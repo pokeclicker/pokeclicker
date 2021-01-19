@@ -12,17 +12,15 @@ class BattleItem extends Item {
         public multiplierType?: keyof typeof MultiplierType,
         public multiplyBy?: number
     ) {
-        super(GameConstants.BattleItemType[type], basePrice, currency, undefined, displayName, description);
+        super(GameConstants.BattleItemType[type], basePrice, currency, undefined, displayName, description, 'battleItem');
         this.type = type;
     }
 
-    use() {
+    use(): boolean {
         EffectEngineRunner.addEffect(this.name(), ItemHandler.amountToUse);
+        return true;
     }
 
-    get image() {
-        return `assets/images/items/battleItem/${this.name()}.png`;
-    }
 }
 
 ItemList['xAttack']         = new BattleItem(GameConstants.BattleItemType.xAttack, '+50% Bonus to Pokémon attack', 600, undefined, undefined, 'pokemonAttack', 1.5);

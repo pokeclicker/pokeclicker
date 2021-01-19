@@ -3,19 +3,13 @@
 class ShovelItem extends Item {
 
     constructor(basePrice: number, displayName: string, description: string) {
-        super('Berry_Shovel', basePrice, GameConstants.Currency.farmPoint, { multiplierDecreaser: MultiplierDecreaser.Berry }, displayName, description);
+        super('Berry_Shovel', basePrice, GameConstants.Currency.farmPoint, { multiplierDecreaser: MultiplierDecreaser.Berry }, displayName, description, 'farm');
     }
 
     gain(amt: number) {
         GameHelper.incrementObservable(App.game.farming.shovelAmt, amt);
     }
 
-    use() {
-    }
-
-    get image() {
-        return `assets/images/items/farm/${this.name()}.png`;
-    }
 }
 
 ItemList['Berry_Shovel']   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');

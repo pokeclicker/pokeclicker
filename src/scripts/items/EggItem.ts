@@ -5,13 +5,13 @@ class EggItem extends CaughtIndicatingItem {
     type: GameConstants.EggItemType;
 
     constructor(type: GameConstants.EggItemType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, displayName?: string) {
-        super(GameConstants.EggItemType[type], basePrice, currency, undefined, displayName);
+        super(GameConstants.EggItemType[type], basePrice, currency, undefined, displayName, undefined, 'egg');
         this.type = type;
     }
 
-    use() {
+    use(): boolean {
         if (player.itemList[this.name()]() <= 0) {
-            return;
+            return false;
         }
 
         let success: boolean;
@@ -27,6 +27,7 @@ class EggItem extends CaughtIndicatingItem {
         if (success) {
             player.loseItem(this.name(), 1);
         }
+        return success;
     }
 
     getCaughtStatus(): CaughtStatus {
@@ -45,9 +46,6 @@ class EggItem extends CaughtIndicatingItem {
         }
     }
 
-    get image() {
-        return `assets/images/items/egg/${this.name()}.png`;
-    }
 }
 
 

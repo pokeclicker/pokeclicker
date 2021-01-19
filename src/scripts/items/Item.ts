@@ -1,10 +1,16 @@
 ///<reference path="../shop/ShopHandler.ts"/>
 
+/**
+ * Source event for decreasing shop multipliers
+ */
 enum MultiplierDecreaser {
     Battle = 0,
     Berry,
 }
 
+/**
+ * Additional shop options for an item
+ */
 interface ShopOptions {
     saveName?: string,
     maxAmount?: number,
@@ -13,20 +19,23 @@ interface ShopOptions {
     multiplierDecreaser?: MultiplierDecreaser,
 }
 
-abstract class Item {
+class Item {
     name: KnockoutObservable<string>;
     saveName: string;
-    basePrice: number;
     type: any;
+
+    // Shop Details
+    basePrice: number;
     currency: GameConstants.Currency;
     price: KnockoutObservable<number>;
-    maxAmount: number;
     multiplier: number;
     multiplierDecrease: boolean;
     multiplierDecreaser: MultiplierDecreaser;
 
+    maxAmount: number;
     description?: string;
     _displayName: string;
+    imageDirectory?: string;
 
     constructor(
         name: string,
@@ -40,8 +49,10 @@ abstract class Item {
             multiplierDecreaser = MultiplierDecreaser.Battle,
         } : ShopOptions = {},
         displayName?: string,
-        description?: string) {
+        description?: string,
+        imageDirectory?: string) {
         this.name = ko.observable(name);
+
         this.basePrice = basePrice;
         this.currency = currency;
         this.price = ko.observable(this.basePrice);
@@ -58,6 +69,7 @@ abstract class Item {
 
         this._displayName = displayName ?? name;
         this.description = description;
+        this.imageDirectory = imageDirectory;
     }
 
     totalPrice(amount: number): number {
@@ -132,7 +144,9 @@ abstract class Item {
         player.gainItem(this.name(), n);
     }
 
-    abstract use();
+    use(): boolean {
+        return false;
+    }
 
     isAvailable(): boolean {
         return true;
@@ -159,8 +173,10 @@ abstract class Item {
     }
 
     get image() {
-        return `assets/images/items/${this.name()}.png`;
+        const subDirectory = this.imageDirectory ? `${this.imageDirectory}/` : '';
+        return `assets/images/items/${subDirectory}${this.name()}.png`;
     }
+
 }
 
 const ItemList: { [name: string]: Item } = {};

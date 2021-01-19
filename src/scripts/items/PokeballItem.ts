@@ -5,7 +5,7 @@ class PokeballItem extends Item {
     type: GameConstants.Pokeball;
 
     constructor(type: GameConstants.Pokeball, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.money, options?: ShopOptions, displayName?: string) {
-        super(GameConstants.Pokeball[type], basePrice, currency, options, displayName);
+        super(GameConstants.Pokeball[type], basePrice, currency, options, displayName, undefined, 'pokeball');
         this.type = type;
     }
 
@@ -14,12 +14,6 @@ class PokeballItem extends Item {
         GameHelper.incrementObservable(App.game.statistics.pokeballsBought[this.type], amt);
     }
 
-    use() {
-    }
-
-    get image() {
-        return `assets/images/items/pokeball/${this.name()}.png`;
-    }
 }
 
 ItemList['Pokeball']   = new PokeballItem(GameConstants.Pokeball.Pokeball, 100, undefined, undefined, 'Pokéball');

@@ -5,7 +5,7 @@ class PokemonItem extends CaughtIndicatingItem {
     type: PokemonNameType;
 
     constructor(pokemon: PokemonNameType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint) {
-        super(pokemon, basePrice, currency);
+        super(pokemon, basePrice, currency, undefined, undefined, undefined, 'pokemonItem');
         this.type = pokemon;
     }
 
@@ -21,15 +21,8 @@ class PokemonItem extends CaughtIndicatingItem {
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(pokemonName).id, shiny, true);
     }
 
-    use() {
-    }
-
     getCaughtStatus(): CaughtStatus {
         return PartyController.getCaughtStatusByName(this.name() as PokemonNameType);
-    }
-
-    get image() {
-        return `assets/images/items/pokemonItem/${this.name()}.png`;
     }
 
 }

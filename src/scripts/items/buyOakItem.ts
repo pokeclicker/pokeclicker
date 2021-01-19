@@ -22,14 +22,12 @@ class BuyOakItem extends Item {
         }
     }
 
-    use() {
-    }
-
     isAvailable(): boolean {
         const oakItem = App.game.oakItems.itemList[this.item];
         const purchased = (oakItem instanceof BoughtOakItem) ? oakItem.purchased : true;
         return super.isAvailable() && !purchased;
     }
+
 }
 
 ItemList['Squirtbottle'] = new BuyOakItem(OakItems.OakItem.Squirtbottle, 5000, Currency.farmPoint);
