@@ -17,7 +17,7 @@ class BattleItem extends Item {
     }
 
     use(): boolean {
-        EffectEngineRunner.addEffect(this.name(), ItemHandler.amountToUse);
+        EffectEngineRunner.addEffect(this.name, ItemHandler.amountToUse);
         return true;
     }
 

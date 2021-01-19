@@ -28,6 +28,10 @@ class BuyOakItem extends Item {
         return super.isAvailable() && !purchased;
     }
 
+    get image(): string {
+        return `assets/images/oakitems/${this.name}.png`;
+    }
+
 }
 
 ItemList['Squirtbottle'] = new BuyOakItem(OakItems.OakItem.Squirtbottle, 5000, Currency.farmPoint);

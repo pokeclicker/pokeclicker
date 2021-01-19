@@ -54,7 +54,7 @@ class BagHandler {
         }
         switch (item.type) {
             case ItemType.item:
-                return player.itemList[this.getItem(item.id).name()];
+                return player.itemList[this.getItem(item.id).name];
             case ItemType.underground:
                 return player.mineInventory()[player.mineInventoryIndex(this.getUndergroundItem(item.id).id)].amount;
             case ItemType.berry:

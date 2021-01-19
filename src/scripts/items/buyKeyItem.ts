@@ -23,6 +23,10 @@ class BuyKeyItem extends Item {
             return super.isAvailable() && !App.game.keyItems.hasKeyItem(this.item);
         }
 
+        get image(): string {
+            return `assets/images/keyitems/${this.name}.png`;
+        }
+
 }
 
 

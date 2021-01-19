@@ -5,12 +5,12 @@ class EggItem extends CaughtIndicatingItem {
     type: GameConstants.EggItemType;
 
     constructor(type: GameConstants.EggItemType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, displayName?: string) {
-        super(GameConstants.EggItemType[type], basePrice, currency, undefined, displayName, undefined, 'egg');
+        super(GameConstants.EggItemType[type], basePrice, currency, undefined, displayName);
         this.type = type;
     }
 
     use(): boolean {
-        if (player.itemList[this.name()]() <= 0) {
+        if (player.itemList[this.name]() <= 0) {
             return false;
         }
 
@@ -25,7 +25,7 @@ class EggItem extends CaughtIndicatingItem {
         }
 
         if (success) {
-            player.loseItem(this.name(), 1);
+            player.loseItem(this.name, 1);
         }
         return success;
     }

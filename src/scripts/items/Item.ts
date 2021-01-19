@@ -20,13 +20,10 @@ interface ShopOptions {
 }
 
 class Item {
-    name: KnockoutObservable<string>;
     saveName: string;
     type: any;
 
     // Shop Details
-    basePrice: number;
-    currency: GameConstants.Currency;
     price: KnockoutObservable<number>;
     multiplier: number;
     multiplierDecrease: boolean;
@@ -38,9 +35,9 @@ class Item {
     imageDirectory?: string;
 
     constructor(
-        name: string,
-        basePrice: number,
-        currency: GameConstants.Currency = GameConstants.Currency.money,
+        public name: string,
+        public basePrice: number,
+        public currency: GameConstants.Currency = GameConstants.Currency.money,
         {
             saveName = '',
             maxAmount = Number.MAX_SAFE_INTEGER,
@@ -51,10 +48,7 @@ class Item {
         displayName?: string,
         description?: string,
         imageDirectory?: string) {
-        this.name = ko.observable(name);
 
-        this.basePrice = basePrice;
-        this.currency = currency;
         this.price = ko.observable(this.basePrice);
         // If no custom save name specified, default to item name
         this.saveName = saveName || name || `${name}|${GameConstants.Currency[currency]}`;
@@ -73,7 +67,7 @@ class Item {
     }
 
     totalPrice(amount: number): number {
-        if (this.name() == GameConstants.Pokeball[GameConstants.Pokeball.Pokeball]) {
+        if (this.name == GameConstants.Pokeball[GameConstants.Pokeball.Pokeball]) {
             return Math.max(0, this.basePrice * amount);
         } else {
             // multiplier should be capped at 100, so work out how many to buy at increasing price and how many at max
@@ -100,7 +94,7 @@ class Item {
 
         if (n > this.maxAmount) {
             Notifier.notify({
-                message: `You can only buy ${this.maxAmount} &times; ${GameConstants.humanifyString(this.name())}!`,
+                message: `You can only buy ${this.maxAmount} &times; ${GameConstants.humanifyString(this.name)}!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             n = this.maxAmount;
@@ -108,7 +102,7 @@ class Item {
 
         if (!this.isAvailable()) {
             Notifier.notify({
-                message: `${GameConstants.humanifyString(this.name())} is sold out!`,
+                message: `${GameConstants.humanifyString(this.name)} is sold out!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             return;
@@ -121,7 +115,7 @@ class Item {
             this.gain(n);
             this.increasePriceMultiplier(n);
             Notifier.notify({
-                message: `You bought ${n} ${GameConstants.humanifyString(this.name())}${multiple}`,
+                message: `You bought ${n} ${GameConstants.humanifyString(this.name)}${multiple}`,
                 type: NotificationConstants.NotificationOption.success,
             });
         } else {
@@ -134,14 +128,14 @@ class Item {
                     break;
             }
             Notifier.notify({
-                message: `You don't have enough ${curr} to buy ${n} ${GameConstants.humanifyString(this.name()) + multiple}`,
+                message: `You don't have enough ${curr} to buy ${n} ${GameConstants.humanifyString(this.name) + multiple}`,
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
     }
 
     gain(n: number) {
-        player.gainItem(this.name(), n);
+        player.gainItem(this.name, n);
     }
 
     use(): boolean {
@@ -174,7 +168,7 @@ class Item {
 
     get image() {
         const subDirectory = this.imageDirectory ? `${this.imageDirectory}/` : '';
-        return `assets/images/items/${subDirectory}${this.name()}.png`;
+        return `assets/images/items/${subDirectory}${this.name}.png`;
     }
 
 }

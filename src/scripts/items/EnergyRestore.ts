@@ -9,7 +9,7 @@ class EnergyRestore extends Item {
     }
 
     use(): boolean {
-        if (player.itemList[this.name()]() <= 0) {
+        if (player.itemList[this.name]() <= 0) {
             return false;
         }
         if (App.game.underground.energy === App.game.underground.getMaxEnergy()) {
@@ -20,7 +20,7 @@ class EnergyRestore extends Item {
             return false;
         }
         App.game.underground.gainEnergyThroughItem(this.type);
-        player.loseItem(this.name(), 1);
+        player.loseItem(this.name, 1);
         return true;
     }
 

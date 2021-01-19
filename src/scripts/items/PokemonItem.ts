@@ -11,7 +11,7 @@ class PokemonItem extends CaughtIndicatingItem {
 
     gain() {
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
-        const pokemonName = this.name() as PokemonNameType;
+        const pokemonName = this.name as PokemonNameType;
         if (shiny) {
             Notifier.notify({
                 message: `✨ You obtained a shiny ${pokemonName}! ✨`,
@@ -22,7 +22,7 @@ class PokemonItem extends CaughtIndicatingItem {
     }
 
     getCaughtStatus(): CaughtStatus {
-        return PartyController.getCaughtStatusByName(this.name() as PokemonNameType);
+        return PartyController.getCaughtStatusByName(this.name as PokemonNameType);
     }
 
 }
