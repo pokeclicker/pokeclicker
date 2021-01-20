@@ -118,6 +118,7 @@ export enum AchievementType {
 
 export enum DungeonTile {
     empty,
+    entrance,
     enemy,
     chest,
     boss,

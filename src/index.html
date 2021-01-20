@@ -226,6 +226,8 @@
                             data-bind="click: function() {
                               if (DungeonRunner.fighting() && !DungeonBattle.catching()) {
                                 DungeonBattle.clickAttack();
+                              } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
+                                DungeonRunner.dungeonLeave();
                               } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
                                 DungeonRunner.openChest();
                               } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
@@ -305,7 +307,12 @@
                             <!-- /ko -->
                             <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) -->
                             <div>
-                                <button class="btn btn-danger dungeon-boss-button">Start Bossfight</button>
+                                <button class="btn btn-danger dungeon-button">Start Bossfight</button>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance -->
+                            <div>
+                                <button class="btn btn-warning dungeon-button">Leave Dungeon</button>
                             </div>
                             <!-- /ko -->
                         </div>

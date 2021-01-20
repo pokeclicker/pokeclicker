@@ -163,5 +163,27 @@ class FarmController {
         return '';
     }
 
+    public static additionalInfoTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
+        const tooltip = [];
+
+        // External Auras
+        App.game.farming.externalAuras.forEach((aura, idx) => {
+            if (typeof aura === 'undefined') {
+                return;
+            }
+            if (aura() === 1) {
+                return;
+            }
+            tooltip.push(`${AuraType[idx]}: ${aura().toFixed(2)}x`);
+        });
+
+        // Adding header if necessary
+        if (tooltip.length) {
+            tooltip.unshift('<u>External Auras</u>');
+        }
+
+        return tooltip.join('<br>');
+    });
+
 }
 

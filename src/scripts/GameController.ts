@@ -9,7 +9,6 @@ class GameController {
                 const tooltip = $('#mapTooltip');
                 tooltip.text(id);
                 tooltip.css('visibility', 'visible');
-
             }
         }, () => {
             const tooltip = $('#mapTooltip');
@@ -132,6 +131,8 @@ class GameController {
         // Pokeball Selector
         const $pokeballSelector = $('#pokeballSelectorModal');
         const pokeballs = App.game.pokeballs;
+        // Underground
+        const $undergroundModal = $('#mineModal');
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
@@ -179,6 +180,14 @@ class GameController {
                                     oakItems.activate(numKey);
                                 }
                             }
+                        } else if ($undergroundModal.data('bs.modal')?._isShown) {
+                            if (numKey == 0) {
+                                ItemList['SmallRestore'].use();
+                            } else if (numKey == 1) {
+                                ItemList['MediumRestore'].use();
+                            } else if (numKey == 2) {
+                                ItemList['LargeRestore'].use();
+                            }
                         }
                     }
             }
@@ -202,8 +211,13 @@ class GameController {
                         DungeonRunner.map.moveRight();
                         break;
                     case 'Space':
-                        DungeonRunner.openChest();
-                        DungeonRunner.startBossFight();
+                        if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
+                            DungeonRunner.dungeonLeave();
+                        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
+                            DungeonRunner.openChest();
+                        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
+                            DungeonRunner.startBossFight();
+                        }
                         break;
                     default: // any other key (ignore)
                         return;

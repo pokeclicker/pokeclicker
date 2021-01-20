@@ -240,6 +240,14 @@
             </div>
 
             <div class="modal-footer">
+                <button type="button" class="btn mr-auto"
+                    data-bind="visible: FarmController.additionalInfoTooltip().length !== 0,
+                    tooltip: {
+                        title: FarmController.additionalInfoTooltip(),
+                        trigger: 'hover',
+                        placement:'top',
+                        html: true,
+                    }">ⓘ</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
