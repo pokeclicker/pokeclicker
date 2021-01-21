@@ -374,6 +374,7 @@ export enum Region {
     kalos = 5,
     alola = 6,
     galar = 7,
+    // TODO: figure out a better way to handle DLC/non main regions
     armor = 8,
     crown = 9,
 }
