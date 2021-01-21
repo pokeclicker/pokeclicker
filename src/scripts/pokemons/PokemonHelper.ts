@@ -164,8 +164,8 @@ class PokemonHelper {
     public static getPokemonShops(pokemonName: PokemonNameType): Array<string> {
         const shops = [];
         Object.entries(TownList).forEach(([townName, town]) => {
-            if (town.shop() && town.shop().items()) {
-                const hasPokemon = town.shop().items().find(item => item.name() == pokemonName);
+            if (town.shop && town.shop.items) {
+                const hasPokemon = town.shop.items.find(item => item.name() == pokemonName);
                 if (hasPokemon) {
                     shops.push(townName);
                 }

@@ -68,7 +68,8 @@ class Underground implements Feature {
                 UndergroundUpgrade.Upgrades.Survey_Cost, 'Survey Cost', 5,
                 AmountFactory.createArray(
                     GameHelper.createArray(50, 250, 50), GameConstants.Currency.diamond),
-                GameHelper.createArray(0, 5, 1)
+                GameHelper.createArray(0, 5, 1),
+                false
             ),
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Survey_Efficiency, 'Survey Efficiency', 4,

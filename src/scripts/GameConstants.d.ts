@@ -178,7 +178,9 @@ namespace GameConstants {
         unova,
         kalos,
         alola,
-        galar
+        galar,
+        armor,
+        crown
     }
     declare function randomIntBetween(min: number, max: number): number;
     declare function randomElement(array: any[]): any;
@@ -236,6 +238,29 @@ namespace GameConstants {
         'Sachet',
         'Whipped_dream',
         'Ice_stone',
+        'Strawberry_sweet',
+        'Berry_sweet',
+        'Love_sweet',
+        'Star_sweet',
+        'Clover_sweet',
+        'Flower_sweet',
+        'Ribbon_sweet',
+        'Chipped_pot',
+        'Tart_apple',
+        'Sweet_apple',
+        'Ice_stone',
+        'Rusted_sword',
+        'Rusted_shield',
+        'Galarica_cuff',
+        'Galarica_wreath',
+        'Lemon_cream',
+        'Mint_cream',
+        'Matcha_cream',
+        'Ruby_cream',
+        'Salted_cream',
+        'Rainbow_swirl',
+        'Caramel_swirl',
+        'Ruby_swirl'
     }
     declare enum BattleItemType {
         'xAttack' = '',
@@ -260,6 +285,9 @@ namespace GameConstants {
         'Cherubi',
         'Zorua',
         'Meloetta (pirouette)',
+        'Toxel',
+        'Eternatus',
+        'Slowpoke (Galar)'
     }
     declare enum PokeBlockColor {
         Black,
@@ -331,6 +359,7 @@ namespace GameConstants {
     declare const SinnohGyms: string[];
     declare const UnovaGyms: string[];
     declare const KalosGyms: string[];
+    declare const GalarGyms: string[];
     declare const RegionGyms: string[][];
     declare function getGymIndex(gym: string): number;
     declare const KantoDungeons: string[];
@@ -339,6 +368,7 @@ namespace GameConstants {
     declare const SinnohDungeons: string[];
     declare const UnovaDungeons: string[];
     declare const KalosDungeons: string[];
+    declare const GalarDungeons: string[];
     declare const RegionDungeons: string[][];
     declare function getDungeonIndex(dungeon: string): number;
     declare const StartingTowns: string[];
