@@ -224,6 +224,8 @@
                             data-bind="click: function() {
                               if (DungeonRunner.fighting() && !DungeonBattle.catching()) {
                                 DungeonBattle.clickAttack();
+                              } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
+                                DungeonRunner.dungeonLeave();
                               } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
                                 DungeonRunner.openChest();
                               } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
@@ -240,7 +242,7 @@
                                 </knockout>
 
                                 <knockout class="left">
-                                    <knockout data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</knockout>
+                                    <knockout data-bind="text: DungeonRunner.dungeon.name">Dungeon name</knockout>
 
                                     <!--If all Pokémon in the dungeon are caught-->
                                     <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) && DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, false))">
@@ -303,7 +305,12 @@
                             <!-- /ko -->
                             <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) -->
                             <div>
-                                <button class="btn btn-danger dungeon-boss-button">Start Bossfight</button>
+                                <button class="btn btn-danger dungeon-button">Start Bossfight</button>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance -->
+                            <div>
+                                <button class="btn btn-warning dungeon-button">Leave Dungeon</button>
                             </div>
                             <!-- /ko -->
                         </div>
@@ -379,7 +386,7 @@
             <!-- ko if: App.game.gameState === GameConstants.GameState.dungeon -->
             <div id="dungeonMap" class="card sortable-disabled border-secondary mb-3 dungeon no-select">
                 <div class="card-header p-0">
-                    <span data-bind="text: DungeonRunner.dungeon.name()"></span>
+                    <span data-bind="text: DungeonRunner.dungeon.name"></span>
                 </div>
                 <div class="card-body p-0 text-center">
                     <table class="dungeon-board">
@@ -435,6 +442,7 @@
                             @import "UnovaSVG.html"
                             @import "KalosSVG.html"
                             @import "AlolaSVG.html"
+                            @import "GalarSVG.html"
 
                         </svg>
                     </div>
