@@ -32,4 +32,8 @@ export const LogBookTypes: Record<string, LogBookType> = {
         display: 'info',
         label: 'QUEST',
     },
+    WANDER: {
+        display: 'primary',
+        label: 'WANDER',
+    },
 };
