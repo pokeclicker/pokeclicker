@@ -47,3 +47,16 @@ RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMa
 RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap.Tornadus, undefined, new GymBadgeRequirement(BadgeEnums.Legend)));
 RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap.Thundurus, undefined, new GymBadgeRequirement(BadgeEnums.Legend)));
 RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap['Meloetta (aria)'], undefined, new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)));
+
+//Galar
+RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon(pokemonMap['Zapdos (Galar)'], undefined, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill'))));
+
+
+//Isle of Armor
+RoamingPokemonList.add(GameConstants.Region.armor, new RoamingPokemon(pokemonMap.Zarude, undefined, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
+RoamingPokemonList.add(GameConstants.Region.armor, new RoamingPokemon(pokemonMap['Moltres (Galar)'], undefined, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill'))));
+
+//Crown Tundra
+RoamingPokemonList.add(GameConstants.Region.crown, new RoamingPokemon(pokemonMap.Spectrier, undefined, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
+RoamingPokemonList.add(GameConstants.Region.crown, new RoamingPokemon(pokemonMap.Glastrier, undefined, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
+RoamingPokemonList.add(GameConstants.Region.crown, new RoamingPokemon(pokemonMap['Zapdos (Galar)'], undefined, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill'))));
