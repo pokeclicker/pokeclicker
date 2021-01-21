@@ -153,13 +153,13 @@ class Farming implements Feature {
             [0, 0, 0, 0, 15], BerryColor.Yellow,
             ['This Berry is very big and sour. The juiciness of the pulp accentuates the sourness.']);
 
-        this.berryData[BerryType.Lum]       = new Berry(BerryType.Lum,      [3000, 3200, 3400, 3600, 7200],
-            2, 0, 1000, 3,
+        this.berryData[BerryType.Lum]       = new Berry(BerryType.Lum,      [3000, 3200, 3400, 3600, 43200],
+            1, 0, 1000, 3,
             [10, 10, 10, 10, 0], BerryColor.Green,
             [
                 'This Berry\'s gradual process of storing nutrients beneficial to Pokémon health causes it to mature slowly.',
-                'This Berry minorly promotes the growth of Berry plants around it.',
-            ], new Aura(AuraType.Growth, [1.01, 1.02, 1.03]));
+                'This Berry multiplies the effect of Berry plants around it.',
+            ], new Aura(AuraType.Boost, [1.01, 1.02, 1.03]));
         //#endregion
 
         //#region Third Generation
@@ -315,7 +315,7 @@ class Farming implements Feature {
             [0, 10, 20, 0, 0], BerryColor.Purple,
             [
                 'Considered to have a special power from the olden days, this Berry is sometimes dried and used as a good-luck charm.',
-                'This Berry causes other Berries to wither away faster.',
+                'This Berry causes other nearby Berries to wither away faster.',
             ], new Aura(AuraType.Death, [1.25, 1.5, 2.0]), ['Shedinja']);
         this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [10800, 21600, 43200, 86400, 172800],
             34, 0, 4000, 15,
@@ -986,7 +986,19 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Shiny](1);
         this.plotList.forEach(plot => plot.clearAuras());
 
-        this.plotList.forEach((plot, idx) => plot.applyAura(idx));
+        // Handle Boost Auras first
+        this.plotList.forEach((plot, idx) => {
+            if (plot.berryData?.aura && plot.berryData?.aura.auraType === AuraType.Boost) {
+                plot.emitAura(idx);
+            }
+        });
+
+        // Handle rest of Auras
+        this.plotList.forEach((plot, idx) => {
+            if (!plot.berryData?.aura || plot.berryData?.aura.auraType !== AuraType.Boost) {
+                plot.emitAura(idx);
+            }
+        });
     }
 
     //#region Plot Unlocking
