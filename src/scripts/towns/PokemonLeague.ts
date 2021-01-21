@@ -110,3 +110,23 @@ TownList['Pokemon League Alola'] = new PokemonLeague(
     ['Elite Molayne', 'Elite Olivia', 'Elite Acerola', 'Elite Kahili', 'Champion Hao']
 );
 (<PokemonLeague>TownList['Pokemon League Alola']).setupGymTowns();
+
+TownList['Wyndon Stadium'] = new PokemonLeague(
+    'Wyndon Stadium',
+    GameConstants.Region.galar,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))],
+    indigoPlateauShop,
+    ['Trainer Marnie', 'Trainer Hop', 'Trainer Bede', 'Champion Leon']
+);
+(<PokemonLeague>TownList['Wyndon Stadium']).setupGymTowns();
+
+TownList['Master Dojo Battlefield'] = new PokemonLeague(
+    'Master Dojo Battlefield',
+    GameConstants.Region.armor,
+    [new MultiRequirement([
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Water'))])],
+    indigoPlateauShop,
+    ['Gym Leader Klara', 'Gym Leader Avery', 'Dojo Master Mustard']
+);
+(<PokemonLeague>TownList['Master Dojo Battlefield']).setupGymTowns();
