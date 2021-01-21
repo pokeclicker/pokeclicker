@@ -1354,7 +1354,7 @@ dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
 
 
 //Isle of Armor
-dungeonList['Master Dojo'] = new Dungeon('Master Dojo',
+dungeonList['Master Dojo Trial'] = new Dungeon('Master Dojo Trial',
     ['Mienfoo', 'Shinx', 'Kadabra', 'Whirlipede'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,

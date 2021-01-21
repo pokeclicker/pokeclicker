@@ -2327,7 +2327,7 @@ TownList['Master Dojo'] = new Town(
     GameConstants.Region.armor,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.armor, 1)],
-        dungeon: dungeonList['Master Dojo'],
+        dungeon: dungeonList['Master Dojo Trial'],
     }
 );
 
