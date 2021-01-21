@@ -20825,8 +20825,8 @@ const pokemonMap: any = new Proxy(pokemonList, {
                     const filteredPokemon: PokemonListData[] = pokemon.filter(p => p.id > 0 && (p as PokemonListData).nativeRegion >= min && (p as PokemonListData).nativeRegion <= max);
                     const random = Math.floor(Math.random() * filteredPokemon.length);
                     const poke: PokemonListData = filteredPokemon[random];
-                    pokemon.find(p => p.id == 0);
-                    return poke;
+                    // return a random Pokemon or MissingNo if none found
+                    return poke || (pokemon.find(p => p.id == 0) as PokemonListData);
                 };
             default:
                 return pokemonNameIndex[prop.toLowerCase()] || pokemon[prop] || pokemon.find(p => p.id == 0);
