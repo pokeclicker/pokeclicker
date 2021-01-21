@@ -104,7 +104,7 @@ class DungeonRunner {
         DungeonRunner.dungeonFinished(true);
         DungeonRunner.fighting(false);
         DungeonRunner.fightingBoss(false);
-        MapHelper.moveToTown(DungeonRunner.dungeon.name());
+        MapHelper.moveToTown(DungeonRunner.dungeon.name);
     }
 
     private static dungeonLost() {
