@@ -1343,7 +1343,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kalos Route 4', GameConstants.Region.kalos, 4,
     new RoutePokemon({
-        land: ['Ledyba', 'Ralts', 'Skitty', 'Budew', 'Combee', 'Flabébé (Red)', 'Flabébé (Orange)', 'Flabébé (White)', 'Flabébé (Yellow)'],
+        land: ['Ledyba', 'Ralts', 'Skitty', 'Budew', 'Combee', 'Flabébé (Red)', 'Flabébé (Orange)', 'Flabébé (White)'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Bug)]
 ));
@@ -1364,7 +1364,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kalos Route 7', GameConstants.Region.kalos, 7,
     new RoutePokemon({
-        land: ['Smeargle', 'Volbeat', 'Illumise', 'Roselia', 'Croagunk', 'Ducklett', 'Flabébé (Yellow)', 'Flabébé (Blue)', 'Flabébé (Orange)', 'Flabébé (White)', 'Spritzee', 'Swirlix'],
+        land: ['Smeargle', 'Volbeat', 'Illumise', 'Roselia', 'Croagunk', 'Ducklett', 'Flabébé (Orange)', 'Flabébé (White)', 'Spritzee', 'Swirlix'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Parfum Palace'))]
 ));
