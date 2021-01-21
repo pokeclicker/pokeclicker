@@ -7,11 +7,11 @@
 class SpecialRoutePokemon {
     constructor (
         public pokemon: PokemonNameType[],
-        public req: (OneFromManyRequirement | Requirement)[]
+        public req: OneFromManyRequirement | Requirement | MultiRequirement
     ) {}
 
     isAvailable(): boolean {
-        return this.req.every(r => r.isCompleted());
+        return this.req.isCompleted();
     }
 }
 
