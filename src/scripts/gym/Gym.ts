@@ -1487,7 +1487,7 @@ gymList['Gym Leader Klara'] = new Gym(
         new GymPokemon('Scolipede', 1945330, 60),
         new GymPokemon('Galarian Slowbro', 1945330, 50),
     ],
-    BadgeEnums.Elite_PoisonBadge,
+    BadgeEnums.Armor_Poison,
     64000,
     'Aww, come on! What a drag! But...I guess it was also kinda fun!',
     [
@@ -1507,10 +1507,10 @@ gymList['Gym Leader Avery'] = new Gym(
         new GymPokemon('Alakazam', 1945330, 60),
         new GymPokemon('Galarian Slowbro', 1945330, 50),
     ],
-    BadgeEnums.Elite_PsychicBadge,
+    BadgeEnums.Armor_Psychic,
     64000,
     'More! I require more! Show me your Stored Power!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_PoisonBadge)]
+    [new GymBadgeRequirement(BadgeEnums.Armor_Poison)]
 );
 gymList['Dojo Master Mustard'] = new Gym(
     'Mustard',
@@ -1526,7 +1526,7 @@ gymList['Dojo Master Mustard'] = new Gym(
     BadgeEnums.Elite_ArmorChampion,
     64000,
     'That strength of yours doesn\'t bend easily!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_PsychicBadge)]
+    [new GymBadgeRequirement(BadgeEnums.Armor_Psychic)]
 );
 gymList['Trainer Peony'] = new Gym(
     'Freezington',

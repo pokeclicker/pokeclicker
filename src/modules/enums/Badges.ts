@@ -111,9 +111,10 @@ enum BadgeEnums {
     'Elite_Hop',
     'Elite_Bede',
     'Elite_GalarChampion',
+    // TODO: figure out a better way to handle DLC/non main regions
     // Armor
-    'Elite_PoisonBadge',
-    'Elite_PsychicBadge',
+    'Armor_Poison',
+    'Armor_Psychic',
     'Elite_ArmorChampion',
     // Crown
     'Elite_CrownChampion',

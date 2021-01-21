@@ -27,6 +27,7 @@ export const TotalPokemonsPerRegion = [
     721, // 72 - Kalos
     809, // 88 - Alola
     890, // 81 - Galar
+    // TODO: figure out a better way to handle DLC/non main regions
     893, // 3 - Armor
     898, // 5 - Crown
 
