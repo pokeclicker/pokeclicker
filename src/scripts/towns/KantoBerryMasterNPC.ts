@@ -1,3 +1,5 @@
+///<reference path="./NPC.ts"/>
+
 class KantoBerryMasterNPC extends NPC {
 
     constructor(
