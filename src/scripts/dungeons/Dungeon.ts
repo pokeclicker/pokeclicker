@@ -945,6 +945,8 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
 
 //Unknown Dungeon? Contains Mewtwo.
 
+
+
 // Alola
 // TODO: Balancing of dungeon Pokemon HP & rewards.
 dungeonList['Trainers\' School'] = new Dungeon('Trainers\' School',
@@ -1241,5 +1243,164 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
         new DungeonBossPokemon('Crobat', 8000000, 70),
         new DungeonBossPokemon('Noivern', 8000000, 70),
         new DungeonBossPokemon('Guzzlord', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+
+
+
+//Galar Dungeons
+
+dungeonList['Slumbering Weald'] = new Dungeon('Slumbering Weald',
+    ['Hoothoot', 'Grubbin', 'Skwovet', 'Rookidee'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [new DungeonBossPokemon('Blipbug', 8000000, 70)],
+    96500, 201, 35);
+
+dungeonList['Inner Slumbering Weald'] = new Dungeon('Inner Slumbering Weald',
+    ['Galarian Weezing', 'Corviknight', 'Galarian Stunfisk', 'Munna', 'Butterfree', 'Orbeetle'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Zamazenta (Battle Hero)', 8000000, 70),
+        new DungeonBossPokemon('Zacian (Battle Hero)', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Galar Mine'] = new Dungeon('Galar Mine',
+    ['Diglett', 'Roggenrola', 'Woobat', 'Drilbur', 'Timburr', 'Rolycoly'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Carkol', 8000000, 70),
+        new DungeonBossPokemon('Woobat', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
+    ['Shuckle', 'Shellos (east)', 'Croagunk', 'Scraggy', 'Binacle', 'Noibat', 'Chewtle'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Galarian Stunfisk', 8000000, 70),
+        new DungeonBossPokemon('Gastrodon (east)', 8000000, 70),
+        new DungeonBossPokemon('Drednaw', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
+    ['Cufant', 'Bronzong', 'Klang', 'Mawile', 'Steelix', 'Galarian Stunfisk'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Froslass', 8000000, 70),
+        new DungeonBossPokemon('Tsareena', 8000000, 70),
+        new DungeonBossPokemon('Salazzle', 8000000, 70),
+        new DungeonBossPokemon('Milotic', 8000000, 70),
+        new DungeonBossPokemon('Garbodor', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
+    ['Galarian Ponyta', 'Spritzee', 'Swirlix', 'Phantump', 'Oranguru', 'Passimian', 'Sinistea'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Hattrem', 8000000, 70),
+        new DungeonBossPokemon('Morgrem', 8000000, 70),
+        new DungeonBossPokemon('Indeedee', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Watchtower Ruins'] = new Dungeon('Watchtower Ruins',
+    ['Gastly', 'Noibat', 'Purrloin', 'Duskull', 'Woobat', 'Haunter', 'Shuckle', 'Ralts', 'Golett', 'Electrike', 'Snorunt'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Corviknight', 8000000, 70),
+        new DungeonBossPokemon('Golurk', 8000000, 70),
+        new DungeonBossPokemon('Drifblim', 8000000, 70),
+        new DungeonBossPokemon('Glalie', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Lake of Outrage'] = new Dungeon('Lake of Outrage',
+    ['Stonjourner', 'Cramorant', 'Galarian Mr. Mime', 'Morpeko', 'Coalossal', 'Sandaconda', 'Galarian Stunfisk', 'Copperajah', 'Indeedee', 'Obstagoon', 'Grimmsnarl'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Hatterene', 8000000, 70),
+        new DungeonBossPokemon('Perrserker', 8000000, 70),
+        new DungeonBossPokemon('Barraskewda', 8000000, 70),
+        new DungeonBossPokemon('Drakloak', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
+    ['Gurdurr', 'Ferrothorn', 'Klang', 'Meowstic', 'Barbaracle', 'Applin', 'Hattrem', 'Qwilfish', 'Hitmonlee', 'Hitmonchan', 'Koffing'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Gigalith', 8000000, 70),
+        new DungeonBossPokemon('Flygon', 8000000, 70),
+        new DungeonBossPokemon('Sigilyph', 8000000, 70),
+        new DungeonBossPokemon('Tyranitar', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+
+
+//Isle of Armor
+dungeonList['Master Dojo Trial'] = new Dungeon('Master Dojo Trial',
+    ['Mienfoo', 'Shinx', 'Kadabra', 'Whirlipede'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [new DungeonBossPokemon('Kubfu', 8000000, 70)],
+    96500, 201, 35);
+
+dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
+    ['Zorua', 'Scraggy', 'Inkay', 'Krokorok'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [new DungeonBossPokemon('Kubfu', 8000000, 70)],
+    96500, 201, 35);
+
+dungeonList['Tower of Water'] = new Dungeon('Tower of Water',
+    ['Psyduck', 'Krabby', 'Marill', 'Poliwhirl'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [new DungeonBossPokemon('Kubfu', 8000000, 70)],
+    96500, 201, 35);
+
+
+//Crown Tundra
+dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
+    ['Golurk', 'Electivire', 'Dragapult', 'Araquanid', 'Cryogonal', 'Bronzong', 'Claydol', 'Absol', 'Galvantula', 'Audino'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Regidrago', 8000000, 70),
+        new DungeonBossPokemon('Regieleki', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Dyna Tree Hill'] = new Dungeon('Dyna Tree Hill',
+    ['Magmar', 'Absol', 'Beartic', 'Cryogonal', 'Dubwool', 'Glalie', 'Clefable'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [new DungeonBossPokemon('Greedent', 8000000, 70)],
+    96500, 201, 35);
+
+dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
+    ['Snom', 'Hatenna', 'Solosis', 'Jynx', 'Piloswine', 'Dubwool'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Sneasel', 8000000, 70),
+        new DungeonBossPokemon('Calyrex', 8000000, 70, new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap.Spectrier),
+            new ObtainedPokemonRequirement(pokemonMap.Glastrier),
+        ])),
     ],
     96500, 201, 35);

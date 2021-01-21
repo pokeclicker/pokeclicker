@@ -10,6 +10,17 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.7.3
+    new ChangelogUpdate('v0.7.3 - Underground', new Date(2021, 0, 18)),
+    new Changelog(changelogType.NEW, 'Underground revamped'),
+    new Changelog(changelogType.CHANGE, 'More Pokémon held items added'),
+    new Changelog(changelogType.CHANGE, 'Add tooltips to battle item values'),
+    new Changelog(changelogType.CHANGE, 'Misc Farm changes and fixes'),
+    new Changelog(changelogType.CHANGE, 'Add Leave button to dungeon entrance'),
+    new Changelog(changelogType.FIXED, 'Hatchery steps given from Unvoa dungeons'),
+    new Changelog(changelogType.FIXED, 'Old Amber quest reward'),
+    new Changelog(changelogType.FIXED, 'Event description line breaks'),
+
     // v0.7.2
     new ChangelogUpdate('v0.7.2', new Date(2021, 0, 3)),
     new Changelog(changelogType.FIXED, 'Poison Barb not gaining experience'),
@@ -18,7 +29,7 @@ const ChangelogItems = [
     // v0.7.1
     new ChangelogUpdate('v0.7.1', new Date(2021, 0, 1)),
     new Changelog(changelogType.NEW, 'Unova Fossils now available in the Underground'),
-    new Changelog(changelogType.NEW, 'Add option to display Pokedex ID in hatchery'),
+    new Changelog(changelogType.NEW, 'Add option to display Pokédex ID in hatchery'),
     new Changelog(changelogType.NEW, 'Save achievement filters'),
     new Changelog(changelogType.NEW, 'Use multiple Protein at once'),
     new Changelog(changelogType.CHANGE, 'Buff P2 Lab, increase boss pool'),
@@ -132,7 +143,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Evolution Stones not working'),
 
     // v0.6.0
-    new ChangelogUpdate('v0.6.0', new Date(2020, 10, 13)),
+    new ChangelogUpdate('v0.6.0 - Farming', new Date(2020, 10, 13)),
     new Changelog(changelogType.NEW, 'Complete Farm overhaul'),
     new Changelog(changelogType.NEW, 'Hotkeys added for oak items modal (O to open, number keys to toggle items)'),
     new Changelog(changelogType.NEW, 'Hotkeys added for Pokéball selector modal (P + number to open, number keys to toggle items)'),
