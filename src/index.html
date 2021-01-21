@@ -242,7 +242,7 @@
                                 </knockout>
 
                                 <knockout class="left">
-                                    <knockout data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</knockout>
+                                    <knockout data-bind="text: DungeonRunner.dungeon.name">Dungeon name</knockout>
 
                                     <!--If all Pokémon in the dungeon are caught-->
                                     <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) && DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, false))">
@@ -386,7 +386,7 @@
             <!-- ko if: App.game.gameState === GameConstants.GameState.dungeon -->
             <div id="dungeonMap" class="card sortable-disabled border-secondary mb-3 dungeon no-select">
                 <div class="card-header p-0">
-                    <span data-bind="text: DungeonRunner.dungeon.name()"></span>
+                    <span data-bind="text: DungeonRunner.dungeon.name"></span>
                 </div>
                 <div class="card-body p-0 text-center">
                     <table class="dungeon-board">

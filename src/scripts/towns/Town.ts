@@ -15,14 +15,14 @@ type TownOptionalArgument = {
 };
 
 class Town {
-    public name: KnockoutObservable<string>;
-    public region: KnockoutObservable<GameConstants.Region>;
-    public gym?: KnockoutObservable<Gym>;
+    public name: string;
+    public region: GameConstants.Region;
+    public gym?: Gym;
     public requirements: (Requirement | OneFromManyRequirement)[];
-    public shop?: KnockoutObservable<Shop>;
-    public berryMaster?: KnockoutObservable<Shop>;
-    public dungeon?: KnockoutObservable<Dungeon>;
-    public npcs?: KnockoutObservableArray<NPC>;
+    public shop?: Shop;
+    public berryMaster?: Shop;
+    public dungeon?: Dungeon;
+    public npcs?: NPC[];
     public startingTown: boolean;
 
     constructor(
@@ -32,15 +32,15 @@ class Town {
         // to pass undefined to get to the one we want
         optional: TownOptionalArgument = {}
     ) {
-        this.name = ko.observable(name);
-        this.region = ko.observable(region);
-        this.gym = ko.observable(gymList[name]);
+        this.name = name;
+        this.region = region;
+        this.gym = gymList[name];
         this.requirements = optional.requirements || [];
-        this.shop = ko.observable(optional.shop);
-        this.berryMaster = ko.observable(optional.berryMaster);
-        this.dungeon = ko.observable(optional.dungeon);
-        this.npcs = ko.observableArray(optional.npcs);
-        this.startingTown = GameConstants.StartingTowns.includes(this.name());
+        this.shop = optional.shop;
+        this.berryMaster = optional.berryMaster;
+        this.dungeon = optional.dungeon;
+        this.npcs = optional.npcs;
+        this.startingTown = GameConstants.StartingTowns.includes(this.name);
     }
 
     public isUnlocked() {
@@ -69,7 +69,7 @@ const pokeMartShop = new Shop([
     ItemList['SmallRestore'],
     ItemList['MediumRestore'],
     ItemList['LargeRestore'],
-]);
+], 'Poké Mart');
 
 //Kanto Shops
 const PewterCityShop = new Shop([
