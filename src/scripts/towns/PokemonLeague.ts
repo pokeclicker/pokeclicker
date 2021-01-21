@@ -1,20 +1,20 @@
 /* eslint-disable array-bracket-newline */
 ///<reference path="Town.ts"/>
 class PokemonLeague extends Town {
-    public gymList: KnockoutObservableArray<KnockoutObservable<Gym>>;
+    public gymList: Gym[];
 
     constructor(name: string, region: GameConstants.Region, requirements: Array<Requirement | OneFromManyRequirement>, shop: Shop, gyms: string[]) {
         super(name, region, { requirements, shop });
-        this.gym(null);
-        this.gymList = ko.observableArray<KnockoutObservable<Gym>>();
+        this.gym = null;
+        this.gymList = [];
         for (const gym of gyms) {
-            this.gymList.push(ko.observable(gymList[gym]));
+            this.gymList.push(gymList[gym]);
         }
     }
 
     public setupGymTowns() {
-        for (const gym of this.gymList()) {
-            TownList[gym().town] = TownList[this.name()];
+        for (const gym of this.gymList) {
+            TownList[gym.town] = TownList[this.name];
         }
     }
 }
@@ -110,3 +110,23 @@ TownList['Pokemon League Alola'] = new PokemonLeague(
     ['Elite Molayne', 'Elite Olivia', 'Elite Acerola', 'Elite Kahili', 'Champion Hao']
 );
 (<PokemonLeague>TownList['Pokemon League Alola']).setupGymTowns();
+
+TownList['Wyndon Stadium'] = new PokemonLeague(
+    'Wyndon Stadium',
+    GameConstants.Region.galar,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))],
+    indigoPlateauShop,
+    ['Trainer Marnie', 'Trainer Hop', 'Trainer Bede', 'Champion Leon']
+);
+(<PokemonLeague>TownList['Wyndon Stadium']).setupGymTowns();
+
+TownList['Master Dojo Battlefield'] = new PokemonLeague(
+    'Master Dojo Battlefield',
+    GameConstants.Region.armor,
+    [new MultiRequirement([
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Water'))])],
+    indigoPlateauShop,
+    ['Gym Leader Klara', 'Gym Leader Avery', 'Dojo Master Mustard']
+);
+(<PokemonLeague>TownList['Master Dojo Battlefield']).setupGymTowns();
