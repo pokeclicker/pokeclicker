@@ -113,7 +113,6 @@ class Quests implements Saveable {
     }
 
     generateQuestList(date = new Date(), level = this.level()) {
-        console.log('generating quests');
         if (this.lastRefresh.toDateString() != date.toDateString()) {
             this.refreshes(0);
         }
@@ -219,7 +218,6 @@ class Quests implements Saveable {
     loadQuestList(questList) {
         // Sanity Check
         this.questList.removeAll();
-        console.log('loading quests', questList);
         questList.forEach(questData => {
             if (questData.hasOwnProperty('name')) {
                 const quest = QuestHelper.createQuest(questData.name, questData.data);
