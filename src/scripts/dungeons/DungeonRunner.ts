@@ -96,12 +96,23 @@ class DungeonRunner {
         DungeonBattle.generateNewBoss();
     }
 
+    public static dungeonLeave() {
+        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.entrance || DungeonRunner.dungeonFinished()) {
+            return;
+        }
+
+        DungeonRunner.dungeonFinished(true);
+        DungeonRunner.fighting(false);
+        DungeonRunner.fightingBoss(false);
+        MapHelper.moveToTown(DungeonRunner.dungeon.name);
+    }
+
     private static dungeonLost() {
         if (!DungeonRunner.dungeonFinished()) {
             DungeonRunner.dungeonFinished(true);
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
-            MapHelper.moveToTown(DungeonRunner.dungeon.name());
+            MapHelper.moveToTown(DungeonRunner.dungeon.name);
             Notifier.notify({
                 message: 'You could not complete the dungeon in time',
                 type: NotificationConstants.NotificationOption.danger,
@@ -112,8 +123,8 @@ class DungeonRunner {
     public static dungeonWon() {
         if (!DungeonRunner.dungeonFinished()) {
             DungeonRunner.dungeonFinished(true);
-            GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name())]);
-            MapHelper.moveToTown(DungeonRunner.dungeon.name());
+            GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]);
+            MapHelper.moveToTown(DungeonRunner.dungeon.name);
             // TODO award loot with a special screen
             Notifier.notify({
                 message: 'You have successfully completed the dungeon',

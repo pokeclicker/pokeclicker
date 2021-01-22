@@ -3,11 +3,11 @@
 abstract class Quest {
     index: number;
     amount: number
-    description: string;
+    customDescription?: string;
     pointsReward: number;
-    xpReward: number;
     progress: KnockoutComputed<number>;
     progressText: KnockoutComputed<string>;
+    inProgress: KnockoutComputed<boolean>;
     isCompleted: KnockoutComputed<boolean>;
     claimed: KnockoutObservable<boolean>;
     private _focus: KnockoutObservable<any>;
@@ -19,13 +19,30 @@ abstract class Quest {
 
     constructor(amount: number, pointsReward: number) {
         this.amount = amount;
-        const randomPointBonus = 0.9 + SeededRand.next() * 0.2; // random between 0.9 and 1.1
-        this.pointsReward = Math.ceil(pointsReward * randomPointBonus);
-        this.xpReward = 100 + (pointsReward / 10);
-        this.claimed = ko.observable(false);
+        this.pointsReward = pointsReward;
         this.initial = ko.observable(null);
+        this.claimed = ko.observable(false);
         this.notified = false;
     }
+
+    get description(): string {
+        return this.customDescription ?? 'Generic Quest Description. This should be overriden.';
+    }
+
+    public static generateData(): any[] {
+        return [1, 0];
+    }
+
+    public static randomizeReward(pointsReward: number) {
+        const randomPointBonus = 0.9 + SeededRand.next() * 0.2; // random between 0.9 and 1.1
+        return Math.ceil(pointsReward * randomPointBonus);
+    }
+
+    get xpReward(): number {
+        return 100 + (this.pointsReward / 10);
+    }
+
+    //#region Quest Status
 
     claim() {
         if (this.isCompleted() && !this.claimed()) {
@@ -93,6 +110,10 @@ abstract class Quest {
             }
         });
 
+        this.inProgress = ko.pureComputed(() => {
+            return this.initial() !== null && !this.claimed();
+        });
+
         // This computed has a side effect - creating a notification - so we cannot safely make it a pureComputed
         // This will only be a problem if we make it subscribe to a function which lives longer than itself
         // Since it is only subscribing to observables on `this`, and the function is being kept on `this`, we shouldn't have a problem
@@ -126,16 +147,29 @@ abstract class Quest {
         });
     }
 
-    inProgress = ko.pureComputed(() => {
-        return this.initial() !== null && !this.claimed();
-    });
+    //#endregion
 
     toJSON() {
         return {
-            initial: this.initial(),
             index: this.index || 0,
-            notified: this.notified,
+            customDescription: this.customDescription,
+            data: <any[]>[this.amount ,this.pointsReward],
+            initial: this.initial(),
             claimed: this.claimed(),
+            notified: this.notified,
         };
+    }
+
+    fromJSON(json: any) {
+        if (!json) {
+            this.index = 0;
+            this.claimed(false);
+            this.initial(null);
+            this.notified = false;
+        }
+        this.index = json.hasOwnProperty('index') ? json['index'] : 0;
+        this.claimed(json.hasOwnProperty('claimed') ? json['claimed'] : false);
+        this.initial(json.hasOwnProperty('initial') ? json['initial'] : null);
+        this.notified = json.hasOwnProperty('notified') ? json['notified'] : false;
     }
 }
