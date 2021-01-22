@@ -328,7 +328,7 @@ class Update implements Saveable {
             }
         },
 
-        '0.7.2': ({ playerData, saveData }) => {
+        '0.7.4': ({ playerData, saveData }) => {
             // Clear old quest data
             delete saveData.quests.questList;
         },
