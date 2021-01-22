@@ -87,7 +87,7 @@ class Preload {
         for (const name in TownList) {
             // Skip unreleased towns unless a feature flag has enabled them
             if (
-                !(<any>window).featureFlags?.preloadUnreleasedTowns && TownList[name].region() > GameConstants.MAX_AVAILABLE_REGION
+                !(<any>window).featureFlags?.preloadUnreleasedTowns && TownList[name].region > GameConstants.MAX_AVAILABLE_REGION
             ) {
                 continue;
             }

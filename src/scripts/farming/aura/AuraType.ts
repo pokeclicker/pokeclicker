@@ -7,4 +7,5 @@ enum AuraType {
     Attract,
     Shiny,
     Death,
+    Boost,
 }

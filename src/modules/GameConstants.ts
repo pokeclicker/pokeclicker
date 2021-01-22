@@ -26,7 +26,11 @@ export const TotalPokemonsPerRegion = [
     649, // 156 - Unova
     721, // 72 - Kalos
     809, // 88 - Alola
-    893, // 84 - Galar
+    890, // 81 - Galar
+    // TODO: figure out a better way to handle DLC/non main regions
+    893, // 3 - Armor
+    898, // 5 - Crown
+
 ];
 
 export const ITEM_USE_TIME = 30;
@@ -355,6 +359,9 @@ export enum Region {
     kalos = 5,
     alola = 6,
     galar = 7,
+    // TODO: figure out a better way to handle DLC/non main regions
+    armor = 8,
+    crown = 9,
 }
 
 export function randomIntBetween(min: number, max: number): number {
@@ -413,7 +420,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Hulbury', 5, 6, 8, 9, 19, 21]),
     },
 
     Ice: {
@@ -424,7 +431,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Giant Chasm']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Circhester', 20, 23, 24]),
     },
 
     Forest: {
@@ -435,7 +442,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set([6, 'Lostlorn Forest', 'Pinwheel Forest', 'Pledge Grove', 'Floccesy Town']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Slumbering Weald', 'Inner Slumbering Weald', 'Glimwood Tangle', 'Ballonlea', 4]),
     },
 
     Cave: {
@@ -446,7 +453,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Seaside Cave', 'Twist Mountain', 'Reversal Mountain', 'Relic Passage', 'Relic Castle', 'Victory Road Unova']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Watchtower Ruins']),
     },
 
     GemCave: {
@@ -457,7 +464,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2']),
     },
 
     PowerPlant: {
@@ -468,7 +475,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Motostoke', 'Spikemuth']),
     },
 
     Mansion: {
@@ -479,14 +486,14 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Castelia City', 'Liberty Garden', 'Dreamyard', 'Mistralton City', 'Opelucid City']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side']),
     },
 
     Graveyard: {
         [Region.kanto]: new Set(['Saffron City', 'Pokemon Tower']),
         [Region.johto]: new Set(['Ecruteak City']),
         [Region.hoenn]: new Set(['Mossdeep City', 'Mt. Pyre']),
-        [Region.sinnoh]: new Set(['Hearthome City']),
+        [Region.sinnoh]: new Set(['Hearthome City', 'Distortion World']),
         [Region.unova]: new Set(['Celestial Tower']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
@@ -545,6 +552,22 @@ export enum StoneType {
     'Sachet',
     'Whipped_dream',
     'Ice_stone',
+    'Chipped_pot',
+    'Strawberry_sweet',
+    'Tart_apple',
+    'Sweet_apple',
+    'Rusted_sword',
+    'Rusted_shield',
+    'Galarica_cuff',
+    'Galarica_wreath',
+    'Lemon_cream',
+    'Mint_cream',
+    'Matcha_cream',
+    'Ruby_cream',
+    'Salted_cream',
+    'Rainbow_swirl',
+    'Caramel_swirl',
+    'Ruby_swirl',
 }
 
 export enum BattleItemType {
@@ -573,6 +596,9 @@ export enum PokemonItemType {
     'Meloetta (pirouette)',
     'Type: Null',
     'Poipole',
+    'Toxel',
+    'Eternatus',
+    'Slowpoke (Galar)',
 }
 
 export enum PokeBlockColor {
@@ -760,6 +786,21 @@ export const AlolaGyms = [
     'Champion Hao',
 ];
 
+export const GalarGyms = [
+    'Turffield',
+    'Hulbury',
+    'Motostoke',
+    'Stow-On-Side',
+    'Ballonlea',
+    'Circhester',
+    'Spikemuth',
+    'Hammerlocke',
+    'Trainer Marnie',
+    'Trainer Hop',
+    'Trainer Bede',
+    'Champion Leon',
+];
+
 export const RegionGyms = [
     KantoGyms,
     JohtoGyms,
@@ -768,6 +809,7 @@ export const RegionGyms = [
     UnovaGyms,
     KalosGyms,
     AlolaGyms,
+    GalarGyms,
 ];
 
 export function getGymIndex(gym: string): number {
@@ -946,6 +988,18 @@ export const AlolaDungeons = [
     'Resolution Cave',
 ];
 
+export const GalarDungeons = [
+    'Slumbering Weald',
+    'Inner Slumbering Weald',
+    'Galar Mine',
+    'Galar Mine No. 2',
+    'Glimwood Tangle',
+    'Rose Tower',
+    'Watchtower Ruins',
+    'Dusty Bowl',
+    'Lake of Outrage',
+];
+
 export const RegionDungeons = [
     KantoDungeons,
     JohtoDungeons,
@@ -954,6 +1008,7 @@ export const RegionDungeons = [
     UnovaDungeons,
     KalosDungeons,
     AlolaDungeons,
+    GalarDungeons,
 ];
 
 export function getDungeonIndex(dungeon: string): number {
@@ -968,7 +1023,7 @@ export const StartingTowns = [
     'Aspertia City', // Unova
     'Vaniville Town', // Kalos
     'Iki Town', // Alola
-    '', // Galar
+    'Postwick', // Galar
 ];
 
 export const DockTowns = [
@@ -979,5 +1034,5 @@ export const DockTowns = [
     'Castelia City', // Unova
     'Coumarine City', // Kalos
     'Hau\'oli City', // Alola
-    '', // Galar
+    'Hulbury', // Galar
 ];

@@ -9,7 +9,6 @@ class GameController {
                 const tooltip = $('#mapTooltip');
                 tooltip.text(id);
                 tooltip.css('visibility', 'visible');
-
             }
         }, () => {
             const tooltip = $('#mapTooltip');
@@ -132,6 +131,8 @@ class GameController {
         // Pokeball Selector
         const $pokeballSelector = $('#pokeballSelectorModal');
         const pokeballs = App.game.pokeballs;
+        // Underground
+        const $undergroundModal = $('#mineModal');
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
@@ -179,6 +180,14 @@ class GameController {
                                     oakItems.activate(numKey);
                                 }
                             }
+                        } else if ($undergroundModal.data('bs.modal')?._isShown) {
+                            if (numKey == 0) {
+                                ItemList['SmallRestore'].use();
+                            } else if (numKey == 1) {
+                                ItemList['MediumRestore'].use();
+                            } else if (numKey == 2) {
+                                ItemList['LargeRestore'].use();
+                            }
                         }
                     }
             }
@@ -216,10 +225,10 @@ class GameController {
                 e.preventDefault();
             } else if (App.game.gameState === GameConstants.GameState.town) {
                 if (e.code === 'Space') {
-                    if (player.town().gym()) {
-                        GymRunner.startGym(player.town().gym());
-                    } else if (player.town().dungeon()) {
-                        DungeonRunner.initializeDungeon(player.town().dungeon());
+                    if (player.town().gym) {
+                        GymRunner.startGym(player.town().gym);
+                    } else if (player.town().dungeon) {
+                        DungeonRunner.initializeDungeon(player.town().dungeon);
                     }
                     e.preventDefault();
                 } else if ('gymList' in player.town()) {

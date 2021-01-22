@@ -22,7 +22,6 @@ class Player {
 
     private _region: KnockoutObservable<GameConstants.Region>;
     private _town: KnockoutObservable<Town>;
-    private _currentTown: KnockoutObservable<string>;
     private _starter: GameConstants.Starter;
     private _timeTraveller = false;
 
@@ -64,7 +63,6 @@ class Player {
         }
 
         this._town = ko.observable(TownList['Pallet Town']);
-        this._currentTown = ko.observable('');
         this._starter = savedPlayer._starter != undefined ? savedPlayer._starter : GameConstants.Starter.None;
 
         this._itemList = Save.initializeItemlist();
@@ -145,14 +143,6 @@ class Player {
 
     set town(value: KnockoutObservable<Town>) {
         this._town = value;
-    }
-
-    get currentTown(): KnockoutObservable<string> {
-        return this._currentTown;
-    }
-
-    set currentTown(value: KnockoutObservable<string>) {
-        this._currentTown = value;
     }
 
     get starter(): GameConstants.Starter {
