@@ -298,7 +298,7 @@ class Update implements Saveable {
             }
         },
 
-        '0.7.1': ({ playerData, saveData}) => {
+        '0.7.1': ({ playerData, saveData }) => {
             saveData.breeding.eggList.map((egg) => {
                 egg.shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps / egg.steps));
                 return egg;
@@ -326,6 +326,11 @@ class Update implements Saveable {
                 // Reset the mine
                 delete saveData.underground.mine;
             }
+        },
+
+        '0.7.4': ({ playerData, saveData }) => {
+            // Clear old quest data
+            delete saveData.quests.questList;
         },
     };
 
