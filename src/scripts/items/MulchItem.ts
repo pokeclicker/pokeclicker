@@ -5,7 +5,7 @@ class MulchItem extends Item {
     type: MulchType;
 
     constructor(type: MulchType, basePrice: number, displayName: string, description: string) {
-        super(MulchType[type], basePrice, GameConstants.Currency.farmPoint, { multiplierDecreaser: MultiplierDecreaser.Berry }, displayName, description);
+        super(MulchType[type], basePrice, GameConstants.Currency.farmPoint, { multiplierDecreaser: MultiplierDecreaser.Berry }, displayName, description, 'farm');
         this.type = type;
     }
 
@@ -13,8 +13,6 @@ class MulchItem extends Item {
         GameHelper.incrementObservable(App.game.farming.mulchList[this.type], amt);
     }
 
-    use() {
-    }
 }
 
 ItemList['Boost_Mulch']   = new MulchItem(MulchType.Boost_Mulch, 50, 'Boost Mulch', 'Increases Berry growth rate.');

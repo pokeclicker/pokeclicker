@@ -1,13 +1,25 @@
 /// <reference path="../Quest.ts" />
 
 class DefeatDungeonQuest extends Quest implements QuestInterface {
-    constructor(dungeon: string, amount: number) {
-        super(amount, DefeatDungeonQuest.calcReward(dungeon, amount));
-        this.description = `Defeat the ${dungeon} dungeon ${amount.toLocaleString('en-US')} times.`;
-        this.focus = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeon)];
+
+    private dungeon: string;
+
+    constructor(amount: number, reward: number, dungeon: string) {
+        super(amount, reward);
+        this.dungeon = dungeon;
+        this.focus = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.dungeon)];
     }
 
-    private static calcReward(dungeon: string, amount: number): number {
+    public static generateData(): any[] {
+        // Allow up to highest region
+        const region = SeededRand.intBetween(0, player.highestRegion());
+        const dungeon = SeededRand.fromArray(GameConstants.RegionDungeons[region]);
+        const amount = SeededRand.intBetween(5, 20);
+        const reward = this.calcReward(amount, dungeon);
+        return [amount, reward, dungeon];
+    }
+
+    private static calcReward(amount: number, dungeon: string): number {
         const playerDamage = App.game.party.calculateClickAttack() + (App.game.party.calculatePokemonAttack() / GameConstants.QUEST_CLICKS_PER_SECOND);
         const attacksToDefeatPokemon = Math.ceil(Math.min(4, dungeonList[dungeon].baseHealth / playerDamage));
         const averageTilesToBoss = 13;
@@ -28,6 +40,18 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         const routeKillsPerDungeon = dungeonList[dungeon].tokenCost / tokens;
         const collectTokensReward = routeKillsPerDungeon * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * amount;
 
-        return Math.min(5000, Math.ceil(completeDungeonsReward + collectTokensReward));
+        const reward = Math.min(5000, Math.ceil(completeDungeonsReward + collectTokensReward));
+        return super.randomizeReward(reward);
+    }
+
+    get description(): string {
+        return `Defeat the ${this.dungeon} dungeon ${this.amount.toLocaleString('en-US')} times.`;
+    }
+
+    toJSON() {
+        const json = super.toJSON();
+        json['name'] = this.constructor.name;
+        json['data'].push(this.dungeon);
+        return json;
     }
 }

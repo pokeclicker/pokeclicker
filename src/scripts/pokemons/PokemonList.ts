@@ -8681,6 +8681,11 @@ const pokemonList = createPokemonArray(
         'evolutions': [
             new LevelEvolution('Burmy (plant)', 'Wormadam (plant)', 20),
             new LevelEvolution('Burmy (plant)', 'Mothim', 20),
+            new EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (plant)', 'Burmy (sand)', 1),
+            new EnvironmentRestrictedLevelEvolution('GemCave', 'Burmy (plant)', 'Burmy (sand)', 1),
+            new EnvironmentRestrictedLevelEvolution('PowerPlant', 'Burmy (plant)', 'Burmy (trash)', 1),
+            new EnvironmentRestrictedLevelEvolution('Mansion', 'Burmy (plant)', 'Burmy (trash)', 1),
+            new EnvironmentRestrictedLevelEvolution('Graveyard', 'Burmy (plant)', 'Burmy (trash)', 1),
         ],
         'base': {
             'hitpoints': 40,
