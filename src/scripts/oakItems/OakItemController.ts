@@ -11,7 +11,7 @@ class OakItemController {
             return;
         }
 
-        if (Settings.getSetting('challenges.disableOakItems').observableValue()) {
+        if (App.game.challenges.current.disableOakItems()) {
             return;
         }
 

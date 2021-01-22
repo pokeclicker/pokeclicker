@@ -59,7 +59,7 @@ class TypeHelper {
 
         let m4 = TypeHelper.typeMatrix[a2][d2];
 
-        if (!Settings.getSetting('challenges.disableShards').value) {
+        if (!App.game.challenges.current.disableShards()) {
             m1 += (App.game.shards.getShardUpgrade(a1, this.valueToType(m1)) * Shards.SHARD_UPGRADE_STEP);
             m2 += (App.game.shards.getShardUpgrade(a1, this.valueToType(m2)) * Shards.SHARD_UPGRADE_STEP);
             m3 += (App.game.shards.getShardUpgrade(a2, this.valueToType(m3)) * Shards.SHARD_UPGRADE_STEP);

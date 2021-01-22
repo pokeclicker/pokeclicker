@@ -50,7 +50,7 @@ class OakItems implements Feature {
         this.addMultiplier('shiny', OakItems.OakItem.Shiny_Charm);
         this.addMultiplier('eggStep', OakItems.OakItem.Blaze_Cassette);
 
-        Settings.getSetting('challenges.disableOakItems').observableValue.subscribe(value => {
+        App.game.challenges.current.disableOakItems.subscribe(value => {
             if (value) {
                 this.itemList.forEach(oakItem => {
                     if (this.isActive(oakItem.name)) {

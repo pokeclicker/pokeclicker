@@ -35,6 +35,7 @@ class Game {
         public specialEvents: SpecialEvents,
         public discord: Discord,
         public achievementTracker: AchievementTracker,
+        public challenges: Challenges,
         public multiplier: Multiplier
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);

@@ -15,7 +15,7 @@ class ItemHandler {
             return false;
         }
 
-        if (ItemList[name] instanceof BattleItem && Settings.getSetting('challenges.disableBattleItems').observableValue()) {
+        if (ItemList[name] instanceof BattleItem && App.game.challenges.current.disableBattleItems()) {
             Notifier.notify({
                 message: 'You can\'t use Battle Items...',
                 type: NotificationConstants.NotificationOption.danger,
