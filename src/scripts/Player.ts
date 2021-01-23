@@ -22,7 +22,7 @@ class Player {
 
     private _region: KnockoutObservable<GameConstants.Region>;
     private _town: KnockoutObservable<Town>;
-    private starter: GameConstants.Starter;
+    private starter: KnockoutObservable<GameConstants.Starter>;
     private _timeTraveller = false;
 
     constructor(savedPlayer?) {

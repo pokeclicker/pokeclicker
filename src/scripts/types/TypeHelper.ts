@@ -50,13 +50,9 @@ class TypeHelper {
         a2 = a2 != PokemonType.None ? a2 : a1;
         d2 = d2 != PokemonType.None ? d2 : d1;
 
-        //TODO factor in shard value
         let m1 = TypeHelper.typeMatrix[a1][d1];
-
         let m2 = TypeHelper.typeMatrix[a1][d2];
-
         let m3 = TypeHelper.typeMatrix[a2][d1];
-
         let m4 = TypeHelper.typeMatrix[a2][d2];
 
         if (!App.game.challenges.list.disableShards.active()) {
