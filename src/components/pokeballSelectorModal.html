@@ -29,8 +29,8 @@
                   click: function(){App.game.pokeballs.selectedSelection()($data.type)},
                   visible: $data.unlocked(),
                   css: { 
-                    'clickable': !($data.type === GameConstants.Pokeball.Masterball && App.game.challenges.current.disableMasterballs()),
-                    'disabled no-click text-muted': ($data.type === GameConstants.Pokeball.Masterball && App.game.challenges.current.disableMasterballs()),
+                    'clickable': !($data.type === GameConstants.Pokeball.Masterball && App.game.challenges.list.disableMasterballs.active()),
+                    'disabled no-click text-muted': ($data.type === GameConstants.Pokeball.Masterball && App.game.challenges.list.disableMasterballs.active()),
                   }"></tr>
               <!-- /ko -->
             </tbody>

@@ -3,30 +3,34 @@ class Challenges implements Saveable {
 
     defaults: Record<string, any> = {};
 
-    current: Record<string, any> = {
-        disableClickAttack: ko.observable(false),
-        disableBattleItems: ko.observable(false),
-        disableMasterballs: ko.observable(false),
-        disableOakItems: ko.observable(false),
-        disableShards: ko.observable(false),
-        disableProteins: ko.observable(false),
+    list: Record<string, Challenge> = {
+        disableClickAttack: new Challenge('No Click Attack', 'Disables the ability to use Click Attacks'),
+        disableBattleItems: new Challenge('No Battle Item', 'Disables the usage of Battle Items'),
+        disableMasterballs: new Challenge('No Masterball', 'Disables the usage of Masterballs'),
+        disableOakItems: new Challenge('No Oak Item', 'Disables the usage of all Oak Items'),
+        disableShards: new Challenge('No Shard', 'Disables the usage of Shards for increasing damage multipliers'),
+        disableProteins: new Challenge('No Protein', 'Disables the usage of Proteins'),
     };
 
     constructor() {}
 
     fromJSON(json): void {
-        if (!json || !json.current) {
+        if (!json || !json.list) {
             return;
         }
 
-        Object.entries(json.current || this.defaults).forEach(([challenge, value]) => {
-            this.current[challenge](!!value);
+        Object.entries(json.list).forEach(([challenge, value]) => {
+            this.list[challenge]?.active(!!value);
         });
     }
 
     toJSON(): Record<string, any> {
+        const list = {};
+        Object.entries(this.list).forEach(([c, v]) => {
+            list[c] = v.active();
+        });
         return {
-            current: ko.toJS(this.current),
+            list,
         };
     }
 

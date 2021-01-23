@@ -11,8 +11,8 @@
 
             </div>
             <div class="modal-body p-0">
-                <p data-bind="visible: App.game.challenges.current.disableShards()" class="bg-danger my-0">
-                    Shard bonuses are currently disabled in the settings.
+                <p data-bind="visible: App.game.challenges.list.disableShards.active()" class="bg-danger my-0">
+                    Shard bonuses are disabled.
                 </p>
                 <table class='table table-sm table-hover m-0'>
                     <!-- ko foreach: Array(Shards.nTypes) -->

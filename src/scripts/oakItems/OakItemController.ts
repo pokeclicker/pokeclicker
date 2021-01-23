@@ -11,7 +11,7 @@ class OakItemController {
             return;
         }
 
-        if (App.game.challenges.current.disableOakItems()) {
+        if (App.game.challenges.list.disableOakItems.active()) {
             return;
         }
 

@@ -15,9 +15,10 @@ class ItemHandler {
             return false;
         }
 
-        if (ItemList[name] instanceof BattleItem && App.game.challenges.current.disableBattleItems()) {
+        if (ItemList[name] instanceof BattleItem && App.game.challenges.list.disableBattleItems.active()) {
             Notifier.notify({
-                message: 'You can\'t use Battle Items...',
+                title: 'Challenge Mode',
+                message: 'Battle Items are disabled',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;

@@ -72,7 +72,7 @@ class Pokeballs implements Feature {
         ]).forEach(selection => {
             selection.subscribe(value => {
                 // switch to Ultraball if Masterball is selected
-                if (value == GameConstants.Pokeball.Masterball && App.game.challenges.current.disableMasterballs()) {
+                if (value == GameConstants.Pokeball.Masterball && App.game.challenges.list.disableMasterballs.active()) {
                     selection(GameConstants.Pokeball.Ultraball);
                     Notifier.notify({
                         title: 'Challenge Mode',
