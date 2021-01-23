@@ -28,6 +28,8 @@ class Plot implements Saveable {
     auraHarvest: KnockoutComputed<number>;
     auraMutation: KnockoutComputed<number>;
     auraReplant: KnockoutComputed<number>;
+    auraDeath: KnockoutComputed<number>;
+    auraBoost: KnockoutComputed<number>;
 
     isEmpty: KnockoutComputed<boolean>;
     isMulched: KnockoutComputed<boolean>;
@@ -47,6 +49,8 @@ class Plot implements Saveable {
         this._auras[AuraType.Harvest] = ko.observable(1);
         this._auras[AuraType.Mutation] = ko.observable(1);
         this._auras[AuraType.Replant] = ko.observable(1);
+        this._auras[AuraType.Death] = ko.observable(1);
+        this._auras[AuraType.Boost] = ko.observable(1);
 
         this.formattedStageTimeLeft = ko.pureComputed(() => {
             if (this.berry === BerryType.None) {
@@ -91,6 +95,12 @@ class Plot implements Saveable {
         this.auraReplant = ko.pureComputed(() => {
             return this._auras[AuraType.Replant]();
         });
+        this.auraDeath = ko.pureComputed(() => {
+            return this._auras[AuraType.Death]();
+        });
+        this.auraBoost = ko.pureComputed(() => {
+            return this._auras[AuraType.Boost]();
+        });
 
         this.formattedAuras = ko.pureComputed(() => {
             const auraStr = [];
@@ -108,6 +118,14 @@ class Plot implements Saveable {
 
             if (this.auraReplant() !== 1) {
                 auraStr.push(`Replant: ${this.auraReplant().toFixed(2)}x`);
+            }
+
+            if (this.auraDeath() !== 1) {
+                auraStr.push(`Death: ${this.auraDeath().toFixed(2)}x`);
+            }
+
+            if (this.auraBoost() !== 1) {
+                auraStr.push(`Boost: ${this.auraBoost().toFixed(2)}x`);
             }
             return auraStr.join('<br/>');
         });
@@ -176,7 +194,8 @@ class Plot implements Saveable {
             // Aura
             if (this.stage() >= PlotStage.Taller && this.berryData.aura) {
                 tooltip.push('<u>Aura Emitted:</u>');
-                tooltip.push(`${this.berryData.aura.getLabel(this.stage())}`);
+                const emittedAura = this.berryData.aura.getAuraValue(this.stage()) * this._auras[AuraType.Boost]();
+                tooltip.push(`${AuraType[this.berryData.aura.auraType]}: ${emittedAura.toFixed(2)}x`);
             }
             const auraStr = this.formattedAuras();
             if (auraStr) {
@@ -285,7 +304,7 @@ class Plot implements Saveable {
     die(harvested = false): void {
         if (!harvested) {
             // Withered Berry plant drops half of the berries
-            const amount = Math.floor(this.harvestAmount() / 2);
+            const amount = Math.ceil(this.harvestAmount() / 2);
             if (amount) {
                 App.game.farming.gainBerry(this.berry, amount);
                 this.notifications.push(FarmNotificationType.Dropped);
@@ -334,14 +353,23 @@ class Plot implements Saveable {
             const wanderPokemon = availablePokemon[Math.floor(Math.random() * availablePokemon.length)];
 
             const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
+
+            // Add to log book
+            const pokemonStr = shiny ? `shiny ${wanderPokemon}` : wanderPokemon;
+            App.game.logbook.newLog(LogBookTypes.WANDER, `A wild ${pokemonStr} has wandered onto the farm!`);
+
+            // Gain Pokemon
             App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(wanderPokemon).id, shiny, true);
 
             // Check for Starf berry generation
             if (shiny) {
                 const emptyPlots = App.game.farming.plotList.filter(plot => plot.isUnlocked && plot.isEmpty());
-                const chosenPlot = emptyPlots[Math.floor(Math.random() * emptyPlots.length)];
-                chosenPlot.plant(BerryType.Starf);
-                App.game.farming.unlockBerry(BerryType.Starf);
+                // No Starf generation if no empty plots :(
+                if (emptyPlots.length) {
+                    const chosenPlot = emptyPlots[Math.floor(Math.random() * emptyPlots.length)];
+                    chosenPlot.plant(BerryType.Starf);
+                    App.game.farming.unlockBerry(BerryType.Starf);
+                }
             }
 
             return {pokemon: wanderPokemon, shiny: shiny};
@@ -362,9 +390,9 @@ class Plot implements Saveable {
 
         multiplier *= this._auras[AuraType.Growth]();
 
-        // Handle Kasib Effect
-        if (this.stage() == PlotStage.Berry && this.berry != BerryType.Kasib && App.game.farming.berryInFarm(BerryType.Kasib)) {
-            multiplier *= 5;
+        // Handle Death Aura
+        if (this.stage() == PlotStage.Berry && this.berry != BerryType.Kasib) {
+            multiplier *= this._auras[AuraType.Death]();
         }
 
         return multiplier;
@@ -418,20 +446,42 @@ class Plot implements Saveable {
         return multiplier;
     }
 
+    /**
+     * Handles adding a multiplicative aura to the Plot
+     * @param auraType The AuraType
+     * @param multiplier The multiplier to modify the current aura by
+     */
     addAura(auraType: AuraType, multiplier: number): void {
         const currentMultiplier = this._auras[auraType]();
         this._auras[auraType](currentMultiplier * multiplier);
+    }
+
+    /**
+     * Handles setting the value of an aura to the Plot
+     * @param auraType The AuraType
+     * @param value The value to be set
+     */
+    setAura(auraType: AuraType, value: number): void {
+        // Death Aura doesn't apply to Kasib
+        if (auraType == AuraType.Death && this.berry === BerryType.Kasib) {
+            return;
+        }
+        // Boost Aura doesn't apply to Lum
+        if (auraType == AuraType.Boost && this.berry === BerryType.Lum) {
+            return;
+        }
+        this._auras[auraType](value);
     }
 
     clearAuras(): void {
         this._auras.forEach(aura => aura(1));
     }
 
-    applyAura(index: number): void {
+    emitAura(index: number): void {
         if (this.berry === BerryType.None) {
             return;
         }
-        this.berryData.aura?.applyAura(index);
+        this.berryData.aura?.emitAura(index);
     }
 
     fromJSON(json: Record<string, any>): void {

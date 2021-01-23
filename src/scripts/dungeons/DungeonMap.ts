@@ -11,14 +11,14 @@ class DungeonMap {
 
         // Move the boss if it spawns on the player.
         if (this.currentTile().type() == GameConstants.DungeonTile.boss) {
-            this.currentTile().type(GameConstants.DungeonTile.empty);
+            this.currentTile().type(GameConstants.DungeonTile.entrance);
             const newX = GameConstants.randomIntBetween(0, size - 2);
             const newY = GameConstants.randomIntBetween(0, size - 2);
             this.board()[newY][newX].type(GameConstants.DungeonTile.boss);
             this.board()[newY][newX].calculateCssClass();
         }
         this.currentTile().isVisible = true;
-        this.currentTile().type(GameConstants.DungeonTile.empty);
+        this.currentTile().type(GameConstants.DungeonTile.entrance);
         this.currentTile().hasPlayer = true;
         this.currentTile().calculateCssClass();
     }

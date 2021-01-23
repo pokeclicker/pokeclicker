@@ -39,8 +39,11 @@ class Quests implements Saveable {
 
     constructor() {}
 
-    // Get a quest line by name
-    getQuestLine(name) {
+    /**
+     * Gets a quest line by name
+     * @param name The quest line name
+     */
+    getQuestLine(name: string) {
         return this.questLines().find(ql => ql.name.toLowerCase() == name.toLowerCase());
     }
 
@@ -90,7 +93,7 @@ class Quests implements Saveable {
         }
     }
 
-    public addXP(amount) {
+    public addXP(amount: number) {
         if (isNaN(amount)) {
             return;
         }
@@ -151,7 +154,10 @@ class Quests implements Saveable {
         return App.game.wallet.hasAmount(this.getRefreshCost());
     }
 
-    // Returns 0 when all quests are complete, ~1 million when none are
+    /**
+     * Formula for the Money cost for refreshing quests
+     * @returns 0 when all quests are complete, ~1 million when none are
+     */
     public getRefreshCost(): Amount {
         // If we have a free refersh, just assume all the quest are completed
         const notComplete = this.freeRefresh() ? 0 : this.incompleteQuests().length;
@@ -173,12 +179,18 @@ class Quests implements Saveable {
         return false;
     }
 
-    // returns false if we still have incomplete/inprogress quest
+    /**
+     * Determines if all quests have been completed and claimed.
+     */
     public allQuestClaimed() {
         return !this.incompleteQuests().length && !this.currentQuests().length;
     }
 
-    // 1000 xp needed to reach level 2, amount needed for next level increases by 20% of previous level
+    /**
+     * Formula for the amount of exp to increase quest level.
+     * 1000 XP is needed for level 2, and then increases 20% each level.
+     * @param level The current quest level
+     */
     public levelToXP(level: number): number {
         if (level >= 2) {
             // Sum of geometric series
@@ -204,13 +216,16 @@ class Quests implements Saveable {
     }
 
     loadQuestList(questList) {
-        questList.forEach(quest => {
-            if (quest.initial === null) {
-                return;
+        // Sanity Check
+        this.questList.removeAll();
+        questList.forEach(questData => {
+            if (questData.hasOwnProperty('name')) {
+                const quest = QuestHelper.createQuest(questData.name, questData.data);
+                quest.fromJSON(questData);
+                this.questList.push(quest);
+            } else {
+                this.questList.push(new CapturePokemonsQuest(1, 0));
             }
-            this.questList()[quest.index].notified = quest.notified;
-            this.questList()[quest.index].claimed(quest.claimed);
-            this.questList()[quest.index].initial(quest.initial);
         });
     }
 
@@ -237,7 +252,7 @@ class Quests implements Saveable {
             lastRefreshLevel: this.lastRefreshLevel,
             lastRefreshRegion: this.lastRefreshRegion,
             freeRefresh: this.freeRefresh(),
-            questList: this.questList(),
+            questList: this.questList().map(quest => quest.toJSON()),
             questLines: this.questLines(),
         };
     }
@@ -262,10 +277,11 @@ class Quests implements Saveable {
             this.freeRefresh(json.freeRefresh || this.defaults.freeRefresh);
         }
 
-        // Generate quest list
-        this.generateQuestList(this.lastRefresh, this.lastRefreshLevel);
-        // Load our current quest list
-        if (json.questList) {
+        if (!json.hasOwnProperty('questList') || !json.questList.length) {
+            // Generate new quest list
+            this.generateQuestList(this.lastRefresh, this.lastRefreshLevel);
+        } else {
+            // Load saved quests
             this.loadQuestList(json.questList);
         }
 

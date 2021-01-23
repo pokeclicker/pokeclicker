@@ -9,31 +9,23 @@ class OakItem extends ExpUpgrade {
     };
 
     private _isActive: KnockoutObservable<boolean>;
-    inactiveBonus: number;
-    unlockReq: number;
-    description: string;
-    expGain: number;
-
 
     constructor(
         name: any,
         displayName: string,
-        description: string,
+        public description: string,
         increasing: boolean,
         bonusList: number[],
-        inactiveBonus: number,
-        unlockReq: number,
-        expGain: number,
+        public inactiveBonus: number,
+        public unlockReq: number,
+        public expGain: number,
         expList: number[] = [500, 1000, 2500, 5000, 10000],
         maxLevel = 5,
-        costList: Amount[] = AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], GameConstants.Currency.money)
+        costList: Amount[] = AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], GameConstants.Currency.money),
+        public bonusSymbol: string = '×'
     ) {
         super(name, displayName, maxLevel, expList, costList, bonusList, increasing);
         this._isActive = ko.observable(false);
-        this.inactiveBonus = inactiveBonus;
-        this.unlockReq = unlockReq;
-        this.description = description;
-        this.expGain = expGain;
     }
 
     use(exp: number = this.expGain, scale = 1) {
@@ -95,7 +87,11 @@ class OakItem extends ExpUpgrade {
         this._isActive(bool);
     }
 
+    get bonusText(): string {
+        return `${this.calculateBonusIfActive()}${this.bonusSymbol}`;
+    }
+
     tooltip = ko.pureComputed(() => {
-        return `<u>${this.displayName}</u><br/><p>${this.description}</p>Level: <strong>${this.level}/${this.maxLevel}</strong><br/>Bonus: <strong>${this.calculateBonusIfActive()}${this.displayName != 'Magic Ball' ? '×' : '%'}</strong>`;
+        return `<u>${this.displayName}</u><br/><p>${this.description}</p>Level: <strong>${this.level}/${this.maxLevel}</strong><br/>Bonus: <strong>${this.bonusText}</strong>`;
     });
 }

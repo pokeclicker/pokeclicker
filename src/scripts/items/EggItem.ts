@@ -9,9 +9,9 @@ class EggItem extends CaughtIndicatingItem {
         this.type = type;
     }
 
-    use() {
-        if (player.itemList[this.name()]() <= 0) {
-            return;
+    use(): boolean {
+        if (player.itemList[this.name]() <= 0) {
+            return false;
         }
 
         let success: boolean;
@@ -25,8 +25,9 @@ class EggItem extends CaughtIndicatingItem {
         }
 
         if (success) {
-            player.loseItem(this.name(), 1);
+            player.loseItem(this.name, 1);
         }
+        return success;
     }
 
     getCaughtStatus(): CaughtStatus {
@@ -44,6 +45,7 @@ class EggItem extends CaughtIndicatingItem {
             }
         }
     }
+
 }
 
 
