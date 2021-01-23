@@ -77,17 +77,17 @@ const PewterCityShop = new Shop([
     'Pokeball',
     'Token Collector',
     'Lucky Egg',
-    'Mystery_egg',
+    'Mystery Egg',
 ]);
 const CeruleanCityShop = new Shop([
-    'Water_stone',
+    'Water Stone',
     'xAttack',
-    'Water_egg',
+    'Water Egg',
 ]);
 const VermilionCityShop = new Shop([
-    'Thunder_stone',
+    'Thunder Stone',
     'Lucky Egg',
-    'Electric_egg',
+    'Electric Egg',
 ]);
 const CeladonCityShop = new Shop([
     'Eevee',
@@ -97,20 +97,20 @@ const CeladonCityShop = new Shop([
     'Lickitung',
 ]);
 const SaffronCityShop = new Shop([
-    'Moon_stone',
+    'Moon Stone',
     'xClick',
-    'Leaf_stone',
-    'Fighting_egg',
+    'Leaf Stone',
+    'Fighting Egg',
 ]);
 const FuchsiaCityShop = new Shop([
     'Ultraball',
-    'Trade_stone',
+    'Trade Stone',
     'Lucky Egg',
-    'Dragon_egg',
+    'Dragon Egg',
 ]);
 const CinnabarIslandShop = new Shop([
-    'Fire_stone',
-    'Fire_egg',
+    'Fire Stone',
+    'Fire Egg',
     'SmallRestore',
     'Explorer Kit',
     'Explosive_Charge',
@@ -126,7 +126,7 @@ const LavenderTownShop = new Shop([
     'Greatball',
     'Item Magnet',
     'Lucky Incense',
-    'Grass_egg',
+    'Grass Egg',
 ]);
 
 // Kanto NPCs
@@ -335,36 +335,36 @@ const CherrygroveCityShop = new Shop([
 const VioletCityShop = new Shop([
     'MediumRestore',
     'Togepi',
-    'Mystery_egg',
+    'Mystery Egg',
 ]);
 const AzaleaTownShop = new Shop([
-    'Kings_rock',
-    'Grass_egg',
+    'King\'s_Rock',
+    'Grass Egg',
 ]);
 const GoldenrodCityShop = new Shop([
-    'Sun_stone',
+    'Sun Stone',
     'Upgrade',
-    'Soothe_bell',
+    'Soothe Bell',
 ]);
 const EcruteakCityShop = new Shop([
     'Greatball',
-    'Fire_egg',
+    'Fire Egg',
 ]);
 const OlivineCityShop = new Shop([
-    'Metal_coat',
-    'Water_egg',
-    'Electric_egg',
+    'Metal Coat',
+    'Water Egg',
+    'Electric Egg',
 ]);
 const CianwoodCityShop = new Shop([
     'Ultraball',
-    'Fighting_egg',
+    'Fighting Egg',
 ]);
 const MahoganyTownShop = new Shop([
-    'Fighting_egg',
+    'Fighting Egg',
 ]);
 const BlackthornCityShop = new Shop([
     'LargeRestore',
-    'Dragon_scale',
+    'Dragon Scale',
 ]);
 
 //Johto Berry Master
@@ -557,31 +557,31 @@ const LittleRootTownShop = new Shop([
     'Pokeball',
 ]);
 const RustboroCityShop = new Shop([
-    'Mystery_egg',
+    'Mystery Egg',
 ]);
 const DewfordTownShop = new Shop([
-    'Fighting_egg',
+    'Fighting Egg',
 ]);
 const SlateportCityShop = new Shop([
     'Greatball',
-    'Water_egg',
+    'Water Egg',
 ]);
 const MauvilleCityShop = new Shop([
-    'Electric_egg',
+    'Electric Egg',
 ]);
 const VerdanturfTownShop = new Shop([
-    'Grass_egg',
-    'Soothe_bell',
+    'Grass Egg',
+    'Soothe Bell',
 ]);
 const LavaridgeTownShop = new Shop([
-    'Fire_egg',
+    'Fire Egg',
 ]);
 const FallarborTownShop = new Shop([
-    'Moon_stone',
+    'Moon Stone',
 ]);
 const FortreeCityShop = new Shop([
     'Ultraball',
-    'Leaf_stone',
+    'Leaf Stone',
 ]);
 const LilyCoveCityShop = new Shop([
     'Pokeball',
@@ -599,17 +599,17 @@ const LilyCoveCityShop = new Shop([
 ]);
 const MossdeepCityShop = new Shop([
     'Beldum',
-    'Prism_scale',
+    'Prism Scale',
 ]);
 const SootopolisCityShop = new Shop([
-    'Water_stone',
+    'Water Stone',
 ]);
 const PacifidlogTownShop = new Shop([
-    'Deepsea_tooth',
-    'Deepsea_scale',
+    'Deep Sea Tooth',
+    'Deep Sea Scale',
 ]);
 const EverGrandeCityShop = new Shop([
-    'Dragon_egg',
+    'Dragon Egg',
 ]);
 // TODO: finalize items and prices
 const BattleFrontierShop = new Shop([
@@ -898,19 +898,19 @@ const TwinleafTownShop = new Shop([
     'Pokeball',
 ]);
 const OreburghCityShop = new Shop([
-    'Mystery_egg',
+    'Mystery Egg',
 ]);
 const EternaCityShop = new Shop([
-    'Grass_egg',
+    'Grass Egg',
 ]);
 const HearthomeCityShop = new Shop([
-    'Soothe_bell',
-    'Fire_egg',
+    'Soothe Bell',
+    'Fire Egg',
 ]);
 const SolaceonTownShop = new Shop([
-    'Dawn_stone',
-    'Dusk_stone',
-    'Shiny_stone',
+    'Dawn Stone',
+    'Dusk Stone',
+    'Shiny Stone',
     'Spiritomb',
 ]);
 const VeilstoneCityShop = new Shop([
@@ -928,34 +928,34 @@ const VeilstoneCityShop = new Shop([
     'Lucky Incense',
 ]);
 const CelesticTownShop = new Shop([
-    'Dragon_egg',
+    'Dragon Egg',
 ]);
 const CanalaveCityShop = new Shop ([
-    'Fighting_egg',
+    'Fighting Egg',
 ]);
 const PalParkShop = new Shop([
-    'Razor_claw',
-    'Razor_fang',
+    'Razor Claw',
+    'Razor Fang',
     'Combee',
     'Burmy (plant)',
     'Cherubi',
 ]);
 const SunyshoreCityShop = new Shop([
-    'Electric_egg',
+    'Electric Egg',
 ]);
 const SurvivalAreaShop = new Shop([
     'Electirizer',
     'Magmarizer',
 ]);
 const ResortAreaShop = new Shop([
-    'Reaper_cloth',
-    'Dubious_disc',
+    'Reaper Cloth',
+    'Dubious Disc',
     'Protector',
 ]);
 const PastoriaShop = new Shop([
     'Ultraball',
     'Skorupi',
-    'Water_egg',
+    'Water Egg',
 ]);
 
 //Sinnoh Berry Master
@@ -1295,25 +1295,25 @@ const VirbankCityShop = new Shop([
     'Greatball',
 ]);
 const CasteliaCityShop = new Shop([
-    'Trade_stone',
-    'Water_egg',
+    'Trade Stone',
+    'Water Egg',
 ]);
 const NimbasaCityShop = new Shop([
-    'Grass_egg',
-    'Electric_egg',
+    'Grass Egg',
+    'Electric Egg',
 ]);
 const DriftveilCityShop = new Shop([
     'Zorua',
 ]);
 const MistraltonCityShop = new Shop([
     'Ultraball',
-    'Thunder_stone',
+    'Thunder Stone',
 ]);
 const LentimasTownShop = new Shop([
-    'Fire_egg',
+    'Fire Egg',
 ]);
 const LacunosaTownShop = new Shop([
-    'Fighting_egg',
+    'Fighting Egg',
 ]);
 const OpelucidCityShop = new Shop([
     'Pokeball',
@@ -1330,23 +1330,23 @@ const OpelucidCityShop = new Shop([
     'Lucky Incense',
 ]);
 const IcirrusCityShop = new Shop([
-    'Dragon_egg',
+    'Dragon Egg',
 ]);
 const BlackAndWhiteParkShop = new Shop([
-    'Moon_stone',
-    'Sun_stone',
+    'Moon Stone',
+    'Sun Stone',
 ]);
 const NacreneCityShop = new Shop([
-    'Soothe_bell',
+    'Soothe Bell',
 ]);
 const StriatonCityShop = new Shop([
-    'Leaf_stone',
-    'Water_stone',
-    'Fire_stone',
+    'Leaf Stone',
+    'Water Stone',
+    'Fire Stone',
 ]);
 const AccumulaTownShop = new Shop([
-    'Dusk_stone',
-    'Shiny_stone',
+    'Dusk Stone',
+    'Shiny Stone',
 ]);
 const AnvilleTownShop = new Shop([
     'Meloetta (pirouette)',
@@ -1679,38 +1679,38 @@ const VanivilleTownShop = new Shop([
     'Pokeball',
 ]);
 const SantaluneCityShop = new Shop([
-    'Mystery_egg',
+    'Mystery Egg',
 ]);
 const LumioseCityShop = new Shop([
     'Greatball',
-    'Electric_egg',
+    'Electric Egg',
 ]);
 const AmbretteTownShop = new Shop([
-    'Water_egg',
+    'Water Egg',
 ]);
 const GeosengeTownShop = new Shop([
-    'Fire_egg',
+    'Fire Egg',
 ]);
 const ShalourCityShop = new Shop([
-    'Fighting_egg',
+    'Fighting Egg',
 ]);
 const CoumarineCityShop = new Shop([
     'Ultraball',
-    'Grass_egg',
+    'Grass Egg',
 ]);
 const LaverreCityShop = new Shop([
     'Sachet',
-    'Whipped_dream',
+    'Whipped Dream',
 ]);
 const DendemilleTownShop = new Shop([
-    'Dusk_stone',
-    'Shiny_stone',
+    'Dusk Stone',
+    'Shiny Stone',
 ]);
 const AnistarCityShop = new Shop([
-    'Sun_stone',
+    'Sun Stone',
 ]);
 const CouriwayTownShop = new Shop([
-    'Dragon_egg',
+    'Dragon Egg',
 ]);
 
 //Kalos Towns
@@ -2143,54 +2143,54 @@ const PostwickShop = new Shop([
 ]);
 const WedgehurstShop = new Shop([
     'Greatball',
-    'Mystery_egg',
+    'Mystery Egg',
 ]);
 const CirchesterShop = new Shop([
-    'Ice_stone',
+    'Ice Stone',
 ]);
 const TurffieldShop = new Shop([
-    'Grass_egg',
-    'Tart_apple',
-    'Sweet_apple',
+    'Grass Egg',
+    'Tart Apple',
+    'Sweet Apple',
 ]);
 const HulburyShop = new Shop([
-    'Water_egg',
+    'Water Egg',
     'Toxel',
 ]);
 const MotostokeShop = new Shop([
-    'Fire_egg',
-    'Strawberry_sweet',
-    'Berry_sweet',
-    'Love_sweet',
-    'Star_sweet',
-    'Clover_sweet',
-    'Flower_sweet',
-    'Ribbon_sweet',
-    'Lemon_cream',
-    'Salted_cream',
-    'Ruby_cream',
-    'Mint_cream',
-    'Matcha_cream',
-    'Caramel_swirl',
-    'Rainbow_swirl',
-    'Ruby_swirl',
+    'Fire Egg',
+    'Strawberry Sweet',
+    'Berry Sweet',
+    'Love Sweet',
+    'Star Sweet',
+    'Clover Sweet',
+    'Flower Sweet',
+    'Ribbon Sweet',
+    'Lemon Cream',
+    'Salted Cream',
+    'Ruby Cream',
+    'Mint Cream',
+    'Matcha Cream',
+    'Caramel Swirl',
+    'Rainbow Swirl',
+    'Ruby Swirl',
 ]);
 const HammerlockeShop = new Shop([
-    'Dragon_egg',
-    'Rusted_sword',
-    'Rusted_shield',
+    'Dragon Egg',
+    'Rusted Sword',
+    'Rusted Shield',
     'Eternatus',
 ]);
 const StowonSideShop: Shop = new Shop([
-    'Fighting_egg',
-    'Chipped_pot',
+    'Fighting Egg',
+    'Chipped Pot',
 ]);
 const SpikemuthShop = new Shop([
-    'Electric_egg',
+    'Electric Egg',
 ]);
 const FreezingtonShop = new Shop([
-    'Galarica_wreath',
-    'Galarica_cuff',
+    'Galarica Wreath',
+    'Galarica Cuff',
 ]);
 const WyndonShop = new Shop([
     'Pokeball',

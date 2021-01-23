@@ -1,4 +1,5 @@
 ///<reference path="../keyItems/KeyItems.ts"/>
+///<reference path="./ShopEntries.ts"/>
 
 class KeyShopItem extends ShopEntry {
 

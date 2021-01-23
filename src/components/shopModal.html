@@ -83,7 +83,7 @@
                 }">
                <knockout data-bind="if: ($data instanceof ShopItem && $data.item instanceof CaughtIndicatingItem)">
                    <span style="position: absolute; top: 15px; right: 20px;"
-                         data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $data.getCaughtStatus()}}">
+                         data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $data.item.getCaughtStatus()}}">
                    </span>
                </knockout>
                <img src="" height="36px" data-bind="attr:{ src: $data.image }">
