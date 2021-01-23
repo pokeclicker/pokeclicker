@@ -331,6 +331,68 @@ class Update implements Saveable {
         '0.7.4': ({ playerData, saveData }) => {
             // Clear old quest data
             delete saveData.quests.questList;
+
+            /*
+             * Challenge Modes
+             */
+            // Disable Click Attacks
+            if (saveData.statistics.clickAttacks <= 100) {
+                Notifier.notify({
+                    title: 'Active Challenge Mode?',
+                    message: `Do you want to activate No Click Attack challenge mode?
+                    
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableClickAttack.activate();">Activate</button>`,
+                    timeout: GameConstants.HOUR,
+                });
+            }
+            // Disable Battle Items
+            Notifier.notify({
+                title: 'Active Challenge Mode?',
+                message: `Do you want to activate No Battle Item challenge mode?
+                
+                <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableBattleItems.activate();">Activate</button>`,
+                timeout: GameConstants.HOUR,
+            });
+            // Disable Master Balls
+            if (!saveData.statistics.pokeballsUsed[3]) {
+                Notifier.notify({
+                    title: 'Active Challenge Mode?',
+                    message: `Do you want to activate No Masterball challenge mode?
+                    
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableMasterballs.activate();">Activate</button>`,
+                    timeout: GameConstants.HOUR,
+                });
+            }
+            // Disable Oak Items
+            if (Object.values(saveData.oakItems).every((oi: any) => !oi.exp)) {
+                Notifier.notify({
+                    title: 'Active Challenge Mode?',
+                    message: `Do you want to activate No Oak Item challenge mode?
+                    
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableOakItems.activate();">Activate</button>`,
+                    timeout: GameConstants.HOUR,
+                });
+            }
+            // Disable Shards
+            if (saveData.shards.shardUpgrades.every((s: number) => !s)) {
+                Notifier.notify({
+                    title: 'Active Challenge Mode?',
+                    message: `Do you want to activate No Shard challenge mode?
+                    
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableShards.activate();">Activate</button>`,
+                    timeout: GameConstants.HOUR,
+                });
+            }
+            // Disable Proteins
+            if (saveData.party.caughtPokemon.every(p => !p.proteinsUsed)) {
+                Notifier.notify({
+                    title: 'Active Challenge Mode?',
+                    message: `Do you want to activate No Protein challenge mode?
+                    
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableProteins.activate();">Activate</button>`,
+                    timeout: GameConstants.HOUR,
+                });
+            }
         },
     };
 
