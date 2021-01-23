@@ -6,7 +6,7 @@ class Underground implements Feature {
 
     upgradeList: Array<Upgrade>;
     defaults: Record<string, any>;
-    private _energy: KnockoutObservable<number> = ko.observable(0);
+    private _energy: KnockoutObservable<number> = ko.observable(50);
 
     public static itemSelected;
     public static energyTick: KnockoutObservable<number> = ko.observable(60);
