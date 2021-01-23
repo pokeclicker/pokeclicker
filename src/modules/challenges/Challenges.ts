@@ -1,4 +1,7 @@
-class Challenges implements Saveable {
+import { Saveable } from '../DataStore/common/Saveable';
+import Challenge from './Challenge';
+
+export default class Challenges implements Saveable {
     saveKey = 'challenges';
 
     defaults: Record<string, any> = {};
@@ -11,8 +14,6 @@ class Challenges implements Saveable {
         disableShards: new Challenge('No Shard', 'Disables the usage of Shards for increasing damage multipliers'),
         disableProteins: new Challenge('No Protein', 'Disables the usage of Proteins'),
     };
-
-    constructor() {}
 
     fromJSON(json): void {
         if (!json || !json.list) {
@@ -33,5 +34,4 @@ class Challenges implements Saveable {
             list,
         };
     }
-
 }

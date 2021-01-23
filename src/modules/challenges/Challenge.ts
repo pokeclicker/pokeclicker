@@ -1,10 +1,14 @@
-class Challenge {
+import {
+    Observable as KnockoutObservable,
+} from 'knockout';
+
+export default class Challenge {
     public active: KnockoutObservable<boolean>;
 
     constructor(
-      public type: string,
-      public description: string,
-      active = false
+        public type: string,
+        public description: string,
+        active = false,
     ) {
         this.active = ko.observable(active);
     }
