@@ -67,9 +67,9 @@ const pokeMartShop = new Shop([
     'Item Magnet',
     'Token Collector',
     'Lucky Incense',
-    'SmallRestore',
-    'MediumRestore',
-    'LargeRestore',
+    'Small Restore',
+    'Medium Restore',
+    'Large Restore',
 ], 'Poké Mart');
 
 //Kanto Shops
@@ -111,7 +111,7 @@ const FuchsiaCityShop = new Shop([
 const CinnabarIslandShop = new Shop([
     'Fire Stone',
     'Fire Egg',
-    'SmallRestore',
+    'Small Restore',
     'Explorer Kit',
     'Explosive_Charge',
     'Treasure_Scanner',
@@ -333,7 +333,7 @@ const CherrygroveCityShop = new Shop([
     'Greatball',
 ]);
 const VioletCityShop = new Shop([
-    'MediumRestore',
+    'Medium Restore',
     'Togepi',
     'Mystery Egg',
 ]);
@@ -363,7 +363,7 @@ const MahoganyTownShop = new Shop([
     'Fighting Egg',
 ]);
 const BlackthornCityShop = new Shop([
-    'LargeRestore',
+    'Large Restore',
     'Dragon Scale',
 ]);
 
@@ -587,9 +587,9 @@ const LilyCoveCityShop = new Shop([
     'Pokeball',
     'Greatball',
     'Ultraball',
-    'SmallRestore',
-    'MediumRestore',
-    'LargeRestore',
+    'Small Restore',
+    'Medium Restore',
+    'Large Restore',
     'xAttack',
     'xClick',
     'Lucky Egg',
@@ -615,9 +615,9 @@ const EverGrandeCityShop = new Shop([
 const BattleFrontierShop = new Shop([
     //new PokeballItem(GameConstants.Pokeball.Ultraball, 1, GameConstants.Currency.battlePoint),
     //new PokeballItem(GameConstants.Pokeball.Masterball, 500, GameConstants.Currency.battlePoint , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.battlePoint]}` }),
-    //new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 10, GameConstants.Currency.battlePoint),
-    //new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 20, GameConstants.Currency.battlePoint),
-    //new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 40, GameConstants.Currency.battlePoint),
+    //new Energy Restore(GameConstants.Energy RestoreSize.Small Restore, 10, GameConstants.Currency.battlePoint),
+    //new Energy Restore(GameConstants.Energy RestoreSize.Medium Restore, 20, GameConstants.Currency.battlePoint),
+    //new Energy Restore(GameConstants.Energy RestoreSize.Large Restore, 40, GameConstants.Currency.battlePoint),
 ]);
 
 //Hoenn Berry Master
@@ -917,9 +917,9 @@ const VeilstoneCityShop = new Shop([
     'Pokeball',
     'Greatball',
     'Ultraball',
-    'SmallRestore',
-    'MediumRestore',
-    'LargeRestore',
+    'Small Restore',
+    'Medium Restore',
+    'Large Restore',
     'xAttack',
     'xClick',
     'Lucky Egg',
@@ -1319,9 +1319,9 @@ const OpelucidCityShop = new Shop([
     'Pokeball',
     'Greatball',
     'Ultraball',
-    'SmallRestore',
-    'MediumRestore',
-    'LargeRestore',
+    'Small Restore',
+    'Medium Restore',
+    'Large Restore',
     'xAttack',
     'xClick',
     'Lucky Egg',
@@ -2196,9 +2196,9 @@ const WyndonShop = new Shop([
     'Pokeball',
     'Greatball',
     'Ultraball',
-    'SmallRestore',
-    'MediumRestore',
-    'LargeRestore',
+    'Small Restore',
+    'Medium Restore',
+    'Large Restore',
     'xAttack',
     'xClick',
     'Lucky Egg',
