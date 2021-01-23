@@ -33,7 +33,7 @@ class GainShardsQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const type = SeededRand.fromArray(GameHelper.createArray(1, GameHelper.enumLength(PokemonType) - 1, 1));
+        const type = SeededRand.fromArray(GameHelper.createArray(0, GameHelper.enumLength(PokemonType) - 2, 1));
         const amount = SeededRand.intBetween(200, 600);
         const reward = this.calcReward(type, amount);
         return [amount, reward, type];
