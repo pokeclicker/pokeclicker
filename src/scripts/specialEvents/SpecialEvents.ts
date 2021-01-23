@@ -99,8 +99,8 @@ SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited ti
         Routes.getRoutesByRegion(GameConstants.Region.hoenn).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Pikachu (Gengar)', 'Shuppet', 'Duskull'].includes(p)));
     }
 );
-// Lets go P/E release date
-SpecialEvents.newEvent('Lets GO!', 'Encounter special Eevee and Pikachu roaming in the Kanto region.',
+// Let's Go P/E release date
+SpecialEvents.newEvent('Let\'s GO!', 'Encounter special Eevee and Pikachu roaming in the Kanto region.',
     // Start
     new Date(new Date().getFullYear(), 10, 16, 1), () => {
         RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Let\'s Go Pikachu']));
