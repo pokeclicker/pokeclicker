@@ -8681,6 +8681,11 @@ const pokemonList = createPokemonArray(
         'evolutions': [
             new LevelEvolution('Burmy (plant)', 'Wormadam (plant)', 20),
             new LevelEvolution('Burmy (plant)', 'Mothim', 20),
+            new EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (plant)', 'Burmy (sand)', 1),
+            new EnvironmentRestrictedLevelEvolution('GemCave', 'Burmy (plant)', 'Burmy (sand)', 1),
+            new EnvironmentRestrictedLevelEvolution('PowerPlant', 'Burmy (plant)', 'Burmy (trash)', 1),
+            new EnvironmentRestrictedLevelEvolution('Mansion', 'Burmy (plant)', 'Burmy (trash)', 1),
+            new EnvironmentRestrictedLevelEvolution('Graveyard', 'Burmy (plant)', 'Burmy (trash)', 1),
         ],
         'base': {
             'hitpoints': 40,
@@ -20238,7 +20243,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': -8,
-        'name': 'Lets go Pikachu',
+        'name': 'Let\'s Go Pikachu',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
         'type': [PokemonType.Electric],
@@ -20256,7 +20261,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': -9,
-        'name': 'Lets go Eevee',
+        'name': 'Let\'s Go Eevee',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
         'type': [PokemonType.Normal],

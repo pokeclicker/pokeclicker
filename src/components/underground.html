@@ -30,7 +30,7 @@
                                 click: function(){ ItemList[$data].use();},
                                 css: { disabled: player._itemList[$data]() <= 0}">
                             <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
-                            <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
+                            <img class="restore-item" data-bind="attr: { src: ItemList[$data].image }">
                             <span data-bind="text: ' +' + App.game.underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])">&nbsp;+? energy</span>
                         </button>
                     </div>
@@ -169,12 +169,12 @@
                                 <tr>
                                     <td class='vertical-middle text-center' data-bind='text: player.getUndergroundItemAmount(item1.id)'></td>
                                     <td class='vertical-middle'>
-                                        <img class='mineInventoryItem' data-bind='attr: {src: item1.imagePath }'>
+                                        <img class='mineInventoryItem' data-bind='attr: {src: item1.image }'>
                                     </td>
                                     <td class='vertical-middle' data-bind='text: amount1 + " × " + item1.name'></td>
                                     <td class='vertical-middle'>→</td>
                                     <td class='vertical-middle'>
-                                        <img class='mineInventoryItem' data-bind='attr: {src: item2.imagePath }'>
+                                        <img class='mineInventoryItem' data-bind='attr: {src: item2.image }'>
                                     </td>
                                     <td class='vertical-middle' data-bind='text: amount2 + " × " + item2.name'></td>
                                     <td class='vertical-middle'>
@@ -220,7 +220,7 @@
     <script type="text/html" id="treasureListTemplate">
         <tr data-bind='if: amount() > 0'>
             <td class='vertical-middle'>
-                <img class='mineInventoryItem' data-bind='attr:{ src: Underground.getMineItemById(id).imagePath }'>
+                <img class='mineInventoryItem' data-bind='attr:{ src: Underground.getMineItemById(id).image }'>
                 <span data-bind='text: "("+$data.amount()+")"'></span>
             </td>
             <td class='vertical-middle' data-bind='text: name'></td>

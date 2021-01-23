@@ -160,7 +160,7 @@ class SafariBattle {
             const enemy = $('#safariBattleModal .enemy').offset();
             enemy.left += 30;
             enemy.top += 70;
-            SafariBattle.dropParticle(`<img width=16px src="${bait.imagePath}">`, $('#safariBattleModal .pageItemFooter').offset(), enemy, 1000, 'cubic-bezier(0,0,0.4,1)').css('z-index', 9999);
+            SafariBattle.dropParticle(`<img width=16px src="${bait.image}">`, $('#safariBattleModal .pageItemFooter').offset(), enemy, 1000, 'cubic-bezier(0,0,0.4,1)').css('z-index', 9999);
             setTimeout(SafariBattle.enemyTurn, 1500);
         }
     }

@@ -6,8 +6,6 @@ class Vitamin extends Item {
         this.type = type;
     }
 
-    use() {
-    }
 }
 
 ItemList.RareCandy = new Vitamin(GameConstants.VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy');
