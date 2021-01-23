@@ -3,8 +3,8 @@ class EnergyRestore extends Item {
 
     type: GameConstants.EnergyRestoreSize;
 
-    constructor(type: GameConstants.EnergyRestoreSize, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.money, displayName?: string) {
-        super(GameConstants.EnergyRestoreSize[type], basePrice, currency, undefined, displayName);
+    constructor(type: GameConstants.EnergyRestoreSize, displayName?: string) {
+        super(GameConstants.EnergyRestoreSize[type], undefined, undefined, undefined, displayName);
         this.type = type;
     }
 
@@ -26,6 +26,10 @@ class EnergyRestore extends Item {
 
 }
 
-ItemList['SmallRestore']  = new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 30000, undefined, 'Small Restore');
-ItemList['MediumRestore'] = new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 100000, undefined, 'Medium Restore');
-ItemList['LargeRestore']  = new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 400000, undefined, 'Large Restore');
+ItemList['SmallRestore']  = new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore,'Small Restore');
+ItemList['MediumRestore'] = new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 'Medium Restore');
+ItemList['LargeRestore']  = new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 'Large Restore');
+
+ShopEntriesList['Small Restore']  = new ShopItem('Small Restore', ItemList['SmallRestore'], 30000);
+ShopEntriesList['Medium Restore'] = new ShopItem('Medium Restore', ItemList['MediumRestore'], 100000);
+ShopEntriesList['Large Restore']  = new ShopItem('Large Restore', ItemList['LargeRestore'], 400000);
