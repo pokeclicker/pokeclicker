@@ -59,6 +59,8 @@ class DungeonRunner {
     public static handleClick() {
         if (DungeonRunner.fighting() && !DungeonBattle.catching()) {
             DungeonBattle.clickAttack();
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
+            DungeonRunner.dungeonLeave();
         } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
             DungeonRunner.openChest();
         } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
