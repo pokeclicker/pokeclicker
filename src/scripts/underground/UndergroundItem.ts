@@ -1,7 +1,7 @@
 class UndergroundItem {
     public name: string;
     public id: number;
-    public space: Array<Array<number>>;
+    public space: Array<Array<any>>;
     public value: number;
     public valueType: string;
 
@@ -10,7 +10,14 @@ class UndergroundItem {
     constructor(name: string, id: number, space: Array<Array<number>>, value = 1, valueType = 'Diamond') {
         this.name = name;
         this.id = id;
-        this.space = space;
+        this.space = space.map((r, y) => r.map((v, x) => ({
+            sizeX: r.length,
+            sizeY: space.length,
+            x,
+            y,
+            value: v ? this.id : 0,
+            rotations: 0,
+        })));
         this.value = value;
         this.valueType = valueType;
     }
