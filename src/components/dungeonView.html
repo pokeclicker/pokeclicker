@@ -13,7 +13,14 @@
             </knockout>
 
             <knockout class="left">
+                <!-- ko if: !DungeonBattle.trainer() -->
                 <knockout data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</knockout>
+                <!-- /ko -->
+                <!-- ko if: DungeonBattle.trainer() -->
+                <knockout data-bind="text: DungeonBattle.trainer().name">Trainer name</knockout>
+                <!-- /ko -->
+
+                <!-- ko if: !DungeonBattle.trainer() -->
 
                 <!--If all Pokémon in the dungeon are caught-->
                 <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) && DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, false))">
@@ -27,6 +34,8 @@
                          class="pokeball-smallest"
                          src="assets/images/pokeball/Pokeball-shiny.svg"/>
                 </knockout>
+
+                <!-- /ko -->
             </knockout>
 
             <!-- ko ifnot: DungeonBattle.trainer() -->
