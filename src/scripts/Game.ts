@@ -45,7 +45,7 @@ class Game {
     }
 
     load() {
-        const saveJSON = localStorage.getItem('save');
+        const saveJSON = localStorage.getItem(`save${Save.key}`);
 
         const saveObject = JSON.parse(saveJSON || '{}');
 

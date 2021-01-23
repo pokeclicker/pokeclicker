@@ -47,7 +47,19 @@
     @importif $GOOGLE_ANALYTICS_ID "googleAnalytics.html"
 
     <style>
-        .loader {
+        #saveSelector {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            background-color: #79c9fa;
+            background-size: cover;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        #loader {
             position: fixed;
             top: 0;
             left: 0;
@@ -75,6 +87,8 @@
 
 <!--$DEV_BANNER-->
 @importif $DEV_BANNER "developmentBanner.html"
+
+@import "saveSelector.html"
 
 @import "splash.html"
 
