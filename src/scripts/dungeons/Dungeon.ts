@@ -20,12 +20,18 @@ type Enemy = PokemonNameType | DetailedPokemon | DungeonTrainer;
 
 type Boss = DungeonBossPokemon | DungeonTrainer;
 
+interface EncounterInfo {
+    image: string,
+    shiny: boolean,
+    hidden: boolean,
+    locked: boolean,
+    lockMessage: string,
+}
+
 /**
  * Gym class.
  */
 class Dungeon {
-    allPokemonNames: PokemonNameType[];
-    allAvailablePokemonNames: PokemonNameType[];
 
     constructor(
         public name: string,
@@ -36,9 +42,7 @@ class Dungeon {
         public tokenCost: number,
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
         public level: number
-    ) {
-        this.calculateAllPokemonNames();
-    }
+    ) { }
 
     public isUnlocked(): boolean {
         // Player requires the Dungeon Ticket to access the dungeons
@@ -50,12 +54,6 @@ class Dungeon {
             return false;
         }
         return true;
-    }
-
-    public calculateAllPokemonNames(): void {
-        // Put the names into a Set to filter out any duplicate values
-        this.allPokemonNames = [...new Set([...this.pokemonList, ...this.availableBosses(true).map(b => b.name)])] as PokemonNameType[];
-        this.allAvailablePokemonNames = [...new Set([...this.pokemonList, ...this.availableBosses().map(b => b.name)])] as PokemonNameType[];
     }
 
     public availableBosses(ignoreRequirement = false): DungeonBossPokemon[] {
@@ -83,7 +81,7 @@ class Dungeon {
     }
 
     /**
-     * Returns the possible Pokemon in the dungeon.
+     * Returns the possible minion Pokemon in the dungeon.
      * Filters out Trainers and collapses DetailedPokemon
      */
     get pokemonList(): PokemonNameType[] {
@@ -100,6 +98,25 @@ class Dungeon {
         });
 
         return list.filter(Dungeon.isPokemon);
+    }
+
+    /**
+     * Returns the possible boss Pokemon in the dungeon.
+     * Filters out Trainers
+     */
+    get bossPokemonList(): PokemonNameType[] {
+        // Filtering out Trainers
+        const list = this.bossList.filter((enemy) => {
+            return enemy instanceof DungeonBossPokemon;
+        }).map((enemy) => {
+            return enemy.name;
+        });
+
+        return list.filter(Dungeon.isPokemon);
+    }
+
+    get availablePokemon(): PokemonNameType[] {
+        return this.pokemonList.concat(this.bossPokemonList);
     }
 
     /**
@@ -124,6 +141,60 @@ class Dungeon {
         return this.bossList.map((boss) => {
             return boss.options?.weight ?? 1;
         });
+    }
+
+    get encounterList(): EncounterInfo[] {
+        const encounterInfo = [];
+
+        // Handling minions
+        this.enemyList.forEach((enemy) => {
+            // Handling Pokemon
+            if (typeof enemy === 'string' || enemy.hasOwnProperty('pokemon')) {
+                let pokemonName: PokemonNameType;
+                if (enemy.hasOwnProperty('pokemon')) {
+                    pokemonName = (<DetailedPokemon>enemy).pokemon;
+                } else {
+                    pokemonName = <PokemonNameType>enemy;
+                }
+                const encounter = {
+                    image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
+                    shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
+                    hidden: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
+                    lock: false,
+                    lockMessage: '',
+                };
+                encounterInfo.push(encounter);
+            // Handling Trainers
+            } else { /* We don't display minion Trainers */ }
+        });
+
+        // Handling Bosses
+        this.bossList.forEach((boss) => {
+            // Handling Pokemon
+            if (boss instanceof DungeonBossPokemon) {
+                const pokemonName = boss.name;
+                const encounter = {
+                    image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
+                    shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
+                    hidden: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
+                    lock: boss.options?.requirement ? !boss.options?.requirement.isCompleted() : false,
+                    lockMessage: boss.options?.requirement ? boss.options?.requirement.hint() : '',
+                };
+                encounterInfo.push(encounter);
+            // Handling Trainer
+            } else {
+                const encounter = {
+                    image: boss.image,
+                    shiny:  false,
+                    hidden: false,
+                    lock: boss.options?.requirement ? !boss.options?.requirement.isCompleted() : false,
+                    lockMessage: boss.options?.requirement ? boss.options?.requirement.hint() : '',
+                };
+                encounterInfo.push(encounter);
+            }
+        });
+
+        return encounterInfo;
     }
 }
 
