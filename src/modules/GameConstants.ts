@@ -285,22 +285,22 @@ export function formatTimeFullLetters(input: number): string {
         times.push(`${weeks}w`.padStart(3, '0'));
         time %= WEEK;
     }
-    if (time >= DAY) {
+    if (time >= DAY || times.length) {
         const days = Math.floor(time / DAY);
         times.push(`${days}d`.padStart(3, '0'));
         time %= DAY;
     }
-    if (time >= HOUR) {
+    if (time >= HOUR || times.length) {
         const hours = Math.floor(time / HOUR);
         times.push(`${hours}h`.padStart(3, '0'));
         time %= HOUR;
     }
-    if (time >= MINUTE) {
+    if (time >= MINUTE || times.length) {
         const minutes = Math.floor(time / MINUTE);
         times.push(`${minutes}m`.padStart(3, '0'));
         time %= MINUTE;
     }
-    if (time >= SECOND) {
+    if (time >= SECOND || times.length) {
         const seconds = Math.floor(time / SECOND);
         times.push(`${seconds}s`.padStart(3, '0'));
     }
