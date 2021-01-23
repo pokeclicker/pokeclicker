@@ -691,7 +691,7 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
     [
         new DungeonBossPokemon('Cacturne', 24000000, 100),
         new DungeonBossPokemon('Excadrill', 26000000, 100),
-        new DungeonBossPokemon('Heatran', 50000000, 100, new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)),
+        new DungeonBossPokemon('Heatran', 30000000, 100, new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)),
     ],
     226500, 14, 100);
 dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
@@ -712,7 +712,7 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
         new DungeonBossPokemon('Tangrowth', 30000000, 100),
         new DungeonBossPokemon('Audino', 32000000, 100),
         new DungeonBossPokemon('Mamoswine', 32000000, 100),
-        new DungeonBossPokemon('Kyurem', 50000000, 100, new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)),
+        new DungeonBossPokemon('Kyurem', 35000000, 100, new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)),
     ],
     266500, 22, 100);
 
