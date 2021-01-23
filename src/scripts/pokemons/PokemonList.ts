@@ -20243,7 +20243,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': -8,
-        'name': 'Lets go Pikachu',
+        'name': 'Let\'s Go Pikachu',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
         'type': [PokemonType.Electric],
@@ -20261,7 +20261,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': -9,
-        'name': 'Lets go Eevee',
+        'name': 'Let\'s Go Eevee',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
         'type': [PokemonType.Normal],
