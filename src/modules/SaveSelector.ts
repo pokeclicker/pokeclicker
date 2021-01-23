@@ -20,7 +20,9 @@ export default class SaveSelector {
             const saveData = JSON.parse(rawData);
             return `
             <div class="col-4 mb-3">
-                <div class="trainer-card trainer-bg-${saveData.profile?.background ?? Math.floor(Math.random() * Profile.MAX_BACKGROUND)} card font-weight-bold" style="color: ${saveData.profile?.textColor ?? 'whitesmoke'}">
+                <div class="trainer-card clickable trainer-bg-${saveData.profile?.background ?? Math.floor(Math.random() * Profile.MAX_BACKGROUND)} card font-weight-bold"
+                    style="color: ${saveData.profile?.textColor ?? 'whitesmoke'}"
+                    onclick="${preview ? "Notifier.notify({ message: 'This would load your profile..' });" : `Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();`}">
                     <div class="card-body">
                         <h5 class="align-middle font-weight-bold"><img src="assets/images/profile/trainer-${saveData.profile?.trainer ?? Math.floor(Math.random() * Profile.MAX_TRAINER)}.png"/> ${saveData.profile?.name ?? 'Trainer'}</h5>
                         <table class="table table-sm table-borderless col-8" style="color: ${saveData.profile?.textColor ?? 'whitesmoke'}">
@@ -41,7 +43,6 @@ export default class SaveSelector {
                         </table>
                         <img class="pokemon-0" src="assets/images/pokemon/${saveData.profile?.pokemon ?? saveData.party.caughtPokemon[0]?.id ?? Math.floor(Math.random() * 251)}.png"/>
                         <small class="version">v${saveData.update.version}</small>
-                        <a href="#" class="btn btn-primary load-game" onclick="${preview ? "Notifier.notify({ message: 'This would load your profile..' });" : `Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">LOAD</a>`}
                     </div>
                 </div>
             </div>

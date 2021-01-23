@@ -1,5 +1,9 @@
 .trainer-card {
-  background-image: url('../assets/images/pattern.png');
+  transition: all 0.2s;
+  &:hover {
+    transform: scale(1.04);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  }
 
   .version {
     position: absolute;
@@ -17,7 +21,7 @@
     position: absolute;
   }
   .pokemon-0 {
-    top: 30px;
+    top: 40px;
     right: 10px;
   }
   /*
