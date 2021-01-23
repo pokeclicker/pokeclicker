@@ -9,7 +9,7 @@ export default class SaveSelector {
                 const saveData = JSON.parse(rawData);
                 container.innerHTML += `
                 <div class="col-4 mb-3">
-                    <div class="trainer-card card text-white font-weight-bold">
+                    <div class="trainer-card trainer-bg-${Math.floor(Math.random() * 40)} card text-white font-weight-bold">
                         <div class="card-body">
                             <h5 class="align-middle font-weight-bold"><img src="assets/images/trainer.png"/> Player_${index}</h5>
                             <p class="card-text">
