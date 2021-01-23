@@ -136,27 +136,10 @@ const dungeonList: { [dungeonName: string]: Dungeon } = {};
 // Kanto Dungeons
 
 dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
-    // ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Pidgey', 'Pidgeotto'], // TODO: HLXII - PUT THIS BACK AFTER TESTING
-    [
-        'Caterpie',
-        {pokemon: 'Bulbasaur', options: { weight: 2 }},
-        new DungeonTrainer('Joey',
-            [
-                new GymPokemon('Rattata', 200, 5),
-                new GymPokemon('Raticate', 210, 7),
-            ], 1, { weight: 100 }),
-    ],
+    ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Pidgey', 'Pidgeotto'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
     102,
-    //[new DungeonBossPokemon('Pikachu', 510, 7)], // TODO: HLXII - PUT THIS BACK AFTER TESTING
-    [
-        new DungeonBossPokemon('Pikachu', 510, 7),
-        new DungeonTrainer('Joey',
-            [
-                new GymPokemon('Mew', 520, 7),
-                new GymPokemon('Mewtwo', 620, 8),
-            ], 2, { weight: 100 }),
-    ],
+    [new DungeonBossPokemon('Pikachu', 510, 7)],
     50, 1, 5
 );
 
