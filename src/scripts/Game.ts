@@ -17,6 +17,7 @@ class Game {
      */
     constructor(
         public update: Update,
+        public profile: Profile,
         public breeding: Breeding,
         public pokeballs: Pokeballs,
         public wallet: Wallet,

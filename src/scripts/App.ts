@@ -21,6 +21,7 @@ class App {
             player = Save.load();
             App.game = new Game(
                 update,
+                new Profile(),
                 new Breeding(multiplier),
                 new Pokeballs(),
                 new Wallet(multiplier),
