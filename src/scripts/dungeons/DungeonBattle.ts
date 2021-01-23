@@ -73,7 +73,7 @@ class DungeonBattle extends Battle {
 
         // No Pokemon left, trainer defeated
         if (this.trainerPokemonIndex() >= this.trainer().team.length) {
-            // TODO: HLXII - Handle rewards for defeating trainer
+            App.game.wallet.gainMoney(this.trainer().reward);
 
             DungeonRunner.fighting(false);
             this.trainer(null);
