@@ -14,8 +14,14 @@ class DefeatPokemonsQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         const amount = SeededRand.intBetween(100, 500);
-        const region = SeededRand.intBetween(0, player.highestRegion());
-        const route = SeededRand.fromArray(Routes.getRoutesByRegion(region)).number;
+        let attempts = 0;
+        let region = GameConstants.Region.kanto;
+        let route = 1;
+        // Try to find unlocked route, end after 10 attempts
+        do {
+            region = SeededRand.intBetween(0, player.highestRegion());
+            route = SeededRand.fromArray(Routes.getRoutesByRegion(region)).number;
+        } while (!MapHelper.accessToRoute(route, region) && ++attempts < 10);
         const reward = this.calcReward(amount, route, region);
         return [amount, reward, route, region];
     }
