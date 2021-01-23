@@ -13,7 +13,7 @@ export default class SaveSelector {
                         <div class="card-body">
                             <h5 class="align-middle font-weight-bold"><img src="assets/images/trainer.png"/> Player_${index}</h5>
                             <p class="card-text">
-                            Badges: ${saveData.badgeCase.length}
+                            Badges: ${saveData.badgeCase.filter((b: boolean) => b).length}
                             <br/>Pokédex: ${saveData.party.caughtPokemon.length}
                             <br/>Time: ${saveData.statistics.secondsPlayed}s
                             <br/>Version: v${saveData.update.version}
