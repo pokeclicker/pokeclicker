@@ -332,6 +332,9 @@ class Update implements Saveable {
             // Clear old quest data
             delete saveData.quests.questList;
 
+            // Update starter selection
+            playerData.starter = playerData._starter;
+
             /*
              * Challenge Modes
              */
