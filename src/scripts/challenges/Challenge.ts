@@ -10,9 +10,7 @@ class Challenge {
     }
 
     activate(): void {
-        if (confirm(`Are you sure you want to activate ${this.type} challenge mode?\n Once activated, It cannot be disabled again later.`)) {
-            this.active(true);
-        }
+        this.active(true);
     }
 
     toJSON(): boolean {
