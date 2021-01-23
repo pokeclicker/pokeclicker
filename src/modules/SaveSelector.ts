@@ -16,6 +16,7 @@ export default class SaveSelector {
                             Badges: ${saveData.badgeCase.length}
                             <br/>Pokédex: ${saveData.party.caughtPokemon.length}
                             <br/>Time: ${saveData.statistics.secondsPlayed}s
+                            <br/>Version: v${saveData.update.version}
                             </p>
                             <a href="#" class="btn btn-primary float-right" onclick="Save.key = '${saveKey.replace(/^save/, '')}'; document.querySelector('#saveSelector').remove(); App.start();">LOAD</a>
                         </div>
