@@ -349,7 +349,7 @@
                                     "></span>
                                 </span>
                             </td>
-                            <td width="50%">
+                            <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
                                 <span style="display: inline;">Click Attack:
                                     <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
                                 </span>
@@ -468,6 +468,9 @@
 
     </div>
 </div>
+
+<!-- Challenge Mode Modal -->
+@import "challengeModeModal.html"
 
 <!--ShopModal-->
 @import "shopModal.html"
