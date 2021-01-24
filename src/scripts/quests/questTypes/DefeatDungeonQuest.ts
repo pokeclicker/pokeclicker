@@ -15,7 +15,7 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         const amount = SeededRand.intBetween(5, 20);
         let attempts = 0;
         let region = GameConstants.Region.kanto;
-        let dungeon = GameConstants.RegionDungeons[region]['Viridian Forest'];
+        let dungeon = GameConstants.RegionDungeons[region][0];
         // Try to find unlocked dungeon, end after 10 attempts
         do {
             region = SeededRand.intBetween(0, player.highestRegion());
