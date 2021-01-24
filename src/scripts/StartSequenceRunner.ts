@@ -36,7 +36,7 @@ class StartSequenceRunner {
             if (battlePokemon.health() <= 0) {
                 setTimeout(() => {
                     Information.hide();
-                    player.starter = StartSequenceRunner.starterPicked;
+                    player.starter(StartSequenceRunner.starterPicked);
                     App.game.profile.pokemon(dataPokemon.id);
                     StartSequenceRunner.showCaughtMessage();
                 }, 1000);

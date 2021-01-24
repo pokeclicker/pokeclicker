@@ -47,11 +47,20 @@
             </td>
           </tr>
         </tbody>
-        <!-- ko if: App.game.oakItems.hasAvailableSlot() -->
+        <!-- ko if: App.game.oakItems.hasAvailableSlot() && !App.game.challenges.list.disableOakItems.active() -->
         <tfoot>
           <tr>
             <td class="clickable table-warning text-light" colspan="2" href="#oakItemsModal" data-toggle="modal">
               Equip another oak item!
+            </td>
+          </tr>
+        </tfoot>
+        <!-- /ko -->
+        <!-- ko if: App.game.challenges.list.disableOakItems.active() -->
+        <tfoot>
+          <tr>
+            <td class="clickable table-danger text-light" colspan="2" href="#oakItemsModal" data-toggle="modal">
+              Oak Items are disabled.
             </td>
           </tr>
         </tfoot>
