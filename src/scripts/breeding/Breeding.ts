@@ -13,7 +13,7 @@ class Breeding implements Feature {
         eggSlots: 1,
         queueList: [],
         queueSlots: 0,
-        batchFill: 4
+        batchFill: 4,
     };
 
     private _eggList: Array<KnockoutObservable<Egg>>;
@@ -394,7 +394,7 @@ class Breeding implements Feature {
     }
 
     set batchFill(value: number) {
-        this._batchFill(value)
+        this._batchFill(value);
     }
 
     public gainEggSlot(): void {
