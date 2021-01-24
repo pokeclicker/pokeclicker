@@ -148,7 +148,7 @@ class DungeonBattle extends Battle {
         this.counter = 0;
 
         // Finding boss from bossList
-        const enemy = GameHelper.fromWeightedArray(DungeonRunner.dungeon.bossList, DungeonRunner.dungeon.bossWeightList);
+        const enemy = GameHelper.fromWeightedArray(DungeonRunner.dungeon.availableBosses(), DungeonRunner.dungeon.bossWeightList);
         // Pokemon
         if (enemy instanceof DungeonBossPokemon) {
             this.enemyPokemon(PokemonFactory.generateDungeonBoss(enemy, DungeonRunner.chestsOpened));

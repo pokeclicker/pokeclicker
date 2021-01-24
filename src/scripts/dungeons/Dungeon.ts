@@ -138,7 +138,7 @@ class Dungeon {
      * Retreives the weights for all the possible bosses
      */
     get bossWeightList(): number[] {
-        return this.bossList.map((boss) => {
+        return this.availableBosses().map((boss) => {
             return boss.options?.weight ?? 1;
         });
     }
