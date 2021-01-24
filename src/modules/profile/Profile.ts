@@ -5,7 +5,7 @@ import { Saveable } from '../DataStore/common/Saveable';
 import * as GameConstants from '../GameConstants';
 
 export default class Profile implements Saveable {
-    public static MAX_TRAINER = 20;
+    public static MAX_TRAINER = 119;
     public static MAX_BACKGROUND = 40;
 
     saveKey = 'profile';
