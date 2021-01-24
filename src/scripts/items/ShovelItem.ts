@@ -2,8 +2,8 @@
 
 class ShovelItem extends Item {
 
-    constructor(basePrice: number, displayName: string, description: string) {
-        super('Berry_Shovel', basePrice, GameConstants.Currency.farmPoint, { multiplierDecreaser: MultiplierDecreaser.Berry }, displayName, description, 'farm');
+    constructor(displayName: string, description: string) {
+        super('Berry_Shovel', undefined, undefined, undefined, displayName, description, 'farm');
     }
 
     gain(amt: number) {
@@ -12,4 +12,6 @@ class ShovelItem extends Item {
 
 }
 
-ItemList['Berry_Shovel']   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
+ItemList['Berry_Shovel']   = new ShovelItem('Berry Shovel', 'Removes Berry Plants in the Farm.');
+
+ShopEntriesList['Berry Shovel'] = new ShopItem('Berry Shovel', ItemList['Berry_Shovel'], 300, Currency.farmPoint, { multiplierDecreaser: MultiplierDecreaser.Berry });

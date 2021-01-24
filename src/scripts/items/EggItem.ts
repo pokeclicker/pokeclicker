@@ -48,7 +48,6 @@ class EggItem extends CaughtIndicatingItem {
 
 }
 
-
 ItemList['Fire_egg']     = new EggItem(GameConstants.EggItemType.Fire_egg, 'Fire Egg');
 ItemList['Water_egg']    = new EggItem(GameConstants.EggItemType.Water_egg, 'Water Egg');
 ItemList['Grass_egg']    = new EggItem(GameConstants.EggItemType.Grass_egg, 'Grass Egg');

@@ -67,7 +67,18 @@ abstract class ShopEntry {
      * Determines whether this ShopEntry is purchasable
      */
     isAvailable(): boolean {
-        return this.available ? this.available.isCompleted() : true;
+
+        // Checking availability function
+        if (this.available && !this.available.isCompleted()) {
+            return false;
+        }
+
+        // Checking max amount
+        if (this.maxAmount && this.amountPurchased() >= this.maxAmount) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

@@ -93,7 +93,7 @@ const CeladonCityShop = new Shop([
     'Eevee',
     'Porygon',
     'Jynx',
-    'M. Mime',
+    'Mr. Mime',
     'Lickitung',
 ]);
 const SaffronCityShop = new Shop([
@@ -113,8 +113,8 @@ const CinnabarIslandShop = new Shop([
     'Fire Egg',
     'Small Restore',
     'Explorer Kit',
-    'Explosive_Charge',
-    'Treasure_Scanner',
+    'Explosive Charge',
+    'Treasure Scanner',
 ]);
 const ViridianCityShop = new Shop([
     'Pokeball',
@@ -369,11 +369,11 @@ const BlackthornCityShop = new Shop([
 
 //Johto Berry Master
 const JohtoBerryMaster = new Shop([
-    'Boost_Mulch',
-    'Rich_Mulch',
-    'Surprise_Mulch',
-    'Amaze_Mulch',
-    'Berry_Shovel',
+    'Boost Mulch',
+    'Rich Mulch',
+    'Surprise Mulch',
+    'Amaze Mulch',
+    'Berry Shovel',
     'Squirtbottle',
 ]);
 
@@ -611,22 +611,22 @@ const PacifidlogTownShop = new Shop([
 const EverGrandeCityShop = new Shop([
     'Dragon Egg',
 ]);
-// TODO: finalize items and prices
+
 const BattleFrontierShop = new Shop([
-    //new PokeballItem(GameConstants.Pokeball.Ultraball, 1, GameConstants.Currency.battlePoint),
-    //new PokeballItem(GameConstants.Pokeball.Masterball, 500, GameConstants.Currency.battlePoint , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.battlePoint]}` }),
-    //new Energy Restore(GameConstants.Energy RestoreSize.Small Restore, 10, GameConstants.Currency.battlePoint),
-    //new Energy Restore(GameConstants.Energy RestoreSize.Medium Restore, 20, GameConstants.Currency.battlePoint),
-    //new Energy Restore(GameConstants.Energy RestoreSize.Large Restore, 40, GameConstants.Currency.battlePoint),
+    'Ultraball BP',
+    'Masterball BP',
+    'Small Restore BP',
+    'Medium Restore BP',
+    'Large Restore BP',
 ]);
 
 //Hoenn Berry Master
 const HoennBerryMaster = new Shop([
-    'Boost_Mulch',
-    'Rich_Mulch',
-    'Surprise_Mulch',
-    'Amaze_Mulch',
-    'Berry_Shovel',
+    'Boost Mulch',
+    'Rich Mulch',
+    'Surprise Mulch',
+    'Amaze Mulch',
+    'Berry Shovel',
     'Sprinklotad',
 ]);
 
@@ -960,11 +960,11 @@ const PastoriaShop = new Shop([
 
 //Sinnoh Berry Master
 const SinnohBerryMaster = new Shop([
-    'Boost_Mulch',
-    'Rich_Mulch',
-    'Surprise_Mulch',
-    'Amaze_Mulch',
-    'Berry_Shovel',
+    'Boost Mulch',
+    'Rich Mulch',
+    'Surprise Mulch',
+    'Amaze Mulch',
+    'Berry Shovel',
 ]);
 
 //Sinnoh NPCs

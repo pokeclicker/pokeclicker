@@ -33,3 +33,7 @@ ItemList['LargeRestore']  = new EnergyRestore(GameConstants.EnergyRestoreSize.La
 ShopEntriesList['Small Restore']  = new ShopItem('Small Restore', ItemList['SmallRestore'], 30000);
 ShopEntriesList['Medium Restore'] = new ShopItem('Medium Restore', ItemList['MediumRestore'], 100000);
 ShopEntriesList['Large Restore']  = new ShopItem('Large Restore', ItemList['LargeRestore'], 400000);
+
+ShopEntriesList['Small Restore BP']  = new ShopItem('Small Restore BP', ItemList['SmallRestore'], 10, Currency.battlePoint);
+ShopEntriesList['Medium Restore BP'] = new ShopItem('Medium Restore BP', ItemList['MediumRestore'], 20, Currency.battlePoint);
+ShopEntriesList['Large Restore BP']  = new ShopItem('Large Restore BP', ItemList['LargeRestore'], 40, Currency.battlePoint);

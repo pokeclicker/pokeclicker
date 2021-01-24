@@ -168,7 +168,7 @@ class Item {
 
     get image() {
         const subDirectory = this.imageDirectory ? `${this.imageDirectory}/` : '';
-        return `assets/images/items/${subDirectory}${this.name}.png`;
+        return `assets/images/items/${subDirectory}${decodeURI(this.name)}.png`;
     }
 
 }
