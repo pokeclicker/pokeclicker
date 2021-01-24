@@ -337,32 +337,35 @@ class Update implements Saveable {
             if (!saveData.hasOwnProperty('shops')) {
                 saveData.shops = {};
             }
+            if (!saveData.shops.hasOwnProperty('shopEntries')) {
+                saveData.shops.shopEntries = {};
+            }
             console.log('testing', playerData);
-            saveData.shops['Masterball D'] = { currentMultiplier: playerData._itemMultipliers['Masterball|diamond'] };
-            saveData.shops['Masterball BP'] = { currentMultiplier: playerData._itemMultipliers['Masterball|battlePoint'] };
-            saveData.shops['Masterball DT'] = { currentMultiplier: playerData._itemMultipliers['Masterball|dungeonToken'] };
-            saveData.shops['Masterball FP'] = { currentMultiplier: playerData._itemMultipliers['Masterball|farmPoint'] };
-            saveData.shops['Masterball'] = { currentMultiplier: playerData._itemMultipliers['Masterball|money'] };
-            saveData.shops['Masterball QP'] = { currentMultiplier: playerData._itemMultipliers['Masterball|questPoint'] };
-            saveData.shops['Protein'] = { currentMultiplier: playerData._itemMultipliers['Protein|money'] };
+            saveData.shops.shopEntries['Masterball D'] = { currentMultiplier: playerData._itemMultipliers['Masterball|diamond'] };
+            saveData.shops.shopEntries['Masterball BP'] = { currentMultiplier: playerData._itemMultipliers['Masterball|battlePoint'] };
+            saveData.shops.shopEntries['Masterball DT'] = { currentMultiplier: playerData._itemMultipliers['Masterball|dungeonToken'] };
+            saveData.shops.shopEntries['Masterball FP'] = { currentMultiplier: playerData._itemMultipliers['Masterball|farmPoint'] };
+            saveData.shops.shopEntries['Masterball'] = { currentMultiplier: playerData._itemMultipliers['Masterball|money'] };
+            saveData.shops.shopEntries['Masterball QP'] = { currentMultiplier: playerData._itemMultipliers['Masterball|questPoint'] };
+            saveData.shops.shopEntries['Protein'] = { currentMultiplier: playerData._itemMultipliers['Protein|money'] };
             // Handling maxAmount entries
             if (saveData.keyItems['Dungeon_ticket']) {
-                saveData.shops['Dungeon Ticket'] = { amountPurchased: 1 };
+                saveData.shops.shopEntries['Dungeon Ticket'] = { amountPurchased: 1 };
             }
             if (saveData.keyItems['Explorer_kit']) {
-                saveData.shops['Explorer Kit'] = { amountPurchased: 1 };
+                saveData.shops.shopEntries['Explorer Kit'] = { amountPurchased: 1 };
             }
             if (saveData.oakItems['Squirtbottle'] && saveData.oakItems['Squirtbottle'].purchased) {
-                saveData.shops['Squirtbottle'] = { amountPurchased: 1 };
+                saveData.shops.shopEntries['Squirtbottle'] = { amountPurchased: 1 };
             }
             if (saveData.oakItems['Sprinklotad'] && saveData.oakItems['Sprinklotad'].purchased) {
-                saveData.shops['Sprinklotad'] = { amountPurchased: 1 };
+                saveData.shops.shopEntries['Sprinklotad'] = { amountPurchased: 1 };
             }
             if (saveData.oakItems['Treasure_Scanner'] && saveData.oakItems['Treasure_Scanner'].purchased) {
-                saveData.shops['Treasure Scanner'] = { amountPurchased: 1 };
+                saveData.shops.shopEntries['Treasure Scanner'] = { amountPurchased: 1 };
             }
             if (saveData.oakItems['Explosive_Charge'] && saveData.oakItems['Explosive_Charge'].purchased) {
-                saveData.shops['Explosive Charge'] = { amountPurchased: 1 };
+                saveData.shops.shopEntries['Explosive Charge'] = { amountPurchased: 1 };
             }
         },
     };

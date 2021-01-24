@@ -32,9 +32,9 @@ class Shops implements Feature {
 
     toJSON(): Record<string, any> {
         const json = {};
-
+        json['shopEntries'] = {};
         Object.keys(this.shopEntries).forEach(shopEntry => {
-            json[shopEntry] = this.shopEntries[shopEntry].toJSON();
+            json['shopEntries'][shopEntry] = this.shopEntries[shopEntry].toJSON();
         });
 
         return json;
@@ -44,11 +44,14 @@ class Shops implements Feature {
         if (!json) {
             return;
         }
-        Object.keys(this.shopEntries).forEach(shopEntry => {
-            if (json.hasOwnProperty(shopEntry)) {
-                this.shopEntries[shopEntry].fromJSON(json[shopEntry]);
-            }
-        });
+        console.log('loading save', json);
+        if (json.hasOwnProperty('shopEntries')) {
+            Object.keys(this.shopEntries).forEach(shopEntry => {
+                if (json.shopEntries.hasOwnProperty(shopEntry)) {
+                    this.shopEntries[shopEntry].fromJSON(json.shopEntries[shopEntry]);
+                }
+            });
+        }
     }
 
 }
