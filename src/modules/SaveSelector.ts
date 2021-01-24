@@ -9,8 +9,10 @@ export default class SaveSelector {
             container.innerHTML += SaveSelector.getTrainerCard(saveKey.replace(/^save/, ''));
         });
 
-        const key = Math.random().toString(36).substring(7);
-        container.innerHTML += `<div class="col-12"></div><a href="#" class="btn btn-primary col-4" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">New Save</a>`;
+        if (saves.length < 6) {
+            const key = Math.random().toString(36).substring(7);
+            container.innerHTML += `<div class="col-12"></div><a href="#" class="btn btn-primary col-4" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">New Save</a>`;
+        }
     }
 
     static getTrainerCard(key: string): string {
