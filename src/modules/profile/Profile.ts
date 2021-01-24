@@ -1,7 +1,7 @@
 import {
     Observable as KnockoutObservable,
 } from 'knockout';
-import { Saveable } from '../dataStore/common/Saveable';
+import { Saveable } from '../DataStore/common/Saveable';
 import * as GameConstants from '../GameConstants';
 
 export default class Profile implements Saveable {
@@ -45,7 +45,7 @@ export default class Profile implements Saveable {
         key?: string,
     ): string {
         return `
-        <div class="mb-3 ${key === undefined ? 'p-2 col-12' : 'col-4'}">
+        <div class="mb-3 ${key === undefined ? 'p-2 col-12' : 'col-lg-4 col-md-6 col-sm-12 xol-xs-12'}">
             <div class="trainer-card clickable trainer-bg-${background} card font-weight-bold"
                 style="color: ${textColor}"
                 onclick="${key === undefined ? "Notifier.notify({ message: 'What a lovely profile!' });" : `Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();`}">

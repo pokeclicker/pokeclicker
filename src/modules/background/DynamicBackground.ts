@@ -4,6 +4,7 @@ import {
     MINUTE,
     SECOND,
     TotalPokemonsPerRegion,
+    Region,
 } from '../GameConstants';
 
 export default class DynamicBackground {
@@ -110,7 +111,7 @@ export default class DynamicBackground {
             // limited to players highest region
             // @ts-ignore
             // eslint-disable-next-line no-undef
-            DynamicBackground.addPokemon(Math.floor(Math.random() * TotalPokemonsPerRegion[player.highestRegion()]) + 1);
+            DynamicBackground.addPokemon(Math.floor(Math.random() * TotalPokemonsPerRegion[player?.highestRegion() || Region.kanto]) + 1);
             // Add another pokemon
             DynamicBackground.startAddingPokemon();
         }, delay);
