@@ -1,13 +1,20 @@
 
 class Trainer {
 
+    public name: string;
+
     constructor(
-        public name: string,
-        public team: GymPokemon[]
-    ) { }
+        public trainerClass: string,
+        public team: GymPokemon[],
+        name?: string,
+        public subTrainerClass?: string
+    ) {
+        this.name = name ? `${trainerClass} ${name}` : trainerClass;
+    }
 
     get image(): string {
-        return `assets/images/trainers/${this.name}.png`;
+        const imageName = this.subTrainerClass ? `${this.trainerClass} ${this.subTrainerClass}` : this.trainerClass;
+        return `assets/images/trainers/${imageName}.png`;
     }
 
 }
