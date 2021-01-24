@@ -11,6 +11,15 @@ class ShopItem extends ShopEntry {
         super(name, basePrice, currency, options);
     }
 
+    /**
+     * Gain the associated item
+     * @param amount The amount to gain
+     */
+    gain(amount: number) {
+        super.gain(amount);
+        this.item.gain(amount);
+    }
+
     get displayName(): string {
         return this.item.displayName;
     }

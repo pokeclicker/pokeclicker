@@ -41,6 +41,7 @@ class App {
                 new AchievementTracker(),
                 multiplier,
                 new Challenges(),
+                new Items(),
                 new Shops()
             );
 

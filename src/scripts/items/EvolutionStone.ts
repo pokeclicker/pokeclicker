@@ -8,10 +8,6 @@ class EvolutionStone extends CaughtIndicatingItem {
         this.type = type;
     }
 
-    public gain(n: number) {
-        player.gainItem(GameConstants.StoneType[this.type], n);
-    }
-
     public use(pokemon?: PokemonNameType): boolean {
         const partyPokemon: PartyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(pokemon).id);
         const shiny = partyPokemon.useStone(this.type);

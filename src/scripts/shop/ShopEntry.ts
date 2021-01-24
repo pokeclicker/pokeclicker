@@ -170,8 +170,6 @@ abstract class ShopEntry {
      * @param amount The amount to gain
      */
     gain(amount: number) {
-        // TODO: HLXII - Handle gaining item
-        //player.gainItem(this.name, n);
         GameHelper.incrementObservable(this.amountPurchased, amount);
     }
 

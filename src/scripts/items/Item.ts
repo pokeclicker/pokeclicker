@@ -1,4 +1,3 @@
-///<reference path="../shop/ShopHandler.ts"/>
 
 interface ItemOptions {
     description?: string,
@@ -21,8 +20,16 @@ class Item {
         this.imageDirectory = options?.imageDirectory;
     }
 
-    gain(n: number) {
-        player.gainItem(this.name, n);
+    get amount(): KnockoutObservable<number> {
+        return App.game.items.itemList[this.name].amount;
+    }
+
+    get unlocked(): KnockoutObservable<boolean> {
+        return App.game.items.itemList[this.name].unlocked;
+    }
+
+    gain(amount: number) {
+        GameHelper.incrementObservable(this.amount, amount);
     }
 
     use(): boolean {
