@@ -21,9 +21,9 @@ export default class Profile implements Saveable {
     constructor(
         name = 'Trainer',
         trainer = Math.floor(Math.random() * Profile.MAX_TRAINER),
-        pokemon = 1,
+        pokemon = 0,
         background = Math.floor(Math.random() * Profile.MAX_BACKGROUND),
-        textColor = 'whitesmoke',
+        textColor = '#f5f5f5',
     ) {
         this.name = ko.observable(name);
         this.trainer = ko.observable(trainer).extend({ numeric: 0 });
