@@ -3,11 +3,13 @@
 class DungeonTrainer extends Trainer {
 
     constructor(
-        name: string,
+        trainerClass: string,
         team: GymPokemon[],
         public reward: number,
-        public options?: EnemyOptions) {
-        super(name, team);
+        public options?: EnemyOptions,
+        name?: string,
+        subTrainerClass?: string) {
+        super(trainerClass, team, name, subTrainerClass);
     }
 
 }
