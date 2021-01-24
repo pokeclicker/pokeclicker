@@ -454,7 +454,9 @@ class Update implements Saveable {
                 }
             }
 
-            //#region Moving Mulches
+            //#region Moving Farm Items
+
+            // Mulches
             if (saveData.hasOwnProperty('farming') && saveData.farming.hasOwnProperty('mulchList')) {
                 saveData.items.itemList['Boost_Mulch'] = {};
                 saveData.items.itemList['Boost_Mulch'].amount = saveData.farming.mulchList[0];
@@ -477,8 +479,17 @@ class Update implements Saveable {
                     saveData.items.itemList['Amaze_Mulch'].unlocked = true;
                 }
             }
-            //#endregion
 
+            // Shovel
+            if (saveData.hasOwnProperty('farming') && saveData.farming.hasOwnProperty('shovelAmt')) {
+                saveData.items.itemList['Berry_Shovel'] = {};
+                saveData.items.itemList['Berry_Shovel'].amount = saveData.farming.shovelAmt;
+                if (saveData.farming.shovelAmt) {
+                    saveData.items.itemList['Berry_Shovel'].unlocked = true;
+                }
+            }
+
+            //#endregion
         },
     };
 

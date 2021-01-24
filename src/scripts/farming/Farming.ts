@@ -30,13 +30,11 @@ class Farming implements Feature {
             const middle = Math.floor(Farming.PLOT_HEIGHT / 2) * Farming.PLOT_WIDTH + Math.floor(Farming.PLOT_WIDTH / 2);
             return new Plot(index === middle, BerryType.None, 0, MulchType.None, 0);
         }),
-        shovelAmt: 0,
     };
 
     berryList: KnockoutObservable<number>[];
     unlockedBerries: KnockoutObservable<boolean>[];
     plotList: Array<Plot>;
-    shovelAmt: KnockoutObservable<number>;
 
     highestUnlockedBerry: KnockoutComputed<number>;
 
@@ -44,7 +42,6 @@ class Farming implements Feature {
         this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
         this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
         this.plotList = this.defaults.plotList;
-        this.shovelAmt = ko.observable(this.defaults.shovelAmt);
 
         this.externalAuras = [];
         this.externalAuras[AuraType.Attract] = ko.observable<number>(1);
@@ -1120,11 +1117,11 @@ class Farming implements Feature {
         if (plot.isEmpty()) {
             return;
         }
-        if (this.shovelAmt() <= 0) {
+        if (ItemList['Berry_Shovel'].amount() <= 0) {
             return;
         }
         plot.die(true);
-        GameHelper.incrementObservable(this.shovelAmt, -1);
+        ItemList['Berry_Shovel'].gain(-1);
         GameHelper.incrementObservable(App.game.statistics.totalShovelsUsed, 1);
 
         this.resetAuras();
@@ -1247,7 +1244,6 @@ class Farming implements Feature {
             berryList: this.berryList.map(ko.unwrap),
             unlockedBerries: this.unlockedBerries.map(ko.unwrap),
             plotList: this.plotList.map(plot => plot.toJSON()),
-            shovelAmt: this.shovelAmt(),
             mutations: this.mutations.map(mutation => mutation.toJSON()),
         };
     }
@@ -1284,13 +1280,6 @@ class Farming implements Feature {
                 plot.fromJSON(value);
                 this.plotList[index] = plot;
             });
-        }
-
-        const shovelAmt = json['shovelAmt'];
-        if (shovelAmt == null) {
-            this.shovelAmt = ko.observable(this.defaults.shovelAmt);
-        } else {
-            this.shovelAmt(shovelAmt);
         }
 
         const mutations = json['mutations'];
