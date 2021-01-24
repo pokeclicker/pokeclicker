@@ -62,6 +62,7 @@ class Game {
     }
 
     initialize() {
+        this.profile.initialize();
         this.breeding.initialize();
         this.pokeballs.initialize();
         this.keyItems.initialize();

@@ -1,5 +1,4 @@
 import Profile from './profile/Profile';
-import * as GameConstants from './GameConstants';
 
 export default class SaveSelector {
     static loadSaves() {
@@ -14,39 +13,22 @@ export default class SaveSelector {
         container.innerHTML += `<div class="col-12"></div><a href="#" class="btn btn-primary col-4" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">New Save</a>`;
     }
 
-    static getTrainerCard(key: string, preview = false): string {
+    static getTrainerCard(key: string): string {
         try {
             const rawData = localStorage.getItem(`save${key}`);
             const saveData = JSON.parse(rawData);
-            return `
-            <div class="col-4 mb-3">
-                <div class="trainer-card clickable trainer-bg-${saveData.profile?.background ?? Math.floor(Math.random() * Profile.MAX_BACKGROUND)} card font-weight-bold"
-                    style="color: ${saveData.profile?.textColor ?? 'whitesmoke'}"
-                    onclick="${preview ? "Notifier.notify({ message: 'This would load your profile..' });" : `Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();`}">
-                    <div class="card-body">
-                        <h5 class="align-middle font-weight-bold"><img src="assets/images/profile/trainer-${saveData.profile?.trainer ?? Math.floor(Math.random() * Profile.MAX_TRAINER)}.png"/> ${saveData.profile?.name ?? 'Trainer'}</h5>
-                        <table class="table table-sm table-borderless col-8" style="color: ${saveData.profile?.textColor ?? 'whitesmoke'}">
-                            <tbody>
-                                <tr>
-                                    <td>Badges:</td>
-                                    <td class="text-right">${saveData.badgeCase.filter((b: boolean) => b).length}</td>
-                                </tr>
-                                <tr>
-                                    <td>Pokédex:</td>
-                                    <td class="text-right">${saveData.party.caughtPokemon.length}</td>
-                                </tr>
-                                <tr>
-                                    <td>Time:</td>
-                                    <td class="text-right">${GameConstants.formatTimeFullLetters(saveData.statistics.secondsPlayed)}</td>
-                                </tr>
-                            <tbody>
-                        </table>
-                        <img class="pokemon-0" src="assets/images/pokemon/${saveData.profile?.pokemon ?? saveData.party.caughtPokemon[0]?.id ?? Math.floor(Math.random() * 251)}.png"/>
-                        <small class="version">v${saveData.update.version}</small>
-                    </div>
-                </div>
-            </div>
-            `;
+            return Profile.getTrainerCard(
+                saveData.profile?.name,
+                saveData.profile?.trainer,
+                saveData.profile?.pokemon ?? saveData.party.caughtPokemon[0]?.id,
+                saveData.profile?.background,
+                saveData.profile?.textColor,
+                saveData.badgeCase.filter((b: boolean) => b).length,
+                saveData.party.caughtPokemon.length,
+                saveData.statistics.secondsPlayed,
+                saveData.update.version,
+                key,
+            );
         } catch (e) {
             // eslint-disable-next-line no-console
             console.log('Failed to load save:', key, e);
