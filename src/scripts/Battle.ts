@@ -93,7 +93,7 @@ class Battle {
             this.generateNewEnemy();
         }
         this.gainItem();
-        player.lowerItemMultipliers(MultiplierDecreaser.Battle);
+        App.game.shops.lowerItemMultipliers(MultiplierDecreaser.Battle);
     }
 
     /**

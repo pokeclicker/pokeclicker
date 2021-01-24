@@ -5,7 +5,7 @@ class MulchItem extends Item {
     type: MulchType;
 
     constructor(type: MulchType, displayName: string, description: string) {
-        super(MulchType[type], undefined, undefined, undefined, displayName, description, 'farm');
+        super(MulchType[type], {displayName: displayName, description: description, imageDirectory: 'farm' });
         this.type = type;
     }
 

@@ -74,8 +74,6 @@ class Player {
             }
         }
 
-        this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
-
         // TODO(@Isha) move to underground classes.
         const mineInventory = (savedPlayer.mineInventory || [])
             // TODO: Convert this to object spread after we're on TS modules
@@ -113,12 +111,6 @@ class Player {
 
     get itemList(): { [p: string]: KnockoutObservable<number> } {
         return this._itemList;
-    }
-
-    private _itemMultipliers: { [name: string]: number };
-
-    get itemMultipliers(): { [p: string]: number } {
-        return this._itemMultipliers;
     }
 
     get route(): KnockoutObservable<number> {
@@ -161,13 +153,6 @@ class Player {
         this._itemList[itemName](this._itemList[itemName]() - amount);
     }
 
-    public lowerItemMultipliers(multiplierDecreaser: MultiplierDecreaser, amount = 1) {
-        for (const obj in ItemList) {
-            const item = ItemList[obj];
-            item.decreasePriceMultiplier(amount, multiplierDecreaser);
-        }
-    }
-
     // TODO(@Isha) move to underground classes.
     public hasMineItems() {
         for (let i = 0; i < this.mineInventory().length; i++) {
@@ -194,7 +179,6 @@ class Player {
             '_region',
             '_starter',
             '_itemList',
-            '_itemMultipliers',
             // TODO(@Isha) remove.
             'mineInventory',
             // TODO(@Isha) remove.

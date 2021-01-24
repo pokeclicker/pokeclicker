@@ -1,5 +1,5 @@
 ///<reference path="../oakItems/OakItems.ts"/>
-///<reference path="./ShopEntries.ts"/>
+///<reference path="./Shops.ts"/>
 
 class OakShopItem extends ShopEntry {
 

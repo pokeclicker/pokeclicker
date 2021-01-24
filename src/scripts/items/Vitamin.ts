@@ -2,7 +2,7 @@ class Vitamin extends Item {
     type: GameConstants.VitaminType;
 
     constructor(type: GameConstants.VitaminType, displayName?: string, description?: string) {
-        super(GameConstants.VitaminType[type], undefined, undefined, undefined, displayName, description);
+        super(GameConstants.VitaminType[type], { displayName: displayName, description: description });
         this.type = type;
     }
 

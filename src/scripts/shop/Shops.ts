@@ -1,8 +1,8 @@
 ///<reference path="./ShopEntry.ts"/>
 
-class ShopEntries implements Feature {
-    name = 'ShopEntries';
-    saveKey = 'shopEntries';
+class Shops implements Feature {
+    name = 'Shops';
+    saveKey = 'shops';
     defaults: Record<string, any>;
 
     public shopEntries: Record<string, ShopEntryData>;
@@ -21,6 +21,13 @@ class ShopEntries implements Feature {
     }
 
     update(delta: number) {
+    }
+
+    lowerItemMultipliers(multiplierDecreaser: MultiplierDecreaser, amount = 1) {
+        for (const obj in ShopEntriesList) {
+            const shopEntry = ShopEntriesList[obj];
+            shopEntry.decreasePriceMultiplier(amount, multiplierDecreaser);
+        }
     }
 
     toJSON(): Record<string, any> {

@@ -1,5 +1,5 @@
 ///<reference path="Item.ts"/>
-///<reference path="../shop/ShopEntries.ts"/>
+///<reference path="../shop/Shops.ts"/>
 ///<reference path="../shop/ShopItem.ts"/>
 class BattleItem extends Item {
 
@@ -12,7 +12,7 @@ class BattleItem extends Item {
         public multiplierType?: keyof typeof MultiplierType,
         public multiplyBy?: number
     ) {
-        super(GameConstants.BattleItemType[type], undefined, undefined, undefined, displayName, description, 'battleItem');
+        super(GameConstants.BattleItemType[type],{ displayName: displayName, description: description, imageDirectory: 'battleItem'});
         this.type = type;
     }
 

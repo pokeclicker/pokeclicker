@@ -40,7 +40,7 @@ class App {
                 new Discord(),
                 new AchievementTracker(),
                 multiplier,
-                new ShopEntries()
+                new Shops()
             );
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#8e44ad;font-weight:900;');

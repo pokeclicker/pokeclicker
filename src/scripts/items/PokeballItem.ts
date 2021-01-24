@@ -5,7 +5,7 @@ class PokeballItem extends Item {
     type: GameConstants.Pokeball;
 
     constructor(type: GameConstants.Pokeball, displayName?: string) {
-        super(GameConstants.Pokeball[type], undefined, undefined, undefined, displayName, undefined, 'pokeball');
+        super(GameConstants.Pokeball[type], {displayName: displayName, imageDirectory: 'pokeball' });
         this.type = type;
     }
 

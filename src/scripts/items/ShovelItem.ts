@@ -3,7 +3,7 @@
 class ShovelItem extends Item {
 
     constructor(displayName: string, description: string) {
-        super('Berry_Shovel', undefined, undefined, undefined, displayName, description, 'farm');
+        super('Berry_Shovel', { displayName: displayName, description: description, imageDirectory: 'farm' });
     }
 
     gain(amt: number) {

@@ -3,12 +3,11 @@
 /**
  * Source event for decreasing shop multipliers
  */
-/*
  enum MultiplierDecreaser {
     Battle = 0,
     Berry,
 }
-*/
+
 
 /**
  * Additional shop options for an item
@@ -56,11 +55,11 @@ abstract class ShopEntry {
     }
 
     get currentMultiplier(): KnockoutObservable<number> {
-        return App.game.shopEntries.shopEntries[this.name].currentMultiplier;
+        return App.game.shops.shopEntries[this.name].currentMultiplier;
     }
 
     get amountPurchased(): KnockoutObservable<number> {
-        return App.game.shopEntries.shopEntries[this.name].amountPurchased;
+        return App.game.shops.shopEntries[this.name].amountPurchased;
     }
 
     /**

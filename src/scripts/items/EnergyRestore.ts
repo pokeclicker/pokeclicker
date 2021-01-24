@@ -4,7 +4,7 @@ class EnergyRestore extends Item {
     type: GameConstants.EnergyRestoreSize;
 
     constructor(type: GameConstants.EnergyRestoreSize, displayName?: string) {
-        super(GameConstants.EnergyRestoreSize[type], undefined, undefined, undefined, displayName);
+        super(GameConstants.EnergyRestoreSize[type], { displayName: displayName });
         this.type = type;
     }
 

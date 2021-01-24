@@ -1092,7 +1092,7 @@ class Farming implements Feature {
         App.game.oakItems.use(OakItems.OakItem.Sprayduck, this.berryData[plot.berry].exp);
         GameHelper.incrementObservable(App.game.statistics.totalManualHarvests, 1);
 
-        player.lowerItemMultipliers(MultiplierDecreaser.Berry, this.berryData[plot.berry].exp);
+        App.game.shops.lowerItemMultipliers(MultiplierDecreaser.Berry, this.berryData[plot.berry].exp);
 
         plot.die(true);
 

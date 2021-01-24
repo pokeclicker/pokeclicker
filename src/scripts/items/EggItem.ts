@@ -5,7 +5,7 @@ class EggItem extends CaughtIndicatingItem {
     type: GameConstants.EggItemType;
 
     constructor(type: GameConstants.EggItemType, displayName?: string) {
-        super(GameConstants.EggItemType[type], undefined, undefined, undefined, displayName, undefined, 'egg');
+        super(GameConstants.EggItemType[type], {displayName: displayName, imageDirectory: 'egg' });
         this.type = type;
     }
 

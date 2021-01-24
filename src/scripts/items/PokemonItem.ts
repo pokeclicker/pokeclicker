@@ -5,7 +5,7 @@ class PokemonItem extends CaughtIndicatingItem {
     type: PokemonNameType;
 
     constructor(pokemon: PokemonNameType, basePrice: number) {
-        super(pokemon, undefined, undefined, undefined, undefined, undefined, 'pokemonItem');
+        super(pokemon, { imageDirectory: 'pokemonItem' });
         this.type = pokemon;
         ShopEntriesList[pokemon] = new ShopItem(pokemon, this, basePrice, Currency.questPoint);
     }

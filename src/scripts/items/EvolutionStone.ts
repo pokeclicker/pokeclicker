@@ -4,7 +4,7 @@ class EvolutionStone extends CaughtIndicatingItem {
     type: GameConstants.StoneType;
 
     constructor(type: GameConstants.StoneType, displayName?: string) {
-        super(GameConstants.StoneType[type], undefined, undefined, undefined, displayName, undefined, 'evolution');
+        super(GameConstants.StoneType[type], { displayName: displayName, imageDirectory: 'evolution' });
         this.type = type;
     }
 
@@ -93,7 +93,7 @@ ShopEntriesList['Sun Stone']         = new ShopItem('Sun Stone', ItemList['Sun_s
 ShopEntriesList['Trade Stone']       = new ShopItem('Trade Stone', ItemList['Trade_stone'], 2500, Currency.questPoint);
 ShopEntriesList['Dragon Scale']      = new ShopItem('Dragon Scale', ItemList['Dragon_scale'], 2500, Currency.questPoint);
 ShopEntriesList['Metal Coat']        = new ShopItem('Metal Coat', ItemList['Metal_coat'], 2500,  Currency.questPoint);
-ShopEntriesList['King\' Rock']       = new ShopItem('King\'s Rock', ItemList['Kings_rock'], 2500, Currency.questPoint);
+ShopEntriesList['King\'s Rock']       = new ShopItem('King\'s Rock', ItemList['Kings_rock'], 2500, Currency.questPoint);
 ShopEntriesList['Upgrade']           = new ShopItem('Upgrade', ItemList['Upgrade'], 2500, Currency.questPoint);
 ShopEntriesList['Soothe Bell']       = new ShopItem('Soothe Bell', ItemList['Soothe_bell'], 2500, Currency.questPoint);
 ShopEntriesList['Deep Sea Tooth']    = new ShopItem('Deep Sea Tooth', ItemList['Deepsea_tooth'], 2500, Currency.questPoint);
