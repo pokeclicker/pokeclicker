@@ -153,7 +153,7 @@ class PokemonHelper {
         const dungeons = [];
         Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
             // Dungeon Boss
-            const boss = dungeon.availableBosses(true).find(boss => boss.name == pokemonName);
+            const boss = dungeon.availableBosses(false, true).find(boss => boss.name == pokemonName);
             if (boss) {
                 const data = {
                     dungeon: dungeonName,

@@ -56,19 +56,39 @@ class Dungeon {
         return true;
     }
 
-    public availableBosses(ignoreRequirement = false): DungeonBossPokemon[] {
+    /**
+     * Finds the possible Bosses in the dungeon
+     * @param includeTrainers Whether to include Trainer Bosses. Defaults to true
+     * @param ignoreRequirement Whether to check if requirements are met. Defaults to false
+     */
+    public availableBosses(includeTrainers = true, ignoreRequirement = false): Boss[] {
         // TODO: HLXII - We need this check as this method is called somewhere during initialization when App isn't initialized yet
         // the requirement.isCompleted call can sometimes use the App object, which will cause this to crash
         // Once App is moved to modules, this check might be able to be removed.
         if (!App.game) {
             return [];
         }
-        return this.bossList.filter(b => {
-            if (b instanceof DungeonBossPokemon) {
-                return (!ignoreRequirement && b.options?.requirement) ? b.options.requirement.isCompleted() : true;
-            }
-            return false;
-        }).map(b => <DungeonBossPokemon>b);
+        if (includeTrainers) {
+            return this.bossList.filter(boss => {
+                return (!ignoreRequirement && boss.options?.requirement) ? boss.options.requirement.isCompleted() : true;
+            });
+        } else {
+            return this.bossList.filter(b => {
+                if (b instanceof DungeonBossPokemon) {
+                    return (!ignoreRequirement && b.options?.requirement) ? b.options.requirement.isCompleted() : true;
+                }
+                return false;
+            }).map(b => <DungeonBossPokemon>b);
+        }
+    }
+
+    /**
+     * Retreives the weights for all the possible bosses
+     */
+    get bossWeightList(): number[] {
+        return this.availableBosses().map((boss) => {
+            return boss.options?.weight ?? 1;
+        });
     }
 
     private static isPokemon(arg: any): arg is PokemonNameType {
@@ -101,25 +121,6 @@ class Dungeon {
     }
 
     /**
-     * Returns the possible boss Pokemon in the dungeon.
-     * Filters out Trainers
-     */
-    get bossPokemonList(): PokemonNameType[] {
-        // Filtering out Trainers
-        const list = this.bossList.filter((enemy) => {
-            return enemy instanceof DungeonBossPokemon;
-        }).map((enemy) => {
-            return enemy.name;
-        });
-
-        return list.filter(Dungeon.isPokemon);
-    }
-
-    get availablePokemon(): PokemonNameType[] {
-        return this.pokemonList.concat(this.bossPokemonList);
-    }
-
-    /**
      * Retreives the weights for all the possible enemies
      */
     get weightList(): number[] {
@@ -135,14 +136,31 @@ class Dungeon {
     }
 
     /**
-     * Retreives the weights for all the possible bosses
+     * Returns the possible boss Pokemon in the dungeon.
+     * Filters out Trainers
      */
-    get bossWeightList(): number[] {
-        return this.availableBosses().map((boss) => {
-            return boss.options?.weight ?? 1;
+    get bossPokemonList(): PokemonNameType[] {
+        // Filtering out Trainers
+        const list = this.bossList.filter((enemy) => {
+            return enemy instanceof DungeonBossPokemon;
+        }).map((enemy) => {
+            return enemy.name;
         });
+
+        return list.filter(Dungeon.isPokemon);
     }
 
+    /**
+     * Gets all possible Pokemon in the dungeon
+     */
+    get availablePokemon(): PokemonNameType[] {
+        return this.pokemonList.concat(this.bossPokemonList);
+    }
+
+    /**
+     * Finds all possible encounters in the Dungeon and their details.
+     * Used for generating the Dungeon Encounter view
+     */
     get encounterList(): EncounterInfo[] {
         const encounterInfo = [];
 
@@ -331,7 +349,7 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
                 new GymPokemon('Grimer', 4170, 12),
                 new GymPokemon('Voltorb', 4170, 12),
                 new GymPokemon('Koffing', 4170, 12),
-            ], 1, { weight: 1 }, 'Miguel', undefined),
+            ], 1, { weight: 1 }, 'Miguel'),
     ],
     75, 4, 10
 );
