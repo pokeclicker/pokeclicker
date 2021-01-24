@@ -566,7 +566,6 @@ dungeonList['Pokemon Mansion'] = new Dungeon('Pokemon Mansion',
                 new GymPokemon('Growlithe', 1500, 34),
                 new GymPokemon('Ponyta', 1500, 34),
             ], 1, { weight: 1 }),
-        
     ],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
     17760,
@@ -677,7 +676,7 @@ dungeonList['Cerulean Cave'] = new Dungeon('Cerulean Cave',
     28735,
     [
         new DungeonBossPokemon('Rhydon', 183675, 60),
-        new DungeonBossPokemon('Mewtwo', 255512, 100)
+        new DungeonBossPokemon('Mewtwo', 255512, 100),
     ],
     2500, 20, 55
 );
