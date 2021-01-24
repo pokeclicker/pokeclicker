@@ -91,14 +91,6 @@ class Save {
         return filtered;
     }
 
-    public static initializeMultipliers(): { [name: string]: number } {
-        const res = {};
-        for (const obj in ItemList) {
-            res[obj] = 1;
-        }
-        return res;
-    }
-
     public static initializeItemlist(): { [name: string]: KnockoutObservable<number> } {
         const res = {};
         for (const obj in ItemList) {
