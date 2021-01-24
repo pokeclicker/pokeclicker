@@ -34,6 +34,15 @@ class Item {
      */
     gain(amount: number) {
         GameHelper.incrementObservable(this.amount, amount);
+        if (amount > 0) {
+            this.unlock();
+        }
+    }
+
+    unlock() {
+        if (!this.unlocked()) {
+            this.unlocked(true);
+        }
     }
 
     use(): boolean {

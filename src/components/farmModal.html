@@ -85,8 +85,8 @@
                                                 tooltip: {title: ItemList[MulchType[$data]].description, trigger: 'hover', animation: false}">
                                             <img src="" width="24px"
                                                 data-bind="attr:{ src: ItemList[MulchType[$data]].image }">
-                                            <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
-                                            <span class="float-right" data-bind="text: App.game.farming.mulchList[$data]().toLocaleString('en-US')"></span>
+                                            <span data-bind="text: ItemList[MulchType[$data]].displayName"></span>
+                                            <span class="float-right" data-bind="text: ItemList[MulchType[$data]].amount().toLocaleString('en-US')"></span>
                                         </li>
                                         <!-- /ko -->
                                     </ul>

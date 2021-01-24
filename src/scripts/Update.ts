@@ -454,6 +454,29 @@ class Update implements Saveable {
                 }
             }
 
+            //#region Moving Mulches
+            if (saveData.hasOwnProperty('farming') && saveData.farming.hasOwnProperty('mulchList')) {
+                saveData.items.itemList['Boost_Mulch'] = {};
+                saveData.items.itemList['Boost_Mulch'].amount = saveData.farming.mulchList[0];
+                if (saveData.farming.mulchList[0]) {
+                    saveData.items.itemList['Boost_Mulch'].unlocked = true;
+                }
+                saveData.items.itemList['Rich_Mulch'] = {};
+                saveData.items.itemList['Rich_Mulch'].amount = saveData.farming.mulchList[1];
+                if (saveData.farming.mulchList[1]) {
+                    saveData.items.itemList['Rich_Mulch'].unlocked = true;
+                }
+                saveData.items.itemList['Surprise_Mulch'] = {};
+                saveData.items.itemList['Surprise_Mulch'].amount = saveData.farming.mulchList[2];
+                if (saveData.farming.mulchList[2]) {
+                    saveData.items.itemList['Surprise_Mulch'].unlocked = true;
+                }
+                saveData.items.itemList['Amaze_Mulch'] = {};
+                saveData.items.itemList['Amaze_Mulch'].amount = saveData.farming.mulchList[3];
+                if (saveData.farming.mulchList[3]) {
+                    saveData.items.itemList['Amaze_Mulch'].unlocked = true;
+                }
+            }
             //#endregion
 
         },

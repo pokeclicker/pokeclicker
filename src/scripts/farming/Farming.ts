@@ -26,7 +26,6 @@ class Farming implements Feature {
     defaults = {
         berryList: Array<number>(GameHelper.enumLength(BerryType) - 1).fill(0),
         unlockedBerries: Array<boolean>(GameHelper.enumLength(BerryType) - 1).fill(false),
-        mulchList: Array<number>(GameHelper.enumLength(MulchType)).fill(0),
         plotList: new Array(Farming.PLOT_WIDTH * Farming.PLOT_HEIGHT).fill(null).map((value, index) => {
             const middle = Math.floor(Farming.PLOT_HEIGHT / 2) * Farming.PLOT_WIDTH + Math.floor(Farming.PLOT_WIDTH / 2);
             return new Plot(index === middle, BerryType.None, 0, MulchType.None, 0);
@@ -36,7 +35,6 @@ class Farming implements Feature {
 
     berryList: KnockoutObservable<number>[];
     unlockedBerries: KnockoutObservable<boolean>[];
-    mulchList: KnockoutObservable<number>[];
     plotList: Array<Plot>;
     shovelAmt: KnockoutObservable<number>;
 
@@ -45,7 +43,6 @@ class Farming implements Feature {
     constructor(private multiplier: Multiplier) {
         this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
         this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
-        this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
         this.plotList = this.defaults.plotList;
         this.shovelAmt = ko.observable(this.defaults.shovelAmt);
 
@@ -1145,9 +1142,9 @@ class Farming implements Feature {
             return;
         }
 
-        amount = Math.min(this.mulchList[mulch](), amount);
+        amount = Math.min(ItemList[MulchType[mulch]].amount(), amount);
 
-        GameHelper.incrementObservable(this.mulchList[mulch], -amount);
+        ItemList[MulchType[mulch]].gain(-amount);
         GameHelper.incrementObservable(App.game.statistics.totalMulchesUsed, amount);
         GameHelper.incrementObservable(App.game.statistics.mulchesUsed[mulch], amount);
 
@@ -1163,7 +1160,7 @@ class Farming implements Feature {
     public mulchAll(mulch: MulchType, amount = 1) {
         const mulchPlots = this.plotList.filter((_, index) => this.canMulch(index, mulch));
         amount *= mulchPlots.length;
-        amount = Math.min(this.mulchList[mulch](), amount);
+        amount = Math.min(ItemList[MulchType[mulch]].amount(), amount);
 
         const sharedMulch = Math.floor(amount / mulchPlots.length);
         if (sharedMulch <= 0) {
@@ -1218,7 +1215,7 @@ class Farming implements Feature {
     }
 
     hasMulch(mulch: MulchType) {
-        return this.mulchList[mulch]() > 0;
+        return ItemList[MulchType[mulch]].amount() > 0;
     }
 
     canAccess(): boolean {
@@ -1249,7 +1246,6 @@ class Farming implements Feature {
         return {
             berryList: this.berryList.map(ko.unwrap),
             unlockedBerries: this.unlockedBerries.map(ko.unwrap),
-            mulchList: this.mulchList.map(ko.unwrap),
             plotList: this.plotList.map(plot => plot.toJSON()),
             shovelAmt: this.shovelAmt(),
             mutations: this.mutations.map(mutation => mutation.toJSON()),
@@ -1276,15 +1272,6 @@ class Farming implements Feature {
         } else {
             (savedUnlockedBerries as boolean[]).forEach((value: boolean, index: number) => {
                 this.unlockedBerries[index](value);
-            });
-        }
-
-        const savedMulches = json['mulchList'];
-        if (savedMulches == null) {
-            this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
-        } else {
-            (savedMulches as number[]).forEach((value: number, index: number) => {
-                this.mulchList[index](value);
             });
         }
 
