@@ -7,7 +7,7 @@ interface ItemOptions {
 
 class Item {
 
-    description?: string;
+    _description?: string;
     _displayName: string;
     imageDirectory?: string;
 
@@ -16,7 +16,7 @@ class Item {
         options?: ItemOptions
     ) {
         this._displayName = options?.displayName ?? name;
-        this.description = options?.description;
+        this._description = options?.description;
         this.imageDirectory = options?.imageDirectory;
     }
 
@@ -49,8 +49,12 @@ class Item {
         return true;
     }
 
-    get displayName() {
+    get displayName(): string {
         return GameConstants.humanifyString(this._displayName);
+    }
+
+    get description(): string {
+        return this._description;
     }
 
     get image() {

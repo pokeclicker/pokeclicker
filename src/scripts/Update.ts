@@ -489,6 +489,18 @@ class Update implements Saveable {
                 }
             }
 
+            // Berries
+            console.log('loading berries', saveData.farming);
+            if (saveData.hasOwnProperty('farming') && saveData.farming.hasOwnProperty('berryList')) {
+                Object.keys(BerryType).forEach(berry => {
+                    if (BerryType[berry] >= 0) {
+                        saveData.items.itemList[berry] = {};
+                        saveData.items.itemList[berry].amount = saveData.farming.berryList[BerryType[berry]];
+                        saveData.items.itemList[berry].unlocked = saveData.farming.unlockedBerries[BerryType[berry]];
+                    }
+                });
+            }
+
             //#endregion
         },
     };
