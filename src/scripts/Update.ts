@@ -397,6 +397,8 @@ class Update implements Saveable {
                 });
             }
 
+            //#region Shops
+
             // Move itemMultipliers to new Shops system
             // Only moving non-decreasing multipliers, as the rest don't matter that much
             if (!saveData.hasOwnProperty('shops')) {
@@ -432,6 +434,28 @@ class Update implements Saveable {
             if (saveData.oakItems['Explosive_Charge'] && saveData.oakItems['Explosive_Charge'].purchased) {
                 saveData.shops.shopEntries['Explosive Charge'] = { amountPurchased: 1 };
             }
+
+            //#endregion
+
+            //#region Items
+
+            if (!saveData.hasOwnProperty('items')) {
+                saveData.items = {};
+            }
+            if (!saveData.items.hasOwnProperty('itemList')) {
+                saveData.items.itemList = {};
+            }
+            // Handling original items
+            for (const item in playerData._itemList) {
+                saveData.items.itemList[item] = {};
+                saveData.items.itemList[item].amount = playerData._itemList[item];
+                if (playerData._itemList[item]) {
+                    saveData.items.itemList[item].unlocked = true;
+                }
+            }
+
+            //#endregion
+
         },
     };
 
