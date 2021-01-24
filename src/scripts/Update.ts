@@ -353,7 +353,7 @@ class Update implements Saveable {
                 title: 'Active Challenge Mode?',
                 message: `Do you want to activate No Battle Item challenge mode?
                 
-                <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableBattleItems.activate();" data-dismiss="toast">Activate</button>`,
+                <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableBattleItems.activate(); Object.values(player.effectList).forEach(e => e(0));" data-dismiss="toast">Activate</button>`,
                 timeout: GameConstants.HOUR,
             });
             // Disable Master Balls
