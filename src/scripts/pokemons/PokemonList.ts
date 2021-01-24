@@ -20804,7 +20804,7 @@ pokemonList.forEach(p => {
 });
 
 const pokemonMap: any = new Proxy(pokemonList, {
-    get: (pokemon, prop: PokemonNameType | 'random') => {
+    get: (pokemon, prop: PokemonNameType | 'random' | 'randomRegion') => {
         if (!isNaN(+prop)) {
             const id: number = +prop;
             const pokemonByID = pokemon.find(p => p.id == id);
@@ -20821,6 +20821,17 @@ const pokemonMap: any = new Proxy(pokemonList, {
                     const max = Math.min(pokemon.length, Math.max(_min, _max));
                     const random = Math.floor(Math.random() * (max ? max : pokemon.length) + min);
                     return pokemon[random];
+                };
+            case 'randomRegion':
+                return (_max = GameConstants.Region.kanto, _min = GameConstants.Region.kanto) => {
+                    // minimum 0 (Kanto)
+                    const min = Math.max(GameConstants.Region.kanto, Math.min(_min, _max));
+                    const max = Math.max(GameConstants.Region.kanto, _min, _max);
+                    const filteredPokemon: PokemonListData[] = pokemon.filter(p => p.id > 0 && (p as PokemonListData).nativeRegion >= min && (p as PokemonListData).nativeRegion <= max);
+                    const random = Math.floor(Math.random() * filteredPokemon.length);
+                    const poke: PokemonListData = filteredPokemon[random];
+                    // return a random Pokemon or MissingNo if none found
+                    return poke || (pokemon.find(p => p.id == 0) as PokemonListData);
                 };
             default:
                 return pokemonNameIndex[prop.toLowerCase()] || pokemon[prop] || pokemon.find(p => p.id == 0);
