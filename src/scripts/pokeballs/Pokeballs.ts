@@ -64,6 +64,26 @@ class Pokeballs implements Feature {
     }
 
     initialize(): void {
+        ([
+            this._alreadyCaughtSelection,
+            this._alreadyCaughtShinySelection,
+            this._notCaughtSelection,
+            this._notCaughtShinySelection,
+        ]).forEach(selection => {
+            selection.subscribe(value => {
+                // switch to Ultraball if Masterball is selected
+                if (value == GameConstants.Pokeball.Masterball && App.game.challenges.list.disableMasterballs.active()) {
+                    selection(GameConstants.Pokeball.Ultraball);
+                    Notifier.notify({
+                        title: 'Challenge Mode',
+                        message: 'Masterballs are disabled!',
+                        type: NotificationConstants.NotificationOption.danger,
+                    });
+                } else if (!this.pokeballs[value]?.unlocked()) {
+                    selection(GameConstants.Pokeball.None);
+                }
+            });
+        });
     }
 
     /**

@@ -22,7 +22,7 @@ class Player {
 
     private _region: KnockoutObservable<GameConstants.Region>;
     private _town: KnockoutObservable<Town>;
-    private _starter: GameConstants.Starter;
+    private starter: KnockoutObservable<GameConstants.Starter>;
     private _timeTraveller = false;
 
     constructor(savedPlayer?) {
@@ -63,7 +63,7 @@ class Player {
         }
 
         this._town = ko.observable(TownList['Pallet Town']);
-        this._starter = savedPlayer._starter != undefined ? savedPlayer._starter : GameConstants.Starter.None;
+        this.starter = ko.observable(savedPlayer.starter != undefined ? savedPlayer.starter : GameConstants.Starter.None);
 
         this._itemList = Save.initializeItemlist();
         if (savedPlayer._itemList) {
@@ -137,14 +137,6 @@ class Player {
         this._town = value;
     }
 
-    get starter(): GameConstants.Starter {
-        return this._starter;
-    }
-
-    set starter(value: GameConstants.Starter) {
-        this._starter = value;
-    }
-
     public gainItem(itemName: string, amount: number) {
         this._itemList[itemName](this._itemList[itemName]() + amount);
     }
@@ -177,8 +169,8 @@ class Player {
         const keep = [
             '_route',
             '_region',
-            '_starter',
             '_itemList',
+            'starter',
             // TODO(@Isha) remove.
             'mineInventory',
             // TODO(@Isha) remove.

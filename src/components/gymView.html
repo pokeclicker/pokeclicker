@@ -10,7 +10,7 @@
             <knockout>
                 <knockout data-bind="text: GymBattle.enemyPokemon().name">Pokémon name</knockout>
             </knockout>
-            
+
             <knockout class="right">
                 <span data-bind="foreach: new Array(GymBattle.pokemonsDefeatedComputable())">
                     <img src="assets/images/pokeball/Pokeball.svg" class="pokeball-smallest pokeball-defeated"/>
@@ -39,10 +39,12 @@
         </div>
 
         <div>
-            <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(GymBattle.enemyPokemon(), GymBattle.enemyPokemon().shiny) }" src=""/>
-            <!-- TODO: put this image somewhere
-            <img height="56px" id="gymLeader" src="" data-bind="attr:{ src: 'assets/images/gymLeaders/' + GymBattle.gym.leaderName + '.png'}">
+            <!-- TODO: HLXII - Add after all Gym Leader images are formatted correctly
+            <div style="position:absolute; left:65%;">
+                <img height=80px data-bind="attr:{ src: GymBattle.gym.imagePath }"/>
+            </div>
             -->
+            <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(GymBattle.enemyPokemon(), GymBattle.enemyPokemon().shiny) }" src=""/>
         </div>
 
         <div class="progress hitpoints" style="height: 20px;">

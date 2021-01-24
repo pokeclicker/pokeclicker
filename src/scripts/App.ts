@@ -40,6 +40,7 @@ class App {
                 new Discord(),
                 new AchievementTracker(),
                 multiplier,
+                new Challenges(),
                 new Shops()
             );
 

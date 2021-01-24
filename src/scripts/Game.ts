@@ -36,6 +36,7 @@ class Game {
         public discord: Discord,
         public achievementTracker: AchievementTracker,
         public multiplier: Multiplier,
+        public challenges: Challenges,
         public shops: Shops
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
@@ -85,7 +86,7 @@ class Game {
 
     start() {
         console.log(`[${GameConstants.formatDate(new Date())}] %cGame started`, 'color:#2ecc71;font-weight:900;');
-        if (player.starter === GameConstants.Starter.None) {
+        if (player.starter() === GameConstants.Starter.None) {
             StartSequenceRunner.start();
         }
         this.interval = setInterval(this.gameTick.bind(this), GameConstants.TICK_TIME);

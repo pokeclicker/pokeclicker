@@ -133,9 +133,6 @@ class MapHelper {
             App.game.gameState = GameConstants.GameState.idle;
             player.route(0);
             const town = TownList[townName];
-            if (town instanceof DungeonTown) {
-                town.dungeon.calculateAllPokemonNames();
-            }
             player.town(town);
             Battle.enemyPokemon(null);
             //this should happen last, so all the values all set beforehand
