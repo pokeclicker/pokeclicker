@@ -5,7 +5,7 @@ class EggItem extends CaughtIndicatingItem {
     type: GameConstants.EggItemType;
 
     constructor(type: GameConstants.EggItemType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, displayName?: string) {
-        super(GameConstants.EggItemType[type], basePrice, currency, undefined, displayName);
+        super(GameConstants.EggItemType[type], basePrice, currency, undefined, displayName, undefined, 'egg');
         this.type = type;
     }
 

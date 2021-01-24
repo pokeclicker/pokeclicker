@@ -11,41 +11,24 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const berryRegionBound = Farming.genBounds[Math.min(player.highestRegion(), GameConstants.Region.unova)];
-        // Getting Berries that can be grown in less than half a day
-        const berryTypes = GameHelper.enumNumbers(BerryType).filter(berry => {
-            // Needs to be a berry that can be planted
-            return berry != BerryType.None
-            // Need to be able obtain within our highest region
-            && berry < berryRegionBound
-            // Needs to take less than 6 hours to fully grow
-            && App.game.farming.berryData[berry].growthTime[3] < 6 * 60 * 60;
-        });
+        // Getting available Berries (always include Gen 1 Berries)
+        const availableBerries = App.game.farming.berryData.filter(berry => App.game.farming.unlockedBerries[berry.type]() || berry.type < BerryType.Persim);
+        const berry = SeededRand.fromArray(availableBerries);
 
-        const berryType = SeededRand.fromArray(berryTypes);
-        // Calculating balanced amount based on BerryType
-        // Hard limits are between 10 and 300
-        // Additional limits based on growing on all 25 plots non-stop in 3 hours
-        const minAmt = 30;
-        let maxAmt = 300;
-
-        const totalGrowths = Math.floor((3 * 60 * 60 * 25) / App.game.farming.berryData[berryType].growthTime[3]);
-        const totalBerries = totalGrowths * App.game.farming.berryData[berryType].harvestAmount;
-        maxAmt = Math.min(maxAmt, totalBerries);
+        const maxAmt = Math.min(300, Math.ceil(432000 / berry.growthTime[3]));
+        const minAmt = Math.min(10, Math.ceil(maxAmt / 2));
 
         const amount = SeededRand.intBetween(minAmt, maxAmt);
-        const reward = this.calcReward(amount, berryType);
-        return [amount, reward, berryType];
+        const reward = this.calcReward(amount, berry.type);
+        return [amount, reward, berry.type];
     }
 
     private static calcReward(amount: number, berryType: BerryType): number {
         const harvestTime = App.game.farming.berryData[berryType].growthTime[3];
-        const harvestAmt = App.game.farming.berryData[berryType].harvestAmount;
+        const harvestAmt = Math.max(4, Math.ceil(App.game.farming.berryData[berryType].harvestAmount));
         const plantAmt = amount / harvestAmt;
-        const plantCycles = plantAmt / App.game.farming.plotList.filter(plot => plot.isUnlocked).length;
-        const totalPlantTime = plantCycles * harvestTime;
-        const scaled = totalPlantTime * 10 / (berryType + 1);
-        const reward = Math.ceil(scaled);
+        const fieldAmt = plantAmt / App.game.farming.plotList.length;
+        const reward = Math.ceil(fieldAmt * Math.pow(harvestTime, .7) * 10);
         return super.randomizeReward(reward);
     }
 
