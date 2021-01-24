@@ -28,12 +28,16 @@ class Item {
         return App.game.items.itemList[this.name].unlocked;
     }
 
+    /**
+     * Handles updating the amount
+     * @param amount The amount to gain. Can be negative for removal
+     */
     gain(amount: number) {
         GameHelper.incrementObservable(this.amount, amount);
     }
 
     use(): boolean {
-        return false;
+        return true;
     }
 
     get displayName() {

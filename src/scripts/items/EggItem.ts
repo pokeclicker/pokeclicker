@@ -10,7 +10,7 @@ class EggItem extends CaughtIndicatingItem {
     }
 
     use(): boolean {
-        if (player.itemList[this.name]() <= 0) {
+        if (this.amount() <= 0) {
             return false;
         }
 
@@ -25,7 +25,7 @@ class EggItem extends CaughtIndicatingItem {
         }
 
         if (success) {
-            player.loseItem(this.name, 1);
+            this.gain(-1);
         }
         return success;
     }

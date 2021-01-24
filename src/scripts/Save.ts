@@ -91,14 +91,6 @@ class Save {
         return filtered;
     }
 
-    public static initializeItemlist(): { [name: string]: KnockoutObservable<number> } {
-        const res = {};
-        for (const obj in ItemList) {
-            res[obj] = ko.observable(0).extend({ numeric: 0 });
-        }
-        return res;
-    }
-
     public static initializeEffects(saved?: Array<string>): { [name: string]: KnockoutObservable<number> } {
         const res = {};
         for (const obj in GameConstants.BattleItemType) {
