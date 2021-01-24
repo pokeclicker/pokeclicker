@@ -110,8 +110,9 @@ abstract class ShopEntry {
     /**
      * Purchases the ShopEntry
      * @param amount Amount to purchase
+     * @return The amount actually purchased
      */
-    buy(amount: number) {
+    buy(amount: number): number {
         // Sanity Check
         if (amount <= 0) {
             return 0;
@@ -147,6 +148,7 @@ abstract class ShopEntry {
                 message: `You bought ${amount} ${this.displayName}${multiple}`,
                 type: NotificationConstants.NotificationOption.success,
             });
+            return amount;
         } else {
             let curr = GameConstants.camelCaseToString(GameConstants.Currency[this.currency]);
             switch (this.currency) {
@@ -160,6 +162,7 @@ abstract class ShopEntry {
                 message: `You don't have enough ${curr} to buy ${amount} ${this.displayName}${multiple}`,
                 type: NotificationConstants.NotificationOption.danger,
             });
+            return 0;
         }
     }
 

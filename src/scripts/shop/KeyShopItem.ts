@@ -12,6 +12,14 @@ class KeyShopItem extends ShopEntry {
         super(name, basePrice, currency, { maxAmount: 1 });
     }
 
+    buy(amount: number): number {
+        const boughtAmount = super.buy(amount);
+        if (boughtAmount) {
+            App.game.keyItems.gainKeyItem(this.item);
+        }
+        return boughtAmount;
+    }
+
     get displayName(): string {
         return App.game.keyItems.itemList[this.item].displayName;
     }

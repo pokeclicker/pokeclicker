@@ -12,6 +12,17 @@ class OakShopItem extends ShopEntry {
         super(name, basePrice, currency, { maxAmount: 1 });
     }
 
+    buy(amount: number): number {
+        const boughtAmount = super.buy(amount);
+        if (boughtAmount) {
+            const oakItem = App.game.oakItems.itemList[this.item];
+            if (oakItem instanceof BoughtOakItem) {
+                oakItem.purchased = true;
+            }
+        }
+        return boughtAmount;
+    }
+
     get displayName(): string {
         return App.game.oakItems.itemList[this.item].displayName;
     }

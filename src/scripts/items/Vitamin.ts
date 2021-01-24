@@ -12,4 +12,4 @@ ItemList.RareCandy = new Vitamin(GameConstants.VitaminType.RareCandy, 'Rare Cand
 ItemList.Protein   = new Vitamin(GameConstants.VitaminType.Protein, undefined, 'Increases Pokemon attack bonus<br/><i>(attack gained per breeding cycle)</i>');
 
 ShopEntriesList['Rare Candy'] = new ShopItem('Rare Candy', ItemList['RareCandy'], Infinity, Currency.money);
-ShopEntriesList['Protein'] = new ShopItem('Protein', ItemList['Protein'], 1000, Currency.money, { multiplier: 1.1, multiplierDecrease: false });
+ShopEntriesList['Protein'] = new ShopItem('Protein', ItemList['Protein'], 10000, Currency.money, { multiplier: 1.1, multiplierDecrease: false });
