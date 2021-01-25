@@ -91,40 +91,25 @@ class Dungeon {
         });
     }
 
-    private static isPokemon(arg: any): arg is PokemonNameType {
-        if (pokemonMap[arg].id) {
-            return true;
-        }
-        if (arg.hasOwnProperty('options')) {
-
-        }
-    }
-
     /**
-     * Returns the possible minion Pokemon in the dungeon.
-     * Filters out Trainers and collapses DetailedPokemon
+     * Returns the possible enemies in the dungeon.
+     * @param ignoreRequirement Whether to check if requirements are met. Defaults to false
      */
-    get pokemonList(): PokemonNameType[] {
-        // Filtering out Trainers
-        const list = this.enemyList.filter((enemy) => {
-            return !enemy.hasOwnProperty('name');
-        }).map((enemy) => {
-            // Collapsing DetailedPokemon
+    public availableMinions(ignoreRequirement = false): Enemy[] {
+        return this.enemyList.filter((enemy) => {
             if (typeof enemy === 'string') {
-                return enemy;
-            } else if (enemy.hasOwnProperty('pokemon')) {
-                return (<DetailedPokemon>enemy).pokemon;
+                return true;
+            } else {
+                return (!ignoreRequirement && enemy.options?.requirement) ? enemy.options.requirement.isCompleted() : true;
             }
         });
-
-        return list.filter(Dungeon.isPokemon);
     }
 
     /**
      * Retreives the weights for all the possible enemies
      */
     get weightList(): number[] {
-        return this.enemyList.map((enemy) => {
+        return this.availableMinions().map((enemy) => {
             if (typeof enemy === 'string') {
                 return 1;
             } else if (enemy.hasOwnProperty('pokemon')) {
@@ -136,24 +121,40 @@ class Dungeon {
     }
 
     /**
+     * Returns the possible minion Pokemon in the dungeon.
+     * Filters out Trainers and collapses DetailedPokemon
+     */
+    get pokemonList(): PokemonNameType[] {
+        // Filtering out Trainers
+        return this.enemyList.filter((enemy) => {
+            return !enemy.hasOwnProperty('name');
+        }).map((enemy) => {
+            // Collapsing DetailedPokemon
+            if (typeof enemy === 'string') {
+                return enemy;
+            } else if (enemy.hasOwnProperty('pokemon')) {
+                return (<DetailedPokemon>enemy).pokemon;
+            }
+        });
+    }
+
+    /**
      * Returns the possible boss Pokemon in the dungeon.
      * Filters out Trainers
      */
     get bossPokemonList(): PokemonNameType[] {
         // Filtering out Trainers
-        const list = this.bossList.filter((enemy) => {
+        return this.bossList.filter((enemy) => {
             return enemy instanceof DungeonBossPokemon;
         }).map((enemy) => {
-            return enemy.name;
+            return enemy.name as PokemonNameType;
         });
-
-        return list.filter(Dungeon.isPokemon);
     }
 
     /**
      * Gets all possible Pokemon in the dungeon
      */
-    get availablePokemon(): PokemonNameType[] {
+    get allPokemon(): PokemonNameType[] {
         return this.pokemonList.concat(this.bossPokemonList);
     }
 

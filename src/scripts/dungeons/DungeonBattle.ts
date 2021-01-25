@@ -100,7 +100,7 @@ class DungeonBattle extends Battle {
         this.counter = 0;
 
         // Finding enemy from enemyList
-        const enemy = GameHelper.fromWeightedArray(DungeonRunner.dungeon.enemyList, DungeonRunner.dungeon.weightList);
+        const enemy = GameHelper.fromWeightedArray(DungeonRunner.dungeon.availableMinions(), DungeonRunner.dungeon.weightList);
         // Pokemon
         if (typeof enemy === 'string' || enemy.hasOwnProperty('pokemon')) {
             const pokemon = (typeof enemy === 'string') ? enemy : (<DetailedPokemon>enemy).pokemon;
