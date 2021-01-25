@@ -5,6 +5,7 @@
  </editorsettings>
  <tileset firstgid="1" source="tiles_FRLG.tsx"/>
  <tileset firstgid="1317" source="tiles_Advanced.tsx"/>
+ <tileset firstgid="9301" source="tiles_custom.tsx"/>
  <layer id="1" name="Water Dark" width="100" height="60" tintcolor="#c8c8c8">
   <data encoding="base64" compression="zstd">
    KLUv/WDAXBUFAHCYAAAAXAEAmABdXAFcAVOg0FkAUMMkAAQGF0QCk40aIA/JfQYPDQeB6UiTCis4pVan+FkjpZehJ0cy+tajr/3CKeW+qfEjnGo8MPobT7JqkgMwVZ0LeApUuEYeRzXUfiPdtePkisur3ipXp743F0d5c1xb5UUSbeoLEW2VNwri1JdLxFFvTsRVvDwRp76YVVe9b81T4hfXsKrueSeVj3nrAw==
@@ -47,7 +48,7 @@
  </layer>
  <layer id="7" name="Dungeons" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXK0IAIIFEBiADYIARBGHk0ZPidHAv7U8DMMwnPUug3mncazGYiDWYRkEK7AAmYd5l1le5VE2eZIXOZB1VrMeC8VKVIGwBgdPqIAHBHIU4IIJIJiZrQMSwBBkIAKVQCN4iOAZgh9lSEaPeoFwNhaLPOApqvgUl7/4GPlgulByPZNl9Br5+h7Wcci4WBPE3qWWviuor1ufqDDl9C7FJ4oaz9TraxOnu7Dlpmy9moQNNn2CaphuIyynaVy4FTqbOUVRLlGbu96i/5vGrbt57wngLXKyMMAj8HoBHDDEf4HBTKYchLEc0d3SeSSbhT1G5pYZ9uHifX/geQM7jQE+Ts6oc090GD13gNGoIwDBBZzk2ha6H3L8sI9wUD8=
+   KLUv/WDAXHUJAEKHFBxwj4AAwIgBwqIEcn0lNxmZtBYBAAAI1c0NCYUH0uS4GhcDcR0uw0IP9D7P8zqCK3ABOG/zNC/zMLs8y6s8yptEkigiQS7pmq7HQnElVoFwDQ5RqDHTICwuKQbgggkgmJmtAxLAEDAwEIFKoBE8RPAMwQ8zJGBHPYFwNi4+8LBXRPEtLl/xMTCD6bvkeqbJ6DUy6ntcxyFhGSe43qWWvqvW17dPVJsye5f+E9XEM736OuN0t7dMU6pXw6XBpk+Qhuk+heU6jQtnIWWXQ5TlGjVy11v0f2Pculv3rgS8jZwsBOARAMGclBQNiPl/qBBlEt3ekeU+7ihl1XkkzEIPrn6HWX3sWN8f6N4ApTHAh88harkbHUbLHeA36hyAkAec5BYXJj/E/QUa4aDO
   </data>
  </layer>
  <layer id="12" name="Decor" width="100" height="60">
