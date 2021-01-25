@@ -55,7 +55,7 @@ export default class Profile implements Saveable {
                 style="color: ${textColor}"
                 onclick="${key === undefined ? "Notifier.notify({ message: 'What a lovely profile!' });" : `Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();`}">
                 <div class="card-body">
-                    <h5 class="align-middle font-weight-bold"><img src="assets/images/profile/trainer-${trainer}.png"/> ${decodeURI(name)}</h5>
+                    <h5 class="align-middle font-weight-bold"><img src="assets/images/profile/trainer-${trainer}.png"/> ${name}</h5>
                     <table class="table table-sm table-borderless col-8" style="color: ${textColor}">
                         <tbody>
                             <tr>
@@ -129,7 +129,7 @@ export default class Profile implements Saveable {
             return;
         }
 
-        if (json.name) this.name(json.name);
+        if (json.name) this.name(decodeURI(json.name));
         if (json.trainer !== undefined) this.trainer(json.trainer);
         if (json.pokemon !== undefined) this.pokemon(json.pokemon);
         if (json.pokemonShiny !== undefined) this.pokemonShiny(json.pokemonShiny);
@@ -139,7 +139,7 @@ export default class Profile implements Saveable {
 
     toJSON(): Record<string, any> {
         return {
-            name: this.name(),
+            name: encodeURI(this.name()),
             trainer: this.trainer(),
             pokemon: this.pokemon(),
             pokemonShiny: this.pokemonShiny(),

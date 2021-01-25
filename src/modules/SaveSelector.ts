@@ -26,7 +26,7 @@ export default class SaveSelector {
             const rawData = localStorage.getItem(`save${key}`);
             const saveData = JSON.parse(rawData);
             return Profile.getTrainerCard(
-                saveData.profile?.name,
+                decodeURI(saveData.profile?.name ?? 'Trainer'),
                 saveData.profile?.trainer,
                 saveData.profile?.pokemon ?? saveData.party.caughtPokemon[0]?.id,
                 saveData.profile?.pokemonShiny,

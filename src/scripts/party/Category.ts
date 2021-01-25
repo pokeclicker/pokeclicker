@@ -64,8 +64,15 @@ class PokemonCategories implements Saveable {
     }
 
     toJSON(): Record<string, any> {
+        const categories = {};
+        Object.entries(PokemonCategories.categories()).forEach(([c, v]) => {
+            categories[c] = {
+                name: encodeURI(v.name()),
+                color: v.color(),
+            };
+        });
         return {
-            categories: ko.toJS(PokemonCategories.categories),
+            categories,
         };
     }
 
@@ -77,10 +84,10 @@ class PokemonCategories implements Saveable {
         json.categories?.forEach((category, index) => {
             const cat = PokemonCategories.categories()[index];
             if (cat) {
-                cat.name(category.name);
+                cat.name(decodeURI(category.name));
                 cat.color(category.color);
             } else {
-                PokemonCategories.addCategory(category.name, category.color);
+                PokemonCategories.addCategory(decodeURI(category.name), category.color);
             }
         });
     }
