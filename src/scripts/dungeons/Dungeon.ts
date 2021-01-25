@@ -929,6 +929,20 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
     ],
     96500, 230, 100);
 
+dungeonList['Pokéball Factory'] = new Dungeon('Pokéball Factory', //TODO: Krush. Fill in with correct trainers
+    ['Arceus (fire)'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    8503000,
+    [new DungeonBossPokemon('Unown (Z)', 90000000, 100)],
+    96500, 230, 100);
+
+dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant', //TODO: Krush. Fill in with correct trainers
+    ['Arceus (fire)'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    8503000,
+    [new DungeonBossPokemon('Unown (Z)', 90000000, 100)],
+    96500, 230, 100);
+
 dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
     ['Graveler', 'Haunter', 'Gurdurr', 'Druddigon', 'Ariados'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],

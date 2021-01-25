@@ -1830,6 +1830,13 @@ TownList['Pokemon League Kalos'] = new Town(
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Kalos'))],
     }
 );
+TownList['Kiloude City'] = new Town(
+    'Kiloude City',
+    GameConstants.Region.kalos,
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+    }
+);
 
 //Kalos Dungeons
 TownList['Santalune Forest'] = new DungeonTown(
@@ -1859,7 +1866,16 @@ TownList['Reflection Cave'] = new DungeonTown(
 );
 //Tower of Mastery?
 //Sea Spirit's Den?
-//Pokeball Factory+Power Plant IF trainers are added
+TownList['Pokéball Factory'] = new DungeonTown(
+    'Pokéball Factory',
+    GameConstants.Region.kalos,
+    [new GymBadgeRequirement(BadgeEnums.Fairy)]
+);
+TownList['Kalos Power Plant'] = new DungeonTown(
+    'Kalos Power Plant',
+    GameConstants.Region.kalos,
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 13)]
+);
 TownList['Lost Hotel'] = new DungeonTown(
     'Lost Hotel',
     GameConstants.Region.kalos,
