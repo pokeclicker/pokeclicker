@@ -1453,6 +1453,7 @@ TownList['Opelucid City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 11)],
         shop: OpelucidCityShop,
+        dungeon: dungeonList['Plasma Assault'],
     }
 );
 TownList['Humilau City'] = new Town(
@@ -1592,12 +1593,19 @@ TownList['Reversal Mountain'] = new DungeonTown(
     GameConstants.Region.unova,
     [new GymBadgeRequirement(BadgeEnums.Jet)]
 );
+TownList['Plasma Assault'] = new DungeonTown(
+    'Plasma Assault',
+    GameConstants.Region.unova,
+    [
+        new GymBadgeRequirement(BadgeEnums.Legend),
+    ]
+);
 TownList['Seaside Cave'] = new DungeonTown(
     'Seaside Cave',
     GameConstants.Region.unova,
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 24),
-        new GymBadgeRequirement(BadgeEnums.Legend),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Assault')),
     ]
 );
 TownList['Giant Chasm'] = new DungeonTown(

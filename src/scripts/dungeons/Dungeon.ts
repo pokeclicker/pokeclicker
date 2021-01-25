@@ -1609,6 +1609,42 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
     ],
     226500, 14, 100);
 
+dungeonList['Plasma Assault'] = new Dungeon('Plasma Assault',
+    [
+        new DungeonTrainer('Team Plasma Grunt',
+            [
+                new GymPokemon('Watchog', 241500, 44),
+                new GymPokemon('Muk', 241500, 44),
+            ], 1, { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Plasma Grunt',
+            [
+                new GymPokemon('Golbat', 241500, 44),
+                new GymPokemon('Garbodor', 241500, 44),
+            ], 1, { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Team Plasma Grunt',
+            [
+                new GymPokemon('Seviper', 241500, 44),
+                new GymPokemon('Weezing', 241500, 44),
+            ], 1, { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Plasma',
+            [
+                new GymPokemon('Pawniard', 241500, 46),
+                new GymPokemon('Pawniard', 241500, 46),
+                new GymPokemon('Absol', 241500, 46),
+            ], 1, { weight: 1 }, 'Shadow', '(shadow)'),
+    ],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    4603000,
+    [
+        new DungeonTrainer('Team Plasma',
+            [
+                new GymPokemon('Cryogonal', 27000000, 46),
+                new GymPokemon('Cryogonal', 27000000, 46),
+                new GymPokemon('Weavile', 27000000, 46),
+            ], 1, { weight: 1 }, 'Zinzolin', '(zinzolin)'),
+    ],
+    241500, 20, 100);
+
 dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
     [
         {pokemon: 'Golduck', options: { weight: 3.5 }},
@@ -1656,7 +1692,7 @@ dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
         new DungeonBossPokemon('Crustle', 28000000, 100),
     ],
     246500, 21, 100);
-
+    
 dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
     [
         {pokemon: 'Clefairy', options: { weight: 5.33 }},
