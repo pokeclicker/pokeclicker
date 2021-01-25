@@ -1,6 +1,8 @@
 import Profile from './profile/Profile';
 
 export default class SaveSelector {
+    static MAX_SAVES = 9;
+
     static loadSaves() {
         const container = document.querySelector('#saveSelector .container');
 
@@ -9,7 +11,7 @@ export default class SaveSelector {
             container.innerHTML += SaveSelector.getTrainerCard(saveKey.replace(/^save/, ''));
         });
 
-        if (saves.length < 9) {
+        if (saves.length < this.MAX_SAVES) {
             const key = Math.random().toString(36).substring(7);
             container.innerHTML += `<div class="col-12"></div><a href="#" class="btn btn-primary col-4" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">New Save</a>`;
         }
