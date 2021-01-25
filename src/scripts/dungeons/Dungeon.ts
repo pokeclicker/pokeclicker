@@ -1608,6 +1608,7 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
         new DungeonBossPokemon('Heatran', 30000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)}),
     ],
     226500, 14, 100);
+
 dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
     [
         {pokemon: 'Golduck', options: { weight: 3.5 }},
@@ -1778,9 +1779,9 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     4403000,
     [
-        new DungeonBossPokemon('Tangrowth', 30000000, 100), {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))}),
-        new DungeonBossPokemon('Audino', 32000000, 100), {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))}),
-        new DungeonBossPokemon('Mamoswine', 32000000, 100), {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))}),
+        new DungeonBossPokemon('Tangrowth', 30000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))}),
+        new DungeonBossPokemon('Audino', 32000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))}),
+        new DungeonBossPokemon('Mamoswine', 32000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))}),
         new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)}),
         new DungeonTrainer('Team Plasma',
             [
@@ -1806,7 +1807,41 @@ dungeonList['Cave of Being'] = new Dungeon('Cave of Being',
     286500, 20, 100);
 
 dungeonList['Abundant Shrine'] = new Dungeon('Abundant Shrine',
-    ['Vulpix', 'Golduck', 'Marill', 'Azumarill', 'Swablu', 'Bronzor', 'Cottonee', 'Petilil', 'Goldeen', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+    [
+        {pokemon: 'Vulpix', options: { weight: 1.45 }},
+        {pokemon: 'Golduck', options: { weight: 1.45 }},
+        {pokemon: 'Marill', options: { weight: 1.45 }},
+        {pokemon: 'Azumarill', options: { weight: 1.45 }},
+        {pokemon: 'Swablu', options: { weight: 1.45 }},
+        {pokemon: 'Bronzor', options: { weight: 1.45 }},
+        {pokemon: 'Cottonee', options: { weight: 1.45 }},
+        {pokemon: 'Petilil', options: { weight: 1.45 }},
+        {pokemon: 'Goldeen', options: { weight: 1.45 }},
+        {pokemon: 'Basculin (Red-Striped)', options: { weight: 1.45 }},
+        {pokemon: 'Basculin (Blue-Striped)', options: { weight: 1.45 }},
+        new DungeonTrainer('Youngster',
+            [
+                new GymPokemon('Skorupi', 306500, 39),
+                new GymPokemon('Seviper', 306500, 39),
+            ], 1, { weight: 1 }, 'Wes'),
+        new DungeonTrainer('Twins',
+            [
+                new GymPokemon('Swablu', 306500, 38),
+                new GymPokemon('Swablu', 306500, 38),
+            ], 1, { weight: 1 }, 'Rae & Ula'),
+        new DungeonTrainer('Lass',
+            [
+                new GymPokemon('Deerling (Spring)', 306500, 39),
+                new GymPokemon('Zangoose', 306500, 39),
+            ], 1, { weight: 1 }, 'Lureen'),
+        new DungeonTrainer('Youngster',
+            [
+                new GymPokemon('Karrablast', 306500, 37),
+                new GymPokemon('Shelmet', 306500, 37),
+                new GymPokemon('Joltik', 306500, 37),
+                new GymPokemon('Scolipede', 306500, 37),
+            ], 1, { weight: 1 }, 'Jaye'),
+    ],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     4803000,
     [
