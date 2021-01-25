@@ -91,6 +91,8 @@ export default class DynamicBackground {
         // eslint-disable-next-line no-undef
         const pokemonSpeed = pokemonMap[id].base.speed;
         let moveSpeed = Math.floor(((pokemonSpeed - DynamicBackground.MIN_SPEED_STAT) / (DynamicBackground.MAX_SPEED_STAT - DynamicBackground.MIN_SPEED_STAT)) * DynamicBackground.MAX_SPEED);
+        // Adjust speed by -1 → +1 randomly
+        moveSpeed += Math.floor(Math.random() * 3) - 1;
         moveSpeed = Math.max(0, Math.min(DynamicBackground.MAX_SPEED, moveSpeed));
         const flying = DynamicBackground.flyingPokemon.includes(id);
         const shiny = !Math.floor(Math.random() * SHINY_CHANCE_BREEDING);
