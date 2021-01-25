@@ -81,8 +81,15 @@ export default class DynamicBackground {
         707, 714, 715, 738, 745, 746,
     ];
 
+    public static MAX_SPEED_STAT = 160;
+    public static MAX_SPEED = 5;
+
     // Add a pokemon to the scene
     static addPokemon = (id) => {
+        // @ts-ignore
+        // eslint-disable-next-line no-undef
+        const pokemonSpeed = pokemonMap[id].base.speed;
+        const moveSpeed = Math.min(4, Math.floor((pokemonSpeed / DynamicBackground.MAX_SPEED_STAT) * DynamicBackground.MAX_SPEED));
         const flying = DynamicBackground.flyingPokemon.includes(id);
         const shiny = !Math.floor(Math.random() * SHINY_CHANCE_BREEDING);
 
@@ -90,8 +97,7 @@ export default class DynamicBackground {
         pokeElement.style.bottom = flying ? `${Math.floor(Math.random() * 70) + 20}vh` : `${Math.floor(Math.random() * 10) + 5}vh`;
         pokeElement.style.backgroundImage = `${shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' : ''}url('assets/images/dynamic-background/pokemon/${id.toString().padStart(3, 0)}${shiny ? 's' : ''}.png')`;
         pokeElement.classList.add('pokemonSprite');
-        pokeElement.classList.add('walkLeft');
-        pokeElement.classList.add('moveLeft');
+        pokeElement.classList.add(`speed-${moveSpeed}`);
         document.getElementById('dynamic-background').appendChild(pokeElement);
         setTimeout(() => {
             document.getElementById('dynamic-background').removeChild(pokeElement);

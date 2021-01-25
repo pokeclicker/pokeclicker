@@ -318,11 +318,24 @@ body.background-dynamic {
         width: 4vh;
         z-index: 0;
         left: -4vh;
+        background-position: 0.00000% 33.3333%;
         
-        &.walkLeft.moveLeft {
-            background-position: 0.00000% 33.3333%;
+        &.speed-0 {
+            animation: walkLeft 0.8s steps(3) infinite, moveLeft 120s linear;
+        }
+        &.speed-1 {
+            animation: walkLeft 0.6s steps(3) infinite, moveLeft 80s linear;
+        }
+        &.speed-2 {
             animation: walkLeft 0.4s steps(3) infinite, moveLeft 60s linear;
         }
+        &.speed-3 {
+            animation: walkLeft 0.35s steps(3) infinite, moveLeft 45s linear;
+        }
+        &.speed-4 {
+            animation: walkLeft 0.3s steps(3) infinite, moveLeft 35s linear;
+        }
+
         @keyframes moveLeft {
             0%   { left: 4000px; }
             100% { left: -1000px; }
