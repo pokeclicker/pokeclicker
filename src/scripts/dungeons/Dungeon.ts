@@ -2104,7 +2104,38 @@ dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
     356500, 7, 100);
 
 dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
-    ['Croagunk', 'Palpitoad', 'Karrablast', 'Shelmet', 'Stunfisk', 'Barboach'],
+    [
+        {pokemon: 'Croagunk', options: { weight: 2.67 }},
+        {pokemon: 'Palpitoad', options: { weight: 2.67 }},
+        {pokemon: 'Karrablast', options: { weight: 2.67 }},
+        {pokemon: 'Shelmet', options: { weight: 2.67 }},
+        {pokemon: 'Stunfisk', options: { weight: 2.67 }},
+        {pokemon: 'Barboach', options: { weight: 2.67 }},
+        new DungeonTrainer('Pokémon Ranger',
+            [
+                new GymPokemon('Accelgor', 356500, 62),
+                new GymPokemon('Swalot', 356500, 62),
+                new GymPokemon('Kecleon', 356500, 62),
+            ], 1, { weight: 1 }, 'Elaine', '(female)'),
+        new DungeonTrainer('Pokémon Ranger',
+            [
+                new GymPokemon('Escavalier', 356500, 62),
+                new GymPokemon('Skuntank', 356500, 62),
+                new GymPokemon('Carnivine', 356500, 62),
+            ], 1, { weight: 1 }, 'Parker', '(male)'),
+        new DungeonTrainer('Fisherman',
+            [
+                new GymPokemon('Corphish', 356500, 60),
+                new GymPokemon('Poliwag', 356500, 60),
+                new GymPokemon('Stunfisk', 356500, 60),
+            ], 1, { weight: 1 }, 'Eustace'),
+        new DungeonTrainer('Fisherman',
+            [
+                new GymPokemon('Poliwhirl', 356500, 60),
+                new GymPokemon('Whiscash', 356500, 60),
+                new GymPokemon('Politoed', 356500, 60),
+            ], 1, { weight: 1 }, 'Arnold'),
+    ],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     5203000,
     [
