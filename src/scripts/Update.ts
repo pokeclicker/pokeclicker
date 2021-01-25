@@ -396,6 +396,8 @@ class Update implements Saveable {
                     timeout: GameConstants.HOUR,
                 });
             }
+            // Add Solaceon Ruins
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 43);
         },
     };
 
