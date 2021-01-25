@@ -29,6 +29,7 @@ export default class SaveSelector {
                 saveData.profile?.name,
                 saveData.profile?.trainer,
                 saveData.profile?.pokemon ?? saveData.party.caughtPokemon[0]?.id,
+                saveData.profile?.pokemonShiny,
                 saveData.profile?.background,
                 saveData.profile?.textColor,
                 saveData.badgeCase.filter((b: boolean) => b).length,

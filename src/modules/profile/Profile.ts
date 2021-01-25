@@ -15,6 +15,7 @@ export default class Profile implements Saveable {
     public name: KnockoutObservable<string>;
     public trainer: KnockoutObservable<number>;
     public pokemon: KnockoutObservable<number>;
+    public pokemonShiny: KnockoutObservable<boolean>;
     public background: KnockoutObservable<number>;
     public textColor: KnockoutObservable<string>;
 
@@ -28,6 +29,7 @@ export default class Profile implements Saveable {
         this.name = ko.observable(name);
         this.trainer = ko.observable(trainer).extend({ numeric: 0 });
         this.pokemon = ko.observable(pokemon).extend({ numeric: 2 });
+        this.pokemonShiny = ko.observable(false).extend({ boolean: null });
         this.background = ko.observable(background).extend({ numeric: 0 });
         this.textColor = ko.observable(textColor);
     }
@@ -36,6 +38,7 @@ export default class Profile implements Saveable {
         name = 'Trainer',
         trainer = Math.floor(Math.random() * Profile.MAX_TRAINER),
         pokemon = Math.floor(Math.random() * 151) + 1,
+        pokemonShiny = false,
         background = Math.floor(Math.random() * Profile.MAX_BACKGROUND),
         textColor = 'whitesmoke',
         badges = 0,
@@ -69,7 +72,7 @@ export default class Profile implements Saveable {
                             </tr>
                         </tbody>
                     </table>
-                    <img class="pokemon-0" src="assets/images/pokemon/${pokemon}.png"/>
+                    <img class="pokemon-0" src="assets/images/${pokemonShiny ? 'shiny' : ''}pokemon/${pokemon}.png"/>
                     <small class="version">v${version}</small>
                     <div class="challenge-badges">${Object.entries(challenges).filter(([, v]) => v).map(([c]) => `<img class="m-1" width="24px" src="${challengeRibbonsPath}${c}.png" data-toggle="tooltip" data-placement="top" title="${GameConstants.camelCaseToString(c)}"/>`).join('')}</div>
                 </div>
@@ -82,7 +85,14 @@ export default class Profile implements Saveable {
         // Load trainer card preview
         this.name.subscribe(() => this.updatePreview());
         this.trainer.subscribe(() => this.updatePreview());
-        this.pokemon.subscribe(() => this.updatePreview());
+        this.pokemon.subscribe((value: number) => {
+            // @ts-ignore
+            // eslint-disable-next-line no-undef
+            const shiny = App.game.party.alreadyCaughtPokemon(value, true);
+            this.pokemonShiny(shiny);
+            // Update preview after checking for shiny
+            this.updatePreview();
+        });
         this.background.subscribe(() => this.updatePreview());
         this.textColor.subscribe(() => this.updatePreview());
         this.updatePreview();
@@ -93,6 +103,7 @@ export default class Profile implements Saveable {
             this.name(),
             this.trainer(),
             this.pokemon(),
+            this.pokemonShiny(),
             this.background(),
             this.textColor(),
             // @ts-ignore
@@ -103,7 +114,7 @@ export default class Profile implements Saveable {
             App.game.party.caughtPokemon.length,
             // @ts-ignore
             // eslint-disable-next-line no-undef
-            App.game.statistics.secondsPlayed,
+            App.game.statistics.secondsPlayed(),
             // @ts-ignore
             // eslint-disable-next-line no-undef
             App.game.update.version,
@@ -121,6 +132,7 @@ export default class Profile implements Saveable {
         if (json.name) this.name(json.name);
         if (json.trainer !== undefined) this.trainer(json.trainer);
         if (json.pokemon !== undefined) this.pokemon(json.pokemon);
+        if (json.pokemonShiny !== undefined) this.pokemonShiny(json.pokemonShiny);
         if (json.background !== undefined) this.background(json.background);
         if (json.textColor) this.textColor(json.textColor);
     }
@@ -130,6 +142,7 @@ export default class Profile implements Saveable {
             name: this.name(),
             trainer: this.trainer(),
             pokemon: this.pokemon(),
+            pokemonShiny: this.pokemonShiny(),
             background: this.background(),
             textColor: this.textColor(),
         };
