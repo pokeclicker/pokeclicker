@@ -13,6 +13,8 @@ export default class SaveSelector {
             const key = Math.random().toString(36).substring(7);
             container.innerHTML += `<div class="col-12"></div><a href="#" class="btn btn-primary col-4" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">New Save</a>`;
         }
+
+        $('[data-toggle="tooltip"]').tooltip();
     }
 
     static getTrainerCard(key: string): string {
@@ -29,6 +31,7 @@ export default class SaveSelector {
                 saveData.party.caughtPokemon.length,
                 saveData.statistics.secondsPlayed,
                 saveData.update.version,
+                saveData.challenges?.list,
                 key,
             );
         } catch (e) {

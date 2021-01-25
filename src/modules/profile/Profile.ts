@@ -42,8 +42,10 @@ export default class Profile implements Saveable {
         pokedex = 0,
         seconds = 0,
         version = '0.0.0',
+        challenges = {},
         key?: string,
     ): string {
+        const challengeRibbonsPath = 'assets/images/challenges/';
         return `
         <div class="mb-3 ${key === undefined ? 'p-2 col-12' : 'col-lg-4 col-md-6 col-sm-12 xol-xs-12'}">
             <div class="trainer-card clickable trainer-bg-${background} card font-weight-bold"
@@ -65,10 +67,11 @@ export default class Profile implements Saveable {
                                 <td>Time:</td>
                                 <td class="text-right">${GameConstants.formatTimeFullLetters(seconds)}</td>
                             </tr>
-                        <tbody>
+                        </tbody>
                     </table>
                     <img class="pokemon-0" src="assets/images/pokemon/${pokemon}.png"/>
                     <small class="version">v${version}</small>
+                    <div class="challenge-badges">${Object.keys(challenges).map((c) => `<img class="m-1" width="24px" src="${challengeRibbonsPath}${c}.png" data-toggle="tooltip" data-placement="top" title="${GameConstants.camelCaseToString(c)}"/>`).join('')}</div>
                 </div>
             </div>
         </div>
@@ -104,6 +107,9 @@ export default class Profile implements Saveable {
             // @ts-ignore
             // eslint-disable-next-line no-undef
             App.game.update.version,
+            // @ts-ignore
+            // eslint-disable-next-line no-undef
+            App.game.challenges.list,
         );
     }
 
