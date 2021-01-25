@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="2020.07.21" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="11">
+<map version="1.4" tiledversion="2020.10.30" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="11">
  <editorsettings>
   <export target="Kanto.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" source="tiles_FRLG.tsx"/>
  <tileset firstgid="1317" source="tiles_Advanced.tsx"/>
- <tileset firstgid="9301" source="pokemontower.tsx"/>
- <tileset firstgid="9337" source="tiles_FRLG_buildings.tsx"/>
+ <tileset firstgid="9301" source="tiles_FRLG_buildings.tsx"/>
+ <tileset firstgid="13270" source="tiles_custom.tsx"/>
  <layer id="1" name="Water Dark" width="100" height="60" locked="1" tintcolor="#c8c8c8">
   <data encoding="base64" compression="zstd">
    KLUv/WDAXGUAACBcAQAAAQC53bsjAg==
@@ -64,7 +64,7 @@
  </layer>
  <layer id="5" name="Dungeons" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXFUJABLNJChgVwEFEN97b8NgtU0KiaYtTb4OkSCpMdoy/vkHPDDFqeLudodSwE49ng/ie/gcvobrfJwv4UP4DgpOBieCU6rZaLaZTWaLGRA4BahsKRvKNtpEE8DmRLFNbBJbxOYxhm1hU9g6Gwfm+rheLpcWlmtlJLpOTK6Rq+QiEQm5QDw6Lo4QKJRxbVwaH4yLC7QsKq7PATeo4TEZySixkgfggkPEjgERTBIcI/z/J4IIJZGpMQky8k3amhamhQIvJSiT8BdNk5JM+OOei5O9jJphCmifNAs42X4m4Mi7TSfc1fB1tcw1t37GWANO5oIaY/nGlwDJ1IuN4MrQL3StGlVymERPea+2svbrwge/dU3D/plF4RyEfpCWHWnO79MkRSPUw+Jh0FVVigc=
+   KLUv/WDAXH0JAMJMJCpgD6AA7A//w25hXfSEk19pY4ix9GdLUFP84b+XtSEvJ/iBKVNUwk36vwPPi+G18FJ4JSznNfPJfDEHK4SVwUrBfC+fy9fysRQQrAYuvunbfNJnUTmaFcT38Dl8Dd9zAl/AB/A538q2salsKSgnm0kJyTYisn1sIRuIR8fGoZGxYUzRVLFtNgmimNiiJhGxQQc5qOExGVFxItMB0IKDEDsGESAEJSI0Rvj/T4SEQUlkagwJMvJN3hpGH7QKs9hBYUtslEn5r6RJ8CZA4zAXvcetzTAltE+aAJykvBhw5G7RaXTQYPSjgGtuXYgBBThZFXiM5Qq3A9NSL4iCK0/XGEo1UP1hMpryXrl97XeFD1XrvIb9TkPC+R76GV67NOeaadK729Nj58ueq6oBDw==
   </data>
  </layer>
  <layer id="13" name="Towns" width="100" height="60" locked="1">
@@ -79,7 +79,7 @@
  </layer>
  <layer id="6" name="Other" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXLUIAIaQLzMgR4EgAMNhQ+DhsEmAxHQO+qQkSyf8AAzAtKqqqnVmVlVV9UxSBEGKegnBf1A4NKgrxDscAB4AJgATeSEg7+N5vI7jeBtP42XEeOkXJy7xiApPOMIBV/NoZp7Mi3kwL8/llV4Ly1t5Ki8F5Z08k1dC8kYOAyYJIAV4sHKwakAqYrBasFKQYIVgdaAysCqwIrDzdF7Ow7l5NgMWTxVPFABeRy8jiKeHJwei19BLaGp4YnhaCHoBvX4un1fPiychqGACEkGYaoIHsAO7AxHMEGwR/n+OYAmMYB62AS0YKqhUpJqyNrkJTl0i6fqkcVSYQLdAMQJlwskrKNyTAxaQAAMUYAEGeAFOin6gZwcxKMOyqSME
+   KLUv/WDAXLUIAFZQLi4gQQEKH3yVVjArJiaLSaCyclWfL5UiIAIioExBEDEEwSfLFewqPWXglvQn/0/qHQAhACUAh/PdzHwyX8wH814+l6/lY6nxjWesOMUnlp5whAPN4FZwWwQ3dRu4TU3gNuATgPQdfUZfUdAH9P18PjpfzgEZx8qTypQSYAVglTSVEK2GVkI9K57VTmWzqlnRMNwWbgq30sEBGK+LlwXK7GRmIvGKeEGQzEZmIuvh5fBqCJmBzD4yj1nHI6BgAhJRmGrhApBDuwMt2EOlaimVqqWmoG6yFEGoKBEf7pNU4vMuB6QanHc5IKkSTqoieBU9gQ+gGqA6QCov7qBfvAJQDbBqwKgATqrSj/pBNahqsKrL1pcQ
   </data>
  </layer>
  <layer id="15" name="Decoration" width="100" height="60">
