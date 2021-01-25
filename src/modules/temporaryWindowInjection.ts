@@ -26,6 +26,7 @@ import EggType from './breeding/EggType';
 import Multiplier from './multiplier/Multiplier';
 import MultiplierType from './multiplier/MultiplierType';
 import SpecialEvent from './specialEvents/SpecialEvent';
+import Challenges from './challenges/Challenges';
 
 Object.assign(<any>window, {
     GameConstants,
@@ -56,4 +57,5 @@ Object.assign(<any>window, {
     Multiplier,
     MultiplierType,
     SpecialEvent,
+    Challenges,
 });

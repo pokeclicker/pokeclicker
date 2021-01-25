@@ -54,6 +54,10 @@ class Gym {
         // Run the first time reward function
         this.rewardFunction();
     }
+
+    get imagePath(): string {
+        return `assets/images/gymLeaders/${GymBattle.gym.leaderName}.png`;
+    }
 }
 
 // Kanto Gyms

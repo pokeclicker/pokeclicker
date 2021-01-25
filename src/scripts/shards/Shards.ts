@@ -67,6 +67,9 @@ class Shards implements Feature {
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
     ): boolean {
+        if (App.game.challenges.list.disableShards.active()) {
+            return false;
+        }
         const lessThanMax = !this.hasMaxUpgrade(typeNum, effectNum);
         const hasEnoughShards = this.shardWallet[typeNum]() >= this.getShardUpgradeCost(typeNum, effectNum);
         return lessThanMax && hasEnoughShards;

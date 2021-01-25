@@ -83,6 +83,7 @@ class Mine {
         if (Mine.alreadyHasRewardId(reward.id)) {
             return false;
         }
+        this.rotateReward(reward);
         if (y + reward.space.length >= App.game.underground.getSizeY() || x + reward.space[0].length >= Underground.sizeX) {
             return false;
         }
@@ -112,13 +113,9 @@ class Mine {
     private static addReward(x: number, y: number, reward: UndergroundItem) {
         for (let i = 0; i < reward.space.length; i++) {
             for (let j = 0; j < reward.space[i].length; j++) {
-                if (reward.space[i][j] !== 0) {
+                if (reward.space[i][j].value != 0) {
                     Mine.rewardGrid[i + y][j + x] = {
-                        sizeX: reward.space[i].length,
-                        sizeY: reward.space.length,
-                        x: j,
-                        y: i,
-                        value: reward.space[i][j] ? reward.id : 0,
+                        ...reward.space[i][j],
                         revealed: 0,
                     };
                 }
@@ -126,6 +123,34 @@ class Mine {
         }
         GameHelper.incrementObservable(Mine.itemsBuried);
         Mine.rewardNumbers.push(reward.id);
+    }
+
+    private static rotateReward(reward): UndergroundItem {
+        let rotations = Math.floor(Math.random() * 4);
+
+        while (rotations-- > 0) {
+            reward.space = reward.space[0].map((val, index) => reward.space.map(row => row[index]).reverse());
+        }
+
+        const currentRotation = this.calculateRotation(reward);
+
+        reward.space = reward.space.map(r => r.map(v => {
+            v.rotations = currentRotation;
+            return v;
+        }));
+
+        return reward;
+    }
+
+    private static calculateRotation(reward): number {
+        let indexX = 0;
+
+        const indexY = reward.space.findIndex(y => {
+            indexX = y.findIndex(x => !x.x && !x.y);
+            return indexX >= 0;
+        });
+
+        return (indexX ? 1 : 0) + (indexY ? 2 : 0);
     }
 
     public static survey() {
@@ -231,9 +256,9 @@ class Mine {
     }
 
     private static bomb() {
-        const tiles = App.game.underground.getBombEfficiency();
+        let tiles = App.game.underground.getBombEfficiency();
         if (App.game.underground.energy >= Underground.BOMB_ENERGY) {
-            for (let i = 1; i < tiles; i++) {
+            while (tiles-- > 0) {
                 const x = GameConstants.randomIntBetween(0, App.game.underground.getSizeY() - 1);
                 const y = GameConstants.randomIntBetween(0, Underground.sizeX - 1);
                 this.breakTile(x, y, 2);
@@ -266,7 +291,7 @@ class Mine {
         if (newlayer == 0 && reward != 0 && reward.revealed != 1) {
             reward.revealed = 1;
             const image = Underground.getMineItemById(reward.value).undergroundImage;
-            $(`div[data-i=${x}][data-j=${y}]`).html(`<div class="mineReward size-${reward.sizeX}-${reward.sizeY} pos-${reward.x}-${reward.y}" style="background-image: url('${image}');"></div>`);
+            $(`div[data-i=${x}][data-j=${y}]`).html(`<div class="mineReward size-${reward.sizeX}-${reward.sizeY} pos-${reward.x}-${reward.y} rotations-${reward.rotations}" style="background-image: url('${image}');"></div>`);
             Mine.checkItemsRevealed();
         }
     }
