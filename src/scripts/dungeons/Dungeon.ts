@@ -1171,7 +1171,29 @@ dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
     106500, 20, 100);
 
 dungeonList['Floccesy Ranch'] = new Dungeon('Floccesy Ranch',
-    ['Psyduck', 'Mareep', 'Azurill', 'Patrat', 'Lillipup', 'Pidove'],
+    [
+        {pokemon: 'Psyduck', options: { weight: 2.67 }},
+        {pokemon: 'Mareep', options: { weight: 2.67 }},
+        {pokemon: 'Azurill', options: { weight: 2.67 }},
+        {pokemon: 'Patrat', options: { weight: 2.67 }},
+        {pokemon: 'Lillipup', options: { weight: 2.67 }},
+        {pokemon: 'Pidove', options: { weight: 2.67 }},
+        new DungeonTrainer('Lass',
+            [
+                new GymPokemon('Purrloin', 126500, 6),
+                new GymPokemon('Sewaddle', 126500, 6),
+            ], 1, { weight: 1 }, 'Molly'),
+        new DungeonTrainer('Janitor',
+            [
+                new GymPokemon('Lillipup', 126500, 6),
+                new GymPokemon('Mareep', 126500, 6),
+            ], 1, { weight: 1 }, 'Orville'),
+        new DungeonTrainer('Youngster',
+            [
+                new GymPokemon('Patrat', 126500, 6),
+                new GymPokemon('Psyduck', 126500, 6),
+            ], 1, { weight: 1 }, 'Kenny'),
+    ],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2503000,
     [new DungeonBossPokemon('Riolu', 13000000, 100)],
