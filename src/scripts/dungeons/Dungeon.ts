@@ -1609,7 +1609,7 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
     ],
     226500, 14, 100);
 
-dungeonList['Plasma Assault'] = new Dungeon('Plasma Assault',
+dungeonList['Team Plasma Assault'] = new Dungeon('Team Plasma Assault',
     [
         new DungeonTrainer('Team Plasma Grunt',
             [
@@ -1640,7 +1640,7 @@ dungeonList['Plasma Assault'] = new Dungeon('Plasma Assault',
             [
                 new GymPokemon('Cryogonal', 27000000, 46),
                 new GymPokemon('Cryogonal', 27000000, 46),
-                new GymPokemon('Weavile', 27000000, 46),
+                new GymPokemon('Weavile', 28000000, 48),
             ], 1, { weight: 1 }, 'Zinzolin', '(zinzolin)'),
     ],
     241500, 20, 100);
@@ -1692,6 +1692,84 @@ dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
         new DungeonBossPokemon('Crustle', 28000000, 100),
     ],
     246500, 21, 100);
+
+dungeonList['Plasma Frigate'] = new Dungeon('Plasma Frigate',
+    [
+        new DungeonTrainer('Team Plasma Grunt',
+            [
+                new GymPokemon('Watchog', 257500, 46),
+                new GymPokemon('Garbodor', 257500, 46),
+            ], 1, { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Plasma Grunt',
+            [
+                new GymPokemon('Golbat', 257500, 46),
+                new GymPokemon('Drapion', 257500, 46),
+            ], 1, { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Plasma Grunt',
+            [
+                new GymPokemon('Seviper', 257500, 46),
+                new GymPokemon('Garbodor', 257500, 46),
+            ], 1, { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Team Plasma Grunt',
+            [new GymPokemon('Krookodile', 257500, 47)],
+            1, { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Plasma Grunt',
+            [new GymPokemon('Drapion', 257500, 47)],
+            1, { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Team Plasma Grunt',
+            [new GymPokemon('Garbodor', 257500, 47)],
+            1, { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Plasma Grunt',
+            [
+                new GymPokemon('Whirlipede', 257500, 46),
+                new GymPokemon('Watchog', 257500, 46),
+            ], 1, { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Plasma Grunt',
+            [
+                new GymPokemon('Pawniard', 257500, 45),
+                new GymPokemon('Pawniard', 257500, 45),
+                new GymPokemon('Pawniard', 257500, 45),
+            ], 1, { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Team Plasma Grunt',
+            [
+                new GymPokemon('Scraggy', 257500, 46),
+                new GymPokemon('Liepard', 257500, 46),
+            ], 1, { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Team Plasma Grunt',
+            [new GymPokemon('Weezing', 257500, 47)],
+            1, { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Plasma Grunt',
+            [
+                new GymPokemon('Krokorok', 257500, 46),
+                new GymPokemon('Raticate', 257500, 46),
+            ], 1, { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Plasma Grunt',
+            [
+                new GymPokemon('Deino', 257500, 45),
+                new GymPokemon('Deino', 257500, 45),
+                new GymPokemon('Sneasel', 257500, 45),
+            ], 1, { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Team Plasma Grunt',
+            [
+                new GymPokemon('Scraggy', 257500, 45),
+                new GymPokemon('Krokorok', 257500, 45),
+                new GymPokemon('Golbat', 257500, 45),
+            ], 1, { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Plasma Grunt',
+            [new GymPokemon('Scrafty', 257500, 47)],
+            1, { weight: 1 }, undefined, '(female)'),
+    ],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    4603000,
+    [
+        new DungeonTrainer('Team Plasma',
+            [
+                new GymPokemon('Cryogonal', 28000000, 48),
+                new GymPokemon('Cryogonal', 28000000, 48),
+                new GymPokemon('Weavile', 29000000, 50),
+            ], 1, { weight: 1 }, 'Zinzolin', '(zinzolin)'),
+    ],
+    257500, 20, 100);
 
 dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
     [
@@ -1821,11 +1899,11 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
         new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)}),
         new DungeonTrainer('Team Plasma',
             [
-                new GymPokemon('Cofagrigus', 30000000, 50),
-                new GymPokemon('Seismitoad', 30000000, 50),
-                new GymPokemon('Eelektross', 30000000, 50),
-                new GymPokemon('Drapion', 30000000, 50),
-                new GymPokemon('Toxicroak', 30000000, 50),
+                new GymPokemon('Cofagrigus', 28000000, 50),
+                new GymPokemon('Seismitoad', 28000000, 50),
+                new GymPokemon('Eelektross', 28000000, 50),
+                new GymPokemon('Drapion', 28000000, 50),
+                new GymPokemon('Toxicroak', 28000000, 50),
                 new GymPokemon('Hydreigon', 30000000, 52),
             ], 1, { weight: 1 }, 'Ghetsis', '(ghetsis)'),
     ],

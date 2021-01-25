@@ -925,8 +925,9 @@ export const UnovaDungeons = [
     'Mistralton Cave',
     'Celestial Tower',
     'Reversal Mountain',
-    'Plasma Assault',
+    'Team Plasma Assault',
     'Seaside Cave',
+    'Plasma Frigate',
     'Giant Chasm',
     'Abundant Shrine',
     'Cave of Being', // Contains gen 4 trio only

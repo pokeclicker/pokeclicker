@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="2020.10.30" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="2">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="2">
+ <editorsettings>
+  <export target="Unova.tmx" format="tmx"/>
+ </editorsettings>
  <tileset firstgid="1" source="tiles_FRLG.tsx"/>
  <tileset firstgid="1317" source="tiles_Advanced.tsx"/>
  <layer id="1" name="Water Dark" width="100" height="60" tintcolor="#c8c8c8">
@@ -44,12 +47,12 @@
  </layer>
  <layer id="7" name="Dungeons" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXBUIALQDAABwDwAAcXIPAHgPAAB5eoAPAACBDwAAfA8AAIJ8bQ8AAG4PAABvdQ8AAHYPAAB3fQ8AAH4PAAB/gXxKqKAHQZoA4IIJIJiZoQcSwBBkKAKTQCN4iuAZgp9lSMireoEsGxX7PLgXUfyKy6/4GB0wTZVcz1VGr5FY308dBzEvnOB6l7r0XVHfwj5Rdcreu5RNsB7PgtS3Fafbt4FOub1KngZAfWI1TJcRFmsaF74LZZG7KOYWtXPXN/q/Om7dpXszBRwjJ8kIeARLEgGPQPF4UfXUA4LuJWMfJUDfH37fsKcxQCvKEU0Ojw7D5g4wR10KCGPAyXF7ofsh2+99hKT6AQ==
+   KLUv/WDAXK0IAIIFEBiADYIARBGHk0ZPidHAv7U8DMMwnPUug3mncazGYiDWYRkEK7AAmYd5l1le5VE2eZIXOZB1VrMeC8VKVIGwBgdPqIAHBHIU4IIJIJiZrQMSwBBkIAKVQCN4iOAZgh9lSEaPeoFwNhaLPOApqvgUl7/4GPlgulByPZNl9Br5+h7Wcci4WBPE3qWWviuor1ufqDDl9C7FJ4oaz9TraxOnu7Dlpmy9moQNNn2CaphuIyynaVy4FTqbOUVRLlGbu96i/5vGrbt57wngLXKyMMAj8HoBHDDEf4HBTKYchLEc0d3SeSSbhT1G5pYZ9uHifX/geQM7jQE+Ts6oc090GD13gNGoIwDBBZzk2ha6H3L8sI9wUD8=
   </data>
  </layer>
  <layer id="12" name="Decor" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXN0CALQCAABwDwAAcXIPAHgPAAB5eoAPAACBDwAAfA8AAIJueXTNBgAAzgYAAM8GAA4g4IKWcwyZmOQDQahez8gH4KR6XwOReoyk8hU4i6TqA06q2N3nB+XWfZPdhzY=
+   KLUv/WDAXCUCAAQCAABwDwAAcW4PAHgPAAB5gA8AAIF0zQYAAM4GAADPBgAKILCC3R2ZmOQDQahez84H4CR1z9U+FR5rP6hxrj4PfMEC
   </data>
  </layer>
 </map>
