@@ -1335,13 +1335,39 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
     166500, 25, 100);
 
 dungeonList['Lostlorn Forest'] = new Dungeon('Lostlorn Forest',
-    ['Roselia', 'Combee', 'Sewaddle', 'Venipede', 'Cottonee', 'Petilil'],
+    [
+        {pokemon: 'Roselia', options: { weight: 2.67 }},
+        {pokemon: 'Combee', options: { weight: 2.67 }},
+        {pokemon: 'Sewaddle', options: { weight: 2.67 }},
+        {pokemon: 'Venipede', options: { weight: 2.67 }},
+        {pokemon: 'Cottonee', options: { weight: 2.67 }},
+        {pokemon: 'Petilil', options: { weight: 2.67 }},
+        new DungeonTrainer('Pokémon Breeder',
+            [
+                new GymPokemon('Tranquill', 176500, 24),
+                new GymPokemon('Liepard', 176500, 24),
+            ], 1, { weight: 1 }, 'Galen', '(male)'),
+        new DungeonTrainer('Pokémon Ranger',
+            [new GymPokemon('Trubbish', 176500, 26)],
+            1, { weight: 1 }, 'Serenity', '(female)'),
+        new DungeonTrainer('Pokémon Ranger',
+            [new GymPokemon('Emolga', 176500, 26)],
+            1, { weight: 1 }, 'Serenity', '(male)'),
+        new DungeonTrainer('Veteran',
+            [
+                new GymPokemon('Larvesta', 176500, 51),
+                new GymPokemon('Pinsir', 176500, 51),
+                new GymPokemon('Heracross', 176500, 51),
+                new GymPokemon('Leavanny', 176500, 51),
+                new GymPokemon('Scolipede', 176500, 51),
+            ], 1, { weight: 1 }, 'Murphy', '(male)'),
+    ],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     3203000,
     [
-        new DungeonBossPokemon('Heracross', 21000000, 100),
+        new DungeonBossPokemon('Heracross', 19000000, 100),
         new DungeonBossPokemon('Pinsir', 19000000, 100),
-        new DungeonBossPokemon('Emolga', 19000000, 100),
+        new DungeonBossPokemon('Emolga', 21000000, 100),
     ],
     176500, 16, 100);
 
