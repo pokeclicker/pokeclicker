@@ -14,6 +14,16 @@ class ItemHandler {
             });
             return false;
         }
+
+        if (ItemList[name] instanceof BattleItem && App.game.challenges.list.disableBattleItems.active()) {
+            Notifier.notify({
+                title: 'Challenge Mode',
+                message: 'Battle Items are disabled',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+
         // Only allow the player to use the amount they have maximum
         this.amountToUse = Math.min(player.itemList[name](), amount);
 

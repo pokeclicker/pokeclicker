@@ -12,6 +12,8 @@ enum PokemonLocationType {
     Shop,
     Fossil,
     Safari,
+    BattleFrontier,
+    Wandering,
 }
 
 class PokemonHelper {
@@ -108,16 +110,28 @@ class PokemonHelper {
         }
     }
 
+    /*
+    PRETTY MUCH ONLY USED BY THE BOT BELOW
+    */
+
     public static getPokemonRegionRoutes(pokemonName: PokemonNameType) {
         const regionRoutes = {};
         Routes.regionRoutes.forEach(routeData => {
             const region = routeData.region;
-            Object.entries(routeData.pokemon).forEach(([pokemon, encounterType]) => {
-                if (Object.values(encounterType).flat().includes(pokemonName)) {
+            Object.entries(routeData.pokemon).forEach(([encounterType, pokemon]) => {
+                if (Object.values(pokemon).flat().includes(pokemonName)) {
                     if (!regionRoutes[region]) {
                         regionRoutes[region] = [];
                     }
-                    regionRoutes[region].push(routeData.number);
+                    regionRoutes[region].push({ route: routeData.number });
+                }
+            });
+            routeData.pokemon.special?.forEach(special => {
+                if (special.pokemon.includes(pokemonName)) {
+                    if (!regionRoutes[region]) {
+                        regionRoutes[region] = [];
+                    }
+                    regionRoutes[region].push({ route: routeData.number, requirements: special.req.hint() });
                 }
             });
         });
@@ -139,11 +153,11 @@ class PokemonHelper {
         const dungeons = [];
         Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
             // Dungeon Boss
-            const boss = dungeon.bossList.find(boss => boss.name == pokemonName);
+            const boss = dungeon.availableBosses(false, true).find(boss => boss.name == pokemonName);
             if (boss) {
                 const data = {
                     dungeon: dungeonName,
-                    requirements: boss.requirement?.hint(),
+                    requirements: boss.options?.requirement?.hint(),
                 };
                 dungeons.push(data);
             }
@@ -164,8 +178,8 @@ class PokemonHelper {
     public static getPokemonShops(pokemonName: PokemonNameType): Array<string> {
         const shops = [];
         Object.entries(TownList).forEach(([townName, town]) => {
-            if (town.shop() && town.shop().items()) {
-                const hasPokemon = town.shop().items().find(item => item.name() == pokemonName);
+            if (town.shop && town.shop.items) {
+                const hasPokemon = town.shop.items.find(item => item.name == pokemonName);
                 if (hasPokemon) {
                     shops.push(townName);
                 }
@@ -235,6 +249,29 @@ class PokemonHelper {
         return (evolutionPokemon as PokemonListData)?.evolutions?.find(e => e.getEvolvedPokemon() == pokemonName);
     }
 
+    public static getPokemonBattleFrontier(pokemonName: PokemonNameType): Array<string> {
+        const stages = [];
+        BattleFrontierMilestones.milestoneRewards.filter(m => m instanceof BattleFrontierMilestonePokemon).forEach(milestone => {
+            if (milestone.pokemonName == pokemonName) {
+                stages.push(milestone.stage);
+            }
+        });
+        return stages;
+    }
+
+    public static getPokemonWandering(pokemonName: PokemonNameType): Array<string> {
+        const berries = [];
+        if (Berry.baseWander.includes(pokemonName)) {
+            return ['Always'];
+        }
+        App.game.farming.berryData.forEach((berry) => {
+            if (berry.wander.includes(pokemonName)) {
+                berries.push(BerryType[berry.type]);
+            }
+        });
+        return berries;
+    }
+
     public static getPokemonLocations = (pokemonName: PokemonNameType) => {
         const encounterTypes = {};
         // Routes
@@ -286,6 +323,18 @@ class PokemonHelper {
         const evolutions = PokemonHelper.getPokemonPrevolution(pokemonName);
         if (evolutions.length) {
             encounterTypes[PokemonLocationType.Evolution] = evolutions;
+        }
+
+        // Battle Frontier
+        const battleFrontier = PokemonHelper.getPokemonBattleFrontier(pokemonName);
+        if (battleFrontier.length) {
+            encounterTypes[PokemonLocationType.BattleFrontier] = battleFrontier;
+        }
+
+        // Wandering
+        const wandering = PokemonHelper.getPokemonWandering(pokemonName);
+        if (wandering.length) {
+            encounterTypes[PokemonLocationType.Wandering] = wandering;
         }
 
         // Return the list of items

@@ -2,14 +2,6 @@
 /// <reference path="../GameConstants.d.ts" />
 
 class MapHelper {
-    public static returnToMap() {
-        if (player.currentTown()) {
-            return this.moveToTown(player.currentTown());
-        }
-        if (player.route()) {
-            return this.moveToRoute(player.route(), player.region);
-        }
-    }
 
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
         if (isNaN(route)) {
@@ -22,7 +14,6 @@ class MapHelper {
         if (this.accessToRoute(route, region)) {
             player.route(route);
             player.region = region;
-            player.currentTown('');
             if (genNewEnemy) {
                 Battle.generateNewEnemy();
             }
@@ -64,7 +55,7 @@ class MapHelper {
     };
 
     public static getCurrentEnvironment(): GameConstants.Environment {
-        const area = player.route() || player.town()?.name() || undefined;
+        const area = player.route() || player.town()?.name || undefined;
 
         const [env] = Object.entries(GameConstants.Environments).find(
             ([, regions]) => Object.values(regions).find(
@@ -103,11 +94,7 @@ class MapHelper {
     }
 
     public static calculateTownCssClass(town: string): string {
-        // TODO(@Isha) this is very weird, refactor this.
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem[town])) {
-            return 'city unlockedTown';
-        }
-        if (player.currentTown() == town) {
+        if (!player.route() && player.town().name == town) {
             return 'city currentTown';
         }
         if (MapHelper.accessToTown(town)) {
@@ -146,11 +133,7 @@ class MapHelper {
             App.game.gameState = GameConstants.GameState.idle;
             player.route(0);
             const town = TownList[townName];
-            if (town instanceof DungeonTown) {
-                town.dungeon().calculateAllPokemonNames();
-            }
             player.town(town);
-            player.currentTown(townName);
             Battle.enemyPokemon(null);
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;

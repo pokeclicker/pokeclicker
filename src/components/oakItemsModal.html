@@ -7,11 +7,14 @@
                    <span aria-hidden="true">&times;</span>
                </button>
            </div>
+           <div data-bind="visible: App.game.challenges.list.disableOakItems.active()" class="modal-body bg-danger my-0 py-0">
+              Oak Items are disabled.
+           </div>
            <div class="modal-body py-1">
               <ul class="row justify-content-center p-0 my-0"
                 data-bind="foreach: App.game.oakItems.itemList"
                 style="list-style-type: none;">
-                  <!-- ko if: $index() % 5 == 0 -->
+                  <!-- ko if: $index() % 4 == 0 -->
                   <div class="w-100"></div>
                   <!-- /ko -->
                   <li class="col p-1">
@@ -76,12 +79,7 @@
                       Level: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].level"></span>
                     </td>
                     <td class="table-dark" style="width: 50%">
-                      <!-- ko if: OakItemController.inspectedItem === OakItems.OakItem.Magic_Ball -->
-                      Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].calculateBonusIfActive()"></span>%
-                      <!-- /ko -->
-                      <!-- ko ifnot: OakItemController.inspectedItem === OakItems.OakItem.Magic_Ball -->
-                      Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].calculateBonusIfActive()"></span>x
-                      <!-- /ko -->
+                      Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].bonusText"></span>
                     </td>
                   </tr>
                   <!-- /ko -->

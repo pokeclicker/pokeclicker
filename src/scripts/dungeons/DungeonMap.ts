@@ -11,14 +11,14 @@ class DungeonMap {
 
         // Move the boss if it spawns on the player.
         if (this.currentTile().type() == GameConstants.DungeonTile.boss) {
-            this.currentTile().type(GameConstants.DungeonTile.empty);
+            this.currentTile().type(GameConstants.DungeonTile.entrance);
             const newX = GameConstants.randomIntBetween(0, size - 2);
             const newY = GameConstants.randomIntBetween(0, size - 2);
             this.board()[newY][newX].type(GameConstants.DungeonTile.boss);
             this.board()[newY][newX].calculateCssClass();
         }
         this.currentTile().isVisible = true;
-        this.currentTile().type(GameConstants.DungeonTile.empty);
+        this.currentTile().type(GameConstants.DungeonTile.entrance);
         this.currentTile().hasPlayer = true;
         this.currentTile().calculateCssClass();
     }
@@ -112,15 +112,20 @@ class DungeonMap {
         // Fill mapList with required Tiles
         const mapList: DungeonTile[] = [];
 
+        // Boss
         mapList.push(new DungeonTile(GameConstants.DungeonTile.boss));
+
+        // Chests
         for (let i = 0; i < this.size; i++) {
             mapList.push(new DungeonTile(GameConstants.DungeonTile.chest));
         }
 
+        // Enemy Pokemon
         for (let i = 0; i < this.size * 2 + 3; i++) {
             mapList.push(new DungeonTile(GameConstants.DungeonTile.enemy));
         }
 
+        // Fill with empty tiles
         for (let i: number = mapList.length; i < this.size * this.size; i++) {
             mapList.push(new DungeonTile(GameConstants.DungeonTile.empty));
         }
