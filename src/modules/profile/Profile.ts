@@ -55,7 +55,7 @@ export default class Profile implements Saveable {
                 style="color: ${textColor}"
                 onclick="${key === undefined ? "Notifier.notify({ message: 'What a lovely profile!' });" : `Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();`}">
                 <div class="card-body">
-                    <h5 class="align-middle font-weight-bold"><img src="assets/images/profile/trainer-${trainer}.png"/> ${name}</h5>
+                    <h5 class="align-middle font-weight-bold"><img src="assets/images/profile/trainer-${trainer}.png"/> ${GameConstants.cleanHTMLString(name)}</h5>
                     <table class="table table-sm table-borderless col-8" style="color: ${textColor}">
                         <tbody>
                             <tr>

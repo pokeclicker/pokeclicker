@@ -53,7 +53,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <select name="breedingCategoryFilter" autocomplete="off" class="custom-select" onchange="BreedingController.filter.category(+this.value), Settings.setSettingByName(this.name, this.value)">
                                     <option value="-1">All</option>
                                     <!-- ko foreach: PokemonCategories.categories -->
-                                    <option style="color: whitesmoke" data-bind="attr: { value: $index, selected: Settings.getSetting('breedingCategoryFilter').value == $index() }, text: $data.name, style: { background: $data.color }">Category</option>
+                                    <option style="color: whitesmoke" data-bind="attr: { value: $index, selected: Settings.getSetting('breedingCategoryFilter').value == $index() }, text: GameConstants.cleanHTMLString($data.name), style: { background: $data.color }">Category</option>
                                     <!-- /ko -->
                                 </select>
                             </div>
@@ -125,7 +125,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <button data-toggle="dropdown" data-bind="class: `category-${$data.category + 1}`"></button>
                                     <div class="dropdown-menu p-0">
                                         <!-- ko foreach: PokemonCategories.categories -->
-                                        <a class="dropdown-item category" href="#" data-bind="text: $data.name, click: () => { $parent.category = $index() }">Category</a>
+                                        <a class="dropdown-item category" href="#" data-bind="text: GameConstants.cleanHTMLString($data.name), click: () => { $parent.category = $index() }">Category</a>
                                         <!-- /ko -->
                                         <a class="dropdown-item bg-dark py-1" href="#categoryModal" data-toggle="modal"><i>Edit</i></a>
                                     </div>

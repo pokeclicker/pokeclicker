@@ -251,6 +251,10 @@ export enum TypeEffectivenessValue {
     Very = 2,
 }
 
+export function cleanHTMLString(str: string): string {
+    return str.replace(/([|&;$%@"<>()+,])/g, (c: string) => `&#${c.charCodeAt(0)};`);
+}
+
 export function humanifyString(str: string): string {
     return str.replace(/[_-]+/g, ' ');
 }
