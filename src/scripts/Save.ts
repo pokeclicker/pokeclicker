@@ -65,8 +65,8 @@ class Save {
         }
     }
 
-    public static reset(): void {
-        const confirmDelete = prompt('Are you sure you want reset?\nIf so, type \'DELETE\'');
+    public static delete(): void {
+        const confirmDelete = prompt('Are you sure you want delete your save file?\n\nIf so, type \'DELETE\'');
 
         if (confirmDelete == 'DELETE') {
             localStorage.removeItem(`player${Save.key}`);

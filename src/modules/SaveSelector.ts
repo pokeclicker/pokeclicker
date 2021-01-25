@@ -13,7 +13,9 @@ export default class SaveSelector {
 
         if (saves.length < this.MAX_SAVES) {
             const key = Math.random().toString(36).substring(7);
-            container.innerHTML += `<div class="col-12"></div><a href="#" class="btn btn-primary col-4" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">New Save</a>`;
+            container.innerHTML += `<div class="col-12"></div>
+            <label class="btn btn-success col-md-4 col-xs-12 mx-1" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">New Save</label>
+            <label for="import-save" class="btn btn-warning col-md-4 col-xs-12 mx-1" onclick="Save.key = '${key}';">Import Save</label>`;
         }
 
         $('[data-toggle="tooltip"]').tooltip();
