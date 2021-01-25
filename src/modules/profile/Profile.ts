@@ -109,7 +109,7 @@ export default class Profile implements Saveable {
             App.game.update.version,
             // @ts-ignore
             // eslint-disable-next-line no-undef
-            App.game.challenges.list,
+            App.game.challenges.toJSON().list,
         );
     }
 
