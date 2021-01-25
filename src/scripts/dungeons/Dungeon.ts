@@ -2304,7 +2304,49 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
     ],
     356500, 3, 100);
 dungeonList['Dreamyard'] = new Dungeon('Dreamyard',
-    ['Raticate', 'Jigglypuff', 'Golbat', 'Watchog', 'Liepard', 'Munna'],
+    [
+        {pokemon: 'Raticate', options: { weight: 4.67 }},
+        {pokemon: 'Jigglypuff', options: { weight: 4.67 }},
+        {pokemon: 'Golbat', options: { weight: 4.67 }},
+        {pokemon: 'Watchog', options: { weight: 4.67 }},
+        {pokemon: 'Liepard', options: { weight: 4.67 }},
+        {pokemon: 'Munna', options: { weight: 4.67 }},
+        new DungeonTrainer('Psychic',
+            [
+                new GymPokemon('Hypno', 356500, 62),
+                new GymPokemon('Dusclops', 356500, 62),
+            ], 1, { weight: 1 }, 'Nandor', '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Gastly', 356500, 63),
+                new GymPokemon('Skuntank', 356500, 63),
+            ], 1, { weight: 1 }, 'Athena', '(female)'),
+        new DungeonTrainer('Psychic',
+            [
+                new GymPokemon('Chingling', 356500, 62),
+                new GymPokemon('Mr. Mime', 356500, 62),
+            ], 1, { weight: 1 }, 'Olesia', '(female)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Klang', 356500, 63),
+                new GymPokemon('Porygon', 356500, 63),
+            ], 1, { weight: 1 }, 'Franklin', '(male)'),
+        new DungeonTrainer('School Kid',
+            [
+                new GymPokemon('Shroomish', 356500, 63),
+                new GymPokemon('Tangrowth', 356500, 63),
+            ], 1, { weight: 1 }, 'William', '(male)'),
+        new DungeonTrainer('Youngster',
+            [
+                new GymPokemon('Slakoth', 356500, 63),
+                new GymPokemon('Slaking', 356500, 63),
+            ], 1, { weight: 1 }, 'Keita'),
+        new DungeonTrainer('School Kid',
+            [
+                new GymPokemon('Igglybuff', 356500, 63),
+                new GymPokemon('Licklicky', 356500, 63),
+            ], 1, { weight: 1 }, 'Rita', '(female)'),
+    ],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     5203000,
     [
