@@ -6,7 +6,7 @@ class Underground implements Feature {
 
     upgradeList: Array<Upgrade>;
     defaults: Record<string, any>;
-    private _energy: KnockoutObservable<number> = ko.observable(0);
+    private _energy: KnockoutObservable<number> = ko.observable(Underground.BASE_ENERGY_MAX);
 
     public static itemSelected;
     public static energyTick: KnockoutObservable<number> = ko.observable(60);
@@ -150,10 +150,10 @@ class Underground implements Feature {
     }
 
     private static mineSquare(amount: number, i: number, j: number): string {
-        if (Mine.rewardGrid[i][j] != 0 && Mine.grid[i][j]() === 0) {
+        if (Mine.rewardGrid[i][j] != 0 && Mine.grid[i][j]() == 0) {
             Mine.rewardGrid[i][j].revealed = 1;
             const image = Underground.getMineItemById(Mine.rewardGrid[i][j].value).undergroundImage;
-            return `<div data-bind='css: Underground.calculateCssClass(${i},${j})' data-i='${i}' data-j='${j}'><div class="mineReward size-${Mine.rewardGrid[i][j].sizeX}-${Mine.rewardGrid[i][j].sizeY} pos-${Mine.rewardGrid[i][j].x}-${Mine.rewardGrid[i][j].y}" style="background-image: url('${image}');"></div></div>`;
+            return `<div data-bind='css: Underground.calculateCssClass(${i},${j})' data-i='${i}' data-j='${j}'><div class="mineReward size-${Mine.rewardGrid[i][j].sizeX}-${Mine.rewardGrid[i][j].sizeY} pos-${Mine.rewardGrid[i][j].x}-${Mine.rewardGrid[i][j].y} rotations-${Mine.rewardGrid[i][j].rotations}" style="background-image: url('${image}');"></div></div>`;
         } else {
             return `<div data-bind='css: Underground.calculateCssClass(${i},${j})' data-i='${i}' data-j='${j}'></div>`;
         }

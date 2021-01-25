@@ -8,9 +8,7 @@ class DungeonRunner {
 
     public static fighting: KnockoutObservable<boolean> = ko.observable(false);
     public static map: DungeonMap;
-    public static pokemonDefeated: number;
     public static chestsOpened: number;
-    public static loot: string[];
     public static currentTileType;
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
     public static defeatedBoss: KnockoutObservable<boolean> = ko.observable(false);
@@ -33,9 +31,7 @@ class DungeonRunner {
 
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
         DungeonRunner.map = new DungeonMap(GameConstants.DUNGEON_SIZE + player.region);
-        DungeonRunner.pokemonDefeated = 0;
         DungeonRunner.chestsOpened = 0;
-        DungeonRunner.loot = [];
         DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
         });
@@ -55,6 +51,21 @@ class DungeonRunner {
         }
         this.timeLeft(this.timeLeft() - GameConstants.DUNGEON_TICK);
         this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.DUNGEON_TIME * 100));
+    }
+
+    /**
+     * Handles the click event in the dungeon view
+     */
+    public static handleClick() {
+        if (DungeonRunner.fighting() && !DungeonBattle.catching()) {
+            DungeonBattle.clickAttack();
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
+            DungeonRunner.dungeonLeave();
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
+            DungeonRunner.openChest();
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
+            DungeonRunner.startBossFight();
+        }
     }
 
     public static openChest() {
@@ -138,7 +149,7 @@ class DungeonRunner {
     })
 
     public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
-        const possiblePokemon: PokemonNameType[] = dungeon.allAvailablePokemonNames;
+        const possiblePokemon: PokemonNameType[] = dungeon.allPokemon;
         return RouteHelper.listCompleted(possiblePokemon, includeShiny);
     }
 

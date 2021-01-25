@@ -7,9 +7,6 @@ class PokeBlock extends Item {
         this.type = color;
     }
 
-    use() {
-    }
-
 }
 
 ItemList['PokeBlock_Black']  = new PokeBlock(GameConstants.PokeBlockColor.Black, Infinity);

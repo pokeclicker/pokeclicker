@@ -112,15 +112,20 @@ class DungeonMap {
         // Fill mapList with required Tiles
         const mapList: DungeonTile[] = [];
 
+        // Boss
         mapList.push(new DungeonTile(GameConstants.DungeonTile.boss));
+
+        // Chests
         for (let i = 0; i < this.size; i++) {
             mapList.push(new DungeonTile(GameConstants.DungeonTile.chest));
         }
 
+        // Enemy Pokemon
         for (let i = 0; i < this.size * 2 + 3; i++) {
             mapList.push(new DungeonTile(GameConstants.DungeonTile.enemy));
         }
 
+        // Fill with empty tiles
         for (let i: number = mapList.length; i < this.size * this.size; i++) {
             mapList.push(new DungeonTile(GameConstants.DungeonTile.empty));
         }

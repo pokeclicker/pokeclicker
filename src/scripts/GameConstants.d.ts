@@ -118,7 +118,6 @@ namespace GameConstants {
     declare const USE_OAK_ITEM_BASE_REWARD: number;
     declare const ACTIVE_QUEST_MULTIPLIER: number;
     declare const QUEST_CLICKS_PER_SECOND: number;
-    declare const QuestTypes: string[];
     declare const QUESTS_PER_SET: number;
     declare enum GameState {
         idle,

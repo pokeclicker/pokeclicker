@@ -59,7 +59,7 @@ class BattleFrontierBattle extends Battle {
     }
 
     public static generateNewEnemy() {
-        const enemy = pokemonMap.random(GameConstants.TotalPokemonsPerRegion[player.highestRegion()]);
+        const enemy = pokemonMap.randomRegion(player.highestRegion());
         // This needs to stay as none so the stage number isn't adjusted
         const health = PokemonFactory.routeHealth(BattleFrontierRunner.stage() + 10, GameConstants.Region.none);
         const level = Math.min(100, BattleFrontierRunner.stage());

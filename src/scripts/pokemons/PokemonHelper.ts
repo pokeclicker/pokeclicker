@@ -153,11 +153,11 @@ class PokemonHelper {
         const dungeons = [];
         Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
             // Dungeon Boss
-            const boss = dungeon.bossList.find(boss => boss.name == pokemonName);
+            const boss = dungeon.availableBosses(false, true).find(boss => boss.name == pokemonName);
             if (boss) {
                 const data = {
                     dungeon: dungeonName,
-                    requirements: boss.requirement?.hint(),
+                    requirements: boss.options?.requirement?.hint(),
                 };
                 dungeons.push(data);
             }
@@ -179,7 +179,7 @@ class PokemonHelper {
         const shops = [];
         Object.entries(TownList).forEach(([townName, town]) => {
             if (town.shop && town.shop.items) {
-                const hasPokemon = town.shop.items.find(item => item.name() == pokemonName);
+                const hasPokemon = town.shop.items.find(item => item.name == pokemonName);
                 if (hasPokemon) {
                     shops.push(townName);
                 }

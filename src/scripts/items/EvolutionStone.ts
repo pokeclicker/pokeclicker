@@ -4,7 +4,7 @@ class EvolutionStone extends CaughtIndicatingItem {
     type: GameConstants.StoneType;
 
     constructor(type: GameConstants.StoneType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, displayName?: string) {
-        super(GameConstants.StoneType[type], basePrice, currency, undefined, displayName);
+        super(GameConstants.StoneType[type], basePrice, currency, undefined, displayName, undefined, 'evolution');
         this.type = type;
     }
 
@@ -12,7 +12,7 @@ class EvolutionStone extends CaughtIndicatingItem {
         player.gainItem(GameConstants.StoneType[this.type], n);
     }
 
-    public use(pokemon?: PokemonNameType) {
+    public use(pokemon?: PokemonNameType): boolean {
         const partyPokemon: PartyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(pokemon).id);
         const shiny = partyPokemon.useStone(this.type);
         return shiny;
@@ -29,6 +29,7 @@ class EvolutionStone extends CaughtIndicatingItem {
             return Math.min(status, PartyController.getCaughtStatusByName(pokemonName));
         }, CaughtStatus.CaughtShiny);
     }
+
 }
 
 // TODO: Set prices for different kinds of stones
