@@ -81,15 +81,17 @@ export default class DynamicBackground {
         707, 714, 715, 738, 745, 746,
     ];
 
-    public static MAX_SPEED_STAT = 160;
-    public static MAX_SPEED = 5;
+    public static MIN_SPEED_STAT = 20;
+    public static MAX_SPEED_STAT = 180;
+    public static MAX_SPEED = 10;
 
     // Add a pokemon to the scene
     static addPokemon = (id) => {
         // @ts-ignore
         // eslint-disable-next-line no-undef
         const pokemonSpeed = pokemonMap[id].base.speed;
-        const moveSpeed = Math.min(4, Math.floor((pokemonSpeed / DynamicBackground.MAX_SPEED_STAT) * DynamicBackground.MAX_SPEED));
+        let moveSpeed = Math.floor(((pokemonSpeed - DynamicBackground.MIN_SPEED_STAT) / (DynamicBackground.MAX_SPEED_STAT - DynamicBackground.MIN_SPEED_STAT)) * DynamicBackground.MAX_SPEED);
+        moveSpeed = Math.min(DynamicBackground.MAX_SPEED, moveSpeed);
         const flying = DynamicBackground.flyingPokemon.includes(id);
         const shiny = !Math.floor(Math.random() * SHINY_CHANCE_BREEDING);
 
