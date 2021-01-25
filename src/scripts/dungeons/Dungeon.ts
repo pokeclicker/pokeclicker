@@ -1692,7 +1692,7 @@ dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
         new DungeonBossPokemon('Crustle', 28000000, 100),
     ],
     246500, 21, 100);
-    
+
 dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
     [
         {pokemon: 'Clefairy', options: { weight: 5.33 }},
