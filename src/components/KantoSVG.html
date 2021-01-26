@@ -544,4 +544,14 @@
         , databind: "click:function(){MapHelper.openShipModal()}, css:{ unlockedTown: player.highestRegion() >= 1}"
         })
      %>
+
+     <%- include('templates/mapOverlay',
+         { name: "SS-Anne"
+         , x: 50, y: 35
+         , width: 8, height: 3
+         , databind: "click:function(){MapHelper.openShipModal()}, css:{ unlockedTown: player.highestRegion() >= 1}"
+         , visible:  "player.highestRegion() >= 0"
+         , image: "/assets/images/ship.png"
+         })
+      %>
 </g>
