@@ -1874,7 +1874,7 @@ TownList['Pokéball Factory'] = new DungeonTown(
 TownList['Kalos Power Plant'] = new DungeonTown(
     'Kalos Power Plant',
     GameConstants.Region.kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 13)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 13), new GymBadgeRequirement(BadgeEnums.Plant)]
 );
 TownList['Lost Hotel'] = new DungeonTown(
     'Lost Hotel',

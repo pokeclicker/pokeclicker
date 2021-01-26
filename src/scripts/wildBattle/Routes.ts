@@ -1427,7 +1427,7 @@ Routes.add(new RegionRoute(
         land: ['Mightyena', 'Skorupi', 'Watchog', 'Liepard', 'Foongus', 'Pawniard', 'Klefki'],
         water: ['Poliwag', 'Poliwhirl', 'Lombre', 'Floatzel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Fairy)]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokéball Factory'))]
     //Replace req with Pokéball Factory dungeon if implemented.
 ));
 Routes.add(new RegionRoute(

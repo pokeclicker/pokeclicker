@@ -1065,7 +1065,7 @@ gymList['Lumiose City'] = new Gym(
     BadgeEnums.Voltage,
     128000,
     'Oh, Bonnie... When will you learn there\'s no shame in losing? I\'m glad whenever I get to learn something new thanks to strong challengers like you here.',
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 13), new GymBadgeRequirement(BadgeEnums.Plant)]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Kalos Power Plant'))]
 );
 //Replace req with Kalos Power Plant dungeon if implemented.
 gymList['Laverre City'] = new Gym(
