@@ -888,12 +888,28 @@ dungeonList['Fiery Path'] = new Dungeon('Fiery Path',
     17000, 101, 5);
 
 dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
-    ['Zubat', 'Golbat', 'Goldeen', 'Magikarp', 'Barboach'],
+    [
+        {pokemon: 'Zubat', options: { weight: 0.8 }},
+        {pokemon: 'Golbat', options: { weight: 0.8 }},
+        {pokemon: 'Goldeen', options: { weight: 0.8 }},
+        {pokemon: 'Magikarp', options: { weight: 0.8 }},
+        {pokemon: 'Barboach', options: { weight: 0.8 }},
+        new DungeonTrainer('Old Couple',
+            [
+                new GymPokemon('Medicham', 18000, 39),
+                new GymPokemon('Hariyama', 18000, 39),
+            ], 1, { weight: 1 }, 'John and Jay'),
+    ],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     443000,
     [
         new DungeonBossPokemon('Solrock', 1240000, 20),
         new DungeonBossPokemon('Lunatone', 1240000, 20),
+        new DungeonTrainer('Dragon Tamer',
+            [
+                new GymPokemon('Altaria', 640000, 37),
+                new GymPokemon('Altaria', 640000, 37),
+            ], 1, { weight: 1 }, 'Nicolas'),
     ],
     18000, 101, 5);
 
