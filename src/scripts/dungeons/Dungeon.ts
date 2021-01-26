@@ -855,10 +855,22 @@ dungeonList['Petalburg Woods'] = new Dungeon('Petalburg Woods',
     12000, 101, 5);
 
 dungeonList['Rusturf Tunnel'] = new Dungeon('Rusturf Tunnel',
-    ['Whismur'],
+    [
+        {pokemon: 'Whismur', options: { weight: 4 }},
+        new DungeonTrainer('Hiker',
+            [
+                new GymPokemon('Geodude', 14000, 16),
+                new GymPokemon('Geodude', 14000, 16),
+                new GymPokemon('Machop', 14000, 16),
+            ], 1, { weight: 1 }, 'Mike'),
+    ],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     400000,
-    [new DungeonBossPokemon('Whismur', 900000, 20)],
+    [
+        new DungeonTrainer('Team Aqua Grunt',
+            [new GymPokemon('Poochyena', 900000, 11)],
+            1, { weight: 1 }, undefined, '(male)'),
+    ],
     14000, 101, 5);
 
 dungeonList['Granite Cave'] = new Dungeon('Granite Cave',
