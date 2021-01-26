@@ -824,10 +824,34 @@ dungeonList['Mt Silver'] = new Dungeon('Mt Silver',
 // Hoenn Dungeons
 
 dungeonList['Petalburg Woods'] = new Dungeon('Petalburg Woods',
-    ['Poochyena', 'Zigzagoon', 'Wurmple', 'Silcoon', 'Cascoon', 'Taillow', 'Shroomish'],
+    [
+        {pokemon: 'Poochyena', options: { weight: 1.33 }},
+        {pokemon: 'Wurmple', options: { weight: 1.33 }},
+        {pokemon: 'Silcoon', options: { weight: 1.33 }},
+        {pokemon: 'Cascoon', options: { weight: 1.33 }},
+        {pokemon: 'Taillow', options: { weight: 1.33 }},
+        {pokemon: 'Shroomish', options: { weight: 1.33 }},
+        new DungeonTrainer('Bug Catcher',
+            [
+                new GymPokemon('Wurmple', 12000, 3),
+                new GymPokemon('Wurmple', 12000, 3),
+                new GymPokemon('Wurmple', 12000, 3),
+                new GymPokemon('Wurmple', 12000, 3),
+            ], 1, { weight: 1 }, 'Lyle'),
+        new DungeonTrainer('Bug Catcher',
+            [
+                new GymPokemon('Nincada', 12000, 6),
+                new GymPokemon('Nincada', 12000, 6),
+            ], 1, { weight: 1 }, 'James'),
+    ],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     380000,
-    [new DungeonBossPokemon('Slakoth', 860000, 10)],
+    [
+        new DungeonBossPokemon('Slakoth', 860000, 10, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Petalburg Woods'))}),
+        new DungeonTrainer('Team Aqua Grunt',
+            [new GymPokemon('Poochyena', 860000, 9)],
+            1, { weight: 1 }, undefined, '(male)'),
+    ],
     12000, 101, 5);
 
 dungeonList['Rusturf Tunnel'] = new Dungeon('Rusturf Tunnel',
