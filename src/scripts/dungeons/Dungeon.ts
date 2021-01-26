@@ -942,13 +942,41 @@ dungeonList['Mt. Chimney'] = new Dungeon('Mt. Chimney',
     20000, 101, 5);
 
 dungeonList['Jagged Pass'] = new Dungeon('Jagged Pass',
-    ['Machop', 'Numel', 'Spoink'],
+    [
+        {pokemon: 'Machop', options: { weight: 0.8 }},
+        {pokemon: 'Numel', options: { weight: 0.8 }},
+        {pokemon: 'Spoink', options: { weight: 0.8 }},
+        new DungeonTrainer('Hiker',
+            [
+                new GymPokemon('Geodude', 22000, 20),
+                new GymPokemon('Baltoy', 22000, 20),
+            ], 1, { weight: 1 }, 'Eric'),
+        new DungeonTrainer('Picnicker',
+            [
+                new GymPokemon('Shroomish', 22000, 19),
+                new GymPokemon('Oddish', 22000, 19),
+                new GymPokemon('Swablu', 22000, 19),
+            ], 1, { weight: 1 }, 'Diana'),
+        new DungeonTrainer('Picnicker',
+            [new GymPokemon('Shroomish', 22000, 21)],
+            1, { weight: 1 }, 'Autumn'),
+        new DungeonTrainer('Triathlete',
+            [new GymPokemon('Shroomish', 22000, 21)],
+            1, { weight: 1 }, 'Julio', '(malecycling)'),
+        new DungeonTrainer('Camper',
+            [
+                new GymPokemon('Zigzagoon', 22000, 20),
+                new GymPokemon('Taillow', 22000, 20),
+            ], 1, { weight: 1 }, 'Ethan'),
+    ],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     460000,
     [
-        new DungeonBossPokemon('Machop', 1400000, 20),
-        new DungeonBossPokemon('Numel', 1400000, 20),
-        new DungeonBossPokemon('Spoink', 1400000, 20),
+        new DungeonTrainer('Team Magma Grunt',
+            [
+                new GymPokemon('Mightyena', 700000, 22),
+                new GymPokemon('Zubat', 700000, 22),
+            ], 1, { weight: 1 }, undefined, '(male)'),
     ],
     22000, 101, 5);
 
