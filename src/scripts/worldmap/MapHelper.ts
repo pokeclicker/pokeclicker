@@ -14,7 +14,7 @@ class MapHelper {
         if (this.accessToRoute(route, region)) {
             player.route(route);
             player.region = region;
-            if (genNewEnemy) {
+            if (genNewEnemy && !Battle.catching()) {
                 Battle.generateNewEnemy();
             }
             App.game.gameState = GameConstants.GameState.fighting;
