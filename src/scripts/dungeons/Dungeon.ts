@@ -914,10 +914,31 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
     18000, 101, 5);
 
 dungeonList['Mt. Chimney'] = new Dungeon('Mt. Chimney',
-    ['Zubat', 'Poochyena'],
+    [
+        new DungeonTrainer('Team Magma Grunt',
+            [new GymPokemon('Numel', 20000, 20)],
+            1, { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Team Magma Grunt',
+            [new GymPokemon('Zubat', 20000, 20)],
+            1, { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Magma Admin',
+            [
+                new GymPokemon('Numel', 18000, 18),
+                new GymPokemon('Poochyena', 20000, 20),
+                new GymPokemon('Numel', 22000, 22),
+                new GymPokemon('Zubat', 22000, 22),
+            ], 1, { weight: 1 }, 'Tabitha'),
+    ],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     460000,
-    [new DungeonBossPokemon('Numel', 1370000, 20)],
+    [
+        new DungeonTrainer('Magma Leader',
+            [
+                new GymPokemon('Mightyena', 450000, 24),
+                new GymPokemon('Zubat', 450000, 24),
+                new GymPokemon('Camerupt', 470000, 25),
+            ], 1, { weight: 1 }, 'Maxie'),
+    ],
     20000, 101, 5);
 
 dungeonList['Jagged Pass'] = new Dungeon('Jagged Pass',
