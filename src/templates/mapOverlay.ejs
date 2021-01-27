@@ -2,13 +2,19 @@
 
 Parameters:
     - name : Required : String
-        The name of this POI.
+        The name of this overlay.
 
     - x : Required : Number
-        The x axis position of this POI element.
+        The x axis position of this overlay element.
 
     - y : Required : Number
-        The y axis position of this POI element.
+        The y axis position of this overlay element.
+
+    - height : Required : Number
+        The height of the element & image in squares (16px per 1 square).
+
+    - width : Required : Number
+        The width of the element & image in squares (16px per 1 square).
 
     - databind : Required : String
         Any knockout data-bind needed for this element to function.
@@ -17,21 +23,21 @@ Parameters:
         The image path
 
     - visible : Required : String
-        Visible when true
+        A knockout data-bind for visibility when true
 
 <% */ %>
 
 <image xlink:href="<%= locals.image %>"
     x="<%= locals.x * 16 %>"
     y="<%= locals.y * 16 %>"
-    height="<%= (locals.height || 3) * 16 %>"
-    width="<%= (locals.width || 3) * 16 %>"
+    height="<%= locals.height * 16 %>"
+    width="<%= locals.width * 16 %>"
     data-bind="visible: <%= locals.visible %>"/>
 <rect class="city"
     data-town="<%= locals.name %>" 
     x="<%= locals.x * 16 %>"
     y="<%= locals.y * 16 %>"
-    height="<%= (locals.height || 3) * 16 %>"
-    width="<%= (locals.width || 3) * 16 %>"
+    height="<%= locals.height * 16 %>"
+    width="<%= locals.width * 16 %>"
     data-bind="visible: <%= locals.visible %>, <%= locals.databind %>">
 </rect>
