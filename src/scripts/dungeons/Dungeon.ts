@@ -721,9 +721,12 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     60600,
     [
         new DungeonBossPokemon('Unown (A)', 280000, 14),
-        new DungeonBossPokemon('Unown (L)', 280000, 14),
-        new DungeonBossPokemon('Unown (P)', 280000, 14),
+        new DungeonBossPokemon('Unown (F)', 280000, 14),
         new DungeonBossPokemon('Unown (H)', 280000, 14),
+        new DungeonBossPokemon('Unown (L)', 280000, 14),
+        new DungeonBossPokemon('Unown (N)', 280000, 14),
+        new DungeonBossPokemon('Unown (P)', 280000, 14),
+        new DungeonBossPokemon('Unown (U)', 280000, 14),
     ],
     3000, 32, 7
 );
@@ -1027,10 +1030,11 @@ dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
     960000,
     [
+        new DungeonBossPokemon('Unown (A)', 4100000, 30),
         new DungeonBossPokemon('Unown (E)', 4100000, 30),
         new DungeonBossPokemon('Unown (L)', 4100000, 30),
         new DungeonBossPokemon('Unown (N)', 4100000, 30),
-        new DungeonBossPokemon('Unown (O)', 4100000, 30),
+        new DungeonBossPokemon('Unown (U)', 4100000, 30),
     ],
     62500, 209, 100);
 
