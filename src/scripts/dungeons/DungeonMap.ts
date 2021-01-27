@@ -2,12 +2,14 @@ class DungeonMap {
     size: number;
     board: KnockoutObservable<DungeonTile[][]>;
     playerPosition: KnockoutObservable<Point>;
+    playerMoved: KnockoutObservable<boolean>;
 
     constructor(size: number) {
         this.size = size;
         this.board = ko.observable(this.generateMap());
 
         this.playerPosition = ko.observable(new Point(Math.floor(size / 2), size - 1));
+        this.playerMoved = ko.observable(false);
 
         // Move the boss if it spawns on the player.
         if (this.currentTile().type() == GameConstants.DungeonTile.boss) {
@@ -25,6 +27,7 @@ class DungeonMap {
 
     public moveToCoordinates(x: number, y: number) {
         this.moveToTile(new Point(x, y));
+        this.playerMoved(true);
     }
 
     public moveUp() {
