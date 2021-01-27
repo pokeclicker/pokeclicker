@@ -19,7 +19,7 @@ class BagHandler {
             case ItemType.berry:
                 return ItemList[this.getBerryName(item.id)].displayName;
             case ItemType.shard:
-                return `${PokemonType[this.getShard(item.id)]} Shard`;
+                return ItemList[this.getShard(item.id)].displayName;
         }
     }
 
@@ -39,7 +39,7 @@ class BagHandler {
             case ItemType.berry:
                 return ItemList[this.getBerryName(item.id)].image;
             case ItemType.shard:
-                return Shards.image(this.getShard(item.id));
+                return ItemList[this.getShard(item.id)].image;
         }
     }
 
@@ -60,7 +60,7 @@ class BagHandler {
             case ItemType.berry:
                 return ItemList[this.getBerryName(item.id)].amount;
             case ItemType.shard:
-                return App.game.shards.shardWallet[this.getShard(item.id)];
+                return ItemList[this.getShard(item.id)].amount;
         }
     }
 
@@ -85,7 +85,7 @@ class BagHandler {
                 ItemList[this.getBerryName(item.id)].gain(amount);
                 return;
             case ItemType.shard:
-                App.game.shards.gainShards(amount, this.getShard(item.id));
+                ItemList[this.getShard(item.id)].gain(amount);
                 return;
         }
     }
@@ -107,11 +107,11 @@ class BagHandler {
         return BerryType[id];
     }
 
-    private static getShard(id: string | number): PokemonType {
+    private static getShard(id: string | number): string {
         if (typeof id === 'string') {
-            id = <number>PokemonType[id];
+            return id;
         }
-        return id;
+        return `${PokemonType[id]} Shard`;
     }
 
     //#endregion

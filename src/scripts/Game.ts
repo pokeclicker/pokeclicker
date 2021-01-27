@@ -71,6 +71,7 @@ class Game {
         this.underground.initialize();
         this.farming.initialize();
         this.specialEvents.initialize();
+        this.shards.initialize();
         this.load();
 
         // TODO refactor to proper initialization methods

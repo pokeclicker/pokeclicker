@@ -512,6 +512,17 @@ class Update implements Saveable {
                 }
             }
 
+            // Handling Shards
+            for (const shard in saveData.shards.shardWallet) {
+                if (!isNaN(Number(shard))) {
+                    saveData.items.itemList[`${PokemonType[shard]} Shard`] = {};
+                    saveData.items.itemList[`${PokemonType[shard]} Shard`].amount = saveData.shards.shardWallet[shard];
+                    if (saveData.items.itemList[`${PokemonType[shard]} Shard`].amount) {
+                        saveData.items.itemList[`${PokemonType[shard]} Shard`].unlocked = true;
+                    }
+                }
+            }
+
             //#endregion
         },
     };
