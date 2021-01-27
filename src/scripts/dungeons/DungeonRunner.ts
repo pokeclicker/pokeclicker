@@ -108,7 +108,7 @@ class DungeonRunner {
     }
 
     public static dungeonLeave() {
-        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.entrance || DungeonRunner.dungeonFinished()) {
+        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.entrance || DungeonRunner.dungeonFinished() || !DungeonRunner.map.playerMoved()) {
             return;
         }
 
