@@ -264,7 +264,7 @@ class PokemonHelper {
         if (Berry.baseWander.includes(pokemonName)) {
             return ['Always'];
         }
-        App.game.farming.berryData.forEach((berry) => {
+        App.game.farming.berries.forEach((berry) => {
             if (berry.wander.includes(pokemonName)) {
                 berries.push(BerryType[berry.type]);
             }

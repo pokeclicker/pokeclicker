@@ -33,7 +33,7 @@
                             <tbody data-bind='foreach: BerryDeal.getDeals(player.region)'>
                                 <!-- ko foreach: berries -->
                                 <tr>
-                                    <!-- ko let: { berry: App.game.farming.getBerry($data.berryType) } -->
+                                    <!-- ko let: { berry: App.game.farming.berries[$data.berryType] } -->
                                     <td data-bind="text: berry.amount()"></td>
                                     <td><img height="28px" data-bind="attr: {src: berry.image }, css: {'berryLocked': !berry.unlocked() }"></img></td>
                                     <td data-bind="text: amount + ' x ' + (berry.unlocked() ? BerryType[$data.berryType] : '???')"></td>

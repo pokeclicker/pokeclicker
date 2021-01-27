@@ -32,7 +32,7 @@
                                         <!-- ko foreach: FarmController.getBerryListWithIndex() -->
                                         <li class="list-group-item list-group-item-action seed-list-item p-2"
                                             data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
-                                            <!-- ko let: { berry: App.game.farming.getBerry($data) } -->
+                                            <!-- ko let: { berry: App.game.farming.berries[$data] } -->
                                             <img src="" height="28px"
                                                 data-bind="attr:{ src: berry.image },
                                                 css: {'berryLocked': !berry.unlocked() }">
@@ -142,7 +142,7 @@
                                                     <span style="display: inline;">
                                                         <img alt="Berry" style="height: 28px;"
                                                             data-bind="attr:{ src: FarmController.getBerryImage(App.game.farming.plotBerryCost($index()).type) },
-                                                            css: {'berryLocked': !App.game.farming.getBerry(App.game.farming.plotBerryCost($index()).type).unlocked() }"/>
+                                                            css: {'berryLocked': !App.game.farming.berries[App.game.farming.plotBerryCost($index()).type].unlocked() }"/>
                                                         <span data-bind="text: GameConstants.formatNumber(App.game.farming.plotBerryCost($index()).amount)">0</span>
                                                     </span>
                                                 </div>
@@ -176,7 +176,7 @@
                                     tooltip: { title: FarmController.getHint($data,true,true),
                                     trigger: 'hover',
                                     placement:'top' }">
-                                <!-- ko let: { berry: App.game.farming.getBerry($data) } -->
+                                <!-- ko let: { berry: App.game.farming.berries[$data] } -->
                                  <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ($data + 1 + '').padStart(2, 0)">number</span>
                                      <img src="" width=80px style="padding: 20px 0px;" data-bind="css: { 'pokemon-not-seen': !berry.unlocked() }, attr:{ src: berry.image }">
                                      <!-- ko if: berry.unlocked() -->

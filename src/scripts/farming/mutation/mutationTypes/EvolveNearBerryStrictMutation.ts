@@ -47,7 +47,7 @@ class EvolveNearBerryStrictMutation extends EvolveNearMutation {
      */
     get unlocked(): boolean {
         for (const berry of Object.keys(this.berryReqs)) {
-            if (!App.game.farming.getBerry(berry as unknown as number).unlocked()) {
+            if (!App.game.farming.berries[berry].unlocked()) {
                 return false;
             }
         }

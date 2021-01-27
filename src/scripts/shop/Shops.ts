@@ -44,7 +44,6 @@ class Shops implements Feature {
         if (!json) {
             return;
         }
-        console.log('loading save', json);
         if (json.hasOwnProperty('shopEntries')) {
             Object.keys(this.shopEntries).forEach(shopEntry => {
                 if (json.shopEntries.hasOwnProperty(shopEntry)) {

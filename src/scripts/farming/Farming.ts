@@ -5,7 +5,7 @@ class Farming implements Feature {
     name = 'Farming';
     saveKey = 'farming';
 
-    berryData: Berry[] = [];
+    berries: Berry[] = [];
     mutations: Mutation[] = [];
 
     externalAuras: KnockoutObservable<number>[];
@@ -47,7 +47,7 @@ class Farming implements Feature {
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {
-                if (this.getBerry(i).unlocked()) {
+                if (this.berries[i].unlocked()) {
                     return i;
                 }
             }
@@ -58,9 +58,10 @@ class Farming implements Feature {
     initialize(): void {
 
         // Storing Berries for easy access
-        this.berryData = Object.values(ItemList).filter(Berry.isBerry);
-
-        console.log(this.berryData);
+        this.berries = [];
+        Object.values(ItemList).filter(Berry.isBerry).forEach(berry => {
+            this.berries[berry.type] = berry;
+        });
 
         //#region Mutations
 
@@ -112,7 +113,7 @@ class Farming implements Feature {
             [[25, 80], [0, 5], [0, 5], [0, 5], [0, 5]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings get too spicy!',
                 unlockReq: function(): boolean {
-                    return App.game.farming.getBerry(BerryType.Cheri).unlocked();
+                    return App.game.farming.berries[BerryType.Cheri].unlocked();
                 },
             }
         ));
@@ -121,7 +122,7 @@ class Farming implements Feature {
             [[0, 5], [25, 80], [0, 5], [0, 5], [0, 5]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings get too dry!',
                 unlockReq: function(): boolean {
-                    return App.game.farming.getBerry(BerryType.Chesto).unlocked();
+                    return App.game.farming.berries[BerryType.Chesto].unlocked();
                 },
             }
         ));
@@ -130,7 +131,7 @@ class Farming implements Feature {
             [[0, 5], [0, 5], [25, 80], [0, 5], [0, 5]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings get too sweet!',
                 unlockReq: function(): boolean {
-                    return App.game.farming.getBerry(BerryType.Pecha).unlocked();
+                    return App.game.farming.berries[BerryType.Pecha].unlocked();
                 },
             }
         ));
@@ -139,7 +140,7 @@ class Farming implements Feature {
             [[0, 5], [0, 5], [0, 5], [25, 80], [0, 5]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings get too bitter!',
                 unlockReq: function(): boolean {
-                    return App.game.farming.getBerry(BerryType.Rawst).unlocked();
+                    return App.game.farming.berries[BerryType.Rawst].unlocked();
                 },
             }
         ));
@@ -148,7 +149,7 @@ class Farming implements Feature {
             [[0, 5], [0, 5], [0, 5], [0, 5], [25, 80]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings get too sour!',
                 unlockReq: function(): boolean {
-                    return App.game.farming.getBerry(BerryType.Aspear).unlocked();
+                    return App.game.farming.berries[BerryType.Aspear].unlocked();
                 },
             }
         ));
@@ -189,9 +190,9 @@ class Farming implements Feature {
             [[10, 15], [0, 0], [10, 15], [0, 0], [10, 15]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy, a little sweet, and a little sour at the same time.',
                 unlockReq: function(): boolean {
-                    return App.game.farming.getBerry(BerryType.Cheri).unlocked() &&
-                    App.game.farming.getBerry(BerryType.Pecha).unlocked() &&
-                    App.game.farming.getBerry(BerryType.Aspear).unlocked();
+                    return App.game.farming.berries[BerryType.Cheri].unlocked() &&
+                    App.game.farming.berries[BerryType.Pecha].unlocked() &&
+                    App.game.farming.berries[BerryType.Aspear].unlocked();
                 },
             }));
         // Hondew
@@ -199,9 +200,9 @@ class Farming implements Feature {
             [[15, 15], [15, 15], [0, 0], [15, 15], [0, 0]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted fairly spicy, dry, and bitter at the same time.',
                 unlockReq: function(): boolean {
-                    return App.game.farming.getBerry(BerryType.Figy).unlocked() &&
-                    App.game.farming.getBerry(BerryType.Wiki).unlocked() &&
-                    App.game.farming.getBerry(BerryType.Aguav).unlocked();
+                    return App.game.farming.berries[BerryType.Figy].unlocked() &&
+                    App.game.farming.berries[BerryType.Wiki].unlocked() &&
+                    App.game.farming.berries[BerryType.Aguav].unlocked();
                 },
             }));
         // Grepa
@@ -296,8 +297,8 @@ class Farming implements Feature {
             [[10, 15], [0, 0], [0, 0], [15, 20], [0, 0]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy and fairly bitter at the same time.',
                 unlockReq: function(): boolean {
-                    return App.game.farming.getBerry(BerryType.Aguav).unlocked() &&
-                    App.game.farming.getBerry(BerryType.Cheri).unlocked();
+                    return App.game.farming.berries[BerryType.Aguav].unlocked() &&
+                    App.game.farming.berries[BerryType.Cheri].unlocked();
                 },
             }));
         // Rindo Overgrow
@@ -320,8 +321,8 @@ class Farming implements Feature {
             [[0, 0], [10, 15], [0, 0], [15, 20], [0, 0]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted a little dry and fairly bitter at the same time.',
                 unlockReq: function(): boolean {
-                    return App.game.farming.getBerry(BerryType.Chesto).unlocked() &&
-                    App.game.farming.getBerry(BerryType.Aguav).unlocked();
+                    return App.game.farming.berries[BerryType.Chesto].unlocked() &&
+                    App.game.farming.berries[BerryType.Aguav].unlocked();
                 },
             }));
         // Payapa
@@ -387,22 +388,22 @@ class Farming implements Feature {
         // Micle
         this.mutations.push(new FieldFlavorMutation(.0003, BerryType.Micle, [0, 600, 0, 0, 0], {
             hint: 'I\'ve heard of a Berry that only appears in the driest of fields.',
-            unlockReq: () => App.game.farming.getBerry(BerryType.Pamtre).unlocked(),
+            unlockReq: () => App.game.farming.berries[BerryType.Pamtre].unlocked(),
         }));
         // Custap
         this.mutations.push(new FieldFlavorMutation(.0003, BerryType.Custap, [0, 0, 600, 0, 0], {
             hint: 'I\'ve heard of a Berry that only appears in the sweetest of fields.',
-            unlockReq: () => App.game.farming.getBerry(BerryType.Watmel).unlocked(),
+            unlockReq: () => App.game.farming.berries[BerryType.Watmel].unlocked(),
         }));
         // Jaboca
         this.mutations.push(new FieldFlavorMutation(.0003, BerryType.Jaboca, [0, 0, 0, 600, 0], {
             hint: 'I\'ve heard of a Berry that only appears in the most bitter of fields.',
-            unlockReq: () => App.game.farming.getBerry(BerryType.Durin).unlocked(),
+            unlockReq: () => App.game.farming.berries[BerryType.Durin].unlocked(),
         }));
         // Rowap
         this.mutations.push(new FieldFlavorMutation(.0003, BerryType.Rowap, [0, 0, 0, 0, 600], {
             hint: 'I\'ve heard of a Berry that only appears in the most sour of fields.',
-            unlockReq: () => App.game.farming.getBerry(BerryType.Belue).unlocked(),
+            unlockReq: () => App.game.farming.berries[BerryType.Belue].unlocked(),
         }));
         // Kee
         this.mutations.push(new GrowNearBerryMutation(.0003, BerryType.Kee,
@@ -442,31 +443,31 @@ class Farming implements Feature {
         // Enigma Mutations
         this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Liechi, BerryType.Passho, [BerryType.Enigma], {
             showHint: false,
-            unlockReq: () => App.game.farming.getBerry(BerryType.Liechi).unlocked(),
+            unlockReq: () => App.game.farming.berries[BerryType.Liechi].unlocked(),
         }));
         this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Ganlon, BerryType.Shuca, [BerryType.Enigma], {
             showHint: false,
-            unlockReq: () => App.game.farming.getBerry(BerryType.Ganlon).unlocked(),
+            unlockReq: () => App.game.farming.berries[BerryType.Ganlon].unlocked(),
         }));
         this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Salac, BerryType.Coba, [BerryType.Enigma], {
             showHint: false,
-            unlockReq: () => App.game.farming.getBerry(BerryType.Salac).unlocked(),
+            unlockReq: () => App.game.farming.berries[BerryType.Salac].unlocked(),
         }));
         this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Petaya, BerryType.Payapa, [BerryType.Enigma], {
             showHint: false,
-            unlockReq: () => App.game.farming.getBerry(BerryType.Petaya).unlocked(),
+            unlockReq: () => App.game.farming.berries[BerryType.Petaya].unlocked(),
         }));
         this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Apicot, BerryType.Chilan, [BerryType.Enigma], {
             showHint: false,
-            unlockReq: () => App.game.farming.getBerry(BerryType.Apicot).unlocked(),
+            unlockReq: () => App.game.farming.berries[BerryType.Apicot].unlocked(),
         }));
         this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Lansat, BerryType.Roseli, [BerryType.Enigma], {
             showHint: false,
-            unlockReq: () => App.game.farming.getBerry(BerryType.Lansat).unlocked(),
+            unlockReq: () => App.game.farming.berries[BerryType.Lansat].unlocked(),
         }));
         this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Starf, BerryType.Haban, [BerryType.Enigma], {
             showHint: false,
-            unlockReq: () => App.game.farming.getBerry(BerryType.Starf).unlocked(),
+            unlockReq: () => App.game.farming.berries[BerryType.Starf].unlocked(),
         }));
 
         // Empty Mutations for hints
@@ -669,7 +670,7 @@ class Farming implements Feature {
 
     canBuyPlot(index: number): boolean {
         const berryData = this.plotBerryCost(index);
-        if (this.getBerry(berryData.type).amount() < berryData.amount) {
+        if (this.berries[berryData.type].amount() < berryData.amount) {
             return false;
         }
         const cost = this.plotFPCost(index);
@@ -722,16 +723,16 @@ class Farming implements Feature {
             return;
         }
 
-        App.game.wallet.gainFarmPoints(this.getBerry(plot.berry).farmValue);
+        App.game.wallet.gainFarmPoints(this.berries[plot.berry].farmValue);
 
         const amount = plot.harvestAmount();
 
         this.gainBerry(plot.berry, amount);
 
-        App.game.oakItems.use(OakItems.OakItem.Sprayduck, this.getBerry(plot.berry).exp);
+        App.game.oakItems.use(OakItems.OakItem.Sprayduck, this.berries[plot.berry].exp);
         GameHelper.incrementObservable(App.game.statistics.totalManualHarvests, 1);
 
-        App.game.shops.lowerItemMultipliers(MultiplierDecreaser.Berry, this.getBerry(plot.berry).exp);
+        App.game.shops.lowerItemMultipliers(MultiplierDecreaser.Berry, this.berries[plot.berry].exp);
 
         plot.die(true);
 
@@ -825,10 +826,6 @@ class Farming implements Feature {
         return true;
     }
 
-    getBerry(type: BerryType): Berry {
-        return ItemList[BerryType[type]] as Berry;
-    }
-
     /**
      * Gives the player a random Berry from the first 8 types
      * @param amount Amount of berries to give. Defaults to 1.
@@ -847,7 +844,7 @@ class Farming implements Feature {
     }
 
     gainBerry(berry: BerryType, amount = 1) {
-        GameHelper.incrementObservable(this.getBerry(berry).amount, Math.floor(amount));
+        GameHelper.incrementObservable(this.berries[berry].amount, Math.floor(amount));
 
         if (amount > 0) {
             this.unlockBerry(berry);
@@ -857,7 +854,7 @@ class Farming implements Feature {
     }
 
     hasBerry(berry: BerryType) {
-        return this.getBerry(berry).amount() > 0;
+        return this.berries[berry].amount() > 0;
     }
 
     hasMulch(mulch: MulchType) {
@@ -869,13 +866,13 @@ class Farming implements Feature {
     }
 
     unlockBerry(berry: BerryType) {
-        if (!this.getBerry(berry).unlocked()) {
+        if (!this.berries[berry].unlocked()) {
             Notifier.notify({
                 message: `You've discovered a ${BerryType[berry]} Berry!`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.route_item_found,
             });
-            this.getBerry(berry).unlock();
+            this.berries[berry].unlock();
         }
     }
 
@@ -924,10 +921,10 @@ class Farming implements Feature {
         const genBounds = Farming.genBounds;
         const minBound = genBounds[gen - 1] || 0;
         const maxBound = genBounds[gen] || Infinity;
-        return App.game.farming.berryData.filter(berry => berry.type >= minBound && berry.type < maxBound).map(berry => berry.type);
+        return App.game.farming.berries.filter(berry => berry.type >= minBound && berry.type < maxBound).map(berry => berry.type);
     }
 
     public static getColor(color: BerryColor): BerryType[] {
-        return App.game.farming.berryData.filter(berry => berry.color === color).map(berry => berry.type);
+        return App.game.farming.berries.filter(berry => berry.color === color).map(berry => berry.type);
     }
 }

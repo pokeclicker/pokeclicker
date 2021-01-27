@@ -63,7 +63,7 @@ class GrowNearBerryMutation extends GrowNearMutation {
      */
     get unlocked(): boolean {
         // Check for Berry requirements
-        if (!this.berryReqs.every(req => App.game.farming.getBerry(req).unlocked())) {
+        if (!this.berryReqs.every(req => App.game.farming.berries[req].unlocked())) {
             return false;
         }
         return super.unlocked;

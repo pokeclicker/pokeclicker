@@ -37,7 +37,6 @@ class Items implements Feature {
         if (!json) {
             return;
         }
-        console.log('loading save', json);
         if (json.hasOwnProperty('itemList')) {
             Object.keys(this.itemList).forEach(itemList => {
                 if (json.itemList.hasOwnProperty(itemList)) {

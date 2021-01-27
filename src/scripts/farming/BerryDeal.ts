@@ -237,14 +237,14 @@ class BerryDeal {
 
     public static canUse(region: GameConstants.Region, i: number): boolean {
         const deal = BerryDeal.list[region].peek()[i];
-        return deal.berries.every((value) => App.game.farming.getBerry(value.berryType).amount() >= value.amount );
+        return deal.berries.every((value) => App.game.farming.berries[value.berryType].amount() >= value.amount );
     }
 
     public static use(region: GameConstants.Region, i: number, tradeTimes = 1) {
         const deal = BerryDeal.list[region].peek()[i];
         if (BerryDeal.canUse(region, i)) {
             const trades = deal.berries.map(berry => {
-                const amt = App.game.farming.getBerry(berry.berryType).amount();
+                const amt = App.game.farming.berries[berry.berryType].amount();
                 const maxTrades = Math.floor(amt / berry.amount);
                 return maxTrades;
             });

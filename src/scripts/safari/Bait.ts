@@ -34,7 +34,7 @@ BaitList['Bait'] = new Bait(BaitType.Bait, 'Bait', 'some bait', 'assets/images/s
 
     });
 BaitList['Razz'] = new Bait(BaitType.Razz, 'Razz Berry', 'a Razz Berry', FarmController.getBerryImage(BerryType.Razz),
-    () => App.game.farming.getBerry(BerryType.Razz).amount(),
+    () => App.game.farming.berries[BerryType.Razz].amount(),
     (pokemon: SafariPokemon) => {
         App.game.farming.gainBerry(BerryType.Razz, -1);
         pokemon.eatingBait = BaitType.Razz;
@@ -42,7 +42,7 @@ BaitList['Razz'] = new Bait(BaitType.Razz, 'Razz Berry', 'a Razz Berry', FarmCon
         pokemon.angry = 0;
     });
 BaitList['Nanab'] = new Bait(BaitType.Nanab, 'Nanab Berry', 'a Nanab Berry', FarmController.getBerryImage(BerryType.Nanab),
-    () => App.game.farming.getBerry(BerryType.Nanab).amount(),
+    () => App.game.farming.berries[BerryType.Nanab].amount(),
     (pokemon: SafariPokemon) => {
         App.game.farming.gainBerry(BerryType.Nanab, -1);
         pokemon.eatingBait = BaitType.Nanab;

@@ -26,7 +26,7 @@ class FarmController {
         });
 
         this.berryListEnd = ko.pureComputed(() => {
-            const highestMutation = App.game.farming.mutations.slice().reverse().find(mut => mut._hintSeen() && !App.game.farming.getBerry(mut.mutatedBerry).unlocked());
+            const highestMutation = App.game.farming.mutations.slice().reverse().find(mut => mut._hintSeen() && !App.game.farming.berries[mut.mutatedBerry].unlocked());
             const highestMutationHint = highestMutation?.mutatedBerry ?? 0;
             return Math.max(App.game.farming.highestUnlockedBerry(), highestMutationHint);
         });
@@ -135,7 +135,7 @@ class FarmController {
     }
 
     public static getBackgroundColor(index: number) {
-        const berry = App.game.farming.getBerry(index);
+        const berry = App.game.farming.berries[index];
         if (berry.unlocked()) {
             return GameConstants.BerryColor[berry.color];
         } else if (FarmController.getHint(index, true) !== '') {
@@ -151,7 +151,7 @@ class FarmController {
     }
 
     public static getHint(index: number, checkSeen = false, checkUnlocked = false) {
-        if (checkUnlocked && App.game.farming.getBerry(index).unlocked()) {
+        if (checkUnlocked && App.game.farming.berries[index].unlocked()) {
             return '';
         }
         const mutation = App.game.farming.mutations.find(mutation => mutation.mutatedBerry === index && mutation.showHint);

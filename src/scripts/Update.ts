@@ -407,7 +407,6 @@ class Update implements Saveable {
             if (!saveData.shops.hasOwnProperty('shopEntries')) {
                 saveData.shops.shopEntries = {};
             }
-            console.log('testing', playerData);
             saveData.shops.shopEntries['Masterball D'] = { currentMultiplier: playerData._itemMultipliers['Masterball|diamond'] };
             saveData.shops.shopEntries['Masterball BP'] = { currentMultiplier: playerData._itemMultipliers['Masterball|battlePoint'] };
             saveData.shops.shopEntries['Masterball DT'] = { currentMultiplier: playerData._itemMultipliers['Masterball|dungeonToken'] };
@@ -490,7 +489,6 @@ class Update implements Saveable {
             }
 
             // Berries
-            console.log('loading berries', saveData.farming);
             if (saveData.hasOwnProperty('farming') && saveData.farming.hasOwnProperty('berryList')) {
                 Object.keys(BerryType).forEach(berry => {
                     if (BerryType[berry] >= 0) {
