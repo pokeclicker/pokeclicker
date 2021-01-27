@@ -1060,7 +1060,7 @@ dungeonList['Mt. Pyre'] = new Dungeon('Mt. Pyre',
         new DungeonTrainer('Pokémon Breeder',
             [
                 new GymPokemon('Skitty', 28000, 26),
-                new GymPokemon('Poochyenna', 28000, 26),
+                new GymPokemon('Poochyena', 28000, 26),
                 new GymPokemon('Zigzagoon', 28000, 26),
                 new GymPokemon('Lotad', 28000, 26),
                 new GymPokemon('Seedot', 28000, 26),
