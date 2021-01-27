@@ -990,6 +990,44 @@ dungeonList['New Mauville'] = new Dungeon('New Mauville',
     ],
     24000, 101, 5);
 
+dungeonList['Weather Institute'] = new Dungeon('Weather Institute',
+    [
+        new DungeonTrainer('Team Aqua Grunt',
+            [new GymPokemon('Carvanha', 39000, 28)],
+            1, { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Team Aqua Grunt',
+            [
+                new GymPokemon('Zubat', 39000, 27),
+                new GymPokemon('Poochyena', 39000, 27),
+            ], 1, { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Aqua Grunt',
+            [
+                new GymPokemon('Poochyena', 39000, 27),
+                new GymPokemon('Carvanha', 39000, 27),
+            ], 1, { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Aqua Grunt',
+            [
+                new GymPokemon('Zubat', 39000, 27),
+                new GymPokemon('Poochyena', 39000, 27),
+            ], 1, { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Team Aqua Grunt',
+            [
+                new GymPokemon('Poochyena', 39000, 26),
+                new GymPokemon('Zubat', 39000, 26),
+                new GymPokemon('Carvanha', 39000, 26),
+            ], 1, { weight: 1 }, undefined, '(male)'),
+    ],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
+    470000,
+    [
+        new DungeonTrainer('Aqua Admin',
+            [
+                new GymPokemon('Carvanha', 910000, 28),
+                new GymPokemon('Mightyena', 910000, 28),
+            ], 1, { weight: 1 }, 'Shelly', '(shelly)'),
+    ],
+    39000, 101, 5);
+
 dungeonList['Mt. Pyre'] = new Dungeon('Mt. Pyre',
     ['Shuppet', 'Duskull', 'Vulpix', 'Wingull', 'Meditite'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
