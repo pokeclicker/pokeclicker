@@ -141,7 +141,7 @@
                                                 <div>
                                                     <span style="display: inline;">
                                                         <img alt="Berry" style="height: 28px;"
-                                                            data-bind="attr:{ src: FarmController.getBerryImage(App.game.farming.plotBerryCost($index()).type) },
+                                                            data-bind="attr:{ src: App.game.farming.berries[App.game.farming.plotBerryCost($index()).type].image },
                                                             css: {'berryLocked': !App.game.farming.berries[App.game.farming.plotBerryCost($index()).type].unlocked() }"/>
                                                         <span data-bind="text: GameConstants.formatNumber(App.game.farming.plotBerryCost($index()).amount)">0</span>
                                                     </span>

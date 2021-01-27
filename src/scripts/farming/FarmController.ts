@@ -146,10 +146,6 @@ class FarmController {
 
     }
 
-    public static getBerryImage(index: number) {
-        return `assets/images/items/berry/${BerryType[index]}.png`;
-    }
-
     public static getHint(index: number, checkSeen = false, checkUnlocked = false) {
         if (checkUnlocked && App.game.farming.berries[index].unlocked()) {
             return '';
