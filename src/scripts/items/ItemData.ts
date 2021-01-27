@@ -10,9 +10,9 @@ class ItemData implements Saveable {
     public amount: KnockoutObservable<number>;
     public unlocked: KnockoutObservable<boolean>;
 
-    constructor() {
-        this.amount = ko.observable(this.defaults.amount);
-        this.unlocked = ko.observable(this.defaults.unlocked);
+    constructor(initialValue?: number, initialUnlocked?: boolean) {
+        this.amount = ko.observable(initialValue ?? this.defaults.amount);
+        this.unlocked = ko.observable(initialUnlocked ?? this.defaults.unlocked);
     }
 
     toJSON(): Record<string, any> {

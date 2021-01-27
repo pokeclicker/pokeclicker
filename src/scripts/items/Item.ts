@@ -3,6 +3,8 @@ interface ItemOptions {
     description?: string,
     displayName?: string,
     imageDirectory?: string,
+    initialValue?: number,
+    initialUnlocked?: boolean,
 }
 
 class Item {
@@ -10,6 +12,8 @@ class Item {
     _description?: string;
     _displayName: string;
     imageDirectory?: string;
+    initialValue?: number;
+    initialUnlocked?: boolean;
 
     constructor(
         public name: string,
@@ -18,6 +22,8 @@ class Item {
         this._displayName = options?.displayName ?? name;
         this._description = options?.description;
         this.imageDirectory = options?.imageDirectory;
+        this.initialValue = options?.initialValue;
+        this.initialUnlocked = options?.initialUnlocked;
     }
 
     get amount(): KnockoutObservable<number> {

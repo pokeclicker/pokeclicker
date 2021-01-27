@@ -500,6 +500,19 @@ class Update implements Saveable {
             }
 
             //#endregion
+
+            // Handling Pokeballs
+            for (const pokeball in saveData.pokeballs.pokeballs) {
+                if (!isNaN(Number(pokeball))) {
+                    saveData.items.itemList[GameConstants.Pokeball[pokeball]] = {};
+                    saveData.items.itemList[GameConstants.Pokeball[pokeball]].amount = saveData.pokeballs.pokeballs[pokeball];
+                    if (saveData.items.itemList[GameConstants.Pokeball[pokeball]].amount) {
+                        saveData.items.itemList[GameConstants.Pokeball[pokeball]].unlocked = true;
+                    }
+                }
+            }
+
+            //#endregion
         },
     };
 

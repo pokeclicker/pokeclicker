@@ -10,7 +10,7 @@ class Items implements Feature {
     constructor() {
         this.itemList = {};
         Object.keys(ItemList).forEach(item => {
-            this.itemList[item] = new ItemData();
+            this.itemList[item] = new ItemData(ItemList[item].initialValue, ItemList[item].initialUnlocked);
         });
     }
 
