@@ -29,7 +29,7 @@ export default class SaveSelector {
                 decodeURI(saveData.profile?.name ?? 'Trainer'),
                 saveData.profile?.trainer,
                 saveData.profile?.pokemon ?? saveData.party.caughtPokemon[0]?.id,
-                saveData.profile?.pokemonShiny,
+                saveData.profile?.pokemonShiny ?? saveData.party.caughtPokemon[0]?.shiny,
                 saveData.profile?.background,
                 saveData.profile?.textColor,
                 saveData.badgeCase.filter((b: boolean) => b).length,

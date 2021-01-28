@@ -396,8 +396,17 @@ class Update implements Saveable {
                     timeout: GameConstants.HOUR,
                 });
             }
+
             // Add Solaceon Ruins
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 43);
+
+            // Multi saves profile
+            const firstPokemon = saveData.party.caughtPokemon[0];
+            saveData.profile = {
+                name: 'Trainer',
+                pokemon: firstPokemon?.id || 0,
+                pokemonShiny: firstPokemon?.shiny || false,
+            };
         },
     };
 
