@@ -854,6 +854,11 @@ TownList['Mt. Pyre'] = new DungeonTown(
     GameConstants.Region.hoenn,
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 122)]
 );
+TownList['Magma Hideout'] = new DungeonTown(
+    'Magma Hideout',
+    GameConstants.Region.hoenn,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Pyre'))]
+);
 TownList['Shoal Cave'] = new DungeonTown(
     'Shoal Cave',
     GameConstants.Region.hoenn,
