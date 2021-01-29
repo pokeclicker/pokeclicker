@@ -10,6 +10,12 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.7.5
+    new ChangelogUpdate('v0.7.5 - Challenges, Trainers and Saves', new Date(2021, 0, 29)),
+    new Changelog(changelogType.FIXED, 'Fix proteins not increasing on usage'),
+    new Changelog(changelogType.FIXED, 'Some trainer images not loading'),
+    new Changelog(changelogType.FIXED, 'Dynamic Pokemon disappearing  before leaving screen'),
+
     // v0.7.4
     new ChangelogUpdate('v0.7.4 - Challenges, Trainers and Saves', new Date(2021, 0, 29)),
     new Changelog(changelogType.NEW, 'Multiple save file support'),
