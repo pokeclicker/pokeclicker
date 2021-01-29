@@ -4,6 +4,7 @@ import {
     MINUTE,
     SECOND,
     TotalPokemonsPerRegion,
+    Region,
 } from '../GameConstants';
 
 export default class DynamicBackground {
@@ -105,7 +106,7 @@ export default class DynamicBackground {
         document.getElementById('dynamic-background').appendChild(pokeElement);
         setTimeout(() => {
             document.getElementById('dynamic-background').removeChild(pokeElement);
-        }, MINUTE);
+        }, 2 * MINUTE);
     };
 
     /* SCENE MANAGEMENT */
@@ -120,7 +121,7 @@ export default class DynamicBackground {
             // limited to players highest region
             // @ts-ignore
             // eslint-disable-next-line no-undef
-            DynamicBackground.addPokemon(Math.floor(Math.random() * TotalPokemonsPerRegion[player.highestRegion()]) + 1);
+            DynamicBackground.addPokemon(Math.floor(Math.random() * TotalPokemonsPerRegion[player?.highestRegion() || Region.kanto]) + 1);
             // Add another pokemon
             DynamicBackground.startAddingPokemon();
         }, delay);
