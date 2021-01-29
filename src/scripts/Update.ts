@@ -469,10 +469,14 @@ class Update implements Saveable {
         const backupSaveData = JSON.stringify({ player: playerData, save: saveData });
 
         const button = document.createElement('a');
-        button.className = 'btn btn-block btn-warning';
-        button.innerText = 'Click to Backup Save!';
-        button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(backupSaveData))}`;
-        button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
+        try {
+            button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(backupSaveData))}`;
+            button.className = 'btn btn-block btn-warning';
+            button.innerText = 'Click to Backup Save!';
+            button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
+        } catch (e) {
+            console.error('Failed to create backup button data:', e);
+        }
 
         return [button, backupSaveData];
     }
