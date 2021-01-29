@@ -106,7 +106,7 @@ export default class DynamicBackground {
         document.getElementById('dynamic-background').appendChild(pokeElement);
         setTimeout(() => {
             document.getElementById('dynamic-background').removeChild(pokeElement);
-        }, MINUTE);
+        }, 2 * MINUTE);
     };
 
     /* SCENE MANAGEMENT */
