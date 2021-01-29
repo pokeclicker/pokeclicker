@@ -589,22 +589,6 @@ export enum StoneType {
     'Sachet',
     'Whipped_dream',
     'Ice_stone',
-    'Chipped_pot',
-    'Strawberry_sweet',
-    'Tart_apple',
-    'Sweet_apple',
-    'Rusted_sword',
-    'Rusted_shield',
-    'Galarica_cuff',
-    'Galarica_wreath',
-    'Lemon_cream',
-    'Mint_cream',
-    'Matcha_cream',
-    'Ruby_cream',
-    'Salted_cream',
-    'Rainbow_swirl',
-    'Caramel_swirl',
-    'Ruby_swirl',
 }
 
 export enum BattleItemType {

@@ -2154,8 +2154,6 @@ const CirchesterShop = new Shop([
 ]);
 const TurffieldShop = new Shop([
     ItemList['Grass_egg'],
-    ItemList['Tart_apple'],
-    ItemList['Sweet_apple'],
 ]);
 const HulburyShop = new Shop([
     ItemList['Water_egg'],
@@ -2163,26 +2161,9 @@ const HulburyShop = new Shop([
 ]);
 const MotostokeShop = new Shop([
     ItemList['Fire_egg'],
-    ItemList['Strawberry_sweet'],
-    ItemList['Berry_sweet'],
-    ItemList['Love_sweet'],
-    ItemList['Star_sweet'],
-    ItemList['Clover_sweet'],
-    ItemList['Flower_sweet'],
-    ItemList['Ribbon_sweet'],
-    ItemList['Lemon_cream'],
-    ItemList['Salted_cream'],
-    ItemList['Ruby_cream'],
-    ItemList['Mint_cream'],
-    ItemList['Matcha_cream'],
-    ItemList['Caramel_swirl'],
-    ItemList['Rainbow_swirl'],
-    ItemList['Ruby_swirl'],
 ]);
 const HammerlockeShop = new Shop([
     ItemList['Dragon_egg'],
-    ItemList['Rusted_sword'],
-    ItemList['Rusted_shield'],
     ItemList['Eternatus'],
 ]);
 const StowonSideShop: Shop = new Shop([
@@ -2191,10 +2172,6 @@ const StowonSideShop: Shop = new Shop([
 ]);
 const SpikemuthShop = new Shop([
     ItemList['Electric_egg'],
-]);
-const FreezingtonShop = new Shop([
-    ItemList['Galarica_wreath'],
-    ItemList['Galarica_cuff'],
 ]);
 const WyndonShop = new Shop([
     ItemList['Pokeball'],
@@ -2341,7 +2318,6 @@ TownList['Freezington'] = new Town(
     'Freezington',
     GameConstants.Region.crown,
     {
-        shop: FreezingtonShop,
         requirements: [new RouteKillRequirement(10, GameConstants.Region.crown, 1)],
     }
 );
