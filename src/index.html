@@ -47,7 +47,23 @@
     @importif $GOOGLE_ANALYTICS_ID "googleAnalytics.html"
 
     <style>
-        .loader {
+        #game.loading {
+            display: none !important;
+        }
+
+        #saveSelector {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-height: 100vh;
+            width: 100vw;
+            background-color: #79c9fa;
+            background-size: cover;
+            z-index: 101;
+            overflow: auto;
+        }
+
+        #loader {
             position: fixed;
             top: 0;
             left: 0;
@@ -71,10 +87,12 @@
 @import "dynamicBackground.html"
 
 <div id="toaster"></div>
-<link href="https://bootswatch.com/4/yeti/bootstrap.min.css" rel="stylesheet" data-bind="attr: {href: 'https://bootswatch.com/4/' + Settings.getSetting('theme').observableValue() + '/bootstrap.min.css'}">
+<link id="theme-link" href="https://bootswatch.com/4/yeti/bootstrap.min.css" rel="stylesheet" data-bind="attr: {href: 'https://bootswatch.com/4/' + Settings.getSetting('theme').observableValue() + '/bootstrap.min.css'}">
 
 <!--$DEV_BANNER-->
 @importif $DEV_BANNER "developmentBanner.html"
+
+@import "saveSelector.html"
 
 @import "splash.html"
 
@@ -83,6 +101,9 @@
 
 <!-- Get Keyitem modal-->
 @import "getKeyItem.html"
+
+<!-- Show profile modal -->
+@import "profileModal.html"
 
 <!-- Show keyitems modal-->
 @import "itemModal.html"
@@ -93,7 +114,7 @@
 @import "templates/eggSVGTemplate.html"
 @import "templates/multiOptionTemplate.html"
 
-<div class="container">
+<div id="game" class="container loading">
     <div class="row justify-content-center">
         <!--The id title is needed for a default marker for money animation to display when not in a wild battle where the playerMoney span is not visible-->
         <h1 id="gameTitle">Pokéclicker</h1>
