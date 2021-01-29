@@ -10,6 +10,30 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.7.5
+    new ChangelogUpdate('v0.7.5 - Challenges, Trainers and Saves', new Date(2021, 0, 29)),
+    new Changelog(changelogType.FIXED, 'Fix proteins not increasing on usage'),
+    new Changelog(changelogType.FIXED, 'Some trainer images not loading'),
+    new Changelog(changelogType.FIXED, 'Dynamic Pokemon disappearing  before leaving screen'),
+
+    // v0.7.4
+    new ChangelogUpdate('v0.7.4 - Challenges, Trainers and Saves', new Date(2021, 0, 29)),
+    new Changelog(changelogType.NEW, 'Multiple save file support'),
+    new Changelog(changelogType.NEW, 'Challenge modes'),
+    new Changelog(changelogType.NEW, 'Trainers added to Kanto Dungeons'),
+    new Changelog(changelogType.CHANGE, 'Log wandering Pokémon for Farm'),
+    new Changelog(changelogType.CHANGE, 'Change Lum berry Aura effect'),
+    new Changelog(changelogType.CHANGE, 'Add more Burmy forms'),
+    new Changelog(changelogType.CHANGE, 'Underground items can spawn in any rotation'),
+    new Changelog(changelogType.CHANGE, 'Quest generation updated'),
+    new Changelog(changelogType.CHANGE, 'Dynamic background Pokémon now have variable speed'),
+    new Changelog(changelogType.CHANGE, 'Leave button won\'t appear in Dungeon until the player has moved'),
+    new Changelog(changelogType.FIXED, 'Underground survey upgrade display'),
+    new Changelog(changelogType.FIXED, 'Fix Heatran & Kyurem HP'),
+    new Changelog(changelogType.FIXED, 'Underground no longer notifies on new game'),
+    new Changelog(changelogType.FIXED, 'Hide future region forms from Battle Frontier'),
+    new Changelog(changelogType.FIXED, 'Fixed quick catch glitch'),
+
     // v0.7.3
     new ChangelogUpdate('v0.7.3 - Underground', new Date(2021, 0, 18)),
     new Changelog(changelogType.NEW, 'Underground revamped'),
