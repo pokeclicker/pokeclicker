@@ -12136,7 +12136,7 @@ const pokemonList = createPokemonArray(
         'levelType': 4,
         'exp': 60,
         'catchRate': 255,
-        'evolutions': [new StoneEvolution('Minccino', 'Cinccino', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Minccino', 'Cinccino', GameConstants.StoneType.Shiny)],
         'base': {
             'hitpoints': 55,
             'attack': 50,
@@ -12873,7 +12873,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 130,
         'catchRate': 90,
-        'evolutions': [new StoneEvolution('Lampent', 'Chandelure', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Lampent', 'Chandelure', GameConstants.StoneType.Dusk)],
         'base': {
             'hitpoints': 60,
             'attack': 40,
@@ -14496,7 +14496,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 157,
         'catchRate': 90,
-        'evolutions': [new StoneEvolution('Doublade', 'Aegislash', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Doublade', 'Aegislash', GameConstants.StoneType.Dusk)],
         'base': {
             'hitpoints': 59,
             'attack': 110,
@@ -15508,7 +15508,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 140,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Charjabug', 'Vikavolt', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Charjabug', 'Vikavolt', GameConstants.StoneType.Thunder)],
         'base': {
             'hitpoints': 57,
             'attack': 82,
