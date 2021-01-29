@@ -396,6 +396,17 @@ class Update implements Saveable {
                     timeout: GameConstants.HOUR,
                 });
             }
+
+            // Add Solaceon Ruins
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 43);
+
+            // Multi saves profile
+            const firstPokemon = saveData.party.caughtPokemon[0];
+            saveData.profile = {
+                name: 'Trainer',
+                pokemon: firstPokemon?.id || 0,
+                pokemonShiny: firstPokemon?.shiny || false,
+            };
         },
     };
 
@@ -528,8 +539,8 @@ class Update implements Saveable {
                             if (window.confirm('Are you sure you want to reset your save? This cannot be undone, so please make sure you have a backup first!')) {
                                 // Force an autodownload of the backup when resetting the save
                                 this.automaticallyDownloadBackup(backupButton, { disableAutoDownloadBackupSaveOnUpdate: false });
-                                localStorage.removeItem('player');
-                                localStorage.removeItem('save');
+                                localStorage.removeItem(`player${Save.key}`);
+                                localStorage.removeItem(`save${Save.key}`);
                                 localStorage.removeItem('settings');
                                 location.reload();
                             }
@@ -603,7 +614,7 @@ class Update implements Saveable {
     getPlayerData() {
         let playerData: any;
         try {
-            playerData = JSON.parse(localStorage.player);
+            playerData = JSON.parse(localStorage.getItem(`player${Save.key}`));
         } catch (err) {
             console.warn('Error getting player data', err);
         } finally {
@@ -613,7 +624,7 @@ class Update implements Saveable {
 
     setPlayerData(playerData: any) {
         try {
-            localStorage.player = JSON.stringify(playerData);
+            localStorage.setItem(`player${Save.key}`, JSON.stringify(playerData));
         } catch (err) {
             console.error('Error setting player data', err);
         }
@@ -622,7 +633,7 @@ class Update implements Saveable {
     getSaveData() {
         let saveData: any;
         try {
-            saveData = JSON.parse(localStorage.save);
+            saveData = JSON.parse(localStorage.getItem(`save${Save.key}`));
         } catch (err) {
             console.warn('Error getting save data', err);
         } finally {
@@ -632,7 +643,7 @@ class Update implements Saveable {
 
     setSaveData(saveData: any) {
         try {
-            localStorage.save = JSON.stringify(saveData);
+            localStorage.setItem(`save${Save.key}`, JSON.stringify(saveData));
         } catch (err) {
             console.error('Error setting save data', err);
         }

@@ -17,6 +17,7 @@ class Game {
      */
     constructor(
         public update: Update,
+        public profile: Profile,
         public breeding: Breeding,
         public pokeballs: Pokeballs,
         public wallet: Wallet,
@@ -46,7 +47,7 @@ class Game {
     }
 
     load() {
-        const saveJSON = localStorage.getItem('save');
+        const saveJSON = localStorage.getItem(`save${Save.key}`);
 
         const saveObject = JSON.parse(saveJSON || '{}');
 
@@ -62,6 +63,7 @@ class Game {
     }
 
     initialize() {
+        this.profile.initialize();
         this.breeding.initialize();
         this.pokeballs.initialize();
         this.keyItems.initialize();

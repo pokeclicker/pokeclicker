@@ -721,9 +721,12 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     60600,
     [
         new DungeonBossPokemon('Unown (A)', 280000, 14),
-        new DungeonBossPokemon('Unown (L)', 280000, 14),
-        new DungeonBossPokemon('Unown (P)', 280000, 14),
+        new DungeonBossPokemon('Unown (F)', 280000, 14),
         new DungeonBossPokemon('Unown (H)', 280000, 14),
+        new DungeonBossPokemon('Unown (L)', 280000, 14),
+        new DungeonBossPokemon('Unown (N)', 280000, 14),
+        new DungeonBossPokemon('Unown (P)', 280000, 14),
+        new DungeonBossPokemon('Unown (U)', 280000, 14),
     ],
     3000, 32, 7
 );
@@ -1021,6 +1024,19 @@ dungeonList['Mt. Coronet South'] = new Dungeon('Mt. Coronet South',
         new DungeonBossPokemon('Absol', 4000000, 50),
     ],
     60500, 201, 20);
+
+dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
+    ['Zubat', 'Geodude', 'Natu', 'Bronzor', 'Hippopotas'],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
+    960000,
+    [
+        new DungeonBossPokemon('Unown (A)', 4100000, 30),
+        new DungeonBossPokemon('Unown (E)', 4100000, 30),
+        new DungeonBossPokemon('Unown (L)', 4100000, 30),
+        new DungeonBossPokemon('Unown (N)', 4100000, 30),
+        new DungeonBossPokemon('Unown (U)', 4100000, 30),
+    ],
+    62500, 209, 100);
 
 dungeonList['Iron Island'] = new Dungeon('Iron Island',
     ['Tentacool', 'Wingull', 'Tentacruel', 'Pelipper', 'Finneon', 'Zubat', 'Geodude', 'Onix', 'Golbat', 'Graveler'],

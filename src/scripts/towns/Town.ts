@@ -1185,6 +1185,11 @@ TownList['Mt. Coronet South'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 207)]
 );
+TownList['Solaceon Ruins'] = new DungeonTown(
+    'Solaceon Ruins',
+    GameConstants.Region.sinnoh,
+    [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 209)]
+);
 TownList['Iron Island'] = new DungeonTown(
     'Iron Island',
     GameConstants.Region.sinnoh,
