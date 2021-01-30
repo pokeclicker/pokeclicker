@@ -28,6 +28,7 @@ class App {
                 new KeyItems(),
                 new BadgeCase(),
                 new OakItems([20, 50, 100], multiplier),
+                new OakItemLoadouts,
                 new PokemonCategories(),
                 new Party(multiplier),
                 new Shards(),

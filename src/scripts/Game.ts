@@ -24,6 +24,7 @@ class Game {
         public keyItems: KeyItems,
         public badgeCase: BadgeCase,
         public oakItems: OakItems,
+        public OakItemLoadouts: OakItemLoadouts,
         public categories: PokemonCategories,
         public party: Party,
         public shards: Shards,

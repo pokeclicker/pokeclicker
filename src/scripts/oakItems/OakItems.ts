@@ -159,7 +159,7 @@ class OakItems implements Feature {
         }
     }
 
-    private deactivateAll() {
+    deactivateAll() {
         for (let i = 0; i < this.itemList.length; i++) {
             this.itemList[i].isActive = false;
         }
