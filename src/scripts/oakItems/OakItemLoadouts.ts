@@ -13,7 +13,7 @@ class OakItemLoadouts {
 
     constructor() {
         this._available = ko.observable(0);
-        this.loadouts = [[OakItems.OakItem.Poison_Barb, OakItems.OakItem.Amulet_Coin, OakItems.OakItem.Magic_Ball]];
+        this.loadouts = [[OakItems.OakItem.Amulet_Coin],[],[]];
     }
 
     activateLoadout(num: number) {
@@ -29,12 +29,22 @@ class OakItemLoadouts {
         }
     }
 
+    isPartOfLoadout(num: number, item: OakItems.OakItem) {
+        this.loadouts[num - 1].forEach(currItem => {
+            if (currItem == item) {
+                return true;
+            }
+        });
+
+        return false;
+    }
+
     clearLoadout(num: number) {
         this.loadouts[num - 1] = [];
     }
 
     openLoadoutModal() {
-        $('#oakItemLoadoutModal').modal('show');
+        $('#OakItemLoadoutModal').modal('show');
     }
 
     // Knockout getters/setters

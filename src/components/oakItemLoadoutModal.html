@@ -1,8 +1,8 @@
-<div class="modal fade noselect" id="oakItemLoadoutModal" tabindex="-1" role="dialog" aria-badgeledby="oakItemLoadoutModal">
+<div class="modal fade noselect" id="OakItemLoadoutModal" tabindex="-1" role="dialog" aria-badgeledby="oakItemLoadoutModal">
     <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
        <div class="modal-content">
            <div class="modal-header">
-               <h5 data-bind="text: 'Oak Items Equipped: ' + App.game.oakItems.activeCount() + '/' + App.game.oakItems.maxActiveCount()">Oak Items</h5>
+               <h5 data-bind="text: 'Modify Your Loadouts'">Oak Items</h5>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                    <span aria-hidden="true">&times;</span>
                </button>
@@ -20,8 +20,8 @@
                   <li class="col p-1">
                       <button class="p-0 btn"
                           data-bind="css: {
-                             'btn-primary': $data.isActive,
-                             'btn-outline-secondary': !$data.isActive
+                             'btn-primary': function(){OakItemLoadoutsController.isPartOfLoadout($data)},
+                             'btn-outline-secondary': function(){OakItemLoadoutsController.isPartOfLoadout($data)}
                            }">
                           <img class="clickable" style="width: 80%;" src=""
                                data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
@@ -30,7 +30,7 @@
                                 },
                                 event: {
                                   mouseover: function(){OakItemController.hover($data.name)},
-                                  click: function(){OakItemController.click($data.name);},
+                                  click: function(){OakItemLoadoutsController.click($data.name);},
                                 }">
                         </button>
                     </li>
@@ -94,28 +94,30 @@
                 </tbody>
               </table>
           </div>
-      </div>
-      <div id="oakItemLoadout">
-        <table class="table table-bordered table-striped m-0">
-          <tr>
-            <td class="p-1 tight">
-              <button class='btn btn-block btn-primary' style="width: 10%; height: 100%;"
-                data-bind='click: function(){ OakItemLoadouts.activateLoadout(1) }'>
-                1
-              </button>
-            </td>
-            <td class="p-1 tight"> 
-              <button class='btn btn-block btn-primary' style="width: 10%; height: 100%;">
-                2
-              </button>
-            </td>
-            <td class="p-1 tight">
-              <button class='btn btn-block btn-primary' style="width: 10%; height: 100%;">
-                3
-              </button>
-            </td>
-          </tr>
-        </table>
+          <div id="oakItemLoadout">
+            <table class="table table-bordered table-striped m-0">
+              <tr>
+                <td class="p-1 tight">
+                  <button class='btn btn-block btn-primary' style="width: 10%; height: 100%;"
+                    data-bind='click: function(){ OakItemLoadoutsController.clickLoadout(1) }'>
+                    1
+                  </button>
+                </td>
+                <td class="p-1 tight"> 
+                  <button class='btn btn-block btn-primary' style="width: 10%; height: 100%;"
+                    data-bind='click: function(){ OakItemLoadoutsController.clickLoadout(2) }'>
+                    2
+                  </button>
+                </td>
+                <td class="p-1 tight">
+                  <button class='btn btn-block btn-primary' style="width: 10%; height: 100%;"
+                    data-bind='click: function(){ OakItemLoadoutsController.clickLoadout(3) }'>
+                    3
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
       </div>
   </div>
 </div>

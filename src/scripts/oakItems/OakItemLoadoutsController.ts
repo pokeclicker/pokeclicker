@@ -16,6 +16,14 @@ class OakItemLoadoutsController {
         App.game.OakItemLoadouts.addItemToLoadout(this.selectedLoadout, item);
     }
 
+    public static isPartOfLoadout(item: OakItems.OakItem) {
+        if (this.selectedLoadout == 0) {
+            return;
+        }
+
+        return App.game.OakItemLoadouts.isPartOfLoadout(this.selectedLoadout, item);
+    }
+
     static get selectedLoadout() {
         return this._selectedLoadout();
     }
