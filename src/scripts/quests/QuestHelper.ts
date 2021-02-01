@@ -49,7 +49,9 @@ class QuestHelper {
         SeededRand.seed(+seed);
 
         const QuestTypes = new Set(Object.keys(this.quests));
-        for (let i = 0; i < amount; i++) {
+        const maxAttempts = 20;
+        let attempts = 0;
+        while (quests.length < amount && attempts++ < maxAttempts) {
             const questType = SeededRand.fromArray(Array.from(QuestTypes));
             if (uniqueQuestTypes) {
                 QuestTypes.delete(questType);
@@ -58,7 +60,7 @@ class QuestHelper {
                 continue;
             }
             const quest = this.createQuest(questType);
-            quest.index = i;
+            quest.index = quests.length;
             quests.push(quest);
         }
         return quests;
