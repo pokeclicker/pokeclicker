@@ -422,6 +422,8 @@ class Update implements Saveable {
                 if (missingNoIndex >= 0) {
                     // Remove the MissingNo (should only appear if we have a bug somewhere)
                     saveData.party.caughtPokemon.splice(missingNoIndex, 1);
+                    // Filter out any MissingNo in the hatchery
+                    saveData.breeding.eggList = saveData.breeding.eggList.filter((e) => e.pokemon != 'MissingNo.');
                     // Check if the Pikachu caused the MissingNo
                     const pikachu = saveData.party.caughtPokemon.find(p => p.id == -8);
                     if (pikachu) {
