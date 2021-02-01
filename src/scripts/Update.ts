@@ -414,6 +414,8 @@ class Update implements Saveable {
             saveData.breeding.eggList.forEach(egg => {
                 egg.pokemon = egg.pokemon.replace('Lets go', 'Let\'s Go');
             });
+            // Fixup Lets Go queue
+            saveData.breeding.queueList = saveData.breeding.queueList.map(p => p.replace('Lets go', 'Let\'s Go'));
 
             // Only update if save is from v0.7.4+
             if (this.minUpdateVersion('0.7.4', saveData)) {
@@ -424,15 +426,18 @@ class Update implements Saveable {
                     saveData.party.caughtPokemon.splice(missingNoIndex, 1);
                     // Filter out any MissingNo in the hatchery
                     saveData.breeding.eggList = saveData.breeding.eggList.filter((e) => e.pokemon != 'MissingNo.');
+                    saveData.breeding.queueList = saveData.breeding.queueList.filter((p) => p != 'MissingNo.');
                     // Check if the Pikachu caused the MissingNo
                     const pikachu = saveData.party.caughtPokemon.find(p => p.id == -8);
                     if (pikachu) {
-                        pikachu.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Pikachu');
+                        pikachu.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Pikachu')
+                            || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Pikachu');
                     }
                     // Check if the Eevee caused the MissingNo
                     const eevee = saveData.party.caughtPokemon.find(p => p.id == -9);
                     if (eevee) {
-                        eevee.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Eevee');
+                        eevee.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Eevee')
+                        || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Eevee');
                     }
                 }
             }
