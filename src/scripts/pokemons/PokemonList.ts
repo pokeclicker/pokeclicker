@@ -9267,7 +9267,11 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'catchRate': 255,
-        'evolutions': [new StoneEvolution('Bonsly', 'Sudowoodo', GameConstants.StoneType.None)],
+        'evolutions': [
+            // Evolves when leveled up while knowing Mimic
+            // Learns mimic at level 16
+            new LevelEvolution('Bonsly', 'Sudowoodo', 32),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 50,
@@ -9286,7 +9290,11 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 62,
         'catchRate': 145,
-        'evolutions': [new StoneEvolution('Mime Jr.', 'Mr. Mime', GameConstants.StoneType.None)],
+        'evolutions': [
+            // Evolves when leveled up while knowing Mimic
+            // Learns mimic at level 32
+            new LevelEvolution('Mime Jr.', 'Mr. Mime', 32),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 20,
@@ -9305,7 +9313,10 @@ const pokemonList = createPokemonArray(
         'levelType': 4,
         'exp': 110,
         'catchRate': 130,
-        'evolutions': [new StoneEvolution('Happiny', 'Chansey', GameConstants.StoneType.None)],
+        'evolutions': [
+            // TODO: Evolves while holding an Oval Stone during the Day time
+            new StoneEvolution('Happiny', 'Chansey', GameConstants.StoneType.None),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 100,
@@ -9623,7 +9634,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 69,
         'catchRate': 25,
-        'evolutions': [new StoneEvolution('Mantyke', 'Mantine', GameConstants.StoneType.None)],
+        'evolutions': [
+            // TODO: Evolves when leveled up with a Remoraid in the party
+            new StoneEvolution('Mantyke', 'Mantine', GameConstants.StoneType.None),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 45,
