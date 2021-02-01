@@ -4,7 +4,6 @@ class OakItemLoadoutsController {
     private static _selectedItem: KnockoutObservable<OakItems.OakItem> = ko.observable(OakItems.OakItem.Magic_Ball);
 
     public static clickLoadout(num: number) {
-        App.game.OakItemLoadouts.clearLoadout(num);
         this.selectedLoadout = num;
     }
 
@@ -13,12 +12,12 @@ class OakItemLoadoutsController {
             return;
         }
 
-        App.game.OakItemLoadouts.addItemToLoadout(this.selectedLoadout, item);
+        App.game.OakItemLoadouts.updateLoadout(this.selectedLoadout, item);
     }
 
     public static isPartOfLoadout(item: OakItems.OakItem) {
         if (this.selectedLoadout == 0) {
-            return;
+            return false;
         }
 
         return App.game.OakItemLoadouts.isPartOfLoadout(this.selectedLoadout, item);

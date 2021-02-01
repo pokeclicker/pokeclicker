@@ -13,7 +13,7 @@ class OakItemLoadouts {
 
     constructor() {
         this._available = ko.observable(0);
-        this.loadouts = [[OakItems.OakItem.Amulet_Coin],[],[]];
+        this.loadouts = [[],[],[]];
     }
 
     activateLoadout(num: number) {
@@ -23,20 +23,19 @@ class OakItemLoadouts {
         });
     }
 
-    addItemToLoadout(num: number, item: OakItems.OakItem) {
-        if (this.loadouts[num - 1].length < 3) {
+    updateLoadout(num: number, item: OakItems.OakItem) {
+        if (this.loadouts[num - 1].includes(item)) {
+            const index = this.loadouts[num - 1].indexOf(item);
+            if (index !== -1) {
+                this.loadouts[num - 1].splice(index, 1);
+            }
+        } else if (this.loadouts[num - 1].length < 3 && App.game.oakItems.isUnlocked(item)) {
             this.loadouts[num - 1].push(item);
         }
     }
 
     isPartOfLoadout(num: number, item: OakItems.OakItem) {
-        this.loadouts[num - 1].forEach(currItem => {
-            if (currItem == item) {
-                return true;
-            }
-        });
-
-        return false;
+        return this.loadouts[num - 1].includes(item);
     }
 
     clearLoadout(num: number) {

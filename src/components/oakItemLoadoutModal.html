@@ -21,7 +21,7 @@
                       <button class="p-0 btn"
                           data-bind="css: {
                              'btn-primary': function(){OakItemLoadoutsController.isPartOfLoadout($data)},
-                             'btn-outline-secondary': function(){OakItemLoadoutsController.isPartOfLoadout($data)}
+                             'btn-outline-secondary': function(){!OakItemLoadoutsController.isPartOfLoadout($data)}
                            }">
                           <img class="clickable" style="width: 80%;" src=""
                                data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
