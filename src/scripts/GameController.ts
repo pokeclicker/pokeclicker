@@ -236,8 +236,8 @@ class GameController {
                     if (!$('#receiveBadgeModal').data('bs.modal')?._isShown) {
                         const number = Number(e.key);
                         // Check if a number higher than 0 and less than total Gyms was pressed
-                        if (number && number <= player.town().gymList().length) {
-                            GymRunner.startGym(player.town().gymList()[number - 1]());
+                        if (number && number <= player.town().gymList.length) {
+                            GymRunner.startGym(player.town().gymList[number - 1]);
                         }
                     }
                 }
