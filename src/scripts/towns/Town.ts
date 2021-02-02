@@ -1828,8 +1828,8 @@ TownList['Snowbelle City'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 19)],
     }
 );
-TownList['Pokemon League Kalos'] = new Town(
-    'Pokemon League Kalos',
+TownList['Pokémon League Kalos'] = new Town(
+    'Pokémon League Kalos',
     GameConstants.Region.kalos,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Kalos'))],
@@ -1870,7 +1870,11 @@ TownList['Reflection Cave'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 11)]
 );
 //Tower of Mastery?
-//Sea Spirit's Den?
+TownList['Sea Spirit\'s Den'] = new DungeonTown(
+    'Sea Spirit\'s Den',
+    GameConstants.Region.kalos,
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 23)]
+);
 TownList['Pokéball Factory'] = new DungeonTown(
     'Pokéball Factory',
     GameConstants.Region.kalos,

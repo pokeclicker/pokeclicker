@@ -1450,6 +1450,13 @@ dungeonList['Parfum Palace'] = new Dungeon('Parfum Palace',
     [new DungeonBossPokemon('Furfrou', 70000000, 100)],
     96500, 6, 100);
 
+dungeonList['Sea Spirit\'s Den'] = new Dungeon('Sea Spirit\'s Den',
+    ['Lapras', 'Dwebble', 'Lanturn', 'Binacle', 'Woobat', 'Onix'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    6003000,
+    [new DungeonBossPokemon('Lugia', 70000000, 100)],
+    96500, 23, 100);
+
 dungeonList['Connecting Cave'] = new Dungeon('Connecting Cave',
     [
         {pokemon: 'Zubat', options: { weight: 1.33 }},
@@ -1560,12 +1567,11 @@ dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
                 new GymPokemon('Granbull', 3500000, 11),
                 new GymPokemon('Helioptile', 3500000, 11),
             ], 1, { weight: 1 }, 'Monique', '(female)'),
+        new DungeonBossPokemon('Diancie', 8000000, 100),
     ],
     96500, 11, 100);
 
 //Tower of Mastery?
-
-//Sea Spirit's Den? Releases Articuno, Zapdos, Moltres roamers.
 
 dungeonList['Lost Hotel'] = new Dungeon('Lost Hotel',
     [
@@ -1912,6 +1918,12 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
     [
         new DungeonTrainer('Team Flare',
             [new GymPokemon('Mightyena', 3500000, 11)], 1, { weight: 1 }, 'Aliana', '(aliana)'),
+        new DungeonBossPokemon('Volcanion', 100000000, 100,
+            {
+                requirement: new MultiRequirement([
+                    new ClearDungeonRequirement(5, GameConstants.getDungeonIndex('Kalos Power Plant')),
+                    new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+                ])}),
     ],
     96500, 13, 100);
 
