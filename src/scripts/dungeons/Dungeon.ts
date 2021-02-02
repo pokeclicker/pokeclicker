@@ -1450,13 +1450,6 @@ dungeonList['Parfum Palace'] = new Dungeon('Parfum Palace',
     [new DungeonBossPokemon('Furfrou', 70000000, 100)],
     96500, 6, 100);
 
-dungeonList['Sea Spirit\'s Den'] = new Dungeon('Sea Spirit\'s Den',
-    ['Lapras', 'Dwebble', 'Lanturn', 'Binacle', 'Woobat', 'Onix'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    6003000,
-    [new DungeonBossPokemon('Lugia', 70000000, 100)],
-    96500, 23, 100);
-
 dungeonList['Connecting Cave'] = new Dungeon('Connecting Cave',
     [
         {pokemon: 'Zubat', options: { weight: 1.33 }},

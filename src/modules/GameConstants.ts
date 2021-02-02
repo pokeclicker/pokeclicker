@@ -967,7 +967,6 @@ export const KalosDungeons = [
     'Glittering Cave',
     'Reflection Cave',
     // 'Tower of Mastery',
-    'Sea Spirit\'s Den',
     'Kalos Power Plant',
     'Pokéball Factory',
     'Lost Hotel',
