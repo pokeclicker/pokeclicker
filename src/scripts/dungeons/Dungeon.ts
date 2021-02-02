@@ -1441,14 +1441,14 @@ dungeonList['Santalune Forest'] = new Dungeon('Santalune Forest',
             ], 1, { weight: 1 }, 'Lise'),
         new DungeonBossPokemon('Pikachu', 70000000, 100),
     ],
-    96500, 230, 100);
+    96500, 2, 100);
 
 dungeonList['Parfum Palace'] = new Dungeon('Parfum Palace',
     ['Goldeen', 'Seaking', 'Magikarp', 'Gyarados', 'Corphish', 'Crawdaunt'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     6003000,
     [new DungeonBossPokemon('Furfrou', 70000000, 100)],
-    96500, 230, 100);
+    96500, 6, 100);
 
 dungeonList['Connecting Cave'] = new Dungeon('Connecting Cave',
     [
@@ -1469,7 +1469,7 @@ dungeonList['Connecting Cave'] = new Dungeon('Connecting Cave',
             1, { weight: 1 }, 'Mercy', '(female)'),
         new DungeonBossPokemon('Axew', 70000000, 100),
     ],
-    96500, 230, 100);
+    96500, 7, 100);
 
 dungeonList['Glittering Cave'] = new Dungeon('Glittering Cave',
     [
@@ -1500,7 +1500,7 @@ dungeonList['Glittering Cave'] = new Dungeon('Glittering Cave',
         new DungeonBossPokemon('Kangaskhan', 70000000, 100),
         new DungeonBossPokemon('Mawile', 70000000, 100),
     ],
-    96500, 230, 100);
+    96500, 9, 100);
 
 dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
     [
@@ -1561,7 +1561,7 @@ dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
                 new GymPokemon('Helioptile', 3500000, 11),
             ], 1, { weight: 1 }, 'Monique', '(female)'),
     ],
-    96500, 230, 100);
+    96500, 11, 100);
 
 //Tower of Mastery?
 
@@ -1612,7 +1612,7 @@ dungeonList['Lost Hotel'] = new Dungeon('Lost Hotel',
             ],1, { weight: 2 }, 'Zoya & Asa'),
         new DungeonBossPokemon('Rotom', 92000000, 100),
     ],
-    96500, 230, 100);
+    96500, 15, 100);
 
 dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
     [
@@ -1705,7 +1705,7 @@ dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
             [new GymPokemon('Houndoom', 3500000, 14)],
             1, { weight: 1 }, 'Mable', '(mable)'),
     ],
-    96500, 230, 100);
+    96500, 15, 100);
 
 dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
     [
@@ -1755,7 +1755,7 @@ dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
         new DungeonBossPokemon('Xerneas', 115000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
         new DungeonBossPokemon('Yveltal', 115000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
     ],
-    96500, 230, 100);
+    96500, 16, 100);
 
 dungeonList['Terminus Cave'] = new Dungeon('Terminus Cave',
     [
@@ -1817,7 +1817,7 @@ dungeonList['Terminus Cave'] = new Dungeon('Terminus Cave',
             ],1, { weight: 3 }, 'Fern & Lee'),
         new DungeonBossPokemon('Zygarde', 8000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)}),
     ],
-    96500, 230, 100);
+    96500, 18, 100);
 
 dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
     ['Jigglypuff', 'Poliwhirl', 'Noctowl', 'Lombre', 'Gothorita', 'Amoonguss'],
@@ -1827,7 +1827,7 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
         new DungeonBossPokemon('Ditto', 90000000, 100),
         new DungeonBossPokemon('Zoroark', 90000000, 100),
     ],
-    96500, 230, 100);
+    96500, 20, 100);
 
 dungeonList['Pokéball Factory'] = new Dungeon('Pokéball Factory',
     [
@@ -1862,7 +1862,7 @@ dungeonList['Pokéball Factory'] = new Dungeon('Pokéball Factory',
             [new GymPokemon('Liepard', 3500000, 11)],
             1, { weight: 1 }, 'Bryony', '(bryony)'),
     ],
-    96500, 230, 100);
+    96500, 14, 100);
 
 dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
     [
@@ -1913,7 +1913,7 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
         new DungeonTrainer('Team Flare',
             [new GymPokemon('Mightyena', 3500000, 11)], 1, { weight: 1 }, 'Aliana', '(aliana)'),
     ],
-    96500, 230, 100);
+    96500, 13, 100);
 
 dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
     [
@@ -2032,7 +2032,7 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
                 new GymPokemon('Alakazam', 3500000, 14),
             ],1, { weight: 1 }, 'Giles', '(male)'),
     ],
-    96500, 230, 100);
+    96500, 21, 100);
 
 //Unknown Dungeon? Contains Mewtwo.
 
