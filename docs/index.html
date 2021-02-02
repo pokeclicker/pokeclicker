@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.7.3"></script>
+    <script src="scripts/modules.min.js?v=0.7.5"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.7.3"></script>
+    <script src="scripts/script.min.js?v=0.7.5"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.7.3" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.7.5" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -61,7 +61,23 @@
     </script>
 
     <style>
-        .loader {
+        #game.loading {
+            display: none !important;
+        }
+
+        #saveSelector {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-height: 100vh;
+            width: 100vw;
+            background-color: #79c9fa;
+            background-size: cover;
+            z-index: 101;
+            overflow: auto;
+        }
+
+        #loader {
             position: fixed;
             top: 0;
             left: 0;
@@ -106,10 +122,32 @@
 </div>
 
 <div id="toaster"></div>
-<link href="https://bootswatch.com/4/yeti/bootstrap.min.css" rel="stylesheet" data-bind="attr: {href: 'https://bootswatch.com/4/' + Settings.getSetting('theme').observableValue() + '/bootstrap.min.css'}">
+<link id="theme-link" href="https://bootswatch.com/4/yeti/bootstrap.min.css" rel="stylesheet" data-bind="attr: {href: 'https://bootswatch.com/4/' + Settings.getSetting('theme').observableValue() + '/bootstrap.min.css'}">
 
 <!--$DEV_BANNER-->
-<div class="loader" id="loader">
+<div class="d-flex align-items-center justify-content-center background-night py-4" id="saveSelector">
+    <div class="justify-content-center container row">
+        <div class="col-6">
+            <img style="width:100%" src="assets/images/pokeclickerlogo.png">
+        </div>
+        <div class="col-12 d-flex align-items-center justify-content-center my-3">
+            <a href="https://discord.gg/a6DFe4p">
+                <img alt="Join our Discord!" src="https://img.shields.io/discord/450412847017754644?color=7289DA&label=Discord&logo=discord&logoColor=7289DA&style=for-the-badge">
+            </a>
+            &nbsp;
+            <a href="https://github.com/pokeclicker/pokeclicker">
+                <img alt="Visit our GitHub!" src="https://img.shields.io/github/package-json/v/pokeclicker/pokeclicker/master?label=GitHub&logo=github&style=for-the-badge">
+            </a>
+            &nbsp;
+            <a href="https://pokeclicker.miraheze.org/wiki/Home_Page">
+                <img alt="Checkout the Wiki!" src="https://img.shields.io/badge/wiki-link-blue?logo=wikimedia-commons&style=for-the-badge">
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<div class="loader background-night" id="loader">
     <br>
     <div class="loader-wrapper">
         <div class="container">
@@ -140,6 +178,9 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-right">
         <li>
+            <a class="dropdown-item" href="#profileModal" data-toggle="modal">Profile</a>
+        </li>
+        <li>
             <a class="dropdown-item" href="#pokedexModal" data-toggle="modal">Pokédex</a>
         </li>
         <li>
@@ -169,6 +210,9 @@
         </li>
         <li>
             <a class="dropdown-item" href="#saveModal" data-toggle="modal">Save</a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="#challengeModeModal" data-toggle="modal">Challenge Modes</a>
         </li>
         <li>
             <a class="dropdown-item" href="#changelogModal" data-toggle="modal">Changelog</a>
@@ -220,6 +264,60 @@
 </div>
 
 
+<!-- Show profile modal -->
+<div class="modal noselect fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style='justify-content: space-around;'>
+                <h5 class="modal-title">Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-left p-2">
+                <div class="form-row p-0" id="breeding-filter">
+                    <div class="form-group col-12">
+                        <label>Name</label>
+                        <input autocomplete="off" class="form-control" oninput="App.game.profile.name(this.value)" placeholder="name" data-bind="value: decodeURI(App.game.profile.name())"/>
+                    </div>
+                    <div class="form-group col-12">
+                        <label>Trainer</label>
+                        <select autocomplete="off" class="custom-select" onchange="App.game.profile.trainer(+this.value)">
+                            <!-- ko foreach: new Array(Profile.MAX_TRAINER).fill(0) -->
+                            <option data-bind="attr: { value: $index(), selected: App.game.profile.trainer() === $index() }, text: `Trainer ${$index()}`">Trainer</option>
+                            <!-- /ko -->
+                        </select>
+                    </div>
+                    <div class="form-group col-12">
+                        <label>Pokemon</label>
+                        <select autocomplete="off" class="custom-select" onchange="App.game.profile.pokemon(+this.value)">
+                            <!-- ko foreach: App.game.party.caughtPokemon -->
+                            <option data-bind="attr: { value: $data.id, selected: App.game.profile.pokemon() === $data.id }, text: $data.name">Pokemon</option>
+                            <!-- /ko -->
+                        </select>
+                    </div>
+                    <div class="form-group col-12">
+                        <label>Background</label>
+                        <select autocomplete="off" class="custom-select" onchange="App.game.profile.background(+this.value)">
+                            <!-- ko foreach: new Array(Profile.MAX_BACKGROUND).fill(0) -->
+                            <option data-bind="attr: { value: $index(), selected: App.game.profile.background() === $index() }, text: `Background ${$index()}`">Background</option>
+                            <!-- /ko -->
+                        </select>
+                    </div>
+                    <div class="form-group col-12">
+                        <label>Text Color</label>
+                        <p class="p-0" data-bind="style: { background: App.game.profile.textColor() }">
+                          <label style="width:100%; min-height: 28px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: App.game.profile.textColor"/></label>
+                        </p>
+                    </div>
+                </div>
+                <div id="profile-trainer-card"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Show keyitems modal-->
 <!-- Show Items modal-->
 <div class="modal" id="showItemsModal" tabindex="-1" role="dialog"
@@ -248,7 +346,7 @@
                                 <div class="col-2" style="cursor: pointer"
                                         data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
                                             click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}">
-                                    <img data-bind="attr: {src: 'assets/images/items/' + $data + '.png'}" style="max-width: 32px;">
+                                    <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;">
                                     <div data-bind="text: player._itemList[$data]()"></div>
                                 </div>
                             </div>
@@ -353,10 +451,11 @@
         html: true,
         boundary: document.getElementById('showItemsModal'),
     }">
-        <img data-bind="attr: {src: 'assets/images/items/' + ItemList[$data].name() + '.png'}" style="max-width: 32px;">
+        <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;">
         <div data-bind="text: player._itemList[$data]()"></div>
     </div>
 </script>
+
 
 <!--Templates -->
 <script type="text/html" id="currencyTemplate">
@@ -439,7 +538,7 @@
     </div>
 </script>
 
-<div class="container">
+<div id="game" class="container loading">
     <div class="row justify-content-center">
         <!--The id title is needed for a default marker for money animation to display when not in a wild battle where the playerMoney span is not visible-->
         <h1 id="gameTitle">Pokéclicker</h1>
@@ -451,7 +550,7 @@
         <div id="left-column" class="col-lg-3 col-md-6 order-lg-first">
 
             <!-- pokeball selector -->
-            <div id="pokeballSelector" class="card sortable border-secondary mb-3" data-bind="visible: player.starter != GameConstants.Starter.None">
+            <div id="pokeballSelector" class="card sortable border-secondary mb-3" data-bind="visible: player.starter() != GameConstants.Starter.None">
     <div class="card-header p-0" data-toggle="collapse" href="#pokeballSelectorBody">
         <span>Pokéballs</span>
     </div>
@@ -501,8 +600,8 @@
     <div class="card-header p-0" data-toggle="collapse" href="#battleItemContainerBody">
       <span>Battle Items</span>
     </div>
-    <button type="button" class="btn btn-sm btn-primary" 
-            style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" 
+    <button type="button" class="btn btn-sm btn-primary"
+            style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
             data-bind="text: EffectEngineRunner.multipliers[EffectEngineRunner.multIndex()]"
             onclick="EffectEngineRunner.incrementMultiplier()"
             oncontextmenu="EffectEngineRunner.decrementMultiplier(); return false"
@@ -514,6 +613,9 @@
             data-trigger="hover">1
     </button>
     <div id="battleItemContainerBody" class="card-body p-0 show">
+      <p data-bind="visible: App.game.challenges.list.disableBattleItems.active()" class="bg-danger my-0">
+          Battle Items are disabled.
+      </p>
       <table class="table table-bordered m-0">
         <tbody>
           <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
@@ -537,7 +639,7 @@
                               placement:'bottom',
                               html: true
                             }">
-                <img src="" class="clickable" data-bind="attr: { src: 'assets/images/items/' + $data + '.png' }" width="26px">
+                <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
 
             </td>
           </tr>
@@ -585,7 +687,7 @@
         </div>
     </div>
 </script>
-<div id="pokemonListContainer" class="card sortable border-secondary mb-3" data-bind="visible: player.starter != GameConstants.Starter.None">
+<div id="pokemonListContainer" class="card sortable border-secondary mb-3" data-bind="visible: player.starter() != GameConstants.Starter.None">
     <div class="card-header p-0" data-toggle="collapse" href="#pokemonListBody">
         <span>Pokémon List</span>
     </div>
@@ -804,101 +906,117 @@
 
                     <!-- Dungeon Battles -->
                     <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.dungeon">
-                        <div class="col no-gutters clickable" style="height: 220px; display: block;"
-                            data-bind="click: function() {
-                              if (DungeonRunner.fighting() && !DungeonBattle.catching()) {
-                                DungeonBattle.clickAttack();
-                              } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
-                                DungeonRunner.dungeonLeave();
-                              } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
-                                DungeonRunner.openChest();
-                              } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
-                                DungeonRunner.startBossFight();
-                              }
-                            }">
-                            <h2 class="pageItemTitle" style="display: block;">
-                                <knockout data-bind="if: DungeonBattle.enemyPokemon() && DungeonBattle.enemyPokemon().health()">
-                                    <knockout data-bind="text: DungeonBattle.enemyPokemon().name">Pokémon name</knockout>
-                                    <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
-                                </knockout>
-                                <knockout data-bind="if: !DungeonBattle.enemyPokemon() || !DungeonBattle.enemyPokemon().health()">
-                                    &nbsp;
-                                </knockout>
+    <div class="col no-gutters clickable" style="height: 220px; display: block;"
+        data-bind="click: function() { DungeonRunner.handleClick() }">
+        <h2 class="pageItemTitle" style="display: block;">
+            <knockout data-bind="if: DungeonBattle.enemyPokemon() && DungeonBattle.enemyPokemon().health()">
+                <knockout data-bind="text: DungeonBattle.enemyPokemon().name">Pokémon name</knockout>
+                <!-- ko if: !DungeonBattle.trainer() -->
+                <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
+                <!-- /ko -->
+            </knockout>
+            <knockout data-bind="if: !DungeonBattle.enemyPokemon() || !DungeonBattle.enemyPokemon().health()">
+                &nbsp;
+            </knockout>
 
-                                <knockout class="left">
-                                    <knockout data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</knockout>
+            <knockout class="left">
+                <!-- ko if: !DungeonBattle.trainer() -->
+                <knockout data-bind="text: DungeonRunner.dungeon.name">Dungeon name</knockout>
+                <!-- /ko -->
+                <!-- ko if: DungeonBattle.trainer() -->
+                <knockout data-bind="text: DungeonBattle.trainer().name">Trainer name</knockout>
+                <!-- /ko -->
 
-                                    <!--If all Pokémon in the dungeon are caught-->
-                                    <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) && DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, false))">
-                                        <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
-                                             src="assets/images/pokeball/Pokeball.svg"/>
-                                    </knockout>
+                <!-- ko if: !DungeonBattle.trainer() -->
 
-                                    <!--If all Pokémon in the dungeon are caught shiny-->
-                                    <knockout data-bind="if: DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true)">
-                                        <img title="You have captured all Pokémon shiny on this route!"
-                                             class="pokeball-smallest"
-                                             src="assets/images/pokeball/Pokeball-shiny.svg"/>
-                                    </knockout>
-                                </knockout>
+                <!--If all Pokémon in the dungeon are caught-->
+                <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) && DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, false))">
+                    <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
+                         src="assets/images/pokeball/Pokeball.svg"/>
+                </knockout>
 
-                                <knockout class="right" data-bind="css: { 'text-danger': DungeonRunner.timeLeftSeconds() < 20, 'text-primary': DungeonRunner.timeLeftSeconds() >= 20 }">
-                                    <h4><strong data-bind="text: DungeonRunner.timeLeftSeconds() + 's'"></strong></h4>
-                                </knockout>
+                <!--If all Pokémon in the dungeon are caught shiny-->
+                <knockout data-bind="if: DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true)">
+                    <img title="You have captured all Pokémon shiny on this route!"
+                         class="pokeball-smallest"
+                         src="assets/images/pokeball/Pokeball-shiny.svg"/>
+                </knockout>
 
-                                <div class="progress timer">
-                                    <div class="progress-bar bg-danger" role="progressbar"
-                                         data-bind="attr:{ style: 'width:' + DungeonRunner.timeLeftPercentage() + '%' },
-                                         css: { 'bg-danger': DungeonRunner.timeLeftSeconds() < 20, 'bg-primary': DungeonRunner.timeLeftSeconds() >= 20 }"
-                                         aria-valuemin="0" aria-valuemax="100">
-                                         <span data-bind="text: DungeonRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
-                                    </div>
-                                </div>
-                            </h2>
+                <!-- /ko -->
+            </knockout>
 
-                            <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching)  -->
-                            <div data-bind="if: DungeonBattle.enemyPokemon">
-                                <div>
-                                    <div data-bind="ifnot: DungeonBattle.catching">
-                                        <img class="enemy"
-                                             data-bind="attr:{ src: PokemonHelper.getImage(DungeonBattle.enemyPokemon(), DungeonBattle.enemyPokemon().shiny) }"
-                                             src=""/>
-                                    </div>
-                                    <div data-bind="if: DungeonBattle.catching" class="catchChance">
-                                        <img class="pokeball-animated"
-                                             data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.svg' }"
-                                             src=""/>
-                                        <br>
-                                        Catch Chance:
-                                        <knockout data-bind="text: Math.floor(DungeonBattle.catchRateActual()) + '%'">Catch Rate</knockout>
-                                    </div>
-                                </div>
-                                <div class="progress hitpoints" style="height: 20px;">
-                                    <div class="progress-bar bg-danger" role="progressbar"
-                                         data-bind="attr:{ style: 'width:' + DungeonBattle.enemyPokemon().healthPercentage() + '%'}, css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunner.fightingBoss()}"
-                                         aria-valuemin="0" aria-valuemax="100">
-                                         <span data-bind="text: DungeonBattle.enemyPokemon().health() + ' / ' + DungeonBattle.enemyPokemon().maxHealth()" style="font-size: 12px;"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /ko -->
-                            <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest -->
-                            <div>
-                                <img class="dungeon-chest" src="assets/images/dungeons/chest.png"/>
-                            </div>
-                            <!-- /ko -->
-                            <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) -->
-                            <div>
-                                <button class="btn btn-danger dungeon-button">Start Bossfight</button>
-                            </div>
-                            <!-- /ko -->
-                            <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance -->
-                            <div>
-                                <button class="btn btn-warning dungeon-button">Leave Dungeon</button>
-                            </div>
-                            <!-- /ko -->
-                        </div>
-                    </div>
+            <!-- ko ifnot: DungeonBattle.trainer() -->
+            <knockout class="right" data-bind="css: { 'text-danger': DungeonRunner.timeLeftSeconds() < 20, 'text-primary': DungeonRunner.timeLeftSeconds() >= 20 }">
+                <h4><strong data-bind="text: DungeonRunner.timeLeftSeconds() + 's'"></strong></h4>
+            </knockout>
+            <!-- /ko -->
+            <!-- ko if: DungeonBattle.trainer() -->
+            <knockout class="right">
+                <span data-bind="foreach: new Array(DungeonBattle.defeatedTrainerPokemon())">
+                    <img src="assets/images/pokeball/Pokeball.svg" class="pokeball-smallest pokeball-defeated"/>
+                </span>
+                <span data-bind="foreach: new Array(DungeonBattle.remainingTrainerPokemon())">
+                    <img src="assets/images/pokeball/Pokeball.svg" class="pokeball-smallest"/>
+                </span>
+            </knockout>
+            <!-- /ko -->
+            <div class="progress timer">
+                <div class="progress-bar bg-danger" role="progressbar"
+                     data-bind="attr:{ style: 'width:' + DungeonRunner.timeLeftPercentage() + '%' },
+                     css: { 'bg-danger': DungeonRunner.timeLeftSeconds() < 20, 'bg-primary': DungeonRunner.timeLeftSeconds() >= 20 }"
+                     aria-valuemin="0" aria-valuemax="100">
+                     <span data-bind="text: DungeonRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
+                </div>
+            </div>
+        </h2>
+
+        <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching)  -->
+        <div data-bind="if: DungeonBattle.enemyPokemon">
+            <div style="position:absolute; left:65%;" data-bind="if: DungeonBattle.trainer()">
+                <img data-bind="attr:{ src: DungeonBattle.trainer().image }"/>
+            </div>
+            <div>
+                <div data-bind="ifnot: DungeonBattle.catching">
+                    <img class="enemy"
+                         data-bind="attr:{ src: PokemonHelper.getImage(DungeonBattle.enemyPokemon(), DungeonBattle.enemyPokemon().shiny) }"
+                         src=""/>
+                </div>
+                <div data-bind="if: DungeonBattle.catching" class="catchChance">
+                    <img class="pokeball-animated"
+                         data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.svg' }"
+                         src=""/>
+                    <br>
+                    Catch Chance:
+                    <knockout data-bind="text: Math.floor(DungeonBattle.catchRateActual()) + '%'">Catch Rate</knockout>
+                </div>
+            </div>
+            <div class="progress hitpoints" style="height: 20px;">
+                <div class="progress-bar bg-danger" role="progressbar"
+                     data-bind="attr:{ style: 'width:' + DungeonBattle.enemyPokemon().healthPercentage() + '%'}, css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunner.fightingBoss()}"
+                     aria-valuemin="0" aria-valuemax="100">
+                     <span data-bind="text: DungeonBattle.enemyPokemon().health() + ' / ' + DungeonBattle.enemyPokemon().maxHealth()" style="font-size: 12px;"></span>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest -->
+        <div>
+            <img class="dungeon-chest" src="assets/images/dungeons/chest.png"/>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) -->
+        <div>
+            <button class="btn btn-danger dungeon-button">Start Bossfight</button>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance && DungeonRunner.map.playerMoved() -->
+        <div>
+            <button class="btn btn-warning dungeon-button">Leave Dungeon</button>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
 
                     <!-- Gym Battles -->
                     
@@ -913,7 +1031,7 @@
             <knockout>
                 <knockout data-bind="text: GymBattle.enemyPokemon().name">Pokémon name</knockout>
             </knockout>
-            
+
             <knockout class="right">
                 <span data-bind="foreach: new Array(GymBattle.pokemonsDefeatedComputable())">
                     <img src="assets/images/pokeball/Pokeball.svg" class="pokeball-smallest pokeball-defeated"/>
@@ -942,10 +1060,12 @@
         </div>
 
         <div>
-            <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(GymBattle.enemyPokemon(), GymBattle.enemyPokemon().shiny) }" src=""/>
-            <!-- TODO: put this image somewhere
-            <img height="56px" id="gymLeader" src="" data-bind="attr:{ src: 'assets/images/gymLeaders/' + GymBattle.gym.leaderName + '.png'}">
+            <!-- TODO: HLXII - Add after all Gym Leader images are formatted correctly
+            <div style="position:absolute; left:65%;">
+                <img height=80px data-bind="attr:{ src: GymBattle.gym.imagePath }"/>
+            </div>
             -->
+            <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(GymBattle.enemyPokemon(), GymBattle.enemyPokemon().shiny) }" src=""/>
         </div>
 
         <div class="progress hitpoints" style="height: 20px;">
@@ -1004,26 +1124,26 @@
 
                     <!--TownView-->
                     <knockout data-bind="if: App.game.gameState === GameConstants.GameState.town">
-<div id="townView" data-bind="style: { backgroundImage: 'url(\'assets/images/towns/' + player.town().name() + '.png\')' }"
+<div id="townView" data-bind="style: { backgroundImage: 'url(\'assets/images/towns/' + player.town().name + '.png\')' }"
      class="justify-content-center no-gutters no-select">
     <div class="row justify-content-center no-gutters">
         <div class="col no-gutters">
             <button type="button" class="btn btn-outline-info" style="float: right;"
-            data-bind="visible: player.town().gym() || player.town().shop(), tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
+            data-bind="visible: player.town().gym || player.town().shop, tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
             <button type="button" class="btn btn-outline-info" style="float: right;"
             data-bind="visible: player.town() instanceof DungeonTown, tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
             <h2 class="pageItemTitle">
-              <knockout data-bind="text: player.town().name()">Town Name</knockout>
+              <knockout data-bind="text: player.town().name">Town Name</knockout>
 
-              <knockout data-bind="if: player.town() instanceof DungeonTown && player.town().dungeon()">
+              <knockout data-bind="if: player.town() instanceof DungeonTown && player.town().dungeon">
                   <!--If all Pokémon in the dungeon are caught-->
-                  <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(player.town().dungeon(), true) && DungeonRunner.dungeonCompleted(player.town().dungeon(), false))">
+                  <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(player.town().dungeon, true) && DungeonRunner.dungeonCompleted(player.town().dungeon, false))">
                       <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
                            src="assets/images/pokeball/Pokeball.svg"/>
                   </knockout>
 
                   <!--If all Pokémon in the dungeon are caught shiny-->
-                  <knockout data-bind="if: DungeonRunner.dungeonCompleted(player.town().dungeon(), true)">
+                  <knockout data-bind="if: DungeonRunner.dungeonCompleted(player.town().dungeon, true)">
                       <img title="You have captured all Pokémon shiny on this route!"
                            class="pokeball-smallest"
                            src="assets/images/pokeball/Pokeball-shiny.svg"/>
@@ -1046,41 +1166,41 @@
                <!-- /ko -->
            </div>
            <div class="list-group">
-               <button data-bind="visible: player.town().gym, attr: { class: player.town().gym() ? Gym.calculateCssClass(player.town().gym()) : '' }"
-                       onclick="GymRunner.startGym(player.town().gym())">
+               <button data-bind="visible: player.town().gym, attr: { class: player.town().gym ? Gym.calculateCssClass(player.town().gym) : '' }"
+                       onclick="GymRunner.startGym(player.town().gym)">
                    Gym
                </button>
-               <a class="btn btn-secondary" href="#shopModal" data-bind="visible: player.town().shop" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop())">Shop</a>
-               <a class="btn btn-secondary" href="#berryMasterModal" data-bind="visible: player.town().berryMaster" data-toggle="modal" onclick="ShopHandler.showShop(player.town().berryMaster())">Berry Master</a>
+               <a class="btn btn-secondary" href="#shopModal" data-bind="visible: player.town().shop" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop)">Shop</a>
+               <a class="btn btn-secondary" href="#berryMasterModal" data-bind="visible: player.town().berryMaster" data-toggle="modal" onclick="ShopHandler.showShop(player.town().berryMaster)">Berry Master</a>
                <button class="btn btn-warning"
                        href="#nextRegionModal" data-toggle="modal"
-                       data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name()), text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">
+                       data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name), text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">
                      Travel To Next Region
                </button>
-               <button class="btn btn-info" onclick="MapHelper.openShipModal();" data-bind="visible: player.highestRegion() > 0 && GameConstants.DockTowns.includes(player.town().name())">
+               <button class="btn btn-info" onclick="MapHelper.openShipModal();" data-bind="visible: player.highestRegion() > 0 && GameConstants.DockTowns.includes(player.town().name)">
                      Dock
                </button>
                <button class="btn btn-secondary p-0"
-                       onclick="DungeonRunner.initializeDungeon(player.town().dungeon())"
-                       data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon(), attr: { class: player.town().dungeon() && App.game.wallet.currencies[GameConstants.Currency.dungeonToken]() >= player.town().dungeon().tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0' }">
+                       onclick="DungeonRunner.initializeDungeon(player.town().dungeon)"
+                       data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon, attr: { class: player.town().dungeon && App.game.wallet.currencies[GameConstants.Currency.dungeonToken]() >= player.town().dungeon.tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0' }">
                    Start<br/>
-                   <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town().dungeon().tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
+                   <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town().dungeon.tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
                </button>
                <button class="btn btn-secondary"
-                       onclick="MapHelper.moveToTown(player.town().dungeon().name())"
-                       data-bind="visible: player.town().dungeon() && (!(player.town() instanceof DungeonTown) && player.town() instanceof Town), if: player.town().dungeon()">
-                   <span data-bind="text: player.town().dungeon().name()"></span>
+                       onclick="MapHelper.moveToTown(player.town().dungeon.name)"
+                       data-bind="visible: player.town().dungeon && (!(player.town() instanceof DungeonTown) && player.town() instanceof Town), if: player.town().dungeon">
+                   <span data-bind="text: player.town().dungeon.name"></span>
                </button>
                <button class="btn btn-primary"
                        onclick="BattleFrontier.enter()"
-                       data-bind="visible: player.town().name() == 'Battle Frontier'">
+                       data-bind="visible: player.town().name == 'Battle Frontier'">
                    Enter Battle Frontier
                </button>
            </div>
        </div>
        <div class="col-6"></div>
        <div class="col-3 no-gutters">
-           <div class="list-group" data-bind="foreach: player.town().npcs()">
+           <div class="list-group" data-bind="foreach: player.town().npcs">
                 <button class="btn btn-info"
                         data-bind="text: $data.name, click: $data.openDialog">
                     NPC
@@ -1090,19 +1210,15 @@
 
     </div>
     <div style="flex-grow: 1;"></div>
-    <knockout data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
+    <knockout data-bind="if: (player.town().dungeon && player.town() instanceof DungeonTown)">
       <div id="dungeonPokemonList" class="card">
         <!--Display all available Pokémon in this dungeon-->
-        <ul class="list-inline" data-bind="foreach: player.town().dungeon().allPokemonNames">
+        <ul class="list-inline" data-bind="foreach: player.town().dungeon.encounterList">
           <li class="list-inline-item">
-            <img class="dungeon-pokemon-preview" src="" data-bind="attr:{
-                src: 'assets/images/' + (App.game.party.alreadyCaughtPokemonByName($data, true) ? 'shiny' : '') + 'pokemon/' + pokemonMap[$data].id + '.png'
-            },
-            css: {
-                'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName($data)
-            }"/>
-            <sup class="shiny" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
-            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: player.town().dungeon() && player.town().dungeon().allAvailablePokemonNames.includes($data)">
+            <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
+            css: { 'dungeon-pokemon-locked': $data.hidden }"/>
+            <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
+            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock">
           </li>
         </ul>
       </div>
@@ -1135,7 +1251,7 @@
                                     "></span>
                                 </span>
                             </td>
-                            <td width="50%">
+                            <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
                                 <span style="display: inline;">Click Attack:
                                     <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
                                 </span>
@@ -1172,7 +1288,7 @@
             <!-- ko if: App.game.gameState === GameConstants.GameState.dungeon -->
             <div id="dungeonMap" class="card sortable-disabled border-secondary mb-3 dungeon no-select">
                 <div class="card-header p-0">
-                    <span data-bind="text: DungeonRunner.dungeon.name()"></span>
+                    <span data-bind="text: DungeonRunner.dungeon.name"></span>
                 </div>
                 <div class="card-body p-0 text-center">
                     <table class="dungeon-board">
@@ -1222,7 +1338,10 @@
             <tbody data-bind="foreach: BattleFrontierMilestones.availableMilestones().slice(0, 4)">
                 <tr>
                     <th class="tight" data-bind="text: $data.stage"></td>
-                    <td class="text-left"><knockout data-bind="text: $data.description"></knockout> <knockout data-bind="if: $data.image"><img data-bind="attr:{ src: $data.image }" src="" width="20px" /></knockout></td>
+                    <td class="text-left">
+                        <img width="28px" data-bind="attr:{ src: $data.image }" />
+                        <knockout data-bind="text: $data.description"></knockout>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -1231,6 +1350,7 @@
     <!-- /ko -->
 </div>
 <!-- /ko -->
+
 
             <div id="middle-bottom-sort-column">
                 <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
@@ -6347,7 +6467,18 @@
     data-bind="click:function(){MapHelper.moveToTown('Mt. Coronet South')},
         attr: { class: MapHelper.calculateTownCssClass('Mt. Coronet South') }">
 </rect>
+    <!--Solaceon Ruins-->
+    
 
+<rect class="city"
+    data-town="Solaceon Ruins" 
+    x="912"
+    y="560"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Solaceon Ruins')},
+        attr: { class: MapHelper.calculateTownCssClass('Solaceon Ruins') }">
+</rect>
     <!--Lake Valor-->
     
 
@@ -9961,6 +10092,1040 @@
 
 </g>
 
+                            <g data-bind='visible: player.region == GameConstants.Region.galar'>
+    <image width="100%" xlink:href="assets/images/galar.png"></image>
+
+    <!-- ------ -->
+    <!-- ROUTES -->
+    <!-- ------ -->
+
+    <!--Route 1-->
+    
+
+<g
+
+    transform="rotate(90 ,720, 864)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 7); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 7) }"
+        height="32"
+        width="64"
+        x="720" y="832">
+    </rect>
+
+    <text style="font-size: 32px" x="744" y="861">1</text>
+
+</g>
+
+
+    <!--Route 2-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 7); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 7) }"
+        height="32"
+        width="48"
+        x="768" y="832">
+    </rect>
+
+    <text style="font-size: 32px" x="784" y="858">2</text>
+
+</g>
+
+    <!--extra Route 2-->
+    
+
+<g
+
+    transform="rotate(90 ,784, 816)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 7); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 7) }"
+        height="32"
+        width="16"
+        x="784" y="784">
+    </rect>
+
+</g>
+
+
+    <!--Rolling Fields-->
+    
+
+<g
+
+    transform="rotate(90 ,720, 720)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 7); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 7) }"
+        height="32"
+        width="80"
+        x="720" y="688">
+    </rect>
+
+    <text style="font-size: 32px" x="733" y="717">R.F.</text>
+
+</g>
+
+
+    <!--Dappled Grove-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(4, 7); } ">
+    <rect data-route='4'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(4, 7) }"
+        height="32"
+        width="96"
+        x="624" y="752">
+    </rect>
+
+    <text style="font-size: 32px" x="640" y="778">D.G.</text>
+
+</g>
+
+    <!--DG Extras-->
+    
+
+<g
+
+    transform="rotate(90 ,624, 688)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(4, 7); } ">
+    <rect data-route='4'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(4, 7) }"
+        height="32"
+        width="64"
+        x="624" y="656">
+    </rect>
+
+</g>
+
+    
+    <!--West Lake Axwell-->
+    
+
+<g
+
+    transform="rotate(90 ,688, 672)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(5, 7); } ">
+    <rect data-route='5'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(5, 7) }"
+        height="32"
+        width="80"
+        x="688" y="640">
+    </rect>
+
+    <text style="font-size: 32px" x="670" y="669">W.L.A.</text>
+
+</g>
+
+    <!--WLA Extra-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(5, 7); } ">
+    <rect data-route='5'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(5, 7) }"
+        height="32"
+        width="64"
+        x="672" y="640">
+    </rect>
+
+</g>
+
+
+    <!--East Lake Axwell-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(6, 7); } ">
+    <rect data-route='6'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(6, 7) }"
+        height="32"
+        width="128"
+        x="736" y="640">
+    </rect>
+
+    <text style="font-size: 32px" x="760" y="666">E.L.A</text>
+
+</g>
+
+    <!--ELA Extras-->
+    
+
+<g
+
+    transform="rotate(90 ,784, 624)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(6, 7); } ">
+    <rect data-route='6'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(6, 7) }"
+        height="32"
+        width="16"
+        x="784" y="592">
+    </rect>
+
+</g>
+
+
+    <!--North Lake Miloch-->
+    
+
+<g
+
+    transform="rotate(90 ,864, 640)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(9, 7); } ">
+    <rect data-route='9'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(9, 7) }"
+        height="32"
+        width="112"
+        x="864" y="608">
+    </rect>
+
+    <text style="font-size: 32px" x="875" y="637">N.L.M.</text>
+
+</g>
+
+
+    <!--South Lake Miloch-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(8, 7); } ">
+    <rect data-route='8'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(8, 7) }"
+        height="32"
+        width="112"
+        x="752" y="720">
+    </rect>
+
+    <text style="font-size: 32px" x="760" y="746">S.L.M.</text>
+
+</g>
+
+     <!--SLM Extras-->
+    
+
+<g
+
+    transform="rotate(90 ,784, 672)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(8, 7); } ">
+    <rect data-route='8'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(8, 7) }"
+        height="32"
+        width="48"
+        x="784" y="640">
+    </rect>
+
+</g>
+
+
+    <!--Giant's Seat-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(7, 7); } ">
+    <rect data-route='7'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(7, 7) }"
+        height="32"
+        width="144"
+        x="752" y="752">
+    </rect>
+
+    <text style="font-size: 32px" x="800" y="778">G.S</text>
+
+</g>
+
+
+    <!--Route 3-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(10, 7); } ">
+    <rect data-route='10'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(10, 7) }"
+        height="32"
+        width="96"
+        x="624" y="576">
+    </rect>
+
+    <text style="font-size: 32px" x="664" y="602">3</text>
+
+</g>
+
+
+    <!--Route 4-->
+    
+
+<g
+
+    transform="rotate(90 ,560, 512)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(11, 7); } ">
+    <rect data-route='11'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(11, 7) }"
+        height="32"
+        width="48"
+        x="560" y="480">
+    </rect>
+
+    <text style="font-size: 32px" x="576" y="509">4</text>
+
+</g>
+
+
+    <!--Route 5-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(12, 7); } ">
+    <rect data-route='12'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 7) }"
+        height="32"
+        width="320"
+        x="608" y="480">
+    </rect>
+
+    <text style="font-size: 32px" x="760" y="506">5</text>
+
+</g>
+
+    <!--Extra bits of Route 5-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(12, 7); } ">
+    <rect data-route='12'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 7) }"
+        height="16"
+        width="16"
+        x="912" y="512">
+    </rect>
+
+</g>
+
+
+    <!--Motostoke Outskirts-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(13, 7); } ">
+    <rect data-route='13'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(13, 7) }"
+        height="32"
+        width="80"
+        x="864" y="576">
+    </rect>
+
+    <text style="font-size: 32px" x="872" y="602">M.S.</text>
+
+</g>
+
+
+    <!--Hammerlocke Hills-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(14, 7); } ">
+    <rect data-route='14'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(14, 7) }"
+        height="28"
+        width="48"
+        x="752" y="528">
+    </rect>
+
+    <text style="font-size: 32px" x="744" y="552">H.H.</text>
+
+</g>
+
+     <!--HH extras-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(14, 7); } ">
+    <rect data-route='14'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(14, 7) }"
+        height="16"
+        width="16"
+        x="784" y="512">
+    </rect>
+
+</g>
+
+     <!--HH extras-->
+    
+
+<g
+
+    transform="rotate(90 ,784, 464)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1146, 7); } ">
+    <rect data-route='1146'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1146, 7) }"
+        height="32"
+        width="16"
+        x="784" y="432">
+    </rect>
+
+</g>
+
+
+    <!--Route 6-->
+    
+
+<g
+
+    transform="rotate(90 ,720, 400)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 7); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 7) }"
+        height="16"
+        width="64"
+        x="720" y="384">
+    </rect>
+
+</g>
+
+    <!--Extra bit of Route 6-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 7); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 7) }"
+        height="32"
+        width="80"
+        x="672" y="368">
+    </rect>
+
+    <text style="font-size: 32px" x="704" y="394">6</text>
+
+</g>
+
+    <!--Extra bit of Route 6-->
+    
+
+<g
+
+    transform="rotate(90 ,672, 320)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 7); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 7) }"
+        height="32"
+        width="48"
+        x="672" y="288">
+    </rect>
+
+</g>
+
+    <!--Extra bit of Route 6-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 7); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 7) }"
+        height="32"
+        width="32"
+        x="640" y="320">
+    </rect>
+
+</g>
+
+
+    <!--Route 7-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(16, 7); } ">
+    <rect data-route='16'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(16, 7) }"
+        height="32"
+        width="80"
+        x="816" y="432">
+    </rect>
+
+    <text style="font-size: 32px" x="848" y="458">7</text>
+
+</g>
+
+
+    <!--Route 8-->
+    
+
+<g
+
+    transform="rotate(90 ,832, 336)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(17, 7); } ">
+    <rect data-route='17'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(17, 7) }"
+        height="32"
+        width="96"
+        x="832" y="304">
+    </rect>
+
+    <text style="font-size: 32px" x="872" y="333">8</text>
+
+</g>
+
+
+    <!--Steamdrift Way-->
+    
+
+<g
+
+    transform="rotate(90 ,864, 304)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 7); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 7) }"
+        height="32"
+        width="64"
+        x="864" y="272">
+    </rect>
+
+    <text style="font-size: 32px" x="864" y="301">S.W.</text>
+
+</g>
+
+
+    <!--Route 2 Lakeside-->
+     
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 7); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 7) }"
+        height="32"
+        width="48"
+        x="784" y="784">
+    </rect>
+
+    <text style="font-size: 32px" x="786" y="810">L.S.</text>
+
+</g>
+
+    <!--Route 2 LS extras-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 7); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 7) }"
+        height="32"
+        width="32"
+        x="816" y="800">
+    </rect>
+
+</g>
+
+
+    <!--Route 9-->
+    
+
+<g
+
+    transform="rotate(90 ,944, 304)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(20, 7); } ">
+    <rect data-route='20'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 7) }"
+        height="32"
+        width="48"
+        x="944" y="272">
+    </rect>
+
+    <text style="font-size: 32px" x="960" y="301">9</text>
+
+</g>
+
+
+    <!--Circhester Bay-->
+    
+
+<g
+
+    transform="rotate(90 ,944, 352)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(21, 7); } ">
+    <rect data-route='21'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(21, 7) }"
+        height="32"
+        width="80"
+        x="944" y="320">
+    </rect>
+
+    <text style="font-size: 32px" x="952" y="349">C.B.</text>
+
+</g>
+
+
+    <!--Outer Spikemuth-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(22, 7); } ">
+    <rect data-route='22'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(22, 7) }"
+        height="32"
+        width="80"
+        x="896" y="432">
+    </rect>
+
+    <text style="font-size: 32px" x="904" y="458">O.S.</text>
+
+</g>
+
+
+    <!--Route 10-->
+    
+
+<g
+
+    transform="rotate(90 ,752, 240)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(23, 7); } ">
+    <rect data-route='23'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 7) }"
+        height="32"
+        width="64"
+        x="752" y="208">
+    </rect>
+
+    <text style="font-size: 32px" x="744" y="237">10 S.</text>
+
+</g>
+
+
+    <!--Route 10 North-->
+    
+
+<g
+
+    transform="rotate(90 ,768, 128)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 7); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 7) }"
+        height="32"
+        width="112"
+        x="768" y="96">
+    </rect>
+
+    <text style="font-size: 32px" x="784" y="125">10 N.</text>
+
+</g>
+
+    <!--Route 10 North extras-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 7); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 7) }"
+        height="32"
+        width="16"
+        x="752" y="208">
+    </rect>
+
+</g>
+
+
+    <!-- ----- -->
+    <!-- TOWNS -->
+    <!-- ----- -->
+
+    <!--Postwick-->
+    
+
+<rect class="city"
+    data-town="Postwick" 
+    x="640"
+    y="872"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Postwick')},
+        attr: { class: MapHelper.calculateTownCssClass('Postwick') },
+        ">
+</rect>
+
+    <!--Wedgehurst-->
+    
+
+<rect class="city"
+    data-town="Wedgehurst" 
+    x="704"
+    y="800"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Wedgehurst')},
+        attr: { class: MapHelper.calculateTownCssClass('Wedgehurst') },
+        ">
+</rect>
+
+    <!--Motostoke-->
+    
+
+<rect class="city"
+    data-town="Motostoke" 
+    x="720"
+    y="556"
+    height="68"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Motostoke')},
+        attr: { class: MapHelper.calculateTownCssClass('Motostoke') },
+        ">
+</rect>
+    <!--Motostoke Extension-->
+    
+
+<rect class="city"
+    data-town="Motostoke" 
+    x="800"
+    y="560"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Motostoke')},
+        attr: { class: MapHelper.calculateTownCssClass('Motostoke') },
+        ">
+</rect>
+
+    <!--Turffield-->
+    
+
+<rect class="city"
+    data-town="Turffield" 
+    x="544"
+    y="448"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Turffield')},
+        attr: { class: MapHelper.calculateTownCssClass('Turffield') },
+        ">
+</rect>
+
+    <!--Hulbury-->
+    
+
+<rect class="city"
+    data-town="Hulbury" 
+    x="928"
+    y="464"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Hulbury')},
+        attr: { class: MapHelper.calculateTownCssClass('Hulbury') },
+        ">
+</rect>
+
+    <!--Hammerlocke-->
+    
+
+<rect class="city"
+    data-town="Hammerlocke" 
+    x="736"
+    y="392"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Hammerlocke')},
+        attr: { class: MapHelper.calculateTownCssClass('Hammerlocke') },
+        ">
+</rect>
+
+    <!--Stow-on-Side-->
+    
+
+<rect class="city"
+    data-town="Stow-on-Side" 
+    x="576"
+    y="288"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Stow-on-Side')},
+        attr: { class: MapHelper.calculateTownCssClass('Stow-on-Side') },
+        ">
+</rect>
+
+    <!--Ballonlea-->
+    
+
+<rect class="city"
+    data-town="Ballonlea" 
+    x="560"
+    y="176"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Ballonlea')},
+        attr: { class: MapHelper.calculateTownCssClass('Ballonlea') },
+        ">
+</rect>
+
+    <!--Circhester-->
+    
+
+<rect class="city"
+    data-town="Circhester" 
+    x="864"
+    y="232"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Circhester')},
+        attr: { class: MapHelper.calculateTownCssClass('Circhester') },
+        ">
+</rect>
+    <!--Circhester extension-->
+    
+
+<rect class="city"
+    data-town="Circhester" 
+    x="944"
+    y="240"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Circhester')},
+        attr: { class: MapHelper.calculateTownCssClass('Circhester') },
+        ">
+</rect>
+
+    <!--Spikemuth-->
+    
+
+<rect class="city"
+    data-town="Spikemuth" 
+    x="976"
+    y="400"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Spikemuth')},
+        attr: { class: MapHelper.calculateTownCssClass('Spikemuth') },
+        ">
+</rect>
+
+    <!--Wyndon-->
+    
+
+<rect class="city"
+    data-town="Wyndon" 
+    x="704"
+    y="56"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Wyndon')},
+        attr: { class: MapHelper.calculateTownCssClass('Wyndon') },
+        ">
+</rect>
+    <!--Wyndon Extension-->
+    
+
+<rect class="city"
+    data-town="Wyndon" 
+    x="784"
+    y="64"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Wyndon')},
+        attr: { class: MapHelper.calculateTownCssClass('Wyndon') },
+        ">
+</rect>
+
+    <!--Wyndon Stadium-->
+    
+
+<rect class="city"
+    data-town="Wyndon Stadium" 
+    x="856"
+    y="4"
+    height="120"
+    width="160"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Wyndon Stadium')},
+        attr: { class: MapHelper.calculateTownCssClass('Wyndon Stadium') },
+        ">
+</rect>
+
+
+    <!-- -------- -->
+    <!-- DUNGEONS -->
+    <!-- -------- -->
+
+    <!--Slumbering Weald-->
+    
+
+<rect class="city"
+    data-town="Slumbering Weald" 
+    x="576"
+    y="912"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Slumbering Weald')},
+        attr: { class: MapHelper.calculateTownCssClass('Slumbering Weald') }">
+</rect>
+
+    <!--Inner Slumbering Weald-->
+    
+
+<rect class="city"
+    data-town="Inner Slumbering Weald" 
+    x="576"
+    y="864"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Inner Slumbering Weald')},
+        attr: { class: MapHelper.calculateTownCssClass('Inner Slumbering Weald') }">
+</rect>
+
+    <!--Watchtower Ruins-->
+    
+
+<rect class="city"
+    data-town="Watchtower Ruins" 
+    x="608"
+    y="640"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Watchtower Ruins')},
+        attr: { class: MapHelper.calculateTownCssClass('Watchtower Ruins') }">
+</rect>
+
+    <!--Galar Mine-->
+    
+
+<rect class="city"
+    data-town="Galar Mine" 
+    x="560"
+    y="560"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Galar Mine')},
+        attr: { class: MapHelper.calculateTownCssClass('Galar Mine') }">
+</rect>
+
+    <!--Galar Mine No. 2-->
+    
+
+<rect class="city"
+    data-town="Galar Mine No. 2" 
+    x="880"
+    y="528"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Galar Mine No. 2')},
+        attr: { class: MapHelper.calculateTownCssClass('Galar Mine No. 2') }">
+</rect>
+
+    <!--Dusty Bowl-->
+    
+
+<rect class="city"
+    data-town="Dusty Bowl" 
+    x="800"
+    y="512"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Dusty Bowl')},
+        attr: { class: MapHelper.calculateTownCssClass('Dusty Bowl') }">
+</rect>
+
+    <!--Lake of Outrage-->
+    
+
+<rect class="city"
+    data-town="Lake of Outrage" 
+    x="688"
+    y="512"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Lake of Outrage')},
+        attr: { class: MapHelper.calculateTownCssClass('Lake of Outrage') }">
+</rect>
+
+    <!--Glimwood Tangle-->
+    
+
+<rect class="city"
+    data-town="Glimwood Tangle" 
+    x="576"
+    y="240"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Glimwood Tangle')},
+        attr: { class: MapHelper.calculateTownCssClass('Glimwood Tangle') }">
+</rect>
+
+    <!--Rose Tower-->
+    
+
+<rect class="city"
+    data-town="Rose Tower" 
+    x="800"
+    y="80"
+    height="16"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Wyndon')},
+        attr: { class: MapHelper.calculateTownCssClass('Rose Tower') }">
+</rect>
+
+    <!-- ------------------ -->
+    <!-- PLACES OF INTEREST -->
+
+    <!-- ------------------ -->
+    
+
+<rect class="city"
+    data-town="Dock" 
+    x="960"
+    y="528"
+    height="48"
+    width="32"
+    data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Hulbury&#39;) }">
+</rect>
+</g>
+
 
                         </svg>
                     </div>
@@ -10021,11 +11186,20 @@
             </td>
           </tr>
         </tbody>
-        <!-- ko if: App.game.oakItems.hasAvailableSlot() -->
+        <!-- ko if: App.game.oakItems.hasAvailableSlot() && !App.game.challenges.list.disableOakItems.active() -->
         <tfoot>
           <tr>
             <td class="clickable table-warning text-light" colspan="2" href="#oakItemsModal" data-toggle="modal">
               Equip another oak item!
+            </td>
+          </tr>
+        </tfoot>
+        <!-- /ko -->
+        <!-- ko if: App.game.challenges.list.disableOakItems.active() -->
+        <tfoot>
+          <tr>
+            <td class="clickable table-danger text-light" colspan="2" href="#oakItemsModal" data-toggle="modal">
+              Oak Items are disabled.
             </td>
           </tr>
         </tfoot>
@@ -10037,7 +11211,7 @@
 
             <!-- Current Quest -->
             <div id="questDisplayContainer" class="card sortable border-secondary mb-3">
-    <!-- ko if: QuestLineHelper.isTutorialCompleted() -->
+    <!-- ko if: QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->
         <div class="card-header p-0" data-toggle="collapse" href="#questDisplayBody">
             <span data-bind='text: "Quests (" + App.game.quests.currentQuests().length + "/" + App.game.quests.questSlots() + ")"'></span>
         </div>
@@ -10048,7 +11222,7 @@
     <!-- /ko -->
 
     <div id="questDisplayBody" class="card-body p-0 show">
-        <!-- ko if: App.game.quests.currentQuests().length == 0 && QuestLineHelper.isTutorialCompleted()-->
+        <!-- ko if: App.game.quests.currentQuests().length == 0 && QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->
             <span class="pt-2 pb-2">No active quest</span>
         <!-- /ko -->
         <table width="100%">
@@ -10204,7 +11378,7 @@
           </tr>
           <tr data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Lance')]">
             <td class="p-0">
-              <button class="btn btn-block btn-primary m-0" onclick="ShopHandler.showShop(pokeMartShop);player.currentTown('Poké Mart');" href="#shopModal" data-toggle="modal">
+              <button class="btn btn-block btn-primary m-0" onclick="ShopHandler.showShop(pokeMartShop);" href="#shopModal" data-toggle="modal">
                   Poké Mart
               </button>
             </td>
@@ -10219,13 +11393,53 @@
     </div>
 </div>
 
+<!-- Challenge Mode Modal -->
+<div class="modal noselect fade" id="challengeModeModal" tabindex="-1" role="dialog" aria-labelledby="challengeModeModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Challenge Modes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <strong>Activate in game challenge modes!</strong><br/>
+                    Once you activate a challenge you will not be able to disable it later on, decide carefully.
+                </p>
+                <br/>
+                <table class="table" width="100%">
+                    <tbody data-bind="foreach: Object.values(App.game.challenges.list)">
+                        <tr data-bind="tooltip: {
+                            title: $data.description,
+                            placement: 'bottom',
+                            trigger: 'hover'
+                        }">
+                            <td class="text-left font-weight-bold" data-bind="text: $data.type"></td>
+                            <td class="p-1">
+                                <!-- ko if: !$data.active() && player.starter() == GameConstants.Starter.None --><button class="btn btn-warning btn-block" data-bind="click: ()=>{$data.activate();}">ACTIVATE</button><!-- /ko -->
+                                <!-- ko if: $data.active() --><button class="btn btn-success btn-block disabled">ACTIVE</button><!-- /ko -->
+                                <!-- ko if: !$data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-secondary btn-block disabled">DISABLED</button><!-- /ko -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+               <button class="btn btn-primary btn-block" data-dismiss="modal">Done!</button>
+            </div>
+       </div>
+    </div>
+</div>
+
+
 <!--ShopModal-->
 <div class="modal fade noselect" id="shopModal" tabindex="-1" role="dialog"
      aria-labelledby="shopModalLabel">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h4 data-bind="text: player.currentTown().endsWith('Mart') ? player.currentTown() : player.currentTown() + ' Shop'">Shop</h4>
+                <h4 data-bind="text: ShopHandler.getShopName()">Shop</h4>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -10286,7 +11500,7 @@
 
 
 <script type="text/html" id="shopBodyTemplate">
-    <div class="row justify-content-center" data-bind="foreach: [...new Set(ShopHandler.shopObservable().items().map(i => i.currency))]">
+    <div class="row justify-content-center" data-bind="foreach: [...new Set(ShopHandler.shopObservable().items.map(i => i.currency))]">
         <h4 class="col-6 col-sm-4 col-lg-2">
             <span data-bind="template: { name: 'currencyTemplate', data: { amount: App.game.wallet.currencies[$data](), currency: $data, reduced: true }}"></span>
         </h4>
@@ -10308,7 +11522,7 @@
                          data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $data.getCaughtStatus()}}">
                    </span>
                </knockout>
-               <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name().replace(/[^\w.-\\(\\)]/g, '_') + '.png' }">
+               <img src="" height="36px" data-bind="attr:{ src: $data.image }">
                <p data-bind="text: $data.displayName">Item Name</p>
                <div data-bind="if: $data.isAvailable()">
                     <span data-bind="template: { name: 'currencyTemplate', data: {'amount': totalPrice(ShopHandler.amount()), 'currency': currency, 'reducedThreshold': 1e10}}"></span>
@@ -10486,6 +11700,9 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                    <span aria-hidden="true">&times;</span>
                </button>
+           </div>
+           <div data-bind="visible: App.game.challenges.list.disableOakItems.active()" class="modal-body bg-danger my-0 py-0">
+              Oak Items are disabled.
            </div>
            <div class="modal-body py-1">
               <ul class="row justify-content-center p-0 my-0"
@@ -10839,30 +12056,31 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
 <!-- Start Sequence Modal-->
 <div class="modal" id="startSequenceModal" tabindex="-1" role="dialog"
 aria-labelledby="startSequenceModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-   <div class="modal-content">
-       <div class="modal-header">
-           <div style="width: 100%;">
-               <img src="assets/images/oak.png">
-               <h5 class="modal-title" id="startSequenceModalLabel">Professor Oak</h5>
-           </div>
-       </div>
-       <div class="modal-body">
-           <p>
-               Hello, there! Welcome to the world of Pokémon!<br/>
-               My name is Oak, People affectionately refer to me as the Pokémon Professor.<br/>
-               This world is inhabited by creatures called Pokémon!<br/>
-               For some people, Pokémon are pets. Other use them for battling.<br/>
-               As for myself… I study Pokémon as a profession.<br/>
-               However, your very own Pokémon legend is about to unfold!<br/>
-               A world of dreams and adventures with Pokémon awaits! Let's go!
-           </p>
-       </div>
-       <div class="modal-footer">
-           <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
-       </div>
-   </div>
-</div>
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div style="width: 100%;">
+                    <img src="assets/images/oak.png">
+                    <h5 class="modal-title" id="startSequenceModalLabel">Professor Oak</h5>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p>
+                Hello, there! Welcome to the world of Pokémon!<br/>
+                My name is Oak, People affectionately refer to me as the Pokémon Professor.<br/>
+                This world is inhabited by creatures called Pokémon!<br/>
+                For some people, Pokémon are pets. Other use them for battling.<br/>
+                As for myself… I study Pokémon as a profession.<br/>
+                However, your very own Pokémon legend is about to unfold!<br/>
+                A world of dreams and adventures with Pokémon awaits! Let's go!
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning mr-auto" href="#challengeModeModal" data-toggle="modal">Challenge Modes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -10978,7 +12196,7 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
            <p>
                So, you won! Congratulations!<br/>
                You are the new Pokémon League champion!<br/>
-               You have grown up so much since you first left with <span data-bind="text: GameConstants.Starter[player.starter]">starter</span>!<br/>
+               You have grown up so much since you first left with <span data-bind="text: GameConstants.Starter[player.starter()]">starter</span>!<br/>
                <br/>
                There are many more regions to explore,<br/>
                In order to move on you will need to capture all available Pokémon from the current region!
@@ -11033,6 +12251,9 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
 
             </div>
             <div class="modal-body p-0">
+                <p data-bind="visible: App.game.challenges.list.disableShards.active()" class="bg-danger my-0 sticky-top">
+                    Shard bonuses are disabled.
+                </p>
                 <table class='table table-sm table-hover m-0'>
                     <!-- ko foreach: Array(Shards.nTypes) -->
                         <thead>
@@ -11305,7 +12526,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 click: function(){ ItemList[$data].use();},
                                 css: { disabled: player._itemList[$data]() <= 0}">
                             <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
-                            <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
+                            <img class="restore-item" data-bind="attr: { src: ItemList[$data].image }">
                             <span data-bind="text: ' +' + App.game.underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])">&nbsp;+? energy</span>
                         </button>
                     </div>
@@ -11444,12 +12665,12 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <tr>
                                     <td class='vertical-middle text-center' data-bind='text: player.getUndergroundItemAmount(item1.id)'></td>
                                     <td class='vertical-middle'>
-                                        <img class='mineInventoryItem' data-bind='attr: {src: item1.imagePath }'>
+                                        <img class='mineInventoryItem' data-bind='attr: {src: item1.image }'>
                                     </td>
                                     <td class='vertical-middle' data-bind='text: amount1 + " × " + item1.name'></td>
                                     <td class='vertical-middle'>→</td>
                                     <td class='vertical-middle'>
-                                        <img class='mineInventoryItem' data-bind='attr: {src: item2.imagePath }'>
+                                        <img class='mineInventoryItem' data-bind='attr: {src: item2.image }'>
                                     </td>
                                     <td class='vertical-middle' data-bind='text: amount2 + " × " + item2.name'></td>
                                     <td class='vertical-middle'>
@@ -11495,7 +12716,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
     <script type="text/html" id="treasureListTemplate">
         <tr data-bind='if: amount() > 0'>
             <td class='vertical-middle'>
-                <img class='mineInventoryItem' data-bind='attr:{ src: Underground.getMineItemById(id).imagePath }'>
+                <img class='mineInventoryItem' data-bind='attr:{ src: Underground.getMineItemById(id).image }'>
                 <span data-bind='text: "("+$data.amount()+")"'></span>
             </td>
             <td class='vertical-middle' data-bind='text: name'></td>
@@ -11782,19 +13003,25 @@ aria-labelledby="pokedexModalLabel">
                 <img src="assets/images/items/Protein.png" width="40%"/>
                 <br/>
                 <div class="sticky-top">
-                  <span class="btn btn-block btn-secondary btn-static" data-bind="text: 'Proteins: ' + player.itemList.Protein().toLocaleString('en-US')"></span>
-                  <button type="button" class="btn btn-sm btn-primary"
-                    style="position: absolute; right: 0px; top: 0px; width: 42px; height: 41px;"
-                    data-bind="text: VitaminController.multiplier[VitaminController.multiplierIndex()]"
-                    onclick="VitaminController.incrementMultiplier()"
-                    oncontextmenu="VitaminController.decrementMultiplier(); return false"
-                    title="Multiplier"
-                    data-toggle="popover"
-                    data-html="true"
-                    data-content="Left/right click to cycle amount<br/>Click on pokemon to use"
-                    data-placement="right"
-                    data-trigger="hover">
-                  </button>
+                  <!-- ko if: App.game.challenges.list.disableProteins.active() -->
+                  <span class="btn btn-block btn-danger btn-static m-0">
+                    Proteins are disabled.
+                  </span>
+                  <!-- /ko -->
+                  <div class="btn-group btn-block m-0" role="group" aria-label="Basic example">
+                    <button class="btn btn-block btn-secondary btn-static" data-bind="text: 'Proteins: ' + player.itemList.Protein().toLocaleString('en-US')"></button>
+                    <button type="button" class="btn btn-sm btn-primary"
+                      data-bind="text: VitaminController.multiplier[VitaminController.multiplierIndex()]"
+                      onclick="VitaminController.incrementMultiplier()"
+                      oncontextmenu="VitaminController.decrementMultiplier(); return false"
+                      title="Multiplier"
+                      data-toggle="popover"
+                      data-html="true"
+                      data-content="Left/right click to cycle amount<br/>Click on pokemon to use"
+                      data-placement="right"
+                      data-trigger="hover">
+                    </button>
+                  </div>
                   <div class="input-group" data-bind="with: Settings.getSetting('partySort')">
                       <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
                           data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
@@ -11901,12 +13128,12 @@ aria-labelledby="badgeCaseModalLabel">
                             <button class="btn btn-primary btn-block" onClick="Save.download()">Download Save</button>
                             <hr>
 
-                            <input type="file" id="input" accept=".txt" style="display:none;"
+                            <input type="file" id="import-save" accept=".txt" style="display:none;"
                                     onchange=Save.loadFromFile(this.files[0])>
-                            <label for="input" class="btn btn-primary btn-block">Import Save</label>
+                            <label for="import-save" class="btn btn-primary btn-block">Import Save</label>
                             <hr>
-                            <h5 class="text-danger">You do not get any rewards for resetting your savefile</h5>
-                            <button class="btn btn-danger btn-block" onClick="Save.reset()">Reset All</button>
+                            <h5 class="text-danger">You will not be able to recover your savefile</h5>
+                            <button class="btn btn-danger btn-block" onClick="Save.delete()">DELETE SAVE</button>
                         </div>
                     </div>
 
@@ -12050,7 +13277,7 @@ aria-labelledby="badgeCaseModalLabel">
                                         <!-- ko foreach: FarmController.getBerryListWithIndex() -->
                                         <li class="list-group-item list-group-item-action seed-list-item p-2"
                                             data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
-                                            <img src="" height="24px"
+                                            <img src="" height="28px"
                                                 data-bind="attr:{ src: FarmController.getBerryImage($data) },
                                                 css: {'berryLocked': !App.game.farming.unlockedBerries[$data]() }">
                                             <span data-bind="text: App.game.farming.unlockedBerries[$data]() ? BerryType[$data] : '???'"></span>
@@ -12101,7 +13328,7 @@ aria-labelledby="badgeCaseModalLabel">
                                                 css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() },
                                                 tooltip: {title: ItemList[MulchType[$data]].description, trigger: 'hover', animation: false}">
                                             <img src="" width="24px"
-                                                data-bind="attr:{ src: 'assets/images/items/' + MulchType[$data] + '.png' }">
+                                                data-bind="attr:{ src: ItemList[MulchType[$data]].image }">
                                             <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
                                             <span class="float-right" data-bind="text: App.game.farming.mulchList[$data]().toLocaleString('en-US')"></span>
                                         </li>
@@ -12135,7 +13362,7 @@ aria-labelledby="badgeCaseModalLabel">
                                     css: { 'active': FarmController.selectedShovel() },
                                     tooltip: {title: 'Clear a Plant from a plot.', trigger: 'hover', animation: false}">
                                     <img src="" height="24px"
-                                        data-bind="attr:{ src: ItemList['Berry_Shovel'].imagePath }">
+                                        data-bind="attr:{ src: ItemList['Berry_Shovel'].image }">
                                     <span>Shovel</span>
                                     <span class="float-right" data-bind="text: App.game.farming.shovelAmt().toLocaleString('en-US')"></span>
                                 </li>
@@ -12156,7 +13383,7 @@ aria-labelledby="badgeCaseModalLabel">
                                             <div class="plotButton plotLockHover">
                                                 <div>
                                                     <span style="display: inline;">
-                                                        <img alt="Berry" style="height: 24px;"
+                                                        <img alt="Berry" style="height: 28px;"
                                                             data-bind="attr:{ src: FarmController.getBerryImage(App.game.farming.plotBerryCost($index()).type) },
                                                             css: {'berryLocked': !App.game.farming.unlockedBerries[App.game.farming.plotBerryCost($index()).type]() }"/>
                                                         <span data-bind="text: GameConstants.formatNumber(App.game.farming.plotBerryCost($index()).amount)">0</span>
@@ -12193,7 +13420,7 @@ aria-labelledby="badgeCaseModalLabel">
                                     trigger: 'hover',
                                     placement:'top' }">
                                  <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ($data + 1 + '').padStart(2, 0)">number</span>
-                                     <img src="" height="120px" style="padding: 20px 0px;" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
+                                     <img src="" width=80px style="padding: 20px 0px;" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
                                      <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
                                      <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BerryType[$data]">name</span>
                                      <a class="overlay" href="#berryDexModal" data-toggle="modal"
@@ -12434,12 +13661,12 @@ aria-labelledby="badgeCaseModalLabel">
                                 <!-- ko foreach: berries -->
                                 <tr>
                                     <td data-bind="text: App.game.farming.berryList[$data.berryType]()"></td>
-                                    <td><img height="24px" data-bind="attr: {src: FarmController.getBerryImage($data.berryType) }, css: {'berryLocked': !App.game.farming.unlockedBerries[$data.berryType]() }"></img></td>
+                                    <td><img height="28px" data-bind="attr: {src: FarmController.getBerryImage($data.berryType) }, css: {'berryLocked': !App.game.farming.unlockedBerries[$data.berryType]() }"></img></td>
                                     <td data-bind="text: amount + ' x ' + (App.game.farming.unlockedBerries[$data.berryType]() ? BerryType[$data.berryType] : '???')"></td>
                                     <!-- ko if: $index() === 0 -->
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">→</td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">
-                                        <img class='mineInventoryItem' data-bind='attr: {src: $parent.item.itemType.imagePath}'>
+                                        <img class='mineInventoryItem' data-bind='attr: {src: $parent.item.itemType.image}'>
                                     </td>
                                     <td class='vertical-middle' data-bind='attr: { rowspan: $parent.berries.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">
@@ -12697,7 +13924,7 @@ aria-labelledby="badgeCaseModalLabel">
                     <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwBall()" data-bind='text: "Ball (" + Safari.balls() + ")"'>Ball (30)</button>
                     <div class="btn-group btn-block col-6 m-0 dropup" style="padding:0px;" data-bind="let: { baitType: ko.observable(BaitType.Bait) }">
                         <button type="button" class='btn btn-primary btn-block' onclick="this.blur();SafariBattle.lockButtons();" data-bind='{ click: function(){SafariBattle.throwBait(baitType());}, enable: BaitList[BaitType[baitType()]].amount() !== 0 && !SafariBattle.disableButtons }'>
-                            <div style="display:inline"><img width=16px data-bind="attr: { src: BaitList[BaitType[baitType()]].imagePath }"></div>
+                            <div style="display:inline"><img width=16px data-bind="attr: { src: BaitList[BaitType[baitType()]].image }"></div>
                             <span data-bind="text: BaitList[BaitType[baitType()]].btnName">Bait (∞)</span>
                         </button>
                         <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split active" data-bind="text: '&nbsp;'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -12759,7 +13986,11 @@ aria-labelledby="badgeCaseModalLabel">
               <tr class="clickable"
                 data-bind="template: { name: 'pokeballSelectionTemplate', data: $data},
                   click: function(){App.game.pokeballs.selectedSelection()($data.type)},
-                  visible: $data.unlocked()"></tr>
+                  visible: $data.unlocked(),
+                  css: { 
+                    'clickable': !($data.type === GameConstants.Pokeball.Masterball && App.game.challenges.list.disableMasterballs.active()),
+                    'disabled no-click text-muted': ($data.type === GameConstants.Pokeball.Masterball && App.game.challenges.list.disableMasterballs.active()),
+                  }"></tr>
               <!-- /ko -->
             </tbody>
           </table>

@@ -1903,10 +1903,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 63,
         'eggCycles': 20,
-        'evolutions': [
-            new StoneEvolution('Galarian Slowpoke', 'Galarian Slowbro', GameConstants.StoneType.Galarica_cuff),
-            new StoneEvolution('Galarian Slowpoke', 'Galarian Slowking', GameConstants.StoneType.Galarica_wreath),
-        ],
         'base': {
             'hitpoints': 90,
             'attack': 65,
@@ -9271,7 +9267,11 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'catchRate': 255,
-        'evolutions': [new StoneEvolution('Bonsly', 'Sudowoodo', GameConstants.StoneType.None)],
+        'evolutions': [
+            // Evolves when leveled up while knowing Mimic
+            // Learns mimic at level 16
+            new LevelEvolution('Bonsly', 'Sudowoodo', 32),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 50,
@@ -9290,7 +9290,11 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 62,
         'catchRate': 145,
-        'evolutions': [new StoneEvolution('Mime Jr.', 'Mr. Mime', GameConstants.StoneType.None)],
+        'evolutions': [
+            // Evolves when leveled up while knowing Mimic
+            // Learns mimic at level 32
+            new LevelEvolution('Mime Jr.', 'Mr. Mime', 32),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 20,
@@ -9309,7 +9313,10 @@ const pokemonList = createPokemonArray(
         'levelType': 4,
         'exp': 110,
         'catchRate': 130,
-        'evolutions': [new StoneEvolution('Happiny', 'Chansey', GameConstants.StoneType.None)],
+        'evolutions': [
+            // TODO: Evolves while holding an Oval Stone during the Day time
+            new StoneEvolution('Happiny', 'Chansey', GameConstants.StoneType.None),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 100,
@@ -9627,7 +9634,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 69,
         'catchRate': 25,
-        'evolutions': [new StoneEvolution('Mantyke', 'Mantine', GameConstants.StoneType.None)],
+        'evolutions': [
+            // TODO: Evolves when leveled up with a Remoraid in the party
+            new StoneEvolution('Mantyke', 'Mantine', GameConstants.StoneType.None),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 45,
@@ -12140,7 +12150,7 @@ const pokemonList = createPokemonArray(
         'levelType': 4,
         'exp': 60,
         'catchRate': 255,
-        'evolutions': [new StoneEvolution('Minccino', 'Cinccino', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Minccino', 'Cinccino', GameConstants.StoneType.Shiny_stone)],
         'base': {
             'hitpoints': 55,
             'attack': 50,
@@ -12877,7 +12887,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 130,
         'catchRate': 90,
-        'evolutions': [new StoneEvolution('Lampent', 'Chandelure', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Lampent', 'Chandelure', GameConstants.StoneType.Dusk_stone)],
         'base': {
             'hitpoints': 60,
             'attack': 40,
@@ -14500,7 +14510,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 157,
         'catchRate': 90,
-        'evolutions': [new StoneEvolution('Doublade', 'Aegislash', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Doublade', 'Aegislash', GameConstants.StoneType.Dusk_stone)],
         'base': {
             'hitpoints': 59,
             'attack': 110,
@@ -15512,7 +15522,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 140,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Charjabug', 'Vikavolt', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Charjabug', 'Vikavolt', GameConstants.StoneType.Thunder_stone)],
         'base': {
             'hitpoints': 57,
             'attack': 82,
@@ -17715,10 +17725,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.erratic,
         'exp': 52,
         'catchRate': 255,
-        'evolutions': [
-            new StoneEvolution('Applin', 'Flapple', GameConstants.StoneType.Tart_apple),
-            new StoneEvolution('Applin', 'Appletun', GameConstants.StoneType.Sweet_apple),
-        ],
     },
     {
         'id': 841,
@@ -18006,7 +18012,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 62,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Sinistea', 'Polteageist', GameConstants.StoneType.Chipped_pot)],
     },
     {
         'id': 855,
@@ -18271,15 +18276,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 54,
         'catchRate': 200,
-        'evolutions': [
-            new StoneEvolution('Milcery', 'Alcremie (Strawberry Vanilla)', GameConstants.StoneType.Strawberry_sweet),
-            new StoneEvolution('Milcery', 'Alcremie (Berry Vanilla)', GameConstants.StoneType.Berry_sweet),
-            new StoneEvolution('Milcery', 'Alcremie (Love Vanilla)', GameConstants.StoneType.Love_sweet),
-            new StoneEvolution('Milcery', 'Alcremie (Star Vanilla)', GameConstants.StoneType.Star_sweet),
-            new StoneEvolution('Milcery', 'Alcremie (Clover Vanilla)', GameConstants.StoneType.Clover_sweet),
-            new StoneEvolution('Milcery', 'Alcremie (Flower Vanilla)', GameConstants.StoneType.Flower_sweet),
-            new StoneEvolution('Milcery', 'Alcremie (Ribbon Vanilla)', GameConstants.StoneType.Ribbon_sweet),
-        ],
     },
     {
         'id': 869,
@@ -18297,16 +18293,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
-        'evolutions': [
-            new StoneEvolution('Alcremie (Strawberry Vanilla)', 'Alcremie (Strawberry Lemon)', GameConstants.StoneType.Lemon_cream),
-            new StoneEvolution('Alcremie (Strawberry Vanilla)', 'Alcremie (Strawberry Mint)', GameConstants.StoneType.Mint_cream),
-            new StoneEvolution('Alcremie (Strawberry Vanilla)', 'Alcremie (Strawberry Matcha)', GameConstants.StoneType.Matcha_cream),
-            new StoneEvolution('Alcremie (Strawberry Vanilla)', 'Alcremie (Strawberry Ruby Cream)', GameConstants.StoneType.Ruby_cream),
-            new StoneEvolution('Alcremie (Strawberry Vanilla)', 'Alcremie (Strawberry Caramel)', GameConstants.StoneType.Caramel_swirl),
-            new StoneEvolution('Alcremie (Strawberry Vanilla)', 'Alcremie (Strawberry Rainbow)', GameConstants.StoneType.Rainbow_swirl),
-            new StoneEvolution('Alcremie (Strawberry Vanilla)', 'Alcremie (Strawberry Ruby Swirl)', GameConstants.StoneType.Ruby_swirl),
-            new StoneEvolution('Alcremie (Strawberry Vanilla)', 'Alcremie (Strawberry Salted)', GameConstants.StoneType.Salted_cream),
-        ],
     },
     {
         'id': 869.01,
@@ -18460,16 +18446,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
-        'evolutions': [
-            new StoneEvolution('Alcremie (Berry Vanilla)', 'Alcremie (Berry Lemon)', GameConstants.StoneType.Lemon_cream),
-            new StoneEvolution('Alcremie (Berry Vanilla)', 'Alcremie (Berry Mint)', GameConstants.StoneType.Mint_cream),
-            new StoneEvolution('Alcremie (Berry Vanilla)', 'Alcremie (Berry Matcha)', GameConstants.StoneType.Matcha_cream),
-            new StoneEvolution('Alcremie (Berry Vanilla)', 'Alcremie (Berry Ruby Cream)', GameConstants.StoneType.Ruby_cream),
-            new StoneEvolution('Alcremie (Berry Vanilla)', 'Alcremie (Berry Caramel)', GameConstants.StoneType.Caramel_swirl),
-            new StoneEvolution('Alcremie (Berry Vanilla)', 'Alcremie (Berry Rainbow)', GameConstants.StoneType.Rainbow_swirl),
-            new StoneEvolution('Alcremie (Berry Vanilla)', 'Alcremie (Berry Ruby Swirl)', GameConstants.StoneType.Ruby_swirl),
-            new StoneEvolution('Alcremie (Berry Vanilla)', 'Alcremie (Berry Salted)', GameConstants.StoneType.Salted_cream),
-        ],
     },
     {
         'id': 869.11,
@@ -18623,16 +18599,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
-        'evolutions': [
-            new StoneEvolution('Alcremie (Love Vanilla)', 'Alcremie (Love Lemon)', GameConstants.StoneType.Lemon_cream),
-            new StoneEvolution('Alcremie (Love Vanilla)', 'Alcremie (Love Mint)', GameConstants.StoneType.Mint_cream),
-            new StoneEvolution('Alcremie (Love Vanilla)', 'Alcremie (Love Matcha)', GameConstants.StoneType.Matcha_cream),
-            new StoneEvolution('Alcremie (Love Vanilla)', 'Alcremie (Love Ruby Cream)', GameConstants.StoneType.Ruby_cream),
-            new StoneEvolution('Alcremie (Love Vanilla)', 'Alcremie (Love Caramel)', GameConstants.StoneType.Caramel_swirl),
-            new StoneEvolution('Alcremie (Love Vanilla)', 'Alcremie (Love Rainbow)', GameConstants.StoneType.Rainbow_swirl),
-            new StoneEvolution('Alcremie (Love Vanilla)', 'Alcremie (Love Ruby Swirl)', GameConstants.StoneType.Ruby_swirl),
-            new StoneEvolution('Alcremie (Love Vanilla)', 'Alcremie (Love Salted)', GameConstants.StoneType.Salted_cream),
-        ],
     },
     {
         'id': 869.21,
@@ -18786,16 +18752,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
-        'evolutions': [
-            new StoneEvolution('Alcremie (Star Vanilla)', 'Alcremie (Star Lemon)', GameConstants.StoneType.Lemon_cream),
-            new StoneEvolution('Alcremie (Star Vanilla)', 'Alcremie (Star Mint)', GameConstants.StoneType.Mint_cream),
-            new StoneEvolution('Alcremie (Star Vanilla)', 'Alcremie (Star Matcha)', GameConstants.StoneType.Matcha_cream),
-            new StoneEvolution('Alcremie (Star Vanilla)', 'Alcremie (Star Ruby Cream)', GameConstants.StoneType.Ruby_cream),
-            new StoneEvolution('Alcremie (Star Vanilla)', 'Alcremie (Star Caramel)', GameConstants.StoneType.Caramel_swirl),
-            new StoneEvolution('Alcremie (Star Vanilla)', 'Alcremie (Star Rainbow)', GameConstants.StoneType.Rainbow_swirl),
-            new StoneEvolution('Alcremie (Star Vanilla)', 'Alcremie (Star Ruby Swirl)', GameConstants.StoneType.Ruby_swirl),
-            new StoneEvolution('Alcremie (Star Vanilla)', 'Alcremie (Star Salted)', GameConstants.StoneType.Salted_cream),
-        ],
     },
     {
         'id': 869.31,
@@ -18949,16 +18905,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
-        'evolutions': [
-            new StoneEvolution('Alcremie (Clover Vanilla)', 'Alcremie (Clover Lemon)', GameConstants.StoneType.Lemon_cream),
-            new StoneEvolution('Alcremie (Clover Vanilla)', 'Alcremie (Clover Mint)', GameConstants.StoneType.Mint_cream),
-            new StoneEvolution('Alcremie (Clover Vanilla)', 'Alcremie (Clover Matcha)', GameConstants.StoneType.Matcha_cream),
-            new StoneEvolution('Alcremie (Clover Vanilla)', 'Alcremie (Clover Ruby Cream)', GameConstants.StoneType.Ruby_cream),
-            new StoneEvolution('Alcremie (Clover Vanilla)', 'Alcremie (Clover Caramel)', GameConstants.StoneType.Caramel_swirl),
-            new StoneEvolution('Alcremie (Clover Vanilla)', 'Alcremie (Clover Rainbow)', GameConstants.StoneType.Rainbow_swirl),
-            new StoneEvolution('Alcremie (Clover Vanilla)', 'Alcremie (Clover Ruby Swirl)', GameConstants.StoneType.Ruby_swirl),
-            new StoneEvolution('Alcremie (Clover Vanilla)', 'Alcremie (Clover Salted)', GameConstants.StoneType.Salted_cream),
-        ],
     },
     {
         'id': 869.41,
@@ -19112,16 +19058,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
-        'evolutions': [
-            new StoneEvolution('Alcremie (Flower Vanilla)', 'Alcremie (Flower Lemon)', GameConstants.StoneType.Lemon_cream),
-            new StoneEvolution('Alcremie (Flower Vanilla)', 'Alcremie (Flower Mint)', GameConstants.StoneType.Mint_cream),
-            new StoneEvolution('Alcremie (Flower Vanilla)', 'Alcremie (Flower Matcha)', GameConstants.StoneType.Matcha_cream),
-            new StoneEvolution('Alcremie (Flower Vanilla)', 'Alcremie (Flower Ruby Cream)', GameConstants.StoneType.Ruby_cream),
-            new StoneEvolution('Alcremie (Flower Vanilla)', 'Alcremie (Flower Caramel)', GameConstants.StoneType.Caramel_swirl),
-            new StoneEvolution('Alcremie (Flower Vanilla)', 'Alcremie (Flower Rainbow)', GameConstants.StoneType.Rainbow_swirl),
-            new StoneEvolution('Alcremie (Flower Vanilla)', 'Alcremie (Flower Ruby Swirl)', GameConstants.StoneType.Ruby_swirl),
-            new StoneEvolution('Alcremie (Flower Vanilla)', 'Alcremie (Flower Salted)', GameConstants.StoneType.Salted_cream),
-        ],
     },
     {
         'id': 869.51,
@@ -19275,16 +19211,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
-        'evolutions': [
-            new StoneEvolution('Alcremie (Ribbon Vanilla)', 'Alcremie (Ribbon Lemon)', GameConstants.StoneType.Lemon_cream),
-            new StoneEvolution('Alcremie (Ribbon Vanilla)', 'Alcremie (Ribbon Mint)', GameConstants.StoneType.Mint_cream),
-            new StoneEvolution('Alcremie (Ribbon Vanilla)', 'Alcremie (Ribbon Matcha)', GameConstants.StoneType.Matcha_cream),
-            new StoneEvolution('Alcremie (Ribbon Vanilla)', 'Alcremie (Ribbon Ruby Cream)', GameConstants.StoneType.Ruby_cream),
-            new StoneEvolution('Alcremie (Ribbon Vanilla)', 'Alcremie (Ribbon Caramel)', GameConstants.StoneType.Caramel_swirl),
-            new StoneEvolution('Alcremie (Ribbon Vanilla)', 'Alcremie (Ribbon Rainbow)', GameConstants.StoneType.Rainbow_swirl),
-            new StoneEvolution('Alcremie (Ribbon Vanilla)', 'Alcremie (Ribbon Ruby Swirl)', GameConstants.StoneType.Ruby_swirl),
-            new StoneEvolution('Alcremie (Ribbon Vanilla)', 'Alcremie (Ribbon Salted)', GameConstants.StoneType.Salted_cream),
-        ],
     },
     {
         'id': 869.61,
@@ -19817,7 +19743,6 @@ const pokemonList = createPokemonArray(
             'specialDefense': 115,
             'speed': 138,
         },
-        'evolutions': [new StoneEvolution('Zacian (Battle Hero)', 'Zacian (Crowned Sword)', GameConstants.StoneType.Rusted_sword)],
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
@@ -19852,7 +19777,6 @@ const pokemonList = createPokemonArray(
             'specialDefense': 115,
             'speed': 138,
         },
-        'evolutions': [new StoneEvolution('Zamazenta (Battle Hero)', 'Zamazenta (Crowned Shield)', GameConstants.StoneType.Rusted_shield)],
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
