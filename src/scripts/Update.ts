@@ -408,6 +408,37 @@ class Update implements Saveable {
                 pokemonShiny: firstPokemon?.shiny || false,
             };
         },
+
+        '0.7.6': ({ playerData, saveData }) => {
+            // Fixup Lets Go eggs
+            saveData.breeding.eggList.forEach(egg => {
+                egg.pokemon = egg.pokemon.replace('Lets go', 'Let\'s Go');
+            });
+            // Fixup Lets Go queue
+            saveData.breeding.queueList = saveData.breeding.queueList.map(p => p.replace('Lets go', 'Let\'s Go'));
+
+            // Find if they have a MissingNo
+            const missingNoIndex = saveData.party.caughtPokemon.findIndex(p => p.id == 0);
+            if (missingNoIndex >= 0) {
+                // Remove the MissingNo (should only appear if we have a bug somewhere)
+                saveData.party.caughtPokemon.splice(missingNoIndex, 1);
+                // Filter out any MissingNo in the hatchery
+                saveData.breeding.eggList = saveData.breeding.eggList.filter((e) => e.pokemon != 'MissingNo.');
+                saveData.breeding.queueList = saveData.breeding.queueList.filter((p) => p != 'MissingNo.');
+                // Check if the Pikachu caused the MissingNo (reset breeding status)
+                const pikachu = saveData.party.caughtPokemon.find(p => p.id == -8);
+                if (pikachu) {
+                    pikachu.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Pikachu')
+                        || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Pikachu');
+                }
+                // Check if the Eevee caused the MissingNo (reset breeding status)
+                const eevee = saveData.party.caughtPokemon.find(p => p.id == -9);
+                if (eevee) {
+                    eevee.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Eevee')
+                        || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Eevee');
+                }
+            }
+        },
     };
 
     constructor() {
