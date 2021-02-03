@@ -837,6 +837,10 @@ export function getGymIndex(gym: string): number {
     return RegionGyms.flat().findIndex((g) => g === gym);
 }
 
+export function getGymRegion(gym: string): Region {
+    return RegionGyms.findIndex((gyms) => gyms.find((g) => g === gym));
+}
+
 export const KantoDungeons = [
     'Viridian Forest',
     'Digletts Cave',
@@ -1035,6 +1039,10 @@ export const RegionDungeons = [
 
 export function getDungeonIndex(dungeon: string): number {
     return RegionDungeons.flat().findIndex((d) => d === dungeon);
+}
+
+export function getDungeonRegion(dungeon: string): Region {
+    return RegionDungeons.findIndex((dungeons) => dungeons.find((d) => d === dungeon));
 }
 
 export const StartingTowns = [

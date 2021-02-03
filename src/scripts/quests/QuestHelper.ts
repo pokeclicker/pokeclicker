@@ -30,17 +30,17 @@ class QuestHelper {
         HarvestBerriesQuest,
     }
 
-    public static createQuest(questName: string, data?: any[]): Quest {
-        if (!this.quests[questName]) {
-            console.error(`Error: Invalid quest - ${questName}.`);
+    public static createQuest(questType: string, data?: any[]): Quest {
+        if (!this.quests[questType]) {
+            console.error(`Error: Invalid quest type - ${questType}.`);
             return;
         }
         // Creating randomly generated quest
         if (!data) {
-            const QuestClass = this.quests[questName];
+            const QuestClass = this.quests[questType];
             return new QuestClass(...QuestClass.generateData());
         }
-        return new this.quests[questName](...data);
+        return new this.quests[questType](...data);
     }
 
     public static generateQuestList(seed: number, amount = 10, uniqueQuestTypes = true) {
@@ -49,13 +49,18 @@ class QuestHelper {
         SeededRand.seed(+seed);
 
         const QuestTypes = new Set(Object.keys(this.quests));
-        for (let i = 0; i < amount; i++) {
-            const type = SeededRand.fromArray(Array.from(QuestTypes));
+        const maxAttempts = 20;
+        let attempts = 0;
+        while (quests.length < amount && attempts++ < maxAttempts) {
+            const questType = SeededRand.fromArray(Array.from(QuestTypes));
             if (uniqueQuestTypes) {
-                QuestTypes.delete(type);
+                QuestTypes.delete(questType);
             }
-            const quest = this.createQuest(type);
-            quest.index = i;
+            if (questType == 'UseOakItemQuest' && App.game.challenges.list.disableOakItems.active()) {
+                continue;
+            }
+            const quest = this.createQuest(questType);
+            quest.index = quests.length;
             quests.push(quest);
         }
         return quests;
