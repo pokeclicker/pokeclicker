@@ -29,7 +29,7 @@ class OakItemLoadouts {
             if (index !== -1) {
                 this.loadouts[num - 1].splice(index, 1);
             }
-        } else if (this.loadouts[num - 1].length < 3 && App.game.oakItems.isUnlocked(item)) {
+        } else if (this.loadouts[num - 1].length < App.game.oakItems.maxActiveCount() && App.game.oakItems.isUnlocked(item)) {
             this.loadouts[num - 1].push(item);
         }
     }
