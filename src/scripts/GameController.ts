@@ -127,7 +127,7 @@ class GameController {
     static addKeyListeners() {
         // Oak Items
         const $oakItemsModal = $('#oakItemsModal');
-        $oakItemsModal.data('allowToggle', true);
+        $oakItemsModal.data('allow-toggle', true);
         $oakItemsModal.on('hidden.bs.modal shown.bs.modal', _ => $oakItemsModal.data('allow-toggle', true));
         const oakItems = App.game.oakItems;
         // Pokeball Selector
@@ -150,7 +150,7 @@ class GameController {
                     // Open oak items with 'O'
                     if (oakItems.canAccess() && $oakItemsModal.data('allow-toggle')) {
                         $('.modal').modal('hide');
-                        $oakItemsModal.data('allow-toggle',false);
+                        $oakItemsModal.data('allow-toggle', false);
                         $oakItemsModal.modal('toggle');
                     }
                     break;
