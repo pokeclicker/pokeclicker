@@ -2,13 +2,13 @@
 
 class DefeatPokemonsQuest extends Quest implements QuestInterface {
 
-    private route: number;
-    private region: GameConstants.Region;
-
-    constructor(killsNeeded: number, reward: number, route: number, region: GameConstants.Region) {
+    constructor(
+        killsNeeded: number,
+        reward: number,
+        private route: number,
+        private region: GameConstants.Region
+    ) {
         super(killsNeeded, reward);
-        this.route = route;
-        this.region = region;
         this.focus = App.game.statistics.routeKills[this.region][this.route];
     }
 
