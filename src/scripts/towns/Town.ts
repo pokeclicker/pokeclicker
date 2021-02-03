@@ -1870,6 +1870,11 @@ TownList['Reflection Cave'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 11)]
 );
 //Tower of Mastery?
+TownList['Sea Spirit\'s Den'] = new DungeonTown(
+    'Sea Spirit\'s Den',
+    GameConstants.Region.kalos,
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 23)]
+);
 TownList['Pokéball Factory'] = new DungeonTown(
     'Pokéball Factory',
     GameConstants.Region.kalos,

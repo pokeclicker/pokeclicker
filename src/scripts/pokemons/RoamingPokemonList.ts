@@ -49,7 +49,10 @@ RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap
 RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap['Meloetta (aria)'], undefined, new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)));
 
 // Kalos
-RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon(pokemonMap.Hoopa));
+RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon(pokemonMap.Zapdos, undefined, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Sea Sprit\'s Den'))));
+RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon(pokemonMap.Moltes, undefined, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Sea Sprit\'s Den'))));
+RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon(pokemonMap.Articuno, undefined, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Sea Sprit\'s Den'))));
+RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon(pokemonMap.Hoopa, undefined, new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)));
 
 //Galar
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon(pokemonMap['Zapdos (Galar)'], undefined, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill'))));
