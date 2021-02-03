@@ -26,8 +26,9 @@ class DungeonMap {
     }
 
     public moveToCoordinates(x: number, y: number) {
-        this.moveToTile(new Point(x, y));
-        this.playerMoved(true);
+        if (this.moveToTile(new Point(x, y))) {
+            this.playerMoved(true);
+        }
     }
 
     public moveUp() {
@@ -46,7 +47,7 @@ class DungeonMap {
         this.moveToCoordinates(this.playerPosition().x - 1, this.playerPosition().y);
     }
 
-    public moveToTile(point: Point) {
+    public moveToTile(point: Point): boolean {
         if (this.hasAccesToTile(point)) {
             this.currentTile().hasPlayer = false;
             this.currentTile().calculateCssClass();
@@ -57,7 +58,9 @@ class DungeonMap {
             if (this.currentTile().type() == GameConstants.DungeonTile.enemy) {
                 DungeonBattle.generateNewEnemy();
             }
+            return true;
         }
+        return false;
     }
 
     public showChestTiles() {
