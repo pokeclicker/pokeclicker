@@ -58,9 +58,7 @@ class MapHelper {
         const area = player.route() || player.town()?.name || undefined;
 
         const [env] = Object.entries(GameConstants.Environments).find(
-            ([, regions]) => Object.values(regions).find(
-                region => region.has(area)
-            )
+            ([, regions]) => regions[player.region]?.has(area)
         ) || [];
 
         return (env as GameConstants.Environment);

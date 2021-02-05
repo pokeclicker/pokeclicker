@@ -2184,7 +2184,6 @@ const HammerlockeShop = new Shop([
 ]);
 const StowonSideShop: Shop = new Shop([
     ItemList['Fighting_egg'],
-    ItemList['Chipped_pot'],
 ]);
 const SpikemuthShop = new Shop([
     ItemList['Electric_egg'],

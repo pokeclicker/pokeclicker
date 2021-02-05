@@ -1,12 +1,15 @@
 /// <reference path="../Quest.ts" />
 
 class DefeatGymQuest extends Quest implements QuestInterface {
+    private region: GameConstants.Region;
 
-    private gymTown: string;
-
-    constructor(amount: number, reward: number, gymTown: string) {
+    constructor(
+        amount: number,
+        reward: number,
+        private gymTown: string
+    ) {
         super(amount, reward);
-        this.gymTown = gymTown;
+        this.region = GameConstants.getGymRegion(this.gymTown);
         this.focus = App.game.statistics.gymsDefeated[GameConstants.getGymIndex(this.gymTown)];
     }
 
@@ -45,6 +48,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         if (!this.gymTown.includes('Elite') && !this.gymTown.includes('Champion')) {
             desc.push('gym');
         }
+        desc.push(`in ${GameConstants.camelCaseToString(GameConstants.Region[this.region])}`);
         desc.push(`${this.amount.toLocaleString('en-US')} times.`);
         return desc.join(' ');
     }
