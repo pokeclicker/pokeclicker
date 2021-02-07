@@ -38,7 +38,7 @@ export default class Sound {
         try {
             this.sound.volume = value / 100;
         } catch (e) {
-            console.error(e);
+            console.error(`Error updating volume for ${this.name}:\n`, e);
         }
     }
 
