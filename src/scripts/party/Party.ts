@@ -41,7 +41,9 @@ class Party implements Feature {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonCaptured[pokemon.id]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonCaptured);
             // Add all shiny catches to the log book
-            App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured a shiny ${pokemon.name}!`);
+            if (Settings.getSetting('logbook_caught').observableValue() == true) {
+                App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured a shiny ${pokemon.name}!`);
+            }
             // Already caught (shiny)
             if (this.alreadyCaughtPokemon(pokemon.id, true)) {
                 return;
@@ -73,7 +75,9 @@ class Party implements Feature {
             });
         }
 
-        App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`);
+        if (Settings.getSetting('logbook_caught').observableValue() == true) {
+            App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`);
+        }
         this._caughtPokemon.push(pokemon);
 
         // Trigger sorting update of PokemonList UI

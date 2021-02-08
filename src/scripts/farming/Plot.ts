@@ -356,7 +356,9 @@ class Plot implements Saveable {
 
             // Add to log book
             const pokemonStr = shiny ? `shiny ${wanderPokemon}` : wanderPokemon;
-            App.game.logbook.newLog(LogBookTypes.WANDER, `A wild ${pokemonStr} has wandered onto the farm!`);
+            if (Settings.getSetting('logbook_wander').observableValue() == true) {
+                App.game.logbook.newLog(LogBookTypes.WANDER, `A wild ${pokemonStr} has wandered onto the farm!`);
+            }
 
             // Gain Pokemon
             App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(wanderPokemon).id, shiny, true);

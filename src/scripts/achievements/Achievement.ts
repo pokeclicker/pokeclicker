@@ -17,9 +17,11 @@ class Achievement {
                 timeout: 1e4,
                 sound: NotificationConstants.NotificationSound.achievement,
             });
-            App.game.logbook.newLog(
-                LogBookTypes.ACHIEVEMENT,
-                `Earned "${this.name}".`);
+            if (Settings.getSetting('logbook_achievement').observableValue() == true) {
+                App.game.logbook.newLog(
+                    LogBookTypes.ACHIEVEMENT,
+                    `Earned "${this.name}".`);
+            }
             player.achievementsCompleted[this.name] = true;
             this.unlocked = true;
             AchievementHandler.filterAchievementList(true);

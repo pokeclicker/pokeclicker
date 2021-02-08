@@ -113,8 +113,10 @@ class Battle {
         if (enemyPokemon.shiny) {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[enemyPokemon.id]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
-            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a wild shiny ${enemyPokemon.name} on route ${player.route()}.`);
-        } else if (!App.game.party.alreadyCaughtPokemon(Battle.enemyPokemon().id)) {
+            if (Settings.getSetting('logbook_shiny').observableValue() == true) {
+                App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a wild shiny ${enemyPokemon.name} on route ${player.route()}.`);
+            }
+        } else if (!App.game.party.alreadyCaughtPokemon(Battle.enemyPokemon().id) && (Settings.getSetting('logbook_new').observableValue() == true)) {
             App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${enemyPokemon.name} on route ${player.route()}.`);
         }
     }
@@ -142,9 +144,13 @@ class Battle {
         if (random <= this.catchRateActual()) { // Caught
             this.catchPokemon(enemyPokemon);
         } else if (enemyPokemon.shiny) { // Failed to catch, Shiny
-            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The Shiny ${enemyPokemon.name} escaped!`);
+            if (Settings.getSetting('logbook_escaped').observableValue() == true) {
+                App.game.logbook.newLog(LogBookTypes.ESCAPED, `The Shiny ${enemyPokemon.name} escaped!`);
+            }
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id)) { // Failed to catch, Uncaught
-            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The wild ${enemyPokemon.name} escaped!`);
+            if (Settings.getSetting('logbook_escaped').observableValue() == true) {
+                App.game.logbook.newLog(LogBookTypes.ESCAPED, `The wild ${enemyPokemon.name} escaped!`);
+            }
         }
         this.catching(false);
         this.catchRateActual(null);

@@ -74,7 +74,9 @@ class BattlePokemon implements EnemyPokemonInterface {
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.dropped_item,
             });
-            App.game.logbook.newLog(LogBookTypes.FOUND, `An enemy ${msg}`);
+            if (Settings.getSetting('logbook_found').observableValue() == true) {
+                App.game.logbook.newLog(LogBookTypes.FOUND, `An enemy ${msg}`);
+            }
         }
         App.game.party.gainExp(this.exp, this.level, trainer);
         App.game.shards.gainShards(this.shardReward, this.type1);

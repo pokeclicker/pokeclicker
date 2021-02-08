@@ -8,6 +8,7 @@ import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
 import { SortOptionConfigs, SortOptions } from './SortOptions';
 import { Region, AchievementType } from '../GameConstants';
+import LogBookSettings from '../logbook/LogBookSettings';
 
 export default Settings;
 
@@ -96,6 +97,11 @@ Settings.add(new RangeSetting('sound.volume', 'Volume', 0, 100, 1, 100));
 
 // Notification settings
 Object.values(NotificationConstants.NotificationSetting).forEach((setting) => {
+    Settings.add(setting);
+});
+
+// LogBook settings
+Object.values(LogBookSettings.LogBookOptions).forEach((setting) => {
     Settings.add(setting);
 });
 

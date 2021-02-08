@@ -13,6 +13,7 @@
                     <li class="nav-item"><a class="nav-link active" href="#settings-display" data-toggle="tab">Display</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings-sound" data-toggle="tab">Sound</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings-notifications" data-toggle="tab">Notifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings-logbooklogs" data-toggle="tab">LogBook Settings</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings-other" data-toggle="tab">Other</a></li>
                 </ul>
 
@@ -50,6 +51,14 @@
                     <div class="tab-pane" id="settings-notifications">
                         <table class="table table-striped table-hover m-0">
                             <tbody data-bind="foreach: Object.values(NotificationConstants.NotificationSetting)">
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane" id="settings-logbooklogs">
+                        <table class="table table-striped table-hover m-0">
+                            <tbody data-bind="foreach: Object.values(LogBookSettings.LogBookOptions)">
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
                             </tbody>
                         </table>

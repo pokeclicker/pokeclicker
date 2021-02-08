@@ -54,17 +54,21 @@ abstract class Quest {
                     message: `You have completed your quest and claimed ${this.pointsReward} quest points!`,
                     type: NotificationConstants.NotificationOption.success,
                 });
-                App.game.logbook.newLog(
-                    LogBookTypes.QUEST_COMPLETE,
-                    `Completed "${this.description}" for ${this.pointsReward} quest points.`);
+                if (Settings.getSetting('logbook_quest').observableValue() == true) {
+                    App.game.logbook.newLog(
+                        LogBookTypes.QUEST_COMPLETE,
+                        `Completed "${this.description}" for ${this.pointsReward} quest points.`);
+                }
             } else {
                 Notifier.notify({
                     message: 'You have completed a quest!',
                     type: NotificationConstants.NotificationOption.success,
                 });
-                App.game.logbook.newLog(
-                    LogBookTypes.QUEST_COMPLETE,
-                    `Completed "${this.description}".`);
+                if (Settings.getSetting('logbook_quest').observableValue() == true) {
+                    App.game.logbook.newLog(
+                        LogBookTypes.QUEST_COMPLETE,
+                        `Completed "${this.description}".`);
+                }
             }
             GameHelper.incrementObservable(App.game.statistics.questsCompleted);
             return true;
