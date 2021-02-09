@@ -1725,7 +1725,13 @@ TownList['Vaniville Town'] = new Town(
         shop: VanivilleTownShop,
     }
 );
-TownList['Aquacorde Town'] = new Town('Aquacorde Town', GameConstants.Region.kalos);
+TownList['Aquacorde Town'] = new Town(
+    'Aquacorde Town',
+    GameConstants.Region.kalos,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 1)],
+    }
+);
 TownList['Santalune City'] = new Town(
     'Santalune City',
     GameConstants.Region.kalos,

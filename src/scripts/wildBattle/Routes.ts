@@ -1330,7 +1330,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Caterpie', 'Weedle', 'Pidgey', 'Zigzagoon', 'Fletchling', 'Bunnelby', 'Scatterbug'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 1)]
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 3', GameConstants.Region.kalos, 3,
