@@ -1717,6 +1717,14 @@ const CouriwayTownShop = new Shop([
     ItemList['Dragon_egg'],
 ]);
 
+//Kalos NPCs
+
+const Birdwatcher = new NPC('Birdwatcher', [
+    'I\'ve heard there is a cave you can find if you go out on the ocean a little ways.',
+    'Apparently defeating a strong creature there unleashes some energy.',
+    'There are rumors that the energy calls some legendary birds to roam Kalos!',
+]);
+
 //Kalos Towns
 TownList['Vaniville Town'] = new Town(
     'Vaniville Town',
@@ -1793,6 +1801,7 @@ TownList['Coumarine City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)],
         shop: CoumarineCityShop,
+        npcs: [Birdwatcher],
     }
 );
 TownList['Laverre City'] = new Town(
