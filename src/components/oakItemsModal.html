@@ -3,8 +3,8 @@
     <div class="modal-content">
       <div class="modal-header p-0">
         <ul class="nav nav-tabs">
-            <li class="nav-item"><a data-toggle='tab' class='p-2 nav-link active' href="#defaultSelector">Default Selector</a></li>
-            <li class='nav-item'><a data-toggle='tab' class='p-2 nav-link' href="#loadoutMenu">Loadout Menu</a></li>
+            <li class="nav-item"><a data-toggle='tab' class='p-2 nav-link active' href="#oakItemSelector">Selector</a></li>
+            <li class='nav-item'><a data-toggle='tab' class='p-2 nav-link' href="#oakItemLoadouts">Loadouts</a></li>
         </ul>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -14,7 +14,7 @@
         Oak Items are disabled.
       </div>
       <div class="modal-body tab-content">
-          <div id="defaultSelector" class="tab-pane fade in active show">
+          <div id="oakItemSelector" class="tab-pane fade in active show">
             <div class="modal-header">
               <h5 style="position: left" data-bind="text: 'Oak Items Equipped: ' + App.game.oakItems.activeCount() + '/' + App.game.oakItems.maxActiveCount()">Oak Items</h5>
             </div>
@@ -43,7 +43,7 @@
                 </li>
             </ul>
           </div>
-          <div id="loadoutMenu" class="tab-pane fade">
+          <div id="oakItemLoadouts" class="tab-pane fade">
             <div class="modal-header p-1">
               <select name="loadoutSelector" autocomplete="off" class="custom-select"
                 onchange="App.game.oakItemLoadouts.selectedLoadout(this.value)"
