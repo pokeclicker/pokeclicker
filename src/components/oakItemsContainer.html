@@ -67,6 +67,7 @@
         <!-- /ko -->
       </table>
     </div>
+    <!-- ko if: !App.game.challenges.list.disableOakItems.active() -->
     <div id="oakItemLoadout">
       <table class="table table-bordered table-striped m-0">
         <tr data-bind="foreach: App.game.oakItemLoadouts.loadouts">
@@ -79,4 +80,5 @@
         </tr>
       </table>
     </div>
+    <!-- /ko -->
 </div>

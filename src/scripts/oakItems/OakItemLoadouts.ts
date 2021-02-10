@@ -21,6 +21,10 @@ class OakItemLoadouts implements Saveable {
     }
 
     toggleItem(item: OakItems.OakItem) {
+        if (App.game.challenges.list.disableOakItems.active()) {
+            return;
+        }
+
         const loadout = this.loadouts[this.selectedLoadout()];
         if (loadout().includes(item)) {
             const index = loadout().indexOf(item);
