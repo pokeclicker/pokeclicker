@@ -338,6 +338,7 @@ namespace GameConstants {
     declare const GalarGyms: string[];
     declare const RegionGyms: string[][];
     declare function getGymIndex(gym: string): number;
+    declare function getGymRegion(gym: string): Region;
     declare const KantoDungeons: string[];
     declare const JohtoDungeons: string[];
     declare const HoennDungeons: string[];
@@ -347,6 +348,7 @@ namespace GameConstants {
     declare const GalarDungeons: string[];
     declare const RegionDungeons: string[][];
     declare function getDungeonIndex(dungeon: string): number;
+    declare function getDungeonRegion(dungeon: string): Region;
     declare const StartingTowns: string[];
     declare const DockTowns: string[];
 }

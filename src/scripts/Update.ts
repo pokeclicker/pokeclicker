@@ -343,7 +343,7 @@ class Update implements Saveable {
                 Notifier.notify({
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Click Attack challenge mode?
-                    
+
                     <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableClickAttack.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
@@ -352,7 +352,7 @@ class Update implements Saveable {
             Notifier.notify({
                 title: 'Active Challenge Mode?',
                 message: `Do you want to activate No Battle Item challenge mode?
-                
+
                 <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableBattleItems.activate(); Object.values(player.effectList).forEach(e => e(0));" data-dismiss="toast">Activate</button>`,
                 timeout: GameConstants.HOUR,
             });
@@ -361,7 +361,7 @@ class Update implements Saveable {
                 Notifier.notify({
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Masterball challenge mode?
-                    
+
                     <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableMasterballs.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
@@ -371,7 +371,7 @@ class Update implements Saveable {
                 Notifier.notify({
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Oak Item challenge mode?
-                    
+
                     <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableOakItems.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
@@ -381,7 +381,7 @@ class Update implements Saveable {
                 Notifier.notify({
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Shard challenge mode?
-                    
+
                     <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableShards.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
@@ -391,7 +391,7 @@ class Update implements Saveable {
                 Notifier.notify({
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Protein challenge mode?
-                    
+
                     <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableProteins.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
@@ -407,6 +407,37 @@ class Update implements Saveable {
                 pokemon: firstPokemon?.id || 0,
                 pokemonShiny: firstPokemon?.shiny || false,
             };
+        },
+
+        '0.7.6': ({ playerData, saveData }) => {
+            // Fixup Lets Go eggs
+            saveData.breeding.eggList.forEach(egg => {
+                egg.pokemon = egg.pokemon.replace('Lets go', 'Let\'s Go');
+            });
+            // Fixup Lets Go queue
+            saveData.breeding.queueList = saveData.breeding.queueList.map(p => p.replace('Lets go', 'Let\'s Go'));
+
+            // Find if they have a MissingNo
+            const missingNoIndex = saveData.party.caughtPokemon.findIndex(p => p.id == 0);
+            if (missingNoIndex >= 0) {
+                // Remove the MissingNo (should only appear if we have a bug somewhere)
+                saveData.party.caughtPokemon.splice(missingNoIndex, 1);
+                // Filter out any MissingNo in the hatchery
+                saveData.breeding.eggList = saveData.breeding.eggList.filter((e) => e.pokemon != 'MissingNo.');
+                saveData.breeding.queueList = saveData.breeding.queueList.filter((p) => p != 'MissingNo.');
+                // Check if the Pikachu caused the MissingNo (reset breeding status)
+                const pikachu = saveData.party.caughtPokemon.find(p => p.id == -8);
+                if (pikachu) {
+                    pikachu.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Pikachu')
+                        || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Pikachu');
+                }
+                // Check if the Eevee caused the MissingNo (reset breeding status)
+                const eevee = saveData.party.caughtPokemon.find(p => p.id == -9);
+                if (eevee) {
+                    eevee.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Eevee')
+                        || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Eevee');
+                }
+            }
         },
     };
 
@@ -504,7 +535,7 @@ class Update implements Saveable {
         const saveData = this.getSaveData();
         const settingsData = this.getSettingsData();
 
-        if (!playerData || !saveData || !settingsData) {
+        if (!playerData || !saveData) {
             return;
         }
 
@@ -660,7 +691,7 @@ class Update implements Saveable {
         } catch (err) {
             console.warn('Error getting settings data', err);
         } finally {
-            return settingsData;
+            return settingsData || {};
         }
     }
 

@@ -127,6 +127,7 @@ class GameController {
     static addKeyListeners() {
         // Oak Items
         const $oakItemsModal = $('#oakItemsModal');
+        $oakItemsModal.on('hidden.bs.modal shown.bs.modal', _ => $oakItemsModal.data('disable-toggle', false));
         const oakItems = App.game.oakItems;
         // Pokeball Selector
         const $pokeballSelector = $('#pokeballSelectorModal');
@@ -146,8 +147,9 @@ class GameController {
             switch (e.code) {
                 case 'KeyO':
                     // Open oak items with 'O'
-                    if (oakItems.canAccess()) {
+                    if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
+                        $oakItemsModal.data('disable-toggle', true);
                         $oakItemsModal.modal('toggle');
                     }
                     break;
@@ -236,8 +238,8 @@ class GameController {
                     if (!$('#receiveBadgeModal').data('bs.modal')?._isShown) {
                         const number = Number(e.key);
                         // Check if a number higher than 0 and less than total Gyms was pressed
-                        if (number && number <= player.town().gymList().length) {
-                            GymRunner.startGym(player.town().gymList()[number - 1]());
+                        if (number && number <= player.town().gymList.length) {
+                            GymRunner.startGym(player.town().gymList[number - 1]);
                         }
                     }
                 }
