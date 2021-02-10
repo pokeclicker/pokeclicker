@@ -1,57 +1,54 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 
-class OakItemLoadouts {
-    defaults = {
-        available: 0,
-    }
+class OakItemLoadouts implements Saveable {
+    saveKey = 'oakItemLoadouts';
 
-    loadouts: OakItems.OakItem[][];
+    private static MAX_SLOTS = 3;
 
+    defaults = {}
 
-    //Number of Loadouts Available
-    private _available: KnockoutObservable<number>;
+    loadouts: Array<KnockoutObservableArray<number>> = Array(OakItemLoadouts.MAX_SLOTS).fill(0).map(() => ko.observableArray());
+    selectedLoadout: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
+    selectedItem: KnockoutObservable<OakItems.OakItem> = ko.observable(OakItems.OakItem.Magic_Ball).extend({ numeric: 0 });
 
-    constructor() {
-        this._available = ko.observable(0);
-        this.loadouts = [[],[],[]];
-    }
+    constructor() {}
 
-    activateLoadout(num: number) {
+    activateLoadout(index: number) {
         App.game.oakItems.deactivateAll();
-        this.loadouts[num - 1].forEach((item: OakItems.OakItem) => {
+        this.loadouts[index]().forEach((item: OakItems.OakItem) => {
             App.game.oakItems.activate(item);
         });
     }
 
-    updateLoadout(num: number, item: OakItems.OakItem) {
-        if (this.loadouts[num - 1].includes(item)) {
-            const index = this.loadouts[num - 1].indexOf(item);
+    toggleItem(item: OakItems.OakItem) {
+        const loadout = this.loadouts[this.selectedLoadout()];
+        if (loadout().includes(item)) {
+            const index = loadout().indexOf(item);
             if (index !== -1) {
-                this.loadouts[num - 1].splice(index, 1);
+                loadout.splice(index, 1);
             }
-        } else if (this.loadouts[num - 1].length < App.game.oakItems.maxActiveCount() && App.game.oakItems.isUnlocked(item)) {
-            this.loadouts[num - 1].push(item);
+        } else if (loadout().length < App.game.oakItems.maxActiveCount() && App.game.oakItems.isUnlocked(item)) {
+            loadout.push(item);
         }
     }
 
-    isPartOfLoadout(num: number, item: OakItems.OakItem) {
-        return this.loadouts[num - 1].includes(item);
+    hasItem(item: OakItems.OakItem): KnockoutComputed<boolean> {
+        return ko.pureComputed(() => {
+            return this.loadouts[this.selectedLoadout()]().includes(item);
+        });
     }
 
-    clearLoadout(num: number) {
-        this.loadouts[num - 1] = [];
+    clearLoadout() {
+        this.loadouts[this.selectedLoadout()].splice(0);
     }
 
-    openLoadoutModal() {
-        $('#OakItemLoadoutModal').modal('show');
+    fromJSON(json: Array<Array<number>>) {
+        json?.forEach((loadout, index) => {
+            loadout.forEach(item => this.loadouts[index]?.push(item));
+        });
     }
 
-    // Knockout getters/setters
-    get available() {
-        return this._available();
-    }
-
-    set available(val: number) {
-        this._available(val);
+    toJSON() {
+        return ko.toJS(App.game.oakItemLoadouts.loadouts);
     }
 }
