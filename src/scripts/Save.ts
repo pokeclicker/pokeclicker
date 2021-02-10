@@ -65,8 +65,14 @@ class Save {
         }
     }
 
-    public static delete(): void {
-        const confirmDelete = prompt('Are you sure you want delete your save file?\n\nIf so, type \'DELETE\'');
+    public static async delete(): Promise<void> {
+        const confirmDelete = await Notifier.notify({
+            title: 'Delete save file',
+            message: 'Are you sure you want delete your save file?\nIf so, type "DELETE"',
+            type: NotificationConstants.NotificationOption.danger,
+            timeout: 6e4,
+            prompt: true,
+        });
 
         if (confirmDelete == 'DELETE') {
             localStorage.removeItem(`player${Save.key}`);
