@@ -66,12 +66,11 @@ class Save {
     }
 
     public static async delete(): Promise<void> {
-        const confirmDelete = await Notifier.notify({
+        const confirmDelete = await Notifier.prompt({
             title: 'Delete save file',
-            message: 'Are you sure you want delete your save file?\nIf so, type "DELETE"',
+            message: 'Are you sure you want delete your save file?\n\nTo confirm, type "DELETE"',
             type: NotificationConstants.NotificationOption.danger,
             timeout: 6e4,
-            prompt: true,
         });
 
         if (confirmDelete == 'DELETE') {
