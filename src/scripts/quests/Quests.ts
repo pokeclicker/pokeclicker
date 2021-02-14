@@ -127,10 +127,15 @@ class Quests implements Saveable {
         return Number(level * (date.getFullYear() + this.refreshes() * 10) * date.getDate() + 1000 * date.getMonth() + 100000 * date.getDate());
     }
 
-    public refreshQuests(free = this.freeRefresh(), shouldConfirm = false) {
+    public async refreshQuests(free = this.freeRefresh(), shouldConfirm = false) {
         if (free || this.canAffordRefresh()) {
             if (!free) {
-                if (shouldConfirm && !confirm('Are you sure you want to refresh the quest list?!')) {
+                if (shouldConfirm && !Notifier.confirm({
+                    title: 'Refresh quest list',
+                    message: 'Are you sure you want to refresh the quest list?',
+                    type: NotificationConstants.NotificationOption.warning,
+                    confirm: 'refresh',
+                })) {
                     return;
                 }
                 App.game.wallet.loseAmount(this.getRefreshCost());

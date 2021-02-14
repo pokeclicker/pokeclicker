@@ -571,14 +571,20 @@ class Update implements Saveable {
                     // On the next tick, set the reset button click handler
                     setTimeout(() => {
                         document.getElementById('failedUpdateResetButton').onclick = () => {
-                            if (window.confirm('Are you sure you want to reset your save? This cannot be undone, so please make sure you have a backup first!')) {
-                                // Force an autodownload of the backup when resetting the save
-                                this.automaticallyDownloadBackup(backupButton, { disableAutoDownloadBackupSaveOnUpdate: false });
-                                localStorage.removeItem(`player${Save.key}`);
-                                localStorage.removeItem(`save${Save.key}`);
-                                localStorage.removeItem('settings');
-                                location.reload();
-                            }
+                            Notifier.confirm({
+                                title: 'Reset save',
+                                message: 'Are you sure you want to reset your save?\n\nThis cannot be undone, so please make sure you have a backup first!',
+                                type: NotificationConstants.NotificationOption.danger,
+                                confirm: 'reset',
+                            }).then(confirmed => {
+                                if (confirmed) {
+                                    // Force an autodownload of the backup when resetting the save
+                                    this.automaticallyDownloadBackup(backupButton, { disableAutoDownloadBackupSaveOnUpdate: false });
+                                    localStorage.removeItem(`player${Save.key}`);
+                                    localStorage.removeItem(`save${Save.key}`);
+                                    location.reload();
+                                }
+                            });
                         };
                     }, 0);
 
