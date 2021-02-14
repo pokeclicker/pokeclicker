@@ -873,8 +873,6 @@ class Farming implements Feature {
     update(delta: number): void {
         const timeToReduce = delta;
 
-        const notifications = new Set<FarmNotificationType>();
-
         let change = false;
 
         // Handle updating auras
@@ -890,10 +888,6 @@ class Farming implements Feature {
             if (plot.update(timeToReduce)) {
                 change = true;
             }
-            if (plot.notifications) {
-                plot.notifications.forEach(n => notifications.add(n));
-                plot.notifications = [];
-            }
         });
 
         // Running Mutations
@@ -902,7 +896,12 @@ class Farming implements Feature {
             this.mutations.forEach(mutation => {
                 if (mutation.mutate()) {
                     GameHelper.incrementObservable(App.game.statistics.totalBerriesMutated, 1);
-                    notifications.add(FarmNotificationType.Mutated);
+                    Notifier.notify({
+                        message: 'A berry has mutated',
+                        type: NotificationConstants.NotificationOption.success,
+                        sound: NotificationConstants.NotificationSound.berry_mutated,
+                        setting: NotificationConstants.NotificationSetting.berry_mutated,
+                    });
                     change = true;
                 }
             });
@@ -917,8 +916,12 @@ class Farming implements Feature {
                 const plot = App.game.farming.plotList[i];
                 wanderPokemon = plot.generateWanderPokemon();
                 if (wanderPokemon !== undefined) {
-                    // TODO: HLXII Handle other bonus (DT?)
-                    notifications.add(FarmNotificationType.Wander);
+                    Notifier.notify({
+                        message: 'A pokemon has wandered onto the farm',
+                        type: NotificationConstants.NotificationOption.success,
+                        sound: NotificationConstants.NotificationSound.pokemon_wander,
+                        setting: NotificationConstants.NotificationSetting.pokemon_wander,
+                    });
                     break;
                 }
             }
@@ -930,54 +933,6 @@ class Farming implements Feature {
         if (change) {
             this.queuedAuraReset = 2;
         }
-
-        if (notifications.size) {
-            notifications.forEach((n) => this.handleNotification(n, wanderPokemon));
-        }
-    }
-
-    handleNotification(farmNotiType: FarmNotificationType, wander?: any): void {
-        let message = '';
-        let type = NotificationConstants.NotificationOption.success;
-
-        switch (farmNotiType) {
-            case FarmNotificationType.Ripe:
-                message = 'A Berry is ready to harvest!';
-                break;
-            case FarmNotificationType.AboutToWither:
-                message = 'A Berry plant is about to wither!';
-                type = NotificationConstants.NotificationOption.warning;
-                break;
-            case FarmNotificationType.Withered:
-                message = 'A Berry plant has withered!';
-                type = NotificationConstants.NotificationOption.warning;
-                break;
-            case FarmNotificationType.Mutated:
-                message = 'A Berry plant has mutated!';
-                break;
-            case FarmNotificationType.Replanted:
-                message = 'A Berry has been replanted!';
-                break;
-            case FarmNotificationType.Dropped:
-                message = 'A Berry has been dropped!';
-                break;
-            case FarmNotificationType.MulchRanOut:
-                message = 'A plot has run out of mulch!';
-                type = NotificationConstants.NotificationOption.warning;
-                break;
-            case FarmNotificationType.Wander:
-                const pokemon = wander?.shiny ? `shiny ${wander?.pokemon}` : wander?.pokemon;
-                message = `A wild ${pokemon} has wandered onto the farm!`;
-                type = wander?.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
-                break;
-        }
-
-        Notifier.notify({
-            message,
-            type,
-            sound: NotificationConstants.NotificationSound.ready_to_harvest,
-            setting: NotificationConstants.NotificationSetting.ready_to_harvest,
-        });
     }
 
     resetAuras() {
@@ -1189,17 +1144,15 @@ class Farming implements Feature {
     /**
      * Gives the player a random Berry from the first 8 types
      * @param amount Amount of berries to give. Defaults to 1.
-     * @param disableNotification Set to true to not notify the player. Defaults to false.
      */
-    gainRandomBerry(amount = 1, disableNotification = false) {
+    gainRandomBerry(amount = 1) {
         const berry = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
-        if (!disableNotification) {
-            Notifier.notify({
-                message: `You got a ${BerryType[berry]} berry!`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.route_item_found,
-            });
-        }
+        Notifier.notify({
+            message: 'You gained a berry',
+            type: NotificationConstants.NotificationOption.success,
+            sound: NotificationConstants.NotificationSound.farm_dropped,
+            setting: NotificationConstants.NotificationSetting.farm_dropped,
+        });
         this.gainBerry(berry, amount);
     }
 

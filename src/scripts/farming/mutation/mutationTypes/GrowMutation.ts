@@ -35,7 +35,6 @@ abstract class GrowMutation extends Mutation {
         const plot = App.game.farming.plotList[index];
         plot.berry = this.mutatedBerry;
         plot.age = 0;
-        plot.notifications = [];
         App.game.farming.unlockBerry(this.mutatedBerry);
     }
 

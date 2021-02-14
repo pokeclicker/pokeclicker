@@ -35,7 +35,6 @@ class Plot implements Saveable {
     isMulched: KnockoutComputed<boolean>;
     stage: KnockoutComputed<number>;
     tooltip: KnockoutComputed<string>;
-    notifications: FarmNotificationType[];
 
     constructor(isUnlocked: boolean, berry: BerryType, age: number, mulch: MulchType, mulchTimeLeft: number) {
         this._isUnlocked = ko.observable(isUnlocked);
@@ -212,8 +211,6 @@ class Plot implements Saveable {
 
             return tooltip.join('<br/>');
         });
-
-        this.notifications = [];
     }
 
     /**
@@ -243,12 +240,22 @@ class Plot implements Saveable {
             }
 
             if (updatedStage === PlotStage.Berry) {
-                this.notifications.push(FarmNotificationType.Ripe);
+                Notifier.notify({
+                    message: 'A berry is ripe',
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.berry_is_ripe,
+                    setting: NotificationConstants.NotificationSetting.berry_is_ripe,
+                });
                 change = true;
             }
 
             if (!this._hasWarnedAboutToWither && this.age + 15 > this.berryData.growthTime[4]) {
-                this.notifications.push(FarmNotificationType.AboutToWither);
+                Notifier.notify({
+                    message: 'A berry plant is about to wither',
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.about_to_wither,
+                    setting: NotificationConstants.NotificationSetting.about_to_wither,
+                });
                 this._hasWarnedAboutToWither = true;
             }
 
@@ -262,7 +269,12 @@ class Plot implements Saveable {
         if (this.mulch !== MulchType.None) {
             this.mulchTimeLeft = Math.max(this.mulchTimeLeft - seconds, 0);
             if (this.mulchTimeLeft === 0) {
-                this.notifications.push(FarmNotificationType.MulchRanOut);
+                Notifier.notify({
+                    message: 'A mulched plot has ran out',
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.mulch_ran_out,
+                    setting: NotificationConstants.NotificationSetting.mulch_ran_out,
+                });
                 this.mulch = MulchType.None;
             }
         }
@@ -286,7 +298,6 @@ class Plot implements Saveable {
     plant(berry: BerryType): void {
         this.berry = berry;
         this.age = 0;
-        this.notifications = [];
         this._hasWarnedAboutToWither = false;
     }
 
@@ -307,26 +318,46 @@ class Plot implements Saveable {
             const amount = Math.ceil(this.harvestAmount() / 2);
             if (amount) {
                 App.game.farming.gainBerry(this.berry, amount);
-                this.notifications.push(FarmNotificationType.Dropped);
+                Notifier.notify({
+                    message: 'A berry has dropped',
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.farm_dropped,
+                    setting: NotificationConstants.NotificationSetting.farm_dropped,
+                });
             }
 
             // Check if berry replants itself
             const replantChance = this.berryData.replantRate * App.game.farming.getReplantMultiplier() * this.getReplantMultiplier();
             if (Math.random() < replantChance) {
                 this.age = 0;
-                this.notifications.push(FarmNotificationType.Replanted);
+                Notifier.notify({
+                    message: 'A berry has replanted',
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.berry_replanted,
+                    setting: NotificationConstants.NotificationSetting.berry_replanted,
+                });
                 App.game.oakItems.use(OakItems.OakItem.Sprinklotad);
                 GameHelper.incrementObservable(App.game.statistics.totalBerriesReplanted, 1);
                 return;
             }
 
-            this.notifications.push(FarmNotificationType.Withered);
+            Notifier.notify({
+                message: 'A plant has withered',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.berry_withered,
+                setting: NotificationConstants.NotificationSetting.berry_withered,
+            });
 
             // Check for Kasib berry mutation/replant chance
             if (App.game.farming.highestUnlockedBerry() > BerryType.Occa) {
                 if (!App.game.farming.berryInFarm(BerryType.Colbur)) {
                     if (Math.random() < 0.05) {
-                        this.notifications.push(FarmNotificationType.Mutated);
+                        Notifier.notify({
+                            message: 'A berry has mutated',
+                            type: NotificationConstants.NotificationOption.success,
+                            sound: NotificationConstants.NotificationSound.berry_mutated,
+                            setting: NotificationConstants.NotificationSetting.berry_mutated,
+                        });
                         this.berry = BerryType.Kasib;
                         this.age = 0;
                         App.game.farming.unlockBerry(BerryType.Kasib);

@@ -55,7 +55,6 @@ abstract class EvolveMutation extends Mutation {
         }
         plot.berry = this.mutatedBerry;
         plot.age = newAge;
-        plot.notifications = [];
         App.game.farming.unlockBerry(this.mutatedBerry);
     }
 
