@@ -343,7 +343,7 @@ class Update implements Saveable {
                 Notifier.notify({
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Click Attack challenge mode?
-                    
+
                     <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableClickAttack.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
@@ -352,7 +352,7 @@ class Update implements Saveable {
             Notifier.notify({
                 title: 'Active Challenge Mode?',
                 message: `Do you want to activate No Battle Item challenge mode?
-                
+
                 <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableBattleItems.activate(); Object.values(player.effectList).forEach(e => e(0));" data-dismiss="toast">Activate</button>`,
                 timeout: GameConstants.HOUR,
             });
@@ -361,7 +361,7 @@ class Update implements Saveable {
                 Notifier.notify({
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Masterball challenge mode?
-                    
+
                     <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableMasterballs.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
@@ -371,7 +371,7 @@ class Update implements Saveable {
                 Notifier.notify({
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Oak Item challenge mode?
-                    
+
                     <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableOakItems.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
@@ -381,7 +381,7 @@ class Update implements Saveable {
                 Notifier.notify({
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Shard challenge mode?
-                    
+
                     <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableShards.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
@@ -391,7 +391,7 @@ class Update implements Saveable {
                 Notifier.notify({
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Protein challenge mode?
-                    
+
                     <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableProteins.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
@@ -535,7 +535,7 @@ class Update implements Saveable {
         const saveData = this.getSaveData();
         const settingsData = this.getSettingsData();
 
-        if (!playerData || !saveData || !settingsData) {
+        if (!playerData || !saveData) {
             return;
         }
 
@@ -691,7 +691,7 @@ class Update implements Saveable {
         } catch (err) {
             console.warn('Error getting settings data', err);
         } finally {
-            return settingsData;
+            return settingsData || {};
         }
     }
 
