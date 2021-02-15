@@ -1914,7 +1914,7 @@ dungeonList['Terminus Cave'] = new Dungeon('Terminus Cave',
                 new GymPokemon('Nidoqueen', 46659450, 51),
                 new GymPokemon('Nidoking', 46654990, 51),
             ],1, { weight: 3 }, 'Fern & Lee'),
-        new DungeonBossPokemon('Zygarde', 9248530, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)}),
+        new DungeonBossPokemon('Zygarde', 92485360, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)}),
     ],
     700000, 18, 45);
 
