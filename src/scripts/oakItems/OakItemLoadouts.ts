@@ -9,11 +9,14 @@ class OakItemLoadouts implements Saveable {
 
     loadouts: Array<KnockoutObservableArray<number>> = Array(OakItemLoadouts.MAX_SLOTS).fill(0).map(() => ko.observableArray());
     selectedLoadout: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
-    selectedItem: KnockoutObservable<OakItems.OakItem> = ko.observable(OakItems.OakItem.Magic_Ball).extend({ numeric: 0 });
 
     constructor() {}
 
     activateLoadout(index: number) {
+        if (App.game.challenges.list.disableOakItems.active()) {
+            return;
+        }
+
         App.game.oakItems.deactivateAll();
         this.loadouts[index]().forEach((item: OakItems.OakItem) => {
             App.game.oakItems.activate(item);
@@ -40,10 +43,6 @@ class OakItemLoadouts implements Saveable {
         return ko.pureComputed(() => {
             return this.loadouts[this.selectedLoadout()]().includes(item);
         });
-    }
-
-    clearLoadout() {
-        this.loadouts[this.selectedLoadout()].splice(0);
     }
 
     fromJSON(json: Array<Array<number>>) {
