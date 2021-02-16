@@ -4,7 +4,7 @@ interface EnemyPokemonInterface extends PokemonInterface {
     level: number;
     catchRate: number;
     exp: number;
-    money: number;
+    reward: Amount,
 
     isAlive(): boolean;
     damage(damage: number): void;
