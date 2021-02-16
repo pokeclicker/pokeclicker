@@ -61,7 +61,7 @@ class BattlePokemon implements EnemyPokemonInterface {
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonDefeated);
         }
 
-        if (this.reward) {
+        if (this.reward.amount > 0) {
             App.game.wallet.addAmount(this.reward);
         }
 
