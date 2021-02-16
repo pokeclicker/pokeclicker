@@ -267,16 +267,20 @@ class Mine {
         }
     }
 
-    private static skipLayer(shouldConfirm = true): boolean {
+    private static async skipLayer(shouldConfirm = true): Promise<void> {
         if (!this.skipsRemaining()) {
-            return false;
+            return;
         }
 
-        if (!shouldConfirm || confirm('Skip this mine layer?')) {
+        if (!shouldConfirm || await Notifier.confirm({
+            title: 'Underground',
+            message: 'Skip this mine layer?',
+            type: NotificationConstants.NotificationOption.warning,
+            confirm: 'skip',
+        })) {
             setTimeout(Mine.completed, 1500);
             Mine.loadingNewLayer = true;
             GameHelper.incrementObservable(this.skipsRemaining, -1);
-            return true;
         }
     }
 

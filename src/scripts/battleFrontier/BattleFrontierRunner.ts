@@ -76,18 +76,24 @@ class BattleFrontierRunner {
         this.end();
     }
     public static battleQuit() {
-        if (!confirm('Are you sure you want to leave?\n\nYou will not receive any Battle Points for the stages already completed.')) {
-            return;
-        }
-        // Don't give any points, user quit the challenge
-        Notifier.notify({
+        Notifier.confirm({
             title: 'Battle Frontier',
-            message: `You made it to stage ${this.stage()}`,
-            type: NotificationConstants.NotificationOption.info,
-            timeout: 5 * GameConstants.MINUTE,
-        });
+            message: 'Are you sure you want to leave?\n\nYou will not receive any Battle Points for the stages already completed.',
+            type: NotificationConstants.NotificationOption.danger,
+            confirm: 'leave',
+        }).then(confirmed => {
+            if (confirmed) {
+                // Don't give any points, user quit the challenge
+                Notifier.notify({
+                    title: 'Battle Frontier',
+                    message: `You made it to stage ${this.stage()}`,
+                    type: NotificationConstants.NotificationOption.info,
+                    timeout: 5 * GameConstants.MINUTE,
+                });
 
-        this.end();
+                this.end();
+            }
+        });
     }
 
     public static timeLeftSeconds = ko.pureComputed(() => {
