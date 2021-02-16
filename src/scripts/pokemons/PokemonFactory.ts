@@ -137,7 +137,7 @@ class PokemonFactory {
         const exp: number = basePokemon.exp;
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         // Reward 2% of dungeon DT cost when the trainer mons are defeated
-        const tokens = Math.round(DungeonRunner.dungeon.tokenCost * 0.02);
+        const tokens = Math.round(DungeonRunner.dungeon.tokenCost * 0.02) * (DungeonRunner.fightingBoss() ? 2 : 1);
         return new BattlePokemon(name, basePokemon.id, basePokemon.type1, basePokemon.type2, maxHealth, level, 0, exp, new Amount(tokens, GameConstants.Currency.dungeonToken), shiny, GameConstants.DUNGEON_SHARDS);
     }
 
