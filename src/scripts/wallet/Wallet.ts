@@ -76,7 +76,7 @@ class Wallet implements Feature {
         this.addAmount(new Amount(bPoints, Currency.battlePoint));
     }
 
-    private addAmount(amount: Amount) {
+    public addAmount(amount: Amount) {
         if (isNaN(amount.amount) || amount.amount <= 0) {
             console.trace('Could not add amount:', amount);
             amount.amount = 1;
