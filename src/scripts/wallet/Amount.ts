@@ -4,7 +4,7 @@ class Amount {
 
 
     constructor(amount: number, currency: GameConstants.Currency) {
-        this.amount = amount;
+        this.amount = Math.round(amount);
         this.currency = currency;
     }
 
