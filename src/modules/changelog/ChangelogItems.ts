@@ -9,6 +9,17 @@ import ChangelogUpdate from './ChangelogUpdate';
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const ChangelogItems = [
+    // v0.7.6
+    new ChangelogUpdate('v0.7.6 - Various bug fixes and feature additions', new Date(2021, 1, 18)),
+    new Changelog(changelogType.NEW, 'New Oak Item loadouts'),
+    new Changelog(changelogType.CHANGE, 'Allow prompts on desktop client'),
+    new Changelog(changelogType.CHANGE, 'Defeated TRAINERS give Dungeon Tokens'),
+    new Changelog(changelogType.FIXED, 'Fixed MissingNo save issue'),
+    new Changelog(changelogType.FIXED, 'Fixed e4 hotkeys'),
+    new Changelog(changelogType.FIXED, 'Fixed sound issues on load'),
+    new Changelog(changelogType.FIXED, 'Fixed shiny code'),
+    new Changelog(changelogType.FIXED, 'Fixed evolution stone methods'),
+
     // note that month is 0 indexed
     // v0.7.5
     new ChangelogUpdate('v0.7.5 - Challenges, Trainers and Saves', new Date(2021, 0, 29)),
