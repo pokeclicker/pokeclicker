@@ -10,6 +10,10 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.7.7
+    new ChangelogUpdate('v0.7.7', new Date(2021, 1, 19)),
+    new Changelog(changelogType.FIXED, 'Fixed currency quest'),
+
     // v0.7.6
     new ChangelogUpdate('v0.7.6', new Date(2021, 1, 19)),
     new Changelog(changelogType.NEW, 'Oak item loadouts'),
