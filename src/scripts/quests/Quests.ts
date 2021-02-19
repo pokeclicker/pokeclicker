@@ -130,7 +130,7 @@ class Quests implements Saveable {
     public async refreshQuests(free = this.freeRefresh(), shouldConfirm = false) {
         if (free || this.canAffordRefresh()) {
             if (!free) {
-                if (shouldConfirm && !Notifier.confirm({
+                if (shouldConfirm && !await Notifier.confirm({
                     title: 'Refresh quest list',
                     message: 'Are you sure you want to refresh the quest list?',
                     type: NotificationConstants.NotificationOption.warning,
