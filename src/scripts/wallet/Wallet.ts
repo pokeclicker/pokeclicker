@@ -19,7 +19,6 @@ class Wallet implements Feature {
         const money = Math.floor(base * bonus);
 
         GameHelper.incrementObservable(App.game.statistics.totalMoney, money);
-        GameController.animateCurrency(money, 'playerMoney');
 
         this.addAmount(new Amount(money, Currency.money));
         return money;
@@ -30,7 +29,6 @@ class Wallet implements Feature {
         const tokens = Math.floor(base * bonus);
 
         GameHelper.incrementObservable(App.game.statistics.totalDungeonTokens, tokens);
-        GameController.animateCurrency(tokens, 'playerMoneyDungeon');
 
         this.addAmount(new Amount(tokens, Currency.dungeonToken));
     }
@@ -41,7 +39,6 @@ class Wallet implements Feature {
         points = Math.floor(points);
 
         GameHelper.incrementObservable(App.game.statistics.totalQuestPoints, points);
-        GameController.animateCurrency(points, 'playerMoneyQuest');
 
         this.addAmount(new Amount(points, Currency.questPoint));
     }
@@ -76,13 +73,25 @@ class Wallet implements Feature {
         this.addAmount(new Amount(bPoints, Currency.battlePoint));
     }
 
-    private addAmount(amount: Amount) {
+    public addAmount(amount: Amount) {
         if (isNaN(amount.amount) || amount.amount <= 0) {
             console.trace('Could not add amount:', amount);
             amount.amount = 1;
         }
 
         GameHelper.incrementObservable(this.currencies[amount.currency], amount.amount);
+
+        switch (amount.currency) {
+            case GameConstants.Currency.money:
+                GameController.animateCurrency(amount.amount, 'playerMoney');
+                break;
+            case GameConstants.Currency.dungeonToken:
+                GameController.animateCurrency(amount.amount, 'playerMoneyDungeon');
+                break;
+            case GameConstants.Currency.questPoint:
+                GameController.animateCurrency(amount.amount, 'playerMoneyQuest');
+                break;
+        }
     }
 
     public hasAmount(amount: Amount) {
