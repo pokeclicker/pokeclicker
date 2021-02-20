@@ -18,9 +18,6 @@ class Wallet implements Feature {
         const bonus = this.multiplier.getBonus('money', true);
         const money = Math.floor(base * bonus);
 
-        GameHelper.incrementObservable(App.game.statistics.totalMoney, money);
-        GameController.animateCurrency(money, 'playerMoney');
-
         this.addAmount(new Amount(money, Currency.money));
         return money;
     }
@@ -28,9 +25,6 @@ class Wallet implements Feature {
     public gainDungeonTokens(base: number, origin?: string) {
         const bonus = this.multiplier.getBonus('dungeonToken', true);
         const tokens = Math.floor(base * bonus);
-
-        GameHelper.incrementObservable(App.game.statistics.totalDungeonTokens, tokens);
-        GameController.animateCurrency(tokens, 'playerMoneyDungeon');
 
         this.addAmount(new Amount(tokens, Currency.dungeonToken));
     }
@@ -40,9 +34,6 @@ class Wallet implements Feature {
 
         points = Math.floor(points);
 
-        GameHelper.incrementObservable(App.game.statistics.totalQuestPoints, points);
-        GameController.animateCurrency(points, 'playerMoneyQuest');
-
         this.addAmount(new Amount(points, Currency.questPoint));
     }
 
@@ -50,8 +41,6 @@ class Wallet implements Feature {
         let diamonds = base;
 
         diamonds = Math.floor(diamonds);
-
-        GameHelper.incrementObservable(App.game.statistics.totalDiamonds, diamonds);
 
         this.addAmount(new Amount(diamonds, Currency.diamond));
     }
@@ -61,8 +50,6 @@ class Wallet implements Feature {
 
         points = Math.floor(points);
 
-        GameHelper.incrementObservable(App.game.statistics.totalFarmPoints, points);
-
         this.addAmount(new Amount(points, Currency.farmPoint));
     }
 
@@ -71,18 +58,40 @@ class Wallet implements Feature {
 
         bPoints = Math.floor(bPoints);
 
-        GameHelper.incrementObservable(App.game.statistics.totalBattlePoints, bPoints);
-
         this.addAmount(new Amount(bPoints, Currency.battlePoint));
     }
 
-    private addAmount(amount: Amount) {
+    public addAmount(amount: Amount) {
         if (isNaN(amount.amount) || amount.amount <= 0) {
             console.trace('Could not add amount:', amount);
             amount.amount = 1;
         }
 
         GameHelper.incrementObservable(this.currencies[amount.currency], amount.amount);
+
+        switch (amount.currency) {
+            case GameConstants.Currency.money:
+                GameController.animateCurrency(amount.amount, 'playerMoney');
+                GameHelper.incrementObservable(App.game.statistics.totalMoney, amount.amount);
+                break;
+            case GameConstants.Currency.dungeonToken:
+                GameController.animateCurrency(amount.amount, 'playerMoneyDungeon');
+                GameHelper.incrementObservable(App.game.statistics.totalDungeonTokens, amount.amount);
+                break;
+            case GameConstants.Currency.questPoint:
+                GameController.animateCurrency(amount.amount, 'playerMoneyQuest');
+                GameHelper.incrementObservable(App.game.statistics.totalQuestPoints, amount.amount);
+                break;
+            case GameConstants.Currency.diamond:
+                GameHelper.incrementObservable(App.game.statistics.totalDiamonds, amount.amount);
+                break;
+            case GameConstants.Currency.farmPoint:
+                GameHelper.incrementObservable(App.game.statistics.totalFarmPoints, amount.amount);
+                break;
+            case GameConstants.Currency.battlePoint:
+                GameHelper.incrementObservable(App.game.statistics.totalBattlePoints, amount.amount);
+                break;
+        }
     }
 
     public hasAmount(amount: Amount) {
