@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.7.6"></script>
+    <script src="scripts/modules.min.js?v=0.7.7"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.7.6"></script>
+    <script src="scripts/script.min.js?v=0.7.7"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.7.6" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.7.7" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -822,19 +822,19 @@
                             <td width="33.33%">
                                 <span style="display: inline;">
                                     <img title="Money" src="assets/images/currency/money.svg" height="25px">
-                                    <span id="playerMoney" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.money]().toLocaleString('en-US')">0</span>
+                                    <span id="animateCurrency-money" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.money]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td width="33.33%">
                                 <span style="display: inline;">
                                     <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px">
-                                    <span id="playerMoneyDungeon" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.dungeonToken]().toLocaleString('en-US')">0</span>
+                                    <span id="animateCurrency-dungeonToken" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.dungeonToken]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td width="33.33%">
                                 <span style="display: inline;">
                                     <img title="Quest points" src="assets/images/currency/questPoint.svg" height="25px">
-                                    <span id="playerMoneyQuest" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">0</span>
+                                    <span id="animateCurrency-questPoint" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                         </tr>
