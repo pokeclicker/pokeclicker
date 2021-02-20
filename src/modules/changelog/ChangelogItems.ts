@@ -11,8 +11,10 @@ import ChangelogUpdate from './ChangelogUpdate';
 const ChangelogItems = [
     // note that month is 0 indexed
     // v0.7.7
-    new ChangelogUpdate('v0.7.7', new Date(2021, 1, 19)),
-    new Changelog(changelogType.FIXED, 'Fixed currency quest'),
+    new ChangelogUpdate('v0.7.7', new Date(2021, 1, 20)),
+    new Changelog(changelogType.FIXED, 'Fixed currency quests'),
+    new Changelog(changelogType.FIXED, 'Fixed currency multipliers'),
+    new Changelog(changelogType.FIXED, 'Fixed quest refreshing without waiting for confirmation'),
 
     // v0.7.6
     new ChangelogUpdate('v0.7.6', new Date(2021, 1, 19)),
