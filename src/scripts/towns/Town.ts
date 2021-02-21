@@ -371,7 +371,8 @@ const BlackthornCityShop = new Shop([
     ItemList['Dragon_scale'],
 ]);
 
-//Johto Berry Master
+// Johto NPCs
+
 const JohtoBerryMaster = new Shop([
     ItemList['Boost_Mulch'],
     ItemList['Rich_Mulch'],
@@ -380,8 +381,6 @@ const JohtoBerryMaster = new Shop([
     ItemList['Berry_Shovel'],
     ItemList['Squirtbottle'],
 ]);
-
-// Johto NPCs
 
 const CherrygroveMrPokemon = new NPC('Mr Pokémon', [
     'Welcome to Johto! This is where the first ever Pokémon egg was found long ago.',
@@ -398,6 +397,10 @@ const EcruteakKimonoGirl = new NPC('Kimono Girl', [
     'Legends say that Ho-Oh is searching for a trainer of pure heart.',
     'To prove yourself, you must tame the three legendary beasts of Johto, and bring them to the nearby Tin Tower.',
 ]);
+
+const JohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
+    'On the news they are getting more reports of roaming Pokémon appearing on {ROUTE_NAME}!',
+], GameConstants.Region.johto);
 
 
 //Johto Towns
@@ -485,6 +488,7 @@ TownList['Blackthorn City'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ice Path'))],
         shop: BlackthornCityShop,
+        npcs: [JohtoRoamerNPC],
     }
 );
 
@@ -651,6 +655,9 @@ const Weatherman = new NPC('Weatherman', [
     'It changes forms when the weather is drastically different.',
     'If you want to collect them all, wait for the weather to change.',
 ]);
+const HoennRoamerNPC = new RoamerNPC('Youngster Alex', [
+    'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
+], GameConstants.Region.hoenn);
 
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
@@ -700,6 +707,7 @@ TownList['Slateport City'] = new Town(
             new GymBadgeRequirement(BadgeEnums.Knuckle),
         ],
         shop: SlateportCityShop,
+        npcs: [HoennRoamerNPC],
     }
 );
 TownList['Mauville City'] = new Town(
@@ -993,6 +1001,9 @@ const HearthomeContestFan = new NPC('Contest Fan', [
     'Their prized Magneton had evolved into a Magnezone!',
     'I\'m so happy for them, all of that training in Mt. Coronet must have paid off!',
 ]);
+const SinnohRoamerNPC = new RoamerNPC('Youngster James', [
+    'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
+], GameConstants.Region.sinnoh);
 
 //Sinnoh Towns
 TownList['Twinleaf Town'] = new Town(
@@ -1093,6 +1104,7 @@ TownList['Pal Park'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 221)],
         shop: PalParkShop,
+        npcs: [SinnohRoamerNPC],
     }
 );
 TownList['Canalave City'] = new Town(
@@ -1368,6 +1380,9 @@ const ExcitedChild = new NPC('Professor Birch\'s Aide', [
     'Then my programme got interrupted by an emergency broadcast. A report on the first confirmed sightings of Tornadus and Thundurus in over twenty-five years! I\'ve read so much about them, they are my favorites.',
     'Last time they were spotted they just roamed around, causing all kinds of mischief. According to my books anyway. I\'m sure that amazing trainer from the TV will want to catch these mighty forces of nature.',
 ]);
+const UnovaRoamerNPC = new RoamerNPC('Youngster Sarah', [
+    'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
+], GameConstants.Region.unova);
 
 //Unova Towns
 TownList['Aspertia City'] = new Town(
@@ -1478,6 +1493,7 @@ TownList['Pokemon League Unova'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Unova'))],
+        npcs: [UnovaRoamerNPC],
     }
 );
 TownList['Icirrus City'] = new Town(
