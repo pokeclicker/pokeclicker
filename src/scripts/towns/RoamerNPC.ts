@@ -17,6 +17,8 @@ class RoamerNPC extends NPC {
             return `There hasn't been any reports of roaming Pokémon around ${GameConstants.camelCaseToString(GameConstants.Region[this.region])} lately..`;
         }
 
-        return super.dialogHTML.replace(/{ROUTE_NAME}/g, route()?.routeName);
+        const roamersHTML = roamers.map(r => `<img width="64px" src="assets/images/pokemon/${r.pokemon.id}.png" />`).join('');
+
+        return super.dialogHTML.replace(/{ROUTE_NAME}/g, route()?.routeName) + roamersHTML;
     }
 }
