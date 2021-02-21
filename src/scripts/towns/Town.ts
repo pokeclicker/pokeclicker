@@ -655,8 +655,8 @@ const Weatherman = new NPC('Weatherman', [
     'It changes forms when the weather is drastically different.',
     'If you want to collect them all, wait for the weather to change.',
 ]);
-const HoennRoamerNPC = new RoamerNPC('Youngster Alex', [
-    'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
+const HoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
+    'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
 ], GameConstants.Region.hoenn);
 
 //Hoenn Towns
@@ -1001,8 +1001,8 @@ const HearthomeContestFan = new NPC('Contest Fan', [
     'Their prized Magneton had evolved into a Magnezone!',
     'I\'m so happy for them, all of that training in Mt. Coronet must have paid off!',
 ]);
-const SinnohRoamerNPC = new RoamerNPC('Youngster James', [
-    'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
+const SinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
+    'I spotted a bunvh of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.sinnoh);
 
 //Sinnoh Towns
@@ -1104,7 +1104,6 @@ TownList['Pal Park'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 221)],
         shop: PalParkShop,
-        npcs: [SinnohRoamerNPC],
     }
 );
 TownList['Canalave City'] = new Town(
@@ -1151,6 +1150,7 @@ TownList['Survival Area'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 225)],
         shop: SurvivalAreaShop,
+        npcs: [SinnohRoamerNPC],
     }
 );
 TownList['Resort Area'] = new Town(
@@ -1374,14 +1374,14 @@ const AnvilleTownShop = new Shop([
 ]);
 
 //Unova NPCs
-const ExcitedChild = new NPC('Professor Birch\'s Aide', [
+const ExcitedChild = new NPC('Excited Child', [
     'Did you hear? Did you see? It was on TV!',
     'I was just watching my favorite show, The National Gymquirer. It was a live segment! Some hot shot trainer from Kanto defeated Drayden! It was amazing! That trainer is so cool! Drayden is like unbeatable.',
     'Then my programme got interrupted by an emergency broadcast. A report on the first confirmed sightings of Tornadus and Thundurus in over twenty-five years! I\'ve read so much about them, they are my favorites.',
     'Last time they were spotted they just roamed around, causing all kinds of mischief. According to my books anyway. I\'m sure that amazing trainer from the TV will want to catch these mighty forces of nature.',
 ]);
 const UnovaRoamerNPC = new RoamerNPC('Youngster Sarah', [
-    'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
+    'My friends told me roaming Pokémon have been spotted on {ROUTE_NAME}!',
 ], GameConstants.Region.unova);
 
 //Unova Towns
@@ -1493,7 +1493,6 @@ TownList['Pokemon League Unova'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Unova'))],
-        npcs: [UnovaRoamerNPC],
     }
 );
 TownList['Icirrus City'] = new Town(
@@ -1505,6 +1504,7 @@ TownList['Icirrus City'] = new Town(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Twist Mountain')),
         ])],
         shop: IcirrusCityShop,
+        npcs: [UnovaRoamerNPC],
     }
 );
 TownList['Black and White Park'] = new Town(
