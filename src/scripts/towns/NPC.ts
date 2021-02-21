@@ -14,8 +14,8 @@ class NPC {
         return this.dialog.map(line => `<p>${line}</p>`).join('\n');
     }
 
-    get visible() {
-        return this.options.requirement?.isCompleted();
+    public isVisible() {
+        return this.options.requirement?.isCompleted() ?? true;
     }
 
     public openDialog() {
