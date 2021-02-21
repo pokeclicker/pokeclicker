@@ -182,6 +182,7 @@ export const GAIN_TOKENS_BASE_REWARD = CAPTURE_POKEMONS_BASE_REWARD / 13;
 
 // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
 export const MINE_LAYERS_BASE_REWARD = questBase * 720;
+export const MINE_ITEMS_BASE_REWARD = questBase * 210;
 
 // not balanced at all for some oak items
 export const USE_OAK_ITEM_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD;
