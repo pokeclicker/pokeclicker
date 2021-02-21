@@ -5,6 +5,7 @@
 ///<reference path="NPC.ts"/>
 ///<reference path="KantoBerryMasterNPC.ts"/>
 ///<reference path="ProfOakNPC.ts"/>
+///<reference path="RoamerNPC.ts"/>
 
 type TownOptionalArgument = {
     requirements?: (Requirement | OneFromManyRequirement)[],
@@ -158,6 +159,9 @@ const BattleItemRival2 = new NPC('Battle Item Master', [
     'Do I know you? Wait... Have you met my worthless rival? Ha! Let me guess, he gave you some unwanted advice?',
     'I bet he forget to tell you that although all Battle Items only last for 30 seconds they can stack and last for days! Now scram!',
 ]);
+const KantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
+    'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
+], GameConstants.Region.kanto);
 
 
 
@@ -219,6 +223,7 @@ TownList['Fuchsia City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 15),
         ])],
         shop: FuchsiaCityShop,
+        npcs: [KantoRoamerNPC],
     }
 );
 TownList['Cinnabar Island'] = new Town(
