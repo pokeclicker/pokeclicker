@@ -211,17 +211,13 @@ class MapHelper {
             MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
             player.region = player.highestRegion();
             // Track when users move region and how long it took in seconds
-            gtag('event', 'new region', {
-                event_category: 'new region',
-                event_label: GameConstants.Region[player.highestRegion()],
-                value: App.game.statistics.secondsPlayed(),
-            });
+            LogEvent('new region', 'new region',
+                GameConstants.Region[player.highestRegion()],
+                App.game.statistics.secondsPlayed());
             // Gather users attack when they moved regions
-            gtag('event', 'attack measurement', {
-                event_category: 'new region',
-                event_label: GameConstants.Region[player.highestRegion()],
-                value: App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, false),
-            });
+            LogEvent('attack measurement', 'new region',
+                GameConstants.Region[player.highestRegion()],
+                App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, false));
         }
     }
 

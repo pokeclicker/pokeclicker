@@ -110,11 +110,7 @@ class Quests implements Saveable {
             });
             this.freeRefresh(true);
             // Track when users gains a quest level and how long it took in seconds
-            gtag('event', 'gain quest level', {
-                event_category: 'quests',
-                event_label: `level (${this.level()})`,
-                value: App.game.statistics.secondsPlayed(),
-            });
+            LogEvent('gain quest level', 'quests', `level (${this.level()})`, App.game.statistics.secondsPlayed());
         }
     }
 
@@ -146,6 +142,13 @@ class Quests implements Saveable {
                 }
                 App.game.wallet.loseAmount(this.getRefreshCost());
             }
+
+            // Track when users refreshes the quest list and how much it cost
+            LogEvent('refresh quest list',
+                'quests',
+                `level (${this.level()})`,
+                free ? 0 : this.getRefreshCost());
+
             this.freeRefresh(false);
             GameHelper.incrementObservable(this.refreshes);
             this.generateQuestList();
