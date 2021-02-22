@@ -59,7 +59,13 @@ class SafariPokemon implements PokemonInterface {
         this.type1 = data.type1;
         this.type2 = data.type2;
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
+        GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[this.id]);
+        GameHelper.incrementObservable(App.game.statistics.totalPokemonEncountered);
+
         if (this.shiny) {
+            GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[this.id]);
+            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
+
             Notifier.notify({
                 message: `✨ You encountered a shiny ${name}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
