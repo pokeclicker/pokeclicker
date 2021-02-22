@@ -109,6 +109,12 @@ class Quests implements Saveable {
                 sound: NotificationConstants.NotificationSound.quest_level_increased,
             });
             this.freeRefresh(true);
+            // Track when users gains a quest level and how long it took in seconds
+            gtag('event', 'gain quest level', {
+                event_category: 'quests',
+                event_label: `level (${this.level()})`,
+                value: App.game.statistics.secondsPlayed(),
+            });
         }
     }
 
