@@ -41,6 +41,10 @@ class PokemonFactory {
                 sound: NotificationConstants.NotificationSound.shiny_long,
                 setting: NotificationConstants.NotificationSetting.encountered_shiny,
             });
+
+            // Track shinies encountered, and rate of shinies
+            LogEvent('encountered shiny', 'shiny pokemon', 'wild encounter',
+                Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, 1, heldItem);
     }
@@ -125,6 +129,10 @@ class PokemonFactory {
                 sound: NotificationConstants.NotificationSound.shiny_long,
                 setting: NotificationConstants.NotificationSetting.encountered_shiny,
             });
+
+            // Track shinies encountered, and rate of shinies
+            LogEvent('encountered shiny', 'shiny pokemon', 'dungeon encounter',
+                Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_SHARDS, heldItem);
     }
@@ -157,6 +165,10 @@ class PokemonFactory {
                 sound: NotificationConstants.NotificationSound.shiny_long,
                 setting: NotificationConstants.NotificationSetting.encountered_shiny,
             });
+
+            // Track shinies encountered, and rate of shinies
+            LogEvent('encountered shiny', 'shiny pokemon', 'dungeon boss encounter',
+                Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_BOSS_SHARDS);
     }
