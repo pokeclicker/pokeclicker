@@ -84,6 +84,10 @@ class Quests implements Saveable {
                 // Give player a free refresh
                 this.freeRefresh(true);
             }
+            LogEvent('completed quest',
+                'quests',
+                `level (${this.level()})`,
+                App.game.statistics.questsCompleted());
         } else {
             console.trace('cannot claim quest..');
             Notifier.notify({
