@@ -7,8 +7,9 @@ const LogEvent = (event: string, event_category: string, event_label?: string, v
             event_label,
             value,
         });
-    // eslint-disable-next-line no-empty
-    } catch (e) {}
+    } catch (e) {
+        console.warn('Failed to send event data.');
+    }
 };
 
 export default LogEvent;
