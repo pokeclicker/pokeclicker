@@ -84,6 +84,8 @@ class Quests implements Saveable {
                 // Give player a free refresh
                 this.freeRefresh(true);
             }
+
+            // Track quest completion and total quest completed
             LogEvent('completed quest',
                 'quests',
                 `level (${this.level()})`,
