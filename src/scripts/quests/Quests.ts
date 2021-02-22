@@ -147,7 +147,7 @@ class Quests implements Saveable {
             LogEvent('refresh quest list',
                 'quests',
                 `level (${this.level()})`,
-                free ? 0 : this.getRefreshCost());
+                free ? 0 : this.getRefreshCost().amount);
 
             this.freeRefresh(false);
             GameHelper.incrementObservable(this.refreshes);
