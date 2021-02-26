@@ -6,6 +6,7 @@ import Profile from './profile/Profile';
 import DataStore from './DataStore';
 import * as GameConstants from './GameConstants';
 import GameHelper from './GameHelper';
+import LogEvent from './LogEvent';
 import BadgeEnums from './enums/Badges';
 import PokemonType from './enums/PokemonType';
 import ItemType from './enums/ItemType';
@@ -35,6 +36,7 @@ Object.assign(<any>window, {
     Profile,
     GameConstants,
     GameHelper,
+    LogEvent,
     DataStore,
     BadgeCase: DataStore.badge,
     Statistics: DataStore.statistics,

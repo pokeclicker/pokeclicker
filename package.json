@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/pokeclicker/pokeclicker#readme",
   "devDependencies": {
+    "@types/gtag.js": "0.0.4",
     "@types/jquery": "^3.5.2",
     "@types/sortablejs": "^1.10.5",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
