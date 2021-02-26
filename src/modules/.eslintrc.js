@@ -17,6 +17,7 @@ module.exports = {
     globals: {
         ko: 'readonly',
         $: 'readonly',
+        gtag: 'readonly',
     },
     rules: {
         indent: 'off',
