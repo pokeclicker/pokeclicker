@@ -185,13 +185,13 @@ class PokemonFactory {
         return possible[Math.floor(Math.random() * possible.length)].pokemon.name;
     }
 
-    private static roamingEncounter(route: number, region: GameConstants.Region): boolean {
+    private static roamingEncounter(routeNum: number, region: GameConstants.Region): boolean {
         // Map to the route numbers
-        const routeNum = MapHelper.normalizeRoute(route, region);
+        const route = Routes.getRoute(region, routeNum);
         const routes = Routes.getRoutesByRegion(region).map(r => MapHelper.normalizeRoute(r.number, region));
 
         // Check if the dice rolls in their favor
-        const encounter = PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, Math.max(...routes), Math.min(...routes), routeNum);
+        const encounter = PokemonFactory.roamingChance(Math.max(...routes), Math.min(...routes), route, region);
         if (!encounter) {
             return false;
         }
@@ -206,8 +206,12 @@ class PokemonFactory {
         return true;
     }
 
-    private static roamingChance(max, min, maxRoute, minRoute, curRoute) {
-        return Math.random() < 1 / (max + ( (min - max) * (maxRoute - curRoute) / (maxRoute - minRoute)));
+    private static roamingChance(maxRoute: number, minRoute: number, curRoute: RegionRoute, region: GameConstants.Region, max = GameConstants.ROAMING_MAX_CHANCE, min = GameConstants.ROAMING_MIN_CHANCE) {
+        const routeNum = MapHelper.normalizeRoute(curRoute?.number, region);
+        // Check if we should have increased chances on this route (3 x rate)
+        const increasedChance = RoamingPokemonList.getIncreasedChanceRouteByRegion(player.region)()?.number == curRoute?.number;
+        const roamingChance = (max + ( (min - max) * (maxRoute - routeNum) / (maxRoute - minRoute))) / (increasedChance ? 3 : 1);
+        return Math.random() < 1 / roamingChance;
     }
 
     private static catchRateHelper(baseCatchRate: number, noVariation = false): number {
