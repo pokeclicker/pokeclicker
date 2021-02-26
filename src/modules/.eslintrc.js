@@ -18,6 +18,9 @@ module.exports = {
         ko: 'readonly',
         $: 'readonly',
         gtag: 'readonly',
+        App: 'readonly',
+        player: 'readonly',
+        pokemonMap: 'readonly',
     },
     rules: {
         indent: 'off',

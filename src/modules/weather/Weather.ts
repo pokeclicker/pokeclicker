@@ -11,8 +11,6 @@ export default class Weather {
     public static regionalWeather: Observable<WeatherType>[] = Array<WeatherType>(GameHelper.enumLength(Region)).fill(WeatherType.Clear).map((v) => ko.observable<WeatherType>(v));
 
     public static currentWeather: Computed<WeatherType> = ko.pureComputed(() => {
-        // @ts-ignore
-        // eslint-disable-next-line no-undef
         const weather = Weather.regionalWeather[player.region]();
 
         // TODO: HLXII - Add weather overrides
