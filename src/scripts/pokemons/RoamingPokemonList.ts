@@ -29,7 +29,7 @@ class RoamingPokemonList {
     }
 
     // How many hours between when the roaming Pokemon change routes for increased chances
-    private static period = 6;
+    private static period = 8;
 
     public static generateIncreasedChanceRoutes(date = new Date()) {
         // Seed the random runmber generator
