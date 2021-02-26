@@ -208,9 +208,9 @@ class PokemonFactory {
 
     private static roamingChance(maxRoute: number, minRoute: number, curRoute: RegionRoute, region: GameConstants.Region, max = GameConstants.ROAMING_MAX_CHANCE, min = GameConstants.ROAMING_MIN_CHANCE) {
         const routeNum = MapHelper.normalizeRoute(curRoute?.number, region);
-        // Check if we should have increased chances on this route
+        // Check if we should have increased chances on this route (3 x rate)
         const increasedChance = RoamingPokemonList.getIncreasedChanceRouteByRegion(player.region)()?.number == curRoute?.number;
-        const roamingChance = (max + ( (min - max) * (maxRoute - routeNum) / (maxRoute - minRoute))) / (increasedChance ? 2 : 1);
+        const roamingChance = (max + ( (min - max) * (maxRoute - routeNum) / (maxRoute - minRoute))) / (increasedChance ? 3 : 1);
         return Math.random() < 1 / roamingChance;
     }
 

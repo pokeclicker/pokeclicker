@@ -1002,7 +1002,7 @@ const HearthomeContestFan = new NPC('Contest Fan', [
     'I\'m so happy for them, all of that training in Mt. Coronet must have paid off!',
 ]);
 const SinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
-    'I spotted a bunvh of roaming Pokémon on {ROUTE_NAME}!',
+    'I spotted a bunch of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.sinnoh);
 
 //Sinnoh Towns
