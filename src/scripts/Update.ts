@@ -642,15 +642,18 @@ class Update implements Saveable {
     // If any pokemon names change in the data rename them,
     // note that name isn't used in party.
     static renamePokemonInSaveData = (saveData, oldName, newName) => {
+        if (!saveData.breeding) {
+            return;
+        }
         // Fixup eggs
-        saveData.breeding.eggList.forEach(egg => {
+        saveData.breeding.eggList?.forEach(egg => {
             if (egg.pokemon == oldName) {
                 egg.pokemon = newName;
             }
         });
 
         // Fixup queue
-        saveData.breeding.queueList = saveData.breeding.queueList.map(p => p == oldName ? newName : p);
+        saveData.breeding.queueList = saveData.breeding.queueList?.map(p => p == oldName ? newName : p) || [];
     }
 
     getPlayerData() {
