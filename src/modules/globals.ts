@@ -1,5 +1,4 @@
 // importing only types, as we are "allowed" to have circular type dependencies
-import type { Observable } from 'knockout';
 import type LogBook from './logbook/LogBook';
 import type BadgeCase from './DataStore/BadgeCase';
 import type Profile from './profile/Profile';
@@ -16,7 +15,7 @@ import type LevelType from './party/LevelType';
 // instead of these cheap imitations.
 
 type TmpGameType = {
-    gameState: Observable<GameState>
+    gameState: GameState
 
     // constructor properties
     update: any,
