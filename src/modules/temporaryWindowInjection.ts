@@ -30,6 +30,7 @@ import Multiplier from './multiplier/Multiplier';
 import MultiplierType from './multiplier/MultiplierType';
 import SpecialEvent from './specialEvents/SpecialEvent';
 import Challenges from './challenges/Challenges';
+import LevelType, { levelRequirements } from './party/LevelType';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -64,4 +65,6 @@ Object.assign(<any>window, {
     MultiplierType,
     SpecialEvent,
     Challenges,
+    LevelType,
+    levelRequirements,
 });

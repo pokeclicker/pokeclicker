@@ -25,8 +25,6 @@ export default class BadgeCase implements Feature {
 
         // Track when users gains a badge and their total attack
         LogEvent('gained badge', 'badges', `gained badge (${camelCaseToString(BadgeEnums[badge])})`,
-            // @ts-ignore
-            // eslint-disable-next-line no-undef
             App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, false));
     }
 
