@@ -1282,7 +1282,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 52.2,
-        'name': ' Galarian Meowth',
+        'name': 'Galarian Meowth',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 255,
         'type': [PokemonType.Normal],

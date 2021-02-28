@@ -69,7 +69,7 @@ export type PokemonNameType
     | 'Alolan Dugtrio'
     | 'Meowth'
     | 'Alolan Meowth'
-    | ' Galarian Meowth'
+    | 'Galarian Meowth'
     | 'Persian'
     | 'Alolan Persian'
     | 'Psyduck'
