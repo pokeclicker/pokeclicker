@@ -20698,8 +20698,6 @@ const pokemonList = createPokemonArray(
     // },
 );
 
-type PokemonNameType = typeof pokemonList[number]['name'];
-
 const pokemonNameIndex = {};
 const maxEggCycles = Math.max(...pokemonList.map(p => p.eggCycles));
 
