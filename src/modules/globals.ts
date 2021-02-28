@@ -9,6 +9,7 @@ import type { GameState, Region } from './GameConstants';
 import type PokemonType from './enums/PokemonType';
 import type BagItem from './interfaces/BagItem';
 import type LevelType from './party/LevelType';
+import type Wallet from './wallet/Wallet';
 
 // These types are only temporary while we are converting things to modules
 // As things are converted, we should import their types here for use,
@@ -22,7 +23,7 @@ type TmpGameType = {
     profile: Profile,
     breeding: any,
     pokeballs: any,
-    wallet: any,
+    wallet: Wallet,
     keyItems: any,
     badgeCase: BadgeCase,
     oakItems: any,
