@@ -31,6 +31,7 @@ import MultiplierType from './multiplier/MultiplierType';
 import SpecialEvent from './specialEvents/SpecialEvent';
 import Challenges from './challenges/Challenges';
 import LevelType, { levelRequirements } from './party/LevelType';
+import WalletClasses from './wallet';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -67,4 +68,5 @@ Object.assign(<any>window, {
     Challenges,
     LevelType,
     levelRequirements,
+    ...WalletClasses,
 });
