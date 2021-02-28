@@ -10,7 +10,7 @@ const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
 type PokemonListData = {
   id: number;
-  name: string;
+  name: PokemonNameType;
   nativeRegion?: GameConstants.Region;
   catchRate: number;
   evolutions?: Evolution[];
@@ -20710,7 +20710,7 @@ pokemonList.forEach(p => {
     (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
     if ((p as PokemonListData).baby) {
         (p as PokemonListData).evolutions?.forEach(evo => {
-            pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon as PokemonNameType;
+            pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon;
             const poke = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon());
             p.eggCycles = Math.round(poke.eggCycles * 0.8);
         });

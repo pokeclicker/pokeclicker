@@ -1,21 +1,22 @@
 abstract class Evolution {
-    basePokemon: string;
     type: EvolutionType[];
 
-    constructor(basePokemon: string) {
+    constructor(
+        public basePokemon: PokemonNameType
+    ) {
         this.basePokemon = basePokemon;
         this.type = [];
     }
 
     isSatisfied(): boolean {
         // Check that evolution is within reached regions
-        return PokemonHelper.calcNativeRegion(this.getEvolvedPokemon() as PokemonNameType) <= player.highestRegion();
+        return PokemonHelper.calcNativeRegion(this.getEvolvedPokemon()) <= player.highestRegion();
     }
 
-    abstract getEvolvedPokemon(): string
+    abstract getEvolvedPokemon(): PokemonNameType
 
     evolve(notification = false): boolean {
-        const evolvedPokemon = this.getEvolvedPokemon() as PokemonNameType;
+        const evolvedPokemon = this.getEvolvedPokemon();
 
         // This Pokemon is from a region we haven't reached yet
         if (PokemonHelper.calcNativeRegion(evolvedPokemon) > player.highestRegion()) {
