@@ -4,7 +4,6 @@ abstract class Evolution {
     constructor(
         public basePokemon: PokemonNameType
     ) {
-        this.basePokemon = basePokemon;
         this.type = [];
     }
 
