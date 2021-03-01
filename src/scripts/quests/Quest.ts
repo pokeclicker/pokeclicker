@@ -73,11 +73,20 @@ abstract class Quest {
     }
 
     quit(shouldConfirm = false) {
-        if (shouldConfirm && !confirm('Are you sure?\nYou can start the quest again later but you will lose all progress!')) {
-            return false;
+        if (shouldConfirm) {
+            Notifier.confirm({
+                title: 'Quit quest',
+                message: 'Are you sure?\n\nYou can start the quest again later but you will lose all progress!',
+                type: NotificationConstants.NotificationOption.warning,
+                confirm: 'quit',
+            }).then(confirmed => {
+                if (confirmed) {
+                    this.initial(null);
+                }
+            });
+        } else {
+            this.initial(null);
         }
-        this.initial(null);
-        return true;
     }
 
     begin() {

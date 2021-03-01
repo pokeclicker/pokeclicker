@@ -24,6 +24,7 @@ class Game {
         public keyItems: KeyItems,
         public badgeCase: BadgeCase,
         public oakItems: OakItems,
+        public oakItemLoadouts: OakItemLoadouts,
         public categories: PokemonCategories,
         public party: Party,
         public shards: Shards,
@@ -78,9 +79,12 @@ class Game {
         this.farming.resetAuras();
         //Safari.load();
         Underground.energyTick(this.underground.getEnergyRegenTime());
-        DailyDeal.generateDeals(this.underground.getDailyDealsMax(), new Date());
-        BerryDeal.generateDeals(new Date());
-        Weather.generateWeather(new Date());
+
+        const now = new Date();
+        DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
+        BerryDeal.generateDeals(now);
+        Weather.generateWeather(now);
+        RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
         this.gameState = GameConstants.GameState.fighting;
     }
@@ -165,6 +169,7 @@ class Game {
             // Check if it's a new hour
             if (old.getHours() !== now.getHours()) {
                 Weather.generateWeather(now);
+                RoamingPokemonList.generateIncreasedChanceRoutes(now);
             }
 
             // Save the game

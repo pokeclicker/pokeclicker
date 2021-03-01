@@ -410,33 +410,20 @@ class Update implements Saveable {
         },
 
         '0.7.6': ({ playerData, saveData }) => {
-            // Fixup Lets Go eggs
-            saveData.breeding.eggList.forEach(egg => {
-                egg.pokemon = egg.pokemon.replace('Lets go', 'Let\'s Go');
-            });
-            // Fixup Lets Go queue
-            saveData.breeding.queueList = saveData.breeding.queueList.map(p => p.replace('Lets go', 'Let\'s Go'));
+            Update.renamePokemonInSaveData(saveData, 'Lets go Pikachu', 'Let\'s Go Pikachu');
+            Update.renamePokemonInSaveData(saveData, 'Lets go Eevee', 'Let\'s Go Eevee');
 
-            // Find if they have a MissingNo
-            const missingNoIndex = saveData.party.caughtPokemon.findIndex(p => p.id == 0);
-            if (missingNoIndex >= 0) {
-                // Remove the MissingNo (should only appear if we have a bug somewhere)
-                saveData.party.caughtPokemon.splice(missingNoIndex, 1);
-                // Filter out any MissingNo in the hatchery
-                saveData.breeding.eggList = saveData.breeding.eggList.filter((e) => e.pokemon != 'MissingNo.');
-                saveData.breeding.queueList = saveData.breeding.queueList.filter((p) => p != 'MissingNo.');
-                // Check if the Pikachu caused the MissingNo (reset breeding status)
-                const pikachu = saveData.party.caughtPokemon.find(p => p.id == -8);
-                if (pikachu) {
-                    pikachu.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Pikachu')
-                        || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Pikachu');
-                }
-                // Check if the Eevee caused the MissingNo (reset breeding status)
-                const eevee = saveData.party.caughtPokemon.find(p => p.id == -9);
-                if (eevee) {
-                    eevee.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Eevee')
-                        || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Eevee');
-                }
+            // Check if the Let's Go Pikachu is hidden due to MissingNo (reset breeding status)
+            const pikachu = saveData.party.caughtPokemon.find(p => p.id == -8);
+            if (pikachu) {
+                pikachu.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Pikachu')
+                    || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Pikachu');
+            }
+            // Check if the Let's Go Eevee is hidden due to MissingNo (reset breeding status)
+            const eevee = saveData.party.caughtPokemon.find(p => p.id == -9);
+            if (eevee) {
+                eevee.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Eevee')
+                    || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Eevee');
             }
         },
     };
@@ -571,14 +558,20 @@ class Update implements Saveable {
                     // On the next tick, set the reset button click handler
                     setTimeout(() => {
                         document.getElementById('failedUpdateResetButton').onclick = () => {
-                            if (window.confirm('Are you sure you want to reset your save? This cannot be undone, so please make sure you have a backup first!')) {
-                                // Force an autodownload of the backup when resetting the save
-                                this.automaticallyDownloadBackup(backupButton, { disableAutoDownloadBackupSaveOnUpdate: false });
-                                localStorage.removeItem(`player${Save.key}`);
-                                localStorage.removeItem(`save${Save.key}`);
-                                localStorage.removeItem('settings');
-                                location.reload();
-                            }
+                            Notifier.confirm({
+                                title: 'Reset save',
+                                message: 'Are you sure you want to reset your save?\n\nThis cannot be undone, so please make sure you have a backup first!',
+                                type: NotificationConstants.NotificationOption.danger,
+                                confirm: 'reset',
+                            }).then(confirmed => {
+                                if (confirmed) {
+                                    // Force an autodownload of the backup when resetting the save
+                                    this.automaticallyDownloadBackup(backupButton, { disableAutoDownloadBackupSaveOnUpdate: false });
+                                    localStorage.removeItem(`player${Save.key}`);
+                                    localStorage.removeItem(`save${Save.key}`);
+                                    location.reload();
+                                }
+                            });
                         };
                     }, 0);
 
@@ -644,6 +637,23 @@ class Update implements Saveable {
             },
         });
         saveData.party.caughtPokemon.push(pokemon);
+    }
+
+    // If any pokemon names change in the data rename them,
+    // note that name isn't used in party.
+    static renamePokemonInSaveData = (saveData, oldName, newName) => {
+        if (!saveData.breeding) {
+            return;
+        }
+        // Fixup eggs
+        saveData.breeding.eggList?.forEach(egg => {
+            if (egg.pokemon == oldName) {
+                egg.pokemon = newName;
+            }
+        });
+
+        // Fixup queue
+        saveData.breeding.queueList = saveData.breeding.queueList?.map(p => p == oldName ? newName : p) || [];
     }
 
     getPlayerData() {

@@ -17,16 +17,21 @@ class GameController {
         });
     }
 
-    static animateCurrency(amount: number, target) {
+    static animateCurrency({ amount, currency }: Amount) {
         // Check if animations have been disabled
         if (!Settings.getSetting('showCurrencyGainedAnimation').observableValue()) {
             return;
         }
-        let pos;
-        const targetVisible = $(`#${target}`).is(':visible');
+        const target = $(`#animateCurrency-${GameConstants.Currency[currency]}`);
+        // If no target for this currency, return
+        if (!target.length) {
+            return;
+        }
+        const targetVisible = target.is(':visible');
 
-        if ($(`#${target}`).offset() && targetVisible) {
-            pos = $(`#${target}`).offset();
+        let pos;
+        if (target.offset() && targetVisible) {
+            pos = target.offset();
             pos.top -= 15;
         } else {
             pos = $('#gameTitle').offset();

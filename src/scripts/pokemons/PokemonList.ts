@@ -1,7 +1,6 @@
 /// <reference path="../party/evolutions/EvolutionMethods.ts" />
 /// <reference path="../party/evolutions/WeatherRestrictedLevelEvolution.ts" />
 /// <reference path="../GameConstants.d.ts" />
-/// <reference path="../party/LevelType.ts" />
 /// <reference path="../../declarations/weather/WeatherType.d.ts" />
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 /// <reference path="../../declarations/interfaces/BagItem.d.ts" />

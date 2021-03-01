@@ -10,6 +10,28 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.7.7
+    new ChangelogUpdate('v0.7.7', new Date(2021, 1, 20)),
+    new Changelog(changelogType.FIXED, 'Fixed currency quests'),
+    new Changelog(changelogType.FIXED, 'Fixed currency multipliers'),
+    new Changelog(changelogType.FIXED, 'Fixed quest refreshing without waiting for confirmation'),
+
+    // v0.7.6
+    new ChangelogUpdate('v0.7.6', new Date(2021, 1, 19)),
+    new Changelog(changelogType.NEW, 'Oak item loadouts'),
+    new Changelog(changelogType.CHANGE, 'No more impossible quest when doing challenges'),
+    new Changelog(changelogType.CHANGE, 'Able to delete saves on the windows client'),
+    new Changelog(changelogType.CHANGE, 'Dungeon Trainers Pokémon will now reward Dungeon Tokens when defeated'),
+    new Changelog(changelogType.CHANGE, 'Dungeon Trainers will now reward Money when defeated'),
+    new Changelog(changelogType.FIXED, 'Sound not remembering previously set volume'),
+    new Changelog(changelogType.FIXED, 'Let\'s Go mons not showing in Pokémon list'),
+    new Changelog(changelogType.FIXED, 'Some missing stone evolutions'),
+    new Changelog(changelogType.FIXED, 'Elite four shortcut keys working again'),
+    new Changelog(changelogType.FIXED, 'Fixed some Pokémon shop sprites'),
+    new Changelog(changelogType.FIXED, 'Fixed some missing trainer sprites'),
+    new Changelog(changelogType.FIXED, 'Fixed some routes/dungeons showing incorrect backgrounds'),
+    new Changelog(changelogType.FIXED, 'Saved game not importing if settings are not set'),
+
     // v0.7.5
     new ChangelogUpdate('v0.7.5 - Challenges, Trainers and Saves', new Date(2021, 0, 29)),
     new Changelog(changelogType.FIXED, 'Fix proteins not increasing on usage'),

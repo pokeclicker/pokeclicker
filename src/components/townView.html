@@ -76,10 +76,12 @@
        <div class="col-6"></div>
        <div class="col-3 no-gutters">
            <div class="list-group" data-bind="foreach: player.town().npcs">
+               <!-- ko if: $data.isVisible() -->
                 <button class="btn btn-info"
                         data-bind="text: $data.name, click: $data.openDialog">
                     NPC
                 </button>
+                <!-- /ko -->
            </div>
         </div>
 

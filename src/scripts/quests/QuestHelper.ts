@@ -5,6 +5,7 @@
 /// <reference path="./questTypes/GainShardsQuest.ts" />
 /// <reference path="./questTypes/HatchEggsQuest.ts" />
 /// <reference path="./questTypes/MineLayersQuest.ts" />
+/// <reference path="./questTypes/MineItemsQuest.ts" />
 /// <reference path="./questTypes/CatchShiniesQuest.ts" />
 /// <reference path="./questTypes/DefeatGymQuest.ts" />
 /// <reference path="./questTypes/DefeatDungeonQuest.ts" />
@@ -22,6 +23,7 @@ class QuestHelper {
         GainShardsQuest,
         HatchEggsQuest,
         MineLayersQuest,
+        MineItemsQuest,
         CatchShiniesQuest,
         DefeatGymQuest,
         DefeatDungeonQuest,

@@ -86,8 +86,6 @@ export default class Profile implements Saveable {
         this.name.subscribe(() => this.updatePreview());
         this.trainer.subscribe(() => this.updatePreview());
         this.pokemon.subscribe((value: number) => {
-            // @ts-ignore
-            // eslint-disable-next-line no-undef
             const shiny = App.game.party.alreadyCaughtPokemon(value, true);
             this.pokemonShiny(shiny);
             // Update preview after checking for shiny
@@ -106,20 +104,10 @@ export default class Profile implements Saveable {
             this.pokemonShiny(),
             this.background(),
             this.textColor(),
-            // @ts-ignore
-            // eslint-disable-next-line no-undef
             App.game.badgeCase.badgeList.filter((b: () => boolean) => b()).length,
-            // @ts-ignore
-            // eslint-disable-next-line no-undef
             App.game.party.caughtPokemon.length,
-            // @ts-ignore
-            // eslint-disable-next-line no-undef
             App.game.statistics.secondsPlayed(),
-            // @ts-ignore
-            // eslint-disable-next-line no-undef
             App.game.update.version,
-            // @ts-ignore
-            // eslint-disable-next-line no-undef
             App.game.challenges.toJSON().list,
         );
     }

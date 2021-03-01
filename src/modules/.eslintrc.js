@@ -17,6 +17,10 @@ module.exports = {
     globals: {
         ko: 'readonly',
         $: 'readonly',
+        gtag: 'readonly',
+        App: 'readonly',
+        player: 'readonly',
+        pokemonMap: 'readonly',
     },
     rules: {
         indent: 'off',
@@ -44,5 +48,6 @@ module.exports = {
         }],
         '@typescript-eslint/lines-between-class-members': ['error', { exceptAfterSingleLine: true }],
         '@typescript-eslint/member-ordering': ['error'],
+        'no-alert': 'error',
     },
 };
