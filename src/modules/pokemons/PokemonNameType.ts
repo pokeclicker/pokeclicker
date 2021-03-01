@@ -1,3 +1,17 @@
+/*
+To update this type when adding new pokemon:
+
+Change the type of `PokemonListData -> name` to `string` and add your new pokemon
+
+Open the game, and run the following code in the browser console
+copy(`export type PokemonNameType
+    = ${pokemonList.map(p => `'${p.name.replace(/'/g, "\\'")}'`).join('\n    | ')};`);
+
+Replace the everything in this file (except for this comment) with what was copied
+
+Change the type of `PokemonListData -> name` back to `PokemonNameType`
+*/
+
 export type PokemonNameType
     = 'Bulbasaur'
     | 'Ivysaur'
