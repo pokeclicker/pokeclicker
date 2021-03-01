@@ -10,7 +10,7 @@ const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
 type PokemonListData = {
   id: number;
-  name: string;
+  name: PokemonNameType;
   nativeRegion?: GameConstants.Region;
   catchRate: number;
   evolutions?: Evolution[];
@@ -1282,7 +1282,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 52.2,
-        'name': ' Galarian Meowth',
+        'name': 'Galarian Meowth',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 255,
         'type': [PokemonType.Normal],
@@ -20698,8 +20698,6 @@ const pokemonList = createPokemonArray(
     // },
 );
 
-type PokemonNameType = typeof pokemonList[number]['name'];
-
 const pokemonNameIndex = {};
 const maxEggCycles = Math.max(...pokemonList.map(p => p.eggCycles));
 
@@ -20712,7 +20710,7 @@ pokemonList.forEach(p => {
     (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
     if ((p as PokemonListData).baby) {
         (p as PokemonListData).evolutions?.forEach(evo => {
-            pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon as PokemonNameType;
+            pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon;
             const poke = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon());
             p.eggCycles = Math.round(poke.eggCycles * 0.8);
         });
