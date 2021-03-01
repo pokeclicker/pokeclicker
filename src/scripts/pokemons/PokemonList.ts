@@ -20724,7 +20724,18 @@ pokemonList.forEach(p => {
     pokemonNameIndex[p.name.toLowerCase()] = p;
 });
 
-const pokemonMap: any = new Proxy(pokemonList, {
+type PokemonMapProxy
+    = Record<PokemonNameType | number, PokemonListData>
+    & {
+        random: (max?: number, min?: number) => PokemonListData,
+        randomRegion: (max?: GameConstants.Region, min?: GameConstants.Region) => PokemonListData,
+    }
+    & Array<PokemonListData>;
+
+const pokemonMap = new GenericProxy<
+    typeof pokemonList,
+    PokemonMapProxy
+>(pokemonList, {
     get: (pokemon, prop: PokemonNameType | 'random' | 'randomRegion') => {
         if (!isNaN(+prop)) {
             const id: number = +prop;

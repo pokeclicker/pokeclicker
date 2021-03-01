@@ -9,6 +9,7 @@ import type { GameState, Region } from './GameConstants';
 import type PokemonType from './enums/PokemonType';
 import type BagItem from './interfaces/BagItem';
 import type LevelType from './party/LevelType';
+import { PokemonNameType } from './pokemons/PokemonNameType';
 
 // These types are only temporary while we are converting things to modules
 // As things are converted, we should import their types here for use,
@@ -52,7 +53,7 @@ type TmpAppType = {
 
 type TmpPokemonListData = {
     id: number;
-    name: string;
+    name: PokemonNameType;
     nativeRegion?: Region;
     catchRate: number;
     evolutions?: any[]; // No Evolutions in modules yet :(
@@ -73,11 +74,17 @@ type TmpPokemonListData = {
     heldItem?: BagItem;
 };
 
-type PokemonMapType = Record<string | number | 'random' | 'randomRegion', TmpPokemonListData>;
+type TmpPokemonMapProxy
+    = Record<PokemonNameType | number, TmpPokemonListData>
+    & {
+        random: (max?: number, min?: number) => TmpPokemonListData,
+        randomRegion: (max?: Region, min?: Region) => TmpPokemonListData,
+    }
+    & Array<TmpPokemonListData>;
 
 // Where all the magic happens
 declare global {
     const App: TmpAppType;
-    const pokemonMap: PokemonMapType;
+    const pokemonMap: TmpPokemonMapProxy;
     const player: any;
 }

@@ -1,5 +1,5 @@
 class RoamingPokemon {
-    public pokemon: DataPokemon;
+    public pokemon: PokemonListData;
 
     constructor(
         public pokemonName: PokemonNameType,
