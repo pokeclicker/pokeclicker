@@ -32,6 +32,7 @@ import SpecialEvent from './specialEvents/SpecialEvent';
 import Challenges from './challenges/Challenges';
 import LevelType, { levelRequirements } from './party/LevelType';
 import WalletClasses from './wallet/inject';
+import GenericProxy from './utilities/GenericProxy';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -69,4 +70,5 @@ Object.assign(<any>window, {
     LevelType,
     levelRequirements,
     ...WalletClasses,
+    GenericProxy,
 });

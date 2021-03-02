@@ -51,7 +51,7 @@ class SpecialEvents implements Feature {
 SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu for a limited time roaming Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 6, 1), () => {
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Flying Pikachu']));
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Flying Pikachu'));
     },
     // End
     new Date(new Date().getFullYear(), 6, 12, 23), () => {
@@ -63,9 +63,9 @@ SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a l
     // Start
     new Date(new Date().getFullYear(), 6, 18, 1), () => {
         dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Armored Mewtwo', 1000000, 80));
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Bulbasaur (clone)']));
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Charmander (clone)']));
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Squirtle (clone)']));
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Bulbasaur (clone)'));
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Charmander (clone)'));
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Squirtle (clone)'));
     },
     // End
     new Date(new Date().getFullYear(), 6, 24, 23), () => {
@@ -103,8 +103,8 @@ SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited ti
 SpecialEvents.newEvent('Let\'s GO!', 'Encounter special Eevee and Pikachu roaming in the Kanto region.',
     // Start
     new Date(new Date().getFullYear(), 10, 16, 1), () => {
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Let\'s Go Pikachu']));
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Let\'s Go Eevee']));
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Let\'s Go Pikachu'));
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Let\'s Go Eevee'));
     },
     // End
     new Date(new Date().getFullYear(), 10, 23, 23), () => {
@@ -118,7 +118,7 @@ SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax for a limite
     new Date(new Date().getFullYear(), 11, 24, 1), () => {
         // Add to every region excluding None
         GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
-            RoamingPokemonList.add(region, new RoamingPokemon(pokemonMap['Santa Snorlax']));
+            RoamingPokemonList.add(region, new RoamingPokemon('Santa Snorlax'));
         });
     },
     // End
