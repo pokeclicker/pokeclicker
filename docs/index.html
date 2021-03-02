@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.7.7"></script>
+    <script src="scripts/modules.min.js?v=0.7.8"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.7.7"></script>
+    <script src="scripts/script.min.js?v=0.7.8"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.7.7" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.7.8" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -57,6 +57,8 @@
             gtag('js', new Date());
 
             gtag('config', 'UA-171657234-1');
+        } else {
+            function gtag(){};
         }
     </script>
 
@@ -1201,10 +1203,12 @@
        <div class="col-6"></div>
        <div class="col-3 no-gutters">
            <div class="list-group" data-bind="foreach: player.town().npcs">
+               <!-- ko if: $data.isVisible() -->
                 <button class="btn btn-info"
                         data-bind="text: $data.name, click: $data.openDialog">
                     NPC
                 </button>
+                <!-- /ko -->
            </div>
         </div>
 
