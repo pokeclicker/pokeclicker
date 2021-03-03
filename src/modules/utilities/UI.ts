@@ -1,6 +1,5 @@
 // Utilities for controlling the user interface
 
-import type JQuery from 'jquery';
 import Amount from '../wallet/Amount';
 import Settings from '../settings';
 import { Currency } from '../GameConstants';
@@ -13,28 +12,22 @@ export function animateCurrency({ amount, currency }: Amount) {
     }
     const target = $(`#animateCurrency-${Currency[currency]}`);
     // If no target for this currency, return
-    if (!target.length) {
+    if (!target.length || !target.is(':visible')) {
         return;
     }
-    const targetVisible = target.is(':visible');
 
-    let pos: JQuery.Coordinates;
-    if (target.offset() && targetVisible) {
-        pos = target.offset();
-        pos.top -= 15;
-    } else {
-        pos = $('#gameTitle').offset();
-        pos.top += 45;
-        pos.left -= 100;
-    }
+    // Add some randomness to where it appears
+    const left = (target.position().left + Math.random() * (target.width() - 25)).toFixed(2);
+    const aniElement = document.createElement('p');
+    aniElement.style.cssText = `z-index: 50; position: absolute; left: ${left}px; bottom: -20px; font-size: ${10 + 0.5 * Math.log(amount)}px;`;
+    aniElement.innerText = `+${amount.toLocaleString('en-US')}`;
 
-    const left = ((Math.random() * ((pos.left + 25) - (pos.left - 25)) + (pos.left - 25))).toFixed(2);
-    const ani = `<p style="z-index:50;position:absolute;left:${left}px;top:${pos.top}px; font-size:${10 + 0.5 * Math.log(amount)}px;">+${amount.toLocaleString('en-US')}</p>`;
-    $(ani).prependTo('body').animate({
-        top: 10,
+    // Append to parent container, animate and remove
+    $(aniElement).prependTo(target.parent()).animate({
+        bottom: 100,
         opacity: 0,
     }, 200 * Math.log(amount) + 1000, 'linear',
     () => {
-        $(this).remove();
+        $(aniElement).remove();
     });
 }
