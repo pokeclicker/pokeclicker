@@ -34,7 +34,7 @@ module.exports = {
             },
         ],
         'no-return-assign': ['error', 'except-parens'],
-        'no-console': ['error', { allow: ['warn', 'error', 'trace'] }],
+        'no-console': ['error', { allow: ['warn', 'error'] }],
         '@typescript-eslint/indent': ['error', 4, { SwitchCase: 1 }],
         '@typescript-eslint/comma-dangle': ['error', {
             arrays: 'always-multiline',
