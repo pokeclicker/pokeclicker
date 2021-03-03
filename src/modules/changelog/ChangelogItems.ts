@@ -10,6 +10,10 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.7.9.x
+    new ChangelogUpdate('v0.7.9 - Patches', new Date(2021, 2, 3)),
+    new Changelog(changelogType.FIXED, 'Attempting to fix some lag, please report on Discord/Github if you are still having major lag compared with v0.7.7, there may be a few patches pushed out for testing'),
+
     // v0.7.8
     new ChangelogUpdate('v0.7.8', new Date(2021, 2, 2)),
     new Changelog(changelogType.NEW, 'Increased roamer odds on specific routes changing every 8 hours, NPCs in certain towns will tell you the current route'),
