@@ -1898,7 +1898,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 4', GameConstants.Region.galar, 11,
     new RoutePokemon({
-        land: ['Yamper', 'Cutiefly', 'Wooloo', 'Milcery', ' Galarian Meowth', 'Budew', 'Ferroseed', 'Joltik', 'Pikachu', 'Eevee', 'Electrike', 'Pumpkaboo', 'Diglett'],
+        land: ['Yamper', 'Cutiefly', 'Wooloo', 'Milcery', 'Galarian Meowth', 'Budew', 'Ferroseed', 'Joltik', 'Pikachu', 'Eevee', 'Electrike', 'Pumpkaboo', 'Diglett'],
         water: ['Magikarp', 'Goldeen', 'Chewtle'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine'))]

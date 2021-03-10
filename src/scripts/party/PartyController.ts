@@ -22,7 +22,7 @@ class PartyController {
         if (pokemon) {
             for (const evolution of pokemon.evolutions) {
                 if (evolution instanceof StoneEvolution && evolution.stone == evoType && evolution.isSatisfied()) {
-                    const pStatus = this.getCaughtStatusByName(evolution.getEvolvedPokemon() as PokemonNameType);
+                    const pStatus = this.getCaughtStatusByName(evolution.getEvolvedPokemon());
                     if (pStatus < status) {
                         status = pStatus;
                     }

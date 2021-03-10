@@ -1,13 +1,20 @@
-/// <reference path="../../declarations/GameHelper.d.ts" />
-/// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
+/* eslint-disable no-param-reassign */
+/* eslint-disable class-methods-use-this */
+import { Observable as KnockoutObservable } from 'knockout';
+import { Feature } from '../DataStore/common/Feature';
+import GameHelper from '../GameHelper';
+import { Currency } from '../GameConstants';
+import Multiplier from '../multiplier/Multiplier';
+import Amount from './Amount';
+import { animateCurrency } from '../utilities/UI';
 
-class Wallet implements Feature {
+export default class Wallet implements Feature {
     name = 'Wallet';
     saveKey = 'wallet';
     currencies: Array<KnockoutObservable<number>>;
 
     defaults = {
-        currencies: new Array(GameHelper.enumLength(GameConstants.Currency)).fill(0),
+        currencies: new Array(GameHelper.enumLength(Currency)).fill(0),
     };
 
     constructor(private multiplier: Multiplier) {
@@ -40,21 +47,21 @@ class Wallet implements Feature {
 
     public calcBonus(amount: Amount) {
         switch (amount.currency) {
-            case GameConstants.Currency.money:
+            case Currency.money:
                 return this.multiplier.getBonus('money', true);
-            case GameConstants.Currency.dungeonToken:
+            case Currency.dungeonToken:
                 return this.multiplier.getBonus('dungeonToken', true);
-            case GameConstants.Currency.questPoint:
-            case GameConstants.Currency.diamond:
-            case GameConstants.Currency.farmPoint:
-            case GameConstants.Currency.battlePoint:
+            case Currency.questPoint:
+            case Currency.diamond:
+            case Currency.farmPoint:
+            case Currency.battlePoint:
             default:
                 return 1;
         }
     }
 
     public addAmount(amount: Amount) {
-        if (isNaN(amount.amount) || amount.amount <= 0) {
+        if (Number.isNaN(amount.amount) || amount.amount <= 0) {
             console.trace('Could not add amount:', amount);
             amount.amount = 1;
         }
@@ -63,26 +70,28 @@ class Wallet implements Feature {
         amount.amount = Math.floor(amount.amount * this.calcBonus(amount));
 
         GameHelper.incrementObservable(this.currencies[amount.currency], amount.amount);
-        GameController.animateCurrency(amount);
+        animateCurrency(amount);
 
         switch (amount.currency) {
-            case GameConstants.Currency.money:
+            case Currency.money:
                 GameHelper.incrementObservable(App.game.statistics.totalMoney, amount.amount);
                 break;
-            case GameConstants.Currency.dungeonToken:
+            case Currency.dungeonToken:
                 GameHelper.incrementObservable(App.game.statistics.totalDungeonTokens, amount.amount);
                 break;
-            case GameConstants.Currency.questPoint:
+            case Currency.questPoint:
                 GameHelper.incrementObservable(App.game.statistics.totalQuestPoints, amount.amount);
                 break;
-            case GameConstants.Currency.diamond:
+            case Currency.diamond:
                 GameHelper.incrementObservable(App.game.statistics.totalDiamonds, amount.amount);
                 break;
-            case GameConstants.Currency.farmPoint:
+            case Currency.farmPoint:
                 GameHelper.incrementObservable(App.game.statistics.totalFarmPoints, amount.amount);
                 break;
-            case GameConstants.Currency.battlePoint:
+            case Currency.battlePoint:
                 GameHelper.incrementObservable(App.game.statistics.totalBattlePoints, amount.amount);
+                break;
+            default:
                 break;
         }
 
@@ -94,14 +103,13 @@ class Wallet implements Feature {
     }
 
     public loseAmount(amount: Amount) {
-        if (isNaN(amount.amount) || amount.amount <= 0) {
+        if (Number.isNaN(amount.amount) || amount.amount <= 0) {
             console.trace('Could not remove amount:', amount);
             amount.amount = 1;
         }
 
         GameHelper.incrementObservable(this.currencies[amount.currency], -amount.amount);
     }
-
 
     initialize(): void {
     }
@@ -116,7 +124,7 @@ class Wallet implements Feature {
         }
 
         this.currencies = this.defaults.currencies.map((v) => ko.observable(v));
-        if (json['currencies'] !== null) {
+        if (json.currencies !== null) {
             const currenciesJson = json.currencies;
             currenciesJson.forEach((value, index) => {
                 this.currencies[index](value || 0);
@@ -130,7 +138,7 @@ class Wallet implements Feature {
         };
     }
 
-    update(delta: number): void {
+    update(): void {
         // This method intentionally left blank
     }
 }

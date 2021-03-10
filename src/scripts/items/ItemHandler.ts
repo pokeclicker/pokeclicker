@@ -71,7 +71,7 @@ class ItemHandler {
         for (let i = 0; i < amountTotal; i++) {
             player.itemList[this.stoneSelected()](player.itemList[this.stoneSelected()]() - 1);
             amountUsed++;
-            if ((ItemList[this.stoneSelected()] as EvolutionStone).use(this.pokemonSelected() as PokemonNameType)) {
+            if ((ItemList[this.stoneSelected()] as EvolutionStone).use(this.pokemonSelected())) {
                 // Stop when a shiny is encountered
                 break;
             }
