@@ -144,6 +144,9 @@ class OakItems implements Feature {
     }
 
     activate(item: OakItems.OakItem) {
+        if (App.game.challenges.list.disableOakItems.active()) {
+            return;
+        }
         if (!this.isUnlocked(item)) {
             return;
         }
@@ -159,7 +162,7 @@ class OakItems implements Feature {
         }
     }
 
-    private deactivateAll() {
+    deactivateAll() {
         for (let i = 0; i < this.itemList.length; i++) {
             this.itemList[i].isActive = false;
         }

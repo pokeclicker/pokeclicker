@@ -17,6 +17,10 @@ module.exports = {
     globals: {
         ko: 'readonly',
         $: 'readonly',
+        gtag: 'readonly',
+        App: 'readonly',
+        player: 'readonly',
+        pokemonMap: 'readonly',
     },
     rules: {
         indent: 'off',
@@ -30,7 +34,7 @@ module.exports = {
             },
         ],
         'no-return-assign': ['error', 'except-parens'],
-        'no-console': ['error', { allow: ['warn', 'error'] }],
+        'no-console': ['error', { allow: ['warn', 'error', 'trace'] }],
         '@typescript-eslint/indent': ['error', 4, { SwitchCase: 1 }],
         '@typescript-eslint/comma-dangle': ['error', {
             arrays: 'always-multiline',
@@ -44,5 +48,6 @@ module.exports = {
         }],
         '@typescript-eslint/lines-between-class-members': ['error', { exceptAfterSingleLine: true }],
         '@typescript-eslint/member-ordering': ['error'],
+        'no-alert': 'error',
     },
 };

@@ -343,7 +343,7 @@ class Update implements Saveable {
                 Notifier.notify({
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Click Attack challenge mode?
-                    
+
                     <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableClickAttack.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
@@ -352,7 +352,7 @@ class Update implements Saveable {
             Notifier.notify({
                 title: 'Active Challenge Mode?',
                 message: `Do you want to activate No Battle Item challenge mode?
-                
+
                 <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableBattleItems.activate(); Object.values(player.effectList).forEach(e => e(0));" data-dismiss="toast">Activate</button>`,
                 timeout: GameConstants.HOUR,
             });
@@ -361,7 +361,7 @@ class Update implements Saveable {
                 Notifier.notify({
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Masterball challenge mode?
-                    
+
                     <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableMasterballs.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
@@ -371,7 +371,7 @@ class Update implements Saveable {
                 Notifier.notify({
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Oak Item challenge mode?
-                    
+
                     <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableOakItems.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
@@ -381,7 +381,7 @@ class Update implements Saveable {
                 Notifier.notify({
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Shard challenge mode?
-                    
+
                     <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableShards.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
@@ -391,10 +391,39 @@ class Update implements Saveable {
                 Notifier.notify({
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Protein challenge mode?
-                    
+
                     <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableProteins.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
+            }
+
+            // Add Solaceon Ruins
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 43);
+
+            // Multi saves profile
+            const firstPokemon = saveData.party.caughtPokemon[0];
+            saveData.profile = {
+                name: 'Trainer',
+                pokemon: firstPokemon?.id || 0,
+                pokemonShiny: firstPokemon?.shiny || false,
+            };
+        },
+
+        '0.7.6': ({ playerData, saveData }) => {
+            Update.renamePokemonInSaveData(saveData, 'Lets go Pikachu', 'Let\'s Go Pikachu');
+            Update.renamePokemonInSaveData(saveData, 'Lets go Eevee', 'Let\'s Go Eevee');
+
+            // Check if the Let's Go Pikachu is hidden due to MissingNo (reset breeding status)
+            const pikachu = saveData.party.caughtPokemon.find(p => p.id == -8);
+            if (pikachu) {
+                pikachu.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Pikachu')
+                    || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Pikachu');
+            }
+            // Check if the Let's Go Eevee is hidden due to MissingNo (reset breeding status)
+            const eevee = saveData.party.caughtPokemon.find(p => p.id == -9);
+            if (eevee) {
+                eevee.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Eevee')
+                    || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Eevee');
             }
         },
     };
@@ -458,10 +487,14 @@ class Update implements Saveable {
         const backupSaveData = JSON.stringify({ player: playerData, save: saveData });
 
         const button = document.createElement('a');
-        button.className = 'btn btn-block btn-warning';
-        button.innerText = 'Click to Backup Save!';
-        button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(backupSaveData))}`;
-        button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
+        try {
+            button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(backupSaveData))}`;
+            button.className = 'btn btn-block btn-warning';
+            button.innerText = 'Click to Backup Save!';
+            button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
+        } catch (e) {
+            console.error('Failed to create backup button data:', e);
+        }
 
         return [button, backupSaveData];
     }
@@ -489,7 +522,7 @@ class Update implements Saveable {
         const saveData = this.getSaveData();
         const settingsData = this.getSettingsData();
 
-        if (!playerData || !saveData || !settingsData) {
+        if (!playerData || !saveData) {
             return;
         }
 
@@ -525,14 +558,20 @@ class Update implements Saveable {
                     // On the next tick, set the reset button click handler
                     setTimeout(() => {
                         document.getElementById('failedUpdateResetButton').onclick = () => {
-                            if (window.confirm('Are you sure you want to reset your save? This cannot be undone, so please make sure you have a backup first!')) {
-                                // Force an autodownload of the backup when resetting the save
-                                this.automaticallyDownloadBackup(backupButton, { disableAutoDownloadBackupSaveOnUpdate: false });
-                                localStorage.removeItem('player');
-                                localStorage.removeItem('save');
-                                localStorage.removeItem('settings');
-                                location.reload();
-                            }
+                            Notifier.confirm({
+                                title: 'Reset save',
+                                message: 'Are you sure you want to reset your save?\n\nThis cannot be undone, so please make sure you have a backup first!',
+                                type: NotificationConstants.NotificationOption.danger,
+                                confirm: 'reset',
+                            }).then(confirmed => {
+                                if (confirmed) {
+                                    // Force an autodownload of the backup when resetting the save
+                                    this.automaticallyDownloadBackup(backupButton, { disableAutoDownloadBackupSaveOnUpdate: false });
+                                    localStorage.removeItem(`player${Save.key}`);
+                                    localStorage.removeItem(`save${Save.key}`);
+                                    location.reload();
+                                }
+                            });
                         };
                     }, 0);
 
@@ -600,10 +639,27 @@ class Update implements Saveable {
         saveData.party.caughtPokemon.push(pokemon);
     }
 
+    // If any pokemon names change in the data rename them,
+    // note that name isn't used in party.
+    static renamePokemonInSaveData = (saveData, oldName, newName) => {
+        if (!saveData.breeding) {
+            return;
+        }
+        // Fixup eggs
+        saveData.breeding.eggList?.forEach(egg => {
+            if (egg.pokemon == oldName) {
+                egg.pokemon = newName;
+            }
+        });
+
+        // Fixup queue
+        saveData.breeding.queueList = saveData.breeding.queueList?.map(p => p == oldName ? newName : p) || [];
+    }
+
     getPlayerData() {
         let playerData: any;
         try {
-            playerData = JSON.parse(localStorage.player);
+            playerData = JSON.parse(localStorage.getItem(`player${Save.key}`));
         } catch (err) {
             console.warn('Error getting player data', err);
         } finally {
@@ -613,7 +669,7 @@ class Update implements Saveable {
 
     setPlayerData(playerData: any) {
         try {
-            localStorage.player = JSON.stringify(playerData);
+            localStorage.setItem(`player${Save.key}`, JSON.stringify(playerData));
         } catch (err) {
             console.error('Error setting player data', err);
         }
@@ -622,7 +678,7 @@ class Update implements Saveable {
     getSaveData() {
         let saveData: any;
         try {
-            saveData = JSON.parse(localStorage.save);
+            saveData = JSON.parse(localStorage.getItem(`save${Save.key}`));
         } catch (err) {
             console.warn('Error getting save data', err);
         } finally {
@@ -632,7 +688,7 @@ class Update implements Saveable {
 
     setSaveData(saveData: any) {
         try {
-            localStorage.save = JSON.stringify(saveData);
+            localStorage.setItem(`save${Save.key}`, JSON.stringify(saveData));
         } catch (err) {
             console.error('Error setting save data', err);
         }
@@ -645,7 +701,7 @@ class Update implements Saveable {
         } catch (err) {
             console.warn('Error getting settings data', err);
         } finally {
-            return settingsData;
+            return settingsData || {};
         }
     }
 

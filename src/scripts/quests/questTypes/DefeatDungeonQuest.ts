@@ -1,12 +1,15 @@
 /// <reference path="../Quest.ts" />
 
 class DefeatDungeonQuest extends Quest implements QuestInterface {
+    private region: GameConstants.Region;
 
-    private dungeon: string;
-
-    constructor(amount: number, reward: number, dungeon: string) {
+    constructor(
+        amount: number,
+        reward: number,
+        private dungeon: string
+    ) {
         super(amount, reward);
-        this.dungeon = dungeon;
+        this.region = GameConstants.getDungeonRegion(this.dungeon);
         this.focus = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.dungeon)];
     }
 
@@ -20,7 +23,6 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         do {
             region = SeededRand.intBetween(0, player.highestRegion());
             dungeon = SeededRand.fromArray(GameConstants.RegionDungeons[region]);
-            console.log(`dungeon ${dungeon} unlocked ${TownList[dungeon].isUnlocked()}`);
         } while (!TownList[dungeon].isUnlocked() && ++attempts < 10);
         const reward = this.calcReward(amount, dungeon);
         return [amount, reward, dungeon];
@@ -52,7 +54,7 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return `Defeat the ${this.dungeon} dungeon ${this.amount.toLocaleString('en-US')} times.`;
+        return `Defeat the ${this.dungeon} dungeon in ${GameConstants.camelCaseToString(GameConstants.Region[this.region])} ${this.amount.toLocaleString('en-US')} times.`;
     }
 
     toJSON() {

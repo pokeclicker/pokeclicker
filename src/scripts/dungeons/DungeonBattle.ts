@@ -73,7 +73,14 @@ class DungeonBattle extends Battle {
 
         // No Pokemon left, trainer defeated
         if (this.trainerPokemonIndex() >= this.trainer().team.length) {
-            App.game.wallet.gainMoney(this.trainer().reward);
+            if (this.trainer().options.reward) {
+                // Custom reward amount on defeat
+                App.game.wallet.addAmount(this.trainer().options.reward);
+            } else {
+                // Reward back 50% or 100% (boss) of the total dungeon DT cost as money
+                const money = Math.round(DungeonRunner.dungeon.tokenCost * (DungeonRunner.fightingBoss() ? 1 : 0.5));
+                App.game.wallet.gainMoney(money);
+            }
 
             DungeonRunner.fighting(false);
             this.trainer(null);

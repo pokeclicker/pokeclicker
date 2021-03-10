@@ -32,6 +32,22 @@ ko.extenders.numeric = (target: ko.Subscribable, precision: number) => {
     return result;
 };
 
+ko.extenders.boolean = (target: ko.Subscribable) => {
+    // create a writable computed observable to intercept writes to our observable
+    const result = ko.pureComputed<boolean>({
+        read: target, // always return the original observable's value
+        write: (newValueRaw: boolean) => {
+            target(!!newValueRaw);
+        },
+    }).extend({ notify: 'always' });
+
+    // initialize with current value to make sure it is rounded appropriately
+    result(target());
+
+    // return the new computed observable
+    return result;
+};
+
 ko.bindingHandlers.contentEditable = {
     init: (element: HTMLElement, valueAccessor) => {
         const value = valueAccessor();

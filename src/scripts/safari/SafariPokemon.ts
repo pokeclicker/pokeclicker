@@ -59,13 +59,23 @@ class SafariPokemon implements PokemonInterface {
         this.type1 = data.type1;
         this.type2 = data.type2;
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
+        GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[this.id]);
+        GameHelper.incrementObservable(App.game.statistics.totalPokemonEncountered);
+
         if (this.shiny) {
+            GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[this.id]);
+            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
+
             Notifier.notify({
                 message: `✨ You encountered a shiny ${name}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.shiny_long,
                 setting: NotificationConstants.NotificationSetting.encountered_shiny,
             });
+
+            // Track shinies encountered, and rate of shinies
+            LogEvent('encountered shiny', 'shiny pokemon', 'safari encounter',
+                Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
         this.baseCatchFactor = data.catchRate * 1 / 6;
         this.baseEscapeFactor = 30;

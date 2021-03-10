@@ -22,7 +22,7 @@ class EvolutionStone extends CaughtIndicatingItem {
         const unlockedEvolutions = pokemonList.filter((p: PokemonListData) => p.evolutions)
             .map((p: PokemonListData) => p.evolutions.find(e => e.type.includes(EvolutionType.Stone) && (e as StoneEvolution).stone === this.type))
             .filter(evolution => evolution)
-            .filter(evolution => PokemonHelper.calcNativeRegion(evolution.getEvolvedPokemon() as PokemonNameType) <= player.highestRegion())
+            .filter(evolution => PokemonHelper.calcNativeRegion(evolution.getEvolvedPokemon()) <= player.highestRegion())
             .map(evolution => evolution.getEvolvedPokemon());
 
         return unlockedEvolutions.reduce((status: CaughtStatus, pokemonName: PokemonNameType) => {
@@ -60,27 +60,4 @@ ItemList['Razor_fang']        = new EvolutionStone(GameConstants.StoneType.Razor
 ItemList['Prism_scale']       = new EvolutionStone(GameConstants.StoneType.Prism_scale, 2500, undefined , 'Prism Scale');
 ItemList['Sachet']            = new EvolutionStone(GameConstants.StoneType.Sachet, 2500, undefined , 'Sachet');
 ItemList['Whipped_dream']     = new EvolutionStone(GameConstants.StoneType.Whipped_dream, 2500, undefined , 'Whipped Dream');
-ItemList['Ice_stone']         = new EvolutionStone(GameConstants.StoneType.Ice_stone, 2500, undefined , 'Ice Stone');
-ItemList['Strawberry_sweet']  = new EvolutionStone(GameConstants.StoneType.Strawberry_sweet, 1000, undefined , 'Strawberry Sweet');
-ItemList['Berry_sweet']       = new EvolutionStone(GameConstants.StoneType.Berry_sweet, 1000, undefined , 'Berry Sweet');
-ItemList['Love_sweet']        = new EvolutionStone(GameConstants.StoneType.Love_sweet, 1000, undefined , 'Love Sweet');
-ItemList['Star_sweet']        = new EvolutionStone(GameConstants.StoneType.Star_sweet, 1000, undefined , 'Star Sweet');
-ItemList['Clover_sweet']      = new EvolutionStone(GameConstants.StoneType.Clover_sweet, 1000, undefined , 'Clover Sweet');
-ItemList['Flower_sweet']      = new EvolutionStone(GameConstants.StoneType.Flower_sweet, 1000, undefined , 'Flower Sweet');
-ItemList['Ribbon_sweet']      = new EvolutionStone(GameConstants.StoneType.Ribbon_sweet, 1000, undefined , 'Ribbon Sweet');
-ItemList['Lemon_cream']       = new EvolutionStone(GameConstants.StoneType.Lemon_cream, 500, undefined , 'Lemon Cream');
-ItemList['Salted_cream']      = new EvolutionStone(GameConstants.StoneType.Salted_cream, 500, undefined , 'Salted Cream');
-ItemList['Mint_cream']        = new EvolutionStone(GameConstants.StoneType.Mint_cream, 500, undefined , 'Mint Cream');
-ItemList['Matcha_cream']      = new EvolutionStone(GameConstants.StoneType.Matcha_cream, 500, undefined , 'Matcha Cream');
-ItemList['Ruby_cream']        = new EvolutionStone(GameConstants.StoneType.Ruby_cream, 500, undefined , 'Ruby Cream');
-ItemList['Rainbow_swirl']     = new EvolutionStone(GameConstants.StoneType.Rainbow_swirl, 500, undefined , 'Rainbow Swirl');
-ItemList['Caramel_swirl']     = new EvolutionStone(GameConstants.StoneType.Caramel_swirl, 500, undefined , 'Caramel Swirl');
-ItemList['Ruby_swirl']        = new EvolutionStone(GameConstants.StoneType.Ruby_swirl, 500, undefined , 'Ruby Swirl');
-ItemList['Tart_apple']        = new EvolutionStone(GameConstants.StoneType.Tart_apple, 2500, undefined , 'Tart Apple');
-ItemList['Sweet_apple']       = new EvolutionStone(GameConstants.StoneType.Sweet_apple, 2500, undefined , 'Sweet Apple');
-ItemList['Chipped_pot']       = new EvolutionStone(GameConstants.StoneType.Chipped_pot, 2500, undefined , 'Chipped Pot');
-ItemList['Rusted_sword']      = new EvolutionStone(GameConstants.StoneType.Rusted_sword, 10000, undefined , 'Rusted Sword');
-ItemList['Rusted_shield']     = new EvolutionStone(GameConstants.StoneType.Rusted_shield, 10000, undefined , 'Rusted Shield');
-ItemList['Galarica_cuff']     = new EvolutionStone(GameConstants.StoneType.Galarica_cuff, 2500, undefined , 'Galarica Cuff');
-ItemList['Galarica_wreath']   = new EvolutionStone(GameConstants.StoneType.Galarica_wreath, 2500, undefined , 'Galarica Wreath');
 ItemList['Ice_stone']         = new EvolutionStone(GameConstants.StoneType.Ice_stone, 2500, undefined , 'Ice Stone');

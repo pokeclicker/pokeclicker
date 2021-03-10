@@ -84,6 +84,12 @@ class Quests implements Saveable {
                 // Give player a free refresh
                 this.freeRefresh(true);
             }
+
+            // Track quest completion and total quest completed
+            LogEvent('completed quest',
+                'quests',
+                `level (${this.level()})`,
+                App.game.statistics.questsCompleted());
         } else {
             console.trace('cannot claim quest..');
             Notifier.notify({
@@ -109,6 +115,8 @@ class Quests implements Saveable {
                 sound: NotificationConstants.NotificationSound.quest_level_increased,
             });
             this.freeRefresh(true);
+            // Track when users gains a quest level and how long it took in seconds
+            LogEvent('gain quest level', 'quests', `level (${this.level()})`, App.game.statistics.secondsPlayed());
         }
     }
 
@@ -127,14 +135,26 @@ class Quests implements Saveable {
         return Number(level * (date.getFullYear() + this.refreshes() * 10) * date.getDate() + 1000 * date.getMonth() + 100000 * date.getDate());
     }
 
-    public refreshQuests(free = this.freeRefresh(), shouldConfirm = false) {
+    public async refreshQuests(free = this.freeRefresh(), shouldConfirm = false) {
         if (free || this.canAffordRefresh()) {
             if (!free) {
-                if (shouldConfirm && !confirm('Are you sure you want to refresh the quest list?!')) {
+                if (shouldConfirm && !await Notifier.confirm({
+                    title: 'Refresh quest list',
+                    message: 'Are you sure you want to refresh the quest list?',
+                    type: NotificationConstants.NotificationOption.warning,
+                    confirm: 'refresh',
+                })) {
                     return;
                 }
                 App.game.wallet.loseAmount(this.getRefreshCost());
             }
+
+            // Track when users refreshes the quest list and how much it cost
+            LogEvent('refresh quest list',
+                'quests',
+                `level (${this.level()})`,
+                free ? 0 : this.getRefreshCost().amount);
+
             this.freeRefresh(false);
             GameHelper.incrementObservable(this.refreshes);
             this.generateQuestList();

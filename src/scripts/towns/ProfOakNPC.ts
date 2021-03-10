@@ -4,7 +4,7 @@ class ProfOakNPC extends NPC {
         public name: string,
         public dialog: string[]
     ) {
-        super(name, dialog);
+        super(name, dialog, { image: 'assets/images/oak.png' });
     }
 
     get dialogHTML(): string {

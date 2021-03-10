@@ -6,7 +6,8 @@ labels:
 assignees: ''
 
 ---
-<!-- Provide a general summary of the issue in the Title above -->
+<!-- Provide a general summary of the suggestion in the Title above -->
+<!-- Ensure ALL relevant fields are filled out, otherwise the suggestion may be closed without review -->
 
 **Current Behavior**
 <!-- Tell us what the game currently does (if anything) -->

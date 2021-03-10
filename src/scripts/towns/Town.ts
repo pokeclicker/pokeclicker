@@ -5,6 +5,7 @@
 ///<reference path="NPC.ts"/>
 ///<reference path="KantoBerryMasterNPC.ts"/>
 ///<reference path="ProfOakNPC.ts"/>
+///<reference path="RoamerNPC.ts"/>
 
 type TownOptionalArgument = {
     requirements?: (Requirement | OneFromManyRequirement)[],
@@ -158,6 +159,9 @@ const BattleItemRival2 = new NPC('Battle Item Master', [
     'Do I know you? Wait... Have you met my worthless rival? Ha! Let me guess, he gave you some unwanted advice?',
     'I bet he forget to tell you that although all Battle Items only last for 30 seconds they can stack and last for days! Now scram!',
 ]);
+const KantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
+    'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
+], GameConstants.Region.kanto);
 
 
 
@@ -219,6 +223,7 @@ TownList['Fuchsia City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 15),
         ])],
         shop: FuchsiaCityShop,
+        npcs: [KantoRoamerNPC],
     }
 );
 TownList['Cinnabar Island'] = new Town(
@@ -366,7 +371,8 @@ const BlackthornCityShop = new Shop([
     ItemList['Dragon_scale'],
 ]);
 
-//Johto Berry Master
+// Johto NPCs
+
 const JohtoBerryMaster = new Shop([
     ItemList['Boost_Mulch'],
     ItemList['Rich_Mulch'],
@@ -375,8 +381,6 @@ const JohtoBerryMaster = new Shop([
     ItemList['Berry_Shovel'],
     ItemList['Squirtbottle'],
 ]);
-
-// Johto NPCs
 
 const CherrygroveMrPokemon = new NPC('Mr Pokémon', [
     'Welcome to Johto! This is where the first ever Pokémon egg was found long ago.',
@@ -393,6 +397,10 @@ const EcruteakKimonoGirl = new NPC('Kimono Girl', [
     'Legends say that Ho-Oh is searching for a trainer of pure heart.',
     'To prove yourself, you must tame the three legendary beasts of Johto, and bring them to the nearby Tin Tower.',
 ]);
+
+const JohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
+    'On the news they are getting more reports of roaming Pokémon appearing on {ROUTE_NAME}!',
+], GameConstants.Region.johto);
 
 
 //Johto Towns
@@ -480,6 +488,7 @@ TownList['Blackthorn City'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ice Path'))],
         shop: BlackthornCityShop,
+        npcs: [JohtoRoamerNPC],
     }
 );
 
@@ -646,6 +655,9 @@ const Weatherman = new NPC('Weatherman', [
     'It changes forms when the weather is drastically different.',
     'If you want to collect them all, wait for the weather to change.',
 ]);
+const HoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
+    'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
+], GameConstants.Region.hoenn);
 
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
@@ -695,6 +707,7 @@ TownList['Slateport City'] = new Town(
             new GymBadgeRequirement(BadgeEnums.Knuckle),
         ],
         shop: SlateportCityShop,
+        npcs: [HoennRoamerNPC],
     }
 );
 TownList['Mauville City'] = new Town(
@@ -988,6 +1001,9 @@ const HearthomeContestFan = new NPC('Contest Fan', [
     'Their prized Magneton had evolved into a Magnezone!',
     'I\'m so happy for them, all of that training in Mt. Coronet must have paid off!',
 ]);
+const SinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
+    'I spotted a bunch of roaming Pokémon on {ROUTE_NAME}!',
+], GameConstants.Region.sinnoh);
 
 //Sinnoh Towns
 TownList['Twinleaf Town'] = new Town(
@@ -1134,6 +1150,7 @@ TownList['Survival Area'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 225)],
         shop: SurvivalAreaShop,
+        npcs: [SinnohRoamerNPC],
     }
 );
 TownList['Resort Area'] = new Town(
@@ -1184,6 +1201,11 @@ TownList['Mt. Coronet South'] = new DungeonTown(
     'Mt. Coronet South',
     GameConstants.Region.sinnoh,
     [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 207)]
+);
+TownList['Solaceon Ruins'] = new DungeonTown(
+    'Solaceon Ruins',
+    GameConstants.Region.sinnoh,
+    [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 209)]
 );
 TownList['Iron Island'] = new DungeonTown(
     'Iron Island',
@@ -1352,12 +1374,15 @@ const AnvilleTownShop = new Shop([
 ]);
 
 //Unova NPCs
-const ExcitedChild = new NPC('Professor Birch\'s Aide', [
+const ExcitedChild = new NPC('Excited Child', [
     'Did you hear? Did you see? It was on TV!',
     'I was just watching my favorite show, The National Gymquirer. It was a live segment! Some hot shot trainer from Kanto defeated Drayden! It was amazing! That trainer is so cool! Drayden is like unbeatable.',
     'Then my programme got interrupted by an emergency broadcast. A report on the first confirmed sightings of Tornadus and Thundurus in over twenty-five years! I\'ve read so much about them, they are my favorites.',
     'Last time they were spotted they just roamed around, causing all kinds of mischief. According to my books anyway. I\'m sure that amazing trainer from the TV will want to catch these mighty forces of nature.',
 ]);
+const UnovaRoamerNPC = new RoamerNPC('Youngster Sarah', [
+    'My friends told me roaming Pokémon have been spotted on {ROUTE_NAME}!',
+], GameConstants.Region.unova);
 
 //Unova Towns
 TownList['Aspertia City'] = new Town(
@@ -1479,6 +1504,7 @@ TownList['Icirrus City'] = new Town(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Twist Mountain')),
         ])],
         shop: IcirrusCityShop,
+        npcs: [UnovaRoamerNPC],
     }
 );
 TownList['Black and White Park'] = new Town(
@@ -2149,8 +2175,6 @@ const CirchesterShop = new Shop([
 ]);
 const TurffieldShop = new Shop([
     ItemList['Grass_egg'],
-    ItemList['Tart_apple'],
-    ItemList['Sweet_apple'],
 ]);
 const HulburyShop = new Shop([
     ItemList['Water_egg'],
@@ -2158,38 +2182,16 @@ const HulburyShop = new Shop([
 ]);
 const MotostokeShop = new Shop([
     ItemList['Fire_egg'],
-    ItemList['Strawberry_sweet'],
-    ItemList['Berry_sweet'],
-    ItemList['Love_sweet'],
-    ItemList['Star_sweet'],
-    ItemList['Clover_sweet'],
-    ItemList['Flower_sweet'],
-    ItemList['Ribbon_sweet'],
-    ItemList['Lemon_cream'],
-    ItemList['Salted_cream'],
-    ItemList['Ruby_cream'],
-    ItemList['Mint_cream'],
-    ItemList['Matcha_cream'],
-    ItemList['Caramel_swirl'],
-    ItemList['Rainbow_swirl'],
-    ItemList['Ruby_swirl'],
 ]);
 const HammerlockeShop = new Shop([
     ItemList['Dragon_egg'],
-    ItemList['Rusted_sword'],
-    ItemList['Rusted_shield'],
     ItemList['Eternatus'],
 ]);
 const StowonSideShop: Shop = new Shop([
     ItemList['Fighting_egg'],
-    ItemList['Chipped_pot'],
 ]);
 const SpikemuthShop = new Shop([
     ItemList['Electric_egg'],
-]);
-const FreezingtonShop = new Shop([
-    ItemList['Galarica_wreath'],
-    ItemList['Galarica_cuff'],
 ]);
 const WyndonShop = new Shop([
     ItemList['Pokeball'],
@@ -2336,7 +2338,6 @@ TownList['Freezington'] = new Town(
     'Freezington',
     GameConstants.Region.crown,
     {
-        shop: FreezingtonShop,
         requirements: [new RouteKillRequirement(10, GameConstants.Region.crown, 1)],
     }
 );

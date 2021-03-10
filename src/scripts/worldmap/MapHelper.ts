@@ -58,9 +58,7 @@ class MapHelper {
         const area = player.route() || player.town()?.name || undefined;
 
         const [env] = Object.entries(GameConstants.Environments).find(
-            ([, regions]) => Object.values(regions).find(
-                region => region.has(area)
-            )
+            ([, regions]) => regions[player.region]?.has(area)
         ) || [];
 
         return (env as GameConstants.Environment);
@@ -212,6 +210,14 @@ class MapHelper {
             GameHelper.incrementObservable(player.highestRegion);
             MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
             player.region = player.highestRegion();
+            // Track when users move region and how long it took in seconds
+            LogEvent('new region', 'new region',
+                GameConstants.Region[player.highestRegion()],
+                App.game.statistics.secondsPlayed());
+            // Gather users attack when they moved regions
+            LogEvent('attack measurement', 'new region',
+                GameConstants.Region[player.highestRegion()],
+                App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, false));
         }
     }
 

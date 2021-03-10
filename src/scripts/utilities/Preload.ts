@@ -33,6 +33,7 @@ class Preload {
     }
 
     public static hideSplashScreen(fast = false) {
+        $('#game').removeClass('loading');
         if (fast) {
             $('.loader').hide();
         } else {

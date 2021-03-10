@@ -18,7 +18,7 @@ class StartSequenceRunner {
 
         App.game.gameState = GameConstants.GameState.fighting;
 
-        const battlePokemon = new BattlePokemon(dataPokemon.name, dataPokemon.id, dataPokemon.type1, dataPokemon.type2, 10, 1, 100, 0, 0, shiny);
+        const battlePokemon = new BattlePokemon(dataPokemon.name, dataPokemon.id, dataPokemon.type1, dataPokemon.type2, 10, 1, 100, 0, new Amount(0, GameConstants.Currency.money), shiny);
         Battle.enemyPokemon(battlePokemon);
 
         // Show the help information text
@@ -37,6 +37,7 @@ class StartSequenceRunner {
                 setTimeout(() => {
                     Information.hide();
                     player.starter(StartSequenceRunner.starterPicked);
+                    App.game.profile.pokemon(dataPokemon.id);
                     StartSequenceRunner.showCaughtMessage();
                 }, 1000);
 

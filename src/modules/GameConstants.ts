@@ -182,6 +182,7 @@ export const GAIN_TOKENS_BASE_REWARD = CAPTURE_POKEMONS_BASE_REWARD / 13;
 
 // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
 export const MINE_LAYERS_BASE_REWARD = questBase * 720;
+export const MINE_ITEMS_BASE_REWARD = questBase * 210;
 
 // not balanced at all for some oak items
 export const USE_OAK_ITEM_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD;
@@ -251,6 +252,10 @@ export enum TypeEffectivenessValue {
     Very = 2,
 }
 
+export function cleanHTMLString(str: string): string {
+    return str.replace(/([|&;$%@"<>()+,])/g, (c: string) => `&#${c.charCodeAt(0)};`);
+}
+
 export function humanifyString(str: string): string {
     return str.replace(/[_-]+/g, ' ');
 }
@@ -272,6 +277,39 @@ export function formatTime(input: number | Date): string {
     const seconds: any = `${time - (hours * 3600) - (minutes * 60)}`.padStart(2, '0');
 
     return `${hours}:${minutes}:${seconds}`;
+}
+
+export function formatTimeFullLetters(input: number): string {
+    // Temporarily recast to number until everything is in modules
+    if (Number.isNaN(Number(input)) || input === 0) { return '-'; }
+    let time = Math.abs(input * 1000);
+    const times = [];
+
+    if (time >= WEEK) {
+        const weeks = Math.floor(time / WEEK);
+        times.push(`${weeks}w`.padStart(3, '0'));
+        time %= WEEK;
+    }
+    if (time >= DAY || times.length) {
+        const days = Math.floor(time / DAY);
+        times.push(`${days}d`.padStart(3, '0'));
+        time %= DAY;
+    }
+    if (time >= HOUR || times.length) {
+        const hours = Math.floor(time / HOUR);
+        times.push(`${hours}h`.padStart(3, '0'));
+        time %= HOUR;
+    }
+    if (time >= MINUTE || times.length) {
+        const minutes = Math.floor(time / MINUTE);
+        times.push(`${minutes}m`.padStart(3, '0'));
+        time %= MINUTE;
+    }
+    if (time >= SECOND || times.length) {
+        const seconds = Math.floor(time / SECOND);
+        times.push(`${seconds}s`.padStart(3, '0'));
+    }
+    return times.slice(0, 3).join(' ');
 }
 
 export function formatTimeShortWords(input: number): string {
@@ -493,7 +531,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kanto]: new Set(['Saffron City', 'Pokemon Tower']),
         [Region.johto]: new Set(['Ecruteak City']),
         [Region.hoenn]: new Set(['Mossdeep City', 'Mt. Pyre']),
-        [Region.sinnoh]: new Set(['Hearthome City', 'Distortion World']),
+        [Region.sinnoh]: new Set(['Hearthome City', 'Solaceon Ruins', 'Distortion World']),
         [Region.unova]: new Set(['Celestial Tower']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
@@ -552,22 +590,6 @@ export enum StoneType {
     'Sachet',
     'Whipped_dream',
     'Ice_stone',
-    'Chipped_pot',
-    'Strawberry_sweet',
-    'Tart_apple',
-    'Sweet_apple',
-    'Rusted_sword',
-    'Rusted_shield',
-    'Galarica_cuff',
-    'Galarica_wreath',
-    'Lemon_cream',
-    'Mint_cream',
-    'Matcha_cream',
-    'Ruby_cream',
-    'Salted_cream',
-    'Rainbow_swirl',
-    'Caramel_swirl',
-    'Ruby_swirl',
 }
 
 export enum BattleItemType {
@@ -816,6 +838,10 @@ export function getGymIndex(gym: string): number {
     return RegionGyms.flat().findIndex((g) => g === gym);
 }
 
+export function getGymRegion(gym: string): Region {
+    return RegionGyms.findIndex((gyms) => gyms.find((g) => g === gym));
+}
+
 export const KantoDungeons = [
     'Viridian Forest',
     'Digletts Cave',
@@ -897,6 +923,7 @@ export const SinnohDungeons = [
     'Old Chateau',
     'Wayward Cave',
     'Mt. Coronet South',
+    'Solaceon Ruins',
     'Iron Island',
     'Mt. Coronet North',
     'Lake Verity',
@@ -1013,6 +1040,10 @@ export const RegionDungeons = [
 
 export function getDungeonIndex(dungeon: string): number {
     return RegionDungeons.flat().findIndex((d) => d === dungeon);
+}
+
+export function getDungeonRegion(dungeon: string): Region {
+    return RegionDungeons.findIndex((dungeons) => dungeons.find((d) => d === dungeon));
 }
 
 export const StartingTowns = [
