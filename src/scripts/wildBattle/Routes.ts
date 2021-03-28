@@ -1330,7 +1330,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Caterpie', 'Weedle', 'Pidgey', 'Zigzagoon', 'Fletchling', 'Bunnelby', 'Scatterbug'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 1)]
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 3', GameConstants.Region.kalos, 3,
@@ -1427,7 +1427,7 @@ Routes.add(new RegionRoute(
         land: ['Mightyena', 'Skorupi', 'Watchog', 'Liepard', 'Foongus', 'Pawniard', 'Klefki'],
         water: ['Poliwag', 'Poliwhirl', 'Lombre', 'Floatzel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Fairy)]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokéball Factory'))]
     //Replace req with Pokéball Factory dungeon if implemented.
 ));
 Routes.add(new RegionRoute(

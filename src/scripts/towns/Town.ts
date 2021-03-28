@@ -1738,6 +1738,14 @@ const CouriwayTownShop = new Shop([
     ItemList['Dragon_egg'],
 ]);
 
+//Kalos NPCs
+
+const Birdwatcher = new NPC('Birdwatcher', [
+    'I\'ve heard there is a cave you can find if you go out on the ocean a little ways.',
+    'Apparently defeating a strong creature there unleashes some energy.',
+    'There are rumors that the energy calls some legendary birds to roam Kalos!',
+]);
+
 //Kalos Towns
 TownList['Vaniville Town'] = new Town(
     'Vaniville Town',
@@ -1746,7 +1754,13 @@ TownList['Vaniville Town'] = new Town(
         shop: VanivilleTownShop,
     }
 );
-TownList['Aquacorde Town'] = new Town('Aquacorde Town', GameConstants.Region.kalos);
+TownList['Aquacorde Town'] = new Town(
+    'Aquacorde Town',
+    GameConstants.Region.kalos,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 1)],
+    }
+);
 TownList['Santalune City'] = new Town(
     'Santalune City',
     GameConstants.Region.kalos,
@@ -1791,6 +1805,7 @@ TownList['Geosenge Town'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 10)],
         shop: GeosengeTownShop,
+        dungeon: dungeonList['Team Flare Secret HQ'],
     }
 );
 TownList['Shalour City'] = new Town(
@@ -1807,6 +1822,7 @@ TownList['Coumarine City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)],
         shop: CoumarineCityShop,
+        npcs: [Birdwatcher],
     }
 );
 TownList['Laverre City'] = new Town(
@@ -1855,6 +1871,13 @@ TownList['Pokémon League Kalos'] = new Town(
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Kalos'))],
     }
 );
+TownList['Kiloude City'] = new Town(
+    'Kiloude City',
+    GameConstants.Region.kalos,
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+    }
+);
 
 //Kalos Dungeons
 TownList['Santalune Forest'] = new DungeonTown(
@@ -1883,8 +1906,21 @@ TownList['Reflection Cave'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 11)]
 );
 //Tower of Mastery?
-//Sea Spirit's Den?
-//Kalos Power Plant?
+TownList['Sea Spirit\'s Den'] = new DungeonTown(
+    'Sea Spirit\'s Den',
+    GameConstants.Region.kalos,
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 23)]
+);
+TownList['Pokéball Factory'] = new DungeonTown(
+    'Pokéball Factory',
+    GameConstants.Region.kalos,
+    [new GymBadgeRequirement(BadgeEnums.Fairy)]
+);
+TownList['Kalos Power Plant'] = new DungeonTown(
+    'Kalos Power Plant',
+    GameConstants.Region.kalos,
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 13), new GymBadgeRequirement(BadgeEnums.Plant)]
+);
 TownList['Lost Hotel'] = new DungeonTown(
     'Lost Hotel',
     GameConstants.Region.kalos,
