@@ -16,7 +16,7 @@ export const MAX_LOAD_TIME = 20000; // 20 Seconds
 export const MUTATION_TICK = 1000;
 export const WANDER_TICK = 1500;
 
-export const MAX_AVAILABLE_REGION = 4; // Unova
+export const MAX_AVAILABLE_REGION = 5; // Kalos
 
 export const TotalPokemonsPerRegion = [
     151, // 151 - Kanto
@@ -182,6 +182,7 @@ export const GAIN_TOKENS_BASE_REWARD = CAPTURE_POKEMONS_BASE_REWARD / 13;
 
 // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
 export const MINE_LAYERS_BASE_REWARD = questBase * 720;
+export const MINE_ITEMS_BASE_REWARD = questBase * 210;
 
 // not balanced at all for some oak items
 export const USE_OAK_ITEM_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD;
@@ -837,6 +838,10 @@ export function getGymIndex(gym: string): number {
     return RegionGyms.flat().findIndex((g) => g === gym);
 }
 
+export function getGymRegion(gym: string): Region {
+    return RegionGyms.findIndex((gyms) => gyms.find((g) => g === gym));
+}
+
 export const KantoDungeons = [
     'Viridian Forest',
     'Digletts Cave',
@@ -969,9 +974,9 @@ export const KalosDungeons = [
     'Glittering Cave',
     'Reflection Cave',
     // 'Tower of Mastery',
-    // 'Sea Spirit's Den',
-    // 'Kalos Power Plant',
-    // 'Pokéball Factory',
+    'Sea Spirit\'s Den',
+    'Kalos Power Plant',
+    'Pokéball Factory',
     'Lost Hotel',
     'Frost Cavern',
     'Team Flare Secret HQ',
@@ -1037,6 +1042,10 @@ export const RegionDungeons = [
 
 export function getDungeonIndex(dungeon: string): number {
     return RegionDungeons.flat().findIndex((d) => d === dungeon);
+}
+
+export function getDungeonRegion(dungeon: string): Region {
+    return RegionDungeons.findIndex((dungeons) => dungeons.find((d) => d === dungeon));
 }
 
 export const StartingTowns = [

@@ -88,8 +88,6 @@ export default class DynamicBackground {
 
     // Add a pokemon to the scene
     static addPokemon = (id) => {
-        // @ts-ignore
-        // eslint-disable-next-line no-undef
         const pokemonSpeed = pokemonMap[id].base.speed;
         let moveSpeed = Math.floor(((pokemonSpeed - DynamicBackground.MIN_SPEED_STAT) / (DynamicBackground.MAX_SPEED_STAT - DynamicBackground.MIN_SPEED_STAT)) * DynamicBackground.MAX_SPEED);
         // Adjust speed by -1 → +1 randomly
@@ -119,8 +117,6 @@ export default class DynamicBackground {
         // Assign our timeout function so we can stop it later
         DynamicBackground.addPokemonTimeout = setTimeout(() => {
             // limited to players highest region
-            // @ts-ignore
-            // eslint-disable-next-line no-undef
             DynamicBackground.addPokemon(Math.floor(Math.random() * TotalPokemonsPerRegion[player?.highestRegion() || Region.kanto]) + 1);
             // Add another pokemon
             DynamicBackground.startAddingPokemon();

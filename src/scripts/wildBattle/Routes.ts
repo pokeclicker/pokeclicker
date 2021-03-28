@@ -1330,7 +1330,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Caterpie', 'Weedle', 'Pidgey', 'Zigzagoon', 'Fletchling', 'Bunnelby', 'Scatterbug'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 1)]
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 3', GameConstants.Region.kalos, 3,
@@ -1427,7 +1427,7 @@ Routes.add(new RegionRoute(
         land: ['Mightyena', 'Skorupi', 'Watchog', 'Liepard', 'Foongus', 'Pawniard', 'Klefki'],
         water: ['Poliwag', 'Poliwhirl', 'Lombre', 'Floatzel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Fairy)]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokéball Factory'))]
     //Replace req with Pokéball Factory dungeon if implemented.
 ));
 Routes.add(new RegionRoute(
@@ -1898,7 +1898,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 4', GameConstants.Region.galar, 11,
     new RoutePokemon({
-        land: ['Yamper', 'Cutiefly', 'Wooloo', 'Milcery', ' Galarian Meowth', 'Budew', 'Ferroseed', 'Joltik', 'Pikachu', 'Eevee', 'Electrike', 'Pumpkaboo', 'Diglett'],
+        land: ['Yamper', 'Cutiefly', 'Wooloo', 'Milcery', 'Galarian Meowth', 'Budew', 'Ferroseed', 'Joltik', 'Pikachu', 'Eevee', 'Electrike', 'Pumpkaboo', 'Diglett'],
         water: ['Magikarp', 'Goldeen', 'Chewtle'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine'))]

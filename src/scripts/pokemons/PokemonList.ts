@@ -1,7 +1,6 @@
 /// <reference path="../party/evolutions/EvolutionMethods.ts" />
 /// <reference path="../party/evolutions/WeatherRestrictedLevelEvolution.ts" />
 /// <reference path="../GameConstants.d.ts" />
-/// <reference path="../party/LevelType.ts" />
 /// <reference path="../../declarations/weather/WeatherType.d.ts" />
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 /// <reference path="../../declarations/interfaces/BagItem.d.ts" />
@@ -11,7 +10,7 @@ const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
 type PokemonListData = {
   id: number;
-  name: string;
+  name: PokemonNameType;
   nativeRegion?: GameConstants.Region;
   catchRate: number;
   evolutions?: Evolution[];
@@ -1283,7 +1282,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 52.2,
-        'name': ' Galarian Meowth',
+        'name': 'Galarian Meowth',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 255,
         'type': [PokemonType.Normal],
@@ -9267,7 +9266,11 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'catchRate': 255,
-        'evolutions': [new StoneEvolution('Bonsly', 'Sudowoodo', GameConstants.StoneType.None)],
+        'evolutions': [
+            // Evolves when leveled up while knowing Mimic
+            // Learns mimic at level 16
+            new LevelEvolution('Bonsly', 'Sudowoodo', 32),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 50,
@@ -9286,7 +9289,11 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 62,
         'catchRate': 145,
-        'evolutions': [new StoneEvolution('Mime Jr.', 'Mr. Mime', GameConstants.StoneType.None)],
+        'evolutions': [
+            // Evolves when leveled up while knowing Mimic
+            // Learns mimic at level 32
+            new LevelEvolution('Mime Jr.', 'Mr. Mime', 32),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 20,
@@ -9305,7 +9312,10 @@ const pokemonList = createPokemonArray(
         'levelType': 4,
         'exp': 110,
         'catchRate': 130,
-        'evolutions': [new StoneEvolution('Happiny', 'Chansey', GameConstants.StoneType.None)],
+        'evolutions': [
+            // TODO: Evolves while holding an Oval Stone during the Day time
+            new StoneEvolution('Happiny', 'Chansey', GameConstants.StoneType.None),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 100,
@@ -9623,7 +9633,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 69,
         'catchRate': 25,
-        'evolutions': [new StoneEvolution('Mantyke', 'Mantine', GameConstants.StoneType.None)],
+        'evolutions': [
+            // TODO: Evolves when leveled up with a Remoraid in the party
+            new StoneEvolution('Mantyke', 'Mantine', GameConstants.StoneType.None),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 45,
@@ -12136,7 +12149,7 @@ const pokemonList = createPokemonArray(
         'levelType': 4,
         'exp': 60,
         'catchRate': 255,
-        'evolutions': [new StoneEvolution('Minccino', 'Cinccino', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Minccino', 'Cinccino', GameConstants.StoneType.Shiny_stone)],
         'base': {
             'hitpoints': 55,
             'attack': 50,
@@ -12873,7 +12886,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 130,
         'catchRate': 90,
-        'evolutions': [new StoneEvolution('Lampent', 'Chandelure', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Lampent', 'Chandelure', GameConstants.StoneType.Dusk_stone)],
         'base': {
             'hitpoints': 60,
             'attack': 40,
@@ -14496,7 +14509,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 157,
         'catchRate': 90,
-        'evolutions': [new StoneEvolution('Doublade', 'Aegislash', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Doublade', 'Aegislash', GameConstants.StoneType.Dusk_stone)],
         'base': {
             'hitpoints': 59,
             'attack': 110,
@@ -15508,7 +15521,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 140,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Charjabug', 'Vikavolt', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Charjabug', 'Vikavolt', GameConstants.StoneType.Thunder_stone)],
         'base': {
             'hitpoints': 57,
             'attack': 82,
@@ -20685,8 +20698,6 @@ const pokemonList = createPokemonArray(
     // },
 );
 
-type PokemonNameType = typeof pokemonList[number]['name'];
-
 const pokemonNameIndex = {};
 const maxEggCycles = Math.max(...pokemonList.map(p => p.eggCycles));
 
@@ -20699,7 +20710,7 @@ pokemonList.forEach(p => {
     (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
     if ((p as PokemonListData).baby) {
         (p as PokemonListData).evolutions?.forEach(evo => {
-            pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon as PokemonNameType;
+            pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon;
             const poke = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon());
             p.eggCycles = Math.round(poke.eggCycles * 0.8);
         });
@@ -20713,7 +20724,18 @@ pokemonList.forEach(p => {
     pokemonNameIndex[p.name.toLowerCase()] = p;
 });
 
-const pokemonMap: any = new Proxy(pokemonList, {
+type PokemonMapProxy
+    = Record<PokemonNameType | number, PokemonListData>
+    & {
+        random: (max?: number, min?: number) => PokemonListData,
+        randomRegion: (max?: GameConstants.Region, min?: GameConstants.Region) => PokemonListData,
+    }
+    & Array<PokemonListData>;
+
+const pokemonMap = new GenericProxy<
+    typeof pokemonList,
+    PokemonMapProxy
+>(pokemonList, {
     get: (pokemon, prop: PokemonNameType | 'random' | 'randomRegion') => {
         if (!isNaN(+prop)) {
             const id: number = +prop;

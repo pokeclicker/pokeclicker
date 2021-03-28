@@ -4,10 +4,9 @@ class KantoBerryMasterNPC extends NPC {
 
     constructor(
         public name: string,
-        public dialog: string[],
-        public image?: string
+        public dialog: string[]
     ) {
-        super(name,dialog,image);
+        super(name, dialog);
     }
 
     get dialogHTML(): string {

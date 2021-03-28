@@ -28,14 +28,18 @@ export default class Sound {
                 }, 1000);
             });
 
-            Settings.getSetting('sound.volume').observableValue.subscribe((volume) => {
-                try {
-                    this.sound.volume = volume / 100;
-                } catch (e) {
-                    console.error(e);
-                }
-            });
+            const volumeObs = Settings.getSetting('sound.volume').observableValue;
+            this.updateVolume(volumeObs());
+            volumeObs.subscribe((v) => this.updateVolume(v));
         });
+    }
+
+    updateVolume(value: number) {
+        try {
+            this.sound.volume = value / 100;
+        } catch (e) {
+            console.error(`Error updating volume for ${this.name}:\n`, e);
+        }
     }
 
     play() {
