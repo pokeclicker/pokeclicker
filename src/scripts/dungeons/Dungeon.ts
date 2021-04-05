@@ -1657,12 +1657,12 @@ dungeonList['Pokéball Factory'] = new Dungeon('Pokéball Factory',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     8173950,
     [
-        new DungeonTrainer('Team Flare Celosia',
+        new DungeonTrainer('Team Flare',
             [new GymPokemon('Manectric', 79385030, 41)],
-            { weight: 1 }, 'Celosia', '(celosia)'),
+            { weight: 1 }, 'Celosia'),
         new DungeonTrainer('Team Flare',
             [new GymPokemon('Liepard', 79284730, 41)],
-            { weight: 1 }, 'Bryony', '(bryony)'),
+            { weight: 1 }, 'Bryony'),
     ],
     615000, 14, 37);
 
