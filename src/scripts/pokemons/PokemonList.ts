@@ -3038,6 +3038,7 @@ const pokemonList = createPokemonArray(
             new NightTimedStoneEvolution('Eevee', 'Umbreon', GameConstants.StoneType.Soothe_bell),
             new DungeonRestrictedLevelEvolution('Lake Acuity','Eevee','Glaceon', 20),
             new DungeonRestrictedLevelEvolution('Eterna Forest', 'Eevee', 'Leafeon', 20),
+            new StoneEvolution('Eevee', 'Sylveon', GameConstants.StoneType.Soothe_bell),
         ],
         'base': {
             'hitpoints': 55,
