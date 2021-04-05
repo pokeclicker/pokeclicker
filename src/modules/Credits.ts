@@ -23,6 +23,15 @@ const Credits: Credit[] = [
         link: 'https://www.deviantart.com/krokotips',
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
     },
+    {
+        resources: [
+            'Team Flare Grunt (male)',
+            'Team Flare Grunt (female)',
+        ],
+        name: 'torqupine',
+        link: 'https://www.deviantart.com/torqupine',
+        // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
+    },
 ];
 
 export default Credits;
