@@ -10,7 +10,13 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
-    // v0.7.9.x
+    // v0.8.0
+    new ChangelogUpdate('v0.8.0 - Kalos', new Date(2021, 3, 4)),
+    new Changelog(changelogType.NEW, 'The Kalos region is now available!\n<i>Some trainer sprites will be missing</i>'),
+    new Changelog(changelogType.FIXED, 'Fixed missing Battle Frontier images'),
+    new Changelog(changelogType.FIXED, 'Attempt to fix svg image on map for older Safari versions'),
+
+    // v0.7.9
     new ChangelogUpdate('v0.7.9 - Patches', new Date(2021, 2, 3)),
     new Changelog(changelogType.FIXED, 'Attempting to fix some lag, please report on Discord/Github if you are still having major lag compared with v0.7.7, there may be a few patches pushed out for testing'),
 
