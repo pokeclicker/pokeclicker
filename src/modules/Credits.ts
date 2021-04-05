@@ -17,6 +17,7 @@ const Credits: Credit[] = [
     {
         resources: [
             'Team Flare Celosia',
+            'Team Flare Mable',
         ],
         name: 'Krokotips',
         link: 'https://www.deviantart.com/krokotips',
