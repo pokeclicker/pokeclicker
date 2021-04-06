@@ -15,7 +15,6 @@ class Berry {
         'Volbeat', 'Illumise',
         'Burmy (plant)', 'Combee', 'Cherubi', 'Munchlax',
         'Sewaddle', 'Karrablast',
-        'Flabébé (Yellow)', 'Flabébé (Blue)',
     ];
 
     constructor(

@@ -91,7 +91,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Aspear]    = new Berry(BerryType.Aspear,   [10, 40, 60, 120, 240],
             6, 0.5, 9, 5,
             [0, 0, 0, 0, 10], BerryColor.Yellow,
-            ['This Berry\'s peel is hard, but the flesh inside is very juicy. It is distinguished by its bracing sourness.']);
+            ['This Berry\'s peel is hard, but the flesh inside is very juicy. It is distinguished by its bracing sourness.'], undefined, ['Flabébé (Yellow)']);
         this.berryData[BerryType.Leppa]     = new Berry(BerryType.Leppa,    [100, 120, 140, 240, 480],
             7, 0.5, 10, 6,
             [10, 0, 10, 10, 10], BerryColor.Red,
@@ -99,11 +99,11 @@ class Farming implements Feature {
         this.berryData[BerryType.Oran]      = new Berry(BerryType.Oran,     [120, 180, 240, 300, 600],
             8, 0.5, 20, 7,
             [10, 10, 0, 10, 10], BerryColor.Blue,
-            ['Nature\'s gifts came together as one in this Berry. It has a wondrous mix of flavors that spread in the mouth.']);
+            ['Nature\'s gifts came together as one in this Berry. It has a wondrous mix of flavors that spread in the mouth.'], undefined, ['Flabébé (Blue)']);
         this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [150, 300, 450, 600, 1200],
             9, 0.5, 30, 8,
             [0, 10, 10, 10, 10], BerryColor.Yellow,
-            ['Sitrus came from the same family as Oran. It is larger and smoother tasting than Oran.']);
+            ['Sitrus came from the same family as Oran. It is larger and smoother tasting than Oran.'], undefined, ['Flabébé (Yellow)']);
         //#endregion
 
         //#region Second Generation
@@ -130,7 +130,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Pinap]     = new Berry(BerryType.Pinap,    [30, 60, 180, 240, 480],
             13, 0.4, 35, 2,
             [10, 0, 0, 0, 10], BerryColor.Yellow,
-            ['It is said that when the sour skin is peeled, this spicy Berry can be crushed to make medicine.']);
+            ['It is said that when the sour skin is peeled, this spicy Berry can be crushed to make medicine.'], undefined, ['Flabébé (Yellow)']);
 
         this.berryData[BerryType.Figy]      = new Berry(BerryType.Figy,     [40, 160, 230, 350, 700],
             14, 0.3, 40, 3,
@@ -151,7 +151,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Iapapa]    = new Berry(BerryType.Iapapa,   [40, 200, 230, 380, 760],
             18, 0.3, 60, 3,
             [0, 0, 0, 0, 15], BerryColor.Yellow,
-            ['This Berry is very big and sour. The juiciness of the pulp accentuates the sourness.']);
+            ['This Berry is very big and sour. The juiciness of the pulp accentuates the sourness.'], undefined, ['Flabébé (Yellow)']);
 
         this.berryData[BerryType.Lum]       = new Berry(BerryType.Lum,      [3000, 3200, 3400, 3600, 43200],
             1, 0, 1000, 3,
@@ -170,11 +170,11 @@ class Farming implements Feature {
         this.berryData[BerryType.Kelpsy]    = new Berry(BerryType.Kelpsy,   [240, 2000, 3400, 6000, 12000],
             21, 0.2, 525, 10,
             [0, 10, 0, 10, 10], BerryColor.Blue,
-            ['This Berry can be eaten as is or boiled to obtain an extract that adds a dash of flavor to food.']);
+            ['This Berry can be eaten as is or boiled to obtain an extract that adds a dash of flavor to food.'], undefined, ['Flabébé (Blue)']);
         this.berryData[BerryType.Qualot]    = new Berry(BerryType.Qualot,   [230, 1000, 2500, 4800, 9600],
             22, 0.2, 550, 10,
             [10, 0, 10, 0, 10], BerryColor.Yellow,
-            ['Even in places of constant rain and high humidity, this Berry\'s plant grows healthy and strong.']);
+            ['Even in places of constant rain and high humidity, this Berry\'s plant grows healthy and strong.'], undefined, ['Flabébé (Yellow)']);
         this.berryData[BerryType.Hondew]    = new Berry(BerryType.Hondew,   [1000, 2000, 5000, 10800, 21600],
             23, 0.2, 2000, 10,
             [10, 10, 0, 10, 0], BerryColor.Green,
@@ -182,7 +182,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Grepa]     = new Berry(BerryType.Grepa,    [300, 3400, 5600, 7200, 14400],
             24, 0.2, 600, 10,
             [0, 10, 10, 0, 10], BerryColor.Yellow,
-            ['One bite of this very tender Berry fills the mouth with its sweet and tangy flavor.']);
+            ['One bite of this very tender Berry fills the mouth with its sweet and tangy flavor.'], undefined, ['Flabébé (Yellow)']);
         this.berryData[BerryType.Tamato]    = new Berry(BerryType.Tamato,   [430, 1400, 4000, 8640, 17280],
             25, 0.2, 625, 10,
             [20, 10, 0, 0, 0], BerryColor.Red,
@@ -203,7 +203,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Nomel]     = new Berry(BerryType.Nomel,    [1240, 5200, 10500, 15120, 30240],
             29, 0.1, 850, 10,
             [10, 0, 0, 0, 20], BerryColor.Yellow,
-            ['This Berry is quite sour overall, with the sourness especially concentrated at the pointed end.']);
+            ['This Berry is quite sour overall, with the sourness especially concentrated at the pointed end.'], undefined, ['Flabébé (Yellow)']);
         this.berryData[BerryType.Spelon]    = new Berry(BerryType.Spelon,   [2000, 7000, 12000, 15480, 30960],
             30, 0.1, 900, 10,
             [30, 10, 0, 0, 0], BerryColor.Red,
@@ -240,14 +240,14 @@ class Farming implements Feature {
             [
                 'This Berry\'s flesh is dotted with countless tiny bubbles of air that keep it afloat in water.',
                 'This Berry promotes the fruiting of nearby Berry plants.',
-            ], new Aura(AuraType.Harvest, [1.1, 1.2, 1.3]), ['Squirtle', 'Totodile', 'Mudkip', 'Piplup', 'Oshawott']);
+            ], new Aura(AuraType.Harvest, [1.1, 1.2, 1.3]), ['Squirtle', 'Totodile', 'Mudkip', 'Piplup', 'Oshawott', 'Flabébé (Blue)']);
         this.berryData[BerryType.Wacan]     = new Berry(BerryType.Wacan,    [10, 180, 900, 1800, 3600],
             2, 0.05, 250, 1,
             [0, 0, 15, 0, 10], BerryColor.Yellow,
             [
                 'Energy from lightning strikes is drawn into the plant, making the Berries grow big and rich.',
                 'The same energy promotes the growth of nearby Berries.',
-            ], new Aura(AuraType.Growth, [1.1, 1.2, 1.3]), ['Pikachu']);
+            ], new Aura(AuraType.Growth, [1.1, 1.2, 1.3]), ['Pikachu', 'Flabébé (Yellow)']);
         this.berryData[BerryType.Rindo]     = new Berry(BerryType.Rindo,    [3600, 7200, 16200, 28800, 57600],
             24, 0.05, 1400, 15,
             [10, 0, 0, 15, 0], BerryColor.Green,
@@ -261,7 +261,7 @@ class Farming implements Feature {
             [
                 'This Berry has a refreshing flavor that strikes a good balance of dryness and sourness. It tastes better chilled.',
                 'This Berry slows the growth of nearby Berries.',
-            ], new Aura(AuraType.Growth, [0.9, 0.8, 0.7]), ['Snover']);
+            ], new Aura(AuraType.Growth, [0.9, 0.8, 0.7]), ['Snover', 'Flabébé (Blue)']);
         this.berryData[BerryType.Chople]    = new Berry(BerryType.Chople,   [5400, 10800, 25200, 36000, 72000],
             26, 0.05, 1600, 15,
             [15, 0, 0, 10, 0], BerryColor.Red,
@@ -283,12 +283,12 @@ class Farming implements Feature {
             [
                 'The sweetness-laden pulp has just the hint of a hard-edged and fragrant bite to it.',
                 'Growing these Berries will soften the ground around it, increasing the chances of replanting.',
-            ], new Aura(AuraType.Replant, [1.01, 1.02, 1.03]), ['Larvitar']);
+            ], new Aura(AuraType.Replant, [1.01, 1.02, 1.03]), ['Larvitar', 'Flabébé (Yellow)']);
         this.berryData[BerryType.Coba]      = new Berry(BerryType.Coba,     [9000, 12600, 16200, 19800, 39600],
             29, 0.05, 1800, 15,
             [0, 10, 0, 15, 0], BerryColor.Blue,
             ['This Berry is said to be a new kind that is a cross of two Berries brought together by winds from far away.'],
-            undefined, ['Tropius']);
+            undefined, ['Tropius', 'Flabébé (Blue)']);
         this.berryData[BerryType.Payapa]    = new Berry(BerryType.Payapa,   [4680, 11880, 23400, 34200, 68400],
             30, 0.05, 1900, 15,
             [0, 0, 10, 0, 15], BerryColor.Purple,
@@ -309,7 +309,7 @@ class Farming implements Feature {
             [
                 'It is often used for pickles because of its very dry flavor. It can also be eaten raw for its provocative taste.',
                 'This Berry plant hardens the surrounding soil, decreasing the chances of replanting.',
-            ], new Aura(AuraType.Replant, [0.99, 0.98, 0.97]), ['Sudowoodo']);
+            ], new Aura(AuraType.Replant, [0.99, 0.98, 0.97]), ['Sudowoodo', 'Flabébé (Yellow)']);
         this.berryData[BerryType.Kasib]     = new Berry(BerryType.Kasib,    [30, 60, 120, 300, 86400],
             1, 1, 25, 1,
             [0, 10, 20, 0, 0], BerryColor.Purple,
@@ -341,7 +341,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Chilan]    = new Berry(BerryType.Chilan,   [240, 1430, 2970, 7200, 14400],
             10, 0.05, 500, 15,
             [0, 25, 10, 0, 0], BerryColor.Yellow,
-            ['This Berry can be cored out and dried to make a whistle. Blowing through its hole makes an indescribable sound.']);
+            ['This Berry can be cored out and dried to make a whistle. Blowing through its hole makes an indescribable sound.'], undefined, ['Flabébé (Yellow)']);
         this.berryData[BerryType.Roseli]    = new Berry(BerryType.Roseli,   [2410, 5040, 12600, 25200, 50400],
             38, 0.05, 2500, 15,
             [0, 0, 25, 10, 0], BerryColor.Pink,
@@ -366,19 +366,19 @@ class Farming implements Feature {
             [
                 'The cluster of drupelets that make up this Berry pop rhythmically if the Berry is handled roughly.',
                 'The sound of these Berries attracts wild Pokémon.',
-            ]);
+            ], undefined, ['Flabébé (Yellow)']);
         this.berryData[BerryType.Rowap]     = new Berry(BerryType.Rowap,    [5760, 9000, 14040, 21240, 42480],
             1, 0.05, 2900, 20,
             [10, 0, 0, 0, 40], BerryColor.Blue,
-            ['In days of old, people worked the top-shaped pieces of this Berry free and used them as toys.']);
+            ['In days of old, people worked the top-shaped pieces of this Berry free and used them as toys.'], undefined, ['Flabébé (Blue)']);
         this.berryData[BerryType.Kee]       = new Berry(BerryType.Kee,      [4680, 9360, 18360, 36360, 72720],
             1, 0.05, 3000, 20,
             [30, 30, 10, 10, 10], BerryColor.Yellow,
-            ['This Berry remains poisonous until fully ripened. Once ripe it has a spicy and sweet complex flavor.']);
+            ['This Berry remains poisonous until fully ripened. Once ripe it has a spicy and sweet complex flavor.'], undefined, ['Flabébé (Yellow)']);
         this.berryData[BerryType.Maranga]   = new Berry(BerryType.Maranga,  [5040, 10080, 20160, 40320, 80640],
             1, 0.05, 3100, 20,
             [10, 10, 30, 30, 10], BerryColor.Blue,
-            ['This Berry resembles the Durin Berry, however its spikes are less pronounced. It is quite delicious when roasted.']);
+            ['This Berry resembles the Durin Berry, however its spikes are less pronounced. It is quite delicious when roasted.'], undefined, ['Flabébé (Blue)']);
 
         this.berryData[BerryType.Liechi]    = new Berry(BerryType.Liechi,   [21600, 43200, 86400, 172800, 345600],
             0.5, 0, 10000, 20,
@@ -404,7 +404,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Apicot]    = new Berry(BerryType.Apicot,   [10800, 21600, 43200, 86400, 432000],
             0.5, 0, 15000, 20,
             [10, 30, 0, 0, 30], BerryColor.Blue,
-            ['This is a very, very mystifying Berry. There is no telling how it can be used, or what may happen if it is used.']);
+            ['This is a very, very mystifying Berry. There is no telling how it can be used, or what may happen if it is used.'], undefined, ['Flabébé (Blue)']);
         this.berryData[BerryType.Lansat]    = new Berry(BerryType.Lansat,   [10800, 21600, 43200, 86400, 432000],
             0.5, 0, 15000, 20,
             [30, 10, 30, 10, 30], BerryColor.Red,
