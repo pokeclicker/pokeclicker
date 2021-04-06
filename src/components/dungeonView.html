@@ -66,7 +66,7 @@
         <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching)  -->
         <div data-bind="if: DungeonBattle.enemyPokemon">
             <div style="position:absolute; left:65%;" data-bind="if: DungeonBattle.trainer()">
-                <img data-bind="attr:{ src: DungeonBattle.trainer().image }"/>
+                <img data-bind="attr:{ src: DungeonBattle.trainer().image }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             </div>
             <div>
                 <div data-bind="ifnot: DungeonBattle.catching">
