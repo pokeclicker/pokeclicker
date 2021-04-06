@@ -15034,6 +15034,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 67,
         'catchRate': 120,
+        'evolutions': [new StoneEvolution('Pumpkaboo', 'Gourgeist', GameConstants.StoneType.Trade_stone)],
         'base': {
             'hitpoints': 44,
             'attack': 66,
