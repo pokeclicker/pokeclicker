@@ -1013,7 +1013,7 @@ gymList['Santalune City'] = new Gym(
     ],
     BadgeEnums.Bug,
     100000,
-    'Young Trainer, you... No, it wasn\'t you alone. You and your <Pokémon> have shown me a whole new depth of field! Fantastic! Just fantastic!',
+    'Young Trainer, you... No, it wasn\'t you alone. You and your Pokémon have shown me a whole new depth of field! Fantastic! Just fantastic!',
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 3)]
 );
 gymList['Cyllage City'] = new Gym(
