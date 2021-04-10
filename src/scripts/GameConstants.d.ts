@@ -318,6 +318,8 @@ namespace GameConstants {
         'Skull Fossil': string;
         'Cover Fossil': string;
         'Plume Fossil': string;
+        'Jaw Fossil': string;
+        'Sail Fossil': string;
     };
     declare const PokemonToFossil: {
         Omanyte: string;
@@ -329,6 +331,8 @@ namespace GameConstants {
         Cranidos: string;
         Tirtouga: string;
         Archen: string;
+        Tyrunt: string;
+        Amaura: string;
     };
     declare const KantoGyms: string[];
     declare const JohtoGyms: string[];
