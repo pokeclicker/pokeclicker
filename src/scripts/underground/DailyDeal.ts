@@ -15,14 +15,6 @@ class DailyDeal {
         this.amount2 = DailyDeal.randomAmount();
     }
 
-    private static randomItem(): UndergroundItem {
-        return UndergroundItem.list[Math.floor(UndergroundItem.list.length * SeededRand.next())];
-    }
-
-    private static randomAmount(): number {
-        return Math.floor(3 * SeededRand.next()) + 1;
-    }
-
     public static generateDeals(maxDeals: number, date: Date) {
         SeededRand.seedWithDate(date);
 
@@ -38,6 +30,14 @@ class DailyDeal {
             i++;
         }
         DailyDeal.list.push(...temp);
+    }
+
+    private static randomItem(): UndergroundItem {
+        return SeededRand.fromArray(UndergroundItem.list);
+    }
+
+    private static randomAmount(): number {
+        return SeededRand.intBetween(1, 3);
     }
 
     private isValid(dealList: Array<DailyDeal>): boolean {
