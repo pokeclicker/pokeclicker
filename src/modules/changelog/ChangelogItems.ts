@@ -10,6 +10,83 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.0
+    new ChangelogUpdate('v0.8.0 - Kalos', new Date(2021, 3, 4)),
+    new Changelog(changelogType.NEW, 'The Kalos region is now available!\n<i>Some trainer sprites will be missing</i>'),
+    new Changelog(changelogType.FIXED, 'Fixed missing Battle Frontier images'),
+    new Changelog(changelogType.FIXED, 'Attempt to fix svg image on map for older Safari versions'),
+
+    // v0.7.9
+    new ChangelogUpdate('v0.7.9 - Patches', new Date(2021, 2, 3)),
+    new Changelog(changelogType.FIXED, 'Attempting to fix some lag, please report on Discord/Github if you are still having major lag compared with v0.7.7, there may be a few patches pushed out for testing'),
+
+    // v0.7.8
+    new ChangelogUpdate('v0.7.8', new Date(2021, 2, 2)),
+    new Changelog(changelogType.NEW, 'Increased roamer odds on specific routes changing every 8 hours, NPCs in certain towns will tell you the current route'),
+    new Changelog(changelogType.NEW, 'Mine items quest in Underground'),
+    new Changelog(changelogType.FIXED, 'Fixed dungeon token gain'),
+    new Changelog(changelogType.FIXED, 'Safari Zone animations'),
+    new Changelog(changelogType.FIXED, 'Safari Zone encounter statistics'),
+    new Changelog(changelogType.FIXED, 'Some roaming event mons'),
+    new Changelog(changelogType.FIXED, 'Not being able to import saves from < v0.5.x'),
+
+    // v0.7.7
+    new ChangelogUpdate('v0.7.7', new Date(2021, 1, 20)),
+    new Changelog(changelogType.FIXED, 'Fixed currency quests'),
+    new Changelog(changelogType.FIXED, 'Fixed currency multipliers'),
+    new Changelog(changelogType.FIXED, 'Fixed quest refreshing without waiting for confirmation'),
+
+    // v0.7.6
+    new ChangelogUpdate('v0.7.6', new Date(2021, 1, 19)),
+    new Changelog(changelogType.NEW, 'Oak item loadouts'),
+    new Changelog(changelogType.CHANGE, 'No more impossible quest when doing challenges'),
+    new Changelog(changelogType.CHANGE, 'Able to delete saves on the windows client'),
+    new Changelog(changelogType.CHANGE, 'Dungeon Trainers Pokémon will now reward Dungeon Tokens when defeated'),
+    new Changelog(changelogType.CHANGE, 'Dungeon Trainers will now reward Money when defeated'),
+    new Changelog(changelogType.FIXED, 'Sound not remembering previously set volume'),
+    new Changelog(changelogType.FIXED, 'Let\'s Go mons not showing in Pokémon list'),
+    new Changelog(changelogType.FIXED, 'Some missing stone evolutions'),
+    new Changelog(changelogType.FIXED, 'Elite four shortcut keys working again'),
+    new Changelog(changelogType.FIXED, 'Fixed some Pokémon shop sprites'),
+    new Changelog(changelogType.FIXED, 'Fixed some missing trainer sprites'),
+    new Changelog(changelogType.FIXED, 'Fixed some routes/dungeons showing incorrect backgrounds'),
+    new Changelog(changelogType.FIXED, 'Saved game not importing if settings are not set'),
+
+    // v0.7.5
+    new ChangelogUpdate('v0.7.5 - Challenges, Trainers and Saves', new Date(2021, 0, 29)),
+    new Changelog(changelogType.FIXED, 'Fix proteins not increasing on usage'),
+    new Changelog(changelogType.FIXED, 'Some trainer images not loading'),
+    new Changelog(changelogType.FIXED, 'Dynamic Pokemon disappearing  before leaving screen'),
+
+    // v0.7.4
+    new ChangelogUpdate('v0.7.4 - Challenges, Trainers and Saves', new Date(2021, 0, 29)),
+    new Changelog(changelogType.NEW, 'Multiple save file support'),
+    new Changelog(changelogType.NEW, 'Challenge modes'),
+    new Changelog(changelogType.NEW, 'Trainers added to Kanto Dungeons'),
+    new Changelog(changelogType.CHANGE, 'Log wandering Pokémon for Farm'),
+    new Changelog(changelogType.CHANGE, 'Change Lum berry Aura effect'),
+    new Changelog(changelogType.CHANGE, 'Add more Burmy forms'),
+    new Changelog(changelogType.CHANGE, 'Underground items can spawn in any rotation'),
+    new Changelog(changelogType.CHANGE, 'Quest generation updated'),
+    new Changelog(changelogType.CHANGE, 'Dynamic background Pokémon now have variable speed'),
+    new Changelog(changelogType.CHANGE, 'Leave button won\'t appear in Dungeon until the player has moved'),
+    new Changelog(changelogType.FIXED, 'Underground survey upgrade display'),
+    new Changelog(changelogType.FIXED, 'Fix Heatran & Kyurem HP'),
+    new Changelog(changelogType.FIXED, 'Underground no longer notifies on new game'),
+    new Changelog(changelogType.FIXED, 'Hide future region forms from Battle Frontier'),
+    new Changelog(changelogType.FIXED, 'Fixed quick catch glitch'),
+
+    // v0.7.3
+    new ChangelogUpdate('v0.7.3 - Underground', new Date(2021, 0, 18)),
+    new Changelog(changelogType.NEW, 'Underground revamped'),
+    new Changelog(changelogType.CHANGE, 'More Pokémon held items added'),
+    new Changelog(changelogType.CHANGE, 'Add tooltips to battle item values'),
+    new Changelog(changelogType.CHANGE, 'Misc Farm changes and fixes'),
+    new Changelog(changelogType.CHANGE, 'Add Leave button to dungeon entrance'),
+    new Changelog(changelogType.FIXED, 'Hatchery steps given from Unvoa dungeons'),
+    new Changelog(changelogType.FIXED, 'Old Amber quest reward'),
+    new Changelog(changelogType.FIXED, 'Event description line breaks'),
+
     // v0.7.2
     new ChangelogUpdate('v0.7.2', new Date(2021, 0, 3)),
     new Changelog(changelogType.FIXED, 'Poison Barb not gaining experience'),
@@ -18,7 +95,7 @@ const ChangelogItems = [
     // v0.7.1
     new ChangelogUpdate('v0.7.1', new Date(2021, 0, 1)),
     new Changelog(changelogType.NEW, 'Unova Fossils now available in the Underground'),
-    new Changelog(changelogType.NEW, 'Add option to display Pokedex ID in hatchery'),
+    new Changelog(changelogType.NEW, 'Add option to display Pokédex ID in hatchery'),
     new Changelog(changelogType.NEW, 'Save achievement filters'),
     new Changelog(changelogType.NEW, 'Use multiple Protein at once'),
     new Changelog(changelogType.CHANGE, 'Buff P2 Lab, increase boss pool'),
@@ -42,7 +119,7 @@ const ChangelogItems = [
     new Changelog(changelogType.CHANGE, 'Updated some environments'),
     new Changelog(changelogType.CHANGE, 'Buffed Babiri berry effect'),
     new Changelog(changelogType.CHANGE, 'Buffed Enigma berry'),
-    new Changelog(changelogType.CHANGE, 'Buffed Farm wondering Pokémon rate'),
+    new Changelog(changelogType.CHANGE, 'Buffed Farm wandering Pokémon rate'),
     new Changelog(changelogType.CHANGE, 'Updated Petaya berry effect'),
     new Changelog(changelogType.CHANGE, 'Updated Kasib berry effect'),
     new Changelog(changelogType.CHANGE, 'Added hints for more berries'),
@@ -98,7 +175,7 @@ const ChangelogItems = [
     new Changelog(changelogType.CHANGE, 'Berries are less likely to mutate nearby plots to themselves'),
     new Changelog(changelogType.CHANGE, 'Berries are less likely to create mutations of themselves'),
     new Changelog(changelogType.CHANGE, 'Nerfed some of the Berry Auras'),
-    new Changelog(changelogType.CHANGE, 'Increase Farm wondering Pokémon shiny chance'),
+    new Changelog(changelogType.CHANGE, 'Increase Farm wandering Pokémon shiny chance'),
     new Changelog(changelogType.CHANGE, 'Misc Farm changes'),
     new Changelog(changelogType.CHANGE, 'Misc text changes'),
     new Changelog(changelogType.FIXED, 'Hotkeys will no longer activate while focused on inputs'),
@@ -132,7 +209,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Evolution Stones not working'),
 
     // v0.6.0
-    new ChangelogUpdate('v0.6.0', new Date(2020, 10, 13)),
+    new ChangelogUpdate('v0.6.0 - Farming', new Date(2020, 10, 13)),
     new Changelog(changelogType.NEW, 'Complete Farm overhaul'),
     new Changelog(changelogType.NEW, 'Hotkeys added for oak items modal (O to open, number keys to toggle items)'),
     new Changelog(changelogType.NEW, 'Hotkeys added for Pokéball selector modal (P + number to open, number keys to toggle items)'),

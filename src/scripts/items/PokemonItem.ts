@@ -5,13 +5,13 @@ class PokemonItem extends CaughtIndicatingItem {
     type: PokemonNameType;
 
     constructor(pokemon: PokemonNameType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint) {
-        super(pokemon, basePrice, currency);
+        super(pokemon, basePrice, currency, undefined, undefined, undefined, 'pokemonItem');
         this.type = pokemon;
     }
 
     gain() {
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
-        const pokemonName = this.name() as PokemonNameType;
+        const pokemonName = this.name as PokemonNameType;
         if (shiny) {
             Notifier.notify({
                 message: `✨ You obtained a shiny ${pokemonName}! ✨`,
@@ -21,13 +21,14 @@ class PokemonItem extends CaughtIndicatingItem {
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(pokemonName).id, shiny, true);
     }
 
-    use() {
-    }
-
     getCaughtStatus(): CaughtStatus {
-        return PartyController.getCaughtStatusByName(this.name() as PokemonNameType);
+        return PartyController.getCaughtStatusByName(this.name as PokemonNameType);
     }
 
+    get image() {
+        const subDirectory = this.imageDirectory ? `${this.imageDirectory}/` : '';
+        return `assets/images/items/${subDirectory}${this.name.replace(/[^\s\w.()-]/g, '')}.png`;
+    }
 }
 
 ItemList['Eevee']                = new PokemonItem('Eevee', 5000);
@@ -44,5 +45,7 @@ ItemList['Cherubi']              = new PokemonItem('Cherubi', 5000);
 ItemList['Spiritomb']            = new PokemonItem('Spiritomb', 5000);
 ItemList['Zorua']                = new PokemonItem('Zorua', 5000);
 ItemList['Meloetta (pirouette)'] = new PokemonItem('Meloetta (pirouette)', 150000);
-ItemList['Type null']            = new PokemonItem('Type: Null', 5000);
+ItemList['Type: Null']           = new PokemonItem('Type: Null', 5000);
 ItemList['Poipole']              = new PokemonItem('Poipole', 5000);
+ItemList['Eternatus']            = new PokemonItem('Eternatus', 10000);
+ItemList['Toxel']                = new PokemonItem('Toxel', 5000);

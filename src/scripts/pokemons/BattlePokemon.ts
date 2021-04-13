@@ -16,9 +16,9 @@ class BattlePokemon implements EnemyPokemonInterface {
      * @param level level is 2 times the current route
      * @param catchRate base chance of catching this Pokémon
      * @param exp base exp reward for defeating this Pokémon
-     * @param money exp base exp reward for defeating this Pokémon
-     * @param shiny
-     * @param [heldItem] item to gain on defeat of this pokemon
+     * @param reward currency reward for defeating this Pokémon
+     * @param shiny is a shiny variant
+     * @param [heldItem] item to possibly gain for defeating this Pokémon
      */
 
     constructor(
@@ -30,10 +30,10 @@ class BattlePokemon implements EnemyPokemonInterface {
         public level: number,
         public catchRate: number,
         public exp: number,
-        public money: number,
+        public reward: Amount = new Amount(0, GameConstants.Currency.money),
         public shiny: boolean,
         public shardReward = 1,
-        public heldItem?: string
+        public heldItem?: BagItem
     ) {
         this.health = ko.observable(maxHealth);
         this.maxHealth = ko.observable(maxHealth);
@@ -61,14 +61,13 @@ class BattlePokemon implements EnemyPokemonInterface {
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonDefeated);
         }
 
-        if (this.money) {
-            App.game.wallet.gainMoney(this.money);
+        if (this.reward.amount > 0) {
+            App.game.wallet.addAmount(this.reward);
         }
 
-        if (this.heldItem && ItemList[this.heldItem]) {
-            const item = ItemList[this.heldItem];
-            const name = GameConstants.humanifyString(item.name());
-            item.gain(1);
+        if (this.heldItem) {
+            const name = BagHandler.displayName(this.heldItem);
+            BagHandler.gainItem(this.heldItem);
             const msg = `${this.name} dropped ${GameHelper.anOrA(name)} ${name}!`;
             Notifier.notify({
                 message: `The enemy ${msg}`,

@@ -16,7 +16,7 @@ export const MAX_LOAD_TIME = 20000; // 20 Seconds
 export const MUTATION_TICK = 1000;
 export const WANDER_TICK = 1500;
 
-export const MAX_AVAILABLE_REGION = 4; // Unova
+export const MAX_AVAILABLE_REGION = 5; // Kalos
 
 export const TotalPokemonsPerRegion = [
     151, // 151 - Kanto
@@ -26,7 +26,11 @@ export const TotalPokemonsPerRegion = [
     649, // 156 - Unova
     721, // 72 - Kalos
     809, // 88 - Alola
-    893, // 84 - Galar
+    890, // 81 - Galar
+    // TODO: figure out a better way to handle DLC/non main regions
+    893, // 3 - Armor
+    898, // 5 - Crown
+
 ];
 
 export const ITEM_USE_TIME = 30;
@@ -117,14 +121,17 @@ export enum AchievementType {
 
 export enum DungeonTile {
     empty,
+    entrance,
     enemy,
     chest,
     boss,
 }
 
 // Held item chance
-export const ROUTE_HELD_ITEM_CHANCE = 512;
-export const DUNGEON_HELD_ITEM_CHANCE = 128;
+export const ROUTE_HELD_ITEM_MODIFIER = 1;
+export const DUNGEON_HELD_ITEM_MODIFIER = 4;
+export const HELD_ITEM_CHANCE = 512;
+export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 
 // Shards from battle
 export const DUNGEON_SHARDS = 3;
@@ -175,6 +182,7 @@ export const GAIN_TOKENS_BASE_REWARD = CAPTURE_POKEMONS_BASE_REWARD / 13;
 
 // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
 export const MINE_LAYERS_BASE_REWARD = questBase * 720;
+export const MINE_ITEMS_BASE_REWARD = questBase * 210;
 
 // not balanced at all for some oak items
 export const USE_OAK_ITEM_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD;
@@ -184,22 +192,6 @@ export const ACTIVE_QUEST_MULTIPLIER = 4;
 // Some active quests may be quicker if passive pokemon attack is used instead of active clicking
 // This number is used to estimate time taken in terms of clicks, for reward calculation
 export const QUEST_CLICKS_PER_SECOND = 5;
-
-export const QuestTypes = [
-    'DefeatPokemons',
-    'CapturePokemons',
-    'GainMoney',
-    'GainTokens',
-    'GainShards',
-    'HatchEggs',
-    'MineLayers',
-    'CatchShinies',
-    'DefeatGym',
-    'DefeatDungeon',
-    'UsePokeball',
-    'UseOakItem',
-    'HarvestBerriesQuest',
-];
 
 export const QUESTS_PER_SET = 10;
 
@@ -260,6 +252,10 @@ export enum TypeEffectivenessValue {
     Very = 2,
 }
 
+export function cleanHTMLString(str: string): string {
+    return str.replace(/([|&;$%@"<>()+,])/g, (c: string) => `&#${c.charCodeAt(0)};`);
+}
+
 export function humanifyString(str: string): string {
     return str.replace(/[_-]+/g, ' ');
 }
@@ -281,6 +277,39 @@ export function formatTime(input: number | Date): string {
     const seconds: any = `${time - (hours * 3600) - (minutes * 60)}`.padStart(2, '0');
 
     return `${hours}:${minutes}:${seconds}`;
+}
+
+export function formatTimeFullLetters(input: number): string {
+    // Temporarily recast to number until everything is in modules
+    if (Number.isNaN(Number(input)) || input === 0) { return '-'; }
+    let time = Math.abs(input * 1000);
+    const times = [];
+
+    if (time >= WEEK) {
+        const weeks = Math.floor(time / WEEK);
+        times.push(`${weeks}w`.padStart(3, '0'));
+        time %= WEEK;
+    }
+    if (time >= DAY || times.length) {
+        const days = Math.floor(time / DAY);
+        times.push(`${days}d`.padStart(3, '0'));
+        time %= DAY;
+    }
+    if (time >= HOUR || times.length) {
+        const hours = Math.floor(time / HOUR);
+        times.push(`${hours}h`.padStart(3, '0'));
+        time %= HOUR;
+    }
+    if (time >= MINUTE || times.length) {
+        const minutes = Math.floor(time / MINUTE);
+        times.push(`${minutes}m`.padStart(3, '0'));
+        time %= MINUTE;
+    }
+    if (time >= SECOND || times.length) {
+        const seconds = Math.floor(time / SECOND);
+        times.push(`${seconds}s`.padStart(3, '0'));
+    }
+    return times.slice(0, 3).join(' ');
 }
 
 export function formatTimeShortWords(input: number): string {
@@ -368,6 +397,9 @@ export enum Region {
     kalos = 5,
     alola = 6,
     galar = 7,
+    // TODO: figure out a better way to handle DLC/non main regions
+    armor = 8,
+    crown = 9,
 }
 
 export function randomIntBetween(min: number, max: number): number {
@@ -426,7 +458,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Hulbury', 5, 6, 8, 9, 19, 21]),
     },
 
     Ice: {
@@ -437,7 +469,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Giant Chasm']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Circhester', 20, 23, 24]),
     },
 
     Forest: {
@@ -448,7 +480,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set([6, 'Lostlorn Forest', 'Pinwheel Forest', 'Pledge Grove', 'Floccesy Town']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Slumbering Weald', 'Inner Slumbering Weald', 'Glimwood Tangle', 'Ballonlea', 4]),
     },
 
     Cave: {
@@ -459,7 +491,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Seaside Cave', 'Twist Mountain', 'Reversal Mountain', 'Relic Passage', 'Relic Castle', 'Victory Road Unova']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Watchtower Ruins']),
     },
 
     GemCave: {
@@ -470,7 +502,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2']),
     },
 
     PowerPlant: {
@@ -481,7 +513,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Motostoke', 'Spikemuth']),
     },
 
     Mansion: {
@@ -492,14 +524,14 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Castelia City', 'Liberty Garden', 'Dreamyard', 'Mistralton City', 'Opelucid City']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side']),
     },
 
     Graveyard: {
         [Region.kanto]: new Set(['Saffron City', 'Pokemon Tower']),
         [Region.johto]: new Set(['Ecruteak City']),
         [Region.hoenn]: new Set(['Mossdeep City', 'Mt. Pyre']),
-        [Region.sinnoh]: new Set(['Hearthome City']),
+        [Region.sinnoh]: new Set(['Hearthome City', 'Solaceon Ruins', 'Distortion World']),
         [Region.unova]: new Set(['Celestial Tower']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
@@ -586,6 +618,9 @@ export enum PokemonItemType {
     'Meloetta (pirouette)',
     'Type: Null',
     'Poipole',
+    'Toxel',
+    'Eternatus',
+    'Slowpoke (Galar)',
 }
 
 export enum PokeBlockColor {
@@ -646,6 +681,8 @@ export const FossilToPokemon = {
     'Skull Fossil': 'Cranidos',
     'Cover Fossil': 'Tirtouga',
     'Plume Fossil': 'Archen',
+    'Jaw Fossil': 'Tyrunt',
+    'Sail Fossil': 'Amaura',
 };
 
 // Used for image name
@@ -659,6 +696,8 @@ export const PokemonToFossil = {
     Cranidos: 'Skull Fossil',
     Tirtouga: 'Cover Fossil',
     Archen: 'Plume Fossil',
+    Tyrunt: 'Jaw Fossil',
+    Amaura: 'Sail Fossil',
 };
 
 // For random quest, name matches entry in gymList (created in Gym.ts)
@@ -773,6 +812,21 @@ export const AlolaGyms = [
     'Champion Hao',
 ];
 
+export const GalarGyms = [
+    'Turffield',
+    'Hulbury',
+    'Motostoke',
+    'Stow-On-Side',
+    'Ballonlea',
+    'Circhester',
+    'Spikemuth',
+    'Hammerlocke',
+    'Trainer Marnie',
+    'Trainer Hop',
+    'Trainer Bede',
+    'Champion Leon',
+];
+
 export const RegionGyms = [
     KantoGyms,
     JohtoGyms,
@@ -781,10 +835,15 @@ export const RegionGyms = [
     UnovaGyms,
     KalosGyms,
     AlolaGyms,
+    GalarGyms,
 ];
 
 export function getGymIndex(gym: string): number {
     return RegionGyms.flat().findIndex((g) => g === gym);
+}
+
+export function getGymRegion(gym: string): Region {
+    return RegionGyms.findIndex((gyms) => gyms.find((g) => g === gym));
 }
 
 export const KantoDungeons = [
@@ -868,6 +927,7 @@ export const SinnohDungeons = [
     'Old Chateau',
     'Wayward Cave',
     'Mt. Coronet South',
+    'Solaceon Ruins',
     'Iron Island',
     'Mt. Coronet North',
     'Lake Verity',
@@ -916,9 +976,9 @@ export const KalosDungeons = [
     'Glittering Cave',
     'Reflection Cave',
     // 'Tower of Mastery',
-    // 'Sea Spirit's Den',
-    // 'Kalos Power Plant',
-    // 'Pokéball Factory',
+    'Sea Spirit\'s Den',
+    'Kalos Power Plant',
+    'Pokéball Factory',
     'Lost Hotel',
     'Frost Cavern',
     'Team Flare Secret HQ',
@@ -959,6 +1019,18 @@ export const AlolaDungeons = [
     'Resolution Cave',
 ];
 
+export const GalarDungeons = [
+    'Slumbering Weald',
+    'Inner Slumbering Weald',
+    'Galar Mine',
+    'Galar Mine No. 2',
+    'Glimwood Tangle',
+    'Rose Tower',
+    'Watchtower Ruins',
+    'Dusty Bowl',
+    'Lake of Outrage',
+];
+
 export const RegionDungeons = [
     KantoDungeons,
     JohtoDungeons,
@@ -967,10 +1039,15 @@ export const RegionDungeons = [
     UnovaDungeons,
     KalosDungeons,
     AlolaDungeons,
+    GalarDungeons,
 ];
 
 export function getDungeonIndex(dungeon: string): number {
     return RegionDungeons.flat().findIndex((d) => d === dungeon);
+}
+
+export function getDungeonRegion(dungeon: string): Region {
+    return RegionDungeons.findIndex((dungeons) => dungeons.find((d) => d === dungeon));
 }
 
 export const StartingTowns = [
@@ -981,7 +1058,7 @@ export const StartingTowns = [
     'Aspertia City', // Unova
     'Vaniville Town', // Kalos
     'Iki Town', // Alola
-    '', // Galar
+    'Postwick', // Galar
 ];
 
 export const DockTowns = [
@@ -992,5 +1069,5 @@ export const DockTowns = [
     'Castelia City', // Unova
     'Coumarine City', // Kalos
     'Hau\'oli City', // Alola
-    '', // Galar
+    'Hulbury', // Galar
 ];

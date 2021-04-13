@@ -17,12 +17,14 @@ class Game {
      */
     constructor(
         public update: Update,
+        public profile: Profile,
         public breeding: Breeding,
         public pokeballs: Pokeballs,
         public wallet: Wallet,
         public keyItems: KeyItems,
         public badgeCase: BadgeCase,
         public oakItems: OakItems,
+        public oakItemLoadouts: OakItemLoadouts,
         public categories: PokemonCategories,
         public party: Party,
         public shards: Shards,
@@ -35,6 +37,7 @@ class Game {
         public specialEvents: SpecialEvents,
         public discord: Discord,
         public achievementTracker: AchievementTracker,
+        public challenges: Challenges,
         public multiplier: Multiplier
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
@@ -45,7 +48,7 @@ class Game {
     }
 
     load() {
-        const saveJSON = localStorage.getItem('save');
+        const saveJSON = localStorage.getItem(`save${Save.key}`);
 
         const saveObject = JSON.parse(saveJSON || '{}');
 
@@ -61,6 +64,7 @@ class Game {
     }
 
     initialize() {
+        this.profile.initialize();
         this.breeding.initialize();
         this.pokeballs.initialize();
         this.keyItems.initialize();
@@ -75,16 +79,19 @@ class Game {
         this.farming.resetAuras();
         //Safari.load();
         Underground.energyTick(this.underground.getEnergyRegenTime());
-        DailyDeal.generateDeals(this.underground.getDailyDealsMax(), new Date());
-        BerryDeal.generateDeals(new Date());
-        Weather.generateWeather(new Date());
+
+        const now = new Date();
+        DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
+        BerryDeal.generateDeals(now);
+        Weather.generateWeather(now);
+        RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
         this.gameState = GameConstants.GameState.fighting;
     }
 
     start() {
         console.log(`[${GameConstants.formatDate(new Date())}] %cGame started`, 'color:#2ecc71;font-weight:900;');
-        if (player.starter === GameConstants.Starter.None) {
+        if (player.starter() === GameConstants.Starter.None) {
             StartSequenceRunner.start();
         }
         this.interval = setInterval(this.gameTick.bind(this), GameConstants.TICK_TIME);
@@ -162,6 +169,7 @@ class Game {
             // Check if it's a new hour
             if (old.getHours() !== now.getHours()) {
                 Weather.generateWeather(now);
+                RoamingPokemonList.generateIncreasedChanceRoutes(now);
             }
 
             // Save the game

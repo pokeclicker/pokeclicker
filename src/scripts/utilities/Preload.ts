@@ -33,6 +33,7 @@ class Preload {
     }
 
     public static hideSplashScreen(fast = false) {
+        $('#game').removeClass('loading');
         if (fast) {
             $('.loader').hide();
         } else {
@@ -87,7 +88,7 @@ class Preload {
         for (const name in TownList) {
             // Skip unreleased towns unless a feature flag has enabled them
             if (
-                !(<any>window).featureFlags?.preloadUnreleasedTowns && TownList[name].region() > GameConstants.MAX_AVAILABLE_REGION
+                !(<any>window).featureFlags?.preloadUnreleasedTowns && TownList[name].region > GameConstants.MAX_AVAILABLE_REGION
             ) {
                 continue;
             }
@@ -151,7 +152,7 @@ class Preload {
                     console.warn('Failed to load image for Underground item:', item.name);
                     resolve();
                 };
-                img.src = `assets/images/underground/${item.id}.png`;
+                img.src = item.undergroundImage;
             }));
         });
         return Promise.all(p);

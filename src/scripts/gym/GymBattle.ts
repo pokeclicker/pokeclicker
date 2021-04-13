@@ -26,7 +26,7 @@ class GymBattle extends Battle {
      */
     public static generateNewEnemy() {
         this.counter = 0;
-        this.enemyPokemon(PokemonFactory.generateTrainerPokemon(this.gym.town, this.index()));
+        this.enemyPokemon(PokemonFactory.generateGymPokemon(this.gym.town, this.index()));
     }
 
     public static pokemonsDefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {

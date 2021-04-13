@@ -1,5 +1,5 @@
 <g data-bind='visible: player.region == GameConstants.Region.kanto'>
-    <image width="100%" xlink:href="assets/images/kanto.png"></image>
+    <image width="1600" height="960" xlink:href="assets/images/kanto.png" href="assets/images/kanto.png"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -544,4 +544,14 @@
         , databind: "click:function(){MapHelper.openShipModal()}, css:{ unlockedTown: player.highestRegion() >= 1}"
         })
      %>
+
+     <%- include('templates/mapOverlay',
+         { name: "SS-Anne"
+         , x: 50, y: 35
+         , width: 8, height: 3
+         , databind: "click:function(){MapHelper.openShipModal()}, css:{ unlockedTown: player.highestRegion() >= 1}"
+         , visible:  "player.highestRegion() >= 1"
+         , image: "/assets/images/ship.png"
+         })
+      %>
 </g>

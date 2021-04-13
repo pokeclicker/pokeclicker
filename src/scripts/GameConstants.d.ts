@@ -92,12 +92,15 @@ namespace GameConstants {
     }
     declare enum DungeonTile {
         empty,
+        entrance,
         enemy,
         chest,
-        boss
+        boss,
     }
-    declare const ROUTE_HELD_ITEM_CHANCE: number;
-    declare const DUNGEON_HELD_ITEM_CHANCE: number;
+    declare const ROUTE_HELD_ITEM_MODIFIER: number;
+    declare const DUNGEON_HELD_ITEM_MODIFIER: number;
+    declare const HELD_ITEM_CHANCE: number;
+    declare const HELD_UNDERGROUND_ITEM_CHANCE: number;
     declare const DUNGEON_SHARDS: number;
     declare const DUNGEON_BOSS_SHARDS: number;
     declare const GYM_SHARDS: number;
@@ -112,10 +115,10 @@ namespace GameConstants {
     declare const CAPTURE_POKEMONS_BASE_REWARD: number;
     declare const GAIN_TOKENS_BASE_REWARD: number;
     declare const MINE_LAYERS_BASE_REWARD: number;
+    declare const MINE_ITEMS_BASE_REWARD: number;
     declare const USE_OAK_ITEM_BASE_REWARD: number;
     declare const ACTIVE_QUEST_MULTIPLIER: number;
     declare const QUEST_CLICKS_PER_SECOND: number;
-    declare const QuestTypes: string[];
     declare const QUESTS_PER_SET: number;
     declare enum GameState {
         idle,
@@ -175,7 +178,9 @@ namespace GameConstants {
         unova,
         kalos,
         alola,
-        galar
+        galar,
+        armor,
+        crown
     }
     declare function randomIntBetween(min: number, max: number): number;
     declare function randomElement(array: any[]): any;
@@ -257,6 +262,9 @@ namespace GameConstants {
         'Cherubi',
         'Zorua',
         'Meloetta (pirouette)',
+        'Toxel',
+        'Eternatus',
+        'Slowpoke (Galar)'
     }
     declare enum PokeBlockColor {
         Black,
@@ -310,6 +318,8 @@ namespace GameConstants {
         'Skull Fossil': string;
         'Cover Fossil': string;
         'Plume Fossil': string;
+        'Jaw Fossil': string;
+        'Sail Fossil': string;
     };
     declare const PokemonToFossil: {
         Omanyte: string;
@@ -321,6 +331,8 @@ namespace GameConstants {
         Cranidos: string;
         Tirtouga: string;
         Archen: string;
+        Tyrunt: string;
+        Amaura: string;
     };
     declare const KantoGyms: string[];
     declare const JohtoGyms: string[];
@@ -328,16 +340,20 @@ namespace GameConstants {
     declare const SinnohGyms: string[];
     declare const UnovaGyms: string[];
     declare const KalosGyms: string[];
+    declare const GalarGyms: string[];
     declare const RegionGyms: string[][];
     declare function getGymIndex(gym: string): number;
+    declare function getGymRegion(gym: string): Region;
     declare const KantoDungeons: string[];
     declare const JohtoDungeons: string[];
     declare const HoennDungeons: string[];
     declare const SinnohDungeons: string[];
     declare const UnovaDungeons: string[];
     declare const KalosDungeons: string[];
+    declare const GalarDungeons: string[];
     declare const RegionDungeons: string[][];
     declare function getDungeonIndex(dungeon: string): number;
+    declare function getDungeonRegion(dungeon: string): Region;
     declare const StartingTowns: string[];
     declare const DockTowns: string[];
 }

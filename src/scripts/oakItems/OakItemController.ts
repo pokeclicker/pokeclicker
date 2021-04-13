@@ -10,6 +10,11 @@ class OakItemController {
             App.game.oakItems.deactivate(item);
             return;
         }
+
+        if (App.game.challenges.list.disableOakItems.active()) {
+            return;
+        }
+
         App.game.oakItems.activate(item);
     }
 
@@ -37,4 +42,3 @@ class OakItemController {
         this._selectedItem(item);
     }
 }
-

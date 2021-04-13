@@ -8,9 +8,7 @@ class DungeonRunner {
 
     public static fighting: KnockoutObservable<boolean> = ko.observable(false);
     public static map: DungeonMap;
-    public static pokemonDefeated: number;
     public static chestsOpened: number;
-    public static loot: string[];
     public static currentTileType;
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
     public static defeatedBoss: KnockoutObservable<boolean> = ko.observable(false);
@@ -33,9 +31,7 @@ class DungeonRunner {
 
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
         DungeonRunner.map = new DungeonMap(GameConstants.DUNGEON_SIZE + player.region);
-        DungeonRunner.pokemonDefeated = 0;
         DungeonRunner.chestsOpened = 0;
-        DungeonRunner.loot = [];
         DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
         });
@@ -55,6 +51,21 @@ class DungeonRunner {
         }
         this.timeLeft(this.timeLeft() - GameConstants.DUNGEON_TICK);
         this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.DUNGEON_TIME * 100));
+    }
+
+    /**
+     * Handles the click event in the dungeon view
+     */
+    public static handleClick() {
+        if (DungeonRunner.fighting() && !DungeonBattle.catching()) {
+            DungeonBattle.clickAttack();
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
+            DungeonRunner.dungeonLeave();
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
+            DungeonRunner.openChest();
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
+            DungeonRunner.startBossFight();
+        }
     }
 
     public static openChest() {
@@ -96,12 +107,23 @@ class DungeonRunner {
         DungeonBattle.generateNewBoss();
     }
 
+    public static dungeonLeave() {
+        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.entrance || DungeonRunner.dungeonFinished() || !DungeonRunner.map.playerMoved()) {
+            return;
+        }
+
+        DungeonRunner.dungeonFinished(true);
+        DungeonRunner.fighting(false);
+        DungeonRunner.fightingBoss(false);
+        MapHelper.moveToTown(DungeonRunner.dungeon.name);
+    }
+
     private static dungeonLost() {
         if (!DungeonRunner.dungeonFinished()) {
             DungeonRunner.dungeonFinished(true);
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
-            MapHelper.moveToTown(DungeonRunner.dungeon.name());
+            MapHelper.moveToTown(DungeonRunner.dungeon.name);
             Notifier.notify({
                 message: 'You could not complete the dungeon in time',
                 type: NotificationConstants.NotificationOption.danger,
@@ -112,8 +134,8 @@ class DungeonRunner {
     public static dungeonWon() {
         if (!DungeonRunner.dungeonFinished()) {
             DungeonRunner.dungeonFinished(true);
-            GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name())]);
-            MapHelper.moveToTown(DungeonRunner.dungeon.name());
+            GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]);
+            MapHelper.moveToTown(DungeonRunner.dungeon.name);
             // TODO award loot with a special screen
             Notifier.notify({
                 message: 'You have successfully completed the dungeon',
@@ -127,7 +149,7 @@ class DungeonRunner {
     })
 
     public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
-        const possiblePokemon: PokemonNameType[] = dungeon.allAvailablePokemonNames;
+        const possiblePokemon: PokemonNameType[] = dungeon.allPokemon;
         return RouteHelper.listCompleted(possiblePokemon, includeShiny);
     }
 

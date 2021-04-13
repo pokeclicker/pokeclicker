@@ -98,6 +98,26 @@ enum BadgeEnums {
     'Elite_Molayne',
     'Elite_Kahili',
     'Elite_AlolaChampion',
+    // Galar
+    'Galar_Grass',
+    'Galar_Water',
+    'Galar_Fire',
+    'Galar_Fighting',
+    'Galar_Fairy',
+    'Galar_Rock',
+    'Galar_Dark',
+    'Galar_Dragon',
+    'Elite_Marnie',
+    'Elite_Hop',
+    'Elite_Bede',
+    'Elite_GalarChampion',
+    // TODO: figure out a better way to handle DLC/non main regions
+    // Armor
+    'Armor_Poison',
+    'Armor_Psychic',
+    'Elite_ArmorChampion',
+    // Crown
+    'Elite_CrownChampion',
 }
 
 export default BadgeEnums;

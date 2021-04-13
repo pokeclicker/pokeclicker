@@ -6,7 +6,8 @@ class Vitamin extends Item {
         this.type = type;
     }
 
-    use() {
+    use(): boolean {
+        return true;
     }
 }
 

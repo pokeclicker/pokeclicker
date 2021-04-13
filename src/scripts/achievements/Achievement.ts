@@ -23,6 +23,8 @@ class Achievement {
             player.achievementsCompleted[this.name] = true;
             this.unlocked = true;
             AchievementHandler.filterAchievementList(true);
+            // Track when users gains an achievement and their total playtime
+            LogEvent('completed achievement', 'achievements', `completed achievement (${this.name})`, App.game.statistics.secondsPlayed());
         }
     }
 
