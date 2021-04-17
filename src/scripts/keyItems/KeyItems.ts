@@ -34,9 +34,45 @@ class KeyItems implements Feature {
                     steps: [
                         {
                             element: document.getElementById('pokeballSelector'),
-                            intro: 'Select which Pokéball types to catch Pokémon with based on their caught/shiny status.<br/><i><sup>Hover over the column titles for more info.</sup></i><br/><br/>Capturing Pokémon gains you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens.',
+                            intro: 'Select which Pokéball types to catch Pokémon with based on their caught/shiny status.<br/><i><sup>Hover over the column titles for more info.</sup></i><br/><br/>Capturing Pokémon gains you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens.<br/><br/>Try now by clicking the "Caught" selector to change it.',
                         },
                     ],
+                    exitOnEsc: false,
+                    showButtons: false,
+                });
+                const caughtSelector: HTMLElement = document.querySelector('.pokeball-small.clickable.pokeball-selected');
+                caughtSelector.addEventListener('click', () => {
+                    Information.hide();
+                    $('#pokeballSelectorModal').one('shown.bs.modal', null, () => {
+                        // Need to set a timeout, otherwise it messes up the modal layout
+                        setTimeout(() => {
+                            Information.show({
+                                steps: [
+                                    {
+                                        element: document.querySelector('#pokeballSelectorModal .modal-body'),
+                                        intro: 'Select the <img title="Pokéball" src="assets/images/pokeball/Pokeball.svg" height="25px"> Pokéball to use this type of ball to capture already caught Pokémon, which will give you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens when captured.',
+                                    },
+                                ],
+                                exitOnEsc: false,
+                                showButtons: false,
+                                // Needed for IntroJs on modals
+                                overlayOpacity: 0,
+                            });
+
+                            // Allow clicking through the IntroJs overlay (needed for modals)
+                            (document.querySelector('.introjs-overlay') as HTMLElement).style.pointerEvents = 'none';
+
+                            // Hide the IntroJS overlay once the user selects the Pokeball
+                            const selectPokeball = document.querySelectorAll('#pokeballSelectorModal .clickable')[1];
+                            selectPokeball.addEventListener('click', () => {
+                                Information.hide();
+                            },{
+                                once: true,
+                            });
+                        }, 10);
+                    });
+                },{
+                    once: true,
                 });
             }, 'Dungeon Ticket'),
             new KeyItem(KeyItems.KeyItem.Super_rod, 'The best fishing rod for catching wild water Pokémon', () => {

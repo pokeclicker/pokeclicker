@@ -681,6 +681,8 @@ export const FossilToPokemon = {
     'Skull Fossil': 'Cranidos',
     'Cover Fossil': 'Tirtouga',
     'Plume Fossil': 'Archen',
+    'Jaw Fossil': 'Tyrunt',
+    'Sail Fossil': 'Amaura',
 };
 
 // Used for image name
@@ -694,6 +696,8 @@ export const PokemonToFossil = {
     Cranidos: 'Skull Fossil',
     Tirtouga: 'Cover Fossil',
     Archen: 'Plume Fossil',
+    Tyrunt: 'Jaw Fossil',
+    Amaura: 'Sail Fossil',
 };
 
 // For random quest, name matches entry in gymList (created in Gym.ts)
