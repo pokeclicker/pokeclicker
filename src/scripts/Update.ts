@@ -429,6 +429,7 @@ class Update implements Saveable {
 
         '0.8.1': ({ playerData, saveData }) => {
             Update.updateAchievementName(playerData, 'These pokémon must be sick', 'These Pokémon must be sick');
+            Update.updateAchievementName(playerData, 'The earth is like unions', 'The earth is like onions');
         },
     };
 

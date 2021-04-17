@@ -143,7 +143,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('This is definitely not Minecraft', 'Dig up 1,000 items', new UndergroundItemsFoundRequirement(1000), 0.01);
         AchievementHandler.addAchievement('I wonder how much is down there...', 'Dig up 10,000 items', new UndergroundItemsFoundRequirement(10000), 0.01);
 
-        AchievementHandler.addAchievement('The earth is like unions', 'Dig deeper 1 time', new UndergroundLayersMinedRequirement(1), 0.01);
+        AchievementHandler.addAchievement('The earth is like onions', 'Dig deeper 1 time', new UndergroundLayersMinedRequirement(1), 0.01);
         AchievementHandler.addAchievement('This takes foreverrrrrrr', 'Dig deeper 10 times', new UndergroundLayersMinedRequirement(10), 0.01);
         AchievementHandler.addAchievement('DigDug ain\'t got nothin on me', 'Dig deeper 100 times', new UndergroundLayersMinedRequirement(100), 0.01);
         AchievementHandler.addAchievement('Both my thumbs are green! This can\'t be healthy', 'Dig deeper 1000 times', new UndergroundLayersMinedRequirement(1000), 0.01);
