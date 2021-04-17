@@ -16,7 +16,7 @@ export const MAX_LOAD_TIME = 20000; // 20 Seconds
 export const MUTATION_TICK = 1000;
 export const WANDER_TICK = 1500;
 
-export const MAX_AVAILABLE_REGION = 4; // Unova
+export const MAX_AVAILABLE_REGION = 5; // Kalos
 
 export const TotalPokemonsPerRegion = [
     151, // 151 - Kanto
@@ -182,6 +182,7 @@ export const GAIN_TOKENS_BASE_REWARD = CAPTURE_POKEMONS_BASE_REWARD / 13;
 
 // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
 export const MINE_LAYERS_BASE_REWARD = questBase * 720;
+export const MINE_ITEMS_BASE_REWARD = questBase * 210;
 
 // not balanced at all for some oak items
 export const USE_OAK_ITEM_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD;
@@ -680,6 +681,8 @@ export const FossilToPokemon = {
     'Skull Fossil': 'Cranidos',
     'Cover Fossil': 'Tirtouga',
     'Plume Fossil': 'Archen',
+    'Jaw Fossil': 'Tyrunt',
+    'Sail Fossil': 'Amaura',
 };
 
 // Used for image name
@@ -693,6 +696,8 @@ export const PokemonToFossil = {
     Cranidos: 'Skull Fossil',
     Tirtouga: 'Cover Fossil',
     Archen: 'Plume Fossil',
+    Tyrunt: 'Jaw Fossil',
+    Amaura: 'Sail Fossil',
 };
 
 // For random quest, name matches entry in gymList (created in Gym.ts)
@@ -971,9 +976,9 @@ export const KalosDungeons = [
     'Glittering Cave',
     'Reflection Cave',
     // 'Tower of Mastery',
-    // 'Sea Spirit's Den',
-    // 'Kalos Power Plant',
-    // 'Pokéball Factory',
+    'Sea Spirit\'s Den',
+    'Kalos Power Plant',
+    'Pokéball Factory',
     'Lost Hotel',
     'Frost Cavern',
     'Team Flare Secret HQ',

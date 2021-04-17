@@ -1,5 +1,4 @@
 
-///<reference path="../wallet/AmountFactory.ts"/>
 class UndergroundUpgrade extends Upgrade {
 
     constructor(

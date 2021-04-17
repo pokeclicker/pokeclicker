@@ -22,7 +22,7 @@ class EvolutionStone extends CaughtIndicatingItem {
         const unlockedEvolutions = pokemonList.filter((p: PokemonListData) => p.evolutions)
             .map((p: PokemonListData) => p.evolutions.find(e => e.type.includes(EvolutionType.Stone) && (e as StoneEvolution).stone === this.type))
             .filter(evolution => evolution)
-            .filter(evolution => PokemonHelper.calcNativeRegion(evolution.getEvolvedPokemon() as PokemonNameType) <= player.highestRegion())
+            .filter(evolution => PokemonHelper.calcNativeRegion(evolution.getEvolvedPokemon()) <= player.highestRegion())
             .map(evolution => evolution.getEvolvedPokemon());
 
         return unlockedEvolutions.reduce((status: CaughtStatus, pokemonName: PokemonNameType) => {

@@ -115,6 +115,7 @@ namespace GameConstants {
     declare const CAPTURE_POKEMONS_BASE_REWARD: number;
     declare const GAIN_TOKENS_BASE_REWARD: number;
     declare const MINE_LAYERS_BASE_REWARD: number;
+    declare const MINE_ITEMS_BASE_REWARD: number;
     declare const USE_OAK_ITEM_BASE_REWARD: number;
     declare const ACTIVE_QUEST_MULTIPLIER: number;
     declare const QUEST_CLICKS_PER_SECOND: number;
@@ -317,6 +318,8 @@ namespace GameConstants {
         'Skull Fossil': string;
         'Cover Fossil': string;
         'Plume Fossil': string;
+        'Jaw Fossil': string;
+        'Sail Fossil': string;
     };
     declare const PokemonToFossil: {
         Omanyte: string;
@@ -328,6 +331,8 @@ namespace GameConstants {
         Cranidos: string;
         Tirtouga: string;
         Archen: string;
+        Tyrunt: string;
+        Amaura: string;
     };
     declare const KantoGyms: string[];
     declare const JohtoGyms: string[];

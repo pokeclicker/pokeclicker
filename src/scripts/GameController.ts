@@ -17,39 +17,6 @@ class GameController {
         });
     }
 
-    static animateCurrency(amount: number, target) {
-        // Check if animations have been disabled
-        if (!Settings.getSetting('showCurrencyGainedAnimation').observableValue()) {
-            return;
-        }
-        let pos;
-        const targetVisible = $(`#${target}`).is(':visible');
-
-        if ($(`#${target}`).offset() && targetVisible) {
-            pos = $(`#${target}`).offset();
-            pos.top -= 15;
-        } else {
-            pos = $('#gameTitle').offset();
-            pos.top += 45;
-            pos.left -= 100;
-        }
-
-        const left = ((Math.random() * ((pos.left + 25) - (pos.left - 25)) + (pos.left - 25))).toFixed(2);
-        const place = amount.toString().length;
-        let multi = 1;
-        for (let i = 0; i < place; i++) {
-            multi *= 10;
-        }
-        const ani = `<p style="z-index:50;position:absolute;left:${left}px;top:${pos.top}px; font-size:${10 + 0.5 * Math.log(amount)}px;">+${amount.toLocaleString('en-US')}</p>`;
-        $(ani).prependTo('body').animate({
-            top: 10,
-            opacity: 0,
-        }, 200 * Math.log(amount) + 1000, 'linear',
-        function () {
-            $(this).remove();
-        });
-    }
-
     static simulateKey(code: string, type = 'keydown', modifiers = {}) {
         const evtName = type.startsWith('key') ? type : `key${type}`;
 

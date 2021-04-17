@@ -69,7 +69,7 @@ class BattleFrontierBattle extends Battle {
         // Give 1 extra shard per pokemon defeated after every 80 stages
         const shards = Math.ceil(BattleFrontierRunner.stage() / 80);
 
-        const enemyPokemon = new BattlePokemon(enemy.name, enemy.id, enemy.type[0], enemy.type[1], health, level, 0, enemy.exp, money, shiny, shards);
+        const enemyPokemon = new BattlePokemon(enemy.name, enemy.id, enemy.type[0], enemy.type[1], health, level, 0, enemy.exp, new Amount(money, GameConstants.Currency.money), shiny, shards);
         this.enemyPokemon(enemyPokemon);
     }
 }

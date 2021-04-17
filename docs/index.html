@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.7.5"></script>
+    <script src="scripts/modules.min.js?v=0.8.0"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.7.5"></script>
+    <script src="scripts/script.min.js?v=0.8.0"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.7.5" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.8.0" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -57,6 +57,8 @@
             gtag('js', new Date());
 
             gtag('config', 'UA-171657234-1');
+        } else {
+            function gtag(){};
         }
     </script>
 
@@ -820,21 +822,21 @@
                     <table width="100%">
                         <tr>
                             <td width="33.33%">
-                                <span style="display: inline;">
+                                <span style="display: inline; position: relative;">
                                     <img title="Money" src="assets/images/currency/money.svg" height="25px">
-                                    <span id="playerMoney" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.money]().toLocaleString('en-US')">0</span>
+                                    <span id="animateCurrency-money" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.money]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td width="33.33%">
-                                <span style="display: inline;">
+                                <span style="display: inline; position: relative;">
                                     <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px">
-                                    <span id="playerMoneyDungeon" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.dungeonToken]().toLocaleString('en-US')">0</span>
+                                    <span id="animateCurrency-dungeonToken" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.dungeonToken]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td width="33.33%">
-                                <span style="display: inline;">
+                                <span style="display: inline; position: relative;">
                                     <img title="Quest points" src="assets/images/currency/questPoint.svg" height="25px">
-                                    <span id="playerMoneyQuest" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">0</span>
+                                    <span id="animateCurrency-questPoint" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                         </tr>
@@ -973,7 +975,7 @@
         <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching)  -->
         <div data-bind="if: DungeonBattle.enemyPokemon">
             <div style="position:absolute; left:65%;" data-bind="if: DungeonBattle.trainer()">
-                <img data-bind="attr:{ src: DungeonBattle.trainer().image }"/>
+                <img data-bind="attr:{ src: DungeonBattle.trainer().image }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             </div>
             <div>
                 <div data-bind="ifnot: DungeonBattle.catching">
@@ -1201,10 +1203,12 @@
        <div class="col-6"></div>
        <div class="col-3 no-gutters">
            <div class="list-group" data-bind="foreach: player.town().npcs">
+               <!-- ko if: $data.isVisible() -->
                 <button class="btn btn-info"
                         data-bind="text: $data.name, click: $data.openDialog">
                     NPC
                 </button>
+                <!-- /ko -->
            </div>
         </div>
 
@@ -1216,7 +1220,7 @@
         <ul class="list-inline" data-bind="foreach: player.town().dungeon.encounterList">
           <li class="list-inline-item">
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
-            css: { 'dungeon-pokemon-locked': $data.hidden }"/>
+            css: { 'dungeon-pokemon-locked': $data.hidden }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
             <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock">
           </li>
@@ -1385,7 +1389,7 @@
                             </defs>
 
                             <g data-bind='visible: player.region == GameConstants.Region.kanto'>
-    <image width="100%" xlink:href="assets/images/kanto.png"></image>
+    <image width="1600" height="960" xlink:href="assets/images/kanto.png" href="assets/images/kanto.png"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -2448,7 +2452,7 @@
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
-    <image width="100%" xlink:href="assets/images/johto.png"></image>
+    <image width="1600" height="960" xlink:href="assets/images/johto.png" href="assets/images/johto.png"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -3563,7 +3567,7 @@
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
-    <image width="100%" xlink:href="assets/images/hoenn.png"></image>
+    <image width="1600" height="960" xlink:href="assets/images/hoenn.png" href="assets/images/hoenn.png"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -5070,7 +5074,7 @@
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
-    <image width="100%" xlink:href="assets/images/sinnoh.png"></image>
+    <image width="1600" height="960" xlink:href="assets/images/sinnoh.png" href="assets/images/sinnoh.png"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -6626,7 +6630,7 @@
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
-    <image width="100%" xlink:href="assets/images/unova.png"></image>
+    <image width="1600" height="960" xlink:href="assets/images/unova.png" href="assets/images/unova.png"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -8109,80 +8113,125 @@
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
-    <image width="100%" xlink:href="assets/images/background.png"></image>
+    <image width="1600" height="960" xlink:href="assets/images/kalos.png" href="assets/images/kalos.png"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
     <!-- ------ -->
 
+    <!--Route 1-->
     
 
 <g
+
+    transform="rotate(90 ,848, 752)"
 
     data-bind="click:function(){ MapHelper.moveToRoute(1, 5); } ">
     <rect data-route='1'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 5) }"
         height="48"
-        width="192"
-        x="0" y="0">
+        width="72"
+        x="848" y="704">
     </rect>
 
-    <text style="font-size: 32px" x="88" y="34">1</text>
+    <text style="font-size: 32px" x="876" y="738">1</text>
 
 </g>
 
 
+    <!--Route 2-->
     
 
 <g
+
+    transform="rotate(90 ,848, 656)"
 
     data-bind="click:function(){ MapHelper.moveToRoute(2, 5); } ">
     <rect data-route='2'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 5) }"
         height="48"
-        width="192"
-        x="0" y="48">
+        width="32"
+        x="848" y="608">
     </rect>
 
-    <text style="font-size: 32px" x="88" y="82">2</text>
+    <text style="font-size: 32px" x="856" y="642">2</text>
 
 </g>
 
 
+    <!--Route 3-->
     
 
 <g
+
+    transform="rotate(90 ,800, 576)"
 
     data-bind="click:function(){ MapHelper.moveToRoute(3, 5); } ">
     <rect data-route='3'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 5) }"
         height="48"
-        width="192"
-        x="0" y="96">
+        width="80"
+        x="800" y="528">
     </rect>
 
-    <text style="font-size: 32px" x="88" y="130">3</text>
+    <text style="font-size: 32px" x="832" y="562">3</text>
 
 </g>
 
 
+    <!--Route 4-->
     
 
 <g
+
+    transform="rotate(90 ,800, 416)"
 
     data-bind="click:function(){ MapHelper.moveToRoute(4, 5); } ">
     <rect data-route='4'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(4, 5) }"
         height="48"
-        width="192"
-        x="0" y="144">
+        width="96"
+        x="800" y="368">
     </rect>
 
-    <text style="font-size: 32px" x="88" y="178">4</text>
+    <text style="font-size: 32px" x="840" y="402">4</text>
 
 </g>
 
 
+    <!--Route 5-->
+    
+
+<g
+
+    transform="rotate(90 ,752, 416)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(5, 5); } ">
+    <rect data-route='5'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(5, 5) }"
+        height="48"
+        width="64"
+        x="752" y="368">
+    </rect>
+
+</g>
+
+    <!--Route 5 extras-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(5, 5); } ">
+    <rect data-route='5'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(5, 5) }"
+        height="16"
+        width="16"
+        x="752" y="400">
+    </rect>
+
+</g>
+
+    <!--Route 5 extras-->
     
 
 <g
@@ -8191,15 +8240,65 @@
     <rect data-route='5'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(5, 5) }"
         height="48"
-        width="192"
-        x="0" y="192">
+        width="96"
+        x="656" y="432">
     </rect>
 
-    <text style="font-size: 32px" x="88" y="226">5</text>
+    <text style="font-size: 32px" x="696" y="466">5</text>
+
+</g>
+
+    <!--Route 5 extras-->
+    
+
+<g
+
+    transform="rotate(90 ,656, 480)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(5, 5); } ">
+    <rect data-route='5'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(5, 5) }"
+        height="48"
+        width="80"
+        x="656" y="432">
+    </rect>
+
+</g>
+
+    <!--Route 5 extras-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(5, 5); } ">
+    <rect data-route='5'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(5, 5) }"
+        height="48"
+        width="32"
+        x="624" y="512">
+    </rect>
 
 </g>
 
 
+    <!--Route 6-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(6, 5); } ">
+    <rect data-route='6'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(6, 5) }"
+        height="64"
+        width="48"
+        x="560" y="432">
+    </rect>
+
+    <text style="font-size: 32px" x="576" y="474">6</text>
+
+</g>
+
+    <!--Route 6 extras-->
     
 
 <g
@@ -8208,15 +8307,14 @@
     <rect data-route='6'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(6, 5) }"
         height="48"
-        width="192"
-        x="0" y="240">
+        width="32"
+        x="528" y="432">
     </rect>
-
-    <text style="font-size: 32px" x="88" y="274">6</text>
 
 </g>
 
 
+    <!--Route 7-->
     
 
 <g
@@ -8225,32 +8323,36 @@
     <rect data-route='7'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(7, 5) }"
         height="48"
-        width="192"
-        x="0" y="288">
+        width="112"
+        x="448" y="512">
     </rect>
 
-    <text style="font-size: 32px" x="88" y="322">7</text>
+    <text style="font-size: 32px" x="496" y="546">7</text>
 
 </g>
 
 
+    <!--Route 8-->
     
 
 <g
+
+    transform="rotate(90 ,384, 560)"
 
     data-bind="click:function(){ MapHelper.moveToRoute(8, 5); } ">
     <rect data-route='8'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(8, 5) }"
         height="48"
-        width="192"
-        x="0" y="336">
+        width="96"
+        x="384" y="512">
     </rect>
 
-    <text style="font-size: 32px" x="88" y="370">8</text>
+    <text style="font-size: 32px" x="424" y="546">8</text>
 
 </g>
 
 
+    <!--Route 9-->
     
 
 <g
@@ -8259,15 +8361,16 @@
     <rect data-route='9'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(9, 5) }"
         height="48"
-        width="192"
-        x="0" y="384">
+        width="112"
+        x="384" y="720">
     </rect>
 
-    <text style="font-size: 32px" x="88" y="418">9</text>
+    <text style="font-size: 32px" x="432" y="754">9</text>
 
 </g>
 
 
+    <!--Route 10-->
     
 
 <g
@@ -8276,15 +8379,31 @@
     <rect data-route='10'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(10, 5) }"
         height="48"
-        width="192"
-        x="0" y="432">
+        width="208"
+        x="112" y="464">
     </rect>
 
-    <text style="font-size: 32px" x="80" y="466">10</text>
+    <text style="font-size: 32px" x="200" y="498">10</text>
+
+</g>
+
+    <!--Route 10 extras-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(10, 5); } ">
+    <rect data-route='10'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(10, 5) }"
+        height="32"
+        width="64"
+        x="320" y="464">
+    </rect>
 
 </g>
 
 
+    <!--Route 11-->
     
 
 <g
@@ -8293,15 +8412,16 @@
     <rect data-route='11'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(11, 5) }"
         height="48"
-        width="192"
-        x="0" y="480">
+        width="96"
+        x="160" y="416">
     </rect>
 
-    <text style="font-size: 32px" x="80" y="514">11</text>
+    <text style="font-size: 32px" x="192" y="450">11</text>
 
 </g>
 
 
+    <!--Route 12-->
     
 
 <g
@@ -8310,32 +8430,16 @@
     <rect data-route='12'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 5) }"
         height="48"
-        width="192"
-        x="0" y="528">
+        width="288"
+        x="272" y="320">
     </rect>
 
-    <text style="font-size: 32px" x="80" y="562">12</text>
+    <text style="font-size: 32px" x="400" y="354">12</text>
 
 </g>
 
 
-    
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(23, 5); } ">
-    <rect data-route='23'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 5) }"
-        height="48"
-        width="192"
-        x="0" y="576">
-    </rect>
-
-    <text style="font-size: 32px" x="80" y="610">23</text>
-
-</g>
-
-
+    <!--Route 13-->
     
 
 <g
@@ -8344,32 +8448,85 @@
     <rect data-route='13'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(13, 5) }"
         height="48"
-        width="192"
-        x="0" y="624">
+        width="160"
+        x="576" y="272">
     </rect>
 
-    <text style="font-size: 32px" x="80" y="658">13</text>
+    <text style="font-size: 32px" x="640" y="306">13</text>
+
+</g>
+
+    <!--Route 13 extras-->
+    
+
+<g
+
+    transform="rotate(90 ,688, 320)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(13, 5); } ">
+    <rect data-route='13'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(13, 5) }"
+        height="48"
+        width="80"
+        x="688" y="272">
+    </rect>
+
+</g>
+
+    <!--Route 13 extras-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(13, 5); } ">
+    <rect data-route='13'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(13, 5) }"
+        height="48"
+        width="32"
+        x="736" y="352">
+    </rect>
 
 </g>
 
 
+    <!--Route 14-->
     
 
 <g
+
+    transform="rotate(90 ,832, 112)"
 
     data-bind="click:function(){ MapHelper.moveToRoute(14, 5); } ">
     <rect data-route='14'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(14, 5) }"
         height="48"
-        width="192"
-        x="0" y="672">
+        width="232"
+        x="832" y="64">
     </rect>
 
-    <text style="font-size: 32px" x="80" y="706">14</text>
+    <text style="font-size: 32px" x="932" y="98">14</text>
+
+</g>
+
+    <!--Route 14 extras-->
+    
+
+<g
+
+    transform="rotate(90 ,848, 344)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(14, 5); } ">
+    <rect data-route='14'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(14, 5) }"
+        height="32"
+        width="8"
+        x="848" y="312">
+    </rect>
 
 </g>
 
 
+    <!--Route 15-->
     
 
 <g
@@ -8378,15 +8535,78 @@
     <rect data-route='15'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 5) }"
         height="48"
-        width="192"
-        x="0" y="720">
+        width="64"
+        x="976" y="48">
     </rect>
-
-    <text style="font-size: 32px" x="80" y="754">15</text>
 
 </g>
 
+    <!--Route 15 extras-->
+    
 
+<g
+
+    transform="rotate(90 ,992, 96)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 5); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 5) }"
+        height="48"
+        width="192"
+        x="992" y="48">
+    </rect>
+
+    <text style="font-size: 32px" x="1072" y="82">15</text>
+
+</g>
+
+    <!--Route 15 extras-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 5); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 5) }"
+        height="32"
+        width="160"
+        x="1040" y="240">
+    </rect>
+
+</g>
+
+    <!--Route 15 extras-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 5); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 5) }"
+        height="16"
+        width="32"
+        x="1168" y="272">
+    </rect>
+
+</g>
+
+    <!--Route 15 extras-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 5); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 5) }"
+        height="16"
+        width="64"
+        x="1040" y="272">
+    </rect>
+
+</g>
+    
+
+    <!--Route 16-->
     
 
 <g
@@ -8395,15 +8615,65 @@
     <rect data-route='16'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(16, 5) }"
         height="48"
-        width="192"
-        x="0" y="768">
+        width="176"
+        x="928" y="288">
     </rect>
 
-    <text style="font-size: 32px" x="80" y="802">16</text>
+    <text style="font-size: 32px" x="1000" y="322">16</text>
+
+</g>
+
+    <!--Route 16 extras-->
+    
+
+<g
+
+    transform="rotate(90 ,928, 336)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(16, 5); } ">
+    <rect data-route='16'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(16, 5) }"
+        height="48"
+        width="80"
+        x="928" y="288">
+    </rect>
+
+</g>
+
+    <!--Route 16 extras-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(16, 5); } ">
+    <rect data-route='16'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(16, 5) }"
+        height="48"
+        width="16"
+        x="912" y="368">
+    </rect>
 
 </g>
 
 
+    <!--Route 17-->
+    
+
+<g
+
+    transform="rotate(90 ,1120, 336)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(17, 5); } ">
+    <rect data-route='17'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(17, 5) }"
+        height="48"
+        width="80"
+        x="1120" y="288">
+    </rect>
+
+</g>
+
+    <!--Route 17 extras-->
     
 
 <g
@@ -8412,15 +8682,16 @@
     <rect data-route='17'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(17, 5) }"
         height="48"
-        width="192"
-        x="192" y="16">
+        width="64"
+        x="1168" y="368">
     </rect>
 
-    <text style="font-size: 32px" x="272" y="50">17</text>
+    <text style="font-size: 32px" x="1184" y="402">17</text>
 
 </g>
 
 
+    <!--Route 18-->
     
 
 <g
@@ -8428,16 +8699,32 @@
     data-bind="click:function(){ MapHelper.moveToRoute(18, 5); } ">
     <rect data-route='18'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 5) }"
-        height="48"
-        width="192"
-        x="192" y="64">
+        height="32"
+        width="80"
+        x="1296" y="368">
     </rect>
 
-    <text style="font-size: 32px" x="272" y="98">18</text>
+    <text style="font-size: 32px" x="1320" y="394">18</text>
+
+</g>
+
+    <!--Route 18 extras-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 5); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 5) }"
+        height="16"
+        width="32"
+        x="1296" y="400">
+    </rect>
 
 </g>
 
 
+    <!--Route 19-->
     
 
 <g
@@ -8446,15 +8733,65 @@
     <rect data-route='19'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 5) }"
         height="48"
-        width="192"
-        x="192" y="112">
+        width="80"
+        x="1248" y="416">
     </rect>
 
-    <text style="font-size: 32px" x="272" y="146">19</text>
+</g>
+
+    <!--Route 19 extras-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 5); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 5) }"
+        height="112"
+        width="48"
+        x="1248" y="464">
+    </rect>
+
+    <text style="font-size: 32px" x="1256" y="530">19</text>
+
+</g>
+
+    <!--Route 19 extras-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 5); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 5) }"
+        height="48"
+        width="32"
+        x="1216" y="528">
+    </rect>
 
 </g>
 
 
+    <!--Route 20-->
+    
+
+<g
+
+    transform="rotate(90 ,1152, 576)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(20, 5); } ">
+    <rect data-route='20'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 5) }"
+        height="48"
+        width="96"
+        x="1152" y="528">
+    </rect>
+
+    <text style="font-size: 32px" x="1184" y="562">20</text>
+
+</g>
+
+    <!--Route 20 extras-->
     
 
 <g
@@ -8463,15 +8800,14 @@
     <rect data-route='20'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 5) }"
         height="48"
-        width="192"
-        x="192" y="160">
+        width="16"
+        x="1136" y="624">
     </rect>
-
-    <text style="font-size: 32px" x="272" y="194">20</text>
 
 </g>
 
 
+    <!--Route 21-->
     
 
 <g
@@ -8480,15 +8816,16 @@
     <rect data-route='21'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(21, 5) }"
         height="48"
-        width="192"
-        x="192" y="208">
+        width="144"
+        x="1008" y="528">
     </rect>
 
-    <text style="font-size: 32px" x="272" y="242">21</text>
+    <text style="font-size: 32px" x="1064" y="562">21</text>
 
 </g>
 
 
+    <!--Route 22-->
     
 
 <g
@@ -8497,11 +8834,60 @@
     <rect data-route='22'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(22, 5) }"
         height="48"
-        width="192"
-        x="192" y="256">
+        width="160"
+        x="848" y="528">
     </rect>
 
-    <text style="font-size: 32px" x="272" y="290">22</text>
+    <text style="font-size: 32px" x="912" y="562">22</text>
+
+</g>
+
+
+    <!--Azure Bay-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(23, 5); } ">
+    <rect data-route='23'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 5) }"
+        height="48"
+        width="64"
+        x="448" y="272">
+    </rect>
+
+</g>
+
+    <!--Azure Bay extras-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(23, 5); } ">
+    <rect data-route='23'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 5) }"
+        height="48"
+        width="160"
+        x="336" y="208">
+    </rect>
+
+    <text style="font-size: 32px" x="384" y="242">A.B.</text>
+
+</g>
+<!--Azure Bay extras-->
+    
+
+<g
+
+    transform="rotate(90 ,448, 256)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(23, 5); } ">
+    <rect data-route='23'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 5) }"
+        height="48"
+        width="16"
+        x="448" y="208">
+    </rect>
 
 </g>
 
@@ -8511,26 +8897,28 @@
     <!-- TOWNS -->
     <!-- ----- -->
 
+    <!--Vaniville Town-->
     
 
 <rect class="city"
     data-town="Vaniville Town" 
-    x="576"
-    y="0"
-    height="64"
-    width="64"
+    x="832"
+    y="824"
+    height="72"
+    width="80"
     data-bind="
         click:function(){MapHelper.moveToTown('Vaniville Town')},
         attr: { class: MapHelper.calculateTownCssClass('Vaniville Town') },
         ">
 </rect>
 
+    <!--Aquacorde Town-->
     
 
 <rect class="city"
     data-town="Aquacorde Town" 
-    x="576"
-    y="64"
+    x="832"
+    y="688"
     height="64"
     width="64"
     data-bind="
@@ -8539,12 +8927,13 @@
         ">
 </rect>
 
+    <!--Santalune City-->
     
 
 <rect class="city"
     data-town="Santalune City" 
-    x="576"
-    y="128"
+    x="784"
+    y="512"
     height="64"
     width="64"
     data-bind="
@@ -8553,12 +8942,27 @@
         ">
 </rect>
 
+    <!--Lumiose City-->
     
 
 <rect class="city"
     data-town="Lumiose City" 
-    x="576"
-    y="192"
+    x="768"
+    y="344"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Lumiose City')},
+        attr: { class: MapHelper.calculateTownCssClass('Lumiose City') },
+        ">
+</rect>
+    <!--Lumiose City extras-->
+    
+
+<rect class="city"
+    data-town="Lumiose City" 
+    x="848"
+    y="352"
     height="64"
     width="64"
     data-bind="
@@ -8567,12 +8971,13 @@
         ">
 </rect>
 
+    <!--Camphrier Town-->
     
 
 <rect class="city"
     data-town="Camphrier Town" 
-    x="576"
-    y="256"
+    x="560"
+    y="496"
     height="64"
     width="64"
     data-bind="
@@ -8581,12 +8986,13 @@
         ">
 </rect>
 
+    <!--Ambrette Town-->
     
 
 <rect class="city"
     data-town="Ambrette Town" 
-    x="576"
-    y="320"
+    x="368"
+    y="656"
     height="64"
     width="64"
     data-bind="
@@ -8595,12 +9001,13 @@
         ">
 </rect>
 
+    <!--Cyllage City-->
     
 
 <rect class="city"
     data-town="Cyllage City" 
-    x="576"
-    y="384"
+    x="320"
+    y="496"
     height="64"
     width="64"
     data-bind="
@@ -8609,12 +9016,13 @@
         ">
 </rect>
 
+    <!--Geosenge Town-->
     
 
 <rect class="city"
     data-town="Geosenge Town" 
-    x="576"
-    y="448"
+    x="96"
+    y="400"
     height="64"
     width="64"
     data-bind="
@@ -8623,12 +9031,13 @@
         ">
 </rect>
 
+    <!--Shalour City-->
     
 
 <rect class="city"
     data-town="Shalour City" 
-    x="576"
-    y="512"
+    x="208"
+    y="304"
     height="64"
     width="64"
     data-bind="
@@ -8637,12 +9046,13 @@
         ">
 </rect>
 
+    <!--Coumarine City-->
     
 
 <rect class="city"
     data-town="Coumarine City" 
-    x="576"
-    y="576"
+    x="512"
+    y="256"
     height="64"
     width="64"
     data-bind="
@@ -8651,12 +9061,27 @@
         ">
 </rect>
 
+    <!--Laverre City-->
+        
+
+<rect class="city"
+    data-town="Laverre City" 
+    x="832"
+    y="40"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Laverre City')},
+        attr: { class: MapHelper.calculateTownCssClass('Laverre City') },
+        ">
+</rect>
+    <!--Laverre City extras-->
     
 
 <rect class="city"
     data-town="Laverre City" 
-    x="576"
-    y="640"
+    x="912"
+    y="48"
     height="64"
     width="64"
     data-bind="
@@ -8665,12 +9090,13 @@
         ">
 </rect>
 
+    <!--Dendemille Town-->
     
 
 <rect class="city"
     data-town="Dendemille Town" 
-    x="576"
-    y="704"
+    x="1104"
+    y="272"
     height="64"
     width="64"
     data-bind="
@@ -8679,12 +9105,13 @@
         ">
 </rect>
 
+    <!--Anistar City-->
     
 
 <rect class="city"
     data-town="Anistar City" 
-    x="576"
-    y="768"
+    x="1232"
+    y="352"
     height="64"
     width="64"
     data-bind="
@@ -8693,12 +9120,13 @@
         ">
 </rect>
 
+    <!--Couriway Town-->
     
 
 <rect class="city"
     data-town="Couriway Town" 
-    x="640"
-    y="32"
+    x="1328"
+    y="400"
     height="64"
     width="64"
     data-bind="
@@ -8707,12 +9135,13 @@
         ">
 </rect>
 
+    <!--Snowbelle City-->
     
 
 <rect class="city"
     data-town="Snowbelle City" 
-    x="640"
-    y="96"
+    x="1152"
+    y="512"
     height="64"
     width="64"
     data-bind="
@@ -8721,27 +9150,47 @@
         ">
 </rect>
 
+    <!--Pokémon League-->
     
 
 <rect class="city"
-    data-town="Pokémon League Kalos" 
-    x="640"
-    y="160"
+    data-town="Pokemon League Kalos" 
+    x="968"
+    y="352"
+    height="120"
+    width="160"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Pokemon League Kalos')},
+        attr: { class: MapHelper.calculateTownCssClass('Pokemon League Kalos') },
+        ">
+</rect>
+
+    <!--Kiloude City-->
+    
+
+<rect class="city"
+    data-town="Kiloude City" 
+    x="1168"
+    y="816"
     height="64"
     width="64"
     data-bind="
-        click:function(){MapHelper.moveToTown('Pokémon League Kalos')},
-        attr: { class: MapHelper.calculateTownCssClass('Pokémon League Kalos') },
+        click:function(){MapHelper.moveToTown('Kiloude City')},
+        attr: { class: MapHelper.calculateTownCssClass('Kiloude City') },
         ">
 </rect>
+
+    <!-- ----- -->
+    <!--DUNGEONS-->
+    <!-- ----- -->
 
     
 
 <rect class="city"
     data-town="Santalune Forest" 
-    x="640"
-    y="224"
-    height="64"
+    x="848"
+    y="608"
+    height="48"
     width="64"
     data-bind="click:function(){MapHelper.moveToTown('Santalune Forest')},
         attr: { class: MapHelper.calculateTownCssClass('Santalune Forest') }">
@@ -8751,9 +9200,9 @@
 
 <rect class="city"
     data-town="Parfum Palace" 
-    x="640"
-    y="288"
-    height="64"
+    x="464"
+    y="432"
+    height="48"
     width="64"
     data-bind="click:function(){MapHelper.moveToTown('Parfum Palace')},
         attr: { class: MapHelper.calculateTownCssClass('Parfum Palace') }">
@@ -8763,9 +9212,9 @@
 
 <rect class="city"
     data-town="Connecting Cave" 
-    x="640"
-    y="352"
-    height="64"
+    x="384"
+    y="512"
+    height="48"
     width="64"
     data-bind="click:function(){MapHelper.moveToTown('Connecting Cave')},
         attr: { class: MapHelper.calculateTownCssClass('Connecting Cave') }">
@@ -8775,9 +9224,9 @@
 
 <rect class="city"
     data-town="Glittering Cave" 
-    x="640"
-    y="416"
-    height="64"
+    x="496"
+    y="720"
+    height="48"
     width="64"
     data-bind="click:function(){MapHelper.moveToTown('Glittering Cave')},
         attr: { class: MapHelper.calculateTownCssClass('Glittering Cave') }">
@@ -8787,9 +9236,9 @@
 
 <rect class="city"
     data-town="Reflection Cave" 
-    x="640"
-    y="480"
-    height="64"
+    x="208"
+    y="368"
+    height="48"
     width="64"
     data-bind="click:function(){MapHelper.moveToTown('Reflection Cave')},
         attr: { class: MapHelper.calculateTownCssClass('Reflection Cave') }">
@@ -8798,22 +9247,10 @@
     
 
 <rect class="city"
-    data-town="Azure bay" 
-    x="640"
-    y="544"
-    height="64"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Azure bay')},
-        attr: { class: MapHelper.calculateTownCssClass('Azure bay') }">
-</rect>
-
-    
-
-<rect class="city"
     data-town="Lost Hotel" 
-    x="640"
-    y="608"
-    height="64"
+    x="928"
+    y="160"
+    height="48"
     width="64"
     data-bind="click:function(){MapHelper.moveToTown('Lost Hotel')},
         attr: { class: MapHelper.calculateTownCssClass('Lost Hotel') }">
@@ -8823,9 +9260,9 @@
 
 <rect class="city"
     data-town="Frost Cavern" 
-    x="640"
-    y="672"
-    height="64"
+    x="1200"
+    y="240"
+    height="48"
     width="64"
     data-bind="click:function(){MapHelper.moveToTown('Frost Cavern')},
         attr: { class: MapHelper.calculateTownCssClass('Frost Cavern') }">
@@ -8834,12 +9271,36 @@
     
 
 <rect class="city"
-    data-town="Team Flare Secret HQ" 
-    x="640"
-    y="736"
-    height="64"
+    data-town="Pokéball Factory" 
+    x="912"
+    y="0"
+    height="48"
     width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Team Flare Secret HQ')},
+    data-bind="click:function(){MapHelper.moveToTown('Pokéball Factory')},
+        attr: { class: MapHelper.calculateTownCssClass('Pokéball Factory') }">
+</rect>
+    
+    
+
+<rect class="city"
+    data-town="Kalos Power Plant" 
+    x="592"
+    y="320"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Kalos Power Plant')},
+        attr: { class: MapHelper.calculateTownCssClass('Kalos Power Plant') }">
+</rect>
+
+    
+
+<rect class="city"
+    data-town="Team Flare Secret HQ" 
+    x="1584"
+    y="944"
+    height="16"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Geosenge Town')},
         attr: { class: MapHelper.calculateTownCssClass('Team Flare Secret HQ') }">
 </rect>
 
@@ -8847,9 +9308,9 @@
 
 <rect class="city"
     data-town="Terminus Cave" 
-    x="704"
-    y="0"
-    height="64"
+    x="1376"
+    y="336"
+    height="48"
     width="64"
     data-bind="click:function(){MapHelper.moveToTown('Terminus Cave')},
         attr: { class: MapHelper.calculateTownCssClass('Terminus Cave') }">
@@ -8859,9 +9320,9 @@
 
 <rect class="city"
     data-town="Pokémon Village" 
-    x="704"
-    y="64"
-    height="64"
+    x="1072"
+    y="624"
+    height="48"
     width="64"
     data-bind="click:function(){MapHelper.moveToTown('Pokémon Village')},
         attr: { class: MapHelper.calculateTownCssClass('Pokémon Village') }">
@@ -8871,9 +9332,9 @@
 
 <rect class="city"
     data-town="Victory Road Kalos" 
-    x="704"
-    y="128"
-    height="64"
+    x="976"
+    y="480"
+    height="48"
     width="64"
     data-bind="click:function(){MapHelper.moveToTown('Victory Road Kalos')},
         attr: { class: MapHelper.calculateTownCssClass('Victory Road Kalos') }">
@@ -8882,85 +9343,13 @@
     
 
 <rect class="city"
-    data-town="Pokemon League Kalos" 
-    x="704"
-    y="192"
-    height="64"
+    data-town="Sea Spirit&#39;s Den" 
+    x="272"
+    y="208"
+    height="48"
     width="64"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Pokemon League Kalos')},
-        attr: { class: MapHelper.calculateTownCssClass('Pokemon League Kalos') },
-        ">
-</rect>
-
-    
-
-<rect class="city"
-    data-town="Pokemon League Kalos" 
-    x="704"
-    y="256"
-    height="64"
-    width="64"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Pokemon League Kalos')},
-        attr: { class: MapHelper.calculateTownCssClass('Pokemon League Kalos') },
-        ">
-</rect>
-
-    
-
-<rect class="city"
-    data-town="Pokemon League Kalos" 
-    x="704"
-    y="320"
-    height="64"
-    width="64"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Pokemon League Kalos')},
-        attr: { class: MapHelper.calculateTownCssClass('Pokemon League Kalos') },
-        ">
-</rect>
-
-    
-
-<rect class="city"
-    data-town="Pokemon League Kalos" 
-    x="704"
-    y="384"
-    height="64"
-    width="64"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Pokemon League Kalos')},
-        attr: { class: MapHelper.calculateTownCssClass('Pokemon League Kalos') },
-        ">
-</rect>
-
-    
-
-<rect class="city"
-    data-town="Pokemon League Kalos" 
-    x="704"
-    y="448"
-    height="64"
-    width="64"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Pokemon League Kalos')},
-        attr: { class: MapHelper.calculateTownCssClass('Pokemon League Kalos') },
-        ">
-</rect>
-
-    
-
-<rect class="city"
-    data-town="Pokemon League Kalos" 
-    x="704"
-    y="512"
-    height="64"
-    width="64"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Pokemon League Kalos')},
-        attr: { class: MapHelper.calculateTownCssClass('Pokemon League Kalos') },
-        ">
+    data-bind="click:function(){MapHelper.moveToTown('Sea Spirit\&#39;s Den')},
+        attr: { class: MapHelper.calculateTownCssClass('Sea Spirit\&#39;s Den') }">
 </rect>
 
     <!-- ------------------ -->
@@ -8971,17 +9360,17 @@
 
 <rect class="city"
     data-town="Dock" 
-    x="1536"
-    y="0"
+    x="512"
+    y="192"
     height="64"
-    width="64"
-    data-bind="click:function(){MapHelper.openShipModal()}">
+    width="48"
+    data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Coumarine City&#39;) }">
 </rect>
 
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.alola'>
-    <image width="100%" xlink:href="assets/images/background.png"></image>
+    <image width="1600" height="960" xlink:href="assets/images/background.png" href="assets/images/background.png"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -10093,7 +10482,7 @@
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.galar'>
-    <image width="100%" xlink:href="assets/images/galar.png"></image>
+    <image width="1600" height="960" xlink:href="assets/images/galar.png" href="assets/images/galar.png"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -11206,6 +11595,20 @@
         <!-- /ko -->
       </table>
     </div>
+    <!-- ko if: !App.game.challenges.list.disableOakItems.active() -->
+    <div id="oakItemLoadout">
+      <table class="table table-bordered table-striped m-0">
+        <tr data-bind="foreach: App.game.oakItemLoadouts.loadouts">
+          <td class="p-1 tight">
+            <button class='btn btn-block btn-primary' style="height: 100%;"
+              data-bind='click: function(){ App.game.oakItemLoadouts.activateLoadout($index()) }, text: $index() + 1'>
+              1
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- /ko -->
 </div>
 
 
@@ -11693,102 +12096,143 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
 
 <!-- Oak Items Modal-->
 <div class="modal fade noselect" id="oakItemsModal" tabindex="-1" role="dialog" aria-badgeledby="oakItemsModal">
-    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
-       <div class="modal-content">
-           <div class="modal-header">
-               <h5 data-bind="text: 'Oak Items Equipped: ' + App.game.oakItems.activeCount() + '/' + App.game.oakItems.maxActiveCount()">Oak Items</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                   <span aria-hidden="true">&times;</span>
-               </button>
-           </div>
-           <div data-bind="visible: App.game.challenges.list.disableOakItems.active()" class="modal-body bg-danger my-0 py-0">
-              Oak Items are disabled.
-           </div>
-           <div class="modal-body py-1">
-              <ul class="row justify-content-center p-0 my-0"
-                data-bind="foreach: App.game.oakItems.itemList"
-                style="list-style-type: none;">
+  <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header p-0">
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a data-toggle='tab' class='p-2 nav-link active' href="#oakItemSelector">Selector</a></li>
+            <li class='nav-item'><a data-toggle='tab' class='p-2 nav-link' href="#oakItemLoadouts">Loadouts</a></li>
+        </ul>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div data-bind="visible: App.game.challenges.list.disableOakItems.active()" class="modal-body bg-danger my-0 py-0">
+        Oak Items are disabled.
+      </div>
+      <div class="modal-body tab-content">
+          <div id="oakItemSelector" class="tab-pane fade in active show">
+            <div class="modal-header">
+              <h5 style="position: left" data-bind="text: 'Oak Items Equipped: ' + App.game.oakItems.activeCount() + '/' + App.game.oakItems.maxActiveCount()">Oak Items</h5>
+            </div>
+            <ul class="row justify-content-center p-0 my-0"
+              data-bind="foreach: App.game.oakItems.itemList"
+              style="list-style-type: none;">
+                <!-- ko if: $index() % 4 == 0 -->
+                <div class="w-100"></div>
+                <!-- /ko -->
+                <li class="col p-1">
+                    <button class="p-0 btn"
+                        data-bind="css: {
+                           'btn-primary': $data.isActive,
+                           'btn-outline-secondary': !$data.isActive
+                         }">
+                        <img class="clickable" style="width: 80%;" src=""
+                             data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
+                              css: {
+                                'oak-item-locked': !App.game.oakItems.isUnlocked($data.name)
+                              },
+                              event: {
+                                mouseover: function(){OakItemController.hover($data.name)},
+                                click: function(){OakItemController.click($data.name);},
+                              }">
+                    </button>
+                </li>
+            </ul>
+          </div>
+          <div id="oakItemLoadouts" class="tab-pane fade">
+            <div class="modal-header p-1">
+              <select name="loadoutSelector" autocomplete="off" class="custom-select"
+                onchange="App.game.oakItemLoadouts.selectedLoadout(this.value)"
+                data-bind="foreach: App.game.oakItemLoadouts.loadouts">
+                  <option data-bind="text: `Loadout ${$index() + 1}`, value: $index(), attr:{ selected: App.game.oakItemLoadouts.selectedLoadout() == $data.value}"></option>
+              </select>
+            </div>
+            <ul class="row justify-content-center p-0 my-0"
+              data-bind="foreach: App.game.oakItems.itemList"
+              style="list-style-type: none;">
                   <!-- ko if: $index() % 4 == 0 -->
                   <div class="w-100"></div>
                   <!-- /ko -->
                   <li class="col p-1">
-                      <button class="p-0 btn"
-                          data-bind="css: {
-                             'btn-primary': $data.isActive,
-                             'btn-outline-secondary': !$data.isActive
-                           }">
-                          <img class="clickable" style="width: 80%;" src=""
-                               data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
-                                css: {
-                                  'oak-item-locked': !App.game.oakItems.isUnlocked($data.name)
-                                },
-                                event: {
-                                  mouseover: function(){OakItemController.hover($data.name)},
-                                  click: function(){OakItemController.click($data.name);},
-                                }">
-                        </button>
-                    </li>
-                </ul>
-          </div>
-          <div class="modal-footer p-0">
-              <table class="table table-bordered text-center m-0">
-                <thead>
-                  <th colspan="2">
-                    <strong data-bind="text: GameConstants.humanifyString(OakItems.OakItem[OakItemController.inspectedItem])"></strong>
-                  </th>
-                </thead>
-                <tbody>
-                  <!-- ko if: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
-                  <tr>
-                    <td colspan="2" data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].description"></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2" class="p-0">
-                      <div class="progress" style="height: 40px;">
-                          <div class="progress-bar bg-primary" role="progressbar"
-                              data-bind="attr:{ style: 'width:' + (App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() ? 100 : App.game.oakItems.itemList[OakItemController.inspectedItem].expPercentage) + '%' },
-                                 css: {
-                                   'bg-success': App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() && !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(),
-                                   'bg-primary': !App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() || App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(),
-                                 }"
-                              aria-valuemin="0" aria-valuemax="100">
-                              <!-- ko if: !App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() && !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
-                              <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].progressString" style="font-size: 15px;"></span>
-                              <!-- /ko -->
-                              <!-- ko if: App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() && !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
-                              <span class="clickable" data-bind="html: 'Upgrade (' + App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/' + GameConstants.Currency[App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().currency] + '.svg height=18px/>)',
-                                click: function(){ App.game.oakItems.itemList[OakItemController.inspectedItem].buy(); }" style="font-size: 15px;">
-                                Upgrade
-                              </span>
-                              <!-- /ko -->
-                              <!-- ko if: App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
-                              <span style="font-size: 15px;">MAX LEVEL!</span>
-                              <!-- /ko -->
-                          </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="table-dark" style="width: 50%">
-                      Level: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].level"></span>
-                    </td>
-                    <td class="table-dark" style="width: 50%">
-                      Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].bonusText"></span>
-                    </td>
-                  </tr>
-                  <!-- /ko -->
-                  <!-- ko ifnot: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
-                  <tr>
-                    <td colspan="2">Locked!<br/><span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].hint()"></span></td>
-                  </tr>
-                  <tr>
-
-                  </tr>
-                  <!-- /ko -->
-                </tbody>
-              </table>
+                    <button class="p-0 btn"
+                        data-bind="css: {
+                          'btn-primary': App.game.oakItemLoadouts.hasItem($index())(),
+                          'btn-outline-secondary': !App.game.oakItemLoadouts.hasItem($index())(),
+                        }">
+                        <img class="clickable" style="width: 80%;" src=""
+                            data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
+                              css: {
+                                'oak-item-locked': !App.game.oakItems.isUnlocked($data.name)
+                              },
+                              event: {
+                                mouseover: function(){OakItemController.hover($data.name)},
+                                click: function(){App.game.oakItemLoadouts.toggleItem($data.name);},
+                              }">
+                      </button>
+                  </li>
+            </ul>
           </div>
       </div>
+      <div class="modal-footer p-0">
+        <table class="table table-bordered text-center m-0">
+          <thead>
+            <th colspan="2">
+              <strong data-bind="text: GameConstants.humanifyString(OakItems.OakItem[OakItemController.inspectedItem])"></strong>
+            </th>
+          </thead>
+          <tbody>
+            <!-- ko if: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
+            <tr>
+              <td colspan="2" data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].description"></td>
+            </tr>
+            <tr>
+              <td colspan="2" class="p-0">
+                <div class="progress" style="height: 40px;">
+                    <div class="progress-bar bg-primary" role="progressbar"
+                        data-bind="attr:{ style: 'width:' + (App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() ? 100 : App.game.oakItems.itemList[OakItemController.inspectedItem].expPercentage) + '%' },
+                            css: {
+                              'bg-success': App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() && !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(),
+                              'bg-primary': !App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() || App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(),
+                            }"
+                        aria-valuemin="0" aria-valuemax="100">
+                        <!-- ko if: !App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() && !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
+                        <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].progressString" style="font-size: 15px;"></span>
+                        <!-- /ko -->
+                        <!-- ko if: App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() && !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
+                        <span class="clickable" data-bind="html: 'Upgrade (' + App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/' + GameConstants.Currency[App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().currency] + '.svg height=18px/>)',
+                          click: function(){ App.game.oakItems.itemList[OakItemController.inspectedItem].buy(); }" style="font-size: 15px;">
+                          Upgrade
+                        </span>
+                        <!-- /ko -->
+                        <!-- ko if: App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
+                        <span style="font-size: 15px;">MAX LEVEL!</span>
+                        <!-- /ko -->
+                    </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="table-dark" style="width: 50%">
+                Level: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].level"></span>
+              </td>
+              <td class="table-dark" style="width: 50%">
+                Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].bonusText"></span>
+              </td>
+            </tr>
+            <!-- /ko -->
+            <!-- ko ifnot: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
+            <tr>
+              <td colspan="2">Locked!<br/><span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].hint()"></span></td>
+            </tr>
+            <tr>
+
+            </tr>
+            <!-- /ko -->
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -14173,7 +14617,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
             </table>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger mr-auto" data-bind="click: () => { if (confirm('Are you sure you want to reset all your categories?')) PokemonCategories.reset(); }">Reset</button>
+            <button type="button" class="btn btn-danger mr-auto" data-bind="click: async () => { if (await Notifier.confirm({ title: 'Reset Categories', message: 'Are you sure you want to reset all of your categories?', confirm: 'reset' })) PokemonCategories.reset(); }">Reset</button>
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
           </div>
       </div>

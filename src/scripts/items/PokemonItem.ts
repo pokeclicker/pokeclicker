@@ -25,6 +25,10 @@ class PokemonItem extends CaughtIndicatingItem {
         return PartyController.getCaughtStatusByName(this.name as PokemonNameType);
     }
 
+    get image() {
+        const subDirectory = this.imageDirectory ? `${this.imageDirectory}/` : '';
+        return `assets/images/items/${subDirectory}${this.name.replace(/[^\s\w.()-]/g, '')}.png`;
+    }
 }
 
 ItemList['Eevee']                = new PokemonItem('Eevee', 5000);
@@ -41,7 +45,7 @@ ItemList['Cherubi']              = new PokemonItem('Cherubi', 5000);
 ItemList['Spiritomb']            = new PokemonItem('Spiritomb', 5000);
 ItemList['Zorua']                = new PokemonItem('Zorua', 5000);
 ItemList['Meloetta (pirouette)'] = new PokemonItem('Meloetta (pirouette)', 150000);
-ItemList['Type null']            = new PokemonItem('Type: Null', 5000);
+ItemList['Type: Null']           = new PokemonItem('Type: Null', 5000);
 ItemList['Poipole']              = new PokemonItem('Poipole', 5000);
 ItemList['Eternatus']            = new PokemonItem('Eternatus', 10000);
 ItemList['Toxel']                = new PokemonItem('Toxel', 5000);

@@ -2,6 +2,7 @@
 
 class RoamingPokemonList {
     public static list: Partial<Record<GameConstants.Region, Array<RoamingPokemon>>> = {};
+    public static increasedChanceRoute: Array<KnockoutObservable<RegionRoute>> = new Array(GameHelper.enumLength(GameConstants.Region)).fill(0).map((route, region) => ko.observable(null));
 
     constructor() { }
 
@@ -21,6 +22,25 @@ class RoamingPokemonList {
 
     public static getRegionalRoamers(region: GameConstants.Region): Array<RoamingPokemon> {
         return RoamingPokemonList.list[region] ? RoamingPokemonList.list[region].filter(p => p.isRoaming()) : [];
+    }
+
+    public static getIncreasedChanceRouteByRegion(region: GameConstants.Region): KnockoutObservable<RegionRoute> {
+        return this.increasedChanceRoute[region];
+    }
+
+    // How many hours between when the roaming Pokemon change routes for increased chances
+    private static period = 8;
+
+    public static generateIncreasedChanceRoutes(date = new Date()) {
+        // Seed the random runmber generator
+        SeededRand.seedWithDateHour(date, this.period);
+
+        this.increasedChanceRoute.forEach((route, region) => {
+            const routes = Routes.getRoutesByRegion(region);
+            // Select a route
+            const selectedRoute = SeededRand.fromArray(routes);
+            route(selectedRoute);
+        });
     }
 }
 
@@ -47,6 +67,12 @@ RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon('Cresseli
 RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon('Tornadus', new GymBadgeRequirement(BadgeEnums.Legend)));
 RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon('Thundurus', new GymBadgeRequirement(BadgeEnums.Legend)));
 RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon('Meloetta (aria)', new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)));
+
+// Kalos
+RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon('Zapdos', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Sea Spirit\'s Den'))));
+RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon('Moltres', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Sea Spirit\'s Den'))));
+RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon('Articuno', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Sea Spirit\'s Den'))));
+RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon('Hoopa', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)));
 
 //Galar
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Galarian Articuno', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill'))));

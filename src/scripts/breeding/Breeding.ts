@@ -97,7 +97,7 @@ class Breeding implements Feature {
             ['Bagon', 'Shelgon', 'Salamence'],
             ['Gible', 'Gabite', 'Garchomp'],
             ['Deino', 'Zweilous', 'Hydreigon'],
-            [],
+            ['Goomy'],
             ['Turtonator', 'Drampa', 'Jangmo-o', 'Hakamo-o', 'Kommo-o'],
             ['Dreepy', 'Drakloak', 'Dragapult'],
         ];
@@ -245,7 +245,7 @@ class Breeding implements Feature {
         return false;
     }
 
-    public gainPokemonEgg(pokemon: PartyPokemon): boolean {
+    public gainPokemonEgg(pokemon: PartyPokemon | PokemonListData): boolean {
         if (!this.hasFreeEggSlot()) {
             Notifier.notify({
                 message: 'You don\'t have any free egg slots',
@@ -254,7 +254,11 @@ class Breeding implements Feature {
             return false;
         }
         const egg = this.createEgg(pokemon.name);
-        pokemon.breeding = true;
+
+        if (pokemon instanceof PartyPokemon) {
+            pokemon.breeding = true;
+        }
+
         return this.gainEgg(egg);
     }
 

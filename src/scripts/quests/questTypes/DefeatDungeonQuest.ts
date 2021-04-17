@@ -23,7 +23,6 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         do {
             region = SeededRand.intBetween(0, player.highestRegion());
             dungeon = SeededRand.fromArray(GameConstants.RegionDungeons[region]);
-            console.log(`dungeon ${dungeon} unlocked ${TownList[dungeon].isUnlocked()}`);
         } while (!TownList[dungeon].isUnlocked() && ++attempts < 10);
         const reward = this.calcReward(amount, dungeon);
         return [amount, reward, dungeon];

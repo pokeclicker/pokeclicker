@@ -1,7 +1,6 @@
 /// <reference path="../party/evolutions/EvolutionMethods.ts" />
 /// <reference path="../party/evolutions/WeatherRestrictedLevelEvolution.ts" />
 /// <reference path="../GameConstants.d.ts" />
-/// <reference path="../party/LevelType.ts" />
 /// <reference path="../../declarations/weather/WeatherType.d.ts" />
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 /// <reference path="../../declarations/interfaces/BagItem.d.ts" />
@@ -11,7 +10,7 @@ const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
 type PokemonListData = {
   id: number;
-  name: string;
+  name: PokemonNameType;
   nativeRegion?: GameConstants.Region;
   catchRate: number;
   evolutions?: Evolution[];
@@ -1283,7 +1282,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 52.2,
-        'name': ' Galarian Meowth',
+        'name': 'Galarian Meowth',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 255,
         'type': [PokemonType.Normal],
@@ -3039,6 +3038,7 @@ const pokemonList = createPokemonArray(
             new NightTimedStoneEvolution('Eevee', 'Umbreon', GameConstants.StoneType.Soothe_bell),
             new DungeonRestrictedLevelEvolution('Lake Acuity','Eevee','Glaceon', 20),
             new DungeonRestrictedLevelEvolution('Eterna Forest', 'Eevee', 'Leafeon', 20),
+            new LevelEvolution('Eevee', 'Sylveon', 29),
         ],
         'base': {
             'hitpoints': 55,
@@ -15034,6 +15034,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 67,
         'catchRate': 120,
+        'evolutions': [new StoneEvolution('Pumpkaboo', 'Gourgeist', GameConstants.StoneType.Trade_stone)],
         'base': {
             'hitpoints': 44,
             'attack': 66,
@@ -20699,8 +20700,6 @@ const pokemonList = createPokemonArray(
     // },
 );
 
-type PokemonNameType = typeof pokemonList[number]['name'];
-
 const pokemonNameIndex = {};
 const maxEggCycles = Math.max(...pokemonList.map(p => p.eggCycles));
 
@@ -20713,7 +20712,7 @@ pokemonList.forEach(p => {
     (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
     if ((p as PokemonListData).baby) {
         (p as PokemonListData).evolutions?.forEach(evo => {
-            pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon as PokemonNameType;
+            pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon;
             const poke = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon());
             p.eggCycles = Math.round(poke.eggCycles * 0.8);
         });
@@ -20727,7 +20726,18 @@ pokemonList.forEach(p => {
     pokemonNameIndex[p.name.toLowerCase()] = p;
 });
 
-const pokemonMap: any = new Proxy(pokemonList, {
+type PokemonMapProxy
+    = Record<PokemonNameType | number, PokemonListData>
+    & {
+        random: (max?: number, min?: number) => PokemonListData,
+        randomRegion: (max?: GameConstants.Region, min?: GameConstants.Region) => PokemonListData,
+    }
+    & Array<PokemonListData>;
+
+const pokemonMap = new GenericProxy<
+    typeof pokemonList,
+    PokemonMapProxy
+>(pokemonList, {
     get: (pokemon, prop: PokemonNameType | 'random' | 'randomRegion') => {
         if (!isNaN(+prop)) {
             const id: number = +prop;
