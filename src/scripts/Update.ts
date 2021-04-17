@@ -426,6 +426,10 @@ class Update implements Saveable {
                     || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Eevee');
             }
         },
+
+        '0.8.1': ({ playerData, saveData }) => {
+            Update.updateAchievementName(playerData, 'These pokémon must be sick', 'These Pokémon must be sick');
+        },
     };
 
     constructor() {
@@ -618,6 +622,14 @@ class Update implements Saveable {
         const end = arr.splice(to);
         arr = [...arr, ...temp, ...end];
         return arr;
+    }
+
+    static updateAchievementName = (playerData, oldName, newName) => {
+        const val = playerData.achievementsCompleted[oldName];
+        if (val != undefined) {
+            playerData.achievementsCompleted[newName] = val;
+            delete playerData.achievementsCompleted[oldName];
+        }
     }
 
     static addPokemonToSaveData = (saveData, pokemonId) => {
