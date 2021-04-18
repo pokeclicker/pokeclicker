@@ -426,7 +426,7 @@ class Update implements Saveable {
                     || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Eevee');
             }
         },
-        
+
         '0.8.1': ({ playerData, saveData }) => {
             // Add Weather Institute
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 29);
