@@ -758,7 +758,6 @@ TownList['LilyCove City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
         shop: LilyCoveCityShop,
-        dungeon: dungeonList['Aqua Hideout'],
         npcs: [BigSpender],
     }
 );
