@@ -2,8 +2,8 @@
 <tileset version="1.5" tiledversion="1.5.0" name="tiles_FRLG" tilewidth="16" tileheight="16" spacing="1" margin="1" tilecount="1316" columns="28">
  <image source="tiles_FRLG.png" width="477" height="800"/>
  <wangsets>
-  <wangset name="Land Routes" type="mixed" tile="3">
-   <wangcolor name="sand path" color="#ffff00" tile="4" probability="1"/>
+  <wangset name="Paths" type="mixed" tile="3">
+   <wangcolor name="Sand Path" color="#ffff00" tile="4" probability="1"/>
    <wangcolor name="Dirt Path" color="#b68536" tile="172" probability="1"/>
    <wangcolor name="Grass Path" color="#00aa00" tile="88" probability="1"/>
    <wangcolor name="Light Grass Path" color="#00d800" tile="256" probability="1"/>
