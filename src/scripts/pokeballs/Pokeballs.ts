@@ -90,7 +90,7 @@ class Pokeballs implements Feature {
      * Checks the players preferences to see what pokéball needs to be used on the next throw.
      * Checks from the players pref to the most basic ball to see if the player has any.
      * @param id the pokemon we are trying to catch.
-     * @param isShiny if the pokémon is shiny.
+     * @param isShiny if the Pokémon is shiny.
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
     public calculatePokeballToUse(id: number, isShiny: boolean): GameConstants.Pokeball {

@@ -14,7 +14,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
             </button>
             <button type="button" class="btn btn-info"
             style="position: absolute; right: 0px; top: 0px; width: auto; height: 69px; padding: 10px;"
-            data-bind="tooltip: { title: `You can trade your level 100 pokémon for an egg of the same pokémon. Hatched pokémon will gain a ${GameConstants.BREEDING_ATTACK_BONUS}% bonus of their base attack and have a higher chance of becoming shiny!`, trigger: 'hover', placement:'left' }">
+            data-bind="tooltip: { title: `You can trade your level 100 Pokémon for an egg of the same Pokémon. Hatched Pokémon will gain a ${GameConstants.BREEDING_ATTACK_BONUS}% bonus of their base attack and have a higher chance of becoming shiny!`, trigger: 'hover', placement:'left' }">
             ?
             </button>
        </div>
@@ -111,7 +111,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     <div>
                         <!-- Check if the player has any level 100 Pokémon or if they have any eggs -->
                         <p class="bg-danger my-0" data-bind="visible: !App.game.party.hasMaxLevelPokemon()">
-                            Unfortunately, you don't have any pokémon of level 100 to breed.
+                            Unfortunately, you don't have any Pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
                         <ul class="row justify-content-center p-0" data-bind="foreach: App.game.party.caughtPokemon">

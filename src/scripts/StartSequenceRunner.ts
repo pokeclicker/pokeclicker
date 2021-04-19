@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (StartSequenceRunner.starterPicked == GameConstants.Starter.None) {
             StartSequenceRunner.noStarterCount++;
             const startersCount = StartSequenceRunner.noStarterCount >= 5 ? 'four' : 'three';
-            $('#pickStarterModalText').text(`I can't hold off all ${startersCount}! Please pick the pokémon you want to fight!`);
+            $('#pickStarterModalText').text(`I can't hold off all ${startersCount}! Please pick the Pokémon you want to fight!`);
             $('#pickStarterModal').modal('show');
             if (StartSequenceRunner.noStarterCount == 5) {
                 // Add Pikachu to the selections

@@ -143,7 +143,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('This is definitely not Minecraft', 'Dig up 1,000 items', new UndergroundItemsFoundRequirement(1000), 0.01);
         AchievementHandler.addAchievement('I wonder how much is down there...', 'Dig up 10,000 items', new UndergroundItemsFoundRequirement(10000), 0.01);
 
-        AchievementHandler.addAchievement('The earth is like unions', 'Dig deeper 1 time', new UndergroundLayersMinedRequirement(1), 0.01);
+        AchievementHandler.addAchievement('The earth is like onions', 'Dig deeper 1 time', new UndergroundLayersMinedRequirement(1), 0.01);
         AchievementHandler.addAchievement('This takes foreverrrrrrr', 'Dig deeper 10 times', new UndergroundLayersMinedRequirement(10), 0.01);
         AchievementHandler.addAchievement('DigDug ain\'t got nothin on me', 'Dig deeper 100 times', new UndergroundLayersMinedRequirement(100), 0.01);
         AchievementHandler.addAchievement('Both my thumbs are green! This can\'t be healthy', 'Dig deeper 1000 times', new UndergroundLayersMinedRequirement(1000), 0.01);
@@ -176,7 +176,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('I Should Probably Take a Break', 'Complete the Kanto Pokédex!', new CaughtUniquePokemonsByRegionRequirement(GameConstants.Region.kanto), 0.50);
 
         AchievementHandler.addAchievement('I\'d rather be shiny', 'Capture your first Shiny', new ShinyPokemonRequirement(1), 0.03);
-        AchievementHandler.addAchievement('These pokémon must be sick', 'Capture 10 unique Shinies', new ShinyPokemonRequirement(10), 0.06);
+        AchievementHandler.addAchievement('These Pokémon must be sick', 'Capture 10 unique Shinies', new ShinyPokemonRequirement(10), 0.06);
         AchievementHandler.addAchievement('Why Am I Doing This?', 'Capture 20 unique Shinies', new ShinyPokemonRequirement(20), 0.09);
         AchievementHandler.addAchievement('Why Am I Still Doing This?!', 'Capture 30 unique Shinies', new ShinyPokemonRequirement(30), 0.12);
         AchievementHandler.addAchievement('Okay fine, I can do a few more', 'Capture 40 unique Shinies', new ShinyPokemonRequirement(40), 0.15);
