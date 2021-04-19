@@ -100,7 +100,7 @@ class PokemonFactory {
     /**
      * Generate a Gym trainer pokemon based on gymName, index and the dataList.
      * @param gymName name of the gym that the player is fighting.
-     * @param index index of the pokémon that is being generated.
+     * @param index index of the Pokémon that is being generated.
      * @returns {any}
      */
     public static generateGymPokemon(gymName: string, index: number): BattlePokemon {
