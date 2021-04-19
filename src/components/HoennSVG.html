@@ -250,15 +250,15 @@
     <!--Route 124-->
     <%- include('templates/mapRoute',
         { route: 124, region: 2
-        , width: 9, height: 14
-        , x: 74, y:10
+        , width: 9, height: 10
+        , x: 74, y:14
         })
      %>
      <!--Route 124 Extension-->
      <%- include('templates/mapRoute',
          { route: 124, region: 2
-         , width: 1, height: 3
-         , x: 73, y: 10
+         , width: 5, height: 4
+         , x: 78, y: 10
          , noText: true
          })
      %>
@@ -670,6 +670,13 @@
         , x: 21, y: 11
         })
      %>
+    
+    <!--Weather Institute-->
+    <%- include('templates/mapDungeon',
+        { name: "Weather Institute"
+        , x: 35, y: 6
+        })
+     %>
 
     <!--Mt. Pyre-->
     <%- include('templates/mapDungeon',
@@ -685,6 +692,28 @@
         , width: 1, height: 3
         })
     %>
+
+    <!--Magma Hideout-->
+    <%- include('templates/mapDungeon',
+        { name: "Magma Hideout"
+        , x: 25, y: 11
+        })
+     %>
+     
+    <!--Aqua Hideout-->
+    <%- include('templates/mapDungeon',
+        { name: "Aqua Hideout"
+        , x: 74, y: 11
+        })
+     %>
+     
+    <!--Aqua Hideout Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Aqua Hideout"
+        , x: 73, y: 11
+        , width: 1, height: 2
+        })
+     %>
 
     <!--Shoal Cave-->
     <%- include('templates/mapDungeon',

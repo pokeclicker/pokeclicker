@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="3">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="3">
  <tileset firstgid="1" source="tiles_FRLG.tsx"/>
  <tileset firstgid="1317" source="tiles_Advanced.tsx"/>
  <layer id="1" name="Water Dark" width="100" height="60" tintcolor="#c8c8c8">
@@ -54,12 +54,12 @@
  </layer>
  <layer id="5" name="Routes" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXAUQAOLFEBNAaxwAfDyDGkteQY/JbGE2TBIfqFcz6Wp0UKCa4aUwyRYHsyplYplv4LQne4isglT7Er7Gl1WI5T/UBPnr2AD4jw+At6Bwb0UDkIITgQBq2/mooJlc7U3PLRiuJlXfCS2iydWJCYs1s2hy1D0qUMCVTWr1X884do0tsknUiyuZXI2GxtPqpQtXV1WbTcHAjAO1gwg3naRKUCZuXqTeWKEnFDkdTu9oP0UMYLqykInJoi4U2Y9v6W4aFz/VwIZH6iSk37N48J1Hzs9cn35ZLtKPvUxJrKkg25Cmck1Kja+nM1JWlUoXsOaaXD1x8J9Ox6oud+4l/2knHJOrIqpCXSSpJo+6A6+zapUDmLjJUq2n6V/5imQyf2alAJ2KFOxG6XS0b02oNrM3X5B1/G6I46LsJKeg0t7NKbZUJ1kCZ++lHDJIfkQ5ihP7y61j1C2d4JoctQURKZlEbabR7lkyyeouVKL+qNO3lZY1CZVKydH0sXSfzDRT9PlkgU0tOaUjiGoS5Bp5LI1XOl9PtwVGRLQweaiDZFmTQQdONmKZg536uv65vItqOEZGVTbNTUINlIxYv6j+pUYfqVqBUr5OSyZXfRlvBV2Hivh0k6NaBqD4J1l1nZbJEe27UfCTgzowg6fLho9O9EpOCjhEm8WEN01yCjhEl0WJN/2VP5cB
+   KLUv/WDAXNUQABIGEhZwaRoA/H+EXKnaGZF5xk3LFBGoWbl9ptcyzhUp4TCt6gAvDJfsYZhEJxPJsNayh6Z1Wt/CF/nsCkoiiRCLH0EDyk/Jh8CffIDAoFCPBA2AggMBCCC2AfmooJlc7X7nLThcDareKVqiydU/E4uVuWgS1B5VKIAvmxyqv75xd509ssmoFi+ZXAUNgeP6SxdWd9U2JwUTMy5UDyLcdJI6YZhx82p1Y5M+IYj0cDpF+2nEgKUrA5mYZOqFIPX0ld5O5TJVGtRYZJ3k1HsID3nHkNMzl6e/Uhal+Z1rmkgbkhRck1B58XRGllWh3sUsuCZX/5z+w9Gh2mXOeec/eZpjMrWjVau6FNWkVnfg7axK5WAmbpJV6yHqr3ojmcQ/I9JBpzgVdoNpArpvLVST2Zsv6Dp+F+RxUe4kZ3Dp3uUZW2onWZqz91EUMoRsiHHMJ7aXW8eoWzrBNTmqFkRUMomqmUTdU8nkqbvQjPojzt5WGtYklKBMgEofmfbJSWWK8vwIyGCTQN+YVXJKRxDVJOhV8lgqXulsK9ZABsh0YFJRB8myJosKmPpiMgedfqG+cL1LPSYVIPm7bJqbnNo87aZH1H+t48fq1qWUb9NCOqQ1OcXLo5cCCCiX9ecETK6+gG9fZzj9exFMhmoZgeKfjJVlWiZHpO9FxU8OyqCMni4tPjLBOzmp4QhaFDf+JOmo4QiqKCb8ya/8XQo=
   </data>
  </layer>
  <layer id="9" name="Dungeons" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXJ0OAKaQMzQAzQgUvDqpx0JJvvVop3appzXKhWWmeoIEj8Ef+P//B94NZab////6H4i4fInwIPHrDYEHIgAoACUA34LrcL7NyNfxiXwhIB+fh2kjsJU20uPY+DRGoi3UPp6tOiYlG0mHs2m2DYcNX4dPQ8bAVuA0QMAW4MJngVTho3ChD/RB+B5cxSBXtSYkpi6gzcHWIMELwauTioCYeqiW5nXglbGWTWVj2VZSULaTGV4YXieMjKmLKQvTq/QiYSouEUYv0SuEmaKYsEnYAGwKPi/PZ6jwDAgWSQGwAgQhGFYBEoAQ6GIEEUWQEAwR/FcEVxRNQLMy8pVUPVUErreKpZSoXuY5fpLIq+1W1ls/gCJwcvKz7h9aI+Bjvrj0rfPnhk6Sjn/ES2scsMjJSfjk5HigbUnyLB56AifBiLegS72eRR5NSsRh1J8H9W7IeV+hMjBI6PzKVPx2A/lPhYNKK5/qDH2sbpwuHFQe+RbTi8wcbFGhIAR8l4QRkJNUI0CTKB0VOYk8zEkg6PmrXTYvy68AwNPlIXDXhQ7tNVQrFNzB9warAVtxH6Y+a0nRoAZswX2Y+MTCgIbiJ3EKhTPZcWHDJMZtAF8UTMJH2o/su/H0WvUD
+   KLUv/WDAXEUQABZSNzAAFQQKfO1IeCJEz/rtKZdVYUspeEgwL3UDUABlUAQrjEwAIACIGf3IZ4Cehg9tCDsqACkAKwAbNGwZTLSR2EIbKHIjQqFg2C58PFunbTTbVOF78FH4JkiI8EF4Dhp8DA5bCBugGh+N63ycD8b34iYW34rLYL6LWrBSsEpgHzYPKwtbB4VgdWBlICBLEs7mYmuR4oXilSmpyNLHdFleJ14VDhnMZtkuPHZ8PT4dFRNbidEIEQE5XjheIwIFlgYsCRC9Qi/QJIAkxufleXUmSwBmbDI2EJuKzUvzmlZIcajgThAqEgKAAgQhGGYDEkARIFSIoMEIEohAIfiPCBICBIFABAnOdZWwWq0IVW8VmaUwtTLB8ZPEVLXRZr11D3mBk4vXtyO0xpgp/SIat06HFJ3sPfiRKa0RtliPX/DbkzdB2xrhWanIDU6upm2ALjs9C4I0+YjD9l8Y9W6YhiNqKWSSjGSdimRO9WG7KXWbInfTKcPCQUnMp1rqbroa4GRIbzfTmYMNqFoNOy/MF8jJgwXQZCzOQU5yJ5r8Qcca233zkj/GD5sAeLrOZrSaGsun9g1eA+Zy3yLRe+usBszlvkWiXwsDJga+AYFTEy+A3zyG1xuQODVhk4BTcHN55vE+b3Cl7zo1wdY5J3pzLcMkbRr5ERy3IQGAJQEnyYcgP9x3sOdpFR0=
   </data>
  </layer>
  <layer id="19" name="Dungeon Extension" width="100" height="60">

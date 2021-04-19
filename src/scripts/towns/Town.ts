@@ -747,7 +747,7 @@ TownList['Fortree City'] = new Town(
     'Fortree City',
     GameConstants.Region.hoenn,
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))],
         shop: FortreeCityShop,
         npcs: [Weatherman],
     }
@@ -857,10 +857,25 @@ TownList['New Mauville'] = new DungeonTown(
     GameConstants.Region.hoenn,
     [new GymBadgeRequirement(BadgeEnums.Balance)]
 );
+TownList['Weather Institute'] = new DungeonTown(
+    'Weather Institute',
+    GameConstants.Region.hoenn,
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)]
+);
 TownList['Mt. Pyre'] = new DungeonTown(
     'Mt. Pyre',
     GameConstants.Region.hoenn,
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 122)]
+);
+TownList['Magma Hideout'] = new DungeonTown(
+    'Magma Hideout',
+    GameConstants.Region.hoenn,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Pyre'))]
+);
+TownList['Aqua Hideout'] = new DungeonTown(
+    'Aqua Hideout',
+    GameConstants.Region.hoenn,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Magma Hideout'))]
 );
 TownList['Shoal Cave'] = new DungeonTown(
     'Shoal Cave',

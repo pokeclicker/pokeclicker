@@ -723,7 +723,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Clamperl', 'Relicanth'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Pyre'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aqua Hideout'))]
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 125', GameConstants.Region.hoenn, 125,
