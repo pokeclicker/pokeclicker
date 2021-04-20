@@ -47,6 +47,7 @@ class AchievementHandler {
     public static filterAchievementList(retainPage = false) {
         this.achievementListFiltered(this.achievementList.filter((a) => (
             a.region <= player.highestRegion() &&
+            a.achievable() &&
             (this.filter.status() == -2 || a.unlocked === !!this.filter.status()) &&
             (this.filter.type()   == -2 || a.property.achievementType === this.filter.type()) &&
             (this.filter.region() == -2 || a.region === this.filter.region())
@@ -67,14 +68,14 @@ class AchievementHandler {
         }
     }
 
-    public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, region = GameConstants.Region.none) {
+    public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, region = GameConstants.Region.none, achievableFunction: () => boolean | null = null) {
         const unlocked: boolean = player.achievementsCompleted[name];
-        AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, region, unlocked));
+        AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, region, unlocked, achievableFunction));
     }
 
     public static calculateMaxBonus() {
         GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
-            AchievementHandler.maxBonus()[region] = AchievementHandler.achievementList.filter(a => a.region == region).reduce((sum, a) => sum + a.bonus, 0);
+            AchievementHandler.maxBonus()[region] = AchievementHandler.achievementList.filter(a => a.region == region && a.achievable()).reduce((sum, a) => sum + a.bonus, 0);
         });
     }
 
@@ -105,7 +106,7 @@ class AchievementHandler {
         return AchievementHandler.achievementList.find((achievement) => achievement.name === name);
     }
 
-    public static initialize(multiplier: Multiplier) {
+    public static initialize(multiplier: Multiplier, challenges: Challenges) {
 
         /*
          * GENERAL
@@ -148,9 +149,9 @@ class AchievementHandler {
         AchievementHandler.addAchievement('DigDug ain\'t got nothin on me', 'Dig deeper 100 times', new UndergroundLayersMinedRequirement(100), 0.01);
         AchievementHandler.addAchievement('Both my thumbs are green! This can\'t be healthy', 'Dig deeper 1000 times', new UndergroundLayersMinedRequirement(1000), 0.01);
 
-        AchievementHandler.addAchievement('Is that how I use this?', 'Level 1 Oak Item to the maximum level', new MaxLevelOakItemRequirement(1), 0.05);
-        AchievementHandler.addAchievement('I\'ve got my hands full with all of these', 'Level 3 Oak Items to the maximum level', new MaxLevelOakItemRequirement(3), 0.1);
-        AchievementHandler.addAchievement('Prepared for anything!', 'Level 8 Oak Items to the maximum level', new MaxLevelOakItemRequirement(8), 0.15);
+        AchievementHandler.addAchievement('Is that how I use this?', 'Level 1 Oak Item to the maximum level', new MaxLevelOakItemRequirement(1), 0.05, GameConstants.Region.none, () => !challenges.list.disableOakItems.active());
+        AchievementHandler.addAchievement('I\'ve got my hands full with all of these', 'Level 3 Oak Items to the maximum level', new MaxLevelOakItemRequirement(3), 0.1, GameConstants.Region.none, () => !challenges.list.disableOakItems.active());
+        AchievementHandler.addAchievement('Prepared for anything!', 'Level 8 Oak Items to the maximum level', new MaxLevelOakItemRequirement(8), 0.15, GameConstants.Region.none, () => !challenges.list.disableOakItems.active());
 
         AchievementHandler.addAchievement('First Team', 'Capture 100 Pokémon', new CapturedRequirement(100), 0.05);
         AchievementHandler.addAchievement('Filling the PC', 'Capture 1,000 Pokémon', new CapturedRequirement(1000), 0.10);
@@ -216,10 +217,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Masterball 2', 'Obtain 10 Masterballs', new PokeballRequirement(10, GameConstants.Pokeball.Masterball), 0.30);
         AchievementHandler.addAchievement('Masterball 3', 'Obtain 100 Masterballs', new PokeballRequirement(100, GameConstants.Pokeball.Masterball), 0.40);
 
-        AchievementHandler.addAchievement('A Few Clicks In', 'Click 10 Times', new ClickRequirement(10, 1), 0.02);
-        AchievementHandler.addAchievement('Clicking Pro', 'Click 100 Times', new ClickRequirement(100, 1), 0.05);
-        AchievementHandler.addAchievement('Ultra Clicker', 'Click 1,000 Times', new ClickRequirement(1000, 1), 0.10);
-        AchievementHandler.addAchievement('Need a new mouse yet?', 'Click 10,000 Times', new ClickRequirement(10000, 1), 0.25);
+        AchievementHandler.addAchievement('A Few Clicks In', 'Click 10 Times', new ClickRequirement(10, 1), 0.02, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Clicking Pro', 'Click 100 Times', new ClickRequirement(100, 1), 0.05, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Ultra Clicker', 'Click 1,000 Times', new ClickRequirement(1000, 1), 0.10, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Need a new mouse yet?', 'Click 10,000 Times', new ClickRequirement(10000, 1), 0.25, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
 
 
         /*
@@ -248,7 +249,7 @@ class AchievementHandler {
         });
 
         AchievementHandler.calculateMaxBonus();
-        this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion()));
+        this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion() && a.achievable()));
 
         // load filters, filter the list & calculate number of tabs
         this.load();
