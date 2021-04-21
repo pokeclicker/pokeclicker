@@ -434,6 +434,10 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 32);
             // Add Aqua Hideout
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 33);
+            // Add Team Plasma Assault
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 72);
+            // Add Team Plasma Assault
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 74);
 
             // Update achievement names
             Update.updateAchievementName(playerData, 'These pokémon must be sick', 'These Pokémon must be sick');
