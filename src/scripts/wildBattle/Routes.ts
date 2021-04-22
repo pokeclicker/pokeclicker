@@ -1395,7 +1395,10 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Nidorina', 'Nidorino', 'Hariyama', 'Staravia', 'Chingling', 'Stunky', 'Throh', 'Sawk', 'Dedenne'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Cliff)]
+    [
+        new GymBadgeRequirement(BadgeEnums.Cliff),
+        new RouteKillRequirement(10, GameConstants.Region.kalos, 10),
+    ]
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 12', GameConstants.Region.kalos, 12,
