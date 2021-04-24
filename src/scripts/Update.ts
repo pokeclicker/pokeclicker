@@ -436,7 +436,7 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 33);
             // Add Team Plasma Assault
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 72);
-            // Add Team Plasma Assault
+            // Add Plasma Frigate
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 74);
 
             // Update achievement names
@@ -627,6 +627,9 @@ class Update implements Saveable {
         this.setSettingsData(updateResult.settingsData);
     }
 
+    // Used for moving dungeons and other stuff
+    // Be sure to insert from lowest index to highest index
+    // Example to get dungeons new index: GameConstants.getDungeonIndex('Aqua Hideout')
     static moveIndex = (arr, to, from = Infinity, defaultVal = 0) => {
         let temp = arr.splice(from, 1);
         if (!temp.length) {
