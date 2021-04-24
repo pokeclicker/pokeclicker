@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="2020.10.30" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="2">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="2">
+ <editorsettings>
+  <export target="Unova.tmx" format="tmx"/>
+ </editorsettings>
  <tileset firstgid="1" source="tiles_FRLG.tsx"/>
  <tileset firstgid="1317" source="tiles_Advanced.tsx"/>
+ <tileset firstgid="9301" source="tiles_custom.tsx"/>
  <layer id="1" name="Water Dark" width="100" height="60" tintcolor="#c8c8c8">
   <data encoding="base64" compression="zstd">
    KLUv/WDAXBUFAHCYAAAAXAEAmABdXAFcAVOg0FkAUMMkAAQGF0QCk40aIA/JfQYPDQeB6UiTCis4pVan+FkjpZehJ0cy+tajr/3CKeW+qfEjnGo8MPobT7JqkgMwVZ0LeApUuEYeRzXUfiPdtePkisur3ipXp743F0d5c1xb5UUSbeoLEW2VNwri1JdLxFFvTsRVvDwRp76YVVe9b81T4hfXsKrueSeVj3nrAw==
@@ -44,12 +48,12 @@
  </layer>
  <layer id="7" name="Dungeons" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXBUIALQDAABwDwAAcXIPAHgPAAB5eoAPAACBDwAAfA8AAIJ8bQ8AAG4PAABvdQ8AAHYPAAB3fQ8AAH4PAAB/gXxKqKAHQZoA4IIJIJiZoQcSwBBkKAKTQCN4iuAZgp9lSMireoEsGxX7PLgXUfyKy6/4GB0wTZVcz1VGr5FY308dBzEvnOB6l7r0XVHfwj5Rdcreu5RNsB7PgtS3Fafbt4FOub1KngZAfWI1TJcRFmsaF74LZZG7KOYWtXPXN/q/Om7dpXszBRwjJ8kIeARLEgGPQPF4UfXUA4LuJWMfJUDfH37fsKcxQCvKEU0Ojw7D5g4wR10KCGPAyXF7ofsh2+99hKT6AQ==
+   KLUv/WDAXHUJAEKHFBxwj4AAwIgBwqIEcn0lNxmZtBYBAAAI1c0NCYUH0uS4GhcDcR0uw0IP9D7P8zqCK3ABOG/zNC/zMLs8y6s8yptEkigiQS7pmq7HQnElVoFwDQ5RqDHTICwuKQbgggkgmJmtAxLAEDAwEIFKoBE8RPAMwQ8zJGBHPYFwNi4+8LBXRPEtLl/xMTCD6bvkeqbJ6DUy6ntcxyFhGSe43qWWvqvW17dPVJsye5f+E9XEM736OuN0t7dMU6pXw6XBpk+Qhuk+heU6jQtnIWWXQ5TlGjVy11v0f2Pculv3rgS8jZwsBOARAMGclBQNiPl/qBBlEt3ekeU+7ihl1XkkzEIPrn6HWX3sWN8f6N4ApTHAh88harkbHUbLHeA36hyAkAec5BYXJj/E/QUa4aDO
   </data>
  </layer>
  <layer id="12" name="Decor" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXN0CALQCAABwDwAAcXIPAHgPAAB5eoAPAACBDwAAfA8AAIJueXTNBgAAzgYAAM8GAA4g4IKWcwyZmOQDQahez8gH4KR6XwOReoyk8hU4i6TqA06q2N3nB+XWfZPdhzY=
+   KLUv/WDAXCUCAAQCAABwDwAAcW4PAHgPAAB5gA8AAIF0zQYAAM4GAADPBgAKILCC3R2ZmOQDQahez84H4CR1z9U+FR5rP6hxrj4PfMEC
   </data>
  </layer>
 </map>
