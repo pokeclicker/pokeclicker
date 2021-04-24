@@ -1801,7 +1801,7 @@ TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 3)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
         shop: LumioseCityShop,
     }
 );
@@ -1809,7 +1809,7 @@ TownList['Camphrier Town'] = new Town(
     'Camphrier Town',
     GameConstants.Region.kalos,
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 5)],
     }
 );
 TownList['Ambrette Town'] = new Town(
