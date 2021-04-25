@@ -94,5 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
             ],
         });
+        AchievementHandler.load();
     });
 });

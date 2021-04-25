@@ -248,9 +248,6 @@ class AchievementHandler {
             });
         });
 
-        AchievementHandler.calculateMaxBonus();
-        this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion() && a.achievable()));
-
         // load filters, filter the list & calculate number of tabs
         this.load();
         this.filterAchievementList(true);
@@ -264,6 +261,8 @@ class AchievementHandler {
     }
 
     static load() {
+        AchievementHandler.calculateMaxBonus();
+        this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion() && a.achievable()));
         AchievementHandler.navigateIndex(Settings.getSetting('achievementsPage').value);
         AchievementHandler.filter.status(Settings.getSetting('achievementsStatus').value);
         AchievementHandler.filter.type(Settings.getSetting('achievementsType').value);
