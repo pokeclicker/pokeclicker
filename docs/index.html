@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.8.0"></script>
+    <script src="scripts/modules.min.js?v=0.8.1"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.8.0"></script>
+    <script src="scripts/script.min.js?v=0.8.1"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.8.0" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.8.1" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -2449,6 +2449,23 @@
     width="64"
     data-bind="click:function(){MapHelper.openShipModal()}, css:{ unlockedTown: player.highestRegion() &gt;= 1}">
 </rect>
+
+     
+
+<image href="/assets/images/ship.png" xlink:href="/assets/images/ship.png"
+    x="800"
+    y="560"
+    height="48"
+    width="128"
+    data-bind="visible: player.highestRegion() &gt;= 1"/>
+<rect class="city"
+    data-town="SS-Anne" 
+    x="800"
+    y="560"
+    height="48"
+    width="128"
+    data-bind="visible: player.highestRegion() &gt;= 1, click:function(){MapHelper.openShipModal()}, css:{ unlockedTown: player.highestRegion() &gt;= 1}">
+</rect>
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
@@ -4105,12 +4122,12 @@
     data-bind="click:function(){ MapHelper.moveToRoute(124, 2); } ">
     <rect data-route='124'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(124, 2) }"
-        height="224"
+        height="160"
         width="144"
-        x="1184" y="160">
+        x="1184" y="224">
     </rect>
 
-    <text style="font-size: 32px" x="1232" y="282">124</text>
+    <text style="font-size: 32px" x="1232" y="314">124</text>
 
 </g>
 
@@ -4122,9 +4139,9 @@
     data-bind="click:function(){ MapHelper.moveToRoute(124, 2); } ">
     <rect data-route='124'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(124, 2) }"
-        height="48"
-        width="16"
-        x="1168" y="160">
+        height="64"
+        width="80"
+        x="1248" y="160">
     </rect>
 
 </g>
@@ -4935,6 +4952,19 @@
     data-bind="click:function(){MapHelper.moveToTown('Mt. Chimney')},
         attr: { class: MapHelper.calculateTownCssClass('Mt. Chimney') }">
 </rect>
+    
+    <!--Weather Institute-->
+    
+
+<rect class="city"
+    data-town="Weather Institute" 
+    x="560"
+    y="96"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Weather Institute')},
+        attr: { class: MapHelper.calculateTownCssClass('Weather Institute') }">
+</rect>
 
     <!--Mt. Pyre-->
     
@@ -4959,6 +4989,45 @@
     width="16"
     data-bind="click:function(){MapHelper.moveToTown('Mt. Pyre')},
         attr: { class: MapHelper.calculateTownCssClass('Mt. Pyre') }">
+</rect>
+
+    <!--Magma Hideout-->
+    
+
+<rect class="city"
+    data-town="Magma Hideout" 
+    x="400"
+    y="176"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Magma Hideout')},
+        attr: { class: MapHelper.calculateTownCssClass('Magma Hideout') }">
+</rect>
+     
+    <!--Aqua Hideout-->
+    
+
+<rect class="city"
+    data-town="Aqua Hideout" 
+    x="1184"
+    y="176"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Aqua Hideout')},
+        attr: { class: MapHelper.calculateTownCssClass('Aqua Hideout') }">
+</rect>
+     
+    <!--Aqua Hideout Extension-->
+    
+
+<rect class="city"
+    data-town="Aqua Hideout" 
+    x="1168"
+    y="176"
+    height="32"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Aqua Hideout')},
+        attr: { class: MapHelper.calculateTownCssClass('Aqua Hideout') }">
 </rect>
 
     <!--Shoal Cave-->
@@ -7227,14 +7296,14 @@
 
 <g
 
-    transform="rotate(90 ,1456, 256)"
+    transform="rotate(90 ,1456, 304)"
 
     data-bind="click:function(){ MapHelper.moveToRoute(24, 4); } ">
     <rect data-route='24'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 4) }"
         height="48"
-        width="80"
-        x="1456" y="208">
+        width="32"
+        x="1456" y="256">
     </rect>
 
 </g>
@@ -7675,6 +7744,8 @@
     data-bind="
         click:function(){MapHelper.moveToTown('Aspertia City')},
         attr: { class: MapHelper.calculateTownCssClass('Aspertia City') },
+        
+            css: { flash: MapHelper.ableToTravel() }
         ">
 </rect>
 
@@ -7760,8 +7831,8 @@
 
 <rect class="city"
     data-town="Seaside Cave" 
-    x="1504"
-    y="288"
+    x="1456"
+    y="256"
     height="48"
     width="64"
     data-bind="click:function(){MapHelper.moveToTown('Seaside Cave')},
@@ -8052,6 +8123,31 @@
     width="64"
     data-bind="click:function(){MapHelper.moveToTown('Pledge Grove')},
         attr: { class: MapHelper.calculateTownCssClass('Pledge Grove') }">
+</rect>
+
+    <!--Plasma Frigate-->
+    
+
+<rect class="city"
+    data-town="Plasma Frigate" 
+    x="1536"
+    y="288"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Plasma Frigate')},
+        attr: { class: MapHelper.calculateTownCssClass('Plasma Frigate') }">
+</rect>
+    <!--Plasma Frigate Extension-->
+    
+
+<rect class="city"
+    data-town="Plasma Frigate" 
+    x="1520"
+    y="304"
+    height="16"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Plasma Frigate')},
+        attr: { class: MapHelper.calculateTownCssClass('Plasma Frigate') }">
 </rect>
 
     <!-- ------------------ -->
@@ -8604,7 +8700,7 @@
     </rect>
 
 </g>
-    
+
 
     <!--Route 16-->
     
@@ -8909,6 +9005,8 @@
     data-bind="
         click:function(){MapHelper.moveToTown('Vaniville Town')},
         attr: { class: MapHelper.calculateTownCssClass('Vaniville Town') },
+        
+            css: { flash: MapHelper.ableToTravel() }
         ">
 </rect>
 
@@ -9279,7 +9377,7 @@
     data-bind="click:function(){MapHelper.moveToTown('Pokéball Factory')},
         attr: { class: MapHelper.calculateTownCssClass('Pokéball Factory') }">
 </rect>
-    
+
     
 
 <rect class="city"
@@ -9901,6 +9999,8 @@
     data-bind="
         click:function(){MapHelper.moveToTown('Iki Town')},
         attr: { class: MapHelper.calculateTownCssClass('Iki Town') },
+        
+            css: { flash: MapHelper.ableToTravel() }
         ">
 </rect>
 
@@ -10597,7 +10697,7 @@
 
 </g>
 
-    
+
     <!--West Lake Axwell-->
     
 
@@ -11167,6 +11267,8 @@
     data-bind="
         click:function(){MapHelper.moveToTown('Postwick')},
         attr: { class: MapHelper.calculateTownCssClass('Postwick') },
+        
+            css: { flash: MapHelper.ableToTravel() }
         ">
 </rect>
 
@@ -12540,7 +12642,7 @@ aria-labelledby="pickStarterModalLabel" aria-hidden="true">
            </div>
        </div>
        <div class="modal-body">
-           <p id="pickStarterModalText">Oh No! We got ambushed by these pokémon!<br>
+           <p id="pickStarterModalText">Oh No! We got ambushed by these Pokémon!<br>
                I can only hold off two! Pick the one you want to fight!</p>
            <div class="row justify-content-center">
                <div class="col-lg-8">
@@ -12582,9 +12684,9 @@ aria-labelledby="starterCaughtModalLabel" aria-hidden="true">
        </div>
        <div class="modal-body">
            <p>
-               Hm! Excellent! You have caught your first pokémon!<br>
+               Hm! Excellent! You have caught your first Pokémon!<br>
                This is where your journey begins. <br>
-               You can progress to the next route after you have defeated 10 pokémon.<br>
+               You can progress to the next route after you have defeated 10 Pokémon.<br>
                To help you on your journey, I will give you these <b>Key items</b>!<br>
                You can view all your <b>Key items</b> in the start menu.<br>
            </p>
@@ -12771,7 +12873,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
             </button>
             <button type="button" class="btn btn-info"
             style="position: absolute; right: 0px; top: 0px; width: auto; height: 69px; padding: 10px;"
-            data-bind="tooltip: { title: `You can trade your level 100 pokémon for an egg of the same pokémon. Hatched pokémon will gain a ${GameConstants.BREEDING_ATTACK_BONUS}% bonus of their base attack and have a higher chance of becoming shiny!`, trigger: 'hover', placement:'left' }">
+            data-bind="tooltip: { title: `You can trade your level 100 Pokémon for an egg of the same Pokémon. Hatched Pokémon will gain a ${GameConstants.BREEDING_ATTACK_BONUS}% bonus of their base attack and have a higher chance of becoming shiny!`, trigger: 'hover', placement:'left' }">
             ?
             </button>
        </div>
@@ -12868,7 +12970,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     <div>
                         <!-- Check if the player has any level 100 Pokémon or if they have any eggs -->
                         <p class="bg-danger my-0" data-bind="visible: !App.game.party.hasMaxLevelPokemon()">
-                            Unfortunately, you don't have any pokémon of level 100 to breed.
+                            Unfortunately, you don't have any Pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
                         <ul class="row justify-content-center p-0" data-bind="foreach: App.game.party.caughtPokemon">
@@ -14201,7 +14303,7 @@ aria-labelledby="badgeCaseModalLabel">
                 </button>
             </div>
             <div class="modal-body bg-ocean">
-                <img src='assets/images/ship.png' style='width: 100%;'>
+                <img class="my-5" src='assets/images/ship.png' style='width: 100%;'>
                 <div style='margin-top:20px' data-bind="foreach: GameHelper.enumStrings(GameConstants.Region)">
                     <!-- ko if: $data !== 'none' -->
                     <button class='btn btn-block btn-success'
