@@ -10,6 +10,19 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.1
+    new ChangelogUpdate('v0.8.1', new Date(2021, 3, 28)),
+    new Changelog(changelogType.NEW, 'Added Kalos fossil Pokémon'),
+    new Changelog(changelogType.NEW, 'Added trainers to Hoenn dungeons'),
+    new Changelog(changelogType.NEW, 'Added trainers to Unova dungeons'),
+    new Changelog(changelogType.CHANGE, 'Tidy up some badge sprites'),
+    new Changelog(changelogType.CHANGE, 'Starting tutorial no longer skippable'),
+    new Changelog(changelogType.CHANGE, 'Hide unobtainable achievements when running challenge modes'),
+    new Changelog(changelogType.FIXED, 'Added starting towns to Unova and Kalos'),
+    new Changelog(changelogType.FIXED, 'Fixed a few Pokémon sprites'),
+    new Changelog(changelogType.FIXED, 'Minor text fixes'),
+    new Changelog(changelogType.FIXED, 'Added some missing/unobtainable Kalos Pokémon'),
+
     // v0.8.0
     new ChangelogUpdate('v0.8.0 - Kalos', new Date(2021, 3, 4)),
     new Changelog(changelogType.NEW, 'The Kalos region is now available!\n<i>Some trainer sprites will be missing</i>'),
