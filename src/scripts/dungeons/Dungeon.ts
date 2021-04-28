@@ -2367,7 +2367,7 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
                 new GymPokemon('Eelektross', 6000000, 50),
                 new GymPokemon('Drapion', 6000000, 50),
                 new GymPokemon('Toxicroak', 6000000, 50),
-                new GymPokemon('Hydreigon', 65000000, 52),
+                new GymPokemon('Hydreigon', 6500000, 52),
             ], { weight: 1 }, 'Ghetsis', '(ghetsis)'),
     ],
     266500, 22, 100);
