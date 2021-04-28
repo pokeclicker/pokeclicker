@@ -267,5 +267,8 @@ class AchievementHandler {
         AchievementHandler.filter.status(Settings.getSetting('achievementsStatus').value);
         AchievementHandler.filter.type(Settings.getSetting('achievementsType').value);
         AchievementHandler.filter.region(Settings.getSetting('achievementsRegion').value);
+        // Cycle the pages to make sure they are upto date
+        AchievementHandler.navigateRight();
+        setTimeout(() => AchievementHandler.navigateLeft(), 1);
     }
 }
