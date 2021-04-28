@@ -42,7 +42,7 @@ class Game {
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
-        AchievementHandler.initialize(multiplier);
+        AchievementHandler.initialize(multiplier, challenges);
         FarmController.initialize();
         EffectEngineRunner.initialize(multiplier);
     }
@@ -79,6 +79,7 @@ class Game {
         this.farming.resetAuras();
         //Safari.load();
         Underground.energyTick(this.underground.getEnergyRegenTime());
+        AchievementHandler.calculateMaxBonus(); //recalculate bonus based on active challenges
 
         const now = new Date();
         DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);

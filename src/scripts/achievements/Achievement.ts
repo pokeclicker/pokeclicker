@@ -5,7 +5,8 @@ class Achievement {
         public property: AchievementRequirement,
         public bonus: number,
         public region: GameConstants.Region,
-        public unlocked = false
+        public unlocked = false,
+        public achievableFunction: () => boolean | null = null
     ) {}
 
     public check() {
@@ -41,8 +42,18 @@ class Achievement {
     })
 
     public getBonus() {
+        if (!this.achievable()) {
+            return 0;
+        }
         const max = AchievementHandler.maxBonus()[this.region];
         return (this.bonus / max * 100).toFixed(2);
+    }
+
+    public achievable() {
+        if (typeof this.achievableFunction === 'function') {
+            return this.achievableFunction();
+        }
+        return true;
     }
 
     public getProgressText: KnockoutComputed<string> = ko.pureComputed(() => {

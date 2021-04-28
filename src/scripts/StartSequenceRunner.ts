@@ -10,6 +10,8 @@ class StartSequenceRunner {
     }
 
     public static pickStarter(s: GameConstants.Starter) {
+        // Reload the achievements in case the user has any challenge modes activated
+        AchievementHandler.load();
         App.game.quests.getQuestLine('Tutorial Quests').beginQuest(0);
         this.starterPicked = s;
         $('#pickStarterModal').modal('hide');
