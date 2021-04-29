@@ -786,8 +786,8 @@ TownList['Ever Grande City'] = new Town(
         shop: EverGrandeCityShop,
     }
 );
-TownList['Pokemon League Hoenn'] = new Town(
-    'Pokemon League',
+TownList['Pokémon League Hoenn'] = new Town(
+    'Pokémon League',
     GameConstants.Region.hoenn,
     {
         requirements: [
@@ -1145,8 +1145,8 @@ TownList['Sunyshore City'] = new Town(
         shop: SunyshoreCityShop,
     }
 );
-TownList['Pokemon League Sinnoh'] = new Town(
-    'Pokemon League Sinnoh',
+TownList['Pokémon League Sinnoh'] = new Town(
+    'Pokémon League Sinnoh',
     GameConstants.Region.sinnoh,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Sinnoh'))],
@@ -1504,8 +1504,8 @@ TownList['Humilau City'] = new Town(
         npcs: [ExcitedChild],
     }
 );
-TownList['Pokemon League Unova'] = new Town(
-    'Pokemon League Unova',
+TownList['Pokémon League Unova'] = new Town(
+    'Pokémon League Unova',
     GameConstants.Region.unova,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Unova'))],
