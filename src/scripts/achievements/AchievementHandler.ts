@@ -151,7 +151,8 @@ class AchievementHandler {
 
         AchievementHandler.addAchievement('Is that how I use this?', 'Level 1 Oak Item to the maximum level', new MaxLevelOakItemRequirement(1), 0.05, GameConstants.Region.none, () => !challenges.list.disableOakItems.active());
         AchievementHandler.addAchievement('I\'ve got my hands full with all of these', 'Level 3 Oak Items to the maximum level', new MaxLevelOakItemRequirement(3), 0.1, GameConstants.Region.none, () => !challenges.list.disableOakItems.active());
-        AchievementHandler.addAchievement('Prepared for anything!', 'Level 8 Oak Items to the maximum level', new MaxLevelOakItemRequirement(8), 0.15, GameConstants.Region.none, () => !challenges.list.disableOakItems.active());
+        AchievementHandler.addAchievement('Professor Oak is the best!', 'Level 8 Oak Items to the maximum level', new MaxLevelOakItemRequirement(8), 0.14, GameConstants.Region.none, () => !challenges.list.disableOakItems.active());
+        AchievementHandler.addAchievement('Prepared for anything!', 'Level 12 Oak Items to the maximum level', new MaxLevelOakItemRequirement(12), 0.18, GameConstants.Region.none, () => !challenges.list.disableOakItems.active());
 
         AchievementHandler.addAchievement('First Team', 'Capture 100 Pokémon', new CapturedRequirement(100), 0.05);
         AchievementHandler.addAchievement('Filling the PC', 'Capture 1,000 Pokémon', new CapturedRequirement(1000), 0.10);
@@ -166,14 +167,14 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Are there any left?', 'Defeat 1,000,000 Pokémon', new DefeatedRequirement(1000000), 0.50);
 
         AchievementHandler.addAchievement('Startin\' Out', 'Capture your first Pokémon', new CaughtPokemonRequirement(1), 0.01);
-        AchievementHandler.addAchievement('Like Ants in a PC', 'Capture 10 unique Pokémons', new CaughtPokemonRequirement(10), 0.02);
-        AchievementHandler.addAchievement('Better Than Season 1 Ash', 'Capture 20 unique Pokémons', new CaughtPokemonRequirement(20), 0.03);
-        AchievementHandler.addAchievement('More Pokémon than Patrick', 'Capture 30 unique Pokémons', new CaughtPokemonRequirement(30), 0.04);
-        AchievementHandler.addAchievement('Rick and Fourty', 'Capture 40 unique Pokémons', new CaughtPokemonRequirement(40), 0.05);
-        AchievementHandler.addAchievement('50 Shades of Pikachu', 'Capture 50 unique Pokémons', new CaughtPokemonRequirement(50), 0.10);
-        AchievementHandler.addAchievement('Keeping Oak Really Busy', 'Capture 75 unique Pokémons', new CaughtPokemonRequirement(75), 0.15);
-        AchievementHandler.addAchievement('Surpassing Ash', 'Capture 88 unique Pokémons', new CaughtPokemonRequirement(88), 0.05);
-        AchievementHandler.addAchievement('I Wanna be The Very Best', 'Capture 100 unique Pokémons', new CaughtPokemonRequirement(100), 0.20);
+        AchievementHandler.addAchievement('Like Ants in a PC', 'Capture 10 unique Pokémon', new CaughtPokemonRequirement(10), 0.02);
+        AchievementHandler.addAchievement('Better Than Season 1 Ash', 'Capture 20 unique Pokémon', new CaughtPokemonRequirement(20), 0.03);
+        AchievementHandler.addAchievement('More Pokémon than Patrick', 'Capture 30 unique Pokémon', new CaughtPokemonRequirement(30), 0.04);
+        AchievementHandler.addAchievement('Rick and Fourty', 'Capture 40 unique Pokémon', new CaughtPokemonRequirement(40), 0.05);
+        AchievementHandler.addAchievement('50 Shades of Pikachu', 'Capture 50 unique Pokémon', new CaughtPokemonRequirement(50), 0.10);
+        AchievementHandler.addAchievement('Keeping Oak Really Busy', 'Capture 75 unique Pokémon', new CaughtPokemonRequirement(75), 0.15);
+        AchievementHandler.addAchievement('Surpassing Ash', 'Capture 88 unique Pokémon', new CaughtPokemonRequirement(88), 0.05);
+        AchievementHandler.addAchievement('I Wanna be The Very Best', 'Capture 100 unique Pokémon', new CaughtPokemonRequirement(100), 0.20);
         AchievementHandler.addAchievement('I Should Probably Take a Break', 'Complete the Kanto Pokédex!', new CaughtUniquePokemonsByRegionRequirement(GameConstants.Region.kanto), 0.50);
 
         AchievementHandler.addAchievement('I\'d rather be shiny', 'Capture your first Shiny', new ShinyPokemonRequirement(1), 0.03);
@@ -197,7 +198,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Stocking Up', 'Obtain 100 Pokéballs', new PokeballRequirement(100, GameConstants.Pokeball.Pokeball), 0.05);
         AchievementHandler.addAchievement('Fully Stocked', 'Obtain 1,000 Pokéballs', new PokeballRequirement(1000, GameConstants.Pokeball.Pokeball), 0.10);
         AchievementHandler.addAchievement('Maybe just a few more for the bunker', 'Obtain 10,000 Pokéballs', new PokeballRequirement(10000, GameConstants.Pokeball.Pokeball), 0.15);
-        AchievementHandler.addAchievement('Doomsday Bunker stocked with Pokeballs!', 'Obtain 100,000 Pokéballs', new PokeballRequirement(100000, GameConstants.Pokeball.Pokeball), 0.20);
+        AchievementHandler.addAchievement('Doomsday Bunker stocked with Pokéballs!', 'Obtain 100,000 Pokéballs', new PokeballRequirement(100000, GameConstants.Pokeball.Pokeball), 0.20);
 
         AchievementHandler.addAchievement('ooooo A blue one!', 'Obtain your first Greatball', new PokeballRequirement(1, GameConstants.Pokeball.Greatball), 0.03);
         AchievementHandler.addAchievement('Greatball 2', 'Obtain 10 Greatballs', new PokeballRequirement(10, GameConstants.Pokeball.Greatball), 0.05);

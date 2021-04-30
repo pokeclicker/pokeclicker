@@ -51,8 +51,8 @@ TownList['Indigo Plateau Johto'] = new PokemonLeague(
 );
 (<PokemonLeague>TownList['Indigo Plateau Johto']).setupGymTowns();
 
-TownList['Pokemon League Hoenn'] = new PokemonLeague(
-    'Pokemon League Hoenn',
+TownList['Pokémon League Hoenn'] = new PokemonLeague(
+    'Pokémon League Hoenn',
     GameConstants.Region.hoenn,
     [
         new RouteKillRequirement(10, GameConstants.Region.hoenn, 128),
@@ -61,10 +61,10 @@ TownList['Pokemon League Hoenn'] = new PokemonLeague(
     indigoPlateauShop,
     ['Elite Sidney', 'Elite Phoebe', 'Elite Glacia', 'Elite Drake', 'Champion Wallace']
 );
-(<PokemonLeague>TownList['Pokemon League Hoenn']).setupGymTowns();
+(<PokemonLeague>TownList['Pokémon League Hoenn']).setupGymTowns();
 
-TownList['Pokemon League Sinnoh'] = new PokemonLeague(
-    'Pokemon League Sinnoh',
+TownList['Pokémon League Sinnoh'] = new PokemonLeague(
+    'Pokémon League Sinnoh',
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 223),
@@ -73,10 +73,10 @@ TownList['Pokemon League Sinnoh'] = new PokemonLeague(
     indigoPlateauShop,
     ['Elite Aaron', 'Elite Bertha', 'Elite Flint', 'Elite Lucian', 'Champion Cynthia']
 );
-(<PokemonLeague>TownList['Pokemon League Sinnoh']).setupGymTowns();
+(<PokemonLeague>TownList['Pokémon League Sinnoh']).setupGymTowns();
 
-TownList['Pokemon League Unova'] = new PokemonLeague(
-    'Pokemon League Unova',
+TownList['Pokémon League Unova'] = new PokemonLeague(
+    'Pokémon League Unova',
     GameConstants.Region.unova,
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 23),
@@ -85,10 +85,10 @@ TownList['Pokemon League Unova'] = new PokemonLeague(
     indigoPlateauShop,
     ['Elite Shauntal', 'Elite Marshal', 'Elite Grimsley', 'Elite Caitlin', 'Champion Iris']
 );
-(<PokemonLeague>TownList['Pokemon League Unova']).setupGymTowns();
+(<PokemonLeague>TownList['Pokémon League Unova']).setupGymTowns();
 
-TownList['Pokemon League Kalos'] = new PokemonLeague(
-    'Pokemon League Kalos',
+TownList['Pokémon League Kalos'] = new PokemonLeague(
+    'Pokémon League Kalos',
     GameConstants.Region.kalos,
     [
         new OneFromManyRequirement([
@@ -100,16 +100,16 @@ TownList['Pokemon League Kalos'] = new PokemonLeague(
     indigoPlateauShop,
     ['Elite Malva', 'Elite Siebold', 'Elite Wikstrom', 'Elite Drasna', 'Champion Diantha']
 );
-(<PokemonLeague>TownList['Pokemon League Kalos']).setupGymTowns();
+(<PokemonLeague>TownList['Pokémon League Kalos']).setupGymTowns();
 
-TownList['Pokemon League Alola'] = new PokemonLeague(
-    'Pokemon League Alola',
+TownList['Pokémon League Alola'] = new PokemonLeague(
+    'Pokémon League Alola',
     GameConstants.Region.alola,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanikala'))],
     indigoPlateauShop,
     ['Elite Molayne', 'Elite Olivia', 'Elite Acerola', 'Elite Kahili', 'Champion Hao']
 );
-(<PokemonLeague>TownList['Pokemon League Alola']).setupGymTowns();
+(<PokemonLeague>TownList['Pokémon League Alola']).setupGymTowns();
 
 TownList['Wyndon Stadium'] = new PokemonLeague(
     'Wyndon Stadium',
