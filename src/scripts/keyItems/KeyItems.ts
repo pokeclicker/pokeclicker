@@ -57,6 +57,14 @@ class KeyItems implements Feature {
                                 overlayOpacity: 0,
                             });
                         }, 100);
+
+                        // Hide the IntroJS overlay once the user selects the Pokeball
+                        const selectPokeball = document.querySelectorAll('#pokeballSelectorModal .clickable')[1];
+                        selectPokeball.addEventListener('click', () => {
+                            Information.hide();
+                        },{
+                            once: true,
+                        });
                     });
                 },{
                     once: true,
