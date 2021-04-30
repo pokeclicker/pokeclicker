@@ -446,6 +446,7 @@ class Update implements Saveable {
 
         '0.8.2': ({ playerData, saveData }) => {
             // Update achievement names
+            Update.updateAchievementName(playerData, 'Doomsday Bunker stocked with Pokeballs!', 'Doomsday Bunker stocked with Pokéballs!');
             Update.updateAchievementName(playerData, 'Prepared for anything!', 'Professor Oak is the best!');
         },
     };
