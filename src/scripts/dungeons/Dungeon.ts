@@ -2762,8 +2762,8 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
             ], { weight: 1 }, 'José', '(male)'),
         new DungeonTrainer('Twins',
             [
-                new GymPokemon('Burmy (plant)', 356500, 60),
-                new GymPokemon('Scyther', 356500, 60),
+                new GymPokemon('Plusle', 356500, 60),
+                new GymPokemon('Minun', 356500, 60),
             ], { weight: 1 }, 'Ally & Amy'),
         new DungeonTrainer('Nursery Aide',
             [
