@@ -2852,7 +2852,7 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
                 new GymPokemon('Linoone', 356500, 63),
                 new GymPokemon('Mandibuzz', 356500, 63),
                 new GymPokemon('Toxicroak', 356500, 63),
-            ], { weight: 1 }, 'Kelsey', '(female)'),
+            ], { weight: 1 }, 'Kathrine', '(female)'),
         new DungeonTrainer('Black Belt',
             [
                 new GymPokemon('Tyrogue', 356500, 61),
