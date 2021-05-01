@@ -2792,7 +2792,7 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
                 new GymPokemon('Mankey', 356500, 60),
                 new GymPokemon('Snubbull', 356500, 60),
                 new GymPokemon('Crawdaunt', 356500, 60),
-            ], { weight: 1 }, 'Hillary'),
+            ], { weight: 1 }, 'Keita'),
         new DungeonTrainer('Pokémon Ranger',
             [
                 new GymPokemon('Electrike', 356500, 62),
