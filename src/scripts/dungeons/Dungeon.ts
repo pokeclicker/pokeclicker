@@ -2542,7 +2542,7 @@ dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
                 new GymPokemon('Pinsir', 326500, 54),
                 new GymPokemon('Heracross', 326500, 54),
             ], { weight: 1 }, 'Martell'),
-        new DungeonTrainer('Black Belt',
+        new DungeonTrainer('Battle Girl',
             [
                 new GymPokemon('Throh', 326500, 54),
                 new GymPokemon('Sawk', 326500, 54),
