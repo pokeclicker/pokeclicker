@@ -2489,7 +2489,7 @@ dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
             [
                 new GymPokemon('Swoobat', 326500, 55),
                 new GymPokemon('Lilligant', 326500, 55),
-            ], { weight: 1 }, 'Chandra', '(female)'),
+            ], { weight: 1 }, 'Shelly', '(female)'),
         new DungeonTrainer('Veteran',
             [
                 new GymPokemon('Sigilyph', 326500, 55),
