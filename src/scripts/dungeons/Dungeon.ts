@@ -2536,7 +2536,7 @@ dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
                 new GymPokemon('Fraxure', 326500, 54),
                 new GymPokemon('Zweilous', 326500, 54),
                 new GymPokemon('Flygon', 326500, 54),
-            ], { weight: 1 }, 'Al', '(male)'),
+            ], { weight: 1 }, 'Hugo', '(male)'),
         new DungeonTrainer('Black Belt',
             [
                 new GymPokemon('Pinsir', 326500, 54),
