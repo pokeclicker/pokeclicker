@@ -2864,7 +2864,7 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
                 new GymPokemon('Tyrogue', 356500, 61),
                 new GymPokemon('Machop', 356500, 61),
                 new GymPokemon('Poliwrath', 356500, 61),
-            ], { weight: 1 }, 'Kentaro'),
+            ], { weight: 1 }, 'Lee'),
         new DungeonTrainer('School Kid',
             [
                 new GymPokemon('Venonat', 356500, 60),
