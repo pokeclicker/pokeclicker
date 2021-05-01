@@ -2616,7 +2616,7 @@ dungeonList['Twist Mountain'] = new Dungeon('Twist Mountain',
                 new GymPokemon('Geodude', 356500, 60),
                 new GymPokemon('Steelix', 356500, 60),
                 new GymPokemon('Boldore', 356500, 60),
-            ], { weight: 1 }, 'Cairn'),
+            ], { weight: 1 }, 'Gus'),
         new DungeonTrainer('Worker',
             [
                 new GymPokemon('Machoke', 356500, 61),
