@@ -2410,7 +2410,7 @@ dungeonList['Abundant Shrine'] = new Dungeon('Abundant Shrine',
             [
                 new GymPokemon('Deerling (Spring)', 306500, 39),
                 new GymPokemon('Zangoose', 306500, 39),
-            ], { weight: 1 }, 'Lureen'),
+            ], { weight: 1 }, 'Lurleen'),
         new DungeonTrainer('Youngster',
             [
                 new GymPokemon('Karrablast', 306500, 37),
