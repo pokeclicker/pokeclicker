@@ -1714,7 +1714,7 @@ dungeonList['Castelia Sewers'] = new Dungeon('Castelia Sewers',
             { weight: 1 }, undefined, '(male)'),
         new DungeonTrainer('Team Plasma Grunt',
             [new GymPokemon('Scraggy', 15000000, 16)],
-            { weight: 1 }, undefined, '(female)'),
+            { weight: 1 }, undefined, '(male)'),
     ],
     146500, 4, 100);
 
