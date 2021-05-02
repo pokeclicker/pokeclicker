@@ -3593,10 +3593,10 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
             ], { weight: 1 }, 'Catrina', '(female)'),
         new DungeonTrainer('Veteran',
             [
-                new GymPokemon('Skarmory', 32395730, 14),
-                new GymPokemon('Umbreon', 33254840, 14),
-                new GymPokemon('Alakazam', 35385940, 14),
-            ], { weight: 1 }, 'Giles', '(male)'),
+                new GymPokemon('Skarmory', 32395730, 55),
+                new GymPokemon('Umbreon', 33254840, 55),
+                new GymPokemon('Alakazam', 35385940, 57),
+            ], { weight: 1 }, 'Gilles', '(male)'),
     ],
     750500, 21, 59);
 
