@@ -1387,7 +1387,7 @@ dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
             [
                 new GymPokemon('Gardevoir', 37000, 43),
                 new GymPokemon('Slaking', 37000, 43),
-            ], { weight: 1 }, 'Katelymn', '(female)'),
+            ], { weight: 1 }, 'Katelynn', '(female)'),
         new DungeonTrainer('Cooltrainer',
             [
                 new GymPokemon('Slaking', 37000, 43),
