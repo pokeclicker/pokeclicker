@@ -965,7 +965,7 @@ dungeonList['Jagged Pass'] = new Dungeon('Jagged Pass',
             [new GymPokemon('Shroomish', 22000, 21)],
             { weight: 1 }, 'Autumn'),
         new DungeonTrainer('Triathlete',
-            [new GymPokemon('Shroomish', 22000, 21)],
+            [new GymPokemon('Magnemite', 22000, 21)],
             { weight: 1 }, 'Julio', '(malecycling)'),
         new DungeonTrainer('Camper',
             [
