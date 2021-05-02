@@ -3543,7 +3543,7 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
             [
                 new GymPokemon('Azumarill', 3500000, 56),
                 new GymPokemon('Florges (Red)', 3500000, 56),
-            ], { weight: 1 }, 'Corrine'),
+            ], { weight: 1 }, 'Corinne'),
         new DungeonTrainer('Hex Maniac',
             [new GymPokemon('Gourgeist', 3500000, 58)],
             { weight: 1 }, 'Raziah', '(kalos)'),
