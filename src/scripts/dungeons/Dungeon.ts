@@ -1259,7 +1259,7 @@ dungeonList['Seafloor Cavern'] = new Dungeon('Seafloor Cavern',
                 new GymPokemon('Mightyena', 32000, 35),
                 new GymPokemon('Golbat', 32000, 35),
             ],
-            { weight: 1 }, undefined, '(female)'),
+            { weight: 1 }, undefined, '(male)'),
         new DungeonTrainer('Aqua Admin',
             [
                 new GymPokemon('Sharpedo', 32000, 37),
