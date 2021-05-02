@@ -1047,7 +1047,7 @@ dungeonList['Mt. Pyre'] = new Dungeon('Mt. Pyre',
             { weight: 1 }, 'Leah', '(hoenn)'),
         new DungeonTrainer('Black Belt',
             [new GymPokemon('Hariyama', 28000, 31)],
-            { weight: 1 }, 'Mark'),
+            { weight: 1 }, 'Zander'),
         new DungeonTrainer('Young Couple',
             [
                 new GymPokemon('Delcatty', 28000, 31),
