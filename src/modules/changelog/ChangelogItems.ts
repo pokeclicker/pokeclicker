@@ -10,6 +10,17 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.2
+    new ChangelogUpdate('v0.8.2', new Date(2021, 4, 3)),
+    new Changelog(changelogType.NEW, 'Added in game FAQ'),
+    new Changelog(changelogType.CHANGE, 'Updated look of Kanto map'),
+    new Changelog(changelogType.CHANGE, 'Added achievement for maxing all 12 Oak items'),
+    new Changelog(changelogType.FIXED, 'Hatched display value not updating in hatchery'),
+    new Changelog(changelogType.FIXED, 'Various text fixes'),
+    new Changelog(changelogType.FIXED, 'Dungeon bosses can now drop held items'),
+    new Changelog(changelogType.FIXED, 'Update some dungeon trainers HP'),
+    new Changelog(changelogType.FIXED, '2nd part of re-capturing tutorial is now optional, as may still appear odd on some browsers'),
+
     // v0.8.1
     new ChangelogUpdate('v0.8.1', new Date(2021, 3, 28)),
     new Changelog(changelogType.NEW, 'Added Kalos fossil Pokémon'),

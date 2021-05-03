@@ -205,7 +205,7 @@ export default class Statistics implements Saveable {
                         return highestID;
                     }
 
-                    // If it's not an int or less than zero, we do not want to set it
+                    // If it's not an int, we do not want to set it
                     const id = Number(prop);
                     if (Number.isNaN(id)) {
                         // eslint-disable-next-line no-console
@@ -213,13 +213,9 @@ export default class Statistics implements Saveable {
                         return () => 0;
                     }
 
-                    return (val) => {
-                        if (!Number.isNaN(Number(val))) {
-                            // eslint-disable-next-line no-param-reassign
-                            statistics[prop] = ko.observable<number>(val).extend({ numeric: 0 });
-                            return val;
-                        } return 0;
-                    };
+                    // eslint-disable-next-line no-param-reassign
+                    statistics[id] = ko.observable<number>(0).extend({ numeric: 0 });
+                    return statistics[id];
                 },
 
                 // This makes it so the stats observable can't be accidently changed
