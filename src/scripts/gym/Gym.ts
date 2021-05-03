@@ -1169,7 +1169,7 @@ gymList['Champion Diantha'] = new Gym(
     'Diantha',
     'Champion Diantha',
     [
-        new GymPokemon('Hawlucha', 7208300, 64),
+        new GymPokemon('Hawlucha', 72083000, 64),
         new GymPokemon('Tyrantrum', 74057000, 65),
         new GymPokemon('Aurorus', 74057000, 65),
         new GymPokemon('Gourgeist', 74557000, 65),
