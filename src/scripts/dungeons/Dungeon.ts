@@ -2457,13 +2457,13 @@ dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
             ], { weight: 1 }, 'Jamie', '(female)'),
         new DungeonTrainer('Psychic',
             [
-                new GymPokemon('Lampent', 326500, 55),
-                new GymPokemon('Musharna', 326500, 55),
+                new GymPokemon('Lampent', 326500, 54),
+                new GymPokemon('Musharna', 326500, 54),
             ], { weight: 1 }, 'Alia', '(female)'),
         new DungeonTrainer('Psychic',
             [
-                new GymPokemon('Metang', 326500, 55),
-                new GymPokemon('Cofagrigus', 326500, 55),
+                new GymPokemon('Metang', 326500, 54),
+                new GymPokemon('Cofagrigus', 326500, 54),
             ], { weight: 1 }, 'Al', '(male)'),
         new DungeonTrainer('Veteran',
             [
