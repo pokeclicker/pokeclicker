@@ -53,23 +53,18 @@ class KeyItems implements Feature {
                                         intro: 'Select the <img title="Pokéball" src="assets/images/pokeball/Pokeball.svg" height="25px"> Pokéball to use this type of ball to capture already caught Pokémon, which will give you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens when captured.',
                                     },
                                 ],
-                                exitOnEsc: false,
-                                showButtons: false,
                                 // Needed for IntroJs on modals
                                 overlayOpacity: 0,
                             });
+                        }, 100);
 
-                            // Allow clicking through the IntroJs overlay (needed for modals)
-                            (document.querySelector('.introjs-overlay') as HTMLElement).style.pointerEvents = 'none';
-
-                            // Hide the IntroJS overlay once the user selects the Pokeball
-                            const selectPokeball = document.querySelectorAll('#pokeballSelectorModal .clickable')[1];
-                            selectPokeball.addEventListener('click', () => {
-                                Information.hide();
-                            },{
-                                once: true,
-                            });
-                        }, 10);
+                        // Hide the IntroJS overlay once the user selects the Pokeball
+                        const selectPokeball = document.querySelectorAll('#pokeballSelectorModal .clickable')[1];
+                        selectPokeball.addEventListener('click', () => {
+                            Information.hide();
+                        },{
+                            once: true,
+                        });
                     });
                 },{
                     once: true,

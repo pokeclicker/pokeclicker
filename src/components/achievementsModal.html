@@ -26,7 +26,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                     <label>Type</label>
                                     <select name="achievementsType" class="custom-select" onchange="AchievementHandler.filter.type(this.value), Settings.setSettingByName(this.name, this.value)">
                                         <!-- ko foreach: Settings.getSetting('achievementsType').options.filter(r => r.value !== -1) -->
-                                        <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsType').value === $data.value }, text: $data.text">Type</option>
+                                        <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsType').value === $data.value }, text: $data.text.replace(/Poke/g, 'Poké')">Type</option>
                                         <!-- /ko -->
                                     </select>
                                 </div>
