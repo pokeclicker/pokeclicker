@@ -202,7 +202,7 @@ class BreedingController {
     // Value displayed at bottom of image
     public static displayValue = ko.observable('attack');
 
-    public static getDisplayValue(pokemon: PartyPokemon): string | KnockoutComputed<string> {
+    public static getDisplayValue(pokemon: PartyPokemon): string {
         const pokemonData = pokemonMap[pokemon.name];
         switch (this.displayValue()) {
             case 'attack': return `Attack: ${pokemon.attack.toLocaleString('en-US')}`;
