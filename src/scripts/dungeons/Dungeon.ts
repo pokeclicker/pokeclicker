@@ -2037,8 +2037,8 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
             ], { weight: 1 }, 'Ray', '(male)'),
         new DungeonTrainer('Ace Trainer',
             [
-                new GymPokemon('Grumpig', 226500, 37),
-                new GymPokemon('Drifblim', 226500, 37),
+                new GymPokemon('Grumpig', 226500, 39),
+                new GymPokemon('Drifblim', 226500, 39),
             ], { weight: 1 }, 'Cora', '(female)'),
         new DungeonTrainer('Black Belt',
             [
