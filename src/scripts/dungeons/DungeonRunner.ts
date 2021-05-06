@@ -30,7 +30,11 @@ class DungeonRunner {
         App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
 
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
-        DungeonRunner.map = new DungeonMap(GameConstants.DUNGEON_SIZE + player.region);
+        if (!DungeonRunner.dungeon.isStatic) {
+            DungeonRunner.map = new DungeonMap(GameConstants.DUNGEON_SIZE + player.region);
+        } else {
+            new DungeonMap(1, true);
+        }
         DungeonRunner.chestsOpened = 0;
         DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;

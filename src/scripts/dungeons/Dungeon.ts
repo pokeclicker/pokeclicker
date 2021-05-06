@@ -42,7 +42,8 @@ class Dungeon {
         public bossList: Boss[],
         public tokenCost: number,
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
-        public level: number
+        public level: number,
+        public isStatic: boolean = false
     ) { }
 
     public isUnlocked(): boolean {
