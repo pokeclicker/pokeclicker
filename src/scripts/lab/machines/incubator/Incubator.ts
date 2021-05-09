@@ -245,6 +245,14 @@ class IncubatorState extends MachineState {
         return Math.ceil(emptyFuel / Incubator.getFuelAmount(fuel));
     }
 
+    checkValue() {
+        if (Incubator.amount() < 0) {
+            Notifier.notify( {message: 'Please enter a number greater than zero'});
+        } else {
+            this.addFuel();
+        }
+    }
+
     /**
      * Handles fueling the Incubator
      */

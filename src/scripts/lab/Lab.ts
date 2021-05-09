@@ -197,11 +197,11 @@ class Lab implements Feature {
             4000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor)] }),
         this.researchList[Lab.Research.plate_deconstructor_eff2] = new Research(
             Lab.Research.plate_deconstructor_eff2, ResearchType.Machine,
-            'Plate Deconstructor Efficiency I', 'Increases amount of shards gained from plate deconstruction by 50%.',
+            'Plate Deconstructor Efficiency II', 'Increases amount of shards gained from plate deconstruction by 50%.',
             12000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_eff1)] }),
         this.researchList[Lab.Research.plate_deconstructor_eff3] = new Research(
             Lab.Research.plate_deconstructor_eff3, ResearchType.Machine,
-            'Plate Deconstructor Efficiency I', 'Increases amount of shards gained from plate deconstruction by 75%.',
+            'Plate Deconstructor Efficiency III', 'Increases amount of shards gained from plate deconstruction by 75%.',
             36000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_eff2)] }),
 
         //#endregion
@@ -242,11 +242,11 @@ class Lab implements Feature {
             4000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor)] }),
         this.researchList[Lab.Research.plate_reconstructor_eff2] = new Research(
             Lab.Research.plate_reconstructor_eff2, ResearchType.Machine,
-            'Plate Reconstructor Efficiency I', 'Decreases amount of shards required for plate reconstruction by 25%.',
+            'Plate Reconstructor Efficiency II', 'Decreases amount of shards required for plate reconstruction by 25%.',
             12000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_eff1)] }),
         this.researchList[Lab.Research.plate_reconstructor_eff3] = new Research(
             Lab.Research.plate_reconstructor_eff3, ResearchType.Machine,
-            'Plate Reconstructor Efficiency I', 'Decreases amount of shards required for plate reconstruction by 50%.',
+            'Plate Reconstructor Efficiency III', 'Decreases amount of shards required for plate reconstruction by 50%.',
             36000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_eff2)] }),
 
         //#endregion

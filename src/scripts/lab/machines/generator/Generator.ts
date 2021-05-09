@@ -218,6 +218,14 @@ class GeneratorState extends MachineState {
         return Math.ceil(emptyFuel / Generator.getFuelAmount(fuel));
     }
 
+    checkValue() {
+        if (Generator.amount() < 0) {
+            Notifier.notify( {message: 'Please enter a number greater than zero'});
+        } else {
+            this.addFuel();
+        }
+    }
+
     /**
      * Handles fueling the Generator
      */
