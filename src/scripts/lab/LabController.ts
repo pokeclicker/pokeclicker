@@ -71,6 +71,7 @@ class LabController extends PartyListController {
     public static openResearchListModal() {
         if (ResearchHandler.researchList.length === 0) {
             ResearchHandler.researchList = App.game.lab.researchList.map(research => research.id);
+            ResearchHandler.resetPages();
             ResearchHandler.filterResearchList();
         }
         $('#researchListModal').modal('show');

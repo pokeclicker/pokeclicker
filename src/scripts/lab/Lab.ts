@@ -878,7 +878,7 @@ class Lab implements Feature {
             }),
         this.researchList[Lab.Research.dubious_disc] = new ResearchWithCost(
             Lab.Research.dubious_disc, ResearchType.Blueprint,
-            'Dubious Disk Blueprint', 'Unlocks the Dubious Disk Fabricator Blueprint.',
+            'Dubious Disc Blueprint', 'Unlocks the Dubious Disc Fabricator Blueprint.',
             7000,  [{item: {type: ItemType.item, id: 'Dubious_disc'}, amount: 5}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
@@ -1226,7 +1226,7 @@ class Lab implements Feature {
         this.machines[Lab.Machine.plate_deconstructor]  = new PlateDeconstructor(Lab.Machine.plate_deconstructor, 'Plate Deconstructor', 'Deconstruct plates into shards.', 1, 2),
         this.machines[Lab.Machine.plate_reconstructor]  = new PlateReconstructor(Lab.Machine.plate_reconstructor, 'Plate Reconstructor', 'Reconstruct plates from shards.', 1, 2),
         this.machines[Lab.Machine.incubator]            = new Incubator(Lab.Machine.incubator, 'Incubator', 'Increases the total Hatchery queue slots when placed.', 2, 3),
-        this.machines[Lab.Machine.fossil_reviver]       = new FossilReviver(Lab.Machine.fossil_reviver, 'Fossil Reviver', 'Revives Fossil Pokemon', 5, 2),
+        this.machines[Lab.Machine.fossil_reviver]       = new FossilReviver(Lab.Machine.fossil_reviver, 'Fossil Reviver', 'Revives Fossil Pokémon', 5, 2),
         this.machines[Lab.Machine.generator]            = new Generator(Lab.Machine.generator, 'Generator', 'Increases Machine speed when placed.', 4, 6),
         this.machines[Lab.Machine.pokeball_factory]     = new PokeballFactory(Lab.Machine.pokeball_factory, 'Pokéball Factory', 'Creates Pokéballs.', 2, 4);
 
