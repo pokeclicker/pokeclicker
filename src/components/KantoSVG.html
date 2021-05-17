@@ -1,4 +1,8 @@
 <g data-bind='visible: player.region == GameConstants.Region.kanto'>
+    <!-- ko if: player.subregion == GameConstants.SubRegion[GameConstants.Region.kanto].johto -->
+    <image width="1600" height="960" xlink:href="assets/images/johto.png" href="assets/images/johto.png"></image>
+    <!-- /ko -->
+    <!-- ko if: player.subregion == GameConstants.SubRegion[GameConstants.Region.kanto].main -->
     <image width="1600" height="960" xlink:href="assets/images/kanto.png" href="assets/images/kanto.png"></image>
 
     <!-- ------ -->
@@ -553,4 +557,5 @@
          , image: "assets/images/ship.png"
          })
       %>
+    <!-- /ko -->
 </g>

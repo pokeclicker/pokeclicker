@@ -403,6 +403,15 @@ export enum Region {
     crown = 9,
 }
 
+enum KantoSubRegions {
+    main = 0,
+    johto = 1,
+}
+
+export const SubRegion = {
+    [Region.kanto]: KantoSubRegions,
+};
+
 export function randomIntBetween(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
