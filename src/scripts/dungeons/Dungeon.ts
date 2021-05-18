@@ -3135,7 +3135,7 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',//keep going 
                 new GymPokemon('Golbat', 7903570, 32),
                 new GymPokemon('Mightyena', 7903570, 32),
             ], { weight: 1 }, undefined, '(male)'),
-        new DungeonTrainer('Flare Grunt',
+        new DungeonTrainer('Team Flare Grunt',
             [
                 new GymPokemon('Golbat', 7903570, 33),
                 new GymPokemon('Croagunk', 7903570, 31),
