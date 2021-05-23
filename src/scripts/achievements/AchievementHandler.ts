@@ -95,7 +95,7 @@ class AchievementHandler {
                 sum += total;
             }
         });
-        return sum;
+        return Math.min(sum, 1);
     }
 
     public static achievementBonusPercent(): string {
@@ -259,6 +259,8 @@ class AchievementHandler {
 
         multiplier.addBonus('exp', () => 1 + this.achievementBonus());
         multiplier.addBonus('money', () => 1 + this.achievementBonus());
+        multiplier.addBonus('dungeonToken', () => 1 + Math.min(this.achievementBonus(), 0.5));
+        multiplier.addBonus('eggStep', () => 1 + Math.min(this.achievementBonus(), 0.5));
     }
 
     static load() {

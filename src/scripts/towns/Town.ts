@@ -66,7 +66,6 @@ const pokeMartShop = new Shop([
     ItemList['Lucky_egg'],
     ItemList['Item_magnet'],
     ItemList['Token_collector'],
-    ItemList['Lucky_incense'],
     ItemList['SmallRestore'],
     ItemList['MediumRestore'],
     ItemList['LargeRestore'],
@@ -125,7 +124,6 @@ const ViridianCityShop = new Shop([
 const LavenderTownShop = new Shop([
     ItemList['Greatball'],
     ItemList['Item_magnet'],
-    ItemList['Lucky_incense'],
     ItemList['Grass_egg'],
 ]);
 
@@ -603,7 +601,6 @@ const LilyCoveCityShop = new Shop([
     ItemList['Lucky_egg'],
     ItemList['Token_collector'],
     ItemList['Item_magnet'],
-    ItemList['Lucky_incense'],
 ]);
 const MossdeepCityShop = new Shop([
     ItemList['Beldum'],
@@ -952,7 +949,6 @@ const VeilstoneCityShop = new Shop([
     ItemList['Lucky_egg'],
     ItemList['Token_collector'],
     ItemList['Item_magnet'],
-    ItemList['Lucky_incense'],
 ]);
 const CelesticTownShop = new Shop([
     ItemList['Dragon_egg'],
@@ -1363,7 +1359,6 @@ const OpelucidCityShop = new Shop([
     ItemList['Lucky_egg'],
     ItemList['Token_collector'],
     ItemList['Item_magnet'],
-    ItemList['Lucky_incense'],
 ]);
 const IcirrusCityShop = new Shop([
     ItemList['Dragon_egg'],
@@ -2269,7 +2264,6 @@ const WyndonShop = new Shop([
     ItemList['Lucky_egg'],
     ItemList['Token_collector'],
     ItemList['Item_magnet'],
-    ItemList['Lucky_incense'],
 ]);
 
 
