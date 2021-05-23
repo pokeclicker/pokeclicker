@@ -801,7 +801,7 @@ export const KalosGyms = [
 export const AlolaGyms = [
     'Iki Town',
     'Konikoni City',
-    'Aether Foundation',
+    'Aether Paradise',
     'Malie City',
     'Altar of the Sunne and Moone',
     'Seafolk Village',
