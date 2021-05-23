@@ -16,7 +16,7 @@ export const MAX_LOAD_TIME = 20000; // 20 Seconds
 export const MUTATION_TICK = 1000;
 export const WANDER_TICK = 1500;
 
-export const MAX_AVAILABLE_REGION = 5; // Kalos
+export const MAX_AVAILABLE_REGION = 6; // Kalos
 
 export const TotalPokemonsPerRegion = [
     151, // 151 - Kanto
@@ -402,15 +402,6 @@ export enum Region {
     armor = 8,
     crown = 9,
 }
-
-enum KantoSubRegions {
-    main = 0,
-    johto = 1,
-}
-
-export const SubRegion = {
-    [Region.kanto]: KantoSubRegions,
-};
 
 export function randomIntBetween(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
