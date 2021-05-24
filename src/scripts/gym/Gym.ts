@@ -1210,9 +1210,9 @@ gymList['Konikoni City'] = new Gym(
     'How lovely.',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 9)]
 );
-gymList['Aether Foundation'] = new Gym(
+gymList['Aether Paradise'] = new Gym(
     'Ultra Wormhole',
-    'Aether Foundation',
+    'Aether Paradise',
     [new GymPokemon('???', 2458300, 27)],
     BadgeEnums.Elite_Nihilego,
     128000,
