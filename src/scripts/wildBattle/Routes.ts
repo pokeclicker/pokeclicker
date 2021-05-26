@@ -1541,7 +1541,7 @@ Routes.add(new RegionRoute(
     5.1
 ));
 Routes.add(new RegionRoute(
-    'Kala\e Bay', GameConstants.Region.alola, 20,
+    'Kala\'e Bay', GameConstants.Region.alola, 20,
     new RoutePokemon({
         land: ['Alolan Rattata', 'Slowpoke', 'Wingull', 'Bagon', 'Yungoos'],
         water: ['Tentacool', 'Shellder', 'Magikarp', 'Remoraid', 'Wingull', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
@@ -1596,7 +1596,7 @@ Routes.add(new RegionRoute(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Diglett\'s Tunnel'))]
 ));
 Routes.add(new RegionRoute(
-    'Alola Akala Outskirts', GameConstants.Region.alola, 21,
+    'Akala Outskirts', GameConstants.Region.alola, 21,
     new RoutePokemon({
         land: ['Alolan Raticate', 'Natu', 'Wingull', 'Nosepass', 'Gumshoos', 'Stufful'],
         water: ['Magikarp', 'Chinchou', 'Wishiwashi (Solo)'],
