@@ -1361,6 +1361,7 @@ class Lab implements Feature {
 
     completeResearch(research: Research) {
         research.completed = true;
+        App.game.lab.resetEffects();
         // Handle complete delegate
         if (research.completeDelegate) {
             research.completeDelegate();
