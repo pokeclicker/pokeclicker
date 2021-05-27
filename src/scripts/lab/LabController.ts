@@ -209,6 +209,7 @@ class LabController extends PartyListController {
 
     public static additionalInfoTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
         const tooltip = [];
+        App.game.lab.resetEffects();
 
         // Multipliers
         for (const [key, value] of Object.entries(App.game.lab.machineEffects)) {
