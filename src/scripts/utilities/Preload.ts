@@ -41,7 +41,7 @@ class Preload {
         }
     }
 
-    public static load(skipWait = false) {
+    public static load(skipWait = false): Promise<void> {
         console.log(`[${GameConstants.formatDate(new Date())}] %cPreloading Images..`, 'color:#8e44ad;font-weight:900;');
         if (skipWait) {
             return new Promise(resolve => {
@@ -84,7 +84,7 @@ class Preload {
     }
 
     private static loadTowns() {
-        const p = Array<Promise<number>>();
+        const p = Array<Promise<void>>();
         for (const name in TownList) {
             // Skip unreleased towns unless a feature flag has enabled them
             if (
@@ -97,7 +97,7 @@ class Preload {
                 continue;
             }
             Preload.itemLoading(name);
-            p.push(new Promise<number>(resolve => {
+            p.push(new Promise<void>(resolve => {
                 const img = new Image();
                 img.onload = () => {
                     Preload.itemLoaded(`town-${name}`);
@@ -116,10 +116,10 @@ class Preload {
     }
 
     private static loadPokemon() {
-        const p = Array<Promise<number>>();
+        const p = Array<Promise<void>>();
         for (let i = 1; i <= GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION]; i++) {
             Preload.itemLoading(i);
-            p.push(new Promise<number>(resolve => {
+            p.push(new Promise<void>(resolve => {
                 const img = new Image();
                 img.onload = () => {
                     Preload.itemLoaded(i);
@@ -138,10 +138,10 @@ class Preload {
     }
 
     private static loadUndergroundItems() {
-        const p = Array<Promise<number>>();
+        const p = Array<Promise<void>>();
         UndergroundItem.list.forEach(item => {
             Preload.itemLoading(item.id);
-            p.push(new Promise<number>(resolve => {
+            p.push(new Promise<void>(resolve => {
                 const img = new Image();
                 img.onload = () => {
                     Preload.itemLoaded(item.id);
@@ -159,7 +159,7 @@ class Preload {
     }
 
     private static minimumTime() {
-        return new Promise<number>(resolve => {
+        return new Promise<void>(resolve => {
             setTimeout(() => {
                 resolve();
             }, GameConstants.MIN_LOAD_TIME);
