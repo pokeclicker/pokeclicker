@@ -75,6 +75,9 @@ class UndergroundItem {
         };
         return mapping[type];
     }
+    public static getPlateTypes(): PokemonType[] {
+        return GameHelper.enumNumbers(PokemonType).filter(val => val != PokemonType.None && val != PokemonType.Normal);
+    }
 
     public isUnlocked(): boolean {
         return this.requirement ? this.requirement.isCompleted() : true;
