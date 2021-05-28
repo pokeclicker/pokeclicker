@@ -51,7 +51,7 @@ class ResearchSlot implements Saveable {
     get workerRate(): number {
         const pokemon = this.workers.map(worker => App.game.party._caughtPokemon().find(p => p.name == worker));
         const pokemonAttack = pokemon.map(pokemon => App.game.party.calculateOnePokemonAttack(pokemon, undefined, undefined, undefined, true, true));
-        const scaledRate = pokemonAttack.map(attack => Math.log10(attack));
+        const scaledRate = pokemonAttack.map(attack => Math.log10(attack) * 1000);
         return scaledRate.reduce((a, b) => a + b, 0);
     }
 
