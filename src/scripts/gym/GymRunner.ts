@@ -30,10 +30,9 @@ class GymRunner {
                 this.started = true;
                 this.hideGif();
             }, GameConstants.GYM_COUNTDOWN);
-
         } else {
             const reqsList = [];
-            gym.requirements?.forEach(requirement => {
+            gym.requirements?.forEach((requirement) => {
                 if (!requirement.isCompleted()) {
                     reqsList.push(requirement.hint());
                 }
@@ -64,7 +63,7 @@ class GymRunner {
             GymRunner.gymLost();
         }
         this.timeLeft(this.timeLeft() - GameConstants.GYM_TICK);
-        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.GYM_TIME * 100));
+        this.timeLeftPercentage(Math.floor((this.timeLeft() / GameConstants.GYM_TIME) * 100));
     }
 
     public static gymLost() {
@@ -90,12 +89,12 @@ class GymRunner {
         GameHelper.incrementObservable(App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym.town)]);
         player.town(TownList[gym.town]);
         App.game.gameState = GameConstants.GameState.town;
+        GymRunner.startGym(gym);
     }
 
     public static timeLeftSeconds = ko.pureComputed(() => {
         return (Math.ceil(GymRunner.timeLeft() / 10) / 10).toFixed(1);
-    })
-
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
