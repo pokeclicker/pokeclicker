@@ -1,6 +1,6 @@
 // Ticks
 export const TICK_TIME = 100;
-export const BATTLE_TICK = 1000;
+export const BATTLE_TICK = 1;
 export const BATTLE_FRONTIER_TICK = 500;
 export const UNDERGROUND_TICK = 1000;
 export const DUNGEON_TIME = 6000;
@@ -15,6 +15,7 @@ export const MIN_LOAD_TIME = 500; // 0.5 Seconds
 export const MAX_LOAD_TIME = 20000; // 20 Seconds
 export const MUTATION_TICK = 1000;
 export const WANDER_TICK = 1500;
+export const POKEBALL_SPEED = 5; // 1 = Normal >1 Faster
 
 export const MAX_AVAILABLE_REGION = 5; // Kalos
 
@@ -30,10 +31,9 @@ export const TotalPokemonsPerRegion = [
     // TODO: figure out a better way to handle DLC/non main regions
     893, // 3 - Armor
     898, // 5 - Crown
-
 ];
 
-export const ITEM_USE_TIME = 30;
+export const ITEM_USE_TIME = 300;
 
 export const SECOND = 1000;
 export const MINUTE = SECOND * 60;
@@ -45,7 +45,7 @@ export const ROAMING_MIN_CHANCE = 8192;
 export const ROAMING_MAX_CHANCE = 4096;
 
 // Shinies
-export const SHINY_CHANCE_BATTLE = 8192;
+export const SHINY_CHANCE_BATTLE = 16384;
 export const SHINY_CHANCE_DUNGEON = 4096;
 export const SHINY_CHANCE_SHOP = 2048;
 export const SHINY_CHANCE_STONE = 2048;
@@ -143,24 +143,7 @@ export const SAFARI_BATTLE_CHANCE = 5;
 
 export const SAFARI_BASE_POKEBALL_COUNT = 30;
 
-export const LEGAL_WALK_BLOCKS = [
-    0,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-];
+export const LEGAL_WALK_BLOCKS = [0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
 
 export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.';
 
@@ -168,7 +151,7 @@ export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari bal
 
 // Numbers calculated by Dimava assumes ability to 1 shot on high routes and some use oak items,
 //   which are now nerfed slightly until upgraded, so those numbers may need further adjusting
-const questBase = 1; // change this to scale all quest points
+const questBase = 4; // change this to scale all quest points
 export const GAIN_MONEY_BASE_REWARD = questBase * 0.0017;
 export const HATCH_EGGS_BASE_REWARD = questBase * 33;
 export const SHINY_BASE_REWARD = questBase * 3000;
@@ -262,7 +245,10 @@ export function humanifyString(str: string): string {
 }
 
 export function camelCaseToString(str: string): string {
-    return str.replace(/[\s_-]?([A-Z])/g, ' $1').replace(/\b\w/g, (w) => (w.replace(/\w/, (c) => c.toUpperCase()))).trim();
+    return str
+        .replace(/[\s_-]?([A-Z])/g, ' $1')
+        .replace(/\b\w/g, (w) => w.replace(/\w/, (c) => c.toUpperCase()))
+        .trim();
 }
 
 export function formatDate(date: Date): string {
@@ -270,19 +256,23 @@ export function formatDate(date: Date): string {
 }
 
 export function formatTime(input: number | Date): string {
-    if (input === 0) { return 'Ready'; }
+    if (input === 0) {
+        return 'Ready';
+    }
 
     const time = parseInt(`${input}`, 10); // don't forget the second param
     const hours: any = `${Math.floor(time / 3600)}`.padStart(2, '0');
-    const minutes: any = `${Math.floor((time - (hours * 3600)) / 60)}`.padStart(2, '0');
-    const seconds: any = `${time - (hours * 3600) - (minutes * 60)}`.padStart(2, '0');
+    const minutes: any = `${Math.floor((time - hours * 3600) / 60)}`.padStart(2, '0');
+    const seconds: any = `${time - hours * 3600 - minutes * 60}`.padStart(2, '0');
 
     return `${hours}:${minutes}:${seconds}`;
 }
 
 export function formatTimeFullLetters(input: number): string {
     // Temporarily recast to number until everything is in modules
-    if (Number.isNaN(Number(input)) || input === 0) { return '-'; }
+    if (Number.isNaN(Number(input)) || input === 0) {
+        return '-';
+    }
     let time = Math.abs(input * 1000);
     const times = [];
 
@@ -315,7 +305,9 @@ export function formatTimeFullLetters(input: number): string {
 
 export function formatTimeShortWords(input: number): string {
     // Temporarily recast to number until everything is in modules
-    if (Number.isNaN(Number(input)) || input === 0) { return 'now'; }
+    if (Number.isNaN(Number(input)) || input === 0) {
+        return 'now';
+    }
     const time = Math.abs(input);
 
     if (time > DAY) {
@@ -332,7 +324,9 @@ export function formatTimeShortWords(input: number): string {
 
 export function formatSecondsToTime(input: number): string {
     // Temporarily recast to number until everything is in modules
-    if (Number.isNaN(Number(input)) || input === 0) { return '-'; }
+    if (Number.isNaN(Number(input)) || input === 0) {
+        return '-';
+    }
     let time = Math.abs(input * 1000);
     const times = [];
 
@@ -365,7 +359,9 @@ export function formatSecondsToTime(input: number): string {
 
 export function formatNumber(input: number): string {
     let num = Number(input); // Temporary cast until everything is in modules
-    if (Number.isNaN(+num)) { return '0'; }
+    if (Number.isNaN(+num)) {
+        return '0';
+    }
 
     if (num >= 1e9) {
         num = Math.floor(num / 1e8);
@@ -702,142 +698,23 @@ export const PokemonToFossil = {
 };
 
 // For random quest, name matches entry in gymList (created in Gym.ts)
-export const KantoGyms = [
-    'Pewter City',
-    'Cerulean City',
-    'Vermilion City',
-    'Celadon City',
-    'Saffron City',
-    'Fuchsia City',
-    'Cinnabar Island',
-    'Viridian City',
-    'Elite Lorelei',
-    'Elite Bruno',
-    'Elite Agatha',
-    'Elite Lance',
-    'Champion Blue',
-];
+export const KantoGyms = ['Pewter City', 'Cerulean City', 'Vermilion City', 'Celadon City', 'Saffron City', 'Fuchsia City', 'Cinnabar Island', 'Viridian City', 'Elite Lorelei', 'Elite Bruno', 'Elite Agatha', 'Elite Lance', 'Champion Blue'];
 
-export const JohtoGyms = [
-    'Violet City',
-    'Azalea Town',
-    'Goldenrod City',
-    'Ecruteak City',
-    'Cianwood City',
-    'Olivine City',
-    'Mahogany Town',
-    'Blackthorn City',
-    'Elite Will',
-    'Elite Koga',
-    'Elite Bruno2',
-    'Elite Karen',
-    'Champion Lance',
-];
+export const JohtoGyms = ['Violet City', 'Azalea Town', 'Goldenrod City', 'Ecruteak City', 'Cianwood City', 'Olivine City', 'Mahogany Town', 'Blackthorn City', 'Elite Will', 'Elite Koga', 'Elite Bruno2', 'Elite Karen', 'Champion Lance'];
 
-export const HoennGyms = [
-    'Rustboro City',
-    'Dewford Town',
-    'Mauville City',
-    'Lavaridge Town',
-    'Petalburg City',
-    'Fortree City',
-    'Mossdeep City',
-    'Sootopolis City',
-    'Elite Sidney',
-    'Elite Phoebe',
-    'Elite Glacia',
-    'Elite Drake',
-    'Champion Wallace',
-];
+export const HoennGyms = ['Rustboro City', 'Dewford Town', 'Mauville City', 'Lavaridge Town', 'Petalburg City', 'Fortree City', 'Mossdeep City', 'Sootopolis City', 'Elite Sidney', 'Elite Phoebe', 'Elite Glacia', 'Elite Drake', 'Champion Wallace'];
 
-export const SinnohGyms = [
-    'Oreburgh City',
-    'Eterna City',
-    'Hearthome City',
-    'Veilstone City',
-    'Pastoria City',
-    'Canalave City',
-    'Snowpoint City',
-    'Sunyshore City',
-    'Elite Aaron',
-    'Elite Bertha',
-    'Elite Flint',
-    'Elite Lucian',
-    'Champion Cynthia',
-];
+export const SinnohGyms = ['Oreburgh City', 'Eterna City', 'Hearthome City', 'Veilstone City', 'Pastoria City', 'Canalave City', 'Snowpoint City', 'Sunyshore City', 'Elite Aaron', 'Elite Bertha', 'Elite Flint', 'Elite Lucian', 'Champion Cynthia'];
 
-export const UnovaGyms = [
-    'Aspertia City',
-    'Virbank City',
-    'Castelia City',
-    'Nimbasa City',
-    'Driftveil City',
-    'Mistralton City',
-    'Opelucid City',
-    'Humilau City',
-    'Elite Shauntal',
-    'Elite Marshal',
-    'Elite Grimsley',
-    'Elite Caitlin',
-    'Champion Iris',
-];
+export const UnovaGyms = ['Aspertia City', 'Virbank City', 'Castelia City', 'Nimbasa City', 'Driftveil City', 'Mistralton City', 'Opelucid City', 'Humilau City', 'Elite Shauntal', 'Elite Marshal', 'Elite Grimsley', 'Elite Caitlin', 'Champion Iris'];
 
-export const KalosGyms = [
-    'Santalune City',
-    'Cyllage City',
-    'Shalour City',
-    'Coumarine City',
-    'Lumiose City',
-    'Laverre City',
-    'Anistar City',
-    'Snowbelle City',
-    'Elite Malva',
-    'Elite Siebold',
-    'Elite Wikstrom',
-    'Elite Drasna',
-    'Champion Diantha',
-];
+export const KalosGyms = ['Santalune City', 'Cyllage City', 'Shalour City', 'Coumarine City', 'Lumiose City', 'Laverre City', 'Anistar City', 'Snowbelle City', 'Elite Malva', 'Elite Siebold', 'Elite Wikstrom', 'Elite Drasna', 'Champion Diantha'];
 
-export const AlolaGyms = [
-    'Iki Town',
-    'Konikoni City',
-    'Aether Paradise',
-    'Malie City',
-    'Altar of the Sunne and Moone',
-    'Seafolk Village',
-    'Exeggutor Island',
-    'Elite Molayne',
-    'Elite Olivia',
-    'Elite Acerola',
-    'Elite Kahili',
-    'Champion Hao',
-];
+export const AlolaGyms = ['Iki Town', 'Konikoni City', 'Aether Paradise', 'Malie City', 'Altar of the Sunne and Moone', 'Seafolk Village', 'Exeggutor Island', 'Elite Molayne', 'Elite Olivia', 'Elite Acerola', 'Elite Kahili', 'Champion Hao'];
 
-export const GalarGyms = [
-    'Turffield',
-    'Hulbury',
-    'Motostoke',
-    'Stow-On-Side',
-    'Ballonlea',
-    'Circhester',
-    'Spikemuth',
-    'Hammerlocke',
-    'Trainer Marnie',
-    'Trainer Hop',
-    'Trainer Bede',
-    'Champion Leon',
-];
+export const GalarGyms = ['Turffield', 'Hulbury', 'Motostoke', 'Stow-On-Side', 'Ballonlea', 'Circhester', 'Spikemuth', 'Hammerlocke', 'Trainer Marnie', 'Trainer Hop', 'Trainer Bede', 'Champion Leon'];
 
-export const RegionGyms = [
-    KantoGyms,
-    JohtoGyms,
-    HoennGyms,
-    SinnohGyms,
-    UnovaGyms,
-    KalosGyms,
-    AlolaGyms,
-    GalarGyms,
-];
+export const RegionGyms = [KantoGyms, JohtoGyms, HoennGyms, SinnohGyms, UnovaGyms, KalosGyms, AlolaGyms, GalarGyms];
 
 export function getGymIndex(gym: string): number {
     return RegionGyms.flat().findIndex((g) => g === gym);
@@ -847,33 +724,9 @@ export function getGymRegion(gym: string): Region {
     return RegionGyms.findIndex((gyms) => gyms.find((g) => g === gym));
 }
 
-export const KantoDungeons = [
-    'Viridian Forest',
-    'Digletts Cave',
-    'Mt. Moon',
-    'Rock Tunnel',
-    'Power Plant',
-    'Pokemon Tower',
-    'Seafoam Islands',
-    'Pokemon Mansion',
-    'Victory Road',
-    'Cerulean Cave',
-];
+export const KantoDungeons = ['Viridian Forest', 'Digletts Cave', 'Mt. Moon', 'Rock Tunnel', 'Power Plant', 'Pokemon Tower', 'Seafoam Islands', 'Pokemon Mansion', 'Victory Road', 'Cerulean Cave'];
 
-export const JohtoDungeons = [
-    'Sprout Tower',
-    'Ruins of Alph',
-    'Union Cave',
-    'Slowpoke Well',
-    'Ilex Forest',
-    'Burned Tower',
-    'Tin Tower',
-    'Whirl Islands',
-    'Mt Mortar',
-    'Ice Path',
-    'Dark Cave',
-    'Mt Silver',
-];
+export const JohtoDungeons = ['Sprout Tower', 'Ruins of Alph', 'Union Cave', 'Slowpoke Well', 'Ilex Forest', 'Burned Tower', 'Tin Tower', 'Whirl Islands', 'Mt Mortar', 'Ice Path', 'Dark Cave', 'Mt Silver'];
 
 export const HoennDungeons = [
     'Petalburg Woods',
@@ -921,29 +774,7 @@ export const HoennDungeons = [
     */
 ];
 
-export const SinnohDungeons = [
-    'Oreburgh Gate',
-    'Ravaged Path',
-    'Eterna Forest',
-    'Old Chateau',
-    'Wayward Cave',
-    'Mt. Coronet South',
-    'Solaceon Ruins',
-    'Iron Island',
-    'Mt. Coronet North',
-    'Lake Verity',
-    'Lake Valor',
-    'Lake Acuity',
-    'Distortion World',
-    'Victory Road Sinnoh',
-    'Spear Pillar',
-    'Fullmoon Island',
-    'Newmoon Island',
-    'Flower Paradise',
-    'Snowpoint Temple',
-    'Stark Mountain',
-    'Hall of Origin',
-];
+export const SinnohDungeons = ['Oreburgh Gate', 'Ravaged Path', 'Eterna Forest', 'Old Chateau', 'Wayward Cave', 'Mt. Coronet South', 'Solaceon Ruins', 'Iron Island', 'Mt. Coronet North', 'Lake Verity', 'Lake Valor', 'Lake Acuity', 'Distortion World', 'Victory Road Sinnoh', 'Spear Pillar', 'Fullmoon Island', 'Newmoon Island', 'Flower Paradise', 'Snowpoint Temple', 'Stark Mountain', 'Hall of Origin'];
 
 export const UnovaDungeons = [
     'Pledge Grove',
@@ -979,7 +810,7 @@ export const KalosDungeons = [
     'Glittering Cave',
     'Reflection Cave',
     // 'Tower of Mastery',
-    'Sea Spirit\'s Den',
+    "Sea Spirit's Den",
     'Kalos Power Plant',
     'Pokéball Factory',
     'Lost Hotel',
@@ -993,8 +824,8 @@ export const KalosDungeons = [
 
 export const AlolaDungeons = [
     'Exeggutor Island Hill',
-    'Trainers\' School',
-    'Hau\'oli Cemetery',
+    "Trainers' School",
+    "Hau'oli Cemetery",
     'Verdant Cavern',
     'Melemele Meadow',
     'Seaward Cave',
@@ -1005,13 +836,13 @@ export const AlolaDungeons = [
     'Brooklet Hill',
     'Wela Volcano Park',
     'Lush Jungle',
-    'Diglett\'s Tunnel',
+    "Diglett's Tunnel",
     'Memorial Hill',
     'Ruins of Life',
     'Malie Garden',
     'Hokulani Observatory',
     'Thrifty Megamart',
-    'Ula\'ula Meadow',
+    "Ula'ula Meadow",
     'Po Town',
     'Mount Lanikala',
     'Ruins of Abundance',
@@ -1022,28 +853,9 @@ export const AlolaDungeons = [
     'Resolution Cave',
 ];
 
-export const GalarDungeons = [
-    'Slumbering Weald',
-    'Inner Slumbering Weald',
-    'Galar Mine',
-    'Galar Mine No. 2',
-    'Glimwood Tangle',
-    'Rose Tower',
-    'Watchtower Ruins',
-    'Dusty Bowl',
-    'Lake of Outrage',
-];
+export const GalarDungeons = ['Slumbering Weald', 'Inner Slumbering Weald', 'Galar Mine', 'Galar Mine No. 2', 'Glimwood Tangle', 'Rose Tower', 'Watchtower Ruins', 'Dusty Bowl', 'Lake of Outrage'];
 
-export const RegionDungeons = [
-    KantoDungeons,
-    JohtoDungeons,
-    HoennDungeons,
-    SinnohDungeons,
-    UnovaDungeons,
-    KalosDungeons,
-    AlolaDungeons,
-    GalarDungeons,
-];
+export const RegionDungeons = [KantoDungeons, JohtoDungeons, HoennDungeons, SinnohDungeons, UnovaDungeons, KalosDungeons, AlolaDungeons, GalarDungeons];
 
 export function getDungeonIndex(dungeon: string): number {
     return RegionDungeons.flat().findIndex((d) => d === dungeon);
@@ -1071,6 +883,6 @@ export const DockTowns = [
     'Canalave City', // Sinnoh
     'Castelia City', // Unova
     'Coumarine City', // Kalos
-    'Hau\'oli City', // Alola
+    "Hau'oli City", // Alola
     'Hulbury', // Galar
 ];

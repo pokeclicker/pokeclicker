@@ -19,19 +19,7 @@ class PartyPokemon implements Saveable {
     _category: KnockoutObservable<number>;
     proteinsUsed: KnockoutObservable<number>;
 
-    constructor(
-        public id: number,
-        public name: PokemonNameType,
-        public evolutions: Evolution[],
-        public baseAttack: number,
-        public attackBonusPercent: number = 0,
-        public attackBonusAmount: number = 0,
-        proteinsUsed,
-        public exp: number = 0,
-        breeding = false,
-        shiny = false,
-        category = 0
-    ) {
+    constructor(public id: number, public name: PokemonNameType, public evolutions: Evolution[], public baseAttack: number, public attackBonusPercent: number = 0, public attackBonusAmount: number = 0, proteinsUsed, public exp: number = 0, breeding = false, shiny = false, category = 0) {
         this.proteinsUsed = ko.observable(proteinsUsed);
         this._breeding = ko.observable(breeding);
         this._shiny = ko.observable(shiny);
@@ -41,7 +29,7 @@ class PartyPokemon implements Saveable {
     }
 
     public calculateAttack(): number {
-        const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
+        const attackBonusMultiplier = 1 + this.attackBonusPercent / 100;
         const levelMultiplier = this.level / 100;
         return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier));
     }
@@ -153,7 +141,6 @@ class PartyPokemon implements Saveable {
                 }
             }
         }
-
     }
 
     public toJSON() {

@@ -1,71 +1,76 @@
-@import "variables.less";
+@import 'variables.less';
 
 @locked: rgba(0, 0, 0, 0.5);
 @currentPlace: rgba(85, 255, 0, 0.5);
 @incomplete: rgba(255, 145, 0, 0.7);
-
+@complete: rgba(255, 72, 0, 0.7);
 #map {
-  rect, path {
-    cursor: pointer;
-    fill: transparent;
-  }
-
-  text {
-    pointer-events: none;
-  }
-
-  .currentRoute {
-    fill: @currentPlace;
-  }
-  
-  .unlockedUnfinishedRoute {
-    fill: @incomplete;
-  }
-  
-  .lockedRoute {
-    fill: @locked;
-  }
-
-  .city {
-    fill: @locked;
-
-    &.currentTown {
-      fill: @currentPlace;
+    rect,
+    path {
+        cursor: pointer;
+        fill: transparent;
     }
 
-    &.unlockedUnfinishedTown {
-      fill: @incomplete;
+    text {
+        pointer-events: none;
     }
 
-    &.unlockedTown {
-      fill: transparent;
-
-      &.flash {
-        fill: #FFD700;
-        stroke: black;
-      }
-    }
-  }
-
-  .dungeon {
-    fill: @locked;
-
-    &.unlockedDungeon {
-      fill: @incomplete;
+    .currentRoute {
+        fill: @currentPlace;
     }
 
-    &.completedDungeon {
-      fill: transparent;
+    .unlockedUnfinishedRoute {
+        fill: @incomplete;
     }
-  }
+
+    .lockedRoute {
+        fill: @locked;
+    }
+
+    .completedRoute {
+        fill: @complete;
+    }
+
+    .city {
+        fill: @locked;
+
+        &.currentTown {
+            fill: @currentPlace;
+        }
+
+        &.unlockedUnfinishedTown {
+            fill: @incomplete;
+        }
+
+        &.unlockedTown {
+            fill: transparent;
+
+            &.flash {
+                fill: #ffd700;
+                stroke: black;
+            }
+        }
+    }
+
+    .dungeon {
+        fill: @locked;
+
+        &.unlockedDungeon {
+            fill: @incomplete;
+        }
+
+        &.completedDungeon {
+            fill: transparent;
+        }
+    }
 }
 
 #mapTooltip {
-  position: absolute;
-  left: 0px;
-  font-size: 13px;
-  font-family: pokemonFont, "Helvetica Neue", sans-serif;
-  padding: 3px;
-  border: solid #7f7f7f 1px;
-  pointer-events: none;
+    position: absolute;
+    left: 0px;
+    font-size: 13px;
+    font-family: pokemonFont, 'Helvetica Neue', sans-serif;
+    padding: 3px;
+    border: solid #7f7f7f 1px;
+    pointer-events: none;
 }

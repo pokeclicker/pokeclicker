@@ -30,7 +30,7 @@ class Breeding implements Feature {
         this.queueSlots = ko.observable(this.defaults.queueSlots);
 
         this._eggList.forEach((egg) => {
-            egg.extend({deferred: true});
+            egg.extend({ deferred: true });
         });
         BreedingController.filter.category(Settings.getSetting('breedingCategoryFilter').value);
         BreedingController.filter.region(Settings.getSetting('breedingRegionFilter').value);
@@ -41,71 +41,16 @@ class Breeding implements Feature {
     }
 
     initialize(): void {
-        this.hatchList[EggType.Fire] = [
-            ['Charmander', 'Vulpix', 'Growlithe', 'Ponyta'],
-            ['Cyndaquil', 'Slugma', 'Houndour', 'Magby'],
-            ['Torchic', 'Numel'],
-            ['Chimchar'],
-            ['Tepig', 'Pansear'],
-            ['Fennekin'],
-            ['Litten'],
-            ['Scorbunny', 'Sizzlipede'],
-        ];
-        this.hatchList[EggType.Water] = [
-            ['Squirtle', 'Lapras', 'Staryu', 'Psyduck'],
-            ['Totodile', 'Wooper', 'Marill', 'Qwilfish'],
-            ['Mudkip', 'Feebas', 'Clamperl'],
-            ['Piplup', 'Finneon', 'Buizel'],
-            ['Oshawott', 'Panpour'],
-            ['Froakie'],
-            ['Popplio', 'Wimpod'],
-            ['Sobble', 'Chewtle'],
-        ];
-        this.hatchList[EggType.Grass] = [
-            ['Bulbasaur', 'Oddish', 'Tangela', 'Bellsprout'],
-            ['Chikorita', 'Hoppip', 'Sunkern'],
-            ['Treecko', 'Tropius', 'Roselia'],
-            ['Turtwig', 'Carnivine', 'Budew'],
-            ['Snivy', 'Pansage'],
-            ['Chespin'],
-            ['Rowlet', 'Morelull'],
-            ['Grookey', 'Gossifleur'],
-        ];
-        this.hatchList[EggType.Fighting] = [
-            ['Hitmonlee', 'Hitmonchan', 'Machop', 'Mankey'],
-            ['Tyrogue'],
-            ['Makuhita', 'Meditite'],
-            ['Riolu'],
-            ['Throh', 'Sawk'],
-            [],
-            ['Crabrawler'],
-            ['Falinks'],
-        ];
-        this.hatchList[EggType.Electric] = [
-            ['Magnemite', 'Pikachu', 'Voltorb', 'Electabuzz'],
-            ['Chinchou', 'Mareep', 'Elekid'],
-            ['Plusle', 'Minun', 'Electrike'],
-            ['Pachirisu', 'Shinx'],
-            ['Blitzle'],
-            [],
-            [],
-            ['Toxel', 'Pincurchin'],
-        ];
-        this.hatchList[EggType.Dragon] = [
-            ['Dratini', 'Dragonair', 'Dragonite'],
-            [],
-            ['Bagon', 'Shelgon', 'Salamence'],
-            ['Gible', 'Gabite', 'Garchomp'],
-            ['Deino', 'Zweilous', 'Hydreigon'],
-            ['Goomy'],
-            ['Turtonator', 'Drampa', 'Jangmo-o', 'Hakamo-o', 'Kommo-o'],
-            ['Dreepy', 'Drakloak', 'Dragapult'],
-        ];
+        this.hatchList[EggType.Fire] = [['Charmander', 'Vulpix', 'Growlithe', 'Ponyta'], ['Cyndaquil', 'Slugma', 'Houndour', 'Magby'], ['Torchic', 'Numel'], ['Chimchar'], ['Tepig', 'Pansear'], ['Fennekin'], ['Litten'], ['Scorbunny', 'Sizzlipede']];
+        this.hatchList[EggType.Water] = [['Squirtle', 'Lapras', 'Staryu', 'Psyduck'], ['Totodile', 'Wooper', 'Marill', 'Qwilfish'], ['Mudkip', 'Feebas', 'Clamperl'], ['Piplup', 'Finneon', 'Buizel'], ['Oshawott', 'Panpour'], ['Froakie'], ['Popplio', 'Wimpod'], ['Sobble', 'Chewtle']];
+        this.hatchList[EggType.Grass] = [['Bulbasaur', 'Oddish', 'Tangela', 'Bellsprout'], ['Chikorita', 'Hoppip', 'Sunkern'], ['Treecko', 'Tropius', 'Roselia'], ['Turtwig', 'Carnivine', 'Budew'], ['Snivy', 'Pansage'], ['Chespin'], ['Rowlet', 'Morelull'], ['Grookey', 'Gossifleur']];
+        this.hatchList[EggType.Fighting] = [['Hitmonlee', 'Hitmonchan', 'Machop', 'Mankey'], ['Tyrogue'], ['Makuhita', 'Meditite'], ['Riolu'], ['Throh', 'Sawk'], [], ['Crabrawler'], ['Falinks']];
+        this.hatchList[EggType.Electric] = [['Magnemite', 'Pikachu', 'Voltorb', 'Electabuzz'], ['Chinchou', 'Mareep', 'Elekid'], ['Plusle', 'Minun', 'Electrike'], ['Pachirisu', 'Shinx'], ['Blitzle'], [], [], ['Toxel', 'Pincurchin']];
+        this.hatchList[EggType.Dragon] = [['Dratini', 'Dragonair', 'Dragonite'], [], ['Bagon', 'Shelgon', 'Salamence'], ['Gible', 'Gabite', 'Garchomp'], ['Deino', 'Zweilous', 'Hydreigon'], ['Goomy'], ['Turtonator', 'Drampa', 'Jangmo-o', 'Hakamo-o', 'Kommo-o'], ['Dreepy', 'Drakloak', 'Dragapult']];
         BreedingController.initialize();
     }
 
-    update(delta: number): void {
-    }
+    update(delta: number): void {}
 
     canAccess(): boolean {
         return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Mystery_egg);
@@ -135,10 +80,9 @@ class Breeding implements Feature {
         this.queueList(json['queueList'] ? json['queueList'] : this.defaults.queueList);
     }
 
-
     toJSON(): Record<string, any> {
         return {
-            eggList: this.eggList.map(egg => egg() === null ? new Egg() : egg().toJSON()),
+            eggList: this.eggList.map((egg) => (egg() === null ? new Egg() : egg().toJSON())),
             eggSlots: this.eggSlots,
             queueList: this.queueList(),
             queueSlots: this.queueSlots(),
@@ -191,11 +135,11 @@ class Breeding implements Feature {
         amount *= this.getStepMultiplier();
 
         amount = Math.round(amount);
-        let index =  this.eggList.length;
+        let index = this.eggList.length;
         while (index-- > 0) {
             const egg = this.eggList[index]();
             egg.addSteps(amount, this.multiplier);
-            if (this.queueList().length && egg.progress() >= 100) {
+            if (egg.progress() >= 100) {
                 this.hatchPokemonEgg(index);
             }
         }
@@ -239,7 +183,7 @@ class Breeding implements Feature {
         const queueSize = this.queueList().length;
         if (queueSize > index) {
             const pokemonName = this.queueList.splice(index, 1)[0];
-            App.game.party._caughtPokemon().find(p => p.name == pokemonName).breeding = false;
+            App.game.party._caughtPokemon().find((p) => p.name == pokemonName).breeding = false;
             return true;
         }
         return false;
@@ -285,7 +229,7 @@ class Breeding implements Feature {
     }
 
     public moveEggs(): void {
-        const tempEggList = App.game.breeding._eggList.filter(egg => egg().type != EggType.None);
+        const tempEggList = App.game.breeding._eggList.filter((egg) => egg().type != EggType.None);
 
         this._eggList.forEach((egg, index) => {
             egg(tempEggList[index] ? tempEggList[index]() : new Egg());
@@ -299,7 +243,7 @@ class Breeding implements Feature {
 
     public createTypedEgg(type: EggType): Egg {
         const hatchList = this.hatchList[type];
-        const hatchable = hatchList.slice(0, player.highestRegion() + 1).filter(list => list.length);
+        const hatchable = hatchList.slice(0, player.highestRegion() + 1).filter((list) => list.length);
 
         // highest region has 1/ratio chance, next highest has 1/(ratio ^ 2), etc.
         // Leftover is given to Kanto, making Kanto and Johto equal chance
@@ -403,9 +347,7 @@ class Breeding implements Feature {
 
     getAllCaughtStatus(): CaughtStatus {
         return GameHelper.enumNumbers(EggType).reduce((status: CaughtStatus, type: EggType) => {
-            return this.hatchList[type]
-                ? Math.min(status, this.getTypeCaughtStatus(type))
-                : status;
+            return this.hatchList[type] ? Math.min(status, this.getTypeCaughtStatus(type)) : status;
         }, CaughtStatus.CaughtShiny);
     }
 
@@ -430,5 +372,4 @@ class Breeding implements Feature {
             $('#breedingModal').modal('hide');
         }
     }
-
 }

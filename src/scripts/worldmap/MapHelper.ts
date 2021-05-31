@@ -2,7 +2,6 @@
 /// <reference path="../GameConstants.d.ts" />
 
 class MapHelper {
-
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
         if (isNaN(route)) {
             return;
@@ -29,7 +28,7 @@ class MapHelper {
             const routeData = Routes.getRoute(region, route);
             const reqsList = [];
 
-            routeData.requirements?.forEach(requirement => {
+            routeData.requirements?.forEach((requirement) => {
                 if (!requirement.isCompleted()) {
                     reqsList.push(requirement.hint());
                 }
@@ -57,11 +56,9 @@ class MapHelper {
     public static getCurrentEnvironment(): GameConstants.Environment {
         const area = player.route() || player.town()?.name || undefined;
 
-        const [env] = Object.entries(GameConstants.Environments).find(
-            ([, regions]) => regions[player.region]?.has(area)
-        ) || [];
+        const [env] = Object.entries(GameConstants.Environments).find(([, regions]) => regions[player.region]?.has(area)) || [];
 
-        return (env as GameConstants.Environment);
+        return env as GameConstants.Environment;
     }
 
     public static calculateBattleCssClass(): string {
@@ -75,7 +72,11 @@ class MapHelper {
             cls = 'currentRoute';
         } else if (MapHelper.accessToRoute(route, region)) {
             if (App.game.statistics.routeKills[region][route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
-                cls = 'unlockedRoute';
+                if (RouteHelper.routeCompleted(route, region, false)) {
+                    cls = 'completedRoute';
+                } else {
+                    cls = 'unlockedRoute';
+                }
             } else {
                 cls = 'unlockedUnfinishedRoute';
             }
@@ -139,7 +140,7 @@ class MapHelper {
             const town = TownList[townName];
             const reqsList = [];
 
-            town.requirements?.forEach(requirement => {
+            town.requirements?.forEach((requirement) => {
                 if (!requirement.isCompleted()) {
                     reqsList.push(requirement.hint());
                 }
@@ -200,7 +201,7 @@ class MapHelper {
     }
 
     public static ableToTravel() {
-        return player.highestRegion() < GameConstants.MAX_AVAILABLE_REGION && new Set(App.game.party.caughtPokemon.filter(p => p.id > 0 && PokemonHelper.calcNativeRegion(p.name) <= player.highestRegion()).map(p => Math.floor(p.id))).size >= GameConstants.TotalPokemonsPerRegion[player.highestRegion()];
+        return player.highestRegion() < GameConstants.MAX_AVAILABLE_REGION && new Set(App.game.party.caughtPokemon.filter((p) => p.id > 0 && PokemonHelper.calcNativeRegion(p.name) <= player.highestRegion()).map((p) => Math.floor(p.id))).size >= GameConstants.TotalPokemonsPerRegion[player.highestRegion()];
     }
 
     public static travelToNextRegion() {
@@ -211,14 +212,9 @@ class MapHelper {
             MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
             player.region = player.highestRegion();
             // Track when users move region and how long it took in seconds
-            LogEvent('new region', 'new region',
-                GameConstants.Region[player.highestRegion()],
-                App.game.statistics.secondsPlayed());
+            LogEvent('new region', 'new region', GameConstants.Region[player.highestRegion()], App.game.statistics.secondsPlayed());
             // Gather users attack when they moved regions
-            LogEvent('attack measurement', 'new region',
-                GameConstants.Region[player.highestRegion()],
-                App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, false));
+            LogEvent('attack measurement', 'new region', GameConstants.Region[player.highestRegion()], App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, false));
         }
     }
-
 }

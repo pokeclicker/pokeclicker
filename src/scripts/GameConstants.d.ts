@@ -30,6 +30,7 @@ namespace GameConstants {
     declare const MAX_LOAD_TIME: number;
     declare const MUTATION_TICK: number;
     declare const WANDER_TICK: number;
+    declare const POKEBALL_SPEED: number;
     declare const MAX_AVAILABLE_REGION: number;
     declare const TotalPokemonsPerRegion: number[];
     declare const ITEM_USE_TIME: number;
@@ -130,7 +131,7 @@ namespace GameConstants {
         safari,
         town,
         shop,
-        battleFrontier
+        battleFrontier,
     }
     declare enum Pokeball {
         'None',
@@ -150,19 +151,19 @@ namespace GameConstants {
         dungeonToken,
         diamond,
         farmPoint,
-        battlePoint
+        battlePoint,
     }
     declare enum TypeEffectiveness {
         Immune,
         NotVery,
         Normal,
-        Very
+        Very,
     }
     declare enum TypeEffectivenessValue {
         Immune,
         NotVery,
         Normal,
-        Very
+        Very,
     }
     declare function humanifyString(str: string): string;
     declare function camelCaseToString(str: string): string;
@@ -181,7 +182,7 @@ namespace GameConstants {
         alola,
         galar,
         armor,
-        crown
+        crown,
     }
     declare function randomIntBetween(min: number, max: number): number;
     declare function randomElement(array: any[]): any;
@@ -189,25 +190,25 @@ namespace GameConstants {
     declare function expRandomElement<T>(array: T[], ratio: number): T;
     declare const TypeColor: string[];
     declare const ROUTE_KILLS_NEEDED: number;
-    declare type EnvironmentData = Partial<Record<number, Set<string | number>>>
+    declare type EnvironmentData = Partial<Record<number, Set<string | number>>>;
     declare const Environments: {
-        Water: EnvironmentData,
-        Ice: EnvironmentData,
-        Forest: EnvironmentData,
-        Cave: EnvironmentData,
-        GemCave: EnvironmentData,
-        PowerPlant: EnvironmentData,
-        Mansion: EnvironmentData,
-        Graveyard: EnvironmentData,
+        Water: EnvironmentData;
+        Ice: EnvironmentData;
+        Forest: EnvironmentData;
+        Cave: EnvironmentData;
+        GemCave: EnvironmentData;
+        PowerPlant: EnvironmentData;
+        Mansion: EnvironmentData;
+        Graveyard: EnvironmentData;
     };
     declare type Environment = keyof typeof Environments;
-    declare const EnvironmentCssClass:Record<Environment, string>;
+    declare const EnvironmentCssClass: Record<Environment, string>;
     declare enum Starter {
         'None' = '',
         'Bulbasaur',
         'Charmander',
         'Squirtle',
-        'Pikachu'
+        'Pikachu',
     }
     declare enum StoneType {
         'None',
@@ -246,7 +247,7 @@ namespace GameConstants {
         'Lucky_egg' = '',
         'Token_collector' = '',
         'Item_magnet' = '',
-        'Lucky_incense' = ''
+        'Lucky_incense' = '',
     }
     declare enum PokemonItemType {
         'Eevee',
@@ -265,7 +266,7 @@ namespace GameConstants {
         'Meloetta (pirouette)',
         'Toxel',
         'Eternatus',
-        'Slowpoke (Galar)'
+        'Slowpoke (Galar)',
     }
     declare enum PokeBlockColor {
         Black,
@@ -273,16 +274,16 @@ namespace GameConstants {
         Gold,
         Purple,
         Gray,
-        White
+        White,
     }
     declare enum VitaminType {
         Protein,
-        RareCandy
+        RareCandy,
     }
     declare enum EnergyRestoreSize {
         SmallRestore,
         MediumRestore,
-        LargeRestore
+        LargeRestore,
     }
     declare enum EggItemType {
         'Fire_egg',
@@ -292,7 +293,7 @@ namespace GameConstants {
         'Electric_egg',
         'Dragon_egg',
         'Pokemon_egg',
-        'Mystery_egg'
+        'Mystery_egg',
     }
     declare const EnergyRestoreEffect: {
         SmallRestore: number;

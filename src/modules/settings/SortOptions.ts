@@ -1,4 +1,5 @@
 import { BREEDING_ATTACK_BONUS } from '../GameConstants';
+import PartyHelper from '../party/PartyHelper';
 
 export enum SortOptions {
     id = 0,
@@ -12,6 +13,7 @@ export enum SortOptions {
     timesHatched = 8,
     category = 9,
     proteinsUsed = 10,
+    effectivebreedingEfficiency = 11,
 }
 
 export type SortOptionConfig = {
@@ -63,7 +65,7 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.breedingEfficiency]: {
         text: 'Breeding Efficiency',
-        getValue: (p) => ((p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed()) / pokemonMap[p.name].eggCycles),
+        getValue: (p) => (p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed()) / pokemonMap[p.name].eggCycles,
         invert: true,
     },
 
@@ -85,5 +87,11 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.proteinsUsed]: {
         text: 'Proteins Used',
         getValue: (p) => p.proteinsUsed() || 0,
+    },
+
+    [SortOptions.effectivebreedingEfficiency]: {
+        text: 'Region Breeding Efficiency',
+        getValue: (p) => ((p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed()) * PartyHelper.calculateRegionMultiplier(p)) / pokemonMap[p.name].eggCycles,
+        invert: true,
     },
 };

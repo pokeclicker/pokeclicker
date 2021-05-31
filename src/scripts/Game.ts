@@ -52,15 +52,17 @@ class Game {
 
         const saveObject = JSON.parse(saveJSON || '{}');
 
-        Object.keys(this).filter(key => this[key]?.saveKey).forEach(key => {
-            try {
-                const saveKey = this[key].saveKey;
-                // Load our save object or the default save data
-                this[key].fromJSON(saveObject[saveKey] || this[key].toJSON());
-            } catch (error) {
-                console.error('Unable to load sava data from JSON for:', key, '\nError:\n', error);
-            }
-        });
+        Object.keys(this)
+            .filter((key) => this[key]?.saveKey)
+            .forEach((key) => {
+                try {
+                    const saveKey = this[key].saveKey;
+                    // Load our save object or the default save data
+                    this[key].fromJSON(saveObject[saveKey] || this[key].toJSON());
+                } catch (error) {
+                    console.error('Unable to load sava data from JSON for:', key, '\nError:\n', error);
+                }
+            });
     }
 
     initialize() {
@@ -207,9 +209,7 @@ class Game {
         }
     }
 
-    save() {
-
-    }
+    save() {}
 
     // Knockout getters/setters
     get gameState() {

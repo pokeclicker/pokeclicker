@@ -23,18 +23,18 @@ class Quests implements Saveable {
     });
     public questSlots: KnockoutComputed<number> = ko.pureComputed((): number => {
         // Minimum of 1, Maximum of 4
-        return Math.min(4, Math.max(1, Math.floor(this.level() / 5)));
+        return Math.min(4, Math.max(2, Math.floor(this.level() / 5)));
     });
 
     // Get current quests by status
     public completedQuests: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {
-        return this.questList().filter(quest => quest.isCompleted());
+        return this.questList().filter((quest) => quest.isCompleted());
     });
     public currentQuests: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {
-        return this.questList().filter(quest => quest.inProgress() && !quest.claimed());
+        return this.questList().filter((quest) => quest.inProgress() && !quest.claimed());
     });
-    public incompleteQuests: KnockoutComputed<Array<Quest>> =  ko.pureComputed(() => {
-        return this.questList().filter(quest => !quest.isCompleted());
+    public incompleteQuests: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {
+        return this.questList().filter((quest) => !quest.isCompleted());
     });
 
     constructor() {}
@@ -44,11 +44,11 @@ class Quests implements Saveable {
      * @param name The quest line name
      */
     getQuestLine(name: string) {
-        return this.questLines().find(ql => ql.name.toLowerCase() == name.toLowerCase());
+        return this.questLines().find((ql) => ql.name.toLowerCase() == name.toLowerCase());
     }
 
     public beginQuest(index: number) {
-        const quest  = this.questList()[index];
+        const quest = this.questList()[index];
         // Check if we can start a new quest, and the requested quest isn't started or completed
         if (this.canStartNewQuest() && quest && !quest.inProgress() && !quest.isCompleted()) {
             quest.begin();
@@ -62,7 +62,7 @@ class Quests implements Saveable {
 
     public quitQuest(index: number, shouldConfirm = false) {
         // Check if we can quit this quest
-        const quest  = this.questList()[index];
+        const quest = this.questList()[index];
         if (quest && quest.inProgress()) {
             quest.quit(shouldConfirm);
         } else {
@@ -75,7 +75,7 @@ class Quests implements Saveable {
 
     public claimQuest(index: number) {
         // Check if we can claim this quest
-        const quest  = this.questList()[index];
+        const quest = this.questList()[index];
         if (quest && quest.isCompleted() && !quest.claimed()) {
             quest.claim();
             // Once the player completes every available quest, refresh the list for free
@@ -86,10 +86,7 @@ class Quests implements Saveable {
             }
 
             // Track quest completion and total quest completed
-            LogEvent('completed quest',
-                'quests',
-                `level (${this.level()})`,
-                App.game.statistics.questsCompleted());
+            LogEvent('completed quest', 'quests', `level (${this.level()})`, App.game.statistics.questsCompleted());
         } else {
             console.trace('cannot claim quest..');
             Notifier.notify({
@@ -127,7 +124,7 @@ class Quests implements Saveable {
         this.lastRefresh = date;
         this.lastRefreshLevel = level;
         this.lastRefreshRegion = player.highestRegion();
-        this.currentQuests().forEach(quest => quest.quit());
+        this.currentQuests().forEach((quest) => quest.quit());
         this.questList(QuestHelper.generateQuestList(this.generateSeed(date, level), GameConstants.QUESTS_PER_SET));
     }
 
@@ -138,22 +135,22 @@ class Quests implements Saveable {
     public async refreshQuests(free = this.freeRefresh(), shouldConfirm = false) {
         if (free || this.canAffordRefresh()) {
             if (!free) {
-                if (shouldConfirm && !await Notifier.confirm({
-                    title: 'Refresh quest list',
-                    message: 'Are you sure you want to refresh the quest list?',
-                    type: NotificationConstants.NotificationOption.warning,
-                    confirm: 'refresh',
-                })) {
+                if (
+                    shouldConfirm &&
+                    !(await Notifier.confirm({
+                        title: 'Refresh quest list',
+                        message: 'Are you sure you want to refresh the quest list?',
+                        type: NotificationConstants.NotificationOption.warning,
+                        confirm: 'refresh',
+                    }))
+                ) {
                     return;
                 }
                 App.game.wallet.loseAmount(this.getRefreshCost());
             }
 
             // Track when users refreshes the quest list and how much it cost
-            LogEvent('refresh quest list',
-                'quests',
-                `level (${this.level()})`,
-                free ? 0 : this.getRefreshCost().amount);
+            LogEvent('refresh quest list', 'quests', `level (${this.level()})`, free ? 0 : this.getRefreshCost().amount);
 
             this.freeRefresh(false);
             GameHelper.incrementObservable(this.refreshes);
@@ -192,7 +189,7 @@ class Quests implements Saveable {
         }
 
         // Check at least 1 quest is either not completed or in progress
-        if (this.questList().find(quest => !quest.isCompleted() && !quest.inProgress())) {
+        if (this.questList().find((quest) => !quest.isCompleted() && !quest.inProgress())) {
             return true;
         }
 
@@ -214,8 +211,10 @@ class Quests implements Saveable {
     public levelToXP(level: number): number {
         if (level >= 2) {
             // Sum of geometric series
-            const a = 1000, r = 1.2, n = level - 1;
-            const sum = a * (Math.pow(r, n) - 1) / (r - 1);
+            const a = 1000,
+                r = 1.2,
+                n = level - 1;
+            const sum = (a * (Math.pow(r, n) - 1)) / (r - 1);
             return Math.ceil(sum);
         } else {
             return 0;
@@ -223,7 +222,9 @@ class Quests implements Saveable {
     }
 
     public xpToLevel(xp: number): number {
-        const sum = xp, a = 1000, r = 1.2;
+        const sum = xp,
+            a = 1000,
+            r = 1.2;
         const n = Math.log(1 + ((r - 1) * sum) / a) / Math.log(r);
         return Math.floor(n + 1);
     }
@@ -232,13 +233,13 @@ class Quests implements Saveable {
         const current = this.level();
         const requiredForCurrent = this.levelToXP(current);
         const requiredForNext = this.levelToXP(current + 1);
-        return 100 * (this.xp() - requiredForCurrent) / (requiredForNext - requiredForCurrent);
+        return (100 * (this.xp() - requiredForCurrent)) / (requiredForNext - requiredForCurrent);
     }
 
     loadQuestList(questList) {
         // Sanity Check
         this.questList.removeAll();
-        questList.forEach(questData => {
+        questList.forEach((questData) => {
             if (questData.hasOwnProperty('name')) {
                 const quest = QuestHelper.createQuest(questData.name, questData.data);
                 quest.fromJSON(questData);
@@ -250,11 +251,11 @@ class Quests implements Saveable {
     }
 
     loadQuestLines(questLines) {
-        questLines.forEach(questLine => {
+        questLines.forEach((questLine) => {
             if (questLine.state == QuestLineState.inactive) {
                 return;
             }
-            const ql = this.questLines().find(ql => ql.name == questLine.name);
+            const ql = this.questLines().find((ql) => ql.name == questLine.name);
             if (ql) {
                 ql.state(questLine.state);
                 if (questLine.state == QuestLineState.started) {
@@ -272,7 +273,7 @@ class Quests implements Saveable {
             lastRefreshLevel: this.lastRefreshLevel,
             lastRefreshRegion: this.lastRefreshRegion,
             freeRefresh: this.freeRefresh(),
-            questList: this.questList().map(quest => quest.toJSON()),
+            questList: this.questList().map((quest) => quest.toJSON()),
             questLines: this.questLines(),
         };
     }
