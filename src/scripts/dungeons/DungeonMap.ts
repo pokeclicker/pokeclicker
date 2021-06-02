@@ -58,6 +58,9 @@ class DungeonMap {
             if (this.currentTile().type() == GameConstants.DungeonTile.enemy) {
                 DungeonBattle.generateNewEnemy();
             }
+            if (this.currentTile().type() == GameConstants.DungeonTile.chest) {
+                DungeonRunner.openChest();
+            }
             return true;
         }
         return false;
