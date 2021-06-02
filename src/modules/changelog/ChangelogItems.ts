@@ -1,4 +1,5 @@
 import Changelog, { changelogType } from './Changelog';
+
 import ChangelogUpdate from './ChangelogUpdate';
 
 /**
@@ -10,6 +11,20 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.3
+    new ChangelogUpdate('v0.8.3', new Date(2021, 5, 1)),
+    new Changelog(changelogType.NEW, 'Gyms now auto repeat, they can be left by clicking on a differenz Zone in the map'),
+    new Changelog(changelogType.NEW, 'Chests in Dungeons now get opened automatically when encountered'),
+    new Changelog(changelogType.NEW, 'Routes, where all Pokemons have already been caught now get highlighted'),
+    new Changelog(changelogType.NEW, 'Eggs now always get hatched automatically, even when the Hatchery Queue is empty'),
+    new Changelog(changelogType.NEW, 'Added Region Breeding Efficiency as Sort Option, this behaves like the normal Breeding Efficiency but also accounts for the Non-Native-Region Debuff'),
+    new Changelog(changelogType.NEW, 'Dungeon Bosses are now highlighted by an orange outline'),
+    new Changelog(changelogType.CHANGE, 'Battle Tick speed increased by 200%, Battle Frontier is unnaffected by this'),
+    new Changelog(changelogType.CHANGE, 'The Shiny chance to encounter Shinies in Battle has been decreased to 1/16384, to compensate for the increased Battle Tick speed'),
+    new Changelog(changelogType.CHANGE, 'Pokeball catch duration has been reduced by 80%, Safari balls are unaffected by this'),
+    new Changelog(changelogType.CHANGE, 'Quest Point gain has been increased by 400%'),
+    new Changelog(changelogType.CHANGE, 'The minimum number of Questslots has been increased by 1'),
+
     // v0.8.2
     new ChangelogUpdate('v0.8.2', new Date(2021, 4, 3)),
     new Changelog(changelogType.NEW, 'Added in game FAQ'),
@@ -68,7 +83,7 @@ const ChangelogItems = [
     new Changelog(changelogType.CHANGE, 'Dungeon Trainers Pokémon will now reward Dungeon Tokens when defeated'),
     new Changelog(changelogType.CHANGE, 'Dungeon Trainers will now reward Money when defeated'),
     new Changelog(changelogType.FIXED, 'Sound not remembering previously set volume'),
-    new Changelog(changelogType.FIXED, 'Let\'s Go mons not showing in Pokémon list'),
+    new Changelog(changelogType.FIXED, "Let's Go mons not showing in Pokémon list"),
     new Changelog(changelogType.FIXED, 'Some missing stone evolutions'),
     new Changelog(changelogType.FIXED, 'Elite four shortcut keys working again'),
     new Changelog(changelogType.FIXED, 'Fixed some Pokémon shop sprites'),
@@ -93,7 +108,7 @@ const ChangelogItems = [
     new Changelog(changelogType.CHANGE, 'Underground items can spawn in any rotation'),
     new Changelog(changelogType.CHANGE, 'Quest generation updated'),
     new Changelog(changelogType.CHANGE, 'Dynamic background Pokémon now have variable speed'),
-    new Changelog(changelogType.CHANGE, 'Leave button won\'t appear in Dungeon until the player has moved'),
+    new Changelog(changelogType.CHANGE, "Leave button won't appear in Dungeon until the player has moved"),
     new Changelog(changelogType.FIXED, 'Underground survey upgrade display'),
     new Changelog(changelogType.FIXED, 'Fix Heatran & Kyurem HP'),
     new Changelog(changelogType.FIXED, 'Underground no longer notifies on new game'),
@@ -505,9 +520,9 @@ const ChangelogItems = [
     new Changelog(changelogType.CHANGE, 'Updated Masterball pricing'),
     new Changelog(changelogType.CHANGE, 'Allow the game to continue running while Day Care is open'),
     new Changelog(changelogType.CHANGE, 'Allow the game to continue running while Underground is open'),
-    new Changelog(changelogType.CHANGE, 'Don\'t send the player back to Route 11 when leaving the Underground'),
+    new Changelog(changelogType.CHANGE, "Don't send the player back to Route 11 when leaving the Underground"),
     new Changelog(changelogType.CHANGE, 'Allow the game to continue running while Farm is open'),
-    new Changelog(changelogType.CHANGE, 'Don\'t send the player back to Route 14 when leaving the Farm'),
+    new Changelog(changelogType.CHANGE, "Don't send the player back to Route 14 when leaving the Farm"),
     new Changelog(changelogType.CHANGE, 'Added button to open Dock for cities located nearby'),
     new Changelog(changelogType.CHANGE, 'Moved shiny icon further into the corner in the Day Care view, to make it easier to spot already shiny Pokémon'),
     new Changelog(changelogType.CHANGE, 'Dungeon size scales depending on region'),
