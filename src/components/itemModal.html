@@ -1,9 +1,8 @@
 <!-- Show Items modal-->
-<div class="modal" id="showItemsModal" tabindex="-1" role="dialog"
-     aria-labelledby="showItemModalLabel" aria-hidden="true">
+<div class="modal" id="showItemsModal" tabindex="-1" role="dialog" aria-labelledby="showItemModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content" style="text-align: center">
-            <div class="modal-header" style='justify-content: space-around;'>
+            <div class="modal-header" style="justify-content: space-around">
                 <h5 class="modal-title">Items</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -12,9 +11,9 @@
 
             <div class="modal-body p-0">
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#evoStones">Evolution Stones</a></li>
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#itemBag">Item Bag</a></li>
-                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#keyItems">Key Items</a></li>
+                    <li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#evoStones">Evolution Stones</a></li>
+                    <li class="nav-item"><a data-toggle="tab" class="nav-link" href="#itemBag">Item Bag</a></li>
+                    <li class="nav-item"><a data-toggle="tab" class="nav-link" href="#keyItems">Key Items</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="evoStones" class="tab-pane active p-3">
@@ -22,47 +21,57 @@
 
                         <div class="row justify-content-sm-center">
                             <div class="row col-10" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
-                                <div class="col-2" style="cursor: pointer"
-                                        data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
-                                            click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}">
-                                    <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;">
+                                <div
+                                    class="col-2"
+                                    style="cursor: pointer"
+                                    data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
+                                            click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}"
+                                >
+                                    <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px" />
                                     <div data-bind="text: player._itemList[$data]()"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <hr/>
+                        <hr />
 
-                        <div class="row justify-content-sm-center" >
-                            <div class="row col-lg-10 col-md-12 offset-md-0 col-sm-12 offset-sm-0"
-                                data-bind="foreach: PokemonHelper.getPokemonsWithEvolution(GameConstants.StoneType[ItemHandler.stoneSelected()])">
+                        <div class="row justify-content-sm-center">
+                            <div class="row col-lg-10 col-md-12 offset-md-0 col-sm-12 offset-sm-0" data-bind="foreach: PokemonHelper.getPokemonsWithEvolution(GameConstants.StoneType[ItemHandler.stoneSelected()])">
                                 <div class="col-md-6 col-sm-10 col-lg-4 offset-sm-1 offset-md-0 offset-md-0 breedingListItem">
-                                    <button class="btn btn-secondary smallButton list-group-item-action" style="padding-right:15px"
-                                            data-bind="click: function() {ItemHandler.pokemonSelected(name)}, css:{ 'pokemon-selected': ItemHandler.pokemonSelected() === name}">
-                                        <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data.id, true) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
+                                    <button class="btn btn-secondary smallButton list-group-item-action" style="padding-right: 15px" data-bind="click: function() {ItemHandler.pokemonSelected(name)}, css:{ 'pokemon-selected': ItemHandler.pokemonSelected() === name}">
+                                        <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data.id, true) ? 'shiny' : '') + 'pokemon/' + id +'.png' }" />
                                         <span data-bind="text: name" style="margin-left: 20px">Name</span>
 
-                                        <span style="float:right; margin-top:8px" data-bind="template: { name: 'caughtStatusTemplate', data: {'status':
+                                        <span
+                                            style="float: right; margin-top: 8px"
+                                            data-bind="template: { name: 'caughtStatusTemplate', data: {'status':
                                             PartyController.getEvolutionsCaughtStatus($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()])
-                                            }}"></span>
+                                            }}"
+                                        ></span>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <hr/>
+                        <hr />
 
-                        <div class="row justify-content-center"
-                             data-bind="template: { name:'multiOptionTemplate',
+                        <div
+                            class="row justify-content-center"
+                            data-bind="template: { name:'multiOptionTemplate',
                                                     data: { observable: ItemHandler.amountSelected,
                                                             optionValues: [1,10,100,1000,Infinity]
                                                           }
-                                                  }">
-                        </div>
+                                                  }"
+                        ></div>
                         <p><i>Stops using evolution stones once a shiny is encountered</i></p>
                         <div class="row no-gutters justify-content-sm-center">
-                            <div class="row justify-content-center" style="padding:15px;">
+                            <div class="row justify-content-center" style="padding: 15px">
                                 <button data-bind="click: function(){ItemHandler.useStones()}" class="btn btn-lg btn-success">Use evolution stones!</button>
+                            </div>
+                        </div>
+                        <div class="row no-gutters justify-content-sm-center">
+                            <div class="row justify-content-center" style="padding: 15px">
+                                <button data-bind="click: function(){ItemHandler.buyStone()}" class="btn btn-lg btn-success">Buy evolution stones!</button>
                             </div>
                         </div>
                     </div>
@@ -77,10 +86,11 @@
 
                     <div id="keyItems" class="tab-pane p-3">
                         <div class="m-0">
-                            <div class="row no-gutters justify-content-sm-center"
-                                data-bind="foreach: App.game.keyItems.itemList">
+                            <div class="row no-gutters justify-content-sm-center" data-bind="foreach: App.game.keyItems.itemList">
                                 <div class="col-2">
-                                    <img class="clickable key-item" src=""
+                                    <img
+                                        class="clickable key-item"
+                                        src=""
                                         data-bind="attr:{
                                         src: 'assets/images/keyitems/' + KeyItems.KeyItem[$data.name] + '.png'},
                                 css: {'key-item-locked': !App.game.keyItems.hasKeyItem($data.name),
@@ -89,7 +99,8 @@
                                 event: {
                                     mouseover: function(){KeyItemController.hover($data.name)},
                                     mouseout : function(){KeyItemController.hoverRelease()}
-                                    }">
+                                    }"
+                                    />
                                 </div>
                             </div>
 
@@ -123,14 +134,17 @@
 </div>
 
 <script type="text/html" id="otherItemTemplate">
-    <div data-container="body" data-bind="tooltip: {
+    <div
+        data-container="body"
+        data-bind="tooltip: {
         title: ItemList[$data] ? `<u>${ItemList[$data].displayName}</u><br/>${ItemList[$data].description || ''}` : '',
         trigger: 'hover',
         placement:'top',
         html: true,
         boundary: document.getElementById('showItemsModal'),
-    }">
-        <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;">
+    }"
+    >
+        <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;" />
         <div data-bind="text: player._itemList[$data]()"></div>
     </div>
 </script>

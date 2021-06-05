@@ -1,13 +1,14 @@
-import Settings from './Settings';
+import { AchievementType, Region } from '../GameConstants';
+import { SortOptionConfigs, SortOptions } from './SortOptions';
+
+import BooleanSetting from './BooleanSetting';
+import DynamicBackground from '../background/DynamicBackground';
+import NotificationConstants from '../notifications/NotificationConstants';
+import PokemonType from '../enums/PokemonType';
+import RangeSetting from './RangeSetting';
 import Setting from './Setting';
 import SettingOption from './SettingOption';
-import BooleanSetting from './BooleanSetting';
-import RangeSetting from './RangeSetting';
-import PokemonType from '../enums/PokemonType';
-import NotificationConstants from '../notifications/NotificationConstants';
-import DynamicBackground from '../background/DynamicBackground';
-import { SortOptionConfigs, SortOptions } from './SortOptions';
-import { Region, AchievementType } from '../GameConstants';
+import Settings from './Settings';
 
 export default Settings;
 
@@ -17,7 +18,9 @@ export default Settings;
 
 // Display settings
 Settings.add(
-    new Setting<string>('theme', 'Theme',
+    new Setting<string>(
+        'theme',
+        'Theme',
         [
             new SettingOption('Cerulean', 'cerulean'),
             new SettingOption('Cosmo', 'cosmo'),
@@ -41,52 +44,22 @@ Settings.add(
             new SettingOption('United', 'united'),
             new SettingOption('Yeti (default)', 'yeti'),
         ],
-        'yeti'),
+        'yeti',
+    ),
 );
-Settings.add(new Setting<string>('breedingDisplay', 'Breeding progress display:',
-    [
-        new SettingOption('Percentage', 'percentage'),
-        new SettingOption('Step count', 'stepCount'),
-    ],
-    'percentage'));
-Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons:',
-    [
-        new SettingOption('+10, +100', 'original'),
-        new SettingOption('+100, +1000', 'bigplus'),
-        new SettingOption('×10, ÷10', 'multiplication'),
-    ],
-    'original'));
+Settings.add(new Setting<string>('breedingDisplay', 'Breeding progress display:', [new SettingOption('Percentage', 'percentage'), new SettingOption('Step count', 'stepCount')], 'percentage'));
+Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons:', [new SettingOption('+10, +100', 'original'), new SettingOption('+100, +1000', 'bigplus'), new SettingOption('×10, ÷10', 'multiplication')], 'original'));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
-Settings.add(new Setting<string>('backgroundImage', 'Background image:',
-    [
-        new SettingOption('Day', 'background-day'),
-        new SettingOption('Night', 'background-night'),
-        new SettingOption('Dynamic', 'background-dynamic'),
-    ],
-    'background-day'));
-Settings.add(new Setting<string>('eggAnimation', 'Egg Hatching Animation:',
-    [
-        new SettingOption('None', 'none'),
-        new SettingOption('Almost & fully ready', 'almost'),
-        new SettingOption('Fully ready', 'full'),
-    ],
-    'full'));
-Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal:',
-    [
-        new SettingOption('Never', 'never'),
-        new SettingOption('Egg Slots Full', 'egg'),
-        new SettingOption('Queue Slots Full', 'queue'),
-    ],
-    'queue'));
-Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
-    [
-        new SettingOption('To Next Stage', 'nextStage'),
-        new SettingOption('Ripe/Death', 'ripeDeath'),
-    ],
-    'nextStage'));
+Settings.add(new Setting<string>('backgroundImage', 'Background image:', [new SettingOption('Day', 'background-day'), new SettingOption('Night', 'background-night'), new SettingOption('Dynamic', 'background-dynamic')], 'background-day'));
+Settings.add(new Setting<string>('eggAnimation', 'Egg Hatching Animation:', [new SettingOption('None', 'none'), new SettingOption('Almost & fully ready', 'almost'), new SettingOption('Fully ready', 'full')], 'full'));
+Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal:', [new SettingOption('Never', 'never'), new SettingOption('Egg Slots Full', 'egg'), new SettingOption('Queue Slots Full', 'queue')], 'queue'));
+Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:', [new SettingOption('To Next Stage', 'nextStage'), new SettingOption('Ripe/Death', 'ripeDeath')], 'nextStage'));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
+Settings.add(new BooleanSetting('autoHarvest', 'Enable automatic harvesting of ripe berries', false));
+Settings.add(new BooleanSetting('autoReplant', 'Enable automatic Replanting of harvested berries', false));
+Settings.add(new BooleanSetting('autoBreed', 'Enable automatic Breeding of the most efficient Pokemons', false));
 
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((sound) => {
@@ -104,80 +77,23 @@ Object.values(NotificationConstants.NotificationSetting).forEach((setting) => {
  */
 
 // Party Sorting
-const sortsettings = Object.keys(SortOptionConfigs).map((opt) => (
-    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
-));
-Settings.add(new Setting<number>('partySort', 'Sort:',
-    sortsettings,
-    SortOptions.id));
+const sortsettings = Object.keys(SortOptionConfigs).map((opt) => new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10)));
+Settings.add(new Setting<number>('partySort', 'Sort:', sortsettings, SortOptions.id));
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
 
 // Breeding Filters
-Settings.add(new Setting<string>('breedingCategoryFilter', 'breedingCategoryFilter',
-    [],
-    '-1'));
-Settings.add(new Setting<string>('breedingRegionFilter', 'breedingRegionFilter',
-    [
-        new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(Region, (r) => r !== 'none'),
-        new SettingOption('None', '-1'),
-    ],
-    '-2'));
-Settings.add(new Setting<string>('breedingTypeFilter1', 'breedingTypeFilter1',
-    [
-        new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
-        new SettingOption('None', '-1'),
-    ],
-    '-2'));
-Settings.add(new Setting<string>('breedingTypeFilter2', 'breedingTypeFilter2',
-    [
-        new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
-        new SettingOption('None', '-1'),
-    ],
-    '-2'));
-Settings.add(new Setting<string>('breedingShinyFilter', 'breedingShinyFilter',
-    [
-        new SettingOption('All', '-1'),
-        new SettingOption('Not Shiny', '0'),
-        new SettingOption('Shiny', '1'),
-    ],
-    '-1'));
-Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter',
-    [
-        new SettingOption('Attack', 'attack'),
-        new SettingOption('Attack Bonus', 'attackBonus'),
-        new SettingOption('Base Attack', 'baseAttack'),
-        new SettingOption('Egg Steps', 'eggSteps'),
-        new SettingOption('Times Hatched', 'timesHatched'),
-        new SettingOption('Breeding Efficiency', 'breedingEfficiency'),
-        new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
-        new SettingOption('Pokedex ID', 'dexId'),
-    ],
-    'attack'));
+Settings.add(new Setting<string>('breedingCategoryFilter', 'breedingCategoryFilter', [], '-1'));
+Settings.add(new Setting<string>('breedingRegionFilter', 'breedingRegionFilter', [new SettingOption('All', '-2'), ...Settings.enumToSettingOptionArray(Region, (r) => r !== 'none'), new SettingOption('None', '-1')], '-2'));
+Settings.add(new Setting<string>('breedingTypeFilter1', 'breedingTypeFilter1', [new SettingOption('All', '-2'), ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'), new SettingOption('None', '-1')], '-2'));
+Settings.add(new Setting<string>('breedingTypeFilter2', 'breedingTypeFilter2', [new SettingOption('All', '-2'), ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'), new SettingOption('None', '-1')], '-2'));
+Settings.add(new Setting<string>('breedingShinyFilter', 'breedingShinyFilter', [new SettingOption('All', '-1'), new SettingOption('Not Shiny', '0'), new SettingOption('Shiny', '1')], '-1'));
+Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter', [new SettingOption('Attack', 'attack'), new SettingOption('Attack Bonus', 'attackBonus'), new SettingOption('Base Attack', 'baseAttack'), new SettingOption('Egg Steps', 'eggSteps'), new SettingOption('Times Hatched', 'timesHatched'), new SettingOption('Breeding Efficiency', 'breedingEfficiency'), new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'), new SettingOption('Pokedex ID', 'dexId')], 'attack'));
 
 // Achievements Filters
 Settings.add(new Setting<number>('achievementsPage', 'achievementsPage', [], 0));
-Settings.add(new Setting<string>('achievementsStatus', 'achievementsStatus',
-    [
-        new SettingOption('All', '-2'),
-        new SettingOption('Incomplete', '0'),
-        new SettingOption('Completed', '1'),
-    ],
-    '-2'));
-Settings.add(new Setting<string>('achievementsType', 'achievementsType',
-    [
-        new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(AchievementType, (a) => a !== 'None'),
-    ],
-    '-2'));
-Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
-    [
-        new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(Region),
-    ],
-    '-2'));
+Settings.add(new Setting<string>('achievementsStatus', 'achievementsStatus', [new SettingOption('All', '-2'), new SettingOption('Incomplete', '0'), new SettingOption('Completed', '1')], '-2'));
+Settings.add(new Setting<string>('achievementsType', 'achievementsType', [new SettingOption('All', '-2'), ...Settings.enumToSettingOptionArray(AchievementType, (a) => a !== 'None')], '-2'));
+Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion', [new SettingOption('All', '-2'), ...Settings.enumToSettingOptionArray(Region)], '-2'));
 
 /*
  * SUBSCRIBERS

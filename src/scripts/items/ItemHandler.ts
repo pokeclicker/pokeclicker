@@ -1,5 +1,4 @@
 class ItemHandler {
-
     public static stoneSelected: KnockoutObservable<string> = ko.observable('Fire_stone');
     public static pokemonSelected: KnockoutObservable<PokemonNameType> = ko.observable('Vulpix');
     public static amountSelected: KnockoutObservable<number> = ko.observable(1);
@@ -82,5 +81,12 @@ class ItemHandler {
             message: `You used ${amountUsed} ${ItemList[this.stoneSelected()].displayName}${multiple}`,
             type: NotificationConstants.NotificationOption.success,
         });
+    }
+
+    public static buyStone() {
+        const stoneSelected = ItemList[this.stoneSelected()];
+        if (stoneSelected.isAvailable()) {
+            stoneSelected.buy(Math.min(this.amountSelected(), 1));
+        }
     }
 }

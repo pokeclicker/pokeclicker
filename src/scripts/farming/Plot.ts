@@ -56,7 +56,7 @@ class Plot implements Saveable {
             if (this.berry === BerryType.None) {
                 return '';
             }
-            const growthTime = this.berryData.growthTime.find(t => this.age < t);
+            const growthTime = this.berryData.growthTime.find((t) => this.age < t);
             const timeLeft = Math.ceil(growthTime - this.age);
             const growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
             return GameConstants.formatTime(timeLeft / growthMultiplier);
@@ -138,7 +138,7 @@ class Plot implements Saveable {
             if (this.berry === BerryType.None) {
                 return PlotStage.Seed;
             }
-            return this.berryData.growthTime.findIndex(t => this.age <= t);
+            return this.berryData.growthTime.findIndex((t) => this.age <= t);
         });
 
         this.tooltip = ko.pureComputed(() => {
@@ -146,13 +146,12 @@ class Plot implements Saveable {
 
             // Time
             if (this.berry !== BerryType.None) {
-
                 tooltip.push(`<u>${BerryType[this.berry]}</u>`);
 
                 // Petaya Effect
                 if (App.game.farming.berryInFarm(BerryType.Petaya) && this.berry !== BerryType.Petaya && this.stage() == PlotStage.Berry) {
                     tooltip.push('∞ until death');
-                // Normal Time
+                    // Normal Time
                 } else {
                     const timeType = Settings.getSetting('farmDisplay').observableValue();
                     if (timeType === 'nextStage') {
@@ -207,7 +206,7 @@ class Plot implements Saveable {
             if (this.mulch !== MulchType.None) {
                 const mulchTime = this.formattedMulchTimeLeft();
                 tooltip.push('<u>Mulch</u>');
-                tooltip.push(`${MulchType[this.mulch].replace('_Mulch','')} : ${mulchTime}`);
+                tooltip.push(`${MulchType[this.mulch].replace('_Mulch', '')} : ${mulchTime}`);
             }
 
             return tooltip.join('<br/>');
@@ -243,7 +242,9 @@ class Plot implements Saveable {
             }
 
             if (updatedStage === PlotStage.Berry) {
-                this.notifications.push(FarmNotificationType.Ripe);
+                if (!Settings.getSetting('autoHarvest').observableValue()) {
+                    this.notifications.push(FarmNotificationType.Ripe);
+                }
                 change = true;
             }
 
@@ -255,6 +256,10 @@ class Plot implements Saveable {
             if (this.age > this.berryData.growthTime[4]) {
                 this.die();
                 change = true;
+            }
+
+            if (this.stage() === PlotStage.Berry && Settings.getSetting('autoHarvest').observableValue()) {
+                App.game.farming.harvestPlot(this);
             }
         }
 
@@ -271,8 +276,8 @@ class Plot implements Saveable {
     }
 
     private stageUpdated(oldAge: number, newAge: number): PlotStage {
-        const oldStage = this.berryData.growthTime.findIndex(t => oldAge < t);
-        const newStage = this.berryData.growthTime.findIndex(t => newAge < t);
+        const oldStage = this.berryData.growthTime.findIndex((t) => oldAge < t);
+        const newStage = this.berryData.growthTime.findIndex((t) => newAge < t);
         if (oldStage !== newStage) {
             return newStage;
         }
@@ -337,7 +342,9 @@ class Plot implements Saveable {
         }
 
         // Reset plant
-        this.berry = BerryType.None;
+        if (!Settings.getSetting('autoReplant').observableValue()) {
+            this.berry = BerryType.None;
+        }
         this.age = 0;
     }
 
@@ -349,7 +356,7 @@ class Plot implements Saveable {
         // Chance to generate wandering Pokemon
         if (Math.random() < GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]()) {
             // Get a random Pokemon from the list of possible encounters
-            const availablePokemon = this.berryData.wander.filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion());
+            const availablePokemon = this.berryData.wander.filter((pokemon) => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion());
             const wanderPokemon = availablePokemon[Math.floor(Math.random() * availablePokemon.length)];
 
             const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
@@ -363,7 +370,7 @@ class Plot implements Saveable {
 
             // Check for Starf berry generation
             if (shiny) {
-                const emptyPlots = App.game.farming.plotList.filter(plot => plot.isUnlocked && plot.isEmpty());
+                const emptyPlots = App.game.farming.plotList.filter((plot) => plot.isUnlocked && plot.isEmpty());
                 // No Starf generation if no empty plots :(
                 if (emptyPlots.length) {
                     const chosenPlot = emptyPlots[Math.floor(Math.random() * emptyPlots.length)];
@@ -372,7 +379,7 @@ class Plot implements Saveable {
                 }
             }
 
-            return {pokemon: wanderPokemon, shiny: shiny};
+            return { pokemon: wanderPokemon, shiny: shiny };
         }
         return undefined;
     }
@@ -385,7 +392,7 @@ class Plot implements Saveable {
         if (this.mulch === MulchType.Boost_Mulch) {
             multiplier = GameConstants.BOOST_MULCH_MULTIPLIER;
         } else if (this.mulch === MulchType.Amaze_Mulch) {
-            multiplier =  GameConstants.AMAZE_MULCH_GROWTH_MULTIPLIER;
+            multiplier = GameConstants.AMAZE_MULCH_GROWTH_MULTIPLIER;
         }
 
         multiplier *= this._auras[AuraType.Growth]();
@@ -474,7 +481,7 @@ class Plot implements Saveable {
     }
 
     clearAuras(): void {
-        this._auras.forEach(aura => aura(1));
+        this._auras.forEach((aura) => aura(1));
     }
 
     emitAura(index: number): void {
@@ -518,7 +525,7 @@ class Plot implements Saveable {
 
         for (let y = posY - 1; y <= posY + 1; y++) {
             for (let x = posX - 1; x <= posX + 1; x++) {
-                if (y < 0 || y > Farming.PLOT_HEIGHT - 1 || x < 0 || x >  Farming.PLOT_WIDTH - 1) {
+                if (y < 0 || y > Farming.PLOT_HEIGHT - 1 || x < 0 || x > Farming.PLOT_WIDTH - 1) {
                     continue;
                 }
                 if (y === posY && x === posX) {
@@ -540,11 +547,18 @@ class Plot implements Saveable {
         const posX = index % Farming.PLOT_WIDTH;
         const posY = (index - posX) / Farming.PLOT_HEIGHT;
 
-        const possiblePlots = [[posY - 1, posX], [posY, posX - 1], [posY, posX + 1], [posY + 1, posX]];
+        const possiblePlots = [
+            [posY - 1, posX],
+            [posY, posX - 1],
+            [posY, posX + 1],
+            [posY + 1, posX],
+        ];
 
-        return possiblePlots.filter(([y, x]) => {
-            return y >= 0 && y < Farming.PLOT_HEIGHT && x >= 0 && x < Farming.PLOT_WIDTH;
-        }).map(([y, x]) => y * Farming.PLOT_HEIGHT + x);
+        return possiblePlots
+            .filter(([y, x]) => {
+                return y >= 0 && y < Farming.PLOT_HEIGHT && x >= 0 && x < Farming.PLOT_WIDTH;
+            })
+            .map(([y, x]) => y * Farming.PLOT_HEIGHT + x);
     }
 
     get berryData(): Berry {
@@ -593,7 +607,6 @@ class Plot implements Saveable {
     }
 
     get auras(): number[] {
-        return this._auras.map(aura => aura());
+        return this._auras.map((aura) => aura());
     }
-
 }

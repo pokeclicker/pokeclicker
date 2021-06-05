@@ -89,9 +89,12 @@ class Dungeon {
      * Retreives the weights for all the possible bosses
      */
     get bossWeightList(): number[] {
-        return this.availableBosses().map((boss) => {
-            return boss.options?.weight ?? 1;
+        // Double the chance of encountering a Dungeon Boss Pokemon you have not yet caught
+        const list = this.availableBosses().map((boss) => {
+            return (boss.options?.weight ?? 1) * (boss instanceof DungeonBossPokemon && !App.game.party.alreadyCaughtPokemonByName(boss.name) ? 2 : 1);
         });
+        console.log(list);
+        return list;
     }
 
     /**

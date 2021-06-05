@@ -99,7 +99,11 @@ class MapHelper {
         if (MapHelper.accessToTown(town)) {
             if (dungeonList.hasOwnProperty(town)) {
                 if (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(town)]()) {
-                    return 'dungeon completedDungeon';
+                    if (DungeonRunner.dungeonCompleted(dungeonList[town], false)) {
+                        return 'dungeon completedRoute';
+                    } else {
+                        return 'dungeon completedDungeon';
+                    }
                 }
                 return 'dungeon unlockedDungeon';
             }
