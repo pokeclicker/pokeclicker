@@ -439,7 +439,6 @@ class Mine {
             rewardNumbers: this.rewardNumbers,
             surveyResult: this.surveyResult(),
             skipsRemaining: this.skipsRemaining(),
-            height: this.getHeight(),
         };
         return mineSave;
     }
