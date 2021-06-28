@@ -1327,6 +1327,9 @@ TownList['Snowpoint Temple'] = new DungeonTown(
 const AspertiaCityShop = new Shop([
     ItemList['Pokeball'],
 ]);
+const FloccesyTownShop = new Shop([
+    ItemList['Mystery_egg'],
+]);
 const VirbankCityShop = new Shop([
     ItemList['Greatball'],
 ]);
@@ -1412,6 +1415,7 @@ TownList['Floccesy Town'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 19)],
+        shop: FloccesyTownShop,
     }
 );
 TownList['Virbank City'] = new Town(
