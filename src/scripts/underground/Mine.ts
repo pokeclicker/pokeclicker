@@ -8,7 +8,7 @@ class Mine {
     public static itemsBuried: KnockoutObservable<number> = ko.observable(0);
     public static rewardNumbers: Array<number>;
     public static surveyResult = ko.observable(null);
-    public static skipsRemaining = ko.observable(Mine.maxSkips)
+    public static skipsRemaining = ko.observable(Mine.maxSkips);
 
     // 0 represents the Mine.Tool.Chisel but it's not loaded here yet.
     public static toolSelected: KnockoutObservable<Mine.Tool> = ko.observable(0);
@@ -129,15 +129,17 @@ class Mine {
         let rotations = Math.floor(Math.random() * 4);
 
         while (rotations-- > 0) {
-            reward.space = reward.space[0].map((val, index) => reward.space.map(row => row[index]).reverse());
+            reward.space = reward.space[0].map((val, index) => reward.space.map((row) => row[index]).reverse());
         }
 
         const currentRotation = this.calculateRotation(reward);
 
-        reward.space = reward.space.map(r => r.map(v => {
-            v.rotations = currentRotation;
-            return v;
-        }));
+        reward.space = reward.space.map((r) =>
+            r.map((v) => {
+                v.rotations = currentRotation;
+                return v;
+            })
+        );
 
         return reward;
     }
@@ -145,8 +147,8 @@ class Mine {
     private static calculateRotation(reward): number {
         let indexX = 0;
 
-        const indexY = reward.space.findIndex(y => {
-            indexX = y.findIndex(x => !x.x && !x.y);
+        const indexY = reward.space.findIndex((y) => {
+            indexX = y.findIndex((x) => !x.x && !x.y);
             return indexX >= 0;
         });
 
@@ -177,28 +179,31 @@ class Mine {
     }
 
     private static rewardSummary() {
-        return Mine.rewardNumbers.reduce((res, id) => {
-            const reward = UndergroundItem.list.find(x => x.id == id);
+        return Mine.rewardNumbers.reduce(
+            (res, id) => {
+                const reward = UndergroundItem.list.find((x) => x.id == id);
 
-            if (ItemList[reward.valueType]) {
-                res.evoItems++;
-            } else {
-                switch (reward.valueType) {
-                    case 'Diamond': {
-                        res.totalValue += reward.value;
-                        break;
-                    }
-                    case 'Mine Egg': {
-                        res.fossils++;
-                        break;
-                    }
-                    default: {
-                        res.plates++;
+                if (ItemList[reward.valueType]) {
+                    res.evoItems++;
+                } else {
+                    switch (reward.valueType) {
+                        case 'Diamond': {
+                            res.totalValue += reward.value;
+                            break;
+                        }
+                        case 'Mine Egg': {
+                            res.fossils++;
+                            break;
+                        }
+                        default: {
+                            res.plates++;
+                        }
                     }
                 }
-            }
-            return res;
-        }, {fossils: 0, plates: 0, evoItems: 0, totalValue: 0});
+                return res;
+            },
+            { fossils: 0, plates: 0, evoItems: 0, totalValue: 0 }
+        );
     }
 
     private static updatesurveyResult(summary) {
@@ -255,7 +260,7 @@ class Mine {
         }
     }
 
-    private static bomb() {
+    public static bomb() {
         let tiles = App.game.underground.getBombEfficiency();
         if (App.game.underground.energy >= Underground.BOMB_ENERGY) {
             while (tiles-- > 0) {
@@ -272,12 +277,15 @@ class Mine {
             return;
         }
 
-        if (!shouldConfirm || await Notifier.confirm({
-            title: 'Underground',
-            message: 'Skip this mine layer?',
-            type: NotificationConstants.NotificationOption.warning,
-            confirm: 'skip',
-        })) {
+        if (
+            !shouldConfirm ||
+            (await Notifier.confirm({
+                title: 'Underground',
+                message: 'Skip this mine layer?',
+                type: NotificationConstants.NotificationOption.warning,
+                confirm: 'skip',
+            }))
+        ) {
             setTimeout(Mine.completed, 1500);
             Mine.loadingNewLayer = true;
             GameHelper.incrementObservable(this.skipsRemaining, -1);
@@ -408,8 +416,7 @@ class Mine {
     }
 
     public static loadSavedMine(mine) {
-        this.grid = mine.grid.map(row => row.map(val => ko.observable(val))),
-        this.rewardGrid = mine.rewardGrid;
+        (this.grid = mine.grid.map((row) => row.map((val) => ko.observable(val)))), (this.rewardGrid = mine.rewardGrid);
         this.itemsFound(mine.itemsFound);
         this.itemsBuried(mine.itemsBuried);
         this.rewardNumbers = mine.rewardNumbers;
@@ -428,7 +435,7 @@ class Mine {
             Mine.loadMine();
         }
         const mineSave = {
-            grid: this.grid.map(row => row.map(val => val())),
+            grid: this.grid.map((row) => row.map((val) => val())),
             rewardGrid: this.rewardGrid,
             itemsFound: this.itemsFound(),
             itemsBuried: this.itemsBuried(),

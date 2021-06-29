@@ -21,73 +21,20 @@ class Underground implements Feature {
 
     initialize() {
         this.upgradeList = [
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Energy_Max, 'Max Energy', 10,
-                AmountFactory.createArray(
-                    GameHelper.createArray(50, 500, 50), GameConstants.Currency.diamond),
-                GameHelper.createArray(0, 100, 10)
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Items_Max, 'Max items', 4,
-                AmountFactory.createArray(
-                    GameHelper.createArray(200, 800, 200), GameConstants.Currency.diamond),
-                GameHelper.createArray(0, 4, 1)
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Items_Min, 'Min Items', 4,
-                AmountFactory.createArray(
-                    GameHelper.createArray(500, 5000, 1500), GameConstants.Currency.diamond),
-                GameHelper.createArray(0, 4, 1)
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Energy_Gain, 'Energy restored', 17,
-                AmountFactory.createArray(
-                    GameHelper.createArray(100, 1700, 100), GameConstants.Currency.diamond),
-                GameHelper.createArray(0, 17, 1)
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Energy_Regen_Time, 'Energy regen time', 20,
-                AmountFactory.createArray(
-                    GameHelper.createArray(20, 400, 20), GameConstants.Currency.diamond),
-                GameHelper.createArray(0, 20, 1),
-                false
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Daily_Deals_Max, 'Daily deals', 2,
-                AmountFactory.createArray(
-                    GameHelper.createArray(150, 300, 150), GameConstants.Currency.diamond),
-                GameHelper.createArray(0, 2, 1)
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Bomb_Efficiency, 'Bomb Efficiency', 5,
-                AmountFactory.createArray(
-                    GameHelper.createArray(50, 250, 50), GameConstants.Currency.diamond),
-                GameHelper.createArray(0, 10, 2)
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Survey_Cost, 'Survey Cost', 5,
-                AmountFactory.createArray(
-                    GameHelper.createArray(50, 250, 50), GameConstants.Currency.diamond),
-                GameHelper.createArray(0, 5, 1),
-                false
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Survey_Efficiency, 'Survey Efficiency', 4,
-                AmountFactory.createArray(
-                    GameHelper.createArray(100, 400, 100), GameConstants.Currency.diamond),
-                GameHelper.createArray(0, 4, 1)
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.NewYLayer, 'Larger underground, +1 Max Item', 1,
-                AmountFactory.createArray(
-                    GameHelper.createArray(3000, 3000, 3000), GameConstants.Currency.diamond),
-                GameHelper.createArray(0, 1, 1)
-            ),
+            new UndergroundUpgrade(UndergroundUpgrade.Upgrades.Energy_Max, 'Max Energy', 10, AmountFactory.createArray(GameHelper.createArray(50, 500, 50), GameConstants.Currency.diamond), GameHelper.createArray(0, 100, 10)),
+            new UndergroundUpgrade(UndergroundUpgrade.Upgrades.Items_Max, 'Max items', 4, AmountFactory.createArray(GameHelper.createArray(200, 800, 200), GameConstants.Currency.diamond), GameHelper.createArray(0, 4, 1)),
+            new UndergroundUpgrade(UndergroundUpgrade.Upgrades.Items_Min, 'Min Items', 4, AmountFactory.createArray(GameHelper.createArray(500, 5000, 1500), GameConstants.Currency.diamond), GameHelper.createArray(0, 4, 1)),
+            new UndergroundUpgrade(UndergroundUpgrade.Upgrades.Energy_Gain, 'Energy restored', 17, AmountFactory.createArray(GameHelper.createArray(100, 1700, 100), GameConstants.Currency.diamond), GameHelper.createArray(0, 17, 1)),
+            new UndergroundUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time, 'Energy regen time', 20, AmountFactory.createArray(GameHelper.createArray(20, 400, 20), GameConstants.Currency.diamond), GameHelper.createArray(0, 20, 1), false),
+            new UndergroundUpgrade(UndergroundUpgrade.Upgrades.Daily_Deals_Max, 'Daily deals', 2, AmountFactory.createArray(GameHelper.createArray(150, 300, 150), GameConstants.Currency.diamond), GameHelper.createArray(0, 2, 1)),
+            new UndergroundUpgrade(UndergroundUpgrade.Upgrades.Bomb_Efficiency, 'Bomb Efficiency', 5, AmountFactory.createArray(GameHelper.createArray(50, 250, 50), GameConstants.Currency.diamond), GameHelper.createArray(0, 10, 2)),
+            new UndergroundUpgrade(UndergroundUpgrade.Upgrades.Survey_Cost, 'Survey Cost', 5, AmountFactory.createArray(GameHelper.createArray(50, 250, 50), GameConstants.Currency.diamond), GameHelper.createArray(0, 5, 1), false),
+            new UndergroundUpgrade(UndergroundUpgrade.Upgrades.Survey_Efficiency, 'Survey Efficiency', 4, AmountFactory.createArray(GameHelper.createArray(100, 400, 100), GameConstants.Currency.diamond), GameHelper.createArray(0, 4, 1)),
+            new UndergroundUpgrade(UndergroundUpgrade.Upgrades.NewYLayer, 'Larger underground, +1 Max Item', 1, AmountFactory.createArray(GameHelper.createArray(3000, 3000, 3000), GameConstants.Currency.diamond), GameHelper.createArray(0, 1, 1)),
         ];
     }
 
-    update(delta: number) {
-    }
+    update(delta: number) {}
 
     getMaxEnergy() {
         return Underground.BASE_ENERGY_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Max).calculateBonus();
@@ -172,7 +119,7 @@ class Underground implements Feature {
         const item = Underground.getMineItemById(id);
 
         if (item.isStone()) {
-            const evostone: EvolutionStone = (ItemList[item.valueType] as EvolutionStone);
+            const evostone: EvolutionStone = ItemList[item.valueType] as EvolutionStone;
             evostone.gain(num);
             return;
         }
@@ -194,7 +141,7 @@ class Underground implements Feature {
     }
 
     public static getMineItemByName(name: string): UndergroundItem {
-        return UndergroundItem.list.find(i => i.name == name);
+        return UndergroundItem.list.find((i) => i.name == name);
     }
 
     public static getMineItemById(id: number): UndergroundItem {
@@ -208,7 +155,11 @@ class Underground implements Feature {
     gainEnergy() {
         if (this.energy < this.getMaxEnergy()) {
             const oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
-            this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
+            const newEnergy = this.energy + oakMultiplier * this.getEnergyGain();
+            if (newEnergy > this.getMaxEnergy()) {
+                Mine.bomb();
+            }
+            this.energy = Math.min(this.getMaxEnergy(), this.energy + oakMultiplier * this.getEnergyGain());
             if (this.energy === this.getMaxEnergy()) {
                 Notifier.notify({
                     message: 'Your mining energy has reached maximum capacity!',
@@ -370,7 +321,6 @@ class Underground implements Feature {
     set energy(value) {
         this._energy(value);
     }
-
 }
 
 $(document).ready(() => {
