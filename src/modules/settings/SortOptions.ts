@@ -14,6 +14,7 @@ export enum SortOptions {
     category = 9,
     proteinsUsed = 10,
     effectivebreedingEfficiency = 11,
+    shinyEfficiency = 12,
 }
 
 export type SortOptionConfig = {
@@ -93,5 +94,10 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
         text: 'Region Breeding Efficiency',
         getValue: (p) => ((p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed()) * PartyHelper.calculateRegionMultiplier(p)) / pokemonMap[p.name].eggCycles,
         invert: true,
+    },
+    [SortOptions.shinyEfficiency]: {
+        text: 'Shiny Breeding Efficiency',
+        getValue: (p) => (p.shiny ? 9999 : 1) * pokemonMap[p.name].eggCycles,
+        invert: false,
     },
 };

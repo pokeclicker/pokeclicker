@@ -1,4 +1,5 @@
 import Changelog, { changelogType } from './Changelog';
+import { SortOptionConfigs, SortOptions } from '../settings/SortOptions';
 
 import ChangelogUpdate from './ChangelogUpdate';
 
@@ -11,6 +12,10 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.4
+    new ChangelogUpdate('v0.8.3', new Date(2021, 7, 6)),
+    new Changelog(changelogType.CHANGE, 'The autobreeding now uses the same sort order as the party list'),
+    new Changelog(changelogType.NEW, `Added new sort order "${SortOptionConfigs[SortOptions.shinyEfficiency].text}"`),
     // v0.8.3
     new ChangelogUpdate('v0.8.3', new Date(2021, 5, 1)),
     new Changelog(changelogType.NEW, 'Gyms now auto repeat, they can be left by clicking on a differenz Zone in the map'),
