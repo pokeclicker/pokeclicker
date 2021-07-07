@@ -646,5 +646,6 @@ class QuestLineHelper {
         this.createTutorial();
         this.createDeoxysQuestLine();
         this.createUndergroundQuestLine();
+        this.createVivillonQuestLine();
     }
 }
