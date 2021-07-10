@@ -1285,7 +1285,11 @@ const pokemonList = createPokemonArray(
         'name': 'Galarian Meowth',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 255,
+<<<<<<< Updated upstream
         'type': [PokemonType.Normal],
+=======
+        'type': [PokemonType.Steel],
+>>>>>>> Stashed changes
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'eggCycles': 20,
@@ -16992,7 +16996,11 @@ const pokemonList = createPokemonArray(
     {
         'id': 800.03,
         'name': 'Necrozma (Ultra)',
+<<<<<<< Updated upstream
         'type': [PokemonType.Psychic],
+=======
+        'type': [PokemonType.Psychic, PokemonType.Dragon],
+>>>>>>> Stashed changes
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
@@ -20581,7 +20589,11 @@ const pokemonList = createPokemonArray(
     // {
     //     'id': -112,
     //     'name': 'Mega Aerodactyl',
+<<<<<<< Updated upstream
     //     'type': [PokemonType.Water, PokemonType.Dark],
+=======
+    //     'type': [PokemonType.Rock, PokemonType.Flying],
+>>>>>>> Stashed changes
     //     'eggCycles': 120,
     //     'levelType': LevelType.mediumslow,
     //     'exp': 215,
@@ -20650,6 +20662,10 @@ const pokemonList = createPokemonArray(
     {
         'id': -793,
         'name': '???',
+<<<<<<< Updated upstream
+=======
+        'nativeRegion': GameConstants.Region.alola,
+>>>>>>> Stashed changes
         'type': [PokemonType.Rock, PokemonType.Poison],
         'eggCycles': 120,
         'levelType': LevelType.slow,
