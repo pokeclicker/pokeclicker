@@ -150,7 +150,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchWater = new CustomQuest(100, ViviMarineAdd, 'Capture 100 Water type Pokémon', () => {
+        const catchWater = new CustomQuest(100, undefined, 'Capture 100 Water type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Water)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchWater);
@@ -169,7 +169,9 @@ class QuestLineHelper {
             1,
             ViviMarineRemove,
             'Find and capture the rare Vivillon! Hint: It has been spotted at some Lake.',
-            App.game.statistics.pokemonCaptured[666.09]
+            App.game.statistics.pokemonCaptured[666.09],
+            undefined,
+            ViviMarineAdd
         );
         VivillonQuestLine.addQuest(catchMarine);
         // Capture 100 Psychic type Pokemon
