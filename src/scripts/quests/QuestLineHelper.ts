@@ -136,7 +136,7 @@ class QuestLineHelper {
         App.game.quests.questLines().push(undergroundQuestLine);
     }
     public static createVivillonQuestLine() {
-        const VivillonQuestLine = new QuestLine('The great hunt', 'Discover the beauty of Vivillon');
+        const VivillonQuestLine = new QuestLine('The Great Vivillon Hunt!', 'Discover the beauty of Vivillon');
 
 
         // Capture 100 Water type Pokemon
@@ -183,7 +183,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchPsychic2 = new CustomQuest(100, ViviModernAdd, 'Capture 100 Psychic type Pokémon', () => {
+        const catchPsychic2 = new CustomQuest(100, undefined, 'Capture 100 Psychic type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Psychic)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchPsychic2);
@@ -200,7 +200,9 @@ class QuestLineHelper {
             1,
             ViviModernRemove,
             'Find and capture the rare Vivillon! Hint: It\'s surrounded by strong Pokémon.',
-            App.game.statistics.pokemonCaptured[666.08]
+            App.game.statistics.pokemonCaptured[666.08],
+            undefined,
+            ViviModernAdd
         );
         VivillonQuestLine.addQuest(catchModern);
         // Capture 100 Poison type Pokemon
@@ -212,7 +214,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchPoison = new CustomQuest(100, ViviJungleAdd, 'Capture 100 Poison type Pokémon', () => {
+        const catchPoison = new CustomQuest(100, undefined, 'Capture 100 Poison type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Poison)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchPoison);
@@ -229,7 +231,9 @@ class QuestLineHelper {
             1,
             ViviJungleRemove,
             'Find and capture the rare Vivillon! Hint: It has been spotted in a swamp.',
-            App.game.statistics.pokemonCaptured[666.18]
+            App.game.statistics.pokemonCaptured[666.18],
+            undefined,
+            ViviJungleAdd
         );
         VivillonQuestLine.addQuest(catchJungle);
         // Capture 100 Dark type Pokemon
@@ -241,7 +245,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchDark = new CustomQuest(100, ViviMonsoonAdd, 'Capture 100 Dark type Pokémon', () => {
+        const catchDark = new CustomQuest(100, undefined, 'Capture 100 Dark type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Dark)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchDark);
@@ -258,7 +262,9 @@ class QuestLineHelper {
             1,
             ViviMonsoonRemove,
             'Find and capture the rare Vivillon! Hint: It\'s hiding at a dark place.',
-            App.game.statistics.pokemonCaptured[666.14]
+            App.game.statistics.pokemonCaptured[666.14],
+            undefined,
+            ViviMonsoonAdd
         );
         VivillonQuestLine.addQuest(catchMonsoon);
         // Capture 100 Steel type Pokemon
@@ -270,7 +276,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchSteel = new CustomQuest(100, ViviTundraAdd, 'Capture 100 Steel type Pokémon', () => {
+        const catchSteel = new CustomQuest(100, undefined, 'Capture 100 Steel type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Steel)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchSteel);
@@ -287,7 +293,9 @@ class QuestLineHelper {
             1,
             ViviTundraRemove,
             'Find and capture the rare Vivillon! Hint: It flew into a factory.',
-            App.game.statistics.pokemonCaptured[666.03]
+            App.game.statistics.pokemonCaptured[666.03],
+            undefined,
+            ViviTundraAdd
         );
         VivillonQuestLine.addQuest(catchTundra);
         // Capture 100 Fire type Pokemon
@@ -299,7 +307,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchFire = new CustomQuest(100, ViviSunAdd, 'Capture 100 Fire type Pokémon', () => {
+        const catchFire = new CustomQuest(100, undefined, 'Capture 100 Fire type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Fire)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchFire);
@@ -316,7 +324,9 @@ class QuestLineHelper {
             1,
             ViviSunRemove,
             'Find and capture the rare Vivillon! Hint: It seems to like hot places.',
-            App.game.statistics.pokemonCaptured[666.16]
+            App.game.statistics.pokemonCaptured[666.16],
+            undefined,
+            ViviSunAdd
         );
         VivillonQuestLine.addQuest(catchSun);
         // Capture 100 Fighting type Pokemon
@@ -328,7 +338,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchFighting = new CustomQuest(100, ViviArchAdd, 'Capture 100 Fighting type Pokémon', () => {
+        const catchFighting = new CustomQuest(100, undefined, 'Capture 100 Fighting type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Fighting)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchFighting);
@@ -345,7 +355,9 @@ class QuestLineHelper {
             1,
             ViviArchRemove,
             'Find and capture the rare Vivillon! Hint: It\'s sitting on a swaying pillar.',
-            App.game.statistics.pokemonCaptured[666.10]
+            App.game.statistics.pokemonCaptured[666.10],
+            undefined,
+            ViviArchAdd
         );
         VivillonQuestLine.addQuest(catchArch);
         // Capture 100 Ghost type Pokemon
@@ -357,7 +369,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchGhost = new CustomQuest(100, ViviElegantAdd, 'Capture 100 Ghost type Pokémon', () => {
+        const catchGhost = new CustomQuest(100, undefined, 'Capture 100 Ghost type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Ghost)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchGhost);
@@ -374,7 +386,9 @@ class QuestLineHelper {
             1,
             ViviElegantRemove,
             'Find and capture the rare Vivillon! Hint: It\'s visiting an abandoned and spooky place.',
-            App.game.statistics.pokemonCaptured[666.06]
+            App.game.statistics.pokemonCaptured[666.06],
+            undefined,
+            ViviElegantAdd
         );
         VivillonQuestLine.addQuest(catchElegant);
         // Capture 100 Fairy type Pokemon
@@ -386,7 +400,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchFairy = new CustomQuest(100, ViviOceanAdd, 'Capture 100 Fairy type Pokémon', () => {
+        const catchFairy = new CustomQuest(100, undefined, 'Capture 100 Fairy type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Fairy)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchFairy);
@@ -403,7 +417,9 @@ class QuestLineHelper {
             1,
             ViviOceanRemove,
             'Find and capture the rare Vivillon! Hint: It\'s flying around an overgrown place full of dreams.',
-            App.game.statistics.pokemonCaptured[666.17]
+            App.game.statistics.pokemonCaptured[666.17],
+            undefined,
+            ViviOceanAdd
         );
         VivillonQuestLine.addQuest(catchOcean);
         // Capture 100 Electric type Pokemon
@@ -415,7 +431,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchElectric = new CustomQuest(100, ViviContiAdd, 'Capture 100 Electric type Pokémon', () => {
+        const catchElectric = new CustomQuest(100, undefined, 'Capture 100 Electric type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Electric)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchElectric);
@@ -432,7 +448,9 @@ class QuestLineHelper {
             1,
             ViviContiRemove,
             'Find and capture the rare Vivillon! Hint: It\s currently in a City full of Electric type Pokémon.',
-            App.game.statistics.pokemonCaptured[666.04]
+            App.game.statistics.pokemonCaptured[666.04],
+            undefined,
+            ViviContiAdd
         );
         VivillonQuestLine.addQuest(catchConti);
         // Capture 100 Bug type Pokemon
@@ -444,7 +462,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchBug = new CustomQuest(100, ViviRiverAdd, 'Capture 100 Bug type Pokémon', () => {
+        const catchBug = new CustomQuest(100, undefined, 'Capture 100 Bug type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Bug)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchBug);
@@ -461,7 +479,9 @@ class QuestLineHelper {
             1,
             ViviRiverRemove,
             'Find and capture the rare Vivillon! Hint: It hides in a dark Forest.',
-            App.game.statistics.pokemonCaptured[666.13]
+            App.game.statistics.pokemonCaptured[666.13],
+            undefined,
+            ViviRiverAdd
         );
         VivillonQuestLine.addQuest(catchRiver);
         // Capture 100 Flying type Pokemon
@@ -473,7 +493,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchFly = new CustomQuest(100, ViviPolarAdd, 'Capture 100 Flying type Pokémon', () => {
+        const catchFly = new CustomQuest(100, undefined, 'Capture 100 Flying type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Flying)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchFly);
@@ -490,7 +510,9 @@ class QuestLineHelper {
             1,
             ViviPolarRemove,
             'Find and capture the rare Vivillon! Hint: It\'s high up in the sky..',
-            App.game.statistics.pokemonCaptured[666.02]
+            App.game.statistics.pokemonCaptured[666.02],
+            undefined,
+            ViviPolarAdd
         );
         VivillonQuestLine.addQuest(catchPolar);
         // Capture 100 Ground type Pokemon
@@ -502,7 +524,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchGround = new CustomQuest(100, ViviSandstormAdd, 'Capture 100 Ground type Pokémon', () => {
+        const catchGround = new CustomQuest(100, undefined, 'Capture 100 Ground type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Ground)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchGround);
@@ -519,7 +541,9 @@ class QuestLineHelper {
             1,
             ViviSandstormRemove,
             'Find and capture the rare Vivillon! Hint: It got lost in the desert sand.',
-            App.game.statistics.pokemonCaptured[666.12]
+            App.game.statistics.pokemonCaptured[666.12],
+            undefined,
+            ViviSandstormAdd
         );
         VivillonQuestLine.addQuest(catchSandstorm);
         // Capture 100 Grass type Pokemon
@@ -531,7 +555,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchGrass = new CustomQuest(100, ViviGardenAdd, 'Capture 100 Grass type Pokémon', () => {
+        const catchGrass = new CustomQuest(100, undefined, 'Capture 100 Grass type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Grass)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchGrass);
@@ -548,7 +572,9 @@ class QuestLineHelper {
             1,
             ViviGardenRemove,
             'Find and capture the rare Vivillon! Hint: It only shows up amongst the most beautiful flowers.',
-            App.game.statistics.pokemonCaptured[666.05]
+            App.game.statistics.pokemonCaptured[666.05],
+            undefined,
+            ViviGardenAdd
         );
         VivillonQuestLine.addQuest(catchGarden);
         // Capture 100 Rock type Pokemon
@@ -560,7 +586,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchRock = new CustomQuest(100, ViviPlainsAdd, 'Capture 100 Rock type Pokémon', () => {
+        const catchRock = new CustomQuest(100, undefined, 'Capture 100 Rock type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Rock)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchRock);
@@ -577,7 +603,9 @@ class QuestLineHelper {
             1,
             ViviPlainsRemove,
             'Find and capture the rare Vivillon! Hint: It has been spotted dancing in the moonlight.',
-            App.game.statistics.pokemonCaptured[666.11]
+            App.game.statistics.pokemonCaptured[666.11],
+            undefined,
+            ViviPlainsAdd
         );
         VivillonQuestLine.addQuest(catchPlains);
         // Capture 100 Dragon type Pokemon
@@ -589,7 +617,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchDragon = new CustomQuest(100, ViviSavannaAdd, 'Capture 100 Dragon type Pokémon', () => {
+        const catchDragon = new CustomQuest(100, undefined, 'Capture 100 Dragon type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Dragon)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchDragon);
@@ -606,7 +634,9 @@ class QuestLineHelper {
             1,
             ViviSavannaRemove,
             'Find and capture the rare Vivillon! Hint: It\'s surrounded by dragons.',
-            App.game.statistics.pokemonCaptured[666.15]
+            App.game.statistics.pokemonCaptured[666.15],
+            undefined,
+            ViviSavannaAdd
         );
         VivillonQuestLine.addQuest(catchSavanna);
         // Capture 100 Ice type Pokemon
@@ -618,17 +648,16 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchIce = new CustomQuest(100, ViviSnowAdd, 'Capture 100 Ice type Pokémon', () => {
+        const catchIce = new CustomQuest(100, undefined, 'Capture 100 Ice type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Ice)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         VivillonQuestLine.addQuest(catchIce);
         // Capture Vivillon (Icy Snow)
         const ViviSnowRemove = () => {
             dungeonList['Frost Cavern'].bossList = dungeonList['Frost Cavern'].bossList.filter(boss => boss.name != 'Vivillon (Icy Snow)');
-            BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(666, 'Vivillon (Pokéball)'));
             Notifier.notify({
                 title: VivillonQuestLine.name,
-                message: 'You caught the rare Vivillon. Congratulations! Check out the Battle Frontier for your last Reward!',
+                message: 'You caught the rare Vivillon.',
                 type: NotificationConstants.NotificationOption.success,
             });
         };
@@ -636,9 +665,41 @@ class QuestLineHelper {
             1,
             ViviSnowRemove,
             'Find and capture the rare Vivillon! Hint: It can be found at a very cold place.',
-            App.game.statistics.pokemonCaptured[666.07]
+            App.game.statistics.pokemonCaptured[666.07],
+            undefined,
+            ViviSnowAdd
         );
         VivillonQuestLine.addQuest(catchSnow);
+        // Capture 200 Normal type Pokemon
+        const ViviBallAdd = () => {
+            BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(666, 'Vivillon (Pokéball)'));
+            Notifier.notify({
+                title: VivillonQuestLine.name,
+                message: 'A Vivillon is hiding somewhere. Only the strongest Challengers can reach it.',
+                type: NotificationConstants.NotificationOption.success,
+            });
+        };
+        const catchNormal = new CustomQuest(200, undefined, 'Capture 200 Normal type Pokémon', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Normal)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
+        });
+        VivillonQuestLine.addQuest(catchNormal);
+        // Capture Vivillon (Pokeball)
+        const ViviBalldone = () => {
+            Notifier.notify({
+                title: VivillonQuestLine.name,
+                message: 'You caught the last rare Vivillon. Congratulations',
+                type: NotificationConstants.NotificationOption.success,
+            });
+        };
+        const catchBall = new CustomQuest(
+            1,
+            ViviBalldone,
+            'Find and capture the rare Vivillon! Hint: Only the strongest Challengers can reach it.',
+            App.game.statistics.pokemonCaptured[666.01],
+            undefined,
+            ViviBallAdd
+        );
+        VivillonQuestLine.addQuest(catchBall);
         App.game.quests.questLines().push(VivillonQuestLine);
     }
     public static isQuestLineCompleted(name: string) {
