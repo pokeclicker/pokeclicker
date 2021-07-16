@@ -454,7 +454,7 @@ class Update implements Saveable {
             saveData.badgeCase = saveData.badgeCase || [];
             // Not using game constants incase the value isn't 73 in the future
             if (saveData.badgeCase[73]) {
-                saveData.quests.questLines.push({state: 1, name: 'The great hunt', quest: 0});
+                saveData.quests.questLines.push({state: 1, name: 'The Great Vivillon Hunt!', quest: 0});
             }
         },
     };
