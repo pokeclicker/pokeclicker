@@ -1285,7 +1285,7 @@ const pokemonList = createPokemonArray(
         'name': 'Galarian Meowth',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 255,
-        'type': [PokemonType.Normal],
+        'type': [PokemonType.Steel],
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'eggCycles': 20,
@@ -20973,6 +20973,7 @@ const pokemonList = createPokemonArray(
     {
         'id': -793,
         'name': '???',
+        'nativeRegion': GameConstants.Region.alola,
         'type': [PokemonType.Rock, PokemonType.Poison],
         'eggCycles': 120,
         'levelType': LevelType.slow,
