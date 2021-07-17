@@ -1107,7 +1107,7 @@ gymList['Snowbelle City'] = new Gym(
     'Impressive! Your Pokémon fought with great courage. I can tell that you\'ve trained your Pokémon well.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Village'))],
     () => {
-        App.game.quests.getQuestLine('The great hunt').beginQuest();
+        App.game.quests.getQuestLine('The Great Vivillon Hunt!').beginQuest();
     }
 );
 //Kalos Elite 4
