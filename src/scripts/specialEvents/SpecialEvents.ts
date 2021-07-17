@@ -133,6 +133,7 @@ SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax for a limite
 SpecialEvents.newEvent('Pokémon are Real!', 'Encounter roaming real Pokémon for a limited time.',
     // Start
     new Date(new Date().getFullYear(), 4, 1, 1), () => {
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Real Exeggutor'));
         RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Real Raikou'));
         RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Real Entei'));
         RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Real Suicune'));
@@ -140,6 +141,7 @@ SpecialEvents.newEvent('Pokémon are Real!', 'Encounter roaming real Pokémon fo
     },
     // End
     new Date(new Date().getFullYear(), 4, 7, 23), () => {
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Real Exeggutor'));
         RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Real Raikou'));
         RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Real Entei'));
         RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Real Suicune'));

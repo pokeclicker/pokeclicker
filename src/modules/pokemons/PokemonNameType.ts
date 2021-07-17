@@ -1162,6 +1162,7 @@ export type PokemonNameType
     | 'Squirtle (clone)'
     | 'Wartortle (clone)'
     | 'Blastoise (clone)'
+    | 'Real Exeggutor'
     | 'Real Raikou'
     | 'Real Entei'
     | 'Real Suicune'
