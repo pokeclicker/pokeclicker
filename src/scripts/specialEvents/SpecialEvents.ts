@@ -129,3 +129,20 @@ SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax for a limite
         });
     }
 );
+// Real Pokémon
+SpecialEvents.newEvent('Pokémon are Real!', 'Encounter roaming real Pokémon for a limited time.',
+    // Start
+    new Date(new Date().getFullYear(), 4, 1, 1), () => {
+        RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Real Raikou'));
+        RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Real Entei'));
+        RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Real Suicune'));
+        RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon('Real Pidove'));
+    },
+    // End
+    new Date(new Date().getFullYear(), 4, 7, 23), () => {
+        RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Real Raikou'));
+        RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Real Entei'));
+        RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Real Suicune'));
+        RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon('Real Pidove'));
+    }
+);
