@@ -20444,6 +20444,23 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': -23,
+        'name': 'Real Purugly',
+        'type': [PokemonType.Normal],
+        'eggCycles': 20,
+        'levelType': 4,
+        'exp': 158,
+        'catchRate': 75,
+        'base': {
+            'hitpoints': 71,
+            'attack': 82,
+            'specialAttack': 64,
+            'defense': 64,
+            'specialDefense': 59,
+            'speed': 112,
+        },
+    },
+    {
+        'id': -24,
         'name': 'Real Pidove',
         'nativeRegion': GameConstants.Region.unova,
         'catchRate': 255,

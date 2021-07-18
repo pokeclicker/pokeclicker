@@ -1166,6 +1166,7 @@ export type PokemonNameType
     | 'Real Raikou'
     | 'Real Entei'
     | 'Real Suicune'
+    | 'Real Purugly'
     | 'Real Pidove'
     | 'Mega Venusaur'
     | 'Mega Charizard X'
