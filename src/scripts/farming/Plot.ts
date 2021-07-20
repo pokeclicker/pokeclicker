@@ -242,9 +242,7 @@ class Plot implements Saveable {
             }
 
             if (updatedStage === PlotStage.Berry) {
-                if (!Settings.getSetting('autoHarvest').observableValue()) {
-                    this.notifications.push(FarmNotificationType.Ripe);
-                }
+                this.notifications.push(FarmNotificationType.Ripe);
                 change = true;
             }
 

@@ -156,7 +156,7 @@ class Underground implements Feature {
         if (this.energy < this.getMaxEnergy()) {
             const oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
             const newEnergy = this.energy + oakMultiplier * this.getEnergyGain();
-            if (newEnergy > this.getMaxEnergy()) {
+            if (newEnergy > this.getMaxEnergy() && Settings.getSetting('autoBomb').value) {
                 Mine.bomb();
             }
             this.energy = Math.min(this.getMaxEnergy(), this.energy + oakMultiplier * this.getEnergyGain());

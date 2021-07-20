@@ -60,7 +60,8 @@ Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disabl
 Settings.add(new BooleanSetting('autoHarvest', 'Enable automatic harvesting of ripe berries', false));
 Settings.add(new BooleanSetting('autoReplant', 'Enable automatic Replanting of harvested berries', false));
 Settings.add(new BooleanSetting('autoBreed', 'Enable automatic Breeding of the most efficient Pokemons', false));
-
+Settings.add(new BooleanSetting('autoBomb', 'Enable Autobombing when reaching full energy', true));
+Settings.add(new BooleanSetting('autoChest', 'Enable automatic opening of chests in dungeons', true));
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((sound) => {
     Settings.add(new BooleanSetting(`sound.${sound.name}`, sound.name, true));

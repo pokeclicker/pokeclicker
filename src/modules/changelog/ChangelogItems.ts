@@ -12,8 +12,14 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.5
+    new ChangelogUpdate('v0.8.5', new Date(2021, 6, 20)),
+    new Changelog(changelogType.NEW, 'The Autobreeding now also considers the Daycare filters'),
+    new Changelog(changelogType.CHANGE, 'The auto opening of chests is can now be turned off in the Settings'),
+    new Changelog(changelogType.CHANGE, 'The auto bombing when reaching max energy can now be turned off in the Settings'),
+    new Changelog(changelogType.CHANGE, 'The notification that berries are ready to harvest now gets displayed again even when auto harvesting is turned on'),
     // v0.8.4
-    new ChangelogUpdate('v0.8.3', new Date(2021, 7, 6)),
+    new ChangelogUpdate('v0.8.4', new Date(2021, 6, 6)),
     new Changelog(changelogType.CHANGE, 'The autobreeding now uses the same sort order as the party list'),
     new Changelog(changelogType.NEW, `Added new sort order "${SortOptionConfigs[SortOptions.shinyEfficiency].text}"`),
     // v0.8.3

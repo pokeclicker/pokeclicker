@@ -142,7 +142,7 @@ class Breeding implements Feature {
             if (egg.progress() >= 100) {
                 this.hatchPokemonEgg(index);
                 if (Settings.getSetting('autoBreed').value && this.hasFreeEggSlot()) {
-                    const bestPokemon = App.game.party.caughtPokemon.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue())).find((p) => p.level == 100 && !p.breeding);
+                    const bestPokemon = App.game.party.caughtPokemon.filter(p => BreedingController.visible(p).peek()).sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue())).find((p) => p.level == 100 && !p.breeding);
                     this.addPokemonToHatchery(bestPokemon);
                 }
             }
