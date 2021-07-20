@@ -84,7 +84,7 @@ class QuestLineHelper {
             Underground.gainMineItem(mindPlate.id, 20);
             Notifier.notify({
                 title: deoxysQuestLine.name,
-                message: 'You have gained 20 ${mindPlate.name}s',
+                message: `You have gained 20 ${mindPlate.name}s`,
                 type: NotificationConstants.NotificationOption.success,
             });
         };
