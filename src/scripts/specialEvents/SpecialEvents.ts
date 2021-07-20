@@ -50,11 +50,11 @@ class SpecialEvents implements Feature {
 SpecialEvents.newEvent('Vivillon', 'Encounter Fancy Pattern Vivillon for a limited time roaming Kalos.',
     // Start
     new Date(new Date().getFullYear(), 0, 24, 1), () => {
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Vivillon (Fancy)'));
+        RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon('Vivillon (Fancy)'));
     },
     // End
     new Date(new Date().getFullYear(), 1, 7, 23), () => {
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 'Vivillon (Fancy)');
+        RoamingPokemonList.remove(GameConstants.Region.kalos, 'Vivillon (Fancy)');
     }
 );
 // First Event
