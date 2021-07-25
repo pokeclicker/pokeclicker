@@ -5,7 +5,6 @@ class Discord implements Saveable {
         ID: null,
     };
 
-
     ID: KnockoutObservable<string> = ko.observable(null);
     codes: Array<DiscordCode> = [
         new DiscordPokemonCode(pokemonMap['Unown (D)'], 700, 'Alternate form of Unown'),
@@ -19,11 +18,12 @@ class Discord implements Saveable {
 
     get enabled(): boolean {
         // This was done like this so es/tslint doesn't throw errors
-        try {
-            return !!JSON.parse('$DISCORD_ENABLED');
-        } catch (e) {
-            return false;
-        }
+        // try {
+        //     return !!JSON.parse('$DISCORD_ENABLED');
+        // } catch (e) {
+        //     return false;
+        // }
+        return true;
     }
 
     constructor() {
@@ -42,8 +42,18 @@ class Discord implements Saveable {
     }
 
     login(): void {
+        // eslint-disable-next-line no-alert
+        const discordID = prompt('Enter your discord id');
+        if (discordID) {
+            this.ID(discordID);
+            Notifier.notify({
+                message: 'Successfully logged in to Discord!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: GameConstants.MINUTE,
+            });
+        }
         // This will be updated from our config values
-        location.href = `$DISCORD_LOGIN_PROXY?action=login&redirect_uri=${encodeURIComponent(location.href.replace(location.search, ''))}`;
+        // location.href = `$DISCORD_LOGIN_PROXY?action=login&redirect_uri=${encodeURIComponent(location.href.replace(location.search, ''))}`;
     }
 
     logout(): void {
@@ -57,11 +67,13 @@ class Discord implements Saveable {
         }
 
         // reverse the string (for names that are similar - forms)
-        const codeSeed = code.name.split('').reverse()
+        const codeSeed = code.name
+            .split('')
+            .reverse()
             // map to the character code
-            .map(l => l.charCodeAt(0))
+            .map((l) => l.charCodeAt(0))
             // multiply the numbers (should be random enough)
-            .reduce((s,b) => s * (b / 10), 1);
+            .reduce((s, b) => s * (b / 10), 1);
 
         SeededRand.seed(discordID + codeSeed);
 
@@ -81,7 +93,7 @@ class Discord implements Saveable {
     }
 
     findCodeMatch(enteredCode: string): DiscordCode {
-        return this.codes.find(code => enteredCode.toUpperCase() == this.calcCode(code));
+        return this.codes.find((code) => enteredCode.toUpperCase() == this.calcCode(code));
     }
 
     enterCode(enteredCode: string): boolean {
@@ -120,8 +132,8 @@ class Discord implements Saveable {
     }
 
     loadCodes(codes) {
-        codes.forEach(code => {
-            const c = this.codes.find(c => c.name == code.name);
+        codes.forEach((code) => {
+            const c = this.codes.find((c) => c.name == code.name);
             if (c) {
                 c.claimed = code.claimed;
             }
@@ -140,8 +152,7 @@ class Discord implements Saveable {
     toJSON(): Record<string, any> {
         return {
             ID: this.ID(),
-            codes: this.codes.filter(c => c.claimed),
+            codes: this.codes.filter((c) => c.claimed),
         };
     }
-
 }

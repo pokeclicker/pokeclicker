@@ -12,6 +12,9 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.7
+    new ChangelogUpdate('v0.8.7', new Date(2021, 6, 25)),
+    new Changelog(changelogType.NEW, 'Discord Integration has been readded but instead of needing to login you just need to provide your discord id'),
     // v0.8.6
     new ChangelogUpdate('v0.8.6', new Date(2021, 6, 25)),
     new Changelog(changelogType.NEW, 'Added highlighting for Routes in which all shinies have been caught'),

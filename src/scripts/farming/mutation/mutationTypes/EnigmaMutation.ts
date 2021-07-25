@@ -4,20 +4,21 @@
  * Mutation to produce the Enigma Berry
  */
 class EnigmaMutation extends GrowMutation {
-
     hintsSeen: KnockoutObservable<boolean>[];
 
     constructor(mutationChance: number) {
         super(mutationChance, BerryType.Enigma, {
-            unlockReq: function(): boolean {
+            unlockReq: function (): boolean {
                 if (App.game.discord.ID === null) {
                     return false;
                 }
-                return EnigmaMutation.getReqs().every(req => App.game.farming.unlockedBerries[req]());
+                return EnigmaMutation.getReqs().every((req) => App.game.farming.unlockedBerries[req]?.());
             },
         });
 
-        this.hintsSeen = Array<boolean>(4).fill(false).map(val => ko.observable(val));
+        this.hintsSeen = Array<boolean>(4)
+            .fill(false)
+            .map((val) => ko.observable(val));
     }
 
     /**
@@ -64,7 +65,7 @@ class EnigmaMutation extends GrowMutation {
         // Remove parasite Berries, as having four sides for mutation requirements means parasite
         // mutations can make it difficult to have all four plants fully grown.
         // Also remove Babiri since they'll stop mutations
-        berryTypes = berryTypes.filter(berry => {
+        berryTypes = berryTypes.filter((berry) => {
             return ![BerryType.Occa, BerryType.Kebia, BerryType.Colbur, BerryType.Babiri].includes(berry);
         });
         return [...new Array(4)].map((_) => SeededRand.fromArray(berryTypes));
@@ -127,7 +128,7 @@ class EnigmaMutation extends GrowMutation {
             tempHint += 'a specific configuration of Berries';
         }
 
-        tempHint += (hints.length !== 4) ? '. However there\'s still something missing...' : '.';
+        tempHint += hints.length !== 4 ? '. However there\'s still something missing...' : '.';
 
         return tempHint;
     }
@@ -142,12 +143,13 @@ class EnigmaMutation extends GrowMutation {
 
         const hintsSeen = json['hintsSeen'];
         if (hintsSeen == null) {
-            this.hintsSeen = Array<boolean>(4).fill(false).map((v) => ko.observable<boolean>(v));
+            this.hintsSeen = Array<boolean>(4)
+                .fill(false)
+                .map((v) => ko.observable<boolean>(v));
         } else {
             (hintsSeen as boolean[]).forEach((value: boolean, index: number) => {
                 this.hintsSeen[index](value);
             });
         }
     }
-
 }
