@@ -767,6 +767,7 @@ class Farming implements Feature {
 
     handleNotification(farmNotiType: FarmNotificationType, wander?: any): void {
         let message = '';
+        let settingOveride: BooleanSetting | null = null;
         let type = NotificationConstants.NotificationOption.success;
 
         switch (farmNotiType) {
@@ -776,13 +777,16 @@ class Farming implements Feature {
             case FarmNotificationType.AboutToWither:
                 message = 'A Berry plant is about to wither!';
                 type = NotificationConstants.NotificationOption.warning;
+                settingOveride = NotificationConstants.NotificationSetting.berry_wither;
                 break;
             case FarmNotificationType.Withered:
                 message = 'A Berry plant has withered!';
+                settingOveride = NotificationConstants.NotificationSetting.berry_wither;
                 type = NotificationConstants.NotificationOption.warning;
                 break;
             case FarmNotificationType.Mutated:
                 message = 'A Berry plant has mutated!';
+                settingOveride = NotificationConstants.NotificationSetting.berry_mutated;
                 break;
             case FarmNotificationType.Replanted:
                 message = 'A Berry has been replanted!';
@@ -805,7 +809,7 @@ class Farming implements Feature {
             message,
             type,
             sound: NotificationConstants.NotificationSound.ready_to_harvest,
-            setting: NotificationConstants.NotificationSetting.ready_to_harvest,
+            setting: settingOveride || NotificationConstants.NotificationSetting.ready_to_harvest,
         });
     }
 

@@ -1,6 +1,6 @@
 import BooleanSetting from '../settings/BooleanSetting';
-import Sound from '../utilities/Sound';
 import NotificationOption from './NotificationOption';
+import Sound from '../utilities/Sound';
 
 /**
  * Contains all notification constants for easy access.
@@ -33,7 +33,9 @@ const NotificationConstants = {
         underground_energy_full: new BooleanSetting('notification.underground_energy_full', 'Mining energy reached maximum capacity', true),
         event_start_end: new BooleanSetting('notification.event_start_end', 'Event start/end information', true),
         dropped_item: new BooleanSetting('notification.dropped_item', 'Enemy Pokémon dropped an item', true),
-        ready_to_harvest: new BooleanSetting('notification.ready_to_harvest', 'Berry ready to harvest', true),
+        ready_to_harvest: new BooleanSetting('notification.ready_to_harvest', 'General Farming Notification', true),
+        berry_mutated: new BooleanSetting('notification.berry_mutated', 'Berry has mutated', true),
+        berry_wither: new BooleanSetting('notification.berry_wither', 'Berry is about to wither', true),
         gym_won: new BooleanSetting('notification.gym_won', 'Gym leader defeated', true),
     },
 };
