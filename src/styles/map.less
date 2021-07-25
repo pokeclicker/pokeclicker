@@ -4,6 +4,7 @@
 @currentPlace: rgba(85, 255, 0, 0.5);
 @incomplete: rgba(255, 145, 0, 0.7);
 @complete: rgba(255, 72, 0, 0.7);
+@shiny: rgba(255, 251, 0, 0.7);
 #map {
     rect,
     path {
@@ -29,6 +30,9 @@
 
     .completedRoute {
         fill: @complete;
+    }
+    .completedShinyRoute {
+        fill: @shiny;
     }
 
     .city {
@@ -65,6 +69,10 @@
 
         &.completedRoute {
             fill: @complete;
+        }
+
+        .completedShinyRoute {
+            fill: @shiny;
         }
     }
 }

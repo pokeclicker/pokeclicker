@@ -66,13 +66,15 @@ class MapHelper {
     }
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
-        let cls;
+        let cls: string;
 
         if (player.route() == route && player.region == region) {
             cls = 'currentRoute';
         } else if (MapHelper.accessToRoute(route, region)) {
             if (App.game.statistics.routeKills[region][route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
-                if (RouteHelper.routeCompleted(route, region, false)) {
+                if (RouteHelper.routeCompleted(route, region, true)) {
+                    cls = 'completedShinyRoute';
+                } else if (RouteHelper.routeCompleted(route, region, false)) {
                     cls = 'completedRoute';
                 } else {
                     cls = 'unlockedRoute';
@@ -99,7 +101,9 @@ class MapHelper {
         if (MapHelper.accessToTown(town)) {
             if (dungeonList.hasOwnProperty(town)) {
                 if (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(town)]()) {
-                    if (DungeonRunner.dungeonCompleted(dungeonList[town], false)) {
+                    if (DungeonRunner.dungeonCompleted(dungeonList[town], true)) {
+                        return 'dungeon completedShinyRoute';
+                    } else if (DungeonRunner.dungeonCompleted(dungeonList[town], false)) {
                         return 'dungeon completedRoute';
                     } else {
                         return 'dungeon completedDungeon';
