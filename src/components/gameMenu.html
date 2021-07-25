@@ -1,4 +1,4 @@
-<div id="startMenu" class="dropdown clearfix" style="position:absolute; right:0; top:0; z-index: 100;">
+<div id="startMenu" class="dropdown clearfix" style="position: absolute; right: 0; top: 0; z-index: 100">
     <button class="btn btn-secondary dropdown-toggle float-right" type="button" data-toggle="dropdown">
         Start Menu
         <span class="caret"></span>
@@ -23,8 +23,13 @@
             <a class="dropdown-item" href="#logBookModal" data-toggle="modal">Log Book</a>
         </li>
         <li data-bind="attr: {  title: App.game.shards.canAccess() ? '' : 'Progress further to unlock...'}">
-            <a class="dropdown-item" href="#" data-bind="click:function(){App.game.shards.openShardModal()},
-            attr: {class: App.game.shards.canAccess() ? 'dropdown-item' : 'dropdown-item disabled all-pointers'}">Shards</a>
+            <a
+                class="dropdown-item"
+                href="#"
+                data-bind="click:function(){App.game.shards.openShardModal()},
+            attr: {class: App.game.shards.canAccess() ? 'dropdown-item' : 'dropdown-item disabled all-pointers'}"
+                >Shards</a
+            >
         </li>
         <li>
             <a class="dropdown-item" href="#showItemsModal" data-toggle="modal">Items</a>
@@ -54,14 +59,13 @@
             <a class="dropdown-item" href="https://pokeclicker.reddit.com" target="_blank">Subreddit</a>
         </li>
         <li>
-            <a class="dropdown-item" href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>
+            <a class="dropdown-item" href="https://discord.gg/EUafCck2" target="_blank">Discord</a>
         </li>
         <li>
             <a class="dropdown-item" href="http://pokeclicker.miraheze.org/" target="_blank">Wiki</a>
         </li>
         <li>
-            <a class="dropdown-item" href="https://github.com/pokeclicker/pokeclicker/issues" target="_blank">Report a bug</a>
+            <a class="dropdown-item" href="https://github.com/zocke1r/pokeclicker/issues" target="_blank">Report a bug</a>
         </li>
-
     </ul>
 </div>
