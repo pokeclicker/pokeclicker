@@ -1,7 +1,6 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 
 class DungeonRunner {
-
     public static dungeon: Dungeon;
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.DUNGEON_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
@@ -38,6 +37,9 @@ class DungeonRunner {
         DungeonRunner.fightingBoss(false);
         DungeonRunner.defeatedBoss(false);
         DungeonRunner.dungeonFinished(false);
+        if (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() > 100) {
+            DungeonRunner.map.showAllTiles();
+        }
         App.game.gameState = GameConstants.GameState.dungeon;
     }
 
@@ -50,7 +52,7 @@ class DungeonRunner {
             }
         }
         this.timeLeft(this.timeLeft() - GameConstants.DUNGEON_TICK);
-        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.DUNGEON_TIME * 100));
+        this.timeLeftPercentage(Math.floor((this.timeLeft() / GameConstants.DUNGEON_TIME) * 100));
     }
 
     /**
@@ -146,7 +148,7 @@ class DungeonRunner {
 
     public static timeLeftSeconds = ko.pureComputed(() => {
         return (Math.ceil(DungeonRunner.timeLeft() / 10) / 10).toFixed(1);
-    })
+    });
 
     public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
         const possiblePokemon: PokemonNameType[] = dungeon.allPokemon;
