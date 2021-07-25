@@ -1,6 +1,6 @@
 {
     "name": "pokeclicker",
-    "version": "0.8.5",
+    "version": "0.8.6",
     "description": "PokéClicker repository",
     "main": "index.js",
     "scripts": {
@@ -9,8 +9,8 @@
         "ts-test": "gulp scripts",
         "eslint": "eslint --ext ts ./src/scripts ./src/modules",
         "eslint-fix": "eslint --ext ts --fix ./src/scripts ./src/modules",
-        "website": "npm test && cross-env NODE_ENV=production gulp website",
-        "publish": "npm test && git push origin develop:master"
+        "website": "npm run eslint-fix && npm test && cross-env NODE_ENV=production gulp website",
+        "publish": "npm test && git push origin develop:develop"
     },
     "repository": {
         "type": "git",
@@ -24,9 +24,9 @@
     "author": "RedSparr0w",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/pokeclicker/pokeclicker/issues"
+        "url": "https://github.com/zocke1r/pokeclicker/issues"
     },
-    "homepage": "https://github.com/pokeclicker/pokeclicker#readme",
+    "homepage": "https://github.com/zocke1r/pokeclicker#readme",
     "devDependencies": {
         "@types/gtag.js": "0.0.4",
         "@types/jquery": "^3.5.2",

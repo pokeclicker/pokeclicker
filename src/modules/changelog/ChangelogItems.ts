@@ -12,6 +12,12 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.6
+    new ChangelogUpdate('v0.8.6', new Date(2021, 6, 25)),
+    new Changelog(changelogType.NEW, 'Added highlighting for Routes in which all shinies have been caught'),
+    new Changelog(changelogType.NEW, 'Once a Dungeon has been completed atleast 100 times the map will always be revealed'),
+    new Changelog(changelogType.CHANGE, 'Changed the discord links to a server specific to this fork version'),
+    new Changelog(changelogType.CHANGE, 'Split up Farming notifications, now there are different notifications for withering related Notifications and for Mutation, the rest of Farming Notifcations get handled through the general Farming Notification Setting'),
     // v0.8.5
     new ChangelogUpdate('v0.8.5', new Date(2021, 6, 20)),
     new Changelog(changelogType.NEW, 'The Autobreeding now also considers the Daycare filters'),
