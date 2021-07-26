@@ -449,6 +449,20 @@ class Update implements Saveable {
             Update.updateAchievementName(playerData, 'Doomsday Bunker stocked with Pokeballs!', 'Doomsday Bunker stocked with Pokéballs!');
             Update.updateAchievementName(playerData, 'Prepared for anything!', 'Professor Oak is the best!');
         },
+
+        '0.8.3': ({ playerData, saveData }) => {
+            // Add missing key items if the player has the badge
+            const badgeToKeyItems = {
+                [5]: 'Safari_ticket', //Soul badge
+                [8]: 'Shard_case', //Earth badge
+            };
+            Object.keys(badgeToKeyItems).forEach(badge => {
+                const keyItem = badgeToKeyItems[badge];
+                if (saveData.badgeCase[badge]) {
+                    saveData.keyItems[keyItem] = true;
+                }
+            });
+        },
     };
 
     constructor() {
