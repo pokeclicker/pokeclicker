@@ -271,6 +271,9 @@ class AchievementHandler {
         AchievementHandler.filter.region(Settings.getSetting('achievementsRegion').value);
         // Cycle the pages to make sure they are upto date
         AchievementHandler.navigateRight();
-        setTimeout(() => AchievementHandler.navigateLeft(), 1);
+        setTimeout(() => {
+            AchievementHandler.navigateLeft();
+            AchievementHandler.filterAchievementList();
+        }, 1);
     }
 }
