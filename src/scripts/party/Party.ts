@@ -177,9 +177,15 @@ class Party implements Feature {
     }
 
     calculateClickAttack(useItem = false): number {
-        // Base power
-        // Shiny pokemon help with a 50% boost
-        const clickAttack = Math.pow(this.caughtPokemon.length + (this.caughtPokemon.filter(p => p.shiny).length / 2) + 1, 1.4);
+        // New click damage formula (see Github issue #997: https://github.com/pokeclicker/pokeclicker/issues/997)
+        // Click Attack Formula:
+        //      Damage = Caught ^ (4/3) + ((Attack * Caught) / (Caught * 20 + 10000))
+        //
+        //          Where "Caught" is 1 for each unique pokemon, + .5 for each unique Shiny.
+        //          Where "Attack" is your total pokemon Attack Power.
+        const caughtPokemonValue = this.caughtPokemon.length + this.caughtPokemon.filter(p => p.shiny).length / 2;
+        const clickAttack = Math.pow(caughtPokemonValue, 4 / 3) + ((this.calculatePokemonAttack() * caughtPokemonValue) / (caughtPokemonValue * 20 + 10000));
+
         const bonus = this.multiplier.getBonus('clickAttack', useItem);
 
         return Math.floor(clickAttack * bonus);
