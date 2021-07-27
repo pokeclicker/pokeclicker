@@ -66,15 +66,15 @@
 }
 
 .dungeon-pokemon-locked {
-  -webkit-filter: brightness(0%); /* Safari 6.0 - 9.0 */
-  filter: brightness(0%);
+  -webkit-filter: brightness(0%) grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: brightness(0%) grayscale(100%);
   opacity: 0.2;
   body.cyborg &,
   body.darkly &,
   body.slate &,
   body.superhero & {
-    -webkit-filter: brightness(100); /* Safari 6.0 - 9.0 */
-    filter: brightness(100);
+    -webkit-filter: brightness(100) grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: brightness(100) grayscale(100%);
     opacity: 0.3;
   }
 }
@@ -84,5 +84,13 @@
   height: auto;
   width: auto;
   margin: -10px -10px -12px;
+}
 
+#dungeonPokemonList {
+  .boss {
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    width: 40%;
+  }
 }
