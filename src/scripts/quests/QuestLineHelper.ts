@@ -202,7 +202,7 @@ class QuestLineHelper {
         });
         VivillonQuestLine.addQuest(catchNormal);
 
-        // Capture Vivillon (Pokeball)
+        // Capture Vivillon (Pokéball)
         const ViviBallAdd = () => {
             BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(666, 'Vivillon (Pokéball)'));
             Notifier.notify({
@@ -214,7 +214,7 @@ class QuestLineHelper {
         const ViviBalldone = () => {
             Notifier.notify({
                 title: VivillonQuestLine.name,
-                message: 'You caught the last rare Vivillon (Pokeball). Congratulations',
+                message: 'You caught the last rare Vivillon (Pokéball). Congratulations',
                 type: NotificationConstants.NotificationOption.success,
             });
         };
