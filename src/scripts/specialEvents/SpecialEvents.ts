@@ -47,7 +47,7 @@ class SpecialEvents implements Feature {
  *  YEARLY EVENTS
  */
 // Lunar New Year
-SpecialEvents.newEvent('Vivillon', 'Encounter Fancy Pattern Vivillon for a limited time roaming Kalos.',
+SpecialEvents.newEvent('Lunar New Year', 'Encounter Fancy Pattern Vivillon for a limited time roaming Kalos.',
     // Start
     new Date(new Date().getFullYear(), 0, 24, 1), () => {
         RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon('Vivillon (Fancy)'));

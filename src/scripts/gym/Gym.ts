@@ -620,9 +620,7 @@ gymList['Champion Wallace'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Drake)],
     () => {
         App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest();
-
     }
-
 );
 
 //Sinnoh Gyms
