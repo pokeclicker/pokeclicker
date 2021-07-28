@@ -214,7 +214,7 @@ class QuestLineHelper {
         const ViviBalldone = () => {
             Notifier.notify({
                 title: VivillonQuestLine.name,
-                message: 'You caught the last rare Vivillon (Pokéball). Congratulations',
+                message: 'You caught the last rare Vivillon (Pokéball).\nCongratulations!',
                 type: NotificationConstants.NotificationOption.success,
             });
         };
