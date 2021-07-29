@@ -145,6 +145,13 @@ class Player {
 
     set subregion(value: number) {
         this._subregion(value);
+        const subregion = SubRegions.getSubRegionById(this.region, value);
+
+        if (subregion.startRoute) {
+            MapHelper.moveToRoute(subregion.startRoute, player.region);
+        } else if (subregion.startTown) {
+            MapHelper.moveToTown(subregion.startTown);
+        }
     }
 
     get town(): KnockoutObservable<Town> {

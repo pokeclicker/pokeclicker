@@ -3,7 +3,9 @@ class SubRegion {
 
     constructor(
         public name: string,
-        public requirement?: Requirement | OneFromManyRequirement
+        public requirement?: Requirement | OneFromManyRequirement,
+        public startTown?: string,
+        public startRoute?: number
     ) {}
 
     public unlocked(): boolean {

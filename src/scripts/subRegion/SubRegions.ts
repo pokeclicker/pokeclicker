@@ -19,6 +19,10 @@ class SubRegions {
     public static getSubRegion(region: GameConstants.Region, subregion: string): SubRegion {
         return this.list[region].find(s => s.name == subregion);
     }
+
+    public static getSubRegionById(region: GameConstants.Region, subregionID: number): SubRegion {
+        return this.list[region].find(s => s.id == subregionID);
+    }
 }
 
 SubRegions.addSubRegion(GameConstants.Region.kanto, new SubRegion('Kanto'));
@@ -27,5 +31,10 @@ SubRegions.addSubRegion(GameConstants.Region.hoenn, new SubRegion('Hoenn'));
 SubRegions.addSubRegion(GameConstants.Region.sinnoh, new SubRegion('Sinnoh'));
 SubRegions.addSubRegion(GameConstants.Region.unova, new SubRegion('Unova'));
 SubRegions.addSubRegion(GameConstants.Region.kalos, new SubRegion('Kalos'));
-SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Melemele & Akala islands'));
-SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Ula\'ula & Poni islands'));
+SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Melemele & Akala islands', undefined, 'Hau\'oli City'));
+SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Ula\'ula & Poni islands', undefined, 'Malie City'));
+
+// SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Melemele island', undefined, 'Hau\'oli City'));
+// SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Akala island', new GymBadgeRequirement(BadgeEnums.MelemeleKahuna), 'Heahea City'));
+// SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Ula\'ula island', undefined, 'Malie City'));
+// SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Poni island', undefined, 'Seafolk Village'));

@@ -13,9 +13,11 @@ class MapHelper {
         }
         if (this.accessToRoute(route, region)) {
             player.route(route);
-            player.region = region;
-            // Always go back to the main island when changing regions
-            player.subregion = 0;
+            if (player.region != region) {
+                player.region = region;
+                // Always go back to the main island when changing regions
+                player.subregion = 0;
+            }
             if (genNewEnemy && !Battle.catching()) {
                 Battle.generateNewEnemy();
             }
@@ -24,7 +26,7 @@ class MapHelper {
             if (!MapHelper.routeExist(route, region)) {
                 return Notifier.notify({
                     message: `${Routes.getName(route, region)} does not exist in the ${GameConstants.Region[region]} region.`,
-                    type: NotificationConstants.NotificationOption.warning,
+                    type: NotificationConstants.NotificationOption.danger,
                 });
             }
 
@@ -163,33 +165,38 @@ class MapHelper {
             $('#ShipModal').modal('show');
         };
         switch (player.region) {
-            case 0:
+            case GameConstants.Region.kanto:
                 if (TownList['Vermilion City'].isUnlocked() && player.highestRegion() > 0) {
                     openModal();
                     return;
                 }
-            case 1:
+            case GameConstants.Region.johto:
                 if (TownList['Olivine City'].isUnlocked()) {
                     openModal();
                     return;
                 }
-            case 2:
+            case GameConstants.Region.hoenn:
                 if (TownList['Slateport City'].isUnlocked()) {
                     openModal();
                     return;
                 }
-            case 3:
+            case GameConstants.Region.sinnoh:
                 if (TownList['Canalave City'].isUnlocked()) {
                     openModal();
                     return;
                 }
-            case 4:
+            case GameConstants.Region.unova:
                 if (TownList['Castelia City'].isUnlocked()) {
                     openModal();
                     return;
                 }
-            case 5:
+            case GameConstants.Region.kalos:
                 if (TownList['Coumarine City'].isUnlocked()) {
+                    openModal();
+                    return;
+                }
+            case GameConstants.Region.alola:
+                if (TownList['Hau\'oli City'].isUnlocked()) {
                     openModal();
                     return;
                 }
