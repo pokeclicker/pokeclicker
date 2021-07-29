@@ -143,6 +143,7 @@ gymList['Fuchsia City'] = new Gym(
         ]),
     ],
     () => {
+        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Safari_ticket, true);
         App.game.quests.getQuestLine('Mining Expedition').beginQuest();
     }
 );
@@ -176,7 +177,10 @@ gymList['Viridian City'] = new Gym(
         new GymBadgeRequirement(BadgeEnums.Volcano),
         new GymBadgeRequirement(BadgeEnums.Marsh),
         new GymBadgeRequirement(BadgeEnums.Thunder),
-    ]
+    ],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Shard_case, true);
+    }
 );
 
 // Kanto Elite 4
