@@ -87,7 +87,34 @@ class Game {
         Weather.generateWeather(now);
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
+        this.computeOfflineEarnings();
+
         this.gameState = GameConstants.GameState.fighting;
+    }
+
+    computeOfflineEarnings() {
+        const now = Date.now();
+        const timeDiffInSeconds = (now - player._previousStartLastSeen) / 1000;
+        if (timeDiffInSeconds > 1) {
+            const timeDiffOverride = timeDiffInSeconds > 86400 ? 86400 : timeDiffInSeconds;//The maximum value is 24h
+            const route: number = player.route();
+            const region: GameConstants.Region = player.region;
+            const availablePokemonMap = RouteHelper.getAvailablePokemonList(route, region).map(name => pokemonMap[name]);
+            const maxHealth: number = PokemonFactory.routeHealth(route, region);
+            let hitsToKill = 0;
+            for (const pokemon of availablePokemonMap) {
+                const type1: PokemonType = pokemon.type[0];
+                const type2: PokemonType = pokemon.type.length > 1 ? pokemon.type[1] : PokemonType.None;
+                const attackAgainstPokemon = App.game.party.calculatePokemonAttack(type1, type2);
+                const currentHitsToKill: number = maxHealth / attackAgainstPokemon;
+                hitsToKill += currentHitsToKill;
+            }
+            const numberOfPokemonDefeated = (timeDiffOverride / 0.9) / hitsToKill;//We attack every 0.9 secs, so we have to divide by 0.9
+            const currentMoney: number = PokemonFactory.routeMoney(player.route(), player.region);
+            const baseMoneyToEarn = numberOfPokemonDefeated * currentMoney;
+            const moneyToEarn = baseMoneyToEarn * 0.5;//Debuff for offline money
+            App.game.wallet.gainMoney(moneyToEarn);
+        }
     }
 
     start() {
