@@ -196,12 +196,6 @@ class QuestLineHelper {
         createVivillonQuest(PokemonType.Dragon, 'Vivillon (Savanna)', ['Dragonspiral Tower'], 'It\'s surrounded by dragons.');
         createVivillonQuest(PokemonType.Ice, 'Vivillon (Icy Snow)', ['Frost Cavern'], 'It can be found at a very cold place.');
 
-        // Capture 200 Normal type Pokemon
-        const catchNormal = new CustomQuest(200, undefined, 'Capture 200 Normal type Pokémon', () => {
-            return pokemonMap.filter(p => p.type.includes(PokemonType.Normal)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
-        });
-        VivillonQuestLine.addQuest(catchNormal);
-
         // Capture Vivillon (Pokéball)
         const ViviBallAdd = () => {
             BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(666, 'Vivillon (Pokéball)'));
@@ -211,6 +205,11 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
+        // Capture 200 Normal type Pokemon
+        const catchNormal = new CustomQuest(200, undefined, 'Capture 200 Normal type Pokémon', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Normal)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
+        });
+        VivillonQuestLine.addQuest(catchNormal);
         const ViviBalldone = () => {
             Notifier.notify({
                 title: VivillonQuestLine.name,
