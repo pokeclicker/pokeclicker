@@ -21096,3 +21096,6 @@ const pokemonMap = new GenericProxy<
         }
     },
 });
+
+// Fix for missing/duplicate pokemon when filtering via pokemonMap
+pokemonMap['filter'] = pokemonList.filter.bind(pokemonList);
