@@ -21092,7 +21092,7 @@ const pokemonMap = new GenericProxy<
                     return poke || (pokemon.find(p => p.id == 0) as PokemonListData);
                 };
             default:
-                return pokemonNameIndex[prop.toLowerCase()] || pokemon[prop] || pokemon.find(p => p.id == 0);
+                return pokemonNameIndex[prop.toLowerCase()] || pokemon[prop]?.bind?.call(pokemon[prop],pokemon) || pokemon[prop] || pokemon.find(p => p.id == 0);
         }
     },
 });
