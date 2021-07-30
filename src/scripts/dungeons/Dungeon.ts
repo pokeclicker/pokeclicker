@@ -3161,8 +3161,8 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',//keep going 
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     7903570,
     [
-        new DungeonTrainer('Team Flare',
-            [new GymPokemon('Mightyena', 75384400, 38)], { weight: 1 }, 'Aliana', '(aliana)'),
+        new DungeonTrainer('Team Flare Aliana',
+            [new GymPokemon('Mightyena', 75384400, 38)], { weight: 1 }),
         new DungeonBossPokemon('Volcanion', 83945700, 100,
             {
                 requirement: new MultiRequirement([
@@ -3205,12 +3205,12 @@ dungeonList['Pokéball Factory'] = new Dungeon('Pokéball Factory',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     8173950,
     [
-        new DungeonTrainer('Team Flare',
+        new DungeonTrainer('Team Flare Celosia',
             [new GymPokemon('Manectric', 79385030, 41)],
-            { weight: 1 }, 'Celosia'),
-        new DungeonTrainer('Team Flare',
+            { weight: 1 }),
+        new DungeonTrainer('Team Flare Bryony',
             [new GymPokemon('Liepard', 79284730, 41)],
-            { weight: 1 }, 'Bryony'),
+            { weight: 1 }),
     ],
     615000, 14, 37);
 
@@ -3348,9 +3348,9 @@ dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     8537490,
     [
-        new DungeonTrainer('Team Flare',
+        new DungeonTrainer('Team Flare Mable',
             [new GymPokemon('Houndoom', 87365830, 48)],
-            { weight: 1 }, 'Mable'),
+            { weight: 1 }),
         new DungeonBossPokemon('Abomasnow', 85376500, 50),
     ],
     665500, 15, 40);
@@ -3395,14 +3395,14 @@ dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     8739480,
     [
-        new DungeonTrainer('Team Flare',
+        new DungeonTrainer('Team Flare Lysandre',
             [
                 new GymPokemon('Mienshao', 22464940, 49),
                 new GymPokemon('Honchkrow', 22564950, 49),
                 new GymPokemon('Pyroar', 23375580, 51),
                 new GymPokemon('Gyarados', 27385730, 53),
             ],
-            { weight: 2 }, 'Lysandre', '(lysandre)'),
+            { weight: 2 }),
         new DungeonBossPokemon('Xerneas', 93659460, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
         new DungeonBossPokemon('Yveltal', 93659450, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
     ],
