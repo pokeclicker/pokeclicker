@@ -451,6 +451,13 @@ class Update implements Saveable {
         },
 
         '0.8.3': ({ playerData, saveData }) => {
+            // If player has defeated the 8th Kalos gym, start the vivillon quest line
+            saveData.badgeCase = saveData.badgeCase || [];
+            // Not using game constants incase the value isn't 73 in the future
+            if (saveData.badgeCase[73]) { // Iceberg badge
+                saveData.quests.questLines.push({state: 1, name: 'The Great Vivillon Hunt!', quest: 0});
+            }
+
             // Add missing key items if the player has the badge
             const badgeToKeyItems = {
                 [5]: 'Safari_ticket', //Soul badge
