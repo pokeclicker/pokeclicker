@@ -7,6 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <h5 data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[player.region])">Region</h5>
             <div class="modal-body bg-ocean">
                 <img class="my-5" src='assets/images/boat.png' style='width: 40%;'>
                 <div style='margin-top:20px' data-bind="foreach: SubRegions.getSubRegions(player.region)">
