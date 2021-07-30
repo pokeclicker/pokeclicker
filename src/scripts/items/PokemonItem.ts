@@ -9,8 +9,11 @@ class PokemonItem extends CaughtIndicatingItem {
         this.type = pokemon;
     }
 
-    gain() {
-        const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
+    gain(amt: number) {
+        let shiny = false;
+        for (let i = 0; i < amt; i++) {
+            shiny = shiny || PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
+        }
         const pokemonName = this.name as PokemonNameType;
         if (shiny) {
             Notifier.notify({
