@@ -73,7 +73,6 @@ gymList['Pewter City'] = new Gym(
     'I took you for granted. As proof of your victory, here\'s the Boulder Badge!',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 2)]
 );
-
 gymList['Cerulean City'] = new Gym(
     'Misty',
     'Cerulean City',
@@ -143,6 +142,7 @@ gymList['Fuchsia City'] = new Gym(
         ]),
     ],
     () => {
+        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Safari_ticket, true);
         App.game.quests.getQuestLine('Mining Expedition').beginQuest();
     }
 );
@@ -176,7 +176,10 @@ gymList['Viridian City'] = new Gym(
         new GymBadgeRequirement(BadgeEnums.Volcano),
         new GymBadgeRequirement(BadgeEnums.Marsh),
         new GymBadgeRequirement(BadgeEnums.Thunder),
-    ]
+    ],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Shard_case, true);
+    }
 );
 
 // Kanto Elite 4
@@ -1104,9 +1107,11 @@ gymList['Snowbelle City'] = new Gym(
     BadgeEnums.Iceberg,
     52000,
     'Impressive! Your Pokémon fought with great courage. I can tell that you\'ve trained your Pokémon well.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Village'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Village'))],
+    () => {
+        App.game.quests.getQuestLine('The Great Vivillon Hunt!').beginQuest();
+    }
 );
-
 //Kalos Elite 4
 //TODO: Balancing of elite Pokemon HP & rewards.
 gymList['Elite Malva'] = new Gym(

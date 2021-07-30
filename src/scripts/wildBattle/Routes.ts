@@ -1685,7 +1685,7 @@ Routes.add(new RegionRoute(
         land: ['Granbull', 'Pelipper', 'Gastrodon (east)', 'Furfrou', 'Inkay'],
         water: ['Dhelmise'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.UlaulaKahuna)] //replace with Aether Paradise 2 if implemented
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))]
 ));
 Routes.add(new RegionRoute(
     'Ancient Poni Path', GameConstants.Region.alola, 25,

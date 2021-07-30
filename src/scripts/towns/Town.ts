@@ -1322,6 +1322,9 @@ TownList['Snowpoint Temple'] = new DungeonTown(
 const AspertiaCityShop = new Shop([
     ItemList['Pokeball'],
 ]);
+const FloccesyTownShop = new Shop([
+    ItemList['Mystery_egg'],
+]);
 const VirbankCityShop = new Shop([
     ItemList['Greatball'],
 ]);
@@ -1407,6 +1410,7 @@ TownList['Floccesy Town'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 19)],
+        shop: FloccesyTownShop,
     }
 );
 TownList['Virbank City'] = new Town(
@@ -2025,18 +2029,19 @@ TownList['Konikoni City'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
     }
 );
-TownList['Malie City'] = new Town(
-    'Malie City',
-    GameConstants.Region.alola,
-    {
-        requirements: [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)], //Replace with Ather Paradise 1 if implemented
-    }
-);
 TownList['Aether Paradise'] = new Town(
     'Aether Paradise',
     GameConstants.Region.alola,
     {
+        dungeon: dungeonList['Aether Foundation'],
         requirements: [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)],
+    }
+);
+TownList['Malie City'] = new Town(
+    'Malie City',
+    GameConstants.Region.alola,
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_Nihilego)],
     }
 );
 TownList['Tapu Village'] = new Town(
@@ -2050,7 +2055,7 @@ TownList['Seafolk Village'] = new Town(
     'Seafolk Village',
     GameConstants.Region.alola,
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.UlaulaKahuna)], //Replace with Ather Paradise 2 if implemented
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
     }
 );
 TownList['Exeggutor Island'] = new Town(
@@ -2066,6 +2071,13 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
+    }
+);
+TownList['Pokémon League Alola'] = new Town(
+    'Pokémon League Alola',
+    GameConstants.Region.alola,
+    {
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanakila'))],
     }
 );
 
@@ -2151,7 +2163,7 @@ TownList['Ruins of Life'] = new DungeonTown(
 TownList['Malie Garden'] = new DungeonTown(
     'Malie Garden',
     GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)] //Replace with Ather Paradise 1 if implemented
+    [new GymBadgeRequirement(BadgeEnums.Elite_Nihilego)] //Replace with Ather Paradise 1 if implemented
 );
 TownList['Hokulani Observatory'] = new DungeonTown(
     'Hokulani Observatory',
@@ -2173,8 +2185,8 @@ TownList['Po Town'] = new DungeonTown(
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 17)]
 );
-TownList['Mount Lanikala'] = new DungeonTown(
-    'Mount Lanikala',
+TownList['Mount Lanakila'] = new DungeonTown(
+    'Mount Lanakila',
     GameConstants.Region.alola,
     [new GymBadgeRequirement(BadgeEnums.PoniKahuna)]
 );
@@ -2185,6 +2197,11 @@ TownList['Ruins of Abundance'] = new DungeonTown(
         new RouteKillRequirement(10, GameConstants.Region.alola, 23),
         new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
     ]
+);
+TownList['Aether Foundation'] = new DungeonTown(
+    'Aether Foundation',
+    GameConstants.Region.alola,
+    [new GymBadgeRequirement(BadgeEnums.UlaulaKahuna)]
 );
 TownList['Exeggutor Island Hill'] = new DungeonTown(
     'Exeggutor Island Hill',

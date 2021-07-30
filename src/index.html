@@ -346,6 +346,7 @@
                         <img width=30px src="" data-bind="attr: { src: Weather.image() }"/>
                     </button>
                     <div id="mapBody" class="card-body p-0 show">
+                        <button class='btn btn-sm btn-block btn-info' data-bind="click: () => SubRegions.openModal(), visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1">Subregional Travel</button>
                         <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
                         <svg id="map" viewBox="0 0 1600 960" preserveAspectRatio="xMaxYMax meet">
                             <defs>
@@ -478,6 +479,9 @@
 
 <!-- Berry Master Modal-->
 @import "berryMasterModal.html"
+
+<!-- Subregion Modal-->
+@import "subregionModal.html"
 
 <!-- Ship Modal-->
 @import "shipModal.html"
