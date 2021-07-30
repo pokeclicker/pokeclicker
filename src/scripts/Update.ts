@@ -458,6 +458,10 @@ class Update implements Saveable {
                 saveData.quests.questLines.push({state: 1, name: 'The Great Vivillon Hunt!', quest: 0});
             }
 
+            if (saveData.statistics.battleFrontierHighestStageCompleted >= 666) {
+                Update.addPokemonToSaveData(saveData, 666.01);
+            }
+
             // Add missing key items if the player has the badge
             const badgeToKeyItems = {
                 [5]: 'Safari_ticket', //Soul badge
