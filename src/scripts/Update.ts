@@ -458,7 +458,7 @@ class Update implements Saveable {
                 saveData.quests.questLines.push({state: 1, name: 'The Great Vivillon Hunt!', quest: 0});
             }
 
-            if (saveData.statistics.battleFrontierHighestStageCompleted >= 666) {
+            if (saveData.statistics.battleFrontierHighestStageCompleted >= 666 && saveData.badgeCase[73]) {
                 Update.addPokemonToSaveData(saveData, 666.01);
             }
 
