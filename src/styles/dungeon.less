@@ -73,8 +73,8 @@
   body.darkly &,
   body.slate &,
   body.superhero & {
-    -webkit-filter: brightness(100); /* Safari 6.0 - 9.0 */
-    filter: brightness(100);
+    -webkit-filter: brightness(0%) invert(100%); /* Safari 6.0 - 9.0 */
+    filter: brightness(0%) invert(100%);
     opacity: 0.3;
   }
 }
@@ -84,5 +84,13 @@
   height: auto;
   width: auto;
   margin: -10px -10px -12px;
+}
 
+#dungeonPokemonList {
+  .boss {
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    width: 35%;
+  }
 }
