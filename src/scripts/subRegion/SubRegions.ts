@@ -23,6 +23,10 @@ class SubRegions {
     public static getSubRegionById(region: GameConstants.Region, subregionID: number): SubRegion {
         return this.list[region].find(s => s.id == subregionID);
     }
+
+    public static openModal() {
+        $('#SubregionModal').modal('show');
+    }
 }
 
 SubRegions.addSubRegion(GameConstants.Region.kanto, new SubRegion('Kanto'));
