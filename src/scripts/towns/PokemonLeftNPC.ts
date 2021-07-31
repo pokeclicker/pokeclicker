@@ -10,7 +10,7 @@ class PokemonLeftNPC extends NPC {
 
     get dialogHTML(): string {
 
-        const caughtPokemonCount = new Set(App.game.party.caughtPokemon.filter(p => p.id > 0 && PokemonHelper.calcNativeRegion(p.name) <= player.highestRegion()).map(p => Math.floor(p.id))).size;
+        const caughtPokemonCount = new Set(App.game.party.caughtPokemon.filter(p => p.id > 0 && PokemonHelper.calcNativeRegion(p.name) <= this.region).map(p => Math.floor(p.id))).size;
         const remainingPokemon = GameConstants.TotalPokemonsPerRegion[this.region] - caughtPokemonCount;
 
         const championBadge = new Map<GameConstants.Region, BadgeEnums>();
