@@ -187,7 +187,7 @@ const questBase = 1; // change this to scale all quest points
 
 // Currency → QP reward amounts
 export const GAIN_MONEY_BASE_REWARD = questBase * 0.0017;
-export const GAIN_TOKENS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 45;
+export const GAIN_TOKENS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 35;
 export const GAIN_FARM_POINTS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 90;
 
 export const HATCH_EGGS_BASE_REWARD = questBase * 33;
