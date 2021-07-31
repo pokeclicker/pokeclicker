@@ -69,7 +69,7 @@
     <!--Route 6-->
     <%- include('templates/mapRoute',
         { route: 6, region: 0
-        , width: 4.9, height: 3
+        , width: 5, height: 3
         , x: 66, y: 26
         , rotate: true
         })
@@ -234,8 +234,8 @@
     <!--Extra bit of Route 19-->
     <%- include('templates/mapRoute',
         { route: 19, region: 0
-        , width: 3, height: 4
-        , x: 48, y: 50
+        , width: 3, height: 5
+        , x: 48, y: 49
         , noText: true
         })
      %>
@@ -251,8 +251,8 @@
     <!--Route 21-->
     <%- include('templates/mapRoute',
         { route: 21, region: 0
-        , width: 11, height: 3
-        , x: 23, y: 42
+        , width: 12, height: 3
+        , x: 23, y: 41
         , rotate: true
         })
      %>
@@ -260,7 +260,7 @@
     <!--Route 22-->
     <%- include('templates/mapRoute',
         { route: 22, region: 0
-        , width: 15, height: 3
+        , width: 16, height: 3
         , x: 7, y: 26
         })
      %>
@@ -322,50 +322,83 @@
          , x: 23, y: 25
          })
       %>
+	  
+   <!--Viridian City extended-->
+    <%- include('templates/mapTown',
+         { name: "Viridian City"
+         , x: 27, y: 26
+		 , width: 1, height: 3
+         })
+      %>	  
 
     <!--Pewter City-->
     <%- include('templates/mapTown',
         { name: "Pewter City"
-        , x: 23, y: 10
+        , x: 22, y: 9
+		, width: 8, height: 5
         })
      %>
+    <!--Pewter City extended-->
+    <%- include('templates/mapTown',
+        { name: "Pewter City"
+        , x: 23, y: 6
+		, width: 7, height: 3
+        })
+     %>	 
 
     <!--Cerulean City-->
     <%- include('templates/mapTown',
          { name: "Cerulean City"
          , x: 62, y: 9
-		 , width: 8, height: 4
+		 , width: 9, height: 4
          })
       %>
 
     <!--Vermilion City-->
     <%- include('templates/mapTown',
         { name: "Vermilion City"
-        , x: 62, y: 31
-		, width: 8, height: 4
+        , x: 61, y: 31
+		, width: 10, height: 4
         })
      %>
 
     <!--Lavender Town-->
     <%- include('templates/mapTown',
          { name: "Lavender Town"
-         , x: 85, y: 20
+         , x: 85, y: 19
+		 , width: 4, height: 5		 
          })
       %>
 
     <!--Celadon City-->
     <%- include('templates/mapTown',
         { name: "Celadon City"
-        , x: 44, y: 18.7
-		, width: 5, height: 4.3
+        , x: 40, y: 15.5
+		, width: 9, height: 10.5
         })
      %>
+	 
+    <!--Celadon City extended-->
+    <%- include('templates/mapTown',
+        { name: "Celadon City"
+        , x: 40, y: 14
+		, width: 5, height: 1.5
+        })
+     %>	 
 
     <!--Saffron City-->
     <%- include('templates/mapTown',
         { name: "Saffron City"
-        , x: 64, y: 21.7
-		, width: 5, height: 4.3
+        , x: 60, y: 18
+		, width: 11, height: 8
+        })
+     %>
+	 
+	    <!--Saffron City extended-->
+    <%- include('templates/mapTown',
+        { name: "Saffron City"
+        , x: 60, y: 14
+		, width: 6, height: 4
         })
      %>
 
@@ -373,17 +406,34 @@
     <%- include('templates/mapTown',
         { name: "Fuchsia City"
         , x: 44, y: 44
-		, width: 8, height: 4
+		, width: 8, height: 5
         })
      %>
 
     <!--Cinnabar Island-->
     <%- include('templates/mapTown',
         { name: "Cinnabar Island"
-        , x: 23, y: 53
+        , x: 22, y: 53
+		, width: 5, height: 5
         })
      %>
 
+    <!--Cinnabar Island ext1-->
+    <%- include('templates/mapTown',
+        { name: "Cinnabar Island"
+        , x: 15, y: 58
+		, width: 8, height: 1
+        })
+     %>	 
+	 
+    <!--Cinnabar Island ext2-->
+    <%- include('templates/mapTown',
+        { name: "Cinnabar Island"
+        , x: 15, y: 55
+		, width: 7, height: 3
+        })
+     %>	 	 
+	 
     <!--Indigo Plateau Kanto-->
     <%- include('templates/mapTown',
         { name: "Indigo Plateau Kanto"
@@ -402,8 +452,8 @@
     <!--Viridian Forest-->
     <%- include('templates/mapDungeon',
         { name: "Viridian Forest"
-        , x: 23, y: 17.5		
-		, width: 3, height: 4.5
+        , x: 21, y: 17.5		
+		, width: 7, height: 4.5
         })
      %>
 
@@ -425,6 +475,14 @@
     <%- include('templates/mapDungeon',
         { name: "Mt. Moon"
         , x: 41, y: 8
+        })
+     %>
+	 
+    <!--Mt. Moon extended-->
+    <%- include('templates/mapDungeon',
+        { name: "Mt. Moon"
+        , x: 45, y: 8
+		, width: 5, height: 6
         })
      %>
 
@@ -462,6 +520,14 @@
     <%- include('templates/mapDungeon',
         { name: "Seafoam Islands"
         , x: 37, y: 54
+        })
+     %>
+	 
+    <!--Seafoam Islands extended-->
+    <%- include('templates/mapDungeon',
+        { name: "Seafoam Islands"
+        , x: 35, y: 54
+        , width: 2, height: 4
         })
      %>
 
