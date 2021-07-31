@@ -1341,6 +1341,15 @@ Routes.add(new RegionRoute(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Santalune Forest'))]
 ));
 Routes.add(new RegionRoute(
+    'Kalos Route 22', GameConstants.Region.kalos, 22,
+    new RoutePokemon({
+        land: ['Psyduck', 'Farfetch\'d', 'Azumarill', 'Dunsparce', 'Azurill', 'Bidoof', 'Bibarel', 'Riolu', 'Bunnelby', 'Diggersby', 'Litleo'],
+        water: ['Magikarp', 'Goldeen', 'Azumarill', 'Carvanha'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 3)],
+    3.1
+));
+Routes.add(new RegionRoute(
     'Kalos Route 4', GameConstants.Region.kalos, 4,
     new RoutePokemon({
         land: ['Ledyba', 'Ralts', 'Skitty', 'Budew', 'Combee', 'Flabébé (Red)', 'Flabébé (Orange)', 'Flabébé (White)'],
@@ -1477,14 +1486,6 @@ Routes.add(new RegionRoute(
         water: ['Poliwag', 'Poliwhirl', 'Lombre', 'Floatzel', 'Basculin (Red-Striped)', 'Dratini'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 19)]
-));
-Routes.add(new RegionRoute(
-    'Kalos Route 22', GameConstants.Region.kalos, 22,
-    new RoutePokemon({
-        land: ['Psyduck', 'Farfetch\'d', 'Azumarill', 'Dunsparce', 'Azurill', 'Bidoof', 'Bibarel', 'Riolu', 'Bunnelby', 'Diggersby', 'Litleo'],
-        water: ['Magikarp', 'Goldeen', 'Azumarill', 'Carvanha'],
-    }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 3)]
 ));
 Routes.add(new RegionRoute(
     'Azure Bay', GameConstants.Region.kalos, 23,
