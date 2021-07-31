@@ -11,7 +11,7 @@ class PokemonLeftNPC extends NPC {
     get dialogHTML(): string {
 
         const caughtPokemonCount = new Set(App.game.party.caughtPokemon.filter(p => p.id > 0 && PokemonHelper.calcNativeRegion(p.name) <= player.highestRegion()).map(p => Math.floor(p.id))).size;
-        const remainingPokemon = GameConstants.TotalPokemonsPerRegion[player.highestRegion()] - caughtPokemonCount;
+        const remainingPokemon = GameConstants.TotalPokemonsPerRegion[this.region] - caughtPokemonCount;
 
         const championBadge = new Map<GameConstants.Region, BadgeEnums>();
         championBadge.set(GameConstants.Region.kanto, BadgeEnums.Elite_KantoChampion);
@@ -27,7 +27,7 @@ class PokemonLeftNPC extends NPC {
             if (remainingPokemon == 0) {
                 return 'You\'ve done it, you\'ve caught all Pokémon in this region! Congratulations!';
             } else {
-                return 'You still have ${remainingPokemon} left to catch in this region! Keep up the good work!';
+                return `You still have ${remainingPokemon} left to catch in this region! Keep up the good work!`;
             }
         } else {
             return 'The first step to catching all the Pokémon is becoming the Champion of the Elite Four!';
