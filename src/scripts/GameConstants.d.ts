@@ -115,6 +115,7 @@ namespace GameConstants {
     declare const DEFEAT_POKEMONS_BASE_REWARD: number;
     declare const CAPTURE_POKEMONS_BASE_REWARD: number;
     declare const GAIN_TOKENS_BASE_REWARD: number;
+    declare const GAIN_FARM_POINTS_BASE_REWARD: number;
     declare const MINE_LAYERS_BASE_REWARD: number;
     declare const MINE_ITEMS_BASE_REWARD: number;
     declare const USE_OAK_ITEM_BASE_REWARD: number;
