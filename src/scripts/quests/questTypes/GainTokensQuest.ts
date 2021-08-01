@@ -15,7 +15,7 @@ class GainTokensQuest extends Quest implements QuestInterface {
     }
 
     private static calcReward(amount: number): number {
-        const reward =  Math.ceil(amount * GameConstants.GAIN_TOKENS_BASE_REWARD * Math.pow(Math.max(1, player.highestRegion()), -0.7));
+        const reward =  Math.ceil(amount * GameConstants.GAIN_TOKENS_BASE_REWARD * Math.pow(Math.max(1, player.highestRegion()), -1.2));
         return super.randomizeReward(reward);
     }
 
