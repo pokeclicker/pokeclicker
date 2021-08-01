@@ -470,6 +470,11 @@ class Update implements Saveable {
                 }
             });
         },
+
+        '0.8.4': ({ playerData, saveData }) => {
+            // Update Pokemon names
+            Update.renamePokemonInSaveData(saveData, 'Vivillon', 'Vivillon (Meadow)');
+        },
     };
 
     constructor() {

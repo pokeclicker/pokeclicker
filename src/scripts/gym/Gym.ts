@@ -1012,7 +1012,7 @@ gymList['Santalune City'] = new Gym(
     'Santalune City',
     [
         new GymPokemon('Surskit', 13737400, 10),
-        new GymPokemon('Vivillon', 17395730, 12),
+        new GymPokemon('Vivillon (Meadow)', 17395730, 12),
     ],
     BadgeEnums.Bug,
     800,
