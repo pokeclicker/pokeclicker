@@ -194,7 +194,12 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     public getUndergroundItemAmount(id: number) {
-        return player.mineInventory().find(i => i.id == id)?.amount() || 0;
+        const mineItem = player.mineInventory().find(i => i.id == id);
+        if (mineItem) {
+            return mineItem.amount();
+        }
+        const itemAmount = player.itemList[Underground.getMineItemById(id)?.valueType];
+        return itemAmount?.() || 0;
     }
 
     public toJSON() {
