@@ -804,7 +804,7 @@ export type PokemonNameType
     | 'Talonflame'
     | 'Scatterbug'
     | 'Spewpa'
-    | 'Vivillon'
+    | 'Vivillon (Meadow)'
     | 'Vivillon (Polar)'
     | 'Vivillon (Tundra)'
     | 'Vivillon (Continental)'

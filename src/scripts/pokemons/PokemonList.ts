@@ -14018,7 +14018,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 75,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Spewpa', 'Vivillon', 12)],
+        'evolutions': [new LevelEvolution('Spewpa', 'Vivillon (Meadow)', 12)],
         'base': {
             'hitpoints': 45,
             'attack': 22,
@@ -14030,7 +14030,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 666,
-        'name': 'Vivillon',
+        'name': 'Vivillon (Meadow)',
         'type': [PokemonType.Bug, PokemonType.Flying],
         'eggCycles': 15,
         'levelType': LevelType.mediumfast,
