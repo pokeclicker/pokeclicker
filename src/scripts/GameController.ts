@@ -197,7 +197,11 @@ class GameController {
                     if (player.town().gym) {
                         GymRunner.startGym(player.town().gym);
                     } else if (player.town().dungeon) {
-                        DungeonRunner.initializeDungeon(player.town().dungeon);
+                        if (player.town() instanceof DungeonTown) {
+                            DungeonRunner.initializeDungeon(player.town().dungeon);
+                        } else {
+                            MapHelper.moveToTown(player.town().dungeon.name);
+                        }
                     }
                     e.preventDefault();
                 } else if ('gymList' in player.town()) {
