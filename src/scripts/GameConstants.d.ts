@@ -89,6 +89,7 @@ namespace GameConstants {
         'Route Kill',
         'Clear Gym',
         'Clear Dungeon',
+        'Berries Unlocked',
     }
     declare enum DungeonTile {
         empty,

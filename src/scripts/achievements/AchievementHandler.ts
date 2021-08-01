@@ -224,6 +224,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Ultra Clicker', 'Click 1,000 Times', new ClickRequirement(1000, 1), 0.10, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
         AchievementHandler.addAchievement('Need a new mouse yet?', 'Click 10,000 Times', new ClickRequirement(10000, 1), 0.25, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
 
+        AchievementHandler.addAchievement('Who planted these here?', 'Unlock 8 Berries', new BerriesUnlockedRequirement(8), 0.1);
+        AchievementHandler.addAchievement('Farmer in training', 'Unlock 18 Berries', new BerriesUnlockedRequirement(18), 0.2);
+        AchievementHandler.addAchievement('Farming apprentice', 'Unlock 36 Berries', new BerriesUnlockedRequirement(36), 0.3);
+        AchievementHandler.addAchievement('Master Farmer', 'Unlock 67 Berries', new BerriesUnlockedRequirement(67), 0.4);
 
         /*
          * REGIONAL
