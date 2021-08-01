@@ -14049,7 +14049,8 @@ const pokemonList = createPokemonArray(
         'id': 666.01,
         'name': 'Vivillon (Pokéball)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14066,7 +14067,8 @@ const pokemonList = createPokemonArray(
         'id': 666.02,
         'name': 'Vivillon (Polar)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14083,7 +14085,8 @@ const pokemonList = createPokemonArray(
         'id': 666.03,
         'name': 'Vivillon (Tundra)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14100,7 +14103,8 @@ const pokemonList = createPokemonArray(
         'id': 666.04,
         'name': 'Vivillon (Continental)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14117,7 +14121,8 @@ const pokemonList = createPokemonArray(
         'id': 666.05,
         'name': 'Vivillon (Garden)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14134,7 +14139,8 @@ const pokemonList = createPokemonArray(
         'id': 666.06,
         'name': 'Vivillon (Elegant)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14151,7 +14157,8 @@ const pokemonList = createPokemonArray(
         'id': 666.07,
         'name': 'Vivillon (Icy Snow)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14168,7 +14175,8 @@ const pokemonList = createPokemonArray(
         'id': 666.08,
         'name': 'Vivillon (Modern)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14185,7 +14193,8 @@ const pokemonList = createPokemonArray(
         'id': 666.09,
         'name': 'Vivillon (Marine)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14202,7 +14211,8 @@ const pokemonList = createPokemonArray(
         'id': 666.10,
         'name': 'Vivillon (Archipelago)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14219,7 +14229,8 @@ const pokemonList = createPokemonArray(
         'id': 666.11,
         'name': 'Vivillon (High Plains)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14236,7 +14247,8 @@ const pokemonList = createPokemonArray(
         'id': 666.12,
         'name': 'Vivillon (Sandstorm)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14253,7 +14265,8 @@ const pokemonList = createPokemonArray(
         'id': 666.13,
         'name': 'Vivillon (River)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14270,7 +14283,8 @@ const pokemonList = createPokemonArray(
         'id': 666.14,
         'name': 'Vivillon (Monsoon)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14287,7 +14301,8 @@ const pokemonList = createPokemonArray(
         'id': 666.15,
         'name': 'Vivillon (Savanna)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14304,7 +14319,8 @@ const pokemonList = createPokemonArray(
         'id': 666.16,
         'name': 'Vivillon (Sun)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14321,7 +14337,8 @@ const pokemonList = createPokemonArray(
         'id': 666.17,
         'name': 'Vivillon (Ocean)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14338,7 +14355,8 @@ const pokemonList = createPokemonArray(
         'id': 666.18,
         'name': 'Vivillon (Jungle)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14355,7 +14373,8 @@ const pokemonList = createPokemonArray(
         'id': 666.19,
         'name': 'Vivillon (Fancy)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
