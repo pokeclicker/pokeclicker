@@ -133,6 +133,7 @@ export enum AchievementType {
     'Clear Gym' = 16,
     'Clear Dungeon' = 17,
     'Farming' = 18,
+    'Quest' = 19,
 }
 
 export enum DungeonTile {

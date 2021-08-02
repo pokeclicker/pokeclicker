@@ -236,6 +236,11 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Farming apprentice', 'Unlock 36 Berries', new BerriesUnlockedRequirement(36), 0.3);
         AchievementHandler.addAchievement('Master Farmer', 'Unlock 67 Berries', new BerriesUnlockedRequirement(67), 0.4);
 
+        AchievementHandler.addAchievement('Can you do this for me?', 'Complete 1 quest', new QuestRequirement(1), 0.05);
+        AchievementHandler.addAchievement('One more favor', 'Complete 10 quest', new QuestRequirement(10), 0.15);
+        AchievementHandler.addAchievement('YES MAN!', 'Complete 100 quest', new QuestRequirement(100), 0.25);
+        AchievementHandler.addAchievement('I just love green coins', 'Complete 1000 quest', new QuestRequirement(1000), 0.4);
+
         /*
          * REGIONAL
          */
