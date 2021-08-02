@@ -132,7 +132,7 @@ export enum AchievementType {
     'Route Kill' = 15,
     'Clear Gym' = 16,
     'Clear Dungeon' = 17,
-    'Berries Unlocked' = 18,
+    'Farming' = 18,
 }
 
 export enum DungeonTile {
