@@ -241,6 +241,16 @@ class AchievementHandler {
         AchievementHandler.addAchievement('YES MAN!', 'Complete 100 quest', new QuestRequirement(100), 0.25);
         AchievementHandler.addAchievement('I just love green coins', 'Complete 1000 quest', new QuestRequirement(1000), 0.4);
 
+        AchievementHandler.addAchievement('Fighting novice', 'Complete stage 100 in Battle Frontier', new BattleFrontierHighestStageRequirement(100), 0.05);
+        AchievementHandler.addAchievement('Competent fighter', 'Complete stage 250 in Battle Frontier', new BattleFrontierHighestStageRequirement(250), 0.15);
+        AchievementHandler.addAchievement('Unstoppable fighting machine', 'Complete stage 500 in Battle Frontier', new BattleFrontierHighestStageRequirement(500), 0.25);
+        AchievementHandler.addAchievement('Living Legend', 'Complete stage 1000 in Battle Frontier', new BattleFrontierHighestStageRequirement(1000), 0.4);
+
+        AchievementHandler.addAchievement('Keep on fighting', 'Complete 500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(500), 0.05);
+        AchievementHandler.addAchievement('Uphill battle', 'Complete 1000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(1000), 0.15);
+        AchievementHandler.addAchievement('Don\'t stop trying', 'Complete 2500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(2500), 0.25);
+        AchievementHandler.addAchievement('King of the hill', 'Complete 5000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(5000), 0.4);
+
         /*
          * REGIONAL
          */

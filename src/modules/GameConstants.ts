@@ -134,6 +134,7 @@ export enum AchievementType {
     'Clear Dungeon' = 17,
     'Farming' = 18,
     'Quest' = 19,
+    'Battle Frontier' = 20,
 }
 
 export enum DungeonTile {
