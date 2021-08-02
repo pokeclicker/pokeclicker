@@ -4,9 +4,8 @@
 ///<reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="NPC.ts"/>
 ///<reference path="KantoBerryMasterNPC.ts"/>
-///<reference path="ProfOakNPC.ts"/>
+///<reference path="ProfNPC.ts"/>
 ///<reference path="RoamerNPC.ts"/>
-///<reference path="PokemonLeftNPC.ts"/>
 
 type TownOptionalArgument = {
     requirements?: (Requirement | OneFromManyRequirement)[],
@@ -149,10 +148,10 @@ const KantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
     'Bah! You younglings have no appreciation of the art of Berry farming!',
     'Come back when you are ready to learn!',
 ]);
-const ProfOak = new ProfOakNPC('Prof. Oak', [
+const ProfOak = new ProfNPC('Prof. Oak', [
     'Good luck on your journey!',
     'Come visit me when you complete your Pokédex!',
-]);
+], GameConstants.Region.kanto);
 const BattleItemRival = new NPC('Battle Item Master', [
     'Hey kid, you look new! Let me offer some advice, Battle Items like xAttack can be acquired along Routes, inside Dungeons and in Shops!',
     'Use them to help you out whenever you feel like time is against you!',
@@ -163,10 +162,6 @@ const BattleItemRival2 = new NPC('Battle Item Master', [
 ]);
 const KantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
     'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
-], GameConstants.Region.kanto);
-
-const KantoRemainingPokemonNPC = new PokemonLeftNPC('Wise Old Man Bob', [
-    'Have you caught all the Pokémon yet?',
 ], GameConstants.Region.kanto);
 
 
@@ -259,7 +254,7 @@ TownList['Pallet Town'] = new Town(
     'Pallet Town',
     GameConstants.Region.kanto,
     {
-        npcs: [ProfOak, KantoRemainingPokemonNPC],
+        npcs: [ProfOak],
     }
 );
 TownList['Lavender Town'] = new Town(
@@ -409,8 +404,9 @@ const JohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
     'On the news they are getting more reports of roaming Pokémon appearing on {ROUTE_NAME}!',
 ], GameConstants.Region.johto);
 
-const JohtoRemainingPokemonNPC = new PokemonLeftNPC('Wise Old Man Bob', [
-    'Have you caught all the Pokémon yet?',
+const ProfElm = new ProfNPC('Prof. Elm', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
 ], GameConstants.Region.johto);
 
 
@@ -420,7 +416,7 @@ TownList['New Bark Town'] = new Town(
     GameConstants.Region.johto,
     {
         shop: NewBarkTownShop,
-        npcs: [JohtoRemainingPokemonNPC],
+        npcs: [ProfElm],
     }
 );
 TownList['Cherrygrove City'] = new Town(
@@ -671,8 +667,9 @@ const HoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
     'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
 ], GameConstants.Region.hoenn);
 
-const HoennRemainingPokemonNPC = new PokemonLeftNPC('Wise Old Man Bob', [
-    'Have you caught all the Pokémon yet?',
+const ProfBirch = new ProfNPC('Prof. Birch', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
 ], GameConstants.Region.hoenn);
 
 //Hoenn Towns
@@ -681,7 +678,7 @@ TownList['Littleroot Town'] = new Town(
     GameConstants.Region.hoenn,
     {
         shop: LittleRootTownShop,
-        npcs: [LittlerootAide, HoennRemainingPokemonNPC],
+        npcs: [LittlerootAide, ProfBirch],
     }
 );
 TownList['Oldale Town'] = new Town(
@@ -1036,8 +1033,9 @@ const SinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
     'I spotted a bunch of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.sinnoh);
 
-const SinnohRemainingPokemonNPC = new PokemonLeftNPC('Wise Old Man Bob', [
-    'Have you caught all the Pokémon yet?',
+const ProfRowan = new ProfNPC('Prof. Rowan', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
 ], GameConstants.Region.sinnoh);
 
 //Sinnoh Towns
@@ -1046,7 +1044,7 @@ TownList['Twinleaf Town'] = new Town(
     GameConstants.Region.sinnoh,
     {
         shop: TwinleafTownShop,
-        npcs: [SinnohRemainingPokemonNPC],
+        npcs: [ProfRowan],
     }
 );
 TownList['Sandgem Town'] = new Town(
@@ -1423,8 +1421,9 @@ const UnovaRoamerNPC = new RoamerNPC('Youngster Sarah', [
     'My friends told me roaming Pokémon have been spotted on {ROUTE_NAME}!',
 ], GameConstants.Region.unova);
 
-const UnovaRemainingPokemonNPC = new PokemonLeftNPC('Wise Old Man Bob', [
-    'Have you caught all the Pokémon yet?',
+const ProfJuniper = new ProfNPC('Prof. Juniper', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
 ], GameConstants.Region.unova);
 
 //Unova Towns
@@ -1433,7 +1432,7 @@ TownList['Aspertia City'] = new Town(
     GameConstants.Region.unova,
     {
         shop: AspertiaCityShop,
-        npcs: [UnovaRemainingPokemonNPC],
+        npcs: [ProfJuniper],
     }
 );
 TownList['Floccesy Town'] = new Town(
@@ -1804,8 +1803,9 @@ const Birdwatcher = new NPC('Birdwatcher', [
     'There are rumors that the energy calls some legendary birds to roam Kalos!',
 ]);
 
-const KalosRemainingPokemonNPC = new PokemonLeftNPC('Wise Old Man Bob', [
-    'Have you caught all the Pokémon yet?',
+const ProfSycamore = new ProfNPC('Prof. Sycamore', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
 ], GameConstants.Region.kalos);
 
 //Kalos Towns
@@ -1814,7 +1814,7 @@ TownList['Vaniville Town'] = new Town(
     GameConstants.Region.kalos,
     {
         shop: VanivilleTownShop,
-        npcs: [KalosRemainingPokemonNPC],
+        npcs: [ProfSycamore],
     }
 );
 TownList['Aquacorde Town'] = new Town(
@@ -2024,8 +2024,9 @@ TownList['Victory Road Kalos'] = new DungeonTown(
 
 // Alola NPCs
 
-const AlolaRemainingPokemonNPC = new PokemonLeftNPC('Wise Old Man Bob', [
-    'Have you caught all the Pokémon yet?',
+const ProfKukui = new ProfNPC('Prof. Kukui', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
 ], GameConstants.Region.alola);
 
 //Alola Towns
@@ -2034,7 +2035,7 @@ TownList['Iki Town'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
-        npcs: [AlolaRemainingPokemonNPC],
+        npcs: [ProfKukui],
     }
 );
 TownList['Hau\'oli City'] = new Town(
@@ -2342,8 +2343,9 @@ const TrainStationGuy = new NPC('Train Station Guy', [
     'There are plenty of unique, powerful ones there, too!',
 ]);
 
-const GalarRemainingPokemonNPC = new PokemonLeftNPC('Wise Old Man Bob', [
-    'Have you caught all the Pokémon yet?',
+const ProfMagnolia = new ProfNPC('Prof. Magnolia', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
 ], GameConstants.Region.galar);
 
 
@@ -2354,7 +2356,7 @@ TownList['Postwick'] = new Town(
     GameConstants.Region.galar,
     {
         shop: PostwickShop,
-        npcs: [Mom, GalarRemainingPokemonNPC],
+        npcs: [Mom, ProfMagnolia],
     }
 );
 TownList['Wedgehurst'] = new Town(
