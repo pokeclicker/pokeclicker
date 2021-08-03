@@ -94,11 +94,30 @@ class Game {
 
     computeOfflineEarnings() {
         const now = Date.now();
-        const timeDiffInSeconds = (now - player._previousStartLastSeen) / 1000;
+        const timeDiffInSeconds = Math.floor((now - player._lastSeen) / 1000);
         if (timeDiffInSeconds > 1) {
-            const timeDiffOverride = timeDiffInSeconds > 86400 ? 86400 : timeDiffInSeconds;//The maximum value is 24h
-            const route: number = player.route();
+            // Only allow up to 24 hours worth of bonuses
+            const timeDiffOverride = Math.min(86400, timeDiffInSeconds);
             const region: GameConstants.Region = player.region;
+            let route: number = player.route();
+            if (!MapHelper.validRoute(route, region)) {
+                switch (region) {
+                    case 0:
+                        route = 1;
+                        break;
+                    case 1:
+                        route = 29;
+                        break;
+                    case 2:
+                        route = 101;
+                        break;
+                    case 3:
+                        route = 201;
+                        break;
+                    default:
+                        route = 1;
+                }
+            }
             const availablePokemonMap = RouteHelper.getAvailablePokemonList(route, region).map(name => pokemonMap[name]);
             const maxHealth: number = PokemonFactory.routeHealth(route, region);
             let hitsToKill = 0;
@@ -109,11 +128,11 @@ class Game {
                 const currentHitsToKill: number = maxHealth / attackAgainstPokemon;
                 hitsToKill += currentHitsToKill;
             }
-            const numberOfPokemonDefeated = (timeDiffOverride / 0.9) / hitsToKill;//We attack every 0.9 secs, so we have to divide by 0.9
-            const currentMoney: number = PokemonFactory.routeMoney(player.route(), player.region);
-            const baseMoneyToEarn = numberOfPokemonDefeated * currentMoney;
+            const numberOfPokemonDefeated = timeDiffOverride / hitsToKill;
+            const routeMoney: number = PokemonFactory.routeMoney(player.route(), player.region, false);
+            const baseMoneyToEarn = numberOfPokemonDefeated * routeMoney;
             const moneyToEarn = baseMoneyToEarn * 0.5;//Debuff for offline money
-            App.game.wallet.gainMoney(moneyToEarn);
+            App.game.wallet.gainMoney(moneyToEarn, false);
         }
     }
 

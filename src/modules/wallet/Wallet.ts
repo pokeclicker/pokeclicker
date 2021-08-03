@@ -21,28 +21,28 @@ export default class Wallet implements Feature {
         this.currencies = this.defaults.currencies.map((v) => ko.observable(v));
     }
 
-    public gainMoney(base: number): Amount {
-        return this.addAmount(new Amount(base, Currency.money));
+    public gainMoney(base: number, addBonuses = true): Amount {
+        return this.addAmount(new Amount(base, Currency.money), addBonuses);
     }
 
-    public gainDungeonTokens(base: number): Amount {
-        return this.addAmount(new Amount(base, Currency.dungeonToken));
+    public gainDungeonTokens(base: number, addBonuses = true): Amount {
+        return this.addAmount(new Amount(base, Currency.dungeonToken), addBonuses);
     }
 
-    public gainQuestPoints(base: number): Amount {
-        return this.addAmount(new Amount(base, Currency.questPoint));
+    public gainQuestPoints(base: number, addBonuses = true): Amount {
+        return this.addAmount(new Amount(base, Currency.questPoint), addBonuses);
     }
 
-    public gainDiamonds(base: number): Amount {
-        return this.addAmount(new Amount(base, Currency.diamond));
+    public gainDiamonds(base: number, addBonuses = true): Amount {
+        return this.addAmount(new Amount(base, Currency.diamond), addBonuses);
     }
 
-    public gainFarmPoints(base: number): Amount {
-        return this.addAmount(new Amount(base, Currency.farmPoint));
+    public gainFarmPoints(base: number, addBonuses = true): Amount {
+        return this.addAmount(new Amount(base, Currency.farmPoint), addBonuses);
     }
 
-    public gainBattlePoints(base: number): Amount {
-        return this.addAmount(new Amount(base, Currency.battlePoint));
+    public gainBattlePoints(base: number, addBonuses = true): Amount {
+        return this.addAmount(new Amount(base, Currency.battlePoint), addBonuses);
     }
 
     public calcBonus(amount: Amount) {
@@ -60,14 +60,16 @@ export default class Wallet implements Feature {
         }
     }
 
-    public addAmount(amount: Amount) {
+    public addAmount(amount: Amount, addBonuses = true) {
         if (Number.isNaN(amount.amount) || amount.amount <= 0) {
             console.trace('Could not add amount:', amount);
             amount.amount = 1;
         }
 
-        // Calculate the bonuses
-        amount.amount = Math.floor(amount.amount * this.calcBonus(amount));
+        if (addBonuses) {
+            // Calculate the bonuses
+            amount.amount = Math.floor(amount.amount * this.calcBonus(amount));
+        }
 
         GameHelper.incrementObservable(this.currencies[amount.currency], amount.amount);
         animateCurrency(amount);

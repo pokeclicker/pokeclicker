@@ -59,9 +59,10 @@ class PokemonFactory {
         return health;
     }
 
-    public static routeMoney(route: number, region: GameConstants.Region): number {
+    public static routeMoney(route: number, region: GameConstants.Region, useRandomDeviation = true): number {
         route = MapHelper.normalizeRoute(route, region);
-        const deviation = Math.floor(Math.random() * 51) - 25;
+        //If it's not random, we take the mean value (truncated)
+        const deviation = useRandomDeviation ? Math.floor(Math.random() * 51) - 25 : 12;
         const money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
 
         return money;

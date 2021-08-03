@@ -29,7 +29,6 @@ class Player {
         const saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0;
-        this._previousStartLastSeen = savedPlayer._lastSeen || 0;
         this._timeTraveller = savedPlayer._timeTraveller || false;
         if (this._lastSeen > Date.now()) {
             Notifier.notify({
@@ -85,11 +84,6 @@ class Player {
 
         this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
 
-        const today = new Date();
-        const lastSeen = new Date(this._lastSeen);
-
-        this._lastSeen = Date.now();
-
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
         this.effectTimer = Save.initializeEffectTimer(savedPlayer.effectTimer || {});
         this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
@@ -102,7 +96,6 @@ class Player {
     public mineInventory: KnockoutObservableArray<any>;
 
     public _lastSeen: number;
-    public _previousStartLastSeen : number;
 
     public effectList: { [name: string]: KnockoutObservable<number> } = {};
     public effectTimer: { [name: string]: KnockoutObservable<string> } = {};
