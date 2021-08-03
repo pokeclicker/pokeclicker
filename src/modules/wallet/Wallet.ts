@@ -60,14 +60,14 @@ export default class Wallet implements Feature {
         }
     }
 
-    public addAmount(amount: Amount, addBonuses = true) {
+    public addAmount(amount: Amount, ignoreBonus = false) {
         if (Number.isNaN(amount.amount) || amount.amount <= 0) {
             console.trace('Could not add amount:', amount);
             amount.amount = 1;
         }
 
-        if (addBonuses) {
-            // Calculate the bonuses
+        // Calculate the bonuses
+        if (!ignoreBonus) {
             amount.amount = Math.floor(amount.amount * this.calcBonus(amount));
         }
 

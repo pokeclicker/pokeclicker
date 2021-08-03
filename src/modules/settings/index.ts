@@ -87,6 +87,7 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
+Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((sound) => {
