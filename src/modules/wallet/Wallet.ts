@@ -21,28 +21,28 @@ export default class Wallet implements Feature {
         this.currencies = this.defaults.currencies.map((v) => ko.observable(v));
     }
 
-    public gainMoney(base: number, addBonuses = true): Amount {
-        return this.addAmount(new Amount(base, Currency.money), addBonuses);
+    public gainMoney(base: number, ignoreBonus = false): Amount {
+        return this.addAmount(new Amount(base, Currency.money), ignoreBonus);
     }
 
-    public gainDungeonTokens(base: number, addBonuses = true): Amount {
-        return this.addAmount(new Amount(base, Currency.dungeonToken), addBonuses);
+    public gainDungeonTokens(base: number, ignoreBonus = false): Amount {
+        return this.addAmount(new Amount(base, Currency.dungeonToken), ignoreBonus);
     }
 
-    public gainQuestPoints(base: number, addBonuses = true): Amount {
-        return this.addAmount(new Amount(base, Currency.questPoint), addBonuses);
+    public gainQuestPoints(base: number, ignoreBonus = false): Amount {
+        return this.addAmount(new Amount(base, Currency.questPoint), ignoreBonus);
     }
 
-    public gainDiamonds(base: number, addBonuses = true): Amount {
-        return this.addAmount(new Amount(base, Currency.diamond), addBonuses);
+    public gainDiamonds(base: number, ignoreBonus = false): Amount {
+        return this.addAmount(new Amount(base, Currency.diamond), ignoreBonus);
     }
 
-    public gainFarmPoints(base: number, addBonuses = true): Amount {
-        return this.addAmount(new Amount(base, Currency.farmPoint), addBonuses);
+    public gainFarmPoints(base: number, ignoreBonus = false): Amount {
+        return this.addAmount(new Amount(base, Currency.farmPoint), ignoreBonus);
     }
 
-    public gainBattlePoints(base: number, addBonuses = true): Amount {
-        return this.addAmount(new Amount(base, Currency.battlePoint), addBonuses);
+    public gainBattlePoints(base: number, ignoreBonus = false): Amount {
+        return this.addAmount(new Amount(base, Currency.battlePoint), ignoreBonus);
     }
 
     public calcBonus(amount: Amount) {
