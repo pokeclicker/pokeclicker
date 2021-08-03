@@ -10,6 +10,24 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.3
+    new ChangelogUpdate('v0.8.3', new Date(2021, 6, 30)),
+    new Changelog(changelogType.NEW, 'Vivillon quest line'),
+    new Changelog(changelogType.CHANGE, 'Achievement bonus percentage now also applies to Dungeon Tokens'),
+    new Changelog(changelogType.CHANGE, 'Added Mystery Egg to Unova shop'),
+    new Changelog(changelogType.CHANGE, 'Updated the look of most maps'),
+    new Changelog(changelogType.CHANGE, 'Added an icon to dungeon bosses'),
+    new Changelog(changelogType.CHANGE, 'Show inventory amount of item you are receiving from Underground daily deal'),
+    new Changelog(changelogType.FIXED, 'Updated Oak Item achivements for no click challenge players'),
+    new Changelog(changelogType.FIXED, 'Underground not refreshing after completing layer and purchasing size upgrade'),
+    new Changelog(changelogType.FIXED, 'Softlock from Safari Ticket and Shard Case if the user refreshed the page after obtaining a badge'),
+    new Changelog(changelogType.FIXED, 'Some trainers teams'),
+    new Changelog(changelogType.FIXED, 'Gym/Elite Four money reward amounts'),
+    new Changelog(changelogType.FIXED, 'Kanto dock ship not showing on client'),
+    new Changelog(changelogType.FIXED, 'Pokemon League images'),
+    new Changelog(changelogType.FIXED, 'When purchasing multiple shop Pokemon the shiny chance was only rolled once'),
+    new Changelog(changelogType.FIXED, 'Some Pokemon silhouettes showing colors when not obtained yet'),
+
     // v0.8.2
     new ChangelogUpdate('v0.8.2', new Date(2021, 4, 3)),
     new Changelog(changelogType.NEW, 'Added in game FAQ'),

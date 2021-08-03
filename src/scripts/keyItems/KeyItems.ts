@@ -100,9 +100,11 @@ class KeyItems implements Feature {
         return this.itemList[item].isUnlocked;
     }
 
-    gainKeyItem(item: KeyItems.KeyItem) {
+    gainKeyItem(item: KeyItems.KeyItem, silent = false) {
         if (!this.hasKeyItem(item)) {
-            KeyItemController.showGainModal(item);
+            if (!silent) {
+                KeyItemController.showGainModal(item);
+            }
             this.itemList[item].unlock();
         }
     }

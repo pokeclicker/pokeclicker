@@ -16,7 +16,22 @@ export const MAX_LOAD_TIME = 20000; // 20 Seconds
 export const MUTATION_TICK = 1000;
 export const WANDER_TICK = 1500;
 
-export const MAX_AVAILABLE_REGION = 5; // Kalos
+export enum Region {
+    none = -1,
+    kanto = 0,
+    johto = 1,
+    hoenn = 2,
+    sinnoh = 3,
+    unova = 4,
+    kalos = 5,
+    alola = 6,
+    galar = 7,
+    // TODO: figure out a better way to handle DLC/non main regions
+    armor = 8,
+    crown = 9,
+}
+
+export const MAX_AVAILABLE_REGION = Region.kalos;
 
 export const TotalPokemonsPerRegion = [
     151, // 151 - Kanto
@@ -47,9 +62,9 @@ export const ROAMING_MAX_CHANCE = 4096;
 // Shinies
 export const SHINY_CHANCE_BATTLE = 8192;
 export const SHINY_CHANCE_DUNGEON = 4096;
-export const SHINY_CHANCE_SHOP = 2048;
 export const SHINY_CHANCE_STONE = 2048;
 export const SHINY_CHANCE_SAFARI = 2048;
+export const SHINY_CHANCE_SHOP = 1024;
 export const SHINY_CHANCE_BREEDING = 1024;
 export const SHINY_CHANCE_FARM = 1024;
 
@@ -117,6 +132,9 @@ export enum AchievementType {
     'Route Kill' = 15,
     'Clear Gym' = 16,
     'Clear Dungeon' = 17,
+    'Farming' = 18,
+    'Quest' = 19,
+    'Battle Frontier' = 20,
 }
 
 export enum DungeonTile {
@@ -367,6 +385,12 @@ export function formatNumber(input: number): string {
     let num = Number(input); // Temporary cast until everything is in modules
     if (Number.isNaN(+num)) { return '0'; }
 
+    if (num >= 1e12) {
+        num = Math.floor(num / 1e11);
+        num = num < 100 ? num / 10 : Math.floor(num / 10);
+        return `${num}T`;
+    }
+
     if (num >= 1e9) {
         num = Math.floor(num / 1e8);
         num = num < 100 ? num / 10 : Math.floor(num / 10);
@@ -386,21 +410,6 @@ export function formatNumber(input: number): string {
     }
 
     return num.toString();
-}
-
-export enum Region {
-    none = -1,
-    kanto = 0,
-    johto = 1,
-    hoenn = 2,
-    sinnoh = 3,
-    unova = 4,
-    kalos = 5,
-    alola = 6,
-    galar = 7,
-    // TODO: figure out a better way to handle DLC/non main regions
-    armor = 8,
-    crown = 9,
 }
 
 export function randomIntBetween(min: number, max: number): number {

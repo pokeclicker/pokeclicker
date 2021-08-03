@@ -2168,7 +2168,7 @@ TownList['Ruins of Life'] = new DungeonTown(
 TownList['Malie Garden'] = new DungeonTown(
     'Malie Garden',
     GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)] //Replace with Ather Paradise 1 if implemented
+    [new GymBadgeRequirement(BadgeEnums.Elite_Nihilego)] //Replace with Ather Paradise 1 if implemented
 );
 TownList['Hokulani Observatory'] = new DungeonTown(
     'Hokulani Observatory',

@@ -793,9 +793,15 @@ class Farming implements Feature {
         // Petaya
         this.mutations.push(new PetayaMutation(.00001));
         // Apicot
-
+        this.mutations.push(new FieldMutation(.00001, BerryType.Apicot, BerryType.Chilan, undefined, {
+            unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Palkia').id](),
+        }));
         // Lansat
         // TODO: HLXII - Add Mutation to evolve Payapa when Milotic, Gardevoir, Blissey, and Togekiss in party.
+        this.mutations.push(new FieldMutation(.00001, BerryType.Lansat, BerryType.Roseli, undefined, {
+            unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Dialga').id](),
+        }));
+
         // Starf
         // No mutation, obtained by wandering shiny pokemon
         // Enigma
