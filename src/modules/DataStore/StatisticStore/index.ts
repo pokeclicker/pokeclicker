@@ -8,7 +8,7 @@ const failedSetValue = () => 0;
 export default class Statistics implements Saveable {
     saveKey = 'statistics';
 
-    defaults = {};
+    defaults: Record<string, any> = {};
 
     selectedPokemonID = ko.observable(1);
 
