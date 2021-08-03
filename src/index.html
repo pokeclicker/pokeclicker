@@ -157,19 +157,19 @@
                             <td width="33.33%">
                                 <span style="display: inline; position: relative;">
                                     <img title="Money" src="assets/images/currency/money.svg" height="25px">
-                                    <span id="animateCurrency-money" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.money]().toLocaleString('en-US')">0</span>
+                                    <span id="animateCurrency-money" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.money]()) : App.game.wallet.currencies[GameConstants.Currency.money]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td width="33.33%">
                                 <span style="display: inline; position: relative;">
                                     <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px">
-                                    <span id="animateCurrency-dungeonToken" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.dungeonToken]().toLocaleString('en-US')">0</span>
+                                    <span id="animateCurrency-dungeonToken" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.dungeonToken]()) : App.game.wallet.currencies[GameConstants.Currency.dungeonToken]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td width="33.33%">
                                 <span style="display: inline; position: relative;">
                                     <img title="Quest points" src="assets/images/currency/questPoint.svg" height="25px">
-                                    <span id="animateCurrency-questPoint" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">0</span>
+                                    <span id="animateCurrency-questPoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.questPoint]()) : App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                         </tr>
@@ -346,6 +346,7 @@
                         <img width=30px src="" data-bind="attr: { src: Weather.image() }"/>
                     </button>
                     <div id="mapBody" class="card-body p-0 show">
+                        <button class='btn btn-sm btn-block btn-info' data-bind="click: () => SubRegions.openModal(), visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1">Subregional Travel</button>
                         <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
                         <svg id="map" viewBox="0 0 1600 960" preserveAspectRatio="xMaxYMax meet">
                             <defs>
@@ -478,6 +479,9 @@
 
 <!-- Berry Master Modal-->
 @import "berryMasterModal.html"
+
+<!-- Subregion Modal-->
+@import "subregionModal.html"
 
 <!-- Ship Modal-->
 @import "shipModal.html"

@@ -139,15 +139,15 @@ class AchievementHandler {
         AchievementHandler.addAchievement('If you like it, you should\'ve put a ring on it.', 'Obtain 10,000 Diamonds', new DiamondRequirement(10000), 0.25);
 
         AchievementHandler.addAchievement('Is my thumb green yet?', 'Dig up 1 item', new UndergroundItemsFoundRequirement(1), 0.01);
-        AchievementHandler.addAchievement('My shovel is starting to crack', 'Dig up 10 items', new UndergroundItemsFoundRequirement(10), 0.01);
-        AchievementHandler.addAchievement('Why can\'t I make a diamond shovel?', 'Dig up 100 items', new UndergroundItemsFoundRequirement(100), 0.01);
-        AchievementHandler.addAchievement('This is definitely not Minecraft', 'Dig up 1,000 items', new UndergroundItemsFoundRequirement(1000), 0.01);
-        AchievementHandler.addAchievement('I wonder how much is down there...', 'Dig up 10,000 items', new UndergroundItemsFoundRequirement(10000), 0.01);
+        AchievementHandler.addAchievement('My shovel is starting to crack', 'Dig up 10 items', new UndergroundItemsFoundRequirement(10), 0.02);
+        AchievementHandler.addAchievement('Why can\'t I make a diamond shovel?', 'Dig up 100 items', new UndergroundItemsFoundRequirement(100), 0.08);
+        AchievementHandler.addAchievement('This is definitely not Minecraft', 'Dig up 1,000 items', new UndergroundItemsFoundRequirement(1000), 0.1);
+        AchievementHandler.addAchievement('I wonder how much is down there...', 'Dig up 10,000 items', new UndergroundItemsFoundRequirement(10000), 0.4);
 
         AchievementHandler.addAchievement('The earth is like onions', 'Dig deeper 1 time', new UndergroundLayersMinedRequirement(1), 0.01);
-        AchievementHandler.addAchievement('This takes foreverrrrrrr', 'Dig deeper 10 times', new UndergroundLayersMinedRequirement(10), 0.01);
-        AchievementHandler.addAchievement('DigDug ain\'t got nothin on me', 'Dig deeper 100 times', new UndergroundLayersMinedRequirement(100), 0.01);
-        AchievementHandler.addAchievement('Both my thumbs are green! This can\'t be healthy', 'Dig deeper 1000 times', new UndergroundLayersMinedRequirement(1000), 0.01);
+        AchievementHandler.addAchievement('This takes foreverrrrrrr', 'Dig deeper 10 times', new UndergroundLayersMinedRequirement(10), 0.03);
+        AchievementHandler.addAchievement('DigDug ain\'t got nothin on me', 'Dig deeper 100 times', new UndergroundLayersMinedRequirement(100), 0.1);
+        AchievementHandler.addAchievement('Both my thumbs are green! This can\'t be healthy', 'Dig deeper 1000 times', new UndergroundLayersMinedRequirement(1000), 0.3);
 
         AchievementHandler.addAchievement('Is that how I use this?', 'Level 1 Oak Item to the maximum level', new MaxLevelOakItemRequirement(1), 0.05, GameConstants.Region.none, () => !challenges.list.disableOakItems.active());
         AchievementHandler.addAchievement('I\'ve got my hands full with all of these', 'Level 3 Oak Items to the maximum level', new MaxLevelOakItemRequirement(3), 0.1, GameConstants.Region.none, () => !challenges.list.disableOakItems.active());
@@ -167,6 +167,9 @@ class AchievementHandler {
         AchievementHandler.addAchievement('The Cake is a Lie, but the Grind is real', 'Defeat 100,000 Pokémon', new DefeatedRequirement(100000), 0.25);
         AchievementHandler.addAchievement('Are there any left?', 'Defeat 1,000,000 Pokémon', new DefeatedRequirement(1000000), 0.50);
 
+        // TODO: move to Kanto region Achievements,
+        // check all Kanto Pokemon obtained (base forms)
+        // add for all other regions
         AchievementHandler.addAchievement('Startin\' Out', 'Capture your first Pokémon', new CaughtPokemonRequirement(1), 0.01);
         AchievementHandler.addAchievement('Like Ants in a PC', 'Capture 10 unique Pokémon', new CaughtPokemonRequirement(10), 0.02);
         AchievementHandler.addAchievement('Better Than Season 1 Ash', 'Capture 20 unique Pokémon', new CaughtPokemonRequirement(20), 0.03);
@@ -189,10 +192,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement('I don\'t know if I can handle the next batch of shinies.', 'Capture 151 unique Shinies!', new ShinyPokemonRequirement(151), 1.50);
 
         AchievementHandler.addAchievement('Pokémon Nursery', 'Hatch 1 egg', new HatchRequirement(1), 0.01);
-        AchievementHandler.addAchievement('A Lot of Running', 'Hatch 10 eggs', new HatchRequirement(10), 0.01);
-        AchievementHandler.addAchievement('Marathon Runner', 'Hatch 100 eggs', new HatchRequirement(100), 0.01);
-        AchievementHandler.addAchievement('Egg Factory', 'Hatch 1,000 eggs', new HatchRequirement(1000), 0.01);
-        AchievementHandler.addAchievement('Offical Easter Bunny', 'Hatch 10,000 eggs', new HatchRequirement(10000), 0.01);
+        AchievementHandler.addAchievement('A Lot of Running', 'Hatch 10 eggs', new HatchRequirement(10), 0.04);
+        AchievementHandler.addAchievement('Marathon Runner', 'Hatch 100 eggs', new HatchRequirement(100), 0.15);
+        AchievementHandler.addAchievement('Egg Factory', 'Hatch 1,000 eggs', new HatchRequirement(1000), 0.3);
+        AchievementHandler.addAchievement('Offical Easter Bunny', 'Hatch 10,000 eggs', new HatchRequirement(10000), 0.4);
 
         AchievementHandler.addAchievement('Why is my Voltorb Upside Down?', 'Obtain your first Pokéball', new PokeballRequirement(1, GameConstants.Pokeball.Pokeball), 0.01);
         AchievementHandler.addAchievement('Starting a Collection', 'Obtain 10 Pokéballs', new PokeballRequirement(10, GameConstants.Pokeball.Pokeball), 0.03);
@@ -224,6 +227,29 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Ultra Clicker', 'Click 1,000 Times', new ClickRequirement(1000, 1), 0.10, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
         AchievementHandler.addAchievement('Need a new mouse yet?', 'Click 10,000 Times', new ClickRequirement(10000, 1), 0.25, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
 
+        AchievementHandler.addAchievement('My new dirty hobby', 'Unlock 3 Plots in the Farm', new FarmPlotsUnlockedRequirement(3), 0.05);
+        AchievementHandler.addAchievement('Allotment gardener', 'Unlock 9 Plots in the Farm', new FarmPlotsUnlockedRequirement(9), 0.15);
+        AchievementHandler.addAchievement('Horticulture', 'Unlock 25 Plots in the Farm', new FarmPlotsUnlockedRequirement(25), 0.25);
+
+        AchievementHandler.addAchievement('Who planted these here?', 'Unlock 8 Berries', new BerriesUnlockedRequirement(8), 0.1);
+        AchievementHandler.addAchievement('Farmer in training', 'Unlock 18 Berries', new BerriesUnlockedRequirement(18), 0.2);
+        AchievementHandler.addAchievement('Farming apprentice', 'Unlock 36 Berries', new BerriesUnlockedRequirement(36), 0.3);
+        AchievementHandler.addAchievement('Master Farmer', 'Unlock 67 Berries', new BerriesUnlockedRequirement(67), 0.4);
+
+        AchievementHandler.addAchievement('Can you do this for me?', 'Complete 1 quest', new QuestRequirement(1), 0.05);
+        AchievementHandler.addAchievement('One more favor', 'Complete 10 quest', new QuestRequirement(10), 0.15);
+        AchievementHandler.addAchievement('YES MAN!', 'Complete 100 quest', new QuestRequirement(100), 0.25);
+        AchievementHandler.addAchievement('I just love green coins', 'Complete 1000 quest', new QuestRequirement(1000), 0.4);
+
+        AchievementHandler.addAchievement('Fighting novice', 'Complete stage 100 in Battle Frontier', new BattleFrontierHighestStageRequirement(100), 0.05);
+        AchievementHandler.addAchievement('Competent fighter', 'Complete stage 250 in Battle Frontier', new BattleFrontierHighestStageRequirement(250), 0.15);
+        AchievementHandler.addAchievement('Unstoppable fighting machine', 'Complete stage 500 in Battle Frontier', new BattleFrontierHighestStageRequirement(500), 0.25);
+        AchievementHandler.addAchievement('Living Legend', 'Complete stage 1000 in Battle Frontier', new BattleFrontierHighestStageRequirement(1000), 0.4);
+
+        AchievementHandler.addAchievement('Keep on fighting', 'Complete 500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(500), 0.05);
+        AchievementHandler.addAchievement('Uphill battle', 'Complete 1000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(1000), 0.15);
+        AchievementHandler.addAchievement('Don\'t stop trying', 'Complete 2500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(2500), 0.25);
+        AchievementHandler.addAchievement('King of the hill', 'Complete 5000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(5000), 0.4);
 
         /*
          * REGIONAL
@@ -260,6 +286,7 @@ class AchievementHandler {
 
         multiplier.addBonus('exp', () => 1 + this.achievementBonus());
         multiplier.addBonus('money', () => 1 + this.achievementBonus());
+        multiplier.addBonus('dungeonToken', () => 1 + this.achievementBonus());
     }
 
     static load() {

@@ -21,6 +21,7 @@ class Player {
     private _route: KnockoutObservable<number>;
 
     private _region: KnockoutObservable<GameConstants.Region>;
+    private _subregion: KnockoutObservable<number>;
     private _town: KnockoutObservable<Town>;
     private starter: KnockoutObservable<GameConstants.Starter>;
     private _timeTraveller = false;
@@ -41,6 +42,7 @@ class Player {
             this._timeTraveller = true;
         }
         this._region = ko.observable(savedPlayer._region);
+        this._subregion = ko.observable(savedPlayer._subregion || 0);
         if (MapHelper.validRoute(savedPlayer._route, savedPlayer._region)) {
             this._route = ko.observable(savedPlayer._route);
         } else {
@@ -139,6 +141,21 @@ class Player {
         this._region(value);
     }
 
+    get subregion(): number {
+        return this._subregion();
+    }
+
+    set subregion(value: number) {
+        this._subregion(value);
+        const subregion = SubRegions.getSubRegionById(this.region, value);
+
+        if (subregion.startRoute) {
+            MapHelper.moveToRoute(subregion.startRoute, player.region);
+        } else if (subregion.startTown) {
+            MapHelper.moveToTown(subregion.startTown);
+        }
+    }
+
     get town(): KnockoutObservable<Town> {
         return this._town;
     }
@@ -179,13 +196,19 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     public getUndergroundItemAmount(id: number) {
-        return player.mineInventory().find(i => i.id == id)?.amount() || 0;
+        const mineItem = player.mineInventory().find(i => i.id == id);
+        if (mineItem) {
+            return mineItem.amount();
+        }
+        const itemAmount = player.itemList[Underground.getMineItemById(id)?.valueType];
+        return itemAmount?.() || 0;
     }
 
     public toJSON() {
         const keep = [
             '_route',
             '_region',
+            '_subregion',
             '_itemList',
             '_itemMultipliers',
             'starter',

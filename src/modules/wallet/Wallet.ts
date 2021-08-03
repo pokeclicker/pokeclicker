@@ -60,14 +60,16 @@ export default class Wallet implements Feature {
         }
     }
 
-    public addAmount(amount: Amount) {
+    public addAmount(amount: Amount, ignoreBonus = false) {
         if (Number.isNaN(amount.amount) || amount.amount <= 0) {
             console.trace('Could not add amount:', amount);
             amount.amount = 1;
         }
 
         // Calculate the bonuses
-        amount.amount = Math.floor(amount.amount * this.calcBonus(amount));
+        if (!ignoreBonus) {
+            amount.amount = Math.floor(amount.amount * this.calcBonus(amount));
+        }
 
         GameHelper.incrementObservable(this.currencies[amount.currency], amount.amount);
         animateCurrency(amount);
