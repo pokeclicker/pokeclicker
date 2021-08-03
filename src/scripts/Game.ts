@@ -132,7 +132,7 @@ class Game {
             const routeMoney: number = PokemonFactory.routeMoney(player.route(), player.region, false);
             const baseMoneyToEarn = numberOfPokemonDefeated * routeMoney;
             const moneyToEarn = baseMoneyToEarn * 0.5;//Debuff for offline money
-            App.game.wallet.gainMoney(moneyToEarn, false);
+            App.game.wallet.gainMoney(moneyToEarn, true);
         }
     }
 
