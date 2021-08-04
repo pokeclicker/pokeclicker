@@ -38,6 +38,7 @@ class Game {
         public discord: Discord,
         public achievementTracker: AchievementTracker,
         public challenges: Challenges,
+        public battleFrontier: BattleFrontier,
         public multiplier: Multiplier
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
@@ -87,7 +88,61 @@ class Game {
         Weather.generateWeather(now);
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
+        this.computeOfflineEarnings();
+
         this.gameState = GameConstants.GameState.fighting;
+    }
+
+    computeOfflineEarnings() {
+        const now = Date.now();
+        const timeDiffInSeconds = Math.floor((now - player._lastSeen) / 1000);
+        if (timeDiffInSeconds > 1) {
+            // Only allow up to 24 hours worth of bonuses
+            const timeDiffOverride = Math.min(86400, timeDiffInSeconds);
+            const region: GameConstants.Region = player.region;
+            let route: number = player.route();
+            if (!MapHelper.validRoute(route, region)) {
+                switch (region) {
+                    case 0:
+                        route = 1;
+                        break;
+                    case 1:
+                        route = 29;
+                        break;
+                    case 2:
+                        route = 101;
+                        break;
+                    case 3:
+                        route = 201;
+                        break;
+                    default:
+                        route = 1;
+                }
+            }
+            const availablePokemonMap = RouteHelper.getAvailablePokemonList(route, region).map(name => pokemonMap[name]);
+            const maxHealth: number = PokemonFactory.routeHealth(route, region);
+            let hitsToKill = 0;
+            for (const pokemon of availablePokemonMap) {
+                const type1: PokemonType = pokemon.type[0];
+                const type2: PokemonType = pokemon.type.length > 1 ? pokemon.type[1] : PokemonType.None;
+                const attackAgainstPokemon = App.game.party.calculatePokemonAttack(type1, type2);
+                const currentHitsToKill: number = Math.ceil(maxHealth / attackAgainstPokemon);
+                hitsToKill += currentHitsToKill;
+            }
+            hitsToKill = Math.ceil(hitsToKill / availablePokemonMap.length);
+            const numberOfPokemonDefeated = Math.floor(timeDiffOverride / hitsToKill);
+            const routeMoney: number = PokemonFactory.routeMoney(player.route(), player.region, false);
+            const baseMoneyToEarn = numberOfPokemonDefeated * routeMoney;
+            const moneyToEarn = Math.floor(baseMoneyToEarn * 0.5);//Debuff for offline money
+            App.game.wallet.gainMoney(moneyToEarn, true);
+
+            Notifier.notify({
+                type: NotificationConstants.NotificationOption.info,
+                title: 'Offline progress',
+                message: `Defeated: ${numberOfPokemonDefeated} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
+                timeout: 2 * GameConstants.MINUTE,
+            });
+        }
     }
 
     start() {
