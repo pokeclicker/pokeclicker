@@ -10,6 +10,26 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.4
+    new ChangelogUpdate('v0.8.4', new Date(2021, 7, 4)),
+    new Changelog(changelogType.NEW, 'Able to unlock Apicot and Lancat berries'),
+    new Changelog(changelogType.NEW, 'Added Farming related achievements'),
+    new Changelog(changelogType.NEW, 'Added Battle Frontier related achievements'),
+    new Changelog(changelogType.NEW, 'Added option to settings menu to shorten currency amounts displayed on main game screen'),
+    new Changelog(changelogType.NEW, 'Added Offline earnings for money (max of 24 hours)'),
+    new Changelog(changelogType.NEW, 'Added a couple of new quest types'),
+    new Changelog(changelogType.CHANGE, 'Buffed click attack calculation'),
+    new Changelog(changelogType.CHANGE, 'Nerfed Kalos Route 22 HP'),
+    new Changelog(changelogType.CHANGE, 'Englarged clickable area for Kanto map towns and dungeons'),
+    new Changelog(changelogType.CHANGE, 'Vivillon base form changed to Vivillon (Meadow)'),
+    new Changelog(changelogType.CHANGE, 'Removed Rare Candy from shops until it has a use'),
+    new Changelog(changelogType.FIXED, 'Vivillon quest step not being completable if you had already defeated stage 666 in the Battle Frontier'),
+    new Changelog(changelogType.FIXED, 'Some Gyms had incorrect HP'),
+    new Changelog(changelogType.FIXED, 'Some trainers teams'),
+    new Changelog(changelogType.FIXED, 'Some Pokémon were not counted towards the catch a type quests'),
+    new Changelog(changelogType.FIXED, 'Show item count for non Underground items in the Daily deals'),
+    new Changelog(changelogType.FIXED, 'Being able to enter some dungeons early'),
+
     // v0.8.3
     new ChangelogUpdate('v0.8.3', new Date(2021, 6, 30)),
     new Changelog(changelogType.NEW, 'Vivillon quest line'),
@@ -24,9 +44,9 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Some trainers teams'),
     new Changelog(changelogType.FIXED, 'Gym/Elite Four money reward amounts'),
     new Changelog(changelogType.FIXED, 'Kanto dock ship not showing on client'),
-    new Changelog(changelogType.FIXED, 'Pokemon League images'),
-    new Changelog(changelogType.FIXED, 'When purchasing multiple shop Pokemon the shiny chance was only rolled once'),
-    new Changelog(changelogType.FIXED, 'Some Pokemon silhouettes showing colors when not obtained yet'),
+    new Changelog(changelogType.FIXED, 'Pokémon League images'),
+    new Changelog(changelogType.FIXED, 'When purchasing multiple shop Pokémon the shiny chance was only rolled once'),
+    new Changelog(changelogType.FIXED, 'Some Pokémon silhouettes showing colors when not obtained yet'),
 
     // v0.8.2
     new ChangelogUpdate('v0.8.2', new Date(2021, 4, 3)),
@@ -98,7 +118,7 @@ const ChangelogItems = [
     new ChangelogUpdate('v0.7.5 - Challenges, Trainers and Saves', new Date(2021, 0, 29)),
     new Changelog(changelogType.FIXED, 'Fix proteins not increasing on usage'),
     new Changelog(changelogType.FIXED, 'Some trainer images not loading'),
-    new Changelog(changelogType.FIXED, 'Dynamic Pokemon disappearing  before leaving screen'),
+    new Changelog(changelogType.FIXED, 'Dynamic Pokémon disappearing  before leaving screen'),
 
     // v0.7.4
     new ChangelogUpdate('v0.7.4 - Challenges, Trainers and Saves', new Date(2021, 0, 29)),
