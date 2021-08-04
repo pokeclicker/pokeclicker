@@ -9,8 +9,10 @@ class BattleFrontierMilestone {
     ) {}
 
     gain () {
-        this.rewardFunction();
-        this.obtained(true);
+        if (!this.obtained()) {
+            this.rewardFunction();
+            this.obtained(true);
+        }
     }
 
     get image() {

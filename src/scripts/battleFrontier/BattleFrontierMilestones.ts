@@ -13,7 +13,7 @@ class BattleFrontierMilestones {
 
     public static nextMileStone() {
         // Get the next possible reward
-        return this.milestoneRewards.find(r => r => !r.obtained());
+        return this.milestoneRewards.find(r => !r.obtained());
     }
 
     public static availableMilestones() {
