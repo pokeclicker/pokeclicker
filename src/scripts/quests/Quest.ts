@@ -172,7 +172,7 @@ abstract class Quest {
         return {
             index: this.index || 0,
             customDescription: this.customDescription,
-            data: <any[]>[this.amount ,this.pointsReward],
+            data: <any[]>[this.amount, this.pointsReward],
             initial: this.initial(),
             claimed: this.claimed(),
             notified: this.notified,
