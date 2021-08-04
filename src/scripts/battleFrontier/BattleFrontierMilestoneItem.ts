@@ -4,8 +4,8 @@ class BattleFrontierMilestoneItem extends BattleFrontierMilestone {
 
     constructor (stage: number, itemName: string, amount: number ) {
         super(stage, () => {
-            if (ItemList[this.itemName]) {
-                ItemList[this.itemName].gain(this.amount);
+            if (ItemList[itemName]) {
+                ItemList[itemName].gain(amount);
             }
         });
 
