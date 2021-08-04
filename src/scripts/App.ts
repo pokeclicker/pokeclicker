@@ -42,6 +42,7 @@ class App {
                 new Discord(),
                 new AchievementTracker(),
                 new Challenges(),
+                new BattleFrontier(),
                 multiplier
             );
 
