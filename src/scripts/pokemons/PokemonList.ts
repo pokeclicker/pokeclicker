@@ -9017,7 +9017,7 @@ const pokemonList = createPokemonArray(
         'name': 'Ambipom',
         'type': [PokemonType.Normal],
         'eggCycles': 20,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 169,
         'catchRate': 45,
         'base': {
@@ -9104,7 +9104,7 @@ const pokemonList = createPokemonArray(
         'name': 'Mismagius',
         'type': [PokemonType.Ghost],
         'eggCycles': 25,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 173,
         'catchRate': 45,
         'base': {
@@ -9138,7 +9138,7 @@ const pokemonList = createPokemonArray(
         'name': 'Glameow',
         'type': [PokemonType.Normal],
         'eggCycles': 20,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 62,
         'catchRate': 190,
         'evolutions': [new LevelEvolution('Glameow', 'Purugly', 38)],
@@ -9156,7 +9156,7 @@ const pokemonList = createPokemonArray(
         'name': 'Purugly',
         'type': [PokemonType.Normal],
         'eggCycles': 20,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 158,
         'catchRate': 75,
         'base': {
@@ -9173,7 +9173,7 @@ const pokemonList = createPokemonArray(
         'name': 'Chingling',
         'type': [PokemonType.Psychic],
         'eggCycles': 25,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 57,
         'catchRate': 120,
         'evolutions': [new NightTimedStoneEvolution('Chingling', 'Chimecho', GameConstants.StoneType.Soothe_bell)],
@@ -9310,7 +9310,7 @@ const pokemonList = createPokemonArray(
         'name': 'Happiny',
         'type': [PokemonType.Normal],
         'eggCycles': 40,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 110,
         'catchRate': 130,
         'evolutions': [
@@ -9810,7 +9810,7 @@ const pokemonList = createPokemonArray(
         'name': 'Togekiss',
         'type': [PokemonType.Fairy, PokemonType.Flying],
         'eggCycles': 10,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 245,
         'catchRate': 30,
         'base': {
@@ -9964,7 +9964,7 @@ const pokemonList = createPokemonArray(
         'name': 'Dusknoir',
         'type': [PokemonType.Ghost],
         'eggCycles': 25,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 236,
         'catchRate': 45,
         'base': {
@@ -11069,7 +11069,7 @@ const pokemonList = createPokemonArray(
         'name': 'Munna',
         'type': [PokemonType.Psychic],
         'eggCycles': 10,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 58,
         'catchRate': 190,
         'evolutions': [new StoneEvolution('Munna', 'Musharna', GameConstants.StoneType.Moon_stone)],
@@ -11087,7 +11087,7 @@ const pokemonList = createPokemonArray(
         'name': 'Musharna',
         'type': [PokemonType.Psychic],
         'eggCycles': 10,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 170,
         'catchRate': 75,
         'base': {
@@ -11318,7 +11318,7 @@ const pokemonList = createPokemonArray(
         'name': 'Audino',
         'type': [PokemonType.Normal],
         'eggCycles': 20,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 390,
         'catchRate': 255,
         'base': {
@@ -12147,7 +12147,7 @@ const pokemonList = createPokemonArray(
         'name': 'Minccino',
         'type': [PokemonType.Normal],
         'eggCycles': 15,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 60,
         'catchRate': 255,
         'evolutions': [new StoneEvolution('Minccino', 'Cinccino', GameConstants.StoneType.Shiny_stone)],
@@ -12165,7 +12165,7 @@ const pokemonList = createPokemonArray(
         'name': 'Cinccino',
         'type': [PokemonType.Normal],
         'eggCycles': 15,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 165,
         'catchRate': 60,
         'base': {
@@ -12638,7 +12638,7 @@ const pokemonList = createPokemonArray(
         'name': 'Alomomola',
         'type': [PokemonType.Water],
         'eggCycles': 40,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 165,
         'catchRate': 75,
         'base': {
@@ -15321,7 +15321,7 @@ const pokemonList = createPokemonArray(
         'name': 'Klefki',
         'type': [PokemonType.Steel, PokemonType.Fairy],
         'eggCycles': 20,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 165,
         'catchRate': 75,
         'base': {
@@ -16125,7 +16125,7 @@ const pokemonList = createPokemonArray(
         'name': 'Wishiwashi (Solo)',
         'type': [PokemonType.Water],
         'eggCycles': 15,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 61,
         'catchRate': 60,
         'base': {
@@ -16142,7 +16142,7 @@ const pokemonList = createPokemonArray(
         'name': 'Wishiwashi (School)',
         'type': [PokemonType.Water],
         'eggCycles': 15,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 61,
         'catchRate': 60,
         'base': {
@@ -16159,7 +16159,7 @@ const pokemonList = createPokemonArray(
         'name': 'Totem Wishiwashi (School)',
         'type': [PokemonType.Water],
         'eggCycles': 15,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 61,
         'catchRate': 60,
         'base': {
@@ -16525,7 +16525,7 @@ const pokemonList = createPokemonArray(
         'name': 'Comfey',
         'type': [PokemonType.Fairy],
         'eggCycles': 20,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 170,
         'catchRate': 60,
         'base': {
@@ -16646,7 +16646,7 @@ const pokemonList = createPokemonArray(
         'name': 'Pyukumuku',
         'type': [PokemonType.Water],
         'eggCycles': 15,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 144,
         'catchRate': 60,
         'base': {
