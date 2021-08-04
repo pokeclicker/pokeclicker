@@ -126,10 +126,11 @@ class Game {
                 const type1: PokemonType = pokemon.type[0];
                 const type2: PokemonType = pokemon.type.length > 1 ? pokemon.type[1] : PokemonType.None;
                 const attackAgainstPokemon = App.game.party.calculatePokemonAttack(type1, type2);
-                const currentHitsToKill: number = maxHealth / attackAgainstPokemon;
+                const currentHitsToKill: number = Math.ceil(maxHealth / attackAgainstPokemon);
                 hitsToKill += currentHitsToKill;
             }
-            const numberOfPokemonDefeated = timeDiffOverride / hitsToKill;
+            hitsToKill = Math.ceil(hitsToKill / availablePokemonMap.length);
+            const numberOfPokemonDefeated = Math.floor(timeDiffOverride / hitsToKill);
             const routeMoney: number = PokemonFactory.routeMoney(player.route(), player.region, false);
             const baseMoneyToEarn = numberOfPokemonDefeated * routeMoney;
             const moneyToEarn = Math.floor(baseMoneyToEarn * 0.5);//Debuff for offline money
