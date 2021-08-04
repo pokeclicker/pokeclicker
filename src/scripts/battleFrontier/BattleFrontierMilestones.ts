@@ -13,11 +13,11 @@ class BattleFrontierMilestones {
 
     public static nextMileStone() {
         // Get the next possible reward
-        return this.milestoneRewards.find(r => r.stage > App.game.statistics.battleFrontierHighestStageCompleted());
+        return this.milestoneRewards.find(r => r => !r.obtained());
     }
 
     public static availableMilestones() {
-        return BattleFrontierMilestones.milestoneRewards.filter(r => r.stage > App.game.statistics.battleFrontierHighestStageCompleted());
+        return BattleFrontierMilestones.milestoneRewards.filter(r => !r.obtained());
     }
 
     public static nextMileStoneStage(): number {
