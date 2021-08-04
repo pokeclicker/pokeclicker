@@ -132,8 +132,15 @@ class Game {
             const numberOfPokemonDefeated = timeDiffOverride / hitsToKill;
             const routeMoney: number = PokemonFactory.routeMoney(player.route(), player.region, false);
             const baseMoneyToEarn = numberOfPokemonDefeated * routeMoney;
-            const moneyToEarn = baseMoneyToEarn * 0.5;//Debuff for offline money
+            const moneyToEarn = Math.floor(baseMoneyToEarn * 0.5);//Debuff for offline money
             App.game.wallet.gainMoney(moneyToEarn, true);
+
+            Notifier.notify({
+                type: NotificationConstants.NotificationOption.info,
+                title: 'Offline progress',
+                message: `Defeated: ${numberOfPokemonDefeated} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
+                timeout: 2 * GameConstants.MINUTE,
+            });
         }
     }
 
