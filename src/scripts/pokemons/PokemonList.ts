@@ -15846,7 +15846,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 140,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Charjabug', 'Vikavolt', GameConstants.StoneType.Thunder_stone)],
+        'evolutions': [
+            new StoneEvolution('Charjabug', 'Vikavolt', GameConstants.StoneType.Thunder_stone),
+            new DungeonRestrictedLevelEvolution('Vast Poni Canyon','Charjabug','Vikavolt', 20),
+        ],
         'base': {
             'hitpoints': 57,
             'attack': 82,
@@ -15898,7 +15901,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 68,
         'catchRate': 225,
-        'evolutions': [new StoneEvolution('Crabrawler', 'Crabominable', GameConstants.StoneType.None)],
+        'evolutions': [new DungeonRestrictedLevelEvolution('Mount Lanakila','Crabrawler','Crabominable', 20)],
         'base': {
             'hitpoints': 47,
             'attack': 82,
@@ -16474,7 +16477,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 102,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Steenee', 'Tsareena', GameConstants.StoneType.None)],
+        'evolutions': [new LevelEvolution('Steenee', 'Tsareena', 29)],
         'base': {
             'hitpoints': 52,
             'attack': 40,
