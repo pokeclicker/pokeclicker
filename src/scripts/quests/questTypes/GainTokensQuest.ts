@@ -8,14 +8,13 @@ class GainTokensQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const multiplier = Math.pow(player.highestRegion() + 1, 3);
-        const amount = SeededRand.intBetween(1000 * multiplier, 8000 * multiplier);
+        const amount = SeededRand.intBetween(1000, 8000);
         const reward = this.calcReward(amount);
         return [amount, reward];
     }
 
     private static calcReward(amount: number): number {
-        const reward =  Math.ceil((amount * GameConstants.GAIN_TOKENS_BASE_REWARD) / Math.pow(player.highestRegion() + 1, 2.6));
+        const reward =  Math.ceil(amount * GameConstants.GAIN_TOKENS_BASE_REWARD);
         return super.randomizeReward(reward);
     }
 
