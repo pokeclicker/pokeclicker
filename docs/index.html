@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.8.3"></script>
+    <script src="scripts/modules.min.js?v=0.8.4"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.8.3"></script>
+    <script src="scripts/script.min.js?v=0.8.4"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.8.3" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.8.4" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -827,19 +827,19 @@
                             <td width="33.33%">
                                 <span style="display: inline; position: relative;">
                                     <img title="Money" src="assets/images/currency/money.svg" height="25px">
-                                    <span id="animateCurrency-money" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.money]().toLocaleString('en-US')">0</span>
+                                    <span id="animateCurrency-money" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.money]()) : App.game.wallet.currencies[GameConstants.Currency.money]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td width="33.33%">
                                 <span style="display: inline; position: relative;">
                                     <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px">
-                                    <span id="animateCurrency-dungeonToken" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.dungeonToken]().toLocaleString('en-US')">0</span>
+                                    <span id="animateCurrency-dungeonToken" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.dungeonToken]()) : App.game.wallet.currencies[GameConstants.Currency.dungeonToken]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td width="33.33%">
                                 <span style="display: inline; position: relative;">
                                     <img title="Quest points" src="assets/images/currency/questPoint.svg" height="25px">
-                                    <span id="animateCurrency-questPoint" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">0</span>
+                                    <span id="animateCurrency-questPoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.questPoint]()) : App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                         </tr>
@@ -1197,7 +1197,7 @@
                    <span data-bind="text: player.town().dungeon.name"></span>
                </button>
                <button class="btn btn-primary"
-                       onclick="BattleFrontier.enter()"
+                       onclick="App.game.battleFrontier.enter()"
                        data-bind="visible: player.town().name == 'Battle Frontier'">
                    Enter Battle Frontier
                </button>
@@ -1339,7 +1339,7 @@
             <i>Note: there is no click damage in the Battle Frontier</i>
         </p>
         <a class="btn btn-block btn-success text-light" onclick="BattleFrontierRunner.start()">Start</a>
-        <a class="btn btn-block btn-danger text-light" onclick="BattleFrontier.leave()">Leave</a>
+        <a class="btn btn-block btn-danger text-light" onclick="App.game.battleFrontier.leave()">Leave</a>
     </div>
     <!-- /ko -->
     <!-- ko if: BattleFrontierRunner.started -->
@@ -1550,11 +1550,11 @@
     <rect data-route='6'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(6, 0) }"
         height="48"
-        width="78.4"
+        width="80"
         x="1056" y="368">
     </rect>
 
-    <text style="font-size: 32px" x="1087.2" y="402">6</text>
+    <text style="font-size: 32px" x="1088" y="402">6</text>
 
 </g>
 
@@ -1899,9 +1899,9 @@
     data-bind="click:function(){ MapHelper.moveToRoute(19, 0); } ">
     <rect data-route='19'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 0) }"
-        height="64"
+        height="80"
         width="48"
-        x="768" y="800">
+        x="768" y="784">
     </rect>
 
 </g>
@@ -1930,17 +1930,17 @@
 
 <g
 
-    transform="rotate(90 ,368, 672)"
+    transform="rotate(90 ,368, 656)"
 
     data-bind="click:function(){ MapHelper.moveToRoute(21, 0); } ">
     <rect data-route='21'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(21, 0) }"
         height="48"
-        width="176"
-        x="368" y="624">
+        width="192"
+        x="368" y="608">
     </rect>
 
-    <text style="font-size: 32px" x="440" y="658">21</text>
+    <text style="font-size: 32px" x="448" y="642">21</text>
 
 </g>
 
@@ -1954,11 +1954,11 @@
     <rect data-route='22'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(22, 0) }"
         height="48"
-        width="240"
+        width="256"
         x="112" y="416">
     </rect>
 
-    <text style="font-size: 32px" x="216" y="450">22</text>
+    <text style="font-size: 32px" x="224" y="450">22</text>
 
 </g>
 
@@ -2076,21 +2076,50 @@
         attr: { class: MapHelper.calculateTownCssClass('Viridian City') },
         ">
 </rect>
+	  
+   <!--Viridian City extended-->
+    
+
+<rect class="city"
+    data-town="Viridian City" 
+    x="432"
+    y="416"
+    height="48"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Viridian City')},
+        attr: { class: MapHelper.calculateTownCssClass('Viridian City') },
+        ">
+</rect>	  
 
     <!--Pewter City-->
     
 
 <rect class="city"
     data-town="Pewter City" 
-    x="368"
-    y="160"
-    height="64"
-    width="64"
+    x="352"
+    y="144"
+    height="80"
+    width="128"
     data-bind="
         click:function(){MapHelper.moveToTown('Pewter City')},
         attr: { class: MapHelper.calculateTownCssClass('Pewter City') },
         ">
 </rect>
+    <!--Pewter City extended-->
+    
+
+<rect class="city"
+    data-town="Pewter City" 
+    x="368"
+    y="96"
+    height="48"
+    width="112"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Pewter City')},
+        attr: { class: MapHelper.calculateTownCssClass('Pewter City') },
+        ">
+</rect>	 
 
     <!--Cerulean City-->
     
@@ -2100,7 +2129,7 @@
     x="992"
     y="144"
     height="64"
-    width="128"
+    width="144"
     data-bind="
         click:function(){MapHelper.moveToTown('Cerulean City')},
         attr: { class: MapHelper.calculateTownCssClass('Cerulean City') },
@@ -2112,10 +2141,10 @@
 
 <rect class="city"
     data-town="Vermilion City" 
-    x="992"
+    x="976"
     y="496"
     height="64"
-    width="128"
+    width="160"
     data-bind="
         click:function(){MapHelper.moveToTown('Vermilion City')},
         attr: { class: MapHelper.calculateTownCssClass('Vermilion City') },
@@ -2128,8 +2157,8 @@
 <rect class="city"
     data-town="Lavender Town" 
     x="1360"
-    y="320"
-    height="64"
+    y="304"
+    height="80"
     width="64"
     data-bind="
         click:function(){MapHelper.moveToTown('Lavender Town')},
@@ -2142,25 +2171,55 @@
 
 <rect class="city"
     data-town="Celadon City" 
-    x="704"
-    y="299.2"
-    height="68.8"
-    width="80"
+    x="640"
+    y="248"
+    height="168"
+    width="144"
     data-bind="
         click:function(){MapHelper.moveToTown('Celadon City')},
         attr: { class: MapHelper.calculateTownCssClass('Celadon City') },
         ">
 </rect>
+	 
+    <!--Celadon City extended-->
+    
+
+<rect class="city"
+    data-town="Celadon City" 
+    x="640"
+    y="224"
+    height="24"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Celadon City')},
+        attr: { class: MapHelper.calculateTownCssClass('Celadon City') },
+        ">
+</rect>	 
 
     <!--Saffron City-->
     
 
 <rect class="city"
     data-town="Saffron City" 
-    x="1024"
-    y="347.2"
-    height="68.8"
-    width="80"
+    x="960"
+    y="288"
+    height="128"
+    width="176"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Saffron City')},
+        attr: { class: MapHelper.calculateTownCssClass('Saffron City') },
+        ">
+</rect>
+	 
+	    <!--Saffron City extended-->
+    
+
+<rect class="city"
+    data-town="Saffron City" 
+    x="960"
+    y="224"
+    height="64"
+    width="96"
     data-bind="
         click:function(){MapHelper.moveToTown('Saffron City')},
         attr: { class: MapHelper.calculateTownCssClass('Saffron City') },
@@ -2174,7 +2233,7 @@
     data-town="Fuchsia City" 
     x="704"
     y="704"
-    height="64"
+    height="80"
     width="128"
     data-bind="
         click:function(){MapHelper.moveToTown('Fuchsia City')},
@@ -2187,16 +2246,46 @@
 
 <rect class="city"
     data-town="Cinnabar Island" 
-    x="368"
+    x="352"
     y="848"
-    height="64"
-    width="64"
+    height="80"
+    width="80"
     data-bind="
         click:function(){MapHelper.moveToTown('Cinnabar Island')},
         attr: { class: MapHelper.calculateTownCssClass('Cinnabar Island') },
         ">
 </rect>
 
+    <!--Cinnabar Island ext1-->
+    
+
+<rect class="city"
+    data-town="Cinnabar Island" 
+    x="240"
+    y="928"
+    height="16"
+    width="128"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Cinnabar Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Cinnabar Island') },
+        ">
+</rect>	 
+	 
+    <!--Cinnabar Island ext2-->
+    
+
+<rect class="city"
+    data-town="Cinnabar Island" 
+    x="240"
+    y="880"
+    height="48"
+    width="112"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Cinnabar Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Cinnabar Island') },
+        ">
+</rect>	 	 
+	 
     <!--Indigo Plateau Kanto-->
     
 
@@ -2224,10 +2313,10 @@
 
 <rect class="city"
     data-town="Viridian Forest" 
-    x="368"
+    x="336"
     y="280"
     height="72"
-    width="48"
+    width="112"
     data-bind="click:function(){MapHelper.moveToTown('Viridian Forest')},
         attr: { class: MapHelper.calculateTownCssClass('Viridian Forest') }">
 </rect>
@@ -2265,6 +2354,19 @@
     y="128"
     height="48"
     width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Mt. Moon')},
+        attr: { class: MapHelper.calculateTownCssClass('Mt. Moon') }">
+</rect>
+	 
+    <!--Mt. Moon extended-->
+    
+
+<rect class="city"
+    data-town="Mt. Moon" 
+    x="720"
+    y="128"
+    height="96"
+    width="80"
     data-bind="click:function(){MapHelper.moveToTown('Mt. Moon')},
         attr: { class: MapHelper.calculateTownCssClass('Mt. Moon') }">
 </rect>
@@ -2329,6 +2431,19 @@
     y="864"
     height="48"
     width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Seafoam Islands')},
+        attr: { class: MapHelper.calculateTownCssClass('Seafoam Islands') }">
+</rect>
+	 
+    <!--Seafoam Islands extended-->
+    
+
+<rect class="city"
+    data-town="Seafoam Islands" 
+    x="560"
+    y="864"
+    height="64"
+    width="32"
     data-bind="click:function(){MapHelper.moveToTown('Seafoam Islands')},
         attr: { class: MapHelper.calculateTownCssClass('Seafoam Islands') }">
 </rect>
@@ -2464,6 +2579,7 @@
     data-bind="visible: player.highestRegion() &gt;= 1, click:function(){MapHelper.openShipModal()}, css:{ unlockedTown: player.highestRegion() &gt;= 1}">
 </rect>
 </g>
+
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="1600" height="960" xlink:href="assets/images/johto.png" href="assets/images/johto.png"></image>
 
@@ -12227,8 +12343,9 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('shopButtons')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('eggAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('hideHatchery')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('farmDisplay')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayReduced')}"></tr>
                             </tbody>
                         </table>
                     </div>

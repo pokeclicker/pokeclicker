@@ -36,7 +36,7 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         const completeDungeonsReward = attacksToCompleteDungeon * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER * amount;
 
         let region: GameConstants.Region, route: number;
-        for (region = player.highestRegion; region >= 0; region--) {
+        for (region = player.highestRegion(); region >= 0; region--) {
             route = QuestHelper.highestOneShotRoute(region); // returns 0 if no routes in this region can be one shot
             if (route) {
                 break;
