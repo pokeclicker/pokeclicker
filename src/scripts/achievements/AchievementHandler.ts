@@ -227,10 +227,29 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Ultra Clicker', 'Click 1,000 Times', new ClickRequirement(1000, 1), 0.10, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
         AchievementHandler.addAchievement('Need a new mouse yet?', 'Click 10,000 Times', new ClickRequirement(10000, 1), 0.25, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
 
+        AchievementHandler.addAchievement('My new dirty hobby', 'Unlock 3 Plots in the Farm', new FarmPlotsUnlockedRequirement(3), 0.05);
+        AchievementHandler.addAchievement('Allotment gardener', 'Unlock 9 Plots in the Farm', new FarmPlotsUnlockedRequirement(9), 0.15);
+        AchievementHandler.addAchievement('Horticulture', 'Unlock 25 Plots in the Farm', new FarmPlotsUnlockedRequirement(25), 0.25);
+
         AchievementHandler.addAchievement('Who planted these here?', 'Unlock 8 Berries', new BerriesUnlockedRequirement(8), 0.1);
         AchievementHandler.addAchievement('Farmer in training', 'Unlock 18 Berries', new BerriesUnlockedRequirement(18), 0.2);
         AchievementHandler.addAchievement('Farming apprentice', 'Unlock 36 Berries', new BerriesUnlockedRequirement(36), 0.3);
         AchievementHandler.addAchievement('Master Farmer', 'Unlock 67 Berries', new BerriesUnlockedRequirement(67), 0.4);
+
+        AchievementHandler.addAchievement('Can you do this for me?', 'Complete 1 quest', new QuestRequirement(1), 0.05);
+        AchievementHandler.addAchievement('One more favor', 'Complete 10 quest', new QuestRequirement(10), 0.15);
+        AchievementHandler.addAchievement('YES MAN!', 'Complete 100 quest', new QuestRequirement(100), 0.25);
+        AchievementHandler.addAchievement('I just love green coins', 'Complete 1000 quest', new QuestRequirement(1000), 0.4);
+
+        AchievementHandler.addAchievement('Fighting novice', 'Complete stage 100 in Battle Frontier', new BattleFrontierHighestStageRequirement(100), 0.05);
+        AchievementHandler.addAchievement('Competent fighter', 'Complete stage 250 in Battle Frontier', new BattleFrontierHighestStageRequirement(250), 0.15);
+        AchievementHandler.addAchievement('Unstoppable fighting machine', 'Complete stage 500 in Battle Frontier', new BattleFrontierHighestStageRequirement(500), 0.25);
+        AchievementHandler.addAchievement('Living Legend', 'Complete stage 1000 in Battle Frontier', new BattleFrontierHighestStageRequirement(1000), 0.4);
+
+        AchievementHandler.addAchievement('Keep on fighting', 'Complete 500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(500), 0.05);
+        AchievementHandler.addAchievement('Uphill battle', 'Complete 1000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(1000), 0.15);
+        AchievementHandler.addAchievement('Don\'t stop trying', 'Complete 2500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(2500), 0.25);
+        AchievementHandler.addAchievement('King of the hill', 'Complete 5000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(5000), 0.4);
 
         /*
          * REGIONAL
