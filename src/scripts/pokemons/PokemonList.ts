@@ -15865,10 +15865,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 140,
         'catchRate': 120,
-        'evolutions': [
-            new StoneEvolution('Charjabug', 'Vikavolt', GameConstants.StoneType.Thunder_stone),
-            new DungeonRestrictedLevelEvolution('Vast Poni Canyon','Charjabug','Vikavolt', 20),
-        ],
+        'evolutions': [new DungeonRestrictedLevelEvolution('Vast Poni Canyon','Charjabug','Vikavolt', 20)],
         'base': {
             'hitpoints': 57,
             'attack': 82,
