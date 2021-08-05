@@ -17151,7 +17151,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': null,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Cosmoem', 'Solgaleo', 53)],
+        'evolutions': [
+            new LevelEvolution('Cosmoem', 'Solgaleo', 53),
+            new LevelEvolution('Cosmoem', 'Lunala', 53),
+        ],
         'base': {
             'hitpoints': 43,
             'attack': 29,
