@@ -17393,7 +17393,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 189,
         'catchRate': 45,
-        'evolutions': [new StoneEvolution('Poipole', 'Naganadel', GameConstants.StoneType.None)],
+        'evolutions': [new LevelEvolution('Poipole', 'Naganadel', 41)],
         'base': {
             'hitpoints': 67,
             'attack': 73,
