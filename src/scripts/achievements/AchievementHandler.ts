@@ -103,7 +103,7 @@ class AchievementHandler {
     }
 
     public static findByName(name: string): Achievement {
-        return AchievementHandler.achievementList.find((achievement) => achievement.name === name);
+        return AchievementHandler.achievementList.find((achievement) => achievement.name === name && achievement.achievable());
     }
 
     public static initialize(multiplier: Multiplier, challenges: Challenges) {

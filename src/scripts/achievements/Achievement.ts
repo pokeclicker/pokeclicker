@@ -38,7 +38,7 @@ class Achievement {
     }
 
     public isCompleted: KnockoutComputed<boolean> = ko.pureComputed(() => {
-        return this.unlocked || this.property.isCompleted();
+        return this.achievable() && (this.unlocked || this.property.isCompleted());
     })
 
     public getBonus() {
