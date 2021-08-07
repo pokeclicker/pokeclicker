@@ -56,7 +56,6 @@ class BattleFrontierBattle extends Battle {
         } else {
             this.enemyPokemon(null);
         }
-        player.lowerItemMultipliers(MultiplierDecreaser.Battle);
     }
 
     public static generateNewEnemy() {
