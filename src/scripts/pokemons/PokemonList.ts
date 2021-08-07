@@ -21097,8 +21097,12 @@ const pokemonMap = new GenericProxy<
                     const min = Math.max(0, Math.min(_min, _max));
                     // maximum is same as however many pokemon are available
                     const max = Math.min(pokemon.length, Math.max(_min, _max));
-                    const random = Math.floor(Math.random() * (max ? max : pokemon.length) + min);
-                    return pokemon[random];
+                    // Decide on a base ID first (so we aren't weighted towards pokemon with multiple forms such as Alcremie)
+                    const basePokemonIDs: number[] = [...new Set(pokemon.filter(p => p.id >= min && p.id <= max).map(p => Math.floor(p.id)))];
+                    const ID: number = Rand.fromArray(basePokemonIDs);
+                    // Choose a Pokemon with that base ID
+                    const poke: PokemonListData = Rand.fromArray(pokemon.filter(p => Math.floor(p.id) === ID && p.id >= min && p.id <= max));
+                    return poke || (pokemon.find(p => p.id == 0) as PokemonListData);
                 };
             case 'randomRegion':
                 return (_max = GameConstants.Region.kanto, _min = GameConstants.Region.kanto) => {
