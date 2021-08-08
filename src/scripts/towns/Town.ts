@@ -2076,7 +2076,7 @@ TownList['Paniola Town'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 4)],
-        shop: PaniolaTownShop
+        shop: PaniolaTownShop,
     }
 );
 TownList['Royal Avenue'] = new Town(
@@ -2134,7 +2134,7 @@ TownList['Exeggutor Island'] = new Town(
     {
         dungeon: dungeonList['Exeggutor Island Hill'],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
-        shop: ExeggutorIslandShop
+        shop: ExeggutorIslandShop,
     }
 );
 TownList['Altar of the Sunne and Moone'] = new Town(
