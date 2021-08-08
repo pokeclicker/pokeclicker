@@ -2388,7 +2388,7 @@ const pokemonList = createPokemonArray(
         'exp': 65,
         'eggCycles': 20,
         'evolutions': [new StoneEvolution('Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone)],
-        //TODO add Alola-only evolution into Alolan Exeggutor using Leafstone
+        'evolutions': [new StoneEvolution('Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone)],
         'base': {
             'hitpoints': 60,
             'attack': 40,
@@ -2442,7 +2442,7 @@ const pokemonList = createPokemonArray(
         'exp': 64,
         'eggCycles': 20,
         'evolutions': [new LevelEvolution('Cubone', 'Marowak', 28)],
-        //TODO add Alola-only evolution into Alolan Marowak at night at level 28
+        'evolutions': [new LevelEvolution('Cubone', 'Alolan Marowak', 28)],
         'base': {
             'hitpoints': 50,
             'attack': 50,
