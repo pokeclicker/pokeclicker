@@ -2387,8 +2387,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 65,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone)],
-        'evolutions': [new StoneEvolution('Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone)],
+        'evolutions': [
+            new StoneEvolution('Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone),
+            new StoneEvolution('Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone),
+        ],
         'base': {
             'hitpoints': 60,
             'attack': 40,
@@ -2441,8 +2443,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Cubone', 'Marowak', 28)],
-        'evolutions': [new LevelEvolution('Cubone', 'Alolan Marowak', 28)],
+        'evolutions': [
+            new LevelEvolution('Cubone', 'Marowak', 28),
+            new LevelEvolution('Cubone', 'Alolan Marowak', 28),
+        ],
         'base': {
             'hitpoints': 50,
             'attack': 50,
