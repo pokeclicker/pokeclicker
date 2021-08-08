@@ -16056,9 +16056,10 @@ const pokemonList = createPokemonArray(
         'exp': 56,
         'catchRate': 190,
         'evolutions': [
-            TimeRestrictedLevelEvolution(6, 16, 'Rockruff', 'Lycanroc (Midday)', 25),
-            TimeRestrictedLevelEvolution(16, 20, 'Rockruff', 'Lycanroc (Dusk)', 25),
-            TimeRestrictedLevelEvolution(20, 6, 'Rockruff', 'Lycanroc (Midnight)', 25),
+            TimeRestrictedLevelEvolution(6, 17, 'Rockruff', 'Lycanroc (Midday)', 25),
+            TimeRestrictedLevelEvolution(17, 18, 'Rockruff', 'Lycanroc (Dusk)', 25),
+            TimeRestrictedLevelEvolution(18, 5, 'Rockruff', 'Lycanroc (Midnight)', 25),
+            TimeRestrictedLevelEvolution(5, 6, 'Rockruff', 'Lycanroc (Dusk)', 25),
         ],
         'base': {
             'hitpoints': 45,
