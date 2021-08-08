@@ -707,7 +707,7 @@ const Weatherman = new NPC('Weatherman', [
 ]);
 
 const MossdeepAstronomer = new NPC('Astronomer', [
-    'Hey did you know about the Millenium Comet? We can see it in the sky right now, and it only comes around once every thousand years!',
+    'Hey did you know about the Millennium Comet? We can see it in the sky right now, and it only comes around once every thousand years!',
     'There’s a legend that a mythical Wish Pokémon awakens when it passes over us. If you’re as strong as the Champion, maybe you’ll find it roaming around Hoenn granting wishes!',
 ]);
 
