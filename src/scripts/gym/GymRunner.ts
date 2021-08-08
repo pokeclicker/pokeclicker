@@ -90,6 +90,7 @@ class GymRunner {
         GameHelper.incrementObservable(App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym.town)]);
         player.town(TownList[gym.town]);
         App.game.gameState = GameConstants.GameState.town;
+        GymRunner.startGym(gym);
     }
 
     public static timeLeftSeconds = ko.pureComputed(() => {

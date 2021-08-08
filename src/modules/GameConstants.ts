@@ -60,13 +60,13 @@ export const ROAMING_MIN_CHANCE = 8192;
 export const ROAMING_MAX_CHANCE = 4096;
 
 // Shinies
-export const SHINY_CHANCE_BATTLE = 8192;
-export const SHINY_CHANCE_DUNGEON = 4096;
-export const SHINY_CHANCE_STONE = 2048;
-export const SHINY_CHANCE_SAFARI = 2048;
-export const SHINY_CHANCE_SHOP = 1024;
-export const SHINY_CHANCE_BREEDING = 1024;
-export const SHINY_CHANCE_FARM = 1024;
+export const SHINY_CHANCE_BATTLE = 24;
+export const SHINY_CHANCE_DUNGEON = 24;
+export const SHINY_CHANCE_STONE = 24;
+export const SHINY_CHANCE_SAFARI = 24;
+export const SHINY_CHANCE_SHOP = 24;
+export const SHINY_CHANCE_BREEDING = 24;
+export const SHINY_CHANCE_FARM = 24;
 
 export const ITEM_PRICE_MULTIPLIER = 1.00045;
 export const ITEM_PRICE_DEDUCT = 1.0005;
@@ -74,18 +74,18 @@ export const ITEM_PRICE_DEDUCT = 1.0005;
 export const PLATE_VALUE = 100;
 
 // Breeding
-export const BREEDING_ATTACK_BONUS = 25;
+export const BREEDING_ATTACK_BONUS = 125;
 
 // Farming
 export const BerryDistribution = [0.39, 0.63, 0.78, 0.87, 0.93, 0.96, 0.98, 1];
 
-export const MULCH_USE_TIME = 300;
+export const MULCH_USE_TIME = 30000;
 export const BOOST_MULCH_MULTIPLIER = 1.5;
 export const RICH_MULCH_MULTIPLIER = 2;
-export const SURPRISE_MULCH_MULTIPLIER = 1.5;
+export const SURPRISE_MULCH_MULTIPLIER = 100.5;
 export const AMAZE_MULCH_GROWTH_MULTIPLIER = 1.25;
-export const AMAZE_MULCH_PRODUCE_MULTIPLIER = 1.5;
-export const AMAZE_MULCH_MUTATE_MULTIPLIER = 1.25;
+export const AMAZE_MULCH_PRODUCE_MULTIPLIER = 100.5;
+export const AMAZE_MULCH_MUTATE_MULTIPLIER = 100.25;
 
 export const WANDER_RATE = 0.0005;
 
@@ -153,9 +153,9 @@ export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 
 // Shards from battle
-export const DUNGEON_SHARDS = 3;
-export const DUNGEON_BOSS_SHARDS = 20;
-export const GYM_SHARDS = 5;
+export const DUNGEON_SHARDS = 30;
+export const DUNGEON_BOSS_SHARDS = 200;
+export const GYM_SHARDS = 50;
 
 export const SAFARI_BATTLE_CHANCE = 5;
 
@@ -186,24 +186,24 @@ export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari bal
 
 // Numbers calculated by Dimava assumes ability to 1 shot on high routes and some use oak items,
 //   which are now nerfed slightly until upgraded, so those numbers may need further adjusting
-const questBase = 1; // change this to scale all quest points
+const questBase = 10; // change this to scale all quest points
 
 // Currency → QP reward amounts
-export const GAIN_MONEY_BASE_REWARD = questBase * 0.0017;
-export const GAIN_TOKENS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 55;
-export const GAIN_FARM_POINTS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 90;
+export const GAIN_MONEY_BASE_REWARD = questBase * 1.0017;
+export const GAIN_TOKENS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 155;
+export const GAIN_FARM_POINTS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 190;
 
-export const HATCH_EGGS_BASE_REWARD = questBase * 33;
-export const SHINY_BASE_REWARD = questBase * 3000;
+export const HATCH_EGGS_BASE_REWARD = questBase * 133;
+export const SHINY_BASE_REWARD = questBase * 13000;
 
-export const DEFEAT_POKEMONS_BASE_REWARD = questBase * 1;
+export const DEFEAT_POKEMONS_BASE_REWARD = questBase * 110;
 
 // Defeat reward divided by chance to catch (guessed)
-export const CAPTURE_POKEMONS_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD / 0.8;
+export const CAPTURE_POKEMONS_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD / 10.8;
 
 // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
-export const MINE_LAYERS_BASE_REWARD = questBase * 720;
-export const MINE_ITEMS_BASE_REWARD = questBase * 210;
+export const MINE_LAYERS_BASE_REWARD = questBase * 1720;
+export const MINE_ITEMS_BASE_REWARD = questBase * 1210;
 
 // not balanced at all for some oak items
 export const USE_OAK_ITEM_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD;
