@@ -1585,7 +1585,7 @@ TownList['Anville Town'] = new Town(
 TownList['Pledge Grove'] = new DungeonTown(
     'Pledge Grove',
     GameConstants.Region.unova,
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 19)]
+    [{requirement: new ObtainedPokemonRequirement(pokemonMap.Keldeo)}]
 );
 TownList['Floccesy Ranch'] = new DungeonTown(
     'Floccesy Ranch',
