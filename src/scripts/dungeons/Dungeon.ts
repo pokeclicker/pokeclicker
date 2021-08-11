@@ -2731,7 +2731,7 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
 dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
     ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    5203000, new DungeonBossPokemon('Keldeo (Resolute)', 52000000, 100),
+    5203000,
     356500, 8, 100);
 
 dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
