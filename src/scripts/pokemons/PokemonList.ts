@@ -2445,7 +2445,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             new LevelEvolution('Cubone', 'Marowak', 28),
-            new LevelEvolution('Cubone', 'Alolan Marowak', 28),
+            TimeRestrictedLevelEvolution(18, 6, 'Cubone', 'Alolan Marowak', 28),
         ],
         'base': {
             'hitpoints': 50,
