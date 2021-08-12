@@ -1638,12 +1638,6 @@ dungeonList['Stark Mountain'] = new Dungeon('Stark Mountain',
 
 // Unova
 // TODO: Balancing of dungeon Pokemon HP & rewards.
-dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
-    ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2403000,
-    [new DungeonBossPokemon('Keldeo (Resolute)', 12000000, 100)],
-    106500, 20, 100);
 
 dungeonList['Floccesy Ranch'] = new Dungeon('Floccesy Ranch',
     [
@@ -2734,6 +2728,13 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
     ],
     356500, 8, 100);
 
+dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
+    ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    5203000,
+    [new DungeonBossPokemon('Keldeo (Resolute)', 52000000, 100)],
+    356500, 8, 100);
+
 dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
     [
         {pokemon: 'Goldeen', options: { weight: 6.57 }},
@@ -2892,6 +2893,7 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
         new DungeonBossPokemon('Virizion', 48000000, 100),
     ],
     356500, 3, 100);
+
 dungeonList['Dreamyard'] = new Dungeon('Dreamyard',
     [
         {pokemon: 'Raticate', options: { weight: 4.67 }},

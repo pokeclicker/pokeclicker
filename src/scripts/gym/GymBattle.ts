@@ -19,6 +19,7 @@ class GymBattle extends Battle {
         } else {
             this.generateNewEnemy();
         }
+        player.lowerItemMultipliers(MultiplierDecreaser.Battle);
     }
 
     /**
