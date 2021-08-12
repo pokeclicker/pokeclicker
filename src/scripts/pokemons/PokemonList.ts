@@ -4,6 +4,7 @@
 /// <reference path="../../declarations/weather/WeatherType.d.ts" />
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 /// <reference path="../../declarations/interfaces/BagItem.d.ts" />
+/// <reference path="../../declarations/utilities/Rand.d.ts" />
 /// <reference path="../farming/BerryType.ts" />
 
 const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
@@ -21099,17 +21100,23 @@ const pokemonMap = new GenericProxy<
                     const min = Math.max(0, Math.min(_min, _max));
                     // maximum is same as however many pokemon are available
                     const max = Math.min(pokemon.length, Math.max(_min, _max));
-                    const random = Math.floor(Math.random() * (max ? max : pokemon.length) + min);
-                    return pokemon[random];
+                    // Decide on a base ID first (so we aren't weighted towards pokemon with multiple forms such as Alcremie)
+                    const basePokemonIDs: number[] = [...new Set(pokemon.filter(p => p.id >= min && p.id <= max).map(p => Math.floor(p.id)))];
+                    const ID: number = Rand.fromArray(basePokemonIDs);
+                    // Choose a Pokemon with that base ID
+                    const poke: PokemonListData = Rand.fromArray(pokemon.filter(p => Math.floor(p.id) === ID && p.id >= min && p.id <= max));
+                    return poke || (pokemon.find(p => p.id == 0) as PokemonListData);
                 };
             case 'randomRegion':
                 return (_max = GameConstants.Region.kanto, _min = GameConstants.Region.kanto) => {
                     // minimum 0 (Kanto)
                     const min = Math.max(GameConstants.Region.kanto, Math.min(_min, _max));
                     const max = Math.max(GameConstants.Region.kanto, _min, _max);
-                    const filteredPokemon: PokemonListData[] = pokemon.filter(p => p.id > 0 && (p as PokemonListData).nativeRegion >= min && (p as PokemonListData).nativeRegion <= max);
-                    const random = Math.floor(Math.random() * filteredPokemon.length);
-                    const poke: PokemonListData = filteredPokemon[random];
+                    // Decide on a base ID first (so we aren't weighted towards pokemon with multiple forms such as Alcremie)
+                    const basePokemonIDs: number[] = [...new Set(pokemon.filter(p => p.id > 0 && (p as PokemonListData).nativeRegion >= min && (p as PokemonListData).nativeRegion <= max).map(p => Math.floor(p.id)))];
+                    const ID: number = Rand.fromArray(basePokemonIDs);
+                    // Choose a Pokemon with that base ID
+                    const poke: PokemonListData = Rand.fromArray(pokemon.filter(p => Math.floor(p.id) === ID && (p as PokemonListData).nativeRegion >= min && (p as PokemonListData).nativeRegion <= max));
                     // return a random Pokemon or MissingNo if none found
                     return poke || (pokemon.find(p => p.id == 0) as PokemonListData);
                 };
