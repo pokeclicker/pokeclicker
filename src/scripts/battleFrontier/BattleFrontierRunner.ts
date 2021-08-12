@@ -88,7 +88,7 @@ class BattleFrontierRunner {
                     title: 'Battle Frontier',
                     message: `You made it to stage ${this.stage()}`,
                     type: NotificationConstants.NotificationOption.info,
-                    timeout: 5 * GameConstants.MINUTE,
+                    timeout: 1 * GameConstants.MINUTE,
                 });
 
                 this.end();
