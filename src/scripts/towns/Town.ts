@@ -691,7 +691,7 @@ const LittlerootAide = new NPC('Professor Birch\'s Aide', [
 ]);
 
 const OldaleTrackingScientist = new NPC('Tracking Scientist', [
-    'Tracking Scientist - Hey trainer, look at these footprints! Huh, I’ve never seen footprints like these before…They look like they came from two different Pokémon, and I saw two blurs, one red and one blue, quickly fly away just as I exited the Pokémon Center.',
+    'Hey trainer, look at these footprints! Huh, I’ve never seen footprints like these before…They look like they came from two different Pokémon, and I saw two blurs, one red and one blue, quickly fly away just as I exited the Pokémon Center.',
     'They were flying really fast, I bet Pokémon that fast will only challenge trainers who have proven they are as strong as Champion Wallace...',
 ]);
 
