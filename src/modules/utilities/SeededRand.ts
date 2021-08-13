@@ -52,6 +52,7 @@ export default class SeededRand {
         return arr.find((_e, i) => (rand -= weights[i]) <= 0) || arr[0];
     }
 
+    // Filters out any enum values that are less than 0 (for None)
     public static fromEnum(_enum): number {
         const arr = Object.keys(_enum).map(Number).filter((item) => item >= 0);
         return this.fromArray(arr);

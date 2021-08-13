@@ -86,11 +86,6 @@ class Player {
 
         this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
 
-        const today = new Date();
-        const lastSeen = new Date(this._lastSeen);
-
-        this._lastSeen = Date.now();
-
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
         this.effectTimer = Save.initializeEffectTimer(savedPlayer.effectTimer || {});
         this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);

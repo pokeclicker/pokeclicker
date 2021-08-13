@@ -33,9 +33,9 @@ class BattleFrontierRunner {
     }
 
     public static nextStage() {
+        // Gain any rewards we should have earned for defeating this stage
+        BattleFrontierMilestones.gainReward(this.stage());
         if (App.game.statistics.battleFrontierHighestStageCompleted() < this.stage()) {
-            // Gain any rewards we should have earned for defeating this stage
-            BattleFrontierMilestones.gainReward(this.stage());
             // Update our highest stage
             App.game.statistics.battleFrontierHighestStageCompleted(this.stage());
         }
@@ -88,7 +88,7 @@ class BattleFrontierRunner {
                     title: 'Battle Frontier',
                     message: `You made it to stage ${this.stage()}`,
                     type: NotificationConstants.NotificationOption.info,
-                    timeout: 5 * GameConstants.MINUTE,
+                    timeout: 1 * GameConstants.MINUTE,
                 });
 
                 this.end();
