@@ -1,4 +1,5 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../Battle.ts" />
 
 class DungeonBattle extends Battle {
 
@@ -25,7 +26,7 @@ class DungeonBattle extends Battle {
     public static defeatPokemon() {
         const enemyPokemon: BattlePokemon = this.enemyPokemon();
 
-        // Handle Rrainer Pokemon defeat
+        // Handle Trainer Pokemon defeat
         if (this.trainer()) {
             this.defeatTrainerPokemon();
             return;
@@ -38,6 +39,7 @@ class DungeonBattle extends Battle {
         }
         enemyPokemon.defeat();
         App.game.breeding.progressEggsBattle(DungeonRunner.dungeon.difficultyRoute, player.region);
+        player.lowerItemMultipliers(MultiplierDecreaser.Battle);
 
         // Clearing Dungeon tile
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
@@ -70,6 +72,7 @@ class DungeonBattle extends Battle {
 
         GameHelper.incrementObservable(this.trainerPokemonIndex);
         App.game.breeding.progressEggsBattle(DungeonRunner.dungeon.difficultyRoute, player.region);
+        player.lowerItemMultipliers(MultiplierDecreaser.Battle);
 
         // No Pokemon left, trainer defeated
         if (this.trainerPokemonIndex() >= this.trainer().team.length) {

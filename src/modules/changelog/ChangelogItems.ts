@@ -10,6 +10,10 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.5
+    new ChangelogUpdate('v0.8.5', new Date(2021, 7, 4)),
+    new Changelog(changelogType.FIXED, 'Battle Frontier not awarding items'),
+
     // v0.8.4
     new ChangelogUpdate('v0.8.4', new Date(2021, 7, 4)),
     new Changelog(changelogType.NEW, 'Able to unlock Apicot and Lancat berries'),
