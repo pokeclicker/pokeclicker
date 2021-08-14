@@ -599,6 +599,7 @@ class Update implements Saveable {
             return;
         }
 
+        // Check if the save is newer than the current client, don't allow it to load.
         if (this.isNewerVersion(this.saveVersion, this.version)) {
             Notifier.notify({
                 title: 'Save version is newer than game version!',
