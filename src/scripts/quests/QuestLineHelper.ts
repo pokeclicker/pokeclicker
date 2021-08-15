@@ -32,9 +32,9 @@ class QuestLineHelper {
         tutorial.addQuest(buyDungeonTicket);
 
         //Clear Viridian Forest
-        const clearMtMoon = new DefeatDungeonQuest(1, 50, 'Viridian Forest');
-        clearMtMoon.customDescription = 'Gather 50 Dungeon tokens by (re)capturing Pokémon, then clear the Viridian Forest dungeon.';
-        tutorial.addQuest(clearMtMoon);
+        const clearViridianForest = new DefeatDungeonQuest(1, 50, 'Viridian Forest');
+        clearViridianForest.customDescription = 'Gather 50 Dungeon tokens by (re)capturing Pokémon, then clear the Viridian Forest dungeon.';
+        tutorial.addQuest(clearViridianForest);
 
         //Defeat Pewter Gym
         const pewterReward = () => {
