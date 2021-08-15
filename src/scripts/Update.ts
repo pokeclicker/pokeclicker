@@ -599,6 +599,18 @@ class Update implements Saveable {
             return;
         }
 
+        // Check if the save is newer than the current client, don't allow it to load.
+        if (this.isNewerVersion(this.saveVersion, this.version)) {
+            Notifier.notify({
+                title: 'Save version is newer than game version!',
+                message: `Please update your game before attempting to load this save..\n\nSave version: ${this.saveVersion}\nGame version: ${this.version}`,
+                type: NotificationConstants.NotificationOption.danger,
+                timeout: GameConstants.DAY,
+            });
+            throw new Error(`Save is newer than game version\nSave version: ${this.saveVersion}\nGame version: ${this.version}`);
+            return;
+        }
+
         const [backupButton, backupSaveData] = this.getBackupButton();
 
         // Must modify these object when updating

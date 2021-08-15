@@ -89,6 +89,7 @@ class Game {
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
         this.computeOfflineEarnings();
+        this.checkAndFix();
 
         this.gameState = GameConstants.GameState.fighting;
     }
@@ -142,6 +143,20 @@ class Game {
                 message: `Defeated: ${numberOfPokemonDefeated} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
                 timeout: 2 * GameConstants.MINUTE,
             });
+        }
+    }
+
+    checkAndFix() {
+        // Quest box not showing (game thinking tutorial is not completed)
+        if (App.game.quests.getQuestLine('Tutorial Quests').state() == QuestLineState.inactive) {
+            if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pewter City')]() >= 1) {
+                // Defeated Brock, Has completed the Tutorial
+                App.game.quests.getQuestLine('Tutorial Quests').state(QuestLineState.ended);
+            } else if (player.starter() >= 0) {
+                // Has chosen a starter, Tutorial is started
+                App.game.quests.getQuestLine('Tutorial Quests').state(QuestLineState.started);
+                App.game.quests.getQuestLine('Tutorial Quests').beginQuest(App.game.quests.getQuestLine('Tutorial Quests').curQuest());
+            }
         }
     }
 
