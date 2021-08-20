@@ -14,6 +14,10 @@
  */
 
 namespace GameConstants {
+    declare const SECOND: number;
+    declare const MINUTE: number;
+    declare const HOUR: number;
+    declare const DAY: number;
     declare const TICK_TIME: number;
     declare const BATTLE_TICK: number;
     declare const BATTLE_FRONTIER_TICK: number;
@@ -33,10 +37,6 @@ namespace GameConstants {
     declare const MAX_AVAILABLE_REGION: number;
     declare const TotalPokemonsPerRegion: number[];
     declare const ITEM_USE_TIME: number;
-    declare const SECOND: number;
-    declare const MINUTE: number;
-    declare const HOUR: number;
-    declare const DAY: number;
     declare const ROAMING_MIN_CHANCE: number;
     declare const ROAMING_MAX_CHANCE: number;
     declare const SHINY_CHANCE_BATTLE: number;

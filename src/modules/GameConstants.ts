@@ -1,20 +1,26 @@
+export const SECOND = 1000;
+export const MINUTE = SECOND * 60;
+export const HOUR = MINUTE * 60;
+export const DAY = HOUR * 24;
+export const WEEK = DAY * 7;
+
 // Ticks
-export const TICK_TIME = 100;
-export const BATTLE_TICK = 1000;
-export const BATTLE_FRONTIER_TICK = 500;
-export const UNDERGROUND_TICK = 1000;
-export const DUNGEON_TIME = 6000;
-export const DUNGEON_TICK = 10;
-export const EFFECT_ENGINE_TICK = 1000;
-export const SAVE_TICK = 10000;
-export const GYM_TIME = 3000;
-export const GYM_COUNTDOWN = 1000;
-export const GYM_TICK = 10;
-export const ACHIEVEMENT_TICK = 1000;
-export const MIN_LOAD_TIME = 500; // 0.5 Seconds
-export const MAX_LOAD_TIME = 20000; // 20 Seconds
-export const MUTATION_TICK = 1000;
-export const WANDER_TICK = 1500;
+export const TICK_TIME = 0.1 * SECOND;
+export const BATTLE_TICK = 1 * SECOND;
+export const BATTLE_FRONTIER_TICK = 0.5 * SECOND;
+export const UNDERGROUND_TICK = 1 * SECOND;
+export const DUNGEON_TIME = 60 * SECOND;
+export const DUNGEON_TICK = 0.1 * SECOND;
+export const EFFECT_ENGINE_TICK = 1 * SECOND;
+export const SAVE_TICK = 10 * SECOND;
+export const GYM_TIME = 30 * SECOND;
+export const GYM_COUNTDOWN = 1 * SECOND;
+export const GYM_TICK = 0.1 * SECOND;
+export const ACHIEVEMENT_TICK = 1 * SECOND;
+export const MIN_LOAD_TIME = 0.5 * SECOND;
+export const MAX_LOAD_TIME = 20 * SECOND;
+export const MUTATION_TICK = 1 * SECOND;
+export const WANDER_TICK = 1.5 * SECOND;
 
 export enum Region {
     none = -1,
@@ -49,12 +55,6 @@ export const TotalPokemonsPerRegion = [
 ];
 
 export const ITEM_USE_TIME = 30;
-
-export const SECOND = 1000;
-export const MINUTE = SECOND * 60;
-export const HOUR = MINUTE * 60;
-export const DAY = HOUR * 24;
-export const WEEK = DAY * 7;
 
 export const ROAMING_MIN_CHANCE = 8192;
 export const ROAMING_MAX_CHANCE = 4096;
