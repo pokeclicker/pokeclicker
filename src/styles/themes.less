@@ -1,22 +1,44 @@
 // Any changes needed for specific bootswatch themes should be put in here
 
+/* Light themes */
+.cerulean, .cosmo, .flatly, .journal, .litera, .lumen, .lux, .materia, .minty, .pulse, .sandstone, .simplex, .spacelab, .sketchy, .united, .yeti {
+  // make the boss icon dark
+  img[src="assets/images/dungeons/boss.svg"] {
+    filter: invert(1) brightness(90%);
+  }
+}
+
+/* Dark themes */
+.cyborg, .darkly, .slate, .superhero {
+  // make pokeball image lighter
+  img[src="assets/images/pokeball/None.svg"] {
+    filter: invert(1) brightness(90%);
+  }
+
+  // make the pokemon silhouettes lighter
+  .dungeon-pokemon-locked {
+    -webkit-filter: brightness(0%) invert(100%); /* Safari 6.0 - 9.0 */
+    filter: brightness(0%) invert(100%);
+    opacity: 0.3;
+  }
+}
+
+/* Individual themes */
+.cosmo {
+  .progress, .progress-bar {
+    font-size: 10px;
+  }
+}
+
 .cyborg {
   .text-light {
     color: whitesmoke !important;
-  }
-
-  img[src="assets/images/pokeball/None.svg"] {
-    filter: invert(1) brightness(90%);
   }
 }
 
 .darkly {
   .text-primary, .text-light {
     color: whitesmoke !important;
-  }
-
-  img[src="assets/images/pokeball/None.svg"] {
-    filter: invert(1) brightness(90%);
   }
 }
 
@@ -59,10 +81,6 @@
       color: whitesmoke !important;
     }
   }
-
-  img[src="assets/images/pokeball/None.svg"] {
-    filter: invert(1) brightness(90%);
-  }
 }
 
 .solar {
@@ -76,7 +94,4 @@
     color: whitesmoke !important;
   }
 
-  img[src="assets/images/pokeball/None.svg"] {
-    filter: invert(1) brightness(90%);
-  }
 }

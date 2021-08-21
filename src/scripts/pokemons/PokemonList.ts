@@ -4,6 +4,7 @@
 /// <reference path="../../declarations/weather/WeatherType.d.ts" />
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 /// <reference path="../../declarations/interfaces/BagItem.d.ts" />
+/// <reference path="../../declarations/utilities/Rand.d.ts" />
 /// <reference path="../farming/BerryType.ts" />
 
 const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
@@ -2387,8 +2388,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 65,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone)],
-        //TODO add Alola-only evolution into Alolan Exeggutor using Leafstone
+        'evolutions': [
+            new StoneEvolution('Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone),
+            new StoneEvolution('Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone),
+        ],
         'base': {
             'hitpoints': 60,
             'attack': 40,
@@ -2441,8 +2444,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Cubone', 'Marowak', 28)],
-        //TODO add Alola-only evolution into Alolan Marowak at night at level 28
+        'evolutions': [
+            new LevelEvolution('Cubone', 'Marowak', 28),
+            TimeRestrictedLevelEvolution(18, 6, 'Cubone', 'Alolan Marowak', 28),
+        ],
         'base': {
             'hitpoints': 50,
             'attack': 50,
@@ -16056,9 +16061,10 @@ const pokemonList = createPokemonArray(
         'exp': 56,
         'catchRate': 190,
         'evolutions': [
-            TimeRestrictedLevelEvolution(6, 16, 'Rockruff', 'Lycanroc (Midday)', 25),
-            TimeRestrictedLevelEvolution(16, 20, 'Rockruff', 'Lycanroc (Dusk)', 25),
-            TimeRestrictedLevelEvolution(20, 6, 'Rockruff', 'Lycanroc (Midnight)', 25),
+            TimeRestrictedLevelEvolution(6, 17, 'Rockruff', 'Lycanroc (Midday)', 25),
+            TimeRestrictedLevelEvolution(17, 18, 'Rockruff', 'Lycanroc (Dusk)', 25),
+            TimeRestrictedLevelEvolution(18, 5, 'Rockruff', 'Lycanroc (Midnight)', 25),
+            TimeRestrictedLevelEvolution(5, 6, 'Rockruff', 'Lycanroc (Dusk)', 25),
         ],
         'base': {
             'hitpoints': 45,
@@ -21099,17 +21105,23 @@ const pokemonMap = new GenericProxy<
                     const min = Math.max(0, Math.min(_min, _max));
                     // maximum is same as however many pokemon are available
                     const max = Math.min(pokemon.length, Math.max(_min, _max));
-                    const random = Math.floor(Math.random() * (max ? max : pokemon.length) + min);
-                    return pokemon[random];
+                    // Decide on a base ID first (so we aren't weighted towards pokemon with multiple forms such as Alcremie)
+                    const basePokemonIDs: number[] = [...new Set(pokemon.filter(p => p.id >= min && p.id <= max).map(p => Math.floor(p.id)))];
+                    const ID: number = Rand.fromArray(basePokemonIDs);
+                    // Choose a Pokemon with that base ID
+                    const poke: PokemonListData = Rand.fromArray(pokemon.filter(p => Math.floor(p.id) === ID && p.id >= min && p.id <= max));
+                    return poke || (pokemon.find(p => p.id == 0) as PokemonListData);
                 };
             case 'randomRegion':
                 return (_max = GameConstants.Region.kanto, _min = GameConstants.Region.kanto) => {
                     // minimum 0 (Kanto)
                     const min = Math.max(GameConstants.Region.kanto, Math.min(_min, _max));
                     const max = Math.max(GameConstants.Region.kanto, _min, _max);
-                    const filteredPokemon: PokemonListData[] = pokemon.filter(p => p.id > 0 && (p as PokemonListData).nativeRegion >= min && (p as PokemonListData).nativeRegion <= max);
-                    const random = Math.floor(Math.random() * filteredPokemon.length);
-                    const poke: PokemonListData = filteredPokemon[random];
+                    // Decide on a base ID first (so we aren't weighted towards pokemon with multiple forms such as Alcremie)
+                    const basePokemonIDs: number[] = [...new Set(pokemon.filter(p => p.id > 0 && (p as PokemonListData).nativeRegion >= min && (p as PokemonListData).nativeRegion <= max).map(p => Math.floor(p.id)))];
+                    const ID: number = Rand.fromArray(basePokemonIDs);
+                    // Choose a Pokemon with that base ID
+                    const poke: PokemonListData = Rand.fromArray(pokemon.filter(p => Math.floor(p.id) === ID && (p as PokemonListData).nativeRegion >= min && (p as PokemonListData).nativeRegion <= max));
                     // return a random Pokemon or MissingNo if none found
                     return poke || (pokemon.find(p => p.id == 0) as PokemonListData);
                 };
