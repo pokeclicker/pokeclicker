@@ -2121,12 +2121,68 @@ TownList['Victory Road Kalos'] = new DungeonTown(
 );
 //Unknown Cave?
 
+//Alola Shops
+
+const IkiTownShop = new Shop([
+    ItemList['Pokeball'],
+]);
+const HauoliCityShop = new Shop([
+    ItemList['Mystery_egg'],
+]);
+const HeaheaCityShop = new Shop([
+    ItemList['Greatball'],
+]);
+const PaniolaTownShop = new Shop([
+    ItemList['Grass_egg'],
+    ItemList['Fire_egg'],
+    ItemList['Water_egg'],
+]);
+const RoyalAvenueShop = new Shop([
+    ItemList['Pokeball'],
+    ItemList['Greatball'],
+    ItemList['Ultraball'],
+    ItemList['SmallRestore'],
+    ItemList['MediumRestore'],
+    ItemList['LargeRestore'],
+    ItemList['xAttack'],
+    ItemList['xClick'],
+    ItemList['Lucky_egg'],
+    ItemList['Token_collector'],
+    ItemList['Item_magnet'],
+    ItemList['Lucky_incense'],
+]);
+const KonikoniCityShop = new Shop([
+    ItemList['Soothe_bell'],
+    ItemList['Trade_stone'],
+]);
+const AetherParadiseShop = new Shop([
+    ItemList['Type: Null'],
+]);
+const MalieCityShop = new Shop([
+    ItemList['Ultraball'],
+    ItemList['Thunder_stone'],
+]);
+const TapuVillageShop = new Shop([
+    ItemList['Ice_stone'],
+]);
+const SeafolkVillageShop = new Shop([
+    ItemList['Fighting_egg'],
+]);
+const ExeggutorIslandShop = new Shop([
+    ItemList['Dragon_egg'],
+    ItemList['Leaf_stone'],
+]);
+const AltaroftheSunneandMooneShop = new Shop([
+    ItemList['Poipole'],
+]);
+
 //Alola Towns
 TownList['Iki Town'] = new Town(
     'Iki Town',
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
+        shop: IkiTownShop,
     }
 );
 TownList['Hau\'oli City'] = new Town(
@@ -2134,6 +2190,7 @@ TownList['Hau\'oli City'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
+        shop: HauoliCityShop,
     }
 );
 TownList['Heahea City'] = new Town(
@@ -2141,6 +2198,7 @@ TownList['Heahea City'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.MelemeleKahuna)],
+        shop: HeaheaCityShop,
     }
 );
 TownList['Paniola Town'] = new Town(
@@ -2148,6 +2206,7 @@ TownList['Paniola Town'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 4)],
+        shop: PaniolaTownShop,
     }
 );
 TownList['Royal Avenue'] = new Town(
@@ -2155,6 +2214,7 @@ TownList['Royal Avenue'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
+        shop: RoyalAvenueShop,
     }
 );
 TownList['Konikoni City'] = new Town(
@@ -2162,6 +2222,7 @@ TownList['Konikoni City'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
+        shop: KonikoniCityShop,
     }
 );
 TownList['Aether Paradise'] = new Town(
@@ -2170,6 +2231,7 @@ TownList['Aether Paradise'] = new Town(
     {
         dungeon: dungeonList['Aether Foundation'],
         requirements: [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)],
+        shop: AetherParadiseShop,
     }
 );
 TownList['Malie City'] = new Town(
@@ -2177,6 +2239,7 @@ TownList['Malie City'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_Nihilego)],
+        shop: MalieCityShop,
     }
 );
 TownList['Tapu Village'] = new Town(
@@ -2184,6 +2247,7 @@ TownList['Tapu Village'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
+        shop: TapuVillageShop,
     }
 );
 TownList['Seafolk Village'] = new Town(
@@ -2191,6 +2255,7 @@ TownList['Seafolk Village'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
+        shop: SeafolkVillageShop,
     }
 );
 TownList['Exeggutor Island'] = new Town(
@@ -2199,6 +2264,7 @@ TownList['Exeggutor Island'] = new Town(
     {
         dungeon: dungeonList['Exeggutor Island Hill'],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
+        shop: ExeggutorIslandShop,
     }
 );
 TownList['Altar of the Sunne and Moone'] = new Town(
@@ -2206,6 +2272,7 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
+        shop: AltaroftheSunneandMooneShop,
     }
 );
 TownList['Pokémon League Alola'] = new Town(
