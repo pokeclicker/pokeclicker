@@ -239,27 +239,36 @@ class Quests implements Saveable {
         // Sanity Check
         this.questList.removeAll();
         questList.forEach(questData => {
-            if (questData.hasOwnProperty('name')) {
-                const quest = QuestHelper.createQuest(questData.name, questData.data);
-                quest.fromJSON(questData);
-                this.questList.push(quest);
-            } else {
-                this.questList.push(new CapturePokemonsQuest(1, 0));
+            try {
+                if (questData.hasOwnProperty('name')) {
+                    const quest = QuestHelper.createQuest(questData.name, questData.data);
+                    quest.fromJSON(questData);
+                    this.questList.push(quest);
+                } else {
+                    this.questList.push(new CapturePokemonsQuest(10, 1));
+                }
+            } catch (e) {
+                console.error(`Quest "${questData.name}" failed to load`, questData);
+                this.questList.push(new CapturePokemonsQuest(10, 1));
             }
         });
     }
 
     loadQuestLines(questLines) {
         questLines.forEach(questLine => {
-            if (questLine.state == QuestLineState.inactive) {
-                return;
-            }
-            const ql = this.questLines().find(ql => ql.name == questLine.name);
-            if (ql) {
-                ql.state(questLine.state);
-                if (questLine.state == QuestLineState.started) {
-                    ql.resumeAt(questLine.quest, questLine.initial);
+            try {
+                if (questLine.state == QuestLineState.inactive) {
+                    return;
                 }
+                const ql = this.getQuestLine(questLine.name);
+                if (ql) {
+                    ql.state(questLine.state);
+                    if (questLine.state == QuestLineState.started) {
+                        ql.resumeAt(questLine.quest, questLine.initial);
+                    }
+                }
+            } catch (e) {
+                console.error(`Quest line "${questLine.name}" failed to load`, questLine);
             }
         });
     }
@@ -278,11 +287,12 @@ class Quests implements Saveable {
     }
 
     fromJSON(json: any) {
+        // Generate the questLines (statistics not yet loaded when constructing)
+        QuestLineHelper.loadQuestLines();
+
         if (!json) {
             // Generate the questList
             this.generateQuestList();
-            // Generate the questLines
-            QuestLineHelper.loadQuestLines();
             return;
         }
 
@@ -305,9 +315,7 @@ class Quests implements Saveable {
             this.loadQuestList(json.questList);
         }
 
-        // Generate the questLines
-        QuestLineHelper.loadQuestLines();
-        // Load our quest line quest
+        // Load our quest line progress
         if (json.questLines) {
             this.loadQuestLines(json.questLines);
         }
