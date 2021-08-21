@@ -19,12 +19,12 @@ class Player {
     public achievementsCompleted: { [name: string]: boolean };
 
     private _route: KnockoutObservable<number>;
-
     private _region: KnockoutObservable<GameConstants.Region>;
     private _subregion: KnockoutObservable<number>;
     private _town: KnockoutObservable<Town>;
     private starter: KnockoutObservable<GameConstants.Starter>;
     private _timeTraveller = false;
+    private _origins: Array<any>;
 
     constructor(savedPlayer?) {
         const saved: boolean = (savedPlayer != null);
@@ -90,6 +90,8 @@ class Player {
         this.effectTimer = Save.initializeEffectTimer(savedPlayer.effectTimer || {});
         this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
 
+        // Save game origins, useful for tracking down any errors that may not be related to the main game
+        this._origins = [...new Set((savedPlayer.origin || [])).add(window.location?.origin)];
     }
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
@@ -212,6 +214,7 @@ class Player {
             'achievementsCompleted',
             '_lastSeen',
             '_timeTraveller',
+            '_origins',
             'gymDefeats',
             'achievementsCompleted',
             'effectList',
