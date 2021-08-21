@@ -10,6 +10,18 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.6
+    new ChangelogUpdate('v0.8.6', new Date(2021, 7, 22)),
+    new Changelog(changelogType.CHANGE, 'Added more NPCs'),
+    new Changelog(changelogType.CHANGE, 'Buffed Capture Pokémon Type quest rewards'),
+    new Changelog(changelogType.CHANGE, 'Buffed Pledge Grove'),
+    new Changelog(changelogType.FIXED, 'Decrease shop multiplier when fighting Trainers/Gyms/Elite 4'),
+    new Changelog(changelogType.FIXED, 'Boss icon visible on light themes'),
+    new Changelog(changelogType.FIXED, 'Some Pokémon level speed types'),
+    new Changelog(changelogType.FIXED, 'Achievements percentage going above maximum'),
+    new Changelog(changelogType.FIXED, 'Quest box sometimes dissapearing'),
+    new Changelog(changelogType.FIXED, 'Minor text fixes'),
+
     // v0.8.5
     new ChangelogUpdate('v0.8.5', new Date(2021, 7, 4)),
     new Changelog(changelogType.FIXED, 'Battle Frontier not awarding items'),
