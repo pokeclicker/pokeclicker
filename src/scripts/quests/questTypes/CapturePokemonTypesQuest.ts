@@ -8,14 +8,14 @@ class CapturePokemonTypesQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.intBetween(100, 500);
+        const amount = SeededRand.intBetween(50, 250);
         const reward = this.calcReward(amount);
         const type = SeededRand.fromEnum(PokemonType);
         return [amount, reward, type];
     }
 
     private static calcReward(amount: number): number {
-        const reward = amount * GameConstants.CAPTURE_POKEMONS_BASE_REWARD * 1.2;
+        const reward = amount * GameConstants.CAPTURE_POKEMONS_BASE_REWARD * 1.4;
         return super.randomizeReward(reward);
     }
 
