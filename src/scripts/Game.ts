@@ -140,7 +140,7 @@ class Game {
             Notifier.notify({
                 type: NotificationConstants.NotificationOption.info,
                 title: 'Offline progress',
-                message: `Defeated: ${numberOfPokemonDefeated} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
+                message: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
                 timeout: 2 * GameConstants.MINUTE,
             });
         }
