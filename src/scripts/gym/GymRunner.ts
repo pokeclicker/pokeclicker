@@ -93,7 +93,7 @@ class GymRunner {
     }
 
     public static timeLeftSeconds = ko.pureComputed(() => {
-        return (Math.ceil(GymRunner.timeLeft() / 10) / 10).toFixed(1);
+        return (Math.ceil(GymRunner.timeLeft() / 100) / 10).toFixed(1);
     })
 
 }

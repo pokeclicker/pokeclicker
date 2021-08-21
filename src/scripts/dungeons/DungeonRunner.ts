@@ -145,7 +145,7 @@ class DungeonRunner {
     }
 
     public static timeLeftSeconds = ko.pureComputed(() => {
-        return (Math.ceil(DungeonRunner.timeLeft() / 10) / 10).toFixed(1);
+        return (Math.ceil(DungeonRunner.timeLeft() / 100) / 10).toFixed(1);
     })
 
     public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
