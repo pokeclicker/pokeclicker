@@ -187,12 +187,12 @@
                     <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
                         <div class="col no-gutters clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 220px; display: block;">
                             <h2 class="pageItemTitle" style="display: block;">
-                                <knockout class="right">
-                                    <knockout data-bind="text: App.game.statistics.routeKills[player.region][player.route()]().toLocaleString('en-US')">0</knockout>
-                                    <knockout data-bind="visible: App.game.statistics.routeKills[player.region][player.route()]() < GameConstants.ROUTE_KILLS_NEEDED">/10</knockout>
-                                    <img src="assets/images/ribbons/achievement_0.png" data-bind="visible: App.game.statistics.routeKills[player.region][player.route()]() >= GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[0] && App.game.statistics.routeKills[player.region][player.route()]() < GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[1]"/>
-                                    <img src="assets/images/ribbons/achievement_1.png" data-bind="visible: App.game.statistics.routeKills[player.region][player.route()]() >= GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[1] && App.game.statistics.routeKills[player.region][player.route()]() < GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[2]"/>
-                                    <img src="assets/images/ribbons/achievement_2.png" data-bind="visible: App.game.statistics.routeKills[player.region][player.route()]() >= GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[2]"/>
+                                <knockout class="right" data-bind="using: App.game.statistics.routeKills[player.region][player.route()]()">
+                                    <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
+                                    <knockout data-bind="visible: $data < GameConstants.ROUTE_KILLS_NEEDED">/10</knockout>
+                                    <img src="assets/images/ribbons/achievement_0.png" data-bind="visible: $data >= GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[0] && $data < GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[1]"/>
+                                    <img src="assets/images/ribbons/achievement_1.png" data-bind="visible: $data >= GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[1] && $data < GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[2]"/>
+                                    <img src="assets/images/ribbons/achievement_2.png" data-bind="visible: $data >= GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[2]"/>
                                 </knockout>
 
                                 <knockout class="left">
