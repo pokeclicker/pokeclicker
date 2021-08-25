@@ -193,6 +193,9 @@ namespace GameConstants {
     declare function expRandomElement<T>(array: T[], ratio: number): T;
     declare const TypeColor: string[];
     declare const ROUTE_KILLS_NEEDED: number;
+    declare const ACHIEVEMENT_DEFEAT_ROUTE_VALUES: number[];
+    declare const ACHIEVEMENT_DEFEAT_GYM_VALUES: number[];
+    declare const ACHIEVEMENT_DEFEAT_DUNGEON_VALUES: number[];
     declare type EnvironmentData = Partial<Record<number, Set<string | number>>>
     declare const Environments: {
         Water: EnvironmentData,
