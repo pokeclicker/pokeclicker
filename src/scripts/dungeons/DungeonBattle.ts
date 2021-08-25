@@ -83,6 +83,9 @@ class DungeonBattle extends Battle {
                 // Reward back 50% or 100% (boss) of the total dungeon DT cost as money
                 const money = Math.round(DungeonRunner.dungeon.tokenCost * (DungeonRunner.fightingBoss() ? 1 : 0.5));
                 App.game.wallet.gainMoney(money);
+                // Reward back 2% or 5% (boss) of the total dungeon DT cost
+                const tokens = Math.round(DungeonRunner.dungeon.tokenCost * (DungeonRunner.fightingBoss() ? 0.05 : 0.02));
+                App.game.wallet.gainDungeonTokens(tokens);
             }
 
             DungeonRunner.fighting(false);
