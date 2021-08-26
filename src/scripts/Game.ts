@@ -101,37 +101,10 @@ class Game {
             // Only allow up to 24 hours worth of bonuses
             const timeDiffOverride = Math.min(86400, timeDiffInSeconds);
             let region: GameConstants.Region = player.region;
-            let route: number = player.route();
+            let route: number = player.route() || GameConstants.StartingRoutes[region];
             if (!MapHelper.validRoute(route, region)) {
-                switch (region) {
-                    case GameConstants.Region.kanto:
-                        route = 1;
-                        break;
-                    case GameConstants.Region.johto:
-                        route = 29;
-                        break;
-                    case GameConstants.Region.hoenn:
-                        route = 101;
-                        break;
-                    case GameConstants.Region.sinnoh:
-                        route = 201;
-                        break;
-                    case GameConstants.Region.unova:
-                        route = 19;
-                        break;
-                    case GameConstants.Region.kalos:
-                        route = 1;
-                        break;
-                    case GameConstants.Region.alola:
-                        route = 1;
-                        break;
-                    case GameConstants.Region.galar:
-                        route = 1;
-                        break;
-                    default:
-                        route = 1;
-                        region = GameConstants.Region.kanto;
-                }
+                route = 1;
+                region = GameConstants.Region.kanto;
             }
             const availablePokemonMap = RouteHelper.getAvailablePokemonList(route, region).map(name => pokemonMap[name]);
             const maxHealth: number = PokemonFactory.routeHealth(route, region);
