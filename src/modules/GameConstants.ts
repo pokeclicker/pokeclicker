@@ -459,6 +459,21 @@ export const TypeColor = [
 ];
 
 export const ROUTE_KILLS_NEEDED = 10;
+export const ACHIEVEMENT_DEFEAT_ROUTE_VALUES = [
+    100,
+    1000,
+    10000,
+];
+export const ACHIEVEMENT_DEFEAT_GYM_VALUES = [
+    10,
+    100,
+    1000,
+];
+export const ACHIEVEMENT_DEFEAT_DUNGEON_VALUES = [
+    10,
+    100,
+    1000,
+];
 
 export type EnvironmentData = Partial<Record<Region, Set<string | number>>>;
 export const Environments: Record<string, EnvironmentData> = {
