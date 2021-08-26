@@ -46,17 +46,29 @@ class Player {
             this._route = ko.observable(savedPlayer._route);
         } else {
             switch (savedPlayer._region) {
-                case 0:
+                case GameConstants.Region.kanto:
                     this._route = ko.observable(1);
                     break;
-                case 1:
+                case GameConstants.Region.johto:
                     this._route = ko.observable(29);
                     break;
-                case 2:
+                case GameConstants.Region.hoenn:
                     this._route = ko.observable(101);
                     break;
-                case 3:
+                case GameConstants.Region.sinnoh:
                     this._route = ko.observable(201);
+                    break;
+                case GameConstants.Region.unova:
+                    this._route = ko.observable(19);
+                    break;
+                case GameConstants.Region.kalos:
+                    this._route = ko.observable(1);
+                    break;
+                case GameConstants.Region.alola:
+                    this._route = ko.observable(1);
+                    break;
+                case GameConstants.Region.galar:
+                    this._route = ko.observable(1);
                     break;
                 default:
                     this._route = ko.observable(1);
