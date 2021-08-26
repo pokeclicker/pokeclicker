@@ -91,7 +91,8 @@ class Game {
         this.computeOfflineEarnings();
         this.checkAndFix();
 
-        this.gameState = GameConstants.GameState.fighting;
+        // If the player isn't on a route, they're in a town/dungeon
+        this.gameState = player.route() ? GameConstants.GameState.fighting : GameConstants.GameState.town;
     }
 
     computeOfflineEarnings() {
