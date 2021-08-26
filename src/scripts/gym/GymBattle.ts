@@ -13,7 +13,7 @@ class GymBattle extends Battle {
 
     public static clickAttack() {
         if (GymRunner.running()) {
-            super.pokemonAttack();
+            super.clickAttack();
         }
     }
     /**
