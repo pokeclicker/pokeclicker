@@ -5,6 +5,17 @@ class GymBattle extends Battle {
     static index: KnockoutObservable<number> = ko.observable(0);
     static totalPokemons: KnockoutObservable<number> = ko.observable(0);
 
+    public static pokemonAttack() {
+        if (GymRunner.running()) {
+            super.pokemonAttack();
+        }
+    }
+
+    public static clickAttack() {
+        if (GymRunner.running()) {
+            super.pokemonAttack();
+        }
+    }
     /**
      * Award the player with exp, and go to the next pokemon
      */
