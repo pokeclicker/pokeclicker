@@ -29,7 +29,10 @@ class Player {
 
     constructor(savedPlayer?) {
         const saved: boolean = (savedPlayer != null);
-        savedPlayer = savedPlayer || {};
+        savedPlayer = savedPlayer || {
+            _region: GameConstants.Region.kanto,
+            _route: 1,
+        };
         this._lastSeen = savedPlayer._lastSeen || 0;
         this._timeTraveller = savedPlayer._timeTraveller || false;
         if (this._lastSeen > Date.now()) {
