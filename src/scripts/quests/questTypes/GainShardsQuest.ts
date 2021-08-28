@@ -2,6 +2,7 @@
 
 class GainShardsQuest extends Quest implements QuestInterface {
     public static maxWeight = 4;
+    public static minWeight = 1.2;
 
     private type: PokemonType;
 
@@ -23,7 +24,7 @@ class GainShardsQuest extends Quest implements QuestInterface {
             });
         });
         const max = Math.max(...types);
-        return types.map(v => (-v + max) / max * this.maxWeight).map((v, i) => Math.max(1.2, Math.round(v * 100) / 100))[type];
+        return types.map(v => ((-v + max) / max) * (this.maxWeight - this.minWeight)).map(v => Math.round((v + this.minWeight) * 100) / 100)[type];
     }
 
     public static generateData(): any[] {
