@@ -30,6 +30,7 @@ class GainShardsQuest extends Quest implements QuestInterface {
     public static generateData(): any[] {
         const amount = SeededRand.intBetween(200, 600);
         let type = SeededRand.fromEnum(PokemonType);
+        // Don't allow type quest for types we can't encounter
         while (this.typeWeight(type) >= this.maxWeight) {
             type = SeededRand.fromEnum(PokemonType);
         }
