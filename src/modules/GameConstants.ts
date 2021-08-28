@@ -199,7 +199,7 @@ export const SHINY_BASE_REWARD = questBase * 3000;
 export const DEFEAT_POKEMONS_BASE_REWARD = questBase * 1;
 
 // Defeat reward divided by chance to catch (guessed)
-export const CAPTURE_POKEMONS_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD / 0.8;
+export const CAPTURE_POKEMONS_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD / 0.74;
 
 // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
 export const MINE_LAYERS_BASE_REWARD = questBase * 720;
