@@ -91,7 +91,8 @@ class Game {
         this.computeOfflineEarnings();
         this.checkAndFix();
 
-        this.gameState = GameConstants.GameState.fighting;
+        // If the player isn't on a route, they're in a town/dungeon
+        this.gameState = player.route() ? GameConstants.GameState.fighting : GameConstants.GameState.town;
     }
 
     computeOfflineEarnings() {
@@ -100,25 +101,11 @@ class Game {
         if (timeDiffInSeconds > 1) {
             // Only allow up to 24 hours worth of bonuses
             const timeDiffOverride = Math.min(86400, timeDiffInSeconds);
-            const region: GameConstants.Region = player.region;
-            let route: number = player.route();
+            let region: GameConstants.Region = player.region;
+            let route: number = player.route() || GameConstants.StartingRoutes[region];
             if (!MapHelper.validRoute(route, region)) {
-                switch (region) {
-                    case 0:
-                        route = 1;
-                        break;
-                    case 1:
-                        route = 29;
-                        break;
-                    case 2:
-                        route = 101;
-                        break;
-                    case 3:
-                        route = 201;
-                        break;
-                    default:
-                        route = 1;
-                }
+                route = 1;
+                region = GameConstants.Region.kanto;
             }
             const availablePokemonMap = RouteHelper.getAvailablePokemonList(route, region).map(name => pokemonMap[name]);
             const maxHealth: number = PokemonFactory.routeHealth(route, region);
