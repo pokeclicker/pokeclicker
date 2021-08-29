@@ -7,6 +7,10 @@ class GainFarmPointsQuest extends Quest implements QuestInterface {
         this.focus = App.game.statistics.totalFarmPoints;
     }
 
+    public static canComplete() {
+        return App.game.farming.canAccess();
+    }
+
     public static generateData(): any[] {
         const amount = SeededRand.intBetween(500, 5000);
         const reward = this.calcReward(amount);

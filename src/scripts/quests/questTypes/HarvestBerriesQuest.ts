@@ -10,6 +10,10 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
         this.focus = App.game.statistics.berriesHarvested[this.berryType];
     }
 
+    public static canComplete() {
+        return App.game.farming.canAccess();
+    }
+
     public static generateData(): any[] {
         // Getting available Berries (always include Gen 1 Berries)
         const availableBerries = App.game.farming.berryData.filter(berry => App.game.farming.unlockedBerries[berry.type]() || berry.type < BerryType.Persim);

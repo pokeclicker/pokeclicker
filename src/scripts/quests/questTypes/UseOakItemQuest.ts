@@ -10,6 +10,10 @@ class UseOakItemQuest extends Quest implements QuestInterface {
         this.focus = App.game.statistics.oakItemUses[this.item];
     }
 
+    public static canComplete() {
+        return App.game.oakItems.canAccess() && !App.game.challenges.list.disableOakItems.active();
+    }
+
     public static generateData(): any[] {
         const possibleItems = [
             OakItems.OakItem.Magic_Ball,

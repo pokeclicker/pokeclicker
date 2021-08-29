@@ -15,15 +15,11 @@ class DefeatGymQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         const amount = SeededRand.intBetween(5, 20);
-        let attempts = 0;
-        let region = GameConstants.Region.kanto;
-        let gymTown = GameConstants.RegionGyms[region][0];
-        // Try to find unlocked gym, end after 10 attempts
-        do {
-            region = SeededRand.intBetween(0, player.highestRegion());
-            gymTown = SeededRand.fromArray(GameConstants.RegionGyms[region]);
-        } while (!Gym.isUnlocked(gymList[gymTown]) && ++attempts < 10);
-
+        const region = SeededRand.intBetween(0, player.highestRegion());
+        // Only use unlocked gyms
+        const possibleGyms = GameConstants.RegionGyms[region].filter(gymTown => Gym.isUnlocked(gymList[gymTown]));
+        // If no gyms unlocked in this region, just use the first gym of the region
+        const gymTown = possibleGyms.length ? SeededRand.fromArray(possibleGyms) : GameConstants.RegionGyms[region][0];
         const reward = this.calcReward(amount, gymTown);
         return [amount, reward, gymTown];
     }
