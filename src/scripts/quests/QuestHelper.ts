@@ -56,9 +56,7 @@ class QuestHelper {
 
         // Only use unlocked quest types
         const QuestTypes = new Set(Object.entries(this.quests).filter(([key, quest]) => quest.canComplete()).map(([key]) => key));
-        const maxAttempts = 20;
-        let attempts = 0;
-        while (quests.length < amount && attempts++ < maxAttempts) {
+        while (quests.length < amount && QuestTypes.size) {
             const questType = SeededRand.fromArray(Array.from(QuestTypes));
             if (uniqueQuestTypes) {
                 QuestTypes.delete(questType);
