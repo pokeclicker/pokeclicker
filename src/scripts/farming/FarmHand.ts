@@ -41,6 +41,7 @@ class FarmHand {
     public level: number;
     public experience: number;
     public energy = 0;
+    public hired = false;
 
     constructor(
         public name: string,
@@ -73,6 +74,9 @@ class FarmHand {
     }
 
     tick(): void {
+        if (!this.hired) {
+            return;
+        }
         // Work when work ticks reached
         this.workTicks += GameConstants.TICK_TIME;
         if (this.workTicks % this.workTick < GameConstants.TICK_TIME) {
@@ -122,8 +126,30 @@ class FarmHand {
     }
 }
 
-const FarmHands: FarmHand[] = [
-    new FarmHand('Jake', 10, 1, FarmHandSpeeds.SnailPaced, 1, 1),
-    new FarmHand('Paul', 15, 3, FarmHandSpeeds.Slowest, 1, 3),
-    new FarmHand('Fred', 100, 10, FarmHandSpeeds.Fastest, 10, 10),
-];
+class FarmHands {
+    public static list: FarmHand[] = [];
+
+    public static add(farmHand: FarmHand) {
+        this.list.push(farmHand);
+    }
+
+    public hired: string[] = [];
+    public available: KnockoutComputed<FarmHand[]>;
+
+    constructor() {
+        this.available = ko.pureComputed(() => FarmHands.list.filter(f => f.isUnlocked()));
+    }
+
+    public isUnlocked() {
+        return player.highestRegion() >= GameConstants.Region.hoenn;
+    }
+
+    public tick() {
+        // run game tick for all hired farmhands
+        FarmHands.list.forEach(f => f.hired && f.tick());
+    }
+}
+
+FarmHands.add(new FarmHand('Jake', 10, 1, FarmHandSpeeds.SnailPaced, 1, 1));
+FarmHands.add(new FarmHand('Paul', 15, 3, FarmHandSpeeds.Slowest, 1, 3));
+FarmHands.add(new FarmHand('Fred', 100, 10, FarmHandSpeeds.Fastest, 10, 10));

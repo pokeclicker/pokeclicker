@@ -7,7 +7,7 @@ class Farming implements Feature {
 
     berryData: Berry[] = [];
     mutations: Mutation[] = [];
-    farmHand: FarmHand;
+    farmHands = FarmHands;
 
     externalAuras: KnockoutObservable<number>[];
 
@@ -942,7 +942,7 @@ class Farming implements Feature {
             notifications.forEach((n) => this.handleNotification(n, wanderPokemon));
         }
 
-        this.farmHand?.tick();
+        this.farmHands.tick();
     }
 
     handleNotification(farmNotiType: FarmNotificationType, wander?: any): void {
