@@ -1091,6 +1091,17 @@ export const StartingTowns = [
     'Postwick', // Galar
 ];
 
+export const StartingRoutes = [
+    1, // Kanto
+    29, // Johto
+    101, // Hoenn
+    201, // Sinnoh
+    19, // Unova
+    1, // Kalos
+    1, // Alola
+    1, // Galar
+];
+
 export const DockTowns = [
     'Vermilion City', // Kanto
     'Olivine City', // Johto
