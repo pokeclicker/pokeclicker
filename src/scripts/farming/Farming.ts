@@ -7,7 +7,7 @@ class Farming implements Feature {
 
     berryData: Berry[] = [];
     mutations: Mutation[] = [];
-    farmHands = FarmHands;
+    farmHands = new FarmHands();
 
     externalAuras: KnockoutObservable<number>[];
 
