@@ -13,6 +13,10 @@ class GainShardsQuest extends Quest implements QuestInterface {
         this.focus = App.game.statistics.shardsGained[this.type];
     }
 
+    public static canComplete() {
+        return App.game.shards.canAccess();
+    }
+
     public static typeWeights(): Array<Record<string, number>> {
         const types = new Array(GameHelper.enumLength(PokemonType) - 1).fill(0);
         Routes.regionRoutes.filter(r => r.isUnlocked()).forEach(r => {
