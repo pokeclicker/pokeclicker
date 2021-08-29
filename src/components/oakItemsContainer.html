@@ -1,4 +1,4 @@
-<div id="oakItemsContainer" class="card sortable border-secondary mb-3" data-bind="visible: App.game.oakItems.canAccess()">
+<div id="oakItemsContainer" class="card sortable border-secondary mb-3" data-bind="visible: App.game.oakItems.canAccess() && !(Settings.getSetting('hideChallengeRelatedModules').observableValue() && App.game.challenges.list.disableOakItems.active())">
     <div class="card-header p-0" data-toggle="collapse" href="#oakItemsBody">
         <span style="text-align:center">Oak Items</span>
     </div>
