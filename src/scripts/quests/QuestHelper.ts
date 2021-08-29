@@ -54,16 +54,14 @@ class QuestHelper {
 
         SeededRand.seed(+seed);
 
-        const QuestTypes = new Set(Object.keys(this.quests));
+        // Only use unlocked quest types
+        const QuestTypes = new Set(Object.entries(this.quests).filter(([key, quest]) => quest.canComplete()).map(([key]) => key));
         const maxAttempts = 20;
         let attempts = 0;
         while (quests.length < amount && attempts++ < maxAttempts) {
             const questType = SeededRand.fromArray(Array.from(QuestTypes));
             if (uniqueQuestTypes) {
                 QuestTypes.delete(questType);
-            }
-            if (questType == 'UseOakItemQuest' && App.game.challenges.list.disableOakItems.active()) {
-                continue;
             }
             const quest = this.createQuest(questType);
             quest.index = quests.length;
