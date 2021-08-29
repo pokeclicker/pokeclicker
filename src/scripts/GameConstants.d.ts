@@ -363,5 +363,6 @@ namespace GameConstants {
     declare function getDungeonIndex(dungeon: string): number;
     declare function getDungeonRegion(dungeon: string): Region;
     declare const StartingTowns: string[];
+    declare const StartingRoutes: number[];
     declare const DockTowns: string[];
 }
