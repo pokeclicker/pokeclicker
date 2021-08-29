@@ -28,6 +28,10 @@ abstract class Quest {
         this.onLoadCalled = false;
     }
 
+    public static canComplete() {
+        return true;
+    }
+
     get description(): string {
         return this.customDescription ?? 'Generic Quest Description. This should be overriden.';
     }

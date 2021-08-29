@@ -199,7 +199,7 @@ export const SHINY_BASE_REWARD = questBase * 3000;
 export const DEFEAT_POKEMONS_BASE_REWARD = questBase * 1;
 
 // Defeat reward divided by chance to catch (guessed)
-export const CAPTURE_POKEMONS_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD / 0.8;
+export const CAPTURE_POKEMONS_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD / 0.74;
 
 // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
 export const MINE_LAYERS_BASE_REWARD = questBase * 720;
@@ -459,6 +459,21 @@ export const TypeColor = [
 ];
 
 export const ROUTE_KILLS_NEEDED = 10;
+export const ACHIEVEMENT_DEFEAT_ROUTE_VALUES = [
+    100,
+    1000,
+    10000,
+];
+export const ACHIEVEMENT_DEFEAT_GYM_VALUES = [
+    10,
+    100,
+    1000,
+];
+export const ACHIEVEMENT_DEFEAT_DUNGEON_VALUES = [
+    10,
+    100,
+    1000,
+];
 
 export type EnvironmentData = Partial<Record<Region, Set<string | number>>>;
 export const Environments: Record<string, EnvironmentData> = {
@@ -1074,6 +1089,17 @@ export const StartingTowns = [
     'Vaniville Town', // Kalos
     'Iki Town', // Alola
     'Postwick', // Galar
+];
+
+export const StartingRoutes = [
+    1, // Kanto
+    29, // Johto
+    101, // Hoenn
+    201, // Sinnoh
+    19, // Unova
+    1, // Kalos
+    1, // Alola
+    1, // Galar
 ];
 
 export const DockTowns = [
