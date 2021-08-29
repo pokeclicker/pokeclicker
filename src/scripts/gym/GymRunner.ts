@@ -6,10 +6,10 @@ class GymRunner {
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
 
     public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList['Pewter City']);
-    public static started: boolean;
+    public static running: KnockoutObservable<boolean> = ko.observable(false);
 
     public static startGym(gym: Gym) {
-        this.started = false;
+        this.running(false);
         this.gymObservable(gym);
         if (Gym.isUnlocked(gym)) {
             if (gym instanceof Champion) {
@@ -27,7 +27,7 @@ class GymRunner {
             this.resetGif();
 
             setTimeout(() => {
-                this.started = true;
+                this.running(true);
                 this.hideGif();
             }, GameConstants.GYM_COUNTDOWN);
 
@@ -57,7 +57,7 @@ class GymRunner {
     }
 
     public static tick() {
-        if (!this.started) {
+        if (!this.running()) {
             return;
         }
         if (this.timeLeft() < 0) {
@@ -68,28 +68,34 @@ class GymRunner {
     }
 
     public static gymLost() {
-        Notifier.notify({
-            message: `It appears you are not strong enough to defeat ${GymBattle.gym.leaderName}`,
-            type: NotificationConstants.NotificationOption.danger,
-        });
-        App.game.gameState = GameConstants.GameState.town;
+        if (this.running()) {
+            this.running(false);
+            Notifier.notify({
+                message: `It appears you are not strong enough to defeat ${GymBattle.gym.leaderName}`,
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            App.game.gameState = GameConstants.GameState.town;
+        }
     }
 
     public static gymWon(gym: Gym) {
-        Notifier.notify({
-            message: `Congratulations, you defeated ${GymBattle.gym.leaderName}!`,
-            type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.gym_won,
-        });
-        this.gymObservable(gym);
-        App.game.wallet.gainMoney(gym.moneyReward);
-        // If this is the first time defeating this gym
-        if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
-            gym.firstWinReward();
+        if (this.running()) {
+            this.running(false);
+            Notifier.notify({
+                message: `Congratulations, you defeated ${GymBattle.gym.leaderName}!`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.gym_won,
+            });
+            this.gymObservable(gym);
+            App.game.wallet.gainMoney(gym.moneyReward);
+            // If this is the first time defeating this gym
+            if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
+                gym.firstWinReward();
+            }
+            GameHelper.incrementObservable(App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym.town)]);
+            player.town(TownList[gym.town]);
+            App.game.gameState = GameConstants.GameState.town;
         }
-        GameHelper.incrementObservable(App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym.town)]);
-        player.town(TownList[gym.town]);
-        App.game.gameState = GameConstants.GameState.town;
     }
 
     public static timeLeftSeconds = ko.pureComputed(() => {
