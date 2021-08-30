@@ -174,6 +174,7 @@ namespace GameConstants {
     declare function camelCaseToString(str: string): string;
     declare function formatDate(date: Date): string;
     declare function formatTime(input: number | Date): string;
+    declare function formatTimeFullLetters(input: number): string;
     declare function formatTimeShortWords(input: number): string;
     declare function formatNumber(input: number): string;
     declare enum Region {
