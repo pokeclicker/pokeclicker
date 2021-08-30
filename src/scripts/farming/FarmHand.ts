@@ -189,22 +189,22 @@ class FarmHand {
             do {
                 // Find empty plots
                 emptyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry == BerryType.None && this.plots().includes(i));
-                // Plant the expected berry
-                let berry;
-                switch (this.focus()) {
-                    case FarmHandBerryTypes.Replant: // Re-plant last berry used
-                        berry = App.game.farming.plotList[emptyPlotIndex].lastPlanted;
-                        break;
-                    case FarmHandBerryTypes.Random: // Plant a random berry
-                        berry = Rand.fromArray(App.game.farming.farmHands.availableBerries().filter(b => b >= 0));
-                        break;
-                    default:
-                        berry = this.focus();
-                }
-                // If we somehow didn't find a berry to use, just plant a Cheri..
-                berry = berry < 0 ? BerryType.Cheri : berry;
                 // Plant the berry
                 if (emptyPlotIndex >= 0 && workTimes > 0) {
+                    // Plant the expected berry
+                    let berry;
+                    switch (this.focus()) {
+                        case FarmHandBerryTypes.Replant: // Re-plant last berry used
+                            berry = App.game.farming.plotList[emptyPlotIndex].lastPlanted;
+                            break;
+                        case FarmHandBerryTypes.Random: // Plant a random berry
+                            berry = Rand.fromArray(App.game.farming.farmHands.availableBerries().filter(b => b >= 0));
+                            break;
+                        default:
+                            berry = this.focus();
+                    }
+                    // If we somehow didn't find a berry to use, just plant a Cheri..
+                    berry = berry < 0 ? BerryType.Cheri : berry;
                     App.game.farming.plant(emptyPlotIndex, berry as BerryType);
                     workTimes--;
                     worked = true;
