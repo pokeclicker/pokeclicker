@@ -6,9 +6,9 @@
             <div class="modal-header p-0">
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#berryFarmView">Farm</a></li>
+                    <li class='nav-item' data-bind="visible: App.game.farming.farmHands.isUnlocked()"><a data-toggle='tab' class='nav-link' href="#farmHandsView">Farm Hands (BETA)</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#berryDexView">Berrydex</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#helpView">Help</a></li>
-                    <li class='nav-item' data-bind="visible: App.game.farming.farmHands.isUnlocked()"><a data-toggle='tab' class='nav-link' href="#farmHandsView">Farm Hands [BETA]</a></li>
                     <!-- TODO: HLXII Add Apricorn Tab ? -->
                     <btn class="btn btn-primary">
                         <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint](), 'currency': GameConstants.Currency.farmPoint}}"></span>
