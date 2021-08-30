@@ -8,7 +8,7 @@
                     <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#berryFarmView">Farm</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#berryDexView">Berrydex</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#helpView">Help</a></li>
-                    <li class='nav-item' data-bind="visible: App.game.farming.farmHands.isUnlocked()"><a data-toggle='tab' class='nav-link' href="#farmHandsView">Farm Hands</a></li>
+                    <li class='nav-item' data-bind="visible: App.game.farming.farmHands.isUnlocked()"><a data-toggle='tab' class='nav-link' href="#farmHandsView">Farm Hands [BETA]</a></li>
                     <!-- TODO: HLXII Add Apricorn Tab ? -->
                     <btn class="btn btn-primary">
                         <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint](), 'currency': GameConstants.Currency.farmPoint}}"></span>
@@ -237,6 +237,49 @@
 
                     <h4><u>Wandering Pokémon</u></h4>
                     <p>Ripe Berry plants may attract wild Pokémon that will join your party. Some Pokémon can only be found using certain Berry species.</p>
+                </div>
+
+                <div id="farmHandsView" class="tab-pane fade">
+                    <div class="row m-0" data-bind="foreach: App.game.farming.farmHands.available()" style="max-width: 100%;">
+                        <div class="card text-left col-md-4 col-sm-6 col-xs-12 p-0">
+                            <h5 class="card-header">
+                                <knockout data-bind="text: $data.name">Name</knockout>
+                                <img class="float-right" src="" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                            </h5>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Cost: <img alt="Farm Points" src="assets/images/currency/farmPoint.svg" style="height: 24px; width: 24px;">&nbsp;<knockout data-bind="text: $data.cost.amount.toLocaleString('en-US')">0</knockout>/hour
+                                    <br/>Work Speed: <knockout data-bind="text: GameConstants.formatTimeFullLetters($data.workTick / 1000)">0</knockout>
+                                    <br/>Efficiency:
+                                    <br/>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-info" role="progressbar" data-bind="attr:{ style: 'width:' + Math.floor(($data.efficiency / $data.maxEfficiency) * 100) + '%' }" aria-valuemin="0" aria-valuemax="50" style="width:0%">
+                                            <span data-bind="text: $data.efficiency.toLocaleString('en-US')">0</span>
+                                        </div>
+                                    </div>
+                                    <br/>Max Energy:
+                                    <br/>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-info" role="progressbar" data-bind="attr:{ style: 'width:' + $data.maxEnergy + '%' }" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                                            <span data-bind="text: $data.maxEnergy.toLocaleString('en-US')">0</span>
+                                        </div>
+                                    </div>
+                                    <!-- ko if: !$data.hired() -->
+                                        <button class="btn btn-primary" data-bind="click: () => $data.hire()">Hire!</button>
+                                    <!-- /ko -->
+                                    <!-- ko if: $data.hired() -->
+                                        <br/>Should Harvest: 
+                                        <input class="clickable float-right" type="checkbox" style="margin: 8px;"
+                                            data-bind="checked: $data.shouldHarvest"/>
+                                        <br/>Berry Planting:
+                                        <br/>
+                                        <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumNumbers(FarmHandBerryTypes).sort((a, b) => a - b), optionsText: i => FarmHandBerryTypes[i], value: $data.focus"></select>
+                                        <button class="btn btn-danger" data-bind="click: () => $data.fire()">Fire!</button>
+                                    <!-- /ko -->
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

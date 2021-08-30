@@ -1262,6 +1262,7 @@ class Farming implements Feature {
             plotList: this.plotList.map(plot => plot.toJSON()),
             shovelAmt: this.shovelAmt(),
             mutations: this.mutations.map(mutation => mutation.toJSON()),
+            farmHands: this.farmHands.toJSON(),
         };
     }
 
@@ -1321,6 +1322,8 @@ class Farming implements Feature {
         } else {
             this.mutations.forEach((mutation, i) => mutation.fromJSON(mutations[i]));
         }
+
+        this.farmHands.fromJSON(json.farmHands);
     }
 
     public static genBounds = [8, 20, 35, 53, Infinity];
