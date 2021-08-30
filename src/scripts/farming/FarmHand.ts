@@ -21,9 +21,7 @@ enum FarmHandSpeeds {
 
 /*
 TODO:
-Make in game menu for hiring/firing/settings
 Work in levels/experience somehow
-Ability to hire multiple people?
 Use accuracy to decide if they plant the right berry or plant a berry at all (still use up energy?)
 Use accuracy to decide if they harvest a berry by accident? (still use up energy?)
 */
@@ -54,6 +52,7 @@ class FarmHand {
     public shouldHarvest: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
     public energy: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
     public hired: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
+    public plots: KnockoutObservableArray<number> = ko.observableArray(new Array(GameConstants.FARM_PLOT_WIDTH * GameConstants.FARM_PLOT_HEIGHT).fill(0).map((v, i) => i));
     // public level: number;
     // public experience: number;
 
@@ -88,6 +87,16 @@ class FarmHand {
 
     isUnlocked(): boolean {
         return this.unlockRequirement?.isCompleted() ?? true;
+    }
+
+    togglePlot(plotIndex: number): void {
+        const index = this.plots().findIndex(p => p == plotIndex);
+        if (index >= 0) {
+            this.plots.splice(index, 1);
+        } else {
+            this.plots.push(plotIndex);
+        }
+        this.plots.sort((a, b) => a - b);
     }
 
     hire(): void {
@@ -158,7 +167,7 @@ class FarmHand {
         // Harvesting berries
         let readyPlotIndex;
         do {
-            readyPlotIndex = App.game.farming.plotList.findIndex(p => p.isUnlocked && p.berry !== BerryType.None && p.stage() >= PlotStage.Berry);
+            readyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry !== BerryType.None && p.stage() >= PlotStage.Berry && this.plots().includes(i));
             if (readyPlotIndex >= 0 && workTimes > 0) {
                 const berry = App.game.farming.plotList[readyPlotIndex].berry;
                 App.game.farming.harvest(readyPlotIndex);
@@ -183,7 +192,7 @@ class FarmHand {
             let berry = this.focus() != FarmHandBerryTypes.Random ? this.focus() : Rand.fromEnum(BerryType);
             berry = berry < 0 ? BerryType.Cheri : berry;
             // Find empty plots
-            emptyPlotIndex = App.game.farming.plotList.findIndex(p => p.isUnlocked && p.berry == BerryType.None);
+            emptyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry == BerryType.None && this.plots().includes(i));
             // Plant the berry
             if (emptyPlotIndex >= 0 && workTimes > 0) {
                 App.game.farming.plant(emptyPlotIndex, berry as BerryType);
@@ -251,6 +260,7 @@ class FarmHand {
         this.costTicks = json.costTicks;
         this.energy(json.energy);
         this.hired(json.hired);
+        this.plots(json.plots);
     }
 }
 

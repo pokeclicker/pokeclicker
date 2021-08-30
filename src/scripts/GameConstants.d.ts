@@ -50,6 +50,8 @@ namespace GameConstants {
     declare const ITEM_PRICE_DEDUCT: number;
     declare const PLATE_VALUE: number;
     declare const BREEDING_ATTACK_BONUS: number;
+    declare const FARM_PLOT_WIDTH: number;
+    declare const FARM_PLOT_HEIGHT: number;
     declare const BerryDistribution: number[];
     declare const MULCH_USE_TIME: number;
     declare const BOOST_MULCH_MULTIPLIER: number;

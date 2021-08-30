@@ -128,7 +128,7 @@
 
                         <div class="col-12 col-lg-8">
                             <div id="plotList" class="row" data-bind="foreach: App.game.farming.plotList">
-                                <!-- ko if: $index() % Farming.PLOT_WIDTH == 0 -->
+                                <!-- ko if: $index() % GameConstants.FARM_PLOT_WIDTH == 0 -->
                                 <div class="w-100"></div>
                                 <!-- /ko -->
                                 <div class="plot col" data-bind="css: { plotLocked : !$data.isUnlocked }">
@@ -310,6 +310,25 @@
                                             <td class="text-left align-middle">Berry Planting:</td>
                                             <td class="text-right tight">
                                                 <select autocomplete="off" class="custom-select custom-select-sm" data-bind="options: App.game.farming.farmHands.availableBerries, optionsText: i => FarmHandBerryTypes[i], value: $data.focus"></select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="clickable" data-toggle="collapse" data-bind="attr: { href: `#allowedPlots${$data.name}`}" >Allowed Plots:</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="row m-0 collapse" data-bind="attr: { id: `allowedPlots${$data.name}`}, foreach: App.game.farming.plotList">
+                                                    <!-- ko if: $index() % GameConstants.FARM_PLOT_WIDTH == 0 -->
+                                                    <div class="w-100"></div>
+                                                    <!-- /ko -->
+                                                    <div class="plot col p-1">
+                                                        <div class="plot-content clickable" data-bind="click: () => { $parent.togglePlot($index()) }">
+                                                            <div class="plotImage">
+                                                                <img style="width: 100%" src="assets/images/farm/soil.png" data-bind="css: { plotEnabled : $parent.plots().includes($index()), plotDisabled : !$parent.plots().includes($index()) }">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
