@@ -165,41 +165,41 @@ class FarmHand {
         let workTimes = this.efficiency;
 
         // Harvesting berries
-        let readyPlotIndex;
-        do {
-            readyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry !== BerryType.None && p.stage() >= PlotStage.Berry && this.plots().includes(i));
-            if (readyPlotIndex >= 0 && workTimes > 0) {
-                const berry = App.game.farming.plotList[readyPlotIndex].berry;
-                App.game.farming.harvest(readyPlotIndex);
-                workTimes--;
-                worked = true;
-                if (this.focus() == FarmHandBerryTypes.Replant) {
-                    App.game.farming.plant(readyPlotIndex, berry);
+        if (this.shouldHarvest()) {
+            let readyPlotIndex;
+            do {
+                readyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry !== BerryType.None && p.stage() >= PlotStage.Berry && this.plots().includes(i));
+                if (readyPlotIndex >= 0 && workTimes > 0) {
+                    const berry = App.game.farming.plotList[readyPlotIndex].berry;
+                    App.game.farming.harvest(readyPlotIndex);
+                    workTimes--;
+                    worked = true;
+                    if (this.focus() == FarmHandBerryTypes.Replant) {
+                        App.game.farming.plant(readyPlotIndex, berry);
+                        workTimes--;
+                        worked = true;
+                    }
+                }
+            } while (readyPlotIndex >= 0 && workTimes > 0);
+        }
+
+        // Planting berries
+        if (this.focus() != FarmHandBerryTypes.None && this.focus() != FarmHandBerryTypes.Replant) {
+            let emptyPlotIndex;
+            do {
+                // Plant the expected berry, or a random berry
+                let berry = this.focus() != FarmHandBerryTypes.Random ? this.focus() : Rand.fromArray(App.game.farming.farmHands.availableBerries().filter(b => b >= 0));
+                berry = berry < 0 ? BerryType.Cheri : berry;
+                // Find empty plots
+                emptyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry == BerryType.None && this.plots().includes(i));
+                // Plant the berry
+                if (emptyPlotIndex >= 0 && workTimes > 0) {
+                    App.game.farming.plant(emptyPlotIndex, berry as BerryType);
                     workTimes--;
                     worked = true;
                 }
-            }
-        } while (readyPlotIndex >= 0 && workTimes > 0);
-
-        // Planting berries
-        let emptyPlotIndex;
-        do {
-            // If they don't want to plant berries, don't do anything here
-            if (this.focus() == FarmHandBerryTypes.None || this.focus() == FarmHandBerryTypes.Replant) {
-                break;
-            }
-            // Plant the expected berry, or a random berry
-            let berry = this.focus() != FarmHandBerryTypes.Random ? this.focus() : Rand.fromEnum(BerryType);
-            berry = berry < 0 ? BerryType.Cheri : berry;
-            // Find empty plots
-            emptyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry == BerryType.None && this.plots().includes(i));
-            // Plant the berry
-            if (emptyPlotIndex >= 0 && workTimes > 0) {
-                App.game.farming.plant(emptyPlotIndex, berry as BerryType);
-                workTimes--;
-                worked = true;
-            }
-        } while (emptyPlotIndex >= 0 && workTimes > 0);
+            } while (emptyPlotIndex >= 0 && workTimes > 0);
+        }
 
         if (!worked) {
             this.addEnergy();
@@ -309,6 +309,7 @@ class FarmHands {
     }
 }
 
+// Note: Gender-neutral names used as the trainer sprite is (seeded) randomly generated
 FarmHands.add(new FarmHand('Alex', 10, 1, FarmHandSpeeds.Lazy, 1, 1, new BerriesUnlockedRequirement(8)));
 FarmHands.add(new FarmHand('Logan', 15, 3, FarmHandSpeeds.Slower, 2, 3, new BerriesUnlockedRequirement(16)));
 FarmHands.add(new FarmHand('Charlie', 30, 10, FarmHandSpeeds.Average, 7, 6, new BerriesUnlockedRequirement(24)));
