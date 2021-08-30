@@ -282,15 +282,18 @@ class FarmHands {
         this.list.push(farmHand);
     }
 
+    public MAX_HIRES = 3;
     public available: KnockoutComputed<FarmHand[]>;
     public hired: KnockoutComputed<FarmHand[]>;
     public availableBerries: KnockoutComputed<FarmHandBerryTypes[]>;
+    public canHire: KnockoutComputed<boolean>;
     public requirement = new BerriesUnlockedRequirement(8);
 
     constructor() {
         this.available = ko.pureComputed(() => FarmHands.list.filter(f => f.isUnlocked()));
         this.hired = ko.pureComputed(() => FarmHands.list.filter(f => f.hired()));
         this.availableBerries = ko.pureComputed(() => GameHelper.enumNumbers(FarmHandBerryTypes).filter(b => App.game.farming.unlockedBerries[b]?.() || b < 0).sort((a, b) => a - b));
+        this.canHire =  ko.pureComputed(() => this.hired().length < this.MAX_HIRES);
     }
 
     public isUnlocked() {
