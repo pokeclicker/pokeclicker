@@ -6,7 +6,7 @@ class BerriesUnlockedRequirement extends AchievementRequirement {
     }
 
     public getProgress() {
-        return Math.min( App.game.farming.unlockedBerries.filter(b => b()).length, this.requiredValue);
+        return Math.min(App.game.farming.unlockedBerries.filter(b => b()).length, this.requiredValue);
     }
 
     public hint(): string {

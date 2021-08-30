@@ -264,6 +264,7 @@ class FarmHands {
     public available: KnockoutComputed<FarmHand[]>;
     public hired: KnockoutComputed<FarmHand[]>;
     public availableBerries: KnockoutComputed<FarmHandBerryTypes[]>;
+    public requirement = new BerriesUnlockedRequirement(8);
 
     constructor() {
         this.available = ko.pureComputed(() => FarmHands.list.filter(f => f.isUnlocked()));
@@ -272,7 +273,7 @@ class FarmHands {
     }
 
     public isUnlocked() {
-        return player.highestRegion() >= GameConstants.Region.hoenn;
+        return this.requirement.isCompleted();
     }
 
     public tick() {
@@ -281,7 +282,7 @@ class FarmHands {
     }
 
     public toJSON(): Record<string, any>[] {
-        return FarmHands.list.map(f => f.toJSON());
+        return this.available().map(f => f.toJSON());
     }
 
     public fromJSON(json: Array<any>): void {
@@ -298,9 +299,9 @@ class FarmHands {
     }
 }
 
-FarmHands.add(new FarmHand('Alex', 10, 1, FarmHandSpeeds.Lazy, 1, 1));
-FarmHands.add(new FarmHand('Logan', 15, 3, FarmHandSpeeds.Slower, 2, 3));
-FarmHands.add(new FarmHand('Charlie', 30, 10, FarmHandSpeeds.Average, 7, 6));
-FarmHands.add(new FarmHand('Kerry', 50, 16, FarmHandSpeeds.AboveAverage, 8, 8));
-FarmHands.add(new FarmHand('Riley', 70, 25, FarmHandSpeeds.Fast, 8, 10));
-FarmHands.add(new FarmHand('Jessie', 100, 50, FarmHandSpeeds.Fastest, 10, 12));
+FarmHands.add(new FarmHand('Alex', 10, 1, FarmHandSpeeds.Lazy, 1, 1, new BerriesUnlockedRequirement(8)));
+FarmHands.add(new FarmHand('Logan', 15, 3, FarmHandSpeeds.Slower, 2, 3, new BerriesUnlockedRequirement(16)));
+FarmHands.add(new FarmHand('Charlie', 30, 10, FarmHandSpeeds.Average, 7, 6, new BerriesUnlockedRequirement(24)));
+FarmHands.add(new FarmHand('Kerry', 50, 16, FarmHandSpeeds.AboveAverage, 8, 8, new BerriesUnlockedRequirement(30)));
+FarmHands.add(new FarmHand('Riley', 70, 25, FarmHandSpeeds.Fast, 8, 10, new BerriesUnlockedRequirement(36)));
+FarmHands.add(new FarmHand('Jessie', 100, 50, FarmHandSpeeds.Fastest, 10, 12, new BerriesUnlockedRequirement(42)));
