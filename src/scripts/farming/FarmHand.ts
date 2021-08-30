@@ -147,7 +147,7 @@ class FarmHand {
     work(): void {
         // Out of energy cannot work right now..
         if (!this.energy()) {
-            GameHelper.incrementObservable(this.energy, 1);
+            this.addEnergy();
             return;
         }
 
@@ -193,10 +193,20 @@ class FarmHand {
         } while (emptyPlotIndex >= 0 && workTimes > 0);
 
         if (!worked) {
-            GameHelper.incrementObservable(this.energy, 1);
+            this.addEnergy();
         } else {
-            GameHelper.incrementObservable(this.energy, -1);
+            this.useEnergy();
         }
+    }
+
+    addEnergy(): void {
+        // Only allow up to maximum value
+        this.energy(Math.min(this.maxEnergy, this.energy() + 1));
+    }
+
+    useEnergy(): void {
+        // Only allow to go down to 0
+        this.energy(Math.max(0, this.energy() - 1));
     }
 
     charge(): void {
@@ -281,4 +291,5 @@ class FarmHands {
 
 FarmHands.add(new FarmHand('Jake', 10, 1, FarmHandSpeeds.SnailPaced, 1, 1));
 FarmHands.add(new FarmHand('Paul', 15, 3, FarmHandSpeeds.Slowest, 1, 3));
+FarmHands.add(new FarmHand('Justin', 30, 10, FarmHandSpeeds.Average, 1, 6));
 FarmHands.add(new FarmHand('Fred', 100, 50, FarmHandSpeeds.Fastest, 10, 12));
