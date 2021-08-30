@@ -398,6 +398,7 @@ const JohtoBerryMaster = new Shop([
     ItemList['Amaze_Mulch'],
     ItemList['Berry_Shovel'],
     ItemList['Squirtbottle'],
+    ItemList['FarmHandKerry'],
 ]);
 
 const NewBarkTechnologyEnthusiast = new NPC('Tech Enthusiast', [
@@ -670,6 +671,7 @@ const BattleFrontierShop = new Shop([
     new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 10, GameConstants.Currency.battlePoint),
     new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 20, GameConstants.Currency.battlePoint),
     new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 40, GameConstants.Currency.battlePoint),
+    ItemList['FarmHandJessie'],
 ]);
 
 //Hoenn Berry Master
@@ -680,6 +682,7 @@ const HoennBerryMaster = new Shop([
     ItemList['Amaze_Mulch'],
     ItemList['Berry_Shovel'],
     ItemList['Sprinklotad'],
+    ItemList['FarmHandRiley'],
 ]);
 
 //Hoenn NPCs
