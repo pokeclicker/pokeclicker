@@ -40,8 +40,8 @@ class FarmHand {
     // Maximum Efficiency value
     public maxEfficiency = 50;
     // Negative value so they are charged on the first tick and work on the first tick
-    public workTicks = -GameConstants.TICK_TIME;
-    public costTicks = -GameConstants.TICK_TIME;
+    public workTicks = ko.observable(-GameConstants.TICK_TIME).extend({ numeric: 0 });
+    public costTicks = ko.observable(-GameConstants.TICK_TIME).extend({ numeric: 0 });
     // When to charge the player whatever the cost is, when to work
     public workTick;
     public costTick = GameConstants.HOUR;
@@ -53,6 +53,7 @@ class FarmHand {
     public energy: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
     public hired: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
     public plots: KnockoutObservableArray<number> = ko.observableArray(new Array(GameConstants.FARM_PLOT_WIDTH * GameConstants.FARM_PLOT_HEIGHT).fill(0).map((v, i) => i));
+    public tooltip: KnockoutComputed<string>;
     // public level: number;
     // public experience: number;
 
@@ -68,14 +69,19 @@ class FarmHand {
         SeededRand.seed(parseInt(this.name, 36));
         this.trainerSprite = SeededRand.intBetween(0, Profile.MAX_TRAINER - 1);
         // Negative value so they are charged on the first tick and work on the first tick
-        this.workTicks = -GameConstants.TICK_TIME;
-        this.costTicks = -GameConstants.TICK_TIME;
+        this.workTicks(-GameConstants.TICK_TIME);
+        this.costTicks(-GameConstants.TICK_TIME);
         // Set initial energy to maximum energy
         this.energy(this.maxEnergy);
         // Calculate how much to charge the player in farm points
         this.cost = new Amount(+Math.pow(100, 1 + cost * 0.08).toPrecision(2), GameConstants.Currency.farmPoint);
         // Calculate how often they work
         this.workTick = this.calcWorkTick(this.speed);
+
+        this.tooltip = ko.pureComputed(() => `<strong>${this.name}</strong><br/>
+            Energy: ${this.energy()}/${this.maxEnergy}<br/>
+            Work Cycle: ${GameConstants.formatTimeFullLetters((this.workTick - this.workTicks()) / 1000)}`
+        );
     }
 
     private calcWorkTick(speed: FarmHandSpeeds): number {
@@ -101,8 +107,8 @@ class FarmHand {
 
     hire(): void {
         // Negative value so they are charged on the first tick and work on the first tick
-        this.workTicks = -GameConstants.TICK_TIME;
-        this.costTicks = -GameConstants.TICK_TIME;
+        this.workTicks(-GameConstants.TICK_TIME);
+        this.costTicks(-GameConstants.TICK_TIME);
 
         // Check the player has enough Farm Points to hire this Farm Hand
         if (!App.game.wallet.hasAmount(this.cost)) {
@@ -140,15 +146,15 @@ class FarmHand {
             return;
         }
         // Charge player when cost tick reached
-        this.costTicks += GameConstants.TICK_TIME;
-        if (this.costTicks % this.costTick < GameConstants.TICK_TIME && this.hired()) {
-            this.costTicks = 0;
+        GameHelper.incrementObservable(this.costTicks, GameConstants.TICK_TIME);
+        if (this.costTicks() % this.costTick < GameConstants.TICK_TIME && this.hired()) {
+            this.costTicks(0);
             this.charge();
         }
         // Work when work ticks reached
-        this.workTicks += GameConstants.TICK_TIME;
-        if (this.workTicks % this.workTick < GameConstants.TICK_TIME && this.hired()) {
-            this.workTicks = 0;
+        GameHelper.incrementObservable(this.workTicks, GameConstants.TICK_TIME);
+        if (this.workTicks() % this.workTick < GameConstants.TICK_TIME && this.hired()) {
+            this.workTicks(0);
             this.work();
         }
     }
@@ -251,12 +257,6 @@ class FarmHand {
         App.game.wallet.loseAmount(this.cost);
     }
 
-    tooltip(): KnockoutComputed<string> {
-        return ko.pureComputed(() => `<strong>${this.name}</strong><br/>
-            Energy: ${this.energy()}/${this.maxEnergy}`
-        );
-    }
-
     toJSON(): Record<string, any> {
         return ko.toJS(this);
     }
@@ -265,13 +265,13 @@ class FarmHand {
         if (!json) {
             return;
         }
-        this.focus(json.focus);
-        this.shouldHarvest(json.shouldHarvest);
-        this.workTicks = json.workTicks;
-        this.costTicks = json.costTicks;
-        this.energy(json.energy);
-        this.hired(json.hired);
-        this.plots(json.plots);
+        this.focus(json.focus || BerryType.None);
+        this.shouldHarvest(json.shouldHarvest || false);
+        this.workTicks(json.workTicks || 0);
+        this.costTicks(json.costTicks || 0);
+        this.energy(json.energy || 0);
+        this.hired(json.hired || false);
+        this.plots(json.plots || []);
     }
 }
 
@@ -322,7 +322,7 @@ class FarmHands {
 
 // Note: Gender-neutral names used as the trainer sprite is (seeded) randomly generated
 FarmHands.add(new FarmHand('Alex', 10, 1, FarmHandSpeeds.Lazy, 1, 1, new BerriesUnlockedRequirement(8)));
-FarmHands.add(new FarmHand('Logan', 15, 3, FarmHandSpeeds.Slower, 2, 3, new BerriesUnlockedRequirement(16)));
+FarmHands.add(new FarmHand('Logan', 15, 3, FarmHandSpeeds.Slower, 2, 4, new BerriesUnlockedRequirement(16)));
 FarmHands.add(new FarmHand('Charlie', 30, 10, FarmHandSpeeds.Average, 7, 6, new BerriesUnlockedRequirement(24)));
 FarmHands.add(new FarmHand('Kerry', 50, 16, FarmHandSpeeds.AboveAverage, 8, 8, new BerriesUnlockedRequirement(30)));
 FarmHands.add(new FarmHand('Riley', 70, 25, FarmHandSpeeds.Fast, 8, 10, new BerriesUnlockedRequirement(36)));
