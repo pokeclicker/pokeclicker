@@ -98,8 +98,8 @@ class FarmHand {
         // Check the player has enough Farm Points to hire this Farm Hand
         if (!App.game.wallet.hasAmount(this.cost)) {
             Notifier.notify({
-                title: `Farm Hand ${this.name}`,
-                message: `You don't have enough Farm Points to hire me..\nCost: ${this.cost.amount}`,
+                title: `[FARM HAND] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
+                message: `You don't have enough Farm Points to hire me..\nCost: <img src="./assets/images/currency/farmPoint.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
                 type: NotificationConstants.NotificationOption.warning,
                 timeout: 30 * GameConstants.SECOND,
             });
@@ -108,7 +108,7 @@ class FarmHand {
         // Farm hand is hired
         this.hired(true);
         Notifier.notify({
-            title: `Farm Hand ${this.name}`,
+            title: `[FARM HAND] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
             message: 'Thanks for hiring me,\nI won\'t let you down!',
             type: NotificationConstants.NotificationOption.success,
             timeout: 30 * GameConstants.SECOND,
@@ -117,7 +117,7 @@ class FarmHand {
 
     fire(): void {
         Notifier.notify({
-            title: `Farm Hand ${this.name}`,
+            title: `[FARM HAND] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
             message: 'Thanks for the work,\nLet me know when you\'re hiring again!',
             type: NotificationConstants.NotificationOption.info,
             timeout: 30 * GameConstants.SECOND,
@@ -213,22 +213,28 @@ class FarmHand {
         // Player cannot afford to pay for this hour
         if (!App.game.wallet.hasAmount(this.cost)) {
             Notifier.notify({
-                title: `Farm Hand ${this.name}`,
-                message: `It looks like you are a little short on Farm Points right now..\nLet me know when you're hiring again!\nCost: ${this.cost.amount}`,
+                title: `[FARM HAND] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
+                message: `It looks like you are a little short on Farm Points right now..\nLet me know when you're hiring again!\nCost: <img src="./assets/images/currency/farmPoint.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
                 type: NotificationConstants.NotificationOption.danger,
-                timeout: GameConstants.MINUTE,
+                timeout: 30 * GameConstants.MINUTE,
             });
             this.hired(false);
             return;
         }
         // Charge the player for the hour
         Notifier.notify({
-            title: `Farm Hand ${this.name}`,
-            message: `Here's your bill for the hour!\nCost: ${this.cost.amount}`,
+            title: `[FARM HAND] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
+            message: `Here's your bill for the hour!\nCost: <img src="./assets/images/currency/farmPoint.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
             type: NotificationConstants.NotificationOption.info,
             timeout: 30 * GameConstants.SECOND,
         });
         App.game.wallet.loseAmount(this.cost);
+    }
+
+    tooltip(): KnockoutComputed<string> {
+        return ko.pureComputed(() => `<strong>${this.name}</strong><br/>
+            Energy: ${this.energy()}/${this.maxEnergy}`
+        );
     }
 
     toJSON(): Record<string, any> {
@@ -255,11 +261,14 @@ class FarmHands {
         this.list.push(farmHand);
     }
 
-    public hired: string[] = [];
     public available: KnockoutComputed<FarmHand[]>;
+    public hired: KnockoutComputed<FarmHand[]>;
+    public availableBerries: KnockoutComputed<FarmHandBerryTypes[]>;
 
     constructor() {
         this.available = ko.pureComputed(() => FarmHands.list.filter(f => f.isUnlocked()));
+        this.hired = ko.pureComputed(() => FarmHands.list.filter(f => f.hired()));
+        this.availableBerries = ko.pureComputed(() => GameHelper.enumNumbers(FarmHandBerryTypes).filter(b => App.game.farming.unlockedBerries[b]?.() || b < 0).sort((a, b) => a - b));
     }
 
     public isUnlocked() {
@@ -289,7 +298,9 @@ class FarmHands {
     }
 }
 
-FarmHands.add(new FarmHand('Jake', 10, 1, FarmHandSpeeds.SnailPaced, 1, 1));
-FarmHands.add(new FarmHand('Paul', 15, 3, FarmHandSpeeds.Slowest, 1, 3));
-FarmHands.add(new FarmHand('Justin', 30, 10, FarmHandSpeeds.Average, 1, 6));
-FarmHands.add(new FarmHand('Fred', 100, 50, FarmHandSpeeds.Fastest, 10, 12));
+FarmHands.add(new FarmHand('Alex', 10, 1, FarmHandSpeeds.Lazy, 1, 1));
+FarmHands.add(new FarmHand('Logan', 15, 3, FarmHandSpeeds.Slower, 2, 3));
+FarmHands.add(new FarmHand('Charlie', 30, 10, FarmHandSpeeds.Average, 7, 6));
+FarmHands.add(new FarmHand('Kerry', 50, 16, FarmHandSpeeds.AboveAverage, 8, 8));
+FarmHands.add(new FarmHand('Riley', 70, 25, FarmHandSpeeds.Fast, 8, 10));
+FarmHands.add(new FarmHand('Jessie', 100, 50, FarmHandSpeeds.Fastest, 10, 12));
