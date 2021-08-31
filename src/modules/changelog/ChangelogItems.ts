@@ -10,6 +10,20 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.7
+    new ChangelogUpdate('v0.8.7', new Date(2021, 7, 31)),
+    new Changelog(changelogType.NEW, '(BETA) Added Farm Hands (Farm Automation) - Check out the Help tab in the Farm for more info'),
+    new Changelog(changelogType.NEW, 'Added an option to hide challenge related modules'),
+    new Changelog(changelogType.CHANGE, 'Display total route defeats when on a route'),
+    new Changelog(changelogType.CHANGE, 'Player will return to last Dungeon/Town they were in before closing game'),
+    new Changelog(changelogType.CHANGE, 'Buffed Pokémon typed quest reward amounts'),
+    new Changelog(changelogType.CHANGE, 'Should no longer recieve quest that cannot be completed right now (unless starting a new region)'),
+    new Changelog(changelogType.CHANGE, 'Nerfed Dungeon Token gains in Dungeons'),
+    new Changelog(changelogType.CHANGE, 'Added unobtainable berries for No Oak Item saves to Johto Berry Master (must have prerequisites to purchase)'),
+    new Changelog(changelogType.FIXED, 'Minor theme fixes'),
+    new Changelog(changelogType.FIXED, 'Trainer image fixes'),
+    new Changelog(changelogType.FIXED, 'Being able to win and lose when fighting a Gym'),
+
     // v0.8.6
     new ChangelogUpdate('v0.8.6', new Date(2021, 7, 22)),
     new Changelog(changelogType.CHANGE, 'Added more NPCs'),
