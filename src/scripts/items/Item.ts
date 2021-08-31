@@ -30,7 +30,7 @@ class Item {
     multiplierDecreaser: MultiplierDecreaser;
 
     maxAmount: number;
-    description?: string;
+    _description?: string;
     _displayName: string;
     imageDirectory?: string;
 
@@ -62,7 +62,7 @@ class Item {
         }
 
         this._displayName = displayName ?? name;
-        this.description = description;
+        this._description = description;
         this.imageDirectory = imageDirectory;
     }
 
@@ -160,6 +160,10 @@ class Item {
         }
         player.itemMultipliers[this.saveName] = Math.max(1, (player.itemMultipliers[this.saveName] || 1) / Math.pow(this.multiplier, amount));
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.saveName]));
+    }
+
+    get description() {
+        return this._description;
     }
 
     get displayName() {
