@@ -94,7 +94,7 @@ class Item {
 
         if (n > this.maxAmount) {
             Notifier.notify({
-                message: `You can only buy ${this.maxAmount} &times; ${GameConstants.humanifyString(this.name)}!`,
+                message: `You can only buy ${this.maxAmount} &times; ${GameConstants.humanifyString(this.displayName)}!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             n = this.maxAmount;
@@ -102,7 +102,7 @@ class Item {
 
         if (!this.isAvailable()) {
             Notifier.notify({
-                message: `${GameConstants.humanifyString(this.name)} is sold out!`,
+                message: `${GameConstants.humanifyString(this.displayName)} is sold out!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             return;
@@ -115,7 +115,7 @@ class Item {
             this.gain(n);
             this.increasePriceMultiplier(n);
             Notifier.notify({
-                message: `You bought ${n} ${GameConstants.humanifyString(this.name)}${multiple}`,
+                message: `You bought ${n} ${GameConstants.humanifyString(this.displayName)}${multiple}`,
                 type: NotificationConstants.NotificationOption.success,
             });
         } else {
@@ -128,7 +128,7 @@ class Item {
                     break;
             }
             Notifier.notify({
-                message: `You don't have enough ${curr} to buy ${n} ${GameConstants.humanifyString(this.name) + multiple}`,
+                message: `You don't have enough ${curr} to buy ${n} ${GameConstants.humanifyString(this.displayName) + multiple}`,
                 type: NotificationConstants.NotificationOption.danger,
             });
         }

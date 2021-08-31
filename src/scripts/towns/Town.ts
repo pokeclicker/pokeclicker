@@ -399,6 +399,10 @@ const JohtoBerryMaster = new Shop([
     ItemList['Berry_Shovel'],
     ItemList['Squirtbottle'],
     ItemList['FarmHandBailey'],
+    ItemList['ChopleBerry'],
+    ItemList['KebiaBerry'],
+    ItemList['ShucaBerry'],
+    ItemList['ChartiBerry'],
 ]);
 
 const NewBarkTechnologyEnthusiast = new NPC('Tech Enthusiast', [
