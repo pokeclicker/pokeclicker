@@ -30,7 +30,12 @@ class DungeonRunner {
         App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
 
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
-        DungeonRunner.map = new DungeonMap(GameConstants.DUNGEON_SIZE + player.region);
+        // Dungeon size increases with each region
+        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + player.region;
+        // Decrease dungeon size by 1 for every 100 completes
+        dungeonSize -= Math.floor(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() / 100);
+        // Dungeon size minimum of MIN_DUNGEON_SIZE
+        DungeonRunner.map = new DungeonMap(Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize));
         DungeonRunner.chestsOpened = 0;
         DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
@@ -90,10 +95,10 @@ class DungeonRunner {
         player.gainItem(input, amount);
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
-        if (DungeonRunner.chestsOpened == GameConstants.DUNGEON_CHEST_SHOW) {
+        if (DungeonRunner.chestsOpened == Math.floor(DungeonRunner.map.size / 3)) {
             DungeonRunner.map.showChestTiles();
         }
-        if (DungeonRunner.chestsOpened == GameConstants.DUNGEON_MAP_SHOW) {
+        if (DungeonRunner.chestsOpened == Math.ceil(DungeonRunner.map.size / 2)) {
             DungeonRunner.map.showAllTiles();
         }
     }
