@@ -14,12 +14,13 @@ class DungeonMap {
         // Move the boss if it spawns on the player.
         if (this.currentTile().type() == GameConstants.DungeonTile.boss) {
             this.currentTile().type(GameConstants.DungeonTile.entrance);
-            const newX = GameConstants.randomIntBetween(0, size - 2);
-            const newY = GameConstants.randomIntBetween(0, size - 2);
+            const newX = GameConstants.randomIntBetween(0, size - 1);
+            const newY = GameConstants.randomIntBetween(0, size - 2); // Don't allow it to be on the bottom row
             this.board()[newY][newX].type(GameConstants.DungeonTile.boss);
             this.board()[newY][newX].calculateCssClass();
         }
         this.currentTile().isVisible = true;
+        this.currentTile().isVisited = true;
         this.currentTile().type(GameConstants.DungeonTile.entrance);
         this.currentTile().hasPlayer = true;
         this.currentTile().calculateCssClass();
@@ -54,6 +55,7 @@ class DungeonMap {
             this.playerPosition(point);
             this.currentTile().hasPlayer = true;
             this.currentTile().isVisible = true;
+            this.currentTile().isVisited = true;
             this.currentTile().calculateCssClass();
             if (this.currentTile().type() == GameConstants.DungeonTile.enemy) {
                 DungeonBattle.generateNewEnemy();
@@ -88,29 +90,33 @@ class DungeonMap {
     }
 
     public hasAccesToTile(point: Point) {
+        // If player fighting/catching they cannot move right now
         if (DungeonRunner.fighting() || DungeonBattle.catching()) {
             return false;
         }
-        //If any of the adjacent Tiles is visited, it's a valid Tile.
+        // If tile out of bounds, it's invalid
         if (point.x < 0 || point.x >= this.size || point.y < 0 || point.y >= this.size) {
             return false;
         }
 
-        if (point.y < this.size - 1 && this.board()[point.y + 1][point.x].isVisible) {
+        //If any of the adjacent Tiles is visited, it's a valid Tile.
+        if (point.y < this.size - 1 && this.board()[point.y + 1][point.x].isVisited) {
             return true;
         }
 
-        if (point.y > 0 && this.board()[point.y - 1][point.x].isVisible) {
+        if (point.y > 0 && this.board()[point.y - 1][point.x].isVisited) {
             return true;
         }
 
-        if (point.x < this.size - 1 && this.board()[point.y][point.x + 1].isVisible) {
+        if (point.x < this.size - 1 && this.board()[point.y][point.x + 1].isVisited) {
             return true;
         }
 
-        if (point.x > 0 && this.board()[point.y][point.x - 1].isVisible) {
+        if (point.x > 0 && this.board()[point.y][point.x - 1].isVisited) {
             return true;
         }
+
+        // If none of the above true, they cannot move there
         return false;
     }
 
@@ -121,13 +127,13 @@ class DungeonMap {
         // Boss
         mapList.push(new DungeonTile(GameConstants.DungeonTile.boss));
 
-        // Chests
-        for (let i = 0; i < this.size; i++) {
+        // Chests (leave 1 space for enemy and 1 space for empty tile)
+        for (let i = 0; i < this.size && mapList.length < this.size * this.size - 2; i++) {
             mapList.push(new DungeonTile(GameConstants.DungeonTile.chest));
         }
 
-        // Enemy Pokemon
-        for (let i = 0; i < this.size * 2 + 3; i++) {
+        // Enemy Pokemon (leave 1 space for empty tile)
+        for (let i = 0; i < this.size * 2 + 3 && mapList.length < this.size * this.size - 1; i++) {
             mapList.push(new DungeonTile(GameConstants.DungeonTile.enemy));
         }
 
@@ -138,6 +144,7 @@ class DungeonMap {
 
         // Shuffle the tiles randomly
         this.shuffle(mapList);
+        // Make sure the player tile is empty
         while (mapList[mapList.length - Math.floor(this.size / 2) - 1].type() != GameConstants.DungeonTile.empty) {
             this.shuffle(mapList);
         }
