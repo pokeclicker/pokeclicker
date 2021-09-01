@@ -11,7 +11,7 @@ class PokemonFactory {
      */
     public static generateWildPokemon(route: number, region: GameConstants.Region): BattlePokemon {
         if (!MapHelper.validRoute(route, region)) {
-            return new BattlePokemon('Rattata', 19, PokemonType.Psychic, PokemonType.None, 10000, 1, 0, 0, new Amount(0, GameConstants.Currency.money), false, 1);
+            return new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0);
         }
         let name: PokemonNameType;
 
