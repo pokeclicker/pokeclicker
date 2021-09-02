@@ -1,4 +1,3 @@
-// TODO: put in game somewhere
 type Credit = {
     resources: string[],
     name: string,
@@ -31,6 +30,16 @@ const Credits: Credit[] = [
         name: 'torqupine',
         link: 'https://www.deviantart.com/torqupine',
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
+    },
+    {
+        resources: [
+            'Team Flare Grunt Duo',
+            'Brains & Brawn',
+            'Surfer',
+            'Golfer',
+        ],
+        name: 'IanWalder',
+        link: 'No link',
     },
 ];
 
