@@ -665,6 +665,7 @@ class Update implements Saveable {
                                     this.automaticallyDownloadBackup(backupButton, { disableAutoDownloadBackupSaveOnUpdate: false });
                                     localStorage.removeItem(`player${Save.key}`);
                                     localStorage.removeItem(`save${Save.key}`);
+                                    localStorage.removeItem(`settings${Save.key}`);
                                     location.reload();
                                 }
                             });

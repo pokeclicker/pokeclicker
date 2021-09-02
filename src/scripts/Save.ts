@@ -6,8 +6,8 @@ class Save {
     public static store(player: Player) {
         const json = JSON.stringify(player);
         localStorage.setItem(`player${Save.key}`, json);
-        localStorage.setItem('settings', Settings.save());
         localStorage.setItem(`save${Save.key}`, JSON.stringify(this.getSaveObject()));
+        localStorage.setItem(`settings${Save.key}`, Settings.save());
 
         this.counter = 0;
         console.log('%cGame saved', 'color:#3498db;font-weight:900;');
@@ -26,7 +26,7 @@ class Save {
     public static load(): Player {
         const saved = localStorage.getItem(`player${Save.key}`);
 
-        const settings = localStorage.getItem('settings');
+        const settings = localStorage.getItem(`settings${Save.key}`) || localStorage.getItem('settings');
         Settings.load(JSON.parse(settings));
 
         if (saved !== 'null') {
@@ -76,6 +76,7 @@ class Save {
         if (confirmDelete == 'DELETE') {
             localStorage.removeItem(`player${Save.key}`);
             localStorage.removeItem(`save${Save.key}`);
+            localStorage.removeItem(`settings${Save.key}`);
 
             location.reload();
         }
@@ -167,6 +168,7 @@ class Save {
                 if (decoded && json && json.player && json.save) {
                     localStorage.setItem(`player${Save.key}`, JSON.stringify(json.player));
                     localStorage.setItem(`save${Save.key}`, JSON.stringify(json.save));
+                    localStorage.setItem(`settings${Save.key}`, JSON.stringify(json.settings));
                     location.reload();
                 } else {
                     Notifier.notify({
