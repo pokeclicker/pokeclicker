@@ -26,7 +26,7 @@ class Save {
     public static load(): Player {
         const saved = localStorage.getItem(`player${Save.key}`);
 
-        const settings = localStorage.getItem(`settings${Save.key}`) || localStorage.getItem('settings');
+        const settings = localStorage.getItem(`settings${Save.key}`) || localStorage.getItem('settings') || '{}';
         Settings.load(JSON.parse(settings));
 
         if (saved !== 'null') {
