@@ -1,9 +1,5 @@
 @import "variables.less";
 
-@locked: rgba(0, 0, 0, 0.5);
-@currentPlace: rgba(85, 255, 0, 0.5);
-@incomplete: rgba(255, 145, 0, 0.7);
-
 #map {
   rect, path {
     cursor: pointer;
@@ -14,49 +10,35 @@
     pointer-events: none;
   }
 
-  .currentRoute {
-    fill: @currentPlace;
+  .currentLocation {
+    fill: var(--currentPlace);
+    opacity: 0.5;
   }
   
-  .unlockedUnfinishedRoute {
-    fill: @incomplete;
+  .locked {
+    fill: var(--locked);
+    opacity: 0.5;
   }
   
-  .lockedRoute {
-    fill: @locked;
+  .unlockedUnfinished {
+    fill: var(--incomplete);
+    opacity: 0.6;
   }
 
-  .city {
-    fill: @locked;
-
-    &.currentTown {
-      fill: @currentPlace;
-    }
-
-    &.unlockedUnfinishedTown {
-      fill: @incomplete;
-    }
-
-    &.unlockedTown {
-      fill: transparent;
-
-      &.flash {
-        fill: #FFD700;
-        stroke: black;
-      }
-    }
+  .uncaughtPokemon {
+    fill: var(--uncaughtPokemon);
+    opacity: 0.6;
   }
 
-  .dungeon {
-    fill: @locked;
+  .uncaughtShinyPokemon {
+    fill: var(--uncaughtShinyPokemon);
+    opacity: 0.6;
+  }
 
-    &.unlockedDungeon {
-      fill: @incomplete;
-    }
-
-    &.completedDungeon {
-      fill: transparent;
-    }
+  .flash {
+    opacity: 1;
+    fill: #FFD700;
+    stroke: black;
   }
 }
 

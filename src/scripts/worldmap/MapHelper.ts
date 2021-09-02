@@ -73,18 +73,18 @@ class MapHelper {
     }
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
-        let cls;
+        let cls = '';
 
         if (player.route() == route && player.region == region) {
-            cls = 'currentRoute';
-        } else if (MapHelper.accessToRoute(route, region)) {
-            if (App.game.statistics.routeKills[region][route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
-                cls = 'unlockedRoute';
-            } else {
-                cls = 'unlockedUnfinishedRoute';
-            }
-        } else {
-            cls = 'lockedRoute';
+            cls = 'currentLocation';
+        } else if (!MapHelper.accessToRoute(route, region)) {
+            cls = 'locked';
+        } else  if (App.game.statistics.routeKills[region][route]() < GameConstants.ROUTE_KILLS_NEEDED) {
+            cls = 'unlockedUnfinished';
+        } else if (!RouteHelper.routeCompleted(route, region, false)) {
+            cls = 'uncaughtPokemon';
+        } else if (!RouteHelper.routeCompleted(route, region, true)) {
+            cls = 'uncaughtShinyPokemon';
         }
 
         // Water routes
@@ -97,29 +97,28 @@ class MapHelper {
 
     public static calculateTownCssClass(town: string): string {
         if (!player.route() && player.town().name == town) {
-            return 'city currentTown';
+            return 'currentLocation';
         }
-        if (MapHelper.accessToTown(town)) {
-            if (dungeonList.hasOwnProperty(town)) {
-                if (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(town)]()) {
-                    return 'dungeon completedDungeon';
-                }
-                return 'dungeon unlockedDungeon';
-            }
-            if (gymList.hasOwnProperty(town)) {
-                const gym = gymList[town];
-                // If defeated the previous gym, but not this one
-                const gymIndex = GameConstants.getGymIndex(town);
-                if (Gym.isUnlocked(gym) && !App.game.badgeCase.hasBadge(gym.badgeReward)) {
-                    return 'city unlockedUnfinishedTown';
-                }
-            }
-            return 'city unlockedTown';
+        if (!MapHelper.accessToTown(town)) {
+            return 'locked';
         }
         if (dungeonList.hasOwnProperty(town)) {
-            return 'dungeon';
+            if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(town)]()) {
+                return 'unlockedUnfinished';
+            } else if (!DungeonRunner.dungeonCompleted(dungeonList[town], false)) {
+                return 'uncaughtPokemon';
+            } else if (!DungeonRunner.dungeonCompleted(dungeonList[town], true)) {
+                return 'uncaughtShinyPokemon';
+            }
         }
-        return 'city';
+        if (gymList.hasOwnProperty(town)) {
+            const gym = gymList[town];
+            // If defeated the previous gym, but not this one
+            const gymIndex = GameConstants.getGymIndex(town);
+            if (Gym.isUnlocked(gym) && !App.game.badgeCase.hasBadge(gym.badgeReward)) {
+                return 'unlockedUnfinished';
+            }
+        }
     }
 
     public static accessToTown(townName: string): boolean {

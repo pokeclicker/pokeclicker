@@ -2,6 +2,7 @@ import Settings from './Settings';
 import Setting from './Setting';
 import SettingOption from './SettingOption';
 import BooleanSetting from './BooleanSetting';
+import CssVariableSetting from './CssVariableSetting';
 import RangeSetting from './RangeSetting';
 import PokemonType from '../enums/PokemonType';
 import NotificationConstants from '../notifications/NotificationConstants';
@@ -180,6 +181,13 @@ Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
         ...Settings.enumToSettingOptionArray(Region),
     ],
     '-2'));
+
+// CSS variable settings
+Settings.add(new CssVariableSetting('locked', 'Map Color Locked Location', [], '#000'));
+Settings.add(new CssVariableSetting('currentPlace', 'Map Color Current Location', [], '#5f0'));
+Settings.add(new CssVariableSetting('incomplete', 'Map Color Incomplete Area', [], '#ff9100'));
+Settings.add(new CssVariableSetting('uncaughtPokemon', 'Map Color Uncaught Pokemon', [], '#3498db'));
+Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Map Color Uncaught Shiny Pokemon', [], '#fbff00'));
 
 /*
  * SUBSCRIBERS
