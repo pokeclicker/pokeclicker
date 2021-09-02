@@ -39,7 +39,8 @@ const Credits: Credit[] = [
             'Golfer',
         ],
         name: 'IanWalder',
-        link: 'No link',
+        name: 'DaleArwin',
+        link: 'https://www.deviantart.com/dalearwin',
     },
 ];
 
