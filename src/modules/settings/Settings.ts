@@ -26,7 +26,11 @@ export default class Settings {
     }
 
     static toJSON() {
-        return this.list.reduce((_dict, setting) => Object.assign(_dict, { [setting.name]: setting.value }), {});
+        const json = {};
+        this.list.forEach((setting) => {
+            json[setting.name] = setting.value;
+        });
+        return json;
     }
 
     static fromJSON(dict) {
