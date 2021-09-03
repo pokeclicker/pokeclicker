@@ -61,16 +61,6 @@ class ShopHandler {
 
     //#region UI
 
-    public static getShopName(): string {
-        if (this.shopObservable().name) {
-            return this.shopObservable().name;
-        }
-        if (player.town()) {
-            return `${player.town().name} Shop`;
-        }
-        return 'Shop';
-    }
-
     public static calculateCss(i: number): string {
         if (this.selected() == i) {
             return 'shopItem clickable btn btn-secondary active';
