@@ -11,17 +11,38 @@
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                     <thead>
                       <tr>
-                        <th>Credited individual</th>
+                        <th colspan="2">Credited individual</th>
                         <th>Contributed sprites</th>
                       </tr>
                     </thead>
-                    <tbody data-bind="foreach: Credits">
+                    <tbody data-bind="foreach: SpriteCredits">
                       <tr>
-                        <td class="text-left">
-                          <span data-bind="text: name">-</span><br>
-                          <span data-bind="text: link">-</span>
+                        <td class="text-center tight p-0">
+                          <img src="" height="28px" data-bind="attr: { src: image }" onerror="this.src='assets/images/profile/trainer-0.png';"/>
                         </td>
-                        <td class="text-left tight text-muted" data-bind="foreach: resources"><span data-bind="text: $data">-</span><br></td>
+                        <td class="text-left">
+                          <a href="#" data-bind="text: name, attr: { href: link ? link : '#' }">-</span>
+                        </td>
+                        <td class="text-left tight text-muted" data-bind="foreach: resources"><span data-bind="text: $data">-</span><br/></td>
+                      </tr>
+                    </tbody>
+                </table>
+                <table class="table table-striped table-hover table-bordered table-sm m-0">
+                    <thead>
+                      <tr>
+                        <th colspan="2">Credited individual</th>
+                        <th>Code Contributions</th>
+                      </tr>
+                    </thead>
+                    <tbody data-bind="foreach: CodeCredits">
+                      <tr>
+                        <td class="text-center tight p-0">
+                          <img src="" height="28px" data-bind="attr: { src: image }" onerror="this.src='assets/images/profile/trainer-0.png';"/>
+                        </td>
+                        <td class="text-left">
+                          <a href="#" data-bind="text: name, attr: { href: link ? link : '#' }">-</span>
+                        </td>
+                        <td class="text-left tight text-muted" data-bind="foreach: resources"><span data-bind="text: $data">-</span><br/></td>
                       </tr>
                     </tbody>
                 </table>

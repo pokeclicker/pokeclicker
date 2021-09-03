@@ -34,7 +34,7 @@ import Challenges from './challenges/Challenges';
 import LevelType, { levelRequirements } from './party/LevelType';
 import WalletClasses from './wallet/inject';
 import GenericProxy from './utilities/GenericProxy';
-import Credits from './Credits';
+import { SpriteCredits, CodeCredits } from './Credits';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -74,5 +74,6 @@ Object.assign(<any>window, {
     levelRequirements,
     ...WalletClasses,
     GenericProxy,
-    Credits,
+    SpriteCredits,
+    CodeCredits,
 });
