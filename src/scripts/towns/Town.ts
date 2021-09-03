@@ -1960,7 +1960,7 @@ TownList['Camphrier Town'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 5)],
-        npcs: [CamphrierFlabébéEnthusiast]
+        npcs: [CamphrierFlabébéEnthusiast],
     }
 );
 TownList['Ambrette Town'] = new Town(
@@ -2019,7 +2019,7 @@ TownList['Dendemille Town'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 15)],
         shop: DendemilleTownShop,
-        npcs: [DendemilleGoomyEnthusiast]
+        npcs: [DendemilleGoomyEnthusiast],
     }
 );
 TownList['Anistar City'] = new Town(
