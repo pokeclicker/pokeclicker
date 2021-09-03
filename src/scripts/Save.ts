@@ -26,8 +26,12 @@ class Save {
     public static load(): Player {
         const saved = localStorage.getItem(`player${Save.key}`);
 
+        // Load our settings, or the saved default settings, or no settings
         const settings = localStorage.getItem(`settings${Save.key}`) || localStorage.getItem('settings') || '{}';
         Settings.load(JSON.parse(settings));
+
+        // Sort modules now, save settings, load settings
+        SortModules();
 
         if (saved !== 'null') {
             return new Player(JSON.parse(saved));
