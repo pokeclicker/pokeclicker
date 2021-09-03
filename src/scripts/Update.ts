@@ -805,7 +805,7 @@ class Update implements Saveable {
     getSettingsData() {
         let settingsData: any;
         try {
-            settingsData = JSON.parse(localStorage.settings);
+            settingsData = JSON.parse(localStorage.getItem(`settings${Save.key}`) || localStorage.settings);
         } catch (err) {
             console.warn('Error getting settings data', err);
         } finally {
@@ -815,7 +815,7 @@ class Update implements Saveable {
 
     setSettingsData(settingsData: any) {
         try {
-            localStorage.settings = JSON.stringify(settingsData);
+            localStorage.setItem(`settings${Save.key}`, JSON.stringify(settingsData));
         } catch (err) {
             console.error('Error setting settings data', err);
         }

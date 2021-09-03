@@ -4,7 +4,7 @@ const columns = ['left-column', 'middle-top-sort-column', 'middle-bottom-sort-co
 
 // Create the settings to be loaded/saved
 columns.forEach(column => {
-    Settings.add(new Setting(`sort-${column}`, `sort ${column}`, [], ''));
+    Settings.add(new Setting(`modules.${column}`, `Modules sort order ${column}`, [], ''));
 });
 
 const SortModules = () => {
@@ -23,7 +23,7 @@ const SortModules = () => {
             store: {
                 set: sortable => {
                     const order = sortable.toArray();
-                    Settings.setSettingByName(`sort-${column}`, order.join('|'));
+                    Settings.setSettingByName(`modules.${column}`, order.join('|'));
                     // Clear out whitespace
                     if (/^([\s\r\n\t]|<!--.*-->)+$/.test(sortable.el.innerHTML)) {
                         sortable.el.innerHTML = '';
@@ -33,7 +33,7 @@ const SortModules = () => {
             onSort: evt => {
                 const currentSortable = evt.to[Object.keys(evt.to)[0]];
                 const order = currentSortable.toArray();
-                Settings.setSettingByName(`sort-${column}`, order.join('|'));
+                Settings.setSettingByName(`modules.${column}`, order.join('|'));
             },
         });
     });
@@ -41,7 +41,7 @@ const SortModules = () => {
     // Sort the items between columns, in order
     columns.forEach(sortable => {
         const parent = document.getElementById(sortable);
-        const itemOrder = Settings.getSetting(`sort-${sortable}`).observableValue();
+        const itemOrder = Settings.getSetting(`modules.${sortable}`).observableValue();
         const itemOrderArr = itemOrder ? itemOrder.split('|') : [];
 
         let prevItem;

@@ -4,10 +4,9 @@ class Save {
     static key = '';
 
     public static store(player: Player) {
-        const json = JSON.stringify(player);
-        localStorage.setItem(`player${Save.key}`, json);
+        localStorage.setItem(`player${Save.key}`, JSON.stringify(player));
         localStorage.setItem(`save${Save.key}`, JSON.stringify(this.getSaveObject()));
-        localStorage.setItem(`settings${Save.key}`, Settings.save());
+        localStorage.setItem(`settings${Save.key}`, JSON.stringify(Settings.toJSON()));
 
         this.counter = 0;
         console.log('%cGame saved', 'color:#3498db;font-weight:900;');
@@ -28,7 +27,7 @@ class Save {
 
         // Load our settings, or the saved default settings, or no settings
         const settings = localStorage.getItem(`settings${Save.key}`) || localStorage.getItem('settings') || '{}';
-        Settings.load(JSON.parse(settings));
+        Settings.fromJSON(JSON.parse(settings));
 
         // Sort modules now, save settings, load settings
         SortModules();
@@ -41,7 +40,7 @@ class Save {
     }
 
     public static download() {
-        const backupSaveData = {player, save: this.getSaveObject()};
+        const backupSaveData = {player, save: this.getSaveObject(), settings: Settings.toJSON()};
         try {
             const element = document.createElement('a');
             element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(backupSaveData)))}`);

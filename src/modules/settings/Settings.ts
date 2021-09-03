@@ -12,10 +12,6 @@ export default class Settings {
         }
     }
 
-    static load(dict) {
-        Object.entries(dict || {})?.forEach(([name, value]) => this.setSettingByName(name, value));
-    }
-
     static setSettingByName(name: string, value: any) {
         const setting = this.getSetting(name);
         if (setting) {
@@ -29,9 +25,12 @@ export default class Settings {
         return this.list.find((setting) => setting.name === name) || null;
     }
 
-    static save() {
-        const dict = this.list.reduce((_dict, setting) => Object.assign(_dict, { [setting.name]: setting.value }), {});
-        return JSON.stringify(dict);
+    static toJSON() {
+        return this.list.reduce((_dict, setting) => Object.assign(_dict, { [setting.name]: setting.value }), {});
+    }
+
+    static fromJSON(dict) {
+        Object.entries(dict || {})?.forEach(([name, value]) => this.setSettingByName(name, value));
     }
 
     static enumToSettingOptionArray(obj: any, filter: (v) => boolean = () => true) {
@@ -39,12 +38,12 @@ export default class Settings {
     }
 
     static saveDefault() {
-        localStorage.setItem('settings', Settings.save());
+        localStorage.setItem('settings', JSON.stringify(Settings.toJSON()));
     }
 
     static loadDefault() {
         const settings = localStorage.getItem('settings') || '{}';
-        this.load(JSON.parse(settings));
+        this.fromJSON(JSON.parse(settings));
     }
 
     static resetDefault() {
