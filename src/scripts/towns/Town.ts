@@ -9,8 +9,7 @@
 
 type TownOptionalArgument = {
     requirements?: (Requirement | OneFromManyRequirement)[],
-    shop?: Shop,
-    berryMaster?: Shop,
+    shops?: Shop[],
     dungeon?: Dungeon,
     npcs?: NPC[],
 };
@@ -20,8 +19,7 @@ class Town {
     public region: GameConstants.Region;
     public gym?: Gym;
     public requirements: (Requirement | OneFromManyRequirement)[];
-    public shop?: Shop;
-    public berryMaster?: Shop;
+    public shops: Shop[];
     public dungeon?: Dungeon;
     public npcs?: NPC[];
     public startingTown: boolean;
@@ -37,8 +35,7 @@ class Town {
         this.region = region;
         this.gym = gymList[name];
         this.requirements = optional.requirements || [];
-        this.shop = optional.shop;
-        this.berryMaster = optional.berryMaster;
+        this.shops = optional.shops || [];
         this.dungeon = optional.dungeon;
         this.npcs = optional.npcs;
         this.startingTown = GameConstants.StartingTowns.includes(this.name);
@@ -70,45 +67,45 @@ const pokeMartShop = new Shop([
     ItemList['SmallRestore'],
     ItemList['MediumRestore'],
     ItemList['LargeRestore'],
-], 'Poké Mart');
+], 'Explorers Poké Mart');
 
 //Kanto Shops
-const PewterCityShop = new Shop([
+const PewterCityShop = new TownShop([
     ItemList['Pokeball'],
     ItemList['Token_collector'],
     ItemList['Lucky_egg'],
     ItemList['Mystery_egg'],
 ]);
-const CeruleanCityShop = new Shop([
+const CeruleanCityShop = new TownShop([
     ItemList['Water_stone'],
     ItemList['xAttack'],
     ItemList['Water_egg'],
 ]);
-const VermilionCityShop = new Shop([
+const VermilionCityShop = new TownShop([
     ItemList['Thunder_stone'],
     ItemList['Lucky_egg'],
     ItemList['Electric_egg'],
 ]);
-const CeladonCityShop = new Shop([
+const CeladonCityShop = new TownShop([
     ItemList['Eevee'],
     ItemList['Porygon'],
     ItemList['Jynx'],
     ItemList['Mr. Mime'],
     ItemList['Lickitung'],
 ]);
-const SaffronCityShop = new Shop([
+const SaffronCityShop = new TownShop([
     ItemList['Moon_stone'],
     ItemList['xClick'],
     ItemList['Leaf_stone'],
     ItemList['Fighting_egg'],
 ]);
-const FuchsiaCityShop = new Shop([
+const FuchsiaCityShop = new TownShop([
     ItemList['Ultraball'],
     ItemList['Trade_stone'],
     ItemList['Lucky_egg'],
     ItemList['Dragon_egg'],
 ]);
-const CinnabarIslandShop = new Shop([
+const CinnabarIslandShop = new TownShop([
     ItemList['Fire_stone'],
     ItemList['Fire_egg'],
     ItemList['SmallRestore'],
@@ -116,13 +113,13 @@ const CinnabarIslandShop = new Shop([
     ItemList['Explosive_Charge'],
     ItemList['Treasure_Scanner'],
 ]);
-const ViridianCityShop = new Shop([
+const ViridianCityShop = new TownShop([
     ItemList['Pokeball'],
     ItemList['xAttack'],
     ItemList['xClick'],
     ItemList['Dungeon_ticket'],
 ]);
-const LavenderTownShop = new Shop([
+const LavenderTownShop = new TownShop([
     ItemList['Greatball'],
     ItemList['Item_magnet'],
     ItemList['Lucky_incense'],
@@ -190,7 +187,7 @@ TownList['Pewter City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 2),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Viridian Forest')),
         ],
-        shop: PewterCityShop,
+        shops: [PewterCityShop],
         npcs: [BattleItemRival],
     }
 );
@@ -199,7 +196,7 @@ TownList['Cerulean City'] = new Town(
     GameConstants.Region.kanto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
-        shop: CeruleanCityShop,
+        shops: [CeruleanCityShop],
         dungeon: dungeonList['Cerulean Cave'],
         npcs: [KantoBerryMaster],
     }
@@ -209,7 +206,7 @@ TownList['Vermilion City'] = new Town(
     GameConstants.Region.kanto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
-        shop: VermilionCityShop,
+        shops: [VermilionCityShop],
         npcs: [VermillionFanClubChairman],
     }
 );
@@ -218,7 +215,7 @@ TownList['Celadon City'] = new Town(
     GameConstants.Region.kanto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
-        shop: CeladonCityShop,
+        shops: [CeladonCityShop],
         npcs: [BigSpender],
     }
 );
@@ -227,7 +224,7 @@ TownList['Saffron City'] = new Town(
     GameConstants.Region.kanto,
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Rainbow)],
-        shop: SaffronCityShop,
+        shops: [SaffronCityShop],
         npcs: [BattleItemRival2],
     }
 );
@@ -239,7 +236,7 @@ TownList['Fuchsia City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 18),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 15),
         ])],
-        shop: FuchsiaCityShop,
+        shops: [FuchsiaCityShop],
         npcs: [KantoRoamerNPC],
     }
 );
@@ -251,7 +248,7 @@ TownList['Cinnabar Island'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 20),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 21),
         ])],
-        shop: CinnabarIslandShop,
+        shops: [CinnabarIslandShop],
         dungeon: dungeonList['Pokemon Mansion'],
         npcs: [CinnabarIslandResearcher],
     }
@@ -261,7 +258,7 @@ TownList['Viridian City'] = new Town(
     GameConstants.Region.kanto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 1)],
-        shop: ViridianCityShop,
+        shops: [ViridianCityShop],
         npcs: [ViridianCityOldMan],
     }
 );
@@ -277,7 +274,7 @@ TownList['Lavender Town'] = new Town(
     GameConstants.Region.kanto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
-        shop: LavenderTownShop,
+        shops: [LavenderTownShop],
         dungeon: dungeonList['Pokemon Tower'],
         npcs: [LavenderMrFuji],
     }
@@ -348,50 +345,50 @@ TownList['Cerulean Cave'] = new DungeonTown(
 );
 
 //Johto Shops
-const NewBarkTownShop = new Shop([
+const NewBarkTownShop = new TownShop([
     ItemList['Pokeball'],
 ]);
-const CherrygroveCityShop = new Shop([
+const CherrygroveCityShop = new TownShop([
     ItemList['Greatball'],
 ]);
-const VioletCityShop = new Shop([
+const VioletCityShop = new TownShop([
     ItemList['MediumRestore'],
     ItemList['Togepi'],
     ItemList['Mystery_egg'],
 ]);
-const AzaleaTownShop = new Shop([
+const AzaleaTownShop = new TownShop([
     ItemList['Kings_rock'],
     ItemList['Grass_egg'],
 ]);
-const GoldenrodCityShop = new Shop([
+const GoldenrodCityShop = new TownShop([
     ItemList['Sun_stone'],
     ItemList['Upgrade'],
     ItemList['Soothe_bell'],
 ]);
-const EcruteakCityShop = new Shop([
+const EcruteakCityShop = new TownShop([
     ItemList['Greatball'],
     ItemList['Fire_egg'],
 ]);
-const OlivineCityShop = new Shop([
+const OlivineCityShop = new TownShop([
     ItemList['Metal_coat'],
     ItemList['Water_egg'],
     ItemList['Electric_egg'],
 ]);
-const CianwoodCityShop = new Shop([
+const CianwoodCityShop = new TownShop([
     ItemList['Ultraball'],
     ItemList['Fighting_egg'],
 ]);
-const MahoganyTownShop = new Shop([
+const MahoganyTownShop = new TownShop([
     ItemList['Fighting_egg'],
 ]);
-const BlackthornCityShop = new Shop([
+const BlackthornCityShop = new TownShop([
     ItemList['LargeRestore'],
     ItemList['Dragon_scale'],
 ]);
 
 // Johto NPCs
 
-const JohtoBerryMaster = new Shop([
+const JohtoBerryMaster = new BerryMasterShop([
     ItemList['Boost_Mulch'],
     ItemList['Rich_Mulch'],
     ItemList['Surprise_Mulch'],
@@ -452,7 +449,7 @@ TownList['New Bark Town'] = new Town(
     'New Bark Town',
     GameConstants.Region.johto,
     {
-        shop: NewBarkTownShop,
+        shops: [NewBarkTownShop],
         npcs: [NewBarkTechnologyEnthusiast],
     }
 );
@@ -461,7 +458,7 @@ TownList['Cherrygrove City'] = new Town(
     GameConstants.Region.johto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 29)],
-        shop: CherrygroveCityShop,
+        shops: [CherrygroveCityShop],
         npcs: [CherrygroveMrPokemon],
     }
 );
@@ -470,7 +467,7 @@ TownList['Violet City'] = new Town(
     GameConstants.Region.johto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 31)],
-        shop: VioletCityShop,
+        shops: [VioletCityShop],
         dungeon: dungeonList['Sprout Tower'],
         npcs: [VioletEarlDervish],
     }
@@ -480,7 +477,7 @@ TownList['Azalea Town'] = new Town(
     GameConstants.Region.johto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 33)],
-        shop: AzaleaTownShop,
+        shops: [AzaleaTownShop],
         dungeon: dungeonList['Slowpoke Well'],
         npcs: [AzaleaOldMan],
     }
@@ -490,8 +487,7 @@ TownList['Goldenrod City'] = new Town(
     GameConstants.Region.johto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
-        shop: GoldenrodCityShop,
-        berryMaster: JohtoBerryMaster,
+        shops: [GoldenrodCityShop, JohtoBerryMaster],
         npcs: [BigSpender],
     }
 );
@@ -500,7 +496,7 @@ TownList['Ecruteak City'] = new Town(
     GameConstants.Region.johto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 37)],
-        shop: EcruteakCityShop,
+        shops: [EcruteakCityShop],
         npcs: [EcruteakKimonoGirl],
     }
 );
@@ -509,7 +505,7 @@ TownList['Olivine City'] = new Town(
     GameConstants.Region.johto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 39)],
-        shop: OlivineCityShop,
+        shops: [OlivineCityShop],
         npcs: [OlivineSSAquaCaptain],
     }
 );
@@ -518,7 +514,7 @@ TownList['Cianwood City'] = new Town(
     GameConstants.Region.johto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 41)],
-        shop: CianwoodCityShop,
+        shops: [CianwoodCityShop],
         npcs: [CianwoodPhotographyAide],
     }
 );
@@ -527,7 +523,7 @@ TownList['Mahogany Town'] = new Town(
     GameConstants.Region.johto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 42)],
-        shop: MahoganyTownShop,
+        shops: [MahoganyTownShop],
         npcs: [MahoganySouvenirShopAttendant],
     }
 );
@@ -536,7 +532,7 @@ TownList['Blackthorn City'] = new Town(
     GameConstants.Region.johto,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ice Path'))],
-        shop: BlackthornCityShop,
+        shops: [BlackthornCityShop],
         npcs: [JohtoRoamerNPC],
     }
 );
@@ -610,37 +606,37 @@ TownList['Mt Silver'] = new DungeonTown(
 );
 
 //Hoenn Shops
-const LittleRootTownShop = new Shop([
+const LittleRootTownShop = new TownShop([
     ItemList['Pokeball'],
 ]);
-const RustboroCityShop = new Shop([
+const RustboroCityShop = new TownShop([
     ItemList['Mystery_egg'],
 ]);
-const DewfordTownShop = new Shop([
+const DewfordTownShop = new TownShop([
     ItemList['Fighting_egg'],
 ]);
-const SlateportCityShop = new Shop([
+const SlateportCityShop = new TownShop([
     ItemList['Greatball'],
     ItemList['Water_egg'],
 ]);
-const MauvilleCityShop = new Shop([
+const MauvilleCityShop = new TownShop([
     ItemList['Electric_egg'],
 ]);
-const VerdanturfTownShop = new Shop([
+const VerdanturfTownShop = new TownShop([
     ItemList['Grass_egg'],
     ItemList['Soothe_bell'],
 ]);
-const LavaridgeTownShop = new Shop([
+const LavaridgeTownShop = new TownShop([
     ItemList['Fire_egg'],
 ]);
-const FallarborTownShop = new Shop([
+const FallarborTownShop = new TownShop([
     ItemList['Moon_stone'],
 ]);
-const FortreeCityShop = new Shop([
+const FortreeCityShop = new TownShop([
     ItemList['Ultraball'],
     ItemList['Leaf_stone'],
 ]);
-const LilyCoveCityShop = new Shop([
+const LilyCoveCityShop = new TownShop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
@@ -654,22 +650,22 @@ const LilyCoveCityShop = new Shop([
     ItemList['Item_magnet'],
     ItemList['Lucky_incense'],
 ]);
-const MossdeepCityShop = new Shop([
+const MossdeepCityShop = new TownShop([
     ItemList['Beldum'],
     ItemList['Prism_scale'],
 ]);
-const SootopolisCityShop = new Shop([
+const SootopolisCityShop = new TownShop([
     ItemList['Water_stone'],
 ]);
-const PacifidlogTownShop = new Shop([
+const PacifidlogTownShop = new TownShop([
     ItemList['Deepsea_tooth'],
     ItemList['Deepsea_scale'],
 ]);
-const EverGrandeCityShop = new Shop([
+const EverGrandeCityShop = new TownShop([
     ItemList['Dragon_egg'],
 ]);
 // TODO: finalize items and prices
-const BattleFrontierShop = new Shop([
+const BattleFrontierShop = new TownShop([
     new PokeballItem(GameConstants.Pokeball.Ultraball, 1, GameConstants.Currency.battlePoint),
     new PokeballItem(GameConstants.Pokeball.Masterball, 500, GameConstants.Currency.battlePoint , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.battlePoint]}` }),
     new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 10, GameConstants.Currency.battlePoint),
@@ -679,7 +675,7 @@ const BattleFrontierShop = new Shop([
 ]);
 
 //Hoenn Berry Master
-const HoennBerryMaster = new Shop([
+const HoennBerryMaster = new BerryMasterShop([
     ItemList['Boost_Mulch'],
     ItemList['Rich_Mulch'],
     ItemList['Surprise_Mulch'],
@@ -733,7 +729,7 @@ TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
     GameConstants.Region.hoenn,
     {
-        shop: LittleRootTownShop,
+        shops: [LittleRootTownShop],
         npcs: [LittlerootAide],
     }
 );
@@ -757,7 +753,7 @@ TownList['Rustboro City'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Petalburg Woods'))],
-        shop: RustboroCityShop,
+        shops: [RustboroCityShop],
     }
 );
 TownList['Dewford Town'] = new Town(
@@ -765,7 +761,7 @@ TownList['Dewford Town'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rusturf Tunnel'))],
-        shop: DewfordTownShop,
+        shops: [DewfordTownShop],
     }
 );
 TownList['Slateport City'] = new Town(
@@ -776,7 +772,7 @@ TownList['Slateport City'] = new Town(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Granite Cave')),
             new GymBadgeRequirement(BadgeEnums.Knuckle),
         ],
-        shop: SlateportCityShop,
+        shops: [SlateportCityShop],
         npcs: [HoennRoamerNPC],
     }
 );
@@ -785,8 +781,7 @@ TownList['Mauville City'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 110)],
-        shop: MauvilleCityShop,
-        berryMaster: HoennBerryMaster,
+        shops: [MauvilleCityShop, HoennBerryMaster],
     }
 );
 TownList['Verdanturf Town'] = new Town(
@@ -794,7 +789,7 @@ TownList['Verdanturf Town'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 117)],
-        shop: VerdanturfTownShop,
+        shops: [VerdanturfTownShop],
     }
 );
 TownList['Lavaridge Town'] = new Town(
@@ -802,7 +797,7 @@ TownList['Lavaridge Town'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Jagged Pass'))],
-        shop: LavaridgeTownShop,
+        shops: [LavaridgeTownShop],
     }
 );
 TownList['Fallarbor Town'] = new Town(
@@ -810,7 +805,7 @@ TownList['Fallarbor Town'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 113)],
-        shop: FallarborTownShop,
+        shops: [FallarborTownShop],
         npcs: [FallarborProfessorCozmo],
     }
 );
@@ -819,7 +814,7 @@ TownList['Fortree City'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))],
-        shop: FortreeCityShop,
+        shops: [FortreeCityShop],
         npcs: [Weatherman],
     }
 );
@@ -828,7 +823,7 @@ TownList['LilyCove City'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
-        shop: LilyCoveCityShop,
+        shops: [LilyCoveCityShop],
         npcs: [BigSpender],
     }
 );
@@ -837,7 +832,7 @@ TownList['Mossdeep City'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 125)],
-        shop: MossdeepCityShop,
+        shops: [MossdeepCityShop],
         npcs: [MossdeepAstronomer],
     }
 );
@@ -846,7 +841,7 @@ TownList['Sootopolis City'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 126), new GymBadgeRequirement(BadgeEnums.Mind)],
-        shop: SootopolisCityShop,
+        shops: [SootopolisCityShop],
         npcs: [SootopolisWallace],
     }
 );
@@ -855,7 +850,7 @@ TownList['Ever Grande City'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Rain)],
-        shop: EverGrandeCityShop,
+        shops: [EverGrandeCityShop],
     }
 );
 TownList['Pokémon League Hoenn'] = new Town(
@@ -873,7 +868,7 @@ TownList['Pacifidlog Town'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 131)],
-        shop: PacifidlogTownShop,
+        shops: [PacifidlogTownShop],
     }
 );
 TownList['Battle Frontier'] = new Town(
@@ -881,7 +876,7 @@ TownList['Battle Frontier'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
-        shop: BattleFrontierShop,
+        shops: [BattleFrontierShop],
     }
 );
 
@@ -993,26 +988,26 @@ TownList['Sealed Chamber'] = new DungeonTown(
 );
 
 //Sinnoh Shops
-const TwinleafTownShop = new Shop([
+const TwinleafTownShop = new TownShop([
     ItemList['Pokeball'],
 ]);
-const OreburghCityShop = new Shop([
+const OreburghCityShop = new TownShop([
     ItemList['Mystery_egg'],
 ]);
-const EternaCityShop = new Shop([
+const EternaCityShop = new TownShop([
     ItemList['Grass_egg'],
 ]);
-const HearthomeCityShop = new Shop([
+const HearthomeCityShop = new TownShop([
     ItemList['Soothe_bell'],
     ItemList['Fire_egg'],
 ]);
-const SolaceonTownShop = new Shop([
+const SolaceonTownShop = new TownShop([
     ItemList['Dawn_stone'],
     ItemList['Dusk_stone'],
     ItemList['Shiny_stone'],
     ItemList['Spiritomb'],
 ]);
-const VeilstoneCityShop = new Shop([
+const VeilstoneCityShop = new TownShop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
@@ -1026,39 +1021,39 @@ const VeilstoneCityShop = new Shop([
     ItemList['Item_magnet'],
     ItemList['Lucky_incense'],
 ]);
-const CelesticTownShop = new Shop([
+const CelesticTownShop = new TownShop([
     ItemList['Dragon_egg'],
 ]);
-const CanalaveCityShop = new Shop ([
+const CanalaveCityShop = new TownShop ([
     ItemList['Fighting_egg'],
 ]);
-const PalParkShop = new Shop([
+const PalParkShop = new TownShop([
     ItemList['Razor_claw'],
     ItemList['Razor_fang'],
     ItemList['Combee'],
     ItemList['Burmy (plant)'],
     ItemList['Cherubi'],
 ]);
-const SunyshoreCityShop = new Shop([
+const SunyshoreCityShop = new TownShop([
     ItemList['Electric_egg'],
 ]);
-const SurvivalAreaShop = new Shop([
+const SurvivalAreaShop = new TownShop([
     ItemList['Electirizer'],
     ItemList['Magmarizer'],
 ]);
-const ResortAreaShop = new Shop([
+const ResortAreaShop = new TownShop([
     ItemList['Reaper_cloth'],
     ItemList['Dubious_disc'],
     ItemList['Protector'],
 ]);
-const PastoriaShop = new Shop([
+const PastoriaShop = new TownShop([
     ItemList['Ultraball'],
     ItemList['Skorupi'],
     ItemList['Water_egg'],
 ]);
 
 //Sinnoh Berry Master
-const SinnohBerryMaster = new Shop([
+const SinnohBerryMaster = new BerryMasterShop([
     ItemList['Boost_Mulch'],
     ItemList['Rich_Mulch'],
     ItemList['Surprise_Mulch'],
@@ -1127,7 +1122,7 @@ TownList['Twinleaf Town'] = new Town(
     'Twinleaf Town',
     GameConstants.Region.sinnoh,
     {
-        shop: TwinleafTownShop,
+        shops: [TwinleafTownShop],
         npcs: [TwinleafContestChampion],
     }
 );
@@ -1151,7 +1146,7 @@ TownList['Oreburgh City'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Oreburgh Gate'))],
-        shop: OreburghCityShop,
+        shops: [OreburghCityShop],
         npcs: [OreburghConstructionWorker],
     }
 );
@@ -1168,7 +1163,7 @@ TownList['Eterna City'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Eterna Forest'))],
-        shop: EternaCityShop,
+        shops: [EternaCityShop],
         npcs: [EternaLassCaroline],
     }
 );
@@ -1177,8 +1172,7 @@ TownList['Hearthome City'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208)],
-        shop: HearthomeCityShop,
-        berryMaster: SinnohBerryMaster,
+        shops: [HearthomeCityShop, SinnohBerryMaster],
         npcs: [HearthomeContestFan],
     }
 );
@@ -1187,7 +1181,7 @@ TownList['Solaceon Town'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 209)],
-        shop: SolaceonTownShop,
+        shops: [SolaceonTownShop],
     }
 );
 TownList['Veilstone City'] = new Town(
@@ -1195,7 +1189,7 @@ TownList['Veilstone City'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 215)],
-        shop: VeilstoneCityShop,
+        shops: [VeilstoneCityShop],
         npcs: [BigSpender],
     }
 );
@@ -1204,7 +1198,7 @@ TownList['Pastoria City'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 213)],
-        shop: PastoriaShop,
+        shops: [PastoriaShop],
     }
 );
 TownList['Celestic Town'] = new Town(
@@ -1215,7 +1209,7 @@ TownList['Celestic Town'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.sinnoh, 210),
             new GymBadgeRequirement(BadgeEnums.Fen),
         ],
-        shop: CelesticTownShop,
+        shops: [CelesticTownShop],
     }
 );
 TownList['Pal Park'] = new Town(
@@ -1223,7 +1217,7 @@ TownList['Pal Park'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 221)],
-        shop: PalParkShop,
+        shops: [PalParkShop],
         npcs: [PalParkWarden],
     }
 );
@@ -1232,7 +1226,7 @@ TownList['Canalave City'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
-        shop: CanalaveCityShop,
+        shops: [CanalaveCityShop],
         npcs: [CanalaveYoungBoy],
     }
 );
@@ -1249,7 +1243,7 @@ TownList['Sunyshore City'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 222)],
-        shop: SunyshoreCityShop,
+        shops: [SunyshoreCityShop],
         npcs: [SunyshoreRibbonerJulia],
     }
 );
@@ -1272,7 +1266,7 @@ TownList['Survival Area'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 225)],
-        shop: SurvivalAreaShop,
+        shops: [SurvivalAreaShop],
         npcs: [SinnohRoamerNPC],
     }
 );
@@ -1281,7 +1275,7 @@ TownList['Resort Area'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 229)],
-        shop: ResortAreaShop,
+        shops: [ResortAreaShop],
     }
 );
 
@@ -1432,37 +1426,37 @@ TownList['Snowpoint Temple'] = new DungeonTown(
 );
 
 //Unova Shops
-const AspertiaCityShop = new Shop([
+const AspertiaCityShop = new TownShop([
     ItemList['Pokeball'],
 ]);
-const FloccesyTownShop = new Shop([
+const FloccesyTownShop = new TownShop([
     ItemList['Mystery_egg'],
 ]);
-const VirbankCityShop = new Shop([
+const VirbankCityShop = new TownShop([
     ItemList['Greatball'],
 ]);
-const CasteliaCityShop = new Shop([
+const CasteliaCityShop = new TownShop([
     ItemList['Trade_stone'],
     ItemList['Water_egg'],
 ]);
-const NimbasaCityShop = new Shop([
+const NimbasaCityShop = new TownShop([
     ItemList['Grass_egg'],
     ItemList['Electric_egg'],
 ]);
-const DriftveilCityShop = new Shop([
+const DriftveilCityShop = new TownShop([
     ItemList['Zorua'],
 ]);
-const MistraltonCityShop = new Shop([
+const MistraltonCityShop = new TownShop([
     ItemList['Ultraball'],
     ItemList['Thunder_stone'],
 ]);
-const LentimasTownShop = new Shop([
+const LentimasTownShop = new TownShop([
     ItemList['Fire_egg'],
 ]);
-const LacunosaTownShop = new Shop([
+const LacunosaTownShop = new TownShop([
     ItemList['Fighting_egg'],
 ]);
-const OpelucidCityShop = new Shop([
+const OpelucidCityShop = new TownShop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
@@ -1476,26 +1470,26 @@ const OpelucidCityShop = new Shop([
     ItemList['Item_magnet'],
     ItemList['Lucky_incense'],
 ]);
-const IcirrusCityShop = new Shop([
+const IcirrusCityShop = new TownShop([
     ItemList['Dragon_egg'],
 ]);
-const BlackAndWhiteParkShop = new Shop([
+const BlackAndWhiteParkShop = new TownShop([
     ItemList['Moon_stone'],
     ItemList['Sun_stone'],
 ]);
-const NacreneCityShop = new Shop([
+const NacreneCityShop = new TownShop([
     ItemList['Soothe_bell'],
 ]);
-const StriatonCityShop = new Shop([
+const StriatonCityShop = new TownShop([
     ItemList['Leaf_stone'],
     ItemList['Water_stone'],
     ItemList['Fire_stone'],
 ]);
-const AccumulaTownShop = new Shop([
+const AccumulaTownShop = new TownShop([
     ItemList['Dusk_stone'],
     ItemList['Shiny_stone'],
 ]);
-const AnvilleTownShop = new Shop([
+const AnvilleTownShop = new TownShop([
     ItemList['Meloetta (pirouette)'],
 ]);
 
@@ -1521,7 +1515,7 @@ TownList['Aspertia City'] = new Town(
     'Aspertia City',
     GameConstants.Region.unova,
     {
-        shop: AspertiaCityShop,
+        shops: [AspertiaCityShop],
     }
 );
 TownList['Floccesy Town'] = new Town(
@@ -1529,7 +1523,7 @@ TownList['Floccesy Town'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 19)],
-        shop: FloccesyTownShop,
+        shops: [FloccesyTownShop],
     }
 );
 TownList['Virbank City'] = new Town(
@@ -1537,7 +1531,7 @@ TownList['Virbank City'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Basic)],
-        shop: VirbankCityShop,
+        shops: [VirbankCityShop],
     }
 );
 TownList['Castelia City'] = new Town(
@@ -1545,7 +1539,7 @@ TownList['Castelia City'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Toxic)],
-        shop: CasteliaCityShop,
+        shops: [CasteliaCityShop],
         dungeon: dungeonList['Castelia Sewers'],
         npcs: [CasteliaMusician],
     }
@@ -1558,7 +1552,7 @@ TownList['Nimbasa City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.unova, 4),
             new GymBadgeRequirement(BadgeEnums.Insect),
         ],
-        shop: NimbasaCityShop,
+        shops: [NimbasaCityShop],
     }
 );
 TownList['Driftveil City'] = new Town(
@@ -1569,7 +1563,7 @@ TownList['Driftveil City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.unova,5),
             new GymBadgeRequirement(BadgeEnums.Bolt),
         ],
-        shop: DriftveilCityShop,
+        shops: [DriftveilCityShop],
     }
 );
 TownList['Mistralton City'] = new Town(
@@ -1580,7 +1574,7 @@ TownList['Mistralton City'] = new Town(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Chargestone Cave')),
             new GymBadgeRequirement(BadgeEnums.Quake),
         ],
-        shop: MistraltonCityShop,
+        shops: [MistraltonCityShop],
     }
 );
 TownList['Lentimas Town'] = new Town(
@@ -1588,7 +1582,7 @@ TownList['Lentimas Town'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Jet)],
-        shop: LentimasTownShop,
+        shops: [LentimasTownShop],
     }
 );
 TownList['Undella Town'] = new Town(
@@ -1603,7 +1597,7 @@ TownList['Lacunosa Town'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 13)],
-        shop: LacunosaTownShop,
+        shops: [LacunosaTownShop],
     }
 );
 TownList['Opelucid City'] = new Town(
@@ -1611,7 +1605,7 @@ TownList['Opelucid City'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 11)],
-        shop: OpelucidCityShop,
+        shops: [OpelucidCityShop],
         dungeon: dungeonList['Team Plasma Assault'],
     }
 );
@@ -1638,7 +1632,7 @@ TownList['Icirrus City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.unova, 8),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Twist Mountain')),
         ])],
-        shop: IcirrusCityShop,
+        shops: [IcirrusCityShop],
         npcs: [UnovaRoamerNPC],
     }
 );
@@ -1653,7 +1647,7 @@ TownList['Black and White Park'] = new Town(
             ]),
             new RouteKillRequirement(10, GameConstants.Region.unova, 15),
         ])],
-        shop: BlackAndWhiteParkShop,
+        shops: [BlackAndWhiteParkShop],
     }
 );
 TownList['Nacrene City'] = new Town(
@@ -1661,7 +1655,7 @@ TownList['Nacrene City'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinwheel Forest'))],
-        shop: NacreneCityShop,
+        shops: [NacreneCityShop],
     }
 );
 TownList['Striaton City'] = new Town(
@@ -1669,7 +1663,7 @@ TownList['Striaton City'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 3)],
-        shop: StriatonCityShop,
+        shops: [StriatonCityShop],
     }
 );
 TownList['Accumula Town'] = new Town(
@@ -1677,7 +1671,7 @@ TownList['Accumula Town'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 2)],
-        shop: AccumulaTownShop,
+        shops: [AccumulaTownShop],
     }
 );
 TownList['Nuvema Town'] = new Town(
@@ -1692,7 +1686,7 @@ TownList['Anville Town'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new ObtainedPokemonRequirement(pokemonMap['Meloetta (aria)'])],
-        shop: AnvilleTownShop,
+        shops: [AnvilleTownShop],
     }
 );
 
@@ -1847,41 +1841,41 @@ TownList['P2 Laboratory'] = new DungeonTown(
 );
 
 //Kalos Shops
-const VanivilleTownShop = new Shop([
+const VanivilleTownShop = new TownShop([
     ItemList['Pokeball'],
 ]);
-const SantaluneCityShop = new Shop([
+const SantaluneCityShop = new TownShop([
     ItemList['Mystery_egg'],
 ]);
-const LumioseCityShop = new Shop([
+const LumioseCityShop = new TownShop([
     ItemList['Greatball'],
     ItemList['Electric_egg'],
 ]);
-const AmbretteTownShop = new Shop([
+const AmbretteTownShop = new TownShop([
     ItemList['Water_egg'],
 ]);
-const GeosengeTownShop = new Shop([
+const GeosengeTownShop = new TownShop([
     ItemList['Fire_egg'],
 ]);
-const ShalourCityShop = new Shop([
+const ShalourCityShop = new TownShop([
     ItemList['Fighting_egg'],
 ]);
-const CoumarineCityShop = new Shop([
+const CoumarineCityShop = new TownShop([
     ItemList['Ultraball'],
     ItemList['Grass_egg'],
 ]);
-const LaverreCityShop = new Shop([
+const LaverreCityShop = new TownShop([
     ItemList['Sachet'],
     ItemList['Whipped_dream'],
 ]);
-const DendemilleTownShop = new Shop([
+const DendemilleTownShop = new TownShop([
     ItemList['Dusk_stone'],
     ItemList['Shiny_stone'],
 ]);
-const AnistarCityShop = new Shop([
+const AnistarCityShop = new TownShop([
     ItemList['Sun_stone'],
 ]);
-const CouriwayTownShop = new Shop([
+const CouriwayTownShop = new TownShop([
     ItemList['Dragon_egg'],
 ]);
 
@@ -1917,7 +1911,7 @@ TownList['Vaniville Town'] = new Town(
     'Vaniville Town',
     GameConstants.Region.kalos,
     {
-        shop: VanivilleTownShop,
+        shops: [VanivilleTownShop],
     }
 );
 TownList['Aquacorde Town'] = new Town(
@@ -1932,7 +1926,7 @@ TownList['Santalune City'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 3)],
-        shop: SantaluneCityShop,
+        shops: [SantaluneCityShop],
     }
 );
 TownList['Lumiose City'] = new Town(
@@ -1940,7 +1934,7 @@ TownList['Lumiose City'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
-        shop: LumioseCityShop,
+        shops: [LumioseCityShop],
         npcs: [LumioseEngineer],
     }
 );
@@ -1956,7 +1950,7 @@ TownList['Ambrette Town'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 8)],
-        shop: AmbretteTownShop,
+        shops: [AmbretteTownShop],
     }
 );
 TownList['Cyllage City'] = new Town(
@@ -1971,7 +1965,7 @@ TownList['Geosenge Town'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 10)],
-        shop: GeosengeTownShop,
+        shops: [GeosengeTownShop],
         dungeon: dungeonList['Team Flare Secret HQ'],
     }
 );
@@ -1980,7 +1974,7 @@ TownList['Shalour City'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reflection Cave'))],
-        shop: ShalourCityShop,
+        shops: [ShalourCityShop],
     }
 );
 TownList['Coumarine City'] = new Town(
@@ -1988,7 +1982,7 @@ TownList['Coumarine City'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)],
-        shop: CoumarineCityShop,
+        shops: [CoumarineCityShop],
         npcs: [Birdwatcher],
     }
 );
@@ -1997,7 +1991,7 @@ TownList['Laverre City'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 14)],
-        shop: LaverreCityShop,
+        shops: [LaverreCityShop],
         npcs: [LaverreFurisodeGirlKatherine],
     }
 );
@@ -2006,7 +2000,7 @@ TownList['Dendemille Town'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 15)],
-        shop: DendemilleTownShop,
+        shops: [DendemilleTownShop],
     }
 );
 TownList['Anistar City'] = new Town(
@@ -2014,7 +2008,7 @@ TownList['Anistar City'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 17)],
-        shop: AnistarCityShop,
+        shops: [AnistarCityShop],
         npcs: [KalosRoamerNPC],
     }
 );
@@ -2023,7 +2017,7 @@ TownList['Couriway Town'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 18)],
-        shop: CouriwayTownShop,
+        shops: [CouriwayTownShop],
     }
 );
 TownList['Snowbelle City'] = new Town(
@@ -2131,21 +2125,21 @@ TownList['Victory Road Kalos'] = new DungeonTown(
 
 //Alola Shops
 
-const IkiTownShop = new Shop([
+const IkiTownShop = new TownShop([
     ItemList['Pokeball'],
 ]);
-const HauoliCityShop = new Shop([
+const HauoliCityShop = new TownShop([
     ItemList['Mystery_egg'],
 ]);
-const HeaheaCityShop = new Shop([
+const HeaheaCityShop = new TownShop([
     ItemList['Greatball'],
 ]);
-const PaniolaTownShop = new Shop([
+const PaniolaTownShop = new TownShop([
     ItemList['Grass_egg'],
     ItemList['Fire_egg'],
     ItemList['Water_egg'],
 ]);
-const RoyalAvenueShop = new Shop([
+const RoyalAvenueShop = new TownShop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
@@ -2159,28 +2153,28 @@ const RoyalAvenueShop = new Shop([
     ItemList['Item_magnet'],
     ItemList['Lucky_incense'],
 ]);
-const KonikoniCityShop = new Shop([
+const KonikoniCityShop = new TownShop([
     ItemList['Soothe_bell'],
     ItemList['Trade_stone'],
 ]);
-const AetherParadiseShop = new Shop([
+const AetherParadiseShop = new TownShop([
     ItemList['Type: Null'],
 ]);
-const MalieCityShop = new Shop([
+const MalieCityShop = new TownShop([
     ItemList['Ultraball'],
     ItemList['Thunder_stone'],
 ]);
-const TapuVillageShop = new Shop([
+const TapuVillageShop = new TownShop([
     ItemList['Ice_stone'],
 ]);
-const SeafolkVillageShop = new Shop([
+const SeafolkVillageShop = new TownShop([
     ItemList['Fighting_egg'],
 ]);
-const ExeggutorIslandShop = new Shop([
+const ExeggutorIslandShop = new TownShop([
     ItemList['Dragon_egg'],
     ItemList['Leaf_stone'],
 ]);
-const AltaroftheSunneandMooneShop = new Shop([
+const AltaroftheSunneandMooneShop = new TownShop([
     ItemList['Poipole'],
 ]);
 
@@ -2190,7 +2184,7 @@ TownList['Iki Town'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
-        shop: IkiTownShop,
+        shops: [IkiTownShop],
     }
 );
 TownList['Hau\'oli City'] = new Town(
@@ -2198,7 +2192,7 @@ TownList['Hau\'oli City'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
-        shop: HauoliCityShop,
+        shops: [HauoliCityShop],
     }
 );
 TownList['Heahea City'] = new Town(
@@ -2206,7 +2200,7 @@ TownList['Heahea City'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.MelemeleKahuna)],
-        shop: HeaheaCityShop,
+        shops: [HeaheaCityShop],
     }
 );
 TownList['Paniola Town'] = new Town(
@@ -2214,7 +2208,7 @@ TownList['Paniola Town'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 4)],
-        shop: PaniolaTownShop,
+        shops: [PaniolaTownShop],
     }
 );
 TownList['Royal Avenue'] = new Town(
@@ -2222,7 +2216,7 @@ TownList['Royal Avenue'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
-        shop: RoyalAvenueShop,
+        shops: [RoyalAvenueShop],
     }
 );
 TownList['Konikoni City'] = new Town(
@@ -2230,7 +2224,7 @@ TownList['Konikoni City'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
-        shop: KonikoniCityShop,
+        shops: [KonikoniCityShop],
     }
 );
 TownList['Aether Paradise'] = new Town(
@@ -2239,7 +2233,7 @@ TownList['Aether Paradise'] = new Town(
     {
         dungeon: dungeonList['Aether Foundation'],
         requirements: [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)],
-        shop: AetherParadiseShop,
+        shops: [AetherParadiseShop],
     }
 );
 TownList['Malie City'] = new Town(
@@ -2247,7 +2241,7 @@ TownList['Malie City'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_Nihilego)],
-        shop: MalieCityShop,
+        shops: [MalieCityShop],
     }
 );
 TownList['Tapu Village'] = new Town(
@@ -2255,7 +2249,7 @@ TownList['Tapu Village'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
-        shop: TapuVillageShop,
+        shops: [TapuVillageShop],
     }
 );
 TownList['Seafolk Village'] = new Town(
@@ -2263,7 +2257,7 @@ TownList['Seafolk Village'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
-        shop: SeafolkVillageShop,
+        shops: [SeafolkVillageShop],
     }
 );
 TownList['Exeggutor Island'] = new Town(
@@ -2272,7 +2266,7 @@ TownList['Exeggutor Island'] = new Town(
     {
         dungeon: dungeonList['Exeggutor Island Hill'],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
-        shop: ExeggutorIslandShop,
+        shops: [ExeggutorIslandShop],
     }
 );
 TownList['Altar of the Sunne and Moone'] = new Town(
@@ -2280,7 +2274,7 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
-        shop: AltaroftheSunneandMooneShop,
+        shops: [AltaroftheSunneandMooneShop],
     }
 );
 TownList['Pokémon League Alola'] = new Town(
@@ -2449,37 +2443,37 @@ TownList['Resolution Cave'] = new DungeonTown(
 //Galar Shops
 
 
-const PostwickShop = new Shop([
+const PostwickShop = new TownShop([
     ItemList['Pokeball'],
 ]);
-const WedgehurstShop = new Shop([
+const WedgehurstShop = new TownShop([
     ItemList['Greatball'],
     ItemList['Mystery_egg'],
 ]);
-const CirchesterShop = new Shop([
+const CirchesterShop = new TownShop([
     ItemList['Ice_stone'],
 ]);
-const TurffieldShop = new Shop([
+const TurffieldShop = new TownShop([
     ItemList['Grass_egg'],
 ]);
-const HulburyShop = new Shop([
+const HulburyShop = new TownShop([
     ItemList['Water_egg'],
     ItemList['Toxel'],
 ]);
-const MotostokeShop = new Shop([
+const MotostokeShop = new TownShop([
     ItemList['Fire_egg'],
 ]);
-const HammerlockeShop = new Shop([
+const HammerlockeShop = new TownShop([
     ItemList['Dragon_egg'],
     ItemList['Eternatus'],
 ]);
-const StowonSideShop: Shop = new Shop([
+const StowonSideShop: Shop = new TownShop([
     ItemList['Fighting_egg'],
 ]);
-const SpikemuthShop = new Shop([
+const SpikemuthShop = new TownShop([
     ItemList['Electric_egg'],
 ]);
-const WyndonShop = new Shop([
+const WyndonShop = new TownShop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
@@ -2516,7 +2510,7 @@ TownList['Postwick'] = new Town(
     'Postwick',
     GameConstants.Region.galar,
     {
-        shop: PostwickShop,
+        shops: [PostwickShop],
         npcs: [Mom],
     }
 );
@@ -2524,7 +2518,7 @@ TownList['Wedgehurst'] = new Town(
     'Wedgehurst',
     GameConstants.Region.galar,
     {
-        shop: WedgehurstShop,
+        shops: [WedgehurstShop],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
         npcs: [TrainStationGuy],
     }
@@ -2533,7 +2527,7 @@ TownList['Motostoke'] = new Town(
     'Motostoke',
     GameConstants.Region.galar,
     {
-        shop: MotostokeShop,
+        shops: [MotostokeShop],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
     }
 );
@@ -2541,7 +2535,7 @@ TownList['Turffield'] = new Town(
     'Turffield',
     GameConstants.Region.galar,
     {
-        shop: TurffieldShop,
+        shops: [TurffieldShop],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 11)],
     }
 );
@@ -2549,7 +2543,7 @@ TownList['Hulbury'] = new Town(
     'Hulbury',
     GameConstants.Region.galar,
     {
-        shop: HulburyShop,
+        shops: [HulburyShop],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 12)],
     }
 );
@@ -2557,7 +2551,7 @@ TownList['Stow-on-Side'] = new Town(
     'Stow-on-Side',
     GameConstants.Region.galar,
     {
-        shop: StowonSideShop,
+        shops: [StowonSideShop],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 15)],
     }
 );
@@ -2572,7 +2566,7 @@ TownList['Hammerlocke'] = new Town(
     'Hammerlocke',
     GameConstants.Region.galar,
     {
-        shop: HammerlockeShop,
+        shops: [HammerlockeShop],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 14)],
     }
 );
@@ -2580,7 +2574,7 @@ TownList['Circhester'] = new Town(
     'Circhester',
     GameConstants.Region.galar,
     {
-        shop: CirchesterShop,
+        shops: [CirchesterShop],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 18)],
     }
 );
@@ -2588,7 +2582,7 @@ TownList['Spikemuth'] = new Town(
     'Spikemuth',
     GameConstants.Region.galar,
     {
-        shop: SpikemuthShop,
+        shops: [SpikemuthShop],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
     }
 );
@@ -2596,7 +2590,7 @@ TownList['Wyndon'] = new Town(
     'Wyndon',
     GameConstants.Region.galar,
     {
-        shop: WyndonShop,
+        shops: [WyndonShop],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 24)],
         dungeon: dungeonList['Rose Tower'],
     }

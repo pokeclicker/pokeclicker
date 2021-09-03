@@ -45,8 +45,9 @@
                        onclick="GymRunner.startGym(player.town().gym)">
                    Gym
                </button>
-               <a class="btn btn-secondary" href="#shopModal" data-bind="visible: player.town().shop" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop)">Shop</a>
-               <a class="btn btn-secondary" href="#berryMasterModal" data-bind="visible: player.town().berryMaster" data-toggle="modal" onclick="ShopHandler.showShop(player.town().berryMaster)">Berry Master</a>
+               <!-- ko foreach: player.town().shops -->
+                    <a class="btn btn-secondary" href="#shopModal" data-bind="attr: { href: $data.href }, event: { click: () => ShopHandler.showShop($data) }, text: $data.name" data-toggle="modal">Shop</a>
+               <!-- /ko -->
                <button class="btn btn-warning"
                        href="#nextRegionModal" data-toggle="modal"
                        data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name), text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">
