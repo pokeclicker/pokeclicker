@@ -204,13 +204,13 @@ class PokemonHelper {
         const shops = [];
         Object.entries(TownList).forEach(([townName, town]) => {
             // Check if the shop has items
-            if (town.shop && town.shop.items) {
+            if (town.shops && town.shops.find(s => s.items)) {
                 // If we only want to check up to a maximum region
                 const region = town.region;
                 if (maxRegion != GameConstants.Region.none && region > maxRegion) {
                     return false;
                 }
-                const hasPokemon = town.shop.items.find(item => item.name == pokemonName);
+                const hasPokemon = town.shops.find(s => s.items?.find(item => item.name == pokemonName));
                 if (hasPokemon) {
                     shops.push(townName);
                 }
