@@ -168,7 +168,11 @@ class Save {
                 if (decoded && json && json.player && json.save) {
                     localStorage.setItem(`player${Save.key}`, JSON.stringify(json.player));
                     localStorage.setItem(`save${Save.key}`, JSON.stringify(json.save));
-                    localStorage.setItem(`settings${Save.key}`, JSON.stringify(json.settings));
+                    if (json.settings) {
+                        localStorage.setItem(`settings${Save.key}`, JSON.stringify(json.settings));
+                    } else {
+                        localStorage.removeItem(`settings${Save.key}`);
+                    }
                     location.reload();
                 } else {
                     Notifier.notify({
