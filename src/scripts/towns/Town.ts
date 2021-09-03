@@ -436,7 +436,7 @@ const CianwoodPhotographyAide = new NPC('Photography Aide', [
 ]);
 
 const MahoganySouvenirShopAttendant = new NPC('Souvenir Shop Attendant', [
-    'We’ve got stuff here nobody else has got! But keep any Item Magnets you have away from the merchandise…especially the RageCandyBars. Keep ‘em outside where they belong, I’ve heard magnets can attract Pokémon with held items more often, and even more so in Dungeons!',
+    'We’ve got stuff here nobody else has got! But keep any Item Magnets you have away from the merchandise… especially the RageCandyBars. Keep ‘em outside where they belong, I’ve heard magnets can attract Pokémon with held items more often, and even more so in Dungeons!',
 ]);
 
 const JohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
@@ -694,13 +694,13 @@ const LittlerootAide = new NPC('Professor Birch\'s Aide', [
 ]);
 
 const OldaleTrackingScientist = new NPC('Tracking Scientist', [
-    'Hey trainer, look at these footprints! Huh, I’ve never seen footprints like these before…They look like they came from two different Pokémon, and I saw two blurs, one red and one blue, quickly fly away just as I exited the Pokémon Center.',
+    'Hey trainer, look at these footprints! Huh, I’ve never seen footprints like these before… They look like they came from two different Pokémon, and I saw two blurs, one red and one blue, quickly fly away just as I exited the Pokémon Center.',
     'They were flying really fast, I bet Pokémon that fast will only challenge trainers who have proven they are as strong as Champion Wallace...',
 ]);
 
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
-    'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms…but I’m not strong enough to find out...',
+    'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...',
 ]);
 
 const Weatherman = new NPC('Weatherman', [
@@ -1069,7 +1069,7 @@ const TwinleafContestChampion = new NPC('Contest Champion', [
 ]);
 
 const SandgemBeachcomber = new NPC('Beachcomber', [
-    'Hmmm…Oh! Sorry, I Didn’t see you there! Sometimes the strangest things wash up on this beach, I just got caught up in the search.',
+    'Hmmm… Oh! Sorry, I Didn’t see you there! Sometimes the strangest things wash up on this beach, I just got caught up in the search.',
     'Just last week a weird blue egg with a red center showed up. I went to go pick it up, but then it hatched! I was so surprised that the little blue Pokémon just hopped right back into the ocean. Who knows, maybe you’ll find it roaming around the region!',
 ]);
 
@@ -1109,8 +1109,8 @@ const SnowpointGlaceonTip = new NPC('Young Girl', [
 ]);
 
 const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
-    'Oh! I don’t get visitors often. My husband is a sailor who visits far away lands…he always tells me these fantastic things.',
-    'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine…maybe they should try the Day Care?',
+    'Oh! I don’t get visitors often. My husband is a sailor who visits far away lands… he always tells me these fantastic things.',
+    'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine… maybe they should try the Day Care?',
 ]);
 
 const SinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
@@ -1503,7 +1503,7 @@ const ExcitedChild = new NPC('Excited Child', [
 
 const CasteliaMusician = new NPC('Musician', [
     'Sup. Ya like jazz? No? Well then you should check out me and my band at the Sonata Cafe where we never play Jazz.',
-    'Sometimes a cool singing Pokémon shows up and joins in on our set. I’ve heard that trainers as strong as the Champion have found it roaming around the region looking for Pokémon battles…but even I wouldn’t challenge it to a Music battle.',
+    'Sometimes a cool singing Pokémon shows up and joins in on our set. I’ve heard that trainers as strong as the Champion have found it roaming around the region looking for Pokémon battles… but even I wouldn’t challenge it to a Music battle.',
 ]);
 
 const UnovaRoamerNPC = new RoamerNPC('Youngster Sarah', [
@@ -1889,7 +1889,7 @@ const Birdwatcher = new NPC('Birdwatcher', [
 
 const LumioseEngineer = new NPC('Engineer', [
     'Ah! Glad to be back in the city after so long at the Power Plant.',
-    'Rumor has it that if you conquer the Power Plant enough times that a strong Pokémon will challenge you made of Fire and Water. But I bet you’d have to be the Champion before it finds you worthy…I certainly have never seen it!',
+    'Rumor has it that if you conquer the Power Plant enough times that a strong Pokémon will challenge you made of Fire and Water. But I bet you’d have to be the Champion before it finds you worthy… I certainly have never seen it!',
 ]);
 
 const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
@@ -1901,7 +1901,18 @@ const KalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
 ], GameConstants.Region.kalos);
 
 const KiloudeConfusedHiker = new NPC('Confused Hiker', [
-    'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me…Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
+    'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
+]);
+
+const DendemilleGoomyEnthusiast = new NPC('Goomy Enthusiast', [
+    'Don\'t you find Goomy to be an interesting Pokémon? I certainly think so!',
+    'Its evolutionary line loves damp conditions, so if Sliggoo matures to level 50 and above during rainy or foggy weather, something marvelous happens!',
+]);
+
+const CamphrierFlabébéEnthusiast = new NPC('Flabébé Enthusiast', [
+    'Ah, isn\'t Flabébé such an eye-catching Pokémon? All these different lovely colors…',
+    'If you\'re searching for the yellow and blue kinds, look no further than the Farm!',
+    'They simply can\'t resist berries that match their colors - just plant a few and they\'ll soon come wandering in.',
 ]);
 
 
@@ -1943,6 +1954,7 @@ TownList['Camphrier Town'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 5)],
+        npcs: [CamphrierFlabébéEnthusiast],
     }
 );
 TownList['Ambrette Town'] = new Town(
@@ -2001,6 +2013,7 @@ TownList['Dendemille Town'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 15)],
         shops: [DendemilleTownShop],
+        npcs: [DendemilleGoomyEnthusiast],
     }
 );
 TownList['Anistar City'] = new Town(
