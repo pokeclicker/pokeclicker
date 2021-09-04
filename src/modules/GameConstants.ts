@@ -105,7 +105,7 @@ export const BerryColor = [
 
 // Dungeons
 export const BASE_DUNGEON_SIZE = 5;
-export const MIN_DUNGEON_SIZE = 3;
+export const MIN_DUNGEON_SIZE = 5;
 export const DUNGEON_CHEST_SHOW = 2;
 export const DUNGEON_MAP_SHOW = 4;
 
