@@ -142,20 +142,29 @@ class FarmHand {
     }
 
     tick(): void {
-        if (!this.hired()) {
+        // If not hired and energy full, there's nothing to do
+        if (!this.hired() && this.energy() >= this.maxEnergy) {
             return;
         }
+
         // Charge player when cost tick reached
         GameHelper.incrementObservable(this.costTicks, GameConstants.TICK_TIME);
-        if (this.costTicks() % this.costTick < GameConstants.TICK_TIME && this.hired()) {
+        if (this.costTicks() % this.costTick < GameConstants.TICK_TIME) {
             this.costTicks(0);
-            this.charge();
+            if (this.hired()) {
+                this.charge();
+            }
         }
-        // Work when work ticks reached
+
+        // Work/Restore energy when work ticks reached
         GameHelper.incrementObservable(this.workTicks, GameConstants.TICK_TIME);
-        if (this.workTicks() % this.workTick < GameConstants.TICK_TIME && this.hired()) {
+        if (this.workTicks() % this.workTick < GameConstants.TICK_TIME) {
             this.workTicks(0);
-            this.work();
+            if (this.hired()) {
+                this.work();
+            } else {
+                this.addEnergy();
+            }
         }
     }
 
@@ -225,14 +234,14 @@ class FarmHand {
         }
     }
 
-    addEnergy(): void {
+    addEnergy(amt = 1): void {
         // Only allow up to maximum value
-        this.energy(Math.min(this.maxEnergy, this.energy() + 1));
+        this.energy(Math.min(this.maxEnergy, this.energy() + amt));
     }
 
-    useEnergy(): void {
+    useEnergy(amt = 1): void {
         // Only allow to go down to 0
-        this.energy(Math.max(0, this.energy() - 1));
+        this.energy(Math.max(0, this.energy() - amt));
     }
 
     charge(): void {
