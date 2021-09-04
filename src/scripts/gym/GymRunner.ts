@@ -24,10 +24,10 @@ class GymRunner {
             GymBattle.index(0);
             GymBattle.generateNewEnemy();
             App.game.gameState = GameConstants.GameState.gym;
+            this.running(true);
             this.resetGif();
 
             setTimeout(() => {
-                this.running(true);
                 this.hideGif();
             }, GameConstants.GYM_COUNTDOWN);
 
