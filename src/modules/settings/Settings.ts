@@ -46,8 +46,11 @@ export default class Settings {
     }
 
     static loadDefault() {
-        const settings = localStorage.getItem('settings') || '{}';
-        this.fromJSON(JSON.parse(settings));
+        const settings = JSON.parse(localStorage.getItem('settings') || '{}');
+        this.list.forEach((setting) => {
+            settings[setting.name] = settings[setting.name] ?? setting.defaultValue;
+        });
+        this.fromJSON(settings);
     }
 
     static resetDefault() {
