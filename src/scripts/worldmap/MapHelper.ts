@@ -85,6 +85,8 @@ class MapHelper {
             cls = 'uncaughtPokemon';
         } else if (!RouteHelper.routeCompleted(route, region, true)) {
             cls = 'uncaughtShinyPokemon';
+        } else {
+            cls = 'completed';
         }
 
         // Water routes
@@ -119,6 +121,7 @@ class MapHelper {
                 return 'unlockedUnfinished';
             }
         }
+        return 'completed';
     }
 
     public static accessToTown(townName: string): boolean {

@@ -188,6 +188,7 @@ Settings.add(new CssVariableSetting('currentPlace', 'Map Color Current Location'
 Settings.add(new CssVariableSetting('incomplete', 'Map Color Incomplete Area', [], '#ff9100'));
 Settings.add(new CssVariableSetting('uncaughtPokemon', 'Map Color Uncaught Pokemon', [], '#3498db'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Map Color Uncaught Shiny Pokemon', [], '#ffee00'));
+Settings.add(new CssVariableSetting('completed', 'Map Color Completed Location', [], '#ffffff'));
 
 /*
  * SUBSCRIBERS
