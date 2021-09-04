@@ -12,10 +12,6 @@ export default class Settings {
         }
     }
 
-    static load(dict) {
-        Object.entries(dict || {})?.forEach(([name, value]) => this.setSettingByName(name, value));
-    }
-
     static setSettingByName(name: string, value: any) {
         const setting = this.getSetting(name);
         if (setting) {
@@ -29,12 +25,32 @@ export default class Settings {
         return this.list.find((setting) => setting.name === name) || null;
     }
 
-    static save() {
-        const dict = this.list.reduce((_dict, setting) => Object.assign(_dict, { [setting.name]: setting.value }), {});
-        return JSON.stringify(dict);
+    static toJSON() {
+        const json = {};
+        this.list.forEach((setting) => {
+            json[setting.name] = setting.value;
+        });
+        return json;
+    }
+
+    static fromJSON(dict) {
+        Object.entries(dict || {})?.forEach(([name, value]) => this.setSettingByName(name, value));
     }
 
     static enumToSettingOptionArray(obj: any, filter: (v) => boolean = () => true) {
         return GameHelper.enumStrings(obj).filter(filter).map((val) => new SettingOption(camelCaseToString(val), `${obj[val]}`));
+    }
+
+    static saveDefault() {
+        localStorage.setItem('settings', JSON.stringify(Settings.toJSON()));
+    }
+
+    static loadDefault() {
+        const settings = localStorage.getItem('settings') || '{}';
+        this.fromJSON(JSON.parse(settings));
+    }
+
+    static resetDefault() {
+        localStorage.removeItem('settings');
     }
 }
