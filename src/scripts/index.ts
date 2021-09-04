@@ -10,7 +10,7 @@ let player;
 document.addEventListener('DOMContentLoaded', () => {
     try {
         const settings = localStorage.getItem('settings');
-        Settings.load(JSON.parse(settings));
+        Settings.fromJSON(JSON.parse(settings));
         document.body.className = `no-select ${Settings.getSetting('theme').observableValue()} ${Settings.getSetting('backgroundImage').observableValue()}`;
         (document.getElementById('theme-link') as HTMLLinkElement).href = `https://bootswatch.com/4/${Settings.getSetting('theme').observableValue()}/bootstrap.min.css`;
 

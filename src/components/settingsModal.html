@@ -36,6 +36,12 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
                                 <tr data-bind="visible: Object.values(App.game.challenges.list).filter(c => c.active()).length > 0, template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideChallengeRelatedModules')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayReduced')}"></tr>
+                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
+                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--currentPlace')}"></tr>
+                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--incomplete')}"></tr>
+                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtPokemon')}"></tr>
+                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShinyPokemon')}"></tr>
+                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--completed')}"></tr>
                             </tbody>
                         </table>
                     </div>
@@ -63,6 +69,11 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
                             </tbody>
                         </table>
+                        <div class="btn-group btn-block">
+                            <button type="button" class="btn btn-primary" onclick="Settings.saveDefault();">Save As Default Settings</button>
+                            <button type="button" class="btn btn-warning" onclick="Settings.loadDefault();">Load From Default Settings</button>
+                            <button type="button" class="btn btn-danger" onclick="Settings.resetDefault();">Reset Default Settings</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -76,8 +87,8 @@
 
 
 <script type="text/html" id="MultipleChoiceSettingTemplate">
-    <td data-bind="text: $data.displayName">setting name</td>
-    <td>
+    <td class="p-2" data-bind="text: $data.displayName">setting name</td>
+    <td class="p-0">
         <select class="form-control" onchange="Settings.setSettingByName(this.name, this.value)" data-bind="foreach: $data.options, attr: {name}">
             <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
         </select>
@@ -85,12 +96,12 @@
 </script>
 
 <script type="text/html" id="BooleanSettingTemplate">
-    <td>
-        <label data-bind="attr: { for: 'checkbox-' + $data.name }, text: $data.displayName">
+    <td class="p-2">
+        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: $data.displayName">
             setting name
         </label>
     </td>
-    <td>
+    <td class="p-2">
         <input class="clickable" type="checkbox"
             data-bind="checked: Settings.getSetting($data.name).observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
             onchange="Settings.setSettingByName(this.name, this.checked)"/>
@@ -103,4 +114,16 @@
             data-bind="attr: { name: $data.name, id: `setting-${$data.name}`, min: $data.minValue, max: $data.maxValue, step: $data.step},
                        value: $data.observableValue"
             oninput="Settings.setSettingByName(this.name, this.value)">
+</script>
+
+
+<script type="text/html" id="ColorChoiceSettingTemplate">
+    <td class="p-2" data-bind="text: $data.displayName">setting name</td>
+    <td class="p-0" data-bind="style: { background: $data.observableValue },
+    tooltip: {
+        title: 'Set to white for transparent',
+        trigger: 'hover',
+    }">
+        <label style="width:100%; min-height: 36px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: $data.observableValue"/></label>
+    </td>
 </script>

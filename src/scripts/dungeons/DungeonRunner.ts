@@ -29,6 +29,11 @@ class DungeonRunner {
         }
         App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
 
+        // Reset any trainers/pokemon if there was one previously
+        DungeonBattle.trainer(null);
+        DungeonBattle.trainerPokemonIndex(0);
+        DungeonBattle.enemyPokemon(null);
+
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
         // Dungeon size increases with each region
         let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + player.region;
