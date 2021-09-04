@@ -118,7 +118,11 @@
 
 <script type="text/html" id="ColorChoiceSettingTemplate">
     <td class="p-2" data-bind="text: $data.displayName">setting name</td>
-    <td class="p-0" data-bind="style: { background: $data.observableValue }">
+    <td class="p-0" data-bind="style: { background: $data.observableValue },
+    tooltip: {
+        title: 'Set to white for transparent',
+        trigger: 'hover',
+    }">
         <label style="width:100%; min-height: 36px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: $data.observableValue"/></label>
     </td>
 </script>

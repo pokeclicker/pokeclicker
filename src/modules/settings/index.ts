@@ -183,11 +183,11 @@ Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
     '-2'));
 
 // CSS variable settings
-Settings.add(new CssVariableSetting('locked', 'Map Color Locked Location', [], '#000'));
-Settings.add(new CssVariableSetting('currentPlace', 'Map Color Current Location', [], '#5f0'));
+Settings.add(new CssVariableSetting('locked', 'Map Color Locked Location', [], '#000000'));
+Settings.add(new CssVariableSetting('currentPlace', 'Map Color Current Location', [], '#55ff00'));
 Settings.add(new CssVariableSetting('incomplete', 'Map Color Incomplete Area', [], '#ff9100'));
 Settings.add(new CssVariableSetting('uncaughtPokemon', 'Map Color Uncaught Pokemon', [], '#3498db'));
-Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Map Color Uncaught Shiny Pokemon', [], '#fbff00'));
+Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Map Color Uncaught Shiny Pokemon', [], '#ffee00'));
 
 /*
  * SUBSCRIBERS
