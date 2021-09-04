@@ -63,6 +63,11 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
                             </tbody>
                         </table>
+                        <div class="btn-group btn-block">
+                            <button type="button" class="btn btn-primary" onclick="Settings.saveDefault();">Save As Default Settings</button>
+                            <button type="button" class="btn btn-warning" onclick="Settings.loadDefault();">Load From Default Settings</button>
+                            <button type="button" class="btn btn-danger" onclick="Settings.resetDefault();">Reset Default Settings</button>
+                        </div>
                     </div>
                 </div>
             </div>
