@@ -211,11 +211,9 @@ class Underground implements Feature {
         player.mineInventory().forEach(mineItem => {
             if (mineItem.valueType == 'Diamond') {
                 nMineItems += mineItem.amount();
-            }
-            else if (mineItem.valueType == 'Mine Egg') {
+            } else if (mineItem.valueType == 'Mine Egg') {
                 nFossils += mineItem.amount();
-            }
-            else {
+            } else {
                 nPlates += mineItem.amount();
             }
         });
