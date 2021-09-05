@@ -193,6 +193,28 @@ class Underground implements Feature {
         }
     }
 
+    public static getDiamondNetWorth(): number {
+        let diamondNetWorth = 0;
+        player.mineInventory().forEach(mineItem => {
+            if (mineItem.valueType == 'Diamond') diamondNetWorth += mineItem.value * mineItem.amount();
+        });
+
+        return diamondNetWorth + App.game.wallet.currencies[GameConstants.Currency.diamond]();
+    }
+
+    public static netWorthTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
+        let nMineItems = 0;
+        let nFossils = 0;
+        let nPlates = 0;
+        player.mineInventory().forEach(mineItem => {
+            if (mineItem.valueType == 'Diamond') nMineItems += mineItem.amount();
+            else if (mineItem.valueType == 'Mine Egg') nFossils += mineItem.amount();
+            else nPlates += mineItem.amount();
+        });
+
+        return '<u>Owned:</u><br>Mine items: ' + nMineItems + '<br>Fossils: ' + nFossils + '<br>Plates: ' + nPlates;
+    });
+
     public static getMineItemByName(name: string): UndergroundItem {
         return UndergroundItem.list.find(i => i.name == name);
     }

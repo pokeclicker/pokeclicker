@@ -199,6 +199,18 @@
             </div>
 
             <div class="modal-footer">
+
+                <button type="button" class="btn mr-auto"
+                    data-bind="visible: Underground.getDiamondNetWorth() > 0,
+                    tooltip: {
+                        title: Underground.netWorthTooltip(),
+                        trigger: 'hover',
+                        placement:'top',
+                        html: true,
+                    }">
+                    <span>Total net worth: <b><span data-bind="text: Underground.getDiamondNetWorth()">-</span></b></span>
+                    <img src='assets/images/underground/diamond.svg' width="20px'">
+                </button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
