@@ -19,11 +19,10 @@ class DungeonMap {
             this.board()[newY][newX].type(GameConstants.DungeonTile.boss);
             this.board()[newY][newX].calculateCssClass();
         }
+        this.currentTile().type(GameConstants.DungeonTile.entrance);
         this.currentTile().isVisible = true;
         this.currentTile().isVisited = true;
-        this.currentTile().type(GameConstants.DungeonTile.entrance);
         this.currentTile().hasPlayer = true;
-        this.currentTile().calculateCssClass();
     }
 
     public moveToCoordinates(x: number, y: number) {
@@ -56,7 +55,6 @@ class DungeonMap {
             this.currentTile().hasPlayer = true;
             this.currentTile().isVisible = true;
             this.currentTile().isVisited = true;
-            this.currentTile().calculateCssClass();
             if (this.currentTile().type() == GameConstants.DungeonTile.enemy) {
                 DungeonBattle.generateNewEnemy();
             }
@@ -65,22 +63,20 @@ class DungeonMap {
         return false;
     }
 
-    public showChestTiles() {
+    public showChestTiles(): void {
         for (let i = 0; i < this.board().length; i++) {
             for (let j = 0; j < this.board()[i].length; j++) {
                 if (this.board()[i][j].type() == GameConstants.DungeonTile.chest) {
                     this.board()[i][j].isVisible = true;
-                    this.board()[i][j].calculateCssClass();
                 }
             }
         }
     }
 
-    public showAllTiles() {
+    public showAllTiles(): void {
         for (let i = 0; i < this.board().length; i++) {
             for (let j = 0; j < this.board()[i].length; j++) {
                 this.board()[i][j].isVisible = true;
-                this.board()[i][j].calculateCssClass();
             }
         }
     }
@@ -89,38 +85,31 @@ class DungeonMap {
         return this.board()[this.playerPosition().y][this.playerPosition().x];
     }
 
-    public hasAccesToTile(point: Point) {
+    public nearbyTiles(point: Point): DungeonTile[] {
+        const tiles = [];
+        tiles.push(this.board()[point.y - 1]?.[point.x]);
+        tiles.push(this.board()[point.y + 1]?.[point.x]);
+        tiles.push(this.board()[point.y]?.[point.x - 1]);
+        tiles.push(this.board()[point.y]?.[point.x + 1]);
+        return tiles.filter(t => t);
+    }
+
+    public hasAccesToTile(point: Point): boolean {
         // If player fighting/catching they cannot move right now
         if (DungeonRunner.fighting() || DungeonBattle.catching()) {
             return false;
         }
+
         // If tile out of bounds, it's invalid
         if (point.x < 0 || point.x >= this.size || point.y < 0 || point.y >= this.size) {
             return false;
         }
 
         //If any of the adjacent Tiles is visited, it's a valid Tile.
-        if (point.y < this.size - 1 && this.board()[point.y + 1][point.x].isVisited) {
-            return true;
-        }
-
-        if (point.y > 0 && this.board()[point.y - 1][point.x].isVisited) {
-            return true;
-        }
-
-        if (point.x < this.size - 1 && this.board()[point.y][point.x + 1].isVisited) {
-            return true;
-        }
-
-        if (point.x > 0 && this.board()[point.y][point.x - 1].isVisited) {
-            return true;
-        }
-
-        // If none of the above true, they cannot move there
-        return false;
+        return this.nearbyTiles(point).some(t => t.isVisited);
     }
 
-    public generateMap() {
+    public generateMap(): DungeonTile[][] {
         // Fill mapList with required Tiles
         const mapList: DungeonTile[] = [];
 
@@ -161,7 +150,7 @@ class DungeonMap {
      * Shuffles array in place.
      * @param {Array} a items The array containing the items.
      */
-    public shuffle(a) {
+    public shuffle(a): void {
         let j, x, i;
         for (i = a.length; i; i--) {
             j = Math.floor(Math.random() * i);
