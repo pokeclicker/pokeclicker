@@ -47,6 +47,10 @@ const SortModules = () => {
         let prevItem;
         itemOrderArr.forEach(item => {
             const child = document.getElementById(item);
+            // If the element doesn't exist anymore, skip it
+            if (!child) {
+                return;
+            }
             if (!prevItem) {
                 parent.insertBefore(child, parent.firstChild);
             } else {
