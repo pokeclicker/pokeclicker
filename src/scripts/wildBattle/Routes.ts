@@ -33,7 +33,7 @@ class Routes {
     }
 
     public static getName(route: number, region: number): string {
-        return this.regionRoutes.find(routeData => routeData.region == region && routeData.number == route).routeName;
+        return this.regionRoutes.find(routeData => routeData.region == region && routeData.number == route)?.routeName ?? 'Unknown Route';
     }
 
     public static unnormalizeRoute(normalizedRoute: number): number {
