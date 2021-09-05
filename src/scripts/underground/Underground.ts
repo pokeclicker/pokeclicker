@@ -196,7 +196,9 @@ class Underground implements Feature {
     public static getDiamondNetWorth(): number {
         let diamondNetWorth = 0;
         player.mineInventory().forEach(mineItem => {
-            if (mineItem.valueType == 'Diamond') diamondNetWorth += mineItem.value * mineItem.amount();
+            if (mineItem.valueType == 'Diamond') {
+                diamondNetWorth += mineItem.value * mineItem.amount();
+            }
         });
 
         return diamondNetWorth + App.game.wallet.currencies[GameConstants.Currency.diamond]();
@@ -207,12 +209,18 @@ class Underground implements Feature {
         let nFossils = 0;
         let nPlates = 0;
         player.mineInventory().forEach(mineItem => {
-            if (mineItem.valueType == 'Diamond') nMineItems += mineItem.amount();
-            else if (mineItem.valueType == 'Mine Egg') nFossils += mineItem.amount();
-            else nPlates += mineItem.amount();
+            if (mineItem.valueType == 'Diamond') {
+                nMineItems += mineItem.amount();
+            }
+            else if (mineItem.valueType == 'Mine Egg') {
+                nFossils += mineItem.amount();
+            }
+            else {
+                nPlates += mineItem.amount();
+            }
         });
 
-        return '<u>Owned:</u><br>Mine items: ' + nMineItems + '<br>Fossils: ' + nFossils + '<br>Plates: ' + nPlates;
+        return `<u>Owned:</u><br>Mine items: ${nMineItems}<br>Fossils: ${nFossils}<br>Plates: ${nPlates}`;
     });
 
     public static getMineItemByName(name: string): UndergroundItem {
