@@ -21,7 +21,7 @@ export const SpriteCredits: Credit[] = [
             'Aether Foundation Employee (male)',
             'Aether Foundation Employee (female)',
             'Aether Branch Chief Faba',
-            'Aether President Lusamine	',
+            'Aether President Lusamine',
             'Hala',
             'Olivia',
             'Nanu',
