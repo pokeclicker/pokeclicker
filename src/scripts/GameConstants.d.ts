@@ -62,7 +62,8 @@ namespace GameConstants {
     declare const AMAZE_MULCH_MUTATE_MULTIPLIER: number;
     declare const WANDER_RATE: number;
     declare const BerryColor: string[];
-    declare const DUNGEON_SIZE: number;
+    declare const BASE_DUNGEON_SIZE: number;
+    declare const MIN_DUNGEON_SIZE: number;
     declare const DUNGEON_CHEST_SHOW: number;
     declare const DUNGEON_MAP_SHOW: number;
     declare enum AchievementOption {
