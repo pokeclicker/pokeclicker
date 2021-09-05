@@ -42,7 +42,7 @@
                         <td class="text-left">
                           <a href="#" data-bind="text: name, attr: { href: link ? link : '#' }">-</span>
                         </td>
-                        <td class="text-left tight text-muted" data-bind="foreach: resources"><span data-bind="text: $data">-</span><br/></td>
+                        <td class="text-left tight text-muted" data-bind="foreach: resources"><span data-bind="text: $data.toLocaleString('en-US')">-</span><br/></td>
                       </tr>
                     </tbody>
                 </table>
