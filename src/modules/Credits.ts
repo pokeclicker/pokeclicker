@@ -11,6 +11,30 @@ type Credit = {
 // Sort alphabetically
 export const SpriteCredits: Credit[] = [
     {
+        name: 'Beliot419',
+        link: 'https://www.deviantart.com/beliot419',
+        image: 'https://a.deviantart.net/avatars-big/b/e/beliot419.png'
+        resources: [
+            'Youth Athlete (female)',
+            'Rising Star (male)',
+            'Team Skull Boss Guzma',
+            'Aether Foundation Employee (male)',
+            'Aether Foundation Employee (female)',
+            'Aether Branch Chief Faba',
+            'Aether President Lusamine	',
+            'Hala',
+            'Olivia',
+            'Nanu',
+            'Mina',
+            'Hapu',
+            'Molayne',
+            'Acerola',
+            'Kahili',
+            'Hau',
+        ],
+        // Notes: Found in spritesheet description: "Feel free to use them, just give me credit."
+    },
+    {
         name: 'DaleArwin',
         link: 'https://www.deviantart.com/dalearwin',
         resources: [
@@ -19,6 +43,7 @@ export const SpriteCredits: Credit[] = [
             'Surfer',
             'Golfer',
         ],
+        // Notes: DaleArwin aka IanWalder, a GitHub contributor to this project gives his permission
     },
     {
         name: 'EmmaRoak',
@@ -72,6 +97,16 @@ export const SpriteCredits: Credit[] = [
             'Armored Mewtwo',
         ],
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
+    },
+    {
+        name: 'mid117',
+        link: 'https://www.deviantart.com/mid117',
+        image: 'https://a.deviantart.net/avatars-big/m/i/mid117.jpg',
+        resources: [
+            'Team Skull Grunt (male)',
+            'Team Skull Grunt (female)',
+        ],
+        // NOTES: Found on DeviantArt About page: "All Sprites here are free to use as long you give credit to me"
     },
     {
         name: 'RedSparr0w',
