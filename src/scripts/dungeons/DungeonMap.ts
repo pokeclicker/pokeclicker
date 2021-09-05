@@ -1,11 +1,12 @@
 class DungeonMap {
-    size: number;
     board: KnockoutObservable<DungeonTile[][]>;
     playerPosition: KnockoutObservable<Point>;
     playerMoved: KnockoutObservable<boolean>;
 
-    constructor(size: number) {
-        this.size = size;
+    constructor(
+        public size: number,
+        public flash = false
+    ) {
         this.board = ko.observable(this.generateMap());
 
         this.playerPosition = ko.observable(new Point(Math.floor(size / 2), size - 1));
@@ -23,6 +24,9 @@ class DungeonMap {
         this.currentTile().isVisible = true;
         this.currentTile().isVisited = true;
         this.currentTile().hasPlayer = true;
+        if (this.flash) {
+            this.nearbyTiles(this.playerPosition()).forEach(t => t.isVisible = true);
+        }
     }
 
     public moveToCoordinates(x: number, y: number) {
@@ -50,8 +54,10 @@ class DungeonMap {
     public moveToTile(point: Point): boolean {
         if (this.hasAccesToTile(point)) {
             this.currentTile().hasPlayer = false;
-            this.currentTile().calculateCssClass();
             this.playerPosition(point);
+            if (this.flash) {
+                this.nearbyTiles(point).forEach(t => t.isVisible = true);
+            }
             this.currentTile().hasPlayer = true;
             this.currentTile().isVisible = true;
             this.currentTile().isVisited = true;
