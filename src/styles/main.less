@@ -225,6 +225,11 @@ body:hover {
   }
 }
 
+// Firefox fix for background covering borders in tables
+td {
+  background-clip: padding-box;
+}
+
 #pokemonList {
   span {
     vertical-align: middle;
