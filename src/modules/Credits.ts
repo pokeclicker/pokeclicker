@@ -116,9 +116,14 @@ export const SpriteCredits: Credit[] = [
 });
 
 /*
-fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_page=100`).then(async res => {
+fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_page=100&anon=1`).then(async res => {
     const json = await res.json();
-    console.log(json.map(c => `    {
+    console.log(json.map(c => {
+        if (!c.login) return c;
+        const anon = json.find(_c => _c.name == c.login);
+        c.contributions += anon ? anon.contributions : 0;
+        return c;
+    }).filter(c => c.login).sort((a, b) => b.contributions - a.contributions).map(c => `    {
         resources: [
             ${c.contributions},
         ],
@@ -126,7 +131,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
         link: '${c.html_url}',
         image: '${c.avatar_url}',
     },`).join('\n'));
-})
+});
 */
 export const CodeCredits: Credit[] = [
     {
@@ -155,6 +160,14 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
+            388,
+        ],
+        name: 'Aegyo',
+        link: 'https://github.com/Aegyo',
+        image: 'https://avatars.githubusercontent.com/u/4183969?v=4',
+    },
+    {
+        resources: [
             64,
         ],
         name: 'fujnw',
@@ -163,15 +176,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            60,
-        ],
-        name: 'Aegyo',
-        link: 'https://github.com/Aegyo',
-        image: 'https://avatars.githubusercontent.com/u/4183969?v=4',
-    },
-    {
-        resources: [
-            51,
+            52,
         ],
         name: 'BaineGames',
         link: 'https://github.com/BaineGames',
