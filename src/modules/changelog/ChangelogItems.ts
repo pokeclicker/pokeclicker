@@ -10,6 +10,20 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.8
+    new ChangelogUpdate('v0.8.8', new Date(2021, 8, 5)),
+    new Changelog(changelogType.NEW, 'Credits modal for sprites and code contributions'),
+    new Changelog(changelogType.CHANGE, 'Can only move to tiles adjacent to visited tiles within Dungeons'),
+    new Changelog(changelogType.CHANGE, 'Can start attacking Gyms as soon as the GO text appears'),
+    new Changelog(changelogType.CHANGE, 'Added more NPCs'),
+    new Changelog(changelogType.CHANGE, 'Farm hands will restore energy while not hired'),
+    new Changelog(changelogType.CHANGE, 'Game settings are now stored within the each individual save'),
+    new Changelog(changelogType.CHANGE, 'Route highlights for uncaught Pokémon, uncaught shiny Pokémon'),
+    new Changelog(changelogType.CHANGE, 'Settings to change colors of route highlights'),
+    new Changelog(changelogType.CHANGE, 'Dungeons now decrease in size for every 10, 100, 1000 etc clears'),
+    new Changelog(changelogType.FIXED, 'Some Fossils appearing in the underground too early'),
+    new Changelog(changelogType.FIXED, 'Dungeon trainers re-appearing after failing them previously'),
+
     // v0.8.7
     new ChangelogUpdate('v0.8.7', new Date(2021, 7, 31)),
     new Changelog(changelogType.NEW, '(BETA) Added Farm Hands (Farm Automation) - Check out the Help tab in the Farm for more info'),
