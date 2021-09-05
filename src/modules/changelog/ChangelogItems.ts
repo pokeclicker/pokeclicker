@@ -21,6 +21,7 @@ const ChangelogItems = [
     new Changelog(changelogType.CHANGE, 'Route highlights for uncaught Pokémon, uncaught shiny Pokémon'),
     new Changelog(changelogType.CHANGE, 'Settings to change colors of route highlights'),
     new Changelog(changelogType.CHANGE, 'Dungeons now decrease in size for every 10, 100, 1000 etc clears'),
+    new Changelog(changelogType.CHANGE, 'Show net value of Underground in footer'),
     new Changelog(changelogType.FIXED, 'Some Fossils appearing in the underground too early'),
     new Changelog(changelogType.FIXED, 'Dungeon trainers re-appearing after failing them previously'),
 
