@@ -13,7 +13,7 @@ export const SpriteCredits: Credit[] = [
     {
         name: 'Beliot419',
         link: 'https://www.deviantart.com/beliot419',
-        image: 'https://a.deviantart.net/avatars-big/b/e/beliot419.png'
+        image: 'https://a.deviantart.net/avatars-big/b/e/beliot419.png',
         resources: [
             'Youth Athlete (female)',
             'Rising Star (male)',
