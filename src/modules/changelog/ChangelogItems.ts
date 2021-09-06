@@ -32,7 +32,7 @@ const ChangelogItems = [
     new Changelog(changelogType.CHANGE, 'Display total route defeats when on a route'),
     new Changelog(changelogType.CHANGE, 'Player will return to last Dungeon/Town they were in before closing game'),
     new Changelog(changelogType.CHANGE, 'Buffed Pokémon typed quest reward amounts'),
-    new Changelog(changelogType.CHANGE, 'Should no longer recieve quest that cannot be completed right now (unless starting a new region)'),
+    new Changelog(changelogType.CHANGE, 'Should no longer receive quest that cannot be completed right now (unless starting a new region)'),
     new Changelog(changelogType.CHANGE, 'Nerfed Dungeon Token gains in Dungeons'),
     new Changelog(changelogType.CHANGE, 'Added unobtainable berries for No Oak Item saves to Johto Berry Master (must have prerequisites to purchase)'),
     new Changelog(changelogType.FIXED, 'Minor theme fixes'),
