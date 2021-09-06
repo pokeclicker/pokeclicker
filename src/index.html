@@ -336,6 +336,15 @@
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
                         <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
                     </div>
+                    <button class='btn btn-sm' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" data-toggle="popover" data-trigger="hover" data-html="true" data-title="Map Legend:"
+                    data-content="Map locations will be coloured based on the following:
+                    <br/><span class='text-currentPlace'>Current Location</span>
+                    <br/><span class='text-locked'>Locked</span>
+                    <br/><span class='text-incomplete'>Incomplete</span>
+                    <br/><span class='text-uncaughtPokemon'>Uncaught Pokemon</span>
+                    <br/><span class='text-uncaughtShinyPokemon'>Uncaught Shiny Pokemon</span>
+                    <br/><span class='text-completed'>Completed</span>
+                    <br/><i>NOTE:<br/>These colors can be customized in the settings menu</i>" data-placement="bottom">ⓘ</button>
                     <button class='btn btn-sm' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
                     data-bind='style: { background: Weather.color() },
                         tooltip: {
