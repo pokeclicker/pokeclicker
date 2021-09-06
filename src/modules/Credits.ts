@@ -38,12 +38,15 @@ export const SpriteCredits: Credit[] = [
         name: 'DaleArwin',
         link: 'https://www.deviantart.com/dalearwin',
         resources: [
-            'Team Flare Grunt Duo',
+            'Team Flare Grunts',
             'Brains & Brawn',
             'Surfer',
             'Golfer',
+            'Dancer (female)',
+            'Aether Foundation Employee (masked)',
+            'Artist (male)',
         ],
-        // Notes: DaleArwin aka IanWalder, a GitHub contributor to this project gives his permission
+        // Notes: DaleArwin aka IanWalder, a GitHub contributor to this project, gives his permission
     },
     {
         name: 'EmmaRoak',
@@ -130,16 +133,6 @@ export const SpriteCredits: Credit[] = [
             'Galar Sprites',
         ],
         // NOTES: free for non-profit use.
-    },
-    {
-        name: 'torqupine',
-        link: 'https://www.deviantart.com/torqupine',
-        image: 'https://a.deviantart.net/avatars-big/t/o/torqupine.png',
-        resources: [
-            'Team Flare Grunt (male)',
-            'Team Flare Grunt (female)',
-        ],
-        // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
     },
 ].map((c) => {
     SeededRand.seed(parseInt(c.name, 36));
