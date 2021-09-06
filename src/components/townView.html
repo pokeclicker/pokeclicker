@@ -40,7 +40,7 @@
                         </button>
                         <button class="btn btn-info p-0"
                             data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex($data.town)]() >= 100,
-                            tooltip: { html: true, title: `Auto restart Elite 4 fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${($data.moneyReward * 2).toLocaleString('en-US')} per battle`, trigger: 'hover', placement:'right' },
+                            tooltip: { html: true, title: `Auto restart Elite 4 fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${($data.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive money for clearing the gym</i>`, trigger: 'hover', placement:'right' },
                             click: () => GymRunner.startGym($data, true)">
                             ↻
                         </button>
@@ -53,7 +53,7 @@
                             onclick="GymRunner.startGym(player.town().gym)">
                         Gym
                     </button>
-                    <button class="btn btn-info p-0" data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town().gym.town)]() >= 100, tooltip: { html: true, title: `Auto restart Gym fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${(player.town().gym.moneyReward * 2).toLocaleString('en-US')} per battle`, trigger: 'hover', placement:'right' }"
+                    <button class="btn btn-info p-0" data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town().gym.town)]() >= 100, tooltip: { html: true, title: `Auto restart Gym fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${(player.town().gym.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive money for clearing the gym</i>`, trigger: 'hover', placement:'right' }"
                             onclick="GymRunner.startGym(player.town().gym, true)">
                         ↻
                     </button>
