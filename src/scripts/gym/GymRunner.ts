@@ -7,8 +7,13 @@ class GymRunner {
 
     public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList['Pewter City']);
     public static running: KnockoutObservable<boolean> = ko.observable(false);
+    public static autoRestart: KnockoutObservable<boolean> = ko.observable(false);
 
-    public static startGym(gym: Gym) {
+    public static startGym(
+        gym: Gym,
+        autoRestart = false
+    ) {
+        this.autoRestart(autoRestart);
         this.running(false);
         this.gymObservable(gym);
         if (Gym.isUnlocked(gym)) {
@@ -86,13 +91,26 @@ class GymRunner {
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.gym_won,
             });
-            this.gymObservable(gym);
-            App.game.wallet.gainMoney(gym.moneyReward);
             // If this is the first time defeating this gym
             if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
                 gym.firstWinReward();
             }
             GameHelper.incrementObservable(App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym.town)]);
+
+            // Auto restart gym battle
+            if (this.autoRestart()) {
+                const cost = (this.gymObservable().moneyReward || 10) * 2;
+                const amt = new Amount(cost, GameConstants.Currency.money);
+                // If the player can afford it, restart the gym
+                if (App.game.wallet.loseAmount(amt)) {
+                    this.startGym(this.gymObservable(), this.autoRestart());
+                    return;
+                }
+            }
+
+            // Award money for defeating gym
+            App.game.wallet.gainMoney(gym.moneyReward);
+            // Send the player back to the town they were in
             player.town(TownList[gym.town]);
             App.game.gameState = GameConstants.GameState.town;
         }
