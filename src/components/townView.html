@@ -30,15 +30,22 @@
     <div class="row no-gutters">
        <div class="col-3 no-gutters">
            <div class="list-group" data-bind="if: player.town() instanceof PokemonLeague">
-              <!-- ko foreach: player.town().gymList -->
-                   <button
-                           data-bind="text: $data.leaderName.replace(/\d/g,''),
-                                      disable: !Gym.isUnlocked($data),
-                                      click: function() {GymRunner.startGym($data)},
-                                      attr: { class: Gym.calculateCssClass($data)}">
-                       E4 Leader
-                   </button>
-               <!-- /ko -->
+                <!-- ko foreach: player.town().gymList -->
+                    <div class="btn-group btn-block mt-0">
+                        <button data-bind="text: $data.leaderName.replace(/\d/g,''),
+                                        disable: !Gym.isUnlocked($data),
+                                        click: function() {GymRunner.startGym($data)},
+                                        attr: { class: Gym.calculateCssClass($data)}">
+                            E4 Leader
+                        </button>
+                        <button class="btn btn-info p-0"
+                            data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex($data.town)]() >= 100,
+                            tooltip: { html: true, title: `Auto restart Elite 4 fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${($data.moneyReward * 2).toLocaleString('en-US')} per battle`, trigger: 'hover', placement:'right' }
+                            click: () => GymRunner.startGym($data, true)">
+                            ↻
+                        </button>
+                    </div>
+                <!-- /ko -->
            </div>
            <div class="list-group">
                 <div class="btn-group btn-block" data-bind="if: player.town().gym">
