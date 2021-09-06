@@ -8,11 +8,14 @@ class GymRunner {
     public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList['Pewter City']);
     public static running: KnockoutObservable<boolean> = ko.observable(false);
     public static autoRestart: KnockoutObservable<boolean> = ko.observable(false);
+    public static initialRun = true;
 
     public static startGym(
         gym: Gym,
-        autoRestart = false
+        autoRestart = false,
+        initialRun = true
     ) {
+        this.initialRun = initialRun;
         this.autoRestart(autoRestart);
         this.running(false);
         this.gymObservable(gym);
@@ -55,10 +58,12 @@ class GymRunner {
     }
 
     public static resetGif() {
-        $('#gymCountdown').show();
-        setTimeout(() => {
-            $('#gymGo').attr('src', 'assets/gifs/go.gif');
-        }, 0);
+        if (!this.autoRestart() || this.initialRun) {
+            $('#gymCountdown').show();
+            setTimeout(() => {
+                $('#gymGo').attr('src', 'assets/gifs/go.gif');
+            }, 0);
+        }
     }
 
     public static tick() {
@@ -103,7 +108,7 @@ class GymRunner {
                 const amt = new Amount(cost, GameConstants.Currency.money);
                 // If the player can afford it, restart the gym
                 if (App.game.wallet.loseAmount(amt)) {
-                    this.startGym(this.gymObservable(), this.autoRestart());
+                    this.startGym(this.gymObservable(), this.autoRestart(), false);
                     return;
                 }
             }
