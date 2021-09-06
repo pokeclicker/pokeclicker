@@ -54,5 +54,10 @@
                 <span data-bind="text: GymBattle.enemyPokemon().health() + ' / ' + GymBattle.enemyPokemon().maxHealth()" style="font-size: 12px;"></span>
             </div>
         </div>
+
+        <button class="btn btn-sm btn-danger" style="position: absolute; top: 68px; left: 10px;" data-bind="visible: GymRunner.autoRestart()"
+                onclick="GymRunner.autoRestart(false)">
+            End Gym
+        </button>
     </div>
 </div>
