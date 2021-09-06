@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import { ObservableArray, PureComputed } from 'knockout';
+import { Observable, ObservableArray, PureComputed } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
 import LogBookLog from './LogBookLog';
 import { LogBookType, LogBookTypes } from './LogBookTypes';
@@ -9,7 +9,7 @@ export default class LogBook implements Feature {
     saveKey = 'logbook';
     defaults: Record<string, any>;
 
-    public filters: Record<string, any> = Object.keys(LogBookTypes).reduce((_dict, setting) => Object.assign(_dict, { [setting]: ko.observable(true) }), {});
+    public filters: Record<string, Observable<boolean>> = Object.keys(LogBookTypes).reduce((_dict, setting) => Object.assign(_dict, { [setting]: ko.observable(true).extend({ boolean: null }) }), {});
     public logs: ObservableArray<LogBookLog> = ko.observableArray([]);
     public filteredLogs: PureComputed<LogBookLog[]> = ko.pureComputed(() => this.logs().filter((log) => this.filters[log.type.label]?.()));
 
@@ -29,7 +29,7 @@ export default class LogBook implements Feature {
             this.logs.push(new LogBookLog(entry.type, entry.description, entry.date));
         });
 
-        Object.entries(json.filters || {}).forEach(([key, value]) => {
+        Object.entries(json.filters || {}).forEach(([key, value]: [string, boolean]) => {
             this.filters[key]?.(value);
         });
     }
