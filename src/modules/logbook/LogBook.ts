@@ -1,15 +1,17 @@
 /* eslint-disable class-methods-use-this */
-import { ObservableArray } from 'knockout';
+import { ObservableArray, PureComputed } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
 import LogBookLog from './LogBookLog';
-import { LogBookType } from './LogBookTypes';
+import { LogBookType, LogBookTypes } from './LogBookTypes';
 
 export default class LogBook implements Feature {
     name = 'Log Book';
     saveKey = 'logbook';
     defaults: Record<string, any>;
 
+    public filters: Record<string, any> = Object.keys(LogBookTypes).reduce((_dict, setting) => Object.assign(_dict, { [setting]: ko.observable(true) }), {});
     public logs: ObservableArray<LogBookLog> = ko.observableArray([]);
+    public filteredLogs: PureComputed<LogBookLog[]> = ko.pureComputed(() => this.logs().filter((log) => this.filters[log.type.label]?.()));
 
     newLog(type: LogBookType, message: string) {
         const length = this.logs.unshift(new LogBookLog(type, message));
@@ -18,20 +20,25 @@ export default class LogBook implements Feature {
         }
     }
 
-    fromJSON(json: { logs: Array<{ type: LogBookType; description: string; date: number }> }): void {
-        if (json == null || !json.logs) {
+    fromJSON(json: any): void {
+        if (json == null) {
             return;
         }
 
-        json.logs.forEach((entry) => {
+        json.logs?.forEach((entry) => {
             this.logs.push(new LogBookLog(entry.type, entry.description, entry.date));
+        });
+
+        Object.entries(json.filters || {}).forEach(([key, value]) => {
+            this.filters[key]?.(value);
         });
     }
 
     toJSON(): { logs: Array<{ type: LogBookType; description: string; date: number }> } {
-        return {
+        return ko.toJS({
             logs: this.logs.slice(0, 100),
-        };
+            filters: this.filters,
+        });
     }
 
     initialize(): void {}
