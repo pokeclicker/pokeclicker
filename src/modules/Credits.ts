@@ -49,6 +49,24 @@ export const SpriteCredits: Credit[] = [
         // Notes: DaleArwin aka IanWalder, a GitHub contributor to this project, gives his permission
     },
     {
+        name: 'Drawnamu',
+        link: 'https://www.deviantart.com/drawnamu',
+        image: 'https://a.deviantart.net/avatars-big/d/r/drawnamu.png',
+        resources: [
+            'Nessa',
+            'Kabu',
+            'Bea',
+            'Opal',
+            'Gordie',
+            'Raihan',
+            'Marnie',
+            'Bede',
+            'Klara',
+            'Mustard',
+        ],
+        // NOTES: Gives permission to everyone who asks in the comments section of the spritesheet as long as credit is given
+    },
+    {
         name: 'EmmaRoak',
         link: 'https://www.deviantart.com/emmaroak',
         image: 'https://a.deviantart.net/avatars-big/e/m/emmaroak.png',
@@ -71,6 +89,7 @@ export const SpriteCredits: Credit[] = [
         image: 'https://a.deviantart.net/avatars-big/g/n/gnomowladny.gif',
         resources: [
             'Team Flare Bryony',
+            'Piers',
         ],
         // NOTES: Feel free to use it if you like, but don\'t forget to give me credit~!
     },
