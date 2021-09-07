@@ -274,6 +274,11 @@ class AchievementHandler {
                 AchievementHandler.addAchievement(`${dungeon} expert`, `Clear ${dungeon} 100 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex(dungeon)), 2, region);
                 AchievementHandler.addAchievement(`${dungeon} hermit`, `Clear ${dungeon} 1,000 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex(dungeon)), 3, region);
             });
+            // Unique Pokémon
+            // AchievementHandler.addAchievement(`${region} Trainer`, `Catch 10% of the Pokémon in ${region}`, new CaughtUniquePokemonsByRegionRequirement(GameConstants.Region.kanto), 0.5, region);
+            // AchievementHandler.addAchievement(`${region} Ace`, `Catch half of the Pokémon in ${region}`, new CaughtUniquePokemonsByRegionRequirement(GameConstants.Region.kanto), 0.5, region);
+            AchievementHandler.addAchievement(`${region} Master`, `Complete the ${region} Pokédex!`, new CaughtUniquePokemonsByRegionRequirement(GameConstants.Region.kanto), 0.5, region);
+            });
         });
 
         // load filters, filter the list & calculate number of tabs
