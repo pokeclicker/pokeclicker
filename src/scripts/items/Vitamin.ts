@@ -1,7 +1,14 @@
 class Vitamin extends Item {
     type: GameConstants.VitaminType;
 
-    constructor(type: GameConstants.VitaminType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.money, options?: ShopOptions, displayName?: string, description?: string) {
+    constructor(
+        type: GameConstants.VitaminType,
+        basePrice: number,
+        currency: GameConstants.Currency = GameConstants.Currency.money,
+        options?: ShopOptions,
+        displayName?: string,
+        description?: string
+    ) {
         super(GameConstants.VitaminType[type], basePrice, currency, options, displayName, description);
         this.type = type;
     }
@@ -39,9 +46,9 @@ ItemList.RareCandy = new Vitamin(
         multiplierDecrease: false,
         saveName: `${GameConstants.VitaminType[GameConstants.VitaminType.RareCandy]}|${GameConstants.Currency[GameConstants.Currency.money]}`,
     },
-    'Rare Candy'
+    'Rare Candy',
+    'A rare to find candy that increases Pokemon attack bonus<br/><i>(attack gained per breeding cycle)</i>.'
 );
-ItemList.RareCandy.description = 'A rare to find candy that increases Pokemon attack bonus<br/><i>(attack gained per breeding cycle)</i>.';
 ItemList.HpUp = new Vitamin(
     GameConstants.VitaminType.HpUp,
     1e4,
@@ -50,9 +57,10 @@ ItemList.HpUp = new Vitamin(
         multiplier: 1.05,
         multiplierDecrease: false,
         saveName: `${GameConstants.VitaminType[GameConstants.VitaminType.HpUp]}|${GameConstants.Currency[GameConstants.Currency.money]}`,
-    }
+    },
+    undefined,
+    'Increases Pokemon hp bonus<br/><i>(attack gained per breeding cycle)</i>'
 );
-ItemList.HpUp.description = 'Increases Pokemon hp bonus<br/><i>(attack gained per breeding cycle)</i>';
 ItemList.Protein = new Vitamin(
     GameConstants.VitaminType.Protein,
     1e4,
@@ -61,9 +69,10 @@ ItemList.Protein = new Vitamin(
         multiplier: 1.05,
         multiplierDecrease: false,
         saveName: `${GameConstants.VitaminType[GameConstants.VitaminType.Protein]}|${GameConstants.Currency[GameConstants.Currency.money]}`,
-    }
+    },
+    undefined,
+    'Increases Pokemon attack bonus<br/><i>(attack gained per breeding cycle)</i>'
 );
-ItemList.Protein.description = 'Increases Pokemon attack bonus<br/><i>(attack gained per breeding cycle)</i>';
 ItemList.Iron = new Vitamin(
     GameConstants.VitaminType.Iron,
     1e4,
@@ -72,9 +81,10 @@ ItemList.Iron = new Vitamin(
         multiplier: 1.05,
         multiplierDecrease: false,
         saveName: `${GameConstants.VitaminType[GameConstants.VitaminType.Iron]}|${GameConstants.Currency[GameConstants.Currency.money]}`,
-    }
+    },
+    undefined,
+    'Increases Pokemon defense bonus<br/><i>(attack gained per breeding cycle)</i>'
 );
-ItemList.Iron.description = 'Increases Pokemon defense bonus<br/><i>(attack gained per breeding cycle)</i>';
 ItemList.Calcium = new Vitamin(
     GameConstants.VitaminType.Calcium,
     1e4,
@@ -83,9 +93,10 @@ ItemList.Calcium = new Vitamin(
         multiplier: 1.05,
         multiplierDecrease: false,
         saveName: `${GameConstants.VitaminType[GameConstants.VitaminType.Calcium]}|${GameConstants.Currency[GameConstants.Currency.money]}`,
-    }
+    },
+    undefined,
+    'Increases Pokemon special attack bonus<br/><i>(attack gained per breeding cycle)</i>'
 );
-ItemList.Calcium.description = 'Increases Pokemon special attack bonus<br/><i>(attack gained per breeding cycle)</i>';
 ItemList.Zinc = new Vitamin(
     GameConstants.VitaminType.Zinc,
     1e4,
@@ -94,9 +105,10 @@ ItemList.Zinc = new Vitamin(
         multiplier: 1.05,
         multiplierDecrease: false,
         saveName: `${GameConstants.VitaminType[GameConstants.VitaminType.Zinc]}|${GameConstants.Currency[GameConstants.Currency.money]}`,
-    }
+    },
+    undefined,
+    'Increases Pokemon special defense bonus<br/><i>(attack gained per breeding cycle)</i>'
 );
-ItemList.Zinc.description = 'Increases Pokemon special defense bonus<br/><i>(attack gained per breeding cycle)</i>';
 ItemList.Carbos = new Vitamin(
     GameConstants.VitaminType.Carbos,
     1e4,
@@ -105,6 +117,7 @@ ItemList.Carbos = new Vitamin(
         multiplier: 1.05,
         multiplierDecrease: false,
         saveName: `${GameConstants.VitaminType[GameConstants.VitaminType.Carbos]}|${GameConstants.Currency[GameConstants.Currency.money]}`,
-    }
+    },
+    undefined,
+    'Increases Pokemon speed bonus<br/><i>(attack gained per breeding cycle)</i>'
 );
-ItemList.Carbos.description = 'Increases Pokemon speed bonus<br/><i>(attack gained per breeding cycle)</i>';
