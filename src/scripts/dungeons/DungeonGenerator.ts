@@ -4,7 +4,7 @@ class CellularAutomata {
         public x: number,
         public y: number,
         public weight: number,
-        public grid: Array<Array<boolean>> = new Array(x).fill(new Array(y).fill(true))
+        public grid: Array<Array<boolean>> = []
     ) {
         this.construct();
     }
