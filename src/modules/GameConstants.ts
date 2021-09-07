@@ -488,7 +488,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Lake Verity', 'Lake Valor', 'Pastoria City']),
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City', 'Plasma Frigate']),
         [Region.kalos]: new Set([8, 'Coumarine City', 'Couriway Town', 'Sea Spirit\'s Den']),
-        [Region.alola]: new Set(),
+        [Region.alola]: new Set([15, 19, 20, 'Seafolk Village', 'Brooklet Hill']),
         [Region.galar]: new Set(['Hulbury', 5, 6, 8, 9, 19, 21]),
     },
 
@@ -499,7 +499,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.sinnoh]: new Set([216, 217, 'Lake Acuity', 'Snowpoint City']),
         [Region.unova]: new Set(['Giant Chasm', 'Plasma Assault']),
         [Region.kalos]: new Set([17, 'Dendemille Town', 'Snowbelle City', 'Frost Cavern']),
-        [Region.alola]: new Set(),
+        [Region.alola]: new Set(['Mount Lanakila']),
         [Region.galar]: new Set(['Circhester', 20, 23, 24]),
     },
 
@@ -510,7 +510,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.sinnoh]: new Set([201, 204, 'Eterna Forest', 'Eterna City', 'Fullmoon Island', 'Newmoon Island']),
         [Region.unova]: new Set([6, 'Lostlorn Forest', 'Pinwheel Forest', 'Pledge Grove', 'Floccesy Town']),
         [Region.kalos]: new Set([1, 14, 20, 'Laverre City', 'Santalune Forest', 'Pokémon Village']),
-        [Region.alola]: new Set(),
+        [Region.alola]: new Set([27, 'Lush Jungle', 'Malie Garden', 'Ula\'ula Meadow', 'Poni Meadow']),
         [Region.galar]: new Set(['Slumbering Weald', 'Inner Slumbering Weald', 'Glimwood Tangle', 'Ballonlea', 4]),
     },
 
@@ -521,7 +521,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.sinnoh]: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
         [Region.unova]: new Set(['Seaside Cave', 'Twist Mountain', 'Reversal Mountain', 'Relic Passage', 'Relic Castle', 'Victory Road Unova']),
         [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Terminus Cave', 'Victory Road Kalos']),
-        [Region.alola]: new Set(),
+        [Region.alola]: new Set([7, 12, 22, 29, 'Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Wela Volcano Park', 'Diglett\'s Tunnel', 'Vast Poni Canyon']),
         [Region.galar]: new Set(['Watchtower Ruins']),
     },
 
@@ -532,7 +532,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.sinnoh]: new Set(['Spear Pillar', 'Hall of Origin', 'Stark Mountain']),
         [Region.unova]: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
         [Region.kalos]: new Set(['Glittering Cave', 'Reflection Cave']),
-        [Region.alola]: new Set(),
+        [Region.alola]: new Set(['Altar of the Sunne and Moone', 'Nebby', 'Resolution Cave']),
         [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2']),
     },
 
@@ -543,7 +543,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.sinnoh]: new Set(['Sunyshore City']),
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City']),
         [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Pokéball Factory', 'Team Flare Secret HQ']),
-        [Region.alola]: new Set(),
+        [Region.alola]: new Set(['Aether Paradise', 'Hokulani Observatory', 'Aether Foundation']),
         [Region.galar]: new Set(['Motostoke', 'Spikemuth']),
     },
 
@@ -554,7 +554,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.sinnoh]: new Set(['Old Chateau', 'Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Liberty Garden', 'Dreamyard', 'Mistralton City', 'Opelucid City']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
-        [Region.alola]: new Set(),
+        [Region.alola]: new Set(['Trainers\' School', 'Ruins of Conflict', 'Ruins of Life', 'Thrifty Megamart', 'Po Town', 'Ruins of Abundance', 'Ruins of Hope']),
         [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side']),
     },
 
@@ -565,7 +565,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.sinnoh]: new Set(['Hearthome City', 'Solaceon Ruins', 'Distortion World']),
         [Region.unova]: new Set(['Celestial Tower']),
         [Region.kalos]: new Set(),
-        [Region.alola]: new Set(),
+        [Region.alola]: new Set(['Hau\'oli Cemetery', 'Memorial Hill']),
         [Region.galar]: new Set(),
     },
 };
