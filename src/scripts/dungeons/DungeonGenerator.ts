@@ -21,6 +21,25 @@ class CellularAutomata {
             }
         }
     }
+    public form_row() {
+        const r = [];
+        for (let i = 0; i < this.x; i++) {
+            const state = Math.floor(Math.random() * 100);
+            if (state <= this.weight) {
+                r.push(true);
+            } else {
+                r.push(false);
+            }
+        }
+        return r;
+    }
+    public build() {
+        let a;
+        for (let i = 0; i < this.y; i++) {
+            a = this.form_row();
+            this.grid.push(a);
+        }
+    }
     public cellular_automaton(map: Array<Array<boolean>>): Array<Array<boolean>> {
         let count;
         const arr: Array<Array<boolean>> = [];
