@@ -34,12 +34,12 @@
                             <button class="btn btn-primary btn-block" onClick="Save.download()">Download Save</button>
                             <hr>
 
-                            <input type="file" id="input" accept=".txt" style="display:none;"
+                            <input type="file" id="import-save" accept=".txt" style="display:none;"
                                     onchange=Save.loadFromFile(this.files[0])>
-                            <label for="input" class="btn btn-primary btn-block">Import Save</label>
+                            <label for="import-save" class="btn btn-primary btn-block">Import Save</label>
                             <hr>
-                            <h5 class="text-danger">You do not get any rewards for resetting your savefile</h5>
-                            <button class="btn btn-danger btn-block" onClick="Save.reset()">Reset All</button>
+                            <h5 class="text-danger">You will not be able to recover your savefile</h5>
+                            <button class="btn btn-danger btn-block" onClick="Save.delete()">DELETE SAVE</button>
                         </div>
                     </div>
 

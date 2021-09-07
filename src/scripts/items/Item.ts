@@ -1,10 +1,16 @@
 ///<reference path="../shop/ShopHandler.ts"/>
 
+/**
+ * Source event for decreasing shop multipliers
+ */
 enum MultiplierDecreaser {
     Battle = 0,
     Berry,
 }
 
+/**
+ * Additional shop options for an item
+ */
 interface ShopOptions {
     saveName?: string,
     maxAmount?: number,
@@ -13,25 +19,25 @@ interface ShopOptions {
     multiplierDecreaser?: MultiplierDecreaser,
 }
 
-abstract class Item {
-    name: KnockoutObservable<string>;
+class Item {
     saveName: string;
-    basePrice: number;
     type: any;
-    currency: GameConstants.Currency;
+
+    // Shop Details
     price: KnockoutObservable<number>;
-    maxAmount: number;
     multiplier: number;
     multiplierDecrease: boolean;
     multiplierDecreaser: MultiplierDecreaser;
 
-    description?: string;
+    maxAmount: number;
+    _description?: string;
     _displayName: string;
+    imageDirectory?: string;
 
     constructor(
-        name: string,
-        basePrice: number,
-        currency: GameConstants.Currency = GameConstants.Currency.money,
+        public name: string,
+        public basePrice: number,
+        public currency: GameConstants.Currency = GameConstants.Currency.money,
         {
             saveName = '',
             maxAmount = Number.MAX_SAFE_INTEGER,
@@ -40,10 +46,9 @@ abstract class Item {
             multiplierDecreaser = MultiplierDecreaser.Battle,
         } : ShopOptions = {},
         displayName?: string,
-        description?: string) {
-        this.name = ko.observable(name);
-        this.basePrice = basePrice;
-        this.currency = currency;
+        description?: string,
+        imageDirectory?: string) {
+
         this.price = ko.observable(this.basePrice);
         // If no custom save name specified, default to item name
         this.saveName = saveName || name || `${name}|${GameConstants.Currency[currency]}`;
@@ -57,11 +62,12 @@ abstract class Item {
         }
 
         this._displayName = displayName ?? name;
-        this.description = description;
+        this._description = description;
+        this.imageDirectory = imageDirectory;
     }
 
     totalPrice(amount: number): number {
-        if (this.name() == GameConstants.Pokeball[GameConstants.Pokeball.Pokeball]) {
+        if (this.name == GameConstants.Pokeball[GameConstants.Pokeball.Pokeball]) {
             return Math.max(0, this.basePrice * amount);
         } else {
             // multiplier should be capped at 100, so work out how many to buy at increasing price and how many at max
@@ -88,7 +94,7 @@ abstract class Item {
 
         if (n > this.maxAmount) {
             Notifier.notify({
-                message: `You can only buy ${this.maxAmount} &times; ${GameConstants.humanifyString(this.name())}!`,
+                message: `You can only buy ${this.maxAmount} &times; ${GameConstants.humanifyString(this.displayName)}!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             n = this.maxAmount;
@@ -96,7 +102,7 @@ abstract class Item {
 
         if (!this.isAvailable()) {
             Notifier.notify({
-                message: `${GameConstants.humanifyString(this.name())} is sold out!`,
+                message: `${GameConstants.humanifyString(this.displayName)} is sold out!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             return;
@@ -109,7 +115,7 @@ abstract class Item {
             this.gain(n);
             this.increasePriceMultiplier(n);
             Notifier.notify({
-                message: `You bought ${n} ${GameConstants.humanifyString(this.name())}${multiple}`,
+                message: `You bought ${n} ${GameConstants.humanifyString(this.displayName)}${multiple}`,
                 type: NotificationConstants.NotificationOption.success,
             });
         } else {
@@ -122,17 +128,19 @@ abstract class Item {
                     break;
             }
             Notifier.notify({
-                message: `You don't have enough ${curr} to buy ${n} ${GameConstants.humanifyString(this.name()) + multiple}`,
+                message: `You don't have enough ${curr} to buy ${n} ${GameConstants.humanifyString(this.displayName) + multiple}`,
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
     }
 
     gain(n: number) {
-        player.gainItem(this.name(), n);
+        player.gainItem(this.name, n);
     }
 
-    abstract use();
+    use(): boolean {
+        return false;
+    }
 
     isAvailable(): boolean {
         return true;
@@ -154,13 +162,19 @@ abstract class Item {
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.saveName]));
     }
 
+    get description() {
+        return this._description;
+    }
+
     get displayName() {
         return GameConstants.humanifyString(this._displayName);
     }
 
-    get imagePath() {
-        return `assets/images/items/${this.name()}.png`;
+    get image() {
+        const subDirectory = this.imageDirectory ? `${this.imageDirectory}/` : '';
+        return `assets/images/items/${subDirectory}${this.name}.png`;
     }
+
 }
 
 const ItemList: { [name: string]: Item } = {};

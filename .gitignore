@@ -9,3 +9,4 @@ src/declarations/
 *.sln
 Web.config
 report.*.json
+.DS_Store

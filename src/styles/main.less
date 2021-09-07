@@ -89,6 +89,10 @@
 	animation: flash linear 0.5s infinite;
 }
 
+img.pixelated {
+  image-rendering: pixelated;
+}
+
 @-webkit-keyframes flash {
 	0% { opacity: 1; }
 	50% { opacity: 0.1; }
@@ -221,6 +225,11 @@ body:hover {
   }
 }
 
+// Firefox fix for background covering borders in tables
+td {
+  background-clip: padding-box;
+}
+
 #pokemonList {
   span {
     vertical-align: middle;
@@ -283,6 +292,10 @@ img {
 
 .clickable {
   cursor: pointer;
+}
+
+.no-click {
+  pointer-events: none;
 }
 
 .btn-static {
@@ -508,4 +521,9 @@ td.tight {
 
 .all-pointers {
   pointer-events: all !important;
+}
+
+.introjs-fixParent.modal,
+.introjs-fixParent.modal-dialog {
+  position: absolute !important;  
 }

@@ -17,12 +17,14 @@ class Game {
      */
     constructor(
         public update: Update,
+        public profile: Profile,
         public breeding: Breeding,
         public pokeballs: Pokeballs,
         public wallet: Wallet,
         public keyItems: KeyItems,
         public badgeCase: BadgeCase,
         public oakItems: OakItems,
+        public oakItemLoadouts: OakItemLoadouts,
         public categories: PokemonCategories,
         public party: Party,
         public shards: Shards,
@@ -35,17 +37,19 @@ class Game {
         public specialEvents: SpecialEvents,
         public discord: Discord,
         public achievementTracker: AchievementTracker,
+        public challenges: Challenges,
+        public battleFrontier: BattleFrontier,
         public multiplier: Multiplier
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
-        AchievementHandler.initialize(multiplier);
+        AchievementHandler.initialize(multiplier, challenges);
         FarmController.initialize();
         EffectEngineRunner.initialize(multiplier);
     }
 
     load() {
-        const saveJSON = localStorage.getItem('save');
+        const saveJSON = localStorage.getItem(`save${Save.key}`);
 
         const saveObject = JSON.parse(saveJSON || '{}');
 
@@ -61,6 +65,7 @@ class Game {
     }
 
     initialize() {
+        this.profile.initialize();
         this.breeding.initialize();
         this.pokeballs.initialize();
         this.keyItems.initialize();
@@ -75,16 +80,76 @@ class Game {
         this.farming.resetAuras();
         //Safari.load();
         Underground.energyTick(this.underground.getEnergyRegenTime());
-        DailyDeal.generateDeals(this.underground.getDailyDealsMax(), new Date());
-        BerryDeal.generateDeals(new Date());
-        Weather.generateWeather(new Date());
+        AchievementHandler.calculateMaxBonus(); //recalculate bonus based on active challenges
 
-        this.gameState = GameConstants.GameState.fighting;
+        const now = new Date();
+        DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
+        BerryDeal.generateDeals(now);
+        Weather.generateWeather(now);
+        RoamingPokemonList.generateIncreasedChanceRoutes(now);
+
+        this.computeOfflineEarnings();
+        this.checkAndFix();
+
+        // If the player isn't on a route, they're in a town/dungeon
+        this.gameState = player.route() ? GameConstants.GameState.fighting : GameConstants.GameState.town;
+    }
+
+    computeOfflineEarnings() {
+        const now = Date.now();
+        const timeDiffInSeconds = Math.floor((now - player._lastSeen) / 1000);
+        if (timeDiffInSeconds > 1) {
+            // Only allow up to 24 hours worth of bonuses
+            const timeDiffOverride = Math.min(86400, timeDiffInSeconds);
+            let region: GameConstants.Region = player.region;
+            let route: number = player.route() || GameConstants.StartingRoutes[region];
+            if (!MapHelper.validRoute(route, region)) {
+                route = 1;
+                region = GameConstants.Region.kanto;
+            }
+            const availablePokemonMap = RouteHelper.getAvailablePokemonList(route, region).map(name => pokemonMap[name]);
+            const maxHealth: number = PokemonFactory.routeHealth(route, region);
+            let hitsToKill = 0;
+            for (const pokemon of availablePokemonMap) {
+                const type1: PokemonType = pokemon.type[0];
+                const type2: PokemonType = pokemon.type.length > 1 ? pokemon.type[1] : PokemonType.None;
+                const attackAgainstPokemon = App.game.party.calculatePokemonAttack(type1, type2);
+                const currentHitsToKill: number = Math.ceil(maxHealth / attackAgainstPokemon);
+                hitsToKill += currentHitsToKill;
+            }
+            hitsToKill = Math.ceil(hitsToKill / availablePokemonMap.length);
+            const numberOfPokemonDefeated = Math.floor(timeDiffOverride / hitsToKill);
+            const routeMoney: number = PokemonFactory.routeMoney(player.route(), player.region, false);
+            const baseMoneyToEarn = numberOfPokemonDefeated * routeMoney;
+            const moneyToEarn = Math.floor(baseMoneyToEarn * 0.5);//Debuff for offline money
+            App.game.wallet.gainMoney(moneyToEarn, true);
+
+            Notifier.notify({
+                type: NotificationConstants.NotificationOption.info,
+                title: 'Offline progress',
+                message: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
+                timeout: 2 * GameConstants.MINUTE,
+            });
+        }
+    }
+
+    checkAndFix() {
+        // Quest box not showing (game thinking tutorial is not completed)
+        if (App.game.quests.getQuestLine('Tutorial Quests').state() == QuestLineState.inactive) {
+            if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pewter City')]() >= 1) {
+                // Defeated Brock, Has completed the Tutorial
+                App.game.quests.getQuestLine('Tutorial Quests').state(QuestLineState.ended);
+            } else if (player.starter() >= 0) {
+                // Has chosen a starter, Tutorial is started
+                App.game.quests.getQuestLine('Tutorial Quests').state(QuestLineState.started);
+                App.game.quests.getQuestLine('Tutorial Quests').beginQuest(App.game.quests.getQuestLine('Tutorial Quests').curQuest());
+            }
+        }
     }
 
     start() {
         console.log(`[${GameConstants.formatDate(new Date())}] %cGame started`, 'color:#2ecc71;font-weight:900;');
-        if (player.starter === GameConstants.Starter.None) {
+        if (player.starter() === GameConstants.Starter.None) {
             StartSequenceRunner.start();
         }
         this.interval = setInterval(this.gameTick.bind(this), GameConstants.TICK_TIME);
@@ -162,6 +227,7 @@ class Game {
             // Check if it's a new hour
             if (old.getHours() !== now.getHours()) {
                 Weather.generateWeather(now);
+                RoamingPokemonList.generateIncreasedChanceRoutes(now);
             }
 
             // Save the game

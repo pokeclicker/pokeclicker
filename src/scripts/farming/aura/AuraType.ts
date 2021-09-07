@@ -6,4 +6,6 @@ enum AuraType {
     Egg,
     Attract,
     Shiny,
+    Death,
+    Boost,
 }

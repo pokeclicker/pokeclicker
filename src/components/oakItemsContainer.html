@@ -1,4 +1,4 @@
-<div id="oakItemsContainer" class="card sortable border-secondary mb-3" data-bind="visible: App.game.oakItems.canAccess()">
+<div id="oakItemsContainer" class="card sortable border-secondary mb-3" data-bind="visible: App.game.oakItems.canAccess() && !(Settings.getSetting('hideChallengeRelatedModules').observableValue() && App.game.challenges.list.disableOakItems.active())">
     <div class="card-header p-0" data-toggle="collapse" href="#oakItemsBody">
         <span style="text-align:center">Oak Items</span>
     </div>
@@ -47,7 +47,7 @@
             </td>
           </tr>
         </tbody>
-        <!-- ko if: App.game.oakItems.hasAvailableSlot() -->
+        <!-- ko if: App.game.oakItems.hasAvailableSlot() && !App.game.challenges.list.disableOakItems.active() -->
         <tfoot>
           <tr>
             <td class="clickable table-warning text-light" colspan="2" href="#oakItemsModal" data-toggle="modal">
@@ -56,6 +56,29 @@
           </tr>
         </tfoot>
         <!-- /ko -->
+        <!-- ko if: App.game.challenges.list.disableOakItems.active() -->
+        <tfoot>
+          <tr>
+            <td class="clickable table-danger text-light" colspan="2" href="#oakItemsModal" data-toggle="modal">
+              Oak Items are disabled.
+            </td>
+          </tr>
+        </tfoot>
+        <!-- /ko -->
       </table>
     </div>
+    <!-- ko if: !App.game.challenges.list.disableOakItems.active() -->
+    <div id="oakItemLoadout">
+      <table class="table table-bordered table-striped m-0">
+        <tr data-bind="foreach: App.game.oakItemLoadouts.loadouts">
+          <td class="p-1 tight">
+            <button class='btn btn-block btn-primary' style="height: 100%;"
+              data-bind='click: function(){ App.game.oakItemLoadouts.activateLoadout($index()) }, text: $index() + 1'>
+              1
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- /ko -->
 </div>

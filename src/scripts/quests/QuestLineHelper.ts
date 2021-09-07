@@ -1,30 +1,30 @@
+/**
+ * Static class used to handle Quest Lines
+ */
 class QuestLineHelper {
+
     public static createTutorial() {
         const tutorial = new QuestLine('Tutorial Quests', 'A short set of quests to get you going');
 
         //Defeat Starter
-        const defeatStarter = new CapturePokemonsQuest(1);
+        const defeatStarter = new CapturePokemonsQuest(1, 10);
         //Capture pokemon because start sequence resets route 1 kills to 0, making this quest think it is incomplete
-        defeatStarter.pointsReward = 10;
-        defeatStarter.description = 'Defeat the Pokémon. Click to deal damage';
+        defeatStarter.customDescription = 'Defeat the Pokémon. Click to deal damage';
         tutorial.addQuest(defeatStarter);
 
         //Capture 1 pokemon
-        const captureOne = new CapturePokemonsQuest(1);
-        captureOne.pointsReward = 20;
-        captureOne.description = 'Capture 1 Pokémon. When you defeat a Pokémon, a Pokéball is thrown and you have a chance to capture it.';
+        const captureOne = new CapturePokemonsQuest(1, 20);
+        captureOne.customDescription = 'Capture 1 Pokémon. When you defeat a Pokémon, a Pokéball is thrown and you have a chance to capture it.';
         tutorial.addQuest(captureOne);
 
         //Kill 5 on route 2
-        const routeTwo = new DefeatPokemonsQuest(2, GameConstants.Region.kanto, 10);
-        routeTwo.pointsReward = 20;
-        routeTwo.description = 'Defeat 10 Pokémon on route 2. Click route 2 on the map to move there and begin fighting.';
+        const routeTwo = new DefeatPokemonsQuest(10, 20, 2, GameConstants.Region.kanto);
+        routeTwo.customDescription = 'Defeat 10 Pokémon on route 2. Click route 2 on the map to move there and begin fighting.';
         tutorial.addQuest(routeTwo);
 
         //Buy pokeballs
-        const buyPokeballs = new BuyPokeballsQuest(10, GameConstants.Pokeball.Pokeball, 50);
-        buyPokeballs.pointsReward = 50;
-        buyPokeballs.description = 'Buy 10 Pokéballs. You can find these in the Viridian City Shop.';
+        const buyPokeballs = new BuyPokeballsQuest(10, 50, GameConstants.Pokeball.Pokeball);
+        buyPokeballs.customDescription = 'Buy 10 Pokéballs. You can find these in the Viridian City Shop.';
         tutorial.addQuest(buyPokeballs);
 
         //Buy Dungeon ticket
@@ -32,10 +32,9 @@ class QuestLineHelper {
         tutorial.addQuest(buyDungeonTicket);
 
         //Clear Viridian Forest
-        const clearMtMoon = new DefeatDungeonQuest('Viridian Forest', 1);
-        clearMtMoon.pointsReward = 50;
-        clearMtMoon.description = 'Gather 50 Dungeon tokens by (re)capturing Pokémon, then clear the Viridian Forest dungeon.';
-        tutorial.addQuest(clearMtMoon);
+        const clearViridianForest = new DefeatDungeonQuest(1, 50, 'Viridian Forest');
+        clearViridianForest.customDescription = 'Gather 50 Dungeon tokens by (re)capturing Pokémon, then clear the Viridian Forest dungeon.';
+        tutorial.addQuest(clearViridianForest);
 
         //Defeat Pewter Gym
         const pewterReward = () => {
@@ -55,17 +54,11 @@ class QuestLineHelper {
         App.game.quests.questLines().push(tutorial);
     }
 
-    // Need to check if tutorial is completed before showing the other quests stuff
-    public static isTutorialCompleted() {
-        return App.game.quests.getQuestLine('Tutorial Quests')?.state() == QuestLineState.ended;
-    }
-
     public static createDeoxysQuestLine() {
         const deoxysQuestLine = new QuestLine('Mystery of Deoxys', 'Discover the mystery of Deoxys');
 
         // Defeat 50 Pokemon on route 129
-        const route129 = new DefeatPokemonsQuest(129, GameConstants.Region.hoenn, 50);
-        route129.pointsReward = 0;
+        const route129 = new DefeatPokemonsQuest(50, 0, 129, GameConstants.Region.hoenn);
         deoxysQuestLine.addQuest(route129);
 
         // Defeat 500 Psychic type Pokemon
@@ -143,9 +136,110 @@ class QuestLineHelper {
         App.game.quests.questLines().push(undergroundQuestLine);
     }
 
+    public static createVivillonQuestLine() {
+        const VivillonQuestLine = new QuestLine('The Great Vivillon Hunt!', 'Discover the beauty of Vivillon');
+
+        const createVivillonQuest = (type: PokemonType, vivillon: PokemonNameType, dungeons: Array<string>, hint: string) => {
+            // Capture 100 Water type Pokemon
+            const catchType = new CustomQuest(100, undefined, `Capture 100 ${PokemonType[type]} type Pokémon`, () => {
+                return pokemonMap.filter(p => p.type.includes(type)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
+            });
+            VivillonQuestLine.addQuest(catchType);
+
+            // Capture Vivillon in a dungeon
+            const vivillonAdd = () => {
+                dungeons.forEach(dungeon => {
+                    dungeonList[dungeon].bossList.push(new DungeonBossPokemon(vivillon, 93659450, 80));
+                });
+                Notifier.notify({
+                    title: VivillonQuestLine.name,
+                    message: `A Vivillon is hiding somewhere.\n${hint}`,
+                    type: NotificationConstants.NotificationOption.info,
+                });
+            };
+            const vivillonRemove = () => {
+                dungeons.forEach(dungeon => {
+                    dungeonList[dungeon].bossList = dungeonList[dungeon].bossList.filter(boss => boss.name != vivillon);
+                });
+                Notifier.notify({
+                    title: VivillonQuestLine.name,
+                    message: `You caught the rare ${vivillon}`,
+                    type: NotificationConstants.NotificationOption.success,
+                });
+            };
+            const catchVivillon = new CustomQuest(
+                1,
+                vivillonRemove,
+                `Find and capture the rare Vivillon!\nHint: ${hint}.`,
+                App.game.statistics.pokemonCaptured[pokemonMap[vivillon].id],
+                undefined,
+                vivillonAdd
+            );
+            VivillonQuestLine.addQuest(catchVivillon);
+        };
+
+        createVivillonQuest(PokemonType.Water, 'Vivillon (Marine)', ['Lake Verity', 'Lake Valor', 'Lake Acuity'], 'It has been spotted at some Lakes.');
+        createVivillonQuest(PokemonType.Psychic, 'Vivillon (Modern)', ['Cerulean Cave'], 'It\'s surrounded by strong Pokémon.');
+        createVivillonQuest(PokemonType.Poison, 'Vivillon (Jungle)', ['Moor of Icirrus'], 'It has been spotted in a swamp.');
+        createVivillonQuest(PokemonType.Dark, 'Vivillon (Monsoon)', ['Dark Cave'], 'It\'s hiding at a dark place.');
+        createVivillonQuest(PokemonType.Steel, 'Vivillon (Tundra)', ['Pokéball Factory'], 'It flew into a factory.');
+        createVivillonQuest(PokemonType.Fire, 'Vivillon (Sun)', ['Mt. Chimney'], 'It seems to like hot places.');
+        createVivillonQuest(PokemonType.Fighting, 'Vivillon (Archipelago)', ['Sprout Tower'], 'It\'s sitting on a swaying pillar.');
+        createVivillonQuest(PokemonType.Ghost, 'Vivillon (Elegant)', ['Lost Hotel'], 'It\'s visiting an abandoned and spooky place.');
+        createVivillonQuest(PokemonType.Fairy, 'Vivillon (Ocean)', ['Dreamyard'], 'It\'s flying around an overgrown place full of dreams.');
+        createVivillonQuest(PokemonType.Electric, 'Vivillon (Continental)', ['New Mauville'], 'It\'s currently in a City full of Electric type Pokémon.');
+        createVivillonQuest(PokemonType.Bug, 'Vivillon (River)', ['Eterna Forest'], 'It hides in a dark Forest.');
+        createVivillonQuest(PokemonType.Flying, 'Vivillon (Polar)', ['Sky Pillar'], 'It\'s high up in the sky.');
+        createVivillonQuest(PokemonType.Ground, 'Vivillon (Sandstorm)', ['Relic Castle'], 'It got lost in the desert sand.');
+        createVivillonQuest(PokemonType.Grass, 'Vivillon (Garden)', ['Flower Paradise'], 'It only shows up amongst the most beautiful flowers.');
+        createVivillonQuest(PokemonType.Rock, 'Vivillon (High Plains)', ['Mt. Moon'], 'It has been spotted dancing in the moonlight.');
+        createVivillonQuest(PokemonType.Dragon, 'Vivillon (Savanna)', ['Dragonspiral Tower'], 'It\'s surrounded by dragons.');
+        createVivillonQuest(PokemonType.Ice, 'Vivillon (Icy Snow)', ['Frost Cavern'], 'It can be found at a very cold place.');
+
+        // Capture 200 Normal type Pokemon
+        const catchNormal = new CustomQuest(200, undefined, 'Capture 200 Normal type Pokémon', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Normal)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
+        });
+        VivillonQuestLine.addQuest(catchNormal);
+
+        // Capture Vivillon (Pokéball)
+        const ViviBallAdd = () => {
+            BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(666, 'Vivillon (Pokéball)'));
+            Notifier.notify({
+                title: VivillonQuestLine.name,
+                message: 'A Vivillon is hiding somewhere.\nOnly the strongest Challengers can reach it.',
+                type: NotificationConstants.NotificationOption.success,
+            });
+        };
+        const ViviBalldone = () => {
+            Notifier.notify({
+                title: VivillonQuestLine.name,
+                message: 'You caught the last rare Vivillon (Pokéball).\nCongratulations!',
+                type: NotificationConstants.NotificationOption.success,
+            });
+        };
+        const catchBall = new CustomQuest(
+            1,
+            ViviBalldone,
+            'Find and capture the rare Vivillon!\nHint: Only the strongest Challengers can reach it.',
+            App.game.statistics.pokemonCaptured[666.01],
+            undefined,
+            ViviBallAdd
+        );
+        VivillonQuestLine.addQuest(catchBall);
+
+        // Add quest to quest line
+        App.game.quests.questLines().push(VivillonQuestLine);
+    }
+
+    public static isQuestLineCompleted(name: string) {
+        return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
+    }
+
     public static loadQuestLines() {
         this.createTutorial();
         this.createDeoxysQuestLine();
         this.createUndergroundQuestLine();
+        this.createVivillonQuestLine();
     }
 }

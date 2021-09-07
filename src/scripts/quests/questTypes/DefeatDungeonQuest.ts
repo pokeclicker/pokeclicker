@@ -1,13 +1,31 @@
 /// <reference path="../Quest.ts" />
 
 class DefeatDungeonQuest extends Quest implements QuestInterface {
-    constructor(dungeon: string, amount: number) {
-        super(amount, DefeatDungeonQuest.calcReward(dungeon, amount));
-        this.description = `Defeat the ${dungeon} dungeon ${amount.toLocaleString('en-US')} times.`;
-        this.focus = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeon)];
+    private region: GameConstants.Region;
+
+    constructor(
+        amount: number,
+        reward: number,
+        private dungeon: string
+    ) {
+        super(amount, reward);
+        this.region = GameConstants.getDungeonRegion(this.dungeon);
+        this.focus = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.dungeon)];
     }
 
-    private static calcReward(dungeon: string, amount: number): number {
+    public static generateData(): any[] {
+        // Allow up to highest region
+        const amount = SeededRand.intBetween(5, 20);
+        const region = SeededRand.intBetween(0, player.highestRegion());
+        // Only use unlocked dungeons
+        const possibleDungeons = GameConstants.RegionDungeons[region].filter(dungeon => TownList[dungeon].isUnlocked());
+        // If no dungeons unlocked in this region, just use the first dungeon of the region
+        const dungeon = possibleDungeons.length ? SeededRand.fromArray(possibleDungeons) : GameConstants.RegionDungeons[region][0];
+        const reward = this.calcReward(amount, dungeon);
+        return [amount, reward, dungeon];
+    }
+
+    private static calcReward(amount: number, dungeon: string): number {
         const playerDamage = App.game.party.calculateClickAttack() + (App.game.party.calculatePokemonAttack() / GameConstants.QUEST_CLICKS_PER_SECOND);
         const attacksToDefeatPokemon = Math.ceil(Math.min(4, dungeonList[dungeon].baseHealth / playerDamage));
         const averageTilesToBoss = 13;
@@ -15,7 +33,7 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         const completeDungeonsReward = attacksToCompleteDungeon * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER * amount;
 
         let region: GameConstants.Region, route: number;
-        for (region = player.highestRegion; region >= 0; region--) {
+        for (region = player.highestRegion(); region >= 0; region--) {
             route = QuestHelper.highestOneShotRoute(region); // returns 0 if no routes in this region can be one shot
             if (route) {
                 break;
@@ -28,6 +46,18 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         const routeKillsPerDungeon = dungeonList[dungeon].tokenCost / tokens;
         const collectTokensReward = routeKillsPerDungeon * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * amount;
 
-        return Math.min(5000, Math.ceil(completeDungeonsReward + collectTokensReward));
+        const reward = Math.min(5000, Math.ceil(completeDungeonsReward + collectTokensReward));
+        return super.randomizeReward(reward);
+    }
+
+    get description(): string {
+        return `Defeat the ${this.dungeon} dungeon in ${GameConstants.camelCaseToString(GameConstants.Region[this.region])} ${this.amount.toLocaleString('en-US')} times.`;
+    }
+
+    toJSON() {
+        const json = super.toJSON();
+        json['name'] = this.constructor.name;
+        json['data'].push(this.dungeon);
+        return json;
     }
 }

@@ -8,21 +8,32 @@ class Aura {
     /**
      * Handles applying the berry's Aura to its neighbors
      */
-    applyAura(index: number): void {
+    emitAura(index: number): void {
         const plot = App.game.farming.plotList[index];
         if (plot.stage() < PlotStage.Taller) {
             return;
         }
-        const multiplier = this.auraMultipliers[plot.stage() - 2];
+        const multiplier = this.auraMultipliers[plot.stage() - 2] * plot._auras[AuraType.Boost]();
+        const plots = Plot.findNearPlots(index);
         switch (this.auraType) {
+            // External Auras
             case AuraType.Attract:
             case AuraType.Egg:
             case AuraType.Shiny:
                 const currentMultiplier = App.game.farming.externalAuras[this.auraType]();
                 App.game.farming.externalAuras[this.auraType](currentMultiplier * multiplier);
                 break;
+            // Auras that are the max magnitude of surroundings
+            case AuraType.Death:
+            case AuraType.Boost:
+                for (const nearIdx of plots) {
+                    const nearPlot = App.game.farming.plotList[nearIdx];
+                    const currentMultiplier = nearPlot._auras[this.auraType]();
+                    nearPlot.setAura(this.auraType, Math.max(currentMultiplier, multiplier));
+                }
+                break;
+            // Default auras are multiplicative
             default:
-                const plots = Plot.findNearPlots(index);
                 for (const nearIdx of plots) {
                     const nearPlot = App.game.farming.plotList[nearIdx];
                     nearPlot.addAura(this.auraType, multiplier);
@@ -31,11 +42,11 @@ class Aura {
         }
     }
 
-    getLabel(stage: PlotStage): string {
+    getAuraValue(stage: PlotStage): number {
         if (!stage || stage < PlotStage.Taller) {
-            return '';
+            return 1;
         }
-        return `${AuraType[this.auraType]}: ${this.auraMultipliers[stage - 2]}x`;
+        return this.auraMultipliers[stage - 2];
     }
 
 }

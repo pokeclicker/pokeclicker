@@ -11,6 +11,11 @@
                 <img src="" data-bind="attr: { src: `assets/images/items/${getVitaminNameByType(App.game.statistics.selectedVitaminId())}.png` }" width="40%"/>
                 <br/>
                 <div class="sticky-top">
+                  <!-- ko if: App.game.challenges.list.disableProteins.active() -->
+                  <span class="btn btn-block btn-danger btn-static m-0">
+                    Vitamins are disabled.
+                  </span>
+                  <!-- /ko -->
                   <span class="btn btn-block btn-primary" data-bind="text: `${getVitaminNameByType(App.game.statistics.selectedVitaminId())}: ${player.itemList[getVitaminNameByType(App.game.statistics.selectedVitaminId())]().toLocaleString('en-US')}`"></span>
                   <button type="button" class="btn btn-sm btn-primary"
                     style="position: absolute; right: 0px; top: 0px; width: 42px; height: 41px;"

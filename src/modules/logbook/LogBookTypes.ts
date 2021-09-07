@@ -24,12 +24,16 @@ export const LogBookTypes: Record<string, LogBookType> = {
         display: 'primary',
         label: 'FOUND',
     },
-    ACHIEVEMENT: {
+    ACHIEVE: {
         display: 'warning',
         label: 'ACHIEVE',
     },
-    QUEST_COMPLETE: {
+    QUEST: {
         display: 'info',
         label: 'QUEST',
+    },
+    WANDER: {
+        display: 'primary',
+        label: 'WANDER',
     },
 };

@@ -1,8 +1,11 @@
 class Shop {
-    items: KnockoutObservableArray<Item>;
+    constructor(
+        public items: Item[],
+        public name = 'Poké Mart',
+        public href = '#shopModal'
+    ) { }
 
-    constructor(items: Item[]) {
-        this.items = ko.observableArray(items);
+    get displayName() {
+        return this.name;
     }
 }
-

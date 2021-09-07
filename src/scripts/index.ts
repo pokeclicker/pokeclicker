@@ -8,7 +8,15 @@ let player;
  * Start the application when all html elements are loaded.
  */
 document.addEventListener('DOMContentLoaded', () => {
-    App.start();
+    try {
+        const settings = localStorage.getItem('settings');
+        Settings.fromJSON(JSON.parse(settings));
+        document.body.className = `no-select ${Settings.getSetting('theme').observableValue()} ${Settings.getSetting('backgroundImage').observableValue()}`;
+        (document.getElementById('theme-link') as HTMLLinkElement).href = `https://bootswatch.com/4/${Settings.getSetting('theme').observableValue()}/bootstrap.min.css`;
+
+    } catch (e) {}
+    // Load list of saves
+    SaveSelector.loadSaves();
 });
 
 // Nested modals can be opened while they are in the middle of hiding.

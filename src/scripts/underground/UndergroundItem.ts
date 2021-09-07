@@ -1,31 +1,44 @@
+///<reference path="../achievements/MaxRegionRequirement.ts"/>
+
 class UndergroundItem {
-    public name: string;
-    public id: number;
-    public space: Array<Array<number>>;
-    public value: number;
-    public valueType: string;
+    public space: Array<Array<any>>;
 
     public static list: Array<UndergroundItem> = [];
 
-    constructor(name: string, id: number, space: Array<Array<number>>, value = 1, valueType = 'Diamond') {
-        this.name = name;
-        this.id = id;
-        this.space = space;
-        this.value = value;
-        this.valueType = valueType;
+    constructor(
+        public name: string,
+        public id: number,
+        space: Array<Array<number>>,
+        public value = 1,
+        public valueType = 'Diamond',
+        public requirement?: Requirement
+    ) {
+        this.space = space.map((r, y) => r.map((v, x) => ({
+            sizeX: r.length,
+            sizeY: space.length,
+            x,
+            y,
+            value: v ? this.id : 0,
+            rotations: 0,
+        })));
     }
 
-    public static addItem(name, id, space, ...rest) {
-        UndergroundItem.list.push(new UndergroundItem(name, id, space, ...rest));
+    public static addItem(
+        name: string,
+        id: number,
+        space: Array<Array<number>>,
+        value = 1,
+        valueType = 'Diamond',
+        requirement?: Requirement
+    ) {
+        UndergroundItem.list.push(new UndergroundItem(name, id, space, value, valueType, requirement));
     }
 
+    // Returns a random unlocked item
     public static getRandomItem(): UndergroundItem {
-        const i = Math.floor(Math.random() * (UndergroundItem.list.length));
-        return UndergroundItem.list[i] || UndergroundItem.list[0];
-    }
-
-    public isStone(): boolean {
-        return ItemList[this.valueType] instanceof EvolutionStone;
+        const unlockedItems = UndergroundItem.list.filter(i => i.isUnlocked());
+        const i = Math.floor(Math.random() * (unlockedItems.length));
+        return unlockedItems[i] || UndergroundItem.list[0];
     }
 
     public static getFullResourceName(valuetype: string, amt: number): string {
@@ -38,20 +51,28 @@ class UndergroundItem {
         return GameConstants.humanifyString(valuetype);
     }
 
+    public isUnlocked(): boolean {
+        return this.requirement ? this.requirement.isCompleted() : true;
+    }
+
+    public isStone(): boolean {
+        return ItemList[this.valueType] instanceof EvolutionStone;
+    }
+
     get displayName() {
         return this.name;
     }
 
-    get imagePath() {
+    get image() {
         // Have to add extra logic here since images are all over the place in location and naming standards
         // Maybe one day we refactor the item system to be cleaner
         if (this.isStone()) {
             const evostone: EvolutionStone = (ItemList[this.valueType] as EvolutionStone);
-            return evostone.imagePath;
+            return evostone.image;
         } else if (this.valueType == 'Mine Egg') {
             return `assets/images/breeding/${this.name}.png`;
         } else {
-            return `assets/images/items/${this.name}.png`;
+            return `assets/images/items/underground/${this.name}.png`;
         }
     }
 
@@ -101,14 +122,14 @@ UndergroundItem.addItem('Pixie Plate',  116, [[1,1,1,1], [1,1,1,1], [1,1,1,1]], 
 UndergroundItem.addItem('Helix Fossil', 200, [[0,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,0]], 0, 'Mine Egg');
 UndergroundItem.addItem('Dome Fossil',  201, [[1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [0,1,1,1,0]], 0, 'Mine Egg');
 UndergroundItem.addItem('Old Amber',    202, [[0,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,0]], 0, 'Mine Egg');
-UndergroundItem.addItem('Root Fossil',  203, [[0,0,1,1,1], [0,0,1,1,1], [1,0,0,1,1], [1,1,1,1,1], [0,1,1,1,0]], 0, 'Mine Egg');
-UndergroundItem.addItem('Claw Fossil',  204, [[1,1,1,0,0], [1,1,1,1,0], [0,1,1,1,1], [0,0,0,1,1]], 0, 'Mine Egg');
-UndergroundItem.addItem('Armor Fossil', 205, [[0,1,1,1,0], [0,1,1,1,0], [1,1,1,1,1], [0,1,1,1,0]], 0, 'Mine Egg');
-UndergroundItem.addItem('Skull Fossil', 206, [[1,1,1,1], [1,1,1,1], [1,1,1,1], [0,1,1,0]], 0, 'Mine Egg');
-UndergroundItem.addItem('Cover Fossil', 207, [[1,1,1,1,0], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [0,1,1,1,1]], 0, 'Mine Egg');
-UndergroundItem.addItem('Plume Fossil', 208, [[0,0,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,0], [1,1,0,0,0]], 0, 'Mine Egg');
-// UndergroundItem.addItem('Jaw Fossil',   209, [[1,1,1], [1,1,1], [1,1,1]], 0, 'Mine Egg');
-// UndergroundItem.addItem('Sail Fossil',  210, [[1,1,1], [1,1,1], [1,1,1]], 0, 'Mine Egg');
+UndergroundItem.addItem('Root Fossil',  203, [[0,0,1,1,1], [0,0,1,1,1], [1,0,0,1,1], [1,1,1,1,1], [0,1,1,1,0]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.hoenn));
+UndergroundItem.addItem('Claw Fossil',  204, [[1,1,1,0,0], [1,1,1,1,0], [0,1,1,1,1], [0,0,0,1,1]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.hoenn));
+UndergroundItem.addItem('Armor Fossil', 205, [[0,1,1,1,0], [0,1,1,1,0], [1,1,1,1,1], [0,1,1,1,0]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.sinnoh));
+UndergroundItem.addItem('Skull Fossil', 206, [[1,1,1,1], [1,1,1,1], [1,1,1,1], [0,1,1,0]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.sinnoh));
+UndergroundItem.addItem('Cover Fossil', 207, [[1,1,1,1,0], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [0,1,1,1,1]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.unova));
+UndergroundItem.addItem('Plume Fossil', 208, [[0,0,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,0], [1,1,0,0,0]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.unova));
+UndergroundItem.addItem('Jaw Fossil',   209, [[0,0,1,1,1], [0,1,1,1,1], [1,1,1,1,1], [1,1,1,1,0]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.kalos));
+UndergroundItem.addItem('Sail Fossil',  210, [[1,1,1,0,0], [1,1,1,1,1], [0,1,1,1,1], [0,1,1,1,0]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.kalos));
 
 // Evolution Stones
 UndergroundItem.addItem('Fire Stone',    300, [[1,1,1], [1,1,1], [1,1,1]], 1, 'Fire_stone');
@@ -116,4 +137,4 @@ UndergroundItem.addItem('Water Stone',   301, [[1,1,1], [1,1,1], [1,1,0]], 1, 'W
 UndergroundItem.addItem('Thunder Stone', 302, [[0,1,1], [1,1,1], [1,1,0]], 1, 'Thunder_stone');
 UndergroundItem.addItem('Leaf Stone',    303, [[0,1,0], [1,1,1], [1,1,1], [0,1,0]], 1, 'Leaf_stone');
 UndergroundItem.addItem('Moon Stone',    304, [[0,1,1,1], [1,1,1,0]], 1, 'Moon_stone');
-UndergroundItem.addItem('Sun Stone',     305, [[0,1,0], [1,1,1], [1,1,1]], 1, 'Sun_stone');
+UndergroundItem.addItem('Sun Stone',     305, [[0,1,0], [1,1,1], [1,1,1]], 1, 'Sun_stone', new MaxRegionRequirement(GameConstants.Region.johto));

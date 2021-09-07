@@ -24,8 +24,9 @@ class RedeemableCodes implements Saveable {
             }),
             new RedeemableCode('shiny-charmer', -318017456, false, () => {
                 // Select a random Pokemon to give the player as a shiny
-                const pokemon = pokemonMap.random(GameConstants.TotalPokemonsPerRegion[player.highestRegion()]);
-                App.game.party.gainPokemonById(pokemon.id, true, true);
+                const pokemon = pokemonMap.randomRegion(player.highestRegion());
+                // Floor the ID, only give base/main Pokemon forms
+                App.game.party.gainPokemonById(Math.floor(pokemon.id), true, true);
                 // Notify that the code was activated successfully
                 Notifier.notify({
                     title:'Code activated!',
