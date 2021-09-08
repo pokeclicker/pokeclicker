@@ -245,8 +245,8 @@ class FarmHand {
     }
 
     charge(): void {
-        // Player cannot afford to pay for this hour
-        if (!App.game.wallet.hasAmount(this.cost)) {
+        // Charge the player if they can afford it, otherwise notify that they cannot
+        if (!App.game.wallet.loseAmount(this.cost)) {
             Notifier.notify({
                 title: `[FARM HAND] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
                 message: `It looks like you are a little short on Farm Points right now..\nLet me know when you're hiring again!\nCost: <img src="./assets/images/currency/farmPoint.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
@@ -263,7 +263,6 @@ class FarmHand {
             type: NotificationConstants.NotificationOption.info,
             timeout: 30 * GameConstants.SECOND,
         });
-        App.game.wallet.loseAmount(this.cost);
     }
 
     toJSON(): Record<string, any> {
