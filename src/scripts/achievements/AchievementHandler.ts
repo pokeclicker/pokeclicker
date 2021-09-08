@@ -167,19 +167,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement('The Cake is a Lie, but the Grind is real', 'Defeat 100,000 Pokémon', new DefeatedRequirement(100000), 0.25);
         AchievementHandler.addAchievement('Are there any left?', 'Defeat 1,000,000 Pokémon', new DefeatedRequirement(1000000), 0.50);
 
-        // TODO: move to Kanto region Achievements,
-        // check all Kanto Pokemon obtained (base forms)
-        // add for all other regions
         AchievementHandler.addAchievement('Startin\' Out', 'Capture your first Pokémon', new CaughtPokemonRequirement(1), 0.01);
-        AchievementHandler.addAchievement('Like Ants in a PC', 'Capture 10 unique Pokémon', new CaughtPokemonRequirement(10), 0.02);
-        AchievementHandler.addAchievement('Better Than Season 1 Ash', 'Capture 20 unique Pokémon', new CaughtPokemonRequirement(20), 0.03);
-        AchievementHandler.addAchievement('More Pokémon than Patrick', 'Capture 30 unique Pokémon', new CaughtPokemonRequirement(30), 0.04);
-        AchievementHandler.addAchievement('Rick and Fourty', 'Capture 40 unique Pokémon', new CaughtPokemonRequirement(40), 0.05);
-        AchievementHandler.addAchievement('50 Shades of Pikachu', 'Capture 50 unique Pokémon', new CaughtPokemonRequirement(50), 0.10);
-        AchievementHandler.addAchievement('Keeping Oak Really Busy', 'Capture 75 unique Pokémon', new CaughtPokemonRequirement(75), 0.15);
-        AchievementHandler.addAchievement('Surpassing Ash', 'Capture 88 unique Pokémon', new CaughtPokemonRequirement(88), 0.05);
-        AchievementHandler.addAchievement('I Wanna be The Very Best', 'Capture 100 unique Pokémon', new CaughtPokemonRequirement(100), 0.20);
-        AchievementHandler.addAchievement('I Should Probably Take a Break', 'Complete the Kanto Pokédex!', new CaughtUniquePokemonsByRegionRequirement(GameConstants.Region.kanto), 0.50);
+        AchievementHandler.addAchievement('Better Than Season 1 Ash', 'Capture 15 unique Pokémon', new CaughtPokemonRequirement(15), 0.05);
+        AchievementHandler.addAchievement('Wonderful! Do you like to collect things?', 'Capture 50 unique Pokémon', new CaughtPokemonRequirement(50), 0.10);
+        AchievementHandler.addAchievement('Surpassing Ash', 'Capture 100 unique Pokémon', new CaughtPokemonRequirement(100), 0.20);
 
         AchievementHandler.addAchievement('I\'d rather be shiny', 'Capture your first Shiny', new ShinyPokemonRequirement(1), 0.03);
         AchievementHandler.addAchievement('These Pokémon must be sick', 'Capture 10 unique Shinies', new ShinyPokemonRequirement(10), 0.06);
@@ -274,6 +265,13 @@ class AchievementHandler {
                 AchievementHandler.addAchievement(`${dungeon} expert`, `Clear ${dungeon} 100 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex(dungeon)), 2, region);
                 AchievementHandler.addAchievement(`${dungeon} hermit`, `Clear ${dungeon} 1,000 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex(dungeon)), 3, region);
             });
+            // Unique Pokémon
+            const amt10 = Math.floor(PokemonHelper.calcUniquePokemonsByRegion(region) * .1);
+            const amt50 = Math.floor(PokemonHelper.calcUniquePokemonsByRegion(region) * .5);
+            const amtAll = Math.floor(PokemonHelper.calcUniquePokemonsByRegion(region));
+            AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Trainer`, `Catch ${amt10} unique Pokémon native to the ${GameConstants.camelCaseToString(GameConstants.Region[region])} region`, new CaughtUniquePokemonsByRegionRequirement(region, amt10), 2, region);
+            AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Ace`, `Catch ${amt50} unique Pokémon native to the ${GameConstants.camelCaseToString(GameConstants.Region[region])} region`, new CaughtUniquePokemonsByRegionRequirement(region, amt50), 4, region);
+            AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Master`, `Complete the ${GameConstants.camelCaseToString(GameConstants.Region[region])} Pokédex!`, new CaughtUniquePokemonsByRegionRequirement(region, amtAll), 6, region);
         });
 
         // load filters, filter the list & calculate number of tabs
