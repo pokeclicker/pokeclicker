@@ -16,6 +16,12 @@ export default class BadgeCase implements Feature {
 
     badgeList: Array<Observable<boolean>> = emptyBadgeList.map((v) => ko.observable(v));
 
+    badgeCaseTooltip: PureComputed<string> = ko.pureComputed(() => {
+        const maxLevel = Math.min((this.badgeCount() + 2) * 10, 100);
+
+        return `Earning badges raises your Pokémons' maximum level, up to 100.<br>The max level of your Pokémon is <b>${maxLevel}</b>.`;
+    });
+
     badgeCount(): number {
         return this.badgeList.reduce((acc, b) => (acc + Number(b())), 0);
     }
@@ -32,12 +38,6 @@ export default class BadgeCase implements Feature {
         if (badge === null || badge === BadgeEnums.None) { return true; }
         return !!this.badgeList[badge]();
     }
-
-    badgeCaseTooltip: PureComputed<string> = ko.pureComputed(() => {
-        const maxLevel = Math.min((this.badgeCount() + 2) * 10, 100);
-
-        return `Earning badges raises your Pokémons' maximum level, up to 100.<br>The max level of your Pokémon is <b>${maxLevel}</b>.`;
-    });
 
     // This method intentionally left blank
     // eslint-disable-next-line class-methods-use-this
