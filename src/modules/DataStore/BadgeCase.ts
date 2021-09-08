@@ -1,4 +1,4 @@
-import { Observable } from 'knockout';
+import { Observable, PureComputed } from 'knockout';
 import { Feature } from './common/Feature';
 import BadgeEnums from '../enums/Badges';
 import GameHelper from '../GameHelper';
@@ -32,6 +32,12 @@ export default class BadgeCase implements Feature {
         if (badge === null || badge === BadgeEnums.None) { return true; }
         return !!this.badgeList[badge]();
     }
+
+    public static badgeCaseTooltip: PureComputed<string> = ko.pureComputed(() => {
+        let maxLevel = Math.min((App.game.badgeCase.badgeCount() + 2) * 10, 100);
+
+        return `Earning badges raises your Pokémons' maximum level, up to 100.<br>The max level of your Pokémon is <b>${maxLevel}</b>.`;
+    });
 
     // This method intentionally left blank
     // eslint-disable-next-line class-methods-use-this
