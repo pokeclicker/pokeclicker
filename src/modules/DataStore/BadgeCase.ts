@@ -16,8 +16,10 @@ export default class BadgeCase implements Feature {
 
     badgeList: Array<Observable<boolean>> = emptyBadgeList.map((v) => ko.observable(v));
 
+    maxLevel: PureComputed<number> = ko.pureComputed(() => Math.min(100, (this.badgeCount() + 2) * 10));
+
     badgeCaseTooltip: PureComputed<string> = ko.pureComputed(() => {
-        const maxLevel = Math.min((this.badgeCount() + 2) * 10, 100);
+        const maxLevel = this.maxLevel();
 
         return `Earning badges raises your Pokémons' maximum level, up to 100.<br>The max level of your Pokémon is <b>${maxLevel}</b>.`;
     });
