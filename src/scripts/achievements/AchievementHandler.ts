@@ -242,6 +242,11 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Don\'t stop trying', 'Complete 2500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(2500), 0.25);
         AchievementHandler.addAchievement('King of the hill', 'Complete 5000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(5000), 0.4);
 
+        AchievementHandler.addAchievement('Let\'s try this out', 'Obtain your first Protein', new ProteinObtainRequirement(1), 0.20);
+        AchievementHandler.addAchievement('Training progress', 'Obtain 10 Proteins', new ProteinObtainRequirement(10), 0.30);
+        AchievementHandler.addAchievement('Strong like the mountain', 'Obtain 100 Proteins', new ProteinObtainRequirement(100), 0.40);
+        AchievementHandler.addAchievement('A literal mountain of muscle', 'Obtain 1000 Proteins', new ProteinObtainRequirement(1000), 0.50);
+
         /*
          * REGIONAL
          */

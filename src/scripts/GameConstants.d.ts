@@ -95,6 +95,7 @@ namespace GameConstants {
         'Farming',
         'Quest',
         'Battle Frontier',
+        'Protein'
     }
     declare enum DungeonTile {
         empty,
