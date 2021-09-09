@@ -14,9 +14,9 @@ class ClearGymRequirement extends AchievementRequirement {
 
     public hint(): string {
         if (this.requiredValue != 1) {
-            return `Requires the ${GameConstants.RegionDungeons.flat()[this.gymIndex]} Gym to be defeated ${this.requiredValue} times.`;
+            return `Requires the ${GameConstants.RegionGyms.flat()[this.gymIndex]} Gym to be defeated ${this.requiredValue} times.`;
         } else {
-            return `Requires the ${GameConstants.RegionDungeons.flat()[this.gymIndex]} Gym to be completed.`;
+            return `Requires the ${GameConstants.RegionGyms.flat()[this.gymIndex]} Gym to be completed.`;
         }
     }
 }
