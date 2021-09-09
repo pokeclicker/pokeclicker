@@ -523,7 +523,7 @@ class Update implements Saveable {
             saveData.statistics = {
                 ...saveData.statistics,
                 totalProteinsObtained: proteinsObtained,
-            }
+            };
         },
     };
 
