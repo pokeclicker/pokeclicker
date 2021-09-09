@@ -104,13 +104,19 @@ export default class Wallet implements Feature {
         return this.currencies[amount.currency]() >= amount.amount;
     }
 
-    public loseAmount(amount: Amount) {
+    public loseAmount(amount: Amount): boolean {
         if (Number.isNaN(amount.amount) || amount.amount <= 0) {
             console.trace('Could not remove amount:', amount);
             amount.amount = 1;
         }
 
+        // If the player doesn't have enough, return false (we shouldn't be able to go negative)
+        if (!this.hasAmount(amount)) {
+            return false;
+        }
+
         GameHelper.incrementObservable(this.currencies[amount.currency], -amount.amount);
+        return true;
     }
 
     initialize(): void {

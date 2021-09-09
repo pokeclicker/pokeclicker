@@ -45,6 +45,10 @@ class QuestLineHelper {
                         element: document.getElementById('questDisplayContainer'),
                         intro: 'Click "List" to see the current quests that can be completed for <img title="Quest points" src="assets/images/currency/questPoint.svg" height="25px"> Quest Points.',
                     },
+                    {
+                        element: document.getElementById('startMenu'),
+                        intro: 'See the badges you\'ve earned in the Badge Case. Badges influence the max level of your Pokémon.',
+                    },
                 ],
             });
         };
