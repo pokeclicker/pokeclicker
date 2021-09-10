@@ -10,6 +10,9 @@ class DefeatPokemonsQuest extends Quest implements QuestInterface {
     ) {
         super(killsNeeded, reward);
         this.focus = App.game.statistics.routeKills[this.region][this.route];
+        this.quickTravelFn = () => {
+            MapHelper.moveToRoute(this.route, this.region);
+        };
     }
 
     public static generateData(): any[] {

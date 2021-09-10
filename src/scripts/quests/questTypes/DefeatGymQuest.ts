@@ -11,6 +11,9 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         super(amount, reward);
         this.region = GameConstants.getGymRegion(this.gymTown);
         this.focus = App.game.statistics.gymsDefeated[GameConstants.getGymIndex(this.gymTown)];
+        this.quickTravelFn = () => {
+            MapHelper.moveToTown(this.gymTown);
+        };
     }
 
     public static generateData(): any[] {

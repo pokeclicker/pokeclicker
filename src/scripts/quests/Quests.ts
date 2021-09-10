@@ -73,6 +73,21 @@ class Quests implements Saveable {
         }
     }
 
+    public quickTravelQuest(index: number) {
+        const quest = this.questList()[index];
+        if (quest) {
+            quest.quickTravel();
+        }
+    }
+
+    public quickTravelAvailable(index: number): boolean {
+        const quest = this.questList()[index];
+        if (quest) {
+            return quest.quickTravelAvailable();
+        }
+        return false;
+    }
+
     public claimQuest(index: number) {
         // Check if we can claim this quest
         const quest  = this.questList()[index];

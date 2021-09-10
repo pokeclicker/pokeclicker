@@ -31,9 +31,14 @@
                     </td>
                     <td width="30%" class="p-0">
                         <!-- ko ifnot: $data.isCompleted() -->
-                        <button class="btn btn-danger btn-sm btn-block p-0" data-bind="click: () => { App.game.quests.quitQuest($data.index, true) }">
-                            Quit
-                        </button>
+                        <div style="display: flex;">
+                            <button class="btn btn-primary btn-sm p-0" style="flex: 1;" data-bind="click: () => { App.game.quests.quickTravelQuest($data.index) }, visible: App.game.quests.quickTravelAvailable($data.index)">
+                                Go
+                            </button>
+                            <button class="btn btn-danger btn-sm p-0" style="flex: 1;" data-bind="click: () => { App.game.quests.quitQuest($data.index, true) }">
+                                Quit
+                            </button>
+                        </div>
                         <!-- /ko -->
                         <!-- ko if: $data.isCompleted() -->
                         <button class="btn btn-success btn-sm btn-block p-0" data-bind="click: () => { App.game.quests.claimQuest($data.index) }">

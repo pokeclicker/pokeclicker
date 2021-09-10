@@ -11,6 +11,9 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         super(amount, reward);
         this.region = GameConstants.getDungeonRegion(this.dungeon);
         this.focus = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.dungeon)];
+        this.quickTravelFn = () => {
+            MapHelper.moveToTown(this.dungeon);
+        };
     }
 
     public static generateData(): any[] {

@@ -18,10 +18,12 @@ abstract class Quest {
     inQuestLine: boolean;
     _onLoad?: () => void;
     onLoadCalled: boolean;
+    quickTravelFn: fn;
 
     constructor(amount: number, pointsReward: number) {
         this.amount = amount;
         this.pointsReward = pointsReward;
+        this.quickTravelFn = null;
         this.initial = ko.observable(null);
         this.claimed = ko.observable(false);
         this.notified = false;
@@ -94,6 +96,16 @@ abstract class Quest {
         } else {
             this.initial(null);
         }
+    }
+
+    quickTravel() {
+        if (this.quickTravelFn) {
+            this.quickTravelFn();
+        }
+    }
+
+    quickTravelAvailable(): boolean {
+        return this.quickTravelFn;
     }
 
     begin() {
