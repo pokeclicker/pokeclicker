@@ -19,6 +19,30 @@ export default class SaveSelector {
         }
 
         $('[data-toggle="tooltip"]').tooltip();
+
+        $('.trainer-card.clickable').on('contextmenu', (e) => {
+            const top = e.pageY;
+            const left = e.pageX;
+            const { key } = e.currentTarget.dataset;
+            if (key) {
+                $('#saveSelectorContextMenu').html(`
+                    <a class="dropdown-item bg-info" href="#" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">Load</a>
+                    <a class="dropdown-item bg-warning" href="#"><label class="clickable my-0" for="import-save" onclick="Save.key = '${key}';">Import (overwrite)</label></a>
+                    <a class="dropdown-item bg-danger" href="#" onclick="Save.key = '${key}'; Save.delete();">Delete</a>
+                `).css({
+                    display: 'block',
+                    position: 'absolute',
+                    top,
+                    left,
+                }).addClass('show');
+                return false; // blocks default Webbrowser right click menu
+            }
+            return true;
+        });
+
+        $('#saveSelector, #context-menu a').on('click', () => {
+            $('#saveSelectorContextMenu').removeClass('show').hide();
+        });
     }
 
     static getTrainerCard(key: string): string {

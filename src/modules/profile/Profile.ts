@@ -52,6 +52,7 @@ export default class Profile implements Saveable {
         return `
         <div class="mb-3 ${key === undefined ? 'p-2 col-12' : 'col-lg-4 col-md-6 col-sm-12 xol-xs-12'}">
             <div class="trainer-card clickable trainer-bg-${background} card font-weight-bold"
+                ${key === undefined ? '' : `data-key="${key}"`}
                 style="color: ${textColor}"
                 onclick="${key === undefined ? "Notifier.notify({ message: 'What a lovely profile!' });" : `Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();`}">
                 <div class="card-body">
