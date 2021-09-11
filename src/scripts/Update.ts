@@ -514,11 +514,15 @@ class Update implements Saveable {
         '0.8.9': ({ playerData, saveData }) => {
             // Retroactively track proteins obtained
             let proteinsObtained = 0;
-            saveData.party.caughtPokemon.forEach(caughtP => {
-                proteinsObtained += caughtP.proteinsUsed;
-            });
 
-            proteinsObtained += playerData._itemList.Protein;
+            // Only update if save is from v0.6.0+ (when proteins were added)
+            if (this.minUpdateVersion('0.6.0', saveData)) {
+                saveData.party.caughtPokemon.forEach(p => {
+                    proteinsObtained += p.proteinsUsed;
+                });
+
+                proteinsObtained += playerData._itemList.Protein;
+            }
 
             saveData.statistics = {
                 ...saveData.statistics,
