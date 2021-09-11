@@ -10,6 +10,6 @@ class ProteinObtainRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
-        return `${this.requiredValue} proteins need to be obtained in total. Used proteins stay counted.`;
+        return `${this.requiredValue} Proteins need to be obtained.`;
     }
 }
