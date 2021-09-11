@@ -135,7 +135,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Left Left Right Right A B A B - Hey, 1 million!', 'Have 1,000,000 Attack', new AttackRequirement(1000000), 0.40);
 
         AchievementHandler.addAchievement('Bling', 'Obtain 100 Diamonds', new DiamondRequirement(100), 0.05);
-        AchievementHandler.addAchievement('Bling x10!', 'Obtain 1000 Diamonds', new DiamondRequirement(1000), 0.15);
+        AchievementHandler.addAchievement('Bling x10!', 'Obtain 1,000 Diamonds', new DiamondRequirement(1000), 0.15);
         AchievementHandler.addAchievement('If you like it, you should\'ve put a ring on it.', 'Obtain 10,000 Diamonds', new DiamondRequirement(10000), 0.25);
 
         AchievementHandler.addAchievement('Is my thumb green yet?', 'Dig up 1 item', new UndergroundItemsFoundRequirement(1), 0.01);
@@ -147,7 +147,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('The earth is like onions', 'Dig deeper 1 time', new UndergroundLayersMinedRequirement(1), 0.01);
         AchievementHandler.addAchievement('This takes foreverrrrrrr', 'Dig deeper 10 times', new UndergroundLayersMinedRequirement(10), 0.03);
         AchievementHandler.addAchievement('DigDug ain\'t got nothin on me', 'Dig deeper 100 times', new UndergroundLayersMinedRequirement(100), 0.1);
-        AchievementHandler.addAchievement('Both my thumbs are green! This can\'t be healthy', 'Dig deeper 1000 times', new UndergroundLayersMinedRequirement(1000), 0.3);
+        AchievementHandler.addAchievement('Both my thumbs are green! This can\'t be healthy', 'Dig deeper 1,000 times', new UndergroundLayersMinedRequirement(1000), 0.3);
 
         AchievementHandler.addAchievement('Is that how I use this?', 'Level 1 Oak Item to the maximum level', new MaxLevelOakItemRequirement(1), 0.05, GameConstants.Region.none, () => !challenges.list.disableOakItems.active());
         AchievementHandler.addAchievement('I\'ve got my hands full with all of these', 'Level 3 Oak Items to the maximum level', new MaxLevelOakItemRequirement(3), 0.1, GameConstants.Region.none, () => !challenges.list.disableOakItems.active());
@@ -230,17 +230,17 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Can you do this for me?', 'Complete 1 quest', new QuestRequirement(1), 0.05);
         AchievementHandler.addAchievement('One more favor', 'Complete 10 quests', new QuestRequirement(10), 0.15);
         AchievementHandler.addAchievement('YES MAN!', 'Complete 100 quests', new QuestRequirement(100), 0.25);
-        AchievementHandler.addAchievement('I just love green coins', 'Complete 1000 quests', new QuestRequirement(1000), 0.4);
+        AchievementHandler.addAchievement('I just love green coins', 'Complete 1,000 quests', new QuestRequirement(1000), 0.4);
 
         AchievementHandler.addAchievement('Fighting novice', 'Complete stage 100 in Battle Frontier', new BattleFrontierHighestStageRequirement(100), 0.05);
         AchievementHandler.addAchievement('Competent fighter', 'Complete stage 250 in Battle Frontier', new BattleFrontierHighestStageRequirement(250), 0.15);
         AchievementHandler.addAchievement('Unstoppable fighting machine', 'Complete stage 500 in Battle Frontier', new BattleFrontierHighestStageRequirement(500), 0.25);
-        AchievementHandler.addAchievement('Living Legend', 'Complete stage 1000 in Battle Frontier', new BattleFrontierHighestStageRequirement(1000), 0.4);
+        AchievementHandler.addAchievement('Living Legend', 'Complete stage 1,000 in Battle Frontier', new BattleFrontierHighestStageRequirement(1000), 0.4);
 
         AchievementHandler.addAchievement('Keep on fighting', 'Complete 500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(500), 0.05);
-        AchievementHandler.addAchievement('Uphill battle', 'Complete 1000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(1000), 0.15);
-        AchievementHandler.addAchievement('Don\'t stop trying', 'Complete 2500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(2500), 0.25);
-        AchievementHandler.addAchievement('King of the hill', 'Complete 5000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(5000), 0.4);
+        AchievementHandler.addAchievement('Uphill battle', 'Complete 1,000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(1000), 0.15);
+        AchievementHandler.addAchievement('Don\'t stop trying', 'Complete 2,500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(2500), 0.25);
+        AchievementHandler.addAchievement('King of the hill', 'Complete 5,000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(5000), 0.4);
 
         /*
          * REGIONAL
