@@ -158,12 +158,24 @@ class Save {
         const fr = new FileReader();
         fr.readAsText(fileToRead);
 
-        setTimeout(() => {
+        setTimeout(async () => {
             try {
                 const decoded = atob(fr.result as string);
                 console.debug('decoded:', decoded);
                 const json = JSON.parse(decoded);
                 console.debug('json:', json);
+                const update = new Update();
+                if (update.isNewerVersion(json.save?.update?.version ?? '999.999.999', update.version)) {
+                    const confirmed = await Notifier.confirm({
+                        title: 'Save version is newer than game version!',
+                        message: `This save file is newer than the game version and may cause issues while attempting to load it,\nAre you sure you want to import it?\n\nSave version: <code>${json.save?.update?.version ?? '999.999.999'}</code>\nGame version: <code>${update.version}</code>`,
+                        type: NotificationConstants.NotificationOption.danger,
+                        confirm: 'confirm',
+                    });
+                    if (!confirmed) {
+                        return;
+                    }
+                }
                 if (decoded && json && json.player && json.save) {
                     localStorage.setItem(`player${Save.key}`, JSON.stringify(json.player));
                     localStorage.setItem(`save${Save.key}`, JSON.stringify(json.save));
