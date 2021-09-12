@@ -148,10 +148,10 @@ class Game {
         // Battle Frontier not accessable (chances are people broke this themselves, but whatever...)
         if (App.game.quests.getQuestLine('Mystery of Deoxys').state() == QuestLineState.inactive) {
             if (App.game.statistics.battleFrontierHighestStageCompleted() >= 100) {
-                // Defeated Brock, Has completed the Tutorial
+                // Defeated stage 100, has obtained deoxys
                 App.game.quests.getQuestLine('Mystery of Deoxys').state(QuestLineState.ended);
             } else if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Wallace')]() >= 1) {
-                // Has chosen a starter, Tutorial is started
+                // Has defeated the Hoenn champion, Quest is started
                 App.game.quests.getQuestLine('Mystery of Deoxys').state(QuestLineState.started);
                 App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest(App.game.quests.getQuestLine('Mystery of Deoxys').curQuest());
             }
