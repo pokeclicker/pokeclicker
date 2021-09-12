@@ -12,7 +12,7 @@ const ChangelogItems = [
     // note that month is 0 indexed
     // v0.8.9
     new ChangelogUpdate('v0.8.9', new Date(2021, 8, 12)),
-    new Changelog(changelogType.NEW, 'Log book can be be filtered by event type'),
+    new Changelog(changelogType.NEW, 'Log book can now be filtered by event type'),
     new Changelog(changelogType.NEW, 'Regional Pokédex achievements'),
     new Changelog(changelogType.NEW, 'Protein achievements'),
     new Changelog(changelogType.NEW, 'Gym auto re-battle system'),
