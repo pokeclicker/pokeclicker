@@ -10,6 +10,7 @@ class EvolutionStone extends CaughtIndicatingItem {
 
     public gain(n: number) {
         player.gainItem(GameConstants.StoneType[this.type], n);
+        GameHelper.incrementObservable(App.game.statistics.itemsObtained[this.name], n);
     }
 
     public use(pokemon?: PokemonNameType): boolean {

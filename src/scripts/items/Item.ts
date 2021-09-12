@@ -135,10 +135,7 @@ class Item {
 
     gain(n: number) {
         player.gainItem(this.name, n);
-
-        if (this.name == 'Protein') {
-            GameHelper.incrementObservable(App.game.statistics.totalProteinsObtained, n);
-        }
+        GameHelper.incrementObservable(App.game.statistics.itemsObtained[this.name], n);
     }
 
     use(): boolean {

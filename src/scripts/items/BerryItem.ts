@@ -10,6 +10,7 @@ class BerryItem extends Item {
 
     gain(amt: number) {
         App.game.farming.gainBerry(this.berry, amt);
+        GameHelper.incrementObservable(App.game.statistics.itemsObtained[this.name], amt);
     }
 
     get description(): string {

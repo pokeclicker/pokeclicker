@@ -188,30 +188,30 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Egg Factory', 'Hatch 1,000 eggs', new HatchRequirement(1000), 0.3);
         AchievementHandler.addAchievement('Offical Easter Bunny', 'Hatch 10,000 eggs', new HatchRequirement(10000), 0.4);
 
-        AchievementHandler.addAchievement('Why is my Voltorb Upside Down?', 'Obtain your first Pokéball', new PokeballRequirement(1, GameConstants.Pokeball.Pokeball), 0.01);
-        AchievementHandler.addAchievement('Starting a Collection', 'Obtain 10 Pokéballs', new PokeballRequirement(10, GameConstants.Pokeball.Pokeball), 0.03);
-        AchievementHandler.addAchievement('Stocking Up', 'Obtain 100 Pokéballs', new PokeballRequirement(100, GameConstants.Pokeball.Pokeball), 0.05);
-        AchievementHandler.addAchievement('Fully Stocked', 'Obtain 1,000 Pokéballs', new PokeballRequirement(1000, GameConstants.Pokeball.Pokeball), 0.10);
-        AchievementHandler.addAchievement('Maybe just a few more for the bunker', 'Obtain 10,000 Pokéballs', new PokeballRequirement(10000, GameConstants.Pokeball.Pokeball), 0.15);
-        AchievementHandler.addAchievement('Doomsday Bunker stocked with Pokéballs!', 'Obtain 100,000 Pokéballs', new PokeballRequirement(100000, GameConstants.Pokeball.Pokeball), 0.20);
+        AchievementHandler.addAchievement('Why is my Voltorb Upside Down?', 'Obtain your first Pokéball', new ItemObtainedRequirement('Pokeball', 1), 0.01);
+        AchievementHandler.addAchievement('Starting a Collection', 'Obtain 10 Pokéballs', new ItemObtainedRequirement('Pokeball', 10), 0.03);
+        AchievementHandler.addAchievement('Stocking Up', 'Obtain 100 Pokéballs', new ItemObtainedRequirement('Pokeball', 100), 0.05);
+        AchievementHandler.addAchievement('Fully Stocked', 'Obtain 1,000 Pokéballs', new ItemObtainedRequirement('Pokeball', 1000), 0.10);
+        AchievementHandler.addAchievement('Maybe just a few more for the bunker', 'Obtain 10,000 Pokéballs', new ItemObtainedRequirement('Pokeball', 10000), 0.15);
+        AchievementHandler.addAchievement('Doomsday Bunker stocked with Pokéballs!', 'Obtain 100,000 Pokéballs', new ItemObtainedRequirement('Pokeball', 100000), 0.20);
 
-        AchievementHandler.addAchievement('ooooo A blue one!', 'Obtain your first Greatball', new PokeballRequirement(1, GameConstants.Pokeball.Greatball), 0.03);
-        AchievementHandler.addAchievement('Greatball 2', 'Obtain 10 Greatballs', new PokeballRequirement(10, GameConstants.Pokeball.Greatball), 0.05);
-        AchievementHandler.addAchievement('Greatball 3', 'Obtain 100 Greatballs', new PokeballRequirement(100, GameConstants.Pokeball.Greatball), 0.10);
-        AchievementHandler.addAchievement('Greatball 4', 'Obtain 1,000 Greatballs', new PokeballRequirement(1000, GameConstants.Pokeball.Greatball), 0.15);
-        AchievementHandler.addAchievement('Greatball 5', 'Obtain 10,000 Greatballs', new PokeballRequirement(10000, GameConstants.Pokeball.Greatball), 0.20);
-        AchievementHandler.addAchievement('Greatball 6', 'Obtain 100,000 Greatballs', new PokeballRequirement(100000, GameConstants.Pokeball.Greatball), 0.30);
+        AchievementHandler.addAchievement('ooooo A blue one!', 'Obtain your first Greatball', new ItemObtainedRequirement('Greatball', 1), 0.03);
+        AchievementHandler.addAchievement('Greatball 2', 'Obtain 10 Greatballs', new ItemObtainedRequirement('Greatball', 10), 0.05);
+        AchievementHandler.addAchievement('Greatball 3', 'Obtain 100 Greatballs', new ItemObtainedRequirement('Greatball', 100), 0.10);
+        AchievementHandler.addAchievement('Greatball 4', 'Obtain 1,000 Greatballs', new ItemObtainedRequirement('Greatball', 1000), 0.15);
+        AchievementHandler.addAchievement('Greatball 5', 'Obtain 10,000 Greatballs', new ItemObtainedRequirement('Greatball', 10000), 0.20);
+        AchievementHandler.addAchievement('Greatball 6', 'Obtain 100,000 Greatballs', new ItemObtainedRequirement('Greatball', 100000), 0.30);
 
-        AchievementHandler.addAchievement('Ultraball 1', 'Obtain your first Ultraball', new PokeballRequirement(1, GameConstants.Pokeball.Ultraball), 0.05);
-        AchievementHandler.addAchievement('Ultraball 2', 'Obtain 10 Ultraballs', new PokeballRequirement(10, GameConstants.Pokeball.Ultraball), 0.10);
-        AchievementHandler.addAchievement('Ultraball 3', 'Obtain 100 Ultraballs', new PokeballRequirement(100, GameConstants.Pokeball.Ultraball), 0.15);
-        AchievementHandler.addAchievement('Ultraball 4', 'Obtain 1,000 Ultraballs', new PokeballRequirement(1000, GameConstants.Pokeball.Ultraball), 0.20);
-        AchievementHandler.addAchievement('Ultraball 5', 'Obtain 10,000 Ultraballs', new PokeballRequirement(10000, GameConstants.Pokeball.Ultraball), 0.30);
-        AchievementHandler.addAchievement('Ultraball 6', 'Obtain 100,000 Ultraballs', new PokeballRequirement(100000, GameConstants.Pokeball.Ultraball), 0.40);
+        AchievementHandler.addAchievement('Ultraball 1', 'Obtain your first Ultraball', new ItemObtainedRequirement('Ultraball', 1), 0.05);
+        AchievementHandler.addAchievement('Ultraball 2', 'Obtain 10 Ultraballs', new ItemObtainedRequirement('Ultraball', 10), 0.10);
+        AchievementHandler.addAchievement('Ultraball 3', 'Obtain 100 Ultraballs', new ItemObtainedRequirement('Ultraball', 100), 0.15);
+        AchievementHandler.addAchievement('Ultraball 4', 'Obtain 1,000 Ultraballs', new ItemObtainedRequirement('Ultraball', 1000), 0.20);
+        AchievementHandler.addAchievement('Ultraball 5', 'Obtain 10,000 Ultraballs', new ItemObtainedRequirement('Ultraball', 10000), 0.30);
+        AchievementHandler.addAchievement('Ultraball 6', 'Obtain 100,000 Ultraballs', new ItemObtainedRequirement('Ultraball', 100000), 0.40);
 
-        AchievementHandler.addAchievement('Masterball 1', 'Obtain your first Masterball', new PokeballRequirement(1, GameConstants.Pokeball.Masterball), 0.20);
-        AchievementHandler.addAchievement('Masterball 2', 'Obtain 10 Masterballs', new PokeballRequirement(10, GameConstants.Pokeball.Masterball), 0.30);
-        AchievementHandler.addAchievement('Masterball 3', 'Obtain 100 Masterballs', new PokeballRequirement(100, GameConstants.Pokeball.Masterball), 0.40);
+        AchievementHandler.addAchievement('Masterball 1', 'Obtain your first Masterball', new ItemObtainedRequirement('Masterball', 1), 0.20);
+        AchievementHandler.addAchievement('Masterball 2', 'Obtain 10 Masterballs', new ItemObtainedRequirement('Masterball', 10), 0.30);
+        AchievementHandler.addAchievement('Masterball 3', 'Obtain 100 Masterballs', new ItemObtainedRequirement('Masterball', 100), 0.40);
 
         AchievementHandler.addAchievement('A Few Clicks In', 'Click 10 Times', new ClickRequirement(10, 1), 0.02, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
         AchievementHandler.addAchievement('Clicking Pro', 'Click 100 Times', new ClickRequirement(100, 1), 0.05, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
@@ -242,15 +242,15 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Don\'t stop trying', 'Complete 2,500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(2500), 0.25);
         AchievementHandler.addAchievement('King of the hill', 'Complete 5,000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(5000), 0.4);
 
-        AchievementHandler.addAchievement('Let\'s try this out', 'Obtain your first Protein', new ProteinObtainRequirement(1), 0.01);
-        AchievementHandler.addAchievement('Pre-workout supplements', 'Obtain five Proteins', new ProteinObtainRequirement(5), 0.02);
-        AchievementHandler.addAchievement('Well-stocked medicine cabinet', 'Obtain 10 Proteins', new ProteinObtainRequirement(10), 0.04);
-        AchievementHandler.addAchievement('I can\'t hold all these Proteins!', 'Obtain 50 Proteins', new ProteinObtainRequirement(50), 0.08);
-        AchievementHandler.addAchievement('Essential nutrients', 'Obtain 100 Proteins', new ProteinObtainRequirement(100), 0.10);
-        AchievementHandler.addAchievement('Putting the \'bulk\' in bulk-buy', 'Obtain 500 Proteins', new ProteinObtainRequirement(500), 0.15);
-        AchievementHandler.addAchievement('Protein stockpile', 'Obtain 1,000 Proteins', new ProteinObtainRequirement(1000), 0.20);
-        AchievementHandler.addAchievement('Fish, eggs, nuts, and cheese', 'Obtain 5,000 Proteins', new ProteinObtainRequirement(5000), 0.35);
-        AchievementHandler.addAchievement('A literal mountain of muscle', 'Obtain 10,000 Proteins', new ProteinObtainRequirement(10000), 0.50);
+        AchievementHandler.addAchievement('Let\'s try this out', 'Obtain your first Protein', new ItemObtainedRequirement('Protein', 1), 0.01);
+        AchievementHandler.addAchievement('Pre-workout supplements', 'Obtain five Proteins', new ItemObtainedRequirement('Protein', 5), 0.02);
+        AchievementHandler.addAchievement('Well-stocked medicine cabinet', 'Obtain 10 Proteins', new ItemObtainedRequirement('Protein', 10), 0.04);
+        AchievementHandler.addAchievement('I can\'t hold all these Proteins!', 'Obtain 50 Proteins', new ItemObtainedRequirement('Protein', 50), 0.08);
+        AchievementHandler.addAchievement('Essential nutrients', 'Obtain 100 Proteins', new ItemObtainedRequirement('Protein', 100), 0.10);
+        AchievementHandler.addAchievement('Putting the \'bulk\' in bulk-buy', 'Obtain 500 Proteins', new ItemObtainedRequirement('Protein', 500), 0.15);
+        AchievementHandler.addAchievement('Protein stockpile', 'Obtain 1,000 Proteins', new ItemObtainedRequirement('Protein', 1000), 0.20);
+        AchievementHandler.addAchievement('Fish, eggs, nuts, and cheese', 'Obtain 5,000 Proteins', new ItemObtainedRequirement('Protein', 5000), 0.35);
+        AchievementHandler.addAchievement('A literal mountain of muscle', 'Obtain 10,000 Proteins', new ItemObtainedRequirement('Protein', 10000), 0.50);
 
         /*
          * REGIONAL

@@ -22,6 +22,7 @@ class PokemonItem extends CaughtIndicatingItem {
             });
         }
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(pokemonName).id, shiny, true);
+        GameHelper.incrementObservable(App.game.statistics.itemsObtained[this.name], amt);
     }
 
     getCaughtStatus(): CaughtStatus {

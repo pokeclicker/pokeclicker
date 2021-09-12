@@ -11,6 +11,7 @@ class MulchItem extends Item {
 
     gain(amt: number) {
         GameHelper.incrementObservable(App.game.farming.mulchList[this.type], amt);
+        GameHelper.incrementObservable(App.game.statistics.itemsObtained[this.name], amt);
     }
 
 }

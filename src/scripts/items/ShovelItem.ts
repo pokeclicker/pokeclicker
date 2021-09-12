@@ -8,6 +8,7 @@ class ShovelItem extends Item {
 
     gain(amt: number) {
         GameHelper.incrementObservable(App.game.farming.shovelAmt, amt);
+        GameHelper.incrementObservable(App.game.statistics.itemsObtained[this.name], amt);
     }
 
 }

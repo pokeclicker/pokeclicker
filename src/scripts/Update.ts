@@ -529,6 +529,24 @@ class Update implements Saveable {
                 totalProteinsObtained: proteinsObtained,
             };
         },
+
+        '0.8.10': ({ playerData, saveData }) => {
+            saveData.statistics = {
+                ...saveData.statistics,
+                itemsObtained: {},
+            };
+
+            saveData.statistics.itemsObtained['Pokeball'] = saveData.statistics.pokeballsBought[0];
+            saveData.statistics.itemsObtained['Greatball'] = saveData.statistics.pokeballsBought[1];
+            saveData.statistics.itemsObtained['Ultraball'] = saveData.statistics.pokeballsBought[2];
+            saveData.statistics.itemsObtained['Masterball'] = saveData.statistics.pokeballsBought[3];
+            saveData.statistics.itemsObtained['Fastball'] = saveData.statistics.pokeballsBought[4];
+            saveData.statistics.itemsObtained['Quickball'] = saveData.statistics.pokeballsBought[5];
+            saveData.statistics.itemsObtained['Timerball'] = saveData.statistics.pokeballsBought[6];
+            saveData.statistics.itemsObtained['Duskball'] = saveData.statistics.pokeballsBought[7];
+            saveData.statistics.itemsObtained['Luxuryball'] = saveData.statistics.pokeballsBought[8];
+            saveData.statistics.itemsObtained['Protein'] = saveData.statistics.totalProteinsObtained;
+        },
     };
 
     constructor() {

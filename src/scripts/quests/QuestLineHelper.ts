@@ -23,7 +23,7 @@ class QuestLineHelper {
         tutorial.addQuest(routeTwo);
 
         //Buy pokeballs
-        const buyPokeballs = new BuyPokeballsQuest(10, 50, GameConstants.Pokeball.Pokeball);
+        const buyPokeballs = new BuyItemsQuest(10, 50, 'Pokeball');
         buyPokeballs.customDescription = 'Buy 10 Pokéballs. You can find these in the Viridian City Shop.';
         tutorial.addQuest(buyPokeballs);
 
