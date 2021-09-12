@@ -242,6 +242,16 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Don\'t stop trying', 'Complete 2,500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(2500), 0.25);
         AchievementHandler.addAchievement('King of the hill', 'Complete 5,000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(5000), 0.4);
 
+        AchievementHandler.addAchievement('Let\'s try this out', 'Obtain your first Protein', new ProteinObtainRequirement(1), 0.01);
+        AchievementHandler.addAchievement('Pre-workout supplements', 'Obtain five Proteins', new ProteinObtainRequirement(5), 0.02);
+        AchievementHandler.addAchievement('Well-stocked medicine cabinet', 'Obtain 10 Proteins', new ProteinObtainRequirement(10), 0.04);
+        AchievementHandler.addAchievement('I can\'t hold all these Proteins!', 'Obtain 50 Proteins', new ProteinObtainRequirement(50), 0.08);
+        AchievementHandler.addAchievement('Essential nutrients', 'Obtain 100 Proteins', new ProteinObtainRequirement(100), 0.10);
+        AchievementHandler.addAchievement('Putting the \'bulk\' in bulk-buy', 'Obtain 500 Proteins', new ProteinObtainRequirement(500), 0.15);
+        AchievementHandler.addAchievement('Protein stockpile', 'Obtain 1,000 Proteins', new ProteinObtainRequirement(1000), 0.20);
+        AchievementHandler.addAchievement('Fish, eggs, nuts, and cheese', 'Obtain 5,000 Proteins', new ProteinObtainRequirement(5000), 0.35);
+        AchievementHandler.addAchievement('A literal mountain of muscle', 'Obtain 10,000 Proteins', new ProteinObtainRequirement(10000), 0.50);
+
         /*
          * REGIONAL
          */
