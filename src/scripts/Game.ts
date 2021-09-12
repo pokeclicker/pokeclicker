@@ -145,6 +145,17 @@ class Game {
                 App.game.quests.getQuestLine('Tutorial Quests').beginQuest(App.game.quests.getQuestLine('Tutorial Quests').curQuest());
             }
         }
+        // Battle Frontier not accessable (chances are people broke this themselves, but whatever...)
+        if (App.game.quests.getQuestLine('Mystery of Deoxys').state() == QuestLineState.inactive) {
+            if (App.game.statistics.battleFrontierHighestStageCompleted() >= 100) {
+                // Defeated Brock, Has completed the Tutorial
+                App.game.quests.getQuestLine('Mystery of Deoxys').state(QuestLineState.ended);
+            } else if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Wallace')]() >= 1) {
+                // Has chosen a starter, Tutorial is started
+                App.game.quests.getQuestLine('Mystery of Deoxys').state(QuestLineState.started);
+                App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest(App.game.quests.getQuestLine('Mystery of Deoxys').curQuest());
+            }
+        }
     }
 
     start() {
