@@ -110,8 +110,7 @@ class Item {
 
         const multiple = n > 1 ? 's' : '';
 
-        if (App.game.wallet.hasAmount(new Amount(this.totalPrice(n), this.currency))) {
-            App.game.wallet.loseAmount(new Amount(this.totalPrice(n), this.currency));
+        if (App.game.wallet.loseAmount(new Amount(this.totalPrice(n), this.currency))) {
             this.gain(n);
             this.increasePriceMultiplier(n);
             Notifier.notify({
@@ -136,6 +135,10 @@ class Item {
 
     gain(n: number) {
         player.gainItem(this.name, n);
+
+        if (this.name == 'Protein') {
+            GameHelper.incrementObservable(App.game.statistics.totalProteinsObtained, n);
+        }
     }
 
     use(): boolean {

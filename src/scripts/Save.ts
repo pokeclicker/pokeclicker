@@ -232,9 +232,3 @@ class Save {
         }
     }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    $('#saveModal').on('show.bs.modal', () => {
-        $('#saveTextArea').text(JSON.stringify(player));
-    });
-});
