@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.8.8"></script>
+    <script src="scripts/modules.min.js?v=0.8.9"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.8.8"></script>
+    <script src="scripts/script.min.js?v=0.8.9"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.8.8" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.8.9" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -145,6 +145,12 @@
                 <img alt="Checkout the Wiki!" src="https://img.shields.io/badge/wiki-link-blue?logo=wikimedia-commons&style=for-the-badge">
             </a>
         </div>
+    </div>
+    
+    <div class="dropdown-menu py-0" id="saveSelectorContextMenu">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
     </div>
 </div>
 
@@ -1069,10 +1075,8 @@
         </div>
 
         <div>
-            <!-- TODO: HLXII - Add after all Gym Leader images are formatted correctly
-            <div style="position:absolute; left:65%;">
-                <img height=80px data-bind="attr:{ src: GymBattle.gym.imagePath }"/>
-            </div>
+            <!-- TODO: Add after all Gym Leader images are formatted correctly (same sizes, style etc)
+            <img style="position:absolute; left:65%; top: 64px; height: 64px" data-bind="attr:{ src: GymBattle.gym.imagePath }" onerror="this.src = 'assets/images/transparent.png'"/>
             -->
             <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(GymBattle.enemyPokemon(), GymBattle.enemyPokemon().shiny) }" src=""/>
         </div>
@@ -1084,6 +1088,11 @@
                 <span data-bind="text: GymBattle.enemyPokemon().health() + ' / ' + GymBattle.enemyPokemon().maxHealth()" style="font-size: 12px;"></span>
             </div>
         </div>
+
+        <button class="btn btn-sm btn-danger" style="position: absolute; top: 68px; left: 10px;" data-bind="visible: GymRunner.autoRestart()"
+                onclick="GymRunner.autoRestart(false)">
+            Stop Auto
+        </button>
     </div>
 </div>
 
@@ -1164,48 +1173,61 @@
     <div class="row no-gutters">
        <div class="col-3 no-gutters">
            <div class="list-group" data-bind="if: player.town() instanceof PokemonLeague">
-              <!-- ko foreach: player.town().gymList -->
-                   <button
-                           data-bind="text: $data.leaderName.replace(/\d/g,''),
-                                      disable: !Gym.isUnlocked($data),
-                                      click: function() {GymRunner.startGym($data)},
-                                      attr: { class: Gym.calculateCssClass($data)}">
-                       E4 Leader
-                   </button>
-               <!-- /ko -->
+                <!-- ko foreach: player.town().gymList -->
+                    <div class="btn-group btn-block mt-0">
+                        <button data-bind="text: $data.leaderName.replace(/\d/g,''),
+                                        disable: !Gym.isUnlocked($data),
+                                        click: function() {GymRunner.startGym($data)},
+                                        attr: { class: Gym.calculateCssClass($data)}">
+                            E4 Leader
+                        </button>
+                        <button class="btn btn-info p-0"
+                            data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex($data.town)]() >= 100,
+                            tooltip: { html: true, title: `Auto restart Elite 4 fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${($data.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive money for clearing the gym</i>`, trigger: 'hover', placement:'right' },
+                            click: () => GymRunner.startGym($data, true)">
+                            ↻
+                        </button>
+                    </div>
+                <!-- /ko -->
            </div>
            <div class="list-group">
-               <button data-bind="visible: player.town().gym, attr: { class: player.town().gym ? Gym.calculateCssClass(player.town().gym) : '' }"
-                       onclick="GymRunner.startGym(player.town().gym)">
-                   Gym
-               </button>
-               <!-- ko foreach: player.town().shops -->
+                <div class="btn-group btn-block" data-bind="if: player.town().gym">
+                    <button data-bind="attr: { class: Gym.calculateCssClass(player.town().gym) }"
+                            onclick="GymRunner.startGym(player.town().gym)">
+                        Gym
+                    </button>
+                    <button class="btn btn-info p-0" data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town().gym.town)]() >= 100, tooltip: { html: true, title: `Auto restart Gym fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${(player.town().gym.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive money for clearing the gym</i>`, trigger: 'hover', placement:'right' }"
+                            onclick="GymRunner.startGym(player.town().gym, true)">
+                        ↻
+                    </button>
+                </div>
+                <!-- ko foreach: player.town().shops -->
                     <a class="btn btn-secondary" href="#shopModal" data-bind="attr: { href: $data.href }, event: { click: () => ShopHandler.showShop($data) }, text: $data.name" data-toggle="modal">Shop</a>
-               <!-- /ko -->
-               <button class="btn btn-warning"
-                       href="#nextRegionModal" data-toggle="modal"
-                       data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name), text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">
-                     Travel To Next Region
-               </button>
-               <button class="btn btn-info" onclick="MapHelper.openShipModal();" data-bind="visible: player.highestRegion() > 0 && GameConstants.DockTowns.includes(player.town().name)">
-                     Dock
-               </button>
-               <button class="btn btn-secondary p-0"
-                       onclick="DungeonRunner.initializeDungeon(player.town().dungeon)"
-                       data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon, attr: { class: player.town().dungeon && App.game.wallet.currencies[GameConstants.Currency.dungeonToken]() >= player.town().dungeon.tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0' }">
-                   Start<br/>
-                   <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town().dungeon.tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
-               </button>
-               <button class="btn btn-secondary"
-                       onclick="MapHelper.moveToTown(player.town().dungeon.name)"
-                       data-bind="visible: player.town().dungeon && (!(player.town() instanceof DungeonTown) && player.town() instanceof Town), if: player.town().dungeon">
-                   <span data-bind="text: player.town().dungeon.name"></span>
-               </button>
-               <button class="btn btn-primary"
-                       onclick="App.game.battleFrontier.enter()"
-                       data-bind="visible: player.town().name == 'Battle Frontier'">
-                   Enter Battle Frontier
-               </button>
+                <!-- /ko -->
+                <button class="btn btn-warning"
+                        href="#nextRegionModal" data-toggle="modal"
+                        data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name), text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">
+                    Travel To Next Region
+                </button>
+                <button class="btn btn-info" onclick="MapHelper.openShipModal();" data-bind="visible: player.highestRegion() > 0 && GameConstants.DockTowns.includes(player.town().name)">
+                    Dock
+                </button>
+                <button class="btn btn-secondary p-0"
+                        onclick="DungeonRunner.initializeDungeon(player.town().dungeon)"
+                        data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon, attr: { class: player.town().dungeon && App.game.wallet.currencies[GameConstants.Currency.dungeonToken]() >= player.town().dungeon.tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0' }">
+                    Start<br/>
+                        <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town().dungeon.tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
+                </button>
+                <button class="btn btn-secondary"
+                        onclick="MapHelper.moveToTown(player.town().dungeon.name)"
+                        data-bind="visible: player.town().dungeon && (!(player.town() instanceof DungeonTown) && player.town() instanceof Town), if: player.town().dungeon">
+                        <span data-bind="text: player.town().dungeon.name"></span>
+                </button>
+                <button class="btn btn-primary"
+                        onclick="App.game.battleFrontier.enter()"
+                        data-bind="visible: player.town().name == 'Battle Frontier'">
+                    Enter Battle Frontier
+                </button>
            </div>
        </div>
        <div class="col-6"></div>
@@ -1382,6 +1404,23 @@
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
                         <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
                     </div>
+                    <button class='btn btn-sm' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" data-toggle="popover" data-trigger="hover" data-html="true" data-title="Map Legend:"
+                    data-content="Map locations will be coloured based on the following:
+                    <br/>
+                    <br/><span>Current Location:</span>
+                    <span class='float-right px-4 bg-currentPlace'>&nbsp;</span>
+                    <br/><span>Locked:</span>
+                    <span class='float-right px-4 bg-locked'>&nbsp;</span>
+                    <br/><span>Incomplete:</span>
+                    <span class='float-right px-4 bg-incomplete'>&nbsp;</span>
+                    <br/><span>Uncaught Pokemon:</span>
+                    <span class='float-right px-4 bg-uncaughtPokemon'>&nbsp;</span>
+                    <br/><span>Uncaught Shiny Pokemon:</span>
+                    <span class='float-right px-4 bg-uncaughtShinyPokemon'>&nbsp;</span>
+                    <br/><span>Completed:</span>
+                    <span class='float-right px-4 bg-completed'>&nbsp;</span>
+                    <br/>
+                    <br/><i>NOTE:<br/>These colors can be customized in the settings menu</i>" data-placement="bottom">ⓘ</button>
                     <button class='btn btn-sm' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
                     data-bind='style: { background: Weather.color() },
                         tooltip: {
@@ -2520,7 +2559,7 @@
     y="208"
     height="64"
     width="64"
-    data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;city unlockedTown&#39; : &#39;city lockedTown&#39; }">
+    data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
     
@@ -2531,7 +2570,7 @@
     y="624"
     height="80"
     width="96"
-    data-bind="click:function(){Safari.openModal()}, attr: { class: Safari.canAccess() ? &#39;city unlockedTown&#39; : &#39;city lockedTown&#39; }">
+    data-bind="click:function(){Safari.openModal()}, attr: { class: Safari.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
     
@@ -2542,7 +2581,7 @@
     y="480"
     height="64"
     width="48"
-    data-bind="click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? &#39;city unlockedTown&#39; : &#39;city lockedTown&#39; }">
+    data-bind="click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
     
@@ -2553,7 +2592,7 @@
     y="640"
     height="48"
     width="48"
-    data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;city unlockedTown&#39; : &#39;city lockedTown&#39; }">
+    data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
     
@@ -2564,7 +2603,7 @@
     y="560"
     height="32"
     width="48"
-    data-bind="click:function(){MapHelper.openShipModal()}, css:{ unlockedTown: player.highestRegion() &gt;= 1}">
+    data-bind="click:function(){MapHelper.openShipModal()}, attr:{ class: player.highestRegion() &gt;= 1 ? &#39;completed&#39; : &#39;locked&#39;}">
 </rect>
 
     
@@ -2581,7 +2620,7 @@
     y="560"
     height="48"
     width="128"
-    data-bind="visible: player.highestRegion() &gt;= 1, click:function(){MapHelper.openShipModal()}, css:{ unlockedTown: player.highestRegion() &gt;= 1}">
+    data-bind="visible: player.highestRegion() &gt;= 1, click:function(){MapHelper.openShipModal()}, attr:{ class: player.highestRegion() &gt;= 1 ? &#39;completed&#39; : &#39;locked&#39;}">
 </rect>
 </g>
 
@@ -12281,12 +12320,19 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Log Book</h5>
+                <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
+                        data-target="#log-book-filter" aria-expanded="false" aria-controls="breeding-filter">
+                    Filters
+                </button>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
             <div class="modal-body p-0">
+                <div class="form-row collapse" id="log-book-filter" style="width: 100%" data-bind="foreach: Object.keys(App.game.logbook.filters)">
+                      <button class="btn col" data-bind="text: $data.replace(/_/g, ' '), css: { [`btn-outline-${LogBookTypes[$data].display}`]: !App.game.logbook.filters[$data](), [`btn-${LogBookTypes[$data].display}`]: App.game.logbook.filters[$data]() }, click: () => App.game.logbook.filters[$data](!App.game.logbook.filters[$data]())" onclick="this.blur()">filter</button>
+                </div>
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                     <thead>
                       <tr>
@@ -12295,7 +12341,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                         <th>Date</th>
                       </tr>
                     </thead>
-                    <tbody data-bind="foreach: App.game.logbook.logs()">
+                    <tbody data-bind="foreach: App.game.logbook.filteredLogs()">
                       <tr>
                         <td class="tight" data-bind="html:type.label, class: 'table-' + type.display"></td>
                         <td class="text-left" data-bind="text:description">-</td>
@@ -12649,7 +12695,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                         <td class="text-left">
                           <a href="#" data-bind="text: name, attr: { href: link ? link : '#' }">-</span>
                         </td>
-                        <td class="text-left tight text-muted" data-bind="foreach: resources"><span data-bind="text: $data">-</span><br/></td>
+                        <td class="text-left tight text-muted" data-bind="foreach: resources"><span data-bind="text: $data.toLocaleString('en-US')">-</span><br/></td>
                       </tr>
                     </tbody>
                 </table>
@@ -13726,6 +13772,13 @@ aria-labelledby="badgeCaseModalLabel">
    <div class="modal-content">
        <div class="modal-header">
            <h5 class="modal-title">Badge Case</h5>
+               <button type="button" class="btn mr-auto"
+                    data-bind="tooltip: {
+                        title: App.game.badgeCase.badgeCaseTooltip(),
+                        trigger: 'hover',
+                        placement:'top',
+                        html: true,
+                    }">ⓘ</button>
            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
            </button>
@@ -13783,7 +13836,7 @@ aria-labelledby="badgeCaseModalLabel">
                             <!-- ko if: App.game.discord.enabled -->
                             <button class="btn btn-primary btn-block" onClick="App.game.discord.login()" data-bind="visible: !App.game.discord.ID()">Link Discord</button>
                             <button class="btn btn-warning btn-block" onClick="App.game.discord.logout()" data-bind="visible: App.game.discord.ID()">Unlink Discord</button>
-                            <i class="text-warning"><strong>Note:</strong> This is <strong>not</strong> used for cloud saves,<br/>this just allows you to enter codes recieved from the Discord bot.</i>
+                            <i class="text-warning"><strong>Note:</strong> This is <strong>not</strong> used for cloud saves,<br/>this just allows you to enter codes received from the Discord bot.</i>
                             <hr>
                             <!-- /ko -->
 

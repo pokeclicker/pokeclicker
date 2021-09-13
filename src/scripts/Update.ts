@@ -510,6 +510,40 @@ class Update implements Saveable {
                 milestones: milestones.filter(([stage]) => stage <= highestStageCompleted),
             };
         },
+
+        '0.8.9': ({ playerData, saveData }) => {
+            // Retroactively track proteins obtained
+            let proteinsObtained = 0;
+
+            // Only update if save is from v0.6.0+ (when proteins were added)
+            if (this.minUpdateVersion('0.6.0', saveData)) {
+                saveData.party.caughtPokemon.forEach(p => {
+                    proteinsObtained += p.proteinsUsed;
+                });
+
+                proteinsObtained += playerData._itemList.Protein;
+            }
+
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalProteinsObtained: proteinsObtained,
+            };
+
+            // Only run if save is from v0.8.7 (a forked version which is breaking stuff)
+            if (saveData.update.version == '0.8.7') {
+                // Check if the save has the Vivillon quest line, otherwise it's not from the main website
+                const questLines = saveData.quests?.questLines?.length || 0;
+                if (questLines < 4) {
+                    Notifier.notify({
+                        title: 'Importing this save will cause errors!',
+                        message: 'Please only use saves from the main website https://pokeclicker.com/',
+                        type: NotificationConstants.NotificationOption.danger,
+                        timeout: GameConstants.DAY,
+                    });
+                    throw new Error('Importing this save will cause errors');
+                }
+            }
+        },
     };
 
     constructor() {

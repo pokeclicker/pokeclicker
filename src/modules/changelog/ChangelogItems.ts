@@ -10,6 +10,21 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.9
+    new ChangelogUpdate('v0.8.9', new Date(2021, 8, 12)),
+    new Changelog(changelogType.NEW, 'Log book can now be filtered by event type'),
+    new Changelog(changelogType.NEW, 'Regional Pokédex achievements'),
+    new Changelog(changelogType.NEW, 'Protein achievements'),
+    new Changelog(changelogType.NEW, 'Gym auto re-battle system'),
+    new Changelog(changelogType.CHANGE, 'Updated Kalos environments'),
+    new Changelog(changelogType.CHANGE, 'Added a legend to the map'),
+    new Changelog(changelogType.FIXED, 'Misc text fixes'),
+    new Changelog(changelogType.FIXED, 'Some locations not showing as locked'),
+    new Changelog(changelogType.FIXED, 'Missing/incorrect code contributors links'),
+    new Changelog(changelogType.FIXED, 'Dungeon grid lines not appearing on FireFox'),
+    new Changelog(changelogType.FIXED, 'MissingNo. appearing in log book'),
+    new Changelog(changelogType.FIXED, 'MissingNo. appearing in Battle Frontier'),
+
     // v0.8.8
     new ChangelogUpdate('v0.8.8', new Date(2021, 8, 5)),
     new Changelog(changelogType.NEW, 'Credits modal for sprites and code contributions'),
