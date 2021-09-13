@@ -60,7 +60,9 @@ Routes.add(new RegionRoute(
     'Kanto Route 22', GameConstants.Region.kanto, 22,
     new RoutePokemon({
         land: ['Rattata', 'Spearow', 'Nidoran(F)', 'Nidoran(M)', 'Mankey'],
-        water: ['Magikarp', 'Poliwag', 'Poliwhirl', 'Goldeen'],
+        kantooldrod: ['Magikarp'],
+        kantogoodrod: ['Poliwag', 'Goldeen'],
+        kantosuperrod: ['Poliwag', 'Poliwhirl'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 1)],
     1.1
@@ -86,7 +88,9 @@ Routes.add(new RegionRoute(
     'Kanto Route 4', GameConstants.Region.kanto, 4,
     new RoutePokemon({
         land: ['Rattata', 'Spearow', 'Ekans', 'Sandshrew', 'Mankey'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Seaking'],
+        kantooldrod: ['Magikarp'],
+        kantogoodrod: ['Poliwag', 'Goldeen'],
+        kantosuperrod: ['Goldeen', 'Seaking'],
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 3),
@@ -97,7 +101,9 @@ Routes.add(new RegionRoute(
     'Kanto Route 24', GameConstants.Region.kanto, 24,
     new RoutePokemon({
         land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Venonat', 'Bellsprout'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Seaking'],
+        kantooldrod: ['Magikarp'],
+        kantogoodrod: ['Poliwag', 'Goldeen'],
+        kantosuperrod: ['Goldeen', 'Seaking'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
     4.1
@@ -106,7 +112,9 @@ Routes.add(new RegionRoute(
     'Kanto Route 25', GameConstants.Region.kanto, 25,
     new RoutePokemon({
         land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Venonat', 'Bellsprout'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Krabby', 'Kingler'],
+        kantooldrod: ['Magikarp'],
+        kantogoodrod: ['Poliwag', 'Goldeen'],
+        kantosuperrod: ['Krabby', 'Kingler'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 24)],
     4.2
@@ -125,7 +133,10 @@ Routes.add(new RegionRoute(
     'Kanto Route 6', GameConstants.Region.kanto, 6,
     new RoutePokemon({
         land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Jigglypuff', 'Meowth', 'Abra'],
-        water: ['Psyduck', 'Golduck', 'Magikarp', 'Poliwag', 'Goldeen'],
+        kantooldrod: ['Magikarp'],
+        kantogoodrod: ['Poliwag', 'Goldeen'],
+        kantosuperrod: ['Goldeen'],
+        surfing: ['Psyduck', 'Golduck'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 5)]
 ));
@@ -133,7 +144,9 @@ Routes.add(new RegionRoute(
     'Kanto Route 11', GameConstants.Region.kanto, 11,
     new RoutePokemon({
         land: ['Pidgey', 'Pidgeotto', 'Raticate', 'Rattata', 'Drowzee'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Tentacool', 'Horsea'],
+        kantooldrod: ['Magikarp'],
+        kantogoodrod: ['Poliwag', 'Goldeen'],
+        kantosuperrod: ['Tentacool', 'Horsea'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
     6.1
@@ -152,7 +165,9 @@ Routes.add(new RegionRoute(
     'Kanto Route 10', GameConstants.Region.kanto, 10,
     new RoutePokemon({
         land: ['Rattata', 'Raticate', 'Nidoran(F)', 'Nidoran(M)', 'Machop', 'Magnemite'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Krabby', 'Kingler', 'Horsea'],
+        kantooldrod: ['Magikarp'],
+        kantogoodrod: ['Poliwag', 'Goldeen'],
+        kantosuperrod: ['Krabby', 'Kingler', 'Horsea'],
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 9),
@@ -179,7 +194,10 @@ Routes.add(new RegionRoute(
     'Kanto Route 12', GameConstants.Region.kanto, 12,
     new RoutePokemon({
         land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Farfetch\'d', 'Snorlax'],
-        water: ['Slowpoke', 'Slowbro', 'Magikarp', 'Poliwag', 'Goldeen', 'Horsea', 'Seadra'],
+        kantooldrod: ['Magikarp'],
+        kantogoodrod: ['Poliwag', 'Goldeen'],
+        kantosuperrod: ['Horsea', 'Seadra'],
+        surfing: ['Slowpoke', 'Slowbro'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokemon Tower'))]
 ));
@@ -187,7 +205,10 @@ Routes.add(new RegionRoute(
     'Kanto Route 13', GameConstants.Region.kanto, 13,
     new RoutePokemon({
         land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Farfetch\'d'],
-        water: ['Slowpoke', 'Slowbro', 'Magikarp', 'Poliwag', 'Goldeen', 'Tentacool', 'Horsea', 'Seadra'],
+        kantooldrod: ['Magikarp'],
+        kantogoodrod: ['Poliwag', 'Goldeen'],
+        kantosuperrod: ['Tentacool', 'Horsea', 'Seadra'],
+        surfing: ['Slowpoke', 'Slowbro'],
     }),
     [
         new OneFromManyRequirement([
@@ -200,7 +221,6 @@ Routes.add(new RegionRoute(
     'Kanto Route 14', GameConstants.Region.kanto, 14,
     new RoutePokemon({
         land: ['Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Venomoth', 'Bellsprout', 'Weepinbell'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen'],
     }),
     [
         new OneFromManyRequirement([
@@ -232,7 +252,9 @@ Routes.add(new RegionRoute(
     'Kanto Route 17', GameConstants.Region.kanto, 17,
     new RoutePokemon({
         land: ['Fearow', 'Ponyta', 'Doduo', 'Dodrio'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Tentacool', 'Shellder'],
+        kantooldrod: ['Magikarp'],
+        kantogoodrod: ['Poliwag', 'Goldeen'],
+        kantosuperrod: ['Tentacool', 'Shellder'],
     }),
     [
         new OneFromManyRequirement([
@@ -245,7 +267,9 @@ Routes.add(new RegionRoute(
     'Kanto Route 18', GameConstants.Region.kanto, 18,
     new RoutePokemon({
         land: ['Rattata', 'Raticate', 'Spearow', 'Fearow', 'Doduo'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Tentacool', 'Shellder'],
+        kantooldrod: ['Magikarp'],
+        kantogoodrod: ['Poliwag', 'Goldeen'],
+        kantosuperrod: ['Tentacool', 'Shellder'],
     }),
     [
         new OneFromManyRequirement([
@@ -257,14 +281,20 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kanto Route 19', GameConstants.Region.kanto, 19,
     new RoutePokemon({
-        water: ['Tentacool', 'Magikarp', 'Poliwag', 'Goldeen', 'Tentacruel', 'Staryu'],
+        kantooldrod: ['Magikarp'],
+        kantogoodrod: ['Poliwag', 'Goldeen'],
+        kantosuperrod: ['Tentacool', 'Tentacruel', 'Staryu'],
+        surfing: ['Tentacool'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Soul)]
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 20', GameConstants.Region.kanto, 20,
     new RoutePokemon({
-        water: ['Tentacool', 'Magikarp', 'Poliwag', 'Goldeen', 'Tentacruel', 'Staryu'],
+        kantooldrod: ['Magikarp'],
+        kantogoodrod: ['Poliwag', 'Goldeen'],
+        kantosuperrod: ['Tentacool', 'Tentacruel', 'Staryu'],
+        surfing: ['Tentacool'],
     }),
     [
         new OneFromManyRequirement([
@@ -277,7 +307,10 @@ Routes.add(new RegionRoute(
     'Kanto Route 21', GameConstants.Region.kanto, 21,
     new RoutePokemon({
         land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Raticate', 'Tangela'],
-        water: ['Tentacool', 'Magikarp', 'Poliwag', 'Goldeen', 'Tentacruel', 'Staryu'],
+        kantooldrod: ['Magikarp'],
+        kantogoodrod: ['Poliwag', 'Goldeen'],
+        kantosuperrod: ['Tentacool', 'Tentacruel', 'Staryu'],
+        surfing: ['Tentacool'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Soul)]
 ));
@@ -285,7 +318,9 @@ Routes.add(new RegionRoute(
     'Kanto Route 23', GameConstants.Region.kanto, 23,
     new RoutePokemon({
         land: ['Fearow', 'Nidorina', 'Nidorino', 'Mankey', 'Primeape'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Poliwhirl'],
+        kantooldrod: ['Magikarp'],
+        kantogoodrod: ['Poliwag', 'Goldeen'],
+        kantosuperrod: ['Poliwag', 'Poliwhirl'],
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 22),

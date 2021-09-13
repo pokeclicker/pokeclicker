@@ -70,9 +70,9 @@ class KeyItems implements Feature {
                     once: true,
                 });
             }, 'Dungeon Ticket'),
-            new KeyItem(KeyItems.KeyItem.Super_rod, 'The best fishing rod for catching wild water Pokémon', () => {
-                return App.game.statistics.routeKills[GameConstants.Region.kanto][12]() >= GameConstants.ROUTE_KILLS_NEEDED;
-            }, undefined, undefined, 'Super Rod'),
+            new KeyItem(KeyItems.KeyItem.Fishing_rod, 'The best fishing rod for catching wild water Pokémon', () => {
+                return App.game.statistics.routeKills[GameConstants.Region.kanto][6]() >= GameConstants.ROUTE_KILLS_NEEDED;
+            }, undefined, undefined, 'Fishing Rod'),
             // TODO obtain somewhere at the start
             new KeyItem(KeyItems.KeyItem.Holo_caster, 'A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others', undefined, undefined, undefined, 'Holo Caster'),
             new KeyItem(KeyItems.KeyItem.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémons attack; some baby Pokémon can only be found through breeding too!', () => {
@@ -154,7 +154,7 @@ namespace KeyItems {
         'Town_map',
         'Factory_key',
         'Dungeon_ticket',
-        'Super_rod',
+        'Fishing_rod',
         'Holo_caster',
         'Mystery_egg',
         'Safari_ticket',
