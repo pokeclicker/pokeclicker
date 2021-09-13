@@ -389,6 +389,7 @@ class Breeding implements Feature {
     }
 
     public queueSlotsGainedFromRegion(region: GameConstants.Region): number {
+        // bewtween 4 → 32 queue slots gained when completing a region
         return Math.min(32, Math.max(4, 4 * Math.pow(2, region - 1)));
     }
 
