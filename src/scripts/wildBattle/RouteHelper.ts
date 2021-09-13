@@ -24,22 +24,22 @@ class RouteHelper {
         if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Fishing_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.water);
         }
-        
+
         // Kanto Old Rod Pokémon
         if (App.game.statistics.routeKills[GameConstants.Region.kanto][6]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kantooldrod);
         }
-        
+
         // Kanto Good Rod Pokémon
         if (MapHelper.accessToTown('Fuchsia City') || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kantogoodrod);
         }
-        
+
         // Kanto Super Rod Pokémon
         if (App.game.statistics.routeKills[GameConstants.Region.kanto][12]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kantosuperrod);
         }
-        
+
         // Surfing Pokémon
         if (App.game.badgeCase.hasBadge(BadgeEnums.Soul) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.surfing);
