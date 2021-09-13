@@ -75,9 +75,9 @@ RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon('Articuno'
 RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon('Hoopa', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)));
 
 //Alola
-RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon('Magearna', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
-RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon('Marshadow', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
-RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon('Zeraora', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
+RoamingPokemonList.add(GameConstants.Region.alola, new RoamingPokemon('Magearna', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
+RoamingPokemonList.add(GameConstants.Region.alola, new RoamingPokemon('Marshadow', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
+RoamingPokemonList.add(GameConstants.Region.alola, new RoamingPokemon('Zeraora', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
 
 //Galar
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Galarian Articuno', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill'))));
