@@ -389,7 +389,7 @@ class Breeding implements Feature {
     }
 
     public queueSlotsGainedFromRegion(region: GameConstants.Region): number {
-        return Math.max(4, 4 * Math.pow(2, region - 1));
+        return Math.min(32, Math.max(4, 4 * Math.pow(2, region - 1)));
     }
 
     get eggList(): Array<KnockoutObservable<Egg>> {
