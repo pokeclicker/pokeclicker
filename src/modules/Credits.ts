@@ -183,7 +183,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
 export const CodeCredits: Credit[] = [
     {
         resources: [
-            1161,
+            1170,
         ],
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
@@ -231,19 +231,19 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
+            45,
+        ],
+        name: 'Ultima1990',
+        link: 'https://github.com/Ultima1990',
+        image: 'https://avatars.githubusercontent.com/u/69112975?v=4',
+    },
+    {
+        resources: [
             43,
         ],
         name: 'HLXII',
         link: 'https://github.com/HLXII',
         image: 'https://avatars.githubusercontent.com/u/33099029?v=4',
-    },
-    {
-        resources: [
-            42,
-        ],
-        name: 'Ultima1990',
-        link: 'https://github.com/Ultima1990',
-        image: 'https://avatars.githubusercontent.com/u/69112975?v=4',
     },
     {
         resources: [
@@ -345,9 +345,25 @@ export const CodeCredits: Credit[] = [
         resources: [
             7,
         ],
+        name: 'IanWalder',
+        link: 'https://github.com/IanWalder',
+        image: 'https://avatars.githubusercontent.com/u/76807453?v=4',
+    },
+    {
+        resources: [
+            7,
+        ],
         name: 'dependabot[bot]',
         link: 'https://github.com/apps/dependabot',
         image: 'https://avatars.githubusercontent.com/in/29110?v=4',
+    },
+    {
+        resources: [
+            6,
+        ],
+        name: 'amative1',
+        link: 'https://github.com/amative1',
+        image: 'https://avatars.githubusercontent.com/u/14666630?v=4',
     },
     {
         resources: [
@@ -385,14 +401,6 @@ export const CodeCredits: Credit[] = [
         resources: [
             4,
         ],
-        name: 'IanWalder',
-        link: 'https://github.com/IanWalder',
-        image: 'https://avatars.githubusercontent.com/u/76807453?v=4',
-    },
-    {
-        resources: [
-            4,
-        ],
         name: 'jaahay',
         link: 'https://github.com/jaahay',
         image: 'https://avatars.githubusercontent.com/u/10636658?v=4',
@@ -404,14 +412,6 @@ export const CodeCredits: Credit[] = [
         name: 'kushpatel0703',
         link: 'https://github.com/kushpatel0703',
         image: 'https://avatars.githubusercontent.com/u/44878521?v=4',
-    },
-    {
-        resources: [
-            3,
-        ],
-        name: 'amative1',
-        link: 'https://github.com/amative1',
-        image: 'https://avatars.githubusercontent.com/u/14666630?v=4',
     },
     {
         resources: [
