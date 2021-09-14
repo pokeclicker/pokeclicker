@@ -32,6 +32,10 @@ class RoutePokemon {
     public hoennsuperrod: PokemonNameType [];
     public hoennsurf: PokemonNameType[];
     public dive: PokemonNameType[];
+    public sinnoholdrod: PokemonNameType [];
+    public sinnohgoodrod: PokemonNameType [];
+    public sinnohsuperrod: PokemonNameType [];
+    public sinnohsurf: PokemonNameType[];
     public special: SpecialRoutePokemon[];
 
     constructor({
@@ -51,6 +55,10 @@ class RoutePokemon {
         hoennsuperrod = [],
         hoennsurf = [],
         dive = [],
+        sinnoholdrod = [],
+        sinnohgoodrod = [],
+        sinnohsuperrod = [],
+        sinnohsurf = [],
         special = [],
     }: {
         land?: PokemonNameType[],
@@ -69,6 +77,10 @@ class RoutePokemon {
         hoennsuperrod?: PokemonNameType[],
         hoennsurf?: PokemonNameType[],
         dive?: PokemonNameType[],
+        sinnoholdrod?: PokemonNameType[],
+        sinnohgoodrod?: PokemonNameType[],
+        sinnohsuperrod?: PokemonNameType[],
+        sinnohsurf?: PokemonNameType[],
         special?: SpecialRoutePokemon[],
     }) {
         this.land = land;
@@ -87,6 +99,10 @@ class RoutePokemon {
         this.hoennsuperrod = hoennsuperrod;
         this.hoennsurf = hoennsurf;
         this.dive = dive;
+        this.sinnoholdrod = sinnoholdrod;
+        this.sinnohgoodrod = sinnohgoodrod;
+        this.sinnohsuperrod = sinnohsuperrod;
+        this.sinnohsurf = sinnohsurf;
         this.special = special;
     }
 }

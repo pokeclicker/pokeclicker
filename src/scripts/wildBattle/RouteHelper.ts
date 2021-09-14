@@ -95,6 +95,26 @@ class RouteHelper {
             pokemonList = pokemonList.concat(possiblePokemons.dive);
         }
 
+        // Sinnoh Old Rod Pokémon
+        if (App.game.statistics.routeKills[GameConstants.Region.sinnoh][202]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.sinnoholdrod);
+        }
+
+        // Sinnoh Good Rod Pokémon
+        if (App.game.statistics.routeKills[GameConstants.Region.sinnoh][209]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.sinnohgoodrod);
+        }
+
+        // Sinnoh Super Rod Pokémon
+        if (App.game.statistics.routeKills[GameConstants.Region.sinnoh][225]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.sinnohsuperrod);
+        }
+
+        // Sinnoh Surf Pokémon
+        if (App.game.badgeCase.hasBadge(BadgeEnums.Fen) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.sinnohsurf);
+        }
+
         // Special requirement Pokémon
         pokemonList = pokemonList.concat(...possiblePokemons.special.filter(p => p.isAvailable()).map(p => p.pokemon));
 
