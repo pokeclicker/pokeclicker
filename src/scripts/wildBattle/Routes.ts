@@ -955,7 +955,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Wingull', 'Pelipper', 'Clamperl', 'Finneon', 'Lumineon'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Fen)],
+    [new GymBadgeRequirement(BadgeEnums.Fen)]
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 220', GameConstants.Region.sinnoh, 220,
