@@ -70,6 +70,31 @@ class RouteHelper {
             pokemonList = pokemonList.concat(possiblePokemons.headbutt);
         }
 
+        // Hoenn Old Rod Pokémon
+        if (App.game.badgeCase.hasBadge(BadgeEnums.Knuckle) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.hoennoldrod);
+        }
+
+        // Hoenn Good Rod Pokémon
+        if (App.game.statistics.routeKills[GameConstants.Region.hoenn][118]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.hoenngoodrod);
+        }
+
+        // Hoenn Super Rod Pokémon
+        if (App.game.statistics.routeKills[GameConstants.Region.hoenn][125]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.hoennsuperrod);
+        }
+
+        // Hoenn Surf Pokémon
+        if (App.game.badgeCase.hasBadge(BadgeEnums.Balance) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.hoennsurf);
+        }
+
+        // Dive Pokémon
+        if (App.game.badgeCase.hasBadge(BadgeEnums.Mind) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.dive);
+        }
+
         // Special requirement Pokémon
         pokemonList = pokemonList.concat(...possiblePokemons.special.filter(p => p.isAvailable()).map(p => p.pokemon));
 
