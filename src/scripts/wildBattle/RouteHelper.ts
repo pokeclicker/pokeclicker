@@ -44,7 +44,7 @@ class RouteHelper {
         if (App.game.badgeCase.hasBadge(BadgeEnums.Soul) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kantosurf);
         }
-        
+
         // Johto Old Rod Pokémon
         if (App.game.statistics.routeKills[GameConstants.Region.johto][32]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.johtooldrod);
