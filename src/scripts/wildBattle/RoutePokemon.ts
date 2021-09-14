@@ -21,7 +21,11 @@ class RoutePokemon {
     public kantooldrod: PokemonNameType [];
     public kantogoodrod: PokemonNameType [];
     public kantosuperrod: PokemonNameType [];
-    public surfing: PokemonNameType[];
+    public kantosurf: PokemonNameType[];
+    public johtooldrod: PokemonNameType [];
+    public johtogoodrod: PokemonNameType [];
+    public johtosuperrod: PokemonNameType [];
+    public johtosurf: PokemonNameType[];
     public headbutt: PokemonNameType[];
     public special: SpecialRoutePokemon[];
 
@@ -31,7 +35,11 @@ class RoutePokemon {
         kantooldrod = [],
         kantogoodrod = [],
         kantosuperrod = [],
-        surfing = [],
+        kantosurf = [],
+        johtooldrod = [],
+        johtogoodrod = [],
+        johtosuperrod = [],
+        johtosurf = [],
         headbutt = [],
         special = [],
     }: {
@@ -40,7 +48,11 @@ class RoutePokemon {
         kantooldrod?: PokemonNameType[],
         kantogoodrod?: PokemonNameType[],
         kantosuperrod?: PokemonNameType[],
-        surfing?: PokemonNameType[],
+        kantosurf?: PokemonNameType[],
+        johtooldrod?: PokemonNameType[],
+        johtogoodrod?: PokemonNameType[],
+        johtosuperrod?: PokemonNameType[],
+        johtosurf?: PokemonNameType[],
         headbutt?: PokemonNameType[],
         special?: SpecialRoutePokemon[],
     }) {
@@ -49,7 +61,11 @@ class RoutePokemon {
         this.kantooldrod = kantooldrod;
         this.kantogoodrod = kantogoodrod;
         this.kantosuperrod = kantosuperrod;
-        this.surfing = surfing;
+        this.kantosurf = kantosurf;
+        this.johtooldrod = johtooldrod;
+        this.johtogoodrod = johtogoodrod;
+        this.johtosuperrod = johtosuperrod;
+        this.johtosurf = johtosurf;
         this.headbutt = headbutt;
         this.special = special;
     }

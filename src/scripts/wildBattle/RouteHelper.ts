@@ -40,9 +40,29 @@ class RouteHelper {
             pokemonList = pokemonList.concat(possiblePokemons.kantosuperrod);
         }
 
-        // Surfing Pokémon
+        // Kanto Surf Pokémon
         if (App.game.badgeCase.hasBadge(BadgeEnums.Soul) || possiblePokemons.land.length == 0) {
-            pokemonList = pokemonList.concat(possiblePokemons.surfing);
+            pokemonList = pokemonList.concat(possiblePokemons.kantosurf);
+        }
+        
+        // Johto Old Rod Pokémon
+        if (App.game.statistics.routeKills[GameConstants.Region.johto][32]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.johtooldrod);
+        }
+
+        // Johto Good Rod Pokémon
+        if (App.game.statistics.routeKills[GameConstants.Region.johto][39]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.johtogoodrod);
+        }
+
+        // Johto Super Rod Pokémon
+        if (App.game.badgeCase.hasBadge(BadgeEnums.Elite_JohtoChampion) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.johtosuperrod);
+        }
+
+        // Johto Surf Pokémon
+        if (App.game.badgeCase.hasBadge(BadgeEnums.Plain) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.johtosurf);
         }
 
         // Headbutt Pokémon

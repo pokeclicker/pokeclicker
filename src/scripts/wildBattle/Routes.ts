@@ -136,7 +136,7 @@ Routes.add(new RegionRoute(
         kantooldrod: ['Magikarp'],
         kantogoodrod: ['Poliwag', 'Goldeen'],
         kantosuperrod: ['Goldeen'],
-        surfing: ['Psyduck', 'Golduck'],
+        kantosurf: ['Psyduck', 'Golduck'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 5)]
 ));
@@ -197,7 +197,7 @@ Routes.add(new RegionRoute(
         kantooldrod: ['Magikarp'],
         kantogoodrod: ['Poliwag', 'Goldeen'],
         kantosuperrod: ['Horsea', 'Seadra'],
-        surfing: ['Slowpoke', 'Slowbro'],
+        kantosurf: ['Slowpoke', 'Slowbro'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokemon Tower'))]
 ));
@@ -208,7 +208,7 @@ Routes.add(new RegionRoute(
         kantooldrod: ['Magikarp'],
         kantogoodrod: ['Poliwag', 'Goldeen'],
         kantosuperrod: ['Tentacool', 'Horsea', 'Seadra'],
-        surfing: ['Slowpoke', 'Slowbro'],
+        kantosurf: ['Slowpoke', 'Slowbro'],
     }),
     [
         new OneFromManyRequirement([
@@ -284,7 +284,7 @@ Routes.add(new RegionRoute(
         kantooldrod: ['Magikarp'],
         kantogoodrod: ['Poliwag', 'Goldeen'],
         kantosuperrod: ['Tentacool', 'Tentacruel', 'Staryu'],
-        surfing: ['Tentacool'],
+        kantosurf: ['Tentacool'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Soul)]
 ));
@@ -294,7 +294,7 @@ Routes.add(new RegionRoute(
         kantooldrod: ['Magikarp'],
         kantogoodrod: ['Poliwag', 'Goldeen'],
         kantosuperrod: ['Tentacool', 'Tentacruel', 'Staryu'],
-        surfing: ['Tentacool'],
+        kantosurf: ['Tentacool'],
     }),
     [
         new OneFromManyRequirement([
@@ -310,7 +310,7 @@ Routes.add(new RegionRoute(
         kantooldrod: ['Magikarp'],
         kantogoodrod: ['Poliwag', 'Goldeen'],
         kantosuperrod: ['Tentacool', 'Tentacruel', 'Staryu'],
-        surfing: ['Tentacool'],
+        kantosurf: ['Tentacool'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Soul)]
 ));
@@ -343,7 +343,10 @@ Routes.add(new RegionRoute(
     'Johto Route 30', GameConstants.Region.johto, 30,
     new RoutePokemon({
         land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Hoothoot', 'Ledyba', 'Spinarak'],
-        water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
+        johtooldrod: ['Poliwag', 'Magikarp'],
+        johtogoodrod: ['Poliwag', 'Magikarp'],
+        johtosuperrod: ['Poliwag', 'Magikarp'],
+        johtosurf: ['Poliwag', 'Poliwhirl'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.johto, 29)]
@@ -352,7 +355,10 @@ Routes.add(new RegionRoute(
     'Johto Route 31', GameConstants.Region.johto, 31,
     new RoutePokemon({
         land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Poliwag', 'Hoothoot', 'Ledyba', 'Spinarak', 'Bellsprout'],
-        water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
+        johtooldrod: ['Poliwag', 'Magikarp'],
+        johtogoodrod: ['Poliwag', 'Magikarp'],
+        johtosuperrod: ['Poliwag', 'Magikarp'],
+        johtosurf: ['Poliwag', 'Poliwhirl'],
         headbutt: ['Spearow', 'Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Aipom', 'Pineco', 'Heracross'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.johto, 30)]
@@ -361,7 +367,10 @@ Routes.add(new RegionRoute(
     'Johto Route 32', GameConstants.Region.johto, 32,
     new RoutePokemon({
         land: ['Rattata', 'Ekans', 'Zubat', 'Bellsprout', 'Mareep', 'Hoppip', 'Wooper'],
-        water: ['Tentacool', 'Tentacruel', 'Quagsire', 'Magikarp', 'Qwilfish'],
+        johtooldrod: ['Tentacool', 'Magikarp'],
+        johtogoodrod: ['Tentacool', 'Magikarp'],
+        johtosuperrod: ['Tentacool', 'Magikarp', 'Qwilfish'],
+        johtosurf: ['Tentacool', 'Tentacruel', 'Quagsire'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Pineco'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Zephyr)]
@@ -378,7 +387,10 @@ Routes.add(new RegionRoute(
     'Johto Route 34', GameConstants.Region.johto, 34,
     new RoutePokemon({
         land: ['Rattata', 'Abra', 'Drowzee', 'Ditto'],
-        water: ['Tentacool', 'Tentacruel', 'Krabby', 'Magikarp', 'Staryu', 'Corsola', 'Kingler'],
+        johtooldrod: ['Krabby', 'Magikarp'],
+        johtogoodrod: ['Krabby', 'Staryu', 'Magikarp', 'Corsola'],
+        johtosuperrod: ['Krabby', 'Kingler', 'Staryu', 'Corsola'],
+        johtosurf: ['Tentacool', 'Tentacruel'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ilex Forest'))]
@@ -387,7 +399,10 @@ Routes.add(new RegionRoute(
     'Johto Route 35', GameConstants.Region.johto, 35,
     new RoutePokemon({
         land: ['Pidgey', 'Nidoran(F)', 'Nidoran(M)', 'Abra', 'Drowzee', 'Ditto', 'Hoothoot', 'Yanma'],
-        water: ['Psyduck', 'Golduck', 'Poliwag', 'Magikarp'],
+        johtooldrod: ['Poliwag', 'Magikarp'],
+        johtogoodrod: ['Poliwag', 'Magikarp'],
+        johtosuperrod: ['Poliwag', 'Magikarp'],
+        johtosurf: ['Psyduck', 'Golduck'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.johto, 34)]
@@ -427,7 +442,10 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Johto Route 40', GameConstants.Region.johto, 40,
     new RoutePokemon({
-        water: ['Tentacool', 'Tentacruel', 'Krabby', 'Magikarp', 'Staryu', 'Corsola', 'Kingler'],
+        johtooldrod: ['Krabby', 'Magikarp'],
+        johtogoodrod: ['Krabby', 'Staryu', 'Magikarp', 'Corsola'],
+        johtosuperrod: ['Krabby', 'Kingler', 'Staryu', 'Corsola'],
+        johtosurf: ['Tentacool', 'Tentacruel'],
     }),
     [
 
@@ -438,7 +456,10 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Johto Route 41', GameConstants.Region.johto, 41,
     new RoutePokemon({
-        water: ['Tentacool', 'Tentacruel', 'Mantine', 'Magikarp', 'Chinchou', 'Shellder'],
+        johtooldrod: ['Tentacool', 'Magikarp'],
+        johtogoodrod: ['Tentacool', 'Shellder', 'Magikarp', 'Chinchou'],
+        johtosuperrod: ['Tentacruel', 'Shellder', 'Chinchou', 'Lanturn'],
+        johtosurf: ['Tentacool', 'Tentacruel', 'Mantine'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.johto, 40)]
 ));
@@ -446,7 +467,10 @@ Routes.add(new RegionRoute(
     'Johto Route 42', GameConstants.Region.johto, 42,
     new RoutePokemon({
         land: ['Spearow', 'Zubat', 'Mankey', 'Mareep', 'Flaaffy'],
-        water: ['Goldeen', 'Seaking', 'Magikarp'],
+        johtooldrod: ['Goldeen', 'Magikarp'],
+        johtogoodrod: ['Goldeen', 'Magikarp'],
+        johtosuperrod: ['Goldeen', 'Seaking', 'Magikarp'],
+        johtosurf: ['Goldeen', 'Seaking'],
         headbutt: ['Spearow', 'Aipom', 'Heracross'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Fog)]
@@ -455,7 +479,10 @@ Routes.add(new RegionRoute(
     'Johto Route 43', GameConstants.Region.johto, 43,
     new RoutePokemon({
         land: ['Pidgeotto', 'Venonat', 'Noctowl', 'Mareep', 'Flaaffy', 'Girafarig'],
-        water: ['Magikarp', 'Poliwag'],
+        johtooldrod: ['Poliwag', 'Magikarp'],
+        johtogoodrod: ['Poliwag', 'Magikarp'],
+        johtosuperrod: ['Poliwag', 'Magikarp'],
+        johtosurf: ['Magikarp'],
         headbutt: ['Venonat', 'Exeggcute', 'Hoothoot', 'Pineco'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.johto, 42)]
@@ -464,7 +491,10 @@ Routes.add(new RegionRoute(
     'Johto Route 44', GameConstants.Region.johto, 44,
     new RoutePokemon({
         land: ['Bellsprout', 'Weepinbell', 'Lickitung', 'Tangela'],
-        water: ['Poliwag', 'Poliwhirl', 'Magikarp', 'Remoraid'],
+        johtooldrod: ['Poliwag', 'Magikarp'],
+        johtogoodrod: ['Poliwag', 'Magikarp'],
+        johtosuperrod: ['Poliwag', 'Magikarp', 'Remoraid'],
+        johtosurf: ['Poliwag', 'Poliwhirl'],
         headbutt: ['Spearow', 'Aipom', 'Heracross'],
     }),
     [
@@ -476,7 +506,10 @@ Routes.add(new RegionRoute(
     'Johto Route 45', GameConstants.Region.johto, 45,
     new RoutePokemon({
         land: ['Geodude', 'Graveler', 'Gligar', 'Teddiursa', 'Skarmory', 'Phanpy'],
-        water: ['Magikarp', 'Poliwag', 'Dratini'],
+        johtooldrod: ['Magikarp'],
+        johtogoodrod: ['Magikarp', 'Dratini'],
+        johtosuperrod: ['Magikarp', 'Dratini', 'Dragonair'],
+        johtosurf: ['Magikarp'],
         headbutt: ['Spearow', 'Aipom', 'Heracross'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ice Path'))]
@@ -494,7 +527,10 @@ Routes.add(new RegionRoute(
     'Johto Route 47', GameConstants.Region.johto, 47,
     new RoutePokemon({
         land: ['Raticate', 'Spearow', 'Fearow', 'Gloom', 'Farfetch\'d', 'Ditto', 'Noctowl', 'Miltank'],
-        water: ['Tentacool', 'Seel', 'Staryu', 'Magikarp', 'Shellder', 'Chinchou', 'Lanturn'],
+        johtooldrod: ['Tentacool', 'Magikarp'],
+        johtogoodrod: ['Tentacool', 'Shellder', 'Magikarp', 'Chinchou'],
+        johtosuperrod: ['Tentacruel', 'Shellder', 'Chinchou', 'Lanturn'],
+        johtosurf: ['Tentacool', 'Seel', 'Staryu'],
         headbutt: ['Metapod', 'Butterfree', 'Kakuna', 'Beedrill', 'Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco', 'Heracross'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Mineral)]
@@ -511,7 +547,10 @@ Routes.add(new RegionRoute(
     'Johto Route 26', GameConstants.Region.johto, 26,
     new RoutePokemon({
         land: ['Raticate', 'Arbok', 'Sandslash', 'Ponyta', 'Doduo', 'Dodrio', 'Quagsire'],
-        water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Shellder', 'Chinchou', 'Lanturn'],
+        johtooldrod: ['Tentacool', 'Magikarp'],
+        johtogoodrod: ['Tentacool', 'Shellder', 'Magikarp'],
+        johtosuperrod: ['Tentacruel', 'Shellder', 'Chinchou', 'Lanturn'],
+        johtosurf: ['Tentacool', 'Tentacruel'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.johto, 27)],
@@ -521,7 +560,10 @@ Routes.add(new RegionRoute(
     'Johto Route 27', GameConstants.Region.johto, 27,
     new RoutePokemon({
         land: ['Raticate', 'Arbok', 'Sandslash', 'Ponyta', 'Doduo', 'Dodrio', 'Quagsire'],
-        water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Shellder', 'Chinchou', 'Lanturn'],
+        johtooldrod: ['Tentacool', 'Magikarp'],
+        johtogoodrod: ['Tentacool', 'Shellder', 'Magikarp'],
+        johtosuperrod: ['Tentacruel', 'Shellder', 'Chinchou', 'Lanturn'],
+        johtosurf: ['Tentacool', 'Tentacruel'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Rising)],
@@ -532,6 +574,10 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Ponyta', 'Tangela', 'Donphan', 'Ursaring', 'Rapidash', 'Doduo', 'Dodrio', 'Sneasel', 'Murkrow'],
         water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
+        johtooldrod: ['Poliwag', 'Magikarp'],
+        johtogoodrod: ['Poliwag', 'Magikarp'],
+        johtosuperrod: ['Poliwag', 'Magikarp'],
+        johtosurf: ['Poliwag', 'Poliwhirl'],
         headbutt: ['Natu', 'Aipom', 'Heracross'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
