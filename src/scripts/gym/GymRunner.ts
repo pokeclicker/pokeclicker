@@ -135,5 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
             KeyItemController.showGainModal(KeyItems.KeyItem.Shard_case);
         }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Fog) {
+            KeyItemController.showGainModal(KeyItems.KeyItem.Johto_HM03_surf);
+        }
     });
 });

@@ -21,53 +21,53 @@ class RouteHelper {
         let pokemonList = possiblePokemons.land;
 
         // Water Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Super_rod) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Kanto_super_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.water);
         }
 
         // Kanto Old Rod Pokémon
-        if (App.game.statistics.routeKills[GameConstants.Region.kanto][6]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Kanto_old_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kantooldrod);
         }
 
         // Kanto Good Rod Pokémon
-        if (MapHelper.accessToTown('Fuchsia City') || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Kanto_good_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kantogoodrod);
         }
 
         // Kanto Super Rod Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Super_rod) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Kanto_super_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kantosuperrod);
         }
 
         // Kanto Surf Pokémon
-        if (App.game.badgeCase.hasBadge(BadgeEnums.Soul) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Kanto_HM03_surf) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kantosurf);
         }
 
         // Johto Old Rod Pokémon
-        if (App.game.statistics.routeKills[GameConstants.Region.johto][32]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Johto_old_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.johtooldrod);
         }
 
         // Johto Good Rod Pokémon
-        if (App.game.statistics.routeKills[GameConstants.Region.johto][39]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Johto_good_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.johtogoodrod);
         }
 
         // Johto Super Rod Pokémon
-        if (App.game.badgeCase.hasBadge(BadgeEnums.Elite_JohtoChampion) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Johto_super_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.johtosuperrod);
         }
 
-        // Johto Surf Pokémon
-        if (App.game.badgeCase.hasBadge(BadgeEnums.Plain) || possiblePokemons.land.length == 0) {
-            pokemonList = pokemonList.concat(possiblePokemons.johtosurf);
+        // Headbutt Pokémon
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Johto_TM02_headbutt) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.headbutt);
         }
 
-        // Headbutt Pokémon
-        if (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ilex Forest')]() > 0) {
-            pokemonList = pokemonList.concat(possiblePokemons.headbutt);
+        // Johto Surf Pokémon
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Johto_HM03_surf ) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.johtosurf);
         }
 
         // Hoenn Old Rod Pokémon

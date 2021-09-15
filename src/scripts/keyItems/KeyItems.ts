@@ -70,9 +70,30 @@ class KeyItems implements Feature {
                     once: true,
                 });
             }, 'Dungeon Ticket'),
-            new KeyItem(KeyItems.KeyItem.Super_rod, 'The best fishing rod for catching wild water Pokémon', () => {
+            // Fishing Rods and other Pokémon unlockers
+            new KeyItem(KeyItems.KeyItem.Kanto_old_rod, 'An old and beat-up fishing rod. Use it by any body of water in the Kanto region to fish for wild Pokémon.', () => {
+                return App.game.statistics.routeKills[GameConstants.Region.kanto][6]() >= GameConstants.ROUTE_KILLS_NEEDED;
+            }, undefined, undefined, 'Kanto Old Rod'),
+            new KeyItem(KeyItems.KeyItem.Kanto_good_rod, 'A new, good-quality fishing rod. Use it by any body of water in the Kanto region to fish for wild Pokémon.', () => {
+                return MapHelper.accessToTown('Fuchsia City');
+            }, undefined, undefined, 'Kanto Good Rod'),
+            new KeyItem(KeyItems.KeyItem.Kanto_super_rod, 'An awesome, high-tech fishing rod. Use it by any body of water in the Kanto region to fish for wild Pokémon.', () => {
                 return App.game.statistics.routeKills[GameConstants.Region.kanto][12]() >= GameConstants.ROUTE_KILLS_NEEDED;
-            }, undefined, undefined, 'Super Rod'),
+            }, undefined, undefined, 'Kanto Super Rod'),
+            new KeyItem(KeyItems.KeyItem.Johto_old_rod, 'Can be used for crossing water in the Kanto region.', () => {
+                return App.game.statistics.routeKills[GameConstants.Region.johto][32]() >= GameConstants.ROUTE_KILLS_NEEDED;
+            }, undefined, undefined, 'Johto Old Rod'),
+            new KeyItem(KeyItems.KeyItem.Johto_good_rod, 'A new, good-quality fishing rod. Use it by any body of water in the Kanto region to fish for wild Pokémon.', () => {
+                return App.game.statistics.routeKills[GameConstants.Region.johto][39]() >= GameConstants.ROUTE_KILLS_NEEDED;
+            }, undefined, undefined, 'Johto Good Rod'),
+            new KeyItem(KeyItems.KeyItem.Johto_super_rod, 'An awesome, high-tech fishing rod. Use it by any body of water in the Kanto region to fish for wild Pokémon.', () => {
+                return App.game.statistics.routeKills[GameConstants.Region.johto][28]() >= GameConstants.ROUTE_KILLS_NEEDED;
+            }, undefined, undefined, 'Johto Super Rod'),
+            new KeyItem(KeyItems.KeyItem.Kanto_HM03_surf, 'Can be used for crossing water in the Kanto region.'),
+            new KeyItem(KeyItems.KeyItem.Johto_TM02_headbutt, 'A ramming attack that may knock wild Pokémon from trees. Warning, may cause concussion.', () => {
+                return App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ilex Forest')]() > 0;
+            }, undefined, undefined, 'Johto TM02 Headbutt'),
+            new KeyItem(KeyItems.KeyItem.Johto_HM03_surf, 'Can be used for crossing water in the Johto region.'),
             // TODO obtain somewhere at the start
             new KeyItem(KeyItems.KeyItem.Holo_caster, 'A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others', undefined, undefined, undefined, 'Holo Caster'),
             new KeyItem(KeyItems.KeyItem.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémons attack; some baby Pokémon can only be found through breeding too!', () => {
@@ -154,7 +175,15 @@ namespace KeyItems {
         'Town_map',
         'Factory_key',
         'Dungeon_ticket',
-        'Super_rod',
+        'Kanto_old_rod',
+        'Kanto_good_rod',
+        'Kanto_super_rod',
+        'Johto_old_rod',
+        'Johto_good_rod',
+        'Johto_super_rod',
+        'Kanto_HM03_surf',
+        'Johto_TM02_headbutt',
+        'Johto_HM03_surf',
         'Holo_caster',
         'Mystery_egg',
         'Safari_ticket',
