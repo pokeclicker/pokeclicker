@@ -367,7 +367,7 @@ gymList['Elite Will'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Rising)]
 );
 gymList['Elite Koga'] = new Gym(
-    'Koga2',
+    'Koga (Johto)',
     'Elite Koga',
     [
         new GymPokemon('Ariados', 245330, 40),
@@ -381,9 +381,9 @@ gymList['Elite Koga'] = new Gym(
     'I subjected you to everything I could muster. But my efforts failed. I must hone my skills. Go on to the next room, and put your abilities to the test!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Will)]
 );
-gymList['Elite Bruno2'] = new Gym(
-    'Bruno2',
-    'Elite Bruno2',
+gymList['Elite Bruno (Johto)'] = new Gym(
+    'Bruno (Johto)',
+    'Elite Bruno (Johto)',
     [
         new GymPokemon('Hitmontop', 245330, 42),
         new GymPokemon('Hitmonlee', 248300, 42),
@@ -412,7 +412,7 @@ gymList['Elite Karen'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Bruno2)]
 );
 gymList['Champion Lance'] = new Gym(
-    'Lance2',
+    'Lance (Johto)',
     'Champion Lance',
     [
         new GymPokemon('Gyarados', 258300, 44),

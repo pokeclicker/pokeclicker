@@ -47,7 +47,7 @@ TownList['Indigo Plateau Johto'] = new PokemonLeague(
     GameConstants.Region.johto,
     [new RouteKillRequirement(10, GameConstants.Region.johto, 27)],
     [indigoPlateauShop],
-    ['Elite Will', 'Elite Koga', 'Elite Bruno2', 'Elite Karen', 'Champion Lance']
+    ['Elite Will', 'Elite Koga', 'Elite Bruno (Johto)', 'Elite Karen', 'Champion Lance']
 );
 (<PokemonLeague>TownList['Indigo Plateau Johto']).setupGymTowns();
 

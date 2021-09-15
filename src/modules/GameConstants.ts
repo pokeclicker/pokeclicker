@@ -760,7 +760,7 @@ export const JohtoGyms = [
     'Blackthorn City',
     'Elite Will',
     'Elite Koga',
-    'Elite Bruno2',
+    'Elite Bruno (Johto)',
     'Elite Karen',
     'Champion Lance',
 ];
