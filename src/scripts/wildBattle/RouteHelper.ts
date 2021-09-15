@@ -25,6 +25,11 @@ class RouteHelper {
             pokemonList = pokemonList.concat(possiblePokemons.water);
         }
 
+        // Headbutt Pokémon
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Johto_TM02_headbutt) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.headbutt);
+        }
+
         // Kanto Old Rod Pokémon
         if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Kanto_old_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kantooldrod);
@@ -60,58 +65,58 @@ class RouteHelper {
             pokemonList = pokemonList.concat(possiblePokemons.johtosuperrod);
         }
 
-        // Headbutt Pokémon
+        // Johto Headbutt Pokémon
         if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Johto_TM02_headbutt) || possiblePokemons.land.length == 0) {
-            pokemonList = pokemonList.concat(possiblePokemons.headbutt);
+            pokemonList = pokemonList.concat(possiblePokemons.johtoheadbutt);
         }
 
         // Johto Surf Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Johto_HM03_surf ) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Johto_HM03_surf) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.johtosurf);
         }
 
         // Hoenn Old Rod Pokémon
-        if (App.game.badgeCase.hasBadge(BadgeEnums.Knuckle) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Hoenn_old_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.hoennoldrod);
         }
 
         // Hoenn Good Rod Pokémon
-        if (App.game.statistics.routeKills[GameConstants.Region.hoenn][118]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Hoenn_good_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.hoenngoodrod);
         }
 
         // Hoenn Super Rod Pokémon
-        if (App.game.statistics.routeKills[GameConstants.Region.hoenn][125]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Hoenn_super_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.hoennsuperrod);
         }
 
         // Hoenn Surf Pokémon
-        if (App.game.badgeCase.hasBadge(BadgeEnums.Balance) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Hoenn_HM03_surf) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.hoennsurf);
         }
 
-        // Dive Pokémon
-        if (App.game.badgeCase.hasBadge(BadgeEnums.Mind) || possiblePokemons.land.length == 0) {
-            pokemonList = pokemonList.concat(possiblePokemons.dive);
+        // Hoenn Dive Pokémon
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Hoenn_HM08_dive) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.hoenndive);
         }
 
         // Sinnoh Old Rod Pokémon
-        if (App.game.statistics.routeKills[GameConstants.Region.sinnoh][202]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Sinnoh_old_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.sinnoholdrod);
         }
 
         // Sinnoh Good Rod Pokémon
-        if (App.game.statistics.routeKills[GameConstants.Region.sinnoh][209]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Sinnoh_good_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.sinnohgoodrod);
         }
 
         // Sinnoh Super Rod Pokémon
-        if (App.game.statistics.routeKills[GameConstants.Region.sinnoh][225]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Sinnoh_super_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.sinnohsuperrod);
         }
 
         // Sinnoh Surf Pokémon
-        if (App.game.badgeCase.hasBadge(BadgeEnums.Fen) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Sinnoh_HM03_surf) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.sinnohsurf);
         }
 

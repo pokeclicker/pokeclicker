@@ -18,6 +18,7 @@ class SpecialRoutePokemon {
 class RoutePokemon {
     public land: PokemonNameType[];
     public water: PokemonNameType[];
+    public headbutt: PokemonNameType[];
     public kantooldrod: PokemonNameType [];
     public kantogoodrod: PokemonNameType [];
     public kantosuperrod: PokemonNameType [];
@@ -26,12 +27,12 @@ class RoutePokemon {
     public johtogoodrod: PokemonNameType [];
     public johtosuperrod: PokemonNameType [];
     public johtosurf: PokemonNameType[];
-    public headbutt: PokemonNameType[];
+    public johtoheadbutt: PokemonNameType[];
     public hoennoldrod: PokemonNameType [];
     public hoenngoodrod: PokemonNameType [];
     public hoennsuperrod: PokemonNameType [];
     public hoennsurf: PokemonNameType[];
-    public dive: PokemonNameType[];
+    public hoenndive: PokemonNameType[];
     public sinnoholdrod: PokemonNameType [];
     public sinnohgoodrod: PokemonNameType [];
     public sinnohsuperrod: PokemonNameType [];
@@ -41,6 +42,7 @@ class RoutePokemon {
     constructor({
         land = [],
         water = [],
+        headbutt = [],
         kantooldrod = [],
         kantogoodrod = [],
         kantosuperrod = [],
@@ -49,12 +51,12 @@ class RoutePokemon {
         johtogoodrod = [],
         johtosuperrod = [],
         johtosurf = [],
-        headbutt = [],
+        johtoheadbutt = [],
         hoennoldrod = [],
         hoenngoodrod = [],
         hoennsuperrod = [],
         hoennsurf = [],
-        dive = [],
+        hoenndive = [],
         sinnoholdrod = [],
         sinnohgoodrod = [],
         sinnohsuperrod = [],
@@ -63,6 +65,7 @@ class RoutePokemon {
     }: {
         land?: PokemonNameType[],
         water?: PokemonNameType[],
+        headbutt?: PokemonNameType[],
         kantooldrod?: PokemonNameType[],
         kantogoodrod?: PokemonNameType[],
         kantosuperrod?: PokemonNameType[],
@@ -71,12 +74,12 @@ class RoutePokemon {
         johtogoodrod?: PokemonNameType[],
         johtosuperrod?: PokemonNameType[],
         johtosurf?: PokemonNameType[],
-        headbutt?: PokemonNameType[],
+        johtoheadbutt?: PokemonNameType[],
         hoennoldrod?: PokemonNameType[],
         hoenngoodrod?: PokemonNameType[],
         hoennsuperrod?: PokemonNameType[],
         hoennsurf?: PokemonNameType[],
-        dive?: PokemonNameType[],
+        hoenndive?: PokemonNameType[],
         sinnoholdrod?: PokemonNameType[],
         sinnohgoodrod?: PokemonNameType[],
         sinnohsuperrod?: PokemonNameType[],
@@ -85,6 +88,7 @@ class RoutePokemon {
     }) {
         this.land = land;
         this.water = water;
+        this.headbutt = headbutt;
         this.kantooldrod = kantooldrod;
         this.kantogoodrod = kantogoodrod;
         this.kantosuperrod = kantosuperrod;
@@ -93,12 +97,12 @@ class RoutePokemon {
         this.johtogoodrod = johtogoodrod;
         this.johtosuperrod = johtosuperrod;
         this.johtosurf = johtosurf;
-        this.headbutt = headbutt;
+        this.johtoheadbutt = johtoheadbutt;
         this.hoennoldrod = hoennoldrod;
         this.hoenngoodrod = hoenngoodrod;
         this.hoennsuperrod = hoennsuperrod;
         this.hoennsurf = hoennsurf;
-        this.dive = dive;
+        this.hoenndive = hoenndive;
         this.sinnoholdrod = sinnoholdrod;
         this.sinnohgoodrod = sinnohgoodrod;
         this.sinnohsuperrod = sinnohsuperrod;
