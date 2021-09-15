@@ -1,5 +1,6 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/enums/Badges.d.ts" />
+/// <reference path="../../declarations/utilities/UI.d.ts" />
 
 class GymRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
@@ -128,9 +129,11 @@ class GymRunner {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    $('#receiveBadgeModal').on('hidden.bs.modal', () => {
+    $('#receiveBadgeModal').on('hidden.bs.modal', async () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Soul) {
-            KeyItemController.showGainModal(KeyItems.KeyItem.Safari_ticket);
+            const modal = KeyItemController.showGainModal(KeyItems.KeyItem.Safari_ticket);
+            await asyncEvent(modal, 'hidden.bs.modal');
+            KeyItemController.showGainModal(KeyItems.KeyItem.Kanto_HM03_surf);
         }
         if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
             KeyItemController.showGainModal(KeyItems.KeyItem.Shard_case);
