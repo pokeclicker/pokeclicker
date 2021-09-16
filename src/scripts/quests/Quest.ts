@@ -18,7 +18,7 @@ abstract class Quest {
     inQuestLine: boolean;
     _onLoad?: () => void;
     onLoadCalled: boolean;
-    quickTravelFn: fn;
+    quickTravelFn: any;
 
     constructor(amount: number, pointsReward: number) {
         this.amount = amount;
@@ -105,7 +105,7 @@ abstract class Quest {
     }
 
     quickTravelAvailable(): boolean {
-        return this.quickTravelFn;
+        return this.quickTravelFn && App.game.quests.level() >= 10;
     }
 
     begin() {
