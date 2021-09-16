@@ -153,5 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Fen) {
             KeyItemController.showGainModal(KeyItems.KeyItem.Sinnoh_HM03_surf);
         }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Quake) {
+            KeyItemController.showGainModal(KeyItems.KeyItem.Unova_HM03_surf);
+        }
     });
 });
