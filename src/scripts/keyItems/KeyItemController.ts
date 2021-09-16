@@ -6,7 +6,7 @@ class KeyItemController {
     static showGainModal(item: KeyItems.KeyItem) {
         this.latestGainedItem = item;
         $('.modal').modal('hide');
-        $('#keyItemModal').modal({
+        return $('#keyItemModal').modal({
             backdrop: 'static',
             keyboard: false,
         });
