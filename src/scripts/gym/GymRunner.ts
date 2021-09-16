@@ -131,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#receiveBadgeModal').on('hidden.bs.modal', () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Soul) {
             KeyItemController.showGainModal(KeyItems.KeyItem.Safari_ticket);
+            KeyItemController.showGainModal(KeyItems.KeyItem.Kanto_HM03_surf);
         }
         if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
             KeyItemController.showGainModal(KeyItems.KeyItem.Shard_case);
@@ -149,6 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (GymBattle.gym.badgeReward == BadgeEnums.Fen) {
             KeyItemController.showGainModal(KeyItems.KeyItem.Sinnoh_HM03_surf);
+        }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Quake) {
+            KeyItemController.showGainModal(KeyItems.KeyItem.Unova_HM03_surf);
         }
     });
 });

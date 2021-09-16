@@ -120,6 +120,16 @@ class RouteHelper {
             pokemonList = pokemonList.concat(possiblePokemons.sinnohsurf);
         }
 
+        // Unova Super Rod Pokémon
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Unova_super_rod) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.unovasuperrod);
+        }
+
+        // Unova Surf Pokémon
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Unova_HM03_surf) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.unovasurf);
+        }
+
         // Special requirement Pokémon
         pokemonList = pokemonList.concat(...possiblePokemons.special.filter(p => p.isAvailable()).map(p => p.pokemon));
 

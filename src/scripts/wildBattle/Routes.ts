@@ -1328,7 +1328,8 @@ Routes.add(new RegionRoute(
     'Unova Route 19', GameConstants.Region.unova, 19,
     new RoutePokemon({
         land: ['Patrat', 'Purrloin'],
-        water: ['Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        unovasuperrod: ['Poliwag', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        unovasurf: ['Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
     0.1
@@ -1337,7 +1338,8 @@ Routes.add(new RegionRoute(
     'Unova Route 20', GameConstants.Region.unova, 20,
     new RoutePokemon({
         land: ['Sunkern', 'Pidove', 'Venipede', 'Patrat', 'Purrloin', 'Sewaddle'],
-        water: ['Azurill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        unovasuperrod: ['Poliwag', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        unovasurf: ['Azurill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.unova, 19)],
     0.2
@@ -1346,7 +1348,8 @@ Routes.add(new RegionRoute(
     'Unova Route 4', GameConstants.Region.unova, 4,
     new RoutePokemon({
         land: ['Sandile', 'Darumaka', 'Trubbish', 'Minccino', 'Scraggy'],
-        water: ['Frillish'],
+        unovasuperrod: ['Krabby', 'Clamperl', 'Qwilfish'],
+        unovasurf: ['Frillish'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Toxic)]
 ));
@@ -1354,7 +1357,6 @@ Routes.add(new RegionRoute(
     'Desert Resort', GameConstants.Region.unova, 25,
     new RoutePokemon({
         land: ['Sandshrew', 'Trapinch', 'Maractus', 'Darumaka', 'Dwebble', 'Scraggy', 'Sigilyph', 'Sandile'],
-        water: [],
     }),
     [
         new MultiRequirement([
@@ -1389,8 +1391,9 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Unova Route 6', GameConstants.Region.unova, 6,
     new RoutePokemon({
-        land: ['Marill', 'Deerling (Spring)', 'Deerling (Autumn)', 'Karrablast', 'Tranquill', 'Foongus', 'Swadloon', 'Vanillite', 'Shelmet'],
-        water: ['Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        land: ['Marill', 'Tranquill', 'Swadloon', 'Vanillite', 'Deerling (Spring)', 'Deerling (Autumn)', 'Karrablast', 'Foongus', 'Shelmet'],
+        unovasuperrod: ['Poliwag', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        unovasurf: ['Marill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 5),
@@ -1400,7 +1403,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Unova Route 7', GameConstants.Region.unova, 7,
     new RoutePokemon({
-        land: ['Zangoose', 'Seviper', 'Cubchoo', 'Deerling (Summer)', 'Deerling (Winter)', 'Watchog', 'Tranquill', 'Foongus'],
+        land: ['Zangoose', 'Seviper', 'Watchog', 'Tranquill', 'Deerling (Summer)', 'Deerling (Winter)', 'Foongus', 'Cubchoo'],
     }),
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Chargestone Cave')),
@@ -1410,16 +1413,17 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Unova Route 13', GameConstants.Region.unova, 13,
     new RoutePokemon({
-        land: ['Tangela', 'Pelipper', 'Drifblim', 'Absol', 'Lunatone', 'Solrock'],
-        water: ['Staryu', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Frillish'],
+        land: ['Tangela', 'Pelipper', 'Absol', 'Lunatone', 'Solrock', 'Drifblim'],
+        unovasuperrod: ['Shellder', 'Luvdisc'],
+        unovasurf: ['Staryu', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Frillish'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))]
 ));
 Routes.add(new RegionRoute(
     'Undella Bay', GameConstants.Region.unova, 24,
     new RoutePokemon({
-        land: [],
-        water: ['Frillish', 'Mantyke', 'Spheal', 'Remoraid', 'Jellicent', 'Wailmer', 'Chinchou', 'Ducklett'],
+        land: ['Remoraid', 'Spheal', 'Mantyke', 'Ducklett', 'Frillish'],
+        unovasuperrod: ['Chinchou', 'Remoraid'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))],
     13
@@ -1427,8 +1431,9 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Unova Route 14', GameConstants.Region.unova, 14,
     new RoutePokemon({
-        land: ['Golduck', 'Swablu', 'Mienfoo', 'Drifblim', 'Absol', 'Altaria'],
-        water: ['Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        land: ['Golduck', 'Swablu', 'Altaria', 'Absol', 'Drifblim', 'Mienfoo'],
+        unovasuperrod: ['Goldeen', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        unovasurf: ['Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))],
     13
@@ -1445,7 +1450,8 @@ Routes.add(new RegionRoute(
     'Unova Route 11', GameConstants.Region.unova, 11,
     new RoutePokemon({
         land: ['Golduck', 'Marill', 'Gligar', 'Zangoose', 'Seviper', 'Karrablast', 'Amoonguss', 'Shelmet'],
-        water: ['Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        unovasuperrod: ['Goldeen', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        unovasurf: ['Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.unova, 12)],
     13.2
@@ -1461,7 +1467,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Unova Route 21', GameConstants.Region.unova, 21,
     new RoutePokemon({
-        water: ['Mantyke', 'Remoraid', 'Spheal', 'Luvdisc'],
+        land: ['Remoraid', 'Mantyke', 'Frillish'],
+        unovasuperrod: ['Remoraid', 'Luvdisc'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Seaside Cave'))]
 ));
@@ -1469,7 +1476,8 @@ Routes.add(new RegionRoute(
     'Unova Route 22', GameConstants.Region.unova, 22,
     new RoutePokemon({
         land: ['Golduck', 'Marill', 'Delibird', 'Pelipper', 'Lunatone', 'Solrock', 'Amoonguss', 'Mienfoo'],
-        water: ['Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        unovasuperrod: ['Goldeen', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        unovasurf: ['Marill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.unova, 21)]
 ));
@@ -1477,7 +1485,8 @@ Routes.add(new RegionRoute(
     'Unova Route 23', GameConstants.Region.unova, 23,
     new RoutePokemon({
         land: ['Golduck', 'Gligar', 'Amoonguss', 'Mienfoo', 'Bouffalant', 'Rufflet', 'Vullaby'],
-        water: ['Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        unovasuperrod: ['Poliwag', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        unovasurf: ['Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))]
 ));
@@ -1485,6 +1494,8 @@ Routes.add(new RegionRoute(
     'Unova Route 8', GameConstants.Region.unova, 8,
     new RoutePokemon({
         land: ['Croagunk', 'Tympole', 'Palpitoad', 'Karrablast', 'Shelmet', 'Stunfisk'],
+        unovasuperrod: ['Barboach', 'Stunfisk'],
+        unovasurf: ['Palpitoad', 'Stunfisk'],
     }),
     [
         new OneFromManyRequirement([
@@ -1515,6 +1526,8 @@ Routes.add(new RegionRoute(
     'Unova Route 3', GameConstants.Region.unova, 3,
     new RoutePokemon({
         land: ['Yanma', 'Watchog', 'Herdier', 'Purrloin', 'Tranquill'],
+        unovasuperrod: ['Goldeen', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        unovasurf: ['Corphish', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinwheel Forest'))],
     23.1
@@ -1530,8 +1543,9 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Unova Route 1', GameConstants.Region.unova, 1,
     new RoutePokemon({
-        land: ['Jigglypuff', 'Watchog', 'Herdier', 'Scrafty'],
-        water: ['Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        land: ['Jigglypuff', 'Watchog', 'Herdier'],
+        unovasuperrod: ['Feebas', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        unovasurf: ['Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.unova, 2)],
     23.3
@@ -1540,6 +1554,7 @@ Routes.add(new RegionRoute(
     'Unova Route 17', GameConstants.Region.unova, 17,
     new RoutePokemon({
         land: ['Frillish', 'Alomomola'],
+        unovasuperrod: ['Horsea', 'Finneon'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.unova, 1)],
     23.4
@@ -1548,7 +1563,8 @@ Routes.add(new RegionRoute(
     'Unova Route 18', GameConstants.Region.unova, 18,
     new RoutePokemon({
         land: ['Tropius', 'Carnivine', 'Watchog', 'Crustle', 'Scrafty'],
-        water: ['Frillish', 'Alomomola'],
+        unovasuperrod: ['Horsea', 'Corsola', 'Finneon'],
+        unovasurf: ['Frillish', 'Alomomola'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.unova, 17)],
     23.5
