@@ -20356,7 +20356,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 898.2,
-        'name': 'Ghost Rider Calyrex',
+        'name': 'Shadow Rider Calyrex',
         'type': [PokemonType.Psychic, PokemonType.Ghost],
         'base': {
             'hitpoints': 100,
