@@ -3857,7 +3857,6 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
     96500, 201, 35);
 
 dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
-    ['Metapod', 'Paras', 'Pinsir', 'Hoothoot', 'Bonsly', 'Trumbeak', 'Fomantis', 'Steenee', 'Comfey', 'Oranguru', 'Passimian'],
     ['Metapod', 'Paras', 'Pinsir', 'Hoothoot', 'Bonsly', 'Trumbeak', 'Fomantis', 'Bounsweet', 'Steenee', 'Comfey', 'Oranguru', 'Passimian'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
