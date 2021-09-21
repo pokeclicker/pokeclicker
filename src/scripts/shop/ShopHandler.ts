@@ -23,7 +23,10 @@ class ShopHandler {
     public static buyItem() {
         const item: Item = this.shopObservable().items[ShopHandler.selected()];
         item.buy(this.amount());
-        ShopHandler.resetAmount();
+
+        if (Settings.getSetting('resetShopAmountOnPurchase').observableValue()) {
+            ShopHandler.resetAmount();
+        }
     }
 
     public static resetAmount() {

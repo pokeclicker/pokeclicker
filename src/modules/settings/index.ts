@@ -99,6 +99,7 @@ Settings.add(new CssVariableSetting('completed', 'Map Color Completed Location',
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
 Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web workers for game ticks (more consistent game speed)', true));
+Settings.add(new BooleanSetting('resetShopAmountOnPurchase', 'Reset buy quantity after each purchase', true));
 
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((sound) => {
