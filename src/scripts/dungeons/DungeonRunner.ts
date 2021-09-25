@@ -28,7 +28,6 @@ class DungeonRunner {
             return false;
         }
         App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
-
         // Reset any trainers/pokemon if there was one previously
         DungeonBattle.trainer(null);
         DungeonBattle.trainerPokemonIndex(0);
@@ -42,6 +41,7 @@ class DungeonRunner {
         const flash = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() >= 200;
         // Dungeon size minimum of MIN_DUNGEON_SIZE
         DungeonRunner.map = new DungeonMap(Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize), flash);
+
         DungeonRunner.chestsOpened = 0;
         DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
@@ -85,8 +85,8 @@ class DungeonRunner {
         }
 
         DungeonRunner.chestsOpened++;
-        const random: number = GameConstants.randomIntBetween(0, DungeonRunner.dungeon.itemList.length - 1);
-        const input = GameConstants.BattleItemType[DungeonRunner.dungeon.itemList[random]];
+
+        let input;
         let amount = 1;
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             if (Math.random() < 0.5) {
@@ -98,6 +98,7 @@ class DungeonRunner {
             type: NotificationConstants.NotificationOption.success,
             setting: NotificationConstants.NotificationSetting.dungeon_item_found,
         });
+
         player.gainItem(input, amount);
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();

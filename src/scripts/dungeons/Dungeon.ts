@@ -17,9 +17,16 @@ interface DetailedPokemon {
     options: EnemyOptions
 }
 
+interface DetailedLoot {
+    loot: GameConstants.BattleItemType | GameConstants.EggItemType,
+    weight?: number,
+}
+
 type Enemy = PokemonNameType | DetailedPokemon | DungeonTrainer;
 
 type Boss = DungeonBossPokemon | DungeonTrainer;
+
+type Loot = DetailedLoot | GameConstants.BattleItemType;
 
 interface EncounterInfo {
     image: string,
@@ -37,7 +44,7 @@ class Dungeon {
     constructor(
         public name: string,
         public enemyList: Enemy[],
-        public itemList: GameConstants.BattleItemType[],
+        public itemList: Loot[],
         public baseHealth: number,
         public bossList: Boss[],
         public tokenCost: number,
@@ -120,6 +127,8 @@ class Dungeon {
             }
         });
     }
+
+    /**
 
     /**
      * Returns the possible minion Pokemon in the dungeon.
@@ -269,7 +278,10 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
                 new GymPokemon('Metapod', 50, 7),
             ], { weight: 1 }, 'Charlie'),
     ],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
+    [
+        {loot: GameConstants.BattleItemType.xAttack, weight: 100},
+        {loot: GameConstants.EggItemType.Grass_egg, weight: 1},
+    ],
     102,
     [
         new DungeonBossPokemon('Pikachu', 510, 7),
@@ -353,7 +365,7 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
                 new GymPokemon('Zubat', 75, 13),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Token_collector],
+    [GameConstants.BattleItemType.xAttack],
     834,
     [
         new DungeonBossPokemon('Kabuto', 4170, 12, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Moon'))}),
