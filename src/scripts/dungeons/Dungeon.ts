@@ -18,7 +18,7 @@ interface DetailedPokemon {
 }
 
 interface DetailedLoot {
-    loot: GameConstants.BattleItemType | GameConstants.EggItemType,
+    loot: string,
     weight?: number,
 }
 
@@ -291,8 +291,8 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
             ], { weight: 1 }, 'Charlie'),
     ],
     [
-        {loot: GameConstants.BattleItemType.xAttack, weight: 100},
-        {loot: GameConstants.EggItemType.Grass_egg, weight: 1},
+        {loot: 'xAttack', weight: 1},
+        {loot: 'Grass_egg', weight: 1},
     ],
     102,
     [

@@ -97,19 +97,6 @@ class DungeonRunner {
 
         DungeonRunner.chestsOpened++;
 
-        let input;
-        const loot = DungeonRunner.lootInput();
-
-        //TODO: Allow for other item types to be used
-
-        if (loot != undefined) {
-            if (typeof loot == 'string') {
-                const input = GameConstants.BattleItemType[loot];
-            } else if (typeof loot == 'number') {
-                const input = GameConstants.EggItemType[loot];
-            }
-        }
-
         let amount = 1;
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             if (Math.random() < 0.5) {
@@ -122,7 +109,7 @@ class DungeonRunner {
             setting: NotificationConstants.NotificationSetting.dungeon_item_found,
         });
 
-        player.gainItem(input, amount);
+        player.gainItem(ItemList[DungeonRunner.lootInput()].name, amount);
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
         if (DungeonRunner.chestsOpened == Math.floor(DungeonRunner.map.size / 3)) {
