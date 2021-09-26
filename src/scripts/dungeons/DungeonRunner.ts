@@ -79,6 +79,17 @@ class DungeonRunner {
         }
     }
 
+    public static lootInput() {
+        const generatedLoot = GameHelper.fromWeightedArray(DungeonRunner.dungeon.itemList, DungeonRunner.dungeon.lootWeightList);
+
+        if (typeof generatedLoot === 'string') {
+            return generatedLoot;
+        } else {
+            return generatedLoot.loot;
+        }
+    }
+
+
     public static openChest() {
         if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.chest) {
             return;
@@ -87,6 +98,18 @@ class DungeonRunner {
         DungeonRunner.chestsOpened++;
 
         let input;
+        const loot = DungeonRunner.lootInput();
+
+        //TODO: Allow for other item types to be used
+
+        if (loot != undefined) {
+            if (typeof loot == 'string') {
+                const input = GameConstants.BattleItemType[loot];
+            } else if (typeof loot == 'number') {
+                const input = GameConstants.EggItemType[loot];
+            }
+        }
+
         let amount = 1;
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             if (Math.random() < 0.5) {

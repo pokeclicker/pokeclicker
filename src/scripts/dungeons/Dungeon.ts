@@ -129,6 +129,18 @@ class Dungeon {
     }
 
     /**
+     * Retreives the weights for all the possible Loot
+     */
+    get lootWeightList(): number[] {
+        return this.itemList.map((loot) => {
+            if (typeof loot === 'string') {
+                return 1;
+            } else {
+                return (<DetailedLoot>loot).weight ?? 1;
+                //TODO: Incorporate dungeon clears into weight calculation (more clears = greater weight with maximum), uses App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]()
+            }
+        });
+    }
 
     /**
      * Returns the possible minion Pokemon in the dungeon.
