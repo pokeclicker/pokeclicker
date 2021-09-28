@@ -1129,6 +1129,10 @@ class Farming implements Feature {
         if (plot.isEmpty()) {
             return;
         }
+        if (plot.stage() == PlotStage.Berry){
+            this.harvest(index);
+            return;
+        }
         if (this.shovelAmt() <= 0) {
             return;
         }
