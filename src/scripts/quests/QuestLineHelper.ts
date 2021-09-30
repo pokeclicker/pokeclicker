@@ -253,6 +253,12 @@ class QuestLineHelper {
                         Routes.getRoute(GameConstants.Region.kanto, route).pokemon.land.push(ultrabeast);
                     }
                 });
+
+                Notifier.notify({
+                    title: UltraBeastQuestLine.name,
+                    message: `An Ultra Beast is hiding somewhere.\n${hint}`,
+                    type: NotificationConstants.NotificationOption.info,
+                });
             };
 
             const catchUltraBeast = new CustomQuest(
