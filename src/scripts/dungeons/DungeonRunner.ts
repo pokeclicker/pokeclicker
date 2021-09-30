@@ -8,6 +8,7 @@ class DungeonRunner {
 
     public static fighting: KnockoutObservable<boolean> = ko.observable(false);
     public static map: DungeonMap;
+    public static lootWeight: number;
     public static chestsOpened: number;
     public static currentTileType;
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
@@ -83,8 +84,10 @@ class DungeonRunner {
         const generatedLoot = GameHelper.fromWeightedArray(DungeonRunner.dungeon.itemList, DungeonRunner.dungeon.lootWeightList);
 
         if (typeof generatedLoot === 'string') {
+            DungeonRunner.lootWeight = 3;
             return generatedLoot;
         } else {
+            DungeonRunner.lootWeight = generatedLoot.weight;
             return generatedLoot.loot;
         }
     }
@@ -100,7 +103,7 @@ class DungeonRunner {
         const input = DungeonRunner.lootInput();
 
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
-            if (Math.random() < 0.5) {
+            if (5000 * Math.random() / ((App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1) * (DungeonRunner.lootWeight + 1)) < 0.5) {
                 amount += 1;
             }
         }
