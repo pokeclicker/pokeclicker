@@ -293,6 +293,7 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
     [
         {loot: 'xAttack', weight: 1},
         {loot: 'Grass_egg', weight: 1},
+        {loot: 'Cheri', weight: 1},
     ],
     102,
     [

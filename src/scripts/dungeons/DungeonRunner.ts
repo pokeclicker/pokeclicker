@@ -89,7 +89,6 @@ class DungeonRunner {
         }
     }
 
-
     public static openChest() {
         if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.chest) {
             return;
@@ -98,18 +97,16 @@ class DungeonRunner {
         DungeonRunner.chestsOpened++;
 
         let amount = 1;
+        const input = DungeonRunner.lootInput();
+
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             if (Math.random() < 0.5) {
                 amount += 1;
             }
         }
-        Notifier.notify({
-            message: `Found ${amount} ${GameConstants.humanifyString(input)} in a dungeon chest`,
-            type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.dungeon_item_found,
-        });
 
-        player.gainItem(ItemList[DungeonRunner.lootInput()].name, amount);
+        DungeonRunner.gainLoot(input, amount);
+
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
         if (DungeonRunner.chestsOpened == Math.floor(DungeonRunner.map.size / 3)) {
@@ -117,6 +114,30 @@ class DungeonRunner {
         }
         if (DungeonRunner.chestsOpened == Math.ceil(DungeonRunner.map.size / 2)) {
             DungeonRunner.map.showAllTiles();
+        }
+    }
+
+    public static gainLoot(input, amount) {
+        if (typeof BerryType[input] == 'number') {
+            Notifier.notify({
+                message: `Found ${amount} ${GameConstants.humanifyString(input)} Berry in a dungeon chest`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+            });
+
+            return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount);
+
+        } else if (ItemList[input].constructor.name == 'EvolutionStone' || 'EggItem' || 'BattleItem' || 'Vitamin' || 'EnergyRestore') {
+            Notifier.notify({
+                message: `Found ${amount} ${GameConstants.humanifyString(input)} in a dungeon chest`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+            });
+
+            return player.gainItem(ItemList[input].name, amount);
+
+        }  else {
+            return;
         }
     }
 
