@@ -114,7 +114,7 @@ class Dungeon {
     }
 
     /**
-     * Retreives the weights for all the possible enemies
+     * Retrieves the weights for all the possible enemies
      */
     get weightList(): number[] {
         return this.availableMinions().map((enemy) => {
@@ -129,15 +129,15 @@ class Dungeon {
     }
 
     /**
-     * Retreives the weights for all the possible Loot
+     * Retrieves the weights for all the possible Loot
      */
     get lootWeightList(): number[] {
         return this.itemList.map((loot) => {
             if (typeof loot === 'string') {
                 return 1;
             } else {
-                return (<DetailedLoot>loot).weight ?? 1;
-                //TODO: Incorporate dungeon clears into weight calculation (more clears = greater weight with maximum), uses App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]()
+                return ((<DetailedLoot>loot).weight / (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1) + 1) ?? 1;
+                //TODO: Incorporate dungeon clears into weight calculation (more clears = greater weight with maximum), uses
             }
         });
     }
@@ -291,10 +291,10 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
             ], { weight: 1 }, 'Charlie'),
     ],
     [
-        {loot: 'xAttack', weight: 1},
-        {loot: 'Grass_egg', weight: 1},
-        {loot: 'Cheri', weight: 1},
-        {loot: 'Pokeball', weight: 1},
+        {loot: 'xAttack', weight: 1000},
+        {loot: 'Grass_egg', weight: 10},
+        {loot: 'Cheri', weight: 100},
+        {loot: 'Pokeball', weight: 1000},
         {loot: 'Insect Plate', weight: 1},
     ],
     102,
