@@ -12,7 +12,8 @@ class Champion extends Gym {
         requirements: Requirement[] = [],
         public alternativePokemon1: GymPokemon[],
         public alternativePokemon2: GymPokemon[],
-        public alternativePokemon3: GymPokemon[]
+        public alternativePokemon3: GymPokemon[],
+        public rewardFunction = () => {}
     ) {
         super(leaderName, town, basePokemon, badgeReward, moneyReward, rewardMessage, requirements);
     }
@@ -67,7 +68,10 @@ gymList['Champion Blue'] = new Champion(
         new GymPokemon('Gyarados', 63040, 59),
         new GymPokemon('Arcanine', 65340, 61),
         new GymPokemon('Venusaur', 70000, 63),
-    ]
+    ],
+    () => {
+        App.game.quests.getQuestLine('Ultra Beast Hunt').beginQuest();
+    }
 );
 
 // TODO: Balancing - Set HP - Set win message
@@ -121,7 +125,10 @@ gymList['Champion Leon'] = new Champion(
     // Charmander
     [new GymPokemon('Inteleon', 2015330, 60)],
     // Squirtle/Pikachu
-    [new GymPokemon('Rillaboom', 2015330, 60)]
+    [new GymPokemon('Rillaboom', 2015330, 60)],
+    () => {
+        //App.game.quests.getQuestLine('Ultra Beast Hunt').beginQuest();
+    }
 );
 
 //TODO: rewards/hp rebalance
