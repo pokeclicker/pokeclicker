@@ -136,17 +136,26 @@ class DungeonRunner {
 
             return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],1);
 
-        } else if (ItemList[input].constructor.name == 'EvolutionStone' || 'EggItem' || 'BattleItem' || 'Vitamin' || 'EnergyRestore') {
-            Notifier.notify({
-                message: `Found ${amount} ${GameConstants.humanifyString(input)} in a dungeon chest`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+        }  else if (Underground.getMineItemByName(input) != undefined && Underground.getMineItemByName(input).isStone() === false) {
+           Notifier.notify({
+               message: `Found ${amount} ${GameConstants.humanifyString(input)} in a dungeon chest`,
+               type: NotificationConstants.NotificationOption.success,
+               setting: NotificationConstants.NotificationSetting.dungeon_item_found,
             });
 
-            return player.gainItem(ItemList[input].name, amount);
+            return Underground.gainMineItem(Underground.getMineItemByName(input).id, amount);
+
+        }  else if (ItemList[input].constructor.name == 'EvolutionStone' || 'EggItem' || 'BattleItem' || 'Vitamin' || 'EnergyRestore') {
+            Notifier.notify({
+               message: `Found ${amount} ${GameConstants.humanifyString(input)} in a dungeon chest`,
+                type: NotificationConstants.NotificationOption.success,
+               setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+           });
+
+           return player.gainItem(ItemList[input].name, amount);
 
         }  else {
-            return;
+            return player.gainItem(ItemList["xAttack"], 1);
         }
     }
 
