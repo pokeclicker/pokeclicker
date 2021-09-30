@@ -136,7 +136,7 @@ class Dungeon {
             if (typeof loot === 'string') {
                 return 1;
             } else {
-                return (10 ^ (<DetailedLoot>loot).weight / (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1) + 1) ?? 1;
+                return (Math.pow(10,(<DetailedLoot>loot).weight) / (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1) + 1) ?? 1;
                 //TODO: Incorporate dungeon clears into weight calculation (more clears = greater weight with maximum), uses
             }
         });
