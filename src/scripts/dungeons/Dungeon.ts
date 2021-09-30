@@ -136,7 +136,7 @@ class Dungeon {
             if (typeof loot === 'string') {
                 return 1;
             } else {
-                return ((<DetailedLoot>loot).weight / (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1) + 1) ?? 1;
+                return (10 ^ (<DetailedLoot>loot).weight / (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1) + 1) ?? 1;
                 //TODO: Incorporate dungeon clears into weight calculation (more clears = greater weight with maximum), uses
             }
         });
@@ -291,11 +291,11 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
             ], { weight: 1 }, 'Charlie'),
     ],
     [
-        {loot: 'xAttack', weight: 1000},
-        {loot: 'Grass_egg', weight: 10},
-        {loot: 'Cheri', weight: 100},
-        {loot: 'Pokeball', weight: 1000},
-        {loot: 'Insect Plate', weight: 1},
+        {loot: 'xAttack', weight: 3},
+        {loot: 'Grass_egg', weight: 1},
+        {loot: 'Cheri', weight: 2},
+        {loot: 'Pokeball', weight: 3},
+        {loot: 'Insect Plate', weight: 0},
     ],
     102,
     [
