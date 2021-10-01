@@ -129,7 +129,7 @@ class Dungeon {
     }
 
     /**
-     * Retrieves the weights for all the possible Loot
+     * Retrieves the weights for all the possible Loot, weight values are utilized as 10^Weight
      */
     get lootWeightList(): number[] {
         return this.itemList.map((loot) => {
@@ -137,7 +137,6 @@ class Dungeon {
                 return 1;
             } else {
                 return (Math.pow(10,(<DetailedLoot>loot).weight) / (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1) + 1) ?? 1;
-                //TODO: Incorporate dungeon clears into weight calculation (more clears = greater weight with maximum), uses
             }
         });
     }
