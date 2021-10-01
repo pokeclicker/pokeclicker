@@ -134,7 +134,7 @@ class Dungeon {
     get lootWeightList(): number[] {
         return this.itemList.map((loot) => {
             if (typeof loot === 'string') {
-                return 1;
+                return 3;
             } else {
                 return (Math.pow(10,(<DetailedLoot>loot).weight) / (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1) + 1) ?? 1;
             }
