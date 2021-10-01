@@ -1685,7 +1685,7 @@ TownList['Anville Town'] = new Town(
     'Anville Town',
     GameConstants.Region.unova,
     {
-        requirements: [new ObtainedPokemonRequirement(pokemonMap['Meloetta (aria)'])],
+        requirements: [new ObtainedPokemonRequirement(pokemonMap['Meloetta (aria)'],1)],
         shops: [AnvilleTownShop],
     }
 );
@@ -1694,7 +1694,7 @@ TownList['Anville Town'] = new Town(
 TownList['Pledge Grove'] = new DungeonTown(
     'Pledge Grove',
     GameConstants.Region.unova,
-    [new ObtainedPokemonRequirement(pokemonMap.Keldeo)]
+    [new ObtainedPokemonRequirement(pokemonMap.Keldeo,1)]
 );
 TownList['Floccesy Ranch'] = new DungeonTown(
     'Floccesy Ranch',
@@ -1786,8 +1786,8 @@ TownList['Abundant Shrine'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 23),
         new RouteKillRequirement(10, GameConstants.Region.unova, 14),
-        new ObtainedPokemonRequirement(pokemonMap.Tornadus),
-        new ObtainedPokemonRequirement(pokemonMap.Thundurus),
+        new ObtainedPokemonRequirement(pokemonMap.Tornadus,1),
+        new ObtainedPokemonRequirement(pokemonMap.Thundurus,1),
     ]
 );
 TownList['Victory Road Unova'] = new DungeonTown(
@@ -1819,9 +1819,9 @@ TownList['Moor of Icirrus'] = new DungeonTown(
     GameConstants.Region.unova,
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 8),
-        new ObtainedPokemonRequirement(pokemonMap.Cobalion),
-        new ObtainedPokemonRequirement(pokemonMap.Terrakion),
-        new ObtainedPokemonRequirement(pokemonMap.Virizion),
+        new ObtainedPokemonRequirement(pokemonMap.Cobalion,1),
+        new ObtainedPokemonRequirement(pokemonMap.Terrakion,1),
+        new ObtainedPokemonRequirement(pokemonMap.Virizion,1),
     ]
 );
 TownList['Pinwheel Forest'] = new DungeonTown(
@@ -2451,7 +2451,10 @@ TownList['Poni Meadow'] = new DungeonTown(
 TownList['Resolution Cave'] = new DungeonTown(
     'Resolution Cave',
     GameConstants.Region.alola,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Poni Meadow'))]
+    [
+        new ObtainedPokemonRequirement(pokemonMap.Stakataka,5),
+        new ObtainedPokemonRequirement(pokemonMap.Blacephalon,5),
+    ]
 );
 //Galar Shops
 

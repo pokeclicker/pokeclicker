@@ -1549,5 +1549,5 @@ gymList['Trainer Peony'] = new Gym(
     BadgeEnums.Elite_CrownChampion,
     64000,
     'Gone and got stronger again, have you? Ah well! Hats off to you-in more ways than one!',
-    [new ObtainedPokemonRequirement(pokemonMap.Calyrex)]
+    [new ObtainedPokemonRequirement(pokemonMap.Calyrex,1)]
 );
