@@ -26,3 +26,4 @@ ItemList['Quickball'] = new PokeballItem(GameConstants.Pokeball.Quickball, Infin
 ItemList['Timerball'] = new PokeballItem(GameConstants.Pokeball.Timerball, Infinity, GameConstants.Currency.farmPoint);
 ItemList['Duskball'] = new PokeballItem(GameConstants.Pokeball.Duskball, Infinity, GameConstants.Currency.farmPoint);
 ItemList['Luxuryball'] = new PokeballItem(GameConstants.Pokeball.Luxuryball, Infinity, GameConstants.Currency.farmPoint);
+ItemList['Beastball'] = new PokeballItem(GameConstants.Pokeball.Beastball, Infinity, GameConstants.Currency.beastPoint);

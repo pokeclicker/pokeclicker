@@ -151,6 +151,7 @@ namespace GameConstants {
         'Timerball',
         'Duskball',
         'Luxuryball',
+        'Beastball',
     }
     declare enum Currency {
         money,
@@ -158,7 +159,8 @@ namespace GameConstants {
         dungeonToken,
         diamond,
         farmPoint,
-        battlePoint
+        battlePoint,
+        beastPoint
     }
     declare enum TypeEffectiveness {
         Immune,

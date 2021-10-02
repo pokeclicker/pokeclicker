@@ -54,6 +54,13 @@ class Pokeballs implements Feature {
             }, 1000, 'Increased catch rate at night time or in dungeons', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
             // TODO: this needs some sort of bonus, possibly extra dungeon tokens
             new Pokeball(GameConstants.Pokeball.Luxuryball, () => 0, 1250, 'A Luxury Pokéball', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+            new Pokeball(GameConstants.Pokeball.Beastball, () => {
+                const enemyPokeId = Battle.enemyPokemon().id;
+                if (App.game.gameState == GameConstants.GameState.fighting && enemyPokeId >= 793 && enemyPokeId <= 799 || App.game.gameState == GameConstants.GameState.fighting && enemyPokeId >= 803 && enemyPokeId <= 806) {
+                    return 5000;
+                }
+                return -90;
+            }, 1000, 'Increased catch rate for Ultra Beasts, reduced catch rate otherwise', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
         ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);

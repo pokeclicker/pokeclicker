@@ -253,6 +253,7 @@ export enum Pokeball {
     'Timerball',
     'Duskball',
     'Luxuryball',
+    'Beastball',
 }
 
 export enum Currency {
@@ -262,6 +263,7 @@ export enum Currency {
     diamond,
     farmPoint,
     battlePoint,
+    beastPoint,
 }
 
 export enum TypeEffectiveness {

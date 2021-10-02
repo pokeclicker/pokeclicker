@@ -17211,7 +17211,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 257,
-        'catchRate': 45,
+        'catchRate': 4.5,
         'base': {
             'hitpoints': 109,
             'attack': 53,
@@ -17228,7 +17228,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': null,
-        'catchRate': 45,
+        'catchRate': 4.5,
         'base': {
             'hitpoints': 107,
             'attack': 139,
@@ -17245,7 +17245,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': null,
-        'catchRate': 45,
+        'catchRate': 4.5,
         'base': {
             'hitpoints': 71,
             'attack': 137,
@@ -17262,7 +17262,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': null,
-        'catchRate': 45,
+        'catchRate': 4.5,
         'base': {
             'hitpoints': 83,
             'attack': 89,
@@ -17279,7 +17279,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': null,
-        'catchRate': 45,
+        'catchRate': 4.5,
         'base': {
             'hitpoints': 97,
             'attack': 101,
@@ -17296,7 +17296,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': null,
-        'catchRate': 45,
+        'catchRate': 4.5,
         'base': {
             'hitpoints': 59,
             'attack': 181,
@@ -17313,7 +17313,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': null,
-        'catchRate': 45,
+        'catchRate': 4.5,
         'base': {
             'hitpoints': 223,
             'attack': 101,
