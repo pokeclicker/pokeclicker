@@ -108,6 +108,8 @@ class DungeonRunner {
             }
         }
 
+        amount = Math.min(Math.pow(amount,DungeonRunner.lootWeight),10);
+
         DungeonRunner.gainLoot(input, amount);
 
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
