@@ -93,6 +93,9 @@ export default class Wallet implements Feature {
             case Currency.battlePoint:
                 GameHelper.incrementObservable(App.game.statistics.totalBattlePoints, amount.amount);
                 break;
+            case Currency.beastPoint:
+                GameHelper.incrementObservable(App.game.statistics.totalBeastPoints, amount.amount);
+                break;
             default:
                 break;
         }

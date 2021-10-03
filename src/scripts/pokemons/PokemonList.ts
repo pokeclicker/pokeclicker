@@ -30,6 +30,7 @@ type PokemonListData = {
   baby?: boolean;
   attack?: number;
   heldItem?: BagItem;
+  currency?: GameConstants.Currency;
 }
 
 function createPokemonArray<T extends readonly PokemonListData[] & Array<{name: V}>, V extends string>(...args: T) {
@@ -17220,6 +17221,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 131,
             'speed': 103,
         },
+        'currency': GameConstants.Currency.beastPoint,
     },
     {
         'id': 794,
@@ -17237,6 +17239,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 53,
             'speed': 79,
         },
+        'currency': GameConstants.Currency.beastPoint,
     },
     {
         'id': 795,
@@ -17254,6 +17257,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 37,
             'speed': 151,
         },
+        'currency': GameConstants.Currency.beastPoint,
     },
     {
         'id': 796,
@@ -17271,6 +17275,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 71,
             'speed': 83,
         },
+        'currency': GameConstants.Currency.beastPoint,
     },
     {
         'id': 797,
@@ -17288,6 +17293,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 101,
             'speed': 61,
         },
+        'currency': GameConstants.Currency.beastPoint,
     },
     {
         'id': 798,
@@ -17305,6 +17311,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 31,
             'speed': 109,
         },
+        'currency': GameConstants.Currency.beastPoint,
     },
     {
         'id': 799,
@@ -17322,6 +17329,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 53,
             'speed': 43,
         },
+        'currency': GameConstants.Currency.beastPoint,
     },
     {
         'id': 800,
@@ -17408,6 +17416,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 67,
             'speed': 73,
         },
+        'currency': GameConstants.Currency.beastPoint,
     },
     {
         'id': 804,
@@ -17425,6 +17434,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 73,
             'speed': 121,
         },
+        'currency': GameConstants.Currency.beastPoint,
     },
     {
         'id': 805,
@@ -17442,6 +17452,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 101,
             'speed': 13,
         },
+        'currency': GameConstants.Currency.beastPoint,
     },
     {
         'id': 806,
@@ -17459,6 +17470,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 79,
             'speed': 107,
         },
+        'currency': GameConstants.Currency.beastPoint,
     },
     {
         'id': 807,
