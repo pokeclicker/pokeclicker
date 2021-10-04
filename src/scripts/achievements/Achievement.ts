@@ -19,7 +19,7 @@ class Achievement {
                 sound: NotificationConstants.NotificationSound.achievement,
             });
             App.game.logbook.newLog(
-                LogBookTypes.ACHIEVEMENT,
+                LogBookTypes.ACHIEVE,
                 `Earned "${this.name}".`);
             player.achievementsCompleted[this.name] = true;
             this.unlocked = true;
@@ -38,7 +38,7 @@ class Achievement {
     }
 
     public isCompleted: KnockoutComputed<boolean> = ko.pureComputed(() => {
-        return this.unlocked || this.property.isCompleted();
+        return this.achievable() && (this.unlocked || this.property.isCompleted());
     })
 
     public getBonus() {

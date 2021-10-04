@@ -1,4 +1,5 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../Battle.ts" />
 
 class DungeonBattle extends Battle {
 
@@ -25,7 +26,7 @@ class DungeonBattle extends Battle {
     public static defeatPokemon() {
         const enemyPokemon: BattlePokemon = this.enemyPokemon();
 
-        // Handle Rrainer Pokemon defeat
+        // Handle Trainer Pokemon defeat
         if (this.trainer()) {
             this.defeatTrainerPokemon();
             return;
@@ -38,6 +39,7 @@ class DungeonBattle extends Battle {
         }
         enemyPokemon.defeat();
         App.game.breeding.progressEggsBattle(DungeonRunner.dungeon.difficultyRoute, player.region);
+        player.lowerItemMultipliers(MultiplierDecreaser.Battle);
 
         // Clearing Dungeon tile
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
@@ -70,16 +72,22 @@ class DungeonBattle extends Battle {
 
         GameHelper.incrementObservable(this.trainerPokemonIndex);
         App.game.breeding.progressEggsBattle(DungeonRunner.dungeon.difficultyRoute, player.region);
+        player.lowerItemMultipliers(MultiplierDecreaser.Battle);
 
         // No Pokemon left, trainer defeated
         if (this.trainerPokemonIndex() >= this.trainer().team.length) {
+            // rewards for defeating trainer
             if (this.trainer().options.reward) {
                 // Custom reward amount on defeat
                 App.game.wallet.addAmount(this.trainer().options.reward);
             } else {
-                // Reward back 50% or 100% (boss) of the total dungeon DT cost as money
-                const money = Math.round(DungeonRunner.dungeon.tokenCost * (DungeonRunner.fightingBoss() ? 1 : 0.5));
-                App.game.wallet.gainMoney(money);
+                const dungeonCost = DungeonRunner.dungeon.tokenCost;
+                // Reward back 50% or 100% (boss) of the total dungeon DT cost as money (excludes achievement multiplier)
+                const money = Math.round(dungeonCost * (DungeonRunner.fightingBoss() ? 1 : 0.5));
+                App.game.wallet.gainMoney(money, true);
+                // Reward back 4% or 10% (boss) of the total dungeon DT cost (excludes achievement multiplier)
+                const tokens = Math.round(dungeonCost * (DungeonRunner.fightingBoss() ? 0.1 : 0.04));
+                App.game.wallet.gainDungeonTokens(tokens, true);
             }
 
             DungeonRunner.fighting(false);

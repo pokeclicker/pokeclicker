@@ -98,3 +98,17 @@
     position: absolute;
   }
 }
+
+#farmHandsView {
+  .plot:hover {
+    cursor: pointer;
+  }
+
+  .plotEnabled {
+    filter: hue-rotate(90deg);
+  }
+
+  .plotDisabled {
+    filter: brightness(50%) opacity(90%);
+  }
+}

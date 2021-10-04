@@ -4,6 +4,7 @@
 /// <reference path="../../declarations/weather/WeatherType.d.ts" />
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 /// <reference path="../../declarations/interfaces/BagItem.d.ts" />
+/// <reference path="../../declarations/utilities/Rand.d.ts" />
 /// <reference path="../farming/BerryType.ts" />
 
 const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
@@ -2387,8 +2388,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 65,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone)],
-        //TODO add Alola-only evolution into Alolan Exeggutor using Leafstone
+        'evolutions': [
+            new StoneEvolution('Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone),
+            new StoneEvolution('Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone),
+        ],
         'base': {
             'hitpoints': 60,
             'attack': 40,
@@ -2441,8 +2444,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Cubone', 'Marowak', 28)],
-        //TODO add Alola-only evolution into Alolan Marowak at night at level 28
+        'evolutions': [
+            new LevelEvolution('Cubone', 'Marowak', 28),
+            TimeRestrictedLevelEvolution(18, 6, 'Cubone', 'Alolan Marowak', 28),
+        ],
         'base': {
             'hitpoints': 50,
             'attack': 50,
@@ -9017,7 +9022,7 @@ const pokemonList = createPokemonArray(
         'name': 'Ambipom',
         'type': [PokemonType.Normal],
         'eggCycles': 20,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 169,
         'catchRate': 45,
         'base': {
@@ -9104,7 +9109,7 @@ const pokemonList = createPokemonArray(
         'name': 'Mismagius',
         'type': [PokemonType.Ghost],
         'eggCycles': 25,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 173,
         'catchRate': 45,
         'base': {
@@ -9138,7 +9143,7 @@ const pokemonList = createPokemonArray(
         'name': 'Glameow',
         'type': [PokemonType.Normal],
         'eggCycles': 20,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 62,
         'catchRate': 190,
         'evolutions': [new LevelEvolution('Glameow', 'Purugly', 38)],
@@ -9156,7 +9161,7 @@ const pokemonList = createPokemonArray(
         'name': 'Purugly',
         'type': [PokemonType.Normal],
         'eggCycles': 20,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 158,
         'catchRate': 75,
         'base': {
@@ -9173,7 +9178,7 @@ const pokemonList = createPokemonArray(
         'name': 'Chingling',
         'type': [PokemonType.Psychic],
         'eggCycles': 25,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 57,
         'catchRate': 120,
         'evolutions': [new NightTimedStoneEvolution('Chingling', 'Chimecho', GameConstants.StoneType.Soothe_bell)],
@@ -9310,7 +9315,7 @@ const pokemonList = createPokemonArray(
         'name': 'Happiny',
         'type': [PokemonType.Normal],
         'eggCycles': 40,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 110,
         'catchRate': 130,
         'evolutions': [
@@ -9810,7 +9815,7 @@ const pokemonList = createPokemonArray(
         'name': 'Togekiss',
         'type': [PokemonType.Fairy, PokemonType.Flying],
         'eggCycles': 10,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 245,
         'catchRate': 30,
         'base': {
@@ -9964,7 +9969,7 @@ const pokemonList = createPokemonArray(
         'name': 'Dusknoir',
         'type': [PokemonType.Ghost],
         'eggCycles': 25,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 236,
         'catchRate': 45,
         'base': {
@@ -11069,7 +11074,7 @@ const pokemonList = createPokemonArray(
         'name': 'Munna',
         'type': [PokemonType.Psychic],
         'eggCycles': 10,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 58,
         'catchRate': 190,
         'evolutions': [new StoneEvolution('Munna', 'Musharna', GameConstants.StoneType.Moon_stone)],
@@ -11087,7 +11092,7 @@ const pokemonList = createPokemonArray(
         'name': 'Musharna',
         'type': [PokemonType.Psychic],
         'eggCycles': 10,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 170,
         'catchRate': 75,
         'base': {
@@ -11318,7 +11323,7 @@ const pokemonList = createPokemonArray(
         'name': 'Audino',
         'type': [PokemonType.Normal],
         'eggCycles': 20,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 390,
         'catchRate': 255,
         'base': {
@@ -12147,7 +12152,7 @@ const pokemonList = createPokemonArray(
         'name': 'Minccino',
         'type': [PokemonType.Normal],
         'eggCycles': 15,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 60,
         'catchRate': 255,
         'evolutions': [new StoneEvolution('Minccino', 'Cinccino', GameConstants.StoneType.Shiny_stone)],
@@ -12165,7 +12170,7 @@ const pokemonList = createPokemonArray(
         'name': 'Cinccino',
         'type': [PokemonType.Normal],
         'eggCycles': 15,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 165,
         'catchRate': 60,
         'base': {
@@ -12638,7 +12643,7 @@ const pokemonList = createPokemonArray(
         'name': 'Alomomola',
         'type': [PokemonType.Water],
         'eggCycles': 40,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 165,
         'catchRate': 75,
         'base': {
@@ -14018,7 +14023,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 75,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Spewpa', 'Vivillon', 12)],
+        'evolutions': [new LevelEvolution('Spewpa', 'Vivillon (Meadow)', 12)],
         'base': {
             'hitpoints': 45,
             'attack': 22,
@@ -14030,7 +14035,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 666,
-        'name': 'Vivillon',
+        'name': 'Vivillon (Meadow)',
         'type': [PokemonType.Bug, PokemonType.Flying],
         'eggCycles': 15,
         'levelType': LevelType.mediumfast,
@@ -14049,7 +14054,8 @@ const pokemonList = createPokemonArray(
         'id': 666.01,
         'name': 'Vivillon (Pokéball)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14066,7 +14072,8 @@ const pokemonList = createPokemonArray(
         'id': 666.02,
         'name': 'Vivillon (Polar)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14083,7 +14090,8 @@ const pokemonList = createPokemonArray(
         'id': 666.03,
         'name': 'Vivillon (Tundra)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14100,7 +14108,8 @@ const pokemonList = createPokemonArray(
         'id': 666.04,
         'name': 'Vivillon (Continental)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14117,7 +14126,8 @@ const pokemonList = createPokemonArray(
         'id': 666.05,
         'name': 'Vivillon (Garden)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14134,7 +14144,8 @@ const pokemonList = createPokemonArray(
         'id': 666.06,
         'name': 'Vivillon (Elegant)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14151,7 +14162,8 @@ const pokemonList = createPokemonArray(
         'id': 666.07,
         'name': 'Vivillon (Icy Snow)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14168,7 +14180,8 @@ const pokemonList = createPokemonArray(
         'id': 666.08,
         'name': 'Vivillon (Modern)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14185,7 +14198,8 @@ const pokemonList = createPokemonArray(
         'id': 666.09,
         'name': 'Vivillon (Marine)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14202,7 +14216,8 @@ const pokemonList = createPokemonArray(
         'id': 666.10,
         'name': 'Vivillon (Archipelago)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14219,7 +14234,8 @@ const pokemonList = createPokemonArray(
         'id': 666.11,
         'name': 'Vivillon (High Plains)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14236,7 +14252,8 @@ const pokemonList = createPokemonArray(
         'id': 666.12,
         'name': 'Vivillon (Sandstorm)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14253,7 +14270,8 @@ const pokemonList = createPokemonArray(
         'id': 666.13,
         'name': 'Vivillon (River)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14270,7 +14288,8 @@ const pokemonList = createPokemonArray(
         'id': 666.14,
         'name': 'Vivillon (Monsoon)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14287,7 +14306,8 @@ const pokemonList = createPokemonArray(
         'id': 666.15,
         'name': 'Vivillon (Savanna)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14304,7 +14324,8 @@ const pokemonList = createPokemonArray(
         'id': 666.16,
         'name': 'Vivillon (Sun)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14321,7 +14342,8 @@ const pokemonList = createPokemonArray(
         'id': 666.17,
         'name': 'Vivillon (Ocean)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14338,7 +14360,8 @@ const pokemonList = createPokemonArray(
         'id': 666.18,
         'name': 'Vivillon (Jungle)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -14355,7 +14378,8 @@ const pokemonList = createPokemonArray(
         'id': 666.19,
         'name': 'Vivillon (Fancy)',
         'type': [PokemonType.Bug, PokemonType.Flying],
-        'eggCycles': 15,
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 185,
         'catchRate': 45,
@@ -15302,7 +15326,7 @@ const pokemonList = createPokemonArray(
         'name': 'Klefki',
         'type': [PokemonType.Steel, PokemonType.Fairy],
         'eggCycles': 20,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 165,
         'catchRate': 75,
         'base': {
@@ -15846,7 +15870,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 140,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Charjabug', 'Vikavolt', GameConstants.StoneType.Thunder_stone)],
+        'evolutions': [new DungeonRestrictedLevelEvolution('Vast Poni Canyon','Charjabug','Vikavolt', 20)],
         'base': {
             'hitpoints': 57,
             'attack': 82,
@@ -15898,7 +15922,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 68,
         'catchRate': 225,
-        'evolutions': [new StoneEvolution('Crabrawler', 'Crabominable', GameConstants.StoneType.None)],
+        'evolutions': [new DungeonRestrictedLevelEvolution('Mount Lanakila','Crabrawler','Crabominable', 20)],
         'base': {
             'hitpoints': 47,
             'attack': 82,
@@ -16037,9 +16061,10 @@ const pokemonList = createPokemonArray(
         'exp': 56,
         'catchRate': 190,
         'evolutions': [
-            TimeRestrictedLevelEvolution(6, 16, 'Rockruff', 'Lycanroc (Midday)', 25),
-            TimeRestrictedLevelEvolution(16, 20, 'Rockruff', 'Lycanroc (Dusk)', 25),
-            TimeRestrictedLevelEvolution(20, 6, 'Rockruff', 'Lycanroc (Midnight)', 25),
+            TimeRestrictedLevelEvolution(6, 17, 'Rockruff', 'Lycanroc (Midday)', 25),
+            TimeRestrictedLevelEvolution(17, 18, 'Rockruff', 'Lycanroc (Dusk)', 25),
+            TimeRestrictedLevelEvolution(18, 5, 'Rockruff', 'Lycanroc (Midnight)', 25),
+            TimeRestrictedLevelEvolution(5, 6, 'Rockruff', 'Lycanroc (Dusk)', 25),
         ],
         'base': {
             'hitpoints': 45,
@@ -16106,7 +16131,7 @@ const pokemonList = createPokemonArray(
         'name': 'Wishiwashi (Solo)',
         'type': [PokemonType.Water],
         'eggCycles': 15,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 61,
         'catchRate': 60,
         'base': {
@@ -16123,7 +16148,7 @@ const pokemonList = createPokemonArray(
         'name': 'Wishiwashi (School)',
         'type': [PokemonType.Water],
         'eggCycles': 15,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 61,
         'catchRate': 60,
         'base': {
@@ -16140,7 +16165,7 @@ const pokemonList = createPokemonArray(
         'name': 'Totem Wishiwashi (School)',
         'type': [PokemonType.Water],
         'eggCycles': 15,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 61,
         'catchRate': 60,
         'base': {
@@ -16474,7 +16499,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 102,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Steenee', 'Tsareena', GameConstants.StoneType.None)],
+        'evolutions': [new LevelEvolution('Steenee', 'Tsareena', 29)],
         'base': {
             'hitpoints': 52,
             'attack': 40,
@@ -16506,7 +16531,7 @@ const pokemonList = createPokemonArray(
         'name': 'Comfey',
         'type': [PokemonType.Fairy],
         'eggCycles': 20,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 170,
         'catchRate': 60,
         'base': {
@@ -16627,7 +16652,7 @@ const pokemonList = createPokemonArray(
         'name': 'Pyukumuku',
         'type': [PokemonType.Water],
         'eggCycles': 15,
-        'levelType': 4,
+        'levelType': LevelType.fast,
         'exp': 144,
         'catchRate': 60,
         'base': {
@@ -17132,7 +17157,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': null,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Cosmoem', 'Solgaleo', 53)],
+        'evolutions': [
+            new LevelEvolution('Cosmoem', 'Solgaleo', 53),
+            new LevelEvolution('Cosmoem', 'Lunala', 53),
+        ],
         'base': {
             'hitpoints': 43,
             'attack': 29,
@@ -17371,7 +17399,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 189,
         'catchRate': 45,
-        'evolutions': [new StoneEvolution('Poipole', 'Naganadel', GameConstants.StoneType.None)],
+        'evolutions': [new LevelEvolution('Poipole', 'Naganadel', 41)],
         'base': {
             'hitpoints': 67,
             'attack': 73,
@@ -20328,7 +20356,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 898.2,
-        'name': 'Ghost Rider Calyrex',
+        'name': 'Shadow Rider Calyrex',
         'type': [PokemonType.Psychic, PokemonType.Ghost],
         'base': {
             'hitpoints': 100,
@@ -21077,22 +21105,28 @@ const pokemonMap = new GenericProxy<
                     const min = Math.max(0, Math.min(_min, _max));
                     // maximum is same as however many pokemon are available
                     const max = Math.min(pokemon.length, Math.max(_min, _max));
-                    const random = Math.floor(Math.random() * (max ? max : pokemon.length) + min);
-                    return pokemon[random];
+                    // Decide on a base ID first (so we aren't weighted towards pokemon with multiple forms such as Alcremie)
+                    const basePokemonIDs: number[] = [...new Set(pokemon.filter(p => p.id >= min && p.id <= max).map(p => Math.floor(p.id)))];
+                    const ID: number = Rand.fromArray(basePokemonIDs);
+                    // Choose a Pokemon with that base ID
+                    const poke: PokemonListData = Rand.fromArray(pokemon.filter(p => Math.floor(p.id) === ID && p.id >= min && p.id <= max));
+                    return poke || (pokemon.find(p => p.id == 0) as PokemonListData);
                 };
             case 'randomRegion':
                 return (_max = GameConstants.Region.kanto, _min = GameConstants.Region.kanto) => {
                     // minimum 0 (Kanto)
                     const min = Math.max(GameConstants.Region.kanto, Math.min(_min, _max));
                     const max = Math.max(GameConstants.Region.kanto, _min, _max);
-                    const filteredPokemon: PokemonListData[] = pokemon.filter(p => p.id > 0 && (p as PokemonListData).nativeRegion >= min && (p as PokemonListData).nativeRegion <= max);
-                    const random = Math.floor(Math.random() * filteredPokemon.length);
-                    const poke: PokemonListData = filteredPokemon[random];
+                    // Decide on a base ID first (so we aren't weighted towards pokemon with multiple forms such as Alcremie)
+                    const basePokemonIDs: number[] = [...new Set(pokemon.filter(p => p.id > 0 && (p as PokemonListData).nativeRegion >= min && (p as PokemonListData).nativeRegion <= max).map(p => Math.floor(p.id)))];
+                    const ID: number = Rand.fromArray(basePokemonIDs);
+                    // Choose a Pokemon with that base ID
+                    const poke: PokemonListData = Rand.fromArray(pokemon.filter(p => Math.floor(p.id) === ID && (p as PokemonListData).nativeRegion >= min && (p as PokemonListData).nativeRegion <= max));
                     // return a random Pokemon or MissingNo if none found
                     return poke || (pokemon.find(p => p.id == 0) as PokemonListData);
                 };
             default:
-                return pokemonNameIndex[prop.toLowerCase()] || pokemon[prop] || pokemon.find(p => p.id == 0);
+                return pokemonNameIndex[prop.toLowerCase()] || pokemon[prop]?.bind?.call(pokemon[prop],pokemon) || pokemon[prop] || pokemon.find(p => p.id == 0);
         }
     },
 });

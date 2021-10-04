@@ -358,8 +358,7 @@ class Breeding implements Feature {
 
     public buyEggSlot(): void {
         const cost: Amount = this.nextEggSlotCost();
-        if (App.game.wallet.hasAmount(cost)) {
-            App.game.wallet.loseAmount(cost);
+        if (App.game.wallet.loseAmount(cost)) {
             this.gainEggSlot();
         }
     }
@@ -390,7 +389,8 @@ class Breeding implements Feature {
     }
 
     public queueSlotsGainedFromRegion(region: GameConstants.Region): number {
-        return Math.max(4, 4 * Math.pow(2, region - 1));
+        // bewtween 4 → 32 queue slots gained when completing a region
+        return Math.min(32, Math.max(4, 4 * Math.pow(2, region - 1)));
     }
 
     get eggList(): Array<KnockoutObservable<Egg>> {

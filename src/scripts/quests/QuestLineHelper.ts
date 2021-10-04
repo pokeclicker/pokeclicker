@@ -32,9 +32,9 @@ class QuestLineHelper {
         tutorial.addQuest(buyDungeonTicket);
 
         //Clear Viridian Forest
-        const clearMtMoon = new DefeatDungeonQuest(1, 50, 'Viridian Forest');
-        clearMtMoon.customDescription = 'Gather 50 Dungeon tokens by (re)capturing Pokémon, then clear the Viridian Forest dungeon.';
-        tutorial.addQuest(clearMtMoon);
+        const clearViridianForest = new DefeatDungeonQuest(1, 50, 'Viridian Forest');
+        clearViridianForest.customDescription = 'Gather 50 Dungeon tokens by (re)capturing Pokémon, then clear the Viridian Forest dungeon.';
+        tutorial.addQuest(clearViridianForest);
 
         //Defeat Pewter Gym
         const pewterReward = () => {
@@ -44,6 +44,10 @@ class QuestLineHelper {
                     {
                         element: document.getElementById('questDisplayContainer'),
                         intro: 'Click "List" to see the current quests that can be completed for <img title="Quest points" src="assets/images/currency/questPoint.svg" height="25px"> Quest Points.',
+                    },
+                    {
+                        element: document.getElementById('startMenu'),
+                        intro: 'See the badges you\'ve earned in the Badge Case. Badges influence the max level of your Pokémon.',
                     },
                 ],
             });

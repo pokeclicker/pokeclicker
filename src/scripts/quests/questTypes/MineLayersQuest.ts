@@ -7,6 +7,10 @@ class MineLayersQuest extends Quest implements QuestInterface {
         this.focus = App.game.statistics.undergroundLayersMined;
     }
 
+    public static canComplete() {
+        return App.game.underground.canAccess();
+    }
+
     public static generateData(): any[] {
         const amount = SeededRand.intBetween(1, 3);
         const reward = this.calcReward(amount);

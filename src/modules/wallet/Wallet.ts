@@ -21,28 +21,28 @@ export default class Wallet implements Feature {
         this.currencies = this.defaults.currencies.map((v) => ko.observable(v));
     }
 
-    public gainMoney(base: number): Amount {
-        return this.addAmount(new Amount(base, Currency.money));
+    public gainMoney(base: number, ignoreBonus = false): Amount {
+        return this.addAmount(new Amount(base, Currency.money), ignoreBonus);
     }
 
-    public gainDungeonTokens(base: number): Amount {
-        return this.addAmount(new Amount(base, Currency.dungeonToken));
+    public gainDungeonTokens(base: number, ignoreBonus = false): Amount {
+        return this.addAmount(new Amount(base, Currency.dungeonToken), ignoreBonus);
     }
 
-    public gainQuestPoints(base: number): Amount {
-        return this.addAmount(new Amount(base, Currency.questPoint));
+    public gainQuestPoints(base: number, ignoreBonus = false): Amount {
+        return this.addAmount(new Amount(base, Currency.questPoint), ignoreBonus);
     }
 
-    public gainDiamonds(base: number): Amount {
-        return this.addAmount(new Amount(base, Currency.diamond));
+    public gainDiamonds(base: number, ignoreBonus = false): Amount {
+        return this.addAmount(new Amount(base, Currency.diamond), ignoreBonus);
     }
 
-    public gainFarmPoints(base: number): Amount {
-        return this.addAmount(new Amount(base, Currency.farmPoint));
+    public gainFarmPoints(base: number, ignoreBonus = false): Amount {
+        return this.addAmount(new Amount(base, Currency.farmPoint), ignoreBonus);
     }
 
-    public gainBattlePoints(base: number): Amount {
-        return this.addAmount(new Amount(base, Currency.battlePoint));
+    public gainBattlePoints(base: number, ignoreBonus = false): Amount {
+        return this.addAmount(new Amount(base, Currency.battlePoint), ignoreBonus);
     }
 
     public calcBonus(amount: Amount) {
@@ -104,13 +104,19 @@ export default class Wallet implements Feature {
         return this.currencies[amount.currency]() >= amount.amount;
     }
 
-    public loseAmount(amount: Amount) {
+    public loseAmount(amount: Amount): boolean {
         if (Number.isNaN(amount.amount) || amount.amount <= 0) {
             console.trace('Could not remove amount:', amount);
             amount.amount = 1;
         }
 
+        // If the player doesn't have enough, return false (we shouldn't be able to go negative)
+        if (!this.hasAmount(amount)) {
+            return false;
+        }
+
         GameHelper.incrementObservable(this.currencies[amount.currency], -amount.amount);
+        return true;
     }
 
     initialize(): void {

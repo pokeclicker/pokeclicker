@@ -470,6 +470,80 @@ class Update implements Saveable {
                 }
             });
         },
+
+        '0.8.4': ({ playerData, saveData }) => {
+            // Update Pokemon names
+            Update.renamePokemonInSaveData(saveData, 'Vivillon', 'Vivillon (Meadow)');
+
+            // Track Battle Frontier milestones earned
+            const milestones = [
+                [5, '25 x Pokéball'],
+                [10, '100 x Pokéball'],
+                [20, '100 x Greatball'],
+                [30, '100 x Ultraball'],
+                [35, '100 x xClick'],
+                [40, '100 x xAttack'],
+                [50, '100 x Small Restore'],
+                [100, 'Deoxys'],
+                [110, '10 x Water Stone'],
+                [120, '10 x Leaf Stone'],
+                [130, '10 x Thunder Stone'],
+                [140, '10 x Fire Stone'],
+                [150, '200 x Medium Restore'],
+                [151, 'Deoxys (attack)'],
+                [160, '100 x Lucky Egg'],
+                [170, '100 x Lucky Incense'],
+                [180, '100 x Item Magnet'],
+                [190, '10 x Mystery Egg'],
+                [200, '100 x Large Restore'],
+                [210, '40 x Water Stone'],
+                [220, '40 x Leaf Stone'],
+                [230, '40 x Thunder Stone'],
+                [240, '40 x Moon Stone'],
+                [250, '6400 x Ultraball'],
+                [251, 'Deoxys (defense)'],
+                [300, '100 x Trade Stone'],
+                [386, 'Deoxys (speed)'],
+            ];
+            const highestStageCompleted = saveData.statistics?.battleFrontierHighestStageCompleted || 0;
+            saveData.battleFrontier = {
+                milestones: milestones.filter(([stage]) => stage <= highestStageCompleted),
+            };
+        },
+
+        '0.8.9': ({ playerData, saveData }) => {
+            // Retroactively track proteins obtained
+            let proteinsObtained = 0;
+
+            // Only update if save is from v0.6.0+ (when proteins were added)
+            if (this.minUpdateVersion('0.6.0', saveData)) {
+                saveData.party.caughtPokemon.forEach(p => {
+                    proteinsObtained += p.proteinsUsed;
+                });
+
+                proteinsObtained += playerData._itemList.Protein;
+            }
+
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalProteinsObtained: proteinsObtained,
+            };
+
+            // Only run if save is from v0.8.7 (a forked version which is breaking stuff)
+            if (saveData.update.version == '0.8.7') {
+                // Check if the save has the Vivillon quest line, otherwise it's not from the main website
+                const questLines = saveData.quests?.questLines?.length || 0;
+                if (questLines < 4) {
+                    Notifier.notify({
+                        title: 'Importing this save will cause errors!',
+                        message: 'Please only use saves from the main website https://pokeclicker.com/',
+                        type: NotificationConstants.NotificationOption.danger,
+                        timeout: GameConstants.DAY,
+                    });
+                    throw new Error('Importing this save will cause errors');
+                }
+            }
+        },
     };
 
     constructor() {
@@ -559,6 +633,18 @@ class Update implements Saveable {
             return;
         }
 
+        // Check if the save is newer than the current client, don't allow it to load.
+        if (this.isNewerVersion(this.saveVersion, this.version)) {
+            Notifier.notify({
+                title: 'Save version is newer than game version!',
+                message: `Please update your game before attempting to load this save..\n\nSave version: ${this.saveVersion}\nGame version: ${this.version}`,
+                type: NotificationConstants.NotificationOption.danger,
+                timeout: GameConstants.DAY,
+            });
+            throw new Error(`Save is newer than game version\nSave version: ${this.saveVersion}\nGame version: ${this.version}`);
+            return;
+        }
+
         const [backupButton, backupSaveData] = this.getBackupButton();
 
         // Must modify these object when updating
@@ -613,6 +699,7 @@ class Update implements Saveable {
                                     this.automaticallyDownloadBackup(backupButton, { disableAutoDownloadBackupSaveOnUpdate: false });
                                     localStorage.removeItem(`player${Save.key}`);
                                     localStorage.removeItem(`save${Save.key}`);
+                                    localStorage.removeItem(`settings${Save.key}`);
                                     location.reload();
                                 }
                             });
@@ -752,7 +839,7 @@ class Update implements Saveable {
     getSettingsData() {
         let settingsData: any;
         try {
-            settingsData = JSON.parse(localStorage.settings);
+            settingsData = JSON.parse(localStorage.getItem(`settings${Save.key}`) || localStorage.settings);
         } catch (err) {
             console.warn('Error getting settings data', err);
         } finally {
@@ -762,7 +849,7 @@ class Update implements Saveable {
 
     setSettingsData(settingsData: any) {
         try {
-            localStorage.settings = JSON.stringify(settingsData);
+            localStorage.setItem(`settings${Save.key}`, JSON.stringify(settingsData));
         } catch (err) {
             console.error('Error setting settings data', err);
         }

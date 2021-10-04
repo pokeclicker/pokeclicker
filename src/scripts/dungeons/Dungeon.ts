@@ -1638,12 +1638,6 @@ dungeonList['Stark Mountain'] = new Dungeon('Stark Mountain',
 
 // Unova
 // TODO: Balancing of dungeon Pokemon HP & rewards.
-dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
-    ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2403000,
-    [new DungeonBossPokemon('Keldeo (Resolute)', 12000000, 100)],
-    106500, 20, 100);
 
 dungeonList['Floccesy Ranch'] = new Dungeon('Floccesy Ranch',
     [
@@ -1726,7 +1720,7 @@ dungeonList['Castelia Sewers'] = new Dungeon('Castelia Sewers',
             { weight: 1 }, undefined, '(male)'),
         new DungeonTrainer('Team Plasma Grunt',
             [new GymPokemon('Scraggy', 15000000, 16)],
-            { weight: 1 }, undefined, '(male)'),
+            { weight: 1 }, undefined, '(female)'),
     ],
     146500, 4, 100);
 
@@ -2049,8 +2043,8 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
             ], { weight: 1 }, 'Ray', '(male)'),
         new DungeonTrainer('Ace Trainer',
             [
-                new GymPokemon('Grumpig', 226500, 39),
-                new GymPokemon('Drifblim', 226500, 39),
+                new GymPokemon('Grumpig', 226500, 37),
+                new GymPokemon('Drifblim', 226500, 37),
             ], { weight: 1 }, 'Cora', '(female)'),
         new DungeonTrainer('Black Belt',
             [
@@ -2734,6 +2728,13 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
     ],
     356500, 8, 100);
 
+dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
+    ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    5203000,
+    [new DungeonBossPokemon('Keldeo (Resolute)', 52000000, 100)],
+    356500, 8, 100);
+
 dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
     [
         {pokemon: 'Goldeen', options: { weight: 6.57 }},
@@ -2892,6 +2893,7 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
         new DungeonBossPokemon('Virizion', 48000000, 100),
     ],
     356500, 3, 100);
+
 dungeonList['Dreamyard'] = new Dungeon('Dreamyard',
     [
         {pokemon: 'Raticate', options: { weight: 4.67 }},
@@ -2951,8 +2953,8 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     5403000,
     [
-        new DungeonBossPokemon('Escavalier', 48000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
-        new DungeonBossPokemon('Porygon-Z', 48000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
+        new DungeonBossPokemon('Escavalier', 58000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
+        new DungeonBossPokemon('Porygon-Z', 58000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
         new DungeonBossPokemon('Genesect', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
         new DungeonBossPokemon('Porygon', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
         new DungeonBossPokemon('Audino', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
@@ -3173,8 +3175,8 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',//keep going 
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     7903570,
     [
-        new DungeonTrainer('Team Flare',
-            [new GymPokemon('Mightyena', 75384400, 38)], { weight: 1 }, 'Aliana', '(aliana)'),
+        new DungeonTrainer('Team Flare Aliana',
+            [new GymPokemon('Mightyena', 75384400, 38)], { weight: 1 }),
         new DungeonBossPokemon('Volcanion', 83945700, 100,
             {
                 requirement: new MultiRequirement([
@@ -3217,12 +3219,12 @@ dungeonList['Pokéball Factory'] = new Dungeon('Pokéball Factory',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     8173950,
     [
-        new DungeonTrainer('Team Flare',
+        new DungeonTrainer('Team Flare Celosia',
             [new GymPokemon('Manectric', 79385030, 41)],
-            { weight: 1 }, 'Celosia'),
-        new DungeonTrainer('Team Flare',
+            { weight: 1 }),
+        new DungeonTrainer('Team Flare Bryony',
             [new GymPokemon('Liepard', 79284730, 41)],
-            { weight: 1 }, 'Bryony'),
+            { weight: 1 }),
     ],
     615000, 14, 37);
 
@@ -3360,9 +3362,9 @@ dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     8537490,
     [
-        new DungeonTrainer('Team Flare',
+        new DungeonTrainer('Team Flare Mable',
             [new GymPokemon('Houndoom', 87365830, 48)],
-            { weight: 1 }, 'Mable'),
+            { weight: 1 }),
         new DungeonBossPokemon('Abomasnow', 85376500, 50),
     ],
     665500, 15, 40);
@@ -3407,14 +3409,14 @@ dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     8739480,
     [
-        new DungeonTrainer('Team Flare',
+        new DungeonTrainer('Team Flare Lysandre',
             [
                 new GymPokemon('Mienshao', 22464940, 49),
                 new GymPokemon('Honchkrow', 22564950, 49),
                 new GymPokemon('Pyroar', 23375580, 51),
                 new GymPokemon('Gyarados', 27385730, 53),
             ],
-            { weight: 2 }, 'Lysandre', '(lysandre)'),
+            { weight: 2 }),
         new DungeonBossPokemon('Xerneas', 93659460, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
         new DungeonBossPokemon('Yveltal', 93659450, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
     ],
@@ -3535,7 +3537,7 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
             { weight: 1 }, 'Veronique'),
         new DungeonTrainer('Backpacker',
             [new GymPokemon('Haxorus', 3500000, 58)], { weight: 1 }, 'Farid', '(male)'),
-        new DungeonTrainer('Batlle Girl',
+        new DungeonTrainer('Battle Girl',
             [new GymPokemon('Medicham', 3500000, 60)], { weight: 1 }, 'Sigrid'),
         new DungeonTrainer('Black Belt',
             [
