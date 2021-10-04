@@ -60,7 +60,7 @@ class Pokeballs implements Feature {
                     return 5000;
                 }
                 return -90;
-            }, 1000, 'Increased catch rate for Ultra Beasts, reduced catch rate otherwise', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+            }, 1000, 'Increased catch rate for Ultra Beasts, reduced catch rate otherwise', new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)),
         ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);

@@ -75,7 +75,9 @@ const PewterCityShop = new TownShop([
     ItemList['Token_collector'],
     ItemList['Lucky_egg'],
     ItemList['Mystery_egg'],
+    ItemList['Beastball'],
 ]);
+
 const CeruleanCityShop = new TownShop([
     ItemList['Water_stone'],
     ItemList['xAttack'],
@@ -2166,6 +2168,9 @@ const RoyalAvenueShop = new TownShop([
     ItemList['Item_magnet'],
     ItemList['Lucky_incense'],
 ]);
+const Route8MotelShop = new TownShop([
+    ItemList['Beastball'],
+]);
 const KonikoniCityShop = new TownShop([
     ItemList['Soothe_bell'],
     ItemList['Trade_stone'],
@@ -2230,6 +2235,14 @@ TownList['Royal Avenue'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
         shops: [RoyalAvenueShop],
+    }
+);
+TownList['Route 8 Motel'] = new Town(
+    'Route 8 Motel',
+    GameConstants.Region.alola,
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+        shops: [Route8MotelShop],
     }
 );
 TownList['Konikoni City'] = new Town(
