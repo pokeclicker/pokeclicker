@@ -81,7 +81,7 @@ class Party implements Feature {
         const multBonus = this.multiplier.getBonus('exp', true);
         const trainerBonus = trainer ? 1.5 : 1;
         const expTotal = Math.floor(exp * level * trainerBonus * multBonus / 9);
-      
+
         const maxLevel = (App.game.badgeCase.badgeCount() + 2) * 20;
         for (const pokemon of this.caughtPokemon) {
             if (pokemon.level < maxLevel) {
