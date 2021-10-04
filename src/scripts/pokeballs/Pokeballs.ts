@@ -57,9 +57,9 @@ class Pokeballs implements Feature {
             new Pokeball(GameConstants.Pokeball.Beastball, () => {
                 const enemyPokeId = Battle.enemyPokemon().id;
                 if (App.game.gameState == GameConstants.GameState.fighting && enemyPokeId >= 793 && enemyPokeId <= 799 || App.game.gameState == GameConstants.GameState.fighting && enemyPokeId >= 803 && enemyPokeId <= 806) {
-                    return 5000;
+                    return 50;
                 }
-                return -90;
+                return -100;
             }, 1000, 'Increased catch rate for Ultra Beasts, reduced catch rate otherwise', new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)),
         ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
