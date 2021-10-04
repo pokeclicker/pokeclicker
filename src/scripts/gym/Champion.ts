@@ -42,9 +42,9 @@ gymList['Champion Blue'] = new Champion(
     'Blue',
     'Champion Blue',
     [
-        new GymPokemon('Pidgeot', 104340, 59),
-        new GymPokemon('Alakazam', 112320, 57),
-        new GymPokemon('Rhydon', 116340, 59),
+        new GymPokemon('Pidgeot', 304340, 59),
+        new GymPokemon('Alakazam', 312320, 57),
+        new GymPokemon('Rhydon', 316340, 59),
     ],
     BadgeEnums.Elite_KantoChampion,
     10000,
@@ -52,21 +52,21 @@ gymList['Champion Blue'] = new Champion(
     [new GymBadgeRequirement(BadgeEnums.Elite_Lance)],
     // Bulbasaur
     [
-        new GymPokemon('Exeggutor', 114520, 59),
-        new GymPokemon('Gyarados', 126040, 61),
-        new GymPokemon('Charizard', 140000, 63),
+        new GymPokemon('Exeggutor', 304520, 59),
+        new GymPokemon('Gyarados', 316040, 61),
+        new GymPokemon('Charizard', 320000, 63),
     ],
     // Charmander
     [
-        new GymPokemon('Arcanine', 115340, 59),
-        new GymPokemon('Exeggutor', 127520, 61),
-        new GymPokemon('Blastoise', 140000, 63),
+        new GymPokemon('Arcanine', 305340, 59),
+        new GymPokemon('Exeggutor', 317520, 61),
+        new GymPokemon('Blastoise', 320000, 63),
     ],
     // Squirtle/Pikachu
     [
-        new GymPokemon('Gyarados', 113040, 59),
-        new GymPokemon('Arcanine', 125340, 61),
-        new GymPokemon('Venusaur', 140000, 63),
+        new GymPokemon('Gyarados', 303040, 59),
+        new GymPokemon('Arcanine', 315340, 61),
+        new GymPokemon('Venusaur', 320000, 63),
     ]
 );
 
