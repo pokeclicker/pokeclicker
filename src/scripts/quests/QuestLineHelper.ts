@@ -287,15 +287,15 @@ class QuestLineHelper {
             UltraBeastQuestLine.addQuest(catchUltraBeast);
         };
 
-        createUltraBeastQuest('Nihilego', ['Wela Volcano Park', 'Diglett\'s Tunnel'], 'It has been spotted at Wela Volcano Park and Diglett\'s Tunnel.', 1);
-        createUltraBeastQuest('Buzzwole', ['Melemele Meadow'], 'It has been spotted at Melemele Meadow.', 2);
-        createUltraBeastQuest('Pheromosa', ['Verdant Cavern'], 'It has been spotted at Verdant Cavern.', 4);
-        createUltraBeastQuest('Xurkitree', ['Memorial Hill', 'Lush Jungle'], 'It has been spotted at Memorial Hill and Lush Jungle.', 2);
+        createUltraBeastQuest('Nihilego', ['Wela Volcano Park', 'Diglett\'s Tunnel'], [undefined], 'It has been spotted at Wela Volcano Park and Diglett\'s Tunnel.', 1);
+        createUltraBeastQuest('Buzzwole', ['Melemele Meadow'], [undefined], 'It has been spotted at Melemele Meadow.', 2);
+        createUltraBeastQuest('Pheromosa', ['Verdant Cavern'], [undefined], 'It has been spotted at Verdant Cavern.', 4);
+        createUltraBeastQuest('Xurkitree', ['Memorial Hill', 'Lush Jungle'], [undefined], 'It has been spotted at Memorial Hill and Lush Jungle.', 2);
         createUltraBeastQuest('Kartana', ['Malie Garden'], [17], 'It has been spotted at Malie Garden.', 4);
         createUltraBeastQuest('Celesteela', ['Malie Garden'], [23], 'It has been spotted at Malie Garden and Haina Desert.', 2);
-        createUltraBeastQuest('Blacephalon', undefined, [27], 'It has been spotted at Poni Grove.', 5);
-        createUltraBeastQuest('Stakataka', undefined, [27], 'It has been spotted at Poni Grove.', 5);
-        createUltraBeastQuest('Guzzlord', ['Resolution Cave'], 'It has been spotted at Resolution Cave.', 1);
+        createUltraBeastQuest('Blacephalon', [undefined], [27], 'It has been spotted at Poni Grove.', 5);
+        createUltraBeastQuest('Stakataka', [undefined], [27], 'It has been spotted at Poni Grove.', 5);
+        createUltraBeastQuest('Guzzlord', ['Resolution Cave'], [undefined], 'It has been spotted at Resolution Cave.', 1);
         App.game.quests.questLines().push(UltraBeastQuestLine);
 
     }
