@@ -17212,7 +17212,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 257,
-        'catchRate': 0,
+        'catchRate': 45,
         'base': {
             'hitpoints': 109,
             'attack': 53,
@@ -17230,7 +17230,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': null,
-        'catchRate': 0,
+        'catchRate': 45,
         'base': {
             'hitpoints': 107,
             'attack': 139,
@@ -17248,7 +17248,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': null,
-        'catchRate': 0,
+        'catchRate': 45,
         'base': {
             'hitpoints': 71,
             'attack': 137,
@@ -17266,7 +17266,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': null,
-        'catchRate': 0,
+        'catchRate': 45,
         'base': {
             'hitpoints': 83,
             'attack': 89,
@@ -17284,7 +17284,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': null,
-        'catchRate': 0,
+        'catchRate': 45,
         'base': {
             'hitpoints': 97,
             'attack': 101,
@@ -17302,7 +17302,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': null,
-        'catchRate': 0,
+        'catchRate': 45,
         'base': {
             'hitpoints': 59,
             'attack': 181,
@@ -17320,7 +17320,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': null,
-        'catchRate': 0,
+        'catchRate': 45,
         'base': {
             'hitpoints': 223,
             'attack': 101,
@@ -17406,7 +17406,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 189,
-        'catchRate': 0,
+        'catchRate': 45,
         'evolutions': [new LevelEvolution('Poipole', 'Naganadel', 41)],
         'base': {
             'hitpoints': 67,
@@ -17425,7 +17425,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 243,
-        'catchRate': 0,
+        'catchRate': 45,
         'base': {
             'hitpoints': 73,
             'attack': 73,
@@ -17443,7 +17443,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 257,
-        'catchRate': 0,
+        'catchRate': 30,
         'base': {
             'hitpoints': 61,
             'attack': 131,
@@ -17461,7 +17461,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 257,
-        'catchRate': 0,
+        'catchRate': 30,
         'base': {
             'hitpoints': 53,
             'attack': 127,

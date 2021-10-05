@@ -57,7 +57,7 @@ class Pokeballs implements Feature {
             new Pokeball(GameConstants.Pokeball.Beastball, () => {
                 const enemyPokemon = Battle.enemyPokemon().name;
                 if (App.game.gameState == GameConstants.GameState.fighting && typeof GameConstants.UltraBeastType[enemyPokemon] === 'number') {
-                    return 25;
+                    return 10;
                 }
                 return -100;
             }, 1000, 'Increased catch rate for Ultra Beasts, reduced catch rate otherwise', new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)),
