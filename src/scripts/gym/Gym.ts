@@ -1349,10 +1349,7 @@ gymList['Special Agent Anabel'] = new Gym(
     BadgeEnums.Agent_Anabel,
     64000,
     'Oh you\'re good! You might just have a shot, here is a Beast Ball. Go hunt down those strange Ultra Beasts! If you collect any shards from them you can trade them for more Beast Balls here.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
-    () => {
-        App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,1);
-    }
+    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
 );
 
 

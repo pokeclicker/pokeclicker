@@ -240,6 +240,21 @@ class QuestLineHelper {
 
         const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts');
 
+        const AnabelReward = () => {
+            Notifier.notify({ message: 'You Beat Anabel!', type: NotificationConstants.NotificationOption.success });
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,1);
+        };
+
+        const AnabelBattle = new CustomQuest(
+            1,
+            AnabelReward,
+            'Defeat Agent Anabel at the Route 8 Motel.',
+            () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Agent Anabel')](),
+            0
+        );
+
+        UltraBeastQuestLine.addQuest(AnabelBattle);
+
         const createUltraBeastQuest = (ultrabeast: PokemonNameType, dungeons: Array<string>, routes: Array<number>, hint: string, numberCaught: number) => {
 
             const ultrabeastAdd = () => {
