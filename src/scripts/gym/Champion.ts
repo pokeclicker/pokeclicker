@@ -68,10 +68,7 @@ gymList['Champion Blue'] = new Champion(
         new GymPokemon('Gyarados', 63040, 59),
         new GymPokemon('Arcanine', 65340, 61),
         new GymPokemon('Venusaur', 70000, 63),
-    ],
-    () => {
-        App.game.quests.getQuestLine('Ultra Beast Hunt').beginQuest();
-    }
+    ]
 );
 
 // TODO: Balancing - Set HP - Set win message
@@ -102,7 +99,10 @@ gymList['Champion Hao'] = new Champion(
     [
         new GymPokemon('Leafeon', 2015330, 58),
         new GymPokemon('Incineroar', 2015330, 60),
-    ]
+    ],
+    () => {
+        App.game.quests.getQuestLine('Ultra Beast Hunt').beginQuest();
+    }
 );
 
 //TODO: rewards/hp rebalance
@@ -125,10 +125,7 @@ gymList['Champion Leon'] = new Champion(
     // Charmander
     [new GymPokemon('Inteleon', 2015330, 60)],
     // Squirtle/Pikachu
-    [new GymPokemon('Rillaboom', 2015330, 60)],
-    () => {
-        //App.game.quests.getQuestLine('Ultra Beast Hunt').beginQuest();
-    }
+    [new GymPokemon('Rillaboom', 2015330, 60)]
 );
 
 //TODO: rewards/hp rebalance
