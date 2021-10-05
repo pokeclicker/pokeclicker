@@ -1336,6 +1336,24 @@ gymList['Elite Kahili'] = new Gym(
     'It\'s frustrating to me as a member of the Elite Four, but it seems your strength is the real deal.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Acerola)]
 );
+gymList['Special Agent Anabel'] = new Gym(
+    'Anabel',
+    'Route 8 Motel',
+    [
+        new GymPokemon('Alakazam', 2500000, 61),
+        new GymPokemon('Weavile', 2500000, 61),
+        new GymPokemon('Mismagius', 2500000, 61),
+        new GymPokemon('Salamence', 2500000, 61),
+        new GymPokemon('Snorlax', 2500000, 61),
+    ],
+    BadgeEnums.Agent_Anabel,
+    64000,
+    'Oh you\'re good! You might just have a shot, here is a Beast Ball. Go hunt down those strange Ultra Beasts! If you collect any shards from them you can trade them for more Beast Balls here.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+    () => {
+        App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,1);
+    }
+);
 
 
 //Galar Leaders

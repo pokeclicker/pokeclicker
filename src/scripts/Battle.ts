@@ -129,7 +129,11 @@ class Battle {
     protected static prepareCatch(enemyPokemon: BattlePokemon, pokeBall: GameConstants.Pokeball) {
         this.pokeball(pokeBall);
         this.catching(true);
-        this.catchRateActual(this.calculateActualCatchRate(enemyPokemon, pokeBall));
+        if (typeof GameConstants.UltraBeastType[enemyPokemon.name] == 'number' && pokeBall != GameConstants.Pokeball.Beastball) {
+            this.catchRateActual(0);
+        } else {
+            this.catchRateActual(this.calculateActualCatchRate(enemyPokemon, pokeBall));
+        }
         App.game.pokeballs.usePokeball(pokeBall);
     }
 
@@ -138,6 +142,7 @@ class Battle {
             this.catching(false);
             return;
         }
+
         const random: number = Math.floor(Math.random() * 100);
         if (random <= this.catchRateActual()) { // Caught
             this.catchPokemon(enemyPokemon);

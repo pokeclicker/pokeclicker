@@ -657,6 +657,20 @@ export enum PokemonItemType {
     'Slowpoke (Galar)',
 }
 
+export enum UltraBeastType {
+    'Nihilego',
+    'Buzzwole',
+    'Pheromosa',
+    'Xurkitree',
+    'Kartana',
+    'Celesteela',
+    'Blacephalon',
+    'Stakataka',
+    'Guzzlord',
+    'Poipole',
+    'Naganadel',
+}
+
 export enum PokeBlockColor {
     Black,
     Red,
