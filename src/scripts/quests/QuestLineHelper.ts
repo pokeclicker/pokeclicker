@@ -260,12 +260,12 @@ class QuestLineHelper {
             const ultrabeastAdd = () => {
                 dungeons.forEach(dungeon => {
                     if (dungeon != undefined) {
-                        dungeonList[dungeon].enemyList.push({pokemon: ultrabeast, options: {weight: dungeonList[dungeon].weightList[0] * 10}});
+                        dungeonList[dungeon].enemyList.push({pokemon: ultrabeast, options: {weight: dungeonList[dungeon].weightList[0] / 10}});
                     }
                 });
                 routes.forEach(route => {
                     if (route != undefined) {
-                        Routes.getRoute(GameConstants.Region.kanto, route).pokemon.land.push(ultrabeast);
+                        Routes.getRoute(GameConstants.Region.alola, route).pokemon.land.push(ultrabeast);
                     }
                 });
 
@@ -287,18 +287,15 @@ class QuestLineHelper {
             UltraBeastQuestLine.addQuest(catchUltraBeast);
         };
 
-        /*createUltraBeastQuest('Nihilego', ['Wela Volcano Park', 'Diglett\'s Tunnel'], 'It has been spotted at Wela Volcano Park and Diglett\'s Tunnel.', 1);
-     createUltraBeastQuest('Buzzwole', ['Melemele Meadow'], 'It has been spotted at Melemele Meadow.', 2);
-     createUltraBeastQuest('Pheromosa', ['Verdant Cavern'], 'It has been spotted at Verdant Cavern.', 4);
-     createUltraBeastQuest('Xurkitree', ['Memorial Hill', 'Lush Jungle'], 'It has been spotted at Memorial Hill and Lush Jungle.', 2);
-     createUltraBeastQuest('Kartana', ['Malie Garden'], [17], 'It has been spotted at Malie Garden.', 4);
-     createUltraBeastQuest('Celesteela', ['Malie Garden'], [23], 'It has been spotted at Malie Garden and Haina Desert.', 2);
-     createUltraBeastQuest('Blacephalon', undefined, [27], 'It has been spotted at Poni Grove.', 5);
-     createUltraBeastQuest('Stakataka', undefined, [27], 'It has been spotted at Poni Grove.', 5);
-     createUltraBeastQuest('Guzzlord', ['Resolution Cave'], 'It has been spotted at Resolution Cave.', 1);*/
-        createUltraBeastQuest('Raikou', ['Power Plant'], [undefined], 'It has been spotted at the Power Plant.', 1);
-        createUltraBeastQuest('Suicune', [undefined], [1], 'It has been spotted on Route 1.', 1);
-        createUltraBeastQuest('Entei', ['Power Plant'], [1], 'It has been spotted at the Power Plant and on Route 1.', 1);
+        createUltraBeastQuest('Nihilego', ['Wela Volcano Park', 'Diglett\'s Tunnel'], 'It has been spotted at Wela Volcano Park and Diglett\'s Tunnel.', 1);
+        createUltraBeastQuest('Buzzwole', ['Melemele Meadow'], 'It has been spotted at Melemele Meadow.', 2);
+        createUltraBeastQuest('Pheromosa', ['Verdant Cavern'], 'It has been spotted at Verdant Cavern.', 4);
+        createUltraBeastQuest('Xurkitree', ['Memorial Hill', 'Lush Jungle'], 'It has been spotted at Memorial Hill and Lush Jungle.', 2);
+        createUltraBeastQuest('Kartana', ['Malie Garden'], [17], 'It has been spotted at Malie Garden.', 4);
+        createUltraBeastQuest('Celesteela', ['Malie Garden'], [23], 'It has been spotted at Malie Garden and Haina Desert.', 2);
+        createUltraBeastQuest('Blacephalon', undefined, [27], 'It has been spotted at Poni Grove.', 5);
+        createUltraBeastQuest('Stakataka', undefined, [27], 'It has been spotted at Poni Grove.', 5);
+        createUltraBeastQuest('Guzzlord', ['Resolution Cave'], 'It has been spotted at Resolution Cave.', 1);
         App.game.quests.questLines().push(UltraBeastQuestLine);
 
     }

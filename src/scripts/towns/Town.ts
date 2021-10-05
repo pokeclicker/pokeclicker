@@ -75,7 +75,6 @@ const PewterCityShop = new TownShop([
     ItemList['Token_collector'],
     ItemList['Lucky_egg'],
     ItemList['Mystery_egg'],
-    ItemList['Beastball'],
 ]);
 
 const CeruleanCityShop = new TownShop([

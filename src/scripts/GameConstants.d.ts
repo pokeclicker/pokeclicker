@@ -288,12 +288,12 @@ namespace GameConstants {
          'Pheromosa',
          'Xurkitree',
          'Kartana',
-          'Celesteela',
-          'Blacephalon',
-          'Stakataka',
-          'Guzzlord',
-          'Poipole',
-        'Naganadel'
+         'Celesteela',
+         'Blacephalon',
+         'Stakataka',
+         'Guzzlord',
+         'Poipole',
+         'Naganadel'
      }
 
     declare enum PokeBlockColor {
