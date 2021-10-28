@@ -89,6 +89,10 @@
 	animation: flash linear 0.5s infinite;
 }
 
+img.pixelated {
+  image-rendering: pixelated;
+}
+
 @-webkit-keyframes flash {
 	0% { opacity: 1; }
 	50% { opacity: 0.1; }
@@ -219,6 +223,11 @@ body:hover {
       max-height: 350px;
     }
   }
+}
+
+// Firefox fix for background covering borders in tables
+td {
+  background-clip: padding-box;
 }
 
 #pokemonList {
@@ -517,4 +526,42 @@ td.tight {
 .introjs-fixParent.modal,
 .introjs-fixParent.modal-dialog {
   position: absolute !important;  
+}
+
+.bg-locked {
+  background-color: var(--locked);
+}
+.bg-currentPlace {
+  background-color: var(--currentPlace);
+}
+.bg-incomplete {
+  background-color: var(--incomplete);
+}
+.bg-uncaughtPokemon {
+  background-color: var(--uncaughtPokemon);
+}
+.bg-uncaughtShinyPokemon {
+  background-color: var(--uncaughtShinyPokemon);
+}
+.bg-completed {
+  background-color: var(--completed);
+}
+
+.text-locked {
+  color: var(--locked);
+}
+.text-currentPlace {
+  color: var(--currentPlace);
+}
+.text-incomplete {
+  color: var(--incomplete);
+}
+.text-uncaughtPokemon {
+  color: var(--uncaughtPokemon);
+}
+.text-uncaughtShinyPokemon {
+  color: var(--uncaughtShinyPokemon);
+}
+.text-completed {
+  color: var(--completed);
 }

@@ -7,6 +7,10 @@ class HatchEggsQuest extends Quest implements QuestInterface {
         this.focus = App.game.statistics.totalPokemonHatched;
     }
 
+    public static canComplete() {
+        return App.game.breeding.canAccess();
+    }
+
     public static generateData(): any[] {
         const amount = SeededRand.intBetween(1, 30);
         const reward = this.calcReward(amount);

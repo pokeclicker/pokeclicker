@@ -11,6 +11,7 @@ class Game {
     // Features
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
+    private worker: Worker;
 
     /**
      * TODO(@Isha) pass all features through the constructor
@@ -89,8 +90,10 @@ class Game {
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
         this.computeOfflineEarnings();
+        this.checkAndFix();
 
-        this.gameState = GameConstants.GameState.fighting;
+        // If the player isn't on a route, they're in a town/dungeon
+        this.gameState = player.route() ? GameConstants.GameState.fighting : GameConstants.GameState.town;
     }
 
     computeOfflineEarnings() {
@@ -99,25 +102,11 @@ class Game {
         if (timeDiffInSeconds > 1) {
             // Only allow up to 24 hours worth of bonuses
             const timeDiffOverride = Math.min(86400, timeDiffInSeconds);
-            const region: GameConstants.Region = player.region;
-            let route: number = player.route();
+            let region: GameConstants.Region = player.region;
+            let route: number = player.route() || GameConstants.StartingRoutes[region];
             if (!MapHelper.validRoute(route, region)) {
-                switch (region) {
-                    case 0:
-                        route = 1;
-                        break;
-                    case 1:
-                        route = 29;
-                        break;
-                    case 2:
-                        route = 101;
-                        break;
-                    case 3:
-                        route = 201;
-                        break;
-                    default:
-                        route = 1;
-                }
+                route = 1;
+                region = GameConstants.Region.kanto;
             }
             const availablePokemonMap = RouteHelper.getAvailablePokemonList(route, region).map(name => pokemonMap[name]);
             const maxHealth: number = PokemonFactory.routeHealth(route, region);
@@ -139,9 +128,34 @@ class Game {
             Notifier.notify({
                 type: NotificationConstants.NotificationOption.info,
                 title: 'Offline progress',
-                message: `Defeated: ${numberOfPokemonDefeated} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
+                message: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
                 timeout: 2 * GameConstants.MINUTE,
             });
+        }
+    }
+
+    checkAndFix() {
+        // Quest box not showing (game thinking tutorial is not completed)
+        if (App.game.quests.getQuestLine('Tutorial Quests').state() == QuestLineState.inactive) {
+            if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pewter City')]() >= 1) {
+                // Defeated Brock, Has completed the Tutorial
+                App.game.quests.getQuestLine('Tutorial Quests').state(QuestLineState.ended);
+            } else if (player.starter() >= 0) {
+                // Has chosen a starter, Tutorial is started
+                App.game.quests.getQuestLine('Tutorial Quests').state(QuestLineState.started);
+                App.game.quests.getQuestLine('Tutorial Quests').beginQuest(App.game.quests.getQuestLine('Tutorial Quests').curQuest());
+            }
+        }
+        // Battle Frontier not accessable (chances are people broke this themselves, but whatever...)
+        if (App.game.quests.getQuestLine('Mystery of Deoxys').state() == QuestLineState.inactive) {
+            if (App.game.statistics.battleFrontierHighestStageCompleted() >= 100) {
+                // Defeated stage 100, has obtained deoxys
+                App.game.quests.getQuestLine('Mystery of Deoxys').state(QuestLineState.ended);
+            } else if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Wallace')]() >= 1) {
+                // Has defeated the Hoenn champion, Quest is started
+                App.game.quests.getQuestLine('Mystery of Deoxys').state(QuestLineState.started);
+                App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest(App.game.quests.getQuestLine('Mystery of Deoxys').curQuest());
+            }
         }
     }
 
@@ -150,7 +164,22 @@ class Game {
         if (player.starter() === GameConstants.Starter.None) {
             StartSequenceRunner.start();
         }
-        this.interval = setInterval(this.gameTick.bind(this), GameConstants.TICK_TIME);
+
+        let workerSupported = true;
+
+        try {
+            console.log('starting web worker...');
+            const blob = new Blob([`setInterval(() => postMessage('tick'), ${GameConstants.TICK_TIME})`]);
+            const blobURL = window.URL.createObjectURL(blob);
+
+            this.worker = new Worker(blobURL);
+            // use a setTimeout to queue the event
+            this.worker?.addEventListener('message', () => Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null);
+        } catch (e) {
+            workerSupported = false;
+        }
+
+        this.interval = setInterval(() => !this.worker || !Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null, GameConstants.TICK_TIME);
     }
 
     stop() {

@@ -28,6 +28,10 @@ abstract class Quest {
         this.onLoadCalled = false;
     }
 
+    public static canComplete() {
+        return true;
+    }
+
     get description(): string {
         return this.customDescription ?? 'Generic Quest Description. This should be overriden.';
     }
@@ -58,7 +62,7 @@ abstract class Quest {
                     type: NotificationConstants.NotificationOption.success,
                 });
                 App.game.logbook.newLog(
-                    LogBookTypes.QUEST_COMPLETE,
+                    LogBookTypes.QUEST,
                     `Completed "${this.description}" for ${this.pointsReward} quest points.`);
             } else {
                 Notifier.notify({
@@ -66,7 +70,7 @@ abstract class Quest {
                     type: NotificationConstants.NotificationOption.success,
                 });
                 App.game.logbook.newLog(
-                    LogBookTypes.QUEST_COMPLETE,
+                    LogBookTypes.QUEST,
                     `Completed "${this.description}".`);
             }
             GameHelper.incrementObservable(App.game.statistics.questsCompleted);

@@ -30,7 +30,7 @@ class Item {
     multiplierDecreaser: MultiplierDecreaser;
 
     maxAmount: number;
-    description?: string;
+    _description?: string;
     _displayName: string;
     imageDirectory?: string;
 
@@ -62,7 +62,7 @@ class Item {
         }
 
         this._displayName = displayName ?? name;
-        this.description = description;
+        this._description = description;
         this.imageDirectory = imageDirectory;
     }
 
@@ -94,7 +94,7 @@ class Item {
 
         if (n > this.maxAmount) {
             Notifier.notify({
-                message: `You can only buy ${this.maxAmount} &times; ${GameConstants.humanifyString(this.name)}!`,
+                message: `You can only buy ${this.maxAmount} &times; ${GameConstants.humanifyString(this.displayName)}!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             n = this.maxAmount;
@@ -102,7 +102,7 @@ class Item {
 
         if (!this.isAvailable()) {
             Notifier.notify({
-                message: `${GameConstants.humanifyString(this.name)} is sold out!`,
+                message: `${GameConstants.humanifyString(this.displayName)} is sold out!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             return;
@@ -110,12 +110,11 @@ class Item {
 
         const multiple = n > 1 ? 's' : '';
 
-        if (App.game.wallet.hasAmount(new Amount(this.totalPrice(n), this.currency))) {
-            App.game.wallet.loseAmount(new Amount(this.totalPrice(n), this.currency));
+        if (App.game.wallet.loseAmount(new Amount(this.totalPrice(n), this.currency))) {
             this.gain(n);
             this.increasePriceMultiplier(n);
             Notifier.notify({
-                message: `You bought ${n} ${GameConstants.humanifyString(this.name)}${multiple}`,
+                message: `You bought ${n} ${GameConstants.humanifyString(this.displayName)}${multiple}`,
                 type: NotificationConstants.NotificationOption.success,
             });
         } else {
@@ -128,7 +127,7 @@ class Item {
                     break;
             }
             Notifier.notify({
-                message: `You don't have enough ${curr} to buy ${n} ${GameConstants.humanifyString(this.name) + multiple}`,
+                message: `You don't have enough ${curr} to buy ${n} ${GameConstants.humanifyString(this.displayName) + multiple}`,
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
@@ -136,6 +135,10 @@ class Item {
 
     gain(n: number) {
         player.gainItem(this.name, n);
+
+        if (this.name == 'Protein') {
+            GameHelper.incrementObservable(App.game.statistics.totalProteinsObtained, n);
+        }
     }
 
     use(): boolean {
@@ -160,6 +163,10 @@ class Item {
         }
         player.itemMultipliers[this.saveName] = Math.max(1, (player.itemMultipliers[this.saveName] || 1) / Math.pow(this.multiplier, amount));
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.saveName]));
+    }
+
+    get description() {
+        return this._description;
     }
 
     get displayName() {

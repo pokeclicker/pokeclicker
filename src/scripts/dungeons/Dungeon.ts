@@ -3537,7 +3537,7 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
             { weight: 1 }, 'Veronique'),
         new DungeonTrainer('Backpacker',
             [new GymPokemon('Haxorus', 3500000, 58)], { weight: 1 }, 'Farid', '(male)'),
-        new DungeonTrainer('Batlle Girl',
+        new DungeonTrainer('Battle Girl',
             [new GymPokemon('Medicham', 3500000, 60)], { weight: 1 }, 'Sigrid'),
         new DungeonTrainer('Black Belt',
             [

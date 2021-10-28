@@ -7,6 +7,7 @@ class Farming implements Feature {
 
     berryData: Berry[] = [];
     mutations: Mutation[] = [];
+    farmHands = new FarmHands();
 
     externalAuras: KnockoutObservable<number>[];
 
@@ -20,15 +21,12 @@ class Farming implements Feature {
     // Queueing an aura reset in later ticks fixes this issue, and is barely noticable to the player.
     queuedAuraReset = -1;
 
-    static readonly PLOT_WIDTH = 5;
-    static readonly PLOT_HEIGHT = 5;
-
     defaults = {
         berryList: Array<number>(GameHelper.enumLength(BerryType) - 1).fill(0),
         unlockedBerries: Array<boolean>(GameHelper.enumLength(BerryType) - 1).fill(false),
         mulchList: Array<number>(GameHelper.enumLength(MulchType)).fill(0),
-        plotList: new Array(Farming.PLOT_WIDTH * Farming.PLOT_HEIGHT).fill(null).map((value, index) => {
-            const middle = Math.floor(Farming.PLOT_HEIGHT / 2) * Farming.PLOT_WIDTH + Math.floor(Farming.PLOT_WIDTH / 2);
+        plotList: new Array(GameConstants.FARM_PLOT_WIDTH * GameConstants.FARM_PLOT_HEIGHT).fill(null).map((value, index) => {
+            const middle = Math.floor(GameConstants.FARM_PLOT_HEIGHT / 2) * GameConstants.FARM_PLOT_WIDTH + Math.floor(GameConstants.FARM_PLOT_WIDTH / 2);
             return new Plot(index === middle, BerryType.None, 0, MulchType.None, 0);
         }),
         shovelAmt: 0,
@@ -233,14 +231,14 @@ class Farming implements Feature {
             [
                 'This Berry is said to have grown plentiful in the tropics of the past. It boasts an intensely hot spiciness.',
                 'It has a tendency to overtake nearby plants.',
-            ], undefined, ['Charmander', 'Cyndaquil', 'Torchic', 'Chimchar', 'Tepig']);
+            ], undefined, ['Charmander', 'Cyndaquil', 'Torchic', 'Chimchar', 'Tepig', 'Fennekin', 'Litten', 'Scorbunny']);
         this.berryData[BerryType.Passho]    = new Berry(BerryType.Passho,   [490, 3600, 10800, 21600, 43200],
             22, 0.05, 1300, 15,
             [0, 15, 0, 10, 0], BerryColor.Blue,
             [
                 'This Berry\'s flesh is dotted with countless tiny bubbles of air that keep it afloat in water.',
                 'This Berry promotes the fruiting of nearby Berry plants.',
-            ], new Aura(AuraType.Harvest, [1.1, 1.2, 1.3]), ['Squirtle', 'Totodile', 'Mudkip', 'Piplup', 'Oshawott', 'Flabébé (Blue)']);
+            ], new Aura(AuraType.Harvest, [1.1, 1.2, 1.3]), ['Squirtle', 'Totodile', 'Mudkip', 'Piplup', 'Oshawott', 'Froakie', 'Popplio', 'Sobble', 'Flabébé (Blue)']);
         this.berryData[BerryType.Wacan]     = new Berry(BerryType.Wacan,    [10, 180, 900, 1800, 3600],
             2, 0.05, 250, 1,
             [0, 0, 15, 0, 10], BerryColor.Yellow,
@@ -254,7 +252,7 @@ class Farming implements Feature {
             [
                 'This Berry has a disagreeable "green" flavor and scent typical of vegetables. It is rich in health-promoting fiber.',
                 'It has a tendency to expand into nearby plots.',
-            ], undefined, ['Bulbasaur', 'Chikorita', 'Treecko', 'Turtwig', 'Snivy']);
+            ], undefined, ['Bulbasaur', 'Chikorita', 'Treecko', 'Turtwig', 'Snivy', 'Chespin', 'Rowlet', 'Grookey']);
         this.berryData[BerryType.Yache]     = new Berry(BerryType.Yache,    [3600, 14400, 28800, 43200, 86400],
             25, 0.05, 1500, 15,
             [0, 10, 0, 0, 15], BerryColor.Blue,
@@ -940,6 +938,8 @@ class Farming implements Feature {
         if (notifications.size) {
             notifications.forEach((n) => this.handleNotification(n, wanderPokemon));
         }
+
+        this.farmHands.tick();
     }
 
     handleNotification(farmNotiType: FarmNotificationType, wander?: any): void {
@@ -1259,6 +1259,7 @@ class Farming implements Feature {
             plotList: this.plotList.map(plot => plot.toJSON()),
             shovelAmt: this.shovelAmt(),
             mutations: this.mutations.map(mutation => mutation.toJSON()),
+            farmHands: this.farmHands.toJSON(),
         };
     }
 
@@ -1318,6 +1319,8 @@ class Farming implements Feature {
         } else {
             this.mutations.forEach((mutation, i) => mutation.fromJSON(mutations[i]));
         }
+
+        this.farmHands.fromJSON(json.farmHands);
     }
 
     public static genBounds = [8, 20, 35, 53, Infinity];

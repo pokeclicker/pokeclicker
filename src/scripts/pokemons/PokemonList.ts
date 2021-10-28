@@ -2388,8 +2388,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 65,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone)],
-        //TODO add Alola-only evolution into Alolan Exeggutor using Leafstone
+        'evolutions': [
+            new StoneEvolution('Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone),
+            new StoneEvolution('Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone),
+        ],
         'base': {
             'hitpoints': 60,
             'attack': 40,
@@ -2442,8 +2444,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Cubone', 'Marowak', 28)],
-        //TODO add Alola-only evolution into Alolan Marowak at night at level 28
+        'evolutions': [
+            new LevelEvolution('Cubone', 'Marowak', 28),
+            TimeRestrictedLevelEvolution(18, 6, 'Cubone', 'Alolan Marowak', 28),
+        ],
         'base': {
             'hitpoints': 50,
             'attack': 50,
@@ -16057,9 +16061,10 @@ const pokemonList = createPokemonArray(
         'exp': 56,
         'catchRate': 190,
         'evolutions': [
-            TimeRestrictedLevelEvolution(6, 16, 'Rockruff', 'Lycanroc (Midday)', 25),
-            TimeRestrictedLevelEvolution(16, 20, 'Rockruff', 'Lycanroc (Dusk)', 25),
-            TimeRestrictedLevelEvolution(20, 6, 'Rockruff', 'Lycanroc (Midnight)', 25),
+            TimeRestrictedLevelEvolution(6, 17, 'Rockruff', 'Lycanroc (Midday)', 25),
+            TimeRestrictedLevelEvolution(17, 18, 'Rockruff', 'Lycanroc (Dusk)', 25),
+            TimeRestrictedLevelEvolution(18, 5, 'Rockruff', 'Lycanroc (Midnight)', 25),
+            TimeRestrictedLevelEvolution(5, 6, 'Rockruff', 'Lycanroc (Dusk)', 25),
         ],
         'base': {
             'hitpoints': 45,
@@ -20351,7 +20356,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 898.2,
-        'name': 'Ghost Rider Calyrex',
+        'name': 'Shadow Rider Calyrex',
         'type': [PokemonType.Psychic, PokemonType.Ghost],
         'base': {
             'hitpoints': 100,

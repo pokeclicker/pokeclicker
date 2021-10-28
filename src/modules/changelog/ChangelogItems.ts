@@ -10,6 +10,62 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.9
+    new ChangelogUpdate('v0.8.9', new Date(2021, 8, 12)),
+    new Changelog(changelogType.NEW, 'Log book can now be filtered by event type'),
+    new Changelog(changelogType.NEW, 'Regional Pokédex achievements'),
+    new Changelog(changelogType.NEW, 'Protein achievements'),
+    new Changelog(changelogType.NEW, 'Gym auto re-battle system'),
+    new Changelog(changelogType.CHANGE, 'Updated Kalos environments'),
+    new Changelog(changelogType.CHANGE, 'Added a legend to the map'),
+    new Changelog(changelogType.FIXED, 'Misc text fixes'),
+    new Changelog(changelogType.FIXED, 'Some locations not showing as locked'),
+    new Changelog(changelogType.FIXED, 'Missing/incorrect code contributors links'),
+    new Changelog(changelogType.FIXED, 'Dungeon grid lines not appearing on FireFox'),
+    new Changelog(changelogType.FIXED, 'MissingNo. appearing in log book'),
+    new Changelog(changelogType.FIXED, 'MissingNo. appearing in Battle Frontier'),
+
+    // v0.8.8
+    new ChangelogUpdate('v0.8.8', new Date(2021, 8, 5)),
+    new Changelog(changelogType.NEW, 'Credits modal for sprites and code contributions'),
+    new Changelog(changelogType.CHANGE, 'Can only move to tiles adjacent to visited tiles within Dungeons'),
+    new Changelog(changelogType.CHANGE, 'Can start attacking Gyms as soon as the GO text appears'),
+    new Changelog(changelogType.CHANGE, 'Added more NPCs'),
+    new Changelog(changelogType.CHANGE, 'Farm hands will restore energy while not hired'),
+    new Changelog(changelogType.CHANGE, 'Game settings are now stored within the each individual save'),
+    new Changelog(changelogType.CHANGE, 'Route highlights for uncaught Pokémon, uncaught shiny Pokémon'),
+    new Changelog(changelogType.CHANGE, 'Settings to change colors of route highlights'),
+    new Changelog(changelogType.CHANGE, 'Dungeons now decrease in size for every 10, 100, 1000 etc clears'),
+    new Changelog(changelogType.CHANGE, 'Show net value of Underground in footer'),
+    new Changelog(changelogType.FIXED, 'Some Fossils appearing in the underground too early'),
+    new Changelog(changelogType.FIXED, 'Dungeon trainers re-appearing after failing them previously'),
+
+    // v0.8.7
+    new ChangelogUpdate('v0.8.7', new Date(2021, 7, 31)),
+    new Changelog(changelogType.NEW, '(BETA) Added Farm Hands (Farm Automation) - Check out the Help tab in the Farm for more info'),
+    new Changelog(changelogType.NEW, 'Added an option to hide challenge related modules'),
+    new Changelog(changelogType.CHANGE, 'Display total route defeats when on a route'),
+    new Changelog(changelogType.CHANGE, 'Player will return to last Dungeon/Town they were in before closing game'),
+    new Changelog(changelogType.CHANGE, 'Buffed Pokémon typed quest reward amounts'),
+    new Changelog(changelogType.CHANGE, 'Should no longer receive quest that cannot be completed right now (unless starting a new region)'),
+    new Changelog(changelogType.CHANGE, 'Nerfed Dungeon Token gains in Dungeons'),
+    new Changelog(changelogType.CHANGE, 'Added unobtainable berries for No Oak Item saves to Johto Berry Master (must have prerequisites to purchase)'),
+    new Changelog(changelogType.FIXED, 'Minor theme fixes'),
+    new Changelog(changelogType.FIXED, 'Trainer image fixes'),
+    new Changelog(changelogType.FIXED, 'Being able to win and lose when fighting a Gym'),
+
+    // v0.8.6
+    new ChangelogUpdate('v0.8.6', new Date(2021, 7, 22)),
+    new Changelog(changelogType.CHANGE, 'Added more NPCs'),
+    new Changelog(changelogType.CHANGE, 'Buffed Capture Pokémon Type quest rewards'),
+    new Changelog(changelogType.CHANGE, 'Buffed Pledge Grove'),
+    new Changelog(changelogType.FIXED, 'Decrease shop multiplier when fighting Trainers/Gyms/Elite 4'),
+    new Changelog(changelogType.FIXED, 'Boss icon visible on light themes'),
+    new Changelog(changelogType.FIXED, 'Some Pokémon level speed types'),
+    new Changelog(changelogType.FIXED, 'Achievements percentage going above maximum'),
+    new Changelog(changelogType.FIXED, 'Quest box sometimes dissapearing'),
+    new Changelog(changelogType.FIXED, 'Minor text fixes'),
+
     // v0.8.5
     new ChangelogUpdate('v0.8.5', new Date(2021, 7, 4)),
     new Changelog(changelogType.FIXED, 'Battle Frontier not awarding items'),

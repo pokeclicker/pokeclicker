@@ -2,6 +2,7 @@ import Settings from './Settings';
 import Setting from './Setting';
 import SettingOption from './SettingOption';
 import BooleanSetting from './BooleanSetting';
+import CssVariableSetting from './CssVariableSetting';
 import RangeSetting from './RangeSetting';
 import PokemonType from '../enums/PokemonType';
 import NotificationConstants from '../notifications/NotificationConstants';
@@ -57,6 +58,7 @@ Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons:',
     ],
     'original'));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
+Settings.add(new BooleanSetting('hideChallengeRelatedModules', 'Hide challenge related modules', false));
 Settings.add(new Setting<string>('backgroundImage', 'Background image:',
     [
         new SettingOption('Day', 'background-day'),
@@ -84,10 +86,19 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
         new SettingOption('Ripe/Death', 'ripeDeath'),
     ],
     'nextStage'));
+Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
+
+// CSS variable settings
+Settings.add(new CssVariableSetting('locked', 'Map Color Locked Location', [], '#000000'));
+Settings.add(new CssVariableSetting('currentPlace', 'Map Color Current Location', [], '#55ff00'));
+Settings.add(new CssVariableSetting('incomplete', 'Map Color Incomplete Area', [], '#ff9100'));
+Settings.add(new CssVariableSetting('uncaughtPokemon', 'Map Color Uncaught Pokemon', [], '#3498db'));
+Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Map Color Uncaught Shiny Pokemon', [], '#ffee00'));
+Settings.add(new CssVariableSetting('completed', 'Map Color Completed Location', [], '#ffffff'));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
-Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
+Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web workers for game ticks (more consistent game speed)', true));
 
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((sound) => {

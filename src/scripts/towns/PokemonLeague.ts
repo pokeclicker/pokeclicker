@@ -3,8 +3,8 @@
 class PokemonLeague extends Town {
     public gymList: Gym[];
 
-    constructor(name: string, region: GameConstants.Region, requirements: Array<Requirement | OneFromManyRequirement>, shop: Shop, gyms: string[]) {
-        super(name, region, { requirements, shop });
+    constructor(name: string, region: GameConstants.Region, requirements: Array<Requirement | OneFromManyRequirement>, shops: Shop[], gyms: string[]) {
+        super(name, region, { requirements, shops });
         this.gym = null;
         this.gymList = [];
         for (const gym of gyms) {
@@ -20,7 +20,7 @@ class PokemonLeague extends Town {
 }
 
 // Share a shop across all Elite 4s
-const indigoPlateauShop = new Shop([
+const indigoPlateauShop = new TownShop([
     new PokeballItem(GameConstants.Pokeball.Masterball, 10000000, GameConstants.Currency.money       , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.money]}` }),
     new PokeballItem(GameConstants.Pokeball.Masterball, 75000   , GameConstants.Currency.dungeonToken, { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.dungeonToken]}` }),
     new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.questPoint  , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.questPoint]}` }),
@@ -37,7 +37,7 @@ TownList['Indigo Plateau Kanto'] = new PokemonLeague(
         new RouteKillRequirement(10, GameConstants.Region.kanto, 23),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road')),
     ],
-    indigoPlateauShop,
+    [indigoPlateauShop],
     ['Elite Lorelei', 'Elite Bruno', 'Elite Agatha', 'Elite Lance', 'Champion Blue']
 );
 (<PokemonLeague>TownList['Indigo Plateau Kanto']).setupGymTowns();
@@ -46,7 +46,7 @@ TownList['Indigo Plateau Johto'] = new PokemonLeague(
     'Indigo Plateau Johto',
     GameConstants.Region.johto,
     [new RouteKillRequirement(10, GameConstants.Region.johto, 27)],
-    indigoPlateauShop,
+    [indigoPlateauShop],
     ['Elite Will', 'Elite Koga', 'Elite Bruno2', 'Elite Karen', 'Champion Lance']
 );
 (<PokemonLeague>TownList['Indigo Plateau Johto']).setupGymTowns();
@@ -58,7 +58,7 @@ TownList['Pokémon League Hoenn'] = new PokemonLeague(
         new RouteKillRequirement(10, GameConstants.Region.hoenn, 128),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Hoenn')),
     ],
-    indigoPlateauShop,
+    [indigoPlateauShop],
     ['Elite Sidney', 'Elite Phoebe', 'Elite Glacia', 'Elite Drake', 'Champion Wallace']
 );
 (<PokemonLeague>TownList['Pokémon League Hoenn']).setupGymTowns();
@@ -70,7 +70,7 @@ TownList['Pokémon League Sinnoh'] = new PokemonLeague(
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 223),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Sinnoh')),
     ],
-    indigoPlateauShop,
+    [indigoPlateauShop],
     ['Elite Aaron', 'Elite Bertha', 'Elite Flint', 'Elite Lucian', 'Champion Cynthia']
 );
 (<PokemonLeague>TownList['Pokémon League Sinnoh']).setupGymTowns();
@@ -82,7 +82,7 @@ TownList['Pokémon League Unova'] = new PokemonLeague(
         new RouteKillRequirement(10, GameConstants.Region.unova, 23),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Unova')),
     ],
-    indigoPlateauShop,
+    [indigoPlateauShop],
     ['Elite Shauntal', 'Elite Marshal', 'Elite Grimsley', 'Elite Caitlin', 'Champion Iris']
 );
 (<PokemonLeague>TownList['Pokémon League Unova']).setupGymTowns();
@@ -97,7 +97,7 @@ TownList['Pokémon League Kalos'] = new PokemonLeague(
         ]),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Kalos')),
     ],
-    indigoPlateauShop,
+    [indigoPlateauShop],
     ['Elite Malva', 'Elite Siebold', 'Elite Wikstrom', 'Elite Drasna', 'Champion Diantha']
 );
 (<PokemonLeague>TownList['Pokémon League Kalos']).setupGymTowns();
@@ -106,7 +106,7 @@ TownList['Pokémon League Alola'] = new PokemonLeague(
     'Pokémon League Alola',
     GameConstants.Region.alola,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanikala'))],
-    indigoPlateauShop,
+    [indigoPlateauShop],
     ['Elite Molayne', 'Elite Olivia', 'Elite Acerola', 'Elite Kahili', 'Champion Hao']
 );
 (<PokemonLeague>TownList['Pokémon League Alola']).setupGymTowns();
@@ -115,7 +115,7 @@ TownList['Wyndon Stadium'] = new PokemonLeague(
     'Wyndon Stadium',
     GameConstants.Region.galar,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))],
-    indigoPlateauShop,
+    [indigoPlateauShop],
     ['Trainer Marnie', 'Trainer Hop', 'Trainer Bede', 'Champion Leon']
 );
 (<PokemonLeague>TownList['Wyndon Stadium']).setupGymTowns();
@@ -123,10 +123,13 @@ TownList['Wyndon Stadium'] = new PokemonLeague(
 TownList['Master Dojo Battlefield'] = new PokemonLeague(
     'Master Dojo Battlefield',
     GameConstants.Region.armor,
-    [new MultiRequirement([
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Water'))])],
-    indigoPlateauShop,
+    [
+        new MultiRequirement([
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Water')),
+        ]),
+    ],
+    [indigoPlateauShop],
     ['Gym Leader Klara', 'Gym Leader Avery', 'Dojo Master Mustard']
 );
 (<PokemonLeague>TownList['Master Dojo Battlefield']).setupGymTowns();

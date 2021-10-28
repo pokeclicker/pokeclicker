@@ -187,10 +187,11 @@
                     <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
                         <div class="col no-gutters clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 220px; display: block;">
                             <h2 class="pageItemTitle" style="display: block;">
-
-                                <!-- ko if: App.game.statistics.routeKills[player.region][player.route()]() < GameConstants.ROUTE_KILLS_NEEDED -->
-                                <knockout class="right" data-bind="text: App.game.statistics.routeKills[player.region][player.route()]() + ' / ' + GameConstants.ROUTE_KILLS_NEEDED">0/10</knockout>
-                                <!-- /ko -->
+                                <knockout class="right" data-bind="using: App.game.statistics.routeKills[player.region][player.route()]()">
+                                    <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
+                                    <knockout data-bind="visible: $data < GameConstants.ROUTE_KILLS_NEEDED">/10</knockout>
+                                    &nbsp;defeated
+                                </knockout>
 
                                 <knockout class="left">
                                     <knockout data-bind="text: Routes.getName(player.route(), player.region)"></knockout>
@@ -335,6 +336,23 @@
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
                         <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
                     </div>
+                    <button class='btn btn-sm' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" data-toggle="popover" data-trigger="hover" data-html="true" data-title="Map Legend:"
+                    data-content="Map locations will be coloured based on the following:
+                    <br/>
+                    <br/><span>Current Location:</span>
+                    <span class='float-right px-4 bg-currentPlace'>&nbsp;</span>
+                    <br/><span>Locked:</span>
+                    <span class='float-right px-4 bg-locked'>&nbsp;</span>
+                    <br/><span>Incomplete:</span>
+                    <span class='float-right px-4 bg-incomplete'>&nbsp;</span>
+                    <br/><span>Uncaught Pokemon:</span>
+                    <span class='float-right px-4 bg-uncaughtPokemon'>&nbsp;</span>
+                    <br/><span>Uncaught Shiny Pokemon:</span>
+                    <span class='float-right px-4 bg-uncaughtShinyPokemon'>&nbsp;</span>
+                    <br/><span>Completed:</span>
+                    <span class='float-right px-4 bg-completed'>&nbsp;</span>
+                    <br/>
+                    <br/><i>NOTE:<br/>These colors can be customized in the settings menu</i>" data-placement="bottom">ⓘ</button>
                     <button class='btn btn-sm' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
                     data-bind='style: { background: Weather.color() },
                         tooltip: {
@@ -426,7 +444,10 @@
 <!-- Changelog Modal -->
 @import "changelog.html"
 
-<!-- Changelog Modal -->
+<!-- Credits Modal -->
+@import "creditsModal.html"
+
+<!-- Events Modal -->
 @import "eventsModal.html"
 
 <!-- Start Sequence Modal-->

@@ -11,7 +11,7 @@ class PokemonFactory {
      */
     public static generateWildPokemon(route: number, region: GameConstants.Region): BattlePokemon {
         if (!MapHelper.validRoute(route, region)) {
-            return new BattlePokemon('Rattata', 19, PokemonType.Psychic, PokemonType.None, 10000, 1, 0, 0, new Amount(0, GameConstants.Currency.money), false, 1);
+            return new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0);
         }
         let name: PokemonNameType;
 
@@ -146,8 +146,8 @@ class PokemonFactory {
         const exp: number = basePokemon.exp;
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         // Reward 2% or 5% (boss) of dungeon DT cost when the trainer mons are defeated
-        const tokens = Math.round(DungeonRunner.dungeon.tokenCost * (DungeonRunner.fightingBoss() ? 0.05 : 0.02));
-        return new BattlePokemon(name, basePokemon.id, basePokemon.type1, basePokemon.type2, maxHealth, level, 0, exp, new Amount(tokens, GameConstants.Currency.dungeonToken), shiny, GameConstants.DUNGEON_SHARDS);
+        const money = 0;
+        return new BattlePokemon(name, basePokemon.id, basePokemon.type1, basePokemon.type2, maxHealth, level, 0, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_SHARDS);
     }
 
     public static generateDungeonBoss(bossPokemon: DungeonBossPokemon, chestsOpened: number): BattlePokemon {

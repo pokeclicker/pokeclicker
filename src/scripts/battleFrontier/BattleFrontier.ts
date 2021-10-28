@@ -25,6 +25,7 @@ class BattleFrontier implements Feature {
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
+        BattleFrontierBattle.enemyPokemon(null);
         App.game.gameState = GameConstants.GameState.battleFrontier;
     }
 

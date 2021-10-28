@@ -510,6 +510,40 @@ class Update implements Saveable {
                 milestones: milestones.filter(([stage]) => stage <= highestStageCompleted),
             };
         },
+
+        '0.8.9': ({ playerData, saveData }) => {
+            // Retroactively track proteins obtained
+            let proteinsObtained = 0;
+
+            // Only update if save is from v0.6.0+ (when proteins were added)
+            if (this.minUpdateVersion('0.6.0', saveData)) {
+                saveData.party.caughtPokemon.forEach(p => {
+                    proteinsObtained += p.proteinsUsed;
+                });
+
+                proteinsObtained += playerData._itemList.Protein;
+            }
+
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalProteinsObtained: proteinsObtained,
+            };
+
+            // Only run if save is from v0.8.7 (a forked version which is breaking stuff)
+            if (saveData.update.version == '0.8.7') {
+                // Check if the save has the Vivillon quest line, otherwise it's not from the main website
+                const questLines = saveData.quests?.questLines?.length || 0;
+                if (questLines < 4) {
+                    Notifier.notify({
+                        title: 'Importing this save will cause errors!',
+                        message: 'Please only use saves from the main website https://pokeclicker.com/',
+                        type: NotificationConstants.NotificationOption.danger,
+                        timeout: GameConstants.DAY,
+                    });
+                    throw new Error('Importing this save will cause errors');
+                }
+            }
+        },
     };
 
     constructor() {
@@ -599,6 +633,18 @@ class Update implements Saveable {
             return;
         }
 
+        // Check if the save is newer than the current client, don't allow it to load.
+        if (this.isNewerVersion(this.saveVersion, this.version)) {
+            Notifier.notify({
+                title: 'Save version is newer than game version!',
+                message: `Please update your game before attempting to load this save..\n\nSave version: ${this.saveVersion}\nGame version: ${this.version}`,
+                type: NotificationConstants.NotificationOption.danger,
+                timeout: GameConstants.DAY,
+            });
+            throw new Error(`Save is newer than game version\nSave version: ${this.saveVersion}\nGame version: ${this.version}`);
+            return;
+        }
+
         const [backupButton, backupSaveData] = this.getBackupButton();
 
         // Must modify these object when updating
@@ -653,6 +699,7 @@ class Update implements Saveable {
                                     this.automaticallyDownloadBackup(backupButton, { disableAutoDownloadBackupSaveOnUpdate: false });
                                     localStorage.removeItem(`player${Save.key}`);
                                     localStorage.removeItem(`save${Save.key}`);
+                                    localStorage.removeItem(`settings${Save.key}`);
                                     location.reload();
                                 }
                             });
@@ -792,7 +839,7 @@ class Update implements Saveable {
     getSettingsData() {
         let settingsData: any;
         try {
-            settingsData = JSON.parse(localStorage.settings);
+            settingsData = JSON.parse(localStorage.getItem(`settings${Save.key}`) || localStorage.settings);
         } catch (err) {
             console.warn('Error getting settings data', err);
         } finally {
@@ -802,7 +849,7 @@ class Update implements Saveable {
 
     setSettingsData(settingsData: any) {
         try {
-            localStorage.settings = JSON.stringify(settingsData);
+            localStorage.setItem(`settings${Save.key}`, JSON.stringify(settingsData));
         } catch (err) {
             console.error('Error setting settings data', err);
         }
