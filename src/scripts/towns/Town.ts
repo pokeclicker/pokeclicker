@@ -69,6 +69,21 @@ const pokeMartShop = new Shop([
     ItemList['LargeRestore'],
 ], 'Explorers Poké Mart');
 
+const DepartmentStoreShop = new Shop([
+    ItemList['Pokeball'],
+    ItemList['Greatball'],
+    ItemList['Ultraball'],
+    ItemList['xAttack'],
+    ItemList['xClick'],
+    ItemList['Lucky_egg'],
+    ItemList['Item_magnet'],
+    ItemList['Token_collector'],
+    ItemList['Lucky_incense'],
+    ItemList['SmallRestore'],
+    ItemList['MediumRestore'],
+    ItemList['LargeRestore'],
+], 'Department Store');
+
 //Kanto Shops
 const PewterCityShop = new TownShop([
     ItemList['Pokeball'],
@@ -92,7 +107,8 @@ const CeladonCityShop = new TownShop([
     ItemList['Jynx'],
     ItemList['Mr. Mime'],
     ItemList['Lickitung'],
-]);
+],   'Game Corner Shop');
+
 const SaffronCityShop = new TownShop([
     ItemList['Moon_stone'],
     ItemList['xClick'],
@@ -215,7 +231,7 @@ TownList['Celadon City'] = new Town(
     GameConstants.Region.kanto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
-        shops: [CeladonCityShop],
+        shops: [DepartmentStoreShop, CeladonCityShop],
         npcs: [BigSpender],
     }
 );
@@ -487,7 +503,7 @@ TownList['Goldenrod City'] = new Town(
     GameConstants.Region.johto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
-        shops: [GoldenrodCityShop, JohtoBerryMaster],
+        shops: [DepartmentStoreShop, GoldenrodCityShop, JohtoBerryMaster],
         npcs: [BigSpender],
     }
 );
@@ -823,7 +839,7 @@ TownList['LilyCove City'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
-        shops: [LilyCoveCityShop],
+        shops: [DepartmentStoreShop, LilyCoveCityShop],
         npcs: [BigSpender],
     }
 );
@@ -1189,7 +1205,7 @@ TownList['Veilstone City'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 215)],
-        shops: [VeilstoneCityShop],
+        shops: [DepartmentStoreShop, VeilstoneCityShop],
         npcs: [BigSpender],
     }
 );
@@ -1609,6 +1625,14 @@ TownList['Opelucid City'] = new Town(
         dungeon: dungeonList['Team Plasma Assault'],
     }
 );
+TownList['Shopping Mall Nine'] = new Town(
+    'Shopping Mall Nine',
+    GameConstants.Region.unova,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 9)],
+        shops: [DepartmentStoreShop],
+    }
+);
 TownList['Humilau City'] = new Town(
     'Humilau City',
     GameConstants.Region.unova,
@@ -1945,7 +1969,7 @@ TownList['Lumiose City'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
-        shops: [LumioseCityShop],
+        shops: [DepartmentStoreShop, LumioseCityShop],
         npcs: [LumioseEngineer],
     }
 );
@@ -2229,7 +2253,7 @@ TownList['Royal Avenue'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
-        shops: [RoyalAvenueShop],
+        shops: [DepartmentStoreShop, RoyalAvenueShop],
     }
 );
 TownList['Konikoni City'] = new Town(
