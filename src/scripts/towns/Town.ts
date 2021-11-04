@@ -661,20 +661,6 @@ const FortreeCityShop = new TownShop([
     ItemList['Ultraball'],
     ItemList['Leaf_stone'],
 ]);
-const LilyCoveCityShop = new TownShop([
-    ItemList['Pokeball'],
-    ItemList['Greatball'],
-    ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
-    ItemList['xAttack'],
-    ItemList['xClick'],
-    ItemList['Lucky_egg'],
-    ItemList['Token_collector'],
-    ItemList['Item_magnet'],
-    ItemList['Lucky_incense'],
-]);
 const MossdeepCityShop = new TownShop([
     ItemList['Beldum'],
     ItemList['Prism_scale'],
@@ -848,7 +834,7 @@ TownList['LilyCove City'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
-        shops: [DepartmentStoreShop, LilyCoveCityShop],
+        shops: [DepartmentStoreShop],
         npcs: [BigSpender],
     }
 );
