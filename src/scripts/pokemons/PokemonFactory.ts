@@ -26,7 +26,7 @@ class PokemonFactory {
         const id = basePokemon.id;
 
         // TODO this monster formula needs to be improved. Preferably with graphs :D
-        const maxHealth: number = PokemonFactory.routeHealth(route, region);
+        const maxHealth: number = Math.floor(0.001 * PokemonFactory.routeHealth(route, region) * basePokemon.hitpoints + 0.9 * PokemonFactory.routeHealth(route, region));
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const level: number = this.routeLevel(route, region);
