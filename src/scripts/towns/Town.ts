@@ -1018,20 +1018,6 @@ const SolaceonTownShop = new TownShop([
     ItemList['Shiny_stone'],
     ItemList['Spiritomb'],
 ]);
-const VeilstoneCityShop = new TownShop([
-    ItemList['Pokeball'],
-    ItemList['Greatball'],
-    ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
-    ItemList['xAttack'],
-    ItemList['xClick'],
-    ItemList['Lucky_egg'],
-    ItemList['Token_collector'],
-    ItemList['Item_magnet'],
-    ItemList['Lucky_incense'],
-]);
 const CelesticTownShop = new TownShop([
     ItemList['Dragon_egg'],
 ]);
@@ -1200,7 +1186,7 @@ TownList['Veilstone City'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 215)],
-        shops: [DepartmentStoreShop, VeilstoneCityShop],
+        shops: [DepartmentStoreShop],
         npcs: [BigSpender],
     }
 );
@@ -1467,20 +1453,6 @@ const LentimasTownShop = new TownShop([
 const LacunosaTownShop = new TownShop([
     ItemList['Fighting_egg'],
 ]);
-const OpelucidCityShop = new TownShop([
-    ItemList['Pokeball'],
-    ItemList['Greatball'],
-    ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
-    ItemList['xAttack'],
-    ItemList['xClick'],
-    ItemList['Lucky_egg'],
-    ItemList['Token_collector'],
-    ItemList['Item_magnet'],
-    ItemList['Lucky_incense'],
-]);
 const IcirrusCityShop = new TownShop([
     ItemList['Dragon_egg'],
 ]);
@@ -1616,7 +1588,6 @@ TownList['Opelucid City'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 11)],
-        shops: [OpelucidCityShop],
         dungeon: dungeonList['Team Plasma Assault'],
     }
 );
