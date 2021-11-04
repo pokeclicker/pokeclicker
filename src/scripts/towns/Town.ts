@@ -108,7 +108,16 @@ const CeladonCityShop = new TownShop([
     ItemList['Mr. Mime'],
     ItemList['Lickitung'],
 ],   'Game Corner Shop');
-
+const CeladonDepartmentStoreShop = new Shop([
+    ItemList['Pokeball'],
+    ItemList['Greatball'],
+    ItemList['xAttack'],
+    ItemList['xClick'],
+    ItemList['Lucky_egg'],
+    ItemList['Item_magnet'],
+    ItemList['Token_collector'],
+    ItemList['Lucky_incense'],
+], 'Department Store');
 const SaffronCityShop = new TownShop([
     ItemList['Moon_stone'],
     ItemList['xClick'],
@@ -231,7 +240,7 @@ TownList['Celadon City'] = new Town(
     GameConstants.Region.kanto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
-        shops: [DepartmentStoreShop, CeladonCityShop],
+        shops: [CeladonDepartmentStoreShop, CeladonCityShop],
         npcs: [BigSpender],
     }
 );
