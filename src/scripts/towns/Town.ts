@@ -2152,20 +2152,6 @@ const PaniolaTownShop = new TownShop([
     ItemList['Fire_egg'],
     ItemList['Water_egg'],
 ]);
-const RoyalAvenueShop = new TownShop([
-    ItemList['Pokeball'],
-    ItemList['Greatball'],
-    ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
-    ItemList['xAttack'],
-    ItemList['xClick'],
-    ItemList['Lucky_egg'],
-    ItemList['Token_collector'],
-    ItemList['Item_magnet'],
-    ItemList['Lucky_incense'],
-]);
 const KonikoniCityShop = new TownShop([
     ItemList['Soothe_bell'],
     ItemList['Trade_stone'],
@@ -2229,7 +2215,7 @@ TownList['Royal Avenue'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
-        shops: [DepartmentStoreShop, RoyalAvenueShop],
+        shops: [DepartmentStoreShop],
     }
 );
 TownList['Konikoni City'] = new Town(
