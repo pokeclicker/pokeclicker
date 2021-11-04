@@ -385,14 +385,10 @@ const AzaleaTownShop = new TownShop([
     ItemList['Kings_rock'],
     ItemList['Grass_egg'],
 ]);
-const GoldenrodCityShop = new TownShop([
-    ItemList['Sun_stone'],
-    ItemList['Upgrade'],
-    ItemList['Soothe_bell'],
-]);
 const EcruteakCityShop = new TownShop([
     ItemList['Greatball'],
     ItemList['Fire_egg'],
+    ItemList['Soothe_bell'],
 ]);
 const OlivineCityShop = new TownShop([
     ItemList['Metal_coat'],
@@ -402,9 +398,11 @@ const OlivineCityShop = new TownShop([
 const CianwoodCityShop = new TownShop([
     ItemList['Ultraball'],
     ItemList['Fighting_egg'],
+    ItemList['Sun_stone'],
 ]);
 const MahoganyTownShop = new TownShop([
     ItemList['Fighting_egg'],
+    ItemList['Upgrade'],
 ]);
 const BlackthornCityShop = new TownShop([
     ItemList['LargeRestore'],
@@ -512,7 +510,7 @@ TownList['Goldenrod City'] = new Town(
     GameConstants.Region.johto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
-        shops: [DepartmentStoreShop, GoldenrodCityShop, JohtoBerryMaster],
+        shops: [DepartmentStoreShop, JohtoBerryMaster],
         npcs: [BigSpender],
     }
 );
@@ -1838,7 +1836,6 @@ const SantaluneCityShop = new TownShop([
     ItemList['Mystery_egg'],
 ]);
 const LumioseCityShop = new TownShop([
-    ItemList['Greatball'],
     ItemList['Electric_egg'],
 ]);
 const AmbretteTownShop = new TownShop([
