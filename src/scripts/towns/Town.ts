@@ -1848,9 +1848,6 @@ const VanivilleTownShop = new TownShop([
 const SantaluneCityShop = new TownShop([
     ItemList['Mystery_egg'],
 ]);
-const LumioseCityShop = new TownShop([
-    ItemList['Electric_egg'],
-]);
 const AmbretteTownShop = new TownShop([
     ItemList['Water_egg'],
 ]);
@@ -1945,7 +1942,7 @@ TownList['Lumiose City'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
-        shops: [DepartmentStoreShop, LumioseCityShop],
+        shops: [DepartmentStoreShop],
         npcs: [LumioseEngineer],
     }
 );
