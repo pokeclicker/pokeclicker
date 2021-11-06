@@ -1624,7 +1624,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 15', GameConstants.Region.alola, 15,
     new RoutePokemon({
-        land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Gumshoos'],
+        land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Gumshoos', 'Sandygast'],
         water: ['Tentacruel', 'Magikarp', 'Clamperl', 'Finneon', 'Wishiwashi (Solo)', 'Bruxish'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))]

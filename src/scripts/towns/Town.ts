@@ -2162,6 +2162,7 @@ const ExeggutorIslandShop = new TownShop([
 ]);
 const AltaroftheSunneandMooneShop = new TownShop([
     ItemList['Poipole'],
+    ItemList['Cosmog'],
 ]);
 
 //Alola Towns
