@@ -35,6 +35,7 @@ import LevelType, { levelRequirements } from './party/LevelType';
 import WalletClasses from './wallet/inject';
 import GenericProxy from './utilities/GenericProxy';
 import { SpriteCredits, CodeCredits } from './Credits';
+import * as modalUtils from './utilities/Modal';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -76,4 +77,5 @@ Object.assign(<any>window, {
     GenericProxy,
     SpriteCredits,
     CodeCredits,
+    modalUtils,
 });
