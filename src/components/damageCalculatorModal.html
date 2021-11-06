@@ -15,6 +15,7 @@
 aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
+        <!-- ko if: modalUtils.observableState['damageCalculatorModal'] === 'show' -->
         <div class="modal-header">
             <h5 class="modal-title" id="damageCalculatorModalLabel">Damage Calculator</h5>
             <button type="button" class="btn btn-info"
@@ -108,6 +109,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
        <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
        </div>
+       <!-- /ko -->
    </div>
 </div>
 </div>
