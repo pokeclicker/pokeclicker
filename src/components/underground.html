@@ -208,7 +208,7 @@
                         placement:'top',
                         html: true,
                     }">
-                    <span>Total net worth: <b><span data-bind="text: Underground.getDiamondNetWorth()">-</span></b></span>
+                    <span>Total net worth: <b><span data-bind="text: Underground.getDiamondNetWorth().toLocaleString('en-US')">-</span></b></span>
                     <img src='assets/images/underground/diamond.svg' width="20px'">
                 </button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

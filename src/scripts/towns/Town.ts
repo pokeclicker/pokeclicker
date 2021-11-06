@@ -1213,10 +1213,7 @@ TownList['Celestic Town'] = new Town(
     'Celestic Town',
     GameConstants.Region.sinnoh,
     {
-        requirements: [
-            new RouteKillRequirement(10, GameConstants.Region.sinnoh, 210),
-            new GymBadgeRequirement(BadgeEnums.Fen),
-        ],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Fen)],
         shops: [CelesticTownShop],
     }
 );
@@ -1348,50 +1345,32 @@ TownList['Mt. Coronet North'] = new DungeonTown(
 TownList['Distortion World'] = new DungeonTown(
     'Distortion World',
     GameConstants.Region.sinnoh,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.sinnoh, 214),
-        new GymBadgeRequirement(BadgeEnums.Icicle),
-    ]
+    [new GymBadgeRequirement(BadgeEnums.Icicle)]
 );
 TownList['Lake Valor'] = new DungeonTown(
     'Lake Valor',
     GameConstants.Region.sinnoh,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.sinnoh, 213),
-        new GymBadgeRequirement(BadgeEnums.Icicle),
-    ]
+    [new GymBadgeRequirement(BadgeEnums.Icicle)]
 );
 TownList['Lake Verity'] = new DungeonTown(
     'Lake Verity',
     GameConstants.Region.sinnoh,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.sinnoh, 201),
-        new GymBadgeRequirement(BadgeEnums.Icicle),
-    ]
+    [new GymBadgeRequirement(BadgeEnums.Icicle)]
 );
 TownList['Lake Acuity'] = new DungeonTown(
     'Lake Acuity',
     GameConstants.Region.sinnoh,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.sinnoh, 217),
-        new GymBadgeRequirement(BadgeEnums.Icicle),
-    ]
+    [new GymBadgeRequirement(BadgeEnums.Icicle)]
 );
 TownList['Victory Road Sinnoh'] = new DungeonTown(
     'Victory Road Sinnoh',
     GameConstants.Region.sinnoh,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.sinnoh, 223),
-        new GymBadgeRequirement(BadgeEnums.Beacon),
-    ]
+    [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 223)]
 );
 TownList['Spear Pillar'] = new DungeonTown(
     'Spear Pillar',
     GameConstants.Region.sinnoh,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.sinnoh, 211),
-        new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion),
-    ]
+    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
 );
 TownList['Hall of Origin'] = new DungeonTown(
     'Hall of Origin',
@@ -1419,18 +1398,12 @@ TownList['Flower Paradise'] = new DungeonTown(
 TownList['Stark Mountain'] = new DungeonTown(
     'Stark Mountain',
     GameConstants.Region.sinnoh,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.sinnoh, 227),
-        new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion),
-    ]
+    [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 227)]
 );
 TownList['Snowpoint Temple'] = new DungeonTown(
     'Snowpoint Temple',
     GameConstants.Region.sinnoh,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.sinnoh, 217),
-        new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion),
-    ]
+    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
 );
 
 //Unova Shops
@@ -2172,6 +2145,7 @@ const ExeggutorIslandShop = new TownShop([
 ]);
 const AltaroftheSunneandMooneShop = new TownShop([
     ItemList['Poipole'],
+    ItemList['Cosmog'],
 ]);
 
 //Alola Towns
