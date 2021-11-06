@@ -57,6 +57,7 @@ Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons:',
         new SettingOption('×10, ÷10', 'multiplication'),
     ],
     'original'));
+Settings.add(new BooleanSetting('resetShopAmountOnPurchase', 'Reset buy quantity after each purchase', true));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
 Settings.add(new BooleanSetting('hideChallengeRelatedModules', 'Hide challenge related modules', false));
 Settings.add(new Setting<string>('backgroundImage', 'Background image:',
@@ -99,7 +100,6 @@ Settings.add(new CssVariableSetting('completed', 'Map Color Completed Location',
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
 Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web workers for game ticks (more consistent game speed)', true));
-Settings.add(new BooleanSetting('resetShopAmountOnPurchase', 'Reset buy quantity after each purchase', true));
 
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((sound) => {
