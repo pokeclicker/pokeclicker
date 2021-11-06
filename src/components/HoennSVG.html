@@ -782,6 +782,30 @@
         })
      %>
 
+     <%- include('templates/mapPOI',
+        { name: "Underground Entrance"
+        , x: 32, y: 13
+        , width: 3, height: 4
+        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Farm"
+        , x: 45, y: 21
+        , width: 3, height: 3
+        , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Pokemon Day Care"
+        , x: 18, y: 27
+        , width: 4, height: 4
+        , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
 
 
 </g>
