@@ -11,6 +11,7 @@ class Game {
     // Features
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
+    private worker: Worker;
 
     /**
      * TODO(@Isha) pass all features through the constructor
@@ -145,6 +146,17 @@ class Game {
                 App.game.quests.getQuestLine('Tutorial Quests').beginQuest(App.game.quests.getQuestLine('Tutorial Quests').curQuest());
             }
         }
+        // Battle Frontier not accessable (chances are people broke this themselves, but whatever...)
+        if (App.game.quests.getQuestLine('Mystery of Deoxys').state() == QuestLineState.inactive) {
+            if (App.game.statistics.battleFrontierHighestStageCompleted() >= 100) {
+                // Defeated stage 100, has obtained deoxys
+                App.game.quests.getQuestLine('Mystery of Deoxys').state(QuestLineState.ended);
+            } else if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Wallace')]() >= 1) {
+                // Has defeated the Hoenn champion, Quest is started
+                App.game.quests.getQuestLine('Mystery of Deoxys').state(QuestLineState.started);
+                App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest(App.game.quests.getQuestLine('Mystery of Deoxys').curQuest());
+            }
+        }
     }
 
     start() {
@@ -152,7 +164,22 @@ class Game {
         if (player.starter() === GameConstants.Starter.None) {
             StartSequenceRunner.start();
         }
-        this.interval = setInterval(this.gameTick.bind(this), GameConstants.TICK_TIME);
+
+        let workerSupported = true;
+
+        try {
+            console.log('starting web worker...');
+            const blob = new Blob([`setInterval(() => postMessage('tick'), ${GameConstants.TICK_TIME})`]);
+            const blobURL = window.URL.createObjectURL(blob);
+
+            this.worker = new Worker(blobURL);
+            // use a setTimeout to queue the event
+            this.worker?.addEventListener('message', () => Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null);
+        } catch (e) {
+            workerSupported = false;
+        }
+
+        this.interval = setInterval(() => !this.worker || !Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null, GameConstants.TICK_TIME);
     }
 
     stop() {

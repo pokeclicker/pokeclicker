@@ -1161,7 +1161,7 @@ export type PokemonNameType
     | 'Spectrier'
     | 'Calyrex'
     | 'Ice Rider Calyrex'
-    | 'Ghost Rider Calyrex'
+    | 'Shadow Rider Calyrex'
     | 'MissingNo.'
     | 'Flying Pikachu'
     | 'Surfing Pikachu'
