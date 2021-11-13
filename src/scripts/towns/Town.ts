@@ -2466,6 +2466,7 @@ TownList['Resolution Cave'] = new DungeonTown(
     [
         new ObtainedPokemonRequirement(pokemonMap.Stakataka,5),
         new ObtainedPokemonRequirement(pokemonMap.Blacephalon,5),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Poni Meadow')),
     ]
 );
 //Galar Shops
