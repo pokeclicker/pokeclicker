@@ -1197,7 +1197,7 @@ gymList['Iki Town'] = new Gym(
         new GymPokemon('Makuhita', 2462000, 15),
         new GymPokemon('Crabrawler', 2462000, 16),
     ],
-    BadgeEnums.MelemeleKahuna,
+    BadgeEnums.FightiniumZ,
     128000,
     'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))]
@@ -1210,7 +1210,7 @@ gymList['Konikoni City'] = new Gym(
         new GymPokemon('Lileep', 2462000, 27),
         new GymPokemon('Lycanroc (Midnight)', 2462000, 28),
     ],
-    BadgeEnums.AkalaKahuna,
+    BadgeEnums.RockiumZ,
     128000,
     'How lovely.',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 9)]
@@ -1222,7 +1222,7 @@ gymList['Aether Paradise'] = new Gym(
     BadgeEnums.Elite_Nihilego,
     128000,
     'The creature escaped back into the ultra wormhole.',
-    [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)]
+    [new GymBadgeRequirement(BadgeEnums.RockiumZ)]
 );
 gymList['Malie City'] = new Gym(
     'Nanu',
@@ -1232,7 +1232,7 @@ gymList['Malie City'] = new Gym(
         new GymPokemon('Krokorok', 2462000, 43),
         new GymPokemon('Alolan Persian', 2462000, 44),
     ],
-    BadgeEnums.UlaulaKahuna,
+    BadgeEnums.DarkiniumZ,
     128000,
     'Hmph...',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))]
@@ -1244,7 +1244,7 @@ gymList['Altar of the Sunne and Moone'] = new Gym(
     BadgeEnums.Elite_UltraNecrozma,
     128000,
     'Necrozma fled. It left something behind.',
-    [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)]
+    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)]
 );
 gymList['Seafolk Village'] = new Gym(
     'Mina',
@@ -1254,7 +1254,7 @@ gymList['Seafolk Village'] = new Gym(
         new GymPokemon('Granbull', 2462000, 51),
         new GymPokemon('Ribombee', 2462000, 51),
     ],
-    BadgeEnums.MinaTrail,
+    BadgeEnums.FairiumZ,
     128000,
     'Woah! I\'m shocked at your strength!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Nebby'))]
@@ -1268,10 +1268,10 @@ gymList['Exeggutor Island'] = new Gym(
         new GymPokemon('Flygon', 2462000, 53),
         new GymPokemon('Mudsdale', 2462000, 54),
     ],
-    BadgeEnums.PoniKahuna,
+    BadgeEnums.GroundiumZ,
     128000,
     'You have succeeded in your final grand trial!',
-    [new GymBadgeRequirement(BadgeEnums.MinaTrail)]
+    [new GymBadgeRequirement(BadgeEnums.FairiumZ)]
 );
 
 //Alola Elite 4
@@ -1289,7 +1289,7 @@ gymList['Elite Molayne'] = new Gym(
     BadgeEnums.Elite_Molayne,
     64000,
     'That Kukui... He certainly found an interesting Trainer for me to face!',
-    [new GymBadgeRequirement(BadgeEnums.PoniKahuna)]
+    [new GymBadgeRequirement(BadgeEnums.FairiumZ)]
 );
 gymList['Elite Olivia'] = new Gym(
     'Olivia',

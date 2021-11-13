@@ -1470,8 +1470,7 @@ Routes.add(new RegionRoute(
     'Alola Route 1', GameConstants.Region.alola, 1,
     new RoutePokemon({
         land: ['Caterpie', 'Alolan Rattata', 'Ledyba', 'Spinarak', 'Pichu', 'Buneary', 'Pikipek', 'Yungoos', 'Grubbin'],
-    }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)]
+    })
 ));
 Routes.add(new RegionRoute(
     'Route 1 Hau\'oli Outskirts', GameConstants.Region.alola, 18,
@@ -1521,7 +1520,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.MelemeleKahuna)]
+    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 5', GameConstants.Region.alola, 5,

@@ -42,7 +42,8 @@ class Dungeon {
         public bossList: Boss[],
         public tokenCost: number,
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
-        public level: number
+        public level: number,
+        public rewardFunction = () => {}
     ) { }
 
     public isUnlocked(): boolean {
@@ -3689,7 +3690,10 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
         new DungeonBossPokemon('Totem Alolan Raticate', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
         new DungeonBossPokemon('Totem Gumshoos', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35);
+    96500, 201, 35,
+    () => {
+        App.game.badgeCase.gainBadge(BadgeEnums.NormaliumZ);
+    });
 
 dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
     [
