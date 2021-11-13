@@ -1474,7 +1474,7 @@ dungeonList['Wayward Cave'] = new Dungeon('Wayward Cave',
     56500, 230, 100);
 
 dungeonList['Mt. Coronet South'] = new Dungeon('Mt. Coronet South',
-    [{pokemon: 'Clefairy', options: { weight: 2 }}, 'Zubat', 'Machop', 'Geodude', 'Nosepass', 'Meditite', 'Chingling', 'Bronzor', 'Magikarp', 'Barboach', 'Noctowl'],
+    [{pokemon: 'Clefairy', options: { weight: 2 }}, 'Zubat', 'Machop', 'Geodude', 'Cleffa', 'Nosepass', 'Meditite', 'Chingling', 'Bronzor', 'Magikarp', 'Barboach'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
     951500,
     [
@@ -1498,7 +1498,7 @@ dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
     62500, 209, 100);
 
 dungeonList['Iron Island'] = new Dungeon('Iron Island',
-    ['Tentacool', 'Wingull', 'Tentacruel', 'Pelipper', 'Finneon', 'Zubat', 'Geodude', 'Onix', 'Golbat', 'Graveler'],
+    ['Zubat', 'Golbat', 'Tentacool', 'Tentacruel', 'Geodude', 'Graveler', 'Onix', 'Wingull', 'Pelipper', 'Finneon'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     983000,
     [new DungeonBossPokemon('Steelix', 4210000, 100)],
@@ -1516,7 +1516,7 @@ dungeonList['Mt. Coronet North'] = new Dungeon('Mt. Coronet North',
     69500, 201, 20);
 
 dungeonList['Lake Verity'] = new Dungeon('Lake Verity',
-    ['Starly', 'Bidoof', 'Psyduck', 'Magikarp', 'Goldeen'],
+    ['Starly', 'Bidoof', 'Psyduck', 'Goldeen', 'Magikarp'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Item_magnet],
     1068735,
     [
@@ -1526,17 +1526,17 @@ dungeonList['Lake Verity'] = new Dungeon('Lake Verity',
     72500, 201, 5);
 
 dungeonList['Lake Valor'] = new Dungeon('Lake Valor',
-    ['Staravia', 'Bibarel', 'Psyduck', 'Golduck', 'Magikarp', 'Goldeen'],
+    ['Psyduck', 'Golduck', 'Goldeen', 'Magikarp', 'Staravia'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     1111500,
     [
-        new DungeonBossPokemon('Noctowl', 4960000, 35),
+        new DungeonBossPokemon('Bibarel', 4960000, 35),
         new DungeonBossPokemon('Azelf', 10060000, 35),
     ],
     74500, 201, 20);
 
 dungeonList['Lake Acuity'] = new Dungeon('Lake Acuity',
-    ['Sneasel', 'Bibarel', 'Psyduck', 'Golduck', 'Magikarp', 'Goldeen','Snover', 'Snorunt'],
+    ['Sneasel', 'Bibarel', 'Psyduck', 'Golduck', 'Magikarp', 'Goldeen', 'Snover', 'Snorunt'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_egg],
     1261800,
     [
@@ -1546,7 +1546,7 @@ dungeonList['Lake Acuity'] = new Dungeon('Lake Acuity',
     78000, 201, 25);
 
 dungeonList['Distortion World'] = new Dungeon('Distortion World',
-    ['Golbat', 'Gastly', 'Haunter', 'Duskull', 'Chingling', 'Bronzor', 'Chimecho'],
+    ['Golbat', 'Gastly', 'Haunter', 'Duskull', 'Chimecho', 'Chingling', 'Bronzor'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
     1322100,
     [
@@ -3857,7 +3857,7 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
     96500, 201, 35);
 
 dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
-    ['Metapod', 'Paras', 'Pinsir', 'Hoothoot', 'Bonsly', 'Trumbeak', 'Fomantis', 'Steenee', 'Comfey', 'Oranguru', 'Passimian'],
+    ['Metapod', 'Paras', 'Pinsir', 'Hoothoot', 'Bonsly', 'Trumbeak', 'Fomantis', 'Bounsweet', 'Steenee', 'Comfey', 'Oranguru', 'Passimian'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [

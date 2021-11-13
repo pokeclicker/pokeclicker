@@ -1894,6 +1894,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 15,
         },
+        'heldItem': {type: ItemType.item, id: 'Kings_rock'},
     },
     {
         'id': 79.1,
@@ -1912,7 +1913,6 @@ const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 15,
         },
-        'heldItem': {type: ItemType.item, id: 'Kings_rock'},
     },
     {
         'id': 80,
