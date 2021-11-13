@@ -4431,11 +4431,7 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
     ],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
-    [
-        new DungeonBossPokemon('Crobat', 8000000, 70),
-        new DungeonBossPokemon('Noivern', 8000000, 70),
-        new DungeonBossPokemon('Guzzlord', 8000000, 70),
-    ],
+    [new DungeonBossPokemon('Guzzlord', 8000000, 70)],
     96500, 201, 35);
 
 

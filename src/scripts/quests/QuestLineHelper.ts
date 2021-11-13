@@ -295,7 +295,21 @@ class QuestLineHelper {
         createUltraBeastQuest('Celesteela', ['Malie Garden'], [23], 'It has been spotted at Malie Garden and Haina Desert.', 2);
         createUltraBeastQuest('Blacephalon', [undefined], [27], 'It has been spotted at Poni Grove.', 5);
         createUltraBeastQuest('Stakataka', [undefined], [27], 'It has been spotted at Poni Grove.', 5);
-        createUltraBeastQuest('Guzzlord', ['Resolution Cave'], [undefined], 'It has been spotted at Resolution Cave.', 1);
+
+        const GuzzlordReward = () => {
+            Notifier.notify({ message: 'You caught all the Ultra Beasts!', type: NotificationConstants.NotificationOption.success });
+        };
+
+        const GuzzlordCatch = new CustomQuest(
+            1,
+            GuzzlordReward,
+            'Catch Guzzlord at Resolution Cave.',
+            () => App.game.statistics.pokemonCaptured[pokemonMap['Guzzlord'].id](),
+            0
+        );
+
+        UltraBeastQuestLine.addQuest(GuzzlordCatch);
+
         App.game.quests.questLines().push(UltraBeastQuestLine);
 
     }
