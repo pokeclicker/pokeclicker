@@ -1273,6 +1273,16 @@ gymList['Exeggutor Island'] = new Gym(
     'You have succeeded in your final grand trial!',
     [new GymBadgeRequirement(BadgeEnums.FairiumZ)]
 );
+//regular trials
+gymList['Verdant Cavern Normal Trial'] = new Gym(
+    'Some Totem Pokémon',
+    'Verdant Cavern',
+    [],
+    BadgeEnums.NormaliumZ,
+    128000,
+    'You have received the Normalium-Z!',
+    []
+);
 
 //Alola Elite 4
 //TODO: Balancing of elite Pokemon HP & rewards.
