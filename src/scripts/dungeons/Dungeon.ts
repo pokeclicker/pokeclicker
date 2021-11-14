@@ -3692,7 +3692,11 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
     ],
     96500, 201, 35,
     () => {
-        App.game.badgeCase.gainBadge(BadgeEnums.NormaliumZ);
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.NormaliumZ)) {
+            GymRunner.gymObservable(gymList['Verdant Cavern Normal Trial']);
+            App.game.badgeCase.gainBadge(BadgeEnums.NormaliumZ);
+            $('#receiveBadgeModal').modal('show');
+        }
     });
 
 dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
