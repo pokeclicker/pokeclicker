@@ -4414,7 +4414,7 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
     ],
     96500, 201, 35,
     () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.GhostiumZ)) {
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.DragoniumZ)) {
             GymRunner.gymObservable(gymList['Vast Poni Canyon Trial']);
             App.game.badgeCase.gainBadge(BadgeEnums.DragoniumZ);
             $('#receiveBadgeModal').modal('show');
