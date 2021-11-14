@@ -4412,7 +4412,14 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
         new DungeonBossPokemon('Kommo-o', 8000000, 70),
         new DungeonBossPokemon('Totem Kommo-o', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35);
+    96500, 201, 35,
+    () => {
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.GhostiumZ)) {
+            GymRunner.gymObservable(gymList['Vast Poni Canyon Trial']);
+            App.game.badgeCase.gainBadge(BadgeEnums.DragoniumZ);
+            $('#receiveBadgeModal').modal('show');
+        }
+    });
 
 dungeonList['Nebby'] = new Dungeon('Nebby',
     ['Clefable', 'Delcatty', 'Sunflora', 'Heliolisk', 'Lunatone', 'Solrock'],

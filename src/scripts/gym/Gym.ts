@@ -1328,6 +1328,15 @@ gymList['Acerola\'s Trial'] = new Gym(
     'You have received the Ghostium-Z!',
     []
 );
+gymList['Vast Poni Canyon Trial'] = new Gym(
+    'Hapu',
+    'Vast Poni Canyon',
+    [],
+    BadgeEnums.DragoniumZ,
+    128000,
+    'You have received the Dragonium-Z!',
+    []
+);
 
 //Alola Elite 4
 //TODO: Balancing of elite Pokemon HP & rewards.
