@@ -1275,7 +1275,7 @@ gymList['Exeggutor Island'] = new Gym(
 );
 //regular trials
 gymList['Verdant Cavern Normal Trial'] = new Gym(
-    'Some Totem Pokémon',
+    'Ilima',
     'Verdant Cavern',
     [],
     BadgeEnums.NormaliumZ,
