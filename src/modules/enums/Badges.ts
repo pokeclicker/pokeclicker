@@ -93,6 +93,8 @@ enum BadgeEnums {
     'GrassiumZ',
     'RockiumZ',
     'Elite_Nihilego',
+    'ElectriumZ',
+    'GhostiumZ',
     'DarkiniumZ',
     'Elite_UltraNecrozma',
     'FairiumZ',

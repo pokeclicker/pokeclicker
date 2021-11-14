@@ -4007,7 +4007,14 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
         new DungeonBossPokemon('Totem Vikavolt', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
         new DungeonBossPokemon('Totem Togedemaru', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35);
+    96500, 201, 35,
+    () => {
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.ElectriumZ)) {
+            GymRunner.gymObservable(gymList['Sophocles\' Trial']);
+            App.game.badgeCase.gainBadge(BadgeEnums.ElectriumZ);
+            $('#receiveBadgeModal').modal('show');
+        }
+    });
 
 dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
     ['Golbat', 'Gastly', 'Haunter', 'Gengar', 'Shuppet', 'Banette', 'Jellicent', 'Klefki'],
@@ -4017,7 +4024,14 @@ dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
         new DungeonBossPokemon('Mimikyu', 8000000, 70),
         new DungeonBossPokemon('Totem Mimikyu', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35);
+    96500, 201, 35,
+    () => {
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.GhostiumZ)) {
+            GymRunner.gymObservable(gymList['Acerola\'s Trial']);
+            App.game.badgeCase.gainBadge(BadgeEnums.GhostiumZ);
+            $('#receiveBadgeModal').modal('show');
+        }
+    });
 
 dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
     [
