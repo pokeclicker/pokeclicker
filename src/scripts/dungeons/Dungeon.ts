@@ -3992,7 +3992,8 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
             [
                 new GymPokemon('Golisopod', 32395730, 34),
                 new GymPokemon('Masquerain', 33254840, 34),
-            ], { weight: 1 }, 'Guzma'),
+            ],
+            { weight: 1 }, 'Guzma', '(guzma)'),
     ],
     96500, 201, 35);
 

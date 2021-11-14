@@ -2247,13 +2247,6 @@ TownList['Altar of the Sunne and Moone'] = new Town(
         shops: [AltaroftheSunneandMooneShop],
     }
 );
-TownList['Pokémon League Alola'] = new Town(
-    'Pokémon League Alola',
-    GameConstants.Region.alola,
-    {
-        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanakila'))],
-    }
-);
 
 //Alola Dungeons
 TownList['Trainers\' School'] = new DungeonTown(
