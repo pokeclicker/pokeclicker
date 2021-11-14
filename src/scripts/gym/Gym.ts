@@ -1310,6 +1310,24 @@ gymList['Mallow\'s Trial'] = new Gym(
     'You have received the Grassium-Z!',
     []
 );
+gymList['Sophocles\' Trial'] = new Gym(
+    'Sophocles',
+    'Hokulani Observatory',
+    [],
+    BadgeEnums.ElectriumZ,
+    128000,
+    'You have received the Electrium-Z!',
+    []
+);
+gymList['Acerola\'s Trial'] = new Gym(
+    'Acerola',
+    'Thrifty Megamart',
+    [],
+    BadgeEnums.GhostiumZ,
+    128000,
+    'You have received the Ghostium-Z!',
+    []
+);
 
 //Alola Elite 4
 //TODO: Balancing of elite Pokemon HP & rewards.

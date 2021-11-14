@@ -17,7 +17,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Youth Athlete (female)',
             'Rising Star (male)',
-            'Team Skull Boss Guzma',
+            'Team Skull Boss (guzma)',
             'Aether Foundation Employee (male)',
             'Aether Foundation Employee (female)',
             'Aether Branch Chief Faba',
@@ -28,6 +28,8 @@ export const SpriteCredits: Credit[] = [
             'Ikawe',
             'Mallow',
             'Olivia',
+            'Sophocles',
+            'Acerola',
             'Nanu',
             'Mina',
             'Hapu',
