@@ -3693,7 +3693,7 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
     96500, 201, 35,
     () => {
         if (!App.game.badgeCase.hasBadge(BadgeEnums.NormaliumZ)) {
-            GymRunner.gymObservable(gymList['Verdant Cavern Normal Trial']);
+            GymRunner.gymObservable(gymList['Ilima\'s Trial']);
             App.game.badgeCase.gainBadge(BadgeEnums.NormaliumZ);
             $('#receiveBadgeModal').modal('show');
         }
@@ -3834,7 +3834,14 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
         new DungeonBossPokemon('Totem Wishiwashi (School)', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
         new DungeonBossPokemon('Totem Araquanid', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35);
+    96500, 201, 35,
+    () => {
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.WateriumZ)) {
+            GymRunner.gymObservable(gymList['Lana\'s Trial']);
+            App.game.badgeCase.gainBadge(BadgeEnums.WateriumZ);
+            $('#receiveBadgeModal').modal('show');
+        }
+    });
 
 dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
     [
@@ -3862,7 +3869,14 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
         new DungeonBossPokemon('Totem Alolan Marowak', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
         new DungeonBossPokemon('Totem Salazzle', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35);
+    96500, 201, 35,
+    () => {
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.FiriumZ)) {
+            GymRunner.gymObservable(gymList['Ikawe\'s Trial']);
+            App.game.badgeCase.gainBadge(BadgeEnums.FiriumZ);
+            $('#receiveBadgeModal').modal('show');
+        }
+    });
 
 dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
     ['Metapod', 'Paras', 'Pinsir', 'Hoothoot', 'Bonsly', 'Trumbeak', 'Fomantis', 'Bounsweet', 'Steenee', 'Comfey', 'Oranguru', 'Passimian'],
@@ -3872,7 +3886,14 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
         new DungeonBossPokemon('Lurantis', 8000000, 70),
         new DungeonBossPokemon('Totem Lurantis', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35);
+    96500, 201, 35,
+    () => {
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.GrassiumZ)) {
+            GymRunner.gymObservable(gymList['Mallow\'s Trial']);
+            App.game.badgeCase.gainBadge(BadgeEnums.GrassiumZ);
+            $('#receiveBadgeModal').modal('show');
+        }
+    });
 
 dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
     [

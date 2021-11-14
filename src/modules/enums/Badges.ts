@@ -88,6 +88,9 @@ enum BadgeEnums {
     // TODO: these are unordered and some may be missing
     'NormaliumZ',
     'FightiniumZ',
+    'WateriumZ',
+    'FiriumZ',
+    'GrassiumZ',
     'RockiumZ',
     'Elite_Nihilego',
     'DarkiniumZ',

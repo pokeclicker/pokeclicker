@@ -1273,14 +1273,41 @@ gymList['Exeggutor Island'] = new Gym(
     'You have succeeded in your final grand trial!',
     [new GymBadgeRequirement(BadgeEnums.FairiumZ)]
 );
-//regular trials
-gymList['Verdant Cavern Normal Trial'] = new Gym(
+//trials
+gymList['Ilima\'s Trial'] = new Gym(
     'Ilima',
     'Verdant Cavern',
     [],
     BadgeEnums.NormaliumZ,
     128000,
     'You have received the Normalium-Z!',
+    []
+);
+gymList['Lana\'s Trial'] = new Gym(
+    'Lana',
+    'Brooklet Hill',
+    [],
+    BadgeEnums.WateriumZ,
+    128000,
+    'You have received the Waterium-Z!',
+    []
+);
+gymList['Ikawe\'s Trial'] = new Gym(
+    'Ikawe',
+    'Wela Volcano Park',
+    [],
+    BadgeEnums.FiriumZ,
+    128000,
+    'You have received the Firium-Z!',
+    []
+);
+gymList['Mallow\'s Trial'] = new Gym(
+    'Mallow',
+    'Lush Jungle',
+    [],
+    BadgeEnums.GrassiumZ,
+    128000,
+    'You have received the Grassium-Z!',
     []
 );
 
