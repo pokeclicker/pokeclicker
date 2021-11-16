@@ -136,7 +136,7 @@ class Dungeon {
             if (typeof loot === 'string') {
                 return 3;
             } else {
-                return (Math.pow(10,Math.pow(10,(<DetailedLoot>loot).weight)) / (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1) + 1) ?? 1;
+                return 10 * Math.pow(10,(<DetailedLoot>loot).weight) / (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1) + 1 ?? 1;
             }
         });
     }
