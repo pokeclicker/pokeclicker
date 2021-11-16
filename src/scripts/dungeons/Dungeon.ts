@@ -134,7 +134,7 @@ class Dungeon {
     get lootWeightList(): number[] {
         return this.itemList.map((loot) => {
             if (typeof loot === 'string') {
-                return 3;
+                return 10000 / (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1) + 1 ?? 1;
             } else {
                 return 10 * Math.pow(10,(<DetailedLoot>loot).weight) / (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1) + 1 ?? 1;
             }
@@ -290,11 +290,10 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
             ], { weight: 1 }, 'Charlie'),
     ],
     [
-        {loot: 'xAttack', weight: 3},
-        {loot: 'Grass_egg', weight: 1},
-        {loot: 'Cheri', weight: 2},
         {loot: 'Pokeball', weight: 3},
-        {loot: 'Insect Plate', weight: 0},
+        {loot: 'xAttack', weight: 2},
+        {loot: 'SmallRestore', weight: 1},
+        {loot: 'Leaf_stone', weight: 0},
     ],
     102,
     [
@@ -308,7 +307,11 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
 
 dungeonList['Digletts Cave'] = new Dungeon('Digletts Cave',
     ['Diglett'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_incense],
+    [
+        {loot: 'xClick', weight: 3},
+        {loot: 'Max Revive', weight: 2},
+        {loot: 'Passho', weight: 0},
+    ],
     1208,
     [new DungeonBossPokemon('Dugtrio', 6040, 31)],
     95, 2, 22
@@ -379,7 +382,15 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
                 new GymPokemon('Zubat', 75, 13),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    [GameConstants.BattleItemType.xAttack],
+    [
+        {loot: 'xClick', weight: 3},
+        {loot: 'Greatball', weight: 2},
+        {loot: 'SmallRestore', weight: 1},
+        {loot: 'Star Piece', weight: 1},
+        {loot: 'Moon_stone', weight: 1},
+        {loot: 'Helix Fossil', weight: 0},
+        {loot: 'Dome Fossil', weight: 0},
+    ],
     834,
     [
         new DungeonBossPokemon('Kabuto', 4170, 12, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Moon'))}),
@@ -473,7 +484,16 @@ dungeonList['Rock Tunnel'] = new Dungeon('Rock Tunnel',
                 new GymPokemon('Pidgey', 500, 20),
             ], { weight: 1 }, 'Dana'),
     ],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Item_magnet],
+    [
+        {loot: 'xClick', weight: 3},
+        {loot: 'Pokeball', weight: 3},
+        {loot: 'Revive', weight: 2},
+        {loot: 'Greatball', weight: 2},
+        {loot: 'MediumRestore', weight: 1},
+        {loot: 'Oval Stone', weight: 1},
+        {loot: 'Heart Scale', weight: 0},
+        {loot: 'Star Piece', weight: 0},
+    ],
     4117,
     [
         new DungeonBossPokemon('Onix', 20585, 17),
@@ -490,7 +510,14 @@ dungeonList['Rock Tunnel'] = new Dungeon('Rock Tunnel',
 
 dungeonList['Power Plant'] = new Dungeon('Power Plant',
     ['Pikachu', 'Raichu', 'Magnemite', 'Magneton', 'Grimer', 'Muk', 'Voltorb', 'Electrode'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
+    [
+        {loot: 'xClick', weight: 3},
+        {loot: 'Max Revive', weight: 2},
+        {loot: 'Thunder_stone', weight: 1},
+        {loot: 'Metal_coat', weight: 1},
+        {loot: 'Electirizer', weight: 0},
+        //TODO: Make Electrode an encounter from Loot
+    ],
     13507,
     [
         new DungeonBossPokemon('Electabuzz', 67535, 35),
@@ -567,7 +594,16 @@ dungeonList['Pokemon Tower'] = new Dungeon('Pokemon Tower',
                 new GymPokemon('Zubat', 750, 23),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [
+        {loot: 'xAttack', weight: 3},
+        {loot: 'Greatball', weight: 2},
+        {loot: 'MediumRestore', weight: 1},
+        {loot: 'Star Piece', weight: 1},
+        {loot: 'Revive', weight: 1},
+        {loot: 'Ultraball', weight: 1},
+        {loot: 'LargeRestore', weight: 0},
+        {loot: 'Soothe_bell', weight: 0},
+    ],
     7523,
     [new DungeonBossPokemon('Marowak', 37615, 30)],
     750, 10, 20
@@ -575,7 +611,12 @@ dungeonList['Pokemon Tower'] = new Dungeon('Pokemon Tower',
 
 dungeonList['Seafoam Islands'] = new Dungeon('Seafoam Islands',
     ['Zubat', 'Golbat', 'Goldeen', 'Poliwag', 'Magikarp', 'Slowpoke', 'Slowbro', 'Tentacool', 'Krabby', 'Kingler', 'Staryu'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_egg],
+    [
+        {loot: 'xClick', weight: 3},
+        {loot: 'Revive', weight: 2},
+        {loot: 'Water_Stone', weight: 1},
+        {loot: 'Ultraball', weight: 1},
+    ],
     17226,
     [
         new DungeonBossPokemon('Seel', 86130, 35),
@@ -630,7 +671,14 @@ dungeonList['Pokemon Mansion'] = new Dungeon('Pokemon Mansion',
                 new GymPokemon('Electrode', 1500, 34),
             ], { weight: 1 }, 'Ivan', '(male)'),
     ],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
+    [
+        {loot: 'xAttack', weight: 3},
+        {loot: 'Ultraball', weight: 2},
+        {loot: 'Fire_stone', weight: 1},
+        {loot: 'Max Revive', weight: 1},
+        {loot: 'Moon_stone', weight: 0},
+        {loot: 'Magmarizer', weight: 0},
+    ],
     17760,
     [new DungeonBossPokemon('Magmar', 88800, 40)],
     1500, 16, 35
@@ -719,7 +767,15 @@ dungeonList['Victory Road'] = new Dungeon('Victory Road',
                 new GymPokemon('Parasect', 2000, 42),
             ], { weight: 1 }, 'Caroline', '(female)'),
     ],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [
+        {loot: 'xAttack', weight: 3},
+        {loot: 'SmallRestore', weight: 2},
+        {loot: 'Ultraball', weight: 2},
+        {loot: 'Max Revive', weight: 1},
+        {loot: 'Star Piece', weight: 1},
+        {loot: 'Leaf_stone', weight: 0},
+        {loot: 'Heart Scale', weight: 0},
+    ],
     24595,
     [
         new DungeonBossPokemon('Machoke', 122975, 42),
@@ -735,7 +791,19 @@ dungeonList['Victory Road'] = new Dungeon('Victory Road',
 
 dungeonList['Cerulean Cave'] = new Dungeon('Cerulean Cave',
     ['Arbok', 'Raichu', 'Sandslash', 'Golbat', 'Gloom', 'Parasect', 'Venomoth', 'Weepinbell', 'Graveler', 'Ditto', 'Chansey', 'Magikarp', 'Poliwag', 'Goldeen', 'Seaking'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
+    [
+        {loot: 'Pokeball', weight: 3},
+        {loot: 'Greatball', weight: 2},
+        {loot: 'Ultraball', weight: 2},
+        {loot: 'Max Revive', weight: 1},
+        {loot: 'LargeRestore', weight: 1},
+        {loot: 'Old Amber', weight: 1},
+        {loot: 'Dusk_stone', weight: 0},
+        {loot: 'Protein', weight: 0},
+        {loot: 'Old Amber', weight: 0},
+        {loot: 'Helix Fossil', weight: 0},
+        {loot: 'Dome Fossil', weight: 0},
+    ],
     28735,
     [
         new DungeonBossPokemon('Rhydon', 183675, 60),
