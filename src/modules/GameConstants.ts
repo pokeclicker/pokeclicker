@@ -848,7 +848,7 @@ export const GalarGyms = [
     'Turffield',
     'Hulbury',
     'Motostoke',
-    'Stow-On-Side',
+    'Stow-on-Side',
     'Ballonlea',
     'Circhester',
     'Spikemuth',
