@@ -326,7 +326,7 @@ class Plot implements Saveable {
             this.notifications.push(FarmNotificationType.Withered);
 
             // Check for Kasib berry mutation/replant chance
-            if (App.game.farming.highestUnlockedBerry() > BerryType.Occa) {
+            if (App.game.farming.highestUnlockedBerry() >= BerryType.Occa) {
                 if (!App.game.farming.berryInFarm(BerryType.Colbur)) {
                     if (Math.random() < 0.05) {
                         this.notifications.push(FarmNotificationType.Mutated);
