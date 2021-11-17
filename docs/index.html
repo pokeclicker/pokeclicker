@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.8.9"></script>
+    <script src="scripts/modules.min.js?v=0.8.10"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.8.9"></script>
+    <script src="scripts/script.min.js?v=0.8.10"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.8.9" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.8.10" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -1181,7 +1181,7 @@
                                         attr: { class: Gym.calculateCssClass($data)}">
                             E4 Leader
                         </button>
-                        <button class="btn btn-info p-0"
+                        <button class="btn btn-info p-0 btn-gym-auto-restart"
                             data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex($data.town)]() >= 100,
                             tooltip: { html: true, title: `Auto restart Elite 4 fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${($data.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive money for clearing the gym</i>`, trigger: 'hover', placement:'right' },
                             click: () => GymRunner.startGym($data, true)">
@@ -1196,7 +1196,7 @@
                             onclick="GymRunner.startGym(player.town().gym)">
                         Gym
                     </button>
-                    <button class="btn btn-info p-0" data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town().gym.town)]() >= 100, tooltip: { html: true, title: `Auto restart Gym fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${(player.town().gym.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive money for clearing the gym</i>`, trigger: 'hover', placement:'right' }"
+                    <button class="btn btn-info p-0 btn-gym-auto-restart" data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town().gym.town)]() >= 100, tooltip: { html: true, title: `Auto restart Gym fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${(player.town().gym.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive money for clearing the gym</i>`, trigger: 'hover', placement:'right' }"
                             onclick="GymRunner.startGym(player.town().gym, true)">
                         ↻
                     </button>
@@ -3535,11 +3535,11 @@
 
 <rect class="city"
     data-town="Slowpoke Well" 
-    x="496"
-    y="912"
-    height="16"
-    width="16"
-    data-bind="click:function(){MapHelper.moveToTown('Azalea Town')},
+    x="512"
+    y="832"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Slowpoke Well')},
         attr: { class: MapHelper.calculateTownCssClass('Slowpoke Well') }">
 </rect>
 
@@ -3735,6 +3735,39 @@
     height="64"
     width="48"
     data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Olivine City&#39;) }">
+</rect>
+
+     
+
+<rect class="city"
+    data-town="Underground Entrance" 
+    x="624"
+    y="464"
+    height="64"
+    width="48"
+    data-bind="click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
+
+     
+
+<rect class="city"
+    data-town="Farm" 
+    x="576"
+    y="224"
+    height="48"
+    width="48"
+    data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
+
+     
+
+<rect class="city"
+    data-town="Pokemon Day Care" 
+    x="448"
+    y="608"
+    height="64"
+    width="64"
+    data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
 </g>
@@ -5292,6 +5325,39 @@
     height="32"
     width="48"
     data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Slateport City&#39;) }">
+</rect>
+
+     
+
+<rect class="city"
+    data-town="Underground Entrance" 
+    x="512"
+    y="208"
+    height="64"
+    width="48"
+    data-bind="click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
+
+     
+
+<rect class="city"
+    data-town="Farm" 
+    x="720"
+    y="336"
+    height="48"
+    width="48"
+    data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
+
+     
+
+<rect class="city"
+    data-town="Pokemon Day Care" 
+    x="288"
+    y="432"
+    height="64"
+    width="64"
+    data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
 
@@ -6852,6 +6918,39 @@
     width="48"
     data-bind="click: function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Canalave City&#39;) }">
 </rect>
+
+     
+
+<rect class="city"
+    data-town="Underground Entrance" 
+    x="912"
+    y="608"
+    height="64"
+    width="48"
+    data-bind="click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
+
+     
+
+<rect class="city"
+    data-town="Farm" 
+    x="1072"
+    y="592"
+    height="48"
+    width="48"
+    data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
+
+     
+
+<rect class="city"
+    data-town="Pokemon Day Care" 
+    x="784"
+    y="560"
+    height="64"
+    width="64"
+    data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
@@ -7785,6 +7884,21 @@
         ">
 </rect>
 
+    <!--Shopping Mall Nine-->
+    
+
+<rect class="city"
+    data-town="Shopping Mall Nine" 
+    x="672"
+    y="112"
+    height="96"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Shopping Mall Nine')},
+        attr: { class: MapHelper.calculateTownCssClass('Shopping Mall Nine') },
+        ">
+</rect>
+
     <!--Lacunosa Town-->
     
 
@@ -8027,10 +8141,10 @@
 <rect class="city"
     data-town="Castelia Sewers" 
     x="896"
-    y="832"
-    height="16"
-    width="16"
-    data-bind="click:function(){MapHelper.moveToTown('Castelia City')},
+    y="864"
+    height="64"
+    width="48"
+    data-bind="click:function(){MapHelper.moveToTown('Castelia Sewers')},
         attr: { class: MapHelper.calculateTownCssClass('Castelia Sewers') }">
 </rect>
 
@@ -8347,6 +8461,39 @@
             click: () =&gt; {
                 Notifier.notify({message: &#39;What a lovely view&#39;});
             }">
+</rect>
+
+    
+
+<rect class="city"
+    data-town="Underground Entrance" 
+    x="864"
+    y="576"
+    height="64"
+    width="48"
+    data-bind="click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
+
+     
+
+<rect class="city"
+    data-town="Farm" 
+    x="336"
+    y="736"
+    height="48"
+    width="48"
+    data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
+
+     
+
+<rect class="city"
+    data-town="Pokemon Day Care" 
+    x="1296"
+    y="576"
+    height="64"
+    width="64"
+    data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 </g>
 
@@ -9536,11 +9683,11 @@
 
 <rect class="city"
     data-town="Team Flare Secret HQ" 
-    x="1584"
-    y="944"
-    height="16"
-    width="16"
-    data-bind="click:function(){MapHelper.moveToTown('Geosenge Town')},
+    x="64"
+    y="352"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Team Flare Secret HQ')},
         attr: { class: MapHelper.calculateTownCssClass('Team Flare Secret HQ') }">
 </rect>
 
@@ -9605,6 +9752,39 @@
     height="64"
     width="48"
     data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Coumarine City&#39;) }">
+</rect>
+
+    
+
+<rect class="city"
+    data-town="Underground Entrance" 
+    x="144"
+    y="336"
+    height="64"
+    width="48"
+    data-bind="click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
+
+     
+
+<rect class="city"
+    data-town="Farm" 
+    x="544"
+    y="592"
+    height="48"
+    width="48"
+    data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
+
+     
+
+<rect class="city"
+    data-town="Pokemon Day Care" 
+    x="464"
+    y="576"
+    height="64"
+    width="64"
+    data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
 </g>
@@ -12392,6 +12572,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('backgroundImage')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('breedingDisplay')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('shopButtons')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('resetShopAmountOnPurchase')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('eggAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('hideHatchery')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('farmDisplay')}"></tr>
@@ -12429,6 +12610,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                         <table class="table table-striped table-hover m-0">
                             <tbody>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('useWebWorkerForGameTicks')}"></tr>
                             </tbody>
                         </table>
                         <div class="btn-group btn-block">
@@ -12459,7 +12641,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
 
 <script type="text/html" id="BooleanSettingTemplate">
     <td class="p-2">
-        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: $data.displayName">
+        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`">
             setting name
         </label>
     </td>
@@ -12480,7 +12662,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
 
 
 <script type="text/html" id="ColorChoiceSettingTemplate">
-    <td class="p-2" data-bind="text: $data.displayName">setting name</td>
+    <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
     <td class="p-0" data-bind="style: { background: $data.observableValue },
     tooltip: {
         title: 'Set to white for transparent',
@@ -13398,7 +13580,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         placement:'top',
                         html: true,
                     }">
-                    <span>Total net worth: <b><span data-bind="text: Underground.getDiamondNetWorth()">-</span></b></span>
+                    <span>Total net worth: <b><span data-bind="text: Underground.getDiamondNetWorth().toLocaleString('en-US')">-</span></b></span>
                     <img src='assets/images/underground/diamond.svg' width="20px'">
                 </button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -14900,6 +15082,7 @@ aria-labelledby="badgeCaseModalLabel">
 aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
+        <!-- ko if: modalUtils.observableState['damageCalculatorModal'] === 'show' -->
         <div class="modal-header">
             <h5 class="modal-title" id="damageCalculatorModalLabel">Damage Calculator</h5>
             <button type="button" class="btn btn-info"
@@ -14993,6 +15176,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
        <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
        </div>
+       <!-- /ko -->
    </div>
 </div>
 </div>
