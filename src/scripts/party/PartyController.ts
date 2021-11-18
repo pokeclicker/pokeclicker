@@ -1,3 +1,5 @@
+declare const modalUtils: { observableState: typeof observableState };
+
 class PartyController {
 
     static getCaughtStatusByName(name: PokemonNameType): CaughtStatus {
@@ -43,9 +45,14 @@ class PartyController {
         return list.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
     }).extend({ rateLimit: 500 });
 
+    private static hatcherySortedList = [];
     static getHatcherySortedList = ko.pureComputed(() => {
-        const list = [...App.game.party.caughtPokemon];
-        return list.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue()));
+        // If the breeding modal is open, we should sort it.
+        if (modalUtils.observableState['breedingModal'] === 'show') {
+            this.hatcherySortedList = [...App.game.party.caughtPokemon];
+            return this.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue()));
+        }
+        return this.hatcherySortedList;
     }).extend({ rateLimit: 500 });
 
     static getProteinSortedList = ko.pureComputed(() => {
