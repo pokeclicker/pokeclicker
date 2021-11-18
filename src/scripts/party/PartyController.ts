@@ -55,9 +55,15 @@ class PartyController {
         return PartyController.hatcherySortedList;
     }).extend({ rateLimit: 500 });
 
+
+    private static proteinSortedList = [];
     static getProteinSortedList = ko.pureComputed(() => {
-        const list = [...App.game.party.caughtPokemon];
-        return list.sort(PartyController.compareBy(Settings.getSetting('proteinSort').observableValue(), Settings.getSetting('proteinSortDirection').observableValue()));
+        // If the protein modal is open, we should sort it.
+        if (modalUtils.observableState['pokemonSelectorModal'] === 'show') {
+            PartyController.proteinSortedList = [...App.game.party.caughtPokemon];
+            return PartyController.proteinSortedList.sort(PartyController.compareBy(Settings.getSetting('proteinSort').observableValue(), Settings.getSetting('proteinSortDirection').observableValue()));
+        }
+        return PartyController.proteinSortedList;
     }).extend({ rateLimit: 500 });
 
     public static compareBy(option: SortOptions, direction: boolean): (a: PartyPokemon, b: PartyPokemon) => number {
