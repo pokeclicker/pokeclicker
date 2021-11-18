@@ -46,12 +46,12 @@ class PartyController {
     static getHatcherySortedList = ko.pureComputed(() => {
         const list = [...App.game.party.caughtPokemon];
         return list.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue()));
-    }).extend({ rateLimit: 1000 });
+    }).extend({ rateLimit: 500 });
 
     static getProteinSortedList = ko.pureComputed(() => {
         const list = [...App.game.party.caughtPokemon];
         return list.sort(PartyController.compareBy(Settings.getSetting('proteinSort').observableValue(), Settings.getSetting('proteinSortDirection').observableValue()));
-    }).extend({ rateLimit: 1000 });
+    }).extend({ rateLimit: 500 });
 
     public static compareBy(option: SortOptions, direction: boolean): (a: PartyPokemon, b: PartyPokemon) => number {
         return function (a, b) {
