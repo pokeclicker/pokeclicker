@@ -49,10 +49,10 @@ class PartyController {
     static getHatcherySortedList = ko.pureComputed(() => {
         // If the breeding modal is open, we should sort it.
         if (modalUtils.observableState['breedingModal'] === 'show') {
-            this.hatcherySortedList = [...App.game.party.caughtPokemon];
-            return this.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue()));
+            PartyController.hatcherySortedList = [...App.game.party.caughtPokemon];
+            return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue()));
         }
-        return this.hatcherySortedList;
+        return PartyController.hatcherySortedList;
     }).extend({ rateLimit: 500 });
 
     static getProteinSortedList = ko.pureComputed(() => {
