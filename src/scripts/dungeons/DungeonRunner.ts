@@ -104,7 +104,7 @@ class DungeonRunner {
 
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             if (5000 * Math.random() / ((App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1) * (DungeonRunner.lootWeight + 1)) < 0.5) {
-                amount *= Math.pow(amount,GameConstants.getDungeonRegion(DungeonRunner.dungeon.name)() + 1);
+                amount *= (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name)() + 1);
             }
         }
 
