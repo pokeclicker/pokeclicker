@@ -10,8 +10,14 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.11
+    new ChangelogUpdate('v0.8.11', new Date(2021, 10, 19)),
+    new Changelog(changelogType.CHANGE, 'Trainers and Background will now show a list of images when changing them on your profile'),
+    new Changelog(changelogType.CHANGE, 'Hatchery and Protein list now sort independently of Party'),
+    new Changelog(changelogType.FIXED, 'Hatchery and Protein list not sorting'),
+
     // v0.8.10
-    new ChangelogUpdate('v0.8.10', new Date(2021, 10, 21)),
+    new ChangelogUpdate('v0.8.10', new Date(2021, 10, 17)),
     new Changelog(changelogType.NEW, 'Allow using web workers for game ticks'),
     new Changelog(changelogType.NEW, 'Added setting to not reset shop amount when purchasing'),
     new Changelog(changelogType.CHANGE, 'Updated Sinnoh route orders and encounters'),
