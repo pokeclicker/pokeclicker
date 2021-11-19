@@ -11,6 +11,7 @@ import type BagItem from './interfaces/BagItem';
 import type LevelType from './party/LevelType';
 import type Wallet from './wallet/Wallet';
 import { PokemonNameType } from './pokemons/PokemonNameType';
+import PokemonCategories from './party/Category';
 
 // These types are only temporary while we are converting things to modules
 // As things are converted, we should import their types here for use,
@@ -29,7 +30,7 @@ type TmpGameType = {
     badgeCase: BadgeCase,
     oakItems: any,
     oakItemLoadouts: any,
-    categories: any,
+    categories: PokemonCategories,
     party: any,
     shards: any,
     underground: any,
