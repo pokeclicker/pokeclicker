@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.8.10"></script>
+    <script src="scripts/modules.min.js?v=0.8.11"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.8.10"></script>
+    <script src="scripts/script.min.js?v=0.8.11"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.8.10" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.8.11" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -295,26 +295,10 @@
                         <input autocomplete="off" class="form-control" oninput="App.game.profile.name(this.value)" placeholder="name" data-bind="value: decodeURI(App.game.profile.name())"/>
                     </div>
                     <div class="form-group col-12">
-                        <label>Trainer</label>
-                        <select autocomplete="off" class="custom-select" onchange="App.game.profile.trainer(+this.value)">
-                            <!-- ko foreach: new Array(Profile.MAX_TRAINER).fill(0) -->
-                            <option data-bind="attr: { value: $index(), selected: App.game.profile.trainer() === $index() }, text: `Trainer ${$index()}`">Trainer</option>
-                            <!-- /ko -->
-                        </select>
-                    </div>
-                    <div class="form-group col-12">
                         <label>Pokemon</label>
                         <select autocomplete="off" class="custom-select" onchange="App.game.profile.pokemon(+this.value)">
                             <!-- ko foreach: App.game.party.caughtPokemon -->
                             <option data-bind="attr: { value: $data.id, selected: App.game.profile.pokemon() === $data.id }, text: $data.name">Pokemon</option>
-                            <!-- /ko -->
-                        </select>
-                    </div>
-                    <div class="form-group col-12">
-                        <label>Background</label>
-                        <select autocomplete="off" class="custom-select" onchange="App.game.profile.background(+this.value)">
-                            <!-- ko foreach: new Array(Profile.MAX_BACKGROUND).fill(0) -->
-                            <option data-bind="attr: { value: $index(), selected: App.game.profile.background() === $index() }, text: `Background ${$index()}`">Background</option>
                             <!-- /ko -->
                         </select>
                     </div>
@@ -324,8 +308,64 @@
                           <label style="width:100%; min-height: 28px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: App.game.profile.textColor"/></label>
                         </p>
                     </div>
+                    <div class="form-group col-12">
+                        <a class="btn btn-block btn-primary text-left" href="#profileTrainerModal" data-toggle="modal">Trainer <img style="position:absolute; right: 10px;" data-bind="attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` }"/></a>
+                    </div>
+                    <div class="form-group col-12">
+                        <a class="btn btn-block btn-primary text-left" href="#profileBackgroundModal" data-toggle="modal">Background <knockout style="position:absolute; right: 10px;" data-bind="text: `#${App.game.profile.background()}`"></knockout></a>
+                    </div>
                 </div>
                 <div id="profile-trainer-card"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal noselect fade" id="profileTrainerModal" tabindex="-1" role="dialog" aria-labelledby="profileTrainerModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style='justify-content: space-around;'>
+                <h5 class="modal-title">Select a Trainer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- ko foreach: new Array(Profile.MAX_TRAINER).fill(0) -->
+                <button style="position: relative;" class='btn'
+                    data-dismiss='modal'
+                    data-bind='click: () => {
+                        App.game.profile.trainer($index());
+                        $("#profileTrainerModal").modal("hide");
+                    },'>
+                    <img data-bind="attr: { src: `assets/images/profile/trainer-${$index()}.png` }"/>
+                </button>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal noselect fade" id="profileBackgroundModal" tabindex="-1" role="dialog" aria-labelledby="profileBackgroundModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style='justify-content: space-around;'>
+                <h5 class="modal-title">Select a Background</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- ko foreach: new Array(Profile.MAX_BACKGROUND).fill(0) -->
+                <button style="position: relative; height: 160px; width: 100%;"
+                    data-dismiss='modal'
+                    data-bind='click: () => {
+                        App.game.profile.background($index());
+                        $("#profileBackgroundModal").modal("hide");
+                    },
+                    class: `btn trainer-card trainer-bg-${$index()}`'>
+                </button>
+                <!-- /ko -->
             </div>
         </div>
     </div>
@@ -13280,7 +13320,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                         </div>
                         <div class="form-row collapse" id="breeding-sort">
-                            <div class="form-group col" data-bind="with: Settings.getSetting('partySort')">
+                            <div class="form-group col" data-bind="with: Settings.getSetting('hatcherySort')">
                                 <label>Sort</label>
                                 <div class="input-group">
                                     <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
@@ -13288,10 +13328,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         <option data-bind="text: $data.text, value: $data.value"></option>
                                     </select>
                                     <div class="input-group-append bg-primary text-light">
-                                        <label for="hatcheryPartySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
-                                        <input id="hatcheryPartySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
-                                            data-bind="checked: Settings.getSetting('partySortDirection').observableValue()"
-                                            onchange="Settings.setSettingByName('partySortDirection', this.checked)"/>
+                                        <label for="hatcherySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('hatcherySortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
+                                        <input id="hatcherySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
+                                            data-bind="checked: Settings.getSetting('hatcherySortDirection').observableValue()"
+                                            onchange="Settings.setSettingByName('hatcherySortDirection', this.checked)"/>
                                     </div>
                                 </div>
                             </div>
@@ -13303,7 +13343,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             Unfortunately, you don't have any Pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                        <ul class="row justify-content-center p-0" data-bind="foreach: App.game.party.caughtPokemon">
+                        <ul class="row justify-content-center p-0" data-bind="foreach: PartyController.getHatcherySortedList()">
                             <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                 <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
                                 <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 0px;top: 0px;">✨</div>
@@ -13883,6 +13923,7 @@ aria-labelledby="pokedexModalLabel">
 <div class="modal noselect fade" id="pokemonSelectorModal" tabindex="-1" role="dialog" aria-labelledby="pokemonSelectorModal">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
         <div class="modal-content">
+            <!-- ko if: modalUtils.observableState['pokemonSelectorModal'] === 'show' -->
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -13912,16 +13953,16 @@ aria-labelledby="pokedexModalLabel">
                       data-trigger="hover">
                     </button>
                   </div>
-                  <div class="input-group" data-bind="with: Settings.getSetting('partySort')">
+                  <div class="input-group" data-bind="with: Settings.getSetting('proteinSort')">
                       <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
                           data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
                           <option data-bind="text: $data.text, value: $data.value"></option>
                       </select>
                       <div class="input-group-append bg-primary text-light">
-                          <label for="hatcheryPartySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
-                          <input id="hatcheryPartySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
-                              data-bind="checked: Settings.getSetting('partySortDirection').observableValue()"
-                              onchange="Settings.setSettingByName('partySortDirection', this.checked)"/>
+                          <label for="proteinSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('proteinSortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
+                          <input id="proteinSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
+                              data-bind="checked: Settings.getSetting('proteinSortDirection').observableValue()"
+                              onchange="Settings.setSettingByName('proteinSortDirection', this.checked)"/>
                       </div>
                   </div>
                 </div>
@@ -13933,7 +13974,7 @@ aria-labelledby="pokedexModalLabel">
                       <th class="text-center bg-dark align-middle">Attack Bonus</th>
                     </tr>
                   </thead>
-                  <tbody data-bind="foreach: App.game.party.caughtPokemon">
+                  <tbody data-bind="foreach: PartyController.getProteinSortedList()">
                     <tr class="clickable" data-bind="click: () => $data.useProtein(VitaminController.getMultiplier()), hidden: $data.breeding">
                       <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="text: $data.proteinsUsed().toLocaleString('en-US')">-</td>
@@ -13942,6 +13983,7 @@ aria-labelledby="pokedexModalLabel">
                   </tbody>
                 </table>
             </div>
+            <!-- /ko -->
         </div>
     </div>
 </div>
