@@ -236,6 +236,17 @@ class PokemonFactory {
                 chance = GameConstants.HELD_ITEM_CHANCE;
                 break;
         }
+        switch (ItemList[name]) {
+            case ItemList[name] = ItemList['Black_DNA']:
+                chance = GameConstants.DNA_ITEM_CHANCE;
+                break;
+            case ItemList[name] = ItemList['White_DNA']:
+                chance = GameConstants.DNA_ITEM_CHANCE;
+                break;
+            default:
+                chance = GameConstants.HELD_ITEM_CHANCE;
+                break;
+        }
         chance /= modifier;
 
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {

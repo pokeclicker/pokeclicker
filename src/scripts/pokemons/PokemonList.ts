@@ -13561,6 +13561,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 120,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'White_DNA'},
     },
     {
         'id': 644,
@@ -13578,6 +13579,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Black_DNA'},
     },
     {
         'id': 645,
