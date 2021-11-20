@@ -1,19 +1,18 @@
 ///<reference path="Evolution.ts"/>
 ///<reference path="EvolutionType.ts"/>
 class LevelEvolution extends Evolution {
-
-    level: number;
-    evolvedPokemon: string
     triggered: boolean;
 
-    constructor(basePokemon: string, evolvedPokemon: string, level: number) {
+    constructor(
+        basePokemon: PokemonNameType,
+        public evolvedPokemon: PokemonNameType,
+        public level: number
+    ) {
         super(basePokemon);
-        this.evolvedPokemon = evolvedPokemon;
-        this.level = level;
         this.type.push(EvolutionType.Level);
     }
 
-    getEvolvedPokemon(): string {
+    getEvolvedPokemon(): PokemonNameType {
         return this.evolvedPokemon;
     }
 

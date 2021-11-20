@@ -13,11 +13,11 @@ class BattleFrontierMilestones {
 
     public static nextMileStone() {
         // Get the next possible reward
-        return this.milestoneRewards.find(r => r.stage > App.game.statistics.battleFrontierHighestStageCompleted());
+        return this.milestoneRewards.find(r => !r.obtained());
     }
 
     public static availableMilestones() {
-        return BattleFrontierMilestones.milestoneRewards.filter(r => r.stage > App.game.statistics.battleFrontierHighestStageCompleted());
+        return BattleFrontierMilestones.milestoneRewards.filter(r => !r.obtained());
     }
 
     public static nextMileStoneStage(): number {
@@ -43,7 +43,12 @@ class BattleFrontierMilestones {
     public static gainReward(defeatedStage: number): void {
         const reward = this.nextMileStone();
         if (reward && reward.stage == defeatedStage) {
-            Notifier.notify({ title: '[Battle Frontier]', message: `You've successfully defeated stage ${defeatedStage} and earned:<br/><span>${reward.description}</span>!`, type: GameConstants.NotificationOption.warning, timeout: 1e4 });
+            Notifier.notify({
+                title: '[Battle Frontier]',
+                message: `You've successfully defeated stage ${defeatedStage} and earned:<br/><span>${reward.description}</span>!`,
+                type: NotificationConstants.NotificationOption.warning,
+                timeout: 1e4,
+            });
             reward.gain();
         }
     }
@@ -57,14 +62,13 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(30, 'Ultra
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(35, 'xClick', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(40, 'xAttack', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(50, 'SmallRestore', 100));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestone(100, 'Deoxys', () => {
-    App.game.party.gainPokemonById(pokemonMap.Deoxys.id);
-}, 'assets/images/items/Premierball.png'));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(100, 'Deoxys'));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(110, 'Water_stone', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(120, 'Leaf_stone', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(130, 'Thunder_stone', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(140, 'Fire_stone', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(150, 'MediumRestore', 200));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(151, 'Deoxys (attack)'));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(160, 'Lucky_egg', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(170, 'Lucky_incense', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(180, 'Item_magnet', 100));
@@ -75,4 +79,6 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(220, 'Leaf
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(230, 'Thunder_stone', 40));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(240, 'Moon_stone', 40));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(250, 'Ultraball', 6400));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(251, 'Deoxys (defense)'));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(300, 'Trade_stone', 100));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(386, 'Deoxys (speed)'));

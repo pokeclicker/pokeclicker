@@ -2,9 +2,11 @@
 
 class Safari {
     static grid: Array<Array<number>>;
+    static pokemonGrid: KnockoutObservableArray<SafariPokemon> = ko.observableArray([]);
     static player: Point = new Point(12, 20);
     static lastDirection = 'up';
     static nextDirection: string;
+    static steps = 0;
     static walking = false;
     static isMoving = false;
     static queue: Array<string> = [];
@@ -25,6 +27,7 @@ class Safari {
 
     public static load() {
         Safari.grid = [];
+        Safari.pokemonGrid([]);
         Safari.playerXY.x = 0;
         Safari.playerXY.y = 0;
         Safari.lastDirection = 'up';
@@ -32,8 +35,7 @@ class Safari {
         Safari.inProgress(true);
         Safari.balls(this.calculateStartPokeballs());
         for ( let i = 0; i < this.sizeY(); i++) {
-            const row = [...Array(this.sizeX())].map(Number.prototype.valueOf, 0);
-            Safari.grid.push(row);
+            Safari.grid.push(Array(this.sizeX()).fill(0));
         }
 
         Safari.addRandomBody(new FenceBody());
@@ -125,7 +127,10 @@ class Safari {
             App.game.gameState = GameConstants.GameState.safari;
             $('#safariModal').modal({backdrop: 'static', keyboard: false});
         } else {
-            Notifier.notify({ message: 'You need the Safari Pass to access this location.<br/><i>Visit the Gym in Fuschia City</i>', type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: 'You need the Safari Pass to access this location.<br/><i>Visit the Gym in Fuschia City</i>',
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
     }
 
@@ -161,7 +166,7 @@ class Safari {
         let html = '';
 
         for (let i = 0; i < Safari.grid.length; i++) {
-            html += "<div class='row flex-nowrap'>";
+            html += '<div class="row flex-nowrap">';
             for (let j = 0; j < Safari.grid[0].length; j++) {
                 html += Safari.square(i, j);
             }
@@ -187,7 +192,7 @@ class Safari {
             top: 32 * j + topLeft.top,
             left: 32 * i + topLeft.left,
         };
-        $('#safariBody').append("<div id='sprite'></div>");
+        $('#safariBody').append('<div id="sprite"></div>');
         $('#sprite').css('background',  `url('assets/images/safari/walk${Safari.lastDirection}.png')`);
         $('#sprite').css('position', 'absolute');
         $('#sprite').offset( offset );
@@ -200,7 +205,7 @@ class Safari {
         Safari.sprite = new Motio(element, {
             fps: 8,
             frames: 4,
-        }).on('frame', function() {
+        }).on('frame', () => {
             if (Safari.sprite.frame % 2 == 0) {
                 Safari.sprite.pause();
             }
@@ -208,7 +213,9 @@ class Safari {
     }
 
     public static move(dir: string) {
-        if (!Safari.walking && !Safari.isMoving && !Safari.inBattle()) {
+        if (!Safari.inProgress()) {
+            return;
+        } else if (!Safari.walking && !Safari.isMoving && !Safari.inBattle()) {
             Safari.queue = [];
             Safari.walking = true;
             Safari.queue.unshift(dir);
@@ -225,7 +232,7 @@ class Safari {
 
         if (!Safari.isMoving) {
             if (Safari.sprite.frame == 2) {
-                Safari.sprite.to(0, true, function() {
+                Safari.sprite.to(0, true, () => {
                     Safari.step(dir);
                 });
             } else {
@@ -257,7 +264,7 @@ class Safari {
             $('#sprite').css('background', `url('assets/images/safari/walk${direction}.png')`);
             Safari.playerXY.x = newPos.x;
             Safari.playerXY.y = newPos.y;
-            $('#sprite').animate(offset, 250, 'linear', function() {
+            $('#sprite').animate(offset, 250, 'linear', () => {
                 Safari.checkBattle();
                 Safari.isMoving = false;
                 if (Safari.walking) {
@@ -267,9 +274,11 @@ class Safari {
                 }
             });
             App.game.breeding.progressEggs(1);
+            this.spawnPokemonCheck();
+            this.despawnPokemonCheck();
         } else {
             $('#sprite').css('background', `url('assets/images/safari/walk${direction}.png')`);
-            setTimeout(function() {
+            setTimeout(() => {
                 Safari.walking = false;
                 Safari.isMoving = false;
                 if (Safari.queue[0]) {
@@ -281,19 +290,52 @@ class Safari {
         }
     }
 
+    public static spawnPokemonCheck() {
+        this.steps++;
+        if (this.steps % 10 === 0 && Math.round(Math.random())) {
+            this.spawnRandomPokemon();
+        }
+    }
+
+    public static despawnPokemonCheck() {
+        let index = this.pokemonGrid().length;
+        while (index-- > 0) {
+            if (--this.pokemonGrid()[index].steps <= 0) {
+                this.pokemonGrid.splice(index, 1);
+            }
+        }
+    }
+
+    private static spawnRandomPokemon() {
+        const y = Math.floor(Math.random() * this.sizeY());
+        const x = Math.floor(Math.random() * this.sizeX());
+        if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) || this.pokemonGrid().find(p => p.x === x && p.y === y)) {
+            return;
+        }
+        const pokemon = SafariPokemon.random();
+
+        pokemon.x = x;
+        pokemon.y = y;
+        pokemon.steps = this.sizeX() + this.sizeY() + Math.floor(Math.random() * 21);
+        this.pokemonGrid.push(pokemon);
+    }
+
     private static directionToXY(dir: string) {
         let x = 0;
         let y = 0;
         switch (dir) {
-            case 'left': x = -1;break;
-            case 'up': y = -1;break;
-            case 'right': x = 1;break;
-            case 'down': y = 1;break;
+            case 'left': x = -1; break;
+            case 'up': y = -1; break;
+            case 'right': x = 1; break;
+            case 'down': y = 1; break;
         }
         return {x: x, y: y};
     }
 
     private static canMove(x: number, y: number): boolean {
+        if (!Safari.inProgress()) {
+            return false;
+        }
         for (let i = 0; i < GameConstants.LEGAL_WALK_BLOCKS.length; i++) {
             if (Safari.grid[y] && Safari.grid[y][x] === GameConstants.LEGAL_WALK_BLOCKS[i]) {
                 return true;
@@ -328,13 +370,20 @@ class Safari {
     }
 
     private static checkBattle(): boolean {
-        let battle = false;
-        if (Safari.grid[Safari.playerXY.y][Safari.playerXY.x] === 10) {
-            battle = Math.random() * GameConstants.SAFARI_BATTLE_CHANCE <= 1;
+        if (Safari.inBattle()) {
+            return false;
         }
-        if (battle && !Safari.inBattle()) {
-            SafariBattle.load();
+        const pokemonOnPlayer = this.pokemonGrid().findIndex(p => p.x === Safari.playerXY.x && p.y === Safari.playerXY.y);
+        if (pokemonOnPlayer >= 0) {
+            SafariBattle.load(this.pokemonGrid()[pokemonOnPlayer]);
+            Safari.pokemonGrid.splice(pokemonOnPlayer, 1);
             return true;
+        }
+        if (Safari.grid[Safari.playerXY.y][Safari.playerXY.x] === 10) {
+            if (Math.random() * GameConstants.SAFARI_BATTLE_CHANCE < 1) {
+                SafariBattle.load();
+                return true;
+            }
         }
         return false;
     }
@@ -350,8 +399,8 @@ class Safari {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function (event) {
-    $('#safariModal').on('hide.bs.modal', function () {
+document.addEventListener('DOMContentLoaded', () => {
+    $('#safariModal').on('hide.bs.modal', () => {
         MapHelper.moveToTown('Fuchsia City');
     });
 });

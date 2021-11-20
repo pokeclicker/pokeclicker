@@ -1,41 +1,4 @@
 /**
-  * Knockout.js extenders
-  */
-$.extend(ko.extenders, {
-    // Only numeric values allowed - usage: ko.observable(0).extend({ numeric: 0 });
-    numeric: function(target, precision) {
-        //create a writable computed observable to intercept writes to our observable
-        const result = ko.pureComputed({
-            read: target,  //always return the original observables value
-            write: function(newValue: string) {
-                if (!isNaN(+newValue)) {
-                    const current = target(),
-                        roundingMultiplier = Math.pow(10, precision),
-                        newValueAsNum = +newValue,
-                        valueToWrite = Math.round(newValueAsNum * roundingMultiplier) / roundingMultiplier;
-
-                    //only write if it changed
-                    if (valueToWrite !== current) {
-                        target(valueToWrite);
-                    } else {
-                    //if the rounded value is the same, but a different value was written, force a notification for the current field
-                        if (newValue !== current) {
-                            target.notifySubscribers(valueToWrite);
-                        }
-                    }
-                }
-            },
-        }).extend({ notify: 'always' });
-
-        //initialize with current value to make sure it is rounded appropriately
-        result(target());
-
-        //return the new computed observable
-        return result;
-    },
-});
-
-/**
  * TODO(@Isha) refactor this to no longer be global but App properties.
  * Will be done after the major player refactor.
  */
@@ -44,6 +7,27 @@ let player;
 /**
  * Start the application when all html elements are loaded.
  */
-document.addEventListener('DOMContentLoaded', function () {
-    App.start();
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        const settings = localStorage.getItem('settings');
+        Settings.fromJSON(JSON.parse(settings));
+        document.body.className = `no-select ${Settings.getSetting('theme').observableValue()} ${Settings.getSetting('backgroundImage').observableValue()}`;
+        (document.getElementById('theme-link') as HTMLLinkElement).href = `https://bootswatch.com/4/${Settings.getSetting('theme').observableValue()}/bootstrap.min.css`;
+
+    } catch (e) {}
+    // Load list of saves
+    SaveSelector.loadSaves();
+});
+
+// Nested modals can be opened while they are in the middle of hiding.
+// This should raise their backdrop on top of any existing modals,
+// preventing us from getting into that messy situation.
+// Copied from https://stackoverflow.com/questions/19305821/multiple-modals-overlay#answer-24914782
+$(document).on('show.bs.modal', '.modal', function () {
+    const zIndex = 1040 + (10 * $('.modal:visible').length);
+    $(this).css('z-index', zIndex);
+    // setTimeout with 0 delay because the backdrop doesn't exist yet
+    setTimeout(() => {
+        $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+    }, 0);
 });

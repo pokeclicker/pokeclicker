@@ -1,17 +1,27 @@
-class GymRunner {
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/enums/Badges.d.ts" />
 
+class GymRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
 
     public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList['Pewter City']);
-    public static started: boolean;
+    public static running: KnockoutObservable<boolean> = ko.observable(false);
+    public static autoRestart: KnockoutObservable<boolean> = ko.observable(false);
+    public static initialRun = true;
 
-    public static startGym(gym: Gym) {
-        this.started = false;
+    public static startGym(
+        gym: Gym,
+        autoRestart = false,
+        initialRun = true
+    ) {
+        this.initialRun = initialRun;
+        this.autoRestart(autoRestart);
+        this.running(false);
         this.gymObservable(gym);
         if (Gym.isUnlocked(gym)) {
             if (gym instanceof Champion) {
-                gym.setPokemon(player.starter);
+                gym.setPokemon(player.starter());
             }
             App.game.gameState = GameConstants.GameState.idle;
             GymRunner.timeLeft(GameConstants.GYM_TIME);
@@ -22,10 +32,10 @@ class GymRunner {
             GymBattle.index(0);
             GymBattle.generateNewEnemy();
             App.game.gameState = GameConstants.GameState.gym;
+            this.running(true);
             this.resetGif();
 
             setTimeout(() => {
-                this.started = true;
                 this.hideGif();
             }, GameConstants.GYM_COUNTDOWN);
 
@@ -36,25 +46,28 @@ class GymRunner {
                     reqsList.push(requirement.hint());
                 }
             });
-            Notifier.notify({ message: `You don't have access to ${gym.leaderName}s Gym yet.<br/>${reqsList.join('<br/>')}`, type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: `You don't have access to ${gym.leaderName}s Gym yet.<br/>${reqsList.join('<br/>')}`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
     }
 
     private static hideGif() {
-        $('#gymCountdownView').fadeOut(300);
-        $('#gymGo').hide();
+        $('#gymCountdown').hide();
     }
 
     public static resetGif() {
-        const $img = $('#gymGo');
-        $img.show();
-        setTimeout(function () {
-            $img.attr('src', 'assets/gifs/go.gif');
-        }, 0);
+        if (!this.autoRestart() || this.initialRun) {
+            $('#gymCountdown').show();
+            setTimeout(() => {
+                $('#gymGo').attr('src', 'assets/gifs/go.gif');
+            }, 0);
+        }
     }
 
     public static tick() {
-        if (!this.started) {
+        if (!this.running()) {
             return;
         }
         if (this.timeLeft() < 0) {
@@ -65,36 +78,62 @@ class GymRunner {
     }
 
     public static gymLost() {
-        Notifier.notify({ message: `It appears you are not strong enough to defeat ${GymBattle.gym.leaderName}`, type: GameConstants.NotificationOption.danger });
-        App.game.gameState = GameConstants.GameState.town;
+        if (this.running()) {
+            this.running(false);
+            Notifier.notify({
+                message: `It appears you are not strong enough to defeat ${GymBattle.gym.leaderName}`,
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            App.game.gameState = GameConstants.GameState.town;
+        }
     }
 
     public static gymWon(gym: Gym) {
-        Notifier.notify({ message: `Congratulations, you defeated ${GymBattle.gym.leaderName}!`, type: GameConstants.NotificationOption.success, setting: GameConstants.NotificationSetting.gym_won });
-        this.gymObservable(gym);
-        App.game.wallet.gainMoney(gym.moneyReward);
-        // If this is the first time defeating this gym
-        if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
-            gym.firstWinReward();
+        if (this.running()) {
+            this.running(false);
+            Notifier.notify({
+                message: `Congratulations, you defeated ${GymBattle.gym.leaderName}!`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.gym_won,
+            });
+            // If this is the first time defeating this gym
+            if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
+                gym.firstWinReward();
+            }
+            GameHelper.incrementObservable(App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym.town)]);
+
+            // Auto restart gym battle
+            if (this.autoRestart()) {
+                const cost = (this.gymObservable().moneyReward || 10) * 2;
+                const amt = new Amount(cost, GameConstants.Currency.money);
+                // If the player can afford it, restart the gym
+                if (App.game.wallet.loseAmount(amt)) {
+                    this.startGym(this.gymObservable(), this.autoRestart(), false);
+                    return;
+                }
+            }
+
+            // Award money for defeating gym
+            App.game.wallet.gainMoney(gym.moneyReward);
+            // Send the player back to the town they were in
+            player.town(TownList[gym.town]);
+            App.game.gameState = GameConstants.GameState.town;
         }
-        GameHelper.incrementObservable(App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym.town)]);
-        player.town(TownList[gym.town]);
-        App.game.gameState = GameConstants.GameState.town;
     }
 
-    public static timeLeftSeconds = ko.pureComputed(function () {
-        return (Math.ceil(GymRunner.timeLeft() / 10) / 10).toFixed(1);
+    public static timeLeftSeconds = ko.pureComputed(() => {
+        return (Math.ceil(GymRunner.timeLeft() / 100) / 10).toFixed(1);
     })
 
 }
 
-document.addEventListener('DOMContentLoaded', function (event) {
-    $('#receiveBadgeModal').on('hidden.bs.modal', function () {
-        if (GymBattle.gym.badgeReward == BadgeCase.Badge.Soul) {
-            App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Safari_ticket);
+document.addEventListener('DOMContentLoaded', () => {
+    $('#receiveBadgeModal').on('hidden.bs.modal', () => {
+        if (GymBattle.gym.badgeReward == BadgeEnums.Soul) {
+            KeyItemController.showGainModal(KeyItems.KeyItem.Safari_ticket);
         }
-        if (GymBattle.gym.badgeReward == BadgeCase.Badge.Earth) {
-            App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Shard_case);
+        if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
+            KeyItemController.showGainModal(KeyItems.KeyItem.Shard_case);
         }
     });
 });

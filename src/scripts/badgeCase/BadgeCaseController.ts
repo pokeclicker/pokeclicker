@@ -1,7 +1,10 @@
+/// <reference path="../../declarations/enums/Badges.d.ts"/>
+
 class BadgeCaseController {
     static getDisplayableBadges() {
-        return Object.keys(BadgeCase.Badge).filter(b =>
-            !b.startsWith('Elite') && b != 'None' && BadgeCase.Badge[b] <= App.game.badgeCase.highestAvailableBadge()
-        );
+        const region = player.highestRegion();
+        return GameConstants.RegionGyms.slice(0, region + 1).flat()
+            .map(gym => BadgeEnums[gymList[gym].badgeReward])
+            .filter(b => !b.startsWith('Elite') && b != 'None');
     }
 }

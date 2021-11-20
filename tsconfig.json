@@ -9,10 +9,10 @@
   "compileOnSave": false,
   "exclude": [
     "node",
-    "node_modules",
     "build",
     "src/libs",
     "src/specs",
+    "src/modules",
     "other"
   ]
 }

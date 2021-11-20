@@ -47,9 +47,22 @@
     left: 0px;
     width: 100%;
     padding-top:100% !important;
+
+    &.rotations-0 {
+        transform: rotate(0deg);
+    }
+    &.rotations-1 {
+        transform: rotate(90deg);
+    }
+    &.rotations-2 {
+        transform: rotate(-90deg);
+    }
+    &.rotations-3 {
+        transform: rotate(180deg);
+    }
     /*
     CODE TO GENERATE THE MINE CSS:
-    
+
     let makeMine = (x, y) => {
         str = [`    &.size-${x}-${y} {`];
         for (ix = 0; ix < x; ix++){
@@ -606,7 +619,7 @@
 
 .ChiselSelected {
     cursor: url('../assets/images/underground/chissel.png'), auto;
-            
+
     &.mineSquare:after {
         content: "";
         position: absolute;
@@ -634,8 +647,10 @@
 }
 
 #mineBody {
-    .row:not(:first-child):not(:last-child) {
-        .HammerSelected:not(:first-child):not(:last-child) {
+    overflow: hidden;
+
+    .row {
+        .HammerSelected {
 
             &.mineSquare:after {
                 content: "";

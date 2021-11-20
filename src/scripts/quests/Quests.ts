@@ -1,14 +1,21 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/DataStore/common/Saveable.d.ts" />
+
 class Quests implements Saveable {
     saveKey = 'quests';
 
     defaults = {
         xp: 0,
         refreshes: 0,
+        freeRefresh: false,
     };
 
     public xp = ko.observable(0).extend({ numeric: 0 });
     public refreshes = ko.observable(0);
     public lastRefresh = new Date();
+    public lastRefreshLevel = 0;
+    public lastRefreshRegion = 0;
+    public freeRefresh = ko.observable(false);
     public questList: KnockoutObservableArray<Quest> = ko.observableArray();
     public questLines: KnockoutObservableArray<QuestLine> = ko.observableArray();
     public level: KnockoutComputed<number> = ko.pureComputed((): number => {
@@ -32,8 +39,11 @@ class Quests implements Saveable {
 
     constructor() {}
 
-    // Get a quest line by name
-    getQuestLine(name) {
+    /**
+     * Gets a quest line by name
+     * @param name The quest line name
+     */
+    getQuestLine(name: string) {
         return this.questLines().find(ql => ql.name.toLowerCase() == name.toLowerCase());
     }
 
@@ -43,7 +53,10 @@ class Quests implements Saveable {
         if (this.canStartNewQuest() && quest && !quest.inProgress() && !quest.isCompleted()) {
             quest.begin();
         } else {
-            Notifier.notify({ message: 'You cannot start more quests', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot start more quests',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -53,7 +66,10 @@ class Quests implements Saveable {
         if (quest && quest.inProgress()) {
             quest.quit(shouldConfirm);
         } else {
-            Notifier.notify({ message: 'You cannot quit this quest', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot quit this quest',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -65,14 +81,25 @@ class Quests implements Saveable {
             // Once the player completes every available quest, refresh the list for free
             if (this.allQuestClaimed()) {
                 this.refreshQuests(true);
+                // Give player a free refresh
+                this.freeRefresh(true);
             }
+
+            // Track quest completion and total quest completed
+            LogEvent('completed quest',
+                'quests',
+                `level (${this.level()})`,
+                App.game.statistics.questsCompleted());
         } else {
             console.trace('cannot claim quest..');
-            Notifier.notify({ message: 'You cannot claim this quest', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot claim this quest',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
-    public addXP(amount) {
+    public addXP(amount: number) {
         if (isNaN(amount)) {
             return;
         }
@@ -81,34 +108,61 @@ class Quests implements Saveable {
 
         // Refresh the list each time a player levels up
         if (this.level() > currentLevel) {
-            Notifier.notify({ message: 'Your quest level has increased!', type: GameConstants.NotificationOption.success, timeout: 1e4, sound: GameConstants.NotificationSound.quest_level_increased });
-            this.refreshQuests(true);
+            Notifier.notify({
+                message: 'Your quest level has increased!<br/><i>You have a free quest refresh.</i>',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 1e4,
+                sound: NotificationConstants.NotificationSound.quest_level_increased,
+            });
+            this.freeRefresh(true);
+            // Track when users gains a quest level and how long it took in seconds
+            LogEvent('gain quest level', 'quests', `level (${this.level()})`, App.game.statistics.secondsPlayed());
         }
     }
 
-    generateQuestList() {
-        this.lastRefresh = new Date();
+    generateQuestList(date = new Date(), level = this.level()) {
+        if (this.lastRefresh.toDateString() != date.toDateString()) {
+            this.refreshes(0);
+        }
+        this.lastRefresh = date;
+        this.lastRefreshLevel = level;
+        this.lastRefreshRegion = player.highestRegion();
         this.currentQuests().forEach(quest => quest.quit());
-        this.questList(QuestHelper.generateQuestList(this.generateSeed(), GameConstants.QUESTS_PER_SET));
+        this.questList(QuestHelper.generateQuestList(this.generateSeed(date, level), GameConstants.QUESTS_PER_SET));
     }
 
-    private generateSeed() {
-        const d = new Date();
-        return Number(this.level() * (d.getFullYear() + this.refreshes() * 10) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate());
+    private generateSeed(date = new Date(), level = this.level()): number {
+        return Number(level * (date.getFullYear() + this.refreshes() * 10) * date.getDate() + 1000 * date.getMonth() + 100000 * date.getDate());
     }
 
-    public refreshQuests(free = false, shouldConfirm = false) {
+    public async refreshQuests(free = this.freeRefresh(), shouldConfirm = false) {
         if (free || this.canAffordRefresh()) {
             if (!free) {
-                if (shouldConfirm && !confirm('Are you sure you want to refresh the quest list?!')) {
+                if (shouldConfirm && !await Notifier.confirm({
+                    title: 'Refresh quest list',
+                    message: 'Are you sure you want to refresh the quest list?',
+                    type: NotificationConstants.NotificationOption.warning,
+                    confirm: 'refresh',
+                })) {
                     return;
                 }
                 App.game.wallet.loseAmount(this.getRefreshCost());
             }
+
+            // Track when users refreshes the quest list and how much it cost
+            LogEvent('refresh quest list',
+                'quests',
+                `level (${this.level()})`,
+                free ? 0 : this.getRefreshCost().amount);
+
+            this.freeRefresh(false);
             GameHelper.incrementObservable(this.refreshes);
             this.generateQuestList();
         } else {
-            Notifier.notify({ message: 'You cannot afford to do that!', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot afford to do that!',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -120,10 +174,15 @@ class Quests implements Saveable {
         return App.game.wallet.hasAmount(this.getRefreshCost());
     }
 
-    // Returns 0 when all quests are complete, ~1 million when none are
+    /**
+     * Formula for the Money cost for refreshing quests
+     * @returns 0 when all quests are complete, ~1 million when none are
+     */
     public getRefreshCost(): Amount {
-        const notComplete = this.incompleteQuests().length;
-        return new Amount(Math.floor(250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1)), GameConstants.Currency.money);
+        // If we have a free refersh, just assume all the quest are completed
+        const notComplete = this.freeRefresh() ? 0 : this.incompleteQuests().length;
+        const cost = Math.floor((250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1)) / 1000) * 1000;
+        return new Amount(Math.max(0, Math.min(1e6, cost)), GameConstants.Currency.money);
     }
 
     public canStartNewQuest(): boolean {
@@ -140,12 +199,18 @@ class Quests implements Saveable {
         return false;
     }
 
-    // returns false if we still have incomplete/inprogress quest
+    /**
+     * Determines if all quests have been completed and claimed.
+     */
     public allQuestClaimed() {
         return !this.incompleteQuests().length && !this.currentQuests().length;
     }
 
-    // 1000 xp needed to reach level 2, amount needed for next level increases by 20% of previous level
+    /**
+     * Formula for the amount of exp to increase quest level.
+     * 1000 XP is needed for level 2, and then increases 20% each level.
+     * @param level The current quest level
+     */
     public levelToXP(level: number): number {
         if (level >= 2) {
             // Sum of geometric series
@@ -171,27 +236,39 @@ class Quests implements Saveable {
     }
 
     loadQuestList(questList) {
-        questList.forEach(quest => {
-            if (quest.initial === null) {
-                return;
+        // Sanity Check
+        this.questList.removeAll();
+        questList.forEach(questData => {
+            try {
+                if (questData.hasOwnProperty('name')) {
+                    const quest = QuestHelper.createQuest(questData.name, questData.data);
+                    quest.fromJSON(questData);
+                    this.questList.push(quest);
+                } else {
+                    this.questList.push(new CapturePokemonsQuest(10, 1));
+                }
+            } catch (e) {
+                console.error(`Quest "${questData.name}" failed to load`, questData);
+                this.questList.push(new CapturePokemonsQuest(10, 1));
             }
-            this.questList()[quest.index].notified = quest.notified;
-            this.questList()[quest.index].claimed(quest.claimed);
-            this.questList()[quest.index].initial(quest.initial);
         });
     }
 
     loadQuestLines(questLines) {
         questLines.forEach(questLine => {
-            if (questLine.state == QuestLineState.inactive) {
-                return;
-            }
-            const ql = this.questLines().find(ql => ql.name == questLine.name);
-            if (ql) {
-                ql.state(questLine.state);
-                if (questLine.state == QuestLineState.started) {
-                    ql.resumeAt(questLine.quest, questLine.initial);
+            try {
+                if (questLine.state == QuestLineState.inactive) {
+                    return;
                 }
+                const ql = this.getQuestLine(questLine.name);
+                if (ql) {
+                    ql.state(questLine.state);
+                    if (questLine.state == QuestLineState.started) {
+                        ql.resumeAt(questLine.quest, questLine.initial);
+                    }
+                }
+            } catch (e) {
+                console.error(`Quest line "${questLine.name}" failed to load`, questLine);
             }
         });
     }
@@ -201,42 +278,44 @@ class Quests implements Saveable {
             xp: this.xp(),
             refreshes: this.refreshes(),
             lastRefresh: this.lastRefresh,
-            questList: this.questList(),
+            lastRefreshLevel: this.lastRefreshLevel,
+            lastRefreshRegion: this.lastRefreshRegion,
+            freeRefresh: this.freeRefresh(),
+            questList: this.questList().map(quest => quest.toJSON()),
             questLines: this.questLines(),
         };
     }
 
     fromJSON(json: any) {
+        // Generate the questLines (statistics not yet loaded when constructing)
+        QuestLineHelper.loadQuestLines();
+
         if (!json) {
             // Generate the questList
             this.generateQuestList();
-            // Generate the questLines
-            QuestLineHelper.loadQuestLines();
             return;
         }
 
         this.xp(json.xp || this.defaults.xp);
-        const lastRefresh = json.lastRefresh ? new Date(json.lastRefresh) : new Date();
-        if (lastRefresh.toDateString() != new Date().toDateString()) {
-            this.refreshes(0);
-            // we don't want to load old quest data
-            delete json.questList;
+        this.refreshes(json.refreshes || this.defaults.refreshes);
+        this.lastRefresh = json.lastRefresh ? new Date(json.lastRefresh) : new Date();
+        this.lastRefreshLevel = json.lastRefreshLevel || this.level();
+        this.lastRefreshRegion = json.lastRefreshRegion || player.highestRegion();
+        if (this.lastRefresh.toDateString() != new Date().toDateString()) {
+            this.freeRefresh(true);
         } else {
-            this.refreshes(json.refreshes || this.defaults.refreshes);
+            this.freeRefresh(json.freeRefresh || this.defaults.freeRefresh);
         }
 
-        // Generate the questList
-        this.generateQuestList();
-
-        // Load any completed/inprogress quest
-        if (json.questList) {
+        if (!json.hasOwnProperty('questList') || !json.questList.length) {
+            // Generate new quest list
+            this.generateQuestList(this.lastRefresh, this.lastRefreshLevel);
+        } else {
+            // Load saved quests
             this.loadQuestList(json.questList);
         }
 
-        // Generate the questLines
-        QuestLineHelper.loadQuestLines();
-
-        // Load any quest line quest
+        // Load our quest line progress
         if (json.questLines) {
             this.loadQuestLines(json.questLines);
         }

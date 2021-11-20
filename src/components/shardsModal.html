@@ -11,6 +11,9 @@
 
             </div>
             <div class="modal-body p-0">
+                <p data-bind="visible: App.game.challenges.list.disableShards.active()" class="bg-danger my-0 sticky-top">
+                    Shard bonuses are disabled.
+                </p>
                 <table class='table table-sm table-hover m-0'>
                     <!-- ko foreach: Array(Shards.nTypes) -->
                         <thead>
@@ -19,8 +22,8 @@
                                     <h3>
                                         <knockout data-bind="text: PokemonType[$index()]"></knockout>
                                         <div class="float-right">
-                                            <img data-bind='attr: { src: "assets/images/shards/" + $index() + ".png" }'/>
-                                            <knockout data-bind="text: App.game.shards.shardWallet[$index()].toLocaleString('en-US')"></knockout>
+                                            <img width=20px data-bind='attr: { src: Shards.image($index()) }'/>
+                                            <knockout data-bind="text: App.game.shards.shardWallet[$index()]().toLocaleString('en-US')"></knockout>
                                         </div>
                                     </h3>
                                 </th>
@@ -28,7 +31,7 @@
                         </thead>
                         <tbody class="collapse show" data-bind="attr: { id: 'collapse-shard-' + $index() }">
                             <!-- ko foreach: Array(Shards.nEffects) -->
-                                <tr>
+                                <tr data-bind='if: App.game.shards.isValidUpgrade($parentContext.$index(), $index())'>
                                     <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
                                     <td width='50%'>
                                         <div class="progress"
@@ -43,7 +46,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]] 
+                                    <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]]
                                         + (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * Shards.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
                                     <td>
                                         <button class='btn btn-block btn-primary'

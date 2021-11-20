@@ -1,4 +1,5 @@
 ///<reference path="pokemons/PokemonFactory.ts"/>
+/// <reference path="../declarations/GameHelper.d.ts" />
 
 /**
  * Handles all logic related to battling
@@ -9,7 +10,7 @@ class Battle {
     static counter = 0;
     static catching: KnockoutObservable<boolean> = ko.observable(false);
     static catchRateActual: KnockoutObservable<number> = ko.observable(null);
-    static pokeball: KnockoutObservable<GameConstants.Pokeball>;
+    static pokeball: KnockoutObservable<GameConstants.Pokeball> = ko.observable(GameConstants.Pokeball.Pokeball);
     static lastPokemonAttack = Date.now();
     static lastClickAttack = Date.now();
 
@@ -45,19 +46,22 @@ class Battle {
      * Attacks with clicks and checks if the enemy is defeated.
      */
     public static clickAttack() {
+        // click attacks disabled and we already beat the starter
+        if (App.game.challenges.list.disableClickAttack.active() && player.starter() != GameConstants.Starter.None) {
+            return;
+        }
         // TODO: figure out a better way of handling this
-        // Limit click attack speed, Only allow 1 attack per 20ms (50 per second)
+        // Limit click attack speed, Only allow 1 attack per 50ms (20 per second)
         const now = Date.now();
-        if (this.lastClickAttack > now - 20) {
+        if (this.lastClickAttack > now - 50) {
             return;
         }
         this.lastClickAttack = now;
         if (!this.enemyPokemon()?.isAlive()) {
             return;
         }
-        App.game.oakItems.use(OakItems.OakItem.Poison_Barb);
         GameHelper.incrementObservable(App.game.statistics.clickAttacks);
-        this.enemyPokemon().damage(App.game.party.calculateClickAttack());
+        this.enemyPokemon().damage(App.game.party.calculateClickAttack(true));
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
         }
@@ -70,7 +74,7 @@ class Battle {
         const enemyPokemon = this.enemyPokemon();
         enemyPokemon.defeat();
 
-        GameHelper.incrementObservable(App.game.statistics.routeKills[player.route()]);
+        GameHelper.incrementObservable(App.game.statistics.routeKills[player.region][player.route()]);
 
         App.game.breeding.progressEggsBattle(player.route(), player.region);
         const isShiny: boolean = enemyPokemon.shiny;
@@ -93,7 +97,7 @@ class Battle {
             this.generateNewEnemy();
         }
         this.gainItem();
-        player.lowerItemMultipliers();
+        player.lowerItemMultipliers(MultiplierDecreaser.Battle);
     }
 
     /**
@@ -109,8 +113,8 @@ class Battle {
         if (enemyPokemon.shiny) {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[enemyPokemon.id]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
-            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a Shiny ${enemyPokemon.name} on route ${player.route()}.`);
-        } else if (!App.game.party.alreadyCaughtPokemon(Battle.enemyPokemon().id)) {
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a wild shiny ${enemyPokemon.name} on route ${player.route()}.`);
+        } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id) && enemyPokemon.health()) {
             App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${enemyPokemon.name} on route ${player.route()}.`);
         }
     }
@@ -123,7 +127,7 @@ class Battle {
     }
 
     protected static prepareCatch(enemyPokemon: BattlePokemon, pokeBall: GameConstants.Pokeball) {
-        this.pokeball = ko.observable(pokeBall);
+        this.pokeball(pokeBall);
         this.catching(true);
         this.catchRateActual(this.calculateActualCatchRate(enemyPokemon, pokeBall));
         App.game.pokeballs.usePokeball(pokeBall);
@@ -147,7 +151,7 @@ class Battle {
     }
 
     public static catchPokemon(enemyPokemon: BattlePokemon) {
-        const route = player.route() || player.town()?.dungeon()?.difficultyRoute || 1;
+        const route = player.route() || player.town()?.dungeon?.difficultyRoute || 1;
         App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(route, player.region));
         App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
         App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny);

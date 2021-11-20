@@ -12,11 +12,11 @@ class KeyItems implements Feature {
 
     initialize() {
         this.itemList = [
-            new KeyItem(KeyItems.KeyItem.Teachy_tv, 'A television set that is tuned to a program with useful tips for novice TRAINERS', null, true),
-            new KeyItem(KeyItems.KeyItem.Coin_case, 'A case for holding money. It can hold up to 1,000,000 coins', null, true),
-            new KeyItem(KeyItems.KeyItem.Pokeball_bag, 'A tiny bag that can hold up to 4 different types of PokéBalls', null, true),
-            new KeyItem(KeyItems.KeyItem.Town_map, 'A very convenient map that can be viewed anytime. It even shows you your present location in the region', function () {
-                return App.game.statistics.routeKills[1]() >= GameConstants.ROUTE_KILLS_NEEDED;
+            new KeyItem(KeyItems.KeyItem.Teachy_tv, 'A television set that is tuned to a program with useful tips for novice TRAINERS', null, true, undefined, 'Teachy TV'),
+            new KeyItem(KeyItems.KeyItem.Coin_case, 'A case for holding money', null, true, undefined, 'Coin Case'),
+            new KeyItem(KeyItems.KeyItem.Pokeball_bag, 'A small bag that can hold many different types of PokéBalls', null, true, undefined, 'Pokéball Bag'),
+            new KeyItem(KeyItems.KeyItem.Town_map, 'A very convenient map that can be viewed anytime. It even shows you your present location in the region', () => {
+                return App.game.statistics.routeKills[GameConstants.Region.kanto][1]() >= GameConstants.ROUTE_KILLS_NEEDED;
             }, false, () => {
                 Information.show({
                     steps: [
@@ -26,36 +26,70 @@ class KeyItems implements Feature {
                         },
                     ],
                 });
-            }),
+            }, 'Town Map'),
             // TODO obtain somewhere at the start
-            new KeyItem(KeyItems.KeyItem.Factory_key, 'This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13'),
-            new KeyItem(KeyItems.KeyItem.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region,<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon', null, false, () => {
+            new KeyItem(KeyItems.KeyItem.Factory_key, 'This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13', undefined, undefined, undefined, 'Factory Key'),
+            new KeyItem(KeyItems.KeyItem.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region and beyond,<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon', null, false, () => {
                 Information.show({
                     steps: [
                         {
                             element: document.getElementById('pokeballSelector'),
-                            intro: 'Select which Pokeball types to catch Pokémon with based on their caught/shiny status.<br/><i><sup>Hover over the column titles for more info.</sup></i><br/><br/>Capturing Pokémon gains you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.png" height="25px"> Dungeon Tokens.',
+                            intro: 'Select which Pokéball types to catch Pokémon with based on their caught/shiny status.<br/><i><sup>Hover over the column titles for more info.</sup></i><br/><br/>Capturing Pokémon gains you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens.<br/><br/>Try now by clicking the "Caught" selector to change it.',
                         },
                     ],
+                    exitOnEsc: false,
+                    showButtons: false,
                 });
-            }),
-            new KeyItem(KeyItems.KeyItem.Super_rod, 'The best fishing rod for catching wild water Pokémon', function () {
-                return App.game.statistics.routeKills[12]() >= GameConstants.ROUTE_KILLS_NEEDED;
-            }),
-            // TODO obtain somewhere at the start
-            new KeyItem(KeyItems.KeyItem.Holo_caster, 'A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others'),
-            new KeyItem(KeyItems.KeyItem.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care', function () {
-                return App.game.statistics.routeKills[5]() >= GameConstants.ROUTE_KILLS_NEEDED;
-            }),
-            new KeyItem(KeyItems.KeyItem.Safari_ticket, 'This ticket grants access to the Safari Zone in Fuchsia City'),
-            new KeyItem(KeyItems.KeyItem.Wailmer_pail, 'This is a tool for watering Berries you planted to make them grow more quickly', function () {
-                return MapHelper.accessToRoute(14, GameConstants.Region.kanto);
-            }),
+                const caughtSelector: HTMLElement = document.querySelector('.pokeball-small.clickable.pokeball-selected');
+                caughtSelector.addEventListener('click', () => {
+                    Information.hide();
+                    $('#pokeballSelectorModal').one('shown.bs.modal', null, () => {
+                        // Need to set a timeout, otherwise it messes up the modal layout
+                        setTimeout(() => {
+                            Information.show({
+                                steps: [
+                                    {
+                                        element: document.querySelector('#pokeballSelectorModal .modal-body'),
+                                        intro: 'Select the <img title="Pokéball" src="assets/images/pokeball/Pokeball.svg" height="25px"> Pokéball to use this type of ball to capture already caught Pokémon, which will give you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens when captured.',
+                                    },
+                                ],
+                                // Needed for IntroJs on modals
+                                overlayOpacity: 0,
+                            });
+                        }, 100);
 
-            new KeyItem(KeyItems.KeyItem.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground'),
+                        // Hide the IntroJS overlay once the user selects the Pokeball
+                        const selectPokeball = document.querySelectorAll('#pokeballSelectorModal .clickable')[1];
+                        selectPokeball.addEventListener('click', () => {
+                            Information.hide();
+                        },{
+                            once: true,
+                        });
+                    });
+                },{
+                    once: true,
+                });
+            }, 'Dungeon Ticket'),
+            new KeyItem(KeyItems.KeyItem.Super_rod, 'The best fishing rod for catching wild water Pokémon', () => {
+                return App.game.statistics.routeKills[GameConstants.Region.kanto][12]() >= GameConstants.ROUTE_KILLS_NEEDED;
+            }, undefined, undefined, 'Super Rod'),
+            // TODO obtain somewhere at the start
+            new KeyItem(KeyItems.KeyItem.Holo_caster, 'A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others', undefined, undefined, undefined, 'Holo Caster'),
+            new KeyItem(KeyItems.KeyItem.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémons attack; some baby Pokémon can only be found through breeding too!', () => {
+                return App.game.statistics.routeKills[GameConstants.Region.kanto][5]() >= GameConstants.ROUTE_KILLS_NEEDED;
+            }, undefined, undefined, 'Mystery Egg'),
+            new KeyItem(KeyItems.KeyItem.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City'),
+            new KeyItem(KeyItems.KeyItem.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.', () => {
+                return MapHelper.accessToRoute(14, GameConstants.Region.kanto);
+            }, undefined, undefined, 'Wailmer Pail'),
+
+            new KeyItem(KeyItems.KeyItem.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground', undefined, undefined, undefined, 'Explorer Kit'),
             // TODO buy for 500 quest points
-            new KeyItem(KeyItems.KeyItem.Event_calendar, 'This calendar will keep you up to date on the latest events'),
-            new KeyItem(KeyItems.KeyItem.Shard_case, 'A case specifically designed for holding shards'),
+            new KeyItem(KeyItems.KeyItem.Event_calendar, 'This calendar will keep you up to date on the latest events', undefined, undefined, undefined, 'Event Calender'),
+            new KeyItem(KeyItems.KeyItem.Shard_case, 'A case specifically designed for holding shards', undefined, undefined, undefined, 'Shard Case'),
+            new KeyItem(KeyItems.KeyItem.DNA_splicers, 'A splicer that fuses certain Pokémon', () => {
+                return App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]() > 0;
+            }, undefined, undefined, 'DNA Splicers'),
         ];
     }
 
@@ -66,9 +100,11 @@ class KeyItems implements Feature {
         return this.itemList[item].isUnlocked;
     }
 
-    gainKeyItem(item: KeyItems.KeyItem) {
+    gainKeyItem(item: KeyItems.KeyItem, silent = false) {
         if (!this.hasKeyItem(item)) {
-            KeyItemController.showGainModal(item);
+            if (!silent) {
+                KeyItemController.showGainModal(item);
+            }
             this.itemList[item].unlock();
         }
     }
@@ -125,6 +161,7 @@ namespace KeyItems {
         'Wailmer_pail',
         'Explorer_kit',
         'Event_calendar',
-        'Shard_case'
+        'Shard_case',
+        'DNA_splicers'
     }
 }

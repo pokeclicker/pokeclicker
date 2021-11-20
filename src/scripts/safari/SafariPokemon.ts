@@ -1,17 +1,27 @@
 class SafariPokemon implements PokemonInterface {
-    name: string;
+    name: PokemonNameType;
     id: number;
     type1: PokemonType;
     type2: PokemonType;
     shiny: boolean;
     baseCatchFactor: number;
     baseEscapeFactor: number;
+
+    // Used for overworld sprites
+    x = 0;
+    y = 0;
+    steps = 0;
+
+    // Affects catch/flee chance
     private _angry: KnockoutObservable<number>;
     private _eating: KnockoutObservable<number>;
-
+    private _eatingBait: KnockoutObservable<BaitType>;
 
     // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
-    static readonly list = [
+    static readonly list: {
+        name: PokemonNameType,
+        weight: number
+    }[] = [
         { name: 'Nidoran(F)', weight: 15 },
         { name: 'Nidorina', weight: 10 },
         { name: 'Nidoran(M)', weight: 25 },
@@ -30,11 +40,18 @@ class SafariPokemon implements PokemonInterface {
         { name: 'Tangela', weight: 4 },
     ];
 
-    static readonly listWeight = SafariPokemon.list.reduce((sum: number, pokemon) => {
-        return sum += pokemon.weight;
-    }, 0);
+    public static listWeight(): number {
+        return SafariPokemon.list.reduce((sum: number, pokemon) => {
+            // double the chance if pokemon has not been captured yet
+            return sum += this.calcPokemonWeight(pokemon);
+        }, 0);
+    }
 
-    constructor(name: string) {
+    public static calcPokemonWeight(pokemon): number {
+        return pokemon.weight * (App.game.party.alreadyCaughtPokemonByName(pokemon.name) ? 1 : 2);
+    }
+
+    constructor(name: PokemonNameType) {
         const data = PokemonHelper.getPokemonByName(name);
 
         this.name = data.name;
@@ -42,13 +59,29 @@ class SafariPokemon implements PokemonInterface {
         this.type1 = data.type1;
         this.type2 = data.type2;
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
+        GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[this.id]);
+        GameHelper.incrementObservable(App.game.statistics.totalPokemonEncountered);
+
         if (this.shiny) {
-            Notifier.notify({ message: `✨ You encountered a shiny ${name}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long, setting: GameConstants.NotificationSetting.encountered_shiny });
+            GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[this.id]);
+            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
+
+            Notifier.notify({
+                message: `✨ You encountered a shiny ${name}! ✨`,
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.shiny_long,
+                setting: NotificationConstants.NotificationSetting.encountered_shiny,
+            });
+
+            // Track shinies encountered, and rate of shinies
+            LogEvent('encountered shiny', 'shiny pokemon', 'safari encounter',
+                Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
         this.baseCatchFactor = data.catchRate * 1 / 6;
         this.baseEscapeFactor = 30;
         this._angry = ko.observable(0);
         this._eating = ko.observable(0);
+        this._eatingBait = ko.observable(BaitType.Bait);
     }
 
     public get catchFactor(): number {
@@ -60,19 +93,26 @@ class SafariPokemon implements PokemonInterface {
         if (this.angry > 0) {
             catchF *= 2;
         }
+        if (this.eatingBait === BaitType.Nanab) {
+            catchF *= 1.5;
+        }
 
         return Math.min(100, catchF);
     }
 
     public get escapeFactor(): number {
+        let escapeF = this.baseEscapeFactor;
         if (this.eating > 0) {
-            return this.baseEscapeFactor / 4;
+            escapeF /= 4;
         }
         if (this.angry > 0) {
-            return this.baseEscapeFactor * 2;
+            escapeF *= 2;
+        }
+        if (this.eatingBait === BaitType.Razz) {
+            escapeF /= 1.5;
         }
 
-        return this.baseEscapeFactor;
+        return escapeF;
     }
 
     public get angry(): number {
@@ -91,14 +131,18 @@ class SafariPokemon implements PokemonInterface {
         this._eating(value);
     }
 
+    public get eatingBait(): BaitType {
+        return this._eatingBait();
+    }
+
+    public set eatingBait(value: BaitType) {
+        this._eatingBait(value);
+    }
+
     public static random() {
-        const rand = Math.random() * SafariPokemon.listWeight;
+        const rand = Math.random() * SafariPokemon.listWeight();
         let i = 0;
-        for (const pokemon of SafariPokemon.list) {
-            i += pokemon.weight;
-            if (rand < i) {
-                return new SafariPokemon(pokemon.name);
-            }
-        }
+        const pokemon = SafariPokemon.list.find(p => (i += this.calcPokemonWeight(p)) && rand < i);
+        return new SafariPokemon(pokemon.name);
     }
 }

@@ -1,5 +1,5 @@
-<g data-bind='if: player.region == GameConstants.Region.johto'>
-    <image width="100%" xlink:href="assets/images/johto.png"></image>
+<g data-bind='visible: player.region == GameConstants.Region.johto'>
+    <image width="1600" height="960" xlink:href="assets/images/johto.png" href="assets/images/johto.png"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -451,9 +451,7 @@
     <!--Slowpoke Well-->
     <%- include('templates/mapDungeon',
         { name: "Slowpoke Well"
-        , moveToTown: "Azalea Town"
-        , x: 31, y: 57
-        , width: 1, height: 1
+        , x: 32, y: 52
         })
      %>
 
@@ -570,6 +568,30 @@
         , x: 15, y: 23
         , width: 3, height: 4
         , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Olivine City') }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Underground Entrance"
+        , x: 39, y: 29
+        , width: 3, height: 4
+        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Farm"
+        , x: 36, y: 14
+        , width: 3, height: 3
+        , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Pokemon Day Care"
+        , x: 28, y: 38
+        , width: 4, height: 4
+        , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
         })
      %>
 

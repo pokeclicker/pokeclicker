@@ -3,7 +3,7 @@ class DataPokemon implements PokemonInterface {
 
     constructor(
         public id: number,
-        public name: string,
+        public name: PokemonNameType,
         public catchRate: number,
         public evolutions: Evolution[],
         public type1: PokemonType,
@@ -12,7 +12,7 @@ class DataPokemon implements PokemonInterface {
         public levelType: LevelType,
         public exp: number,
         public eggCycles: number,
-        public heldItem: string | null
+        public heldItem: BagItem | null
     ) {
         this.shiny = false;
     }

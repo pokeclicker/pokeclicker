@@ -1,24 +1,56 @@
-class BattleFrontier {
+class BattleFrontier implements Feature {
+    name = 'BattleFrontier';
+    saveKey = 'battleFrontier';
+
+    milestones = BattleFrontierMilestones;
+
+    defaults = {};
+
     constructor() {}
 
-    public static canAccess() {
+    initialize(): void {}
+
+    update(delta: number): void {}
+
+    canAccess(): boolean {
         const deoxysQuest = App.game.quests.getQuestLine('Mystery of Deoxys');
         return deoxysQuest.state() == QuestLineState.ended || deoxysQuest.curQuest() >= 3;
     }
 
-    public static enter() {
-        if (!this.canAccess()) {
-            return Notifier.notify({ title: '[Battle Frontier]', message: 'You must progress further in the "Mystery of Deoxys" quest before you can participate', type: GameConstants.NotificationOption.warning });
+    public enter(): void {
+        if (!App.game.battleFrontier.canAccess()) {
+            return Notifier.notify({
+                title: '[Battle Frontier]',
+                message: 'You must progress further in the "Mystery of Deoxys" quest before you can participate',
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
+        BattleFrontierBattle.enemyPokemon(null);
         App.game.gameState = GameConstants.GameState.battleFrontier;
     }
 
-    public static start() {
+    public start(): void {
         BattleFrontierRunner.start();
     }
 
-    public static leave() {
+    public leave(): void {
         // Put the user back in the town
         App.game.gameState = GameConstants.GameState.town;
+    }
+
+    toJSON(): Record<string, any> {
+        return {
+            milestones: this.milestones.milestoneRewards.filter(m => m.obtained()).map(m => [m.stage, m.description]),
+        };
+    }
+
+    fromJSON(json: Record<string, any>): void {
+        if (json == null) {
+            return;
+        }
+
+        json.milestones?.forEach(([stage, description]) => {
+            this.milestones.milestoneRewards.find(m => m.stage == stage && m.description == description)?.obtained(true);
+        });
     }
 }

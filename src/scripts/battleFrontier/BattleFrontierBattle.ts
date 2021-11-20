@@ -1,9 +1,11 @@
-///<reference path="../Battle.ts"/>
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../Battle.ts" />
+
 class BattleFrontierBattle extends Battle {
     static alternateAttack = false;
     static pokemonIndex: KnockoutObservable<number> = ko.observable(0);
     static totalPokemons: KnockoutObservable<number> = ko.observable(3);
-    
+
     // Looks like we don't need this, unless we want to put a random trainer name or similar
     static trainer: KnockoutObservable<number> = ko.observable(0);
 
@@ -57,7 +59,7 @@ class BattleFrontierBattle extends Battle {
     }
 
     public static generateNewEnemy() {
-        const enemy = pokemonMap.random(GameConstants.TotalPokemonsPerRegion[player.highestRegion()]);
+        const enemy = pokemonMap.randomRegion(player.highestRegion());
         // This needs to stay as none so the stage number isn't adjusted
         const health = PokemonFactory.routeHealth(BattleFrontierRunner.stage() + 10, GameConstants.Region.none);
         const level = Math.min(100, BattleFrontierRunner.stage());
@@ -67,7 +69,7 @@ class BattleFrontierBattle extends Battle {
         // Give 1 extra shard per pokemon defeated after every 80 stages
         const shards = Math.ceil(BattleFrontierRunner.stage() / 80);
 
-        const enemyPokemon = new BattlePokemon(enemy.name, enemy.id, enemy.type[0], enemy.type[1], health, level, 0, enemy.exp, money, shiny, shards);
+        const enemyPokemon = new BattlePokemon(enemy.name, enemy.id, enemy.type[0], enemy.type[1], health, level, 0, enemy.exp, new Amount(money, GameConstants.Currency.money), shiny, shards);
         this.enemyPokemon(enemyPokemon);
     }
 }

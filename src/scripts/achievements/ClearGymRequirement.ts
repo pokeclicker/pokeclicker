@@ -1,10 +1,10 @@
-///<reference path="Requirement.ts"/>
+///<reference path="AchievementRequirement.ts"/>
 
-class ClearGymRequirement extends Requirement {
+class ClearGymRequirement extends AchievementRequirement {
     public gymIndex: number; // Gym name index in array GameConstants.Gyms
 
-    constructor(value: number, gymIndex: number, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, type);
+    constructor(value: number, gymIndex: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+        super(value, option, GameConstants.AchievementType['Clear Gym']);
         this.gymIndex = gymIndex;
     }
 
@@ -14,9 +14,9 @@ class ClearGymRequirement extends Requirement {
 
     public hint(): string {
         if (this.requiredValue != 1) {
-            return `Requires the ${GameConstants.RegionDungeons.flat()[this.gymIndex]} Gym to be defeated ${this.requiredValue} times.`;
+            return `Requires the ${GameConstants.RegionGyms.flat()[this.gymIndex]} Gym to be defeated ${this.requiredValue} times.`;
         } else {
-            return `Requires the ${GameConstants.RegionDungeons.flat()[this.gymIndex]} Gym to be completed.`;
+            return `Requires the ${GameConstants.RegionGyms.flat()[this.gymIndex]} Gym to be completed.`;
         }
     }
 }

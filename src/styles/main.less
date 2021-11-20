@@ -17,7 +17,7 @@
   top: 0px;
   padding: 10px;
   width: 370px;
-  z-index: 1020;
+  z-index: 10020;
   pointer-events: none;
   .toast {
     pointer-events: all;
@@ -27,7 +27,7 @@
   }
 }
 
-  
+
 @media (min-width: 768px) {
   #left-column, #middle-sort-column, #right-column {
     &:empty {
@@ -87,6 +87,10 @@
   color:#f2f;
 	-webkit-animation: flash linear 0.5s infinite;
 	animation: flash linear 0.5s infinite;
+}
+
+img.pixelated {
+  image-rendering: pixelated;
 }
 
 @-webkit-keyframes flash {
@@ -221,26 +225,47 @@ body:hover {
   }
 }
 
+// Firefox fix for background covering borders in tables
+td {
+  background-clip: padding-box;
+}
+
 #pokemonList {
   span {
     vertical-align: middle;
-  }
-  td {
-    vertical-align: middle;
-    padding: 0 @tablePaddingWidth;
+    line-height: inherit;
   }
 
-  td:first-child {
-    min-width: 60%;
-    text-align: left;
-  }
-  th:first-child {
-    text-align: left;
-  }
-  th {
-    text-align: center;
-    //padding: 0 @tablePaddingWidth;
+  td {
     vertical-align: middle;
+    // Use the width as the height padding as well
+    padding: @tablePaddingWidth;
+
+    > div {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  // Fill the line when we're in small mode
+  .pokemonName { width: 100%; }
+
+  // Hide the name header when we're in small mode
+  .col-lg-3 & thead .pokemonName { display: none; }
+
+  // Name should grow faster than attack and level
+  .pokemonName { flex-grow: 10; }
+  .pokemonAttack, .pokemonLevel {
+    flex-grow: 1;
+    min-width: 60px;
+  }
+
+  .pokemonAttack { text-align: left; }
+  .pokemonLevel { text-align: right; }
+
+  .col-lg-6 & {
+    .pokemonName { width: auto; }
+    .pokemonAttack { text-align: right; }
   }
 }
 
@@ -267,6 +292,14 @@ img {
 
 .clickable {
   cursor: pointer;
+}
+
+.no-click {
+  pointer-events: none;
+}
+
+.btn-static {
+  pointer-events: none;
 }
 
 img {
@@ -464,6 +497,7 @@ img {
 *::-webkit-scrollbar
 {
 	width: 8px;
+	height: 8px;
 	background-color: #F5F5F5;
 }
 
@@ -487,4 +521,47 @@ td.tight {
 
 .all-pointers {
   pointer-events: all !important;
+}
+
+.introjs-fixParent.modal,
+.introjs-fixParent.modal-dialog {
+  position: absolute !important;  
+}
+
+.bg-locked {
+  background-color: var(--locked);
+}
+.bg-currentPlace {
+  background-color: var(--currentPlace);
+}
+.bg-incomplete {
+  background-color: var(--incomplete);
+}
+.bg-uncaughtPokemon {
+  background-color: var(--uncaughtPokemon);
+}
+.bg-uncaughtShinyPokemon {
+  background-color: var(--uncaughtShinyPokemon);
+}
+.bg-completed {
+  background-color: var(--completed);
+}
+
+.text-locked {
+  color: var(--locked);
+}
+.text-currentPlace {
+  color: var(--currentPlace);
+}
+.text-incomplete {
+  color: var(--incomplete);
+}
+.text-uncaughtPokemon {
+  color: var(--uncaughtPokemon);
+}
+.text-uncaughtShinyPokemon {
+  color: var(--uncaughtShinyPokemon);
+}
+.text-completed {
+  color: var(--completed);
 }

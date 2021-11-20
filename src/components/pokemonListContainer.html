@@ -1,38 +1,79 @@
-<div id="pokemonListContainer" class="card sortable border-secondary mb-3" data-bind="visible: player.starter != GameConstants.Starter.None">
+<script type="text/html" id="PartySortSettingTemplate">
+    <div class="row no-gutters" style="align-items: center">
+        <div class="input-group">
+            <select
+                class="custom-select"
+                onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                data-bind="foreach: $data.options, attr: {name}"
+            >
+                <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
+            </select>
+            <div class="input-group-append bg-primary text-light">
+                <label
+                    for="partySortDirection"
+                    class="clickable m-0 pl-2 pr-2"
+                    style="font-size: 22px;"
+                    data-bind="text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂'"
+                >⥂</label>
+                <input
+                    id="partySortDirection"
+                    style="vertical-align: middle"
+                    class="hidden"
+                    type="checkbox"
+                    data-bind="checked: Settings.getSetting('partySortDirection').observableValue()"
+                    onchange="Settings.setSettingByName('partySortDirection', this.checked)"
+                />
+            </div>
+        </div>
+    </div>
+</script>
+<div id="pokemonListContainer" class="card sortable border-secondary mb-3" data-bind="visible: player.starter() != GameConstants.Starter.None">
     <div class="card-header p-0" data-toggle="collapse" href="#pokemonListBody">
         <span>Pokémon List</span>
     </div>
     <div id="pokemonListBody" class="card-body p-0 show table-responsive">
         <div data-bind="template: { name: 'PartySortSettingTemplate', data: Settings.getSetting('partySort')}"></div>
 
-        <table id="pokemonList" class="table table-striped table-hover table-sm m-0">
+        <table
+            id="pokemonList"
+            class="table table-striped table-hover table-sm m-0"
+        >
             <thead>
-
-            <tr>
-                <th>Name</th>
-                <th>Atk</th>
-                <th>Lvl</th>
-            </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div>
+                            <div class="pokemonName">
+                                <span>Name</span>
+                            </div>
+                            <div class="pokemonAttack">Attack</div>
+                            <div class="pokemonLevel">Level</div>
+                        </div>
+                    </td>
+                </tr>
             </thead>
-            <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: PartyController.getSortedList() }">
-
+            <tbody data-bind="foreach: PartyController.getSortedList()">
+                <tr data-bind="hidden: $data.breeding">
+                    <td>
+                        <img
+                            class="smallImage"
+                            data-bind="attr: { src: PokemonHelper.getImage($data, App.game.party.alreadyCaughtPokemon($data.id, true)) }"
+                            src=""
+                            alt=""
+                        />
+                    </td>
+                    <td>
+                        <div>
+                            <div class="pokemonName">
+                                <span data-bind="text: name">Name</span>
+                                <sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
+                            </div>
+                            <div class="pokemonAttack" data-bind="text: attack.toLocaleString()"></div>
+                            <div class="pokemonLevel" data-bind="text: level"></div>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
-
-    <script type="text/html" id="PartySortSettingTemplate">
-        <div class="row no-gutters" style="align-items: center">
-            <div class="col-2">Sort:</div>
-            <select class="col-9" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
-                    data-bind="foreach: $data.options, attr: {name}">
-                <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
-            </select>
-            <div class="col-1">
-                <label for="partySortDirection" class="clickable" style="font-size: 24px;" data-bind="text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
-                <input id="partySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
-                       data-bind="checked: Settings.getSetting('partySortDirection').observableValue()"
-                       onchange="Settings.setSettingByName('partySortDirection', this.checked)"/>
-            </div>
-        </div>
-    </script>
 </div>
