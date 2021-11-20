@@ -248,6 +248,8 @@ namespace GameConstants {
         'Razor_claw',
         'Razor_fang',
         'Prism_scale',
+        'Black_DNA',
+        'White_DNA',
         'Sachet',
         'Whipped_dream',
         'Ice_stone',
