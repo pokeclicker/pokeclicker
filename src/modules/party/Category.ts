@@ -5,8 +5,6 @@ import {
     Observable as KnockoutObservable,
     Subscription as KnockoutSubscription,
     ObservableArray as KnockoutObservableArray,
-    observableArray,
-    observable,
 } from 'knockout';
 import { Saveable } from '../DataStore/common/Saveable';
 
@@ -17,7 +15,7 @@ export type PokemonCategory = {
 };
 
 export default class PokemonCategories implements Saveable {
-    public static categories: KnockoutObservableArray<PokemonCategory> = observableArray([]);
+    public static categories: KnockoutObservableArray<PokemonCategory> = ko.observableArray([]);
 
     saveKey = 'categories';
     defaults = {};
@@ -41,7 +39,7 @@ export default class PokemonCategories implements Saveable {
     }
 
     public static addCategory(name: string, color: string): void {
-        this.categories.push({ name: observable(name), color: observable(color) });
+        this.categories.push({ name: ko.observable(name), color: ko.observable(color) });
 
         // Subscribe to color change event
         const root = document.documentElement;
