@@ -39,6 +39,7 @@ class Routes {
     public static unnormalizeRoute(normalizedRoute: number): number {
         return this.regionRoutes[normalizedRoute - 1].number;
     }
+
     public static normalizedNumber(region: GameConstants.Region, route: number): number {
         if (region == GameConstants.Region.none) {
             return route;
