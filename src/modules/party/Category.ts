@@ -18,7 +18,7 @@ export default class PokemonCategories implements Saveable {
     public static categories: KnockoutObservableArray<PokemonCategory> = ko.observableArray([]);
 
     saveKey = 'categories';
-    defaults = {};
+    defaults: Record<string, any> = {};
 
     public static initialize() {
         this.addCategory('None', '#333'); // dark grey
