@@ -1281,7 +1281,7 @@ gymList['Ilima\'s Trial'] = new Gym(
     BadgeEnums.NormaliumZ,
     128000,
     'You have received the Normalium-Z!',
-    []
+    [new ObtainedPokemonRequirement(pokemonMap.Meltan)]
 );
 gymList['Lana\'s Trial'] = new Gym(
     'Lana',
@@ -1290,7 +1290,7 @@ gymList['Lana\'s Trial'] = new Gym(
     BadgeEnums.WateriumZ,
     128000,
     'You have received the Waterium-Z!',
-    []
+    [new ObtainedPokemonRequirement(pokemonMap.Meltan)]
 );
 gymList['Ikawe\'s Trial'] = new Gym(
     'Ikawe',
@@ -1299,7 +1299,7 @@ gymList['Ikawe\'s Trial'] = new Gym(
     BadgeEnums.FiriumZ,
     128000,
     'You have received the Firium-Z!',
-    []
+    [new ObtainedPokemonRequirement(pokemonMap.Meltan)]
 );
 gymList['Mallow\'s Trial'] = new Gym(
     'Mallow',
@@ -1308,7 +1308,7 @@ gymList['Mallow\'s Trial'] = new Gym(
     BadgeEnums.GrassiumZ,
     128000,
     'You have received the Grassium-Z!',
-    []
+    [new ObtainedPokemonRequirement(pokemonMap.Meltan)]
 );
 gymList['Sophocles\' Trial'] = new Gym(
     'Sophocles',
@@ -1317,7 +1317,7 @@ gymList['Sophocles\' Trial'] = new Gym(
     BadgeEnums.ElectriumZ,
     128000,
     'You have received the Electrium-Z!',
-    []
+    [new ObtainedPokemonRequirement(pokemonMap.Meltan)]
 );
 gymList['Acerola\'s Trial'] = new Gym(
     'Acerola',
@@ -1326,7 +1326,7 @@ gymList['Acerola\'s Trial'] = new Gym(
     BadgeEnums.GhostiumZ,
     128000,
     'You have received the Ghostium-Z!',
-    []
+    [new ObtainedPokemonRequirement(pokemonMap.Meltan)]
 );
 gymList['Vast Poni Canyon Trial'] = new Gym(
     'Hapu',
@@ -1335,7 +1335,7 @@ gymList['Vast Poni Canyon Trial'] = new Gym(
     BadgeEnums.DragoniumZ,
     128000,
     'You have received the Dragonium-Z!',
-    []
+    [new ObtainedPokemonRequirement(pokemonMap.Meltan)]
 );
 
 //Alola Elite 4
