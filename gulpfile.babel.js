@@ -196,7 +196,7 @@ gulp.task('scripts', () => {
         ]))
         .then(() => {
             // Compile the old scripts
-            const tsProject = typescript.createProject('tsconfig.json');
+            const tsProject = typescript.createProject('tsconfig.json', { typescript: require('typescript') });
             const compileScripts = tsProject.src()
                 .pipe(replace('$VERSION', version))
                 .pipe(replace('$DISCORD_ENABLED', !!config.DISCORD_LOGIN_PROXY))
