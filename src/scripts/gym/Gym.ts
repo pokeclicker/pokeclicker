@@ -7,11 +7,20 @@
  * Data list that contains all gymLeaders, accessible by townName.
  */
 const gymList: { [townName: string]: Gym } = {};
+interface gymFlags {
+    quest?: boolean;
+    achievement?: boolean;
+}
 
 /**
  * Gym class.
  */
 class Gym {
+    public flags = {
+        quest: true,
+        achievement: true,
+    };
+
     constructor(
         public leaderName: string,
         public town: string,
@@ -20,8 +29,15 @@ class Gym {
         public moneyReward: number,
         public defeatMessage: string,
         public requirements: (OneFromManyRequirement | Requirement)[] = [],
-        public rewardFunction = () => {}
-    ) {}
+        public rewardFunction = () => {},
+        {
+            quest = true,
+            achievement = true,
+        }: gymFlags = {}
+    ) {
+        this.flags.quest = quest;
+        this.flags.achievement = achievement;
+    }
 
     public static isUnlocked(gym: Gym): boolean {
         return gym.requirements.every(requirement => requirement.isCompleted());
@@ -452,8 +468,7 @@ gymList['Dewford Town'] = new Gym(
     ],
     BadgeEnums.Knuckle,
     2000,
-    'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Gym Badge!',
-    []
+    'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Gym Badge!'
 );
 gymList['Mauville City'] = new Gym(
     'Wattson',
@@ -466,8 +481,7 @@ gymList['Mauville City'] = new Gym(
     ],
     BadgeEnums.Dynamo,
     3000,
-    'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!',
-    []
+    'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!'
 );
 gymList['Lavaridge Town'] = new Gym(
     'Flannery',
@@ -480,8 +494,7 @@ gymList['Lavaridge Town'] = new Gym(
     ],
     BadgeEnums.Heat,
     4000,
-    'Oh... I guess I was trying too hard... I... I\'ve only recently become a Gym Leader. I tried too hard to be someone I\'m not. I have to do things my natural way. If I don\'t, my Pokémon will be confused. Thanks for teaching me that. For that, you deserve this.',
-    []
+    'Oh... I guess I was trying too hard... I... I\'ve only recently become a Gym Leader. I tried too hard to be someone I\'m not. I have to do things my natural way. If I don\'t, my Pokémon will be confused. Thanks for teaching me that. For that, you deserve this.'
 );
 gymList['Petalburg City'] = new Gym(
     'Norman',
@@ -509,8 +522,7 @@ gymList['Fortree City'] = new Gym(
     ],
     BadgeEnums.Feather,
     6000,
-    'Never before have I seen a Trainer command Pokémon with more grace than I... In recognition of your prowess, I present to you this Gym Badge.',
-    []
+    'Never before have I seen a Trainer command Pokémon with more grace than I... In recognition of your prowess, I present to you this Gym Badge.'
 );
 gymList['Mossdeep City'] = new Gym(
     'Tate & Liza',
@@ -523,8 +535,7 @@ gymList['Mossdeep City'] = new Gym(
     ],
     BadgeEnums.Mind,
     8000,
-    'What? Our combination... Was shattered! It can\'t be helped. You\'ve won... So, in recognition, take this Gym Badge.',
-    []
+    'What? Our combination... Was shattered! It can\'t be helped. You\'ve won... So, in recognition, take this Gym Badge.'
 );
 gymList['Sootopolis City'] = new Gym(
     'Juan',
@@ -1281,7 +1292,12 @@ gymList['Ilima\'s Trial'] = new Gym(
     BadgeEnums.NormaliumZ,
     128000,
     'You have received the Normalium-Z!',
-    [new ObtainedPokemonRequirement(pokemonMap.Meltan)]
+    undefined,
+    undefined,
+    {
+        quest: false,
+        achievement: false,
+    }
 );
 gymList['Lana\'s Trial'] = new Gym(
     'Lana',
@@ -1290,7 +1306,12 @@ gymList['Lana\'s Trial'] = new Gym(
     BadgeEnums.WateriumZ,
     128000,
     'You have received the Waterium-Z!',
-    [new ObtainedPokemonRequirement(pokemonMap.Meltan)]
+    undefined,
+    undefined,
+    {
+        quest: false,
+        achievement: false,
+    }
 );
 gymList['Ikawe\'s Trial'] = new Gym(
     'Ikawe',
@@ -1299,7 +1320,12 @@ gymList['Ikawe\'s Trial'] = new Gym(
     BadgeEnums.FiriumZ,
     128000,
     'You have received the Firium-Z!',
-    [new ObtainedPokemonRequirement(pokemonMap.Meltan)]
+    undefined,
+    undefined,
+    {
+        quest: false,
+        achievement: false,
+    }
 );
 gymList['Mallow\'s Trial'] = new Gym(
     'Mallow',
@@ -1308,7 +1334,12 @@ gymList['Mallow\'s Trial'] = new Gym(
     BadgeEnums.GrassiumZ,
     128000,
     'You have received the Grassium-Z!',
-    [new ObtainedPokemonRequirement(pokemonMap.Meltan)]
+    undefined,
+    undefined,
+    {
+        quest: false,
+        achievement: false,
+    }
 );
 gymList['Sophocles\' Trial'] = new Gym(
     'Sophocles',
@@ -1317,7 +1348,12 @@ gymList['Sophocles\' Trial'] = new Gym(
     BadgeEnums.ElectriumZ,
     128000,
     'You have received the Electrium-Z!',
-    [new ObtainedPokemonRequirement(pokemonMap.Meltan)]
+    undefined,
+    undefined,
+    {
+        quest: false,
+        achievement: false,
+    }
 );
 gymList['Acerola\'s Trial'] = new Gym(
     'Acerola',
@@ -1326,7 +1362,12 @@ gymList['Acerola\'s Trial'] = new Gym(
     BadgeEnums.GhostiumZ,
     128000,
     'You have received the Ghostium-Z!',
-    [new ObtainedPokemonRequirement(pokemonMap.Meltan)]
+    undefined,
+    undefined,
+    {
+        quest: false,
+        achievement: false,
+    }
 );
 gymList['Vast Poni Canyon Trial'] = new Gym(
     'Hapu',
@@ -1335,7 +1376,12 @@ gymList['Vast Poni Canyon Trial'] = new Gym(
     BadgeEnums.DragoniumZ,
     128000,
     'You have received the Dragonium-Z!',
-    [new ObtainedPokemonRequirement(pokemonMap.Meltan)]
+    undefined,
+    undefined,
+    {
+        quest: false,
+        achievement: false,
+    }
 );
 
 //Alola Elite 4
