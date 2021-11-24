@@ -123,7 +123,7 @@ SpecialEvents.newEvent('Let\'s GO!', 'Encounter special Eevee and Pikachu roamin
     }
 );
 // Christmas
-SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax for a limited time roaming around Kanto, Johto and Hoenn.',
+SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax for a limited time roaming around every region.',
     // Start
     new Date(new Date().getFullYear(), 11, 24, 1), () => {
         // Add to every region excluding None
