@@ -84,6 +84,12 @@ enum BadgeEnums {
     'Elite_Wikstrom',
     'Elite_Drasna',
     'Elite_KalosChampion',
+    'KantoAsh',
+    'JohtoAsh',
+    'HoennAsh',
+    'SinnohAsh',
+    'UnovaAsh',
+    'KalosAsh',
     // Alola
     // TODO: these are unordered and some may be missing
     'MelemeleKahuna',
