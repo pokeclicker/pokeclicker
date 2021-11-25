@@ -821,6 +821,7 @@ gymList['Champion Cynthia'] = new Gym(
 );
 
 //Unova Gyms
+//TODO: Balancing of gym Pokemon HP & rewards.
 gymList['Aspertia City'] = new Gym(
     'Cheren',
     'Aspertia City',
@@ -933,6 +934,7 @@ gymList['Humilau City'] = new Gym(
 );
 
 //Unova Elite 4
+//TODO: Balancing of elite Pokemon HP & rewards.
 gymList['Elite Shauntal'] = new Gym(
     'Shauntal',
     'Elite Shauntal',
