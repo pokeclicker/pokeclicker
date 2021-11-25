@@ -9,7 +9,7 @@ class Information {
 
     constructor() {}
 
-    static show(options = {}) {
+    static show(options: introJs.Options = {}) {
         return introJs().setOptions({
             ...this.defaultOptions,
             ...options,

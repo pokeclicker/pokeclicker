@@ -32,7 +32,7 @@ class RouteHelper {
         }
 
         // Special requirement Pokémon
-        pokemonList = pokemonList.concat(possiblePokemons.special.filter(p => p.isAvailable()).map(p => p.pokemon));
+        pokemonList = pokemonList.concat(...possiblePokemons.special.filter(p => p.isAvailable()).map(p => p.pokemon));
 
         return pokemonList;
     }

@@ -50,18 +50,17 @@ class TypeHelper {
         a2 = a2 != PokemonType.None ? a2 : a1;
         d2 = d2 != PokemonType.None ? d2 : d1;
 
-        //TODO factor in shard value
         let m1 = TypeHelper.typeMatrix[a1][d1];
-        m1 += (App.game.shards.getShardUpgrade(a1, this.valueToType(m1)) * Shards.SHARD_UPGRADE_STEP);
-
         let m2 = TypeHelper.typeMatrix[a1][d2];
-        m2 += (App.game.shards.getShardUpgrade(a1, this.valueToType(m2)) * Shards.SHARD_UPGRADE_STEP);
-
         let m3 = TypeHelper.typeMatrix[a2][d1];
-        m3 += (App.game.shards.getShardUpgrade(a2, this.valueToType(m3)) * Shards.SHARD_UPGRADE_STEP);
-
         let m4 = TypeHelper.typeMatrix[a2][d2];
-        m4 += (App.game.shards.getShardUpgrade(a2, this.valueToType(m4)) * Shards.SHARD_UPGRADE_STEP);
+
+        if (!App.game.challenges.list.disableShards.active()) {
+            m1 += (App.game.shards.getShardUpgrade(a1, this.valueToType(m1)) * Shards.SHARD_UPGRADE_STEP);
+            m2 += (App.game.shards.getShardUpgrade(a1, this.valueToType(m2)) * Shards.SHARD_UPGRADE_STEP);
+            m3 += (App.game.shards.getShardUpgrade(a2, this.valueToType(m3)) * Shards.SHARD_UPGRADE_STEP);
+            m4 += (App.game.shards.getShardUpgrade(a2, this.valueToType(m4)) * Shards.SHARD_UPGRADE_STEP);
+        }
 
         return Math.max(m1 * m2, m3 * m4);
     }

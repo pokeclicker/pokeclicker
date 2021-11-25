@@ -298,7 +298,7 @@ class Update implements Saveable {
             }
         },
 
-        '0.7.1': ({ playerData, saveData}) => {
+        '0.7.1': ({ playerData, saveData }) => {
             saveData.breeding.eggList.map((egg) => {
                 egg.shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps / egg.steps));
                 return egg;
@@ -325,6 +325,223 @@ class Update implements Saveable {
             if (saveData.underground?.mine) {
                 // Reset the mine
                 delete saveData.underground.mine;
+            }
+        },
+
+        '0.7.4': ({ playerData, saveData }) => {
+            // Clear old quest data
+            delete saveData.quests.questList;
+
+            // Update starter selection
+            playerData.starter = playerData._starter;
+
+            /*
+             * Challenge Modes
+             */
+            // Disable Click Attacks
+            if (saveData.statistics.clickAttacks <= 100) {
+                Notifier.notify({
+                    title: 'Active Challenge Mode?',
+                    message: `Do you want to activate No Click Attack challenge mode?
+
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableClickAttack.activate();" data-dismiss="toast">Activate</button>`,
+                    timeout: GameConstants.HOUR,
+                });
+            }
+            // Disable Battle Items
+            Notifier.notify({
+                title: 'Active Challenge Mode?',
+                message: `Do you want to activate No Battle Item challenge mode?
+
+                <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableBattleItems.activate(); Object.values(player.effectList).forEach(e => e(0));" data-dismiss="toast">Activate</button>`,
+                timeout: GameConstants.HOUR,
+            });
+            // Disable Master Balls
+            if (!saveData.statistics.pokeballsUsed[3]) {
+                Notifier.notify({
+                    title: 'Active Challenge Mode?',
+                    message: `Do you want to activate No Masterball challenge mode?
+
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableMasterballs.activate();" data-dismiss="toast">Activate</button>`,
+                    timeout: GameConstants.HOUR,
+                });
+            }
+            // Disable Oak Items
+            if (Object.values(saveData.oakItems).every((oi: any) => !oi.exp)) {
+                Notifier.notify({
+                    title: 'Active Challenge Mode?',
+                    message: `Do you want to activate No Oak Item challenge mode?
+
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableOakItems.activate();" data-dismiss="toast">Activate</button>`,
+                    timeout: GameConstants.HOUR,
+                });
+            }
+            // Disable Shards
+            if (saveData.shards.shardUpgrades.every((s: number) => !s)) {
+                Notifier.notify({
+                    title: 'Active Challenge Mode?',
+                    message: `Do you want to activate No Shard challenge mode?
+
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableShards.activate();" data-dismiss="toast">Activate</button>`,
+                    timeout: GameConstants.HOUR,
+                });
+            }
+            // Disable Proteins
+            if (saveData.party.caughtPokemon.every(p => !p.proteinsUsed)) {
+                Notifier.notify({
+                    title: 'Active Challenge Mode?',
+                    message: `Do you want to activate No Protein challenge mode?
+
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableProteins.activate();" data-dismiss="toast">Activate</button>`,
+                    timeout: GameConstants.HOUR,
+                });
+            }
+
+            // Add Solaceon Ruins
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 43);
+
+            // Multi saves profile
+            const firstPokemon = saveData.party.caughtPokemon[0];
+            saveData.profile = {
+                name: 'Trainer',
+                pokemon: firstPokemon?.id || 0,
+                pokemonShiny: firstPokemon?.shiny || false,
+            };
+        },
+
+        '0.7.6': ({ playerData, saveData }) => {
+            Update.renamePokemonInSaveData(saveData, 'Lets go Pikachu', 'Let\'s Go Pikachu');
+            Update.renamePokemonInSaveData(saveData, 'Lets go Eevee', 'Let\'s Go Eevee');
+
+            // Check if the Let's Go Pikachu is hidden due to MissingNo (reset breeding status)
+            const pikachu = saveData.party.caughtPokemon.find(p => p.id == -8);
+            if (pikachu) {
+                pikachu.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Pikachu')
+                    || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Pikachu');
+            }
+            // Check if the Let's Go Eevee is hidden due to MissingNo (reset breeding status)
+            const eevee = saveData.party.caughtPokemon.find(p => p.id == -9);
+            if (eevee) {
+                eevee.breeding = !!saveData.breeding.eggList.find((e) => e.pokemon == 'Let\'s Go Eevee')
+                    || !!saveData.breeding.queueList.find((p) => p == 'Let\'s Go Eevee');
+            }
+        },
+
+        '0.8.1': ({ playerData, saveData }) => {
+            // Add Weather Institute
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 29);
+            // Add Magma Hideout
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 32);
+            // Add Aqua Hideout
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 33);
+            // Add Team Plasma Assault
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 72);
+            // Add Plasma Frigate
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 74);
+
+            // Update achievement names
+            Update.updateAchievementName(playerData, 'These pokémon must be sick', 'These Pokémon must be sick');
+            Update.updateAchievementName(playerData, 'The earth is like unions', 'The earth is like onions');
+        },
+
+        '0.8.2': ({ playerData, saveData }) => {
+            // Update achievement names
+            Update.updateAchievementName(playerData, 'Doomsday Bunker stocked with Pokeballs!', 'Doomsday Bunker stocked with Pokéballs!');
+            Update.updateAchievementName(playerData, 'Prepared for anything!', 'Professor Oak is the best!');
+        },
+
+        '0.8.3': ({ playerData, saveData }) => {
+            // If player has defeated the 8th Kalos gym, start the vivillon quest line
+            saveData.badgeCase = saveData.badgeCase || [];
+            // Not using game constants incase the value isn't 73 in the future
+            if (saveData.badgeCase[73]) { // Iceberg badge
+                saveData.quests.questLines.push({state: 1, name: 'The Great Vivillon Hunt!', quest: 0});
+            }
+
+            // Add missing key items if the player has the badge
+            const badgeToKeyItems = {
+                [5]: 'Safari_ticket', //Soul badge
+                [8]: 'Shard_case', //Earth badge
+            };
+            Object.keys(badgeToKeyItems).forEach(badge => {
+                const keyItem = badgeToKeyItems[badge];
+                if (saveData.badgeCase[badge]) {
+                    saveData.keyItems[keyItem] = true;
+                }
+            });
+        },
+
+        '0.8.4': ({ playerData, saveData }) => {
+            // Update Pokemon names
+            Update.renamePokemonInSaveData(saveData, 'Vivillon', 'Vivillon (Meadow)');
+
+            // Track Battle Frontier milestones earned
+            const milestones = [
+                [5, '25 x Pokéball'],
+                [10, '100 x Pokéball'],
+                [20, '100 x Greatball'],
+                [30, '100 x Ultraball'],
+                [35, '100 x xClick'],
+                [40, '100 x xAttack'],
+                [50, '100 x Small Restore'],
+                [100, 'Deoxys'],
+                [110, '10 x Water Stone'],
+                [120, '10 x Leaf Stone'],
+                [130, '10 x Thunder Stone'],
+                [140, '10 x Fire Stone'],
+                [150, '200 x Medium Restore'],
+                [151, 'Deoxys (attack)'],
+                [160, '100 x Lucky Egg'],
+                [170, '100 x Lucky Incense'],
+                [180, '100 x Item Magnet'],
+                [190, '10 x Mystery Egg'],
+                [200, '100 x Large Restore'],
+                [210, '40 x Water Stone'],
+                [220, '40 x Leaf Stone'],
+                [230, '40 x Thunder Stone'],
+                [240, '40 x Moon Stone'],
+                [250, '6400 x Ultraball'],
+                [251, 'Deoxys (defense)'],
+                [300, '100 x Trade Stone'],
+                [386, 'Deoxys (speed)'],
+            ];
+            const highestStageCompleted = saveData.statistics?.battleFrontierHighestStageCompleted || 0;
+            saveData.battleFrontier = {
+                milestones: milestones.filter(([stage]) => stage <= highestStageCompleted),
+            };
+        },
+
+        '0.8.9': ({ playerData, saveData }) => {
+            // Retroactively track proteins obtained
+            let proteinsObtained = 0;
+
+            // Only update if save is from v0.6.0+ (when proteins were added)
+            if (this.minUpdateVersion('0.6.0', saveData)) {
+                saveData.party.caughtPokemon.forEach(p => {
+                    proteinsObtained += p.proteinsUsed;
+                });
+
+                proteinsObtained += playerData._itemList.Protein;
+            }
+
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalProteinsObtained: proteinsObtained,
+            };
+
+            // Only run if save is from v0.8.7 (a forked version which is breaking stuff)
+            if (saveData.update.version == '0.8.7') {
+                // Check if the save has the Vivillon quest line, otherwise it's not from the main website
+                const questLines = saveData.quests?.questLines?.length || 0;
+                if (questLines < 4) {
+                    Notifier.notify({
+                        title: 'Importing this save will cause errors!',
+                        message: 'Please only use saves from the main website https://pokeclicker.com/',
+                        type: NotificationConstants.NotificationOption.danger,
+                        timeout: GameConstants.DAY,
+                    });
+                    throw new Error('Importing this save will cause errors');
+                }
             }
         },
     };
@@ -388,10 +605,14 @@ class Update implements Saveable {
         const backupSaveData = JSON.stringify({ player: playerData, save: saveData });
 
         const button = document.createElement('a');
-        button.className = 'btn btn-block btn-warning';
-        button.innerText = 'Click to Backup Save!';
-        button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(backupSaveData))}`;
-        button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
+        try {
+            button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(backupSaveData))}`;
+            button.className = 'btn btn-block btn-warning';
+            button.innerText = 'Click to Backup Save!';
+            button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
+        } catch (e) {
+            console.error('Failed to create backup button data:', e);
+        }
 
         return [button, backupSaveData];
     }
@@ -412,6 +633,18 @@ class Update implements Saveable {
             return;
         }
 
+        // Check if the save is newer than the current client, don't allow it to load.
+        if (this.isNewerVersion(this.saveVersion, this.version)) {
+            Notifier.notify({
+                title: 'Save version is newer than game version!',
+                message: `Please update your game before attempting to load this save..\n\nSave version: ${this.saveVersion}\nGame version: ${this.version}`,
+                type: NotificationConstants.NotificationOption.danger,
+                timeout: GameConstants.DAY,
+            });
+            throw new Error(`Save is newer than game version\nSave version: ${this.saveVersion}\nGame version: ${this.version}`);
+            return;
+        }
+
         const [backupButton, backupSaveData] = this.getBackupButton();
 
         // Must modify these object when updating
@@ -419,7 +652,7 @@ class Update implements Saveable {
         const saveData = this.getSaveData();
         const settingsData = this.getSettingsData();
 
-        if (!playerData || !saveData || !settingsData) {
+        if (!playerData || !saveData) {
             return;
         }
 
@@ -455,14 +688,21 @@ class Update implements Saveable {
                     // On the next tick, set the reset button click handler
                     setTimeout(() => {
                         document.getElementById('failedUpdateResetButton').onclick = () => {
-                            if (window.confirm('Are you sure you want to reset your save? This cannot be undone, so please make sure you have a backup first!')) {
-                                // Force an autodownload of the backup when resetting the save
-                                this.automaticallyDownloadBackup(backupButton, { disableAutoDownloadBackupSaveOnUpdate: false });
-                                localStorage.removeItem('player');
-                                localStorage.removeItem('save');
-                                localStorage.removeItem('settings');
-                                location.reload();
-                            }
+                            Notifier.confirm({
+                                title: 'Reset save',
+                                message: 'Are you sure you want to reset your save?\n\nThis cannot be undone, so please make sure you have a backup first!',
+                                type: NotificationConstants.NotificationOption.danger,
+                                confirm: 'reset',
+                            }).then(confirmed => {
+                                if (confirmed) {
+                                    // Force an autodownload of the backup when resetting the save
+                                    this.automaticallyDownloadBackup(backupButton, { disableAutoDownloadBackupSaveOnUpdate: false });
+                                    localStorage.removeItem(`player${Save.key}`);
+                                    localStorage.removeItem(`save${Save.key}`);
+                                    localStorage.removeItem(`settings${Save.key}`);
+                                    location.reload();
+                                }
+                            });
                         };
                     }, 0);
 
@@ -501,6 +741,9 @@ class Update implements Saveable {
         this.setSettingsData(updateResult.settingsData);
     }
 
+    // Used for moving dungeons and other stuff
+    // Be sure to insert from lowest index to highest index
+    // Example to get dungeons new index: GameConstants.getDungeonIndex('Aqua Hideout')
     static moveIndex = (arr, to, from = Infinity, defaultVal = 0) => {
         let temp = arr.splice(from, 1);
         if (!temp.length) {
@@ -509,6 +752,14 @@ class Update implements Saveable {
         const end = arr.splice(to);
         arr = [...arr, ...temp, ...end];
         return arr;
+    }
+
+    static updateAchievementName = (playerData, oldName, newName) => {
+        const val = playerData.achievementsCompleted[oldName];
+        if (val != undefined) {
+            playerData.achievementsCompleted[newName] = val;
+            delete playerData.achievementsCompleted[oldName];
+        }
     }
 
     static addPokemonToSaveData = (saveData, pokemonId) => {
@@ -530,10 +781,27 @@ class Update implements Saveable {
         saveData.party.caughtPokemon.push(pokemon);
     }
 
+    // If any pokemon names change in the data rename them,
+    // note that name isn't used in party.
+    static renamePokemonInSaveData = (saveData, oldName, newName) => {
+        if (!saveData.breeding) {
+            return;
+        }
+        // Fixup eggs
+        saveData.breeding.eggList?.forEach(egg => {
+            if (egg.pokemon == oldName) {
+                egg.pokemon = newName;
+            }
+        });
+
+        // Fixup queue
+        saveData.breeding.queueList = saveData.breeding.queueList?.map(p => p == oldName ? newName : p) || [];
+    }
+
     getPlayerData() {
         let playerData: any;
         try {
-            playerData = JSON.parse(localStorage.player);
+            playerData = JSON.parse(localStorage.getItem(`player${Save.key}`));
         } catch (err) {
             console.warn('Error getting player data', err);
         } finally {
@@ -543,7 +811,7 @@ class Update implements Saveable {
 
     setPlayerData(playerData: any) {
         try {
-            localStorage.player = JSON.stringify(playerData);
+            localStorage.setItem(`player${Save.key}`, JSON.stringify(playerData));
         } catch (err) {
             console.error('Error setting player data', err);
         }
@@ -552,7 +820,7 @@ class Update implements Saveable {
     getSaveData() {
         let saveData: any;
         try {
-            saveData = JSON.parse(localStorage.save);
+            saveData = JSON.parse(localStorage.getItem(`save${Save.key}`));
         } catch (err) {
             console.warn('Error getting save data', err);
         } finally {
@@ -562,7 +830,7 @@ class Update implements Saveable {
 
     setSaveData(saveData: any) {
         try {
-            localStorage.save = JSON.stringify(saveData);
+            localStorage.setItem(`save${Save.key}`, JSON.stringify(saveData));
         } catch (err) {
             console.error('Error setting save data', err);
         }
@@ -571,17 +839,17 @@ class Update implements Saveable {
     getSettingsData() {
         let settingsData: any;
         try {
-            settingsData = JSON.parse(localStorage.settings);
+            settingsData = JSON.parse(localStorage.getItem(`settings${Save.key}`) || localStorage.settings);
         } catch (err) {
             console.warn('Error getting settings data', err);
         } finally {
-            return settingsData;
+            return settingsData || {};
         }
     }
 
     setSettingsData(settingsData: any) {
         try {
-            localStorage.settings = JSON.stringify(settingsData);
+            localStorage.setItem(`settings${Save.key}`, JSON.stringify(settingsData));
         } catch (err) {
             console.error('Error setting settings data', err);
         }

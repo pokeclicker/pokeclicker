@@ -1,6 +1,7 @@
 <div class="modal noselect fade" id="pokemonSelectorModal" tabindex="-1" role="dialog" aria-labelledby="pokemonSelectorModal">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
         <div class="modal-content">
+            <!-- ko if: modalUtils.observableState['pokemonSelectorModal'] === 'show' -->
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -11,29 +12,35 @@
                 <img src="assets/images/items/Protein.png" width="40%"/>
                 <br/>
                 <div class="sticky-top">
-                  <span class="btn btn-block btn-secondary btn-static" data-bind="text: 'Proteins: ' + player.itemList.Protein().toLocaleString('en-US')"></span>
-                  <button type="button" class="btn btn-sm btn-primary"
-                    style="position: absolute; right: 0px; top: 0px; width: 42px; height: 41px;"
-                    data-bind="text: VitaminController.multiplier[VitaminController.multiplierIndex()]"
-                    onclick="VitaminController.incrementMultiplier()"
-                    oncontextmenu="VitaminController.decrementMultiplier(); return false"
-                    title="Multiplier"
-                    data-toggle="popover"
-                    data-html="true"
-                    data-content="Left/right click to cycle amount<br/>Click on pokemon to use"
-                    data-placement="right"
-                    data-trigger="hover">
-                  </button>
-                  <div class="input-group" data-bind="with: Settings.getSetting('partySort')">
+                  <!-- ko if: App.game.challenges.list.disableProteins.active() -->
+                  <span class="btn btn-block btn-danger btn-static m-0">
+                    Proteins are disabled.
+                  </span>
+                  <!-- /ko -->
+                  <div class="btn-group btn-block m-0" role="group" aria-label="Basic example">
+                    <button class="btn btn-block btn-secondary btn-static" data-bind="text: 'Proteins: ' + player.itemList.Protein().toLocaleString('en-US')"></button>
+                    <button type="button" class="btn btn-sm btn-primary"
+                      data-bind="text: VitaminController.multiplier[VitaminController.multiplierIndex()]"
+                      onclick="VitaminController.incrementMultiplier()"
+                      oncontextmenu="VitaminController.decrementMultiplier(); return false"
+                      title="Multiplier"
+                      data-toggle="popover"
+                      data-html="true"
+                      data-content="Left/right click to cycle amount<br/>Click on pokemon to use"
+                      data-placement="right"
+                      data-trigger="hover">
+                    </button>
+                  </div>
+                  <div class="input-group" data-bind="with: Settings.getSetting('proteinSort')">
                       <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
                           data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
                           <option data-bind="text: $data.text, value: $data.value"></option>
                       </select>
                       <div class="input-group-append bg-primary text-light">
-                          <label for="hatcheryPartySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
-                          <input id="hatcheryPartySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
-                              data-bind="checked: Settings.getSetting('partySortDirection').observableValue()"
-                              onchange="Settings.setSettingByName('partySortDirection', this.checked)"/>
+                          <label for="proteinSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('proteinSortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
+                          <input id="proteinSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
+                              data-bind="checked: Settings.getSetting('proteinSortDirection').observableValue()"
+                              onchange="Settings.setSettingByName('proteinSortDirection', this.checked)"/>
                       </div>
                   </div>
                 </div>
@@ -45,7 +52,7 @@
                       <th class="text-center bg-dark align-middle">Attack Bonus</th>
                     </tr>
                   </thead>
-                  <tbody data-bind="foreach: App.game.party.caughtPokemon">
+                  <tbody data-bind="foreach: PartyController.getProteinSortedList()">
                     <tr class="clickable" data-bind="click: () => $data.useProtein(VitaminController.getMultiplier()), hidden: $data.breeding">
                       <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="text: $data.proteinsUsed().toLocaleString('en-US')">-</td>
@@ -54,6 +61,7 @@
                   </tbody>
                 </table>
             </div>
+            <!-- /ko -->
         </div>
     </div>
 </div>

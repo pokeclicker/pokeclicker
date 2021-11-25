@@ -86,18 +86,45 @@ enum BadgeEnums {
     'Elite_KalosChampion',
     // Alola
     // TODO: these are unordered and some may be missing
-    'MelemeleKahuna',
-    'AkalaKahuna',
+    'NormaliumZ',
+    'FightiniumZ',
+    'WateriumZ',
+    'FiriumZ',
+    'GrassiumZ',
+    'RockiumZ',
     'Elite_Nihilego',
-    'UlaulaKahuna',
+    'ElectriumZ',
+    'GhostiumZ',
+    'DarkiniumZ',
+    'DragoniumZ',
     'Elite_UltraNecrozma',
-    'MinaTrail',
-    'PoniKahuna',
+    'FairiumZ',
+    'GroundiumZ',
     'Elite_Olivia',
     'Elite_Acerola',
     'Elite_Molayne',
     'Elite_Kahili',
     'Elite_AlolaChampion',
+    // Galar
+    'Galar_Grass',
+    'Galar_Water',
+    'Galar_Fire',
+    'Galar_Fighting',
+    'Galar_Fairy',
+    'Galar_Rock',
+    'Galar_Dark',
+    'Galar_Dragon',
+    'Elite_Marnie',
+    'Elite_Hop',
+    'Elite_Bede',
+    'Elite_GalarChampion',
+    // TODO: figure out a better way to handle DLC/non main regions
+    // Armor
+    'Armor_Poison',
+    'Armor_Psychic',
+    'Elite_ArmorChampion',
+    // Crown
+    'Elite_CrownChampion',
 }
 
 export default BadgeEnums;

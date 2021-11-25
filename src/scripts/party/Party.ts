@@ -75,9 +75,6 @@ class Party implements Feature {
 
         App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`);
         this._caughtPokemon.push(pokemon);
-
-        // Trigger sorting update of PokemonList UI
-        PartyController.sortList();
     }
 
     public gainExp(exp = 0, level = 1, trainer = false) {
@@ -85,7 +82,7 @@ class Party implements Feature {
         const trainerBonus = trainer ? 1.5 : 1;
         const expTotal = Math.floor(exp * level * trainerBonus * multBonus / 9);
 
-        const maxLevel = (App.game.badgeCase.badgeCount() + 2) * 10;
+        const maxLevel = App.game.badgeCase.maxLevel();
         for (const pokemon of this.caughtPokemon) {
             if (pokemon.level < maxLevel) {
                 pokemon.gainExp(expTotal);
@@ -179,7 +176,8 @@ class Party implements Feature {
     calculateClickAttack(useItem = false): number {
         // Base power
         // Shiny pokemon help with a 50% boost
-        const clickAttack = Math.pow(this.caughtPokemon.length + (this.caughtPokemon.filter(p => p.shiny).length / 2) + 1, 1.4);
+        const clickAttack = Math.pow(this.caughtPokemon.length + (this.caughtPokemon.filter(p => p.shiny).length / 2) + 1, 1.4) * (1 + AchievementHandler.achievementBonus());
+
         const bonus = this.multiplier.getBonus('clickAttack', useItem);
 
         return Math.floor(clickAttack * bonus);

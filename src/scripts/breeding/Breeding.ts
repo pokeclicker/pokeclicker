@@ -49,7 +49,7 @@ class Breeding implements Feature {
             ['Tepig', 'Pansear'],
             ['Fennekin'],
             ['Litten'],
-            ['Scorbunny'],
+            ['Scorbunny', 'Sizzlipede'],
         ];
         this.hatchList[EggType.Water] = [
             ['Squirtle', 'Lapras', 'Staryu', 'Psyduck'],
@@ -59,7 +59,7 @@ class Breeding implements Feature {
             ['Oshawott', 'Panpour'],
             ['Froakie'],
             ['Popplio', 'Wimpod'],
-            ['Sobble'],
+            ['Sobble', 'Chewtle'],
         ];
         this.hatchList[EggType.Grass] = [
             ['Bulbasaur', 'Oddish', 'Tangela', 'Bellsprout'],
@@ -69,7 +69,7 @@ class Breeding implements Feature {
             ['Snivy', 'Pansage'],
             ['Chespin'],
             ['Rowlet', 'Morelull'],
-            ['Grookey'],
+            ['Grookey', 'Gossifleur'],
         ];
         this.hatchList[EggType.Fighting] = [
             ['Hitmonlee', 'Hitmonchan', 'Machop', 'Mankey'],
@@ -79,7 +79,7 @@ class Breeding implements Feature {
             ['Throh', 'Sawk'],
             [],
             ['Crabrawler'],
-            [],
+            ['Falinks'],
         ];
         this.hatchList[EggType.Electric] = [
             ['Magnemite', 'Pikachu', 'Voltorb', 'Electabuzz'],
@@ -89,7 +89,7 @@ class Breeding implements Feature {
             ['Blitzle'],
             [],
             [],
-            [],
+            ['Toxel', 'Pincurchin'],
         ];
         this.hatchList[EggType.Dragon] = [
             ['Dratini', 'Dragonair', 'Dragonite'],
@@ -97,9 +97,9 @@ class Breeding implements Feature {
             ['Bagon', 'Shelgon', 'Salamence'],
             ['Gible', 'Gabite', 'Garchomp'],
             ['Deino', 'Zweilous', 'Hydreigon'],
-            [],
+            ['Goomy'],
             ['Turtonator', 'Drampa', 'Jangmo-o', 'Hakamo-o', 'Kommo-o'],
-            [],
+            ['Dreepy', 'Drakloak', 'Dragapult'],
         ];
         BreedingController.initialize();
     }
@@ -245,7 +245,7 @@ class Breeding implements Feature {
         return false;
     }
 
-    public gainPokemonEgg(pokemon: PartyPokemon): boolean {
+    public gainPokemonEgg(pokemon: PartyPokemon | PokemonListData): boolean {
         if (!this.hasFreeEggSlot()) {
             Notifier.notify({
                 message: 'You don\'t have any free egg slots',
@@ -254,7 +254,11 @@ class Breeding implements Feature {
             return false;
         }
         const egg = this.createEgg(pokemon.name);
-        pokemon.breeding = true;
+
+        if (pokemon instanceof PartyPokemon) {
+            pokemon.breeding = true;
+        }
+
         return this.gainEgg(egg);
     }
 
@@ -354,8 +358,7 @@ class Breeding implements Feature {
 
     public buyEggSlot(): void {
         const cost: Amount = this.nextEggSlotCost();
-        if (App.game.wallet.hasAmount(cost)) {
-            App.game.wallet.loseAmount(cost);
+        if (App.game.wallet.loseAmount(cost)) {
             this.gainEggSlot();
         }
     }
@@ -386,7 +389,8 @@ class Breeding implements Feature {
     }
 
     public queueSlotsGainedFromRegion(region: GameConstants.Region): number {
-        return Math.max(4, 4 * Math.pow(2, region - 1));
+        // bewtween 4 → 32 queue slots gained when completing a region
+        return Math.min(32, Math.max(4, 4 * Math.pow(2, region - 1)));
     }
 
     get eggList(): Array<KnockoutObservable<Egg>> {

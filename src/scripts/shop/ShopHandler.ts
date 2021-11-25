@@ -9,19 +9,24 @@ class ShopHandler {
         this.resetAmount();
         this.shopObservable(shop);
 
-        shop.items().forEach(item => {
+        shop.items.forEach(item => {
             item.price(Math.round(item.basePrice * (player.itemMultipliers[item.saveName] || 1)));
         });
     }
+
+    //#region Controls
 
     public static setSelected(i: number) {
         this.selected(i);
     }
 
     public static buyItem() {
-        const item: Item = this.shopObservable().items()[ShopHandler.selected()];
+        const item: Item = this.shopObservable().items[ShopHandler.selected()];
         item.buy(this.amount());
-        ShopHandler.resetAmount();
+
+        if (Settings.getSetting('resetShopAmountOnPurchase').observableValue()) {
+            ShopHandler.resetAmount();
+        }
     }
 
     public static resetAmount() {
@@ -42,7 +47,7 @@ class ShopHandler {
     }
 
     public static maxAmount(n: number) {
-        const item: Item = this.shopObservable().items()[ShopHandler.selected()];
+        const item: Item = this.shopObservable().items[ShopHandler.selected()];
         const input = $('input[name="amountOfItems"]');
 
         if (!item || !item.isAvailable()) {
@@ -55,6 +60,10 @@ class ShopHandler {
         input.val(amt).change();
     }
 
+    //#endregion
+
+    //#region UI
+
     public static calculateCss(i: number): string {
         if (this.selected() == i) {
             return 'shopItem clickable btn btn-secondary active';
@@ -64,7 +73,7 @@ class ShopHandler {
     }
 
     public static calculateButtonCss(): string {
-        const item: Item = this.shopObservable().items()[ShopHandler.selected()];
+        const item: Item = this.shopObservable().items[ShopHandler.selected()];
 
         if (item && !(item.isAvailable() && App.game.wallet.hasAmount(new Amount(item.totalPrice(this.amount()), item.currency)))
                 || this.amount() < 1) {
@@ -73,4 +82,6 @@ class ShopHandler {
             return 'btn btn-success smallButton smallFont';
         }
     }
+
+    //#endregion
 }

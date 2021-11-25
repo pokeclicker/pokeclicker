@@ -1,12 +1,12 @@
 class Save {
 
     static counter = 0;
+    static key = '';
 
     public static store(player: Player) {
-        const json = JSON.stringify(player);
-        localStorage.setItem('player', json);
-        localStorage.setItem('settings', Settings.save());
-        localStorage.setItem('save', JSON.stringify(this.getSaveObject()));
+        localStorage.setItem(`player${Save.key}`, JSON.stringify(player));
+        localStorage.setItem(`save${Save.key}`, JSON.stringify(this.getSaveObject()));
+        localStorage.setItem(`settings${Save.key}`, JSON.stringify(Settings.toJSON()));
 
         this.counter = 0;
         console.log('%cGame saved', 'color:#3498db;font-weight:900;');
@@ -23,10 +23,14 @@ class Save {
     }
 
     public static load(): Player {
-        const saved = localStorage.getItem('player');
+        const saved = localStorage.getItem(`player${Save.key}`);
 
-        const settings = localStorage.getItem('settings');
-        Settings.load(JSON.parse(settings));
+        // Load our settings, or the saved default settings, or no settings
+        const settings = localStorage.getItem(`settings${Save.key}`) || localStorage.getItem('settings') || '{}';
+        Settings.fromJSON(JSON.parse(settings));
+
+        // Sort modules now, save settings, load settings
+        SortModules();
 
         if (saved !== 'null') {
             return new Player(JSON.parse(saved));
@@ -36,7 +40,7 @@ class Save {
     }
 
     public static download() {
-        const backupSaveData = {player, save: this.getSaveObject()};
+        const backupSaveData = {player, save: this.getSaveObject(), settings: Settings.toJSON()};
         try {
             const element = document.createElement('a');
             element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(backupSaveData)))}`);
@@ -64,12 +68,18 @@ class Save {
         }
     }
 
-    public static reset(): void {
-        const confirmDelete = prompt('Are you sure you want reset?\nIf so, type \'DELETE\'');
+    public static async delete(): Promise<void> {
+        const confirmDelete = await Notifier.prompt({
+            title: 'Delete save file',
+            message: 'Are you sure you want delete your save file?\n\nTo confirm, type "DELETE"',
+            type: NotificationConstants.NotificationOption.danger,
+            timeout: 6e4,
+        });
 
         if (confirmDelete == 'DELETE') {
-            localStorage.removeItem('player');
-            localStorage.removeItem('save');
+            localStorage.removeItem(`player${Save.key}`);
+            localStorage.removeItem(`save${Save.key}`);
+            localStorage.removeItem(`settings${Save.key}`);
 
             location.reload();
         }
@@ -159,8 +169,13 @@ class Save {
                 const json = JSON.parse(decoded);
                 console.debug('json:', json);
                 if (decoded && json && json.player && json.save) {
-                    localStorage.setItem('player', JSON.stringify(json.player));
-                    localStorage.setItem('save', JSON.stringify(json.save));
+                    localStorage.setItem(`player${Save.key}`, JSON.stringify(json.player));
+                    localStorage.setItem(`save${Save.key}`, JSON.stringify(json.save));
+                    if (json.settings) {
+                        localStorage.setItem(`settings${Save.key}`, JSON.stringify(json.settings));
+                    } else {
+                        localStorage.removeItem(`settings${Save.key}`);
+                    }
                     location.reload();
                 } else {
                     Notifier.notify({
@@ -217,9 +232,3 @@ class Save {
         }
     }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    $('#saveModal').on('show.bs.modal', () => {
-        $('#saveTextArea').text(JSON.stringify(player));
-    });
-});

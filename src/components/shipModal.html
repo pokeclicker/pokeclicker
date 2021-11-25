@@ -8,15 +8,15 @@
                 </button>
             </div>
             <div class="modal-body bg-ocean">
-                <img src='assets/images/ship.png' style='width: 100%;'>
+                <img class="my-5" src='assets/images/ship.png' style='width: 100%;'>
                 <div style='margin-top:20px' data-bind="foreach: GameHelper.enumStrings(GameConstants.Region)">
                     <!-- ko if: $data !== 'none' -->
-                    <button class='btn btn-block btn-success'
+                    <button style="position: relative;" class='btn btn-block btn-success'
                         data-dismiss='modal'
-                        data-bind='visible: player.region != GameConstants.Region[$data] && GameConstants.Region[$data] <= player.highestRegion() && GameConstants.Region[$data] <= GameConstants.MAX_AVAILABLE_REGION,
-                        click: () => { MapHelper.moveToTown(GameConstants.DockTowns[GameConstants.Region[$data]]); player.region = GameConstants.Region[$data]; },
-                        text: GameConstants.camelCaseToString($data)'>
-                        Region
+                        data-bind='visible: GameConstants.Region[$data] <= player.highestRegion() && GameConstants.Region[$data] <= GameConstants.MAX_AVAILABLE_REGION,
+                        click: () => { MapHelper.moveToTown(GameConstants.DockTowns[GameConstants.Region[$data]]); player.region = GameConstants.Region[$data]; $("#ShipModal").modal("hide");  },
+                        attr: { disabled: player.region == GameConstants.Region[$data] }'>
+                        <img style="position:absolute; left: 10px;" data-bind="visible: player.region == GameConstants.Region[$data], attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` }"/> <knockout data-bind="text: GameConstants.camelCaseToString($data)">Region</knockout>
                     </button>
                     <!-- /ko -->
                 </div>

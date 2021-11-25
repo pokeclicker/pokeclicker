@@ -14,7 +14,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
             </button>
             <button type="button" class="btn btn-info"
             style="position: absolute; right: 0px; top: 0px; width: auto; height: 69px; padding: 10px;"
-            data-bind="tooltip: { title: `You can trade your level 100 pokémon for an egg of the same pokémon. Hatched pokémon will gain a ${GameConstants.BREEDING_ATTACK_BONUS}% bonus of their base attack and have a higher chance of becoming shiny!`, trigger: 'hover', placement:'left' }">
+            data-bind="tooltip: { title: `You can trade your level 100 Pokémon for an egg of the same Pokémon. Hatched Pokémon will gain a ${GameConstants.BREEDING_ATTACK_BONUS}% bonus of their base attack and have a higher chance of becoming shiny!`, trigger: 'hover', placement:'left' }">
             ?
             </button>
        </div>
@@ -91,7 +91,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                         </div>
                         <div class="form-row collapse" id="breeding-sort">
-                            <div class="form-group col" data-bind="with: Settings.getSetting('partySort')">
+                            <div class="form-group col" data-bind="with: Settings.getSetting('hatcherySort')">
                                 <label>Sort</label>
                                 <div class="input-group">
                                     <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
@@ -99,10 +99,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         <option data-bind="text: $data.text, value: $data.value"></option>
                                     </select>
                                     <div class="input-group-append bg-primary text-light">
-                                        <label for="hatcheryPartySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
-                                        <input id="hatcheryPartySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
-                                            data-bind="checked: Settings.getSetting('partySortDirection').observableValue()"
-                                            onchange="Settings.setSettingByName('partySortDirection', this.checked)"/>
+                                        <label for="hatcherySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('hatcherySortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
+                                        <input id="hatcherySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
+                                            data-bind="checked: Settings.getSetting('hatcherySortDirection').observableValue()"
+                                            onchange="Settings.setSettingByName('hatcherySortDirection', this.checked)"/>
                                     </div>
                                 </div>
                             </div>
@@ -111,10 +111,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     <div>
                         <!-- Check if the player has any level 100 Pokémon or if they have any eggs -->
                         <p class="bg-danger my-0" data-bind="visible: !App.game.party.hasMaxLevelPokemon()">
-                            Unfortunately, you don't have any pokémon of level 100 to breed.
+                            Unfortunately, you don't have any Pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                        <ul class="row justify-content-center p-0" data-bind="foreach: App.game.party.caughtPokemon">
+                        <ul class="row justify-content-center p-0" data-bind="foreach: PartyController.getHatcherySortedList()">
                             <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                 <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
                                 <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 0px;top: 0px;">✨</div>

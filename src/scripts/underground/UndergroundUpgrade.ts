@@ -1,5 +1,4 @@
 
-///<reference path="../wallet/AmountFactory.ts"/>
 class UndergroundUpgrade extends Upgrade {
 
     constructor(
@@ -20,9 +19,13 @@ namespace UndergroundUpgrade {
     export enum Upgrades {
         'Energy_Max',
         'Items_Max',
+        'Items_Min',
         'Energy_Gain',
         'Energy_Regen_Time',
         'Daily_Deals_Max',
         'Bomb_Efficiency',
+        'Survey_Cost',
+        'Survey_Efficiency',
+        'NewYLayer',
     }
 }

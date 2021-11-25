@@ -64,13 +64,33 @@ class Pokeballs implements Feature {
     }
 
     initialize(): void {
+        ([
+            this._alreadyCaughtSelection,
+            this._alreadyCaughtShinySelection,
+            this._notCaughtSelection,
+            this._notCaughtShinySelection,
+        ]).forEach(selection => {
+            selection.subscribe(value => {
+                // switch to Ultraball if Masterball is selected
+                if (value == GameConstants.Pokeball.Masterball && App.game.challenges.list.disableMasterballs.active()) {
+                    selection(GameConstants.Pokeball.Ultraball);
+                    Notifier.notify({
+                        title: 'Challenge Mode',
+                        message: 'Masterballs are disabled!',
+                        type: NotificationConstants.NotificationOption.danger,
+                    });
+                } else if (!this.pokeballs[value]?.unlocked()) {
+                    selection(GameConstants.Pokeball.None);
+                }
+            });
+        });
     }
 
     /**
      * Checks the players preferences to see what pokéball needs to be used on the next throw.
      * Checks from the players pref to the most basic ball to see if the player has any.
      * @param id the pokemon we are trying to catch.
-     * @param isShiny if the pokémon is shiny.
+     * @param isShiny if the Pokémon is shiny.
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
     public calculatePokeballToUse(id: number, isShiny: boolean): GameConstants.Pokeball {

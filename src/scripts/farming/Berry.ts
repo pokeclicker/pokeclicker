@@ -9,7 +9,7 @@ class Berry {
     public flavors: BerryFlavor[];
     public wander: PokemonNameType[];
 
-    private static baseWander: PokemonNameType[] = [
+    public static baseWander: PokemonNameType[] = [
         'Tangela', 'Scyther',
         'Pineco', 'Heracross',
         'Volbeat', 'Illumise',

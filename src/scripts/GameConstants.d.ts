@@ -14,6 +14,10 @@
  */
 
 namespace GameConstants {
+    declare const SECOND: number;
+    declare const MINUTE: number;
+    declare const HOUR: number;
+    declare const DAY: number;
     declare const TICK_TIME: number;
     declare const BATTLE_TICK: number;
     declare const BATTLE_FRONTIER_TICK: number;
@@ -33,10 +37,6 @@ namespace GameConstants {
     declare const MAX_AVAILABLE_REGION: number;
     declare const TotalPokemonsPerRegion: number[];
     declare const ITEM_USE_TIME: number;
-    declare const SECOND: number;
-    declare const MINUTE: number;
-    declare const HOUR: number;
-    declare const DAY: number;
     declare const ROAMING_MIN_CHANCE: number;
     declare const ROAMING_MAX_CHANCE: number;
     declare const SHINY_CHANCE_BATTLE: number;
@@ -50,6 +50,8 @@ namespace GameConstants {
     declare const ITEM_PRICE_DEDUCT: number;
     declare const PLATE_VALUE: number;
     declare const BREEDING_ATTACK_BONUS: number;
+    declare const FARM_PLOT_WIDTH: number;
+    declare const FARM_PLOT_HEIGHT: number;
     declare const BerryDistribution: number[];
     declare const MULCH_USE_TIME: number;
     declare const BOOST_MULCH_MULTIPLIER: number;
@@ -60,7 +62,8 @@ namespace GameConstants {
     declare const AMAZE_MULCH_MUTATE_MULTIPLIER: number;
     declare const WANDER_RATE: number;
     declare const BerryColor: string[];
-    declare const DUNGEON_SIZE: number;
+    declare const BASE_DUNGEON_SIZE: number;
+    declare const MIN_DUNGEON_SIZE: number;
     declare const DUNGEON_CHEST_SHOW: number;
     declare const DUNGEON_MAP_SHOW: number;
     declare enum AchievementOption {
@@ -89,15 +92,21 @@ namespace GameConstants {
         'Route Kill',
         'Clear Gym',
         'Clear Dungeon',
+        'Farming',
+        'Quest',
+        'Battle Frontier',
+        'Protein'
     }
     declare enum DungeonTile {
         empty,
+        entrance,
         enemy,
         chest,
-        boss
+        boss,
     }
     declare const ROUTE_HELD_ITEM_MODIFIER: number;
     declare const DUNGEON_HELD_ITEM_MODIFIER: number;
+    declare const DUNGEON_BOSS_HELD_ITEM_MODIFIER: number;
     declare const HELD_ITEM_CHANCE: number;
     declare const HELD_UNDERGROUND_ITEM_CHANCE: number;
     declare const DUNGEON_SHARDS: number;
@@ -113,11 +122,12 @@ namespace GameConstants {
     declare const DEFEAT_POKEMONS_BASE_REWARD: number;
     declare const CAPTURE_POKEMONS_BASE_REWARD: number;
     declare const GAIN_TOKENS_BASE_REWARD: number;
+    declare const GAIN_FARM_POINTS_BASE_REWARD: number;
     declare const MINE_LAYERS_BASE_REWARD: number;
+    declare const MINE_ITEMS_BASE_REWARD: number;
     declare const USE_OAK_ITEM_BASE_REWARD: number;
     declare const ACTIVE_QUEST_MULTIPLIER: number;
     declare const QUEST_CLICKS_PER_SECOND: number;
-    declare const QuestTypes: string[];
     declare const QUESTS_PER_SET: number;
     declare enum GameState {
         idle,
@@ -166,6 +176,7 @@ namespace GameConstants {
     declare function camelCaseToString(str: string): string;
     declare function formatDate(date: Date): string;
     declare function formatTime(input: number | Date): string;
+    declare function formatTimeFullLetters(input: number): string;
     declare function formatTimeShortWords(input: number): string;
     declare function formatNumber(input: number): string;
     declare enum Region {
@@ -177,7 +188,9 @@ namespace GameConstants {
         unova,
         kalos,
         alola,
-        galar
+        galar,
+        armor,
+        crown
     }
     declare function randomIntBetween(min: number, max: number): number;
     declare function randomElement(array: any[]): any;
@@ -185,6 +198,9 @@ namespace GameConstants {
     declare function expRandomElement<T>(array: T[], ratio: number): T;
     declare const TypeColor: string[];
     declare const ROUTE_KILLS_NEEDED: number;
+    declare const ACHIEVEMENT_DEFEAT_ROUTE_VALUES: number[];
+    declare const ACHIEVEMENT_DEFEAT_GYM_VALUES: number[];
+    declare const ACHIEVEMENT_DEFEAT_DUNGEON_VALUES: number[];
     declare type EnvironmentData = Partial<Record<number, Set<string | number>>>
     declare const Environments: {
         Water: EnvironmentData,
@@ -259,6 +275,9 @@ namespace GameConstants {
         'Cherubi',
         'Zorua',
         'Meloetta (pirouette)',
+        'Toxel',
+        'Eternatus',
+        'Slowpoke (Galar)'
     }
     declare enum PokeBlockColor {
         Black,
@@ -312,6 +331,8 @@ namespace GameConstants {
         'Skull Fossil': string;
         'Cover Fossil': string;
         'Plume Fossil': string;
+        'Jaw Fossil': string;
+        'Sail Fossil': string;
     };
     declare const PokemonToFossil: {
         Omanyte: string;
@@ -323,6 +344,8 @@ namespace GameConstants {
         Cranidos: string;
         Tirtouga: string;
         Archen: string;
+        Tyrunt: string;
+        Amaura: string;
     };
     declare const KantoGyms: string[];
     declare const JohtoGyms: string[];
@@ -330,16 +353,21 @@ namespace GameConstants {
     declare const SinnohGyms: string[];
     declare const UnovaGyms: string[];
     declare const KalosGyms: string[];
+    declare const GalarGyms: string[];
     declare const RegionGyms: string[][];
     declare function getGymIndex(gym: string): number;
+    declare function getGymRegion(gym: string): Region;
     declare const KantoDungeons: string[];
     declare const JohtoDungeons: string[];
     declare const HoennDungeons: string[];
     declare const SinnohDungeons: string[];
     declare const UnovaDungeons: string[];
     declare const KalosDungeons: string[];
+    declare const GalarDungeons: string[];
     declare const RegionDungeons: string[][];
     declare function getDungeonIndex(dungeon: string): number;
+    declare function getDungeonRegion(dungeon: string): Region;
     declare const StartingTowns: string[];
+    declare const StartingRoutes: number[];
     declare const DockTowns: string[];
 }

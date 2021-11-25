@@ -33,9 +33,9 @@ class BattleFrontierRunner {
     }
 
     public static nextStage() {
+        // Gain any rewards we should have earned for defeating this stage
+        BattleFrontierMilestones.gainReward(this.stage());
         if (App.game.statistics.battleFrontierHighestStageCompleted() < this.stage()) {
-            // Gain any rewards we should have earned for defeating this stage
-            BattleFrontierMilestones.gainReward(this.stage());
             // Update our highest stage
             App.game.statistics.battleFrontierHighestStageCompleted(this.stage());
         }
@@ -76,22 +76,28 @@ class BattleFrontierRunner {
         this.end();
     }
     public static battleQuit() {
-        if (!confirm('Are you sure you want to leave?\n\nYou will not receive any Battle Points for the stages already completed.')) {
-            return;
-        }
-        // Don't give any points, user quit the challenge
-        Notifier.notify({
+        Notifier.confirm({
             title: 'Battle Frontier',
-            message: `You made it to stage ${this.stage()}`,
-            type: NotificationConstants.NotificationOption.info,
-            timeout: 5 * GameConstants.MINUTE,
-        });
+            message: 'Are you sure you want to leave?\n\nYou will not receive any Battle Points for the stages already completed.',
+            type: NotificationConstants.NotificationOption.danger,
+            confirm: 'leave',
+        }).then(confirmed => {
+            if (confirmed) {
+                // Don't give any points, user quit the challenge
+                Notifier.notify({
+                    title: 'Battle Frontier',
+                    message: `You made it to stage ${this.stage()}`,
+                    type: NotificationConstants.NotificationOption.info,
+                    timeout: 1 * GameConstants.MINUTE,
+                });
 
-        this.end();
+                this.end();
+            }
+        });
     }
 
     public static timeLeftSeconds = ko.pureComputed(() => {
-        return (Math.ceil(BattleFrontierRunner.timeLeft() / 10) / 10).toFixed(1);
+        return (Math.ceil(BattleFrontierRunner.timeLeft() / 100) / 10).toFixed(1);
     })
 
     public static pokemonLeftImages = ko.pureComputed(() => {

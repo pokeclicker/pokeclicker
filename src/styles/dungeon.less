@@ -1,4 +1,5 @@
 .tile {
+  position: relative;
   height: 45px;
   border: 1px solid black;
   margin: 1px;
@@ -6,14 +7,18 @@
   &:hover {
     opacity: 0.8;
   }
+
+  &:not(.tile-visited, .tile-invisible, .tile-player) {
+    filter: brightness(50%);
+  }
 }
 
 .tile-invisible {
-  background-color: #505050;
+  background-color: #333;
 }
 
 .tile-player {
-  background: green;
+  background-color: #2ecc71;
   position: relative;
   &::after {
     position: absolute;
@@ -31,20 +36,44 @@
   background-color: whitesmoke;
 }
 
+.tile-entrance {
+  background-color: #3498db;
+}
+
 .tile-enemy {
-  background-color: red;
+  background-color: #e74c3c;
 }
 
 .tile-chest {
-  background-color: yellow;
+  background-color: #f1c40f;
+  &::after {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    content: '';
+    display: block;
+    height: 70%;
+    width: 70%;
+    background: center / contain no-repeat url('../assets/images/dungeons/chest.png');
+  }
 }
 
 .tile-boss {
-  background-color: purple;
+  background-color: #9b59b6;
+  &::after {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    content: '';
+    display: block;
+    height: 70%;
+    width: 70%;
+    background: center / contain no-repeat url('../assets/images/dungeons/boss.svg');
+  }
 }
 
 .healthbar-boss {
-  background-color: purple;
+  background-color: #9b59b6;
 }
 
 .dungeon-board {
@@ -57,7 +86,7 @@
   margin-top: 50px;
 }
 
-.dungeon-boss-button {
+.dungeon-button {
   margin-top: 50px;
 }
 
@@ -65,14 +94,6 @@
   -webkit-filter: brightness(0%); /* Safari 6.0 - 9.0 */
   filter: brightness(0%);
   opacity: 0.2;
-  body.cyborg &,
-  body.darkly &,
-  body.slate &,
-  body.superhero & {
-    -webkit-filter: brightness(100); /* Safari 6.0 - 9.0 */
-    filter: brightness(100);
-    opacity: 0.3;
-  }
 }
 
 .dungeon-pokemon-preview {
@@ -80,5 +101,13 @@
   height: auto;
   width: auto;
   margin: -10px -10px -12px;
+}
 
+#dungeonPokemonList {
+  .boss {
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    width: 35%;
+  }
 }
