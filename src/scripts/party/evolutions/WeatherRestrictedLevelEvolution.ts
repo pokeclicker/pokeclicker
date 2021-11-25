@@ -1,11 +1,11 @@
 class WeatherRestrictedLevelEvolution extends LevelEvolution {
-
-    weather: WeatherType[];
-
-    constructor(basePokemon: string, evolvedPokemon: string, level: number, weather: WeatherType[]) {
+    constructor(
+        basePokemon: PokemonNameType,
+        evolvedPokemon: PokemonNameType,
+        level: number,
+        public weather: WeatherType[]
+    ) {
         super(basePokemon, evolvedPokemon, level);
-
-        this.weather = weather;
         this.type.push(EvolutionType.Other);
     }
 

@@ -19,12 +19,14 @@ class BuyKeyItem extends Item {
             App.game.keyItems.gainKeyItem(this.item);
         }
 
-        use() {
-        }
-
         isAvailable(): boolean {
             return super.isAvailable() && !App.game.keyItems.hasKeyItem(this.item);
         }
+
+        get image(): string {
+            return `assets/images/keyitems/${this.name}.png`;
+        }
+
 }
 
 

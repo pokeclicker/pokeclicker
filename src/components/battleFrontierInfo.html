@@ -15,7 +15,7 @@
             <i>Note: there is no click damage in the Battle Frontier</i>
         </p>
         <a class="btn btn-block btn-success text-light" onclick="BattleFrontierRunner.start()">Start</a>
-        <a class="btn btn-block btn-danger text-light" onclick="BattleFrontier.leave()">Leave</a>
+        <a class="btn btn-block btn-danger text-light" onclick="App.game.battleFrontier.leave()">Leave</a>
     </div>
     <!-- /ko -->
     <!-- ko if: BattleFrontierRunner.started -->
@@ -33,7 +33,10 @@
             <tbody data-bind="foreach: BattleFrontierMilestones.availableMilestones().slice(0, 4)">
                 <tr>
                     <th class="tight" data-bind="text: $data.stage"></td>
-                    <td class="text-left"><knockout data-bind="text: $data.description"></knockout> <knockout data-bind="if: $data.image"><img data-bind="attr:{ src: $data.image }" src="" width="20px" /></knockout></td>
+                    <td class="text-left">
+                        <img width="28px" data-bind="attr:{ src: $data.image }" />
+                        <knockout data-bind="text: $data.description"></knockout>
+                    </td>
                 </tr>
             </tbody>
         </table>

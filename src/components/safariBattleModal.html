@@ -42,7 +42,7 @@
                     <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwBall()" data-bind='text: "Ball (" + Safari.balls() + ")"'>Ball (30)</button>
                     <div class="btn-group btn-block col-6 m-0 dropup" style="padding:0px;" data-bind="let: { baitType: ko.observable(BaitType.Bait) }">
                         <button type="button" class='btn btn-primary btn-block' onclick="this.blur();SafariBattle.lockButtons();" data-bind='{ click: function(){SafariBattle.throwBait(baitType());}, enable: BaitList[BaitType[baitType()]].amount() !== 0 && !SafariBattle.disableButtons }'>
-                            <div style="display:inline"><img width=16px data-bind="attr: { src: BaitList[BaitType[baitType()]].imagePath }"></div>
+                            <div style="display:inline"><img width=16px data-bind="attr: { src: BaitList[BaitType[baitType()]].image }"></div>
                             <span data-bind="text: BaitList[BaitType[baitType()]].btnName">Bait (∞)</span>
                         </button>
                         <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split active" data-bind="text: '&nbsp;'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

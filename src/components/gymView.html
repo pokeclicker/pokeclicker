@@ -10,7 +10,7 @@
             <knockout>
                 <knockout data-bind="text: GymBattle.enemyPokemon().name">Pokémon name</knockout>
             </knockout>
-            
+
             <knockout class="right">
                 <span data-bind="foreach: new Array(GymBattle.pokemonsDefeatedComputable())">
                     <img src="assets/images/pokeball/Pokeball.svg" class="pokeball-smallest pokeball-defeated"/>
@@ -39,10 +39,10 @@
         </div>
 
         <div>
-            <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(GymBattle.enemyPokemon(), GymBattle.enemyPokemon().shiny) }" src=""/>
-            <!-- TODO: put this image somewhere
-            <img height="56px" id="gymLeader" src="" data-bind="attr:{ src: 'assets/images/gymLeaders/' + GymBattle.gym.leaderName + '.png'}">
+            <!-- TODO: Add after all Gym Leader images are formatted correctly (same sizes, style etc)
+            <img style="position:absolute; left:65%; top: 64px; height: 64px" data-bind="attr:{ src: GymBattle.gym.imagePath }" onerror="this.src = 'assets/images/transparent.png'"/>
             -->
+            <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(GymBattle.enemyPokemon(), GymBattle.enemyPokemon().shiny) }" src=""/>
         </div>
 
         <div class="progress hitpoints" style="height: 20px;">
@@ -52,5 +52,10 @@
                 <span data-bind="text: GymBattle.enemyPokemon().health() + ' / ' + GymBattle.enemyPokemon().maxHealth()" style="font-size: 12px;"></span>
             </div>
         </div>
+
+        <button class="btn btn-sm btn-danger" style="position: absolute; top: 68px; left: 10px;" data-bind="visible: GymRunner.autoRestart()"
+                onclick="GymRunner.autoRestart(false)">
+            Stop Auto
+        </button>
     </div>
 </div>

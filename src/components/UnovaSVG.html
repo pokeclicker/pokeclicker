@@ -1,5 +1,5 @@
 <g data-bind='visible: player.region == GameConstants.Region.unova'>
-    <image width="100%" xlink:href="assets/images/unova.png"></image>
+    <image width="1600" height="960" xlink:href="assets/images/unova.png" href="assets/images/unova.png"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -285,9 +285,9 @@
     <!--Undella Bay extension-->
     <%- include('templates/mapRoute',
         { route: 24, region: 4
-        , width: 5, height: 3
+        , width: 2, height: 3
         , rotate: true
-        , x: 91, y: 16, noText: true
+        , x: 91, y: 19, noText: true
         })
     %>
 
@@ -448,6 +448,14 @@
         })
     %>
 
+    <!--Shopping Mall Nine-->
+    <%- include('templates/mapTown',
+        { name: "Shopping Mall Nine"
+        , x: 42, y: 7
+        , width: 5, height: 6
+        })
+    %>
+
     <!--Lacunosa Town-->
     <%- include('templates/mapTown',
         { name: "Lacunosa Town"
@@ -503,6 +511,7 @@
         { name: "Aspertia City"
         , x: 6, y: 51.5
         , width: 5, height: 4.5
+        , home: true
         })
     %>
 
@@ -527,9 +536,9 @@
         })
     %>
 
-    <!--Pokemon League Unova-->
+    <!--Pokémon League Unova-->
     <%- include('templates/mapTown',
-        { name: "Pokemon League Unova"
+        { name: "Pokémon League Unova"
         , x: 55.5, y: 0.25
         , width: 10, height: 6.75
         })
@@ -550,7 +559,7 @@
     <!--Seaside Cave-->
     <%- include('templates/mapDungeon',
         { name: "Seaside Cave"
-        , x: 94, y: 18
+        , x: 91, y: 16
         , width: 4, height: 3
         })
     %>
@@ -574,9 +583,8 @@
     <!--Castelia Sewers-->
     <%- include('templates/mapDungeon',
         { name: "Castelia Sewers"
-        , moveToTown: "Castelia City"
-        , x: 56, y: 52
-        , width: 1, height: 1
+        , x: 56, y: 54
+        , width: 3, height: 4
         })
     %>
 
@@ -731,12 +739,27 @@
         })
     %>
 
+    <!--Plasma Frigate-->
+    <%- include('templates/mapDungeon',
+        { name: "Plasma Frigate"
+        , x: 96, y: 18
+        , width: 4, height: 3
+        })
+    %>
+    <!--Plasma Frigate Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Plasma Frigate"
+        , x: 95, y: 19
+        , width: 1, height: 1
+        })
+    %>
+
     <!-- ------------------ -->
     <!-- PLACES OF INTEREST -->
     <!-- ------------------ -->
     <%- include('templates/mapPOI',
         { name: "Dock"
-        , x: 49, y: 53
+        , x: 51, y: 53
         , width: 3, height: 7
         , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Castelia City') }"
         })
@@ -745,8 +768,8 @@
     <!--bridge-->
     <%- include('templates/mapPOI',
         { name: "Skyarrow Bridge"
-        , width: 10, height: 3
-        , x: 57, y: 49
+        , width: 3, height: 7
+        , x: 62, y: 40
         , databind: `attr: { class: MapHelper.accessToRoute(4, GameConstants.Region.unova) ? 'unlockedRoute' : 'lockedRoute' },
             click: () => {
                 Notifier.notify({message: 'What a lovely view'});
@@ -756,23 +779,36 @@
     <!--bridge-->
     <%- include('templates/mapPOI',
         { name: "Skyarrow Bridge"
-        , width: 3, height: 9
-        , x: 64, y: 40
+        , width: 7, height: 3
+        , x: 65, y: 40
         , databind: `attr: { class: MapHelper.accessToRoute(4, GameConstants.Region.unova) ? 'unlockedRoute' : 'lockedRoute' },
             click: () => {
                 Notifier.notify({message: 'What a lovely view'});
             }`
         })
     %>
-    <!--bridge-->
+
     <%- include('templates/mapPOI',
-        { name: "Skyarrow Bridge"
-        , width: 5, height: 3
-        , x: 67, y: 40
-        , databind: `attr: { class: MapHelper.accessToRoute(4, GameConstants.Region.unova) ? 'unlockedRoute' : 'lockedRoute' },
-            click: () => {
-                Notifier.notify({message: 'What a lovely view'});
-            }`
+        { name: "Underground Entrance"
+        , x: 54, y: 36
+        , width: 3, height: 4
+        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
         })
-    %>
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Farm"
+        , x: 21, y: 46
+        , width: 3, height: 3
+        , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Pokemon Day Care"
+        , x: 81, y: 36
+        , width: 4, height: 4
+        , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
 </g>

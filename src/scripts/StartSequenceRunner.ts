@@ -10,6 +10,8 @@ class StartSequenceRunner {
     }
 
     public static pickStarter(s: GameConstants.Starter) {
+        // Reload the achievements in case the user has any challenge modes activated
+        AchievementHandler.load();
         App.game.quests.getQuestLine('Tutorial Quests').beginQuest(0);
         this.starterPicked = s;
         $('#pickStarterModal').modal('hide');
@@ -18,7 +20,7 @@ class StartSequenceRunner {
 
         App.game.gameState = GameConstants.GameState.fighting;
 
-        const battlePokemon = new BattlePokemon(dataPokemon.name, dataPokemon.id, dataPokemon.type1, dataPokemon.type2, 10, 1, 100, 0, 0, shiny);
+        const battlePokemon = new BattlePokemon(dataPokemon.name, dataPokemon.id, dataPokemon.type1, dataPokemon.type2, 10, 1, 100, 0, new Amount(0, GameConstants.Currency.money), shiny);
         Battle.enemyPokemon(battlePokemon);
 
         // Show the help information text
@@ -36,7 +38,8 @@ class StartSequenceRunner {
             if (battlePokemon.health() <= 0) {
                 setTimeout(() => {
                     Information.hide();
-                    player.starter = StartSequenceRunner.starterPicked;
+                    player.starter(StartSequenceRunner.starterPicked);
+                    App.game.profile.pokemon(dataPokemon.id);
                     StartSequenceRunner.showCaughtMessage();
                 }, 1000);
 
@@ -69,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (StartSequenceRunner.starterPicked == GameConstants.Starter.None) {
             StartSequenceRunner.noStarterCount++;
             const startersCount = StartSequenceRunner.noStarterCount >= 5 ? 'four' : 'three';
-            $('#pickStarterModalText').text(`I can't hold off all ${startersCount}! Please pick the pokémon you want to fight!`);
+            $('#pickStarterModalText').text(`I can't hold off all ${startersCount}! Please pick the Pokémon you want to fight!`);
             $('#pickStarterModal').modal('show');
             if (StartSequenceRunner.noStarterCount == 5) {
                 // Add Pikachu to the selections

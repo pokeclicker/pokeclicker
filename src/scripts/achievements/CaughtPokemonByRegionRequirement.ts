@@ -2,8 +2,8 @@
 
 class CaughtUniquePokemonsByRegionRequirement extends AchievementRequirement {
     private region: GameConstants.Region;
-    constructor(region: GameConstants.Region, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(PokemonHelper.calcUniquePokemonsByRegion(region), option, GameConstants.AchievementType['Caught Unique Pokemons By Region']);
+    constructor(region: GameConstants.Region, amount = 0, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+        super(amount || PokemonHelper.calcUniquePokemonsByRegion(region), option, GameConstants.AchievementType['Caught Unique Pokemons By Region']);
         this.region = region;
     }
 
