@@ -797,6 +797,7 @@ export type PokemonNameType
     | 'Froakie'
     | 'Frogadier'
     | 'Greninja'
+    | 'Ash Greninja'
     | 'Bunnelby'
     | 'Diggersby'
     | 'Fletchling'
