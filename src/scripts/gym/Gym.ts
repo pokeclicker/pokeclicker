@@ -1214,7 +1214,7 @@ gymList['Pallet Town'] = new Gym(
     'Insert quote here.',
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)]
 );
-gymList['Cherrygrove  City'] = new Gym(
+gymList['Cherrygrove City'] = new Gym(
     'Ash Ketchum 2',
     'Cherrygrove City',
     [
@@ -1230,9 +1230,9 @@ gymList['Cherrygrove  City'] = new Gym(
     'Insert quote here.',
     [new GymBadgeRequirement(BadgeEnums.KantoAsh)]
 );
-gymList['Lilycove City'] = new Gym(
+gymList['LilyCove City'] = new Gym(
     'Ash Ketchum 3',
-    'Lilycove City',
+    'LilyCove City',
     [
         new GymPokemon('Pikachu', 48300, 58),
         new GymPokemon('Swellow', 52000, 56),

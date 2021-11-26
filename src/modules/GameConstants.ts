@@ -781,7 +781,7 @@ export const HoennGyms = [
     'Elite Glacia',
     'Elite Drake',
     'Champion Wallace',
-    'Lilycove City',
+    'LilyCove City',
 ];
 
 export const SinnohGyms = [
