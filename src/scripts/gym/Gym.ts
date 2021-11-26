@@ -1198,9 +1198,9 @@ gymList['Champion Diantha'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]
 );
 //Ash Ketchum gyms
-gymList['Pallet Town'] = new Gym(
-    'Ash Ketchum 1',
-    'Pallet Town',
+gymList['AshinKanto'] = new Gym(
+    'Ash Ketchum',
+    'AshinKanto',
     [
         new GymPokemon('Pikachu', 48300, 58),
         new GymPokemon('Pidgeot', 52000, 56),
@@ -1212,7 +1212,12 @@ gymList['Pallet Town'] = new Gym(
     BadgeEnums.KantoAsh,
     7500,
     'Insert quote here.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+    undefined,
+    {
+        quest: false,
+        achievement: false,
+    }
 );
 gymList['Cherrygrove City'] = new Gym(
     'Ash Ketchum 2',

@@ -618,4 +618,14 @@
          , image: "assets/images/ship.png"
          })
       %>
+
+    <%- include('templates/mapOverlay',
+         { name: "Ash in Kanto"
+         , x: 18, y: 33
+         , width: 4, height: 4
+         , databind: "click: function(){GymRunner.startGym(gymList.AshinKanto)}, attr: { class: MapHelper.calculateTownCssClass('AshinKanto') }"
+         , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Diantha')]() >= 1 && App.game.statistics.gymsDefeated[GameConstants.getGymIndex('AshinKanto')]() == 0"
+         , image: "assets/images/ashketchumoverworld.png"
+         })
+      %>
 </g>
