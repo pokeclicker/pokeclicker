@@ -19,17 +19,17 @@ class OakItems implements Feature {
     initialize() {
         this.itemList = [
             new OakItem(OakItems.OakItem.Magic_Ball, 'Magic Ball', 'Gives a bonus to your catchrate',
-                true, [5, 6, 7, 8, 9, 10], 0, 20, 2, undefined, undefined, undefined, '%'),
+                true, [10, 15, 20, 25, 35, 50], 0, 20, 10, undefined, undefined, undefined, '%'),
             new OakItem(OakItems.OakItem.Amulet_Coin, 'Amulet Coin', 'Gain more coins from battling',
-                true, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 30, 1),
+                true, [5.00, 10.00, 15.00, 20.00, 30.00, 50.00], 1, 30, 1),
             new OakItem(OakItems.OakItem.Poison_Barb, 'Poison Barb', 'Clicks do more damage',
                 true, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 40, 3),
             new OakItem(OakItems.OakItem.Exp_Share, 'EXP Share', 'Gain more exp from battling',
-                true, [1.15, 1.18, 1.21, 1.24, 1.27, 1.30], 1, 50, 1),
+                true, [2.00, 3.00, 4.00, 5.00, 7.50, 10.00], 1, 50, 5),
             new OakItem(OakItems.OakItem.Sprayduck, 'Sprayduck', 'Makes your berries grow faster',
                 false, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 60, 1),
             new OakItem(OakItems.OakItem.Shiny_Charm, 'Shiny Charm', 'Encounter shinies more often',
-                true, [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, 70, 150),
+                true, [5.00, 7.50, 10.00, 15.00, 20.00, 25.00], 1, 70, 300),
             new OakItem(OakItems.OakItem.Blaze_Cassette, 'Blaze Cassette', 'Hatch eggs faster',
                 false, [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, 80, 10),
             new OakItem(OakItems.OakItem.Cell_Battery, 'Cell Battery', 'More passive mining energy regen',
@@ -93,7 +93,7 @@ class OakItems implements Feature {
                 return i;
             }
         }
-        return this.unlockRequirements.length;
+        return this.unlockRequirements.length + 3;
     }
 
     activeCount() {

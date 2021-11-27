@@ -54,7 +54,7 @@ export const TotalPokemonsPerRegion = [
 
 ];
 
-export const ITEM_USE_TIME = 30;
+export const ITEM_USE_TIME = 3000;
 
 export const ROAMING_MIN_CHANCE = 8192;
 export const ROAMING_MAX_CHANCE = 4096;
@@ -158,9 +158,9 @@ export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 
 // Shards from battle
-export const DUNGEON_SHARDS = 3;
-export const DUNGEON_BOSS_SHARDS = 20;
-export const GYM_SHARDS = 5;
+export const DUNGEON_SHARDS = 30;
+export const DUNGEON_BOSS_SHARDS = 200;
+export const GYM_SHARDS = 50;
 
 export const SAFARI_BATTLE_CHANCE = 5;
 
@@ -191,7 +191,7 @@ export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari bal
 
 // Numbers calculated by Dimava assumes ability to 1 shot on high routes and some use oak items,
 //   which are now nerfed slightly until upgraded, so those numbers may need further adjusting
-const questBase = 1; // change this to scale all quest points
+const questBase = 50; // change this to scale all quest points
 
 // Currency → QP reward amounts
 export const GAIN_MONEY_BASE_REWARD = questBase * 0.0017;
