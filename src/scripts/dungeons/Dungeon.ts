@@ -798,10 +798,40 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
 );
 
 dungeonList['Union Cave'] = new Dungeon('Union Cave',
-    ['Rattata', 'Sandshrew', 'Zubat', 'Geodude', 'Onix', 'Goldeen', 'Magikarp'],
+    [
+        {pokemon: 'Rattata', options: { weight: 1.5 }},
+        {pokemon: 'Sandshrew', options: { weight: 1.5 }},
+        {pokemon: 'Zubat', options: { weight: 1.5 }},
+        {pokemon: 'Geodude', options: { weight: 1.5 }},
+        {pokemon: 'Onix', options: { weight: 1.5 }},
+        {pokemon: 'Goldeen', options: { weight: 1.5 }},
+        {pokemon: 'Magikarp', options: { weight: 1.5 }},
+        {pokemon: 'Wooper', options: { weight: 1.5 }},
+        new DungeonTrainer('Hiker',
+            [
+                new GymPokemon('Geodude', 2000, 4),
+                new GymPokemon('Geodude', 3000, 6),
+                new GymPokemon('Geodude', 4000, 8),
+            ], { weight: 1 }, 'Russell'),
+        new DungeonTrainer('Firebreather',
+            [
+                new GymPokemon('Koffing', 3000, 6),
+                new GymPokemon('Koffing', 3000, 6),
+            ], { weight: 1 }, 'Bill'),
+        new DungeonTrainer('PokéManiac',
+            [new GymPokemon('Slowpoke', 3000, 10)],
+            { weight: 1 }, 'Larry'),
+    ],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     63600,
-    [new DungeonBossPokemon('Wooper', 300000, 14)],
+    [
+        new DungeonTrainer('Hiker',
+            [new GymPokemon('Onix', 300000, 11)],
+            { weight: 1 }, 'Daniel',),
+        new DungeonTrainer('Firebreather',
+            [new GymPokemon('Vulpix', 300000, 9)],
+            { weight: 1 }, 'Ray',),
+    ],
     3000, 32, 7
 );
 
