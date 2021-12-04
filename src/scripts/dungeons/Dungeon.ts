@@ -836,10 +836,33 @@ dungeonList['Union Cave'] = new Dungeon('Union Cave',
 );
 
 dungeonList['Slowpoke Well'] = new Dungeon('Slowpoke Well',
-    ['Zubat', 'Slowpoke'],
+    [
+        {pokemon: 'Zubat', options: { weight: 6 }},
+        {pokemon: 'Slowpoke', options: { weight: 6 }},
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Rattata', 3500, 9),
+                new GymPokemon('Rattata', 3500, 9),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Zubat', 3500, 9),
+                new GymPokemon('Ekans', 3500, 11),
+            ], { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Rattata', 3500, 7),
+                new GymPokemon('Zubat', 3500, 9),
+                new GymPokemon('Zubat', 3500, 9),
+            ], { weight: 1 }, undefined, '(male)'),
+    ],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     67900,
-    [new DungeonBossPokemon('Slowbro', 320000, 20)],
+    [
+        new DungeonTrainer('Rocket Executive',
+            [new GymPokemon('Koffing', 320000, 14),],
+            { weight: 1 }, 'Proton', '(proton)'),
+    ],
     3500, 33, 12
 );
 
