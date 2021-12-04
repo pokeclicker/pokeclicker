@@ -608,12 +608,12 @@ TownList['Burned Tower'] = new DungeonTown(
 TownList['Tin Tower'] = new DungeonTown(
     'Tin Tower',
     GameConstants.Region.johto,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rockets Hideout'))],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rockets Hideout'))]
 );
 TownList['Whirl Islands'] = new DungeonTown(
     'Whirl Islands',
     GameConstants.Region.johto,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rockets Hideout'))],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rockets Hideout'))]
 );
 TownList['Mt Mortar'] = new DungeonTown(
     'Mt Mortar',
