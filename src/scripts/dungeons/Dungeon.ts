@@ -894,7 +894,7 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
 );
 
 dungeonList['Burned Tower'] = new Dungeon('Burned Tower',
-    ['Rattata', 'Zubat', 'Koffing', 'Raticate'],
+    ['Rattata', 'Raticate', 'Zubat', 'Koffing'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
     88500,
     [new DungeonBossPokemon('Golbat', 360000, 35), new DungeonBossPokemon('Weezing', 320000, 35), new DungeonBossPokemon('Shuckle', 610000, 50)],
