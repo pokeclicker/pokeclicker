@@ -968,7 +968,7 @@ dungeonList['Ice Path'] = new Dungeon('Ice Path',
 );
 
 dungeonList['Dark Cave'] = new Dungeon('Dark Cave',
-    ['Zubat', 'Geodude', 'Golbat', 'Graveler', 'Wobbuffet'],
+    ['Zubat', 'Golbat', 'Geodude', 'Graveler', 'Wobbuffet'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     127000,
     [new DungeonBossPokemon('Dunsparce', 460000, 55)],
