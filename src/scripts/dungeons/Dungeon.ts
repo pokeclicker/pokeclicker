@@ -771,7 +771,18 @@ dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
 );
 
 dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
-    ['Natu', 'Wooper', 'Quagsire', 'Smeargle', 'Magikarp', 'Poliwag', 'Poliwhirl'],
+    [
+        {pokemon: 'Poliwag', options: { weight: 1 }},
+        {pokemon: 'Poliwhirl', options: { weight: 1 }},
+        {pokemon: 'Magikarp', options: { weight: 1 }},
+        {pokemon: 'Natu', options: { weight: 1 }},
+        {pokemon: 'Wooper', options: { weight: 1 }},
+        {pokemon: 'Quagsire', options: { weight: 1 }},
+        {pokemon: 'Smeargle', options: { weight: 1 }},
+        new DungeonTrainer('Psychic',
+            [new GymPokemon('Girafarig', 3000, 26)],
+            { weight: 1 }, 'Nathan', '(male)'),
+    ],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     60600,
     [
