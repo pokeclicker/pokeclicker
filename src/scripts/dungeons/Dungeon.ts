@@ -827,10 +827,10 @@ dungeonList['Union Cave'] = new Dungeon('Union Cave',
     [
         new DungeonTrainer('Hiker',
             [new GymPokemon('Onix', 300000, 11)],
-            { weight: 1 }, 'Daniel',),
+            { weight: 1 }, 'Daniel'),
         new DungeonTrainer('Firebreather',
             [new GymPokemon('Vulpix', 300000, 9)],
-            { weight: 1 }, 'Ray',),
+            { weight: 1 }, 'Ray'),
     ],
     3000, 32, 7
 );
