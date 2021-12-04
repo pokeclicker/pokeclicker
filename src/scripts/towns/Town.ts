@@ -560,6 +560,7 @@ TownList['Mahogany Town'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 42)],
         shops: [MahoganyTownShop],
+        dungeon: dungeonList['Team Rockets Hideout'],
         npcs: [MahoganySouvenirShopAttendant],
     }
 );
@@ -607,23 +608,25 @@ TownList['Burned Tower'] = new DungeonTown(
 TownList['Tin Tower'] = new DungeonTown(
     'Tin Tower',
     GameConstants.Region.johto,
-    [
-        new GymBadgeRequirement(BadgeEnums.Mineral),
-        new GymBadgeRequirement(BadgeEnums.Glacier),
-    ]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rockets Hideout'))],
 );
 TownList['Whirl Islands'] = new DungeonTown(
     'Whirl Islands',
     GameConstants.Region.johto,
-    [
-        new GymBadgeRequirement(BadgeEnums.Mineral),
-        new GymBadgeRequirement(BadgeEnums.Glacier),
-    ]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rockets Hideout'))],
 );
 TownList['Mt Mortar'] = new DungeonTown(
     'Mt Mortar',
     GameConstants.Region.johto,
     [new RouteKillRequirement(10, GameConstants.Region.johto, 42)]
+);
+TownList['Team Rockets Hideout'] = new DungeonTown(
+    'Team Rockets Hideout',
+    GameConstants.Region.johto,
+    [
+        new GymBadgeRequirement(BadgeEnums.Mineral),
+        new GymBadgeRequirement(BadgeEnums.Glacier),
+    ]
 );
 TownList['Ice Path'] = new DungeonTown(
     'Ice Path',

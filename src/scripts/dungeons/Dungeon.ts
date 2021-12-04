@@ -959,6 +959,86 @@ dungeonList['Mt Mortar'] = new Dungeon('Mt Mortar',
     5500, 42, 30
 );
 
+dungeonList['Team Rockets Hideout'] = new Dungeon('Team Rockets Hideout',
+    [
+        {pokemon: 'Geodude', options: { weight: 0.5 }},
+        {pokemon: 'Voltorb', options: { weight: 0.5 }},
+        {pokemon: 'Electrode', options: { weight: 0.5 }},
+        {pokemon: 'Koffing', options: { weight: 0.5 }},
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Rattata', 5500, 16),
+                new GymPokemon('Rattata', 5500, 16),
+                new GymPokemon('Rattata', 5500, 16),
+                new GymPokemon('Rattata', 5500, 16),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Magnemite', 5500, 20),
+                new GymPokemon('Magnemite', 5500, 20),
+                new GymPokemon('Magnemite', 5500, 20),
+            ], { weight: 1 }, 'Jed', '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Drowzee', 5500, 17),
+                new GymPokemon('Zubat', 5500, 19),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Zubat', 5500, 16),
+                new GymPokemon('Grimer', 5500, 17),
+                new GymPokemon('Rattata', 5500, 18),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Venonat', 5500, 18),
+                new GymPokemon('Venonat', 5500, 18),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [new GymPokemon('Golbat', 5500, 18)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Rattata', 5500, 17),
+                new GymPokemon('Zubat', 5500, 17),
+                new GymPokemon('Rattata', 5500, 17),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Ekans', 5500, 18),
+                new GymPokemon('Gloom', 5500, 18),
+            ], { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [new GymPokemon('Raticate', 5500, 19)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Koffing', 5500, 22),
+                new GymPokemon('Koffing', 5500, 22),
+            ], { weight: 1 }, 'Ross', '(male)'),
+        new DungeonTrainer('Scientist',
+            [new GymPokemon('Ditto', 5500, 24)],
+            { weight: 1 }, 'Mitch', '(male)'),
+    ],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
+    104100,
+    [
+        new DungeonTrainer('Rocket Executive',
+            [
+                new GymPokemon('Zubat', 1400000, 22),
+                new GymPokemon('Koffing', 140000, 22),
+                new GymPokemon('Raticate', 140000, 24),
+            ], { weight: 1 }, 'Petrel', '(petrel)'),
+        new DungeonTrainer('Rocket Executive',
+            [
+                new GymPokemon('Arbok', 1400000, 23),
+                new GymPokemon('Gloom', 140000, 23),
+                new GymPokemon('Murkrow', 140000, 25),
+            ], { weight: 1 }, 'Ariana', '(ariana)'),
+    ],
+    5500, 43, 30
+);
+
 dungeonList['Ice Path'] = new Dungeon('Ice Path',
     ['Zubat', 'Jynx', 'Swinub'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_incense],
