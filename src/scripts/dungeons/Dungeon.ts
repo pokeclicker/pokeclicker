@@ -926,10 +926,36 @@ dungeonList['Whirl Islands'] = new Dungeon('Whirl Islands',
 );
 
 dungeonList['Mt Mortar'] = new Dungeon('Mt Mortar',
-    ['Rattata', 'Zubat', 'Geodude', 'Marill', 'Raticate', 'Golbat', 'Graveler'],
+    [
+        {pokemon: 'Rattata', options: { weight: 0.5 }},
+        {pokemon: 'Raticate', options: { weight: 0.5 }},
+        {pokemon: 'Zubat', options: { weight: 0.5 }},
+        {pokemon: 'Golbat', options: { weight: 0.5 }},
+        {pokemon: 'Geodude', options: { weight: 0.5 }},
+        {pokemon: 'Graveler', options: { weight: 0.5 }},
+        {pokemon: 'Marill', options: { weight: 0.5 }},
+        new DungeonTrainer('Pokémaniac',
+            [
+                new GymPokemon('Nidoking', 5500, 17),
+                new GymPokemon('Nidoqueen', 5500, 17),
+            ], { weight: 1 }, 'Miller'),
+        new DungeonTrainer('Super Nerd',
+            [new GymPokemon('Slowpoke', 5500, 19)],
+            { weight: 1 }, 'Markus'),
+        new DungeonTrainer('Super Nerd',
+            [new GymPokemon('Seadra', 5500, 39)],
+            { weight: 1 }, 'Hugh'),
+    ],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
     104100,
-    [new DungeonBossPokemon('Tyrogue', 420000, 45)],
+    [
+        new DungeonTrainer('Black Belt',
+            [
+                new GymPokemon('Hitmonlee', 210000, 34),
+                new GymPokemon('Hitmonchan', 210000, 34),
+            ], { weight: 1 }, 'Kiyo'),
+        new DungeonBossPokemon('Tyrogue', 420000, 45, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt Mortar'))}),
+    ],
     5500, 42, 30
 );
 
