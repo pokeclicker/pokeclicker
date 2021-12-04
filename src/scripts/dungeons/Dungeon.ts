@@ -722,10 +722,51 @@ dungeonList['Cerulean Cave'] = new Dungeon('Cerulean Cave',
 // Johto Dungeons
 
 dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
-    ['Rattata', 'Gastly', 'Hoothoot'],
+    [
+        {pokemon: 'Rattata', options: { weight: 8 }},
+        {pokemon: 'Gastly', options: { weight: 8 }},
+        {pokemon: 'Hoothoot', options: { weight: 8 }},
+        new DungeonTrainer('Sage',
+            [
+                new GymPokemon('Bellsprout', 2500, 3),
+                new GymPokemon('Bellsprout', 2500, 3),
+                new GymPokemon('Bellsprout', 2500, 3),
+            ], { weight: 1 }, 'Nico'),
+        new DungeonTrainer('Sage',
+            [
+                new GymPokemon('Bellsprout', 2500, 3),
+                new GymPokemon('Bellsprout', 2500, 3),
+                new GymPokemon('Bellsprout', 2500, 3),
+            ], { weight: 1 }, 'Chow'),
+        new DungeonTrainer('Sage',
+            [
+                new GymPokemon('Bellsprout', 2500, 3),
+                new GymPokemon('Bellsprout', 2500, 3),
+                new GymPokemon('Bellsprout', 2500, 3),
+            ], { weight: 1 }, 'Edmond'),
+        new DungeonTrainer('Sage',
+            [new GymPokemon('Bellsprout', 2500, 6)],
+            { weight: 1 }, 'Jin'),
+        new DungeonTrainer('Sage',
+            [new GymPokemon('Bellsprout', 2500, 6)],
+            { weight: 1 }, 'Neal'),
+        new DungeonTrainer('Sage',
+            [
+                new GymPokemon('Bellsprout', 2500, 7),
+                new GymPokemon('Hoothoot', 2500, 7),
+            ], { weight: 1 }, 'Troy'),
+    ],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Item_magnet],
     56735,
-    [new DungeonBossPokemon('Bellsprout', 260000, 10)],
+    [
+        new DungeonTrainer('Sage',
+            [
+                new GymPokemon('Bellsprout', 86000, 7),
+                new GymPokemon('Bellsprout', 86000, 7),
+                new GymPokemon('Hoothoot', 87000, 10),
+            ],
+            { weight: 1 }, 'Li'),
+    ],
     2500, 31, 5
 );
 
