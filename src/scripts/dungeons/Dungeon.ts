@@ -860,7 +860,7 @@ dungeonList['Slowpoke Well'] = new Dungeon('Slowpoke Well',
     67900,
     [
         new DungeonTrainer('Rocket Executive',
-            [new GymPokemon('Koffing', 320000, 14),],
+            [new GymPokemon('Koffing', 320000, 14)],
             { weight: 1 }, 'Proton', '(proton)'),
     ],
     3500, 33, 12
