@@ -912,6 +912,7 @@ export const JohtoDungeons = [
     'Radio Tower',
     'Ice Path',
     'Dark Cave',
+    'Victory Road Johto',
     'Mt Silver',
 ];
 

@@ -1198,6 +1198,17 @@ dungeonList['Dark Cave'] = new Dungeon('Dark Cave',
     6500, 45, 35
 );
 
+dungeonList['Victory Road Johto'] = new Dungeon('Victory Road Johto',
+    ['Golbat', 'Graveler', 'Onix', 'Rhyhorn'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    128500,
+    [
+        new DungeonBossPokemon('Sandslash', 500000, 55),
+        new DungeonBossPokemon('Rhydon', 500000, 55)
+    ],
+    7000, 46, 40
+);
+
 dungeonList['Mt Silver'] = new Dungeon('Mt Silver',
     ['Ponyta', 'Doduo', 'Tangela', 'Sneasel', 'Ursaring', 'Donphan', 'Teddiursa', 'Phanpy', 'Quagsire', 'Misdreavus'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
