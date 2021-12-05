@@ -524,6 +524,7 @@ TownList['Goldenrod City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
         shops: [GoldenrodDepartmentStoreShop, JohtoBerryMaster],
+        dungeon: dungeonList['Radio Tower'],
         npcs: [BigSpender],
     }
 );
@@ -608,12 +609,12 @@ TownList['Burned Tower'] = new DungeonTown(
 TownList['Tin Tower'] = new DungeonTown(
     'Tin Tower',
     GameConstants.Region.johto,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rockets Hideout'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Radio Tower'))]
 );
 TownList['Whirl Islands'] = new DungeonTown(
     'Whirl Islands',
     GameConstants.Region.johto,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rockets Hideout'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Radio Tower'))]
 );
 TownList['Mt Mortar'] = new DungeonTown(
     'Mt Mortar',
@@ -627,6 +628,11 @@ TownList['Team Rockets Hideout'] = new DungeonTown(
         new GymBadgeRequirement(BadgeEnums.Mineral),
         new GymBadgeRequirement(BadgeEnums.Glacier),
     ]
+);
+TownList['Radio Tower'] = new DungeonTown(
+    'Radio Tower',
+    GameConstants.Region.johto,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rockets Hideout'))]
 );
 TownList['Ice Path'] = new DungeonTown(
     'Ice Path',

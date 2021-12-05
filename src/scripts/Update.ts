@@ -547,6 +547,8 @@ class Update implements Saveable {
         '0.8.12': ({ playerData, saveData }) => {
             // Add Team Rockets Hideout
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 19);
+            // Add Radio Tower
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 20);
         },
     };
 

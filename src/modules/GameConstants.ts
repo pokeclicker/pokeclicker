@@ -909,6 +909,7 @@ export const JohtoDungeons = [
     'Whirl Islands',
     'Mt Mortar',
     'Team Rockets Hideout',
+    'Radio Tower',
     'Ice Path',
     'Dark Cave',
     'Mt Silver',
