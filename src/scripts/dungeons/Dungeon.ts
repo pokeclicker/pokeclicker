@@ -1204,7 +1204,7 @@ dungeonList['Victory Road Johto'] = new Dungeon('Victory Road Johto',
     128500,
     [
         new DungeonBossPokemon('Sandslash', 500000, 55),
-        new DungeonBossPokemon('Rhydon', 500000, 55)
+        new DungeonBossPokemon('Rhydon', 500000, 55),
     ],
     7000, 46, 40
 );
