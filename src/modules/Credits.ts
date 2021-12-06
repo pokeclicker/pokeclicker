@@ -137,6 +137,14 @@ export const SpriteCredits: Credit[] = [
         // NOTES: Found on DeviantArt About page: "All Sprites here are free to use as long you give credit to me"
     },
     {
+        name: 'procompyart',
+        link: 'https://www.instagram.com/procompyart/',
+        resources: [
+            'Elf Munchlax',
+        ],
+        // Notes: Permission given via Discord #development-chat
+    },
+    {
         name: 'RedSparr0w',
         link: 'https://api.github.com/users/RedSparr0w',
         image: 'https://avatars.githubusercontent.com/u/7288322?v=4',

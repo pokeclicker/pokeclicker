@@ -541,6 +541,7 @@ export type PokemonNameType
     | 'Gabite'
     | 'Garchomp'
     | 'Munchlax'
+    | 'Elf Munchlax'
     | 'Riolu'
     | 'Lucario'
     | 'Hippopotas'
