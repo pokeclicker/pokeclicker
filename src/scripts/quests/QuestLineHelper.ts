@@ -236,6 +236,25 @@ class QuestLineHelper {
         App.game.quests.questLines().push(VivillonQuestLine);
     }
 
+    public static createRocketjohtoQuestLine() {
+        const RocketjohtoQuestLine = new QuestLine('Radio Tower Takeover', 'Team Rocket has taken over the Radio Tower!');
+
+        const RadiotowerReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1);
+            Notifier.notify({
+                title: RocketjohtoQuestLine.name,
+                message: `The grateful radio director gave you a Masterball!`,
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearRadioTower = new CustomQuest(1, RadiotowerReward, 'Clear the Radio Tower dungeon in Goldenrod City', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')](), 0);
+        RocketjohtoQuestLine.addQuest(clearRadioTower);
+
+        App.game.quests.questLines().push(RocketjohtoQuestLine);
+    }
+
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
@@ -245,5 +264,6 @@ class QuestLineHelper {
         this.createDeoxysQuestLine();
         this.createUndergroundQuestLine();
         this.createVivillonQuestLine();
+        this.createRocketjohtoQuestLine();
     }
 }
