@@ -243,7 +243,7 @@ class QuestLineHelper {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1);
             Notifier.notify({
                 title: RocketjohtoQuestLine.name,
-                message: `The grateful radio director gave you a Masterball!`,
+                message: 'The grateful radio director gave you a Masterball!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
