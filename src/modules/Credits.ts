@@ -140,6 +140,7 @@ export const SpriteCredits: Credit[] = [
         name: 'procompyart',
         link: 'https://www.instagram.com/procompyart/',
         resources: [
+            'Grinch Celebi',
             'Elf Munchlax',
         ],
         // Notes: Permission given via Discord #development-chat

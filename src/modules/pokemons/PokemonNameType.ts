@@ -331,6 +331,7 @@ export type PokemonNameType
     | 'Lugia'
     | 'Ho-Oh'
     | 'Celebi'
+    | 'Grinch Celebi'
     | 'Treecko'
     | 'Grovyle'
     | 'Sceptile'
