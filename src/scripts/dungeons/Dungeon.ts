@@ -42,7 +42,8 @@ class Dungeon {
         public bossList: Boss[],
         public tokenCost: number,
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
-        public level: number
+        public level: number,
+        public rewardFunction = () => {}
     ) { }
 
     public isUnlocked(): boolean {
@@ -3688,7 +3689,14 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
         new DungeonBossPokemon('Totem Alolan Raticate', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
         new DungeonBossPokemon('Totem Gumshoos', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35);
+    96500, 201, 35,
+    () => {
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.NormaliumZ)) {
+            GymRunner.gymObservable(gymList['Ilima\'s Trial']);
+            App.game.badgeCase.gainBadge(BadgeEnums.NormaliumZ);
+            $('#receiveBadgeModal').modal('show');
+        }
+    });
 
 dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
     [
@@ -3825,7 +3833,14 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
         new DungeonBossPokemon('Totem Wishiwashi (School)', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
         new DungeonBossPokemon('Totem Araquanid', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35);
+    96500, 201, 35,
+    () => {
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.WateriumZ)) {
+            GymRunner.gymObservable(gymList['Lana\'s Trial']);
+            App.game.badgeCase.gainBadge(BadgeEnums.WateriumZ);
+            $('#receiveBadgeModal').modal('show');
+        }
+    });
 
 dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
     [
@@ -3853,7 +3868,14 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
         new DungeonBossPokemon('Totem Alolan Marowak', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
         new DungeonBossPokemon('Totem Salazzle', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35);
+    96500, 201, 35,
+    () => {
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.FiriumZ)) {
+            GymRunner.gymObservable(gymList['Ikawe\'s Trial']);
+            App.game.badgeCase.gainBadge(BadgeEnums.FiriumZ);
+            $('#receiveBadgeModal').modal('show');
+        }
+    });
 
 dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
     ['Metapod', 'Paras', 'Pinsir', 'Hoothoot', 'Bonsly', 'Trumbeak', 'Fomantis', 'Bounsweet', 'Steenee', 'Comfey', 'Oranguru', 'Passimian'],
@@ -3863,7 +3885,14 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
         new DungeonBossPokemon('Lurantis', 8000000, 70),
         new DungeonBossPokemon('Totem Lurantis', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35);
+    96500, 201, 35,
+    () => {
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.GrassiumZ)) {
+            GymRunner.gymObservable(gymList['Mallow\'s Trial']);
+            App.game.badgeCase.gainBadge(BadgeEnums.GrassiumZ);
+            $('#receiveBadgeModal').modal('show');
+        }
+    });
 
 dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
     [
@@ -3962,7 +3991,8 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
             [
                 new GymPokemon('Golisopod', 32395730, 34),
                 new GymPokemon('Masquerain', 33254840, 34),
-            ], { weight: 1 }, 'Guzma'),
+            ],
+            { weight: 1 }, 'Guzma', '(guzma)'),
     ],
     96500, 201, 35);
 
@@ -3976,7 +4006,14 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
         new DungeonBossPokemon('Totem Vikavolt', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
         new DungeonBossPokemon('Totem Togedemaru', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35);
+    96500, 201, 35,
+    () => {
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.ElectriumZ)) {
+            GymRunner.gymObservable(gymList['Sophocles\' Trial']);
+            App.game.badgeCase.gainBadge(BadgeEnums.ElectriumZ);
+            $('#receiveBadgeModal').modal('show');
+        }
+    });
 
 dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
     ['Golbat', 'Gastly', 'Haunter', 'Gengar', 'Shuppet', 'Banette', 'Jellicent', 'Klefki'],
@@ -3986,7 +4023,14 @@ dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
         new DungeonBossPokemon('Mimikyu', 8000000, 70),
         new DungeonBossPokemon('Totem Mimikyu', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35);
+    96500, 201, 35,
+    () => {
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.GhostiumZ)) {
+            GymRunner.gymObservable(gymList['Acerola\'s Trial']);
+            App.game.badgeCase.gainBadge(BadgeEnums.GhostiumZ);
+            $('#receiveBadgeModal').modal('show');
+        }
+    });
 
 dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
     [
@@ -4367,7 +4411,14 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
         new DungeonBossPokemon('Kommo-o', 8000000, 70),
         new DungeonBossPokemon('Totem Kommo-o', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35);
+    96500, 201, 35,
+    () => {
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.DragoniumZ)) {
+            GymRunner.gymObservable(gymList['Vast Poni Canyon Trial']);
+            App.game.badgeCase.gainBadge(BadgeEnums.DragoniumZ);
+            $('#receiveBadgeModal').modal('show');
+        }
+    });
 
 dungeonList['Nebby'] = new Dungeon('Nebby',
     ['Clefable', 'Delcatty', 'Sunflora', 'Heliolisk', 'Lunatone', 'Solrock'],

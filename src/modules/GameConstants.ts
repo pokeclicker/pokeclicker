@@ -833,10 +833,17 @@ export const KalosGyms = [
 ];
 
 export const AlolaGyms = [
+    'Ilima\'s Trial',
     'Iki Town',
+    'Lana\'s Trial',
+    'Ikawe\'s Trial',
+    'Mallow\'s Trial',
     'Konikoni City',
     'Aether Paradise',
+    'Sophocles\' Trial',
+    'Acerola\'s Trial',
     'Malie City',
+    'Vast Poni Canyon Trial',
     'Altar of the Sunne and Moone',
     'Seafolk Village',
     'Exeggutor Island',
