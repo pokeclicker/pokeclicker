@@ -1114,7 +1114,7 @@ Routes.add(new RegionRoute(
         sinnoholdrod: ['Magikarp'],
         sinnohgoodrod: ['Goldeen', 'Magikarp', 'Remoraid'],
         sinnohsuperrod: ['Seaking', 'Gyarados', 'Octillery'],
-        sinnohsurf: ['Psyduck', 'Golduck', 'Shellos (east)', 'Gastrodon(east)'],
+        sinnohsurf: ['Psyduck', 'Golduck', 'Shellos (east)', 'Gastrodon (east)'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 213)],
     210.4
