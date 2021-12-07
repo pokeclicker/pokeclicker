@@ -348,6 +348,10 @@
         })
     %>
 
+    <!-- -------- -->
+    <!-- DUNGEONS -->
+    <!-- -------- -->
+
     <%- include('templates/mapDungeon',
         { name: "Trainers' School"
         , x: 20, y: 29
@@ -492,5 +496,525 @@
 
     <!-- ko if: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula & Poni islands').id -->
     <image width="1600" height="960" xlink:href="assets/images/kanto.png" href="assets/images/alola2.png"></image>
+
+    <!-- ------ -->
+    <!-- ROUTES -->
+    <!-- ------ -->
+
+    <!--Route 10-->
+    <%- include('templates/mapRoute',
+        { route: 10, region: 6
+        , width: 9, height: 3
+        , x: 64, y: 19
+        })
+    %>
+
+    <!--Mount Hokulani-->
+    <%- include('templates/mapRoute',
+        { route: 22, region: 6
+        , width: 3, height: 6, name: "MH"
+        , x: 64, y: 13
+        })
+    %>
+
+    <!--Route 11-->
+    <%- include('templates/mapRoute',
+        { route: 11, region: 6
+        , width: 3, height: 7
+        , x: 73, y: 22
+        })
+    %>
+
+    <!--Route 11 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 11, region: 6
+        , width: 6, height: 3
+        , x: 76, y: 26
+        , noText: true
+        })
+    %>
+
+    <!--Route 12-->
+    <%- include('templates/mapRoute',
+        { route: 12, region: 6
+        , width: 3, height: 12
+        , x: 84, y: 31
+        })
+    %>
+
+    <!--Route 12 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 12, region: 6
+        , width: 1, height: 4
+        , x: 82, y: 26
+        , noText: true
+        })
+    %>
+
+    <!--Route 12 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 12, region: 6
+        , width: 1, height: 4
+        , x: 83, y: 27
+        , noText: true
+        })
+    %>
+
+    <!--Route 12 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 12, region: 6
+        , width: 1, height: 3
+        , x: 84, y: 28
+        , noText: true
+        })
+    %>
+
+    <!--Route 12 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 12, region: 6
+        , width: 1, height: 2
+        , x: 85, y: 29
+        , noText: true
+        })
+    %>
+
+    <!--Route 12 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 12, region: 6
+        , width: 1, height: 1
+        , x: 86, y: 30
+        , noText: true
+        })
+    %>
+
+    <!--Route 12 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 12, region: 6
+        , width: 1, height: 1
+        , x: 86, y: 43
+        , noText: true
+        })
+    %>
+
+    <!--Route 12 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 12, region: 6
+        , width: 1, height: 2
+        , x: 85, y: 43
+        , noText: true
+        })
+    %>
+
+    <!--Route 12 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 12, region: 6
+        , width: 1, height: 3
+        , x: 84, y: 43
+        , noText: true
+        })
+    %>
+
+    <!--Route 12 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 12, region: 6
+        , width: 1, height: 4
+        , x: 83, y: 43
+        , noText: true
+        })
+    %>
+
+    <!--Route 12 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 12, region: 6
+        , width: 1, height: 3
+        , x: 82, y: 44
+        , noText: true
+        })
+    %>
+
+    <!--Route 13-->
+    <%- include('templates/mapRoute',
+        { route: 13, region: 6
+        , width: 14, height: 3
+        , x: 68, y: 44
+        })
+    %>
+
+    <!--Haina Desert-->
+    <%- include('templates/mapRoute',
+        { route: 23, region: 6
+        , width: 3, height: 10, name: "HD"
+        , x: 73, y: 34
+        })
+    %>
+
+    <!--Route 14-->
+    <%- include('templates/mapRoute',
+        { route: 14, region: 6
+        , width: 3, height: 7
+        , x: 62, y: 47
+        })
+    %>
+
+    <!--Route 14 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 14, region: 6
+        , width: 3, height: 3
+        , x: 65, y: 51
+        , noText: true
+        })
+    %>
+
+    <!--Route 15-->
+    <%- include('templates/mapRoute',
+        { route: 15, region: 6
+        , width: 4, height: 12
+        , x: 53, y: 35
+        })
+    %>
+
+    <!--Route 15 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 15, region: 6
+        , width: 5, height: 4
+        , x: 57, y: 43
+        , noText: true
+        })
+    %>
+
+    <!--Route 15 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 15, region: 6
+        , width: 2, height: 3
+        , x: 62, y: 44
+        , noText: true
+        })
+    %>
+
+    <!--Route 16-->
+    <%- include('templates/mapRoute',
+        { route: 16, region: 6
+        , width: 3, height: 6
+        , x: 54, y: 29
+        })
+    %>
+
+    <!--Route 17-->
+    <%- include('templates/mapRoute',
+        { route: 17, region: 6
+        , width: 3, height: 14
+        , x: 54, y: 12
+        })
+    %>
+
+    <!--Route 17 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 17, region: 6
+        , width: 2, height: 3
+        , x: 52, y: 12
+        , noText: true
+        })
+    %>
+
+    <!--Poni Wilds-->
+    <%- include('templates/mapRoute',
+        { route: 24, region: 6
+        , width: 12, height: 3, name: "PW"
+        , x: 16, y: 38
+        })
+    %>
+
+    <!--Poni Wilds Extension-->
+    <%- include('templates/mapRoute',
+        { route: 24, region: 6
+        , width: 4, height: 3
+        , x: 25, y: 41
+        , noText: true
+        })
+    %>
+
+    <!--Poni Wilds Extension-->
+    <%- include('templates/mapRoute',
+        { route: 24, region: 6
+        , width: 3, height: 0.5
+        , x: 16, y: 41
+        , noText: true
+        })
+    %>
+
+    <!--Ancient Poni Path-->
+    <%- include('templates/mapRoute',
+        { route: 25, region: 6
+        , width: 7, height: 3, name: "APP"
+        , x: 29, y: 41
+        })
+    %>
+
+    <!--Ancient Poni Path Extension-->
+    <%- include('templates/mapRoute',
+        { route: 25, region: 6
+        , width: 3, height: 6
+        , x: 29, y: 35
+        , noText: true
+        })
+    %>
+
+    <!--Poni Breaker Coast-->
+    <%- include('templates/mapRoute',
+        { route: 26, region: 6
+        , width: 8, height: 3, name: "PBC"
+        , x: 31, y: 44
+        })
+    %>
+
+    <!--Poni Grove-->
+    <%- include('templates/mapRoute',
+        { route: 27, region: 6
+        , width: 3, height: 5, name: "PGr"
+        , x: 33, y: 36
+        })
+    %>
+
+    <!--Poni Plains-->
+    <%- include('templates/mapRoute',
+        { route: 28, region: 6
+        , width: 7, height: 3, name: "PP"
+        , x: 36, y: 36
+        })
+    %>
+
+    <!--Poni Coast-->
+    <%- include('templates/mapRoute',
+        { route: 29, region: 6
+        , width: 3, height: 8, name: "PC"
+        , x: 40, y: 28
+        })
+    %>
+
+    <!--Poni Gauntlet-->
+    <%- include('templates/mapRoute',
+        { route: 30, region: 6
+        , width: 7, height: 3, name: "PGa"
+        , x: 32, y: 23
+        })
+    %>
+
+    <!--Poni Gauntlet Extension-->
+    <%- include('templates/mapRoute',
+        { route: 30, region: 6
+        , width: 1, height: 1
+        , x: 38, y: 26
+        , noText: true
+        })
+    %>
+
+    <!--Poni Gauntlet Extension-->
+    <%- include('templates/mapRoute',
+        { route: 30, region: 6
+        , width: 1, height: 4
+        , x: 39, y: 24
+        , noText: true
+        })
+    %>
+
+    <!--Poni Gauntlet Extension-->
+    <%- include('templates/mapRoute',
+        { route: 30, region: 6
+        , width: 1, height: 3
+        , x: 40, y: 25
+        , noText: true
+        })
+    %>
+
+    <!--Poni Gauntlet Extension-->
+    <%- include('templates/mapRoute',
+        { route: 30, region: 6
+        , width: 1, height: 2
+        , x: 41, y: 26
+        , noText: true
+        })
+    %>
+
+    <!--Poni Gauntlet Extension-->
+    <%- include('templates/mapRoute',
+        { route: 30, region: 6
+        , width: 1, height: 1
+        , x: 42, y: 27
+        , noText: true
+        })
+    %>
+
+    <!-- ----- -->
+    <!-- TOWNS -->
+    <!-- ----- -->
+
+    <!--Aether Paradise-->
+    <%- include('templates/mapTown',
+        { name: "Aether Paradise"
+        , x: 40, y: 1.5
+        , width: 5, height: 4.5
+        })
+    %>
+
+    <!--Malie City-->
+    <%- include('templates/mapTown',
+        { name: "Malie City"
+        , x: 77, y: 17.5
+        , width: 5, height: 4.5
+        })
+    %>
+
+    <!--Malie City Extension-->
+    <%- include('templates/mapTown',
+        { name: "Malie City"
+        , x: 73, y: 18
+        , width: 4, height: 4
+        })
+    %>
+
+    <!--Tapu Village-->
+    <%- include('templates/mapTown',
+        { name: "Tapu Village"
+        , x: 64, y: 43
+        , width: 4, height: 4
+        })
+    %>
+
+    <!--Seafolk Village-->
+    <%- include('templates/mapTown',
+        { name: "Seafolk Village"
+        , x: 15, y: 41.5
+        , width: 5, height: 4.5
+        })
+    %>
+
+    <!--Exeggutor Island-->
+    <%- include('templates/mapTown',
+        { name: "Exeggutor Island"
+        , x: 5, y: 43
+        , width: 4, height: 4
+        })
+    %>
+
+    <!--Altar of the Sunne and Moone-->
+    <%- include('templates/mapTown',
+        { name: "Altar of the Sunne and Moone"
+        , x: 25, y: 25
+        , width: 4, height: 4
+        })
+    %>
+
+    <!--Pokémon League Alola-->
+    <%- include('templates/mapTown',
+        { name: "Pokémon League Alola"
+        , x: 60.5, y: 32
+        , width: 10, height: 7.5
+        })
+    %>
+
+    <!-- -------- -->
+    <!-- DUNGEONS -->
+    <!-- -------- -->
+
+    <%- include('templates/mapDungeon',
+        { name: "Malie Garden"
+        , x: 73, y: 15
+        , width: 4, height: 3
+        })
+    %>
+
+    <%- include('templates/mapDungeon',
+        { name: "Hokulani Observatory"
+        , x: 64, y: 9
+        , width: 4, height: 4
+        })
+    %>
+
+    <%- include('templates/mapDungeon',
+        { name: "Thrifty Megamart"
+        , x: 65, y: 48
+        , width: 4, height: 3
+        })
+    %>
+
+    <%- include('templates/mapDungeon',
+        { name: "Ula\'ula Meadow"
+        , x: 53, y: 26
+        , width: 4, height: 3
+        })
+    %>
+
+    <%- include('templates/mapDungeon',
+        { name: "Po Town"
+        , x: 52, y: 9
+        , width: 4, height: 3
+        })
+    %>
+
+    <%- include('templates/mapDungeon',
+        { name: "Mount Lanakila"
+        , x: 64, y: 40
+        , width: 4, height: 3
+        })
+    %>
+
+    <%- include('templates/mapDungeon',
+        { name: "Ruins of Abundance"
+        , x: 73, y: 31
+        , width: 4, height: 3
+        })
+    %>
+
+    <%- include('templates/mapDungeon',
+        { name: "Vast Poni Canyon"
+        , x: 29, y: 31
+        , width: 4, height: 4
+        })
+    %>
+
+    <!--Vast Poni Canyon Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Vast Poni Canyon"
+        , x: 25, y: 29
+        , width: 4, height: 3
+        })
+    %>
+
+    <!--Vast Poni Canyon Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Vast Poni Canyon"
+        , x: 28, y: 32
+        , width: 1, height: 1
+        })
+    %>
+
+    <!--Vast Poni Canyon Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Vast Poni Canyon"
+        , x: 29, y: 30
+        , width: 2, height: 1
+        })
+    %>
+
+    <%- include('templates/mapDungeon',
+        { name: "Ruins of Hope"
+        , x: 36, y: 41
+        , width: 4, height: 3
+        })
+    %>
+
+    <%- include('templates/mapDungeon',
+        { name: "Poni Meadow"
+        , x: 36, y: 33
+        , width: 4, height: 3
+        })
+    %>
+
+    <%- include('templates/mapDungeon',
+        { name: "Resolution Cave"
+        , x: 36, y: 30
+        , width: 4, height: 3
+        })
+    %>
     <!-- /ko -->
 </g>

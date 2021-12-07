@@ -11,6 +11,7 @@ class Game {
     // Features
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
+    private worker: Worker;
 
     /**
      * TODO(@Isha) pass all features through the constructor
@@ -163,7 +164,22 @@ class Game {
         if (player.starter() === GameConstants.Starter.None) {
             StartSequenceRunner.start();
         }
-        this.interval = setInterval(this.gameTick.bind(this), GameConstants.TICK_TIME);
+
+        let workerSupported = true;
+
+        try {
+            console.log('starting web worker...');
+            const blob = new Blob([`setInterval(() => postMessage('tick'), ${GameConstants.TICK_TIME})`]);
+            const blobURL = window.URL.createObjectURL(blob);
+
+            this.worker = new Worker(blobURL);
+            // use a setTimeout to queue the event
+            this.worker?.addEventListener('message', () => Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null);
+        } catch (e) {
+            workerSupported = false;
+        }
+
+        this.interval = setInterval(() => !this.worker || !Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null, GameConstants.TICK_TIME);
     }
 
     stop() {

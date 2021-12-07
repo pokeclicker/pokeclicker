@@ -35,6 +35,7 @@ import LevelType, { levelRequirements } from './party/LevelType';
 import WalletClasses from './wallet/inject';
 import GenericProxy from './utilities/GenericProxy';
 import { SpriteCredits, CodeCredits } from './Credits';
+import * as modalUtils from './utilities/Modal';
 import { asyncEvent } from './utilities/UI';
 
 Object.assign(<any>window, {
@@ -77,5 +78,6 @@ Object.assign(<any>window, {
     GenericProxy,
     SpriteCredits,
     CodeCredits,
+    modalUtils,
     asyncEvent,
 });

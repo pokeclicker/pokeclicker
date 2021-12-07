@@ -10,6 +10,28 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.11
+    new ChangelogUpdate('v0.8.11', new Date(2021, 10, 19)),
+    new Changelog(changelogType.CHANGE, 'Trainers and Background will now show a list of images when changing them on your profile'),
+    new Changelog(changelogType.CHANGE, 'Hatchery and Protein list now sort independently of Party'),
+    new Changelog(changelogType.FIXED, 'Hatchery and Protein list not sorting'),
+
+    // v0.8.10
+    new ChangelogUpdate('v0.8.10', new Date(2021, 10, 17)),
+    new Changelog(changelogType.NEW, 'Allow using web workers for game ticks'),
+    new Changelog(changelogType.NEW, 'Added setting to not reset shop amount when purchasing'),
+    new Changelog(changelogType.CHANGE, 'Updated Sinnoh route orders and encounters'),
+    new Changelog(changelogType.CHANGE, 'Updated Slowpoke rare item drops'),
+    new Changelog(changelogType.CHANGE, 'Added Farm, Daycare, Underground locations to all maps'),
+    new Changelog(changelogType.CHANGE, 'Moved a few dungeons out of towns'),
+    new Changelog(changelogType.CHANGE, 'Updated Kalos visually'),
+    new Changelog(changelogType.CHANGE, 'Lowered some berry unlock requirements'),
+    new Changelog(changelogType.FIXED, 'When shoveling a fully grown crop it will be harvested instead'),
+    new Changelog(changelogType.FIXED, 'Lag caused by sorting by Pokémon attack'),
+    new Changelog(changelogType.FIXED, 'Auto Gym button sizing'),
+    new Changelog(changelogType.FIXED, 'Reduce some lag'),
+    new Changelog(changelogType.FIXED, 'Minor text fixes'),
+
     // v0.8.9
     new ChangelogUpdate('v0.8.9', new Date(2021, 8, 12)),
     new Changelog(changelogType.NEW, 'Log book can now be filtered by event type'),

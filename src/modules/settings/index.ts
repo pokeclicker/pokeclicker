@@ -57,6 +57,7 @@ Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons:',
         new SettingOption('×10, ÷10', 'multiplication'),
     ],
     'original'));
+Settings.add(new BooleanSetting('resetShopAmountOnPurchase', 'Reset buy quantity after each purchase', true));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
 Settings.add(new BooleanSetting('hideChallengeRelatedModules', 'Hide challenge related modules', false));
 Settings.add(new Setting<string>('backgroundImage', 'Background image:',
@@ -86,10 +87,19 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
         new SettingOption('Ripe/Death', 'ripeDeath'),
     ],
     'nextStage'));
+Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
+
+// CSS variable settings
+Settings.add(new CssVariableSetting('locked', 'Map Color Locked Location', [], '#000000'));
+Settings.add(new CssVariableSetting('currentPlace', 'Map Color Current Location', [], '#55ff00'));
+Settings.add(new CssVariableSetting('incomplete', 'Map Color Incomplete Area', [], '#ff9100'));
+Settings.add(new CssVariableSetting('uncaughtPokemon', 'Map Color Uncaught Pokemon', [], '#3498db'));
+Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Map Color Uncaught Shiny Pokemon', [], '#ffee00'));
+Settings.add(new CssVariableSetting('completed', 'Map Color Completed Location', [], '#ffffff'));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
-Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
+Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web workers for game ticks (more consistent game speed)', true));
 
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((sound) => {
@@ -107,13 +117,25 @@ Object.values(NotificationConstants.NotificationSetting).forEach((setting) => {
  */
 
 // Party Sorting
-const sortsettings = Object.keys(SortOptionConfigs).map((opt) => (
+const partySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
-Settings.add(new Setting<number>('partySort', 'Sort:',
-    sortsettings,
-    SortOptions.id));
+Settings.add(new Setting<number>('partySort', 'Sort:', partySortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
+
+// Hatchery Sorting
+const hatcherySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('hatcherySort', 'Sort:', hatcherySortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('hatcherySortDirection', 'reverse', false));
+
+// Protein Sorting
+const proteinSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('proteinSort', 'Sort:', proteinSortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('proteinSortDirection', 'reverse', false));
 
 // Breeding Filters
 Settings.add(new Setting<string>('breedingCategoryFilter', 'breedingCategoryFilter',
@@ -181,14 +203,6 @@ Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
         ...Settings.enumToSettingOptionArray(Region),
     ],
     '-2'));
-
-// CSS variable settings
-Settings.add(new CssVariableSetting('locked', 'Map Color Locked Location', [], '#000000'));
-Settings.add(new CssVariableSetting('currentPlace', 'Map Color Current Location', [], '#55ff00'));
-Settings.add(new CssVariableSetting('incomplete', 'Map Color Incomplete Area', [], '#ff9100'));
-Settings.add(new CssVariableSetting('uncaughtPokemon', 'Map Color Uncaught Pokemon', [], '#3498db'));
-Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Map Color Uncaught Shiny Pokemon', [], '#ffee00'));
-Settings.add(new CssVariableSetting('completed', 'Map Color Completed Location', [], '#ffffff'));
 
 /*
  * SUBSCRIBERS
