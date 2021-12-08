@@ -7,6 +7,7 @@ export default class Challenges implements Saveable {
     defaults: Record<string, any> = {};
 
     list: Record<string, Challenge> = {
+        regionalAttackDebuff: new Challenge('Region Attack Debuff (recommended)', 'Lowers Pokémon attack based on native region and highest reached region', true),
         disableClickAttack: new Challenge('No Click Attack', 'Disables the ability to use Click Attacks'),
         disableBattleItems: new Challenge('No Battle Item', 'Disables the usage of Battle Items'),
         disableMasterballs: new Challenge('No Masterball', 'Disables the usage of Masterballs'),
