@@ -130,6 +130,26 @@ class RouteHelper {
             pokemonList = pokemonList.concat(possiblePokemons.unovasurf);
         }
 
+        // Kalos Old rod Pokémon
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Kalos_old_rod) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.kalosoldrod);
+        }
+
+        // Kalos Good Rod Pokémon
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Kalos_good_rod) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.kalosgoodrod);
+        }
+
+        // Kalos Super Rod Pokémon
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Kalos_super_rod) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.kalossuperrod);
+        }
+
+        // Kalos Surf Pokémon
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Kalos_HM03_surf) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.kalossurf);
+        }
+
         // Special requirement Pokémon
         pokemonList = pokemonList.concat(...possiblePokemons.special.filter(p => p.isAvailable()).map(p => p.pokemon));
 

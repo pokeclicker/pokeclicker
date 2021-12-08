@@ -1554,8 +1554,11 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kalos Route 3', GameConstants.Region.kalos, 3,
     new RoutePokemon({
-        land: ['Pidgey', 'Pikachu', 'Dunsparce', 'Azurill', 'Bidoof', 'Burmy (plant)', 'Bunnelby', 'Fletchling', 'Dunsparce'],
-        water: ['Magikarp', 'Goldeen', 'Marill', 'Masquerain'],
+        land: ['Pidgey', 'Pikachu', 'Dunsparce', 'Azurill', 'Bidoof', 'Burmy (plant)', 'Bunnelby', 'Fletchling'],
+        kalosoldrod: ['Magikarp'],
+        kalosgoodrod: ['Goldeen', 'Corphish'],
+        kalossuperrod: ['Seaking', 'Gyarados', 'Crawdaunt'],
+        kalossurf: ['Marill', 'Masquerain'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Santalune Forest'))]
 ));
@@ -1563,7 +1566,10 @@ Routes.add(new RegionRoute(
     'Kalos Route 22', GameConstants.Region.kalos, 22,
     new RoutePokemon({
         land: ['Psyduck', 'Farfetch\'d', 'Azumarill', 'Dunsparce', 'Azurill', 'Bidoof', 'Bibarel', 'Riolu', 'Bunnelby', 'Diggersby', 'Litleo'],
-        water: ['Magikarp', 'Goldeen', 'Azumarill', 'Carvanha'],
+        kalosoldrod: ['Magikarp'],
+        kalosgoodrod: ['Goldeen', 'Carvanha'],
+        kalossuperrod: ['Seaking', 'Gyarados', 'Sharpedo'],
+        kalossurf: ['Psyduck', 'Azumarill'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 3)],
     3.1
@@ -1600,7 +1606,10 @@ Routes.add(new RegionRoute(
     'Kalos Route 8', GameConstants.Region.kalos, 8,
     new RoutePokemon({
         land: ['Spoink', 'Zangoose', 'Seviper', 'Absol', 'Bagon', 'Drifloon', 'Mienfoo', 'Inkay'],
-        water: ['Tentacool', 'Shellder', 'Staryu', 'Wailmer', 'Luvdisc', 'Skrelp', 'Clauncher'],
+        kalosoldrod: ['Luvdisc'],
+        kalosgoodrod: ['Shellder', 'Staryu', 'Skrelp', 'Clauncher'],
+        kalossuperrod: ['Cloyster', 'Starmie', 'Qwilfish', 'Dragalge', 'Clawitzer'],
+        kalossurf: ['Tentacool', 'Wailmer'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Connecting Cave'))]
 ));
@@ -1632,7 +1641,10 @@ Routes.add(new RegionRoute(
     'Kalos Route 12', GameConstants.Region.kalos, 12,
     new RoutePokemon({
         land: ['Slowpoke', 'Exeggcute', 'Pinsir', 'Tauros', 'Heracross', 'Miltank', 'Pachirisu', 'Chatot'],
-        water: ['Tentacool', 'Lapras', 'Remoraid', 'Clamperl', 'Mantyke'],
+        kalosoldrod: ['Luvdisc'],
+        kalosgoodrod: ['Remoraid', 'Clamperl'],
+        kalossuperrod: ['Corsola', 'Octillery', 'Huntail', 'Gorebyss'],
+        kalossurf: ['Tentacool', 'Lapras', 'Mantyke'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Rumble)]
     //Replace req with Tower of Mastery dungeon if implemented.
@@ -1647,8 +1659,11 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kalos Route 14', GameConstants.Region.kalos, 14,
     new RoutePokemon({
-        land: ['Weepinbell', 'Haunter', 'Quagsire', 'Skorupi', 'Carnivine', 'Karrablast', 'Shelmet', 'Goomy'],
-        water: ['Poliwag', 'Poliwhirl', 'Barboach', 'Stunfisk'],
+        land: ['Weepinbell', 'Haunter', 'Quagsire', 'Skorupi', 'Carnivine', 'Karrablast', 'Shelmet', 'Stunfisk', 'Goomy'],
+        kalosoldrod: ['Poliwag'],
+        kalosgoodrod: ['Poliwhirl', 'Barboach'],
+        kalossuperrod: ['Poliwhirl', 'Whiscash'],
+        kalossurf: ['Quagsire', 'Stunfisk', 'Goomy'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Voltage)]
 ));
@@ -1656,16 +1671,21 @@ Routes.add(new RegionRoute(
     'Kalos Route 15', GameConstants.Region.kalos, 15,
     new RoutePokemon({
         land: ['Mightyena', 'Skorupi', 'Watchog', 'Liepard', 'Foongus', 'Pawniard', 'Klefki'],
-        water: ['Poliwag', 'Poliwhirl', 'Lombre', 'Floatzel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        kalosoldrod: ['Poliwag'],
+        kalosgoodrod: ['Poliwhirl', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        kalossuperrod: ['Poliwhirl', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        kalossurf: ['Lombre', 'Floatzel'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokéball Factory'))]
-    //Replace req with Pokéball Factory dungeon if implemented.
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 16', GameConstants.Region.kalos, 16,
     new RoutePokemon({
         land: ['Weepinbell', 'Floatzel', 'Skorupi', 'Foongus', 'Klefki', 'Phantump', 'Pumpkaboo'],
-        water: ['Poliwag', 'Poliwhirl', 'Lombre', 'Floatzel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        kalosoldrod: ['Poliwag'],
+        kalosgoodrod: ['Poliwhirl', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        kalossuperrod: ['Poliwhirl', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        kalossurf: ['Lombre', 'Floatzel'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 15)]
 ));
@@ -1687,7 +1707,10 @@ Routes.add(new RegionRoute(
     'Kalos Route 19', GameConstants.Region.kalos, 19,
     new RoutePokemon({
         land: ['Weepinbell', 'Haunter', 'Quagsire', 'Drapion', 'Carnivine', 'Karrablast', 'Shelmet', 'Sliggoo'],
-        water: ['Poliwag', 'Poliwhirl', 'Barboach', 'Stunfisk', 'Politoed'],
+        kalosoldrod: ['Poliwag'],
+        kalosgoodrod: ['Poliwhirl', 'Barboach'],
+        kalossuperrod: ['Poliwhirl', 'Politoed', 'Whiscash'],
+        kalossurf: ['Quagsire', 'Stunfisk', 'Sliggoo'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 18)]
 ));
@@ -1702,7 +1725,10 @@ Routes.add(new RegionRoute(
     'Kalos Route 21', GameConstants.Region.kalos, 21,
     new RoutePokemon({
         land: ['Scyther', 'Ursaring', 'Spinda', 'Altaria', 'Floatzel'],
-        water: ['Poliwag', 'Poliwhirl', 'Lombre', 'Floatzel', 'Basculin (Red-Striped)', 'Dratini'],
+        kalosoldrod: ['Poliwag'],
+        kalosgoodrod: ['Poliwhirl', 'Dratini', 'Basculin (Red-Striped)'],
+        kalossuperrod: ['Poliwhirl', 'Dragonair', 'Basculin (Red-Striped)'],
+        kalossurf: ['Lombre', 'Floatzel'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 19)]
 ));
@@ -1710,7 +1736,10 @@ Routes.add(new RegionRoute(
     'Azure Bay', GameConstants.Region.kalos, 23,
     new RoutePokemon({
         land: ['Slowpoke', 'Exeggcute', 'Chatot', 'Inkay'],
-        water: ['Tentacool', 'Lapras', 'Chinchou', 'Remoraid', 'Luvdisc', 'Mantyke'],
+        kalosoldrod: ['Luvdisc'],
+        kalosgoodrod: ['Chinchou', 'Remoraid'],
+        kalossuperrod: ['Lanturn', 'Octillery', 'Alomomola'],
+        kalossurf: ['Tentacool', 'Lapras', 'Mantyke'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)], 12
 ));

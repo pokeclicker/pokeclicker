@@ -39,6 +39,10 @@ class RoutePokemon {
     public sinnohsurf: PokemonNameType[];
     public unovasuperrod: PokemonNameType [];
     public unovasurf: PokemonNameType[];
+    public kalosoldrod: PokemonNameType [];
+    public kalosgoodrod: PokemonNameType [];
+    public kalossuperrod: PokemonNameType [];
+    public kalossurf: PokemonNameType[];
     public special: SpecialRoutePokemon[];
 
     constructor({
@@ -65,6 +69,10 @@ class RoutePokemon {
         sinnohsurf = [],
         unovasuperrod = [],
         unovasurf = [],
+        kalosoldrod = [],
+        kalosgoodrod = [],
+        kalossuperrod = [],
+        kalossurf = [],
         special = [],
     }: {
         land?: PokemonNameType[],
@@ -90,6 +98,10 @@ class RoutePokemon {
         sinnohsurf?: PokemonNameType[],
         unovasuperrod?: PokemonNameType[],
         unovasurf?: PokemonNameType[],
+        kalosoldrod?: PokemonNameType[],
+        kalosgoodrod?: PokemonNameType[],
+        kalossuperrod?: PokemonNameType[],
+        kalossurf?: PokemonNameType[],
         special?: SpecialRoutePokemon[],
     }) {
         this.land = land;
@@ -115,6 +127,10 @@ class RoutePokemon {
         this.sinnohsurf = sinnohsurf;
         this.unovasuperrod = unovasuperrod;
         this.unovasurf = unovasurf;
+        this.kalosoldrod = kalosoldrod;
+        this.kalosgoodrod = kalosgoodrod;
+        this.kalossuperrod = kalossuperrod;
+        this.kalossurf = kalossurf;
         this.special = special;
     }
 }

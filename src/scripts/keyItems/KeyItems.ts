@@ -108,6 +108,15 @@ class KeyItems implements Feature {
             new KeyItem(KeyItems.KeyItem.Unova_super_rod, 'An awesome, high-tech fishing rod. Use it at any body of water in the Unova region to fish for wild aquatic Pokémon.', () => {
                 return App.game.statistics.routeKills[GameConstants.Region.unova][1]() >= GameConstants.ROUTE_KILLS_NEEDED;
             }, undefined, undefined, 'Unova Super Rod'),
+            new KeyItem(KeyItems.KeyItem.Kalos_old_rod, 'An old and beat-up fishing rod. Use it by any body of water in the Kalos region to fish for wild aquatic Pokémon.', () => {
+                return App.game.statistics.routeKills[GameConstants.Region.kalos][8]() >= GameConstants.ROUTE_KILLS_NEEDED;
+            }, undefined, undefined, 'Kalos Old Rod'),
+            new KeyItem(KeyItems.KeyItem.Kalos_good_rod, 'A new, good-quality fishing rod. Use it by any body of water in the Kalos region to fish for wild aquatic Pokémon.', () => {
+                return App.game.statistics.routeKills[GameConstants.Region.kalos][12]() >= GameConstants.ROUTE_KILLS_NEEDED;
+            }, undefined, undefined, 'Kalos Good Rod'),
+            new KeyItem(KeyItems.KeyItem.Kalos_super_rod, 'An awesome, high-tech fishing rod. Use it at any body of water in the Kalos region to fish for wild aquatic Pokémon.', () => {
+                return App.game.statistics.routeKills[GameConstants.Region.kalos][16]() >= GameConstants.ROUTE_KILLS_NEEDED;
+            }, undefined, undefined, 'Kalos Super Rod'),
             new KeyItem(KeyItems.KeyItem.Kanto_HM03_surf, 'Can be used for crossing water in the Kanto region.', undefined, undefined, undefined, 'Kanto HM03 Surf'),
             new KeyItem(KeyItems.KeyItem.Johto_TM02_headbutt, 'Can be used to knock wild Pokémon from trees in the Johto region. Warning, may cause concussion.', () => {
                 return App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ilex Forest')]() > 0;
@@ -117,6 +126,7 @@ class KeyItems implements Feature {
             new KeyItem(KeyItems.KeyItem.Hoenn_HM08_dive, 'Can be used to dive to the bottom of Hoenn\'s oceans to find new kinds of Pokémon.', undefined, undefined, undefined, 'Hoenn HM08 Dive'),
             new KeyItem(KeyItems.KeyItem.Sinnoh_HM03_surf, 'Can be used for crossing water in the Sinnoh region.', undefined, undefined, undefined, 'Sinnoh HM03 Surf'),
             new KeyItem(KeyItems.KeyItem.Unova_HM03_surf, 'Can be used for crossing water in the Unova region.', undefined, undefined, undefined, 'Unova HM03 Surf'),
+            new KeyItem(KeyItems.KeyItem.Kalos_HM03_surf, 'Can be used for crossing water in the Kalos region.', undefined, undefined, undefined, 'Kalos HM03 Surf'),
             // TODO obtain somewhere at the start
             new KeyItem(KeyItems.KeyItem.Holo_caster, 'A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others', undefined, undefined, undefined, 'Holo Caster'),
             new KeyItem(KeyItems.KeyItem.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémons attack; some baby Pokémon can only be found through breeding too!', () => {
@@ -211,6 +221,9 @@ namespace KeyItems {
         'Sinnoh_good_rod',
         'Sinnoh_super_rod',
         'Unova_super_rod',
+        'Kalos_old_rod',
+        'Kalos_good_rod',
+        'Kalos_super_rod',
         'Kanto_HM03_surf',
         'Johto_TM02_headbutt',
         'Johto_HM03_surf',
@@ -218,6 +231,7 @@ namespace KeyItems {
         'Hoenn_HM08_dive',
         'Sinnoh_HM03_surf',
         'Unova_HM03_surf',
+        'Kalos_HM03_surf',
         'Holo_caster',
         'Mystery_egg',
         'Safari_ticket',
