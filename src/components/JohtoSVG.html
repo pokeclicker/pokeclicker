@@ -120,7 +120,7 @@
     <!--Route 35-->
     <%- include('templates/mapRoute',
         { route: 35, region: 1
-        , width: 8, height: 3
+        , width: 7, height: 3
         , x: 24, y: 22
         , rotate: true
         })
@@ -368,6 +368,22 @@
         })
      %>
 
+    <!--Goldenrod City Extension-->
+    <%- include('templates/mapTown',
+        { name: "Goldenrod City"
+        , x: 22, y: 35
+        , width: 3, height: 1
+        })
+     %>
+
+    <!--Goldenrod City Extension-->
+    <%- include('templates/mapTown',
+        { name: "Goldenrod City"
+        , x: 27, y: 31
+        , width: 3, height: 0.5
+        })
+     %>
+
     <!--Ecruteak City-->
     <%- include('templates/mapTown',
         { name: "Ecruteak City"
@@ -524,7 +540,7 @@
     <!--Radio Tower-->
     <%- include('templates/mapDungeon',
         { name: "Radio Tower"
-        , x: 22, y: 30
+        , x: 22, y: 29
         , width: 3, height: 6
         })
      %>
@@ -532,8 +548,8 @@
     <!--Radio Tower Extension-->
     <%- include('templates/mapDungeon',
         { name: "Radio Tower"
-        , x: 25, y: 30
-        , width: 2, height: 1.5
+        , x: 25, y: 29
+        , width: 2, height: 2.5
         })
      %>
 
