@@ -680,15 +680,15 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Castform (sunny)'], new MultiRequirement([
                 new ObtainedPokemonRequirement(pokemonMap.Castform),
                 new WeatherRequirement([WeatherType.Sunny]),
-                ])),
+            ])),
             new SpecialRoutePokemon(['Castform (rainy)'], new MultiRequirement([
                 new ObtainedPokemonRequirement(pokemonMap.Castform),
                 new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm]),
-                ])),
+            ])),
             new SpecialRoutePokemon(['Castform (snowy)'], new MultiRequirement([
                 new ObtainedPokemonRequirement(pokemonMap.Castform),
                 new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail]),
-                ])),
+            ])),
         ],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 118)]
