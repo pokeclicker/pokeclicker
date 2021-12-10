@@ -840,14 +840,14 @@ class Farming implements Feature {
         this.mutations.push(new BlankMutation(0, BerryType.Kasib,
             {
                 hint: 'I\'ve heard of a Berry that only appears after a Berry plant has withered, but is repelled by Colbur Plants.',
-                unlockReq: () => App.game.farming.highestUnlockedBerry() > BerryType.Occa,
+                unlockReq: () => App.game.farming.highestUnlockedBerry() >= BerryType.Occa,
             }));
 
         // Starf
         this.mutations.push(new BlankMutation(0, BerryType.Starf,
             {
                 hint: 'I\'ve heard of a Berry that only appears after a Shiny Pokémon wanders near open soil.',
-                unlockReq: () => App.game.farming.highestUnlockedBerry() > BerryType.Occa,
+                unlockReq: () => App.game.farming.highestUnlockedBerry() >= BerryType.Occa,
             }));
 
         //#endregion
@@ -1127,6 +1127,10 @@ class Farming implements Feature {
             return;
         }
         if (plot.isEmpty()) {
+            return;
+        }
+        if (plot.stage() == PlotStage.Berry) {
+            this.harvest(index);
             return;
         }
         if (this.shovelAmt() <= 0) {

@@ -127,7 +127,7 @@ UndergroundItem.addItem('Claw Fossil',  204, [[1,1,1,0,0], [1,1,1,1,0], [0,1,1,1
 UndergroundItem.addItem('Armor Fossil', 205, [[0,1,1,1,0], [0,1,1,1,0], [1,1,1,1,1], [0,1,1,1,0]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.sinnoh));
 UndergroundItem.addItem('Skull Fossil', 206, [[1,1,1,1], [1,1,1,1], [1,1,1,1], [0,1,1,0]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.sinnoh));
 UndergroundItem.addItem('Cover Fossil', 207, [[1,1,1,1,0], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [0,1,1,1,1]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.unova));
-UndergroundItem.addItem('Plume Fossil', 208, [[0,0,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,0], [1,1,0,0,0]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.unova));
+UndergroundItem.addItem('Plume Fossil', 208, [[0,0,1,1,1], [0,1,1,1,1], [1,1,1,1,0], [1,1,1,1,0], [1,1,0,0,0]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.unova));
 UndergroundItem.addItem('Jaw Fossil',   209, [[0,0,1,1,1], [0,1,1,1,1], [1,1,1,1,1], [1,1,1,1,0]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.kalos));
 UndergroundItem.addItem('Sail Fossil',  210, [[1,1,1,0,0], [1,1,1,1,1], [0,1,1,1,1], [0,1,1,1,0]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.kalos));
 

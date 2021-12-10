@@ -39,6 +39,7 @@ class Routes {
     public static unnormalizeRoute(normalizedRoute: number): number {
         return this.regionRoutes[normalizedRoute - 1].number;
     }
+
     public static normalizedNumber(region: GameConstants.Region, route: number): number {
         if (region == GameConstants.Region.none) {
             return route;
@@ -1521,7 +1522,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.MelemeleKahuna)]
+    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 5', GameConstants.Region.alola, 5,
@@ -1615,7 +1616,7 @@ Routes.add(new RegionRoute(
     [new RouteKillRequirement(10, GameConstants.Region.alola, 13)]
 ));
 Routes.add(new RegionRoute(
-    'Alola Haina Desert', GameConstants.Region.alola, 23,
+    'Haina Desert', GameConstants.Region.alola, 23,
     new RoutePokemon({
         land: ['Alolan Dugtrio', 'Trapinch', 'Baltoy', 'Gabite', 'Krokorok', 'Golett'],
     }),
@@ -1624,7 +1625,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 15', GameConstants.Region.alola, 15,
     new RoutePokemon({
-        land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Gumshoos'],
+        land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Gumshoos', 'Sandygast'],
         water: ['Tentacruel', 'Magikarp', 'Clamperl', 'Finneon', 'Wishiwashi (Solo)', 'Bruxish'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))]
