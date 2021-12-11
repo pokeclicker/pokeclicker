@@ -1607,12 +1607,12 @@ dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
     96500, 230, 100);
 
 dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
-    ['Vileplume', 'Bellsprout', 'Exeggutor', 'Bellossom', 'Skiploom', 'Sunflora', 'Roselia'],
+    ['Gloom', 'Bellsprout', 'Tangela', 'Skiploom', 'Lombre', 'Seedot', 'Roselia'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_incense],
     2603000,
     [
-        new DungeonBossPokemon('Venusaur', 9900000, 50),
-        new DungeonBossPokemon('Meganium', 11000000, 50),
+        new DungeonBossPokemon('Parasect', 9900000, 50),
+        new DungeonBossPokemon('Breloom', 11000000, 50),
         new DungeonBossPokemon('Shaymin (land)', 11000000, 50),
         new DungeonBossPokemon('Shaymin (sky)', 11000000, 50),
     ],
