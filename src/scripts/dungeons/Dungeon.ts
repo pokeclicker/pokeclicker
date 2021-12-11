@@ -1671,13 +1671,13 @@ dungeonList['Floccesy Ranch'] = new Dungeon('Floccesy Ranch',
     126500, 20, 100);
 
 dungeonList['Liberty Garden'] = new Dungeon('Liberty Garden',
-    ['Vulpix', 'Sunflora', 'Abra', 'Wingull', 'Pidove', 'Sentret'],
+    ['Vulpix', 'Jumpluff', 'Abra', 'Wingull', 'Pidove', 'Sentret'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2703000,
     [
         new DungeonBossPokemon('Victini', 14000000, 100),
-        new DungeonBossPokemon('Ninetales', 14000000, 100),
-        new DungeonBossPokemon('Alakazam', 14000000, 100),
+        new DungeonBossPokemon('Chimecho', 14000000, 100),
+        new DungeonBossPokemon('Kadabra', 14000000, 100),
     ],
     136500, 20, 100);
 
