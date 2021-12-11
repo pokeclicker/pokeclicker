@@ -2169,7 +2169,7 @@ TownList['Heahea City'] = new Town(
     'Heahea City',
     GameConstants.Region.alola,
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.MelemeleKahuna)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
         shops: [HeaheaCityShop],
     }
 );
@@ -2202,7 +2202,7 @@ TownList['Aether Paradise'] = new Town(
     GameConstants.Region.alola,
     {
         dungeon: dungeonList['Aether Foundation'],
-        requirements: [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
         shops: [AetherParadiseShop],
     }
 );
@@ -2245,13 +2245,7 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
         shops: [AltaroftheSunneandMooneShop],
-    }
-);
-TownList['Pokémon League Alola'] = new Town(
-    'Pokémon League Alola',
-    GameConstants.Region.alola,
-    {
-        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanakila'))],
+        dungeon: dungeonList['Nebby'],
     }
 );
 
@@ -2284,7 +2278,7 @@ TownList['Seaward Cave'] = new DungeonTown(
 TownList['Ten Carat Hill'] = new DungeonTown(
     'Ten Carat Hill',
     GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.MelemeleKahuna)]
+    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)]
 );
 TownList['Ruins of Conflict'] = new DungeonTown(
     'Ruins of Conflict',
@@ -2362,7 +2356,7 @@ TownList['Po Town'] = new DungeonTown(
 TownList['Mount Lanakila'] = new DungeonTown(
     'Mount Lanakila',
     GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.PoniKahuna)]
+    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
 );
 TownList['Ruins of Abundance'] = new DungeonTown(
     'Ruins of Abundance',
@@ -2375,7 +2369,7 @@ TownList['Ruins of Abundance'] = new DungeonTown(
 TownList['Aether Foundation'] = new DungeonTown(
     'Aether Foundation',
     GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.UlaulaKahuna)]
+    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)]
 );
 TownList['Exeggutor Island Hill'] = new DungeonTown(
     'Exeggutor Island Hill',
