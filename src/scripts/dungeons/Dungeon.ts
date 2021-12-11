@@ -1593,7 +1593,7 @@ dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
     106500, 230, 100);
 
 dungeonList['Fullmoon Island'] = new Dungeon('Fullmoon Island',
-    ['Illumise', 'Minun', 'Espeon', 'Luvdisc'],
+    ['Illumise', 'Minun', 'Hypno', 'Luvdisc'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2603000,
     [new DungeonBossPokemon('Clefable', 11000000, 100)],
