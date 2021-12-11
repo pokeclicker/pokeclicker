@@ -1600,7 +1600,7 @@ dungeonList['Fullmoon Island'] = new Dungeon('Fullmoon Island',
     96500, 230, 100);
 
 dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
-    ['Volbeat', 'Plusle', 'Umbreon', 'Luvdisc'],
+    ['Volbeat', 'Plusle', 'Absol', 'Luvdisc'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2603000,
     [new DungeonBossPokemon('Darkrai', 11000000, 100)],
