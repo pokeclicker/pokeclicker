@@ -1042,6 +1042,7 @@ dungeonList['Weather Institute'] = new Dungeon('Weather Institute',
                 new GymPokemon('Carvanha', 910000, 28),
                 new GymPokemon('Mightyena', 910000, 28),
             ], { weight: 1 }, 'Shelly', '(shelly)'),
+        new DungeonBossPokemon('Castform', 1820000, 20, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))}),
     ],
     26000, 101, 5);
 
