@@ -138,8 +138,7 @@ class Battle {
             this.catching(false);
             return;
         }
-        const random: number = Math.floor(Math.random() * 100);
-        if (random <= this.catchRateActual()) { // Caught
+        if (Rand.chance(this.catchRateActual())) { // Caught
             this.catchPokemon(enemyPokemon);
         } else if (enemyPokemon.shiny) { // Failed to catch, Shiny
             App.game.logbook.newLog(LogBookTypes.ESCAPED, `The Shiny ${enemyPokemon.name} escaped!`);
@@ -160,7 +159,7 @@ class Battle {
     static gainItem() {
         const p = player.route() / 1600 + 0.009375;
 
-        if (Math.random() < p) {
+        if (Rand.chance(p)) {
             App.game.farming.gainRandomBerry();
         }
     }

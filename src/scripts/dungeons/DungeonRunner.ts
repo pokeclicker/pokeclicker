@@ -85,20 +85,19 @@ class DungeonRunner {
         }
 
         DungeonRunner.chestsOpened++;
-        const random: number = GameConstants.randomIntBetween(0, DungeonRunner.dungeon.itemList.length - 1);
-        const input = GameConstants.BattleItemType[DungeonRunner.dungeon.itemList[random]];
+        const item = GameConstants.BattleItemType[Rand.fromArray(DungeonRunner.dungeon.itemList)];
         let amount = 1;
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
-            if (Math.random() < 0.5) {
+            if (Rand.chance(0.5)) {
                 amount += 1;
             }
         }
         Notifier.notify({
-            message: `Found ${amount} ${GameConstants.humanifyString(input)} in a dungeon chest`,
+            message: `Found ${amount} ${GameConstants.humanifyString(item)} in a dungeon chest`,
             type: NotificationConstants.NotificationOption.success,
             setting: NotificationConstants.NotificationSetting.dungeon_item_found,
         });
-        player.gainItem(input, amount);
+        player.gainItem(item, amount);
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
         if (DungeonRunner.chestsOpened == Math.floor(DungeonRunner.map.size / 3)) {

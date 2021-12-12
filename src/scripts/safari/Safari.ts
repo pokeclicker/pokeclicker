@@ -292,7 +292,7 @@ class Safari {
 
     public static spawnPokemonCheck() {
         this.steps++;
-        if (this.steps % 10 === 0 && Math.round(Math.random())) {
+        if (this.steps % 10 === 0 && Rand.boolean()) {
             this.spawnRandomPokemon();
         }
     }
@@ -380,7 +380,7 @@ class Safari {
             return true;
         }
         if (Safari.grid[Safari.playerXY.y][Safari.playerXY.x] === 10) {
-            if (Math.random() * GameConstants.SAFARI_BATTLE_CHANCE < 1) {
+            if (Rand.chance(GameConstants.SAFARI_BATTLE_CHANCE)) {
                 SafariBattle.load();
                 return true;
             }

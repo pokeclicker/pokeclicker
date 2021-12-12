@@ -106,7 +106,7 @@ class SandBody extends SafariBody {
     }
 
     private static addCube(x: number, y: number, body: Array<Array<number>>): Array<Array<number>> {
-        if (Math.random() >= 0.5) {
+        if (Rand.boolean()) {
             body[y + 2][x] = 15;
             body[y + 2][x + 1] = 15;
             body[y][x + 2] = 15;

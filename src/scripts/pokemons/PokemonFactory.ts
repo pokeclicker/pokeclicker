@@ -84,9 +84,7 @@ class PokemonFactory {
     public static generateShiny(chance: number, skipBonus = false): boolean {
         const bonus = skipBonus ? 1 : App.game.multiplier.getBonus('shiny');
 
-        const rand: number = Math.floor(Math.random() * chance / bonus) + 1;
-
-        if (rand <= 1) {
+        if (Rand.chance(chance / bonus)) {
             App.game.oakItems.use(OakItems.OakItem.Shiny_Charm);
             return true;
         }
@@ -213,7 +211,7 @@ class PokemonFactory {
         // Check if we should have increased chances on this route (3 x rate)
         const increasedChance = RoamingPokemonList.getIncreasedChanceRouteByRegion(player.region)()?.number == curRoute?.number;
         const roamingChance = (max + ( (min - max) * (maxRoute - routeNum) / (maxRoute - minRoute))) / (increasedChance ? 3 : 1);
-        return Math.random() < 1 / roamingChance;
+        return Rand.chance(roamingChance);
     }
 
     private static catchRateHelper(baseCatchRate: number, noVariation = false): number {
@@ -251,8 +249,8 @@ class PokemonFactory {
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             chance /= 1.5;
         }
-        const rand: number = Math.floor(Math.random() * chance) + 1;
-        if (rand <= 1) {
+
+        if (Rand.chance(chance)) {
             return item;
         }
 

@@ -219,8 +219,7 @@ class SafariBattle {
 
     private static enemyTurn() {
         // Enemy turn to flee;
-        const random = Math.floor(Math.random() * 100);
-        if (random < SafariBattle.enemy.escapeFactor) {
+        if (Rand.chance(SafariBattle.enemy.escapeFactor / 100)) {
             SafariBattle.text(`${SafariBattle.enemy.name} has fled.`);
             setTimeout(SafariBattle.endBattle, 1000);
         } else if (SafariBattle.enemy.eating > 0) {
