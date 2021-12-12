@@ -75,7 +75,7 @@ export default class Profile implements Saveable {
                     </table>
                     <img class="pokemon-0" src="assets/images/${pokemonShiny ? 'shiny' : ''}pokemon/${pokemon}.png"/>
                     <small class="version">v${version}</small>
-                    <div class="challenge-badges">${Object.entries(challenges).filter(([, v]) => v).map(([c]) => `<img class="m-1" width="24px" src="${challengeRibbonsPath}${c}.png" data-toggle="tooltip" data-placement="top" title="${GameConstants.camelCaseToString(c)}"/>`).join('')}</div>
+                    <div class="challenge-badges">${Object.entries(challenges).filter(([, v]) => v).map(([c]) => `<img class="m-1" width="24px" src="${challengeRibbonsPath}${c}.png" onerror="this.remove()" data-toggle="tooltip" data-placement="top" title="${GameConstants.camelCaseToString(c)}"/>`).join('')}</div>
                 </div>
             </div>
         </div>

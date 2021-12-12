@@ -544,6 +544,16 @@ class Update implements Saveable {
                 }
             }
         },
+
+        '0.8.12': async ({ playerData, saveData }) => {
+            if (!await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be changed later)', confirm: 'enable', cancel: 'disable' })) {
+                App.game.challenges.list.regionalAttackDebuff.disable();
+            }
+            if (!await Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be changed later)', confirm: 'enable', cancel: 'disable' })) {
+                App.game.challenges.list.requireCompletePokedex.disable();
+            }
+        },
+
     };
 
     constructor() {
