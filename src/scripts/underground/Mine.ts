@@ -68,8 +68,8 @@ class Mine {
         if (App.game.oakItems.isActive(OakItems.OakItem.Explosive_Charge)) {
             const tiles = App.game.oakItems.calculateBonus(OakItems.OakItem.Explosive_Charge);
             for (let i = 1; i < tiles; i++) {
-                const x = GameConstants.randomIntBetween(0, App.game.underground.getSizeY() - 1);
-                const y = GameConstants.randomIntBetween(0, Underground.sizeX - 1);
+                const x = Rand.intBetween(0, App.game.underground.getSizeY() - 1);
+                const y = Rand.intBetween(0, Underground.sizeX - 1);
                 this.breakTile(x, y, 1);
             }
         }
@@ -166,8 +166,8 @@ class Mine {
 
         const tiles = App.game.underground.getSurvey_Efficiency();
         for (let i = 0; i < tiles; i++) {
-            const x = GameConstants.randomIntBetween(0, this.getHeight() - 1);
-            const y = GameConstants.randomIntBetween(0, Underground.sizeX - 1);
+            const x = Rand.intBetween(0, this.getHeight() - 1);
+            const y = Rand.intBetween(0, Underground.sizeX - 1);
             this.breakTile(x, y, 5);
         }
 
@@ -259,8 +259,8 @@ class Mine {
         let tiles = App.game.underground.getBombEfficiency();
         if (App.game.underground.energy >= Underground.BOMB_ENERGY) {
             while (tiles-- > 0) {
-                const x = GameConstants.randomIntBetween(0, this.getHeight() - 1);
-                const y = GameConstants.randomIntBetween(0, Underground.sizeX - 1);
+                const x = Rand.intBetween(0, this.getHeight() - 1);
+                const y = Rand.intBetween(0, Underground.sizeX - 1);
                 this.breakTile(x, y, 2);
             }
             App.game.underground.energy -= Underground.BOMB_ENERGY;

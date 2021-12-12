@@ -15,8 +15,8 @@ class DungeonMap {
         // Move the boss if it spawns on the player.
         if (this.currentTile().type() == GameConstants.DungeonTile.boss) {
             this.currentTile().type(GameConstants.DungeonTile.entrance);
-            const newX = GameConstants.randomIntBetween(0, size - 1);
-            const newY = GameConstants.randomIntBetween(0, size - 2); // Don't allow it to be on the bottom row
+            const newX = Rand.intBetween(0, size - 1);
+            const newY = Rand.intBetween(0, size - 2); // Don't allow it to be on the bottom row
             this.board()[newY][newX].type(GameConstants.DungeonTile.boss);
             this.board()[newY][newX].calculateCssClass();
         }

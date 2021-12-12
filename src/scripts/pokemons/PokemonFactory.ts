@@ -217,7 +217,7 @@ class PokemonFactory {
     }
 
     private static catchRateHelper(baseCatchRate: number, noVariation = false): number {
-        const catchVariation = noVariation ? 0 : GameConstants.randomIntBetween(-3, 3);
+        const catchVariation = noVariation ? 0 : Rand.intBetween(-3, 3);
         const catchRateRaw = Math.floor(Math.pow(baseCatchRate, 0.75)) + catchVariation;
         return GameConstants.clipNumber(catchRateRaw, 0, 100);
     }

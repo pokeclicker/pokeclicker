@@ -306,7 +306,7 @@ class Breeding implements Feature {
         const ratio = 2;
         const possibleHatches = GameConstants.expRandomElement(hatchable, ratio);
 
-        const pokemon = GameConstants.randomElement(possibleHatches);
+        const pokemon = Rand.fromArray(possibleHatches);
         return this.createEgg(pokemon, type);
     }
 

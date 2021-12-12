@@ -420,14 +420,6 @@ export function formatNumber(input: number): string {
     return num.toString();
 }
 
-export function randomIntBetween(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-export function randomElement(array: any[]): any {
-    return array[randomIntBetween(0, array.length - 1)];
-}
-
 export function clipNumber(num: number, min: number, max: number): number {
     return Math.min(Math.max(num, min), max);
 }
