@@ -38,6 +38,11 @@ export default class SeededRand {
         return Math.floor((max - min + 1) * this.next() + min);
     }
 
+    // get a number between 0 and max (excluding max)
+    public static floor(max: number): number {
+        return Math.floor(this.next() * max);
+    }
+
     // 50/50 chance of true or false
     public static boolean(): boolean {
         return !!this.intBetween(0, 1);
