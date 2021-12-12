@@ -19,7 +19,7 @@ class PokemonFactory {
             name = PokemonFactory.generateRoamingEncounter(route, region);
         } else {
             const availablePokemonList: PokemonNameType[] = RouteHelper.getAvailablePokemonList(route, region);
-            const rand: number = Math.floor(Math.random() * availablePokemonList.length);
+            const rand: number = Rand.floor(availablePokemonList.length);
             name = availablePokemonList[rand];
         }
         const basePokemon = PokemonHelper.getPokemonByName(name);
@@ -62,7 +62,7 @@ class PokemonFactory {
     public static routeMoney(route: number, region: GameConstants.Region, useRandomDeviation = true): number {
         route = MapHelper.normalizeRoute(route, region);
         //If it's not random, we take the mean value (truncated)
-        const deviation = useRandomDeviation ? Math.floor(Math.random() * 51) - 25 : 12;
+        const deviation = useRandomDeviation ? Rand.floor(51) - 25 : 12;
         const money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
 
         return money;
@@ -172,17 +172,12 @@ class PokemonFactory {
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_BOSS_SHARDS, heldItem);
     }
+
     private static generateRoamingEncounter(route: number, region: GameConstants.Region): PokemonNameType {
         const possible = RoamingPokemonList.getRegionalRoamers(region);
 
         // Double the chance of encountering a roaming Pokemon you have not yet caught
-        possible.forEach(r => {
-            if (!App.game.party.alreadyCaughtPokemonByName(r.pokemon.name)) {
-                possible.push(r);
-            }
-        });
-
-        return possible[Math.floor(Math.random() * possible.length)].pokemon.name;
+        return Rand.fromWeightedArray(possible, possible.map(r => App.game.party.alreadyCaughtPokemonByName(r.pokemon.name) ? 1 : 2)).pokemon.name;
     }
 
     private static roamingEncounter(routeNum: number, region: GameConstants.Region): boolean {

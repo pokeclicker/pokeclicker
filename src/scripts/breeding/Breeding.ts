@@ -311,7 +311,7 @@ class Breeding implements Feature {
     }
 
     public createRandomEgg(): Egg {
-        const type = Math.floor(Math.random() * Object.keys(this.hatchList).length);
+        const type = +Rand.fromArray(Object.keys(this.hatchList));
         const egg = this.createTypedEgg(type);
         egg.type = EggType.Mystery;
         return egg;

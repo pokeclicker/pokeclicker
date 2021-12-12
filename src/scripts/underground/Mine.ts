@@ -24,7 +24,7 @@ class Mine {
             const row = [];
             const rewardRow = [];
             for (let j = 0; j < Underground.sizeX; j++) {
-                row.push(ko.observable(Math.min(5, Math.max(1, Math.floor(Math.random() * 2 + Math.random() * 3) + 1))));
+                row.push(ko.observable(Math.min(5, Math.max(1, Math.floor(Rand.float(2) + Rand.float(3)) + 1))));
                 rewardRow.push(0);
             }
             tmpGrid.push(row);
@@ -76,7 +76,7 @@ class Mine {
     }
 
     private static getRandomCoord(max: number, size: number): number {
-        return Math.floor(Math.random() * (max - size));
+        return Rand.floor(max - size);
     }
 
     private static canAddReward(x: number, y: number, reward: UndergroundItem): boolean {
@@ -126,7 +126,7 @@ class Mine {
     }
 
     private static rotateReward(reward): UndergroundItem {
-        let rotations = Math.floor(Math.random() * 4);
+        let rotations = Rand.floor(4);
 
         while (rotations-- > 0) {
             reward.space = reward.space[0].map((val, index) => reward.space.map(row => row[index]).reverse());

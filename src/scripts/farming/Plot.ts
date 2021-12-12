@@ -352,8 +352,8 @@ class Plot implements Saveable {
         // Chance to generate wandering Pokemon
         if (Rand.chance(GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]())) {
             // Get a random Pokemon from the list of possible encounters
-            const availablePokemon = this.berryData.wander.filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion());
-            const wanderPokemon = availablePokemon[Math.floor(Math.random() * availablePokemon.length)];
+            const availablePokemon: PokemonNameType[] = this.berryData.wander.filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion());
+            const wanderPokemon = Rand.fromArray(availablePokemon);
 
             const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
 
@@ -369,7 +369,7 @@ class Plot implements Saveable {
                 const emptyPlots = App.game.farming.plotList.filter(plot => plot.isUnlocked && plot.isEmpty());
                 // No Starf generation if no empty plots :(
                 if (emptyPlots.length) {
-                    const chosenPlot = emptyPlots[Math.floor(Math.random() * emptyPlots.length)];
+                    const chosenPlot = emptyPlots[Rand.floor(emptyPlots.length)];
                     chosenPlot.plant(BerryType.Starf);
                     App.game.farming.unlockBerry(BerryType.Starf);
                 }

@@ -47,7 +47,7 @@ abstract class SafariBody {
     public static shuffle(a) {
         let j, x, i;
         for (i = a.length; i; i--) {
-            j = Math.floor(Math.random() * i);
+            j = Rand.floor(i);
             x = a[i - 1];
             a[i - 1] = a[j];
             a[j] = x;
@@ -86,7 +86,7 @@ class SandBody extends SafariBody {
     }
 
     static randomInt(): number {
-        return Math.floor(Math.random() * 3) + 3;
+        return Rand.intBetween(3, 5);
     }
 
     private generateCube(sizeX: number, sizeY: number): Array<Array<number>> {
@@ -98,8 +98,8 @@ class SandBody extends SafariBody {
 
         const amount = this.type === 'fence' ? 20 : 4;
         for (let i = 0; i < amount; i++) {
-            const x = Math.floor(Math.random() * (sizeX - 2));
-            const y = Math.floor(Math.random() * (sizeY - 2));
+            const x = Rand.floor(sizeX - 2);
+            const y = Rand.floor(sizeY - 2);
             body = SandBody.addCube(x,y,body);
         }
         return body;
@@ -232,7 +232,7 @@ class FenceBody extends SandBody {
 
     private openFence() {
         const options = [26, 28, 29, 31];
-        const pick = options[Math.floor(Math.random() * options.length)];
+        const pick = Rand.fromArray(options);
         for (let i = 0; i < this.grid.length; i++) {
             for (let j = 0; j < this.grid[0].length; j++) {
                 if (this.grid[i][j] === pick) {
@@ -247,8 +247,8 @@ class FenceBody extends SandBody {
 class WaterBody extends SafariBody {
     constructor() {
         super();
-        const x = Math.floor(Math.random() * 3) + 3;
-        const y = Math.floor(Math.random() * 3) + 3;
+        const x = Rand.intBetween(3, 5);
+        const y = Rand.intBetween(3, 5);
         const body = [];
         for (let i = 0; i < y; i++) {
             const row = [];
@@ -290,8 +290,8 @@ class WaterBody extends SafariBody {
 class GrassBody extends SafariBody {
     constructor() {
         super();
-        const x = Math.floor(Math.random() * 3) + 4;
-        const y = Math.floor(Math.random() * 3) + 4;
+        const x = Rand.intBetween(4, 6);
+        const y = Rand.intBetween(4, 6);
         const body = [];
         for (let i = 0; i < y; i++) {
             const row = [];
