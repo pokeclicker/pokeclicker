@@ -485,6 +485,7 @@ TownList['New Bark Town'] = new Town(
     'New Bark Town',
     GameConstants.Region.johto,
     {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
         shops: [NewBarkTownShop],
         npcs: [NewBarkTechnologyEnthusiast],
     }
@@ -751,6 +752,7 @@ TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
     GameConstants.Region.hoenn,
     {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
         shops: [LittleRootTownShop],
         npcs: [LittlerootAide],
     }
@@ -1130,6 +1132,7 @@ TownList['Twinleaf Town'] = new Town(
     'Twinleaf Town',
     GameConstants.Region.sinnoh,
     {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
         shops: [TwinleafTownShop],
         npcs: [TwinleafContestChampion],
     }
@@ -1482,6 +1485,7 @@ TownList['Aspertia City'] = new Town(
     'Aspertia City',
     GameConstants.Region.unova,
     {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
         shops: [AspertiaCityShop],
     }
 );
@@ -1892,6 +1896,7 @@ TownList['Vaniville Town'] = new Town(
     'Vaniville Town',
     GameConstants.Region.kalos,
     {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
         shops: [VanivilleTownShop],
     }
 );
@@ -2153,7 +2158,7 @@ TownList['Iki Town'] = new Town(
     'Iki Town',
     GameConstants.Region.alola,
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
         shops: [IkiTownShop],
     }
 );
@@ -2474,6 +2479,7 @@ TownList['Postwick'] = new Town(
     'Postwick',
     GameConstants.Region.galar,
     {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
         shops: [PostwickShop],
         npcs: [Mom],
     }
