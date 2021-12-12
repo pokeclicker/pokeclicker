@@ -525,6 +525,7 @@ TownList['Goldenrod City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
         shops: [GoldenrodDepartmentStoreShop, JohtoBerryMaster],
+        dungeon: dungeonList['Radio Tower'],
         npcs: [BigSpender],
     }
 );
@@ -561,6 +562,7 @@ TownList['Mahogany Town'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 42)],
         shops: [MahoganyTownShop],
+        dungeon: dungeonList['Team Rockets Hideout'],
         npcs: [MahoganySouvenirShopAttendant],
     }
 );
@@ -608,23 +610,30 @@ TownList['Burned Tower'] = new DungeonTown(
 TownList['Tin Tower'] = new DungeonTown(
     'Tin Tower',
     GameConstants.Region.johto,
-    [
-        new GymBadgeRequirement(BadgeEnums.Mineral),
-        new GymBadgeRequirement(BadgeEnums.Glacier),
-    ]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Radio Tower'))]
 );
 TownList['Whirl Islands'] = new DungeonTown(
     'Whirl Islands',
     GameConstants.Region.johto,
-    [
-        new GymBadgeRequirement(BadgeEnums.Mineral),
-        new GymBadgeRequirement(BadgeEnums.Glacier),
-    ]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Radio Tower'))]
 );
 TownList['Mt Mortar'] = new DungeonTown(
     'Mt Mortar',
     GameConstants.Region.johto,
     [new RouteKillRequirement(10, GameConstants.Region.johto, 42)]
+);
+TownList['Team Rockets Hideout'] = new DungeonTown(
+    'Team Rockets Hideout',
+    GameConstants.Region.johto,
+    [
+        new GymBadgeRequirement(BadgeEnums.Mineral),
+        new GymBadgeRequirement(BadgeEnums.Glacier),
+    ]
+);
+TownList['Radio Tower'] = new DungeonTown(
+    'Radio Tower',
+    GameConstants.Region.johto,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rockets Hideout'))]
 );
 TownList['Ice Path'] = new DungeonTown(
     'Ice Path',
@@ -635,6 +644,11 @@ TownList['Dark Cave'] = new DungeonTown(
     'Dark Cave',
     GameConstants.Region.johto,
     [new RouteKillRequirement(10, GameConstants.Region.johto, 45)]
+);
+TownList['Victory Road Johto'] = new DungeonTown(
+    'Victory Road Johto',
+    GameConstants.Region.johto,
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 26)]
 );
 TownList['Mt Silver'] = new DungeonTown(
     'Mt Silver',

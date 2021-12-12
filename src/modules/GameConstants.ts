@@ -518,7 +518,7 @@ export const Environments: Record<string, EnvironmentData> = {
 
     Cave: {
         [Region.kanto]: new Set(['Pewter City', 'Digletts Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road']),
-        [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave']),
+        [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave', 'Victory Road Johto']),
         [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn', 'Seafloor Cavern']),
         [Region.sinnoh]: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
         [Region.unova]: new Set(['Seaside Cave', 'Twist Mountain', 'Reversal Mountain', 'Relic Passage', 'Relic Castle', 'Victory Road Unova']),
@@ -540,7 +540,7 @@ export const Environments: Record<string, EnvironmentData> = {
 
     PowerPlant: {
         [Region.kanto]: new Set(['Vermilion City', 'Power Plant']),
-        [Region.johto]: new Set(['Tin Tower']),
+        [Region.johto]: new Set(['Tin Tower', 'Team Rockets Hideout', 'Radio Tower']),
         [Region.hoenn]: new Set(['Mauville City']),
         [Region.sinnoh]: new Set(['Sunyshore City']),
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City']),
@@ -911,8 +911,11 @@ export const JohtoDungeons = [
     'Tin Tower',
     'Whirl Islands',
     'Mt Mortar',
+    'Team Rockets Hideout',
+    'Radio Tower',
     'Ice Path',
     'Dark Cave',
+    'Victory Road Johto',
     'Mt Silver',
 ];
 

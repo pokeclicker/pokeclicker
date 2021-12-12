@@ -433,10 +433,7 @@ Routes.add(new RegionRoute(
         water: ['Poliwag', 'Poliwhirl', 'Magikarp', 'Remoraid'],
         headbutt: ['Spearow', 'Aipom', 'Heracross'],
     }),
-    [
-        new GymBadgeRequirement(BadgeEnums.Mineral),
-        new GymBadgeRequirement(BadgeEnums.Glacier),
-    ]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Radio Tower'))]
 ));
 Routes.add(new RegionRoute(
     'Johto Route 45', GameConstants.Region.johto, 45,
