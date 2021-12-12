@@ -1424,6 +1424,7 @@ dungeonList['Weather Institute'] = new Dungeon('Weather Institute',
                 new GymPokemon('Carvanha', 910000, 28),
                 new GymPokemon('Mightyena', 910000, 28),
             ], { weight: 1 }, 'Shelly', '(shelly)'),
+        new DungeonBossPokemon('Castform', 1820000, 20, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))}),
     ],
     26000, 101, 5);
 
@@ -1974,26 +1975,26 @@ dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
     106500, 230, 100);
 
 dungeonList['Fullmoon Island'] = new Dungeon('Fullmoon Island',
-    ['Illumise', 'Minun', 'Espeon', 'Luvdisc'],
+    ['Illumise', 'Minun', 'Hypno', 'Luvdisc'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2603000,
     [new DungeonBossPokemon('Clefable', 11000000, 100)],
     96500, 230, 100);
 
 dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
-    ['Volbeat', 'Plusle', 'Umbreon', 'Luvdisc'],
+    ['Volbeat', 'Plusle', 'Absol', 'Luvdisc'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2603000,
     [new DungeonBossPokemon('Darkrai', 11000000, 100)],
     96500, 230, 100);
 
 dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
-    ['Vileplume', 'Bellsprout', 'Exeggutor', 'Bellossom', 'Skiploom', 'Sunflora', 'Roselia'],
+    ['Gloom', 'Bellsprout', 'Tangela', 'Skiploom', 'Lombre', 'Seedot', 'Roselia'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_incense],
     2603000,
     [
-        new DungeonBossPokemon('Venusaur', 9900000, 50),
-        new DungeonBossPokemon('Meganium', 11000000, 50),
+        new DungeonBossPokemon('Parasect', 9900000, 50),
+        new DungeonBossPokemon('Breloom', 11000000, 50),
         new DungeonBossPokemon('Shaymin (land)', 11000000, 50),
         new DungeonBossPokemon('Shaymin (sky)', 11000000, 50),
     ],
@@ -2052,13 +2053,13 @@ dungeonList['Floccesy Ranch'] = new Dungeon('Floccesy Ranch',
     126500, 20, 100);
 
 dungeonList['Liberty Garden'] = new Dungeon('Liberty Garden',
-    ['Vulpix', 'Sunflora', 'Abra', 'Wingull', 'Pidove', 'Sentret'],
+    ['Vulpix', 'Sunkern', 'Abra', 'Wingull', 'Pidove', 'Sentret'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2703000,
     [
         new DungeonBossPokemon('Victini', 14000000, 100),
-        new DungeonBossPokemon('Ninetales', 14000000, 100),
-        new DungeonBossPokemon('Alakazam', 14000000, 100),
+        new DungeonBossPokemon('Chimecho', 14000000, 100),
+        new DungeonBossPokemon('Kadabra', 14000000, 100),
     ],
     136500, 20, 100);
 
@@ -3332,17 +3333,17 @@ dungeonList['Dreamyard'] = new Dungeon('Dreamyard',
     356500, 3, 100);
 
 dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
-    ['Scyther', 'Scizor', 'Pineco', 'Forretress', 'Porygon2', 'Electrode', 'Metang'],
+    ['Scyther', 'Electrode', 'Pineco', 'Forretress', 'Metang', 'Ferroseed', 'Ferrothorn'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     5403000,
     [
-        new DungeonBossPokemon('Escavalier', 58000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
-        new DungeonBossPokemon('Porygon-Z', 58000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
-        new DungeonBossPokemon('Genesect', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
-        new DungeonBossPokemon('Porygon', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
-        new DungeonBossPokemon('Audino', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
+        new DungeonBossPokemon('Ursaring', 58000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
         new DungeonBossPokemon('Mawile', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
         new DungeonBossPokemon('Sableye', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
+        new DungeonBossPokemon('Zangoose', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
+        new DungeonBossPokemon('Audino', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
+        new DungeonBossPokemon('Durant', 58000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
+        new DungeonBossPokemon('Genesect', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
         new DungeonTrainer('Team Plasma',
             [
                 new GymPokemon('Magneton', 10000000, 72),

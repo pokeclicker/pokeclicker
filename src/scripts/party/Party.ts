@@ -112,9 +112,13 @@ class Party implements Feature {
         const pAttack = useBaseAttack ? pokemon.baseAttack : pokemon.attack;
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
 
+        // Check if the pokemon is in their native region
         if (!ignoreRegionMultiplier && nativeRegion != region && nativeRegion != GameConstants.Region.none) {
-            // Pokemon only retain a % of their total damage in other regions based on highest region.
-            multiplier = this.getRegionAttackMultiplier();
+            // Check if the challenge mode is active
+            if (App.game.challenges.list.regionalAttackDebuff.active()) {
+                // Pokemon only retain a % of their total damage in other regions based on highest region.
+                multiplier = this.getRegionAttackMultiplier();
+            }
         }
 
         // Check if the Pokemon is currently breeding (no attack)

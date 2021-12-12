@@ -17,6 +17,10 @@ export default class Challenge {
         this.active(true);
     }
 
+    disable(): void {
+        this.active(false);
+    }
+
     toJSON(): boolean {
         return this.active();
     }
