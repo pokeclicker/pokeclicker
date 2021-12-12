@@ -13598,6 +13598,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 120,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'White_DNA'},
     },
     {
         'id': 644,
@@ -13615,6 +13616,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Black_DNA'},
     },
     {
         'id': 645,
@@ -13658,6 +13660,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 297,
         'catchRate': 3,
+        'evolutions': [
+            new StoneEvolution('Kyurem', 'Kyurem (Black)', GameConstants.StoneType.Black_DNA),
+            new StoneEvolution('Kyurem', 'Kyurem (White)', GameConstants.StoneType.White_DNA),
+        ],
         'base': {
             'hitpoints': 125,
             'attack': 130,

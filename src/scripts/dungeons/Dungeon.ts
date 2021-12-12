@@ -3056,13 +3056,12 @@ dungeonList['Twist Mountain'] = new Dungeon('Twist Mountain',
     356500, 7, 100);
 
 dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
-    ['Dratini', 'Tranquill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Vanillish', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)', 'Beartic', 'Mienfoo', 'Mienshao', 'Golett', 'Golurk'],
+    ['Dratini', 'Tranquill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Vanillish', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)', 'Beartic', 'Mienfoo', 'Mienshao', 'Druddigon', 'Golett', 'Golurk'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     5203000,
     [
         new DungeonBossPokemon('Dragonite', 48000000, 100),
         new DungeonBossPokemon('Reshiram', 48000000, 100),
-        new DungeonBossPokemon('Druddigon', 48000000, 100),
         new DungeonBossPokemon('Zekrom', 50000000, 100),
     ],
     356500, 7, 100);
