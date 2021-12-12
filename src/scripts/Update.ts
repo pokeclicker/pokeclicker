@@ -553,6 +553,12 @@ class Update implements Saveable {
             // Add Victory Road Johto
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 23);
 
+            // If the player has the Glacier Badge already
+            // Not using game constants incase the badge value isn't 20 in the future
+            if (saveData.badgeCase[20]) {
+                saveData.quests.questLines.push({state: 1, name: 'Radio Tower Takeover', quest: 0});
+            }
+
             // Check if player wants to activate the new challenge modes
             if (!await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be changed later)', confirm: 'enable', cancel: 'disable' })) {
                 App.game.challenges.list.regionalAttackDebuff.disable();
