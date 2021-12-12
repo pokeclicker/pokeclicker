@@ -1037,9 +1037,6 @@ dungeonList['Team Rockets Hideout'] = new Dungeon('Team Rockets Hideout',
             ], { weight: 1 }, 'Ariana', '(ariana)'),
     ],
     5500, 43, 31,
-    () => {
-        App.game.quests.getQuestLine('Radio Tower Takeover').beginQuest();
-    }
 );
 
 dungeonList['Radio Tower'] = new Dungeon('Radio Tower',

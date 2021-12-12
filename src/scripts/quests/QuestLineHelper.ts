@@ -237,7 +237,10 @@ class QuestLineHelper {
     }
 
     public static createRocketjohtoQuestLine() {
-        const RocketjohtoQuestLine = new QuestLine('Radio Tower Takeover', 'Team Rocket has taken over the Radio Tower!');
+        const RocketjohtoQuestLine = new QuestLine('Radio Tower Takeover', 'Team Rocket is up to no good again!');
+        
+        const clearTeamRocketHideout = new CustomQuest(1, 0, 'Clear the Team Rockets Hideout dungeon in Mahogany Town', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Rockets Hideout')](), 0);
+        RocketjohtoQuestLine.addQuest(clearTeamRocketHideout);
 
         const RadiotowerReward = () => {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1);

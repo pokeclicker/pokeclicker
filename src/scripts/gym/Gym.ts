@@ -349,7 +349,10 @@ gymList['Mahogany Town'] = new Gym(
     BadgeEnums.Glacier,
     4000,
     'Ah, I am impressed by your prowess. With your strong will, I know you will overcome all life\'s obstacles. You are worthy of this Badge!',
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 43)]
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 43)],
+    () => {
+        App.game.quests.getQuestLine('Radio Tower Takeover').beginQuest();
+    }
 );
 gymList['Blackthorn City'] = new Gym(
     'Clair',
