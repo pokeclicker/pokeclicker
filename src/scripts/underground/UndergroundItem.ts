@@ -43,7 +43,7 @@ class UndergroundItem {
 
     public static getFullResourceName(valuetype: string, amt: number): string {
         if (valuetype != 'Diamond' && amt >= 50) {
-            valuetype += ' shard';
+            valuetype += ' gem';
         }
         if (amt > 1) {
             valuetype += 's';
