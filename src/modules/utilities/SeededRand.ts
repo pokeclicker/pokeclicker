@@ -45,7 +45,7 @@ export default class SeededRand {
 
     // If number is more than one, the chance is 1/chance otherwise the chance is a percentage
     public static chance(chance: number): boolean {
-        return chance >= 1 ? this.intBetween(1, chance) === 1 : this.next() <= chance;
+        return this.next() <= (chance >= 1 ? 1 / chance : chance);
     }
 
     // Pick an element from an array
