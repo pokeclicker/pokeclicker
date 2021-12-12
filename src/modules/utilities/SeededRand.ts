@@ -35,17 +35,25 @@ export default class SeededRand {
 
     // get a number between min and max (both inclusive)
     public static intBetween(min: number, max: number): number {
-        return Math.floor((max - min + 1) * SeededRand.next() + min);
+        return Math.floor((max - min + 1) * this.next() + min);
     }
 
+    // 50/50 chance of true or false
     public static boolean(): boolean {
         return !!this.intBetween(0, 1);
     }
 
-    public static fromArray<T>(arr: Array<T>): T {
-        return arr[SeededRand.intBetween(0, arr.length - 1)];
+    // If number is more than one, the chance is 1/chance otherwise the chance is a percentage
+    public static chance(chance: number): boolean {
+        return chance >= 1 ? this.intBetween(1, chance) === 1 : this.next() <= chance;
     }
 
+    // Pick an element from an array
+    public static fromArray<T>(arr: Array<T>): T {
+        return arr[this.intBetween(0, arr.length - 1)];
+    }
+
+    // Pick an element from an array with specified weights
     public static fromWeightedArray<T>(arr: Array<T>, weights: Array<number>): T {
         const max = weights.reduce((acc, weight) => acc + weight, 0);
         let rand = this.intBetween(1, max);
@@ -56,5 +64,10 @@ export default class SeededRand {
     public static fromEnum(_enum): number {
         const arr = Object.keys(_enum).map(Number).filter((item) => item >= 0);
         return this.fromArray(arr);
+    }
+
+    // Get a string of letters and numbers (lowercase)
+    public static string(length: number): string {
+        return [...Array(length)].map(() => this.next().toString(36)[2]).join('');
     }
 }
