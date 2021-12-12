@@ -211,7 +211,8 @@ class MapHelper {
     }
 
     public static ableToTravel() {
-        return player.highestRegion() < GameConstants.MAX_AVAILABLE_REGION && new Set(App.game.party.caughtPokemon.filter(p => p.id > 0 && PokemonHelper.calcNativeRegion(p.name) <= player.highestRegion()).map(p => Math.floor(p.id))).size >= GameConstants.TotalPokemonsPerRegion[player.highestRegion()];
+        // Check if player requires complete dex to move on to the next region, if so check that the starter town is unlocked, otherwise check if all regional pokemon are obtained
+        return (!App.game.challenges.list.requireCompletePokedex.active() && TownList[GameConstants.StartingTowns[player.highestRegion()]].isUnlocked()) || player.highestRegion() < GameConstants.MAX_AVAILABLE_REGION && new Set(App.game.party.caughtPokemon.filter(p => p.id > 0 && PokemonHelper.calcNativeRegion(p.name) <= player.highestRegion()).map(p => Math.floor(p.id))).size >= GameConstants.TotalPokemonsPerRegion[player.highestRegion()];
     }
 
     public static travelToNextRegion() {
