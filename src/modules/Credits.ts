@@ -118,15 +118,6 @@ export const SpriteCredits: Credit[] = [
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
     },
     {
-        name: 'KrushGames',
-        link: 'https://github.com/KrushGames',
-        image: 'https://avatars.githubusercontent.com/u/71728117?v=4',
-        resources: [
-            'Black DNA',
-            'White DNA',
-        ],
-    },
-    {
         name: 'leparagon',
         link: 'https://www.deviantart.com/leparagon',
         image: 'https://a.deviantart.net/avatars-big/l/e/leparagon.jpg',
