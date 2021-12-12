@@ -58,12 +58,6 @@ const pokeMartShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['xAttack'],
-    ItemList['xClick'],
-    ItemList['Lucky_egg'],
-    ItemList['Item_magnet'],
-    ItemList['Token_collector'],
-    ItemList['Lucky_incense'],
     ItemList['SmallRestore'],
     ItemList['MediumRestore'],
     ItemList['LargeRestore'],
@@ -73,12 +67,6 @@ const DepartmentStoreShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['xAttack'],
-    ItemList['xClick'],
-    ItemList['Lucky_egg'],
-    ItemList['Item_magnet'],
-    ItemList['Token_collector'],
-    ItemList['Lucky_incense'],
     ItemList['SmallRestore'],
     ItemList['MediumRestore'],
     ItemList['LargeRestore'],
@@ -87,18 +75,14 @@ const DepartmentStoreShop = new Shop([
 //Kanto Shops
 const PewterCityShop = new TownShop([
     ItemList['Pokeball'],
-    ItemList['Token_collector'],
-    ItemList['Lucky_egg'],
     ItemList['Mystery_egg'],
 ]);
 const CeruleanCityShop = new TownShop([
     ItemList['Water_stone'],
-    ItemList['xAttack'],
     ItemList['Water_egg'],
 ]);
 const VermilionCityShop = new TownShop([
     ItemList['Thunder_stone'],
-    ItemList['Lucky_egg'],
     ItemList['Electric_egg'],
 ]);
 const CeladonCityShop = new TownShop([
@@ -111,23 +95,15 @@ const CeladonCityShop = new TownShop([
 const CeladonDepartmentStoreShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['xAttack'],
-    ItemList['xClick'],
-    ItemList['Lucky_egg'],
-    ItemList['Item_magnet'],
-    ItemList['Token_collector'],
-    ItemList['Lucky_incense'],
 ], 'Department Store');
 const SaffronCityShop = new TownShop([
     ItemList['Moon_stone'],
-    ItemList['xClick'],
     ItemList['Leaf_stone'],
     ItemList['Fighting_egg'],
 ]);
 const FuchsiaCityShop = new TownShop([
     ItemList['Ultraball'],
     ItemList['Trade_stone'],
-    ItemList['Lucky_egg'],
     ItemList['Dragon_egg'],
 ]);
 const CinnabarIslandShop = new TownShop([
@@ -140,14 +116,10 @@ const CinnabarIslandShop = new TownShop([
 ]);
 const ViridianCityShop = new TownShop([
     ItemList['Pokeball'],
-    ItemList['xAttack'],
-    ItemList['xClick'],
     ItemList['Dungeon_ticket'],
 ]);
 const LavenderTownShop = new TownShop([
     ItemList['Greatball'],
-    ItemList['Item_magnet'],
-    ItemList['Lucky_incense'],
     ItemList['Grass_egg'],
 ]);
 
@@ -188,7 +160,7 @@ const ProfOak = new ProfOakNPC('Prof. Oak', [
 ]);
 
 const BattleItemRival = new NPC('Battle Item Master', [
-    'Hey kid, you look new! Let me offer some advice, Battle Items like xAttack can be acquired along Routes, inside Dungeons and in Shops!',
+    'Hey kid, you look new! Let me offer some advice, Battle Items like xAttack can be acquired inside Dungeons!',
     'Use them to help you out whenever you feel like time is against you!',
 ]);
 
@@ -389,12 +361,6 @@ const GoldenrodDepartmentStoreShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['xAttack'],
-    ItemList['xClick'],
-    ItemList['Lucky_egg'],
-    ItemList['Item_magnet'],
-    ItemList['Token_collector'],
-    ItemList['Lucky_incense'],
     ItemList['SmallRestore'],
     ItemList['MediumRestore'],
 ], 'Department Store');
@@ -2444,12 +2410,6 @@ const WyndonShop = new TownShop([
     ItemList['SmallRestore'],
     ItemList['MediumRestore'],
     ItemList['LargeRestore'],
-    ItemList['xAttack'],
-    ItemList['xClick'],
-    ItemList['Lucky_egg'],
-    ItemList['Token_collector'],
-    ItemList['Item_magnet'],
-    ItemList['Lucky_incense'],
 ]);
 
 
