@@ -56,7 +56,7 @@ export default class SeededRand {
     // Pick an element from an array with specified weights
     public static fromWeightedArray<T>(arr: Array<T>, weights: Array<number>): T {
         const max = weights.reduce((acc, weight) => acc + weight, 0);
-        let rand = this.intBetween(1, max);
+        let rand = this.next() * max;
         return arr.find((_e, i) => (rand -= weights[i]) <= 0) || arr[0];
     }
 
