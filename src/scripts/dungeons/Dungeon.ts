@@ -1671,7 +1671,7 @@ dungeonList['Floccesy Ranch'] = new Dungeon('Floccesy Ranch',
     126500, 20, 100);
 
 dungeonList['Liberty Garden'] = new Dungeon('Liberty Garden',
-    ['Vulpix', 'Jumpluff', 'Abra', 'Wingull', 'Pidove', 'Sentret'],
+    ['Vulpix', 'Sunkern', 'Abra', 'Wingull', 'Pidove', 'Sentret'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2703000,
     [
