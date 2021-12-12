@@ -238,7 +238,7 @@ class QuestLineHelper {
 
     public static createRocketjohtoQuestLine() {
         const RocketjohtoQuestLine = new QuestLine('Radio Tower Takeover', 'Team Rocket is up to no good again!');
-        
+
         const clearTeamRocketHideout = new CustomQuest(1, 0, 'Clear the Team Rockets Hideout dungeon in Mahogany Town', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Rockets Hideout')](), 0);
         RocketjohtoQuestLine.addQuest(clearTeamRocketHideout);
 
