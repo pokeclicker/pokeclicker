@@ -17,7 +17,7 @@ interface DetailedPokemon {
     options: EnemyOptions
 }
 
-interface DetailedLoot {
+interface Loot {
     loot: string,
     weight?: number,
 }
@@ -25,8 +25,6 @@ interface DetailedLoot {
 type Enemy = PokemonNameType | DetailedPokemon | DungeonTrainer;
 
 type Boss = DungeonBossPokemon | DungeonTrainer;
-
-type Loot = DetailedLoot | GameConstants.BattleItemType;
 
 interface EncounterInfo {
     image: string,
@@ -134,11 +132,10 @@ class Dungeon {
      */
     get lootWeightList(): number[] {
         return this.itemList.map((loot) => {
-            if (typeof loot === 'string') {
-                return (Math.pow(10, 4) / (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1)) + 1 ?? 1;
-            } else {
-                return (Math.pow(10, (<DetailedLoot>loot).weight) / (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1)) + 1 ?? 1;
-            }
+            // Minimum of 1 times cleared for division
+            const timesCleared = Math.max(1, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]());
+            // Caclculate total weight based on times cleared, minimum weight being original number specified
+            return Math.max(loot.weight, Math.pow(10, loot.weight) / timesCleared) + 1 || 1;
         });
     }
 
@@ -1209,7 +1206,7 @@ dungeonList['Team Rockets Hideout'] = new Dungeon('Team Rockets Hideout',
             [new GymPokemon('Ditto', 5500, 24)],
             { weight: 1 }, 'Mitch', '(male)'),
     ],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
+    [{loot: 'xAttack', weight: 4}, {loot: 'xClick', weight: 4}, {loot: 'Token_collector', weight: 4}],
     104100,
     [
         new DungeonTrainer('Rocket Executive',
@@ -1340,7 +1337,7 @@ dungeonList['Radio Tower'] = new Dungeon('Radio Tower',
                 new GymPokemon('Gloom', 5750, 24),
             ], { weight: 1 }, undefined, '(female)'),
     ],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
+    [{loot: 'xAttack', weight: 4}, {loot: 'xClick', weight: 4}, {loot: 'Token_collector', weight: 4}],
     112000,
     [
         new DungeonTrainer('Rocket Executive',
@@ -1407,7 +1404,7 @@ dungeonList['Dark Cave'] = new Dungeon('Dark Cave',
 
 dungeonList['Victory Road Johto'] = new Dungeon('Victory Road Johto',
     ['Golbat', 'Graveler', 'Onix', 'Rhyhorn'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     128500,
     [
         new DungeonBossPokemon('Sandslash', 500000, 55),
@@ -4947,7 +4944,7 @@ dungeonList['Trainers\' School'] = new Dungeon('Trainers\' School',
         new DungeonTrainer('Rising Star',
             [new GymPokemon('Ekans', 3500000, 8)], { weight: 1 }, 'Joseph', '(male)'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonTrainer('Teacher',
@@ -4971,7 +4968,7 @@ dungeonList['Hau\'oli Cemetery'] = new Dungeon('Hau\'oli Cemetery',
         new DungeonTrainer('Preschooler',
             [new GymPokemon('Happiny', 3500000, 8)], { weight: 1 }, 'Malia', '(female)'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Drifloon', 8000000, 70),
@@ -4989,7 +4986,7 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
         new DungeonTrainer('Team Skull Grunt',
             [new GymPokemon('Drowzee', 3500000, 11)], { weight: 1 }, undefined, '(male)'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Alolan Raticate', 8000000, 70),
@@ -5017,7 +5014,7 @@ dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
         new DungeonTrainer('Actor',
             [new GymPokemon('Oricorio (Pom-pom)', 3500000, 12)], { weight: 1 }, 'Meredith'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Flabébé (Red)', 8000000, 70),
@@ -5027,7 +5024,7 @@ dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
 
 dungeonList['Seaward Cave'] = new Dungeon('Seaward Cave',
     ['Zubat', 'Psyduck', 'Seel', 'Magikarp', 'Smoochum'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Delibird', 8000000, 70),
@@ -5037,7 +5034,7 @@ dungeonList['Seaward Cave'] = new Dungeon('Seaward Cave',
 
 dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
     ['Zubat', 'Machop', 'Psyduck', 'Mawile', 'Roggenrola'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Spinda', 8000000, 70),
@@ -5048,7 +5045,7 @@ dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
 
 dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
     ['Florges (Red)', 'Comfey', 'Dedenne', 'Ampharos', 'Electivire'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Jolteon', 8000000, 70),
@@ -5059,7 +5056,7 @@ dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
 
 dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
     ['Pikachu', 'Pichu'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Pikachu (Original cap)', 8000000, 70),
@@ -5091,7 +5088,7 @@ dungeonList['Paniola Ranch'] = new Dungeon('Paniola Ranch',
                 new GymPokemon('Magnemite', 33254840, 16),
             ], { weight: 1 }, 'Micah', '(male)'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Tauros', 8000000, 70),
@@ -5133,7 +5130,7 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
                 new GymPokemon('Magikarp', 33254840, 16),
             ], { weight: 1 }, 'Carl'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Wishiwashi (School)', 8000000, 70),
@@ -5168,7 +5165,7 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
         new DungeonTrainer('Hiker',
             [new GymPokemon('Roggenrola', 3500000, 19)], { weight: 1 }, 'Calhoun'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Alolan Marowak', 8000000, 70),
@@ -5187,7 +5184,7 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
 
 dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
     ['Metapod', 'Paras', 'Pinsir', 'Hoothoot', 'Bonsly', 'Trumbeak', 'Fomantis', 'Bounsweet', 'Steenee', 'Comfey', 'Oranguru', 'Passimian'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Lurantis', 8000000, 70),
@@ -5220,7 +5217,7 @@ dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
         new DungeonTrainer('Team Skull Grunt',
             [new GymPokemon('Salandit', 3500000, 23)], { weight: 1 }, undefined, '(male)'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [new DungeonBossPokemon('Larvitar', 8000000, 70)],
     96500, 201, 35);
@@ -5245,7 +5242,7 @@ dungeonList['Memorial Hill'] = new Dungeon('Memorial Hill',
         new DungeonTrainer('Punk Girl',
             [new GymPokemon('Ariados', 3500000, 24)], { weight: 1 }, 'Melissa'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonTrainer('Team Skull Grunt',
@@ -5255,7 +5252,7 @@ dungeonList['Memorial Hill'] = new Dungeon('Memorial Hill',
 
 dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
     ['Florges (Red)', 'Comfey', 'Gardevoir', 'Chimecho', 'Musharna'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Espeon', 8000000, 70),
@@ -5292,7 +5289,7 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
                 new GymPokemon('Vulpix', 33254840, 28),
             ], { weight: 1 }, 'Landon and Yukiro'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonTrainer('Team Skull Boss',
@@ -5306,7 +5303,7 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
 
 dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
     ['Grubbin', 'Charjabug', 'Elekid', 'Electabuzz', 'Skarmory', 'Dedenne'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Vikavolt', 8000000, 70),
@@ -5325,7 +5322,7 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
 
 dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
     ['Golbat', 'Gastly', 'Haunter', 'Gengar', 'Shuppet', 'Banette', 'Jellicent', 'Klefki'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Mimikyu', 8000000, 70),
@@ -5367,7 +5364,7 @@ dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
         new DungeonTrainer('Actor',
             [new GymPokemon('Oricorio (Baile)', 3500000, 36)], { weight: 1 }, 'Meredith', '(female)'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Floette (Red)', 8000000, 70),
@@ -5435,7 +5432,7 @@ dungeonList['Po Town'] = new Dungeon('Po Town',
                 new GymPokemon('Golbat', 33254840, 38),
             ], { weight: 1 }, undefined, '(female)'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonTrainer('Team Skull Boss',
@@ -5518,7 +5515,7 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
                 new GymPokemon('Gigalith', 33254840, 65),
             ], { weight: 1 }, 'Aristo', '(male)'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Absol', 8000000, 70),
@@ -5530,7 +5527,7 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
 
 dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
     ['Florges (Red)', 'Comfey', 'Whimsicott', 'Bellossom', 'Lilligant'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Leafeon', 8000000, 70),
@@ -5607,7 +5604,7 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
                 new GymPokemon('Pinsir', 33254840, 45),
             ], { weight: 1 }, 'Guzma'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonTrainer('Aether President',
@@ -5623,7 +5620,7 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
 
 dungeonList['Exeggutor Island Hill'] = new Dungeon('Exeggutor Island Hill',
     ['Exeggcute', 'Pelipper', 'Gastrodon (east)'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Pinsir', 8000000, 70),
@@ -5713,7 +5710,7 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
         new DungeonTrainer('Surfer',
             [new GymPokemon('Golduck', 3500000, 47)], { weight: 1 }, 'Joshah'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Kommo-o', 8000000, 70),
@@ -5730,7 +5727,7 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
 
 dungeonList['Nebby'] = new Dungeon('Nebby',
     ['Clefable', 'Delcatty', 'Sunflora', 'Heliolisk', 'Lunatone', 'Solrock'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Lunala', 8000000, 70),
@@ -5740,7 +5737,7 @@ dungeonList['Nebby'] = new Dungeon('Nebby',
 
 dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
     ['Florges (Red)', 'Comfey', 'Azumarill', 'Politoed', 'Gorebyss'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Vaporeon', 8000000, 70),
@@ -5761,7 +5758,7 @@ dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
         new DungeonTrainer('Actor',
             [new GymPokemon('Oricorio (Sensu)', 3500000, 47)], { weight: 1 }, 'Meredith', '(female)'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Oricorio (Sensu)', 8000000, 70),
@@ -5787,7 +5784,7 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
                 new GymPokemon('Mudsdale', 33254840, 59),
             ], { weight: 1 }, 'Travis'),
     ],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Crobat', 8000000, 70),
@@ -5803,14 +5800,14 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
 
 dungeonList['Slumbering Weald'] = new Dungeon('Slumbering Weald',
     ['Hoothoot', 'Grubbin', 'Skwovet', 'Rookidee'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [new DungeonBossPokemon('Blipbug', 8000000, 70)],
     96500, 201, 35);
 
 dungeonList['Inner Slumbering Weald'] = new Dungeon('Inner Slumbering Weald',
     ['Galarian Weezing', 'Corviknight', 'Galarian Stunfisk', 'Munna', 'Butterfree', 'Orbeetle'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Zamazenta (Battle Hero)', 8000000, 70),
@@ -5820,7 +5817,7 @@ dungeonList['Inner Slumbering Weald'] = new Dungeon('Inner Slumbering Weald',
 
 dungeonList['Galar Mine'] = new Dungeon('Galar Mine',
     ['Diglett', 'Roggenrola', 'Woobat', 'Drilbur', 'Timburr', 'Rolycoly'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Carkol', 8000000, 70),
@@ -5830,7 +5827,7 @@ dungeonList['Galar Mine'] = new Dungeon('Galar Mine',
 
 dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
     ['Shuckle', 'Shellos (east)', 'Croagunk', 'Scraggy', 'Binacle', 'Noibat', 'Chewtle'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Galarian Stunfisk', 8000000, 70),
@@ -5841,7 +5838,7 @@ dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
 
 dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
     ['Cufant', 'Bronzong', 'Klang', 'Mawile', 'Steelix', 'Galarian Stunfisk'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Froslass', 8000000, 70),
@@ -5854,7 +5851,7 @@ dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
 
 dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
     ['Galarian Ponyta', 'Spritzee', 'Swirlix', 'Phantump', 'Oranguru', 'Passimian', 'Sinistea'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Hattrem', 8000000, 70),
@@ -5865,7 +5862,7 @@ dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
 
 dungeonList['Watchtower Ruins'] = new Dungeon('Watchtower Ruins',
     ['Gastly', 'Noibat', 'Purrloin', 'Duskull', 'Woobat', 'Haunter', 'Shuckle', 'Ralts', 'Golett', 'Electrike', 'Snorunt'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Corviknight', 8000000, 70),
@@ -5877,7 +5874,7 @@ dungeonList['Watchtower Ruins'] = new Dungeon('Watchtower Ruins',
 
 dungeonList['Lake of Outrage'] = new Dungeon('Lake of Outrage',
     ['Stonjourner', 'Cramorant', 'Galarian Mr. Mime', 'Morpeko', 'Coalossal', 'Sandaconda', 'Galarian Stunfisk', 'Copperajah', 'Indeedee', 'Obstagoon', 'Grimmsnarl'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Hatterene', 8000000, 70),
@@ -5889,7 +5886,7 @@ dungeonList['Lake of Outrage'] = new Dungeon('Lake of Outrage',
 
 dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
     ['Gurdurr', 'Ferrothorn', 'Klang', 'Meowstic', 'Barbaracle', 'Applin', 'Hattrem', 'Qwilfish', 'Hitmonlee', 'Hitmonchan', 'Koffing'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Gigalith', 8000000, 70),
@@ -5904,21 +5901,21 @@ dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
 //Isle of Armor
 dungeonList['Master Dojo Trial'] = new Dungeon('Master Dojo Trial',
     ['Mienfoo', 'Shinx', 'Kadabra', 'Whirlipede'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [new DungeonBossPokemon('Kubfu', 8000000, 70)],
     96500, 201, 35);
 
 dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     ['Zorua', 'Scraggy', 'Inkay', 'Krokorok'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [new DungeonBossPokemon('Kubfu', 8000000, 70)],
     96500, 201, 35);
 
 dungeonList['Tower of Water'] = new Dungeon('Tower of Water',
     ['Psyduck', 'Krabby', 'Marill', 'Poliwhirl'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [new DungeonBossPokemon('Kubfu', 8000000, 70)],
     96500, 201, 35);
@@ -5927,7 +5924,7 @@ dungeonList['Tower of Water'] = new Dungeon('Tower of Water',
 //Crown Tundra
 dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
     ['Golurk', 'Electivire', 'Dragapult', 'Araquanid', 'Cryogonal', 'Bronzong', 'Claydol', 'Absol', 'Galvantula', 'Audino'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Regidrago', 8000000, 70),
@@ -5937,14 +5934,14 @@ dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
 
 dungeonList['Dyna Tree Hill'] = new Dungeon('Dyna Tree Hill',
     ['Magmar', 'Absol', 'Beartic', 'Cryogonal', 'Dubwool', 'Glalie', 'Clefable'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [new DungeonBossPokemon('Greedent', 8000000, 70)],
     96500, 201, 35);
 
 dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
     ['Snom', 'Hatenna', 'Solosis', 'Jynx', 'Piloswine', 'Dubwool'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
         new DungeonBossPokemon('Sneasel', 8000000, 70),

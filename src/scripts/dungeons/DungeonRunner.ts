@@ -8,7 +8,6 @@ class DungeonRunner {
 
     public static fighting: KnockoutObservable<boolean> = ko.observable(false);
     public static map: DungeonMap;
-    public static lootWeight: number;
     public static chestsOpened: number;
     public static currentTileType;
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
@@ -82,14 +81,7 @@ class DungeonRunner {
 
     public static lootInput() {
         const generatedLoot = GameHelper.fromWeightedArray(DungeonRunner.dungeon.itemList, DungeonRunner.dungeon.lootWeightList);
-
-        if (typeof generatedLoot === 'string') {
-            DungeonRunner.lootWeight = 3;
-            return generatedLoot;
-        } else {
-            DungeonRunner.lootWeight = generatedLoot.weight;
-            return generatedLoot.loot;
-        }
+        return generatedLoot;
     }
 
     public static openChest() {
@@ -100,15 +92,18 @@ class DungeonRunner {
         DungeonRunner.chestsOpened++;
 
         let amount = 1;
-        const input = DungeonRunner.lootInput();
+        const loot = DungeonRunner.lootInput();
 
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
-            if (5000 * Math.random() / ((App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() + 1) * (DungeonRunner.lootWeight + 1)) < 0.5) {
+            // Decreasing chance for rarer items (62.5% → 12.5%)
+            const magnetChance = 0.5 / (4 / (loot.weight + 1));
+            if (Math.random() < magnetChance) {
+                // Gain more items in higher regions
                 amount *= (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 2);
             }
         }
 
-        DungeonRunner.gainLoot(input, amount);
+        DungeonRunner.gainLoot(loot.loot, amount);
 
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
@@ -123,7 +118,7 @@ class DungeonRunner {
     public static gainLoot(input, amount) {
         if (typeof BerryType[input] == 'number') {
             Notifier.notify({
-                message: `Found ${amount} ${GameConstants.humanifyString(input)} Berry in a dungeon chest`,
+                message: `Found ${amount} × ${GameConstants.humanifyString(input)} Berry in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.dungeon_item_found,
             });
@@ -132,7 +127,7 @@ class DungeonRunner {
 
         } else if (typeof GameConstants.Pokeball[input] == 'number') {
             Notifier.notify({
-                message: `Found ${amount} ${GameConstants.humanifyString(input)} in a dungeon chest`,
+                message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.dungeon_item_found,
             });
@@ -141,7 +136,7 @@ class DungeonRunner {
 
         }  else if (Underground.getMineItemByName(input) != undefined && Underground.getMineItemByName(input).isStone() === false) {
             Notifier.notify({
-                message: `Found ${amount} ${GameConstants.humanifyString(input)} in a dungeon chest`,
+                message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.dungeon_item_found,
             });
@@ -150,7 +145,7 @@ class DungeonRunner {
 
         }  else if (ItemList[input].constructor.name == 'EvolutionStone' || 'EggItem' || 'BattleItem' || 'Vitamin' || 'EnergyRestore') {
             Notifier.notify({
-                message: `Found ${amount} ${GameConstants.humanifyString(input)} in a dungeon chest`,
+                message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.dungeon_item_found,
             });
