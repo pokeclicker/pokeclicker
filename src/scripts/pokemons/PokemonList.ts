@@ -5691,6 +5691,24 @@ const pokemonList = createPokemonArray(
         'heldItem': {type: ItemType.berry, id: BerryType.Lum},
     },
     {
+        'id': 251.1,
+        'name': 'Grinch Celebi',
+        'catchRate': 45,
+        'type': [PokemonType.Psychic, PokemonType.Grass],
+        'levelType': LevelType.mediumslow,
+        'exp': 270,
+        'eggCycles': 120,
+        'base': {
+            'hitpoints': 100,
+            'attack': 100,
+            'specialAttack': 100,
+            'defense': 100,
+            'specialDefense': 100,
+            'speed': 100,
+        },
+        'heldItem': {type: ItemType.berry, id: BerryType.Lum},
+    },
+    {
         'id': 252,
         'name': 'Treecko',
         'type': [PokemonType.Grass],
@@ -9429,6 +9447,25 @@ const pokemonList = createPokemonArray(
         'exp': 78,
         'catchRate': 50,
         'evolutions': [new StoneEvolution('Munchlax', 'Snorlax', GameConstants.StoneType.Soothe_bell)],
+        'baby': true,
+        'base': {
+            'hitpoints': 135,
+            'attack': 85,
+            'specialAttack': 40,
+            'defense': 40,
+            'specialDefense': 85,
+            'speed': 5,
+        },
+    },
+    {
+        'id': 446.1,
+        'name': 'Elf Munchlax',
+        'type': [PokemonType.Normal],
+        'eggCycles': 40,
+        'levelType': LevelType.slow,
+        'exp': 78,
+        'catchRate': 50,
+        'evolutions': [new StoneEvolution('Elf Munchlax', 'Santa Snorlax', GameConstants.StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 135,
@@ -13561,6 +13598,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 120,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'White_DNA'},
     },
     {
         'id': 644,
@@ -13578,6 +13616,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Black_DNA'},
     },
     {
         'id': 645,
@@ -13621,6 +13660,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 297,
         'catchRate': 3,
+        'evolutions': [
+            new StoneEvolution('Kyurem', 'Kyurem (Black)', GameConstants.StoneType.Black_DNA),
+            new StoneEvolution('Kyurem', 'Kyurem (White)', GameConstants.StoneType.White_DNA),
+        ],
         'base': {
             'hitpoints': 125,
             'attack': 130,

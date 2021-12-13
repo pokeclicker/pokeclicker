@@ -17,13 +17,19 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Youth Athlete (female)',
             'Rising Star (male)',
-            'Team Skull Boss Guzma',
+            'Team Skull Boss (guzma)',
             'Aether Foundation Employee (male)',
             'Aether Foundation Employee (female)',
             'Aether Branch Chief Faba',
             'Aether President Lusamine',
+            'Ilima',
             'Hala',
+            'Lana',
+            'Ikawe',
+            'Mallow',
             'Olivia',
+            'Sophocles',
+            'Acerola',
             'Nanu',
             'Mina',
             'Hapu',
@@ -129,6 +135,15 @@ export const SpriteCredits: Credit[] = [
             'Team Skull Grunt (female)',
         ],
         // NOTES: Found on DeviantArt About page: "All Sprites here are free to use as long you give credit to me"
+    },
+    {
+        name: 'procompyart',
+        link: 'https://www.instagram.com/procompyart/',
+        resources: [
+            'Grinch Celebi',
+            'Elf Munchlax',
+        ],
+        // Notes: Permission given via Discord #development-chat
     },
     {
         name: 'RedSparr0w',

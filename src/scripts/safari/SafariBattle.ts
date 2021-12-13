@@ -1,11 +1,9 @@
 class SafariBattle {
     static _enemy: KnockoutObservable<SafariPokemon> = ko.observable();
-    static busy = false;
+    static busy = ko.observable(false).extend({ boolean: null });
     static text: KnockoutObservable<string> = ko.observable('What will you do?');
     static escapeAttempts = 0;
     static particle;
-
-    static disableButtons = false;
 
     public static get enemy(): SafariPokemon {
         return SafariBattle._enemy();
@@ -25,14 +23,13 @@ class SafariBattle {
         SafariBattle.enemy = enemy;
         Safari.inBattle(true);
         SafariBattle.text('What will you do?');
-        SafariBattle.unlockButtons();
         SafariBattle.escapeAttempts = 0;
         $('#safariBattleModal').modal({ backdrop: 'static', keyboard: false });
     }
 
     public static throwBall() {
-        if (!SafariBattle.busy) {
-            SafariBattle.busy = true;
+        if (!SafariBattle.busy()) {
+            SafariBattle.busy(true);
             Safari.balls(Safari.balls() - 1);
 
             $('#safariBattleModal .enemy').css('transition-duration', `${0.75 * SafariBattle.Speed.enemyTransition}ms`);
@@ -67,7 +64,7 @@ class SafariBattle {
     }
 
     private static startCapture() {
-        return new Promise((resolve, reject) => {
+        return new Promise<void>((resolve, reject) => {
             $('#safariBattleModal .enemy').addClass('safariCapture');
             $('#safariBall').removeClass('spin');
             resolve();
@@ -75,7 +72,7 @@ class SafariBattle {
     }
 
     private static startBounce() {
-        return new Promise((resolve, reject) => {
+        return new Promise<void>((resolve, reject) => {
             $('#safariBattleModal').css('animation-duration', `${1.6 * SafariBattle.Speed.ballBounce}ms`);
             $('#safariBattleModal .enemy > img').css('opacity', '0');
             SafariBattle.particle.addClass('bounce');
@@ -152,9 +149,17 @@ class SafariBattle {
     }
 
     public static throwBait(baitType: BaitType) {
-        if (!SafariBattle.busy) {
-            SafariBattle.busy = true;
+        if (!SafariBattle.busy()) {
+            SafariBattle.busy(true);
             const bait: Bait = BaitList[BaitType[baitType]];
+            if (bait.amount() <= 0) {
+                SafariBattle.text(`You don't have enough ${bait.name}`);
+                setTimeout(() => {
+                    SafariBattle.text('What will you do?');
+                    SafariBattle.busy(false);
+                }, 1500);
+                return;
+            }
             SafariBattle.text(`You throw ${bait.useName} at ${SafariBattle.enemy.name}`);
             bait.use(SafariBattle.enemy);
             const enemy = $('#safariBattleModal .enemy').offset();
@@ -166,8 +171,8 @@ class SafariBattle {
     }
 
     public static throwRock() {
-        if (!SafariBattle.busy) {
-            SafariBattle.busy = true;
+        if (!SafariBattle.busy()) {
+            SafariBattle.busy(true);
             SafariBattle.text(`You throw a rock at ${SafariBattle.enemy.name}`);
             SafariBattle.enemy.angry = Math.max(SafariBattle.enemy.angry, Math.floor(Math.random() * 5 + 2));
             SafariBattle.enemy.eating = 0;
@@ -205,8 +210,8 @@ class SafariBattle {
     }
 
     public static run() {
-        if (!SafariBattle.busy) {
-            SafariBattle.busy = true;
+        if (!SafariBattle.busy()) {
+            SafariBattle.busy(true);
             SafariBattle.text('You flee.');
             setTimeout(SafariBattle.endBattle, 1500);
         }
@@ -229,25 +234,14 @@ class SafariBattle {
         SafariBattle.enemy.angry = Math.max(0, SafariBattle.enemy.angry - 1);
         setTimeout(() => {
             SafariBattle.text('What will you do?');
-            SafariBattle.busy = false;
-            SafariBattle.unlockButtons();
+            SafariBattle.busy(false);
         }, 1500);
-    }
-
-    private static lockButtons() {
-        SafariBattle.disableButtons = true;
-        $('#safariBattleModal .modal-footer button').attr('disabled', 'true');
-    }
-
-    private static unlockButtons() {
-        SafariBattle.disableButtons = false;
-        $('#safariBattleModal .modal-footer button').attr('disabled', null);
     }
 
     private static endBattle() {
         $('#safariBattleModal').one('hidden.bs.modal', () => {
             Safari.inBattle(false);
-            SafariBattle.busy = false;
+            SafariBattle.busy(false);
         }).modal('hide');
     }
 
@@ -256,7 +250,7 @@ class SafariBattle {
         setTimeout(() => {
             Safari.inBattle(false);
             Safari.inProgress(false);
-            SafariBattle.busy = false;
+            SafariBattle.busy(false);
             $('#safariBattleModal').modal('hide');
             $('#safariModal').modal('hide');
         }, 2000);
