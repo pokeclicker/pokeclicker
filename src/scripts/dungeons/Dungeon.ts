@@ -2463,7 +2463,6 @@ dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
 
 dungeonList['Fullmoon Island'] = new Dungeon('Fullmoon Island',
     ['Illumise', 'Minun', 'Hypno', 'Luvdisc'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     [
         {loot: 'xClick', weight: 4},
         {loot: 'Mind Plate', weight: 3},
