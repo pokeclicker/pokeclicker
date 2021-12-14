@@ -3046,6 +3046,9 @@ const pokemonList = createPokemonArray(
             new DungeonRestrictedLevelEvolution('Pokémon Village', 'Eevee', 'Leafeon', 20),
             new DungeonRestrictedLevelEvolution('Lush Jungle', 'Eevee', 'Leafeon', 20),
             new DungeonRestrictedLevelEvolution('Lake Acuity','Eevee','Glaceon', 20),
+            new DungeonRestrictedLevelEvolution('Twist Mountain','Eevee','Glaceon', 20),
+            new DungeonRestrictedLevelEvolution('Frost Cavern','Eevee','Glaceon', 20),
+            new DungeonRestrictedLevelEvolution('Mount Lanakila','Eevee','Glaceon', 20),
             new LevelEvolution('Eevee', 'Sylveon', 29),
         ],
         'base': {
