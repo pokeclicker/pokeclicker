@@ -129,6 +129,7 @@ namespace GameConstants {
     declare const ACTIVE_QUEST_MULTIPLIER: number;
     declare const QUEST_CLICKS_PER_SECOND: number;
     declare const QUESTS_PER_SET: number;
+    declare const DNA_ITEM_CHANCE: number;
     declare enum GameState {
         idle,
         paused,
@@ -248,6 +249,8 @@ namespace GameConstants {
         'Razor_claw',
         'Razor_fang',
         'Prism_scale',
+        'Black_DNA',
+        'White_DNA',
         'Sachet',
         'Whipped_dream',
         'Ice_stone',

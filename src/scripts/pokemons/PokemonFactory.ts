@@ -228,14 +228,24 @@ class PokemonFactory {
         }
 
         let chance = GameConstants.HELD_ITEM_CHANCE;
+
+        // Apply drop chance by item type
         switch (item.type) {
             case ItemType.underground:
                 chance = GameConstants.HELD_UNDERGROUND_ITEM_CHANCE;
                 break;
-            default:
-                chance = GameConstants.HELD_ITEM_CHANCE;
+        }
+
+        // Apply drop chance by item ID
+        switch (item.id) {
+            case 'Black_DNA':
+                chance = GameConstants.DNA_ITEM_CHANCE;
+                break;
+            case 'White_DNA':
+                chance = GameConstants.DNA_ITEM_CHANCE;
                 break;
         }
+
         chance /= modifier;
 
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {

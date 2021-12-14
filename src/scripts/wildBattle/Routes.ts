@@ -39,6 +39,7 @@ class Routes {
     public static unnormalizeRoute(normalizedRoute: number): number {
         return this.regionRoutes[normalizedRoute - 1].number;
     }
+
     public static normalizedNumber(region: GameConstants.Region, route: number): number {
         if (region == GameConstants.Region.none) {
             return route;
@@ -432,10 +433,7 @@ Routes.add(new RegionRoute(
         water: ['Poliwag', 'Poliwhirl', 'Magikarp', 'Remoraid'],
         headbutt: ['Spearow', 'Aipom', 'Heracross'],
     }),
-    [
-        new GymBadgeRequirement(BadgeEnums.Mineral),
-        new GymBadgeRequirement(BadgeEnums.Glacier),
-    ]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Radio Tower'))]
 ));
 Routes.add(new RegionRoute(
     'Johto Route 45', GameConstants.Region.johto, 45,
@@ -676,10 +674,18 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Carvanha'],
         special:
         [
-            new SpecialRoutePokemon(['Castform'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Sandstorm, WeatherType.Windy])),
-            new SpecialRoutePokemon(['Castform (sunny)'], new WeatherRequirement([WeatherType.Sunny])),
-            new SpecialRoutePokemon(['Castform (rainy)'], new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])),
-            new SpecialRoutePokemon(['Castform (snowy)'], new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail, WeatherType.Fog])),
+            new SpecialRoutePokemon(['Castform (sunny)'], new MultiRequirement([
+                new ObtainedPokemonRequirement(pokemonMap.Castform),
+                new WeatherRequirement([WeatherType.Sunny]),
+            ])),
+            new SpecialRoutePokemon(['Castform (rainy)'], new MultiRequirement([
+                new ObtainedPokemonRequirement(pokemonMap.Castform),
+                new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm]),
+            ])),
+            new SpecialRoutePokemon(['Castform (snowy)'], new MultiRequirement([
+                new ObtainedPokemonRequirement(pokemonMap.Castform),
+                new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail, WeatherType.Fog]),
+            ])),
         ],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 118)]
@@ -690,7 +696,10 @@ Routes.add(new RegionRoute(
         land: ['Surskit', 'Poochyena', 'Mightyena', 'Oddish', 'Marill', 'Absol', 'Kecleon', 'Seedot'],
         water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)]
+    [
+        new RouteKillRequirement(10, GameConstants.Region.hoenn, 119),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute')),
+    ]
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 121', GameConstants.Region.hoenn, 121,
@@ -1521,7 +1530,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.MelemeleKahuna)]
+    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 5', GameConstants.Region.alola, 5,
@@ -1615,7 +1624,7 @@ Routes.add(new RegionRoute(
     [new RouteKillRequirement(10, GameConstants.Region.alola, 13)]
 ));
 Routes.add(new RegionRoute(
-    'Alola Haina Desert', GameConstants.Region.alola, 23,
+    'Haina Desert', GameConstants.Region.alola, 23,
     new RoutePokemon({
         land: ['Alolan Dugtrio', 'Trapinch', 'Baltoy', 'Gabite', 'Krokorok', 'Golett'],
     }),
