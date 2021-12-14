@@ -3041,8 +3041,11 @@ const pokemonList = createPokemonArray(
             new StoneEvolution('Eevee', 'Flareon', GameConstants.StoneType.Fire_stone),
             new DayTimedStoneEvolution('Eevee', 'Espeon', GameConstants.StoneType.Soothe_bell),
             new NightTimedStoneEvolution('Eevee', 'Umbreon', GameConstants.StoneType.Soothe_bell),
-            new DungeonRestrictedLevelEvolution('Lake Acuity','Eevee','Glaceon', 20),
             new DungeonRestrictedLevelEvolution('Eterna Forest', 'Eevee', 'Leafeon', 20),
+            new DungeonRestrictedLevelEvolution('Pinwheel Forest', 'Eevee', 'Leafeon', 20),
+            new DungeonRestrictedLevelEvolution('Pokémon Village', 'Eevee', 'Leafeon', 20),
+            new DungeonRestrictedLevelEvolution('Lush Jungle', 'Eevee', 'Leafeon', 20),
+            new DungeonRestrictedLevelEvolution('Lake Acuity','Eevee','Glaceon', 20),
             new LevelEvolution('Eevee', 'Sylveon', 29),
         ],
         'base': {
