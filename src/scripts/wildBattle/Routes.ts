@@ -429,7 +429,7 @@ Routes.add(new RegionRoute(
                 new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt Mortar')),
                 new GymBadgeRequirement(BadgeEnums.Fog),
             ]),
-            new RouteKillRequirement(10, GameConstants.Region.johto, 42)
+            new RouteKillRequirement(10, GameConstants.Region.johto, 42),
         ]),
     ],
 ));
