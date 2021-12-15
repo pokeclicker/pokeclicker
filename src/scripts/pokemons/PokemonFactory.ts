@@ -18,9 +18,7 @@ class PokemonFactory {
         if (PokemonFactory.roamingEncounter(route, region)) {
             name = PokemonFactory.generateRoamingEncounter(route, region);
         } else {
-            const availablePokemonList: PokemonNameType[] = RouteHelper.getAvailablePokemonList(route, region);
-            const rand: number = Math.floor(Math.random() * availablePokemonList.length);
-            name = availablePokemonList[rand];
+            name = Rand.fromArray(RouteHelper.getAvailablePokemonList(route, region));
         }
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
@@ -62,7 +60,7 @@ class PokemonFactory {
     public static routeMoney(route: number, region: GameConstants.Region, useRandomDeviation = true): number {
         route = MapHelper.normalizeRoute(route, region);
         //If it's not random, we take the mean value (truncated)
-        const deviation = useRandomDeviation ? Math.floor(Math.random() * 51) - 25 : 12;
+        const deviation = useRandomDeviation ? Rand.intBetween(-25, 25) : 12;
         const money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
 
         return money;
@@ -84,9 +82,7 @@ class PokemonFactory {
     public static generateShiny(chance: number, skipBonus = false): boolean {
         const bonus = skipBonus ? 1 : App.game.multiplier.getBonus('shiny');
 
-        const rand: number = Math.floor(Math.random() * chance / bonus) + 1;
-
-        if (rand <= 1) {
+        if (Rand.chance(chance / bonus)) {
             App.game.oakItems.use(OakItems.OakItem.Shiny_Charm);
             return true;
         }
@@ -174,17 +170,12 @@ class PokemonFactory {
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_BOSS_SHARDS, heldItem);
     }
+
     private static generateRoamingEncounter(route: number, region: GameConstants.Region): PokemonNameType {
         const possible = RoamingPokemonList.getRegionalRoamers(region);
 
         // Double the chance of encountering a roaming Pokemon you have not yet caught
-        possible.forEach(r => {
-            if (!App.game.party.alreadyCaughtPokemonByName(r.pokemon.name)) {
-                possible.push(r);
-            }
-        });
-
-        return possible[Math.floor(Math.random() * possible.length)].pokemon.name;
+        return Rand.fromWeightedArray(possible, possible.map(r => App.game.party.alreadyCaughtPokemonByName(r.pokemon.name) ? 1 : 2)).pokemon.name;
     }
 
     private static roamingEncounter(routeNum: number, region: GameConstants.Region): boolean {
@@ -213,11 +204,11 @@ class PokemonFactory {
         // Check if we should have increased chances on this route (3 x rate)
         const increasedChance = RoamingPokemonList.getIncreasedChanceRouteByRegion(player.region)()?.number == curRoute?.number;
         const roamingChance = (max + ( (min - max) * (maxRoute - routeNum) / (maxRoute - minRoute))) / (increasedChance ? 3 : 1);
-        return Math.random() < 1 / roamingChance;
+        return Rand.chance(roamingChance);
     }
 
     private static catchRateHelper(baseCatchRate: number, noVariation = false): number {
-        const catchVariation = noVariation ? 0 : GameConstants.randomIntBetween(-3, 3);
+        const catchVariation = noVariation ? 0 : Rand.intBetween(-3, 3);
         const catchRateRaw = Math.floor(Math.pow(baseCatchRate, 0.75)) + catchVariation;
         return GameConstants.clipNumber(catchRateRaw, 0, 100);
     }
@@ -251,8 +242,8 @@ class PokemonFactory {
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             chance /= 1.5;
         }
-        const rand: number = Math.floor(Math.random() * chance) + 1;
-        if (rand <= 1) {
+
+        if (Rand.chance(chance)) {
             return item;
         }
 

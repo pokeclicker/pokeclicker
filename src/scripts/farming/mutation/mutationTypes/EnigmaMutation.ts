@@ -72,7 +72,7 @@ class EnigmaMutation extends GrowMutation {
 
     get hintIndex(): number {
         SeededRand.seedWithDate(new Date());
-        return Math.floor(SeededRand.next() * 4);
+        return SeededRand.floor(4);
     }
 
     /**
