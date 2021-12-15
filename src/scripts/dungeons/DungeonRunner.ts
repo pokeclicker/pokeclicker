@@ -80,7 +80,7 @@ class DungeonRunner {
     }
 
     public static lootInput() {
-        const generatedLoot = GameHelper.fromWeightedArray(DungeonRunner.dungeon.itemList, DungeonRunner.dungeon.lootWeightList);
+        const generatedLoot = Rand.fromWeightedArray(DungeonRunner.dungeon.itemList, DungeonRunner.dungeon.lootWeightList);
         return generatedLoot;
     }
 
@@ -90,14 +90,13 @@ class DungeonRunner {
         }
 
         DungeonRunner.chestsOpened++;
-
         let amount = 1;
         const loot = DungeonRunner.lootInput();
 
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             // Decreasing chance for rarer items (62.5% → 12.5%)
             const magnetChance = 0.5 / (4 / (loot.weight + 1));
-            if (Math.random() < magnetChance) {
+            if (Rand.chance(magnetChance)) {
                 // Gain more items in higher regions
                 amount *= (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 2);
             }

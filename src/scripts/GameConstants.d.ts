@@ -193,8 +193,6 @@ namespace GameConstants {
         armor,
         crown
     }
-    declare function randomIntBetween(min: number, max: number): number;
-    declare function randomElement(array: any[]): any;
     declare function clipNumber(num: number, min: number, max: number): number;
     declare function expRandomElement<T>(array: T[], ratio: number): T;
     declare const TypeColor: string[];
