@@ -396,7 +396,6 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Tentacruel', 'Krabby', 'Magikarp', 'Staryu', 'Corsola', 'Kingler'],
     }),
     [
-
         new RouteKillRequirement(10, GameConstants.Region.johto, 39),
         new GymBadgeRequirement(BadgeEnums.Fog),
     ]
@@ -424,7 +423,15 @@ Routes.add(new RegionRoute(
         water: ['Magikarp', 'Poliwag'],
         headbutt: ['Venonat', 'Exeggcute', 'Hoothoot', 'Pineco'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 42)]
+    [
+        new OneFromManyRequirement([
+            new MultiRequirement([
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt Mortar')),
+                new GymBadgeRequirement(BadgeEnums.Fog),
+            ]),
+            new RouteKillRequirement(10, GameConstants.Region.johto, 42)
+        ]),
+    ],
 ));
 Routes.add(new RegionRoute(
     'Johto Route 44', GameConstants.Region.johto, 44,
