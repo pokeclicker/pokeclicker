@@ -1979,6 +1979,9 @@ const pokemonList = createPokemonArray(
         'evolutions': [
             new DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Magneton', 'Magnezone', 20),
             new DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Magneton', 'Magnezone', 20),
+            new DungeonRestrictedLevelEvolution('Chargestone Cave', 'Magneton', 'Magnezone', 20),
+            new DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Magneton', 'Magnezone', 20),
+            new DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Magneton', 'Magnezone', 20),
         ],
         'base': {
             'hitpoints': 50,
@@ -3041,8 +3044,14 @@ const pokemonList = createPokemonArray(
             new StoneEvolution('Eevee', 'Flareon', GameConstants.StoneType.Fire_stone),
             new DayTimedStoneEvolution('Eevee', 'Espeon', GameConstants.StoneType.Soothe_bell),
             new NightTimedStoneEvolution('Eevee', 'Umbreon', GameConstants.StoneType.Soothe_bell),
-            new DungeonRestrictedLevelEvolution('Lake Acuity','Eevee','Glaceon', 20),
             new DungeonRestrictedLevelEvolution('Eterna Forest', 'Eevee', 'Leafeon', 20),
+            new DungeonRestrictedLevelEvolution('Pinwheel Forest', 'Eevee', 'Leafeon', 20),
+            new DungeonRestrictedLevelEvolution('Pokémon Village', 'Eevee', 'Leafeon', 20),
+            new DungeonRestrictedLevelEvolution('Lush Jungle', 'Eevee', 'Leafeon', 20),
+            new DungeonRestrictedLevelEvolution('Lake Acuity','Eevee','Glaceon', 20),
+            new DungeonRestrictedLevelEvolution('Twist Mountain','Eevee','Glaceon', 20),
+            new DungeonRestrictedLevelEvolution('Frost Cavern','Eevee','Glaceon', 20),
+            new DungeonRestrictedLevelEvolution('Mount Lanakila','Eevee','Glaceon', 20),
             new LevelEvolution('Eevee', 'Sylveon', 29),
         ],
         'base': {
@@ -6597,6 +6606,9 @@ const pokemonList = createPokemonArray(
         'evolutions': [
             new DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Nosepass', 'Probopass', 20),
             new DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Nosepass', 'Probopass', 20),
+            new DungeonRestrictedLevelEvolution('Chargestone Cave', 'Nosepass', 'Probopass', 20),
+            new DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Nosepass', 'Probopass', 20),
+            new DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Nosepass', 'Probopass', 20),
         ],
         'base': {
             'hitpoints': 30,
@@ -15913,7 +15925,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 140,
         'catchRate': 120,
-        'evolutions': [new DungeonRestrictedLevelEvolution('Vast Poni Canyon','Charjabug','Vikavolt', 20)],
+        'evolutions': [new DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Charjabug', 'Vikavolt', 20)],
         'base': {
             'hitpoints': 57,
             'attack': 82,
