@@ -431,7 +431,7 @@ Routes.add(new RegionRoute(
             ]),
             new RouteKillRequirement(10, GameConstants.Region.johto, 42),
         ]),
-    ],
+    ]
 ));
 Routes.add(new RegionRoute(
     'Johto Route 44', GameConstants.Region.johto, 44,
