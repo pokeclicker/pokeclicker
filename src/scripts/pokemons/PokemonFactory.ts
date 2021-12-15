@@ -18,9 +18,7 @@ class PokemonFactory {
         if (PokemonFactory.roamingEncounter(route, region)) {
             name = PokemonFactory.generateRoamingEncounter(route, region);
         } else {
-            const availablePokemonList: PokemonNameType[] = RouteHelper.getAvailablePokemonList(route, region);
-            const rand: number = Rand.floor(availablePokemonList.length);
-            name = availablePokemonList[rand];
+            name = Rand.fromArray(RouteHelper.getAvailablePokemonList(route, region));
         }
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
@@ -62,7 +60,7 @@ class PokemonFactory {
     public static routeMoney(route: number, region: GameConstants.Region, useRandomDeviation = true): number {
         route = MapHelper.normalizeRoute(route, region);
         //If it's not random, we take the mean value (truncated)
-        const deviation = useRandomDeviation ? Rand.floor(51) - 25 : 12;
+        const deviation = useRandomDeviation ? Rand.intBetween(-25, 25) : 12;
         const money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
 
         return money;
