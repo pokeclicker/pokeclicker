@@ -414,7 +414,6 @@ const CianwoodCityShop = new TownShop([
     ItemList['Sun_stone'],
 ]);
 const MahoganyTownShop = new TownShop([
-    ItemList['Fighting_egg'],
     ItemList['Upgrade'],
 ]);
 const BlackthornCityShop = new TownShop([
