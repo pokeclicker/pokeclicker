@@ -1735,7 +1735,10 @@ TownList['Chargestone Cave'] = new DungeonTown(
 TownList['Mistralton Cave'] = new DungeonTown(
     'Mistralton Cave',
     GameConstants.Region.unova,
-    [new GymBadgeRequirement(BadgeEnums.Quake)]
+    [
+        new GymBadgeRequirement(BadgeEnums.Quake),
+        new RouteKillRequirement(10, GameConstants.Region.unova, 6),
+    ]
 );
 TownList['Celestial Tower'] = new DungeonTown(
     'Celestial Tower',
