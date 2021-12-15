@@ -13,7 +13,7 @@ class BerryDeal {
     }
 
     private static randomBerry(berryList: BerryType[]): BerryType {
-        return Rand.fromArray(berryList);
+        return SeededRand.fromArray(berryList);
     }
 
     private static randomBattleItem(): Item {

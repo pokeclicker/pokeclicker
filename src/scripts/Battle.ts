@@ -157,7 +157,7 @@ class Battle {
     }
 
     static gainItem() {
-        const p = player.route() / 1600 + 0.009375;
+        const p = MapHelper.normalizeRoute(player.route(), player.region) / 1600 + 0.009375;
 
         if (Rand.chance(p)) {
             App.game.farming.gainRandomBerry();
