@@ -138,7 +138,7 @@ class Battle {
             this.catching(false);
             return;
         }
-        if (Rand.chance(this.catchRateActual())) { // Caught
+        if (Rand.chance(this.catchRateActual() / 100)) { // Caught
             this.catchPokemon(enemyPokemon);
         } else if (enemyPokemon.shiny) { // Failed to catch, Shiny
             App.game.logbook.newLog(LogBookTypes.ESCAPED, `The Shiny ${enemyPokemon.name} escaped!`);
