@@ -315,6 +315,7 @@ gymList['Ecruteak City'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Plain)],
     () => {
         App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Johto_HM03_surf, true);
+        App.game.quests.getQuestLine('Team Rocket').beginQuest();
     }
 );
 gymList['Cianwood City'] = new Gym(
@@ -353,7 +354,7 @@ gymList['Mahogany Town'] = new Gym(
     BadgeEnums.Glacier,
     4000,
     'Ah, I am impressed by your prowess. With your strong will, I know you will overcome all life\'s obstacles. You are worthy of this Badge!',
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 43)]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rockets Hideout'))]
 );
 gymList['Blackthorn City'] = new Gym(
     'Clair',

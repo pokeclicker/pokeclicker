@@ -2,6 +2,7 @@ import NotificationOption from './NotificationOption';
 import Sound from '../utilities/Sound';
 import BooleanSetting from '../settings/BooleanSetting';
 import Settings from '../settings/Settings';
+import Rand from '../utilities/Rand';
 
 export default class Notifier {
     public static notify({
@@ -33,7 +34,7 @@ export default class Notifier {
             }
 
             // Get the notification ready to display
-            const toastID = Math.random().toString(36).substr(2, 9);
+            const toastID = Rand.string(7);
             const toastHTML = `<div id="${toastID}" class="toast bg-${NotificationOption[type]}" data-autohide="false">
                 ${title ? `<div class="toast-header">
                     <strong class="mr-auto text-primary">${title || ''}</strong>
@@ -85,7 +86,7 @@ export default class Notifier {
 
         return new Promise((resolve) => {
             // Get the notification ready to display
-            const modalID = Math.random().toString(36).substr(2, 9);
+            const modalID = Rand.string(7);
             const html = `
 <div class="modal fade noselect" id="modal${modalID}" tabindex="-1" role="dialog" aria-badgeledby="prompt">
     <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
@@ -165,7 +166,7 @@ export default class Notifier {
 
         return new Promise((resolve) => {
             // Get the notification ready to display
-            const modalID = Math.random().toString(36).substr(2, 9);
+            const modalID = Rand.string(7);
             const html = `
 <div class="modal fade noselect" id="modal${modalID}" tabindex="-1" role="dialog" aria-badgeledby="prompt">
     <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">

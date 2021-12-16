@@ -414,7 +414,6 @@ const CianwoodCityShop = new TownShop([
     ItemList['Sun_stone'],
 ]);
 const MahoganyTownShop = new TownShop([
-    ItemList['Fighting_egg'],
     ItemList['Upgrade'],
 ]);
 const BlackthornCityShop = new TownShop([
@@ -485,6 +484,7 @@ TownList['New Bark Town'] = new Town(
     'New Bark Town',
     GameConstants.Region.johto,
     {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
         shops: [NewBarkTownShop],
         npcs: [NewBarkTechnologyEnthusiast],
     }
@@ -524,6 +524,7 @@ TownList['Goldenrod City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
         shops: [GoldenrodDepartmentStoreShop, JohtoBerryMaster],
+        dungeon: dungeonList['Radio Tower'],
         npcs: [BigSpender],
     }
 );
@@ -558,8 +559,12 @@ TownList['Mahogany Town'] = new Town(
     'Mahogany Town',
     GameConstants.Region.johto,
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 42)],
+        requirements: [new OneFromManyRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.johto, 42),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt Mortar')),
+        ])],
         shops: [MahoganyTownShop],
+        dungeon: dungeonList['Team Rockets Hideout'],
         npcs: [MahoganySouvenirShopAttendant],
     }
 );
@@ -607,23 +612,30 @@ TownList['Burned Tower'] = new DungeonTown(
 TownList['Tin Tower'] = new DungeonTown(
     'Tin Tower',
     GameConstants.Region.johto,
-    [
-        new GymBadgeRequirement(BadgeEnums.Mineral),
-        new GymBadgeRequirement(BadgeEnums.Glacier),
-    ]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Radio Tower'))]
 );
 TownList['Whirl Islands'] = new DungeonTown(
     'Whirl Islands',
     GameConstants.Region.johto,
-    [
-        new GymBadgeRequirement(BadgeEnums.Mineral),
-        new GymBadgeRequirement(BadgeEnums.Glacier),
-    ]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Radio Tower'))]
 );
 TownList['Mt Mortar'] = new DungeonTown(
     'Mt Mortar',
     GameConstants.Region.johto,
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 42)]
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 37)]
+);
+TownList['Team Rockets Hideout'] = new DungeonTown(
+    'Team Rockets Hideout',
+    GameConstants.Region.johto,
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 43)]
+);
+TownList['Radio Tower'] = new DungeonTown(
+    'Radio Tower',
+    GameConstants.Region.johto,
+    [
+        new GymBadgeRequirement(BadgeEnums.Mineral),
+        new GymBadgeRequirement(BadgeEnums.Glacier),
+    ]
 );
 TownList['Ice Path'] = new DungeonTown(
     'Ice Path',
@@ -634,6 +646,11 @@ TownList['Dark Cave'] = new DungeonTown(
     'Dark Cave',
     GameConstants.Region.johto,
     [new RouteKillRequirement(10, GameConstants.Region.johto, 45)]
+);
+TownList['Victory Road Johto'] = new DungeonTown(
+    'Victory Road Johto',
+    GameConstants.Region.johto,
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 26)]
 );
 TownList['Mt Silver'] = new DungeonTown(
     'Mt Silver',
@@ -751,6 +768,7 @@ TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
     GameConstants.Region.hoenn,
     {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
         shops: [LittleRootTownShop],
         npcs: [LittlerootAide],
     }
@@ -1130,6 +1148,7 @@ TownList['Twinleaf Town'] = new Town(
     'Twinleaf Town',
     GameConstants.Region.sinnoh,
     {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
         shops: [TwinleafTownShop],
         npcs: [TwinleafContestChampion],
     }
@@ -1473,8 +1492,15 @@ const CasteliaMusician = new NPC('Musician', [
     'Sometimes a cool singing Pokémon shows up and joins in on our set. I’ve heard that trainers as strong as the Champion have found it roaming around the region looking for Pokémon battles… but even I wouldn’t challenge it to a Music battle.',
 ]);
 
-const UnovaRoamerNPC = new RoamerNPC('Youngster Sarah', [
-    'My friends told me roaming Pokémon have been spotted on {ROUTE_NAME}!',
+const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
+    'Legends say Kyurem is missing a part of itself. It is waiting for a hero to fill in the missing parts of its body with Truth or Ideals.',
+    'The legendary dragons of Dragonspiral Tower are said to embody these very concepts. They sometimes leave a piece of their DNA behind after a battle.',
+    'If you have DNA splicers, perhaps you can make Kyurem whole again.',
+    'I\'ve never seen it, but supposedly it works just like any evolution stone.',
+]);
+
+const UnovaRoamerNPC = new RoamerNPC('Professor Juniper\'s Aide', [
+    'Our research indicates a higher concentration of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.unova);
 
 //Unova Towns
@@ -1482,6 +1508,7 @@ TownList['Aspertia City'] = new Town(
     'Aspertia City',
     GameConstants.Region.unova,
     {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
         shops: [AspertiaCityShop],
     }
 );
@@ -1607,7 +1634,7 @@ TownList['Icirrus City'] = new Town(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Twist Mountain')),
         ])],
         shops: [IcirrusCityShop],
-        npcs: [UnovaRoamerNPC],
+        npcs: [IcirrusFanClubChairman],
     }
 );
 TownList['Black and White Park'] = new Town(
@@ -1653,6 +1680,7 @@ TownList['Nuvema Town'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 1)],
+        npcs: [UnovaRoamerNPC],
     }
 );
 TownList['Anville Town'] = new Town(
@@ -1709,7 +1737,10 @@ TownList['Chargestone Cave'] = new DungeonTown(
 TownList['Mistralton Cave'] = new DungeonTown(
     'Mistralton Cave',
     GameConstants.Region.unova,
-    [new GymBadgeRequirement(BadgeEnums.Quake)]
+    [
+        new GymBadgeRequirement(BadgeEnums.Quake),
+        new RouteKillRequirement(10, GameConstants.Region.unova, 6),
+    ]
 );
 TownList['Celestial Tower'] = new DungeonTown(
     'Celestial Tower',
@@ -1892,6 +1923,7 @@ TownList['Vaniville Town'] = new Town(
     'Vaniville Town',
     GameConstants.Region.kalos,
     {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
         shops: [VanivilleTownShop],
     }
 );
@@ -2153,7 +2185,7 @@ TownList['Iki Town'] = new Town(
     'Iki Town',
     GameConstants.Region.alola,
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
         shops: [IkiTownShop],
     }
 );
@@ -2474,6 +2506,7 @@ TownList['Postwick'] = new Town(
     'Postwick',
     GameConstants.Region.galar,
     {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
         shops: [PostwickShop],
         npcs: [Mom],
     }

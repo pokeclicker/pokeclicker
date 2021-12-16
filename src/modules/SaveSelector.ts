@@ -1,4 +1,5 @@
 import Profile from './profile/Profile';
+import Rand from './utilities/Rand';
 
 export default class SaveSelector {
     static MAX_SAVES = 9;
@@ -12,7 +13,7 @@ export default class SaveSelector {
         });
 
         if (saves.length < this.MAX_SAVES) {
-            const key = Math.random().toString(36).substring(7);
+            const key = Rand.string(6);
             container.innerHTML += `<div class="col-12"></div>
             <label class="btn btn-success col-md-4 col-xs-12 mx-1" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">New Save</label>
             <label for="import-save" class="btn btn-warning col-md-4 col-xs-12 mx-1" onclick="Save.key = '${key}';">Import Save</label>`;

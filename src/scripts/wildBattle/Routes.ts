@@ -449,7 +449,6 @@ Routes.add(new RegionRoute(
         johtosuperrod: ['Krabby', 'Kingler', 'Staryu', 'Corsola'],
     }),
     [
-
         new RouteKillRequirement(10, GameConstants.Region.johto, 39),
         new GymBadgeRequirement(BadgeEnums.Fog),
     ]
@@ -486,7 +485,15 @@ Routes.add(new RegionRoute(
         johtosurf: ['Magikarp'],
         johtoheadbutt: ['Venonat', 'Exeggcute', 'Hoothoot', 'Pineco'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 42)]
+    [
+        new OneFromManyRequirement([
+            new MultiRequirement([
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt Mortar')),
+                new GymBadgeRequirement(BadgeEnums.Fog),
+            ]),
+            new RouteKillRequirement(10, GameConstants.Region.johto, 42),
+        ]),
+    ]
 ));
 Routes.add(new RegionRoute(
     'Johto Route 44', GameConstants.Region.johto, 44,
@@ -498,10 +505,7 @@ Routes.add(new RegionRoute(
         johtosurf: ['Poliwag', 'Poliwhirl'],
         johtoheadbutt: ['Spearow', 'Aipom', 'Heracross'],
     }),
-    [
-        new GymBadgeRequirement(BadgeEnums.Mineral),
-        new GymBadgeRequirement(BadgeEnums.Glacier),
-    ]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Radio Tower'))]
 ));
 Routes.add(new RegionRoute(
     'Johto Route 45', GameConstants.Region.johto, 45,
@@ -803,10 +807,18 @@ Routes.add(new RegionRoute(
         hoennsurf: ['Tentacool', 'Wingull', 'Pelipper'],
         special:
         [
-            new SpecialRoutePokemon(['Castform'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Sandstorm, WeatherType.Windy])),
-            new SpecialRoutePokemon(['Castform (sunny)'], new WeatherRequirement([WeatherType.Sunny])),
-            new SpecialRoutePokemon(['Castform (rainy)'], new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])),
-            new SpecialRoutePokemon(['Castform (snowy)'], new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail, WeatherType.Fog])),
+            new SpecialRoutePokemon(['Castform (sunny)'], new MultiRequirement([
+                new ObtainedPokemonRequirement(pokemonMap.Castform),
+                new WeatherRequirement([WeatherType.Sunny]),
+            ])),
+            new SpecialRoutePokemon(['Castform (rainy)'], new MultiRequirement([
+                new ObtainedPokemonRequirement(pokemonMap.Castform),
+                new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm]),
+            ])),
+            new SpecialRoutePokemon(['Castform (snowy)'], new MultiRequirement([
+                new ObtainedPokemonRequirement(pokemonMap.Castform),
+                new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail, WeatherType.Fog]),
+            ])),
         ],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 118)]
@@ -820,7 +832,10 @@ Routes.add(new RegionRoute(
         hoennsuperrod: ['Barboach'],
         hoennsurf: ['Goldeen', 'Marill', 'Surskit'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)]
+    [
+        new RouteKillRequirement(10, GameConstants.Region.hoenn, 119),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute')),
+    ]
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 121', GameConstants.Region.hoenn, 121,
