@@ -133,22 +133,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Soul) {
             const modal = KeyItemController.showGainModal(KeyItems.KeyItem.Safari_ticket);
             await asyncEvent(modal, 'hidden.bs.modal');
-            KeyItemController.showGainModal(KeyItems.KeyItem.Kanto_HM03_surf);
+            KeyItemController.showGainModal(KeyItems.KeyItem.HM03_surf);
         }
         if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
             KeyItemController.showGainModal(KeyItems.KeyItem.Shard_case);
         }
-        if (GymBattle.gym.badgeReward == BadgeEnums.Fog) {
-            KeyItemController.showGainModal(KeyItems.KeyItem.Johto_HM03_surf);
-        }
-        if (GymBattle.gym.badgeReward == BadgeEnums.Knuckle) {
-            KeyItemController.showGainModal(KeyItems.KeyItem.Hoenn_old_rod);
-        }
-        if (GymBattle.gym.badgeReward == BadgeEnums.Balance) {
-            KeyItemController.showGainModal(KeyItems.KeyItem.Hoenn_HM03_surf);
-        }
         if (GymBattle.gym.badgeReward == BadgeEnums.Mind) {
-            KeyItemController.showGainModal(KeyItems.KeyItem.Hoenn_HM08_dive);
+            KeyItemController.showGainModal(KeyItems.KeyItem.HM08_dive);
         }
         if (GymBattle.gym.badgeReward == BadgeEnums.Fen) {
             KeyItemController.showGainModal(KeyItems.KeyItem.Sinnoh_HM03_surf);

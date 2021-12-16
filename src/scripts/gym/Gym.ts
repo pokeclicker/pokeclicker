@@ -159,7 +159,7 @@ gymList['Fuchsia City'] = new Gym(
     ],
     () => {
         App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Safari_ticket, true);
-        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Kanto_HM03_surf, true);
+        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.HM03_surf, true);
         App.game.quests.getQuestLine('Mining Expedition').beginQuest();
     }
 );
@@ -314,7 +314,6 @@ gymList['Ecruteak City'] = new Gym(
     'I\'m not good enough yet... All right. This Badge is yours.',
     [new GymBadgeRequirement(BadgeEnums.Plain)],
     () => {
-        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Johto_HM03_surf, true);
         App.game.quests.getQuestLine('Team Rocket').beginQuest();
     }
 );
@@ -474,10 +473,6 @@ gymList['Dewford Town'] = new Gym(
     BadgeEnums.Knuckle,
     2000,
     'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Gym Badge!',
-    [],
-    () => {
-        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Hoenn_old_rod, true);
-    }
 );
 gymList['Mauville City'] = new Gym(
     'Wattson',
@@ -518,9 +513,6 @@ gymList['Petalburg City'] = new Gym(
     5000,
     '… I… I can\'t… I can\'t believe it. I lost to you? But, rules are rules! Here, take this.',
     [new GymBadgeRequirement(BadgeEnums.Heat)],
-    () => {
-        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Hoenn_HM03_surf, true);
-    }
 );
 gymList['Fortree City'] = new Gym(
     'Winona',
@@ -550,7 +542,7 @@ gymList['Mossdeep City'] = new Gym(
     'What? Our combination... Was shattered! It can\'t be helped. You\'ve won... So, in recognition, take this Gym Badge.',
     [],
     () => {
-        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Hoenn_HM08_dive, true);
+        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.HM08_dive, true);
     }
 );
 gymList['Sootopolis City'] = new Gym(

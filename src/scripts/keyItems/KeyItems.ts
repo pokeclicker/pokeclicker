@@ -71,31 +71,9 @@ class KeyItems implements Feature {
                 });
             }, 'Dungeon Ticket'),
             // Fishing Rods and other Pokémon unlockers
-            new KeyItem(KeyItems.KeyItem.Kanto_old_rod, 'An old and beat-up fishing rod. Use it by any body of water in the Kanto region to fish for wild Pokémon.', () => {
+            new KeyItem(KeyItems.KeyItem.Fishing_rod, 'The best fishing rod for catching wild water Pokémon', () => {
                 return App.game.statistics.routeKills[GameConstants.Region.kanto][6]() >= GameConstants.ROUTE_KILLS_NEEDED;
-            }, undefined, undefined, 'Kanto Old Rod'),
-            new KeyItem(KeyItems.KeyItem.Kanto_good_rod, 'A new, good-quality fishing rod. Use it by any body of water in the Kanto region to fish for wild Pokémon.', () => {
-                return MapHelper.accessToTown('Fuchsia City');
-            }, undefined, undefined, 'Kanto Good Rod'),
-            new KeyItem(KeyItems.KeyItem.Kanto_super_rod, 'An awesome, high-tech fishing rod. Use it by any body of water in the Kanto region to fish for wild Pokémon.', () => {
-                return App.game.statistics.routeKills[GameConstants.Region.kanto][12]() >= GameConstants.ROUTE_KILLS_NEEDED;
-            }, undefined, undefined, 'Kanto Super Rod'),
-            new KeyItem(KeyItems.KeyItem.Johto_old_rod, 'Use by water in the Johto region to fish for Pokémon.', () => {
-                return App.game.statistics.routeKills[GameConstants.Region.johto][32]() >= GameConstants.ROUTE_KILLS_NEEDED;
-            }, undefined, undefined, 'Johto Old Rod'),
-            new KeyItem(KeyItems.KeyItem.Johto_good_rod, 'A good Rod for catching Pokémon in the Johto region.', () => {
-                return App.game.statistics.routeKills[GameConstants.Region.johto][39]() >= GameConstants.ROUTE_KILLS_NEEDED;
-            }, undefined, undefined, 'Johto Good Rod'),
-            new KeyItem(KeyItems.KeyItem.Johto_super_rod, 'The best Rod for catching Pokémon in the Johto region.', () => {
-                return App.game.statistics.routeKills[GameConstants.Region.johto][28]() >= GameConstants.ROUTE_KILLS_NEEDED;
-            }, undefined, undefined, 'Johto Super Rod'),
-            new KeyItem(KeyItems.KeyItem.Hoenn_old_rod, 'Use by any body of water in the Hoenn region to fish for wild Pokémon.', undefined, undefined, undefined, 'Hoenn Old Rod'),
-            new KeyItem(KeyItems.KeyItem.Hoenn_good_rod, 'A decent fishing rod for catching wild Pokémon in the Hoenn region.', () => {
-                return App.game.statistics.routeKills[GameConstants.Region.hoenn][118]() >= GameConstants.ROUTE_KILLS_NEEDED;
-            }, undefined, undefined, 'Hoenn Good Rod'),
-            new KeyItem(KeyItems.KeyItem.Hoenn_super_rod, 'The best fishing rod for catching wild Pokémon in the Hoenn region.', () => {
-                return App.game.statistics.routeKills[GameConstants.Region.hoenn][125]() >= GameConstants.ROUTE_KILLS_NEEDED;
-            }, undefined, undefined, 'Hoenn Super Rod'),
+            }, undefined, undefined, 'Fishing Rod'),
             new KeyItem(KeyItems.KeyItem.Sinnoh_old_rod, 'An old and beat-up fishing rod. Use it by any body of water in the Sinnoh region to fish for wild aquatic Pokémon.', () => {
                 return App.game.statistics.routeKills[GameConstants.Region.sinnoh][202]() >= GameConstants.ROUTE_KILLS_NEEDED;
             }, undefined, undefined, 'Sinnoh Old Rod'),
@@ -117,13 +95,11 @@ class KeyItems implements Feature {
             new KeyItem(KeyItems.KeyItem.Kalos_super_rod, 'An awesome, high-tech fishing rod. Use it at any body of water in the Kalos region to fish for wild aquatic Pokémon.', () => {
                 return App.game.statistics.routeKills[GameConstants.Region.kalos][16]() >= GameConstants.ROUTE_KILLS_NEEDED;
             }, undefined, undefined, 'Kalos Super Rod'),
-            new KeyItem(KeyItems.KeyItem.Kanto_HM03_surf, 'Can be used for crossing water in the Kanto region.', undefined, undefined, undefined, 'Kanto HM03 Surf'),
-            new KeyItem(KeyItems.KeyItem.Johto_TM02_headbutt, 'Can be used to knock wild Pokémon from trees in the Johto region. Warning, may cause concussion.', () => {
+            new KeyItem(KeyItems.KeyItem.HM03_surf, 'Can be used for crossing water.', undefined, undefined, undefined, 'HM03 Surf'),
+            new KeyItem(KeyItems.KeyItem.TM02_headbutt, 'Can be used to knock wild Pokémon from trees. Warning, may cause concussion.', () => {
                 return App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ilex Forest')]() > 0;
-            }, undefined, undefined, 'Johto TM02 Headbutt'),
-            new KeyItem(KeyItems.KeyItem.Johto_HM03_surf, 'Can be used for crossing water in the Johto region.', undefined, undefined, undefined, 'Johto HM03 Surf'),
-            new KeyItem(KeyItems.KeyItem.Hoenn_HM03_surf, 'Can be used for crossing water in the Hoenn region.', undefined, undefined, undefined, 'Hoenn HM03 Surf'),
-            new KeyItem(KeyItems.KeyItem.Hoenn_HM08_dive, 'Can be used to dive to the bottom of Hoenn\'s oceans to find new kinds of Pokémon.', undefined, undefined, undefined, 'Hoenn HM08 Dive'),
+            }, undefined, undefined, 'TM02 Headbutt'),
+            new KeyItem(KeyItems.KeyItem.HM08_dive, 'Can be used to dive to the bottom of the ocean to find new kinds of Pokémon.', undefined, undefined, undefined, 'HM08 Dive'),
             new KeyItem(KeyItems.KeyItem.Sinnoh_HM03_surf, 'Can be used for crossing water in the Sinnoh region.', undefined, undefined, undefined, 'Sinnoh HM03 Surf'),
             new KeyItem(KeyItems.KeyItem.Unova_HM03_surf, 'Can be used for crossing water in the Unova region.', undefined, undefined, undefined, 'Unova HM03 Surf'),
             new KeyItem(KeyItems.KeyItem.Kalos_HM03_surf, 'Can be used for crossing water in the Kalos region.', undefined, undefined, undefined, 'Kalos HM03 Surf'),
@@ -208,15 +184,7 @@ namespace KeyItems {
         'Town_map',
         'Factory_key',
         'Dungeon_ticket',
-        'Kanto_old_rod',
-        'Kanto_good_rod',
-        'Kanto_super_rod',
-        'Johto_old_rod',
-        'Johto_good_rod',
-        'Johto_super_rod',
-        'Hoenn_old_rod',
-        'Hoenn_good_rod',
-        'Hoenn_super_rod',
+        'Fishing_rod',
         'Sinnoh_old_rod',
         'Sinnoh_good_rod',
         'Sinnoh_super_rod',
@@ -224,11 +192,9 @@ namespace KeyItems {
         'Kalos_old_rod',
         'Kalos_good_rod',
         'Kalos_super_rod',
-        'Kanto_HM03_surf',
-        'Johto_TM02_headbutt',
-        'Johto_HM03_surf',
-        'Hoenn_HM03_surf',
-        'Hoenn_HM08_dive',
+        'HM03_surf',
+        'TM02_headbutt',
+        'HM08_dive',
         'Sinnoh_HM03_surf',
         'Unova_HM03_surf',
         'Kalos_HM03_surf',
