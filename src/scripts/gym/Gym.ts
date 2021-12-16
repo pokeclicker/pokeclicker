@@ -311,7 +311,10 @@ gymList['Ecruteak City'] = new Gym(
     BadgeEnums.Fog,
     1500,
     'I\'m not good enough yet... All right. This Badge is yours.',
-    [new GymBadgeRequirement(BadgeEnums.Plain)]
+    [new GymBadgeRequirement(BadgeEnums.Plain)],
+    () => {
+        App.game.quests.getQuestLine('Team Rocket').beginQuest();
+    }
 );
 gymList['Cianwood City'] = new Gym(
     'Chuck',
@@ -349,10 +352,7 @@ gymList['Mahogany Town'] = new Gym(
     BadgeEnums.Glacier,
     4000,
     'Ah, I am impressed by your prowess. With your strong will, I know you will overcome all life\'s obstacles. You are worthy of this Badge!',
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 43)],
-    () => {
-        App.game.quests.getQuestLine('Radio Tower Takeover').beginQuest();
-    }
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rockets Hideout'))]
 );
 gymList['Blackthorn City'] = new Gym(
     'Clair',
