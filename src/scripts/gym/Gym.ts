@@ -472,7 +472,7 @@ gymList['Dewford Town'] = new Gym(
     ],
     BadgeEnums.Knuckle,
     2000,
-    'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Gym Badge!',
+    'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Gym Badge!'
 );
 gymList['Mauville City'] = new Gym(
     'Wattson',
@@ -512,7 +512,7 @@ gymList['Petalburg City'] = new Gym(
     BadgeEnums.Balance,
     5000,
     '… I… I can\'t… I can\'t believe it. I lost to you? But, rules are rules! Here, take this.',
-    [new GymBadgeRequirement(BadgeEnums.Heat)],
+    [new GymBadgeRequirement(BadgeEnums.Heat)]
 );
 gymList['Fortree City'] = new Gym(
     'Winona',
