@@ -1271,7 +1271,7 @@ gymList['Seafolk Village'] = new Gym(
     BadgeEnums.FairiumZ,
     128000,
     'Woah! I\'m shocked at your strength!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Nebby'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('The Bag'))]
 );
 gymList['Exeggutor Island'] = new Gym(
     'Hapu',

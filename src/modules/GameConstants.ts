@@ -843,7 +843,7 @@ export const AlolaGyms = [
     'Elite Olivia',
     'Elite Acerola',
     'Elite Kahili',
-    'Champion Hao',
+    'Champion Hau',
 ];
 
 export const GalarGyms = [
@@ -1053,7 +1053,7 @@ export const AlolaDungeons = [
     'Ruins of Abundance',
     'Aether Foundation',
     'Vast Poni Canyon',
-    'Nebby',
+    'The Bag',
     'Ruins of Hope',
     'Poni Meadow',
     'Resolution Cave',

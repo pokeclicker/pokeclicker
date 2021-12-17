@@ -2277,7 +2277,7 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
         shops: [AltaroftheSunneandMooneShop],
-        dungeon: dungeonList['Nebby'],
+        dungeon: dungeonList['The Bag'],
     }
 );
 
@@ -2413,8 +2413,8 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     GameConstants.Region.alola,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))]
 );
-TownList['Nebby'] = new DungeonTown(
-    'Nebby',
+TownList['The Bag'] = new DungeonTown(
+    'The Bag',
     GameConstants.Region.alola,
     [new GymBadgeRequirement(BadgeEnums.Elite_UltraNecrozma)]
 );
