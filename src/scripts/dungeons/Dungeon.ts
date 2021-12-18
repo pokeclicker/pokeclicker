@@ -4867,7 +4867,7 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
             [
                 new GymPokemon('Banette', 3500000, 57),
                 new GymPokemon('Leafeon', 3500000, 59),
-            ], { weight: 1 }, 'Gerard', '(male)'),
+            ], { weight: 1 }, 'Gerard'),
         new DungeonTrainer('Artist',
             [new GymPokemon('Smeargle', 3500000, 58)], { weight: 1 }, 'Vincent'),
         new DungeonTrainer('Hiker',
