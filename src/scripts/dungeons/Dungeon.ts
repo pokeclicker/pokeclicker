@@ -311,7 +311,7 @@ dungeonList['Digletts Cave'] = new Dungeon('Digletts Cave',
         {loot: 'xClick', weight: 4},
         {loot: 'Lucky_incense', weight: 4},
         {loot: 'Max Revive', weight: 2},
-        {loot: 'Passho', weight: 0},
+        {loot: 'Wiki', weight: 0},
     ],
     1208,
     [new DungeonBossPokemon('Dugtrio', 6040, 31)],
@@ -389,14 +389,12 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
         {loot: 'Greatball', weight: 3},
         {loot: 'SmallRestore', weight: 2},
         {loot: 'Star Piece', weight: 2},
+        {loot: 'Helix Fossil', weight: 1},
+        {loot: 'Dome Fossil', weight: 1},
         {loot: 'Moon_stone', weight: 0},
-        {loot: 'Helix Fossil', weight: 0},
-        {loot: 'Dome Fossil', weight: 0},
     ],
     834,
     [
-        new DungeonBossPokemon('Kabuto', 4170, 12, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Moon'))}),
-        new DungeonBossPokemon('Omanyte', 4170, 12, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Moon'))}),
         new DungeonTrainer('Super Nerd',
             [
                 new GymPokemon('Grimer', 2780, 12),
@@ -404,7 +402,16 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
                 new GymPokemon('Koffing', 2780, 12),
             ], { weight: 1 }, 'Miguel'),
     ],
-    75, 4, 10
+    75, 4, 10,
+    () => {
+        const item = Rand.boolean() ? 'Dome Fossil' : 'Helix Fossil';
+        Underground.gainMineItem(Underground.getMineItemByName(item).id, 1);
+        Notifier.notify({
+            message: `You were awarded a ${GameConstants.humanifyString(item)} for defeating the Super Nerd`,
+            type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+        });
+    }
 );
 
 dungeonList['Rock Tunnel'] = new Dungeon('Rock Tunnel',
