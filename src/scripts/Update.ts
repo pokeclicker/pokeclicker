@@ -554,7 +554,7 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 23);
 
             // If the player has the Fog Badge already
-            // Not using game constants incase the badge value isn't 20 in the future
+            // Not using game constants incase the badge value isn't 17 in the future
             if (saveData.badgeCase[17]) {
                 saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
             }
