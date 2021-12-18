@@ -402,7 +402,16 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
                 new GymPokemon('Koffing', 2780, 12),
             ], { weight: 1 }, 'Miguel'),
     ],
-    75, 4, 10
+    75, 4, 10,
+    () => {
+        const item = Rand.boolean() ? 'Dome Fossil' : 'Helix Fossil';
+        Underground.gainMineItem(Underground.getMineItemByName(item).id, 1);
+        Notifier.notify({
+            message: `You were awarded a ${GameConstants.humanifyString(item)} for defeating the Super Nerd`,
+            type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+        });
+    }
 );
 
 dungeonList['Rock Tunnel'] = new Dungeon('Rock Tunnel',
