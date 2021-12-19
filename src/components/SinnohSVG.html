@@ -227,15 +227,6 @@
         })
     %>
 
-    <!--Route 214 extra-->
-    <%- include('templates/mapRoute',
-        { route: 214, region: 3
-        , height: 4, width: 1
-        , x: 73, y: 40
-        , noText: true
-        })
-    %>
-
     <!--Route 215-->
     <%- include('templates/mapRoute',
         { route: 215, region: 3
@@ -732,14 +723,6 @@
         })
     %>
 
-    <!--Distortion World-->
-    <%- include('templates/mapDungeon',
-        { name: "Distortion World"
-        , x: 74, y: 39
-        , height: 5, width: 5
-        })
-    %>
-
     <!--Lake Acuity-->
     <%- include('templates/mapDungeon',
         { name: "Lake Acuity"
@@ -838,5 +821,25 @@
         , width: 4, height: 4
         , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Distortion World"
+         , x: 39, y: 26
+         , width: 5, height: 5
+         , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Snowpoint City')]() >= 1 ? 'completed' : 'locked'}"
+         , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Snowpoint City')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]() == 0"
+         , image: "assets/images/distortionworld.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Distortion World"
+         , x: 74, y: 39
+         , width: 5, height: 5
+         , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Snowpoint City')]() >= 1 ? 'completed' : 'locked'}"
+         , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]() >= 1"
+         , image: "assets/images/distortionworld.png"
+         })
      %>
 </g>
