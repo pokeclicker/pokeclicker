@@ -314,7 +314,7 @@ gymList['Ecruteak City'] = new Gym(
     'I\'m not good enough yet... All right. This Badge is yours.',
     [new GymBadgeRequirement(BadgeEnums.Plain)],
     () => {
-        App.game.quests.getQuestLine('Team Rocket').beginQuest();
+        App.game.quests.getQuestLine('Team Rocket Again').beginQuest();
     }
 );
 gymList['Cianwood City'] = new Gym(
