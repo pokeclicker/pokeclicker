@@ -706,10 +706,7 @@ gymList['Pastoria City'] = new Gym(
     BadgeEnums.Fen,
     2500,
     'It seems the undertow pulled me under... But I had a great time battling with you! You\'ve earned this!',
-    [new GymBadgeRequirement(BadgeEnums.Cobble)],
-    () => {
-        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Sinnoh_HM03_surf, true);
-    }
+    [new GymBadgeRequirement(BadgeEnums.Cobble)]
 );
 gymList['Canalave City'] = new Gym(
     'Byron',
@@ -899,10 +896,7 @@ gymList['Driftveil City'] = new Gym(
     BadgeEnums.Quake,
     4800,
     'Phew… You\'re really somethin\'! Li\'l whippersnapper Trainers who pack a real punch keep showin\' up one after another. Mrmph. Here! Take this!',
-    [new GymBadgeRequirement(BadgeEnums.Bolt)],
-    () => {
-        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Unova_HM03_surf, true);
-    }
+    [new GymBadgeRequirement(BadgeEnums.Bolt)]
 );
 gymList['Mistralton City'] = new Gym(
     'Skyla',
@@ -1067,10 +1061,7 @@ gymList['Shalour City'] = new Gym(
     BadgeEnums.Rumble,
     3800,
     'Oh! I have been defeated! Alack, alay! Lady Korrina gave a terrible display! This is it. I must give up my title and admit that your strength far exceeds-- Just teasing! But here\'s your Badge. Boy, you\'ll be rolling in \'em soon!',
-    [new GymBadgeRequirement(BadgeEnums.Cliff)],
-    () => {
-        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Kalos_HM03_surf, true);
-    }
+    [new GymBadgeRequirement(BadgeEnums.Cliff)]
 );
 gymList['Coumarine City'] = new Gym(
     'Ramos',

@@ -101,52 +101,52 @@ class RouteHelper {
         }
 
         // Sinnoh Old Rod Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Sinnoh_old_rod) || possiblePokemons.land.length == 0) {
+        if (App.game.statistics.routeKills[GameConstants.Region.sinnoh][202]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.sinnoholdrod);
         }
 
         // Sinnoh Good Rod Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Sinnoh_good_rod) || possiblePokemons.land.length == 0) {
+        if (App.game.statistics.routeKills[GameConstants.Region.sinnoh][209]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.sinnohgoodrod);
         }
 
         // Sinnoh Super Rod Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Sinnoh_super_rod) || possiblePokemons.land.length == 0) {
+        if (App.game.statistics.routeKills[GameConstants.Region.sinnoh][225]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.sinnohsuperrod);
         }
 
         // Sinnoh Surf Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Sinnoh_HM03_surf) || possiblePokemons.land.length == 0) {
+        if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pastoria City')]() >= 1 || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.sinnohsurf);
         }
 
         // Unova Super Rod Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Unova_super_rod) || possiblePokemons.land.length == 0) {
+        if (App.game.statistics.routeKills[GameConstants.Region.unova][1]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.unovasuperrod);
         }
 
         // Unova Surf Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Unova_HM03_surf) || possiblePokemons.land.length == 0) {
+        if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Driftveil City')]() >= 1 || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.unovasurf);
         }
 
         // Kalos Old rod Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Kalos_old_rod) || possiblePokemons.land.length == 0) {
+        if (App.game.statistics.routeKills[GameConstants.Region.kalos][8]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kalosoldrod);
         }
 
         // Kalos Good Rod Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Kalos_good_rod) || possiblePokemons.land.length == 0) {
+        if (App.game.statistics.routeKills[GameConstants.Region.kalos][12]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kalosgoodrod);
         }
 
         // Kalos Super Rod Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Kalos_super_rod) || possiblePokemons.land.length == 0) {
+        if (App.game.statistics.routeKills[GameConstants.Region.kalos][16]() >= GameConstants.ROUTE_KILLS_NEEDED || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kalossuperrod);
         }
 
         // Kalos Surf Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Kalos_HM03_surf) || possiblePokemons.land.length == 0) {
+        if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Shalour City')]() >= 1 || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kalossurf);
         }
 
