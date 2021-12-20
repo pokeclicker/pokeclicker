@@ -1218,13 +1218,13 @@ dungeonList['Team Rockets Hideout'] = new Dungeon('Team Rockets Hideout',
     [
         new DungeonTrainer('Rocket Executive',
             [
-                new GymPokemon('Zubat', 1400000, 22),
+                new GymPokemon('Zubat', 140000, 22),
                 new GymPokemon('Koffing', 140000, 22),
                 new GymPokemon('Raticate', 140000, 24),
             ], { weight: 1 }, 'Petrel', '(petrel)'),
         new DungeonTrainer('Rocket Executive',
             [
-                new GymPokemon('Arbok', 1400000, 23),
+                new GymPokemon('Arbok', 140000, 23),
                 new GymPokemon('Gloom', 140000, 23),
                 new GymPokemon('Murkrow', 140000, 25),
             ], { weight: 1 }, 'Ariana', '(ariana)'),
@@ -1349,7 +1349,7 @@ dungeonList['Radio Tower'] = new Dungeon('Radio Tower',
     [
         new DungeonTrainer('Rocket Executive',
             [
-                new GymPokemon('Houndour', 1430000, 33),
+                new GymPokemon('Houndour', 143000, 33),
                 new GymPokemon('Koffing', 143000, 32),
                 new GymPokemon('Houndoom', 144000, 35),
             ], { weight: 1 }, 'Archer', '(archer)'),
@@ -1367,7 +1367,7 @@ dungeonList['Radio Tower'] = new Dungeon('Radio Tower',
             ], { weight: 1 }, 'Petrel', '(petrel)'),
         new DungeonTrainer('Rocket Executive',
             [
-                new GymPokemon('Arbok', 1430000, 32),
+                new GymPokemon('Arbok', 143000, 32),
                 new GymPokemon('Gloom', 143000, 32),
                 new GymPokemon('Murkrow', 144000, 32),
             ], { weight: 1 }, 'Ariana', '(ariana)'),
