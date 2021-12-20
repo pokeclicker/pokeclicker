@@ -2791,6 +2791,8 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
         {loot: 'Earth Plate', weight: 3},
         {loot: 'Cover Fossil', weight: 2},
         {loot: 'Plume Fossil', weight: 2},
+        {loot: 'Plume Fossil', weight: 2},
+        {loot: 'Darmanitan (Zen)', weight: 0},
     ],
     3003000,
     [
