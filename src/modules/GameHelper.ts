@@ -97,12 +97,6 @@ export default class GameHelper {
         return a.length - 1;
     }
 
-    public static fromWeightedArray<T>(arr: Array<T>, weights: Array<number>): T {
-        const max = weights.reduce((acc, weight) => acc + weight, 0);
-        let rand = Math.random() * max;
-        return arr.find((_e, i) => (rand -= weights[i]) <= 0) || arr[0];
-    }
-
     public static createArray(start: number, max: number, step: number): Array<number> {
         const array = [];
         for (let i = start; i <= max; i += step) {
