@@ -194,7 +194,9 @@ class DungeonRunner {
             DungeonRunner.dungeonFinished(true);
             GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]);
             MapHelper.moveToTown(DungeonRunner.dungeon.name);
-            DungeonRunner.dungeon.rewardFunction();
+            if (Rand.chance(10) === true) {
+                DungeonRunner.dungeon.rewardFunction();
+            }
             // TODO award loot with a special screen
             Notifier.notify({
                 message: 'You have successfully completed the dungeon',
