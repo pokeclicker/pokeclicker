@@ -21,6 +21,7 @@ interface Loot {
     loot: string,
     weight?: number,
     requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
+    amount?: number,
 }
 
 type Enemy = PokemonNameType | DetailedPokemon | DungeonTrainer;
