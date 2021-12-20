@@ -90,8 +90,8 @@ class DungeonRunner {
         }
 
         DungeonRunner.chestsOpened++;
-        let amount = 1;
         const loot = DungeonRunner.lootInput();
+        let amount = loot.amount || 1;
 
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             // Decreasing chance for rarer items (62.5% → 12.5%)
