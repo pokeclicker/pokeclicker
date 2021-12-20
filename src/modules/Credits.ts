@@ -144,7 +144,7 @@ export const SpriteCredits: Credit[] = [
         ],
         // NOTES: Granted permission on devianart to NiceDice via PN
     },
-    {    
+    {
         name: 'procompyart',
         link: 'https://www.instagram.com/procompyart/',
         resources: [
