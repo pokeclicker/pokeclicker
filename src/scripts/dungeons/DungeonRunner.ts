@@ -98,7 +98,7 @@ class DungeonRunner {
             const magnetChance = 0.5 / (4 / (loot.weight + 1));
             if (Rand.chance(magnetChance)) {
                 // Gain more items in higher regions
-                amount += (Math.round(Math.max(loot.weight,2) / 8 * (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 1)));
+                amount += Math.max(1, Math.round(Math.max(loot.weight,2) / 8 * (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 1)));
             }
         }
 
