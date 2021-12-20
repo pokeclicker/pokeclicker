@@ -143,6 +143,25 @@ class DungeonBattle extends Battle {
         DungeonRunner.fighting(true);
     }
 
+    public static generateNewLootEnemy(pokemon: PokemonNameType) {
+        this.catching(false);
+        this.counter = 0;
+        const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon
+            , DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth * 2, DungeonRunner.dungeon.level);
+        this.enemyPokemon(enemyPokemon);
+
+        GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[enemyPokemon.id]);
+        GameHelper.incrementObservable(App.game.statistics.totalPokemonEncountered);
+        if (enemyPokemon.shiny) {
+            GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[enemyPokemon.id]);
+            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `[${player.town().dungeon.name}] You encountered a Shiny ${this.enemyPokemon().name}.`);
+        } else if (!App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id)) {
+            App.game.logbook.newLog(LogBookTypes.NEW, `[${player.town().dungeon.name}] You encountered a wild ${this.enemyPokemon().name}.`);
+        }
+        DungeonRunner.fighting(true);
+    }
+
     /**
      * Handles generating the enemy Trainer Pokemon
      */
