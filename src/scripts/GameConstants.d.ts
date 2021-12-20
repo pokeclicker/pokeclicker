@@ -50,6 +50,8 @@ namespace GameConstants {
     declare const ITEM_PRICE_DEDUCT: number;
     declare const PLATE_VALUE: number;
     declare const BREEDING_ATTACK_BONUS: number;
+    declare const FARM_PLOT_WIDTH: number;
+    declare const FARM_PLOT_HEIGHT: number;
     declare const BerryDistribution: number[];
     declare const MULCH_USE_TIME: number;
     declare const BOOST_MULCH_MULTIPLIER: number;
@@ -60,7 +62,8 @@ namespace GameConstants {
     declare const AMAZE_MULCH_MUTATE_MULTIPLIER: number;
     declare const WANDER_RATE: number;
     declare const BerryColor: string[];
-    declare const DUNGEON_SIZE: number;
+    declare const BASE_DUNGEON_SIZE: number;
+    declare const MIN_DUNGEON_SIZE: number;
     declare const DUNGEON_CHEST_SHOW: number;
     declare const DUNGEON_MAP_SHOW: number;
     declare enum AchievementOption {
@@ -92,6 +95,7 @@ namespace GameConstants {
         'Farming',
         'Quest',
         'Battle Frontier',
+        'Protein'
     }
     declare enum DungeonTile {
         empty,
@@ -125,6 +129,7 @@ namespace GameConstants {
     declare const ACTIVE_QUEST_MULTIPLIER: number;
     declare const QUEST_CLICKS_PER_SECOND: number;
     declare const QUESTS_PER_SET: number;
+    declare const DNA_ITEM_CHANCE: number;
     declare enum GameState {
         idle,
         paused,
@@ -172,6 +177,7 @@ namespace GameConstants {
     declare function camelCaseToString(str: string): string;
     declare function formatDate(date: Date): string;
     declare function formatTime(input: number | Date): string;
+    declare function formatTimeFullLetters(input: number): string;
     declare function formatTimeShortWords(input: number): string;
     declare function formatNumber(input: number): string;
     declare enum Region {
@@ -187,12 +193,13 @@ namespace GameConstants {
         armor,
         crown
     }
-    declare function randomIntBetween(min: number, max: number): number;
-    declare function randomElement(array: any[]): any;
     declare function clipNumber(num: number, min: number, max: number): number;
     declare function expRandomElement<T>(array: T[], ratio: number): T;
     declare const TypeColor: string[];
     declare const ROUTE_KILLS_NEEDED: number;
+    declare const ACHIEVEMENT_DEFEAT_ROUTE_VALUES: number[];
+    declare const ACHIEVEMENT_DEFEAT_GYM_VALUES: number[];
+    declare const ACHIEVEMENT_DEFEAT_DUNGEON_VALUES: number[];
     declare type EnvironmentData = Partial<Record<number, Set<string | number>>>
     declare const Environments: {
         Water: EnvironmentData,
@@ -215,31 +222,33 @@ namespace GameConstants {
     }
     declare enum StoneType {
         'None',
+        'Leaf_stone',
         'Fire_stone',
         'Water_stone',
         'Thunder_stone',
-        'Leaf_stone',
         'Moon_stone',
-        'Sun_stone',
         'Trade_stone',
-        'Dragon_scale',
+        'Sun_stone',
+        'Soothe_bell',
         'Metal_coat',
         'Kings_rock',
         'Upgrade',
-        'Soothe_bell',
+        'Dragon_scale',
+        'Prism_scale',
         'Deepsea_tooth',
         'Deepsea_scale',
-        'Dawn_stone',
-        'Dusk_stone',
         'Shiny_stone',
-        'Dubious_disc',
+        'Dusk_stone',
+        'Dawn_stone',
+        'Razor_claw',
+        'Razor_fang',
         'Electirizer',
         'Magmarizer',
         'Protector',
+        'Dubious_disc',
         'Reaper_cloth',
-        'Razor_claw',
-        'Razor_fang',
-        'Prism_scale',
+        'Black_DNA',
+        'White_DNA',
         'Sachet',
         'Whipped_dream',
         'Ice_stone',
@@ -360,5 +369,6 @@ namespace GameConstants {
     declare function getDungeonIndex(dungeon: string): number;
     declare function getDungeonRegion(dungeon: string): Region;
     declare const StartingTowns: string[];
+    declare const StartingRoutes: number[];
     declare const DockTowns: string[];
 }

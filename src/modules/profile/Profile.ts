@@ -3,6 +3,7 @@ import {
 } from 'knockout';
 import { Saveable } from '../DataStore/common/Saveable';
 import * as GameConstants from '../GameConstants';
+import Rand from '../utilities/Rand';
 
 export default class Profile implements Saveable {
     public static MAX_TRAINER = 119;
@@ -21,9 +22,9 @@ export default class Profile implements Saveable {
 
     constructor(
         name = 'Trainer',
-        trainer = Math.floor(Math.random() * Profile.MAX_TRAINER),
+        trainer = Rand.floor(Profile.MAX_TRAINER),
         pokemon = 0,
-        background = Math.floor(Math.random() * Profile.MAX_BACKGROUND),
+        background = Rand.floor(Profile.MAX_BACKGROUND),
         textColor = '#f5f5f5',
     ) {
         this.name = ko.observable(name);
@@ -36,10 +37,10 @@ export default class Profile implements Saveable {
 
     static getTrainerCard(
         name = 'Trainer',
-        trainer = Math.floor(Math.random() * Profile.MAX_TRAINER),
-        pokemon = Math.floor(Math.random() * 151) + 1,
+        trainer = Rand.floor(Profile.MAX_TRAINER),
+        pokemon = Rand.intBetween(1, 151),
         pokemonShiny = false,
-        background = Math.floor(Math.random() * Profile.MAX_BACKGROUND),
+        background = Rand.floor(Profile.MAX_BACKGROUND),
         textColor = 'whitesmoke',
         badges = 0,
         pokedex = 0,
@@ -52,6 +53,7 @@ export default class Profile implements Saveable {
         return `
         <div class="mb-3 ${key === undefined ? 'p-2 col-12' : 'col-lg-4 col-md-6 col-sm-12 xol-xs-12'}">
             <div class="trainer-card clickable trainer-bg-${background} card font-weight-bold"
+                ${key === undefined ? '' : `data-key="${key}"`}
                 style="color: ${textColor}"
                 onclick="${key === undefined ? "Notifier.notify({ message: 'What a lovely profile!' });" : `Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();`}">
                 <div class="card-body">
@@ -74,7 +76,7 @@ export default class Profile implements Saveable {
                     </table>
                     <img class="pokemon-0" src="assets/images/${pokemonShiny ? 'shiny' : ''}pokemon/${pokemon}.png"/>
                     <small class="version">v${version}</small>
-                    <div class="challenge-badges">${Object.entries(challenges).filter(([, v]) => v).map(([c]) => `<img class="m-1" width="24px" src="${challengeRibbonsPath}${c}.png" data-toggle="tooltip" data-placement="top" title="${GameConstants.camelCaseToString(c)}"/>`).join('')}</div>
+                    <div class="challenge-badges">${Object.entries(challenges).filter(([, v]) => v).map(([c]) => `<img class="m-1" width="24px" src="${challengeRibbonsPath}${c}.png" onerror="this.remove()" data-toggle="tooltip" data-placement="top" title="${GameConstants.camelCaseToString(c)}"/>`).join('')}</div>
                 </div>
             </div>
         </div>

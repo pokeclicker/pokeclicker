@@ -28,6 +28,10 @@ abstract class Quest {
         this.onLoadCalled = false;
     }
 
+    public static canComplete() {
+        return true;
+    }
+
     get description(): string {
         return this.customDescription ?? 'Generic Quest Description. This should be overriden.';
     }
@@ -37,7 +41,7 @@ abstract class Quest {
     }
 
     public static randomizeReward(pointsReward: number) {
-        const randomPointBonus = 0.9 + SeededRand.next() * 0.2; // random between 0.9 and 1.1
+        const randomPointBonus = 0.9 + SeededRand.float(0.2); // random between 0.9 and 1.1
         return Math.ceil(pointsReward * randomPointBonus);
     }
 
@@ -58,7 +62,7 @@ abstract class Quest {
                     type: NotificationConstants.NotificationOption.success,
                 });
                 App.game.logbook.newLog(
-                    LogBookTypes.QUEST_COMPLETE,
+                    LogBookTypes.QUEST,
                     `Completed "${this.description}" for ${this.pointsReward} quest points.`);
             } else {
                 Notifier.notify({
@@ -66,7 +70,7 @@ abstract class Quest {
                     type: NotificationConstants.NotificationOption.success,
                 });
                 App.game.logbook.newLog(
-                    LogBookTypes.QUEST_COMPLETE,
+                    LogBookTypes.QUEST,
                     `Completed "${this.description}".`);
             }
             GameHelper.incrementObservable(App.game.statistics.questsCompleted);

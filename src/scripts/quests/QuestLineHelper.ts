@@ -45,6 +45,10 @@ class QuestLineHelper {
                         element: document.getElementById('questDisplayContainer'),
                         intro: 'Click "List" to see the current quests that can be completed for <img title="Quest points" src="assets/images/currency/questPoint.svg" height="25px"> Quest Points.',
                     },
+                    {
+                        element: document.getElementById('startMenu'),
+                        intro: 'See the badges you\'ve earned in the Badge Case. Badges influence the max level of your Pokémon.',
+                    },
                 ],
             });
         };
@@ -232,6 +236,28 @@ class QuestLineHelper {
         App.game.quests.questLines().push(VivillonQuestLine);
     }
 
+    public static createRocketjohtoQuestLine() {
+        const RocketjohtoQuestLine = new QuestLine('Team Rocket Again', 'Team Rocket is up to no good again!');
+
+        const clearTeamRocketHideout = new CustomQuest(1, 0, 'Clear the Team Rockets Hideout dungeon in Mahogany Town', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Rockets Hideout')](), 0);
+        RocketjohtoQuestLine.addQuest(clearTeamRocketHideout);
+
+        const RadiotowerReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1);
+            Notifier.notify({
+                title: RocketjohtoQuestLine.name,
+                message: 'The grateful radio director gave you a Masterball!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearRadioTower = new CustomQuest(1, RadiotowerReward, 'Clear the Radio Tower dungeon in Goldenrod City', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')](), 0);
+        RocketjohtoQuestLine.addQuest(clearRadioTower);
+
+        App.game.quests.questLines().push(RocketjohtoQuestLine);
+    }
+
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
@@ -241,5 +267,6 @@ class QuestLineHelper {
         this.createDeoxysQuestLine();
         this.createUndergroundQuestLine();
         this.createVivillonQuestLine();
+        this.createRocketjohtoQuestLine();
     }
 }

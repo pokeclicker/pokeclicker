@@ -1893,6 +1893,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 15,
         },
+        'heldItem': {type: ItemType.item, id: 'Kings_rock'},
     },
     {
         'id': 79.1,
@@ -1911,7 +1912,6 @@ const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 15,
         },
-        'heldItem': {type: ItemType.item, id: 'Kings_rock'},
     },
     {
         'id': 80,
@@ -1979,6 +1979,9 @@ const pokemonList = createPokemonArray(
         'evolutions': [
             new DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Magneton', 'Magnezone', 20),
             new DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Magneton', 'Magnezone', 20),
+            new DungeonRestrictedLevelEvolution('Chargestone Cave', 'Magneton', 'Magnezone', 20),
+            new DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Magneton', 'Magnezone', 20),
+            new DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Magneton', 'Magnezone', 20),
         ],
         'base': {
             'hitpoints': 50,
@@ -3041,8 +3044,14 @@ const pokemonList = createPokemonArray(
             new StoneEvolution('Eevee', 'Flareon', GameConstants.StoneType.Fire_stone),
             new DayTimedStoneEvolution('Eevee', 'Espeon', GameConstants.StoneType.Soothe_bell),
             new NightTimedStoneEvolution('Eevee', 'Umbreon', GameConstants.StoneType.Soothe_bell),
-            new DungeonRestrictedLevelEvolution('Lake Acuity','Eevee','Glaceon', 20),
             new DungeonRestrictedLevelEvolution('Eterna Forest', 'Eevee', 'Leafeon', 20),
+            new DungeonRestrictedLevelEvolution('Pinwheel Forest', 'Eevee', 'Leafeon', 20),
+            new DungeonRestrictedLevelEvolution('Pokémon Village', 'Eevee', 'Leafeon', 20),
+            new DungeonRestrictedLevelEvolution('Lush Jungle', 'Eevee', 'Leafeon', 20),
+            new DungeonRestrictedLevelEvolution('Lake Acuity','Eevee','Glaceon', 20),
+            new DungeonRestrictedLevelEvolution('Twist Mountain','Eevee','Glaceon', 20),
+            new DungeonRestrictedLevelEvolution('Frost Cavern','Eevee','Glaceon', 20),
+            new DungeonRestrictedLevelEvolution('Mount Lanakila','Eevee','Glaceon', 20),
             new LevelEvolution('Eevee', 'Sylveon', 29),
         ],
         'base': {
@@ -5691,6 +5700,24 @@ const pokemonList = createPokemonArray(
         'heldItem': {type: ItemType.berry, id: BerryType.Lum},
     },
     {
+        'id': 251.1,
+        'name': 'Grinch Celebi',
+        'catchRate': 45,
+        'type': [PokemonType.Psychic, PokemonType.Grass],
+        'levelType': LevelType.mediumslow,
+        'exp': 270,
+        'eggCycles': 120,
+        'base': {
+            'hitpoints': 100,
+            'attack': 100,
+            'specialAttack': 100,
+            'defense': 100,
+            'specialDefense': 100,
+            'speed': 100,
+        },
+        'heldItem': {type: ItemType.berry, id: BerryType.Lum},
+    },
+    {
         'id': 252,
         'name': 'Treecko',
         'type': [PokemonType.Grass],
@@ -6579,6 +6606,9 @@ const pokemonList = createPokemonArray(
         'evolutions': [
             new DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Nosepass', 'Probopass', 20),
             new DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Nosepass', 'Probopass', 20),
+            new DungeonRestrictedLevelEvolution('Chargestone Cave', 'Nosepass', 'Probopass', 20),
+            new DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Nosepass', 'Probopass', 20),
+            new DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Nosepass', 'Probopass', 20),
         ],
         'base': {
             'hitpoints': 30,
@@ -9429,6 +9459,25 @@ const pokemonList = createPokemonArray(
         'exp': 78,
         'catchRate': 50,
         'evolutions': [new StoneEvolution('Munchlax', 'Snorlax', GameConstants.StoneType.Soothe_bell)],
+        'baby': true,
+        'base': {
+            'hitpoints': 135,
+            'attack': 85,
+            'specialAttack': 40,
+            'defense': 40,
+            'specialDefense': 85,
+            'speed': 5,
+        },
+    },
+    {
+        'id': 446.1,
+        'name': 'Elf Munchlax',
+        'type': [PokemonType.Normal],
+        'eggCycles': 40,
+        'levelType': LevelType.slow,
+        'exp': 78,
+        'catchRate': 50,
+        'evolutions': [new StoneEvolution('Elf Munchlax', 'Santa Snorlax', GameConstants.StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 135,
@@ -13561,6 +13610,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 120,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'White_DNA'},
     },
     {
         'id': 644,
@@ -13578,6 +13628,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Black_DNA'},
     },
     {
         'id': 645,
@@ -13621,6 +13672,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 297,
         'catchRate': 3,
+        'evolutions': [
+            new StoneEvolution('Kyurem', 'Kyurem (Black)', GameConstants.StoneType.Black_DNA),
+            new StoneEvolution('Kyurem', 'Kyurem (White)', GameConstants.StoneType.White_DNA),
+        ],
         'base': {
             'hitpoints': 125,
             'attack': 130,
@@ -15870,7 +15925,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 140,
         'catchRate': 120,
-        'evolutions': [new DungeonRestrictedLevelEvolution('Vast Poni Canyon','Charjabug','Vikavolt', 20)],
+        'evolutions': [new DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Charjabug', 'Vikavolt', 20)],
         'base': {
             'hitpoints': 57,
             'attack': 82,
@@ -20356,7 +20411,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 898.2,
-        'name': 'Ghost Rider Calyrex',
+        'name': 'Shadow Rider Calyrex',
         'type': [PokemonType.Psychic, PokemonType.Ghost],
         'base': {
             'hitpoints': 100,

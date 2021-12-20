@@ -3,6 +3,7 @@
 import Amount from '../wallet/Amount';
 import Settings from '../settings';
 import { Currency } from '../GameConstants';
+import Rand from './Rand';
 
 // eslint-disable-next-line import/prefer-default-export
 export function animateCurrency({ amount, currency }: Amount) {
@@ -17,7 +18,7 @@ export function animateCurrency({ amount, currency }: Amount) {
     }
 
     // Add some randomness to where it appears
-    const left = (target.position().left + Math.random() * (target.width() - 25)).toFixed(2);
+    const left = (target.position().left + Rand.float(target.width() - 25)).toFixed(2);
     const aniElement = document.createElement('p');
     aniElement.style.cssText = `z-index: 50; position: absolute; left: ${left}px; bottom: -20px; font-size: ${10 + 0.5 * Math.log(amount)}px;`;
     aniElement.innerText = `+${amount.toLocaleString('en-US')}`;

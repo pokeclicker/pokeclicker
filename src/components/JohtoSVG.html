@@ -16,8 +16,8 @@
     <!--Route 26-->
     <%- include('templates/mapRoute',
         { route: 26, region: 1
-        , width: 31, height: 3
-        , x: 93, y: 11
+        , width: 20, height: 3
+        , x: 93, y: 22
         , rotate: true
         })
      %>
@@ -120,7 +120,7 @@
     <!--Route 35-->
     <%- include('templates/mapRoute',
         { route: 35, region: 1
-        , width: 9.5, height: 3
+        , width: 7, height: 3
         , x: 24, y: 22
         , rotate: true
         })
@@ -355,8 +355,32 @@
     <!--Goldenrod City-->
     <%- include('templates/mapTown',
         { name: "Goldenrod City"
-        , x: 23, y: 31.5
-        , width: 5, height: 9.5
+        , x: 25, y: 31.5
+        , width: 5, height: 4.5
+        })
+     %>
+    
+    <!--Goldenrod City Extension-->
+    <%- include('templates/mapTown',
+        { name: "Goldenrod City"
+        , x: 23, y: 36
+        , width: 5, height: 5
+        })
+     %>
+
+    <!--Goldenrod City Extension-->
+    <%- include('templates/mapTown',
+        { name: "Goldenrod City"
+        , x: 22, y: 35
+        , width: 3, height: 1
+        })
+     %>
+
+    <!--Goldenrod City Extension-->
+    <%- include('templates/mapTown',
+        { name: "Goldenrod City"
+        , x: 27, y: 31
+        , width: 3, height: 0.5
         })
      %>
 
@@ -451,9 +475,7 @@
     <!--Slowpoke Well-->
     <%- include('templates/mapDungeon',
         { name: "Slowpoke Well"
-        , moveToTown: "Azalea Town"
-        , x: 31, y: 57
-        , width: 1, height: 1
+        , x: 32, y: 52
         })
      %>
 
@@ -515,6 +537,22 @@
          })
       %>
 
+    <!--Radio Tower-->
+    <%- include('templates/mapDungeon',
+        { name: "Radio Tower"
+        , x: 22, y: 29
+        , width: 3, height: 6
+        })
+     %>
+
+    <!--Radio Tower Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Radio Tower"
+        , x: 25, y: 29
+        , width: 2, height: 2.5
+        })
+     %>
+
     <!--Ice Path-->
     <%- include('templates/mapDungeon',
         { name: "Ice Path"
@@ -542,6 +580,20 @@
          , width: 1, height: 1
          })
       %>
+     <!--Dark Cave Extension-->
+     <%- include('templates/mapDungeon',
+         { name: "Dark Cave"
+         , x: 51, y: 16
+         , width: 4, height: 3
+         })
+      %>
+
+    <!--Victory Road Johto-->
+    <%- include('templates/mapDungeon',
+        { name: "Victory Road Johto"
+        , x: 93, y: 19
+        })
+     %>
 
     <!--Mt Silver-->
     <%- include('templates/mapDungeon',
@@ -570,6 +622,30 @@
         , x: 15, y: 23
         , width: 3, height: 4
         , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Olivine City') }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Underground Entrance"
+        , x: 39, y: 29
+        , width: 3, height: 4
+        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Farm"
+        , x: 36, y: 14
+        , width: 3, height: 3
+        , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Pokemon Day Care"
+        , x: 28, y: 38
+        , width: 4, height: 4
+        , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
         })
      %>
 

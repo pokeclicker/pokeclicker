@@ -75,9 +75,6 @@ class Party implements Feature {
 
         App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`);
         this._caughtPokemon.push(pokemon);
-
-        // Trigger sorting update of PokemonList UI
-        PartyController.sortList();
     }
 
     public gainExp(exp = 0, level = 1, trainer = false) {
@@ -85,7 +82,7 @@ class Party implements Feature {
         const trainerBonus = trainer ? 1.5 : 1;
         const expTotal = Math.floor(exp * level * trainerBonus * multBonus / 9);
 
-        const maxLevel = (App.game.badgeCase.badgeCount() + 2) * 10;
+        const maxLevel = App.game.badgeCase.maxLevel();
         for (const pokemon of this.caughtPokemon) {
             if (pokemon.level < maxLevel) {
                 pokemon.gainExp(expTotal);
@@ -115,9 +112,13 @@ class Party implements Feature {
         const pAttack = useBaseAttack ? pokemon.baseAttack : pokemon.attack;
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
 
+        // Check if the pokemon is in their native region
         if (!ignoreRegionMultiplier && nativeRegion != region && nativeRegion != GameConstants.Region.none) {
-            // Pokemon only retain a % of their total damage in other regions based on highest region.
-            multiplier = this.getRegionAttackMultiplier();
+            // Check if the challenge mode is active
+            if (App.game.challenges.list.regionalAttackDebuff.active()) {
+                // Pokemon only retain a % of their total damage in other regions based on highest region.
+                multiplier = this.getRegionAttackMultiplier();
+            }
         }
 
         // Check if the Pokemon is currently breeding (no attack)

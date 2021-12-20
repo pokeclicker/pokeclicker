@@ -1,8 +1,11 @@
 class Shop {
-
     constructor(
         public items: Item[],
-        public name?: string
+        public name = 'Poké Mart',
+        public href = '#shopModal'
     ) { }
-}
 
+    get displayName() {
+        return this.name;
+    }
+}

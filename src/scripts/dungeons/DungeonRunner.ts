@@ -28,9 +28,20 @@ class DungeonRunner {
             return false;
         }
         App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
+        // Reset any trainers/pokemon if there was one previously
+        DungeonBattle.trainer(null);
+        DungeonBattle.trainerPokemonIndex(0);
+        DungeonBattle.enemyPokemon(null);
 
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
-        DungeonRunner.map = new DungeonMap(GameConstants.DUNGEON_SIZE + player.region);
+        // Dungeon size increases with each region
+        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + player.region;
+        // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
+        dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toString().length - 1);
+        const flash = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() >= 200;
+        // Dungeon size minimum of MIN_DUNGEON_SIZE
+        DungeonRunner.map = new DungeonMap(Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize), flash);
+
         DungeonRunner.chestsOpened = 0;
         DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
@@ -68,33 +79,80 @@ class DungeonRunner {
         }
     }
 
+    public static lootInput() {
+        const generatedLoot = Rand.fromWeightedArray(DungeonRunner.dungeon.itemList, DungeonRunner.dungeon.lootWeightList);
+        return generatedLoot;
+    }
+
     public static openChest() {
         if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.chest) {
             return;
         }
 
         DungeonRunner.chestsOpened++;
-        const random: number = GameConstants.randomIntBetween(0, DungeonRunner.dungeon.itemList.length - 1);
-        const input = GameConstants.BattleItemType[DungeonRunner.dungeon.itemList[random]];
-        let amount = 1;
+        const loot = DungeonRunner.lootInput();
+        let amount = loot.amount || 1;
+
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
-            if (Math.random() < 0.5) {
-                amount += 1;
+            // Decreasing chance for rarer items (62.5% → 12.5%)
+            const magnetChance = 0.5 / (4 / (loot.weight + 1));
+            if (Rand.chance(magnetChance)) {
+                // Gain more items in higher regions
+                amount += Math.max(1, Math.round(Math.max(loot.weight,2) / 8 * (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 1)));
             }
         }
-        Notifier.notify({
-            message: `Found ${amount} ${GameConstants.humanifyString(input)} in a dungeon chest`,
-            type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.dungeon_item_found,
-        });
-        player.gainItem(input, amount);
+
+        DungeonRunner.gainLoot(loot.loot, amount);
+
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
-        if (DungeonRunner.chestsOpened == GameConstants.DUNGEON_CHEST_SHOW) {
+        if (DungeonRunner.chestsOpened == Math.floor(DungeonRunner.map.size / 3)) {
             DungeonRunner.map.showChestTiles();
         }
-        if (DungeonRunner.chestsOpened == GameConstants.DUNGEON_MAP_SHOW) {
+        if (DungeonRunner.chestsOpened == Math.ceil(DungeonRunner.map.size / 2)) {
             DungeonRunner.map.showAllTiles();
+        }
+    }
+
+    public static gainLoot(input, amount) {
+        if (typeof BerryType[input] == 'number') {
+            Notifier.notify({
+                message: `Found ${amount} × ${GameConstants.humanifyString(input)} Berry in a dungeon chest`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+            });
+
+            return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount);
+
+        } else if (typeof GameConstants.Pokeball[input] == 'number') {
+            Notifier.notify({
+                message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+            });
+
+            return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount);
+
+        }  else if (Underground.getMineItemByName(input) != undefined && Underground.getMineItemByName(input).isStone() === false) {
+            Notifier.notify({
+                message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+            });
+
+            return Underground.gainMineItem(Underground.getMineItemByName(input).id, amount);
+
+        }  else if (ItemList[input].constructor.name == 'EvolutionStone' || 'EggItem' || 'BattleItem' || 'Vitamin' || 'EnergyRestore') {
+            Notifier.notify({
+                message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+            });
+
+            return player.gainItem(ItemList[input].name, amount);
+
+        }  else {
+            return player.gainItem(ItemList['xAttack'], 1);
         }
     }
 
@@ -136,6 +194,7 @@ class DungeonRunner {
             DungeonRunner.dungeonFinished(true);
             GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]);
             MapHelper.moveToTown(DungeonRunner.dungeon.name);
+            DungeonRunner.dungeon.rewardFunction();
             // TODO award loot with a special screen
             Notifier.notify({
                 message: 'You have successfully completed the dungeon',

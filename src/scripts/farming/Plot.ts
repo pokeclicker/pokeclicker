@@ -10,6 +10,7 @@ class Plot implements Saveable {
 
     _isUnlocked: KnockoutObservable<boolean>;
     _berry: KnockoutObservable<BerryType>;
+    _lastPlanted: KnockoutObservable<BerryType>;
     _age: KnockoutObservable<number>;
 
     _mulch: KnockoutObservable<MulchType>;
@@ -40,6 +41,7 @@ class Plot implements Saveable {
     constructor(isUnlocked: boolean, berry: BerryType, age: number, mulch: MulchType, mulchTimeLeft: number) {
         this._isUnlocked = ko.observable(isUnlocked);
         this._berry = ko.observable(berry).extend({ numeric: 0 });
+        this._lastPlanted = ko.observable(berry).extend({ numeric: 0 });
         this._age = ko.observable(age).extend({ numeric: 3 });
         this._mulch = ko.observable(mulch).extend({ numeric: 0 });
         this._mulchTimeLeft = ko.observable(mulchTimeLeft).extend({ numeric: 3 });
@@ -285,6 +287,7 @@ class Plot implements Saveable {
      */
     plant(berry: BerryType): void {
         this.berry = berry;
+        this.lastPlanted = berry;
         this.age = 0;
         this.notifications = [];
         this._hasWarnedAboutToWither = false;
@@ -312,7 +315,7 @@ class Plot implements Saveable {
 
             // Check if berry replants itself
             const replantChance = this.berryData.replantRate * App.game.farming.getReplantMultiplier() * this.getReplantMultiplier();
-            if (Math.random() < replantChance) {
+            if (Rand.chance(replantChance)) {
                 this.age = 0;
                 this.notifications.push(FarmNotificationType.Replanted);
                 App.game.oakItems.use(OakItems.OakItem.Sprinklotad);
@@ -323,9 +326,9 @@ class Plot implements Saveable {
             this.notifications.push(FarmNotificationType.Withered);
 
             // Check for Kasib berry mutation/replant chance
-            if (App.game.farming.highestUnlockedBerry() > BerryType.Occa) {
+            if (App.game.farming.highestUnlockedBerry() >= BerryType.Occa) {
                 if (!App.game.farming.berryInFarm(BerryType.Colbur)) {
-                    if (Math.random() < 0.05) {
+                    if (Rand.chance(0.05)) {
                         this.notifications.push(FarmNotificationType.Mutated);
                         this.berry = BerryType.Kasib;
                         this.age = 0;
@@ -347,10 +350,10 @@ class Plot implements Saveable {
             return undefined;
         }
         // Chance to generate wandering Pokemon
-        if (Math.random() < GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]()) {
+        if (Rand.chance(GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]())) {
             // Get a random Pokemon from the list of possible encounters
-            const availablePokemon = this.berryData.wander.filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion());
-            const wanderPokemon = availablePokemon[Math.floor(Math.random() * availablePokemon.length)];
+            const availablePokemon: PokemonNameType[] = this.berryData.wander.filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion());
+            const wanderPokemon = Rand.fromArray(availablePokemon);
 
             const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
 
@@ -366,7 +369,7 @@ class Plot implements Saveable {
                 const emptyPlots = App.game.farming.plotList.filter(plot => plot.isUnlocked && plot.isEmpty());
                 // No Starf generation if no empty plots :(
                 if (emptyPlots.length) {
-                    const chosenPlot = emptyPlots[Math.floor(Math.random() * emptyPlots.length)];
+                    const chosenPlot = emptyPlots[Rand.floor(emptyPlots.length)];
                     chosenPlot.plant(BerryType.Starf);
                     App.game.farming.unlockBerry(BerryType.Starf);
                 }
@@ -494,12 +497,14 @@ class Plot implements Saveable {
         this.age = json['age'] ?? this.defaults.age;
         this.mulch = json['mulch'] ?? this.defaults.mulch;
         this.mulchTimeLeft = json['mulchTimeLeft'] ?? this.defaults.mulchTimeLeft;
+        this.lastPlanted = json['lastPlanted'] ?? json['berry'] ?? this.defaults.berry;
     }
 
     toJSON(): Record<string, any> {
         return {
             isUnlocked: this.isUnlocked,
             berry: this.berry,
+            lastPlanted: this.lastPlanted,
             age: this.age,
             mulch: this.mulch,
             mulchTimeLeft: this.mulchTimeLeft,
@@ -513,18 +518,18 @@ class Plot implements Saveable {
     public static findNearPlots(index: number): number[] {
         const plots = [];
 
-        const posX = index % Farming.PLOT_WIDTH;
-        const posY = (index - posX) / Farming.PLOT_HEIGHT;
+        const posX = index % GameConstants.FARM_PLOT_WIDTH;
+        const posY = (index - posX) / GameConstants.FARM_PLOT_HEIGHT;
 
         for (let y = posY - 1; y <= posY + 1; y++) {
             for (let x = posX - 1; x <= posX + 1; x++) {
-                if (y < 0 || y > Farming.PLOT_HEIGHT - 1 || x < 0 || x >  Farming.PLOT_WIDTH - 1) {
+                if (y < 0 || y > GameConstants.FARM_PLOT_HEIGHT - 1 || x < 0 || x >  GameConstants.FARM_PLOT_WIDTH - 1) {
                     continue;
                 }
                 if (y === posY && x === posX) {
                     continue;
                 }
-                const id = y * Farming.PLOT_HEIGHT + x;
+                const id = y * GameConstants.FARM_PLOT_HEIGHT + x;
                 plots.push(id);
             }
         }
@@ -537,14 +542,14 @@ class Plot implements Saveable {
      * @param index The plot index
      */
     public static findPlusPlots(index: number, filter?: (n: number) => boolean): number[] {
-        const posX = index % Farming.PLOT_WIDTH;
-        const posY = (index - posX) / Farming.PLOT_HEIGHT;
+        const posX = index % GameConstants.FARM_PLOT_WIDTH;
+        const posY = (index - posX) / GameConstants.FARM_PLOT_HEIGHT;
 
         const possiblePlots = [[posY - 1, posX], [posY, posX - 1], [posY, posX + 1], [posY + 1, posX]];
 
         return possiblePlots.filter(([y, x]) => {
-            return y >= 0 && y < Farming.PLOT_HEIGHT && x >= 0 && x < Farming.PLOT_WIDTH;
-        }).map(([y, x]) => y * Farming.PLOT_HEIGHT + x);
+            return y >= 0 && y < GameConstants.FARM_PLOT_HEIGHT && x >= 0 && x < GameConstants.FARM_PLOT_WIDTH;
+        }).map(([y, x]) => y * GameConstants.FARM_PLOT_HEIGHT + x);
     }
 
     get berryData(): Berry {
@@ -566,6 +571,14 @@ class Plot implements Saveable {
 
     set berry(berry: BerryType) {
         this._berry(berry);
+    }
+
+    get lastPlanted(): BerryType {
+        return this._lastPlanted();
+    }
+
+    set lastPlanted(berry: BerryType) {
+        this._lastPlanted(berry);
     }
 
     get age(): number {

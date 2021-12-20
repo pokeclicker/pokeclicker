@@ -23,7 +23,10 @@ class ShopHandler {
     public static buyItem() {
         const item: Item = this.shopObservable().items[ShopHandler.selected()];
         item.buy(this.amount());
-        ShopHandler.resetAmount();
+
+        if (Settings.getSetting('resetShopAmountOnPurchase').observableValue()) {
+            ShopHandler.resetAmount();
+        }
     }
 
     public static resetAmount() {
@@ -60,16 +63,6 @@ class ShopHandler {
     //#endregion
 
     //#region UI
-
-    public static getShopName(): string {
-        if (this.shopObservable().name) {
-            return this.shopObservable().name;
-        }
-        if (player.town()) {
-            return `${player.town().name} Shop`;
-        }
-        return 'Shop';
-    }
 
     public static calculateCss(i: number): string {
         if (this.selected() == i) {

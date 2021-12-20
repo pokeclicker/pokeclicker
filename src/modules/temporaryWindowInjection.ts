@@ -17,6 +17,7 @@ import SettingOption from './settings/SettingOption';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
 import SeededRand from './utilities/SeededRand';
+import Rand from './utilities/Rand';
 import Settings from './settings/index';
 import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
 import NotificationConstants from './notifications/NotificationConstants';
@@ -33,6 +34,8 @@ import Challenges from './challenges/Challenges';
 import LevelType, { levelRequirements } from './party/LevelType';
 import WalletClasses from './wallet/inject';
 import GenericProxy from './utilities/GenericProxy';
+import { SpriteCredits, CodeCredits } from './Credits';
+import * as modalUtils from './utilities/Modal';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -53,6 +56,7 @@ Object.assign(<any>window, {
     WeatherType,
     Weather,
     SeededRand,
+    Rand,
     Settings,
     NotificationConstants,
     Notifier,
@@ -71,4 +75,7 @@ Object.assign(<any>window, {
     levelRequirements,
     ...WalletClasses,
     GenericProxy,
+    SpriteCredits,
+    CodeCredits,
+    modalUtils,
 });

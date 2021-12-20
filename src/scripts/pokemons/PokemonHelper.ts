@@ -204,13 +204,13 @@ class PokemonHelper {
         const shops = [];
         Object.entries(TownList).forEach(([townName, town]) => {
             // Check if the shop has items
-            if (town.shop && town.shop.items) {
+            if (town.shops && town.shops.find(s => s.items)) {
                 // If we only want to check up to a maximum region
                 const region = town.region;
                 if (maxRegion != GameConstants.Region.none && region > maxRegion) {
                     return false;
                 }
-                const hasPokemon = town.shop.items.find(item => item.name == pokemonName);
+                const hasPokemon = town.shops.find(s => s.items?.find(item => item.name == pokemonName));
                 if (hasPokemon) {
                     shops.push(townName);
                 }
@@ -261,8 +261,9 @@ class PokemonHelper {
     }
 
     public static getPokemonSafariChance(pokemonName: PokemonNameType): number {
+        const safariWeight = SafariPokemon.list.reduce((sum, p) => sum += p.weight, 0);
         const safariPokemon = SafariPokemon.list.find(p => p.name == pokemonName);
-        return safariPokemon ? +((SafariPokemon.calcPokemonWeight(safariPokemon) / SafariPokemon.listWeight()) * 100).toFixed(2) : 0;
+        return safariPokemon ? +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2) : 0;
     }
 
     public static getPokemonPrevolution(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<Evolution> {

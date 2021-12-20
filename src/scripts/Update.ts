@@ -510,6 +510,63 @@ class Update implements Saveable {
                 milestones: milestones.filter(([stage]) => stage <= highestStageCompleted),
             };
         },
+
+        '0.8.9': ({ playerData, saveData }) => {
+            // Retroactively track proteins obtained
+            let proteinsObtained = 0;
+
+            // Only update if save is from v0.6.0+ (when proteins were added)
+            if (this.minUpdateVersion('0.6.0', saveData)) {
+                saveData.party.caughtPokemon.forEach(p => {
+                    proteinsObtained += p.proteinsUsed;
+                });
+
+                proteinsObtained += playerData._itemList.Protein;
+            }
+
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalProteinsObtained: proteinsObtained,
+            };
+
+            // Only run if save is from v0.8.7 (a forked version which is breaking stuff)
+            if (saveData.update.version == '0.8.7') {
+                // Check if the save has the Vivillon quest line, otherwise it's not from the main website
+                const questLines = saveData.quests?.questLines?.length || 0;
+                if (questLines < 4) {
+                    Notifier.notify({
+                        title: 'Importing this save will cause errors!',
+                        message: 'Please only use saves from the main website https://pokeclicker.com/',
+                        type: NotificationConstants.NotificationOption.danger,
+                        timeout: GameConstants.DAY,
+                    });
+                    throw new Error('Importing this save will cause errors');
+                }
+            }
+        },
+
+        '0.8.12': async ({ playerData, saveData }) => {
+            // Add Team Rockets Hideout
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 19);
+            // Add Radio Tower
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 20);
+            // Add Victory Road Johto
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 23);
+
+            // If the player has the Fog Badge already
+            // Not using game constants incase the badge value isn't 17 in the future
+            if (saveData.badgeCase[17]) {
+                saveData.quests.questLines.push({state: 1, name: 'Team Rocket Again', quest: 0});
+            }
+
+            // Check if player wants to activate the new challenge modes
+            if (!await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be changed later)', confirm: 'enable', cancel: 'disable' })) {
+                App.game.challenges.list.regionalAttackDebuff.disable();
+            }
+            if (!await Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be changed later)', confirm: 'enable', cancel: 'disable' })) {
+                App.game.challenges.list.requireCompletePokedex.disable();
+            }
+        },
     };
 
     constructor() {
@@ -665,6 +722,7 @@ class Update implements Saveable {
                                     this.automaticallyDownloadBackup(backupButton, { disableAutoDownloadBackupSaveOnUpdate: false });
                                     localStorage.removeItem(`player${Save.key}`);
                                     localStorage.removeItem(`save${Save.key}`);
+                                    localStorage.removeItem(`settings${Save.key}`);
                                     location.reload();
                                 }
                             });
@@ -804,7 +862,7 @@ class Update implements Saveable {
     getSettingsData() {
         let settingsData: any;
         try {
-            settingsData = JSON.parse(localStorage.settings);
+            settingsData = JSON.parse(localStorage.getItem(`settings${Save.key}`) || localStorage.settings);
         } catch (err) {
             console.warn('Error getting settings data', err);
         } finally {
@@ -814,7 +872,7 @@ class Update implements Saveable {
 
     setSettingsData(settingsData: any) {
         try {
-            localStorage.settings = JSON.stringify(settingsData);
+            localStorage.setItem(`settings${Save.key}`, JSON.stringify(settingsData));
         } catch (err) {
             console.error('Error setting settings data', err);
         }
