@@ -10,6 +10,25 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.12
+    new ChangelogUpdate('v0.8.12', new Date(2021, 11, 20)),
+    new Changelog(changelogType.NEW, 'Added 2 new optional (recommended) challenges'),
+    new Changelog(changelogType.NEW, 'Added 2 new x-mas Pokémon'),
+    new Changelog(changelogType.NEW, 'Added new Johto questline'),
+    new Changelog(changelogType.NEW, 'Added new Johto trainers'),
+    new Changelog(changelogType.NEW, 'Added new Johto dungeons'),
+    new Changelog(changelogType.NEW, 'Kyurem forms are now obtainable'),
+    new Changelog(changelogType.NEW, 'Better looting in dungeons'),
+    new Changelog(changelogType.NEW, 'Added a Roamer encounter increase boost to Jaboca berries'),
+    new Changelog(changelogType.CHANGE, 'Updated Logbook encounter message formatting'),
+    new Changelog(changelogType.CHANGE, 'Reduced Plume Fossil sizing'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Castform encounters'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some Pokémons encounter locations'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some items purchase locations'),
+    new Changelog(changelogType.CHANGE, 'Shuffled around some item orders in menus'),
+    new Changelog(changelogType.FIXED, 'Minor text fixes'),
+    new Changelog(changelogType.FIXED, 'Being able to go into Bait debt in the Safari Zone'),
+
     // v0.8.11
     new ChangelogUpdate('v0.8.11', new Date(2021, 10, 19)),
     new Changelog(changelogType.CHANGE, 'Trainers and Background will now show a list of images when changing them on your profile'),
