@@ -20,6 +20,8 @@ interface DetailedPokemon {
 interface Loot {
     loot: string,
     weight?: number,
+    requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
+    amount?: number,
 }
 
 type Enemy = PokemonNameType | DetailedPokemon | DungeonTrainer;
@@ -132,9 +134,12 @@ class Dungeon {
      */
     get lootWeightList(): number[] {
         return this.itemList.map((loot) => {
+            if (loot.requirement && !loot.requirement.isCompleted()) {
+                return 0;
+            }
             // Minimum of 1 times cleared for division
             const timesCleared = Math.max(1, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]());
-            // Caclculate total weight based on times cleared, minimum weight being original number specified
+            // Calculate total weight based on times cleared, minimum weight being original number specified
             return Math.max(loot.weight, Math.pow(10, loot.weight) / timesCleared) + 1 || 1;
         });
     }
