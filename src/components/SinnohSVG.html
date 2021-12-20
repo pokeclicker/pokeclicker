@@ -836,7 +836,7 @@
          { name: "Distortion World"
          , x: 39, y: 26
          , width: 5, height: 5
-         , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Snowpoint City')]() >= 1 ? 'completed' : 'locked'}"
+         , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: MapHelper.calculateTownCssClass('Distortion World') }"
          , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Snowpoint City')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]() == 0"
          , image: "assets/images/distortionworld.png"
          })
@@ -846,7 +846,7 @@
          { name: "Distortion World"
          , x: 74, y: 39
          , width: 5, height: 5
-         , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Snowpoint City')]() >= 1 ? 'completed' : 'locked'}"
+         , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: MapHelper.calculateTownCssClass('Distortion World') }"
          , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]() >= 1"
          , image: "assets/images/distortionworld.png"
          })
