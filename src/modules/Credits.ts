@@ -25,7 +25,7 @@ export const SpriteCredits: Credit[] = [
             'Ilima',
             'Hala',
             'Lana',
-            'Ikawe',
+            'Kiawe',
             'Mallow',
             'Olivia',
             'Sophocles',

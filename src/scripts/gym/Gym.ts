@@ -1316,8 +1316,8 @@ gymList['Lana\'s Trial'] = new Gym(
         achievement: false,
     }
 );
-gymList['Ikawe\'s Trial'] = new Gym(
-    'Ikawe',
+gymList['Kiawe\'s Trial'] = new Gym(
+    'Kiawe',
     'Wela Volcano Park',
     [],
     BadgeEnums.FiriumZ,
