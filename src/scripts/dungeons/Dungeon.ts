@@ -5183,7 +5183,7 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
     96500, 201, 35,
     () => {
         if (!App.game.badgeCase.hasBadge(BadgeEnums.FiriumZ)) {
-            GymRunner.gymObservable(gymList['Ikawe\'s Trial']);
+            GymRunner.gymObservable(gymList['Kiawe\'s Trial']);
             App.game.badgeCase.gainBadge(BadgeEnums.FiriumZ);
             $('#receiveBadgeModal').modal('show');
         }
