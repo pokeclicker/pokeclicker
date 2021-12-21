@@ -429,6 +429,7 @@ const JohtoBerryMaster = new BerryMasterShop([
     ItemList['Surprise_Mulch'],
     ItemList['Amaze_Mulch'],
     ItemList['Berry_Shovel'],
+    ItemList['Mulch_Shovel'],
     ItemList['Squirtbottle'],
     ItemList['FarmHandBailey'],
     ItemList['ChopleBerry'],
@@ -720,6 +721,7 @@ const HoennBerryMaster = new BerryMasterShop([
     ItemList['Surprise_Mulch'],
     ItemList['Amaze_Mulch'],
     ItemList['Berry_Shovel'],
+    ItemList['Mulch_Shovel'],
     ItemList['Sprinklotad'],
     ItemList['FarmHandKerry'],
 ]);
@@ -1085,6 +1087,7 @@ const SinnohBerryMaster = new BerryMasterShop([
     ItemList['Surprise_Mulch'],
     ItemList['Amaze_Mulch'],
     ItemList['Berry_Shovel'],
+    ItemList['Mulch_Shovel'],
     ItemList['FarmHandRiley'],
 ]);
 

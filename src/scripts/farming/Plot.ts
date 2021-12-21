@@ -487,6 +487,11 @@ class Plot implements Saveable {
         this.berryData.aura?.emitAura(index);
     }
 
+    clearMulch(): void {
+        this.mulch = MulchType.None;
+        this.mulchTimeLeft = 0;
+    }
+
     fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
