@@ -137,6 +137,14 @@ export const SpriteCredits: Credit[] = [
         // NOTES: Found on DeviantArt About page: "All Sprites here are free to use as long you give credit to me"
     },
     {
+        name: 'nileplumb',
+        link: 'https://www.deviantart.com/nileplumb',
+        resources: [
+            'Furfrou Trim Shop Icons',
+        ],
+        // NOTES: Granted permission on devianart to NiceDice via PN
+    },
+    {
         name: 'procompyart',
         link: 'https://www.instagram.com/procompyart/',
         resources: [
