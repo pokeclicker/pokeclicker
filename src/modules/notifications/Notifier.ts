@@ -13,14 +13,16 @@ export default class Notifier {
         time = 'just now',
         sound = null,
         setting = null,
+        image = null,
     }: {
         message: string;
         type?: NotificationOption;
         title?: string;
         timeout?: number;
-        time?: string,
-        sound?: Sound,
-        setting?: BooleanSetting,
+        time?: string;
+        sound?: Sound;
+        setting?: BooleanSetting;
+        image?: string;
     }): void {
         $(document).ready(() => {
             // If we have sounds enabled for this, play it now
@@ -37,11 +39,13 @@ export default class Notifier {
             const toastID = Rand.string(7);
             const toastHTML = `<div id="${toastID}" class="toast bg-${NotificationOption[type]}" data-autohide="false">
                 ${title ? `<div class="toast-header">
+                    ${image ? `<img src="${image}" class="icon" />` : ''}
                     <strong class="mr-auto text-primary">${title || ''}</strong>
                     <small class="text-muted">${time}</small>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">×</button>
                 </div>` : ''}
                 <div class="toast-body text-light">
+                    ${!title && image ? `<img src="${image}" class="icon" />` : ''}
                     ${message.replace(/\n/g, '<br/>')}
                     ${title ? '' : '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast">×</button>'}
                 </div>
