@@ -52,20 +52,20 @@ gymList['Champion Blue'] = new Champion(
     [new GymBadgeRequirement(BadgeEnums.Elite_Lance)],
     // Bulbasaur
     [
+        new GymPokemon('Gyarados', 65340, 61),
         new GymPokemon('Exeggutor', 57520, 59),
-        new GymPokemon('Gyarados', 63040, 61),
         new GymPokemon('Charizard', 70000, 63),
     ],
     // Charmander
     [
-        new GymPokemon('Arcanine', 65340, 59),
-        new GymPokemon('Exeggutor', 57520, 61),
+        new GymPokemon('Exeggutor', 65340, 61),
+        new GymPokemon('Arcanine', 57520, 59),
         new GymPokemon('Blastoise', 70000, 63),
     ],
     // Squirtle/Pikachu
     [
-        new GymPokemon('Gyarados', 63040, 59),
         new GymPokemon('Arcanine', 65340, 61),
+        new GymPokemon('Gyarados', 57520, 59),
         new GymPokemon('Venusaur', 70000, 63),
     ]
 );

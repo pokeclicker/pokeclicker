@@ -263,12 +263,10 @@ const dungeonList: { [dungeonName: string]: Dungeon } = {};
 
 dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
     [
-        {pokemon: 'Caterpie', options: { weight: 2.67 }},
-        {pokemon: 'Metapod', options: { weight: 2.67 }},
-        {pokemon: 'Weedle', options: { weight: 2.67 }},
-        {pokemon: 'Kakuna', options: { weight: 2.67 }},
-        {pokemon: 'Pidgey', options: { weight: 2.67 }},
-        {pokemon: 'Pidgeotto', options: { weight: 2.67 }},
+        {pokemon: 'Caterpie', options: { weight: 4 }},
+        {pokemon: 'Metapod', options: { weight: 4 }},
+        {pokemon: 'Weedle', options: { weight: 4 }},
+        {pokemon: 'Kakuna', options: { weight: 4 }},
         new DungeonTrainer('Bug Catcher',
             [
                 new GymPokemon('Weedle', 50, 6),
@@ -329,11 +327,10 @@ dungeonList['Digletts Cave'] = new Dungeon('Digletts Cave',
 
 dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
     [
-        {pokemon: 'Sandshrew', options: { weight: 8.8 }},
-        {pokemon: 'Clefairy', options: { weight: 8.8 }},
-        {pokemon: 'Zubat', options: { weight: 8.8 }},
-        {pokemon: 'Paras', options: { weight: 8.8 }},
-        {pokemon: 'Geodude', options: { weight: 8.8 }},
+        {pokemon: 'Clefairy', options: { weight: 11 }},
+        {pokemon: 'Zubat', options: { weight: 11 }},
+        {pokemon: 'Paras', options: { weight: 11 }},
+        {pokemon: 'Geodude', options: { weight: 11 }},
         new DungeonTrainer('Bug Catcher',
             [
                 new GymPokemon('Weedle', 75, 11),
@@ -427,9 +424,10 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
 
 dungeonList['Rock Tunnel'] = new Dungeon('Rock Tunnel',
     [
-        {pokemon: 'Zubat', options: { weight: 20 }},
-        {pokemon: 'Geodude', options: { weight: 20 }},
-        {pokemon: 'Machop', options: { weight: 20 }},
+        {pokemon: 'Zubat', options: { weight: 14 }},
+        {pokemon: 'Mankey', options: { weight: 14 }},
+        {pokemon: 'Geodude', options: { weight: 14 }},
+        {pokemon: 'Machop', options: { weight: 14 }},
         new DungeonTrainer('PokéManiac',
             [
                 new GymPokemon('Cubone', 500, 23),
@@ -529,7 +527,7 @@ dungeonList['Rock Tunnel'] = new Dungeon('Rock Tunnel',
 );
 
 dungeonList['Power Plant'] = new Dungeon('Power Plant',
-    ['Pikachu', 'Raichu', 'Magnemite', 'Magneton', 'Grimer', 'Muk', 'Voltorb', 'Electrode'],
+    ['Pikachu', 'Magnemite', 'Magneton', 'Voltorb', 'Electrode'],
     [
         {loot: 'Lucky_incense', weight: 4},
         {loot: 'Token_collector', weight: 4},
@@ -635,7 +633,7 @@ dungeonList['Pokemon Tower'] = new Dungeon('Pokemon Tower',
 );
 
 dungeonList['Seafoam Islands'] = new Dungeon('Seafoam Islands',
-    ['Zubat', 'Golbat', 'Goldeen', 'Poliwag', 'Magikarp', 'Slowpoke', 'Slowbro', 'Tentacool', 'Krabby', 'Kingler', 'Staryu'],
+    ['Zubat', 'Golbat', 'Psyduck', 'Golduck', 'Slowpoke', 'Slowbro', 'Krabby', 'Horsea', 'Magikarp'],
     [
         {loot: 'Item_magnet', weight: 4},
         {loot: 'xAttack', weight: 4},
@@ -654,14 +652,15 @@ dungeonList['Seafoam Islands'] = new Dungeon('Seafoam Islands',
 
 dungeonList['Pokemon Mansion'] = new Dungeon('Pokemon Mansion',
     [
-        {pokemon: 'Rattata', options: { weight: 3.5 }},
-        {pokemon: 'Raticate', options: { weight: 3.5 }},
-        {pokemon: 'Growlithe', options: { weight: 3.5 }},
-        {pokemon: 'Grimer', options: { weight: 3.5 }},
-        {pokemon: 'Muk', options: { weight: 3.5 }},
-        {pokemon: 'Koffing', options: { weight: 3.5 }},
-        {pokemon: 'Weezing', options: { weight: 3.5 }},
-        {pokemon: 'Ditto', options: { weight: 3.5 }},
+        {pokemon: 'Rattata', options: { weight: 3.11 }},
+        {pokemon: 'Raticate', options: { weight: 3.11 }},
+        {pokemon: 'Vulpix', options: { weight: 3.11 }},
+        {pokemon: 'Growlithe', options: { weight: 3.11 }},
+        {pokemon: 'Grimer', options: { weight: 3.11 }},
+        {pokemon: 'Muk', options: { weight: 3.11 }},
+        {pokemon: 'Koffing', options: { weight: 3.11 }},
+        {pokemon: 'Weezing', options: { weight: 3.11 }},
+        {pokemon: 'Ditto', options: { weight: 3.11 }},
         new DungeonTrainer('Youngster',
             [
                 new GymPokemon('Ekans', 1500, 33),
@@ -716,11 +715,15 @@ dungeonList['Pokemon Mansion'] = new Dungeon('Pokemon Mansion',
 
 dungeonList['Victory Road'] = new Dungeon('Victory Road',
     [
-        {pokemon: 'Zubat', options: { weight: 8.8 }},
-        {pokemon: 'Golbat', options: { weight: 8.8 }},
-        {pokemon: 'Geodude', options: { weight: 8.8 }},
-        {pokemon: 'Graveler', options: { weight: 8.8 }},
-        {pokemon: 'Onix', options: { weight: 8.8 }},
+        {pokemon: 'Arbok', options: { weight: 4.88 }},
+        {pokemon: 'Sandslash', options: { weight: 4.88 }},
+        {pokemon: 'Zubat', options: { weight: 4.88 }},
+        {pokemon: 'Golbat', options: { weight: 4.88 }},
+        {pokemon: 'Primeape', options: { weight: 4.88 }},
+        {pokemon: 'Machop', options: { weight: 4.88 }},
+        {pokemon: 'Geodude', options: { weight: 4.88 }},
+        {pokemon: 'Onix', options: { weight: 4.88 }},
+        {pokemon: 'Marowak', options: { weight: 4.88 }},
         new DungeonTrainer('Cooltrainer',
             [
                 new GymPokemon('Persian', 2000, 42),
@@ -822,7 +825,7 @@ dungeonList['Victory Road'] = new Dungeon('Victory Road',
 );
 
 dungeonList['Cerulean Cave'] = new Dungeon('Cerulean Cave',
-    ['Arbok', 'Raichu', 'Sandslash', 'Golbat', 'Gloom', 'Parasect', 'Venomoth', 'Weepinbell', 'Graveler', 'Ditto', 'Chansey', 'Magikarp', 'Poliwag', 'Goldeen', 'Seaking'],
+    ['Golbat', 'Parasect', 'Psyduck', 'Golduck', 'Primeape', 'Poliwag', 'Machoke', 'Slowpoke', 'Slowbro', 'Magneton', 'Electrode', 'Goldeen', 'Magikarp', 'Ditto'],
     [
         {loot: 'Pokeball', weight: 4},
         {loot: 'Token_collector', weight: 4},
@@ -839,7 +842,7 @@ dungeonList['Cerulean Cave'] = new Dungeon('Cerulean Cave',
     ],
     28735,
     [
-        new DungeonBossPokemon('Rhydon', 183675, 60),
+        new DungeonBossPokemon('Kadabra', 183675, 60),
         new DungeonBossPokemon('Mewtwo', 255512, 100),
     ],
     2500, 20, 55
