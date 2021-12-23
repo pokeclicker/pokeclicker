@@ -1103,7 +1103,7 @@ const SandgemBeachcomber = new NPC('Beachcomber', [
     'Just last week a weird blue egg with a red center showed up. I went to go pick it up, but then it hatched! I was so surprised that the little blue Pokémon just hopped right back into the ocean. Who knows, maybe you’ll find it roaming around the region!',
 ]);
 
-const FloaramaFlowerGirl = new NPC('Flower Girl', [
+const FloaromaFlowerGirl = new NPC('Flower Girl', [
     'Something amazing just happened!',
     'My friend was taking their Eevee on a walk through Eterna Forest, and it suddenly evolved!',
     'Can you believe that?',
@@ -1186,7 +1186,7 @@ TownList['Floaroma Town'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ravaged Path'))],
-        npcs: [FloaramaFlowerGirl],
+        npcs: [FloaromaFlowerGirl],
     }
 );
 TownList['Eterna City'] = new Town(
