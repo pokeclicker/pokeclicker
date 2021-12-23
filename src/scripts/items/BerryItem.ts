@@ -1,11 +1,11 @@
 ///<reference path="Item.ts"/>
 
 class BerryItem extends Item {
-    public berry: BerryType;
+    public berryName: string;
 
-    constructor(public berryName: string, basePrice: number, currency = GameConstants.Currency.farmPoint, public berryReq?: BerryType) {
-        super(`${berryName}Berry`, basePrice, currency, { maxAmount: 1 }, `${berryName} Berry`);
-        this.berry = BerryType[berryName];
+    constructor(public berry: BerryType, basePrice: number, currency = GameConstants.Currency.farmPoint, public berryReq?: BerryType) {
+        super(`${BerryType[berry]}Berry`, basePrice, currency, { maxAmount: 1 }, `${BerryType[berry]} Berry`);
+        this.berryName = BerryType[berry];
     }
 
     gain(amt: number) {
@@ -28,7 +28,7 @@ class BerryItem extends Item {
     }
 }
 
-ItemList['ChopleBerry']   = new BerryItem('Chople', 10000, GameConstants.Currency.farmPoint, BerryType.Spelon);
-ItemList['KebiaBerry']   = new BerryItem('Kebia', 10000, GameConstants.Currency.farmPoint, BerryType.Pamtre);
-ItemList['ShucaBerry']   = new BerryItem('Shuca', 10000, GameConstants.Currency.farmPoint, BerryType.Watmel);
-ItemList['ChartiBerry']   = new BerryItem('Charti', 10000, GameConstants.Currency.farmPoint, BerryType.Cornn);
+ItemList['ChopleBerry']   = new BerryItem(BerryType.Chople, 10000, GameConstants.Currency.farmPoint, BerryType.Spelon);
+ItemList['KebiaBerry']   = new BerryItem(BerryType.Kebia, 10000, GameConstants.Currency.farmPoint, BerryType.Pamtre);
+ItemList['ShucaBerry']   = new BerryItem(BerryType.Shuca, 10000, GameConstants.Currency.farmPoint, BerryType.Watmel);
+ItemList['ChartiBerry']   = new BerryItem(BerryType.Charti, 10000, GameConstants.Currency.farmPoint, BerryType.Cornn);
