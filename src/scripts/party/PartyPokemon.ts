@@ -87,7 +87,7 @@ class PartyPokemon implements Saveable {
             }
         }
         if (possibleEvolutions.length !== 0) {
-            return GameConstants.randomElement(possibleEvolutions).evolve();
+            return Rand.fromArray(possibleEvolutions).evolve();
         }
         return false;
     }

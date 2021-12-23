@@ -113,9 +113,9 @@ class Battle {
         if (enemyPokemon.shiny) {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[enemyPokemon.id]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
-            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a wild shiny ${enemyPokemon.name} on route ${player.route()}.`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a wild shiny ${enemyPokemon.name}.`);
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id) && enemyPokemon.health()) {
-            App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${enemyPokemon.name} on route ${player.route()}.`);
+            App.game.logbook.newLog(LogBookTypes.NEW, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a wild ${enemyPokemon.name}.`);
         }
     }
 
@@ -142,9 +142,7 @@ class Battle {
             this.catching(false);
             return;
         }
-
-        const random: number = Math.floor(Math.random() * 100);
-        if (random <= this.catchRateActual()) { // Caught
+        if (Rand.chance(this.catchRateActual() / 100)) { // Caught
             this.catchPokemon(enemyPokemon);
         } else if (enemyPokemon.shiny) { // Failed to catch, Shiny
             App.game.logbook.newLog(LogBookTypes.ESCAPED, `The Shiny ${enemyPokemon.name} escaped!`);
@@ -163,9 +161,9 @@ class Battle {
     }
 
     static gainItem() {
-        const p = player.route() / 1600 + 0.009375;
+        const p = MapHelper.normalizeRoute(player.route(), player.region) / 1600 + 0.009375;
 
-        if (Math.random() < p) {
+        if (Rand.chance(p)) {
             App.game.farming.gainRandomBerry();
         }
     }

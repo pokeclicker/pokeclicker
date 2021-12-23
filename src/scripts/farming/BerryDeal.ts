@@ -13,7 +13,7 @@ class BerryDeal {
     }
 
     private static randomBerry(berryList: BerryType[]): BerryType {
-        return berryList[Math.floor(berryList.length * SeededRand.next())];
+        return SeededRand.fromArray(berryList);
     }
 
     private static randomBattleItem(): Item {

@@ -235,7 +235,6 @@ class QuestLineHelper {
         // Add quest to quest line
         App.game.quests.questLines().push(VivillonQuestLine);
     }
-
     public static createUltraBeastQuestLine() {
 
         const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts');
@@ -312,6 +311,28 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(UltraBeastQuestLine);
 
+
+    public static createRocketjohtoQuestLine() {
+        const RocketjohtoQuestLine = new QuestLine('Team Rocket Again', 'Team Rocket is up to no good again!');
+
+        const clearTeamRocketHideout = new CustomQuest(1, 0, 'Clear the Team Rockets Hideout dungeon in Mahogany Town', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Rockets Hideout')](), 0);
+        RocketjohtoQuestLine.addQuest(clearTeamRocketHideout);
+
+        const RadiotowerReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1);
+            Notifier.notify({
+                title: RocketjohtoQuestLine.name,
+                message: 'The grateful radio director gave you a Masterball!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearRadioTower = new CustomQuest(1, RadiotowerReward, 'Clear the Radio Tower dungeon in Goldenrod City', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')](), 0);
+        RocketjohtoQuestLine.addQuest(clearRadioTower);
+
+        App.game.quests.questLines().push(RocketjohtoQuestLine);
+
     }
 
     public static isQuestLineCompleted(name: string) {
@@ -325,5 +346,7 @@ class QuestLineHelper {
         this.createUndergroundQuestLine();
         this.createVivillonQuestLine();
         this.createUltraBeastQuestLine();
+        this.createRocketjohtoQuestLine();
+
     }
 }

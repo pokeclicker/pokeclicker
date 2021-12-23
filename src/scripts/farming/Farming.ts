@@ -51,9 +51,11 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Attract] = ko.observable<number>(1);
         this.externalAuras[AuraType.Egg] = ko.observable<number>(1);
         this.externalAuras[AuraType.Shiny] = ko.observable<number>(1);
+        this.externalAuras[AuraType.Roaming] = ko.observable<number>(1);
 
         this.multiplier.addBonus('shiny', () => this.externalAuras[AuraType.Shiny]());
         this.multiplier.addBonus('eggStep', () => this.externalAuras[AuraType.Egg]());
+        this.multiplier.addBonus('roaming', () => this.externalAuras[AuraType.Roaming]());
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {
@@ -364,7 +366,7 @@ class Farming implements Feature {
             [
                 'The cluster of drupelets that make up this Berry pop rhythmically if the Berry is handled roughly.',
                 'The sound of these Berries attracts wild Pokémon.',
-            ], undefined, ['Flabébé (Yellow)']);
+            ], new Aura(AuraType.Roaming, [1.005, 1.01, 1.015]), ['Flabébé (Yellow)']);
         this.berryData[BerryType.Rowap]     = new Berry(BerryType.Rowap,    [5760, 9000, 14040, 21240, 42480],
             1, 0.05, 2900, 20,
             [10, 0, 0, 0, 40], BerryColor.Blue,
@@ -840,14 +842,14 @@ class Farming implements Feature {
         this.mutations.push(new BlankMutation(0, BerryType.Kasib,
             {
                 hint: 'I\'ve heard of a Berry that only appears after a Berry plant has withered, but is repelled by Colbur Plants.',
-                unlockReq: () => App.game.farming.highestUnlockedBerry() > BerryType.Occa,
+                unlockReq: () => App.game.farming.highestUnlockedBerry() >= BerryType.Occa,
             }));
 
         // Starf
         this.mutations.push(new BlankMutation(0, BerryType.Starf,
             {
                 hint: 'I\'ve heard of a Berry that only appears after a Shiny Pokémon wanders near open soil.',
-                unlockReq: () => App.game.farming.highestUnlockedBerry() > BerryType.Occa,
+                unlockReq: () => App.game.farming.highestUnlockedBerry() >= BerryType.Occa,
             }));
 
         //#endregion
@@ -990,6 +992,7 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Attract](1);
         this.externalAuras[AuraType.Egg](1);
         this.externalAuras[AuraType.Shiny](1);
+        this.externalAuras[AuraType.Roaming](1);
         this.plotList.forEach(plot => plot.clearAuras());
 
         // Handle Boost Auras first

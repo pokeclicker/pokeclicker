@@ -261,8 +261,9 @@ class PokemonHelper {
     }
 
     public static getPokemonSafariChance(pokemonName: PokemonNameType): number {
+        const safariWeight = SafariPokemon.list.reduce((sum, p) => sum += p.weight, 0);
         const safariPokemon = SafariPokemon.list.find(p => p.name == pokemonName);
-        return safariPokemon ? +((SafariPokemon.calcPokemonWeight(safariPokemon) / SafariPokemon.listWeight()) * 100).toFixed(2) : 0;
+        return safariPokemon ? +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2) : 0;
     }
 
     public static getPokemonPrevolution(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<Evolution> {

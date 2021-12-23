@@ -14,8 +14,10 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
                You are the new Pokémon League champion!<br/>
                You have grown up so much since you first left with <span data-bind="text: GameConstants.Starter[player.starter()]">starter</span>!<br/>
                <br/>
-               There are many more regions to explore,<br/>
-               In order to move on you will need to capture all available Pokémon from the current region!
+               There are many more regions to explore!
+                <!-- ko if: App.game.challenges.list.requireCompletePokedex.active() -->
+               <br/>In order to move on you will need to capture all available Pokémon from the current region!
+               <!-- /ko -->
            </p>
        </div>
        <div class="modal-footer">
