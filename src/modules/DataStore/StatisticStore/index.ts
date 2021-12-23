@@ -60,6 +60,7 @@ export default class Statistics implements Saveable {
      */
     pokeballsUsed: Array<KnockoutObservable<number>>;
     pokeballsBought: Array<KnockoutObservable<number>>;
+    pokeballsObtained: Array<KnockoutObservable<number>>;
     // Other
     shardsGained: Array<KnockoutObservable<number>>;
     oakItemUses: Array<KnockoutObservable<number>>;
@@ -121,6 +122,7 @@ export default class Statistics implements Saveable {
         'dungeonsCleared',
         'pokeballsUsed',
         'pokeballsBought',
+        'pokeballsObtained',
         'shardsGained',
         'oakItemUses',
         'berriesHarvested',

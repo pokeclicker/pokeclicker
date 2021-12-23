@@ -243,8 +243,7 @@ class QuestLineHelper {
         RocketjohtoQuestLine.addQuest(clearTeamRocketHideout);
 
         const RadiotowerReward = () => {
-            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1);
-            GameHelper.incrementObservable(App.game.statistics.pokeballsBought[GameConstants.Pokeball['Masterball']],1);
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
             Notifier.notify({
                 title: RocketjohtoQuestLine.name,
                 message: 'The grateful radio director gave you a Masterball!',

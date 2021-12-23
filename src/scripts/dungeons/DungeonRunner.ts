@@ -131,8 +131,7 @@ class DungeonRunner {
                 setting: NotificationConstants.NotificationSetting.dungeon_item_found,
             });
 
-            GameHelper.incrementObservable(App.game.statistics.pokeballsBought[GameConstants.Pokeball[GameConstants.humanifyString(input)]],amount);
-            return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount);
+            return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount, false);
 
         }  else if (Underground.getMineItemByName(input) != undefined && Underground.getMineItemByName(input).isStone() === false) {
             Notifier.notify({
