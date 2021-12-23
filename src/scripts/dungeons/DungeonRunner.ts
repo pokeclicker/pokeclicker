@@ -36,18 +36,17 @@ class DungeonRunner {
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
         // Dungeon size increases with each region
         let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + player.region;
+        let flash = false;
 
-
-        // Dungeon size minimum of MIN_DUNGEON_SIZE
-        const flash = false;
-
+        // Check if harder dungeons enabled
         if (!App.game.challenges.list.hardDungeons.active()) {
-        // Reveal dungeon tiles nearby player
-            const flash = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() >= 200;
+            // Reveal dungeon tiles nearby player
+            flash = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() >= 200;
             // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
             dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toString().length - 1);
         }
 
+        // Dungeon size minimum of MIN_DUNGEON_SIZE
         DungeonRunner.map = new DungeonMap(Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize), flash);
 
         DungeonRunner.chestsOpened = 0;
