@@ -265,7 +265,7 @@ TownList['Saffron City'] = new Town(
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Rainbow)],
         shops: [SaffronCityShop],
-        npcs: [SaffronBattleItemRival2],
+        npcs: [SaffronBattleItemRival],
     }
 );
 TownList['Fuchsia City'] = new Town(
@@ -1922,11 +1922,11 @@ const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
     'I\'ve heard its evolutionary line loves damp conditions, and apparently if you train a Sliggoo during rainy or foggy weather something marvelous happens!',
 ]);
 
-const KalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
+const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
     'The spirits tell me roaming Pokémon have been spotted on {ROUTE_NAME}!',
 ], GameConstants.Region.kalos);
 
-const AnistarKiloudeConfusedHiker = new NPC('Confused Hiker', [
+const KiloudeConfusedHiker = new NPC('Confused Hiker', [
     'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
 ]);
 
