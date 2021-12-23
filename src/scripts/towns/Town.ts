@@ -572,7 +572,7 @@ TownList['Blackthorn City'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ice Path'))],
         shops: [BlackthornCityShop],
-        npcs: [JohtoRoamerNPC],
+        npcs: [BlackthornJohtoRoamerNPC],
     }
 );
 
