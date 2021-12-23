@@ -45,6 +45,7 @@ export default class Statistics implements Saveable {
     undergroundDailyDealTrades: KnockoutObservable<number>;
     // Farm
     totalManualHarvests: KnockoutObservable<number>;
+    totalBerriesObtained: KnockoutObservable<number>;
     totalBerriesHarvested: KnockoutObservable<number>;
     totalBerriesReplanted: KnockoutObservable<number>;
     totalBerriesMutated: KnockoutObservable<number>;
@@ -66,6 +67,7 @@ export default class Statistics implements Saveable {
     oakItemUses: Array<KnockoutObservable<number>>;
     // Farm
     berriesHarvested: Array<KnockoutObservable<number>>;
+    berriesObtained: KnockoutObservable<number>;
     mulchesUsed: Array<KnockoutObservable<number>>;
     // Battle
     routeKills: Record<string, Record<string, KnockoutObservable<number>>>;
@@ -109,6 +111,7 @@ export default class Statistics implements Saveable {
         'undergroundDailyDealTrades',
         'totalManualHarvests',
         'totalBerriesHarvested',
+        'totalBerriesObtained',
         'totalBerriesReplanted',
         'totalBerriesMutated',
         'totalMulchesUsed',
@@ -126,6 +129,7 @@ export default class Statistics implements Saveable {
         'shardsGained',
         'oakItemUses',
         'berriesHarvested',
+        'berriesObtained',
         'mulchesUsed',
     ];
     // These will allow negative values (special events etc)

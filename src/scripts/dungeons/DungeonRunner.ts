@@ -122,7 +122,7 @@ class DungeonRunner {
                 setting: NotificationConstants.NotificationSetting.dungeon_item_found,
             });
 
-            return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount);
+            return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount, false);
 
         } else if (typeof GameConstants.Pokeball[input] == 'number') {
             Notifier.notify({
