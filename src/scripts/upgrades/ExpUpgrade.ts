@@ -50,7 +50,7 @@ class ExpUpgrade extends Upgrade {
 
     get expPercentage() {
         const nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
-        return Math.round(this.normalizedExp) / nextLevelExp * 100;
+        return this.normalizedExp / nextLevelExp * 100;
     }
 
     get progressString(): string {
