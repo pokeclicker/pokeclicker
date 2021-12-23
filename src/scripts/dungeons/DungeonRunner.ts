@@ -38,7 +38,7 @@ class DungeonRunner {
         let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + player.region;
         let flash = false;
 
-        // Check if harder dungeons enabled
+        // Check if harder dungeons disabled
         if (!App.game.challenges.list.hardDungeons.active()) {
             // Reveal dungeon tiles nearby player
             flash = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() >= 200;
