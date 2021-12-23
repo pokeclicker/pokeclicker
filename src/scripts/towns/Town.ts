@@ -735,6 +735,10 @@ const OldaleTrackingScientist = new NPC('Tracking Scientist', [
     'They were flying really fast, I bet Pokémon that fast will only challenge trainers who have proven they are as strong as Champion Wallace...',
 ]);
 
+const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
+    'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
+], GameConstants.Region.hoenn);
+
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
     'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...',
@@ -751,15 +755,16 @@ const MossdeepAstronomer = new NPC('Astronomer', [
     'There’s a legend that a mythical Wish Pokémon awakens when it passes over us. If you’re as strong as the Champion, maybe you’ll find it roaming around Hoenn granting wishes!',
 ]);
 
+const PacifidlogDiver = new NPC('Diver', [
+    'Yo! Find any cool stuff in chests lately? I\'ve heard that if you beat a Dungeon a lot then the stuff you find in chests gets even more awesome.',
+    'I\'ve even found Masterballs in Chests! Who would put a Masterball in a chest?',
+]);
+
 const SootopolisWallace = new NPC('Gym Leader Wallace', [
     'The creators of the lands and ocean slumber within the Cave of Origin.',
     'However, they will only awaken when in the presence of a truly great trainer.',
     'You will have to overcome the Pokémon League before you have any chance to encounter them.',
 ]);
-
-const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
-    'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
-], GameConstants.Region.hoenn);
 
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
@@ -874,6 +879,15 @@ TownList['Mossdeep City'] = new Town(
         npcs: [MossdeepAstronomer],
     }
 );
+TownList['Pacifidlog Town'] = new Town(
+    'Pacifidlog Town',
+    GameConstants.Region.hoenn,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 131)],
+        shops: [PacifidlogTownShop],
+        npcs: [PacifidlogDiver],
+    }
+);
 TownList['Sootopolis City'] = new Town(
     'Sootopolis City',
     GameConstants.Region.hoenn,
@@ -899,14 +913,6 @@ TownList['Pokémon League Hoenn'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.hoenn, 128),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Hoenn')),
         ],
-    }
-);
-TownList['Pacifidlog Town'] = new Town(
-    'Pacifidlog Town',
-    GameConstants.Region.hoenn,
-    {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 131)],
-        shops: [PacifidlogTownShop],
     }
 );
 TownList['Battle Frontier'] = new Town(
