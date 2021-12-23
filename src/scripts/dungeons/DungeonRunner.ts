@@ -39,14 +39,15 @@ class DungeonRunner {
 
 
         // Dungeon size minimum of MIN_DUNGEON_SIZE
-        if (!App.game.challenges.list.hardDungeons.active()) {
+        if (App.game.challenges.list.hardDungeons.active()) {
+            const flash = false;
+            DungeonRunner.map = new DungeonMap(Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize), flash);
+        } else {
             const flash = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() >= 200;
             // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
             dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toString().length - 1);
             DungeonRunner.map = new DungeonMap(Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize), flash);
-        } else {
-            const flash = false;
-            DungeonRunner.map = new DungeonMap(Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize), flash);
+
         }
 
 
