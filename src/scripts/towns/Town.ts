@@ -256,7 +256,7 @@ TownList['Celadon City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
         shops: [CeladonDepartmentStoreShop, CeladonCityShop],
-        npcs: [CeladonBigSpender],
+        npcs: [BigSpender],
     }
 );
 TownList['Saffron City'] = new Town(
