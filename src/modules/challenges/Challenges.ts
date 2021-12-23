@@ -15,6 +15,7 @@ export default class Challenges implements Saveable {
         disableOakItems: new Challenge('No Oak Item', 'Disables the usage of all Oak Items'),
         disableShards: new Challenge('No Shard', 'Disables the usage of Shards for increasing damage multipliers'),
         disableProteins: new Challenge('No Protein', 'Disables the usage of Proteins'),
+        hardDungeons: new Challenge('Hard Dungeons', 'Makes Dungeons Hard, no perks and very rare good loot'),
     };
 
     fromJSON(json): void {
