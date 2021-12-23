@@ -310,6 +310,7 @@ class QuestLineHelper {
         UltraBeastQuestLine.addQuest(GuzzlordCatch);
 
         App.game.quests.questLines().push(UltraBeastQuestLine);
+    }
 
 
     public static createRocketjohtoQuestLine() {
