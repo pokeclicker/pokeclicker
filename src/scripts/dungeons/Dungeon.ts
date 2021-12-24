@@ -140,8 +140,8 @@ class Dungeon {
             // Minimum of 1 times cleared for division, maximum of 500 times cleared
             const timesCleared = Math.min(500, Math.max(1, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]()));
             // Calculate total weight based on times cleared, minimum weight being original number specified
-			let power = App.game.challenges.list.hardDungeons.active() ? 20 : 15;
-			return Math.max(loot.weight, Math.pow(power, loot.weight) / timesCleared) + 1 || 1;
+            const power = App.game.challenges.list.hardDungeons.active() ? 20 : 15;
+            return Math.max(loot.weight, Math.pow(power, loot.weight) / timesCleared) + 1 || 1;
         });
     }
 
