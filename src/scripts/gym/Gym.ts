@@ -1310,9 +1310,9 @@ gymList['Lana\'s Trial'] = new Gym(
     'Lana',
     'Brooklet Hill',
     [
-        new GymPokemon('Arcanine', 2458300, 51),
-        new GymPokemon('Talonflame', 2462000, 51),
-        new GymPokemon('Marowak', 2462000, 51),
+        new GymPokemon('Lanturn', 2458300, 51),
+        new GymPokemon('Cloyster', 2462000, 51),
+        new GymPokemon('Araquanid', 2462000, 51),
     ],
     BadgeEnums.WateriumZ,
     128000,
@@ -1327,7 +1327,11 @@ gymList['Lana\'s Trial'] = new Gym(
 gymList['Kiawe\'s Trial'] = new Gym(
     'Kiawe',
     'Wela Volcano Park',
-    [],
+    [
+        new GymPokemon('Arcanine', 2458300, 51),
+        new GymPokemon('Talonflame', 2462000, 51),
+        new GymPokemon('Alolan Marowak', 2462000, 51),
+    ],
     BadgeEnums.FiriumZ,
     128000,
     'You have received the Firium-Z!',
