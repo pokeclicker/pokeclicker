@@ -702,7 +702,7 @@ const FortreeCityShop = new TownShop([
 const MossdeepCityShop = new TownShop([
     ItemList['Beldum'],
     ItemList['Prism_scale'],
-    ItemLIst['Upgrade'],
+    ItemList['Upgrade'],
 ]);
 const SootopolisCityShop = new TownShop([
     ItemList['Water_stone'],
@@ -1924,7 +1924,7 @@ const FriseurFurfrouShop = new Shop([
     ItemList['Furfrou (Kabuki)'],
     ItemList['Furfrou (Pharaoh)'],
 ], 'Friseur Furfrou');
-const: CamphrierTownShop = new TownShop([
+const CamphrierTownShop = new TownShop([
     ItemList['Greatball'],
     ItemList['Thunder_stone'],
     ItemList['Electric_egg'],
@@ -2140,7 +2140,7 @@ TownList['Snowbelle City'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 19)],
-        Shops: [SnowbelleCityShop],
+        shops: [SnowbelleCityShop],
     }
 );
 TownList['Pokémon League Kalos'] = new Town(
