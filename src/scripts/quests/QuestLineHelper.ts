@@ -262,16 +262,16 @@ class QuestLineHelper {
         const AquaMagmahoennQuestLine = new QuestLine('Land vs Water', 'Put a stop to the schemes of Team Aqua and Team Magma');
 
         const clearMtChimney = new CustomQuest(1, 0, 'Stop Team Magma at Mt. Chimney', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Chimney')](), 0);
-        AquaMagmahoennQuestLine.addquest(clearMtChimney);
+        AquaMagmahoennQuestLine.addQuest(clearMtChimney);
 
         const clearWeatherInstitute = new CustomQuest(1, 0, 'Stop Team Aqua at the Weather Institute', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Weather Institute')](), 0);
-        AquaMagmahoennQuestLine.addquest(clearWeatherInstitute);
+        AquaMagmahoennQuestLine.addQuest(clearWeatherInstitute);
 
         const clearMagmaHideout = new CustomQuest(1, 0, 'Raid the Team Magma hideout', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Magma Hideout')](), 0);
-        AquaMagmahoennQuestLine.addquest(clearMagmaHideout);
+        AquaMagmahoennQuestLine.addQuest(clearMagmaHideout);
 
         const clearAquaHideout = new CustomQuest(1, 0, 'Raid the Team Aqua hideout', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aqua Hideout')](), 0);
-        AquaMagmahoennQuestLine.addquest(clearAquaHideout);
+        AquaMagmahoennQuestLine.addQuest(clearAquaHideout);
 
         const SeafloorcavernReward = () => {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1);
@@ -283,8 +283,8 @@ class QuestLineHelper {
             });
         };
 
-        const clearSeafloorCavern = new CustomQuest(1, SeafloorcavernReward, 'Team Aqua\'s leader Archie escaped from their hideout. Find him and put a stop to this once and for all', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seafloor Cavern')](), 0);
-        AquaMagmahoennQuestLine.addquest(clearSeafloorCavern);
+        const clearSeafloorCavern = new CustomQuest(1, SeafloorcavernReward, 'Team Aqua\'s leader Archie escaped from their hideout. Find him in the Seafloor Cavern and put a stop to this once and for all', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seafloor Cavern')](), 0);
+        AquaMagmahoennQuestLine.addQuest(clearSeafloorCavern);
 
         App.game.quests.questLines().push(AquaMagmahoennQuestLine);
     }
@@ -299,5 +299,6 @@ class QuestLineHelper {
         this.createUndergroundQuestLine();
         this.createVivillonQuestLine();
         this.createRocketjohtoQuestLine();
+        this.createAquaMagmahoennQuestLine();
     }
 }
