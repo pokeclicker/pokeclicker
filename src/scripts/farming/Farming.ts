@@ -1158,15 +1158,14 @@ class Farming implements Feature {
         if (!plot.isUnlocked) {
             return;
         }
-        if (plot.isEmpty()) {
-            return;
-        }
         if (this.mulchShovelAmt() <= 0) {
             return;
         }
-        plot.clearMulch();
-        GameHelper.incrementObservable(this.mulchShovelAmt, -1);
-        //GameHelper.incrementObservable(App.game.statistics.totalShovelsUsed, 1);
+
+        if (plot.clearMulch()) {
+            GameHelper.incrementObservable(this.mulchShovelAmt, -1);
+            //GameHelper.incrementObservable(App.game.statistics.totalShovelsUsed, 1);
+        }
 
         this.resetAuras();
     }

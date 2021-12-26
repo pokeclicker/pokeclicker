@@ -91,17 +91,6 @@
                                         </li>
                                         <!-- /ko -->
                                     </ul>
-                                    <ul id="shovelMulch" class="list-group p-0">
-                                        <li class="list-group-item list-group-item-action seed-list-item p-3"
-                                            data-bind="click: function() {FarmController.selectedMulchShovel(true);FarmController.selectedShovel(false);FarmController.selectedMulch(-1);},
-                                    css: { 'active': FarmController.selectedMulchShovel() },
-                                    tooltip: {title: 'Clear a Mulch from a plot.', trigger: 'hover', animation: false}">
-                                            <img src="" height="21px"
-                                                 data-bind="attr:{ src: ItemList['Mulch_Shovel'].image }">
-                                            <span>MulchShovel</span>
-                                            <span class="float-right" data-bind="text: App.game.farming.mulchShovelAmt().toLocaleString('en-US')"></span>
-                                        </li>
-                                    </ul>
                                     <div class="justify-content-center py-1">
                                         <div class="btn-group btn-block">
                                             <button type="button" class="btn btn-sm btn-secondary"
@@ -125,6 +114,7 @@
                             </div>
 
                             <ul id="shovelList" class="list-group">
+                                <!-- ko if: FarmController.berryListVisible() -->
                                 <li class="list-group-item list-group-item-action seed-list-item p-2"
                                     data-bind="click: function() {FarmController.selectedShovel(true);FarmController.selectedMulchShovel(false);},
                                     css: { 'active': FarmController.selectedShovel() },
@@ -134,6 +124,20 @@
                                     <span>Shovel</span>
                                     <span class="float-right" data-bind="text: App.game.farming.shovelAmt().toLocaleString('en-US')"></span>
                                 </li>
+                                <!-- /ko -->
+                            </ul>
+                            <ul id="shovelMulch" class="list-group p-0">
+                                <!-- ko if: !FarmController.berryListVisible() -->
+                                <li class="list-group-item list-group-item-action seed-list-item p-3"
+                                    data-bind="click: function() {FarmController.selectedMulchShovel(true);FarmController.selectedShovel(false);FarmController.selectedMulch(-1);},
+                            css: { 'active': FarmController.selectedMulchShovel() },
+                            tooltip: {title: 'Clear a Mulch from a plot.', trigger: 'hover', animation: false}">
+                                    <img src="" height="21px"
+                                         data-bind="attr:{ src: ItemList['Mulch_Shovel'].image }">
+                                    <span>MulchShovel</span>
+                                    <span class="float-right" data-bind="text: App.game.farming.mulchShovelAmt().toLocaleString('en-US')"></span>
+                                </li>
+                                <!-- /ko -->
                             </ul>
                         </div>
 

@@ -14,7 +14,6 @@ class ShovelItem extends Item {
 
 ItemList['Berry_Shovel']   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
 
-//TODO : move into other file ?
 class MulchShovelItem extends Item {
 
     constructor(basePrice: number, displayName: string, description: string) {
