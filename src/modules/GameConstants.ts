@@ -828,7 +828,7 @@ export const AlolaGyms = [
     'Ilima\'s Trial',
     'Iki Town',
     'Lana\'s Trial',
-    'Ikawe\'s Trial',
+    'Kiawe\'s Trial',
     'Mallow\'s Trial',
     'Konikoni City',
     'Aether Paradise',

@@ -90,15 +90,15 @@ class DungeonRunner {
         }
 
         DungeonRunner.chestsOpened++;
-        let amount = 1;
         const loot = DungeonRunner.lootInput();
+        let amount = loot.amount || 1;
 
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             // Decreasing chance for rarer items (62.5% → 12.5%)
             const magnetChance = 0.5 / (4 / (loot.weight + 1));
             if (Rand.chance(magnetChance)) {
                 // Gain more items in higher regions
-                amount *= (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 2);
+                amount += Math.max(1, Math.round(Math.max(loot.weight,2) / 8 * (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 1)));
             }
         }
 
@@ -131,6 +131,7 @@ class DungeonRunner {
                 setting: NotificationConstants.NotificationSetting.dungeon_item_found,
             });
 
+            GameHelper.incrementObservable(App.game.statistics.pokeballsBought[GameConstants.Pokeball[GameConstants.humanifyString(input)]],amount);
             return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount);
 
         }  else if (Underground.getMineItemByName(input) != undefined && Underground.getMineItemByName(input).isStone() === false) {
@@ -142,7 +143,16 @@ class DungeonRunner {
 
             return Underground.gainMineItem(Underground.getMineItemByName(input).id, amount);
 
-        }  else if (ItemList[input].constructor.name == 'EvolutionStone' || 'EggItem' || 'BattleItem' || 'Vitamin' || 'EnergyRestore') {
+        }  else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
+            Notifier.notify({
+                message: `Found ${1} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+            });
+
+            return DungeonBattle.generateNewLootEnemy(input);
+
+        }   else if (ItemList[input].constructor.name == 'EvolutionStone' || 'EggItem' || 'BattleItem' || 'Vitamin' || 'EnergyRestore') {
             Notifier.notify({
                 message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
