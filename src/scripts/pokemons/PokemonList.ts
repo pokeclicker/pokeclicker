@@ -21289,7 +21289,6 @@ pokemonList.forEach(p => {
             p['evolution'].push(...(e as GroupedDungeonEvolution).formSingularEvolution());
         }
     });
-    p['evolution'] = p['evolution'] as Evolution[];
     const baseOffense = 2 * Math.round(Math.sqrt(p.base.attack * p.base.specialAttack) + Math.sqrt(p.base.speed));
     const baseDefense = 2 * Math.round(Math.sqrt(p.base.defense * p.base.specialDefense) + Math.sqrt(p.base.speed));
     const baseStamina = 2 * p.base.hitpoints;
