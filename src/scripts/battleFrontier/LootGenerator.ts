@@ -16,7 +16,7 @@ class LootGenerator {
         {name: 'xAttack', divAmount: 0.06},
         {name: 'Lucky_incense', divAmount: 0.1},
     ];
-    public static rand = randStream(this.lootTable.length);
+    public static rand = randStream(LootGenerator.lootTable.length);
     public static getLoot(stage: number) {
         const item = this.lootTable[this.rand.next().value as number];
         return new BattleFrontierMilestoneItem(stage, item.name, Math.floor(stage / item.divAmount));
