@@ -36,9 +36,9 @@ class BattleFrontierRunner {
     public static nextStage() {
         // Gain any rewards we should have earned for defeating this stage
         BattleFrontierMilestones.gainReward(this.stage());
-        if (this.proceduralStage - this.stage() <= 50 && this.proceduralStage > App.game.statistics.battleFrontierHighestStageCompleted()) {
+        if (this.proceduralStage - this.stage() <= 25 && this.proceduralStage > App.game.statistics.battleFrontierHighestStageCompleted()) {
             BattleFrontierMilestones.addMilestone(LootGenerator.getLoot(this.proceduralStage));
-            this.proceduralStage += 100;
+            this.proceduralStage += 50;
         }
         if (App.game.statistics.battleFrontierHighestStageCompleted() < this.stage()) {
             // Update our highest stage
