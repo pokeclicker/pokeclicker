@@ -567,6 +567,52 @@ class Update implements Saveable {
                 App.game.challenges.list.requireCompletePokedex.disable();
             }
         },
+        '0.8.13': ({ playerData, saveData }) => {
+            saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(e => {
+                switch (e.id) {
+                    case -3:
+                        e.id = 150.1;
+                        break;
+                    case -1:
+                        e.id = 25.08;
+                        break;
+                    case -2:
+                        e.id = 25.09;
+                        break;
+                    case -4:
+                        e.id = 143.1;
+                        break;
+                    case -5:
+                        e.id = 175.1;
+                        break;
+                    case -7:
+                        e.id = 25.10;
+                        break;
+                    case -6:
+                        e.id = 1.1;
+                        break;
+                    case -8:
+                        e.id = 25.11;
+                        break;
+                    case -9:
+                        e.id = 133.1;
+                        break;
+                    case -10:
+                        e.id = 1.2;
+                        break;
+                    case -11:
+                    case -12:
+                    case -13:
+                    case -14:
+                    case -15:
+                    case -16:
+                    case -17:
+                    case -18:
+                        e.id = Math.abs(e.id) - 9 + 0.1;
+                        break;
+                }
+            });
+        },
     };
 
     constructor() {

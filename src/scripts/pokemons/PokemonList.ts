@@ -20600,7 +20600,7 @@ const pokemonList = createPokemonArray(
     },
     // Event Pokemon only between -1 → -99
     {
-        'id': -1,
+        'id': 25.08,
         'name': 'Flying Pikachu',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
@@ -20618,7 +20618,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -2,
+        'id': 25.09,
         'name': 'Surfing Pikachu',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
@@ -20636,7 +20636,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -3,
+        'id': 150.1,
         'name': 'Armored Mewtwo',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 2,
@@ -20654,7 +20654,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -4,
+        'id': 143.1,
         'name': 'Santa Snorlax',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 25,
@@ -20672,7 +20672,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -5,
+        'id': 175.1,
         'name': 'Spooky Togepi',
         'nativeRegion': GameConstants.Region.johto,
         'catchRate': 30,
@@ -20690,7 +20690,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -6,
+        'id': 1.1,
         'name': 'Spooky Bulbasaur',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 25,
@@ -20708,7 +20708,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -7,
+        'id': 25.10,
         'name': 'Pikachu (Gengar)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
@@ -20726,7 +20726,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -8,
+        'id': 25.11,
         'name': 'Let\'s Go Pikachu',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
@@ -20744,7 +20744,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -9,
+        'id': 133.1,
         'name': 'Let\'s Go Eevee',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
@@ -20762,7 +20762,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -10,
+        'id': 1.2,
         'name': 'Bulbasaur (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20781,7 +20781,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -11,
+        'id': 2.1,
         'name': 'Ivysaur (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20800,7 +20800,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -12,
+        'id': 3.1,
         'name': 'Venusaur (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20818,7 +20818,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -13,
+        'id': 4.1,
         'name': 'Charmander (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20837,7 +20837,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -14,
+        'id': 5.1,
         'name': 'Charmeleon (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20856,7 +20856,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -15,
+        'id': 6.1,
         'name': 'Charizard (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20874,7 +20874,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -16,
+        'id': 7.1,
         'name': 'Squirtle (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20893,7 +20893,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -17,
+        'id': 8.1,
         'name': 'Wartortle (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20912,7 +20912,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -18,
+        'id': 9.1,
         'name': 'Blastoise (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20929,9 +20929,9 @@ const pokemonList = createPokemonArray(
             'speed': 78,
         },
     },
-    // Megas only between -100 → -199
+    // Megas are separated from normal Pokemon as they aren't really added and will have special plans later on
     {
-        'id': -100,
+        'id': 3.1,
         'name': 'Mega Venusaur',
         'nativeRegion': GameConstants.Region.kanto,
         'type': [PokemonType.Grass, PokemonType.Poison],
@@ -20949,7 +20949,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -101,
+        'id': 6.1,
         'name': 'Mega Charizard X',
         'nativeRegion': GameConstants.Region.kanto,
         'type': [PokemonType.Fire, PokemonType.Dragon],
@@ -20967,7 +20967,7 @@ const pokemonList = createPokemonArray(
         },
     },
     // {
-    //     'id': -102,
+    //     'id': 6.2,
     //     'name': 'Mega Charizard Y',
     //     'type': [PokemonType.Fire, PokemonType.Flying],
     //     'eggCycles': 120,
@@ -20984,7 +20984,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': -103,
+    //     'id': 9.1,
     //     'name': 'Mega Blastoise',
     //     'type': [PokemonType.Water],
     //     'eggCycles': 120,
@@ -21001,7 +21001,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': -104,
+    //     'id': 15.1,
     //     'name': 'Mega Beedrill',
     //     'type': [PokemonType.Bug, PokemonType.Poison],
     //     'eggCycles': 80,
@@ -21018,7 +21018,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': -105,
+    //     'id': 18.1,
     //     'name': 'Mega Pidgeot',
     //     'type': [PokemonType.Normal, PokemonType.Flying],
     //     'eggCycles': 80,
@@ -21035,7 +21035,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': -106,
+    //     'id': 65.1,
     //     'name': 'Mega Alakazam',
     //     'type': [PokemonType.Psychic],
     //     'eggCycles': 80,
@@ -21052,7 +21052,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': -107,
+    //     'id': 80.2,
     //     'name': 'Mega Slowbro',
     //     'type': [PokemonType.Water, PokemonType.Psychic],
     //     'eggCycles': 80,
@@ -21069,7 +21069,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': -108,
+    //     'id': 94.1,
     //     'name': 'Mega Gengar',
     //     'type': [PokemonType.Poison, PokemonType.Ghost],
     //     'eggCycles': 120,
@@ -21086,7 +21086,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': -109,
+    //     'id': 115.1,
     //     'name': 'Mega Kangaskhan',
     //     'type': [PokemonType.Normal],
     //     'eggCycles': 120,
@@ -21103,7 +21103,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': -110,
+    //     'id': 127.1,
     //     'name': 'Mega Pinsir',
     //     'type': [PokemonType.Bug, PokemonType.Flying],
     //     'eggCycles': 120,
@@ -21120,7 +21120,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     {
-        'id': -111,
+        'id': 130.1,
         'name': 'Mega Gyarados',
         'nativeRegion': GameConstants.Region.kanto,
         'type': [PokemonType.Water, PokemonType.Dark],
@@ -21138,7 +21138,7 @@ const pokemonList = createPokemonArray(
         },
     },
     // {
-    //     'id': -112,
+    //     'id': 142.1,
     //     'name': 'Mega Aerodactyl',
     //     'type': [PokemonType.Water, PokemonType.Dark],
     //     'eggCycles': 120,
@@ -21155,7 +21155,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': -113,
+    //     'id': 150.2,
     //     'name': 'Mega Mewtwo X',
     //     'type': [PokemonType.Psychic, PokemonType.Fighting],
     //     'eggCycles': 120,
@@ -21172,7 +21172,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': -114,
+    //     'id': 150.3,
     //     'name': 'Mega Mewtwo Y',
     //     'type': [PokemonType.Psychic, PokemonType.Fighting],
     //     'eggCycles': 120,
@@ -21189,7 +21189,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     {
-        'id': -115,
+        'id': 384.1,
         'name': 'Mega Rayquaza',
         'nativeRegion': GameConstants.Region.hoenn,
         'type': [PokemonType.Dragon, PokemonType.Flying],
@@ -21225,7 +21225,7 @@ const pokemonList = createPokemonArray(
         },
     }
     // {
-    //     'id': -116,
+    //     'id': 383.1,
     //     'name': 'Primal Groudon',
     //     'type': [PokemonType.Ground, PokemonType.Fire],
     //     'eggCycles': 120,
@@ -21242,7 +21242,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': -117,
+    //     'id': 382.1,
     //     'name': 'Primal Kyogre',
     //     'type': [PokemonType.Water],
     //     'eggCycles': 120,
