@@ -21291,13 +21291,15 @@ pokemonList.forEach(p => {
     (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
     if ((p as PokemonListData).baby) {
         (p as PokemonListData).evolutions?.forEach(evo => {
-            pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon;
-            const poke = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon());
+            const evoVal = evo as Evolution;
+            pokemonBabyPrevolutionMap[evoVal.getEvolvedPokemon()] = evoVal.basePokemon;
+            const poke = pokemonList.find(_p => _p.name == evoVal.getEvolvedPokemon());
             p.eggCycles = Math.round(poke.eggCycles * 0.8);
         });
     } else {
         (p as PokemonListData).evolutions?.forEach(evo => {
-            const poke = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon());
+            const evoVal = evo as Evolution;
+            const poke = pokemonList.find(_p => _p.name == evoVal.getEvolvedPokemon());
             poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * 1.5));
         });
     }
