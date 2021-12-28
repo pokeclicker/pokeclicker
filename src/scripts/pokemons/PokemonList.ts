@@ -8,13 +8,37 @@
 /// <reference path="../farming/BerryType.ts" />
 
 const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
+/**
+ * Utility class
+ *
+ * Doesn't extend Evolution as it's purely for the sake of simplicity and will only be used inside PokemonList.ts
+ *
+ * Currently work for grouped dungeon evolution, but can easily refactored to work for Weather as well
+ */
+class GroupedDungeonEvolution {
+    constructor(
+        public locations: string[],
+        public from: PokemonNameType,
+        public into: PokemonNameType,
+        public level: number
+    ) {}
+    public formSingularEvolution() {
+        const arr = [];
+        this.locations.forEach(e => {
+            arr.push(new DungeonRestrictedLevelEvolution(e, this.from, this.into, this.level));
+        });
+        return arr;
+    }
+}
+
+type EvolutionClass = Evolution | GroupedDungeonEvolution;
 
 type PokemonListData = {
   id: number;
   name: PokemonNameType;
   nativeRegion?: GameConstants.Region;
   catchRate: number;
-  evolutions?: Evolution[];
+  evolutions?: EvolutionClass[];
   type: PokemonType[];
   base: {
     hitpoints: number;
@@ -3044,14 +3068,8 @@ const pokemonList = createPokemonArray(
             new StoneEvolution('Eevee', 'Flareon', GameConstants.StoneType.Fire_stone),
             new DayTimedStoneEvolution('Eevee', 'Espeon', GameConstants.StoneType.Soothe_bell),
             new NightTimedStoneEvolution('Eevee', 'Umbreon', GameConstants.StoneType.Soothe_bell),
-            new DungeonRestrictedLevelEvolution('Eterna Forest', 'Eevee', 'Leafeon', 20),
-            new DungeonRestrictedLevelEvolution('Pinwheel Forest', 'Eevee', 'Leafeon', 20),
-            new DungeonRestrictedLevelEvolution('Pokémon Village', 'Eevee', 'Leafeon', 20),
-            new DungeonRestrictedLevelEvolution('Lush Jungle', 'Eevee', 'Leafeon', 20),
-            new DungeonRestrictedLevelEvolution('Lake Acuity','Eevee','Glaceon', 20),
-            new DungeonRestrictedLevelEvolution('Twist Mountain','Eevee','Glaceon', 20),
-            new DungeonRestrictedLevelEvolution('Frost Cavern','Eevee','Glaceon', 20),
-            new DungeonRestrictedLevelEvolution('Mount Lanakila','Eevee','Glaceon', 20),
+            new GroupedDungeonEvolution(['Eterna Forest','Pinwheel Forest','Pokémon Village','Lush Jungle'], 'Eevee', 'Leafeon', 20),
+            new GroupedDungeonEvolution(['Lake Acuity','Twist Mountain','Frost Cavern','Mount Lanakila'], 'Eevee', 'Glaceon', 20),
             new LevelEvolution('Eevee', 'Sylveon', 29),
         ],
         'base': {
@@ -6603,13 +6621,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 75,
         'catchRate': 255,
-        'evolutions': [
-            new DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Nosepass', 'Probopass', 20),
-            new DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Nosepass', 'Probopass', 20),
-            new DungeonRestrictedLevelEvolution('Chargestone Cave', 'Nosepass', 'Probopass', 20),
-            new DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Nosepass', 'Probopass', 20),
-            new DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Nosepass', 'Probopass', 20),
-        ],
+        'evolutions': [new GroupedDungeonEvolution(['Mt. Coronet North','Mt. Coronet South','Chargestone Cave','Kalos Power Plant','Vast Poni Canyon'], 'Nosepass', 'Probopass', 20)],
         'base': {
             'hitpoints': 30,
             'attack': 45,
@@ -21265,6 +21277,13 @@ const maxEggCycles = Math.max(...pokemonList.map(p => p.eggCycles));
 
 // TODO move to its own initialize method that gets called on game start.
 pokemonList.forEach(p => {
+    p['evolution'].forEach(e => {
+        if (e.constructor.name === GroupedDungeonEvolution.constructor.name) {
+            const evoIndex = p['evolution'].indexOf(e);
+            p['evolution'].splice(evoIndex,1);
+            p['evolution'].push(...(e as GroupedDungeonEvolution).formSingularEvolution());
+        }
+    });
     const baseOffense = 2 * Math.round(Math.sqrt(p.base.attack * p.base.specialAttack) + Math.sqrt(p.base.speed));
     const baseDefense = 2 * Math.round(Math.sqrt(p.base.defense * p.base.specialDefense) + Math.sqrt(p.base.speed));
     const baseStamina = 2 * p.base.hitpoints;
