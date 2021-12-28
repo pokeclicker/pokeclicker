@@ -59,7 +59,7 @@ class PokemonHelper {
         const type2: PokemonType = basePokemon['type'][1] ?? PokemonType.None;
 
         const eggCycles: number = basePokemon['eggCycles'] || 20;
-        return new DataPokemon(basePokemon['id'], basePokemon['name'], basePokemon['catchRate'], basePokemon['evolutions'], type1, type2, basePokemon['attack'], basePokemon['levelType'], basePokemon['exp'], eggCycles, basePokemon['heldItem']);
+        return new DataPokemon(basePokemon['id'], basePokemon['name'], basePokemon['catchRate'], (basePokemon['evolutions'] as Evolution[]), type1, type2, basePokemon['attack'], basePokemon['levelType'], basePokemon['exp'], eggCycles, basePokemon['heldItem']);
     }
 
     public static typeStringToId(id: string) {
@@ -268,7 +268,7 @@ class PokemonHelper {
 
     public static getPokemonPrevolution(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<Evolution> {
         const evolutions = [];
-        const prevolutionPokemon = pokemonList.filter((p: PokemonListData) => p.evolutions?.find(e => e.getEvolvedPokemon() == pokemonName));
+        const prevolutionPokemon = pokemonList.filter((p: PokemonListData) => p.evolutions?.find(e => (e as Evolution).getEvolvedPokemon() == pokemonName));
         prevolutionPokemon.forEach((p: PokemonListData) => p.evolutions.forEach(e => {
             if (e.getEvolvedPokemon() == pokemonName) {
                 if (maxRegion != GameConstants.Region.none && p.nativeRegion > maxRegion) {
@@ -281,19 +281,19 @@ class PokemonHelper {
     }
 
     public static getPokemonLevelPrevolution(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Evolution {
-        const evolutionPokemon = pokemonList.find((p: PokemonListData) => p.evolutions?.find(e => e.type.includes(EvolutionType.Level) && e.getEvolvedPokemon() == pokemonName));
+        const evolutionPokemon = pokemonList.find((p: PokemonListData) => p.evolutions?.find(e => (e as Evolution).type.includes(EvolutionType.Level) && e.getEvolvedPokemon() == pokemonName));
         if (maxRegion != GameConstants.Region.none && pokemonMap[evolutionPokemon.name].nativeRegion > maxRegion) {
             return;
         }
-        return (evolutionPokemon as PokemonListData)?.evolutions?.find(e => e.getEvolvedPokemon() == pokemonName);
+        return (evolutionPokemon as PokemonListData)?.evolutions?.find(e => (e as Evolution).getEvolvedPokemon() === pokemonName);
     }
 
     public static getPokemonStonePrevolution(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Evolution {
-        const evolutionPokemon = pokemonList.find((p: PokemonListData) => p.evolutions?.find(e => e.type.includes(EvolutionType.Stone) && e.getEvolvedPokemon() == pokemonName));
+        const evolutionPokemon = pokemonList.find((p: PokemonListData) => p.evolutions?.find(e => (e as Evolution).type.includes(EvolutionType.Stone) && (e as Evolution).getEvolvedPokemon() == pokemonName));
         if (maxRegion != GameConstants.Region.none && pokemonMap[evolutionPokemon.name].nativeRegion > maxRegion) {
             return;
         }
-        return (evolutionPokemon as PokemonListData)?.evolutions?.find(e => e.getEvolvedPokemon() == pokemonName);
+        return (evolutionPokemon as PokemonListData)?.evolutions?.find(e => e.getEvolvedPokemon() === pokemonName);
     }
 
     public static getPokemonBattleFrontier(pokemonName: PokemonNameType): Array<string> {
