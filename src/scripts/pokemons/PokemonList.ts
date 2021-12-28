@@ -11,8 +11,6 @@ const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 /**
  * Utility class
  *
- * Doesn't extend Evolution as it's purely for the sake of simplicity and will only be used inside PokemonList.ts
- *
  * Currently work for grouped dungeon evolution, but can easily refactored to work for Weather as well
  */
 class GroupedDungeonEvolution extends Evolution {
