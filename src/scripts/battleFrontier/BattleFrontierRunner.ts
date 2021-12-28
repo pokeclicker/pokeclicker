@@ -4,6 +4,7 @@ class BattleFrontierRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
     static stage: KnockoutObservable<number> = ko.observable(1); // Start at stage 1
+    static proceduralStage = 400;
 
     public static counter = 0;
 
@@ -35,6 +36,10 @@ class BattleFrontierRunner {
     public static nextStage() {
         // Gain any rewards we should have earned for defeating this stage
         BattleFrontierMilestones.gainReward(this.stage());
+        if (this.proceduralStage - this.stage() <= 50) {
+            BattleFrontierMilestones.addMilestone(LootGenerator.getLoot(this.proceduralStage));
+            this.proceduralStage += 100;
+        }
         if (App.game.statistics.battleFrontierHighestStageCompleted() < this.stage()) {
             // Update our highest stage
             App.game.statistics.battleFrontierHighestStageCompleted(this.stage());
