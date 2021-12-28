@@ -30,6 +30,7 @@ class SubRegions {
 }
 
 SubRegions.addSubRegion(GameConstants.Region.kanto, new SubRegion('Kanto'));
+SubRegions.addSubRegion(GameConstants.Region.kanto, new SubRegion('Sevii Islands'));
 SubRegions.addSubRegion(GameConstants.Region.johto, new SubRegion('Johto'));
 SubRegions.addSubRegion(GameConstants.Region.hoenn, new SubRegion('Hoenn'));
 SubRegions.addSubRegion(GameConstants.Region.sinnoh, new SubRegion('Sinnoh'));
