@@ -20931,7 +20931,7 @@ const pokemonList = createPokemonArray(
     },
     // Megas are separated from normal Pokemon as they aren't really added and will have special plans later on
     {
-        'id': 3.1,
+        'id': 3.2,
         'name': 'Mega Venusaur',
         'nativeRegion': GameConstants.Region.kanto,
         'type': [PokemonType.Grass, PokemonType.Poison],
@@ -20949,7 +20949,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 6.1,
+        'id': 6.2,
         'name': 'Mega Charizard X',
         'nativeRegion': GameConstants.Region.kanto,
         'type': [PokemonType.Fire, PokemonType.Dragon],
@@ -20967,7 +20967,7 @@ const pokemonList = createPokemonArray(
         },
     },
     // {
-    //     'id': 6.2,
+    //     'id': 6.3,
     //     'name': 'Mega Charizard Y',
     //     'type': [PokemonType.Fire, PokemonType.Flying],
     //     'eggCycles': 120,
@@ -20984,7 +20984,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': 9.1,
+    //     'id': 9.2,
     //     'name': 'Mega Blastoise',
     //     'type': [PokemonType.Water],
     //     'eggCycles': 120,
