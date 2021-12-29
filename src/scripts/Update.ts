@@ -575,7 +575,7 @@ class Update implements Saveable {
                 for (let i = 0; i < count; i++) {
                     // Unsafe code, but I'm using it because it's a lot shorter than a switch case
                     const loot = LootGenerator.lootTable[rand.next().value as number];
-                    eval(`playerData._itemList.${loot.name} += ${(count * 50 + 350) / loot.divAmount}`);
+                    playerData._itemList[loot.name] += (count * 50 + 350) / loot.divAmount;
                 }
             }
         },
