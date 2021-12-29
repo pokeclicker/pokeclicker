@@ -40,6 +40,7 @@ class Game {
         public achievementTracker: AchievementTracker,
         public challenges: Challenges,
         public battleFrontier: BattleFrontier,
+        public battleParty: BattleParty,
         public multiplier: Multiplier
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
@@ -74,6 +75,7 @@ class Game {
         this.underground.initialize();
         this.farming.initialize();
         this.specialEvents.initialize();
+        this.battleParty.initialize();
         this.load();
 
         // TODO refactor to proper initialization methods

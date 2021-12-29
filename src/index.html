@@ -115,7 +115,7 @@
 @import "templates/caughtStatusTemplate.html"
 @import "templates/eggSVGTemplate.html"
 @import "templates/multiOptionTemplate.html"
-
+@import "templates/battlePartyPokemonTemplate.html"
 <div id="game" class="container loading">
     <div class="row justify-content-center">
         <!--The id title is needed for a default marker for money animation to display when not in a wild battle where the playerMoney span is not visible-->
@@ -410,6 +410,9 @@
             <!-- Egg Slots/Breeding-->
             @import "breedingDisplay.html"
 
+            <!-- Battle Party-->
+            @import "battlePartyDisplay.html"
+
             <!-- Shortcuts Menu -->
             @import "shortcutsContainer.html"
         </div>
@@ -473,6 +476,9 @@
 
 <!-- Breeding Modal-->
 @import "breedingModal.html"
+
+<!-- Battle Party Modal -->
+@import "battlePartyModal.html"
 
 <!-- Underground Modal -->
 @import "underground.html"

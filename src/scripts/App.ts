@@ -43,6 +43,7 @@ class App {
                 new AchievementTracker(),
                 new Challenges(),
                 new BattleFrontier(),
+                new BattleParty(),
                 multiplier
             );
 
