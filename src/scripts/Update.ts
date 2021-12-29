@@ -570,12 +570,12 @@ class Update implements Saveable {
         '0.8.13': ({ playerData, saveData }) => {
             const maxBattleFrontierStage = saveData.statistics.battleFrontierHighestStageCompleted;
             if (maxBattleFrontierStage >= 400) {
-                const count = (maxBattleFrontierStage - 400 - maxBattleFrontierStage % 50) / 50;
+                const count = (maxBattleFrontierStage - 400 - maxBattleFrontierStage % 50) / 50 + 1;
                 const rand = randStream(LootGenerator.lootTable.length);
                 for (let i = 0; i < count; i++) {
                     // Unsafe code, but I'm using it because it's a lot shorter than a switch case
                     const loot = LootGenerator.lootTable[rand.next().value as number];
-                    eval(`playerData._itemList.${loot.name} += ${(count * 50 + 400) / loot.divAmount}`);
+                    eval(`playerData._itemList.${loot.name} += ${(count * 50 + 350) / loot.divAmount}`);
                 }
             }
         },
