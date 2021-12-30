@@ -2,28 +2,20 @@
     <div class="card-header p-0" data-toggle="collapse" href="#battlePartyPokemonList">
         <span>Battle Party</span>
     </div>
-    <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
-            data-bind='click: function(){ BattlePartyController.openBattlePartyModal(); }'>
+    <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" data-bind='click: function(){ BattlePartyController.openBattlePartyModal(); }'>
         List
     </button>
     <div id='battlePartyPokemonList' class="card-body p-0 show">
-      <div class="row m-0" data-bind="foreach: App.game.battleParty.partyPokemon">
-        <div class="col-3 col-md-6 p-0 battlePartyPokemonSlot">
-          <div class="content">
-        
-            <div data-bind="visible: $index() > App.game.battleParty.battlePartyPokemonSlots" style="margin-top: 20px;">
-                <img src="assets/images/battleParty/lock.svg">
+        <div class="row m-0" data-bind="foreach: App.game.battleParty.partyPokemon">
+            <div class="col-3 col-md-6 p-0slot battlePartyPokemonSlot">
+                <div class="content">
+                    <div class="clickable" data-bind="click: function(){}">
+                        <div data-bind="template: { name: 'battlePartyPokemonTemplate', data: $data}, class: 'partyslot'"></div>
+                    </div>
+                </div>
             </div>
-            <div class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.battleParty.hatchPokemonEgg($index()) }">
-
-                <div data-bind="template: { name: 'battlePartyPokemonTemplate', data: $data}, class: 'hatching'"></div>
-                
-
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-   
+
 
 </div>

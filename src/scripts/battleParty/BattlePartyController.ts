@@ -5,7 +5,7 @@ class BattlePartyController {
             $('#battlePartyModal').modal('show');
         } else {
             Notifier.notify({
-                message: 'You do not have access to the Day Care yet.<br/><i>Clear route 5 first</i>',
+                message: 'You do not have access to the Party yet.<br/><i></i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }

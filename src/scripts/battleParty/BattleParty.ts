@@ -1,6 +1,6 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
-/// <reference path="IPartyPokemon.ts" />
+/// <reference path="Ability.ts" />
 
 class BattleParty implements Feature {
 
@@ -13,15 +13,13 @@ class BattleParty implements Feature {
     _partyPokemon: KnockoutObservableArray<PartyPokemon>;
 
     constructor() {
-        const poke = PokemonFactory.generatePartyPokemon(1, true);
         this._partyPokemon = ko.observableArray([]);
-        this._partyPokemon.push(poke);
-        this._partyPokemon.push(poke);
-        this._partyPokemon.push(poke);
-        this._partyPokemon.push(poke);
-        this._partyPokemon.push(poke);
-        this._partyPokemon.push(poke);
-
+        this._partyPokemon.push(PokemonFactory.generatePartyPokemon(-115, true));
+        this._partyPokemon.push(PokemonFactory.generatePartyPokemon(1, true));
+        this._partyPokemon.push(PokemonFactory.generatePartyPokemon(112, true));
+        this._partyPokemon.push(PokemonFactory.generatePartyPokemon(313, true));
+        this._partyPokemon.push(PokemonFactory.generatePartyPokemon(261, true));
+        this._partyPokemon.push(PokemonFactory.generatePartyPokemon(901, true));
     }
 
     get partyPokemon() {
@@ -48,7 +46,6 @@ class BattleParty implements Feature {
 
 
         this._partyPokemon()[id] = pokemon;
-        pokemon.passiveAbility.apply();
     }
 
 
