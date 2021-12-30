@@ -1,4 +1,12 @@
-class PartyPokemon implements Saveable {
+class PartyPokemon implements Saveable, IBattlePartyPokemon {
+///////////////////// BATTTLE PARTY DEV
+    passiveAbility = null;
+    activeAbility = null;
+
+
+
+    ////////////////////////
+
     saveKey: string;
 
     defaults = {

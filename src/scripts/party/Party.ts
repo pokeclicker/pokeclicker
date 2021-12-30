@@ -77,6 +77,7 @@ class Party implements Feature {
         this._caughtPokemon.push(pokemon);
     }
 
+
     public gainExp(exp = 0, level = 1, trainer = false) {
         const multBonus = this.multiplier.getBonus('exp', true);
         const trainerBonus = trainer ? 1.5 : 1;
