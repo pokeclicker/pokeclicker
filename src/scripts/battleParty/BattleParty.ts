@@ -3,30 +3,39 @@
 /// <reference path="Ability.ts" />
 
 class BattleParty implements Feature {
-
     name = 'BattleParty';
-
 
     saveKey = 'battleParty';
     defaults: Record<string, any>;
 
-    _partyPokemon: KnockoutObservableArray<PartyPokemon>;
+    _partyPokemon: KnockoutObservableArray<BattlePartyPokemon>;
 
     constructor() {
         this._partyPokemon = ko.observableArray([]);
-        this._partyPokemon.push(PokemonFactory.generatePartyPokemon(-115, true));
-        this._partyPokemon.push(PokemonFactory.generatePartyPokemon(1, true));
-        this._partyPokemon.push(PokemonFactory.generatePartyPokemon(112, true));
-        this._partyPokemon.push(PokemonFactory.generatePartyPokemon(313, true));
-        this._partyPokemon.push(PokemonFactory.generatePartyPokemon(261, true));
-        this._partyPokemon.push(PokemonFactory.generatePartyPokemon(901, true));
+        for (let i = 0; i < 6; i++) {
+            this.setPokemonAtId(
+                i,
+                this.generateBattlePartyPokemon(
+                    PokemonFactory.generatePartyPokemon(i + 1, true)
+                )
+            );
+        }
+    }
+
+    generateBattlePartyPokemon(pokemon: PartyPokemon): BattlePartyPokemon {
+        const passive = new StatBoostingAbility('', '', 0, () => {
+            console.log(`onEnter ${pokemon.name}`);
+        }, () => {
+            console.log(`onExit${pokemon.name}`);
+        });
+        return new BattlePartyPokemon(passive, null, null, pokemon);
     }
 
     get partyPokemon() {
         return this._partyPokemon();
     }
 
-    getPokemonAtId(id: number): PartyPokemon {
+    getPokemonAtId(id: number): BattlePartyPokemon {
         if (id > 5) {
             return null;
         }
@@ -35,21 +44,53 @@ class BattleParty implements Feature {
     }
 
     //set the pokemons at the given id and executes hooks
-    setPokemonAtId(id: number, pokemon: PartyPokemon) {
+    setPokemonAtId(id: number, pokemon: BattlePartyPokemon) {
         if (id > 5) {
             return;
         }
         const currentPoke = this._partyPokemon[id];
         if (currentPoke != undefined) {
-            currentPoke.passiveAbility.remove();
+            this.removePokemonAtId(id);
         }
+        this.addPokemonAtId(id, pokemon);
+    }
+    //removes the pokemons at the given id
 
-
+    removePokemonAtId(id: number) {
+        if (id > 5) {
+            return;
+        }
+        this._partyPokemon()[id].passiveAbility.onExit();
+        this._partyPokemon()[id] = null;
+        this._partyPokemon(this._partyPokemon());
+    }
+    addPokemonAtId(id: number, pokemon: BattlePartyPokemon) {
+        if (id > 5) {
+            return;
+        }
         this._partyPokemon()[id] = pokemon;
+        this._partyPokemon()[id].passiveAbility.onEnter();
+        this._partyPokemon(this._partyPokemon());
+
     }
 
-
-
+    onSlotClick(index: number) {
+        if (index > 5) {
+            return;
+        }
+        console.log(index);
+        console.log(this._partyPokemon()[index]);
+        if (this._partyPokemon()[index] != null) {
+            this.removePokemonAtId(index);
+        } else {
+            this.addPokemonAtId(
+                index,
+                this.generateBattlePartyPokemon(
+                    PokemonFactory.generatePartyPokemon(index + 1, true)
+                )
+            );
+        }
+    }
 
     initialize(): void {}
 
@@ -58,12 +99,9 @@ class BattleParty implements Feature {
     }
     update(delta: number): void {}
 
-
     toJSON(): Record<string, any> {
         return {};
     }
 
-    fromJSON(json: Record<string, any>): void { }
-
-
+    fromJSON(json: Record<string, any>): void {}
 }

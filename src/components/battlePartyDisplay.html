@@ -9,7 +9,9 @@
         <div class="row m-0" data-bind="foreach: App.game.battleParty.partyPokemon">
             <div class="col-3 col-md-6 p-0slot battlePartyPokemonSlot">
                 <div class="content">
-                    <div class="clickable" data-bind="click: function(){}">
+                    <div class="clickable" data-bind="click: function(){BattlePartyController.onBattlePartySlotClick($index())}">
+
+                        
                         <div data-bind="template: { name: 'battlePartyPokemonTemplate', data: $data}, class: 'partyslot'"></div>
                     </div>
                 </div>

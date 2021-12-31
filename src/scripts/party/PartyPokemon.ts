@@ -1,5 +1,6 @@
 class PartyPokemon implements Saveable {
 
+
     saveKey: string;
 
     defaults = {
