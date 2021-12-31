@@ -1,4 +1,7 @@
 <script type="text/html" id="battlePartyPokemonTemplate">
-    <img src="" class="battlePartyPokemon" data-bind=" attr:{ src: PokedexHelper.getImage($data.id)}">
+      <!-- ko ifnot: $data == null -->
+    <img src="" class="battlePartyPokemon" data-bind=" attr:{ src: PokedexHelper.getImage($data.pokemon.id)}">
+                    <!-- /ko -->
+
     <!-- <div class="pokemonAttack" data-bind="text: $data.attack"></div> -->
 </script>

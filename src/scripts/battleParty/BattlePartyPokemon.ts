@@ -1,6 +1,7 @@
 class BattlePartyPokemon {
     constructor(
-        public ability: Ability,
+        public passiveAbility: IPassiveAbility,
+        public activeAbility : IActiveAbility,
         public heldIten: HeldItem,
         public pokemon: PartyPokemon
     ) {}
