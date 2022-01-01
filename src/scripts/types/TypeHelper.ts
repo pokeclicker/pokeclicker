@@ -62,13 +62,11 @@ class TypeHelper {
             m4 += (App.game.shards.getShardUpgrade(a2, this.valueToType(m4)) * Shards.SHARD_UPGRADE_STEP);
         }
 
-        if (BattleParty.boostPool[a1]) {
-            m1 *= BattleParty.boostPool[a1];
-            m2 *= BattleParty.boostPool[a1];
+        if (PartySlots.boostPool[a1]) {
+            m1 *= PartySlots.boostPool[a1];
         }
-        if (BattleParty.boostPool[a2]) {
-            m3 *= BattleParty.boostPool[a2];
-            m4 *= BattleParty.boostPool[a2];
+        if (PartySlots.boostPool[a2]) {
+            m3 *= PartySlots.boostPool[a2];
         }
 
         return Math.max(m1 * m2, m3 * m4);

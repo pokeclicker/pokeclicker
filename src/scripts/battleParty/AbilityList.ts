@@ -4,7 +4,7 @@
 interface Dictionary<T> {
     [Key: string]: T;
 }
-class Abilities {
+class AbilityList {
     constructor() {}
     public static list: Dictionary<Ability[]> = {};
     public static findPokemonAbilities(name: PokemonNameType) {
@@ -21,12 +21,12 @@ class Abilities {
     }
 }
 
-Abilities.add(new StatBoostingAbility('Overgrow', 'A considerable boost to Grass type damage', 1.2, () => {
+AbilityList.add(new StatBoostingAbility('Overgrow', 'A considerable boost to Grass type damage', 1.2, () => {
     AbilityFactory.giveTypedBoost(PokemonType.Grass, 1.2);
 }, () => {
     AbilityFactory.removeTypedBoost(PokemonType.Grass, 1.2);
 }), ['Bulbasaur', 'Ivysaur', 'Venusaur']);
-Abilities.add(new StatBoostingAbility('Blaze', 'A considerable boost to Fire type damage', 1.2, () => {
+AbilityList.add(new StatBoostingAbility('Blaze', 'A considerable boost to Fire type damage', 1.2, () => {
     AbilityFactory.giveTypedBoost(PokemonType.Fire, 1.2);
 }, () => {
     AbilityFactory.removeTypedBoost(PokemonType.Fire, 1.2);

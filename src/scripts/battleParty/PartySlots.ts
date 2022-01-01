@@ -2,7 +2,7 @@
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 /// <reference path="Ability.ts" />
 
-class BattleParty implements Feature {
+class PartySlots implements Feature {
     name = 'BattleParty';
 
     saveKey = 'battleParty';
@@ -12,6 +12,9 @@ class BattleParty implements Feature {
     public static boostPool: Dictionary<PokemonType>;
 
     constructor() {
+    }
+
+    generateTest() {
         this._partyPokemon = ko.observableArray([]);
         for (let i = 0; i < 6; i++) {
             this.setPokemonAtId(
@@ -22,9 +25,8 @@ class BattleParty implements Feature {
             );
         }
     }
-
     generateBattlePartyPokemon(pokemon: PartyPokemon): BattlePartyPokemon {
-        return new BattlePartyPokemon(Abilities.list[pokemon.name][0], null, null, pokemon);
+        return new BattlePartyPokemon(AbilityList.list[pokemon.name][0], null, null, pokemon);
     }
 
     get partyPokemon() {
