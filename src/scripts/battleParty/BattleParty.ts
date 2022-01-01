@@ -9,6 +9,7 @@ class BattleParty implements Feature {
     defaults: Record<string, any>;
 
     _partyPokemon: KnockoutObservableArray<BattlePartyPokemon>;
+    public static boostPool: Dictionary<PokemonType>;
 
     constructor() {
         this._partyPokemon = ko.observableArray([]);
@@ -23,12 +24,7 @@ class BattleParty implements Feature {
     }
 
     generateBattlePartyPokemon(pokemon: PartyPokemon): BattlePartyPokemon {
-        const passive = new StatBoostingAbility('', '', 0, () => {
-            console.log(`onEnter ${pokemon.name}`);
-        }, () => {
-            console.log(`onExit${pokemon.name}`);
-        });
-        return new BattlePartyPokemon(passive, null, null, pokemon);
+        return new BattlePartyPokemon(Abilities.list[pokemon.name][0], null, null, pokemon);
     }
 
     get partyPokemon() {

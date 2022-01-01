@@ -20,3 +20,14 @@ class Abilities {
         });
     }
 }
+
+Abilities.add(new StatBoostingAbility('Overgrow', 'A considerable boost to Grass type damage', 1.2, () => {
+    AbilityFactory.giveTypedBoost(PokemonType.Grass, 1.2);
+}, () => {
+    AbilityFactory.removeTypedBoost(PokemonType.Grass, 1.2);
+}), ['Bulbasaur', 'Ivysaur', 'Venusaur']);
+Abilities.add(new StatBoostingAbility('Blaze', 'A considerable boost to Fire type damage', 1.2, () => {
+    AbilityFactory.giveTypedBoost(PokemonType.Fire, 1.2);
+}, () => {
+    AbilityFactory.removeTypedBoost(PokemonType.Fire, 1.2);
+}), ['Charmander', 'Charmeleon', 'Charizard']);
