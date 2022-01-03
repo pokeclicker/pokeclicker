@@ -17,6 +17,7 @@ class PartySlots implements Feature {
         }
         // some other boost initialization stuffs
         PartySlots.boostPool['eggSteps'] = 1;
+        this.generateTest();
     }
 
     generateTest() {
