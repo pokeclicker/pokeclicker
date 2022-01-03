@@ -9,7 +9,7 @@ class PartySlots implements Feature {
     defaults: Record<string, any>;
 
     _partyPokemon: KnockoutObservableArray<BattlePartyPokemon>;
-    public static boostPool: Dictionary<PokemonType>;
+    public static boostPool: Dictionary<number>;
 
     constructor() {
         for (let i = -1; i < 18; i++) {
