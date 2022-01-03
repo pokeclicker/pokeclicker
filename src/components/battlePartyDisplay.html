@@ -1,4 +1,4 @@
-<div id="battlePartyDisplay" class="card sortable border-secondary mb-3" data-bind="visible: App.game.battleParty.canAccess()">
+<div id="battlePartyDisplay" class="card sortable border-secondary mb-3" data-bind="visible: App.game.partySlots.canAccess()">
     <div class="card-header p-0" data-toggle="collapse" href="#battlePartyPokemonList">
         <span>Battle Party</span>
     </div>
@@ -6,12 +6,12 @@
         List
     </button>
     <div id='battlePartyPokemonList' class="card-body p-0 show">
-        <div class="row m-0" data-bind="foreach: App.game.battleParty.partyPokemon">
+        <div class="row m-0" data-bind="foreach: App.game.partySlots.partyPokemon">
             <div class="col-3 col-md-6 p-0slot battlePartyPokemonSlot">
                 <div class="content">
                     <div class="clickable" data-bind="click: function(){BattlePartyController.onBattlePartySlotClick($index())}">
 
-                        
+
                         <div data-bind="template: { name: 'battlePartyPokemonTemplate', data: $data}, class: 'partyslot'"></div>
                     </div>
                 </div>
