@@ -8,7 +8,7 @@ class PartySlots implements Feature {
     saveKey = 'battleParty';
     defaults: Record<string, any>;
 
-    _partyPokemon: KnockoutObservableArray<BattlePartyPokemon>;
+    _partyPokemon: KnockoutObservableArray<BattlePartyPokemon> = ko.observableArray([]);
     public static boostPool: Dictionary<number> = {};
 
     constructor() {
@@ -21,7 +21,6 @@ class PartySlots implements Feature {
     }
 
     generateTest() {
-        this._partyPokemon = ko.observableArray([]);
         for (let i = 0; i < 6; i++) {
             this.setPokemonAtId(
                 i,
