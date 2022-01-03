@@ -13,6 +13,7 @@ class PartySlots implements Feature {
 
     constructor() {
         Object.keys(PokemonType).forEach(e => PartySlots.boostPool[e] = 1);
+        // some other boost initialization stuffs
     }
 
     generateTest() {
