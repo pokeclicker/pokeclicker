@@ -2,6 +2,8 @@
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 /// <reference path="Ability.ts" />
 
+type MapKeyType = PokemonType | string;
+
 class PartySlots implements Feature {
     name = 'BattleParty';
 
@@ -9,7 +11,7 @@ class PartySlots implements Feature {
     defaults: Record<string, any>;
 
     _partyPokemon: KnockoutObservableArray<BattlePartyPokemon> = ko.observableArray([]);
-    public static boostPool : Map<PokemonType,number> = new Map<PokemonType,number>();
+    public static boostPool : Map<MapKeyType,number> = new Map<MapKeyType,number>();
 
     constructor() {
         for (let i = -1; i < 18; i++) {

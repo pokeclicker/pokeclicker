@@ -1,12 +1,9 @@
 /**
  * Primitive data type for easier handling. Much better than records and normal Object
  */
-interface Dictionary<T> {
-    [Key: string]: T;
-}
 class AbilityList {
     constructor() {}
-    public static list: Dictionary<Ability[]> = {};
+    public static list: Map<string, Ability[]> = new Map<string, Ability[]>();
     public static findPokemonAbilities(name: PokemonNameType) {
         return this.list[name];
     }
