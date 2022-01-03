@@ -64,9 +64,11 @@ class TypeHelper {
 
         if (PartySlots.boostPool[a1]) {
             m1 *= PartySlots.boostPool[PokemonType[a1]];
+            m2 *= PartySlots.boostPool[PokemonType[a1]];
         }
         if (PartySlots.boostPool[a2]) {
             m3 *= PartySlots.boostPool[PokemonType[a2]];
+            m4 *= PartySlots.boostPool[PokemonType[a1]];
         }
 
         return Math.max(m1 * m2, m3 * m4);
