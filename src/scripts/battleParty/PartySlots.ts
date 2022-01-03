@@ -12,8 +12,11 @@ class PartySlots implements Feature {
     public static boostPool: Dictionary<number>;
 
     constructor() {
-        Object.keys(PokemonType).forEach(e => PartySlots.boostPool[e] = 1);
+        for (let i = -1; i < 18; i++) {
+            PartySlots.boostPool[PokemonType[i]] = 1;
+        }
         // some other boost initialization stuffs
+        PartySlots.boostPool['eggSteps'] = 1;
     }
 
     generateTest() {
