@@ -12,7 +12,7 @@ class PartySlots implements Feature {
 
     _partyPokemon: KnockoutObservableArray<BattlePartyPokemon> = ko.observableArray([]);
     public static boostPool : Map<MapKeyType,number> = new Map<MapKeyType,number>();
-
+    public static fearMeter : KnockoutObservable<number> = ko.observable(0);
     constructor() {
         for (let i = -1; i < 18; i++) {
             PartySlots.boostPool[PokemonType[i]] = 1;
@@ -23,7 +23,7 @@ class PartySlots implements Feature {
     }
 
     generateTest() {
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 5; i++) {
             this.setPokemonAtId(
                 i,
                 this.generateBattlePartyPokemon(
@@ -31,6 +31,12 @@ class PartySlots implements Feature {
                 )
             );
         }
+        this.setPokemonAtId(
+            5,
+            this.generateBattlePartyPokemon(
+                PokemonFactory.generatePartyPokemon(-115, true)
+            )
+        );
     }
     generateBattlePartyPokemon(pokemon: PartyPokemon): BattlePartyPokemon {
         return new BattlePartyPokemon(AbilityList.list[pokemon.name][0], null, null, pokemon);
@@ -50,24 +56,24 @@ class PartySlots implements Feature {
 
     //set the pokemons at the given id and executes hooks
     setPokemonAtId(id: number, pokemon: BattlePartyPokemon) {
-        if (id > 5) {
-            return;
+        if (PartySlots.fearMeter() + pokemon.pokemon.attack <= 600) {
+            if (id > 5) {
+                return;
+            }
+            const currentPoke = this._partyPokemon[id];
+            if (currentPoke != undefined) {
+                this.removePokemonAtId(id);
+            }
+            this.addPokemonAtId(id, pokemon);
         }
-        const currentPoke = this._partyPokemon[id];
-        if (currentPoke != undefined) {
-            this.removePokemonAtId(id);
-        }
-        this.addPokemonAtId(id, pokemon);
     }
     //removes the pokemons at the given id
 
     removePokemonAtId(id: number) {
-        if (id > 5) {
-            return;
-        }
         this._partyPokemon()[id].passiveAbility.onExit();
         this._partyPokemon()[id] = null;
         this._partyPokemon(this._partyPokemon());
+        GameHelper.incrementObservable(PartySlots.fearMeter, -this._partyPokemon()[id].pokemon);
     }
     addPokemonAtId(id: number, pokemon: BattlePartyPokemon) {
         if (id > 5) {
@@ -76,7 +82,7 @@ class PartySlots implements Feature {
         this._partyPokemon()[id] = pokemon;
         this._partyPokemon()[id].passiveAbility.onEnter();
         this._partyPokemon(this._partyPokemon());
-
+        GameHelper.incrementObservable(PartySlots.fearMeter, pokemon.pokemon.attack);
     }
 
     onSlotClick(index: number) {

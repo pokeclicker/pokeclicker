@@ -1,7 +1,15 @@
 <script type="text/html" id="battlePartyPokemonTemplate">
-      <!-- ko ifnot: $data == null -->
-    <img src="" class="battlePartyPokemon" data-bind=" attr:{ src: PokedexHelper.getImage($data.pokemon.id)}">
-                    <!-- /ko -->
-
-    <!-- <div class="pokemonAttack" data-bind="text: $data.attack"></div> -->
+    <!-- ko ifnot: $data == null -->
+    <div class="battlePartyPokemon" data-bind="tooltip: {
+        title: $data.getInfo(),
+        trigger: 'hover',
+        html: true
+    }">
+        <img src="" class="battlePartyPokemon" data-bind=" attr:{ src: PokedexHelper.getImage($data.pokemon.id)}">
+        <!-- ko if: $data.status['mega'] == true -->
+        <img src="" class="partySymbol" data-bind=" attr:{ src: $data.getStatus()}">
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+    <!-- <div class=" pokemonAttack " data-bind="text: $data.attack "></div> -->
 </script>

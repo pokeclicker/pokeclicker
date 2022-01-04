@@ -28,3 +28,8 @@ AbilityList.add(new StatBoostingAbility('Blaze', 'A considerable boost to Fire t
 }, () => {
     AbilityFactory.removeTypedBoost(PokemonType.Fire, 1.2);
 }), ['Charmander', 'Charmeleon', 'Charizard']);
+AbilityList.add(new StatBoostingAbility('Delta Stream', 'Reserved for the biggest of sneks', 1.2, () => {
+    console.log('Haha big snek go brrrrrrrrrrrrrrrr');
+}, () => {
+    console.log('Big snek is no more');
+}), ['Mega Rayquaza']);
