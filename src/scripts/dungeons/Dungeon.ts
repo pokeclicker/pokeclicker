@@ -2567,7 +2567,7 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
         new DungeonBossPokemon('Parasect', 9900000, 50),
         new DungeonBossPokemon('Breloom', 11000000, 50),
         new DungeonBossPokemon('Shaymin (land)', 11000000, 50),
-        new DungeonBossPokemon('Shaymin (sky)', 11000000, 50),
+        new DungeonBossPokemon('Shaymin (sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement(pokemonMap['Shaymin (land)'])}),
     ],
     96500, 201, 32);
 
