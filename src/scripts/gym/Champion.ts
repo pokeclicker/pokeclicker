@@ -48,24 +48,24 @@ gymList['Champion Blue'] = new Champion(
     ],
     BadgeEnums.Elite_KantoChampion,
     10000,
-    'Why? Why did I lose? I never made any mistakes raising my Pokémon… Darn it! You\'re the new Pokémon League Champion! Although I don\'t like to admit it…',
+    'NO! That can\'t be! You beat me at my best! After all that work to become the League Champ? My reign is over already? It\'s not fair!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Lance)],
     // Bulbasaur
     [
-        new GymPokemon('Gyarados', 65340, 61),
         new GymPokemon('Exeggutor', 57520, 59),
+        new GymPokemon('Gyarados', 65340, 61),
         new GymPokemon('Charizard', 70000, 63),
     ],
     // Charmander
     [
-        new GymPokemon('Exeggutor', 65340, 61),
         new GymPokemon('Arcanine', 57520, 59),
+        new GymPokemon('Exeggutor', 65340, 61),
         new GymPokemon('Blastoise', 70000, 63),
     ],
     // Squirtle/Pikachu
     [
-        new GymPokemon('Arcanine', 65340, 61),
         new GymPokemon('Gyarados', 57520, 59),
+        new GymPokemon('Arcanine', 65340, 61),
         new GymPokemon('Venusaur', 70000, 63),
     ]
 );
