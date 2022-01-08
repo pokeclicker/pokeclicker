@@ -657,4 +657,14 @@
         })
      %>
 
+     <%- include('templates/mapOverlay',
+         { name: "Professor Sycamore's Blimp"
+         , x: 57, y: 52
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('Vaniville Town')}, attr:{ class: MapHelper.calculateTownCssClass('Vaniville Town') }"
+         , visible:  "MapHelper.ableToTravel()"
+         , image: "assets/images/map/blimp-empty.png"
+         })
+     %>
+
 </g>
