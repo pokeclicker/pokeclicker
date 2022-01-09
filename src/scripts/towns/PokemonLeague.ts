@@ -45,7 +45,10 @@ TownList['Indigo Plateau Kanto'] = new PokemonLeague(
 TownList['Indigo Plateau Johto'] = new PokemonLeague(
     'Indigo Plateau Johto',
     GameConstants.Region.johto,
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 27)],
+    [
+        new RouteKillRequirement(10, GameConstants.Region.johto, 26),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Johto')),
+    ],
     [indigoPlateauShop],
     ['Elite Will', 'Elite Koga', 'Elite Bruno2', 'Elite Karen', 'Champion Lance']
 );
@@ -105,7 +108,7 @@ TownList['Pokémon League Kalos'] = new PokemonLeague(
 TownList['Pokémon League Alola'] = new PokemonLeague(
     'Pokémon League Alola',
     GameConstants.Region.alola,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanikala'))],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanakila'))],
     [indigoPlateauShop],
     ['Elite Molayne', 'Elite Olivia', 'Elite Acerola', 'Elite Kahili', 'Champion Hao']
 );

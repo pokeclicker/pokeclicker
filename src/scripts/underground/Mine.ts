@@ -24,7 +24,7 @@ class Mine {
             const row = [];
             const rewardRow = [];
             for (let j = 0; j < Underground.sizeX; j++) {
-                row.push(ko.observable(Math.min(5, Math.max(1, Math.floor(Math.random() * 2 + Math.random() * 3) + 1))));
+                row.push(ko.observable(Math.min(5, Math.max(1, Math.floor(Rand.float(2) + Rand.float(3)) + 1))));
                 rewardRow.push(0);
             }
             tmpGrid.push(row);
@@ -68,15 +68,15 @@ class Mine {
         if (App.game.oakItems.isActive(OakItems.OakItem.Explosive_Charge)) {
             const tiles = App.game.oakItems.calculateBonus(OakItems.OakItem.Explosive_Charge);
             for (let i = 1; i < tiles; i++) {
-                const x = GameConstants.randomIntBetween(0, App.game.underground.getSizeY() - 1);
-                const y = GameConstants.randomIntBetween(0, Underground.sizeX - 1);
+                const x = Rand.intBetween(0, App.game.underground.getSizeY() - 1);
+                const y = Rand.intBetween(0, Underground.sizeX - 1);
                 this.breakTile(x, y, 1);
             }
         }
     }
 
     private static getRandomCoord(max: number, size: number): number {
-        return Math.floor(Math.random() * (max - size));
+        return Rand.floor(max - size);
     }
 
     private static canAddReward(x: number, y: number, reward: UndergroundItem): boolean {
@@ -126,7 +126,7 @@ class Mine {
     }
 
     private static rotateReward(reward): UndergroundItem {
-        let rotations = Math.floor(Math.random() * 4);
+        let rotations = Rand.floor(4);
 
         while (rotations-- > 0) {
             reward.space = reward.space[0].map((val, index) => reward.space.map(row => row[index]).reverse());
@@ -166,8 +166,8 @@ class Mine {
 
         const tiles = App.game.underground.getSurvey_Efficiency();
         for (let i = 0; i < tiles; i++) {
-            const x = GameConstants.randomIntBetween(0, this.getHeight() - 1);
-            const y = GameConstants.randomIntBetween(0, Underground.sizeX - 1);
+            const x = Rand.intBetween(0, this.getHeight() - 1);
+            const y = Rand.intBetween(0, Underground.sizeX - 1);
             this.breakTile(x, y, 5);
         }
 
@@ -259,8 +259,8 @@ class Mine {
         let tiles = App.game.underground.getBombEfficiency();
         if (App.game.underground.energy >= Underground.BOMB_ENERGY) {
             while (tiles-- > 0) {
-                const x = GameConstants.randomIntBetween(0, this.getHeight() - 1);
-                const y = GameConstants.randomIntBetween(0, Underground.sizeX - 1);
+                const x = Rand.intBetween(0, this.getHeight() - 1);
+                const y = Rand.intBetween(0, Underground.sizeX - 1);
                 this.breakTile(x, y, 2);
             }
             App.game.underground.energy -= Underground.BOMB_ENERGY;
@@ -324,8 +324,7 @@ class Mine {
 
                 if (App.game.oakItems.isActive(OakItems.OakItem.Treasure_Scanner)) {
                     const giveDouble = App.game.oakItems.calculateBonus(OakItems.OakItem.Treasure_Scanner) / 100;
-                    let random = Math.random();
-                    if (giveDouble >= random) {
+                    if (Rand.chance(giveDouble)) {
                         Underground.gainMineItem(Mine.rewardNumbers[i]);
                         Notifier.notify({
                             message: `You found an extra ${GameConstants.humanifyString(itemName)} in the Mine!`,
@@ -334,8 +333,7 @@ class Mine {
                             timeout: 4000,
                         });
 
-                        random = Math.random();
-                        if (giveDouble >= random) {
+                        if (Rand.chance(giveDouble)) {
                             Underground.gainMineItem(Mine.rewardNumbers[i]);
                             Notifier.notify({
                                 message: `Lucky! You found another ${GameConstants.humanifyString(itemName)}!`,
@@ -344,8 +342,7 @@ class Mine {
                                 timeout: 6000,
                             });
 
-                            random = Math.random();
-                            if (giveDouble >= random) {
+                            if (Rand.chance(giveDouble)) {
                                 Underground.gainMineItem(Mine.rewardNumbers[i]);
                                 Notifier.notify({
                                     message: `Jackpot! You found another ${GameConstants.humanifyString(itemName)}!`,

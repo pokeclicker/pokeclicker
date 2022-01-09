@@ -315,7 +315,7 @@ class Plot implements Saveable {
 
             // Check if berry replants itself
             const replantChance = this.berryData.replantRate * App.game.farming.getReplantMultiplier() * this.getReplantMultiplier();
-            if (Math.random() < replantChance) {
+            if (Rand.chance(replantChance)) {
                 this.age = 0;
                 this.notifications.push(FarmNotificationType.Replanted);
                 App.game.oakItems.use(OakItems.OakItem.Sprinklotad);
@@ -326,9 +326,9 @@ class Plot implements Saveable {
             this.notifications.push(FarmNotificationType.Withered);
 
             // Check for Kasib berry mutation/replant chance
-            if (App.game.farming.highestUnlockedBerry() > BerryType.Occa) {
+            if (App.game.farming.highestUnlockedBerry() >= BerryType.Occa) {
                 if (!App.game.farming.berryInFarm(BerryType.Colbur)) {
-                    if (Math.random() < 0.05) {
+                    if (Rand.chance(0.05)) {
                         this.notifications.push(FarmNotificationType.Mutated);
                         this.berry = BerryType.Kasib;
                         this.age = 0;
@@ -350,10 +350,10 @@ class Plot implements Saveable {
             return undefined;
         }
         // Chance to generate wandering Pokemon
-        if (Math.random() < GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]()) {
+        if (Rand.chance(GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]())) {
             // Get a random Pokemon from the list of possible encounters
-            const availablePokemon = this.berryData.wander.filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion());
-            const wanderPokemon = availablePokemon[Math.floor(Math.random() * availablePokemon.length)];
+            const availablePokemon: PokemonNameType[] = this.berryData.wander.filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion());
+            const wanderPokemon = Rand.fromArray(availablePokemon);
 
             const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
 
@@ -369,7 +369,7 @@ class Plot implements Saveable {
                 const emptyPlots = App.game.farming.plotList.filter(plot => plot.isUnlocked && plot.isEmpty());
                 // No Starf generation if no empty plots :(
                 if (emptyPlots.length) {
-                    const chosenPlot = emptyPlots[Math.floor(Math.random() * emptyPlots.length)];
+                    const chosenPlot = emptyPlots[Rand.floor(emptyPlots.length)];
                     chosenPlot.plant(BerryType.Starf);
                     App.game.farming.unlockBerry(BerryType.Starf);
                 }

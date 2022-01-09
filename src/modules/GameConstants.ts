@@ -156,6 +156,7 @@ export const DUNGEON_HELD_ITEM_MODIFIER = ROUTE_HELD_ITEM_MODIFIER * 4;
 export const DUNGEON_BOSS_HELD_ITEM_MODIFIER = DUNGEON_HELD_ITEM_MODIFIER * 1.5;
 export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
+export const DNA_ITEM_CHANCE = 60;
 
 // Shards from battle
 export const DUNGEON_SHARDS = 3;
@@ -419,14 +420,6 @@ export function formatNumber(input: number): string {
     return num.toString();
 }
 
-export function randomIntBetween(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-export function randomElement(array: any[]): any {
-    return array[randomIntBetween(0, array.length - 1)];
-}
-
 export function clipNumber(num: number, min: number, max: number): number {
     return Math.min(Math.max(num, min), max);
 }
@@ -517,7 +510,7 @@ export const Environments: Record<string, EnvironmentData> = {
 
     Cave: {
         [Region.kanto]: new Set(['Pewter City', 'Digletts Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road']),
-        [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave']),
+        [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave', 'Victory Road Johto']),
         [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn', 'Seafloor Cavern']),
         [Region.sinnoh]: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
         [Region.unova]: new Set(['Seaside Cave', 'Twist Mountain', 'Reversal Mountain', 'Relic Passage', 'Relic Castle', 'Victory Road Unova']),
@@ -539,7 +532,7 @@ export const Environments: Record<string, EnvironmentData> = {
 
     PowerPlant: {
         [Region.kanto]: new Set(['Vermilion City', 'Power Plant']),
-        [Region.johto]: new Set(['Tin Tower']),
+        [Region.johto]: new Set(['Tin Tower', 'Team Rockets Hideout', 'Radio Tower']),
         [Region.hoenn]: new Set(['Mauville City']),
         [Region.sinnoh]: new Set(['Sunyshore City']),
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City']),
@@ -594,31 +587,33 @@ export enum Starter {
 
 export enum StoneType {
     'None' = -1,
+    'Leaf_stone',
     'Fire_stone',
     'Water_stone',
     'Thunder_stone',
-    'Leaf_stone',
     'Moon_stone',
-    'Sun_stone',
     'Trade_stone',
-    'Dragon_scale',
+    'Sun_stone',
+    'Soothe_bell',
     'Metal_coat',
     'Kings_rock',
     'Upgrade',
-    'Soothe_bell',
+    'Dragon_scale',
+    'Prism_scale',
     'Deepsea_tooth',
     'Deepsea_scale',
-    'Dawn_stone',
-    'Dusk_stone',
     'Shiny_stone',
-    'Dubious_disc',
+    'Dusk_stone',
+    'Dawn_stone',
+    'Razor_claw',
+    'Razor_fang',
     'Electirizer',
     'Magmarizer',
     'Protector',
+    'Dubious_disc',
     'Reaper_cloth',
-    'Razor_claw',
-    'Razor_fang',
-    'Prism_scale',
+    'Black_DNA',
+    'White_DNA',
     'Sachet',
     'Whipped_dream',
     'Ice_stone',
@@ -830,10 +825,17 @@ export const KalosGyms = [
 ];
 
 export const AlolaGyms = [
+    'Ilima\'s Trial',
     'Iki Town',
+    'Lana\'s Trial',
+    'Kiawe\'s Trial',
+    'Mallow\'s Trial',
     'Konikoni City',
     'Aether Paradise',
+    'Sophocles\' Trial',
+    'Acerola\'s Trial',
     'Malie City',
+    'Vast Poni Canyon Trial',
     'Altar of the Sunne and Moone',
     'Seafolk Village',
     'Exeggutor Island',
@@ -848,7 +850,7 @@ export const GalarGyms = [
     'Turffield',
     'Hulbury',
     'Motostoke',
-    'Stow-On-Side',
+    'Stow-on-Side',
     'Ballonlea',
     'Circhester',
     'Spikemuth',
@@ -901,8 +903,11 @@ export const JohtoDungeons = [
     'Tin Tower',
     'Whirl Islands',
     'Mt Mortar',
+    'Team Rockets Hideout',
+    'Radio Tower',
     'Ice Path',
     'Dark Cave',
+    'Victory Road Johto',
     'Mt Silver',
 ];
 

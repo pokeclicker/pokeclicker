@@ -30,6 +30,7 @@
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('backgroundImage')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('breedingDisplay')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('shopButtons')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('resetShopAmountOnPurchase')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('eggAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('hideHatchery')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('farmDisplay')}"></tr>
@@ -98,7 +99,7 @@
 
 <script type="text/html" id="BooleanSettingTemplate">
     <td class="p-2">
-        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: $data.displayName">
+        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`">
             setting name
         </label>
     </td>
@@ -119,7 +120,7 @@
 
 
 <script type="text/html" id="ColorChoiceSettingTemplate">
-    <td class="p-2" data-bind="text: $data.displayName">setting name</td>
+    <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
     <td class="p-0" data-bind="style: { background: $data.observableValue },
     tooltip: {
         title: 'Set to white for transparent',

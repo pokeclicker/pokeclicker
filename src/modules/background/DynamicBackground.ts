@@ -6,6 +6,7 @@ import {
     TotalPokemonsPerRegion,
     Region,
 } from '../GameConstants';
+import Rand from '../utilities/Rand';
 
 export default class DynamicBackground {
     public static autoUpdateScene;
@@ -91,13 +92,13 @@ export default class DynamicBackground {
         const pokemonSpeed = pokemonMap[id].base.speed;
         let moveSpeed = Math.floor(((pokemonSpeed - DynamicBackground.MIN_SPEED_STAT) / (DynamicBackground.MAX_SPEED_STAT - DynamicBackground.MIN_SPEED_STAT)) * DynamicBackground.MAX_SPEED);
         // Adjust speed by -1 → +1 randomly
-        moveSpeed += Math.floor(Math.random() * 3) - 1;
+        moveSpeed += Rand.intBetween(-1, 1);
         moveSpeed = Math.max(0, Math.min(DynamicBackground.MAX_SPEED, moveSpeed));
         const flying = DynamicBackground.flyingPokemon.includes(id);
-        const shiny = !Math.floor(Math.random() * SHINY_CHANCE_BREEDING);
+        const shiny = Rand.chance(SHINY_CHANCE_BREEDING);
 
         const pokeElement = document.createElement('div');
-        pokeElement.style.bottom = flying ? `${Math.floor(Math.random() * 70) + 20}vh` : `${Math.floor(Math.random() * 10) + 5}vh`;
+        pokeElement.style.bottom = flying ? `${Rand.intBetween(20, 90)}vh` : `${Rand.intBetween(5, 15)}vh`;
         pokeElement.style.backgroundImage = `${shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' : ''}url('assets/images/dynamic-background/pokemon/${id.toString().padStart(3, 0)}${shiny ? 's' : ''}.png')`;
         pokeElement.classList.add('pokemonSprite');
         pokeElement.classList.add(`speed-${moveSpeed}`);
@@ -112,12 +113,12 @@ export default class DynamicBackground {
 
     static startAddingPokemon = () => {
         // Random delay up to 10 seconds
-        const delay = Math.floor(Math.random() * (10 * SECOND));
+        const delay = Rand.intBetween(0, 10 * SECOND);
 
         // Assign our timeout function so we can stop it later
         DynamicBackground.addPokemonTimeout = setTimeout(() => {
             // limited to players highest region
-            DynamicBackground.addPokemon(Math.floor(Math.random() * TotalPokemonsPerRegion[player?.highestRegion() || Region.kanto]) + 1);
+            DynamicBackground.addPokemon(Rand.intBetween(1, TotalPokemonsPerRegion[player?.highestRegion() || Region.kanto]));
             // Add another pokemon
             DynamicBackground.startAddingPokemon();
         }, delay);

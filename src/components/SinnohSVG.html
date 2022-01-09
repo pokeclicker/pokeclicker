@@ -732,14 +732,6 @@
         })
     %>
 
-    <!--Distortion World-->
-    <%- include('templates/mapDungeon',
-        { name: "Distortion World"
-        , x: 74, y: 39
-        , height: 5, width: 5
-        })
-    %>
-
     <!--Lake Acuity-->
     <%- include('templates/mapDungeon',
         { name: "Lake Acuity"
@@ -814,5 +806,49 @@
         , height: 4, width: 3
         , databind: "click: function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Canalave City') }"
         })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Underground Entrance"
+        , x: 57, y: 38
+        , width: 3, height: 4
+        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Farm"
+        , x: 67, y: 37
+        , width: 3, height: 3
+        , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Pokemon Day Care"
+        , x: 49, y: 35
+        , width: 4, height: 4
+        , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Distortion World"
+         , x: 39, y: 26
+         , width: 5, height: 5
+         , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: MapHelper.calculateTownCssClass('Distortion World') }"
+         , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Snowpoint City')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]() == 0"
+         , image: "assets/images/map/distortion_world.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Distortion World"
+         , x: 74, y: 39
+         , width: 5, height: 5
+         , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: MapHelper.calculateTownCssClass('Distortion World') }"
+         , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]() >= 1"
+         , image: "assets/images/map/distortion_world.png"
+         })
      %>
 </g>
