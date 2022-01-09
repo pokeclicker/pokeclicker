@@ -22,9 +22,14 @@ class PokemonFactory {
         }
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
+        const routeAvgHp = (region, route) => {
+          let poke = [...new Set(Object.values(Routes.getRoute(region, route).pokemon).flat().map(p => p.pokemon ?? p).flat())]
+          let total = poke.map(p => pokemonMap[p].base.hitpoints).reduce((s, a) => s + a, 0);
+          return total / poke.length;
+        };
 
         // TODO this monster formula needs to be improved. Preferably with graphs :D
-        const maxHealth: number = Math.floor(0.001 * PokemonFactory.routeHealth(route, region) * basePokemon.hitpoints + 0.9 * PokemonFactory.routeHealth(route, region));
+        const maxHealth: number = Math.round((PokemonFactory.routeHealth(route, region) - (PokemonFactory.routeHealth(route, region) / 10)) + (PokemonFactory.routeHealth(route, region) / 10 / routeAvgHp(region, route) * basePokemon.hitpoints));
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const level: number = this.routeLevel(route, region);
