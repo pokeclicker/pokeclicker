@@ -857,8 +857,19 @@
          , x: 12, y: 53
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('Twinleaf Town')}, attr:{ class: MapHelper.calculateTownCssClass('Twinleaf Town') }"
-         , visible:  "MapHelper.ableToTravel()"
-         , image: "assets/images/map/blimp-empty.png"
+         , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+         , image: "assets/images/map/blimp_empty.png"
          })
      %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Professor Rowan's Blimp"
+         , x: 12, y: 53
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('Twinleaf Town')}, attr:{ class: MapHelper.calculateTownCssClass('Twinleaf Town') }"
+         , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+         , image: "assets/images/map/blimp_pikachu.png"
+         })
+     %>
+
 </g>
