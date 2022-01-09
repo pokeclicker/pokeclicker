@@ -23,8 +23,8 @@ class PokemonFactory {
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
         const routeAvgHp = (region, route) => {
-            let poke = [...new Set(Object.values(Routes.getRoute(region, route).pokemon).flat().map(p => p.pokemon ?? p).flat())];
-            let total = poke.map(p => pokemonMap[p].base.hitpoints).reduce((s, a) => s + a, 0);
+            const poke = [...new Set(Object.values(Routes.getRoute(region, route).pokemon).flat().map(p => p.pokemon ?? p).flat())];
+            const total = poke.map(p => pokemonMap[p].base.hitpoints).reduce((s, a) => s + a, 0);
             return total / poke.length;
         };
 
