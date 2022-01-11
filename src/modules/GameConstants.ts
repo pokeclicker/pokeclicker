@@ -482,7 +482,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Lake Verity', 'Lake Valor', 'Pastoria City']),
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City', 'Plasma Frigate']),
         [Region.kalos]: new Set([8, 'Coumarine City', 'Couriway Town', 'Sea Spirit\'s Den']),
-        [Region.alola]: new Set([15, 19, 20, 'Seafolk Village', 'Brooklet Hill']),
+        [Region.alola]: new Set([15, 19, 20, 'Seafolk Village', 'Brooklet Hill', 'Lake of the Sunne and Moone']),
         [Region.galar]: new Set(['Hulbury', 5, 6, 8, 9, 19, 21]),
     },
 
@@ -526,7 +526,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.sinnoh]: new Set(['Spear Pillar', 'Hall of Origin', 'Stark Mountain']),
         [Region.unova]: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
         [Region.kalos]: new Set(['Glittering Cave', 'Reflection Cave']),
-        [Region.alola]: new Set(['Altar of the Sunne and Moone', 'Nebby', 'Resolution Cave']),
+        [Region.alola]: new Set(['Altar of the Sunne and Moone', 'Resolution Cave']),
         [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2']),
     },
 
@@ -1053,7 +1053,7 @@ export const AlolaDungeons = [
     'Ruins of Abundance',
     'Aether Foundation',
     'Vast Poni Canyon',
-    'The Bag',
+    'Lake of the Sunne and Moone',
     'Ruins of Hope',
     'Poni Meadow',
     'Resolution Cave',
