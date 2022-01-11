@@ -1852,6 +1852,14 @@ const VanivilleTownShop = new TownShop([
 const SantaluneCityShop = new TownShop([
     ItemList['Mystery_egg'],
 ]);
+const FriseurFurfrouShop = new Shop([
+    ItemList['Furfrou (Debutante)'],
+    ItemList['Furfrou (Diamond)'],
+    ItemList['Furfrou (Matron)'],
+    ItemList['Furfrou (Dandy)'],
+    ItemList['Furfrou (Kabuki)'],
+    ItemList['Furfrou (Pharaoh)'],
+], 'Friseur Furfrou');
 const AmbretteTownShop = new TownShop([
     ItemList['Water_egg'],
 ]);
@@ -1947,7 +1955,7 @@ TownList['Lumiose City'] = new Town(
     GameConstants.Region.kalos,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
-        shops: [DepartmentStoreShop],
+        shops: [DepartmentStoreShop,FriseurFurfrouShop],
         npcs: [LumioseEngineer],
     }
 );
