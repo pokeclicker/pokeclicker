@@ -5800,13 +5800,14 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
         }
     });
 
-dungeonList['The Bag'] = new Dungeon('The Bag',
-    ['Clefable', 'Delcatty', 'Sunflora', 'Heliolisk', 'Lunatone', 'Solrock'],
+dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and Moone',
+    ['Clefairy', 'Sunkern', 'Skitty', 'Lunatone', 'Solrock', 'Helioptile'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Lunala', 8000000, 70),
-        new DungeonBossPokemon('Solgaleo', 8000000, 70),
+        new DungeonBossPokemon('Cosmog', 8000000, 70),
+        new DungeonBossPokemon('Lunala', 1410000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Lunala)}),
+        new DungeonBossPokemon('Solgaleo', 1410000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Solgaleo)}),
     ],
     96500, 201, 35);
 

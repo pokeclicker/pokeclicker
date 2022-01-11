@@ -2185,7 +2185,6 @@ const ExeggutorIslandShop = new TownShop([
 ]);
 const AltaroftheSunneandMooneShop = new TownShop([
     ItemList['Poipole'],
-    ItemList['Cosmog'],
 ]);
 
 //Alola Towns
@@ -2285,7 +2284,6 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
         shops: [AltaroftheSunneandMooneShop],
-        dungeon: dungeonList['The Bag'],
     }
 );
 
@@ -2421,10 +2419,10 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     GameConstants.Region.alola,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))]
 );
-TownList['The Bag'] = new DungeonTown(
-    'The Bag',
+TownList['Lake of the Sunne and Moone'] = new DungeonTown(
+    'Lake of the Sunne and Moone',
     GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.Elite_UltraNecrozma)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
 );
 TownList['Ruins of Hope'] = new DungeonTown(
     'Ruins of Hope',
