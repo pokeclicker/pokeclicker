@@ -34,6 +34,9 @@ class Pokeballs implements Feature {
                     // between 15 (0 kills) → 0 (4012 kills)
                     return Math.min(15, Math.max(0, Math.pow(16, 1 - Math.pow(Math.max(0, kills - 10), 0.6) / 145) - 1));
                 }
+                if (App.game.gameState == GameConstants.GameState.dungeon) {
+                    return Math.min(15,Math.pow(DungeonRunner.timeLeftPercentage(),2) / 500);
+                }
                 return 0;
             }, 1000, 'Increased catch rate on routes with less Pokémon defeated', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
             new Pokeball(GameConstants.Pokeball.Timerball, () => {
@@ -41,6 +44,9 @@ class Pokeballs implements Feature {
                     const kills = App.game.statistics.routeKills[GameConstants.Region[player.region]]?.[player.route()]?.() || 0;
                     // between 0 (0 kills) → 15 (9920 kills)
                     return Math.min(15, Math.max(0, Math.pow(16, Math.pow(kills, 0.6) / 250) - 1));
+                }
+                if (App.game.gameState == GameConstants.GameState.dungeon) {
+                    return Math.min(15,100 / DungeonRunner.timeLeftPercentage());
                 }
                 return 0;
             }, 1000, 'Increased catch rate on routes with more Pokémon defeated', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
@@ -54,6 +60,45 @@ class Pokeballs implements Feature {
             }, 1000, 'Increased catch rate at night time or in dungeons', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
             // TODO: this needs some sort of bonus, possibly extra dungeon tokens
             new Pokeball(GameConstants.Pokeball.Luxuryball, () => 0, 1250, 'A Luxury Pokéball', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+
+            new Pokeball(GameConstants.Pokeball.Diveball, () => {
+                const numLandPokemon = Routes.getRoute(player.region,player.route()).pokemon.land.length > 0;
+                const numWaterPokemon = Routes.getRoute(player.region,player.route()).pokemon.water.length > 0;
+                const numHeadbuttPokemon = Routes.getRoute(player.region,player.route()).pokemon.headbutt.length > 0;
+                const numSpecialPokemon = Routes.getRoute(player.region,player.route()).pokemon.special.length > 0;
+
+                // If route has no Land Pokémon and has Water Pokémon
+                if (numLandPokemon == false && numHeadbuttPokemon == false && numSpecialPokemon == false && numWaterPokemon == true) {
+                    return 15;
+                }
+                return 0;
+            }, 1250, 'Increased catch rate on water routes', new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)),
+
+            new Pokeball(GameConstants.Pokeball.Lureball, () => {
+                const numLandPokemon = Routes.getRoute(player.region,player.route()).pokemon.land.length > 0;
+                const isWaterPokemon = Routes.getRoute(player.region,player.route()).pokemon.water.includes(Battle.enemyPokemon().name);
+
+                // If route has Land Pokémon and the current pokémon is a Water Pokémon
+                if (numLandPokemon == true && isWaterPokemon == true) {
+                    return 15;
+                }
+                return 0;
+            }, 1250, 'Increased catch rate on fished Pokémon', new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)),
+
+            new Pokeball(GameConstants.Pokeball.Nestball, () => {
+                const maxRoute = MapHelper.normalizeRoute(Routes.getRoute(GameConstants.MAX_AVAILABLE_REGION, Routes.getRoutesByRegion(GameConstants.MAX_AVAILABLE_REGION).length - 1).number, GameConstants.MAX_AVAILABLE_REGION);
+                const currentRoute = MapHelper.normalizeRoute(player.route(),player.region);
+
+                // Increased rate for earlier routes, scales with regional progression
+                return Math.min(15,Math.max(1,GameConstants.MAX_AVAILABLE_REGION) * maxRoute / currentRoute);
+            }, 1250, 'Increased catch rate on earlier routes', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+
+            new Pokeball(GameConstants.Pokeball.Repeatball, () => {
+                const amountCaught = App.game.statistics.pokemonCaptured[Battle.enemyPokemon().id]();
+
+                return Math.min(15,Math.pow(amountCaught,2) / 5000);
+            }, 1250, 'Increased catch rate with more catches', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+
         ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);
