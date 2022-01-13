@@ -62,13 +62,9 @@ class Pokeballs implements Feature {
             new Pokeball(GameConstants.Pokeball.Luxuryball, () => 0, 1250, 'A Luxury Pokéball', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Diveball, () => {
-                const numLandPokemon = Routes.getRoute(player.region,player.route()).pokemon.land.length > 0;
-                const numWaterPokemon = Routes.getRoute(player.region,player.route()).pokemon.water.length > 0;
-                const numHeadbuttPokemon = Routes.getRoute(player.region,player.route()).pokemon.headbutt.length > 0;
-                const numSpecialPokemon = Routes.getRoute(player.region,player.route()).pokemon.special.length > 0;
 
-                // If route has no Land Pokémon and has Water Pokémon
-                if (numLandPokemon == false && numHeadbuttPokemon == false && numSpecialPokemon == false && numWaterPokemon == true) {
+                // If area is a water environment,
+                if (MapHelper.getCurrentEnvironment() == 'Water') {
                     return 15;
                 }
                 return 0;
