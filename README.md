@@ -1,3 +1,13 @@
+DISCLAIMER: This Fork is basically for me to use at school. I'm making the tab seem like [DeltaMath](https://deltamath.com) when in reality, it's pokeclicker. It's just a tool for me to seem like im being productive lol.
+
+Actual PokeClicker details below.
+
+
+
+
+
+
+
 [![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/pokeclicker/pokeclicker/develop?label=dev%20version)](https://github.com/pokeclicker/pokeclicker/tree/develop)<br/>
 [![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/pokeclicker/pokeclicker/master?label=live%20version)](https://www.pokeclicker.com/)<br/>
 [![Build Status](https://img.shields.io/travis/com/pokeclicker/pokeclicker?logo=travis)](https://travis-ci.com/pokeclicker/pokeclicker)<br/>
