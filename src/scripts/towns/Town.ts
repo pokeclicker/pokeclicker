@@ -756,8 +756,8 @@ const MossdeepAstronomer = new NPC('Astronomer', [
 ]);
 
 const PacifidlogDiver = new NPC('Diver', [
-    'Yo! Find any cool stuff in chests lately? I\'ve heard that if you beat a Dungeon a lot then the stuff you find in chests gets even more awesome.',
-    'I\'ve even found Masterballs in Chests! Who would put a Masterball in a chest?',
+    'Yo! Find any cool stuff in chests lately?',
+    ' I\'ve heard that if you beat a Dungeon a lot then the stuff you find in chests gets even more awesome.',
 ]);
 
 const SootopolisWallace = new NPC('Gym Leader Wallace', [
