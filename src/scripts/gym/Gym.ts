@@ -1461,7 +1461,7 @@ gymList['Special Agent Anabel'] = new Gym(
     ],
     BadgeEnums.Agent_Anabel,
     64000,
-    'Oh you\'re good! You might just have a shot, here is a Beast Ball. Go hunt down those strange Ultra Beasts! If you collect any tokens from them you can trade them for more Beast Balls here.',
+    'Oh you\'re good! You might just have a shot, here is a Beast Ball. Go hunt down those strange Ultra Beasts! If you collect any Beast Points from them you can trade them for more Beast Balls here.',
     [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
 );
 
