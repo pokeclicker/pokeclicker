@@ -1127,7 +1127,7 @@ dungeonList['Mt Mortar'] = new Dungeon('Mt Mortar',
         {pokemon: 'Geodude', options: { weight: 0.5 }},
         {pokemon: 'Graveler', options: { weight: 0.5 }},
         {pokemon: 'Marill', options: { weight: 0.5 }},
-        new DungeonTrainer('Pokémaniac',
+        new DungeonTrainer('PokéManiac',
             [
                 new GymPokemon('Nidoking', 5500, 17),
                 new GymPokemon('Nidoqueen', 5500, 17),
