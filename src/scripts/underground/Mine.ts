@@ -8,7 +8,7 @@ class Mine {
     public static itemsBuried: KnockoutObservable<number> = ko.observable(0);
     public static rewardNumbers: Array<number>;
     public static surveyResult = ko.observable(null);
-    public static skipsRemaining = ko.observable(Mine.maxSkips)
+    public static skipsRemaining = ko.observable(Mine.maxSkips);
 
     // 0 represents the Mine.Tool.Chisel but it's not loaded here yet.
     public static toolSelected: KnockoutObservable<Mine.Tool> = ko.observable(0);
@@ -315,7 +315,7 @@ class Mine {
     public static checkItemsRevealed() {
         for (let i = 0; i < Mine.rewardNumbers.length; i++) {
             if (Mine.checkItemRevealed(Mine.rewardNumbers[i])) {
-                Underground.gainMineItem(Mine.rewardNumbers[i]);
+                let amount = 1;
                 const itemName = Underground.getMineItemById(Mine.rewardNumbers[i]).name;
                 Notifier.notify({
                     message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}`,
@@ -325,7 +325,7 @@ class Mine {
                 if (App.game.oakItems.isActive(OakItems.OakItem.Treasure_Scanner)) {
                     const giveDouble = App.game.oakItems.calculateBonus(OakItems.OakItem.Treasure_Scanner) / 100;
                     if (Rand.chance(giveDouble)) {
-                        Underground.gainMineItem(Mine.rewardNumbers[i]);
+                        amount++;
                         Notifier.notify({
                             message: `You found an extra ${GameConstants.humanifyString(itemName)} in the Mine!`,
                             type: NotificationConstants.NotificationOption.success,
@@ -334,7 +334,7 @@ class Mine {
                         });
 
                         if (Rand.chance(giveDouble)) {
-                            Underground.gainMineItem(Mine.rewardNumbers[i]);
+                            amount++;
                             Notifier.notify({
                                 message: `Lucky! You found another ${GameConstants.humanifyString(itemName)}!`,
                                 type: NotificationConstants.NotificationOption.success,
@@ -343,7 +343,7 @@ class Mine {
                             });
 
                             if (Rand.chance(giveDouble)) {
-                                Underground.gainMineItem(Mine.rewardNumbers[i]);
+                                amount++;
                                 Notifier.notify({
                                     message: `Jackpot! You found another ${GameConstants.humanifyString(itemName)}!`,
                                     type: NotificationConstants.NotificationOption.success,
@@ -356,8 +356,9 @@ class Mine {
                 }
 
                 App.game.oakItems.use(OakItems.OakItem.Treasure_Scanner);
-                Mine.itemsFound(Mine.itemsFound() + 1);
-                GameHelper.incrementObservable(App.game.statistics.undergroundItemsFound);
+                Underground.gainMineItem(Mine.rewardNumbers[i], amount);
+                GameHelper.incrementObservable(Mine.itemsFound);
+                GameHelper.incrementObservable(App.game.statistics.undergroundItemsFound, amount);
                 Mine.rewardNumbers.splice(i, 1);
                 i--;
                 Mine.checkCompleted();
