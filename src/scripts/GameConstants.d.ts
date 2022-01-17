@@ -159,7 +159,7 @@ namespace GameConstants {
         dungeonToken,
         diamond,
         farmPoint,
-        battlePoint
+        battlePoint,
     }
     declare enum TypeEffectiveness {
         Immune,
@@ -259,7 +259,21 @@ namespace GameConstants {
         'Lucky_egg' = '',
         'Token_collector' = '',
         'Item_magnet' = '',
-        'Lucky_incense' = ''
+        'Lucky_incense' = '',
+        'Red_Flute' = '',
+        'White_Flute' = '',
+        'Black_Flute' = '',
+        'Yellow_Flute' = '',
+        'Blue_Flute' = '',
+        'Poke_Flute' = ''
+    }
+    declare enum FluteItemType {
+        //'Red_Flute' = '',
+        //'White_Flute' = '',
+        //'Black_Flute' = '',
+        //'Yellow_Flute' = '',
+        //'Blue_Flute' = '',
+        //'Poke_Flute' = ''
     }
     declare enum PokemonItemType {
         'Eevee',

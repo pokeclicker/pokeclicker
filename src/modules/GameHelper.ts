@@ -130,6 +130,16 @@ export default class GameHelper {
         return this.binarySearch(testTooHigh, newMin, newMax);
     }
 
+    public static chunk<T>(size: number, array: Array<T>): Array<Array<T>> {
+        let i = 0; let residx = 0; const
+            res = [];
+        while (i < array.length) {
+            res[residx] = array.slice(i, i += size);
+            residx += 1;
+        }
+        return res;
+    }
+
     private static getTomorrow() {
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
