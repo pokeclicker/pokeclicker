@@ -74,6 +74,11 @@ class OakItem extends ExpUpgrade {
     }
 
     // Knockout getters/setters
+    get expPercentage() {
+        const nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
+        return Math.floor(this.normalizedExp / this.expGain) / Math.ceil(nextLevelExp / this.expGain) * 100;
+    }
+
     get progressString(): string {
         const nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
         return `${Math.floor(this.normalizedExp / this.expGain)} / ${Math.ceil(nextLevelExp / this.expGain)}`;
