@@ -1164,7 +1164,7 @@ class Farming implements Feature {
 
         if (plot.clearMulch()) {
             GameHelper.incrementObservable(this.mulchShovelAmt, -1);
-            //GameHelper.incrementObservable(App.game.statistics.totalShovelsUsed, 1);
+            GameHelper.incrementObservable(App.game.statistics.totalShovelsUsed, 1);
         }
 
         this.resetAuras();
