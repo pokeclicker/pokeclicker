@@ -724,6 +724,9 @@ const HoennBerryMaster = new BerryMasterShop([
     ItemList['FarmHandKerry'],
 ]);
 
+//Hoenn Berry Master
+const HoennFluteMaster = new ShardMasterShop([]);
+
 //Hoenn NPCs
 
 const LittlerootAide = new NPC('Professor Birch\'s Aide', [
@@ -845,7 +848,7 @@ TownList['Fallarbor Town'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 113)],
-        shops: [FallarborTownShop],
+        shops: [FallarborTownShop, HoennFluteMaster],
         npcs: [FallarborProfessorCozmo],
     }
 );

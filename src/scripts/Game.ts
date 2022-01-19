@@ -91,6 +91,7 @@ class Game {
 
         this.computeOfflineEarnings();
         this.checkAndFix();
+        ShardDeal.generateDeals();
 
         // If the player isn't on a route, they're in a town/dungeon
         this.gameState = player.route() ? GameConstants.GameState.fighting : GameConstants.GameState.town;
