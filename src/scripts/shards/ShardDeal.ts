@@ -53,6 +53,18 @@ class ShardDeal {
             ItemList['Blue_Flute'],
             10
         ));
+        list.push(new ShardDeal(
+            [
+                ShardType['Normal'],
+                ShardType['Fairy'],
+            ],
+            [
+                1,
+                20,
+            ],
+            ItemList['Red_Flute'],
+            10
+        ));
         return list;
     }
 
@@ -62,7 +74,11 @@ class ShardDeal {
 
     public static canUse(region: GameConstants.Region, i: number): boolean {
         const deal = ShardDeal.list[region].peek()[i];
-        return deal.shards.every((value) => App.game.shards.shardWallet[value.shardType]() >= value.amount);
+        if (player.itemList[deal.item.itemType.name]() > 0) {
+            return false;
+        } else {
+            return deal.shards.every((value) => App.game.shards.shardWallet[value.shardType]() >= value.amount);
+        }
     }
 
     public static use(region: GameConstants.Region, i: number, tradeTimes = 1) {
