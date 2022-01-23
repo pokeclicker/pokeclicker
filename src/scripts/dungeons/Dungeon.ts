@@ -5114,31 +5114,21 @@ dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
     ],
     835000, 3, 14);
 
-dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
-    ['Florges (Red)', 'Comfey', 'Dedenne', 'Ampharos', 'Electivire'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
-    [
-        new DungeonBossPokemon('Jolteon', 8000000, 70),
-        new DungeonBossPokemon('Sylveon', 8000000, 70),
-        new DungeonBossPokemon('Tapu Koko', 8000000, 70),
-    ],
-    96500, 201, 35);
 
 dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
     ['Pikachu', 'Pichu'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    11952804,
     [
-        new DungeonBossPokemon('Pikachu (Original cap)', 8000000, 70),
-        new DungeonBossPokemon('Pikachu (Hoenn cap)', 8000000, 70),
-        new DungeonBossPokemon('Pikachu (Sinnoh cap)', 8000000, 70),
-        new DungeonBossPokemon('Pikachu (Unova cap)', 8000000, 70),
-        new DungeonBossPokemon('Pikachu (Kalos cap)', 8000000, 70),
-        new DungeonBossPokemon('Pikachu (Alola cap)', 8000000, 70),
-        new DungeonBossPokemon('Pikachu (Partner cap)', 8000000, 70),
+        new DungeonBossPokemon('Pikachu (Original cap)', 59764020, 15),
+        new DungeonBossPokemon('Pikachu (Hoenn cap)', 59764020, 15),
+        new DungeonBossPokemon('Pikachu (Sinnoh cap)', 59764020, 15),
+        new DungeonBossPokemon('Pikachu (Unova cap)', 59764020, 15),
+        new DungeonBossPokemon('Pikachu (Kalos cap)', 59764020, 15),
+        new DungeonBossPokemon('Pikachu (Alola cap)', 59764020, 15),
+        new DungeonBossPokemon('Pikachu (Partner cap)', 59764020, 15),
     ],
-    96500, 201, 35);
+    850000, 4, 15);
 
 dungeonList['Paniola Ranch'] = new Dungeon('Paniola Ranch',
     [
@@ -5803,6 +5793,17 @@ dungeonList['Nebby'] = new Dungeon('Nebby',
     [
         new DungeonBossPokemon('Lunala', 8000000, 70),
         new DungeonBossPokemon('Solgaleo', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
+    ['Florges (Red)', 'Comfey', 'Dedenne', 'Ampharos', 'Electivire'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    2203000,
+    [
+        new DungeonBossPokemon('Jolteon', 8000000, 70),
+        new DungeonBossPokemon('Sylveon', 8000000, 70),
+        new DungeonBossPokemon('Tapu Koko', 8000000, 70),
     ],
     96500, 201, 35);
 
