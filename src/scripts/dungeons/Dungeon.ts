@@ -5055,17 +5055,17 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
         {pokemon: 'Noibat', options: { weight: 0.8 }},
         {pokemon: 'Yungoos', options: { weight: 0.8 }},
         new DungeonTrainer('Team Skull Grunt',
-            [new GymPokemon('Drowzee', 3500000, 11)], { weight: 1 }, undefined, '(male)'),
+            [new GymPokemon('Drowzee', 11595673, 11)], { weight: 1 }, undefined, '(male)'),
     ],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    11595673,
     [
-        new DungeonBossPokemon('Alolan Raticate', 8000000, 70),
-        new DungeonBossPokemon('Gumshoos', 8000000, 70),
+        new DungeonBossPokemon('Alolan Raticate', 57978365, 12),
+        new DungeonBossPokemon('Gumshoos', 57978365, 12),
         new DungeonBossPokemon('Totem Alolan Raticate', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
         new DungeonBossPokemon('Totem Gumshoos', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35,
+    810000, 2, 11,
     () => {
         if (!App.game.badgeCase.hasBadge(BadgeEnums.NormaliumZ)) {
             GymRunner.gymObservable(gymList['Ilima\'s Trial']);
@@ -5083,15 +5083,15 @@ dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
         {pokemon: 'Petilil', options: { weight: 0.66 }},
         {pokemon: 'Cutiefly', options: { weight: 0.66 }},
         new DungeonTrainer('Actor',
-            [new GymPokemon('Oricorio (Pom-pom)', 3500000, 12)], { weight: 1 }, 'Meredith'),
+            [new GymPokemon('Oricorio (Pom-pom)', 11769270, 12)], { weight: 1 }, 'Meredith'),
     ],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    825000,
     [
-        new DungeonBossPokemon('Flabébé (Red)', 8000000, 70),
-        new DungeonBossPokemon('Oricorio (Pom-pom)', 8000000, 70),
+        new DungeonBossPokemon('Flabébé (Red)', 58846350, 12),
+        new DungeonBossPokemon('Oricorio (Pom-pom)', 58846350, 12),
     ],
-    96500, 201, 35);
+    11769270, 3, 12);
 
 dungeonList['Seaward Cave'] = new Dungeon('Seaward Cave',
     ['Zubat', 'Psyduck', 'Seel', 'Magikarp', 'Smoochum'],
