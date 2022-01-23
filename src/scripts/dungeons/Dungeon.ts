@@ -5373,12 +5373,12 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
 dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
     ['Golbat', 'Gastly', 'Haunter', 'Gengar', 'Shuppet', 'Banette', 'Jellicent', 'Klefki'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    14705422,
     [
-        new DungeonBossPokemon('Mimikyu', 8000000, 70),
-        new DungeonBossPokemon('Totem Mimikyu', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Mimikyu', 73527110, 35),
+        new DungeonBossPokemon('Totem Mimikyu', 8000000, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35,
+    1025000, 14, 34,
     () => {
         if (!App.game.badgeCase.hasBadge(BadgeEnums.GhostiumZ)) {
             GymRunner.gymObservable(gymList['Acerola\'s Trial']);
