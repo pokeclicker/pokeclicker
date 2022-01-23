@@ -5579,12 +5579,12 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
 dungeonList['Exeggutor Island Hill'] = new Dungeon('Exeggutor Island Hill',
     ['Exeggcute', 'Pelipper', 'Gastrodon (east)'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    15773066,
     [
-        new DungeonBossPokemon('Pinsir', 8000000, 70),
-        new DungeonBossPokemon('Tropius', 8000000, 70),
+        new DungeonBossPokemon('Pinsir', 78865330, 45),
+        new DungeonBossPokemon('Tropius', 78865330, 45),
     ],
-    96500, 201, 35);
+    1100000, 24, 45);
 
 dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
     [
