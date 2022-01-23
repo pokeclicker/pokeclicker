@@ -5065,7 +5065,7 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
         new DungeonBossPokemon('Totem Alolan Raticate', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
         new DungeonBossPokemon('Totem Gumshoos', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    810000, 2, 11,
+    805000, 2, 11,
     () => {
         if (!App.game.badgeCase.hasBadge(BadgeEnums.NormaliumZ)) {
             GymRunner.gymObservable(gymList['Ilima\'s Trial']);
@@ -5086,33 +5086,33 @@ dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
             [new GymPokemon('Oricorio (Pom-pom)', 11769270, 12)], { weight: 1 }, 'Meredith'),
     ],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    825000,
+    11769270,
     [
         new DungeonBossPokemon('Flabébé (Red)', 58846350, 12),
         new DungeonBossPokemon('Oricorio (Pom-pom)', 58846350, 12),
     ],
-    11769270, 3, 12);
+    825000, 3, 12);
 
 dungeonList['Seaward Cave'] = new Dungeon('Seaward Cave',
     ['Zubat', 'Psyduck', 'Seel', 'Magikarp', 'Smoochum'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    835000,
+    11845338,
     [
         new DungeonBossPokemon('Delibird', 59226690, 12),
         new DungeonBossPokemon('Barboach', 59226690, 17),
     ],
-    11845338, 3, 17);
+    830000, 3, 17);
 
 dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
     ['Zubat', 'Machop', 'Psyduck', 'Mawile', 'Roggenrola'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    11897821,
     [
-        new DungeonBossPokemon('Spinda', 8000000, 70),
-        new DungeonBossPokemon('Carbink', 8000000, 70),
-        new DungeonBossPokemon('Rockruff', 8000000, 70),
+        new DungeonBossPokemon('Spinda', 59489105, 14),
+        new DungeonBossPokemon('Carbink', 59489105, 14),
+        new DungeonBossPokemon('Rockruff', 59489105, 14),
     ],
-    96500, 201, 35);
+    835000, 3, 14);
 
 dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
     ['Florges (Red)', 'Comfey', 'Dedenne', 'Ampharos', 'Electivire'],
