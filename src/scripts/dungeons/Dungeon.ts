@@ -5096,12 +5096,12 @@ dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
 dungeonList['Seaward Cave'] = new Dungeon('Seaward Cave',
     ['Zubat', 'Psyduck', 'Seel', 'Magikarp', 'Smoochum'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    835000,
     [
-        new DungeonBossPokemon('Delibird', 8000000, 70),
-        new DungeonBossPokemon('Barboach', 8000000, 70),
+        new DungeonBossPokemon('Delibird', 59226690, 12),
+        new DungeonBossPokemon('Barboach', 59226690, 17),
     ],
-    96500, 201, 35);
+    11845338, 3, 17);
 
 dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
     ['Zubat', 'Machop', 'Psyduck', 'Mawile', 'Roggenrola'],
