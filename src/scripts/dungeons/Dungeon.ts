@@ -5246,12 +5246,12 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
 dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
     ['Metapod', 'Paras', 'Pinsir', 'Hoothoot', 'Bonsly', 'Trumbeak', 'Fomantis', 'Bounsweet', 'Steenee', 'Comfey', 'Oranguru', 'Passimian'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    13090332,
     [
-        new DungeonBossPokemon('Lurantis', 8000000, 70),
-        new DungeonBossPokemon('Totem Lurantis', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Lurantis', 65451660, 24),
+        new DungeonBossPokemon('Totem Lurantis', 8000000, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35,
+    925000, 8, 21,
     () => {
         if (!App.game.badgeCase.hasBadge(BadgeEnums.GrassiumZ)) {
             GymRunner.gymObservable(gymList['Mallow\'s Trial']);
