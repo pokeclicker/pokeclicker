@@ -5033,19 +5033,19 @@ dungeonList['Hau\'oli Cemetery'] = new Dungeon('Hau\'oli Cemetery',
         {pokemon: 'Gastly', options: { weight: 4 }},
         {pokemon: 'Misdreavus', options: { weight: 4 }},
         new DungeonTrainer('Pokémon Breeder',
-            [new GymPokemon('Pikachu', 3500000, 9)], { weight: 1 }, 'Ikue', '(female)'),
+            [new GymPokemon('Pikachu', 11587450, 9)], { weight: 1 }, 'Ikue', '(female)'),
         new DungeonTrainer('Office Worker',
-            [new GymPokemon('Pikipek', 3500000, 9)], { weight: 1 }, 'Jeremy', '(male)'),
+            [new GymPokemon('Pikipek', 11587450, 9)], { weight: 1 }, 'Jeremy', '(male)'),
         new DungeonTrainer('Preschooler',
-            [new GymPokemon('Happiny', 3500000, 8)], { weight: 1 }, 'Malia', '(female)'),
+            [new GymPokemon('Happiny', 11587450, 8)], { weight: 1 }, 'Malia', '(female)'),
     ],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    11587450,
     [
-        new DungeonBossPokemon('Drifloon', 8000000, 70),
-        new DungeonBossPokemon('Litwick', 8000000, 70),
+        new DungeonBossPokemon('Drifloon', 28968625, 9),
+        new DungeonBossPokemon('Litwick', 28968625, 9),
     ],
-    96500, 201, 35);
+    800000, 2, 9);
 
 dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
     [
