@@ -2384,19 +2384,6 @@ TownList['Po Town'] = new DungeonTown(
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 17)]
 );
-TownList['Mount Lanakila'] = new DungeonTown(
-    'Mount Lanakila',
-    GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
-);
-TownList['Ruins of Abundance'] = new DungeonTown(
-    'Ruins of Abundance',
-    GameConstants.Region.alola,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.alola, 23),
-        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
-    ]
-);
 TownList['Aether Foundation'] = new DungeonTown(
     'Aether Foundation',
     GameConstants.Region.alola,
@@ -2417,6 +2404,11 @@ TownList['Nebby'] = new DungeonTown(
     GameConstants.Region.alola,
     [new GymBadgeRequirement(BadgeEnums.Elite_UltraNecrozma)]
 );
+TownList['Mount Lanakila'] = new DungeonTown(
+    'Mount Lanakila',
+    GameConstants.Region.alola,
+    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
+);
 TownList['Ruins of Conflict'] = new DungeonTown(
     'Ruins of Conflict',
     GameConstants.Region.alola,
@@ -2427,6 +2419,14 @@ TownList['Ruins of Life'] = new DungeonTown(
     GameConstants.Region.alola,
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 21),
+        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
+    ]
+);
+TownList['Ruins of Abundance'] = new DungeonTown(
+    'Ruins of Abundance',
+    GameConstants.Region.alola,
+    [
+        new RouteKillRequirement(10, GameConstants.Region.alola, 23),
         new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
     ]
 );
