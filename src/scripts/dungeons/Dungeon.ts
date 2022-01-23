@@ -5290,37 +5290,26 @@ dungeonList['Memorial Hill'] = new Dungeon('Memorial Hill',
         {pokemon: 'Phantump', options: { weight: 10 }},
         new DungeonTrainer('Preschooler',
             [
-                new GymPokemon('Magby', 32395730, 23),
-                new GymPokemon('Ledian', 33254840, 23),
+                new GymPokemon('Magby', 13286024, 23),
+                new GymPokemon('Ledian', 13286024, 23),
             ], { weight: 1 }, 'Liam', '(male)'),
         new DungeonTrainer('Gentleman',
-            [new GymPokemon('Jolteon', 3500000, 24)], { weight: 1 }, 'Smith'),
+            [new GymPokemon('Jolteon', 13286024, 24)], { weight: 1 }, 'Smith'),
         new DungeonTrainer('Madame',
             [
-                new GymPokemon('Furfrou', 32395730, 24),
-                new GymPokemon('Comfey', 33254840, 24),
+                new GymPokemon('Furfrou', 13286024, 24),
+                new GymPokemon('Comfey', 13286024, 24),
             ], { weight: 1 }, 'Sayuri'),
         new DungeonTrainer('Punk Girl',
-            [new GymPokemon('Ariados', 3500000, 24)], { weight: 1 }, 'Melissa'),
+            [new GymPokemon('Ariados', 13286024, 24)], { weight: 1 }, 'Melissa'),
     ],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    13286024,
     [
         new DungeonTrainer('Team Skull Grunt',
-            [new GymPokemon('Alolan Raticate', 3500000, 24)], { weight: 1 }, undefined, '(male)'),
+            [new GymPokemon('Alolan Raticate', 66430120, 24)], { weight: 1 }, undefined, '(male)'),
     ],
-    96500, 201, 35);
-
-dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
-    ['Florges (Red)', 'Comfey', 'Gardevoir', 'Chimecho', 'Musharna'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
-    [
-        new DungeonBossPokemon('Espeon', 8000000, 70),
-        new DungeonBossPokemon('Sylveon', 8000000, 70),
-        new DungeonBossPokemon('Tapu Lele', 8000000, 70),
-    ],
-    96500, 201, 35);
+    950000, 9, 24);
 
 dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
     [
@@ -5804,6 +5793,17 @@ dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
         new DungeonBossPokemon('Jolteon', 8000000, 70),
         new DungeonBossPokemon('Sylveon', 8000000, 70),
         new DungeonBossPokemon('Tapu Koko', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
+    ['Florges (Red)', 'Comfey', 'Gardevoir', 'Chimecho', 'Musharna'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    2203000,
+    [
+        new DungeonBossPokemon('Espeon', 8000000, 70),
+        new DungeonBossPokemon('Sylveon', 8000000, 70),
+        new DungeonBossPokemon('Tapu Lele', 8000000, 70),
     ],
     96500, 201, 35);
 

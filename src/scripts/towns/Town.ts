@@ -2324,11 +2324,6 @@ TownList['Ten Carat Hill'] = new DungeonTown(
     GameConstants.Region.alola,
     [new GymBadgeRequirement(BadgeEnums.FightiniumZ)]
 );
-TownList['Ruins of Conflict'] = new DungeonTown(
-    'Ruins of Conflict',
-    GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
-);
 TownList['Pikachu Valley'] = new DungeonTown(
     'Pikachu Valley',
     GameConstants.Region.alola,
@@ -2363,14 +2358,6 @@ TownList['Memorial Hill'] = new DungeonTown(
     'Memorial Hill',
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 9)]
-);
-TownList['Ruins of Life'] = new DungeonTown(
-    'Ruins of Life',
-    GameConstants.Region.alola,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.alola, 21),
-        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
-    ]
 );
 TownList['Malie Garden'] = new DungeonTown(
     'Malie Garden',
@@ -2429,6 +2416,19 @@ TownList['Nebby'] = new DungeonTown(
     'Nebby',
     GameConstants.Region.alola,
     [new GymBadgeRequirement(BadgeEnums.Elite_UltraNecrozma)]
+);
+TownList['Ruins of Conflict'] = new DungeonTown(
+    'Ruins of Conflict',
+    GameConstants.Region.alola,
+    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
+);
+TownList['Ruins of Life'] = new DungeonTown(
+    'Ruins of Life',
+    GameConstants.Region.alola,
+    [
+        new RouteKillRequirement(10, GameConstants.Region.alola, 21),
+        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
+    ]
 );
 TownList['Ruins of Hope'] = new DungeonTown(
     'Ruins of Hope',
