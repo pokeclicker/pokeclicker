@@ -5354,14 +5354,14 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
 dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
     ['Grubbin', 'Charjabug', 'Elekid', 'Electabuzz', 'Skarmory', 'Dedenne'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    13883676,
     [
-        new DungeonBossPokemon('Vikavolt', 8000000, 70),
-        new DungeonBossPokemon('Togedemaru', 8000000, 70),
-        new DungeonBossPokemon('Totem Vikavolt', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
-        new DungeonBossPokemon('Totem Togedemaru', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Vikavolt', 69418380, 29),
+        new DungeonBossPokemon('Togedemaru', 69418380, 33),
+        new DungeonBossPokemon('Totem Vikavolt', 8000000, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Togedemaru', 8000000, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    96500, 201, 35,
+    1000000, 22, 27,
     () => {
         if (!App.game.badgeCase.hasBadge(BadgeEnums.ElectriumZ)) {
             GymRunner.gymObservable(gymList['Sophocles\' Trial']);
