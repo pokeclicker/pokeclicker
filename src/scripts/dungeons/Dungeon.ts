@@ -5840,30 +5840,30 @@ dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
 
 dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
     [
-        {pokemon: 'Golbat', options: { weight: 4 }},
+        {pokemon: 'Zubat', options: { weight: 4 }},
         {pokemon: 'Alolan Dugtrio', options: { weight: 4 }},
         {pokemon: 'Druddigon', options: { weight: 4 }},
         new DungeonTrainer('Veteran',
             [
-                new GymPokemon('Ribombee', 32395730, 61),
-                new GymPokemon('Bewear', 33254840, 61),
+                new GymPokemon('Ribombee', 17114462, 61),
+                new GymPokemon('Bewear', 17114462, 61),
             ], { weight: 1 }, 'Leticia', '(female)'),
         new DungeonTrainer('Backpacker',
-            [new GymPokemon('Manectric', 3500000, 59)], { weight: 1 }, 'Maria', '(female)'),
+            [new GymPokemon('Manectric', 17114462, 59)], { weight: 1 }, 'Maria', '(female)'),
         new DungeonTrainer('Hiker',
             [
-                new GymPokemon('Alolan Dugtrio', 32395730, 59),
-                new GymPokemon('Mudsdale', 33254840, 59),
+                new GymPokemon('Alolan Dugtrio', 17114462, 59),
+                new GymPokemon('Mudsdale', 17114462, 59),
             ], { weight: 1 }, 'Travis'),
     ],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    17114462,
     [
-        new DungeonBossPokemon('Crobat', 8000000, 70),
-        new DungeonBossPokemon('Noivern', 8000000, 70),
-        new DungeonBossPokemon('Guzzlord', 8000000, 70),
+        new DungeonBossPokemon('Golbat', 85572310, 59),
+        new DungeonBossPokemon('Noivern', 85572310, 59),
+        new DungeonBossPokemon('Guzzlord', 90673816, 70),
     ],
-    96500, 201, 35);
+    1125000, 30, 59);
 
 
 
