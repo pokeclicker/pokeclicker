@@ -5828,15 +5828,15 @@ dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
         {pokemon: 'Misdreavus', options: { weight: 0.57 }},
         {pokemon: 'Barboach', options: { weight: 0.57 }},
         new DungeonTrainer('Actor',
-            [new GymPokemon('Oricorio (Sensu)', 3500000, 47)], { weight: 1 }, 'Meredith', '(female)'),
+            [new GymPokemon('Oricorio (Sensu)', 16659968, 57)], { weight: 1 }, 'Meredith', '(female)'),
     ],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    16659968,
     [
-        new DungeonBossPokemon('Oricorio (Sensu)', 8000000, 70),
-        new DungeonBossPokemon('Floette (Red)', 8000000, 70),
+        new DungeonBossPokemon('Oricorio (Sensu)', 83299840, 70),
+        new DungeonBossPokemon('Floette (Red)', 83299840, 70),
     ],
-    96500, 201, 35);
+    1100000, 28, 57);
 
 dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
     [
