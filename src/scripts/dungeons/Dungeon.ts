@@ -5062,8 +5062,8 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
     [
         new DungeonBossPokemon('Alolan Raticate', 57978365, 12),
         new DungeonBossPokemon('Gumshoos', 57978365, 12),
-        new DungeonBossPokemon('Totem Alolan Raticate', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
-        new DungeonBossPokemon('Totem Gumshoos', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Alolan Raticate', 82543791, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Gumshoos', 82543791, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     805000, 2, 11,
     () => {
@@ -5196,8 +5196,8 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
     [
         new DungeonBossPokemon('Wishiwashi (School)', 60690300, 20),
         new DungeonBossPokemon('Araquanid', 60690300, 20),
-        new DungeonBossPokemon('Totem Wishiwashi (School)', 8000000, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
-        new DungeonBossPokemon('Totem Araquanid', 8000000, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Wishiwashi (School)', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Araquanid', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     875000, 5, 17,
     () => {
@@ -5231,8 +5231,8 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
     [
         new DungeonBossPokemon('Alolan Marowak', 64481960, 22),
         new DungeonBossPokemon('Salazzle', 64481960, 22),
-        new DungeonBossPokemon('Totem Alolan Marowak', 8000000, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
-        new DungeonBossPokemon('Totem Salazzle', 8000000, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Alolan Marowak', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Salazzle', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     900000, 7, 19,
     () => {
@@ -5249,7 +5249,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
     13090332,
     [
         new DungeonBossPokemon('Lurantis', 65451660, 24),
-        new DungeonBossPokemon('Totem Lurantis', 8000000, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Lurantis', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     925000, 8, 21,
     () => {
@@ -5358,8 +5358,8 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
     [
         new DungeonBossPokemon('Vikavolt', 69418380, 29),
         new DungeonBossPokemon('Togedemaru', 69418380, 33),
-        new DungeonBossPokemon('Totem Vikavolt', 8000000, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
-        new DungeonBossPokemon('Totem Togedemaru', 8000000, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Vikavolt', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Togedemaru', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     1000000, 22, 27,
     () => {
@@ -5376,7 +5376,7 @@ dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
     14705422,
     [
         new DungeonBossPokemon('Mimikyu', 73527110, 35),
-        new DungeonBossPokemon('Totem Mimikyu', 8000000, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Mimikyu', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     1025000, 14, 34,
     () => {
@@ -5672,7 +5672,7 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
     15992044,
     [
         new DungeonBossPokemon('Kommo-o', 79960220, 49),
-        new DungeonBossPokemon('Totem Kommo-o', 8000000, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Kommo-o', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     1025000, 25, 48,
     () => {
@@ -5775,48 +5775,48 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
     1050000, 26, 50);
 
 dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
-    ['Florges (Red)', 'Comfey', 'Dedenne', 'Ampharos', 'Electivire'],
+    ['Floette (Red)', 'Comfey', 'Dedenne', 'Ampharos', 'Electabuzz'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    16435490,
     [
-        new DungeonBossPokemon('Jolteon', 8000000, 70),
-        new DungeonBossPokemon('Sylveon', 8000000, 70),
-        new DungeonBossPokemon('Tapu Koko', 8000000, 70),
+        new DungeonBossPokemon('Luxray', 82177450, 55),
+        new DungeonBossPokemon('Granbull', 82177450, 55),
+        new DungeonBossPokemon('Tapu Koko', 82543791, 60),
     ],
-    96500, 201, 35);
+    1075000, 27, 55);
 
 dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
-    ['Florges (Red)', 'Comfey', 'Gardevoir', 'Chimecho', 'Musharna'],
+    ['Floette (Red)', 'Comfey', 'Gardevoir', 'Chimecho', 'Munna'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    16435490,
     [
-        new DungeonBossPokemon('Espeon', 8000000, 70),
-        new DungeonBossPokemon('Sylveon', 8000000, 70),
-        new DungeonBossPokemon('Tapu Lele', 8000000, 70),
+        new DungeonBossPokemon('Wobbuffet', 82177450, 55),
+        new DungeonBossPokemon('Granbull', 82177450, 55),
+        new DungeonBossPokemon('Tapu Lele', 82543791, 60),
     ],
-    96500, 201, 35);
+    1075000, 27, 55);
 
 dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
-    ['Florges (Red)', 'Comfey', 'Whimsicott', 'Bellossom', 'Lilligant'],
+    ['Floette (Red)', 'Comfey', 'Cottonee', 'Gloom', 'Petilil'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    16435490,
     [
-        new DungeonBossPokemon('Leafeon', 8000000, 70),
-        new DungeonBossPokemon('Sylveon', 8000000, 70),
-        new DungeonBossPokemon('Tapu Bulu', 8000000, 70),
+        new DungeonBossPokemon('Maractus', 82177450, 55),
+        new DungeonBossPokemon('Granbull', 82177450, 55),
+        new DungeonBossPokemon('Tapu Bulu', 82543791, 60),
     ],
-    96500, 201, 35);
+    1075000, 27, 55);
 
 dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
-    ['Florges (Red)', 'Comfey', 'Azumarill', 'Politoed', 'Gorebyss'],
+    ['Floette (Red)', 'Comfey', 'Azumarill', 'Poliwhirl', 'Clamperl'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    16435490,
     [
-        new DungeonBossPokemon('Vaporeon', 8000000, 70),
-        new DungeonBossPokemon('Sylveon', 8000000, 70),
-        new DungeonBossPokemon('Tapu Fini', 8000000, 70),
+        new DungeonBossPokemon('Lumineon', 82177450, 55),
+        new DungeonBossPokemon('Granbull', 82177450, 55),
+        new DungeonBossPokemon('Tapu Fini', 82543791, 60),
     ],
-    96500, 201, 35);
+    1075000, 27, 55);
 
 dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
     [
