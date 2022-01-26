@@ -7,7 +7,7 @@ class fluteEffectRunner {
         GameHelper.enumStrings(GameConstants.FluteItemType).forEach((itemName) => {
             const item = (ItemList[itemName] as FluteItem);
             if (item.multiplierType) {
-                multiplier.addBonus(item.multiplierType, () => this.isActive(itemName)() ? item.multiplyBy : 1);
+                multiplier.addBonus(item.multiplierType, () => this.isActive(itemName)() ? item.multiplyBy * AchievementHandler.achievementBonus() : 1);
             }
             if (EffectEngineRunner.isActive(GameConstants.FluteItemType[itemName])()) {
                 GameHelper.incrementObservable(this.numActiveFlutes,1);
@@ -21,7 +21,6 @@ class fluteEffectRunner {
         for (const itemName in GameConstants.FluteItemType) {
             if (fluteEffectRunner.getLowestShard(itemName) > 0 && fluteEffectRunner.isActive(GameConstants.FluteItemType[itemName])()) {
                 player.effectList[itemName](Math.max(0, this.getLowestShard(itemName) - this.numActiveFlutes()));
-                this.shardCost(itemName);
                 this.updateFormattedTimeLeft(itemName);
             }
             if (player.effectList[itemName]() == 30) {
@@ -34,8 +33,10 @@ class fluteEffectRunner {
             }
             if (player.effectList[itemName]() == 1) {
                 GameHelper.incrementObservable(this.numActiveFlutes,-1);
+                player.gainItem(itemName, 1);
             }
         }
+        this.shardCost();
     }
 
     public static getLowestShard(itemName: string) {
@@ -45,9 +46,16 @@ class fluteEffectRunner {
         return shardMaxTime;
     }
 
-    public static shardCost(itemName: string) {
-        const item = (ItemList[itemName] as FluteItem);
-        item.shardTypes.forEach(idx => App.game.shards.gainShards(-this.numActiveFlutes(), ShardType[idx]));
+    public static shardCost() {
+        const shardNames = [];
+        for (const itemName in GameConstants.FluteItemType) {
+            if (fluteEffectRunner.isActive(GameConstants.FluteItemType[itemName])()) {
+                const item = (ItemList[itemName] as FluteItem);
+                item.shardTypes.forEach(idx => shardNames.push(ShardType[idx]));
+            }
+        }
+        const uniqueShards = [...new Set(shardNames)];
+        uniqueShards.forEach(idx => App.game.shards.gainShards(-this.numActiveFlutes(), idx));
     }
 
     public static getEffect(itemName: string) {

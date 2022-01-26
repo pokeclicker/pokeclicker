@@ -31,38 +31,86 @@ class ShardDeal {
 
         list.push(new ShardDeal(
             [
-                ShardType['Normal'],
+                ShardType['Fighting'],
                 ShardType['Fire'],
+                ShardType['Poison'],
             ],
             [
-                1,
-                20,
+                1000,
+                1000,
+                1000,
             ],
             ItemList['Red_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                ShardType['Dark'],
-                ShardType['Grass'],
+                ShardType['Normal'],
+                ShardType['Bug'],
+                ShardType['Rock'],
             ],
             [
-                1,
-                20,
+                1000,
+                1000,
+                1000,
+            ],
+            ItemList['White_Flute'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                ShardType['Normal'],
+                ShardType['Flying'],
+                ShardType['Poison'],
+            ],
+            [
+                1000,
+                1000,
+                1000,
+            ],
+            ItemList['Black_Flute'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                ShardType['Dark'],
+                ShardType['Electric'],
+                ShardType['Steel'],
+            ],
+            [
+                1000,
+                1000,
+                1000,
+            ],
+            ItemList['Yellow_Flute'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                ShardType['Dark'],
+                ShardType['Ghost'],
+                ShardType['Ice'],
+            ],
+            [
+                1000,
+                1000,
+                1000,
             ],
             ItemList['Blue_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                ShardType['Steel'],
+                ShardType['Fighting'],
+                ShardType['Ice'],
                 ShardType['Fairy'],
             ],
             [
-                1,
-                20,
+                1000,
+                1000,
+                1000,
             ],
-            ItemList['Black_Flute'],
+            ItemList['Poke_Flute'],
             1
         ));
         return list;
