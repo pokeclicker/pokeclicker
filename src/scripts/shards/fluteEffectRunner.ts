@@ -1,26 +1,27 @@
 class fluteEffectRunner {
     public static counter = 0;
-    public static numActiveFlutes = 0;
+    public static numActiveFlutes: KnockoutObservable<number> = ko.observable(0);
 
     public static initialize(multiplier: Multiplier) {
+        fluteEffectRunner.numActiveFlutes(0);
         GameHelper.enumStrings(GameConstants.FluteItemType).forEach((itemName) => {
             const item = (ItemList[itemName] as FluteItem);
             if (item.multiplierType) {
                 multiplier.addBonus(item.multiplierType, () => this.isActive(itemName)() ? item.multiplyBy : 1);
             }
             if (EffectEngineRunner.isActive(GameConstants.FluteItemType[itemName])()) {
-                fluteEffectRunner.numActiveFlutes += 1;
+                GameHelper.incrementObservable(this.numActiveFlutes,1);
             }
         });
     }
 
     public static tick() {
         this.counter = 0;
-        const shardsToReduce = fluteEffectRunner.numActiveFlutes;
+
         for (const itemName in GameConstants.FluteItemType) {
-            const timeRemaining = player.effectList[itemName]();
-            if (timeRemaining > 0) {
-                player.effectList[itemName](Math.max(0, timeRemaining - shardsToReduce));
+            if (fluteEffectRunner.getLowestShard(itemName) > 0 && fluteEffectRunner.isActive(GameConstants.FluteItemType[itemName])()) {
+                player.effectList[itemName](Math.max(0, this.getLowestShard(itemName) - this.numActiveFlutes()));
+                this.shardCost(itemName);
                 this.updateFormattedTimeLeft(itemName);
             }
             if (player.effectList[itemName]() == 30) {
@@ -31,7 +32,22 @@ class fluteEffectRunner {
                     setting: NotificationConstants.NotificationSetting.battle_item_timer,
                 });
             }
+            if (player.effectList[itemName]() == 1) {
+                GameHelper.incrementObservable(this.numActiveFlutes,-1);
+            }
         }
+    }
+
+    public static getLowestShard(itemName: string) {
+        const item = (ItemList[itemName] as FluteItem);
+        const shardArray = item.shardTypes.map(idx => App.game.shards.shardWallet[ShardType[idx]]());
+        const shardMaxTime = Math.min(...shardArray);
+        return shardMaxTime;
+    }
+
+    public static shardCost(itemName: string) {
+        const item = (ItemList[itemName] as FluteItem);
+        item.shardTypes.forEach(idx => App.game.shards.gainShards(-this.numActiveFlutes(), ShardType[idx]));
     }
 
     public static getEffect(itemName: string) {
@@ -42,12 +58,9 @@ class fluteEffectRunner {
     }
 
     public static addEffect(itemName: string) {
-        const item = (ItemList[itemName] as FluteItem);
-        const shardArray = item.shardTypes.map(idx => App.game.shards.shardWallet[ShardType[idx]]());
-        const shardMaxTime = Math.min(...shardArray);
 
         //NOTE: this if statement is untested
-        if (shardMaxTime == 0) {
+        if (fluteEffectRunner.getLowestShard(itemName) == 0) {
             Notifier.notify({
                 message: 'You don\'t have enough shards to use this Flute',
                 type: NotificationConstants.NotificationOption.danger,
@@ -55,7 +68,8 @@ class fluteEffectRunner {
             return;
         }
 
-        player.effectList[itemName](Math.max(0, player.effectList[itemName]() + shardMaxTime));
+        player.effectList[itemName](Math.max(0, player.effectList[itemName]() + fluteEffectRunner.getLowestShard(itemName)));
+        GameHelper.incrementObservable(this.numActiveFlutes,1);
         this.updateFormattedTimeLeft(itemName);
     }
 
