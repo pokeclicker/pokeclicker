@@ -260,20 +260,14 @@ namespace GameConstants {
         'Token_collector' = '',
         'Item_magnet' = '',
         'Lucky_incense' = '',
+    }
+    declare enum FluteItemType {
         'Red_Flute' = '',
         'White_Flute' = '',
         'Black_Flute' = '',
         'Yellow_Flute' = '',
         'Blue_Flute' = '',
         'Poke_Flute' = ''
-    }
-    declare enum FluteItemType {
-        //'Red_Flute' = '',
-        //'White_Flute' = '',
-        //'Black_Flute' = '',
-        //'Yellow_Flute' = '',
-        //'Blue_Flute' = '',
-        //'Poke_Flute' = ''
     }
     declare enum PokemonItemType {
         'Eevee',

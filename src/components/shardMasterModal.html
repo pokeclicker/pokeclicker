@@ -43,6 +43,7 @@
                                             <button class='btn btn-success btn-block' data-bind='click: function(){ShardDeal.use(player.region, $parentContext.$index(), tradeAmount())}, css: { disabled: !ShardDeal.canUse(player.region, $parentContext.$index()) }'>
                                                 Trade
                                             </button>
+                                            <!-- TODO: Make the dropdown button disappear for Flute trades -->
                                             <button type="button" data-bind="text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             </button>
                                             <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">

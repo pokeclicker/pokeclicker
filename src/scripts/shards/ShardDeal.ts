@@ -39,7 +39,7 @@ class ShardDeal {
                 20,
             ],
             ItemList['Red_Flute'],
-            10
+            1
         ));
         list.push(new ShardDeal(
             [
@@ -51,19 +51,19 @@ class ShardDeal {
                 20,
             ],
             ItemList['Blue_Flute'],
-            10
+            1
         ));
         list.push(new ShardDeal(
             [
-                ShardType['Normal'],
+                ShardType['Steel'],
                 ShardType['Fairy'],
             ],
             [
                 1,
                 20,
             ],
-            ItemList['Red_Flute'],
-            10
+            ItemList['Black_Flute'],
+            1
         ));
         return list;
     }
@@ -74,7 +74,7 @@ class ShardDeal {
 
     public static canUse(region: GameConstants.Region, i: number): boolean {
         const deal = ShardDeal.list[region].peek()[i];
-        if (player.itemList[deal.item.itemType.name]() > 0) {
+        if (player.itemList[deal.item.itemType.name]() > 0 || fluteEffectRunner.isActive(GameConstants.FluteItemType[deal.item.itemType.name])()) {
             return false;
         } else {
             return deal.shards.every((value) => App.game.shards.shardWallet[value.shardType]() >= value.amount);
@@ -93,6 +93,7 @@ class ShardDeal {
             deal.shards.forEach((value) =>
                 GameHelper.incrementObservable(App.game.shards.shardWallet[value.shardType], -value.amount * maxTrades));
             deal.item.itemType.gain(deal.item.amount * maxTrades);
+            //ShardDeal.list[player.region]().filter(p => p == deal) -> remove deal from array, needs to generate new list
         }
     }
 }

@@ -18,6 +18,7 @@
       <p data-bind="visible: App.game.challenges.list.disableBattleItems.active()" class="bg-danger my-0">
           Battle Items are disabled.
       </p>
+      <!-- Battle Items -->
       <table class="table table-bordered m-0">
         <tbody>
           <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem'))">
@@ -57,5 +58,61 @@
         </tbody>
       </table>
     </div>
+    <div class="card-header p-0" data-toggle="collapse" href="#fluteItemContainerBody">
+      <span>Flutes</span>
+    </div>
+    <button type="button" class="btn btn-sm btn-primary"
+            style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
+            data-bind="text: '1x'"
+            title="Controls"
+            data-toggle="popover"
+            data-html="true"
+            data-content="Left/right click to cycle amount<br/>Click on item image to use"
+            data-placement="right"
+            data-trigger="hover">1
+    </button>
+    <div id="fluteItemContainerBody" class="card-body p-0 show">
+      <p data-bind="visible: App.game.challenges.list.disableBattleItems.active()" class="bg-danger my-0">
+          Flutes are disabled.
+      </p>
+      <!-- Flutes -->
+      <table class="table table-bordered m-0">
+        <tbody>
+          <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'FluteItem'))">
+            <tr data-bind="foreach: $data"> 
+                 <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data](),trigger:'hover',placement:'top',animation:false}"></td>
+            </tr>
+            <tr data-bind="foreach: $data"> 
+                 <td class="p-0" data-bind="attr: {
+                                disabled: !player.itemList[$data]()
+                            },
+                            css: {
+                                'bg-primary': fluteEffectRunner.getEffect($data) > 30,
+                                'bg-warning': fluteEffectRunner.getEffect($data) <= 30 && fluteEffectRunner.getEffect($data) > 0,
+                                'bg-secondary': !fluteEffectRunner.isActive($data)()
+                            },
+                            event: {
+                                click: function(){ItemHandler.useItem($data)}
+                            },
+                            tooltip: {
+                              title: ItemList[$data].displayName + '<br/>' + ItemList[$data].description,
+                              trigger: 'hover',
+                              placement:'bottom',
+                              html: true
+                            }">
+                <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
 
+            </td>
+            </tr>
+            <tr data-bind="foreach: $data">
+                <td class="text-light p-0">
+              <!-- ko if: fluteEffectRunner.getEffect($data) > 0 -->
+                <code data-bind="text: player.effectTimer[$data](),tooltip: {title:GameConstants.formatSecondsToTime(player.effectList[$data]()),trigger:'hover',placement:'bottom',html:true}"></code>
+              <!-- /ko -->
+                </td>
+            </tr>
+          </tbody>
+        </tbody>
+      </table>
+    </div>
 </div>

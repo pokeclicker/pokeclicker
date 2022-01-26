@@ -47,6 +47,7 @@ class Game {
         AchievementHandler.initialize(multiplier, challenges);
         FarmController.initialize();
         EffectEngineRunner.initialize(multiplier);
+        fluteEffectRunner.initialize(multiplier);
     }
 
     load() {
@@ -279,10 +280,14 @@ class Game {
         // Farm
         this.farming.update(GameConstants.TICK_TIME / GameConstants.SECOND);
 
-        // Effect Engine (battle items)
+        // Effect Engine (battle items and flutes)
         EffectEngineRunner.counter += GameConstants.TICK_TIME;
         if (EffectEngineRunner.counter >= GameConstants.EFFECT_ENGINE_TICK) {
             EffectEngineRunner.tick();
+        }
+        fluteEffectRunner.counter += GameConstants.TICK_TIME;
+        if (fluteEffectRunner.counter >= GameConstants.EFFECT_ENGINE_TICK) {
+            fluteEffectRunner.tick();
         }
 
         // Game timers

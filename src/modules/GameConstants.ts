@@ -626,21 +626,15 @@ export enum BattleItemType {
     'Token_collector' = 'Token_collector',
     'Item_magnet' = 'Item_magnet',
     'Lucky_incense' = 'Lucky_incense',
+}
+
+export enum FluteItemType {
     'Red_Flute' = 'Red_Flute',
     'White_Flute' = 'White_Flute',
     'Black_Flute' = 'Black_Flute',
     'Yellow_Flute' = 'Yellow_Flute',
     'Blue_Flute' = 'Blue_Flute',
     'Poke_Flute' = 'Poke_Flute',
-}
-
-export enum FluteItemType {
-    // 'Red_Flute' = 'Red_Flute',
-    // 'White_Flute' = 'White_Flute',
-    // 'Black_Flute' = 'Black_Flute',
-    // 'Yellow_Flute' = 'Yellow_Flute',
-    // 'Blue_Flute' = 'Blue_Flute',
-    // 'Poke_Flute' = 'Poke_Flute',
     // 'Azure_Flute' = 'Azure_Flute',
     // 'Eon_Flute' = 'Eon_Flute',
     // 'Sun_Flute' = 'Sun_Flute',
