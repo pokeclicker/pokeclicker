@@ -9,7 +9,7 @@ class fluteEffectRunner {
             if (item.multiplierType) {
                 multiplier.addBonus(item.multiplierType, () => this.isActive(itemName)() ? item.multiplyBy * AchievementHandler.achievementBonus() : 1);
             }
-            if (EffectEngineRunner.isActive(GameConstants.FluteItemType[itemName])()) {
+            if (this.isActive(GameConstants.FluteItemType[itemName])()) {
                 GameHelper.incrementObservable(this.numActiveFlutes,1);
             }
         });
@@ -75,10 +75,21 @@ class fluteEffectRunner {
             });
             return;
         }
+        if (this.isActive(GameConstants.FluteItemType[itemName])()) {
+            this.removeEffect(itemName);
+            return;
+        }
 
         player.effectList[itemName](Math.max(0, player.effectList[itemName]() + fluteEffectRunner.getLowestShard(itemName)));
         GameHelper.incrementObservable(this.numActiveFlutes,1);
         this.updateFormattedTimeLeft(itemName);
+    }
+
+    public static removeEffect(itemName: string) {
+        player.effectList[itemName](0);
+        GameHelper.incrementObservable(this.numActiveFlutes,-1);
+        this.updateFormattedTimeLeft(itemName);
+        player.gainItem(itemName, 1);
     }
 
     public static updateFormattedTimeLeft(itemName: string) {
@@ -93,7 +104,7 @@ class fluteEffectRunner {
     }
 
     public static getDungeonTokenMultiplier() {
-        return this.isActive(GameConstants.BattleItemType.Token_collector)() ? 1.5 : 1;
+        return this.isActive(GameConstants.FluteItemType.Blue_Flute)() ? 1.5 : 1;
     }
 
 

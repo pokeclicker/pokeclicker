@@ -7,7 +7,8 @@ class ItemHandler {
     public static amountToUse = 1;
 
     public static useItem(name: string, amount = 1): boolean {
-        if (!player.itemList[name]()) {
+
+        if (!player.itemList[name]() && !(ItemList[name] instanceof FluteItem)) {
             Notifier.notify({
                 message: `You don't have any ${ItemList[name].displayName}s left...`,
                 type: NotificationConstants.NotificationOption.danger,

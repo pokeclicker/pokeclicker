@@ -267,7 +267,13 @@ namespace GameConstants {
         'Black_Flute' = '',
         'Yellow_Flute' = '',
         'Blue_Flute' = '',
-        'Poke_Flute' = ''
+        'Poke_Flute' = '',
+        'Azure_Flute' = '',
+        'Eon_Flute' = '',
+        'Sun_Flute' = '',
+        'Moon_Flute' = '',
+        'Time_Flute' = '',
+        'Grass_Flute' = '',
     }
     declare enum PokemonItemType {
         'Eevee',
