@@ -13,7 +13,7 @@ class ShardDeal {
     }
 
     public static generateDeals() {
-        const shardMasterRegions = [GameConstants.Region.hoenn];
+        const shardMasterRegions = [GameConstants.Region.hoenn, GameConstants.Region.unova];
 
         for (const region of shardMasterRegions) {
             if (!ShardDeal.list[region]) {
@@ -23,10 +23,11 @@ class ShardDeal {
             }
         }
 
-        ShardDeal.list[GameConstants.Region.hoenn].push(...this.generateFluteDeals());
+        ShardDeal.list[GameConstants.Region.hoenn].push(...this.generateHoennFluteDeals());
+        ShardDeal.list[GameConstants.Region.unova].push(...this.generateUnovaFluteDeals());
     }
 
-    private static generateFluteDeals() {
+    private static generateHoennFluteDeals() {
         const list = [];
 
         list.push(new ShardDeal(
@@ -111,6 +112,96 @@ class ShardDeal {
                 1000,
             ],
             ItemList['Poke_Flute'],
+            1
+        ));
+        return list;
+    }
+
+    private static generateUnovaFluteDeals() {
+        const list = [];
+
+        list.push(new ShardDeal(
+            [
+                ShardType['Dragon'],
+                ShardType['Ghost'],
+                ShardType['Psychic'],
+            ],
+            [
+                1000,
+                1000,
+                1000,
+            ],
+            ItemList['Azure_Flute'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                ShardType['Flying'],
+                ShardType['Dragon'],
+                ShardType['Psychic'],
+            ],
+            [
+                1000,
+                1000,
+                1000,
+            ],
+            ItemList['Eon_Flute'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                ShardType['Fire'],
+                ShardType['Ground'],
+                ShardType['Water'],
+            ],
+            [
+                1000,
+                1000,
+                1000,
+            ],
+            ItemList['Sun_Flute'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                ShardType['Rock'],
+                ShardType['Ground'],
+                ShardType['Electric'],
+            ],
+            [
+                1000,
+                1000,
+                1000,
+            ],
+            ItemList['Moon_Flute'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                ShardType['Grass'],
+                ShardType['Psychic'],
+                ShardType['Water'],
+            ],
+            [
+                1000,
+                1000,
+                1000,
+            ],
+            ItemList['Time_Flute'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                ShardType['Grass'],
+                ShardType['Bug'],
+                ShardType['Fairy'],
+            ],
+            [
+                1000,
+                1000,
+                1000,
+            ],
+            ItemList['Grass_Flute'],
             1
         ));
         return list;

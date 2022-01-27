@@ -33,7 +33,7 @@ class DungeonRunner {
         DungeonBattle.trainerPokemonIndex(0);
         DungeonBattle.enemyPokemon(null);
 
-        DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
+        DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME * fluteEffectRunner.getFluteMultiplier('Time_Flute'));
         // Dungeon size increases with each region
         let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + player.region;
         // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes

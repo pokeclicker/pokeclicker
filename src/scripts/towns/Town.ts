@@ -722,7 +722,7 @@ const HoennBerryMaster = new BerryMasterShop([
     ItemList['FarmHandKerry'],
 ]);
 
-//Hoenn Berry Master
+//Hoenn Flute Master
 const HoennFluteMaster = new ShardMasterShop([]);
 
 //Hoenn NPCs
@@ -1511,6 +1511,9 @@ const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
     'I\'ve never seen it, but supposedly it works just like any evolution stone.',
 ]);
 
+//Unova Shard Master
+const UnovaFluteMaster = new ShardMasterShop([]);
+
 const UnovaRoamerNPC = new RoamerNPC('Professor Juniper\'s Aide', [
     'Our research indicates a higher concentration of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.unova);
@@ -1597,6 +1600,7 @@ TownList['Undella Town'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))],
+        shops: [UnovaFluteMaster],
     }
 );
 TownList['Lacunosa Town'] = new Town(
