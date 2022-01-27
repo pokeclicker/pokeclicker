@@ -7,7 +7,7 @@ class fluteEffectRunner {
         GameHelper.enumStrings(GameConstants.FluteItemType).forEach((itemName) => {
             const item = (ItemList[itemName] as FluteItem);
             if (item.multiplierType) {
-                multiplier.addBonus(item.multiplierType, () => this.isActive(itemName)() ? item.multiplyBy * AchievementHandler.achievementBonus() : 1);
+                multiplier.addBonus(item.multiplierType, () => this.isActive(itemName)() ? 1 + ((item.multiplyBy - 1) * AchievementHandler.achievementBonus()) : 1);
             }
             if (this.isActive(GameConstants.FluteItemType[itemName])()) {
                 GameHelper.incrementObservable(this.numActiveFlutes,1);
@@ -103,8 +103,8 @@ class fluteEffectRunner {
         player.effectTimer[itemName](times.join(':'));
     }
 
-    public static getDungeonTokenMultiplier() {
-        return this.isActive(GameConstants.FluteItemType.Blue_Flute)() ? 1.5 : 1;
+    public static getFluteMultiplier(itemName: string) {
+        return this.isActive(GameConstants.FluteItemType[itemName])() ? (1 + 0.02 * AchievementHandler.achievementBonus()) : 1;
     }
 
 
