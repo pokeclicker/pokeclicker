@@ -143,4 +143,9 @@ class ShardDeal {
             deal.item.itemType.gain(deal.item.amount * maxTrades);
         }
     }
+
+    public static isFluteDeal(region: GameConstants.Region, i: number): boolean {
+        const deal = ShardDeal.list[region].peek()[i];
+        return deal.item.itemType instanceof FluteItem;
+    }
 }

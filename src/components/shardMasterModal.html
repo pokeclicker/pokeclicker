@@ -45,7 +45,7 @@
                                                 Trade
                                             </button>
                                             <!-- TODO: Make the dropdown button disappear for Flute trades -->
-                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: ShardDeal.isFluteDeal(player.region, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'>
                                             </button>
                                             <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
                                                 <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data"></button>
