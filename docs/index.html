@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.8.13"></script>
+    <script src="scripts/modules.min.js?v=0.8.14"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.8.13"></script>
+    <script src="scripts/script.min.js?v=0.8.14"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,27 +41,9 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.8.13" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.8.14" rel="stylesheet">
 
     <!-- Google Analytics-->
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171657234-1"></script>
-    <script>
-        if (true) {
-            window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-
-            gtag('js', new Date());
-
-            gtag('config', 'UA-171657234-1');
-        } else {
-            function gtag(){};
-        }
-    </script>
-
     <style>
         #game.loading {
             display: none !important;
@@ -670,13 +652,15 @@
       <p data-bind="visible: App.game.challenges.list.disableBattleItems.active()" class="bg-danger my-0">
           Battle Items are disabled.
       </p>
+      <!-- Battle Items -->
       <table class="table table-bordered m-0">
         <tbody>
-          <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
-            <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data](),trigger:'hover',placement:'top',animation:false}"></td>
-          </tr>
-          <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
-            <td class="p-0" data-bind="attr: {
+          <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem'))">
+            <tr data-bind="foreach: $data"> 
+                 <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data](),trigger:'hover',placement:'top',animation:false}"></td>
+            </tr>
+            <tr data-bind="foreach: $data"> 
+                 <td class="p-0" data-bind="attr: {
                                 disabled: !player.itemList[$data]()
                             },
                             css: {
@@ -696,18 +680,65 @@
                 <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
 
             </td>
-          </tr>
-          <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
-            <td class="text-light p-0">
+            </tr>
+            <tr data-bind="foreach: $data">
+                <td class="text-light p-0">
               <!-- ko if: EffectEngineRunner.getEffect($data) > 0 -->
                 <code data-bind="text: player.effectTimer[$data](),tooltip: {title:GameConstants.formatSecondsToTime(player.effectList[$data]()),trigger:'hover',placement:'bottom',html:true}"></code>
               <!-- /ko -->
-            </td>
-          </tr>
+                </td>
+            </tr>
+          </tbody>
         </tbody>
       </table>
     </div>
+    <div class="card-header p-0" data-toggle="collapse" href="#fluteItemContainerBody">
+      <span>Flutes</span>
+    </div>
+    <div id="fluteItemContainerBody" class="card-body p-0 show">
+      <p data-bind="visible: App.game.challenges.list.disableBattleItems.active()" class="bg-danger my-0">
+          Flutes are disabled.
+      </p>
+      <!-- Flutes -->
+      <table class="table table-bordered m-0">
+        <tbody>
+          <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'FluteItem'))">
+            <tr data-bind="foreach: $data"> 
+                 <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data](),trigger:'hover',placement:'top',animation:false}"></td>
+            </tr>
+            <tr data-bind="foreach: $data"> 
+                 <td class="p-0" data-bind="attr: {
+                                disabled: !player.itemList[$data]()
+                            },
+                            css: {
+                                'bg-primary': fluteEffectRunner.getEffect($data) > 30,
+                                'bg-warning': fluteEffectRunner.getEffect($data) <= 30 && fluteEffectRunner.getEffect($data) > 0,
+                                'bg-secondary': !fluteEffectRunner.isActive($data)()
+                            },
+                            event: {
+                                click: function(){ItemHandler.useItem($data)}
+                            },
+                            tooltip: {
+                              title: ItemList[$data].displayName + '<br/>' + ItemList[$data].description,
+                              trigger: 'hover',
+                              placement:'bottom',
+                              html: true
+                            }">
+                <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
 
+            </td>
+            </tr>
+            <tr data-bind="foreach: $data">
+                <td class="text-light p-0">
+              <!-- ko if: fluteEffectRunner.getEffect($data) > 0 -->
+                <code data-bind="text: player.effectTimer[$data](),tooltip: {title:GameConstants.formatSecondsToTime(player.effectList[$data]()),trigger:'hover',placement:'bottom',html:true}"></code>
+              <!-- /ko -->
+                </td>
+            </tr>
+          </tbody>
+        </tbody>
+      </table>
+    </div>
 </div>
 
 
@@ -1357,7 +1388,8 @@
                                             title: Battle.enemyPokemon()
                                                 ? `${App.game.party.calculatePokemonAttack(
                                                     Battle.enemyPokemon().type1,
-                                                    Battle.enemyPokemon().type2
+                                                    Battle.enemyPokemon().type2,
+                                                    true,
                                                 ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
                                                 : '',
                                             trigger: 'hover',
@@ -7094,7 +7126,7 @@
 
      
 
-<image href="assets/images/map/distorsion_world.png" xlink:href="assets/images/map/distorsion_world.png"
+<image href="assets/images/map/distortion_world.png" xlink:href="assets/images/map/distortion_world.png"
     x="1184"
     y="624"
     height="80"
@@ -13180,9 +13212,8 @@
                             <td class="text-left font-weight-bold" data-bind="text: $data.type"></td>
                             <td class="p-1">
                                 <!-- ko if: !$data.active() && player.starter() == GameConstants.Starter.None --><button class="btn btn-warning btn-block" data-bind="click: ()=>{$data.activate();}">ACTIVATE</button><!-- /ko -->
-                                <!-- ko if: $data.active() && player.starter() == GameConstants.Starter.None --><button class="btn btn-success btn-block" data-bind="click: ()=>{$data.disable();}">ACTIVE</button><!-- /ko -->
                                 <!-- ko if: !$data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-secondary btn-block disabled">DISABLED</button><!-- /ko -->
-                                <!-- ko if: $data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-success btn-block disabled">ACTIVE</button><!-- /ko -->
+                                <!-- ko if: $data.active() --><button class="btn btn-success btn-block" data-bind="click: ()=>{$data.disable();}">ACTIVE</button><!-- /ko -->
                             </td>
                         </tr>
                     </tbody>
@@ -14553,7 +14584,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         <div class='progress'>
                             <div id='mineEnergyBar' class='progress-bar bg-warning' role='progressbar'
                                  aria-valuemin='0' aria-valuemax='100'
-                                 data-bind="style: { width: Math.floor(App.game.underground.energy/App.game.underground.getMaxEnergy()*100) + '%' }">
+                                 data-bind="style: { width: (Math.floor(App.game.underground.energy)/App.game.underground.getMaxEnergy()*100).toFixed(2) + '%' }">
                                 <span data-bind="text: 'Energy: ' + Math.floor(App.game.underground.energy) + ' / ' + App.game.underground.getMaxEnergy() + (Math.floor(App.game.underground.energy) < App.game.underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
                             </div>
                         </div>
@@ -15902,6 +15933,77 @@ aria-labelledby="badgeCaseModalLabel">
                 <!-- ko if: !shopVisible() -->
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 <!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Shard Master Modal-->
+<div class="modal fade noselect" id="shardMasterModal" tabindex="-1" role="dialog"
+     aria-labelledby="shardMasterModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4>Shard Master</h4>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
+            </div>
+            <div>
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#shardMasterTrade">Trades</a></li>
+                </ul>
+            </div>
+            <div class="modal-body tab-content">
+                <div id="shardMasterTrade" class="tab-pane fade in active show">
+                    <div class="table-responsive" id="shardDealsBody">
+                        <table class="table table-sm table-hover table-striped m-0 text-left">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Inv</th>
+                                    <th></th>
+                                    <th>Shards</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Item</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind='foreach: ShardDeal.getDeals(player.region)'>
+                                <!-- ko foreach: shards -->
+                                <tr>
+                                    <td data-bind="text: App.game.shards.shardWallet[$data.shardType]()"></td>
+                                    <td><img height="24px" data-bind="attr: {src: Shards.image($data.shardType) }"></img></td>
+                                    <td data-bind="text: amount + ' x ' + ShardType[$data.shardType]"></td>
+                                    <!-- ko if: $index() === 0 -->
+                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">→</td>
+                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
+                                          <img class='mineInventoryItem' data-bind='attr: {src: $parent.item.itemType.image}'>
+                                    </td>
+                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.shards.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
+                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
+                                        <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
+                                            <!-- TODO: Make the "Trade" Button read "SOLD OUT" when disabled -->
+                                            <button class='btn btn-success btn-block' data-bind='click: function(){ShardDeal.use(player.region, $parentContext.$index(), tradeAmount())}, css: { disabled: !ShardDeal.canUse(player.region, $parentContext.$index()) }'>
+                                                Trade
+                                            </button>
+                                            <!-- TODO: Make the dropdown button disappear for Flute trades -->
+                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: ShardDeal.isFluteDeal(player.region, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'>
+                                            </button>
+                                            <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
+                                                <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data"></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <!-- /ko -->
+                                </tr>
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
