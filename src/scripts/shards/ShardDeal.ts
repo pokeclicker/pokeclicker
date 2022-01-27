@@ -141,7 +141,6 @@ class ShardDeal {
             deal.shards.forEach((value) =>
                 GameHelper.incrementObservable(App.game.shards.shardWallet[value.shardType], -value.amount * maxTrades));
             deal.item.itemType.gain(deal.item.amount * maxTrades);
-            //ShardDeal.list[player.region]().filter(p => p == deal) -> remove deal from array, needs to generate new list
         }
     }
 }

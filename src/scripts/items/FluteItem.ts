@@ -34,5 +34,5 @@ ItemList['Azure_Flute']         = new FluteItem(GameConstants.FluteItemType.Azur
 ItemList['Eon_Flute']         = new FluteItem(GameConstants.FluteItemType.Eon_Flute, '+2% Bonus to Roaming Chance x Achievement Bonus', Infinity, undefined, ['Flying', 'Dragon', 'Psychic'], undefined, 'roaming', 1.02);
 ItemList['Sun_Flute']         = new FluteItem(GameConstants.FluteItemType.Sun_Flute, '+2% Bonus to Egg Steps x Achievement Bonus', Infinity, undefined, ['Fire', 'Ground', 'Water'], undefined, 'eggStep', 1.02);
 ItemList['Moon_Flute']         = new FluteItem(GameConstants.FluteItemType.Moon_Flute, '+2% Bonus to Mining Energy Regeneration x Achievement Bonus', Infinity, undefined, ['Rock', 'Ground', 'Electric'], undefined, undefined, undefined);
-ItemList['Time_Flute']         = new FluteItem(GameConstants.FluteItemType.Time_Flute, '+2% Bonus to Farm Growth Speed x Achievement Bonus', Infinity, undefined, ['Grass', 'Psychic', 'Water'], undefined, undefined, undefined);
-ItemList['Grass_Flute']         = new FluteItem(GameConstants.FluteItemType.Grass_Flute, '+2% Bonus to Farm Mutation Chance x Achievement Bonus', Infinity, undefined, ['Grass', 'Bug', 'Fairy'], undefined, undefined, undefined);
+ItemList['Time_Flute']         = new FluteItem(GameConstants.FluteItemType.Time_Flute, 'Undecided', Infinity, undefined, ['Grass', 'Psychic', 'Water'], undefined, undefined, undefined);
+ItemList['Grass_Flute']         = new FluteItem(GameConstants.FluteItemType.Grass_Flute, 'Undecided', Infinity, undefined, ['Grass', 'Bug', 'Fairy'], undefined, undefined, undefined);

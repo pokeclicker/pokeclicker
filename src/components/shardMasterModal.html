@@ -40,6 +40,7 @@
                                     <td class='vertical-middle' data-bind='attr: { rowspan: $parent.shards.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
                                         <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
+                                            <!-- TODO: Make the "Trade" Button read "SOLD OUT" when disabled -->
                                             <button class='btn btn-success btn-block' data-bind='click: function(){ShardDeal.use(player.region, $parentContext.$index(), tradeAmount())}, css: { disabled: !ShardDeal.canUse(player.region, $parentContext.$index()) }'>
                                                 Trade
                                             </button>
