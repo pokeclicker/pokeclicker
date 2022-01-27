@@ -17,8 +17,10 @@ class fluteEffectRunner {
 
     public static tick() {
         this.counter = 0;
+        let lowestInitialShard = 0;
 
         for (const itemName in GameConstants.FluteItemType) {
+            lowestInitialShard = this.getLowestShard(itemName);
             if (fluteEffectRunner.getLowestShard(itemName) > 0 && fluteEffectRunner.isActive(GameConstants.FluteItemType[itemName])()) {
                 player.effectList[itemName](Math.max(0, this.getLowestShard(itemName) - this.numActiveFlutes()));
                 this.updateFormattedTimeLeft(itemName);
@@ -31,12 +33,13 @@ class fluteEffectRunner {
                     setting: NotificationConstants.NotificationSetting.battle_item_timer,
                 });
             }
-            if (player.effectList[itemName]() == 1) {
-                GameHelper.incrementObservable(this.numActiveFlutes,-1);
-                player.gainItem(itemName, 1);
-            }
         }
         this.shardCost();
+        for (const itemName in GameConstants.FluteItemType) {
+            if (lowestInitialShard > 0 && this.getLowestShard(itemName) <= 0) {
+                this.removeEffect(itemName);
+            }
+        }
     }
 
     public static getLowestShard(itemName: string) {

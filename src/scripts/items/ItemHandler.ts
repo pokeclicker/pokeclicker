@@ -8,9 +8,17 @@ class ItemHandler {
 
     public static useItem(name: string, amount = 1): boolean {
 
-        if (!player.itemList[name]() && !(ItemList[name] instanceof FluteItem)) {
+        if (!player.itemList[name]() && ItemList[name] instanceof BattleItem) {
             Notifier.notify({
                 message: `You don't have any ${ItemList[name].displayName}s left...`,
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+
+        if (!player.itemList[name]() && ItemList[name] instanceof FluteItem && !fluteEffectRunner.isActive(GameConstants.FluteItemType[name])()) {
+            Notifier.notify({
+                message: `You don't have any ${ItemList[name].displayName}s...`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;
