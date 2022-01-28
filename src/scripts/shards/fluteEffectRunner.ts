@@ -17,11 +17,8 @@ class fluteEffectRunner {
 
     public static tick() {
         this.counter = 0;
-        let lowestInitialShard = 0;
 
         for (const itemName in GameConstants.FluteItemType) {
-            lowestInitialShard = this.getLowestShard(itemName);
-            if (fluteEffectRunner.getLowestShard(itemName) > 0 && fluteEffectRunner.isActive(GameConstants.FluteItemType[itemName])()) {
                 player.effectList[itemName](Math.max(0, this.getLowestShard(itemName) - this.numActiveFlutes()));
                 this.updateFormattedTimeLeft(itemName);
             }
@@ -32,14 +29,15 @@ class fluteEffectRunner {
                     sound: NotificationConstants.NotificationSound.battle_item_timer,
                     setting: NotificationConstants.NotificationSetting.battle_item_timer,
                 });
+                        message: `The ${GameConstants.humanifyString(itemName)}s effect ran out!`,
+                        type: NotificationConstants.NotificationOption.danger,
+                        sound: NotificationConstants.NotificationSound.battle_item_timer,
+                        setting: NotificationConstants.NotificationSetting.battle_item_timer,
+                    });
+                }
             }
         }
         this.shardCost();
-        for (const itemName in GameConstants.FluteItemType) {
-            if (lowestInitialShard > 0 && this.getLowestShard(itemName) <= 0) {
-                this.removeEffect(itemName);
-            }
-        }
     }
 
     public static getLowestShard(itemName: string) {
@@ -90,7 +88,7 @@ class fluteEffectRunner {
 
     public static removeEffect(itemName: string) {
         player.effectList[itemName](0);
-        GameHelper.incrementObservable(this.numActiveFlutes,-1);
+        GameHelper.incrementObservable(this.numActiveFlutes, -1);
         this.updateFormattedTimeLeft(itemName);
         player.gainItem(itemName, 1);
     }
