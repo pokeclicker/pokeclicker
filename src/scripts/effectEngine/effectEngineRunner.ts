@@ -34,12 +34,6 @@ class EffectEngineRunner {
                     setting: NotificationConstants.NotificationSetting.battle_item_timer,
                 });
             }
-            if (player.effectList[itemName]() == 0) {
-                Notifier.notify({
-                    message: `The ${GameConstants.humanifyString(itemName)}'s effect wore off!`,
-                    type: NotificationConstants.NotificationOption.warning,
-                });
-            }
         }
     }
 
