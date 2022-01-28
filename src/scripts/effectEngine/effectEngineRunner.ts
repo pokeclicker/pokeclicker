@@ -28,10 +28,16 @@ class EffectEngineRunner {
             }
             if (player.effectList[itemName]() == 5) {
                 Notifier.notify({
-                    message: `The ${GameConstants.humanifyString(itemName)}s effect is about to wear off!`,
+                    message: `The ${GameConstants.humanifyString(itemName)}'s effect is about to wear off!`,
                     type: NotificationConstants.NotificationOption.warning,
                     sound: NotificationConstants.NotificationSound.battle_item_timer,
                     setting: NotificationConstants.NotificationSetting.battle_item_timer,
+                });
+            }
+            if (player.effectList[itemName]() == 0) {
+                Notifier.notify({
+                    message: `The ${GameConstants.humanifyString(itemName)}'s effect wore off!`,
+                    type: NotificationConstants.NotificationOption.warning,
                 });
             }
         }

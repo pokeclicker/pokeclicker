@@ -25,7 +25,7 @@ class fluteEffectRunner {
                 if (this.numActiveFlutes() >= this.getLowestShard(itemName)) {
                     this.removeEffect(itemName);
                     Notifier.notify({
-                        message: `The ${GameConstants.humanifyString(itemName)}s effect ran out!`,
+                        message: `The ${GameConstants.humanifyString(itemName)}'s effect ran out!`,
                         type: NotificationConstants.NotificationOption.danger,
                         sound: NotificationConstants.NotificationSound.battle_item_timer,
                         setting: NotificationConstants.NotificationSetting.battle_item_timer,
