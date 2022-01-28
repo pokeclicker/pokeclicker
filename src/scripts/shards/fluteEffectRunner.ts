@@ -19,16 +19,12 @@ class fluteEffectRunner {
         this.counter = 0;
 
         for (const itemName in GameConstants.FluteItemType) {
+            if (this.getLowestShard(itemName) > 0 && this.isActive(GameConstants.FluteItemType[itemName])()) {
                 player.effectList[itemName](Math.max(0, this.getLowestShard(itemName) - this.numActiveFlutes()));
                 this.updateFormattedTimeLeft(itemName);
-            }
-            if (player.effectList[itemName]() == 30) {
-                Notifier.notify({
-                    message: `The ${GameConstants.humanifyString(itemName)}s effect is about to wear off!`,
-                    type: NotificationConstants.NotificationOption.warning,
-                    sound: NotificationConstants.NotificationSound.battle_item_timer,
-                    setting: NotificationConstants.NotificationSetting.battle_item_timer,
-                });
+                if (this.numActiveFlutes() >= this.getLowestShard(itemName)) {
+                    this.removeEffect(itemName);
+                    Notifier.notify({
                         message: `The ${GameConstants.humanifyString(itemName)}s effect ran out!`,
                         type: NotificationConstants.NotificationOption.danger,
                         sound: NotificationConstants.NotificationSound.battle_item_timer,
