@@ -16,13 +16,23 @@ class ItemHandler {
             return false;
         }
 
-        if (!player.itemList[name]() && ItemList[name] instanceof FluteItem && !fluteEffectRunner.isActive(GameConstants.FluteItemType[name])()) {
-            Notifier.notify({
-                message: `You don't have any ${ItemList[name].displayName}s...`,
-                type: NotificationConstants.NotificationOption.danger,
-            });
-            return false;
+        if (ItemList[name] instanceof FluteItem) {
+            if (!fluteEffectRunner.isActive(GameConstants.FluteItemType[name])() && !player.itemList[name]()) {
+                Notifier.notify({
+                    message: `You don't have any ${ItemList[name].displayName}s...`,
+                    type: NotificationConstants.NotificationOption.danger,
+                });
+                return false;
+            }
+            if (App.game.challenges.list.disableShards.active()) {
+                Notifier.notify({
+                    message: 'Shards are Disabled',
+                    type: NotificationConstants.NotificationOption.danger,
+                });
+                return false;
+            }
         }
+
 
         if (ItemList[name] instanceof BattleItem && App.game.challenges.list.disableBattleItems.active()) {
             Notifier.notify({
