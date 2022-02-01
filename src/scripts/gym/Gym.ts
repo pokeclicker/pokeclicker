@@ -81,8 +81,8 @@ gymList['Pewter City'] = new Gym(
     'Brock',
     'Pewter City',
     [
-        new GymPokemon('Geodude', 770, 12),
-        new GymPokemon('Onix', 1554, 14),
+        new GymPokemon('Geodude', 693, 12),
+        new GymPokemon('Onix', 1399, 14),
     ],
     BadgeEnums.Boulder,
     250,
