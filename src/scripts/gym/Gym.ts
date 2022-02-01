@@ -490,7 +490,11 @@ gymList['Mauville City'] = new Gym(
     ],
     BadgeEnums.Dynamo,
     3000,
-    'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!'
+    'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!',
+    [new GymBadgeRequirement(BadgeEnums.Knuckle)],
+    () => {
+        App.game.quests.getQuestLine('Land vs Water').beginQuest();
+    }
 );
 gymList['Lavaridge Town'] = new Gym(
     'Flannery',
