@@ -43,7 +43,7 @@ class fluteEffectRunner {
         return shardMaxTime;
     }
 
-    public static shardCost() {
+    public static getActiveShardTypes() {
         const shardNames = [];
         for (const itemName in GameConstants.FluteItemType) {
             if (fluteEffectRunner.isActive(GameConstants.FluteItemType[itemName])()) {
@@ -52,7 +52,11 @@ class fluteEffectRunner {
             }
         }
         const uniqueShards = [...new Set(shardNames)];
-        uniqueShards.forEach(idx => App.game.shards.gainShards(-this.numActiveFlutes(), idx));
+        return uniqueShards;
+    }
+
+    public static shardCost() {
+        this.getActiveShardTypes().forEach(idx => App.game.shards.gainShards(-this.numActiveFlutes(), idx));
     }
 
     public static getEffect(itemName: string) {
