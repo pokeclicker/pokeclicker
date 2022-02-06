@@ -215,8 +215,8 @@ class Farming implements Feature {
             31, 0.1, 950, 10,
             [0, 30, 10, 0, 0], BerryColor.Purple,
             [
-                 'This Berry drifted from a faraway sea. It is now cultivated in the Sinnoh region.' 
-                 'It has a tendency to expand into nearby plots.'
+                'This Berry drifted from a faraway sea. It is now cultivated in the Sinnoh region.' ,
+                'It has a tendency to expand into nearby plots.',
             ] , undefined, ['Oricorio (Sensu)']);
         this.berryData[BerryType.Watmel]    = new Berry(BerryType.Watmel,   [2300, 3400, 9800, 16560, 33120],
             32, 0.1, 1000, 10,
