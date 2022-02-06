@@ -567,6 +567,13 @@ class Update implements Saveable {
                 App.game.challenges.list.requireCompletePokedex.disable();
             }
         },
+
+        '0.8.14': async ({ playerData, saveData }) => {
+            // Start Aqua Magma questline if player has Dynamo Badge already
+            if (saveData.badgeCase[29]) {
+                saveData.quests.questLines.push({state: 1, name: 'Land vs Water', quest: 0});
+            }
+        },
     };
 
     constructor() {
