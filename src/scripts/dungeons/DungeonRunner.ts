@@ -122,7 +122,7 @@ class DungeonRunner {
                 setting: NotificationConstants.NotificationSetting.dungeon_item_found,
             });
 
-            return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount);
+            return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount, false);
 
         } else if (typeof GameConstants.Pokeball[input] == 'number') {
             Notifier.notify({
@@ -131,7 +131,7 @@ class DungeonRunner {
                 setting: NotificationConstants.NotificationSetting.dungeon_item_found,
             });
 
-            return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount);
+            return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount, false);
 
         }  else if (Underground.getMineItemByName(input) != undefined && Underground.getMineItemByName(input).isStone() === false) {
             Notifier.notify({
@@ -142,7 +142,16 @@ class DungeonRunner {
 
             return Underground.gainMineItem(Underground.getMineItemByName(input).id, amount);
 
-        }  else if (ItemList[input].constructor.name == 'EvolutionStone' || 'EggItem' || 'BattleItem' || 'Vitamin' || 'EnergyRestore') {
+        }  else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
+            Notifier.notify({
+                message: `Found ${1} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+            });
+
+            return DungeonBattle.generateNewLootEnemy(input);
+
+        }   else if (ItemList[input].constructor.name == 'EvolutionStone' || 'EggItem' || 'BattleItem' || 'Vitamin' || 'EnergyRestore') {
             Notifier.notify({
                 message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,

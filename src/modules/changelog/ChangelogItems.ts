@@ -10,6 +10,14 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.13
+    new ChangelogUpdate('v0.8.13', new Date(2021, 11, 21)),
+    new Changelog(changelogType.NEW, 'Dungeon loot Mimic encounters'),
+    new Changelog(changelogType.NEW, 'Added new Furfrou forms'),
+    new Changelog(changelogType.FIXED, 'Team Rocket HP'),
+    new Changelog(changelogType.FIXED, 'Dungeon loot not being tracked in statistics'),
+    new Changelog(changelogType.FIXED, 'Nerfed dungeon loot (still being re-worked)'),
+
     // v0.8.12
     new ChangelogUpdate('v0.8.12', new Date(2021, 11, 20)),
     new Changelog(changelogType.NEW, 'Added 2 new optional (recommended) challenges'),

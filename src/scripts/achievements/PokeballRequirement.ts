@@ -9,7 +9,7 @@ class PokeballRequirement extends AchievementRequirement {
     }
 
     public getProgress() {
-        return Math.min(App.game.statistics.pokeballsBought[this.pokeball](), this.requiredValue);
+        return Math.min(App.game.statistics.pokeballsObtained[this.pokeball](), this.requiredValue);
     }
 
     public hint(): string {
