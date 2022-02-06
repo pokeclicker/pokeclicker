@@ -10,7 +10,7 @@ class PokeballItem extends Item {
     }
 
     gain(amt: number) {
-        App.game.pokeballs.gainPokeballs(this.type, amt, true);
+        App.game.pokeballs.gainPokeballs(this.type, amt);
     }
 
 }
