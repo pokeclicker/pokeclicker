@@ -30,6 +30,7 @@ class Farming implements Feature {
             return new Plot(index === middle, BerryType.None, 0, MulchType.None, 0);
         }),
         shovelAmt: 0,
+        mulchShovelAmt: 0,
     };
 
     berryList: KnockoutObservable<number>[];
@@ -37,6 +38,7 @@ class Farming implements Feature {
     mulchList: KnockoutObservable<number>[];
     plotList: Array<Plot>;
     shovelAmt: KnockoutObservable<number>;
+    mulchShovelAmt: KnockoutObservable<number>;
 
     highestUnlockedBerry: KnockoutComputed<number>;
 
@@ -46,6 +48,7 @@ class Farming implements Feature {
         this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
         this.plotList = this.defaults.plotList;
         this.shovelAmt = ko.observable(this.defaults.shovelAmt);
+        this.mulchShovelAmt = ko.observable(this.defaults.mulchShovelAmt);
 
         this.externalAuras = [];
         this.externalAuras[AuraType.Attract] = ko.observable<number>(1);
@@ -1147,6 +1150,27 @@ class Farming implements Feature {
     }
 
     /**
+     * Handles using the Mulch Shovel to remove mulch from a plot
+     * @param index The plot index
+     */
+    public shovelMulch(index: number): void {
+        const plot = this.plotList[index];
+        if (!plot.isUnlocked) {
+            return;
+        }
+        if (this.mulchShovelAmt() <= 0) {
+            return;
+        }
+
+        if (plot.clearMulch()) {
+            GameHelper.incrementObservable(this.mulchShovelAmt, -1);
+            GameHelper.incrementObservable(App.game.statistics.totalShovelsUsed, 1);
+        }
+
+        this.resetAuras();
+    }
+
+    /**
      * Adds mulch to a plot
      * @param index The plot index
      * @param mulch The MulchType to be added
@@ -1269,6 +1293,7 @@ class Farming implements Feature {
             mulchList: this.mulchList.map(ko.unwrap),
             plotList: this.plotList.map(plot => plot.toJSON()),
             shovelAmt: this.shovelAmt(),
+            mulchShovelAmt: this.mulchShovelAmt(),
             mutations: this.mutations.map(mutation => mutation.toJSON()),
             farmHands: this.farmHands.toJSON(),
         };
@@ -1322,6 +1347,13 @@ class Farming implements Feature {
             this.shovelAmt = ko.observable(this.defaults.shovelAmt);
         } else {
             this.shovelAmt(shovelAmt);
+        }
+
+        const mulchShovelAmt = json['mulchShovelAmt'];
+        if (mulchShovelAmt == null) {
+            this.mulchShovelAmt = ko.observable(this.defaults.mulchShovelAmt);
+        } else {
+            this.mulchShovelAmt(mulchShovelAmt);
         }
 
         const mutations = json['mutations'];
