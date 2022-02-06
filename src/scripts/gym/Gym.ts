@@ -1295,7 +1295,11 @@ gymList['Exeggutor Island'] = new Gym(
 gymList['Ilima\'s Trial'] = new Gym(
     'Ilima',
     'Verdant Cavern',
-    [],
+    [
+        new GymPokemon('Gumshoos', 2458300, 51),
+        new GymPokemon('Smeargle', 2462000, 51),
+        new GymPokemon('Komala', 2462000, 51),
+    ],
     BadgeEnums.NormaliumZ,
     128000,
     'You have received the Normalium-Z!',
@@ -1309,7 +1313,11 @@ gymList['Ilima\'s Trial'] = new Gym(
 gymList['Lana\'s Trial'] = new Gym(
     'Lana',
     'Brooklet Hill',
-    [],
+    [
+        new GymPokemon('Lanturn', 2458300, 51),
+        new GymPokemon('Cloyster', 2462000, 51),
+        new GymPokemon('Araquanid', 2462000, 51),
+    ],
     BadgeEnums.WateriumZ,
     128000,
     'You have received the Waterium-Z!',
@@ -1323,7 +1331,11 @@ gymList['Lana\'s Trial'] = new Gym(
 gymList['Kiawe\'s Trial'] = new Gym(
     'Kiawe',
     'Wela Volcano Park',
-    [],
+    [
+        new GymPokemon('Arcanine', 2458300, 51),
+        new GymPokemon('Talonflame', 2462000, 51),
+        new GymPokemon('Alolan Marowak', 2462000, 51),
+    ],
     BadgeEnums.FiriumZ,
     128000,
     'You have received the Firium-Z!',
@@ -1337,7 +1349,11 @@ gymList['Kiawe\'s Trial'] = new Gym(
 gymList['Mallow\'s Trial'] = new Gym(
     'Mallow',
     'Lush Jungle',
-    [],
+    [
+        new GymPokemon('Trevenant', 2458300, 51),
+        new GymPokemon('Shiinotic', 2462000, 51),
+        new GymPokemon('Tsareena', 2462000, 51),
+    ],
     BadgeEnums.GrassiumZ,
     128000,
     'You have received the Grassium-Z!',
@@ -1351,7 +1367,11 @@ gymList['Mallow\'s Trial'] = new Gym(
 gymList['Sophocles\' Trial'] = new Gym(
     'Sophocles',
     'Hokulani Observatory',
-    [],
+    [
+        new GymPokemon('Togedemaru', 2458300, 51),
+        new GymPokemon('Magnezone', 2462000, 51),
+        new GymPokemon('Alolan Golem', 2462000, 51),
+    ],
     BadgeEnums.ElectriumZ,
     128000,
     'You have received the Electrium-Z!',
@@ -1365,7 +1385,11 @@ gymList['Sophocles\' Trial'] = new Gym(
 gymList['Acerola\'s Trial'] = new Gym(
     'Acerola',
     'Thrifty Megamart',
-    [],
+    [
+        new GymPokemon('Haunter', 2458300, 51),
+        new GymPokemon('Gengar', 2462000, 51),
+        new GymPokemon('Mimikyu', 2462000, 51),
+    ],
     BadgeEnums.GhostiumZ,
     128000,
     'You have received the Ghostium-Z!',
@@ -1377,9 +1401,13 @@ gymList['Acerola\'s Trial'] = new Gym(
     }
 );
 gymList['Vast Poni Canyon Trial'] = new Gym(
-    'Hapu',
+    'Totem Kommo-o',
     'Vast Poni Canyon',
-    [],
+    [
+        new GymPokemon('Jangmo-o', 2458300, 51),
+        new GymPokemon('Hakamo-o', 2462000, 51),
+        new GymPokemon('Kommo-o', 2462000, 51),
+    ],
     BadgeEnums.DragoniumZ,
     128000,
     'You have received the Dragonium-Z!',
