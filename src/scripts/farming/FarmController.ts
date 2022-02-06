@@ -60,8 +60,11 @@ class FarmController {
     }
 
     public static calculateCssClass() {
-        if (this.selectedShovel() || this.selectedMulchShovel()) {
+        if (this.selectedShovel()) {
             return 'ShovelSelected';
+        }
+        if (this.selectedMulchShovel()) {
+            return 'MulchShovelSelected';
         }
         if (this.berryListVisible()) {
             return 'BerrySelected';
