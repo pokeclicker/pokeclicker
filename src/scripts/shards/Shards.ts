@@ -12,16 +12,19 @@ class Shards implements Feature {
     defaults = {
         'shardWallet': Array<number>(Shards.nTypes).fill(0),
         'shardUpgrades': Array<number>(Shards.nTypes * Shards.nEffects).fill(0),
+        'shardCollapsed': Array<boolean>(Shards.nTypes).fill(false),
     };
 
     public shardWallet: Array<KnockoutObservable<number>>;
     public shardUpgrades: Array<KnockoutObservable<number>>;
+    public shardCollapsed: Array<boolean>;
 
     public validUpgrades = {};
 
     constructor() {
         this.shardWallet = this.defaults.shardWallet.map((v) => ko.observable(v));
         this.shardUpgrades = this.defaults.shardUpgrades.map((v) => ko.observable(v));
+        this.shardCollapsed = this.defaults.shardCollapsed.map((b) => b);
         GameHelper.enumNumbers(PokemonType).map(type => {
             this.validUpgrades[type] = {};
             this.validUpgrades[type][GameConstants.TypeEffectiveness.Immune] = !!TypeHelper.typeMatrix[type]?.includes(GameConstants.TypeEffectivenessValue.Immune);
@@ -113,6 +116,7 @@ class Shards implements Feature {
         return {
             'shardWallet': this.shardWallet.map(ko.unwrap),
             'shardUpgrades': this.shardUpgrades.map(ko.unwrap),
+            'shardCollapsed': this.shardCollapsed.map((b) => b),
         };
     }
 
@@ -124,6 +128,11 @@ class Shards implements Feature {
             json['shardUpgrades'].forEach((v, i) => {
                 this.shardUpgrades[i](v);
             });
+            if ('shardCollapsed' in json) {
+                json['shardCollapsed'].forEach((v, i) => {
+                    this.shardCollapsed[i] = v;
+                });
+            }
         }
     }
 
