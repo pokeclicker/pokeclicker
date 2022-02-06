@@ -258,6 +258,37 @@ class QuestLineHelper {
         App.game.quests.questLines().push(RocketjohtoQuestLine);
     }
 
+    public static createAquaMagmahoennQuestLine() {
+        const AquaMagmahoennQuestLine = new QuestLine('Land vs Water', 'Put a stop to the schemes of Team Aqua and Team Magma');
+
+        const clearMtChimney = new CustomQuest(1, 0, 'Stop Team Magma at Mt. Chimney', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Chimney')](), 0);
+        AquaMagmahoennQuestLine.addQuest(clearMtChimney);
+
+        const clearWeatherInstitute = new CustomQuest(1, 0, 'Stop Team Aqua at the Weather Institute', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Weather Institute')](), 0);
+        AquaMagmahoennQuestLine.addQuest(clearWeatherInstitute);
+
+        const clearMagmaHideout = new CustomQuest(1, 0, 'Raid the Team Magma hideout', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Magma Hideout')](), 0);
+        AquaMagmahoennQuestLine.addQuest(clearMagmaHideout);
+
+        const clearAquaHideout = new CustomQuest(1, 0, 'Raid the Team Aqua hideout', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aqua Hideout')](), 0);
+        AquaMagmahoennQuestLine.addQuest(clearAquaHideout);
+
+        const SeafloorcavernReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1);
+            Notifier.notify({
+                title: AquaMagmahoennQuestLine.name,
+                message: 'You found a Masterball!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearSeafloorCavern = new CustomQuest(1, SeafloorcavernReward, 'Team Aqua\'s leader Archie escaped from their hideout. Find him in the Seafloor Cavern and put a stop to this once and for all', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seafloor Cavern')](), 0);
+        AquaMagmahoennQuestLine.addQuest(clearSeafloorCavern);
+
+        App.game.quests.questLines().push(AquaMagmahoennQuestLine);
+    }
+
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
@@ -268,5 +299,6 @@ class QuestLineHelper {
         this.createUndergroundQuestLine();
         this.createVivillonQuestLine();
         this.createRocketjohtoQuestLine();
+        this.createAquaMagmahoennQuestLine();
     }
 }
