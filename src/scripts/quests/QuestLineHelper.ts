@@ -243,7 +243,7 @@ class QuestLineHelper {
         RocketjohtoQuestLine.addQuest(clearTeamRocketHideout);
 
         const RadiotowerReward = () => {
-            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1);
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
             Notifier.notify({
                 title: RocketjohtoQuestLine.name,
                 message: 'The grateful radio director gave you a Masterball!',
@@ -274,7 +274,7 @@ class QuestLineHelper {
         AquaMagmahoennQuestLine.addQuest(clearAquaHideout);
 
         const SeafloorcavernReward = () => {
-            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1);
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
             Notifier.notify({
                 title: AquaMagmahoennQuestLine.name,
                 message: 'You found a Masterball!',
