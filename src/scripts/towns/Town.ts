@@ -153,27 +153,27 @@ const LavenderTownShop = new TownShop([
 
 // Kanto NPCs
 
+const PalletProfOak = new ProfOakNPC('Prof. Oak', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
+]);
+
 const ViridianCityOldMan = new NPC('Old Man', [
     'Ahh, I\'ve had my coffee now and I feel great!',
     'You can use the Pokéball Selector to select which type of Pokéball to use on specific Pokémon based on caught status.',
 ]);
 
-const CinnabarIslandResearcher = new NPC('Researcher', [
-    'They were trying to clone an ancient Pokémon in the mansion, I wonder if they succeeded.',
-    'Apparently the ancient Pokémon escaped, And can be found roaming around Kanto!',
+const PewterBattleItemRival = new NPC('Battle Item Master', [
+    'Hey kid, you look new! Let me offer some advice, Battle Items like xAttack can be acquired along Routes, inside Dungeons and in Shops!',
+    'Use them to help you out whenever you feel like time is against you!',
 ]);
 
-const BigSpender = new NPC('Big Spender', [
-    'I love shopping! When I come in, the cashiers know I want tons of items.',
-    'You can use the Shop Amount Button settings to make it easy for big purchases, too!',
-]);
-
-const KantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
+const CeruleanKantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
     'Bah! You younglings have no appreciation of the art of Berry farming!',
     'Come back when you are ready to learn!',
 ]);
 
-const VermillionFanClubChairman = new NPC('Fan Club Chairman', [
+const VermilionFanClubChairman = new NPC('Fan Club Chairman', [
     'You won’t find a Pokémon as wonderful as my favorite Rapidash in those Typed Eggs in the shops, but they might hatch rare Pokémon you can’t find anywhere else!',
 ]);
 
@@ -182,28 +182,33 @@ const LavenderMrFuji = new NPC('Mr. Fuji', [
     'Did you know that sparkling Pokémon are more often found in Dungeons, on Farms, from Eggs, and even from Shops, the Safari Zone, and Evolutions from Items?',
 ]);
 
-const ProfOak = new ProfOakNPC('Prof. Oak', [
-    'Good luck on your journey!',
-    'Come visit me when you complete your Pokédex!',
+const BigSpender = new NPC('Big Spender', [
+    'I love shopping! When I come in, the cashiers know I want tons of items.',
+    'You can use the Shop Amount Button settings to make it easy for big purchases, too!',
 ]);
 
-const BattleItemRival = new NPC('Battle Item Master', [
-    'Hey kid, you look new! Let me offer some advice, Battle Items like xAttack can be acquired along Routes, inside Dungeons and in Shops!',
-    'Use them to help you out whenever you feel like time is against you!',
-]);
-
-const BattleItemRival2 = new NPC('Battle Item Master', [
+const SaffronBattleItemRival = new NPC('Battle Item Master', [
     'Do I know you? Wait... Have you met my worthless rival? Ha! Let me guess, he gave you some unwanted advice?',
     'I bet he forget to tell you that although all Battle Items only last for 30 seconds they can stack and last for days! Now scram!',
 ]);
 
-const KantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
+const FuchsiaKantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
     'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.kanto);
 
-
+const CinnabarIslandResearcher = new NPC('Researcher', [
+    'They were trying to clone an ancient Pokémon in the mansion, I wonder if they succeeded.',
+    'Apparently the ancient Pokémon escaped, And can be found roaming around Kanto!',
+]);
 
 //Kanto Towns
+TownList['Pallet Town'] = new Town(
+    'Pallet Town',
+    GameConstants.Region.kanto,
+    {
+        npcs: [PalletProfOak],
+    }
+);
 TownList['Pewter City'] = new Town(
     'Pewter City',
     GameConstants.Region.kanto,
@@ -213,7 +218,7 @@ TownList['Pewter City'] = new Town(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Viridian Forest')),
         ],
         shops: [PewterCityShop],
-        npcs: [BattleItemRival],
+        npcs: [PewterBattleItemRival],
     }
 );
 TownList['Cerulean City'] = new Town(
@@ -223,7 +228,7 @@ TownList['Cerulean City'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
         shops: [CeruleanCityShop],
         dungeon: dungeonList['Cerulean Cave'],
-        npcs: [KantoBerryMaster],
+        npcs: [CeruleanKantoBerryMaster],
     }
 );
 TownList['Vermilion City'] = new Town(
@@ -232,7 +237,17 @@ TownList['Vermilion City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
         shops: [VermilionCityShop],
-        npcs: [VermillionFanClubChairman],
+        npcs: [VermilionFanClubChairman],
+    }
+);
+TownList['Lavender Town'] = new Town(
+    'Lavender Town',
+    GameConstants.Region.kanto,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
+        shops: [LavenderTownShop],
+        dungeon: dungeonList['Pokemon Tower'],
+        npcs: [LavenderMrFuji],
     }
 );
 TownList['Celadon City'] = new Town(
@@ -250,7 +265,7 @@ TownList['Saffron City'] = new Town(
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Rainbow)],
         shops: [SaffronCityShop],
-        npcs: [BattleItemRival2],
+        npcs: [SaffronBattleItemRival],
     }
 );
 TownList['Fuchsia City'] = new Town(
@@ -262,7 +277,7 @@ TownList['Fuchsia City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 15),
         ])],
         shops: [FuchsiaCityShop],
-        npcs: [KantoRoamerNPC],
+        npcs: [FuchsiaKantoRoamerNPC],
     }
 );
 TownList['Cinnabar Island'] = new Town(
@@ -285,23 +300,6 @@ TownList['Viridian City'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 1)],
         shops: [ViridianCityShop],
         npcs: [ViridianCityOldMan],
-    }
-);
-TownList['Pallet Town'] = new Town(
-    'Pallet Town',
-    GameConstants.Region.kanto,
-    {
-        npcs: [ProfOak],
-    }
-);
-TownList['Lavender Town'] = new Town(
-    'Lavender Town',
-    GameConstants.Region.kanto,
-    {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
-        shops: [LavenderTownShop],
-        dungeon: dungeonList['Pokemon Tower'],
-        npcs: [LavenderMrFuji],
     }
 );
 
@@ -477,7 +475,7 @@ const MahoganySouvenirShopAttendant = new NPC('Souvenir Shop Attendant', [
     'We’ve got stuff here nobody else has got! But keep any Item Magnets you have away from the merchandise… especially the RageCandyBars. Keep ‘em outside where they belong, I’ve heard magnets can attract Pokémon with held items more often, and even more so in Dungeons!',
 ]);
 
-const JohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
+const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
     'On the news they are getting more reports of roaming Pokémon appearing on {ROUTE_NAME}!',
 ], GameConstants.Region.johto);
 
@@ -576,7 +574,7 @@ TownList['Blackthorn City'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ice Path'))],
         shops: [BlackthornCityShop],
-        npcs: [JohtoRoamerNPC],
+        npcs: [BlackthornJohtoRoamerNPC],
     }
 );
 
@@ -749,12 +747,16 @@ const OldaleTrackingScientist = new NPC('Tracking Scientist', [
     'They were flying really fast, I bet Pokémon that fast will only challenge trainers who have proven they are as strong as Champion Wallace...',
 ]);
 
+const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
+    'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
+], GameConstants.Region.hoenn);
+
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
     'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...',
 ]);
 
-const Weatherman = new NPC('Weatherman', [
+const FortreeWeatherman = new NPC('Weatherman', [
     'Castform is a very finnicky pokemon.',
     'It changes forms when the weather is drastically different.',
     'If you want to collect them all, wait for the weather to change.',
@@ -765,15 +767,16 @@ const MossdeepAstronomer = new NPC('Astronomer', [
     'There’s a legend that a mythical Wish Pokémon awakens when it passes over us. If you’re as strong as the Champion, maybe you’ll find it roaming around Hoenn granting wishes!',
 ]);
 
+const PacifidlogDiver = new NPC('Diver', [
+    'Yo! Find any cool stuff in chests lately?',
+    ' I\'ve heard that if you beat a Dungeon a lot then the stuff you find in chests gets even more awesome.',
+]);
+
 const SootopolisWallace = new NPC('Gym Leader Wallace', [
     'The creators of the lands and ocean slumber within the Cave of Origin.',
     'However, they will only awaken when in the presence of a truly great trainer.',
     'You will have to overcome the Pokémon League before you have any chance to encounter them.',
 ]);
-
-const HoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
-    'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
-], GameConstants.Region.hoenn);
 
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
@@ -826,7 +829,7 @@ TownList['Slateport City'] = new Town(
             new GymBadgeRequirement(BadgeEnums.Knuckle),
         ],
         shops: [SlateportCityShop],
-        npcs: [HoennRoamerNPC],
+        npcs: [SlateportHoennRoamerNPC],
     }
 );
 TownList['Mauville City'] = new Town(
@@ -868,7 +871,7 @@ TownList['Fortree City'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))],
         shops: [FortreeCityShop],
-        npcs: [Weatherman],
+        npcs: [FortreeWeatherman],
     }
 );
 TownList['LilyCove City'] = new Town(
@@ -887,6 +890,15 @@ TownList['Mossdeep City'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 125)],
         shops: [MossdeepCityShop],
         npcs: [MossdeepAstronomer],
+    }
+);
+TownList['Pacifidlog Town'] = new Town(
+    'Pacifidlog Town',
+    GameConstants.Region.hoenn,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 131)],
+        shops: [PacifidlogTownShop],
+        npcs: [PacifidlogDiver],
     }
 );
 TownList['Sootopolis City'] = new Town(
@@ -914,14 +926,6 @@ TownList['Pokémon League Hoenn'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.hoenn, 128),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Hoenn')),
         ],
-    }
-);
-TownList['Pacifidlog Town'] = new Town(
-    'Pacifidlog Town',
-    GameConstants.Region.hoenn,
-    {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 131)],
-        shops: [PacifidlogTownShop],
     }
 );
 TownList['Battle Frontier'] = new Town(
@@ -1133,9 +1137,9 @@ const SandgemBeachcomber = new NPC('Beachcomber', [
     'Just last week a weird blue egg with a red center showed up. I went to go pick it up, but then it hatched! I was so surprised that the little blue Pokémon just hopped right back into the ocean. Who knows, maybe you’ll find it roaming around the region!',
 ]);
 
-const FloaramaLeafeonTip = new NPC('Flower Girl', [
+const FloaromaFlowerGirl = new NPC('Flower Girl', [
     'Something amazing just happened!',
-    'My friend was taking their Eevee on a walk through Eterna Forest, and it suddenly evolved into a Leafeon!',
+    'My friend was taking their Eevee on a walk through Eterna Forest, and it suddenly evolved!',
     'Can you believe that?',
 ]);
 
@@ -1163,8 +1167,8 @@ const CanalaveYoungBoy = new NPC('Young Boy', [
     'Maybe if you can prove yourself by conquering that island you could find Cresselia roaming around the region...',
 ]);
 
-const SnowpointGlaceonTip = new NPC('Young Girl', [
-    'Someone told me that training an Eevee in Lake Acuity will make it evolve something new.',
+const SnowpointYoungGirl = new NPC('Young Girl', [
+    'Someone told me that training an Eevee in Lake Acuity will make it evolve.',
     'They must be lying, how can that be true?!',
 ]);
 
@@ -1173,7 +1177,7 @@ const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
     'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine… maybe they should try the Day Care?',
 ]);
 
-const SinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
+const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
     'I spotted a bunch of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.sinnoh);
 
@@ -1218,7 +1222,7 @@ TownList['Floaroma Town'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ravaged Path'))],
         shops: [FloaromaTownShop],
-        npcs: [FloaramaLeafeonTip],
+        npcs: [FloaromaFlowerGirl],
     }
 );
 TownList['Eterna City'] = new Town(
@@ -1296,7 +1300,7 @@ TownList['Snowpoint City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 217)],
         shops: [SnowpointCityShop],
-        npcs: [SnowpointGlaceonTip],
+        npcs: [SnowpointYoungGirl],
     }
 );
 TownList['Sunyshore City'] = new Town(
@@ -1328,7 +1332,7 @@ TownList['Survival Area'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 225)],
         shops: [SurvivalAreaShop],
-        npcs: [SinnohRoamerNPC],
+        npcs: [SurvivalAreaSinnohRoamerNPC],
     }
 );
 TownList['Resort Area'] = new Town(
@@ -1552,6 +1556,11 @@ const CasteliaMusician = new NPC('Musician', [
     'Sometimes a cool singing Pokémon shows up and joins in on our set. I’ve heard that trainers as strong as the Champion have found it roaming around the region looking for Pokémon battles… but even I wouldn’t challenge it to a Music battle.',
 ]);
 
+const NimbasaExplorer = new NPC('Explorer', [
+    'Whew! The desert is rough out there, glad you\'ve made it all the way to Nimbasa.',
+    'Sometimes I find some weird stuff out in the sand, sometimes even Pokémon hiding in Chests. Like this one time in Relic Castle, I found a Pokémon that looks like a statue that I\'ve never seen before!',
+]);
+
 const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
     'Legends say Kyurem is missing a part of itself. It is waiting for a hero to fill in the missing parts of its body with Truth or Ideals.',
     'The legendary dragons of Dragonspiral Tower are said to embody these very concepts. They sometimes leave a piece of their DNA behind after a battle.',
@@ -1607,6 +1616,7 @@ TownList['Nimbasa City'] = new Town(
             new GymBadgeRequirement(BadgeEnums.Insect),
         ],
         shops: [NimbasaCityShop],
+        npcs: [NimbasaExplorer],
     }
 );
 TownList['Driftveil City'] = new Town(
@@ -1981,32 +1991,9 @@ const SnowbelleCityShop = new TownShop([
 
 //Kalos NPCs
 
-const Birdwatcher = new NPC('Birdwatcher', [
-    'I\'ve heard there is a cave you can find if you go out on the ocean a little ways.',
-    'Apparently defeating a strong creature there unleashes some energy.',
-    'There are rumors that the energy calls some legendary birds to roam Kalos!',
-]);
-
 const LumioseEngineer = new NPC('Engineer', [
-    'Ah! Glad to be back in the city after so long at the Power Plant.',
-    'Rumor has it that if you conquer the Power Plant enough times that a strong Pokémon will challenge you made of Fire and Water. But I bet you’d have to be the Champion before it finds you worthy… I certainly have never seen it!',
-]);
-
-const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
-    'You know what type can’t touch my Fairy types? Yep! Even if you train \’em when it’s gloomy outside, still not gonna work against me~',
-]);
-
-const KalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
-    'The spirits tell me roaming Pokémon have been spotted on {ROUTE_NAME}!',
-], GameConstants.Region.kalos);
-
-const KiloudeConfusedHiker = new NPC('Confused Hiker', [
-    'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
-]);
-
-const DendemilleGoomyEnthusiast = new NPC('Goomy Enthusiast', [
-    'Don\'t you find Goomy to be an interesting Pokémon? I certainly think so!',
-    'Its evolutionary line loves damp conditions, so if Sliggoo matures to level 50 and above during rainy or foggy weather, something marvelous happens!',
+    'I\'m glad to be back in the city after so long at the Power Plant, it\'s so dusty out there!.',
+    'Rumor has it that if you conquer the Kalos Power Plant enough times that a strong Pokémon will challenge you made of Fire and Water. But I bet you’d have to be the Champion before it finds you worthy… I certainly have never seen it!',
 ]);
 
 const CamphrierFlabébéEnthusiast = new NPC('Flabébé Enthusiast', [
@@ -2015,6 +2002,24 @@ const CamphrierFlabébéEnthusiast = new NPC('Flabébé Enthusiast', [
     'They simply can\'t resist berries that match their colors - just plant a few and they\'ll soon come wandering in.',
 ]);
 
+const CoumarineBirdwatcher = new NPC('Birdwatcher', [
+    'I\'ve heard there is a cave you can find if you go out on the ocean a little ways.',
+    'Apparently defeating a strong creature there unleashes some energy.',
+    'There are rumors that the energy calls some legendary birds to roam Kalos!',
+]);
+
+const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
+    'Don\'t you find Goomy to be an interesting Pokémon? I certainly think so, even though it isn\'t a problem for my Pokémon~',
+    'I\'ve heard its evolutionary line loves damp conditions, and apparently if you train a Sliggoo during rainy or foggy weather something marvelous happens!',
+]);
+
+const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
+    'The spirits tell me roaming Pokémon have been spotted on {ROUTE_NAME}!',
+], GameConstants.Region.kalos);
+
+const KiloudeConfusedHiker = new NPC('Confused Hiker', [
+    'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
+]);
 
 //Kalos Towns
 
@@ -2097,7 +2102,7 @@ TownList['Coumarine City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)],
         shops: [CoumarineCityShop],
-        npcs: [Birdwatcher],
+        npcs: [CoumarineBirdwatcher],
     }
 );
 TownList['Laverre City'] = new Town(
@@ -2115,7 +2120,6 @@ TownList['Dendemille Town'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 15)],
         shops: [DendemilleTownShop],
-        npcs: [DendemilleGoomyEnthusiast],
     }
 );
 TownList['Anistar City'] = new Town(
@@ -2124,7 +2128,7 @@ TownList['Anistar City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 17)],
         shops: [AnistarCityShop],
-        npcs: [KalosRoamerNPC],
+        npcs: [AnistarKalosRoamerNPC],
     }
 );
 TownList['Couriway Town'] = new Town(
