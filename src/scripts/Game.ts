@@ -248,7 +248,7 @@ class Game {
                 BerryDeal.generateDeals(now);
                 Notifier.notify({
                     title: 'It\'s a new day!',
-                    message: 'Your Underground deals have been updated.<br/><i>You have a free quest refresh.</i>',
+                    message: `${this.underground.canAccess() ? 'Your Underground deals have been updated.<br/>' : ''}<i>You have a free quest refresh.</i>`,
                     type: NotificationConstants.NotificationOption.info,
                     timeout: 3e4,
                 });
