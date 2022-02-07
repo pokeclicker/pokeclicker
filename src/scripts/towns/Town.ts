@@ -1505,7 +1505,7 @@ const MistraltonCityShop = new TownShop([
 const LentimasTownShop = new TownShop([
     ItemList['Fire_egg'],
 ]);
-const TownShop = new TownShop([
+const UndellaTownShop = new TownShop([
     ItemList['Deepsea_scale'],
     ItemList['Deepsea_tooth'],
 ]);
@@ -1663,7 +1663,7 @@ TownList['Undella Town'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))],
-        shops: [UndellaTownShop, UnovaFluteMaster]
+        shops: [UndellaTownShop, UnovaFluteMaster],
     }
 );
 TownList['Lacunosa Town'] = new Town(
