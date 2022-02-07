@@ -122,7 +122,7 @@ class DungeonRunner {
                 setting: NotificationConstants.NotificationSetting.dungeon_item_found,
             });
 
-            return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount);
+            return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount, false);
 
         } else if (ItemList[input] instanceof PokeballItem) {
             Notifier.notify({
@@ -130,8 +130,7 @@ class DungeonRunner {
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.dungeon_item_found,
             });
-            GameHelper.incrementObservable(App.game.statistics.pokeballsBought[GameConstants.Pokeball[GameConstants.humanifyString(input)]],amount);
-            return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount);
+            return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount, false);
 
         }  else if (Underground.getMineItemByName(input) instanceof UndergroundItem && Underground.getMineItemByName(input).isStone() === false) {
             Notifier.notify({
