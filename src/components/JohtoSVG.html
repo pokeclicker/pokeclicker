@@ -434,6 +434,22 @@
         })
      %>
 
+    <!--Indigo Plateau 2.0 Extension-->
+    <%- include('templates/mapTown',
+        { name: "Indigo Plateau Johto"
+        , x: 92, y: 11
+        , width: 5, height: 3
+        })
+     %>
+
+    <!--Indigo Plateau 2.0 Extension-->
+    <%- include('templates/mapTown',
+        { name: "Indigo Plateau Johto"
+        , x: 93, y: 14
+        , width: 3, height: 5
+        })
+     %>
+
 
 
 
@@ -647,6 +663,26 @@
         , width: 4, height: 4
         , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Professor Elm's Blimp"
+         , x: 74, y: 45
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('New Bark Town')}, attr:{ class: MapHelper.calculateTownCssClass('New Bark Town') }"
+         , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+         , image: "assets/images/map/blimp_empty.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Professor Elm's Blimp"
+         , x: 74, y: 45
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('New Bark Town')}, attr:{ class: MapHelper.calculateTownCssClass('New Bark Town') }"
+         , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+         , image: "assets/images/map/blimp_pikachu.png"
+         })
      %>
 
 </g>
