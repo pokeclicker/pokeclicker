@@ -309,7 +309,7 @@ class Plot implements Saveable {
             // Withered Berry plant drops half of the berries
             const amount = Math.ceil(this.harvestAmount() / 2);
             if (amount) {
-                App.game.farming.gainBerry(this.berry, amount);
+                App.game.farming.gainBerry(this.berry, amount, true);
                 this.notifications.push(FarmNotificationType.Dropped);
             }
 
@@ -485,6 +485,18 @@ class Plot implements Saveable {
             return;
         }
         this.berryData.aura?.emitAura(index);
+    }
+
+    /**
+     * returns true if the plot had mulch.
+     */
+    clearMulch(): boolean {
+        const wasMulched = this.mulch != MulchType.None;
+        if (wasMulched) {
+            this.mulch = MulchType.None;
+            this.mulchTimeLeft = 0;
+        }
+        return wasMulched;
     }
 
     fromJSON(json: Record<string, any>): void {
