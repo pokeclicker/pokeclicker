@@ -241,7 +241,7 @@ class QuestLineHelper {
 
         const AnabelReward = () => {
             Notifier.notify({ message: 'You Beat Anabel!', type: NotificationConstants.NotificationOption.success });
-            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,1);
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,1,false);
         };
 
         const AnabelBattle = new CustomQuest(
