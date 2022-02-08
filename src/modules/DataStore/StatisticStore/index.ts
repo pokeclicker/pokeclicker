@@ -46,6 +46,7 @@ export default class Statistics implements Saveable {
     undergroundDailyDealTrades: KnockoutObservable<number>;
     // Farm
     totalManualHarvests: KnockoutObservable<number>;
+    totalBerriesObtained: KnockoutObservable<number>;
     totalBerriesHarvested: KnockoutObservable<number>;
     totalBerriesReplanted: KnockoutObservable<number>;
     totalBerriesMutated: KnockoutObservable<number>;
@@ -61,11 +62,13 @@ export default class Statistics implements Saveable {
      */
     pokeballsUsed: Array<KnockoutObservable<number>>;
     pokeballsBought: Array<KnockoutObservable<number>>;
+    pokeballsObtained: Array<KnockoutObservable<number>>;
     // Other
     shardsGained: Array<KnockoutObservable<number>>;
     oakItemUses: Array<KnockoutObservable<number>>;
     // Farm
     berriesHarvested: Array<KnockoutObservable<number>>;
+    berriesObtained: KnockoutObservable<number>;
     mulchesUsed: Array<KnockoutObservable<number>>;
     // Battle
     routeKills: Record<string, Record<string, KnockoutObservable<number>>>;
@@ -109,6 +112,7 @@ export default class Statistics implements Saveable {
         'undergroundDailyDealTrades',
         'totalManualHarvests',
         'totalBerriesHarvested',
+        'totalBerriesObtained',
         'totalBerriesReplanted',
         'totalBerriesMutated',
         'totalMulchesUsed',
@@ -122,9 +126,11 @@ export default class Statistics implements Saveable {
         'dungeonsCleared',
         'pokeballsUsed',
         'pokeballsBought',
+        'pokeballsObtained',
         'shardsGained',
         'oakItemUses',
         'berriesHarvested',
+        'berriesObtained',
         'mulchesUsed',
     ];
     // These will allow negative values (special events etc)
