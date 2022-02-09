@@ -147,9 +147,8 @@ class Party implements Feature {
 
         // Should we take flute boost into account
         if (includeFlute) {
-            const types = fluteEffectRunner.getActiveShardTypes();
             const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
-            types.forEach(value => {
+            fluteEffectRunner.activeShardTypes().forEach(value => {
                 if (value == dataPokemon.type1) {
                     attack *= 1.005;
                 }

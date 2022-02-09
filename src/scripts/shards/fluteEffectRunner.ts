@@ -1,6 +1,7 @@
 class fluteEffectRunner {
     public static counter = 0;
     public static numActiveFlutes: KnockoutObservable<number> = ko.observable(0);
+    public static activeShardTypes: KnockoutObservableArray<number> = ko.observableArray();
 
     public static initialize(multiplier: Multiplier) {
         fluteEffectRunner.numActiveFlutes(0);
@@ -13,6 +14,7 @@ class fluteEffectRunner {
                 GameHelper.incrementObservable(this.numActiveFlutes,1);
             }
         });
+        this.getActiveShardTypes();
     }
 
     public static tick() {
@@ -44,19 +46,20 @@ class fluteEffectRunner {
     }
 
     public static getActiveShardTypes() {
-        const shardNames = [];
+        this.activeShardTypes.removeAll();
+        let shardNames = [];
         for (const itemName in GameConstants.FluteItemType) {
             if (fluteEffectRunner.isActive(GameConstants.FluteItemType[itemName])()) {
                 const item = (ItemList[itemName] as FluteItem);
                 item.shardTypes.forEach(idx => shardNames.push(ShardType[idx]));
             }
         }
-        const uniqueShards = [...new Set(shardNames)];
-        return uniqueShards;
+        shardNames = [...new Set(shardNames)];
+        shardNames.forEach(x => this.activeShardTypes.push(x));
     }
 
     public static shardCost() {
-        this.getActiveShardTypes().forEach(idx => App.game.shards.gainShards(-this.numActiveFlutes(), idx));
+        this.activeShardTypes().forEach(idx => App.game.shards.gainShards(-this.numActiveFlutes(), idx));
     }
 
     public static getEffect(itemName: string) {
@@ -84,6 +87,7 @@ class fluteEffectRunner {
         player.effectList[itemName](Math.max(0, player.effectList[itemName]() + fluteEffectRunner.getLowestShard(itemName)));
         GameHelper.incrementObservable(this.numActiveFlutes,1);
         this.updateFormattedTimeLeft(itemName);
+        this.getActiveShardTypes();
     }
 
     public static removeEffect(itemName: string) {
@@ -91,6 +95,7 @@ class fluteEffectRunner {
         GameHelper.incrementObservable(this.numActiveFlutes, -1);
         this.updateFormattedTimeLeft(itemName);
         player.gainItem(itemName, 1);
+        this.getActiveShardTypes();
     }
 
     public static updateFormattedTimeLeft(itemName: string) {
