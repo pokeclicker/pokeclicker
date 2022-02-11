@@ -129,7 +129,7 @@ class PartyPokemon implements Saveable {
 
     public hideFromProteinList = (): boolean => {
         return this.breeding ||
-            (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideOnMaxProtiens').observableValue());
+            (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue());
     }
 
     public fromJSON(json: Record<string, any>): void {

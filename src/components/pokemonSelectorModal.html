@@ -44,8 +44,8 @@
                       </div>
                   </div>
                   <input type="checkbox" id="hide-max-protein-pokemons" class="form-check-input"
-                      data-bind="checked: Settings.getSetting('proteinHideOnMaxProtiens').observableValue()"
-                      onchange="Settings.setSettingByName('proteinHideOnMaxProtiens', this.checked)"/>
+                      data-bind="checked: Settings.getSetting('proteinHideMaxedPokemon').observableValue()"
+                      onchange="Settings.setSettingByName('proteinHideMaxedPokemon', this.checked)"/>
                   <label for="hide-max-protein-pokemons" class="form-check-label">Hide Pokémon with max protein</label>
                 </div>
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
