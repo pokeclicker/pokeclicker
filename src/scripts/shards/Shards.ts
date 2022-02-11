@@ -24,7 +24,7 @@ class Shards implements Feature {
     constructor() {
         this.shardWallet = this.defaults.shardWallet.map((v) => ko.observable(v));
         this.shardUpgrades = this.defaults.shardUpgrades.map((v) => ko.observable(v));
-        this.shardCollapsed = this.defaults.shardCollapsed.map((b) => b);
+        this.shardCollapsed = this.defaults.shardCollapsed;
         GameHelper.enumNumbers(PokemonType).map(type => {
             this.validUpgrades[type] = {};
             this.validUpgrades[type][GameConstants.TypeEffectiveness.Immune] = !!TypeHelper.typeMatrix[type]?.includes(GameConstants.TypeEffectivenessValue.Immune);
@@ -116,7 +116,7 @@ class Shards implements Feature {
         return {
             'shardWallet': this.shardWallet.map(ko.unwrap),
             'shardUpgrades': this.shardUpgrades.map(ko.unwrap),
-            'shardCollapsed': this.shardCollapsed.map((b) => b),
+            'shardCollapsed': this.shardCollapsed,
         };
     }
 
@@ -128,11 +128,9 @@ class Shards implements Feature {
             json['shardUpgrades'].forEach((v, i) => {
                 this.shardUpgrades[i](v);
             });
-            if ('shardCollapsed' in json) {
-                json['shardCollapsed'].forEach((v, i) => {
-                    this.shardCollapsed[i] = v;
-                });
-            }
+            json['shardCollapsed']?.forEach((v, i) => {
+                this.shardCollapsed[i] = v;
+            });
         }
     }
 
