@@ -35,6 +35,9 @@
     <!--Motio-->
     <script src="libs/motio.js"></script>
 
+    <!--ACSRQ-->
+    <script src="scripts/acsrq.js"></script>
+
     <!--Intro.js-->
     <script src="libs/intro.min.js"></script>
     <link href="libs/introjs.css" rel="stylesheet">
@@ -146,7 +149,7 @@
             </a>
         </div>
     </div>
-    
+
     <div class="dropdown-menu py-0" id="saveSelectorContextMenu">
         <a class="dropdown-item" href="#">Action</a>
         <a class="dropdown-item" href="#">Another action</a>
@@ -647,7 +650,7 @@
     </div>
 
     <script type="text/html" id="selectedPokeballDisplayTemplate">
-        <img class="pokeball-small clickable pokeball-selected" 
+        <img class="pokeball-small clickable pokeball-selected"
             data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.value] + '.svg'}, click: function() {App.game.pokeballs.selectedSelection($data.field); App.game.pokeballs.selectedTitle($data.title); $('#pokeballSelectorModal').modal('show')}"/>
     </script>
 
@@ -1082,7 +1085,7 @@
 
 
                     <!-- Gym Battles -->
-                    
+
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.gym">
     <div class="col no-gutters clickable" data-bind="click: function() {GymBattle.clickAttack()}" style="height: 220px; display: block;">
         <h2 class="pageItemTitle" style="display: block;">
@@ -1146,7 +1149,7 @@
 
 
                     <!-- Battle Frontier Battles -->
-                    
+
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState == GameConstants.GameState.battleFrontier">
     <div class="col no-gutters" data-bind="if: BattleFrontierBattle.enemyPokemon" style="height: 220px; display: block;">
         <h2 class="pageItemTitle" style="display: block;">
@@ -1398,7 +1401,7 @@
             <!-- /ko -->
 
             <!-- Battle Frontier Information Container  -->
-            
+
 <!-- ko if: App.game.gameState === GameConstants.GameState.battleFrontier -->
 <div id="battleFrontierInformation" class="card sortable-disabled border-secondary mb-3 battle-frontier no-select">
     <div class="card-header p-0">
@@ -1505,7 +1508,7 @@
     <!-- ------ -->
 
     <!--Route 1-->
-    
+
 
 <g
 
@@ -1525,7 +1528,7 @@
 
 
     <!--Route 2-->
-    
+
 
 <g
 
@@ -1544,7 +1547,7 @@
 </g>
 
     <!--Extra bit of Route 2-->
-    
+
 
 <g
 
@@ -1558,9 +1561,9 @@
 
 </g>
 
- 
+
     <!--Route 3-->
-    
+
 
 <g
 
@@ -1578,7 +1581,7 @@
 
 
     <!--Route 4-->
-    
+
 
 <g
 
@@ -1596,7 +1599,7 @@
 
 
     <!--Route 5-->
-    
+
 
 <g
 
@@ -1615,7 +1618,7 @@
 </g>
 
     <!--Extra bit of Route 5-->
-    
+
 
 <g
 
@@ -1633,7 +1636,7 @@
 
 
     <!--Route 6-->
-    
+
 
 <g
 
@@ -1653,7 +1656,7 @@
 
 
     <!--Route 7-->
-    
+
 
 <g
 
@@ -1671,7 +1674,7 @@
 
 
     <!--Route 8-->
-    
+
 
 <g
 
@@ -1689,7 +1692,7 @@
 
 
     <!--Route 9-->
-    
+
 
 <g
 
@@ -1705,9 +1708,9 @@
 
 </g>
 
-	 
+
 	   <!--Extra bit of Route 9-->
-    
+
 
 <g
 
@@ -1723,7 +1726,7 @@
 
 
     <!--Route 10-->
-    
+
 
 <g
 
@@ -1738,7 +1741,7 @@
 </g>
 
     <!--Extra bit of Route 10-->
-    
+
 
 <g
 
@@ -1757,7 +1760,7 @@
 </g>
 
 	    <!--Extra bit of Route 10-->
-    
+
 
 <g
 
@@ -1773,7 +1776,7 @@
 
 
     <!--Route 11-->
-    
+
 
 <g
 
@@ -1790,7 +1793,7 @@
 </g>
 
     <!--Extra bit of Route 11-->
-    
+
 
 <g
 
@@ -1805,7 +1808,7 @@
 </g>
 
     <!--Extra bit of Route 11-->
-    
+
 
 <g
 
@@ -1821,7 +1824,7 @@
 
 
     <!--Route 12-->
-    
+
 
 <g
 
@@ -1841,7 +1844,7 @@
 
 
     <!--Route 13-->
-    
+
 
 <g
 
@@ -1861,7 +1864,7 @@
 
 
     <!--Route 14-->
-    
+
 
 <g
 
@@ -1879,7 +1882,7 @@
 
 
     <!--Route 15-->
-    
+
 
 <g
 
@@ -1896,7 +1899,7 @@
 </g>
 
     <!--Extra bit of Route 15-->
-    
+
 
 <g
 
@@ -1912,7 +1915,7 @@
 
 
     <!--Route 16-->
-    
+
 
 <g
 
@@ -1930,7 +1933,7 @@
 
 
     <!--Route 17-->
-    
+
 
 <g
 
@@ -1950,7 +1953,7 @@
 
 
     <!--Route 18-->
-    
+
 
 <g
 
@@ -1968,7 +1971,7 @@
 
 
     <!--Route 19-->
-    
+
 
 <g
 
@@ -1985,7 +1988,7 @@
 </g>
 
     <!--Extra bit of Route 19-->
-    
+
 
 <g
 
@@ -2001,7 +2004,7 @@
 
 
     <!--Route 20-->
-    
+
 
 <g
 
@@ -2019,7 +2022,7 @@
 
 
     <!--Route 21-->
-    
+
 
 <g
 
@@ -2039,7 +2042,7 @@
 
 
     <!--Route 22-->
-    
+
 
 <g
 
@@ -2057,7 +2060,7 @@
 
 
     <!--Route 23-->
-    
+
 
 <g
 
@@ -2076,7 +2079,7 @@
 </g>
 
     <!--Extra bit of Route 23-->
-    
+
 
 <g
 
@@ -2094,7 +2097,7 @@
 
 
     <!--Route 24-->
-    
+
 
 <g
 
@@ -2114,7 +2117,7 @@
 
 
     <!--Route 25-->
-    
+
 
 <g
 
@@ -2139,10 +2142,10 @@
     <!-- ----- -->
 
     <!--Pallet Town-->
-    
+
 
 <rect class="city"
-    data-town="Pallet Town" 
+    data-town="Pallet Town"
     x="352"
     y="584"
     height="72"
@@ -2150,16 +2153,16 @@
     data-bind="
         click:function(){MapHelper.moveToTown('Pallet Town')},
         attr: { class: MapHelper.calculateTownCssClass('Pallet Town') },
-        
+
             css: { flash: MapHelper.ableToTravel() }
         ">
 </rect>
 
     <!--Viridian City-->
-    
+
 
 <rect class="city"
-    data-town="Viridian City" 
+    data-town="Viridian City"
     x="368"
     y="400"
     height="64"
@@ -2169,12 +2172,12 @@
         attr: { class: MapHelper.calculateTownCssClass('Viridian City') },
         ">
 </rect>
-	  
+
    <!--Viridian City extended-->
-    
+
 
 <rect class="city"
-    data-town="Viridian City" 
+    data-town="Viridian City"
     x="432"
     y="416"
     height="48"
@@ -2183,13 +2186,13 @@
         click:function(){MapHelper.moveToTown('Viridian City')},
         attr: { class: MapHelper.calculateTownCssClass('Viridian City') },
         ">
-</rect>	  
+</rect>
 
     <!--Pewter City-->
-    
+
 
 <rect class="city"
-    data-town="Pewter City" 
+    data-town="Pewter City"
     x="352"
     y="144"
     height="80"
@@ -2200,10 +2203,10 @@
         ">
 </rect>
     <!--Pewter City extended-->
-    
+
 
 <rect class="city"
-    data-town="Pewter City" 
+    data-town="Pewter City"
     x="368"
     y="96"
     height="48"
@@ -2212,13 +2215,13 @@
         click:function(){MapHelper.moveToTown('Pewter City')},
         attr: { class: MapHelper.calculateTownCssClass('Pewter City') },
         ">
-</rect>	 
+</rect>
 
     <!--Cerulean City-->
-    
+
 
 <rect class="city"
-    data-town="Cerulean City" 
+    data-town="Cerulean City"
     x="992"
     y="144"
     height="64"
@@ -2230,10 +2233,10 @@
 </rect>
 
     <!--Vermilion City-->
-    
+
 
 <rect class="city"
-    data-town="Vermilion City" 
+    data-town="Vermilion City"
     x="976"
     y="496"
     height="64"
@@ -2245,10 +2248,10 @@
 </rect>
 
     <!--Lavender Town-->
-    
+
 
 <rect class="city"
-    data-town="Lavender Town" 
+    data-town="Lavender Town"
     x="1360"
     y="304"
     height="80"
@@ -2260,10 +2263,10 @@
 </rect>
 
     <!--Celadon City-->
-    
+
 
 <rect class="city"
-    data-town="Celadon City" 
+    data-town="Celadon City"
     x="640"
     y="248"
     height="168"
@@ -2273,12 +2276,12 @@
         attr: { class: MapHelper.calculateTownCssClass('Celadon City') },
         ">
 </rect>
-	 
+
     <!--Celadon City extended-->
-    
+
 
 <rect class="city"
-    data-town="Celadon City" 
+    data-town="Celadon City"
     x="640"
     y="224"
     height="24"
@@ -2287,13 +2290,13 @@
         click:function(){MapHelper.moveToTown('Celadon City')},
         attr: { class: MapHelper.calculateTownCssClass('Celadon City') },
         ">
-</rect>	 
+</rect>
 
     <!--Saffron City-->
-    
+
 
 <rect class="city"
-    data-town="Saffron City" 
+    data-town="Saffron City"
     x="960"
     y="288"
     height="128"
@@ -2303,12 +2306,12 @@
         attr: { class: MapHelper.calculateTownCssClass('Saffron City') },
         ">
 </rect>
-	 
+
 	    <!--Saffron City extended-->
-    
+
 
 <rect class="city"
-    data-town="Saffron City" 
+    data-town="Saffron City"
     x="960"
     y="224"
     height="64"
@@ -2320,10 +2323,10 @@
 </rect>
 
     <!--Fuchsia City-->
-    
+
 
 <rect class="city"
-    data-town="Fuchsia City" 
+    data-town="Fuchsia City"
     x="704"
     y="704"
     height="80"
@@ -2335,10 +2338,10 @@
 </rect>
 
     <!--Cinnabar Island-->
-    
+
 
 <rect class="city"
-    data-town="Cinnabar Island" 
+    data-town="Cinnabar Island"
     x="352"
     y="848"
     height="80"
@@ -2350,10 +2353,10 @@
 </rect>
 
     <!--Cinnabar Island ext1-->
-    
+
 
 <rect class="city"
-    data-town="Cinnabar Island" 
+    data-town="Cinnabar Island"
     x="240"
     y="928"
     height="16"
@@ -2362,13 +2365,13 @@
         click:function(){MapHelper.moveToTown('Cinnabar Island')},
         attr: { class: MapHelper.calculateTownCssClass('Cinnabar Island') },
         ">
-</rect>	 
-	 
+</rect>
+
     <!--Cinnabar Island ext2-->
-    
+
 
 <rect class="city"
-    data-town="Cinnabar Island" 
+    data-town="Cinnabar Island"
     x="240"
     y="880"
     height="48"
@@ -2377,13 +2380,13 @@
         click:function(){MapHelper.moveToTown('Cinnabar Island')},
         attr: { class: MapHelper.calculateTownCssClass('Cinnabar Island') },
         ">
-</rect>	 	 
-	 
+</rect>
+
     <!--Indigo Plateau Kanto-->
-    
+
 
 <rect class="city"
-    data-town="Indigo Plateau Kanto" 
+    data-town="Indigo Plateau Kanto"
     x="48"
     y="0"
     height="192"
@@ -2402,10 +2405,10 @@
     <!-- -------- -->
 
     <!--Viridian Forest-->
-    
+
 
 <rect class="city"
-    data-town="Viridian Forest" 
+    data-town="Viridian Forest"
     x="336"
     y="280"
     height="72"
@@ -2415,10 +2418,10 @@
 </rect>
 
     <!--Digletts Cave Pewter-->
-    
+
 
 <rect class="city"
-    data-town="Digletts Cave" 
+    data-town="Digletts Cave"
     x="432"
     y="224"
     height="48"
@@ -2427,10 +2430,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Digletts Cave') }">
 </rect>
     <!--Digletts Cave Vermilion-->
-    
+
 
 <rect class="city"
-    data-town="Digletts Cave" 
+    data-town="Digletts Cave"
     x="1152"
     y="464"
     height="48"
@@ -2439,10 +2442,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Digletts Cave') }">
 </rect>
     <!--Mt. Moon-->
-    
+
 
 <rect class="city"
-    data-town="Mt. Moon" 
+    data-town="Mt. Moon"
     x="656"
     y="128"
     height="48"
@@ -2450,12 +2453,12 @@
     data-bind="click:function(){MapHelper.moveToTown('Mt. Moon')},
         attr: { class: MapHelper.calculateTownCssClass('Mt. Moon') }">
 </rect>
-	 
+
     <!--Mt. Moon extended-->
-    
+
 
 <rect class="city"
-    data-town="Mt. Moon" 
+    data-town="Mt. Moon"
     x="720"
     y="128"
     height="96"
@@ -2465,10 +2468,10 @@
 </rect>
 
     <!--Rock Tunnel-->
-    
+
 
 <rect class="city"
-    data-town="Rock Tunnel" 
+    data-town="Rock Tunnel"
     x="1392"
     y="160"
     height="48"
@@ -2478,10 +2481,10 @@
 </rect>
 
     <!--Power Plant-->
-    
+
 
 <rect class="city"
-    data-town="Power Plant" 
+    data-town="Power Plant"
     x="1488"
     y="224"
     height="64"
@@ -2490,10 +2493,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Power Plant') }">
 </rect>
 	    <!--Power Plant Extenstion-->
-    
+
 
 <rect class="city"
-    data-town="Power Plant" 
+    data-town="Power Plant"
     x="1456"
     y="224"
     height="32"
@@ -2503,10 +2506,10 @@
 </rect>
 
     <!--Pokémon Tower-->
-    
+
 
 <rect class="city"
-    data-town="Pokemon Tower" 
+    data-town="Pokemon Tower"
     x="1424"
     y="256"
     height="128"
@@ -2516,10 +2519,10 @@
 </rect>
 
     <!--Seafoam Islands-->
-    
+
 
 <rect class="city"
-    data-town="Seafoam Islands" 
+    data-town="Seafoam Islands"
     x="592"
     y="864"
     height="48"
@@ -2527,12 +2530,12 @@
     data-bind="click:function(){MapHelper.moveToTown('Seafoam Islands')},
         attr: { class: MapHelper.calculateTownCssClass('Seafoam Islands') }">
 </rect>
-	 
+
     <!--Seafoam Islands extended-->
-    
+
 
 <rect class="city"
-    data-town="Seafoam Islands" 
+    data-town="Seafoam Islands"
     x="560"
     y="864"
     height="64"
@@ -2542,10 +2545,10 @@
 </rect>
 
     <!--Pokémon Mansion-->
-    
+
 
 <rect class="city"
-    data-town="Pokemon Mansion" 
+    data-town="Pokemon Mansion"
     x="240"
     y="800"
     height="80"
@@ -2555,10 +2558,10 @@
 </rect>
 
     <!--Victory Road-->
-    
+
 
 <rect class="city"
-    data-town="Victory Road" 
+    data-town="Victory Road"
     x="96"
     y="288"
     height="64"
@@ -2567,10 +2570,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Victory Road') }">
 </rect>
     <!--Victory Road Extension-->
-    
+
 
 <rect class="city"
-    data-town="Victory Road" 
+    data-town="Victory Road"
     x="112"
     y="352"
     height="16"
@@ -2580,10 +2583,10 @@
 </rect>
 
     <!--Cerulean Cave-->
-    
+
 
 <rect class="city"
-    data-town="Cerulean Cave" 
+    data-town="Cerulean Cave"
     x="976"
     y="80"
     height="48"
@@ -2600,10 +2603,10 @@
     <!-- PLACES OF INTEREST -->
     <!-- ------------------ -->
 
-    
+
 
 <rect class="city"
-    data-town="Pokemon Day Care" 
+    data-town="Pokemon Day Care"
     x="1088"
     y="208"
     height="64"
@@ -2611,10 +2614,10 @@
     data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Safari Zone" 
+    data-town="Safari Zone"
     x="752"
     y="624"
     height="80"
@@ -2622,10 +2625,10 @@
     data-bind="click:function(){Safari.openModal()}, attr: { class: Safari.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Underground Entrance" 
+    data-town="Underground Entrance"
     x="1328"
     y="480"
     height="64"
@@ -2633,10 +2636,10 @@
     data-bind="click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Farm" 
+    data-town="Farm"
     x="1152"
     y="640"
     height="48"
@@ -2644,10 +2647,10 @@
     data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Dock" 
+    data-town="Dock"
     x="976"
     y="560"
     height="32"
@@ -2655,7 +2658,7 @@
     data-bind="click:function(){MapHelper.openShipModal()}, attr:{ class: player.highestRegion() &gt;= 1 ? &#39;completed&#39; : &#39;locked&#39;}">
 </rect>
 
-    
+
 
 <image href="assets/images/ship.png" xlink:href="assets/images/ship.png"
     x="928"
@@ -2664,7 +2667,7 @@
     width="128"
     data-bind="visible: player.highestRegion() &gt;= 1"/>
 <rect class="city"
-    data-town="SS-Anne" 
+    data-town="SS-Anne"
     x="928"
     y="560"
     height="48"
@@ -2672,7 +2675,7 @@
     data-bind="visible: player.highestRegion() &gt;= 1, click:function(){MapHelper.openShipModal()}, attr:{ class: player.highestRegion() &gt;= 1 ? &#39;completed&#39; : &#39;locked&#39;}">
 </rect>
 
-    
+
 
 <image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
     x="432"
@@ -2681,7 +2684,7 @@
     width="96"
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
 <rect class="city"
-    data-town="Professor Oak&#39;s Blimp" 
+    data-town="Professor Oak&#39;s Blimp"
     x="432"
     y="592"
     height="48"
@@ -2689,7 +2692,7 @@
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Pallet Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Pallet Town&#39;) }">
 </rect>
 
-     
+
 
 <image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
     x="432"
@@ -2698,7 +2701,7 @@
     width="96"
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
 <rect class="city"
-    data-town="Professor Oak&#39;s Blimp" 
+    data-town="Professor Oak&#39;s Blimp"
     x="432"
     y="592"
     height="48"
@@ -2716,7 +2719,7 @@
     <!-- ------ -->
 
     <!--Route 27-->
-    
+
 
 <g
 
@@ -2734,7 +2737,7 @@
 
 
     <!--Route 26-->
-    
+
 
 <g
 
@@ -2754,7 +2757,7 @@
 
 
     <!--Route 28-->
-    
+
 
 <g
 
@@ -2772,7 +2775,7 @@
 
 
     <!--Route 29-->
-    
+
 
 <g
 
@@ -2790,7 +2793,7 @@
 
 
     <!--Route 30-->
-    
+
 
 <g
 
@@ -2810,7 +2813,7 @@
 
 
     <!--Route 31-->
-    
+
 
 <g
 
@@ -2828,7 +2831,7 @@
 
 
     <!--Route 32-->
-    
+
 
 <g
 
@@ -2847,7 +2850,7 @@
 </g>
 
      <!--Extra bit of Route 32-->
-     
+
 
 <g
 
@@ -2864,7 +2867,7 @@
 </g>
 
       <!--Extra bit of Route 32-->
-      
+
 
 <g
 
@@ -2882,7 +2885,7 @@
 
 
     <!--Route 33-->
-    
+
 
 <g
 
@@ -2900,7 +2903,7 @@
 
 
     <!--Route 34-->
-    
+
 
 <g
 
@@ -2919,7 +2922,7 @@
 </g>
 
      <!--Extra bit of Route 34-->
-     
+
 
 <g
 
@@ -2936,7 +2939,7 @@
 </g>
 
       <!--Extra bit of Route 34-->
-      
+
 
 <g
 
@@ -2954,7 +2957,7 @@
 
 
     <!--Route 35-->
-    
+
 
 <g
 
@@ -2974,7 +2977,7 @@
 
 
     <!--Route 36-->
-    
+
 
 <g
 
@@ -2992,7 +2995,7 @@
 
 
     <!--Route 37-->
-    
+
 
 <g
 
@@ -3012,7 +3015,7 @@
 
 
     <!--Route 38-->
-    
+
 
 <g
 
@@ -3030,7 +3033,7 @@
 
 
     <!--Route 39-->
-    
+
 
 <g
 
@@ -3050,7 +3053,7 @@
 
 
     <!--Route 40-->
-    
+
 
 <g
 
@@ -3070,7 +3073,7 @@
 
 
     <!--Route 41-->
-    
+
 
 <g
 
@@ -3089,7 +3092,7 @@
 </g>
 
      <!--Extra bit of Route 41-->
-     
+
 
 <g
 
@@ -3106,7 +3109,7 @@
 </g>
 
     <!--Extra bit of Route 41-->
-    
+
 
 <g
 
@@ -3122,7 +3125,7 @@
 
 
     <!--Route 42-->
-    
+
 
 <g
 
@@ -3139,7 +3142,7 @@
 </g>
 
      <!--Extra bit of Route 42-->
-     
+
 
 <g
 
@@ -3154,7 +3157,7 @@
 </g>
 
      <!--Extra bit of Route 42-->
-     
+
 
 <g
 
@@ -3170,7 +3173,7 @@
 
 
     <!--Route 43-->
-    
+
 
 <g
 
@@ -3190,7 +3193,7 @@
 
 
     <!--Route 44-->
-    
+
 
 <g
 
@@ -3207,7 +3210,7 @@
 </g>
 
      <!--Extra bit of Route 44-->
-     
+
 
 <g
 
@@ -3223,7 +3226,7 @@
 
 
     <!--Route 45-->
-    
+
 
 <g
 
@@ -3242,7 +3245,7 @@
 </g>
 
      <!--Extra bit of Route 45-->
-    
+
 
 <g
 
@@ -3259,7 +3262,7 @@
 </g>
 
     <!--Extra bit of Route 45-->
-   
+
 
 <g
 
@@ -3277,7 +3280,7 @@
 
 
     <!--Route 46-->
-    
+
 
 <g
 
@@ -3296,7 +3299,7 @@
 </g>
 
     <!--Extra bit of Route 46-->
-    
+
 
 <g
 
@@ -3311,7 +3314,7 @@
 </g>
 
     <!--Extra bit of Route 46-->
-    
+
 
 <g
 
@@ -3329,7 +3332,7 @@
 
 
      <!--Route 47-->
-    
+
 
 <g
 
@@ -3349,7 +3352,7 @@
 
 
     <!--Route 48-->
-    
+
 
 <g
 
@@ -3376,10 +3379,10 @@
     <!-- ----- -->
 
     <!--New Bark Town-->
-    
+
 
 <rect class="city"
-    data-town="New Bark Town" 
+    data-town="New Bark Town"
     x="1152"
     y="648"
     height="72"
@@ -3387,16 +3390,16 @@
     data-bind="
         click:function(){MapHelper.moveToTown('New Bark Town')},
         attr: { class: MapHelper.calculateTownCssClass('New Bark Town') },
-        
+
             css: { flash: MapHelper.ableToTravel() }
         ">
 </rect>
 
     <!--Cherrygrove City-->
-    
+
 
 <rect class="city"
-    data-town="Cherrygrove City" 
+    data-town="Cherrygrove City"
     x="800"
     y="656"
     height="64"
@@ -3408,10 +3411,10 @@
 </rect>
 
     <!--Violet City-->
-    
+
 
 <rect class="city"
-    data-town="Violet City" 
+    data-town="Violet City"
     x="656"
     y="288"
     height="64"
@@ -3423,10 +3426,10 @@
 </rect>
 
     <!--Azalea Town-->
-    
+
 
 <rect class="city"
-    data-town="Azalea Town" 
+    data-town="Azalea Town"
     x="448"
     y="864"
     height="64"
@@ -3438,10 +3441,10 @@
 </rect>
 
     <!--Goldenrod City-->
-    
+
 
 <rect class="city"
-    data-town="Goldenrod City" 
+    data-town="Goldenrod City"
     x="400"
     y="504"
     height="72"
@@ -3451,12 +3454,12 @@
         attr: { class: MapHelper.calculateTownCssClass('Goldenrod City') },
         ">
 </rect>
-    
+
     <!--Goldenrod City Extension-->
-    
+
 
 <rect class="city"
-    data-town="Goldenrod City" 
+    data-town="Goldenrod City"
     x="368"
     y="576"
     height="80"
@@ -3468,10 +3471,10 @@
 </rect>
 
     <!--Goldenrod City Extension-->
-    
+
 
 <rect class="city"
-    data-town="Goldenrod City" 
+    data-town="Goldenrod City"
     x="352"
     y="560"
     height="16"
@@ -3483,10 +3486,10 @@
 </rect>
 
     <!--Goldenrod City Extension-->
-    
+
 
 <rect class="city"
-    data-town="Goldenrod City" 
+    data-town="Goldenrod City"
     x="432"
     y="496"
     height="8"
@@ -3498,10 +3501,10 @@
 </rect>
 
     <!--Ecruteak City-->
-    
+
 
 <rect class="city"
-    data-town="Ecruteak City" 
+    data-town="Ecruteak City"
     x="512"
     y="144"
     height="64"
@@ -3513,10 +3516,10 @@
 </rect>
 
     <!--Olivine City-->
-    
+
 
 <rect class="city"
-    data-town="Olivine City" 
+    data-town="Olivine City"
     x="144"
     y="296"
     height="72"
@@ -3527,10 +3530,10 @@
         ">
 </rect>
      <!--Olivine City Extension-->
-     
+
 
 <rect class="city"
-    data-town="Olivine City" 
+    data-town="Olivine City"
     x="224"
     y="304"
     height="64"
@@ -3542,10 +3545,10 @@
 </rect>
 
     <!--Cianwood City-->
-    
+
 
 <rect class="city"
-    data-town="Cianwood City" 
+    data-town="Cianwood City"
     x="64"
     y="656"
     height="64"
@@ -3557,10 +3560,10 @@
 </rect>
 
     <!--Mahogany Town-->
-    
+
 
 <rect class="city"
-    data-town="Mahogany Town" 
+    data-town="Mahogany Town"
     x="880"
     y="144"
     height="64"
@@ -3572,10 +3575,10 @@
 </rect>
 
     <!--Blackthorn City-->
-    
+
 
 <rect class="city"
-    data-town="Blackthorn City" 
+    data-town="Blackthorn City"
     x="1104"
     y="224"
     height="64"
@@ -3587,10 +3590,10 @@
 </rect>
 
     <!--Indigo Plateau 2.0-->
-    
+
 
 <rect class="city"
-    data-town="Indigo Plateau Johto" 
+    data-town="Indigo Plateau Johto"
     x="1424"
     y="48"
     height="128"
@@ -3602,10 +3605,10 @@
 </rect>
 
     <!--Indigo Plateau 2.0 Extension-->
-    
+
 
 <rect class="city"
-    data-town="Indigo Plateau Johto" 
+    data-town="Indigo Plateau Johto"
     x="1472"
     y="176"
     height="48"
@@ -3617,10 +3620,10 @@
 </rect>
 
     <!--Indigo Plateau 2.0 Extension-->
-    
+
 
 <rect class="city"
-    data-town="Indigo Plateau Johto" 
+    data-town="Indigo Plateau Johto"
     x="1488"
     y="224"
     height="80"
@@ -3639,10 +3642,10 @@
     <!-- -------- -->
 
     <!--Sprout Tower-->
-    
+
 
 <rect class="city"
-    data-town="Sprout Tower" 
+    data-town="Sprout Tower"
     x="704"
     y="216"
     height="72"
@@ -3651,10 +3654,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Sprout Tower') }">
 </rect>
     <!--Sprout Tower Extension-->
-    
+
 
 <rect class="city"
-    data-town="Sprout Tower" 
+    data-town="Sprout Tower"
     x="720"
     y="288"
     height="16"
@@ -3664,10 +3667,10 @@
 </rect>
 
     <!--Ruins of Alph-->
-    
+
 
 <rect class="city"
-    data-town="Ruins of Alph" 
+    data-town="Ruins of Alph"
     x="656"
     y="400"
     height="64"
@@ -3677,10 +3680,10 @@
 </rect>
 
     <!--Union Cave-->
-    
+
 
 <rect class="city"
-    data-town="Union Cave" 
+    data-town="Union Cave"
     x="656"
     y="752"
     height="64"
@@ -3690,10 +3693,10 @@
 </rect>
 
     <!--Slowpoke Well-->
-    
+
 
 <rect class="city"
-    data-town="Slowpoke Well" 
+    data-town="Slowpoke Well"
     x="512"
     y="832"
     height="48"
@@ -3703,10 +3706,10 @@
 </rect>
 
     <!--Ilex Forest-->
-    
+
 
 <rect class="city"
-    data-town="Ilex Forest" 
+    data-town="Ilex Forest"
     x="384"
     y="800"
     height="48"
@@ -3716,10 +3719,10 @@
 </rect>
 
     <!--Burned Tower-->
-    
+
 
 <rect class="city"
-    data-town="Burned Tower" 
+    data-town="Burned Tower"
     x="416"
     y="32"
     height="112"
@@ -3728,10 +3731,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Burned Tower') }">
 </rect>
      <!--Burned Tower Extension-->
-     
+
 
 <rect class="city"
-    data-town="Burned Tower" 
+    data-town="Burned Tower"
     x="416"
     y="144"
     height="16"
@@ -3741,10 +3744,10 @@
 </rect>
 
     <!--Tin Tower-->
-    
+
 
 <rect class="city"
-    data-town="Tin Tower" 
+    data-town="Tin Tower"
     x="560"
     y="0"
     height="144"
@@ -3753,10 +3756,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Tin Tower') }">
 </rect>
      <!--Tin Tower Extension-->
-     
+
 
 <rect class="city"
-    data-town="Tin Tower" 
+    data-town="Tin Tower"
     x="576"
     y="144"
     height="16"
@@ -3766,10 +3769,10 @@
 </rect>
 
     <!--Whirl Islands-->
-    
+
 
 <rect class="city"
-    data-town="Whirl Islands" 
+    data-town="Whirl Islands"
     x="192"
     y="624"
     height="48"
@@ -3779,10 +3782,10 @@
 </rect>
 
     <!--Mt Mortar-->
-    
+
 
 <rect class="city"
-    data-town="Mt Mortar" 
+    data-town="Mt Mortar"
     x="768"
     y="128"
     height="48"
@@ -3791,10 +3794,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Mt Mortar') }">
 </rect>
      <!--Mt Mortar Extension-->
-     
+
 
 <rect class="city"
-    data-town="Mt Mortar" 
+    data-town="Mt Mortar"
     x="832"
     y="96"
     height="64"
@@ -3804,10 +3807,10 @@
 </rect>
 
     <!--Radio Tower-->
-    
+
 
 <rect class="city"
-    data-town="Radio Tower" 
+    data-town="Radio Tower"
     x="352"
     y="464"
     height="96"
@@ -3817,10 +3820,10 @@
 </rect>
 
     <!--Radio Tower Extension-->
-    
+
 
 <rect class="city"
-    data-town="Radio Tower" 
+    data-town="Radio Tower"
     x="400"
     y="464"
     height="40"
@@ -3830,10 +3833,10 @@
 </rect>
 
     <!--Ice Path-->
-    
+
 
 <rect class="city"
-    data-town="Ice Path" 
+    data-town="Ice Path"
     x="1104"
     y="144"
     height="48"
@@ -3842,10 +3845,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Ice Path') }">
 </rect>
      <!--Ice Path Extension-->
-     
+
 
 <rect class="city"
-    data-town="Ice Path" 
+    data-town="Ice Path"
     x="1168"
     y="176"
     height="16"
@@ -3855,10 +3858,10 @@
 </rect>
 
     <!--Dark Cave-->
-    
+
 
 <rect class="city"
-    data-town="Dark Cave" 
+    data-town="Dark Cave"
     x="1072"
     y="432"
     height="48"
@@ -3867,10 +3870,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Dark Cave') }">
 </rect>
      <!--Dark Cave Extension-->
-     
+
 
 <rect class="city"
-    data-town="Dark Cave" 
+    data-town="Dark Cave"
     x="1120"
     y="480"
     height="16"
@@ -3879,10 +3882,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Dark Cave') }">
 </rect>
      <!--Dark Cave Extension-->
-     
+
 
 <rect class="city"
-    data-town="Dark Cave" 
+    data-town="Dark Cave"
     x="816"
     y="256"
     height="48"
@@ -3892,10 +3895,10 @@
 </rect>
 
     <!--Victory Road Johto-->
-    
+
 
 <rect class="city"
-    data-town="Victory Road Johto" 
+    data-town="Victory Road Johto"
     x="1488"
     y="304"
     height="48"
@@ -3905,10 +3908,10 @@
 </rect>
 
     <!--Mt Silver-->
-    
+
 
 <rect class="city"
-    data-town="Mt Silver" 
+    data-town="Mt Silver"
     x="1184"
     y="496"
     height="80"
@@ -3917,10 +3920,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Mt Silver') }">
 </rect>
      <!--Mt Silver Extension-->
-     
+
 
 <rect class="city"
-    data-town="Mt Silver" 
+    data-town="Mt Silver"
     x="1248"
     y="576"
     height="16"
@@ -3936,10 +3939,10 @@
     <!-- PLACES OF INTEREST -->
     <!-- ------------------ -->
 
-    
+
 
 <rect class="city"
-    data-town="Dock" 
+    data-town="Dock"
     x="240"
     y="368"
     height="64"
@@ -3947,10 +3950,10 @@
     data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Olivine City&#39;) }">
 </rect>
 
-     
+
 
 <rect class="city"
-    data-town="Underground Entrance" 
+    data-town="Underground Entrance"
     x="624"
     y="464"
     height="64"
@@ -3958,10 +3961,10 @@
     data-bind="click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-     
+
 
 <rect class="city"
-    data-town="Farm" 
+    data-town="Farm"
     x="576"
     y="224"
     height="48"
@@ -3969,10 +3972,10 @@
     data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-     
+
 
 <rect class="city"
-    data-town="Pokemon Day Care" 
+    data-town="Pokemon Day Care"
     x="448"
     y="608"
     height="64"
@@ -3980,7 +3983,7 @@
     data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-     
+
 
 <image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
     x="1184"
@@ -3989,7 +3992,7 @@
     width="96"
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
 <rect class="city"
-    data-town="Professor Elm&#39;s Blimp" 
+    data-town="Professor Elm&#39;s Blimp"
     x="1184"
     y="720"
     height="48"
@@ -3997,7 +4000,7 @@
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;New Bark Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;New Bark Town&#39;) }">
 </rect>
 
-     
+
 
 <image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
     x="1184"
@@ -4006,7 +4009,7 @@
     width="96"
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
 <rect class="city"
-    data-town="Professor Elm&#39;s Blimp" 
+    data-town="Professor Elm&#39;s Blimp"
     x="1184"
     y="720"
     height="48"
@@ -4024,7 +4027,7 @@
     <!-- ------ -->
 
     <!--Route 101-->
-    
+
 
 <g
 
@@ -4042,7 +4045,7 @@
 
 
     <!--Route 102-->
-    
+
 
 <g
 
@@ -4060,7 +4063,7 @@
 
 
     <!--Route 103-->
-    
+
 
 <g
 
@@ -4078,7 +4081,7 @@
 
 
      <!--Route 104-->
-     
+
 
 <g
 
@@ -4097,7 +4100,7 @@
 </g>
 
     <!--Route 104 Extension-->
-    
+
 
 <g
 
@@ -4113,7 +4116,7 @@
 
 
     <!--Route 105-->
-    
+
 
 <g
 
@@ -4133,7 +4136,7 @@
 
 
     <!--Route 106-->
-    
+
 
 <g
 
@@ -4151,7 +4154,7 @@
 
 
     <!--Route 107-->
-    
+
 
 <g
 
@@ -4169,7 +4172,7 @@
 
 
     <!--Route 108-->
-    
+
 
 <g
 
@@ -4187,7 +4190,7 @@
 
 
     <!--Route 109-->
-    
+
 
 <g
 
@@ -4207,7 +4210,7 @@
 
 
     <!--Route 110-->
-    
+
 
 <g
 
@@ -4227,7 +4230,7 @@
 
 
     <!--Route 111-->
-    
+
 
 <g
 
@@ -4247,7 +4250,7 @@
 
 
     <!--Route 112-->
-    
+
 
 <g
 
@@ -4265,7 +4268,7 @@
 
 
     <!--Route 113-->
-    
+
 
 <g
 
@@ -4283,7 +4286,7 @@
 
 
     <!--Route 114-->
-    
+
 
 <g
 
@@ -4302,7 +4305,7 @@
 </g>
 
     <!--Route 114 Extension-->
-    
+
 
 <g
 
@@ -4318,7 +4321,7 @@
 
 
     <!--Route 115-->
-    
+
 
 <g
 
@@ -4337,7 +4340,7 @@
 </g>
 
      <!--Route 115 Extension-->
-     
+
 
 <g
 
@@ -4353,7 +4356,7 @@
 
 
     <!--Route 116-->
-    
+
 
 <g
 
@@ -4370,7 +4373,7 @@
 </g>
 
      <!--Route 116 Extension-->
-     
+
 
 <g
 
@@ -4386,7 +4389,7 @@
 
 
     <!--Route 117-->
-    
+
 
 <g
 
@@ -4404,7 +4407,7 @@
 
 
     <!--Route 118-->
-    
+
 
 <g
 
@@ -4422,7 +4425,7 @@
 
 
     <!--Route 119-->
-    
+
 
 <g
 
@@ -4442,7 +4445,7 @@
 
 
     <!--Route 120-->
-    
+
 
 <g
 
@@ -4462,7 +4465,7 @@
 
 
     <!--Route 121-->
-    
+
 
 <g
 
@@ -4480,7 +4483,7 @@
 
 
     <!--Route 122-->
-    
+
 
 <g
 
@@ -4499,7 +4502,7 @@
 </g>
 
     <!--Route 122 Extension-->
-    
+
 
 <g
 
@@ -4514,7 +4517,7 @@
 </g>
 
     <!--Route 122 Extension-->
-    
+
 
 <g
 
@@ -4530,7 +4533,7 @@
 
 
     <!--Route 123-->
-    
+
 
 <g
 
@@ -4548,7 +4551,7 @@
 
 
     <!--Route 124-->
-    
+
 
 <g
 
@@ -4565,7 +4568,7 @@
 </g>
 
      <!--Route 124 Extension-->
-     
+
 
 <g
 
@@ -4580,7 +4583,7 @@
 </g>
 
      <!--Route 124 Extension-->
-     
+
 
 <g
 
@@ -4596,7 +4599,7 @@
 
 
     <!--Route 125-->
-    
+
 
 <g
 
@@ -4613,7 +4616,7 @@
 </g>
 
     <!--Route 125 Extension-->
-    
+
 
 <g
 
@@ -4628,7 +4631,7 @@
 </g>
 
     <!--Route 125 Extension-->
-    
+
 
 <g
 
@@ -4643,7 +4646,7 @@
 </g>
 
     <!--Route 125 Extension-->
-    
+
 
 <g
 
@@ -4658,7 +4661,7 @@
 </g>
 
     <!--Route 125 Extension-->
-    
+
 
 <g
 
@@ -4674,7 +4677,7 @@
 
 
     <!--Route 126-->
-    
+
 
 <g
 
@@ -4691,7 +4694,7 @@
 </g>
 
      <!--Route 126 Extension-->
-     
+
 
 <g
 
@@ -4706,7 +4709,7 @@
 </g>
 
      <!--Route 126 Extension-->
-     
+
 
 <g
 
@@ -4721,7 +4724,7 @@
 </g>
 
      <!--Route 126 Extension-->
-     
+
 
 <g
 
@@ -4736,7 +4739,7 @@
 </g>
 
      <!--Route 126 Extension-->
-     
+
 
 <g
 
@@ -4752,7 +4755,7 @@
 
 
     <!--Route 127-->
-    
+
 
 <g
 
@@ -4769,7 +4772,7 @@
 </g>
 
      <!--Route 127 Extension-->
-     
+
 
 <g
 
@@ -4784,7 +4787,7 @@
 </g>
 
      <!--Route 127 Extension-->
-     
+
 
 <g
 
@@ -4799,7 +4802,7 @@
 </g>
 
      <!--Route 127 Extension-->
-     
+
 
 <g
 
@@ -4815,7 +4818,7 @@
 
 
     <!--Route 128-->
-    
+
 
 <g
 
@@ -4833,7 +4836,7 @@
 
 
     <!--Route 129-->
-    
+
 
 <g
 
@@ -4851,7 +4854,7 @@
 
 
     <!--Route 130-->
-    
+
 
 <g
 
@@ -4869,7 +4872,7 @@
 
 
     <!--Route 131-->
-    
+
 
 <g
 
@@ -4887,7 +4890,7 @@
 
 
     <!--Route 132-->
-    
+
 
 <g
 
@@ -4905,7 +4908,7 @@
 
 
     <!--Route 133-->
-    
+
 
 <g
 
@@ -4923,7 +4926,7 @@
 
 
     <!--Route 134-->
-    
+
 
 <g
 
@@ -4948,10 +4951,10 @@
     <!-- ----- -->
 
     <!--Littleroot Town-->
-    
+
 
 <rect class="city"
-    data-town="Littleroot Town" 
+    data-town="Littleroot Town"
     x="224"
     y="696"
     height="72"
@@ -4959,16 +4962,16 @@
     data-bind="
         click:function(){MapHelper.moveToTown('Littleroot Town')},
         attr: { class: MapHelper.calculateTownCssClass('Littleroot Town') },
-        
+
             css: { flash: MapHelper.ableToTravel() }
         ">
 </rect>
 
     <!--Oldale Town-->
-    
+
 
 <rect class="city"
-    data-town="Oldale Town" 
+    data-town="Oldale Town"
     x="224"
     y="592"
     height="64"
@@ -4980,10 +4983,10 @@
 </rect>
 
     <!--Petalburg City-->
-    
+
 
 <rect class="city"
-    data-town="Petalburg City" 
+    data-town="Petalburg City"
     x="64"
     y="592"
     height="64"
@@ -4995,10 +4998,10 @@
 </rect>
 
     <!--Rustboro City-->
-    
+
 
 <rect class="city"
-    data-town="Rustboro City" 
+    data-town="Rustboro City"
     x="0"
     y="296"
     height="152"
@@ -5010,10 +5013,10 @@
 </rect>
 
     <!--Dewford Town-->
-    
+
 
 <rect class="city"
-    data-town="Dewford Town" 
+    data-town="Dewford Town"
     x="128"
     y="864"
     height="64"
@@ -5025,10 +5028,10 @@
 </rect>
 
     <!--Slateport City-->
-    
+
 
 <rect class="city"
-    data-town="Slateport City" 
+    data-town="Slateport City"
     x="448"
     y="616"
     height="152"
@@ -5040,10 +5043,10 @@
 </rect>
 
     <!--Mauville City-->
-    
+
 
 <rect class="city"
-    data-town="Mauville City" 
+    data-town="Mauville City"
     x="432"
     y="360"
     height="72"
@@ -5054,10 +5057,10 @@
         ">
 </rect>
     <!--Mauville City Extension-->
-    
+
 
 <rect class="city"
-    data-town="Mauville City" 
+    data-town="Mauville City"
     x="512"
     y="368"
     height="64"
@@ -5069,10 +5072,10 @@
 </rect>
 
     <!--Verdanturf Town-->
-    
+
 
 <rect class="city"
-    data-town="Verdanturf Town" 
+    data-town="Verdanturf Town"
     x="224"
     y="368"
     height="64"
@@ -5084,10 +5087,10 @@
 </rect>
 
     <!--Fallarbor Town-->
-    
+
 
 <rect class="city"
-    data-town="Fallarbor Town" 
+    data-town="Fallarbor Town"
     x="176"
     y="48"
     height="64"
@@ -5099,10 +5102,10 @@
 </rect>
 
     <!--Lavaridge Town-->
-    
+
 
 <rect class="city"
-    data-town="Lavaridge Town" 
+    data-town="Lavaridge Town"
     x="288"
     y="256"
     height="64"
@@ -5114,10 +5117,10 @@
 </rect>
 
     <!--Fortree City-->
-    
+
 
 <rect class="city"
-    data-town="Fortree City" 
+    data-town="Fortree City"
     x="672"
     y="48"
     height="64"
@@ -5129,10 +5132,10 @@
 </rect>
 
     <!--LilyCove City-->
-    
+
 
 <rect class="city"
-    data-town="LilyCove City" 
+    data-town="LilyCove City"
     x="1040"
     y="200"
     height="72"
@@ -5143,10 +5146,10 @@
         ">
 </rect>
     <!--LilyCove City Extension-->
-    
+
 
 <rect class="city"
-    data-town="LilyCove City" 
+    data-town="LilyCove City"
     x="1120"
     y="208"
     height="64"
@@ -5158,10 +5161,10 @@
 </rect>
 
     <!--Mossdeep City-->
-    
+
 
 <rect class="city"
-    data-town="Mossdeep City" 
+    data-town="Mossdeep City"
     x="1328"
     y="296"
     height="72"
@@ -5172,10 +5175,10 @@
         ">
 </rect>
     <!--Mossdeep City Extension-->
-    
+
 
 <rect class="city"
-    data-town="Mossdeep City" 
+    data-town="Mossdeep City"
     x="1408"
     y="304"
     height="64"
@@ -5187,10 +5190,10 @@
 </rect>
 
     <!--Sootopolis City-->
-    
+
 
 <rect class="city"
-    data-town="Sootopolis City" 
+    data-town="Sootopolis City"
     x="1200"
     y="512"
     height="64"
@@ -5202,10 +5205,10 @@
 </rect>
 
     <!--Pacifidlog Town-->
-    
+
 
 <rect class="city"
-    data-town="Pacifidlog Town" 
+    data-town="Pacifidlog Town"
     x="992"
     y="640"
     height="64"
@@ -5217,10 +5220,10 @@
 </rect>
 
     <!--Ever Grande City-->
-    
+
 
 <rect class="city"
-    data-town="Ever Grande City" 
+    data-town="Ever Grande City"
     x="1488"
     y="640"
     height="64"
@@ -5232,10 +5235,10 @@
 </rect>
 
     <!--Pokémon League Hoenn-->
-    
+
 
 <rect class="city"
-    data-town="Pokémon League Hoenn" 
+    data-town="Pokémon League Hoenn"
     x="1440"
     y="416"
     height="128"
@@ -5247,10 +5250,10 @@
 </rect>
 
      <!--Battle Frontier-->
-     
+
 
 <rect class="city"
-    data-town="Battle Frontier" 
+    data-town="Battle Frontier"
     x="1232"
     y="744"
     height="72"
@@ -5261,10 +5264,10 @@
         ">
 </rect>
     <!--Battle Frontier Extension-->
-    
+
 
 <rect class="city"
-    data-town="Battle Frontier" 
+    data-town="Battle Frontier"
     x="1272"
     y="736"
     height="8"
@@ -5283,10 +5286,10 @@
     <!-- -------- -->
 
     <!--Petalburg Woods-->
-    
+
 
 <rect class="city"
-    data-town="Petalburg Woods" 
+    data-town="Petalburg Woods"
     x="16"
     y="464"
     height="48"
@@ -5296,10 +5299,10 @@
 </rect>
 
     <!--Rusturf Tunnel-->
-    
+
 
 <rect class="city"
-    data-town="Rusturf Tunnel" 
+    data-town="Rusturf Tunnel"
     x="208"
     y="320"
     height="48"
@@ -5309,10 +5312,10 @@
 </rect>
 
     <!--Granite Cave-->
-    
+
 
 <rect class="city"
-    data-town="Granite Cave" 
+    data-town="Granite Cave"
     x="64"
     y="864"
     height="64"
@@ -5322,10 +5325,10 @@
 </rect>
 
     <!--New Mauville-->
-    
+
 
 <rect class="city"
-    data-town="New Mauville" 
+    data-town="New Mauville"
     x="512"
     y="432"
     height="48"
@@ -5335,10 +5338,10 @@
 </rect>
 
     <!--Meteor Falls-->
-    
+
 
 <rect class="city"
-    data-town="Meteor Falls" 
+    data-town="Meteor Falls"
     x="48"
     y="160"
     height="48"
@@ -5348,10 +5351,10 @@
 </rect>
 
     <!--Fiery Path-->
-    
+
 
 <rect class="city"
-    data-town="Fiery Path" 
+    data-town="Fiery Path"
     x="400"
     y="224"
     height="48"
@@ -5361,10 +5364,10 @@
 </rect>
 
     <!--Jagged Pass-->
-    
+
 
 <rect class="city"
-    data-town="Jagged Pass" 
+    data-town="Jagged Pass"
     x="336"
     y="224"
     height="48"
@@ -5374,10 +5377,10 @@
 </rect>
 
     <!--Mt. Chimney-->
-    
+
 
 <rect class="city"
-    data-town="Mt. Chimney" 
+    data-town="Mt. Chimney"
     x="336"
     y="176"
     height="48"
@@ -5385,12 +5388,12 @@
     data-bind="click:function(){MapHelper.moveToTown('Mt. Chimney')},
         attr: { class: MapHelper.calculateTownCssClass('Mt. Chimney') }">
 </rect>
-    
+
     <!--Weather Institute-->
-    
+
 
 <rect class="city"
-    data-town="Weather Institute" 
+    data-town="Weather Institute"
     x="560"
     y="96"
     height="48"
@@ -5400,10 +5403,10 @@
 </rect>
 
     <!--Mt. Pyre-->
-    
+
 
 <rect class="city"
-    data-town="Mt. Pyre" 
+    data-town="Mt. Pyre"
     x="928"
     y="288"
     height="64"
@@ -5412,10 +5415,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Mt. Pyre') }">
 </rect>
     <!--Mt. Pyre Extension-->
-    
+
 
 <rect class="city"
-    data-town="Mt. Pyre" 
+    data-town="Mt. Pyre"
     x="992"
     y="304"
     height="48"
@@ -5425,10 +5428,10 @@
 </rect>
 
     <!--Magma Hideout-->
-    
+
 
 <rect class="city"
-    data-town="Magma Hideout" 
+    data-town="Magma Hideout"
     x="400"
     y="176"
     height="48"
@@ -5436,12 +5439,12 @@
     data-bind="click:function(){MapHelper.moveToTown('Magma Hideout')},
         attr: { class: MapHelper.calculateTownCssClass('Magma Hideout') }">
 </rect>
-     
+
     <!--Aqua Hideout-->
-    
+
 
 <rect class="city"
-    data-town="Aqua Hideout" 
+    data-town="Aqua Hideout"
     x="1184"
     y="176"
     height="48"
@@ -5449,12 +5452,12 @@
     data-bind="click:function(){MapHelper.moveToTown('Aqua Hideout')},
         attr: { class: MapHelper.calculateTownCssClass('Aqua Hideout') }">
 </rect>
-     
+
     <!--Aqua Hideout Extension-->
-    
+
 
 <rect class="city"
-    data-town="Aqua Hideout" 
+    data-town="Aqua Hideout"
     x="1168"
     y="176"
     height="32"
@@ -5464,10 +5467,10 @@
 </rect>
 
     <!--Shoal Cave-->
-    
+
 
 <rect class="city"
-    data-town="Shoal Cave" 
+    data-town="Shoal Cave"
     x="1392"
     y="208"
     height="48"
@@ -5477,10 +5480,10 @@
 </rect>
 
     <!--Seafloor Cavern-->
-    
+
 
 <rect class="city"
-    data-town="Seafloor Cavern" 
+    data-town="Seafloor Cavern"
     x="1328"
     y="608"
     height="48"
@@ -5490,10 +5493,10 @@
 </rect>
 
     <!--Sky Pillar-->
-    
+
 
 <rect class="city"
-    data-town="Sky Pillar" 
+    data-town="Sky Pillar"
     x="1152"
     y="544"
     height="96"
@@ -5503,10 +5506,10 @@
 </rect>
 
     <!--Cave of Origin-->
-    
+
 
 <rect class="city"
-    data-town="Cave of Origin" 
+    data-town="Cave of Origin"
     x="1136"
     y="432"
     height="48"
@@ -5516,10 +5519,10 @@
 </rect>
 
     <!--Hoenn Victory Road-->
-    
+
 
 <rect class="city"
-    data-town="Victory Road Hoenn" 
+    data-town="Victory Road Hoenn"
     x="1472"
     y="560"
     height="64"
@@ -5528,10 +5531,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Victory Road Hoenn') }">
 </rect>
     <!--Hoenn Victory Road Extension-->
-    
+
 
 <rect class="city"
-    data-town="Victory Road Hoenn" 
+    data-town="Victory Road Hoenn"
     x="1520"
     y="544"
     height="16"
@@ -5541,10 +5544,10 @@
 </rect>
 
     <!--Sealed Chamber-->
-    
+
 
 <rect class="city"
-    data-town="Sealed Chamber" 
+    data-town="Sealed Chamber"
     x="608"
     y="560"
     height="80"
@@ -5560,10 +5563,10 @@
     <!-- PLACES OF INTEREST -->
     <!-- ------------------ -->
 
-    
+
 
 <rect class="city"
-    data-town="Dock" 
+    data-town="Dock"
     x="528"
     y="720"
     height="32"
@@ -5571,10 +5574,10 @@
     data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Slateport City&#39;) }">
 </rect>
 
-     
+
 
 <rect class="city"
-    data-town="Underground Entrance" 
+    data-town="Underground Entrance"
     x="512"
     y="208"
     height="64"
@@ -5582,10 +5585,10 @@
     data-bind="click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-     
+
 
 <rect class="city"
-    data-town="Farm" 
+    data-town="Farm"
     x="720"
     y="336"
     height="48"
@@ -5593,10 +5596,10 @@
     data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-     
+
 
 <rect class="city"
-    data-town="Pokemon Day Care" 
+    data-town="Pokemon Day Care"
     x="288"
     y="432"
     height="64"
@@ -5604,7 +5607,7 @@
     data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-     
+
 
 <image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
     x="304"
@@ -5613,7 +5616,7 @@
     width="96"
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
 <rect class="city"
-    data-town="Professor Birch&#39;s Blimp" 
+    data-town="Professor Birch&#39;s Blimp"
     x="304"
     y="688"
     height="48"
@@ -5621,7 +5624,7 @@
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Littleroot Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Littleroot Town&#39;) }">
 </rect>
 
-     
+
 
 <image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
     x="304"
@@ -5630,7 +5633,7 @@
     width="96"
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
 <rect class="city"
-    data-town="Professor Birch&#39;s Blimp" 
+    data-town="Professor Birch&#39;s Blimp"
     x="304"
     y="688"
     height="48"
@@ -5648,7 +5651,7 @@
     <!-- ------ -->
 
     <!--Route 201 extra (behind because of text)-->
-    
+
 
 <g
 
@@ -5663,7 +5666,7 @@
 </g>
 
     <!--Route 201-->
-    
+
 
 <g
 
@@ -5681,7 +5684,7 @@
 
 
     <!--Route 202-->
-    
+
 
 <g
 
@@ -5701,7 +5704,7 @@
 
 
     <!--Route 203-->
-    
+
 
 <g
 
@@ -5719,7 +5722,7 @@
 
 
     <!--Route 204-->
-    
+
 
 <g
 
@@ -5738,7 +5741,7 @@
 </g>
 
     <!--Route 204 Extension-->
-    
+
 
 <g
 
@@ -5754,7 +5757,7 @@
 
 
     <!--Route 205-->
-    
+
 
 <g
 
@@ -5771,7 +5774,7 @@
 </g>
 
     <!--Route 205 Extension-->
-    
+
 
 <g
 
@@ -5786,7 +5789,7 @@
 </g>
 
     <!--Route 205 Extension-->
-    
+
 
 <g
 
@@ -5801,7 +5804,7 @@
 </g>
 
      <!--Route 205 Extension-->
-    
+
 
 <g
 
@@ -5817,7 +5820,7 @@
 
 
     <!--Route 206-->
-    
+
 
 <g
 
@@ -5836,7 +5839,7 @@
 </g>
 
     <!--Route 206 Extension-->
-    
+
 
 <g
 
@@ -5854,7 +5857,7 @@
 
 
     <!--Route 207-->
-    
+
 
 <g
 
@@ -5872,7 +5875,7 @@
 
 
     <!--Route 208-->
-    
+
 
 <g
 
@@ -5890,7 +5893,7 @@
 
 
     <!--Route 208 extra-->
-    
+
 
 <g
 
@@ -5906,7 +5909,7 @@
 
 
     <!--Route 209-->
-    
+
 
 <g
 
@@ -5926,7 +5929,7 @@
 
 
     <!--Route 209 extra bit-->
-    
+
 
 <g
 
@@ -5942,7 +5945,7 @@
 
 
     <!--Route 209 extra 1-->
-    
+
 
 <g
 
@@ -5958,7 +5961,7 @@
 
 
     <!--Route 210 extra-->
-    
+
 
 <g
 
@@ -5976,7 +5979,7 @@
 
 
     <!--Route 210-->
-    
+
 
 <g
 
@@ -5994,7 +5997,7 @@
 
 
     <!--Route 211-->
-    
+
 
 <g
 
@@ -6012,7 +6015,7 @@
 
 
     <!--Route 211 extra-->
-    
+
 
 <g
 
@@ -6028,7 +6031,7 @@
 
 
     <!--Route 212-->
-    
+
 
 <g
 
@@ -6046,7 +6049,7 @@
 
 
     <!--Route 212 extra-->
-    
+
 
 <g
 
@@ -6062,7 +6065,7 @@
 
 
     <!--Route 213-->
-    
+
 
 <g
 
@@ -6080,7 +6083,7 @@
 
 
     <!--Route 214-->
-    
+
 
 <g
 
@@ -6100,7 +6103,7 @@
 
 
     <!--Route 214 extra-->
-    
+
 
 <g
 
@@ -6116,7 +6119,7 @@
 
 
     <!--Route 215-->
-    
+
 
 <g
 
@@ -6134,7 +6137,7 @@
 
 
     <!--Route 216-->
-    
+
 
 <g
 
@@ -6152,7 +6155,7 @@
 
 
     <!--Route 216 extra-->
-    
+
 
 <g
 
@@ -6168,7 +6171,7 @@
 
 
     <!--Route 217-->
-    
+
 
 <g
 
@@ -6188,7 +6191,7 @@
 
 
     <!--Route 217 extra-->
-    
+
 
 <g
 
@@ -6204,7 +6207,7 @@
 
 
     <!--Route 217 extra-->
-    
+
 
 <g
 
@@ -6220,7 +6223,7 @@
 
 
     <!--Route 218-->
-    
+
 
 <g
 
@@ -6238,7 +6241,7 @@
 
 
     <!--Route 219-->
-    
+
 
 <g
 
@@ -6258,7 +6261,7 @@
 
 
     <!--Route 220-->
-    
+
 
 <g
 
@@ -6276,7 +6279,7 @@
 
 
     <!--Route 221-->
-    
+
 
 <g
 
@@ -6294,7 +6297,7 @@
 
 
     <!--Route 222-->
-    
+
 
 <g
 
@@ -6312,7 +6315,7 @@
 
 
     <!--Route 223-->
-    
+
 
 <g
 
@@ -6332,7 +6335,7 @@
 
 
     <!--Route 224-->
-    
+
 
 <g
 
@@ -6351,7 +6354,7 @@
 </g>
 
     <!--Route 224 Extension-->
-    
+
 
 <g
 
@@ -6368,7 +6371,7 @@
 </g>
 
     <!--Route 224 Extension (Flower Path)-->
-    
+
 
 <g
 
@@ -6386,7 +6389,7 @@
 
 
     <!--Route 225-->
-    
+
 
 <g
 
@@ -6405,7 +6408,7 @@
 </g>
 
     <!--Route 225 extra-->
-    
+
 
 <g
 
@@ -6423,7 +6426,7 @@
 
 
     <!--Route 226-->
-    
+
 
 <g
 
@@ -6441,7 +6444,7 @@
 
 
     <!--Route 227-->
-    
+
 
 <g
 
@@ -6461,7 +6464,7 @@
 
 
     <!--Route 228-->
-    
+
 
 <g
 
@@ -6481,7 +6484,7 @@
 
 
     <!--Route 229-->
-    
+
 
 <g
 
@@ -6499,7 +6502,7 @@
 
 
     <!--Route 230-->
-    
+
 
 <g
 
@@ -6521,10 +6524,10 @@
     <!-- ----- -->
 
     <!--Twinleaf Town-->
-    
+
 
 <rect class="city"
-    data-town="Twinleaf Town" 
+    data-town="Twinleaf Town"
     x="112"
     y="840"
     height="72"
@@ -6532,16 +6535,16 @@
     data-bind="
         click:function(){MapHelper.moveToTown('Twinleaf Town')},
         attr: { class: MapHelper.calculateTownCssClass('Twinleaf Town') },
-        
+
             css: { flash: MapHelper.ableToTravel() }
         ">
 </rect>
 
     <!--Sandgem Town-->
-    
+
 
 <rect class="city"
-    data-town="Sandgem Town" 
+    data-town="Sandgem Town"
     x="272"
     y="784"
     height="64"
@@ -6553,10 +6556,10 @@
 </rect>
 
     <!--Canalave City-->
-    
+
 
 <rect class="city"
-    data-town="Canalave City" 
+    data-town="Canalave City"
     x="80"
     y="656"
     height="64"
@@ -6568,10 +6571,10 @@
 </rect>
 
     <!--Jubilife City-->
-    
+
 
 <rect class="city"
-    data-town="Jubilife City" 
+    data-town="Jubilife City"
     x="224"
     y="656"
     height="64"
@@ -6582,10 +6585,10 @@
         ">
 </rect>
     <!--Jubilife City extra-->
-    
+
 
 <rect class="city"
-    data-town="Jubilife City" 
+    data-town="Jubilife City"
     x="224"
     y="648"
     height="8"
@@ -6597,10 +6600,10 @@
 </rect>
 
     <!--Oreburgh City-->
-    
+
 
 <rect class="city"
-    data-town="Oreburgh City" 
+    data-town="Oreburgh City"
     x="448"
     y="656"
     height="64"
@@ -6612,10 +6615,10 @@
 </rect>
 
     <!--Floaroma Town-->
-    
+
 
 <rect class="city"
-    data-town="Floaroma Town" 
+    data-town="Floaroma Town"
     x="272"
     y="512"
     height="64"
@@ -6627,10 +6630,10 @@
 </rect>
 
     <!--Eterna City-->
-    
+
 
 <rect class="city"
-    data-town="Eterna City" 
+    data-town="Eterna City"
     x="496"
     y="416"
     height="64"
@@ -6642,10 +6645,10 @@
 </rect>
 
     <!--Hearthome City-->
-    
+
 
 <rect class="city"
-    data-town="Hearthome City" 
+    data-town="Hearthome City"
     x="704"
     y="624"
     height="64"
@@ -6657,10 +6660,10 @@
 </rect>
 
     <!--Hearthome City extra-->
-    
+
 
 <rect class="city"
-    data-town="Hearthome City" 
+    data-town="Hearthome City"
     x="704"
     y="616"
     height="8"
@@ -6672,10 +6675,10 @@
 </rect>
 
     <!--Celestic Town-->
-    
+
 
 <rect class="city"
-    data-town="Celestic Town" 
+    data-town="Celestic Town"
     x="752"
     y="416"
     height="64"
@@ -6687,10 +6690,10 @@
 </rect>
 
     <!--Veilstone City-->
-    
+
 
 <rect class="city"
-    data-town="Veilstone City" 
+    data-town="Veilstone City"
     x="1024"
     y="464"
     height="64"
@@ -6702,10 +6705,10 @@
 </rect>
 
     <!--Veilstone City extra-->
-    
+
 
 <rect class="city"
-    data-town="Veilstone City" 
+    data-town="Veilstone City"
     x="1024"
     y="456"
     height="8"
@@ -6717,10 +6720,10 @@
 </rect>
 
     <!--Solaceon Town-->
-    
+
 
 <rect class="city"
-    data-town="Solaceon Town" 
+    data-town="Solaceon Town"
     x="848"
     y="544"
     height="64"
@@ -6732,10 +6735,10 @@
 </rect>
 
     <!--Pastoria City-->
-    
+
 
 <rect class="city"
-    data-town="Pastoria City" 
+    data-town="Pastoria City"
     x="944"
     y="800"
     height="64"
@@ -6747,10 +6750,10 @@
 </rect>
 
     <!--Sunyshore City-->
-    
+
 
 <rect class="city"
-    data-town="Sunyshore City" 
+    data-town="Sunyshore City"
     x="1248"
     y="768"
     height="64"
@@ -6762,10 +6765,10 @@
 </rect>
 
     <!--Sunyshore City extra-->
-    
+
 
 <rect class="city"
-    data-town="Sunyshore City" 
+    data-town="Sunyshore City"
     x="1248"
     y="760"
     height="8"
@@ -6777,10 +6780,10 @@
 </rect>
 
     <!--Snowpoint City-->
-    
+
 
 <rect class="city"
-    data-town="Snowpoint City" 
+    data-town="Snowpoint City"
     x="528"
     y="24"
     height="72"
@@ -6792,10 +6795,10 @@
 </rect>
 
     <!--Fight Area-->
-    
+
 
 <rect class="city"
-    data-town="Fight Area" 
+    data-town="Fight Area"
     x="960"
     y="216"
     height="72"
@@ -6807,10 +6810,10 @@
 </rect>
 
     <!--Survival Area-->
-    
+
 
 <rect class="city"
-    data-town="Survival Area" 
+    data-town="Survival Area"
     x="1024"
     y="96"
     height="64"
@@ -6822,10 +6825,10 @@
 </rect>
 
     <!--Resort Area-->
-    
+
 
 <rect class="city"
-    data-town="Resort Area" 
+    data-town="Resort Area"
     x="1264"
     y="288"
     height="64"
@@ -6837,10 +6840,10 @@
 </rect>
 
     <!--Pal Park-->
-    
+
 
 <rect class="city"
-    data-town="Pal Park" 
+    data-town="Pal Park"
     x="528"
     y="864"
     height="64"
@@ -6852,10 +6855,10 @@
 </rect>
 
     <!--Pokémon League Sinnoh-->
-    
+
 
 <rect class="city"
-    data-town="Pokémon League Sinnoh" 
+    data-town="Pokémon League Sinnoh"
     x="1288"
     y="387.2"
     height="108.8"
@@ -6871,10 +6874,10 @@
     <!-- -------- -->
 
     <!--Lake Verity-->
-    
+
 
 <rect class="city"
-    data-town="Lake Verity" 
+    data-town="Lake Verity"
     x="48"
     y="784"
     height="64"
@@ -6884,10 +6887,10 @@
 </rect>
 
     <!--Ravaged Path-->
-    
+
 
 <rect class="city"
-    data-town="Ravaged Path" 
+    data-town="Ravaged Path"
     x="224"
     y="592"
     height="48"
@@ -6897,10 +6900,10 @@
 </rect>
 
     <!--Eterna Forest-->
-    
+
 
 <rect class="city"
-    data-town="Eterna Forest" 
+    data-town="Eterna Forest"
     x="288"
     y="432"
     height="48"
@@ -6910,10 +6913,10 @@
 </rect>
 
     <!--Old Chateau-->
-    
+
 
 <rect class="city"
-    data-town="Old Chateau" 
+    data-town="Old Chateau"
     x="224"
     y="464"
     height="48"
@@ -6923,10 +6926,10 @@
 </rect>
 
     <!--Oreburgh Gate-->
-    
+
 
 <rect class="city"
-    data-town="Oreburgh Gate" 
+    data-town="Oreburgh Gate"
     x="384"
     y="624"
     height="48"
@@ -6936,10 +6939,10 @@
 </rect>
 
     <!--Wayward Cave-->
-    
+
 
 <rect class="city"
-    data-town="Wayward Cave" 
+    data-town="Wayward Cave"
     x="512"
     y="544"
     height="48"
@@ -6949,10 +6952,10 @@
 </rect>
 
     <!--Mt. Coronet North-->
-    
+
 
 <rect class="city"
-    data-town="Mt. Coronet North" 
+    data-town="Mt. Coronet North"
     x="640"
     y="352"
     height="64"
@@ -6962,10 +6965,10 @@
 </rect>
 
     <!--Mt. Coronet North extra-->
-    
+
 
 <rect class="city"
-    data-town="Mt. Coronet North" 
+    data-town="Mt. Coronet North"
     x="704"
     y="416"
     height="16"
@@ -6975,10 +6978,10 @@
 </rect>
 
     <!--Mt. Coronet North extra 2-->
-    
+
 
 <rect class="city"
-    data-town="Mt. Coronet North" 
+    data-town="Mt. Coronet North"
     x="640"
     y="288"
     height="64"
@@ -6988,10 +6991,10 @@
 </rect>
 
     <!--Spear Pillar-->
-    
+
 
 <rect class="city"
-    data-town="Spear Pillar" 
+    data-town="Spear Pillar"
     x="640"
     y="496"
     height="96"
@@ -7001,10 +7004,10 @@
 </rect>
 
     <!--Hall of Origin-->
-    
+
 
 <rect class="city"
-    data-town="Hall of Origin" 
+    data-town="Hall of Origin"
     x="624"
     y="416"
     height="80"
@@ -7014,10 +7017,10 @@
 </rect>
 
     <!--Mt. Coronet South-->
-    
+
 
 <rect class="city"
-    data-town="Mt. Coronet South" 
+    data-town="Mt. Coronet South"
     x="592"
     y="528"
     height="128"
@@ -7027,10 +7030,10 @@
 </rect>
 
     <!--Mt. Coronet South extra-->
-    
+
 
 <rect class="city"
-    data-town="Mt. Coronet South" 
+    data-town="Mt. Coronet South"
     x="640"
     y="592"
     height="64"
@@ -7039,10 +7042,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Mt. Coronet South') }">
 </rect>
     <!--Solaceon Ruins-->
-    
+
 
 <rect class="city"
-    data-town="Solaceon Ruins" 
+    data-town="Solaceon Ruins"
     x="912"
     y="560"
     height="48"
@@ -7051,10 +7054,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Solaceon Ruins') }">
 </rect>
     <!--Lake Valor-->
-    
+
 
 <rect class="city"
-    data-town="Lake Valor" 
+    data-town="Lake Valor"
     x="1056"
     y="752"
     height="64"
@@ -7064,10 +7067,10 @@
 </rect>
 
     <!--Lake Acuity-->
-    
+
 
 <rect class="city"
-    data-town="Lake Acuity" 
+    data-town="Lake Acuity"
     x="464"
     y="16"
     height="64"
@@ -7077,10 +7080,10 @@
 </rect>
 
     <!--Snowpoint Temple-->
-    
+
 
 <rect class="city"
-    data-town="Snowpoint Temple" 
+    data-town="Snowpoint Temple"
     x="608"
     y="0"
     height="96"
@@ -7090,10 +7093,10 @@
 </rect>
 
     <!--Fullmoon Island-->
-    
+
 
 <rect class="city"
-    data-town="Fullmoon Island" 
+    data-town="Fullmoon Island"
     x="64"
     y="96"
     height="48"
@@ -7103,10 +7106,10 @@
 </rect>
 
     <!--Newmoon Island-->
-    
+
 
 <rect class="city"
-    data-town="Newmoon Island" 
+    data-town="Newmoon Island"
     x="240"
     y="96"
     height="48"
@@ -7116,10 +7119,10 @@
 </rect>
 
     <!--Iron Island-->
-    
+
 
 <rect class="city"
-    data-town="Iron Island" 
+    data-town="Iron Island"
     x="160"
     y="384"
     height="48"
@@ -7129,10 +7132,10 @@
 </rect>
 
     <!--Flower Paradise-->
-    
+
 
 <rect class="city"
-    data-town="Flower Paradise" 
+    data-town="Flower Paradise"
     x="1456"
     y="0"
     height="48"
@@ -7142,10 +7145,10 @@
 </rect>
 
     <!--Stark Mountain-->
-    
+
 
 <rect class="city"
-    data-town="Stark Mountain" 
+    data-town="Stark Mountain"
     x="1104"
     y="0"
     height="48"
@@ -7155,10 +7158,10 @@
 </rect>
 
     <!--Victory Road Sinnoh-->
-    
+
 
 <rect class="city"
-    data-town="Victory Road Sinnoh" 
+    data-town="Victory Road Sinnoh"
     x="1344"
     y="496"
     height="48"
@@ -7171,10 +7174,10 @@
     <!-- PLACES OF INTEREST -->
     <!-- ------------------ -->
 
-    
+
 
 <rect class="city"
-    data-town="Dock" 
+    data-town="Dock"
     x="96"
     y="592"
     height="64"
@@ -7182,10 +7185,10 @@
     data-bind="click: function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Canalave City&#39;) }">
 </rect>
 
-     
+
 
 <rect class="city"
-    data-town="Underground Entrance" 
+    data-town="Underground Entrance"
     x="912"
     y="608"
     height="64"
@@ -7193,10 +7196,10 @@
     data-bind="click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-     
+
 
 <rect class="city"
-    data-town="Farm" 
+    data-town="Farm"
     x="1072"
     y="592"
     height="48"
@@ -7204,10 +7207,10 @@
     data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-     
+
 
 <rect class="city"
-    data-town="Pokemon Day Care" 
+    data-town="Pokemon Day Care"
     x="784"
     y="560"
     height="64"
@@ -7215,7 +7218,7 @@
     data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-     
+
 
 <image href="assets/images/map/distortion_world.png" xlink:href="assets/images/map/distortion_world.png"
     x="624"
@@ -7224,7 +7227,7 @@
     width="80"
     data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Snowpoint City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Distortion World&#39;)]() == 0"/>
 <rect class="city"
-    data-town="Distortion World" 
+    data-town="Distortion World"
     x="624"
     y="416"
     height="80"
@@ -7232,7 +7235,7 @@
     data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Snowpoint City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Distortion World&#39;)]() == 0, click:function(){MapHelper.moveToTown(&#39;Distortion World&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Distortion World&#39;) }">
 </rect>
 
-     
+
 
 <image href="assets/images/map/distortion_world.png" xlink:href="assets/images/map/distortion_world.png"
     x="1184"
@@ -7241,7 +7244,7 @@
     width="80"
     data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Distortion World&#39;)]() &gt;= 1"/>
 <rect class="city"
-    data-town="Distortion World" 
+    data-town="Distortion World"
     x="1184"
     y="624"
     height="80"
@@ -7249,7 +7252,7 @@
     data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Distortion World&#39;)]() &gt;= 1, click:function(){MapHelper.moveToTown(&#39;Distortion World&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Distortion World&#39;) }">
 </rect>
 
-     
+
 
 <image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
     x="192"
@@ -7258,7 +7261,7 @@
     width="96"
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
 <rect class="city"
-    data-town="Professor Rowan&#39;s Blimp" 
+    data-town="Professor Rowan&#39;s Blimp"
     x="192"
     y="848"
     height="48"
@@ -7266,7 +7269,7 @@
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Twinleaf Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Twinleaf Town&#39;) }">
 </rect>
 
-     
+
 
 <image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
     x="192"
@@ -7275,7 +7278,7 @@
     width="96"
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
 <rect class="city"
-    data-town="Professor Rowan&#39;s Blimp" 
+    data-town="Professor Rowan&#39;s Blimp"
     x="192"
     y="848"
     height="48"
@@ -7293,7 +7296,7 @@
     <!-- ------ -->
 
     <!--Route 1-->
-    
+
 
 <g
 
@@ -7313,7 +7316,7 @@
 
 
     <!--Route 2-->
-    
+
 
 <g
 
@@ -7333,7 +7336,7 @@
 
 
     <!--Route 3-->
-    
+
 
 <g
 
@@ -7351,7 +7354,7 @@
 
 
     <!--Route 4-->
-    
+
 
 <g
 
@@ -7370,7 +7373,7 @@
 </g>
 
     <!--extra Route 4-->
-    
+
 
 <g
 
@@ -7386,7 +7389,7 @@
 
 
     <!--Desert Resort-->
-    
+
 
 <g
 
@@ -7404,7 +7407,7 @@
 
 
     <!--Route 5-->
-    
+
 
 <g
 
@@ -7422,7 +7425,7 @@
 
 
     <!--Route 6-->
-    
+
 
 <g
 
@@ -7439,7 +7442,7 @@
 </g>
 
     <!--Extra bit of Route 6-->
-    
+
 
 <g
 
@@ -7455,7 +7458,7 @@
 
 
     <!--Route 7-->
-    
+
 
 <g
 
@@ -7472,7 +7475,7 @@
 </g>
 
      <!--Extra bit of Route 7-->
-    
+
 
 <g
 
@@ -7488,7 +7491,7 @@
 
 
     <!--Route 8-->
-    
+
 
 <g
 
@@ -7506,7 +7509,7 @@
 
 
     <!--Route 9-->
-    
+
 
 <g
 
@@ -7524,7 +7527,7 @@
 
 
     <!--Route 11-->
-    
+
 
 <g
 
@@ -7542,7 +7545,7 @@
 
 
     <!--Route 12-->
-    
+
 
 <g
 
@@ -7560,7 +7563,7 @@
 
 
     <!--Route 13-->
-    
+
 
 <g
 
@@ -7577,7 +7580,7 @@
 </g>
 
     <!--Extra bit of Route 13-->
-    
+
 
 <g
 
@@ -7592,7 +7595,7 @@
 </g>
 
     <!--Extra bit of Route 13-->
-    
+
 
 <g
 
@@ -7607,7 +7610,7 @@
 </g>
 
     <!--Extra bit of Route 13-->
-    
+
 
 <g
 
@@ -7622,7 +7625,7 @@
 </g>
 
     <!--Extra bit of Route 13-->
-    
+
 
 <g
 
@@ -7638,7 +7641,7 @@
 
 
     <!--Route 14-->
-    
+
 
 <g
 
@@ -7655,7 +7658,7 @@
 </g>
 
     <!--Extra bit of Route 14-->
-    
+
 
 <g
 
@@ -7670,7 +7673,7 @@
 </g>
 
     <!--Extra bit of Route 14-->
-    
+
 
 <g
 
@@ -7686,7 +7689,7 @@
 
 
     <!--Route 15-->
-    
+
 
 <g
 
@@ -7704,7 +7707,7 @@
 
 
     <!--Route 16-->
-    
+
 
 <g
 
@@ -7722,7 +7725,7 @@
 
 
     <!--Route 17-->
-    
+
 
 <g
 
@@ -7739,7 +7742,7 @@
 </g>
 
     <!--Extra bit of Route 17-->
-    
+
 
 <g
 
@@ -7754,7 +7757,7 @@
 </g>
 
     <!--Extra bit of Route 17-->
-    
+
 
 <g
 
@@ -7770,7 +7773,7 @@
 
 
     <!--Route 18-->
-    
+
 
 <g
 
@@ -7788,7 +7791,7 @@
 
 
     <!--Route 19-->
-    
+
 
 <g
 
@@ -7807,7 +7810,7 @@
 </g>
 
      <!--Extra bit of Route 19-->
-     
+
 
 <g
 
@@ -7823,7 +7826,7 @@
 
 
     <!--Route 20-->
-    
+
 
 <g
 
@@ -7841,7 +7844,7 @@
 
 
     <!--Route 21-->
-    
+
 
 <g
 
@@ -7861,7 +7864,7 @@
 
 
     <!--Undella Bay-->
-    
+
 
 <g
 
@@ -7879,7 +7882,7 @@
 
 
     <!--Undella Bay extension-->
-    
+
 
 <g
 
@@ -7897,7 +7900,7 @@
 
 
      <!--Route 22-->
-    
+
 
 <g
 
@@ -7915,7 +7918,7 @@
 
 
     <!--Route 23-->
-    
+
 
 <g
 
@@ -7932,7 +7935,7 @@
 </g>
 
     <!--Extra bit of Route 23-->
-    
+
 
 <g
 
@@ -7947,7 +7950,7 @@
 </g>
 
     <!--Extra bit of Route 23-->
-    
+
 
 <g
 
@@ -7962,7 +7965,7 @@
 </g>
 
     <!--Extra bit of Route 23-->
-    
+
 
 <g
 
@@ -7983,10 +7986,10 @@
     <!-- ----- -->
 
     <!--Nuvema Town-->
-    
+
 
 <rect class="city"
-    data-town="Nuvema Town" 
+    data-town="Nuvema Town"
     x="1376"
     y="864"
     height="64"
@@ -7998,10 +8001,10 @@
 </rect>
 
     <!--Accumula Town-->
-    
+
 
 <rect class="city"
-    data-town="Accumula Town" 
+    data-town="Accumula Town"
     x="1376"
     y="752"
     height="64"
@@ -8013,10 +8016,10 @@
 </rect>
 
     <!--Striaton City-->
-    
+
 
 <rect class="city"
-    data-town="Striaton City" 
+    data-town="Striaton City"
     x="1376"
     y="624"
     height="64"
@@ -8028,10 +8031,10 @@
 </rect>
 
     <!--Nacrene City-->
-    
+
 
 <rect class="city"
-    data-town="Nacrene City" 
+    data-town="Nacrene City"
     x="1216"
     y="624"
     height="64"
@@ -8043,10 +8046,10 @@
 </rect>
 
     <!--Castelia City-->
-    
+
 
 <rect class="city"
-    data-town="Castelia City" 
+    data-town="Castelia City"
     x="768"
     y="776"
     height="72"
@@ -8057,10 +8060,10 @@
         ">
 </rect>
     <!--Castelia City Extension-->
-    
+
 
 <rect class="city"
-    data-town="Castelia City" 
+    data-town="Castelia City"
     x="848"
     y="784"
     height="64"
@@ -8072,10 +8075,10 @@
 </rect>
 
     <!--Nimbasa City-->
-    
+
 
 <rect class="city"
-    data-town="Nimbasa City" 
+    data-town="Nimbasa City"
     x="752"
     y="488"
     height="72"
@@ -8086,10 +8089,10 @@
         ">
 </rect>
     <!--Nimbasa City Extension-->
-    
+
 
 <rect class="city"
-    data-town="Nimbasa City" 
+    data-town="Nimbasa City"
     x="832"
     y="496"
     height="64"
@@ -8101,10 +8104,10 @@
 </rect>
 
     <!--Driftveil City-->
-    
+
 
 <rect class="city"
-    data-town="Driftveil City" 
+    data-town="Driftveil City"
     x="400"
     y="488"
     height="72"
@@ -8115,10 +8118,10 @@
         ">
 </rect>
     <!--Driftveil City Extension-->
-    
+
 
 <rect class="city"
-    data-town="Driftveil City" 
+    data-town="Driftveil City"
     x="480"
     y="496"
     height="64"
@@ -8130,10 +8133,10 @@
 </rect>
 
     <!--Mistralton City-->
-    
+
 
 <rect class="city"
-    data-town="Mistralton City" 
+    data-town="Mistralton City"
     x="192"
     y="344"
     height="72"
@@ -8144,10 +8147,10 @@
         ">
 </rect>
     <!--Mistralton City Extension-->
-    
+
 
 <rect class="city"
-    data-town="Mistralton City" 
+    data-town="Mistralton City"
     x="272"
     y="352"
     height="64"
@@ -8159,10 +8162,10 @@
 </rect>
 
     <!--Icirrus City-->
-    
+
 
 <rect class="city"
-    data-town="Icirrus City" 
+    data-town="Icirrus City"
     x="400"
     y="184"
     height="72"
@@ -8173,10 +8176,10 @@
         ">
 </rect>
     <!--Icirrus City Extension-->
-    
+
 
 <rect class="city"
-    data-town="Icirrus City" 
+    data-town="Icirrus City"
     x="480"
     y="192"
     height="64"
@@ -8188,10 +8191,10 @@
 </rect>
 
     <!--Opelucid City-->
-    
+
 
 <rect class="city"
-    data-town="Opelucid City" 
+    data-town="Opelucid City"
     x="752"
     y="184"
     height="72"
@@ -8202,10 +8205,10 @@
         ">
 </rect>
     <!--Opelucid City Extension-->
-    
+
 
 <rect class="city"
-    data-town="Opelucid City" 
+    data-town="Opelucid City"
     x="832"
     y="192"
     height="64"
@@ -8217,10 +8220,10 @@
 </rect>
 
     <!--Shopping Mall Nine-->
-    
+
 
 <rect class="city"
-    data-town="Shopping Mall Nine" 
+    data-town="Shopping Mall Nine"
     x="672"
     y="112"
     height="96"
@@ -8232,10 +8235,10 @@
 </rect>
 
     <!--Lacunosa Town-->
-    
+
 
 <rect class="city"
-    data-town="Lacunosa Town" 
+    data-town="Lacunosa Town"
     x="1120"
     y="192"
     height="64"
@@ -8247,10 +8250,10 @@
 </rect>
 
     <!--Undella Town-->
-    
+
 
 <rect class="city"
-    data-town="Undella Town" 
+    data-town="Undella Town"
     x="1264"
     y="312"
     height="72"
@@ -8261,10 +8264,10 @@
         ">
 </rect>
     <!--Undella Town Extension-->
-    
+
 
 <rect class="city"
-    data-town="Undella Town" 
+    data-town="Undella Town"
     x="1344"
     y="320"
     height="64"
@@ -8276,10 +8279,10 @@
 </rect>
 
     <!--Lentimas Town-->
-    
+
 
 <rect class="city"
-    data-town="Lentimas Town" 
+    data-town="Lentimas Town"
     x="1072"
     y="320"
     height="64"
@@ -8291,10 +8294,10 @@
 </rect>
 
     <!--Black and White Park-->
-    
+
 
 <rect class="city"
-    data-town="Black and White Park" 
+    data-town="Black and White Park"
     x="1088"
     y="488"
     height="72"
@@ -8305,10 +8308,10 @@
         ">
 </rect>
     <!--Black and White Park-->
-    
+
 
 <rect class="city"
-    data-town="Black and White Park" 
+    data-town="Black and White Park"
     x="1168"
     y="496"
     height="64"
@@ -8320,10 +8323,10 @@
 </rect>
 
     <!--Humilau City-->
-    
+
 
 <rect class="city"
-    data-town="Humilau City" 
+    data-town="Humilau City"
     x="1440"
     y="88"
     height="72"
@@ -8335,10 +8338,10 @@
 </rect>
 
     <!--Aspertia City-->
-    
+
 
 <rect class="city"
-    data-town="Aspertia City" 
+    data-town="Aspertia City"
     x="96"
     y="824"
     height="72"
@@ -8346,16 +8349,16 @@
     data-bind="
         click:function(){MapHelper.moveToTown('Aspertia City')},
         attr: { class: MapHelper.calculateTownCssClass('Aspertia City') },
-        
+
             css: { flash: MapHelper.ableToTravel() }
         ">
 </rect>
 
     <!--Floccesy Town-->
-    
+
 
 <rect class="city"
-    data-town="Floccesy Town" 
+    data-town="Floccesy Town"
     x="176"
     y="672"
     height="64"
@@ -8367,10 +8370,10 @@
 </rect>
 
     <!--Virbank City-->
-    
+
 
 <rect class="city"
-    data-town="Virbank City" 
+    data-town="Virbank City"
     x="448"
     y="672"
     height="64"
@@ -8382,10 +8385,10 @@
 </rect>
 
     <!--Anville Town-->
-    
+
 
 <rect class="city"
-    data-town="Anville Town" 
+    data-town="Anville Town"
     x="128"
     y="48"
     height="64"
@@ -8397,10 +8400,10 @@
 </rect>
 
     <!--Pokémon League Unova-->
-    
+
 
 <rect class="city"
-    data-town="Pokémon League Unova" 
+    data-town="Pokémon League Unova"
     x="888"
     y="4"
     height="108"
@@ -8416,10 +8419,10 @@
     <!-- -------- -->
 
     <!--P2 Laboratory-->
-    
+
 
 <rect class="city"
-    data-town="P2 Laboratory" 
+    data-town="P2 Laboratory"
     x="1248"
     y="832"
     height="48"
@@ -8429,10 +8432,10 @@
 </rect>
 
     <!--Seaside Cave-->
-    
+
 
 <rect class="city"
-    data-town="Seaside Cave" 
+    data-town="Seaside Cave"
     x="1456"
     y="256"
     height="48"
@@ -8442,10 +8445,10 @@
 </rect>
 
     <!--Dreamyard-->
-    
+
 
 <rect class="city"
-    data-town="Dreamyard" 
+    data-town="Dreamyard"
     x="1440"
     y="640"
     height="48"
@@ -8455,10 +8458,10 @@
 </rect>
 
     <!--Pinwheel Forest-->
-    
+
 
 <rect class="city"
-    data-town="Pinwheel Forest" 
+    data-town="Pinwheel Forest"
     x="1152"
     y="640"
     height="48"
@@ -8468,10 +8471,10 @@
 </rect>
 
     <!--Castelia Sewers-->
-    
+
 
 <rect class="city"
-    data-town="Castelia Sewers" 
+    data-town="Castelia Sewers"
     x="896"
     y="864"
     height="64"
@@ -8481,10 +8484,10 @@
 </rect>
 
     <!-- Desert Resort
-    
+
 
 <rect class="city"
-    data-town="Desert Resort" 
+    data-town="Desert Resort"
     x="752"
     y="656"
     height="48"
@@ -8494,10 +8497,10 @@
 </rect> -->
 
     <!--Relic Castle-->
-    
+
 
 <rect class="city"
-    data-town="Relic Castle" 
+    data-town="Relic Castle"
     x="688"
     y="608"
     height="48"
@@ -8507,10 +8510,10 @@
 </rect>
 
     <!--Relic Passage-->
-    
+
 
 <rect class="city"
-    data-town="Relic Passage" 
+    data-town="Relic Passage"
     x="592"
     y="640"
     height="48"
@@ -8520,10 +8523,10 @@
 </rect>
 
     <!--Mistralton Cave-->
-    
+
 
 <rect class="city"
-    data-town="Mistralton Cave" 
+    data-town="Mistralton Cave"
     x="368"
     y="416"
     height="48"
@@ -8533,10 +8536,10 @@
 </rect>
 
     <!--Chargestone Cave-->
-    
+
 
 <rect class="city"
-    data-town="Chargestone Cave" 
+    data-town="Chargestone Cave"
     x="272"
     y="416"
     height="48"
@@ -8546,10 +8549,10 @@
 </rect>
 
     <!--Celestial Tower-->
-    
+
 
 <rect class="city"
-    data-town="Celestial Tower" 
+    data-town="Celestial Tower"
     x="272"
     y="208"
     height="48"
@@ -8559,10 +8562,10 @@
 </rect>
 
     <!--Twist Mountain-->
-    
+
 
 <rect class="city"
-    data-town="Twist Mountain" 
+    data-town="Twist Mountain"
     x="336"
     y="208"
     height="48"
@@ -8572,10 +8575,10 @@
 </rect>
 
     <!--Dragonspiral Tower-->
-    
+
 
 <rect class="city"
-    data-town="Dragonspiral Tower" 
+    data-town="Dragonspiral Tower"
     x="416"
     y="128"
     height="48"
@@ -8585,10 +8588,10 @@
 </rect>
 
     <!--Moor of Icirrus-->
-    
+
 
 <rect class="city"
-    data-town="Moor of Icirrus" 
+    data-town="Moor of Icirrus"
     x="544"
     y="160"
     height="48"
@@ -8598,10 +8601,10 @@
 </rect>
 
     <!--Reversal Mountain-->
-    
+
 
 <rect class="city"
-    data-town="Reversal Mountain" 
+    data-town="Reversal Mountain"
     x="1184"
     y="320"
     height="80"
@@ -8611,10 +8614,10 @@
 </rect>
 
     <!--Reversal Mountain extra-->
-    
+
 
 <rect class="city"
-    data-town="Reversal Mountain" 
+    data-town="Reversal Mountain"
     x="1136"
     y="336"
     height="48"
@@ -8624,10 +8627,10 @@
 </rect>
 
     <!--Abundant Shrine-->
-    
+
 
 <rect class="city"
-    data-town="Abundant Shrine" 
+    data-town="Abundant Shrine"
     x="1120"
     y="400"
     height="48"
@@ -8637,10 +8640,10 @@
 </rect>
 
     <!--Lostlorn Forest-->
-    
+
 
 <rect class="city"
-    data-town="Lostlorn Forest" 
+    data-town="Lostlorn Forest"
     x="944"
     y="464"
     height="48"
@@ -8650,10 +8653,10 @@
 </rect>
 
     <!--Floccesy Ranch-->
-    
+
 
 <rect class="city"
-    data-town="Floccesy Ranch" 
+    data-town="Floccesy Ranch"
     x="272"
     y="640"
     height="48"
@@ -8663,10 +8666,10 @@
 </rect>
 
     <!--Cave of Being-->
-    
+
 
 <rect class="city"
-    data-town="Cave of Being" 
+    data-town="Cave of Being"
     x="272"
     y="736"
     height="48"
@@ -8676,10 +8679,10 @@
 </rect>
 
     <!--Liberty Garden-->
-    
+
 
 <rect class="city"
-    data-town="Liberty Garden" 
+    data-town="Liberty Garden"
     x="448"
     y="832"
     height="48"
@@ -8689,10 +8692,10 @@
 </rect>
 
     <!--Giant Chasm-->
-    
+
 
 <rect class="city"
-    data-town="Giant Chasm" 
+    data-town="Giant Chasm"
     x="1264"
     y="112"
     height="48"
@@ -8702,10 +8705,10 @@
 </rect>
 
     <!--Victory Road Unova-->
-    
+
 
 <rect class="city"
-    data-town="Victory Road Unova" 
+    data-town="Victory Road Unova"
     x="1056"
     y="32"
     height="48"
@@ -8715,10 +8718,10 @@
 </rect>
 
     <!--Pledge Grove-->
-    
+
 
 <rect class="city"
-    data-town="Pledge Grove" 
+    data-town="Pledge Grove"
     x="176"
     y="624"
     height="48"
@@ -8728,10 +8731,10 @@
 </rect>
 
     <!--Plasma Frigate-->
-    
+
 
 <rect class="city"
-    data-town="Plasma Frigate" 
+    data-town="Plasma Frigate"
     x="1536"
     y="288"
     height="48"
@@ -8740,10 +8743,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Plasma Frigate') }">
 </rect>
     <!--Plasma Frigate Extension-->
-    
+
 
 <rect class="city"
-    data-town="Plasma Frigate" 
+    data-town="Plasma Frigate"
     x="1520"
     y="304"
     height="16"
@@ -8755,10 +8758,10 @@
     <!-- ------------------ -->
     <!-- PLACES OF INTEREST -->
     <!-- ------------------ -->
-    
+
 
 <rect class="city"
-    data-town="Dock" 
+    data-town="Dock"
     x="816"
     y="848"
     height="112"
@@ -8767,10 +8770,10 @@
 </rect>
 
     <!--bridge-->
-    
+
 
 <rect class="city"
-    data-town="Skyarrow Bridge" 
+    data-town="Skyarrow Bridge"
     x="992"
     y="640"
     height="112"
@@ -8781,10 +8784,10 @@
             }">
 </rect>
     <!--bridge-->
-    
+
 
 <rect class="city"
-    data-town="Skyarrow Bridge" 
+    data-town="Skyarrow Bridge"
     x="1040"
     y="640"
     height="48"
@@ -8795,10 +8798,10 @@
             }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Underground Entrance" 
+    data-town="Underground Entrance"
     x="864"
     y="576"
     height="64"
@@ -8806,10 +8809,10 @@
     data-bind="click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-     
+
 
 <rect class="city"
-    data-town="Farm" 
+    data-town="Farm"
     x="336"
     y="736"
     height="48"
@@ -8817,10 +8820,10 @@
     data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-     
+
 
 <rect class="city"
-    data-town="Pokemon Day Care" 
+    data-town="Pokemon Day Care"
     x="1296"
     y="576"
     height="64"
@@ -8828,7 +8831,7 @@
     data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-     
+
 
 <image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
     x="160"
@@ -8837,7 +8840,7 @@
     width="96"
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
 <rect class="city"
-    data-town="Professor Juniper&#39;s Blimp" 
+    data-town="Professor Juniper&#39;s Blimp"
     x="160"
     y="768"
     height="48"
@@ -8845,7 +8848,7 @@
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Aspertia City&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Aspertia City&#39;) }">
 </rect>
 
-     
+
 
 <image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
     x="160"
@@ -8854,7 +8857,7 @@
     width="96"
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
 <rect class="city"
-    data-town="Professor Juniper&#39;s Blimp" 
+    data-town="Professor Juniper&#39;s Blimp"
     x="160"
     y="768"
     height="48"
@@ -8872,7 +8875,7 @@
     <!-- ------ -->
 
     <!--Route 1-->
-    
+
 
 <g
 
@@ -8892,7 +8895,7 @@
 
 
     <!--Route 2-->
-    
+
 
 <g
 
@@ -8912,7 +8915,7 @@
 
 
     <!--Route 3-->
-    
+
 
 <g
 
@@ -8932,7 +8935,7 @@
 
 
     <!--Route 4-->
-    
+
 
 <g
 
@@ -8952,7 +8955,7 @@
 
 
     <!--Route 5-->
-    
+
 
 <g
 
@@ -8969,7 +8972,7 @@
 </g>
 
     <!--Route 5 extras-->
-    
+
 
 <g
 
@@ -8984,7 +8987,7 @@
 </g>
 
     <!--Route 5 extras-->
-    
+
 
 <g
 
@@ -9001,7 +9004,7 @@
 </g>
 
     <!--Route 5 extras-->
-    
+
 
 <g
 
@@ -9018,7 +9021,7 @@
 </g>
 
     <!--Route 5 extras-->
-    
+
 
 <g
 
@@ -9034,7 +9037,7 @@
 
 
     <!--Route 6-->
-    
+
 
 <g
 
@@ -9051,7 +9054,7 @@
 </g>
 
     <!--Route 6 extras-->
-    
+
 
 <g
 
@@ -9067,7 +9070,7 @@
 
 
     <!--Route 7-->
-    
+
 
 <g
 
@@ -9085,7 +9088,7 @@
 
 
     <!--Route 8-->
-    
+
 
 <g
 
@@ -9105,7 +9108,7 @@
 
 
     <!--Route 9-->
-    
+
 
 <g
 
@@ -9123,7 +9126,7 @@
 
 
     <!--Route 10-->
-    
+
 
 <g
 
@@ -9140,7 +9143,7 @@
 </g>
 
     <!--Route 10 extras-->
-    
+
 
 <g
 
@@ -9156,7 +9159,7 @@
 
 
     <!--Route 11-->
-    
+
 
 <g
 
@@ -9174,7 +9177,7 @@
 
 
     <!--Route 12-->
-    
+
 
 <g
 
@@ -9192,7 +9195,7 @@
 
 
     <!--Route 13-->
-    
+
 
 <g
 
@@ -9209,7 +9212,7 @@
 </g>
 
     <!--Route 13 extras-->
-    
+
 
 <g
 
@@ -9226,7 +9229,7 @@
 </g>
 
     <!--Route 13 extras-->
-    
+
 
 <g
 
@@ -9242,7 +9245,7 @@
 
 
     <!--Route 14-->
-    
+
 
 <g
 
@@ -9261,7 +9264,7 @@
 </g>
 
     <!--Route 14 extras-->
-    
+
 
 <g
 
@@ -9279,7 +9282,7 @@
 
 
     <!--Route 15-->
-    
+
 
 <g
 
@@ -9294,7 +9297,7 @@
 </g>
 
     <!--Route 15 extras-->
-    
+
 
 <g
 
@@ -9313,7 +9316,7 @@
 </g>
 
     <!--Route 15 extras-->
-    
+
 
 <g
 
@@ -9328,7 +9331,7 @@
 </g>
 
     <!--Route 15 extras-->
-    
+
 
 <g
 
@@ -9343,7 +9346,7 @@
 </g>
 
     <!--Route 15 extras-->
-    
+
 
 <g
 
@@ -9359,7 +9362,7 @@
 
 
     <!--Route 16-->
-    
+
 
 <g
 
@@ -9376,7 +9379,7 @@
 </g>
 
     <!--Route 16 extras-->
-    
+
 
 <g
 
@@ -9393,7 +9396,7 @@
 </g>
 
     <!--Route 16 extras-->
-    
+
 
 <g
 
@@ -9409,7 +9412,7 @@
 
 
     <!--Route 17-->
-    
+
 
 <g
 
@@ -9426,7 +9429,7 @@
 </g>
 
     <!--Route 17 extras-->
-    
+
 
 <g
 
@@ -9444,7 +9447,7 @@
 
 
     <!--Route 18-->
-    
+
 
 <g
 
@@ -9461,7 +9464,7 @@
 </g>
 
     <!--Route 18 extras-->
-    
+
 
 <g
 
@@ -9477,7 +9480,7 @@
 
 
     <!--Route 19-->
-    
+
 
 <g
 
@@ -9492,7 +9495,7 @@
 </g>
 
     <!--Route 19 extras-->
-    
+
 
 <g
 
@@ -9509,7 +9512,7 @@
 </g>
 
     <!--Route 19 extras-->
-    
+
 
 <g
 
@@ -9525,7 +9528,7 @@
 
 
     <!--Route 20-->
-    
+
 
 <g
 
@@ -9544,7 +9547,7 @@
 </g>
 
     <!--Route 20 extras-->
-    
+
 
 <g
 
@@ -9560,7 +9563,7 @@
 
 
     <!--Route 21-->
-    
+
 
 <g
 
@@ -9578,7 +9581,7 @@
 
 
     <!--Route 22-->
-    
+
 
 <g
 
@@ -9596,7 +9599,7 @@
 
 
     <!--Azure Bay-->
-    
+
 
 <g
 
@@ -9611,7 +9614,7 @@
 </g>
 
     <!--Azure Bay extras-->
-    
+
 
 <g
 
@@ -9627,7 +9630,7 @@
 
 </g>
 <!--Azure Bay extras-->
-    
+
 
 <g
 
@@ -9650,10 +9653,10 @@
     <!-- ----- -->
 
     <!--Vaniville Town-->
-    
+
 
 <rect class="city"
-    data-town="Vaniville Town" 
+    data-town="Vaniville Town"
     x="832"
     y="824"
     height="72"
@@ -9661,16 +9664,16 @@
     data-bind="
         click:function(){MapHelper.moveToTown('Vaniville Town')},
         attr: { class: MapHelper.calculateTownCssClass('Vaniville Town') },
-        
+
             css: { flash: MapHelper.ableToTravel() }
         ">
 </rect>
 
     <!--Aquacorde Town-->
-    
+
 
 <rect class="city"
-    data-town="Aquacorde Town" 
+    data-town="Aquacorde Town"
     x="832"
     y="688"
     height="64"
@@ -9682,10 +9685,10 @@
 </rect>
 
     <!--Santalune City-->
-    
+
 
 <rect class="city"
-    data-town="Santalune City" 
+    data-town="Santalune City"
     x="784"
     y="512"
     height="64"
@@ -9697,10 +9700,10 @@
 </rect>
 
     <!--Lumiose City-->
-    
+
 
 <rect class="city"
-    data-town="Lumiose City" 
+    data-town="Lumiose City"
     x="768"
     y="344"
     height="72"
@@ -9711,10 +9714,10 @@
         ">
 </rect>
     <!--Lumiose City extras-->
-    
+
 
 <rect class="city"
-    data-town="Lumiose City" 
+    data-town="Lumiose City"
     x="848"
     y="352"
     height="64"
@@ -9726,10 +9729,10 @@
 </rect>
 
     <!--Camphrier Town-->
-    
+
 
 <rect class="city"
-    data-town="Camphrier Town" 
+    data-town="Camphrier Town"
     x="560"
     y="496"
     height="64"
@@ -9741,10 +9744,10 @@
 </rect>
 
     <!--Ambrette Town-->
-    
+
 
 <rect class="city"
-    data-town="Ambrette Town" 
+    data-town="Ambrette Town"
     x="368"
     y="656"
     height="64"
@@ -9756,10 +9759,10 @@
 </rect>
 
     <!--Cyllage City-->
-    
+
 
 <rect class="city"
-    data-town="Cyllage City" 
+    data-town="Cyllage City"
     x="320"
     y="496"
     height="64"
@@ -9771,10 +9774,10 @@
 </rect>
 
     <!--Geosenge Town-->
-    
+
 
 <rect class="city"
-    data-town="Geosenge Town" 
+    data-town="Geosenge Town"
     x="96"
     y="400"
     height="64"
@@ -9786,10 +9789,10 @@
 </rect>
 
     <!--Shalour City-->
-    
+
 
 <rect class="city"
-    data-town="Shalour City" 
+    data-town="Shalour City"
     x="208"
     y="304"
     height="64"
@@ -9801,10 +9804,10 @@
 </rect>
 
     <!--Coumarine City-->
-    
+
 
 <rect class="city"
-    data-town="Coumarine City" 
+    data-town="Coumarine City"
     x="512"
     y="256"
     height="64"
@@ -9816,10 +9819,10 @@
 </rect>
 
     <!--Laverre City-->
-        
+
 
 <rect class="city"
-    data-town="Laverre City" 
+    data-town="Laverre City"
     x="832"
     y="40"
     height="72"
@@ -9830,10 +9833,10 @@
         ">
 </rect>
     <!--Laverre City extras-->
-    
+
 
 <rect class="city"
-    data-town="Laverre City" 
+    data-town="Laverre City"
     x="912"
     y="48"
     height="64"
@@ -9845,10 +9848,10 @@
 </rect>
 
     <!--Dendemille Town-->
-    
+
 
 <rect class="city"
-    data-town="Dendemille Town" 
+    data-town="Dendemille Town"
     x="1104"
     y="272"
     height="64"
@@ -9860,10 +9863,10 @@
 </rect>
 
     <!--Anistar City-->
-    
+
 
 <rect class="city"
-    data-town="Anistar City" 
+    data-town="Anistar City"
     x="1232"
     y="352"
     height="64"
@@ -9875,10 +9878,10 @@
 </rect>
 
     <!--Couriway Town-->
-    
+
 
 <rect class="city"
-    data-town="Couriway Town" 
+    data-town="Couriway Town"
     x="1328"
     y="400"
     height="64"
@@ -9890,10 +9893,10 @@
 </rect>
 
     <!--Snowbelle City-->
-    
+
 
 <rect class="city"
-    data-town="Snowbelle City" 
+    data-town="Snowbelle City"
     x="1152"
     y="512"
     height="64"
@@ -9905,10 +9908,10 @@
 </rect>
 
     <!--Pokémon League-->
-    
+
 
 <rect class="city"
-    data-town="Pokémon League Kalos" 
+    data-town="Pokémon League Kalos"
     x="968"
     y="352"
     height="120"
@@ -9920,10 +9923,10 @@
 </rect>
 
     <!--Kiloude City-->
-    
+
 
 <rect class="city"
-    data-town="Kiloude City" 
+    data-town="Kiloude City"
     x="1168"
     y="816"
     height="64"
@@ -9938,10 +9941,10 @@
     <!--DUNGEONS-->
     <!-- ----- -->
 
-    
+
 
 <rect class="city"
-    data-town="Santalune Forest" 
+    data-town="Santalune Forest"
     x="848"
     y="608"
     height="48"
@@ -9950,10 +9953,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Santalune Forest') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Parfum Palace" 
+    data-town="Parfum Palace"
     x="464"
     y="432"
     height="48"
@@ -9962,10 +9965,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Parfum Palace') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Connecting Cave" 
+    data-town="Connecting Cave"
     x="384"
     y="512"
     height="48"
@@ -9974,10 +9977,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Connecting Cave') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Glittering Cave" 
+    data-town="Glittering Cave"
     x="496"
     y="720"
     height="48"
@@ -9986,10 +9989,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Glittering Cave') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Reflection Cave" 
+    data-town="Reflection Cave"
     x="208"
     y="368"
     height="48"
@@ -9998,10 +10001,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Reflection Cave') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Lost Hotel" 
+    data-town="Lost Hotel"
     x="928"
     y="160"
     height="48"
@@ -10010,10 +10013,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Lost Hotel') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Frost Cavern" 
+    data-town="Frost Cavern"
     x="1200"
     y="240"
     height="48"
@@ -10022,10 +10025,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Frost Cavern') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Pokéball Factory" 
+    data-town="Pokéball Factory"
     x="912"
     y="0"
     height="48"
@@ -10034,10 +10037,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Pokéball Factory') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Kalos Power Plant" 
+    data-town="Kalos Power Plant"
     x="592"
     y="320"
     height="48"
@@ -10046,10 +10049,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Kalos Power Plant') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Team Flare Secret HQ" 
+    data-town="Team Flare Secret HQ"
     x="64"
     y="352"
     height="48"
@@ -10058,10 +10061,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Team Flare Secret HQ') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Terminus Cave" 
+    data-town="Terminus Cave"
     x="1376"
     y="336"
     height="48"
@@ -10070,10 +10073,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Terminus Cave') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Pokémon Village" 
+    data-town="Pokémon Village"
     x="1072"
     y="624"
     height="48"
@@ -10082,10 +10085,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Pokémon Village') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Victory Road Kalos" 
+    data-town="Victory Road Kalos"
     x="976"
     y="480"
     height="48"
@@ -10094,10 +10097,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Victory Road Kalos') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Sea Spirit&#39;s Den" 
+    data-town="Sea Spirit&#39;s Den"
     x="272"
     y="208"
     height="48"
@@ -10110,10 +10113,10 @@
     <!-- PLACES OF INTEREST -->
     <!-- ------------------ -->
 
-    
+
 
 <rect class="city"
-    data-town="Dock" 
+    data-town="Dock"
     x="512"
     y="192"
     height="64"
@@ -10121,10 +10124,10 @@
     data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Coumarine City&#39;) }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Underground Entrance" 
+    data-town="Underground Entrance"
     x="144"
     y="336"
     height="64"
@@ -10132,10 +10135,10 @@
     data-bind="click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-     
+
 
 <rect class="city"
-    data-town="Farm" 
+    data-town="Farm"
     x="544"
     y="592"
     height="48"
@@ -10143,10 +10146,10 @@
     data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-     
+
 
 <rect class="city"
-    data-town="Pokemon Day Care" 
+    data-town="Pokemon Day Care"
     x="464"
     y="576"
     height="64"
@@ -10154,7 +10157,7 @@
     data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
-     
+
 
 <image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
     x="912"
@@ -10163,7 +10166,7 @@
     width="96"
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
 <rect class="city"
-    data-town="Professor Sycamore&#39;s Blimp" 
+    data-town="Professor Sycamore&#39;s Blimp"
     x="912"
     y="832"
     height="48"
@@ -10171,7 +10174,7 @@
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Vaniville Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Vaniville Town&#39;) }">
 </rect>
 
-     
+
 
 <image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
     x="912"
@@ -10180,7 +10183,7 @@
     width="96"
     data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
 <rect class="city"
-    data-town="Professor Sycamore&#39;s Blimp" 
+    data-town="Professor Sycamore&#39;s Blimp"
     x="912"
     y="832"
     height="48"
@@ -10199,7 +10202,7 @@
     <!-- ------ -->
 
     <!--Route 1-->
-    
+
 
 <g
 
@@ -10217,7 +10220,7 @@
 
 
     <!--Route 1 Extension-->
-    
+
 
 <g
 
@@ -10232,8 +10235,8 @@
 </g>
 
 
-    <!--Route 1 Hau'oli Outskirts--> 
-    
+    <!--Route 1 Hau'oli Outskirts-->
+
 
 <g
 
@@ -10250,8 +10253,8 @@
 </g>
 
 
-    <!--Route 1 Hau'oli Outskirts Extension--> 
-    
+    <!--Route 1 Hau'oli Outskirts Extension-->
+
 
 <g
 
@@ -10267,7 +10270,7 @@
 
 
     <!--Route 1 Hau'oli Outskirts Extension-->
-    
+
 
 <g
 
@@ -10283,7 +10286,7 @@
 
 
     <!--Route 1 Hau'oli Outskirts Extension-->
-    
+
 
 <g
 
@@ -10299,7 +10302,7 @@
 
 
     <!--Route 2-->
-    
+
 
 <g
 
@@ -10317,7 +10320,7 @@
 
 
     <!--Route 2 Extension-->
-    
+
 
 <g
 
@@ -10333,7 +10336,7 @@
 
 
     <!--Route 3-->
-    
+
 
 <g
 
@@ -10351,7 +10354,7 @@
 
 
     <!--Route 3 Extension-->
-    
+
 
 <g
 
@@ -10367,7 +10370,7 @@
 
 
     <!--Melemele Sea-->
-    
+
 
 <g
 
@@ -10385,7 +10388,7 @@
 
 
     <!--Melemele Sea Extension-->
-    
+
 
 <g
 
@@ -10401,7 +10404,7 @@
 
 
     <!--Melemele Sea Extension-->
-    
+
 
 <g
 
@@ -10417,7 +10420,7 @@
 
 
     <!--Melemele Sea Extension-->
-    
+
 
 <g
 
@@ -10433,7 +10436,7 @@
 
 
     <!--Kala'e Bay-->
-    
+
 
 <g
 
@@ -10451,7 +10454,7 @@
 
 
     <!--Kala'e Bay Extension-->
-    
+
 
 <g
 
@@ -10467,7 +10470,7 @@
 
 
     <!--Kala'e Bay Extension-->
-    
+
 
 <g
 
@@ -10483,7 +10486,7 @@
 
 
     <!--Route 4-->
-    
+
 
 <g
 
@@ -10501,7 +10504,7 @@
 
 
     <!--Route 4 Extension-->
-    
+
 
 <g
 
@@ -10517,7 +10520,7 @@
 
 
     <!--Route 5-->
-    
+
 
 <g
 
@@ -10535,7 +10538,7 @@
 
 
     <!--Route 6-->
-    
+
 
 <g
 
@@ -10553,7 +10556,7 @@
 
 
     <!--Route 6 Extension-->
-    
+
 
 <g
 
@@ -10569,7 +10572,7 @@
 
 
     <!--Route 7-->
-    
+
 
 <g
 
@@ -10587,7 +10590,7 @@
 
 
     <!--Route 8-->
-    
+
 
 <g
 
@@ -10605,7 +10608,7 @@
 
 
     <!--Route 8 Extension-->
-    
+
 
 <g
 
@@ -10621,7 +10624,7 @@
 
 
     <!--Route 8 Extension-->
-    
+
 
 <g
 
@@ -10637,7 +10640,7 @@
 
 
     <!--Route 9-->
-    
+
 
 <g
 
@@ -10655,7 +10658,7 @@
 
 
     <!--Route 9 Extension-->
-    
+
 
 <g
 
@@ -10671,7 +10674,7 @@
 
 
     <!--Akala Outskirts-->
-    
+
 
 <g
 
@@ -10689,7 +10692,7 @@
 
 
     <!--Akala Outskirts Extension---->
-    
+
 
 <g
 
@@ -10709,10 +10712,10 @@
     <!-- ----- -->
 
     <!--Iki Town-->
-    
+
 
 <rect class="city"
-    data-town="Iki Town" 
+    data-town="Iki Town"
     x="288"
     y="312"
     height="72"
@@ -10720,16 +10723,16 @@
     data-bind="
         click:function(){MapHelper.moveToTown('Iki Town')},
         attr: { class: MapHelper.calculateTownCssClass('Iki Town') },
-        
+
             css: { flash: MapHelper.ableToTravel() }
         ">
 </rect>
 
     <!--Hau'oli City-->
-    
+
 
 <rect class="city"
-    data-town="Hau&#39;oli City" 
+    data-town="Hau&#39;oli City"
     x="64"
     y="456"
     height="72"
@@ -10741,10 +10744,10 @@
 </rect>
 
     <!--Hau'oli City Extension-->
-    
+
 
 <rect class="city"
-    data-town="Hau&#39;oli City" 
+    data-town="Hau&#39;oli City"
     x="144"
     y="464"
     height="64"
@@ -10756,10 +10759,10 @@
 </rect>
 
     <!--Heahea City-->
-    
+
 
 <rect class="city"
-    data-town="Heahea City" 
+    data-town="Heahea City"
     x="1040"
     y="648"
     height="72"
@@ -10771,10 +10774,10 @@
 </rect>
 
     <!--Heahea City Extension-->
-    
+
 
 <rect class="city"
-    data-town="Heahea City" 
+    data-town="Heahea City"
     x="1120"
     y="656"
     height="64"
@@ -10786,10 +10789,10 @@
 </rect>
 
     <!--Paniola Town-->
-    
+
 
 <rect class="city"
-    data-town="Paniola Town" 
+    data-town="Paniola Town"
     x="1200"
     y="416"
     height="64"
@@ -10801,10 +10804,10 @@
 </rect>
 
     <!--Royal Avenue-->
-    
+
 
 <rect class="city"
-    data-town="Royal Avenue" 
+    data-town="Royal Avenue"
     x="1328"
     y="536"
     height="72"
@@ -10816,10 +10819,10 @@
 </rect>
 
     <!--Royal Avenue Extension-->
-    
+
 
 <rect class="city"
-    data-town="Royal Avenue" 
+    data-town="Royal Avenue"
     x="1408"
     y="544"
     height="64"
@@ -10831,10 +10834,10 @@
 </rect>
 
     <!--Konikoni City-->
-    
+
 
 <rect class="city"
-    data-town="Konikoni City" 
+    data-town="Konikoni City"
     x="1024"
     y="768"
     height="64"
@@ -10846,10 +10849,10 @@
 </rect>
 
     <!--Aether Paradise-->
-    
+
 
 <rect class="city"
-    data-town="Aether Paradise" 
+    data-town="Aether Paradise"
     x="720"
     y="824"
     height="72"
@@ -10864,10 +10867,10 @@
     <!-- DUNGEONS -->
     <!-- -------- -->
 
-    
+
 
 <rect class="city"
-    data-town="Trainers&#39; School" 
+    data-town="Trainers&#39; School"
     x="320"
     y="464"
     height="48"
@@ -10876,10 +10879,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Trainers\&#39; School') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Hau&#39;oli Cemetery" 
+    data-town="Hau&#39;oli Cemetery"
     x="112"
     y="352"
     height="48"
@@ -10888,10 +10891,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli Cemetery') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Verdant Cavern" 
+    data-town="Verdant Cavern"
     x="224"
     y="192"
     height="48"
@@ -10900,10 +10903,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Verdant Cavern') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Melemele Meadow" 
+    data-town="Melemele Meadow"
     x="320"
     y="192"
     height="48"
@@ -10912,10 +10915,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Melemele Meadow') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Seaward Cave" 
+    data-town="Seaward Cave"
     x="432"
     y="192"
     height="48"
@@ -10924,10 +10927,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Seaward Cave') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Ten Carat Hill" 
+    data-town="Ten Carat Hill"
     x="400"
     y="560"
     height="48"
@@ -10937,10 +10940,10 @@
 </rect>
 
     <!--Ten Carat Hill Extension-->
-    
+
 
 <rect class="city"
-    data-town="Ten Carat Hill" 
+    data-town="Ten Carat Hill"
     x="400"
     y="608"
     height="64"
@@ -10949,10 +10952,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Ruins of Conflict" 
+    data-town="Ruins of Conflict"
     x="288"
     y="256"
     height="48"
@@ -10961,10 +10964,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Ruins of Conflict') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Pikachu Valley" 
+    data-town="Pikachu Valley"
     x="1104"
     y="432"
     height="48"
@@ -10973,10 +10976,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Pikachu Valley') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Paniola Ranch" 
+    data-town="Paniola Ranch"
     x="1264"
     y="432"
     height="48"
@@ -10985,10 +10988,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Paniola Ranch') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Brooklet Hill" 
+    data-town="Brooklet Hill"
     x="1152"
     y="320"
     height="96"
@@ -10998,10 +11001,10 @@
 </rect>
 
     <!--Brooklet Hill Extension-->
-    
+
 
 <rect class="city"
-    data-town="Brooklet Hill" 
+    data-town="Brooklet Hill"
     x="1232"
     y="320"
     height="48"
@@ -11010,10 +11013,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Brooklet Hill') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Wela Volcano Park" 
+    data-town="Wela Volcano Park"
     x="1408"
     y="272"
     height="48"
@@ -11022,10 +11025,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Wela Volcano Park') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Lush Jungle" 
+    data-town="Lush Jungle"
     x="1264"
     y="160"
     height="48"
@@ -11034,10 +11037,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Lush Jungle') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Diglett&#39;s Tunnel" 
+    data-town="Diglett&#39;s Tunnel"
     x="1136"
     y="720"
     height="96"
@@ -11047,10 +11050,10 @@
 </rect>
 
     <!--Diglett's Tunnel Extension-->
-    
+
 
 <rect class="city"
-    data-town="Diglett&#39;s Tunnel" 
+    data-town="Diglett&#39;s Tunnel"
     x="1184"
     y="720"
     height="48"
@@ -11059,10 +11062,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Diglett\&#39;s Tunnel') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Memorial Hill" 
+    data-town="Memorial Hill"
     x="1184"
     y="832"
     height="48"
@@ -11071,10 +11074,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Memorial Hill') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Ruins of Life" 
+    data-town="Ruins of Life"
     x="1280"
     y="752"
     height="48"
@@ -11087,10 +11090,10 @@
     <!-- PLACES OF INTEREST -->
     <!-- ------------------ -->
 
-    
+
 
 <rect class="city"
-    data-town="Dock" 
+    data-town="Dock"
     x="144"
     y="528"
     height="48"
@@ -11107,7 +11110,7 @@
     <!-- ------ -->
 
     <!--Route 10-->
-    
+
 
 <g
 
@@ -11125,7 +11128,7 @@
 
 
     <!--Mount Hokulani-->
-    
+
 
 <g
 
@@ -11143,7 +11146,7 @@
 
 
     <!--Route 11-->
-    
+
 
 <g
 
@@ -11161,7 +11164,7 @@
 
 
     <!--Route 11 Extension-->
-    
+
 
 <g
 
@@ -11177,7 +11180,7 @@
 
 
     <!--Route 12-->
-    
+
 
 <g
 
@@ -11195,7 +11198,7 @@
 
 
     <!--Route 12 Extension-->
-    
+
 
 <g
 
@@ -11211,7 +11214,7 @@
 
 
     <!--Route 12 Extension-->
-    
+
 
 <g
 
@@ -11227,7 +11230,7 @@
 
 
     <!--Route 12 Extension-->
-    
+
 
 <g
 
@@ -11243,7 +11246,7 @@
 
 
     <!--Route 12 Extension-->
-    
+
 
 <g
 
@@ -11259,7 +11262,7 @@
 
 
     <!--Route 12 Extension-->
-    
+
 
 <g
 
@@ -11275,7 +11278,7 @@
 
 
     <!--Route 12 Extension-->
-    
+
 
 <g
 
@@ -11291,7 +11294,7 @@
 
 
     <!--Route 12 Extension-->
-    
+
 
 <g
 
@@ -11307,7 +11310,7 @@
 
 
     <!--Route 12 Extension-->
-    
+
 
 <g
 
@@ -11323,7 +11326,7 @@
 
 
     <!--Route 12 Extension-->
-    
+
 
 <g
 
@@ -11339,7 +11342,7 @@
 
 
     <!--Route 12 Extension-->
-    
+
 
 <g
 
@@ -11355,7 +11358,7 @@
 
 
     <!--Route 13-->
-    
+
 
 <g
 
@@ -11373,7 +11376,7 @@
 
 
     <!--Haina Desert-->
-    
+
 
 <g
 
@@ -11391,7 +11394,7 @@
 
 
     <!--Route 14-->
-    
+
 
 <g
 
@@ -11409,7 +11412,7 @@
 
 
     <!--Route 14 Extension-->
-    
+
 
 <g
 
@@ -11425,7 +11428,7 @@
 
 
     <!--Route 15-->
-    
+
 
 <g
 
@@ -11443,7 +11446,7 @@
 
 
     <!--Route 15 Extension-->
-    
+
 
 <g
 
@@ -11459,7 +11462,7 @@
 
 
     <!--Route 15 Extension-->
-    
+
 
 <g
 
@@ -11475,7 +11478,7 @@
 
 
     <!--Route 16-->
-    
+
 
 <g
 
@@ -11493,7 +11496,7 @@
 
 
     <!--Route 17-->
-    
+
 
 <g
 
@@ -11511,7 +11514,7 @@
 
 
     <!--Route 17 Extension-->
-    
+
 
 <g
 
@@ -11527,7 +11530,7 @@
 
 
     <!--Poni Wilds-->
-    
+
 
 <g
 
@@ -11545,7 +11548,7 @@
 
 
     <!--Poni Wilds Extension-->
-    
+
 
 <g
 
@@ -11561,7 +11564,7 @@
 
 
     <!--Poni Wilds Extension-->
-    
+
 
 <g
 
@@ -11577,7 +11580,7 @@
 
 
     <!--Ancient Poni Path-->
-    
+
 
 <g
 
@@ -11595,7 +11598,7 @@
 
 
     <!--Ancient Poni Path Extension-->
-    
+
 
 <g
 
@@ -11611,7 +11614,7 @@
 
 
     <!--Poni Breaker Coast-->
-    
+
 
 <g
 
@@ -11629,7 +11632,7 @@
 
 
     <!--Poni Grove-->
-    
+
 
 <g
 
@@ -11647,7 +11650,7 @@
 
 
     <!--Poni Plains-->
-    
+
 
 <g
 
@@ -11665,7 +11668,7 @@
 
 
     <!--Poni Coast-->
-    
+
 
 <g
 
@@ -11683,7 +11686,7 @@
 
 
     <!--Poni Gauntlet-->
-    
+
 
 <g
 
@@ -11701,7 +11704,7 @@
 
 
     <!--Poni Gauntlet Extension-->
-    
+
 
 <g
 
@@ -11717,7 +11720,7 @@
 
 
     <!--Poni Gauntlet Extension-->
-    
+
 
 <g
 
@@ -11733,7 +11736,7 @@
 
 
     <!--Poni Gauntlet Extension-->
-    
+
 
 <g
 
@@ -11749,7 +11752,7 @@
 
 
     <!--Poni Gauntlet Extension-->
-    
+
 
 <g
 
@@ -11765,7 +11768,7 @@
 
 
     <!--Poni Gauntlet Extension-->
-    
+
 
 <g
 
@@ -11785,10 +11788,10 @@
     <!-- ----- -->
 
     <!--Aether Paradise-->
-    
+
 
 <rect class="city"
-    data-town="Aether Paradise" 
+    data-town="Aether Paradise"
     x="640"
     y="24"
     height="72"
@@ -11800,10 +11803,10 @@
 </rect>
 
     <!--Malie City-->
-    
+
 
 <rect class="city"
-    data-town="Malie City" 
+    data-town="Malie City"
     x="1232"
     y="280"
     height="72"
@@ -11815,10 +11818,10 @@
 </rect>
 
     <!--Malie City Extension-->
-    
+
 
 <rect class="city"
-    data-town="Malie City" 
+    data-town="Malie City"
     x="1168"
     y="288"
     height="64"
@@ -11830,10 +11833,10 @@
 </rect>
 
     <!--Tapu Village-->
-    
+
 
 <rect class="city"
-    data-town="Tapu Village" 
+    data-town="Tapu Village"
     x="1024"
     y="688"
     height="64"
@@ -11845,10 +11848,10 @@
 </rect>
 
     <!--Seafolk Village-->
-    
+
 
 <rect class="city"
-    data-town="Seafolk Village" 
+    data-town="Seafolk Village"
     x="240"
     y="664"
     height="72"
@@ -11860,10 +11863,10 @@
 </rect>
 
     <!--Exeggutor Island-->
-    
+
 
 <rect class="city"
-    data-town="Exeggutor Island" 
+    data-town="Exeggutor Island"
     x="80"
     y="688"
     height="64"
@@ -11875,10 +11878,10 @@
 </rect>
 
     <!--Altar of the Sunne and Moone-->
-    
+
 
 <rect class="city"
-    data-town="Altar of the Sunne and Moone" 
+    data-town="Altar of the Sunne and Moone"
     x="400"
     y="400"
     height="64"
@@ -11890,10 +11893,10 @@
 </rect>
 
     <!--Pokémon League Alola-->
-    
+
 
 <rect class="city"
-    data-town="Pokémon League Alola" 
+    data-town="Pokémon League Alola"
     x="968"
     y="512"
     height="120"
@@ -11908,10 +11911,10 @@
     <!-- DUNGEONS -->
     <!-- -------- -->
 
-    
+
 
 <rect class="city"
-    data-town="Malie Garden" 
+    data-town="Malie Garden"
     x="1168"
     y="240"
     height="48"
@@ -11920,10 +11923,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Malie Garden') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Hokulani Observatory" 
+    data-town="Hokulani Observatory"
     x="1024"
     y="144"
     height="64"
@@ -11932,10 +11935,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Hokulani Observatory') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Thrifty Megamart" 
+    data-town="Thrifty Megamart"
     x="1040"
     y="768"
     height="48"
@@ -11944,10 +11947,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Thrifty Megamart') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Ula&#39;ula Meadow" 
+    data-town="Ula&#39;ula Meadow"
     x="848"
     y="416"
     height="48"
@@ -11956,10 +11959,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Ula\&#39;ula Meadow') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Po Town" 
+    data-town="Po Town"
     x="832"
     y="144"
     height="48"
@@ -11968,10 +11971,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Po Town') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Mount Lanakila" 
+    data-town="Mount Lanakila"
     x="1024"
     y="640"
     height="48"
@@ -11980,10 +11983,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Mount Lanakila') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Ruins of Abundance" 
+    data-town="Ruins of Abundance"
     x="1168"
     y="496"
     height="48"
@@ -11992,10 +11995,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Ruins of Abundance') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Vast Poni Canyon" 
+    data-town="Vast Poni Canyon"
     x="464"
     y="496"
     height="64"
@@ -12005,10 +12008,10 @@
 </rect>
 
     <!--Vast Poni Canyon Extension-->
-    
+
 
 <rect class="city"
-    data-town="Vast Poni Canyon" 
+    data-town="Vast Poni Canyon"
     x="400"
     y="464"
     height="48"
@@ -12018,10 +12021,10 @@
 </rect>
 
     <!--Vast Poni Canyon Extension-->
-    
+
 
 <rect class="city"
-    data-town="Vast Poni Canyon" 
+    data-town="Vast Poni Canyon"
     x="448"
     y="512"
     height="16"
@@ -12031,10 +12034,10 @@
 </rect>
 
     <!--Vast Poni Canyon Extension-->
-    
+
 
 <rect class="city"
-    data-town="Vast Poni Canyon" 
+    data-town="Vast Poni Canyon"
     x="464"
     y="480"
     height="16"
@@ -12043,10 +12046,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Ruins of Hope" 
+    data-town="Ruins of Hope"
     x="576"
     y="656"
     height="48"
@@ -12055,10 +12058,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Ruins of Hope') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Poni Meadow" 
+    data-town="Poni Meadow"
     x="576"
     y="528"
     height="48"
@@ -12067,10 +12070,10 @@
         attr: { class: MapHelper.calculateTownCssClass('Poni Meadow') }">
 </rect>
 
-    
+
 
 <rect class="city"
-    data-town="Resolution Cave" 
+    data-town="Resolution Cave"
     x="576"
     y="480"
     height="48"
@@ -12089,7 +12092,7 @@
     <!-- ------ -->
 
     <!--Route 1-->
-    
+
 
 <g
 
@@ -12109,7 +12112,7 @@
 
 
     <!--Route 2-->
-    
+
 
 <g
 
@@ -12126,7 +12129,7 @@
 </g>
 
     <!--extra Route 2-->
-    
+
 
 <g
 
@@ -12144,7 +12147,7 @@
 
 
     <!--Rolling Fields-->
-    
+
 
 <g
 
@@ -12164,7 +12167,7 @@
 
 
     <!--Dappled Grove-->
-    
+
 
 <g
 
@@ -12181,7 +12184,7 @@
 </g>
 
     <!--DG Extras-->
-    
+
 
 <g
 
@@ -12199,7 +12202,7 @@
 
 
     <!--West Lake Axwell-->
-    
+
 
 <g
 
@@ -12218,7 +12221,7 @@
 </g>
 
     <!--WLA Extra-->
-    
+
 
 <g
 
@@ -12234,7 +12237,7 @@
 
 
     <!--East Lake Axwell-->
-    
+
 
 <g
 
@@ -12251,7 +12254,7 @@
 </g>
 
     <!--ELA Extras-->
-    
+
 
 <g
 
@@ -12269,7 +12272,7 @@
 
 
     <!--North Lake Miloch-->
-    
+
 
 <g
 
@@ -12289,7 +12292,7 @@
 
 
     <!--South Lake Miloch-->
-    
+
 
 <g
 
@@ -12306,7 +12309,7 @@
 </g>
 
      <!--SLM Extras-->
-    
+
 
 <g
 
@@ -12324,7 +12327,7 @@
 
 
     <!--Giant's Seat-->
-    
+
 
 <g
 
@@ -12342,7 +12345,7 @@
 
 
     <!--Route 3-->
-    
+
 
 <g
 
@@ -12360,7 +12363,7 @@
 
 
     <!--Route 4-->
-    
+
 
 <g
 
@@ -12380,7 +12383,7 @@
 
 
     <!--Route 5-->
-    
+
 
 <g
 
@@ -12397,7 +12400,7 @@
 </g>
 
     <!--Extra bits of Route 5-->
-    
+
 
 <g
 
@@ -12413,7 +12416,7 @@
 
 
     <!--Motostoke Outskirts-->
-    
+
 
 <g
 
@@ -12431,7 +12434,7 @@
 
 
     <!--Hammerlocke Hills-->
-    
+
 
 <g
 
@@ -12448,7 +12451,7 @@
 </g>
 
      <!--HH extras-->
-    
+
 
 <g
 
@@ -12463,7 +12466,7 @@
 </g>
 
      <!--HH extras-->
-    
+
 
 <g
 
@@ -12481,7 +12484,7 @@
 
 
     <!--Route 6-->
-    
+
 
 <g
 
@@ -12498,7 +12501,7 @@
 </g>
 
     <!--Extra bit of Route 6-->
-    
+
 
 <g
 
@@ -12515,7 +12518,7 @@
 </g>
 
     <!--Extra bit of Route 6-->
-    
+
 
 <g
 
@@ -12532,7 +12535,7 @@
 </g>
 
     <!--Extra bit of Route 6-->
-    
+
 
 <g
 
@@ -12548,7 +12551,7 @@
 
 
     <!--Route 7-->
-    
+
 
 <g
 
@@ -12566,7 +12569,7 @@
 
 
     <!--Route 8-->
-    
+
 
 <g
 
@@ -12586,7 +12589,7 @@
 
 
     <!--Steamdrift Way-->
-    
+
 
 <g
 
@@ -12606,7 +12609,7 @@
 
 
     <!--Route 2 Lakeside-->
-     
+
 
 <g
 
@@ -12623,7 +12626,7 @@
 </g>
 
     <!--Route 2 LS extras-->
-    
+
 
 <g
 
@@ -12639,7 +12642,7 @@
 
 
     <!--Route 9-->
-    
+
 
 <g
 
@@ -12659,7 +12662,7 @@
 
 
     <!--Circhester Bay-->
-    
+
 
 <g
 
@@ -12679,7 +12682,7 @@
 
 
     <!--Outer Spikemuth-->
-    
+
 
 <g
 
@@ -12697,7 +12700,7 @@
 
 
     <!--Route 10-->
-    
+
 
 <g
 
@@ -12717,7 +12720,7 @@
 
 
     <!--Route 10 North-->
-    
+
 
 <g
 
@@ -12736,7 +12739,7 @@
 </g>
 
     <!--Route 10 North extras-->
-    
+
 
 <g
 
@@ -12756,10 +12759,10 @@
     <!-- ----- -->
 
     <!--Postwick-->
-    
+
 
 <rect class="city"
-    data-town="Postwick" 
+    data-town="Postwick"
     x="640"
     y="872"
     height="72"
@@ -12767,16 +12770,16 @@
     data-bind="
         click:function(){MapHelper.moveToTown('Postwick')},
         attr: { class: MapHelper.calculateTownCssClass('Postwick') },
-        
+
             css: { flash: MapHelper.ableToTravel() }
         ">
 </rect>
 
     <!--Wedgehurst-->
-    
+
 
 <rect class="city"
-    data-town="Wedgehurst" 
+    data-town="Wedgehurst"
     x="704"
     y="800"
     height="64"
@@ -12788,10 +12791,10 @@
 </rect>
 
     <!--Motostoke-->
-    
+
 
 <rect class="city"
-    data-town="Motostoke" 
+    data-town="Motostoke"
     x="720"
     y="556"
     height="68"
@@ -12802,10 +12805,10 @@
         ">
 </rect>
     <!--Motostoke Extension-->
-    
+
 
 <rect class="city"
-    data-town="Motostoke" 
+    data-town="Motostoke"
     x="800"
     y="560"
     height="64"
@@ -12817,10 +12820,10 @@
 </rect>
 
     <!--Turffield-->
-    
+
 
 <rect class="city"
-    data-town="Turffield" 
+    data-town="Turffield"
     x="544"
     y="448"
     height="64"
@@ -12832,10 +12835,10 @@
 </rect>
 
     <!--Hulbury-->
-    
+
 
 <rect class="city"
-    data-town="Hulbury" 
+    data-town="Hulbury"
     x="928"
     y="464"
     height="64"
@@ -12847,10 +12850,10 @@
 </rect>
 
     <!--Hammerlocke-->
-    
+
 
 <rect class="city"
-    data-town="Hammerlocke" 
+    data-town="Hammerlocke"
     x="736"
     y="392"
     height="72"
@@ -12862,10 +12865,10 @@
 </rect>
 
     <!--Stow-on-Side-->
-    
+
 
 <rect class="city"
-    data-town="Stow-on-Side" 
+    data-town="Stow-on-Side"
     x="576"
     y="288"
     height="64"
@@ -12877,10 +12880,10 @@
 </rect>
 
     <!--Ballonlea-->
-    
+
 
 <rect class="city"
-    data-town="Ballonlea" 
+    data-town="Ballonlea"
     x="560"
     y="176"
     height="64"
@@ -12892,10 +12895,10 @@
 </rect>
 
     <!--Circhester-->
-    
+
 
 <rect class="city"
-    data-town="Circhester" 
+    data-town="Circhester"
     x="864"
     y="232"
     height="72"
@@ -12906,10 +12909,10 @@
         ">
 </rect>
     <!--Circhester extension-->
-    
+
 
 <rect class="city"
-    data-town="Circhester" 
+    data-town="Circhester"
     x="944"
     y="240"
     height="64"
@@ -12921,10 +12924,10 @@
 </rect>
 
     <!--Spikemuth-->
-    
+
 
 <rect class="city"
-    data-town="Spikemuth" 
+    data-town="Spikemuth"
     x="976"
     y="400"
     height="64"
@@ -12936,10 +12939,10 @@
 </rect>
 
     <!--Wyndon-->
-    
+
 
 <rect class="city"
-    data-town="Wyndon" 
+    data-town="Wyndon"
     x="704"
     y="56"
     height="72"
@@ -12950,10 +12953,10 @@
         ">
 </rect>
     <!--Wyndon Extension-->
-    
+
 
 <rect class="city"
-    data-town="Wyndon" 
+    data-town="Wyndon"
     x="784"
     y="64"
     height="64"
@@ -12965,10 +12968,10 @@
 </rect>
 
     <!--Wyndon Stadium-->
-    
+
 
 <rect class="city"
-    data-town="Wyndon Stadium" 
+    data-town="Wyndon Stadium"
     x="856"
     y="4"
     height="120"
@@ -12985,10 +12988,10 @@
     <!-- -------- -->
 
     <!--Slumbering Weald-->
-    
+
 
 <rect class="city"
-    data-town="Slumbering Weald" 
+    data-town="Slumbering Weald"
     x="576"
     y="912"
     height="48"
@@ -12998,10 +13001,10 @@
 </rect>
 
     <!--Inner Slumbering Weald-->
-    
+
 
 <rect class="city"
-    data-town="Inner Slumbering Weald" 
+    data-town="Inner Slumbering Weald"
     x="576"
     y="864"
     height="48"
@@ -13011,10 +13014,10 @@
 </rect>
 
     <!--Watchtower Ruins-->
-    
+
 
 <rect class="city"
-    data-town="Watchtower Ruins" 
+    data-town="Watchtower Ruins"
     x="608"
     y="640"
     height="48"
@@ -13024,10 +13027,10 @@
 </rect>
 
     <!--Galar Mine-->
-    
+
 
 <rect class="city"
-    data-town="Galar Mine" 
+    data-town="Galar Mine"
     x="560"
     y="560"
     height="48"
@@ -13037,10 +13040,10 @@
 </rect>
 
     <!--Galar Mine No. 2-->
-    
+
 
 <rect class="city"
-    data-town="Galar Mine No. 2" 
+    data-town="Galar Mine No. 2"
     x="880"
     y="528"
     height="48"
@@ -13050,10 +13053,10 @@
 </rect>
 
     <!--Dusty Bowl-->
-    
+
 
 <rect class="city"
-    data-town="Dusty Bowl" 
+    data-town="Dusty Bowl"
     x="800"
     y="512"
     height="48"
@@ -13063,10 +13066,10 @@
 </rect>
 
     <!--Lake of Outrage-->
-    
+
 
 <rect class="city"
-    data-town="Lake of Outrage" 
+    data-town="Lake of Outrage"
     x="688"
     y="512"
     height="48"
@@ -13076,10 +13079,10 @@
 </rect>
 
     <!--Glimwood Tangle-->
-    
+
 
 <rect class="city"
-    data-town="Glimwood Tangle" 
+    data-town="Glimwood Tangle"
     x="576"
     y="240"
     height="48"
@@ -13089,10 +13092,10 @@
 </rect>
 
     <!--Rose Tower-->
-    
+
 
 <rect class="city"
-    data-town="Rose Tower" 
+    data-town="Rose Tower"
     x="800"
     y="80"
     height="16"
@@ -13105,10 +13108,10 @@
     <!-- PLACES OF INTEREST -->
 
     <!-- ------------------ -->
-    
+
 
 <rect class="city"
-    data-town="Dock" 
+    data-town="Dock"
     x="960"
     y="528"
     height="48"
@@ -14167,7 +14170,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
             <span class="text-muted">The GitHub repo is located here:</span><br/>
             <a href="https://github.com/pokeclicker/pokeclicker">https://github.com/pokeclicker/pokeclicker</a><br/>
             <span class="text-muted">Any new issues, suggestions or code contributions are always welcomed.</span><br/>
-            <span class="text-muted">You may even earn the @Poké Crew, @Code Contributor or @Developer roles in Discord.</span></p>              
+            <span class="text-muted">You may even earn the @Poké Crew, @Code Contributor or @Developer roles in Discord.</span></p>
          </div>
 
          <div class="modal-footer">
@@ -15521,7 +15524,7 @@ aria-labelledby="badgeCaseModalLabel">
                         <span data-bind="template: { name: 'amountTemplate', data: App.game.quests.getRefreshCost() }"></span> - Refresh
                     </button>
                     <!-- /ko -->
-                    
+
                 </div>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
@@ -15785,7 +15788,7 @@ aria-labelledby="badgeCaseModalLabel">
 
                     <h4><u>Wandering Pokémon</u></h4>
                     <p>Ripe Berry plants may attract wild Pokémon that will join your party. Some Pokémon can only be found using certain Berry species.</p>
-                    
+
                     <h4><u>Farm Hands (BETA)</u></h4>
                     <p><i>(unlocked after obtaining 8 unique berries)</i></p>
                     <p>Farm Hands can help around the Farm, they will harvest and plant berries as needed.</p>
@@ -16441,7 +16444,7 @@ aria-labelledby="badgeCaseModalLabel">
                 data-bind="template: { name: 'pokeballSelectionTemplate', data: $data},
                   click: function(){App.game.pokeballs.selectedSelection()($data.type)},
                   visible: $data.unlocked(),
-                  css: { 
+                  css: {
                     'clickable': !($data.type === GameConstants.Pokeball.Masterball && App.game.challenges.list.disableMasterballs.active()),
                     'disabled no-click text-muted': ($data.type === GameConstants.Pokeball.Masterball && App.game.challenges.list.disableMasterballs.active()),
                   }"></tr>
