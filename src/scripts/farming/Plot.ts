@@ -309,7 +309,7 @@ class Plot implements Saveable {
             // Withered Berry plant drops half of the berries
             const amount = Math.ceil(this.harvestAmount() / 2);
             if (amount) {
-                App.game.farming.gainBerry(this.berry, amount, true);
+                App.game.farming.gainBerry(this.berry, amount);
                 this.notifications.push(FarmNotificationType.Dropped);
             }
 
