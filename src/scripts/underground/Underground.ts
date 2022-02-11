@@ -345,7 +345,7 @@ class Underground implements Feature {
         }
     }
 
-    canAccess() {
+    public canAccess() {
         return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
     }
 
