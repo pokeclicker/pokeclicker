@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.8.13"></script>
+    <script src="scripts/modules.min.js?v=0.8.14"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.8.13"></script>
+    <script src="scripts/script.min.js?v=0.8.14"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.8.13" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.8.14" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -417,9 +417,11 @@
                                         <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data.id, true) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
                                         <span data-bind="text: name" style="margin-left: 20px">Name</span>
 
-                                        <span style="float:right; margin-top:8px" data-bind="template: { name: 'caughtStatusTemplate', data: {'status':
-                                            PartyController.getEvolutionsCaughtStatus($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()])
-                                            }}"></span>
+                                        <span style="float:right; margin-top:8px"  data-bind="using: { statuses: PartyController.getStoneEvolutionsCaughtStatus($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">
+                                            <div class="row" data-bind="foreach: statuses">
+                                                <div class="col-2" data-bind="template: { name: 'caughtStatusTemplate', data: { 'status': $data } }"></div>
+                                            </div>
+                                        </span>
                                     </button>
                                 </div>
                             </div>
@@ -546,6 +548,12 @@
 
 <script type="text/html" id="caughtStatusTemplate">
     <knockout style="display: inline;">
+        <!-- ko if: $data.status == CaughtStatus.NotCaught -->
+        <img title="You have not captured this Pokémon yet!"
+             class="pokeball-smallest"
+             src="assets/images/pokeball/None.svg"
+        />
+        <!-- /ko -->
         <!-- ko if: $data.status == CaughtStatus.Caught -->
         <img title="You have captured this Pokémon!"
              class="pokeball-smallest"
@@ -1357,7 +1365,8 @@
                                             title: Battle.enemyPokemon()
                                                 ? `${App.game.party.calculatePokemonAttack(
                                                     Battle.enemyPokemon().type1,
-                                                    Battle.enemyPokemon().type2
+                                                    Battle.enemyPokemon().type2,
+                                                    true,
                                                 ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
                                                 : '',
                                             trigger: 'hover',
@@ -2662,6 +2671,41 @@
     width="128"
     data-bind="visible: player.highestRegion() &gt;= 1, click:function(){MapHelper.openShipModal()}, attr:{ class: player.highestRegion() &gt;= 1 ? &#39;completed&#39; : &#39;locked&#39;}">
 </rect>
+
+    
+
+<image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
+    x="432"
+    y="592"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Oak&#39;s Blimp" 
+    x="432"
+    y="592"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Pallet Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Pallet Town&#39;) }">
+</rect>
+
+     
+
+<image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
+    x="432"
+    y="592"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Oak&#39;s Blimp" 
+    x="432"
+    y="592"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Pallet Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Pallet Town&#39;) }">
+</rect>
+
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
@@ -3557,6 +3601,36 @@
         ">
 </rect>
 
+    <!--Indigo Plateau 2.0 Extension-->
+    
+
+<rect class="city"
+    data-town="Indigo Plateau Johto" 
+    x="1472"
+    y="176"
+    height="48"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Indigo Plateau Johto')},
+        attr: { class: MapHelper.calculateTownCssClass('Indigo Plateau Johto') },
+        ">
+</rect>
+
+    <!--Indigo Plateau 2.0 Extension-->
+    
+
+<rect class="city"
+    data-town="Indigo Plateau Johto" 
+    x="1488"
+    y="224"
+    height="80"
+    width="48"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Indigo Plateau Johto')},
+        attr: { class: MapHelper.calculateTownCssClass('Indigo Plateau Johto') },
+        ">
+</rect>
+
 
 
 
@@ -3904,6 +3978,40 @@
     height="64"
     width="64"
     data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
+
+     
+
+<image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
+    x="1184"
+    y="720"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Elm&#39;s Blimp" 
+    x="1184"
+    y="720"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;New Bark Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;New Bark Town&#39;) }">
+</rect>
+
+     
+
+<image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
+    x="1184"
+    y="720"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Elm&#39;s Blimp" 
+    x="1184"
+    y="720"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;New Bark Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;New Bark Town&#39;) }">
 </rect>
 
 </g>
@@ -5496,7 +5604,39 @@
     data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
+     
 
+<image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
+    x="304"
+    y="688"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Birch&#39;s Blimp" 
+    x="304"
+    y="688"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Littleroot Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Littleroot Town&#39;) }">
+</rect>
+
+     
+
+<image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
+    x="304"
+    y="688"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Birch&#39;s Blimp" 
+    x="304"
+    y="688"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Littleroot Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Littleroot Town&#39;) }">
+</rect>
 
 </g>
 
@@ -7094,7 +7234,7 @@
 
      
 
-<image href="assets/images/map/distorsion_world.png" xlink:href="assets/images/map/distorsion_world.png"
+<image href="assets/images/map/distortion_world.png" xlink:href="assets/images/map/distortion_world.png"
     x="1184"
     y="624"
     height="80"
@@ -7108,6 +7248,41 @@
     width="80"
     data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Distortion World&#39;)]() &gt;= 1, click:function(){MapHelper.moveToTown(&#39;Distortion World&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Distortion World&#39;) }">
 </rect>
+
+     
+
+<image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
+    x="192"
+    y="848"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Rowan&#39;s Blimp" 
+    x="192"
+    y="848"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Twinleaf Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Twinleaf Town&#39;) }">
+</rect>
+
+     
+
+<image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
+    x="192"
+    y="848"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Rowan&#39;s Blimp" 
+    x="192"
+    y="848"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Twinleaf Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Twinleaf Town&#39;) }">
+</rect>
+
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
@@ -8652,6 +8827,41 @@
     width="64"
     data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
+
+     
+
+<image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
+    x="160"
+    y="768"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Juniper&#39;s Blimp" 
+    x="160"
+    y="768"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Aspertia City&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Aspertia City&#39;) }">
+</rect>
+
+     
+
+<image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
+    x="160"
+    y="768"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Juniper&#39;s Blimp" 
+    x="160"
+    y="768"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Aspertia City&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Aspertia City&#39;) }">
+</rect>
+
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
@@ -9942,6 +10152,40 @@
     height="64"
     width="64"
     data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
+
+     
+
+<image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
+    x="912"
+    y="832"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Sycamore&#39;s Blimp" 
+    x="912"
+    y="832"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Vaniville Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Vaniville Town&#39;) }">
+</rect>
+
+     
+
+<image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
+    x="912"
+    y="832"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Sycamore&#39;s Blimp" 
+    x="912"
+    y="832"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Vaniville Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Vaniville Town&#39;) }">
 </rect>
 
 </g>
@@ -13180,9 +13424,8 @@
                             <td class="text-left font-weight-bold" data-bind="text: $data.type"></td>
                             <td class="p-1">
                                 <!-- ko if: !$data.active() && player.starter() == GameConstants.Starter.None --><button class="btn btn-warning btn-block" data-bind="click: ()=>{$data.activate();}">ACTIVATE</button><!-- /ko -->
-                                <!-- ko if: $data.active() && player.starter() == GameConstants.Starter.None --><button class="btn btn-success btn-block" data-bind="click: ()=>{$data.disable();}">ACTIVE</button><!-- /ko -->
                                 <!-- ko if: !$data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-secondary btn-block disabled">DISABLED</button><!-- /ko -->
-                                <!-- ko if: $data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-success btn-block disabled">ACTIVE</button><!-- /ko -->
+                                <!-- ko if: $data.active() --><button class="btn btn-success btn-block" data-bind="click: ()=>{$data.disable();}">ACTIVE</button><!-- /ko -->
                             </td>
                         </tr>
                     </tbody>
@@ -14277,7 +14520,7 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
                     <!-- ko foreach: Array(Shards.nTypes) -->
                         <thead>
                             <tr>
-                                <th colspan="4" class="clickable text-left table-dark text-light" data-toggle="collapse" data-bind="attr: { 'href': '#collapse-shard-' + $index() }">
+                                <th colspan="4" class="clickable text-left table-dark text-light" data-toggle="collapse" data-bind="attr: { 'href': '#collapse-shard-' + $index() }, click: function() { App.game.shards.shardCollapsed[$index()] = !App.game.shards.shardCollapsed[$index()]; }">
                                     <h3>
                                         <knockout data-bind="text: PokemonType[$index()]"></knockout>
                                         <div class="float-right">
@@ -14288,7 +14531,7 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="collapse show" data-bind="attr: { id: 'collapse-shard-' + $index() }">
+                        <tbody data-bind="class: 'collapse' + (App.game.shards.shardCollapsed[$index()] ? '' : ' show'), attr: { id: 'collapse-shard-' + $index()}">
                             <!-- ko foreach: Array(Shards.nEffects) -->
                                 <tr data-bind='if: App.game.shards.isValidUpgrade($parentContext.$index(), $index())'>
                                     <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
@@ -14553,7 +14796,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         <div class='progress'>
                             <div id='mineEnergyBar' class='progress-bar bg-warning' role='progressbar'
                                  aria-valuemin='0' aria-valuemax='100'
-                                 data-bind="style: { width: Math.floor(App.game.underground.energy/App.game.underground.getMaxEnergy()*100) + '%' }">
+                                 data-bind="style: { width: (Math.floor(App.game.underground.energy)/App.game.underground.getMaxEnergy()*100).toFixed(2) + '%' }">
                                 <span data-bind="text: 'Energy: ' + Math.floor(App.game.underground.energy) + ' / ' + App.game.underground.getMaxEnergy() + (Math.floor(App.game.underground.energy) < App.game.underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
                             </div>
                         </div>
@@ -15036,7 +15279,7 @@ aria-labelledby="pokedexModalLabel">
             <div class="modal-body p-0">
                 <img src="assets/images/items/Protein.png" width="40%"/>
                 <br/>
-                <div class="sticky-top">
+                <div class="sticky-top bg-dark text-light">
                   <!-- ko if: App.game.challenges.list.disableProteins.active() -->
                   <span class="btn btn-block btn-danger btn-static m-0">
                     Proteins are disabled.
@@ -15068,6 +15311,10 @@ aria-labelledby="pokedexModalLabel">
                               onchange="Settings.setSettingByName('proteinSortDirection', this.checked)"/>
                       </div>
                   </div>
+                  <input type="checkbox" id="hide-max-protein-pokemons" class="form-check-input"
+                      data-bind="checked: Settings.getSetting('proteinHideMaxedPokemon').observableValue()"
+                      onchange="Settings.setSettingByName('proteinHideMaxedPokemon', this.checked)"/>
+                  <label for="hide-max-protein-pokemons" class="form-check-label">Hide Pokémon with max protein</label>
                 </div>
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
@@ -15078,7 +15325,7 @@ aria-labelledby="pokedexModalLabel">
                     </tr>
                   </thead>
                   <tbody data-bind="foreach: PartyController.getProteinSortedList()">
-                    <tr class="clickable" data-bind="click: () => $data.useProtein(VitaminController.getMultiplier()), hidden: $data.breeding">
+                    <tr class="clickable" data-bind="click: () => $data.useProtein(VitaminController.getMultiplier()), hidden: $data.hideFromProteinList()">
                       <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="text: $data.proteinsUsed().toLocaleString('en-US')">-</td>
                       <td class="text-center tight" data-bind="text: Math.floor($data.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + $data.proteinsUsed()).toLocaleString('en-US')">-</td>
@@ -15319,7 +15566,7 @@ aria-labelledby="badgeCaseModalLabel">
                                     <ul id="seedList" class="list-group p-0">
                                         <!-- ko foreach: FarmController.getBerryListWithIndex() -->
                                         <li class="list-group-item list-group-item-action seed-list-item p-2"
-                                            data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
+                                            data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
                                             <img src="" height="28px"
                                                 data-bind="attr:{ src: FarmController.getBerryImage($data) },
                                                 css: {'berryLocked': !App.game.farming.unlockedBerries[$data]() }">
@@ -15367,11 +15614,11 @@ aria-labelledby="badgeCaseModalLabel">
                                     <ul id="mulchList" class="list-group p-0">
                                         <!-- ko foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1) -->
                                         <li class="list-group-item list-group-item-action seed-list-item p-2"
-                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);},
+                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);},
                                                 css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() },
                                                 tooltip: {title: ItemList[MulchType[$data]].description, trigger: 'hover', animation: false}">
                                             <img src="" width="24px"
-                                                data-bind="attr:{ src: ItemList[MulchType[$data]].image }">
+                                                 data-bind="attr:{ src: ItemList[MulchType[$data]].image }">
                                             <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
                                             <span class="float-right" data-bind="text: App.game.farming.mulchList[$data]().toLocaleString('en-US')"></span>
                                         </li>
@@ -15400,8 +15647,9 @@ aria-labelledby="badgeCaseModalLabel">
                             </div>
 
                             <ul id="shovelList" class="list-group">
+                                <!-- ko if: FarmController.berryListVisible() -->
                                 <li class="list-group-item list-group-item-action seed-list-item p-2"
-                                    data-bind="click: function() {FarmController.selectedShovel(true);},
+                                    data-bind="click: function() {FarmController.selectedShovel(true);FarmController.selectedMulchShovel(false);},
                                     css: { 'active': FarmController.selectedShovel() },
                                     tooltip: {title: 'Clear a Plant from a plot.', trigger: 'hover', animation: false}">
                                     <img src="" height="24px"
@@ -15409,6 +15657,20 @@ aria-labelledby="badgeCaseModalLabel">
                                     <span>Shovel</span>
                                     <span class="float-right" data-bind="text: App.game.farming.shovelAmt().toLocaleString('en-US')"></span>
                                 </li>
+                                <!-- /ko -->
+                            </ul>
+                            <ul id="shovelMulch" class="list-group p-0">
+                                <!-- ko if: !FarmController.berryListVisible() -->
+                                <li class="list-group-item list-group-item-action seed-list-item p-3"
+                                    data-bind="click: function() {FarmController.selectedMulchShovel(true);FarmController.selectedShovel(false);FarmController.selectedMulch(-1);},
+                            css: { 'active': FarmController.selectedMulchShovel() },
+                            tooltip: {title: 'Clear a Mulch from a plot.', trigger: 'hover', animation: false}">
+                                    <img src="" height="21px"
+                                         data-bind="attr:{ src: ItemList['Mulch_Shovel'].image }">
+                                    <span>MulchShovel</span>
+                                    <span class="float-right" data-bind="text: App.game.farming.mulchShovelAmt().toLocaleString('en-US')"></span>
+                                </li>
+                                <!-- /ko -->
                             </ul>
                         </div>
 

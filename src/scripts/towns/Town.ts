@@ -1083,7 +1083,7 @@ const CelesticTownShop = new TownShop([
 ]);
 const CanalaveCityShop = new TownShop ([
     ItemList['Fighting_egg'],
-    ItemList['Metal Coat'],
+    ItemList['Metal_coat'],
 ]);
 const PalParkShop = new TownShop([
     ItemList['Razor_claw'],
