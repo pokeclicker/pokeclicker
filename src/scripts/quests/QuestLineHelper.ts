@@ -289,6 +289,34 @@ class QuestLineHelper {
         App.game.quests.questLines().push(AquaMagmahoennQuestLine);
     }
 
+    public static createPlasmaunovaQuestLine() {
+        const PlasmaunovaQuestLine = new QuestLine('Quest for the DNA Splicers', 'Prevent Team Plasma from using these dangerous Splicers');
+  
+        const clearOpelucidGym = new CustomQuest(1, 0, 'Defeat the Opelucid City gym leader to obtain the DNA Splicers', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')](), 0);
+        PlasmaunovaQuestLine.addQuest(clearOpelucidGym);
+
+        const clearTeamPlasmaAssault = new CustomQuest(1, 0, 'Zinzolin has stolen the DNA Splicers and is assaulting the city with his army of grunts and shadows! Defend against the Team Plasma Assault in Opelucid City!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Plasma Assault')](), 0);
+        PlasmaunovaQuestLine.addQuest(clearTeamPlasmaAssault);
+
+        const clearPlasmaFrigate = new CustomQuest(1, 0, 'Zinzolin has fled the scene with the stolen DNA Splicers. Find and clear out the Plasma Frigate', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')](), 0);
+        PlasmaunovaQuestLine.addQuest(clearPlasmaFrigate);
+
+        const GiantchasmReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            Notifier.notify({
+                title: PlasmaunovaQuestLine.name,
+                message: 'You found a Masterball!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearGiantChasm = new CustomQuest(1, GiantchasmReward, 'Team Plasma\'s leader Ghetsis plans on using the DNA Splicers on Kyurem in Giant Chasm. Clear the dungeon to end his evil plans.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')](), 0);
+        PlasmaunovaQuestLine.addQuest(clearGiantChasm);
+
+        App.game.quests.questLines().push(PlasmaunovaQuestLine);
+    }
+
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
@@ -300,5 +328,6 @@ class QuestLineHelper {
         this.createVivillonQuestLine();
         this.createRocketjohtoQuestLine();
         this.createAquaMagmahoennQuestLine();
+        this.createPlasmaunovaQuestLine();
     }
 }
