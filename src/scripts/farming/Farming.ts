@@ -214,7 +214,10 @@ class Farming implements Feature {
         this.berryData[BerryType.Pamtre]    = new Berry(BerryType.Pamtre,   [3000, 10000, 16400, 18000, 36000],
             31, 0.1, 950, 10,
             [0, 30, 10, 0, 0], BerryColor.Purple,
-            ['This Berry drifted from a faraway sea. It is now cultivated in the Sinnoh region.'], undefined, ['Oricorio (Sensu)']);
+            [
+                'This Berry drifted from a faraway sea. It is now cultivated in the Sinnoh region.' ,
+                'It has a tendency to expand into nearby plots.',
+            ] , undefined, ['Oricorio (Sensu)']);
         this.berryData[BerryType.Watmel]    = new Berry(BerryType.Watmel,   [2300, 3400, 9800, 16560, 33120],
             32, 0.1, 1000, 10,
             [0, 0, 30, 10, 0], BerryColor.Pink,
@@ -950,6 +953,8 @@ class Farming implements Feature {
     handleNotification(farmNotiType: FarmNotificationType, wander?: any): void {
         let message = '';
         let type = NotificationConstants.NotificationOption.success;
+        let sound = NotificationConstants.NotificationSound.ready_to_harvest;
+        let setting = NotificationConstants.NotificationSetting.ready_to_harvest;
 
         switch (farmNotiType) {
             case FarmNotificationType.Ripe:
@@ -958,36 +963,50 @@ class Farming implements Feature {
             case FarmNotificationType.AboutToWither:
                 message = 'A Berry plant is about to wither!';
                 type = NotificationConstants.NotificationOption.warning;
+                sound = NotificationConstants.NotificationSound.berry_wither;
+                setting = NotificationConstants.NotificationSetting.about_to_wither;
                 break;
             case FarmNotificationType.Withered:
                 message = 'A Berry plant has withered!';
                 type = NotificationConstants.NotificationOption.warning;
+                sound = NotificationConstants.NotificationSound.berry_wither;
+                setting = NotificationConstants.NotificationSetting.berry_withered;
                 break;
             case FarmNotificationType.Mutated:
                 message = 'A Berry plant has mutated!';
+                sound = NotificationConstants.NotificationSound.berry_mutated;
+                setting = NotificationConstants.NotificationSetting.berry_mutated;
                 break;
             case FarmNotificationType.Replanted:
                 message = 'A Berry has been replanted!';
+                sound = NotificationConstants.NotificationSound.berry_replanted;
+                setting = NotificationConstants.NotificationSetting.berry_replanted;
                 break;
             case FarmNotificationType.Dropped:
                 message = 'A Berry has been dropped!';
+                sound = NotificationConstants.NotificationSound.berry_dropped;
+                setting = NotificationConstants.NotificationSetting.berry_dropped;
                 break;
             case FarmNotificationType.MulchRanOut:
                 message = 'A plot has run out of mulch!';
                 type = NotificationConstants.NotificationOption.warning;
+                sound = NotificationConstants.NotificationSound.mulch_ran_out;
+                setting = NotificationConstants.NotificationSetting.mulch_ran_out;
                 break;
             case FarmNotificationType.Wander:
                 const pokemon = wander?.shiny ? `shiny ${wander?.pokemon}` : wander?.pokemon;
                 message = `A wild ${pokemon} has wandered onto the farm!`;
                 type = wander?.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
+                sound = NotificationConstants.NotificationSound.wandering_pokemon;
+                setting = NotificationConstants.NotificationSetting.wandering_pokemon;
                 break;
         }
 
         Notifier.notify({
             message,
             type,
-            sound: NotificationConstants.NotificationSound.ready_to_harvest,
-            setting: NotificationConstants.NotificationSetting.ready_to_harvest,
+            sound,
+            setting,
         });
     }
 
@@ -1099,7 +1118,7 @@ class Farming implements Feature {
 
         const amount = plot.harvestAmount();
 
-        this.gainBerry(plot.berry, amount, true);
+        this.gainBerry(plot.berry, amount);
 
         App.game.oakItems.use(OakItems.OakItem.Sprayduck, this.berryData[plot.berry].exp);
         GameHelper.incrementObservable(App.game.statistics.totalManualHarvests, 1);
@@ -1240,7 +1259,7 @@ class Farming implements Feature {
         this.gainBerry(berry, amount, false);
     }
 
-    gainBerry(berry: BerryType, amount = 1, farming: boolean) {
+    gainBerry(berry: BerryType, amount = 1, farming = true) {
         GameHelper.incrementObservable(this.berryList[berry], Math.floor(amount));
 
         if (amount > 0) {

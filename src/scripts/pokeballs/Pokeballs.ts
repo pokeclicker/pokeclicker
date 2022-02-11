@@ -178,7 +178,7 @@ class Pokeballs implements Feature {
         return this.pokeballs[ball].catchTime;
     }
 
-    gainPokeballs(ball: GameConstants.Pokeball, amount: number, purchase: boolean): void {
+    gainPokeballs(ball: GameConstants.Pokeball, amount: number, purchase = true): void {
         GameHelper.incrementObservable(this.pokeballs[ball].quantity, amount);
         GameHelper.incrementObservable(App.game.statistics.pokeballsObtained[ball],amount);
         if (purchase === true) {
