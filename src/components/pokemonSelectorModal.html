@@ -11,7 +11,7 @@
             <div class="modal-body p-0">
                 <img src="assets/images/items/Protein.png" width="40%"/>
                 <br/>
-                <div class="sticky-top">
+                <div class="sticky-top bg-dark text-light">
                   <!-- ko if: App.game.challenges.list.disableProteins.active() -->
                   <span class="btn btn-block btn-danger btn-static m-0">
                     Proteins are disabled.
@@ -43,12 +43,10 @@
                               onchange="Settings.setSettingByName('proteinSortDirection', this.checked)"/>
                       </div>
                   </div>
-                </div>
-                <div>
-                    <input type="checkbox" id="hide-max-protein-pokemons" class="form-check-input"
-                        data-bind="checked: Settings.getSetting('proteinHideOnMaxProtiens').observableValue()"
-                        onchange="Settings.setSettingByName('proteinHideOnMaxProtiens', this.checked)"/>
-                    <label for="hide-max-protein-pokemons" class="form-check-label">Hide pokemons with max protein</label>
+                  <input type="checkbox" id="hide-max-protein-pokemons" class="form-check-input"
+                      data-bind="checked: Settings.getSetting('proteinHideOnMaxProtiens').observableValue()"
+                      onchange="Settings.setSettingByName('proteinHideOnMaxProtiens', this.checked)"/>
+                  <label for="hide-max-protein-pokemons" class="form-check-label">Hide Pokémon with max protein</label>
                 </div>
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
