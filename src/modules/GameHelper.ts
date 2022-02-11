@@ -131,7 +131,8 @@ export default class GameHelper {
     }
 
     public static chunk<T>(size: number, array: Array<T>): Array<Array<T>> {
-        let i = 0, residx = 0;
+        let i = 0;
+        let residx = 0;
         const res = [];
         while (i < array.length) {
             res[residx] = array.slice(i, i += size);
