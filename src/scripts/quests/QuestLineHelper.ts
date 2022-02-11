@@ -291,7 +291,7 @@ class QuestLineHelper {
 
     public static createPlasmaunovaQuestLine() {
         const PlasmaunovaQuestLine = new QuestLine('Quest for the DNA Splicers', 'Prevent Team Plasma from using these dangerous Splicers');
-  
+
         const clearOpelucidGym = new CustomQuest(1, 0, 'Defeat the Opelucid City gym leader to obtain the DNA Splicers', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')](), 0);
         PlasmaunovaQuestLine.addQuest(clearOpelucidGym);
 
