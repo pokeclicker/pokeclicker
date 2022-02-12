@@ -5767,13 +5767,13 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
 dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and Moone',
     ['Clefairy', 'Sunkern', 'Skitty', 'Lunatone', 'Solrock', 'Helioptile'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
+    16435490,
     [
-        new DungeonBossPokemon('Cosmog', 8000000, 70),
-        new DungeonBossPokemon('Lunala', 1410000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Lunala)}),
-        new DungeonBossPokemon('Solgaleo', 1410000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Solgaleo)}),
+        new DungeonBossPokemon('Cosmog', 82177450, 70),
+        new DungeonBossPokemon('Lunala', 90673816, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Lunala)}),
+        new DungeonBossPokemon('Solgaleo', 90673816, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Solgaleo)}),
     ],
-    96500, 201, 35);
+    1075000, 27, 70);
 
 dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
     ['Floette (Red)', 'Comfey', 'Dedenne', 'Ampharos', 'Electabuzz'],
