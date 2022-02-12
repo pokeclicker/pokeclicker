@@ -2517,15 +2517,15 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     GameConstants.Region.alola,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))]
 );
-TownList['Lake of the Sunne and Moone'] = new DungeonTown(
-    'Lake of the Sunne and Moone',
-    GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
-);
 TownList['Mount Lanakila'] = new DungeonTown(
     'Mount Lanakila',
     GameConstants.Region.alola,
     [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
+);
+TownList['Lake of the Sunne and Moone'] = new DungeonTown(
+    'Lake of the Sunne and Moone',
+    GameConstants.Region.alola,
+    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
 );
 TownList['Ruins of Conflict'] = new DungeonTown(
     'Ruins of Conflict',

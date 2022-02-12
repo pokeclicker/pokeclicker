@@ -5683,17 +5683,6 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
         }
     });
 
-dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and Moone',
-    ['Clefairy', 'Sunkern', 'Skitty', 'Lunatone', 'Solrock', 'Helioptile'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
-    [
-        new DungeonBossPokemon('Cosmog', 8000000, 70),
-        new DungeonBossPokemon('Lunala', 1410000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Lunala)}),
-        new DungeonBossPokemon('Solgaleo', 1410000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Solgaleo)}),
-    ],
-    96500, 201, 35);
-
 dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
     [
         {pokemon: 'Alolan Raticate', options: { weight: 8.67 }},
@@ -5774,6 +5763,17 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
         new DungeonBossPokemon('Necrozma', 83527125, 65),
     ],
     1050000, 26, 50);
+
+dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and Moone',
+    ['Clefairy', 'Sunkern', 'Skitty', 'Lunatone', 'Solrock', 'Helioptile'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    2203000,
+    [
+        new DungeonBossPokemon('Cosmog', 8000000, 70),
+        new DungeonBossPokemon('Lunala', 1410000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Lunala)}),
+        new DungeonBossPokemon('Solgaleo', 1410000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Solgaleo)}),
+    ],
+    96500, 201, 35);
 
 dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
     ['Floette (Red)', 'Comfey', 'Dedenne', 'Ampharos', 'Electabuzz'],
