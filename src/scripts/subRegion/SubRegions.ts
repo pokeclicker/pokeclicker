@@ -44,5 +44,5 @@ SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Ula\'ula & Po
 // SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Poni island', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation')), 'Seafolk Village'));
 SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar', undefined, 'Postwick'));
 // For the Galar DLC islands
-// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Armor', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
-// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Crown', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
+// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Isle of Armor', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
+// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Crown Tundra', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
