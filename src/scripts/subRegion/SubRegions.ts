@@ -1,3 +1,6 @@
+///<reference path="./SubRegion.ts"/>
+///<reference path="../achievements/NullRequirement.ts"/>
+
 class SubRegions {
     public static list: Record<GameConstants.Region, SubRegion[]> = {};
 
@@ -45,7 +48,13 @@ SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Ula\'ula & Po
 SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar', undefined, 'Postwick'));
 // For once Galar is split into 2 regions
 // SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar South', undefined, 'Postwick'));
-// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar North', undefined, 'Hammerlocke'));
-// For the Galar DLC islands
-// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Isle of Armor', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
-// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Crown Tundra', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
+// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar North', new RouteKillRequirement(10, GameConstants.Region.galar, 14), 'Hammerlocke'));
+// Galar DLC islands
+SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Isle of Armor', new MultiRequirement([
+    new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
+    new NullRequirement(),
+])));
+SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Crown Tundra', new MultiRequirement([
+    new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
+    new NullRequirement(),
+])));
