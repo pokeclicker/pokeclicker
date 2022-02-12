@@ -123,26 +123,3 @@ gymList['Champion Leon'] = new Champion(
     // Squirtle/Pikachu
     [new GymPokemon('Rillaboom', 2015330, 60)]
 );
-
-//TODO: rewards/hp rebalance
-gymList['Trainer Hop'] = new Champion(
-    'Hop',
-    'Trainer Hop',
-    [
-        new GymPokemon('Dubwool', 1945330, 49),
-        new GymPokemon('Cramorant', 1948300, 49),
-        new GymPokemon('Pincurchin', 1952000, 50),
-        new GymPokemon('Snorlax', 1957000, 51),
-        new GymPokemon('Corviknight', 1945330, 50),
-    ],
-    BadgeEnums.Elite_Hop,
-    100000,
-    'Thanks, mate. I\'m really glad you were the one here with me.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Marnie)],
-    // Bulbasaur
-    [new GymPokemon('Inteleon', 2015330, 60)],
-    // Charmander
-    [new GymPokemon('Rillaboom', 2015330, 60)],
-    // Squirtle/Pikachu
-    [new GymPokemon('Cinderace', 2015330, 60)]
-);
