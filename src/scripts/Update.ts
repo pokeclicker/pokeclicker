@@ -573,6 +573,17 @@ class Update implements Saveable {
             if (saveData.badgeCase[29]) {
                 saveData.quests.questLines.push({state: 1, name: 'Land vs Water', quest: 0});
             }
+
+            // Just incase statistics is not set
+            saveData.statistics = saveData.statistics || {};
+
+            // Rename from the old statistic name
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalBerriesObtained: saveData.statistics.totalBerriesHarvested || 0,
+                pokeballsObtained: saveData.statistics.pokeballsBought || 0,
+                berriesObtained:  saveData.statistics.berriesHarvested || 0,
+            };
         },
     };
 

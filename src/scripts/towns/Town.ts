@@ -1083,7 +1083,7 @@ const CelesticTownShop = new TownShop([
 ]);
 const CanalaveCityShop = new TownShop ([
     ItemList['Fighting_egg'],
-    ItemList['Metal Coat'],
+    ItemList['Metal_coat'],
 ]);
 const PalParkShop = new TownShop([
     ItemList['Razor_claw'],
@@ -2307,7 +2307,6 @@ const ExeggutorIslandShop = new TownShop([
 ]);
 const AltaroftheSunneandMooneShop = new TownShop([
     ItemList['Poipole'],
-    ItemList['Cosmog'],
     ItemList['Sun_stone'],
     ItemList['Moon_stone'],
 ]);
@@ -2409,7 +2408,6 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
         shops: [AltaroftheSunneandMooneShop],
-        dungeon: dungeonList['Nebby'],
     }
 );
 
@@ -2519,10 +2517,10 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     GameConstants.Region.alola,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))]
 );
-TownList['Nebby'] = new DungeonTown(
-    'Nebby',
+TownList['Lake of the Sunne and Moone'] = new DungeonTown(
+    'Lake of the Sunne and Moone',
     GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.Elite_UltraNecrozma)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
 );
 TownList['Mount Lanakila'] = new DungeonTown(
     'Mount Lanakila',
