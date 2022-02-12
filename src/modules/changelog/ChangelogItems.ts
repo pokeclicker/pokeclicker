@@ -10,6 +10,33 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.14
+    new ChangelogUpdate('v0.8.14', new Date(2022, 1, 11)),
+    new Changelog(changelogType.NEW, 'Land vs Water questline in Hoenn'),
+    new Changelog(changelogType.NEW, 'Can now shovel away Mulch in the Farm'),
+    new Changelog(changelogType.NEW, 'Added some new Pokéball types'),
+    new Changelog(changelogType.CHANGE, 'Updated Undella Bay on the Unova map'),
+    new Changelog(changelogType.CHANGE, 'Reduced cost of Furfrou (Kabuki)'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some NPCs'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some dungeon loot'),
+    new Changelog(changelogType.CHANGE, 'Extra loot gained from Treasure Scanner now counts towards quests'),
+    new Changelog(changelogType.CHANGE, 'Challenges can now be disabled at any point'),
+    new Changelog(changelogType.CHANGE, 'Can now download saves from main menu'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some shops items'),
+    new Changelog(changelogType.CHANGE, 'Adjusted the way evolutions are shown in Evolution Item modal'),
+    new Changelog(changelogType.CHANGE, 'Pokémon have variable health on routes based on HP stat'),
+    new Changelog(changelogType.CHANGE, 'Can hide Pokémon that have max protein in the protein menu'),
+    new Changelog(changelogType.CHANGE, 'Saves Shard menu collapsed state'),
+    new Changelog(changelogType.CHANGE, 'Added more options for notifications relating to the Farm'),
+    new Changelog(changelogType.FIXED, 'Fixed a problem with dungeons having incorrect item names for loot'),
+    new Changelog(changelogType.FIXED, 'Attack value shown on hover in Battle Frontier'),
+    new Changelog(changelogType.FIXED, 'Distortion World image on map'),
+    new Changelog(changelogType.FIXED, 'Progress bar percentages shown'),
+    new Changelog(changelogType.FIXED, 'Extended Johto Pokémon League to cover more map'),
+    new Changelog(changelogType.FIXED, 'Gaining dungeon tokens based on new route while catching'),
+    new Changelog(changelogType.FIXED, 'Offline progress message not shown on new game creation'),
+    new Changelog(changelogType.FIXED, 'New Underground deals notification not shown if Underground not unlocked'),
+
     // v0.8.13
     new ChangelogUpdate('v0.8.13', new Date(2021, 11, 21)),
     new Changelog(changelogType.NEW, 'Dungeon loot Mimic encounters'),
