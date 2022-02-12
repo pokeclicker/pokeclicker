@@ -37,8 +37,12 @@ SubRegions.addSubRegion(GameConstants.Region.unova, new SubRegion('Unova'));
 SubRegions.addSubRegion(GameConstants.Region.kalos, new SubRegion('Kalos'));
 SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Melemele & Akala islands', undefined, 'Hau\'oli City'));
 SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Ula\'ula & Poni islands', new GymBadgeRequirement(BadgeEnums.Elite_Nihilego), 'Malie City'));
-
+// For once Alola is split into 4 regions
 // SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Melemele island', undefined, 'Hau\'oli City'));
 // SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Akala island', new GymBadgeRequirement(BadgeEnums.MelemeleKahuna), 'Heahea City'));
 // SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Ula\'ula island', new GymBadgeRequirement(BadgeEnums.Elite_Nihilego), 'Malie City'));
 // SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Poni island', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation')), 'Seafolk Village'));
+SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar', undefined, 'Postwick'));
+// For the Galar DLC islands
+// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Armor', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
+// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Crown', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));

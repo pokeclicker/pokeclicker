@@ -84,10 +84,12 @@ RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Galarian 
 
 
 //Isle of Armor
-RoamingPokemonList.add(GameConstants.Region.armor, new RoamingPokemon('Zarude', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
-RoamingPokemonList.add(GameConstants.Region.armor, new RoamingPokemon('Galarian Moltres', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill'))));
+// TODO: Only allow these to roam within the subregion?
+RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Zarude', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
+RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Galarian Moltres', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill'))));
 
 //Crown Tundra
-RoamingPokemonList.add(GameConstants.Region.crown, new RoamingPokemon('Spectrier', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
-RoamingPokemonList.add(GameConstants.Region.crown, new RoamingPokemon('Glastrier', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
-RoamingPokemonList.add(GameConstants.Region.crown, new RoamingPokemon('Galarian Zapdos', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill'))));
+// TODO: Only allow these to roam within the subregion?
+RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Spectrier', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
+RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Glastrier', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
+RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Galarian Zapdos', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill'))));

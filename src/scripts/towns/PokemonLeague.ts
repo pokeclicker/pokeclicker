@@ -125,7 +125,7 @@ TownList['Wyndon Stadium'] = new PokemonLeague(
 
 TownList['Master Dojo Battlefield'] = new PokemonLeague(
     'Master Dojo Battlefield',
-    GameConstants.Region.armor,
+    GameConstants.Region.galar,
     [
         new MultiRequirement([
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
