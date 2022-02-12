@@ -71,9 +71,9 @@ gymList['Champion Blue'] = new Champion(
 );
 
 // TODO: Balancing - Set HP - Set win message
-gymList['Champion Hao'] = new Champion(
-    'Hao',
-    'Champion Hao',
+gymList['Champion Hau'] = new Champion(
+    'Hau',
+    'Champion Hau',
     [
         new GymPokemon('Alolan Raichu', 2015330, 59),
         new GymPokemon('Tauros', 2015330, 58),

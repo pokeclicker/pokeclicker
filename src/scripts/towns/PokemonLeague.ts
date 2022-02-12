@@ -110,7 +110,7 @@ TownList['Pokémon League Alola'] = new PokemonLeague(
     GameConstants.Region.alola,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanakila'))],
     [indigoPlateauShop],
-    ['Elite Molayne', 'Elite Olivia', 'Elite Acerola', 'Elite Kahili', 'Champion Hao']
+    ['Elite Molayne', 'Elite Olivia', 'Elite Acerola', 'Elite Kahili', 'Champion Hau']
 );
 (<PokemonLeague>TownList['Pokémon League Alola']).setupGymTowns();
 
