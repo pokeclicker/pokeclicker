@@ -1594,7 +1594,7 @@ gymList['Hammerlocke'] = new Gym(
     128000,
     'I might have lost, but I still look good. Maybe I should snap a quick selfie...',
     [
-        new RouteKillRequirement(20, GameConstants.Region.galar, 22),
+        new RouteKillRequirement(10, GameConstants.Region.galar, 22),
         new GymBadgeRequirement(BadgeEnums.Galar_Dark),
     ]
 );
