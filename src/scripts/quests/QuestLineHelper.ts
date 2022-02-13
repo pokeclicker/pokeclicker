@@ -239,7 +239,7 @@ class QuestLineHelper {
     public static createRocketjohtoQuestLine() {
         const RocketjohtoQuestLine = new QuestLine('Team Rocket Again', 'Team Rocket is up to no good again!');
 
-        const clearTeamRocketHideout = new CustomQuest(1, 0, 'Clear the Team Rockets Hideout dungeon in Mahogany Town', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Rockets Hideout')](), 0);
+        const clearTeamRocketHideout = new CustomQuest(1, 0, 'Clear the Team Rockets Hideout dungeon in Mahogany Town', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Rockets Hideout')]());
         RocketjohtoQuestLine.addQuest(clearTeamRocketHideout);
 
         const RadiotowerReward = () => {
@@ -252,7 +252,7 @@ class QuestLineHelper {
             });
         };
 
-        const clearRadioTower = new CustomQuest(1, RadiotowerReward, 'Clear the Radio Tower dungeon in Goldenrod City', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')](), 0);
+        const clearRadioTower = new CustomQuest(1, RadiotowerReward, 'Clear the Radio Tower dungeon in Goldenrod City', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')]());
         RocketjohtoQuestLine.addQuest(clearRadioTower);
 
         App.game.quests.questLines().push(RocketjohtoQuestLine);
@@ -261,16 +261,16 @@ class QuestLineHelper {
     public static createAquaMagmahoennQuestLine() {
         const AquaMagmahoennQuestLine = new QuestLine('Land vs Water', 'Put a stop to the schemes of Team Aqua and Team Magma');
 
-        const clearMtChimney = new CustomQuest(1, 0, 'Stop Team Magma at Mt. Chimney', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Chimney')](), 0);
+        const clearMtChimney = new CustomQuest(1, 0, 'Stop Team Magma at Mt. Chimney', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Chimney')]());
         AquaMagmahoennQuestLine.addQuest(clearMtChimney);
 
-        const clearWeatherInstitute = new CustomQuest(1, 0, 'Stop Team Aqua at the Weather Institute', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Weather Institute')](), 0);
+        const clearWeatherInstitute = new CustomQuest(1, 0, 'Stop Team Aqua at the Weather Institute', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Weather Institute')]());
         AquaMagmahoennQuestLine.addQuest(clearWeatherInstitute);
 
-        const clearMagmaHideout = new CustomQuest(1, 0, 'Raid the Team Magma hideout', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Magma Hideout')](), 0);
+        const clearMagmaHideout = new CustomQuest(1, 0, 'Raid the Team Magma hideout', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Magma Hideout')]());
         AquaMagmahoennQuestLine.addQuest(clearMagmaHideout);
 
-        const clearAquaHideout = new CustomQuest(1, 0, 'Raid the Team Aqua hideout', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aqua Hideout')](), 0);
+        const clearAquaHideout = new CustomQuest(1, 0, 'Raid the Team Aqua hideout', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aqua Hideout')]());
         AquaMagmahoennQuestLine.addQuest(clearAquaHideout);
 
         const SeafloorcavernReward = () => {
@@ -283,22 +283,23 @@ class QuestLineHelper {
             });
         };
 
-        const clearSeafloorCavern = new CustomQuest(1, SeafloorcavernReward, 'Team Aqua\'s leader Archie escaped from their hideout. Find him in the Seafloor Cavern and put a stop to this once and for all', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seafloor Cavern')](), 0);
+        const clearSeafloorCavern = new CustomQuest(1, SeafloorcavernReward, 'Team Aqua\'s leader Archie escaped from their hideout. Find him in the Seafloor Cavern and put a stop to this once and for all', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seafloor Cavern')]());
         AquaMagmahoennQuestLine.addQuest(clearSeafloorCavern);
 
         App.game.quests.questLines().push(AquaMagmahoennQuestLine);
     }
 
-    public static createPlasmaunovaQuestLine() {
+    public static createPlasmaUnovaQuestLine() {
         const PlasmaunovaQuestLine = new QuestLine('Quest for the DNA Splicers', 'Prevent Team Plasma from using these dangerous Splicers');
 
-        const clearOpelucidGym = new CustomQuest(1, 0, 'Defeat the Opelucid City gym leader to obtain the DNA Splicers', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')](), 0);
+        const clearOpelucidGym = new CustomQuest(1, 0, 'Defeat the Opelucid City gym leader to obtain the DNA Splicers', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')](), App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]());
+        console.log('clears:', App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]());
         PlasmaunovaQuestLine.addQuest(clearOpelucidGym);
 
-        const clearTeamPlasmaAssault = new CustomQuest(1, 0, 'Zinzolin has stolen the DNA Splicers and is assaulting the city with his army of grunts and shadows! Defend against the Team Plasma Assault in Opelucid City!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Plasma Assault')](), 0);
+        const clearTeamPlasmaAssault = new CustomQuest(1, 0, 'Zinzolin has stolen the DNA Splicers and is assaulting the city with his army of grunts and shadows! Defend against the Team Plasma Assault in Opelucid City!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Plasma Assault')]());
         PlasmaunovaQuestLine.addQuest(clearTeamPlasmaAssault);
 
-        const clearPlasmaFrigate = new CustomQuest(1, 0, 'Zinzolin has fled the scene with the stolen DNA Splicers. Find and clear out the Plasma Frigate', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')](), 0);
+        const clearPlasmaFrigate = new CustomQuest(1, 0, 'Zinzolin has fled the scene with the stolen DNA Splicers. Find and clear out the Plasma Frigate', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]());
         PlasmaunovaQuestLine.addQuest(clearPlasmaFrigate);
 
         const GiantchasmReward = () => {
@@ -311,7 +312,7 @@ class QuestLineHelper {
             });
         };
 
-        const clearGiantChasm = new CustomQuest(1, GiantchasmReward, 'Team Plasma\'s leader Ghetsis plans on using the DNA Splicers on Kyurem in Giant Chasm. Clear the dungeon to end his evil plans.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')](), 0);
+        const clearGiantChasm = new CustomQuest(1, GiantchasmReward, 'Team Plasma\'s leader Ghetsis plans on using the DNA Splicers on Kyurem in Giant Chasm. Clear the dungeon to end his evil plans.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]());
         PlasmaunovaQuestLine.addQuest(clearGiantChasm);
 
         App.game.quests.questLines().push(PlasmaunovaQuestLine);
@@ -328,6 +329,6 @@ class QuestLineHelper {
         this.createVivillonQuestLine();
         this.createRocketjohtoQuestLine();
         this.createAquaMagmahoennQuestLine();
-        this.createPlasmaunovaQuestLine();
+        this.createPlasmaUnovaQuestLine();
     }
 }
