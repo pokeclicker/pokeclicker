@@ -585,6 +585,13 @@ class Update implements Saveable {
                 berriesObtained:  saveData.statistics.berriesHarvested || 0,
             };
         },
+
+        '0.8.15': async ({ playerData, saveData }) => {
+            // Start Plasma questline if player has Jet Badge already
+            if (saveData.badgeCase[58]) {
+                saveData.quests.questLines.push({state: 1, name: 'Quest for the DNA Splicers', quest: 0});
+            }
+        },
     };
 
     constructor() {
