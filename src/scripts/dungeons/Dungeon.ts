@@ -3548,10 +3548,6 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
     ],
     4403000,
     [
-        new DungeonBossPokemon('Tangrowth', 30000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))}),
-        new DungeonBossPokemon('Audino', 32000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))}),
-        new DungeonBossPokemon('Mamoswine', 32000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))}),
-        new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)}),
         new DungeonTrainer('Team Plasma',
             [
                 new GymPokemon('Cofagrigus', 6000000, 50),
@@ -3561,6 +3557,10 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
                 new GymPokemon('Toxicroak', 6000000, 50),
                 new GymPokemon('Hydreigon', 6500000, 52),
             ], { weight: 1 }, 'Ghetsis', '(ghetsis)'),
+        new DungeonBossPokemon('Tangrowth', 30000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))}),
+        new DungeonBossPokemon('Audino', 32000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))}),
+        new DungeonBossPokemon('Mamoswine', 32000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))}),
+        new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)}),
     ],
     266500, 22, 100);
 
