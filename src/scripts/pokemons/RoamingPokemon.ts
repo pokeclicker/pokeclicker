@@ -3,7 +3,7 @@ class RoamingPokemon {
 
     constructor(
         public pokemonName: PokemonNameType,
-        public unlockRequirement?: Requirement
+        public unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement
     ) {
         this.pokemon = pokemonMap[pokemonName];
     }

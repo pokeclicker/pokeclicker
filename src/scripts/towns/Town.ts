@@ -2733,9 +2733,9 @@ TownList['Wyndon Stadium'] = new Town(
 
 TownList['Master Dojo'] = new Town(
     'Master Dojo',
-    GameConstants.Region.armor,
+    GameConstants.Region.galar,
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.armor, 1)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
         dungeon: dungeonList['Master Dojo Trial'],
     }
 );
@@ -2743,9 +2743,9 @@ TownList['Master Dojo'] = new Town(
 //Crown Tundra Towns
 TownList['Freezington'] = new Town(
     'Freezington',
-    GameConstants.Region.crown,
+    GameConstants.Region.galar,
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.crown, 1)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
     }
 );
 

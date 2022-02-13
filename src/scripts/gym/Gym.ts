@@ -1597,7 +1597,7 @@ gymList['Hammerlocke'] = new Gym(
     128000,
     'I might have lost, but I still look good. Maybe I should snap a quick selfie...',
     [
-        new RouteKillRequirement(20, GameConstants.Region.galar, 22),
+        new RouteKillRequirement(10, GameConstants.Region.galar, 22),
         new GymBadgeRequirement(BadgeEnums.Galar_Dark),
     ]
 );
@@ -1615,6 +1615,23 @@ gymList['Trainer Marnie'] = new Gym(
     64000,
     'I mean, If you\'re gonna win, you could at least win in a way that makes me look good, right?',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))]
+);
+gymList['Trainer Hop'] = new Gym(
+    'Hop',
+    'Trainer Hop',
+    [
+        new GymPokemon('Dubwool', 1945330, 49),
+        new GymPokemon('Cramorant', 1948300, 49),
+        new GymPokemon('Pincurchin', 1952000, 50),
+        new GymPokemon('Snorlax', 1957000, 51),
+        new GymPokemon('Corviknight', 1945330, 50),
+        // TODO: Change based on starter
+        new GymPokemon('Inteleon', 2015330, 60),
+    ],
+    BadgeEnums.Elite_Hop,
+    64000,
+    'Thanks, mate. I\'m really glad you were the one here with me.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Marnie)]
 );
 gymList['Trainer Bede'] = new Gym(
     'Bede',
