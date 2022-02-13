@@ -1,3 +1,5 @@
+declare const modalUtils: { observableState: typeof observableState };
+
 class PartyController {
 
     static getCaughtStatusByName(name: PokemonNameType): CaughtStatus {
@@ -16,20 +18,20 @@ class PartyController {
         return CaughtStatus.NotCaught;
     }
 
-    static getEvolutionsCaughtStatus(id: number, evoType?: GameConstants.StoneType): CaughtStatus {
-        let status = CaughtStatus.CaughtShiny;
+    static getStoneEvolutionsCaughtStatus(id: number, evoType?: GameConstants.StoneType): CaughtStatus[] {
         const pokemon = App.game.party.caughtPokemon.find(p => p.id == id);
+        const statuses: CaughtStatus[] = [];
         if (pokemon) {
             for (const evolution of pokemon.evolutions) {
-                if (evolution instanceof StoneEvolution && evolution.stone == evoType && evolution.isSatisfied()) {
+                // skip other Restrictions to show all eevee evolutions for the region
+                const regionStatisfied = PokemonHelper.calcNativeRegion(evolution.getEvolvedPokemon()) <= player.highestRegion();
+                if (evolution instanceof StoneEvolution && evolution.stone == evoType && regionStatisfied) {
                     const pStatus = this.getCaughtStatusByName(evolution.getEvolvedPokemon());
-                    if (pStatus < status) {
-                        status = pStatus;
-                    }
+                    statuses.push(pStatus);
                 }
             }
         }
-        return status;
+        return statuses;
     }
 
     public static getMaxLevelPokemonList(): Array<PartyPokemon> {
@@ -41,6 +43,27 @@ class PartyController {
     static getSortedList = ko.pureComputed(() => {
         const list = [...App.game.party.caughtPokemon];
         return list.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
+    }).extend({ rateLimit: 500 });
+
+    private static hatcherySortedList = [];
+    static getHatcherySortedList = ko.pureComputed(() => {
+        // If the breeding modal is open, we should sort it.
+        if (modalUtils.observableState['breedingModal'] === 'show') {
+            PartyController.hatcherySortedList = [...App.game.party.caughtPokemon];
+            return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue()));
+        }
+        return PartyController.hatcherySortedList;
+    }).extend({ rateLimit: 500 });
+
+
+    private static proteinSortedList = [];
+    static getProteinSortedList = ko.pureComputed(() => {
+        // If the protein modal is open, we should sort it.
+        if (modalUtils.observableState['pokemonSelectorModal'] === 'show') {
+            PartyController.proteinSortedList = [...App.game.party.caughtPokemon];
+            return PartyController.proteinSortedList.sort(PartyController.compareBy(Settings.getSetting('proteinSort').observableValue(), Settings.getSetting('proteinSortDirection').observableValue()));
+        }
+        return PartyController.proteinSortedList;
     }).extend({ rateLimit: 500 });
 
     public static compareBy(option: SortOptions, direction: boolean): (a: PartyPokemon, b: PartyPokemon) => number {

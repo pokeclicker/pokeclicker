@@ -218,7 +218,7 @@ class Underground implements Feature {
             }
         });
 
-        return `<u>Owned:</u><br>Mine items: ${nMineItems}<br>Fossils: ${nFossils}<br>Plates: ${nPlates}`;
+        return `<u>Owned:</u><br>Mine items: ${nMineItems.toLocaleString('en-US')}<br>Fossils: ${nFossils.toLocaleString('en-US')}<br>Plates: ${nPlates.toLocaleString('en-US')}`;
     });
 
     public static getMineItemByName(name: string): UndergroundItem {
@@ -345,7 +345,7 @@ class Underground implements Feature {
         }
     }
 
-    canAccess() {
+    public canAccess() {
         return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
     }
 

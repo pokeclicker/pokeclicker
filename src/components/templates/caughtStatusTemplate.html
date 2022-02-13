@@ -1,5 +1,11 @@
 <script type="text/html" id="caughtStatusTemplate">
     <knockout style="display: inline;">
+        <!-- ko if: $data.status == CaughtStatus.NotCaught -->
+        <img title="You have not captured this Pokémon yet!"
+             class="pokeball-smallest"
+             src="assets/images/pokeball/None.svg"
+        />
+        <!-- /ko -->
         <!-- ko if: $data.status == CaughtStatus.Caught -->
         <img title="You have captured this Pokémon!"
              class="pokeball-smallest"

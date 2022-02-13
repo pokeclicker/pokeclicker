@@ -1,4 +1,7 @@
+import NotificationConstants from './notifications/NotificationConstants';
+import Notifier from './notifications/Notifier';
 import Profile from './profile/Profile';
+import Rand from './utilities/Rand';
 
 export default class SaveSelector {
     static MAX_SAVES = 9;
@@ -12,7 +15,7 @@ export default class SaveSelector {
         });
 
         if (saves.length < this.MAX_SAVES) {
-            const key = Math.random().toString(36).substring(7);
+            const key = Rand.string(6);
             container.innerHTML += `<div class="col-12"></div>
             <label class="btn btn-success col-md-4 col-xs-12 mx-1" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">New Save</label>
             <label for="import-save" class="btn btn-warning col-md-4 col-xs-12 mx-1" onclick="Save.key = '${key}';">Import Save</label>`;
@@ -26,6 +29,7 @@ export default class SaveSelector {
             const { key } = e.currentTarget.dataset;
             if (key) {
                 $('#saveSelectorContextMenu').html(`
+                    <a class="dropdown-item bg-success" href="#" onclick="Save.key = '${key}'; SaveSelector.Download('${key}')">Download (backup)</a>
                     <a class="dropdown-item bg-info" href="#" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">Load</a>
                     <a class="dropdown-item bg-warning" href="#"><label class="clickable my-0" for="import-save" onclick="Save.key = '${key}';">Import (overwrite)</label></a>
                     <a class="dropdown-item bg-danger" href="#" onclick="Save.key = '${key}'; Save.delete();">Delete</a>
@@ -67,6 +71,47 @@ export default class SaveSelector {
             // eslint-disable-next-line no-console
             console.log('Failed to load save:', key, e);
             return '';
+        }
+    }
+
+    static Download(key: string): void {
+        try {
+            // Load save data
+            const saveData = JSON.parse(localStorage[`save${key}`]);
+            const playerData = JSON.parse(localStorage[`player${key}`]);
+            const settingsData = JSON.parse(localStorage[`settings${key}`] ?? localStorage.settings);
+
+            // If we are missing any data, don't download the save
+            if (!saveData || !playerData || !settingsData) {
+                throw new Error('Missing save data..');
+            }
+
+            const data = {
+                save: saveData,
+                player: playerData,
+                settings: settingsData,
+            };
+
+            // Create a download element
+            const element = document.createElement('a');
+            element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(data)))}`);
+            const filename = `[v${saveData.update.version}] PokeClickerSave_${key}.txt`;
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        } catch (err) {
+            console.error('Error trying to download save', err);
+            Notifier.notify({
+                title: 'Failed to download save data',
+                message: 'Please check the console for errors, and report them on our Discord.',
+                type: NotificationConstants.NotificationOption.primary,
+                timeout: 6e4,
+            });
         }
     }
 }

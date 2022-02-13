@@ -30,6 +30,7 @@ class Farming implements Feature {
             return new Plot(index === middle, BerryType.None, 0, MulchType.None, 0);
         }),
         shovelAmt: 0,
+        mulchShovelAmt: 0,
     };
 
     berryList: KnockoutObservable<number>[];
@@ -37,6 +38,7 @@ class Farming implements Feature {
     mulchList: KnockoutObservable<number>[];
     plotList: Array<Plot>;
     shovelAmt: KnockoutObservable<number>;
+    mulchShovelAmt: KnockoutObservable<number>;
 
     highestUnlockedBerry: KnockoutComputed<number>;
 
@@ -46,14 +48,17 @@ class Farming implements Feature {
         this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
         this.plotList = this.defaults.plotList;
         this.shovelAmt = ko.observable(this.defaults.shovelAmt);
+        this.mulchShovelAmt = ko.observable(this.defaults.mulchShovelAmt);
 
         this.externalAuras = [];
         this.externalAuras[AuraType.Attract] = ko.observable<number>(1);
         this.externalAuras[AuraType.Egg] = ko.observable<number>(1);
         this.externalAuras[AuraType.Shiny] = ko.observable<number>(1);
+        this.externalAuras[AuraType.Roaming] = ko.observable<number>(1);
 
         this.multiplier.addBonus('shiny', () => this.externalAuras[AuraType.Shiny]());
         this.multiplier.addBonus('eggStep', () => this.externalAuras[AuraType.Egg]());
+        this.multiplier.addBonus('roaming', () => this.externalAuras[AuraType.Roaming]());
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {
@@ -73,15 +78,15 @@ class Farming implements Feature {
         this.berryData[BerryType.Cheri]     = new Berry(BerryType.Cheri,    [5,10,20,30,60],
             2, 0.5, 5, 1,
             [10, 0, 0, 0, 0], BerryColor.Red,
-            ['This bright red Berry is very spicy and has a provocative flavor. It blooms with delicate, pretty flowers.']);
+            ['This bright red Berry is very spicy and has a provocative flavor. It blooms with delicate, pretty flowers.'], undefined, ['Oricorio (Baile)']);
         this.berryData[BerryType.Chesto]    = new Berry(BerryType.Chesto,   [5, 15, 25, 40, 80],
             3, 0.5, 6, 2,
             [0, 10, 0, 0, 0], BerryColor.Purple,
-            ['This Berry\'s thick skin and fruit are very tough and dry tasting. However, every bit of it can be eaten.']);
+            ['This Berry\'s thick skin and fruit are very tough and dry tasting. However, every bit of it can be eaten.'], undefined, ['Oricorio (Sensu)']);
         this.berryData[BerryType.Pecha]     = new Berry(BerryType.Pecha,    [10, 35, 50, 60, 120],
             4, 0.5, 7, 3,
             [0, 0, 10, 0, 0], BerryColor.Pink,
-            ['Because of its hollow inside pocket, there isn\'t a lot to eat. What can be eaten is very sweet and delicious']);
+            ['Because of its hollow inside pocket, there isn\'t a lot to eat. What can be eaten is very sweet and delicious'], undefined, ['Oricorio (Pa\'u)']);
         this.berryData[BerryType.Rawst]     = new Berry(BerryType.Rawst,    [15, 30, 45, 80, 160],
             5, 0.5, 8, 4,
             [0, 0, 0, 10, 0], BerryColor.Green,
@@ -89,11 +94,11 @@ class Farming implements Feature {
         this.berryData[BerryType.Aspear]    = new Berry(BerryType.Aspear,   [10, 40, 60, 120, 240],
             6, 0.5, 9, 5,
             [0, 0, 0, 0, 10], BerryColor.Yellow,
-            ['This Berry\'s peel is hard, but the flesh inside is very juicy. It is distinguished by its bracing sourness.'], undefined, ['Flabébé (Yellow)']);
+            ['This Berry\'s peel is hard, but the flesh inside is very juicy. It is distinguished by its bracing sourness.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-pom)']);
         this.berryData[BerryType.Leppa]     = new Berry(BerryType.Leppa,    [100, 120, 140, 240, 480],
             7, 0.5, 10, 6,
             [10, 0, 10, 10, 10], BerryColor.Red,
-            ['It takes longer to grow than Berries such as Cheri. The smaller Berries taste better.']);
+            ['It takes longer to grow than Berries such as Cheri. The smaller Berries taste better.'], undefined, ['Oricorio (Baile)']);
         this.berryData[BerryType.Oran]      = new Berry(BerryType.Oran,     [120, 180, 240, 300, 600],
             8, 0.5, 20, 7,
             [10, 10, 0, 10, 10], BerryColor.Blue,
@@ -101,26 +106,26 @@ class Farming implements Feature {
         this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [150, 300, 450, 600, 1200],
             9, 0.5, 30, 8,
             [0, 10, 10, 10, 10], BerryColor.Yellow,
-            ['Sitrus came from the same family as Oran. It is larger and smoother tasting than Oran.'], undefined, ['Flabébé (Yellow)']);
+            ['Sitrus came from the same family as Oran. It is larger and smoother tasting than Oran.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-pom)']);
         //#endregion
 
         //#region Second Generation
         this.berryData[BerryType.Persim]    = new Berry(BerryType.Persim,   [20, 40, 50, 90, 180],
             5, 0.4, 10, 2,
             [10, 10, 10, 0, 10], BerryColor.Pink,
-            ['The more this Berry absorbs energy from sunlight, the more vividly colorful it grows.']);
+            ['The more this Berry absorbs energy from sunlight, the more vividly colorful it grows.'], undefined, ['Oricorio (Pa\'u)']);
         this.berryData[BerryType.Razz]      = new Berry(BerryType.Razz,     [100, 150, 200, 250, 500],
             7, 0.4, 15, 2,
             [10, 10, 0, 0, 0], BerryColor.Red,
-            ['A small hint of spiciness lingers in the red granules surrounding this Berry. Their centers have a dry taste.']);
+            ['A small hint of spiciness lingers in the red granules surrounding this Berry. Their centers have a dry taste.'], undefined, ['Oricorio (Baile)']);
         this.berryData[BerryType.Bluk]      = new Berry(BerryType.Bluk,     [200, 250, 300, 330, 660],
             9, 0.4, 20, 2,
             [0, 10, 10, 0, 0], BerryColor.Purple,
-            ['Though this small, delicately skinned Berry is blue in color, it dyes the mouth black when eaten.']);
+            ['Though this small, delicately skinned Berry is blue in color, it dyes the mouth black when eaten.'], undefined, ['Oricorio (Sensu)']);
         this.berryData[BerryType.Nanab]     = new Berry(BerryType.Nanab,    [25, 30, 35, 250, 500],
             11, 0.4, 25, 2,
             [0, 0, 10, 10, 0], BerryColor.Pink,
-            ['Bitter, but with a trace of sweetness, the Nanab Berry was the seventh to be discovered in the world.']);
+            ['Bitter, but with a trace of sweetness, the Nanab Berry was the seventh to be discovered in the world.'], undefined, ['Oricorio (Pa\'u)']);
         this.berryData[BerryType.Wepear]    = new Berry(BerryType.Wepear,   [150, 350, 375, 400, 800],
             12, 0.4, 30, 2,
             [0, 0, 0, 10, 10], BerryColor.Green,
@@ -128,20 +133,20 @@ class Farming implements Feature {
         this.berryData[BerryType.Pinap]     = new Berry(BerryType.Pinap,    [30, 60, 180, 240, 480],
             13, 0.4, 35, 2,
             [10, 0, 0, 0, 10], BerryColor.Yellow,
-            ['It is said that when the sour skin is peeled, this spicy Berry can be crushed to make medicine.'], undefined, ['Flabébé (Yellow)']);
+            ['It is said that when the sour skin is peeled, this spicy Berry can be crushed to make medicine.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-pom)']);
 
         this.berryData[BerryType.Figy]      = new Berry(BerryType.Figy,     [40, 160, 230, 350, 700],
             14, 0.3, 40, 3,
             [15, 0, 0, 0, 0], BerryColor.Red,
-            ['This Berry is oddly shaped, appearing as if someone took a bite out of it. It is packed full of spicy substances.']);
+            ['This Berry is oddly shaped, appearing as if someone took a bite out of it. It is packed full of spicy substances.'], undefined, ['Oricorio (Baile)']);
         this.berryData[BerryType.Wiki]      = new Berry(BerryType.Wiki,     [40, 190, 210, 360, 720],
             15, 0.3, 45, 3,
             [0, 15, 0, 0, 0], BerryColor.Purple,
-            ['It is said that this Berry grew lumps to help Pokémon grip it, allowing propagation farther afield.']);
+            ['It is said that this Berry grew lumps to help Pokémon grip it, allowing propagation farther afield.'], undefined, ['Oricorio (Sensu)']);
         this.berryData[BerryType.Mago]      = new Berry(BerryType.Mago,     [40, 180, 240, 370, 740],
             16, 0.3, 50, 3,
             [0, 0, 15, 0, 0], BerryColor.Pink,
-            ['This Berry progressively curves as it grows. The curvier the Berry, the sweeter and tastier.']);
+            ['This Berry progressively curves as it grows. The curvier the Berry, the sweeter and tastier.'], undefined, ['Oricorio (Pa\'u)']);
         this.berryData[BerryType.Aguav]     = new Berry(BerryType.Aguav,    [40, 170, 220, 350, 700],
             17, 0.3, 55, 3,
             [0, 0, 0, 15, 0], BerryColor.Green,
@@ -149,7 +154,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Iapapa]    = new Berry(BerryType.Iapapa,   [40, 200, 230, 380, 760],
             18, 0.3, 60, 3,
             [0, 0, 0, 0, 15], BerryColor.Yellow,
-            ['This Berry is very big and sour. The juiciness of the pulp accentuates the sourness.'], undefined, ['Flabébé (Yellow)']);
+            ['This Berry is very big and sour. The juiciness of the pulp accentuates the sourness.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-pom)']);
 
         this.berryData[BerryType.Lum]       = new Berry(BerryType.Lum,      [3000, 3200, 3400, 3600, 43200],
             1, 0, 1000, 3,
@@ -164,7 +169,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Pomeg]     = new Berry(BerryType.Pomeg,    [200, 1200, 4000, 5400, 10800],
             20, 0.2, 500, 10,
             [10, 0, 10, 10, 0], BerryColor.Red,
-            ['When this sweetly spicy Berry\'s thick skin is peeled, many pieces of the fruit spill out.']);
+            ['When this sweetly spicy Berry\'s thick skin is peeled, many pieces of the fruit spill out.'], undefined, ['Oricorio (Baile)']);
         this.berryData[BerryType.Kelpsy]    = new Berry(BerryType.Kelpsy,   [240, 2000, 3400, 6000, 12000],
             21, 0.2, 525, 10,
             [0, 10, 0, 10, 10], BerryColor.Blue,
@@ -172,7 +177,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Qualot]    = new Berry(BerryType.Qualot,   [230, 1000, 2500, 4800, 9600],
             22, 0.2, 550, 10,
             [10, 0, 10, 0, 10], BerryColor.Yellow,
-            ['Even in places of constant rain and high humidity, this Berry\'s plant grows healthy and strong.'], undefined, ['Flabébé (Yellow)']);
+            ['Even in places of constant rain and high humidity, this Berry\'s plant grows healthy and strong.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-pom)']);
         this.berryData[BerryType.Hondew]    = new Berry(BerryType.Hondew,   [1000, 2000, 5000, 10800, 21600],
             23, 0.2, 2000, 10,
             [10, 10, 0, 10, 0], BerryColor.Green,
@@ -180,20 +185,20 @@ class Farming implements Feature {
         this.berryData[BerryType.Grepa]     = new Berry(BerryType.Grepa,    [300, 3400, 5600, 7200, 14400],
             24, 0.2, 600, 10,
             [0, 10, 10, 0, 10], BerryColor.Yellow,
-            ['One bite of this very tender Berry fills the mouth with its sweet and tangy flavor.'], undefined, ['Flabébé (Yellow)']);
+            ['One bite of this very tender Berry fills the mouth with its sweet and tangy flavor.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-pom)']);
         this.berryData[BerryType.Tamato]    = new Berry(BerryType.Tamato,   [430, 1400, 4000, 8640, 17280],
             25, 0.2, 625, 10,
             [20, 10, 0, 0, 0], BerryColor.Red,
-            ['This Berry is large and spicy. When eaten during the cold season, it warms the body from inside.']);
+            ['This Berry is large and spicy. When eaten during the cold season, it warms the body from inside.'], undefined, ['Oricorio (Baile)']);
 
         this.berryData[BerryType.Cornn]     = new Berry(BerryType.Cornn,    [1100, 4000, 8000, 9000, 18000],
             26, 0.1, 700, 10,
             [0, 20, 10, 0, 0], BerryColor.Purple,
-            ['Its dryness is quite strong. As a result, its true deliciousness can\'t be appreciated by just eating one or two.']);
+            ['Its dryness is quite strong. As a result, its true deliciousness can\'t be appreciated by just eating one or two.'], undefined, ['Oricorio (Sensu)']);
         this.berryData[BerryType.Magost]    = new Berry(BerryType.Magost,   [2400, 6500, 10000, 14400, 28800],
             27, 0.1, 750, 10,
             [0, 0, 20, 10, 0], BerryColor.Pink,
-            ['The grown-up flavor and dreamy sweetness of this Berry make it a favorite of Pokémon everywhere.']);
+            ['The grown-up flavor and dreamy sweetness of this Berry make it a favorite of Pokémon everywhere.'], undefined, ['Oricorio (Pa\'u)']);
         this.berryData[BerryType.Rabuta]    = new Berry(BerryType.Rabuta,   [2310, 5400, 9500, 12240, 24480],
             28, 0.1, 800, 10,
             [0, 0, 0, 20, 10], BerryColor.Green,
@@ -201,19 +206,22 @@ class Farming implements Feature {
         this.berryData[BerryType.Nomel]     = new Berry(BerryType.Nomel,    [1240, 5200, 10500, 15120, 30240],
             29, 0.1, 850, 10,
             [10, 0, 0, 0, 20], BerryColor.Yellow,
-            ['This Berry is quite sour overall, with the sourness especially concentrated at the pointed end.'], undefined, ['Flabébé (Yellow)']);
+            ['This Berry is quite sour overall, with the sourness especially concentrated at the pointed end.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-pom)']);
         this.berryData[BerryType.Spelon]    = new Berry(BerryType.Spelon,   [2000, 7000, 12000, 15480, 30960],
             30, 0.1, 900, 10,
             [30, 10, 0, 0, 0], BerryColor.Red,
-            ['So spicy is the Spelon Berry that, Fire type or not, Pokémon will try to breathe fire after eating a single one.']);
+            ['So spicy is the Spelon Berry that, Fire type or not, Pokémon will try to breathe fire after eating a single one.'], undefined, ['Oricorio (Baile)']);
         this.berryData[BerryType.Pamtre]    = new Berry(BerryType.Pamtre,   [3000, 10000, 16400, 18000, 36000],
             31, 0.1, 950, 10,
             [0, 30, 10, 0, 0], BerryColor.Purple,
-            ['This Berry drifted from a faraway sea. It is now cultivated in the Sinnoh region.']);
+            [
+                'This Berry drifted from a faraway sea. It is now cultivated in the Sinnoh region.' ,
+                'It has a tendency to expand into nearby plots.',
+            ] , undefined, ['Oricorio (Sensu)']);
         this.berryData[BerryType.Watmel]    = new Berry(BerryType.Watmel,   [2300, 3400, 9800, 16560, 33120],
             32, 0.1, 1000, 10,
             [0, 0, 30, 10, 0], BerryColor.Pink,
-            ['A bounty of nature that is exceedingly sweet. The Berry is huge, with some discovered that exceed 20 inches.']);
+            ['A bounty of nature that is exceedingly sweet. The Berry is huge, with some discovered that exceed 20 inches.'], undefined, ['Oricorio (Pa\'u)']);
         this.berryData[BerryType.Durin]     = new Berry(BerryType.Durin,    [10000, 14000, 18000, 21600, 43200],
             33, 0.1, 1050, 10,
             [0, 0, 0, 30, 10], BerryColor.Green,
@@ -221,7 +229,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Belue]     = new Berry(BerryType.Belue,    [5000, 9800, 14500, 19800, 39600],
             20, 0.1, 1100, 10,
             [10, 0, 0, 0, 30], BerryColor.Purple,
-            ['This glossy and colorful Berry has a mouthwateringly delicious appearance. However, it is awfully sour.']);
+            ['This glossy and colorful Berry has a mouthwateringly delicious appearance. However, it is awfully sour.'], undefined, ['Oricorio (Sensu)']);
         //#endregion
 
         //#region Fourth Generation (Typed)
@@ -231,7 +239,7 @@ class Farming implements Feature {
             [
                 'This Berry is said to have grown plentiful in the tropics of the past. It boasts an intensely hot spiciness.',
                 'It has a tendency to overtake nearby plants.',
-            ], undefined, ['Charmander', 'Cyndaquil', 'Torchic', 'Chimchar', 'Tepig', 'Fennekin', 'Litten', 'Scorbunny']);
+            ], undefined, ['Charmander', 'Cyndaquil', 'Torchic', 'Chimchar', 'Tepig', 'Fennekin', 'Litten', 'Oricorio (Baile)', 'Scorbunny']);
         this.berryData[BerryType.Passho]    = new Berry(BerryType.Passho,   [490, 3600, 10800, 21600, 43200],
             22, 0.05, 1300, 15,
             [0, 15, 0, 10, 0], BerryColor.Blue,
@@ -245,7 +253,7 @@ class Farming implements Feature {
             [
                 'Energy from lightning strikes is drawn into the plant, making the Berries grow big and rich.',
                 'The same energy promotes the growth of nearby Berries.',
-            ], new Aura(AuraType.Growth, [1.1, 1.2, 1.3]), ['Pikachu', 'Flabébé (Yellow)']);
+            ], new Aura(AuraType.Growth, [1.1, 1.2, 1.3]), ['Pikachu', 'Flabébé (Yellow)', 'Oricorio (Pom-pom)']);
         this.berryData[BerryType.Rindo]     = new Berry(BerryType.Rindo,    [3600, 7200, 16200, 28800, 57600],
             24, 0.05, 1400, 15,
             [10, 0, 0, 15, 0], BerryColor.Green,
@@ -266,7 +274,7 @@ class Farming implements Feature {
             [
                 'This Berry contains a substance that generates heat. It can even heat up a chilly heart.',
                 'Growing these Berries will promote Egg growth.',
-            ], new Aura(AuraType.Egg, [1.01, 1.02, 1.03]), ['Riolu']);
+            ], new Aura(AuraType.Egg, [1.01, 1.02, 1.03]), ['Riolu', 'Oricorio (Baile)']);
         this.berryData[BerryType.Kebia]     = new Berry(BerryType.Kebia,    [100, 200, 400, 600, 86400],
             1, 1, 50, 1,
             [0, 15, 0, 0, 10], BerryColor.Green,
@@ -281,7 +289,7 @@ class Farming implements Feature {
             [
                 'The sweetness-laden pulp has just the hint of a hard-edged and fragrant bite to it.',
                 'Growing these Berries will soften the ground around it, increasing the chances of replanting.',
-            ], new Aura(AuraType.Replant, [1.01, 1.02, 1.03]), ['Larvitar', 'Flabébé (Yellow)']);
+            ], new Aura(AuraType.Replant, [1.01, 1.02, 1.03]), ['Larvitar', 'Flabébé (Yellow)', 'Oricorio (Pom-pom)']);
         this.berryData[BerryType.Coba]      = new Berry(BerryType.Coba,     [9000, 12600, 16200, 19800, 39600],
             29, 0.05, 1800, 15,
             [0, 10, 0, 15, 0], BerryColor.Blue,
@@ -293,7 +301,7 @@ class Farming implements Feature {
             [
                 'This Berry is said to sense human emotions for the way it swells roundly when a person approaches.',
                 'The same behavior affects nearby plants, causing additional mutations.',
-            ], new Aura(AuraType.Mutation, [1.1, 1.2, 1.3]), ['Natu']);
+            ], new Aura(AuraType.Mutation, [1.1, 1.2, 1.3]), ['Natu', 'Oricorio (Sensu)']);
         this.berryData[BerryType.Tanga]     = new Berry(BerryType.Tanga,    [450, 900, 1800, 3600, 7200],
             3, 0.5, 500, 15,
             [20, 0, 0, 0, 10], BerryColor.Green,
@@ -307,28 +315,28 @@ class Farming implements Feature {
             [
                 'It is often used for pickles because of its very dry flavor. It can also be eaten raw for its provocative taste.',
                 'This Berry plant hardens the surrounding soil, decreasing the chances of replanting.',
-            ], new Aura(AuraType.Replant, [0.99, 0.98, 0.97]), ['Sudowoodo', 'Flabébé (Yellow)']);
+            ], new Aura(AuraType.Replant, [0.99, 0.98, 0.97]), ['Sudowoodo', 'Flabébé (Yellow)', 'Oricorio (Pom-pom)']);
         this.berryData[BerryType.Kasib]     = new Berry(BerryType.Kasib,    [30, 60, 120, 300, 86400],
             1, 1, 25, 1,
             [0, 10, 20, 0, 0], BerryColor.Purple,
             [
                 'Considered to have a special power from the olden days, this Berry is sometimes dried and used as a good-luck charm.',
                 'This Berry causes other nearby Berries to wither away faster.',
-            ], new Aura(AuraType.Death, [1.25, 1.5, 2.0]), ['Shedinja']);
+            ], new Aura(AuraType.Death, [1.25, 1.5, 2.0]), ['Shedinja', 'Oricorio (Sensu)']);
         this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [10800, 21600, 43200, 86400, 172800],
             34, 0, 4000, 15,
             [0, 0, 10, 20, 0], BerryColor.Red,
             [
                 'If a large enough volume of this Berry is boiled down, its bitterness fades away. It makes a good jam.',
                 'This Berry requires a lot of energy to grow, stealing away nutrients from nearby plots.',
-            ], new Aura(AuraType.Growth, [0.8, 0.6, 0.5]), ['Bagon']);
+            ], new Aura(AuraType.Growth, [0.8, 0.6, 0.5]), ['Bagon', 'Oricorio (Baile)']);
         this.berryData[BerryType.Colbur]    = new Berry(BerryType.Colbur,   [2880, 10080, 19440, 27000, 54000],
             35, 0.05, 2300, 15,
             [0, 0, 0, 10, 20], BerryColor.Purple,
             [
                 'Tiny hooks grow on the surface of this Berry. It latches on to Pokémon so it can be carried to far-off places.',
                 'It has a tendency to overtake nearby plants.',
-            ], undefined, ['Absol']);
+            ], undefined, ['Absol', 'Oricorio (Sensu)']);
         this.berryData[BerryType.Babiri]    = new Berry(BerryType.Babiri,   [7200, 16200, 32400, 64800, 129600],
             36, 0.05, 2400, 15,
             [25, 10, 0, 0, 0], BerryColor.Green,
@@ -339,14 +347,14 @@ class Farming implements Feature {
         this.berryData[BerryType.Chilan]    = new Berry(BerryType.Chilan,   [240, 1430, 2970, 7200, 14400],
             10, 0.05, 500, 15,
             [0, 25, 10, 0, 0], BerryColor.Yellow,
-            ['This Berry can be cored out and dried to make a whistle. Blowing through its hole makes an indescribable sound.'], undefined, ['Flabébé (Yellow)']);
+            ['This Berry can be cored out and dried to make a whistle. Blowing through its hole makes an indescribable sound.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-pom)']);
         this.berryData[BerryType.Roseli]    = new Berry(BerryType.Roseli,   [2410, 5040, 12600, 25200, 50400],
             38, 0.05, 2500, 15,
             [0, 0, 25, 10, 0], BerryColor.Pink,
             [
                 'This Berry is sweet with a hint of bitterness and has a lingering sweet scent. It is often dried and used to make tea.',
                 'The scent of this Berry plant attracts wild Pokémon.',
-            ], new Aura(AuraType.Attract, [1.01, 1.02, 1.03]), ['Togepi']);
+            ], new Aura(AuraType.Attract, [1.01, 1.02, 1.03]), ['Togepi', 'Oricorio (Pa\'u)']);
         //#endregion
 
         //#region Fifth Generation
@@ -357,14 +365,14 @@ class Farming implements Feature {
         this.berryData[BerryType.Custap]    = new Berry(BerryType.Custap,   [3240, 8280, 13320, 27360, 54720],
             1, 0.05, 2700, 20,
             [0, 0, 40, 10, 0], BerryColor.Red,
-            ['The flesh underneath the Custap Berry\'s tough skin is sweet and creamy soft.']);
+            ['The flesh underneath the Custap Berry\'s tough skin is sweet and creamy soft.'], undefined, ['Oricorio (Baile)']);
         this.berryData[BerryType.Jaboca]    = new Berry(BerryType.Jaboca,   [4320, 8640, 16560, 33480, 66960],
             1, 0.05, 2800, 20,
             [0, 0, 0, 40, 10], BerryColor.Yellow,
             [
                 'The cluster of drupelets that make up this Berry pop rhythmically if the Berry is handled roughly.',
                 'The sound of these Berries attracts wild Pokémon.',
-            ], undefined, ['Flabébé (Yellow)']);
+            ], new Aura(AuraType.Roaming, [1.005, 1.01, 1.015]), ['Flabébé (Yellow)', 'Oricorio (Pom-pom)']);
         this.berryData[BerryType.Rowap]     = new Berry(BerryType.Rowap,    [5760, 9000, 14040, 21240, 42480],
             1, 0.05, 2900, 20,
             [10, 0, 0, 0, 40], BerryColor.Blue,
@@ -372,7 +380,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Kee]       = new Berry(BerryType.Kee,      [4680, 9360, 18360, 36360, 72720],
             1, 0.05, 3000, 20,
             [30, 30, 10, 10, 10], BerryColor.Yellow,
-            ['This Berry remains poisonous until fully ripened. Once ripe it has a spicy and sweet complex flavor.'], undefined, ['Flabébé (Yellow)']);
+            ['This Berry remains poisonous until fully ripened. Once ripe it has a spicy and sweet complex flavor.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-pom)']);
         this.berryData[BerryType.Maranga]   = new Berry(BerryType.Maranga,  [5040, 10080, 20160, 40320, 80640],
             1, 0.05, 3100, 20,
             [10, 10, 30, 30, 10], BerryColor.Blue,
@@ -382,11 +390,11 @@ class Farming implements Feature {
             0.5, 0, 10000, 20,
             [30, 10, 30, 0, 0], BerryColor.Red,
             ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of the sea.'],
-            undefined, ['Manaphy']);
+            undefined, ['Manaphy', 'Oricorio (Baile)']);
         this.berryData[BerryType.Ganlon]    = new Berry(BerryType.Ganlon,   [21600, 43200, 86400, 172800, 345600],
             0.5, 0, 10000, 20,
             [0, 30, 10, 30, 0], BerryColor.Purple,
-            ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of the land.']);
+            ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of the land.'], undefined, ['Oricorio (Sensu)']);
         this.berryData[BerryType.Salac]     = new Berry(BerryType.Salac,    [21600, 43200, 86400, 172800, 345600],
             0.5, 0, 10000, 20,
             [0, 0, 30, 10, 30], BerryColor.Green,
@@ -398,7 +406,7 @@ class Farming implements Feature {
                 'This Berry is surrounded by mystery. It is rumored to be imbued with the power of all living things.',
                 'This power keeps other Berries alive for longer.',
             ],
-            undefined, ['Mew']);
+            undefined, ['Mew', 'Oricorio (Pa\'u)']);
         this.berryData[BerryType.Apicot]    = new Berry(BerryType.Apicot,   [10800, 21600, 43200, 86400, 432000],
             0.5, 0, 15000, 20,
             [10, 30, 0, 0, 30], BerryColor.Blue,
@@ -406,7 +414,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Lansat]    = new Berry(BerryType.Lansat,   [10800, 21600, 43200, 86400, 432000],
             0.5, 0, 15000, 20,
             [30, 10, 30, 10, 30], BerryColor.Red,
-            ['This is said to be a legendary Berry. Holding it supposedly brings great joy.']);
+            ['This is said to be a legendary Berry. Holding it supposedly brings great joy.'], undefined, ['Oricorio (Baile)']);
         this.berryData[BerryType.Starf]     = new Berry(BerryType.Starf,    [10800, 21600, 43200, 86400, 432000],
             0.5, 0, 15000, 20,
             [30, 10, 30, 10, 30], BerryColor.Green,
@@ -416,7 +424,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [10800, 21600, 43200, 86400, 604800],
             0.5, 0, 15000, 20,
             [40, 10, 0, 0, 0], BerryColor.Purple,
-            ['A completely enigmatic Berry. It apparently has the power of the stars that fill the night sky.']);
+            ['A completely enigmatic Berry. It apparently has the power of the stars that fill the night sky.'], undefined, ['Oricorio (Sensu)']);
         //#endregion
 
         //#endregion
@@ -840,14 +848,14 @@ class Farming implements Feature {
         this.mutations.push(new BlankMutation(0, BerryType.Kasib,
             {
                 hint: 'I\'ve heard of a Berry that only appears after a Berry plant has withered, but is repelled by Colbur Plants.',
-                unlockReq: () => App.game.farming.highestUnlockedBerry() > BerryType.Occa,
+                unlockReq: () => App.game.farming.highestUnlockedBerry() >= BerryType.Occa,
             }));
 
         // Starf
         this.mutations.push(new BlankMutation(0, BerryType.Starf,
             {
                 hint: 'I\'ve heard of a Berry that only appears after a Shiny Pokémon wanders near open soil.',
-                unlockReq: () => App.game.farming.highestUnlockedBerry() > BerryType.Occa,
+                unlockReq: () => App.game.farming.highestUnlockedBerry() >= BerryType.Occa,
             }));
 
         //#endregion
@@ -945,6 +953,8 @@ class Farming implements Feature {
     handleNotification(farmNotiType: FarmNotificationType, wander?: any): void {
         let message = '';
         let type = NotificationConstants.NotificationOption.success;
+        let sound = NotificationConstants.NotificationSound.ready_to_harvest;
+        let setting = NotificationConstants.NotificationSetting.ready_to_harvest;
 
         switch (farmNotiType) {
             case FarmNotificationType.Ripe:
@@ -953,36 +963,50 @@ class Farming implements Feature {
             case FarmNotificationType.AboutToWither:
                 message = 'A Berry plant is about to wither!';
                 type = NotificationConstants.NotificationOption.warning;
+                sound = NotificationConstants.NotificationSound.berry_wither;
+                setting = NotificationConstants.NotificationSetting.about_to_wither;
                 break;
             case FarmNotificationType.Withered:
                 message = 'A Berry plant has withered!';
                 type = NotificationConstants.NotificationOption.warning;
+                sound = NotificationConstants.NotificationSound.berry_wither;
+                setting = NotificationConstants.NotificationSetting.berry_withered;
                 break;
             case FarmNotificationType.Mutated:
                 message = 'A Berry plant has mutated!';
+                sound = NotificationConstants.NotificationSound.berry_mutated;
+                setting = NotificationConstants.NotificationSetting.berry_mutated;
                 break;
             case FarmNotificationType.Replanted:
                 message = 'A Berry has been replanted!';
+                sound = NotificationConstants.NotificationSound.berry_replanted;
+                setting = NotificationConstants.NotificationSetting.berry_replanted;
                 break;
             case FarmNotificationType.Dropped:
                 message = 'A Berry has been dropped!';
+                sound = NotificationConstants.NotificationSound.berry_dropped;
+                setting = NotificationConstants.NotificationSetting.berry_dropped;
                 break;
             case FarmNotificationType.MulchRanOut:
                 message = 'A plot has run out of mulch!';
                 type = NotificationConstants.NotificationOption.warning;
+                sound = NotificationConstants.NotificationSound.mulch_ran_out;
+                setting = NotificationConstants.NotificationSetting.mulch_ran_out;
                 break;
             case FarmNotificationType.Wander:
                 const pokemon = wander?.shiny ? `shiny ${wander?.pokemon}` : wander?.pokemon;
                 message = `A wild ${pokemon} has wandered onto the farm!`;
                 type = wander?.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
+                sound = NotificationConstants.NotificationSound.wandering_pokemon;
+                setting = NotificationConstants.NotificationSetting.wandering_pokemon;
                 break;
         }
 
         Notifier.notify({
             message,
             type,
-            sound: NotificationConstants.NotificationSound.ready_to_harvest,
-            setting: NotificationConstants.NotificationSetting.ready_to_harvest,
+            sound,
+            setting,
         });
     }
 
@@ -990,6 +1014,7 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Attract](1);
         this.externalAuras[AuraType.Egg](1);
         this.externalAuras[AuraType.Shiny](1);
+        this.externalAuras[AuraType.Roaming](1);
         this.plotList.forEach(plot => plot.clearAuras());
 
         // Handle Boost Auras first
@@ -1129,12 +1154,37 @@ class Farming implements Feature {
         if (plot.isEmpty()) {
             return;
         }
+        if (plot.stage() == PlotStage.Berry) {
+            this.harvest(index);
+            return;
+        }
         if (this.shovelAmt() <= 0) {
             return;
         }
         plot.die(true);
         GameHelper.incrementObservable(this.shovelAmt, -1);
         GameHelper.incrementObservable(App.game.statistics.totalShovelsUsed, 1);
+
+        this.resetAuras();
+    }
+
+    /**
+     * Handles using the Mulch Shovel to remove mulch from a plot
+     * @param index The plot index
+     */
+    public shovelMulch(index: number): void {
+        const plot = this.plotList[index];
+        if (!plot.isUnlocked) {
+            return;
+        }
+        if (this.mulchShovelAmt() <= 0) {
+            return;
+        }
+
+        if (plot.clearMulch()) {
+            GameHelper.incrementObservable(this.mulchShovelAmt, -1);
+            GameHelper.incrementObservable(App.game.statistics.totalShovelsUsed, 1);
+        }
 
         this.resetAuras();
     }
@@ -1206,16 +1256,20 @@ class Farming implements Feature {
                 setting: NotificationConstants.NotificationSetting.route_item_found,
             });
         }
-        this.gainBerry(berry, amount);
+        this.gainBerry(berry, amount, false);
     }
 
-    gainBerry(berry: BerryType, amount = 1) {
+    gainBerry(berry: BerryType, amount = 1, farming = true) {
         GameHelper.incrementObservable(this.berryList[berry], Math.floor(amount));
 
         if (amount > 0) {
             this.unlockBerry(berry);
-            GameHelper.incrementObservable(App.game.statistics.totalBerriesHarvested, amount);
-            GameHelper.incrementObservable(App.game.statistics.berriesHarvested[berry], amount);
+            GameHelper.incrementObservable(App.game.statistics.totalBerriesObtained, amount);
+            GameHelper.incrementObservable(App.game.statistics.berriesObtained[berry], amount);
+            if (farming === true) {
+                GameHelper.incrementObservable(App.game.statistics.totalBerriesHarvested, amount);
+                GameHelper.incrementObservable(App.game.statistics.berriesHarvested[berry], amount);
+            }
         }
     }
 
@@ -1258,6 +1312,7 @@ class Farming implements Feature {
             mulchList: this.mulchList.map(ko.unwrap),
             plotList: this.plotList.map(plot => plot.toJSON()),
             shovelAmt: this.shovelAmt(),
+            mulchShovelAmt: this.mulchShovelAmt(),
             mutations: this.mutations.map(mutation => mutation.toJSON()),
             farmHands: this.farmHands.toJSON(),
         };
@@ -1311,6 +1366,13 @@ class Farming implements Feature {
             this.shovelAmt = ko.observable(this.defaults.shovelAmt);
         } else {
             this.shovelAmt(shovelAmt);
+        }
+
+        const mulchShovelAmt = json['mulchShovelAmt'];
+        if (mulchShovelAmt == null) {
+            this.mulchShovelAmt = ko.observable(this.defaults.mulchShovelAmt);
+        } else {
+            this.mulchShovelAmt(mulchShovelAmt);
         }
 
         const mutations = json['mutations'];

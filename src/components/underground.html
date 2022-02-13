@@ -38,7 +38,7 @@
                         <div class='progress'>
                             <div id='mineEnergyBar' class='progress-bar bg-warning' role='progressbar'
                                  aria-valuemin='0' aria-valuemax='100'
-                                 data-bind="style: { width: Math.floor(App.game.underground.energy/App.game.underground.getMaxEnergy()*100) + '%' }">
+                                 data-bind="style: { width: (Math.floor(App.game.underground.energy)/App.game.underground.getMaxEnergy()*100).toFixed(2) + '%' }">
                                 <span data-bind="text: 'Energy: ' + Math.floor(App.game.underground.energy) + ' / ' + App.game.underground.getMaxEnergy() + (Math.floor(App.game.underground.energy) < App.game.underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
                             </div>
                         </div>
@@ -208,7 +208,7 @@
                         placement:'top',
                         html: true,
                     }">
-                    <span>Total net worth: <b><span data-bind="text: Underground.getDiamondNetWorth()">-</span></b></span>
+                    <span>Total net worth: <b><span data-bind="text: Underground.getDiamondNetWorth().toLocaleString('en-US')">-</span></b></span>
                     <img src='assets/images/underground/diamond.svg' width="20px'">
                 </button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

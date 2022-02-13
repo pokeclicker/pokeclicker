@@ -57,6 +57,7 @@ Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons:',
         new SettingOption('×10, ÷10', 'multiplication'),
     ],
     'original'));
+Settings.add(new BooleanSetting('resetShopAmountOnPurchase', 'Reset buy quantity after each purchase', true));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
 Settings.add(new BooleanSetting('hideChallengeRelatedModules', 'Hide challenge related modules', false));
 Settings.add(new Setting<string>('backgroundImage', 'Background image:',
@@ -116,13 +117,26 @@ Object.values(NotificationConstants.NotificationSetting).forEach((setting) => {
  */
 
 // Party Sorting
-const sortsettings = Object.keys(SortOptionConfigs).map((opt) => (
+const partySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
-Settings.add(new Setting<number>('partySort', 'Sort:',
-    sortsettings,
-    SortOptions.id));
+Settings.add(new Setting<number>('partySort', 'Sort:', partySortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
+
+// Hatchery Sorting
+const hatcherySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('hatcherySort', 'Sort:', hatcherySortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('hatcherySortDirection', 'reverse', false));
+
+// Protein Sorting
+const proteinSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('proteinSort', 'Sort:', proteinSortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('proteinSortDirection', 'reverse', false));
+Settings.add(new BooleanSetting('proteinHideMaxedPokemon', 'Hide Pokémon with max protein', false));
 
 // Breeding Filters
 Settings.add(new Setting<string>('breedingCategoryFilter', 'breedingCategoryFilter',
