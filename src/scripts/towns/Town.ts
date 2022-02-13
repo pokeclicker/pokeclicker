@@ -2442,11 +2442,6 @@ TownList['Ten Carat Hill'] = new DungeonTown(
     GameConstants.Region.alola,
     [new GymBadgeRequirement(BadgeEnums.FightiniumZ)]
 );
-TownList['Ruins of Conflict'] = new DungeonTown(
-    'Ruins of Conflict',
-    GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
-);
 TownList['Pikachu Valley'] = new DungeonTown(
     'Pikachu Valley',
     GameConstants.Region.alola,
@@ -2482,14 +2477,6 @@ TownList['Memorial Hill'] = new DungeonTown(
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 9)]
 );
-TownList['Ruins of Life'] = new DungeonTown(
-    'Ruins of Life',
-    GameConstants.Region.alola,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.alola, 21),
-        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
-    ]
-);
 TownList['Malie Garden'] = new DungeonTown(
     'Malie Garden',
     GameConstants.Region.alola,
@@ -2515,19 +2502,6 @@ TownList['Po Town'] = new DungeonTown(
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 17)]
 );
-TownList['Mount Lanakila'] = new DungeonTown(
-    'Mount Lanakila',
-    GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
-);
-TownList['Ruins of Abundance'] = new DungeonTown(
-    'Ruins of Abundance',
-    GameConstants.Region.alola,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.alola, 23),
-        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
-    ]
-);
 TownList['Aether Foundation'] = new DungeonTown(
     'Aether Foundation',
     GameConstants.Region.alola,
@@ -2543,10 +2517,36 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     GameConstants.Region.alola,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))]
 );
+TownList['Mount Lanakila'] = new DungeonTown(
+    'Mount Lanakila',
+    GameConstants.Region.alola,
+    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
+);
 TownList['Lake of the Sunne and Moone'] = new DungeonTown(
     'Lake of the Sunne and Moone',
     GameConstants.Region.alola,
     [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
+);
+TownList['Ruins of Conflict'] = new DungeonTown(
+    'Ruins of Conflict',
+    GameConstants.Region.alola,
+    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
+);
+TownList['Ruins of Life'] = new DungeonTown(
+    'Ruins of Life',
+    GameConstants.Region.alola,
+    [
+        new RouteKillRequirement(10, GameConstants.Region.alola, 21),
+        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
+    ]
+);
+TownList['Ruins of Abundance'] = new DungeonTown(
+    'Ruins of Abundance',
+    GameConstants.Region.alola,
+    [
+        new RouteKillRequirement(10, GameConstants.Region.alola, 23),
+        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
+    ]
 );
 TownList['Ruins of Hope'] = new DungeonTown(
     'Ruins of Hope',
