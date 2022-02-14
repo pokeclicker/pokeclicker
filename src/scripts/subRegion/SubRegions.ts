@@ -35,11 +35,11 @@ SubRegions.addSubRegion(GameConstants.Region.hoenn, new SubRegion('Hoenn'));
 SubRegions.addSubRegion(GameConstants.Region.sinnoh, new SubRegion('Sinnoh'));
 SubRegions.addSubRegion(GameConstants.Region.unova, new SubRegion('Unova'));
 SubRegions.addSubRegion(GameConstants.Region.kalos, new SubRegion('Kalos'));
-SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Melemele & Akala islands', undefined, 'Hau\'oli City'));
+SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Melemele Island', undefined, 'Hau\'oli City'));
+SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Melemele & Akala islands', new GymBadgeRequirement(BadgeEnums.FightiniumZ), 'Heahea City'));
 SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Ula\'ula & Poni islands', new GymBadgeRequirement(BadgeEnums.Elite_Nihilego), 'Malie City'));
 SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar'));
 
-// SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Melemele island', undefined, 'Hau\'oli City'));
 // SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Akala island', new GymBadgeRequirement(BadgeEnums.MelemeleKahuna), 'Heahea City'));
 // SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Ula\'ula island', new GymBadgeRequirement(BadgeEnums.Elite_Nihilego), 'Malie City'));
 // SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Poni island', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation')), 'Seafolk Village'));
