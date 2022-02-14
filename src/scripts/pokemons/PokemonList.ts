@@ -525,7 +525,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 10,
         'evolutions': [
             new StoneEvolution('Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone),
-            new StoneEvolution('Pikachu', 'Alolan Raichu', GameConstants.StoneType.Thunder_stone),
+            new RegionStoneEvolution(GameConstants.Region.alola, 'Pikachu', 'Alolan Raichu', GameConstants.StoneType.Thunder_stone),
         ],
         'base': {
             'hitpoints': 35,
@@ -2395,7 +2395,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             new StoneEvolution('Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone),
-            new StoneEvolution('Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone),
+            new RegionStoneEvolution(GameConstants.Region.alola, 'Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone),
         ],
         'base': {
             'hitpoints': 60,
