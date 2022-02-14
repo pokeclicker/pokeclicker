@@ -2577,7 +2577,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 68,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Koffing', 'Weezing', 35), new LevelEvolution('Koffing', 'Galarian Weezing', 35)],
+        'evolutions': [
+            new LevelEvolution('Koffing', 'Weezing', 35),
+            new RegionLevelEvolution(GameConstants.Region.galar, 'Koffing', 'Galarian Weezing', 35),
+        ],
         'base': {
             'hitpoints': 40,
             'attack': 65,
@@ -9331,6 +9334,7 @@ const pokemonList = createPokemonArray(
             // Evolves when leveled up while knowing Mimic
             // Learns mimic at level 32
             new LevelEvolution('Mime Jr.', 'Mr. Mime', 32),
+            new RegionLevelEvolution(GameConstants.Region.galar, 'Mime Jr.', 'Galarian Mr. Mime', 32),
         ],
         'baby': true,
         'base': {
