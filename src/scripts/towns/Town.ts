@@ -2311,7 +2311,14 @@ const AltaroftheSunneandMooneShop = new TownShop([
     ItemList['Moon_stone'],
 ]);
 
+//Alola NPCs
+
+const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [
+    'Some very rare Pokémon have been sighted on {ROUTE_NAME}. I hope we can learn more about them.',
+], GameConstants.Region.alola);
+
 //Alola Towns
+
 TownList['Iki Town'] = new Town(
     'Iki Town',
     GameConstants.Region.alola,
@@ -2367,6 +2374,7 @@ TownList['Aether Paradise'] = new Town(
         dungeon: dungeonList['Aether Foundation'],
         requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
         shops: [AetherParadiseShop],
+        npcs: [AetherParadiseAlolaRoamerNPC],
     }
 );
 TownList['Malie City'] = new Town(
