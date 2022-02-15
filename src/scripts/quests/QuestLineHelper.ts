@@ -322,7 +322,6 @@ class QuestLineHelper {
         const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
 
         const clearAetherParadiseGym = new CustomQuest(1, 0, 'A strange creature has appeared in Aether Paradise. Make it go away. Clear the Aether Paradise gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Aether Paradise')]());
-        console.log('clears:', App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Aether Paradise')]());
         skullAetherAlolaQuestLine.addQuest(clearAetherParadiseGym);
 
         const clearMalieGarden = new CustomQuest(1, 0, 'Team Skull are being annoying. Get rid of them. Clear the Malie Garden dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Malie Garden')]());
