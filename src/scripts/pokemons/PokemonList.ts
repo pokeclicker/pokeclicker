@@ -523,8 +523,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone)],
-        //TODO add Alola-only evolution into Alolan Raichu using Thunderstone
+        'evolutions': [
+            new StoneEvolution('Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone),
+            new RegionStoneEvolution(GameConstants.Region.alola, 'Pikachu', 'Alolan Raichu', GameConstants.StoneType.Thunder_stone),
+        ],
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -2393,7 +2395,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             new StoneEvolution('Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone),
-            new StoneEvolution('Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone),
+            new RegionStoneEvolution(GameConstants.Region.alola, 'Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone),
         ],
         'base': {
             'hitpoints': 60,
@@ -2449,6 +2451,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             new LevelEvolution('Cubone', 'Marowak', 28),
+            // TODO: Regional restricted as well as night restricted
             TimeRestrictedLevelEvolution(18, 6, 'Cubone', 'Alolan Marowak', 28),
         ],
         'base': {
@@ -2575,7 +2578,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 68,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Koffing', 'Weezing', 35), new LevelEvolution('Koffing', 'Galarian Weezing', 35)],
+        'evolutions': [
+            new LevelEvolution('Koffing', 'Weezing', 35),
+            new RegionLevelEvolution(GameConstants.Region.galar, 'Koffing', 'Galarian Weezing', 35),
+        ],
         'base': {
             'hitpoints': 40,
             'attack': 65,
@@ -9329,6 +9335,7 @@ const pokemonList = createPokemonArray(
             // Evolves when leveled up while knowing Mimic
             // Learns mimic at level 32
             new LevelEvolution('Mime Jr.', 'Mr. Mime', 32),
+            new RegionLevelEvolution(GameConstants.Region.galar, 'Mime Jr.', 'Galarian Mr. Mime', 32),
         ],
         'baby': true,
         'base': {
