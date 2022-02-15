@@ -18,7 +18,7 @@
                     <!-- ko foreach: Array(Shards.nTypes) -->
                         <thead>
                             <tr>
-                                <th colspan="4" class="clickable text-left table-dark text-light" data-toggle="collapse" data-bind="attr: { 'href': '#collapse-shard-' + $index() }">
+                                <th colspan="4" class="clickable text-left table-dark text-light" data-toggle="collapse" data-bind="attr: { 'href': '#collapse-shard-' + $index() }, click: function() { App.game.shards.shardCollapsed[$index()] = !App.game.shards.shardCollapsed[$index()]; }">
                                     <h3>
                                         <knockout data-bind="text: PokemonType[$index()]"></knockout>
                                         <div class="float-right">
@@ -29,7 +29,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="collapse show" data-bind="attr: { id: 'collapse-shard-' + $index() }">
+                        <tbody data-bind="class: 'collapse' + (App.game.shards.shardCollapsed[$index()] ? '' : ' show'), attr: { id: 'collapse-shard-' + $index()}">
                             <!-- ko foreach: Array(Shards.nEffects) -->
                                 <tr data-bind='if: App.game.shards.isValidUpgrade($parentContext.$index(), $index())'>
                                     <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>

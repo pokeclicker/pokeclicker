@@ -152,6 +152,10 @@ namespace GameConstants {
         'Timerball',
         'Duskball',
         'Luxuryball',
+        'Diveball',
+        'Lureball',
+        'Nestball',
+        'Repeatball',
     }
     declare enum Currency {
         money,
@@ -190,8 +194,7 @@ namespace GameConstants {
         kalos,
         alola,
         galar,
-        armor,
-        crown
+        final,
     }
     declare function clipNumber(num: number, min: number, max: number): number;
     declare function expRandomElement<T>(array: T[], ratio: number): T;
