@@ -909,7 +909,10 @@ gymList['Mistralton City'] = new Gym(
     BadgeEnums.Jet,
     7600,
     'You\'re an amazing Pokémon Trainer. My Pokémon and I are happy because for the first time in quite a while--about two years, I\'d say--we could fight with our full strength. This is an official League Gym Badge. But this is just a stepping-stone.',
-    [new GymBadgeRequirement(BadgeEnums.Quake)]
+    [new GymBadgeRequirement(BadgeEnums.Quake)],
+    () => {
+        App.game.quests.getQuestLine('Quest for the DNA Splicers').beginQuest();
+    }
 );
 gymList['Opelucid City'] = new Gym(
     'Drayden',
@@ -1211,9 +1214,9 @@ gymList['Iki Town'] = new Gym(
     'Hala',
     'Iki Town',
     [
-        new GymPokemon('Machop', 2458300, 15),
-        new GymPokemon('Makuhita', 2462000, 15),
-        new GymPokemon('Crabrawler', 2462000, 16),
+        new GymPokemon('Machop', 62058739, 15),
+        new GymPokemon('Makuhita', 62058739, 15),
+        new GymPokemon('Crabrawler', 63069612, 16),
     ],
     BadgeEnums.FightiniumZ,
     128000,
@@ -1224,9 +1227,9 @@ gymList['Konikoni City'] = new Gym(
     'Olivia',
     'Konikoni City',
     [
-        new GymPokemon('Anorith', 2458300, 27),
-        new GymPokemon('Lileep', 2462000, 27),
-        new GymPokemon('Lycanroc (Midnight)', 2462000, 28),
+        new GymPokemon('Anorith', 66147743, 27),
+        new GymPokemon('Lileep', 66147743, 27),
+        new GymPokemon('Lycanroc (Midnight)', 67478674, 28),
     ],
     BadgeEnums.RockiumZ,
     128000,
@@ -1236,7 +1239,7 @@ gymList['Konikoni City'] = new Gym(
 gymList['Aether Paradise'] = new Gym(
     'Ultra Wormhole',
     'Aether Paradise',
-    [new GymPokemon('???', 2458300, 27)],
+    [new GymPokemon('???', 132295486, 27)],
     BadgeEnums.Elite_Nihilego,
     128000,
     'The creature escaped back into the ultra wormhole.',
@@ -1246,9 +1249,9 @@ gymList['Malie City'] = new Gym(
     'Nanu',
     'Malie City',
     [
-        new GymPokemon('Sableye', 2458300, 43),
-        new GymPokemon('Krokorok', 2462000, 43),
-        new GymPokemon('Alolan Persian', 2462000, 44),
+        new GymPokemon('Sableye', 70650480, 43),
+        new GymPokemon('Krokorok', 70650480, 43),
+        new GymPokemon('Alolan Persian', 71735104, 44),
     ],
     BadgeEnums.DarkiniumZ,
     128000,
@@ -1258,33 +1261,33 @@ gymList['Malie City'] = new Gym(
 gymList['Altar of the Sunne and Moone'] = new Gym(
     'Ultra Megalopolis',
     'Altar of the Sunne and Moone',
-    [new GymPokemon('Necrozma (Ultra)', 2458300, 60)],
+    [new GymPokemon('Necrozma (Ultra)', 141300960, 60)],
     BadgeEnums.Elite_UltraNecrozma,
     128000,
-    'Necrozma fled. It left something behind.',
+    'Necrozma fled.',
     [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)]
 );
 gymList['Seafolk Village'] = new Gym(
     'Mina',
     'Seafolk Village',
     [
-        new GymPokemon('Mawile', 2458300, 51),
-        new GymPokemon('Granbull', 2462000, 51),
-        new GymPokemon('Ribombee', 2462000, 51),
+        new GymPokemon('Mawile', 74749379, 51),
+        new GymPokemon('Granbull', 74749379, 51),
+        new GymPokemon('Ribombee', 75838262, 51),
     ],
     BadgeEnums.FairiumZ,
     128000,
     'Woah! I\'m shocked at your strength!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Nebby'))]
+    [new GymBadgeRequirement(BadgeEnums.Elite_UltraNecrozma)]
 );
 gymList['Exeggutor Island'] = new Gym(
     'Hapu',
     'Exeggutor Island',
     [
-        new GymPokemon('Golurk', 2458300, 53),
-        new GymPokemon('Gastrodon (east)', 2462000, 53),
-        new GymPokemon('Flygon', 2462000, 53),
-        new GymPokemon('Mudsdale', 2462000, 54),
+        new GymPokemon('Golurk', 76658268, 53),
+        new GymPokemon('Gastrodon (east)', 76658268, 53),
+        new GymPokemon('Flygon', 76658268, 53),
+        new GymPokemon('Mudsdale', 77747374, 54),
     ],
     BadgeEnums.GroundiumZ,
     128000,
@@ -1425,11 +1428,11 @@ gymList['Elite Molayne'] = new Gym(
     'Molayne',
     'Elite Molayne',
     [
-        new GymPokemon('Klefki', 1945330, 56),
-        new GymPokemon('Bisharp', 1948300, 56),
-        new GymPokemon('Magnezone', 1952000, 56),
-        new GymPokemon('Metagross', 1957000, 56),
-        new GymPokemon('Alolan Dugtrio', 1957000, 57),
+        new GymPokemon('Klefki', 85547357, 56),
+        new GymPokemon('Bisharp', 85547357, 56),
+        new GymPokemon('Magnezone', 85547357, 56),
+        new GymPokemon('Metagross', 85547357, 56),
+        new GymPokemon('Alolan Dugtrio', 86456446, 57),
     ],
     BadgeEnums.Elite_Molayne,
     64000,
@@ -1440,11 +1443,11 @@ gymList['Elite Olivia'] = new Gym(
     'Olivia',
     'Elite Olivia',
     [
-        new GymPokemon('Armaldo', 1945330, 56),
-        new GymPokemon('Cradily', 1948300, 56),
-        new GymPokemon('Gigalith', 1952000, 56),
-        new GymPokemon('Probopass', 1957000, 56),
-        new GymPokemon('Lycanroc (Midnight)', 1957000, 57),
+        new GymPokemon('Armaldo', 85547357, 56),
+        new GymPokemon('Cradily', 85547357, 56),
+        new GymPokemon('Gigalith', 85547357, 56),
+        new GymPokemon('Probopass', 85547357, 56),
+        new GymPokemon('Lycanroc (Midnight)', 86456446, 57),
     ],
     BadgeEnums.Elite_Olivia,
     64000,
@@ -1455,11 +1458,11 @@ gymList['Elite Acerola'] = new Gym(
     'Acerola',
     'Elite Acerola',
     [
-        new GymPokemon('Banette', 1945330, 56),
-        new GymPokemon('Drifblim', 1948300, 56),
-        new GymPokemon('Dhelmise', 1952000, 56),
-        new GymPokemon('Froslass', 1957000, 56),
-        new GymPokemon('Palossand', 1957000, 57),
+        new GymPokemon('Banette', 85547357, 56),
+        new GymPokemon('Drifblim', 85547357, 56),
+        new GymPokemon('Dhelmise', 85547357, 56),
+        new GymPokemon('Froslass', 85547357, 56),
+        new GymPokemon('Palossand', 86456446, 57),
     ],
     BadgeEnums.Elite_Acerola,
     64000,
@@ -1470,11 +1473,11 @@ gymList['Elite Kahili'] = new Gym(
     'Kahili',
     'Elite Kahili',
     [
-        new GymPokemon('Braviary', 1945330, 56),
-        new GymPokemon('Hawlucha', 1948300, 56),
-        new GymPokemon('Oricorio (Baile)', 1952000, 56),
-        new GymPokemon('Mandibuzz', 1957000, 56),
-        new GymPokemon('Toucannon', 1957000, 57),
+        new GymPokemon('Braviary', 85547357, 56),
+        new GymPokemon('Hawlucha', 85547357, 56),
+        new GymPokemon('Oricorio (Baile)', 85547357, 56),
+        new GymPokemon('Mandibuzz', 85547357, 56),
+        new GymPokemon('Toucannon', 86456446, 57),
     ],
     BadgeEnums.Elite_Kahili,
     64000,
@@ -1594,7 +1597,7 @@ gymList['Hammerlocke'] = new Gym(
     128000,
     'I might have lost, but I still look good. Maybe I should snap a quick selfie...',
     [
-        new RouteKillRequirement(20, GameConstants.Region.galar, 22),
+        new RouteKillRequirement(10, GameConstants.Region.galar, 22),
         new GymBadgeRequirement(BadgeEnums.Galar_Dark),
     ]
 );
@@ -1612,6 +1615,23 @@ gymList['Trainer Marnie'] = new Gym(
     64000,
     'I mean, If you\'re gonna win, you could at least win in a way that makes me look good, right?',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))]
+);
+gymList['Trainer Hop'] = new Gym(
+    'Hop',
+    'Trainer Hop',
+    [
+        new GymPokemon('Dubwool', 1945330, 49),
+        new GymPokemon('Cramorant', 1948300, 49),
+        new GymPokemon('Pincurchin', 1952000, 50),
+        new GymPokemon('Snorlax', 1957000, 51),
+        new GymPokemon('Corviknight', 1945330, 50),
+        // TODO: Change based on starter
+        new GymPokemon('Inteleon', 2015330, 60),
+    ],
+    BadgeEnums.Elite_Hop,
+    64000,
+    'Thanks, mate. I\'m really glad you were the one here with me.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Marnie)]
 );
 gymList['Trainer Bede'] = new Gym(
     'Bede',
