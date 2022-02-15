@@ -344,7 +344,7 @@ class QuestLineHelper {
             });
         };
 
-        const clearAltaroftheSunnandMooneGym = new CustomQuest(1, AltaroftheSunnandMooneGymReward, 'Stop the Eather of Light from absorbing all light in Alola. Clear the Altar of the Sunne and Moone gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Altar of the Sunne and Moone')](), App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Altar of the Sunne and Moone')]());
+        const clearAltaroftheSunnandMooneGym = new CustomQuest(1, AltaroftheSunnandMooneGymReward, 'Stop the Eather of Light from absorbing all light in Alola. Clear the Altar of the Sunne and Moone gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Altar of the Sunne and Moone')]());
         console.log('clears:', App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Altar of the Sunne and Moone')]());
         skullAetherAlolaQuestLine.addQuest(clearAltaroftheSunnandMooneGym);
 
