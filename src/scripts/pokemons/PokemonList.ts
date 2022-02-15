@@ -435,7 +435,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Dark, PokemonType.Normal],
         'levelType': LevelType.mediumfast,
         'exp': 145,
-        'eggCycles': 15,
+        'eggCycles': 23,
         'base': {
             'hitpoints': 75,
             'attack': 71,
@@ -523,8 +523,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone)],
-        //TODO add Alola-only evolution into Alolan Raichu using Thunderstone
+        'evolutions': [
+            new StoneEvolution('Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone),
+            new RegionStoneEvolution(GameConstants.Region.alola, 'Pikachu', 'Alolan Raichu', GameConstants.StoneType.Thunder_stone),
+        ],
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -2393,7 +2395,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             new StoneEvolution('Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone),
-            new StoneEvolution('Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone),
+            new RegionStoneEvolution(GameConstants.Region.alola, 'Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone),
         ],
         'base': {
             'hitpoints': 60,
@@ -2449,6 +2451,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             new LevelEvolution('Cubone', 'Marowak', 28),
+            // TODO: Regional restricted as well as night restricted
             TimeRestrictedLevelEvolution(18, 6, 'Cubone', 'Alolan Marowak', 28),
         ],
         'base': {
@@ -2505,7 +2508,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Fire, PokemonType.Ghost],
         'levelType': LevelType.mediumfast,
         'exp': 149,
-        'eggCycles': 20,
+        'eggCycles': 30,
         'base': {
             'hitpoints': 60,
             'attack': 80,
@@ -2575,7 +2578,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 68,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Koffing', 'Weezing', 35), new LevelEvolution('Koffing', 'Galarian Weezing', 35)],
+        'evolutions': [
+            new LevelEvolution('Koffing', 'Weezing', 35),
+            new RegionLevelEvolution(GameConstants.Region.galar, 'Koffing', 'Galarian Weezing', 35),
+        ],
         'base': {
             'hitpoints': 40,
             'attack': 65,
@@ -9329,6 +9335,7 @@ const pokemonList = createPokemonArray(
             // Evolves when leveled up while knowing Mimic
             // Learns mimic at level 32
             new LevelEvolution('Mime Jr.', 'Mr. Mime', 32),
+            new RegionLevelEvolution(GameConstants.Region.galar, 'Mime Jr.', 'Galarian Mr. Mime', 32),
         ],
         'baby': true,
         'base': {
@@ -16039,7 +16046,7 @@ const pokemonList = createPokemonArray(
         'id': 735.01,
         'name': 'Totem Gumshoos',
         'type': [PokemonType.Normal],
-        'eggCycles': 15,
+        'eggCycles': 23,
         'levelType': LevelType.mediumfast,
         'exp': 146,
         'catchRate': 127,
@@ -16109,7 +16116,7 @@ const pokemonList = createPokemonArray(
         'id': 738.01,
         'name': 'Totem Vikavolt',
         'type': [PokemonType.Bug, PokemonType.Electric],
-        'eggCycles': 15,
+        'eggCycles': 35,
         'levelType': LevelType.mediumfast,
         'exp': 225,
         'catchRate': 45,
@@ -16494,7 +16501,7 @@ const pokemonList = createPokemonArray(
         'id': 752.01,
         'name': 'Totem Araquanid',
         'type': [PokemonType.Water, PokemonType.Bug],
-        'eggCycles': 15,
+        'eggCycles': 23,
         'levelType': LevelType.mediumfast,
         'exp': 159,
         'catchRate': 100,
@@ -16546,7 +16553,7 @@ const pokemonList = createPokemonArray(
         'id': 754.01,
         'name': 'Totem Lurantis',
         'type': [PokemonType.Grass],
-        'eggCycles': 20,
+        'eggCycles': 30,
         'levelType': LevelType.mediumfast,
         'exp': 168,
         'catchRate': 75,
@@ -16633,7 +16640,7 @@ const pokemonList = createPokemonArray(
         'id': 758.01,
         'name': 'Totem Salazzle',
         'type': [PokemonType.Poison, PokemonType.Fire],
-        'eggCycles': 20,
+        'eggCycles': 30,
         'levelType': LevelType.mediumfast,
         'exp': 168,
         'catchRate': 45,
@@ -17258,7 +17265,7 @@ const pokemonList = createPokemonArray(
         'id': 784.01,
         'name': 'Totem Kommo-o',
         'type': [PokemonType.Dragon, PokemonType.Fighting],
-        'eggCycles': 40,
+        'eggCycles': 90,
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 45,
