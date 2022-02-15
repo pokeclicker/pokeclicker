@@ -2451,6 +2451,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             new LevelEvolution('Cubone', 'Marowak', 28),
+            // TODO: Regional restricted as well as night restricted
             TimeRestrictedLevelEvolution(18, 6, 'Cubone', 'Alolan Marowak', 28),
         ],
         'base': {
