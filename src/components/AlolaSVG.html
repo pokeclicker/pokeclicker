@@ -385,8 +385,17 @@
     <!--Route 2-->
     <%- include('templates/mapRoute',
         { route: 2, region: 6
-        , width: 3, height: 5
+        , width: 2, height: 5
         , x: 13, y: 11
+        , noText: true
+        })
+    %>
+
+    <!--Route 2-->
+    <%- include('templates/mapRoute',
+        { route: 2, region: 6
+        , width: 1, height: 2
+        , x: 15, y: 14
         , noText: true
         })
     %>
@@ -573,8 +582,8 @@
     <!--Route 3 extension-->
     <%- include('templates/mapRoute',
         { route: 3, region: 6
-        , width: 2, height: 7
-        , x: 46, y: 16
+        , width: 2, height: 5
+        , x: 46, y: 17
         , noText: true
         })
     %>
@@ -582,8 +591,26 @@
     <!--Route 3 extension-->
     <%- include('templates/mapRoute',
         { route: 3, region: 6
-        , width: 2, height: 3
+        , width: 1, height: 1
+        , x: 47, y: 22
+        , noText: true
+        })
+    %>
+
+    <!--Route 3 extension-->
+    <%- include('templates/mapRoute',
+        { route: 3, region: 6
+        , width: 2, height: 4
         , x: 45.5, y: 13
+        , noText: true
+        })
+    %>
+
+    <!--Route 3 extension-->
+    <%- include('templates/mapRoute',
+        { route: 3, region: 6
+        , width: 0.5, height: 1
+        , x: 47.5, y: 16
         , noText: true
         })
     %>
