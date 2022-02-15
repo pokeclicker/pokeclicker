@@ -32,12 +32,11 @@ export enum Region {
     kalos = 5,
     alola = 6,
     galar = 7,
-    // TODO: figure out a better way to handle DLC/non main regions
-    armor = 8,
-    crown = 9,
+    // Throws an error if no region after the final region
+    final = 8,
 }
 
-export const MAX_AVAILABLE_REGION = Region.kalos;
+export const MAX_AVAILABLE_REGION = Region.alola;
 
 export const TotalPokemonsPerRegion = [
     151, // 151 - Kanto
@@ -47,11 +46,7 @@ export const TotalPokemonsPerRegion = [
     649, // 156 - Unova
     721, // 72 - Kalos
     809, // 88 - Alola
-    890, // 81 - Galar
-    // TODO: figure out a better way to handle DLC/non main regions
-    893, // 3 - Armor
-    898, // 5 - Crown
-
+    898, // 89 - Galar
 ];
 
 export const ITEM_USE_TIME = 30;
@@ -1039,7 +1034,6 @@ export const AlolaDungeons = [
     'Melemele Meadow',
     'Seaward Cave',
     'Ten Carat Hill',
-    'Ruins of Conflict',
     'Pikachu Valley',
     'Paniola Ranch',
     'Brooklet Hill',
@@ -1047,17 +1041,18 @@ export const AlolaDungeons = [
     'Lush Jungle',
     'Diglett\'s Tunnel',
     'Memorial Hill',
-    'Ruins of Life',
     'Malie Garden',
     'Hokulani Observatory',
     'Thrifty Megamart',
     'Ula\'ula Meadow',
     'Po Town',
-    'Mount Lanakila',
-    'Ruins of Abundance',
     'Aether Foundation',
     'Vast Poni Canyon',
+    'Mount Lanakila',
     'Lake of the Sunne and Moone',
+    'Ruins of Conflict',
+    'Ruins of Life',
+    'Ruins of Abundance',
     'Ruins of Hope',
     'Poni Meadow',
     'Resolution Cave',

@@ -120,7 +120,7 @@ class QuestLineHelper {
         undergroundQuestLine.addQuest(buyExplorerKit);
 
         // Mine 5 layers in the Unerground
-        const OldAmberReward = () => {
+        const oldAmberReward = () => {
             // Gain an Old Amber
             const oldAmber = UndergroundItem.list.find(item => item.name == 'Old Amber');
             if (!oldAmber) {
@@ -134,21 +134,21 @@ class QuestLineHelper {
                 timeout: GameConstants.MINUTE,
             });
         };
-        const mineLayers = new CustomQuest(5, OldAmberReward, 'Mine 5 layers in the Underground', App.game.statistics.undergroundLayersMined);
+        const mineLayers = new CustomQuest(5, oldAmberReward, 'Mine 5 layers in the Underground', App.game.statistics.undergroundLayersMined);
         undergroundQuestLine.addQuest(mineLayers);
 
         App.game.quests.questLines().push(undergroundQuestLine);
     }
 
     public static createVivillonQuestLine() {
-        const VivillonQuestLine = new QuestLine('The Great Vivillon Hunt!', 'Discover the beauty of Vivillon');
+        const vivillonQuestLine = new QuestLine('The Great Vivillon Hunt!', 'Discover the beauty of Vivillon');
 
         const createVivillonQuest = (type: PokemonType, vivillon: PokemonNameType, dungeons: Array<string>, hint: string) => {
             // Capture 100 Water type Pokemon
             const catchType = new CustomQuest(100, undefined, `Capture 100 ${PokemonType[type]} type Pokémon`, () => {
                 return pokemonMap.filter(p => p.type.includes(type)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
             });
-            VivillonQuestLine.addQuest(catchType);
+            vivillonQuestLine.addQuest(catchType);
 
             // Capture Vivillon in a dungeon
             const vivillonAdd = () => {
@@ -156,7 +156,7 @@ class QuestLineHelper {
                     dungeonList[dungeon].bossList.push(new DungeonBossPokemon(vivillon, 93659450, 80));
                 });
                 Notifier.notify({
-                    title: VivillonQuestLine.name,
+                    title: vivillonQuestLine.name,
                     message: `A Vivillon is hiding somewhere.\n${hint}`,
                     type: NotificationConstants.NotificationOption.info,
                 });
@@ -166,7 +166,7 @@ class QuestLineHelper {
                     dungeonList[dungeon].bossList = dungeonList[dungeon].bossList.filter(boss => boss.name != vivillon);
                 });
                 Notifier.notify({
-                    title: VivillonQuestLine.name,
+                    title: vivillonQuestLine.name,
                     message: `You caught the rare ${vivillon}`,
                     type: NotificationConstants.NotificationOption.success,
                 });
@@ -179,7 +179,7 @@ class QuestLineHelper {
                 undefined,
                 vivillonAdd
             );
-            VivillonQuestLine.addQuest(catchVivillon);
+            vivillonQuestLine.addQuest(catchVivillon);
         };
 
         createVivillonQuest(PokemonType.Water, 'Vivillon (Marine)', ['Lake Verity', 'Lake Valor', 'Lake Acuity'], 'It has been spotted at some Lakes.');
@@ -204,89 +204,118 @@ class QuestLineHelper {
         const catchNormal = new CustomQuest(200, undefined, 'Capture 200 Normal type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Normal)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
-        VivillonQuestLine.addQuest(catchNormal);
+        vivillonQuestLine.addQuest(catchNormal);
 
         // Capture Vivillon (Pokéball)
-        const ViviBallAdd = () => {
+        const viviBallAdd = () => {
             BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(666, 'Vivillon (Pokéball)'));
             Notifier.notify({
-                title: VivillonQuestLine.name,
+                title: vivillonQuestLine.name,
                 message: 'A Vivillon is hiding somewhere.\nOnly the strongest Challengers can reach it.',
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const ViviBalldone = () => {
+        const viviBalldone = () => {
             Notifier.notify({
-                title: VivillonQuestLine.name,
+                title: vivillonQuestLine.name,
                 message: 'You caught the last rare Vivillon (Pokéball).\nCongratulations!',
                 type: NotificationConstants.NotificationOption.success,
             });
         };
         const catchBall = new CustomQuest(
             1,
-            ViviBalldone,
+            viviBalldone,
             'Find and capture the rare Vivillon!\nHint: Only the strongest Challengers can reach it.',
             App.game.statistics.pokemonCaptured[666.01],
             undefined,
-            ViviBallAdd
+            viviBallAdd
         );
-        VivillonQuestLine.addQuest(catchBall);
+        vivillonQuestLine.addQuest(catchBall);
 
         // Add quest to quest line
-        App.game.quests.questLines().push(VivillonQuestLine);
+        App.game.quests.questLines().push(vivillonQuestLine);
     }
 
-    public static createRocketjohtoQuestLine() {
-        const RocketjohtoQuestLine = new QuestLine('Team Rocket Again', 'Team Rocket is up to no good again!');
+    public static createRocketJohtoQuestLine() {
+        const rocketJohtoQuestLine = new QuestLine('Team Rocket Again', 'Team Rocket is up to no good again!');
 
-        const clearTeamRocketHideout = new CustomQuest(1, 0, 'Clear the Team Rockets Hideout dungeon in Mahogany Town', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Rockets Hideout')](), 0);
-        RocketjohtoQuestLine.addQuest(clearTeamRocketHideout);
+        const clearTeamRocketHideout = new CustomQuest(1, 0, 'Clear the Team Rockets Hideout dungeon in Mahogany Town', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Rockets Hideout')]());
+        rocketJohtoQuestLine.addQuest(clearTeamRocketHideout);
 
-        const RadiotowerReward = () => {
+        const radioTowerReward = () => {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
             Notifier.notify({
-                title: RocketjohtoQuestLine.name,
+                title: rocketJohtoQuestLine.name,
                 message: 'The grateful radio director gave you a Masterball!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
         };
 
-        const clearRadioTower = new CustomQuest(1, RadiotowerReward, 'Clear the Radio Tower dungeon in Goldenrod City', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')](), 0);
-        RocketjohtoQuestLine.addQuest(clearRadioTower);
+        const clearRadioTower = new CustomQuest(1, radioTowerReward, 'Clear the Radio Tower dungeon in Goldenrod City', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')]());
+        rocketJohtoQuestLine.addQuest(clearRadioTower);
 
-        App.game.quests.questLines().push(RocketjohtoQuestLine);
+        App.game.quests.questLines().push(rocketJohtoQuestLine);
     }
 
-    public static createAquaMagmahoennQuestLine() {
-        const AquaMagmahoennQuestLine = new QuestLine('Land vs Water', 'Put a stop to the schemes of Team Aqua and Team Magma');
+    public static createAquaMagmaHoennQuestLine() {
+        const aquaMagmaHoennQuestLine = new QuestLine('Land vs Water', 'Put a stop to the schemes of Team Aqua and Team Magma');
 
-        const clearMtChimney = new CustomQuest(1, 0, 'Stop Team Magma at Mt. Chimney', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Chimney')](), 0);
-        AquaMagmahoennQuestLine.addQuest(clearMtChimney);
+        const clearMtChimney = new CustomQuest(1, 0, 'Stop Team Magma at Mt. Chimney', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Chimney')]());
+        aquaMagmaHoennQuestLine.addQuest(clearMtChimney);
 
-        const clearWeatherInstitute = new CustomQuest(1, 0, 'Stop Team Aqua at the Weather Institute', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Weather Institute')](), 0);
-        AquaMagmahoennQuestLine.addQuest(clearWeatherInstitute);
+        const clearWeatherInstitute = new CustomQuest(1, 0, 'Stop Team Aqua at the Weather Institute', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Weather Institute')]());
+        aquaMagmaHoennQuestLine.addQuest(clearWeatherInstitute);
 
-        const clearMagmaHideout = new CustomQuest(1, 0, 'Raid the Team Magma hideout', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Magma Hideout')](), 0);
-        AquaMagmahoennQuestLine.addQuest(clearMagmaHideout);
+        const clearMagmaHideout = new CustomQuest(1, 0, 'Raid the Team Magma hideout', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Magma Hideout')]());
+        aquaMagmaHoennQuestLine.addQuest(clearMagmaHideout);
 
-        const clearAquaHideout = new CustomQuest(1, 0, 'Raid the Team Aqua hideout', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aqua Hideout')](), 0);
-        AquaMagmahoennQuestLine.addQuest(clearAquaHideout);
+        const clearAquaHideout = new CustomQuest(1, 0, 'Raid the Team Aqua hideout', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aqua Hideout')]());
+        aquaMagmaHoennQuestLine.addQuest(clearAquaHideout);
 
-        const SeafloorcavernReward = () => {
+        const seafloorCavernReward = () => {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
             Notifier.notify({
-                title: AquaMagmahoennQuestLine.name,
+                title: aquaMagmaHoennQuestLine.name,
                 message: 'You found a Masterball!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
         };
 
-        const clearSeafloorCavern = new CustomQuest(1, SeafloorcavernReward, 'Team Aqua\'s leader Archie escaped from their hideout. Find him in the Seafloor Cavern and put a stop to this once and for all', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seafloor Cavern')](), 0);
-        AquaMagmahoennQuestLine.addQuest(clearSeafloorCavern);
+        const clearSeafloorCavern = new CustomQuest(1, seafloorCavernReward, 'Team Aqua\'s leader Archie escaped from their hideout. Find him in the Seafloor Cavern and put a stop to this once and for all', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seafloor Cavern')]());
+        aquaMagmaHoennQuestLine.addQuest(clearSeafloorCavern);
 
-        App.game.quests.questLines().push(AquaMagmahoennQuestLine);
+        App.game.quests.questLines().push(aquaMagmaHoennQuestLine);
+    }
+
+    public static createPlasmaUnovaQuestLine() {
+        const plasmaUnovaQuestLine = new QuestLine('Quest for the DNA Splicers', 'Prevent Team Plasma from using these dangerous Splicers');
+
+        const clearOpelucidGym = new CustomQuest(1, 0, 'Defeat the Opelucid City gym leader to obtain the DNA Splicers', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')](), App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]());
+        console.log('clears:', App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]());
+        plasmaUnovaQuestLine.addQuest(clearOpelucidGym);
+
+        const clearTeamPlasmaAssault = new CustomQuest(1, 0, 'Zinzolin has stolen the DNA Splicers and is assaulting the city with his army of grunts and shadows! Defend against the Team Plasma Assault in Opelucid City!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Plasma Assault')]());
+        plasmaUnovaQuestLine.addQuest(clearTeamPlasmaAssault);
+
+        const clearPlasmaFrigate = new CustomQuest(1, 0, 'Zinzolin has fled the scene with the stolen DNA Splicers. Find and clear out the Plasma Frigate', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]());
+        plasmaUnovaQuestLine.addQuest(clearPlasmaFrigate);
+
+        const giantChasmReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            Notifier.notify({
+                title: plasmaUnovaQuestLine.name,
+                message: 'You found a Masterball!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearGiantChasm = new CustomQuest(1, giantChasmReward, 'Team Plasma\'s leader Ghetsis plans on using the DNA Splicers on Kyurem in Giant Chasm. Clear the dungeon to end his evil plans.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]());
+        plasmaUnovaQuestLine.addQuest(clearGiantChasm);
+
+        App.game.quests.questLines().push(plasmaUnovaQuestLine);
     }
 
     public static isQuestLineCompleted(name: string) {
@@ -298,7 +327,8 @@ class QuestLineHelper {
         this.createDeoxysQuestLine();
         this.createUndergroundQuestLine();
         this.createVivillonQuestLine();
-        this.createRocketjohtoQuestLine();
-        this.createAquaMagmahoennQuestLine();
+        this.createRocketJohtoQuestLine();
+        this.createAquaMagmaHoennQuestLine();
+        this.createPlasmaUnovaQuestLine();
     }
 }

@@ -2482,5 +2482,20 @@
         , width: 4, height: 3
         })
     %>
+
+    <!-- ------------------ -->
+    <!-- PLACES OF INTEREST -->
+    <!-- ------------------ -->
+
+    <!-- TODO: REMOVE IF UB QUESTLINE GETS MERGED -->
+    <%- include('templates/mapOverlay',
+        { name: "Access Denied - Future Content"
+        , x: 36, y: 30
+        , width: 4, height: 3
+        , databind: "click:function(){MapHelper.moveToTown('Seafolk Village')}, attr:{ class: MapHelper.calculateTownCssClass('Seafolk Village') }"
+        , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Poni Meadow')]() >= 1"
+        , image: "assets/images/map/transparent.png"
+        })
+    %>
     <!-- /ko -->
 </g>
