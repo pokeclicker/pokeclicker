@@ -1140,12 +1140,20 @@
     <!-- TOWNS -->
     <!-- ----- -->
 
+    <!--Iki Town Outskirts-->
+    <%- include('templates/mapTown',
+        { name: "Iki Town Outskirts"
+        , x: 67, y: 29.5
+        , width: 5, height: 4.5
+        , home: true
+        })
+    %>
+
     <!--Iki Town-->
     <%- include('templates/mapTown',
         { name: "Iki Town"
         , x: 32, y: 16
         , width: 13, height: 8
-        , home: true
         })
     %>
 
@@ -1154,7 +1162,14 @@
         { name: "Iki Town"
         , x: 31, y: 16
         , width: 1, height: 7
-        , home: true
+        })
+    %>
+
+    <!--Professor Kukui\'s Lab-->
+    <%- include('templates/mapTown',
+        { name: "Professor Kukui\'s Lab"
+        , x: 71, y: 37
+        , width: 4, height: 4
         })
     %>
 
@@ -1227,6 +1242,30 @@
         { name: "Hau'oli City"
         , x: 10, y: 29
         , width: 3, height: 1
+        })
+    %>
+
+    <!--Hau'oli City Extension-->
+    <%- include('templates/mapTown',
+        { name: "Hau'oli City"
+        , x: 37, y: 32.5
+        , width: 5, height: 3.5
+        })
+    %>
+
+    <!--Hau'oli City Extension-->
+    <%- include('templates/mapTown',
+        { name: "Hau'oli City"
+        , x: 42, y: 34.5
+        , width: 5, height: 3.5
+        })
+    %>
+
+    <!--Roadside Motel-->
+    <%- include('templates/mapTown',
+        { name: "Roadside Motel"
+        , x: 5, y: 14.5
+        , width: 5, height: 5.5
         })
     %>
 
