@@ -145,6 +145,24 @@ class Item {
         return false;
     }
 
+    checkCanUse(): boolean {
+        if (!player.itemList[this.name]()) {
+            Notifier.notify({
+                message: `You don't have any ${ItemList[this.name].displayName}s left...`,
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+        return true;
+    }
+
+    canUse(): boolean {
+        if (this.checkCanUse() == false) {
+            return false;
+        }
+        return true;
+    }
+
     isAvailable(): boolean {
         return true;
     }

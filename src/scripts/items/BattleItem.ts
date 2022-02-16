@@ -21,6 +21,23 @@ class BattleItem extends Item {
         return true;
     }
 
+    checkCanUse(): boolean {
+        if (App.game.challenges.list.disableBattleItems.active()) {
+            Notifier.notify({
+                title: 'Challenge Mode',
+                message: 'Battle Items are disabled',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+        if (!player.itemList[this.name]()) {
+            Notifier.notify({
+                message: `You don't have any ${ItemList[this.name].displayName}s left...`,
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+    }
 }
 
 ItemList['xAttack']         = new BattleItem(GameConstants.BattleItemType.xAttack, '+50% Bonus to Pokémon attack', 600, undefined, undefined, 'pokemonAttack', 1.5);

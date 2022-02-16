@@ -1,14 +1,15 @@
-class ShardDeal {
-    public shards: { shardType: ShardType, amount: number}[];
-    public item: { itemType: Item, amount: number};
+type ShardCost = {
+    shardType: ShardType,
+    amount: number,
+}
 
+class ShardDeal {
+    public shards: ShardCost[];
+    public item: { itemType: Item, amount: number};
     public static list: Record<GameConstants.Region, KnockoutObservableArray<ShardDeal>> = {};
 
-    constructor(shard: ShardType[], shardAmount: number[], item: Item, itemAmount: number) {
-        this.shards = [];
-        shard.forEach((shard, idx) => {
-            this.shards.push({shardType: shard, amount: shardAmount[idx]});
-        });
+    constructor(shardCosts: ShardCost[], item: Item, itemAmount: number) {
+        this.shards = shardCosts;
         this.item = {itemType: item, amount: itemAmount};
     }
 
@@ -32,84 +33,54 @@ class ShardDeal {
 
         list.push(new ShardDeal(
             [
-                ShardType['Fighting'],
-                ShardType['Fire'],
-                ShardType['Poison'],
-            ],
-            [
-                1000,
-                1000,
-                1000,
+                {shardType: ShardType['Fire'], amount: 1000},
+                {shardType: ShardType['Fighting'], amount: 1000},
+                {shardType: ShardType['Poison'], amount: 1000},
             ],
             ItemList['Red_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                ShardType['Normal'],
-                ShardType['Bug'],
-                ShardType['Rock'],
-            ],
-            [
-                1000,
-                1000,
-                1000,
+                {shardType: ShardType['Normal'], amount: 1000},
+                {shardType: ShardType['Bug'], amount: 1000},
+                {shardType: ShardType['Rock'], amount: 1000},
             ],
             ItemList['White_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                ShardType['Normal'],
-                ShardType['Flying'],
-                ShardType['Poison'],
-            ],
-            [
-                1000,
-                1000,
-                1000,
+                {shardType: ShardType['Normal'], amount: 1000},
+                {shardType: ShardType['Flying'], amount: 1000},
+                {shardType: ShardType['Poison'], amount: 1000},
             ],
             ItemList['Black_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                ShardType['Dark'],
-                ShardType['Electric'],
-                ShardType['Steel'],
-            ],
-            [
-                1000,
-                1000,
-                1000,
+                {shardType: ShardType['Dark'], amount: 1000},
+                {shardType: ShardType['Electric'], amount: 1000},
+                {shardType: ShardType['Steel'], amount: 1000},
             ],
             ItemList['Yellow_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                ShardType['Dark'],
-                ShardType['Ghost'],
-                ShardType['Ice'],
-            ],
-            [
-                1000,
-                1000,
-                1000,
+                {shardType: ShardType['Dark'], amount: 1000},
+                {shardType: ShardType['Ghost'], amount: 1000},
+                {shardType: ShardType['Ice'], amount: 1000},
             ],
             ItemList['Blue_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                ShardType['Fighting'],
-                ShardType['Ice'],
-                ShardType['Fairy'],
-            ],
-            [
-                1000,
-                1000,
-                1000,
+                {shardType: ShardType['Fighting'], amount: 1000},
+                {shardType: ShardType['Ice'], amount: 1000},
+                {shardType: ShardType['Fairy'], amount: 1000},
             ],
             ItemList['Poke_Flute'],
             1
@@ -122,84 +93,54 @@ class ShardDeal {
 
         list.push(new ShardDeal(
             [
-                ShardType['Dragon'],
-                ShardType['Ghost'],
-                ShardType['Psychic'],
-            ],
-            [
-                1000,
-                1000,
-                1000,
+                {shardType: ShardType['Dragon'], amount: 1000},
+                {shardType: ShardType['Ghost'], amount: 1000},
+                {shardType: ShardType['Psychic'], amount: 1000},
             ],
             ItemList['Azure_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                ShardType['Flying'],
-                ShardType['Dragon'],
-                ShardType['Psychic'],
-            ],
-            [
-                1000,
-                1000,
-                1000,
+                {shardType: ShardType['Flying'], amount: 1000},
+                {shardType: ShardType['Dragon'], amount: 1000},
+                {shardType: ShardType['Psychic'], amount: 1000},
             ],
             ItemList['Eon_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                ShardType['Fire'],
-                ShardType['Ground'],
-                ShardType['Water'],
-            ],
-            [
-                1000,
-                1000,
-                1000,
+                {shardType: ShardType['Fire'], amount: 1000},
+                {shardType: ShardType['Ground'], amount: 1000},
+                {shardType: ShardType['Water'], amount: 1000},
             ],
             ItemList['Sun_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                ShardType['Rock'],
-                ShardType['Ground'],
-                ShardType['Electric'],
-            ],
-            [
-                1000,
-                1000,
-                1000,
+                {shardType: ShardType['Rock'], amount: 1000},
+                {shardType: ShardType['Ground'], amount: 1000},
+                {shardType: ShardType['Electric'], amount: 1000},
             ],
             ItemList['Moon_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                ShardType['Grass'],
-                ShardType['Psychic'],
-                ShardType['Water'],
-            ],
-            [
-                1000,
-                1000,
-                1000,
+                {shardType: ShardType['Grass'], amount: 1000},
+                {shardType: ShardType['Psychic'], amount: 1000},
+                {shardType: ShardType['Water'], amount: 1000},
             ],
             ItemList['Time_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                ShardType['Grass'],
-                ShardType['Bug'],
-                ShardType['Fairy'],
-            ],
-            [
-                1000,
-                1000,
-                1000,
+                {shardType: ShardType['Grass'], amount: 1000},
+                {shardType: ShardType['Bug'], amount: 1000},
+                {shardType: ShardType['Fairy'], amount: 1000},
             ],
             ItemList['Grass_Flute'],
             1

@@ -8,38 +8,7 @@ class ItemHandler {
 
     public static useItem(name: string, amount = 1): boolean {
 
-        if (!player.itemList[name]() && ItemList[name] instanceof BattleItem) {
-            Notifier.notify({
-                message: `You don't have any ${ItemList[name].displayName}s left...`,
-                type: NotificationConstants.NotificationOption.danger,
-            });
-            return false;
-        }
-
-        if (ItemList[name] instanceof FluteItem) {
-            if (!fluteEffectRunner.isActive(GameConstants.FluteItemType[name])() && !player.itemList[name]()) {
-                Notifier.notify({
-                    message: `You don't have any ${ItemList[name].displayName}s...`,
-                    type: NotificationConstants.NotificationOption.danger,
-                });
-                return false;
-            }
-            if (App.game.challenges.list.disableShards.active()) {
-                Notifier.notify({
-                    message: 'Shards are Disabled',
-                    type: NotificationConstants.NotificationOption.danger,
-                });
-                return false;
-            }
-        }
-
-
-        if (ItemList[name] instanceof BattleItem && App.game.challenges.list.disableBattleItems.active()) {
-            Notifier.notify({
-                title: 'Challenge Mode',
-                message: 'Battle Items are disabled',
-                type: NotificationConstants.NotificationOption.danger,
-            });
+        if (!ItemList[name].canUse()) {
             return false;
         }
 
