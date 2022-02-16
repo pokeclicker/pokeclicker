@@ -1764,7 +1764,7 @@ TownList['Anville Town'] = new Town(
     'Anville Town',
     GameConstants.Region.unova,
     {
-        requirements: [new ObtainedPokemonRequirement(pokemonMap['Meloetta (aria)'],1)],
+        requirements: [new ObtainedPokemonRequirement(pokemonMap['Meloetta (aria)'])],
         shops: [AnvilleTownShop],
     }
 );
@@ -1773,7 +1773,7 @@ TownList['Anville Town'] = new Town(
 TownList['Pledge Grove'] = new DungeonTown(
     'Pledge Grove',
     GameConstants.Region.unova,
-    [new ObtainedPokemonRequirement(pokemonMap.Keldeo,1)]
+    [new ObtainedPokemonRequirement(pokemonMap.Keldeo)]
 );
 TownList['Floccesy Ranch'] = new DungeonTown(
     'Floccesy Ranch',
@@ -1868,8 +1868,8 @@ TownList['Abundant Shrine'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 23),
         new RouteKillRequirement(10, GameConstants.Region.unova, 14),
-        new ObtainedPokemonRequirement(pokemonMap.Tornadus,1),
-        new ObtainedPokemonRequirement(pokemonMap.Thundurus,1),
+        new ObtainedPokemonRequirement(pokemonMap.Tornadus),
+        new ObtainedPokemonRequirement(pokemonMap.Thundurus),
     ]
 );
 TownList['Victory Road Unova'] = new DungeonTown(
@@ -1901,9 +1901,9 @@ TownList['Moor of Icirrus'] = new DungeonTown(
     GameConstants.Region.unova,
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 8),
-        new ObtainedPokemonRequirement(pokemonMap.Cobalion,1),
-        new ObtainedPokemonRequirement(pokemonMap.Terrakion,1),
-        new ObtainedPokemonRequirement(pokemonMap.Virizion,1),
+        new ObtainedPokemonRequirement(pokemonMap.Cobalion),
+        new ObtainedPokemonRequirement(pokemonMap.Terrakion),
+        new ObtainedPokemonRequirement(pokemonMap.Virizion),
     ]
 );
 TownList['Pinwheel Forest'] = new DungeonTown(

@@ -1101,9 +1101,9 @@ dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
         new DungeonBossPokemon('Raticate', 380000, 35),
         new DungeonBossPokemon('Haunter', 380000, 35),
         new DungeonBossPokemon('Ho-Oh', 1410000, 100, {requirement: new MultiRequirement([
-            new ObtainedPokemonRequirement(pokemonMap.Raikou, 1),
-            new ObtainedPokemonRequirement(pokemonMap.Entei, 1),
-            new ObtainedPokemonRequirement(pokemonMap.Suicune, 1),
+            new ObtainedPokemonRequirement(pokemonMap.Raikou),
+            new ObtainedPokemonRequirement(pokemonMap.Entei),
+            new ObtainedPokemonRequirement(pokemonMap.Suicune),
         ])}),
     ],
     4500, 37, 20
@@ -2316,11 +2316,11 @@ dungeonList['Old Chateau'] = new Dungeon('Old Chateau',
     853000,
     [
         new DungeonBossPokemon('Rotom', 4200000, 100),
-        new DungeonBossPokemon('Rotom (heat)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom, 1)}),
-        new DungeonBossPokemon('Rotom (wash)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom, 1)}),
-        new DungeonBossPokemon('Rotom (frost)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom, 1)}),
-        new DungeonBossPokemon('Rotom (fan)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom, 1)}),
-        new DungeonBossPokemon('Rotom (mow)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom, 1)}),
+        new DungeonBossPokemon('Rotom (heat)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
+        new DungeonBossPokemon('Rotom (wash)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
+        new DungeonBossPokemon('Rotom (frost)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
+        new DungeonBossPokemon('Rotom (fan)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
+        new DungeonBossPokemon('Rotom (mow)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
     ],
     52500, 230, 100);
 
@@ -2632,7 +2632,7 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
         new DungeonBossPokemon('Parasect', 9900000, 50),
         new DungeonBossPokemon('Breloom', 11000000, 50),
         new DungeonBossPokemon('Shaymin (land)', 11000000, 50),
-        new DungeonBossPokemon('Shaymin (sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement(pokemonMap['Shaymin (land)'], 1)}),
+        new DungeonBossPokemon('Shaymin (sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement(pokemonMap['Shaymin (land)'])}),
     ],
     96500, 201, 32);
 
@@ -6132,8 +6132,8 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
         new DungeonBossPokemon('Sneasel', 8000000, 70),
         new DungeonBossPokemon('Calyrex', 8000000, 70, {
             requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement(pokemonMap.Spectrier, 1),
-                new ObtainedPokemonRequirement(pokemonMap.Glastrier, 1),
+                new ObtainedPokemonRequirement(pokemonMap.Spectrier),
+                new ObtainedPokemonRequirement(pokemonMap.Glastrier),
             ])}),
     ],
     96500, 201, 35);
