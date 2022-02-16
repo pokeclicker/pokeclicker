@@ -49,7 +49,9 @@ export const TotalPokemonsPerRegion = [
     898, // 89 - Galar
 ];
 
+// Battle Items
 export const ITEM_USE_TIME = 30;
+export const FLUTE_TYPE_ATTACK_MULTIPLIER = 1.005;
 
 export const ROAMING_MIN_CHANCE = 8192;
 export const ROAMING_MAX_CHANCE = 4096;

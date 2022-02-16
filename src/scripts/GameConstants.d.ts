@@ -37,6 +37,7 @@ namespace GameConstants {
     declare const MAX_AVAILABLE_REGION: number;
     declare const TotalPokemonsPerRegion: number[];
     declare const ITEM_USE_TIME: number;
+    declare const FLUTE_TYPE_ATTACK_MULTIPLIER: number;
     declare const ROAMING_MIN_CHANCE: number;
     declare const ROAMING_MAX_CHANCE: number;
     declare const SHINY_CHANCE_BATTLE: number;

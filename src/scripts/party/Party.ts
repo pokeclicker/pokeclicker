@@ -150,10 +150,10 @@ class Party implements Feature {
             const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
             fluteEffectRunner.activeShardTypes().forEach(value => {
                 if (value == dataPokemon.type1) {
-                    attack *= 1.005;
+                    attack *= GameConstants.FLUTE_TYPE_ATTACK_MULTIPLIER;
                 }
                 if (value == dataPokemon.type2) {
-                    attack *= 1.005;
+                    attack *= GameConstants.FLUTE_TYPE_ATTACK_MULTIPLIER;
                 }
             });
         }

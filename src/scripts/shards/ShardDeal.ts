@@ -1,5 +1,5 @@
 type ShardCost = {
-    shardType: ShardType,
+    shardType: PokemonType,
     amount: number,
 }
 
@@ -33,54 +33,54 @@ class ShardDeal {
 
         list.push(new ShardDeal(
             [
-                {shardType: ShardType['Fire'], amount: 1000},
-                {shardType: ShardType['Fighting'], amount: 1000},
-                {shardType: ShardType['Poison'], amount: 1000},
+                {shardType: PokemonType['Fire'], amount: 1000},
+                {shardType: PokemonType['Fighting'], amount: 1000},
+                {shardType: PokemonType['Poison'], amount: 1000},
             ],
             ItemList['Red_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                {shardType: ShardType['Normal'], amount: 1000},
-                {shardType: ShardType['Bug'], amount: 1000},
-                {shardType: ShardType['Rock'], amount: 1000},
+                {shardType: PokemonType['Normal'], amount: 1000},
+                {shardType: PokemonType['Bug'], amount: 1000},
+                {shardType: PokemonType['Rock'], amount: 1000},
             ],
             ItemList['White_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                {shardType: ShardType['Normal'], amount: 1000},
-                {shardType: ShardType['Flying'], amount: 1000},
-                {shardType: ShardType['Poison'], amount: 1000},
+                {shardType: PokemonType['Normal'], amount: 1000},
+                {shardType: PokemonType['Flying'], amount: 1000},
+                {shardType: PokemonType['Poison'], amount: 1000},
             ],
             ItemList['Black_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                {shardType: ShardType['Dark'], amount: 1000},
-                {shardType: ShardType['Electric'], amount: 1000},
-                {shardType: ShardType['Steel'], amount: 1000},
+                {shardType: PokemonType['Dark'], amount: 1000},
+                {shardType: PokemonType['Electric'], amount: 1000},
+                {shardType: PokemonType['Steel'], amount: 1000},
             ],
             ItemList['Yellow_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                {shardType: ShardType['Dark'], amount: 1000},
-                {shardType: ShardType['Ghost'], amount: 1000},
-                {shardType: ShardType['Ice'], amount: 1000},
+                {shardType: PokemonType['Dark'], amount: 1000},
+                {shardType: PokemonType['Ghost'], amount: 1000},
+                {shardType: PokemonType['Ice'], amount: 1000},
             ],
             ItemList['Blue_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                {shardType: ShardType['Fighting'], amount: 1000},
-                {shardType: ShardType['Ice'], amount: 1000},
-                {shardType: ShardType['Fairy'], amount: 1000},
+                {shardType: PokemonType['Fighting'], amount: 1000},
+                {shardType: PokemonType['Ice'], amount: 1000},
+                {shardType: PokemonType['Fairy'], amount: 1000},
             ],
             ItemList['Poke_Flute'],
             1
@@ -93,54 +93,54 @@ class ShardDeal {
 
         list.push(new ShardDeal(
             [
-                {shardType: ShardType['Dragon'], amount: 1000},
-                {shardType: ShardType['Ghost'], amount: 1000},
-                {shardType: ShardType['Psychic'], amount: 1000},
+                {shardType: PokemonType['Dragon'], amount: 1000},
+                {shardType: PokemonType['Ghost'], amount: 1000},
+                {shardType: PokemonType['Psychic'], amount: 1000},
             ],
             ItemList['Azure_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                {shardType: ShardType['Flying'], amount: 1000},
-                {shardType: ShardType['Dragon'], amount: 1000},
-                {shardType: ShardType['Psychic'], amount: 1000},
+                {shardType: PokemonType['Flying'], amount: 1000},
+                {shardType: PokemonType['Dragon'], amount: 1000},
+                {shardType: PokemonType['Psychic'], amount: 1000},
             ],
             ItemList['Eon_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                {shardType: ShardType['Fire'], amount: 1000},
-                {shardType: ShardType['Ground'], amount: 1000},
-                {shardType: ShardType['Water'], amount: 1000},
+                {shardType: PokemonType['Fire'], amount: 1000},
+                {shardType: PokemonType['Ground'], amount: 1000},
+                {shardType: PokemonType['Water'], amount: 1000},
             ],
             ItemList['Sun_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                {shardType: ShardType['Rock'], amount: 1000},
-                {shardType: ShardType['Ground'], amount: 1000},
-                {shardType: ShardType['Electric'], amount: 1000},
+                {shardType: PokemonType['Rock'], amount: 1000},
+                {shardType: PokemonType['Ground'], amount: 1000},
+                {shardType: PokemonType['Electric'], amount: 1000},
             ],
             ItemList['Moon_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                {shardType: ShardType['Grass'], amount: 1000},
-                {shardType: ShardType['Psychic'], amount: 1000},
-                {shardType: ShardType['Water'], amount: 1000},
+                {shardType: PokemonType['Grass'], amount: 1000},
+                {shardType: PokemonType['Psychic'], amount: 1000},
+                {shardType: PokemonType['Water'], amount: 1000},
             ],
             ItemList['Time_Flute'],
             1
         ));
         list.push(new ShardDeal(
             [
-                {shardType: ShardType['Grass'], amount: 1000},
-                {shardType: ShardType['Bug'], amount: 1000},
-                {shardType: ShardType['Fairy'], amount: 1000},
+                {shardType: PokemonType['Grass'], amount: 1000},
+                {shardType: PokemonType['Bug'], amount: 1000},
+                {shardType: PokemonType['Fairy'], amount: 1000},
             ],
             ItemList['Grass_Flute'],
             1

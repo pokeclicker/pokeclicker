@@ -8,13 +8,13 @@ class fluteEffectRunner {
         GameHelper.enumStrings(GameConstants.FluteItemType).forEach((itemName) => {
             const item = (ItemList[itemName] as FluteItem);
             if (item.multiplierType) {
-                multiplier.addBonus(item.multiplierType, () => this.isActive(itemName)() ? 1 + ((item.multiplyBy - 1) * AchievementHandler.achievementBonus()) : 1);
+                multiplier.addBonus(item.multiplierType, () => this.isActive(itemName)() ? this.getFluteMultiplier(itemName) : 1);
             }
             if (this.isActive(GameConstants.FluteItemType[itemName])()) {
                 GameHelper.incrementObservable(this.numActiveFlutes,1);
             }
         });
-        this.getActiveShardTypes();
+        this.updateActiveShardTypes();
     }
 
     public static tick() {
@@ -40,18 +40,18 @@ class fluteEffectRunner {
 
     public static getLowestShard(itemName: string) {
         const item = (ItemList[itemName] as FluteItem);
-        const shardArray = item.shardTypes.map(idx => App.game.shards.shardWallet[ShardType[idx]]());
+        const shardArray = item.shardTypes.map(idx => App.game.shards.shardWallet[PokemonType[idx]]());
         const shardMaxTime = Math.min(...shardArray);
         return shardMaxTime;
     }
 
-    public static getActiveShardTypes() {
+    public static updateActiveShardTypes() {
         this.activeShardTypes.removeAll();
         let shardNames = [];
         for (const itemName in GameConstants.FluteItemType) {
             if (fluteEffectRunner.isActive(GameConstants.FluteItemType[itemName])()) {
                 const item = (ItemList[itemName] as FluteItem);
-                item.shardTypes.forEach(idx => shardNames.push(ShardType[idx]));
+                item.shardTypes.forEach(idx => shardNames.push(PokemonType[idx]));
             }
         }
         shardNames = [...new Set(shardNames)];
@@ -69,7 +69,7 @@ class fluteEffectRunner {
         return player.effectList[itemName]();
     }
 
-    public static addEffect(itemName: string) {
+    public static toggleEffect(itemName: string) {
 
         //NOTE: this if statement is untested
         if (fluteEffectRunner.getLowestShard(itemName) == 0) {
@@ -87,7 +87,7 @@ class fluteEffectRunner {
         player.effectList[itemName](Math.max(0, player.effectList[itemName]() + fluteEffectRunner.getLowestShard(itemName)));
         GameHelper.incrementObservable(this.numActiveFlutes,1);
         this.updateFormattedTimeLeft(itemName);
-        this.getActiveShardTypes();
+        this.updateActiveShardTypes();
     }
 
     public static removeEffect(itemName: string) {
@@ -95,7 +95,7 @@ class fluteEffectRunner {
         GameHelper.incrementObservable(this.numActiveFlutes, -1);
         this.updateFormattedTimeLeft(itemName);
         player.gainItem(itemName, 1);
-        this.getActiveShardTypes();
+        this.updateActiveShardTypes();
     }
 
     public static updateFormattedTimeLeft(itemName: string) {
@@ -110,7 +110,8 @@ class fluteEffectRunner {
     }
 
     public static getFluteMultiplier(itemName: string) {
-        return this.isActive(GameConstants.FluteItemType[itemName])() ? (1 + 0.02 * AchievementHandler.achievementBonus()) : 1;
+        const flute = (ItemList[itemName] as FluteItem);
+        return this.isActive(flute.name)() ? (1 + (flute.multiplyBy - 1) * AchievementHandler.achievementBonus()) : 1;
     }
 
 

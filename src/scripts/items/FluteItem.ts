@@ -8,7 +8,7 @@ class FluteItem extends Item {
         description: string,
         basePrice: number,
         currency: undefined,
-        public shardTypes: string[],
+        public shardTypes: (keyof typeof PokemonType)[],
         displayName?: string,
         public multiplierType?: keyof typeof MultiplierType,
         public multiplyBy?: number
@@ -18,7 +18,7 @@ class FluteItem extends Item {
     }
 
     use(): boolean {
-        fluteEffectRunner.addEffect(this.name);
+        fluteEffectRunner.toggleEffect(this.name);
         return true;
     }
 

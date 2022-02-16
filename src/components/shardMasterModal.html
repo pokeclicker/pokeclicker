@@ -31,7 +31,7 @@
                                 <tr>
                                     <td data-bind="text: App.game.shards.shardWallet[$data.shardType]()"></td>
                                     <td><img height="24px" data-bind="attr: {src: Shards.image($data.shardType) }"></img></td>
-                                    <td data-bind="text: amount + ' x ' + ShardType[$data.shardType]"></td>
+                                    <td data-bind="text: amount + ' x ' + PokemonType[$data.shardType]"></td>
                                     <!-- ko if: $index() === 0 -->
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">→</td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
