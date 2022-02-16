@@ -72,14 +72,14 @@ gymList['Champion Blue'] = new Champion(
 );
 
 // TODO: Balancing - Set HP - Set win message
-gymList['Champion Hao'] = new Champion(
-    'Hao',
-    'Champion Hao',
+gymList['Champion Hau'] = new Champion(
+    'Hau',
+    'Champion Hau',
     [
-        new GymPokemon('Alolan Raichu', 2015330, 59),
-        new GymPokemon('Tauros', 2015330, 58),
-        new GymPokemon('Noivern', 2015330, 58),
-        new GymPokemon('Crabominable', 2015330, 59),
+        new GymPokemon('Alolan Raichu', 91545555, 59),
+        new GymPokemon('Tauros', 89636471, 58),
+        new GymPokemon('Noivern', 89636471, 58),
+        new GymPokemon('Crabominable', 91545555, 59),
     ],
     BadgeEnums.Elite_AlolaChampion,
     100000,
@@ -87,18 +87,18 @@ gymList['Champion Hao'] = new Champion(
     [new GymBadgeRequirement(BadgeEnums.Elite_Kahili)],
     // Bulbasaur
     [
-        new GymPokemon('Flareon', 2015330, 58),
-        new GymPokemon('Primarina', 2015330, 60),
+        new GymPokemon('Flareon', 89636471, 58),
+        new GymPokemon('Primarina', 96725389, 60),
     ],
     // Charmander
     [
-        new GymPokemon('Vaporeon', 2015330, 58),
-        new GymPokemon('Decidueye', 2015330, 60),
+        new GymPokemon('Vaporeon', 89636471, 58),
+        new GymPokemon('Decidueye', 96725389, 60),
     ],
     // Squirtle/Pikachu
     [
-        new GymPokemon('Leafeon', 2015330, 58),
-        new GymPokemon('Incineroar', 2015330, 60),
+        new GymPokemon('Leafeon', 89636471, 58),
+        new GymPokemon('Incineroar', 96725389, 60),
     ],
     () => {
         App.game.quests.getQuestLine('Ultra Beast Hunt').beginQuest();
@@ -126,27 +126,4 @@ gymList['Champion Leon'] = new Champion(
     [new GymPokemon('Inteleon', 2015330, 60)],
     // Squirtle/Pikachu
     [new GymPokemon('Rillaboom', 2015330, 60)]
-);
-
-//TODO: rewards/hp rebalance
-gymList['Trainer Hop'] = new Champion(
-    'Hop',
-    'Trainer Hop',
-    [
-        new GymPokemon('Dubwool', 1945330, 49),
-        new GymPokemon('Cramorant', 1948300, 49),
-        new GymPokemon('Pincurchin', 1952000, 50),
-        new GymPokemon('Snorlax', 1957000, 51),
-        new GymPokemon('Corviknight', 1945330, 50),
-    ],
-    BadgeEnums.Elite_Hop,
-    100000,
-    'Thanks, mate. I\'m really glad you were the one here with me.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Marnie)],
-    // Bulbasaur
-    [new GymPokemon('Inteleon', 2015330, 60)],
-    // Charmander
-    [new GymPokemon('Rillaboom', 2015330, 60)],
-    // Squirtle/Pikachu
-    [new GymPokemon('Cinderace', 2015330, 60)]
 );

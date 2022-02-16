@@ -56,6 +56,5 @@ ItemList['Furfrou (Kabuki)']     = new PokemonItem('Furfrou (Kabuki)', 75000, Cu
 ItemList['Furfrou (Pharaoh)']    = new PokemonItem('Furfrou (Pharaoh)', 300000000, Currency.dungeonToken);
 ItemList['Type: Null']           = new PokemonItem('Type: Null', 5000);
 ItemList['Poipole']              = new PokemonItem('Poipole', 5000);
-ItemList['Cosmog']               = new PokemonItem('Cosmog', 5000);
 ItemList['Eternatus']            = new PokemonItem('Eternatus', 10000);
 ItemList['Toxel']                = new PokemonItem('Toxel', 5000);

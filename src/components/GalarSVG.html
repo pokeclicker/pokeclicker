@@ -1,4 +1,5 @@
 <g data-bind='visible: player.region == GameConstants.Region.galar'>
+    <!-- ko if: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Galar').id -->
     <image width="1600" height="960" xlink:href="assets/images/galar.png" href="assets/images/galar.png"></image>
 
     <!-- ------ -->
@@ -536,4 +537,5 @@
         , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hulbury') }"
         })
      %>
+    <!-- /ko -->
 </g>
