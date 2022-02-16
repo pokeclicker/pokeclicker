@@ -309,6 +309,11 @@ function main(){
 		if (localStorage.getItem('a6csrq-settings') != null) {
 			if (JSON.parse(localStorage.getItem('a6csrq-settings'))[9][2] == 1) {
 				Save.key = JSON.parse(localStorage.getItem('a6csrq-settings'))[9][1];
+
+        var pSave = JSON.parse(localStorage.getItem(`player${Save.key}`))
+        pSave._lastSeen = Date.now();
+        localStorage.setItem(`player${Save.key}`, JSON.stringify(pSave));
+
 				document.querySelector('#saveSelector').remove();
 				App.start();
 			}
