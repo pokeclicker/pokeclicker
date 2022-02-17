@@ -38,6 +38,7 @@ class FluteItem extends Item {
             });
             return false;
         }
+        return true;
     }
 
 }

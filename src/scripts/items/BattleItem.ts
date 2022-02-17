@@ -37,6 +37,7 @@ class BattleItem extends Item {
             });
             return false;
         }
+        return true;
     }
 }
 

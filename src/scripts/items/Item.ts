@@ -156,13 +156,6 @@ class Item {
         return true;
     }
 
-    canUse(): boolean {
-        if (this.checkCanUse() == false) {
-            return false;
-        }
-        return true;
-    }
-
     isAvailable(): boolean {
         return true;
     }

@@ -8,7 +8,7 @@ class ItemHandler {
 
     public static useItem(name: string, amount = 1): boolean {
 
-        if (!ItemList[name].canUse()) {
+        if (!ItemList[name].checkCanUse()) {
             return false;
         }
 
