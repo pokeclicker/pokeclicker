@@ -591,6 +591,18 @@ class Update implements Saveable {
             if (saveData.badgeCase[58]) {
                 saveData.quests.questLines.push({state: 1, name: 'Quest for the DNA Splicers', quest: 0});
             }
+
+            // Update id of pokemons with id < 0
+            [[-3, 150.1], [-4, 143.1], [-18, 9.1], [-17, 8.1], [-16, 7.1], [-15, 6.1], [-14, 5.1], [-13, 4.1]]
+                .forEach(idPair => {
+                    const pokemon = saveData.party.caughtPokemon.find(cp => cp.id == idPair[0]);
+                    if (pokemon !== undefined) {
+                        pokemon.id = idPair[1];
+                        console.log(saveData.statistics.pokemonHatched);
+                        saveData.statistics.pokemonHatched[idPair[1]] = saveData.statistics.pokemonHatched[idPair[0]];
+                        delete saveData.statistics.pokemonHatched[idPair[0]];
+                    }
+                });
         },
     };
 

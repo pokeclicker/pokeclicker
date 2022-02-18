@@ -20643,7 +20643,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -3,
+        'id': 150.1,
         'name': 'Armored Mewtwo',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 2,
@@ -20661,7 +20661,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -4,
+        'id': 143.1,
         'name': 'Santa Snorlax',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 25,
@@ -20825,7 +20825,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -13,
+        'id': 4.1,
         'name': 'Charmander (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20844,7 +20844,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -14,
+        'id': 5.1,
         'name': 'Charmeleon (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20863,7 +20863,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -15,
+        'id': 6.1,
         'name': 'Charizard (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20881,7 +20881,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -16,
+        'id': 7.1,
         'name': 'Squirtle (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20900,7 +20900,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -17,
+        'id': 8.1,
         'name': 'Wartortle (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20919,7 +20919,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -18,
+        'id': 9.1,
         'name': 'Blastoise (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
