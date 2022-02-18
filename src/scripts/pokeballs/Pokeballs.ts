@@ -87,7 +87,7 @@ class Pokeballs implements Feature {
                 const currentRoute = MapHelper.normalizeRoute(player.route(),player.region);
 
                 // Increased rate for earlier routes, scales with regional progression
-                return Math.min(15,Math.max(1,player.highestRegion()) * maxRoute / currentRoute);
+                return Math.min(15,Math.max(1,player.highestRegion()) * Math.max(1,(maxRoute / currentRoute)));
             }, 1250, 'Increased catch rate on earlier routes', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Repeatball, () => {
