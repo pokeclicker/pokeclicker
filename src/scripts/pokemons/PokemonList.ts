@@ -20605,9 +20605,9 @@ const pokemonList = createPokemonArray(
             'speed': 0,
         },
     },
-    // Event Pokemon only between -1 → -99
+    // Event Pokemons
     {
-        'id': -1,
+        'id': 25.4,
         'name': 'Flying Pikachu',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
@@ -20625,7 +20625,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -2,
+        'id': 25.3,
         'name': 'Surfing Pikachu',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,

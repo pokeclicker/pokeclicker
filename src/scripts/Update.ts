@@ -598,6 +598,7 @@ class Update implements Saveable {
                 [-18, 9.1], [-17, 8.1], [-16, 7.1], [-15, 6.1], [-14, 5.1], [-13, 4.1], [-12, 3.1], [-11, 2.1], [-10, 1.1],
                 [-9, 133.1], [-8, 25.1],
                 [-7, 25.2], [-6, 1.2], [-5, 175.1],
+                [-2, 25.3], [-1, 25.4],
             ]
                 .forEach(idPair => {
                     const pokemon = saveData.party.caughtPokemon.find(cp => cp.id == idPair[0]);
