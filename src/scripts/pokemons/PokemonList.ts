@@ -20679,7 +20679,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -5,
+        'id': 175.1,
         'name': 'Spooky Togepi',
         'nativeRegion': GameConstants.Region.johto,
         'catchRate': 30,
@@ -20697,7 +20697,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -6,
+        'id': 1.2,
         'name': 'Spooky Bulbasaur',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 25,
@@ -20715,7 +20715,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -7,
+        'id': 25.2,
         'name': 'Pikachu (Gengar)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
