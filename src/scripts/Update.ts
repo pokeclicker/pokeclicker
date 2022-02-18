@@ -593,12 +593,11 @@ class Update implements Saveable {
             }
 
             // Update id of pokemons with id < 0
-            [[-3, 150.1], [-4, 143.1], [-18, 9.1], [-17, 8.1], [-16, 7.1], [-15, 6.1], [-14, 5.1], [-13, 4.1]]
+            [[-3, 150.1], [-4, 143.1], [-18, 9.1], [-17, 8.1], [-16, 7.1], [-15, 6.1], [-14, 5.1], [-13, 4.1], [-12, 3.1], [-11, 2.1], [-10, 1.1], [-9, 133.1], [-8, 25.1]]
                 .forEach(idPair => {
                     const pokemon = saveData.party.caughtPokemon.find(cp => cp.id == idPair[0]);
                     if (pokemon !== undefined) {
                         pokemon.id = idPair[1];
-                        console.log(saveData.statistics.pokemonHatched);
                         saveData.statistics.pokemonHatched[idPair[1]] = saveData.statistics.pokemonHatched[idPair[0]];
                         delete saveData.statistics.pokemonHatched[idPair[0]];
                     }

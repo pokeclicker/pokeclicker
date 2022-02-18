@@ -20733,7 +20733,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -8,
+        'id': 25.1,
         'name': 'Let\'s Go Pikachu',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
@@ -20751,7 +20751,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -9,
+        'id': 133.1,
         'name': 'Let\'s Go Eevee',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
@@ -20769,7 +20769,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -10,
+        'id': 1.1,
         'name': 'Bulbasaur (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20788,7 +20788,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -11,
+        'id': 2.1,
         'name': 'Ivysaur (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
@@ -20807,7 +20807,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': -12,
+        'id': 3.1,
         'name': 'Venusaur (clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
