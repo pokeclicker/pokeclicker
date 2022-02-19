@@ -6,14 +6,16 @@ class Aura {
     ) { }
 
     /**
-     * Handles applying the berry's Aura to its neighbors
+     * Handles applying the berry's Aura to its neighbors test
      */
     emitAura(index: number): void {
         const plot = App.game.farming.plotList[index];
         if (plot.stage() < PlotStage.Taller) {
             return;
         }
-        const multiplier = this.auraMultipliers[plot.stage() - 2] * plot._auras[AuraType.Boost]();
+        const berryAura = this.auraMultipliers[plot.stage() - 2]; /*this should make typing easier*/
+        const lumBoost = plot._auras[AuraType.Boost]();
+        const multiplier = (berryAura >= 1) ? (berryAura * lumBoost) : (berryAura / lumBoost);
         const plots = Plot.findNearPlots(index);
         switch (this.auraType) {
             // External Auras
