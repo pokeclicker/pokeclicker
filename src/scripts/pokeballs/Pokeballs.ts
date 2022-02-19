@@ -48,7 +48,7 @@ class Pokeballs implements Feature {
                 if (App.game.gameState == GameConstants.GameState.dungeon) {
                     const maxBonus = 15;
                     const timeLeftPercent = DungeonRunner.timeLeftPercentage();
-                    const timeLeftPercentWhenMax = 20;
+                    const timeLeftPercentWhenMax = 15;
                     return (timeLeftPercentWhenMax < timeLeftPercent) ? (200 / timeLeftPercent - 2) : maxBonus;
                 }
                 return 0;
