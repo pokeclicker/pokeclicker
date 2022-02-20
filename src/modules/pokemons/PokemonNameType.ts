@@ -1005,6 +1005,8 @@ export type PokemonNameType
     | 'Kartana'
     | 'Guzzlord'
     | 'Necrozma'
+    | 'Necrozma (Dusk Mane)'
+    | 'Necrozma (Dawn Wings)'
     | 'Necrozma (Ultra)'
     | 'Magearna'
     | 'Marshadow'

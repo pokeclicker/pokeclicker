@@ -215,14 +215,15 @@ class GameController {
                     }
                 }
             } else if (App.game.gameState === GameConstants.GameState.fighting) {
+                const initialRoute = MapHelper.normalizeRoute(player.route(),player.region);
                 // Allow '=' to fallthrough to '+' since they share a key on many keyboards
                 switch (e.key) {
                     case '=':
                     case '+':
-                        MapHelper.moveToRoute(player.route() + 1, player.region);
+                        MapHelper.moveToRoute(Routes.unnormalizeRoute(initialRoute + 1), player.region);
                         break;
                     case '-':
-                        MapHelper.moveToRoute(player.route() - 1, player.region);
+                        MapHelper.moveToRoute(Routes.unnormalizeRoute(initialRoute - 1), player.region);
                         break;
                     default: // any other key (ignore)
                         return;
