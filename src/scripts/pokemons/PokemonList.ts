@@ -10157,6 +10157,23 @@ const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 479.6,
+        'name': 'Rotom (discord)',
+        'type': [PokemonType.Electric, PokemonType.Ghost],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 182,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 50,
+            'attack': 50,
+            'specialAttack': 95,
+            'defense': 77,
+            'specialDefense': 77,
+            'speed': 91,
+        },
+    },
+    {
         'id': 480,
         'name': 'Uxie',
         'type': [PokemonType.Psychic],
