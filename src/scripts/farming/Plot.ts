@@ -199,7 +199,7 @@ class Plot implements Saveable {
                 const berryAuraValue = this.berryData.aura.getAuraValue(this.stage());
                 const lumAuraValue = this._auras[AuraType.Boost]();
                 tooltip.push('<u>Aura Emitted:</u>');
-                const emittedAura = (berryAuraValue >= 1) ? (berryAuraValue * lumAuraValue) : (berryAuraValue / lumAuraValue); /* I fought this forever wondering why the tooltip wasn't right */
+                const emittedAura = (berryAuraValue >= 1) ? (berryAuraValue * lumAuraValue) : (berryAuraValue / lumAuraValue);
                 tooltip.push(`${AuraType[this.berryData.aura.auraType]}: ${emittedAura.toFixed(2)}x`);
             }
             const auraStr = this.formattedAuras();
