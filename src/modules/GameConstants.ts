@@ -1027,7 +1027,6 @@ export const KalosDungeons = [
 ];
 
 export const AlolaDungeons = [
-    'Exeggutor Island Hill',
     'Trainers\' School',
     'Hau\'oli Cemetery',
     'Verdant Cavern',
@@ -1047,6 +1046,7 @@ export const AlolaDungeons = [
     'Ula\'ula Meadow',
     'Po Town',
     'Aether Foundation',
+    'Exeggutor Island Hill',
     'Vast Poni Canyon',
     'Mount Lanakila',
     'Lake of the Sunne and Moone',
