@@ -147,8 +147,9 @@ class DungeonBattle extends Battle {
     public static generateNewLootEnemy(pokemon: PokemonNameType) {
         this.catching(false);
         this.counter = 0;
+        const pokemonLevel = PokemonFactory.routeLevel(DungeonRunner.dungeon.difficultyRoute, player.region);
         const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon
-            , DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth * 2, DungeonRunner.dungeon.level);
+            , DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth * 2, pokemonLevel);
         this.enemyPokemon(enemyPokemon);
 
         GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[enemyPokemon.id]);
@@ -171,7 +172,8 @@ class DungeonBattle extends Battle {
 
         const pokemon = this.trainer().team[this.trainerPokemonIndex()];
         const baseHealth = DungeonRunner.fightingBoss() ? pokemon.maxHealth : DungeonRunner.dungeon.baseHealth;
-        const level = DungeonRunner.fightingBoss() ? pokemon.level : DungeonRunner.dungeon.level;
+        const dungeonLevel = PokemonFactory.routeLevel(DungeonRunner.dungeon.difficultyRoute, player.region);
+        const level = DungeonRunner.fightingBoss() ? pokemon.level : dungeonLevel;
         const enemyPokemon = PokemonFactory.generateDungeonTrainerPokemon(pokemon, DungeonRunner.chestsOpened, baseHealth, level);
 
         this.enemyPokemon(enemyPokemon);
