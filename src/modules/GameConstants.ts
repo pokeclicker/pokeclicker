@@ -1096,7 +1096,7 @@ export const StartingTowns = [
     'Twinleaf Town', // Sinnoh
     'Aspertia City', // Unova
     'Vaniville Town', // Kalos
-    'Iki Town', // Alola
+    'Iki Town Outskirts', // Alola
     'Postwick', // Galar
 ];
 

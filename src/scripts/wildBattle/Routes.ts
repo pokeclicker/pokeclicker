@@ -1009,7 +1009,7 @@ Routes.add(new RegionRoute(
         land: ['Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Beautifly', 'Dustox', 'Roselia', 'Floatzel', 'Gastrodon (east)', 'Chatot'],
         water: ['Tentacruel', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Pelipper', 'Luvdisc', 'Gastrodon (east)'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Sinnoh'))]
+    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 225', GameConstants.Region.sinnoh, 225,
