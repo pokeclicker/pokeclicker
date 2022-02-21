@@ -292,8 +292,7 @@ class QuestLineHelper {
     public static createPlasmaUnovaQuestLine() {
         const plasmaUnovaQuestLine = new QuestLine('Quest for the DNA Splicers', 'Prevent Team Plasma from using these dangerous Splicers');
 
-        const clearOpelucidGym = new CustomQuest(1, 0, 'Defeat the Opelucid City gym leader to obtain the DNA Splicers', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')](), App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]());
-        console.log('clears:', App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]());
+        const clearOpelucidGym = new CustomQuest(1, 0, 'Defeat the Opelucid City gym leader to obtain the DNA Splicers', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]());
         plasmaUnovaQuestLine.addQuest(clearOpelucidGym);
 
         const clearTeamPlasmaAssault = new CustomQuest(1, 0, 'Zinzolin has stolen the DNA Splicers and is assaulting the city with his army of grunts and shadows! Defend against the Team Plasma Assault in Opelucid City!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Plasma Assault')]());
@@ -318,6 +317,37 @@ class QuestLineHelper {
         App.game.quests.questLines().push(plasmaUnovaQuestLine);
     }
 
+    public static createSkullAetherAlolaQuestLine() {
+        const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
+
+        const clearAetherParadiseGym = new CustomQuest(1, 0, 'A strange creature has appeared in Aether Paradise. Make it go away. Clear the Aether Paradise gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Aether Paradise')]());
+        skullAetherAlolaQuestLine.addQuest(clearAetherParadiseGym);
+
+        const clearMalieGarden = new CustomQuest(1, 0, 'Team Skull are being annoying. Get rid of them. Clear the Malie Garden dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Malie Garden')]());
+        skullAetherAlolaQuestLine.addQuest(clearMalieGarden);
+
+        const clearPoTown = new CustomQuest(1, 0, 'Team Skull have stolen a child\'s Yungoos. Raid their base. Clear the Po Town dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Po Town')]());
+        skullAetherAlolaQuestLine.addQuest(clearPoTown);
+
+        const clearAetherFoundation = new CustomQuest(1, 0, 'Aether president Lusamine has recruited Team Skull in her own plan to stop the Eater of Light. She\'s an idiot. Stop her. Clear the Aether Foundation dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')]());
+        skullAetherAlolaQuestLine.addQuest(clearAetherFoundation);
+
+        const AltaroftheSunnandMooneGymReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            Notifier.notify({
+                title: skullAetherAlolaQuestLine.name,
+                message: 'You found a Masterball!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearAltaroftheSunnandMooneGym = new CustomQuest(1, AltaroftheSunnandMooneGymReward, 'Stop the Eater of Light from absorbing all light in Alola. Clear the Altar of the Sunne and Moone gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Altar of the Sunne and Moone')]());
+        skullAetherAlolaQuestLine.addQuest(clearAltaroftheSunnandMooneGym);
+
+        App.game.quests.questLines().push(skullAetherAlolaQuestLine);
+    }
+
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
@@ -330,5 +360,6 @@ class QuestLineHelper {
         this.createRocketJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
         this.createPlasmaUnovaQuestLine();
+        this.createSkullAetherAlolaQuestLine();
     }
 }
