@@ -2248,7 +2248,7 @@ TownList['Victory Road Kalos'] = new DungeonTown(
 
 //Alola Shops
 
-const IkiTownShop = new TownShop([
+const IkiTownOutskirtsShop = new TownShop([
     ItemList['Pokeball'],
 ]);
 const HauoliCityShop = new TownShop([
@@ -2319,12 +2319,26 @@ const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke
 
 //Alola Towns
 
+TownList['Iki Town Outskirts'] = new Town(
+    'Iki Town Outskirts',
+    GameConstants.Region.alola,
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+        shops: [IkiTownOutskirtsShop],
+    }
+);
 TownList['Iki Town'] = new Town(
     'Iki Town',
     GameConstants.Region.alola,
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-        shops: [IkiTownShop],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
+    }
+);
+TownList['Professor Kukui\'s Lab'] = new Town(
+    'Professor Kukui\'s Lab',
+    GameConstants.Region.alola,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
     }
 );
 TownList['Hau\'oli City'] = new Town(
@@ -2333,6 +2347,13 @@ TownList['Hau\'oli City'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
         shops: [HauoliCityShop],
+    }
+);
+TownList['Roadside Motel'] = new Town(
+    'Roadside Motel',
+    GameConstants.Region.alola,
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
     }
 );
 TownList['Heahea City'] = new Town(
