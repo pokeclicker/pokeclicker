@@ -174,7 +174,7 @@ class QuestLineHelper {
             const catchVivillon = new CustomQuest(
                 1,
                 vivillonRemove,
-                `Find and capture the rare Vivillon!\nHint: ${hint}.`,
+                `Find and capture the rare Vivillon!\nHint: ${hint}`,
                 App.game.statistics.pokemonCaptured[pokemonMap[vivillon].id],
                 undefined,
                 vivillonAdd

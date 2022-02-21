@@ -480,7 +480,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.hoenn]: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134]),
         [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Lake Verity', 'Lake Valor', 'Pastoria City']),
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City', 'Plasma Frigate']),
-        [Region.kalos]: new Set([8, 'Coumarine City', 'Couriway Town', 'Sea Spirit\'s Den']),
+        [Region.kalos]: new Set([8, 23, 'Coumarine City', 'Couriway Town', 'Sea Spirit\'s Den']),
         [Region.alola]: new Set([15, 19, 20, 'Seafolk Village', 'Brooklet Hill', 'Lake of the Sunne and Moone']),
         [Region.galar]: new Set(['Hulbury', 5, 6, 8, 9, 19, 21]),
     },
@@ -1027,7 +1027,6 @@ export const KalosDungeons = [
 ];
 
 export const AlolaDungeons = [
-    'Exeggutor Island Hill',
     'Trainers\' School',
     'Hau\'oli Cemetery',
     'Verdant Cavern',
@@ -1047,6 +1046,7 @@ export const AlolaDungeons = [
     'Ula\'ula Meadow',
     'Po Town',
     'Aether Foundation',
+    'Exeggutor Island Hill',
     'Vast Poni Canyon',
     'Mount Lanakila',
     'Lake of the Sunne and Moone',
@@ -1096,7 +1096,7 @@ export const StartingTowns = [
     'Twinleaf Town', // Sinnoh
     'Aspertia City', // Unova
     'Vaniville Town', // Kalos
-    'Iki Town', // Alola
+    'Iki Town Outskirts', // Alola
     'Postwick', // Galar
 ];
 
