@@ -329,7 +329,7 @@ class QuestLineHelper {
         const clearPoTown = new CustomQuest(1, 0, 'Team Skull have stolen a child\'s Yungoos. Raid their base. Clear the Po Town dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Po Town')]());
         skullAetherAlolaQuestLine.addQuest(clearPoTown);
 
-        const clearAetherFoundation = new CustomQuest(1, 0, 'Aether president Lusamine has recruited Team Skull in her own plan to stop the Eather of Light. She\'s an idiot. Stop her. Clear the Aether Foundation dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')]());
+        const clearAetherFoundation = new CustomQuest(1, 0, 'Aether president Lusamine has recruited Team Skull in her own plan to stop the Eater of Light. She\'s an idiot. Stop her. Clear the Aether Foundation dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')]());
         skullAetherAlolaQuestLine.addQuest(clearAetherFoundation);
 
         const AltaroftheSunnandMooneGymReward = () => {
@@ -342,7 +342,7 @@ class QuestLineHelper {
             });
         };
 
-        const clearAltaroftheSunnandMooneGym = new CustomQuest(1, AltaroftheSunnandMooneGymReward, 'Stop the Eather of Light from absorbing all light in Alola. Clear the Altar of the Sunne and Moone gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Altar of the Sunne and Moone')]());
+        const clearAltaroftheSunnandMooneGym = new CustomQuest(1, AltaroftheSunnandMooneGymReward, 'Stop the Eater of Light from absorbing all light in Alola. Clear the Altar of the Sunne and Moone gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Altar of the Sunne and Moone')]());
         skullAetherAlolaQuestLine.addQuest(clearAltaroftheSunnandMooneGym);
 
         App.game.quests.questLines().push(skullAetherAlolaQuestLine);
