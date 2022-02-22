@@ -97,28 +97,47 @@ class MapHelper {
         return cls;
     }
 
-    public static calculateTownCssClass(town: string): string {
-        if (!player.route() && player.town().name == town) {
+    public static calculateTownCssClass(townName: string): string {
+        if (!player.route() && player.town().name == townName) {
             return 'currentLocation';
         }
-        if (!MapHelper.accessToTown(town)) {
+        if (!MapHelper.accessToTown(townName)) {
             return 'locked';
         }
-        if (dungeonList.hasOwnProperty(town)) {
-            if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(town)]()) {
+        if (dungeonList[townName]) {
+            if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(townName)]()) {
                 return 'unlockedUnfinished';
-            } else if (!DungeonRunner.dungeonCompleted(dungeonList[town], false)) {
+            } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], false)) {
                 return 'uncaughtPokemon';
-            } else if (!DungeonRunner.dungeonCompleted(dungeonList[town], true)) {
+            } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], true)) {
                 return 'uncaughtShinyPokemon';
             }
         }
-        if (gymList.hasOwnProperty(town)) {
-            const gym = gymList[town];
-            // If defeated the previous gym, but not this one
-            const gymIndex = GameConstants.getGymIndex(town);
+        if (gymList[townName]) {
+            const gym = gymList[townName];
             if (Gym.isUnlocked(gym) && !App.game.badgeCase.hasBadge(gym.badgeReward)) {
                 return 'unlockedUnfinished';
+            }
+        }
+        const town = TownList[townName];
+        // We don't want to re-process DungeonTowns
+        if (!(town instanceof DungeonTown) && town?.dungeon) {
+            const dungeonAccess = MapHelper.calculateTownCssClass(town?.dungeon.name);
+            switch (dungeonAccess) {
+                // if dungeon completed or locked, ignore it
+                case 'completed':
+                case 'locked':
+                    break;
+                // Return the dungeons state
+                default:
+                    return dungeonAccess;
+            }
+        }
+        if (town instanceof PokemonLeague && (town as PokemonLeague)?.gymList) {
+            for (const gym of (town as PokemonLeague)?.gymList) {
+                if (Gym.isUnlocked(gym) && !App.game.badgeCase.hasBadge(gym.badgeReward)) {
+                    return 'unlockedUnfinished';
+                }
             }
         }
         return 'completed';

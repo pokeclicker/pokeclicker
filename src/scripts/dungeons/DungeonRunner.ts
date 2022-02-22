@@ -122,19 +122,18 @@ class DungeonRunner {
                 setting: NotificationConstants.NotificationSetting.dungeon_item_found,
             });
 
-            return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount);
+            return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount, false);
 
-        } else if (typeof GameConstants.Pokeball[input] == 'number') {
+        } else if (ItemList[input] instanceof PokeballItem) {
             Notifier.notify({
                 message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.dungeon_item_found,
             });
 
-            GameHelper.incrementObservable(App.game.statistics.pokeballsBought[GameConstants.Pokeball[GameConstants.humanifyString(input)]],amount);
-            return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount);
+            return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount, false);
 
-        }  else if (Underground.getMineItemByName(input) != undefined && Underground.getMineItemByName(input).isStone() === false) {
+        }  else if (Underground.getMineItemByName(input) instanceof UndergroundItem) {
             Notifier.notify({
                 message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
@@ -152,7 +151,7 @@ class DungeonRunner {
 
             return DungeonBattle.generateNewLootEnemy(input);
 
-        }   else if (ItemList[input].constructor.name == 'EvolutionStone' || 'EggItem' || 'BattleItem' || 'Vitamin' || 'EnergyRestore') {
+        }   else if (ItemList[input] instanceof EvolutionStone || EggItem || BattleItem || Vitamin || EnergyRestore) {
             Notifier.notify({
                 message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
