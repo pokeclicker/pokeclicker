@@ -23,7 +23,7 @@ class PartySlots implements Feature {
     }
 
     generateTest() {
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 6; i++) {
             this.setPokemonAtId(
                 i,
                 this.generateBattlePartyPokemon(
@@ -31,12 +31,6 @@ class PartySlots implements Feature {
                 )
             );
         }
-        this.setPokemonAtId(
-            5,
-            this.generateBattlePartyPokemon(
-                PokemonFactory.generatePartyPokemon(-115, true)
-            )
-        );
     }
     generateBattlePartyPokemon(pokemon: PartyPokemon): BattlePartyPokemon {
         return new BattlePartyPokemon(AbilityList.list[pokemon.name][0], null, null, pokemon);
@@ -44,6 +38,10 @@ class PartySlots implements Feature {
 
     get partyPokemon() {
         return this._partyPokemon();
+    }
+
+    addPokemon(pokemon: PartyPokemon) {
+        this.setPokemonAtId(this._partyPokemon().findIndex(e => e === null) || 6, this.generateBattlePartyPokemon(pokemon));
     }
 
     getPokemonAtId(id: number): BattlePartyPokemon {
@@ -56,7 +54,7 @@ class PartySlots implements Feature {
 
     //set the pokemons at the given id and executes hooks
     setPokemonAtId(id: number, pokemon: BattlePartyPokemon) {
-        if (PartySlots.fearMeter() + pokemon.pokemon.attack <= 600) {
+        if (PartySlots.fearMeter() + pokemon.pokemon.attack <= 900) {
             if (id > 5) {
                 return;
             }
@@ -86,22 +84,15 @@ class PartySlots implements Feature {
     }
 
     onSlotClick(index: number) {
-        if (index > 5) {
-            return;
-        }
-        console.log(index);
-        console.log(this._partyPokemon()[index]);
         if (this._partyPokemon()[index] != null) {
             this.removePokemonAtId(index);
-        } else {
-            this.addPokemonAtId(
-                index,
-                this.generateBattlePartyPokemon(
-                    PokemonFactory.generatePartyPokemon(index + 1, true)
-                )
-            );
         }
     }
+
+    hasFreePartySlot(): boolean {
+        return this._partyPokemon().length > this._partyPokemon().filter(a => a !== null).length;
+    }
+
 
     initialize(): void {}
 
