@@ -1234,7 +1234,10 @@ gymList['Konikoni City'] = new Gym(
     BadgeEnums.RockiumZ,
     128000,
     'How lovely.',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 9)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
+    () => {
+        App.game.quests.getQuestLine('Eater of Light').beginQuest();
+    }
 );
 gymList['Aether Paradise'] = new Gym(
     'Ultra Wormhole',
