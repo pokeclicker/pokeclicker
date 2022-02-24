@@ -2327,7 +2327,7 @@ const HeaheaCafeOwner = new NPC('Café Owner', [
 ]);
 const RoyalAvenueSpectator = new NPC('Spectator', [
     'I think batles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
-    'Evolving Pikachu or Exeggute in Alola can result in a new form! Sometimes.',
+    'Evolving Pikachu or Exeggcute in Alola can result in a new form! Sometimes.',
 ]);
 const KonikoniKahuna = new NPC('Kahuna Olivia', [
     'What do you mean Grand trials are just like gym battles? It\'s a totally different thing!',
