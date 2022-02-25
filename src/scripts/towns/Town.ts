@@ -2321,7 +2321,7 @@ const IkiKahuna = new NPC('Kahuna Hala', [
 ]);
 const HeaheaCafeOwner = new NPC('Café Owner', [
     'Akala Island has three trials.',
-    'Lana\'s trial in Brooklet Hill, Kiawe\'s trial in Wela Volcano Park and Mallow\'s trial in Lush Jungle.',
+    'Captain Lana\'s trial in Brooklet Hill, Captain Kiawe\'s trial in Wela Volcano Park and Captain Mallow\'s trial in Lush Jungle.',
     'For what it\'s worth, I say don\'t go to any of those places. Too wet, too hot and too... jungly. Why not stay here? Have a coffee! Enjoy the city!',
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
 ]);
