@@ -8,4 +8,5 @@ enum AuraType {
     Shiny,
     Death,
     Boost,
+    Roaming,
 }

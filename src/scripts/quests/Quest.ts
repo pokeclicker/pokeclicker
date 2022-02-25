@@ -41,7 +41,7 @@ abstract class Quest {
     }
 
     public static randomizeReward(pointsReward: number) {
-        const randomPointBonus = 0.9 + SeededRand.next() * 0.2; // random between 0.9 and 1.1
+        const randomPointBonus = 0.9 + SeededRand.float(0.2); // random between 0.9 and 1.1
         return Math.ceil(pointsReward * randomPointBonus);
     }
 

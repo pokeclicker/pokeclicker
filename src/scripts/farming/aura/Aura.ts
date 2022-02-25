@@ -13,13 +13,16 @@ class Aura {
         if (plot.stage() < PlotStage.Taller) {
             return;
         }
-        const multiplier = this.auraMultipliers[plot.stage() - 2] * plot._auras[AuraType.Boost]();
+        const berryAura = this.auraMultipliers[plot.stage() - 2];
+        const lumBoost = plot._auras[AuraType.Boost]();
+        const multiplier = (berryAura >= 1) ? (berryAura * lumBoost) : (berryAura / lumBoost);
         const plots = Plot.findNearPlots(index);
         switch (this.auraType) {
             // External Auras
             case AuraType.Attract:
             case AuraType.Egg:
             case AuraType.Shiny:
+            case AuraType.Roaming:
                 const currentMultiplier = App.game.farming.externalAuras[this.auraType]();
                 App.game.farming.externalAuras[this.auraType](currentMultiplier * multiplier);
                 break;

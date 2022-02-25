@@ -553,18 +553,43 @@ class Update implements Saveable {
             // Add Victory Road Johto
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 23);
 
-            // If the player has the Glacier Badge already
-            // Not using game constants incase the badge value isn't 20 in the future
-            if (saveData.badgeCase[20]) {
-                saveData.quests.questLines.push({state: 1, name: 'Radio Tower Takeover', quest: 0});
+            // If the player has the Fog Badge already
+            // Not using game constants incase the badge value isn't 17 in the future
+            if (saveData.badgeCase[17]) {
+                saveData.quests.questLines.push({state: 1, name: 'Team Rocket Again', quest: 0});
             }
 
             // Check if player wants to activate the new challenge modes
-            if (!await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be changed later)', confirm: 'enable', cancel: 'disable' })) {
+            if (!await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
                 App.game.challenges.list.regionalAttackDebuff.disable();
             }
-            if (!await Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be changed later)', confirm: 'enable', cancel: 'disable' })) {
+            if (!await Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
                 App.game.challenges.list.requireCompletePokedex.disable();
+            }
+        },
+
+        '0.8.14': async ({ playerData, saveData }) => {
+            // Start Aqua Magma questline if player has Dynamo Badge already
+            if (saveData.badgeCase[29]) {
+                saveData.quests.questLines.push({state: 1, name: 'Land vs Water', quest: 0});
+            }
+
+            // Just incase statistics is not set
+            saveData.statistics = saveData.statistics || {};
+
+            // Rename from the old statistic name
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalBerriesObtained: saveData.statistics.totalBerriesHarvested || 0,
+                pokeballsObtained: saveData.statistics.pokeballsBought || 0,
+                berriesObtained:  saveData.statistics.berriesHarvested || 0,
+            };
+        },
+
+        '0.8.15': async ({ playerData, saveData }) => {
+            // Start Plasma questline if player has Jet Badge already
+            if (saveData.badgeCase[58]) {
+                saveData.quests.questLines.push({state: 1, name: 'Quest for the DNA Splicers', quest: 0});
             }
         },
     };

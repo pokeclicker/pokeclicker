@@ -37,8 +37,7 @@ class UndergroundItem {
     // Returns a random unlocked item
     public static getRandomItem(): UndergroundItem {
         const unlockedItems = UndergroundItem.list.filter(i => i.isUnlocked());
-        const i = Math.floor(Math.random() * (unlockedItems.length));
-        return unlockedItems[i] || UndergroundItem.list[0];
+        return Rand.fromArray(unlockedItems) || UndergroundItem.list[0];
     }
 
     public static getFullResourceName(valuetype: string, amt: number): string {

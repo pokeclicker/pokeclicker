@@ -120,6 +120,9 @@ class Game {
             }
             hitsToKill = Math.ceil(hitsToKill / availablePokemonMap.length);
             const numberOfPokemonDefeated = Math.floor(timeDiffOverride / hitsToKill);
+            if (numberOfPokemonDefeated === 0) {
+                return;
+            }
             const routeMoney: number = PokemonFactory.routeMoney(player.route(), player.region, false);
             const baseMoneyToEarn = numberOfPokemonDefeated * routeMoney;
             const moneyToEarn = Math.floor(baseMoneyToEarn * 0.5);//Debuff for offline money
@@ -245,7 +248,7 @@ class Game {
                 BerryDeal.generateDeals(now);
                 Notifier.notify({
                     title: 'It\'s a new day!',
-                    message: 'Your Underground deals have been updated.<br/><i>You have a free quest refresh.</i>',
+                    message: `${this.underground.canAccess() ? 'Your Underground deals have been updated.<br/>' : ''}<i>You have a free quest refresh.</i>`,
                     type: NotificationConstants.NotificationOption.info,
                     timeout: 3e4,
                 });

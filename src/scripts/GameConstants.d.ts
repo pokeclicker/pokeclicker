@@ -152,6 +152,10 @@ namespace GameConstants {
         'Timerball',
         'Duskball',
         'Luxuryball',
+        'Diveball',
+        'Lureball',
+        'Nestball',
+        'Repeatball',
     }
     declare enum Currency {
         money,
@@ -190,11 +194,8 @@ namespace GameConstants {
         kalos,
         alola,
         galar,
-        armor,
-        crown
+        final,
     }
-    declare function randomIntBetween(min: number, max: number): number;
-    declare function randomElement(array: any[]): any;
     declare function clipNumber(num: number, min: number, max: number): number;
     declare function expRandomElement<T>(array: T[], ratio: number): T;
     declare const TypeColor: string[];
@@ -224,31 +225,31 @@ namespace GameConstants {
     }
     declare enum StoneType {
         'None',
+        'Leaf_stone',
         'Fire_stone',
         'Water_stone',
         'Thunder_stone',
-        'Leaf_stone',
         'Moon_stone',
-        'Sun_stone',
         'Trade_stone',
-        'Dragon_scale',
+        'Sun_stone',
+        'Soothe_bell',
         'Metal_coat',
         'Kings_rock',
         'Upgrade',
-        'Soothe_bell',
+        'Dragon_scale',
+        'Prism_scale',
         'Deepsea_tooth',
         'Deepsea_scale',
-        'Dawn_stone',
-        'Dusk_stone',
         'Shiny_stone',
-        'Dubious_disc',
+        'Dusk_stone',
+        'Dawn_stone',
+        'Razor_claw',
+        'Razor_fang',
         'Electirizer',
         'Magmarizer',
         'Protector',
+        'Dubious_disc',
         'Reaper_cloth',
-        'Razor_claw',
-        'Razor_fang',
-        'Prism_scale',
         'Black_DNA',
         'White_DNA',
         'Sachet',
