@@ -9484,7 +9484,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 78,
         'catchRate': 50,
-        'evolutions': [new StoneEvolution('Elf Munchlax', 'Santa Snorlax', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [new LevelEvolution('Elf Munchlax', 'Santa Snorlax', 69420)],
         'baby': true,
         'base': {
             'hitpoints': 135,
