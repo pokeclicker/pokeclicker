@@ -210,7 +210,7 @@ class Mine {
             text.push(`Evolution Items: ${summary.evoItems}`);
         }
         if (summary.plates) {
-            text.push(`Shard Plates: ${summary.plates}`);
+            text.push(`Gem Plates: ${summary.plates}`);
         }
         text.push(`Diamond Value: ${summary.totalValue}`);
 

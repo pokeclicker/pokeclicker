@@ -31,7 +31,7 @@ type TmpGameType = {
     oakItemLoadouts: any,
     categories: any,
     party: any,
-    shards: any,
+    gems: any,
     underground: any,
     farming: any,
     logbook: LogBook,

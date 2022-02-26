@@ -28,7 +28,7 @@ class Game {
         public oakItemLoadouts: OakItemLoadouts,
         public categories: PokemonCategories,
         public party: Party,
-        public shards: Shards,
+        public gems: Gems,
         public underground: Underground,
         public farming: Farming,
         public logbook: LogBook,

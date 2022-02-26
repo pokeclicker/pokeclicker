@@ -1,4 +1,4 @@
-<div class="modal fade noselect" id="shardModal" tabindex="-1" role="dialog" aria-badgeledby="shardModal">
+<div class="modal fade noselect" id="gemModal" tabindex="-1" role="dialog" aria-badgeledby="gemModal">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
        <div class="modal-content">
             <div class="modal-header">
@@ -11,33 +11,33 @@
 
             </div>
             <div class="modal-body p-0">
-                <p data-bind="visible: App.game.challenges.list.disableShards.active()" class="bg-danger my-0 sticky-top">
-                    Shard bonuses are disabled.
+                <p data-bind="visible: App.game.challenges.list.disableGems.active()" class="bg-danger my-0 sticky-top">
+                    Gem bonuses are disabled.
                 </p>
                 <table class='table table-sm table-hover m-0'>
-                    <!-- ko foreach: Array(Shards.nTypes) -->
+                    <!-- ko foreach: Array(Gems.nTypes) -->
                         <thead>
                             <tr>
-                                <th colspan="4" class="clickable text-left table-dark text-light" data-toggle="collapse" data-bind="attr: { 'href': '#collapse-shard-' + $index() }, click: function() { App.game.shards.shardCollapsed[$index()] = !App.game.shards.shardCollapsed[$index()]; }">
+                                <th colspan="4" class="clickable text-left table-dark text-light" data-toggle="collapse" data-bind="attr: { 'href': '#collapse-gem-' + $index() }, click: function() { App.game.gems.gemCollapsed[$index()] = !App.game.gems.gemCollapsed[$index()]; }">
                                     <h3>
                                         <knockout data-bind="text: PokemonType[$index()]"></knockout>
                                         <div class="float-right">
-                                            <img width=20px data-bind='attr: { src: Shards.image($index()) }'/>
-                                            <knockout data-bind="text: App.game.shards.shardWallet[$index()]().toLocaleString('en-US')"></knockout>
+                                            <img width=20px data-bind='attr: { src: Gems.image($index()) }'/>
+                                            <knockout data-bind="text: App.game.gems.gemWallet[$index()]().toLocaleString('en-US')"></knockout>
                                         </div>
                                     </h3>
                                 </th>
                             </tr>
                         </thead>
-                        <tbody data-bind="class: 'collapse' + (App.game.shards.shardCollapsed[$index()] ? '' : ' show'), attr: { id: 'collapse-shard-' + $index()}">
-                            <!-- ko foreach: Array(Shards.nEffects) -->
-                                <tr data-bind='if: App.game.shards.isValidUpgrade($parentContext.$index(), $index())'>
+                        <tbody data-bind="class: 'collapse' + (App.game.gems.gemCollapsed[$index()] ? '' : ' show'), attr: { id: 'collapse-gem-' + $index()}">
+                            <!-- ko foreach: Array(Gems.nEffects) -->
+                                <tr data-bind='if: App.game.gems.isValidUpgrade($parentContext.$index(), $index())'>
                                     <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
                                     <td width='50%'>
                                         <div class="progress"
                                             data-bind="style: { 'background-color': '#' + TypeHelper.typeColorsLocked[$parentContext.$index()] }">
                                             <div class='progress-bar' role="progressbar"
-                                                data-bind="style: { width: (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * 10) + '%',
+                                                data-bind="style: { width: (App.game.gems.getGemUpgrade($parentContext.$index(), $index()) * 10) + '%',
                                                                         'background-color': '#' + TypeHelper.typeColors[$parentContext.$index()] }"
                                                 aria-valuemin="0" aria-valuemax="100">
                                             </div>
@@ -47,12 +47,12 @@
                                         </div>
                                     </td>
                                     <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]]
-                                        + (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * Shards.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
+                                        + (App.game.gems.getGemUpgrade($parentContext.$index(), $index()) * Gems.GEM_UPGRADE_STEP)).toFixed(1) + "x"'></td>
                                     <td>
                                         <button class='btn btn-block btn-primary'
-                                                data-bind='click: function(){App.game.shards.buyShardUpgrade($parentContext.$index(), $index())},
-                                                    css: {disabled: !App.game.shards.canBuyShardUpgrade($parentContext.$index(), $index())},
-                                                    text: (App.game.shards.hasMaxUpgrade($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + App.game.shards.getShardUpgradeCost($parentContext.$index(), $index()) + ")")'>
+                                                data-bind='click: function(){App.game.gems.buyGemUpgrade($parentContext.$index(), $index())},
+                                                    css: {disabled: !App.game.gems.canBuyGemUpgrade($parentContext.$index(), $index())},
+                                                    text: (App.game.gems.hasMaxUpgrade($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + App.game.gems.getGemUpgradeCost($parentContext.$index(), $index()) + ")")'>
                                         </button>
                                     </td>
                                 </tr>

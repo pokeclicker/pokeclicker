@@ -4,7 +4,7 @@
 /// <reference path="./questTypes/GainFarmPointsQuest.ts" />
 /// <reference path="./questTypes/GainMoneyQuest.ts" />
 /// <reference path="./questTypes/GainTokensQuest.ts" />
-/// <reference path="./questTypes/GainShardsQuest.ts" />
+/// <reference path="./questTypes/GainGemsQuest.ts" />
 /// <reference path="./questTypes/HatchEggsQuest.ts" />
 /// <reference path="./questTypes/MineLayersQuest.ts" />
 /// <reference path="./questTypes/MineItemsQuest.ts" />
@@ -24,7 +24,7 @@ class QuestHelper {
         GainFarmPointsQuest,
         GainMoneyQuest,
         GainTokensQuest,
-        GainShardsQuest,
+        GainGemsQuest,
         HatchEggsQuest,
         MineLayersQuest,
         MineItemsQuest,

@@ -583,6 +583,7 @@ class Update implements Saveable {
                 totalBerriesObtained: saveData.statistics.totalBerriesHarvested || 0,
                 pokeballsObtained: saveData.statistics.pokeballsBought || 0,
                 berriesObtained:  saveData.statistics.berriesHarvested || 0,
+
             };
         },
 
@@ -591,6 +592,25 @@ class Update implements Saveable {
             if (saveData.badgeCase[58]) {
                 saveData.quests.questLines.push({state: 1, name: 'Quest for the DNA Splicers', quest: 0});
             }
+            // Just incase statistics is not set
+            saveData.statistics = saveData.statistics || {};
+
+            // Rename from the old statistic name
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalGemsGained: saveData.statistics.totalShardsGained || 0,
+                gemsGained: saveData.statistics.shardsGained || 0,
+            };
+
+            const badgeToKeyItems = {
+                [8]: 'Gem_case', //Earth badge
+            };
+            Object.keys(badgeToKeyItems).forEach(badge => {
+                const keyItem = badgeToKeyItems[badge];
+                if (saveData.badgeCase[badge]) {
+                    saveData.keyItems[keyItem] = true;
+                }
+            });
         },
     };
 
