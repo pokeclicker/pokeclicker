@@ -13,6 +13,7 @@ class Battle {
     static pokeball: KnockoutObservable<GameConstants.Pokeball> = ko.observable(GameConstants.Pokeball.Pokeball);
     static lastPokemonAttack = Date.now();
     static lastClickAttack = Date.now();
+    static route;
 
     /**
      * Probably not needed right now, but might be if we add more logic to a gameTick.
@@ -72,11 +73,12 @@ class Battle {
      */
     public static defeatPokemon() {
         const enemyPokemon = this.enemyPokemon();
+        Battle.route = player.route();
         enemyPokemon.defeat();
 
-        GameHelper.incrementObservable(App.game.statistics.routeKills[player.region][player.route()]);
+        GameHelper.incrementObservable(App.game.statistics.routeKills[player.region][Battle.route]);
 
-        App.game.breeding.progressEggsBattle(player.route(), player.region);
+        App.game.breeding.progressEggsBattle(Battle.route, player.region);
         const isShiny: boolean = enemyPokemon.shiny;
         const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny);
 
@@ -85,7 +87,7 @@ class Battle {
             setTimeout(
                 () => {
                     this.attemptCatch(enemyPokemon);
-                    if (player.route() != 0) {
+                    if (Battle.route != 0) {
                         this.generateNewEnemy();
                     }
                 },
@@ -138,8 +140,7 @@ class Battle {
             this.catching(false);
             return;
         }
-        const random: number = Math.floor(Math.random() * 100);
-        if (random <= this.catchRateActual()) { // Caught
+        if (Rand.chance(this.catchRateActual() / 100)) { // Caught
             this.catchPokemon(enemyPokemon);
         } else if (enemyPokemon.shiny) { // Failed to catch, Shiny
             App.game.logbook.newLog(LogBookTypes.ESCAPED, `The Shiny ${enemyPokemon.name} escaped!`);
@@ -151,16 +152,16 @@ class Battle {
     }
 
     public static catchPokemon(enemyPokemon: BattlePokemon) {
-        const route = player.route() || player.town()?.dungeon?.difficultyRoute || 1;
-        App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(route, player.region));
+        const catchRoute = Battle.route || player.town()?.dungeon?.difficultyRoute || 1;
+        App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(catchRoute, player.region));
         App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
         App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny);
     }
 
     static gainItem() {
-        const p = player.route() / 1600 + 0.009375;
+        const p = MapHelper.normalizeRoute(Battle.route, player.region) / 1600 + 0.009375;
 
-        if (Math.random() < p) {
+        if (Rand.chance(p)) {
             App.game.farming.gainRandomBerry();
         }
     }

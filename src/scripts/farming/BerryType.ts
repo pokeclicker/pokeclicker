@@ -73,3 +73,5 @@ enum BerryType {
     Starf,
     Enigma,
 }
+
+type BerryNameType = keyof typeof BerryType;

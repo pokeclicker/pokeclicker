@@ -87,7 +87,7 @@ class PartyPokemon implements Saveable {
             }
         }
         if (possibleEvolutions.length !== 0) {
-            return GameConstants.randomElement(possibleEvolutions).evolve();
+            return Rand.fromArray(possibleEvolutions).evolve();
         }
         return false;
     }
@@ -126,6 +126,11 @@ class PartyPokemon implements Saveable {
         // Allow 5 for every region visited (including Kanto)
         return (player.highestRegion() + 1) * 5 - this.proteinsUsed();
     };
+
+    public hideFromProteinList = (): boolean => {
+        return this.breeding ||
+            (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue());
+    }
 
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {

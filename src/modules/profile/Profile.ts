@@ -3,6 +3,7 @@ import {
 } from 'knockout';
 import { Saveable } from '../DataStore/common/Saveable';
 import * as GameConstants from '../GameConstants';
+import Rand from '../utilities/Rand';
 
 export default class Profile implements Saveable {
     public static MAX_TRAINER = 119;
@@ -21,9 +22,9 @@ export default class Profile implements Saveable {
 
     constructor(
         name = 'Trainer',
-        trainer = Math.floor(Math.random() * Profile.MAX_TRAINER),
+        trainer = Rand.floor(Profile.MAX_TRAINER),
         pokemon = 0,
-        background = Math.floor(Math.random() * Profile.MAX_BACKGROUND),
+        background = Rand.floor(Profile.MAX_BACKGROUND),
         textColor = '#f5f5f5',
     ) {
         this.name = ko.observable(name);
@@ -36,10 +37,10 @@ export default class Profile implements Saveable {
 
     static getTrainerCard(
         name = 'Trainer',
-        trainer = Math.floor(Math.random() * Profile.MAX_TRAINER),
-        pokemon = Math.floor(Math.random() * 151) + 1,
+        trainer = Rand.floor(Profile.MAX_TRAINER),
+        pokemon = Rand.intBetween(1, 151),
         pokemonShiny = false,
-        background = Math.floor(Math.random() * Profile.MAX_BACKGROUND),
+        background = Rand.floor(Profile.MAX_BACKGROUND),
         textColor = 'whitesmoke',
         badges = 0,
         pokedex = 0,

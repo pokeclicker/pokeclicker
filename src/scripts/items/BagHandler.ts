@@ -82,7 +82,7 @@ class BagHandler {
                 Underground.gainMineItem(this.getUndergroundItem(item.id).id, amount);
                 return;
             case ItemType.berry:
-                App.game.farming.gainBerry(this.getBerry(item.id), amount);
+                App.game.farming.gainBerry(this.getBerry(item.id), amount, false);
                 return;
             case ItemType.shard:
                 App.game.shards.gainShards(amount, this.getShard(item.id));
