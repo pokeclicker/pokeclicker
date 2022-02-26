@@ -1646,10 +1646,10 @@ dungeonList['Mt. Chimney'] = new Dungeon('Mt. Chimney',
     [
         new DungeonTrainer('Team Magma Grunt',
             [new GymPokemon('Numel', 20000, 20)],
-            { weight: 1 }, undefined, '(female)'),
+            { weight: 2 }, undefined, '(female)'),
         new DungeonTrainer('Team Magma Grunt',
             [new GymPokemon('Zubat', 20000, 20)],
-            { weight: 1 }, undefined, '(male)'),
+            { weight: 2 }, undefined, '(male)'),
         new DungeonTrainer('Magma Admin',
             [
                 new GymPokemon('Numel', 18000, 18),
