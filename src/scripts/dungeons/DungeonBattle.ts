@@ -119,8 +119,7 @@ class DungeonBattle extends Battle {
         // Pokemon
         if (typeof enemy === 'string' || enemy.hasOwnProperty('pokemon')) {
             const pokemon = (typeof enemy === 'string') ? enemy : (<DetailedPokemon>enemy).pokemon;
-            const pokemonLevel = PokemonFactory.routeLevel(DungeonRunner.dungeon.difficultyRoute, player.region);
-            const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon, DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, pokemonLevel);
+            const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon, DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeonLevel());
             this.enemyPokemon(enemyPokemon);
 
             GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[enemyPokemon.id]);
@@ -147,9 +146,8 @@ class DungeonBattle extends Battle {
     public static generateNewLootEnemy(pokemon: PokemonNameType) {
         this.catching(false);
         this.counter = 0;
-        const pokemonLevel = PokemonFactory.routeLevel(DungeonRunner.dungeon.difficultyRoute, player.region);
         const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon
-            , DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth * 2, pokemonLevel);
+            , DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth * 2, DungeonRunner.dungeonLevel());
         this.enemyPokemon(enemyPokemon);
 
         GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[enemyPokemon.id]);
@@ -172,8 +170,7 @@ class DungeonBattle extends Battle {
 
         const pokemon = this.trainer().team[this.trainerPokemonIndex()];
         const baseHealth = DungeonRunner.fightingBoss() ? pokemon.maxHealth : DungeonRunner.dungeon.baseHealth;
-        const dungeonLevel = PokemonFactory.routeLevel(DungeonRunner.dungeon.difficultyRoute, player.region);
-        const level = DungeonRunner.fightingBoss() ? pokemon.level : dungeonLevel;
+        const level = DungeonRunner.fightingBoss() ? pokemon.level : DungeonRunner.dungeonLevel();
         const enemyPokemon = PokemonFactory.generateDungeonTrainerPokemon(pokemon, DungeonRunner.chestsOpened, baseHealth, level);
 
         this.enemyPokemon(enemyPokemon);
