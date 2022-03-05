@@ -898,11 +898,11 @@ export function getGymRegion(gym: string): Region {
 
 export const KantoDungeons = [
     'Viridian Forest',
-    'Digletts Cave',
     'Mt. Moon',
+    'Digletts Cave',
     'Rock Tunnel',
-    'Power Plant',
     'Pokemon Tower',
+    'Power Plant',
     'Seafoam Islands',
     'Pokemon Mansion',
     'Victory Road',
@@ -931,13 +931,13 @@ export const HoennDungeons = [
     'Petalburg Woods',
     'Rusturf Tunnel',
     'Granite Cave',
-    'Jagged Pass',
     'Fiery Path',
-    'Mt. Chimney',
     'Meteor Falls',
+    'Mt. Chimney',
+    'Jagged Pass',
+    'New Mauville',
     'Weather Institute',
     'Mt. Pyre',
-    'New Mauville',
     'Magma Hideout',
     'Aqua Hideout',
     'Shoal Cave',
@@ -998,7 +998,6 @@ export const SinnohDungeons = [
 ];
 
 export const UnovaDungeons = [
-    'Pledge Grove',
     'Floccesy Ranch',
     'Liberty Garden',
     'Castelia Sewers',
@@ -1013,12 +1012,13 @@ export const UnovaDungeons = [
     'Seaside Cave',
     'Plasma Frigate',
     'Giant Chasm',
-    'Abundant Shrine',
     'Cave of Being', // Contains gen 4 trio only
+    'Abundant Shrine',
     'Victory Road Unova',
     'Twist Mountain',
     'Dragonspiral Tower',
     'Moor of Icirrus',
+    'Pledge Grove',
     'Pinwheel Forest',
     'Dreamyard',
     'P2 Laboratory',
@@ -1113,7 +1113,7 @@ export const StartingTowns = [
     'Twinleaf Town', // Sinnoh
     'Aspertia City', // Unova
     'Vaniville Town', // Kalos
-    'Iki Town', // Alola
+    'Iki Town Outskirts', // Alola
     'Postwick', // Galar
 ];
 

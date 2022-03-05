@@ -2254,7 +2254,7 @@ TownList['Victory Road Kalos'] = new DungeonTown(
 
 //Alola Shops
 
-const IkiTownShop = new TownShop([
+const IkiTownOutskirtsShop = new TownShop([
     ItemList['Pokeball'],
 ]);
 const HauoliCityShop = new TownShop([
@@ -2319,18 +2319,62 @@ const AltaroftheSunneandMooneShop = new TownShop([
 
 //Alola NPCs
 
+const IkiKahuna = new NPC('Kahuna Hala', [
+    'Welcome to Alola!',
+    'Here we don\'t have gyms. We have the Island Challenge. On each of our four islands you will complete one or more trials.',
+    'After completing all of an island\'s trials you will battle that island\'s Kahuna in a Grand trial.',
+    'This island only has one trial: Captain Ilima\'s trial in Verdant Cavern. Come back here after clearing that challenge for your Grand trial battle.',
+]);
+const HeaheaCafeOwner = new NPC('Café Owner', [
+    'Akala Island has three trials.',
+    'Captain Lana\'s trial in Brooklet Hill, Captain Kiawe\'s trial in Wela Volcano Park and Captain Mallow\'s trial in Lush Jungle.',
+    'For what it\'s worth, I say don\'t go to any of those places. Too wet, too hot and too... jungly. Why not stay here? Have a coffee! Enjoy the city!',
+    'Or go to Konikoni City down south. You might even meet our Kahuna there!',
+]);
+const RoyalAvenueSpectator = new NPC('Spectator', [
+    'I think batles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
+    'Evolving Pikachu or Exeggcute in Alola can result in a new form! Sometimes.',
+]);
+const KonikoniKahuna = new NPC('Kahuna Olivia', [
+    'What do you mean Grand trials are just like gym battles? It\'s a totally different thing!',
+    'Come fight me in our very special and unique brand new Pokémon League and see if you still think our Island Challenge is nothing special!',
+]);
+const MalieKahuna = new NPC('Kahuna Nanu', [
+    'A trial-goer, huh? Figures.',
+    'Just go clear Captain Sophocles\' trial at the Hokulani Observatory and Captain Acerola\'s Trial at the Thrifty Megamart. And take care of those Team Skull punks in Po Town while you\'re at it.',
+    'Then come back here so we can get this Grand trial over with.',
+]);
+const SeafolkCaptain = new NPC('Captain Mina', [
+    'My trial is in this town. Yes, it\'s just a gym battle. However, I want you to clear the trial in Vast Poni Canyon first. It has no Captain, so you\'ll be all on your own. Be careful.',
+    'If you can defeat me you\'ll find our Kahuna on Exeggutor Island.',
+]);
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [
     'Some very rare Pokémon have been sighted on {ROUTE_NAME}. I hope we can learn more about them.',
 ], GameConstants.Region.alola);
 
 //Alola Towns
 
+TownList['Iki Town Outskirts'] = new Town(
+    'Iki Town Outskirts',
+    GameConstants.Region.alola,
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+        shops: [IkiTownOutskirtsShop],
+    }
+);
 TownList['Iki Town'] = new Town(
     'Iki Town',
     GameConstants.Region.alola,
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-        shops: [IkiTownShop],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
+        npcs: [IkiKahuna],
+    }
+);
+TownList['Professor Kukui\'s Lab'] = new Town(
+    'Professor Kukui\'s Lab',
+    GameConstants.Region.alola,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
     }
 );
 TownList['Hau\'oli City'] = new Town(
@@ -2341,12 +2385,20 @@ TownList['Hau\'oli City'] = new Town(
         shops: [HauoliCityShop],
     }
 );
+TownList['Roadside Motel'] = new Town(
+    'Roadside Motel',
+    GameConstants.Region.alola,
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+    }
+);
 TownList['Heahea City'] = new Town(
     'Heahea City',
     GameConstants.Region.alola,
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
         shops: [HeaheaCityShop],
+        npcs: [HeaheaCafeOwner],
     }
 );
 TownList['Paniola Town'] = new Town(
@@ -2363,6 +2415,7 @@ TownList['Royal Avenue'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
         shops: [DepartmentStoreShop],
+        npcs: [RoyalAvenueSpectator],
     }
 );
 TownList['Konikoni City'] = new Town(
@@ -2371,6 +2424,7 @@ TownList['Konikoni City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
         shops: [KonikoniCityShop],
+        npcs: [KonikoniKahuna],
     }
 );
 TownList['Aether Paradise'] = new Town(
@@ -2389,6 +2443,7 @@ TownList['Malie City'] = new Town(
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_Nihilego)],
         shops: [MalieCityShop],
+        npcs: [MalieKahuna],
     }
 );
 TownList['Tapu Village'] = new Town(
@@ -2405,6 +2460,7 @@ TownList['Seafolk Village'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
         shops: [SeafolkVillageShop],
+        npcs: [SeafolkCaptain],
     }
 );
 TownList['Exeggutor Island'] = new Town(

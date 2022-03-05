@@ -16366,6 +16366,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 61,
         'catchRate': 60,
+        'evolutions': [new LevelEvolution('Wishiwashi (Solo)', 'Wishiwashi (School)', 20)],
         'base': {
             'hitpoints': 45,
             'attack': 20,
@@ -16396,7 +16397,7 @@ const pokemonList = createPokemonArray(
         'id': 746.02,
         'name': 'Totem Wishiwashi (School)',
         'type': [PokemonType.Water],
-        'eggCycles': 15,
+        'eggCycles': 23,
         'levelType': LevelType.fast,
         'exp': 61,
         'catchRate': 60,
