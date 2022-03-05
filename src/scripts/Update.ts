@@ -596,15 +596,20 @@ class Update implements Saveable {
             // Shards -> Gems
             delete saveData.quests.questList;
 
-            //TODO (or not): make these functions, or an equivalent, work. Right now, this update just zeros every shard.
+            //Setting gems = shards
+            saveData.gems = saveData.shards || {};
+            saveData.gems = {
+                ...saveData.gems,
+                gemWallet: saveData.shards.shardWallet || 0,
+                gemCollapsed: saveData.shards.shardCollapsed || 0,
+                gemUpgrades: saveData.shards.shardUpgrades || 0,
+            };
 
-            //saveData.gems.gemWallet = saveData.shards.shardWallet;
-            //saveData.gems.gemCollapsed = saveData.shards.shardCollapsed;
-            //saveData.gems.gemUpgrades: saveData.shards.shardUpgrades;
+            delete saveData.keyItems['Shard_case'];
 
-            if (saveData.keyItems['Shard_case'] = true) {
+            // Swapping Shard Case for Gem Case
+            if (saveData.badgeCase[8]) {
                 saveData.keyItems['Gem_case'] = true;
-                delete saveData.keyItems['Shard_case'];
             }
 
             // Just incase statistics is not set
@@ -617,6 +622,17 @@ class Update implements Saveable {
                 gemsGained: saveData.statistics.shardsGained || 0,
             };
 
+            // Disable Gems Challenge, this is kind of a crappy solution but eh
+            if (saveData.gems.gemUpgrades.every((g: number) => !g)) {
+                Notifier.notify({
+                    title: 'Active Challenge Mode?',
+                    message: `Do you want to activate the No Gem challenge mode?
+                    (Synonymous with the former "No Shard" Challenge)
+
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableGems.activate();" data-dismiss="toast">Activate</button>`,
+                    timeout: GameConstants.HOUR,
+                });
+            }
         },
     };
 
