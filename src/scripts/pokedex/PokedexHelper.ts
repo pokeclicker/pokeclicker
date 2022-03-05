@@ -94,7 +94,7 @@ class PokedexHelper {
             }
 
             // Check if the name contains the string
-            if (filter['name'] && !pokemon.name.toLowerCase().includes(filter['name'].toLowerCase())) {
+            if (filter['name'] && !pokemon.name.toLowerCase().includes(filter['name'].toLowerCase().trim())) {
                 return false;
             }
 
