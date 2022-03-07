@@ -16395,7 +16395,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 746.02,
-        'name': 'Totem Wishiwashi (School)',
+        'name': 'Totem Wishiwashi',
         'type': [PokemonType.Water],
         'eggCycles': 23,
         'levelType': LevelType.fast,
