@@ -601,7 +601,10 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 78, 79); // Abundant Shrine
 
             // Shards -> Gems
-            delete saveData.quests.questList;
+            saveData.quests.questList = {
+                ...saveData.quests.questList,
+                gainGemsQuest: saveData.quests.questList.gainShardsQuest || 0,
+            };
 
             //Setting gems = shards
             saveData.gems = {
