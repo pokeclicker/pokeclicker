@@ -604,7 +604,6 @@ class Update implements Saveable {
             delete saveData.quests.questList;
 
             //Setting gems = shards
-            saveData.gems = saveData.shards || {};
             saveData.gems = {
                 ...saveData.gems,
                 gemWallet: saveData.shards.shardWallet || 0,
