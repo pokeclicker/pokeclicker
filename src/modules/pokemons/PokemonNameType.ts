@@ -937,7 +937,7 @@ export type PokemonNameType
     | 'Lycanroc (Dusk)'
     | 'Wishiwashi (Solo)'
     | 'Wishiwashi (School)'
-    | 'Totem Wishiwashi (School)'
+    | 'Totem Wishiwashi'
     | 'Mareanie'
     | 'Toxapex'
     | 'Mudbray'

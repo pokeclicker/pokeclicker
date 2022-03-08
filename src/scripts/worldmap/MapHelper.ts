@@ -8,7 +8,7 @@ class MapHelper {
             return;
         }
         let genNewEnemy = false;
-        if (route != player.route()) {
+        if (route != Battle.route) {
             genNewEnemy = true;
         }
         if (this.accessToRoute(route, region)) {
@@ -155,6 +155,8 @@ class MapHelper {
         if (MapHelper.accessToTown(townName)) {
             App.game.gameState = GameConstants.GameState.idle;
             player.route(0);
+            Battle.route = 0;
+            Battle.catching(false);
             const town = TownList[townName];
             player.town(town);
             Battle.enemyPokemon(null);

@@ -19,12 +19,20 @@ class EvolutionStone extends CaughtIndicatingItem {
     }
 
     getCaughtStatus(): CaughtStatus {
+        // Only include Pokémon which have evolutions
         const unlockedEvolutions = pokemonList.filter((p: PokemonListData) => p.evolutions)
+            // only include base Pokémon we have caught
+            .filter(p => PartyController.getCaughtStatusByName(p.name))
+            // Map to the evolution which uses this stone type
             .map((p: PokemonListData) => p.evolutions.find(e => e.type.includes(EvolutionType.Stone) && (e as StoneEvolution).stone === this.type))
+            // Ensure the we actually found an evolution
             .filter(evolution => evolution)
+            // Filter out any Pokémon which can't be obtained yet (future region)
             .filter(evolution => PokemonHelper.calcNativeRegion(evolution.getEvolvedPokemon()) <= player.highestRegion())
+            // Finally get the evolution
             .map(evolution => evolution.getEvolvedPokemon());
 
+        // Calculate the lowest caught status
         return unlockedEvolutions.reduce((status: CaughtStatus, pokemonName: PokemonNameType) => {
             return Math.min(status, PartyController.getCaughtStatusByName(pokemonName));
         }, CaughtStatus.CaughtShiny);
