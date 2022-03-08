@@ -601,10 +601,14 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 78, 79); // Abundant Shrine
 
             // Shards -> Gems
-            saveData.quests.questList = {
-                ...saveData.quests.questList,
-                gainGemsQuest: saveData.quests.questList.gainShardsQuest || 0,
-            };
+
+            //Questlist update
+            saveData.quests.questList = saveData.quests.questList.map(q => {
+                if (q.name == 'GainShardsQuest') {
+                    q.name = 'GainGemsQuest';
+                }
+                return q;
+            });
 
             //Setting gems = shards
             saveData.gems = {
@@ -631,17 +635,8 @@ class Update implements Saveable {
                 gemsGained: saveData.statistics.shardsGained || 0,
             };
 
-            // Disable Gems Challenge, this is kind of a crappy solution but eh
-            if (saveData.gems.gemUpgrades.every((g: number) => !g)) {
-                Notifier.notify({
-                    title: 'Active Challenge Mode?',
-                    message: `Do you want to activate the No Gem challenge mode?
-                    (Synonymous with the former "No Shard" Challenge)
-
-                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableGems.activate();" data-dismiss="toast">Activate</button>`,
-                    timeout: GameConstants.HOUR,
-                });
-            }
+            // Challenge update
+            saveData.challenges.list.disableGems = saveData.challenges?.list?.disableShards ?? false;
         },
     };
 
