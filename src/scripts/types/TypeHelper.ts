@@ -55,11 +55,11 @@ class TypeHelper {
         let m3 = TypeHelper.typeMatrix[a2][d1];
         let m4 = TypeHelper.typeMatrix[a2][d2];
 
-        if (!App.game.challenges.list.disableShards.active()) {
-            m1 += (App.game.shards.getShardUpgrade(a1, this.valueToType(m1)) * Shards.SHARD_UPGRADE_STEP);
-            m2 += (App.game.shards.getShardUpgrade(a1, this.valueToType(m2)) * Shards.SHARD_UPGRADE_STEP);
-            m3 += (App.game.shards.getShardUpgrade(a2, this.valueToType(m3)) * Shards.SHARD_UPGRADE_STEP);
-            m4 += (App.game.shards.getShardUpgrade(a2, this.valueToType(m4)) * Shards.SHARD_UPGRADE_STEP);
+        if (!App.game.challenges.list.disableGems.active()) {
+            m1 += (App.game.gems.getGemUpgrade(a1, this.valueToType(m1)) * Gems.GEM_UPGRADE_STEP);
+            m2 += (App.game.gems.getGemUpgrade(a1, this.valueToType(m2)) * Gems.GEM_UPGRADE_STEP);
+            m3 += (App.game.gems.getGemUpgrade(a2, this.valueToType(m3)) * Gems.GEM_UPGRADE_STEP);
+            m4 += (App.game.gems.getGemUpgrade(a2, this.valueToType(m4)) * Gems.GEM_UPGRADE_STEP);
         }
 
         return Math.max(m1 * m2, m3 * m4);

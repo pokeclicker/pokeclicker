@@ -153,10 +153,10 @@ export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 export const DNA_ITEM_CHANCE = 60;
 
-// Shards from battle
-export const DUNGEON_SHARDS = 3;
-export const DUNGEON_BOSS_SHARDS = 20;
-export const GYM_SHARDS = 5;
+// Gems from battle
+export const DUNGEON_GEMS = 3;
+export const DUNGEON_BOSS_GEMS = 20;
+export const GYM_GEMS = 5;
 
 export const SAFARI_BATTLE_CHANCE = 5;
 
@@ -881,11 +881,11 @@ export function getGymRegion(gym: string): Region {
 
 export const KantoDungeons = [
     'Viridian Forest',
-    'Digletts Cave',
     'Mt. Moon',
+    'Digletts Cave',
     'Rock Tunnel',
-    'Power Plant',
     'Pokemon Tower',
+    'Power Plant',
     'Seafoam Islands',
     'Pokemon Mansion',
     'Victory Road',
@@ -914,13 +914,13 @@ export const HoennDungeons = [
     'Petalburg Woods',
     'Rusturf Tunnel',
     'Granite Cave',
-    'Jagged Pass',
     'Fiery Path',
-    'Mt. Chimney',
     'Meteor Falls',
+    'Mt. Chimney',
+    'Jagged Pass',
+    'New Mauville',
     'Weather Institute',
     'Mt. Pyre',
-    'New Mauville',
     'Magma Hideout',
     'Aqua Hideout',
     'Shoal Cave',
@@ -981,7 +981,6 @@ export const SinnohDungeons = [
 ];
 
 export const UnovaDungeons = [
-    'Pledge Grove',
     'Floccesy Ranch',
     'Liberty Garden',
     'Castelia Sewers',
@@ -996,12 +995,13 @@ export const UnovaDungeons = [
     'Seaside Cave',
     'Plasma Frigate',
     'Giant Chasm',
-    'Abundant Shrine',
     'Cave of Being', // Contains gen 4 trio only
+    'Abundant Shrine',
     'Victory Road Unova',
     'Twist Mountain',
     'Dragonspiral Tower',
     'Moor of Icirrus',
+    'Pledge Grove',
     'Pinwheel Forest',
     'Dreamyard',
     'P2 Laboratory',
@@ -1027,7 +1027,6 @@ export const KalosDungeons = [
 ];
 
 export const AlolaDungeons = [
-    'Exeggutor Island Hill',
     'Trainers\' School',
     'Hau\'oli Cemetery',
     'Verdant Cavern',
@@ -1047,6 +1046,7 @@ export const AlolaDungeons = [
     'Ula\'ula Meadow',
     'Po Town',
     'Aether Foundation',
+    'Exeggutor Island Hill',
     'Vast Poni Canyon',
     'Mount Lanakila',
     'Lake of the Sunne and Moone',
@@ -1096,7 +1096,7 @@ export const StartingTowns = [
     'Twinleaf Town', // Sinnoh
     'Aspertia City', // Unova
     'Vaniville Town', // Kalos
-    'Iki Town', // Alola
+    'Iki Town Outskirts', // Alola
     'Postwick', // Galar
 ];
 

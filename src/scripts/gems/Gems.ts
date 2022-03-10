@@ -1,30 +1,30 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 
-class Shards implements Feature {
-    name = 'Shards';
-    saveKey = 'shards';
+class Gems implements Feature {
+    name = 'Gems';
+    saveKey = 'gems';
 
     public static readonly nTypes: number =
         GameHelper.enumLength(PokemonType) - 1;
     public static readonly nEffects: number =
         GameHelper.enumLength(GameConstants.TypeEffectiveness);
     defaults = {
-        'shardWallet': Array<number>(Shards.nTypes).fill(0),
-        'shardUpgrades': Array<number>(Shards.nTypes * Shards.nEffects).fill(0),
-        'shardCollapsed': Array<boolean>(Shards.nTypes).fill(false),
+        'gemWallet': Array<number>(Gems.nTypes).fill(0),
+        'gemUpgrades': Array<number>(Gems.nTypes * Gems.nEffects).fill(0),
+        'gemCollapsed': Array<boolean>(Gems.nTypes).fill(false),
     };
 
-    public shardWallet: Array<KnockoutObservable<number>>;
-    public shardUpgrades: Array<KnockoutObservable<number>>;
-    public shardCollapsed: Array<boolean>;
+    public gemWallet: Array<KnockoutObservable<number>>;
+    public gemUpgrades: Array<KnockoutObservable<number>>;
+    public gemCollapsed: Array<boolean>;
 
     public validUpgrades = {};
 
     constructor() {
-        this.shardWallet = this.defaults.shardWallet.map((v) => ko.observable(v));
-        this.shardUpgrades = this.defaults.shardUpgrades.map((v) => ko.observable(v));
-        this.shardCollapsed = this.defaults.shardCollapsed;
+        this.gemWallet = this.defaults.gemWallet.map((v) => ko.observable(v));
+        this.gemUpgrades = this.defaults.gemUpgrades.map((v) => ko.observable(v));
+        this.gemCollapsed = this.defaults.gemCollapsed;
         GameHelper.enumNumbers(PokemonType).map(type => {
             this.validUpgrades[type] = {};
             this.validUpgrades[type][GameConstants.TypeEffectiveness.Immune] = !!TypeHelper.typeMatrix[type]?.includes(GameConstants.TypeEffectivenessValue.Immune);
@@ -34,7 +34,7 @@ class Shards implements Feature {
         });
     }
 
-    public gainShards(amt: number, typeNum: PokemonType) {
+    public gainGems(amt: number, typeNum: PokemonType) {
         if (!this.canAccess()) {
             return;
         }
@@ -43,19 +43,19 @@ class Shards implements Feature {
             return;
         }
 
-        GameHelper.incrementObservable(this.shardWallet[typeNum], amt);
+        GameHelper.incrementObservable(this.gemWallet[typeNum], amt);
 
         if (amt > 0) {
-            GameHelper.incrementObservable(App.game.statistics.totalShardsGained, amt);
-            GameHelper.incrementObservable(App.game.statistics.shardsGained[typeNum], amt);
+            GameHelper.incrementObservable(App.game.statistics.totalGemsGained, amt);
+            GameHelper.incrementObservable(App.game.statistics.gemsGained[typeNum], amt);
         }
     }
 
-    public getShardUpgradeCost(
+    public getGemUpgradeCost(
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
     ): number {
-        const cost = (this.getShardUpgrade(typeNum, effectNum) + 1) * Shards.SHARD_UPGRADE_COST;
+        const cost = (this.getGemUpgrade(typeNum, effectNum) + 1) * Gems.GEM_UPGRADE_COST;
         return cost;
     }
 
@@ -63,28 +63,28 @@ class Shards implements Feature {
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
     ): boolean {
-        return this.getShardUpgrade(typeNum, effectNum) >= Shards.MAX_SHARD_UPGRADES;
+        return this.getGemUpgrade(typeNum, effectNum) >= Gems.MAX_GEM_UPGRADES;
     }
 
-    public canBuyShardUpgrade(
+    public canBuyGemUpgrade(
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
     ): boolean {
-        if (App.game.challenges.list.disableShards.active()) {
+        if (App.game.challenges.list.disableGems.active()) {
             return false;
         }
         const lessThanMax = !this.hasMaxUpgrade(typeNum, effectNum);
-        const hasEnoughShards = this.shardWallet[typeNum]() >= this.getShardUpgradeCost(typeNum, effectNum);
-        return lessThanMax && hasEnoughShards;
+        const hasEnoughGems = this.gemWallet[typeNum]() >= this.getGemUpgradeCost(typeNum, effectNum);
+        return lessThanMax && hasEnoughGems;
     }
 
-    public buyShardUpgrade(
+    public buyGemUpgrade(
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
     ): void {
-        if (this.canBuyShardUpgrade(typeNum, effectNum)) {
-            this.gainShards(-this.getShardUpgradeCost(typeNum, effectNum), typeNum);
-            GameHelper.incrementObservable(this.shardUpgrades[typeNum * Shards.nEffects + effectNum]);
+        if (this.canBuyGemUpgrade(typeNum, effectNum)) {
+            this.gainGems(-this.getGemUpgradeCost(typeNum, effectNum), typeNum);
+            GameHelper.incrementObservable(this.gemUpgrades[typeNum * Gems.nEffects + effectNum]);
         }
     }
 
@@ -95,18 +95,18 @@ class Shards implements Feature {
         return !!this.validUpgrades[typeNum]?.[effectNum];
     }
 
-    public getShardUpgrade(
+    public getGemUpgrade(
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
     ): number {
-        return this.shardUpgrades[typeNum * Shards.nEffects + effectNum]();
+        return this.gemUpgrades[typeNum * Gems.nEffects + effectNum]();
     }
 
     initialize() {
     }
 
     canAccess(): boolean {
-        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Shard_case);
+        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Gem_case);
     }
 
     update(delta: number) {
@@ -114,44 +114,44 @@ class Shards implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-            'shardWallet': this.shardWallet.map(ko.unwrap),
-            'shardUpgrades': this.shardUpgrades.map(ko.unwrap),
-            'shardCollapsed': this.shardCollapsed,
+            'gemWallet': this.gemWallet.map(ko.unwrap),
+            'gemUpgrades': this.gemUpgrades.map(ko.unwrap),
+            'gemCollapsed': this.gemCollapsed,
         };
     }
 
     fromJSON(json: Record<string, any>) {
         if (json != null) {
-            json['shardWallet'].forEach((v, i) => {
-                this.shardWallet[i](v);
+            json['gemWallet'].forEach((v, i) => {
+                this.gemWallet[i](v);
             });
-            json['shardUpgrades'].forEach((v, i) => {
-                this.shardUpgrades[i](v);
+            json['gemUpgrades'].forEach((v, i) => {
+                this.gemUpgrades[i](v);
             });
-            json['shardCollapsed']?.forEach((v, i) => {
-                this.shardCollapsed[i] = v;
+            json['gemCollapsed']?.forEach((v, i) => {
+                this.gemCollapsed[i] = v;
             });
         }
     }
 
     public static image(type: number): string {
-        return `assets/images/shards/${PokemonType[type]} Shard.png`;
+        return `assets/images/gems/${PokemonType[type]} Gem.png`;
     }
 
-    public openShardModal() {
+    public openGemModal() {
         if (this.canAccess()) {
-            $('#shardModal').modal('show');
+            $('#gemModal').modal('show');
         } else {
             Notifier.notify({
-                message: 'You do not have the Shard Case',
+                message: 'You do not have the Gem Case',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
     }
 }
 
-namespace Shards {
-    export const SHARD_UPGRADE_COST = 500;
-    export const SHARD_UPGRADE_STEP = 0.1;
-    export const MAX_SHARD_UPGRADES = 10;
+namespace Gems {
+    export const GEM_UPGRADE_COST = 500;
+    export const GEM_UPGRADE_STEP = 0.1;
+    export const MAX_GEM_UPGRADES = 10;
 }

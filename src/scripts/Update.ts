@@ -583,6 +583,7 @@ class Update implements Saveable {
                 totalBerriesObtained: saveData.statistics.totalBerriesHarvested || 0,
                 pokeballsObtained: saveData.statistics.pokeballsBought || 0,
                 berriesObtained:  saveData.statistics.berriesHarvested || 0,
+
             };
         },
 
@@ -591,6 +592,51 @@ class Update implements Saveable {
             if (saveData.badgeCase[58]) {
                 saveData.quests.questLines.push({state: 1, name: 'Quest for the DNA Splicers', quest: 0});
             }
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 2, 1); // Digletts Cave
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 5, 4); // Power Plant
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 31, 28); // Jagged Pass
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 29, 30); // Mt. Chimney
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 32, 34); // New Mauville
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 84, 64); // Pledge Grove
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 78, 79); // Abundant Shrine
+
+            // Shards -> Gems
+
+            //Questlist update
+            saveData.quests.questList = saveData.quests.questList.map(q => {
+                if (q.name == 'GainShardsQuest') {
+                    q.name = 'GainGemsQuest';
+                }
+                return q;
+            });
+
+            //Setting gems = shards
+            saveData.gems = {
+                ...saveData.gems,
+                gemWallet: saveData.shards.shardWallet || 0,
+                gemCollapsed: saveData.shards.shardCollapsed || 0,
+                gemUpgrades: saveData.shards.shardUpgrades || 0,
+            };
+
+            delete saveData.keyItems['Shard_case'];
+
+            // Swapping Shard Case for Gem Case
+            if (saveData.badgeCase[8]) {
+                saveData.keyItems['Gem_case'] = true;
+            }
+
+            // Just incase statistics is not set
+            saveData.statistics = saveData.statistics || {};
+
+            // Rename from the old statistic name
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalGemsGained: saveData.statistics.totalShardsGained || 0,
+                gemsGained: saveData.statistics.shardsGained || 0,
+            };
+
+            // Challenge update
+            saveData.challenges.list.disableGems = saveData.challenges?.list?.disableShards ?? false;
         },
     };
 
