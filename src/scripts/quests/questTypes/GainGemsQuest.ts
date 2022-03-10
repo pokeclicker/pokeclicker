@@ -1,6 +1,6 @@
 /// <reference path="../Quest.ts" />
 
-class GainShardsQuest extends Quest implements QuestInterface {
+class GainGemsQuest extends Quest implements QuestInterface {
     public static maxWeight = 4;
     public static minWeight = 1.2;
     public static weights: Array<Record<string, number>> = [];
@@ -10,11 +10,11 @@ class GainShardsQuest extends Quest implements QuestInterface {
     constructor(amount: number, reward: number, type: PokemonType) {
         super(amount, reward);
         this.type = type;
-        this.focus = App.game.statistics.shardsGained[this.type];
+        this.focus = App.game.statistics.gemsGained[this.type];
     }
 
     public static canComplete() {
-        return App.game.shards.canAccess();
+        return App.game.gems.canAccess();
     }
 
     public static typeWeights(): Array<Record<string, number>> {
@@ -49,7 +49,7 @@ class GainShardsQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return `Gain ${this.amount.toLocaleString('en-US')} ${PokemonType[this.type]} shards.`;
+        return `Gain ${this.amount.toLocaleString('en-US')} ${PokemonType[this.type]} gems.`;
     }
 
     toJSON() {

@@ -31,7 +31,7 @@ class App {
                 new OakItemLoadouts(),
                 new PokemonCategories(),
                 new Party(multiplier),
-                new Shards(),
+                new Gems(),
                 new Underground(),
                 new Farming(multiplier),
                 new LogBook(),
