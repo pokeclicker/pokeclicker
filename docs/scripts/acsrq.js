@@ -28,7 +28,6 @@ window.addEventListener("load", function() {
 	setTimeout(function(){
 		main();
 
-
 		setInterval(function(){
 			main();
 		}, 500);
@@ -495,7 +494,7 @@ function a6menu(){
 		td1r06menu.id = "autoPlant";
 		var td2r06 = document.createElement('td');
 
-		/*var tr07 = document.createElement('tr');
+		var tr07 = document.createElement('tr');
     tr07.id = 'mutateBot';
 		tr07.style.display = "none";
     var td1r07 = document.createElement('td');
@@ -510,7 +509,7 @@ function a6menu(){
   		td1r07menu.appendChild(td1r07submenu);
   	}
   	td1r07menu.id = "autoMutate";
-  	var td2r07 = document.createElement('td');*/
+  	var td2r07 = document.createElement('td');
 
 		var tr2 = document.createElement('tr');
 		tr2.id = 'areaPhase';
@@ -585,8 +584,8 @@ function a6menu(){
     td2r05.appendChild(document.createTextNode('SR Bot'));
 		td1r06.appendChild(td1r06menu);
     td2r06.appendChild(document.createTextNode('Planter Bot'));
-		//td1r07.appendChild(td1r07menu);
-    //td2r07.appendChild(document.createTextNode('Mutate Bot'));
+		td1r07.appendChild(td1r07menu);
+    td2r07.appendChild(document.createTextNode('Mutate Bot'));
 		td1r2.appendChild(td1r2textbox);
 		td2r2.appendChild(document.createTextNode('Phase'));
 		td1r3.appendChild(document.createTextNode(''));
@@ -618,8 +617,8 @@ function a6menu(){
 		tr05.appendChild(td2r05);
 		tr06.appendChild(td1r06);
 		tr06.appendChild(td2r06);
-		//tr07.appendChild(td1r07);
-		//tr07.appendChild(td2r07);
+		tr07.appendChild(td1r07);
+		tr07.appendChild(td2r07);
 		tr2.appendChild(td1r2);
 		tr2.appendChild(td2r2);
 		tr3.appendChild(td1r3);
@@ -644,7 +643,7 @@ function a6menu(){
 		tbdy.appendChild(tr04);
 		tbdy.appendChild(tr05);
 		tbdy.appendChild(tr06);
-		//tbdy.appendChild(tr07);
+		tbdy.appendChild(tr07);
 		tbdy.appendChild(tr2);
 		tbdy.appendChild(tr3);
 		tbdy.appendChild(tr4);
@@ -660,7 +659,6 @@ function a6menu(){
 		var sFoot = document.createElement('div');
 		sFoot.id = 'shinyFooter';
     sFoot.className = 'card-footer p-0';
-    //sFoot.setAttribute('data-bind', "hidden: App.game.gameState === GameConstants.GameState.town");
 		sFoot.appendBefore( document.querySelector("#battleContainer > div.card-footer.p-0") );
 		sFoot.style.display = "none";
 
@@ -1050,20 +1048,20 @@ async function a6settings() {
 			//Farm Bots
 			if (App.game.farming.canAccess() == true) {
 				document.querySelector("#plantBot").removeAttribute("style");
-				//document.querySelector("#mutateBot").removeAttribute("style");
+				document.querySelector("#mutateBot").removeAttribute("style");
 				//Planter
 				var checkAutoFarmer1 = document.querySelector("#autoPlant");
 				if (checkAutoFarmer1.value != "N/A"){
 					plantBot();
 				}
 				//Mutator
-				/*var checkAutoFarmer2 = document.querySelector("#autoMutate");
+				var checkAutoFarmer2 = document.querySelector("#autoMutate");
 				if (checkAutoFarmer2.value != "N/A"){
 					mutateBot();
-				}*/
+				}
 			} else {
 				document.querySelector("#plantBot").style.display = "none";
-				//document.querySelector("#mutateBot").style.display = "none";
+				document.querySelector("#mutateBot").style.display = "none";
 			}
 		} else {
 			document.querySelector("#breedingBot").style.display = "none";
@@ -1076,8 +1074,8 @@ async function a6settings() {
 			document.querySelector("#safariCheck").checked = false;
 			document.querySelector("#plantBot").style.display = "none";
 			document.querySelector("#plantBot").value = "N/A";
-			//document.querySelector("#mutateBot").style.display = "none";
-			//document.querySelector("#mutateBot").value = "N/A";
+			document.querySelector("#mutateBot").style.display = "none";
+			document.querySelector("#mutateBot").value = "N/A";
 			document.querySelector("#breedingBot").style.display = "none";
 			document.querySelector("#srBot").style.display = "none";
 			document.querySelector("#srCheck").checked = false;
@@ -2914,55 +2912,18 @@ async function plantBot() {
 	}
 }
 
-function CalculateMulchNeeded(ArrayInPlot, ArrayInBerry) {
-	var mulchArray = []
-	for (i = 0; i < ArrayInPlot.length; i++) {
-		if (ArrayInBerry[i] == -1) {
-			mulchArray.push(0);
-		}
-		else{
-			var newGrowthTime = Math.ceil(App.game.farming.berryData[ArrayInBerry[i]].growthTime[3] * (2/3));
-			var mulchAmount = Math.ceil(newGrowthTime / 300) + 1;
-			mulchArray.push(mulchAmount);
-		}
-	}
-	return mulchArray;
-}
-
-function MulchPlots(ArrayInPlots) {
-	for (let plotIt = 0; plotIt < ArrayInPlots.length; plotIt++) {
-		if(App.game.farming.plotList[ArrayInPlots[plotIt]].mulchTimeLeft <= 3 && App.game.farming.plotList[ArrayInPlots[plotIt]].berry !== -1){
-			FarmController.selectedMulch(MulchType["Boost_Mulch"]);
-			FarmController.selectedShovel(false);
-			App.game.farming.plotList[ArrayInPlots[plotIt]].mulch;
-		}
-	}
-}
-
-function CheckIfEnoughMulch(ArrayInPlots, ArrayInBerry) {
-	if (Settings.getSetting('mutateMulch') == "boostM") {
-		if(CalculateMulchNeeded(ArrayInPlots, ArrayInBerry).reduce((a, b) => a + b, 0) >= App.game.farming.mulchList[0]()){
-			boost = (2/3);
-		} else {
-			boost = 1;
-		}
-	}
-}
-
 async function mutateBot() {
   var selectedBerry = document.querySelector("#autoMutate").value;
 
 	switch (selectedBerry) {
 		case "Persim":
 			if (App.game.farming.plotList[12].berry == -1) {
-				CheckIfEnoughMulch([12, 6], [6, 2]);
 				App.game.farming.plant(12,6);
 				setTimeout(() => {
 					App.game.farming.plant(6,2);
-				}, (240000 * boost));
+				}, 240000);
 			}
 			if (App.game.farming.plotList[12].berry == 6) {
-				MulchPlots([12, 6]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 8) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -2979,14 +2940,12 @@ async function mutateBot() {
 			break;
 		case "Razz":
 			if (App.game.farming.plotList[12].berry == -1) {
-				CheckIfEnoughMulch([12, 6], [5, 0]);
 				App.game.farming.plant(12,5);
 				setTimeout(() => {
 					App.game.farming.plant(6,0);
-				}, (210000 * boost));
+				}, 210000);
 			}
 			if (App.game.farming.plotList[12].berry == 5) {
-				MulchPlots([12, 6]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 9) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3001,14 +2960,12 @@ async function mutateBot() {
 			break;
 		case "Bluk":
 			if (App.game.farming.plotList[12].berry == -1) {
-				CheckIfEnoughMulch([12, 6], [5, 1]);
 				App.game.farming.plant(12,5);
 				setTimeout(() => {
 					App.game.farming.plant(6,1);
-				}, (200000 * boost));
+				}, 200000);
 			}
 			if (App.game.farming.plotList[12].berry == 5) {
-				MulchPlots([12, 6]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 10) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3023,14 +2980,12 @@ async function mutateBot() {
 			break;
 		case "Nanab":
 			if (App.game.farming.plotList[12].berry == -1) {
-				CheckIfEnoughMulch([12, 6], [4, 2]);
 				App.game.farming.plant(12,4);
 				setTimeout(() => {
 					App.game.farming.plant(6,2);
-				}, 60000 * boost);
+				}, 60000);
 			}
 			if (App.game.farming.plotList[12].berry == 4) {
-				MulchPlots([12, 6]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 11) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3045,14 +3000,12 @@ async function mutateBot() {
 			break;
 		case "Wepear":
 			if (App.game.farming.plotList[12].berry == -1) {
-				CheckIfEnoughMulch([12, 6], [6, 3]);
 				App.game.farming.plant(12,6);
 				setTimeout(() => {
 					App.game.farming.plant(6,3);
-				}, 220000 * boost);
+				}, 220000);
 			}
 			if (App.game.farming.plotList[12].berry == 6) {
-				MulchPlots([12, 6]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 12) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3067,14 +3020,12 @@ async function mutateBot() {
 			break;
 		case "Pinap":
 			if (App.game.farming.plotList[6].berry == -1) {
-				CheckIfEnoughMulch([6, 12], [7, 4]);
 				App.game.farming.plant(6,7);
 				setTimeout(() => {
 					App.game.farming.plant(12,4);
-				}, 480000 * boost);
+				}, 480000);
 			}
 			if (App.game.farming.plotList[6].berry == 7) {
-				MulchPlots([6, 12]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 13) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3089,13 +3040,11 @@ async function mutateBot() {
 			break;
 		case "Figy":
 			if (App.game.farming.plotList[12].berry == -1) {
-				CheckIfEnoughMulch([7, 11, 12], [0, 0, 0]);
 				App.game.farming.plant(7,0);
 				App.game.farming.plant(11,0);
 				App.game.farming.plant(12,0);
 			}
 			if (App.game.farming.plotList[12].berry == 0) {
-				MulchPlots([7, 11, 12]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 14) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3110,13 +3059,11 @@ async function mutateBot() {
 			break;
 		case "Wiki":
 			if (App.game.farming.plotList[12].berry == -1) {
-				CheckIfEnoughMulch([7, 11, 12], [1, 1, 1]);
 				App.game.farming.plant(7,1);
 				App.game.farming.plant(11,1);
 				App.game.farming.plant(12,1);
 			}
 			if (App.game.farming.plotList[12].berry == 1) {
-				MulchPlots([7, 11, 12]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 15) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3131,13 +3078,11 @@ async function mutateBot() {
 			break;
 		case "Mago":
 			if (App.game.farming.plotList[12].berry == -1) {
-				CheckIfEnoughMulch([7, 11, 12], [2, 2, 2]);
 				App.game.farming.plant(7,2);
 				App.game.farming.plant(11,2);
 				App.game.farming.plant(12,2);
 			}
 			if (App.game.farming.plotList[12].berry == 2) {
-				MulchPlots([7, 11, 12]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 16) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3152,13 +3097,11 @@ async function mutateBot() {
 			break;
 		case "Aguav":
 			if (App.game.farming.plotList[12].berry == -1) {
-				CheckIfEnoughMulch([7, 11, 12], [3, 3, 3]);
 				App.game.farming.plant(7,3);
 				App.game.farming.plant(11,3);
 				App.game.farming.plant(12,3);
 			}
 			if (App.game.farming.plotList[12].berry == 3) {
-				MulchPlots([7, 11, 12]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 17) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3173,13 +3116,11 @@ async function mutateBot() {
 			break;
 		case "Iapapa":
 			if (App.game.farming.plotList[12].berry == -1) {
-				CheckIfEnoughMulch([7, 11, 12], [4, 4, 4]);
 				App.game.farming.plant(7,4);
 				App.game.farming.plant(11,4);
 				App.game.farming.plant(12,4);
 			}
 			if (App.game.farming.plotList[12].berry == 4) {
-				MulchPlots([7, 11, 12]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 18) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3194,32 +3135,30 @@ async function mutateBot() {
 			break;
 		case "Lum":
 			if (App.game.farming.plotList[6].berry == -1) {
-				CheckIfEnoughMulch([6, 7, 11, 8, 16, 13, 17, 18], [7, 6, 5, 4, 3, 2, 1, 0]);
 				App.game.farming.plant(6,7);
 				setTimeout(() => {
 					App.game.farming.plant(7,6);
-				}, 300000 * boost);
+				}, 300000);
 				setTimeout(() => {
 					App.game.farming.plant(11,5);
-				}, 360000 * boost);
+				}, 360000);
 				setTimeout(() => {
 					App.game.farming.plant(8,4);
-				}, 480000 * boost);
+				}, 480000);
 				setTimeout(() => {
 					App.game.farming.plant(16,3);
-				}, 520000 * boost);
+				}, 520000);
 				setTimeout(() => {
 					App.game.farming.plant(13,2);
-				}, 540000 * boost);
+				}, 540000);
 				setTimeout(() => {
 					App.game.farming.plant(17,1);
-				}, 560000 * boost);
+				}, 560000);
 				setTimeout(() => {
 					App.game.farming.plant(18,0);
-				}, 570000 * boost);
+				}, 570000);
 			}
 			if (App.game.farming.plotList[6].berry == 7) {
-				MulchPlots([6, 7, 11, 8, 16, 13, 17, 18]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 19) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3235,14 +3174,12 @@ async function mutateBot() {
 		// 3x3 throigh Grepa, then 5x5
 		case "Pomeg":
 			if (App.game.farming.plotList[12].berry == -1) {
-				CheckIfEnoughMulch([12, 6], [18, 16]);
 				App.game.farming.plant(12,18);
 				setTimeout(() => {
 					App.game.farming.plant(6,16);
-				}, 10000 * boost);
+				}, 10000);
 			}
 			if (App.game.farming.plotList[12].berry == 18) {
-				MulchPlots([12, 6]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 20) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3257,14 +3194,12 @@ async function mutateBot() {
 			break;
 		case "Kelpsy":
 			if (App.game.farming.plotList[12].berry == -1) {
-				CheckIfEnoughMulch([12, 6], [8, 1]);
 				App.game.farming.plant(12,8);
 				setTimeout(() => {
 					App.game.farming.plant(6,1);
-				}, 50000 * boost);
+				}, 50000);
 			}
 			if (App.game.farming.plotList[12].berry == 8) {
-				MulchPlots([12, 6]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 21) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3279,14 +3214,12 @@ async function mutateBot() {
 			break;
 		case "Qualot":
 			if (App.game.farming.plotList[12].berry == -1) {
-				CheckIfEnoughMulch([12, 6], [16, 13]);
 				App.game.farming.plant(12,16);
 				setTimeout(() => {
 					App.game.farming.plant(6,13);
-				}, 130000 * boost);
+				}, 130000);
 			}
 			if (App.game.farming.plotList[12].berry == 16) {
-				MulchPlots([12, 6]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 22) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3301,15 +3234,13 @@ async function mutateBot() {
 			break;
 		case "Hondew":
 			if (App.game.farming.plotList[12].berry == -1) {
-				CheckIfEnoughMulch([12, 13, 8], [15, 17, 14]);
 				App.game.farming.plant(12,15);
 				setTimeout(() => {
 					App.game.farming.plant(13,17);
 					App.game.farming.plant(8,14);
-				}, 10000 * boost);
+				}, 10000);
 			}
 			if (App.game.farming.plotList[12].berry == 15) {
-				MulchPlots([12, 13, 8]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 23) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3324,12 +3255,10 @@ async function mutateBot() {
 			break;
 		case "Grepa":
 			if (App.game.farming.plotList[12].berry == -1) {
-				CheckIfEnoughMulch([12, 6], [17, 14]);
 				App.game.farming.plant(12,17);
 				App.game.farming.plant(6,14);
 			}
 			if (App.game.farming.plotList[12].berry == 17) {
-				MulchPlots([12, 6]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 24) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3344,17 +3273,15 @@ async function mutateBot() {
 			break;
 		case "Tamato":
 			if (App.game.farming.plotList[6].berry == -1) {
-				CheckIfEnoughMulch([6, 9, 21, 24, 0, 1, 2, 3, 4, 5, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17 ,18, 19, 20, 22, 23], [20, 20, 20, 20, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]);
 				App.game.farming.plant(6,20);
 				App.game.farming.plant(9,20);
 				App.game.farming.plant(21,20);
 				App.game.farming.plant(24,20);
 				setTimeout(function(){
           [0,1,2,3,4,5,7,8,10,11,12,13,14,15,16,17,18,19,20,22,23].forEach(item => App.game.farming.plant(item,9));
-				}, 5150000 * boost);
+				}, 5150000);
 			}
 			if (App.game.farming.plotList[6].berry == 20) {
-				MulchPlots([6, 9, 21, 24, 0, 1, 2, 3, 4, 5, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17 ,18, 19, 20, 22, 23]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 25) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3369,7 +3296,6 @@ async function mutateBot() {
 			break;
 		case "Cornn":
 			if (App.game.farming.plotList[6].berry == -1) {
-				CheckIfEnoughMulch([6, 9, 21, 24, 5, 8, 20, 23, 1, 4, 16, 19], [15, 15, 15, 15, 10, 10, 10, 10, 5, 5, 5, 5]);
 				App.game.farming.plant(6,15);
 				App.game.farming.plant(9,15);
 				App.game.farming.plant(21,15);
@@ -3379,16 +3305,15 @@ async function mutateBot() {
 					App.game.farming.plant(8,10);
 					App.game.farming.plant(20,10);
 					App.game.farming.plant(23,10);
-				}, 30000 * boost);
+				}, 30000);
 				setTimeout(function(){
 					App.game.farming.plant(1,5);
 					App.game.farming.plant(4,5);
 					App.game.farming.plant(16,5);
 					App.game.farming.plant(19,5);
-				}, 120000 * boost);
+				}, 120000);
 			}
 			if (App.game.farming.plotList[6].berry == 15) {
-				MulchPlots([6, 9, 21, 24, 5, 8, 20, 23, 1, 4, 16, 19]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 26) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3403,7 +3328,6 @@ async function mutateBot() {
 			break;
 		case "Magost":
 			if (App.game.farming.plotList[6].berry == -1) {
-				CheckIfEnoughMulch([6, 9, 21, 24, 5, 8, 20, 23, 1, 4, 16, 19], [16, 16, 16, 16, 11, 11, 11, 11, 2, 2, 2, 2]);
 				App.game.farming.plant(6,16);
 				App.game.farming.plant(9,16);
 				App.game.farming.plant(21,16);
@@ -3413,16 +3337,15 @@ async function mutateBot() {
 					App.game.farming.plant(8,11);
 					App.game.farming.plant(20,11);
 					App.game.farming.plant(23,11);
-				}, 120000 * boost);
+				}, 120000);
 				setTimeout(function(){
 					App.game.farming.plant(1,2);
 					App.game.farming.plant(4,2);
 					App.game.farming.plant(16,2);
 					App.game.farming.plant(19,2);
-				}, 310000 * boost);
+				}, 310000);
 			}
 			if (App.game.farming.plotList[6].berry == 16) {
-				MulchPlots([6, 9, 21, 24, 5, 8, 20, 23, 1, 4, 16, 19]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 27) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3437,17 +3360,15 @@ async function mutateBot() {
 			break;
 		case "Rabuta":
 			if (App.game.farming.plotList[6].berry == -1) {
-				CheckIfEnoughMulch([6, 9, 21, 24, 0, 1, 2, 3, 4, 5, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17 ,18, 19, 20, 22, 23], [17, 17, 17, 17, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]);
 				App.game.farming.plant(6,17);
 				App.game.farming.plant(9,17);
 				App.game.farming.plant(21,17);
 				App.game.farming.plant(24,17);
 				setTimeout(function(){
           [0,1,2,3,4,5,7,8,10,11,12,13,14,15,16,17,18,19,20,22,23].forEach(item => App.game.farming.plant(item,4));
-				}, 230000 * boost);
+				}, 230000);
 			}
 			if (App.game.farming.plotList[6].berry == 17) {
-				MulchPlots([6, 9, 21, 24, 0, 1, 2, 3, 4, 5, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17 ,18, 19, 20, 22, 23]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 28) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3462,14 +3383,12 @@ async function mutateBot() {
 			break;
 		case "Nomel":
 			if (App.game.farming.plotList[6].berry == -1) {
-				CheckIfEnoughMulch([6, 9, 21, 24], [13, 13, 13, 13]);
 				App.game.farming.plant(6,13);
 				App.game.farming.plant(9,13);
 				App.game.farming.plant(21,13);
 				App.game.farming.plant(24,13);
 			}
 			if (App.game.farming.plotList[6].berry == 13) {
-				MulchPlots([6, 9, 21, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 29) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3484,13 +3403,11 @@ async function mutateBot() {
 			break;
 		case "Spelon":
 			if (App.game.farming.plotList[6].berry == -1) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++){
 					App.game.farming.plant(berryIt,25);
 				}
 			}
 			if (App.game.farming.plotList[6].berry == 25) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 30) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3505,13 +3422,11 @@ async function mutateBot() {
 			break;
 		case "Pamtre":
 			if (App.game.farming.plotList[6].berry == -1) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++){
 					App.game.farming.plant(berryIt,26);
 				}
 			}
 			if (App.game.farming.plotList[6].berry == 26) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 31) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3526,13 +3441,11 @@ async function mutateBot() {
 			break;
 		case "Watmel":
 			if (App.game.farming.plotList[6].berry == -1) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++){
 					App.game.farming.plant(berryIt,27);
 				}
 			}
 			if (App.game.farming.plotList[6].berry == 27) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 32) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3547,13 +3460,11 @@ async function mutateBot() {
 			break;
 		case "Durin":
 			if (App.game.farming.plotList[6].berry == -1) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++){
 					App.game.farming.plant(berryIt,28);
 				}
 			}
 			if (App.game.farming.plotList[6].berry == 28) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 33) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3568,13 +3479,11 @@ async function mutateBot() {
 			break;
 		case "Belue":
 			if (App.game.farming.plotList[6].berry == -1) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++){
 					App.game.farming.plant(berryIt,29);
 				}
 			}
 			if (App.game.farming.plotList[6].berry == 29) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 34) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3589,7 +3498,6 @@ async function mutateBot() {
 			break;
 		case "Occa":
 			if (App.game.farming.plotList[5].berry == -1) {
-				CheckIfEnoughMulch([5, 9, 22, 0, 4, 17, 2, 15, 19, 7, 20, 24], [30, 30, 30, 25, 25 ,25, 14, 14, 14, 9, 9, 9]);
 				App.game.farming.plant(5,30);
 				App.game.farming.plant(9,30);
 				App.game.farming.plant(22,30);
@@ -3597,20 +3505,19 @@ async function mutateBot() {
 					App.game.farming.plant(0,25);
 					App.game.farming.plant(4,25);
 					App.game.farming.plant(17,25);
-				}, 6840000 * boost);
+				}, 6840000);
 				setTimeout(function(){
 					App.game.farming.plant(2,14);
 					App.game.farming.plant(15,14);
 					App.game.farming.plant(19,14);
-				}, 15130000 * boost);
+				}, 15130000);
 				setTimeout(function(){
 					App.game.farming.plant(7,9);
 					App.game.farming.plant(20,9);
 					App.game.farming.plant(24,9);
-				}, 15230000 * boost);
+				}, 15230000);
 			}
 			if (App.game.farming.plotList[5].berry == 30) {
-				MulchPlots([5, 9, 22, 0, 4, 17, 2, 15, 19, 7, 20, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 35) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3625,7 +3532,6 @@ async function mutateBot() {
 			break;
 		case "Passho":
 			if (App.game.farming.plotList[7].berry == -1) {
-				CheckIfEnoughMulch([7, 20, 24, 2, 15, 19, 0, 4, 17, 5, 9, 22], [43, 43, 43, 21, 21, 21, 6, 6, 6, 1, 1, 1]);
 				App.game.farming.plant(7,43);
 				App.game.farming.plant(20,43);
 				App.game.farming.plant(24,43);
@@ -3633,20 +3539,19 @@ async function mutateBot() {
 					App.game.farming.plant(2,21);
 					App.game.farming.plant(15,21);
 					App.game.farming.plant(19,21);
-				}, 13800000 * boost);
+				}, 13800000);
 				setTimeout(function(){
 					App.game.farming.plant(0,6);
 					App.game.farming.plant(4,6);
 					App.game.farming.plant(17,6);
-				}, 19500000 * boost);
+				}, 19500000);
 				setTimeout(function(){
 					App.game.farming.plant(5,1);
 					App.game.farming.plant(9,1);
 					App.game.farming.plant(22,1);
-				}, 19760000 * boost);
+				}, 19760000);
 			}
 			if (App.game.farming.plotList[7].berry == 30) {
-				MulchPlots([7, 20, 24, 2, 15, 19, 0, 4, 17, 5, 9, 22]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 36) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3661,7 +3566,6 @@ async function mutateBot() {
 			break;
 		case "Wacan":
 			if (App.game.farming.plotList[7].berry == -1) {
-				CheckIfEnoughMulch([7, 20, 24, 5, 9, 22, 0, 4, 17, 2, 15, 19], [24, 24, 24, 22, 22, 22, 18, 18 ,18 , 13, 13, 13]);
 				App.game.farming.plant(7,24);
 				App.game.farming.plant(20,24);
 				App.game.farming.plant(24,24);
@@ -3669,20 +3573,19 @@ async function mutateBot() {
 					App.game.farming.plant(5,22);
 					App.game.farming.plant(9,22);
 					App.game.farming.plant(22,22);
-				}, 2400000 * boost);
+				}, 2400000);
 				setTimeout(function(){
 					App.game.farming.plant(0,18);
 					App.game.farming.plant(4,18);
 					App.game.farming.plant(17,18);
-				}, 6820000 * boost);
+				}, 6820000);
 				setTimeout(function(){
 					App.game.farming.plant(2,13);
 					App.game.farming.plant(15,13);
 					App.game.farming.plant(19,13);
-				}, 6960000 * boost);
+				}, 6960000);
 			}
 			if (App.game.farming.plotList[7].berry == 24) {
-				MulchPlots([7, 20, 24, 5, 9, 22, 0, 4, 17, 2, 15, 19]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 37) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3697,7 +3600,6 @@ async function mutateBot() {
 			break;
 		case "Rindo":
 			if (App.game.farming.plotList[6].berry == -1) {
-				CheckIfEnoughMulch([6, 9, 21, 24, 0, 3, 15, 18], [17, 17, 17, 17, 14, 14, 14, 14]);
 				App.game.farming.plant(6,17);
 				App.game.farming.plant(9,17);
 				App.game.farming.plant(21,17);
@@ -3708,7 +3610,6 @@ async function mutateBot() {
 				App.game.farming.plant(18,14);
 			}
 			if (App.game.farming.plotList[6].berry == 17) {
-				MulchPlots([6, 9, 21, 24, 0, 3, 15, 18]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 38) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3723,7 +3624,6 @@ async function mutateBot() {
 			break;
 		case "Yache":
 			if (App.game.farming.plotList[0].berry == -1) {
-				CheckIfEnoughMulch([0, 2, 4, 10, 12, 14, 20, 22, 24], [36, 36, 36, 36, 36, 36, 36, 36, 36]);
 				App.game.farming.plant(0,36);
 				App.game.farming.plant(2,36);
 				App.game.farming.plant(4,36);
@@ -3735,7 +3635,6 @@ async function mutateBot() {
 				App.game.farming.plant(24,36);
 			}
 			if (App.game.farming.plotList[0].berry == 36) {
-				MulchPlots([0, 2, 4, 10, 12, 14, 20, 22, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 39) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3750,13 +3649,11 @@ async function mutateBot() {
 			break;
 		case "Chople":
 			if (App.game.farming.plotList[0].berry == -1 && OakItem["Blaze_Cassette"].isActive == true) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++){
 					App.game.farming.plant(berryIt,30);
 				}
 			}
 			if (App.game.farming.plotList[0].berry == 30) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 40) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3771,13 +3668,11 @@ async function mutateBot() {
 			break;
 		case "Kebia":
 			if (App.game.farming.plotList[0].berry == -1 && OakItem["Poison_Barb"].isActive == true) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++){
 					App.game.farming.plant(berryIt,31);
 				}
 			}
 			if (App.game.farming.plotList[0].berry == 31) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 41) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3792,13 +3687,11 @@ async function mutateBot() {
 			break;
 		case "Shuca":
 			if (App.game.farming.plotList[0].berry == -1 && OakItem["Sprinklotad"].isActive == true) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++){
 					App.game.farming.plant(berryIt,32);
 				}
 			}
 			if (App.game.farming.plotList[0].berry == 32) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 42) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3813,7 +3706,6 @@ async function mutateBot() {
 			break;
 		case "Coba":
 			if (App.game.farming.plotList[0].berry == -1) {
-				CheckIfEnoughMulch([0, 3, 15, 18, 6, 9, 21, 24], [15, 15, 15, 15, 17, 17, 17, 17]);
 				App.game.farming.plant(0,15);
 				App.game.farming.plant(3,15);
 				App.game.farming.plant(15,15);
@@ -3823,10 +3715,9 @@ async function mutateBot() {
 					App.game.farming.plant(9,17);
 					App.game.farming.plant(21,17);
 					App.game.farming.plant(24,17);
-				}, 10000 * boost);
+				}, 10000);
 			}
 			if (App.game.farming.plotList[0].berry == 15) {
-				MulchPlots([0, 3, 15, 18, 6, 9, 21, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 43) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3841,7 +3732,6 @@ async function mutateBot() {
 			break;
 		case "Payapa":
 			if (App.game.farming.plotList[7].berry == -1) {
-				CheckIfEnoughMulch([7, 20, 24, 2, 15, 19, 0, 4, 17, 5, 9, 22], [31, 31, 31, 26, 26, 26, 15, 15, 15, 10, 10, 10]);
 				App.game.farming.plant(7,31);
 				App.game.farming.plant(20,31);
 				App.game.farming.plant(24,31);
@@ -3849,20 +3739,19 @@ async function mutateBot() {
 					App.game.farming.plant(2,26);
 					App.game.farming.plant(15,26);
 					App.game.farming.plant(19,26);
-				}, 9000000 * boost);
+				}, 9000000);
 				setTimeout(function(){
 					App.game.farming.plant(0,15);
 					App.game.farming.plant(4,15);
 					App.game.farming.plant(17,15);
-				}, 17640000 * boost);
+				}, 17640000);
 				setTimeout(function(){
 					App.game.farming.plant(5,10);
 					App.game.farming.plant(9,10);
 					App.game.farming.plant(22,10);
-				}, 17670000 * boost);
+				}, 17670000);
 			}
 			if (App.game.farming.plotList[7].berry == 31) {
-				MulchPlots([7, 20, 24, 2, 15, 19, 0, 4, 17, 5, 9, 22]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 44) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3877,11 +3766,9 @@ async function mutateBot() {
 			break;
 		case "Tanga":
 			if (App.game.farming.plotList[0].berry == -1) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 19, 20, 21, 22, 23, 24], [38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38]);
 				[0,1,2,3,4,5,7,9,10,11,12,13,14,15,17,19,20,21,22,23,24].forEach(item => App.game.farming.plant(item,38));
 			}
 			if (App.game.farming.plotList[0].berry == 38) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 45) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3896,13 +3783,11 @@ async function mutateBot() {
 			break;
 		case "Charti":
 			if (App.game.farming.plotList[0].berry == -1 && OakItem["Cell_Battery"].isActive == true) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++){
 					App.game.farming.plant(berryIt,26);
 				}
 			}
 			if (App.game.farming.plotList[0].berry == 26) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 46) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3917,13 +3802,11 @@ async function mutateBot() {
 			break;
 		case "Kasib":
 			if (App.game.farming.plotList[0].berry == -1) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++){
 					App.game.farming.plant(berryIt,0);
 				}
 			}
 			if (App.game.farming.plotList[0].berry == 26) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 47) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3935,29 +3818,27 @@ async function mutateBot() {
 			break;
 		case "Haban":
 			if (App.game.farming.plotList[1].berry == -1) {
-				CheckIfEnoughMulch([1, 9, 15, 23, 12, 3, 5, 19, 21, 2, 10, 14, 22], [38, 38, 38, 38, 35, 36, 36, 36, 36, 37, 37, 37, 37]);
 				App.game.farming.plant(1,38);
 				App.game.farming.plant(9,38);
 				App.game.farming.plant(15,38);
 				App.game.farming.plant(23,38);
 				setTimeout(function(){
 					App.game.farming.plant(12,35);
-				}, 6840000 * boost);
+				}, 6840000);
 				setTimeout(function(){
 					App.game.farming.plant(3,36);
 					App.game.farming.plant(5,36);
 					App.game.farming.plant(19,36);
 					App.game.farming.plant(21,36);
-				}, 7200000 * boost);
+				}, 7200000);
 				setTimeout(function(){
 					App.game.farming.plant(2,37);
 					App.game.farming.plant(10,37);
 					App.game.farming.plant(14,37);
 					App.game.farming.plant(22,37);
-				}, 27000000 * boost);
+				}, 27000000);
 			}
 			if (App.game.farming.plotList[1].berry == 38) {
-				MulchPlots([1, 9, 15, 23, 12, 3, 5, 19, 21, 2, 10, 14, 22]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 48) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -3972,7 +3853,6 @@ async function mutateBot() {
 			break;
 		case "Colbur":
 			if (App.game.farming.plotList[6].berry == -1) {
-				CheckIfEnoughMulch([6, 9, 21, 24, 1, 4, 16, 19, 5, 8, 20, 23], [44, 44, 44, 44, 28, 28, 28, 28, 47, 47, 47, 47]);
 				App.game.farming.plant(6,44);
 				App.game.farming.plant(9,44);
 				App.game.farming.plant(21,44);
@@ -3982,16 +3862,15 @@ async function mutateBot() {
 					App.game.farming.plant(4,28);
 					App.game.farming.plant(16,28);
 					App.game.farming.plant(19,28);
-				}, 21960000 * boost);
+				}, 21960000);
 				setTimeout(function(){
 					App.game.farming.plant(5,47);
 					App.game.farming.plant(8,47);
 					App.game.farming.plant(20,47);
 					App.game.farming.plant(23,47);
-				}, 33900000 * boost);
+				}, 33900000);
 			}
 			if (App.game.farming.plotList[6].berry == 44) {
-				MulchPlots([6, 9, 21, 24, 1, 4, 16, 19, 5, 8, 20, 23]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 49) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -4006,14 +3885,12 @@ async function mutateBot() {
 			break;
 		case "Babiri":
 			if (App.game.farming.plotList[0].berry == -1) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 7, 17, 20, 21, 22, 23, 24, 5, 9, 10, 11, 12, 13, 14, 15, 19], [42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 47, 47, 47, 47, 47, 47, 47, 47, 47]);
 				[0,1,2,3,4,7,17,20,21,22,23,24].forEach(item => App.game.farming.plant(item,42));
 				setTimeout(function(){
 					[5,9,10,11,12,13,14,15,19].forEach(item => App.game.farming.plant(item,47));
-				}, 1800000 * boost);
+				}, 1800000);
 			}
 			if (App.game.farming.plotList[0].berry == 42) {
-				MulchPlots([0, 1, 2, 3, 4, 7, 17, 20, 21, 22, 23, 24, 5, 9, 10, 11, 12, 13, 14, 15, 19]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 50) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -4028,13 +3905,11 @@ async function mutateBot() {
 			break;
 		case "Chilan":
 			if (App.game.farming.plotList[0].berry == -1) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++){
 					App.game.farming.plant(berryIt,40);
 				}
 			}
 			if (App.game.farming.plotList[0].berry == 40) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 51) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -4049,7 +3924,6 @@ async function mutateBot() {
 			break;
 		case "Roseli":
 			if (App.game.farming.plotList[7].berry == -1) {
-				CheckIfEnoughMulch([7, 20, 24, 2, 15, 19, 0, 4, 17, 5, 9, 22], [32, 32, 32, 27, 27, 27, 16, 16, 16, 11, 11, 11]);
 				App.game.farming.plant(7,32);
 				App.game.farming.plant(20,32);
 				App.game.farming.plant(24,32);
@@ -4057,20 +3931,19 @@ async function mutateBot() {
 					App.game.farming.plant(2,27);
 					App.game.farming.plant(15,27);
 					App.game.farming.plant(19,27);
-				}, 2160000 * boost);
+				}, 2160000);
 				setTimeout(function(){
 					App.game.farming.plant(0,16);
 					App.game.farming.plant(4,16);
 					App.game.farming.plant(17,16);
-				}, 16190000 * boost);
+				}, 16190000);
 				setTimeout(function(){
 					App.game.farming.plant(5,11);
 					App.game.farming.plant(9,11);
 					App.game.farming.plant(22,11);
-				}, 16310000 * boost);
+				}, 16310000);
 			}
 			if (App.game.farming.plotList[7].berry == 32) {
-				MulchPlots([7, 20, 24, 2, 15, 19, 0, 4, 17, 5, 9, 22]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 52) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -4085,11 +3958,9 @@ async function mutateBot() {
 			break;
 		case "Micle":
 			if (App.game.farming.plotList[0].berry == -1) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 13, 14, 15, 17, 19, 20, 21, 22, 23, 24], [31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31]);
 				[0,1,2,3,4,5,7,9,10,11,13,14,15,17,19,20,21,22,23,24].forEach(item => App.game.farming.plant(item,31));
 			}
 			if (App.game.farming.plotList[0].berry == 31) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 13, 14, 15, 17, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 53) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -4104,11 +3975,9 @@ async function mutateBot() {
 			break;
 		case "Custap":
 			if (App.game.farming.plotList[0].berry == -1) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 13, 14, 15, 17, 19, 20, 21, 22, 23, 24], [32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32]);
 				[0,1,2,3,4,5,7,9,10,11,13,14,15,17,19,20,21,22,23,24].forEach(item => App.game.farming.plant(item,32));
 			}
 			if (App.game.farming.plotList[0].berry == 32) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 54) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -4123,11 +3992,9 @@ async function mutateBot() {
 			break;
 		case "Jaboca":
 			if (App.game.farming.plotList[0].berry == -1) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 13, 14, 15, 17, 19, 20, 21, 22, 23, 24], [33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33]);
 				[0,1,2,3,4,5,7,9,10,11,13,14,15,17,19,20,21,22,23,24].forEach(item => App.game.farming.plant(item,33));
 			}
 			if (App.game.farming.plotList[0].berry == 33) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 13, 14, 15, 17, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 55) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -4142,11 +4009,9 @@ async function mutateBot() {
 			break;
 		case "Rowap":
 			if (App.game.farming.plotList[0].berry == -1) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 13, 14, 15, 17, 19, 20, 21, 22, 23, 24], [34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34]);
 				[0,1,2,3,4,5,7,9,10,11,13,14,15,17,19,20,21,22,23,24].forEach(item => App.game.farming.plant(item,34));
 			}
 			if (App.game.farming.plotList[0].berry == 34) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 13, 14, 15, 17, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 56) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -4161,12 +4026,10 @@ async function mutateBot() {
 			break;
 		case "Kee":
 			if (App.game.farming.plotList[0].berry == -1) {
-				CheckIfEnoughMulch([0, 3, 15, 18, 6, 9, 21, 24], [59, 59, 59 ,59, 60, 60, 60, 60]);
 				[0,3,15,18].forEach(item => App.game.farming.plant(item,59));
 				[6,9,21,24].forEach(item => App.game.farming.plant(item,60));
 			}
 			if (App.game.farming.plotList[0].berry == 59) {
-				MulchPlots([0, 3, 15, 18, 6, 9, 21, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 57) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -4181,7 +4044,6 @@ async function mutateBot() {
 			break;
 		case "Maranga":
 			if (App.game.farming.plotList[0].berry == -1) {
-				CheckIfEnoughMulch([0, 3, 15, 18, 6, 9, 21, 24], [61, 61, 61, 61, 62, 62, 62, 62]);
 				App.game.farming.plant(0,61);
 				App.game.farming.plant(3,61);
 				App.game.farming.plant(15,61);
@@ -4191,10 +4053,9 @@ async function mutateBot() {
 					App.game.farming.plant(9,62);
 					App.game.farming.plant(21,62);
 					App.game.farming.plant(24,62);
-				}, 86400000 * boost);
+				}, 86400000);
 			}
 			if (App.game.farming.plotList[0].berry == 61) {
-				MulchPlots([0, 3, 15, 18, 6, 9, 21, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 58) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -4209,11 +4070,9 @@ async function mutateBot() {
 			break;
 		case "Liechi":
 			if (App.game.farming.plotList[0].berry == -1 && App.game.party.alreadyCaughtPokemonByName("Kyogre") == true) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36]);
 				[0,1,2,3,4,5,7,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24].forEach(item => App.game.farming.plant(item,36));
 			}
 			if (App.game.farming.plotList[0].berry == 36) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 59) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -4228,11 +4087,9 @@ async function mutateBot() {
 			break;
 		case "Ganlon":
 			if (App.game.farming.plotList[0].berry == -1 && App.game.party.alreadyCaughtPokemonByName("Groudon") == true) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42]);
 				[0,1,2,3,4,5,7,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24].forEach(item => App.game.farming.plant(item,42));
 			}
 			if (App.game.farming.plotList[0].berry == 42) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 60) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -4247,11 +4104,9 @@ async function mutateBot() {
 			break;
 		case "Salac":
 			if (App.game.farming.plotList[0].berry == -1 && App.game.party.alreadyCaughtPokemonByName("Rayquaza") == true) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43]);
 				[0,1,2,3,4,5,7,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24].forEach(item => App.game.farming.plant(item,43));
 			}
 			if (App.game.farming.plotList[0].berry == 43) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 61) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -4266,62 +4121,60 @@ async function mutateBot() {
 			break;
 		case "Petaya":
 			if (App.game.farming.plotList[24].berry == -1) {
-				CheckIfEnoughMulch([24, 16, 14, 15, 10, 21, 12, 22, 4, 13, 17, 0, 11, 23, 18, 19, 2, 20], [48, 50, 39, 42, 46, 40, 44, 38, 49, 36, 52, 35, 43, 51, 45, 37, 41, 47]);
 				App.game.farming.plant(24,48);
 				setTimeout(function(){
 					App.game.farming.plant(16,50);
-				}, 21600000 * boost);
+				}, 21600000);
 				setTimeout(function(){
 					App.game.farming.plant(14,39);
-				}, 43200000 * boost);
+				}, 43200000);
 				setTimeout(function(){
 					App.game.farming.plant(15,42);
-				}, 46800000 * boost);
+				}, 46800000);
 				setTimeout(function(){
 					App.game.farming.plant(10,46);
-				}, 48600000 * boost);
+				}, 48600000);
 				setTimeout(function(){
 					App.game.farming.plant(21,40);
-				}, 50400000 * boost);
+				}, 50400000);
 				setTimeout(function(){
 					App.game.farming.plant(12,44);
-				}, 52200000 * boost);
+				}, 52200000);
 				setTimeout(function(){
 					App.game.farming.plant(22,38);
-				}, 57600000 * boost);
+				}, 57600000);
 				setTimeout(function(){
 					App.game.farming.plant(4,49);
-				}, 59400000 * boost);
+				}, 59400000);
         setTimeout(function(){
 					App.game.farming.plant(13,36);
-				}, 61200000 * boost);
+				}, 61200000);
 				setTimeout(function(){
 					App.game.farming.plant(17,52);
-				}, 61200000 * boost);
+				}, 61200000);
 				setTimeout(function(){
 					App.game.farming.plant(0,35);
-				}, 64440000 * boost);
+				}, 64440000);
 				setTimeout(function(){
 					App.game.farming.plant(11,43);
-				}, 66600000 * boost);
+				}, 66600000);
 				setTimeout(function(){
 					App.game.farming.plant(23,51);
-				}, 77400000 * boost);
+				}, 77400000);
 				setTimeout(function(){
 					App.game.farming.plant(18,45);
-				}, 79800000 * boost);
+				}, 79800000);
 				setTimeout(function(){
 					App.game.farming.plant(19,37);
-				}, 82620000 * boost);
+				}, 82620000);
 				setTimeout(function(){
 					App.game.farming.plant(2,41);
-				}, 85800000 * boost);
+				}, 85800000);
 				setTimeout(function(){
 					App.game.farming.plant(20,47);
-				}, 86100000 * boost);
+				}, 86100000);
 			}
 			if (App.game.farming.plotList[24].berry == 48) {
-				MulchPlots([24, 16, 14, 15, 10, 21, 12, 22, 4, 13, 17, 0, 11, 23, 18, 19, 2, 20]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 62) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -4336,11 +4189,9 @@ async function mutateBot() {
 			break;
 		case "Apicot":
 			if (App.game.farming.plotList[0].berry == -1 && App.game.party.alreadyCaughtPokemonByName("Palkia") == true) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51]);
 				[0,1,2,3,4,5,7,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24].forEach(item => App.game.farming.plant(item,51));
 			}
 			if (App.game.farming.plotList[0].berry == 51) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 63) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
@@ -4355,11 +4206,9 @@ async function mutateBot() {
 			break;
 		case "Lansat":
 			if (App.game.farming.plotList[0].berry == -1 && App.game.party.alreadyCaughtPokemonByName("Dialga") == true) {
-				CheckIfEnoughMulch([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52]);
 				[0,1,2,3,4,5,7,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24].forEach(item => App.game.farming.plant(item,52));
 			}
 			if (App.game.farming.plotList[0].berry == 52) {
-				MulchPlots([0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 				for (let berryIt = 0; berryIt < App.game.farming.plotList.length; berryIt++) {
 					if (App.game.farming.plotList[berryIt].berry == 64) {
 						if (App.game.farming.plotList[berryIt].age > (App.game.farming.berryData[App.game.farming.plotList[berryIt].berry].growthTime[3])) {
