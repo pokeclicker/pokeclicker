@@ -42,6 +42,17 @@
   }
 }
 
+.minty {
+    // text color in buttons are white, but expected to be black
+    .btn, .btn:hover {
+        color: #495057;
+    }
+    // text color in primary buttons gets overridden by the lines above
+    .btn-primary, .btn-primary:hover {
+        color: #fff;
+    }
+}
+
 .sketchy {
   // Fix double close button
   #toaster .toast-body, .text-light {
