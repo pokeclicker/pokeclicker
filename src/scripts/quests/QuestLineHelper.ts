@@ -352,6 +352,10 @@ class QuestLineHelper {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
 
+    public static areDailyQuestsUnlocked() {
+        return this.isQuestLineCompleted('Tutorial Quests');
+    }
+
     public static loadQuestLines() {
         this.createTutorial();
         this.createDeoxysQuestLine();
