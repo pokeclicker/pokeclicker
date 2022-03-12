@@ -246,11 +246,11 @@ class Game {
                 //Refresh the Underground deals
                 DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
                 BerryDeal.generateDeals(now);
-                if (this.underground.canAccess() || QuestLineHelper.areDailyQuestsUnlocked()) {
+                if (this.underground.canAccess() || App.game.quests.isDailyQuestsUnlocked()) {
                     Notifier.notify({
                         title: 'It\'s a new day!',
                         message: `${this.underground.canAccess() ? 'Your Underground deals have been updated.<br/>' : ''}` +
-                        `${QuestLineHelper.areDailyQuestsUnlocked() ? '<i>You have a free quest refresh.</i>' : ''}`,
+                        `${App.game.quests.isDailyQuestsUnlocked() ? '<i>You have a free quest refresh.</i>' : ''}`,
                         type: NotificationConstants.NotificationOption.info,
                         timeout: 3e4,
                     });
