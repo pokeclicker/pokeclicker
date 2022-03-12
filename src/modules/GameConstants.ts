@@ -155,10 +155,10 @@ export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 export const DNA_ITEM_CHANCE = 60;
 
-// Shards from battle
-export const DUNGEON_SHARDS = 3;
-export const DUNGEON_BOSS_SHARDS = 20;
-export const GYM_SHARDS = 5;
+// Gems from battle
+export const DUNGEON_GEMS = 3;
+export const DUNGEON_BOSS_GEMS = 20;
+export const GYM_GEMS = 5;
 
 export const SAFARI_BATTLE_CHANCE = 5;
 

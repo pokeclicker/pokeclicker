@@ -66,15 +66,15 @@ class QuestLineHelper {
         deoxysQuestLine.addQuest(route129);
 
         // Defeat 500 Psychic type Pokemon
-        const psychicShardReward = () => {
-            App.game.shards.gainShards(500, PokemonType.Psychic);
+        const psychicGemReward = () => {
+            App.game.gems.gainGems(500, PokemonType.Psychic);
             Notifier.notify({
                 title: deoxysQuestLine.name,
-                message: 'You have gained 500 Psychic shards',
+                message: 'You have gained 500 Psychic gems',
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const defeatPsychic = new CustomQuest(500, psychicShardReward, 'Defeat 500 Psychic type Pokémon', () => {
+        const defeatPsychic = new CustomQuest(500, psychicGemReward, 'Defeat 500 Psychic type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Psychic)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
         });
         deoxysQuestLine.addQuest(defeatPsychic);

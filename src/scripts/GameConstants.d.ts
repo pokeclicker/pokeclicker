@@ -110,9 +110,9 @@ namespace GameConstants {
     declare const DUNGEON_BOSS_HELD_ITEM_MODIFIER: number;
     declare const HELD_ITEM_CHANCE: number;
     declare const HELD_UNDERGROUND_ITEM_CHANCE: number;
-    declare const DUNGEON_SHARDS: number;
-    declare const DUNGEON_BOSS_SHARDS: number;
-    declare const GYM_SHARDS: number;
+    declare const DUNGEON_GEMS: number;
+    declare const DUNGEON_BOSS_GEMS: number;
+    declare const GYM_GEMS: number;
     declare const SAFARI_BATTLE_CHANCE: number;
     declare const SAFARI_BASE_POKEBALL_COUNT: number;
     declare const LEGAL_WALK_BLOCKS: number[];

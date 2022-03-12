@@ -194,7 +194,7 @@ gymList['Viridian City'] = new Gym(
         new GymBadgeRequirement(BadgeEnums.Thunder),
     ],
     () => {
-        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Shard_case, true);
+        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Gem_case, true);
     }
 );
 
