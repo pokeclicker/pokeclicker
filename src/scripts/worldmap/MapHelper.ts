@@ -83,8 +83,12 @@ class MapHelper {
             cls = 'unlockedUnfinished';
         } else if (!RouteHelper.routeCompleted(route, region, false)) {
             cls = 'uncaughtPokemon';
+        } else if (!RouteHelper.routeCompleted(route, region, true) && !RouteHelper.isAchievementsComplete(route, region)) {
+            cls = 'uncaughtShinyPokemonAndMissingAchievement';
         } else if (!RouteHelper.routeCompleted(route, region, true)) {
             cls = 'uncaughtShinyPokemon';
+        } else if (!RouteHelper.isAchievementsComplete(route, region)) {
+            cls = 'missingAchievement';
         } else {
             cls = 'completed';
         }
