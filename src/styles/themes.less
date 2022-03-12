@@ -43,13 +43,9 @@
 }
 
 .minty {
-    // text color in buttons are white, but expected to be black
-    .btn, .btn:hover {
+    // Button without color class text is light, but expected to be dark
+    .btn:not([class*="btn-"]) {
         color: #495057;
-    }
-    // text color in primary buttons gets overridden by the lines above
-    .btn-primary, .btn-primary:hover {
-        color: #fff;
     }
 }
 
