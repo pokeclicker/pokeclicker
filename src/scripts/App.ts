@@ -56,6 +56,9 @@ class App {
             PokedexHelper.updateList();
 
             App.game.initialize();
+
+            // Fixes custom theme css if Default theme was different from save theme (must be done before bindings)
+            document.body.className = 'no-select';
             ko.applyBindings(App.game);
 
             GameController.applyRouteBindings();
