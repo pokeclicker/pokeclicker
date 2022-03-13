@@ -235,4 +235,8 @@ class DungeonRunner {
     public static hasEnoughTokens() {
         return App.game.wallet.hasAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
     }
+
+    public static dungeonLevel(): number {
+        return PokemonFactory.routeLevel(this.dungeon.difficultyRoute, player.region);
+    }
 }
