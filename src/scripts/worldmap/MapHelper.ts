@@ -123,8 +123,12 @@ class MapHelper {
         }
         if (gymList[townName]) {
             const gym = gymList[townName];
-            if (Gym.isUnlocked(gym) && !App.game.badgeCase.hasBadge(gym.badgeReward)) {
-                return 'unlockedUnfinished';
+            if (Gym.isUnlocked(gym)) {
+                if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
+                    return 'unlockedUnfinished';
+                } else if (!Gym.isAchievementsComplete(gym)) {
+                    return 'missingAchievement';
+                }
             }
         }
         const town = TownList[townName];
