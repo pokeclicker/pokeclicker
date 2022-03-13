@@ -113,8 +113,12 @@ class MapHelper {
                 return 'unlockedUnfinished';
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], false)) {
                 return 'uncaughtPokemon';
+            } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], true) && !DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
+                return 'uncaughtShinyPokemonAndMissingAchievement';
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], true)) {
                 return 'uncaughtShinyPokemon';
+            } else if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
+                return 'missingAchievement';
             }
         }
         if (gymList[townName]) {
