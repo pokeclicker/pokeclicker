@@ -235,6 +235,10 @@ class Quests implements Saveable {
         return 100 * (this.xp() - requiredForCurrent) / (requiredForNext - requiredForCurrent);
     }
 
+    public isDailyQuestsUnlocked() {
+        return QuestLineHelper.isQuestLineCompleted('Tutorial Quests');
+    }
+
     loadQuestList(questList) {
         // Sanity Check
         this.questList.removeAll();
