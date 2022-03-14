@@ -46,7 +46,10 @@ class Pokeballs implements Feature {
                     return Math.min(15, Math.max(0, Math.pow(16, Math.pow(kills, 0.6) / 250) - 1));
                 }
                 if (App.game.gameState == GameConstants.GameState.dungeon) {
-                    return Math.min(15,100 / DungeonRunner.timeLeftPercentage());
+                    const maxBonus = 15;
+                    const timeLeftPercent = DungeonRunner.timeLeftPercentage();
+                    const timeLeftPercentWhenMax = 15;
+                    return (timeLeftPercentWhenMax < timeLeftPercent) ? (200 / timeLeftPercent - 2) : maxBonus;
                 }
                 return 0;
             }, 1000, 'Increased catch rate on routes with more Pokémon defeated', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
@@ -86,7 +89,7 @@ class Pokeballs implements Feature {
                 const currentRoute = MapHelper.normalizeRoute(player.route(),player.region);
 
                 // Increased rate for earlier routes, scales with regional progression
-                return Math.min(15,Math.max(1,player.highestRegion()) * maxRoute / currentRoute);
+                return Math.min(15,Math.max(1,player.highestRegion()) * Math.max(1,(maxRoute / currentRoute)));
             }, 1250, 'Increased catch rate on earlier routes', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Repeatball, () => {

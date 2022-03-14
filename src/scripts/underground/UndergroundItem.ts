@@ -42,7 +42,7 @@ class UndergroundItem {
 
     public static getFullResourceName(valuetype: string, amt: number): string {
         if (valuetype != 'Diamond' && amt >= 50) {
-            valuetype += ' shard';
+            valuetype += ' gem';
         }
         if (amt > 1) {
             valuetype += 's';
@@ -98,7 +98,7 @@ UndergroundItem.addItem('Heat Rock',    13, [[1,0,1,0], [1,1,1,1], [1,1,1,1]], 2
 UndergroundItem.addItem('Icy Rock',     14, [[0,1,1,0], [1,1,1,1], [1,1,1,1], [1,0,0,1]], 2);
 UndergroundItem.addItem('Damp Rock',    15, [[1,1,1], [1,1,1], [1,0,1]], 2);
 
-// Shard Plates
+// Gem Plates
 UndergroundItem.addItem('Draco Plate',  100, [[1,1,1,1], [1,1,1,1], [1,1,1,1]], 100, 'dragon');
 UndergroundItem.addItem('Dread Plate',  101, [[1,1,1,1], [1,1,1,1], [1,1,1,1]], 100, 'dark');
 UndergroundItem.addItem('Earth Plate',  102, [[1,1,1,1], [1,1,1,1], [1,1,1,1]], 100, 'ground');

@@ -329,7 +329,7 @@ class Underground implements Feature {
             default:
                 const type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string
                 const typeNum = PokemonType[type];
-                App.game.shards.gainShards(GameConstants.PLATE_VALUE * amount, typeNum);
+                App.game.gems.gainGems(GameConstants.PLATE_VALUE * amount, typeNum);
         }
         return success;
     }

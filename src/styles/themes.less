@@ -42,6 +42,13 @@
   }
 }
 
+.minty {
+    // Button without color class text is light, but expected to be dark
+    .btn:not([class*="btn-"]) {
+        color: #495057;
+    }
+}
+
 .sketchy {
   // Fix double close button
   #toaster .toast-body, .text-light {
