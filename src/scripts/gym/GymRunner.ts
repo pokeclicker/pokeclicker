@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
             KeyItemController.showGainModal(KeyItems.KeyItem.Safari_ticket);
         }
         if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
-            KeyItemController.showGainModal(KeyItems.KeyItem.Shard_case);
+            KeyItemController.showGainModal(KeyItems.KeyItem.Gem_case);
         }
     });
 });

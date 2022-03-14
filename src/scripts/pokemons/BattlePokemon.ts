@@ -32,7 +32,7 @@ class BattlePokemon implements EnemyPokemonInterface {
         public exp: number,
         public reward: Amount = new Amount(0, GameConstants.Currency.money),
         public shiny: boolean,
-        public shardReward = 1,
+        public gemReward = 1,
         public heldItem?: BagItem
     ) {
         this.health = ko.observable(maxHealth);
@@ -77,9 +77,7 @@ class BattlePokemon implements EnemyPokemonInterface {
             App.game.logbook.newLog(LogBookTypes.FOUND, `An enemy ${msg}`);
         }
         App.game.party.gainExp(this.exp, this.level, trainer);
-        App.game.shards.gainShards(this.shardReward, this.type1);
-        App.game.shards.gainShards(this.shardReward, this.type2);
+        App.game.gems.gainGems(this.gemReward, this.type1);
+        App.game.gems.gainGems(this.gemReward, this.type2);
     }
 }
-
-
