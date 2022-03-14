@@ -58,4 +58,8 @@ type UndergroundItemNameType
     | 'Thunder Stone'
     | 'Leaf Stone'
     | 'Moon Stone'
-    | 'Sun Stone';
+    | 'Sun Stone'
+    | 'Red Shard'
+    | 'Yellow Shard'
+    | 'Green Shard'
+    | 'Blue Shard';

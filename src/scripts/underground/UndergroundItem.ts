@@ -137,3 +137,9 @@ UndergroundItem.addItem('Thunder Stone', 302, [[0,1,1], [1,1,1], [1,1,0]], 1, 'T
 UndergroundItem.addItem('Leaf Stone',    303, [[0,1,0], [1,1,1], [1,1,1], [0,1,0]], 1, 'Leaf_stone');
 UndergroundItem.addItem('Moon Stone',    304, [[0,1,1,1], [1,1,1,0]], 1, 'Moon_stone');
 UndergroundItem.addItem('Sun Stone',     305, [[0,1,0], [1,1,1], [1,1,1]], 1, 'Sun_stone', new MaxRegionRequirement(GameConstants.Region.johto));
+
+// Shards
+UndergroundItem.addItem('Red Shard', 400, [[1,1,1], [1,1,0], [1,1,1]], 1);
+UndergroundItem.addItem('Yellow Shard', 401, [[1,0,1,0], [1,1,1,0], [1,1,1,1]], 1);
+UndergroundItem.addItem('Green Shard', 402, [[1,1,1,1], [1,1,1,1], [1,1,0,1]], 1);
+UndergroundItem.addItem('Blue Shard', 403, [[1,1,1], [1,1,1], [1,1,0]], 1);
