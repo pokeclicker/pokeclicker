@@ -44,14 +44,10 @@ class Gym {
     }
 
     public static isAchievementsComplete(gym: Gym) {
-        let result = true;
-        AchievementHandler.achievementList.forEach(achievement => {
-            if (achievement.property instanceof ClearGymRequirement && achievement.property.gymIndex === GameConstants.getGymIndex(gym.town) && !achievement.isCompleted()) {
-                result = false;
-                return true;
-            }
+        const gymIndex = GameConstants.getGymIndex(gym.town);
+        return AchievementHandler.achievementList.every(achievement => {
+            return !(achievement.property instanceof ClearGymRequirement && achievement.property.gymIndex === gymIndex && !achievement.isCompleted());
         });
-        return result;
     }
 
     public static calculateCssClass(gym: Gym): KnockoutComputed<string> {

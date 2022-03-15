@@ -222,14 +222,10 @@ class DungeonRunner {
     }
 
     public static isAchievementsComplete(dungeon: Dungeon) {
-        let result = true;
-        AchievementHandler.achievementList.forEach(achievement => {
-            if (achievement.property instanceof ClearDungeonRequirement && achievement.property.dungeonIndex === GameConstants.getDungeonIndex(dungeon.name) && !achievement.isCompleted()) {
-                result = false;
-                return true;
-            }
+        const dungeonIndex = GameConstants.getDungeonIndex(dungeon.name);
+        return AchievementHandler.achievementList.every(achievement => {
+            return !(achievement.property instanceof ClearDungeonRequirement && achievement.property.dungeonIndex === dungeonIndex && !achievement.isCompleted());
         });
-        return result;
     }
 
     public static hasEnoughTokens() {

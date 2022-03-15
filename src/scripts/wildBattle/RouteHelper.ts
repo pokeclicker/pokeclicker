@@ -64,14 +64,9 @@ class RouteHelper {
     }
 
     public static isAchievementsComplete(route: number, region: GameConstants.Region) {
-        let result = true;
-        AchievementHandler.achievementList.forEach(achievement => {
-            if (achievement.property instanceof RouteKillRequirement && achievement.property.region === region && achievement.property.route === route && !achievement.isCompleted()) {
-                result = false;
-                return true;
-            }
+        return AchievementHandler.achievementList.every(achievement => {
+            return !(achievement.property instanceof RouteKillRequirement && achievement.property.region === region && achievement.property.route === route && !achievement.isCompleted());
         });
-        return result;
     }
 
 }
