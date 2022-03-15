@@ -151,6 +151,11 @@ class MapHelper {
                     return 'unlockedUnfinished';
                 }
             }
+            for (const gym of (town as PokemonLeague)?.gymList) {
+                if (Gym.isUnlocked(gym) && !Gym.isAchievementsComplete(gym)) {
+                    return 'missingAchievement';
+                }
+            }
         }
         return 'completed';
     }
