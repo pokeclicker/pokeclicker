@@ -330,7 +330,7 @@ class Update implements Saveable {
 
         '0.7.4': ({ playerData, saveData }) => {
             // Clear old quest data
-            delete saveData.quests.questList;
+            saveData.quests.questList = [];
 
             // Update starter selection
             playerData.starter = playerData._starter;
@@ -338,6 +338,8 @@ class Update implements Saveable {
             /*
              * Challenge Modes
              */
+            // Create empty challenges object
+            saveData.challenges = { list: {} };
             // Disable Click Attacks
             if (saveData.statistics.clickAttacks <= 100) {
                 Notifier.notify({
