@@ -243,7 +243,7 @@ class MapHelper {
         }
 
         // Check if all regional pokemon are obtained
-        return new Set(App.game.party.caughtPokemon.filter(p => p.id > 0 && PokemonHelper.calcNativeRegion(p.name) <= player.highestRegion()).map(p => Math.floor(p.id))).size >= GameConstants.TotalPokemonsPerRegion[player.highestRegion()];
+        return PokemonHelper.numberOfPokemonsCaughtWithBaseFormNativeToRegion(player.highestRegion()) >= GameConstants.TotalPokemonsPerRegion[player.highestRegion()];
     }
 
     public static travelToNextRegion() {

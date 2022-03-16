@@ -387,4 +387,34 @@ class PokemonHelper {
         // Return the list of items
         return encounterTypes;
     }
+
+    public static numberOfPokemonsCaughtWithBaseFormNativeToRegion(region: GameConstants.Region) {
+        let result = 0;
+        let currentPokemonThisRegion = false;
+        let currentPokemonCaught = false;
+        let lastPokemonBaseId = 0;
+
+        // Counts each form once, and only if the baseform is native to this region
+        App.game.party.caughtPokemon.sort((a, b) => a.id - b.id).forEach(pokemon => {
+            if (pokemon.id < 0) {
+                return false;
+            }
+            if (Math.floor(pokemon.id) !== lastPokemonBaseId) {
+                currentPokemonCaught = false;
+                if (Math.floor(pokemon.id) === pokemon.id) { // Baseform caught
+                    currentPokemonThisRegion = PokemonHelper.calcNativeRegion(pokemon.name) === region;
+                } else { // Baseform not caught. Find baseform elsewhere
+                    currentPokemonThisRegion = PokemonHelper.calcNativeRegion(PokemonHelper.getPokemonById(Math.floor(pokemon.id)).name) === region;
+                }
+            }
+            lastPokemonBaseId = Math.floor(pokemon.id);
+            if (!currentPokemonThisRegion || currentPokemonCaught) {
+                return false;
+            }
+            result++;
+            currentPokemonCaught = true;
+        });
+
+        return result;
+    }
 }
