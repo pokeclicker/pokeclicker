@@ -545,7 +545,7 @@ class Update implements Saveable {
             }
         },
 
-        '0.8.12': async ({ playerData, saveData }) => {
+        '0.8.12': ({ playerData, saveData }) => {
             // Add Team Rockets Hideout
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 19);
             // Add Radio Tower
@@ -559,16 +559,18 @@ class Update implements Saveable {
                 saveData.quests.questLines.push({state: 1, name: 'Team Rocket Again', quest: 0});
             }
 
-            // Check if player wants to activate the new challenge modes
-            if (!await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
-                App.game.challenges.list.regionalAttackDebuff.disable();
-            }
-            if (!await Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
-                App.game.challenges.list.requireCompletePokedex.disable();
-            }
+            setTimeout(async () => {
+                // Check if player wants to activate the new challenge modes
+                if (!await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
+                    App.game.challenges.list.regionalAttackDebuff.disable();
+                }
+                if (!await Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
+                    App.game.challenges.list.requireCompletePokedex.disable();
+                }
+            }, GameConstants.SECOND);
         },
 
-        '0.8.14': async ({ playerData, saveData }) => {
+        '0.8.14': ({ playerData, saveData }) => {
             // Start Aqua Magma questline if player has Dynamo Badge already
             if (saveData.badgeCase[29]) {
                 saveData.quests.questLines.push({state: 1, name: 'Land vs Water', quest: 0});
@@ -587,7 +589,7 @@ class Update implements Saveable {
             };
         },
 
-        '0.8.15': async ({ playerData, saveData }) => {
+        '0.8.15': ({ playerData, saveData }) => {
             // Start Plasma questline if player has Jet Badge already
             if (saveData.badgeCase[58]) {
                 saveData.quests.questLines.push({state: 1, name: 'Quest for the DNA Splicers', quest: 0});
