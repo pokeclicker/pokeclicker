@@ -60,11 +60,11 @@ export default class SaveSelector {
                 saveData.profile?.pokemonShiny ?? saveData.party.caughtPokemon[0]?.shiny,
                 saveData.profile?.background,
                 saveData.profile?.textColor,
-                saveData.badgeCase.filter((b: boolean) => b).length,
-                saveData.party.caughtPokemon.length,
-                saveData.statistics.secondsPlayed,
-                saveData.update.version,
-                saveData.challenges?.list,
+                saveData.badgeCase?.filter((b: boolean) => b)?.length ?? 0,
+                saveData.party?.caughtPokemon?.length ?? 0,
+                saveData.statistics?.secondsPlayed ?? 0,
+                saveData.update?.version ?? 'Unknown',
+                saveData.challenges?.list ?? {},
                 key,
             );
         } catch (e) {

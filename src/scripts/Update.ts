@@ -10,6 +10,7 @@ class Update implements Saveable {
 
     updateSteps = {
         '0.4.0': ({ playerData, saveData }) => {
+            saveData.update = { version: '0.0.0' };
             // Update the save data as it is no longer a part of player data
             saveData.statistics = {
                 ...playerData.statistics || {},
@@ -532,7 +533,7 @@ class Update implements Saveable {
             };
 
             // Only run if save is from v0.8.7 (a forked version which is breaking stuff)
-            if (saveData.update.version == '0.8.7') {
+            if (saveData.update?.version == '0.8.7') {
                 // Check if the save has the Vivillon quest line, otherwise it's not from the main website
                 const questLines = saveData.quests?.questLines?.length || 0;
                 if (questLines < 4) {
@@ -616,9 +617,9 @@ class Update implements Saveable {
 
             //Setting gems = shards
             saveData.gems = {
-                gemWallet: saveData.shards.shardWallet || 0,
-                gemCollapsed: saveData.shards.shardCollapsed || 0,
-                gemUpgrades: saveData.shards.shardUpgrades || 0,
+                gemWallet: saveData.shards.shardWallet || [],
+                gemCollapsed: saveData.shards.shardCollapsed || [],
+                gemUpgrades: saveData.shards.shardUpgrades || [],
             };
 
             delete saveData.keyItems['Shard_case'];
@@ -681,7 +682,7 @@ class Update implements Saveable {
 
     // check if save version is newer or equal to version
     minUpdateVersion(version, saveData): boolean {
-        return !this.isOlderVersion(saveData.update.version, version);
+        return !this.isOlderVersion(saveData.update?.version, version);
     }
 
     // potentially newer version > check against version
@@ -726,7 +727,7 @@ class Update implements Saveable {
     }
 
     check() {
-        if (this.saveVersion === this.version || this.saveVersion === '0.0.0') {
+        if (this.saveVersion === this.version) {
             return;
         }
 
