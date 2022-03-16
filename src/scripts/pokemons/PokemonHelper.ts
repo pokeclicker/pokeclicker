@@ -395,7 +395,7 @@ class PokemonHelper {
         let lastPokemonBaseId = 0;
 
         // Counts each form once, and only if the baseform is native to this region
-        App.game.party.caughtPokemon.sort((a, b) => a.id - b.id).forEach(pokemon => {
+        [...App.game.party.caughtPokemon].sort((a, b) => a.id - b.id).forEach(pokemon => {
             if (pokemon.id < 0) {
                 return false;
             }
