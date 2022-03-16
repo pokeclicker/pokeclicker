@@ -2222,7 +2222,23 @@ dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
 // Sinnoh
 
 dungeonList['Oreburgh Gate'] = new Dungeon('Oreburgh Gate',
-    ['Zubat', 'Psyduck', 'Geodude', 'Golduck', 'Magikarp', 'Barboach'],
+    [
+        {pokemon: 'Zubat', options: { weight: 1.1 }},
+        {pokemon: 'Golbat', options: { weight: 1.1 }},
+        {pokemon: 'Psyduck', options: { weight: 1.1 }},
+        {pokemon: 'Golduck', options: { weight: 1.1 }},
+        {pokemon: 'Geodude', options: { weight: 1.1 }},
+        {pokemon: 'Magikarp', options: { weight: 1.1 }},
+        {pokemon: 'Barboach', options: { weight: 1.1 }},
+        new DungeonTrainer('Camper',
+            [
+                new GymPokemon('Starly', 39000, 7),
+                new GymPokemon('Shinx', 39000, 7),
+            ], { weight: 1 }, 'Curtis'),
+        new DungeonTrainer('Picnicker',
+            [new GymPokemon('Bidoof', 39000, 9)],
+            { weight: 1 }, 'Diana'),
+    ],
     [
         {loot: 'xAttack', weight: 3.75},
         {loot: 'Item_magnet', weight: 3.5},
@@ -2240,7 +2256,7 @@ dungeonList['Oreburgh Gate'] = new Dungeon('Oreburgh Gate',
     39000, 201);
 
 dungeonList['Ravaged Path'] = new Dungeon('Ravaged Path',
-    ['Zubat', 'Psyduck',  'Golduck', 'Magikarp', 'Barboach'],
+    ['Zubat', 'Golbat', 'Psyduck', 'Golduck', 'Magikarp', 'Barboach'],
     [
         {loot: 'Lucky_incense', weight: 4},
         {loot: 'Pamtre', weight: 3.5},
@@ -2257,7 +2273,42 @@ dungeonList['Ravaged Path'] = new Dungeon('Ravaged Path',
     43000, 201);
 
 dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
-    ['Gastly', 'Hoothoot', 'Wurmple', 'Silcoon', 'Cascoon', 'Bidoof', 'Kricketot', 'Budew', 'Buneary'],
+    [
+        {pokemon: 'Gastly', options: { weight: 1.8 }},
+        {pokemon: 'Hoothoot', options: { weight: 1.8 }},
+        {pokemon: 'Wurmple', options: { weight: 1.8 }},
+        {pokemon: 'Silcoon', options: { weight: 1.8 }},
+        {pokemon: 'Cascoon', options: { weight: 1.8 }},
+        {pokemon: 'Bidoof', options: { weight: 1.8 }},
+        {pokemon: 'Kricketot', options: { weight: 1.8 }},
+        {pokemon: 'Budew', options: { weight: 1.8 }},
+        {pokemon: 'Buneary', options: { weight: 1.8 }},
+        new DungeonTrainer('Bug Catcher & Lass',
+            [
+                new GymPokemon('Wurmple', 48000, 9),
+                new GymPokemon('Silcoon', 48000, 11),
+                new GymPokemon('Beautifly', 48000, 13),
+                new GymPokemon('Pachirisu', 48000, 14),
+            ], { weight: 1 }, 'Jack & Briana'),
+        new DungeonTrainer('Psychics',
+            [
+                new GymPokemon('Abra', 48000, 15),
+                new GymPokemon('Abra', 48000, 15),
+            ], { weight: 1 }, 'Linsey & Elijah'),
+        new DungeonTrainer('Bug Catchers',
+            [
+                new GymPokemon('Wurmple', 48000, 9),
+                new GymPokemon('Cascoon', 48000, 11),
+                new GymPokemon('Dustox', 48000, 13),
+                new GymPokemon('Burmy (plant)', 48000, 12),
+                new GymPokemon('Kricketune', 48000, 12),
+            ], { weight: 1 }, 'Philip & Donald'),
+        new DungeonTrainer('Psychics',
+            [
+                new GymPokemon('Meditite', 48000, 15),
+                new GymPokemon('Psyduck', 48000, 15),
+            ], { weight: 1 }, 'Kody & Rachael'),
+    ],
     [
         {loot: 'Cheri', weight: 4},
         {loot: 'Oran', weight: 4},
