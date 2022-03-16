@@ -605,16 +605,15 @@ class Update implements Saveable {
             // Shards -> Gems
 
             //Questlist update
-            saveData.quests.questList = saveData.quests.questList.map(q => {
+            saveData.quests.questList = saveData.quests.questList?.map(q => {
                 if (q.name == 'GainShardsQuest') {
                     q.name = 'GainGemsQuest';
                 }
                 return q;
-            });
+            }) || [];
 
             //Setting gems = shards
             saveData.gems = {
-                ...saveData.gems,
                 gemWallet: saveData.shards.shardWallet || 0,
                 gemCollapsed: saveData.shards.shardCollapsed || 0,
                 gemUpgrades: saveData.shards.shardUpgrades || 0,
