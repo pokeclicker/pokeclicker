@@ -1234,6 +1234,7 @@ TownList['Eterna City'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Eterna Forest'))],
         shops: [EternaCityShop],
+        dungeon: dungeonList['Team Galactic Eterna Building'],
         npcs: [EternaLassCaroline],
     }
 );
@@ -1376,6 +1377,11 @@ TownList['Old Chateau'] = new DungeonTown(
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 205),
         new GymBadgeRequirement(BadgeEnums.Forest),
     ]
+);
+TownList['Team Galactic Eterna Building'] = new DungeonTown(
+    'Team Galactic Eterna Building',
+    GameConstants.Region.sinnoh,
+    [new GymBadgeRequirement(BadgeEnums.Forest)],
 );
 TownList['Wayward Cave'] = new DungeonTown(
     'Wayward Cave',

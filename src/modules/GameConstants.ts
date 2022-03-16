@@ -961,6 +961,7 @@ export const SinnohDungeons = [
     'Ravaged Path',
     'Eterna Forest',
     'Old Chateau',
+    'Team Galactic Eterna Building',
     'Wayward Cave',
     'Mt. Coronet South',
     'Solaceon Ruins',

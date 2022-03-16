@@ -867,7 +867,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Zubat', 'Machop', 'Geodude', 'Ponyta', 'Gligar', 'Kricketune', 'Stunky'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Forest)]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building'))]
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 207', GameConstants.Region.sinnoh, 207,

@@ -2341,13 +2341,67 @@ dungeonList['Old Chateau'] = new Dungeon('Old Chateau',
     853000,
     [
         new DungeonBossPokemon('Rotom', 4200000, 100),
-        new DungeonBossPokemon('Rotom (heat)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
-        new DungeonBossPokemon('Rotom (wash)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
-        new DungeonBossPokemon('Rotom (frost)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
-        new DungeonBossPokemon('Rotom (fan)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
-        new DungeonBossPokemon('Rotom (mow)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
     ],
     52500, 230);
+
+dungeonList['Team Galactic Eterna Building'] = new Dungeon('Team Galactic Eterna Building',
+    [
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Zubat', 54250, 17),
+                new GymPokemon('Stunky', 54250, 17),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Zubat', 54250, 16),
+                new GymPokemon('Glameow', 54250, 18),
+            ], { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Glameow', 54250, 19)],
+            { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Croagunk', 54250, 19)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Stunky', 54250, 16),
+                new GymPokemon('Croagunk', 54250, 16),
+                new GymPokemon('Glameow', 54250, 16),
+            ], { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Scientist',
+            [new GymPokemon('Kadabra', 146500, 20)],
+            { weight: 1 }, 'Travon', '(male)'),
+    ],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    877000,
+    [
+        new DungeonTrainer('Commander',
+            [
+                new GymPokemon('Zubat', 2150000, 21),
+                new GymPokemon('Skuntank', 2150000, 23),
+            ], { weight: 1 }, 'Juniper', '(juniper)'),
+        new DungeonBossPokemon('Rotom (heat)', 4300000, 100, {requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap.Rotom),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
+        ])}),
+        new DungeonBossPokemon('Rotom (wash)', 4300000, 100, {requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap.Rotom),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
+        ])}),
+        new DungeonBossPokemon('Rotom (frost)', 4300000, 100, {requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap.Rotom),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
+        ])}),
+        new DungeonBossPokemon('Rotom (fan)', 4300000, 100, {requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap.Rotom),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
+        ])}),
+        new DungeonBossPokemon('Rotom (mow)', 4300000, 100, {requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap.Rotom),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
+        ])}),
+    ],
+    54250, 205);
 
 dungeonList['Wayward Cave'] = new Dungeon('Wayward Cave',
     ['Zubat', 'Geodude', 'Onix'],
