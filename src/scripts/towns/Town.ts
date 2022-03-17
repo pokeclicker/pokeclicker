@@ -1381,7 +1381,7 @@ TownList['Old Chateau'] = new DungeonTown(
 TownList['Team Galactic Eterna Building'] = new DungeonTown(
     'Team Galactic Eterna Building',
     GameConstants.Region.sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Forest)],
+    [new GymBadgeRequirement(BadgeEnums.Forest)]
 );
 TownList['Wayward Cave'] = new DungeonTown(
     'Wayward Cave',
