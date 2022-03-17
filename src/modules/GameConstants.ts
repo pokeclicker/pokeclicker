@@ -533,7 +533,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kanto]: new Set(['Vermilion City', 'Power Plant']),
         [Region.johto]: new Set(['Tin Tower', 'Team Rockets Hideout', 'Radio Tower']),
         [Region.hoenn]: new Set(['Mauville City']),
-        [Region.sinnoh]: new Set(['Sunyshore City']),
+        [Region.sinnoh]: new Set(['Team Galactic Eterna Building', 'Sunyshore City']),
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City']),
         [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Pokéball Factory', 'Team Flare Secret HQ']),
         [Region.alola]: new Set(['Aether Paradise', 'Hokulani Observatory', 'Aether Foundation']),

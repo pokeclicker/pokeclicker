@@ -2451,10 +2451,10 @@ dungeonList['Wayward Cave'] = new Dungeon('Wayward Cave',
     ],
     903000,
     [new DungeonBossPokemon('Bronzor', 4400000, 100)],
-    56500, 230);
+    56500, 206);
 
 dungeonList['Mt. Coronet South'] = new Dungeon('Mt. Coronet South',
-    [{pokemon: 'Clefairy', options: { weight: 2 }}, 'Zubat', 'Machop', 'Geodude', 'Cleffa', 'Nosepass', 'Meditite', 'Chingling', 'Bronzor', 'Magikarp', 'Barboach'],
+    [{pokemon: 'Clefairy', options: { weight: 2 }}, 'Zubat', 'Machop', 'Geodude', 'Magikarp', 'Cleffa', 'Nosepass', 'Barboach', 'Meditite', 'Chingling', 'Bronzor'],
     [
         {loot: 'xAttack', weight: 3.75},
         {loot: 'Lucky_incense', weight: 3.5},
@@ -2469,10 +2469,22 @@ dungeonList['Mt. Coronet South'] = new Dungeon('Mt. Coronet South',
         new DungeonBossPokemon('Bronzong', 4000000, 50),
         new DungeonBossPokemon('Absol', 4000000, 50),
     ],
-    60500, 201);
+    60500, 207);
 
 dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
-    ['Zubat', 'Geodude', 'Natu', 'Bronzor', 'Hippopotas'],
+    [
+        {pokemon: 'Zubat', options: { weight: 0.8 }},
+        {pokemon: 'Geodude', options: { weight: 0.8 }},
+        {pokemon: 'Natu', options: { weight: 0.8 }},
+        {pokemon: 'Bronzor', options: { weight: 0.8 }},
+        {pokemon: 'Hippopotas', options: { weight: 0.8 }},
+        new DungeonTrainer('Ruin Maniac',
+            [
+                new GymPokemon('Geodude', 62500, 19),
+                new GymPokemon('Geodude', 62500, 21),
+                new GymPokemon('Bronzor', 62500, 23),
+            ], { weight: 1 }, 'Karl'),
+    ],
     [
         {loot: 'Lucky_incense', weight: 3.75},
         {loot: 'Persim', weight: 3.25},
