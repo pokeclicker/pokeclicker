@@ -2253,7 +2253,7 @@ dungeonList['Oreburgh Gate'] = new Dungeon('Oreburgh Gate',
         new DungeonBossPokemon('Gyarados', 3703000, 14),
         new DungeonBossPokemon('Whiscash', 3703000, 14),
     ],
-    39000, 201);
+    39000, 203);
 
 dungeonList['Ravaged Path'] = new Dungeon('Ravaged Path',
     ['Zubat', 'Golbat', 'Psyduck', 'Golduck', 'Magikarp', 'Barboach'],
@@ -2270,7 +2270,7 @@ dungeonList['Ravaged Path'] = new Dungeon('Ravaged Path',
         new DungeonBossPokemon('Gyarados', 3803000, 14),
         new DungeonBossPokemon('Whiscash', 3803000, 14),
     ],
-    43000, 201);
+    43000, 204);
 
 dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
     [
@@ -2325,7 +2325,7 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
         new DungeonBossPokemon('Beautifly', 3950000, 30),
         new DungeonBossPokemon('Dustox', 3950000, 30),
     ],
-    48000, 201);
+    48000, 205);
 
 dungeonList['Old Chateau'] = new Dungeon('Old Chateau',
     ['Gastly', 'Haunter', 'Gengar'],
@@ -2342,7 +2342,7 @@ dungeonList['Old Chateau'] = new Dungeon('Old Chateau',
     [
         new DungeonBossPokemon('Rotom', 4200000, 100),
     ],
-    52500, 230);
+    52500, 205);
 
 dungeonList['Team Galactic Eterna Building'] = new Dungeon('Team Galactic Eterna Building',
     [
@@ -2404,7 +2404,41 @@ dungeonList['Team Galactic Eterna Building'] = new Dungeon('Team Galactic Eterna
     54250, 205);
 
 dungeonList['Wayward Cave'] = new Dungeon('Wayward Cave',
-    ['Zubat', 'Geodude', 'Onix'],
+    [
+        {pokemon: 'Zubat', options: { weight: 6.7 }},
+        {pokemon: 'Geodude', options: { weight: 6.7 }},
+        {pokemon: 'Onix', options: { weight: 6.7 }},
+        new DungeonTrainer('Hikers',
+            [
+                new GymPokemon('Geodude', 56500, 20),
+                new GymPokemon('Geodude', 56500, 20),
+                new GymPokemon('Onix', 56500, 22),
+            ], { weight: 1 }, 'Reginald & Lorenzo'),
+        new DungeonTrainer('Lass & Youngster',
+            [
+                new GymPokemon('Buneary', 56500, 22),
+                new GymPokemon('Staravia', 56500, 17),
+                new GymPokemon('Ponyta', 56500, 20),
+                new GymPokemon('Shellos (west)', 56500, 20),
+            ], { weight: 1 }, 'Cassidy & Wayne'),
+        new DungeonTrainer('Picnicker & Camper',
+            [
+                new GymPokemon('Psyduck', 56500, 22),
+                new GymPokemon('Aipom', 56500, 22),
+            ], { weight: 1 }, 'Tori & Diego'),
+        new DungeonTrainer('Picnicker & Camper',
+            [
+                new GymPokemon('Hoothoot', 56500, 22),
+                new GymPokemon('Buizel', 56500, 20),
+                new GymPokemon('Shinx', 56500, 20),
+            ], { weight: 1 }, 'Ana & Parker'),
+        new DungeonTrainer('Collector & Ruin Maniac',
+            [
+                new GymPokemon('Gible', 56500, 22),
+                new GymPokemon('Geodude', 56500, 19),
+                new GymPokemon('Bronzor', 56500, 21),
+            ], { weight: 1 }, 'Terry & Gerald'),
+    ],
     [
         {loot: 'Token_collector', weight: 4},
         {loot: 'Rawst', weight: 3.75},
