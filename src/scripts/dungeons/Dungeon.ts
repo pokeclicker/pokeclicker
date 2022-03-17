@@ -2339,9 +2339,7 @@ dungeonList['Old Chateau'] = new Dungeon('Old Chateau',
         {loot: 'Odd Keystone', weight: 1.75},
     ],
     853000,
-    [
-        new DungeonBossPokemon('Rotom', 4200000, 100),
-    ],
+    [new DungeonBossPokemon('Rotom', 4200000, 100)],
     52500, 205);
 
 dungeonList['Team Galactic Eterna Building'] = new Dungeon('Team Galactic Eterna Building',
