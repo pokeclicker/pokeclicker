@@ -27,12 +27,16 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
         <div class="modal-body p-0">
             <div class="p-1">
                 <div class="form-row m-0">
-                    <div class="form-group col-md-3 col-6 align-self-center">
+                    <div class="form-group col-md-3 col-6 text-left">
                         <div class="form-check">
                             <input id="damage-calc-include-breeding" class="form-check-input" type="checkbox" autocomplete="off" data-bind="checked: DamageCalculator.includeBreeding"></input>
                             <label for="damage-calc-include-breeding" class="form-check-label">Include Breeding</label>
                         </div>
-                        <div class="form-check">
+                         <div class="form-check">
+                            <input id="damage-calc-ignore-level" class="form-check-input" type="checkbox" autocomplete="off" data-bind="checked: DamageCalculator.ignoreLevel"></input>
+                            <label for="damage-calc-ignore-level" class="form-check-label">Ignore Level</label>
+                        </div>
+                       <div class="form-check">
                             <input id="damage-calc-use-base" class="form-check-input" type="checkbox" autocomplete="off" data-bind="checked: DamageCalculator.baseAttackOnly"></input>
                             <label for="damage-calc-use-base" class="form-check-label">Base Attack Only</label>
                         </div>
