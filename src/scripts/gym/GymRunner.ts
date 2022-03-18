@@ -94,7 +94,7 @@ class GymRunner {
             Notifier.notify({
                 message: `Congratulations, you defeated ${GymBattle.gym.leaderName}!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.gym_won,
+                setting: NotificationConstants.NotificationSetting.General.gym_won,
             });
             // If this is the first time defeating this gym
             if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {

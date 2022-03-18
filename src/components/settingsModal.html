@@ -58,8 +58,48 @@
 
                     <div class="tab-pane" id="settings-notifications">
                         <table class="table table-striped table-hover m-0">
-                            <tbody data-bind="foreach: Object.values(NotificationConstants.NotificationSetting)">
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
+                            <thead>
+                                <tr class="clickable" data-toggle="collapse" href="#settingsNotificationGeneral">
+                                    <th>General</th><th>></th>
+                                </tr>
+                            </thead>
+                            <tbody id="settingsNotificationGeneral" class="collapse">
+                                <!-- ko foreach: Object.values(NotificationConstants.NotificationSetting.General) -->
+                                    <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
+                                <!-- /ko -->
+                            </tbody>
+
+                            <thead>
+                                <tr class="clickable" data-toggle="collapse" href="#settingsNotificationHatchery">
+                                    <th>Hatchery</th><th>></th>
+                                </tr>
+                            </thead>
+                            <tbody id="settingsNotificationHatchery" class="collapse">
+                                <!-- ko foreach: Object.values(NotificationConstants.NotificationSetting.Hatchery) -->
+                                    <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
+                                <!-- /ko -->
+                            </tbody>
+
+                            <thead>
+                                <tr class="clickable" data-toggle="collapse" href="#settingsNotificationFarming">
+                                    <th>Farming</th><th>></th>
+                                </tr>
+                            </thead>
+                            <tbody id="settingsNotificationFarming" class="collapse">
+                                <!-- ko foreach: Object.values(NotificationConstants.NotificationSetting.Farming) -->
+                                    <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
+                                <!-- /ko -->
+                            </tbody>
+
+                            <thead>
+                                <tr class="clickable" data-toggle="collapse" href="#settingsNotificationItems">
+                                    <th>Items</th><th>></th>
+                                </tr>
+                            </thead>
+                            <tbody id="settingsNotificationItems" class="collapse">
+                                <!-- ko foreach: Object.values(NotificationConstants.NotificationSetting.Items) -->
+                                    <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
+                                <!-- /ko -->
                             </tbody>
                         </table>
                     </div>
