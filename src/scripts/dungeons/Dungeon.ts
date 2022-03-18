@@ -2377,7 +2377,7 @@ dungeonList['Team Galactic Eterna Building'] = new Dungeon('Team Galactic Eterna
             [
                 new GymPokemon('Zubat', 2150000, 21),
                 new GymPokemon('Skuntank', 2150000, 23),
-            ], { weight: 1 }, 'Juniper', '(juniper)'),
+            ], { weight: 1 }, 'Jupiter', '(jupiter)'),
         new DungeonBossPokemon('Rotom (heat)', 4300000, 100, {requirement: new MultiRequirement([
             new ObtainedPokemonRequirement(pokemonMap.Rotom),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
@@ -2599,10 +2599,102 @@ dungeonList['Iron Island'] = new Dungeon('Iron Island',
                 new GymPokemon('Stunky', 701667, 34),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    66500, 230);
+    66500, 218);
+
+dungeonList['Lake Valor'] = new Dungeon('Lake Valor',
+    [
+        {pokemon: 'Psyduck', options: { weight: 2 }},
+        {pokemon: 'Golduck', options: { weight: 2 }},
+        {pokemon: 'Goldeen', options: { weight: 2 }},
+        {pokemon: 'Magikarp', options: { weight: 2 }},
+        {pokemon: 'Staravia', options: { weight: 2 }},
+        {pokemon: 'Bibarel', options: { weight: 2 }},
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Glameow', 1015000, 35),
+                new GymPokemon('Murkrow', 1015000, 35),
+            ], { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Golbat', 1015000, 37)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Croagunk', 1015000, 33),
+                new GymPokemon('Houndour', 1015000, 33),
+                new GymPokemon('Stunky', 1015000, 33),
+                new GymPokemon('Glameow', 1015000, 33),
+            ], { weight: 1 }, undefined, '(male)'),
+    ],
+    [
+        {loot: 'Token_collector', weight: 4},
+        {loot: 'Sitrus', weight: 3.75},
+        {loot: 'Mind Plate', weight: 2.5},
+        {loot: 'Electric_egg', weight: 1},
+        {loot: 'Kebia', weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Lake Valor'))},
+        {loot: 'Chople', weight: 1, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Lake Valor'))},
+        {loot: 'Thunder_stone', weight: 0},
+    ],
+    1015000,
+    [
+        new DungeonTrainer('Commander',
+            [
+                new GymPokemon('Golbat', 1533334, 38),
+                new GymPokemon('Bronzor', 1533334, 38),
+                new GymPokemon('Toxicroak', 1533334, 40),
+            ], { weight: 1 }, 'Saturn', '(saturn)'),
+        new DungeonBossPokemon('Azelf', 10060000, 50, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
+    ],
+    69500, 218);
+
+dungeonList['Lake Verity'] = new Dungeon('Lake Verity',
+    [
+        {pokemon: 'Psyduck', options: { weight: 2.7 }},
+        {pokemon: 'Golduck', options: { weight: 2.7 }},
+        {pokemon: 'Goldeen', options: { weight: 2.7 }},
+        {pokemon: 'Magikarp', options: { weight: 2.7 }},
+        {pokemon: 'Starly', options: { weight: 2.7 }},
+        {pokemon: 'Bidoof', options: { weight: 2.7 }},
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Glameow', 1068735, 33),
+                new GymPokemon('Golbat', 1068735, 33),
+                new GymPokemon('Murkrow', 1068735, 36),
+            ], { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Croagunk', 1068735, 37)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Stunky', 1068735, 35),
+                new GymPokemon('Houndour', 1068735, 35),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Houndour', 1068735, 34),
+                new GymPokemon('Glameow', 1068735, 36),
+            ], { weight: 1 }, undefined, '(female)'),
+    ],
+    [
+        {loot: 'xAttack', weight: 4},
+        {loot: 'Sitrus', weight: 3.75},
+        {loot: 'Mind Plate', weight: 2.5},
+        {loot: 'Fire_egg', weight: 1},
+        {loot: 'Chilan', weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Lake Verity'))},
+        {loot: 'Fire_stone', weight: 0},
+    ],
+    1068735,
+    [
+        new DungeonTrainer('Commander',
+            [
+                new GymPokemon('Golbat', 1606667, 38),
+                new GymPokemon('Bronzor', 1606667, 38),
+                new GymPokemon('Toxicroak', 1606667, 40),
+            ], { weight: 1 }, 'Mars', '(mars)'),
+    ],
+    72500, 218);
 
 dungeonList['Mt. Coronet North'] = new Dungeon('Mt. Coronet North',
-    [{pokemon: 'Clefairy', options: { weight: 2 }}, 'Zubat', 'Machop', 'Geodude', 'Meditite', 'Chingling', 'Bronzor', 'Magikarp', 'Barboach', 'Noctowl', 'Snover'],
+    [{pokemon: 'Clefairy', options: { weight: 2 }}, 'Zubat', 'Machop', 'Geodude', 'Magikarp', 'Noctowl', 'Meditite', 'Barboach', 'Chingling', 'Bronzor', 'Snover'],
     [
         {loot: 'xClick', weight: 4},
         {loot: 'Kelpsy', weight: 3.5},
@@ -2616,51 +2708,16 @@ dungeonList['Mt. Coronet North'] = new Dungeon('Mt. Coronet North',
         {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(350, GameConstants.getDungeonIndex('Mt. Coronet North'))},
         {loot: 'Max Revive', weight: 0},
     ],
-    1015000,
-    [
-        new DungeonBossPokemon('Graveler', 4600000, 35),
-        new DungeonBossPokemon('Feebas', 4600000, 50),
-        new DungeonBossPokemon('Medicham', 4600000, 50),
-    ],
-    69500, 201);
-
-dungeonList['Lake Verity'] = new Dungeon('Lake Verity',
-    ['Starly', 'Bidoof', 'Psyduck', 'Goldeen', 'Magikarp'],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Sitrus', weight: 3.75},
-        {loot: 'Mind Plate', weight: 2.5},
-        {loot: 'Fire_egg', weight: 1},
-        {loot: 'Chilan', weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Lake Verity'))},
-        {loot: 'Fire_stone', weight: 0},
-    ],
-    1068735,
-    [
-        new DungeonBossPokemon('Golduck', 4820000, 10),
-        new DungeonBossPokemon('Seaking', 4820000, 10),
-    ],
-    72500, 201);
-
-dungeonList['Lake Valor'] = new Dungeon('Lake Valor',
-    ['Psyduck', 'Golduck', 'Goldeen', 'Magikarp', 'Staravia'],
-    [
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Sitrus', weight: 3.75},
-        {loot: 'Mind Plate', weight: 2.5},
-        {loot: 'Electric_egg', weight: 1},
-        {loot: 'Kebia', weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Lake Valor'))},
-        {loot: 'Chople', weight: 1, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Lake Valor'))},
-        {loot: 'Thunder_stone', weight: 0},
-    ],
     1111500,
     [
-        new DungeonBossPokemon('Bibarel', 4960000, 35),
-        new DungeonBossPokemon('Azelf', 10060000, 35),
+        new DungeonBossPokemon('Graveler', 4960000, 35),
+        new DungeonBossPokemon('Feebas', 4960000, 50),
+        new DungeonBossPokemon('Medicham', 4960000, 50),
     ],
-    74500, 201);
+    74500, 218);
 
 dungeonList['Lake Acuity'] = new Dungeon('Lake Acuity',
-    ['Sneasel', 'Bibarel', 'Psyduck', 'Golduck', 'Magikarp', 'Goldeen', 'Snover', 'Snorunt'],
+    ['Psyduck', 'Golduck', 'Goldeen', 'Magikarp', 'Gyarados', 'Sneasel', 'Snorunt', 'Bibarel', 'Snover'],
     [
         {loot: 'Lucky_egg', weight: 4},
         {loot: 'Sitrus', weight: 3.75},
@@ -2672,8 +2729,13 @@ dungeonList['Lake Acuity'] = new Dungeon('Lake Acuity',
     ],
     1261800,
     [
-        new DungeonBossPokemon('Gyarados', 5070000, 40),
-        new DungeonBossPokemon('Uxie', 10070000, 40),
+        new DungeonTrainer('Commander',
+            [
+                new GymPokemon('Bronzor', 1690000, 38),
+                new GymPokemon('Zubat', 1690000, 38),
+                new GymPokemon('Skuntank', 1690000, 40),
+            ], { weight: 1 }, 'Jupiter', '(jupiter)'),
+        new DungeonBossPokemon('Uxie', 10070000, 50, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
     ],
     78000, 201);
 

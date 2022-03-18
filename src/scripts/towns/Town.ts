@@ -1403,31 +1403,31 @@ TownList['Iron Island'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)]
 );
+TownList['Lake Valor'] = new DungeonTown(
+    'Lake Valor',
+    GameConstants.Region.sinnoh,
+    [new GymBadgeRequirement(BadgeEnums.Mine)]
+);
+TownList['Lake Verity'] = new DungeonTown(
+    'Lake Verity',
+    GameConstants.Region.sinnoh,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lake Valor'))]
+);
 TownList['Mt. Coronet North'] = new DungeonTown(
     'Mt. Coronet North',
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 211),
-        new GymBadgeRequirement(BadgeEnums.Mine),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lake Verity')),
     ]
-);
-TownList['Distortion World'] = new DungeonTown(
-    'Distortion World',
-    GameConstants.Region.sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Icicle)]
-);
-TownList['Lake Valor'] = new DungeonTown(
-    'Lake Valor',
-    GameConstants.Region.sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Icicle)]
-);
-TownList['Lake Verity'] = new DungeonTown(
-    'Lake Verity',
-    GameConstants.Region.sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Icicle)]
 );
 TownList['Lake Acuity'] = new DungeonTown(
     'Lake Acuity',
+    GameConstants.Region.sinnoh,
+    [new GymBadgeRequirement(BadgeEnums.Icicle)]
+);
+TownList['Distortion World'] = new DungeonTown(
+    'Distortion World',
     GameConstants.Region.sinnoh,
     [new GymBadgeRequirement(BadgeEnums.Icicle)]
 );
