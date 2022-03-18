@@ -1,7 +1,7 @@
 class fluteEffectRunner {
     public static counter = 0;
     public static numActiveFlutes: KnockoutObservable<number> = ko.observable(0);
-    public static activeShardTypes: KnockoutObservableArray<number> = ko.observableArray();
+    public static activeGemTypes: KnockoutObservableArray<number> = ko.observableArray();
 
     public static initialize(multiplier: Multiplier) {
         fluteEffectRunner.numActiveFlutes(0);
@@ -14,17 +14,17 @@ class fluteEffectRunner {
                 GameHelper.incrementObservable(this.numActiveFlutes,1);
             }
         });
-        this.updateActiveShardTypes();
+        this.updateActiveGemTypes();
     }
 
     public static tick() {
         this.counter = 0;
 
         for (const itemName in GameConstants.FluteItemType) {
-            if (this.getLowestShard(itemName) > 0 && this.isActive(GameConstants.FluteItemType[itemName])()) {
-                player.effectList[itemName](Math.max(0, this.getLowestShard(itemName) - this.numActiveFlutes()));
+            if (this.getLowestGem(itemName) > 0 && this.isActive(GameConstants.FluteItemType[itemName])()) {
+                player.effectList[itemName](Math.max(0, this.getLowestGem(itemName) - this.numActiveFlutes()));
                 this.updateFormattedTimeLeft(itemName);
-                if (this.numActiveFlutes() >= this.getLowestShard(itemName)) {
+                if (this.numActiveFlutes() >= this.getLowestGem(itemName)) {
                     this.removeEffect(itemName);
                     Notifier.notify({
                         message: `The ${GameConstants.humanifyString(itemName)}'s effect ran out!`,
@@ -35,31 +35,31 @@ class fluteEffectRunner {
                 }
             }
         }
-        this.shardCost();
+        this.gemCost();
     }
 
-    public static getLowestShard(itemName: string) {
+    public static getLowestGem(itemName: string) {
         const item = (ItemList[itemName] as FluteItem);
-        const shardArray = item.shardTypes.map(idx => App.game.shards.shardWallet[PokemonType[idx]]());
-        const shardMaxTime = Math.min(...shardArray);
-        return shardMaxTime;
+        const gemArray = item.gemTypes.map(idx => App.game.gems.gemWallet[PokemonType[idx]]());
+        const gemMaxTime = Math.min(...gemArray);
+        return gemMaxTime;
     }
 
-    public static updateActiveShardTypes() {
-        this.activeShardTypes.removeAll();
-        let shardNames = [];
+    public static updateActiveGemTypes() {
+        this.activeGemTypes.removeAll();
+        let gemNames = [];
         for (const itemName in GameConstants.FluteItemType) {
             if (fluteEffectRunner.isActive(GameConstants.FluteItemType[itemName])()) {
                 const item = (ItemList[itemName] as FluteItem);
-                item.shardTypes.forEach(idx => shardNames.push(PokemonType[idx]));
+                item.gemTypes.forEach(idx => gemNames.push(PokemonType[idx]));
             }
         }
-        shardNames = [...new Set(shardNames)];
-        shardNames.forEach(x => this.activeShardTypes.push(x));
+        gemNames = [...new Set(gemNames)];
+        gemNames.forEach(x => this.activeGemTypes.push(x));
     }
 
-    public static shardCost() {
-        this.activeShardTypes().forEach(idx => App.game.shards.gainShards(-this.numActiveFlutes(), idx));
+    public static gemCost() {
+        this.activeGemTypes().forEach(idx => App.game.gems.gainGems(-this.numActiveFlutes(), idx));
     }
 
     public static getEffect(itemName: string) {
@@ -72,9 +72,9 @@ class fluteEffectRunner {
     public static toggleEffect(itemName: string) {
 
         //NOTE: this if statement is untested
-        if (fluteEffectRunner.getLowestShard(itemName) == 0) {
+        if (fluteEffectRunner.getLowestGem(itemName) == 0) {
             Notifier.notify({
-                message: 'You don\'t have enough shards to use this Flute',
+                message: 'You don\'t have enough gems to use this Flute',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return;
@@ -84,10 +84,10 @@ class fluteEffectRunner {
             return;
         }
 
-        player.effectList[itemName](Math.max(0, player.effectList[itemName]() + fluteEffectRunner.getLowestShard(itemName)));
+        player.effectList[itemName](Math.max(0, player.effectList[itemName]() + fluteEffectRunner.getLowestGem(itemName)));
         GameHelper.incrementObservable(this.numActiveFlutes,1);
         this.updateFormattedTimeLeft(itemName);
-        this.updateActiveShardTypes();
+        this.updateActiveGemTypes();
     }
 
     public static removeEffect(itemName: string) {
@@ -95,7 +95,7 @@ class fluteEffectRunner {
         GameHelper.incrementObservable(this.numActiveFlutes, -1);
         this.updateFormattedTimeLeft(itemName);
         player.gainItem(itemName, 1);
-        this.updateActiveShardTypes();
+        this.updateActiveGemTypes();
     }
 
     public static updateFormattedTimeLeft(itemName: string) {

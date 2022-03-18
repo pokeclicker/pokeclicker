@@ -22,10 +22,10 @@
       <table class="table table-bordered m-0">
         <tbody>
           <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem'))">
-            <tr data-bind="foreach: $data"> 
+            <tr data-bind="foreach: $data">
                  <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data](),trigger:'hover',placement:'top',animation:false}"></td>
             </tr>
-            <tr data-bind="foreach: $data"> 
+            <tr data-bind="foreach: $data">
                  <td class="p-0" data-bind="attr: {
                                 disabled: !player.itemList[$data]()
                             },
@@ -62,17 +62,17 @@
       <span>Flutes</span>
     </div>
     <div id="fluteItemContainerBody" class="card-body p-0 show">
-      <p data-bind="visible: App.game.challenges.list.disableBattleItems.active() || App.game.challenges.list.disableShards.active()" class="bg-danger my-0">
+      <p data-bind="visible: App.game.challenges.list.disableBattleItems.active() || App.game.challenges.list.disableGems.active()" class="bg-danger my-0">
           Flutes are disabled.
       </p>
       <!-- Flutes -->
       <table class="table table-bordered m-0">
         <tbody>
           <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'FluteItem'))">
-            <tr data-bind="foreach: $data"> 
+            <tr data-bind="foreach: $data">
                  <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data](),trigger:'hover',placement:'top',animation:false}"></td>
             </tr>
-            <tr data-bind="foreach: $data"> 
+            <tr data-bind="foreach: $data">
                  <td class="p-0" data-bind="attr: {
                                 disabled: !player.itemList[$data]()
                             },
@@ -85,7 +85,7 @@
                                 click: function(){ItemHandler.useItem($data)}
                             },
                             tooltip: {
-                              title: ItemList[$data].displayName + '<br/>' + ItemList[$data].description + '<br/>' + 'Utilizes: ' + ItemList[$data].shardTypes[0] + ', ' + ItemList[$data].shardTypes[1] + ', and ' + ItemList[$data].shardTypes[2] + ' Shards',
+                              title: ItemList[$data].displayName + '<br/>' + ItemList[$data].description + '<br/>' + 'Utilizes: ' + ItemList[$data].gemTypes[0] + ', ' + ItemList[$data].gemTypes[1] + ', and ' + ItemList[$data].gemTypes[2] + ' Gems',
                               trigger: 'hover',
                               placement:'bottom',
                               html: true

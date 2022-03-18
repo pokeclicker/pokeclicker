@@ -8,7 +8,7 @@ class FluteItem extends Item {
         description: string,
         basePrice: number,
         currency: undefined,
-        public shardTypes: (keyof typeof PokemonType)[],
+        public gemTypes: (keyof typeof PokemonType)[],
         displayName?: string,
         public multiplierType?: keyof typeof MultiplierType,
         public multiplyBy?: number
@@ -23,10 +23,10 @@ class FluteItem extends Item {
     }
 
     checkCanUse(): boolean {
-        if (App.game.challenges.list.disableShards.active()) {
+        if (App.game.challenges.list.disableGems.active()) {
             Notifier.notify({
                 title: 'Challenge Mode',
-                message: 'Shards are Disabled',
+                message: 'Gems are Disabled',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;

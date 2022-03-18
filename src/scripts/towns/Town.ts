@@ -737,7 +737,7 @@ const HoennBerryMaster = new BerryMasterShop([
 ]);
 
 //Hoenn Flute Master
-const HoennFluteMaster = new ShardMasterShop([]);
+const HoennFluteMaster = new GemMasterShop([]);
 
 //Hoenn NPCs
 
@@ -1574,8 +1574,8 @@ const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
     'I\'ve never seen it, but supposedly it works just like any evolution stone.',
 ]);
 
-//Unova Shard Master
-const UnovaFluteMaster = new ShardMasterShop([]);
+//Unova Gem Master
+const UnovaFluteMaster = new GemMasterShop([]);
 
 const UnovaRoamerNPC = new RoamerNPC('Professor Juniper\'s Aide', [
     'Our research indicates a higher concentration of roaming Pokémon on {ROUTE_NAME}!',

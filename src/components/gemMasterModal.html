@@ -1,51 +1,51 @@
-<div class="modal fade noselect" id="shardMasterModal" tabindex="-1" role="dialog"
-     aria-labelledby="shardMasterModalLabel">
+<div class="modal fade noselect" id="gemMasterModal" tabindex="-1" role="dialog"
+     aria-labelledby="gemMasterModalLabel">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h4>Shard Master</h4>
+                <h4>Gem Master</h4>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
             </div>
             <div>
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#shardMasterTrade">Trades</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#gemMasterTrade">Trades</a></li>
                 </ul>
             </div>
             <div class="modal-body tab-content">
-                <div id="shardMasterTrade" class="tab-pane fade in active show">
-                    <div class="table-responsive" id="shardDealsBody">
+                <div id="gemMasterTrade" class="tab-pane fade in active show">
+                    <div class="table-responsive" id="gemDealsBody">
                         <table class="table table-sm table-hover table-striped m-0 text-left">
                             <thead>
                                 <tr>
                                     <th class="text-center">Inv</th>
                                     <th></th>
-                                    <th>Shards</th>
+                                    <th>Gems</th>
                                     <th></th>
                                     <th></th>
                                     <th>Item</th>
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody data-bind='foreach: ShardDeal.getDeals(player.region)'>
-                                <!-- ko foreach: shards -->
+                            <tbody data-bind='foreach: GemDeal.getDeals(player.region)'>
+                                <!-- ko foreach: gems -->
                                 <tr>
-                                    <td data-bind="text: App.game.shards.shardWallet[$data.shardType]()"></td>
-                                    <td><img height="24px" data-bind="attr: {src: Shards.image($data.shardType) }"></img></td>
-                                    <td data-bind="text: amount + ' x ' + PokemonType[$data.shardType]"></td>
+                                    <td data-bind="text: App.game.gems.gemWallet[$data.gemType]()"></td>
+                                    <td><img height="24px" data-bind="attr: {src: Gems.image($data.gemType) }"></img></td>
+                                    <td data-bind="text: amount + ' x ' + PokemonType[$data.gemType]"></td>
                                     <!-- ko if: $index() === 0 -->
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">→</td>
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
+                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">→</td>
+                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">
                                           <img class='mineInventoryItem' data-bind='attr: {src: $parent.item.itemType.image}'>
                                     </td>
-                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.shards.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
+                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.gems.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
+                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">
                                         <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
                                             <!-- TODO: Make the "Trade" Button read "SOLD OUT" when disabled -->
-                                            <button class='btn btn-success btn-block' data-bind='click: function(){ShardDeal.use(player.region, $parentContext.$index(), tradeAmount())}, css: { disabled: !ShardDeal.canUse(player.region, $parentContext.$index()) }'>
+                                            <button class='btn btn-success btn-block' data-bind='click: function(){GemDeal.use(player.region, $parentContext.$index(), tradeAmount())}, css: { disabled: !GemDeal.canUse(player.region, $parentContext.$index()) }'>
                                                 Trade
                                             </button>
                                             <!-- TODO: Make the dropdown button disappear for Flute trades -->
-                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: ShardDeal.isFluteDeal(player.region, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'>
+                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: GemDeal.isFluteDeal(player.region, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'>
                                             </button>
                                             <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
                                                 <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data"></button>

@@ -88,7 +88,7 @@ class Game {
         DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
         BerryDeal.generateDeals(now);
         Weather.generateWeather(now);
-        ShardDeal.generateDeals();
+        GemDeal.generateDeals();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
         this.computeOfflineEarnings();
