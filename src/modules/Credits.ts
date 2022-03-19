@@ -117,6 +117,7 @@ export const SpriteCredits: Credit[] = [
         ],
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
     },
+    {
         name: 'Leaf',
         link: 'https://twitter.com/Leafalie',
         resources: [
@@ -133,6 +134,7 @@ export const SpriteCredits: Credit[] = [
             'Totem Kommo-o',
         ],
         // Notes: Permission given via Discord
+    },
     {
         name: 'leparagon',
         link: 'https://www.deviantart.com/leparagon',
