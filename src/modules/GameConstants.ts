@@ -1048,6 +1048,7 @@ export const AlolaDungeons = [
     'Aether Foundation',
     'Exeggutor Island Hill',
     'Vast Poni Canyon',
+    'Mina\'s Houseboat',
     'Mount Lanakila',
     'Lake of the Sunne and Moone',
     'Ruins of Conflict',

@@ -5761,11 +5761,27 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
         new DungeonBossPokemon('Kommo-o', 79960220, 49),
         new DungeonBossPokemon('Totem Kommo-o', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    1025000, 25,
+    1125000, 25,
     () => {
         if (!App.game.badgeCase.hasBadge(BadgeEnums.DragoniumZ)) {
             GymRunner.gymObservable(gymList['Vast Poni Canyon Trial']);
             App.game.badgeCase.gainBadge(BadgeEnums.DragoniumZ);
+            $('#receiveBadgeModal').modal('show');
+        }
+    });
+
+dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
+    ['Chansey', 'Wingull', 'Pelipper', 'Spritzee', 'Swirlix', 'Cutiefly', 'Comfey', 'Dhelmise'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    16217412,
+    [
+        new DungeonBossPokemon('Ribombee', 81087060, 55),
+    ],
+    1150000, 25,
+    () => {
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.FairiumZ)) {
+            GymRunner.gymObservable(gymList['Mina\'s Trial']);
+            App.game.badgeCase.gainBadge(BadgeEnums.FairiumZ);
             $('#receiveBadgeModal').modal('show');
         }
     });
@@ -5842,14 +5858,14 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
             ], { weight: 1 }, 'Aristo', '(male)'),
     ],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    16212850,
+    16312850,
     [
         new DungeonBossPokemon('Absol', 81064250, 50),
         new DungeonBossPokemon('Glalie', 81064250, 50),
         new DungeonBossPokemon('Vanilluxe', 81064250, 50),
         new DungeonBossPokemon('Necrozma', 83527125, 65),
     ],
-    1050000, 26);
+    1175000, 26);
 
 dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and Moone',
     ['Clefairy', 'Sunkern', 'Skitty', 'Lunatone', 'Solrock', 'Helioptile'],
@@ -5860,7 +5876,7 @@ dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and 
         new DungeonBossPokemon('Lunala', 90673816, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Lunala)}),
         new DungeonBossPokemon('Solgaleo', 90673816, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Solgaleo)}),
     ],
-    1075000, 27);
+    1200000, 27);
 
 dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
     ['Floette (Red)', 'Comfey', 'Dedenne', 'Ampharos', 'Electabuzz'],
@@ -5871,7 +5887,7 @@ dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
         new DungeonBossPokemon('Granbull', 82177450, 55),
         new DungeonBossPokemon('Tapu Koko', 82543791, 60),
     ],
-    1075000, 27);
+    1200000, 27);
 
 dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
     ['Floette (Red)', 'Comfey', 'Gardevoir', 'Chimecho', 'Munna'],
@@ -5882,7 +5898,7 @@ dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
         new DungeonBossPokemon('Granbull', 82177450, 55),
         new DungeonBossPokemon('Tapu Lele', 82543791, 60),
     ],
-    1075000, 27);
+    1200000, 27);
 
 dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
     ['Floette (Red)', 'Comfey', 'Cottonee', 'Gloom', 'Petilil'],
@@ -5893,7 +5909,7 @@ dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
         new DungeonBossPokemon('Granbull', 82177450, 55),
         new DungeonBossPokemon('Tapu Bulu', 82543791, 60),
     ],
-    1075000, 27);
+    1200000, 27);
 
 dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
     ['Floette (Red)', 'Comfey', 'Azumarill', 'Poliwhirl', 'Clamperl'],
@@ -5904,7 +5920,7 @@ dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
         new DungeonBossPokemon('Granbull', 82177450, 55),
         new DungeonBossPokemon('Tapu Fini', 82543791, 60),
     ],
-    1075000, 27);
+    1200000, 27);
 
 dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
     [
@@ -5924,7 +5940,7 @@ dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
         new DungeonBossPokemon('Oricorio (Sensu)', 83299840, 70),
         new DungeonBossPokemon('Floette (Red)', 83299840, 70),
     ],
-    1100000, 28);
+    1225000, 28);
 
 dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
     [
@@ -5951,7 +5967,7 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
         new DungeonBossPokemon('Noivern', 85572310, 59),
         new DungeonBossPokemon('Guzzlord', 90673816, 70),
     ],
-    1125000, 30);
+    1250000, 30);
 
 
 

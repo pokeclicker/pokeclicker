@@ -2454,6 +2454,7 @@ TownList['Seafolk Village'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
         shops: [SeafolkVillageShop],
+        dungeon: dungeonList['Mina\'s Houseboat'],
         npcs: [SeafolkCaptain],
     }
 );
@@ -2580,6 +2581,11 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     'Vast Poni Canyon',
     GameConstants.Region.alola,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))]
+);
+TownList['Mina\'s Houseboat'] = new DungeonTown(
+    'Mina\'s Houseboat',
+    GameConstants.Region.alola,
+    [new GymBadgeRequirement(BadgeEnums.Elite_UltraNecrozma)]
 );
 TownList['Mount Lanakila'] = new DungeonTown(
     'Mount Lanakila',
