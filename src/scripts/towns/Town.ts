@@ -1764,7 +1764,10 @@ TownList['Anville Town'] = new Town(
     'Anville Town',
     GameConstants.Region.unova,
     {
-        requirements: [new ObtainedPokemonRequirement(pokemonMap['Meloetta (aria)'])],
+        requirements: [
+            new ObtainedPokemonRequirement(pokemonMap['Meloetta (aria)']),
+            new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
+        ],
         shops: [AnvilleTownShop],
     }
 );
@@ -1773,7 +1776,10 @@ TownList['Anville Town'] = new Town(
 TownList['Pledge Grove'] = new DungeonTown(
     'Pledge Grove',
     GameConstants.Region.unova,
-    [new ObtainedPokemonRequirement(pokemonMap.Keldeo)]
+    [
+        new ObtainedPokemonRequirement(pokemonMap.Keldeo),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Moor of Icirrus')),
+    ]
 );
 TownList['Floccesy Ranch'] = new DungeonTown(
     'Floccesy Ranch',
