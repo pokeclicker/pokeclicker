@@ -4,9 +4,11 @@
     <div class="row justify-content-center no-gutters">
         <div class="col no-gutters">
             <button type="button" class="btn btn-outline-info" style="float: right;"
-            data-bind="visible: player.town().gym || player.town().shop, tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
+            data-bind="visible: player.town().gym || player.town().shop, tooltip: { title: 'In towns you can battle Gym Leaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
             <button type="button" class="btn btn-outline-info" style="float: right;"
             data-bind="visible: player.town() instanceof DungeonTown, tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
+            <button type="button" class="btn btn-outline-info" style="float: left;"
+            data-bind="visible: player.town() instanceof DungeonTown, tooltip: { title: `Clears: ${App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]()}`, trigger: 'hover', placement:'left' }">Stats</button>
             <h2 class="pageItemTitle">
               <knockout data-bind="text: player.town().name">Town Name</knockout>
 
