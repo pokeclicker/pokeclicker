@@ -5774,9 +5774,7 @@ dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
     ['Chansey', 'Wingull', 'Pelipper', 'Spritzee', 'Swirlix', 'Cutiefly', 'Comfey', 'Dhelmise'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     16217412,
-    [
-        new DungeonBossPokemon('Ribombee', 81087060, 55),
-    ],
+    [new DungeonBossPokemon('Ribombee', 81087060, 55)],
     1150000, 25,
     () => {
         if (!App.game.badgeCase.hasBadge(BadgeEnums.FairiumZ)) {
