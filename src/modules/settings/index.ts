@@ -96,7 +96,7 @@ Settings.add(new CssVariableSetting('incomplete', 'Map Color Incomplete Area', [
 Settings.add(new CssVariableSetting('uncaughtPokemon', 'Map Color Uncaught Pokemon', [], '#3498db'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Map Color Uncaught Shiny Pokemon', [], '#ffee00'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Map Color Uncaught Shiny Pokemon and missing achievement', [], '#ffee00'));
-Settings.add(new CssVariableSetting('missingAchievement', 'Map Color Missing achievement', [], '#ffffff'));
+Settings.add(new CssVariableSetting('missingAchievement', 'Map Color Missing achievement', [], '#f04124'));
 Settings.add(new CssVariableSetting('completed', 'Map Color Completed Location', [], '#ffffff'));
 
 // Other settings
