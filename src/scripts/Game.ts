@@ -248,12 +248,15 @@ class Game {
                 //Refresh the Underground deals
                 DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
                 BerryDeal.generateDeals(now);
-                Notifier.notify({
-                    title: 'It\'s a new day!',
-                    message: `${this.underground.canAccess() ? 'Your Underground deals have been updated.<br/>' : ''}<i>You have a free quest refresh.</i>`,
-                    type: NotificationConstants.NotificationOption.info,
-                    timeout: 3e4,
-                });
+                if (this.underground.canAccess() || App.game.quests.isDailyQuestsUnlocked()) {
+                    Notifier.notify({
+                        title: 'It\'s a new day!',
+                        message: `${this.underground.canAccess() ? 'Your Underground deals have been updated.<br/>' : ''}` +
+                        `${App.game.quests.isDailyQuestsUnlocked() ? '<i>You have a free quest refresh.</i>' : ''}`,
+                        type: NotificationConstants.NotificationOption.info,
+                        timeout: 3e4,
+                    });
+                }
             }
 
             // Check if it's a new hour

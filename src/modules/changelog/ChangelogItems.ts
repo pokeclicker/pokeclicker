@@ -10,6 +10,33 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.15
+    new ChangelogUpdate('v0.8.15', new Date(2022, 2, 14)),
+    new Changelog(changelogType.NEW, 'Team Plasma questline'),
+    new Changelog(changelogType.CHANGE, 'Shards are now called Gems'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some dungeon loot'),
+    new Changelog(changelogType.CHANGE, 'DNA no longer shows in master farmer trades'),
+    new Changelog(changelogType.CHANGE, 'Lum berry now affects Haban'),
+    new Changelog(changelogType.CHANGE, 'Updated route movement hotkeys order (-, +)'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Timerball effect'),
+    new Changelog(changelogType.CHANGE, 'Updated Sinnoh route 224 requirements'),
+    new Changelog(changelogType.CHANGE, 'Updated dungeon achievement order'),
+    new Changelog(changelogType.CHANGE, 'Updated start menu order'),
+    new Changelog(changelogType.CHANGE, 'Trim search text in Pokédex'),
+    new Changelog(changelogType.CHANGE, 'Weather changes'),
+    new Changelog(changelogType.CHANGE, 'Show players trainer image as the trainer in the dungeon'),
+    new Changelog(changelogType.FIXED, 'Missing shop items'),
+    new Changelog(changelogType.FIXED, 'Enigma Discord requirement'),
+    new Changelog(changelogType.FIXED, 'Updated some achivement descriptions'),
+    new Changelog(changelogType.FIXED, 'Updated message about disabling challenges'),
+    new Changelog(changelogType.FIXED, 'Town images breaking if they contained a \' character'),
+    new Changelog(changelogType.FIXED, 'Some notifications containing extra . characters'),
+    new Changelog(changelogType.FIXED, 'MissingNo. appearing in Gyms/Routes'),
+    new Changelog(changelogType.FIXED, 'Shop evolution items showing incorrect caught status'),
+    new Changelog(changelogType.FIXED, 'Dungeon XP gained for defeating Pokémon'),
+    new Changelog(changelogType.FIXED, 'Minor theme adjustments'),
+    new Changelog(changelogType.FIXED, 'New day message no longer appears on new saves'),
+
     // v0.8.14
     new ChangelogUpdate('v0.8.14', new Date(2022, 1, 11)),
     new Changelog(changelogType.NEW, 'Land vs Water questline in Hoenn'),
