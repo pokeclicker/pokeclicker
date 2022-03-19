@@ -36,7 +36,7 @@ export enum Region {
     final = 8,
 }
 
-export const MAX_AVAILABLE_REGION = Region.kalos;
+export const MAX_AVAILABLE_REGION = Region.alola;
 
 export const TotalPokemonsPerRegion = [
     151, // 151 - Kanto
