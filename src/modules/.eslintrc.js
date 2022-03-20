@@ -22,6 +22,13 @@ module.exports = {
         player: 'readonly',
         pokemonMap: 'readonly',
     },
+    settings: {
+        'import/resolver': {
+            node: {
+                extensions: ['.js', '.jsx', '.ts', '.tsx'],
+            },
+        },
+    },
     rules: {
         indent: 'off',
         'max-len': [
@@ -49,5 +56,15 @@ module.exports = {
         '@typescript-eslint/lines-between-class-members': ['error', { exceptAfterSingleLine: true }],
         '@typescript-eslint/member-ordering': ['error'],
         'no-alert': 'error',
+        'import/extensions': [
+            'error',
+            'ignorePackages',
+            {
+                js: 'never',
+                jsx: 'never',
+                ts: 'never',
+                tsx: 'never',
+            },
+        ],
     },
 };

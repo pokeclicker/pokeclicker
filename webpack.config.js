@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     mode: 'development',
-    entry: './src/modules/index.ts',
+    entry: './src/modules/index.tsx',
     module: {
         rules: [
             {
@@ -11,7 +11,7 @@ module.exports = {
                 exclude: /node_modules/,
                 options: {
                     configFile: path.resolve(__dirname, 'src/modules/tsconfig.json'),
-                }
+                },
             },
         ],
     },

@@ -67,7 +67,7 @@ gulp.task('deploy', () => gulp.src('./dist/**/*')
 
 const srcs = {
     buildArtefacts: 'build/**/*',
-    scripts: ['src/scripts/**/*.ts', 'src/modules/**/*.ts'],
+    scripts: ['src/scripts/**/*.ts', 'src/modules/**/*.{ts,tsx}'],
     html: ['src/*.html', 'src/templates/*.html', 'src/components/*.html'],
     ejsTemplates: ['src/templates/*.ejs'],
     styles: 'src/styles/**/*.less',
@@ -149,7 +149,7 @@ gulp.task('compile-html', (done) => {
 });
 
 gulp.task('scripts', () => {
-    const base = gulp.src('src/modules/index.ts')
+    const base = gulp.src('src/modules/index.tsx')
         .pipe(gulpWebpack(webpackConfig, webpack));
 
     // Convert the posix path to a path that matches the current OS
