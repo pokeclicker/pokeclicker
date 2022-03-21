@@ -149,7 +149,7 @@ gulp.task('compile-html', (done) => {
 });
 
 gulp.task('scripts', () => {
-    const base = gulp.src('src/modules/index.tsx')
+    const base = gulp.src('src/modules/index.ts')
         .pipe(gulpWebpack(webpackConfig, webpack));
 
     // Convert the posix path to a path that matches the current OS

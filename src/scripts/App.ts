@@ -61,6 +61,7 @@ class App {
             // Fixes custom theme css if Default theme was different from save theme (must be done before bindings)
             document.body.className = 'no-select';
             ko.applyBindings(App.game);
+            bindReact(App.game);
 
             GameController.applyRouteBindings();
             Preload.hideSplashScreen();

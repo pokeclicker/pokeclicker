@@ -37,6 +37,7 @@ import GenericProxy from './utilities/GenericProxy';
 import { SpriteCredits, CodeCredits } from './Credits';
 import * as modalUtils from './utilities/Modal';
 import PokemonCategories from './party/Category';
+import bindReact from './react';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -80,4 +81,5 @@ Object.assign(<any>window, {
     CodeCredits,
     modalUtils,
     PokemonCategories,
+    bindReact,
 });

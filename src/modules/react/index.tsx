@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactApp from './App';
+import { Provider } from './hooks/useGame';
 
-const render = () => {
+const bindReact = (Game: any) => {
     ReactDOM.render(
-        <ReactApp />,
+        <Provider Game={Game}>
+            <ReactApp />
+        </Provider>,
         document.getElementById('react-root'),
     );
 };
 
-export default render;
+export default bindReact;
