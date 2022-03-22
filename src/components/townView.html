@@ -6,13 +6,20 @@
             <button type="button" class="btn btn-outline-info" style="float: right;"
             data-bind="visible: player.town().gym || player.town().shop, tooltip: { title: 'In towns you can battle Gym Leaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
             <button type="button" class="btn btn-outline-info" style="float: right;"
-            data-bind="visible: player.town() instanceof DungeonTown, tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
-            <button type="button" class="btn btn-outline-info" style="float: left;"
-            data-bind="visible: player.town() instanceof DungeonTown, tooltip: { title: `Clears: ${App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]()}`, trigger: 'hover', placement:'left' }">Stats</button>
+            data-bind="visible: player.town() instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'), tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
             <h2 class="pageItemTitle">
               <knockout data-bind="text: player.town().name">Town Name</knockout>
-
+              <knockout data-bind="if: player.town().gym">
+                  <knockout class="left" data-bind="using: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town().name)]()">
+                      <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
+                      <knockout data-bind="visible: player.town().gym">Clears</knockout>
+                  </knockout>
+              </knockout>
               <knockout data-bind="if: player.town() instanceof DungeonTown && player.town().dungeon">
+                  <knockout class="right" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]()">
+                      <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
+                      <knockout data-bind="visible: QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">Clears</knockout>
+                  </knockout>
                   <!--If all Pokémon in the dungeon are caught-->
                   <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(player.town().dungeon, true) && DungeonRunner.dungeonCompleted(player.town().dungeon, false))">
                       <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
