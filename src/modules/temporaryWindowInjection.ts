@@ -36,6 +36,7 @@ import WalletClasses from './wallet/inject';
 import GenericProxy from './utilities/GenericProxy';
 import { SpriteCredits, CodeCredits } from './Credits';
 import * as modalUtils from './utilities/Modal';
+import PokemonCategories from './party/Category';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -78,4 +79,5 @@ Object.assign(<any>window, {
     SpriteCredits,
     CodeCredits,
     modalUtils,
+    PokemonCategories,
 });

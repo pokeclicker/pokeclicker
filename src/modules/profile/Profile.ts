@@ -86,7 +86,11 @@ export default class Profile implements Saveable {
     initialize() {
         // Load trainer card preview
         this.name.subscribe(() => this.updatePreview());
-        this.trainer.subscribe(() => this.updatePreview());
+        this.trainer.subscribe((val) => {
+            this.updatePreview();
+            // Update trainer image in css
+            document.documentElement.style.setProperty('--trainer-image', `url('../assets/images/profile/trainer-${val}.png')`);
+        });
         this.pokemon.subscribe((value: number) => {
             const shiny = App.game.party.alreadyCaughtPokemon(value, true);
             this.pokemonShiny(shiny);

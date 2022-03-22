@@ -1,24 +1,32 @@
-type PokemonCategory = {
+/* eslint-disable no-param-reassign */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-plusplus  */
+import {
+    Observable as KnockoutObservable,
+    Subscription as KnockoutSubscription,
+    ObservableArray as KnockoutObservableArray,
+} from 'knockout';
+import { Saveable } from '../DataStore/common/Saveable';
+
+export type PokemonCategory = {
     name: KnockoutObservable<string>,
     color: KnockoutObservable<string>,
     subscriber?: KnockoutSubscription,
-}
+};
 
-class PokemonCategories implements Saveable {
-    saveKey = 'categories';
-    defaults = {};
-
+export default class PokemonCategories implements Saveable {
     public static categories: KnockoutObservableArray<PokemonCategory> = ko.observableArray([]);
 
-    constructor() {}
+    saveKey = 'categories';
+    defaults: Record<string, any> = {};
 
     public static initialize() {
-        this.addCategory('None', '#333');        // dark grey
+        this.addCategory('None', '#333'); // dark grey
         this.addCategory('Favorite', '#e74c3c'); // red
     }
 
     public static reset() {
-        App.game.party.caughtPokemon.forEach(p => {
+        App.game.party.caughtPokemon.forEach((p) => {
             if (p.category) {
                 p.category = 0;
             }
@@ -36,8 +44,8 @@ class PokemonCategories implements Saveable {
         // Subscribe to color change event
         const root = document.documentElement;
         const index = this.categories().length - 1;
-        this.categories()[index].subscriber = this.categories()[index].color.subscribe(value => {
-            root.style.setProperty(`--pokemon-category-${index + 1}` , value);
+        this.categories()[index].subscriber = this.categories()[index].color.subscribe((value) => {
+            root.style.setProperty(`--pokemon-category-${index + 1}`, value);
         });
         // Update the color now
         this.categories()[index].color.valueHasMutated();
@@ -49,8 +57,8 @@ class PokemonCategories implements Saveable {
             return;
         }
 
-        App.game.party.caughtPokemon.forEach(p => {
-            if (p.category == index) {
+        App.game.party.caughtPokemon.forEach((p) => {
+            if (+p.category === index) {
                 p.category = 0;
             }
             if (p.category > index) {

@@ -40,9 +40,9 @@ class PartyPokemon implements Saveable {
         this._category = ko.observable(category);
     }
 
-    public calculateAttack(): number {
+    public calculateAttack(ignoreLevel = false): number {
         const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
-        const levelMultiplier = this.level / 100;
+        const levelMultiplier = ignoreLevel ? 1 : this.level / 100;
         return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier));
     }
 
