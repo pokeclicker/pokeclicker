@@ -3,12 +3,12 @@ import Modal from '../common/Modal';
 import ModalHeader from '../common/ModalHeader';
 import ModalFooter from '../common/ModalFooter';
 import LogBookTable from './LogBookTable';
-import { useGame } from '../../hooks/useGame';
+import { useSelector } from '../../hooks';
 import LogBookFilters from './LogBookFilters';
+import { filteredLogs } from '../../selectors/logbook';
 
 const LogBookModal = () => {
-    const Game = useGame();
-    const filteredLogs = Game.logbook.filteredLogs();
+    const logs = useSelector(filteredLogs);
 
     return (
         <Modal name="logBook">
@@ -22,7 +22,7 @@ const LogBookModal = () => {
             <div className="modal-body p-0">
                 <LogBookFilters />
 
-                <LogBookTable logs={ filteredLogs }/>
+                <LogBookTable logs={ logs }/>
             </div>
 
             <ModalFooter />

@@ -170,6 +170,8 @@ gulp.task('scripts', () => {
             // Strip '../src/modules' from the start of declaration vinylPaths
             { dirname: vinylPath.dirname.replace(osPathModulePrefix, '.') }
         )))
+        // Remove re-exports
+        .pipe(replace(/(^|\n)export .* from .*;/g, ''))
         // Remove default exports
         .pipe(replace(/(^|\n)export default \w+;/g, ''))
         // Replace imports with references
