@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { GameShim } from '../temporaryTypes';
 import ReactApp from './App';
 import { Provider } from './hooks/useGame';
 
-const bindReact = (Game: any) => {
+const bindReact = (Game: GameShim) => {
     ReactDOM.render(
         <Provider Game={Game}>
             <ReactApp />
