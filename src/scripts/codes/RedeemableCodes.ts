@@ -53,7 +53,7 @@ class RedeemableCodes implements Saveable {
                     GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeon)]);
                 });
                 // Catch all Pokemon
-                for (let id = 1; id <= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.kanto]; id++) {
+                for (let id = 1; id <= GameConstants.MaxIDPerRegion[GameConstants.Region.kanto]; id++) {
                     App.game.party.gainPokemonById(id, false, true);
                 }
                 // Notify that the code was activated successfully

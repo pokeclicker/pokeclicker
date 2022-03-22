@@ -38,7 +38,7 @@ export enum Region {
 
 export const MAX_AVAILABLE_REGION = Region.alola;
 
-export const TotalPokemonsPerRegion = [
+export const MaxIDPerRegion = [
     151, // 151 - Kanto
     251, // 100 - Johto
     386, // 135 - Hoenn
