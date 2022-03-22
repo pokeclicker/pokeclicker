@@ -57,11 +57,18 @@
                     </div>
 
                     <div class="tab-pane" id="settings-notifications">
-                        <table class="table table-striped table-hover m-0">
-                            <tbody data-bind="foreach: Object.values(NotificationConstants.NotificationSetting)">
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
-                            </tbody>
-                        </table>
+                        <!-- ko foreach: Object.keys(NotificationConstants.NotificationSetting) -->
+                        <span class="btn btn-block btn-dark clickable mt-1" data-toggle="collapse" data-bind="text: $data, attr: { href: '#settingsNotification' + $data }"></span>
+                        <div class="collapse show" data-bind="attr: { id: 'settingsNotification' + $data }">
+                            <table class="table table-striped table-hover m-0">
+                                <tbody>
+                                <!-- ko foreach: Object.values(NotificationConstants.NotificationSetting[$data]) -->
+                                    <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
+                                <!-- /ko -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /ko -->
                     </div>
 
                     <div class="tab-pane" id="settings-other">

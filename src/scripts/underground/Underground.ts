@@ -243,7 +243,7 @@ class Underground implements Feature {
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 1e4,
                     sound: NotificationConstants.NotificationSound.underground_energy_full,
-                    setting: NotificationConstants.NotificationSetting.underground_energy_full,
+                    setting: NotificationConstants.NotificationSetting.General.underground_energy_full,
                 });
             }
         }
