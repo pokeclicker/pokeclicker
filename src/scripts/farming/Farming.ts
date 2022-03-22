@@ -954,7 +954,7 @@ class Farming implements Feature {
         let message = '';
         let type = NotificationConstants.NotificationOption.success;
         let sound = NotificationConstants.NotificationSound.ready_to_harvest;
-        let setting = NotificationConstants.NotificationSetting.ready_to_harvest;
+        let setting = NotificationConstants.NotificationSetting.Farming.ready_to_harvest;
 
         switch (farmNotiType) {
             case FarmNotificationType.Ripe:
@@ -964,41 +964,41 @@ class Farming implements Feature {
                 message = 'A Berry plant is about to wither!';
                 type = NotificationConstants.NotificationOption.warning;
                 sound = NotificationConstants.NotificationSound.berry_wither;
-                setting = NotificationConstants.NotificationSetting.about_to_wither;
+                setting = NotificationConstants.NotificationSetting.Farming.about_to_wither;
                 break;
             case FarmNotificationType.Withered:
                 message = 'A Berry plant has withered!';
                 type = NotificationConstants.NotificationOption.warning;
                 sound = NotificationConstants.NotificationSound.berry_wither;
-                setting = NotificationConstants.NotificationSetting.berry_withered;
+                setting = NotificationConstants.NotificationSetting.Farming.berry_withered;
                 break;
             case FarmNotificationType.Mutated:
                 message = 'A Berry plant has mutated!';
                 sound = NotificationConstants.NotificationSound.berry_mutated;
-                setting = NotificationConstants.NotificationSetting.berry_mutated;
+                setting = NotificationConstants.NotificationSetting.Farming.berry_mutated;
                 break;
             case FarmNotificationType.Replanted:
                 message = 'A Berry has been replanted!';
                 sound = NotificationConstants.NotificationSound.berry_replanted;
-                setting = NotificationConstants.NotificationSetting.berry_replanted;
+                setting = NotificationConstants.NotificationSetting.Farming.berry_replanted;
                 break;
             case FarmNotificationType.Dropped:
                 message = 'A Berry has been dropped!';
                 sound = NotificationConstants.NotificationSound.berry_dropped;
-                setting = NotificationConstants.NotificationSetting.berry_dropped;
+                setting = NotificationConstants.NotificationSetting.Farming.berry_dropped;
                 break;
             case FarmNotificationType.MulchRanOut:
                 message = 'A plot has run out of mulch!';
                 type = NotificationConstants.NotificationOption.warning;
                 sound = NotificationConstants.NotificationSound.mulch_ran_out;
-                setting = NotificationConstants.NotificationSetting.mulch_ran_out;
+                setting = NotificationConstants.NotificationSetting.Farming.mulch_ran_out;
                 break;
             case FarmNotificationType.Wander:
                 const pokemon = wander?.shiny ? `shiny ${wander?.pokemon}` : wander?.pokemon;
                 message = `A wild ${pokemon} has wandered onto the farm!`;
                 type = wander?.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
                 sound = NotificationConstants.NotificationSound.wandering_pokemon;
-                setting = NotificationConstants.NotificationSetting.wandering_pokemon;
+                setting = NotificationConstants.NotificationSetting.Farming.wandering_pokemon;
                 break;
         }
 
@@ -1253,7 +1253,7 @@ class Farming implements Feature {
             Notifier.notify({
                 message: `You got a ${BerryType[berry]} berry!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.route_item_found,
+                setting: NotificationConstants.NotificationSetting.Items.route_item_found,
             });
         }
         this.gainBerry(berry, amount, false);
@@ -1290,7 +1290,7 @@ class Farming implements Feature {
             Notifier.notify({
                 message: `You've discovered a ${BerryType[berry]} Berry!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.route_item_found,
+                setting: NotificationConstants.NotificationSetting.Items.route_item_found,
             });
             this.unlockedBerries[berry](true);
         }
