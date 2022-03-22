@@ -41,6 +41,12 @@ import Information from './utilities/Information';
 import TypeHelper from './types/TypeHelper';
 import Upgrade from './upgrades/Upgrade';
 import ExpUpgrade from './upgrades/ExpUpgrade';
+import OakItemType from './enums/OakItemType';
+import OakItem from './oakItems/OakItem';
+import OakItems from './oakItems/OakItems';
+import BoughtOakItem from './oakItems/BoughtOakItem';
+import OakItemController from './oakItems/OakItemController';
+import OakItemLoadouts from './oakItems/OakItemLoadouts';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -88,4 +94,10 @@ Object.assign(<any>window, {
     TypeHelper,
     Upgrade,
     ExpUpgrade,
+    OakItemType,
+    OakItem,
+    OakItems,
+    BoughtOakItem,
+    OakItemController,
+    OakItemLoadouts,
 });

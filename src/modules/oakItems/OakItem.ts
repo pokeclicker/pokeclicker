@@ -1,14 +1,20 @@
-/// <reference path="../../declarations/GameHelper.d.ts" />
-/// <reference path="../../declarations/upgrades/ExpUpgrade.d.ts" />
+import {
+    Observable as KnockoutObservable,
+} from 'knockout';
+import { Currency } from '../GameConstants';
+import GameHelper from '../GameHelper';
+import ExpUpgrade from '../upgrades/ExpUpgrade';
+import Amount from '../wallet/Amount';
+import AmountFactory from '../wallet/AmountFactory';
 
-class OakItem extends ExpUpgrade {
+export default class OakItem extends ExpUpgrade {
     defaults = {
         level: 0,
         exp: 0,
         isActive: false,
     };
 
-    private _isActive: KnockoutObservable<boolean>;
+    private isActiveKO: KnockoutObservable<boolean>;
 
     constructor(
         name: any,
@@ -21,11 +27,11 @@ class OakItem extends ExpUpgrade {
         public expGain: number,
         expList: number[] = [500, 1000, 2500, 5000, 10000],
         maxLevel = 5,
-        costList: Amount[] = AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], GameConstants.Currency.money),
-        public bonusSymbol: string = '×'
+        costList: Amount[] = AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], Currency.money),
+        public bonusSymbol: string = '×',
     ) {
         super(name, displayName, maxLevel, expList, costList, bonusList, increasing);
-        this._isActive = ko.observable(false);
+        this.isActiveKO = ko.observable(false);
     }
 
     use(exp: number = this.expGain, scale = 1) {
@@ -42,13 +48,14 @@ class OakItem extends ExpUpgrade {
         return App.game.party.caughtPokemon.length >= this.unlockReq;
     }
 
+    // TODO: do we need both of these hint methods?
     getHint(): string {
         return `Capture ${this.unlockReq - App.game.party.caughtPokemon.length} more unique Pokémon`;
     }
 
-    hint = ko.pureComputed(() => {
-        return `Capture ${this.unlockReq - App.game.party.caughtPokemon.length} more unique Pokémon`;
-    });
+    get hint() {
+        return ko.pureComputed(() => `Capture ${this.unlockReq - App.game.party.caughtPokemon.length} more unique Pokémon`);
+    }
 
     calculateBonus(level: number = this.level): number {
         if (!this.isActive) {
@@ -61,22 +68,21 @@ class OakItem extends ExpUpgrade {
         return super.calculateBonus(level);
     }
 
-
     toJSON(): Record<string, any> {
         const json = super.toJSON();
-        json['isActive'] = this.isActive;
+        json.isActive = this.isActive;
         return json;
     }
 
     fromJSON(json: Record<string, any>): void {
         super.fromJSON(json);
-        this.isActive = json['isActive'] ?? this.defaults.isActive;
+        this.isActive = json.isActive ?? this.defaults.isActive;
     }
 
     // Knockout getters/setters
     get expPercentage() {
         const nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
-        return Math.floor(this.normalizedExp / this.expGain) / Math.ceil(nextLevelExp / this.expGain) * 100;
+        return (Math.floor(this.normalizedExp / this.expGain) / Math.ceil(nextLevelExp / this.expGain)) * 100;
     }
 
     get progressString(): string {
@@ -85,18 +91,18 @@ class OakItem extends ExpUpgrade {
     }
 
     get isActive() {
-        return this._isActive();
+        return this.isActiveKO();
     }
 
     set isActive(bool: boolean) {
-        this._isActive(bool);
+        this.isActiveKO(bool);
     }
 
     get bonusText(): string {
         return `${this.calculateBonusIfActive()}${this.bonusSymbol}`;
     }
 
-    tooltip = ko.pureComputed(() => {
-        return `<u>${this.displayName}</u><br/><p>${this.description}</p>Level: <strong>${this.level}/${this.maxLevel}</strong><br/>Bonus: <strong>${this.bonusText}</strong>`;
-    });
+    get tooltip() {
+        return ko.pureComputed(() => `<u>${this.displayName}</u><br/><p>${this.description}</p>Level: <strong>${this.level}/${this.maxLevel}</strong><br/>Bonus: <strong>${this.bonusText}</strong>`);
+    }
 }
