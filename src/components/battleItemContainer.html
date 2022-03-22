@@ -58,7 +58,7 @@
         </tbody>
       </table>
     </div>
-    <div class="card-header p-0" data-toggle="collapse" href="#fluteItemContainerBody">
+    <div class="card-header p-0" data-toggle="collapse" href="#fluteItemContainerBody" data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
       <span>Flutes</span>
     </div>
     <div id="fluteItemContainerBody" class="card-body p-0 show">
@@ -66,7 +66,7 @@
           Flutes are disabled.
       </p>
       <!-- Flutes -->
-      <table class="table table-bordered m-0">
+      <table class="table table-bordered m-0" data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
         <tbody>
           <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'FluteItem'))">
             <tr data-bind="foreach: $data">
