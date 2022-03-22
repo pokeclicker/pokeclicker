@@ -90,14 +90,14 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 
 // CSS variable settings
-Settings.add(new CssVariableSetting('locked', 'Map Color Locked Location', [], '#000000'));
-Settings.add(new CssVariableSetting('currentPlace', 'Map Color Current Location', [], '#55ff00'));
-Settings.add(new CssVariableSetting('incomplete', 'Map Color Incomplete Area', [], '#ff9100'));
-Settings.add(new CssVariableSetting('uncaughtPokemon', 'Map Color Uncaught Pokemon', [], '#3498db'));
-Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Map Color Uncaught Shiny Pokemon', [], '#ffee00'));
-Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Map Color Uncaught Shiny Pokemon and missing achievement', [], '#ffee00'));
-Settings.add(new CssVariableSetting('missingAchievement', 'Map Color Missing achievement', [], '#f04124'));
-Settings.add(new CssVariableSetting('completed', 'Map Color Completed Location', [], '#ffffff'));
+Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
+Settings.add(new CssVariableSetting('currentPlace', 'Current Location', [], '#55ff00'));
+Settings.add(new CssVariableSetting('incomplete', 'Incomplete Area', [], '#ff9100'));
+Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokemon', [], '#3498db'));
+Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Aachievement', [], '#ff3874'));
+Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokemon', [], '#ffee00'));
+Settings.add(new CssVariableSetting('missingAchievement', 'Missing Achievement', [], '#cd54fc'));
+Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#ffffff'));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
