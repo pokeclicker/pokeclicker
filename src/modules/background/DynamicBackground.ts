@@ -3,7 +3,7 @@ import {
     SHINY_CHANCE_BREEDING,
     MINUTE,
     SECOND,
-    TotalPokemonsPerRegion,
+    MaxIDPerRegion,
     Region,
 } from '../GameConstants';
 import Rand from '../utilities/Rand';
@@ -118,7 +118,7 @@ export default class DynamicBackground {
         // Assign our timeout function so we can stop it later
         DynamicBackground.addPokemonTimeout = setTimeout(() => {
             // limited to players highest region
-            DynamicBackground.addPokemon(Rand.intBetween(1, TotalPokemonsPerRegion[player?.highestRegion() || Region.kanto]));
+            DynamicBackground.addPokemon(Rand.intBetween(1, MaxIDPerRegion[player?.highestRegion() || Region.kanto]));
             // Add another pokemon
             DynamicBackground.startAddingPokemon();
         }, delay);

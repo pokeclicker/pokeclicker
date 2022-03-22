@@ -110,8 +110,10 @@ Object.values(NotificationConstants.NotificationSound).forEach((sound) => {
 Settings.add(new RangeSetting('sound.volume', 'Volume', 0, 100, 1, 100));
 
 // Notification settings
-Object.values(NotificationConstants.NotificationSetting).forEach((setting) => {
-    Settings.add(setting);
+Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup) => {
+    Object.values(settingsGroup).forEach((setting) => {
+        Settings.add(setting);
+    });
 });
 
 /*
