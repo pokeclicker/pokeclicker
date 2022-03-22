@@ -58,8 +58,8 @@
 
                     <div class="tab-pane" id="settings-notifications">
                         <!-- ko foreach: Object.keys(NotificationConstants.NotificationSetting) -->
-                        <span class="btn btn-block btn-dark clickable" data-toggle="collapse" data-bind="text: $data, attr: { href: '#settingsNotification' + $data }"></span>
-                        <div class="collapse" data-bind="attr: { id: 'settingsNotification' + $data }">
+                        <span class="btn btn-block btn-dark clickable mt-1" data-toggle="collapse" data-bind="text: $data, attr: { href: '#settingsNotification' + $data }"></span>
+                        <div class="collapse show" data-bind="attr: { id: 'settingsNotification' + $data }">
                             <table class="table table-striped table-hover m-0">
                                 <tbody>
                                 <!-- ko foreach: Object.values(NotificationConstants.NotificationSetting[$data]) -->
