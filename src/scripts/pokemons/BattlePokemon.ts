@@ -72,7 +72,7 @@ class BattlePokemon implements EnemyPokemonInterface {
             Notifier.notify({
                 message: `The enemy ${msg}`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.dropped_item,
+                setting: NotificationConstants.NotificationSetting.Items.dropped_item,
             });
             App.game.logbook.newLog(LogBookTypes.FOUND, `An enemy ${msg}`);
         }
