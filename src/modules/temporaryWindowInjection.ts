@@ -38,6 +38,7 @@ import { SpriteCredits, CodeCredits } from './Credits';
 import * as modalUtils from './utilities/Modal';
 import PokemonCategories from './party/Category';
 import Information from './utilities/Information';
+import TypeHelper from './types/TypeHelper';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -82,4 +83,5 @@ Object.assign(<any>window, {
     modalUtils,
     PokemonCategories,
     Information,
+    TypeHelper,
 });

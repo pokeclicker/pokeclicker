@@ -153,6 +153,11 @@ export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 export const DNA_ITEM_CHANCE = 60;
 
+// Gems
+export const GEM_UPGRADE_COST = 500;
+export const GEM_UPGRADE_STEP = 0.1;
+export const MAX_GEM_UPGRADES = 10;
+
 // Gems from battle
 export const DUNGEON_GEMS = 3;
 export const DUNGEON_BOSS_GEMS = 20;
