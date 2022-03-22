@@ -39,6 +39,8 @@ import * as modalUtils from './utilities/Modal';
 import PokemonCategories from './party/Category';
 import Information from './utilities/Information';
 import TypeHelper from './types/TypeHelper';
+import Upgrade from './upgrades/Upgrade';
+import ExpUpgrade from './upgrades/ExpUpgrade';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -84,4 +86,6 @@ Object.assign(<any>window, {
     PokemonCategories,
     Information,
     TypeHelper,
+    Upgrade,
+    ExpUpgrade,
 });
