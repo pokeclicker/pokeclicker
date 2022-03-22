@@ -67,7 +67,7 @@ export default class SpecialEvent {
             type,
             time,
             timeout,
-            setting: NotificationConstants.NotificationSetting.event_start_end,
+            setting: NotificationConstants.NotificationSetting.General.event_start_end,
         });
     }
 
