@@ -99,7 +99,7 @@ class fluteEffectRunner {
     }
 
     public static fluteFormattedTime(itemName: string): number {
-       return (player.effectList[itemName]() / this.numActiveFlutes());
+        return (player.effectList[itemName]() / this.numActiveFlutes());
     }
 
     public static updateFormattedTimeLeft(itemName: string) {
