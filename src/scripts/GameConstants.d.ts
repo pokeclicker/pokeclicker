@@ -35,7 +35,7 @@ namespace GameConstants {
     declare const MUTATION_TICK: number;
     declare const WANDER_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
-    declare const TotalPokemonsPerRegion: number[];
+    declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
     declare const FLUTE_TYPE_ATTACK_MULTIPLIER: number;
     declare const ROAMING_MIN_CHANCE: number;
