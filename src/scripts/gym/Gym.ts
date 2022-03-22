@@ -43,6 +43,13 @@ class Gym {
         return gym.requirements.every(requirement => requirement.isCompleted());
     }
 
+    public static isAchievementsComplete(gym: Gym) {
+        const gymIndex = GameConstants.getGymIndex(gym.town);
+        return AchievementHandler.achievementList.every(achievement => {
+            return !(achievement.property instanceof ClearGymRequirement && achievement.property.gymIndex === gymIndex && !achievement.isCompleted());
+        });
+    }
+
     public static calculateCssClass(gym: Gym): KnockoutComputed<string> {
         return ko.pureComputed(() => {
             if (App.game.badgeCase.hasBadge(gym.badgeReward)) {
