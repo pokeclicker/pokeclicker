@@ -17,7 +17,7 @@ const LogBookTable = ({ logs }: Props) => (
         </thead>
         <tbody>
             { logs.map((log) => (
-                <LogBookRow log={log} />
+                <LogBookRow log={log} key={`log-${log.id}`} />
             ))}
         </tbody>
     </table>

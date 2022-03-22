@@ -9,7 +9,8 @@ const LogBookFilters = () => {
             { Object.entries(Game.logbook.filters).map(([filter, isActive]) => {
                 const active = isActive();
                 return (
-                    <button className={`btn col ${active ? `btn-${filter}` : `btn-outline-${filter}`}`}
+                    <button key={`log-filter-${filter}`}
+                        className={`btn col ${active ? `btn-${filter}` : `btn-outline-${filter}`}`}
                         onClick={(event) => { event.currentTarget.blur(); isActive(!active); }}>
                         { filter.replace(/_/g, ' ') }
                     </button>

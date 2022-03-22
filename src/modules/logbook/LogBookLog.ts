@@ -1,4 +1,7 @@
+import getUniqueId from '../utilities/uniqueId';
 import { LogBookType } from './LogBookTypes';
+
+// unique id for use in React key
 
 export default class LogBookLog {
     constructor(
@@ -8,5 +11,6 @@ export default class LogBookLog {
         },
         public description: string = 'Unknown entry',
         public date: number = Date.now(),
+        public id = getUniqueId(),
     ) {}
 }
