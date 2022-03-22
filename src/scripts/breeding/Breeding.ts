@@ -277,7 +277,7 @@ class Breeding implements Feature {
                         type: NotificationConstants.NotificationOption.success,
                         timeout: 1e4,
                         sound: NotificationConstants.NotificationSound.empty_queue,
-                        setting: NotificationConstants.NotificationSetting.empty_queue,
+                        setting: NotificationConstants.NotificationSetting.Hatchery.empty_queue,
                     });
                 }
             }
@@ -306,12 +306,12 @@ class Breeding implements Feature {
         const ratio = 2;
         const possibleHatches = GameConstants.expRandomElement(hatchable, ratio);
 
-        const pokemon = GameConstants.randomElement(possibleHatches);
+        const pokemon = Rand.fromArray(possibleHatches);
         return this.createEgg(pokemon, type);
     }
 
     public createRandomEgg(): Egg {
-        const type = Math.floor(Math.random() * Object.keys(this.hatchList).length);
+        const type = +Rand.fromArray(Object.keys(this.hatchList));
         const egg = this.createTypedEgg(type);
         egg.type = EggType.Mystery;
         return egg;

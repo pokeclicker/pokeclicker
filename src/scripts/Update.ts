@@ -10,6 +10,7 @@ class Update implements Saveable {
 
     updateSteps = {
         '0.4.0': ({ playerData, saveData }) => {
+            saveData.update = { version: '0.0.0' };
             // Update the save data as it is no longer a part of player data
             saveData.statistics = {
                 ...playerData.statistics || {},
@@ -330,7 +331,7 @@ class Update implements Saveable {
 
         '0.7.4': ({ playerData, saveData }) => {
             // Clear old quest data
-            delete saveData.quests.questList;
+            saveData.quests.questList = [];
 
             // Update starter selection
             playerData.starter = playerData._starter;
@@ -338,6 +339,8 @@ class Update implements Saveable {
             /*
              * Challenge Modes
              */
+            // Create empty challenges object
+            saveData.challenges = { list: {} };
             // Disable Click Attacks
             if (saveData.statistics.clickAttacks <= 100) {
                 Notifier.notify({
@@ -530,7 +533,7 @@ class Update implements Saveable {
             };
 
             // Only run if save is from v0.8.7 (a forked version which is breaking stuff)
-            if (saveData.update.version == '0.8.7') {
+            if (saveData.update?.version == '0.8.7') {
                 // Check if the save has the Vivillon quest line, otherwise it's not from the main website
                 const questLines = saveData.quests?.questLines?.length || 0;
                 if (questLines < 4) {
@@ -545,7 +548,7 @@ class Update implements Saveable {
             }
         },
 
-        '0.8.12': async ({ playerData, saveData }) => {
+        '0.8.12': ({ playerData, saveData }) => {
             // Add Team Rockets Hideout
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 19);
             // Add Radio Tower
@@ -553,19 +556,91 @@ class Update implements Saveable {
             // Add Victory Road Johto
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 23);
 
-            // If the player has the Glacier Badge already
-            // Not using game constants incase the badge value isn't 20 in the future
-            if (saveData.badgeCase[20]) {
-                saveData.quests.questLines.push({state: 1, name: 'Radio Tower Takeover', quest: 0});
+            // If the player has the Fog Badge already
+            // Not using game constants incase the badge value isn't 17 in the future
+            if (saveData.badgeCase[17]) {
+                saveData.quests.questLines.push({state: 1, name: 'Team Rocket Again', quest: 0});
             }
 
-            // Check if player wants to activate the new challenge modes
-            if (!await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be changed later)', confirm: 'enable', cancel: 'disable' })) {
-                App.game.challenges.list.regionalAttackDebuff.disable();
+            setTimeout(async () => {
+                // Check if player wants to activate the new challenge modes
+                if (!await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
+                    App.game.challenges.list.regionalAttackDebuff.disable();
+                }
+                if (!await Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
+                    App.game.challenges.list.requireCompletePokedex.disable();
+                }
+            }, GameConstants.SECOND);
+        },
+
+        '0.8.14': ({ playerData, saveData }) => {
+            // Start Aqua Magma questline if player has Dynamo Badge already
+            if (saveData.badgeCase[29]) {
+                saveData.quests.questLines.push({state: 1, name: 'Land vs Water', quest: 0});
             }
-            if (!await Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be changed later)', confirm: 'enable', cancel: 'disable' })) {
-                App.game.challenges.list.requireCompletePokedex.disable();
+
+            // Just incase statistics is not set
+            saveData.statistics = saveData.statistics || {};
+
+            // Rename from the old statistic name
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalBerriesObtained: saveData.statistics.totalBerriesHarvested || 0,
+                pokeballsObtained: saveData.statistics.pokeballsBought || 0,
+                berriesObtained:  saveData.statistics.berriesHarvested || 0,
+
+            };
+        },
+
+        '0.8.15': ({ playerData, saveData }) => {
+            // Start Plasma questline if player has Jet Badge already
+            if (saveData.badgeCase[58]) {
+                saveData.quests.questLines.push({state: 1, name: 'Quest for the DNA Splicers', quest: 0});
             }
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 2, 1); // Digletts Cave
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 5, 4); // Power Plant
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 31, 28); // Jagged Pass
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 29, 30); // Mt. Chimney
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 32, 34); // New Mauville
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 84, 64); // Pledge Grove
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 78, 79); // Abundant Shrine
+
+            // Shards -> Gems
+
+            //Questlist update
+            saveData.quests.questList = saveData.quests.questList?.map(q => {
+                if (q.name == 'GainShardsQuest') {
+                    q.name = 'GainGemsQuest';
+                }
+                return q;
+            }) || [];
+
+            //Setting gems = shards
+            saveData.gems = {
+                gemWallet: saveData.shards.shardWallet || [],
+                gemCollapsed: saveData.shards.shardCollapsed || [],
+                gemUpgrades: saveData.shards.shardUpgrades || [],
+            };
+
+            delete saveData.keyItems['Shard_case'];
+
+            // Swapping Shard Case for Gem Case
+            if (saveData.badgeCase[8]) {
+                saveData.keyItems['Gem_case'] = true;
+            }
+
+            // Just incase statistics is not set
+            saveData.statistics = saveData.statistics || {};
+
+            // Rename from the old statistic name
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalGemsGained: saveData.statistics.totalShardsGained || 0,
+                gemsGained: saveData.statistics.shardsGained || 0,
+            };
+
+            // Challenge update
+            saveData.challenges.list.disableGems = saveData.challenges?.list?.disableShards ?? false;
         },
     };
 
@@ -607,7 +682,7 @@ class Update implements Saveable {
 
     // check if save version is newer or equal to version
     minUpdateVersion(version, saveData): boolean {
-        return !this.isOlderVersion(saveData.update.version, version);
+        return !this.isOlderVersion(saveData.update?.version, version);
     }
 
     // potentially newer version > check against version
@@ -652,7 +727,7 @@ class Update implements Saveable {
     }
 
     check() {
-        if (this.saveVersion === this.version || this.saveVersion === '0.0.0') {
+        if (this.saveVersion === this.version) {
             return;
         }
 

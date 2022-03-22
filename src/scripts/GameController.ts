@@ -215,14 +215,25 @@ class GameController {
                     }
                 }
             } else if (App.game.gameState === GameConstants.GameState.fighting) {
+                const initialRoute = MapHelper.normalizeRoute(player.route(),player.region);
+                const firstRoute = Routes.getRoutesByRegion(player.region)[0].number;
+                const lastRoute = Routes.getRoutesByRegion(player.region)[Routes.getRoutesByRegion(player.region).length - 1].number;
                 // Allow '=' to fallthrough to '+' since they share a key on many keyboards
                 switch (e.key) {
                     case '=':
                     case '+':
-                        MapHelper.moveToRoute(player.route() + 1, player.region);
+                        if (initialRoute + 1 > MapHelper.normalizeRoute(lastRoute, player.region)) {
+                            MapHelper.moveToRoute(firstRoute, player.region);
+                        } else {
+                            MapHelper.moveToRoute(Routes.unnormalizeRoute(initialRoute + 1), player.region);
+                        }
                         break;
                     case '-':
-                        MapHelper.moveToRoute(player.route() - 1, player.region);
+                        if (initialRoute - 1 < MapHelper.normalizeRoute(firstRoute, player.region)) {
+                            MapHelper.moveToRoute(lastRoute, player.region);
+                        } else {
+                            MapHelper.moveToRoute(Routes.unnormalizeRoute(initialRoute - 1), player.region);
+                        }
                         break;
                     default: // any other key (ignore)
                         return;

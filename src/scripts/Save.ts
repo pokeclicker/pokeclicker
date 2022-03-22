@@ -117,7 +117,7 @@ class Save {
         return res;
     }
 
-    public static initializeShards(saved?: Array<Array<number>>): Array<Array<KnockoutObservable<number>>> {
+    public static initializeGems(saved?: Array<Array<number>>): Array<Array<KnockoutObservable<number>>> {
         let res;
         if (saved) {
             res = saved.map((type) => {

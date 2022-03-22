@@ -243,7 +243,7 @@ class Underground implements Feature {
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 1e4,
                     sound: NotificationConstants.NotificationSound.underground_energy_full,
-                    setting: NotificationConstants.NotificationSetting.underground_energy_full,
+                    setting: NotificationConstants.NotificationSetting.General.underground_energy_full,
                 });
             }
         }
@@ -329,7 +329,7 @@ class Underground implements Feature {
             default:
                 const type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string
                 const typeNum = PokemonType[type];
-                App.game.shards.gainShards(GameConstants.PLATE_VALUE * amount, typeNum);
+                App.game.gems.gainGems(GameConstants.PLATE_VALUE * amount, typeNum);
         }
         return success;
     }
@@ -345,7 +345,7 @@ class Underground implements Feature {
         }
     }
 
-    canAccess() {
+    public canAccess() {
         return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
     }
 

@@ -108,8 +108,10 @@ Object.values(NotificationConstants.NotificationSound).forEach((sound) => {
 Settings.add(new RangeSetting('sound.volume', 'Volume', 0, 100, 1, 100));
 
 // Notification settings
-Object.values(NotificationConstants.NotificationSetting).forEach((setting) => {
-    Settings.add(setting);
+Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup) => {
+    Object.values(settingsGroup).forEach((setting) => {
+        Settings.add(setting);
+    });
 });
 
 /*
@@ -136,6 +138,7 @@ const proteinSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 ));
 Settings.add(new Setting<number>('proteinSort', 'Sort:', proteinSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('proteinSortDirection', 'reverse', false));
+Settings.add(new BooleanSetting('proteinHideMaxedPokemon', 'Hide Pokémon with max protein', false));
 
 // Breeding Filters
 Settings.add(new Setting<string>('breedingCategoryFilter', 'breedingCategoryFilter',

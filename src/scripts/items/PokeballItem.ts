@@ -11,7 +11,6 @@ class PokeballItem extends Item {
 
     gain(amt: number) {
         App.game.pokeballs.gainPokeballs(this.type, amt);
-        GameHelper.incrementObservable(App.game.statistics.pokeballsBought[this.type], amt);
     }
 
 }
@@ -26,3 +25,7 @@ ItemList['Quickball'] = new PokeballItem(GameConstants.Pokeball.Quickball, Infin
 ItemList['Timerball'] = new PokeballItem(GameConstants.Pokeball.Timerball, Infinity, GameConstants.Currency.farmPoint);
 ItemList['Duskball'] = new PokeballItem(GameConstants.Pokeball.Duskball, Infinity, GameConstants.Currency.farmPoint);
 ItemList['Luxuryball'] = new PokeballItem(GameConstants.Pokeball.Luxuryball, Infinity, GameConstants.Currency.farmPoint);
+ItemList['Diveball'] = new PokeballItem(GameConstants.Pokeball.Diveball, Infinity, GameConstants.Currency.battlePoint);
+ItemList['Lureball'] = new PokeballItem(GameConstants.Pokeball.Lureball, Infinity, GameConstants.Currency.battlePoint);
+ItemList['Nestball'] = new PokeballItem(GameConstants.Pokeball.Nestball, Infinity, GameConstants.Currency.battlePoint);
+ItemList['Repeatball'] = new PokeballItem(GameConstants.Pokeball.Repeatball, Infinity, GameConstants.Currency.battlePoint);

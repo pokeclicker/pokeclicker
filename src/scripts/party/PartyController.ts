@@ -18,20 +18,20 @@ class PartyController {
         return CaughtStatus.NotCaught;
     }
 
-    static getEvolutionsCaughtStatus(id: number, evoType?: GameConstants.StoneType): CaughtStatus {
-        let status = CaughtStatus.CaughtShiny;
+    static getStoneEvolutionsCaughtStatus(id: number, evoType?: GameConstants.StoneType): CaughtStatus[] {
         const pokemon = App.game.party.caughtPokemon.find(p => p.id == id);
+        const statuses: CaughtStatus[] = [];
         if (pokemon) {
             for (const evolution of pokemon.evolutions) {
-                if (evolution instanceof StoneEvolution && evolution.stone == evoType && evolution.isSatisfied()) {
+                // skip other Restrictions to show all eevee evolutions for the region
+                const regionStatisfied = PokemonHelper.calcNativeRegion(evolution.getEvolvedPokemon()) <= player.highestRegion();
+                if (evolution instanceof StoneEvolution && evolution.stone == evoType && regionStatisfied) {
                     const pStatus = this.getCaughtStatusByName(evolution.getEvolvedPokemon());
-                    if (pStatus < status) {
-                        status = pStatus;
-                    }
+                    statuses.push(pStatus);
                 }
             }
         }
-        return status;
+        return statuses;
     }
 
     public static getMaxLevelPokemonList(): Array<PartyPokemon> {

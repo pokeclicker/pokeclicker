@@ -32,7 +32,7 @@ type TmpGameType = {
     oakItemLoadouts: any,
     categories: PokemonCategories,
     party: any,
-    shards: any,
+    gems: any,
     underground: any,
     farming: any,
     logbook: LogBook,

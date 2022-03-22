@@ -174,7 +174,7 @@ class SafariBattle {
         if (!SafariBattle.busy()) {
             SafariBattle.busy(true);
             SafariBattle.text(`You throw a rock at ${SafariBattle.enemy.name}`);
-            SafariBattle.enemy.angry = Math.max(SafariBattle.enemy.angry, Math.floor(Math.random() * 5 + 2));
+            SafariBattle.enemy.angry = Math.max(SafariBattle.enemy.angry, Rand.intBetween(2, 6));
             SafariBattle.enemy.eating = 0;
             const enemy = $('#safariBattleModal .enemy').offset();
             enemy.left += 40;
@@ -219,8 +219,7 @@ class SafariBattle {
 
     private static enemyTurn() {
         // Enemy turn to flee;
-        const random = Math.floor(Math.random() * 100);
-        if (random < SafariBattle.enemy.escapeFactor) {
+        if (Rand.chance(SafariBattle.enemy.escapeFactor / 100)) {
             SafariBattle.text(`${SafariBattle.enemy.name} has fled.`);
             setTimeout(SafariBattle.endBattle, 1000);
         } else if (SafariBattle.enemy.eating > 0) {
