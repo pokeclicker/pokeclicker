@@ -221,6 +221,13 @@ class DungeonRunner {
         return RouteHelper.listCompleted(possiblePokemon, includeShiny);
     }
 
+    public static isAchievementsComplete(dungeon: Dungeon) {
+        const dungeonIndex = GameConstants.getDungeonIndex(dungeon.name);
+        return AchievementHandler.achievementList.every(achievement => {
+            return !(achievement.property instanceof ClearDungeonRequirement && achievement.property.dungeonIndex === dungeonIndex && !achievement.isCompleted());
+        });
+    }
+
     public static hasEnoughTokens() {
         return App.game.wallet.hasAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
     }

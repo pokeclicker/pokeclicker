@@ -83,8 +83,12 @@ class MapHelper {
             cls = 'unlockedUnfinished';
         } else if (!RouteHelper.routeCompleted(route, region, false)) {
             cls = 'uncaughtPokemon';
+        } else if (!RouteHelper.routeCompleted(route, region, true) && !RouteHelper.isAchievementsComplete(route, region)) {
+            cls = 'uncaughtShinyPokemonAndMissingAchievement';
         } else if (!RouteHelper.routeCompleted(route, region, true)) {
             cls = 'uncaughtShinyPokemon';
+        } else if (!RouteHelper.isAchievementsComplete(route, region)) {
+            cls = 'missingAchievement';
         } else {
             cls = 'completed';
         }
@@ -109,14 +113,22 @@ class MapHelper {
                 return 'unlockedUnfinished';
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], false)) {
                 return 'uncaughtPokemon';
+            } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], true) && !DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
+                return 'uncaughtShinyPokemonAndMissingAchievement';
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], true)) {
                 return 'uncaughtShinyPokemon';
+            } else if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
+                return 'missingAchievement';
             }
         }
         if (gymList[townName]) {
             const gym = gymList[townName];
-            if (Gym.isUnlocked(gym) && !App.game.badgeCase.hasBadge(gym.badgeReward)) {
-                return 'unlockedUnfinished';
+            if (Gym.isUnlocked(gym)) {
+                if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
+                    return 'unlockedUnfinished';
+                } else if (!Gym.isAchievementsComplete(gym)) {
+                    return 'missingAchievement';
+                }
             }
         }
         const town = TownList[townName];
@@ -137,6 +149,11 @@ class MapHelper {
             for (const gym of (town as PokemonLeague)?.gymList) {
                 if (Gym.isUnlocked(gym) && !App.game.badgeCase.hasBadge(gym.badgeReward)) {
                     return 'unlockedUnfinished';
+                }
+            }
+            for (const gym of (town as PokemonLeague)?.gymList) {
+                if (Gym.isUnlocked(gym) && !Gym.isAchievementsComplete(gym)) {
+                    return 'missingAchievement';
                 }
             }
         }
