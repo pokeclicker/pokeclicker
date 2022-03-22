@@ -761,6 +761,12 @@ const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...',
 ]);
 
+const LavaridgeSootCollector = new NPC('Soot Collector', [
+    'Blegh! I\'ve taken three soaks in the hot springs and I can still taste the soot!'
+    'The Flute Trader in Fallarbor Town has been paying me to go collect soot to make Flutes, but I\'m sick of it.'
+    'People say they have truly mystical powers, but that they require Gems of different types to use. Also, using more Flutes at the same time costs more Gems to use'
+]);
+
 const FortreeWeatherman = new NPC('Weatherman', [
     'Castform is a very finnicky pokemon.',
     'It changes forms when the weather is drastically different.',
@@ -859,6 +865,7 @@ TownList['Lavaridge Town'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Jagged Pass'))],
         shops: [LavaridgeTownShop],
+        npcs: [LavaridgeSootCollector],
     }
 );
 TownList['Fallarbor Town'] = new Town(
