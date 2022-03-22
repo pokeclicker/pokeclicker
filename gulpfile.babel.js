@@ -177,7 +177,7 @@ gulp.task('scripts', () => {
         // Convert exports to declarations so that ./src/scripts can use them
         .pipe(replace(/(^|\n)export (?!declare)(default )?/, '$1declare '))
         // Remove any remaining 'export'
-        .pipe(replace(/(^|\n)export/g, ''))
+        .pipe(replace(/(^|\n)export/g, '\n'))
         // Fix broken declarations for things like temporaryWindowInjection
         .pipe(replace('declare {};', ''))
         .pipe(gulp.dest(dests.declarations));
