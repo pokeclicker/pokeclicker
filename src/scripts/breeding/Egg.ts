@@ -75,14 +75,14 @@ class Egg implements Saveable {
                     message: `${this.pokemon} is ready to hatch!`,
                     type: NotificationConstants.NotificationOption.success,
                     sound: NotificationConstants.NotificationSound.ready_to_hatch,
-                    setting: NotificationConstants.NotificationSetting.ready_to_hatch,
+                    setting: NotificationConstants.NotificationSetting.Hatchery.ready_to_hatch,
                 });
             } else {
                 Notifier.notify({
                     message: 'An egg is ready to hatch!',
                     type: NotificationConstants.NotificationOption.success,
                     sound: NotificationConstants.NotificationSound.ready_to_hatch,
-                    setting: NotificationConstants.NotificationSetting.ready_to_hatch,
+                    setting: NotificationConstants.NotificationSetting.Hatchery.ready_to_hatch,
                 });
             }
             this.notified = true;
@@ -131,7 +131,7 @@ class Egg implements Saveable {
                 message: `✨ You hatched a shiny ${this.pokemon}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.shiny_long,
-                setting: NotificationConstants.NotificationSetting.hatched_shiny,
+                setting: NotificationConstants.NotificationSetting.Hatchery.hatched_shiny,
             });
             App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}!`);
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonHatched[pokemonID]);
@@ -140,7 +140,7 @@ class Egg implements Saveable {
             Notifier.notify({
                 message: `You hatched ${GameHelper.anOrA(this.pokemon)} ${this.pokemon}!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.hatched,
+                setting: NotificationConstants.NotificationSetting.Hatchery.hatched,
             });
         }
 

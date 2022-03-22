@@ -141,7 +141,7 @@ abstract class Quest {
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 5e3,
                     sound: NotificationConstants.NotificationSound.quest_ready_to_complete,
-                    setting: NotificationConstants.NotificationSetting.quest_ready_to_complete,
+                    setting: NotificationConstants.NotificationSetting.General.quest_ready_to_complete,
                 });
                 this.notified = true;
             }
