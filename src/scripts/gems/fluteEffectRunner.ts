@@ -99,7 +99,7 @@ class fluteEffectRunner {
     }
 
     public static updateFormattedTimeLeft(itemName: string) {
-        const times = GameConstants.formatTime(player.effectList[itemName]()).split(':');
+        const times = GameConstants.formatTime(player.effectList[itemName]() / this.numActiveFlutes()).split(':');
         if (+times[0] > 99) {
             return player.effectTimer[itemName]('99h+');
         } else if (+times[0] > 0) {
