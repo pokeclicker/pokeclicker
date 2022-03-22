@@ -98,8 +98,12 @@ class fluteEffectRunner {
         this.updateActiveGemTypes();
     }
 
+    public static fluteFormattedTime(itemName: string): number {
+       return (player.effectList[itemName]() / this.numActiveFlutes());
+    }
+
     public static updateFormattedTimeLeft(itemName: string) {
-        const times = GameConstants.formatTime(player.effectList[itemName]() / this.numActiveFlutes()).split(':');
+        const times = GameConstants.formatTime(this.fluteFormattedTime(itemName)).split(':');
         if (+times[0] > 99) {
             return player.effectTimer[itemName]('99h+');
         } else if (+times[0] > 0) {
