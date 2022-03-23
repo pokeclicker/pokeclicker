@@ -36,6 +36,20 @@ interface EncounterInfo {
     lockMessage: string,
 }
 
+// Gain a gym badge after first completion of a dungeon
+const DungeonGainGymBadge = (gym: Gym, badge: BadgeEnums) => {
+    // Check that the player hasn't already obtained the badge
+    if (!App.game.badgeCase.hasBadge(badge)) {
+        // Set the set to our expected gym
+        // This updates our modal values
+        GymRunner.gymObservable(gym);
+        // Give the player the badge
+        App.game.badgeCase.gainBadge(badge);
+        // Show the modal
+        $('#receiveBadgeModal').modal('show');
+    }
+};
+
 /**
  * Gym class.
  */
@@ -5153,13 +5167,7 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
         new DungeonBossPokemon('Totem Gumshoos', 82543791, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     805000, 2,
-    () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.NormaliumZ)) {
-            GymRunner.gymObservable(gymList['Ilima\'s Trial']);
-            App.game.badgeCase.gainBadge(BadgeEnums.NormaliumZ);
-            $('#receiveBadgeModal').modal('show');
-        }
-    });
+    () => DungeonGainGymBadge(gymList['Ilima\'s Trial'], BadgeEnums.NormaliumZ));
 
 dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
     [
@@ -5287,13 +5295,7 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
         new DungeonBossPokemon('Totem Araquanid', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     875000, 5,
-    () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.WateriumZ)) {
-            GymRunner.gymObservable(gymList['Lana\'s Trial']);
-            App.game.badgeCase.gainBadge(BadgeEnums.WateriumZ);
-            $('#receiveBadgeModal').modal('show');
-        }
-    });
+    () => DungeonGainGymBadge(gymList['Lana\'s Trial'], BadgeEnums.WateriumZ));
 
 dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
     [
@@ -5322,13 +5324,7 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
         new DungeonBossPokemon('Totem Salazzle', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     900000, 7,
-    () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.FiriumZ)) {
-            GymRunner.gymObservable(gymList['Kiawe\'s Trial']);
-            App.game.badgeCase.gainBadge(BadgeEnums.FiriumZ);
-            $('#receiveBadgeModal').modal('show');
-        }
-    });
+    () => DungeonGainGymBadge(gymList['Kiawe\'s Trial'], BadgeEnums.FiriumZ));
 
 dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
     ['Metapod', 'Paras', 'Pinsir', 'Hoothoot', 'Bonsly', 'Trumbeak', 'Fomantis', 'Bounsweet', 'Steenee', 'Comfey', 'Oranguru', 'Passimian'],
@@ -5339,13 +5335,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
         new DungeonBossPokemon('Totem Lurantis', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     925000, 8,
-    () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.GrassiumZ)) {
-            GymRunner.gymObservable(gymList['Mallow\'s Trial']);
-            App.game.badgeCase.gainBadge(BadgeEnums.GrassiumZ);
-            $('#receiveBadgeModal').modal('show');
-        }
-    });
+    () => DungeonGainGymBadge(gymList['Mallow\'s Trial'], BadgeEnums.GrassiumZ));
 
 dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
     [
@@ -5449,13 +5439,7 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
         new DungeonBossPokemon('Totem Togedemaru', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     1000000, 22,
-    () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.ElectriumZ)) {
-            GymRunner.gymObservable(gymList['Sophocles\' Trial']);
-            App.game.badgeCase.gainBadge(BadgeEnums.ElectriumZ);
-            $('#receiveBadgeModal').modal('show');
-        }
-    });
+    () => DungeonGainGymBadge(gymList['Sophocles\' Trial'], BadgeEnums.ElectriumZ));
 
 dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
     ['Golbat', 'Gastly', 'Haunter', 'Gengar', 'Shuppet', 'Banette', 'Jellicent', 'Klefki'],
@@ -5466,13 +5450,7 @@ dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
         new DungeonBossPokemon('Totem Mimikyu', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     1025000, 14,
-    () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.GhostiumZ)) {
-            GymRunner.gymObservable(gymList['Acerola\'s Trial']);
-            App.game.badgeCase.gainBadge(BadgeEnums.GhostiumZ);
-            $('#receiveBadgeModal').modal('show');
-        }
-    });
+    () => DungeonGainGymBadge(gymList['Acerola\'s Trial'], BadgeEnums.GhostiumZ));
 
 dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
     [
@@ -5762,13 +5740,7 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
         new DungeonBossPokemon('Totem Kommo-o', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     1125000, 25,
-    () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.DragoniumZ)) {
-            GymRunner.gymObservable(gymList['Vast Poni Canyon Trial']);
-            App.game.badgeCase.gainBadge(BadgeEnums.DragoniumZ);
-            $('#receiveBadgeModal').modal('show');
-        }
-    });
+    () => DungeonGainGymBadge(gymList['Vast Poni Canyon Trial'], BadgeEnums.DragoniumZ));
 
 dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
     ['Chansey', 'Wingull', 'Pelipper', 'Spritzee', 'Swirlix', 'Cutiefly', 'Comfey', 'Dhelmise'],
@@ -5776,13 +5748,7 @@ dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
     16217412,
     [new DungeonBossPokemon('Ribombee', 81087060, 55)],
     1150000, 25,
-    () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.FairiumZ)) {
-            GymRunner.gymObservable(gymList['Mina\'s Trial']);
-            App.game.badgeCase.gainBadge(BadgeEnums.FairiumZ);
-            $('#receiveBadgeModal').modal('show');
-        }
-    });
+    () => DungeonGainGymBadge(gymList['Mina\'s Trial'], BadgeEnums.FairiumZ));
 
 dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
     [
