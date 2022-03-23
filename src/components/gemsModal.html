@@ -47,7 +47,7 @@
                                         </div>
                                     </td>
                                     <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]]
-                                        + (App.game.gems.getGemUpgrade($parentContext.$index(), $index()) * Gems.GEM_UPGRADE_STEP)).toFixed(1) + "x"'></td>
+                                        + (App.game.gems.getGemUpgrade($parentContext.$index(), $index()) * GameConstants.GEM_UPGRADE_STEP)).toFixed(1) + "x"'></td>
                                     <td>
                                         <button class='btn btn-block btn-primary'
                                                 data-bind='click: function(){App.game.gems.buyGemUpgrade($parentContext.$index(), $index())},
