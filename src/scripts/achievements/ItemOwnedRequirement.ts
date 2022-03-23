@@ -1,4 +1,4 @@
-///<reference path="Requirement.ts"/>
+///<reference path="../../declarations/requirements/Requirement.d.ts"/>
 
 class ItemOwnedRequirement extends Requirement {
     constructor(public itemName: string, value = 1, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {

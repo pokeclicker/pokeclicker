@@ -62,7 +62,7 @@ class SafariPokemon implements PokemonInterface {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${name}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
-                sound: NotificationConstants.NotificationSound.shiny_long,
+                sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
             });
 
