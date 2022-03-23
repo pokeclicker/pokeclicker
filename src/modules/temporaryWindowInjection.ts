@@ -55,6 +55,8 @@ import AchievementRequirement from './requirements/AchievementRequirement';
 import NullRequirement from './requirements/NullRequirement';
 import MultiRequirement from './requirements/MultiRequirement';
 import OneFromManyRequirement from './requirements/OneFromManyRequirement';
+import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
+import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -116,4 +118,6 @@ Object.assign(<any>window, {
     NullRequirement,
     MultiRequirement,
     OneFromManyRequirement,
+    UndergroundItemsFoundRequirement,
+    UndergroundLayersMinedRequirement,
 });
