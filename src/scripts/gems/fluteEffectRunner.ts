@@ -29,7 +29,7 @@ class fluteEffectRunner {
                     Notifier.notify({
                         message: `The ${GameConstants.humanifyString(itemName)}'s effect ran out!`,
                         type: NotificationConstants.NotificationOption.danger,
-                        sound: NotificationConstants.NotificationSound.battle_item_timer,
+                        sound: NotificationConstants.NotificationSound.General.battle_item_timer,
                         setting: NotificationConstants.NotificationSetting.Items.battle_item_timer,
                     });
                 }
