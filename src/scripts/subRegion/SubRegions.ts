@@ -45,6 +45,14 @@ SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Ula\'ula & Po
 // SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Akala island', new GymBadgeRequirement(BadgeEnums.MelemeleKahuna), 'Heahea City'));
 // SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Ula\'ula island', new GymBadgeRequirement(BadgeEnums.Elite_Nihilego), 'Malie City'));
 // SubRegions.addSubRegion(GameConstants.Region.alola, new SubRegion('Poni island', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation')), 'Seafolk Village'));
+enum AlolaSubRegions {
+    MelemeleIsland = 0,
+    AkalaIsland = 1,
+    UlaulaAndPoniIslands = 2,
+    // UlaulaIsland = 2,
+    // PoniIsland = 3
+}
+
 SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar', undefined, 'Postwick'));
 // For once Galar is split into 2 regions
 // SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar South', undefined, 'Postwick'));

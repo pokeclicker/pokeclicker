@@ -5,7 +5,8 @@ class RegionRoute {
         public number: number,
         public pokemon: RoutePokemon,
         public requirements: (OneFromManyRequirement | Requirement)[] = [],
-        public orderNumber?: number
+        public orderNumber?: number,
+        public subRegion?: number
     ) {
         this.orderNumber = orderNumber || number;
     }

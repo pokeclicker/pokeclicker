@@ -1,16 +1,20 @@
-/// <reference path="../../declarations/GameHelper.d.ts" />
+import {
+    Observable as KnockoutObservable,
+    ObservableArray as KnockoutObservableArray,
+    Computed as KnockoutComputed,
+} from 'knockout';
+import { Saveable } from '../DataStore/common/Saveable';
+import OakItemType from '../enums/OakItemType';
 
-class OakItemLoadouts implements Saveable {
-    saveKey = 'oakItemLoadouts';
-
+export default class OakItemLoadouts implements Saveable {
     private static MAX_SLOTS = 3;
 
-    defaults = {}
+    saveKey = 'oakItemLoadouts';
+
+    defaults = {};
 
     loadouts: Array<KnockoutObservableArray<number>> = Array(OakItemLoadouts.MAX_SLOTS).fill(0).map(() => ko.observableArray());
     selectedLoadout: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
-
-    constructor() {}
 
     activateLoadout(index: number) {
         if (App.game.challenges.list.disableOakItems.active()) {
@@ -18,12 +22,12 @@ class OakItemLoadouts implements Saveable {
         }
 
         App.game.oakItems.deactivateAll();
-        this.loadouts[index]().forEach((item: OakItems.OakItem) => {
+        this.loadouts[index]().forEach((item: OakItemType) => {
             App.game.oakItems.activate(item);
         });
     }
 
-    toggleItem(item: OakItems.OakItem) {
+    toggleItem(item: OakItemType) {
         if (App.game.challenges.list.disableOakItems.active()) {
             return;
         }
@@ -39,18 +43,17 @@ class OakItemLoadouts implements Saveable {
         }
     }
 
-    hasItem(item: OakItems.OakItem): KnockoutComputed<boolean> {
-        return ko.pureComputed(() => {
-            return this.loadouts[this.selectedLoadout()]().includes(item);
-        });
+    hasItem(item: OakItemType): KnockoutComputed<boolean> {
+        return ko.pureComputed(() => this.loadouts[this.selectedLoadout()]().includes(item));
     }
 
     fromJSON(json: Array<Array<number>>) {
         json?.forEach((loadout, index) => {
-            loadout.forEach(item => this.loadouts[index]?.push(item));
+            loadout.forEach((item) => this.loadouts[index]?.push(item));
         });
     }
 
+    // eslint-disable-next-line class-methods-use-this
     toJSON() {
         return ko.toJS(App.game.oakItemLoadouts.loadouts);
     }
