@@ -43,7 +43,7 @@ class PokemonFactory {
                 message: `✨ You encountered a shiny ${name}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.shiny_long,
-                setting: NotificationConstants.NotificationSetting.encountered_shiny,
+                setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
             });
 
             // Track shinies encountered, and rate of shinies
@@ -89,7 +89,7 @@ class PokemonFactory {
         const bonus = skipBonus ? 1 : App.game.multiplier.getBonus('shiny');
 
         if (Rand.chance(chance / bonus)) {
-            App.game.oakItems.use(OakItems.OakItem.Shiny_Charm);
+            App.game.oakItems.use(OakItemType.Shiny_Charm);
             return true;
         }
         return false;
@@ -130,7 +130,7 @@ class PokemonFactory {
                 message: `✨ You encountered a shiny ${name}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.shiny_long,
-                setting: NotificationConstants.NotificationSetting.encountered_shiny,
+                setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
             });
 
             // Track shinies encountered, and rate of shinies
@@ -167,7 +167,7 @@ class PokemonFactory {
                 message: `✨ You encountered a shiny ${name}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.shiny_long,
-                setting: NotificationConstants.NotificationSetting.encountered_shiny,
+                setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
             });
 
             // Track shinies encountered, and rate of shinies
