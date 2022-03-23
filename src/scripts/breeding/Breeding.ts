@@ -277,7 +277,7 @@ class Breeding implements Feature {
                         type: NotificationConstants.NotificationOption.success,
                         timeout: 1e4,
                         sound: NotificationConstants.NotificationSound.empty_queue,
-                        setting: NotificationConstants.NotificationSetting.empty_queue,
+                        setting: NotificationConstants.NotificationSetting.Hatchery.empty_queue,
                     });
                 }
             }
