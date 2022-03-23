@@ -89,7 +89,7 @@ class PokemonFactory {
         const bonus = skipBonus ? 1 : App.game.multiplier.getBonus('shiny');
 
         if (Rand.chance(chance / bonus)) {
-            App.game.oakItems.use(OakItems.OakItem.Shiny_Charm);
+            App.game.oakItems.use(OakItemType.Shiny_Charm);
             return true;
         }
         return false;

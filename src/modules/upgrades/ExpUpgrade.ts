@@ -1,7 +1,13 @@
+import {
+    Observable as KnockoutObservable,
+} from 'knockout';
+import Amount from '../wallet/Amount';
+import Upgrade from './Upgrade';
+
 /**
  * An upgrade that requires experience to level up.
  */
-class ExpUpgrade extends Upgrade {
+export default class ExpUpgrade extends Upgrade {
     defaults = {
         level: 0,
         exp: 0,
@@ -9,12 +15,12 @@ class ExpUpgrade extends Upgrade {
 
     expList: number[];
 
-    private _exp: KnockoutObservable<number>;
+    private expKO: KnockoutObservable<number>;
 
     constructor(name: any, displayName: string, maxLevel: number, expList: number[], costList: Amount[], bonusList: number[], increasing: boolean) {
         super(name, displayName, maxLevel, costList, bonusList, increasing);
         this.expList = expList;
-        this._exp = ko.observable(0);
+        this.expKO = ko.observable(0);
     }
 
     gainExp(exp: number) {
@@ -31,13 +37,13 @@ class ExpUpgrade extends Upgrade {
 
     toJSON(): Record<string, any> {
         const json = super.toJSON();
-        json['exp'] = this.exp;
+        json.exp = this.exp;
         return json;
     }
 
     fromJSON(json: Record<string, any>): void {
         super.fromJSON(json);
-        this.exp = json['exp'] ?? this.defaults.exp;
+        this.exp = json.exp ?? this.defaults.exp;
     }
 
     // Knockout getters/setters
@@ -50,7 +56,7 @@ class ExpUpgrade extends Upgrade {
 
     get expPercentage() {
         const nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
-        return Math.round(this.normalizedExp) / nextLevelExp * 100;
+        return (Math.round(this.normalizedExp) / nextLevelExp) * 100;
     }
 
     get progressString(): string {
@@ -60,11 +66,10 @@ class ExpUpgrade extends Upgrade {
 
     // Private as external sources should use gainExp and normalizedExp
     private get exp() {
-        return this._exp();
+        return this.expKO();
     }
 
     private set exp(exp: number) {
-        this._exp(exp);
+        this.expKO(exp);
     }
-
 }
