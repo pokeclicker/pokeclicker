@@ -1,8 +1,8 @@
 import MultiplierType from './MultiplierType';
 import GameHelper from '../GameHelper';
 
-type GetMultiplierFunction = (useBonus: boolean) => number;
-type MultTypeString = keyof typeof MultiplierType;
+export type GetMultiplierFunction = (useBonus: boolean) => number;
+export type MultTypeString = keyof typeof MultiplierType;
 
 export default class Multiplier {
     private multipliers: Record<MultTypeString, Array<GetMultiplierFunction>>;
