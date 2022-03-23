@@ -1,32 +1,33 @@
-class Upgrade implements Saveable {
+import {
+    Observable as KnockoutObservable,
+} from 'knockout';
+import { Saveable } from '../DataStore/common/Saveable';
+import NotificationConstants from '../notifications/NotificationConstants';
+import Notifier from '../notifications/Notifier';
+import Amount from '../wallet/Amount';
+
+export default class Upgrade implements Saveable {
     defaults = {
         level: 0,
     };
     saveKey: string;
 
-    name: any;
-    displayName: string;
-    maxLevel: number;
-    _level: KnockoutObservable<number> = ko.observable();
+    levelKO: KnockoutObservable<number> = ko.observable();
 
-    // Describes whether this upgrade increases or decreases a number.
-    // (e.g. power is increasing, time is decreasing).
-    increasing: boolean;
-
-    // Optional array of costs
-    costList: Amount[] = [];
-    // Optional array of benefits
-    bonusList: number[] = [];
-
-    constructor(name: any, displayName: string, maxLevel: number, costList: Amount[], bonusList: number[], increasing = true) {
+    constructor(
+        public name: any,
+        public displayName: string,
+        public maxLevel: number,
+        // Optional array of costs
+        public costList: Amount[] = [],
+        // Optional array of benefits
+        public bonusList: number[] = [],
+        // Describes whether this upgrade increases or decreases a number.
+        // (e.g. power is increasing, time is decreasing).
+        public increasing = true,
+    ) {
         this.saveKey = name;
-        this.name = name;
-        this.displayName = displayName;
-        this.maxLevel = maxLevel;
         this.level = this.defaults.level;
-        this.costList = costList;
-        this.bonusList = bonusList;
-        this.increasing = increasing;
     }
 
     calculateCost(): Amount {
@@ -71,14 +72,14 @@ class Upgrade implements Saveable {
     }
 
     levelUp() {
-        this.level = this.level + 1;
+        this.level += 1;
     }
 
     fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
         }
-        this.level = json['level'] ?? this.defaults.level;
+        this.level = json.level ?? this.defaults.level;
     }
 
     toJSON(): Record<string, any> {
@@ -89,11 +90,10 @@ class Upgrade implements Saveable {
 
     // Knockout getters/setters
     get level(): number {
-        return this._level();
+        return this.levelKO();
     }
 
     set level(value) {
-        this._level(Math.min(value, this.maxLevel));
+        this.levelKO(Math.min(value, this.maxLevel));
     }
-
 }

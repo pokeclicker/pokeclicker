@@ -55,7 +55,7 @@ class Gems implements Feature {
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
     ): number {
-        const cost = (this.getGemUpgrade(typeNum, effectNum) + 1) * Gems.GEM_UPGRADE_COST;
+        const cost = (this.getGemUpgrade(typeNum, effectNum) + 1) * GameConstants.GEM_UPGRADE_COST;
         return cost;
     }
 
@@ -63,7 +63,7 @@ class Gems implements Feature {
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
     ): boolean {
-        return this.getGemUpgrade(typeNum, effectNum) >= Gems.MAX_GEM_UPGRADES;
+        return this.getGemUpgrade(typeNum, effectNum) >= GameConstants.MAX_GEM_UPGRADES;
     }
 
     public canBuyGemUpgrade(
@@ -148,10 +148,4 @@ class Gems implements Feature {
             });
         }
     }
-}
-
-namespace Gems {
-    export const GEM_UPGRADE_COST = 500;
-    export const GEM_UPGRADE_STEP = 0.1;
-    export const MAX_GEM_UPGRADES = 10;
 }
