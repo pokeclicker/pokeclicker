@@ -103,11 +103,11 @@ class fluteEffectRunner {
     }
 
     public static fluteTooltip(itemName: string): string {
-        let str = [];
+        const str = [];
         str.push(`Gems/Second: ${fluteEffectRunner.numActiveFlutes()} <br><br>Gem Types Used:`);
         const item = (ItemList[itemName] as FluteItem);
         item.gemTypes.forEach(t => {
-          str.push(`${t}: ${App.game.gems.gemWallet[PokemonType[t]]()}`);
+            str.push(`${t}: ${App.game.gems.gemWallet[PokemonType[t]]()}`);
         });
         str.push(`<br>Time Remaining:<br> ${GameConstants.formatSecondsToTime(this.fluteFormattedTime(itemName))}`);
         return str.join('<br>');
