@@ -21341,7 +21341,7 @@ pokemonList.forEach(p => {
             poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * 1.5));
         });
     }
-    (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(p.id));
+    (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.MaxIDPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(p.id));
     pokemonNameIndex[p.name.toLowerCase()] = p;
 });
 

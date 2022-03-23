@@ -36,6 +36,17 @@ import WalletClasses from './wallet/inject';
 import GenericProxy from './utilities/GenericProxy';
 import { SpriteCredits, CodeCredits } from './Credits';
 import * as modalUtils from './utilities/Modal';
+import PokemonCategories from './party/Category';
+import Information from './utilities/Information';
+import TypeHelper from './types/TypeHelper';
+import Upgrade from './upgrades/Upgrade';
+import ExpUpgrade from './upgrades/ExpUpgrade';
+import OakItemType from './enums/OakItemType';
+import OakItem from './oakItems/OakItem';
+import OakItems from './oakItems/OakItems';
+import BoughtOakItem from './oakItems/BoughtOakItem';
+import OakItemController from './oakItems/OakItemController';
+import OakItemLoadouts from './oakItems/OakItemLoadouts';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -78,4 +89,15 @@ Object.assign(<any>window, {
     SpriteCredits,
     CodeCredits,
     modalUtils,
+    PokemonCategories,
+    Information,
+    TypeHelper,
+    Upgrade,
+    ExpUpgrade,
+    OakItemType,
+    OakItem,
+    OakItems,
+    BoughtOakItem,
+    OakItemController,
+    OakItemLoadouts,
 });

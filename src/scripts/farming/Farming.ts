@@ -674,13 +674,13 @@ class Farming implements Feature {
             hint: 'I\'ve heard that growing a Passho Berry alone will cause it to change!',
         }));
         // Chople
-        this.mutations.push(new OakMutation(.0001, BerryType.Chople, BerryType.Spelon, OakItems.OakItem.Blaze_Cassette));
+        this.mutations.push(new OakMutation(.0001, BerryType.Chople, BerryType.Spelon, OakItemType.Blaze_Cassette));
         // Kebia
-        this.mutations.push(new OakMutation(.0001, BerryType.Kebia, BerryType.Pamtre, OakItems.OakItem.Poison_Barb));
+        this.mutations.push(new OakMutation(.0001, BerryType.Kebia, BerryType.Pamtre, OakItemType.Poison_Barb));
         // Kebia Parasite
         this.mutations.push(new ParasiteMutation(.0004, BerryType.Kebia));
         // Shuca
-        this.mutations.push(new OakMutation(.0001, BerryType.Shuca, BerryType.Watmel, OakItems.OakItem.Sprinklotad));
+        this.mutations.push(new OakMutation(.0001, BerryType.Shuca, BerryType.Watmel, OakItemType.Sprinklotad));
         // Coba
         // TODO: HLXII - Change mutation to grow spontaneously when Flying pokemon in party
         this.mutations.push(new GrowNearFlavorMutation(.0001, BerryType.Coba,
@@ -706,7 +706,7 @@ class Farming implements Feature {
             hint: 'I\'ve heard that a special Berry can appear after being surrounded by Rindo Berries!',
         }));
         // Charti
-        this.mutations.push(new OakMutation(.0001, BerryType.Charti, BerryType.Cornn, OakItems.OakItem.Cell_Battery));
+        this.mutations.push(new OakMutation(.0001, BerryType.Charti, BerryType.Cornn, OakItemType.Cell_Battery));
         // Kasib
         // No mutation, will check withers
         // Haban
@@ -866,19 +866,19 @@ class Farming implements Feature {
 
     getGrowthMultiplier(): number {
         let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck);
+        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprayduck);
         return multiplier;
     }
 
     getReplantMultiplier(): number {
         let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Sprinklotad);
+        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprinklotad);
         return multiplier;
     }
 
     getMutationMultiplier(): number {
         let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Squirtbottle);
+        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Squirtbottle);
         return multiplier;
     }
 
@@ -954,7 +954,7 @@ class Farming implements Feature {
         let message = '';
         let type = NotificationConstants.NotificationOption.success;
         let sound = NotificationConstants.NotificationSound.ready_to_harvest;
-        let setting = NotificationConstants.NotificationSetting.ready_to_harvest;
+        let setting = NotificationConstants.NotificationSetting.Farming.ready_to_harvest;
 
         switch (farmNotiType) {
             case FarmNotificationType.Ripe:
@@ -964,41 +964,41 @@ class Farming implements Feature {
                 message = 'A Berry plant is about to wither!';
                 type = NotificationConstants.NotificationOption.warning;
                 sound = NotificationConstants.NotificationSound.berry_wither;
-                setting = NotificationConstants.NotificationSetting.about_to_wither;
+                setting = NotificationConstants.NotificationSetting.Farming.about_to_wither;
                 break;
             case FarmNotificationType.Withered:
                 message = 'A Berry plant has withered!';
                 type = NotificationConstants.NotificationOption.warning;
                 sound = NotificationConstants.NotificationSound.berry_wither;
-                setting = NotificationConstants.NotificationSetting.berry_withered;
+                setting = NotificationConstants.NotificationSetting.Farming.berry_withered;
                 break;
             case FarmNotificationType.Mutated:
                 message = 'A Berry plant has mutated!';
                 sound = NotificationConstants.NotificationSound.berry_mutated;
-                setting = NotificationConstants.NotificationSetting.berry_mutated;
+                setting = NotificationConstants.NotificationSetting.Farming.berry_mutated;
                 break;
             case FarmNotificationType.Replanted:
                 message = 'A Berry has been replanted!';
                 sound = NotificationConstants.NotificationSound.berry_replanted;
-                setting = NotificationConstants.NotificationSetting.berry_replanted;
+                setting = NotificationConstants.NotificationSetting.Farming.berry_replanted;
                 break;
             case FarmNotificationType.Dropped:
                 message = 'A Berry has been dropped!';
                 sound = NotificationConstants.NotificationSound.berry_dropped;
-                setting = NotificationConstants.NotificationSetting.berry_dropped;
+                setting = NotificationConstants.NotificationSetting.Farming.berry_dropped;
                 break;
             case FarmNotificationType.MulchRanOut:
                 message = 'A plot has run out of mulch!';
                 type = NotificationConstants.NotificationOption.warning;
                 sound = NotificationConstants.NotificationSound.mulch_ran_out;
-                setting = NotificationConstants.NotificationSetting.mulch_ran_out;
+                setting = NotificationConstants.NotificationSetting.Farming.mulch_ran_out;
                 break;
             case FarmNotificationType.Wander:
                 const pokemon = wander?.shiny ? `shiny ${wander?.pokemon}` : wander?.pokemon;
                 message = `A wild ${pokemon} has wandered onto the farm!`;
                 type = wander?.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
                 sound = NotificationConstants.NotificationSound.wandering_pokemon;
-                setting = NotificationConstants.NotificationSetting.wandering_pokemon;
+                setting = NotificationConstants.NotificationSetting.Farming.wandering_pokemon;
                 break;
         }
 
@@ -1120,7 +1120,7 @@ class Farming implements Feature {
 
         this.gainBerry(plot.berry, amount);
 
-        App.game.oakItems.use(OakItems.OakItem.Sprayduck, this.berryData[plot.berry].exp);
+        App.game.oakItems.use(OakItemType.Sprayduck, this.berryData[plot.berry].exp);
         GameHelper.incrementObservable(App.game.statistics.totalManualHarvests, 1);
 
         player.lowerItemMultipliers(MultiplierDecreaser.Berry, this.berryData[plot.berry].exp);
@@ -1253,7 +1253,7 @@ class Farming implements Feature {
             Notifier.notify({
                 message: `You got a ${BerryType[berry]} berry!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.route_item_found,
+                setting: NotificationConstants.NotificationSetting.Items.route_item_found,
             });
         }
         this.gainBerry(berry, amount, false);
@@ -1290,7 +1290,7 @@ class Farming implements Feature {
             Notifier.notify({
                 message: `You've discovered a ${BerryType[berry]} Berry!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.route_item_found,
+                setting: NotificationConstants.NotificationSetting.Items.route_item_found,
             });
             this.unlockedBerries[berry](true);
         }
