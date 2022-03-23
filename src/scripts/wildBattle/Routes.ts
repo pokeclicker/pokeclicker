@@ -1704,7 +1704,6 @@ Routes.add(new RegionRoute(
     'Poni Wilds', GameConstants.Region.alola, 24,
     new RoutePokemon({
         land: ['Granbull', 'Pelipper', 'Gastrodon (east)', 'Furfrou', 'Inkay'],
-        water: ['Dhelmise'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
     undefined,

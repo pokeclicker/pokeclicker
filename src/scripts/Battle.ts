@@ -123,7 +123,7 @@ class Battle {
 
     protected static calculateActualCatchRate(enemyPokemon: BattlePokemon, pokeBall: GameConstants.Pokeball) {
         const pokeballBonus = App.game.pokeballs.getCatchBonus(pokeBall);
-        const oakBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Magic_Ball);
+        const oakBonus = App.game.oakItems.calculateBonus(OakItemType.Magic_Ball);
         const totalChance = GameConstants.clipNumber(enemyPokemon.catchRate + pokeballBonus + oakBonus, 0, 100);
         return totalChance;
     }
@@ -154,7 +154,7 @@ class Battle {
     public static catchPokemon(enemyPokemon: BattlePokemon) {
         const catchRoute = Battle.route || player.town()?.dungeon?.difficultyRoute || 1;
         App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(catchRoute, player.region));
-        App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
+        App.game.oakItems.use(OakItemType.Magic_Ball);
         App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny);
     }
 
