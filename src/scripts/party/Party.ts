@@ -50,7 +50,7 @@ class Party implements Feature {
             Notifier.notify({
                 message: `✨ You have captured a shiny ${pokemon.name}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
-                sound: NotificationConstants.NotificationSound.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
 
             // Already caught (non shiny) we need to update the party pokemon directly
@@ -69,7 +69,7 @@ class Party implements Feature {
             Notifier.notify({
                 message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`,
                 type: NotificationConstants.NotificationOption.success,
-                sound: NotificationConstants.NotificationSound.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
         }
 

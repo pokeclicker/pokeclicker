@@ -104,8 +104,10 @@ Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disabl
 Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web workers for game ticks (more consistent game speed)', true));
 
 // Sound settings
-Object.values(NotificationConstants.NotificationSound).forEach((sound) => {
-    Settings.add(new BooleanSetting(`sound.${sound.name}`, sound.name, true));
+Object.values(NotificationConstants.NotificationSound).forEach((soundGroup) => {
+    Object.values(soundGroup).forEach((sound) => {
+        Settings.add(new BooleanSetting(`sound.${sound.name}`, sound.name, true));
+    });
 });
 Settings.add(new RangeSetting('sound.volume', 'Volume', 0, 100, 1, 100));
 

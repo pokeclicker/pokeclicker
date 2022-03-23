@@ -9,22 +9,30 @@ import NotificationOption from './NotificationOption';
 const NotificationConstants = {
     NotificationOption,
     NotificationSound: {
-        ready_to_hatch: new Sound('ready_to_hatch', 'Egg ready to hatch'),
-        empty_queue: new Sound('empty_queue', 'Hatchery queue is empty'),
-        shiny_long: new Sound('shiny_long', 'Shiny Pokémon encountered/hatched'),
-        new_catch: new Sound('new_catch', 'New Pokémon/shiny captured'),
-        achievement: new Sound('achievement', 'New achievement earned'),
-        battle_item_timer: new Sound('battle_item_timer', 'Battle item about to wear off'),
-        quest_ready_to_complete: new Sound('quest_ready_to_complete', 'Quest is ready to be completed'),
-        quest_level_increased: new Sound('quest_level_increased', 'Quest level increased'),
-        underground_energy_full: new Sound('underground_energy_full', 'Mining energy reached maximum capacity'),
-        ready_to_harvest: new Sound('ready_to_harvest', 'Berry ready to harvest'),
-        berry_wither: new Sound('ready_to_harvest', 'Berry about to wither/has withered'),
-        berry_mutated: new Sound('ready_to_harvest', 'Berry has mutated'),
-        berry_replanted: new Sound('ready_to_harvest', 'Berry has been replanted'),
-        berry_dropped: new Sound('ready_to_harvest', 'Berry has been dropped'),
-        mulch_ran_out: new Sound('ready_to_harvest', 'Mulch has run out'),
-        wandering_pokemon: new Sound('ready_to_harvest', 'Wandering Pokémon encountered'),
+        General: {
+            shiny_long: new Sound('shiny_long', 'Shiny Pokémon encountered/hatched'),
+            new_catch: new Sound('new_catch', 'New Pokémon/shiny captured'),
+            achievement: new Sound('achievement', 'New achievement earned'),
+            battle_item_timer: new Sound('battle_item_timer', 'Battle item about to wear off'),
+            underground_energy_full: new Sound('underground_energy_full', 'Mining energy reached maximum capacity'),
+        },
+        Hatchery: {
+            ready_to_hatch: new Sound('ready_to_hatch', 'Egg ready to hatch'),
+            empty_queue: new Sound('empty_queue', 'Hatchery queue is empty'),
+        },
+        Quests: {
+            quest_ready_to_complete: new Sound('quest_ready_to_complete', 'Quest is ready to be completed'),
+            quest_level_increased: new Sound('quest_level_increased', 'Quest level increased'),
+        },
+        Farming: {
+            ready_to_harvest: new Sound('ready_to_harvest', 'Berry ready to harvest'),
+            berry_wither: new Sound('ready_to_harvest', 'Berry about to wither/has withered'),
+            berry_mutated: new Sound('ready_to_harvest', 'Berry has mutated'),
+            berry_replanted: new Sound('ready_to_harvest', 'Berry has been replanted'),
+            berry_dropped: new Sound('ready_to_harvest', 'Berry has been dropped'),
+            mulch_ran_out: new Sound('ready_to_harvest', 'Mulch has run out'),
+            wandering_pokemon: new Sound('ready_to_harvest', 'Wandering Pokémon encountered'),
+        },
     },
     NotificationSetting: {
         General: {
