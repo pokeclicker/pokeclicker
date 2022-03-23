@@ -12,14 +12,16 @@
               <knockout data-bind="if: player.town().gym && QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">
                   <knockout class="left" data-bind="using: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town().name)]()">
                       <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
-                      <knockout data-bind="visible: player.town().gym">Clears</knockout>
+                      <knockout data-bind="visible: player.town().gym">clears</knockout>
                   </knockout>
               </knockout>
-              <knockout data-bind="if: player.town() instanceof DungeonTown && player.town().dungeon && QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">
+              <knockout data-bind="if: player.town() instanceof DungeonTown && player.town().dungeon">
+                  <!-- ko if: QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->
                   <knockout class="right" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]()">
                       <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
-                      <knockout data-bind="visible: QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">Clears</knockout>
+                      <knockout data-bind="visible: QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">clears</knockout>
                   </knockout>
+                  <!-- /ko -->
                   <!--If all Pokémon in the dungeon are caught-->
                   <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(player.town().dungeon, true) && DungeonRunner.dungeonCompleted(player.town().dungeon, false))">
                       <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
