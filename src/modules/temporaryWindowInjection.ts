@@ -50,6 +50,7 @@ import OakItemLoadouts from './oakItems/OakItemLoadouts';
 import SpecialRoutePokemon from './routes/SpecialRoutePokemon';
 import RoutePokemon from './routes/RoutePokemon';
 import RegionRoute from './routes/RegionRoute';
+import Routes from './routes/Routes';
 import Requirement from './requirements/Requirement';
 import AchievementRequirement from './requirements/AchievementRequirement';
 import NullRequirement from './requirements/NullRequirement';
@@ -74,6 +75,7 @@ import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequiremen
 import PokeballRequirement from './requirements/PokeballRequirement';
 import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
 import QuestRequirement from './requirements/QuestRequirement';
+import RouteKillRequirement from './requirements/RouteKillRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
@@ -135,6 +137,7 @@ Object.assign(<any>window, {
     SpecialRoutePokemon,
     RoutePokemon,
     RegionRoute,
+    Routes,
     Requirement,
     AchievementRequirement,
     NullRequirement,
@@ -159,6 +162,7 @@ Object.assign(<any>window, {
     PokeballRequirement,
     ProteinObtainRequirement,
     QuestRequirement,
+    RouteKillRequirement,
     ShinyPokemonRequirement,
     TokenRequirement,
     UndergroundItemsFoundRequirement,
