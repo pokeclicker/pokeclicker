@@ -1,4 +1,4 @@
-///<reference path="Requirement.ts"/>
+///<reference path="../../declarations/requirements/Requirement.d.ts"/>
 
 class ObtainedPokemonRequirement extends Requirement {
     public pokemonID: number;
