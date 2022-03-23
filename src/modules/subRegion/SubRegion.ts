@@ -1,11 +1,13 @@
-class SubRegion {
+import Requirement from '../requirements/Requirement';
+
+export default class SubRegion {
     public id = 0;
 
     constructor(
         public name: string,
-        public requirement?: Requirement | OneFromManyRequirement,
+        public requirement?: Requirement,
         public startTown?: string,
-        public startRoute?: number
+        public startRoute?: number,
     ) {}
 
     public unlocked(): boolean {

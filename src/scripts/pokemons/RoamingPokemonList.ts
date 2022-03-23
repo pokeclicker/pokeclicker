@@ -1,7 +1,7 @@
 /// <reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="../achievements/SubregionRequirement.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
-///<reference path="../subRegion/SubRegions.ts"/>
+///<reference path="../../declarations/subRegion/SubRegions.d.ts"/>
 
 class RoamingPokemonList {
     public static list: Partial<Record<GameConstants.Region, Array<RoamingPokemon>>> = {};

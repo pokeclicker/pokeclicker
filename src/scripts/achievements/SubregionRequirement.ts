@@ -1,4 +1,5 @@
 ///<reference path="../../declarations/requirements/Requirement.d.ts"/>
+///<reference path="../../declarations/subRegion/SubRegions.d.ts"/>
 
 class SubregionRequirement extends Requirement {
     constructor(public region: GameConstants.Region, public subregion: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.equal) {
