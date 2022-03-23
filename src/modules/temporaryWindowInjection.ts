@@ -56,6 +56,9 @@ import NullRequirement from './requirements/NullRequirement';
 import MultiRequirement from './requirements/MultiRequirement';
 import OneFromManyRequirement from './requirements/OneFromManyRequirement';
 import AttackRequirement from './requirements/AttackRequirement';
+import BattleFrontierHighestStageRequirement from './requirements/BattleFrontierHighestStageRequirement';
+import BattleFrontierTotalStageRequirement from './requirements/BattleFrontierTotalStageRequirement';
+import BerriesUnlockedRequirement from './requirements/BerriesUnlockedRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
 import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
 
@@ -118,8 +121,11 @@ Object.assign(<any>window, {
     AchievementRequirement,
     NullRequirement,
     MultiRequirement,
-    AttackRequirement,
     OneFromManyRequirement,
+    AttackRequirement,
+    BattleFrontierHighestStageRequirement,
+    BattleFrontierTotalStageRequirement,
+    BerriesUnlockedRequirement,
     UndergroundItemsFoundRequirement,
     UndergroundLayersMinedRequirement,
 });

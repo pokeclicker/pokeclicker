@@ -1,6 +1,7 @@
-///<reference path="../../declarations/requirements/AchievementRequirement.d.ts"/>
+import * as GameConstants from '../GameConstants';
+import AchievementRequirement from './AchievementRequirement';
 
-class BattleFrontierHighestStageRequirement extends AchievementRequirement {
+export default class BattleFrontierHighestStageRequirement extends AchievementRequirement {
     constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
         super(value, option, GameConstants.AchievementType['Battle Frontier']);
     }
