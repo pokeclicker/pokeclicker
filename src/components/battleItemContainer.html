@@ -101,12 +101,7 @@
                 <code data-bind="
                 text: player.effectTimer[$data](),
                 tooltip: {
-                  title: 'Gems/Second: ' + fluteEffectRunner.numActiveFlutes() +
-                     '<br><br>Shard Types Used: <br>' +
-                     ItemList[$data].gemTypes[0] + ': ' + App.game.gems.gemWallet[PokemonType[ItemList[$data].gemTypes[0]]]() + '<br>' +
-                     ItemList[$data].gemTypes[1] + ': ' + App.game.gems.gemWallet[PokemonType[ItemList[$data].gemTypes[1]]]() + '<br>' +
-                     ItemList[$data].gemTypes[2] + ': ' + App.game.gems.gemWallet[PokemonType[ItemList[$data].gemTypes[2]]]() + '<br>' +
-                     '<br> Time Remaining: <br>' + GameConstants.formatSecondsToTime(fluteEffectRunner.fluteFormattedTime($data)),
+                  title: fluteEffectRunner.fluteTooltip($data),
                   trigger:'hover',
                   placement:'bottom',
                   html:true

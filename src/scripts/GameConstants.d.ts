@@ -184,6 +184,7 @@ namespace GameConstants {
     declare function formatTime(input: number | Date): string;
     declare function formatTimeFullLetters(input: number): string;
     declare function formatTimeShortWords(input: number): string;
+    declare function formatSecondsToTime(input: number): string;
     declare function formatNumber(input: number): string;
     declare enum Region {
         none,

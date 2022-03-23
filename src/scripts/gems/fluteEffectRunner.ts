@@ -102,6 +102,17 @@ class fluteEffectRunner {
         return (player.effectList[itemName]() / this.numActiveFlutes());
     }
 
+    public static fluteTooltip(itemName: string): string {
+        let str = [];
+        str.push(`Gems/Second: ${fluteEffectRunner.numActiveFlutes()} <br><br>Gem Types Used:`);
+        const item = (ItemList[itemName] as FluteItem);
+        item.gemTypes.forEach(t => {
+          str.push(`${t}: ${App.game.gems.gemWallet[PokemonType[t]]()}`);
+        });
+        str.push(`<br>Time Remaining:<br> ${GameConstants.formatSecondsToTime(this.fluteFormattedTime(itemName))}`);
+        return str.join('<br>');
+    }
+
     public static updateFormattedTimeLeft(itemName: string) {
         const times = GameConstants.formatTime(this.fluteFormattedTime(itemName)).split(':');
         if (+times[0] > 99) {
