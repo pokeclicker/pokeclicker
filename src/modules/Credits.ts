@@ -118,6 +118,24 @@ export const SpriteCredits: Credit[] = [
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
     },
     {
+        name: 'Leaf',
+        link: 'https://twitter.com/Leafalie',
+        resources: [
+            'Totem Alolan Raticate',
+            'Totem Alolan Marowak',
+            'Totem Gumshoos',
+            'Totem Vikavolt',
+            'Totem Wishiwashi',
+            'Totem Araquanid',
+            'Totem Lurantis',
+            'Totem Salazzle',
+            'Totem Togedemaru',
+            'Totem Mimikyu',
+            'Totem Kommo-o',
+        ],
+        // Notes: Permission given via Discord
+    },
+    {
         name: 'leparagon',
         link: 'https://www.deviantart.com/leparagon',
         image: 'https://a.deviantart.net/avatars-big/l/e/leparagon.jpg',

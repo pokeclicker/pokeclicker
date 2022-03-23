@@ -36,6 +36,20 @@ interface EncounterInfo {
     lockMessage: string,
 }
 
+// Gain a gym badge after first completion of a dungeon
+const DungeonGainGymBadge = (gym: Gym, badge: BadgeEnums) => {
+    // Check that the player hasn't already obtained the badge
+    if (!App.game.badgeCase.hasBadge(badge)) {
+        // Set the set to our expected gym
+        // This updates our modal values
+        GymRunner.gymObservable(gym);
+        // Give the player the badge
+        App.game.badgeCase.gainBadge(badge);
+        // Show the modal
+        $('#receiveBadgeModal').modal('show');
+    }
+};
+
 /**
  * Gym class.
  */
@@ -5153,13 +5167,7 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
         new DungeonBossPokemon('Totem Gumshoos', 82543791, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     805000, 2,
-    () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.NormaliumZ)) {
-            GymRunner.gymObservable(gymList['Ilima\'s Trial']);
-            App.game.badgeCase.gainBadge(BadgeEnums.NormaliumZ);
-            $('#receiveBadgeModal').modal('show');
-        }
-    });
+    () => DungeonGainGymBadge(gymList['Ilima\'s Trial'], BadgeEnums.NormaliumZ));
 
 dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
     [
@@ -5287,13 +5295,7 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
         new DungeonBossPokemon('Totem Araquanid', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     875000, 5,
-    () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.WateriumZ)) {
-            GymRunner.gymObservable(gymList['Lana\'s Trial']);
-            App.game.badgeCase.gainBadge(BadgeEnums.WateriumZ);
-            $('#receiveBadgeModal').modal('show');
-        }
-    });
+    () => DungeonGainGymBadge(gymList['Lana\'s Trial'], BadgeEnums.WateriumZ));
 
 dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
     [
@@ -5322,13 +5324,7 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
         new DungeonBossPokemon('Totem Salazzle', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     900000, 7,
-    () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.FiriumZ)) {
-            GymRunner.gymObservable(gymList['Kiawe\'s Trial']);
-            App.game.badgeCase.gainBadge(BadgeEnums.FiriumZ);
-            $('#receiveBadgeModal').modal('show');
-        }
-    });
+    () => DungeonGainGymBadge(gymList['Kiawe\'s Trial'], BadgeEnums.FiriumZ));
 
 dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
     ['Metapod', 'Paras', 'Pinsir', 'Hoothoot', 'Bonsly', 'Trumbeak', 'Fomantis', 'Bounsweet', 'Steenee', 'Comfey', 'Oranguru', 'Passimian'],
@@ -5339,13 +5335,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
         new DungeonBossPokemon('Totem Lurantis', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     925000, 8,
-    () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.GrassiumZ)) {
-            GymRunner.gymObservable(gymList['Mallow\'s Trial']);
-            App.game.badgeCase.gainBadge(BadgeEnums.GrassiumZ);
-            $('#receiveBadgeModal').modal('show');
-        }
-    });
+    () => DungeonGainGymBadge(gymList['Mallow\'s Trial'], BadgeEnums.GrassiumZ));
 
 dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
     [
@@ -5449,13 +5439,7 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
         new DungeonBossPokemon('Totem Togedemaru', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     1000000, 22,
-    () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.ElectriumZ)) {
-            GymRunner.gymObservable(gymList['Sophocles\' Trial']);
-            App.game.badgeCase.gainBadge(BadgeEnums.ElectriumZ);
-            $('#receiveBadgeModal').modal('show');
-        }
-    });
+    () => DungeonGainGymBadge(gymList['Sophocles\' Trial'], BadgeEnums.ElectriumZ));
 
 dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
     ['Golbat', 'Gastly', 'Haunter', 'Gengar', 'Shuppet', 'Banette', 'Jellicent', 'Klefki'],
@@ -5466,13 +5450,7 @@ dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
         new DungeonBossPokemon('Totem Mimikyu', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     1025000, 14,
-    () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.GhostiumZ)) {
-            GymRunner.gymObservable(gymList['Acerola\'s Trial']);
-            App.game.badgeCase.gainBadge(BadgeEnums.GhostiumZ);
-            $('#receiveBadgeModal').modal('show');
-        }
-    });
+    () => DungeonGainGymBadge(gymList['Acerola\'s Trial'], BadgeEnums.GhostiumZ));
 
 dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
     [
@@ -5761,14 +5739,16 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
         new DungeonBossPokemon('Kommo-o', 79960220, 49),
         new DungeonBossPokemon('Totem Kommo-o', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
-    1025000, 25,
-    () => {
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.DragoniumZ)) {
-            GymRunner.gymObservable(gymList['Vast Poni Canyon Trial']);
-            App.game.badgeCase.gainBadge(BadgeEnums.DragoniumZ);
-            $('#receiveBadgeModal').modal('show');
-        }
-    });
+    1125000, 25,
+    () => DungeonGainGymBadge(gymList['Vast Poni Canyon Trial'], BadgeEnums.DragoniumZ));
+
+dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
+    ['Chansey', 'Wingull', 'Pelipper', 'Spritzee', 'Swirlix', 'Cutiefly', 'Comfey', 'Dhelmise'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    16217412,
+    [new DungeonBossPokemon('Ribombee', 81087060, 55)],
+    1150000, 25,
+    () => DungeonGainGymBadge(gymList['Mina\'s Trial'], BadgeEnums.FairiumZ));
 
 dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
     [
@@ -5842,14 +5822,14 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
             ], { weight: 1 }, 'Aristo', '(male)'),
     ],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    16212850,
+    16312850,
     [
         new DungeonBossPokemon('Absol', 81064250, 50),
         new DungeonBossPokemon('Glalie', 81064250, 50),
         new DungeonBossPokemon('Vanilluxe', 81064250, 50),
         new DungeonBossPokemon('Necrozma', 83527125, 65),
     ],
-    1050000, 26);
+    1175000, 26);
 
 dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and Moone',
     ['Clefairy', 'Sunkern', 'Skitty', 'Lunatone', 'Solrock', 'Helioptile'],
@@ -5860,7 +5840,7 @@ dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and 
         new DungeonBossPokemon('Lunala', 90673816, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Lunala)}),
         new DungeonBossPokemon('Solgaleo', 90673816, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Solgaleo)}),
     ],
-    1075000, 27);
+    1200000, 27);
 
 dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
     ['Floette (Red)', 'Comfey', 'Dedenne', 'Ampharos', 'Electabuzz'],
@@ -5871,7 +5851,7 @@ dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
         new DungeonBossPokemon('Granbull', 82177450, 55),
         new DungeonBossPokemon('Tapu Koko', 82543791, 60),
     ],
-    1075000, 27);
+    1200000, 27);
 
 dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
     ['Floette (Red)', 'Comfey', 'Gardevoir', 'Chimecho', 'Munna'],
@@ -5882,7 +5862,7 @@ dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
         new DungeonBossPokemon('Granbull', 82177450, 55),
         new DungeonBossPokemon('Tapu Lele', 82543791, 60),
     ],
-    1075000, 27);
+    1200000, 27);
 
 dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
     ['Floette (Red)', 'Comfey', 'Cottonee', 'Gloom', 'Petilil'],
@@ -5893,7 +5873,7 @@ dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
         new DungeonBossPokemon('Granbull', 82177450, 55),
         new DungeonBossPokemon('Tapu Bulu', 82543791, 60),
     ],
-    1075000, 27);
+    1200000, 27);
 
 dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
     ['Floette (Red)', 'Comfey', 'Azumarill', 'Poliwhirl', 'Clamperl'],
@@ -5904,7 +5884,7 @@ dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
         new DungeonBossPokemon('Granbull', 82177450, 55),
         new DungeonBossPokemon('Tapu Fini', 82543791, 60),
     ],
-    1075000, 27);
+    1200000, 27);
 
 dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
     [
@@ -5924,7 +5904,7 @@ dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
         new DungeonBossPokemon('Oricorio (Sensu)', 83299840, 70),
         new DungeonBossPokemon('Floette (Red)', 83299840, 70),
     ],
-    1100000, 28);
+    1225000, 28);
 
 dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
     [
@@ -5951,7 +5931,7 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
         new DungeonBossPokemon('Noivern', 85572310, 59),
         new DungeonBossPokemon('Guzzlord', 90673816, 70),
     ],
-    1125000, 30);
+    1250000, 30);
 
 
 

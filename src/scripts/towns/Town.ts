@@ -2345,8 +2345,8 @@ const MalieKahuna = new NPC('Kahuna Nanu', [
     'Then come back here so we can get this Grand trial over with.',
 ]);
 const SeafolkCaptain = new NPC('Captain Mina', [
-    'My trial is in this town. Yes, it\'s just a gym battle. However, I want you to clear the trial in Vast Poni Canyon first. It has no Captain, so you\'ll be all on your own. Be careful.',
-    'If you can defeat me you\'ll find our Kahuna on Exeggutor Island.',
+    'My trial is in this town. Right there, inside my very own houseboat. However, I want you to clear the trial in Vast Poni Canyon first. It has no Captain, so you\'ll be all on your own. Be careful.',
+    'If you can clear my trial you\'ll find our Kahuna on Exeggutor Island.',
 ]);
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [
     'Some very rare Pokémon have been sighted on {ROUTE_NAME}. I hope we can learn more about them.',
@@ -2460,6 +2460,7 @@ TownList['Seafolk Village'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
         shops: [SeafolkVillageShop],
+        dungeon: dungeonList['Mina\'s Houseboat'],
         npcs: [SeafolkCaptain],
     }
 );
@@ -2586,6 +2587,11 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     'Vast Poni Canyon',
     GameConstants.Region.alola,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))]
+);
+TownList['Mina\'s Houseboat'] = new DungeonTown(
+    'Mina\'s Houseboat',
+    GameConstants.Region.alola,
+    [new GymBadgeRequirement(BadgeEnums.Elite_UltraNecrozma)]
 );
 TownList['Mount Lanakila'] = new DungeonTown(
     'Mount Lanakila',

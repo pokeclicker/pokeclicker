@@ -1193,19 +1193,6 @@ gymList['Altar of the Sunne and Moone'] = new Gym(
     'Necrozma fled.',
     [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)]
 );
-gymList['Seafolk Village'] = new Gym(
-    'Mina',
-    'Seafolk Village',
-    [
-        new GymPokemon('Mawile', 74749379, 51),
-        new GymPokemon('Granbull', 74749379, 51),
-        new GymPokemon('Ribombee', 75838262, 51),
-    ],
-    BadgeEnums.FairiumZ,
-    128000,
-    'Woah! I\'m shocked at your strength!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_UltraNecrozma)]
-);
 gymList['Exeggutor Island'] = new Gym(
     'Hapu',
     'Exeggutor Island',
@@ -1218,7 +1205,7 @@ gymList['Exeggutor Island'] = new Gym(
     BadgeEnums.GroundiumZ,
     128000,
     'You have succeeded in your final grand trial!',
-    [new GymBadgeRequirement(BadgeEnums.FairiumZ)]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))]
 );
 //trials
 gymList['Ilima\'s Trial'] = new Gym(
@@ -1340,6 +1327,24 @@ gymList['Vast Poni Canyon Trial'] = new Gym(
     BadgeEnums.DragoniumZ,
     128000,
     'You have received the Dragonium-Z!',
+    undefined,
+    undefined,
+    {
+        quest: false,
+        achievement: false,
+    }
+);
+gymList['Mina\'s Trial'] = new Gym(
+    'Mina',
+    'Mina\'s Houseboat',
+    [
+        new GymPokemon('Pelipper', 2458300, 51),
+        new GymPokemon('Chansey', 2462000, 51),
+        new GymPokemon('Ribombee', 2462000, 51),
+    ],
+    BadgeEnums.FairiumZ,
+    128000,
+    'You have received the Fairium-Z!',
     undefined,
     undefined,
     {
