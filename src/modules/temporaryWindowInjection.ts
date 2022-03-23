@@ -47,14 +47,14 @@ import OakItems from './oakItems/OakItems';
 import BoughtOakItem from './oakItems/BoughtOakItem';
 import OakItemController from './oakItems/OakItemController';
 import OakItemLoadouts from './oakItems/OakItemLoadouts';
+import SpecialRoutePokemon from './routes/SpecialRoutePokemon';
+import RoutePokemon from './routes/RoutePokemon';
+import RegionRoute from './routes/RegionRoute';
 import Requirement from './requirements/Requirement';
 import AchievementRequirement from './requirements/AchievementRequirement';
 import NullRequirement from './requirements/NullRequirement';
 import MultiRequirement from './requirements/MultiRequirement';
 import OneFromManyRequirement from './requirements/OneFromManyRequirement';
-import SpecialRoutePokemon from './routes/SpecialRoutePokemon';
-import RoutePokemon from './routes/RoutePokemon';
-import RegionRoute from './routes/RegionRoute';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -108,12 +108,12 @@ Object.assign(<any>window, {
     BoughtOakItem,
     OakItemController,
     OakItemLoadouts,
+    SpecialRoutePokemon,
+    RoutePokemon,
+    RegionRoute,
     Requirement,
     AchievementRequirement,
     NullRequirement,
     MultiRequirement,
     OneFromManyRequirement,
-    SpecialRoutePokemon,
-    RoutePokemon,
-    RegionRoute,
 });
