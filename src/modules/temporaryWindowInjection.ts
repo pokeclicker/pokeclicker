@@ -55,6 +55,7 @@ import AchievementRequirement from './requirements/AchievementRequirement';
 import NullRequirement from './requirements/NullRequirement';
 import MultiRequirement from './requirements/MultiRequirement';
 import OneFromManyRequirement from './requirements/OneFromManyRequirement';
+import AttackRequirement from './requirements/AttackRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
 import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
 
@@ -117,6 +118,7 @@ Object.assign(<any>window, {
     AchievementRequirement,
     NullRequirement,
     MultiRequirement,
+    AttackRequirement,
     OneFromManyRequirement,
     UndergroundItemsFoundRequirement,
     UndergroundLayersMinedRequirement,
