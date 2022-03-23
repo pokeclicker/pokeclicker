@@ -1,6 +1,7 @@
-///<reference path="../../declarations/requirements/AchievementRequirement.d.ts"/>
+import * as GameConstants from '../GameConstants';
+import AchievementRequirement from './AchievementRequirement';
 
-class ClearDungeonRequirement extends AchievementRequirement {
+export default class ClearDungeonRequirement extends AchievementRequirement {
     public dungeonIndex: number; // Gym name index in array GameConstants.Gyms
 
     constructor(value: number, dungeonIndex: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
@@ -13,10 +14,9 @@ class ClearDungeonRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
-        if (this.requiredValue != 1) {
-            return `${GameConstants.RegionDungeons.flat()[this.dungeonIndex]} needs to be completed ${this.requiredValue} times.`;
-        } else {
+        if (this.requiredValue === 1) {
             return `${GameConstants.RegionDungeons.flat()[this.dungeonIndex]} needs to be completed.`;
         }
+        return `${GameConstants.RegionDungeons.flat()[this.dungeonIndex]} needs to be completed ${this.requiredValue} times.`;
     }
 }

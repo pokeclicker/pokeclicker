@@ -1,12 +1,13 @@
-///<reference path="../../declarations/requirements/AchievementRequirement.d.ts"/>
+import * as GameConstants from '../GameConstants';
+import AchievementRequirement from './AchievementRequirement';
 
-class CaughtPokemonRequirement extends AchievementRequirement {
+export default class CaughtPokemonRequirement extends AchievementRequirement {
     constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
         super(value, option, GameConstants.AchievementType['Caught Pokemon']);
     }
 
     public getProgress() {
-        return Math.min(App.game.party.caughtPokemon.filter(p => p.id > 0).length, this.requiredValue);
+        return Math.min(App.game.party.caughtPokemon.filter((p) => p.id > 0).length, this.requiredValue);
     }
 
     public hint(): string {

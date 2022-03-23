@@ -59,6 +59,11 @@ import AttackRequirement from './requirements/AttackRequirement';
 import BattleFrontierHighestStageRequirement from './requirements/BattleFrontierHighestStageRequirement';
 import BattleFrontierTotalStageRequirement from './requirements/BattleFrontierTotalStageRequirement';
 import BerriesUnlockedRequirement from './requirements/BerriesUnlockedRequirement';
+import CapturedRequirement from './requirements/CapturedRequirement';
+import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
+import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
+import ClearGymRequirement from './requirements/ClearGymRequirement';
+import ClickRequirement from './requirements/ClickRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
 import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
 
@@ -126,6 +131,11 @@ Object.assign(<any>window, {
     BattleFrontierHighestStageRequirement,
     BattleFrontierTotalStageRequirement,
     BerriesUnlockedRequirement,
+    CapturedRequirement,
+    CaughtPokemonRequirement,
+    ClearDungeonRequirement,
+    ClearGymRequirement,
+    ClickRequirement,
     UndergroundItemsFoundRequirement,
     UndergroundLayersMinedRequirement,
 });

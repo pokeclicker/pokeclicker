@@ -1,5 +1,5 @@
 /// <reference path="../../declarations/enums/Badges.d.ts"/>
-///<reference path="ClearGymRequirement.ts"/>
+/// <reference path="../../declarations/requirements/ClearGymRequirement.d.ts"/>
 
 class GymBadgeRequirement extends Requirement {
     public badge: BadgeEnums;

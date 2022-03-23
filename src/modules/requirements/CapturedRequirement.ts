@@ -1,8 +1,9 @@
-///<reference path="../../declarations/requirements/AchievementRequirement.d.ts"/>
+import * as GameConstants from '../GameConstants';
+import AchievementRequirement from './AchievementRequirement';
 
-class CapturedRequirement extends AchievementRequirement {
+export default class CapturedRequirement extends AchievementRequirement {
     constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, option, GameConstants.AchievementType['Captured']);
+        super(value, option, GameConstants.AchievementType.Captured);
     }
 
     public getProgress() {
