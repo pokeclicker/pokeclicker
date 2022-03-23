@@ -1,6 +1,8 @@
-///<reference path="../../declarations/requirements/AchievementRequirement.d.ts"/>
+import * as GameConstants from '../GameConstants';
+import OakItem from '../oakItems/OakItem';
+import AchievementRequirement from './AchievementRequirement';
 
-class MaxLevelOakItemRequirement extends AchievementRequirement {
+export default class MaxLevelOakItemRequirement extends AchievementRequirement {
     constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
         super(value, option, GameConstants.AchievementType['Max Level Oak Item']);
     }

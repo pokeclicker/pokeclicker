@@ -70,6 +70,7 @@ import FarmPlotsUnlockedRequirement from './requirements/FarmPlotsUnlockedRequir
 import GymBadgeRequirement from './requirements/GymBadgeRequirement';
 import HatchRequirement from './requirements/HatchRequirement';
 import MoneyRequirement from './requirements/MoneyRequirement';
+import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
 import PokeballRequirement from './requirements/PokeballRequirement';
 import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
 import QuestRequirement from './requirements/QuestRequirement';
@@ -153,6 +154,7 @@ Object.assign(<any>window, {
     GymBadgeRequirement,
     HatchRequirement,
     MoneyRequirement,
+    MaxLevelOakItemRequirement,
     PokeballRequirement,
     ProteinObtainRequirement,
     QuestRequirement,
