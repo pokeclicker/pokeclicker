@@ -1,8 +1,9 @@
-///<reference path="../../declarations/requirements/AchievementRequirement.d.ts"/>
+import * as GameConstants from '../GameConstants';
+import AchievementRequirement from './AchievementRequirement';
 
-class DiamondRequirement extends AchievementRequirement {
+export default class DiamondRequirement extends AchievementRequirement {
     constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, option, GameConstants.AchievementType['Diamond']);
+        super(value, option, GameConstants.AchievementType.Diamond);
     }
 
     public getProgress() {

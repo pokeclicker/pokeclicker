@@ -1,6 +1,6 @@
-/// <reference path="../../declarations/enums/Badges.d.ts"/>
+///<reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="DungeonBossPokemon.ts"/>
-///<reference path="../achievements/GymBadgeRequirement.ts"/>
+///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 ///<reference path="../achievements/ObtainedPokemonRequirement.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>

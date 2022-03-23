@@ -64,6 +64,17 @@ import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
 import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
 import ClearGymRequirement from './requirements/ClearGymRequirement';
 import ClickRequirement from './requirements/ClickRequirement';
+import DefeatedRequirement from './requirements/DefeatedRequirement';
+import DiamondRequirement from './requirements/DiamondRequirement';
+import FarmPlotsUnlockedRequirement from './requirements/FarmPlotsUnlockedRequirement';
+import GymBadgeRequirement from './requirements/GymBadgeRequirement';
+import HatchRequirement from './requirements/HatchRequirement';
+import MoneyRequirement from './requirements/MoneyRequirement';
+import PokeballRequirement from './requirements/PokeballRequirement';
+import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
+import QuestRequirement from './requirements/QuestRequirement';
+import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
+import TokenRequirement from './requirements/TokenRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
 import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
 
@@ -136,6 +147,17 @@ Object.assign(<any>window, {
     ClearDungeonRequirement,
     ClearGymRequirement,
     ClickRequirement,
+    DefeatedRequirement,
+    DiamondRequirement,
+    FarmPlotsUnlockedRequirement,
+    GymBadgeRequirement,
+    HatchRequirement,
+    MoneyRequirement,
+    PokeballRequirement,
+    ProteinObtainRequirement,
+    QuestRequirement,
+    ShinyPokemonRequirement,
+    TokenRequirement,
     UndergroundItemsFoundRequirement,
     UndergroundLayersMinedRequirement,
 });

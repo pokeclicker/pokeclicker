@@ -1,7 +1,8 @@
-/// <reference path="../../declarations/enums/Badges.d.ts"/>
-/// <reference path="../../declarations/requirements/ClearGymRequirement.d.ts"/>
+import BadgeEnums from '../enums/Badges';
+import * as GameConstants from '../GameConstants';
+import Requirement from './Requirement';
 
-class GymBadgeRequirement extends Requirement {
+export default class GymBadgeRequirement extends Requirement {
     public badge: BadgeEnums;
     constructor(badge: BadgeEnums, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
         super(1, option);
