@@ -7,16 +7,16 @@ class MapHelper {
         if (isNaN(route)) {
             return;
         }
+        const routeData = Routes.getRoute(region, route);
         let genNewEnemy = false;
         if (route != Battle.route) {
             genNewEnemy = true;
         }
         if (this.accessToRoute(route, region)) {
             player.route(route);
+            player._subregion(routeData.subRegion != undefined ? routeData.subRegion : 0);
             if (player.region != region) {
                 player.region = region;
-                // Always go back to the main island when changing regions
-                player.subregion = 0;
             }
             if (genNewEnemy && !Battle.catching()) {
                 Battle.generateNewEnemy();
@@ -30,7 +30,6 @@ class MapHelper {
                 });
             }
 
-            const routeData = Routes.getRoute(region, route);
             const reqsList = [];
 
             routeData.requirements?.forEach(requirement => {
