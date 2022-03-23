@@ -97,6 +97,7 @@
             <tr data-bind="foreach: $data">
                 <td class="text-light p-0">
               <!-- ko if: fluteEffectRunner.getEffect($data) > 0 -->
+              <!-- TODO: Move to fluteEffectRunner -->
                 <code data-bind="
                 text: player.effectTimer[$data](),
                 tooltip: {
