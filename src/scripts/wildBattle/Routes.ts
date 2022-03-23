@@ -2,7 +2,7 @@
 ///<reference path="../../declarations/routes/RegionRoute.d.ts"/>
 ///<reference path="../../scripts/GameConstants.d.ts" />
 /// <reference path="../../declarations/weather/WeatherType.d.ts"/>
-/// <reference path="../achievements/WeatherRequirement.ts"/>
+/// <reference path="../../declarations/requirements/WeatherRequirement.d.ts"/>
 
 class Routes {
     public static regionRoutes: RegionRoute[] = [];

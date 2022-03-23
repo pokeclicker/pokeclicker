@@ -78,6 +78,7 @@ import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
 import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
+import WeatherRequirement from './requirements/WeatherRequirement';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -162,4 +163,5 @@ Object.assign(<any>window, {
     TokenRequirement,
     UndergroundItemsFoundRequirement,
     UndergroundLayersMinedRequirement,
+    WeatherRequirement,
 });
