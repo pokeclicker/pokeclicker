@@ -878,7 +878,7 @@ class Farming implements Feature {
 
     getMutationMultiplier(): number {
         let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItemsType.Squirtbottle) * fluteEffectRunner.getFluteMultiplier('Grass_Flute');
+        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Squirtbottle) * fluteEffectRunner.getFluteMultiplier('Grass_Flute');
         return multiplier;
     }
 
