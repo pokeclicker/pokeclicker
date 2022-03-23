@@ -276,7 +276,7 @@ class Breeding implements Feature {
                         message: 'Hatchery queue is empty',
                         type: NotificationConstants.NotificationOption.success,
                         timeout: 1e4,
-                        sound: NotificationConstants.NotificationSound.empty_queue,
+                        sound: NotificationConstants.NotificationSound.Hatchery.empty_queue,
                         setting: NotificationConstants.NotificationSetting.Hatchery.empty_queue,
                     });
                 }

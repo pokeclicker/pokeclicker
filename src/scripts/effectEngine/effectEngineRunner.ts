@@ -30,7 +30,7 @@ class EffectEngineRunner {
                 Notifier.notify({
                     message: `The ${GameConstants.humanifyString(itemName)}s effect is about to wear off!`,
                     type: NotificationConstants.NotificationOption.warning,
-                    sound: NotificationConstants.NotificationSound.battle_item_timer,
+                    sound: NotificationConstants.NotificationSound.General.battle_item_timer,
                     setting: NotificationConstants.NotificationSetting.Items.battle_item_timer,
                 });
             }

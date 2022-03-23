@@ -74,14 +74,14 @@ class Egg implements Saveable {
                 Notifier.notify({
                     message: `${this.pokemon} is ready to hatch!`,
                     type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.ready_to_hatch,
+                    sound: NotificationConstants.NotificationSound.Hatchery.ready_to_hatch,
                     setting: NotificationConstants.NotificationSetting.Hatchery.ready_to_hatch,
                 });
             } else {
                 Notifier.notify({
                     message: 'An egg is ready to hatch!',
                     type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.ready_to_hatch,
+                    sound: NotificationConstants.NotificationSound.Hatchery.ready_to_hatch,
                     setting: NotificationConstants.NotificationSetting.Hatchery.ready_to_hatch,
                 });
             }
@@ -130,7 +130,7 @@ class Egg implements Saveable {
             Notifier.notify({
                 message: `✨ You hatched a shiny ${this.pokemon}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
-                sound: NotificationConstants.NotificationSound.shiny_long,
+                sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched_shiny,
             });
             App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}!`);
