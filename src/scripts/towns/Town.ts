@@ -1,6 +1,6 @@
 /* eslint-disable array-bracket-newline */
-///<reference path="../achievements/GymBadgeRequirement.ts"/>
-///<reference path="../achievements/OneFromManyRequirement.ts"/>
+///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 ///<reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="NPC.ts"/>
 ///<reference path="KantoBerryMasterNPC.ts"/>
