@@ -836,7 +836,6 @@ export const AlolaGyms = [
     'Malie City',
     'Vast Poni Canyon Trial',
     'Altar of the Sunne and Moone',
-    'Seafolk Village',
     'Exeggutor Island',
     'Elite Molayne',
     'Elite Olivia',
