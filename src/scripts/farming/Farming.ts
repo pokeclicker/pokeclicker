@@ -674,13 +674,13 @@ class Farming implements Feature {
             hint: 'I\'ve heard that growing a Passho Berry alone will cause it to change!',
         }));
         // Chople
-        this.mutations.push(new OakMutation(.0001, BerryType.Chople, BerryType.Spelon, OakItems.OakItem.Blaze_Cassette));
+        this.mutations.push(new OakMutation(.0001, BerryType.Chople, BerryType.Spelon, OakItemType.Blaze_Cassette));
         // Kebia
-        this.mutations.push(new OakMutation(.0001, BerryType.Kebia, BerryType.Pamtre, OakItems.OakItem.Poison_Barb));
+        this.mutations.push(new OakMutation(.0001, BerryType.Kebia, BerryType.Pamtre, OakItemType.Poison_Barb));
         // Kebia Parasite
         this.mutations.push(new ParasiteMutation(.0004, BerryType.Kebia));
         // Shuca
-        this.mutations.push(new OakMutation(.0001, BerryType.Shuca, BerryType.Watmel, OakItems.OakItem.Sprinklotad));
+        this.mutations.push(new OakMutation(.0001, BerryType.Shuca, BerryType.Watmel, OakItemType.Sprinklotad));
         // Coba
         // TODO: HLXII - Change mutation to grow spontaneously when Flying pokemon in party
         this.mutations.push(new GrowNearFlavorMutation(.0001, BerryType.Coba,
@@ -706,7 +706,7 @@ class Farming implements Feature {
             hint: 'I\'ve heard that a special Berry can appear after being surrounded by Rindo Berries!',
         }));
         // Charti
-        this.mutations.push(new OakMutation(.0001, BerryType.Charti, BerryType.Cornn, OakItems.OakItem.Cell_Battery));
+        this.mutations.push(new OakMutation(.0001, BerryType.Charti, BerryType.Cornn, OakItemType.Cell_Battery));
         // Kasib
         // No mutation, will check withers
         // Haban
@@ -866,19 +866,19 @@ class Farming implements Feature {
 
     getGrowthMultiplier(): number {
         let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck) * fluteEffectRunner.getFluteMultiplier('Grass_Flute');
+        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprayduck) * fluteEffectRunner.getFluteMultiplier('Grass_Flute');
         return multiplier;
     }
 
     getReplantMultiplier(): number {
         let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Sprinklotad) * fluteEffectRunner.getFluteMultiplier('Grass_Flute');
+        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprinklotad) * fluteEffectRunner.getFluteMultiplier('Grass_Flute');
         return multiplier;
     }
 
     getMutationMultiplier(): number {
         let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Squirtbottle) * fluteEffectRunner.getFluteMultiplier('Grass_Flute');
+        multiplier *= App.game.oakItems.calculateBonus(OakItemsType.Squirtbottle) * fluteEffectRunner.getFluteMultiplier('Grass_Flute');
         return multiplier;
     }
 
@@ -1120,7 +1120,7 @@ class Farming implements Feature {
 
         this.gainBerry(plot.berry, amount);
 
-        App.game.oakItems.use(OakItems.OakItem.Sprayduck, this.berryData[plot.berry].exp);
+        App.game.oakItems.use(OakItemType.Sprayduck, this.berryData[plot.berry].exp);
         GameHelper.incrementObservable(App.game.statistics.totalManualHarvests, 1);
 
         player.lowerItemMultipliers(MultiplierDecreaser.Berry, this.berryData[plot.berry].exp);

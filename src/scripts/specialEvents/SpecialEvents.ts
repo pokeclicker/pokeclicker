@@ -37,15 +37,8 @@ class SpecialEvents implements Feature {
 }
 
 // TODO: Fetch events from a server each 1/2/3/6/12/24 hours?
-// Create our events here for now
+// Create our events here for now (yearly)
 
-/*
- *  ONE TIME/TEMP EVENTS
- */
-
-/*
- *  YEARLY EVENTS
- */
 // Lunar New Year
 SpecialEvents.newEvent('Lunar New Year', 'Encounter Fancy Pattern Vivillon for a limited time roaming Kalos.',
     // Start

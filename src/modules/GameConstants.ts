@@ -155,6 +155,11 @@ export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 export const DNA_ITEM_CHANCE = 60;
 
+// Gems
+export const GEM_UPGRADE_COST = 500;
+export const GEM_UPGRADE_STEP = 0.1;
+export const MAX_GEM_UPGRADES = 10;
+
 // Gems from battle
 export const DUNGEON_GEMS = 3;
 export const DUNGEON_BOSS_GEMS = 20;
@@ -853,7 +858,6 @@ export const AlolaGyms = [
     'Malie City',
     'Vast Poni Canyon Trial',
     'Altar of the Sunne and Moone',
-    'Seafolk Village',
     'Exeggutor Island',
     'Elite Molayne',
     'Elite Olivia',
@@ -1065,6 +1069,7 @@ export const AlolaDungeons = [
     'Aether Foundation',
     'Exeggutor Island Hill',
     'Vast Poni Canyon',
+    'Mina\'s Houseboat',
     'Mount Lanakila',
     'Lake of the Sunne and Moone',
     'Ruins of Conflict',
