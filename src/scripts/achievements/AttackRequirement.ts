@@ -1,4 +1,5 @@
-///<reference path="AchievementRequirement.ts"/>
+///<reference path="../../declarations/requirements/AchievementRequirement.d.ts"/>
+
 
 class AttackRequirement extends AchievementRequirement {
     private static attack = ko.pureComputed(() => {

@@ -1,4 +1,4 @@
-///<reference path="AchievementRequirement.ts"/>
+///<reference path="../../declarations/requirements/AchievementRequirement.d.ts"/>
 
 class CaughtPokemonRequirement extends AchievementRequirement {
     constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {

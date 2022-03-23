@@ -1,4 +1,4 @@
-///<reference path="AchievementRequirement.ts"/>
+///<reference path="../../declarations/requirements/AchievementRequirement.d.ts"/>
 
 class MoneyRequirement extends AchievementRequirement {
     constructor(requiredValue: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {

@@ -1,4 +1,4 @@
-///<reference path="RoutePokemon.ts"/>
+///<reference path="../../declarations/routes/RoutePokemon.d.ts"/>
 
 /**
  * Helper class to retrieve information from RoutePokemon

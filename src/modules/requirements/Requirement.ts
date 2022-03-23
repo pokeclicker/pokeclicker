@@ -1,4 +1,6 @@
-abstract class Requirement {
+import * as GameConstants from '../GameConstants';
+
+export default abstract class Requirement {
     public requiredValue: number;
     public option: GameConstants.AchievementOption;
 
@@ -7,11 +9,8 @@ abstract class Requirement {
         this.option = option;
     }
 
-    abstract getProgress(): number;
-    abstract hint(): string;
-
     public getProgressPercentage() {
-        return (this.getProgress() / this.requiredValue * 100).toFixed(1);
+        return ((this.getProgress() / this.requiredValue) * 100).toFixed(1);
     }
 
     public isCompleted() {
@@ -19,11 +18,13 @@ abstract class Requirement {
             case GameConstants.AchievementOption.less:
                 return this.getProgress() < this.requiredValue;
             case GameConstants.AchievementOption.equal:
-                return this.getProgress() == this.requiredValue;
+                return this.getProgress() === this.requiredValue;
             case GameConstants.AchievementOption.more:
+            default:
                 return this.getProgress() >= this.requiredValue;
         }
     }
 
+    abstract getProgress(): number;
+    abstract hint(): string;
 }
-

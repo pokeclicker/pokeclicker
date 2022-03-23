@@ -1,4 +1,4 @@
-///<reference path="AchievementRequirement.ts"/>
+///<reference path="../../declarations/requirements/AchievementRequirement.d.ts"/>
 
 class ClearDungeonRequirement extends AchievementRequirement {
     public dungeonIndex: number; // Gym name index in array GameConstants.Gyms
