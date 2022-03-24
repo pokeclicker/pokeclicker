@@ -18,7 +18,7 @@
                        <th>End Time</th>
                      </tr>
                    </thead>
-                   <tbody data-bind="foreach: SpecialEvents.events">
+                   <tbody data-bind="foreach: SpecialEvents.events.sort((a, b) => a.startTime - b.startTime)">
                      <!-- ko if: Date.now() < endTime -->
                      <tr>
                        <td data-bind="text: title"></td>

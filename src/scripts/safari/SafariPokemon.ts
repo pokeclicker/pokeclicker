@@ -62,7 +62,7 @@ class SafariPokemon implements PokemonInterface {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${name}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
-                sound: NotificationConstants.NotificationSound.shiny_long,
+                sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
             });
 
@@ -78,7 +78,7 @@ class SafariPokemon implements PokemonInterface {
     }
 
     public get catchFactor(): number {
-        const oakBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Magic_Ball);
+        const oakBonus = App.game.oakItems.calculateBonus(OakItemType.Magic_Ball);
         let catchF = this.baseCatchFactor + oakBonus;
         if (this.eating > 0) {
             catchF /= 2;
