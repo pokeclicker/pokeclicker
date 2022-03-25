@@ -1,15 +1,17 @@
-declare const Sortable: any;
+import Sortable from 'sortablejs';
+import Settings from './settings/Settings';
+import Setting from './settings/Setting';
 
 const columns = ['left-column', 'middle-top-sort-column', 'middle-bottom-sort-column', 'right-column'];
 
 // Create the settings to be loaded/saved
-columns.forEach(column => {
+columns.forEach((column) => {
     Settings.add(new Setting(`modules.${column}`, `Modules sort order ${column}`, [], ''));
 });
 
-const SortModules = () => {
+export const SortModules = () => {
     // Enable sorting of items
-    columns.forEach(column => {
+    columns.forEach((column) => {
         Sortable.create(document.getElementById(column), {
             animation: 100,
             group: 'main-sortable',
@@ -21,16 +23,18 @@ const SortModules = () => {
             delayOnTouchOnly: true,
             touchStartThreshold: 20,
             store: {
-                set: sortable => {
+                get: null,
+                set: (sortable) => {
                     const order = sortable.toArray();
                     Settings.setSettingByName(`modules.${column}`, order.join('|'));
                     // Clear out whitespace
                     if (/^([\s\r\n\t]|<!--.*-->)+$/.test(sortable.el.innerHTML)) {
+                        // eslint-disable-next-line no-param-reassign
                         sortable.el.innerHTML = '';
                     }
                 },
             },
-            onSort: evt => {
+            onSort: (evt) => {
                 const currentSortable = evt.to[Object.keys(evt.to)[0]];
                 const order = currentSortable.toArray();
                 Settings.setSettingByName(`modules.${column}`, order.join('|'));
@@ -39,13 +43,13 @@ const SortModules = () => {
     });
 
     // Sort the items between columns, in order
-    columns.forEach(sortable => {
+    columns.forEach((sortable) => {
         const parent = document.getElementById(sortable);
         const itemOrder = Settings.getSetting(`modules.${sortable}`).observableValue();
         const itemOrderArr = itemOrder ? itemOrder.split('|') : [];
 
         let prevItem;
-        itemOrderArr.forEach(item => {
+        itemOrderArr.forEach((item) => {
             const child = document.getElementById(item);
             // If the element doesn't exist anymore, skip it
             if (!child) {
@@ -62,7 +66,7 @@ const SortModules = () => {
     });
 
     // Clear out whitespace
-    columns.forEach(sortable => {
+    columns.forEach((sortable) => {
         const el = document.getElementById(sortable);
         if (/^([\s\r\n\t]|<!--.*-->)+$/.test(el.innerHTML)) {
             el.innerHTML = '';
