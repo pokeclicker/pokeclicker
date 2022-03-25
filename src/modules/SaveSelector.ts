@@ -11,7 +11,7 @@ export default class SaveSelector {
 
         const saves = Object.keys(localStorage).filter((k: string) => k.startsWith('save'));
         saves.forEach((saveKey) => {
-            container.innerHTML += SaveSelector.getTrainerCard(saveKey.replace(/^save/, ''));
+            container.appendChild(SaveSelector.getTrainerCard(saveKey.replace(/^save/, '')));
         });
 
         if (saves.length >= this.MAX_SAVES) {
@@ -50,7 +50,7 @@ export default class SaveSelector {
         SortSaves();
     }
 
-    static getTrainerCard(key: string): string {
+    static getTrainerCard(key: string): Element {
         try {
             const rawData = localStorage.getItem(`save${key}`);
             const saveData = JSON.parse(rawData);
@@ -71,7 +71,7 @@ export default class SaveSelector {
         } catch (e) {
             // eslint-disable-next-line no-console
             console.log('Failed to load save:', key, e);
-            return '';
+            return document.createElement('div');
         }
     }
 
