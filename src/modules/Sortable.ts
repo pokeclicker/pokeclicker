@@ -73,3 +73,30 @@ export const SortModules = () => {
         }
     });
 };
+
+export const SortSaves = () => {
+    // Enable sorting of saves
+    const settingName = 'sort.saveSelector';
+    Sortable.create(document.querySelector('#saveSelector .save-container'), {
+        animation: 100,
+        group: settingName,
+        draggable: '.trainer-card-container',
+        handle: '.trainer-card',
+        dataIdAttr: 'data-key',
+        sort: true,
+        delay: 500,
+        delayOnTouchOnly: true,
+        touchStartThreshold: 20,
+        store: {
+            get: () => {
+                const order = Settings.getSetting(settingName).observableValue();
+                return order ? order.split('|') : [];
+            },
+            set: (sortable) => {
+                const order = sortable.toArray();
+                Settings.setSettingByName(settingName, order.join('|'));
+                Settings.saveDefault();
+            },
+        },
+    });
+};

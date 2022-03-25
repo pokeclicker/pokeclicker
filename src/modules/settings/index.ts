@@ -211,6 +211,9 @@ Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
     ],
     '-2'));
 
+// Save menu sorting
+Settings.add(new Setting('sort.saveSelector', 'Saves sort order', [], ''));
+
 /*
  * SUBSCRIBERS
  */

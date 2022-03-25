@@ -51,7 +51,7 @@ export default class Profile implements Saveable {
     ): string {
         const challengeRibbonsPath = 'assets/images/challenges/';
         return `
-        <div class="mb-3 ${key === undefined ? 'p-2 col-12' : 'col-lg-4 col-md-6 col-sm-12 xol-xs-12'}">
+        <div class="trainer-card-container mb-3 ${key === undefined ? 'p-2 col-12' : 'col-lg-4 col-md-6 col-sm-12 xol-xs-12'}" ${key === undefined ? '' : `data-key="${key}"`}>
             <div class="trainer-card clickable trainer-bg-${background} card font-weight-bold"
                 ${key === undefined ? '' : `data-key="${key}"`}
                 style="color: ${textColor}"
