@@ -259,7 +259,7 @@ class MapHelper {
         }
 
         // Check if all regional pokemon are obtained
-        return AchievementHandler.findByName(`${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])} Master`).isCompleted();
+        return AchievementHandler.findByName(`${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion()])} Master`).isCompleted();
     }
 
     public static travelToNextRegion() {
