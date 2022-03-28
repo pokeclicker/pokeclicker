@@ -98,16 +98,12 @@ class PokemonHelper {
             return pokemon.nativeRegion;
         }
         const id = pokemon.id;
-        const region = GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(id));
+        const region = GameConstants.MaxIDPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(id));
         return region >= 0 ? region : GameConstants.Region.none;
     }
 
     public static calcUniquePokemonsByRegion(region: GameConstants.Region) {
-        if (region != 0) {
-            return GameConstants.TotalPokemonsPerRegion[region] - Number(GameConstants.TotalPokemonsPerRegion[region - 1]);
-        } else {
-            return GameConstants.TotalPokemonsPerRegion[region];
-        }
+        return new Set(pokemonList.filter(p => p.id > 0 && PokemonHelper.calcNativeRegion(p.name) === region).map(p => Math.floor(p.id))).size;
     }
 
     /*
