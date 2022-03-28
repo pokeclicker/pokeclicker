@@ -1,4 +1,4 @@
-///<reference path="AchievementRequirement.ts"/>
+///<reference path="../../declarations/requirements/AchievementRequirement.d.ts"/>
 
 class CaughtUniquePokemonsByRegionRequirement extends AchievementRequirement {
     private region: GameConstants.Region;

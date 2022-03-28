@@ -35,7 +35,7 @@ namespace GameConstants {
     declare const MUTATION_TICK: number;
     declare const WANDER_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
-    declare const TotalPokemonsPerRegion: number[];
+    declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
     declare const ROAMING_MIN_CHANCE: number;
     declare const ROAMING_MAX_CHANCE: number;
@@ -109,6 +109,9 @@ namespace GameConstants {
     declare const DUNGEON_BOSS_HELD_ITEM_MODIFIER: number;
     declare const HELD_ITEM_CHANCE: number;
     declare const HELD_UNDERGROUND_ITEM_CHANCE: number;
+    declare const GEM_UPGRADE_COST: number;
+    declare const GEM_UPGRADE_STEP: number;
+    declare const MAX_GEM_UPGRADES: number;
     declare const DUNGEON_GEMS: number;
     declare const DUNGEON_BOSS_GEMS: number;
     declare const GYM_GEMS: number;

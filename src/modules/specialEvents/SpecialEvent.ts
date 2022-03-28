@@ -67,14 +67,14 @@ export default class SpecialEvent {
             type,
             time,
             timeout,
-            setting: NotificationConstants.NotificationSetting.event_start_end,
+            setting: NotificationConstants.NotificationSetting.General.event_start_end,
         });
     }
 
     checkStart() {
-        // If event already over, do nothing
+        // If event already over, move it to next year
         if (this.timeTillEnd() <= 0) {
-            this.status = SpecialEventStatus.ended;
+            this.updateDate();
             return;
         }
 
@@ -165,8 +165,16 @@ export default class SpecialEvent {
 
     end() {
         // Update event status
-        this.status = SpecialEventStatus.ended;
         this.notify('just ended!', 1 * HOUR, NotificationConstants.NotificationOption.danger);
         this.endFunction();
+        this.status = SpecialEventStatus.none;
+        this.updateDate();
+    }
+
+    // Move the event to the next year
+    updateDate() {
+        this.endTime.setFullYear(this.endTime.getFullYear() + 1);
+        this.startTime.setFullYear(this.startTime.getFullYear() + 1);
+        this.checkStart();
     }
 }
