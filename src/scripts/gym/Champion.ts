@@ -160,7 +160,7 @@ gymList['Champion Diantha'] = new Champion(
         new GymPokemon('Aurorus', 62057000, 65),
         new GymPokemon('Gourgeist', 62557000, 65),
         new GymPokemon('Goodra', 62170000, 66),
-        new GymPokemon('Gardevoir', 63070000, 68),
+        new GymPokemon('Mega Gardevoir', 63070000, 68),
     ],
     BadgeEnums.Elite_KalosChampion,
     128000,
