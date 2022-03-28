@@ -90,26 +90,32 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 
 // CSS variable settings
-Settings.add(new CssVariableSetting('locked', 'Map Color Locked Location', [], '#000000'));
-Settings.add(new CssVariableSetting('currentPlace', 'Map Color Current Location', [], '#55ff00'));
-Settings.add(new CssVariableSetting('incomplete', 'Map Color Incomplete Area', [], '#ff9100'));
-Settings.add(new CssVariableSetting('uncaughtPokemon', 'Map Color Uncaught Pokemon', [], '#3498db'));
-Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Map Color Uncaught Shiny Pokemon', [], '#ffee00'));
-Settings.add(new CssVariableSetting('completed', 'Map Color Completed Location', [], '#ffffff'));
+Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
+Settings.add(new CssVariableSetting('currentPlace', 'Current Location', [], '#55ff00'));
+Settings.add(new CssVariableSetting('incomplete', 'Incomplete Area', [], '#ff9100'));
+Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokemon', [], '#3498db'));
+Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Achievement', [], '#c939fe'));
+Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokemon', [], '#ffee00'));
+Settings.add(new CssVariableSetting('missingAchievement', 'Missing Achievement', [], '#57e3ff'));
+Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#ffffff'));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
 Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web workers for game ticks (more consistent game speed)', true));
 
 // Sound settings
-Object.values(NotificationConstants.NotificationSound).forEach((sound) => {
-    Settings.add(new BooleanSetting(`sound.${sound.name}`, sound.name, true));
+Object.values(NotificationConstants.NotificationSound).forEach((soundGroup) => {
+    Object.values(soundGroup).forEach((sound) => {
+        Settings.add(new BooleanSetting(`sound.${sound.name}`, sound.name, true));
+    });
 });
 Settings.add(new RangeSetting('sound.volume', 'Volume', 0, 100, 1, 100));
 
 // Notification settings
-Object.values(NotificationConstants.NotificationSetting).forEach((setting) => {
-    Settings.add(setting);
+Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup) => {
+    Object.values(settingsGroup).forEach((setting) => {
+        Settings.add(setting);
+    });
 });
 
 /*
@@ -136,6 +142,7 @@ const proteinSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 ));
 Settings.add(new Setting<number>('proteinSort', 'Sort:', proteinSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('proteinSortDirection', 'reverse', false));
+Settings.add(new BooleanSetting('proteinHideMaxedPokemon', 'Hide Pokémon with max protein', false));
 
 // Breeding Filters
 Settings.add(new Setting<string>('breedingCategoryFilter', 'breedingCategoryFilter',

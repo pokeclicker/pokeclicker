@@ -65,8 +65,8 @@ class Mine {
         Underground.showMine();
 
         //Check if Explosive_Charge is equipped.
-        if (App.game.oakItems.isActive(OakItems.OakItem.Explosive_Charge)) {
-            const tiles = App.game.oakItems.calculateBonus(OakItems.OakItem.Explosive_Charge);
+        if (App.game.oakItems.isActive(OakItemType.Explosive_Charge)) {
+            const tiles = App.game.oakItems.calculateBonus(OakItemType.Explosive_Charge);
             for (let i = 1; i < tiles; i++) {
                 const x = Rand.intBetween(0, App.game.underground.getSizeY() - 1);
                 const y = Rand.intBetween(0, Underground.sizeX - 1);
@@ -210,7 +210,7 @@ class Mine {
             text.push(`Evolution Items: ${summary.evoItems}`);
         }
         if (summary.plates) {
-            text.push(`Shard Plates: ${summary.plates}`);
+            text.push(`Gem Plates: ${summary.plates}`);
         }
         text.push(`Diamond Value: ${summary.totalValue}`);
 
@@ -322,8 +322,8 @@ class Mine {
                     type: NotificationConstants.NotificationOption.success,
                 });
 
-                if (App.game.oakItems.isActive(OakItems.OakItem.Treasure_Scanner)) {
-                    const giveDouble = App.game.oakItems.calculateBonus(OakItems.OakItem.Treasure_Scanner) / 100;
+                if (App.game.oakItems.isActive(OakItemType.Treasure_Scanner)) {
+                    const giveDouble = App.game.oakItems.calculateBonus(OakItemType.Treasure_Scanner) / 100;
                     if (Rand.chance(giveDouble)) {
                         amount++;
                         Notifier.notify({
@@ -355,7 +355,7 @@ class Mine {
                     }
                 }
 
-                App.game.oakItems.use(OakItems.OakItem.Treasure_Scanner);
+                App.game.oakItems.use(OakItemType.Treasure_Scanner);
                 Underground.gainMineItem(Mine.rewardNumbers[i], amount);
                 GameHelper.incrementObservable(Mine.itemsFound);
                 GameHelper.incrementObservable(App.game.statistics.undergroundItemsFound, amount);
@@ -378,7 +378,7 @@ class Mine {
                 }
             }
         }
-        App.game.oakItems.use(OakItems.OakItem.Cell_Battery);
+        App.game.oakItems.use(OakItemType.Cell_Battery);
         return true;
     }
 
@@ -404,7 +404,7 @@ class Mine {
             type: NotificationConstants.NotificationOption.info,
         });
         ko.cleanNode(document.getElementById('mineBody'));
-        App.game.oakItems.use(OakItems.OakItem.Explosive_Charge);
+        App.game.oakItems.use(OakItemType.Explosive_Charge);
         Mine.loadMine();
         ko.applyBindings(null, document.getElementById('mineBody'));
     }

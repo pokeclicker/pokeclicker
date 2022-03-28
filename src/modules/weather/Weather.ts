@@ -34,13 +34,14 @@ export default class Weather {
         [WeatherType.Clear]:
             new WeatherCondition(WeatherType.Clear, '#ffe57a', 'The weather is clear and pleasant.', 30),
         [WeatherType.Overcast]:
-            new WeatherCondition(WeatherType.Overcast, '#bed8ff', 'Clouds fill the skies.', 20),
+            new WeatherCondition(WeatherType.Overcast, '#bed8ff', 'Clouds fill the skies.', 15,
+                [{ type: PokemonType.Normal, multiplier: 1.1 }]),
         [WeatherType.Rain]:
             new WeatherCondition(WeatherType.Rain, '#9db7f5', 'It\'s rainy and humid.', 10,
-                [{ type: PokemonType.Water, multiplier: 1.1 }]),
+                [{ type: PokemonType.Water, multiplier: 1.1 }, { type: PokemonType.Bug, multiplier: 1.05 }]),
         [WeatherType.Thunderstorm]:
             new WeatherCondition(WeatherType.Thunderstorm, '#a19288', 'It\'s currently raining heavily with thunder.', 5,
-                [{ type: PokemonType.Electric, multiplier: 1.1 }, { type: PokemonType.Water, multiplier: 1.1 }]),
+                [{ type: PokemonType.Electric, multiplier: 1.1 }, { type: PokemonType.Water, multiplier: 1.1 }, { type: PokemonType.Fire, multiplier: 0.9 }]),
         [WeatherType.Snow]:
             new WeatherCondition(WeatherType.Snow, '#bbe6e6', 'It\'s cold and snowing.', 5,
                 [{ type: PokemonType.Ice, multiplier: 1.05 }]),
@@ -52,13 +53,13 @@ export default class Weather {
                 [{ type: PokemonType.Ice, multiplier: 1.2 }, { type: PokemonType.Fire, multiplier: 0.9 }, { type: PokemonType.Grass, multiplier: 0.9 }]),
         [WeatherType.Sunny]:
             new WeatherCondition(WeatherType.Sunny, '#f5ac78', 'The sunlight is strong.', 10,
-                [{ type: PokemonType.Fire, multiplier: 1.1 }, { type: PokemonType.Grass, multiplier: 1.1 }]),
+                [{ type: PokemonType.Fire, multiplier: 1.2 }, { type: PokemonType.Grass, multiplier: 1.1 }, { type: PokemonType.Water, multiplier: 0.9 }]),
         [WeatherType.Sandstorm]:
             new WeatherCondition(WeatherType.Sandstorm, '#d1c07d', 'A sandstorm is raging.', 10,
                 [{ type: PokemonType.Rock, multiplier: 1.1 }, { type: PokemonType.Ground, multiplier: 1.1 }, { type: PokemonType.Steel, multiplier: 1.1 }]),
         [WeatherType.Fog]:
             new WeatherCondition(WeatherType.Fog, '#d2c2ef', 'The fog is deep...', 10,
-                [{ type: PokemonType.Ghost, multiplier: 1.1 }]),
+                [{ type: PokemonType.Ghost, multiplier: 1.2 }, { type: PokemonType.Dark, multiplier: 1.1 }, { type: PokemonType.Electric, multiplier: 0.9 }]),
         [WeatherType.Windy]:
             new WeatherCondition(WeatherType.Windy, '#81c4ca', 'Mysterious strong winds blow.', 1,
                 [{ type: PokemonType.Flying, multiplier: 1.2 }, { type: PokemonType.Dragon, multiplier: 1.1 }]),

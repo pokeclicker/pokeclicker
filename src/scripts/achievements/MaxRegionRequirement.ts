@@ -1,4 +1,4 @@
-///<reference path="Requirement.ts"/>
+///<reference path="../../declarations/requirements/Requirement.d.ts"/>
 
 class MaxRegionRequirement extends Requirement {
     constructor(maxRegion = GameConstants.Region.none, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {

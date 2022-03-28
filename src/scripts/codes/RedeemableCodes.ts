@@ -13,7 +13,7 @@ class RedeemableCodes implements Saveable {
             new RedeemableCode('farming-quick-start', -83143881, false, () => {
                 // Give the player 10k farming points, 100 Cheri berries
                 App.game.wallet.gainFarmPoints(10000);
-                App.game.farming.gainBerry(BerryType.Cheri, 100);
+                App.game.farming.gainBerry(BerryType.Cheri, 100, false);
                 // Notify that the code was activated successfully
                 Notifier.notify({
                     title:'Code activated!',
@@ -53,7 +53,7 @@ class RedeemableCodes implements Saveable {
                     GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeon)]);
                 });
                 // Catch all Pokemon
-                for (let id = 1; id <= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.kanto]; id++) {
+                for (let id = 1; id <= GameConstants.MaxIDPerRegion[GameConstants.Region.kanto]; id++) {
                     App.game.party.gainPokemonById(id, false, true);
                 }
                 // Notify that the code was activated successfully
