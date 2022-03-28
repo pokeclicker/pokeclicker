@@ -35,7 +35,7 @@ namespace GameConstants {
     declare const MUTATION_TICK: number;
     declare const WANDER_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
-    declare const TotalPokemonsPerRegion: number[];
+    declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
     declare const ROAMING_MIN_CHANCE: number;
     declare const ROAMING_MAX_CHANCE: number;
@@ -109,9 +109,12 @@ namespace GameConstants {
     declare const DUNGEON_BOSS_HELD_ITEM_MODIFIER: number;
     declare const HELD_ITEM_CHANCE: number;
     declare const HELD_UNDERGROUND_ITEM_CHANCE: number;
-    declare const DUNGEON_SHARDS: number;
-    declare const DUNGEON_BOSS_SHARDS: number;
-    declare const GYM_SHARDS: number;
+    declare const GEM_UPGRADE_COST: number;
+    declare const GEM_UPGRADE_STEP: number;
+    declare const MAX_GEM_UPGRADES: number;
+    declare const DUNGEON_GEMS: number;
+    declare const DUNGEON_BOSS_GEMS: number;
+    declare const GYM_GEMS: number;
     declare const SAFARI_BATTLE_CHANCE: number;
     declare const SAFARI_BASE_POKEBALL_COUNT: number;
     declare const LEGAL_WALK_BLOCKS: number[];
@@ -152,6 +155,10 @@ namespace GameConstants {
         'Timerball',
         'Duskball',
         'Luxuryball',
+        'Diveball',
+        'Lureball',
+        'Nestball',
+        'Repeatball',
     }
     declare enum Currency {
         money,
@@ -190,8 +197,7 @@ namespace GameConstants {
         kalos,
         alola,
         galar,
-        armor,
-        crown
+        final,
     }
     declare function clipNumber(num: number, min: number, max: number): number;
     declare function expRandomElement<T>(array: T[], ratio: number): T;

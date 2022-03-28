@@ -117,7 +117,7 @@ class Preload {
 
     private static loadPokemon() {
         const p = Array<Promise<void>>();
-        for (let i = 1; i <= GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION]; i++) {
+        for (let i = 1; i <= GameConstants.MaxIDPerRegion[GameConstants.MAX_AVAILABLE_REGION]; i++) {
             Preload.itemLoading(i);
             p.push(new Promise<void>(resolve => {
                 const img = new Image();

@@ -95,7 +95,7 @@ class GymRunner {
             Notifier.notify({
                 message: `Congratulations, you defeated ${GymBattle.gym.leaderName}!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.gym_won,
+                setting: NotificationConstants.NotificationSetting.General.gym_won,
             });
             // If this is the first time defeating this gym
             if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
             KeyItemController.showGainModal(KeyItems.KeyItem.HM03_surf);
         }
         if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
-            KeyItemController.showGainModal(KeyItems.KeyItem.Shard_case);
+            KeyItemController.showGainModal(KeyItems.KeyItem.Gem_case);
         }
         if (GymBattle.gym.badgeReward == BadgeEnums.Mind) {
             KeyItemController.showGainModal(KeyItems.KeyItem.HM08_dive);

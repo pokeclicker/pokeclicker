@@ -1,4 +1,4 @@
-/// <reference path="upgrades/Upgrade.ts" />
+/// <reference path="../declarations/upgrades/Upgrade.d.ts" />
 
 /**
  * Required modules before porting:
