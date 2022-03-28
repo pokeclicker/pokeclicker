@@ -534,7 +534,6 @@ Routes.add(new RegionRoute(
     'Johto Route 28', GameConstants.Region.johto, 28,
     new RoutePokemon({
         land: ['Ponyta', 'Tangela', 'Donphan', 'Ursaring', 'Rapidash', 'Doduo', 'Dodrio', 'Sneasel', 'Murkrow'],
-        water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
         johtooldrod: ['Poliwag', 'Magikarp'],
         johtogoodrod: ['Poliwag', 'Magikarp'],
         johtosuperrod: ['Poliwag', 'Magikarp'],
