@@ -159,6 +159,9 @@ class Party implements Feature {
 
     public calculateEVAttackBonus(pokemon: PartyPokemon): number {
         const EVs = this.getEffortValues(pokemon)();
+        if(!App.game.badgeCase.hasBadge(BadgeEnums.Relic)){
+          return 1;
+        }
         return (EVs < 50) ? (1 + 0.01 * EVs) : (1 + Math.min(1, Math.pow((EVs - 30),0.075) - 0.75));
     }
 
