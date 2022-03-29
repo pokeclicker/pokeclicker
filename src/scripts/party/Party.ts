@@ -109,7 +109,7 @@ class Party implements Feature {
 
     public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, includeWeather = true, ignoreLevel = false): number {
         let multiplier = 1, attack = 0;
-        const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : pokemon.attack);
+        const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : (pokemon.attack * (this.getEVAttackBonus(pokemon))));
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
 
         // Check if the pokemon is in their native region
@@ -151,6 +151,11 @@ class Party implements Feature {
     public getRegionAttackMultiplier(highestRegion = player.highestRegion()): number {
         // between 0.2 -> 1 based on highest region
         return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
+    }
+
+    public getEVAttackBonus(pokemon: PartyPokemon): number {
+        const EVs = App.game.statistics.pokemonEVs[pokemon.id];
+        return (EVs() < 50) ? (1 + 0.01 * EVs()) : (1 + Math.min(1, Math.pow((EVs() - 30),0.075) - 0.75));
     }
 
     public pokemonAttackObservable: KnockoutComputed<number> = ko.pureComputed(() => {

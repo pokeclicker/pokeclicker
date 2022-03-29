@@ -6,6 +6,7 @@ class PartyPokemon implements Saveable {
         attackBonusPercent: 0,
         attackBonusAmount: 0,
         proteinsUsed: 0,
+        pokemonEVs: 0,
         exp: 0,
         breeding: false,
         shiny: false,
@@ -18,6 +19,7 @@ class PartyPokemon implements Saveable {
     _attack: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
     proteinsUsed: KnockoutObservable<number>;
+    pokemonEVs: KnockoutObservable<number>;
 
     constructor(
         public id: number,
@@ -27,12 +29,14 @@ class PartyPokemon implements Saveable {
         public attackBonusPercent: number = 0,
         public attackBonusAmount: number = 0,
         proteinsUsed,
+        pokemonEVs,
         public exp: number = 0,
         breeding = false,
         shiny = false,
         category = 0
     ) {
         this.proteinsUsed = ko.observable(proteinsUsed);
+        this.pokemonEVs = ko.observable(pokemonEVs);
         this._breeding = ko.observable(breeding);
         this._shiny = ko.observable(shiny);
         this._level = ko.observable(1);

@@ -81,6 +81,7 @@ export default class Statistics implements Saveable {
     pokemonDefeated: any;
     pokemonEncountered: any;
     pokemonHatched: any;
+    pokemonEVs: any;
     shinyPokemonCaptured: any;
     shinyPokemonDefeated: any;
     shinyPokemonEncountered: any;
@@ -138,6 +139,7 @@ export default class Statistics implements Saveable {
         'pokemonDefeated',
         'pokemonEncountered',
         'pokemonHatched',
+        'pokemonEVs',
         'shinyPokemonCaptured',
         'shinyPokemonDefeated',
         'shinyPokemonEncountered',
