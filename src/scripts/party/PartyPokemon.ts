@@ -6,7 +6,7 @@ class PartyPokemon implements Saveable {
         attackBonusPercent: 0,
         attackBonusAmount: 0,
         proteinsUsed: 0,
-        pokemonEVs: 0,
+        effortPoints: 0,
         exp: 0,
         breeding: false,
         shiny: false,
@@ -19,7 +19,7 @@ class PartyPokemon implements Saveable {
     _attack: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
     proteinsUsed: KnockoutObservable<number>;
-    pokemonEVs: KnockoutObservable<number>;
+    effortPoints: KnockoutObservable<number>;
 
     constructor(
         public id: number,
@@ -29,14 +29,14 @@ class PartyPokemon implements Saveable {
         public attackBonusPercent: number = 0,
         public attackBonusAmount: number = 0,
         proteinsUsed,
-        pokemonEVs,
+        effortPoints,
         public exp: number = 0,
         breeding = false,
         shiny = false,
         category = 0
     ) {
         this.proteinsUsed = ko.observable(proteinsUsed);
-        this.pokemonEVs = ko.observable(pokemonEVs);
+        this.effortPoints = ko.observable(effortPoints);
         this._breeding = ko.observable(breeding);
         this._shiny = ko.observable(shiny);
         this._level = ko.observable(1);
@@ -148,6 +148,7 @@ class PartyPokemon implements Saveable {
         this.attackBonusPercent = json['attackBonusPercent'] ?? this.defaults.attackBonusPercent;
         this.attackBonusAmount = json['attackBonusAmount'] ?? this.defaults.attackBonusAmount;
         this.proteinsUsed = ko.observable(json['proteinsUsed'] ?? this.defaults.proteinsUsed);
+        this.effortPoints = ko.observable(json['effortPoints'] ?? this.defaults.effortPoints);
         this.exp = json['exp'] ?? this.defaults.exp;
         this.breeding = json['breeding'] ?? this.defaults.breeding;
         this.shiny = json['shiny'] ?? this.defaults.shiny;
@@ -178,6 +179,7 @@ class PartyPokemon implements Saveable {
             id: this.id,
             attackBonusPercent: this.attackBonusPercent,
             attackBonusAmount: this.attackBonusAmount,
+            effortPoints: this.effortPoints(),
             proteinsUsed: this.proteinsUsed(),
             exp: this.exp,
             breeding: this.breeding,

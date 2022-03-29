@@ -154,22 +154,22 @@ class Battle {
     public static catchPokemon(enemyPokemon: BattlePokemon) {
         const catchRoute = Battle.route || player.town()?.dungeon?.difficultyRoute || 1;
         App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(catchRoute, player.region));
-        GameHelper.incrementObservable(App.game.statistics.pokemonEVs[enemyPokemon.id],this.determineEVs(enemyPokemon));
+        GameHelper.incrementObservable(App.game.statistics.effortPoints[enemyPokemon.id],this.determineEffortPoints(enemyPokemon));
         App.game.oakItems.use(OakItemType.Magic_Ball);
         App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny);
     }
 
-    public static determineEVs(enemyPokemon: BattlePokemon): number {
-        let EVNum = 1;
+    public static determineEffortPoints(enemyPokemon: BattlePokemon): number {
+        let EPNum = GameConstants.BASE_EP_YIELD;
 
         if (enemyPokemon.shiny) {
-            EVNum *= 2;
+            EPNum *= GameConstants.SHINY_EP_YIELD;
         }
 
         if (player.route()) {
-            return EVNum;
+            return EPNum;
         } else if (player.town()?.dungeon) {
-            return EVNum *= 2;
+            return EPNum *= GameConstants.DUNGEON_EP_YIELD;
         }
     }
 

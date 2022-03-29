@@ -642,11 +642,16 @@ class Update implements Saveable {
             // Challenge update
             saveData.challenges.list.disableGems = saveData.challenges?.list?.disableShards ?? false;
 
+            saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
+                p.effortPoints = 0;
+                return p;
+            });
+
         },
 
         '0.8.16': ({ playerData, saveData }) => {
             saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
-                p.pokemonEVs = 0;
+                p.effortPoints = 0;
                 return p;
             });
         },
