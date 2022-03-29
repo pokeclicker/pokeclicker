@@ -62,6 +62,9 @@
                                                   }">
                         </div>
                         <p><i>Stops using evolution stones once a shiny is encountered</i></p>
+                        <p data-bind="visible: PartyController.hasMultipleStoneEvolutionsAvailable(ItemHandler.pokemonSelected(), GameConstants.StoneType[ItemHandler.stoneSelected()])">
+                            <i>If the requirements for more than one evolution is fulfilled, a random evolution will be selected</i>
+                        </p>
                         <div class="row no-gutters justify-content-sm-center">
                             <div class="row justify-content-center" style="padding:15px;">
                                 <button data-bind="click: function(){ItemHandler.useStones()}" class="btn btn-lg btn-success">Use evolution stones!</button>
