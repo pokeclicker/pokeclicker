@@ -21,7 +21,7 @@ export default class SaveSelector {
 
         $('[data-toggle="tooltip"]').tooltip();
 
-        $('.trainer-card.clickable').on('contextmenu', (e) => {
+        $(container).on('contextmenu', '.trainer-card.clickable', (e) => {
             const top = e.pageY;
             const left = e.pageX;
             const { key } = e.currentTarget.dataset;

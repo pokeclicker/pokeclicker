@@ -61,6 +61,7 @@ export default class Profile implements Saveable {
         const card: HTMLElement = node.querySelector('.trainer-card');
         card.classList.add(`trainer-bg-${background}`);
         card.style.color = textColor;
+        card.dataset.key = key;
         card.addEventListener('click', () => {
             // If no key provided, this is a preview
             if (key === undefined) {
