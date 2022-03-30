@@ -1,5 +1,6 @@
 /// <reference path="../declarations/DataStore/BadgeCase.d.ts" />
 /// <reference path="../declarations/GameHelper.d.ts" />
+/// <reference path="../declarations/party/Category.d.ts"/>
 
 /**
  * Main game class.
@@ -28,7 +29,7 @@ class Game {
         public oakItemLoadouts: OakItemLoadouts,
         public categories: PokemonCategories,
         public party: Party,
-        public shards: Shards,
+        public gems: Gems,
         public underground: Underground,
         public farming: Farming,
         public logbook: LogBook,
@@ -246,12 +247,15 @@ class Game {
                 //Refresh the Underground deals
                 DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
                 BerryDeal.generateDeals(now);
-                Notifier.notify({
-                    title: 'It\'s a new day!',
-                    message: `${this.underground.canAccess() ? 'Your Underground deals have been updated.<br/>' : ''}<i>You have a free quest refresh.</i>`,
-                    type: NotificationConstants.NotificationOption.info,
-                    timeout: 3e4,
-                });
+                if (this.underground.canAccess() || App.game.quests.isDailyQuestsUnlocked()) {
+                    Notifier.notify({
+                        title: 'It\'s a new day!',
+                        message: `${this.underground.canAccess() ? 'Your Underground deals have been updated.<br/>' : ''}` +
+                        `${App.game.quests.isDailyQuestsUnlocked() ? '<i>You have a free quest refresh.</i>' : ''}`,
+                        type: NotificationConstants.NotificationOption.info,
+                        timeout: 3e4,
+                    });
+                }
             }
 
             // Check if it's a new hour

@@ -1,6 +1,6 @@
 ///<reference path="GymPokemon.ts"/>
 ///<reference path="../pokemons/PokemonFactory.ts"/>
-///<reference path="../achievements/OneFromManyRequirement.ts"/>
+///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 ///<reference path="../../declarations/enums/Badges.d.ts"/>
 
 /**
@@ -41,6 +41,13 @@ class Gym {
 
     public static isUnlocked(gym: Gym): boolean {
         return gym.requirements.every(requirement => requirement.isCompleted());
+    }
+
+    public static isAchievementsComplete(gym: Gym) {
+        const gymIndex = GameConstants.getGymIndex(gym.town);
+        return AchievementHandler.achievementList.every(achievement => {
+            return !(achievement.property instanceof ClearGymRequirement && achievement.property.gymIndex === gymIndex && !achievement.isCompleted());
+        });
     }
 
     public static calculateCssClass(gym: Gym): KnockoutComputed<string> {
@@ -194,7 +201,7 @@ gymList['Viridian City'] = new Gym(
         new GymBadgeRequirement(BadgeEnums.Thunder),
     ],
     () => {
-        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Shard_case, true);
+        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Gem_case, true);
     }
 );
 
@@ -259,7 +266,6 @@ gymList['Elite Lance'] = new Gym(
     'I still can’t believe my dragons lost to you! You’re now the Pokémon League champion! …Or, you would have been, but you have one more challenge ahead. You have to face another trainer!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Agatha)]
 );
-//TODO make champion Gym
 
 //Johto Gyms
 gymList['Violet City'] = new Gym(
@@ -429,22 +435,6 @@ gymList['Elite Karen'] = new Gym(
     7500,
     'Strong Pokémon. Weak Pokémon. That is only the selfish perception of people. Truly skilled Trainers should try to win with the Pokémon they love best. I like your style. You understand what\'s important. Go on — — the Champion is waiting.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Bruno2)]
-);
-gymList['Champion Lance'] = new Gym(
-    'Lance2',
-    'Champion Lance',
-    [
-        new GymPokemon('Gyarados', 258300, 44),
-        new GymPokemon('Dragonite', 262000, 47),
-        new GymPokemon('Charizard', 264000, 46),
-        new GymPokemon('Aerodactyl', 260250, 46),
-        new GymPokemon('Dragonite', 270000, 47),
-        new GymPokemon('Dragonite', 270000, 50),
-    ],
-    BadgeEnums.Elite_JohtoChampion,
-    7500,
-    '…It\'s over. But it\'s an odd feeling. I\'m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Karen)]
 );
 
 // Hoenn Gyms
@@ -621,25 +611,6 @@ gymList['Elite Drake'] = new Gym(
     'You deserve every credit for coming this far as a Trainer of Pokémon. You do seem to know what is needed. Yes, what a Trainer needs is a virtuous heart. Pokémon touch the good hearts of Trainers and learn good from wrong. They touch the good hearts of Trainers and grow strong. Go! Go onwards! The Champion is waiting!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Glacia)]
 );
-gymList['Champion Wallace'] = new Gym(
-    'Wallace',
-    'Champion Wallace',
-    [
-        new GymPokemon('Wailord', 1202000, 57),
-        new GymPokemon('Tentacruel', 1164000, 55),
-        new GymPokemon('Ludicolo', 1184000, 56),
-        new GymPokemon('Whiscash', 1172000, 56),
-        new GymPokemon('Gyarados', 1163000, 56),
-        new GymPokemon('Milotic', 1182000, 58),
-    ],
-    BadgeEnums.Elite_HoennChampion,
-    16000,
-    'I, the Champion, fall in defeat… That was wonderful work. You were elegant, infuriatingly so. And yet it was utterly glorious! Kudos to you! You are a truly noble Pokémon Trainer!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Drake)],
-    () => {
-        App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest();
-    }
-);
 
 //Sinnoh Gyms
 gymList['Oreburgh City'] = new Gym(
@@ -809,22 +780,6 @@ gymList['Elite Lucian'] = new Gym(
     18000,
     'Congratulations. You have beaten the Elite Four. However, that doesn\'t mean you\'re done with the Pokémon league. There remains the Champion. I should warn you—the Champion is far stronger than the Elite Four. Now, go on. Step through the doorway to your final battle.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Flint)]
-);
-gymList['Champion Cynthia'] = new Gym(
-    'Cynthia',
-    'Champion Cynthia',
-    [
-        new GymPokemon('Spiritomb', 3458300, 58),
-        new GymPokemon('Roserade', 3462000, 58),
-        new GymPokemon('Togekiss', 3464000, 60),
-        new GymPokemon('Lucario', 3460250, 60),
-        new GymPokemon('Milotic', 3470000, 58),
-        new GymPokemon('Garchomp', 3570000, 62),
-    ],
-    BadgeEnums.Elite_SinnohChampion,
-    32000,
-    'That was excellent. Truly, an outstanding battle. You gave the support your Pokémon needed to maximize their power. And you guided them with certainty to secure victory. You have both passion and calculating coolness. Together, you and your Pokémon can overcome any challenge that may come your way. Those are the impressions I got from our battle. I\'m glad I got to take part in the crowning of Sinnoh\'s new Champion! Come with me. We\'ll take the lift.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Lucian)]
 );
 
 //Unova Gyms
@@ -1009,22 +964,6 @@ gymList['Elite Caitlin'] = new Gym(
     'You and your Pokémon are both excellent and elegant. To have been able to battle against such a splendid team... My Pokémon and I learned a lot! I offer you my thanks',
     [new GymBadgeRequirement(BadgeEnums.Elite_Grimsley)]
 );
-gymList['Champion Iris'] = new Gym(
-    'Iris',
-    'Champion Iris',
-    [
-        new GymPokemon('Hydreigon', 12458300, 58),
-        new GymPokemon('Salamence', 12462000, 58),
-        new GymPokemon('Aggron', 12464000, 58),
-        new GymPokemon('Archeops', 12460250, 60),
-        new GymPokemon('Lapras', 12470000, 58),
-        new GymPokemon('Haxorus', 14570000, 62),
-    ],
-    BadgeEnums.Elite_UnovaChampion,
-    64000,
-    'I\'m upset I couldn\'t win! But you know what? More than that, I\'m happy! I mean, come on. By having a serious battle, you and your Pokémon, and me and my Pokémon, we all got to know one another better than before! Yep, we sure did! OK, let\'s go!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Caitlin)]
-);
 
 //Kalos Gyms
 //TODO: Balancing of gym Pokemon HP & rewards.
@@ -1191,22 +1130,6 @@ gymList['Elite Drasna'] = new Gym(
     'Oh, dear me. That sure was a quick battle... I do hope you\'ll come back again sometime!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom)]
 );
-gymList['Champion Diantha'] = new Gym(
-    'Diantha',
-    'Champion Diantha',
-    [
-        new GymPokemon('Hawlucha', 60083000, 64),
-        new GymPokemon('Tyrantrum', 62057000, 65),
-        new GymPokemon('Aurorus', 62057000, 65),
-        new GymPokemon('Gourgeist', 62557000, 65),
-        new GymPokemon('Goodra', 62170000, 66),
-        new GymPokemon('Gardevoir', 63070000, 68),
-    ],
-    BadgeEnums.Elite_KalosChampion,
-    128000,
-    'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart...',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]
-);
 
 //Alola Gyms
 //TODO: Balancing of gym Pokemon HP & rewards.
@@ -1270,19 +1193,6 @@ gymList['Altar of the Sunne and Moone'] = new Gym(
     'Necrozma fled.',
     [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)]
 );
-gymList['Seafolk Village'] = new Gym(
-    'Mina',
-    'Seafolk Village',
-    [
-        new GymPokemon('Mawile', 74749379, 51),
-        new GymPokemon('Granbull', 74749379, 51),
-        new GymPokemon('Ribombee', 75838262, 51),
-    ],
-    BadgeEnums.FairiumZ,
-    128000,
-    'Woah! I\'m shocked at your strength!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_UltraNecrozma)]
-);
 gymList['Exeggutor Island'] = new Gym(
     'Hapu',
     'Exeggutor Island',
@@ -1295,7 +1205,7 @@ gymList['Exeggutor Island'] = new Gym(
     BadgeEnums.GroundiumZ,
     128000,
     'You have succeeded in your final grand trial!',
-    [new GymBadgeRequirement(BadgeEnums.FairiumZ)]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))]
 );
 //trials
 gymList['Ilima\'s Trial'] = new Gym(
@@ -1417,6 +1327,24 @@ gymList['Vast Poni Canyon Trial'] = new Gym(
     BadgeEnums.DragoniumZ,
     128000,
     'You have received the Dragonium-Z!',
+    undefined,
+    undefined,
+    {
+        quest: false,
+        achievement: false,
+    }
+);
+gymList['Mina\'s Trial'] = new Gym(
+    'Mina',
+    'Mina\'s Houseboat',
+    [
+        new GymPokemon('Pelipper', 2458300, 51),
+        new GymPokemon('Chansey', 2462000, 51),
+        new GymPokemon('Ribombee', 2462000, 51),
+    ],
+    BadgeEnums.FairiumZ,
+    128000,
+    'You have received the Fairium-Z!',
     undefined,
     undefined,
     {
