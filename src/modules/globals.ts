@@ -52,7 +52,8 @@ type TmpGameType = {
 };
 
 type TmpAppType = {
-    game: TmpGameType
+    game: TmpGameType,
+    start: ()=>void
 };
 
 type TmpPokemonListData = {
@@ -78,6 +79,10 @@ type TmpPokemonListData = {
     heldItem?: BagItem;
 };
 
+type TmpSaveType = {
+    key: string;
+};
+
 type TmpPokemonMapProxy
     = Record<PokemonNameType | number, TmpPokemonListData>
     & {
@@ -91,4 +96,5 @@ declare global {
     const App: TmpAppType;
     const pokemonMap: TmpPokemonMapProxy;
     const player: any;
+    const Save: TmpSaveType;
 }
