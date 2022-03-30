@@ -55,13 +55,13 @@ class PartyPokemon implements Saveable {
     }
 
     public calculatePokerus(): boolean {
-      // Egg can't hatch and Egg has pokerus
-      return App.game.breeding.eggList.some(e => {
-        if(!e().canHatch() && !e().isNone()){
-          const pokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(e().pokemon).id);
-          return pokemon.pokerus
-        }
-      });
+        // Egg can't hatch and Egg has pokerus
+        return App.game.breeding.eggList.some(e => {
+            if (!e().canHatch() && !e().isNone()) {
+                const pokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(e().pokemon).id);
+                return pokemon.pokerus;
+            }
+        });
     }
 
     calculateLevelFromExp() {

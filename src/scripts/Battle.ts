@@ -162,8 +162,8 @@ class Battle {
     public static calculateEffortPoints(enemyPokemon: BattlePokemon): number {
         let EPNum = GameConstants.BASE_EP_YIELD;
 
-        if(App.game.party.getPokemon(enemyPokemon.id).pokerus){
-          return 0;
+        if (App.game.party.getPokemon(enemyPokemon.id).pokerus) {
+            return 0;
         }
 
         if (enemyPokemon.shiny) {
