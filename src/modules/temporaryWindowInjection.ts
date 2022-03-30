@@ -83,6 +83,7 @@ import TokenRequirement from './requirements/TokenRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
 import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
 import WeatherRequirement from './requirements/WeatherRequirement';
+import { SortModules, SortSaves } from './Sortable';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -173,4 +174,6 @@ Object.assign(<any>window, {
     UndergroundItemsFoundRequirement,
     UndergroundLayersMinedRequirement,
     WeatherRequirement,
+    SortModules,
+    SortSaves,
 });

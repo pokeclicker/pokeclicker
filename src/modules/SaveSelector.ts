@@ -1,29 +1,27 @@
 import NotificationConstants from './notifications/NotificationConstants';
 import Notifier from './notifications/Notifier';
 import Profile from './profile/Profile';
-import Rand from './utilities/Rand';
+import { SortSaves } from './Sortable';
 
 export default class SaveSelector {
     static MAX_SAVES = 9;
 
     static loadSaves() {
-        const container = document.querySelector('#saveSelector .container');
+        const container = document.querySelector('#saveSelector .save-container');
 
         const saves = Object.keys(localStorage).filter((k: string) => k.startsWith('save'));
         saves.forEach((saveKey) => {
-            container.innerHTML += SaveSelector.getTrainerCard(saveKey.replace(/^save/, ''));
+            container.appendChild(SaveSelector.getTrainerCard(saveKey.replace(/^save/, '')));
         });
 
-        if (saves.length < this.MAX_SAVES) {
-            const key = Rand.string(6);
-            container.innerHTML += `<div class="col-12"></div>
-            <label class="btn btn-success col-md-4 col-xs-12 mx-1" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">New Save</label>
-            <label for="import-save" class="btn btn-warning col-md-4 col-xs-12 mx-1" onclick="Save.key = '${key}';">Import Save</label>`;
+        if (saves.length >= this.MAX_SAVES) {
+            const newImportButton: HTMLDivElement = document.querySelector('#saveSelector .new-import-buttons');
+            newImportButton.style.display = 'none';
         }
 
         $('[data-toggle="tooltip"]').tooltip();
 
-        $('.trainer-card.clickable').on('contextmenu', (e) => {
+        $(container).on('contextmenu', '.trainer-card.clickable', (e) => {
             const top = e.pageY;
             const left = e.pageX;
             const { key } = e.currentTarget.dataset;
@@ -47,9 +45,12 @@ export default class SaveSelector {
         $('#saveSelector, #context-menu a').on('click', () => {
             $('#saveSelectorContextMenu').removeClass('show').hide();
         });
+
+        // Sort our saves
+        SortSaves();
     }
 
-    static getTrainerCard(key: string): string {
+    static getTrainerCard(key: string): Element {
         try {
             const rawData = localStorage.getItem(`save${key}`);
             const saveData = JSON.parse(rawData);
@@ -70,7 +71,7 @@ export default class SaveSelector {
         } catch (e) {
             // eslint-disable-next-line no-console
             console.log('Failed to load save:', key, e);
-            return '';
+            return document.createElement('div');
         }
     }
 
