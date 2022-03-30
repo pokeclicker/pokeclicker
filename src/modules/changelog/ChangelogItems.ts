@@ -10,6 +10,19 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.16
+    new ChangelogUpdate('v0.8.16', new Date(2022, 2, 30)),
+    new Changelog(changelogType.NEW, 'Added map colors for Achievement not yet complete'),
+    new Changelog(changelogType.NEW, 'Show Dungeon and Gym clears'),
+    new Changelog(changelogType.NEW, 'Can re-order saves on the save selection screen'),
+    new Changelog(changelogType.CHANGE, 'Notification and sounds settings now grouped'),
+    new Changelog(changelogType.CHANGE, 'Increased size of Gem icons'),
+    new Changelog(changelogType.CHANGE, 'Added option to damage calculator that ignores Pokémon level'),
+    new Changelog(changelogType.CHANGE, 'Updated the Quest Point cost for some Pokémon'),
+    new Changelog(changelogType.CHANGE, 'Different Champion defeat message per region'),
+    new Changelog(changelogType.CHANGE, 'Hide Evolution Stones from future regions in the items menu'),
+    new Changelog(changelogType.FIXED, 'Progress bar showing as incomplete when an Oak Item is ready to be upgraded'),
+
     // v0.8.15
     new ChangelogUpdate('v0.8.15', new Date(2022, 2, 14)),
     new Changelog(changelogType.NEW, 'Team Plasma questline'),
