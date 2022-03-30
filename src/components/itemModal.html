@@ -24,7 +24,8 @@
                             <div class="row col-10" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
                                 <div class="col-2" style="cursor: pointer"
                                         data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
-                                            click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}">
+                                            click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')},
+                                            visible: ItemList[$data].unlockedRegion <= player.highestRegion()">
                                     <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;">
                                     <div data-bind="text: player._itemList[$data]()"></div>
                                 </div>
