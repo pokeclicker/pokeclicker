@@ -10,11 +10,13 @@ class PartyPokemon implements Saveable {
         exp: 0,
         breeding: false,
         shiny: false,
+        pokerus: false,
         category: 0,
     };
 
     _breeding: KnockoutObservable<boolean>;
     _shiny: KnockoutObservable<boolean>;
+    _pokerus: KnockoutObservable<boolean>;
     _level: KnockoutObservable<number>;
     _attack: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
@@ -33,12 +35,14 @@ class PartyPokemon implements Saveable {
         public exp: number = 0,
         breeding = false,
         shiny = false,
+        pokerus = false,
         category = 0
     ) {
         this.proteinsUsed = ko.observable(proteinsUsed);
         this.effortPoints = ko.observable(effortPoints);
         this._breeding = ko.observable(breeding);
         this._shiny = ko.observable(shiny);
+        this._pokerus = ko.observable(pokerus);
         this._level = ko.observable(1);
         this._attack = ko.observable(this.calculateAttack());
         this._category = ko.observable(category);
@@ -48,6 +52,16 @@ class PartyPokemon implements Saveable {
         const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
         const levelMultiplier = ignoreLevel ? 1 : this.level / 100;
         return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier));
+    }
+
+    public calculatePokerus(): boolean {
+      // Egg can't hatch and Egg has pokerus
+      return App.game.breeding.eggList.some(e => {
+        if(!e().canHatch() && !e().isNone()){
+          const pokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(e().pokemon).id);
+          return pokemon.pokerus
+        }
+      });
     }
 
     calculateLevelFromExp() {
@@ -152,6 +166,7 @@ class PartyPokemon implements Saveable {
         this.exp = json['exp'] ?? this.defaults.exp;
         this.breeding = json['breeding'] ?? this.defaults.breeding;
         this.shiny = json['shiny'] ?? this.defaults.shiny;
+        this.pokerus = json['pokerus'] ?? this.defaults.pokerus;
         this.category = json['category'] ?? this.defaults.category;
         this.level = this.calculateLevelFromExp();
         this.attack = this.calculateAttack();
@@ -184,6 +199,7 @@ class PartyPokemon implements Saveable {
             exp: this.exp,
             breeding: this.breeding,
             shiny: this.shiny,
+            pokerus: this.pokerus,
             levelEvolutionTriggered: levelEvolutionTriggered,
             category: this.category,
         };
@@ -212,6 +228,14 @@ class PartyPokemon implements Saveable {
 
     set breeding(bool: boolean) {
         this._breeding(bool);
+    }
+
+    get pokerus(): boolean {
+        return this._pokerus();
+    }
+
+    set pokerus(bool: boolean) {
+        this._pokerus(bool);
     }
 
     get shiny(): boolean {
