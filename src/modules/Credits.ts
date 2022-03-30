@@ -185,6 +185,13 @@ export const SpriteCredits: Credit[] = [
         ],
     },
     {
+        name: 'Sandi315',
+        link: 'https://www.reddit.com/user/Sandi315/',
+        resources: [
+            'Pokémon background',
+        ],
+    },
+    {
         name: 'Smogon Sprite Project',
         link: 'https://www.smogon.com/forums/forums/smeargles-laptop.325/',
         resources: [
