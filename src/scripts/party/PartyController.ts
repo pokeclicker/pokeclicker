@@ -34,6 +34,11 @@ class PartyController {
         return statuses;
     }
 
+    static hasMultipleStoneEvolutionsAvailable(pokemonName: string, evoType: GameConstants.StoneType) {
+        const pokemon = App.game.party.caughtPokemon.find(p => p.name == pokemonName);
+        return pokemon != undefined && this.getStoneEvolutionsCaughtStatus(pokemon.id, evoType).length > 1;
+    }
+
     public static getMaxLevelPokemonList(): Array<PartyPokemon> {
         return App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
             return !partyPokemon.breeding && partyPokemon.level >= 100;
