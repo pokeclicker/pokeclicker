@@ -173,7 +173,7 @@ export const SpriteCredits: Credit[] = [
     },
     {
         name: 'RedSparr0w',
-        link: 'https://api.github.com/users/RedSparr0w',
+        link: 'https://github.com/RedSparr0w',
         image: 'https://avatars.githubusercontent.com/u/7288322?v=4',
         resources: [
             'Let\'s Go Eevee',
@@ -182,6 +182,13 @@ export const SpriteCredits: Credit[] = [
             'Spooky Togepi',
             'Spooky Bulbasaur',
             'Pikachu (Gengar)',
+        ],
+    },
+    {
+        name: 'Sandi315',
+        link: 'https://www.reddit.com/user/Sandi315/',
+        resources: [
+            'Pokémon background',
         ],
     },
     {
@@ -224,7 +231,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
 export const CodeCredits: Credit[] = [
     {
         resources: [
-            1218,
+            1232,
         ],
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
@@ -256,7 +263,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            95,
+            98,
         ],
         name: 'Ultima1990',
         link: 'https://github.com/Ultima1990',
@@ -288,7 +295,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            33,
+            34,
         ],
         name: 'jk13pclick',
         link: 'https://github.com/jk13pclick',
@@ -368,6 +375,22 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
+            12,
+        ],
+        name: 'Jaaslet',
+        link: 'https://github.com/Jaaslet',
+        image: 'https://avatars.githubusercontent.com/u/2961347?v=4',
+    },
+    {
+        resources: [
+            11,
+        ],
+        name: 'NiCeDiCe90',
+        link: 'https://github.com/NiCeDiCe90',
+        image: 'https://avatars.githubusercontent.com/u/82889773?v=4',
+    },
+    {
+        resources: [
             10,
         ],
         name: 'nls0',
@@ -381,14 +404,6 @@ export const CodeCredits: Credit[] = [
         name: 'KrushGames',
         link: 'https://github.com/KrushGames',
         image: 'https://avatars.githubusercontent.com/u/71728117?v=4',
-    },
-    {
-        resources: [
-            9,
-        ],
-        name: 'NiCeDiCe90',
-        link: 'https://github.com/NiCeDiCe90',
-        image: 'https://avatars.githubusercontent.com/u/82889773?v=4',
     },
     {
         resources: [
@@ -442,14 +457,6 @@ export const CodeCredits: Credit[] = [
         resources: [
             4,
         ],
-        name: 'Jaaslet',
-        link: 'https://github.com/Jaaslet',
-        image: 'https://avatars.githubusercontent.com/u/2961347?v=4',
-    },
-    {
-        resources: [
-            4,
-        ],
         name: 'jaahay',
         link: 'https://github.com/jaahay',
         image: 'https://avatars.githubusercontent.com/u/10636658?v=4',
@@ -464,7 +471,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            3,
+            4,
         ],
         name: 'Symi001',
         link: 'https://github.com/Symi001',
@@ -581,6 +588,14 @@ export const CodeCredits: Credit[] = [
         name: 'fadedrob',
         link: 'https://github.com/fadedrob',
         image: 'https://avatars.githubusercontent.com/u/24292240?v=4',
+    },
+    {
+        resources: [
+            1,
+        ],
+        name: 'RobinLaevaert',
+        link: 'https://github.com/RobinLaevaert',
+        image: 'https://avatars.githubusercontent.com/u/33598142?v=4',
     },
     {
         resources: [

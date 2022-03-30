@@ -94,9 +94,9 @@ Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'))
 Settings.add(new CssVariableSetting('currentPlace', 'Current Location', [], '#55ff00'));
 Settings.add(new CssVariableSetting('incomplete', 'Incomplete Area', [], '#ff9100'));
 Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokemon', [], '#3498db'));
-Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Aachievement', [], '#ff3874'));
+Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Achievement', [], '#c939fe'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokemon', [], '#ffee00'));
-Settings.add(new CssVariableSetting('missingAchievement', 'Missing Achievement', [], '#c939fe'));
+Settings.add(new CssVariableSetting('missingAchievement', 'Missing Achievement', [], '#57e3ff'));
 Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#ffffff'));
 
 // Other settings
@@ -210,6 +210,9 @@ Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
         ...Settings.enumToSettingOptionArray(Region),
     ],
     '-2'));
+
+// Save menu sorting
+Settings.add(new Setting('sort.saveSelector', 'Saves sort order', [], ''));
 
 /*
  * SUBSCRIBERS
