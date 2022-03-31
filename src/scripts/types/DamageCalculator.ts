@@ -1,13 +1,13 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 
 class DamageCalculator {
-    static type1 = ko.observable(PokemonType.None);
-    static type2 = ko.observable(PokemonType.None);
+    static type1 = ko.observable(PokemonType.None).extend({ numeric: 0 });
+    static type2 = ko.observable(PokemonType.None).extend({ numeric: 0 });
     static region = ko.observable(GameConstants.Region.none);
     static includeBreeding = ko.observable(false);
     static baseAttackOnly = ko.observable(false);
     static ignoreLevel = ko.observable(false);
-    static detailType = ko.observable(PokemonType.None);
+    static detailType = ko.observable(PokemonType.None).extend({ numeric: 0 });
 
     static observableTypeDamageArray = ko.pureComputed(DamageCalculator.getDamageByTypes, DamageCalculator);
     static observableTypeDetails = ko.pureComputed(DamageCalculator.getTypeDetail);
