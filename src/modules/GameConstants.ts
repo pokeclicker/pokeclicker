@@ -38,7 +38,7 @@ export enum Region {
 
 export const MAX_AVAILABLE_REGION = Region.kalos;
 
-export const TotalPokemonsPerRegion = [
+export const MaxIDPerRegion = [
     151, // 151 - Kanto
     251, // 100 - Johto
     386, // 135 - Hoenn
@@ -114,27 +114,26 @@ export enum AchievementOption {
 export enum AchievementType {
     'None' = -1,
     'Money' = 0,
-    'Token' = 1,
-    'Attack' = 2,
-    'Diamond' = 3,
-    'Underground Items Found' = 4,
-    'Underground Layers Mined' = 5,
-    'Max Level Oak Item' = 6,
-    'Captured' = 7,
-    'Defeated' = 8,
-    'Caught Pokemon' = 9,
-    'Caught Unique Pokemons By Region' = 10,
-    'Shiny Pokemon' = 11,
-    'Hatch' = 12,
-    'Pokeball' = 13,
-    'Click' = 14,
-    'Route Kill' = 15,
-    'Clear Gym' = 16,
-    'Clear Dungeon' = 17,
-    'Farming' = 18,
-    'Quest' = 19,
-    'Battle Frontier' = 20,
-    'Protein' = 21,
+    'Token',
+    'Attack',
+    'Diamond',
+    'Underground Items Found',
+    'Underground Layers Mined',
+    'Max Level Oak Item',
+    'Captured',
+    'Defeated',
+    'Caught Pokemon',
+    'Shiny Pokemon',
+    'Hatch',
+    'Pokeball',
+    'Click',
+    'Route Kill',
+    'Clear Gym',
+    'Clear Dungeon',
+    'Farming',
+    'Quest',
+    'Battle Frontier',
+    'Protein',
 }
 
 export enum DungeonTile {
@@ -152,6 +151,11 @@ export const DUNGEON_BOSS_HELD_ITEM_MODIFIER = DUNGEON_HELD_ITEM_MODIFIER * 1.5;
 export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 export const DNA_ITEM_CHANCE = 60;
+
+// Gems
+export const GEM_UPGRADE_COST = 500;
+export const GEM_UPGRADE_STEP = 0.1;
+export const MAX_GEM_UPGRADES = 10;
 
 // Gems from battle
 export const DUNGEON_GEMS = 3;
@@ -836,7 +840,6 @@ export const AlolaGyms = [
     'Malie City',
     'Vast Poni Canyon Trial',
     'Altar of the Sunne and Moone',
-    'Seafolk Village',
     'Exeggutor Island',
     'Elite Molayne',
     'Elite Olivia',
@@ -1048,6 +1051,7 @@ export const AlolaDungeons = [
     'Aether Foundation',
     'Exeggutor Island Hill',
     'Vast Poni Canyon',
+    'Mina\'s Houseboat',
     'Mount Lanakila',
     'Lake of the Sunne and Moone',
     'Ruins of Conflict',

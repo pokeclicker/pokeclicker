@@ -11,6 +11,9 @@ import type BagItem from './interfaces/BagItem';
 import type LevelType from './party/LevelType';
 import type Wallet from './wallet/Wallet';
 import { PokemonNameType } from './pokemons/PokemonNameType';
+import PokemonCategories from './party/Category';
+import OakItems from './oakItems/OakItems';
+import OakItemLoadouts from './oakItems/OakItemLoadouts';
 
 // These types are only temporary while we are converting things to modules
 // As things are converted, we should import their types here for use,
@@ -27,9 +30,9 @@ type TmpGameType = {
     wallet: Wallet,
     keyItems: any,
     badgeCase: BadgeCase,
-    oakItems: any,
-    oakItemLoadouts: any,
-    categories: any,
+    oakItems: OakItems,
+    oakItemLoadouts: OakItemLoadouts,
+    categories: PokemonCategories,
     party: any,
     gems: any,
     underground: any,
@@ -49,7 +52,8 @@ type TmpGameType = {
 };
 
 type TmpAppType = {
-    game: TmpGameType
+    game: TmpGameType,
+    start: ()=>void
 };
 
 type TmpPokemonListData = {
@@ -75,6 +79,10 @@ type TmpPokemonListData = {
     heldItem?: BagItem;
 };
 
+type TmpSaveType = {
+    key: string;
+};
+
 type TmpPokemonMapProxy
     = Record<PokemonNameType | number, TmpPokemonListData>
     & {
@@ -88,4 +96,5 @@ declare global {
     const App: TmpAppType;
     const pokemonMap: TmpPokemonMapProxy;
     const player: any;
+    const Save: TmpSaveType;
 }

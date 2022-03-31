@@ -112,7 +112,7 @@ class Quests implements Saveable {
                 message: 'Your quest level has increased!<br/><i>You have a free quest refresh.</i>',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 1e4,
-                sound: NotificationConstants.NotificationSound.quest_level_increased,
+                sound: NotificationConstants.NotificationSound.Quests.quest_level_increased,
             });
             this.freeRefresh(true);
             // Track when users gains a quest level and how long it took in seconds

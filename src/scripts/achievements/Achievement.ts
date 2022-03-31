@@ -16,7 +16,7 @@ class Achievement {
                 message: this.description,
                 type: NotificationConstants.NotificationOption.warning,
                 timeout: 1e4,
-                sound: NotificationConstants.NotificationSound.achievement,
+                sound: NotificationConstants.NotificationSound.General.achievement,
             });
             App.game.logbook.newLog(
                 LogBookTypes.ACHIEVE,

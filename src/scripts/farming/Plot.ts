@@ -321,7 +321,7 @@ class Plot implements Saveable {
             if (Rand.chance(replantChance)) {
                 this.age = 0;
                 this.notifications.push(FarmNotificationType.Replanted);
-                App.game.oakItems.use(OakItems.OakItem.Sprinklotad);
+                App.game.oakItems.use(OakItemType.Sprinklotad);
                 GameHelper.incrementObservable(App.game.statistics.totalBerriesReplanted, 1);
                 return;
             }

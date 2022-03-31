@@ -103,7 +103,7 @@ abstract class Mutation implements Saveable {
                 return;
             }
             this.handleMutation(idx);
-            App.game.oakItems.use(OakItems.OakItem.Squirtbottle);
+            App.game.oakItems.use(OakItemType.Squirtbottle);
             mutated = true;
         });
 

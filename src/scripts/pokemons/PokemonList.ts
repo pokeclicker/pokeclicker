@@ -429,7 +429,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 20.02,
-        'name': 'Totem Alolan Raticate',
+        'name': 'Totem Raticate',
         'nativeRegion': GameConstants.Region.alola,
         'catchRate': 127,
         'type': [PokemonType.Dark, PokemonType.Normal],
@@ -2502,7 +2502,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 105.02,
-        'name': 'Totem Alolan Marowak',
+        'name': 'Totem Marowak',
         'nativeRegion': GameConstants.Region.alola,
         'catchRate': 75,
         'type': [PokemonType.Fire, PokemonType.Ghost],
@@ -21341,7 +21341,7 @@ pokemonList.forEach(p => {
             poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * 1.5));
         });
     }
-    (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(p.id));
+    (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.MaxIDPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(p.id));
     pokemonNameIndex[p.name.toLowerCase()] = p;
 });
 
