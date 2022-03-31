@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.8.16"></script>
+    <script src="scripts/modules.min.js?v=0.8.17"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.8.16"></script>
+    <script src="scripts/script.min.js?v=0.8.17"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.8.16" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.8.17" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -437,7 +437,7 @@
                                 <div class="col-2" style="cursor: pointer"
                                         data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
                                             click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')},
-                                            visible: ItemList[$data].unlockedRegion <= player.highestRegion()">
+                                            visible: ItemList[$data].unlockedRegion <= player.highestRegion() || player.amountOfItem($data) > 0">
                                     <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;">
                                     <div data-bind="text: player._itemList[$data]()"></div>
                                 </div>

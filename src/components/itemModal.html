@@ -25,7 +25,7 @@
                                 <div class="col-2" style="cursor: pointer"
                                         data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
                                             click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')},
-                                            visible: ItemList[$data].unlockedRegion <= player.highestRegion()">
+                                            visible: ItemList[$data].unlockedRegion <= player.highestRegion() || player.amountOfItem($data) > 0">
                                     <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;">
                                     <div data-bind="text: player._itemList[$data]()"></div>
                                 </div>
