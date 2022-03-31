@@ -53,7 +53,7 @@ class FluteItem extends Item {
 
 ItemList['Red_Flute']         = new FluteItem(GameConstants.FluteItemType.Red_Flute, 'Bonus to Click Attack', Infinity, undefined, ['Fighting', 'Fire', 'Poison'], undefined, 'clickAttack', 1.02);
 ItemList['White_Flute']       = new FluteItem(GameConstants.FluteItemType.White_Flute, 'Bonus to Exp Yield', Infinity, undefined, ['Normal', 'Bug', 'Rock'], undefined, 'exp', 1.02);
-ItemList['Black_Flute']       = new FluteItem(GameConstants.FluteItemType.Black_Flute, '+Bonus to Item Drop Rate', Infinity, undefined, ['Normal', 'Flying', 'Poison'], undefined, undefined, 1.02);
+ItemList['Black_Flute']       = new FluteItem(GameConstants.FluteItemType.Black_Flute, 'Bonus to Item Drop Rate', Infinity, undefined, ['Normal', 'Flying', 'Poison'], undefined, undefined, 1.02);
 ItemList['Yellow_Flute']      = new FluteItem(GameConstants.FluteItemType.Yellow_Flute, 'Bonus to Pokedollar Yield', Infinity, undefined, ['Dark', 'Electric', 'Steel'], undefined, 'money', 1.02);
 ItemList['Blue_Flute']        = new FluteItem(GameConstants.FluteItemType.Blue_Flute, 'Bonus to Dungeon Token Yield', Infinity, undefined, ['Dark', 'Ghost', 'Ice'], undefined, 'dungeonToken', 1.02);
 ItemList['Poke_Flute']        = new FluteItem(GameConstants.FluteItemType.Poke_Flute, 'Bonus to Pokémon Attack', Infinity, undefined, ['Fighting', 'Ice', 'Fairy'], undefined, 'pokemonAttack', 1.02);
