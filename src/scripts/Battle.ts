@@ -162,7 +162,7 @@ class Battle {
     public static calculateEffortPoints(enemyPokemon: BattlePokemon): number {
         let EPNum = GameConstants.BASE_EP_YIELD;
 
-        if (App.game.party.getPokemon(enemyPokemon.id).pokerus) {
+        if (!App.game.party.getPokemon(enemyPokemon.id).pokerus) {
             return 0;
         }
 
@@ -170,11 +170,10 @@ class Battle {
             EPNum *= GameConstants.SHINY_EP_YIELD;
         }
 
-        if (player.route()) {
-            return EPNum;
-        } else if (player.town()?.dungeon) {
+        if (player.town().dungeon) {
             return EPNum *= GameConstants.DUNGEON_EP_YIELD;
         }
+        return EPNum;
     }
 
     static gainItem() {
