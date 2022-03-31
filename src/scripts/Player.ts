@@ -104,6 +104,10 @@ class Player {
         return this._itemList;
     }
 
+    public amountOfItem(itemName: string) {
+        return this._itemList[itemName]();
+    }
+
     private _itemMultipliers: { [name: string]: number };
 
     get itemMultipliers(): { [p: string]: number } {
