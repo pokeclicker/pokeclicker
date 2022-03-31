@@ -19101,7 +19101,15 @@ aria-labelledby="badgeCaseModalLabel">
                                     <!-- ko if: $index() === 0 -->
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">→</td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">
-                                          <img class='mineInventoryItem' data-bind='attr: {src: $parent.item.itemType.image}'>
+                                          <img class='mineInventoryItem' data-bind="attr: {
+                                            src: $parent.item.itemType.image
+                                          },
+                                          tooltip: {
+                                            title: ItemList[$parent.item.itemType.name].description,
+                                            trigger: 'hover',
+                                            placement:'bottom',
+                                            html: true
+                                          }">
                                     </td>
                                     <td class='vertical-middle' data-bind='attr: { rowspan: $parent.gems.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">
@@ -19111,10 +19119,10 @@ aria-labelledby="badgeCaseModalLabel">
                                                 Trade
                                             </button>
                                             <!-- TODO: Make the dropdown button disappear for Flute trades -->
-                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: GemDeal.isFluteDeal(player.region, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'>
+                                            <button type="button" data-bind="visible: !GemDeal.isFluteDeal(player.region, $parentContext.$index()), text: tradeAmount() + '&nbsp;', css: { disabled: GemDeal.isFluteDeal(player.region, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'>
                                             </button>
                                             <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
-                                                <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data"></button>
+                                                <button class="dropdown-item" type="button" data-bind="visible: !GemDeal.isFluteDeal(player.region, $parentContext.$index()), click: function(){tradeAmount($data)}, text: $data"></button>
                                             </div>
                                         </div>
                                     </td>
