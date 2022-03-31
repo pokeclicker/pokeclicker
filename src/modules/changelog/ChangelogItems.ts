@@ -10,6 +10,13 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.8.17
+    new ChangelogUpdate('v0.8.17', new Date(2022, 2, 31)),
+    new Changelog(changelogType.NEW, 'Added Shiny achievements per region'),
+    new Changelog(changelogType.CHANGE, 'Show Evolution Stones from future regions in the items menu if you have at least 1'),
+    new Changelog(changelogType.FIXED, 'Incorrect regions for some evolution items'),
+    new Changelog(changelogType.FIXED, 'Damage calculator showing NaN'),
+
     // v0.8.16
     new ChangelogUpdate('v0.8.16', new Date(2022, 2, 30)),
     new Changelog(changelogType.NEW, 'Added map colors for Achievement not yet complete'),
