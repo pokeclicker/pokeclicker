@@ -231,7 +231,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
 export const CodeCredits: Credit[] = [
     {
         resources: [
-            1232,
+            1236,
         ],
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
@@ -247,7 +247,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            391,
+            392,
         ],
         name: 'Aegyo',
         link: 'https://github.com/Aegyo',
@@ -295,7 +295,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            34,
+            35,
         ],
         name: 'jk13pclick',
         link: 'https://github.com/jk13pclick',
@@ -375,7 +375,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            12,
+            13,
         ],
         name: 'Jaaslet',
         link: 'https://github.com/Jaaslet',

@@ -85,7 +85,6 @@ namespace GameConstants {
         'Captured',
         'Defeated',
         'Caught Pokemon',
-        'Caught Unique Pokemons By Region',
         'Shiny Pokemon',
         'Hatch',
         'Pokeball',
