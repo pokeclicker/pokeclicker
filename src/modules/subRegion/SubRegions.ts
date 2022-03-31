@@ -43,8 +43,8 @@ SubRegions.addSubRegion(Region.hoenn, new SubRegion('Hoenn'));
 SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Sinnoh'));
 SubRegions.addSubRegion(Region.unova, new SubRegion('Unova'));
 SubRegions.addSubRegion(Region.kalos, new SubRegion('Kalos'));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Melemele Island', undefined, 'Hau\'oli City'));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Melemele & Akala islands', new GymBadgeRequirement(BadgeEnums.FightiniumZ), 'Heahea City'));
+SubRegions.addSubRegion(Region.alola, new SubRegion('Melemele island', undefined, 'Hau\'oli City'));
+SubRegions.addSubRegion(Region.alola, new SubRegion('Akala island', new GymBadgeRequirement(BadgeEnums.FightiniumZ), 'Heahea City'));
 SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula & Poni islands', new GymBadgeRequirement(BadgeEnums.Elite_Nihilego), 'Malie City'));
 // For when Alola is split into 4 regions
 // SubRegions.addSubRegion(Region.alola, new SubRegion('Akala island', new GymBadgeRequirement(BadgeEnums.MelemeleKahuna), 'Heahea City'));
