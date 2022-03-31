@@ -67,6 +67,7 @@ class Game {
         AchievementHandler.initialize(this.multiplier, this.challenges);
         FarmController.initialize();
         EffectEngineRunner.initialize(this.multiplier);
+        ItemHandler.initilizeEvoStones();
         this.profile.initialize();
         this.breeding.initialize();
         this.pokeballs.initialize();

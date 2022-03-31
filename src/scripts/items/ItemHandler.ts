@@ -83,4 +83,23 @@ class ItemHandler {
             type: NotificationConstants.NotificationOption.success,
         });
     }
+
+    public static initilizeEvoStones() {
+        Object.values(ItemList).filter(item => item instanceof EvolutionStone).forEach(evoStone => {
+            if ((evoStone as EvolutionStone).unlockedRegion > GameConstants.Region.none) {
+                return false;
+            }
+
+            (evoStone as EvolutionStone).unlockedRegion = Math.min(...pokemonList.filter(p =>
+                (p as PokemonListData).nativeRegion > GameConstants.Region.none &&
+                (p as PokemonListData).evolutions != undefined &&
+                (p as PokemonListData).evolutions.some(e => e instanceof StoneEvolution && e.stone == evoStone.type)
+            ).map(p => {
+                return Math.min(...(p as PokemonListData).evolutions.filter(e => e instanceof StoneEvolution && e.stone == evoStone.type)
+                    .map(e => Math.max((p as PokemonListData).nativeRegion, PokemonHelper.calcNativeRegion(e.getEvolvedPokemon())))
+                    .filter(r => r > GameConstants.Region.none));
+            })
+            );
+        });
+    }
 }
