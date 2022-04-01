@@ -39,7 +39,7 @@
                                             src: $parent.item.itemType.image
                                           },
                                           tooltip: {
-                                            title: ItemList[$parent.item.itemType.name].getDescription(),
+                                            title: GemDeal.isFluteDeal(player.region, $parentContext.$index()) ? ItemList[$parent.item.itemType.name].getDescription() : ItemList[$parent.item.itemType.name].description,
                                             trigger: 'hover',
                                             placement:'bottom',
                                             html: true
@@ -49,7 +49,7 @@
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">
                                         <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
                                             <button class='btn btn-success btn-block' data-bind='click: function(){GemDeal.use(player.region, $parentContext.$index(), tradeAmount())}, css: { disabled: !GemDeal.canUse(player.region, $parentContext.$index()) }'>
-                                                <knockout data-bind="text: GemDeal.canUse(player.region, $parentContext.$index()) ? 'Trade' : 'Sold out'"></knockout>
+                                                <knockout data-bind="text: !GemDeal.isFluteDeal(player.region, $parentContext.$index()) || GemDeal.canUse(player.region, $parentContext.$index()) ? 'Trade' : 'Sold out'"></knockout>
                                             </button>
                                             <button type="button" data-bind="visible: !GemDeal.isFluteDeal(player.region, $parentContext.$index()), text: tradeAmount() + '&nbsp;', css: { disabled: GemDeal.isFluteDeal(player.region, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'>
                                             </button>
