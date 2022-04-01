@@ -122,30 +122,30 @@ class GameController {
             GameController.keyHeld[e.code] = true;
             switch (e.code) {
                 case 'KeyF':
-					// Open the Farm with 'F'
-					if (farms.canAccess() && !$farmsModal.data('disable-toggle')) {
-						$('.modal').modal('hide');
-						$farmsModal.data('disable-toggle', true);
-						$farmsModal.modal('toggle');
-					}
-					break;
-				case 'KeyH':
-					// Open the Hatchery with 'F'
-					if (hatchery.canAccess() && !$hatcheryModal.data('disable-toggle')) {
-						$('.modal').modal('hide');
-						$hatcheryModal.data('disable-toggle', true);
-						$hatcheryModal.modal('toggle');
-					}
-					break;
-				  case 'KeyO':
-					// Open oak items with 'O'
-					if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
-						$('.modal').modal('hide');
-						$oakItemsModal.data('disable-toggle', true);
-						$oakItemsModal.modal('toggle');
-					}
-					break;
-				case 'KeyU':
+                    // Open the Farm with 'F'
+                    if (farms.canAccess() && !$farmsModal.data('disable-toggle')) {
+                    $('.modal').modal('hide');
+                        $farmsModal.data('disable-toggle', true);
+                        $farmsModal.modal('toggle');
+                    }
+                    break;
+                case 'KeyH':
+                    // Open the Hatchery with 'F'
+                    if (hatchery.canAccess() && !$hatcheryModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $hatcheryModal.data('disable-toggle', true);
+                        $hatcheryModal.modal('toggle');
+                    }
+                    break;
+                case 'KeyO':
+                    // Open oak items with 'O'
+                    if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $oakItemsModal.data('disable-toggle', true);
+                        $oakItemsModal.modal('toggle');
+                    }
+                    break;
+                case 'KeyU':
                     // Open the Underground with 'U'
                     if (underground.canAccess() && !$undergroundModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
