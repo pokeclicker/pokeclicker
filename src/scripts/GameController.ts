@@ -130,7 +130,7 @@ class GameController {
                   }
                   break;
               case 'KeyH':
-                  // Open the Underground with 'U'
+                  // Open the Hatchery with 'F'
                   if (hatchery.canAccess() && !$hatcheryModal.data('disable-toggle')) {
                       $('.modal').modal('hide');
                       $hatcheryModal.data('disable-toggle', true);
@@ -248,30 +248,6 @@ class GameController {
                 if (e.code === 'Space') {
                     if (player.town().gym) {
                         GymRunner.startGym(player.town().gym);
-                    } else if (player.town().gymList) {
-                        let numKey = +e.key;
-                        if (!isNaN(numKey)) {
-                            numKey -= 1;
-                            switch (numKey) {
-                                case 1:
-                                    GymRunner.startGym(player.town().gymList[0]);
-                                    break;
-                                case 2:
-                                    GymRunner.startGym(player.town().gymList[1]);
-                                    break;
-                                case 3:
-                                    GymRunner.startGym(player.town().gymList[2]);
-                                    break;
-                                case 4:
-                                    GymRunner.startGym(player.town().gymList[3]);
-                                    break;
-                                case 5:
-                                    GymRunner.startGym(player.town().gymList[4]);
-                                    break;
-                                default:
-                                    return;
-                            }
-                        }
                     } else if (player.town().dungeon) {
                         if (player.town() instanceof DungeonTown) {
                             DungeonRunner.initializeDungeon(player.town().dungeon);
