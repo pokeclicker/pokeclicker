@@ -130,8 +130,8 @@ class GameController {
                     }
                     break;
                 case 'KeyH':
-                     // Open the Hatchery with 'H'
-                     if ($undergroundModal.data('bs.modal')?._isShown) {
+                    // Open the Hatchery with 'H'
+                    if ($undergroundModal.data('bs.modal')?._isShown) {
                         Mine.toolSelected(Mine.Tool.Hammer);
                     } else {
                         if (hatchery.canAccess() && !$hatcheryModal.data('disable-toggle')) {
