@@ -203,7 +203,7 @@ export const SpriteCredits: Credit[] = [
     },
     {
         name: 'Someone Alive',
-        link: 'https://discordapp.com/users/824384977633411082'
+        link: 'https://discordapp.com/users/824384977633411082',
         resources: [
             'Team Flare Aliana',
             'Team Flare Admin (male)',
