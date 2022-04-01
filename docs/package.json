@@ -14,19 +14,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/switchlove/pokeclicker.git"
+    "url": "git+https://github.com/pokeclicker/pokeclicker.git"
   },
   "babel": {
     "presets": [
       "env"
     ]
   },
-  "author": "switchlove",
+  "author": "RedSparr0w",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/switchlove/pokeclicker/issues"
+    "url": "https://github.com/pokeclicker/pokeclicker/issues"
   },
-  "homepage": "https://github.com/switchlove/pokeclicker#readme",
+  "homepage": "https://github.com/pokeclicker/pokeclicker#readme",
   "devDependencies": {
     "@types/gtag.js": "0.0.4",
     "@types/jquery": "^3.5.2",
