@@ -130,11 +130,15 @@ class GameController {
                     }
                     break;
                 case 'KeyH':
-                    // Open the Hatchery with 'F'
-                    if (hatchery.canAccess() && !$hatcheryModal.data('disable-toggle')) {
-                        $('.modal').modal('hide');
-                        $hatcheryModal.data('disable-toggle', true);
-                        $hatcheryModal.modal('toggle');
+                     // Open the Hatchery with 'H'
+                     if ($undergroundModal.data('bs.modal')?._isShown) {
+                        Mine.toolSelected(Mine.Tool.Hammer);
+                    } else {
+                        if (hatchery.canAccess() && !$hatcheryModal.data('disable-toggle')) {
+                            $('.modal').modal('hide');
+                            $hatcheryModal.data('disable-toggle', true);
+                            $hatcheryModal.modal('toggle');
+                        }
                     }
                     break;
                 case 'KeyO':
@@ -196,9 +200,7 @@ class GameController {
                             FarmController.selectedShovel() ? FarmController.selectedShovel(false) : FarmController.selectedShovel(true);
                         }
                     } else if ($undergroundModal.data('bs.modal')?._isShown) {
-                        if (e.code == 'KeyH') {
-                            Mine.toolSelected(Mine.Tool.Hammer);
-                        } else if (e.code == 'KeyC') {
+                        if (e.code == 'KeyC') {
                             Mine.toolSelected(Mine.Tool.Chisel);
                         } else if (e.code == 'KeyS') {
                             Mine.survey();
