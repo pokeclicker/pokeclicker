@@ -13,7 +13,7 @@ class FluteItem extends Item {
         public multiplierType: keyof typeof MultiplierType,
         public multiplyBy: number
     ) {
-        super(GameConstants.FluteItemType[type], basePrice, currency, undefined, displayName, description, 'fluteItem');
+        super(GameConstants.FluteItemType[type], basePrice, currency, { maxAmount : 1 }, displayName, description, 'fluteItem');
         this.type = type;
     }
 
@@ -25,6 +25,10 @@ class FluteItem extends Item {
     getDescription(): string {
         const multiplier = (((this.multiplyBy - 1) * AchievementHandler.achievementBonus()) * 100).toFixed(2);
         return `${multiplier}% bonus to ${this.description}`;
+    }
+
+    isSoldOut(): boolean {
+        return player.itemList[this.name]() > 0 || fluteEffectRunner.isActive(GameConstants.FluteItemType[this.name])();
     }
 
     checkCanUse(): boolean {

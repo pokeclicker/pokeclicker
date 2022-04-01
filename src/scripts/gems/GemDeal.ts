@@ -154,7 +154,7 @@ class GemDeal {
 
     public static canUse(region: GameConstants.Region, i: number): boolean {
         const deal = GemDeal.list[region].peek()[i];
-        if (player.itemList[deal.item.itemType.name]() > 0 || fluteEffectRunner.isActive(GameConstants.FluteItemType[deal.item.itemType.name])()) {
+        if (ItemList[deal.item.itemType.name].isSoldOut()) {
             return false;
         } else {
             return deal.gems.every((value) => App.game.gems.gemWallet[value.gemType]() >= value.amount);

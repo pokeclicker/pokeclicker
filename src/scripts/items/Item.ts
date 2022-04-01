@@ -160,6 +160,14 @@ class Item {
         return true;
     }
 
+    isSoldOut(): boolean {
+        return false;
+    }
+
+    getDescription(): string {
+        return this._description;
+    }
+
     increasePriceMultiplier(amount = 1) {
         player.itemMultipliers[this.saveName] = Math.min(100, (player.itemMultipliers[this.saveName] || 1) * Math.pow(this.multiplier, amount));
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.saveName]));
