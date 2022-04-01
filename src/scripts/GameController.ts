@@ -124,7 +124,7 @@ class GameController {
                 case 'KeyF':
                     // Open the Farm with 'F'
                     if (farms.canAccess() && !$farmsModal.data('disable-toggle')) {
-                    $('.modal').modal('hide');
+                        $('.modal').modal('hide');
                         $farmsModal.data('disable-toggle', true);
                         $farmsModal.modal('toggle');
                     }
