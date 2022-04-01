@@ -102,15 +102,15 @@ class GameController {
         // Underground
         const $undergroundModal = $('#mineModal');
         $undergroundModal.on('hidden.bs.modal shown.bs.modal', _ => $undergroundModal.data('disable-toggle', false));
-        const underground = App.game.underground
+        const underground = App.game.underground;
         // Farm
         const $farmsModal = $('#farmModal');
         $farmsModal.on('hidden.bs.modal shown.bs.modal', _ => $farmsModal.data('disable-toggle', false));
-        const farms = App.game.farming
+        const farms = App.game.farming;
         // Hatchery
         const $hatcheryModal = $('#breedingModal');
         $hatcheryModal.on('hidden.bs.modal shown.bs.modal', _ => $hatcheryModal.data('disable-toggle', false));
-        const hatchery = App.game.breeding
+        const hatchery = App.game.breeding;
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
@@ -121,38 +121,38 @@ class GameController {
             // Set flags for any key currently pressed down (used to check if key held down currently)
             GameController.keyHeld[e.code] = true;
             switch (e.code) {
-              case 'KeyF':
-                  // Open the Farm with 'F'
-                  if (farms.canAccess() && !$farmsModal.data('disable-toggle')) {
-                      $('.modal').modal('hide');
-                      $farmsModal.data('disable-toggle', true);
-                      $farmsModal.modal('toggle');
-                  }
-                  break;
-              case 'KeyH':
-                  // Open the Hatchery with 'F'
-                  if (hatchery.canAccess() && !$hatcheryModal.data('disable-toggle')) {
-                      $('.modal').modal('hide');
-                      $hatcheryModal.data('disable-toggle', true);
-                      $hatcheryModal.modal('toggle');
-                  }
-                  break;
-              case 'KeyO':
-                  // Open oak items with 'O'
-                  if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
-                      $('.modal').modal('hide');
-                      $oakItemsModal.data('disable-toggle', true);
-                      $oakItemsModal.modal('toggle');
-                  }
-                  break;
-              case 'KeyU':
-                  // Open the Underground with 'U'
-                  if (underground.canAccess() && !$undergroundModal.data('disable-toggle')) {
-                      $('.modal').modal('hide');
-                      $undergroundModal.data('disable-toggle', true);
-                      $undergroundModal.modal('toggle');
-                  }
-                  break;
+                case 'KeyF':
+					// Open the Farm with 'F'
+					if (farms.canAccess() && !$farmsModal.data('disable-toggle')) {
+						$('.modal').modal('hide');
+						$farmsModal.data('disable-toggle', true);
+						$farmsModal.modal('toggle');
+					}
+					break;
+				case 'KeyH':
+					// Open the Hatchery with 'F'
+					if (hatchery.canAccess() && !$hatcheryModal.data('disable-toggle')) {
+						$('.modal').modal('hide');
+						$hatcheryModal.data('disable-toggle', true);
+						$hatcheryModal.modal('toggle');
+					}
+					break;
+				  case 'KeyO':
+					// Open oak items with 'O'
+					if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
+						$('.modal').modal('hide');
+						$oakItemsModal.data('disable-toggle', true);
+						$oakItemsModal.modal('toggle');
+					}
+					break;
+				case 'KeyU':
+                    // Open the Underground with 'U'
+                    if (underground.canAccess() && !$undergroundModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $undergroundModal.data('disable-toggle', true);
+                        $undergroundModal.modal('toggle');
+                    }
+                    break;
                 default:
                     let numKey = +e.key;
                     // Check for a number key being pressed
@@ -207,9 +207,9 @@ class GameController {
                         }
                     }
                     if (GameController.keyHeld['ShiftLeft']) {
-                      if (e.code == 'KeyS') {
-                          Save.store(player);
-                      }
+                        if (e.code == 'KeyS') {
+                            Save.store(player);
+                        }
                     }
             }
 
