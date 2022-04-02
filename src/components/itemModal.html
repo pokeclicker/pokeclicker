@@ -78,6 +78,11 @@
                             <div class="row col-10">
                                 <div class="btn btn-primary col-2" data-bind="template: { name: 'otherItemTemplate', data: 'Protein'}, click: () => $('#pokemonSelectorModal').modal('show')"></div>
                             </div>
+                            <!-- ko foreach: HeldItem.getHeldItems() -->
+                            <div class="row col-10">
+                                <div class="btn btn-primary col-2" data-bind="template: { name: 'otherItemTemplate', data: $data.name}, click: () => $('#heldItemModal').modal('show')"></div>
+                            </div>
+                            <!-- /ko -->
                         </div>
                     </div>
 
