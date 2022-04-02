@@ -1,6 +1,8 @@
 ///<reference path="Item.ts"/>
 
 class HeldItem extends Item {
+    regionUnlocked: GameConstants.Region;
+
     constructor(
         name: string,
         basePrice: number,
@@ -8,12 +10,17 @@ class HeldItem extends Item {
         shopOptions : ShopOptions,
         displayName: string,
         description: string,
-        public regionUnlocked: GameConstants.Region) {
+        regionUnlocked: GameConstants.Region) {
         super(name, basePrice, currency, shopOptions, displayName, description, 'heldItems');
+        this.regionUnlocked = regionUnlocked;
     }
 
     public static getHeldItems() {
         return Object.values(ItemList).filter(i => i instanceof HeldItem);
+    }
+
+    public isUnlocked() {
+        return player.highestRegion() >= this.regionUnlocked;
     }
 }
 
