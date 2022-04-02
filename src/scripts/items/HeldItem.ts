@@ -1,6 +1,8 @@
 ///<reference path="Item.ts"/>
 
 class HeldItem extends Item {
+    public static heldItemSelected: KnockoutObservable<HeldItem> = ko.observable(undefined);
+
     regionUnlocked: GameConstants.Region;
 
     constructor(

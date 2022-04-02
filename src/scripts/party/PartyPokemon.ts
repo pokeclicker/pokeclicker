@@ -18,6 +18,7 @@ class PartyPokemon implements Saveable {
     _attack: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
     proteinsUsed: KnockoutObservable<number>;
+    heldItem: KnockoutObservable<HeldItem>;
 
     constructor(
         public id: number,
@@ -38,6 +39,7 @@ class PartyPokemon implements Saveable {
         this._level = ko.observable(1);
         this._attack = ko.observable(this.calculateAttack());
         this._category = ko.observable(category);
+        this.heldItem = ko.observable(undefined);
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -132,6 +134,28 @@ class PartyPokemon implements Saveable {
             (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue());
     }
 
+    public giveHeldItem = (heldItem: HeldItem): void => {
+        if (this.heldItem() && this.heldItem().displayName == heldItem.displayName) {
+            player.gainItem(this.heldItem().name, 1);
+            this.heldItem(undefined);
+            return;
+        }
+
+        if (player.amountOfItem(heldItem.name) < 1) {
+            Notifier.notify({
+                message: `You don't have any ${heldItem.displayName} left.`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return;
+        }
+
+        if (this.heldItem()) {
+            player.gainItem(this.heldItem().name, 1);
+        }
+        player.loseItem(heldItem.name, 1);
+        this.heldItem(heldItem);
+    }
+
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
@@ -150,6 +174,7 @@ class PartyPokemon implements Saveable {
         this.category = json['category'] ?? this.defaults.category;
         this.level = this.calculateLevelFromExp();
         this.attack = this.calculateAttack();
+        this.heldItem = ko.observable(json['heldItem'] && ItemList[json['heldItem']] instanceof HeldItem ? ItemList[json['heldItem']] as HeldItem : undefined);
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
@@ -180,6 +205,7 @@ class PartyPokemon implements Saveable {
             shiny: this.shiny,
             levelEvolutionTriggered: levelEvolutionTriggered,
             category: this.category,
+            heldItem: this.heldItem() ? this.heldItem().name : undefined,
         };
     }
 

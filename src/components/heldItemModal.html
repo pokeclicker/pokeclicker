@@ -9,58 +9,36 @@
                 </button>
             </div>
             <div class="modal-body p-0">
-                <img src="assets/images/items/Protein.png" width="40%"/>
+                <img data-bind="src: HeldItem.heldItemSelected.getImage()" width="40%"/>
                 <br/>
                 <div class="sticky-top bg-dark text-light">
-                  <!-- ko if: App.game.challenges.list.disableProteins.active() -->
-                  <span class="btn btn-block btn-danger btn-static m-0">
-                    Proteins are disabled.
-                  </span>
-                  <!-- /ko -->
                   <div class="btn-group btn-block m-0" role="group" aria-label="Basic example">
-                    <button class="btn btn-block btn-secondary btn-static" data-bind="text: 'Proteins: ' + player.itemList.Protein().toLocaleString('en-US')"></button>
-                    <button type="button" class="btn btn-sm btn-primary"
-                      data-bind="text: VitaminController.multiplier[VitaminController.multiplierIndex()]"
-                      onclick="VitaminController.incrementMultiplier()"
-                      oncontextmenu="VitaminController.decrementMultiplier(); return false"
-                      title="Multiplier"
-                      data-toggle="popover"
-                      data-html="true"
-                      data-content="Left/right click to cycle amount<br/>Click on pokemon to use"
-                      data-placement="right"
-                      data-trigger="hover">
-                    </button>
+                    <button class="btn btn-block btn-secondary btn-static" data-bind="text: HeldItem.heldItemSelected().displayName + ': ' + player.amountOfItem(HeldItem.heldItemSelected().name)"></button>
                   </div>
-                  <div class="input-group" data-bind="with: Settings.getSetting('proteinSort')">
+                  <div class="input-group" data-bind="with: Settings.getSetting('heldItemSort')">
                       <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
                           data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
                           <option data-bind="text: $data.text, value: $data.value"></option>
                       </select>
                       <div class="input-group-append bg-primary text-light">
-                          <label for="proteinSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('proteinSortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
-                          <input id="proteinSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
-                              data-bind="checked: Settings.getSetting('proteinSortDirection').observableValue()"
-                              onchange="Settings.setSettingByName('proteinSortDirection', this.checked)"/>
+                          <label for="heldItemSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('heldItemSortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
+                          <input id="heldItemSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
+                              data-bind="checked: Settings.getSetting('heldItemSortDirection').observableValue()"
+                              onchange="Settings.setSettingByName('heldItemSortDirection', this.checked)"/>
                       </div>
                   </div>
-                  <input type="checkbox" id="hide-max-protein-pokemons" class="form-check-input"
-                      data-bind="checked: Settings.getSetting('proteinHideMaxedPokemon').observableValue()"
-                      onchange="Settings.setSettingByName('proteinHideMaxedPokemon', this.checked)"/>
-                  <label for="hide-max-protein-pokemons" class="form-check-label">Hide Pokémon with max protein</label>
                 </div>
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
                     <tr class="text-light">
                       <th class="text-left bg-dark align-middle">Pokemon</th>
-                      <th class="text-center bg-dark align-middle">Proteins Used</th>
-                      <th class="text-center bg-dark align-middle">Attack Bonus</th>
+                      <th class="text-center bg-dark align-middle">Current item</th>
                     </tr>
                   </thead>
-                  <tbody data-bind="foreach: PartyController.getProteinSortedList()">
-                    <tr class="clickable" data-bind="click: () => $data.useProtein(VitaminController.getMultiplier()), hidden: $data.hideFromProteinList()">
+                  <tbody data-bind="foreach: PartyController.getHeldItemSortedList()">
+                    <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected())">
                       <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
-                      <td class="text-center tight" data-bind="text: $data.proteinsUsed().toLocaleString('en-US')">-</td>
-                      <td class="text-center tight" data-bind="text: Math.floor($data.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + $data.proteinsUsed()).toLocaleString('en-US')">-</td>
+                      <td class="text-center tight" data-bind="text: $data.heldItem() == undefined ? '' : $data.heldItem().displayName"></td>
                     </tr>
                   </tbody>
                 </table>

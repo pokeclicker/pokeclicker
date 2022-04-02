@@ -144,6 +144,13 @@ Settings.add(new Setting<number>('proteinSort', 'Sort:', proteinSortSettings, So
 Settings.add(new BooleanSetting('proteinSortDirection', 'reverse', false));
 Settings.add(new BooleanSetting('proteinHideMaxedPokemon', 'Hide Pokémon with max protein', false));
 
+// Held Item Sorting
+const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('heldItemSort', 'Sort:', heldItemSortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false));
+
 // Breeding Filters
 Settings.add(new Setting<string>('breedingCategoryFilter', 'breedingCategoryFilter',
     [],

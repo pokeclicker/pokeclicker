@@ -80,7 +80,7 @@
                             </div>
                             <!-- ko foreach: HeldItem.getHeldItems() -->
                             <div class="row col-10" data-bind="visible: $data.isUnlocked()">
-                                <div class="btn btn-primary col-2" data-bind="template: { name: 'otherItemTemplate', data: $data.name}, click: () => $('#heldItemModal').modal('show')"></div>
+                                <div class="btn btn-primary col-2" data-bind="template: { name: 'otherItemTemplate', data: $data.name}, click: () => { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }"></div>
                             </div>
                             <!-- /ko -->
                         </div>
