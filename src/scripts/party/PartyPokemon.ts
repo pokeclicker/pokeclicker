@@ -40,12 +40,16 @@ class PartyPokemon implements Saveable {
         this._attack = ko.observable(this.calculateAttack());
         this._category = ko.observable(category);
         this.heldItem = ko.observable(undefined);
+        this.heldItem.subscribe(hi => {
+            this.attack = this.calculateAttack();
+        });
     }
 
     public calculateAttack(ignoreLevel = false): number {
         const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
         const levelMultiplier = ignoreLevel ? 1 : this.level / 100;
-        return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier));
+        const heldItemMultiplier = this.heldItem && this.heldItem() instanceof AttackBonusHeldItem ? (this.heldItem() as AttackBonusHeldItem).attackBonus : 1;
+        return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * heldItemMultiplier));
     }
 
     calculateLevelFromExp() {
@@ -174,7 +178,7 @@ class PartyPokemon implements Saveable {
         this.category = json['category'] ?? this.defaults.category;
         this.level = this.calculateLevelFromExp();
         this.attack = this.calculateAttack();
-        this.heldItem = ko.observable(json['heldItem'] && ItemList[json['heldItem']] instanceof HeldItem ? ItemList[json['heldItem']] as HeldItem : undefined);
+        this.heldItem(json['heldItem'] && ItemList[json['heldItem']] instanceof HeldItem ? ItemList[json['heldItem']] as HeldItem : undefined);
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
@@ -205,7 +209,7 @@ class PartyPokemon implements Saveable {
             shiny: this.shiny,
             levelEvolutionTriggered: levelEvolutionTriggered,
             category: this.category,
-            heldItem: this.heldItem() ? this.heldItem().name : undefined,
+            heldItem: this.heldItem()?.name,
         };
     }
 
