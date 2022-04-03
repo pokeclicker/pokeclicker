@@ -34,6 +34,10 @@ class EvolutionStone extends CaughtIndicatingItem {
             // Finally get the evolution
             .map(evolution => evolution.getEvolvedPokemon());
 
+        if (unlockedEvolutions.length == 0) {
+            return undefined;
+        }
+
         // Calculate the lowest caught status
         return unlockedEvolutions.reduce((status: CaughtStatus, pokemonName: PokemonNameType) => {
             return Math.min(status, PartyController.getCaughtStatusByName(pokemonName));
@@ -53,8 +57,8 @@ ItemList['Sun_stone']         = new EvolutionStone(GameConstants.StoneType.Sun_s
 ItemList['Soothe_bell']       = new EvolutionStone(GameConstants.StoneType.Soothe_bell, 2500, undefined , 'Soothe Bell', GameConstants.Region.johto);
 ItemList['Metal_coat']        = new EvolutionStone(GameConstants.StoneType.Metal_coat, 2500, undefined , 'Metal Coat', GameConstants.Region.johto);
 ItemList['Kings_rock']        = new EvolutionStone(GameConstants.StoneType.Kings_rock, 2500, undefined , 'King\'s Rock', GameConstants.Region.johto);
-ItemList['Upgrade']           = new EvolutionStone(GameConstants.StoneType.Upgrade, 2500, undefined , 'Upgrade', GameConstants.Region.johto);
-ItemList['Dragon_scale']      = new EvolutionStone(GameConstants.StoneType.Dragon_scale, 2500, undefined, 'Dragon Scale', GameConstants.Region.johto);
+ItemList['Upgrade']           = new EvolutionStone(GameConstants.StoneType.Upgrade, 2500, undefined , 'Upgrade', GameConstants.Region.hoenn);
+ItemList['Dragon_scale']      = new EvolutionStone(GameConstants.StoneType.Dragon_scale, 2500, undefined, 'Dragon Scale', GameConstants.Region.hoenn);
 ItemList['Prism_scale']       = new EvolutionStone(GameConstants.StoneType.Prism_scale, 2500, undefined , 'Prism Scale', GameConstants.Region.hoenn);
 ItemList['Deepsea_tooth']     = new EvolutionStone(GameConstants.StoneType.Deepsea_tooth, 2500, undefined , 'Deep Sea Tooth', GameConstants.Region.hoenn);
 ItemList['Deepsea_scale']     = new EvolutionStone(GameConstants.StoneType.Deepsea_scale, 2500, undefined , 'Deep Sea Scale', GameConstants.Region.hoenn);
