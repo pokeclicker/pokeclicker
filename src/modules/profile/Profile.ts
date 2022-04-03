@@ -75,7 +75,7 @@ export default class Profile implements Saveable {
         const trainerImage: HTMLImageElement = node.querySelector('.trainer-image');
         trainerImage.src = `assets/images/profile/trainer-${trainer}.png`;
         const trainerName: HTMLElement = node.querySelector('.trainer-name');
-        trainerName.innerText = GameConstants.cleanHTMLString(name);
+        trainerName.innerText = name;
         const table: HTMLElement = node.querySelector('.table');
         table.style.color = textColor;
         const trainerBadges: HTMLElement = node.querySelector('.trainer-badges');
