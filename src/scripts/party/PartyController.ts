@@ -81,6 +81,16 @@ class PartyController {
         return PartyController.heldItemSortedList;
     }).extend({ rateLimit: 500 });
 
+    private static pokemonsWithHeldItemSortedList = [];
+    static getPokemonsWithHeldItemSortedList = ko.pureComputed(() => {
+        // If the held item modal is open, we should sort it.
+        if (modalUtils.observableState['heldItemModal'] === 'show') {
+            PartyController.pokemonsWithHeldItemSortedList = [...App.game.party.caughtPokemon.filter(p => p.heldItem())];
+            return PartyController.pokemonsWithHeldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
+        }
+        return PartyController.pokemonsWithHeldItemSortedList;
+    }).extend({ rateLimit: 500 });
+
     public static compareBy(option: SortOptions, direction: boolean): (a: PartyPokemon, b: PartyPokemon) => number {
         return function (a, b) {
             let res, dir = (direction) ? -1 : 1;
