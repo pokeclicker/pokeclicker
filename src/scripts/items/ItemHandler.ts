@@ -85,16 +85,21 @@ class ItemHandler {
     }
 
     public static initilizeEvoStones() {
+        // Set our unlock regions
         Object.values(ItemList).filter(item => item instanceof EvolutionStone).forEach(evoStone => {
+            // If a region has already been manually set
             if ((evoStone as EvolutionStone).unlockedRegion > GameConstants.Region.none) {
                 return false;
             }
 
+            // Get a list of evolutions that use this stone, set the unlock region to the lowest region
             (evoStone as EvolutionStone).unlockedRegion = Math.min(...pokemonList.filter(p =>
+                // Filter to only include pokemon that make use of this evolution stone
                 (p as PokemonListData).nativeRegion > GameConstants.Region.none &&
                 (p as PokemonListData).evolutions != undefined &&
                 (p as PokemonListData).evolutions.some(e => e instanceof StoneEvolution && e.stone == evoStone.type)
             ).map(p => {
+                // Map to the native region for evolutions that use this stone
                 return Math.min(...(p as PokemonListData).evolutions.filter(e => e instanceof StoneEvolution && e.stone == evoStone.type)
                     .map(e => Math.max((p as PokemonListData).nativeRegion, PokemonHelper.calcNativeRegion(e.getEvolvedPokemon())))
                     .filter(r => r > GameConstants.Region.none));
