@@ -44,11 +44,6 @@ class Game {
         public multiplier: Multiplier
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
-
-        AchievementHandler.initialize(multiplier, challenges);
-        FarmController.initialize();
-        EffectEngineRunner.initialize(multiplier);
-        fluteEffectRunner.initialize(multiplier);
     }
 
     load() {
@@ -68,6 +63,12 @@ class Game {
     }
 
     initialize() {
+        PokemonHelper.initilizePokemons();
+        AchievementHandler.initialize(this.multiplier, this.challenges);
+        FarmController.initialize();
+        EffectEngineRunner.initialize(this.multiplier);
+        fluteEffectRunner.initialize(this.multiplier);
+        ItemHandler.initilizeEvoStones();
         this.profile.initialize();
         this.breeding.initialize();
         this.pokeballs.initialize();
