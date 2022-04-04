@@ -255,7 +255,7 @@ class Mine {
         }
     }
 
-    private static bomb() {
+    public static bomb() {
         let tiles = App.game.underground.getBombEfficiency();
         if (App.game.underground.energy >= Underground.BOMB_ENERGY) {
             while (tiles-- > 0) {
