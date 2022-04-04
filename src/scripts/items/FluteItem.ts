@@ -24,7 +24,7 @@ class FluteItem extends Item {
 
     getDescription(): string {
         const multiplier = (((this.multiplyBy - 1) * AchievementHandler.achievementBonus()) * 100).toFixed(2);
-        return `+ ${multiplier}% bonus to ${this.description}`;
+        return `+${multiplier}% bonus to ${this.description}`;
     }
 
     isSoldOut(): boolean {
