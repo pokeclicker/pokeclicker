@@ -311,7 +311,7 @@
                 <div class="form-row p-0" id="breeding-filter">
                     <div class="form-group col-12">
                         <label>Name</label>
-                        <input autocomplete="off" class="form-control" oninput="App.game.profile.name(this.value)" placeholder="name" data-bind="value: decodeURI(App.game.profile.name())"/>
+                        <input autocomplete="off" class="form-control" oninput="App.game.profile.name(this.value)" placeholder="name" data-bind="value: App.game.profile.name()"/>
                     </div>
                     <div class="form-group col-12">
                         <label>Pokemon</label>
@@ -753,22 +753,22 @@
         <tbody>
           <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'FluteItem'))">
             <tr data-bind="foreach: $data">
-                 <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data](),trigger:'hover',placement:'top',animation:false}"></td>
-            </tr>
-            <tr data-bind="foreach: $data">
                  <td class="p-0" data-bind="attr: {
                                 disabled: !player.itemList[$data]()
                             },
                             css: {
                                 'bg-primary': fluteEffectRunner.getEffect($data) > 30,
                                 'bg-warning': fluteEffectRunner.getEffect($data) <= 30 && fluteEffectRunner.getEffect($data) > 0,
-                                'bg-secondary': !fluteEffectRunner.isActive($data)()
+                                'bg-secondary': !fluteEffectRunner.isActive($data)(),
+                            },
+                            style: {
+                                'opacity': player.itemList[$data]() || fluteEffectRunner.isActive($data)() ? '1' : '0.1'
                             },
                             event: {
                                 click: function(){ItemHandler.useItem($data)}
                             },
                             tooltip: {
-                              title: ItemList[$data].displayName + '<br/>' + ItemList[$data].description + '<br/>' + 'Utilizes: ' + ItemList[$data].gemTypes[0] + ', ' + ItemList[$data].gemTypes[1] + ', and ' + ItemList[$data].gemTypes[2] + ' Gems',
+                              title: ItemList[$data].displayName + '<br/>' + ItemList[$data].getDescription() + '<br/>' + 'Utilizes: ' + ItemList[$data].gemTypes[0] + ', ' + ItemList[$data].gemTypes[1] + ', and ' + ItemList[$data].gemTypes[2] + ' Gems',
                               trigger: 'hover',
                               placement:'bottom',
                               html: true
@@ -10287,7 +10287,7 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.alola'>
     
-    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele island').id">
         <image width="1600" height="960" xlink:href="assets/images/alola-melemele.png" href="assets/images/alola-melemele.png"></image>
 
         <!-- ------ -->
@@ -12998,296 +12998,12 @@
 </rect>
     </g>
 
-    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele & Akala islands').id">
-        <image width="1600" height="960" xlink:href="assets/images/alola.png" href="assets/images/alola.png"></image>
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala island').id">
+        <image width="1600" height="960" xlink:href="assets/images/alola.png" href="assets/images/alola-akala.png"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
         <!-- ------ -->
-
-        <!--Route 1-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
-    <rect data-route='1'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
-        height="48"
-        width="240"
-        x="288" y="384">
-    </rect>
-
-    <text style="font-size: 32px" x="400" y="418">1</text>
-
-</g>
-
-
-        <!--Route 1 Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
-    <rect data-route='1'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
-        height="80"
-        width="48"
-        x="480" y="432">
-    </rect>
-
-</g>
-
-
-        <!--Route 1 Hau'oli Outskirts--> 
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
-    <rect data-route='18'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
-        height="48"
-        width="272"
-        x="272" y="512">
-    </rect>
-
-    <text style="font-size: 32px" x="336" y="546">Outskirts</text>
-
-</g>
-
-
-        <!--Route 1 Hau'oli Outskirts Extension--> 
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
-    <rect data-route='18'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
-        height="80"
-        width="48"
-        x="496" y="560">
-    </rect>
-
-</g>
-
-
-        <!--Route 1 Hau'oli Outskirts Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
-    <rect data-route='18'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
-        height="48"
-        width="64"
-        x="208" y="480">
-    </rect>
-
-</g>
-
-
-        <!--Route 1 Hau'oli Outskirts Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
-    <rect data-route='18'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
-        height="32"
-        width="48"
-        x="272" y="480">
-    </rect>
-
-</g>
-
-
-        <!--Route 2-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
-    <rect data-route='2'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
-        height="312"
-        width="48"
-        x="64" y="144">
-    </rect>
-
-    <text style="font-size: 32px" x="80" y="310">2</text>
-
-</g>
-
-
-        <!--Route 2 Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
-    <rect data-route='2'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
-        height="48"
-        width="176"
-        x="112" y="144">
-    </rect>
-
-</g>
-
-
-        <!--Route 3-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
-    <rect data-route='3'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
-        height="240"
-        width="48"
-        x="384" y="144">
-    </rect>
-
-    <text style="font-size: 32px" x="400" y="274">3</text>
-
-</g>
-
-
-        <!--Route 3 Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
-    <rect data-route='3'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
-        height="48"
-        width="96"
-        x="288" y="144">
-    </rect>
-
-</g>
-
-
-        <!--Melemele Sea-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
-    <rect data-route='19'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
-        height="160"
-        width="80"
-        x="592" y="528">
-    </rect>
-
-    <text style="font-size: 32px" x="608" y="618">Sea</text>
-
-</g>
-
-
-        <!--Melemele Sea Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
-    <rect data-route='19'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
-        height="48"
-        width="128"
-        x="464" y="640">
-    </rect>
-
-</g>
-
-
-        <!--Melemele Sea Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
-    <rect data-route='19'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
-        height="16"
-        width="32"
-        x="560" y="624">
-    </rect>
-
-</g>
-
-
-        <!--Melemele Sea Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
-    <rect data-route='19'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
-        height="16"
-        width="16"
-        x="576" y="608">
-    </rect>
-
-</g>
-
-
-        <!--Kala'e Bay-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
-    <rect data-route='20'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
-        height="144"
-        width="96"
-        x="496" y="208">
-    </rect>
-
-    <text style="font-size: 32px" x="520" y="290">Bay</text>
-
-</g>
-
-
-        <!--Kala'e Bay Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
-    <rect data-route='20'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
-        height="96"
-        width="64"
-        x="432" y="240">
-    </rect>
-
-</g>
-
-
-        <!--Kala'e Bay Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
-    <rect data-route='20'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
-        height="16"
-        width="16"
-        x="480" y="336">
-    </rect>
-
-</g>
-
 
         <!--Route 4-->
         
@@ -13299,10 +13015,10 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(4, 6) }"
         height="176"
         width="48"
-        x="1136" y="480">
+        x="736" y="480">
     </rect>
 
-    <text style="font-size: 32px" x="1152" y="578">4</text>
+    <text style="font-size: 32px" x="752" y="578">4</text>
 
 </g>
 
@@ -13317,7 +13033,7 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(4, 6) }"
         height="48"
         width="64"
-        x="1184" y="480">
+        x="784" y="480">
     </rect>
 
 </g>
@@ -13333,10 +13049,10 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(5, 6) }"
         height="224"
         width="48"
-        x="1280" y="208">
+        x="880" y="208">
     </rect>
 
-    <text style="font-size: 32px" x="1296" y="330">5</text>
+    <text style="font-size: 32px" x="896" y="330">5</text>
 
 </g>
 
@@ -13351,10 +13067,10 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(6, 6) }"
         height="240"
         width="48"
-        x="1280" y="480">
+        x="880" y="480">
     </rect>
 
-    <text style="font-size: 32px" x="1296" y="610">6</text>
+    <text style="font-size: 32px" x="896" y="610">6</text>
 
 </g>
 
@@ -13369,7 +13085,7 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(6, 6) }"
         height="48"
         width="96"
-        x="1184" y="672">
+        x="784" y="672">
     </rect>
 
 </g>
@@ -13385,10 +13101,10 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(7, 6) }"
         height="464"
         width="48"
-        x="1472" y="144">
+        x="1072" y="144">
     </rect>
 
-    <text style="font-size: 32px" x="1488" y="386">7</text>
+    <text style="font-size: 32px" x="1088" y="386">7</text>
 
 </g>
 
@@ -13403,10 +13119,10 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(8, 6) }"
         height="48"
         width="320"
-        x="1200" y="96">
+        x="800" y="96">
     </rect>
 
-    <text style="font-size: 32px" x="1352" y="130">8</text>
+    <text style="font-size: 32px" x="952" y="130">8</text>
 
 </g>
 
@@ -13421,7 +13137,7 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(8, 6) }"
         height="112"
         width="48"
-        x="1200" y="144">
+        x="800" y="144">
     </rect>
 
 </g>
@@ -13437,7 +13153,7 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(8, 6) }"
         height="48"
         width="32"
-        x="1248" y="208">
+        x="848" y="208">
     </rect>
 
 </g>
@@ -13453,10 +13169,10 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(9, 6) }"
         height="48"
         width="144"
-        x="1040" y="832">
+        x="640" y="832">
     </rect>
 
-    <text style="font-size: 32px" x="1104" y="866">9</text>
+    <text style="font-size: 32px" x="704" y="866">9</text>
 
 </g>
 
@@ -13471,7 +13187,7 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(9, 6) }"
         height="16"
         width="48"
-        x="1136" y="816">
+        x="736" y="816">
     </rect>
 
 </g>
@@ -13487,10 +13203,10 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(21, 6) }"
         height="48"
         width="96"
-        x="1248" y="832">
+        x="848" y="832">
     </rect>
 
-    <text style="font-size: 32px" x="1264" y="866">A.O.</text>
+    <text style="font-size: 32px" x="864" y="866">A.O.</text>
 
 </g>
 
@@ -13505,7 +13221,7 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(21, 6) }"
         height="32"
         width="48"
-        x="1296" y="800">
+        x="896" y="800">
     </rect>
 
 </g>
@@ -13515,59 +13231,12 @@
         <!-- TOWNS -->
         <!-- ----- -->
 
-        <!--Iki Town-->
-        
-
-<rect class="city"
-    data-town="Iki Town" 
-    x="288"
-    y="312"
-    height="72"
-    width="80"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Iki Town')},
-        attr: { class: MapHelper.calculateTownCssClass('Iki Town') },
-        
-            css: { flash: MapHelper.ableToTravel() }
-        ">
-</rect>
-
-        <!--Hau'oli City-->
-        
-
-<rect class="city"
-    data-town="Hau&#39;oli City" 
-    x="64"
-    y="456"
-    height="72"
-    width="80"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Hau\&#39;oli City')},
-        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli City') },
-        ">
-</rect>
-
-        <!--Hau'oli City Extension-->
-        
-
-<rect class="city"
-    data-town="Hau&#39;oli City" 
-    x="144"
-    y="464"
-    height="64"
-    width="64"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Hau\&#39;oli City')},
-        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli City') },
-        ">
-</rect>
-
         <!--Heahea City-->
         
 
 <rect class="city"
     data-town="Heahea City" 
-    x="1040"
+    x="640"
     y="648"
     height="72"
     width="80"
@@ -13582,7 +13251,7 @@
 
 <rect class="city"
     data-town="Heahea City" 
-    x="1120"
+    x="720"
     y="656"
     height="64"
     width="64"
@@ -13597,7 +13266,7 @@
 
 <rect class="city"
     data-town="Paniola Town" 
-    x="1200"
+    x="800"
     y="416"
     height="64"
     width="64"
@@ -13612,7 +13281,7 @@
 
 <rect class="city"
     data-town="Royal Avenue" 
-    x="1328"
+    x="928"
     y="536"
     height="72"
     width="80"
@@ -13627,7 +13296,7 @@
 
 <rect class="city"
     data-town="Royal Avenue" 
-    x="1408"
+    x="1008"
     y="544"
     height="64"
     width="64"
@@ -13642,7 +13311,7 @@
 
 <rect class="city"
     data-town="Konikoni City" 
-    x="1024"
+    x="624"
     y="768"
     height="64"
     width="64"
@@ -13657,7 +13326,7 @@
 
 <rect class="city"
     data-town="Aether Paradise" 
-    x="720"
+    x="320"
     y="824"
     height="72"
     width="80"
@@ -13674,105 +13343,8 @@
         
 
 <rect class="city"
-    data-town="Trainers&#39; School" 
-    x="320"
-    y="464"
-    height="48"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Trainers\&#39; School')},
-        attr: { class: MapHelper.calculateTownCssClass('Trainers\&#39; School') }">
-</rect>
-
-        
-
-<rect class="city"
-    data-town="Hau&#39;oli Cemetery" 
-    x="112"
-    y="352"
-    height="48"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Hau\&#39;oli Cemetery')},
-        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli Cemetery') }">
-</rect>
-
-        
-
-<rect class="city"
-    data-town="Verdant Cavern" 
-    x="224"
-    y="192"
-    height="48"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Verdant Cavern')},
-        attr: { class: MapHelper.calculateTownCssClass('Verdant Cavern') }">
-</rect>
-
-        
-
-<rect class="city"
-    data-town="Melemele Meadow" 
-    x="320"
-    y="192"
-    height="48"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Melemele Meadow')},
-        attr: { class: MapHelper.calculateTownCssClass('Melemele Meadow') }">
-</rect>
-
-        
-
-<rect class="city"
-    data-town="Seaward Cave" 
-    x="432"
-    y="192"
-    height="48"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Seaward Cave')},
-        attr: { class: MapHelper.calculateTownCssClass('Seaward Cave') }">
-</rect>
-
-        
-
-<rect class="city"
-    data-town="Ten Carat Hill" 
-    x="400"
-    y="560"
-    height="48"
-    width="96"
-    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
-        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
-</rect>
-
-        <!--Ten Carat Hill Extension-->
-        
-
-<rect class="city"
-    data-town="Ten Carat Hill" 
-    x="400"
-    y="608"
-    height="64"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
-        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
-</rect>
-
-        
-
-<rect class="city"
-    data-town="Ruins of Conflict" 
-    x="288"
-    y="256"
-    height="48"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Ruins of Conflict')},
-        attr: { class: MapHelper.calculateTownCssClass('Ruins of Conflict') }">
-</rect>
-
-        
-
-<rect class="city"
     data-town="Pikachu Valley" 
-    x="1104"
+    x="704"
     y="432"
     height="48"
     width="64"
@@ -13784,7 +13356,7 @@
 
 <rect class="city"
     data-town="Paniola Ranch" 
-    x="1264"
+    x="864"
     y="432"
     height="48"
     width="64"
@@ -13796,7 +13368,7 @@
 
 <rect class="city"
     data-town="Brooklet Hill" 
-    x="1152"
+    x="752"
     y="320"
     height="96"
     width="80"
@@ -13809,7 +13381,7 @@
 
 <rect class="city"
     data-town="Brooklet Hill" 
-    x="1232"
+    x="832"
     y="320"
     height="48"
     width="48"
@@ -13821,7 +13393,7 @@
 
 <rect class="city"
     data-town="Wela Volcano Park" 
-    x="1408"
+    x="1008"
     y="272"
     height="48"
     width="64"
@@ -13833,7 +13405,7 @@
 
 <rect class="city"
     data-town="Lush Jungle" 
-    x="1264"
+    x="864"
     y="160"
     height="48"
     width="64"
@@ -13845,7 +13417,7 @@
 
 <rect class="city"
     data-town="Diglett&#39;s Tunnel" 
-    x="1136"
+    x="736"
     y="720"
     height="96"
     width="48"
@@ -13858,7 +13430,7 @@
 
 <rect class="city"
     data-town="Diglett&#39;s Tunnel" 
-    x="1184"
+    x="784"
     y="720"
     height="48"
     width="64"
@@ -13870,7 +13442,7 @@
 
 <rect class="city"
     data-town="Memorial Hill" 
-    x="1184"
+    x="784"
     y="832"
     height="48"
     width="64"
@@ -13882,7 +13454,7 @@
 
 <rect class="city"
     data-town="Ruins of Life" 
-    x="1280"
+    x="880"
     y="752"
     height="48"
     width="64"
@@ -13898,10 +13470,10 @@
 
 <rect class="city"
     data-town="Dock" 
-    x="144"
-    y="528"
-    height="48"
-    width="32"
+    x="592"
+    y="656"
+    height="64"
+    width="48"
     data-bind="click:function(){MapHelper.openShipModal()}">
 </rect>
     </g>
@@ -16430,7 +16002,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 data-bind="tooltip: { title: 'As you earn achievements, you gain up to 100% (per region) more Click Attack, Money, Dungeon Tokens and Experience from all sources.', trigger: 'hover', placement:'right' }">Achievements Bonus: <u class="text-primary" data-bind="text: AchievementHandler.achievementBonusPercent()"></u></h5>
+                <h5 data-bind="tooltip: { title: 'As you earn achievements, you gain up to 100% (per region) more Click Attack, Money, Dungeon Tokens, Flute effects and Experience from all sources.', trigger: 'hover', placement:'right' }">Achievements Bonus: <u class="text-primary" data-bind="text: AchievementHandler.achievementBonusPercent()"></u></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -19105,7 +18677,7 @@ aria-labelledby="badgeCaseModalLabel">
                                             src: $parent.item.itemType.image
                                           },
                                           tooltip: {
-                                            title: ItemList[$parent.item.itemType.name].description,
+                                            title: ItemList[$parent.item.itemType.name].getDescription(),
                                             trigger: 'hover',
                                             placement:'bottom',
                                             html: true
@@ -19114,15 +18686,13 @@ aria-labelledby="badgeCaseModalLabel">
                                     <td class='vertical-middle' data-bind='attr: { rowspan: $parent.gems.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">
                                         <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
-                                            <!-- TODO: Make the "Trade" Button read "SOLD OUT" when disabled -->
                                             <button class='btn btn-success btn-block' data-bind='click: function(){GemDeal.use(player.region, $parentContext.$index(), tradeAmount())}, css: { disabled: !GemDeal.canUse(player.region, $parentContext.$index()) }'>
-                                                Trade
+                                                <knockout data-bind="text: !ItemList[$parent.item.itemType.name].isSoldOut() ? 'Trade' : 'Sold out'"></knockout>
                                             </button>
-                                            <!-- TODO: Make the dropdown button disappear for Flute trades -->
-                                            <button type="button" data-bind="visible: !GemDeal.isFluteDeal(player.region, $parentContext.$index()), text: tradeAmount() + '&nbsp;', css: { disabled: GemDeal.isFluteDeal(player.region, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'>
+                                            <button type="button" data-bind="visible: ItemList[$parent.item.itemType.name].maxAmount > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'>
                                             </button>
                                             <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
-                                                <button class="dropdown-item" type="button" data-bind="visible: !GemDeal.isFluteDeal(player.region, $parentContext.$index()), click: function(){tradeAmount($data)}, text: $data"></button>
+                                                <button class="dropdown-item" type="button" data-bind="visible: ItemList[$parents[1].item.itemType.name].maxAmount > 1, click: function(){tradeAmount($data)}, text: $data"></button>
                                             </div>
                                         </div>
                                     </td>
