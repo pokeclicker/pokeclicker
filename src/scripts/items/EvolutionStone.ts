@@ -36,6 +36,10 @@ class EvolutionStone extends CaughtIndicatingItem {
             // Finally get the evolution
             .map(evolution => evolution.getEvolvedPokemon());
 
+        if (unlockedEvolutions.length == 0) {
+            return undefined;
+        }
+
         // Calculate the lowest caught status
         return unlockedEvolutions.reduce((status: CaughtStatus, pokemonName: PokemonNameType) => {
             return Math.min(status, PartyController.getCaughtStatusByName(pokemonName));
