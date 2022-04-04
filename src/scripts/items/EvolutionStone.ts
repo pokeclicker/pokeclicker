@@ -20,13 +20,15 @@ class EvolutionStone extends CaughtIndicatingItem {
         return shiny;
     }
 
-    getCaughtStatus(): CaughtStatus {
+    getCaughtStatus = ko.pureComputed((): CaughtStatus => {
         // Only include Pokémon which have evolutions
         const unlockedEvolutions = pokemonList.filter((p: PokemonListData) => p.evolutions)
             // only include base Pokémon we have caught
             .filter(p => PartyController.getCaughtStatusByName(p.name))
             // Map to the evolution which uses this stone type
-            .map((p: PokemonListData) => p.evolutions.find(e => e.type.includes(EvolutionType.Stone) && (e as StoneEvolution).stone === this.type))
+            .map((p: PokemonListData) => p.evolutions.filter(e => e.type.includes(EvolutionType.Stone) && (e as StoneEvolution).stone === this.type))
+            // Flatten the array (in case of multiple evolutions)
+            .flat()
             // Ensure the we actually found an evolution
             .filter(evolution => evolution)
             // Filter out any Pokémon which can't be obtained yet (future region)
@@ -42,8 +44,7 @@ class EvolutionStone extends CaughtIndicatingItem {
         return unlockedEvolutions.reduce((status: CaughtStatus, pokemonName: PokemonNameType) => {
             return Math.min(status, PartyController.getCaughtStatusByName(pokemonName));
         }, CaughtStatus.CaughtShiny);
-    }
-
+    });
 }
 
 // TODO: Set prices for different kinds of stones
