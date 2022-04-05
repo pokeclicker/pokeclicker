@@ -1,5 +1,6 @@
 /* eslint-disable array-bracket-newline */
 ///<reference path="Town.ts"/>
+///<reference path="TownList.ts"/>
 class PokemonLeague extends Town {
     public gymList: Gym[];
 
@@ -110,7 +111,7 @@ TownList['Pokémon League Alola'] = new PokemonLeague(
     GameConstants.Region.alola,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanakila'))],
     [indigoPlateauShop],
-    ['Elite Molayne', 'Elite Olivia', 'Elite Acerola', 'Elite Kahili', 'Champion Hao']
+    ['Elite Molayne', 'Elite Olivia', 'Elite Acerola', 'Elite Kahili', 'Champion Hau']
 );
 (<PokemonLeague>TownList['Pokémon League Alola']).setupGymTowns();
 
@@ -125,7 +126,7 @@ TownList['Wyndon Stadium'] = new PokemonLeague(
 
 TownList['Master Dojo Battlefield'] = new PokemonLeague(
     'Master Dojo Battlefield',
-    GameConstants.Region.armor,
+    GameConstants.Region.galar,
     [
         new MultiRequirement([
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),

@@ -40,7 +40,7 @@ class FarmController {
             $('#farmModal').modal('show');
         } else {
             Notifier.notify({
-                message: `You need the ${GameConstants.humanifyString(KeyItems.KeyItem[KeyItems.KeyItem.Wailmer_pail])} to access this location`,
+                message: `You need the ${GameConstants.humanifyString(KeyItemType[KeyItemType.Wailmer_pail])} to access this location`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }

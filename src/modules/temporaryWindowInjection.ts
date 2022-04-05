@@ -10,6 +10,7 @@ import LogEvent from './LogEvent';
 import BadgeEnums from './enums/Badges';
 import PokemonType from './enums/PokemonType';
 import ItemType from './enums/ItemType';
+import KeyItemType from './enums/KeyItemType';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -36,6 +37,57 @@ import WalletClasses from './wallet/inject';
 import GenericProxy from './utilities/GenericProxy';
 import { SpriteCredits, CodeCredits } from './Credits';
 import * as modalUtils from './utilities/Modal';
+import PokemonCategories from './party/Category';
+import Information from './utilities/Information';
+import TypeHelper from './types/TypeHelper';
+import Upgrade from './upgrades/Upgrade';
+import ExpUpgrade from './upgrades/ExpUpgrade';
+import OakItemType from './enums/OakItemType';
+import OakItem from './oakItems/OakItem';
+import OakItems from './oakItems/OakItems';
+import BoughtOakItem from './oakItems/BoughtOakItem';
+import OakItemController from './oakItems/OakItemController';
+import OakItemLoadouts from './oakItems/OakItemLoadouts';
+import SpecialRoutePokemon from './routes/SpecialRoutePokemon';
+import RoutePokemon from './routes/RoutePokemon';
+import RegionRoute from './routes/RegionRoute';
+import Routes from './routes/Routes';
+import SubRegion from './subRegion/SubRegion';
+import SubRegions, { AlolaSubRegions } from './subRegion/SubRegions';
+import Requirement from './requirements/Requirement';
+import AchievementRequirement from './requirements/AchievementRequirement';
+import NullRequirement from './requirements/NullRequirement';
+import MultiRequirement from './requirements/MultiRequirement';
+import OneFromManyRequirement from './requirements/OneFromManyRequirement';
+import AttackRequirement from './requirements/AttackRequirement';
+import BattleFrontierHighestStageRequirement from './requirements/BattleFrontierHighestStageRequirement';
+import BattleFrontierTotalStageRequirement from './requirements/BattleFrontierTotalStageRequirement';
+import BerriesUnlockedRequirement from './requirements/BerriesUnlockedRequirement';
+import CapturedRequirement from './requirements/CapturedRequirement';
+import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
+import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
+import ClearGymRequirement from './requirements/ClearGymRequirement';
+import ClickRequirement from './requirements/ClickRequirement';
+import DefeatedRequirement from './requirements/DefeatedRequirement';
+import DiamondRequirement from './requirements/DiamondRequirement';
+import FarmPlotsUnlockedRequirement from './requirements/FarmPlotsUnlockedRequirement';
+import GymBadgeRequirement from './requirements/GymBadgeRequirement';
+import HatchRequirement from './requirements/HatchRequirement';
+import MoneyRequirement from './requirements/MoneyRequirement';
+import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
+import PokeballRequirement from './requirements/PokeballRequirement';
+import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
+import QuestRequirement from './requirements/QuestRequirement';
+import RouteKillRequirement from './requirements/RouteKillRequirement';
+import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
+import TokenRequirement from './requirements/TokenRequirement';
+import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
+import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
+import WeatherRequirement from './requirements/WeatherRequirement';
+import { SortModules, SortSaves } from './Sortable';
+import KeyItemController from './keyItems/KeyItemController';
+import KeyItem from './keyItems/KeyItem';
+import KeyItems from './keyItems/KeyItems';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -49,6 +101,7 @@ Object.assign(<any>window, {
     BadgeEnums,
     PokemonType,
     ItemType,
+    KeyItemType,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -78,4 +131,57 @@ Object.assign(<any>window, {
     SpriteCredits,
     CodeCredits,
     modalUtils,
+    PokemonCategories,
+    Information,
+    TypeHelper,
+    Upgrade,
+    ExpUpgrade,
+    OakItemType,
+    OakItem,
+    OakItems,
+    BoughtOakItem,
+    OakItemController,
+    OakItemLoadouts,
+    SpecialRoutePokemon,
+    RoutePokemon,
+    RegionRoute,
+    Routes,
+    SubRegion,
+    SubRegions,
+    AlolaSubRegions,
+    Requirement,
+    AchievementRequirement,
+    NullRequirement,
+    MultiRequirement,
+    OneFromManyRequirement,
+    AttackRequirement,
+    BattleFrontierHighestStageRequirement,
+    BattleFrontierTotalStageRequirement,
+    BerriesUnlockedRequirement,
+    CapturedRequirement,
+    CaughtPokemonRequirement,
+    ClearDungeonRequirement,
+    ClearGymRequirement,
+    ClickRequirement,
+    DefeatedRequirement,
+    DiamondRequirement,
+    FarmPlotsUnlockedRequirement,
+    GymBadgeRequirement,
+    HatchRequirement,
+    MoneyRequirement,
+    MaxLevelOakItemRequirement,
+    PokeballRequirement,
+    ProteinObtainRequirement,
+    QuestRequirement,
+    RouteKillRequirement,
+    ShinyPokemonRequirement,
+    TokenRequirement,
+    UndergroundItemsFoundRequirement,
+    UndergroundLayersMinedRequirement,
+    WeatherRequirement,
+    SortModules,
+    SortSaves,
+    KeyItemController,
+    KeyItem,
+    KeyItems,
 });

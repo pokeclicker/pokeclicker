@@ -194,9 +194,12 @@ class Plot implements Saveable {
             }
 
             // Aura
+
             if (this.stage() >= PlotStage.Taller && this.berryData.aura) {
+                const berryAuraValue = this.berryData.aura.getAuraValue(this.stage());
+                const lumAuraValue = this._auras[AuraType.Boost]();
                 tooltip.push('<u>Aura Emitted:</u>');
-                const emittedAura = this.berryData.aura.getAuraValue(this.stage()) * this._auras[AuraType.Boost]();
+                const emittedAura = (berryAuraValue >= 1) ? (berryAuraValue * lumAuraValue) : (berryAuraValue / lumAuraValue);
                 tooltip.push(`${AuraType[this.berryData.aura.auraType]}: ${emittedAura.toFixed(2)}x`);
             }
             const auraStr = this.formattedAuras();
@@ -309,7 +312,7 @@ class Plot implements Saveable {
             // Withered Berry plant drops half of the berries
             const amount = Math.ceil(this.harvestAmount() / 2);
             if (amount) {
-                App.game.farming.gainBerry(this.berry, amount, true);
+                App.game.farming.gainBerry(this.berry, amount);
                 this.notifications.push(FarmNotificationType.Dropped);
             }
 
@@ -318,7 +321,7 @@ class Plot implements Saveable {
             if (Rand.chance(replantChance)) {
                 this.age = 0;
                 this.notifications.push(FarmNotificationType.Replanted);
-                App.game.oakItems.use(OakItems.OakItem.Sprinklotad);
+                App.game.oakItems.use(OakItemType.Sprinklotad);
                 GameHelper.incrementObservable(App.game.statistics.totalBerriesReplanted, 1);
                 return;
             }

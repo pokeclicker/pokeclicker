@@ -334,7 +334,7 @@
             @import "battleFrontierInfo.html"
 
             <div id="middle-bottom-sort-column">
-                <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
+                <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
                     App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
                         <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
@@ -350,8 +350,12 @@
                     <span class='float-right px-4 bg-incomplete'>&nbsp;</span>
                     <br/><span>Uncaught Pokemon:</span>
                     <span class='float-right px-4 bg-uncaughtPokemon'>&nbsp;</span>
+                    <br/><span>Uncaught Shiny Pokemon and Missing Achievement:</span>
+                    <span class='float-right px-4 bg-uncaughtShinyPokemonAndMissingAchievement'>&nbsp;</span>
                     <br/><span>Uncaught Shiny Pokemon:</span>
                     <span class='float-right px-4 bg-uncaughtShinyPokemon'>&nbsp;</span>
+                    <br/><span>Missing Achievement:</span>
+                    <span class='float-right px-4 bg-missingAchievement'>&nbsp;</span>
                     <br/><span>Completed:</span>
                     <span class='float-right px-4 bg-completed'>&nbsp;</span>
                     <br/>
@@ -468,8 +472,8 @@
 <!-- Log Book Modal-->
 @import "nextRegionModal.html"
 
-<!-- Shards Modal -->
-@import "shardsModal.html"
+<!-- Gems Modal -->
+@import "gemsModal.html"
 
 <!-- Breeding Modal-->
 @import "breedingModal.html"

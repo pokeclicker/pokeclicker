@@ -235,15 +235,15 @@ class Underground implements Feature {
 
     gainEnergy() {
         if (this.energy < this.getMaxEnergy()) {
-            const oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
+            const oakMultiplier = App.game.oakItems.calculateBonus(OakItemType.Cell_Battery);
             this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
             if (this.energy === this.getMaxEnergy()) {
                 Notifier.notify({
                     message: 'Your mining energy has reached maximum capacity!',
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 1e4,
-                    sound: NotificationConstants.NotificationSound.underground_energy_full,
-                    setting: NotificationConstants.NotificationSetting.underground_energy_full,
+                    sound: NotificationConstants.NotificationSound.General.underground_energy_full,
+                    setting: NotificationConstants.NotificationSetting.General.underground_energy_full,
                 });
             }
         }
@@ -329,7 +329,7 @@ class Underground implements Feature {
             default:
                 const type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string
                 const typeNum = PokemonType[type];
-                App.game.shards.gainShards(GameConstants.PLATE_VALUE * amount, typeNum);
+                App.game.gems.gainGems(GameConstants.PLATE_VALUE * amount, typeNum);
         }
         return success;
     }
@@ -345,8 +345,8 @@ class Underground implements Feature {
         }
     }
 
-    canAccess() {
-        return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
+    public canAccess() {
+        return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit);
     }
 
     calculateItemEffect(item: GameConstants.EnergyRestoreSize) {

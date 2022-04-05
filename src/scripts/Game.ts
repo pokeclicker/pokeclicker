@@ -1,5 +1,6 @@
 /// <reference path="../declarations/DataStore/BadgeCase.d.ts" />
 /// <reference path="../declarations/GameHelper.d.ts" />
+/// <reference path="../declarations/party/Category.d.ts"/>
 
 /**
  * Main game class.
@@ -28,7 +29,7 @@ class Game {
         public oakItemLoadouts: OakItemLoadouts,
         public categories: PokemonCategories,
         public party: Party,
-        public shards: Shards,
+        public gems: Gems,
         public underground: Underground,
         public farming: Farming,
         public logbook: LogBook,
@@ -43,10 +44,6 @@ class Game {
         public multiplier: Multiplier
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
-
-        AchievementHandler.initialize(multiplier, challenges);
-        FarmController.initialize();
-        EffectEngineRunner.initialize(multiplier);
     }
 
     load() {
@@ -66,6 +63,10 @@ class Game {
     }
 
     initialize() {
+        AchievementHandler.initialize(this.multiplier, this.challenges);
+        FarmController.initialize();
+        EffectEngineRunner.initialize(this.multiplier);
+        ItemHandler.initilizeEvoStones();
         this.profile.initialize();
         this.breeding.initialize();
         this.pokeballs.initialize();
@@ -77,7 +78,12 @@ class Game {
         this.load();
 
         // TODO refactor to proper initialization methods
-        Battle.generateNewEnemy();
+        if (player.starter() != GameConstants.Starter.None) {
+            Battle.generateNewEnemy();
+        } else {
+            const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false);
+            Battle.enemyPokemon(battlePokemon);
+        }
         this.farming.resetAuras();
         //Safari.load();
         Underground.energyTick(this.underground.getEnergyRegenTime());
@@ -120,6 +126,9 @@ class Game {
             }
             hitsToKill = Math.ceil(hitsToKill / availablePokemonMap.length);
             const numberOfPokemonDefeated = Math.floor(timeDiffOverride / hitsToKill);
+            if (numberOfPokemonDefeated === 0) {
+                return;
+            }
             const routeMoney: number = PokemonFactory.routeMoney(player.route(), player.region, false);
             const baseMoneyToEarn = numberOfPokemonDefeated * routeMoney;
             const moneyToEarn = Math.floor(baseMoneyToEarn * 0.5);//Debuff for offline money
@@ -243,12 +252,15 @@ class Game {
                 //Refresh the Underground deals
                 DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
                 BerryDeal.generateDeals(now);
-                Notifier.notify({
-                    title: 'It\'s a new day!',
-                    message: 'Your Underground deals have been updated.<br/><i>You have a free quest refresh.</i>',
-                    type: NotificationConstants.NotificationOption.info,
-                    timeout: 3e4,
-                });
+                if (this.underground.canAccess() || App.game.quests.isDailyQuestsUnlocked()) {
+                    Notifier.notify({
+                        title: 'It\'s a new day!',
+                        message: `${this.underground.canAccess() ? 'Your Underground deals have been updated.<br/>' : ''}` +
+                        `${App.game.quests.isDailyQuestsUnlocked() ? '<i>You have a free quest refresh.</i>' : ''}`,
+                        type: NotificationConstants.NotificationOption.info,
+                        timeout: 3e4,
+                    });
+                }
             }
 
             // Check if it's a new hour

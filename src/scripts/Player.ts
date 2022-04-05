@@ -1,4 +1,4 @@
-/// <reference path="upgrades/Upgrade.ts" />
+/// <reference path="../declarations/upgrades/Upgrade.d.ts" />
 
 /**
  * Required modules before porting:
@@ -102,6 +102,10 @@ class Player {
 
     get itemList(): { [p: string]: KnockoutObservable<number> } {
         return this._itemList;
+    }
+
+    public amountOfItem(itemName: string) {
+        return this._itemList[itemName]();
     }
 
     private _itemMultipliers: { [name: string]: number };

@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.8.13"></script>
+    <script src="scripts/modules.min.js?v=0.8.17"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.8.13"></script>
+    <script src="scripts/script.min.js?v=0.8.17"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.8.13" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.8.17" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -145,6 +145,12 @@
                 <img alt="Checkout the Wiki!" src="https://img.shields.io/badge/wiki-link-blue?logo=wikimedia-commons&style=for-the-badge">
             </a>
         </div>
+        <div class="save-container justify-content-center container row"></div>
+        
+        <div class="new-import-buttons justify-content-center container row">
+            <label class="btn btn-success col-md-4 col-xs-12 mx-1" onclick="Save.key = Rand.string(6); document.querySelector('#saveSelector').remove(); App.start();">New Save</label>
+            <label for="import-save" class="btn btn-warning col-md-4 col-xs-12 mx-1" onclick="Save.key = Rand.string(6);">Import Save</label>
+        </div>
     </div>
     
     <div class="dropdown-menu py-0" id="saveSelectorContextMenu">
@@ -154,6 +160,37 @@
     </div>
 </div>
 
+<template id="trainerCardTemplate">
+    <div class="trainer-card-container mb-3 col-lg-4 col-md-6 col-sm-12 xol-xs-12">
+        <div class="trainer-card clickable card font-weight-bold">
+            <div class="card-body">
+                <h5 class="align-middle font-weight-bold">
+                    <img class="trainer-image"/>
+                    <span class="trainer-name"></span>
+                </h5>
+                <table class="table table-sm table-borderless col-8">
+                    <tbody>
+                        <tr>
+                            <td>Badges:</td>
+                            <td class="trainer-badges text-right">0</td>
+                        </tr>
+                        <tr>
+                            <td>Pokédex:</td>
+                            <td class="trainer-pokedex text-right">0</td>
+                        </tr>
+                        <tr>
+                            <td>Time:</td>
+                            <td class="trainer-time text-right">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <img class="trainer-pokemon-image" />
+                <small class="trainer-version">v0.0.0</small>
+                <div class="challenge-badges"></div>
+            </div>
+        </div>
+    </div>
+</template>
 
 <div class="loader background-night" id="loader">
     <br>
@@ -186,13 +223,26 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-right">
         <li>
-            <a class="dropdown-item" href="#profileModal" data-toggle="modal">Profile</a>
-        </li>
-        <li>
             <a class="dropdown-item" href="#pokedexModal" data-toggle="modal">Pokédex</a>
         </li>
         <li>
+            <a class="dropdown-item" href="#showItemsModal" data-toggle="modal">Items</a>
+        </li>
+        <li data-bind="attr: {  title: App.game.gems.canAccess() ? '' : 'Progress further to unlock...'}">
+            <a class="dropdown-item" href="#" data-bind="click:function(){App.game.gems.openGemModal()},
+            attr: {class: App.game.gems.canAccess() ? 'dropdown-item' : 'dropdown-item disabled all-pointers'}">Gems</a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="#profileModal" data-toggle="modal">Profile</a>
+        </li>
+        <li>
             <a class="dropdown-item" href="#badgeCaseModal" data-toggle="modal">Badge Case</a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="#saveModal" data-toggle="modal">Save</a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="#settingsModal" data-toggle="modal">Settings</a>
         </li>
         <li>
             <button class="dropdown-item" href="#statisticsModal" data-toggle="modal">Statistics</button>
@@ -203,21 +253,8 @@
         <li>
             <a class="dropdown-item" href="#logBookModal" data-toggle="modal">Log Book</a>
         </li>
-        <li data-bind="attr: {  title: App.game.shards.canAccess() ? '' : 'Progress further to unlock...'}">
-            <a class="dropdown-item" href="#" data-bind="click:function(){App.game.shards.openShardModal()},
-            attr: {class: App.game.shards.canAccess() ? 'dropdown-item' : 'dropdown-item disabled all-pointers'}">Shards</a>
-        </li>
-        <li>
-            <a class="dropdown-item" href="#showItemsModal" data-toggle="modal">Items</a>
-        </li>
-        <li>
-            <a class="dropdown-item" href="#settingsModal" data-toggle="modal">Settings</a>
-        </li>
         <li>
             <a class="dropdown-item" href="#damageCalculatorModal" data-toggle="modal">Damage Calculator</a>
-        </li>
-        <li>
-            <a class="dropdown-item" href="#saveModal" data-toggle="modal">Save</a>
         </li>
         <li>
             <a class="dropdown-item" href="#challengeModeModal" data-toggle="modal">Challenge Modes</a>
@@ -399,7 +436,8 @@
                             <div class="row col-10" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
                                 <div class="col-2" style="cursor: pointer"
                                         data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
-                                            click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}">
+                                            click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')},
+                                            visible: ItemList[$data].unlockedRegion <= player.highestRegion() || player.amountOfItem($data) > 0">
                                     <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;">
                                     <div data-bind="text: player._itemList[$data]()"></div>
                                 </div>
@@ -417,9 +455,11 @@
                                         <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data.id, true) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
                                         <span data-bind="text: name" style="margin-left: 20px">Name</span>
 
-                                        <span style="float:right; margin-top:8px" data-bind="template: { name: 'caughtStatusTemplate', data: {'status':
-                                            PartyController.getEvolutionsCaughtStatus($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()])
-                                            }}"></span>
+                                        <span style="float:right; margin-top:8px"  data-bind="using: { statuses: PartyController.getStoneEvolutionsCaughtStatus($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">
+                                            <div class="row" data-bind="foreach: statuses">
+                                                <div class="col-2" data-bind="template: { name: 'caughtStatusTemplate', data: { 'status': $data } }"></div>
+                                            </div>
+                                        </span>
                                     </button>
                                 </div>
                             </div>
@@ -435,6 +475,9 @@
                                                   }">
                         </div>
                         <p><i>Stops using evolution stones once a shiny is encountered</i></p>
+                        <p data-bind="visible: PartyController.hasMultipleStoneEvolutionsAvailable(ItemHandler.pokemonSelected(), GameConstants.StoneType[ItemHandler.stoneSelected()])">
+                            <i>If the requirements for more than one evolution is fulfilled, a random evolution will be selected</i>
+                        </p>
                         <div class="row no-gutters justify-content-sm-center">
                             <div class="row justify-content-center" style="padding:15px;">
                                 <button data-bind="click: function(){ItemHandler.useStones()}" class="btn btn-lg btn-success">Use evolution stones!</button>
@@ -546,6 +589,12 @@
 
 <script type="text/html" id="caughtStatusTemplate">
     <knockout style="display: inline;">
+        <!-- ko if: $data.status == CaughtStatus.NotCaught -->
+        <img title="You have not captured this Pokémon yet!"
+             class="pokeball-smallest"
+             src="assets/images/pokeball/None.svg"
+        />
+        <!-- /ko -->
         <!-- ko if: $data.status == CaughtStatus.Caught -->
         <img title="You have captured this Pokémon!"
              class="pokeball-smallest"
@@ -1182,18 +1231,29 @@
 
                     <!--TownView-->
                     <knockout data-bind="if: App.game.gameState === GameConstants.GameState.town">
-<div id="townView" data-bind="style: { backgroundImage: 'url(\'assets/images/towns/' + player.town().name + '.png\')' }"
+<div id="townView" data-bind="style: { backgroundImage: `url('assets/images/towns/${player.town().name.replace(/'/, `\\'`)}.png')` }"
      class="justify-content-center no-gutters no-select">
     <div class="row justify-content-center no-gutters">
         <div class="col no-gutters">
             <button type="button" class="btn btn-outline-info" style="float: right;"
-            data-bind="visible: player.town().gym || player.town().shop, tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
+            data-bind="visible: player.town().gym || player.town().shop, tooltip: { title: 'In towns you can battle Gym Leaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
             <button type="button" class="btn btn-outline-info" style="float: right;"
-            data-bind="visible: player.town() instanceof DungeonTown, tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
+            data-bind="visible: player.town() instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'), tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
             <h2 class="pageItemTitle">
               <knockout data-bind="text: player.town().name">Town Name</knockout>
-
+              <knockout data-bind="if: player.town().gym && QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">
+                  <knockout class="left" data-bind="using: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town().name)]()">
+                      <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
+                      <knockout data-bind="visible: player.town().gym">clears</knockout>
+                  </knockout>
+              </knockout>
               <knockout data-bind="if: player.town() instanceof DungeonTown && player.town().dungeon">
+                  <!-- ko if: QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->
+                  <knockout class="right" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]()">
+                      <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
+                      <knockout data-bind="visible: QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">clears</knockout>
+                  </knockout>
+                  <!-- /ko -->
                   <!--If all Pokémon in the dungeon are caught-->
                   <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(player.town().dungeon, true) && DungeonRunner.dungeonCompleted(player.town().dungeon, false))">
                       <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
@@ -1357,7 +1417,8 @@
                                             title: Battle.enemyPokemon()
                                                 ? `${App.game.party.calculatePokemonAttack(
                                                     Battle.enemyPokemon().type1,
-                                                    Battle.enemyPokemon().type2
+                                                    Battle.enemyPokemon().type2,
+                                                    true,
                                                 ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
                                                 : '',
                                             trigger: 'hover',
@@ -1455,8 +1516,12 @@
                     <span class='float-right px-4 bg-incomplete'>&nbsp;</span>
                     <br/><span>Uncaught Pokemon:</span>
                     <span class='float-right px-4 bg-uncaughtPokemon'>&nbsp;</span>
+                    <br/><span>Uncaught Shiny Pokemon and Missing Achievement:</span>
+                    <span class='float-right px-4 bg-uncaughtShinyPokemonAndMissingAchievement'>&nbsp;</span>
                     <br/><span>Uncaught Shiny Pokemon:</span>
                     <span class='float-right px-4 bg-uncaughtShinyPokemon'>&nbsp;</span>
+                    <br/><span>Missing Achievement:</span>
+                    <span class='float-right px-4 bg-missingAchievement'>&nbsp;</span>
                     <br/><span>Completed:</span>
                     <span class='float-right px-4 bg-completed'>&nbsp;</span>
                     <br/>
@@ -2662,6 +2727,41 @@
     width="128"
     data-bind="visible: player.highestRegion() &gt;= 1, click:function(){MapHelper.openShipModal()}, attr:{ class: player.highestRegion() &gt;= 1 ? &#39;completed&#39; : &#39;locked&#39;}">
 </rect>
+
+    
+
+<image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
+    x="432"
+    y="592"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Oak&#39;s Blimp" 
+    x="432"
+    y="592"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Pallet Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Pallet Town&#39;) }">
+</rect>
+
+     
+
+<image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
+    x="432"
+    y="592"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Oak&#39;s Blimp" 
+    x="432"
+    y="592"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Pallet Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Pallet Town&#39;) }">
+</rect>
+
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
@@ -3557,6 +3657,36 @@
         ">
 </rect>
 
+    <!--Indigo Plateau 2.0 Extension-->
+    
+
+<rect class="city"
+    data-town="Indigo Plateau Johto" 
+    x="1472"
+    y="176"
+    height="48"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Indigo Plateau Johto')},
+        attr: { class: MapHelper.calculateTownCssClass('Indigo Plateau Johto') },
+        ">
+</rect>
+
+    <!--Indigo Plateau 2.0 Extension-->
+    
+
+<rect class="city"
+    data-town="Indigo Plateau Johto" 
+    x="1488"
+    y="224"
+    height="80"
+    width="48"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Indigo Plateau Johto')},
+        attr: { class: MapHelper.calculateTownCssClass('Indigo Plateau Johto') },
+        ">
+</rect>
+
 
 
 
@@ -3904,6 +4034,40 @@
     height="64"
     width="64"
     data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
+
+     
+
+<image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
+    x="1184"
+    y="720"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Elm&#39;s Blimp" 
+    x="1184"
+    y="720"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;New Bark Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;New Bark Town&#39;) }">
+</rect>
+
+     
+
+<image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
+    x="1184"
+    y="720"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Elm&#39;s Blimp" 
+    x="1184"
+    y="720"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;New Bark Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;New Bark Town&#39;) }">
 </rect>
 
 </g>
@@ -5496,7 +5660,39 @@
     data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
+     
 
+<image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
+    x="304"
+    y="688"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Birch&#39;s Blimp" 
+    x="304"
+    y="688"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Littleroot Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Littleroot Town&#39;) }">
+</rect>
+
+     
+
+<image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
+    x="304"
+    y="688"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Birch&#39;s Blimp" 
+    x="304"
+    y="688"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Littleroot Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Littleroot Town&#39;) }">
+</rect>
 
 </g>
 
@@ -7094,7 +7290,7 @@
 
      
 
-<image href="assets/images/map/distorsion_world.png" xlink:href="assets/images/map/distorsion_world.png"
+<image href="assets/images/map/distortion_world.png" xlink:href="assets/images/map/distortion_world.png"
     x="1184"
     y="624"
     height="80"
@@ -7108,6 +7304,41 @@
     width="80"
     data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Distortion World&#39;)]() &gt;= 1, click:function(){MapHelper.moveToTown(&#39;Distortion World&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Distortion World&#39;) }">
 </rect>
+
+     
+
+<image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
+    x="192"
+    y="848"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Rowan&#39;s Blimp" 
+    x="192"
+    y="848"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Twinleaf Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Twinleaf Town&#39;) }">
+</rect>
+
+     
+
+<image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
+    x="192"
+    y="848"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Rowan&#39;s Blimp" 
+    x="192"
+    y="848"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Twinleaf Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Twinleaf Town&#39;) }">
+</rect>
+
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
@@ -8652,6 +8883,41 @@
     width="64"
     data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
+
+     
+
+<image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
+    x="160"
+    y="768"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Juniper&#39;s Blimp" 
+    x="160"
+    y="768"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Aspertia City&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Aspertia City&#39;) }">
+</rect>
+
+     
+
+<image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
+    x="160"
+    y="768"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Juniper&#39;s Blimp" 
+    x="160"
+    y="768"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Aspertia City&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Aspertia City&#39;) }">
+</rect>
+
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
@@ -9944,18 +10210,2764 @@
     data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
+     
+
+<image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
+    x="912"
+    y="832"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Sycamore&#39;s Blimp" 
+    x="912"
+    y="832"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() != GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Vaniville Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Vaniville Town&#39;) }">
+</rect>
+
+     
+
+<image href="assets/images/map/blimp_pikachu.png" xlink:href="assets/images/map/blimp_pikachu.png"
+    x="912"
+    y="832"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu"/>
+<rect class="city"
+    data-town="Professor Sycamore&#39;s Blimp" 
+    x="912"
+    y="832"
+    height="48"
+    width="96"
+    data-bind="visible: MapHelper.ableToTravel() &amp;&amp; player.starter() == GameConstants.Starter.Pikachu, click:function(){MapHelper.moveToTown(&#39;Vaniville Town&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Vaniville Town&#39;) }">
+</rect>
+
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.alola'>
-    <!-- ko if: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele & Akala islands').id -->
-    <image width="1600" height="960" xlink:href="assets/images/alola.png" href="assets/images/alola.png"></image>
-
-    <!-- ------ -->
-    <!-- ROUTES -->
-    <!-- ------ -->
-
-    <!--Route 1-->
     
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
+        <image width="1600" height="960" xlink:href="assets/images/alola-melemele.png" href="assets/images/alola-melemele.png"></image>
+
+        <!-- ------ -->
+        <!-- ROUTES -->
+        <!-- ------ -->
+
+        <!--Route 1-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
+        height="64"
+        width="160"
+        x="784" y="400">
+    </rect>
+
+    <text style="font-size: 32px" x="856" y="442">1</text>
+
+</g>
+
+
+        <!--Route 1 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
+        height="32"
+        width="112"
+        x="672" y="448">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
+        height="16"
+        width="16"
+        x="768" y="432">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
+        height="16"
+        width="16"
+        x="784" y="464">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
+        height="32"
+        width="144"
+        x="976" y="400">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
+        height="16"
+        width="128"
+        x="912" y="384">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
+        height="16"
+        width="32"
+        x="944" y="400">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
+        height="40"
+        width="32"
+        x="1104" y="432">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
+        height="16"
+        width="16"
+        x="1088" y="432">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
+        height="64"
+        width="32"
+        x="672" y="384">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
+        height="32"
+        width="80"
+        x="944" y="432">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
+        height="48"
+        width="32"
+        x="1024" y="464">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
+        height="16"
+        width="16"
+        x="1024" y="448">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
+        height="32"
+        width="16"
+        x="1008" y="464">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
+        height="16"
+        width="16"
+        x="992" y="464">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="32"
+        width="128"
+        x="752" y="656">
+    </rect>
+
+    <text style="font-size: 32px" x="744" y="682">Outskirts</text>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="32"
+        width="80"
+        x="880" y="624">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="32"
+        width="64"
+        x="976" y="592">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="48"
+        width="64"
+        x="1040" y="544">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="16"
+        width="32"
+        x="848" y="640">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="16"
+        width="32"
+        x="880" y="656">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="16"
+        width="48"
+        x="928" y="608">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="16"
+        width="32"
+        x="960" y="624">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="32"
+        width="32"
+        x="1024" y="512">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="16"
+        width="16"
+        x="1024" y="544">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="16"
+        width="16"
+        x="1056" y="528">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="16"
+        width="32"
+        x="1008" y="576">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="48"
+        width="32"
+        x="1104" y="592">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="32"
+        width="16"
+        x="1104" y="560">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="32"
+        width="16"
+        x="1088" y="592">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="16"
+        width="16"
+        x="1040" y="592">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="32"
+        width="96"
+        x="688" y="624">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="16"
+        width="16"
+        x="736" y="656">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="16"
+        width="32"
+        x="784" y="640">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="16"
+        width="128"
+        x="624" y="608">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="16"
+        width="32"
+        x="656" y="624">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="32"
+        width="96"
+        x="576" y="576">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="32"
+        width="64"
+        x="528" y="544">
+    </rect>
+
+</g>
+
+
+        <!--Route 1 Hau'oli Outskirts extension--> 
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
+        height="16"
+        width="32"
+        x="544" y="576">
+    </rect>
+
+</g>
+
+
+        <!--Route 2-->
+        
+
+<g
+
+    transform="rotate(90 ,160, 192)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
+        height="48"
+        width="272"
+        x="160" y="144">
+    </rect>
+
+    <text style="font-size: 32px" x="288" y="178">2</text>
+
+</g>
+
+
+        <!--Route 2-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
+        height="32"
+        width="48"
+        x="208" y="368">
+    </rect>
+
+</g>
+
+
+        <!--Route 2-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
+        height="16"
+        width="32"
+        x="224" y="400">
+    </rect>
+
+</g>
+
+
+        <!--Route 2-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
+        height="80"
+        width="32"
+        x="208" y="176">
+    </rect>
+
+</g>
+
+
+        <!--Route 2-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
+        height="32"
+        width="16"
+        x="240" y="224">
+    </rect>
+
+</g>
+
+
+        <!--Route 2-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
+        height="64"
+        width="32"
+        x="256" y="224">
+    </rect>
+
+</g>
+
+
+        <!--Route 2-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
+        height="32"
+        width="80"
+        x="240" y="176">
+    </rect>
+
+</g>
+
+
+        <!--Route 2-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
+        height="32"
+        width="80"
+        x="320" y="160">
+    </rect>
+
+</g>
+
+
+        <!--Route 2-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
+        height="32"
+        width="64"
+        x="400" y="144">
+    </rect>
+
+</g>
+
+
+        <!--Route 2-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
+        height="48"
+        width="32"
+        x="464" y="112">
+    </rect>
+
+</g>
+
+
+        <!--Route 2-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
+        height="16"
+        width="32"
+        x="288" y="160">
+    </rect>
+
+</g>
+
+
+        <!--Route 2-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
+        height="16"
+        width="32"
+        x="368" y="144">
+    </rect>
+
+</g>
+
+
+        <!--Route 2-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
+        height="16"
+        width="32"
+        x="432" y="128">
+    </rect>
+
+</g>
+
+
+        <!--Route 2-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
+        height="16"
+        width="32"
+        x="432" y="176">
+    </rect>
+
+</g>
+
+
+        <!--Route 3-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="80"
+        width="80"
+        x="592" y="48">
+    </rect>
+
+    <text style="font-size: 32px" x="624" y="98">3</text>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="32"
+        width="96"
+        x="496" y="96">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="16"
+        width="32"
+        x="496" y="128">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="16"
+        width="48"
+        x="544" y="80">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="16"
+        width="16"
+        x="576" y="64">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="80"
+        width="32"
+        x="672" y="64">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="16"
+        width="16"
+        x="656" y="128">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="64"
+        width="32"
+        x="704" y="96">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="16"
+        width="16"
+        x="704" y="80">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="48"
+        width="48"
+        x="720" y="160">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="16"
+        width="16"
+        x="736" y="144">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="80"
+        width="32"
+        x="736" y="272">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="16"
+        width="16"
+        x="752" y="352">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="64"
+        width="32"
+        x="728" y="208">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="16"
+        width="8"
+        x="760" y="256">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="32"
+        width="48"
+        x="768" y="368">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="16"
+        width="16"
+        x="752" y="368">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="16"
+        width="32"
+        x="768" y="352">
+    </rect>
+
+</g>
+
+
+        <!--Route 3 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
+        height="16"
+        width="16"
+        x="768" y="336">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="48"
+        width="208"
+        x="1248" y="640">
+    </rect>
+
+    <text style="font-size: 32px" x="1288" y="674">Melemele</text>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="48"
+        width="208"
+        x="1248" y="688">
+    </rect>
+
+    <text style="font-size: 32px" x="1328" y="722">Sea</text>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="48"
+        width="176"
+        x="1264" y="592">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="32"
+        width="16"
+        x="1440" y="608">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="32"
+        width="112"
+        x="1248" y="560">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="64"
+        x="1360" y="576">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="32"
+        x="1232" y="544">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="160"
+        x="1104" y="720">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="48"
+        width="32"
+        x="1216" y="672">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="32"
+        x="1184" y="704">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="16"
+        x="1200" y="688">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="32"
+        width="16"
+        x="1472" y="688">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="80"
+        width="16"
+        x="1456" y="656">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="96"
+        width="368"
+        x="1104" y="736">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="48"
+        width="240"
+        x="1216" y="832">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="80"
+        width="16"
+        x="1472" y="752">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="32"
+        width="16"
+        x="1456" y="832">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="48"
+        width="16"
+        x="1488" y="784">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="16"
+        x="1200" y="864">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="160"
+        x="1264" y="880">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="32"
+        x="1296" y="896">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="32"
+        width="112"
+        x="1040" y="832">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="32"
+        width="192"
+        x="848" y="864">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="128"
+        width="32"
+        x="752" y="688">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="48"
+        width="80"
+        x="784" y="816">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="32"
+        width="48"
+        x="784" y="784">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="16"
+        x="784" y="768">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="16"
+        x="832" y="800">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="32"
+        width="32"
+        x="784" y="688">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="16"
+        x="816" y="688">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="16"
+        x="784" y="720">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="32"
+        x="720" y="736">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="32"
+        width="16"
+        x="736" y="752">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="32"
+        width="16"
+        x="768" y="816">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="32"
+        x="816" y="864">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="32"
+        x="912" y="896">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="32"
+        width="16"
+        x="864" y="832">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="48"
+        x="880" y="848">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="16"
+        x="1024" y="848">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="96"
+        x="1040" y="864">
+    </rect>
+
+</g>
+
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="16"
+        width="32"
+        x="1072" y="880">
+    </rect>
+
+</g>
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="32"
+        width="32"
+        x="1072" y="800">
+    </rect>
+
+</g>
+
+
+
+        <!--Melemele Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
+        height="32"
+        width="16"
+        x="1088" y="768">
+    </rect>
+
+</g>
+
+
+        <!--Kala'e Bay-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
+    <rect data-route='20'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
+        height="96"
+        width="128"
+        x="864" y="192">
+    </rect>
+
+    <text style="font-size: 32px" x="848" y="250">Kala&#39;e Bay</text>
+
+</g>
+
+
+        <!--Kala'e Bay extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
+    <rect data-route='20'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
+        height="32"
+        width="16"
+        x="992" y="224">
+    </rect>
+
+</g>
+
+
+        <!--Kala'e Bay extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
+    <rect data-route='20'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
+        height="32"
+        width="104"
+        x="760" y="224">
+    </rect>
+
+</g>
+
+
+        <!--Kala'e Bay extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
+    <rect data-route='20'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
+        height="16"
+        width="16"
+        x="848" y="256">
+    </rect>
+
+</g>
+
+
+        <!--Kala'e Bay extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
+    <rect data-route='20'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
+        height="16"
+        width="112"
+        x="864" y="176">
+    </rect>
+
+</g>
+
+
+        <!--Kala'e Bay extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
+    <rect data-route='20'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
+        height="16"
+        width="64"
+        x="880" y="160">
+    </rect>
+
+</g>
+
+
+        <!--Kala'e Bay extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
+    <rect data-route='20'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
+        height="48"
+        width="48"
+        x="896" y="288">
+    </rect>
+
+</g>
+
+
+        <!--Kala'e Bay extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
+    <rect data-route='20'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
+        height="16"
+        width="16"
+        x="880" y="288">
+    </rect>
+
+</g>
+
+
+        <!--Kala'e Bay extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
+    <rect data-route='20'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
+        height="32"
+        width="16"
+        x="896" y="336">
+    </rect>
+
+</g>
+
+
+        <!--Kala'e Bay extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
+    <rect data-route='20'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
+        height="16"
+        width="16"
+        x="880" y="352">
+    </rect>
+
+</g>
+
+
+        <!--Kala'e Bay extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
+    <rect data-route='20'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
+        height="32"
+        width="32"
+        x="944" y="288">
+    </rect>
+
+</g>
+
+
+        <!-- ----- -->
+        <!-- TOWNS -->
+        <!-- ----- -->
+
+        <!--Iki Town Outskirts-->
+        
+
+<rect class="city"
+    data-town="Iki Town Outskirts" 
+    x="1072"
+    y="472"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Iki Town Outskirts')},
+        attr: { class: MapHelper.calculateTownCssClass('Iki Town Outskirts') },
+        
+            css: { flash: MapHelper.ableToTravel() }
+        ">
+</rect>
+
+        <!--Iki Town-->
+        
+
+<rect class="city"
+    data-town="Iki Town" 
+    x="512"
+    y="256"
+    height="128"
+    width="208"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Iki Town')},
+        attr: { class: MapHelper.calculateTownCssClass('Iki Town') },
+        ">
+</rect>
+
+        <!--Iki Town extension-->
+        
+
+<rect class="city"
+    data-town="Iki Town" 
+    x="496"
+    y="256"
+    height="112"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Iki Town')},
+        attr: { class: MapHelper.calculateTownCssClass('Iki Town') },
+        ">
+</rect>
+
+        <!--Professor Kukui\'s Lab-->
+        
+
+<rect class="city"
+    data-town="Professor Kukui&#39;s Lab" 
+    x="1136"
+    y="592"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Professor Kukui\&#39;s Lab')},
+        attr: { class: MapHelper.calculateTownCssClass('Professor Kukui\&#39;s Lab') },
+        ">
+</rect>
+
+        <!--Hau'oli City-->
+        
+
+<rect class="city"
+    data-town="Hau&#39;oli City" 
+    x="144"
+    y="480"
+    height="64"
+    width="368"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Hau\&#39;oli City')},
+        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli City') },
+        ">
+</rect>
+
+        <!--Hau'oli City Extension-->
+        
+
+<rect class="city"
+    data-town="Hau&#39;oli City" 
+    x="208"
+    y="472"
+    height="8"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Hau\&#39;oli City')},
+        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli City') },
+        ">
+</rect>
+
+        <!--Hau'oli City Extension-->
+        
+
+<rect class="city"
+    data-town="Hau&#39;oli City" 
+    x="320"
+    y="472"
+    height="8"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Hau\&#39;oli City')},
+        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli City') },
+        ">
+</rect>
+
+        <!--Hau'oli City Extension-->
+        
+
+<rect class="city"
+    data-town="Hau&#39;oli City" 
+    x="80"
+    y="544"
+    height="112"
+    width="448"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Hau\&#39;oli City')},
+        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli City') },
+        ">
+</rect>
+
+        <!--Hau'oli City Extension-->
+        
+
+<rect class="city"
+    data-town="Hau&#39;oli City" 
+    x="128"
+    y="528"
+    height="16"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Hau\&#39;oli City')},
+        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli City') },
+        ">
+</rect>
+
+        <!--Hau'oli City Extension-->
+        
+
+<rect class="city"
+    data-town="Hau&#39;oli City" 
+    x="224"
+    y="656"
+    height="32"
+    width="304"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Hau\&#39;oli City')},
+        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli City') },
+        ">
+</rect>
+
+        <!--Hau'oli City Extension-->
+        
+
+<rect class="city"
+    data-town="Hau&#39;oli City" 
+    x="208"
+    y="656"
+    height="16"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Hau\&#39;oli City')},
+        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli City') },
+        ">
+</rect>
+
+        <!--Hau'oli City Extension-->
+        
+
+<rect class="city"
+    data-town="Hau&#39;oli City" 
+    x="224"
+    y="688"
+    height="16"
+    width="160"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Hau\&#39;oli City')},
+        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli City') },
+        ">
+</rect>
+
+        <!--Hau'oli City Extension-->
+        
+
+<rect class="city"
+    data-town="Hau&#39;oli City" 
+    x="160"
+    y="464"
+    height="16"
+    width="48"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Hau\&#39;oli City')},
+        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli City') },
+        ">
+</rect>
+
+        <!--Hau'oli City Extension-->
+        
+
+<rect class="city"
+    data-town="Hau&#39;oli City" 
+    x="592"
+    y="520"
+    height="56"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Hau\&#39;oli City')},
+        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli City') },
+        ">
+</rect>
+
+        <!--Hau'oli City Extension-->
+        
+
+<rect class="city"
+    data-town="Hau&#39;oli City" 
+    x="672"
+    y="552"
+    height="56"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Hau\&#39;oli City')},
+        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli City') },
+        ">
+</rect>
+
+        <!--Roadside Motel-->
+        
+
+<rect class="city"
+    data-town="Roadside Motel" 
+    x="80"
+    y="232"
+    height="88"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Roadside Motel')},
+        attr: { class: MapHelper.calculateTownCssClass('Roadside Motel') },
+        ">
+</rect>
+
+        <!-- -------- -->
+        <!-- DUNGEONS -->
+        <!-- -------- -->
+
+        <!--Trainers School-->
+        
+
+<rect class="city"
+    data-town="Trainers&#39; School" 
+    x="880"
+    y="536"
+    height="72"
+    width="96"
+    data-bind="click:function(){MapHelper.moveToTown('Trainers\&#39; School')},
+        attr: { class: MapHelper.calculateTownCssClass('Trainers\&#39; School') }">
+</rect>
+
+        <!--Hau'oli Cemetery-->
+        
+
+<rect class="city"
+    data-town="Hau&#39;oli Cemetery" 
+    x="320"
+    y="336"
+    height="80"
+    width="96"
+    data-bind="click:function(){MapHelper.moveToTown('Hau\&#39;oli Cemetery')},
+        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli Cemetery') }">
+</rect>
+
+        <!--Hau'oli Cemetery extension-->
+        
+
+<rect class="city"
+    data-town="Hau&#39;oli Cemetery" 
+    x="416"
+    y="352"
+    height="64"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Hau\&#39;oli Cemetery')},
+        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli Cemetery') }">
+</rect>
+
+        <!--Hau'oli Cemetery extension-->
+        
+
+<rect class="city"
+    data-town="Hau&#39;oli Cemetery" 
+    x="256"
+    y="384"
+    height="32"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Hau\&#39;oli Cemetery')},
+        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli Cemetery') }">
+</rect>
+
+        <!-- Verdant Cavern-->
+        
+
+<rect class="city"
+    data-town="Verdant Cavern" 
+    x="464"
+    y="160"
+    height="48"
+    width="80"
+    data-bind="click:function(){MapHelper.moveToTown('Verdant Cavern')},
+        attr: { class: MapHelper.calculateTownCssClass('Verdant Cavern') }">
+</rect>
+
+        <!--Melemele Meadow-->
+        
+
+<rect class="city"
+    data-town="Melemele Meadow" 
+    x="608"
+    y="144"
+    height="32"
+    width="96"
+    data-bind="click:function(){MapHelper.moveToTown('Melemele Meadow')},
+        attr: { class: MapHelper.calculateTownCssClass('Melemele Meadow') }">
+</rect>
+
+        <!--Melemele Meadow extension-->
+        
+
+<rect class="city"
+    data-town="Melemele Meadow" 
+    x="704"
+    y="160"
+    height="16"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Melemele Meadow')},
+        attr: { class: MapHelper.calculateTownCssClass('Melemele Meadow') }">
+</rect>
+
+        <!--Melemele Meadow extension-->
+        
+
+<rect class="city"
+    data-town="Melemele Meadow" 
+    x="576"
+    y="128"
+    height="32"
+    width="32"
+    data-bind="click:function(){MapHelper.moveToTown('Melemele Meadow')},
+        attr: { class: MapHelper.calculateTownCssClass('Melemele Meadow') }">
+</rect>
+
+        <!--Melemele Meadow extension-->
+        
+
+<rect class="city"
+    data-town="Melemele Meadow" 
+    x="560"
+    y="128"
+    height="16"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Melemele Meadow')},
+        attr: { class: MapHelper.calculateTownCssClass('Melemele Meadow') }">
+</rect>
+
+        <!--Melemele Meadow extension-->
+        
+
+<rect class="city"
+    data-town="Melemele Meadow" 
+    x="608"
+    y="128"
+    height="16"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Melemele Meadow')},
+        attr: { class: MapHelper.calculateTownCssClass('Melemele Meadow') }">
+</rect>
+
+        <!--Seaward Cave-->
+        
+
+<rect class="city"
+    data-town="Seaward Cave" 
+    x="768"
+    y="128"
+    height="80"
+    width="48"
+    data-bind="click:function(){MapHelper.moveToTown('Seaward Cave')},
+        attr: { class: MapHelper.calculateTownCssClass('Seaward Cave') }">
+</rect>
+
+        <!--Seaward Cave extension-->
+        
+
+<rect class="city"
+    data-town="Seaward Cave" 
+    x="816"
+    y="144"
+    height="48"
+    width="32"
+    data-bind="click:function(){MapHelper.moveToTown('Seaward Cave')},
+        attr: { class: MapHelper.calculateTownCssClass('Seaward Cave') }">
+</rect>
+
+        <!--Seaward Cave extension-->
+        
+
+<rect class="city"
+    data-town="Seaward Cave" 
+    x="816"
+    y="192"
+    height="16"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Seaward Cave')},
+        attr: { class: MapHelper.calculateTownCssClass('Seaward Cave') }">
+</rect>
+
+        <!--Ten Carat Hill-->
+        
+
+<rect class="city"
+    data-town="Ten Carat Hill" 
+    x="832"
+    y="688"
+    height="112"
+    width="256"
+    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
+        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
+</rect>
+
+        <!--Ten Carat Hill extension-->
+        
+
+<rect class="city"
+    data-town="Ten Carat Hill" 
+    x="880"
+    y="800"
+    height="48"
+    width="160"
+    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
+        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
+</rect>
+
+        <!--Ten Carat Hill extension-->
+        
+
+<rect class="city"
+    data-town="Ten Carat Hill" 
+    x="912"
+    y="656"
+    height="32"
+    width="176"
+    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
+        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
+</rect>
+
+        <!--Ten Carat Hill extension-->
+        
+
+<rect class="city"
+    data-town="Ten Carat Hill" 
+    x="992"
+    y="624"
+    height="32"
+    width="96"
+    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
+        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
+</rect>
+
+        <!--Ten Carat Hill extension-->
+        
+
+<rect class="city"
+    data-town="Ten Carat Hill" 
+    x="1056"
+    y="592"
+    height="32"
+    width="32"
+    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
+        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
+</rect>
+
+        <!--Ten Carat Hill extension-->
+        
+
+<rect class="city"
+    data-town="Ten Carat Hill" 
+    x="1040"
+    y="608"
+    height="16"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
+        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
+</rect>
+
+        <!--Ten Carat Hill extension-->
+        
+
+<rect class="city"
+    data-town="Ten Carat Hill" 
+    x="960"
+    y="640"
+    height="16"
+    width="32"
+    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
+        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
+</rect>
+
+        <!--Ten Carat Hill extension-->
+        
+
+<rect class="city"
+    data-town="Ten Carat Hill" 
+    x="880"
+    y="672"
+    height="16"
+    width="32"
+    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
+        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
+</rect>
+
+        <!--Ten Carat Hill extension-->
+        
+
+<rect class="city"
+    data-town="Ten Carat Hill" 
+    x="816"
+    y="704"
+    height="32"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
+        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
+</rect>
+
+        <!--Ten Carat Hill extension-->
+        
+
+<rect class="city"
+    data-town="Ten Carat Hill" 
+    x="816"
+    y="752"
+    height="32"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
+        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
+</rect>
+
+        
+        <!--Ten Carat Hill extension-->
+        
+
+<rect class="city"
+    data-town="Ten Carat Hill" 
+    x="864"
+    y="800"
+    height="32"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
+        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
+</rect>
+        
+        <!--Ten Carat Hill extension-->
+        
+
+<rect class="city"
+    data-town="Ten Carat Hill" 
+    x="848"
+    y="800"
+    height="16"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
+        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
+</rect>
+        
+        <!--Ten Carat Hill extension-->
+        
+
+<rect class="city"
+    data-town="Ten Carat Hill" 
+    x="928"
+    y="848"
+    height="16"
+    width="96"
+    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
+        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
+</rect>
+        
+        <!--Ten Carat Hill extension-->
+        
+
+<rect class="city"
+    data-town="Ten Carat Hill" 
+    x="1040"
+    y="800"
+    height="32"
+    width="32"
+    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
+        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
+</rect>
+
+            
+        <!--Ten Carat Hill extension-->
+        
+
+<rect class="city"
+    data-town="Ten Carat Hill" 
+    x="1088"
+    y="624"
+    height="32"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
+        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
+</rect>
+
+        <!--Ruins of Conflict-->
+        
+
+<rect class="city"
+    data-town="Ruins of Conflict" 
+    x="560"
+    y="192"
+    height="64"
+    width="80"
+    data-bind="click:function(){MapHelper.moveToTown('Ruins of Conflict')},
+        attr: { class: MapHelper.calculateTownCssClass('Ruins of Conflict') }">
+</rect>
+
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+
+        <!--Dock-->
+        
+
+<rect class="city"
+    data-town="Dock" 
+    x="352"
+    y="736"
+    height="96"
+    width="192"
+    data-bind="click:function(){MapHelper.openShipModal()}">
+</rect>
+
+        <!--Dock extension-->
+        
+
+<rect class="city"
+    data-town="Dock" 
+    x="480"
+    y="688"
+    height="48"
+    width="48"
+    data-bind="click:function(){MapHelper.openShipModal()}">
+</rect>
+
+        <!--Dock extension-->
+        
+
+<rect class="city"
+    data-town="Dock" 
+    x="368"
+    y="720"
+    height="16"
+    width="112"
+    data-bind="click:function(){MapHelper.openShipModal()}">
+</rect>
+    </g>
+
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele & Akala islands').id">
+        <image width="1600" height="960" xlink:href="assets/images/alola.png" href="assets/images/alola.png"></image>
+
+        <!-- ------ -->
+        <!-- ROUTES -->
+        <!-- ------ -->
+
+        <!--Route 1-->
+        
 
 <g
 
@@ -9972,8 +12984,8 @@
 </g>
 
 
-    <!--Route 1 Extension-->
-    
+        <!--Route 1 Extension-->
+        
 
 <g
 
@@ -9988,8 +13000,8 @@
 </g>
 
 
-    <!--Route 1 Hau'oli Outskirts--> 
-    
+        <!--Route 1 Hau'oli Outskirts--> 
+        
 
 <g
 
@@ -10006,8 +13018,8 @@
 </g>
 
 
-    <!--Route 1 Hau'oli Outskirts Extension--> 
-    
+        <!--Route 1 Hau'oli Outskirts Extension--> 
+        
 
 <g
 
@@ -10022,8 +13034,8 @@
 </g>
 
 
-    <!--Route 1 Hau'oli Outskirts Extension-->
-    
+        <!--Route 1 Hau'oli Outskirts Extension-->
+        
 
 <g
 
@@ -10038,8 +13050,8 @@
 </g>
 
 
-    <!--Route 1 Hau'oli Outskirts Extension-->
-    
+        <!--Route 1 Hau'oli Outskirts Extension-->
+        
 
 <g
 
@@ -10054,8 +13066,8 @@
 </g>
 
 
-    <!--Route 2-->
-    
+        <!--Route 2-->
+        
 
 <g
 
@@ -10072,8 +13084,8 @@
 </g>
 
 
-    <!--Route 2 Extension-->
-    
+        <!--Route 2 Extension-->
+        
 
 <g
 
@@ -10088,8 +13100,8 @@
 </g>
 
 
-    <!--Route 3-->
-    
+        <!--Route 3-->
+        
 
 <g
 
@@ -10106,8 +13118,8 @@
 </g>
 
 
-    <!--Route 3 Extension-->
-    
+        <!--Route 3 Extension-->
+        
 
 <g
 
@@ -10122,8 +13134,8 @@
 </g>
 
 
-    <!--Melemele Sea-->
-    
+        <!--Melemele Sea-->
+        
 
 <g
 
@@ -10140,8 +13152,8 @@
 </g>
 
 
-    <!--Melemele Sea Extension-->
-    
+        <!--Melemele Sea Extension-->
+        
 
 <g
 
@@ -10156,8 +13168,8 @@
 </g>
 
 
-    <!--Melemele Sea Extension-->
-    
+        <!--Melemele Sea Extension-->
+        
 
 <g
 
@@ -10172,8 +13184,8 @@
 </g>
 
 
-    <!--Melemele Sea Extension-->
-    
+        <!--Melemele Sea Extension-->
+        
 
 <g
 
@@ -10188,8 +13200,8 @@
 </g>
 
 
-    <!--Kala'e Bay-->
-    
+        <!--Kala'e Bay-->
+        
 
 <g
 
@@ -10206,8 +13218,8 @@
 </g>
 
 
-    <!--Kala'e Bay Extension-->
-    
+        <!--Kala'e Bay Extension-->
+        
 
 <g
 
@@ -10222,8 +13234,8 @@
 </g>
 
 
-    <!--Kala'e Bay Extension-->
-    
+        <!--Kala'e Bay Extension-->
+        
 
 <g
 
@@ -10238,8 +13250,8 @@
 </g>
 
 
-    <!--Route 4-->
-    
+        <!--Route 4-->
+        
 
 <g
 
@@ -10256,8 +13268,8 @@
 </g>
 
 
-    <!--Route 4 Extension-->
-    
+        <!--Route 4 Extension-->
+        
 
 <g
 
@@ -10272,8 +13284,8 @@
 </g>
 
 
-    <!--Route 5-->
-    
+        <!--Route 5-->
+        
 
 <g
 
@@ -10290,8 +13302,8 @@
 </g>
 
 
-    <!--Route 6-->
-    
+        <!--Route 6-->
+        
 
 <g
 
@@ -10308,8 +13320,8 @@
 </g>
 
 
-    <!--Route 6 Extension-->
-    
+        <!--Route 6 Extension-->
+        
 
 <g
 
@@ -10324,8 +13336,8 @@
 </g>
 
 
-    <!--Route 7-->
-    
+        <!--Route 7-->
+        
 
 <g
 
@@ -10342,8 +13354,8 @@
 </g>
 
 
-    <!--Route 8-->
-    
+        <!--Route 8-->
+        
 
 <g
 
@@ -10360,8 +13372,8 @@
 </g>
 
 
-    <!--Route 8 Extension-->
-    
+        <!--Route 8 Extension-->
+        
 
 <g
 
@@ -10376,8 +13388,8 @@
 </g>
 
 
-    <!--Route 8 Extension-->
-    
+        <!--Route 8 Extension-->
+        
 
 <g
 
@@ -10392,8 +13404,8 @@
 </g>
 
 
-    <!--Route 9-->
-    
+        <!--Route 9-->
+        
 
 <g
 
@@ -10410,8 +13422,8 @@
 </g>
 
 
-    <!--Route 9 Extension-->
-    
+        <!--Route 9 Extension-->
+        
 
 <g
 
@@ -10426,8 +13438,8 @@
 </g>
 
 
-    <!--Akala Outskirts-->
-    
+        <!--Akala Outskirts-->
+        
 
 <g
 
@@ -10444,8 +13456,8 @@
 </g>
 
 
-    <!--Akala Outskirts Extension---->
-    
+        <!--Akala Outskirts Extension---->
+        
 
 <g
 
@@ -10460,12 +13472,12 @@
 </g>
 
 
-    <!-- ----- -->
-    <!-- TOWNS -->
-    <!-- ----- -->
+        <!-- ----- -->
+        <!-- TOWNS -->
+        <!-- ----- -->
 
-    <!--Iki Town-->
-    
+        <!--Iki Town-->
+        
 
 <rect class="city"
     data-town="Iki Town" 
@@ -10481,8 +13493,8 @@
         ">
 </rect>
 
-    <!--Hau'oli City-->
-    
+        <!--Hau'oli City-->
+        
 
 <rect class="city"
     data-town="Hau&#39;oli City" 
@@ -10496,8 +13508,8 @@
         ">
 </rect>
 
-    <!--Hau'oli City Extension-->
-    
+        <!--Hau'oli City Extension-->
+        
 
 <rect class="city"
     data-town="Hau&#39;oli City" 
@@ -10511,8 +13523,8 @@
         ">
 </rect>
 
-    <!--Heahea City-->
-    
+        <!--Heahea City-->
+        
 
 <rect class="city"
     data-town="Heahea City" 
@@ -10526,8 +13538,8 @@
         ">
 </rect>
 
-    <!--Heahea City Extension-->
-    
+        <!--Heahea City Extension-->
+        
 
 <rect class="city"
     data-town="Heahea City" 
@@ -10541,8 +13553,8 @@
         ">
 </rect>
 
-    <!--Paniola Town-->
-    
+        <!--Paniola Town-->
+        
 
 <rect class="city"
     data-town="Paniola Town" 
@@ -10556,8 +13568,8 @@
         ">
 </rect>
 
-    <!--Royal Avenue-->
-    
+        <!--Royal Avenue-->
+        
 
 <rect class="city"
     data-town="Royal Avenue" 
@@ -10571,8 +13583,8 @@
         ">
 </rect>
 
-    <!--Royal Avenue Extension-->
-    
+        <!--Royal Avenue Extension-->
+        
 
 <rect class="city"
     data-town="Royal Avenue" 
@@ -10586,8 +13598,8 @@
         ">
 </rect>
 
-    <!--Konikoni City-->
-    
+        <!--Konikoni City-->
+        
 
 <rect class="city"
     data-town="Konikoni City" 
@@ -10601,8 +13613,8 @@
         ">
 </rect>
 
-    <!--Aether Paradise-->
-    
+        <!--Aether Paradise-->
+        
 
 <rect class="city"
     data-town="Aether Paradise" 
@@ -10616,11 +13628,11 @@
         ">
 </rect>
 
-    <!-- -------- -->
-    <!-- DUNGEONS -->
-    <!-- -------- -->
+        <!-- -------- -->
+        <!-- DUNGEONS -->
+        <!-- -------- -->
 
-    
+        
 
 <rect class="city"
     data-town="Trainers&#39; School" 
@@ -10632,7 +13644,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Trainers\&#39; School') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Hau&#39;oli Cemetery" 
@@ -10644,7 +13656,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli Cemetery') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Verdant Cavern" 
@@ -10656,7 +13668,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Verdant Cavern') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Melemele Meadow" 
@@ -10668,7 +13680,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Melemele Meadow') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Seaward Cave" 
@@ -10680,7 +13692,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Seaward Cave') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Ten Carat Hill" 
@@ -10692,8 +13704,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
 </rect>
 
-    <!--Ten Carat Hill Extension-->
-    
+        <!--Ten Carat Hill Extension-->
+        
 
 <rect class="city"
     data-town="Ten Carat Hill" 
@@ -10705,7 +13717,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Ruins of Conflict" 
@@ -10717,7 +13729,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Ruins of Conflict') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Pikachu Valley" 
@@ -10729,7 +13741,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Pikachu Valley') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Paniola Ranch" 
@@ -10741,7 +13753,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Paniola Ranch') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Brooklet Hill" 
@@ -10753,8 +13765,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Brooklet Hill') }">
 </rect>
 
-    <!--Brooklet Hill Extension-->
-    
+        <!--Brooklet Hill Extension-->
+        
 
 <rect class="city"
     data-town="Brooklet Hill" 
@@ -10766,7 +13778,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Brooklet Hill') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Wela Volcano Park" 
@@ -10778,7 +13790,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Wela Volcano Park') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Lush Jungle" 
@@ -10790,7 +13802,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Lush Jungle') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Diglett&#39;s Tunnel" 
@@ -10802,8 +13814,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Diglett\&#39;s Tunnel') }">
 </rect>
 
-    <!--Diglett's Tunnel Extension-->
-    
+        <!--Diglett's Tunnel Extension-->
+        
 
 <rect class="city"
     data-town="Diglett&#39;s Tunnel" 
@@ -10815,7 +13827,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Diglett\&#39;s Tunnel') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Memorial Hill" 
@@ -10827,7 +13839,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Memorial Hill') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Ruins of Life" 
@@ -10839,11 +13851,11 @@
         attr: { class: MapHelper.calculateTownCssClass('Ruins of Life') }">
 </rect>
 
-    <!-- ------------------ -->
-    <!-- PLACES OF INTEREST -->
-    <!-- ------------------ -->
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
 
-    
+        
 
 <rect class="city"
     data-town="Dock" 
@@ -10853,17 +13865,17 @@
     width="32"
     data-bind="click:function(){MapHelper.openShipModal()}">
 </rect>
-    <!-- /ko -->
+    </g>
 
-    <!-- ko if: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula & Poni islands').id -->
-    <image width="1600" height="960" xlink:href="assets/images/kanto.png" href="assets/images/alola2.png"></image>
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula & Poni islands').id">
+        <image width="1600" height="960" xlink:href="assets/images/kanto.png" href="assets/images/alola2.png"></image>
 
-    <!-- ------ -->
-    <!-- ROUTES -->
-    <!-- ------ -->
+        <!-- ------ -->
+        <!-- ROUTES -->
+        <!-- ------ -->
 
-    <!--Route 10-->
-    
+        <!--Route 10-->
+        
 
 <g
 
@@ -10880,8 +13892,8 @@
 </g>
 
 
-    <!--Mount Hokulani-->
-    
+        <!--Mount Hokulani-->
+        
 
 <g
 
@@ -10898,8 +13910,8 @@
 </g>
 
 
-    <!--Route 11-->
-    
+        <!--Route 11-->
+        
 
 <g
 
@@ -10916,8 +13928,8 @@
 </g>
 
 
-    <!--Route 11 Extension-->
-    
+        <!--Route 11 Extension-->
+        
 
 <g
 
@@ -10932,8 +13944,8 @@
 </g>
 
 
-    <!--Route 12-->
-    
+        <!--Route 12-->
+        
 
 <g
 
@@ -10950,8 +13962,8 @@
 </g>
 
 
-    <!--Route 12 Extension-->
-    
+        <!--Route 12 Extension-->
+        
 
 <g
 
@@ -10966,8 +13978,8 @@
 </g>
 
 
-    <!--Route 12 Extension-->
-    
+        <!--Route 12 Extension-->
+        
 
 <g
 
@@ -10982,8 +13994,8 @@
 </g>
 
 
-    <!--Route 12 Extension-->
-    
+        <!--Route 12 Extension-->
+        
 
 <g
 
@@ -10998,8 +14010,8 @@
 </g>
 
 
-    <!--Route 12 Extension-->
-    
+        <!--Route 12 Extension-->
+        
 
 <g
 
@@ -11014,8 +14026,8 @@
 </g>
 
 
-    <!--Route 12 Extension-->
-    
+        <!--Route 12 Extension-->
+        
 
 <g
 
@@ -11030,8 +14042,8 @@
 </g>
 
 
-    <!--Route 12 Extension-->
-    
+        <!--Route 12 Extension-->
+        
 
 <g
 
@@ -11046,8 +14058,8 @@
 </g>
 
 
-    <!--Route 12 Extension-->
-    
+        <!--Route 12 Extension-->
+        
 
 <g
 
@@ -11062,8 +14074,8 @@
 </g>
 
 
-    <!--Route 12 Extension-->
-    
+        <!--Route 12 Extension-->
+        
 
 <g
 
@@ -11078,8 +14090,8 @@
 </g>
 
 
-    <!--Route 12 Extension-->
-    
+        <!--Route 12 Extension-->
+        
 
 <g
 
@@ -11094,8 +14106,8 @@
 </g>
 
 
-    <!--Route 12 Extension-->
-    
+        <!--Route 12 Extension-->
+        
 
 <g
 
@@ -11110,8 +14122,8 @@
 </g>
 
 
-    <!--Route 13-->
-    
+        <!--Route 13-->
+        
 
 <g
 
@@ -11128,8 +14140,8 @@
 </g>
 
 
-    <!--Haina Desert-->
-    
+        <!--Haina Desert-->
+        
 
 <g
 
@@ -11146,8 +14158,8 @@
 </g>
 
 
-    <!--Route 14-->
-    
+        <!--Route 14-->
+        
 
 <g
 
@@ -11164,8 +14176,8 @@
 </g>
 
 
-    <!--Route 14 Extension-->
-    
+        <!--Route 14 Extension-->
+        
 
 <g
 
@@ -11180,8 +14192,8 @@
 </g>
 
 
-    <!--Route 15-->
-    
+        <!--Route 15-->
+        
 
 <g
 
@@ -11198,8 +14210,8 @@
 </g>
 
 
-    <!--Route 15 Extension-->
-    
+        <!--Route 15 Extension-->
+        
 
 <g
 
@@ -11214,8 +14226,8 @@
 </g>
 
 
-    <!--Route 15 Extension-->
-    
+        <!--Route 15 Extension-->
+        
 
 <g
 
@@ -11230,8 +14242,8 @@
 </g>
 
 
-    <!--Route 16-->
-    
+        <!--Route 16-->
+        
 
 <g
 
@@ -11248,8 +14260,8 @@
 </g>
 
 
-    <!--Route 17-->
-    
+        <!--Route 17-->
+        
 
 <g
 
@@ -11266,8 +14278,8 @@
 </g>
 
 
-    <!--Route 17 Extension-->
-    
+        <!--Route 17 Extension-->
+        
 
 <g
 
@@ -11282,8 +14294,8 @@
 </g>
 
 
-    <!--Poni Wilds-->
-    
+        <!--Poni Wilds-->
+        
 
 <g
 
@@ -11300,8 +14312,8 @@
 </g>
 
 
-    <!--Poni Wilds Extension-->
-    
+        <!--Poni Wilds Extension-->
+        
 
 <g
 
@@ -11316,8 +14328,8 @@
 </g>
 
 
-    <!--Poni Wilds Extension-->
-    
+        <!--Poni Wilds Extension-->
+        
 
 <g
 
@@ -11332,8 +14344,8 @@
 </g>
 
 
-    <!--Ancient Poni Path-->
-    
+        <!--Ancient Poni Path-->
+        
 
 <g
 
@@ -11350,8 +14362,8 @@
 </g>
 
 
-    <!--Ancient Poni Path Extension-->
-    
+        <!--Ancient Poni Path Extension-->
+        
 
 <g
 
@@ -11366,8 +14378,8 @@
 </g>
 
 
-    <!--Poni Breaker Coast-->
-    
+        <!--Poni Breaker Coast-->
+        
 
 <g
 
@@ -11384,8 +14396,8 @@
 </g>
 
 
-    <!--Poni Grove-->
-    
+        <!--Poni Grove-->
+        
 
 <g
 
@@ -11402,8 +14414,8 @@
 </g>
 
 
-    <!--Poni Plains-->
-    
+        <!--Poni Plains-->
+        
 
 <g
 
@@ -11420,8 +14432,8 @@
 </g>
 
 
-    <!--Poni Coast-->
-    
+        <!--Poni Coast-->
+        
 
 <g
 
@@ -11438,8 +14450,8 @@
 </g>
 
 
-    <!--Poni Gauntlet-->
-    
+        <!--Poni Gauntlet-->
+        
 
 <g
 
@@ -11456,8 +14468,8 @@
 </g>
 
 
-    <!--Poni Gauntlet Extension-->
-    
+        <!--Poni Gauntlet Extension-->
+        
 
 <g
 
@@ -11472,8 +14484,8 @@
 </g>
 
 
-    <!--Poni Gauntlet Extension-->
-    
+        <!--Poni Gauntlet Extension-->
+        
 
 <g
 
@@ -11488,8 +14500,8 @@
 </g>
 
 
-    <!--Poni Gauntlet Extension-->
-    
+        <!--Poni Gauntlet Extension-->
+        
 
 <g
 
@@ -11504,8 +14516,8 @@
 </g>
 
 
-    <!--Poni Gauntlet Extension-->
-    
+        <!--Poni Gauntlet Extension-->
+        
 
 <g
 
@@ -11520,8 +14532,8 @@
 </g>
 
 
-    <!--Poni Gauntlet Extension-->
-    
+        <!--Poni Gauntlet Extension-->
+        
 
 <g
 
@@ -11536,12 +14548,12 @@
 </g>
 
 
-    <!-- ----- -->
-    <!-- TOWNS -->
-    <!-- ----- -->
+        <!-- ----- -->
+        <!-- TOWNS -->
+        <!-- ----- -->
 
-    <!--Aether Paradise-->
-    
+        <!--Aether Paradise-->
+        
 
 <rect class="city"
     data-town="Aether Paradise" 
@@ -11555,8 +14567,8 @@
         ">
 </rect>
 
-    <!--Malie City-->
-    
+        <!--Malie City-->
+        
 
 <rect class="city"
     data-town="Malie City" 
@@ -11570,8 +14582,8 @@
         ">
 </rect>
 
-    <!--Malie City Extension-->
-    
+        <!--Malie City Extension-->
+        
 
 <rect class="city"
     data-town="Malie City" 
@@ -11585,8 +14597,8 @@
         ">
 </rect>
 
-    <!--Tapu Village-->
-    
+        <!--Tapu Village-->
+        
 
 <rect class="city"
     data-town="Tapu Village" 
@@ -11600,8 +14612,8 @@
         ">
 </rect>
 
-    <!--Seafolk Village-->
-    
+        <!--Seafolk Village-->
+        
 
 <rect class="city"
     data-town="Seafolk Village" 
@@ -11615,8 +14627,8 @@
         ">
 </rect>
 
-    <!--Exeggutor Island-->
-    
+        <!--Exeggutor Island-->
+        
 
 <rect class="city"
     data-town="Exeggutor Island" 
@@ -11630,8 +14642,8 @@
         ">
 </rect>
 
-    <!--Altar of the Sunne and Moone-->
-    
+        <!--Altar of the Sunne and Moone-->
+        
 
 <rect class="city"
     data-town="Altar of the Sunne and Moone" 
@@ -11645,8 +14657,8 @@
         ">
 </rect>
 
-    <!--Pokémon League Alola-->
-    
+        <!--Pokémon League Alola-->
+        
 
 <rect class="city"
     data-town="Pokémon League Alola" 
@@ -11660,11 +14672,11 @@
         ">
 </rect>
 
-    <!-- -------- -->
-    <!-- DUNGEONS -->
-    <!-- -------- -->
+        <!-- -------- -->
+        <!-- DUNGEONS -->
+        <!-- -------- -->
 
-    
+        
 
 <rect class="city"
     data-town="Malie Garden" 
@@ -11676,7 +14688,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Malie Garden') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Hokulani Observatory" 
@@ -11688,7 +14700,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Hokulani Observatory') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Thrifty Megamart" 
@@ -11700,7 +14712,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Thrifty Megamart') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Ula&#39;ula Meadow" 
@@ -11712,7 +14724,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Ula\&#39;ula Meadow') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Po Town" 
@@ -11724,7 +14736,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Po Town') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Mount Lanakila" 
@@ -11736,7 +14748,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Mount Lanakila') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Ruins of Abundance" 
@@ -11748,7 +14760,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Ruins of Abundance') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Vast Poni Canyon" 
@@ -11760,8 +14772,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }">
 </rect>
 
-    <!--Vast Poni Canyon Extension-->
-    
+        <!--Vast Poni Canyon Extension-->
+        
 
 <rect class="city"
     data-town="Vast Poni Canyon" 
@@ -11773,8 +14785,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }">
 </rect>
 
-    <!--Vast Poni Canyon Extension-->
-    
+        <!--Vast Poni Canyon Extension-->
+        
 
 <rect class="city"
     data-town="Vast Poni Canyon" 
@@ -11786,8 +14798,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }">
 </rect>
 
-    <!--Vast Poni Canyon Extension-->
-    
+        <!--Vast Poni Canyon Extension-->
+        
 
 <rect class="city"
     data-town="Vast Poni Canyon" 
@@ -11799,7 +14811,20 @@
         attr: { class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }">
 </rect>
 
-    
+        <!--Lake of the Sunne and Moone-->
+        
+
+<rect class="city"
+    data-town="Lake of the Sunne and Moone" 
+    x="912"
+    y="416"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Lake of the Sunne and Moone')},
+        attr: { class: MapHelper.calculateTownCssClass('Lake of the Sunne and Moone') }">
+</rect>
+
+        
 
 <rect class="city"
     data-town="Ruins of Hope" 
@@ -11811,7 +14836,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Ruins of Hope') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Poni Meadow" 
@@ -11823,7 +14848,7 @@
         attr: { class: MapHelper.calculateTownCssClass('Poni Meadow') }">
 </rect>
 
-    
+        
 
 <rect class="city"
     data-town="Resolution Cave" 
@@ -11834,18 +14859,41 @@
     data-bind="click:function(){MapHelper.moveToTown('Resolution Cave')},
         attr: { class: MapHelper.calculateTownCssClass('Resolution Cave') }">
 </rect>
-    <!-- /ko -->
+
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+
+        <!-- TODO: REMOVE IF UB QUESTLINE GETS MERGED -->
+        
+
+<image href="assets/images/map/transparent.png" xlink:href="assets/images/map/transparent.png"
+    x="576"
+    y="480"
+    height="48"
+    width="64"
+    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Poni Meadow&#39;)]() &gt;= 1"/>
+<rect class="city"
+    data-town="Access Denied - Future Content" 
+    x="576"
+    y="480"
+    height="48"
+    width="64"
+    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Poni Meadow&#39;)]() &gt;= 1, click:function(){MapHelper.moveToTown(&#39;Seafolk Village&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Seafolk Village&#39;) }">
+</rect>
+    </g>
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.galar'>
-    <image width="1600" height="960" xlink:href="assets/images/galar.png" href="assets/images/galar.png"></image>
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Galar').id">
+        <image width="1600" height="960" xlink:href="assets/images/galar.png" href="assets/images/galar.png"></image>
 
-    <!-- ------ -->
-    <!-- ROUTES -->
-    <!-- ------ -->
+        <!-- ------ -->
+        <!-- ROUTES -->
+        <!-- ------ -->
 
-    <!--Route 1-->
-    
+        <!--Route 1-->
+        
 
 <g
 
@@ -11864,8 +14912,8 @@
 </g>
 
 
-    <!--Route 2-->
-    
+        <!--Route 2-->
+        
 
 <g
 
@@ -11881,8 +14929,8 @@
 
 </g>
 
-    <!--extra Route 2-->
-    
+        <!--extra Route 2-->
+        
 
 <g
 
@@ -11899,8 +14947,8 @@
 </g>
 
 
-    <!--Rolling Fields-->
-    
+        <!--Rolling Fields-->
+        
 
 <g
 
@@ -11919,8 +14967,8 @@
 </g>
 
 
-    <!--Dappled Grove-->
-    
+        <!--Dappled Grove-->
+        
 
 <g
 
@@ -11936,8 +14984,8 @@
 
 </g>
 
-    <!--DG Extras-->
-    
+        <!--DG Extras-->
+        
 
 <g
 
@@ -11954,8 +15002,8 @@
 </g>
 
 
-    <!--West Lake Axwell-->
-    
+        <!--West Lake Axwell-->
+        
 
 <g
 
@@ -11973,8 +15021,8 @@
 
 </g>
 
-    <!--WLA Extra-->
-    
+        <!--WLA Extra-->
+        
 
 <g
 
@@ -11989,8 +15037,8 @@
 </g>
 
 
-    <!--East Lake Axwell-->
-    
+        <!--East Lake Axwell-->
+        
 
 <g
 
@@ -12006,8 +15054,8 @@
 
 </g>
 
-    <!--ELA Extras-->
-    
+        <!--ELA Extras-->
+        
 
 <g
 
@@ -12024,8 +15072,8 @@
 </g>
 
 
-    <!--North Lake Miloch-->
-    
+        <!--North Lake Miloch-->
+        
 
 <g
 
@@ -12044,8 +15092,8 @@
 </g>
 
 
-    <!--South Lake Miloch-->
-    
+        <!--South Lake Miloch-->
+        
 
 <g
 
@@ -12061,8 +15109,8 @@
 
 </g>
 
-     <!--SLM Extras-->
-    
+        <!--SLM Extras-->
+        
 
 <g
 
@@ -12079,8 +15127,8 @@
 </g>
 
 
-    <!--Giant's Seat-->
-    
+        <!--Giant's Seat-->
+        
 
 <g
 
@@ -12097,8 +15145,8 @@
 </g>
 
 
-    <!--Route 3-->
-    
+        <!--Route 3-->
+        
 
 <g
 
@@ -12115,8 +15163,8 @@
 </g>
 
 
-    <!--Route 4-->
-    
+        <!--Route 4-->
+        
 
 <g
 
@@ -12135,8 +15183,8 @@
 </g>
 
 
-    <!--Route 5-->
-    
+        <!--Route 5-->
+        
 
 <g
 
@@ -12152,8 +15200,8 @@
 
 </g>
 
-    <!--Extra bits of Route 5-->
-    
+        <!--Extra bits of Route 5-->
+        
 
 <g
 
@@ -12168,8 +15216,8 @@
 </g>
 
 
-    <!--Motostoke Outskirts-->
-    
+        <!--Motostoke Outskirts-->
+        
 
 <g
 
@@ -12186,8 +15234,8 @@
 </g>
 
 
-    <!--Hammerlocke Hills-->
-    
+        <!--Hammerlocke Hills-->
+        
 
 <g
 
@@ -12203,8 +15251,8 @@
 
 </g>
 
-     <!--HH extras-->
-    
+        <!--HH extras-->
+        
 
 <g
 
@@ -12218,8 +15266,8 @@
 
 </g>
 
-     <!--HH extras-->
-    
+        <!--HH extras-->
+        
 
 <g
 
@@ -12236,8 +15284,8 @@
 </g>
 
 
-    <!--Route 6-->
-    
+        <!--Route 6-->
+        
 
 <g
 
@@ -12253,8 +15301,8 @@
 
 </g>
 
-    <!--Extra bit of Route 6-->
-    
+        <!--Extra bit of Route 6-->
+        
 
 <g
 
@@ -12270,8 +15318,8 @@
 
 </g>
 
-    <!--Extra bit of Route 6-->
-    
+        <!--Extra bit of Route 6-->
+        
 
 <g
 
@@ -12287,8 +15335,8 @@
 
 </g>
 
-    <!--Extra bit of Route 6-->
-    
+        <!--Extra bit of Route 6-->
+        
 
 <g
 
@@ -12303,8 +15351,8 @@
 </g>
 
 
-    <!--Route 7-->
-    
+        <!--Route 7-->
+        
 
 <g
 
@@ -12321,8 +15369,8 @@
 </g>
 
 
-    <!--Route 8-->
-    
+        <!--Route 8-->
+        
 
 <g
 
@@ -12341,8 +15389,8 @@
 </g>
 
 
-    <!--Steamdrift Way-->
-    
+        <!--Steamdrift Way-->
+        
 
 <g
 
@@ -12361,8 +15409,8 @@
 </g>
 
 
-    <!--Route 2 Lakeside-->
-     
+        <!--Route 2 Lakeside-->
+        
 
 <g
 
@@ -12378,8 +15426,8 @@
 
 </g>
 
-    <!--Route 2 LS extras-->
-    
+        <!--Route 2 LS extras-->
+        
 
 <g
 
@@ -12394,8 +15442,8 @@
 </g>
 
 
-    <!--Route 9-->
-    
+        <!--Route 9-->
+        
 
 <g
 
@@ -12414,8 +15462,8 @@
 </g>
 
 
-    <!--Circhester Bay-->
-    
+        <!--Circhester Bay-->
+        
 
 <g
 
@@ -12434,8 +15482,8 @@
 </g>
 
 
-    <!--Outer Spikemuth-->
-    
+        <!--Outer Spikemuth-->
+        
 
 <g
 
@@ -12452,8 +15500,8 @@
 </g>
 
 
-    <!--Route 10-->
-    
+        <!--Route 10-->
+        
 
 <g
 
@@ -12472,8 +15520,8 @@
 </g>
 
 
-    <!--Route 10 North-->
-    
+        <!--Route 10 North-->
+        
 
 <g
 
@@ -12491,8 +15539,8 @@
 
 </g>
 
-    <!--Route 10 North extras-->
-    
+        <!--Route 10 North extras-->
+        
 
 <g
 
@@ -12507,12 +15555,12 @@
 </g>
 
 
-    <!-- ----- -->
-    <!-- TOWNS -->
-    <!-- ----- -->
+        <!-- ----- -->
+        <!-- TOWNS -->
+        <!-- ----- -->
 
-    <!--Postwick-->
-    
+        <!--Postwick-->
+        
 
 <rect class="city"
     data-town="Postwick" 
@@ -12528,8 +15576,8 @@
         ">
 </rect>
 
-    <!--Wedgehurst-->
-    
+        <!--Wedgehurst-->
+        
 
 <rect class="city"
     data-town="Wedgehurst" 
@@ -12543,8 +15591,8 @@
         ">
 </rect>
 
-    <!--Motostoke-->
-    
+        <!--Motostoke-->
+        
 
 <rect class="city"
     data-town="Motostoke" 
@@ -12557,8 +15605,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Motostoke') },
         ">
 </rect>
-    <!--Motostoke Extension-->
-    
+        <!--Motostoke Extension-->
+        
 
 <rect class="city"
     data-town="Motostoke" 
@@ -12572,8 +15620,8 @@
         ">
 </rect>
 
-    <!--Turffield-->
-    
+        <!--Turffield-->
+        
 
 <rect class="city"
     data-town="Turffield" 
@@ -12587,8 +15635,8 @@
         ">
 </rect>
 
-    <!--Hulbury-->
-    
+        <!--Hulbury-->
+        
 
 <rect class="city"
     data-town="Hulbury" 
@@ -12602,8 +15650,8 @@
         ">
 </rect>
 
-    <!--Hammerlocke-->
-    
+        <!--Hammerlocke-->
+        
 
 <rect class="city"
     data-town="Hammerlocke" 
@@ -12617,8 +15665,8 @@
         ">
 </rect>
 
-    <!--Stow-on-Side-->
-    
+        <!--Stow-on-Side-->
+        
 
 <rect class="city"
     data-town="Stow-on-Side" 
@@ -12632,8 +15680,8 @@
         ">
 </rect>
 
-    <!--Ballonlea-->
-    
+        <!--Ballonlea-->
+        
 
 <rect class="city"
     data-town="Ballonlea" 
@@ -12647,8 +15695,8 @@
         ">
 </rect>
 
-    <!--Circhester-->
-    
+        <!--Circhester-->
+        
 
 <rect class="city"
     data-town="Circhester" 
@@ -12661,8 +15709,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Circhester') },
         ">
 </rect>
-    <!--Circhester extension-->
-    
+        <!--Circhester extension-->
+        
 
 <rect class="city"
     data-town="Circhester" 
@@ -12676,8 +15724,8 @@
         ">
 </rect>
 
-    <!--Spikemuth-->
-    
+        <!--Spikemuth-->
+        
 
 <rect class="city"
     data-town="Spikemuth" 
@@ -12691,8 +15739,8 @@
         ">
 </rect>
 
-    <!--Wyndon-->
-    
+        <!--Wyndon-->
+        
 
 <rect class="city"
     data-town="Wyndon" 
@@ -12705,8 +15753,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Wyndon') },
         ">
 </rect>
-    <!--Wyndon Extension-->
-    
+        <!--Wyndon Extension-->
+        
 
 <rect class="city"
     data-town="Wyndon" 
@@ -12720,8 +15768,8 @@
         ">
 </rect>
 
-    <!--Wyndon Stadium-->
-    
+        <!--Wyndon Stadium-->
+        
 
 <rect class="city"
     data-town="Wyndon Stadium" 
@@ -12736,12 +15784,12 @@
 </rect>
 
 
-    <!-- -------- -->
-    <!-- DUNGEONS -->
-    <!-- -------- -->
+        <!-- -------- -->
+        <!-- DUNGEONS -->
+        <!-- -------- -->
 
-    <!--Slumbering Weald-->
-    
+        <!--Slumbering Weald-->
+        
 
 <rect class="city"
     data-town="Slumbering Weald" 
@@ -12753,8 +15801,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Slumbering Weald') }">
 </rect>
 
-    <!--Inner Slumbering Weald-->
-    
+        <!--Inner Slumbering Weald-->
+        
 
 <rect class="city"
     data-town="Inner Slumbering Weald" 
@@ -12766,8 +15814,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Inner Slumbering Weald') }">
 </rect>
 
-    <!--Watchtower Ruins-->
-    
+        <!--Watchtower Ruins-->
+        
 
 <rect class="city"
     data-town="Watchtower Ruins" 
@@ -12779,8 +15827,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Watchtower Ruins') }">
 </rect>
 
-    <!--Galar Mine-->
-    
+        <!--Galar Mine-->
+        
 
 <rect class="city"
     data-town="Galar Mine" 
@@ -12792,8 +15840,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Galar Mine') }">
 </rect>
 
-    <!--Galar Mine No. 2-->
-    
+        <!--Galar Mine No. 2-->
+        
 
 <rect class="city"
     data-town="Galar Mine No. 2" 
@@ -12805,8 +15853,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Galar Mine No. 2') }">
 </rect>
 
-    <!--Dusty Bowl-->
-    
+        <!--Dusty Bowl-->
+        
 
 <rect class="city"
     data-town="Dusty Bowl" 
@@ -12818,8 +15866,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Dusty Bowl') }">
 </rect>
 
-    <!--Lake of Outrage-->
-    
+        <!--Lake of Outrage-->
+        
 
 <rect class="city"
     data-town="Lake of Outrage" 
@@ -12831,8 +15879,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Lake of Outrage') }">
 </rect>
 
-    <!--Glimwood Tangle-->
-    
+        <!--Glimwood Tangle-->
+        
 
 <rect class="city"
     data-town="Glimwood Tangle" 
@@ -12844,8 +15892,8 @@
         attr: { class: MapHelper.calculateTownCssClass('Glimwood Tangle') }">
 </rect>
 
-    <!--Rose Tower-->
-    
+        <!--Rose Tower-->
+        
 
 <rect class="city"
     data-town="Rose Tower" 
@@ -12857,11 +15905,11 @@
         attr: { class: MapHelper.calculateTownCssClass('Rose Tower') }">
 </rect>
 
-    <!-- ------------------ -->
-    <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
 
-    <!-- ------------------ -->
-    
+        <!-- ------------------ -->
+        
 
 <rect class="city"
     data-town="Dock" 
@@ -12871,6 +15919,7 @@
     width="32"
     data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Hulbury&#39;) }">
 </rect>
+    </g>
 </g>
 
 
@@ -12905,7 +15954,7 @@
         <tbody data-bind="foreach: App.game.oakItems.itemList">
           <tr data-bind="if: $data.isActive, tooltip: { html: true, title: $data.tooltip, trigger: 'hover', placement:'bottom' }">
             <td class="tight p-1">
-              <img class="clickable" href="#oakItemsModal" data-toggle="modal" src="" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'}" width="32px">
+              <img class="clickable" href="#oakItemsModal" data-toggle="modal" src="" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[$data.name] + '.png'}" width="32px">
             </td>
             <td class="p-0">
               <div class="progress" style="height: 40px;">
@@ -12972,7 +16021,7 @@
 
             <!-- Current Quest -->
             <div id="questDisplayContainer" class="card sortable border-secondary mb-3">
-    <!-- ko if: QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->
+    <!-- ko if: App.game.quests.isDailyQuestsUnlocked() -->
         <div class="card-header p-0" data-toggle="collapse" href="#questDisplayBody">
             <span data-bind='text: "Quests (" + App.game.quests.currentQuests().length + "/" + App.game.quests.questSlots() + ")"'></span>
         </div>
@@ -12983,7 +16032,7 @@
     <!-- /ko -->
 
     <div id="questDisplayBody" class="card-body p-0 show">
-        <!-- ko if: App.game.quests.currentQuests().length == 0 && QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->
+        <!-- ko if: App.game.quests.currentQuests().length == 0 && App.game.quests.isDailyQuestsUnlocked() -->
             <span class="pt-2 pb-2">No active quest</span>
         <!-- /ko -->
         <table width="100%">
@@ -13167,7 +16216,7 @@
             <div class="modal-body">
                 <p>
                     <strong>Activate in game challenge modes!</strong><br/>
-                    Once you activate a challenge you will not be able to disable it later on, decide carefully.
+                    Challenges can be disabled later, but cannot be re-enabled.
                 </p>
                 <br/>
                 <table class="table" width="100%">
@@ -13180,9 +16229,8 @@
                             <td class="text-left font-weight-bold" data-bind="text: $data.type"></td>
                             <td class="p-1">
                                 <!-- ko if: !$data.active() && player.starter() == GameConstants.Starter.None --><button class="btn btn-warning btn-block" data-bind="click: ()=>{$data.activate();}">ACTIVATE</button><!-- /ko -->
-                                <!-- ko if: $data.active() && player.starter() == GameConstants.Starter.None --><button class="btn btn-success btn-block" data-bind="click: ()=>{$data.disable();}">ACTIVE</button><!-- /ko -->
                                 <!-- ko if: !$data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-secondary btn-block disabled">DISABLED</button><!-- /ko -->
-                                <!-- ko if: $data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-success btn-block disabled">ACTIVE</button><!-- /ko -->
+                                <!-- ko if: $data.active() --><button class="btn btn-success btn-block" data-bind="click: ()=>{$data.disable();}">ACTIVE</button><!-- /ko -->
                             </td>
                         </tr>
                     </tbody>
@@ -13304,7 +16352,7 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
    <div class="modal-content">
        <div class="modal-header">
            <div style="width: 100%;">
-               <img src=""
+               <img src="" onerror="this.src='assets/images/trainers/Mysterious Trainer.png'"
                     data-bind="attr:{ src: 'assets/images/gymLeaders/' + GymRunner.gymObservable().leaderName + '.png'}">
                <h5 class="modal-title" id="receiveBadgeModalLabel"
                    data-bind="text: GymRunner.gymObservable().leaderName.replace(/\d/g,'')">Modal title</h5>
@@ -13314,7 +16362,7 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
        <div class="modal-body">
            <p data-bind="text: GymRunner.gymObservable().defeatMessage"></p>
            <!-- ko if: !BadgeEnums[GymRunner.gymObservable().badgeReward].startsWith('Elite') -->
-           <img src="" width="56px" data-bind="attr:{ src: 'assets/images/badges/' + BadgeEnums[GymRunner.gymObservable().badgeReward] + '.png'}">
+           <img src="" width="56px" data-bind="attr:{ src: 'assets/images/badges/' + BadgeEnums[GymRunner.gymObservable().badgeReward] + '.png'}" onerror="this.src='assets/images/badges/Unknown.png'">
            <!-- /ko -->
 
        </div>
@@ -13487,7 +16535,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                            'btn-outline-secondary': !$data.isActive
                          }">
                         <img class="clickable" style="width: 80%;" src=""
-                             data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
+                             data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[$data.name] + '.png'},
                               css: {
                                 'oak-item-locked': !App.game.oakItems.isUnlocked($data.name)
                               },
@@ -13520,7 +16568,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                           'btn-outline-secondary': !App.game.oakItemLoadouts.hasItem($index())(),
                         }">
                         <img class="clickable" style="width: 80%;" src=""
-                            data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
+                            data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[$data.name] + '.png'},
                               css: {
                                 'oak-item-locked': !App.game.oakItems.isUnlocked($data.name)
                               },
@@ -13537,7 +16585,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
         <table class="table table-bordered text-center m-0">
           <thead>
             <th colspan="2">
-              <strong data-bind="text: GameConstants.humanifyString(OakItems.OakItem[OakItemController.inspectedItem])"></strong>
+              <strong data-bind="text: GameConstants.humanifyString(OakItemType[OakItemController.inspectedItem])"></strong>
             </th>
           </thead>
           <tbody>
@@ -13718,11 +16766,14 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
                                 <tr data-bind="visible: Object.values(App.game.challenges.list).filter(c => c.active()).length > 0, template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideChallengeRelatedModules')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayReduced')}"></tr>
+                                <tr><th colspan="2">Map Colors</th></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--currentPlace')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--incomplete')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtPokemon')}"></tr>
+                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShinyPokemonAndMissingAchievement')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShinyPokemon')}"></tr>
+                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--missingAchievement')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--completed')}"></tr>
                             </tbody>
                         </table>
@@ -13730,19 +16781,33 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
 
                     <div class="tab-pane" id="settings-sound">
                         <div data-bind="template: {name: 'RangeSettingTemplate', data: Settings.getSetting('sound.volume')}"></div>
-                        <table class="table table-striped table-hover m-0">
-                            <tbody data-bind="foreach: Object.values(NotificationConstants.NotificationSound)">
-                              <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting(`sound.${$data.name}`)}"></tr>
-                            </tbody>
-                        </table>
+                        <!-- ko foreach: Object.keys(NotificationConstants.NotificationSound) -->
+                        <span class="btn btn-block btn-dark clickable mt-1" data-toggle="collapse" data-bind="text: $data, attr: { href: '#settingsSound' + $data }"></span>
+                        <div class="collapse show" data-bind="attr: { id: 'settingsSound' + $data }">
+                            <table class="table table-striped table-hover m-0">
+                                <tbody>
+                                <!-- ko foreach: Object.values(NotificationConstants.NotificationSound[$data]) -->
+                                    <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting(`sound.${$data.name}`)}"></tr>
+                                <!-- /ko -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /ko -->
                     </div>
 
                     <div class="tab-pane" id="settings-notifications">
-                        <table class="table table-striped table-hover m-0">
-                            <tbody data-bind="foreach: Object.values(NotificationConstants.NotificationSetting)">
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
-                            </tbody>
-                        </table>
+                        <!-- ko foreach: Object.keys(NotificationConstants.NotificationSetting) -->
+                        <span class="btn btn-block btn-dark clickable mt-1" data-toggle="collapse" data-bind="text: $data, attr: { href: '#settingsNotification' + $data }"></span>
+                        <div class="collapse show" data-bind="attr: { id: 'settingsNotification' + $data }">
+                            <table class="table table-striped table-hover m-0">
+                                <tbody>
+                                <!-- ko foreach: Object.values(NotificationConstants.NotificationSetting[$data]) -->
+                                    <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
+                                <!-- /ko -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /ko -->
                     </div>
 
                     <div class="tab-pane" id="settings-other">
@@ -13810,6 +16875,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
         <label style="width:100%; min-height: 36px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: $data.observableValue"/></label>
     </td>
 </script>
+
 
 <!-- FAQ Modal -->
 <div class="modal fade noselect" id="FAQModal" tabindex="-1" role="dialog" aria-badgeledby="FAQModal">
@@ -14047,7 +17113,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                        <th>End Time</th>
                      </tr>
                    </thead>
-                   <tbody data-bind="foreach: SpecialEvents.events">
+                   <tbody data-bind="foreach: SpecialEvents.events.sort((a, b) => a.startTime - b.startTime)">
                      <!-- ko if: Date.now() < endTime -->
                      <tr>
                        <td data-bind="text: title"></td>
@@ -14209,14 +17275,45 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
        </div>
        <div class="modal-body">
            <p>
-               So, you won! Congratulations!<br/>
-               You are the new Pokémon League champion!<br/>
-               You have grown up so much since you first left with <span data-bind="text: GameConstants.Starter[player.starter()]">starter</span>!<br/>
-               <br/>
-               There are many more regions to explore!
-                <!-- ko if: App.game.challenges.list.requireCompletePokedex.active() -->
-               <br/>In order to move on you will need to capture all available Pokémon from the current region!
-               <!-- /ko -->
+                <p data-bind="visible: player.region == GameConstants.Region.kanto">
+                    So, you won! Congratulations!<br/>
+                    You are the new Pokémon League champion!<br/>
+                    You have grown up so much since you first left with <span data-bind="text: GameConstants.Starter[player.starter()]">starter</span>!<br/>
+                    <br/>
+                    There are many more regions to explore!
+                </p>
+                <p data-bind="visible: player.region == GameConstants.Region.johto">
+                    I heard from Professor Elm that you had just conquered the Johto Pokémon League! congratulations!<br/>
+                    You are the new Johto League champion!
+                </p>
+                <p data-bind="visible: player.region == GameConstants.Region.hoenn">
+                    Professor Birch told me that you just beat the Hoenn Pokémon League! Congratulations!<br/>
+                    You are the new Hoenn League champion!
+                </p>
+                <p data-bind="visible: player.region == GameConstants.Region.sinnoh">
+                    I heard from Professor Rowan that you had just conquered the Sinnoh Pokémon League! Congratulations!<br/>
+                    You are the new Sinnoh League champion!
+                </p>
+                <p data-bind="visible: player.region == GameConstants.Region.unova">
+                    Professor Juniper told me that you also beat the Unova Pokémon League! Congratulations!<br/>
+                    You are the new Unova League champion!
+                </p>
+                <p data-bind="visible: player.region == GameConstants.Region.kalos">
+                    Professor Sycamore just told me. You are unstoppable! Congratulations!<br/>
+                    You are the new Kalos League champion!
+                </p>
+                <p data-bind="visible: player.region == GameConstants.Region.alola">
+                    Professor Kukui told me that you just beat the Alola Pokémon League! Congratulations!<br/>
+                    You are the new Alola League champion!
+                </p>
+                <p data-bind="visible: player.region == GameConstants.Region.galar">
+                    Professor Sonia told me that you just beat the Galar Pokémon League! Congratulations!<br/>
+                    You are the new Galar League champion!
+                </p>
+
+                <p data-bind="visible: App.game.challenges.list.requireCompletePokedex.active()">
+                    In order to move on you will need to capture all available Pokémon from the current region!
+                </p>
            </p>
        </div>
        <div class="modal-footer">
@@ -14256,47 +17353,47 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
 </div>
 
 
-<!-- Shards Modal -->
-<div class="modal fade noselect" id="shardModal" tabindex="-1" role="dialog" aria-badgeledby="shardModal">
+<!-- Gems Modal -->
+<div class="modal fade noselect" id="gemModal" tabindex="-1" role="dialog" aria-badgeledby="gemModal">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
        <div class="modal-content">
             <div class="modal-header">
-                <h5>Shards</h5>
+                <h5>Gems</h5>
                 <button type="button" class="btn btn-info"
                         style="position: absolute; right: 0px; top: 0px; width: auto; height: 63px; padding: 10px;"
-                        data-bind="tooltip: { title: 'Use shards to upgrade the type effectiveness of your Pokémon. When you defeat a Pokémon, you get shards based on its type.', trigger: 'hover', placement:'left' }">
+                        data-bind="tooltip: { title: 'Use gems to upgrade the type effectiveness of your Pokémon. When you defeat a Pokémon, you get gems based on its type.', trigger: 'hover', placement:'left' }">
                     ?
                 </button>
 
             </div>
             <div class="modal-body p-0">
-                <p data-bind="visible: App.game.challenges.list.disableShards.active()" class="bg-danger my-0 sticky-top">
-                    Shard bonuses are disabled.
+                <p data-bind="visible: App.game.challenges.list.disableGems.active()" class="bg-danger my-0 sticky-top">
+                    Gem bonuses are disabled.
                 </p>
                 <table class='table table-sm table-hover m-0'>
-                    <!-- ko foreach: Array(Shards.nTypes) -->
+                    <!-- ko foreach: Array(Gems.nTypes) -->
                         <thead>
                             <tr>
-                                <th colspan="4" class="clickable text-left table-dark text-light" data-toggle="collapse" data-bind="attr: { 'href': '#collapse-shard-' + $index() }">
+                                <th colspan="4" class="clickable text-left table-dark text-light" data-toggle="collapse" data-bind="attr: { 'href': '#collapse-gem-' + $index() }, click: function() { App.game.gems.gemCollapsed[$index()] = !App.game.gems.gemCollapsed[$index()]; }">
                                     <h3>
                                         <knockout data-bind="text: PokemonType[$index()]"></knockout>
                                         <div class="float-right">
-                                            <img width=20px data-bind='attr: { src: Shards.image($index()) }'/>
-                                            <knockout data-bind="text: App.game.shards.shardWallet[$index()]().toLocaleString('en-US')"></knockout>
+                                            <img width=32px data-bind='attr: { src: Gems.image($index()) }'/>
+                                            <knockout data-bind="text: App.game.gems.gemWallet[$index()]().toLocaleString('en-US')"></knockout>
                                         </div>
                                     </h3>
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="collapse show" data-bind="attr: { id: 'collapse-shard-' + $index() }">
-                            <!-- ko foreach: Array(Shards.nEffects) -->
-                                <tr data-bind='if: App.game.shards.isValidUpgrade($parentContext.$index(), $index())'>
+                        <tbody data-bind="class: 'collapse' + (App.game.gems.gemCollapsed[$index()] ? '' : ' show'), attr: { id: 'collapse-gem-' + $index()}">
+                            <!-- ko foreach: Array(Gems.nEffects) -->
+                                <tr data-bind='if: App.game.gems.isValidUpgrade($parentContext.$index(), $index())'>
                                     <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
                                     <td width='50%'>
                                         <div class="progress"
                                             data-bind="style: { 'background-color': '#' + TypeHelper.typeColorsLocked[$parentContext.$index()] }">
                                             <div class='progress-bar' role="progressbar"
-                                                data-bind="style: { width: (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * 10) + '%',
+                                                data-bind="style: { width: (App.game.gems.getGemUpgrade($parentContext.$index(), $index()) * 10) + '%',
                                                                         'background-color': '#' + TypeHelper.typeColors[$parentContext.$index()] }"
                                                 aria-valuemin="0" aria-valuemax="100">
                                             </div>
@@ -14306,12 +17403,12 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
                                         </div>
                                     </td>
                                     <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]]
-                                        + (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * Shards.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
+                                        + (App.game.gems.getGemUpgrade($parentContext.$index(), $index()) * GameConstants.GEM_UPGRADE_STEP)).toFixed(1) + "x"'></td>
                                     <td>
                                         <button class='btn btn-block btn-primary'
-                                                data-bind='click: function(){App.game.shards.buyShardUpgrade($parentContext.$index(), $index())},
-                                                    css: {disabled: !App.game.shards.canBuyShardUpgrade($parentContext.$index(), $index())},
-                                                    text: (App.game.shards.hasMaxUpgrade($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + App.game.shards.getShardUpgradeCost($parentContext.$index(), $index()) + ")")'>
+                                                data-bind='click: function(){App.game.gems.buyGemUpgrade($parentContext.$index(), $index())},
+                                                    css: {disabled: !App.game.gems.canBuyGemUpgrade($parentContext.$index(), $index())},
+                                                    text: (App.game.gems.hasMaxUpgrade($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + App.game.gems.getGemUpgradeCost($parentContext.$index(), $index()) + ")")'>
                                         </button>
                                     </td>
                                 </tr>
@@ -14553,7 +17650,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         <div class='progress'>
                             <div id='mineEnergyBar' class='progress-bar bg-warning' role='progressbar'
                                  aria-valuemin='0' aria-valuemax='100'
-                                 data-bind="style: { width: Math.floor(App.game.underground.energy/App.game.underground.getMaxEnergy()*100) + '%' }">
+                                 data-bind="style: { width: (Math.floor(App.game.underground.energy)/App.game.underground.getMaxEnergy()*100).toFixed(2) + '%' }">
                                 <span data-bind="text: 'Energy: ' + Math.floor(App.game.underground.energy) + ' / ' + App.game.underground.getMaxEnergy() + (Math.floor(App.game.underground.energy) < App.game.underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
                             </div>
                         </div>
@@ -14655,7 +17752,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     <br/>Every time you mine out all items in a level, you will recover one Skip.</p>
 
                     <h4><u>Treasures</u></h4>
-                    <p>Sell your treasures for shards or diamonds!</p>
+                    <p>Sell your treasures for gems or diamonds!</p>
                     <p>If you have found any fossils, you can hatch the Pokémon they contain from the Treasures tab, or from the Day Care.</p>
 
                     <h4><u>Upgrades</u></h4>
@@ -15036,7 +18133,7 @@ aria-labelledby="pokedexModalLabel">
             <div class="modal-body p-0">
                 <img src="assets/images/items/Protein.png" width="40%"/>
                 <br/>
-                <div class="sticky-top">
+                <div class="sticky-top bg-dark text-light">
                   <!-- ko if: App.game.challenges.list.disableProteins.active() -->
                   <span class="btn btn-block btn-danger btn-static m-0">
                     Proteins are disabled.
@@ -15068,6 +18165,10 @@ aria-labelledby="pokedexModalLabel">
                               onchange="Settings.setSettingByName('proteinSortDirection', this.checked)"/>
                       </div>
                   </div>
+                  <input type="checkbox" id="hide-max-protein-pokemons" class="form-check-input"
+                      data-bind="checked: Settings.getSetting('proteinHideMaxedPokemon').observableValue()"
+                      onchange="Settings.setSettingByName('proteinHideMaxedPokemon', this.checked)"/>
+                  <label for="hide-max-protein-pokemons" class="form-check-label">Hide Pokémon with max protein</label>
                 </div>
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
@@ -15078,7 +18179,7 @@ aria-labelledby="pokedexModalLabel">
                     </tr>
                   </thead>
                   <tbody data-bind="foreach: PartyController.getProteinSortedList()">
-                    <tr class="clickable" data-bind="click: () => $data.useProtein(VitaminController.getMultiplier()), hidden: $data.breeding">
+                    <tr class="clickable" data-bind="click: () => $data.useProtein(VitaminController.getMultiplier()), hidden: $data.hideFromProteinList()">
                       <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="text: $data.proteinsUsed().toLocaleString('en-US')">-</td>
                       <td class="text-center tight" data-bind="text: Math.floor($data.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + $data.proteinsUsed()).toLocaleString('en-US')">-</td>
@@ -15319,7 +18420,7 @@ aria-labelledby="badgeCaseModalLabel">
                                     <ul id="seedList" class="list-group p-0">
                                         <!-- ko foreach: FarmController.getBerryListWithIndex() -->
                                         <li class="list-group-item list-group-item-action seed-list-item p-2"
-                                            data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
+                                            data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
                                             <img src="" height="28px"
                                                 data-bind="attr:{ src: FarmController.getBerryImage($data) },
                                                 css: {'berryLocked': !App.game.farming.unlockedBerries[$data]() }">
@@ -15367,11 +18468,11 @@ aria-labelledby="badgeCaseModalLabel">
                                     <ul id="mulchList" class="list-group p-0">
                                         <!-- ko foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1) -->
                                         <li class="list-group-item list-group-item-action seed-list-item p-2"
-                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);},
+                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);},
                                                 css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() },
                                                 tooltip: {title: ItemList[MulchType[$data]].description, trigger: 'hover', animation: false}">
                                             <img src="" width="24px"
-                                                data-bind="attr:{ src: ItemList[MulchType[$data]].image }">
+                                                 data-bind="attr:{ src: ItemList[MulchType[$data]].image }">
                                             <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
                                             <span class="float-right" data-bind="text: App.game.farming.mulchList[$data]().toLocaleString('en-US')"></span>
                                         </li>
@@ -15400,8 +18501,9 @@ aria-labelledby="badgeCaseModalLabel">
                             </div>
 
                             <ul id="shovelList" class="list-group">
+                                <!-- ko if: FarmController.berryListVisible() -->
                                 <li class="list-group-item list-group-item-action seed-list-item p-2"
-                                    data-bind="click: function() {FarmController.selectedShovel(true);},
+                                    data-bind="click: function() {FarmController.selectedShovel(true);FarmController.selectedMulchShovel(false);},
                                     css: { 'active': FarmController.selectedShovel() },
                                     tooltip: {title: 'Clear a Plant from a plot.', trigger: 'hover', animation: false}">
                                     <img src="" height="24px"
@@ -15409,6 +18511,20 @@ aria-labelledby="badgeCaseModalLabel">
                                     <span>Shovel</span>
                                     <span class="float-right" data-bind="text: App.game.farming.shovelAmt().toLocaleString('en-US')"></span>
                                 </li>
+                                <!-- /ko -->
+                            </ul>
+                            <ul id="shovelMulch" class="list-group p-0">
+                                <!-- ko if: !FarmController.berryListVisible() -->
+                                <li class="list-group-item list-group-item-action seed-list-item p-3"
+                                    data-bind="click: function() {FarmController.selectedMulchShovel(true);FarmController.selectedShovel(false);FarmController.selectedMulch(-1);},
+                            css: { 'active': FarmController.selectedMulchShovel() },
+                            tooltip: {title: 'Clear a Mulch from a plot.', trigger: 'hover', animation: false}">
+                                    <img src="" height="21px"
+                                         data-bind="attr:{ src: ItemList['Mulch_Shovel'].image }">
+                                    <span>MulchShovel</span>
+                                    <span class="float-right" data-bind="text: App.game.farming.mulchShovelAmt().toLocaleString('en-US')"></span>
+                                </li>
+                                <!-- /ko -->
                             </ul>
                         </div>
 
@@ -16239,10 +19355,14 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
         <div class="modal-body p-0">
             <div class="p-1">
                 <div class="form-row m-0">
-                    <div class="form-group col-md-3 col-6 align-self-center">
+                    <div class="form-group col-md-3 col-6 text-left">
                         <div class="form-check">
                             <input id="damage-calc-include-breeding" class="form-check-input" type="checkbox" autocomplete="off" data-bind="checked: DamageCalculator.includeBreeding"></input>
                             <label for="damage-calc-include-breeding" class="form-check-label">Include Breeding</label>
+                        </div>
+                        <div class="form-check">
+                            <input id="damage-calc-ignore-level" class="form-check-input" type="checkbox" autocomplete="off" data-bind="checked: DamageCalculator.ignoreLevel"></input>
+                            <label for="damage-calc-ignore-level" class="form-check-label">Ignore Level</label>
                         </div>
                         <div class="form-check">
                             <input id="damage-calc-use-base" class="form-check-input" type="checkbox" autocomplete="off" data-bind="checked: DamageCalculator.baseAttackOnly"></input>
