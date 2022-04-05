@@ -26,6 +26,7 @@ module.exports = {
     },
     rules: {
         indent: 'off',
+        'no-plusplus': 'off',
         'max-len': [
             'error', 200, 2, {
                 ignoreUrls: true,
