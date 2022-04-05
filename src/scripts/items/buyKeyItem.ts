@@ -1,4 +1,4 @@
-///<reference path="../keyItems/KeyItems.ts"/>
+///<reference path="../../declarations/keyItems/KeyItems.d.ts"/>
 class BuyKeyItem extends Item {
 
         item: KeyItemType;
