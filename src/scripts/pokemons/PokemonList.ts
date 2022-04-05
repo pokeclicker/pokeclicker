@@ -725,6 +725,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 25.01,
         'name': 'Pikachu (Original cap)',
+        'nativeRegion': GameConstants.Region.johto,
         'catchRate': 190,
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
