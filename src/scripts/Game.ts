@@ -63,7 +63,6 @@ class Game {
     }
 
     initialize() {
-        PokemonHelper.initilizePokemons();
         AchievementHandler.initialize(this.multiplier, this.challenges);
         FarmController.initialize();
         EffectEngineRunner.initialize(this.multiplier);

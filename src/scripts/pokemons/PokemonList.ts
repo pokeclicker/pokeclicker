@@ -21322,6 +21322,37 @@ const pokemonList = createPokemonArray(
 const pokemonNameIndex = {};
 const maxEggCycles = Math.max(...pokemonList.map(p => p.eggCycles));
 
+// This needs to be initiallised before pokemonMap as some other things rely on it for data
+// Specifically Roamers not sure what else.
+pokemonList.forEach(p => {
+    // Calculate our attack values
+    const baseOffense = 2 * Math.round(Math.sqrt(p.base.attack * p.base.specialAttack) + Math.sqrt(p.base.speed));
+    const baseDefense = 2 * Math.round(Math.sqrt(p.base.defense * p.base.specialDefense) + Math.sqrt(p.base.speed));
+    const baseStamina = 2 * p.base.hitpoints;
+    (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
+
+    if ((p as PokemonListData).baby) {
+        // Calculate prevolutions/baby pokemon
+        // Egg steos should be lower than evolved form
+        (p as PokemonListData).evolutions?.forEach(evo => {
+            pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon;
+            const poke = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon());
+            p.eggCycles = Math.round(poke.eggCycles * 0.8);
+        });
+    } else {
+        // Calculate evolutions egg steps to be higher than the base forms
+        (p as PokemonListData).evolutions?.forEach(evo => {
+            const poke = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon());
+            poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * 1.5));
+        });
+    }
+    // Calculate this pokemons native region
+    (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.MaxIDPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(p.id));
+    // Create an index of pokemon
+    pokemonNameIndex[p.name.toLowerCase()] = p;
+}
+);
+
 type PokemonMapProxy
     = Record<PokemonNameType | number, PokemonListData>
     & {
