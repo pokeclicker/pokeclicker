@@ -473,7 +473,8 @@ export const ACHIEVEMENT_DEFEAT_GYM_VALUES = [
 export const ACHIEVEMENT_DEFEAT_DUNGEON_VALUES = [
     10,
     100,
-    1000,
+    250,
+    500,
 ];
 
 export type EnvironmentData = Partial<Record<Region, Set<string | number>>>;
