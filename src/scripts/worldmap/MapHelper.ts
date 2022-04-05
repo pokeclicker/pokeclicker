@@ -86,21 +86,21 @@ class MapHelper {
         let cls = '';
 
         if (player.route() == route && player.region == region) {
-            cls = 'currentLocation';
+            cls = areaStatus[areaStatus.currentLocation];
         } else if (!MapHelper.accessToRoute(route, region)) {
-            cls = 'locked';
+            cls = areaStatus[areaStatus.locked];
         } else  if (App.game.statistics.routeKills[region][route]() < GameConstants.ROUTE_KILLS_NEEDED) {
-            cls = 'unlockedUnfinished';
+            cls = areaStatus[areaStatus.unlockedUnfinished];
         } else if (!RouteHelper.routeCompleted(route, region, false)) {
-            cls = 'uncaughtPokemon';
+            cls = areaStatus[areaStatus.uncaughtPokemon];
         } else if (!RouteHelper.routeCompleted(route, region, true) && !RouteHelper.isAchievementsComplete(route, region)) {
-            cls = 'uncaughtShinyPokemonAndMissingAchievement';
+            cls = areaStatus[areaStatus.uncaughtShinyPokemonAndMissingAchievement];
         } else if (!RouteHelper.routeCompleted(route, region, true)) {
-            cls = 'uncaughtShinyPokemon';
+            cls = areaStatus[areaStatus.uncaughtShinyPokemon];
         } else if (!RouteHelper.isAchievementsComplete(route, region)) {
-            cls = 'missingAchievement';
+            cls = areaStatus[areaStatus.missingAchievement];
         } else {
-            cls = 'completed';
+            cls = areaStatus[areaStatus.completed];
         }
 
         // Water routes
