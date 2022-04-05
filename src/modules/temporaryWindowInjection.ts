@@ -85,6 +85,7 @@ import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFou
 import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
 import WeatherRequirement from './requirements/WeatherRequirement';
 import { SortModules, SortSaves } from './Sortable';
+import KeyItemController from './keyItems/KeyItemController';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -178,4 +179,5 @@ Object.assign(<any>window, {
     WeatherRequirement,
     SortModules,
     SortSaves,
+    KeyItemController,
 });
