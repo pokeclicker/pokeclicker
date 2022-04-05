@@ -371,9 +371,9 @@
                         <img width=30px src="" data-bind="attr: { src: Weather.image() }"/>
                     </button>
                     <div id="mapBody" class="card-body p-0 show">
-                        <div id="subregion-travel-buttons">
+                        <div id="subregion-travel-buttons" data-bind="visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1">
                             <button class="btn btn-sm btn-info" style="width: 5%;" data-bind="click: () => player.subregion = player.subregion - 1">&lt;</button>
-                            <button class="btn btn-sm btn-info" style="width: 88%;" data-bind="click: () => SubRegions.openModal(), visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1">Subregional Travel</button>
+                            <button class="btn btn-sm btn-info" style="width: 88%;" data-bind="click: () => SubRegions.openModal()">Subregional Travel</button>
                             <button class="btn btn-sm btn-info" style="width: 5%;" data-bind="click: () => player.subregion = player.subregion + 1">&gt;</button>
                         </div>
                         <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
