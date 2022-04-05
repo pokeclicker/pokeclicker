@@ -22,7 +22,7 @@ export default class KeyItem {
         this.isUnlocked = ko.observable(isUnlocked ?? false);
         this.unlockReward = unlockReward;
 
-        if (this.isUnlocked || unlockReq === undefined) {
+        if (this.isUnlocked() || typeof unlockReq !== 'function') {
             this.unlockReq = null;
             return;
         }
