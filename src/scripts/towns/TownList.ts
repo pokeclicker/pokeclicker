@@ -2283,7 +2283,7 @@ const HeaheaCafeOwner = new NPC('Café Owner', [
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
 ]);
 const RoyalAvenueSpectator = new NPC('Spectator', [
-    'I think batles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
+    'I think battles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
     'Evolving Pikachu or Exeggcute in Alola can result in a new form! Sometimes.',
 ]);
 const KonikoniKahuna = new NPC('Kahuna Olivia', [
