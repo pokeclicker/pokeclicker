@@ -2751,7 +2751,74 @@ dungeonList['Lake Acuity'] = new Dungeon('Lake Acuity',
             ], { weight: 1 }, 'Jupiter', '(jupiter)'),
         new DungeonBossPokemon('Uxie', 10070000, 50, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
     ],
-    78000, 201);
+    78000, 217);
+
+dungeonList['Team Galactic HQ'] = new Dungeon('Team Galactic HQ',
+    [
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Glameow', 1295400, 41)],
+            { weight: 2 }, undefined, '(female)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Glameow', 1295400, 37),
+                new GymPokemon('Murkrow', 1295400, 38),
+                new GymPokemon('Croagunk', 1295400, 39),
+            ], { weight: 2 }, undefined, '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Kirlia', 1295400, 40),
+                new GymPokemon('Kadabra', 1295400, 40),
+            ], { weight: 2 }, 'Frederick', '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Stunky', 1295400, 41)],
+            { weight: 2 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Murkrow', 1295400, 41),
+                new GymPokemon('Stunky', 1295400, 41),
+            ], { weight: 2 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Golbat', 1295400, 40),
+                new GymPokemon('Golbat', 1295400, 38),
+            ], { weight: 2 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Golbat', 1295400, 39),
+                new GymPokemon('Houndour', 1295400, 39),
+            ], { weight: 2 }, undefined, '(female)'),
+        new DungeonTrainer('Scientist',
+            [new GymPokemon('Porygon2', 1295400, 42)],
+            { weight: 2 }, 'Darrius', '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Stunky', 1295400, 38),
+                new GymPokemon('Croagunk', 1295400, 40),
+            ], { weight: 2 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Croagunk', 1295400, 38),
+                new GymPokemon('Stunky', 1295400, 38),
+                new GymPokemon('Glameow', 1295400, 38),
+            ], { weight: 2 }, undefined, '(female)'),
+        new DungeonTrainer('Commander',
+            [
+                new GymPokemon('Golbat', 1295400, 42),
+                new GymPokemon('Bronzor', 1295400, 42),
+                new GymPokemon('Toxicroak', 1295400, 42),
+            ], { weight: 1 }, 'Saturn', '(saturn)'),
+    ],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    1295400,
+    [
+        new DungeonTrainer('Galactic Boss',
+            [
+                new GymPokemon('Sneasel', 1760000, 44),
+                new GymPokemon('Crobat', 1760000, 44),
+                new GymPokemon('Honchkrow', 1760000, 46),
+            ], { weight: 1 }, 'Cyrus', '(cyrus)'),
+    ],
+    82500, 217);
 
 dungeonList['Distortion World'] = new Dungeon('Distortion World',
     ['Golbat', 'Gastly', 'Haunter', 'Duskull', 'Chimecho', 'Chingling', 'Bronzor'],

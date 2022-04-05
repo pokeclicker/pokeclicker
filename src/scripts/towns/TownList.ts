@@ -1212,6 +1212,7 @@ TownList['Veilstone City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 215)],
         shops: [DepartmentStoreShop],
+        dungeon: dungeonList['Team Galactic HQ'],
         npcs: [BigSpender],
     }
 );
@@ -1381,6 +1382,11 @@ TownList['Lake Acuity'] = new DungeonTown(
     'Lake Acuity',
     GameConstants.Region.sinnoh,
     [new GymBadgeRequirement(BadgeEnums.Icicle)]
+);
+TownList['Team Galactic HQ'] = new DungeonTown(
+    'Team Galactic HQ',
+    GameConstants.Region.sinnoh,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lake Acuity'))]
 );
 TownList['Victory Road Sinnoh'] = new DungeonTown(
     'Victory Road Sinnoh',
