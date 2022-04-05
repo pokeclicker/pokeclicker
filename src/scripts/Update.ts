@@ -647,14 +647,14 @@ class Update implements Saveable {
             // Migrate event negative ID's to decimals of base form
             saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(pokemon => {
                 switch (pokemon.id) {
-                    case -3:
-                        pokemon.id = 150.1;
-                        break;
                     case -1:
                         pokemon.id = 25.08;
                         break;
                     case -2:
                         pokemon.id = 25.09;
+                        break;
+                    case -3:
+                        pokemon.id = 150.1;
                         break;
                     case -4:
                         pokemon.id = 143.1;
@@ -662,11 +662,11 @@ class Update implements Saveable {
                     case -5:
                         pokemon.id = 175.1;
                         break;
+                    case -6:
+                        pokemon.id = 1.2;
+                        break;
                     case -7:
                         pokemon.id = 25.10;
-                        break;
-                    case -6:
-                        pokemon.id = 1.1;
                         break;
                     case -8:
                         pokemon.id = 25.11;
@@ -675,8 +675,6 @@ class Update implements Saveable {
                         pokemon.id = 133.1;
                         break;
                     case -10:
-                        pokemon.id = 1.2;
-                        break;
                     case -11:
                     case -12:
                     case -13:

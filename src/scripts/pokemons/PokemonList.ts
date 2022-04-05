@@ -57,13 +57,14 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 1.1,
-        'name': 'Spooky Bulbasaur',
+        'name': 'Bulbasaur (clone)',
         'nativeRegion': GameConstants.Region.kanto,
-        'catchRate': 25,
+        'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Poison],
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
+        'evolutions': [new LevelEvolution('Bulbasaur (clone)', 'Ivysaur (clone)', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -75,14 +76,13 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 1.2,
-        'name': 'Bulbasaur (clone)',
+        'name': 'Spooky Bulbasaur',
         'nativeRegion': GameConstants.Region.kanto,
-        'catchRate': 45,
+        'catchRate': 25,
         'type': [PokemonType.Grass, PokemonType.Poison],
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Bulbasaur (clone)', 'Ivysaur (clone)', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
