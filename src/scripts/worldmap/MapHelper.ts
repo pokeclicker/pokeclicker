@@ -1,6 +1,17 @@
 /// <reference path="../../declarations/DataStore/StatisticStore/index.d.ts" />
 /// <reference path="../GameConstants.d.ts" />
 
+enum areaStatus {
+    currentLocation,
+    locked,
+    unlockedUnfinished,
+    uncaughtPokemon,
+    uncaughtShinyPokemonAndMissingAchievement,
+    uncaughtShinyPokemon,
+    missingAchievement,
+    completed,
+}
+
 class MapHelper {
 
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
@@ -101,36 +112,40 @@ class MapHelper {
     }
 
     public static calculateTownCssClass(townName: string): string {
+        // Check if we are currently at this location
         if (!player.route() && player.town().name == townName) {
-            return 'currentLocation';
+            return areaStatus[areaStatus.currentLocation];
         }
+        // Check if this location is locked
         if (!MapHelper.accessToTown(townName)) {
-            return 'locked';
+            return areaStatus[areaStatus.locked];
         }
+        const states = [];
+        // Is this location a dungeon
         if (dungeonList[townName]) {
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(townName)]()) {
-                return 'unlockedUnfinished';
+                return areaStatus[areaStatus.unlockedUnfinished];
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], false)) {
-                return 'uncaughtPokemon';
+                return areaStatus[areaStatus.uncaughtPokemon];
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], true) && !DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
-                return 'uncaughtShinyPokemonAndMissingAchievement';
+                return areaStatus[areaStatus.uncaughtShinyPokemonAndMissingAchievement];
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], true)) {
-                return 'uncaughtShinyPokemon';
+                return areaStatus[areaStatus.uncaughtShinyPokemon];
             } else if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
-                return 'missingAchievement';
-            }
-        }
-        if (gymList[townName]) {
-            const gym = gymList[townName];
-            if (Gym.isUnlocked(gym)) {
-                if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
-                    return 'unlockedUnfinished';
-                } else if (!Gym.isAchievementsComplete(gym)) {
-                    return 'missingAchievement';
-                }
+                return areaStatus[areaStatus.missingAchievement];
             }
         }
         const town = TownList[townName];
+        if (town.gym) {
+            const gym = town.gym;
+            if (Gym.isUnlocked(gym)) {
+                if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
+                    states.push(areaStatus.unlockedUnfinished);
+                } else if (!Gym.isAchievementsComplete(gym)) {
+                    states.push(areaStatus.missingAchievement);
+                }
+            }
+        }
         // We don't want to re-process DungeonTowns
         if (!(town instanceof DungeonTown) && town?.dungeon) {
             const dungeonAccess = MapHelper.calculateTownCssClass(town?.dungeon.name);
@@ -141,22 +156,25 @@ class MapHelper {
                     break;
                 // Return the dungeons state
                 default:
-                    return dungeonAccess;
+                    states.push(areaStatus[dungeonAccess]);
             }
+        }
+        if (states.length) {
+            return areaStatus[Math.min(...states)];
         }
         if (town instanceof PokemonLeague && (town as PokemonLeague)?.gymList) {
             for (const gym of (town as PokemonLeague)?.gymList) {
                 if (Gym.isUnlocked(gym) && !App.game.badgeCase.hasBadge(gym.badgeReward)) {
-                    return 'unlockedUnfinished';
+                    return areaStatus[areaStatus.unlockedUnfinished];
                 }
             }
             for (const gym of (town as PokemonLeague)?.gymList) {
                 if (Gym.isUnlocked(gym) && !Gym.isAchievementsComplete(gym)) {
-                    return 'missingAchievement';
+                    return areaStatus[areaStatus.missingAchievement];
                 }
             }
         }
-        return 'completed';
+        return areaStatus[areaStatus.completed];
     }
 
     public static accessToTown(townName: string): boolean {
