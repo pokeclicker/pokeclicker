@@ -68,7 +68,7 @@ class Dungeon {
 
     public isUnlocked(): boolean {
         // Player requires the Dungeon Ticket to access the dungeons
-        if (!App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket)) {
+        if (!App.game.keyItems.hasKeyItem(KeyItemType.Dungeon_ticket)) {
             Notifier.notify({
                 message: 'You need the Dungeon ticket to access dungeons',
                 type: NotificationConstants.NotificationOption.danger,
@@ -4845,7 +4845,7 @@ dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
                 new GymPokemon('Mienshao', 22464940, 49),
                 new GymPokemon('Honchkrow', 22564950, 49),
                 new GymPokemon('Pyroar', 23375580, 51),
-                new GymPokemon('Gyarados', 27385730, 53),
+                new GymPokemon('Mega Gyarados', 27385730, 53),
             ],
             { weight: 2 }),
         new DungeonBossPokemon('Xerneas', 93659460, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
