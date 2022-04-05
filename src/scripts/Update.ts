@@ -643,8 +643,8 @@ class Update implements Saveable {
             saveData.challenges.list.disableGems = saveData.challenges?.list?.disableShards ?? false;
         },
 
-        '0.8.16': ({ playerData, saveData }) => {
-            // Migrate negative ID's to decimals of base form
+        '0.8.18': ({ playerData, saveData }) => {
+            // Migrate event negative ID's to decimals of base form
             saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(e => {
                 switch (e.id) {
                     case -3:
