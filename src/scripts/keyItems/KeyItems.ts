@@ -10,7 +10,7 @@ class KeyItems implements Feature {
         this.itemList = [];
     }
 
-    initialize() {
+    initialize(): void {
         this.itemList = [
             new KeyItem(KeyItemType.Teachy_tv, 'A television set that is tuned to a program with useful tips for novice TRAINERS', null, true, undefined, 'Teachy TV'),
             new KeyItem(KeyItemType.Coin_case, 'A case for holding money', null, true, undefined, 'Coin Case'),
@@ -93,14 +93,14 @@ class KeyItems implements Feature {
         ];
     }
 
-    hasKeyItem(item: KeyItemType) {
+    hasKeyItem(item: KeyItemType): boolean {
         if (this.itemList[item] == undefined) {
             return false;
         }
-        return this.itemList[item].isUnlocked;
+        return this.itemList[item].isUnlocked();
     }
 
-    gainKeyItem(item: KeyItemType, silent = false) {
+    gainKeyItem(item: KeyItemType, silent = false): void {
         if (!this.hasKeyItem(item)) {
             if (!silent) {
                 KeyItemController.showGainModal(item);
@@ -136,7 +136,7 @@ class KeyItems implements Feature {
     toJSON(): Record<string, any> {
         const save = {};
         for (let i = 0; i < this.itemList.length; i++) {
-            save[KeyItemType[this.itemList[i].name]] = this.itemList[i].isUnlocked;
+            save[KeyItemType[this.itemList[i].name]] = this.itemList[i].isUnlocked();
         }
         return save;
     }
