@@ -44,10 +44,6 @@ class Game {
         public multiplier: Multiplier
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
-
-        AchievementHandler.initialize(multiplier, challenges);
-        FarmController.initialize();
-        EffectEngineRunner.initialize(multiplier);
     }
 
     load() {
@@ -67,6 +63,10 @@ class Game {
     }
 
     initialize() {
+        AchievementHandler.initialize(this.multiplier, this.challenges);
+        FarmController.initialize();
+        EffectEngineRunner.initialize(this.multiplier);
+        ItemHandler.initilizeEvoStones();
         this.profile.initialize();
         this.breeding.initialize();
         this.pokeballs.initialize();
@@ -78,7 +78,12 @@ class Game {
         this.load();
 
         // TODO refactor to proper initialization methods
-        Battle.generateNewEnemy();
+        if (player.starter() != GameConstants.Starter.None) {
+            Battle.generateNewEnemy();
+        } else {
+            const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false);
+            Battle.enemyPokemon(battlePokemon);
+        }
         this.farming.resetAuras();
         //Safari.load();
         Underground.energyTick(this.underground.getEnergyRegenTime());

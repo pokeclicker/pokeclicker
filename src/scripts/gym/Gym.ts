@@ -165,7 +165,7 @@ gymList['Fuchsia City'] = new Gym(
         ]),
     ],
     () => {
-        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Safari_ticket, true);
+        App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
         App.game.quests.getQuestLine('Mining Expedition').beginQuest();
     }
 );
@@ -201,7 +201,7 @@ gymList['Viridian City'] = new Gym(
         new GymBadgeRequirement(BadgeEnums.Thunder),
     ],
     () => {
-        App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Gem_case, true);
+        App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
     }
 );
 
