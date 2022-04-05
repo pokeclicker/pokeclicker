@@ -645,48 +645,53 @@ class Update implements Saveable {
 
         '0.8.18': ({ playerData, saveData }) => {
             // Migrate event negative ID's to decimals of base form
-            saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(pokemon => {
-                switch (pokemon.id) {
-                    case -1:
-                        pokemon.id = 25.08;
-                        break;
-                    case -2:
-                        pokemon.id = 25.09;
-                        break;
-                    case -3:
-                        pokemon.id = 150.1;
-                        break;
-                    case -4:
-                        pokemon.id = 143.1;
-                        break;
-                    case -5:
-                        pokemon.id = 175.1;
-                        break;
-                    case -6:
-                        pokemon.id = 1.2;
-                        break;
-                    case -7:
-                        pokemon.id = 25.10;
-                        break;
-                    case -8:
-                        pokemon.id = 25.11;
-                        break;
-                    case -9:
-                        pokemon.id = 133.1;
-                        break;
-                    case -10:
-                    case -11:
-                    case -12:
-                    case -13:
-                    case -14:
-                    case -15:
-                    case -16:
-                    case -17:
-                    case -18:
-                        pokemon.id = Math.abs(pokemon.id) - 9 + 0.1;
-                        break;
+            const eventIDs = [
+                [-1, 25.08],
+                [-2, 25.09],
+                [-3, 150.1],
+                [-4, 143.1],
+                [-5, 175.1],
+                [-6, 1.2],
+                [-7, 25.1],
+                [-8, 25.11],
+                [-9, 133.1],
+                [-10, 1.1],
+                [-11, 2.1],
+                [-12, 3.1],
+                [-13, 4.1],
+                [-14, 5.1],
+                [-15, 6.1],
+                [-16, 7.1],
+                [-17, 8.1],
+                [-18, 9.1],
+            ];
+
+            eventIDs.forEach(([oldID, newID]) => {
+                const pokemon = saveData.party.caughtPokemon.find(p => p.id === oldID);
+                // If player hasn't caught this mon yet, return.
+                if (pokemon == undefined) {
+                    return;
                 }
-                return pokemon;
+                // Update our ID
+                pokemon.id = newID;
+                // Update our statistics
+                saveData.statistics.pokemonEncountered[newID] = saveData.statistics.pokemonEncountered[oldID];
+                saveData.statistics.pokemonDefeated[newID] = saveData.statistics.pokemonDefeated[oldID];
+                saveData.statistics.pokemonCaptured[newID] = saveData.statistics.pokemonCaptured[oldID];
+                saveData.statistics.pokemonHatched[newID] = saveData.statistics.pokemonHatched[oldID];
+                saveData.statistics.shinyPokemonEncountered[newID] = saveData.statistics.shinyPokemonEncountered[oldID];
+                saveData.statistics.shinyPokemonDefeated[newID] = saveData.statistics.shinyPokemonDefeated[oldID];
+                saveData.statistics.shinyPokemonCaptured[newID] = saveData.statistics.shinyPokemonCaptured[oldID];
+                saveData.statistics.shinyPokemonHatched[newID] = saveData.statistics.shinyPokemonHatched[oldID];
+                // Delete our old statistics
+                delete saveData.statistics.pokemonEncountered[oldID];
+                delete saveData.statistics.pokemonDefeated[oldID];
+                delete saveData.statistics.pokemonCaptured[oldID];
+                delete saveData.statistics.pokemonHatched[oldID];
+                delete saveData.statistics.shinyPokemonEncountered[oldID];
+                delete saveData.statistics.shinyPokemonDefeated[oldID];
+                delete saveData.statistics.shinyPokemonCaptured[oldID];
+                delete saveData.statistics.shinyPokemonHatched[oldID];
             });
         },
     };
