@@ -1,9 +1,9 @@
 class KeyItemController {
-    private static _inspectedItem: KnockoutObservable<KeyItems.KeyItem> = ko.observable(KeyItems.KeyItem.Teachy_tv);
-    private static _selectedItem: KnockoutObservable<KeyItems.KeyItem> = ko.observable(KeyItems.KeyItem.Teachy_tv);
-    private static _latestGainedItem: KnockoutObservable<KeyItems.KeyItem> = ko.observable(KeyItems.KeyItem.Teachy_tv)
+    private static _inspectedItem: KnockoutObservable<KeyItemType> = ko.observable(KeyItemType.Teachy_tv);
+    private static _selectedItem: KnockoutObservable<KeyItemType> = ko.observable(KeyItemType.Teachy_tv);
+    private static _latestGainedItem: KnockoutObservable<KeyItemType> = ko.observable(KeyItemType.Teachy_tv)
 
-    static showGainModal(item: KeyItems.KeyItem) {
+    static showGainModal(item: KeyItemType) {
         this.latestGainedItem = item;
         $('.modal').modal('hide');
         $('#keyItemModal').modal({
@@ -12,7 +12,7 @@ class KeyItemController {
         });
     }
 
-    public static hover(item: KeyItems.KeyItem) {
+    public static hover(item: KeyItemType) {
         this.inspectedItem = item;
     }
 
@@ -24,7 +24,7 @@ class KeyItemController {
         return this._inspectedItem();
     }
 
-    static set inspectedItem(item: KeyItems.KeyItem) {
+    static set inspectedItem(item: KeyItemType) {
         this._inspectedItem(item);
     }
 
@@ -32,7 +32,7 @@ class KeyItemController {
         return this._selectedItem();
     }
 
-    static set selectedItem(item: KeyItems.KeyItem) {
+    static set selectedItem(item: KeyItemType) {
         this._selectedItem(item);
     }
 
@@ -40,7 +40,7 @@ class KeyItemController {
         return this._latestGainedItem();
     }
 
-    static set latestGainedItem(item: KeyItems.KeyItem) {
+    static set latestGainedItem(item: KeyItemType) {
         this._latestGainedItem(item);
     }
 }

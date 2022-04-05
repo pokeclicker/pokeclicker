@@ -130,10 +130,10 @@ class GymRunner {
 document.addEventListener('DOMContentLoaded', () => {
     $('#receiveBadgeModal').on('hidden.bs.modal', () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Soul) {
-            KeyItemController.showGainModal(KeyItems.KeyItem.Safari_ticket);
+            KeyItemController.showGainModal(KeyItemType.Safari_ticket);
         }
         if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
-            KeyItemController.showGainModal(KeyItems.KeyItem.Gem_case);
+            KeyItemController.showGainModal(KeyItemType.Gem_case);
         }
     });
 });

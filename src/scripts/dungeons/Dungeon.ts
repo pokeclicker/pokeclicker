@@ -68,7 +68,7 @@ class Dungeon {
 
     public isUnlocked(): boolean {
         // Player requires the Dungeon Ticket to access the dungeons
-        if (!App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket)) {
+        if (!App.game.keyItems.hasKeyItem(KeyItemType.Dungeon_ticket)) {
             Notifier.notify({
                 message: 'You need the Dungeon ticket to access dungeons',
                 type: NotificationConstants.NotificationOption.danger,

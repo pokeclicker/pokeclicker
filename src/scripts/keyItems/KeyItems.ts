@@ -12,10 +12,10 @@ class KeyItems implements Feature {
 
     initialize() {
         this.itemList = [
-            new KeyItem(KeyItems.KeyItem.Teachy_tv, 'A television set that is tuned to a program with useful tips for novice TRAINERS', null, true, undefined, 'Teachy TV'),
-            new KeyItem(KeyItems.KeyItem.Coin_case, 'A case for holding money', null, true, undefined, 'Coin Case'),
-            new KeyItem(KeyItems.KeyItem.Pokeball_bag, 'A small bag that can hold many different types of PokéBalls', null, true, undefined, 'Pokéball Bag'),
-            new KeyItem(KeyItems.KeyItem.Town_map, 'A very convenient map that can be viewed anytime. It even shows you your present location in the region', () => {
+            new KeyItem(KeyItemType.Teachy_tv, 'A television set that is tuned to a program with useful tips for novice TRAINERS', null, true, undefined, 'Teachy TV'),
+            new KeyItem(KeyItemType.Coin_case, 'A case for holding money', null, true, undefined, 'Coin Case'),
+            new KeyItem(KeyItemType.Pokeball_bag, 'A small bag that can hold many different types of PokéBalls', null, true, undefined, 'Pokéball Bag'),
+            new KeyItem(KeyItemType.Town_map, 'A very convenient map that can be viewed anytime. It even shows you your present location in the region', () => {
                 return App.game.statistics.routeKills[GameConstants.Region.kanto][1]() >= GameConstants.ROUTE_KILLS_NEEDED;
             }, false, () => {
                 Information.show({
@@ -28,8 +28,8 @@ class KeyItems implements Feature {
                 });
             }, 'Town Map'),
             // TODO obtain somewhere at the start
-            new KeyItem(KeyItems.KeyItem.Factory_key, 'This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13', undefined, undefined, undefined, 'Factory Key'),
-            new KeyItem(KeyItems.KeyItem.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region and beyond,<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon', null, false, () => {
+            new KeyItem(KeyItemType.Factory_key, 'This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13', undefined, undefined, undefined, 'Factory Key'),
+            new KeyItem(KeyItemType.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region and beyond,<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon', null, false, () => {
                 Information.show({
                     steps: [
                         {
@@ -70,37 +70,37 @@ class KeyItems implements Feature {
                     once: true,
                 });
             }, 'Dungeon Ticket'),
-            new KeyItem(KeyItems.KeyItem.Super_rod, 'The best fishing rod for catching wild water Pokémon', () => {
+            new KeyItem(KeyItemType.Super_rod, 'The best fishing rod for catching wild water Pokémon', () => {
                 return App.game.statistics.routeKills[GameConstants.Region.kanto][12]() >= GameConstants.ROUTE_KILLS_NEEDED;
             }, undefined, undefined, 'Super Rod'),
             // TODO obtain somewhere at the start
-            new KeyItem(KeyItems.KeyItem.Holo_caster, 'A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others', undefined, undefined, undefined, 'Holo Caster'),
-            new KeyItem(KeyItems.KeyItem.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémons attack; some baby Pokémon can only be found through breeding too!', () => {
+            new KeyItem(KeyItemType.Holo_caster, 'A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others', undefined, undefined, undefined, 'Holo Caster'),
+            new KeyItem(KeyItemType.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémons attack; some baby Pokémon can only be found through breeding too!', () => {
                 return App.game.statistics.routeKills[GameConstants.Region.kanto][5]() >= GameConstants.ROUTE_KILLS_NEEDED;
             }, undefined, undefined, 'Mystery Egg'),
-            new KeyItem(KeyItems.KeyItem.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City'),
-            new KeyItem(KeyItems.KeyItem.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.', () => {
+            new KeyItem(KeyItemType.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City'),
+            new KeyItem(KeyItemType.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.', () => {
                 return MapHelper.accessToRoute(14, GameConstants.Region.kanto);
             }, undefined, undefined, 'Wailmer Pail'),
 
-            new KeyItem(KeyItems.KeyItem.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground', undefined, undefined, undefined, 'Explorer Kit'),
+            new KeyItem(KeyItemType.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground', undefined, undefined, undefined, 'Explorer Kit'),
             // TODO buy for 500 quest points
-            new KeyItem(KeyItems.KeyItem.Event_calendar, 'This calendar will keep you up to date on the latest events', undefined, undefined, undefined, 'Event Calender'),
-            new KeyItem(KeyItems.KeyItem.Gem_case, 'A case specifically designed for holding gems', undefined, undefined, undefined, 'Gem Case'),
-            new KeyItem(KeyItems.KeyItem.DNA_splicers, 'A splicer that fuses certain Pokémon', () => {
+            new KeyItem(KeyItemType.Event_calendar, 'This calendar will keep you up to date on the latest events', undefined, undefined, undefined, 'Event Calender'),
+            new KeyItem(KeyItemType.Gem_case, 'A case specifically designed for holding gems', undefined, undefined, undefined, 'Gem Case'),
+            new KeyItem(KeyItemType.DNA_splicers, 'A splicer that fuses certain Pokémon', () => {
                 return App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]() > 0;
             }, undefined, undefined, 'DNA Splicers'),
         ];
     }
 
-    hasKeyItem(item: KeyItems.KeyItem) {
+    hasKeyItem(item: KeyItemType) {
         if (this.itemList[item] == undefined) {
             return false;
         }
         return this.itemList[item].isUnlocked;
     }
 
-    gainKeyItem(item: KeyItems.KeyItem, silent = false) {
+    gainKeyItem(item: KeyItemType, silent = false) {
         if (!this.hasKeyItem(item)) {
             if (!silent) {
                 KeyItemController.showGainModal(item);
@@ -118,7 +118,7 @@ class KeyItems implements Feature {
             if (json.hasOwnProperty(key)) {
                 if (json[key] === true) {
                     // Unlock to dispose unlocker if needed
-                    this.itemList[KeyItems.KeyItem[key]].unlock();
+                    this.itemList[KeyItemType[key]].unlock();
                 }
             }
         }
@@ -136,32 +136,12 @@ class KeyItems implements Feature {
     toJSON(): Record<string, any> {
         const save = {};
         for (let i = 0; i < this.itemList.length; i++) {
-            save[KeyItems.KeyItem[this.itemList[i].name]] = this.itemList[i].isUnlocked;
+            save[KeyItemType[this.itemList[i].name]] = this.itemList[i].isUnlocked;
         }
         return save;
     }
 
     update(delta: number): void {
         // This method intentionally left blank
-    }
-}
-
-namespace KeyItems {
-    export enum KeyItem {
-        'Teachy_tv',
-        'Coin_case',
-        'Pokeball_bag',
-        'Town_map',
-        'Factory_key',
-        'Dungeon_ticket',
-        'Super_rod',
-        'Holo_caster',
-        'Mystery_egg',
-        'Safari_ticket',
-        'Wailmer_pail',
-        'Explorer_kit',
-        'Event_calendar',
-        'Gem_case',
-        'DNA_splicers'
     }
 }

@@ -88,7 +88,7 @@
                                 <div class="col-2">
                                     <img class="clickable key-item" src=""
                                         data-bind="attr:{
-                                        src: 'assets/images/keyitems/' + KeyItems.KeyItem[$data.name] + '.png'},
+                                        src: 'assets/images/keyitems/' + KeyItemType[$data.name] + '.png'},
                                 css: {'key-item-locked': !App.game.keyItems.hasKeyItem($data.name),
                                 'key-item-selected': KeyItemController.inspectedItem == $data.name
                                 },

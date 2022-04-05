@@ -10,6 +10,7 @@ import LogEvent from './LogEvent';
 import BadgeEnums from './enums/Badges';
 import PokemonType from './enums/PokemonType';
 import ItemType from './enums/ItemType';
+import KeyItemType from './enums/KeyItemType';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -97,6 +98,7 @@ Object.assign(<any>window, {
     BadgeEnums,
     PokemonType,
     ItemType,
+    KeyItemType,
     BooleanSetting,
     RangeSetting,
     Setting,
