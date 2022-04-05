@@ -20988,9 +20988,9 @@ const pokemonList = createPokemonArray(
             'speed': 78,
         },
     },
-    // Megas are separated from normal Pokemon as they aren't really added and will have special plans later on
+    // Megas only between -100 → -199
     {
-        'id': 3.2,
+        'id': -100,
         'name': 'Mega Venusaur',
         'nativeRegion': GameConstants.Region.kanto,
         'type': [PokemonType.Grass, PokemonType.Poison],
@@ -21008,7 +21008,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 6.2,
+        'id': -101,
         'name': 'Mega Charizard X',
         'nativeRegion': GameConstants.Region.kanto,
         'type': [PokemonType.Fire, PokemonType.Dragon],
@@ -21026,7 +21026,7 @@ const pokemonList = createPokemonArray(
         },
     },
     // {
-    //     'id': 6.3,
+    //     'id': -102,
     //     'name': 'Mega Charizard Y',
     //     'type': [PokemonType.Fire, PokemonType.Flying],
     //     'eggCycles': 120,
@@ -21043,7 +21043,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': 9.2,
+    //     'id': -103,
     //     'name': 'Mega Blastoise',
     //     'type': [PokemonType.Water],
     //     'eggCycles': 120,
@@ -21060,7 +21060,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': 15.1,
+    //     'id': -104,
     //     'name': 'Mega Beedrill',
     //     'type': [PokemonType.Bug, PokemonType.Poison],
     //     'eggCycles': 80,
@@ -21077,7 +21077,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': 18.1,
+    //     'id': -105,
     //     'name': 'Mega Pidgeot',
     //     'type': [PokemonType.Normal, PokemonType.Flying],
     //     'eggCycles': 80,
@@ -21094,7 +21094,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': 65.1,
+    //     'id': -106,
     //     'name': 'Mega Alakazam',
     //     'type': [PokemonType.Psychic],
     //     'eggCycles': 80,
@@ -21111,7 +21111,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': 80.2,
+    //     'id': -107,
     //     'name': 'Mega Slowbro',
     //     'type': [PokemonType.Water, PokemonType.Psychic],
     //     'eggCycles': 80,
@@ -21128,7 +21128,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': 94.1,
+    //     'id': -108,
     //     'name': 'Mega Gengar',
     //     'type': [PokemonType.Poison, PokemonType.Ghost],
     //     'eggCycles': 120,
@@ -21145,7 +21145,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': 115.1,
+    //     'id': -109,
     //     'name': 'Mega Kangaskhan',
     //     'type': [PokemonType.Normal],
     //     'eggCycles': 120,
@@ -21162,7 +21162,7 @@ const pokemonList = createPokemonArray(
     //     },
     // },
     // {
-    //     'id': 127.1,
+    //     'id': -110,
     //     'name': 'Mega Pinsir',
     //     'type': [PokemonType.Bug, PokemonType.Flying],
     //     'eggCycles': 120,
@@ -21861,40 +21861,6 @@ const pokemonList = createPokemonArray(
             'speed': 103,
         },
     }
-    // {
-    //     'id': 383.1,
-    //     'name': 'Primal Groudon',
-    //     'type': [PokemonType.Ground, PokemonType.Fire],
-    //     'eggCycles': 120,
-    //     'levelType': LevelType.slow,
-    //     'exp': 347,
-    //     'catchRate': 2,
-    //     'base': {
-    //         'hitpoints': 100,
-    //         'attack': 180,
-    //         'specialAttack': 150,
-    //         'defense': 160,
-    //         'specialDefense': 90,
-    //         'speed': 90,
-    //     },
-    // },
-    // {
-    //     'id': 382.1,
-    //     'name': 'Primal Kyogre',
-    //     'type': [PokemonType.Water],
-    //     'eggCycles': 120,
-    //     'levelType': LevelType.slow,
-    //     'exp': 347,
-    //     'catchRate': 2,
-    //     'base': {
-    //         'hitpoints': 100,
-    //         'attack': 150,
-    //         'specialAttack': 180,
-    //         'defense': 90,
-    //         'specialDefense': 160,
-    //         'speed': 90,
-    //     },
-    // },
 );
 
 const pokemonNameIndex = {};
