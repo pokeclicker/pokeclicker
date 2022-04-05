@@ -1,3 +1,5 @@
+///<reference path="../declarations/Sortable.d.ts"/>
+
 class Save {
 
     static counter = 0;
