@@ -1198,5 +1198,6 @@ export type PokemonNameType
     | 'Mega Venusaur'
     | 'Mega Charizard X'
     | 'Mega Gyarados'
+    | 'Mega Gardevoir'
     | 'Mega Rayquaza'
     | '???';
