@@ -5221,7 +5221,6 @@ dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
         new DungeonBossPokemon('Pikachu (Unova cap)', 59764020, 15),
         new DungeonBossPokemon('Pikachu (Kalos cap)', 59764020, 15),
         new DungeonBossPokemon('Pikachu (Alola cap)', 59764020, 15),
-        new DungeonBossPokemon('Pikachu (Partner cap)', 59764020, 15),
     ],
     850000, 4);
 
