@@ -22,6 +22,7 @@ module.exports = {
         player: 'readonly',
         pokemonMap: 'readonly',
         Save: 'readonly',
+        MapHelper: 'readonly',
     },
     rules: {
         indent: 'off',
