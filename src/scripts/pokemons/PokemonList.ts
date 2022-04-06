@@ -17978,6 +17978,23 @@ const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 801.1,
+        'name': 'Magearna (Original Color)',
+        'type': [PokemonType.Steel, PokemonType.Fairy],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': null,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 80,
+            'attack': 95,
+            'specialAttack': 130,
+            'defense': 115,
+            'specialDefense': 115,
+            'speed': 65,
+        },
+    },
+    {
         'id': 802,
         'name': 'Marshadow',
         'type': [PokemonType.Fighting, PokemonType.Ghost],
