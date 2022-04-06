@@ -1,7 +1,7 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/achievements/Achievement.d.ts" />
 
 class AchievementHandler {
-
     public static achievementList: Achievement[] = [];
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static maxBonus: KnockoutObservableArray<number> = ko.observableArray([]);
@@ -73,16 +73,27 @@ class AchievementHandler {
         AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, region, unlocked, achievableFunction));
     }
 
+    public static calculateBonus(): void {
+        AchievementHandler.achievementList.forEach((achievement) => {
+            if (!achievement.achievable()) {
+                return 0;
+            }
+            const max = AchievementHandler.maxBonus()[achievement.region];
+            achievement.bonus = (achievement.bonusWeight / max) * 100;
+        });
+    }
+
     public static calculateMaxBonus() {
         GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
-            AchievementHandler.maxBonus()[region] = AchievementHandler.achievementList.filter(a => a.region == region && a.achievable()).reduce((sum, a) => sum + a.bonus, 0);
+            AchievementHandler.maxBonus()[region] = AchievementHandler.achievementList.filter(a => a.region == region && a.achievable()).reduce((sum, a) => sum + a.bonusWeight, 0);
         });
+        AchievementHandler.calculateBonus();
     }
 
     public static bonusUnlocked(): number {
         let sum = 0;
         GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
-            sum += AchievementHandler.achievementList.filter(a => a.region == region && a.isCompleted()).reduce((sum, a) => sum + a.bonus, 0);
+            sum += AchievementHandler.achievementList.filter(a => a.region == region && a.isCompleted()).reduce((sum, a) => sum + a.bonusWeight, 0);
         });
         return sum;
     }
@@ -90,7 +101,7 @@ class AchievementHandler {
     public static achievementBonus(): number {
         let sum = 0;
         GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
-            const total = AchievementHandler.achievementList.filter(a => a.region == region && a.isCompleted()).reduce((sum, a) => sum + a.bonus, 0) / AchievementHandler.maxBonus()[region];
+            const total = AchievementHandler.achievementList.filter(a => a.region == region && a.isCompleted()).reduce((sum, a) => sum + a.bonusWeight, 0) / AchievementHandler.maxBonus()[region];
             if (!isNaN(total)) {
                 sum += total;
             }
