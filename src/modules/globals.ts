@@ -5,7 +5,7 @@ import type Profile from './profile/Profile';
 import type Statistics from './DataStore/StatisticStore';
 import type Challenges from './challenges/Challenges';
 import type Multiplier from './multiplier/Multiplier';
-import type { GameState, Region } from './GameConstants';
+import type { Environment, GameState, Region } from './GameConstants';
 import type PokemonType from './enums/PokemonType';
 import type BagItem from './interfaces/BagItem';
 import type LevelType from './party/LevelType';
@@ -83,6 +83,23 @@ type TmpSaveType = {
     key: string;
 };
 
+type TmpMapHelperType = {
+    moveToRoute: (route: number, region: Region)=>void;
+    routeExist: (route: number, region: Region)=>boolean;
+    normalizeRoute: (route: number, region: Region)=>number;
+    accessToRoute: (route: number, region: Region)=>boolean;
+    getCurrentEnvironment: ()=>Environment;
+    calculateBattleCssClass: ()=>string;
+    calculateRouteCssClass: (route: number, region: Region)=>string;
+    calculateTownCssClass: (townName: string)=>string;
+    accessToTown: (townName: string)=>boolean;
+    moveToTown: (townName: string)=>void;
+    validRoute: (route: number, region: Region)=>boolean;
+    openShipModal: ()=>void;
+    ableToTravel: ()=>boolean;
+    travelToNextRegion: ()=>void;
+};
+
 type TmpPokemonMapProxy
     = Record<PokemonNameType | number, TmpPokemonListData>
     & {
@@ -97,4 +114,5 @@ declare global {
     const pokemonMap: TmpPokemonMapProxy;
     const player: any;
     const Save: TmpSaveType;
+    const MapHelper: TmpMapHelperType;
 }
