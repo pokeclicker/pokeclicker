@@ -725,7 +725,6 @@ const pokemonList = createPokemonArray(
     {
         'id': 25.01,
         'name': 'Pikachu (Original cap)',
-        'nativeRegion': GameConstants.Region.johto,
         'catchRate': 190,
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
@@ -743,7 +742,6 @@ const pokemonList = createPokemonArray(
     {
         'id': 25.02,
         'name': 'Pikachu (Hoenn cap)',
-        'nativeRegion': GameConstants.Region.hoenn,
         'catchRate': 190,
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
@@ -761,7 +759,6 @@ const pokemonList = createPokemonArray(
     {
         'id': 25.03,
         'name': 'Pikachu (Sinnoh cap)',
-        'nativeRegion': GameConstants.Region.sinnoh,
         'catchRate': 190,
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
@@ -779,7 +776,6 @@ const pokemonList = createPokemonArray(
     {
         'id': 25.04,
         'name': 'Pikachu (Unova cap)',
-        'nativeRegion': GameConstants.Region.unova,
         'catchRate': 190,
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
@@ -797,7 +793,6 @@ const pokemonList = createPokemonArray(
     {
         'id': 25.05,
         'name': 'Pikachu (Kalos cap)',
-        'nativeRegion': GameConstants.Region.kalos,
         'catchRate': 190,
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
@@ -815,7 +810,6 @@ const pokemonList = createPokemonArray(
     {
         'id': 25.06,
         'name': 'Pikachu (Alola cap)',
-        'nativeRegion': GameConstants.Region.alola,
         'catchRate': 190,
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
