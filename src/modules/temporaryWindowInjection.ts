@@ -77,6 +77,7 @@ import GymBadgeRequirement from './requirements/GymBadgeRequirement';
 import HatchRequirement from './requirements/HatchRequirement';
 import MoneyRequirement from './requirements/MoneyRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
+import MaxRegionRequirement from './requirements/MaxRegionRequirement';
 import PokeballRequirement from './requirements/PokeballRequirement';
 import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
 import QuestRequirement from './requirements/QuestRequirement';
@@ -175,6 +176,7 @@ Object.assign(<any>window, {
     HatchRequirement,
     MoneyRequirement,
     MaxLevelOakItemRequirement,
+    MaxRegionRequirement,
     PokeballRequirement,
     ProteinObtainRequirement,
     QuestRequirement,
