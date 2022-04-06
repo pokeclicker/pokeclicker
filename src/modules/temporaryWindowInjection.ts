@@ -9,6 +9,8 @@ import GameHelper from './GameHelper';
 import LogEvent from './LogEvent';
 import BadgeEnums from './enums/Badges';
 import PokemonType from './enums/PokemonType';
+import CaughtStatus from './enums/CaughtStatus';
+import EvolutionType from './enums/EvolutionType';
 import ItemType from './enums/ItemType';
 import KeyItemType from './enums/KeyItemType';
 import BooleanSetting from './settings/BooleanSetting';
@@ -100,6 +102,8 @@ Object.assign(<any>window, {
     Statistics: DataStore.statistics,
     BadgeEnums,
     PokemonType,
+    CaughtStatus,
+    EvolutionType,
     ItemType,
     KeyItemType,
     BooleanSetting,
