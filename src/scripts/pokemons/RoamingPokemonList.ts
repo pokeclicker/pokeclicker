@@ -1,5 +1,5 @@
 /// <reference path="../../declarations/enums/Badges.d.ts"/>
-///<reference path="../achievements/SubregionRequirement.ts"/>
+///<reference path="../../declarations/requirements/SubregionRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 ///<reference path="../../declarations/subRegion/SubRegions.d.ts"/>
 

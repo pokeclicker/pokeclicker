@@ -83,6 +83,7 @@ import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
 import QuestRequirement from './requirements/QuestRequirement';
 import RouteKillRequirement from './requirements/RouteKillRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
+import SubregionRequirement from './requirements/SubregionRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
 import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
@@ -183,6 +184,7 @@ Object.assign(<any>window, {
     QuestRequirement,
     RouteKillRequirement,
     ShinyPokemonRequirement,
+    SubregionRequirement,
     TokenRequirement,
     UndergroundItemsFoundRequirement,
     UndergroundLayersMinedRequirement,
