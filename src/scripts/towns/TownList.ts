@@ -2270,6 +2270,12 @@ const AltaroftheSunneandMooneShop = new TownShop([
 
 //Alola NPCs
 
+const IkiOutskirtsMom = new NPC('Scratch Cat Girl', [
+    'I love cats very much, but dogs aren\'t so bad either.',
+    'Out of all the dog like Pokémon, I think Rockruff is definitely the most adorable. And it even has three evolutions! One during the day, one at night and one in between, from 5 to 6 o\'clock.',
+    'What\'s that? AM or PM?',
+    'Yes.',
+]);
 const IkiKahuna = new NPC('Kahuna Hala', [
     'Welcome to Alola!',
     'Here we don\'t have gyms. We have the Island Challenge. On each of our four islands you will complete one or more trials.',
@@ -2283,7 +2289,7 @@ const HeaheaCafeOwner = new NPC('Café Owner', [
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
 ]);
 const RoyalAvenueSpectator = new NPC('Spectator', [
-    'I think batles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
+    'I think battles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
     'Evolving Pikachu or Exeggcute in Alola can result in a new form! Sometimes.',
 ]);
 const KonikoniKahuna = new NPC('Kahuna Olivia', [
@@ -2311,6 +2317,7 @@ TownList['Iki Town Outskirts'] = new Town(
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
         shops: [IkiTownOutskirtsShop],
+        npcs: [IkiOutskirtsMom],
     }
 );
 TownList['Iki Town'] = new Town(
