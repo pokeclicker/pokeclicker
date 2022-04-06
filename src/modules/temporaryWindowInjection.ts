@@ -92,6 +92,7 @@ import KeyItemController from './keyItems/KeyItemController';
 import KeyItem from './keyItems/KeyItem';
 import KeyItems from './keyItems/KeyItems';
 import Achievement from './achievements/Achievement';
+import Gems from './gems/Gems';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -192,4 +193,5 @@ Object.assign(<any>window, {
     KeyItem,
     KeyItems,
     Achievement,
+    Gems,
 });
