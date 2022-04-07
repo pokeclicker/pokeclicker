@@ -32,6 +32,8 @@ import LogBook from './logbook/LogBook';
 import { LogBookTypes } from './logbook/LogBookTypes';
 import ChangelogItems from './changelog/ChangelogItems';
 import RedeemableCode from './codes/RedeemableCode';
+import RedeemableCodes from './codes/RedeemableCodes';
+import RedeemableCodeController from './codes/RedeemableCodeController';
 import EggType from './breeding/EggType';
 import Multiplier from './multiplier/Multiplier';
 import MultiplierType from './multiplier/MultiplierType';
@@ -131,6 +133,8 @@ Object.assign(<any>window, {
     LogBookTypes,
     ChangelogItems,
     RedeemableCode,
+    RedeemableCodes,
+    RedeemableCodeController,
     EggType,
     Multiplier,
     MultiplierType,
