@@ -8,3 +8,5 @@ enum FarmNotificationType {
     MulchRanOut,
     Wander,
 }
+
+export default FarmNotificationType;

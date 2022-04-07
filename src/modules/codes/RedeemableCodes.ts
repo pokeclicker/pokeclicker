@@ -1,8 +1,10 @@
-/// <reference path="../../declarations/GameHelper.d.ts" />
-/// <reference path="../../declarations/DataStore/common/Saveable.d.ts" />
-/// <reference path="../../declarations/codes/RedeemableCode.d.ts" />
+import { Saveable } from '../DataStore/common/Saveable';
+import BerryType from '../enums/BerryType';
+import NotificationConstants from '../notifications/NotificationConstants';
+import Notifier from '../notifications/Notifier';
+import RedeemableCode from './RedeemableCode';
 
-class RedeemableCodes implements Saveable {
+export default class RedeemableCodes implements Saveable {
     defaults: Record<string, any>;
     saveKey = 'redeemableCodes';
 
@@ -16,7 +18,7 @@ class RedeemableCodes implements Saveable {
                 App.game.farming.gainBerry(BerryType.Cheri, 100, false);
                 // Notify that the code was activated successfully
                 Notifier.notify({
-                    title:'Code activated!',
+                    title: 'Code activated!',
                     message: 'You gained 10,000 farmpoints and 100 Cheri berries',
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 1e4,
@@ -29,37 +31,8 @@ class RedeemableCodes implements Saveable {
                 App.game.party.gainPokemonById(Math.floor(pokemon.id), true, true);
                 // Notify that the code was activated successfully
                 Notifier.notify({
-                    title:'Code activated!',
+                    title: 'Code activated!',
                     message: `✨ You found a shiny ${pokemon.name}! ✨`,
-                    type: NotificationConstants.NotificationOption.success,
-                    timeout: 1e4,
-                });
-            }),
-            new RedeemableCode('complete-kanto', 750807787, false, () => {
-                // Complete all routes
-                Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => {
-                    GameHelper.incrementObservable(App.game.statistics.routeKills[route.region][route.number], 10);
-                });
-                // Complete all gyms
-                GameConstants.KantoGyms.forEach(gym => {
-                    GameHelper.incrementObservable(App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym)]);
-                    // Give badge
-                    if (!App.game.badgeCase.hasBadge(gymList[gym].badgeReward)) {
-                        App.game.badgeCase.gainBadge(gymList[gym].badgeReward);
-                    }
-                });
-                // Complete all dungeons
-                GameConstants.KantoDungeons.forEach(dungeon => {
-                    GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeon)]);
-                });
-                // Catch all Pokemon
-                for (let id = 1; id <= GameConstants.MaxIDPerRegion[GameConstants.Region.kanto]; id++) {
-                    App.game.party.gainPokemonById(id, false, true);
-                }
-                // Notify that the code was activated successfully
-                Notifier.notify({
-                    title:'Code activated!',
-                    message: 'You have unlocked all of the Kanto region',
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 1e4,
                 });
@@ -67,62 +40,63 @@ class RedeemableCodes implements Saveable {
         ];
     }
 
+    // eslint-disable-next-line class-methods-use-this
     isDiscordCode(code: string): boolean {
         return /^\w{4}-\w{4}-\w{4}$/.test(code);
     }
 
-    enterCode(code: string) {
+    enterCode(code: string): void {
         // If this is a Discord code, send it to the Discord class to check
         if (App.game.discord.enabled && this.isDiscordCode(code)) {
-            return App.game.discord.enterCode(code);
+            App.game.discord.enterCode(code);
+            return;
         }
 
         const hash = this.hash(code);
 
-        const redeemableCode = this.codeList.find(c => {
-            return c.hash === hash;
-        });
+        const redeemableCode = this.codeList.find((c) => c.hash === hash);
 
         if (!redeemableCode) {
-            return Notifier.notify({
+            Notifier.notify({
                 message: `Invalid code ${code}`,
                 type: NotificationConstants.NotificationOption.danger,
             });
+            return;
         }
 
-        if (redeemableCode) {
-            redeemableCode.redeem();
-        }
+        redeemableCode.redeem();
     }
 
     /**
      * Insecure hash, but should keep some of the nosy people out.
      * @param text
      */
+    // eslint-disable-next-line class-methods-use-this
     hash(text: string): number {
-        let hash = 0, i, chr;
+        let hash = 0;
+        let i = 0;
+        let chr = 0;
         if (text.length === 0) {
             return hash;
         }
 
         for (i = 0; i < text.length; i++) {
             chr = text.charCodeAt(i);
+            // eslint-disable-next-line no-bitwise
             hash = ((hash << 5) - hash) + chr;
+            // eslint-disable-next-line no-bitwise
             hash |= 0; // Convert to 32bit integer
         }
         return hash;
     }
-
 
     fromJSON(json: string[]): void {
         if (json == null) {
             return;
         }
 
-        json.forEach(name => {
-            const foundCode = this.codeList.find(code => {
-                return code.name === name;
-            });
+        json.forEach((name) => {
+            const foundCode = this.codeList.find((code) => code.name === name);
 
             if (foundCode) {
                 foundCode.isRedeemed = true;
@@ -138,5 +112,4 @@ class RedeemableCodes implements Saveable {
             return res;
         }, []);
     }
-
 }
