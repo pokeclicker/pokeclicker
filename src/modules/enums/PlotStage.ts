@@ -3,5 +3,7 @@ enum PlotStage {
     Sprout,
     Taller,
     Bloom,
-    Berry
+    Berry,
 }
+
+export default PlotStage;
