@@ -121,16 +121,16 @@ class GameController {
             // Set flags for any key currently pressed down (used to check if key held down currently)
             GameController.keyHeld[e.code] = true;
             switch (e.code) {
-                case 'KeyF':
-                    // Open the Farm with 'F'
+                case Settings.getSetting('hotkey.farm').value:
+                    // Open the Farm
                     if (farms.canAccess() && !$farmsModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
                         $farmsModal.data('disable-toggle', true);
                         $farmsModal.modal('toggle');
                     }
                     break;
-                case 'KeyH':
-                    // Open the Hatchery with 'H'
+                case Settings.getSetting('hotkey.hatchery').value:
+                    // Open the Hatchery
                     if ($undergroundModal.data('bs.modal')?._isShown) {
                         Mine.toolSelected(Mine.Tool.Hammer);
                     } else {
@@ -141,16 +141,16 @@ class GameController {
                         }
                     }
                     break;
-                case 'KeyO':
-                    // Open oak items with 'O'
+                case Settings.getSetting('hotkey.oakitems').value:
+                    // Open oak items
                     if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
                         $oakItemsModal.data('disable-toggle', true);
                         $oakItemsModal.modal('toggle');
                     }
                     break;
-                case 'KeyU':
-                    // Open the Underground with 'U'
+                case Settings.getSetting('hotkey.underground').value:
+                    // Open the Underground
                     if (underground.canAccess() && !$undergroundModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
                         $undergroundModal.data('disable-toggle', true);

@@ -214,6 +214,12 @@ Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
 // Save menu sorting
 Settings.add(new Setting('sort.saveSelector', 'Saves sort order', [], ''));
 
+// Hotkeys
+Settings.add(new Setting('hotkey.farm', 'Open the Farm', [], 'KeyF'));
+Settings.add(new Setting('hotkey.hatchery', 'Open the Hatchery', [], 'KeyH'));
+Settings.add(new Setting('hotkey.oakitems', 'Open Oak Items menu', [], 'KeyO'));
+Settings.add(new Setting('hotkey.underground', 'Open the Underground', [], 'KeyU'));
+
 /*
  * SUBSCRIBERS
  */
