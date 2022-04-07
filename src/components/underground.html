@@ -211,6 +211,9 @@
                     <span>Total net worth: <b><span data-bind="text: Underground.getDiamondNetWorth().toLocaleString('en-US')">-</span></b></span>
                     <img src='assets/images/underground/diamond.svg' width="20px'">
                 </button>
+                <button type="button" class="btn btn-success" onclick="App.game.underground.openUndergroundSellAllModal()">
+                    <span>Sell all treasures</span>
+                </button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -248,8 +251,8 @@
                 <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
                     <button class='btn btn-success btn-block'
                             data-bind="attr: { 'data-itemid': id },
-                            css: { disabled: amount() <= 0 || (valueType === 'Mine Egg' && !App.game.breeding.hasFreeEggSlot()) },
-                                    text: valueType === 'Mine Egg' ? 'Breed' : 'Sell',
+                            css: { disabled: amount() <= 0 || sellLocked() || (valueType === 'Mine Egg' && !App.game.breeding.hasFreeEggSlot()) },
+                                    text: valueType === 'Mine Egg' ? 'Breed' : sellLocked() ? 'Sell (locked)' : 'Sell',
                                     click: function(){Underground.sellMineItem($element.dataset.itemid, sellAmount() || 1)}">
                     </button>
                     <!-- ko if: valueType !== 'Mine Egg' -->
@@ -258,9 +261,54 @@
                     <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
                         <button class="dropdown-item" type="button" data-bind="click: function(){sellAmount($data)}, text: $data"></button>
                     </div>
+                    <div class="input-group-append bg-success text-light">
+                        <label
+                            class="clickable m-0 pl-2 pr-2"
+                            style="font-size: 22px;"
+                            data-bind="text: sellLocked() ? '🔒' : '🔓', attr: { for: 'sellLockedIndicatorOfItem' + id }"
+                        >🔓</label>
+                        <input
+                            style="vertical-align: middle"
+                            class="hidden"
+                            type="checkbox"
+                            data-bind="checked: sellLocked(), attr: { id: 'sellLockedIndicatorOfItem' + id }, event: { change: function(){Underground.setSellLockOfMineItem(id, !sellLocked())} }"
+                        />
+                    </div>
                     <!-- /ko -->
                 </div>
             </td>
         </tr>
+    </script>
+</div>
+
+<div aria-labelledby="mineSellAllTreasuresModalLabel" class="modal fade noselect mt-5" id="mineSellAllTreasuresModal" role="dialog"
+     style="cursor:default" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body" data-bind="let: { filteredMineInvetory: player.mineInventory().filter(t => t.amount() > 0 && t.valueType != 'Mine Egg') }">
+                <h5>Cumulative value of treasures</h5>
+                <h6 data-bind="text: '(' + filteredMineInvetory.filter(t => !t.sellLocked()).length + ' of ' + filteredMineInvetory.length + ' selected)'"></h6>
+                <div>
+                    <ul
+                        style="text-align: left"
+                        data-bind="template: { name: 'cumulativeValueListTemplate', foreach: Object.keys(Underground.getCumulativeValues()).sort() }"
+                    ></ul>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn mr-auto btn-danger" data-bind="click: function(){Underground.sellAllMineItems()}">
+                    <span>Sell all treasures</span>
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/html" id="cumulativeValueListTemplate">
+        <li data-bind="let: { valueType: $data, cumulativeValue: Underground.getCumulativeValues()[$data].cumulativeValue, imgSrc: Underground.getCumulativeValues()[$data].imgSrc }">
+            <img width="20px'" data-bind="attr: { src: imgSrc }">
+            <span data-bind="text: cumulativeValue + ' ' + UndergroundItem.getFullResourceName(valueType, cumulativeValue)"></span>
+        </li>
     </script>
 </div>
