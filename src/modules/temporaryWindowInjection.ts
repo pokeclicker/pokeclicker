@@ -16,6 +16,7 @@ import CaughtStatus from './enums/CaughtStatus';
 import EvolutionType from './enums/EvolutionType';
 import ItemType from './enums/ItemType';
 import KeyItemType from './enums/KeyItemType';
+import PlotStage from './enums/PlotStage';
 // end enums
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
@@ -118,6 +119,7 @@ Object.assign(<any>window, {
     EvolutionType,
     ItemType,
     KeyItemType,
+    PlotStage,
     BooleanSetting,
     RangeSetting,
     Setting,
