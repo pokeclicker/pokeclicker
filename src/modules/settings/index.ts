@@ -88,6 +88,7 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
     ],
     'nextStage'));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
+Settings.add(new BooleanSetting('showGymCountdown', 'Show the Gym Countdown', true));
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));

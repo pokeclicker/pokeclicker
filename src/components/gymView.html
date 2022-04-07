@@ -29,7 +29,8 @@
                 </div>
             </div>
         </h2>
-
+        
+        <!-- ko if: Settings.getSetting('showGymCountdown').value -->
         <div id="gymCountdown">
           <div class="row" style="display: inline-block; vertical-align: middle;">
             <div class="col-sm-6 offset-sm-3">
@@ -37,6 +38,7 @@
             </div>
           </div>
         </div>
+        <!-- /ko -->
 
         <div>
             <!-- TODO: Add after all Gym Leader images are formatted correctly (same sizes, style etc)
