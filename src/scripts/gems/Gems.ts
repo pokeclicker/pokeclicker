@@ -106,7 +106,7 @@ class Gems implements Feature {
     }
 
     canAccess(): boolean {
-        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Gem_case);
+        return App.game.keyItems.hasKeyItem(KeyItemType.Gem_case);
     }
 
     update(delta: number) {
