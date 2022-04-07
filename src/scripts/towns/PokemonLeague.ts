@@ -9,7 +9,7 @@ class PokemonLeague extends Town {
         this.gym = null;
         this.gymList = [];
         for (const gym of gyms) {
-            this.gymList.push(gymList[gym]);
+            this.gymList.push(GymList[gym]);
         }
     }
 
