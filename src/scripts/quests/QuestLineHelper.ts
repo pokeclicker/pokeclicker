@@ -7,33 +7,51 @@ class QuestLineHelper {
         const tutorial = new QuestLine('Tutorial Quests', 'A short set of quests to get you going');
 
         //Defeat Starter
-        const defeatStarter = new CapturePokemonsQuest(1, 10);
-        //Capture pokemon because start sequence resets route 1 kills to 0, making this quest think it is incomplete
-        defeatStarter.customDescription = 'Defeat the Pokémon. Click to deal damage';
+        const defeatStarter = new CustomQuest(1, 10,
+            'Defeat the Pokémon. Click to deal damage',
+            () => App.game.statistics.totalPokemonDefeated(),
+            0 // Initial of 0 so it auto completes if bugged
+        );
         tutorial.addQuest(defeatStarter);
 
         //Capture 1 pokemon
-        const captureOne = new CapturePokemonsQuest(1, 20);
-        captureOne.customDescription = 'Capture 1 Pokémon. When you defeat a Pokémon, a Pokéball is thrown and you have a chance to capture it.';
+        const captureOne = new CustomQuest(1, 20,
+            'Capture 1 Pokémon. When you defeat a Pokémon, a Pokéball is thrown and you have a chance to capture it.',
+            () => App.game.statistics.totalPokemonCaptured(),
+            1 // Initial of 1 so it auto completes if bugged
+        );
         tutorial.addQuest(captureOne);
 
         //Kill 5 on route 2
-        const routeTwo = new DefeatPokemonsQuest(10, 20, 2, GameConstants.Region.kanto);
-        routeTwo.customDescription = 'Defeat 10 Pokémon on route 2. Click route 2 on the map to move there and begin fighting.';
+        const routeTwo = new CustomQuest(10, 20,
+            'Defeat 10 Pokémon on route 2. Click route 2 on the map to move there and begin fighting.',
+            () => App.game.statistics.routeKills[GameConstants.Region.kanto]['2'](),
+            0 // Initial of 0 so it auto completes if bugged
+        );
         tutorial.addQuest(routeTwo);
 
         //Buy pokeballs
-        const buyPokeballs = new BuyPokeballsQuest(10, 50, GameConstants.Pokeball.Pokeball);
-        buyPokeballs.customDescription = 'Buy 10 Pokéballs. You can find these in the Viridian City Shop.';
+        const buyPokeballs = new CustomQuest(10, 50,
+            'Buy 10 Pokéballs. You can find these in the Viridian City Shop.',
+            () => App.game.statistics.pokeballsBought[GameConstants.Pokeball.Pokeball](),
+            0 // Initial of 0 so it auto completes if bugged
+        );
         tutorial.addQuest(buyPokeballs);
 
         //Buy Dungeon ticket
-        const buyDungeonTicket = new CustomQuest(1, 50, 'Buy the Dungeon ticket from Viridian City Shop.', () => +App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket), 0);
+        const buyDungeonTicket = new CustomQuest(1, 50,
+            'Buy the Dungeon ticket from Viridian City Shop.',
+            () => +App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket),
+            0
+        );
         tutorial.addQuest(buyDungeonTicket);
 
         //Clear Viridian Forest
-        const clearViridianForest = new DefeatDungeonQuest(1, 50, 'Viridian Forest');
-        clearViridianForest.customDescription = 'Gather 50 Dungeon tokens by (re)capturing Pokémon, then clear the Viridian Forest dungeon.';
+        const clearViridianForest = new CustomQuest(1, 50,
+            'Gather 50 Dungeon tokens by (re)capturing Pokémon, then clear the Viridian Forest dungeon.',
+            () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Viridian Forest')](),
+            0
+        );
         tutorial.addQuest(clearViridianForest);
 
         //Defeat Pewter Gym
@@ -52,7 +70,11 @@ class QuestLineHelper {
                 ],
             });
         };
-        const pewter = new CustomQuest(1, pewterReward, 'Defeat Pewter City Gym. Click the town on the map to move there, then click the Gym button to start the battle.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pewter City')](), 0);
+        const pewter = new CustomQuest(1, pewterReward,
+            'Defeat Pewter City Gym. Click the town on the map to move there, then click the Gym button to start the battle.',
+            () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pewter City')](),
+            0
+        );
         tutorial.addQuest(pewter);
 
         App.game.quests.questLines().push(tutorial);
