@@ -59,8 +59,8 @@ class Gym {
     }
 
     public static getLeaderByBadge(badge: BadgeEnums): string {
-        for (const item in gymList) {
-            const gym = gymList[item];
+        for (const item in GymList) {
+            const gym = GymList[item];
             if (BadgeEnums[gym.badgeReward] == BadgeEnums[BadgeEnums[badge]]) {
                 return gym.leaderName;
             }
