@@ -43,6 +43,7 @@ const DungeonGainGymBadge = (gym: Gym, badge: BadgeEnums) => {
         // Set the set to our expected gym
         // This updates our modal values
         GymRunner.gymObservable(gym);
+        GymBattle.gym = gym;
         // Give the player the badge
         App.game.badgeCase.gainBadge(badge);
         // Show the modal
