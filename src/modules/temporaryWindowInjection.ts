@@ -8,6 +8,7 @@ import * as GameConstants from './GameConstants';
 import GameHelper from './GameHelper';
 import LogEvent from './LogEvent';
 // enums
+import AuraType from './enums/AuraType';
 import BadgeEnums from './enums/Badges';
 import BerryType from './enums/BerryType';
 import PokemonType from './enums/PokemonType';
@@ -109,6 +110,7 @@ Object.assign(<any>window, {
     DataStore,
     BadgeCase: DataStore.badge,
     Statistics: DataStore.statistics,
+    AuraType,
     BadgeEnums,
     BerryType,
     PokemonType,
