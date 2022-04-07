@@ -1,4 +1,5 @@
-///<reference path="./MulchType.ts"/>
+/// <reference path="../../declarations/enums/MulchType.d.ts"/>
+
 class FarmController {
 
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);

@@ -5,7 +5,7 @@
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 /// <reference path="../../declarations/interfaces/BagItem.d.ts" />
 /// <reference path="../../declarations/utilities/Rand.d.ts" />
-/// <reference path="../farming/BerryType.ts" />
+/// <reference path="../../declarations/enums/BerryType.d.ts"/>
 
 const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
