@@ -10,12 +10,15 @@ import LogEvent from './LogEvent';
 // enums
 import AuraType from './enums/AuraType';
 import BadgeEnums from './enums/Badges';
+import BerryColor from './enums/BerryColor';
 import BerryType from './enums/BerryType';
 import PokemonType from './enums/PokemonType';
 import CaughtStatus from './enums/CaughtStatus';
 import EvolutionType from './enums/EvolutionType';
+import FlavorType from './enums/FlavorType';
 import ItemType from './enums/ItemType';
 import KeyItemType from './enums/KeyItemType';
+import MulchType from './enums/MulchType';
 import PlotStage from './enums/PlotStage';
 // end enums
 import BooleanSetting from './settings/BooleanSetting';
@@ -113,12 +116,15 @@ Object.assign(<any>window, {
     Statistics: DataStore.statistics,
     AuraType,
     BadgeEnums,
+    BerryColor,
     BerryType,
     PokemonType,
     CaughtStatus,
     EvolutionType,
+    FlavorType,
     ItemType,
     KeyItemType,
+    MulchType,
     PlotStage,
     BooleanSetting,
     RangeSetting,
