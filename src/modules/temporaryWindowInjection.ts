@@ -7,12 +7,15 @@ import DataStore from './DataStore';
 import * as GameConstants from './GameConstants';
 import GameHelper from './GameHelper';
 import LogEvent from './LogEvent';
+// enums
 import BadgeEnums from './enums/Badges';
+import BerryType from './enums/BerryType';
 import PokemonType from './enums/PokemonType';
 import CaughtStatus from './enums/CaughtStatus';
 import EvolutionType from './enums/EvolutionType';
 import ItemType from './enums/ItemType';
 import KeyItemType from './enums/KeyItemType';
+// end enums
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -105,6 +108,7 @@ Object.assign(<any>window, {
     BadgeCase: DataStore.badge,
     Statistics: DataStore.statistics,
     BadgeEnums,
+    BerryType,
     PokemonType,
     CaughtStatus,
     EvolutionType,

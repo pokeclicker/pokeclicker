@@ -1,4 +1,4 @@
-///<reference path="./BerryType.ts"/>
+/// <reference path="../../declarations/enums/BerryType.d.ts"/>
 
 interface BerryFlavor {
     type: FlavorType,
