@@ -1538,6 +1538,17 @@
             , databind: "click:function(){MapHelper.openShipModal()}"
             })
         %>
+
+        <!-- TODO: REMOVE IF UB QUESTLINE GETS MERGED -->
+        <%- include('templates/mapOverlay',
+            { name: "Access Denied - Future Content"
+            , x: 5, y: 14.5
+            , width: 5, height: 5.5
+            , databind: "click:function(){MapHelper.moveToTown('Iki Town')}, attr:{ class: MapHelper.calculateTownCssClass('Seafolk Village') }"
+            , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Hau')]() >= 1"
+            , image: "assets/images/map/transparent.png"
+            })
+        %>
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala island').id">
