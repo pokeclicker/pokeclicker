@@ -51,6 +51,20 @@ document.addEventListener('pokeclicker.game.initialized', () => {
             RoamingPokemonList.remove(GameConstants.Region.kalos, 'Vivillon (Fancy)');
         }
     );
+    // Easter
+    SpecialEvents.newEvent('Easter', 'Encounter Surprise Togepi for a limited time with a dedicated Quest Line.',
+        // Start
+        new Date(new Date().getFullYear(), 3, 8, 1), () => {
+            const togepiEggHuntQuestLine = App.game.quests.getQuestLine('Togepi Egg Hunt');
+            if(togepiEggHuntQuestLine.state() == QuestLineState.inactive) {
+                App.game.quests.getQuestLine('Togepi Egg Hunt').beginQuest();
+            }
+        },
+        // End
+        new Date(new Date().getFullYear(), 3, 29, 23), () => {
+            // do not end questline, so ppl can finish it
+        }
+    );
     // First Event
     SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu for a limited time roaming Kanto.',
         // Start

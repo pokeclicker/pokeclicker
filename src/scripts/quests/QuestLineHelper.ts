@@ -339,6 +339,63 @@ class QuestLineHelper {
         App.game.quests.questLines().push(plasmaUnovaQuestLine);
     }
 
+    public static createFindSurpriseTogepiForEasterQuestLine() {
+        const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'Togepi has hidden somewhere and cannot be found!');
+
+        const surpriseTogepi = pokemonMap['Surprise Togepi'];
+
+        const togepiInKantoSetup = () => {
+            dungeonList['Viridian Forest'].bossList.push(new DungeonTrainer('Easter basket', [ new GymPokemon('Surprise Togepi', 300000, 100), ], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion) }));
+            App.game.statistics.pokemonDefeated[surpriseTogepi.id](0);
+        };
+        const afterDefeatingTogepiInKanto = () => {
+            Notifier.notify({
+                title: findSurpriseTogepiForEasterQuestLine.name,
+                message: 'Seems like this was just an Easter egg after all..',
+                type: NotificationConstants.NotificationOption.info,
+                timeout: 3e4,
+            });
+
+            dungeonList['Viridian Forest'].bossList = dungeonList['Viridian Forest'].bossList.filter(boss => boss.name != 'Easter basket');
+        };
+        const defeatTogepiInKanto = new CustomQuest(1, afterDefeatingTogepiInKanto, 'Erika reported, Togepi was last seen in Kanto. Go look for it!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 0, togepiInKantoSetup);
+        findSurpriseTogepiForEasterQuestLine.addQuest(defeatTogepiInKanto);
+
+        const togepiInHoennSetup = () => {
+            dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Easter basket', [ new GymPokemon('Surprise Togepi', 900000, 100), ], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
+        };
+        const afterDefeatingTogepiInHoenn = () => {
+            Notifier.notify({
+                title: findSurpriseTogepiForEasterQuestLine.name,
+                message: 'I swear that was just a Togepi.. well maybe not.',
+                type: NotificationConstants.NotificationOption.info,
+                timeout: 3e4,
+            });
+
+            dungeonList['Petalburg Woods'].bossList = dungeonList['Petalburg Woods'].bossList.filter(boss => boss.name != 'Easter basket');
+        };
+        const encounterTogepiInHoenn = new CustomQuest(1, afterDefeatingTogepiInHoenn, 'Another report just came in, stating that they saw and strange egg on it\'s way to Hoenn!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 1, togepiInHoennSetup);
+        findSurpriseTogepiForEasterQuestLine.addQuest(encounterTogepiInHoenn);
+
+        const togepiInJohtoSetup = () => {
+            dungeonList['Ilex Forest'].bossList.push(new DungeonTrainer('Easter basket', [ new GymPokemon('Surprise Togepi', 2700000, 100), ], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion) }));
+        };
+        const afterDefeatingTogepiInJohto = () => {
+            App.game.party.gainPokemonById(surpriseTogepi.id);
+            Notifier.notify({
+                title: findSurpriseTogepiForEasterQuestLine.name,
+                message: 'You found the hidden Togepi!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+            dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Easter basket');
+        };
+        const encounterSurpriseTogepiInJohto = new CustomQuest(1, afterDefeatingTogepiInJohto, 'There is a big Egg Hunt going on in Ilex Forest right now, maybe I should take a look?', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 2, togepiInJohtoSetup);
+        findSurpriseTogepiForEasterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
+
+        App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
+    }
+
     public static createSkullAetherAlolaQuestLine() {
         const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
 
@@ -383,5 +440,6 @@ class QuestLineHelper {
         this.createAquaMagmaHoennQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createSkullAetherAlolaQuestLine();
+        this.createFindSurpriseTogepiForEasterQuestLine();
     }
 }
