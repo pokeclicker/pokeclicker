@@ -2277,7 +2277,7 @@ const IkiOutskirtsMom = new NPC('Scratch Cat Girl', [
     'Yes.',
 ]);
 const KukuisLabProfessor = new NPC('Professor Kukui', [
-    'Are you looking for some rare Pokémon? Maybe I can help with that. What are you wait for? Ask away!',
+    'Are you looking for some rare Pokémon? Maybe I can help with that. Ask away!',
     'Ultra Beast? Never heard of it. I have no idea what that is. As far as I know they simply do not exist.',
     'Meltan? What\'s a Meltan? Nope, don\'t know about that one either.',
     'You seem very sure about this. Look, if you\'re so certain that these things you are talking about are real, I\'m sure they will show up sooner or later. If you\'re patient...',
