@@ -80,7 +80,7 @@ class Safari {
     }
 
     private static getRandomCoord(max: number): number {
-        return Math.floor(Math.random() * (max - 3)) + 1;
+        return Rand.intBetween(1, max - 3);
     }
 
     private static canAddBody(x: number, y: number, body: SafariBody): boolean {
@@ -159,7 +159,7 @@ class Safari {
     }
 
     private static canAccess() {
-        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Safari_ticket);
+        return App.game.keyItems.hasKeyItem(KeyItemType.Safari_ticket);
     }
 
     static show() {
@@ -292,7 +292,7 @@ class Safari {
 
     public static spawnPokemonCheck() {
         this.steps++;
-        if (this.steps % 10 === 0 && Math.round(Math.random())) {
+        if (this.steps % 10 === 0 && Rand.boolean()) {
             this.spawnRandomPokemon();
         }
     }
@@ -307,8 +307,8 @@ class Safari {
     }
 
     private static spawnRandomPokemon() {
-        const y = Math.floor(Math.random() * this.sizeY());
-        const x = Math.floor(Math.random() * this.sizeX());
+        const y = Rand.floor(this.sizeY());
+        const x = Rand.floor(this.sizeX());
         if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) || this.pokemonGrid().find(p => p.x === x && p.y === y)) {
             return;
         }
@@ -316,7 +316,7 @@ class Safari {
 
         pokemon.x = x;
         pokemon.y = y;
-        pokemon.steps = this.sizeX() + this.sizeY() + Math.floor(Math.random() * 21);
+        pokemon.steps = this.sizeX() + this.sizeY() + Rand.floor(21);
         this.pokemonGrid.push(pokemon);
     }
 
@@ -380,7 +380,7 @@ class Safari {
             return true;
         }
         if (Safari.grid[Safari.playerXY.y][Safari.playerXY.x] === 10) {
-            if (Math.random() * GameConstants.SAFARI_BATTLE_CHANCE < 1) {
+            if (Rand.chance(GameConstants.SAFARI_BATTLE_CHANCE)) {
                 SafariBattle.load();
                 return true;
             }

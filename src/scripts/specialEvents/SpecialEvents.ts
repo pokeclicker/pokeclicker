@@ -37,15 +37,8 @@ class SpecialEvents implements Feature {
 }
 
 // TODO: Fetch events from a server each 1/2/3/6/12/24 hours?
-// Create our events here for now
+// Create our events here for now (yearly)
 
-/*
- *  ONE TIME/TEMP EVENTS
- */
-
-/*
- *  YEARLY EVENTS
- */
 // Lunar New Year
 SpecialEvents.newEvent('Lunar New Year', 'Encounter Fancy Pattern Vivillon for a limited time roaming Kalos.',
     // Start
@@ -123,13 +116,14 @@ SpecialEvents.newEvent('Let\'s GO!', 'Encounter special Eevee and Pikachu roamin
     }
 );
 // Christmas
-SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax for a limited time roaming around Kanto, Johto and Hoenn.',
+SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and discover the Grinch of Ilex Forest.',
     // Start
     new Date(new Date().getFullYear(), 11, 24, 1), () => {
         // Add to every region excluding None
         GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
             RoamingPokemonList.add(region, new RoamingPokemon('Santa Snorlax'));
         });
+        dungeonList['Ilex Forest'].bossList.push(new DungeonBossPokemon('Grinch Celebi', 1600000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)}));
     },
     // End
     new Date(new Date().getFullYear(), 11, 30, 23), () => {
@@ -137,6 +131,7 @@ SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax for a limite
         GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
             RoamingPokemonList.remove(region, 'Santa Snorlax');
         });
+        dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Grinch Celebi');
     }
 );
 

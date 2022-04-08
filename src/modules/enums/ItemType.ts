@@ -2,7 +2,7 @@ enum ItemType {
     item = 1,
     underground,
     berry,
-    shard,
+    gem,
 }
 
 export default ItemType;

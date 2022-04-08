@@ -59,7 +59,7 @@ class PokemonHelper {
         const type2: PokemonType = basePokemon['type'][1] ?? PokemonType.None;
 
         const eggCycles: number = basePokemon['eggCycles'] || 20;
-        return new DataPokemon(basePokemon['id'], basePokemon['name'], basePokemon['catchRate'], basePokemon['evolutions'], type1, type2, basePokemon['attack'], basePokemon['levelType'], basePokemon['exp'], eggCycles, basePokemon['heldItem']);
+        return new DataPokemon(basePokemon['id'], basePokemon['name'], basePokemon['catchRate'], basePokemon['evolutions'], type1, type2, basePokemon['attack'], basePokemon['base']['hitpoints'], basePokemon['levelType'], basePokemon['exp'], eggCycles, basePokemon['heldItem']);
     }
 
     public static typeStringToId(id: string) {
@@ -98,16 +98,12 @@ class PokemonHelper {
             return pokemon.nativeRegion;
         }
         const id = pokemon.id;
-        const region = GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(id));
+        const region = GameConstants.MaxIDPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(id));
         return region >= 0 ? region : GameConstants.Region.none;
     }
 
     public static calcUniquePokemonsByRegion(region: GameConstants.Region) {
-        if (region != 0) {
-            return GameConstants.TotalPokemonsPerRegion[region] - Number(GameConstants.TotalPokemonsPerRegion[region - 1]);
-        } else {
-            return GameConstants.TotalPokemonsPerRegion[region];
-        }
+        return new Set(pokemonList.filter(p => p.id > 0 && PokemonHelper.calcNativeRegion(p.name) === region).map(p => Math.floor(p.id))).size;
     }
 
     /*
@@ -261,8 +257,9 @@ class PokemonHelper {
     }
 
     public static getPokemonSafariChance(pokemonName: PokemonNameType): number {
+        const safariWeight = SafariPokemon.list.reduce((sum, p) => sum += p.weight, 0);
         const safariPokemon = SafariPokemon.list.find(p => p.name == pokemonName);
-        return safariPokemon ? +((SafariPokemon.calcPokemonWeight(safariPokemon) / SafariPokemon.listWeight()) * 100).toFixed(2) : 0;
+        return safariPokemon ? +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2) : 0;
     }
 
     public static getPokemonPrevolution(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<Evolution> {

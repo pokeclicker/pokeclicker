@@ -41,7 +41,7 @@ abstract class Quest {
     }
 
     public static randomizeReward(pointsReward: number) {
-        const randomPointBonus = 0.9 + SeededRand.next() * 0.2; // random between 0.9 and 1.1
+        const randomPointBonus = 0.9 + SeededRand.float(0.2); // random between 0.9 and 1.1
         return Math.ceil(pointsReward * randomPointBonus);
     }
 
@@ -140,8 +140,8 @@ abstract class Quest {
                     message: `You can complete your quest for ${this.pointsReward} quest points!`,
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 5e3,
-                    sound: NotificationConstants.NotificationSound.quest_ready_to_complete,
-                    setting: NotificationConstants.NotificationSetting.quest_ready_to_complete,
+                    sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+                    setting: NotificationConstants.NotificationSetting.General.quest_ready_to_complete,
                 });
                 this.notified = true;
             }

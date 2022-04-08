@@ -1,4 +1,4 @@
-/// <reference path="upgrades/Upgrade.ts" />
+/// <reference path="../declarations/upgrades/Upgrade.d.ts" />
 
 /**
  * Required modules before porting:
@@ -104,6 +104,10 @@ class Player {
         return this._itemList;
     }
 
+    public amountOfItem(itemName: string) {
+        return this._itemList[itemName]();
+    }
+
     private _itemMultipliers: { [name: string]: number };
 
     get itemMultipliers(): { [p: string]: number } {
@@ -131,6 +135,12 @@ class Player {
     }
 
     set subregion(value: number) {
+        if (value < 0) {
+            value = Math.max(...SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id));
+        }
+        if (value > Math.max(...SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id))) {
+            value = 0;
+        }
         this._subregion(value);
         const subregion = SubRegions.getSubRegionById(this.region, value);
 

@@ -589,9 +589,7 @@
 
     <%- include('templates/mapDungeon',
         { name: "Team Flare Secret HQ"
-        , x: 99, y: 59
-        , width: 1, height: 1
-        , moveToTown: "Geosenge Town"
+        , x: 4, y: 22
         })
     %>
 
@@ -634,5 +632,49 @@
         , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Coumarine City') }"
         })
     %>
+
+    <%- include('templates/mapPOI',
+        { name: "Underground Entrance"
+        , x: 9, y: 21
+        , width: 3, height: 4
+        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Farm"
+        , x: 34, y: 37
+        , width: 3, height: 3
+        , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Pokemon Day Care"
+        , x: 29, y: 36
+        , width: 4, height: 4
+        , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Professor Sycamore's Blimp"
+         , x: 57, y: 52
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('Vaniville Town')}, attr:{ class: MapHelper.calculateTownCssClass('Vaniville Town') }"
+         , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+         , image: "assets/images/map/blimp_empty.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Professor Sycamore's Blimp"
+         , x: 57, y: 52
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('Vaniville Town')}, attr:{ class: MapHelper.calculateTownCssClass('Vaniville Town') }"
+         , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+         , image: "assets/images/map/blimp_pikachu.png"
+         })
+     %>
 
 </g>

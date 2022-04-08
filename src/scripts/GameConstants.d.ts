@@ -35,7 +35,7 @@ namespace GameConstants {
     declare const MUTATION_TICK: number;
     declare const WANDER_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
-    declare const TotalPokemonsPerRegion: number[];
+    declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
     declare const ROAMING_MIN_CHANCE: number;
     declare const ROAMING_MAX_CHANCE: number;
@@ -84,7 +84,6 @@ namespace GameConstants {
         'Captured',
         'Defeated',
         'Caught Pokemon',
-        'Caught Unique Pokemons By Region',
         'Shiny Pokemon',
         'Hatch',
         'Pokeball',
@@ -109,9 +108,12 @@ namespace GameConstants {
     declare const DUNGEON_BOSS_HELD_ITEM_MODIFIER: number;
     declare const HELD_ITEM_CHANCE: number;
     declare const HELD_UNDERGROUND_ITEM_CHANCE: number;
-    declare const DUNGEON_SHARDS: number;
-    declare const DUNGEON_BOSS_SHARDS: number;
-    declare const GYM_SHARDS: number;
+    declare const GEM_UPGRADE_COST: number;
+    declare const GEM_UPGRADE_STEP: number;
+    declare const MAX_GEM_UPGRADES: number;
+    declare const DUNGEON_GEMS: number;
+    declare const DUNGEON_BOSS_GEMS: number;
+    declare const GYM_GEMS: number;
     declare const SAFARI_BATTLE_CHANCE: number;
     declare const SAFARI_BASE_POKEBALL_COUNT: number;
     declare const LEGAL_WALK_BLOCKS: number[];
@@ -129,6 +131,7 @@ namespace GameConstants {
     declare const ACTIVE_QUEST_MULTIPLIER: number;
     declare const QUEST_CLICKS_PER_SECOND: number;
     declare const QUESTS_PER_SET: number;
+    declare const DNA_ITEM_CHANCE: number;
     declare enum GameState {
         idle,
         paused,
@@ -151,6 +154,10 @@ namespace GameConstants {
         'Timerball',
         'Duskball',
         'Luxuryball',
+        'Diveball',
+        'Lureball',
+        'Nestball',
+        'Repeatball',
     }
     declare enum Currency {
         money,
@@ -189,11 +196,8 @@ namespace GameConstants {
         kalos,
         alola,
         galar,
-        armor,
-        crown
+        final,
     }
-    declare function randomIntBetween(min: number, max: number): number;
-    declare function randomElement(array: any[]): any;
     declare function clipNumber(num: number, min: number, max: number): number;
     declare function expRandomElement<T>(array: T[], ratio: number): T;
     declare const TypeColor: string[];
@@ -223,31 +227,33 @@ namespace GameConstants {
     }
     declare enum StoneType {
         'None',
+        'Leaf_stone',
         'Fire_stone',
         'Water_stone',
         'Thunder_stone',
-        'Leaf_stone',
         'Moon_stone',
-        'Sun_stone',
         'Trade_stone',
-        'Dragon_scale',
+        'Sun_stone',
+        'Soothe_bell',
         'Metal_coat',
         'Kings_rock',
         'Upgrade',
-        'Soothe_bell',
+        'Dragon_scale',
+        'Prism_scale',
         'Deepsea_tooth',
         'Deepsea_scale',
-        'Dawn_stone',
-        'Dusk_stone',
         'Shiny_stone',
-        'Dubious_disc',
+        'Dusk_stone',
+        'Dawn_stone',
+        'Razor_claw',
+        'Razor_fang',
         'Electirizer',
         'Magmarizer',
         'Protector',
+        'Dubious_disc',
         'Reaper_cloth',
-        'Razor_claw',
-        'Razor_fang',
-        'Prism_scale',
+        'Black_DNA',
+        'White_DNA',
         'Sachet',
         'Whipped_dream',
         'Ice_stone',

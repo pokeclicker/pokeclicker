@@ -98,12 +98,12 @@ abstract class Mutation implements Saveable {
         let mutated = false;
 
         plots.forEach((idx) => {
-            const willMutate =  Math.random() < this.mutationChance(idx) * App.game.farming.getMutationMultiplier() * App.game.farming.plotList[idx].getMutationMultiplier();
+            const willMutate =  Rand.chance(this.mutationChance(idx) * App.game.farming.getMutationMultiplier() * App.game.farming.plotList[idx].getMutationMultiplier());
             if (!willMutate) {
                 return;
             }
             this.handleMutation(idx);
-            App.game.oakItems.use(OakItems.OakItem.Squirtbottle);
+            App.game.oakItems.use(OakItemType.Squirtbottle);
             mutated = true;
         });
 

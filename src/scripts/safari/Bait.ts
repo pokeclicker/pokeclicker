@@ -29,7 +29,7 @@ BaitList['Bait'] = new Bait(BaitType.Bait, 'Bait', 'some bait', 'assets/images/s
     () => '∞',
     (pokemon: SafariPokemon) => {
         pokemon.eatingBait = BaitType.Bait;
-        pokemon.eating = Math.max(pokemon.eating, Math.floor(Math.random() * 5 + 2));
+        pokemon.eating = Math.max(pokemon.eating, Rand.intBetween(2, 6));
         pokemon.angry = 0;
 
     });
@@ -38,7 +38,7 @@ BaitList['Razz'] = new Bait(BaitType.Razz, 'Razz Berry', 'a Razz Berry', FarmCon
     (pokemon: SafariPokemon) => {
         GameHelper.incrementObservable(App.game.farming.berryList[BerryType.Razz], -1);
         pokemon.eatingBait = BaitType.Razz;
-        pokemon.eating = Math.max(pokemon.eating, Math.floor(Math.random() * 6 + 2));
+        pokemon.eating = Math.max(pokemon.eating, Rand.intBetween(2, 7));
         pokemon.angry = 0;
     });
 BaitList['Nanab'] = new Bait(BaitType.Nanab, 'Nanab Berry', 'a Nanab Berry', FarmController.getBerryImage(BerryType.Nanab),
@@ -46,6 +46,6 @@ BaitList['Nanab'] = new Bait(BaitType.Nanab, 'Nanab Berry', 'a Nanab Berry', Far
     (pokemon: SafariPokemon) => {
         GameHelper.incrementObservable(App.game.farming.berryList[BerryType.Nanab], -1);
         pokemon.eatingBait = BaitType.Nanab;
-        pokemon.eating = Math.max(pokemon.eating, Math.floor(Math.random() * 6 + 2));
+        pokemon.eating = Math.max(pokemon.eating, Rand.intBetween(2, 7));
         pokemon.angry = 0;
     });

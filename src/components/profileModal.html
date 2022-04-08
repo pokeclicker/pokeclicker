@@ -11,15 +11,7 @@
                 <div class="form-row p-0" id="breeding-filter">
                     <div class="form-group col-12">
                         <label>Name</label>
-                        <input autocomplete="off" class="form-control" oninput="App.game.profile.name(this.value)" placeholder="name" data-bind="value: decodeURI(App.game.profile.name())"/>
-                    </div>
-                    <div class="form-group col-12">
-                        <label>Trainer</label>
-                        <select autocomplete="off" class="custom-select" onchange="App.game.profile.trainer(+this.value)">
-                            <!-- ko foreach: new Array(Profile.MAX_TRAINER).fill(0) -->
-                            <option data-bind="attr: { value: $index(), selected: App.game.profile.trainer() === $index() }, text: `Trainer ${$index()}`">Trainer</option>
-                            <!-- /ko -->
-                        </select>
+                        <input autocomplete="off" class="form-control" oninput="App.game.profile.name(this.value)" placeholder="name" data-bind="value: App.game.profile.name()"/>
                     </div>
                     <div class="form-group col-12">
                         <label>Pokemon</label>
@@ -30,18 +22,16 @@
                         </select>
                     </div>
                     <div class="form-group col-12">
-                        <label>Background</label>
-                        <select autocomplete="off" class="custom-select" onchange="App.game.profile.background(+this.value)">
-                            <!-- ko foreach: new Array(Profile.MAX_BACKGROUND).fill(0) -->
-                            <option data-bind="attr: { value: $index(), selected: App.game.profile.background() === $index() }, text: `Background ${$index()}`">Background</option>
-                            <!-- /ko -->
-                        </select>
-                    </div>
-                    <div class="form-group col-12">
                         <label>Text Color</label>
                         <p class="p-0" data-bind="style: { background: App.game.profile.textColor() }">
                           <label style="width:100%; min-height: 28px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: App.game.profile.textColor"/></label>
                         </p>
+                    </div>
+                    <div class="form-group col-12">
+                        <a class="btn btn-block btn-primary text-left" href="#profileTrainerModal" data-toggle="modal">Trainer <img style="position:absolute; right: 10px;" data-bind="attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` }"/></a>
+                    </div>
+                    <div class="form-group col-12">
+                        <a class="btn btn-block btn-primary text-left" href="#profileBackgroundModal" data-toggle="modal">Background <knockout style="position:absolute; right: 10px;" data-bind="text: `#${App.game.profile.background()}`"></knockout></a>
                     </div>
                 </div>
                 <div id="profile-trainer-card"></div>

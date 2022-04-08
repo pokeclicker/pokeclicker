@@ -105,6 +105,8 @@
 
 <!-- Show profile modal -->
 @import "profileModal.html"
+@import "profileTrainerModal.html"
+@import "profileBackgroundModal.html"
 
 <!-- Show keyitems modal-->
 @import "itemModal.html"
@@ -297,7 +299,8 @@
                                             title: Battle.enemyPokemon()
                                                 ? `${App.game.party.calculatePokemonAttack(
                                                     Battle.enemyPokemon().type1,
-                                                    Battle.enemyPokemon().type2
+                                                    Battle.enemyPokemon().type2,
+                                                    true,
                                                 ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
                                                 : '',
                                             trigger: 'hover',
@@ -332,7 +335,7 @@
             @import "battleFrontierInfo.html"
 
             <div id="middle-bottom-sort-column">
-                <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
+                <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
                     App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
                         <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
@@ -348,8 +351,12 @@
                     <span class='float-right px-4 bg-incomplete'>&nbsp;</span>
                     <br/><span>Uncaught Pokemon:</span>
                     <span class='float-right px-4 bg-uncaughtPokemon'>&nbsp;</span>
+                    <br/><span>Uncaught Shiny Pokemon and Missing Achievement:</span>
+                    <span class='float-right px-4 bg-uncaughtShinyPokemonAndMissingAchievement'>&nbsp;</span>
                     <br/><span>Uncaught Shiny Pokemon:</span>
                     <span class='float-right px-4 bg-uncaughtShinyPokemon'>&nbsp;</span>
+                    <br/><span>Missing Achievement:</span>
+                    <span class='float-right px-4 bg-missingAchievement'>&nbsp;</span>
                     <br/><span>Completed:</span>
                     <span class='float-right px-4 bg-completed'>&nbsp;</span>
                     <br/>
@@ -365,7 +372,11 @@
                         <img width=30px src="" data-bind="attr: { src: Weather.image() }"/>
                     </button>
                     <div id="mapBody" class="card-body p-0 show">
-                        <button class='btn btn-sm btn-block btn-info' data-bind="click: () => SubRegions.openModal(), visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1">Subregional Travel</button>
+                        <div id="subregion-travel-buttons" class="btn-group mr-2" role="group" style="width: 100%;" data-bind="visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1">
+                            <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion - 1">&lt;</button>
+                            <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="click: () => SubRegions.openModal()">Subregional Travel</button>
+                            <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion + 1">&gt;</button>
+                        </div>
                         <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
                         <svg id="map" viewBox="0 0 1600 960" preserveAspectRatio="xMaxYMax meet">
                             <defs>
@@ -466,8 +477,8 @@
 <!-- Log Book Modal-->
 @import "nextRegionModal.html"
 
-<!-- Shards Modal -->
-@import "shardsModal.html"
+<!-- Gems Modal -->
+@import "gemsModal.html"
 
 <!-- Breeding Modal-->
 @import "breedingModal.html"
