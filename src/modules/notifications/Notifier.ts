@@ -1,6 +1,6 @@
 import NotificationOption from './NotificationOption';
 import Sound from '../utilities/Sound';
-import BooleanSetting from '../settings/BooleanSetting';
+import NotificationSetting from '../settings/NotificationSetting';
 import Settings from '../settings/Settings';
 import Rand from '../utilities/Rand';
 
@@ -21,7 +21,7 @@ export default class Notifier {
         timeout?: number;
         time?: string;
         sound?: Sound;
-        setting?: BooleanSetting;
+        setting?: NotificationSetting;
         image?: string;
     }): void {
         $(document).ready(() => {
