@@ -223,6 +223,11 @@ Settings.add(new HotkeySetting('hotkey.underground', 'Open the Underground', [],
 Settings.add(new HotkeySetting('hotkey.pokeballMenu', 'Open Pokeball menu', [], 'KeyP', { suffix: ' + Number' }));
 Settings.add(new HotkeySetting('hotkey.forceSave', 'Force save game', [], 'KeyS', { prefix: 'Shift + ' }));
 
+Settings.add(new HotkeySetting('hotkey.underground.hammer', 'Use the Hammer', [], 'KeyH'));
+Settings.add(new HotkeySetting('hotkey.underground.chisel', 'Use the Chisel', [], 'KeyC'));
+Settings.add(new HotkeySetting('hotkey.underground.survey', 'Use the Survey', [], 'KeyS'));
+Settings.add(new HotkeySetting('hotkey.underground.bomb', 'Use the Bomb', [], 'KeyB'));
+
 /*
  * SUBSCRIBERS
  */

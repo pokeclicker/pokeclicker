@@ -147,19 +147,21 @@ class GameController {
                 }
             }
             if ($undergroundModal.data('bs.modal')?._isShown) {
-                if (e.code == 'KeyH') {
-                    Mine.toolSelected(Mine.Tool.Hammer);
-                    return;
-                } else if (e.code == 'KeyC') {
-                    Mine.toolSelected(Mine.Tool.Chisel);
-                    return;
-                } else if (e.code == 'KeyS') {
-                    Mine.survey();
-                    return;
-                } else if (e.code == 'KeyB') {
-                    Mine.bomb();
-                    return;
-                } else if (isNumberKey) {
+                switch (e.code) {
+                    case Settings.getSetting('hotkey.underground.hammer').observableValue():
+                        Mine.toolSelected(Mine.Tool.Hammer);
+                        return;
+                    case Settings.getSetting('hotkey.underground.chisel').observableValue():
+                        Mine.toolSelected(Mine.Tool.Chisel);
+                        return;
+                    case Settings.getSetting('hotkey.underground.survey').observableValue():
+                        Mine.survey();
+                        return;
+                    case Settings.getSetting('hotkey.underground.bomb').observableValue():
+                        Mine.bomb();
+                        return;
+                }
+                if (isNumberKey) {
                     if (numberKey === 0) {
                         ItemList['SmallRestore'].use();
                     } else if (numberKey === 1) {
