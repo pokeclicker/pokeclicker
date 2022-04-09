@@ -29,6 +29,16 @@ export default class Notifier {
                 sound.play();
             }
 
+            if (setting && setting.desktopNotification.value && Notification.permission === 'granted') {
+                const desktopNotification = new Notification(title, {
+                    body: message,
+                    icon: image,
+                });
+                setTimeout(() => {
+                    desktopNotification.close();
+                }, timeout);
+            }
+
             // Check if this type of notification is disabled
             if (setting && !setting.inGameNotification.value) {
                 return;
