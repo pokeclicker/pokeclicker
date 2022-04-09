@@ -16,9 +16,7 @@ class SpecialEvents implements Feature {
     }
 
     initialize(): void {
-        for (let event of SpecialEvents.events) {
-            event.initialize();
-        }
+        SpecialEvents.events.forEach(event => event.initialize());
     }
 
     fromJSON(json: any): void {
