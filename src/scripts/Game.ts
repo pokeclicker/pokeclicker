@@ -63,7 +63,6 @@ class Game {
     }
 
     initialize() {
-        PokemonHelper.initilizePokemons();
         AchievementHandler.initialize(this.multiplier, this.challenges);
         FarmController.initialize();
         EffectEngineRunner.initialize(this.multiplier);
@@ -80,7 +79,12 @@ class Game {
         this.load();
 
         // TODO refactor to proper initialization methods
-        Battle.generateNewEnemy();
+        if (player.starter() != GameConstants.Starter.None) {
+            Battle.generateNewEnemy();
+        } else {
+            const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false);
+            Battle.enemyPokemon(battlePokemon);
+        }
         this.farming.resetAuras();
         //Safari.load();
         Underground.energyTick(this.underground.getEnergyRegenTime());

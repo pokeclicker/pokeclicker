@@ -108,7 +108,7 @@ class Breeding implements Feature {
     }
 
     canAccess(): boolean {
-        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Mystery_egg);
+        return App.game.keyItems.hasKeyItem(KeyItemType.Mystery_egg);
     }
 
     fromJSON(json: Record<string, any>): void {

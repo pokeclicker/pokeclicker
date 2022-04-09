@@ -475,7 +475,8 @@ export const ACHIEVEMENT_DEFEAT_GYM_VALUES = [
 export const ACHIEVEMENT_DEFEAT_DUNGEON_VALUES = [
     10,
     100,
-    1000,
+    250,
+    500,
 ];
 
 export type EnvironmentData = Partial<Record<Region, Set<string | number>>>;
@@ -857,6 +858,7 @@ export const AlolaGyms = [
     'Malie City',
     'Vast Poni Canyon Trial',
     'Altar of the Sunne and Moone',
+    'Mina\'s Trial',
     'Exeggutor Island',
     'Elite Molayne',
     'Elite Olivia',

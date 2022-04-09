@@ -7,9 +7,21 @@ import DataStore from './DataStore';
 import * as GameConstants from './GameConstants';
 import GameHelper from './GameHelper';
 import LogEvent from './LogEvent';
+// enums
+import AuraType from './enums/AuraType';
 import BadgeEnums from './enums/Badges';
+import BerryColor from './enums/BerryColor';
+import BerryType from './enums/BerryType';
 import PokemonType from './enums/PokemonType';
+import CaughtStatus from './enums/CaughtStatus';
+import EvolutionType from './enums/EvolutionType';
+import FarmNotificationType from './enums/FarmNotificationType';
+import FlavorType from './enums/FlavorType';
 import ItemType from './enums/ItemType';
+import KeyItemType from './enums/KeyItemType';
+import MulchType from './enums/MulchType';
+import PlotStage from './enums/PlotStage';
+// end enums
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -26,6 +38,8 @@ import LogBook from './logbook/LogBook';
 import { LogBookTypes } from './logbook/LogBookTypes';
 import ChangelogItems from './changelog/ChangelogItems';
 import RedeemableCode from './codes/RedeemableCode';
+import RedeemableCodes from './codes/RedeemableCodes';
+import RedeemableCodeController from './codes/RedeemableCodeController';
 import EggType from './breeding/EggType';
 import Multiplier from './multiplier/Multiplier';
 import MultiplierType from './multiplier/MultiplierType';
@@ -74,16 +88,23 @@ import GymBadgeRequirement from './requirements/GymBadgeRequirement';
 import HatchRequirement from './requirements/HatchRequirement';
 import MoneyRequirement from './requirements/MoneyRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
+import MaxRegionRequirement from './requirements/MaxRegionRequirement';
 import PokeballRequirement from './requirements/PokeballRequirement';
 import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
 import QuestRequirement from './requirements/QuestRequirement';
 import RouteKillRequirement from './requirements/RouteKillRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
+import SubregionRequirement from './requirements/SubregionRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
 import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
 import WeatherRequirement from './requirements/WeatherRequirement';
 import { SortModules, SortSaves } from './Sortable';
+import KeyItemController from './keyItems/KeyItemController';
+import KeyItem from './keyItems/KeyItem';
+import KeyItems from './keyItems/KeyItems';
+import Achievement from './achievements/Achievement';
+import Gems from './gems/Gems';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -94,9 +115,19 @@ Object.assign(<any>window, {
     DataStore,
     BadgeCase: DataStore.badge,
     Statistics: DataStore.statistics,
+    AuraType,
     BadgeEnums,
+    BerryColor,
+    BerryType,
     PokemonType,
+    CaughtStatus,
+    EvolutionType,
+    FarmNotificationType,
+    FlavorType,
     ItemType,
+    KeyItemType,
+    MulchType,
+    PlotStage,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -114,6 +145,8 @@ Object.assign(<any>window, {
     LogBookTypes,
     ChangelogItems,
     RedeemableCode,
+    RedeemableCodes,
+    RedeemableCodeController,
     EggType,
     Multiplier,
     MultiplierType,
@@ -165,15 +198,22 @@ Object.assign(<any>window, {
     HatchRequirement,
     MoneyRequirement,
     MaxLevelOakItemRequirement,
+    MaxRegionRequirement,
     PokeballRequirement,
     ProteinObtainRequirement,
     QuestRequirement,
     RouteKillRequirement,
     ShinyPokemonRequirement,
+    SubregionRequirement,
     TokenRequirement,
     UndergroundItemsFoundRequirement,
     UndergroundLayersMinedRequirement,
     WeatherRequirement,
     SortModules,
     SortSaves,
+    KeyItemController,
+    KeyItem,
+    KeyItems,
+    Achievement,
+    Gems,
 });
