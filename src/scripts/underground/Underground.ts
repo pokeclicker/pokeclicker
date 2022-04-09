@@ -206,16 +206,16 @@ class Underground implements Feature {
     }
 
     public static getCumulativeValues(): Record<string, { cumulativeValue: number, imgSrc: string }> {
-        let cumulativeValues = {};
+        const cumulativeValues = {};
         player.mineInventory().forEach(mineItem => {
             if (mineItem.valueType != 'Mine Egg' && mineItem.amount() > 0 && !mineItem.sellLocked()) {
-                let cumulativeValueOfType = cumulativeValues[mineItem.valueType]
-                if(!cumulativeValueOfType) {
+                let cumulativeValueOfType = cumulativeValues[mineItem.valueType];
+                if (!cumulativeValueOfType) {
                     cumulativeValueOfType = { cumulativeValue: 0, imgSrc: null };
                     cumulativeValues[mineItem.valueType] = cumulativeValueOfType;
                 }
 
-                if(mineItem.valueType == 'Diamond') {
+                if (mineItem.valueType == 'Diamond') {
                     cumulativeValueOfType.imgSrc = 'assets/images/underground/diamond.svg';
                 } else {
                     cumulativeValueOfType.imgSrc = Underground.getMineItemById(mineItem.id).image;
@@ -397,7 +397,7 @@ class Underground implements Feature {
 
     openUndergroundSellAllModal() {
         if (this.canAccess()) {
-            if(Object.keys(Underground.getCumulativeValues()).length == 0) {
+            if (Object.keys(Underground.getCumulativeValues()).length == 0) {
                 Notifier.notify({
                     message: 'You have no items selected for selling.',
                     type: NotificationConstants.NotificationOption.warning,
