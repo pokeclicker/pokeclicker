@@ -1517,7 +1517,7 @@
             { name: "Dock"
             , x: 22, y: 46
             , width: 12, height: 6
-            , databind: "click:function(){MapHelper.openShipModal()}"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hau\\'oli City') }"
             })
         %>
 
@@ -1526,7 +1526,7 @@
             { name: "Dock"
             , x: 30, y: 43
             , width: 3, height: 3
-            , databind: "click:function(){MapHelper.openShipModal()}"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hau\\'oli City') }"
             })
         %>
 
@@ -1535,7 +1535,7 @@
             { name: "Dock"
             , x: 23, y: 45
             , width: 7, height: 1
-            , databind: "click:function(){MapHelper.openShipModal()}"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hau\\'oli City') }"
             })
         %>
 
@@ -1812,7 +1812,7 @@
             { name: "Dock"
             , x: 37, y: 41
             , width: 3, height: 4
-            , databind: "click:function(){MapHelper.openShipModal()}"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Heahea City') }"
             })
         %>
     </g>
@@ -2351,6 +2351,15 @@
         <!-- ------------------ -->
         <!-- PLACES OF INTEREST -->
         <!-- ------------------ -->
+
+        <!--Dock-->
+        <%- include('templates/mapPOI',
+            { name: "Dock"
+            , x: 82, y: 18
+            , width: 3, height: 4
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Malie City') }"
+            })
+        %>
 
         <!-- TODO: REMOVE IF UB QUESTLINE GETS MERGED -->
         <%- include('templates/mapOverlay',
