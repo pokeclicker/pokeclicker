@@ -48,6 +48,8 @@ class Discord implements Saveable {
 
     logout(): void {
         this.ID(this.defaults.id);
+        // Save now
+        Save.store(player);
     }
 
     calcCode(code) {

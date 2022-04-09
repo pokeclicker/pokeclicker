@@ -1,18 +1,32 @@
-/// <reference path="../../declarations/GameHelper.d.ts" />
-/// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
+/* eslint-disable class-methods-use-this */
+import {
+    Observable as KnockoutObservable,
+} from 'knockout';
+import { Feature } from '../DataStore/common/Feature';
+import KeyItemType from '../enums/KeyItemType';
+import PokemonType from '../enums/PokemonType';
+import {
+    GEM_UPGRADE_COST,
+    MAX_GEM_UPGRADES,
+    TypeEffectiveness,
+    TypeEffectivenessValue,
+} from '../GameConstants';
+import GameHelper from '../GameHelper';
+import NotificationConstants from '../notifications/NotificationConstants';
+import Notifier from '../notifications/Notifier';
+import TypeHelper from '../types/TypeHelper';
 
-class Gems implements Feature {
+export default class Gems implements Feature {
+    public static readonly nTypes: number = GameHelper.enumLength(PokemonType) - 1;
+    public static readonly nEffects: number = GameHelper.enumLength(TypeEffectiveness);
+
     name = 'Gems';
     saveKey = 'gems';
 
-    public static readonly nTypes: number =
-        GameHelper.enumLength(PokemonType) - 1;
-    public static readonly nEffects: number =
-        GameHelper.enumLength(GameConstants.TypeEffectiveness);
     defaults = {
-        'gemWallet': Array<number>(Gems.nTypes).fill(0),
-        'gemUpgrades': Array<number>(Gems.nTypes * Gems.nEffects).fill(0),
-        'gemCollapsed': Array<boolean>(Gems.nTypes).fill(false),
+        gemWallet: Array<number>(Gems.nTypes).fill(0),
+        gemUpgrades: Array<number>(Gems.nTypes * Gems.nEffects).fill(0),
+        gemCollapsed: Array<boolean>(Gems.nTypes).fill(false),
     };
 
     public gemWallet: Array<KnockoutObservable<number>>;
@@ -25,13 +39,17 @@ class Gems implements Feature {
         this.gemWallet = this.defaults.gemWallet.map((v) => ko.observable(v));
         this.gemUpgrades = this.defaults.gemUpgrades.map((v) => ko.observable(v));
         this.gemCollapsed = this.defaults.gemCollapsed;
-        GameHelper.enumNumbers(PokemonType).map(type => {
+        GameHelper.enumNumbers(PokemonType).forEach((type) => {
             this.validUpgrades[type] = {};
-            this.validUpgrades[type][GameConstants.TypeEffectiveness.Immune] = !!TypeHelper.typeMatrix[type]?.includes(GameConstants.TypeEffectivenessValue.Immune);
-            this.validUpgrades[type][GameConstants.TypeEffectiveness.NotVery] = !!TypeHelper.typeMatrix[type]?.includes(GameConstants.TypeEffectivenessValue.NotVery);
-            this.validUpgrades[type][GameConstants.TypeEffectiveness.Normal] = !!TypeHelper.typeMatrix[type]?.includes(GameConstants.TypeEffectivenessValue.Normal);
-            this.validUpgrades[type][GameConstants.TypeEffectiveness.Very] = !!TypeHelper.typeMatrix[type]?.includes(GameConstants.TypeEffectivenessValue.Very);
+            this.validUpgrades[type][TypeEffectiveness.Immune] = !!TypeHelper.typeMatrix[type]?.includes(TypeEffectivenessValue.Immune);
+            this.validUpgrades[type][TypeEffectiveness.NotVery] = !!TypeHelper.typeMatrix[type]?.includes(TypeEffectivenessValue.NotVery);
+            this.validUpgrades[type][TypeEffectiveness.Normal] = !!TypeHelper.typeMatrix[type]?.includes(TypeEffectivenessValue.Normal);
+            this.validUpgrades[type][TypeEffectiveness.Very] = !!TypeHelper.typeMatrix[type]?.includes(TypeEffectivenessValue.Very);
         });
+    }
+
+    public static image(type: number): string {
+        return `assets/images/gems/${PokemonType[type]} Gem.png`;
     }
 
     public gainGems(amt: number, typeNum: PokemonType) {
@@ -39,7 +57,7 @@ class Gems implements Feature {
             return;
         }
 
-        if (typeNum == PokemonType.None) {
+        if (typeNum === PokemonType.None) {
             return;
         }
 
@@ -53,22 +71,22 @@ class Gems implements Feature {
 
     public getGemUpgradeCost(
         typeNum: PokemonType,
-        effectNum: GameConstants.TypeEffectiveness
+        effectNum: TypeEffectiveness,
     ): number {
-        const cost = (this.getGemUpgrade(typeNum, effectNum) + 1) * GameConstants.GEM_UPGRADE_COST;
+        const cost = (this.getGemUpgrade(typeNum, effectNum) + 1) * GEM_UPGRADE_COST;
         return cost;
     }
 
     public hasMaxUpgrade(
         typeNum: PokemonType,
-        effectNum: GameConstants.TypeEffectiveness
+        effectNum: TypeEffectiveness,
     ): boolean {
-        return this.getGemUpgrade(typeNum, effectNum) >= GameConstants.MAX_GEM_UPGRADES;
+        return this.getGemUpgrade(typeNum, effectNum) >= MAX_GEM_UPGRADES;
     }
 
     public canBuyGemUpgrade(
         typeNum: PokemonType,
-        effectNum: GameConstants.TypeEffectiveness
+        effectNum: TypeEffectiveness,
     ): boolean {
         if (App.game.challenges.list.disableGems.active()) {
             return false;
@@ -80,7 +98,7 @@ class Gems implements Feature {
 
     public buyGemUpgrade(
         typeNum: PokemonType,
-        effectNum: GameConstants.TypeEffectiveness
+        effectNum: TypeEffectiveness,
     ): void {
         if (this.canBuyGemUpgrade(typeNum, effectNum)) {
             this.gainGems(-this.getGemUpgradeCost(typeNum, effectNum), typeNum);
@@ -90,52 +108,47 @@ class Gems implements Feature {
 
     public isValidUpgrade(
         typeNum: PokemonType,
-        effectNum: GameConstants.TypeEffectiveness
+        effectNum: TypeEffectiveness,
     ): boolean {
         return !!this.validUpgrades[typeNum]?.[effectNum];
     }
 
     public getGemUpgrade(
         typeNum: PokemonType,
-        effectNum: GameConstants.TypeEffectiveness
+        effectNum: TypeEffectiveness,
     ): number {
         return this.gemUpgrades[typeNum * Gems.nEffects + effectNum]();
     }
 
-    initialize() {
-    }
+    initialize() {}
 
     canAccess(): boolean {
         return App.game.keyItems.hasKeyItem(KeyItemType.Gem_case);
     }
 
-    update(delta: number) {
-    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    update(delta: number) {}
 
     toJSON(): Record<string, any> {
         return {
-            'gemWallet': this.gemWallet.map(ko.unwrap),
-            'gemUpgrades': this.gemUpgrades.map(ko.unwrap),
-            'gemCollapsed': this.gemCollapsed,
+            gemWallet: this.gemWallet.map(ko.unwrap),
+            gemUpgrades: this.gemUpgrades.map(ko.unwrap),
+            gemCollapsed: this.gemCollapsed,
         };
     }
 
     fromJSON(json: Record<string, any>) {
         if (json != null) {
-            json['gemWallet'].forEach((v, i) => {
+            json.gemWallet.forEach((v, i) => {
                 this.gemWallet[i](v);
             });
-            json['gemUpgrades'].forEach((v, i) => {
+            json.gemUpgrades.forEach((v, i) => {
                 this.gemUpgrades[i](v);
             });
-            json['gemCollapsed']?.forEach((v, i) => {
+            json.gemCollapsed?.forEach((v, i) => {
                 this.gemCollapsed[i] = v;
             });
         }
-    }
-
-    public static image(type: number): string {
-        return `assets/images/gems/${PokemonType[type]} Gem.png`;
     }
 
     public openGemModal() {

@@ -5,7 +5,7 @@ class GymRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
 
-    public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList['Pewter City']);
+    public static gymObservable: KnockoutObservable<Gym> = ko.observable(GymList['Pewter City']);
     public static running: KnockoutObservable<boolean> = ko.observable(false);
     public static autoRestart: KnockoutObservable<boolean> = ko.observable(false);
     public static initialRun = true;
