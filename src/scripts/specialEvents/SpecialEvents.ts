@@ -16,7 +16,7 @@ class SpecialEvents implements Feature {
     }
 
     initialize(): void {
-        for(var event of SpecialEvents.events) {
+        for (let event of SpecialEvents.events) {
             event.initialize();
         }
     }
@@ -59,7 +59,7 @@ SpecialEvents.newEvent('Easter', 'Encounter Surprise Togepi for a limited time w
     // Start
     new Date(new Date().getFullYear(), 3, 8, 1), () => {
         const togepiEggHuntQuestLine = App.game.quests.getQuestLine('Togepi Egg Hunt');
-        if(togepiEggHuntQuestLine.state() == QuestLineState.inactive) {
+        if (togepiEggHuntQuestLine.state() == QuestLineState.inactive) {
             App.game.quests.getQuestLine('Togepi Egg Hunt').beginQuest();
         }
     },
