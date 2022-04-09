@@ -59,7 +59,9 @@ class GymRunner {
 
     public static resetGif() {
         // If the user doesn't want the animation, just return
-        if (!Settings.getSetting('showGymGoAnimation').value) return;
+        if (!Settings.getSetting('showGymGoAnimation').value) {
+            return;
+        }
 
         if (!this.autoRestart() || this.initialRun) {
             $('#gymGoContainer').show();
