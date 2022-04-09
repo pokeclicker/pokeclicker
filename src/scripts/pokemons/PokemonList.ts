@@ -5,7 +5,7 @@
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 /// <reference path="../../declarations/interfaces/BagItem.d.ts" />
 /// <reference path="../../declarations/utilities/Rand.d.ts" />
-/// <reference path="../farming/BerryType.ts" />
+/// <reference path="../../declarations/enums/BerryType.d.ts"/>
 
 const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
@@ -17957,6 +17957,23 @@ const pokemonList = createPokemonArray(
     {
         'id': 801,
         'name': 'Magearna',
+        'type': [PokemonType.Steel, PokemonType.Fairy],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': null,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 80,
+            'attack': 95,
+            'specialAttack': 130,
+            'defense': 115,
+            'specialDefense': 115,
+            'speed': 65,
+        },
+    },
+    {
+        'id': 801.1,
+        'name': 'Magearna (Original Color)',
         'type': [PokemonType.Steel, PokemonType.Fairy],
         'eggCycles': 120,
         'levelType': LevelType.slow,

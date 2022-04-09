@@ -30,7 +30,7 @@ class Town {
     ) {
         this.name = name;
         this.region = region;
-        this.gym = gymList[name];
+        this.gym = GymList[name];
         this.requirements = optional.requirements || [];
         this.shops = optional.shops || [];
         this.dungeon = optional.dungeon;

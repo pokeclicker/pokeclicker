@@ -206,7 +206,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/824384977633411082',
         resources: [
             'Team Flare Aliana',
-            'Team Flare Admin (male)',
+            'Team Flare Admins',
         ],
         // Notes: Permission given via Discord #development-chat.
     },
