@@ -345,7 +345,7 @@ class QuestLineHelper {
         const surpriseTogepi = pokemonMap['Surprise Togepi'];
 
         const togepiInKantoSetup = () => {
-            dungeonList['Viridian Forest'].bossList.push(new DungeonTrainer('Easter basket', [ new GymPokemon('Surprise Togepi', 300000, 100), ], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion) }));
+            dungeonList['Viridian Forest'].bossList.push(new DungeonTrainer('Easter basket', [new GymPokemon('Surprise Togepi', 300000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion) }));
             App.game.statistics.pokemonDefeated[surpriseTogepi.id](0);
         };
         const afterDefeatingTogepiInKanto = () => {
@@ -362,7 +362,7 @@ class QuestLineHelper {
         findSurpriseTogepiForEasterQuestLine.addQuest(defeatTogepiInKanto);
 
         const togepiInHoennSetup = () => {
-            dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Easter basket', [ new GymPokemon('Surprise Togepi', 900000, 100), ], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
+            dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Easter basket', [new GymPokemon('Surprise Togepi', 900000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
         };
         const afterDefeatingTogepiInHoenn = () => {
             Notifier.notify({
@@ -374,11 +374,11 @@ class QuestLineHelper {
 
             dungeonList['Petalburg Woods'].bossList = dungeonList['Petalburg Woods'].bossList.filter(boss => boss.name != 'Easter basket');
         };
-        const encounterTogepiInHoenn = new CustomQuest(1, afterDefeatingTogepiInHoenn, 'Another report just came in, stating that they saw and strange egg on it\'s way to Hoenn!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 1, togepiInHoennSetup);
+        const encounterTogepiInHoenn = new CustomQuest(1, afterDefeatingTogepiInHoenn, 'Another report just came in, stating that they saw a strange egg boarding the ferry to Hoenn!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 1, togepiInHoennSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterTogepiInHoenn);
 
         const togepiInJohtoSetup = () => {
-            dungeonList['Ilex Forest'].bossList.push(new DungeonTrainer('Easter basket', [ new GymPokemon('Surprise Togepi', 2700000, 100), ], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion) }));
+            dungeonList['Ilex Forest'].bossList.push(new DungeonTrainer('Easter basket', [new GymPokemon('Surprise Togepi', 2700000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion) }));
         };
         const afterDefeatingTogepiInJohto = () => {
             App.game.party.gainPokemonById(surpriseTogepi.id);
