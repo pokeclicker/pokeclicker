@@ -141,23 +141,23 @@ class GameController {
 
             // Within modals
             if ($farmsModal.data('bs.modal')?._isShown) {
-                if (e.code == Settings.getSetting('hotkey.farm.toggleShovel').observableValue()) {
+                if (e.code == Settings.getSetting('hotkey.farm.toggleShovel').value) {
                     FarmController.selectedShovel() ? FarmController.selectedShovel(false) : FarmController.selectedShovel(true);
                     return;
                 }
             }
             if ($undergroundModal.data('bs.modal')?._isShown) {
                 switch (e.code) {
-                    case Settings.getSetting('hotkey.underground.hammer').observableValue():
+                    case Settings.getSetting('hotkey.underground.hammer').value:
                         Mine.toolSelected(Mine.Tool.Hammer);
                         return;
-                    case Settings.getSetting('hotkey.underground.chisel').observableValue():
+                    case Settings.getSetting('hotkey.underground.chisel').value:
                         Mine.toolSelected(Mine.Tool.Chisel);
                         return;
-                    case Settings.getSetting('hotkey.underground.survey').observableValue():
+                    case Settings.getSetting('hotkey.underground.survey').value:
                         Mine.survey();
                         return;
-                    case Settings.getSetting('hotkey.underground.bomb').observableValue():
+                    case Settings.getSetting('hotkey.underground.bomb').value:
                         Mine.bomb();
                         return;
                 }
@@ -226,22 +226,22 @@ class GameController {
                 if (App.game.gameState === GameConstants.GameState.dungeon) {
                     switch (e.code) {
                         case 'ArrowUp':
-                        case Settings.getSetting('hotkey.dungeon.up').observableValue():
+                        case Settings.getSetting('hotkey.dungeon.up').value:
                             DungeonRunner.map.moveUp();
                             return;
                         case 'ArrowLeft':
-                        case Settings.getSetting('hotkey.dungeon.left').observableValue():
+                        case Settings.getSetting('hotkey.dungeon.left').value:
                             DungeonRunner.map.moveLeft();
                             return;
                         case 'ArrowDown':
-                        case Settings.getSetting('hotkey.dungeon.down').observableValue():
+                        case Settings.getSetting('hotkey.dungeon.down').value:
                             DungeonRunner.map.moveDown();
                             return;
                         case 'ArrowRight':
-                        case Settings.getSetting('hotkey.dungeon.right').observableValue():
+                        case Settings.getSetting('hotkey.dungeon.right').value:
                             DungeonRunner.map.moveRight();
                             return;
-                        case Settings.getSetting('hotkey.dungeon.interact').observableValue():
+                        case Settings.getSetting('hotkey.dungeon.interact').value:
                             if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
                                 DungeonRunner.dungeonLeave();
                             } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
@@ -255,7 +255,7 @@ class GameController {
 
                 // Within towns
                 if (App.game.gameState === GameConstants.GameState.town) {
-                    if (e.code === Settings.getSetting('hotkey.town.start').observableValue()) {
+                    if (e.code === Settings.getSetting('hotkey.town.start').value) {
                         if (player.town().gym) {
                             GymRunner.startGym(player.town().gym);
                         } else if (player.town().dungeon) {
@@ -280,7 +280,7 @@ class GameController {
 
             // Anywhere keys
             switch (e.code) {
-                case Settings.getSetting('hotkey.farm').observableValue():
+                case Settings.getSetting('hotkey.farm').value:
                     // Open the Farm
                     if (farms.canAccess() && !$farmsModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
@@ -289,7 +289,7 @@ class GameController {
                         return;
                     }
                     break;
-                case Settings.getSetting('hotkey.hatchery').observableValue():
+                case Settings.getSetting('hotkey.hatchery').value:
                     // Open the Hatchery
                     if (hatchery.canAccess() && !$hatcheryModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
@@ -298,7 +298,7 @@ class GameController {
                         return;
                     }
                     break;
-                case Settings.getSetting('hotkey.oakItems').observableValue():
+                case Settings.getSetting('hotkey.oakItems').value:
                     // Open oak items
                     if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
@@ -307,7 +307,7 @@ class GameController {
                         return;
                     }
                     break;
-                case Settings.getSetting('hotkey.underground').observableValue():
+                case Settings.getSetting('hotkey.underground').value:
                     // Open the Underground
                     if (underground.canAccess() && !$undergroundModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
@@ -316,7 +316,7 @@ class GameController {
                         return;
                     }
                     break;
-                case Settings.getSetting('hotkey.forceSave').observableValue():
+                case Settings.getSetting('hotkey.forceSave').value:
                     if (GameController.keyHeld['ShiftLeft'] || GameController.keyHeld['ShiftRight']) {
                         Save.store(player);
                         return;
@@ -325,7 +325,7 @@ class GameController {
                 default:
                     // Check for a number key being pressed
                     if (isNumberKey) {
-                        if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').observableValue()]) {
+                        if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
                             // Open pokeball selector modal using P + (1-4) for each condition
                             if (!($pokeballSelector.data('bs.modal')?._isShown)) {
                                 $('.modal').modal('hide');
