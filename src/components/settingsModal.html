@@ -284,6 +284,7 @@
                             s.set('None');
                     }
                     e.currentTarget.blur();
+                    e.stopPropagation()
                     return false;
                 },
                 keypress: (s, e) => {
