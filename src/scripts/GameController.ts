@@ -126,7 +126,6 @@ class GameController {
                 return;
             }
 
-            e.preventDefault();
             const key = GameController.convertKey(e.key);
 
             // Set flags for any key currently pressed down (used to check if key held down currently)
@@ -145,30 +144,30 @@ class GameController {
                     Safari.move(dir);
                 }
                 // We don't want to process any other keys while in the Safari zone
-                return;
+                return e.preventDefault();
             }
 
             // Within modals
             if ($farmsModal.data('bs.modal')?._isShown) {
                 if (key == Settings.getSetting('hotkey.farm.toggleShovel').value) {
                     FarmController.selectedShovel() ? FarmController.selectedShovel(false) : FarmController.selectedShovel(true);
-                    return;
+                    return e.preventDefault();
                 }
             }
             if ($undergroundModal.data('bs.modal')?._isShown) {
                 switch (key) {
                     case Settings.getSetting('hotkey.underground.hammer').value:
                         Mine.toolSelected(Mine.Tool.Hammer);
-                        return;
+                        return e.preventDefault();
                     case Settings.getSetting('hotkey.underground.chisel').value:
                         Mine.toolSelected(Mine.Tool.Chisel);
-                        return;
+                        return e.preventDefault();
                     case Settings.getSetting('hotkey.underground.survey').value:
                         Mine.survey();
-                        return;
+                        return e.preventDefault();
                     case Settings.getSetting('hotkey.underground.bomb').value:
                         Mine.bomb();
-                        return;
+                        return e.preventDefault();
                 }
                 if (isNumberKey) {
                     if (numberKey === 0) {
@@ -178,7 +177,7 @@ class GameController {
                     } else if (numberKey === 2) {
                         ItemList['LargeRestore'].use();
                     }
-                    return;
+                    return e.preventDefault();
                 }
             }
             if ($oakItemsModal.data('bs.modal')?._isShown) {
@@ -191,7 +190,7 @@ class GameController {
                             oakItems.activate(numberKey);
                         }
                     }
-                    return;
+                    return e.preventDefault();
                 }
             }
             if ($pokeballSelector.data('bs.modal')?._isShown) {
@@ -199,13 +198,13 @@ class GameController {
                     // Switch selection type
                     if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
                         $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numberKey)?.trigger('click');
-                        return;
+                        return e.preventDefault();
                     }
                     // Select Pokeball from pokeball selector (0 = none)
                     if (numberKey < App.game.pokeballs.pokeballs.length) {
                         pokeballs.selectedSelection()(numberKey);
                     }
-                    return;
+                    return e.preventDefault();
                 }
             }
 
@@ -225,14 +224,14 @@ class GameController {
                             } else {
                                 MapHelper.moveToRoute(Routes.unnormalizeRoute(initialRoute + 1), player.region);
                             }
-                            return;
+                            return e.preventDefault();
                         case '-':
                             if (initialRoute - 1 < MapHelper.normalizeRoute(firstRoute, player.region)) {
                                 MapHelper.moveToRoute(lastRoute, player.region);
                             } else {
                                 MapHelper.moveToRoute(Routes.unnormalizeRoute(initialRoute - 1), player.region);
                             }
-                            return;
+                            return e.preventDefault();
                     }
                 }
 
@@ -242,19 +241,19 @@ class GameController {
                         case 'ArrowUp':
                         case Settings.getSetting('hotkey.dungeon.up').value:
                             DungeonRunner.map.moveUp();
-                            return;
+                            return e.preventDefault();
                         case 'ArrowLeft':
                         case Settings.getSetting('hotkey.dungeon.left').value:
                             DungeonRunner.map.moveLeft();
-                            return;
+                            return e.preventDefault();
                         case 'ArrowDown':
                         case Settings.getSetting('hotkey.dungeon.down').value:
                             DungeonRunner.map.moveDown();
-                            return;
+                            return e.preventDefault();
                         case 'ArrowRight':
                         case Settings.getSetting('hotkey.dungeon.right').value:
                             DungeonRunner.map.moveRight();
-                            return;
+                            return e.preventDefault();
                         case Settings.getSetting('hotkey.dungeon.interact').value:
                             if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
                                 DungeonRunner.dungeonLeave();
@@ -263,7 +262,7 @@ class GameController {
                             } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
                                 DungeonRunner.startBossFight();
                             }
-                            return;
+                            return e.preventDefault();
                     }
                 }
 
@@ -279,14 +278,14 @@ class GameController {
                                 MapHelper.moveToTown(player.town().dungeon.name);
                             }
                         }
-                        return;
+                        return e.preventDefault();
                     } else if ('gymList' in player.town()) {
                         if (isNumberKey) {
                             // Check if a number higher than 0 and less than total Gyms was pressed
                             if (numberKey < player.town().gymList.length) {
                                 GymRunner.startGym(player.town().gymList[numberKey]);
                             }
-                            return;
+                            return e.preventDefault();
                         }
                     }
                 }
@@ -300,7 +299,7 @@ class GameController {
                         $('.modal').modal('hide');
                         $farmsModal.data('disable-toggle', true);
                         $farmsModal.modal('toggle');
-                        return;
+                        return e.preventDefault();
                     }
                     break;
                 case Settings.getSetting('hotkey.hatchery').value:
@@ -309,7 +308,7 @@ class GameController {
                         $('.modal').modal('hide');
                         $hatcheryModal.data('disable-toggle', true);
                         $hatcheryModal.modal('toggle');
-                        return;
+                        return e.preventDefault();
                     }
                     break;
                 case Settings.getSetting('hotkey.oakItems').value:
@@ -318,7 +317,7 @@ class GameController {
                         $('.modal').modal('hide');
                         $oakItemsModal.data('disable-toggle', true);
                         $oakItemsModal.modal('toggle');
-                        return;
+                        return e.preventDefault();
                     }
                     break;
                 case Settings.getSetting('hotkey.underground').value:
@@ -327,13 +326,13 @@ class GameController {
                         $('.modal').modal('hide');
                         $undergroundModal.data('disable-toggle', true);
                         $undergroundModal.modal('toggle');
-                        return;
+                        return e.preventDefault();
                     }
                     break;
                 case Settings.getSetting('hotkey.forceSave').value:
                     if (GameController.keyHeld['Shift']) {
                         Save.store(player);
-                        return;
+                        return e.preventDefault();
                     }
                     break;
                 default:
@@ -345,9 +344,13 @@ class GameController {
                                 $('.modal').modal('hide');
                             }
                             $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numberKey)?.trigger('click');
-                            return;
+                            return e.preventDefault();
                         }
                     }
+            }
+
+            if (key === 'Space') {
+                return e.preventDefault();
             }
         });
 
@@ -366,9 +369,11 @@ class GameController {
                 if (dir) {
                     e.preventDefault();
                     Safari.stop(dir);
-                } else if (key === 'Space') {
-                    e.preventDefault();
                 }
+            }
+
+            if (key === 'Space') {
+                return e.preventDefault();
             }
         });
     }
