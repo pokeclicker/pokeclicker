@@ -277,6 +277,15 @@
             class="btn-block"
             style="padding: 10px 0;"
             data-bind="event: {
+                keydown: (s, e) => {
+                    switch(e.code) {
+                        case 'Backspace':
+                        case 'Escape':
+                            s.set('None');
+                    }
+                    e.currentTarget.blur();
+                    return false;
+                },
                 keypress: (s, e) => {
                     s.set(e.code);
                     e.currentTarget.blur();
