@@ -141,7 +141,7 @@ class GameController {
 
             // Within modals
             if ($farmsModal.data('bs.modal')?._isShown) {
-                if (e.code == 'KeyS') {
+                if (e.code == Settings.getSetting('hotkey.farm.toggleShovel').observableValue()) {
                     FarmController.selectedShovel() ? FarmController.selectedShovel(false) : FarmController.selectedShovel(true);
                     return;
                 }
@@ -226,22 +226,22 @@ class GameController {
                 if (App.game.gameState === GameConstants.GameState.dungeon) {
                     switch (e.code) {
                         case 'ArrowUp':
-                        case 'KeyW':
+                        case Settings.getSetting('hotkey.dungeon.up').observableValue():
                             DungeonRunner.map.moveUp();
                             return;
                         case 'ArrowLeft':
-                        case 'KeyA':
+                        case Settings.getSetting('hotkey.dungeon.left').observableValue():
                             DungeonRunner.map.moveLeft();
                             return;
                         case 'ArrowDown':
-                        case 'KeyS':
+                        case Settings.getSetting('hotkey.dungeon.down').observableValue():
                             DungeonRunner.map.moveDown();
                             return;
                         case 'ArrowRight':
-                        case 'KeyD':
+                        case Settings.getSetting('hotkey.dungeon.right').observableValue():
                             DungeonRunner.map.moveRight();
                             return;
-                        case 'Space':
+                        case Settings.getSetting('hotkey.dungeon.interact').observableValue():
                             if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
                                 DungeonRunner.dungeonLeave();
                             } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
@@ -255,7 +255,7 @@ class GameController {
 
                 // Within towns
                 if (App.game.gameState === GameConstants.GameState.town) {
-                    if (e.code === 'Space') {
+                    if (e.code === Settings.getSetting('hotkey.town.start').observableValue()) {
                         if (player.town().gym) {
                             GymRunner.startGym(player.town().gym);
                         } else if (player.town().dungeon) {

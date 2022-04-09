@@ -216,17 +216,27 @@ Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
 Settings.add(new Setting('sort.saveSelector', 'Saves sort order', [], ''));
 
 // Hotkeys
-Settings.add(new HotkeySetting('hotkey.farm', 'Open the Farm', [], 'KeyF'));
-Settings.add(new HotkeySetting('hotkey.hatchery', 'Open the Hatchery', [], 'KeyH'));
-Settings.add(new HotkeySetting('hotkey.oakItems', 'Open Oak Items menu', [], 'KeyO'));
-Settings.add(new HotkeySetting('hotkey.underground', 'Open the Underground', [], 'KeyU'));
-Settings.add(new HotkeySetting('hotkey.pokeballMenu', 'Open Pokeball menu', [], 'KeyP', { suffix: ' + Number' }));
-Settings.add(new HotkeySetting('hotkey.forceSave', 'Force save game', [], 'KeyS', { prefix: 'Shift + ' }));
+Settings.add(new HotkeySetting('hotkey.farm', 'Open the Farm', 'KeyF'));
+Settings.add(new HotkeySetting('hotkey.hatchery', 'Open the Hatchery', 'KeyH'));
+Settings.add(new HotkeySetting('hotkey.oakItems', 'Open Oak Items menu', 'KeyO'));
+Settings.add(new HotkeySetting('hotkey.underground', 'Open the Underground', 'KeyU'));
+Settings.add(new HotkeySetting('hotkey.pokeballMenu', 'Open Pokeball menu', 'KeyP', { suffix: ' + Number' }));
 
-Settings.add(new HotkeySetting('hotkey.underground.hammer', 'Use the Hammer', [], 'KeyH'));
-Settings.add(new HotkeySetting('hotkey.underground.chisel', 'Use the Chisel', [], 'KeyC'));
-Settings.add(new HotkeySetting('hotkey.underground.survey', 'Use the Survey', [], 'KeyS'));
-Settings.add(new HotkeySetting('hotkey.underground.bomb', 'Use the Bomb', [], 'KeyB'));
+Settings.add(new HotkeySetting('hotkey.farm.toggleShovel', 'Toggle Shovel', 'KeyS'));
+
+Settings.add(new HotkeySetting('hotkey.underground.hammer', 'Switch to Hammer', 'KeyH'));
+Settings.add(new HotkeySetting('hotkey.underground.chisel', 'Switch to Chisel', 'KeyC'));
+Settings.add(new HotkeySetting('hotkey.underground.survey', 'Survey', 'KeyS'));
+Settings.add(new HotkeySetting('hotkey.underground.bomb', 'Bomb', 'KeyB'));
+
+Settings.add(new HotkeySetting('hotkey.dungeon.up', 'Move Up', 'KeyW', { prefix: '↑ or ' }));
+Settings.add(new HotkeySetting('hotkey.dungeon.left', 'Move Left', 'KeyA', { prefix: '← or ' }));
+Settings.add(new HotkeySetting('hotkey.dungeon.down', 'Move Down', 'KeyS', { prefix: '↓ or ' }));
+Settings.add(new HotkeySetting('hotkey.dungeon.right', 'Move Right', 'KeyD', { prefix: '→ or ' }));
+Settings.add(new HotkeySetting('hotkey.dungeon.interact', 'Interact', 'Space'));
+
+Settings.add(new HotkeySetting('hotkey.town.start', 'Start Gym/Dungeon', 'Space'));
+Settings.add(new HotkeySetting('hotkey.forceSave', 'Force save game', 'KeyS', { prefix: 'Shift + ' }));
 
 /*
  * SUBSCRIBERS

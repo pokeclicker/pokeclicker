@@ -4,11 +4,11 @@ export default class HotkeySetting extends Setting<string> {
     public prefix ='';
     public suffix ='';
 
-    constructor(name: string, displayName: string, options = [], defaultValue = '', settings: { prefix?: string, suffix?: string } = { prefix: '', suffix: '' }) {
+    constructor(name: string, displayName: string, defaultValue = '', settings: { prefix?: string, suffix?: string } = { prefix: '', suffix: '' }) {
         super(
             name,
             displayName,
-            options,
+            [],
             defaultValue,
         );
         this.prefix = settings.prefix || '';
