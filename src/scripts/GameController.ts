@@ -325,7 +325,7 @@ class GameController {
                 default:
                     // Check for a number key being pressed
                     if (isNumberKey) {
-                        if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballMenu').observableValue()]) {
+                        if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').observableValue()]) {
                             // Open pokeball selector modal using P + (1-4) for each condition
                             if (!($pokeballSelector.data('bs.modal')?._isShown)) {
                                 $('.modal').modal('hide');

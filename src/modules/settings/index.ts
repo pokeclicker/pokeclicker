@@ -216,11 +216,11 @@ Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
 Settings.add(new Setting('sort.saveSelector', 'Saves sort order', [], ''));
 
 // Hotkeys
-Settings.add(new HotkeySetting('hotkey.farm', 'Open the Farm', 'KeyF'));
-Settings.add(new HotkeySetting('hotkey.hatchery', 'Open the Hatchery', 'KeyH'));
-Settings.add(new HotkeySetting('hotkey.oakItems', 'Open Oak Items menu', 'KeyO'));
-Settings.add(new HotkeySetting('hotkey.underground', 'Open the Underground', 'KeyU'));
-Settings.add(new HotkeySetting('hotkey.pokeballMenu', 'Open Pokeball menu', 'KeyP', { suffix: ' + Number' }));
+Settings.add(new HotkeySetting('hotkey.farm', 'Farm', 'KeyF'));
+Settings.add(new HotkeySetting('hotkey.hatchery', 'Hatchery', 'KeyH'));
+Settings.add(new HotkeySetting('hotkey.oakItems', 'Oak Items', 'KeyO'));
+Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'KeyU'));
+Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Pokéball Selection', 'KeyP', { suffix: ' + Number' }));
 
 Settings.add(new HotkeySetting('hotkey.farm.toggleShovel', 'Toggle Shovel', 'KeyS'));
 

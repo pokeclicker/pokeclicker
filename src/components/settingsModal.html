@@ -90,9 +90,9 @@
                             <tbody>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.farm')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.hatchery')}"></tr>
-                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.oakItems')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground')}"></tr>
-                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.pokeballMenu')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.oakItems')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.pokeballSelection')}"></tr>
                             </tbody>
                             <thead>
                                 <tr><th colspan="2">Farm</th></tr>
@@ -108,6 +108,49 @@
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.chisel')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.survey')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.bomb')}"></tr>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Use Restore:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Each number refers to a specific Restore',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Oak Items</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Toggle Oak Item:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Each number refers to a specific Oak Item',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Pokéball Selector</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Select Pokéball Type:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Each number refers to a specific Pokéball',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
                             </tbody>
                             <thead>
                                 <tr><th colspan="2">Dungeon</th></tr>
@@ -120,10 +163,37 @@
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dungeon.interact')}"></tr>
                             </tbody>
                             <thead>
-                                <tr><th colspan="2">Other</th></tr>
+                                <tr><th colspan="2">Town</th></tr>
                             </thead>
                             <tbody>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.town.start')}"></tr>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Start Elite 4:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Each number refers to a specific Elite 4 member',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Other</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Change Routes:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Change routes based on route order',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>- or +</code></kbd>
+                                    </td>
+                                </tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.forceSave')}"></tr>
                             </tbody>
                         </table>
