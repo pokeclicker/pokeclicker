@@ -100,8 +100,6 @@ class Game {
 
         // If the player isn't on a route, they're in a town/dungeon
         this.gameState = player.route() ? GameConstants.GameState.fighting : GameConstants.GameState.town;
-
-        document.dispatchEvent(new CustomEvent('pokeclicker.game.initialized'));
     }
 
     computeOfflineEarnings() {
