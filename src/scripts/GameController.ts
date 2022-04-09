@@ -187,6 +187,11 @@ class GameController {
             }
             if ($pokeballSelector.data('bs.modal')?._isShown) {
                 if (isNumberKey) {
+                    // Switch selection type
+                    if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
+                        $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numberKey)?.trigger('click');
+                        return;
+                    }
                     // Select Pokeball from pokeball selector (0 = none)
                     if (numberKey < App.game.pokeballs.pokeballs.length) {
                         pokeballs.selectedSelection()(numberKey);
