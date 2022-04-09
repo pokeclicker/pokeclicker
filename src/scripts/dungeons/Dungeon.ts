@@ -2914,7 +2914,7 @@ dungeonList['Spear Pillar'] = new Dungeon('Spear Pillar',
     84500, 217);
 
 dungeonList['Distortion World'] = new Dungeon('Distortion World',
-    ['Golbat', 'Gastly', 'Haunter', 'Duskull', 'Chimecho', 'Chingling', 'Bronzor'],
+    ['Golbat', 'Gastly', 'Duskull', 'Dusclops', 'Chimecho', 'Chingling', 'Bronzor', 'Bronzong'],
     [
         {loot: 'xClick', weight: 4},
         {loot: 'Nomel', weight: 3.5},
@@ -2927,13 +2927,20 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
         {loot: 'Haban', weight: 0, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Distortion World'))},
         {loot: 'Reaper_cloth', weight: 0},
     ],
-    1322100,
+    1350400,
     [
-        new DungeonBossPokemon('Dusclops', 5280000, 45),
-        new DungeonBossPokemon('Bronzong', 5280000, 45),
-        new DungeonBossPokemon('Giratina (altered)', 11880000, 45),
+        new DungeonTrainer('Galactic Boss',
+            [
+                new GymPokemon('Houndoom', 1128000, 45),
+                new GymPokemon('Honchkrow', 1128000, 47),
+                new GymPokemon('Crobat', 1128000, 46),
+                new GymPokemon('Gyarados', 1128000, 46),
+                new GymPokemon('Weavile', 1128000, 47),
+            ], { weight: 1 }, 'Cyrus', '(cyrus)'),
+        new DungeonBossPokemon('Dusclops', 5640000, 45),
+        new DungeonBossPokemon('Giratina (altered)', 11880000, 45, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
     ],
-    82500, 201);
+    86500, 217);
 
 dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
     ['Golbat', 'Graveler', 'Onix', 'Rhyhorn', 'Magneton', 'Azumarill', 'Floatzel'],
@@ -2955,7 +2962,7 @@ dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
         new DungeonBossPokemon('Steelix', 7000000, 100),
         new DungeonBossPokemon('Gabite', 7000000, 100),
     ],
-    86500, 230);
+    89500, 223);
 
 dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
     ['Slowpoke', 'Spearow', 'Garchomp', 'Slakoth', 'Eevee', 'Breloom', 'Absol'],
