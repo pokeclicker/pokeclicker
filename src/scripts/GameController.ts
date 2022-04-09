@@ -331,7 +331,7 @@ class GameController {
                     }
                     break;
                 case Settings.getSetting('hotkey.forceSave').value:
-                    if (GameController.keyHeld['ShiftLeft'] || GameController.keyHeld['ShiftRight']) {
+                    if (GameController.keyHeld['Shift']) {
                         Save.store(player);
                         return;
                     }
