@@ -10,9 +10,9 @@ class Champion extends Gym {
         moneyReward: number,
         rewardMessage: string,
         requirements: Requirement[] = [],
-        public alternativePokemon1: GymPokemon[],
-        public alternativePokemon2: GymPokemon[],
-        public alternativePokemon3: GymPokemon[],
+        public alternativePokemon1?: GymPokemon[],
+        public alternativePokemon2?: GymPokemon[],
+        public alternativePokemon3?: GymPokemon[],
         public rewardFunction = () => {}
     ) {
         super(leaderName, town, basePokemon, badgeReward, moneyReward, rewardMessage, requirements, rewardFunction);

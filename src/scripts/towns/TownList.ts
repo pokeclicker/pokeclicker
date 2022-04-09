@@ -2380,10 +2380,6 @@ TownList['Route 8 Motel'] = new Town(
     }
 );
 
-const Route8MotelShop = new TownShop([
-    ItemList['Beastball'],
-]);
-
 TownList['Royal Avenue'] = new Town(
     'Royal Avenue',
     GameConstants.Region.alola,
