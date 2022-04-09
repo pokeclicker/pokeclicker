@@ -345,7 +345,7 @@ class QuestLineHelper {
         const surpriseTogepi = pokemonMap['Surprise Togepi'];
 
         const togepiInKantoSetup = () => {
-            dungeonList['Viridian Forest'].bossList.push(new DungeonTrainer('Easter basket', [new GymPokemon('Surprise Togepi', 300000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion) }));
+            dungeonList['Viridian Forest'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 300000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion) }));
             App.game.statistics.pokemonDefeated[surpriseTogepi.id](0);
         };
         const afterDefeatingTogepiInKanto = () => {
@@ -356,13 +356,13 @@ class QuestLineHelper {
                 timeout: 3e4,
             });
 
-            dungeonList['Viridian Forest'].bossList = dungeonList['Viridian Forest'].bossList.filter(boss => boss.name != 'Easter basket');
+            dungeonList['Viridian Forest'].bossList = dungeonList['Viridian Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
         const defeatTogepiInKanto = new CustomQuest(1, afterDefeatingTogepiInKanto, 'Erika reported, Togepi was last seen in Kanto. Go look for it!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 0, togepiInKantoSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(defeatTogepiInKanto);
 
         const togepiInHoennSetup = () => {
-            dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Easter basket', [new GymPokemon('Surprise Togepi', 900000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
+            dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 900000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
         };
         const afterDefeatingTogepiInHoenn = () => {
             Notifier.notify({
@@ -372,13 +372,13 @@ class QuestLineHelper {
                 timeout: 3e4,
             });
 
-            dungeonList['Petalburg Woods'].bossList = dungeonList['Petalburg Woods'].bossList.filter(boss => boss.name != 'Easter basket');
+            dungeonList['Petalburg Woods'].bossList = dungeonList['Petalburg Woods'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
         const encounterTogepiInHoenn = new CustomQuest(1, afterDefeatingTogepiInHoenn, 'Another report just came in, stating that they saw a strange egg boarding the ferry to Hoenn!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 1, togepiInHoennSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterTogepiInHoenn);
 
         const togepiInJohtoSetup = () => {
-            dungeonList['Ilex Forest'].bossList.push(new DungeonTrainer('Easter basket', [new GymPokemon('Surprise Togepi', 2700000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion) }));
+            dungeonList['Ilex Forest'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 2700000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion) }));
         };
         const afterDefeatingTogepiInJohto = () => {
             App.game.party.gainPokemonById(surpriseTogepi.id);
@@ -388,7 +388,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
-            dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Easter basket');
+            dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
         const encounterSurpriseTogepiInJohto = new CustomQuest(1, afterDefeatingTogepiInJohto, 'There is a big Egg Hunt going on in Ilex Forest right now, maybe I should take a look?', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 2, togepiInJohtoSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
