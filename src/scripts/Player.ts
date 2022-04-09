@@ -73,7 +73,7 @@ class Player {
             // TODO: Convert this to object spread after we're on TS modules
             .map((v) => Object.assign({}, v, {
                 amount: ko.observable(v.amount),
-                sellLocked: ko.observable(v.sellLocked)
+                sellLocked: ko.observable(v.sellLocked),
             }));
         this.mineInventory = ko.observableArray(mineInventory);
 
