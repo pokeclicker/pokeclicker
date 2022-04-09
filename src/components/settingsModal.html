@@ -248,22 +248,20 @@
 
 <script type="text/html" id="NotificationSettingTemplate">
     <td class="p-2">
-        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`">
+        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.inGameNotification.displayName}:`">
             setting name
         </label>
     </td>
     <td class="p-2">
         <input class="clickable" type="checkbox"
-            data-bind="
-            checked: $data.observableValue()[0], attr: {name, id: 'checkbox-' + $data.name },
-            event: { change: $parent.toggle }"/>
+            data-bind="checked: $data.inGameNotification.observableValue(), attr: { name: $data.inGameNotification.name, id: 'checkbox-' + $data.inGameNotification.name }",
+            onchange="Settings.setSettingByName(this.name, this.checked)"/>
     </td>
     <td class="p-2">
-        <label data-bind="attr: { for: 'checkbox-desktop-' + $data.name }">Desktop:</label>
+        <label data-bind="attr: { for: 'checkbox-' + $data.desktopNotification.name }">Desktop:</label>
         <input class="clickable" type="checkbox"
-            data-bind="
-            checked: $data.observableValue()[1], attr: {name, id: 'checkbox-desktop-' + $data.name },
-            event: { change: $parent.toggleDesktop }"/>
+            data-bind="checked: $data.desktopNotification.observableValue(), attr: { name: $data.desktopNotification.name, id: 'checkbox-' + $data.desktopNotification.name }",
+            onchange="Settings.setSettingByName(this.name, this.checked)"/>
     </td>
 </script>
 

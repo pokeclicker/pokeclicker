@@ -1,7 +1,6 @@
 import NotificationOption from './NotificationOption';
 import Sound from '../utilities/Sound';
 import NotificationSetting from '../settings/NotificationSetting';
-import Settings from '../settings/Settings';
 import Rand from '../utilities/Rand';
 
 export default class Notifier {
@@ -31,7 +30,7 @@ export default class Notifier {
             }
 
             // Check if this type of notification is disabled
-            if (setting && !Settings.getSetting(setting.name).value) {
+            if (setting && !setting.inGameNotification.value) {
                 return;
             }
 
