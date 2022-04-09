@@ -156,25 +156,28 @@
 
 <script type="text/html" id="KeyChoiceSettingTemplate">
     <td class="p-2">
-        <kbd style="position:absolute;left:5px;" data-bind="visible: $data.prefix || $data.suffix, text: `${$data.prefix}${$data.observableValue()}${$data.suffix}`">Key</kbd>
         <knockout data-bind="text: `${$data.displayName}:`">setting name</knockout>
     </td>
     <td class="p-0" data-bind="tooltip: {
         title: 'Click here to set a new key',
         trigger: 'hover',
     }">
-        <input class="btn" data-bind="event: {
-            keypress: (s, e) => {
-                s.set(e.code);
-                e.currentTarget.blur();
-            },
-            click: (s, e) => {
-                e.currentTarget.value = 'press a key...';
-            },
-            blur: (s, e) => {
-                e.currentTarget.value = s.value;
-            }
-        }, value: $data.value"
-            readonly/></input>
+    
+        <kbd contenteditable="true" spellcheck="false"
+            class="btn-block"
+            style="padding: 10px 0;"
+            data-bind="event: {
+                keypress: (s, e) => {
+                    s.set(e.code);
+                    e.currentTarget.blur();
+                    return false;
+                },
+                click: (s, e) => {
+                    e.currentTarget.innerHTML = `<code>${s.prefix}</code>...<code>${s.suffix}</code>`;
+                },
+                blur: (s, e) => {
+                    e.currentTarget.innerHTML = `<code>${s.prefix}</code>${s.observableValue()}<code>${s.suffix}</code>`;
+                }
+            }, html: `<code>${$data.prefix}</code>${$data.observableValue()}<code>${$data.suffix}</code>`">Key</kbd>
     </td>
 </script>
