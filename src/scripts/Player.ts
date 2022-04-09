@@ -71,8 +71,10 @@ class Player {
         // TODO(@Isha) move to underground classes.
         const mineInventory = (savedPlayer.mineInventory || [])
             // TODO: Convert this to object spread after we're on TS modules
-            .map((v) => Object.assign({}, v, { amount: ko.observable(v.amount) }))
-            .map((v) => Object.assign({}, v, { sellLocked: ko.observable(v.sellLocked) }));
+            .map((v) => Object.assign({}, v, {
+                amount: ko.observable(v.amount),
+                sellLocked: ko.observable(v.sellLocked)
+            }));
         this.mineInventory = ko.observableArray(mineInventory);
 
         this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
