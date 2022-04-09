@@ -284,7 +284,7 @@
                             s.set('None');
                             break;
                         default:
-                            s.set(e.code);
+                            s.set(GameController.convertKey(e.key));
                     }
                     e.currentTarget.blur();
                     e.stopPropagation();
@@ -294,8 +294,8 @@
                     e.currentTarget.innerHTML = `<code>${s.prefix}</code>...<code>${s.suffix}</code>`;
                 },
                 blur: (s, e) => {
-                    e.currentTarget.innerHTML = `<code>${s.prefix}</code>${s.observableValue().replace(/Key/,'')}<code>${s.suffix}</code>`;
+                    e.currentTarget.innerHTML = `<code>${s.prefix}</code>${s.observableValue()}<code>${s.suffix}</code>`;
                 }
-            }, html: `<code>${$data.prefix}</code>${$data.observableValue().replace(/Key/,'')}<code>${$data.suffix}</code>`">Key</kbd>
+            }, html: `<code>${$data.prefix}</code>${$data.observableValue()}<code>${$data.suffix}</code>`">Key</kbd>
     </td>
 </script>

@@ -17,6 +17,14 @@ class GameController {
         });
     }
 
+    static convertKey(key: string) {
+        let newKey = key.length > 1 ? key : key.toUpperCase();
+        if (newKey == ' ') {
+            newKey = 'Space';
+        }
+        return newKey;
+    }
+
     static simulateKey(code: string, type = 'keydown', modifiers = {}) {
         const evtName = type.startsWith('key') ? type : `key${type}`;
 
@@ -119,19 +127,20 @@ class GameController {
             }
 
             e.preventDefault();
+            const key = GameController.convertKey(e.key);
 
             // Set flags for any key currently pressed down (used to check if key held down currently)
-            GameController.keyHeld[e.code] = true;
+            GameController.keyHeld[key] = true;
 
             // Set our number key if defined (-1 for 0 indexed)
-            const numberKey = (+e.key) - 1;
+            const numberKey = (+key) - 1;
             const isNumberKey = !isNaN(numberKey);
 
             const visibleModals = $('.modal:visible').length;
 
             // Safari Zone
             if (App.game.gameState === GameConstants.GameState.safari) {
-                const dir = GameConstants.KeyCodeToDirection[e.code];
+                const dir = GameConstants.KeyCodeToDirection[key];
                 if (dir) {
                     Safari.move(dir);
                 }
@@ -141,13 +150,13 @@ class GameController {
 
             // Within modals
             if ($farmsModal.data('bs.modal')?._isShown) {
-                if (e.code == Settings.getSetting('hotkey.farm.toggleShovel').value) {
+                if (key == Settings.getSetting('hotkey.farm.toggleShovel').value) {
                     FarmController.selectedShovel() ? FarmController.selectedShovel(false) : FarmController.selectedShovel(true);
                     return;
                 }
             }
             if ($undergroundModal.data('bs.modal')?._isShown) {
-                switch (e.code) {
+                switch (key) {
                     case Settings.getSetting('hotkey.underground.hammer').value:
                         Mine.toolSelected(Mine.Tool.Hammer);
                         return;
@@ -208,7 +217,7 @@ class GameController {
                     const firstRoute = Routes.getRoutesByRegion(player.region)[0].number;
                     const lastRoute = Routes.getRoutesByRegion(player.region)[Routes.getRoutesByRegion(player.region).length - 1].number;
                     // Allow '=' to fallthrough to '+' since they share a key on many keyboards
-                    switch (e.key) {
+                    switch (key) {
                         case '=':
                         case '+':
                             if (initialRoute + 1 > MapHelper.normalizeRoute(lastRoute, player.region)) {
@@ -229,7 +238,7 @@ class GameController {
 
                 // Dungeons
                 if (App.game.gameState === GameConstants.GameState.dungeon) {
-                    switch (e.code) {
+                    switch (key) {
                         case 'ArrowUp':
                         case Settings.getSetting('hotkey.dungeon.up').value:
                             DungeonRunner.map.moveUp();
@@ -260,7 +269,7 @@ class GameController {
 
                 // Within towns
                 if (App.game.gameState === GameConstants.GameState.town) {
-                    if (e.code === Settings.getSetting('hotkey.town.start').value) {
+                    if (key === Settings.getSetting('hotkey.town.start').value) {
                         if (player.town().gym) {
                             GymRunner.startGym(player.town().gym);
                         } else if (player.town().dungeon) {
@@ -284,7 +293,7 @@ class GameController {
             }
 
             // Anywhere keys
-            switch (e.code) {
+            switch (key) {
                 case Settings.getSetting('hotkey.farm').value:
                     // Open the Farm
                     if (farms.canAccess() && !$farmsModal.data('disable-toggle')) {
@@ -348,15 +357,16 @@ class GameController {
                 return;
             }
 
+            const key = GameController.convertKey(e.key);
             // Our key is no longer being held down
-            delete GameController.keyHeld[e.code];
+            delete GameController.keyHeld[key];
 
             if (App.game.gameState === GameConstants.GameState.safari) {
-                const dir = GameConstants.KeyCodeToDirection[e.code];
+                const dir = GameConstants.KeyCodeToDirection[key];
                 if (dir) {
                     e.preventDefault();
                     Safari.stop(dir);
-                } else if (e.code === 'Space') {
+                } else if (key === 'Space') {
                     e.preventDefault();
                 }
             }
