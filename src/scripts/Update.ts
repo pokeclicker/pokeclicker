@@ -700,15 +700,15 @@ class Update implements Saveable {
                 delete saveData.statistics.shinyPokemonCaptured[oldID];
                 delete saveData.statistics.shinyPokemonHatched[oldID];
             });
+          },
 
-            // Note: This doesn't work, but it does with prior update functions. I'm probably missing something with creating a new version
-            '0.8.19': ({ playerData, saveData }) => {
-                saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
-                    p.effortPoints = 0;
-                    return p;
-                });
-            },
-        },
+          // Note: This doesn't work, but it does with prior update functions. I'm probably missing something with creating a new version
+          '0.8.19': ({ playerData, saveData }) => {
+              saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
+                  p.effortPoints = 0;
+                  return p;
+              });
+          }    
     };
 
     constructor() {
