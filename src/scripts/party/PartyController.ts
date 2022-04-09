@@ -36,7 +36,18 @@ class PartyController {
 
     static hasMultipleStoneEvolutionsAvailable(pokemonName: string, evoType: GameConstants.StoneType) {
         const pokemon = App.game.party.caughtPokemon.find(p => p.name == pokemonName);
-        return pokemon != undefined && this.getStoneEvolutionsCaughtStatus(pokemon.id, evoType).length > 1;
+        let found = false;
+        if (pokemon) {
+            for (const evolution of pokemon.evolutions) {
+                if (evolution instanceof StoneEvolution && evolution.stone == evoType && evolution.isSatisfied()) {
+                    if (found) {
+                        return true;
+                    }
+                    found = true;
+                }
+            }
+        }
+        return false;
     }
 
     public static getMaxLevelPokemonList(): Array<PartyPokemon> {
