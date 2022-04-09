@@ -41,6 +41,7 @@ const NotificationConstants = {
             underground_energy_full: new BooleanSetting('notification.underground_energy_full', 'Mining energy reached maximum capacity', true),
             event_start_end: new BooleanSetting('notification.event_start_end', 'Event start/end information', true),
             gym_won: new BooleanSetting('notification.gym_won', 'Gym leader defeated', true),
+            offline_earnings: new BooleanSetting('notification.offline_earnings', 'Offline earnings', true),
         },
         Hatchery: {
             ready_to_hatch: new BooleanSetting('notification.ready_to_hatch', 'Egg ready to hatch', true),

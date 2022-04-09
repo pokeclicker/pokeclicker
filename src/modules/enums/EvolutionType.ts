@@ -4,5 +4,7 @@ enum EvolutionType {
     Timed,
     Location,
     Environment,
-    Other
+    Other,
 }
+
+export default EvolutionType;

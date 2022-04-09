@@ -5,7 +5,7 @@ class GymRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
 
-    public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList['Pewter City']);
+    public static gymObservable: KnockoutObservable<Gym> = ko.observable(GymList['Pewter City']);
     public static running: KnockoutObservable<boolean> = ko.observable(false);
     public static autoRestart: KnockoutObservable<boolean> = ko.observable(false);
     public static initialRun = true;
@@ -54,12 +54,17 @@ class GymRunner {
     }
 
     private static hideGif() {
-        $('#gymCountdown').hide();
+        $('#gymGoContainer').hide();
     }
 
     public static resetGif() {
+        // If the user doesn't want the animation, just return
+        if (!Settings.getSetting('showGymGoAnimation').value) {
+            return;
+        }
+
         if (!this.autoRestart() || this.initialRun) {
-            $('#gymCountdown').show();
+            $('#gymGoContainer').show();
             setTimeout(() => {
                 $('#gymGo').attr('src', 'assets/gifs/go.gif');
             }, 0);

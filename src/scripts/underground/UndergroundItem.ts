@@ -1,4 +1,4 @@
-///<reference path="../achievements/MaxRegionRequirement.ts"/>
+///<reference path="../../declarations/requirements/MaxRegionRequirement.d.ts"/>
 ///<reference path="StoneUnlockedRequirement.ts"/>
 
 class UndergroundItem {
