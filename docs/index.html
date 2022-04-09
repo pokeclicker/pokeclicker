@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.8.17"></script>
+    <script src="scripts/modules.min.js?v=0.8.18"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.8.17"></script>
+    <script src="scripts/script.min.js?v=0.8.18"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.8.17" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.8.18" rel="stylesheet">
 
     <!-- Google Analytics-->
     <style>
@@ -283,14 +283,14 @@
             <div class="modal-body">
                 <h5><strong>Congratulations!</strong></h5>
                 <span>You have gained a</span><br>
-                <img class="key-item" src="" data-bind="attr:{ title: App.game.keyItems.itemList[KeyItemController.latestGainedItem].displayName,  src: 'assets/images/keyitems/' + KeyItems.KeyItem[KeyItemController.latestGainedItem] + '.png'}"/><br>
+                <img class="key-item" src="" data-bind="attr:{ title: App.game.keyItems.itemList[KeyItemController.latestGainedItem()].displayName,  src: 'assets/images/keyitems/' + KeyItemType[KeyItemController.latestGainedItem()] + '.png'}"/><br>
                 <span>
-                    <strong data-bind="text: App.game.keyItems.itemList[KeyItemController.latestGainedItem].displayName">Name</strong>
+                    <strong data-bind="text: App.game.keyItems.itemList[KeyItemController.latestGainedItem()].displayName">Name</strong>
                 </span><br>
-                <span data-bind="html:  App.game.keyItems.itemList[KeyItemController.latestGainedItem].description">Description</span>
+                <span data-bind="html:  App.game.keyItems.itemList[KeyItemController.latestGainedItem()].description">Description</span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: App.game.keyItems.itemList[KeyItemController.latestGainedItem].unlockReward">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: App.game.keyItems.itemList[KeyItemController.latestGainedItem()].unlockReward">Close</button>
             </div>
         </div>
     </div>
@@ -482,9 +482,9 @@
                                 <div class="col-2">
                                     <img class="clickable key-item" src=""
                                         data-bind="attr:{
-                                        src: 'assets/images/keyitems/' + KeyItems.KeyItem[$data.name] + '.png'},
+                                        src: 'assets/images/keyitems/' + KeyItemType[$data.name] + '.png'},
                                 css: {'key-item-locked': !App.game.keyItems.hasKeyItem($data.name),
-                                'key-item-selected': KeyItemController.inspectedItem == $data.name
+                                'key-item-selected': KeyItemController.inspectedItem() == $data.name
                                 },
                                 event: {
                                     mouseover: function(){KeyItemController.hover($data.name)},
@@ -496,15 +496,15 @@
                             <div class="oak-item-info">
                                 <div class="row justify-content-sm-center">
                                     <div class="col-xs-10">
-                                        <b><span data-bind="text: App.game.keyItems.itemList[KeyItemController.inspectedItem].displayName"></span></b>
+                                        <b><span data-bind="text: App.game.keyItems.itemList[KeyItemController.inspectedItem()].displayName"></span></b>
                                     </div>
                                 </div>
                                 <div class="row justify-content-sm-center">
                                     <div class="col-xs-10">
-                                        <knockout data-bind="if: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem)">
-                                            <p data-bind="html: App.game.keyItems.itemList[KeyItemController.inspectedItem].description"></p>
+                                        <knockout data-bind="if: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem())">
+                                            <p data-bind="html: App.game.keyItems.itemList[KeyItemController.inspectedItem()].description"></p>
                                         </knockout>
-                                        <knockout data-bind="ifnot: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem)">
+                                        <knockout data-bind="ifnot: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem())">
                                             <p>?????</p>
                                         </knockout>
                                     </div>
@@ -1392,7 +1392,14 @@
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
             css: { 'dungeon-pokemon-locked': $data.hidden }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
-            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock">
+            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="
+            hidden: !$data.lock,
+            tooltip: {
+                title: 'Try talking to the locals. Sometimes they know more than you think.',
+                html: true,
+                placement: 'bottom',
+                trigger: 'hover'
+            }">
           </li>
           <!-- /ko -->
           <!--Display all available bosses in this dungeon-->
@@ -1402,7 +1409,13 @@
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
             css: { 'dungeon-pokemon-locked': $data.hidden }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
-            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock">
+            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock,
+            tooltip: {
+                title: 'Try talking to the locals. Sometimes they know more than you think.',
+                html: true,
+                placement: 'bottom',
+                trigger: 'hover'
+            }">
           </li>
           <!-- /ko -->
         </ul>
@@ -1539,7 +1552,7 @@
 
 
             <div id="middle-bottom-sort-column">
-                <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
+                <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
                     App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
                         <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
@@ -1576,7 +1589,11 @@
                         <img width=30px src="" data-bind="attr: { src: Weather.image() }"/>
                     </button>
                     <div id="mapBody" class="card-body p-0 show">
-                        <button class='btn btn-sm btn-block btn-info' data-bind="click: () => SubRegions.openModal(), visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1">Subregional Travel</button>
+                        <div id="subregion-travel-buttons" class="btn-group mr-2" role="group" style="width: 100%;" data-bind="visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1">
+                            <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion - 1">&lt;</button>
+                            <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="click: () => SubRegions.openModal()">Subregional Travel</button>
+                            <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion + 1">&gt;</button>
+                        </div>
                         <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
                         <svg id="map" viewBox="0 0 1600 960" preserveAspectRatio="xMaxYMax meet">
                             <defs>
