@@ -6,3 +6,4 @@ enum FlavorType {
     Sour,
 }
 
+export default FlavorType;

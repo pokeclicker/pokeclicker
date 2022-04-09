@@ -1,5 +1,7 @@
 enum CaughtStatus {
     NotCaught,
     Caught,
-    CaughtShiny
+    CaughtShiny,
 }
+
+export default CaughtStatus;
