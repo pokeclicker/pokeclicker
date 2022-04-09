@@ -282,14 +282,11 @@
                         case 'Backspace':
                         case 'Escape':
                             s.set('None');
+                        default:
+                            s.set(e.code);
                     }
                     e.currentTarget.blur();
-                    e.stopPropagation()
-                    return false;
-                },
-                keypress: (s, e) => {
-                    s.set(e.code);
-                    e.currentTarget.blur();
+                    e.stopPropagation();
                     return false;
                 },
                 click: (s, e) => {
