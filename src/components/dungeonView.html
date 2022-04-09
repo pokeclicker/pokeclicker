@@ -87,14 +87,20 @@
                 <div class="progress-bar bg-danger" role="progressbar"
                      data-bind="attr:{ style: 'width:' + DungeonBattle.enemyPokemon().healthPercentage() + '%'}, css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunner.fightingBoss()}"
                      aria-valuemin="0" aria-valuemax="100">
-                     <span data-bind="text: DungeonBattle.enemyPokemon().health() + ' / ' + DungeonBattle.enemyPokemon().maxHealth() + (DungeonRunner.chestsOpened && ' (+' + 100*(DungeonRunner.chestsOpened / 5) + '%)')" style="font-size: 12px;"></span>
+                     <span data-bind="text: DungeonBattle.enemyPokemon().health() + ' / ' + DungeonBattle.enemyPokemon().maxHealth()" style="font-size: 12px;"></span>
                 </div>
             </div>
         </div>
         <!-- /ko -->
         <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest -->
         <div>
-            <img class="dungeon-chest" src="assets/images/dungeons/chest.png"/>
+            <div class="dungeon-chest" style="height: 95px">
+                <img src="assets/images/dungeons/chest.png"/>
+            </div>
+            <button class="btn btn-warning chest-button">
+                <p>Open</p>
+                <p>(+20% Enemy HP)</p>
+            </button>
         </div>
         <!-- /ko -->
         <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) -->
