@@ -41,7 +41,7 @@ class QuestLineHelper {
         //Buy Dungeon ticket
         const buyDungeonTicket = new CustomQuest(1, 50,
             'Buy the Dungeon ticket from Viridian City Shop.',
-            () => +App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket),
+            () => +App.game.keyItems.hasKeyItem(KeyItemType.Dungeon_ticket),
             0
         );
         tutorial.addQuest(buyDungeonTicket);
@@ -138,7 +138,7 @@ class QuestLineHelper {
         const undergroundQuestLine = new QuestLine('Mining Expedition', 'Explore the underground');
 
         //Buy Explorer Kit (no reward)
-        const buyExplorerKit = new CustomQuest(1, () => {}, 'Buy the Explorer Kit from Cinnabar Island Shop', () => +App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit), 0);
+        const buyExplorerKit = new CustomQuest(1, () => {}, 'Buy the Explorer Kit from Cinnabar Island Shop', () => +App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit), 0);
         undergroundQuestLine.addQuest(buyExplorerKit);
 
         // Mine 5 layers in the Unerground

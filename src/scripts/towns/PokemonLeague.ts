@@ -1,5 +1,6 @@
 /* eslint-disable array-bracket-newline */
 ///<reference path="Town.ts"/>
+///<reference path="TownList.ts"/>
 class PokemonLeague extends Town {
     public gymList: Gym[];
 
