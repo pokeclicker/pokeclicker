@@ -687,6 +687,9 @@ const HoennBerryMaster = new BerryMasterShop([
     ItemList['FarmHandKerry'],
 ]);
 
+//Hoenn Flute Master
+const HoennFluteMaster = new GemMasterShop([]);
+
 //Hoenn NPCs
 
 const LittlerootAide = new NPC('Professor Birch\'s Aide', [
@@ -707,6 +710,12 @@ const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
     'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...',
+]);
+
+const LavaridgeSootCollector = new NPC('Soot Collector', [
+    'Blegh! I\'ve taken three soaks in the hot springs and I can still taste the soot!',
+    'The Flute Trader in Fallarbor Town has been paying me to go collect soot to make Flutes, but I\'m sick of it.',
+    'People say they have truly mystical powers, but that they require Gems of different types to use. Also, using more Flutes at the same time costs more Gems to use',
 ]);
 
 const FortreeWeatherman = new NPC('Weatherman', [
@@ -814,7 +823,7 @@ TownList['Fallarbor Town'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 113)],
-        shops: [FallarborTownShop],
+        shops: [FallarborTownShop, HoennFluteMaster],
         npcs: [FallarborProfessorCozmo],
     }
 );
@@ -1497,6 +1506,9 @@ const AnvilleTownShop = new TownShop([
     ItemList['Meloetta (pirouette)'],
 ]);
 
+//Unova Gem Master
+const UnovaFluteMaster = new GemMasterShop([]);
+
 //Unova NPCs
 const ExcitedChild = new NPC('Excited Child', [
     'Did you hear? Did you see? It was on TV!',
@@ -1608,7 +1620,7 @@ TownList['Undella Town'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))],
-        shops: [UndellaTownShop],
+        shops: [UndellaTownShop, UnovaFluteMaster],
     }
 );
 TownList['Lacunosa Town'] = new Town(
