@@ -1009,6 +1009,7 @@ export type PokemonNameType
     | 'Necrozma (Dawn Wings)'
     | 'Necrozma (Ultra)'
     | 'Magearna'
+    | 'Magearna (Original Color)'
     | 'Marshadow'
     | 'Poipole'
     | 'Naganadel'

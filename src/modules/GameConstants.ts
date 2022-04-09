@@ -696,10 +696,10 @@ export const KeyCodeToDirection = {
     ArrowLeft: 'left',
     ArrowDown: 'down',
     ArrowRight: 'right',
-    KeyW: 'up',
-    KeyA: 'left',
-    KeyS: 'down',
-    KeyD: 'right',
+    W: 'up',
+    A: 'left',
+    S: 'down',
+    D: 'right',
 };
 
 export const FossilToPokemon = {
@@ -841,6 +841,7 @@ export const AlolaGyms = [
     'Malie City',
     'Vast Poni Canyon Trial',
     'Altar of the Sunne and Moone',
+    'Mina\'s Trial',
     'Exeggutor Island',
     'Elite Molayne',
     'Elite Olivia',

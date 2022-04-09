@@ -2270,6 +2270,19 @@ const AltaroftheSunneandMooneShop = new TownShop([
 
 //Alola NPCs
 
+const IkiOutskirtsMom = new NPC('Scratch Cat Girl', [
+    'I love cats very much, but dogs aren\'t so bad either.',
+    'Out of all the dog like Pokémon, I think Rockruff is definitely the most adorable. And it even has three evolutions! One during the day, one at night and one in between, from 5 to 6 o\'clock.',
+    'What\'s that? AM or PM?',
+    'Yes.',
+]);
+const KukuisLabProfessor = new NPC('Professor Kukui', [
+    'Are you looking for some rare Pokémon? Maybe I can help with that. Ask away!',
+    'Ultra Beast? Never heard of it. I have no idea what that is. As far as I know they simply do not exist.',
+    'Meltan? What\'s a Meltan? Nope, don\'t know about that one either.',
+    'You seem very sure about this. Look, if you\'re so certain that these things you are talking about are real, I\'m sure they will show up sooner or later. If you\'re patient...',
+    'You got me all excited. We\'ll WAIT FOR these new rare Pokémon together. Hold on, let me just UPDATE my calendar. Just to be sure I\'m free to investigate these new Pokémon that only you know about when they show up. I wouldn\'t miss this for the world.',
+]);
 const IkiKahuna = new NPC('Kahuna Hala', [
     'Welcome to Alola!',
     'Here we don\'t have gyms. We have the Island Challenge. On each of our four islands you will complete one or more trials.',
@@ -2283,7 +2296,7 @@ const HeaheaCafeOwner = new NPC('Café Owner', [
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
 ]);
 const RoyalAvenueSpectator = new NPC('Spectator', [
-    'I think batles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
+    'I think battles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
     'Evolving Pikachu or Exeggcute in Alola can result in a new form! Sometimes.',
 ]);
 const KonikoniKahuna = new NPC('Kahuna Olivia', [
@@ -2311,6 +2324,7 @@ TownList['Iki Town Outskirts'] = new Town(
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
         shops: [IkiTownOutskirtsShop],
+        npcs: [IkiOutskirtsMom],
     }
 );
 TownList['Iki Town'] = new Town(
@@ -2326,6 +2340,7 @@ TownList['Professor Kukui\'s Lab'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
+        npcs: [KukuisLabProfessor],
     }
 );
 TownList['Hau\'oli City'] = new Town(
