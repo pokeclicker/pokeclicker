@@ -201,6 +201,15 @@ export const SpriteCredits: Credit[] = [
         ],
         // NOTES: free for non-profit use.
     },
+    {
+        name: 'Someone Alive',
+        link: 'https://discordapp.com/users/824384977633411082',
+        resources: [
+            'Team Flare Aliana',
+            'Team Flare Admins',
+        ],
+        // Notes: Permission given via Discord #development-chat.
+    },
 ].map((c) => {
     SeededRand.seed(parseInt(c.name, 36));
     // eslint-disable-next-line no-param-reassign

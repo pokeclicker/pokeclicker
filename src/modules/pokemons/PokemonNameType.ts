@@ -1009,6 +1009,7 @@ export type PokemonNameType
     | 'Necrozma (Dawn Wings)'
     | 'Necrozma (Ultra)'
     | 'Magearna'
+    | 'Magearna (Original Color)'
     | 'Marshadow'
     | 'Poipole'
     | 'Naganadel'
@@ -1198,5 +1199,6 @@ export type PokemonNameType
     | 'Mega Venusaur'
     | 'Mega Charizard X'
     | 'Mega Gyarados'
+    | 'Mega Gardevoir'
     | 'Mega Rayquaza'
     | '???';

@@ -644,14 +644,71 @@ class Update implements Saveable {
 
         },
 
-        // Note: This doesn't work, but it does with prior update functions. I'm probably missing something with creating a new version
         '0.8.18': ({ playerData, saveData }) => {
-            saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
-                p.effortPoints = 0;
-                return p;
-            });
-        },
+            // Migrate event negative ID's to decimals of base form
+            const eventIDs = [
+                [-1, 25.08],
+                [-2, 25.09],
+                [-3, 150.1],
+                [-4, 143.1],
+                [-5, 175.1],
+                [-6, 1.2],
+                [-7, 25.1],
+                [-8, 25.11],
+                [-9, 133.1],
+                [-10, 1.1],
+                [-11, 2.1],
+                [-12, 3.1],
+                [-13, 4.1],
+                [-14, 5.1],
+                [-15, 6.1],
+                [-16, 7.1],
+                [-17, 8.1],
+                [-18, 9.1],
+            ];
 
+            eventIDs.forEach(([oldID, newID]) => {
+                const pokemon = saveData.party.caughtPokemon.find(p => p.id === oldID);
+                // If player hasn't caught this mon yet, return.
+                if (pokemon == undefined) {
+                    return;
+                }
+                // Update our ID
+                pokemon.id = newID;
+                if (!saveData.statistics.pokemonHatched) {
+                    saveData.statistics.pokemonHatched = {};
+                }
+                if (!saveData.statistics.shinyPokemonHatched) {
+                    saveData.statistics.shinyPokemonHatched = {};
+                }
+                // Update our statistics
+                saveData.statistics.pokemonEncountered[newID] = saveData.statistics.pokemonEncountered[oldID] || 0;
+                saveData.statistics.pokemonDefeated[newID] = saveData.statistics.pokemonDefeated[oldID] || 0;
+                saveData.statistics.pokemonCaptured[newID] = saveData.statistics.pokemonCaptured[oldID] || 0;
+                saveData.statistics.pokemonHatched[newID] = saveData.statistics.pokemonHatched[oldID] || 0;
+                saveData.statistics.shinyPokemonEncountered[newID] = saveData.statistics.shinyPokemonEncountered[oldID] || 0;
+                saveData.statistics.shinyPokemonDefeated[newID] = saveData.statistics.shinyPokemonDefeated[oldID] || 0;
+                saveData.statistics.shinyPokemonCaptured[newID] = saveData.statistics.shinyPokemonCaptured[oldID] || 0;
+                saveData.statistics.shinyPokemonHatched[newID] = saveData.statistics.shinyPokemonHatched[oldID] || 0;
+                // Delete our old statistics
+                delete saveData.statistics.pokemonEncountered[oldID];
+                delete saveData.statistics.pokemonDefeated[oldID];
+                delete saveData.statistics.pokemonCaptured[oldID];
+                delete saveData.statistics.pokemonHatched[oldID];
+                delete saveData.statistics.shinyPokemonEncountered[oldID];
+                delete saveData.statistics.shinyPokemonDefeated[oldID];
+                delete saveData.statistics.shinyPokemonCaptured[oldID];
+                delete saveData.statistics.shinyPokemonHatched[oldID];
+            });
+
+            // Note: This doesn't work, but it does with prior update functions. I'm probably missing something with creating a new version
+            '0.8.19': ({ playerData, saveData }) => {
+                saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
+                    p.effortPoints = 0;
+                    return p;
+                });
+            },
+        },
     };
 
     constructor() {

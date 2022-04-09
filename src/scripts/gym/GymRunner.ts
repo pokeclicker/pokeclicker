@@ -5,7 +5,7 @@ class GymRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
 
-    public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList['Pewter City']);
+    public static gymObservable: KnockoutObservable<Gym> = ko.observable(GymList['Pewter City']);
     public static running: KnockoutObservable<boolean> = ko.observable(false);
     public static autoRestart: KnockoutObservable<boolean> = ko.observable(false);
     public static initialRun = true;
@@ -130,10 +130,10 @@ class GymRunner {
 document.addEventListener('DOMContentLoaded', () => {
     $('#receiveBadgeModal').on('hidden.bs.modal', () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Soul) {
-            KeyItemController.showGainModal(KeyItems.KeyItem.Safari_ticket);
+            KeyItemController.showGainModal(KeyItemType.Safari_ticket);
         }
         if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
-            KeyItemController.showGainModal(KeyItems.KeyItem.Gem_case);
+            KeyItemController.showGainModal(KeyItemType.Gem_case);
         }
     });
 });

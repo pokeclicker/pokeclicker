@@ -1,3 +1,4 @@
+///<reference path="../../../declarations/enums/EvolutionType.d.ts"/>
 abstract class Evolution {
     type: EvolutionType[];
 

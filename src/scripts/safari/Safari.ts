@@ -159,7 +159,7 @@ class Safari {
     }
 
     private static canAccess() {
-        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Safari_ticket);
+        return App.game.keyItems.hasKeyItem(KeyItemType.Safari_ticket);
     }
 
     static show() {

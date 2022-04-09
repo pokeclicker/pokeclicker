@@ -346,7 +346,7 @@ class Underground implements Feature {
     }
 
     public canAccess() {
-        return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
+        return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit);
     }
 
     calculateItemEffect(item: GameConstants.EnergyRestoreSize) {
