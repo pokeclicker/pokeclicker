@@ -278,13 +278,19 @@
             style="padding: 10px 0;"
             data-bind="event: {
                 keydown: (s, e) => {
-                    switch(e.code) {
+                    const key = GameController.convertKey(e.key);
+                    switch(key) {
                         case 'Backspace':
                         case 'Escape':
                             s.set('None');
                             break;
+                        case 'Shift':
+                        case 'Ctrl':
+                        case 'Alt':
+                        case 'Meta':
+                            return;
                         default:
-                            s.set(GameController.convertKey(e.key));
+                            s.set(key);
                     }
                     e.currentTarget.blur();
                     e.stopPropagation();
