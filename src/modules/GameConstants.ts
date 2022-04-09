@@ -979,6 +979,7 @@ export const SinnohDungeons = [
     'Spear Pillar',
     'Distortion World',
     'Victory Road Sinnoh',
+    'Sendoff Spring',
     'Fullmoon Island',
     'Newmoon Island',
     'Flower Paradise',

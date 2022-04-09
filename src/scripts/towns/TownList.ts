@@ -1398,10 +1398,15 @@ TownList['Victory Road Sinnoh'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 223)]
 );
+TownList['Sendoff Spring'] = new DungeonTown(
+    'Sendoff Spring',
+    GameConstants.Region.sinnoh,
+    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
+);
 TownList['Hall of Origin'] = new DungeonTown(
     'Hall of Origin',
     GameConstants.Region.sinnoh,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Spear Pillar'))]
+    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
 );
 TownList['Fullmoon Island'] = new DungeonTown(
     'Fullmoon Island',

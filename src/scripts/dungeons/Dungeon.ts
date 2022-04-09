@@ -2937,8 +2937,7 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
                 new GymPokemon('Gyarados', 1128000, 46),
                 new GymPokemon('Weavile', 1128000, 47),
             ], { weight: 1 }, 'Cyrus', '(cyrus)'),
-        new DungeonBossPokemon('Dusclops', 5640000, 45),
-        new DungeonBossPokemon('Giratina (altered)', 11880000, 45, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
+        new DungeonBossPokemon('Giratina (altered)', 11880000, 45, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)}),
     ],
     86500, 217);
 
@@ -2963,6 +2962,17 @@ dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
         new DungeonBossPokemon('Gabite', 7000000, 100),
     ],
     89500, 223);
+
+dungeonList['Sendoff Spring'] = new Dungeon('Sendoff Spring',
+    ['Golbat', 'Golduck', 'Graveler', 'Goldeen', 'Magikarp', 'Staravia', 'Bibarel', 'Chingling'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    2603000,
+    [
+        new DungeonBossPokemon('Seaking', 10000000, 100),
+        new DungeonBossPokemon('Gyarados', 10000000, 100),
+        new DungeonBossPokemon('Dusclops', 10000000, 100),
+    ],
+    96500, 230);
 
 dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
     ['Slowpoke', 'Spearow', 'Garchomp', 'Slakoth', 'Eevee', 'Breloom', 'Absol'],
@@ -3057,7 +3067,7 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
         new DungeonBossPokemon('Shaymin (land)', 11000000, 50),
         new DungeonBossPokemon('Shaymin (sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement(pokemonMap['Shaymin (land)'])}),
     ],
-    96500, 201);
+    96500, 230);
 
 dungeonList['Snowpoint Temple'] = new Dungeon('Snowpoint Temple',
     ['Golbat', 'Sneasel', 'Smoochum'],
