@@ -191,10 +191,15 @@ class Game {
         }
 
         this.interval = setInterval(() => !this.worker || !Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null, GameConstants.TICK_TIME);
+        window.onbeforeunload = () => {
+            player._lastSeen = Date.now();
+            Save.store(player);
+        };
     }
 
     stop() {
         clearTimeout(this.interval);
+        window.onbeforeunload = () => {};
     }
 
     gameTick() {
