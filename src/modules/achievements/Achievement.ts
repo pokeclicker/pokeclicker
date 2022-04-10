@@ -7,6 +7,7 @@ import AchievementRequirement from '../requirements/AchievementRequirement';
 import * as GameConstants from '../GameConstants';
 import { LogBookTypes } from '../logbook/LogBookTypes';
 import LogEvent from '../LogEvent';
+import AchievementHandler from '../../scripts/achievements/AchievementHandler';
 
 export default class Achievement {
     public isCompleted: KnockoutComputed<boolean> = ko.pureComputed(() => this.achievable() && (this.unlocked || this.property.isCompleted()));
