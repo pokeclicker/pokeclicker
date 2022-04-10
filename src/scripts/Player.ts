@@ -79,6 +79,7 @@ class Player {
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
         this.effectTimer = Save.initializeEffectTimer(savedPlayer.effectTimer || {});
         this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
+        this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
 
         // Save game origins, useful for tracking down any errors that may not be related to the main game
         this._origins = [...new Set((savedPlayer.origin || [])).add(window.location?.origin)];
@@ -94,7 +95,8 @@ class Player {
     public effectList: { [name: string]: KnockoutObservable<number> } = {};
     public effectTimer: { [name: string]: KnockoutObservable<string> } = {};
 
-    private highestRegion: KnockoutObservable<GameConstants.Region>;
+    public highestRegion: KnockoutObservable<GameConstants.Region>;
+    public highestSubRegion: KnockoutObservable<number>;
 
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
         this._itemList = value;
@@ -142,6 +144,9 @@ class Player {
             value = 0;
         }
         this._subregion(value);
+        if (value > this.highestSubRegion()) {
+            this.highestSubRegion(value);
+        }
         const subregion = SubRegions.getSubRegionById(this.region, value);
 
         if (subregion.startRoute) {
