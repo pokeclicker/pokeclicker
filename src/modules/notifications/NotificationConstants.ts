@@ -51,6 +51,9 @@ const NotificationConstants = {
             event_start_end: new NotificationSetting('notification.event_start_end', 'Event start/end information', true, false, NotificationWarnOnBlocked),
             gym_won: new NotificationSetting('notification.gym_won', 'Gym leader defeated', true, false, NotificationWarnOnBlocked),
             offline_earnings: new NotificationSetting('notification.offline_earnings', 'Offline earnings', true, false, NotificationWarnOnBlocked),
+            achievement_complete: new NotificationSetting('notification.achievement_complete', 'Achievement complete', true, false, NotificationWarnOnBlocked),
+            new_catch: new NotificationSetting('notification.new_catch', 'New Pokémon/shiny captured', true, false, NotificationWarnOnBlocked),
+            battle_frontier: new NotificationSetting('notification.battle_frontier', 'Battle Frontier', true, false, NotificationWarnOnBlocked),
         },
         Hatchery: {
             ready_to_hatch: new NotificationSetting('notification.ready_to_hatch', 'Egg ready to hatch', true, false, NotificationWarnOnBlocked),
