@@ -13,6 +13,7 @@ export default class Notifier {
         sound = null,
         setting = null,
         image = null,
+        htmlLessMessage = null,
     }: {
         message: string;
         type?: NotificationOption;
@@ -22,6 +23,7 @@ export default class Notifier {
         sound?: Sound;
         setting?: NotificationSetting;
         image?: string;
+        htmlLessMessage?: string;
     }): void {
         $(document).ready(() => {
             // If we have sounds enabled for this, play it now
@@ -31,7 +33,7 @@ export default class Notifier {
 
             if (setting && setting.desktopNotification.value && Notification.permission === 'granted') {
                 const desktopNotification = new Notification(title, {
-                    body: message,
+                    body: htmlLessMessage ?? message,
                     icon: image,
                 });
                 setTimeout(() => {
