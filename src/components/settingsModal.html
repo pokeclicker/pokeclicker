@@ -257,7 +257,10 @@
             data-bind="checked: $data.inGameNotification.observableValue(), attr: { name: $data.inGameNotification.name, id: 'checkbox-' + $data.inGameNotification.name }",
             onchange="Settings.setSettingByName(this.name, this.checked)"/>
     </td>
-    <td class="p-2">
+    <td class="p-2" data-bind="tooltip: {
+        title: 'Desktop notifications can be seen, even if the game is not in focus',
+        trigger: 'hover',
+    }">
         <label data-bind="attr: { for: 'checkbox-' + $data.desktopNotification.name }">Desktop:</label>
         <input class="clickable" type="checkbox"
             data-bind="checked: $data.desktopNotification.observableValue(), attr: { name: $data.desktopNotification.name, id: 'checkbox-' + $data.desktopNotification.name }",
