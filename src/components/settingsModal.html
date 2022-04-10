@@ -241,7 +241,7 @@
     </td>
     <td class="p-2">
         <input class="clickable" type="checkbox"
-            data-bind="checked: Settings.getSetting($data.name).observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
+            data-bind="checked: $data.observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
             onchange="Settings.setSettingByName(this.name, this.checked)"/>
     </td>
 </script>
