@@ -3088,7 +3088,7 @@ dungeonList['Snowpoint Temple'] = new Dungeon('Snowpoint Temple',
     96500, 230);
 
 dungeonList['Stark Mountain'] = new Dungeon('Stark Mountain',
-    [   
+    [
         {pokemon: 'Fearow', options: { weight: 4 }},
         {pokemon: 'Golbat', options: { weight: 4 }},
         {pokemon: 'Graveler', options: { weight: 4 }},
