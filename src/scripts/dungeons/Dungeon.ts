@@ -2485,7 +2485,15 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
         new DungeonBossPokemon('Bronzong', 5280000, 45),
         new DungeonBossPokemon('Giratina (altered)', 11880000, 45),
     ],
-    82500, 201);
+    82500, 201,
+    () => {
+        if (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]() <= 1) {
+            KeyItemController.showGainModal(KeyItemType.Pokerus_virus);
+            const starter = App.game.party.getPokemon(pokemonMap[(GameConstants.Starter[player.starter()])].id);
+            starter.pokerus = true;
+        }
+    }
+);
 
 dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
     ['Golbat', 'Graveler', 'Onix', 'Rhyhorn', 'Magneton', 'Azumarill', 'Floatzel'],

@@ -1112,6 +1112,11 @@ const HearthomeContestFan = new NPC('Contest Fan', [
     'I\'m so happy for them, all of that training in Mt. Coronet must have paid off!',
 ]);
 
+const CelesticGrandma = new NPC('Cynthia\s Grandmother', [
+    'Hello young one, have you come here to learn of Sinnoh’s mysteries?',
+    'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine… maybe they should try the Day Care?',
+]);
+
 const PalParkWarden = new NPC('Pal Park Warden', [
     'Hey! Welcome to the Pal Park, have you been to my Dad’s Safari Zone in Kanto? We don’t have as many Pokémon here, but I’ve heard that a flower Pokémon found here can bloom when it’s sunny outside!',
 ]);
@@ -1128,7 +1133,9 @@ const SnowpointYoungGirl = new NPC('Young Girl', [
 
 const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
     'Oh! I don’t get visitors often. My husband is a sailor who visits far away lands… he always tells me these fantastic things.',
-    'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine… maybe they should try the Day Care?',
+    'One time he came back and his Wailmer looked funny. We took it to the Pokécenter and they said it had caught some weird virus called Pokérus!',
+    'They said that it is a virus that can spread in the Pokémon Day Care, and that only Pokémon that aren’nt fully leveled up can spread it',
+    'Oddly enough, Wailmer seemed stronger than ever! If you have a Pokémon with Pokérus, try catching more of that type of Pokémon!',
 ]);
 
 const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
@@ -1228,6 +1235,7 @@ TownList['Celestic Town'] = new Town(
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Fen)],
         shops: [CelesticTownShop],
+        npcs: [CelesticGrandma],
     }
 );
 TownList['Pal Park'] = new Town(

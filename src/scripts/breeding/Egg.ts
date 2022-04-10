@@ -114,8 +114,10 @@ class Egg implements Saveable {
                 partyPokemon.exp = 0;
                 partyPokemon.level = 1;
                 partyPokemon.breeding = false;
-                if (!partyPokemon.pokerus) {
-                    partyPokemon.pokerus = partyPokemon.calculatePokerus();
+                if (partyPokemon.canCatchPokerus()) {
+                    if (!partyPokemon.pokerus) {
+                        partyPokemon.pokerus = partyPokemon.calculatePokerus();
+                    }
                 }
                 partyPokemon.level = partyPokemon.calculateLevelFromExp();
                 partyPokemon.checkForLevelEvolution();

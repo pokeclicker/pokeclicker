@@ -110,7 +110,7 @@ aria-labelledby="pokedexModalLabel">
                                 <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}.svg`}"/>
                             </div>
                             <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name) && App.game.party.getPokemon($data.id).pokerus" style="position: absolute;left: 2px;top: -15px;">
-                                <img width="30px" src="" data-bind="attr: { src: `assets/images/Pokerus.png`}"/>
+                                <img width="30px" src="" data-bind="attr: { src: `assets/images/breeding/Pokerus.png`}"/>
                             </div>
                             <img src="" width="80px" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokedexHelper.getImage($data.id)}">
                             <!-- ko if: PokedexHelper.pokemonSeen($data.id) -->

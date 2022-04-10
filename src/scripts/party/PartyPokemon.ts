@@ -54,6 +54,10 @@ class PartyPokemon implements Saveable {
         return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier));
     }
 
+    public canCatchPokerus(): boolean {
+        return App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
+    }
+
     public calculatePokerus(): boolean {
         // Egg can't hatch and Egg has pokerus
         return App.game.breeding.eggList.some(e => {
