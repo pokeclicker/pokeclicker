@@ -15,7 +15,9 @@ class SpecialEvents implements Feature {
         }
     }
 
-    initialize(): void {}
+    initialize(): void {
+        SpecialEvents.events.forEach(event => event.initialize());
+    }
 
     fromJSON(json: any): void {
         if (!json) {
@@ -48,6 +50,20 @@ SpecialEvents.newEvent('Lunar New Year', 'Encounter Fancy Pattern Vivillon for a
     // End
     new Date(new Date().getFullYear(), 1, 7, 23), () => {
         RoamingPokemonList.remove(GameConstants.Region.kalos, 'Vivillon (Fancy)');
+    }
+);
+// Easter
+SpecialEvents.newEvent('Easter', 'Encounter Surprise Togepi for a limited time with a dedicated Quest Line.',
+    // Start
+    new Date(new Date().getFullYear(), 3, 8, 1), () => {
+        const togepiEggHuntQuestLine = App.game.quests.getQuestLine('Togepi Egg Hunt');
+        if (togepiEggHuntQuestLine.state() == QuestLineState.inactive) {
+            App.game.quests.getQuestLine('Togepi Egg Hunt').beginQuest();
+        }
+    },
+    // End
+    new Date(new Date().getFullYear(), 3, 29, 23), () => {
+        // do not end questline, so ppl can finish it
     }
 );
 // First Event
@@ -134,4 +150,3 @@ SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the 
         dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Grinch Celebi');
     }
 );
-
