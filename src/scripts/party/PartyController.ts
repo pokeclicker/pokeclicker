@@ -36,13 +36,16 @@ class PartyController {
 
     static hasMultipleStoneEvolutionsAvailable(pokemonName: string, evoType: GameConstants.StoneType) {
         const pokemon = App.game.party.caughtPokemon.find(p => p.name == pokemonName);
+        // We only want to check against pokemon that have multiple possible evolutions that can happen now
         let found = false;
         if (pokemon) {
             for (const evolution of pokemon.evolutions) {
                 if (evolution instanceof StoneEvolution && evolution.stone == evoType && evolution.isSatisfied()) {
+                    // If we've already found 1 evolution, then there are multiple possible evolutions
                     if (found) {
                         return true;
                     }
+                    // We've found 1 possible evolution
                     found = true;
                 }
             }
