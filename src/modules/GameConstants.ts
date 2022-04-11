@@ -963,7 +963,7 @@ export const HoennDungeons = [
 
 export const SinnohDungeons = [
     'Oreburgh Gate',
-    'Ravaged Path',
+    'Valley Windworks',
     'Eterna Forest',
     'Old Chateau',
     'Team Galactic Eterna Building',

@@ -2270,8 +2270,28 @@ dungeonList['Oreburgh Gate'] = new Dungeon('Oreburgh Gate',
     ],
     39000, 203);
 
-dungeonList['Ravaged Path'] = new Dungeon('Ravaged Path',
-    ['Zubat', 'Golbat', 'Psyduck', 'Golduck', 'Magikarp', 'Barboach'],
+dungeonList['Valley Windworks'] = new Dungeon('Valley Windworks',
+    [
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Glameow', 756000, 13)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Zubat', 756000, 13)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Glameow', 756000, 11),
+                new GymPokemon('Stunky', 756000, 11),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Stunky', 756000, 13)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Zubat', 756000, 11),
+                new GymPokemon('Zubat', 756000, 11),
+            ], { weight: 1 }, undefined, '(male)'),
+    ],
     [
         {loot: 'Lucky_incense', weight: 4},
         {loot: 'Pamtre', weight: 3.5},
@@ -2282,8 +2302,12 @@ dungeonList['Ravaged Path'] = new Dungeon('Ravaged Path',
     ],
     756000,
     [
-        new DungeonBossPokemon('Gyarados', 3803000, 14),
-        new DungeonBossPokemon('Whiscash', 3803000, 14),
+        new DungeonTrainer('Commander',
+            [
+                new GymPokemon('Zubat', 1901500, 15),
+                new GymPokemon('Purugly', 1901500, 17),
+            ], { weight: 1 }, 'Mars', '(mars)'),
+        new DungeonBossPokemon('Drifloon', 3803000, 14, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Valley Windworks'))}),
     ],
     43000, 204);
 

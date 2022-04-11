@@ -1174,7 +1174,10 @@ TownList['Floaroma Town'] = new Town(
     'Floaroma Town',
     GameConstants.Region.sinnoh,
     {
-        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ravaged Path'))],
+        requirements: [
+            new RouteKillRequirement(10, GameConstants.Region.sinnoh, 204),
+            new GymBadgeRequirement(BadgeEnums.Coal),
+        ],
         shops: [FloaromaTownShop],
         npcs: [FloaromaFlowerGirl],
     }
@@ -1306,8 +1309,8 @@ TownList['Oreburgh Gate'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 203)]
 );
-TownList['Ravaged Path'] = new DungeonTown(
-    'Ravaged Path',
+TownList['Valley Windworks'] = new DungeonTown(
+    'Valley Windworks',
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 204),
