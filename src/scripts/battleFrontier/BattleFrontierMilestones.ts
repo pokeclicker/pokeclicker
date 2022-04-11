@@ -46,7 +46,6 @@ class BattleFrontierMilestones {
             Notifier.notify({
                 title: '[Battle Frontier]',
                 message: `You've successfully defeated stage ${defeatedStage} and earned:<br/><span>${reward.description}</span>!`,
-                htmlLessMessage: `You've successfully defeated stage ${defeatedStage} and earned:\n${reward.description}!`,
                 type: NotificationConstants.NotificationOption.info,
                 setting: NotificationConstants.NotificationSetting.General.battle_frontier,
                 timeout: 1e4,

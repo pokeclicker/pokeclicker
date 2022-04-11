@@ -32,8 +32,9 @@ export default class Notifier {
             }
 
             if (setting && setting.desktopNotification.value && Notification.permission === 'granted') {
+                const regex = /<br\s*[/]?>/gi;
                 const desktopNotification = new Notification(title, {
-                    body: htmlLessMessage ?? message,
+                    body: htmlLessMessage ?? message.replace(regex, '\n'),
                     icon: image,
                     silent: true,
                 });
