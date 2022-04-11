@@ -696,10 +696,10 @@ export const KeyCodeToDirection = {
     ArrowLeft: 'left',
     ArrowDown: 'down',
     ArrowRight: 'right',
-    KeyW: 'up',
-    KeyA: 'left',
-    KeyS: 'down',
-    KeyD: 'right',
+    W: 'up',
+    A: 'left',
+    S: 'down',
+    D: 'right',
 };
 
 export const FossilToPokemon = {

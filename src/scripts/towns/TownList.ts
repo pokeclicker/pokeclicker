@@ -2276,6 +2276,13 @@ const IkiOutskirtsMom = new NPC('Scratch Cat Girl', [
     'What\'s that? AM or PM?',
     'Yes.',
 ]);
+const KukuisLabProfessor = new NPC('Professor Kukui', [
+    'Are you looking for some rare Pokémon? Maybe I can help with that. Ask away!',
+    'Ultra Beast? Never heard of it. I have no idea what that is. As far as I know they simply do not exist.',
+    'Meltan? What\'s a Meltan? Nope, don\'t know about that one either.',
+    'You seem very sure about this. Look, if you\'re so certain that these things you are talking about are real, I\'m sure they will show up sooner or later. If you\'re patient...',
+    'You got me all excited. We\'ll WAIT FOR these new rare Pokémon together. Hold on, let me just UPDATE my calendar. Just to be sure I\'m free to investigate these new Pokémon that only you know about when they show up. I wouldn\'t miss this for the world.',
+]);
 const IkiKahuna = new NPC('Kahuna Hala', [
     'Welcome to Alola!',
     'Here we don\'t have gyms. We have the Island Challenge. On each of our four islands you will complete one or more trials.',
@@ -2333,6 +2340,7 @@ TownList['Professor Kukui\'s Lab'] = new Town(
     GameConstants.Region.alola,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
+        npcs: [KukuisLabProfessor],
     }
 );
 TownList['Hau\'oli City'] = new Town(
@@ -2343,11 +2351,13 @@ TownList['Hau\'oli City'] = new Town(
         shops: [HauoliCityShop],
     }
 );
+//TODO: Change requirement when UB questline is merged.
 TownList['Roadside Motel'] = new Town(
     'Roadside Motel',
     GameConstants.Region.alola,
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+        // requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+        requirements: [new NullRequirement()],
     }
 );
 TownList['Heahea City'] = new Town(
@@ -2595,10 +2605,12 @@ TownList['Poni Meadow'] = new DungeonTown(
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 28)]
 );
+//TODO: Change requirement when UB questline is merged.
 TownList['Resolution Cave'] = new DungeonTown(
     'Resolution Cave',
     GameConstants.Region.alola,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Poni Meadow'))]
+    //[new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Poni Meadow'))]
+    [new NullRequirement()]
 );
 //Galar Shops
 

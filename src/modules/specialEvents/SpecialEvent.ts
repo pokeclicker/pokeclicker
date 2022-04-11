@@ -30,8 +30,6 @@ export default class SpecialEvent {
         this.startFunction = startFunction;
         this.endTime = endTime;
         this.endFunction = endFunction;
-
-        this.initialize();
     }
 
     initialize(): void {
