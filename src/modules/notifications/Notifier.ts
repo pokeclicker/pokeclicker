@@ -35,6 +35,7 @@ export default class Notifier {
                 const desktopNotification = new Notification(title, {
                     body: htmlLessMessage ?? message,
                     icon: image,
+                    silent: true,
                 });
                 setTimeout(() => {
                     desktopNotification.close();
