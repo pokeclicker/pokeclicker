@@ -2615,6 +2615,7 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
         {loot: 'Charti', weight: 0.5, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Flower Paradise'))},
         {loot: 'Kasib', weight: 0.5, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Flower Paradise'))},
         {loot: 'Leaf_stone', weight: 0},
+        {loot: 'Bulbasaur (Rose)', weight: 0, requirement: new ClearDungeonRequirement(500, GameConstants.getDungeonIndex('Flower Paradise'))},
     ],
     2603000,
     [
