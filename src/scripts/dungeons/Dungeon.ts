@@ -2942,7 +2942,8 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
     86500, 217);
 
 dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
-    [   {pokemon: 'Golbat', options: { weight: 9.3 }},
+    [
+        {pokemon: 'Golbat', options: { weight: 9.3 }},
         {pokemon: 'Graveler', options: { weight: 9.3 }},
         {pokemon: 'Onix', options: { weight: 9.3 }},
         {pokemon: 'Rhyhorn', options: { weight: 9.3 }},
