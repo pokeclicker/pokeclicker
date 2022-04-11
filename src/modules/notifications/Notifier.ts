@@ -42,7 +42,7 @@ export default class Notifier {
             }
 
             // Check if this type of notification is disabled
-            if (setting && !setting.inGameNotification.value) {
+            if (setting && setting.inGameNotification && !setting.inGameNotification.value) {
                 return;
             }
 
