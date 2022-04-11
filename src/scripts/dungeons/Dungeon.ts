@@ -2942,7 +2942,87 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
     86500, 217);
 
 dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
-    ['Golbat', 'Graveler', 'Onix', 'Rhyhorn', 'Magneton', 'Azumarill', 'Floatzel'],
+    [   {pokemon: 'Golbat', options: { weight: 9.3 }},
+        {pokemon: 'Graveler', options: { weight: 9.3 }},
+        {pokemon: 'Onix', options: { weight: 9.3 }},
+        {pokemon: 'Rhyhorn', options: { weight: 9.3 }},
+        {pokemon: 'Magneton', options: { weight: 9.3 }},
+        {pokemon: 'Floatzel', options: { weight: 9.3 }},
+        new DungeonTrainer('Psychic',
+            [
+                new GymPokemon('Haunter', 1503000, 43),
+                new GymPokemon('Gengar', 1503000, 46),
+                new GymPokemon('Gardevoir', 1503000, 46),
+            ], { weight: 1 }, 'Bryce', '(male)'),
+        new DungeonTrainer('Bird Keeper',
+            [
+                new GymPokemon('Noctowl', 1503000, 45),
+                new GymPokemon('Togetic', 1503000, 47),
+            ], { weight: 1 }, 'Hana'),
+        new DungeonTrainer('Ace Trainer',
+            [
+                new GymPokemon('Blissey', 1503000, 45),
+                new GymPokemon('Glalie', 1503000, 46),
+                new GymPokemon('Magnezone', 1503000, 48),
+            ], { weight: 1 }, 'Mariah', '(female)'),
+        new DungeonTrainer('Ace Trainer',
+            [
+                new GymPokemon('Mamoswine', 1503000, 45),
+                new GymPokemon('Mothim', 1503000, 46),
+                new GymPokemon('Rampardos', 1503000, 48),
+            ], { weight: 1 }, 'Omar', '(male)'),
+        new DungeonTrainer('Ace Trainer',
+            [
+                new GymPokemon('Clefable', 1503000, 47),
+                new GymPokemon('Torterra', 1503000, 48),
+            ], { weight: 1 }, 'Sydney', '(female)'),
+        new DungeonTrainer('Veteran',
+            [
+                new GymPokemon('Staraptor', 1503000, 47),
+                new GymPokemon('Lickilicky', 1503000, 47),
+            ], { weight: 1 }, 'Clayton', '(male)'),
+        new DungeonTrainer('Double Team',
+            [
+                new GymPokemon('Staraptor', 1503000, 50),
+                new GymPokemon('Ambipom', 1503000, 50),
+            ], { weight: 1 }, 'Al & Kay'),
+        new DungeonTrainer('Black Belt',
+            [new GymPokemon('Machamp', 1503000, 48)],
+            { weight: 1 }, 'Miles'),
+        new DungeonTrainer('Psychic',
+            [
+                new GymPokemon('Chimecho', 1503000, 44),
+                new GymPokemon('Absol', 1503000, 45),
+                new GymPokemon('Dusknoir', 1503000, 46),
+            ], { weight: 1 }, 'Valencia', '(female)'),
+        new DungeonTrainer('Double Team',
+            [
+                new GymPokemon('Lumineon', 1503000, 50),
+                new GymPokemon('Rapidash', 1503000, 50),
+            ], { weight: 1 }, 'Pat & Jo'),
+        new DungeonTrainer('Ace Trainer',
+            [
+                new GymPokemon('Rhydon', 1503000, 47),
+                new GymPokemon('Carnivine', 1503000, 48),
+            ], { weight: 1 }, 'Henry', '(male)'),
+        new DungeonTrainer('Dragon Tamer',
+            [
+                new GymPokemon('Altaria', 1503000, 45),
+                new GymPokemon('Gabite', 1503000, 47),
+            ], { weight: 1 }, 'Ondrej'),
+        new DungeonTrainer('Veteran',
+            [
+                new GymPokemon('Porygon-Z', 1503000, 46),
+                new GymPokemon('Tangrowth', 1503000, 46),
+                new GymPokemon('Empoleon', 1503000, 46),
+            ], { weight: 1 }, 'Edgar', '(male)'),
+        new DungeonTrainer('Dragon Tamer',
+            [
+                new GymPokemon('Gible', 1503000, 43),
+                new GymPokemon('Swablu', 1503000, 45),
+                new GymPokemon('Gabite', 1503000, 47),
+            ], { weight: 1 }, 'Clinton'),
+    ],
     [
         {loot: 'Lucky_incense', weight: 4},
         {loot: 'Oran', weight: 3.75},
@@ -2959,7 +3039,6 @@ dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
     [
         new DungeonBossPokemon('Rhydon', 7000000, 100),
         new DungeonBossPokemon('Steelix', 7000000, 100),
-        new DungeonBossPokemon('Gabite', 7000000, 100),
     ],
     89500, 223);
 
