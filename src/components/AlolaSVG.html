@@ -1517,7 +1517,7 @@
             { name: "Dock"
             , x: 22, y: 46
             , width: 12, height: 6
-            , databind: "click:function(){MapHelper.openShipModal()}"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hau\\'oli City') }"
             })
         %>
 
@@ -1526,7 +1526,7 @@
             { name: "Dock"
             , x: 30, y: 43
             , width: 3, height: 3
-            , databind: "click:function(){MapHelper.openShipModal()}"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hau\\'oli City') }"
             })
         %>
 
@@ -1535,7 +1535,7 @@
             { name: "Dock"
             , x: 23, y: 45
             , width: 7, height: 1
-            , databind: "click:function(){MapHelper.openShipModal()}"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hau\\'oli City') }"
             })
         %>
     </g>
@@ -1801,7 +1801,7 @@
             { name: "Dock"
             , x: 37, y: 41
             , width: 3, height: 4
-            , databind: "click:function(){MapHelper.openShipModal()}"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Heahea City') }"
             })
         %>
     </g>
@@ -2341,14 +2341,12 @@
         <!-- PLACES OF INTEREST -->
         <!-- ------------------ -->
 
-        <!-- TODO: REMOVE IF UB QUESTLINE GETS MERGED -->
-        <%- include('templates/mapOverlay',
-            { name: "Access Denied - Future Content"
-            , x: 36, y: 30
-            , width: 4, height: 3
-            , databind: "click:function(){MapHelper.moveToTown('Seafolk Village')}, attr:{ class: MapHelper.calculateTownCssClass('Seafolk Village') }"
-            , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Poni Meadow')]() >= 1"
-            , image: "assets/images/map/transparent.png"
+        <!--Dock-->
+        <%- include('templates/mapPOI',
+            { name: "Dock"
+            , x: 82, y: 18
+            , width: 3, height: 4
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Malie City') }"
             })
         %>
     </g>
