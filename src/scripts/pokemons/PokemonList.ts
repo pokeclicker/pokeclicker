@@ -97,7 +97,7 @@ const pokemonList = createPokemonArray(
         'name': 'Bulbasaur (Rose)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 25,
-        'type': [PokemonType.Grass, PokemonType.Poison],
+        'type': [PokemonType.Grass, PokemonType.Fairy],
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
