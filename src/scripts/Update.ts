@@ -699,6 +699,11 @@ class Update implements Saveable {
                 delete saveData.statistics.shinyPokemonCaptured[oldID];
                 delete saveData.statistics.shinyPokemonHatched[oldID];
             });
+
+            playerData.mineInventory = playerData.mineInventory?.map(i => {
+                i.sellLocked = false;
+                return i;
+            }) || [];
         },
     };
 
