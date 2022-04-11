@@ -339,6 +339,64 @@ class QuestLineHelper {
         App.game.quests.questLines().push(plasmaUnovaQuestLine);
     }
 
+    public static createFindSurpriseTogepiForEasterQuestLine() {
+        const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted but cannot be found!');
+
+        const surpriseTogepi = pokemonMap['Surprise Togepi'];
+
+        const togepiInKantoSetup = () => {
+            dungeonList['Viridian Forest'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 300000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion) }));
+            App.game.statistics.pokemonDefeated[surpriseTogepi.id](0);
+        };
+        const afterDefeatingTogepiInKanto = () => {
+            Notifier.notify({
+                title: findSurpriseTogepiForEasterQuestLine.name,
+                message: 'Seems like this was just an Easter egg after all..',
+                image: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`,
+                type: NotificationConstants.NotificationOption.info,
+                timeout: 3e4,
+            });
+
+            dungeonList['Viridian Forest'].bossList = dungeonList['Viridian Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
+        };
+        const defeatTogepiInKanto = new CustomQuest(1, afterDefeatingTogepiInKanto, 'Erika reported that a strange Togepi has been seen around Kanto. Go look for it!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 0, togepiInKantoSetup);
+        findSurpriseTogepiForEasterQuestLine.addQuest(defeatTogepiInKanto);
+
+        const togepiInJohtoSetup = () => {
+            dungeonList['Ilex Forest'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 900000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion) }));
+        };
+        const afterDefeatingTogepiInJohto = () => {
+            Notifier.notify({
+                title: findSurpriseTogepiForEasterQuestLine.name,
+                message: 'I swear that was a Togepi.. well maybe not.',
+                image: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`,
+                type: NotificationConstants.NotificationOption.info,
+                timeout: 3e4,
+            });
+            dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
+        };
+        const encounterSurpriseTogepiInJohto = new CustomQuest(1, afterDefeatingTogepiInJohto, 'Another report just came in, stating that they saw a strange egg boarding the ferry to Johto!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 1, togepiInJohtoSetup);
+        findSurpriseTogepiForEasterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
+
+        const togepiInHoennSetup = () => {
+            dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 2700000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
+        };
+        const afterDefeatingTogepiInHoenn = () => {
+            App.game.party.gainPokemonById(surpriseTogepi.id);
+            Notifier.notify({
+                title: findSurpriseTogepiForEasterQuestLine.name,
+                message: 'You found the special Togepi!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+            dungeonList['Petalburg Woods'].bossList = dungeonList['Petalburg Woods'].bossList.filter(boss => boss.name != 'Egg Hunter');
+        };
+        const encounterTogepiInHoenn = new CustomQuest(1, afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in Petalburg Woods right now, maybe I should take a look?', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 2, togepiInHoennSetup);
+        findSurpriseTogepiForEasterQuestLine.addQuest(encounterTogepiInHoenn);
+
+        App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
+    }
+
     public static createSkullAetherAlolaQuestLine() {
         const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
 
@@ -383,5 +441,6 @@ class QuestLineHelper {
         this.createAquaMagmaHoennQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createSkullAetherAlolaQuestLine();
+        this.createFindSurpriseTogepiForEasterQuestLine();
     }
 }
