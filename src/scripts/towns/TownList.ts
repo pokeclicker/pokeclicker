@@ -2368,11 +2368,13 @@ TownList['Hau\'oli City'] = new Town(
         shops: [HauoliCityShop],
     }
 );
+//TODO: Change requirement when UB questline is merged.
 TownList['Roadside Motel'] = new Town(
     'Roadside Motel',
     GameConstants.Region.alola,
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+        // requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+        requirements: [new NullRequirement()],
     }
 );
 TownList['Heahea City'] = new Town(
@@ -2620,10 +2622,12 @@ TownList['Poni Meadow'] = new DungeonTown(
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 28)]
 );
+//TODO: Change requirement when UB questline is merged.
 TownList['Resolution Cave'] = new DungeonTown(
     'Resolution Cave',
     GameConstants.Region.alola,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Poni Meadow'))]
+    //[new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Poni Meadow'))]
+    [new NullRequirement()]
 );
 //Galar Shops
 
