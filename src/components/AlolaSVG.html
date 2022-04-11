@@ -1538,17 +1538,6 @@
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hau\\'oli City') }"
             })
         %>
-
-        <!-- TODO: REMOVE IF UB QUESTLINE GETS MERGED -->
-        <%- include('templates/mapOverlay',
-            { name: "Access Denied - Future Content"
-            , x: 5, y: 14.5
-            , width: 5, height: 5.5
-            , databind: "click:function(){MapHelper.moveToTown('Iki Town')}, attr:{ class: MapHelper.calculateTownCssClass('Iki Town') }"
-            , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Hau')]() >= 1"
-            , image: "assets/images/map/transparent.png"
-            })
-        %>
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala island').id">
@@ -2358,17 +2347,6 @@
             , x: 82, y: 18
             , width: 3, height: 4
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Malie City') }"
-            })
-        %>
-
-        <!-- TODO: REMOVE IF UB QUESTLINE GETS MERGED -->
-        <%- include('templates/mapOverlay',
-            { name: "Access Denied - Future Content"
-            , x: 36, y: 30
-            , width: 4, height: 3
-            , databind: "click:function(){MapHelper.moveToTown('Seafolk Village')}, attr:{ class: MapHelper.calculateTownCssClass('Seafolk Village') }"
-            , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Poni Meadow')]() >= 1"
-            , image: "assets/images/map/transparent.png"
             })
         %>
     </g>
