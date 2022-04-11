@@ -229,6 +229,7 @@ class Player {
             'effectList',
             'effectTimer',
             'highestRegion',
+            'highestSubRegion',
         ];
         const plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep);
