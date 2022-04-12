@@ -1056,6 +1056,9 @@ const SurvivalAreaShop = new TownShop([
     ItemList['Electirizer'],
     ItemList['Magmarizer'],
 ]);
+const FightAreaShop = new TownShop([
+    ItemList['Macho_Brace'],
+]);
 const ResortAreaShop = new TownShop([
     ItemList['Reaper_cloth'],
     ItemList['Dubious_disc'],
@@ -1278,6 +1281,7 @@ TownList['Fight Area'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
+        // shops: [FightAreaShop],
     }
 );
 TownList['Survival Area'] = new Town(

@@ -30,7 +30,7 @@ class AttackBonusHeldItem extends HeldItem {
     constructor(
         name: string,
         basePrice: number,
-        currency: GameConstants.Currency = GameConstants.Currency.money,
+        currency: GameConstants.Currency,
         shopOptions : ShopOptions,
         displayName: string,
         public attackBonus: number,
@@ -38,3 +38,18 @@ class AttackBonusHeldItem extends HeldItem {
         super(name, basePrice, currency, shopOptions, displayName, `Increases the attack of a pokemon by ${((attackBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked);
     }
 }
+
+class EVsGainedBonusHeldItem extends HeldItem { // TODO: make sure this class does something
+    constructor(
+        name: string,
+        basePrice: number,
+        currency: GameConstants.Currency,
+        shopOptions : ShopOptions,
+        displayName: string,
+        public gainedBonus: number,
+        regionUnlocked: GameConstants.Region) {
+        super(name, basePrice, currency, shopOptions, displayName, `Increases the EVs gained for a pokemon by ${((gainedBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked);
+    }
+}
+
+ItemList['Macho_Brace'] = new EVsGainedBonusHeldItem('Macho_Brace', 6655321, GameConstants.Currency.money, undefined, 'Macho Brace', 2, GameConstants.Region.final /* GameConstants.Region.sinnoh */);
