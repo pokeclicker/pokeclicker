@@ -109,6 +109,16 @@ export const SpriteCredits: Credit[] = [
         // NOTES: No notes about credit, can no longer find an existing profile for the user
     },
     {
+        name: 'JapuDCret',
+        link: 'https://github.com/JapuDCret',
+        image: 'https://avatars.githubusercontent.com/u/14893450?v=4',
+        resources: [
+            'Surprise Togepi',
+            'Egg Hunter',
+        ],
+        // NOTES: Permission given via PRs
+    },
+    {
         name: 'Krokotips',
         link: 'https://www.deviantart.com/krokotips',
         resources: [
