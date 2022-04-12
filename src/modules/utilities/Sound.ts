@@ -21,7 +21,7 @@ export default class Sound {
                 this.sound.play().finally(() => {
                     this.sound.pause();
                     this.sound.src = src;
-                });
+                }).catch(() => { });
                 setTimeout(() => {
                     this.sound.pause();
                     this.sound.src = src;

@@ -7,33 +7,51 @@ class QuestLineHelper {
         const tutorial = new QuestLine('Tutorial Quests', 'A short set of quests to get you going');
 
         //Defeat Starter
-        const defeatStarter = new CapturePokemonsQuest(1, 10);
-        //Capture pokemon because start sequence resets route 1 kills to 0, making this quest think it is incomplete
-        defeatStarter.customDescription = 'Defeat the Pokémon. Click to deal damage';
+        const defeatStarter = new CustomQuest(1, 10,
+            'Defeat the Pokémon. Click to deal damage',
+            () => App.game.statistics.totalPokemonDefeated(),
+            0 // Initial of 0 so it auto completes if bugged
+        );
         tutorial.addQuest(defeatStarter);
 
         //Capture 1 pokemon
-        const captureOne = new CapturePokemonsQuest(1, 20);
-        captureOne.customDescription = 'Capture 1 Pokémon. When you defeat a Pokémon, a Pokéball is thrown and you have a chance to capture it.';
+        const captureOne = new CustomQuest(1, 20,
+            'Capture 1 Pokémon. When you defeat a Pokémon, a Pokéball is thrown and you have a chance to capture it.',
+            () => App.game.statistics.totalPokemonCaptured(),
+            1 // Initial of 1 so it auto completes if bugged
+        );
         tutorial.addQuest(captureOne);
 
         //Kill 5 on route 2
-        const routeTwo = new DefeatPokemonsQuest(10, 20, 2, GameConstants.Region.kanto);
-        routeTwo.customDescription = 'Defeat 10 Pokémon on route 2. Click route 2 on the map to move there and begin fighting.';
+        const routeTwo = new CustomQuest(10, 20,
+            'Defeat 10 Pokémon on route 2. Click route 2 on the map to move there and begin fighting.',
+            () => App.game.statistics.routeKills[GameConstants.Region.kanto]['2'](),
+            0 // Initial of 0 so it auto completes if bugged
+        );
         tutorial.addQuest(routeTwo);
 
         //Buy pokeballs
-        const buyPokeballs = new BuyPokeballsQuest(10, 50, GameConstants.Pokeball.Pokeball);
-        buyPokeballs.customDescription = 'Buy 10 Pokéballs. You can find these in the Viridian City Shop.';
+        const buyPokeballs = new CustomQuest(10, 50,
+            'Buy 10 Pokéballs. You can find these in the Viridian City Shop.',
+            () => App.game.statistics.pokeballsBought[GameConstants.Pokeball.Pokeball](),
+            0 // Initial of 0 so it auto completes if bugged
+        );
         tutorial.addQuest(buyPokeballs);
 
         //Buy Dungeon ticket
-        const buyDungeonTicket = new CustomQuest(1, 50, 'Buy the Dungeon ticket from Viridian City Shop.', () => +App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket), 0);
+        const buyDungeonTicket = new CustomQuest(1, 50,
+            'Buy the Dungeon ticket from Viridian City Shop.',
+            () => +App.game.keyItems.hasKeyItem(KeyItemType.Dungeon_ticket),
+            0
+        );
         tutorial.addQuest(buyDungeonTicket);
 
         //Clear Viridian Forest
-        const clearViridianForest = new DefeatDungeonQuest(1, 50, 'Viridian Forest');
-        clearViridianForest.customDescription = 'Gather 50 Dungeon tokens by (re)capturing Pokémon, then clear the Viridian Forest dungeon.';
+        const clearViridianForest = new CustomQuest(1, 50,
+            'Gather 50 Dungeon tokens by (re)capturing Pokémon, then clear the Viridian Forest dungeon.',
+            () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Viridian Forest')](),
+            0
+        );
         tutorial.addQuest(clearViridianForest);
 
         //Defeat Pewter Gym
@@ -52,7 +70,11 @@ class QuestLineHelper {
                 ],
             });
         };
-        const pewter = new CustomQuest(1, pewterReward, 'Defeat Pewter City Gym. Click the town on the map to move there, then click the Gym button to start the battle.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pewter City')](), 0);
+        const pewter = new CustomQuest(1, pewterReward,
+            'Defeat Pewter City Gym. Click the town on the map to move there, then click the Gym button to start the battle.',
+            () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pewter City')](),
+            0
+        );
         tutorial.addQuest(pewter);
 
         App.game.quests.questLines().push(tutorial);
@@ -116,7 +138,7 @@ class QuestLineHelper {
         const undergroundQuestLine = new QuestLine('Mining Expedition', 'Explore the underground');
 
         //Buy Explorer Kit (no reward)
-        const buyExplorerKit = new CustomQuest(1, () => {}, 'Buy the Explorer Kit from Cinnabar Island Shop', () => +App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit), 0);
+        const buyExplorerKit = new CustomQuest(1, () => {}, 'Buy the Explorer Kit from Cinnabar Island Shop', () => +App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit), 0);
         undergroundQuestLine.addQuest(buyExplorerKit);
 
         // Mine 5 layers in the Unerground
@@ -317,6 +339,64 @@ class QuestLineHelper {
         App.game.quests.questLines().push(plasmaUnovaQuestLine);
     }
 
+    public static createFindSurpriseTogepiForEasterQuestLine() {
+        const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted but cannot be found!');
+
+        const surpriseTogepi = pokemonMap['Surprise Togepi'];
+
+        const togepiInKantoSetup = () => {
+            dungeonList['Viridian Forest'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 300000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion) }));
+            App.game.statistics.pokemonDefeated[surpriseTogepi.id](0);
+        };
+        const afterDefeatingTogepiInKanto = () => {
+            Notifier.notify({
+                title: findSurpriseTogepiForEasterQuestLine.name,
+                message: 'Seems like this was just an Easter egg after all..',
+                image: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`,
+                type: NotificationConstants.NotificationOption.info,
+                timeout: 3e4,
+            });
+
+            dungeonList['Viridian Forest'].bossList = dungeonList['Viridian Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
+        };
+        const defeatTogepiInKanto = new CustomQuest(1, afterDefeatingTogepiInKanto, 'Erika reported that a strange Togepi has been seen around Kanto. Go look for it!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 0, togepiInKantoSetup);
+        findSurpriseTogepiForEasterQuestLine.addQuest(defeatTogepiInKanto);
+
+        const togepiInJohtoSetup = () => {
+            dungeonList['Ilex Forest'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 900000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion) }));
+        };
+        const afterDefeatingTogepiInJohto = () => {
+            Notifier.notify({
+                title: findSurpriseTogepiForEasterQuestLine.name,
+                message: 'I swear that was a Togepi.. well maybe not.',
+                image: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`,
+                type: NotificationConstants.NotificationOption.info,
+                timeout: 3e4,
+            });
+            dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
+        };
+        const encounterSurpriseTogepiInJohto = new CustomQuest(1, afterDefeatingTogepiInJohto, 'Another report just came in, stating that they saw a strange egg boarding the ferry to Johto!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 1, togepiInJohtoSetup);
+        findSurpriseTogepiForEasterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
+
+        const togepiInHoennSetup = () => {
+            dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 2700000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
+        };
+        const afterDefeatingTogepiInHoenn = () => {
+            App.game.party.gainPokemonById(surpriseTogepi.id);
+            Notifier.notify({
+                title: findSurpriseTogepiForEasterQuestLine.name,
+                message: 'You found the special Togepi!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+            dungeonList['Petalburg Woods'].bossList = dungeonList['Petalburg Woods'].bossList.filter(boss => boss.name != 'Egg Hunter');
+        };
+        const encounterTogepiInHoenn = new CustomQuest(1, afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in Petalburg Woods right now, maybe I should take a look?', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 2, togepiInHoennSetup);
+        findSurpriseTogepiForEasterQuestLine.addQuest(encounterTogepiInHoenn);
+
+        App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
+    }
+
     public static createSkullAetherAlolaQuestLine() {
         const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
 
@@ -361,5 +441,6 @@ class QuestLineHelper {
         this.createAquaMagmaHoennQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createSkullAetherAlolaQuestLine();
+        this.createFindSurpriseTogepiForEasterQuestLine();
     }
 }

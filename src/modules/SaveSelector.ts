@@ -54,8 +54,14 @@ export default class SaveSelector {
         try {
             const rawData = localStorage.getItem(`save${key}`);
             const saveData = JSON.parse(rawData);
+            let username = saveData.profile?.name ?? 'Trainer';
+            try {
+                username = decodeURI(saveData.profile?.name ?? 'Trainer');
+            } catch (e) {
+                console.warn('Unable to parse username');
+            }
             return Profile.getTrainerCard(
-                decodeURI(saveData.profile?.name ?? 'Trainer'),
+                username,
                 saveData.profile?.trainer,
                 saveData.profile?.pokemon ?? saveData.party.caughtPokemon[0]?.id,
                 saveData.profile?.pokemonShiny ?? saveData.party.caughtPokemon[0]?.shiny,

@@ -22,7 +22,7 @@ enum BerryType {
     Aguav,
     Iapapa,
     Lum,
-    //Third Generation
+    // Third Generation
     Pomeg,
     Kelpsy,
     Qualot,
@@ -74,4 +74,4 @@ enum BerryType {
     Enigma,
 }
 
-type BerryNameType = keyof typeof BerryType;
+export default BerryType;
