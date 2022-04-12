@@ -63,7 +63,7 @@ class PartyPokemon implements Saveable {
     }
 
     public gainExp(exp: number) {
-        this.exp += exp;
+        this.exp += exp * this.getExpMultiplier();
         const oldLevel = this.level;
         const newLevel = this.calculateLevelFromExp();
         if (oldLevel !== newLevel) {
@@ -71,6 +71,14 @@ class PartyPokemon implements Saveable {
             this.attack = this.calculateAttack();
             this.checkForLevelEvolution();
         }
+    }
+
+    private getExpMultiplier() {
+        let result = 1;
+        if (this.heldItem() && this.heldItem() instanceof ExpGainedBonusHeldItem) {
+            result *= (this.heldItem() as ExpGainedBonusHeldItem).gainedBonus;
+        }
+        return result;
     }
 
     public checkForLevelEvolution() {

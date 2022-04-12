@@ -52,4 +52,18 @@ class EVsGainedBonusHeldItem extends HeldItem { // TODO: make sure this class do
     }
 }
 
+class ExpGainedBonusHeldItem extends HeldItem {
+    constructor(
+        name: string,
+        basePrice: number,
+        currency: GameConstants.Currency,
+        shopOptions : ShopOptions,
+        displayName: string,
+        public gainedBonus: number,
+        regionUnlocked: GameConstants.Region) {
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that earns the Pokémon ${((gainedBonus - 1) * 100).toFixed(0)}% bonus Experience Points.`, regionUnlocked);
+    }
+}
+
+ItemList['Wonder_Chest'] = new ExpGainedBonusHeldItem('Wonder_Chest', 10000, GameConstants.Currency.money, undefined, 'Wonder Chest', 1.15, GameConstants.Region.johto);
 ItemList['Macho_Brace'] = new EVsGainedBonusHeldItem('Macho_Brace', 6655321, GameConstants.Currency.money, undefined, 'Macho Brace', 2, GameConstants.Region.final /* GameConstants.Region.sinnoh */);

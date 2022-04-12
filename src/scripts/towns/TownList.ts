@@ -326,6 +326,7 @@ const VioletCityShop = new TownShop([
     ItemList['MediumRestore'],
     ItemList['Togepi'],
     ItemList['Mystery_egg'],
+    ItemList['Wonder_Chest'],
 ]);
 const AzaleaTownShop = new TownShop([
     ItemList['Kings_rock'],
