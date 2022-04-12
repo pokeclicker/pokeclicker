@@ -1,7 +1,7 @@
 import NotificationOption from './NotificationOption';
 import Sound from '../utilities/Sound';
-import NotificationSetting from '../settings/NotificationSetting';
 import Rand from '../utilities/Rand';
+import type NotificationSetting from '../settings/NotificationSetting';
 
 export default class Notifier {
     public static notify({
