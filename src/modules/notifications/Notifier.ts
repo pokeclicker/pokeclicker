@@ -32,9 +32,11 @@ export default class Notifier {
             }
 
             if (setting && setting.desktopNotification.value && Notification.permission === 'granted') {
-                const regex = /<br\s*[/]?>/gi;
+                const tempEl = document.createElement('div');
+                tempEl.innerHTML = strippedMessage ?? message.replace(/<br\s*[/]?>/gi, '\n');
+                const msg = tempEl.innerText.replace(/  +/g, ' ');
                 const desktopNotification = new Notification(title, {
-                    body: strippedMessage ?? message.replace(regex, '\n'),
+                    body: msg,
                     icon: image,
                     silent: true,
                 });
