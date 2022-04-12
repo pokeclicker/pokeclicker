@@ -13,7 +13,7 @@ export default class Notifier {
         sound = null,
         setting = null,
         image = null,
-        htmlLessMessage = null,
+        strippedMessage = null,
     }: {
         message: string;
         type?: NotificationOption;
@@ -23,7 +23,7 @@ export default class Notifier {
         sound?: Sound;
         setting?: NotificationSetting;
         image?: string;
-        htmlLessMessage?: string;
+        strippedMessage?: string;
     }): void {
         $(document).ready(() => {
             // If we have sounds enabled for this, play it now
@@ -34,7 +34,7 @@ export default class Notifier {
             if (setting && setting.desktopNotification.value && Notification.permission === 'granted') {
                 const regex = /<br\s*[/]?>/gi;
                 const desktopNotification = new Notification(title, {
-                    body: htmlLessMessage ?? message.replace(regex, '\n'),
+                    body: strippedMessage ?? message.replace(regex, '\n'),
                     icon: image,
                     silent: true,
                 });

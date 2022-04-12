@@ -138,7 +138,7 @@ class Game {
                 type: NotificationConstants.NotificationOption.info,
                 title: 'Offline progress',
                 message: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
-                htmlLessMessage: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: ${moneyToEarn.toLocaleString('en-US')} money`,
+                strippedMessage: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: ${moneyToEarn.toLocaleString('en-US')} money`,
                 timeout: 2 * GameConstants.MINUTE,
                 setting: NotificationConstants.NotificationSetting.General.offline_earnings,
             });
