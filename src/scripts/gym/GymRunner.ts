@@ -47,7 +47,7 @@ class GymRunner {
                 }
             });
             Notifier.notify({
-                message: `You don't have access to ${gym.leaderName}s Gym yet.<br/>${reqsList.join('<br/>')}`,
+                message: `You don't have access to ${gym.leaderName}s Gym yet.\n${reqsList.join('\n')}`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }

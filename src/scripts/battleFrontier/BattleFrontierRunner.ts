@@ -63,7 +63,7 @@ class BattleFrontierRunner {
 
         Notifier.notify({
             title: 'Battle Frontier',
-            message: `You managed to beat stage ${stageBeaten}.<br/>You received ${battlePointsEarned} BP`,
+            message: `You managed to beat stage ${stageBeaten}.\nYou received ${battlePointsEarned} BP`,
             type: NotificationConstants.NotificationOption.success,
             setting: NotificationConstants.NotificationSetting.General.battle_frontier,
             timeout: 5 * GameConstants.MINUTE,
