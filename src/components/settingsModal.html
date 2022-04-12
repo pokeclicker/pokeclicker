@@ -248,27 +248,32 @@
 
 <script type="text/html" id="NotificationSettingTemplate">
     <td class="p-2">
-        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`">
+        <label class="m-0" data-bind="attr: { for: 'checkbox-game-' + $data.name }, text: `${$data.displayName}:`">
             setting name
         </label>
     </td>
-    <!-- ko if: $data.inGameNotification != undefined -->
-    <td class="p-2">
-        <input class="clickable" type="checkbox"
-            data-bind="checked: $data.inGameNotification.observableValue(), attr: { name: $data.inGameNotification.name, id: 'checkbox-' + $data.inGameNotification.name }",
-            onchange="Settings.setSettingByName(this.name, this.checked)"/>
-    </td>
-    <!-- /ko -->
-    <!-- ko if: $data.inGameNotification == undefined -->
-    <td></td>
-    <!-- /ko -->
-    <td class="p-2" data-bind="tooltip: {
-        title: 'Desktop notifications can be seen, even if the game is not in focus',
+    <td class="p-2 tight" data-bind="tooltip: {
+        title: 'In game notifications',
         trigger: 'hover',
     }">
-        <label data-bind="attr: { for: 'checkbox-' + $data.desktopNotification.name }">Desktop:</label>
+        <!-- ko if: $data.inGameNotification != undefined -->
+        <label data-bind="attr: { for: 'checkbox-game-' + $data.inGameNotification.name }">🎮</label>
         <input class="clickable" type="checkbox"
-            data-bind="checked: $data.desktopNotification.observableValue(), attr: { name: $data.desktopNotification.name, id: 'checkbox-' + $data.desktopNotification.name }",
+            data-bind="checked: $data.inGameNotification.observableValue(), attr: { name: $data.inGameNotification.name, id: 'checkbox-game-' + $data.inGameNotification.name }"
+            onchange="Settings.setSettingByName(this.name, this.checked)"/>
+        <!-- /ko -->
+        <!-- ko if: $data.inGameNotification == undefined -->
+        <label>🎮</label>
+        <input type="checkbox" checked disabled/>
+        <!-- /ko -->
+    </td>
+    <td class="p-2 tight" data-bind="tooltip: {
+        title: 'Desktop notifications, these can be seen even if the game is not in focus',
+        trigger: 'hover',
+    }">
+        <label data-bind="attr: { for: 'checkbox-desktop-' + $data.desktopNotification.name }">🖥️</label>
+        <input class="clickable" type="checkbox"
+            data-bind="checked: $data.desktopNotification.observableValue(), attr: { name: $data.desktopNotification.name, id: 'checkbox-desktop-' + $data.desktopNotification.name }",
             onchange="Settings.setSettingByName(this.name, this.checked)"/>
     </td>
 </script>
