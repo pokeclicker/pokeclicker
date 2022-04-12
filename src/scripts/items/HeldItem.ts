@@ -35,7 +35,7 @@ class AttackBonusHeldItem extends HeldItem {
         displayName: string,
         public attackBonus: number,
         regionUnlocked: GameConstants.Region) {
-        super(name, basePrice, currency, shopOptions, displayName, `Increases the attack of a pokemon by ${((attackBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked);
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that raises the attack of the pokémon by ${((attackBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked);
     }
 }
 
@@ -48,7 +48,7 @@ class EVsGainedBonusHeldItem extends HeldItem { // TODO: make sure this class do
         displayName: string,
         public gainedBonus: number,
         regionUnlocked: GameConstants.Region) {
-        super(name, basePrice, currency, shopOptions, displayName, `Increases the EVs gained for a pokemon by ${((gainedBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked);
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that increases the EVs the pokémon gains by ${((gainedBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked);
     }
 }
 
