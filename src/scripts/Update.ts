@@ -643,7 +643,7 @@ class Update implements Saveable {
             saveData.challenges.list.disableGems = saveData.challenges?.list?.disableShards ?? false;
         },
 
-        '0.8.18': ({ playerData, saveData }) => {
+        '0.9.0': ({ playerData, saveData }) => {
             // Migrate event negative ID's to decimals of base form
             const eventIDs = [
                 [-1, 25.08],
