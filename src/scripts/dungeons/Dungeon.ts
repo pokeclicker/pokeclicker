@@ -3257,7 +3257,7 @@ dungeonList['Stark Mountain'] = new Dungeon('Stark Mountain',
                 new GymPokemon('Solrock', 2603000, 57),
                 new GymPokemon('Gallade', 2603000, 59),
             ], { weight: 1 }, 'Chelsey & Sterling', '(both)'),
-        new DungeonTrainer('Veteran & Dragon Tamer',
+        new DungeonTrainer('Dragon Warriors',
             [
                 new GymPokemon('Raticate', 2603000, 57),
                 new GymPokemon('Drifblim', 2603000, 58),
