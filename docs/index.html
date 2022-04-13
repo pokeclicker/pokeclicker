@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.8.17"></script>
+    <script src="scripts/modules.min.js?v=0.9.0"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.8.17"></script>
+    <script src="scripts/script.min.js?v=0.9.0"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.8.17" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.9.0" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -301,14 +301,14 @@
             <div class="modal-body">
                 <h5><strong>Congratulations!</strong></h5>
                 <span>You have gained a</span><br>
-                <img class="key-item" src="" data-bind="attr:{ title: App.game.keyItems.itemList[KeyItemController.latestGainedItem].displayName,  src: 'assets/images/keyitems/' + KeyItems.KeyItem[KeyItemController.latestGainedItem] + '.png'}"/><br>
+                <img class="key-item" src="" data-bind="attr:{ title: App.game.keyItems.itemList[KeyItemController.latestGainedItem()].displayName,  src: 'assets/images/keyitems/' + KeyItemType[KeyItemController.latestGainedItem()] + '.png'}"/><br>
                 <span>
-                    <strong data-bind="text: App.game.keyItems.itemList[KeyItemController.latestGainedItem].displayName">Name</strong>
+                    <strong data-bind="text: App.game.keyItems.itemList[KeyItemController.latestGainedItem()].displayName">Name</strong>
                 </span><br>
-                <span data-bind="html:  App.game.keyItems.itemList[KeyItemController.latestGainedItem].description">Description</span>
+                <span data-bind="html:  App.game.keyItems.itemList[KeyItemController.latestGainedItem()].description">Description</span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: App.game.keyItems.itemList[KeyItemController.latestGainedItem].unlockReward">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: App.game.keyItems.itemList[KeyItemController.latestGainedItem()].unlockReward">Close</button>
             </div>
         </div>
     </div>
@@ -329,7 +329,7 @@
                 <div class="form-row p-0" id="breeding-filter">
                     <div class="form-group col-12">
                         <label>Name</label>
-                        <input autocomplete="off" class="form-control" oninput="App.game.profile.name(this.value)" placeholder="name" data-bind="value: decodeURI(App.game.profile.name())"/>
+                        <input autocomplete="off" class="form-control" oninput="App.game.profile.name(this.value)" placeholder="name" data-bind="value: App.game.profile.name()"/>
                     </div>
                     <div class="form-group col-12">
                         <label>Pokemon</label>
@@ -500,9 +500,9 @@
                                 <div class="col-2">
                                     <img class="clickable key-item" src=""
                                         data-bind="attr:{
-                                        src: 'assets/images/keyitems/' + KeyItems.KeyItem[$data.name] + '.png'},
+                                        src: 'assets/images/keyitems/' + KeyItemType[$data.name] + '.png'},
                                 css: {'key-item-locked': !App.game.keyItems.hasKeyItem($data.name),
-                                'key-item-selected': KeyItemController.inspectedItem == $data.name
+                                'key-item-selected': KeyItemController.inspectedItem() == $data.name
                                 },
                                 event: {
                                     mouseover: function(){KeyItemController.hover($data.name)},
@@ -514,15 +514,15 @@
                             <div class="oak-item-info">
                                 <div class="row justify-content-sm-center">
                                     <div class="col-xs-10">
-                                        <b><span data-bind="text: App.game.keyItems.itemList[KeyItemController.inspectedItem].displayName"></span></b>
+                                        <b><span data-bind="text: App.game.keyItems.itemList[KeyItemController.inspectedItem()].displayName"></span></b>
                                     </div>
                                 </div>
                                 <div class="row justify-content-sm-center">
                                     <div class="col-xs-10">
-                                        <knockout data-bind="if: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem)">
-                                            <p data-bind="html: App.game.keyItems.itemList[KeyItemController.inspectedItem].description"></p>
+                                        <knockout data-bind="if: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem())">
+                                            <p data-bind="html: App.game.keyItems.itemList[KeyItemController.inspectedItem()].description"></p>
                                         </knockout>
-                                        <knockout data-bind="ifnot: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem)">
+                                        <knockout data-bind="ifnot: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem())">
                                             <p>?????</p>
                                         </knockout>
                                     </div>
@@ -1105,7 +1105,13 @@
         <!-- /ko -->
         <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest -->
         <div>
-            <img class="dungeon-chest" src="assets/images/dungeons/chest.png"/>
+            <div class="dungeon-chest" style="height: 95px">
+                <img src="assets/images/dungeons/chest.png"/>
+            </div>
+            <button class="btn btn-warning chest-button">
+                <p>Open</p>
+                <p>(+20% Enemy HP)</p>
+            </button>
         </div>
         <!-- /ko -->
         <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) -->
@@ -1155,7 +1161,7 @@
             </div>
         </h2>
 
-        <div id="gymCountdown">
+        <div id="gymGoContainer" data-bind="if: Settings.getSetting('showGymGoAnimation').observableValue">
           <div class="row" style="display: inline-block; vertical-align: middle;">
             <div class="col-sm-6 offset-sm-3">
               <img style="width:100%" id="gymGo" src="assets/gifs/go.gif">
@@ -1353,17 +1359,30 @@
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
             css: { 'dungeon-pokemon-locked': $data.hidden }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
-            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock">
+            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="
+            hidden: !$data.lock,
+            tooltip: {
+                title: 'Try talking to the locals. Sometimes they know more than you think.',
+                html: true,
+                placement: 'bottom',
+                trigger: 'hover'
+            }">
           </li>
           <!-- /ko -->
           <!--Display all available bosses in this dungeon-->
           <!-- ko foreach: player.town().dungeon.bossEncounterList -->
-          <li class="list-inline-item">
+          <li class="list-inline-item" data-bind="hidden: $data.hide">
             <img class="boss" src="assets/images/dungeons/boss.svg"/>
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
             css: { 'dungeon-pokemon-locked': $data.hidden }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
-            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock">
+            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock,
+            tooltip: {
+                title: 'Try talking to the locals. Sometimes they know more than you think.',
+                html: true,
+                placement: 'bottom',
+                trigger: 'hover'
+            }">
           </li>
           <!-- /ko -->
         </ul>
@@ -1500,7 +1519,7 @@
 
 
             <div id="middle-bottom-sort-column">
-                <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
+                <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
                     App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
                         <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
@@ -1537,7 +1556,13 @@
                         <img width=30px src="" data-bind="attr: { src: Weather.image() }"/>
                     </button>
                     <div id="mapBody" class="card-body p-0 show">
-                        <button class='btn btn-sm btn-block btn-info' data-bind="click: () => SubRegions.openModal(), visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1">Subregional Travel</button>
+                        <div id="subregion-travel-buttons" class="btn-group mr-2" role="group" style="width: 100%;" data-bind="
+                            visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1,
+                            css: { 'slow-flash': player.highestRegion() == player.region && SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > player.highestSubRegion() + 1 }">
+                            <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion - 1">&lt;</button>
+                            <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="click: () => SubRegions.openModal()">Subregional Travel</button>
+                            <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion + 1">&gt;</button>
+                        </div>
                         <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
                         <svg id="map" viewBox="0 0 1600 960" preserveAspectRatio="xMaxYMax meet">
                             <defs>
@@ -5856,21 +5881,6 @@
 
 </g>
 
-     <!--Route 205 Extension-->
-    
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(205, 3); } ">
-    <rect data-route='205'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(205, 3) }"
-        height="48"
-        width="32"
-        x="384" y="528">
-    </rect>
-
-</g>
-
 
     <!--Route 206-->
     
@@ -6151,22 +6161,6 @@
     </rect>
 
     <text style="font-size: 32px" x="1240" y="514">214</text>
-
-</g>
-
-
-    <!--Route 214 extra-->
-    
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(214, 3); } ">
-    <rect data-route='214'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(214, 3) }"
-        height="64"
-        width="16"
-        x="1168" y="640">
-    </rect>
 
 </g>
 
@@ -6939,17 +6933,17 @@
         attr: { class: MapHelper.calculateTownCssClass('Lake Verity') }">
 </rect>
 
-    <!--Ravaged Path-->
+    <!--Valley Windworks-->
     
 
 <rect class="city"
-    data-town="Ravaged Path" 
-    x="224"
-    y="592"
+    data-town="Valley Windworks" 
+    x="384"
+    y="528"
     height="48"
     width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Ravaged Path')},
-        attr: { class: MapHelper.calculateTownCssClass('Ravaged Path') }">
+    data-bind="click:function(){MapHelper.moveToTown('Valley Windworks')},
+        attr: { class: MapHelper.calculateTownCssClass('Valley Windworks') }">
 </rect>
 
     <!--Eterna Forest-->
@@ -7223,6 +7217,32 @@
         attr: { class: MapHelper.calculateTownCssClass('Victory Road Sinnoh') }">
 </rect>
 
+    <!--Sendoff Spring-->
+    
+
+<rect class="city"
+    data-town="Sendoff Spring" 
+    x="1200"
+    y="640"
+    height="64"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Sendoff Spring')},
+        attr: { class: MapHelper.calculateTownCssClass('Sendoff Spring') }">
+</rect>
+
+    <!--Sendoff Spring Extension-->
+    
+
+<rect class="city"
+    data-town="Sendoff Spring" 
+    x="1168"
+    y="656"
+    height="48"
+    width="32"
+    data-bind="click:function(){MapHelper.moveToTown('Sendoff Spring')},
+        attr: { class: MapHelper.calculateTownCssClass('Sendoff Spring') }">
+</rect>
+
     <!-- ------------------ -->
     <!-- PLACES OF INTEREST -->
     <!-- ------------------ -->
@@ -7278,31 +7298,31 @@
     y="416"
     height="80"
     width="80"
-    data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Snowpoint City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Distortion World&#39;)]() == 0"/>
+    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Spear Pillar&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Distortion World&#39;)]() == 0"/>
 <rect class="city"
     data-town="Distortion World" 
     x="624"
     y="416"
     height="80"
     width="80"
-    data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Snowpoint City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Distortion World&#39;)]() == 0, click:function(){MapHelper.moveToTown(&#39;Distortion World&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Distortion World&#39;) }">
+    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Spear Pillar&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Distortion World&#39;)]() == 0, click:function(){MapHelper.moveToTown(&#39;Distortion World&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Distortion World&#39;) }">
 </rect>
 
      
 
 <image href="assets/images/map/distortion_world.png" xlink:href="assets/images/map/distortion_world.png"
     x="1184"
-    y="624"
+    y="560"
     height="80"
     width="80"
-    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Distortion World&#39;)]() &gt;= 1"/>
+    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Sendoff Spring&#39;)]() &gt;= 1"/>
 <rect class="city"
     data-town="Distortion World" 
     x="1184"
-    y="624"
+    y="560"
     height="80"
     width="80"
-    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Distortion World&#39;)]() &gt;= 1, click:function(){MapHelper.moveToTown(&#39;Distortion World&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Distortion World&#39;) }">
+    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Sendoff Spring&#39;)]() &gt;= 1, click:function(){MapHelper.moveToTown(&#39;Distortion World&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Distortion World&#39;) }">
 </rect>
 
      
@@ -10248,7 +10268,7 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.alola'>
     
-    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele island').id">
         <image width="1600" height="960" xlink:href="assets/images/alola-melemele.png" href="assets/images/alola-melemele.png"></image>
 
         <!-- ------ -->
@@ -12931,7 +12951,7 @@
     y="736"
     height="96"
     width="192"
-    data-bind="click:function(){MapHelper.openShipModal()}">
+    data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Hau\&#39;oli City&#39;) }">
 </rect>
 
         <!--Dock extension-->
@@ -12943,7 +12963,7 @@
     y="688"
     height="48"
     width="48"
-    data-bind="click:function(){MapHelper.openShipModal()}">
+    data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Hau\&#39;oli City&#39;) }">
 </rect>
 
         <!--Dock extension-->
@@ -12955,300 +12975,16 @@
     y="720"
     height="16"
     width="112"
-    data-bind="click:function(){MapHelper.openShipModal()}">
+    data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Hau\&#39;oli City&#39;) }">
 </rect>
     </g>
 
-    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele & Akala islands').id">
-        <image width="1600" height="960" xlink:href="assets/images/alola.png" href="assets/images/alola.png"></image>
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala island').id">
+        <image width="1600" height="960" xlink:href="assets/images/alola.png" href="assets/images/alola-akala.png"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
         <!-- ------ -->
-
-        <!--Route 1-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
-    <rect data-route='1'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
-        height="48"
-        width="240"
-        x="288" y="384">
-    </rect>
-
-    <text style="font-size: 32px" x="400" y="418">1</text>
-
-</g>
-
-
-        <!--Route 1 Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(1, 6); } ">
-    <rect data-route='1'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 6) }"
-        height="80"
-        width="48"
-        x="480" y="432">
-    </rect>
-
-</g>
-
-
-        <!--Route 1 Hau'oli Outskirts--> 
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
-    <rect data-route='18'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
-        height="48"
-        width="272"
-        x="272" y="512">
-    </rect>
-
-    <text style="font-size: 32px" x="336" y="546">Outskirts</text>
-
-</g>
-
-
-        <!--Route 1 Hau'oli Outskirts Extension--> 
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
-    <rect data-route='18'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
-        height="80"
-        width="48"
-        x="496" y="560">
-    </rect>
-
-</g>
-
-
-        <!--Route 1 Hau'oli Outskirts Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
-    <rect data-route='18'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
-        height="48"
-        width="64"
-        x="208" y="480">
-    </rect>
-
-</g>
-
-
-        <!--Route 1 Hau'oli Outskirts Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(18, 6); } ">
-    <rect data-route='18'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 6) }"
-        height="32"
-        width="48"
-        x="272" y="480">
-    </rect>
-
-</g>
-
-
-        <!--Route 2-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
-    <rect data-route='2'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
-        height="312"
-        width="48"
-        x="64" y="144">
-    </rect>
-
-    <text style="font-size: 32px" x="80" y="310">2</text>
-
-</g>
-
-
-        <!--Route 2 Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(2, 6); } ">
-    <rect data-route='2'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 6) }"
-        height="48"
-        width="176"
-        x="112" y="144">
-    </rect>
-
-</g>
-
-
-        <!--Route 3-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
-    <rect data-route='3'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
-        height="240"
-        width="48"
-        x="384" y="144">
-    </rect>
-
-    <text style="font-size: 32px" x="400" y="274">3</text>
-
-</g>
-
-
-        <!--Route 3 Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(3, 6); } ">
-    <rect data-route='3'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 6) }"
-        height="48"
-        width="96"
-        x="288" y="144">
-    </rect>
-
-</g>
-
-
-        <!--Melemele Sea-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
-    <rect data-route='19'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
-        height="160"
-        width="80"
-        x="592" y="528">
-    </rect>
-
-    <text style="font-size: 32px" x="608" y="618">Sea</text>
-
-</g>
-
-
-        <!--Melemele Sea Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
-    <rect data-route='19'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
-        height="48"
-        width="128"
-        x="464" y="640">
-    </rect>
-
-</g>
-
-
-        <!--Melemele Sea Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
-    <rect data-route='19'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
-        height="16"
-        width="32"
-        x="560" y="624">
-    </rect>
-
-</g>
-
-
-        <!--Melemele Sea Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(19, 6); } ">
-    <rect data-route='19'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 6) }"
-        height="16"
-        width="16"
-        x="576" y="608">
-    </rect>
-
-</g>
-
-
-        <!--Kala'e Bay-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
-    <rect data-route='20'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
-        height="144"
-        width="96"
-        x="496" y="208">
-    </rect>
-
-    <text style="font-size: 32px" x="520" y="290">Bay</text>
-
-</g>
-
-
-        <!--Kala'e Bay Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
-    <rect data-route='20'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
-        height="96"
-        width="64"
-        x="432" y="240">
-    </rect>
-
-</g>
-
-
-        <!--Kala'e Bay Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(20, 6); } ">
-    <rect data-route='20'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 6) }"
-        height="16"
-        width="16"
-        x="480" y="336">
-    </rect>
-
-</g>
-
 
         <!--Route 4-->
         
@@ -13260,10 +12996,10 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(4, 6) }"
         height="176"
         width="48"
-        x="1136" y="480">
+        x="736" y="480">
     </rect>
 
-    <text style="font-size: 32px" x="1152" y="578">4</text>
+    <text style="font-size: 32px" x="752" y="578">4</text>
 
 </g>
 
@@ -13278,7 +13014,7 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(4, 6) }"
         height="48"
         width="64"
-        x="1184" y="480">
+        x="784" y="480">
     </rect>
 
 </g>
@@ -13294,10 +13030,10 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(5, 6) }"
         height="224"
         width="48"
-        x="1280" y="208">
+        x="880" y="208">
     </rect>
 
-    <text style="font-size: 32px" x="1296" y="330">5</text>
+    <text style="font-size: 32px" x="896" y="330">5</text>
 
 </g>
 
@@ -13312,10 +13048,10 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(6, 6) }"
         height="240"
         width="48"
-        x="1280" y="480">
+        x="880" y="480">
     </rect>
 
-    <text style="font-size: 32px" x="1296" y="610">6</text>
+    <text style="font-size: 32px" x="896" y="610">6</text>
 
 </g>
 
@@ -13330,7 +13066,7 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(6, 6) }"
         height="48"
         width="96"
-        x="1184" y="672">
+        x="784" y="672">
     </rect>
 
 </g>
@@ -13346,10 +13082,10 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(7, 6) }"
         height="464"
         width="48"
-        x="1472" y="144">
+        x="1072" y="144">
     </rect>
 
-    <text style="font-size: 32px" x="1488" y="386">7</text>
+    <text style="font-size: 32px" x="1088" y="386">7</text>
 
 </g>
 
@@ -13364,10 +13100,10 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(8, 6) }"
         height="48"
         width="320"
-        x="1200" y="96">
+        x="800" y="96">
     </rect>
 
-    <text style="font-size: 32px" x="1352" y="130">8</text>
+    <text style="font-size: 32px" x="952" y="130">8</text>
 
 </g>
 
@@ -13382,7 +13118,7 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(8, 6) }"
         height="112"
         width="48"
-        x="1200" y="144">
+        x="800" y="144">
     </rect>
 
 </g>
@@ -13398,7 +13134,7 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(8, 6) }"
         height="48"
         width="32"
-        x="1248" y="208">
+        x="848" y="208">
     </rect>
 
 </g>
@@ -13414,10 +13150,10 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(9, 6) }"
         height="48"
         width="144"
-        x="1040" y="832">
+        x="640" y="832">
     </rect>
 
-    <text style="font-size: 32px" x="1104" y="866">9</text>
+    <text style="font-size: 32px" x="704" y="866">9</text>
 
 </g>
 
@@ -13432,7 +13168,7 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(9, 6) }"
         height="16"
         width="48"
-        x="1136" y="816">
+        x="736" y="816">
     </rect>
 
 </g>
@@ -13448,10 +13184,10 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(21, 6) }"
         height="48"
         width="96"
-        x="1248" y="832">
+        x="848" y="832">
     </rect>
 
-    <text style="font-size: 32px" x="1264" y="866">A.O.</text>
+    <text style="font-size: 32px" x="864" y="866">A.O.</text>
 
 </g>
 
@@ -13466,7 +13202,7 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(21, 6) }"
         height="32"
         width="48"
-        x="1296" y="800">
+        x="896" y="800">
     </rect>
 
 </g>
@@ -13476,59 +13212,12 @@
         <!-- TOWNS -->
         <!-- ----- -->
 
-        <!--Iki Town-->
-        
-
-<rect class="city"
-    data-town="Iki Town" 
-    x="288"
-    y="312"
-    height="72"
-    width="80"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Iki Town')},
-        attr: { class: MapHelper.calculateTownCssClass('Iki Town') },
-        
-            css: { flash: MapHelper.ableToTravel() }
-        ">
-</rect>
-
-        <!--Hau'oli City-->
-        
-
-<rect class="city"
-    data-town="Hau&#39;oli City" 
-    x="64"
-    y="456"
-    height="72"
-    width="80"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Hau\&#39;oli City')},
-        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli City') },
-        ">
-</rect>
-
-        <!--Hau'oli City Extension-->
-        
-
-<rect class="city"
-    data-town="Hau&#39;oli City" 
-    x="144"
-    y="464"
-    height="64"
-    width="64"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Hau\&#39;oli City')},
-        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli City') },
-        ">
-</rect>
-
         <!--Heahea City-->
         
 
 <rect class="city"
     data-town="Heahea City" 
-    x="1040"
+    x="640"
     y="648"
     height="72"
     width="80"
@@ -13543,7 +13232,7 @@
 
 <rect class="city"
     data-town="Heahea City" 
-    x="1120"
+    x="720"
     y="656"
     height="64"
     width="64"
@@ -13558,7 +13247,7 @@
 
 <rect class="city"
     data-town="Paniola Town" 
-    x="1200"
+    x="800"
     y="416"
     height="64"
     width="64"
@@ -13573,7 +13262,7 @@
 
 <rect class="city"
     data-town="Royal Avenue" 
-    x="1328"
+    x="928"
     y="536"
     height="72"
     width="80"
@@ -13588,7 +13277,7 @@
 
 <rect class="city"
     data-town="Royal Avenue" 
-    x="1408"
+    x="1008"
     y="544"
     height="64"
     width="64"
@@ -13603,7 +13292,7 @@
 
 <rect class="city"
     data-town="Konikoni City" 
-    x="1024"
+    x="624"
     y="768"
     height="64"
     width="64"
@@ -13618,7 +13307,7 @@
 
 <rect class="city"
     data-town="Aether Paradise" 
-    x="720"
+    x="320"
     y="824"
     height="72"
     width="80"
@@ -13635,105 +13324,8 @@
         
 
 <rect class="city"
-    data-town="Trainers&#39; School" 
-    x="320"
-    y="464"
-    height="48"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Trainers\&#39; School')},
-        attr: { class: MapHelper.calculateTownCssClass('Trainers\&#39; School') }">
-</rect>
-
-        
-
-<rect class="city"
-    data-town="Hau&#39;oli Cemetery" 
-    x="112"
-    y="352"
-    height="48"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Hau\&#39;oli Cemetery')},
-        attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli Cemetery') }">
-</rect>
-
-        
-
-<rect class="city"
-    data-town="Verdant Cavern" 
-    x="224"
-    y="192"
-    height="48"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Verdant Cavern')},
-        attr: { class: MapHelper.calculateTownCssClass('Verdant Cavern') }">
-</rect>
-
-        
-
-<rect class="city"
-    data-town="Melemele Meadow" 
-    x="320"
-    y="192"
-    height="48"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Melemele Meadow')},
-        attr: { class: MapHelper.calculateTownCssClass('Melemele Meadow') }">
-</rect>
-
-        
-
-<rect class="city"
-    data-town="Seaward Cave" 
-    x="432"
-    y="192"
-    height="48"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Seaward Cave')},
-        attr: { class: MapHelper.calculateTownCssClass('Seaward Cave') }">
-</rect>
-
-        
-
-<rect class="city"
-    data-town="Ten Carat Hill" 
-    x="400"
-    y="560"
-    height="48"
-    width="96"
-    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
-        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
-</rect>
-
-        <!--Ten Carat Hill Extension-->
-        
-
-<rect class="city"
-    data-town="Ten Carat Hill" 
-    x="400"
-    y="608"
-    height="64"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
-        attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
-</rect>
-
-        
-
-<rect class="city"
-    data-town="Ruins of Conflict" 
-    x="288"
-    y="256"
-    height="48"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Ruins of Conflict')},
-        attr: { class: MapHelper.calculateTownCssClass('Ruins of Conflict') }">
-</rect>
-
-        
-
-<rect class="city"
     data-town="Pikachu Valley" 
-    x="1104"
+    x="704"
     y="432"
     height="48"
     width="64"
@@ -13745,7 +13337,7 @@
 
 <rect class="city"
     data-town="Paniola Ranch" 
-    x="1264"
+    x="864"
     y="432"
     height="48"
     width="64"
@@ -13757,7 +13349,7 @@
 
 <rect class="city"
     data-town="Brooklet Hill" 
-    x="1152"
+    x="752"
     y="320"
     height="96"
     width="80"
@@ -13770,7 +13362,7 @@
 
 <rect class="city"
     data-town="Brooklet Hill" 
-    x="1232"
+    x="832"
     y="320"
     height="48"
     width="48"
@@ -13782,7 +13374,7 @@
 
 <rect class="city"
     data-town="Wela Volcano Park" 
-    x="1408"
+    x="1008"
     y="272"
     height="48"
     width="64"
@@ -13794,7 +13386,7 @@
 
 <rect class="city"
     data-town="Lush Jungle" 
-    x="1264"
+    x="864"
     y="160"
     height="48"
     width="64"
@@ -13806,7 +13398,7 @@
 
 <rect class="city"
     data-town="Diglett&#39;s Tunnel" 
-    x="1136"
+    x="736"
     y="720"
     height="96"
     width="48"
@@ -13819,7 +13411,7 @@
 
 <rect class="city"
     data-town="Diglett&#39;s Tunnel" 
-    x="1184"
+    x="784"
     y="720"
     height="48"
     width="64"
@@ -13831,7 +13423,7 @@
 
 <rect class="city"
     data-town="Memorial Hill" 
-    x="1184"
+    x="784"
     y="832"
     height="48"
     width="64"
@@ -13843,7 +13435,7 @@
 
 <rect class="city"
     data-town="Ruins of Life" 
-    x="1280"
+    x="880"
     y="752"
     height="48"
     width="64"
@@ -13859,11 +13451,11 @@
 
 <rect class="city"
     data-town="Dock" 
-    x="144"
-    y="528"
-    height="48"
-    width="32"
-    data-bind="click:function(){MapHelper.openShipModal()}">
+    x="592"
+    y="656"
+    height="64"
+    width="48"
+    data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Heahea City&#39;) }">
 </rect>
     </g>
 
@@ -14864,22 +14456,16 @@
         <!-- PLACES OF INTEREST -->
         <!-- ------------------ -->
 
-        <!-- TODO: REMOVE IF UB QUESTLINE GETS MERGED -->
+        <!--Dock-->
         
 
-<image href="assets/images/map/transparent.png" xlink:href="assets/images/map/transparent.png"
-    x="576"
-    y="480"
-    height="48"
-    width="64"
-    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Poni Meadow&#39;)]() &gt;= 1"/>
 <rect class="city"
-    data-town="Access Denied - Future Content" 
-    x="576"
-    y="480"
-    height="48"
-    width="64"
-    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Poni Meadow&#39;)]() &gt;= 1, click:function(){MapHelper.moveToTown(&#39;Seafolk Village&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Seafolk Village&#39;) }">
+    data-town="Dock" 
+    x="1312"
+    y="288"
+    height="64"
+    width="48"
+    data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Malie City&#39;) }">
 </rect>
     </g>
 </g>
@@ -16742,6 +16328,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                     <li class="nav-item"><a class="nav-link active" href="#settings-display" data-toggle="tab">Display</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings-sound" data-toggle="tab">Sound</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings-notifications" data-toggle="tab">Notifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings-hotkeys" data-toggle="tab">Hotkeys</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings-other" data-toggle="tab">Other</a></li>
                 </ul>
 
@@ -16766,6 +16353,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
                                 <tr data-bind="visible: Object.values(App.game.challenges.list).filter(c => c.active()).length > 0, template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideChallengeRelatedModules')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayReduced')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGymGoAnimation')}"></tr>
                                 <tr><th colspan="2">Map Colors</th></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--currentPlace')}"></tr>
@@ -16802,12 +16390,129 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                             <table class="table table-striped table-hover m-0">
                                 <tbody>
                                 <!-- ko foreach: Object.values(NotificationConstants.NotificationSetting[$data]) -->
-                                    <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
+                                    <tr data-bind="template: { name: 'NotificationSettingTemplate', data: $data }"></tr>
                                 <!-- /ko -->
                                 </tbody>
                             </table>
                         </div>
                         <!-- /ko -->
+                    </div>
+
+                    <div class="tab-pane" id="settings-hotkeys">
+                        <table class="table table-striped table-hover m-0">
+                            <thead>
+                                <tr><th colspan="2">Modals</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.farm')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.hatchery')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.oakItems')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.pokeballSelection')}"></tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Farm</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.farm.toggleShovel')}"></tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Underground</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.hammer')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.chisel')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.survey')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.bomb')}"></tr>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Use Restore:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Each number refers to a specific Restore',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Oak Items</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Toggle Oak Item:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Each number refers to a specific Oak Item',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Pokéball Selector</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Select Pokéball Type:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Each number refers to a specific Pokéball',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Dungeon</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dungeon.up')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dungeon.left')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dungeon.down')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dungeon.right')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dungeon.interact')}"></tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Town</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.town.start')}"></tr>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Start Elite 4:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Each number refers to a specific Elite 4 member',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Other</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Change Routes:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Change routes based on route order',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>- or +</code></kbd>
+                                    </td>
+                                </tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.forceSave')}"></tr>
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="tab-pane" id="settings-other">
@@ -16851,7 +16556,39 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
     </td>
     <td class="p-2">
         <input class="clickable" type="checkbox"
-            data-bind="checked: Settings.getSetting($data.name).observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
+            data-bind="checked: $data.observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
+            onchange="Settings.setSettingByName(this.name, this.checked)"/>
+    </td>
+</script>
+
+<script type="text/html" id="NotificationSettingTemplate">
+    <td class="p-2">
+        <label class="m-0" data-bind="attr: { for: 'checkbox-game-' + $data.name }, text: `${$data.displayName}:`">
+            setting name
+        </label>
+    </td>
+    <td class="p-2 tight" data-bind="tooltip: {
+        title: 'In game notifications',
+        trigger: 'hover',
+    }">
+        <!-- ko if: $data.inGameNotification != undefined -->
+        <label data-bind="attr: { for: 'checkbox-game-' + $data.inGameNotification.name }">🎮</label>
+        <input class="clickable" type="checkbox"
+            data-bind="checked: $data.inGameNotification.observableValue(), attr: { name: $data.inGameNotification.name, id: 'checkbox-game-' + $data.inGameNotification.name }"
+            onchange="Settings.setSettingByName(this.name, this.checked)"/>
+        <!-- /ko -->
+        <!-- ko if: $data.inGameNotification == undefined -->
+        <label>🎮</label>
+        <input type="checkbox" checked disabled/>
+        <!-- /ko -->
+    </td>
+    <td class="p-2 tight" data-bind="tooltip: {
+        title: 'Desktop notifications, these can be seen even if the game is not in focus',
+        trigger: 'hover',
+    }">
+        <label data-bind="attr: { for: 'checkbox-desktop-' + $data.desktopNotification.name }">🖥️</label>
+        <input class="clickable" type="checkbox"
+            data-bind="checked: $data.desktopNotification.observableValue(), attr: { name: $data.desktopNotification.name, id: 'checkbox-desktop-' + $data.desktopNotification.name }",
             onchange="Settings.setSettingByName(this.name, this.checked)"/>
     </td>
 </script>
@@ -16864,7 +16601,6 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
             oninput="Settings.setSettingByName(this.name, this.value)">
 </script>
 
-
 <script type="text/html" id="ColorChoiceSettingTemplate">
     <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
     <td class="p-0" data-bind="style: { background: $data.observableValue },
@@ -16873,6 +16609,48 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
         trigger: 'hover',
     }">
         <label style="width:100%; min-height: 36px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: $data.observableValue"/></label>
+    </td>
+</script>
+
+<script type="text/html" id="KeyChoiceSettingTemplate">
+    <td class="p-2">
+        <knockout data-bind="text: `${$data.displayName}:`">setting name</knockout>
+    </td>
+    <td class="p-0" data-bind="tooltip: {
+        title: 'Click here to set a new key',
+        trigger: 'hover',
+    }">
+
+        <kbd contenteditable="true" spellcheck="false"
+            class="btn-block"
+            style="padding: 10px 0;"
+            data-bind="event: {
+                keydown: (s, e) => {
+                    const key = GameController.convertKey(e.key);
+                    switch(key) {
+                        case 'Backspace':
+                        case 'Escape':
+                            s.set('None');
+                            break;
+                        case 'Shift':
+                        case 'Ctrl':
+                        case 'Alt':
+                        case 'Meta':
+                            return;
+                        default:
+                            s.set(key);
+                    }
+                    e.currentTarget.blur();
+                    e.stopPropagation();
+                    return false;
+                },
+                click: (s, e) => {
+                    e.currentTarget.innerHTML = `<code>${s.prefix}</code>...<code>${s.suffix}</code>`;
+                },
+                blur: (s, e) => {
+                    e.currentTarget.innerHTML = `<code>${s.prefix}</code>${s.observableValue()}<code>${s.suffix}</code>`;
+                }
+            }, html: `<code>${$data.prefix}</code>${$data.observableValue()}<code>${$data.suffix}</code>`">Key</kbd>
     </td>
 </script>
 
@@ -17823,6 +17601,9 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     <span>Total net worth: <b><span data-bind="text: Underground.getDiamondNetWorth().toLocaleString('en-US')">-</span></b></span>
                     <img src='assets/images/underground/diamond.svg' width="20px'">
                 </button>
+                <button type="button" class="btn btn-success" onclick="App.game.underground.openUndergroundSellAllModal()">
+                    <span>Sell all treasures</span>
+                </button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -17858,20 +17639,77 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
             <!-- /ko -->
             <td class='vertical-middle'>
                 <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
+                    <!-- ko ifnot: valueType == "Mine Egg" -->
+                    <div class="input-group-prepend btn btn-success active">
+                        <label
+                            class="clickable m-0"
+                            data-bind="text: sellLocked() ? '🔒' : '🔓', attr: { for: 'sellLockedIndicatorOfItem' + id }"
+                        >🔓</label>
+                        <input
+                            class="hidden"
+                            type="checkbox"
+                            data-bind="checked: sellLocked(), attr: { id: 'sellLockedIndicatorOfItem' + id }, event: { change: function(){Underground.setSellLockOfMineItem(id, !sellLocked())} }"
+                        />
+                    </div>
+                    <!-- /ko -->
                     <button class='btn btn-success btn-block'
                             data-bind="attr: { 'data-itemid': id },
-                            css: { disabled: amount() <= 0 || (valueType === 'Mine Egg' && !App.game.breeding.hasFreeEggSlot()) },
+                            css: { disabled: amount() <= 0 || sellLocked() || (valueType === 'Mine Egg' && !App.game.breeding.hasFreeEggSlot()) },
                                     text: valueType === 'Mine Egg' ? 'Breed' : 'Sell',
                                     click: function(){Underground.sellMineItem($element.dataset.itemid, sellAmount() || 1)}">
                     </button>
                     <!-- ko if: valueType !== 'Mine Egg' -->
-                    <button type="button" data-bind="text: sellAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" data-bind="text: sellAmount() + '&nbsp;', css: { disabled: sellLocked() }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
                         <button class="dropdown-item" type="button" data-bind="click: function(){sellAmount($data)}, text: $data"></button>
                     </div>
                     <!-- /ko -->
                 </div>
+            </td>
+        </tr>
+    </script>
+</div>
+
+<div aria-labelledby="mineSellAllTreasuresModalLabel" class="modal fade noselect mt-5" id="mineSellAllTreasuresModal" role="dialog"
+     style="cursor:default" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document" data-bind="let: { filteredMineInvetory: player.mineInventory().filter(t => t.amount() > 0 && t.valueType != 'Mine Egg') }">
+        <div class="modal-content">
+            <div class="modal-header d-block">
+                <h4 class="mb-0">
+                    Sell all selected treasures
+                </h4>
+                (<span data-bind="text: filteredMineInvetory.filter(t => !t.sellLocked()).length + ' of ' + filteredMineInvetory.length"></span>)
+            </div>
+            <div class="modal-body p-0">
+                <table class="table table-sm table-hover table-striped m-0">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Cumulative Value</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="template: { name: 'cumulativeValueListTemplate', foreach: Object.keys(Underground.getCumulativeValues()).sort() }">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn mr-auto btn-danger" data-bind="click: function(){Underground.sellAllMineItems()}">
+                    <span>Confirm sell</span>
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/html" id="cumulativeValueListTemplate">
+        <tr data-bind="let: { valueType: $data, cumulativeValue: Underground.getCumulativeValues()[$data].cumulativeValue, imgSrc: Underground.getCumulativeValues()[$data].imgSrc }">
+            <td>
+                <img width="20px'" data-bind="attr: { src: imgSrc }">
+            </td>
+            <td>
+                <span data-bind="text: cumulativeValue + ' ' + UndergroundItem.getFullResourceName(valueType, cumulativeValue)"></span>
             </td>
         </tr>
     </script>
@@ -19071,7 +18909,7 @@ aria-labelledby="badgeCaseModalLabel">
                     <button style="position: relative;" class='btn btn-block btn-success'
                         data-dismiss='modal'
                         data-bind='visible: GameConstants.Region[$data] <= player.highestRegion() && GameConstants.Region[$data] <= GameConstants.MAX_AVAILABLE_REGION,
-                        click: () => { MapHelper.moveToTown(GameConstants.DockTowns[GameConstants.Region[$data]]); player.region = GameConstants.Region[$data]; $("#ShipModal").modal("hide");  },
+                        click: () => { MapHelper.moveToTown(GameConstants.DockTowns[GameConstants.Region[$data]]); player.region = GameConstants.Region[$data]; player._subregion(0); $("#ShipModal").modal("hide");  },
                         attr: { disabled: player.region == GameConstants.Region[$data] }'>
                         <img style="position:absolute; left: 10px;" data-bind="visible: player.region == GameConstants.Region[$data], attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` }"/> <knockout data-bind="text: GameConstants.camelCaseToString($data)">Region</knockout>
                     </button>

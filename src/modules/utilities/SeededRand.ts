@@ -1,10 +1,10 @@
 import { MINUTE, HOUR } from '../GameConstants';
 
 export default class SeededRand {
-    private static state = 12345;
-    private static readonly MOD: number = 233280;
-    private static readonly OFFSET: number = 49297;
-    private static readonly MULTIPLIER: number = 9301;
+    public static state = 12345;
+    public static readonly MOD: number = 233280;
+    public static readonly OFFSET: number = 49297;
+    public static readonly MULTIPLIER: number = 9301;
 
     public static next(): number {
         this.state = (this.state * this.MULTIPLIER + this.OFFSET) % this.MOD;

@@ -29,6 +29,7 @@ import SettingOption from './settings/SettingOption';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
 import SeededRand from './utilities/SeededRand';
+import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
 import Settings from './settings/index';
 import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
@@ -93,6 +94,7 @@ import PokeballRequirement from './requirements/PokeballRequirement';
 import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
 import QuestRequirement from './requirements/QuestRequirement';
 import RouteKillRequirement from './requirements/RouteKillRequirement';
+import SeededDateRequirement from './requirements/SeededDateRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
@@ -135,6 +137,7 @@ Object.assign(<any>window, {
     WeatherType,
     Weather,
     SeededRand,
+    SeededDateRand,
     Rand,
     Settings,
     NotificationConstants,
@@ -203,6 +206,7 @@ Object.assign(<any>window, {
     ProteinObtainRequirement,
     QuestRequirement,
     RouteKillRequirement,
+    SeededDateRequirement,
     ShinyPokemonRequirement,
     SubregionRequirement,
     TokenRequirement,

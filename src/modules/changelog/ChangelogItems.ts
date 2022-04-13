@@ -10,6 +10,22 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.0
+    new ChangelogUpdate('v0.9.0 - Alola', new Date(2022, 3, 13)),
+    new Changelog(changelogType.NEW, 'The Alola region is now available'),
+    new Changelog(changelogType.NEW, 'More hotkeys'),
+    new Changelog(changelogType.NEW, 'Customizable hotkeys'),
+    new Changelog(changelogType.NEW, 'Desktop notifications'),
+    new Changelog(changelogType.NEW, 'Added Sell-all button to Underground'),
+    new Changelog(changelogType.NEW, 'Sinnoh Quest Line'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Dungeon Achievement amounts required'),
+    new Changelog(changelogType.CHANGE, 'Adjusted shop Evolution Stone caught indicator'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some sprites'),
+    new Changelog(changelogType.CHANGE, 'Indicate HP buff when opening chests in Dungeons'),
+    new Changelog(changelogType.CHANGE, 'Changed some Sinnoh Dungeons'),
+    new Changelog(changelogType.CHANGE, 'Ruins of Alph Unown encounters'),
+    new Changelog(changelogType.FIXED, 'Save profiles not loading if they contained a % symbol'),
+
     // v0.8.17
     new ChangelogUpdate('v0.8.17', new Date(2022, 2, 31)),
     new Changelog(changelogType.NEW, 'Added Shiny achievements per region'),
