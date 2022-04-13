@@ -148,8 +148,17 @@ class PartyPokemon implements Saveable {
 
     public giveHeldItem = (heldItem: HeldItem): void => {
         if (this.heldItem() && this.heldItem().displayName == heldItem.displayName) {
-            player.gainItem(this.heldItem().name, 1);
-            this.heldItem(undefined);
+            Notifier.confirm({
+                title: 'Remove held item',
+                message: 'Held items are one time use only.\nRemoved items will be lost.\nAre you sure you want to remove it?',
+                confirm: 'remove',
+                type: NotificationConstants.NotificationOption.warning,
+            }).then((confirmed) => {
+                if (confirmed) {
+                    this.heldItem(undefined);
+                }
+            });
+
             return;
         }
 
