@@ -2322,7 +2322,7 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
         {pokemon: 'Kricketot', options: { weight: 1.8 }},
         {pokemon: 'Budew', options: { weight: 1.8 }},
         {pokemon: 'Buneary', options: { weight: 1.8 }},
-        new DungeonTrainer('Bug Catcher & Lass',
+        new DungeonTrainer('Bookworms',
             [
                 new GymPokemon('Wurmple', 812000, 9),
                 new GymPokemon('Silcoon', 812000, 11),
