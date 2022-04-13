@@ -179,6 +179,7 @@ class Save {
                     } else {
                         localStorage.removeItem(`settings${Save.key}`);
                     }
+                    window.onbeforeunload = () => {}; // To prevent the old save from being saved again
                     location.reload();
                 } else {
                     Notifier.notify({
