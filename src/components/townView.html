@@ -133,7 +133,7 @@
           <!-- /ko -->
           <!--Display all available bosses in this dungeon-->
           <!-- ko foreach: player.town().dungeon.bossEncounterList -->
-          <li class="list-inline-item">
+          <li class="list-inline-item" data-bind="hidden: $data.hide">
             <img class="boss" src="assets/images/dungeons/boss.svg"/>
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
             css: { 'dungeon-pokemon-locked': $data.hidden }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>

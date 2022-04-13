@@ -90,6 +90,7 @@ class Game {
         AchievementHandler.calculateMaxBonus(); //recalculate bonus based on active challenges
 
         const now = new Date();
+        SeededDateRand.seedWithDate(now);
         DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
         BerryDeal.generateDeals(now);
         Weather.generateWeather(now);
@@ -253,6 +254,7 @@ class Game {
 
             // Check if it's a new day
             if (old.toLocaleDateString() !== now.toLocaleDateString()) {
+                SeededDateRand.seedWithDate(now);
                 // Give the player a free quest refresh
                 this.quests.freeRefresh(true);
                 //Refresh the Underground deals
