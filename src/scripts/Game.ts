@@ -191,10 +191,14 @@ class Game {
         }
 
         this.interval = setInterval(() => !this.worker || !Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null, GameConstants.TICK_TIME);
+        window.onbeforeunload = () => {
+            this.save();
+        };
     }
 
     stop() {
         clearTimeout(this.interval);
+        window.onbeforeunload = () => {};
     }
 
     gameTick() {
@@ -271,9 +275,7 @@ class Game {
                 RoamingPokemonList.generateIncreasedChanceRoutes(now);
             }
 
-            // Save the game
-            player._lastSeen = Date.now();
-            Save.store(player);
+            this.save();
         }
 
         // Underground
@@ -306,7 +308,8 @@ class Game {
     }
 
     save() {
-
+        player._lastSeen = Date.now();
+        Save.store(player);
     }
 
     // Knockout getters/setters
