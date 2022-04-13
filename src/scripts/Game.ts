@@ -134,14 +134,14 @@ class Game {
             const moneyToEarn = Math.floor(baseMoneyToEarn * 0.5);//Debuff for offline money
             App.game.wallet.gainMoney(moneyToEarn, true);
 
-            if (Settings.getSetting('notification.offline_earnings').value) {
-                Notifier.notify({
-                    type: NotificationConstants.NotificationOption.info,
-                    title: 'Offline progress',
-                    message: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
-                    timeout: 2 * GameConstants.MINUTE,
-                });
-            }
+            Notifier.notify({
+                type: NotificationConstants.NotificationOption.info,
+                title: 'Offline progress',
+                message: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
+                strippedMessage: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: ${moneyToEarn.toLocaleString('en-US')} money`,
+                timeout: 2 * GameConstants.MINUTE,
+                setting: NotificationConstants.NotificationSetting.General.offline_earnings,
+            });
         }
     }
 
@@ -261,7 +261,7 @@ class Game {
                 if (this.underground.canAccess() || App.game.quests.isDailyQuestsUnlocked()) {
                     Notifier.notify({
                         title: 'It\'s a new day!',
-                        message: `${this.underground.canAccess() ? 'Your Underground deals have been updated.<br/>' : ''}` +
+                        message: `${this.underground.canAccess() ? 'Your Underground deals have been updated.\n' : ''}` +
                         `${App.game.quests.isDailyQuestsUnlocked() ? '<i>You have a free quest refresh.</i>' : ''}`,
                         type: NotificationConstants.NotificationOption.info,
                         timeout: 3e4,
