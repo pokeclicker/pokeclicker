@@ -1174,7 +1174,10 @@ TownList['Floaroma Town'] = new Town(
     'Floaroma Town',
     GameConstants.Region.sinnoh,
     {
-        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ravaged Path'))],
+        requirements: [
+            new RouteKillRequirement(10, GameConstants.Region.sinnoh, 204),
+            new GymBadgeRequirement(BadgeEnums.Coal),
+        ],
         shops: [FloaromaTownShop],
         npcs: [FloaromaFlowerGirl],
     }
@@ -1185,6 +1188,7 @@ TownList['Eterna City'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Eterna Forest'))],
         shops: [EternaCityShop],
+        dungeon: dungeonList['Team Galactic Eterna Building'],
         npcs: [EternaLassCaroline],
     }
 );
@@ -1211,6 +1215,7 @@ TownList['Veilstone City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 215)],
         shops: [DepartmentStoreShop],
+        dungeon: dungeonList['Team Galactic HQ'],
         npcs: [BigSpender],
     }
 );
@@ -1304,8 +1309,8 @@ TownList['Oreburgh Gate'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 203)]
 );
-TownList['Ravaged Path'] = new DungeonTown(
-    'Ravaged Path',
+TownList['Valley Windworks'] = new DungeonTown(
+    'Valley Windworks',
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 204),
@@ -1328,6 +1333,11 @@ TownList['Old Chateau'] = new DungeonTown(
         new GymBadgeRequirement(BadgeEnums.Forest),
     ]
 );
+TownList['Team Galactic Eterna Building'] = new DungeonTown(
+    'Team Galactic Eterna Building',
+    GameConstants.Region.sinnoh,
+    [new GymBadgeRequirement(BadgeEnums.Forest)]
+);
 TownList['Wayward Cave'] = new DungeonTown(
     'Wayward Cave',
     GameConstants.Region.sinnoh,
@@ -1348,48 +1358,58 @@ TownList['Iron Island'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)]
 );
+TownList['Lake Valor'] = new DungeonTown(
+    'Lake Valor',
+    GameConstants.Region.sinnoh,
+    [new GymBadgeRequirement(BadgeEnums.Mine)]
+);
+TownList['Lake Verity'] = new DungeonTown(
+    'Lake Verity',
+    GameConstants.Region.sinnoh,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lake Valor'))]
+);
 TownList['Mt. Coronet North'] = new DungeonTown(
     'Mt. Coronet North',
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 211),
-        new GymBadgeRequirement(BadgeEnums.Mine),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lake Verity')),
     ]
-);
-TownList['Distortion World'] = new DungeonTown(
-    'Distortion World',
-    GameConstants.Region.sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Icicle)]
-);
-TownList['Lake Valor'] = new DungeonTown(
-    'Lake Valor',
-    GameConstants.Region.sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Icicle)]
-);
-TownList['Lake Verity'] = new DungeonTown(
-    'Lake Verity',
-    GameConstants.Region.sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Icicle)]
 );
 TownList['Lake Acuity'] = new DungeonTown(
     'Lake Acuity',
     GameConstants.Region.sinnoh,
     [new GymBadgeRequirement(BadgeEnums.Icicle)]
 );
+TownList['Team Galactic HQ'] = new DungeonTown(
+    'Team Galactic HQ',
+    GameConstants.Region.sinnoh,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lake Acuity'))]
+);
+TownList['Spear Pillar'] = new DungeonTown(
+    'Spear Pillar',
+    GameConstants.Region.sinnoh,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic HQ'))]
+);
+TownList['Distortion World'] = new DungeonTown(
+    'Distortion World',
+    GameConstants.Region.sinnoh,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Spear Pillar'))]
+);
 TownList['Victory Road Sinnoh'] = new DungeonTown(
     'Victory Road Sinnoh',
     GameConstants.Region.sinnoh,
     [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 223)]
 );
-TownList['Spear Pillar'] = new DungeonTown(
-    'Spear Pillar',
+TownList['Sendoff Spring'] = new DungeonTown(
+    'Sendoff Spring',
     GameConstants.Region.sinnoh,
     [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
 );
 TownList['Hall of Origin'] = new DungeonTown(
     'Hall of Origin',
     GameConstants.Region.sinnoh,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Spear Pillar'))]
+    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
 );
 TownList['Fullmoon Island'] = new DungeonTown(
     'Fullmoon Island',

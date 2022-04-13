@@ -704,6 +704,26 @@ class Update implements Saveable {
                 i.sellLocked = false;
                 return i;
             }) || [];
+
+            // Start Galactic questline if player has Coal Badge already
+            if (saveData.badgeCase[40]) {
+                saveData.quests.questLines.push({state: 1, name: 'A new world', quest: 0});
+            }
+
+            // Clear Valley Windworks Clears
+            saveData.statistics.dungeonsCleared[44] = 0;
+            // Add Team Galactic Eterna Building
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 47);
+            // Move Lake Verity
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 53, 52);
+            // Move Lake Valor
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 52, 54);
+            // Add Team Galactic HQ
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 56);
+            // Move Spear Pillar
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 57, 59);
+            // Add Sendoff Spring
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
         },
     };
 
