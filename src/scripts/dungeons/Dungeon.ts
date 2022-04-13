@@ -10,6 +10,7 @@ interface EnemyOptions {
     weight?: number,
     requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
     reward?: Amount,
+    hide?: boolean,
 }
 
 interface DetailedPokemon {
@@ -31,6 +32,7 @@ type Boss = DungeonBossPokemon | DungeonTrainer;
 interface EncounterInfo {
     image: string,
     shiny: boolean,
+    hide: boolean,
     hidden: boolean,
     locked: boolean,
     lockMessage: string,
@@ -248,6 +250,7 @@ class Dungeon {
                 const encounter = {
                     image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
                     shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
+                    hide: boss.options?.hide ? (boss.options?.requirement ? !boss.options?.requirement.isCompleted() : boss.options?.hide) : false,
                     hidden: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
                     lock: boss.options?.requirement ? !boss.options?.requirement.isCompleted() : false,
                     lockMessage: boss.options?.requirement ? boss.options?.requirement.hint() : '',
@@ -258,6 +261,7 @@ class Dungeon {
                 const encounter = {
                     image: boss.image,
                     shiny:  false,
+                    hide: boss.options?.hide ? (boss.options?.requirement ? !boss.options?.requirement.isCompleted() : boss.options?.hide) : false,
                     hidden: false,
                     lock: boss.options?.requirement ? !boss.options?.requirement.isCompleted() : false,
                     lockMessage: boss.options?.requirement ? boss.options?.requirement.hint() : '',
