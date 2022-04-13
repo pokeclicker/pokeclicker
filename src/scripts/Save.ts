@@ -83,6 +83,7 @@ class Save {
             localStorage.removeItem(`save${Save.key}`);
             localStorage.removeItem(`settings${Save.key}`);
 
+            window.onbeforeunload = () => {}; // To prevent the save from being saved again
             location.reload();
         }
     }
