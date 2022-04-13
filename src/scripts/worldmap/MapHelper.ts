@@ -50,7 +50,7 @@ class MapHelper {
             });
 
             Notifier.notify({
-                message: `You don't have access to that route yet.<br/>${reqsList.join('<br/>')}`,
+                message: `You don't have access to that route yet.\n${reqsList.join('\n')}`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -207,7 +207,7 @@ class MapHelper {
             });
 
             Notifier.notify({
-                message: `You don't have access to that location yet.<br/>${reqsList.join('<br/>')}`,
+                message: `You don't have access to that location yet.\n${reqsList.join('\n')}`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }

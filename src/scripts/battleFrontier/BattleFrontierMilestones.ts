@@ -45,8 +45,9 @@ class BattleFrontierMilestones {
         if (reward && reward.stage == defeatedStage) {
             Notifier.notify({
                 title: '[Battle Frontier]',
-                message: `You've successfully defeated stage ${defeatedStage} and earned:<br/><span>${reward.description}</span>!`,
-                type: NotificationConstants.NotificationOption.warning,
+                message: `You've successfully defeated stage ${defeatedStage} and earned:\n<span>${reward.description}</span>!`,
+                type: NotificationConstants.NotificationOption.info,
+                setting: NotificationConstants.NotificationSetting.General.battle_frontier,
                 timeout: 1e4,
             });
             reward.gain();

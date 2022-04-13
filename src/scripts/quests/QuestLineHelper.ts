@@ -123,7 +123,7 @@ class QuestLineHelper {
         const reachStage100Reward = () => {
             Notifier.notify({
                 title: deoxysQuestLine.name,
-                message: 'Quest line completed!<br/><i>You have uncovered the Mystery of Deoxys</i>',
+                message: 'Quest line completed!\n<i>You have uncovered the Mystery of Deoxys</i>',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
@@ -151,7 +151,7 @@ class QuestLineHelper {
             Underground.gainMineItem(oldAmber.id);
             Notifier.notify({
                 title: undergroundQuestLine.name,
-                message: 'You have gained an Old Amber fossil!<br/><i>You can breed this in the hatchery.</i>',
+                message: 'You have gained an Old Amber fossil!\n<i>You can breed this in the hatchery.</i>',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: GameConstants.MINUTE,
             });
