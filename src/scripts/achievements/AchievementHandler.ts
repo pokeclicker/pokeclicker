@@ -70,7 +70,11 @@ class AchievementHandler {
 
     public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, region = GameConstants.Region.none, achievableFunction: () => boolean | null = null) {
         const unlocked: boolean = player.achievementsCompleted[name];
-        AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, region, unlocked, achievableFunction));
+        const achievement = new Achievement(name, description, property, bonus, region, unlocked, achievableFunction);
+        AchievementHandler.achievementList.push(achievement);
+        achievement.isCompleted.subscribe(() => {
+            AchievementHandler.filterAchievementList(true);
+        });
     }
 
     public static calculateBonus(): void {
