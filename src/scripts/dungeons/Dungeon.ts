@@ -133,6 +133,51 @@ class Dungeon {
     }
 
     /**
+     * Gets all available Pokemon in the dungeon
+     */
+    public allAvailablePokemon(): PokemonNameType[] {
+        const encounterInfo = [];
+
+        // Handling minions
+        this.enemyList.forEach((enemy) => {
+            // Handling Pokemon
+            if (typeof enemy === 'string' || enemy.hasOwnProperty('pokemon')) {
+                let pokemonName: PokemonNameType;
+                if (enemy.hasOwnProperty('pokemon')) {
+                    // Check if requirements have been met
+                    if ((enemy as DetailedPokemon).options?.requirement) {
+                        if (!(enemy as DetailedPokemon).options.requirement.isCompleted()) {
+                            return;
+                        }
+                    }
+                    pokemonName = (<DetailedPokemon>enemy).pokemon;
+                } else {
+                    pokemonName = <PokemonNameType>enemy;
+                }
+                encounterInfo.push(pokemonName);
+            // Handling Trainers
+            } else { /* We don't include Trainers */ }
+        });
+
+        // Handling Bosses
+        this.bossList.forEach((boss) => {
+            // Handling Pokemon
+            if (boss instanceof DungeonBossPokemon) {
+                if (boss.options?.requirement) {
+                    if (!boss.options.requirement.isCompleted()) {
+                        return;
+                    }
+                }
+                const pokemonName = boss.name;
+                encounterInfo.push(pokemonName);
+            // Handling Trainer
+            } else { /* We don't include Trainers */ }
+        });
+
+        return encounterInfo;
+    }
+
+    /**
      * Retrieves the weights for all the possible enemies
      */
     get weightList(): number[] {

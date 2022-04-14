@@ -30,7 +30,7 @@ class GameController {
 
         const event = document.createEvent('HTMLEvents') as KeyboardEvent;
         Object.defineProperties(event, {
-            code: {value: code},
+            key: {value: code},
         });
         event.initEvent(evtName, true, false);
 

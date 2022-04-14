@@ -250,17 +250,15 @@
             <td class='vertical-middle'>
                 <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
                     <!-- ko ifnot: valueType == "Mine Egg" -->
-                    <div class="input-group-prepend btn btn-success active">
-                        <label
-                            class="clickable m-0"
-                            data-bind="text: sellLocked() ? '🔒' : '🔓', attr: { for: 'sellLockedIndicatorOfItem' + id }"
-                        >🔓</label>
-                        <input
-                            class="hidden"
-                            type="checkbox"
-                            data-bind="checked: sellLocked(), attr: { id: 'sellLockedIndicatorOfItem' + id }, event: { change: function(){Underground.setSellLockOfMineItem(id, !sellLocked())} }"
-                        />
-                    </div>
+                    <label
+                    class="input-group-prepend btn btn-success active clickable m-0"
+                        data-bind="text: sellLocked() ? '🔒' : '🔓', attr: { for: 'sellLockedIndicatorOfItem' + id }"
+                    >🔓</label>
+                    <input
+                        class="hidden"
+                        type="checkbox"
+                        data-bind="checked: sellLocked(), attr: { id: 'sellLockedIndicatorOfItem' + id }, event: { change: function(){Underground.setSellLockOfMineItem(id, !sellLocked())} }"
+                    />
                     <!-- /ko -->
                     <button class='btn btn-success btn-block'
                             data-bind="attr: { 'data-itemid': id },
