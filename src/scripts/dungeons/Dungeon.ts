@@ -991,115 +991,103 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     [
         new DungeonBossPokemon('Unown (A)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 0),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 0),
         }),
         new DungeonBossPokemon('Unown (B)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 1),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 1),
         }),
         new DungeonBossPokemon('Unown (C)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 2),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 2),
         }),
         new DungeonBossPokemon('Unown (D)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 3),
-        }),
-        new DungeonBossPokemon('Unown (E)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 4),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 3),
         }),
         new DungeonBossPokemon('Unown (F)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 5),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 4),
         }),
         new DungeonBossPokemon('Unown (G)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 6),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 5),
         }),
         new DungeonBossPokemon('Unown (H)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 7),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 6),
         }),
         new DungeonBossPokemon('Unown (I)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 8),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 7),
         }),
         new DungeonBossPokemon('Unown (J)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 9),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 8),
         }),
         new DungeonBossPokemon('Unown (K)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 10),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 9),
         }),
         new DungeonBossPokemon('Unown (L)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 11),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 10),
         }),
         new DungeonBossPokemon('Unown (M)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 12),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 11),
         }),
         new DungeonBossPokemon('Unown (N)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 13),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 12),
         }),
         new DungeonBossPokemon('Unown (O)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 14),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 13),
         }),
         new DungeonBossPokemon('Unown (P)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 15),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 14),
         }),
         new DungeonBossPokemon('Unown (Q)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 16),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 15),
         }),
         new DungeonBossPokemon('Unown (R)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 17),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 16),
         }),
         new DungeonBossPokemon('Unown (S)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 18),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 17),
         }),
         new DungeonBossPokemon('Unown (T)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 19),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 18),
         }),
         new DungeonBossPokemon('Unown (U)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 20),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 19),
         }),
         new DungeonBossPokemon('Unown (V)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 21),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 20),
         }),
         new DungeonBossPokemon('Unown (W)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 22),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 21),
         }),
         new DungeonBossPokemon('Unown (X)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 23),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 22),
         }),
         new DungeonBossPokemon('Unown (Y)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 24),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 23),
         }),
         new DungeonBossPokemon('Unown (Z)', 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 25),
-        }),
-        new DungeonBossPokemon('Unown (!)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 26),
-        }),
-        new DungeonBossPokemon('Unown (?)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 27),
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 24) == 24),
         }),
     ],
     3000, 32);
@@ -2692,11 +2680,98 @@ dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
     ],
     960000,
     [
-        new DungeonBossPokemon('Unown (A)', 4100000, 30),
-        new DungeonBossPokemon('Unown (E)', 4100000, 30),
-        new DungeonBossPokemon('Unown (L)', 4100000, 30),
-        new DungeonBossPokemon('Unown (N)', 4100000, 30),
-        new DungeonBossPokemon('Unown (U)', 4100000, 30),
+        new DungeonBossPokemon('Unown (A)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 0),
+        }),
+        new DungeonBossPokemon('Unown (B)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 1),
+        }),
+        new DungeonBossPokemon('Unown (C)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 2),
+        }),
+        new DungeonBossPokemon('Unown (D)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 3),
+        }),
+        new DungeonBossPokemon('Unown (E)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 4),
+        }),
+        new DungeonBossPokemon('Unown (G)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 5),
+        }),
+        new DungeonBossPokemon('Unown (I)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 6),
+        }),
+        new DungeonBossPokemon('Unown (J)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 7),
+        }),
+        new DungeonBossPokemon('Unown (K)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 8),
+        }),
+        new DungeonBossPokemon('Unown (L)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 9),
+        }),
+        new DungeonBossPokemon('Unown (M)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 10),
+        }),
+        new DungeonBossPokemon('Unown (N)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 11),
+        }),
+        new DungeonBossPokemon('Unown (O)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 12),
+        }),
+        new DungeonBossPokemon('Unown (Q)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 13),
+        }),
+        new DungeonBossPokemon('Unown (R)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 14),
+        }),
+        new DungeonBossPokemon('Unown (S)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 15),
+        }),
+        new DungeonBossPokemon('Unown (T)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 16),
+        }),
+        new DungeonBossPokemon('Unown (U)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 17),
+        }),
+        new DungeonBossPokemon('Unown (V)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 18),
+        }),
+        new DungeonBossPokemon('Unown (W)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 19),
+        }),
+        new DungeonBossPokemon('Unown (X)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 20),
+        }),
+        new DungeonBossPokemon('Unown (Y)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 21),
+        }),
+        new DungeonBossPokemon('Unown (Z)', 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 22) == 22),
+        }),
     ],
     62500, 209);
 
