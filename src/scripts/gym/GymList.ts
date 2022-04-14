@@ -1563,7 +1563,7 @@ GymList['Stow-on-Side2'] = new Gym(
     BadgeEnums.Galar_FightingGhost,
     80000,
     'Maybe my mask... kept me from seeing just how strong you really are...',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Galar_Fighting_Ghost)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarFightingGhost)]
 );
 GymList['Ballonlea'] = new Gym(
     'Opal',
@@ -1605,7 +1605,7 @@ GymList['Circhester2'] = new Gym(
     BadgeEnums.Galar_RockIce,
     80000,
     'I think you took breaking the ice a little too literally...',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Galar_Rock_Ice)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarRockIce)]
 );
 GymList['Spikemuth'] = new Gym(
     'Piers',
@@ -1763,7 +1763,7 @@ GymList['Gym Leader Avery'] = new Gym(
     BadgeEnums.Elite_ArmorPsychic,
     150000,
     'More! I require more! Show me your Stored Power!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarPoison)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_ArmorPoison)]
 );
 GymList['Dojo Master Mustard'] = new Gym(
     'Mustard',

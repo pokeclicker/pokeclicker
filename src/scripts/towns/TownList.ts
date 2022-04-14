@@ -2842,7 +2842,7 @@ TownList['Galar Mine No. 2'] = new DungeonTown(
 TownList['Glimwood Tangle'] = new DungeonTown(
     'Glimwood Tangle',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Galar_Fighting)]
+    [new GymBadgeRequirement(BadgeEnums.Galar_FightingGhost)]
 );
 TownList['Rose Tower'] = new DungeonTown(
     'Rose Tower',
