@@ -1546,7 +1546,7 @@ GymList['Stow-on-Side1'] = new Gym(
         new GymPokemon('Sirfetch\'d', 66586319, 35),
         new GymPokemon('Machamp', 69360749, 36),
     ],
-    BadgeEnums.Elite_GalarFightingGhost,
+    BadgeEnums.Galar_Fighting,
     80000,
     'Your strength nearly made me want to turn and run in my bare feet',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 15)]
@@ -1560,10 +1560,10 @@ GymList['Stow-on-Side2'] = new Gym(
         new GymPokemon('Cursola', 66586319, 35),
         new GymPokemon('Gengar', 69360749, 36),
     ],
-    BadgeEnums.Galar_FightingGhost,
+    BadgeEnums.Galar_Ghost,
     80000,
     'Maybe my mask... kept me from seeing just how strong you really are...',
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarFightingGhost)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 15)]
 );
 GymList['Ballonlea'] = new Gym(
     'Opal',
@@ -1588,7 +1588,7 @@ GymList['Circhester1'] = new Gym(
         new GymPokemon('Stonjourner', 86035713, 41),
         new GymPokemon('Coalossal', 88696611, 42),
     ],
-    BadgeEnums.Elite_GalarRockIce,
+    BadgeEnums.Galar_Rock,
     80000,
     'I just want to climb into a hole... Well, I guess it\'d be more like falling from here.',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 18)]
@@ -1602,10 +1602,10 @@ GymList['Circhester2'] = new Gym(
         new GymPokemon('Eiscue', 86035713, 41),
         new GymPokemon('Lapras', 88696611, 42),
     ],
-    BadgeEnums.Galar_RockIce,
+    BadgeEnums.Galar_Ice,
     80000,
     'I think you took breaking the ice a little too literally...',
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarRockIce)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 18)]
 );
 GymList['Spikemuth'] = new Gym(
     'Piers',
