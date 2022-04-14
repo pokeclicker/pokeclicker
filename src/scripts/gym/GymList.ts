@@ -1683,11 +1683,11 @@ GymList['Trainer Hop'] = new Champion(
     'Thanks, mate. I\'m really glad you were the one here with me.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Bede)],
     // Bulbasaur
-    [new GymPokemon('Inteleon', 137833678, 60),],
+    [new GymPokemon('Inteleon', 137833678, 60)],
     // Charmander
-    [new GymPokemon('Rillaboom', 137833678, 60),],
+    [new GymPokemon('Rillaboom', 137833678, 60)],
     // Squirtle/Pikachu
-    [new GymPokemon('Cinderace', 137833678, 60),]
+    [new GymPokemon('Cinderace', 137833678, 60)]
 );
 // Galar Champion
 //TODO: rewards/hp rebalance
@@ -1705,21 +1705,21 @@ GymList['Champion Leon'] = new Champion(
     [new GymBadgeRequirement(BadgeEnums.Elite_Hop)],
     // Bulbasaur
     [
-      new GymPokemon('Seismitoad', 133481036, 64),
-      new GymPokemon('Cinderace', 137833678, 64),
-      new GymPokemon('Charizard', 145088083, 65),
+        new GymPokemon('Seismitoad', 133481036, 64),
+        new GymPokemon('Cinderace', 137833678, 64),
+        new GymPokemon('Charizard', 145088083, 65),
     ],
     // Charmander
     [
-      new GymPokemon('Mr. Rime', 133481036, 64),
-      new GymPokemon('Inteleon', 137833678, 64),
-      new GymPokemon('Charizard', 145088083, 65),
+        new GymPokemon('Mr. Rime', 133481036, 64),
+        new GymPokemon('Inteleon', 137833678, 64),
+        new GymPokemon('Charizard', 145088083, 65),
     ],
     // Squirtle/Pikachu
     [
-      new GymPokemon('Rhyperior', 133481036, 64),
-      new GymPokemon('Rillaboom', 137833678, 64),
-      new GymPokemon('Charizard', 145088083, 65),
+        new GymPokemon('Rhyperior', 133481036, 64),
+        new GymPokemon('Rillaboom', 137833678, 64),
+        new GymPokemon('Charizard', 145088083, 65),
     ]
 );
 
