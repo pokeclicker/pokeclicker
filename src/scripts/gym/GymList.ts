@@ -1683,17 +1683,11 @@ GymList['Trainer Hop'] = new Champion(
     'Thanks, mate. I\'m really glad you were the one here with me.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Bede)],
     // Bulbasaur
-    [
-      new GymPokemon('Inteleon', 137833678, 60),
-    ],
+    [new GymPokemon('Inteleon', 137833678, 60),],
     // Charmander
-    [
-      new GymPokemon('Rillaboom', 137833678, 60),
-    ],
+    [new GymPokemon('Rillaboom', 137833678, 60),],
     // Squirtle/Pikachu
-    [
-      new GymPokemon('Cinderace', 137833678, 60),
-    ]
+    [new GymPokemon('Cinderace', 137833678, 60),]
 );
 // Galar Champion
 //TODO: rewards/hp rebalance
