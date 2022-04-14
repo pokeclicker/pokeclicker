@@ -107,6 +107,8 @@ import KeyItem from './keyItems/KeyItem';
 import KeyItems from './keyItems/KeyItems';
 import Achievement from './achievements/Achievement';
 import Gems from './gems/Gems';
+import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequirement';
+import QuestCompletedRequirement from './requirements/QuestCompletedRequirement';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -220,4 +222,6 @@ Object.assign(<any>window, {
     KeyItems,
     Achievement,
     Gems,
+    QuestLineCompletedRequirement,
+    QuestCompletedRequirement,
 });
