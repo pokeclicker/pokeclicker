@@ -1546,7 +1546,7 @@ GymList['Stow-on-Side1'] = new Gym(
         new GymPokemon('Sirfetch\'d', 66586319, 35),
         new GymPokemon('Machamp', 69360749, 36),
     ],
-    BadgeEnums.Elite_Galar_Fighting_Ghost,
+    BadgeEnums.Elite_GalarFightingGhost,
     80000,
     'Your strength nearly made me want to turn and run in my bare feet',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 15)]
@@ -1560,7 +1560,7 @@ GymList['Stow-on-Side2'] = new Gym(
         new GymPokemon('Cursola', 66586319, 35),
         new GymPokemon('Gengar', 69360749, 36),
     ],
-    BadgeEnums.Galar_Fighting_Ghost,
+    BadgeEnums.Galar_FightingGhost,
     80000,
     'Maybe my mask... kept me from seeing just how strong you really are...',
     [new GymBadgeRequirement(BadgeEnums.Elite_Galar_Fighting_Ghost)]
@@ -1588,7 +1588,7 @@ GymList['Circhester1'] = new Gym(
         new GymPokemon('Stonjourner', 86035713, 41),
         new GymPokemon('Coalossal', 88696611, 42),
     ],
-    BadgeEnums.Elite_Galar_Rock_Ice,
+    BadgeEnums.Elite_GalarRockIce,
     80000,
     'I just want to climb into a hole... Well, I guess it\'d be more like falling from here.',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 18)]
@@ -1602,7 +1602,7 @@ GymList['Circhester2'] = new Gym(
         new GymPokemon('Eiscue', 86035713, 41),
         new GymPokemon('Lapras', 88696611, 42),
     ],
-    BadgeEnums.Galar_Rock_Ice,
+    BadgeEnums.Galar_RockIce,
     80000,
     'I think you took breaking the ice a little too literally...',
     [new GymBadgeRequirement(BadgeEnums.Elite_Galar_Rock_Ice)]
@@ -1740,7 +1740,7 @@ GymList['Gym Leader Klara'] = new Gym(
         new GymPokemon('Scolipede', 147068434, 69),
         new GymPokemon('Galarian Slowbro', 151617045, 70),
     ],
-    BadgeEnums.Elite_Armor_Poison,
+    BadgeEnums.Elite_ArmorPoison,
     150000,
     'Aww, come on! What a drag! But...I guess it was also kinda fun!',
     [
@@ -1760,10 +1760,10 @@ GymList['Gym Leader Avery'] = new Gym(
         new GymPokemon('Alakazam', 147068434, 69),
         new GymPokemon('Galarian Slowking', 151617045, 70),
     ],
-    BadgeEnums.Elite_Armor_Psychic,
+    BadgeEnums.Elite_ArmorPsychic,
     150000,
     'More! I require more! Show me your Stored Power!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Galar_Poison)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarPoison)]
 );
 GymList['Dojo Master Mustard'] = new Gym(
     'Mustard',
@@ -1776,10 +1776,10 @@ GymList['Dojo Master Mustard'] = new Gym(
         new GymPokemon('Urshifu (Single Strike)', 159596891, 75),
         new GymPokemon('Urshifu (Rapid Strike)', 159596891, 75),
     ],
-    BadgeEnums.Elite_Armor_Champion,
+    BadgeEnums.Elite_ArmorChampion,
     250000,
     'That strength of yours doesn\'t bend easily!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Armor_Psychic)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_ArmorPsychic)]
 );
 GymList['Trainer Peony'] = new Gym(
     'Freezington',
@@ -1791,7 +1791,7 @@ GymList['Trainer Peony'] = new Gym(
         new GymPokemon('Aggron', 197029616, 74),
         new GymPokemon('Copperajah', 203123316, 74),
     ],
-    BadgeEnums.Elite_Crown_Champion,
+    BadgeEnums.Elite_CrownChampion,
     250000,
     'Gone and got stronger again, have you? Ah well! Hats off to you-in more ways than one!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Crown Shrine'))]
