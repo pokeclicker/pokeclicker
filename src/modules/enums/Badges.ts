@@ -109,7 +109,7 @@ enum BadgeEnums {
     'Galar_Grass',
     'Galar_Water',
     'Galar_Fire',
-    'Elite_GalarFightingGhost'
+    'Elite_GalarFightingGhost',
     'Galar_FightingGhost',
     'Galar_Fairy',
     'Elite_GalarRockIce',
