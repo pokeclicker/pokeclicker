@@ -107,6 +107,7 @@ export type PokemonNameType
     | 'Machop'
     | 'Machoke'
     | 'Machamp'
+    | 'Gigantamax Machamp'
     | 'Bellsprout'
     | 'Weepinbell'
     | 'Victreebel'
