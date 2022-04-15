@@ -6856,6 +6856,36 @@ dungeonList['Tower of Water'] = new Dungeon('Tower of Water',
 
 
 //Crown Tundra
+dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
+    ['Trevenant', 'Stonjourner', 'Heatmor', 'Conkeldurr', 'Rhyperior', 'Aerodactyl'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    2203000,
+    [
+        new DungeonBossPokemon('Regidrago', 8000000, 70),
+        new DungeonBossPokemon('Regieleki', 8000000, 70),
+    ],
+    96500, 201);
+
+dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
+    ['Metagross', 'Bronzong', 'Dragapult', 'Snorlax', 'Magmortar'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    2203000,
+    [
+        new DungeonBossPokemon('Regidrago', 8000000, 70),
+        new DungeonBossPokemon('Regieleki', 8000000, 70),
+    ],
+    96500, 201);
+
+dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
+    ['Cryogonal', 'Beartic', 'Glalie', 'Aurorus', 'Weavile', 'Vanilluxe', 'Galarian Darmanitan', 'Absol', 'Froslass', 'Delibird'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    2203000,
+    [
+        new DungeonBossPokemon('Regidrago', 8000000, 70),
+        new DungeonBossPokemon('Regieleki', 8000000, 70),
+    ],
+    96500, 201);
+
 dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
     ['Golurk', 'Electivire', 'Dragapult', 'Araquanid', 'Cryogonal', 'Bronzong', 'Claydol', 'Absol', 'Galvantula', 'Audino'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
