@@ -633,6 +633,7 @@ export enum StoneType {
     'Flower_sweet',
     'Star_sweet',
     'Ribbon_sweet',
+    'Wishing_star',
 
 }
 
@@ -662,9 +663,6 @@ export enum PokemonItemType {
     'Meloetta (pirouette)',
     'Type: Null',
     'Poipole',
-    'Toxel',
-    'Eternatus',
-    'Slowpoke (Galar)',
 }
 
 export enum PokeBlockColor {
