@@ -2869,23 +2869,48 @@ TownList['Lake of Outrage'] = new DungeonTown(
     GameConstants.Region.galar,
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
 );
-TownList['Towers of Two Fists'] = new DungeonTown(
-    'Towers of Two Fists',
+TownList['Master Dojo Trial'] = new DungeonTown(
+    'Master Dojo Trial',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 25)]
+);
+TownList['Tower of Darkness'] = new DungeonTown(
+    'Tower of Darkness',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 34)]
+);
+TownList['Tower of Water'] = new DungeonTown(
+    'Tower of Water',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 28)]
+);
+TownList['Rock Peak Ruins'] = new DungeonTown(
+    'Rock Peak Ruins',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 43)]
+);
+TownList['Iron Ruins'] = new DungeonTown(
+    'Iron Ruins',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 43)]
+);
+TownList['Iceberg Ruins'] = new DungeonTown(
+    'Iceberg Ruins',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 51)]
 );
 TownList['Split-Decision Ruins'] = new DungeonTown(
     'Split-Decision Ruins',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 48)]
 );
-TownList['The Crown Tundra'] = new DungeonTown(
-    'The Crown Tundra',
+TownList['Dyna Tree Hill'] = new DungeonTown(
+    'Dyna Tree Hill',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 50)]
 );
-TownList['Freezington Ruins'] = new DungeonTown(
-    'Freezington Ruins',
+TownList['Crown Shrine'] = new DungeonTown(
+    'Crown Shrine',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 53)]
 );
