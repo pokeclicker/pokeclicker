@@ -18112,6 +18112,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 808,
         'name': 'Meltan',
+        'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Steel],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -18130,6 +18131,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 809,
         'name': 'Melmetal',
+        'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Steel],
         'eggCycles': 120,
         'levelType': LevelType.slow,
