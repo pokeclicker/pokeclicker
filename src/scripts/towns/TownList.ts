@@ -2691,7 +2691,7 @@ const WyndonShop = new TownShop([
 ]);
 const MasterDojoShop = new TownShop([
     ItemList['Galarica_cuff'],
-    ItemList['Galarica_wreath']
+    ItemList['Galarica_wreath'],
 ]);
 
 
