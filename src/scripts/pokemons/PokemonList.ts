@@ -1610,7 +1610,7 @@ const pokemonList = createPokemonArray(
         'evolutions': [
             new LevelEvolution('Meowth', 'Persian', 28),
             new StoneEvolution('Meowth', 'Gigantamax Meowth', GameConstants.StoneType.Wishing_star),
-          ],
+        ],
         'base': {
             'hitpoints': 40,
             'attack': 45,
