@@ -10,6 +10,15 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.1
+    new ChangelogUpdate('v0.9.1', new Date(2022, 3, 14)),
+    new Changelog(changelogType.FIXED, 'Easter quest line not starting on new saves'),
+    new Changelog(changelogType.FIXED, 'Save deletion/importing in game'),
+    new Changelog(changelogType.FIXED, 'Shop Pokémon prices rounding'),
+    new Changelog(changelogType.FIXED, 'On screen Safari Zone controls not working'),
+    new Changelog(changelogType.FIXED, 'Achievement filtering'),
+    new Changelog(changelogType.FIXED, 'Dungeon showing as incomplete if locked Pokémon not obtained yet'),
+
     // v0.9.0
     new ChangelogUpdate('v0.9.0 - Alola', new Date(2022, 3, 13)),
     new Changelog(changelogType.NEW, 'The Alola region is now available'),

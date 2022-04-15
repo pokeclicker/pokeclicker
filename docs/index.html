@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.9.0"></script>
+    <script src="scripts/modules.min.js?v=0.9.1"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.9.0"></script>
+    <script src="scripts/script.min.js?v=0.9.1"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.9.0" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.9.1" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -248,7 +248,7 @@
             <button class="dropdown-item" href="#statisticsModal" data-toggle="modal">Statistics</button>
         </li>
         <li>
-            <a class="dropdown-item" href="#achievementsModal" data-toggle="modal">Achievements</a>
+            <a class="dropdown-item" href="#achievementsModal" data-toggle="modal" onclick="AchievementHandler.filterAchievementList(true);">Achievements</a>
         </li>
         <li>
             <a class="dropdown-item" href="#logBookModal" data-toggle="modal">Log Book</a>
@@ -861,6 +861,7 @@
     style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
     data-toggle="modal"
     href="#achievementsModal"
+    onclick="AchievementHandler.filterAchievementList(true);"
   >
     List
   </button>
@@ -17640,17 +17641,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
             <td class='vertical-middle'>
                 <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
                     <!-- ko ifnot: valueType == "Mine Egg" -->
-                    <div class="input-group-prepend btn btn-success active">
-                        <label
-                            class="clickable m-0"
-                            data-bind="text: sellLocked() ? '🔒' : '🔓', attr: { for: 'sellLockedIndicatorOfItem' + id }"
-                        >🔓</label>
-                        <input
-                            class="hidden"
-                            type="checkbox"
-                            data-bind="checked: sellLocked(), attr: { id: 'sellLockedIndicatorOfItem' + id }, event: { change: function(){Underground.setSellLockOfMineItem(id, !sellLocked())} }"
-                        />
-                    </div>
+                    <label
+                    class="input-group-prepend btn btn-success active clickable m-0"
+                        data-bind="text: sellLocked() ? '🔒' : '🔓', attr: { for: 'sellLockedIndicatorOfItem' + id }"
+                    >🔓</label>
+                    <input
+                        class="hidden"
+                        type="checkbox"
+                        data-bind="checked: sellLocked(), attr: { id: 'sellLockedIndicatorOfItem' + id }, event: { change: function(){Underground.setSellLockOfMineItem(id, !sellLocked())} }"
+                    />
                     <!-- /ko -->
                     <button class='btn btn-success btn-block'
                             data-bind="attr: { 'data-itemid': id },

@@ -7,7 +7,7 @@ enum QuestLineState {
 class QuestLine {
     name: string;
     description: string;
-    state: KnockoutObservable<QuestLineState> = ko.observable(QuestLineState.inactive);
+    state: KnockoutObservable<QuestLineState> = ko.observable(QuestLineState.inactive).extend({ numeric: 0 });
     quests: KnockoutObservableArray<Quest>;
     curQuest: KnockoutComputed<number>;
     curQuestObject: KnockoutComputed<any>;
