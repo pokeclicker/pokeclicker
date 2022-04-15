@@ -269,6 +269,7 @@ namespace GameConstants {
         'Flower_sweet',
         'Star_sweet',
         'Ribbon_sweet',
+        'Wishing_star',
     }
     declare enum BattleItemType {
         'xAttack' = '',
@@ -293,9 +294,8 @@ namespace GameConstants {
         'Cherubi',
         'Zorua',
         'Meloetta (pirouette)',
-        'Toxel',
-        'Eternatus',
-        'Slowpoke (Galar)'
+        'Type: Null',
+        'Poipole',
     }
     declare enum PokeBlockColor {
         Black,

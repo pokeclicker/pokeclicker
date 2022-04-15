@@ -2642,25 +2642,35 @@ const WedgehurstShop = new TownShop([
     ItemList['Greatball'],
     ItemList['Mystery_egg'],
 ]);
-const CirchesterShop = new TownShop([
-    ItemList['Ice_stone'],
-]);
 const TurffieldShop = new TownShop([
     ItemList['Grass_egg'],
+    ItemList['Sweet_apple'],
+    ItemList['Tart_apple'],
 ]);
 const HulburyShop = new TownShop([
     ItemList['Water_egg'],
-    ItemList['Toxel'],
 ]);
 const MotostokeShop = new TownShop([
     ItemList['Fire_egg'],
 ]);
 const HammerlockeShop = new TownShop([
     ItemList['Dragon_egg'],
-    ItemList['Eternatus'],
 ]);
 const StowonSideShop: Shop = new TownShop([
     ItemList['Fighting_egg'],
+]);
+const BallonleaShop = new TownShop([
+    ItemList['Cracked_pot'],
+    ItemList['Strawberry_sweet'],
+    ItemList['Berry_sweet'],
+    ItemList['Love_sweet'],
+    ItemList['Star_sweet'],
+    ItemList['Clover_sweet'],
+    ItemList['Flower_sweet'],
+    ItemList['Ribbon_sweet'],
+]);
+const CirchesterShop = new TownShop([
+    ItemList['Ice_stone'],
 ]);
 const SpikemuthShop = new TownShop([
     ItemList['Electric_egg'],
@@ -2678,6 +2688,10 @@ const WyndonShop = new TownShop([
     ItemList['Token_collector'],
     ItemList['Item_magnet'],
     ItemList['Lucky_incense'],
+]);
+const MasterDojoShop = new TownShop([
+    ItemList['Galarica_cuff'],
+    ItemList['Galarica_wreath']
 ]);
 
 
@@ -2752,6 +2766,7 @@ TownList['Ballonlea'] = new Town(
     'Ballonlea',
     GameConstants.Region.galar,
     {
+        shops: [BallonleaShop],
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glimwood Tangle'))],
     }
 );
@@ -2801,6 +2816,7 @@ TownList['Master Dojo'] = new Town(
     'Master Dojo',
     GameConstants.Region.galar,
     {
+        shops: [MasterDojoShop],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
         dungeon: dungeonList['Master Dojo Trial'],
     }
