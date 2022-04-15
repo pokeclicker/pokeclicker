@@ -6006,7 +6006,7 @@ dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
 
 
 dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
-    ['Pikachu', 'Pichu'],
+    ['Pikachu', 'Pichu', 'Plusle', 'Minun', 'Pachirisu', 'Emolga', 'Dedenne'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     11952804,
     [
