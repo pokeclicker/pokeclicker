@@ -44,6 +44,9 @@ class Town {
         if (GameConstants.DockTowns.includes(name)) {
             this.content.push(new DockTownContent(this));
         }
+        if (GameConstants.StartingTowns.includes(name)) {
+            this.content.push(new NextRegionTownContent());
+        }
     }
 
     public isUnlocked() {

@@ -1,7 +1,7 @@
 abstract class TownContent {
     public abstract cssClass: string;
     public abstract requirements: (Requirement | OneFromManyRequirement)[];
-    public abstract text: string;
+    public abstract text(): string;
     public abstract isVisible(): boolean;
     public abstract onclick(): void;
 }
@@ -12,8 +12,6 @@ class DockTownContent implements TownContent {
     constructor(parent: Town) {
         this.parent = parent;
     }
-
-    public text = 'Dock';
     public cssClass = 'btn-info';
     public requirements: [];
 
@@ -24,10 +22,13 @@ class DockTownContent implements TownContent {
     public onclick(): void {
         MapHelper.openShipModal();
     }
+
+    public text() {
+        return 'Dock';
+    }
 }
 
 class BattleFrontierTownContent implements TownContent {
-    public text = 'Enter Battle Frontier';
     public cssClass = 'btn-primary';
     public requirements: [];
 
@@ -37,5 +38,26 @@ class BattleFrontierTownContent implements TownContent {
 
     public onclick(): void {
         App.game.battleFrontier.enter();
+    }
+
+    public text() {
+        return 'Enter Battle Frontier';
+    }
+}
+
+class NextRegionTownContent implements TownContent {
+    public cssClass = 'btn-warning';
+    public requirements: [];
+
+    public isVisible() {
+        return MapHelper.ableToTravel();
+    }
+
+    public onclick(): void {
+        $('#nextRegionModal').modal('show');
+    }
+
+    public text() {
+        return `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`;
     }
 }
