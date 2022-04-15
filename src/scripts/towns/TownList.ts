@@ -2398,7 +2398,7 @@ TownList['Roadside Motel'] = new Town(
 TownList['Heahea City'] = new Town(
     'Heahea City',
     GameConstants.Region.alola,
-    [HeaheaCityShop],
+    [HeaheaCityShop, new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
         npcs: [HeaheaCafeOwner],
@@ -2443,7 +2443,7 @@ TownList['Aether Paradise'] = new Town(
 TownList['Malie City'] = new Town(
     'Malie City',
     GameConstants.Region.alola,
-    [MalieCityShop],
+    [MalieCityShop, new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_Nihilego)],
         npcs: [MalieKahuna],
