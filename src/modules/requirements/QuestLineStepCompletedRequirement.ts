@@ -2,7 +2,7 @@ import { AchievementOption } from '../GameConstants';
 
 import Requirement from './Requirement';
 
-export default class QuestLineCompletedRequirement extends Requirement {
+export default class QuestLineStepCompletedRequirement extends Requirement {
     questLineName: string;
     questIndex: number;
 
