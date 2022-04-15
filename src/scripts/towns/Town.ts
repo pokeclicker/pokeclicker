@@ -7,7 +7,6 @@
 
 type TownOptionalArgument = {
     requirements?: (Requirement | OneFromManyRequirement)[],
-    shops?: Shop[],
     dungeon?: Dungeon,
     npcs?: NPC[],
 };
@@ -17,7 +16,6 @@ class Town {
     public region: GameConstants.Region;
     public gym?: Gym;
     public requirements: (Requirement | OneFromManyRequirement)[];
-    public shops: Shop[];
     public dungeon?: Dungeon;
     public npcs?: NPC[];
     public startingTown: boolean;
@@ -35,18 +33,18 @@ class Town {
         this.region = region;
         this.gym = GymList[name];
         this.requirements = optional.requirements || [];
-        this.shops = optional.shops || [];
         this.dungeon = optional.dungeon;
         this.npcs = optional.npcs;
         this.startingTown = GameConstants.StartingTowns.includes(this.name);
         this.content = content;
 
         if (GameConstants.DockTowns.includes(name)) {
-            this.content.push(new DockTownContent(this));
+            this.content.push(new DockTownContent());
         }
         if (GameConstants.StartingTowns.includes(name)) {
             this.content.push(new NextRegionTownContent());
         }
+        content.forEach((c) => c.addParent(this));
     }
 
     public isUnlocked() {

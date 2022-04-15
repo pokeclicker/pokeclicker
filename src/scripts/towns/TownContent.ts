@@ -1,19 +1,22 @@
 abstract class TownContent {
     public abstract cssClass: string;
-    public abstract requirements: (Requirement | OneFromManyRequirement)[];
     public abstract text(): string;
     public abstract isVisible(): boolean;
     public abstract onclick(): void;
-}
 
-class DockTownContent implements TownContent {
-    parent: Town;
-
-    constructor(parent: Town) {
+    public requirements: (Requirement | OneFromManyRequirement)[];
+    protected parent: Town;
+    addParent(parent: Town) {
         this.parent = parent;
     }
+
+    constructor(requirements: (Requirement | OneFromManyRequirement)[] = []) {
+        this.requirements = requirements;
+    }
+}
+
+class DockTownContent extends TownContent {
     public cssClass = 'btn-info';
-    public requirements: [];
 
     public isVisible() {
         return player.highestRegion() > 0;
@@ -28,9 +31,8 @@ class DockTownContent implements TownContent {
     }
 }
 
-class BattleFrontierTownContent implements TownContent {
+class BattleFrontierTownContent extends TownContent {
     public cssClass = 'btn-primary';
-    public requirements: [];
 
     public isVisible() {
         return true;
@@ -45,9 +47,8 @@ class BattleFrontierTownContent implements TownContent {
     }
 }
 
-class NextRegionTownContent implements TownContent {
+class NextRegionTownContent extends TownContent {
     public cssClass = 'btn-warning';
-    public requirements: [];
 
     public isVisible() {
         return MapHelper.ableToTravel();

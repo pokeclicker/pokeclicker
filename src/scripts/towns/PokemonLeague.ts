@@ -5,7 +5,7 @@ class PokemonLeague extends Town {
     public gymList: Gym[];
 
     constructor(name: string, region: GameConstants.Region, requirements: Array<Requirement | OneFromManyRequirement>, shops: Shop[], gyms: string[]) {
-        super(name, region, [], { requirements, shops });
+        super(name, region, shops, { requirements });
         this.gym = null;
         this.gymList = [];
         for (const gym of gyms) {
@@ -21,7 +21,7 @@ class PokemonLeague extends Town {
 }
 
 // Share a shop across all Elite 4s
-const indigoPlateauShop = new TownShop([
+const indigoPlateauShop = new Shop([
     new PokeballItem(GameConstants.Pokeball.Masterball, 10000000, GameConstants.Currency.money       , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.money]}` }),
     new PokeballItem(GameConstants.Pokeball.Masterball, 75000   , GameConstants.Currency.dungeonToken, { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.dungeonToken]}` }),
     new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.questPoint  , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.questPoint]}` }),
