@@ -14,6 +14,8 @@ function TimeRestrictedBase<T extends MinimalEvo>(Base: T) {
 }
 // new TimeRestrictedLevelEvolution(start: number, end: number, basePokemon: string, evolvedPokemon: string, level: number)
 const TimeRestrictedLevelEvolution = TimeRestrictedBase(LevelEvolution);
+// new TimeRestrictedStoneEvolution(start: number, end: number, basePokemon: string, evolvedPokemon: string, stone: GameConstants.StoneType
+const TimeRestrictedStoneEvolution = TimeRestrictedBase(StoneEvolution);
 
 // new DayTimedLevelEvolution(basePokemon: string, evolvedPokemon: string, level: number)
 const DayTimedLevelEvolution = DayTimeRestricted(LevelEvolution);
