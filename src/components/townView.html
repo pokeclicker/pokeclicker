@@ -77,7 +77,7 @@
                         data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name), text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">
                     Travel To Next Region
                 </button>
-                <button class="btn btn-info" onclick="MapHelper.openShipModal();" data-bind="visible: player.highestRegion() > 0 && GameConstants.DockTowns.includes(player.town().name)">
+                <button class="btn btn-info" onclick="" data-bind="visible: ">
                     Dock
                 </button>
                 <button class="btn btn-secondary p-0"
@@ -96,6 +96,16 @@
                         data-bind="visible: player.town().name == 'Battle Frontier'">
                     Enter Battle Frontier
                 </button>
+
+                <!-- ko foreach: player.town().content -->
+                <button data-bind="
+                    class: 'btn ' + $data.cssClass,
+                    text: $data.text,
+                    visible: $data.isVisible,
+                    click: $data.onclick
+                    "></button>
+
+                <!-- /ko -->
            </div>
        </div>
        <div class="col-6"></div>

@@ -3,6 +3,7 @@
 ///<reference path="KantoBerryMasterNPC.ts"/>
 ///<reference path="ProfOakNPC.ts"/>
 ///<reference path="RoamerNPC.ts"/>
+///<reference path="TownContent.ts"/>
 
 type TownOptionalArgument = {
     requirements?: (Requirement | OneFromManyRequirement)[],
@@ -20,10 +21,12 @@ class Town {
     public dungeon?: Dungeon;
     public npcs?: NPC[];
     public startingTown: boolean;
+    public content: TownContent[];
 
     constructor(
         name: string,
         region: GameConstants.Region,
+        content: TownContent[] = [],
         // Optional arguments are in a named object, so that we don't need
         // to pass undefined to get to the one we want
         optional: TownOptionalArgument = {}
@@ -36,6 +39,11 @@ class Town {
         this.dungeon = optional.dungeon;
         this.npcs = optional.npcs;
         this.startingTown = GameConstants.StartingTowns.includes(this.name);
+        this.content = content;
+
+        if (GameConstants.DockTowns.includes(name)) {
+            this.content.push(new Dock(this));
+        }
     }
 
     public isUnlocked() {
@@ -45,6 +53,6 @@ class Town {
 
 class DungeonTown extends Town {
     constructor(name: string, region: GameConstants.Region, requirements: (Requirement | OneFromManyRequirement)[] = []) {
-        super(name, region, { requirements, dungeon: dungeonList[name] });
+        super(name, region, [], { requirements, dungeon: dungeonList[name] });
     }
 }
