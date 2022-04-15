@@ -150,6 +150,8 @@ class Egg implements Saveable {
             Notifier.notify({
                 message: `You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`,
                 type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+                setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
             App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(baseForm).id);
         }

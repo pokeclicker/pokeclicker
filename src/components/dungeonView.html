@@ -94,7 +94,13 @@
         <!-- /ko -->
         <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest -->
         <div>
-            <img class="dungeon-chest" src="assets/images/dungeons/chest.png"/>
+            <div class="dungeon-chest" style="height: 95px">
+                <img src="assets/images/dungeons/chest.png"/>
+            </div>
+            <button class="btn btn-warning chest-button">
+                <p>Open</p>
+                <p>(+20% Enemy HP)</p>
+            </button>
         </div>
         <!-- /ko -->
         <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) -->
