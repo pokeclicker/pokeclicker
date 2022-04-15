@@ -1,13 +1,25 @@
 abstract class TownContent {
-    public abstract cssClass: string;
+    public abstract cssClass(): KnockoutComputed<string>;
     public abstract text(): string;
     public abstract isVisible(): boolean;
     public abstract onclick(): void;
+    public tooltip: string = undefined;
 
     public requirements: (Requirement | OneFromManyRequirement)[];
     protected parent: Town;
-    addParent(parent: Town) {
+    public addParent(parent: Town) {
         this.parent = parent;
+    }
+
+    public showAutoStart() {
+        return false;
+    }
+    public onAutoStart() {
+
+    }
+
+    public areaStatus() {
+        return areaStatus.completed;
     }
 
     constructor(requirements: (Requirement | OneFromManyRequirement)[] = []) {
@@ -16,7 +28,11 @@ abstract class TownContent {
 }
 
 class DockTownContent extends TownContent {
-    public cssClass = 'btn-info';
+    public cssClass() {
+        return ko.pureComputed(() => {
+            return 'btn btn-info';
+        });
+    }
 
     public isVisible() {
         return player.highestRegion() > 0;
@@ -32,7 +48,11 @@ class DockTownContent extends TownContent {
 }
 
 class BattleFrontierTownContent extends TownContent {
-    public cssClass = 'btn-primary';
+    public cssClass() {
+        return ko.pureComputed(() => {
+            return 'btn btn-primary';
+        });
+    }
 
     public isVisible() {
         return true;
@@ -48,7 +68,11 @@ class BattleFrontierTownContent extends TownContent {
 }
 
 class NextRegionTownContent extends TownContent {
-    public cssClass = 'btn-warning';
+    public cssClass() {
+        return ko.pureComputed(() => {
+            return 'btn btn-warning';
+        });
+    }
 
     public isVisible() {
         return MapHelper.ableToTravel();

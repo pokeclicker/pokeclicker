@@ -1,7 +1,11 @@
 ///<reference path="../towns/TownContent.ts"/>
 
 class Shop extends TownContent {
-    public cssClass = 'btn-secondary';
+    public cssClass() {
+        return ko.pureComputed(() => {
+            return 'btn btn-secondary';
+        });
+    }
     public text(): string {
         return this.name ?? 'Poké Mart';
     }

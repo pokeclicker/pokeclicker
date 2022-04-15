@@ -136,16 +136,9 @@ class MapHelper {
             }
         }
         const town = TownList[townName];
-        if (town.gym) {
-            const gym = town.gym;
-            if (Gym.isUnlocked(gym)) {
-                if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
-                    states.push(areaStatus.unlockedUnfinished);
-                } else if (!Gym.isAchievementsComplete(gym)) {
-                    states.push(areaStatus.missingAchievement);
-                }
-            }
-        }
+        town.content.forEach(c => {
+            states.push(c.areaStatus());
+        });
         // We don't want to re-process DungeonTowns
         if (!(town instanceof DungeonTown) && town?.dungeon) {
             const dungeonAccess = MapHelper.calculateTownCssClass(town?.dungeon.name);

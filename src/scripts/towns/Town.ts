@@ -14,7 +14,6 @@ type TownOptionalArgument = {
 class Town {
     public name: string;
     public region: GameConstants.Region;
-    public gym?: Gym;
     public requirements: (Requirement | OneFromManyRequirement)[];
     public dungeon?: Dungeon;
     public npcs?: NPC[];
@@ -31,13 +30,15 @@ class Town {
     ) {
         this.name = name;
         this.region = region;
-        this.gym = GymList[name];
         this.requirements = optional.requirements || [];
         this.dungeon = optional.dungeon;
         this.npcs = optional.npcs;
         this.startingTown = GameConstants.StartingTowns.includes(this.name);
         this.content = content;
 
+        if (GymList[name]) {
+            this.content.unshift(GymList[name]);
+        }
         if (GameConstants.DockTowns.includes(name)) {
             this.content.push(new DockTownContent());
         }

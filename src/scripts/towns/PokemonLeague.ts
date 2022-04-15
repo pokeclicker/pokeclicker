@@ -6,7 +6,6 @@ class PokemonLeague extends Town {
 
     constructor(name: string, region: GameConstants.Region, requirements: Array<Requirement | OneFromManyRequirement>, shops: Shop[], gyms: string[]) {
         super(name, region, shops, { requirements });
-        this.gym = null;
         this.gymList = [];
         for (const gym of gyms) {
             this.gymList.push(GymList[gym]);
