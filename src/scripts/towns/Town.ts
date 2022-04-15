@@ -42,7 +42,7 @@ class Town {
         this.content = content;
 
         if (GameConstants.DockTowns.includes(name)) {
-            this.content.push(new Dock(this));
+            this.content.push(new DockTownContent(this));
         }
     }
 

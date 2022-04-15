@@ -921,7 +921,7 @@ TownList['Pokémon League Hoenn'] = new Town(
 TownList['Battle Frontier'] = new Town(
     'Battle Frontier',
     GameConstants.Region.hoenn,
-    [],
+    [new BattleFrontierTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
         shops: [BattleFrontierShop],

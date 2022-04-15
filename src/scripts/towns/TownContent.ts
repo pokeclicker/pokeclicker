@@ -6,7 +6,7 @@ abstract class TownContent {
     public abstract onclick(): void;
 }
 
-class Dock implements TownContent {
+class DockTownContent implements TownContent {
     parent: Town;
 
     constructor(parent: Town) {
@@ -23,5 +23,19 @@ class Dock implements TownContent {
 
     public onclick(): void {
         MapHelper.openShipModal();
+    }
+}
+
+class BattleFrontierTownContent implements TownContent {
+    public text = 'Enter Battle Frontier';
+    public cssClass = 'btn-primary';
+    public requirements: [];
+
+    public isVisible() {
+        return true;
+    }
+
+    public onclick(): void {
+        App.game.battleFrontier.enter();
     }
 }
