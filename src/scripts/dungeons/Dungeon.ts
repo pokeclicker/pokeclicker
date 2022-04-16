@@ -959,7 +959,9 @@ dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
     ],
     2500, 31);
 
-const AlphList = 'MKOJUGWNIQZCPLVDTXSHYABFR'.split('');
+// All Unown except "E?!"
+SeededRand.seed(1337);
+const AlphUnownList = SeededRand.shuffleArray('ABCDFGHIJKLMNOPQRSTUVWXYZ'.split(''));
 
 dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     [
@@ -991,9 +993,9 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     ],
     60600,
     [
-        ...AlphList.map((char, index) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 280000, 14, {
+        ...AlphUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, AlphList.length - 1) == index),
+            requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(AlphUnownList) == char),
         })),
     ],
     3000, 32);
@@ -2560,7 +2562,9 @@ dungeonList['Mt. Coronet South'] = new Dungeon('Mt. Coronet South',
     ],
     60500, 207);
 
-const SolaceonList = 'NDYUXQMCSLAEGRIZWBOVTKJ'.split('');
+// All Unown except "FHP?!"
+SeededRand.seed(420);
+const SolaceonUnownList = SeededRand.shuffleArray('ABCDEGIJKLMNOQRSTUVWXYZ'.split(''));
 
 dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
     [
@@ -2588,9 +2592,9 @@ dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
     ],
     960000,
     [
-        ...SolaceonList.map((char, index) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+        ...SolaceonUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, SolaceonList.length - 1) == index),
+            requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(SolaceonUnownList) == char),
         })),
     ],
     62500, 209);
