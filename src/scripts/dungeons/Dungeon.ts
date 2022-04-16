@@ -959,7 +959,7 @@ dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
     ],
     2500, 31);
 
-const AlphList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?"
+const AlphList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?";
 
 dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     [
@@ -996,7 +996,7 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
                     hide: true,
                     requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, AlphList.length-1) == i),
                 }),
-        }
+        };
     ],
     3000, 32);
 
