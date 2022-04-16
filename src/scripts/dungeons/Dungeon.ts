@@ -991,7 +991,7 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     ],
     60600,
     [
-        ...AlphList.map((char, index) => new DungeonBossPokemon('Unown (${char})', 280000, 14, {
+        ...AlphList.map((char, index) => new DungeonBossPokemon(`Unown (${char})`, 280000, 14, {
             hide: true,
             requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, AlphList.length-1) == index),
         })),
