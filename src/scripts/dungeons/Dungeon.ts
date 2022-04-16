@@ -959,7 +959,7 @@ dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
     ],
     2500, 31);
 
-const AlphList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?";
+const AlphList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?".split('');
 
 dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     [
@@ -991,12 +991,10 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     ],
     60600,
     [
-        for (var i=0; AlphList.length-1; i++) {
-                new DungeonBossPokemon('Unown ('+AlphList.charAt(i)+')', 280000, 14, {
-                    hide: true,
-                    requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, AlphList.length-1) == i),
-                }),
-        };
+        AlphList.map((char, index) => new DungeonBossPokemon('Unown (${char})', 280000, 14, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, AlphList.length-1) == index),
+        })),
     ],
     3000, 32);
 
