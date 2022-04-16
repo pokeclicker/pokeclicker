@@ -959,7 +959,7 @@ dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
     ],
     2500, 31);
 
-const AlphList = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!?'.split('');
+const AlphList = 'MKOJUGWNIQZCPLVDTXSHYABFR'.split('');
 
 dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     [
@@ -2560,6 +2560,8 @@ dungeonList['Mt. Coronet South'] = new Dungeon('Mt. Coronet South',
     ],
     60500, 207);
 
+const SolaceonList = 'NDYUXQMCSLAEGRIZWBOVTKJ'.split('');
+
 dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
     [
         {pokemon: 'Zubat', options: { weight: 0.8 }},
@@ -2586,11 +2588,10 @@ dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
     ],
     960000,
     [
-        new DungeonBossPokemon('Unown (A)', 4100000, 30),
-        new DungeonBossPokemon('Unown (E)', 4100000, 30),
-        new DungeonBossPokemon('Unown (L)', 4100000, 30),
-        new DungeonBossPokemon('Unown (N)', 4100000, 30),
-        new DungeonBossPokemon('Unown (U)', 4100000, 30),
+        ...SolaceonList.map((char, index) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, SolaceonList.length - 1) == index),
+        })),
     ],
     62500, 209);
 
