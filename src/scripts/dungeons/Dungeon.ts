@@ -959,6 +959,8 @@ dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
     ],
     2500, 31);
 
+const AlphList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?"
+
 dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     [
         {pokemon: 'Poliwag', options: { weight: 0.6 }},
@@ -989,118 +991,12 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     ],
     60600,
     [
-        new DungeonBossPokemon('Unown (A)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 0),
-        }),
-        new DungeonBossPokemon('Unown (B)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 1),
-        }),
-        new DungeonBossPokemon('Unown (C)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 2),
-        }),
-        new DungeonBossPokemon('Unown (D)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 3),
-        }),
-        new DungeonBossPokemon('Unown (E)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 4),
-        }),
-        new DungeonBossPokemon('Unown (F)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 5),
-        }),
-        new DungeonBossPokemon('Unown (G)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 6),
-        }),
-        new DungeonBossPokemon('Unown (H)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 7),
-        }),
-        new DungeonBossPokemon('Unown (I)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 8),
-        }),
-        new DungeonBossPokemon('Unown (J)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 9),
-        }),
-        new DungeonBossPokemon('Unown (K)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 10),
-        }),
-        new DungeonBossPokemon('Unown (L)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 11),
-        }),
-        new DungeonBossPokemon('Unown (M)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 12),
-        }),
-        new DungeonBossPokemon('Unown (N)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 13),
-        }),
-        new DungeonBossPokemon('Unown (O)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 14),
-        }),
-        new DungeonBossPokemon('Unown (P)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 15),
-        }),
-        new DungeonBossPokemon('Unown (Q)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 16),
-        }),
-        new DungeonBossPokemon('Unown (R)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 17),
-        }),
-        new DungeonBossPokemon('Unown (S)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 18),
-        }),
-        new DungeonBossPokemon('Unown (T)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 19),
-        }),
-        new DungeonBossPokemon('Unown (U)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 20),
-        }),
-        new DungeonBossPokemon('Unown (V)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 21),
-        }),
-        new DungeonBossPokemon('Unown (W)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 22),
-        }),
-        new DungeonBossPokemon('Unown (X)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 23),
-        }),
-        new DungeonBossPokemon('Unown (Y)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 24),
-        }),
-        new DungeonBossPokemon('Unown (Z)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 25),
-        }),
-        new DungeonBossPokemon('Unown (!)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 26),
-        }),
-        new DungeonBossPokemon('Unown (?)', 280000, 14, {
-            hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, 27) == 27),
-        }),
+        for (var i=0; AlphList.length-1; i++) {
+                new DungeonBossPokemon('Unown ('+AlphList.charAt(i)+')', 280000, 14, {
+                    hide: true,
+                    requirement: new SeededDateRequirement(() => SeededDateRand.intBetween(0, AlphList.length-1) == i),
+                }),
+        }
     ],
     3000, 32);
 
