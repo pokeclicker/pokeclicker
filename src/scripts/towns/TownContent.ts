@@ -11,13 +11,6 @@ abstract class TownContent {
         this.parent = parent;
     }
 
-    public showAutoStart() {
-        return false;
-    }
-    public onAutoStart() {
-
-    }
-
     public areaStatus() {
         return areaStatus.completed;
     }

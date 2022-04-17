@@ -72,10 +72,11 @@
                         click: $data.onclick,
                         tooltip: ($data.tooltip ? { title: $data.tooltip, trigger: 'hover', placement: 'left' } : undefined)
                         "></button>
+                <!-- ko if: $data instanceof Gym -->
                     <button class="btn btn-info p-0 btn-gym-auto-restart" data-bind="
-                        visible: $data.showAutoStart(),
                         tooltip: { html: true, title: `Auto restart Gym fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${($data.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive money for clearing the gym</i>`, trigger: 'hover', placement:'right' },
-                        onclick: $data.onAutoStart">↻</button>
+                        onclick: GymRunner.startGym($data, true);">↻</button>
+                <!-- /ko -->
                 </div>
                 <!-- /ko -->
            </div>

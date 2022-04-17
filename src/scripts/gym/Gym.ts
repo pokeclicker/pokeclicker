@@ -39,12 +39,7 @@ class Gym extends TownContent {
         quest: true,
         achievement: true,
     };
-    public showAutoStart() {
-        return App.game.statistics.gymsDefeated[GameConstants.getGymIndex(this.town)]() >= 100;
-    }
-    public onAutoStart() {
-        GymRunner.startGym(this, true);
-    }
+
     public areaStatus(): areaStatus {
         if (Gym.isUnlocked(this)) {
             if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
