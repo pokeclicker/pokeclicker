@@ -47,7 +47,12 @@ class Town {
         if (GameConstants.StartingTowns.includes(name)) {
             this.content.push(new NextRegionTownContent());
         }
-        content.forEach((c) => c.addParent(this));
+        content.forEach((c) => {
+            c.addParent(this);
+            if (c instanceof Gym) {
+                TownList[c.town] = this;
+            }
+        });
     }
 
     public isUnlocked() {
