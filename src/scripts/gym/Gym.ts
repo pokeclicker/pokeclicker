@@ -63,13 +63,12 @@ class Gym extends TownContent {
         {
             quest = true,
             achievement = true,
-        }: gymFlags = {},
-        buttonText = 'Gym'
+        }: gymFlags = {}
     ) {
         super(requirements);
         this.flags.quest = quest;
         this.flags.achievement = achievement;
-        this.buttonText = buttonText;
+        this.buttonText = leaderName.replace(/\d/g,'');
     }
 
     public static isUnlocked(gym: Gym): boolean {

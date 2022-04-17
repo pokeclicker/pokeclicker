@@ -37,7 +37,9 @@ class Town {
         this.content = content;
 
         if (GymList[name]) {
-            this.content.unshift(GymList[name]);
+            const gym = GymList[name];
+            gym.buttonText = 'Gym';
+            this.content.unshift(gym);
         }
         if (GameConstants.DockTowns.includes(name)) {
             this.content.push(new DockTownContent());

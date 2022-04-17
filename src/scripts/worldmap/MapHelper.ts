@@ -155,18 +155,6 @@ class MapHelper {
         if (states.length) {
             return areaStatus[Math.min(...states)];
         }
-        if (town instanceof PokemonLeague && (town as PokemonLeague)?.gymList) {
-            for (const gym of (town as PokemonLeague)?.gymList) {
-                if (Gym.isUnlocked(gym) && !App.game.badgeCase.hasBadge(gym.badgeReward)) {
-                    return areaStatus[areaStatus.unlockedUnfinished];
-                }
-            }
-            for (const gym of (town as PokemonLeague)?.gymList) {
-                if (Gym.isUnlocked(gym) && !Gym.isAchievementsComplete(gym)) {
-                    return areaStatus[areaStatus.missingAchievement];
-                }
-            }
-        }
         return areaStatus[areaStatus.completed];
     }
 

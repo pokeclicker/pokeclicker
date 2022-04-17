@@ -3,7 +3,7 @@
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 
-const TownList: { [name: string]: Town | PokemonLeague } = {};
+const TownList: { [name: string]: Town } = {};
 
 const pokeMartShop = new Shop([
     ItemList['Pokeball'],
