@@ -7,7 +7,6 @@
 
 type TownOptionalArgument = {
     requirements?: (Requirement | OneFromManyRequirement)[],
-    dungeon?: Dungeon,
     npcs?: NPC[],
 };
 
@@ -31,7 +30,6 @@ class Town {
         this.name = name;
         this.region = region;
         this.requirements = optional.requirements || [];
-        this.dungeon = optional.dungeon;
         this.npcs = optional.npcs;
         this.startingTown = GameConstants.StartingTowns.includes(this.name);
         this.content = content;
@@ -61,7 +59,10 @@ class Town {
 }
 
 class DungeonTown extends Town {
+    dungeon: Dungeon
+
     constructor(name: string, region: GameConstants.Region, requirements: (Requirement | OneFromManyRequirement)[] = []) {
-        super(name, region, [], { requirements, dungeon: dungeonList[name] });
+        super(name, region, [], { requirements });
+        this.dungeon = dungeonList[name];
     }
 }

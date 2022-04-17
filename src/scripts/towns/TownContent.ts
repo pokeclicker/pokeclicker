@@ -83,3 +83,41 @@ class NextRegionTownContent extends TownContent {
         return `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`;
     }
 }
+
+class MoveToDungeon extends TownContent {
+    dungeon: Dungeon;
+    constructor(dungeon: Dungeon) {
+        super([]);
+        this.dungeon = dungeon;
+    }
+
+    public cssClass(): KnockoutComputed<string> {
+        return ko.pureComputed(() => {
+            return 'btn btn-secondary';
+        });
+    }
+    public text(): string {
+        return this.dungeon.name;
+    }
+    public isVisible(): boolean {
+        return true;
+    }
+    public onclick(): void {
+        MapHelper.moveToTown(this.dungeon.name);
+    }
+    public isUnlocked(): boolean {
+        return TownList[this.dungeon.name].isUnlocked();
+    }
+    public areaStatus(): areaStatus {
+        const dungeonAccess = MapHelper.calculateTownCssClass(this.dungeon.name);
+        switch (dungeonAccess) {
+            // if dungeon completed or locked, ignore it
+            case 'completed':
+            case 'locked':
+                return areaStatus.completed;
+            // Return the dungeons state
+            default:
+                return areaStatus[dungeonAccess];
+        }
+    }
+}

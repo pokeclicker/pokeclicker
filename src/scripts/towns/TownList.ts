@@ -186,10 +186,9 @@ TownList['Pewter City'] = new Town(
 TownList['Cerulean City'] = new Town(
     'Cerulean City',
     GameConstants.Region.kanto,
-    [CeruleanCityShop],
+    [CeruleanCityShop, new MoveToDungeon(dungeonList['Cerulean Cave'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
-        dungeon: dungeonList['Cerulean Cave'],
         npcs: [CeruleanKantoBerryMaster],
     }
 );
@@ -205,10 +204,9 @@ TownList['Vermilion City'] = new Town(
 TownList['Lavender Town'] = new Town(
     'Lavender Town',
     GameConstants.Region.kanto,
-    [LavenderTownShop],
+    [LavenderTownShop, new MoveToDungeon(dungeonList['Pokemon Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
-        dungeon: dungeonList['Pokemon Tower'],
         npcs: [LavenderMrFuji],
     }
 );
@@ -245,13 +243,12 @@ TownList['Fuchsia City'] = new Town(
 TownList['Cinnabar Island'] = new Town(
     'Cinnabar Island',
     GameConstants.Region.kanto,
-    [CinnabarIslandShop],
+    [CinnabarIslandShop, new MoveToDungeon(dungeonList['Pokemon Mansion'])],
     {
         requirements: [new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.kanto, 20),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 21),
         ])],
-        dungeon: dungeonList['Pokemon Mansion'],
         npcs: [CinnabarIslandResearcher],
     }
 );
@@ -477,30 +474,27 @@ TownList['Cherrygrove City'] = new Town(
 TownList['Violet City'] = new Town(
     'Violet City',
     GameConstants.Region.johto,
-    [VioletCityShop],
+    [VioletCityShop, new MoveToDungeon(dungeonList['Sprout Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 31)],
-        dungeon: dungeonList['Sprout Tower'],
         npcs: [VioletEarlDervish],
     }
 );
 TownList['Azalea Town'] = new Town(
     'Azalea Town',
     GameConstants.Region.johto,
-    [AzaleaTownShop],
+    [AzaleaTownShop, new MoveToDungeon(dungeonList['Slowpoke Well'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 33)],
-        dungeon: dungeonList['Slowpoke Well'],
         npcs: [AzaleaOldMan],
     }
 );
 TownList['Goldenrod City'] = new Town(
     'Goldenrod City',
     GameConstants.Region.johto,
-    [GoldenrodDepartmentStoreShop, JohtoBerryMaster],
+    [GoldenrodDepartmentStoreShop, JohtoBerryMaster, new MoveToDungeon(dungeonList['Radio Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
-        dungeon: dungeonList['Radio Tower'],
         npcs: [BigSpender],
     }
 );
@@ -534,13 +528,12 @@ TownList['Cianwood City'] = new Town(
 TownList['Mahogany Town'] = new Town(
     'Mahogany Town',
     GameConstants.Region.johto,
-    [MahoganyTownShop],
+    [MahoganyTownShop, new MoveToDungeon(dungeonList['Team Rockets Hideout'])],
     {
         requirements: [new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.johto, 42),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt Mortar')),
         ])],
-        dungeon: dungeonList['Team Rockets Hideout'],
         npcs: [MahoganySouvenirShopAttendant],
     }
 );
@@ -1223,10 +1216,9 @@ TownList['Floaroma Town'] = new Town(
 TownList['Eterna City'] = new Town(
     'Eterna City',
     GameConstants.Region.sinnoh,
-    [EternaCityShop],
+    [EternaCityShop, new MoveToDungeon(dungeonList['Team Galactic Eterna Building'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Eterna Forest'))],
-        dungeon: dungeonList['Team Galactic Eterna Building'],
         npcs: [EternaLassCaroline],
     }
 );
@@ -1250,10 +1242,9 @@ TownList['Solaceon Town'] = new Town(
 TownList['Veilstone City'] = new Town(
     'Veilstone City',
     GameConstants.Region.sinnoh,
-    [DepartmentStoreShop],
+    [DepartmentStoreShop, new MoveToDungeon(dungeonList['Team Galactic HQ'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 215)],
-        dungeon: dungeonList['Team Galactic HQ'],
         npcs: [BigSpender],
     }
 );
@@ -1625,10 +1616,9 @@ TownList['Virbank City'] = new Town(
 TownList['Castelia City'] = new Town(
     'Castelia City',
     GameConstants.Region.unova,
-    [CasteliaCityShop],
+    [CasteliaCityShop, new MoveToDungeon(dungeonList['Castelia Sewers'])],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Toxic)],
-        dungeon: dungeonList['Castelia Sewers'],
         npcs: [CasteliaMusician],
     }
 );
@@ -1693,10 +1683,9 @@ TownList['Lacunosa Town'] = new Town(
 TownList['Opelucid City'] = new Town(
     'Opelucid City',
     GameConstants.Region.unova,
-    [OpelucidCityShop],
+    [OpelucidCityShop, new MoveToDungeon(dungeonList['Team Plasma Assault'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 11)],
-        dungeon: dungeonList['Team Plasma Assault'],
     }
 );
 TownList['Shopping Mall Nine'] = new Town(
@@ -2119,10 +2108,9 @@ TownList['Cyllage City'] = new Town(
 TownList['Geosenge Town'] = new Town(
     'Geosenge Town',
     GameConstants.Region.kalos,
-    [GeosengeTownShop],
+    [GeosengeTownShop, new MoveToDungeon(dungeonList['Team Flare Secret HQ'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 10)],
-        dungeon: dungeonList['Team Flare Secret HQ'],
     }
 );
 TownList['Shalour City'] = new Town(
@@ -2486,9 +2474,8 @@ TownList['Konikoni City'] = new Town(
 TownList['Aether Paradise'] = new Town(
     'Aether Paradise',
     GameConstants.Region.alola,
-    [AetherParadiseShop],
+    [AetherParadiseShop, new MoveToDungeon(dungeonList['Aether Foundation'])],
     {
-        dungeon: dungeonList['Aether Foundation'],
         requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
         npcs: [AetherParadiseAlolaRoamerNPC],
     }
@@ -2513,19 +2500,17 @@ TownList['Tapu Village'] = new Town(
 TownList['Seafolk Village'] = new Town(
     'Seafolk Village',
     GameConstants.Region.alola,
-    [SeafolkVillageShop],
+    [SeafolkVillageShop, new MoveToDungeon(dungeonList['Mina\'s Houseboat'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
-        dungeon: dungeonList['Mina\'s Houseboat'],
         npcs: [SeafolkCaptain],
     }
 );
 TownList['Exeggutor Island'] = new Town(
     'Exeggutor Island',
     GameConstants.Region.alola,
-    [ExeggutorIslandShop],
+    [ExeggutorIslandShop, new MoveToDungeon(dungeonList['Exeggutor Island Hill'])],
     {
-        dungeon: dungeonList['Exeggutor Island Hill'],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
     }
 );
@@ -2861,10 +2846,9 @@ TownList['Spikemuth'] = new Town(
 TownList['Wyndon'] = new Town(
     'Wyndon',
     GameConstants.Region.galar,
-    [WyndonShop],
+    [WyndonShop, new MoveToDungeon(dungeonList['Rose Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 24)],
-        dungeon: dungeonList['Rose Tower'],
     }
 );
 TownList['Wyndon Stadium'] = new Town(
@@ -2882,10 +2866,9 @@ TownList['Wyndon Stadium'] = new Town(
 TownList['Master Dojo'] = new Town(
     'Master Dojo',
     GameConstants.Region.galar,
-    [],
+    [new MoveToDungeon(dungeonList['Master Dojo Trial'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
-        dungeon: dungeonList['Master Dojo Trial'],
     }
 );
 TownList['Master Dojo Battlefield'] = new Town(

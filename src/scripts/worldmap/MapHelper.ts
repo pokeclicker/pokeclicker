@@ -139,19 +139,6 @@ class MapHelper {
         town.content.forEach(c => {
             states.push(c.areaStatus());
         });
-        // We don't want to re-process DungeonTowns
-        if (!(town instanceof DungeonTown) && town?.dungeon) {
-            const dungeonAccess = MapHelper.calculateTownCssClass(town?.dungeon.name);
-            switch (dungeonAccess) {
-                // if dungeon completed or locked, ignore it
-                case 'completed':
-                case 'locked':
-                    break;
-                // Return the dungeons state
-                default:
-                    states.push(areaStatus[dungeonAccess]);
-            }
-        }
         if (states.length) {
             return areaStatus[Math.min(...states)];
         }

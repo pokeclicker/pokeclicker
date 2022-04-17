@@ -39,11 +39,6 @@
                     Start<br/>
                         <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town().dungeon.tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
                 </button>
-                <button class="btn btn-secondary"
-                        onclick="MapHelper.moveToTown(player.town().dungeon.name)"
-                        data-bind="visible: player.town().dungeon && (!(player.town() instanceof DungeonTown) && player.town() instanceof Town), if: player.town().dungeon">
-                        <span data-bind="text: player.town().dungeon.name"></span>
-                </button>
 
                 <!-- ko foreach: player.town().content -->
                 <div class="btn-group btn-block" style="margin-top: 0px;">
