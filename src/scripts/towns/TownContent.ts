@@ -15,6 +15,10 @@ abstract class TownContent {
         return areaStatus.completed;
     }
 
+    public isUnlocked(): boolean {
+        return this.requirements.every(requirement => requirement.isCompleted());
+    }
+
     constructor(requirements: (Requirement | OneFromManyRequirement)[] = []) {
         this.requirements = requirements;
     }

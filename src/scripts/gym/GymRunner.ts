@@ -19,7 +19,7 @@ class GymRunner {
         this.autoRestart(autoRestart);
         this.running(false);
         this.gymObservable(gym);
-        if (Gym.isUnlocked(gym)) {
+        if (gym.isUnlocked()) {
             if (gym instanceof Champion) {
                 gym.setPokemon(player.starter());
             }

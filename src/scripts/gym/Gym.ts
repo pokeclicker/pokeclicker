@@ -41,7 +41,7 @@ class Gym extends TownContent {
     };
 
     public areaStatus(): areaStatus {
-        if (Gym.isUnlocked(this)) {
+        if (this.isUnlocked()) {
             if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
                 return areaStatus.unlockedUnfinished;
             } else if (!Gym.isAchievementsComplete(this)) {
@@ -69,10 +69,6 @@ class Gym extends TownContent {
         this.flags.quest = quest;
         this.flags.achievement = achievement;
         this.buttonText = leaderName.replace(/\d/g,'');
-    }
-
-    public static isUnlocked(gym: Gym): boolean {
-        return gym.requirements.every(requirement => requirement.isCompleted());
     }
 
     public static isAchievementsComplete(gym: Gym) {

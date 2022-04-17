@@ -51,6 +51,7 @@
                         class: $data.cssClass(),
                         text: $data.text(),
                         visible: $data.isVisible(),
+                        disable: !$data.isUnlocked(),
                         click: $data.onclick,
                         tooltip: ($data.tooltip ? { title: $data.tooltip, trigger: 'hover', placement: 'left' } : undefined)
                         "></button>
