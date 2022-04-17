@@ -2870,7 +2870,7 @@ TownList['Wyndon'] = new Town(
 TownList['Wyndon Stadium'] = new Town(
     'Wyndon Stadium',
     GameConstants.Region.galar,
-    [GymList['Trainer Marnie'], GymList['Trainer Hop'], GymList['Trainer Bede'], GymList['Champion Leon'], indigoPlateauShop],
+    [GymList['Trainer Marnie'], GymList['Trainer Hop'], GymList['Trainer Bede'], GymList['Champion Leon'], pokeLeagueShop],
     {
         requirements: [
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower')),
