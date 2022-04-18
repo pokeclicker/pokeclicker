@@ -80,4 +80,16 @@ export default class SeededRand {
     public static string(length: number): string {
         return [...Array(length)].map(() => this.next().toString(36)[2]).join('');
     }
+
+    // Shuffle an array
+    public static shuffleArray<T>(arr: Array<T>): Array<T> {
+        const output = [...arr];
+        for (let i = output.length; i; i--) {
+            const j = this.floor(i);
+            const x = output[i - 1];
+            output[i - 1] = output[j];
+            output[j] = x;
+        }
+        return output;
+    }
 }
