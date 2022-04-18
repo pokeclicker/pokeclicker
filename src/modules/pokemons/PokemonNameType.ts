@@ -1175,7 +1175,7 @@ export type PokemonNameType
     | 'Snom'
     | 'Frosmoth'
     | 'Stonjourner'
-    | 'Eiscue'
+    | 'Eiscue (iceface)'
     | 'Eiscue (noice)'
     | 'Indeedee'
     | 'Morpeko'

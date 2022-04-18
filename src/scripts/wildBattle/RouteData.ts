@@ -1938,7 +1938,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 7', GameConstants.Region.galar, 16,
     new RoutePokemon({
-        land: ['Thievul', 'Corviknight', 'Perrserker', 'Morpeko', 'Liepard', 'Seismitoad', 'Karrablast', 'Shelmet', 'Meowstic', 'Corviknight', 'Galvantula', 'Inkay', 'Thievul', 'Perrserker', 'Morpeko'],
+        land: ['Thievul', 'Corviknight', 'Perrserker', 'Morpeko', 'Morpeko (hangry)', 'Liepard', 'Seismitoad', 'Karrablast', 'Shelmet', 'Meowstic', 'Corviknight', 'Galvantula', 'Inkay', 'Thievul', 'Perrserker', 'Morpeko'],
         headbutt: ['Greedent'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Galar_Fairy)]
@@ -1985,7 +1985,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Outer Spikemuth', GameConstants.Region.galar, 22,
     new RoutePokemon({
-        land: ['Liepard', 'Thievul', 'Perrserker','Morpeko', 'Morpeko (hangry)', 'Jellicent', 'Bergmite', 'Mareanie','Toxapex', 'Dhelmise', 'Clobbopus'],
+        land: ['Liepard', 'Thievul', 'Perrserker','Morpeko', 'Jellicent', 'Bergmite', 'Mareanie','Toxapex', 'Dhelmise', 'Clobbopus'],
         headbutt: ['Greedent'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 21)]
@@ -2000,7 +2000,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 10 North', GameConstants.Region.galar, 24,
     new RoutePokemon({
-        land: ['Snom', 'Duraludon', 'Stonjourner', 'Eiscue', 'Eiscue (noice)', 'Beartic', 'Vanillish', 'Abomasnow', 'Galarian Darumaka','Galarian Mr. Mime', 'Sneasel', 'Snover', 'Cubchoo'],
+        land: ['Snom', 'Duraludon', 'Stonjourner', 'Eiscue (noice)', 'Beartic', 'Vanillish', 'Abomasnow', 'Galarian Darumaka','Galarian Mr. Mime', 'Sneasel', 'Snover', 'Cubchoo'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 23)]
 ));
@@ -2488,7 +2488,7 @@ Routes.add(new RegionRoute(
     'Frigid Sea', GameConstants.Region.galar, 47,
     new RoutePokemon({
         land: ['Bergmite', 'Mime Jr.', 'Audino'],
-        water: ['Magikarp', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Wailmer', 'Gyarados', 'Dhelmise', 'Spheal', 'Avalugg', 'Eiscue', 'Tirtouga', 'Wailmer'],
+        water: ['Magikarp', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Wailmer', 'Gyarados', 'Dhelmise', 'Spheal', 'Avalugg', 'Eiscue (noice)', 'Tirtouga', 'Wailmer'],
         special:
       [
           new SpecialRoutePokemon(['Sealeo', 'Walrein', 'Carracosta'],  new WeatherRequirement([WeatherType.Clear])),
