@@ -21097,7 +21097,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 875,
-        'name': 'Eiscue',
+        'name': 'Eiscue (iceface)',
         'type': [PokemonType.Ice],
         'base': {
             'hitpoints': 75,
@@ -21125,6 +21125,7 @@ const pokemonList = createPokemonArray(
             'speed': 130,
         },
         'eggCycles': 25,
+        'evolutions': [new EnvironmentRestrictedLevelEvolution('Ice' 'Eiscue (noice)', 'Eiscue (iceface)', 1)],
         'levelType': LevelType.slow,
         'exp': 165,
         'catchRate': 60,
