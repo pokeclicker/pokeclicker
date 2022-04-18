@@ -6887,11 +6887,11 @@ dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
     96500, 201);
 
 dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
-    ['Golurk', 'Electabuzz', 'Dragloak', 'Araquanid', 'Cryogonal', 'Bronzong', 'Claydol', 'Absol', 'Galvantula', 'Audino'],
+    ['Golurk', 'Electabuzz', 'Drakloak', 'Araquanid', 'Cryogonal', 'Bronzong', 'Claydol', 'Absol', 'Galvantula', 'Audino'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Dragloak', 8000000, 70),
+        new DungeonBossPokemon('Dragapult', 8000000, 70),
         new DungeonBossPokemon('Electivire', 8000000, 70),
         new DungeonBossPokemon('Regidrago', 8000000, 70),
         new DungeonBossPokemon('Regieleki', 8000000, 70),
