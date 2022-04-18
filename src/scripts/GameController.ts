@@ -272,16 +272,13 @@ class GameController {
                         if (player.town() instanceof DungeonTown) {
                             DungeonRunner.initializeDungeon(player.town().dungeon);
                         } else {
-                            player.town().content[0].onclick();
-                        }
-                        if (player.town().gym) {
-                            GymRunner.startGym(player.town().gym);
+                            player.town().content[0].protectedOnclick();
                         }
                         return e.preventDefault();
                     } else if (isNumberKey) {
                         // Check if a number higher than 0 and less than total Gyms was pressed
                         if (numberKey < player.town().content.length) {
-                            player.town().content[numberKey].onclick();
+                            player.town().content[numberKey].protectedOnclick();
                         }
                         return e.preventDefault();
                     }

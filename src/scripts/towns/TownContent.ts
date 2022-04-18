@@ -23,6 +23,23 @@ abstract class TownContent {
         return undefined;
     }
 
+    public protectedOnclick(): void {
+        const reqsList = [];
+        this.requirements?.forEach(requirement => {
+            if (!requirement.isCompleted()) {
+                reqsList.push(requirement.hint());
+            }
+        });
+        if (reqsList.length) {
+            Notifier.notify({
+                message: `You don't have access yet.\n${reqsList.join('\n')}`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
+        } else {
+            this.onclick();
+        }
+    }
+
     constructor(requirements: (Requirement | OneFromManyRequirement)[] = []) {
         this.requirements = requirements;
     }
