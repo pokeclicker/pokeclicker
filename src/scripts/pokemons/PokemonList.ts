@@ -22072,7 +22072,7 @@ const pokemonList = createPokemonArray(
             'speed': 130,
         },
         'eggCycles': 25,
-        'evolutions': [new EnvironmentRestrictedLevelEvolution('Ice' 'Eiscue (noice)', 'Eiscue (iceface)', 1)],
+        'evolutions': [new EnvironmentRestrictedLevelEvolution('Ice', 'Eiscue (noice)', 'Eiscue (iceface)', 1)],
         'levelType': LevelType.slow,
         'exp': 165,
         'catchRate': 60,
