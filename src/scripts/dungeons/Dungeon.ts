@@ -6861,36 +6861,38 @@ dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Regidrago', 8000000, 70),
-        new DungeonBossPokemon('Regieleki', 8000000, 70),
+        new DungeonBossPokemon('Relicanth', 8000000, 70),
+        new DungeonBossPokemon('Regirock', 8000000, 70),
     ],
     96500, 201);
 
 dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
-    ['Metagross', 'Bronzong', 'Dragapult', 'Snorlax', 'Magmortar'],
+    ['Metang', 'Bronzong', 'Dragapult', 'Snorlax', 'Magmortar'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Regidrago', 8000000, 70),
-        new DungeonBossPokemon('Regieleki', 8000000, 70),
+        new DungeonBossPokemon('Metagross', 8000000, 70),
+        new DungeonBossPokemon('Registeel', 8000000, 70),
     ],
     96500, 201);
 
 dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
-    ['Cryogonal', 'Beartic', 'Glalie', 'Aurorus', 'Weavile', 'Vanilluxe', 'Galarian Darmanitan', 'Absol', 'Froslass', 'Delibird'],
+    ['Cryogonal', 'Beartic', 'Galarian Darmanitan', 'Aurorus', 'Weavile', 'Vanilluxe', 'Absol', 'Froslass', 'Delibird'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Regidrago', 8000000, 70),
-        new DungeonBossPokemon('Regieleki', 8000000, 70),
+        new DungeonBossPokemon('Glalie', 8000000, 70),
+        new DungeonBossPokemon('Regice', 8000000, 70),
     ],
     96500, 201);
 
 dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
-    ['Golurk', 'Electivire', 'Dragapult', 'Araquanid', 'Cryogonal', 'Bronzong', 'Claydol', 'Absol', 'Galvantula', 'Audino'],
+    ['Golurk', 'Electabuzz', 'Dragloak', 'Araquanid', 'Cryogonal', 'Bronzong', 'Claydol', 'Absol', 'Galvantula', 'Audino'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
+        new DungeonBossPokemon('Dragloak', 8000000, 70),
+        new DungeonBossPokemon('Electivire', 8000000, 70),
         new DungeonBossPokemon('Regidrago', 8000000, 70),
         new DungeonBossPokemon('Regieleki', 8000000, 70),
     ],
