@@ -177,19 +177,31 @@ class Game {
             StartSequenceRunner.start();
         }
 
-        let workerSupported = true;
-
         try {
             console.log('starting web worker...');
-            const blob = new Blob([`setInterval(() => postMessage('tick'), ${GameConstants.TICK_TIME})`]);
+            const blob = new Blob([
+                `
+                let _time = 0;
+                let ticks = 0;
+                const tick = (time) => {
+                    const delta = time - _time;
+                    ticks += delta;
+                    _time = time;
+                    if (ticks >= ${GameConstants.TICK_TIME}) {
+                        ticks -= ${GameConstants.TICK_TIME};
+                        postMessage('tick');
+                    }
+                    requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
+                `,
+            ]);
             const blobURL = window.URL.createObjectURL(blob);
 
             this.worker = new Worker(blobURL);
             // use a setTimeout to queue the event
             this.worker?.addEventListener('message', () => Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null);
-        } catch (e) {
-            workerSupported = false;
-        }
+        } catch (e) {}
 
         this.interval = setInterval(() => !this.worker || !Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null, GameConstants.TICK_TIME);
         window.onbeforeunload = () => {
