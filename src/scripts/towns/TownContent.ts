@@ -1,5 +1,5 @@
 abstract class TownContent {
-    public abstract cssClass(): KnockoutComputed<string>;
+    public abstract cssClass(): string;
     public abstract text(): string;
     public abstract isVisible(): boolean;
     public abstract onclick(): void;
@@ -26,9 +26,7 @@ abstract class TownContent {
 
 class DockTownContent extends TownContent {
     public cssClass() {
-        return ko.pureComputed(() => {
-            return 'btn btn-info';
-        });
+        return 'btn btn-info';
     }
 
     public isVisible() {
@@ -46,9 +44,7 @@ class DockTownContent extends TownContent {
 
 class BattleFrontierTownContent extends TownContent {
     public cssClass() {
-        return ko.pureComputed(() => {
-            return 'btn btn-primary';
-        });
+        return 'btn btn-primary';
     }
 
     public isVisible() {
@@ -66,9 +62,7 @@ class BattleFrontierTownContent extends TownContent {
 
 class NextRegionTownContent extends TownContent {
     public cssClass() {
-        return ko.pureComputed(() => {
-            return 'btn btn-warning';
-        });
+        return 'btn btn-warning';
     }
 
     public isVisible() {
@@ -91,10 +85,8 @@ class MoveToDungeon extends TownContent {
         this.dungeon = dungeon;
     }
 
-    public cssClass(): KnockoutComputed<string> {
-        return ko.pureComputed(() => {
-            return 'btn btn-secondary';
-        });
+    public cssClass() {
+        return 'btn btn-secondary';
     }
     public text(): string {
         return this.dungeon.name;

@@ -19,12 +19,10 @@ class Gym extends TownContent {
     buttonText: string;
     public tooltip = 'Battle Gym Leaders to earn badges';
     public cssClass() {
-        return ko.pureComputed(() => {
-            if (App.game.badgeCase.hasBadge(this.badgeReward)) {
-                return 'btn btn-success';
-            }
-            return 'btn btn-secondary';
-        });
+        if (App.game.badgeCase.hasBadge(this.badgeReward)) {
+            return 'btn btn-success';
+        }
+        return 'btn btn-secondary';
     }
     public text(): string {
         return this.buttonText;
