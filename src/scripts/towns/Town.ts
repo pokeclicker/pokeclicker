@@ -47,9 +47,6 @@ class Town {
         }
         content.forEach((c) => {
             c.addParent(this);
-            if (c instanceof Gym) {
-                TownList[c.town] = this;
-            }
         });
     }
 

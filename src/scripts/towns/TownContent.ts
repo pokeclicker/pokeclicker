@@ -6,7 +6,7 @@ abstract class TownContent {
     public tooltip: string = undefined;
 
     public requirements: (Requirement | OneFromManyRequirement)[];
-    protected parent: Town;
+    public parent: Town;
     public addParent(parent: Town) {
         this.parent = parent;
     }
