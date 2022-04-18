@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="row no-gutters">
-       <div class="col-3 no-gutters">
+       <div class="col-4 no-gutters">
            <div class="list-group">
                 <button class="btn btn-secondary p-0"
                         onclick="DungeonRunner.initializeDungeon(player.town().dungeon)"
@@ -56,11 +56,16 @@
                         click: () => GymRunner.startGym($data, true),
                         visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex($data.town)]() >= 100">↻</button>
                     <!-- /ko -->
+                    <span class="p-0 bg-secondary text-center col-3" data-bind="
+                        visible: $data.clears() != undefined,
+                        text: $data.clears(),
+                        tooltip: { html: true, title: 'Total clears', trigger: 'hover', placement:'right' }"
+                        ></span>
                 </div>
                 <!-- /ko -->
            </div>
        </div>
-       <div class="col-6"></div>
+       <div class="col-5"></div>
        <div class="col-3 no-gutters">
            <div class="list-group" data-bind="foreach: player.town().npcs">
                <!-- ko if: $data.isVisible() -->

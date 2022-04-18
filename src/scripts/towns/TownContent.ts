@@ -19,6 +19,10 @@ abstract class TownContent {
         return this.requirements.every(requirement => requirement.isCompleted());
     }
 
+    public clears(): number {
+        return undefined;
+    }
+
     constructor(requirements: (Requirement | OneFromManyRequirement)[] = []) {
         this.requirements = requirements;
     }
@@ -111,5 +115,11 @@ class MoveToDungeon extends TownContent {
             default:
                 return areaStatus[dungeonAccess];
         }
+    }
+    public clears() {
+        if (!QuestLineHelper.isQuestLineCompleted('Tutorial Quests')) {
+            return undefined;
+        }
+        return App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.dungeon.name)]();
     }
 }
