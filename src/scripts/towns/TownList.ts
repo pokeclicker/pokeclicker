@@ -2902,7 +2902,14 @@ TownList['Iceberg Ruins'] = new DungeonTown(
 TownList['Split-Decision Ruins'] = new DungeonTown(
     'Split-Decision Ruins',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 48)]
+    [
+        new MultiRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.galar, 48),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Iron Ruins')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Iceberg Ruins')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rock Peak Ruins')),
+        ]),
+    ]
 );
 TownList['Dyna Tree Hill'] = new DungeonTown(
     'Dyna Tree Hill',
