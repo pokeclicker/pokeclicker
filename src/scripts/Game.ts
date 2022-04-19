@@ -188,7 +188,12 @@ class Game {
                     ticks += delta;
                     _time = time;
                     if (ticks >= ${GameConstants.TICK_TIME}) {
-                        ticks -= ${GameConstants.TICK_TIME};
+                        // Skip the ticks if we have too many...
+                        if (ticks >= ${GameConstants.TICK_TIME * 2}) {
+                          ticks = 0;
+                        } else {
+                            ticks -= ${GameConstants.TICK_TIME};
+                        }
                         postMessage('tick');
                     }
                     requestAnimationFrame(tick);
