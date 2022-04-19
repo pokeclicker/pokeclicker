@@ -128,7 +128,7 @@ class Safari {
             $('#safariModal').modal({backdrop: 'static', keyboard: false});
         } else {
             Notifier.notify({
-                message: 'You need the Safari Pass to access this location.<br/><i>Visit the Gym in Fuschia City</i>',
+                message: 'You need the Safari Pass to access this location.\n<i>Visit the Gym in Fuschia City</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }

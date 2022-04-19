@@ -90,6 +90,7 @@ class Game {
         AchievementHandler.calculateMaxBonus(); //recalculate bonus based on active challenges
 
         const now = new Date();
+        SeededDateRand.seedWithDate(now);
         DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
         BerryDeal.generateDeals(now);
         Weather.generateWeather(now);
@@ -134,14 +135,14 @@ class Game {
             const moneyToEarn = Math.floor(baseMoneyToEarn * 0.5);//Debuff for offline money
             App.game.wallet.gainMoney(moneyToEarn, true);
 
-            if (Settings.getSetting('notification.offline_earnings').value) {
-                Notifier.notify({
-                    type: NotificationConstants.NotificationOption.info,
-                    title: 'Offline progress',
-                    message: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
-                    timeout: 2 * GameConstants.MINUTE,
-                });
-            }
+            Notifier.notify({
+                type: NotificationConstants.NotificationOption.info,
+                title: 'Offline progress',
+                message: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
+                strippedMessage: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: ${moneyToEarn.toLocaleString('en-US')} money`,
+                timeout: 2 * GameConstants.MINUTE,
+                setting: NotificationConstants.NotificationSetting.General.offline_earnings,
+            });
         }
     }
 
@@ -176,25 +177,41 @@ class Game {
             StartSequenceRunner.start();
         }
 
-        let workerSupported = true;
-
         try {
             console.log('starting web worker...');
-            const blob = new Blob([`setInterval(() => postMessage('tick'), ${GameConstants.TICK_TIME})`]);
+            const blob = new Blob([
+                `
+                let _time = 0;
+                let ticks = 0;
+                const tick = (time) => {
+                    const delta = time - _time;
+                    ticks += delta;
+                    _time = time;
+                    if (ticks >= ${GameConstants.TICK_TIME}) {
+                        ticks -= ${GameConstants.TICK_TIME};
+                        postMessage('tick');
+                    }
+                    requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
+                `,
+            ]);
             const blobURL = window.URL.createObjectURL(blob);
 
             this.worker = new Worker(blobURL);
             // use a setTimeout to queue the event
             this.worker?.addEventListener('message', () => Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null);
-        } catch (e) {
-            workerSupported = false;
-        }
+        } catch (e) {}
 
         this.interval = setInterval(() => !this.worker || !Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null, GameConstants.TICK_TIME);
+        window.onbeforeunload = () => {
+            this.save();
+        };
     }
 
     stop() {
         clearTimeout(this.interval);
+        window.onbeforeunload = () => {};
     }
 
     gameTick() {
@@ -249,6 +266,7 @@ class Game {
 
             // Check if it's a new day
             if (old.toLocaleDateString() !== now.toLocaleDateString()) {
+                SeededDateRand.seedWithDate(now);
                 // Give the player a free quest refresh
                 this.quests.freeRefresh(true);
                 //Refresh the Underground deals
@@ -257,7 +275,7 @@ class Game {
                 if (this.underground.canAccess() || App.game.quests.isDailyQuestsUnlocked()) {
                     Notifier.notify({
                         title: 'It\'s a new day!',
-                        message: `${this.underground.canAccess() ? 'Your Underground deals have been updated.<br/>' : ''}` +
+                        message: `${this.underground.canAccess() ? 'Your Underground deals have been updated.\n' : ''}` +
                         `${App.game.quests.isDailyQuestsUnlocked() ? '<i>You have a free quest refresh.</i>' : ''}`,
                         type: NotificationConstants.NotificationOption.info,
                         timeout: 3e4,
@@ -271,9 +289,7 @@ class Game {
                 RoamingPokemonList.generateIncreasedChanceRoutes(now);
             }
 
-            // Save the game
-            player._lastSeen = Date.now();
-            Save.store(player);
+            this.save();
         }
 
         // Underground
@@ -306,7 +322,8 @@ class Game {
     }
 
     save() {
-
+        player._lastSeen = Date.now();
+        Save.store(player);
     }
 
     // Knockout getters/setters

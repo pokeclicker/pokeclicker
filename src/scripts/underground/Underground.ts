@@ -347,7 +347,7 @@ class Underground implements Feature {
     public static sellAllMineItems() {
         for (let i = 0; i < player.mineInventory().length; i++) {
             const item = player.mineInventory()[i];
-            if (!item.sellLocked()) {
+            if (!item.sellLocked() && item.valueType != 'Mine Egg') {
                 Underground.sellMineItem(item.id, Infinity);
             }
         }
@@ -389,7 +389,7 @@ class Underground implements Feature {
             $('#mineModal').modal('show');
         } else {
             Notifier.notify({
-                message: 'You need the Explorer Kit to access this location.<br/><i>Check out the shop at Cinnabar Island</i>',
+                message: 'You need the Explorer Kit to access this location.\n<i>Check out the shop at Cinnabar Island</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -407,7 +407,7 @@ class Underground implements Feature {
             $('#mineSellAllTreasuresModal').modal('show');
         } else {
             Notifier.notify({
-                message: 'You need the Explorer Kit to access this location.<br/><i>Check out the shop at Cinnabar Island</i>',
+                message: 'You need the Explorer Kit to access this location.\n<i>Check out the shop at Cinnabar Island</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
