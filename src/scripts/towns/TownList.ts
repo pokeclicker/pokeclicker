@@ -2328,6 +2328,11 @@ const MalieKahuna = new NPC('Kahuna Nanu', [
     'Just go clear Captain Sophocles\' trial at the Hokulani Observatory and Captain Acerola\'s Trial at the Thrifty Megamart. And take care of those Team Skull punks in Po Town while you\'re at it.',
     'Then come back here so we can get this Grand trial over with.',
 ]);
+const TapuWorker = new NPC('Worker', [
+    'Yesterday was my first day working on Mount Lanakila. I was up there maintaining the paths to the new Pokémon League.',
+    'My trusty Crabrawler was with me. He was smashing some rocks that were blocking the path, having a grand ol\' time like usual, when suddenly we were attacked by a wild pokémon!',
+    'After the battle Crabrawler evolved! I didn\'t even know he could do that. He\'s so different now. But I still love him. He\'s my best friend, and he\'s even better at rock smashing now!',
+]);
 const SeafolkCaptain = new NPC('Captain Mina', [
     'My trial is in this town. Right there, inside my very own houseboat. However, I want you to clear the trial in Vast Poni Canyon first. It has no Captain, so you\'ll be all on your own. Be careful.',
     'If you can clear my trial you\'ll find our Kahuna on Exeggutor Island.',
@@ -2440,6 +2445,7 @@ TownList['Tapu Village'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
         shops: [TapuVillageShop],
+        npcs: [TapuWorker],
     }
 );
 TownList['Seafolk Village'] = new Town(
