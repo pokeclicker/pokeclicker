@@ -27,7 +27,7 @@ class DungeonRunner {
             });
             return false;
         }
-        App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
+        App.game.wallet.loseAmount(new Amount(Math.round(DungeonRunner.dungeon.tokenCost * Math.pow(.95, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toString().length - 1)), GameConstants.Currency.dungeonToken));
         // Reset any trainers/pokemon if there was one previously
         DungeonBattle.trainer(null);
         DungeonBattle.trainerPokemonIndex(0);
