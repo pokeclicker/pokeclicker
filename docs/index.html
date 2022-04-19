@@ -44,24 +44,6 @@
     <link href="styles/styles.min.css?v=0.9.1" rel="stylesheet">
 
     <!-- Google Analytics-->
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171657234-1"></script>
-    <script>
-        if (true) {
-            window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-
-            gtag('js', new Date());
-
-            gtag('config', 'UA-171657234-1');
-        } else {
-            function gtag(){};
-        }
-    </script>
-
     <style>
         #game.loading {
             display: none !important;
@@ -132,16 +114,14 @@
         <div class="col-6">
             <img style="width:100%" src="assets/images/pokeclickerlogo.png">
         </div>
-        <div class="col-12 d-flex align-items-center justify-content-center my-3">
-            <a href="https://discord.gg/a6DFe4p">
+        <div class="col-12 d-flex align-items-center justify-content-center my-3 flex-column flex-md-row">
+            <a class="mb-1 mr-md-1" href="https://discord.gg/a6DFe4p">
                 <img alt="Join our Discord!" src="https://img.shields.io/discord/450412847017754644?color=7289DA&label=Discord&logo=discord&logoColor=7289DA&style=for-the-badge">
             </a>
-            &nbsp;
-            <a href="https://github.com/pokeclicker/pokeclicker">
+            <a class="mb-1 mr-md-1" href="https://github.com/pokeclicker/pokeclicker">
                 <img alt="Visit our GitHub!" src="https://img.shields.io/github/package-json/v/pokeclicker/pokeclicker/master?label=GitHub&logo=github&style=for-the-badge">
             </a>
-            &nbsp;
-            <a href="https://pokeclicker.miraheze.org/wiki/Home_Page">
+            <a class="mb-1 mr-md-1" href="https://pokeclicker.miraheze.org/wiki/Home_Page">
                 <img alt="Checkout the Wiki!" src="https://img.shields.io/badge/wiki-link-blue?logo=wikimedia-commons&style=for-the-badge">
             </a>
         </div>
@@ -1323,7 +1303,7 @@
                         onclick="DungeonRunner.initializeDungeon(player.town().dungeon)"
                         data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon, attr: { class: player.town().dungeon && App.game.wallet.currencies[GameConstants.Currency.dungeonToken]() >= player.town().dungeon.tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0' }">
                     Start<br/>
-                        <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town().dungeon.tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
+                        <span data-bind="template: { name: 'currencyTemplate', data: {'amount': Math.round(player.town().dungeon.tokenCost * Math.pow(.95, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]().toString().length-1)), 'currency': GameConstants.Currency.dungeonToken}}"></span>
                 </button>
                 <button class="btn btn-secondary"
                         onclick="MapHelper.moveToTown(player.town().dungeon.name)"
@@ -18049,19 +18029,23 @@ aria-labelledby="badgeCaseModalLabel">
            </button>
        </div>
        <div class="modal-body">
-           <div class="row no-gutters justify-content-center"
-                data-bind="foreach: BadgeCaseController.getDisplayableBadges()">
-               <div class="col-3 badgeEntry">
-                   <img src="" width="60px"
-                        data-bind="attr:{ src: 'assets/images/badges/'+ $data +'.png'},
-                        css: { 'badge-not-acquired': !App.game.badgeCase.hasBadge(BadgeEnums[$data])}">
+            <div data-bind="foreach: Object.entries(BadgeCaseController.getDisplayableBadges())">
+                <div>
+                    <h4 data-bind="text: $data[0]"></h4>
+                    <div class="row no-gutters justify-content-center"
+                        data-bind="foreach: $data[1]">
+                        <div class="col-3 badgeEntry">
+                            <img src="" width="60px"
+                                data-bind="attr:{ src: 'assets/images/badges/'+ $data +'.png'},
+                                css: { 'badge-not-acquired': !App.game.badgeCase.hasBadge(BadgeEnums[$data])}">
 
-                   <p style="bottom: 0;"
-                      data-bind="text: $data">name</p>
-
-               </div>
-           </div>
-       </div>
+                            <p style="bottom: 0;"
+                                data-bind="text: $data">name</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
        <div class="modal-footer">
            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
