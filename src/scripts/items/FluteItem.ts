@@ -71,4 +71,4 @@ ItemList['Eon_Flute']         = new FluteItem(GameConstants.FluteItemType.Eon_Fl
 ItemList['Sun_Flute']         = new FluteItem(GameConstants.FluteItemType.Sun_Flute, 'Egg Steps', Infinity, undefined, ['Fire', 'Ground', 'Water'], undefined, 'eggStep', 1.02);
 ItemList['Moon_Flute']        = new FluteItem(GameConstants.FluteItemType.Moon_Flute, 'Mining Energy Regeneration Yield and Time', Infinity, undefined, ['Rock', 'Ground', 'Electric'], undefined, undefined, 1.02);
 ItemList['Time_Flute']        = new FluteItem(GameConstants.FluteItemType.Time_Flute, 'Dungeon Timer', Infinity, undefined, ['Grass', 'Psychic', 'Water'], undefined, undefined, 1.02);
-ItemList['Grass_Flute']       = new FluteItem(GameConstants.FluteItemType.Grass_Flute, 'Berry Replant, Growth, and Mutation Multipliers', Infinity, undefined, ['Grass', 'Bug', 'Fairy'], undefined, undefined, 1.02);
+ItemList['Grass_Flute']       = new FluteItem(GameConstants.FluteItemType.Grass_Flute, 'Berry Replant and Growth Multipliers', Infinity, undefined, ['Grass', 'Bug', 'Fairy'], undefined, undefined, 1.02);
