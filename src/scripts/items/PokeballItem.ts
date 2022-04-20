@@ -29,4 +29,4 @@ ItemList['Diveball'] = new PokeballItem(GameConstants.Pokeball.Diveball, Infinit
 ItemList['Lureball'] = new PokeballItem(GameConstants.Pokeball.Lureball, Infinity, GameConstants.Currency.battlePoint);
 ItemList['Nestball'] = new PokeballItem(GameConstants.Pokeball.Nestball, Infinity, GameConstants.Currency.battlePoint);
 ItemList['Repeatball'] = new PokeballItem(GameConstants.Pokeball.Repeatball, Infinity, GameConstants.Currency.battlePoint);
-ItemList['Beastball'] = new PokeballItem(GameConstants.Pokeball.Beastball, 1000000, GameConstants.Currency.beastPoint);
+ItemList['Beastball'] = new PokeballItem(GameConstants.Pokeball.Beastball, 10000, GameConstants.Currency.questPoint);

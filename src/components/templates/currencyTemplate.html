@@ -18,9 +18,6 @@
         <!-- ko if: $data.currency == GameConstants.Currency.battlePoint -->
         <img alt="Battle Points" src="assets/images/currency/battlePoint.svg" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
         <!-- /ko -->
-        <!-- ko if: $data.currency == GameConstants.Currency.beastPoint -->
-        <img alt="Beast Points" src="assets/images/currency/beastPoint.svg" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
-        <!-- /ko -->
 
         <span data-bind="text: ($data.reduced || ($data.amount > $data.reducedThreshold) || !$data.amount) ? GameConstants.formatNumber($data.amount) : $data.amount.toLocaleString('en-US')">0</span>
     </span>

@@ -166,8 +166,7 @@ namespace GameConstants {
         dungeonToken,
         diamond,
         farmPoint,
-        battlePoint,
-        beastPoint
+        battlePoint
     }
     declare enum TypeEffectiveness {
         Immune,

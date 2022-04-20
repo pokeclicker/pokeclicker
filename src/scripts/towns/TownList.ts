@@ -2245,7 +2245,7 @@ const PaniolaTownShop = new TownShop([
     ItemList['Fire_egg'],
     ItemList['Water_egg'],
 ]);
-const Route8MotelShop = new TownShop([
+const RoadsideMotelShop = new TownShop([
     ItemList['Beastball'],
 ]);
 const KonikoniCityShop = new TownShop([
@@ -2374,15 +2374,16 @@ TownList['Hau\'oli City'] = new Town(
         shops: [HauoliCityShop],
     }
 );
-//TODO: Change requirement when UB questline is merged.
+
 TownList['Roadside Motel'] = new Town(
     'Roadside Motel',
     GameConstants.Region.alola,
     {
-        // requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
-        requirements: [new NullRequirement()],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+        shops: [RoadsideMotelShop],
     }
 );
+
 TownList['Heahea City'] = new Town(
     'Heahea City',
     GameConstants.Region.alola,
@@ -2398,15 +2399,6 @@ TownList['Paniola Town'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 4)],
         shops: [PaniolaTownShop],
-    }
-);
-
-TownList['Route 8 Motel'] = new Town(
-    'Route 8 Motel',
-    GameConstants.Region.alola,
-    {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
-        shops: [Route8MotelShop],
     }
 );
 

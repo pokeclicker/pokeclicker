@@ -1465,7 +1465,7 @@ GymList['Elite Kahili'] = new Gym(
 );
 GymList['Special Agent Anabel'] = new Gym(
     'Anabel',
-    'Route 8 Motel',
+    'Roadside Motel',
     [
         new GymPokemon('Alakazam', 2500000, 61),
         new GymPokemon('Weavile', 2500000, 61),
@@ -1475,7 +1475,7 @@ GymList['Special Agent Anabel'] = new Gym(
     ],
     BadgeEnums.Agent_Anabel,
     64000,
-    'Oh you\'re good! You might just have a shot, here is a Beast Ball. Go hunt down those strange Ultra Beasts! If you collect any Beast Points from them you can trade them for more Beast Balls here.',
+    'Oh you\'re good! You might just have a shot, here are some Beast Balls. Go hunt down those strange Ultra Beasts! If you need more Beast Balls, you can buy them here.',
     [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
 );
 

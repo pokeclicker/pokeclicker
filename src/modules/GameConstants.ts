@@ -267,7 +267,6 @@ export enum Currency {
     diamond,
     farmPoint,
     battlePoint,
-    beastPoint,
 }
 
 export enum TypeEffectiveness {
