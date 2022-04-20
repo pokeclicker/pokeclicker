@@ -82,7 +82,8 @@ class Save {
             localStorage.removeItem(`player${Save.key}`);
             localStorage.removeItem(`save${Save.key}`);
             localStorage.removeItem(`settings${Save.key}`);
-
+            // Prevent the old save from being saved again
+            window.onbeforeunload = () => {};
             location.reload();
         }
     }
@@ -184,6 +185,8 @@ class Save {
                     } else {
                         localStorage.removeItem(`settings${Save.key}`);
                     }
+                    // Prevent the old save from being saved again
+                    window.onbeforeunload = () => {};
                     location.reload();
                 } else {
                     Notifier.notify({

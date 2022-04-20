@@ -50,7 +50,7 @@ class MapHelper {
             });
 
             Notifier.notify({
-                message: `You don't have access to that route yet.<br/>${reqsList.join('<br/>')}`,
+                message: `You don't have access to that route yet.\n${reqsList.join('\n')}`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -207,7 +207,7 @@ class MapHelper {
             });
 
             Notifier.notify({
-                message: `You don't have access to that location yet.<br/>${reqsList.join('<br/>')}`,
+                message: `You don't have access to that location yet.\n${reqsList.join('\n')}`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -285,6 +285,7 @@ class MapHelper {
             // Gain queue slots based on highest region
             App.game.breeding.gainQueueSlot(App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion()));
             GameHelper.incrementObservable(player.highestRegion);
+            player.highestSubRegion(0);
             MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
             player.region = player.highestRegion();
             // Track when users move region and how long it took in seconds

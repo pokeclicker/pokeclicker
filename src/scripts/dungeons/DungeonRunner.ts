@@ -217,7 +217,7 @@ class DungeonRunner {
     })
 
     public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
-        const possiblePokemon: PokemonNameType[] = dungeon.allPokemon;
+        const possiblePokemon: PokemonNameType[] = dungeon.allAvailablePokemon();
         return RouteHelper.listCompleted(possiblePokemon, includeShiny);
     }
 

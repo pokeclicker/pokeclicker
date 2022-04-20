@@ -83,7 +83,7 @@ class Item {
             const maxCost = (this.basePrice * 100 * (amount - incAmount));
             const total = incCost + maxCost;
 
-            return Math.max(0, Math.floor(total));
+            return Math.max(0, Math.round(total));
         }
     }
 

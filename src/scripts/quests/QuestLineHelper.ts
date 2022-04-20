@@ -123,7 +123,7 @@ class QuestLineHelper {
         const reachStage100Reward = () => {
             Notifier.notify({
                 title: deoxysQuestLine.name,
-                message: 'Quest line completed!<br/><i>You have uncovered the Mystery of Deoxys</i>',
+                message: 'Quest line completed!\n<i>You have uncovered the Mystery of Deoxys</i>',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
@@ -151,7 +151,7 @@ class QuestLineHelper {
             Underground.gainMineItem(oldAmber.id);
             Notifier.notify({
                 title: undergroundQuestLine.name,
-                message: 'You have gained an Old Amber fossil!<br/><i>You can breed this in the hatchery.</i>',
+                message: 'You have gained an Old Amber fossil!\n<i>You can breed this in the hatchery.</i>',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: GameConstants.MINUTE,
             });
@@ -339,6 +339,64 @@ class QuestLineHelper {
         App.game.quests.questLines().push(plasmaUnovaQuestLine);
     }
 
+    public static createFindSurpriseTogepiForEasterQuestLine() {
+        const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted but cannot be found!');
+
+        const surpriseTogepi = pokemonMap['Surprise Togepi'];
+
+        const togepiInKantoSetup = () => {
+            dungeonList['Viridian Forest'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 300000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion) }));
+            App.game.statistics.pokemonDefeated[surpriseTogepi.id](0);
+        };
+        const afterDefeatingTogepiInKanto = () => {
+            Notifier.notify({
+                title: findSurpriseTogepiForEasterQuestLine.name,
+                message: 'Seems like this was just an Easter egg after all..',
+                image: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`,
+                type: NotificationConstants.NotificationOption.info,
+                timeout: 3e4,
+            });
+
+            dungeonList['Viridian Forest'].bossList = dungeonList['Viridian Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
+        };
+        const defeatTogepiInKanto = new CustomQuest(1, afterDefeatingTogepiInKanto, 'Erika reported that a strange Togepi has been seen around Kanto. Go look for it!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 0, togepiInKantoSetup);
+        findSurpriseTogepiForEasterQuestLine.addQuest(defeatTogepiInKanto);
+
+        const togepiInJohtoSetup = () => {
+            dungeonList['Ilex Forest'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 900000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion) }));
+        };
+        const afterDefeatingTogepiInJohto = () => {
+            Notifier.notify({
+                title: findSurpriseTogepiForEasterQuestLine.name,
+                message: 'I swear that was a Togepi.. well maybe not.',
+                image: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`,
+                type: NotificationConstants.NotificationOption.info,
+                timeout: 3e4,
+            });
+            dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
+        };
+        const encounterSurpriseTogepiInJohto = new CustomQuest(1, afterDefeatingTogepiInJohto, 'Another report just came in, stating that they saw a strange egg boarding the ferry to Johto!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 1, togepiInJohtoSetup);
+        findSurpriseTogepiForEasterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
+
+        const togepiInHoennSetup = () => {
+            dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 2700000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
+        };
+        const afterDefeatingTogepiInHoenn = () => {
+            App.game.party.gainPokemonById(surpriseTogepi.id);
+            Notifier.notify({
+                title: findSurpriseTogepiForEasterQuestLine.name,
+                message: 'You found the special Togepi!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+            dungeonList['Petalburg Woods'].bossList = dungeonList['Petalburg Woods'].bossList.filter(boss => boss.name != 'Egg Hunter');
+        };
+        const encounterTogepiInHoenn = new CustomQuest(1, afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in Petalburg Woods right now, maybe I should take a look?', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 2, togepiInHoennSetup);
+        findSurpriseTogepiForEasterQuestLine.addQuest(encounterTogepiInHoenn);
+
+        App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
+    }
+
     public static createSkullAetherAlolaQuestLine() {
         const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
 
@@ -370,6 +428,52 @@ class QuestLineHelper {
         App.game.quests.questLines().push(skullAetherAlolaQuestLine);
     }
 
+    public static createGalacticSinnohQuestLine() {
+        const galacticSinnohQuestLine = new QuestLine('A new world', 'End Team Galactic\'s plan to destroy the world and create a new one in its place.');
+
+        const clearValleyWindworks = new CustomQuest(1, 0, 'Team Galactic is stealing energy. Clear Valley Windworks.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Valley Windworks')]());
+        galacticSinnohQuestLine.addQuest(clearValleyWindworks);
+
+        const clearTeamGalacticEternaBuilding = new CustomQuest(1, 0, 'Team Galactic is kidnapping Pokémon now. Clear Team Galactic Eterna Building in Eterna City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Galactic Eterna Building')]());
+        galacticSinnohQuestLine.addQuest(clearTeamGalacticEternaBuilding);
+
+        const clearVeilstoneCityGym = new CustomQuest(1, 0, 'All is quiet. Team Galactic isn\'t doing anything. Guess they learned their lesson. Just keep traveling I guess. Clear the Veilstone City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Veilstone City')]());
+        galacticSinnohQuestLine.addQuest(clearVeilstoneCityGym);
+
+        const clearCanalaveCityGym = new CustomQuest(1, 0, 'That sure is a strange building in Veilstone City. Oh well, no use worrying about that now. Adventure awaits! Clear the Canalave City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Canalave City')]());
+        galacticSinnohQuestLine.addQuest(clearCanalaveCityGym);
+
+        const clearLakeValor = new CustomQuest(1, 0, 'A commotion was heard at Lake Valor. You must protect the lake\'s guardian! Clear Lake Valor.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Lake Valor')]());
+        galacticSinnohQuestLine.addQuest(clearLakeValor);
+
+        const clearLakeVerity = new CustomQuest(1, 0, 'Lake Valor\'s guardian was taken. Better try again at the next lake. Clear Lake Verity.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Lake Verity')]());
+        galacticSinnohQuestLine.addQuest(clearLakeVerity);
+
+        const clearLakeAcuity = new CustomQuest(1, 0, 'Lake Verity\'s guardian was also taken. Only one lake remains. Clear Lake Acuity.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Lake Acuity')]());
+        galacticSinnohQuestLine.addQuest(clearLakeAcuity);
+
+        const clearTeamGalacticHQ = new CustomQuest(1, 0, 'You failed to protect any of the lake guardians. They have been taken to Veilstone City. So that\'s what that strange building was. Clear Team Galactic HQ in Veilstone City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Galactic HQ')]());
+        galacticSinnohQuestLine.addQuest(clearTeamGalacticHQ);
+
+        const clearSpearPillar = new CustomQuest(1, 0, 'The lake guardians have been rescued, but Cyrus has used them to forge the Red Chain. He is taking it to the top of Mount Coronet. Follow him! Clear Spear Pillar.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Spear Pillar')]());
+        galacticSinnohQuestLine.addQuest(clearSpearPillar);
+
+        const DistortionWorldReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            Notifier.notify({
+                title: galacticSinnohQuestLine.name,
+                message: 'You found a Masterball!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearDistortionWorld = new CustomQuest(1, DistortionWorldReward, 'Cyrus planned to use the Red Chain to enslave Dialga and Palkia, but he accidentally angered Giratina and has been taken to its realm. A portal has appeared on top of Mount Coronet. Use it to follow Cyrus and end his threat once and for all. Clear Distortion World.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]());
+        galacticSinnohQuestLine.addQuest(clearDistortionWorld);
+
+        App.game.quests.questLines().push(galacticSinnohQuestLine);
+    }
+
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
@@ -383,5 +487,7 @@ class QuestLineHelper {
         this.createAquaMagmaHoennQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createSkullAetherAlolaQuestLine();
+        this.createFindSurpriseTogepiForEasterQuestLine();
+        this.createGalacticSinnohQuestLine();
     }
 }
