@@ -9,6 +9,7 @@ import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
 import { SortOptionConfigs, SortOptions } from './SortOptions';
 import { Region, AchievementType } from '../GameConstants';
+import HotkeySetting from './HotkeySetting';
 
 export default Settings;
 
@@ -88,6 +89,7 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
     ],
     'nextStage'));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
+Settings.add(new BooleanSetting('showGymGoAnimation', 'Show Gym GO animation', true));
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
@@ -114,7 +116,10 @@ Settings.add(new RangeSetting('sound.volume', 'Volume', 0, 100, 1, 100));
 // Notification settings
 Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup) => {
     Object.values(settingsGroup).forEach((setting) => {
-        Settings.add(setting);
+        if (setting.inGameNotification !== undefined) {
+            Settings.add(setting.inGameNotification);
+        }
+        Settings.add(setting.desktopNotification);
     });
 });
 
@@ -213,6 +218,29 @@ Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
 
 // Save menu sorting
 Settings.add(new Setting('sort.saveSelector', 'Saves sort order', [], ''));
+
+// Hotkeys
+Settings.add(new HotkeySetting('hotkey.farm', 'Farm', 'F'));
+Settings.add(new HotkeySetting('hotkey.hatchery', 'Hatchery', 'H'));
+Settings.add(new HotkeySetting('hotkey.oakItems', 'Oak Items', 'O'));
+Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
+Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Pokéball Selection', 'P', { suffix: ' + Number' }));
+
+Settings.add(new HotkeySetting('hotkey.farm.toggleShovel', 'Toggle Shovel', 'S'));
+
+Settings.add(new HotkeySetting('hotkey.underground.hammer', 'Switch to Hammer', 'H'));
+Settings.add(new HotkeySetting('hotkey.underground.chisel', 'Switch to Chisel', 'C'));
+Settings.add(new HotkeySetting('hotkey.underground.survey', 'Survey', 'S'));
+Settings.add(new HotkeySetting('hotkey.underground.bomb', 'Bomb', 'B'));
+
+Settings.add(new HotkeySetting('hotkey.dungeon.up', 'Move Up', 'W', { prefix: '↑ or ' }));
+Settings.add(new HotkeySetting('hotkey.dungeon.left', 'Move Left', 'A', { prefix: '← or ' }));
+Settings.add(new HotkeySetting('hotkey.dungeon.down', 'Move Down', 'S', { prefix: '↓ or ' }));
+Settings.add(new HotkeySetting('hotkey.dungeon.right', 'Move Right', 'D', { prefix: '→ or ' }));
+Settings.add(new HotkeySetting('hotkey.dungeon.interact', 'Interact', 'Space'));
+
+Settings.add(new HotkeySetting('hotkey.town.start', 'Start Gym/Dungeon', 'Space'));
+Settings.add(new HotkeySetting('hotkey.forceSave', 'Force save game', 'S', { prefix: 'Shift + ' }));
 
 /*
  * SUBSCRIBERS

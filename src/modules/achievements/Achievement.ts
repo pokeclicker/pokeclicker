@@ -31,6 +31,7 @@ export default class Achievement {
                 type: NotificationConstants.NotificationOption.warning,
                 timeout: 1e4,
                 sound: NotificationConstants.NotificationSound.General.achievement,
+                setting: NotificationConstants.NotificationSetting.General.achievement_complete,
             });
             App.game.logbook.newLog(
                 LogBookTypes.ACHIEVE,

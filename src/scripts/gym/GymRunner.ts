@@ -47,19 +47,24 @@ class GymRunner {
                 }
             });
             Notifier.notify({
-                message: `You don't have access to ${gym.leaderName}s Gym yet.<br/>${reqsList.join('<br/>')}`,
+                message: `You don't have access to ${gym.leaderName}s Gym yet.\n${reqsList.join('\n')}`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
     }
 
     private static hideGif() {
-        $('#gymCountdown').hide();
+        $('#gymGoContainer').hide();
     }
 
     public static resetGif() {
+        // If the user doesn't want the animation, just return
+        if (!Settings.getSetting('showGymGoAnimation').value) {
+            return;
+        }
+
         if (!this.autoRestart() || this.initialRun) {
-            $('#gymCountdown').show();
+            $('#gymGoContainer').show();
             setTimeout(() => {
                 $('#gymGo').attr('src', 'assets/gifs/go.gif');
             }, 0);
