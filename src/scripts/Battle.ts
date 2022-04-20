@@ -132,7 +132,7 @@ class Battle {
         this.pokeball(pokeBall);
         this.catching(true);
         if (typeof GameConstants.UltraBeastType[enemyPokemon.name] == 'number') {
-            if (pokeBall == GameConstants.Pokeball.Beastball || pokeBall == GameConstants.Pokeball.Masterball) {
+            if (pokeBall == GameConstants.Pokeball.Beastball) { // TODO: Make this work for Masterballs?
                 this.catchRateActual(this.calculateActualCatchRate(enemyPokemon, pokeBall));
             } else {
                 this.catchRateActual(0);

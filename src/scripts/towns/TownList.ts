@@ -2634,8 +2634,11 @@ TownList['Poni Meadow'] = new DungeonTown(
 TownList['Resolution Cave'] = new DungeonTown(
     'Resolution Cave',
     GameConstants.Region.alola,
-    //Clear Requirement tied to completion of Stakataka step of UB Quest
-    [new NullRequirement()]
+    [
+      new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
+      new ObtainedPokemonRequirement(pokemonMap.Stakataka, 5), //TODO: Clear Requirement tied to completion of Stakataka step of UB Quest
+    ]
+    //new NullRequirement()
 );
 //Galar Shops
 
