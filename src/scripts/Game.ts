@@ -177,19 +177,66 @@ class Game {
             StartSequenceRunner.start();
         }
 
-        let workerSupported = true;
-
         try {
             console.log('starting web worker...');
-            const blob = new Blob([`setInterval(() => postMessage('tick'), ${GameConstants.TICK_TIME})`]);
+            const blob = new Blob([
+                `
+                // Window visibility state
+                let pageHidden = false;
+                self.onmessage = function(e) {
+                    if (e.data.pageHidden != undefined) {
+                        pageHidden = e.data.pageHidden;
+                    }
+                };
+
+                // setInterval (slower on FireFox)
+                const tickInterval = setInterval(() => {
+                    // Don't process while page visible
+                    if (!pageHidden) return;
+
+                    postMessage('tick')
+                }, ${GameConstants.TICK_TIME});
+
+                // requestAnimationFrame (consistent if page visible)
+                let _time = 0;
+                let ticks = 0;
+                const tick = (time) => {
+                    // Don't process while page hidden
+                    if (pageHidden) return requestAnimationFrame(tick);
+
+                    const delta = time - _time;
+                    ticks += delta;
+                    _time = time;
+                    if (ticks >= ${GameConstants.TICK_TIME}) {
+                        // Skip the ticks if we have too many...
+                        if (ticks >= ${GameConstants.TICK_TIME * 2}) {
+                          ticks = 0;
+                        } else {
+                            ticks -= ${GameConstants.TICK_TIME};
+                        }
+                        postMessage('tick');
+                    }
+                    requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
+                `,
+            ]);
             const blobURL = window.URL.createObjectURL(blob);
 
             this.worker = new Worker(blobURL);
             // use a setTimeout to queue the event
             this.worker?.addEventListener('message', () => Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null);
-        } catch (e) {
-            workerSupported = false;
-        }
+
+            // Let our worker know if the page is visible or not
+            let pageHidden = document.hidden;
+            document.addEventListener('visibilitychange', () => {
+                if (pageHidden != document.hidden) {
+                    pageHidden = document.hidden;
+                    this.worker.postMessage({'pageHidden': pageHidden});
+                }
+            });
+            this.worker.postMessage({'pageHidden': pageHidden});
+        } catch (e) {}
 
         this.interval = setInterval(() => !this.worker || !Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null, GameConstants.TICK_TIME);
         window.onbeforeunload = () => {
