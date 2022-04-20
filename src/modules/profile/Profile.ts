@@ -95,7 +95,7 @@ export default class Profile implements Saveable {
                 const img: HTMLImageElement = document.createElement('img');
                 img.onerror = () => img.remove();
                 img.className = 'm-1';
-                img.width = 24;
+                img.width = 18;
                 img.src = `assets/images/challenges/${c}.png`;
                 img.title = GameConstants.camelCaseToString(c);
                 img.dataset.toggle = 'tooltip';

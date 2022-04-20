@@ -160,7 +160,8 @@ class Party implements Feature {
     }
 
     public calculateEVAttackBonus(pokemon: PartyPokemon): number {
-        const EVs = this.getEffortValues(pokemon)();
+        const RawEVs = this.getEffortValues(pokemon)();
+        const EVs = App.game.challenges.list.slowEVs.active() ? Math.floor(RawEVs/10): RawEVs/10;
         if (!pokemon.pokerus) {
             return 1;
         }
