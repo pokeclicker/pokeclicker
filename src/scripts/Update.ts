@@ -728,13 +728,13 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
         },
 
-        '0.9.1': ({ playerData, saveData }) => {
-        saveData.keyItems['Pokerus_virus'] = true;
+        '0.9.2': ({ playerData, saveData }) => {
+            saveData.keyItems['Pokerus_virus'] = true;
 
-        saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
-        p.effortPoints = 0;
-        return p;
-        });
+            saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
+                p.effortPoints = 0;
+                return p;
+            });
         },
     };
 
