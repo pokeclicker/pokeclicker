@@ -347,7 +347,7 @@ class Underground implements Feature {
     public static sellAllMineItems() {
         for (let i = 0; i < player.mineInventory().length; i++) {
             const item = player.mineInventory()[i];
-            if (!item.sellLocked()) {
+            if (!item.sellLocked() && item.valueType != 'Mine Egg') {
                 Underground.sellMineItem(item.id, Infinity);
             }
         }
