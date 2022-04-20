@@ -279,6 +279,8 @@ class GameController {
                         // Check if a number higher than 0 and less than total Gyms was pressed
                         if (numberKey < player.town().content.length) {
                             player.town().content[numberKey].protectedOnclick();
+                        } else if (player.town().npcs && numberKey < player.town().content.length + player.town().npcs.length) {
+                            player.town().npcs[numberKey - player.town().content.length].openDialog();
                         }
                         return e.preventDefault();
                     }
