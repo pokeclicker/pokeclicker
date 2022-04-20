@@ -2634,7 +2634,7 @@ TownList['Poni Meadow'] = new DungeonTown(
 TownList['Resolution Cave'] = new DungeonTown(
     'Resolution Cave',
     GameConstants.Region.alola,
-    //[new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Poni Meadow'))]
+    //Clear Requirement tied to completion of Stakataka step of UB Quest
     [new NullRequirement()]
 );
 //Galar Shops

@@ -105,7 +105,7 @@ enum BadgeEnums {
     'Elite_Molayne',
     'Elite_Kahili',
     'Elite_AlolaChampion',
-    'Agent_Anabel',
+    'Elite_AgentAnabel',
     // Galar
     'Galar_Grass',
     'Galar_Water',

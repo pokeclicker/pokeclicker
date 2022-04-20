@@ -1463,21 +1463,6 @@ GymList['Elite Kahili'] = new Gym(
     'It\'s frustrating to me as a member of the Elite Four, but it seems your strength is the real deal.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Acerola)]
 );
-GymList['Special Agent Anabel'] = new Gym(
-    'Anabel',
-    'Roadside Motel',
-    [
-        new GymPokemon('Alakazam', 2500000, 61),
-        new GymPokemon('Weavile', 2500000, 61),
-        new GymPokemon('Mismagius', 2500000, 61),
-        new GymPokemon('Salamence', 2500000, 61),
-        new GymPokemon('Snorlax', 2500000, 61),
-    ],
-    BadgeEnums.Agent_Anabel,
-    64000,
-    'Oh you\'re good! You might just have a shot, here are some Beast Balls. Go hunt down those strange Ultra Beasts! If you need more Beast Balls, you can buy them here.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
-);
 
 // Alola Champion
 // TODO: Balancing - Set HP
@@ -1512,6 +1497,22 @@ GymList['Champion Hau'] = new Champion(
     () => {
         App.game.quests.getQuestLine('Ultra Beast Hunt').beginQuest();
     }
+);
+
+GymList['Roadside Motel'] = new Gym(
+    'Anabel',
+    'Roadside Motel',
+    [
+        new GymPokemon('Alakazam', 90000000, 61),
+        new GymPokemon('Weavile', 90000000, 61),
+        new GymPokemon('Mismagius', 90000000, 61),
+        new GymPokemon('Salamence', 90000000, 61),
+        new GymPokemon('Snorlax', 90000000, 61),
+    ],
+    BadgeEnums.Elite_AgentAnabel,
+    64000,
+    'Oh you\'re good! You might just have a shot, here are some Beast Balls. Go hunt down those strange Ultra Beasts! If you need more Beast Balls, you can buy them here.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
 );
 
 

@@ -6618,8 +6618,6 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
     1250000, 30);
 
 
-
-
 //Galar Dungeons
 
 dungeonList['Slumbering Weald'] = new Dungeon('Slumbering Weald',

@@ -269,8 +269,8 @@ class QuestLineHelper {
         const AnabelBattle = new CustomQuest(
             1,
             AnabelReward,
-            'Defeat Agent Anabel at the Route 8 Motel.',
-            () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Agent Anabel')](),
+            'Defeat Agent Anabel at the Roadside Motel.',
+            () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Roadside Motel')](),
             0
         );
 
@@ -281,7 +281,7 @@ class QuestLineHelper {
             const ultrabeastAdd = () => {
                 dungeons.forEach(dungeon => {
                     if (dungeon != undefined) {
-                        dungeonList[dungeon].enemyList.push({pokemon: ultrabeast, options: {weight: dungeonList[dungeon].weightList[0] / 10}});
+                        dungeonList[dungeon].enemyList.push({pokemon: ultrabeast, options: {weight: dungeonList[dungeon].weightList[0]}});
                     }
                 });
                 routes.forEach(route => {

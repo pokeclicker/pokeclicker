@@ -725,6 +725,15 @@ class Update implements Saveable {
             // Add Sendoff Spring
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
         },
+
+        '0.9.2': ({ playerData, saveData }) => {
+            // If player has defeated the Hoenn Champion, start the deoxys quest line
+            saveData.badgeCase = saveData.badgeCase || [];
+            // Not using game constants incase the value isn't 39 in the future
+            if (saveData.badgeCase[97]) {
+                saveData.quests.questLines.push({state: 1, name: 'Ultra Beast Hunt', quest: 0});
+            }
+        },
     };
 
     constructor() {

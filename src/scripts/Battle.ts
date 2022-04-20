@@ -131,10 +131,12 @@ class Battle {
     protected static prepareCatch(enemyPokemon: BattlePokemon, pokeBall: GameConstants.Pokeball) {
         this.pokeball(pokeBall);
         this.catching(true);
-        if (typeof GameConstants.UltraBeastType[enemyPokemon.name] == 'number' && pokeBall != GameConstants.Pokeball.Beastball) {
-            this.catchRateActual(0);
-        } else {
-            this.catchRateActual(this.calculateActualCatchRate(enemyPokemon, pokeBall));
+        if (typeof GameConstants.UltraBeastType[enemyPokemon.name] == 'number') {
+            if (pokeBall == GameConstants.Pokeball.Beastball || pokeBall == GameConstants.Pokeball.Masterball) {
+                this.catchRateActual(this.calculateActualCatchRate(enemyPokemon, pokeBall));
+            } else {
+                this.catchRateActual(0);
+            }
         }
         App.game.pokeballs.usePokeball(pokeBall);
     }

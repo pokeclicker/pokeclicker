@@ -863,6 +863,7 @@ export const AlolaGyms = [
     'Elite Acerola',
     'Elite Kahili',
     'Champion Hau',
+    'Roadside Motel',
 ];
 
 export const GalarGyms = [

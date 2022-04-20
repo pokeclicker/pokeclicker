@@ -99,11 +99,11 @@ class Pokeballs implements Feature {
             }, 1250, 'Increased catch rate with more catches', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Beastball, () => {
-                if (App.game.gameState == GameConstants.GameState.fighting && typeof GameConstants.UltraBeastType[Battle.enemyPokemon().name] === 'number') {
+                if (typeof GameConstants.UltraBeastType[Battle.enemyPokemon().name] === 'number') {
                     return 10;
                 }
                 return -100;
-            }, 1000, 'Increased catch rate for Ultra Beasts, reduced catch rate otherwise', new GymBadgeRequirement(BadgeEnums.Agent_Anabel)),
+            }, 1000, 'Increased catch rate for Ultra Beasts, reduced catch rate otherwise', new GymBadgeRequirement(BadgeEnums.Elite_AgentAnabel)),
         ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);
@@ -170,7 +170,11 @@ class Pokeballs implements Feature {
 
         // Workaround for UB quest, a better solution would be good
         if (typeof GameConstants.UltraBeastType[Battle.enemyPokemon().name] === 'number') {
-            pref = GameConstants.Pokeball.Beastball;
+            if (this.pokeballs[GameConstants.Pokeball.Beastball].quantity() > 0) {
+                pref = GameConstants.Pokeball.Beastball;
+            } else {
+                pref = GameConstants.Pokeball.None;
+            }
         }
 
         if (this.pokeballs[pref]?.quantity()) {
