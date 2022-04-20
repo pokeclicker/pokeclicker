@@ -30,8 +30,6 @@ export default class SpecialEvent {
         this.startFunction = startFunction;
         this.endTime = endTime;
         this.endFunction = endFunction;
-
-        this.initialize();
     }
 
     initialize(): void {
@@ -63,7 +61,7 @@ export default class SpecialEvent {
     notify(time: string, timeout: number, type = NotificationConstants.NotificationOption.info) {
         Notifier.notify({
             title: `[EVENT] ${this.title}`,
-            message: `${this.description}<br/><br/><strong>Start time:</strong> ${this.startTime.toLocaleString()}<br/><strong>End time:</strong> ${this.endTime.toLocaleString()}`,
+            message: `${this.description}\n\n<strong>Start time:</strong> ${this.startTime.toLocaleString()}\n<strong>End time:</strong> ${this.endTime.toLocaleString()}`,
             type,
             time,
             timeout,

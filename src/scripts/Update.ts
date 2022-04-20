@@ -644,7 +644,7 @@ class Update implements Saveable {
 
         },
 
-        '0.8.18': ({ playerData, saveData }) => {
+        '0.9.0': ({ playerData, saveData }) => {
             // Migrate event negative ID's to decimals of base form
             const eventIDs = [
                 [-1, 25.08],
@@ -701,12 +701,40 @@ class Update implements Saveable {
                 delete saveData.statistics.shinyPokemonHatched[oldID];
             });
 
-            saveData.keyItems['Pokerus_virus'] = true;
 
-            saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
-                p.effortPoints = 0;
-                return p;
-            });
+            playerData.mineInventory = playerData.mineInventory?.map(i => {
+                i.sellLocked = false;
+                return i;
+            }) || [];
+
+            // Start Galactic questline if player has Coal Badge already
+            if (saveData.badgeCase[40]) {
+                saveData.quests.questLines.push({state: 1, name: 'A new world', quest: 0});
+            }
+
+            // Clear Valley Windworks Clears
+            saveData.statistics.dungeonsCleared[44] = 0;
+            // Add Team Galactic Eterna Building
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 47);
+            // Move Lake Verity
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 53, 52);
+            // Move Lake Valor
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 52, 54);
+            // Add Team Galactic HQ
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 56);
+            // Move Spear Pillar
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 57, 59);
+            // Add Sendoff Spring
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
+        },
+
+        '0.9.1': ({ playerData, saveData }) => {
+        saveData.keyItems['Pokerus_virus'] = true;
+
+        saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
+        p.effortPoints = 0;
+        return p;
+        });
         },
     };
 
@@ -734,7 +762,7 @@ class Update implements Saveable {
                             clearInterval(checkForNewVersionInterval);
                             Notifier.notify({
                                 title: `[UPDATE] v${result.version}`,
-                                message: 'A newer version of the game is available:<br/><br/><a class="btn btn-warning btn-block" href="#" onclick="location.reload(true);">Reload Page</a>',
+                                message: 'A newer version of the game is available:\n\n<a class="btn btn-warning btn-block" href="#" onclick="location.reload(true);">Reload Page</a>',
                                 timeout: GameConstants.DAY,
                             });
                         }
@@ -844,7 +872,7 @@ class Update implements Saveable {
                     console.error(`Caught error while applying update v${version}`, e, { beforeUpdate, updateData });
                     Notifier.notify({
                         title: `Failed to update to v${this.version}!`,
-                        message: `Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a> along with your save file.<br /><br />${backupButton.outerHTML}<br />${resetButton.outerHTML}`,
+                        message: `Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a> along with your save file.\n\n${backupButton.outerHTML}\n${resetButton.outerHTML}`,
                         type: NotificationConstants.NotificationOption.primary,
                         timeout: GameConstants.DAY,
                     });
@@ -879,7 +907,7 @@ class Update implements Saveable {
             this.automaticallyDownloadBackup(backupButton, settingsData);
             Notifier.notify({
                 title: `[v${this.version}] Game has been updated!`,
-                message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${backupButton.outerHTML}`,
+                message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!\n\n${backupButton.outerHTML}`,
                 type: NotificationConstants.NotificationOption.primary,
                 timeout: 6e4,
             });
@@ -887,7 +915,7 @@ class Update implements Saveable {
             console.error('Error trying to convert backup save', err);
             Notifier.notify({
                 title: `[v${this.version}] Game has been updated!`,
-                message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/><i>Failed to download old save, Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a>.</i>',
+                message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!\n\n<i>Failed to download old save, Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a>.</i>',
                 type: NotificationConstants.NotificationOption.primary,
                 timeout: 6e4,
             });

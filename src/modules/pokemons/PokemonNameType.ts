@@ -1183,6 +1183,7 @@ export type PokemonNameType
     | 'Armored Mewtwo'
     | 'Santa Snorlax'
     | 'Spooky Togepi'
+    | 'Surprise Togepi'
     | 'Spooky Bulbasaur'
     | 'Pikachu (Gengar)'
     | 'Let\'s Go Pikachu'
