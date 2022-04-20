@@ -194,7 +194,7 @@ class Game {
                     // Don't process while page visible
                     if (!pageHidden) return;
 
-                    postMessage('tickInterval')
+                    postMessage('tick')
                 }, ${GameConstants.TICK_TIME});
 
                 // requestAnimationFrame (consistent if page visible)
