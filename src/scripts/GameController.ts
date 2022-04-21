@@ -119,6 +119,8 @@ class GameController {
         const $hatcheryModal = $('#breedingModal');
         $hatcheryModal.on('hidden.bs.modal shown.bs.modal', _ => $hatcheryModal.data('disable-toggle', false));
         const hatchery = App.game.breeding;
+        // ship
+        const $shipModal = $('#ShipModal');
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
@@ -203,6 +205,17 @@ class GameController {
                     // Select Pokeball from pokeball selector (0 = none)
                     if (numberKey < App.game.pokeballs.pokeballs.length) {
                         pokeballs.selectedSelection()(numberKey);
+                    }
+                    return e.preventDefault();
+                }
+            }
+            if ($shipModal.data('bs.modal')?._isShown) {
+                if (isNumberKey) {
+                    if (numberKey <= player.highestRegion()) {
+                        const regionButton = $('.ship-modal-region-button').eq(numberKey);
+                        if (regionButton && !regionButton.prop('disabled')) {
+                            regionButton.trigger('click');
+                        }
                     }
                     return e.preventDefault();
                 }
