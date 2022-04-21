@@ -257,83 +257,6 @@ class QuestLineHelper {
         // Add quest to quest line
         App.game.quests.questLines().push(vivillonQuestLine);
     }
-    public static createUltraBeastQuestLine() {
-
-        const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts');
-
-        const AnabelReward = () => {
-            Notifier.notify({ message: 'You Beat Anabel!', type: NotificationConstants.NotificationOption.success });
-            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,5,false);
-        };
-
-        const AnabelBattle = new CustomQuest(
-            1,
-            AnabelReward,
-            'Defeat Agent Anabel at the Roadside Motel.',
-            () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Roadside Motel')](),
-            0
-        );
-
-        UltraBeastQuestLine.addQuest(AnabelBattle);
-
-        const createUltraBeastQuest = (ultrabeast: PokemonNameType, dungeons: Array<string>, routes: Array<number>, hint: string, numberCaught: number) => {
-
-            const ultrabeastAdd = () => {
-                dungeons.forEach(dungeon => {
-                    if (dungeon != undefined) {
-                        dungeonList[dungeon].enemyList.push({pokemon: ultrabeast, options: {weight: dungeonList[dungeon].weightList[0]}});
-                    }
-                });
-                routes.forEach(route => {
-                    if (route != undefined) {
-                        Routes.getRoute(GameConstants.Region.alola, route).pokemon.land.push(ultrabeast);
-                    }
-                });
-
-                Notifier.notify({
-                    title: UltraBeastQuestLine.name,
-                    message: `An Ultra Beast is hiding somewhere.\n${hint}`,
-                    type: NotificationConstants.NotificationOption.info,
-                });
-            };
-
-            const catchUltraBeast = new CustomQuest(
-                numberCaught,
-                undefined,
-                `Find and capture the rare Ultra Beast ${numberCaught} times!\nHint: ${hint}.`,
-                App.game.statistics.pokemonCaptured[pokemonMap[ultrabeast].id],
-                undefined,
-                ultrabeastAdd
-            );
-            UltraBeastQuestLine.addQuest(catchUltraBeast);
-        };
-
-        createUltraBeastQuest('Nihilego', ['Wela Volcano Park', 'Diglett\'s Tunnel'], [undefined], 'It has been spotted at Wela Volcano Park and Diglett\'s Tunnel.', 1);
-        createUltraBeastQuest('Buzzwole', ['Melemele Meadow'], [undefined], 'It has been spotted at Melemele Meadow.', 2);
-        createUltraBeastQuest('Pheromosa', ['Verdant Cavern'], [undefined], 'It has been spotted at Verdant Cavern.', 4);
-        createUltraBeastQuest('Xurkitree', ['Memorial Hill', 'Lush Jungle'], [undefined], 'It has been spotted at Memorial Hill and Lush Jungle.', 2);
-        createUltraBeastQuest('Kartana', ['Malie Garden'], [17], 'It has been spotted at Malie Garden.', 4);
-        createUltraBeastQuest('Celesteela', ['Malie Garden'], [23], 'It has been spotted at Malie Garden and Haina Desert.', 2);
-        createUltraBeastQuest('Blacephalon', [undefined], [27], 'It has been spotted at Poni Grove.', 5);
-        createUltraBeastQuest('Stakataka', [undefined], [27], 'It has been spotted at Poni Grove.', 5);
-
-        const GuzzlordReward = () => {
-            Notifier.notify({ message: 'You caught all the Ultra Beasts!', type: NotificationConstants.NotificationOption.success });
-        };
-
-        const GuzzlordCatch = new CustomQuest(
-            1,
-            GuzzlordReward,
-            'Catch Guzzlord at Resolution Cave.',
-            () => App.game.statistics.pokemonCaptured[pokemonMap['Guzzlord'].id](),
-            0
-        );
-
-        UltraBeastQuestLine.addQuest(GuzzlordCatch);
-
-        App.game.quests.questLines().push(UltraBeastQuestLine);
-    }
-
 
     public static createRocketJohtoQuestLine() {
         const rocketJohtoQuestLine = new QuestLine('Team Rocket Again', 'Team Rocket is up to no good again!');
@@ -550,6 +473,74 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(galacticSinnohQuestLine);
     }
+
+    public static createUltraBeastQuestLine() {
+
+        const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts');
+
+        const AnabelReward = () => {
+            Notifier.notify({ message: 'You Beat Anabel!', type: NotificationConstants.NotificationOption.success });
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,5,false);
+        };
+
+        const AnabelBattle = new CustomQuest(
+            1,
+            AnabelReward,
+            'Defeat Agent Anabel at the Roadside Motel.',
+            () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Roadside Motel')](),
+            0
+        );
+
+        UltraBeastQuestLine.addQuest(AnabelBattle);
+
+        const createUltraBeastQuest = (ultrabeast: PokemonNameType, hint: string, numberCaught: number) => {
+
+            const ultraBeastUnlock = () => {
+                Notifier.notify({
+                    title: UltraBeastQuestLine.name,
+                    message: `An Ultra Beast is hiding somewhere.\n${hint}`,
+                    type: NotificationConstants.NotificationOption.info,
+                });
+            };
+
+            const catchUltraBeast = new CustomQuest(
+                numberCaught,
+                undefined,
+                `Find and capture the rare Ultra Beast ${numberCaught} times!\nHint: ${hint}.`,
+                App.game.statistics.pokemonCaptured[pokemonMap[ultrabeast].id],
+                undefined,
+                ultraBeastUnlock
+            );
+            UltraBeastQuestLine.addQuest(catchUltraBeast);
+        };
+
+        createUltraBeastQuest('Nihilego', 'It has been spotted at Wela Volcano Park and Diglett\'s Tunnel.', 1);
+        createUltraBeastQuest('Buzzwole', 'It has been spotted at Melemele Meadow.', 2);
+        createUltraBeastQuest('Pheromosa', 'It has been spotted at Verdant Cavern.', 4);
+        createUltraBeastQuest('Xurkitree', 'It has been spotted at Memorial Hill and Lush Jungle.', 2);
+        createUltraBeastQuest('Kartana', 'It has been spotted at Malie Garden and on Route 17.', 4);
+        createUltraBeastQuest('Celesteela', 'It has been spotted at Malie Garden and Haina Desert.', 2);
+        createUltraBeastQuest('Blacephalon', 'It has been spotted at Poni Grove.', 5);
+        createUltraBeastQuest('Stakataka', 'It has been spotted at Poni Grove.', 5);
+
+        const GuzzlordReward = () => {
+            Notifier.notify({ message: 'You caught all the Ultra Beasts!', type: NotificationConstants.NotificationOption.success });
+        };
+
+        const GuzzlordCatch = new CustomQuest(
+            1,
+            GuzzlordReward,
+            'Catch Guzzlord at Resolution Cave.',
+            () => App.game.statistics.pokemonCaptured[pokemonMap['Guzzlord'].id](),
+            0
+        );
+
+        UltraBeastQuestLine.addQuest(GuzzlordCatch);
+
+        App.game.quests.questLines().push(UltraBeastQuestLine);
+    }
+
+
 
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;

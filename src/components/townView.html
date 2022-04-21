@@ -78,7 +78,7 @@
         <!--Display all available Pokémon in this dungeon-->
         <ul class="list-inline">
           <!-- ko foreach: player.town().dungeon.normalEncounterList -->
-          <li class="list-inline-item">
+          <li class="list-inline-item" data-bind="hidden: $data.hide">
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
             css: { 'dungeon-pokemon-locked': $data.hidden }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>

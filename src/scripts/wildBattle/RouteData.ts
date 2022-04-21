@@ -1619,6 +1619,7 @@ Routes.add(new RegionRoute(
     'Haina Desert', GameConstants.Region.alola, 23,
     new RoutePokemon({
         land: ['Alolan Dugtrio', 'Trapinch', 'Baltoy', 'Gabite', 'Krokorok', 'Golett'],
+        special: [new SpecialRoutePokemon(['Celesteela'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 5))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))],
     undefined,
@@ -1647,6 +1648,7 @@ Routes.add(new RegionRoute(
     'Alola Route 17', GameConstants.Region.alola, 17,
     new RoutePokemon({
         land: ['Alolan Raticate', 'Fearow', 'Alolan Graveler', 'Ledian', 'Ariados', 'Scraggy', 'Bisharp', 'Gumshoos'],
+        special: [new SpecialRoutePokemon(['Kartana'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 4))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ula\'ula Meadow'))],
     undefined,
@@ -1683,6 +1685,10 @@ Routes.add(new RegionRoute(
     'Poni Grove', GameConstants.Region.alola, 27,
     new RoutePokemon({
         land: ['Pinsir', 'Heracross', 'Buneary', 'Riolu', 'Zoroark', 'Trumbeak'],
+        special: [
+            new SpecialRoutePokemon(['Blacephalon'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 6)),
+            new SpecialRoutePokemon(['Stakataka'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 7)),
+        ],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
     undefined,
