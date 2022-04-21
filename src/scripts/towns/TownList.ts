@@ -1319,10 +1319,9 @@ TownList['Pokémon League Sinnoh'] = new Town(
 TownList['Fight Area'] = new Town(
     'Fight Area',
     GameConstants.Region.sinnoh,
-    [],
+    [/*FightAreaShop*/],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
-        // shops: [FightAreaShop],
     }
 );
 TownList['Survival Area'] = new Town(
