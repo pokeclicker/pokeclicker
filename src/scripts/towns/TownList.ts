@@ -88,6 +88,7 @@ const CinnabarIslandShop = new TownShop([
     ItemList['Explorer_kit'],
     ItemList['Explosive_Charge'],
     ItemList['Treasure_Scanner'],
+    ItemList['HatcheryHelperKris'],
 ]);
 const ViridianCityShop = new TownShop([
     ItemList['Pokeball'],
@@ -357,6 +358,7 @@ const OlivineCityShop = new TownShop([
     ItemList['Electric_egg'],
     ItemList['Water_stone'],
     ItemList['Thunder_stone'],
+    ItemList['HatcheryHelperCarey'],
 ]);
 const CianwoodCityShop = new TownShop([
     ItemList['Ultraball'],
@@ -366,6 +368,7 @@ const CianwoodCityShop = new TownShop([
 const MahoganyTownShop = new TownShop([
     ItemList['Upgrade'],
     ItemList['Trade_stone'],
+    ItemList['HatcheryHelperDakota'],
 ]);
 const BlackthornCityShop = new TownShop([
     ItemList['LargeRestore'],
@@ -673,6 +676,7 @@ const BattleFrontierShop = new TownShop([
     new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 20, GameConstants.Currency.battlePoint),
     new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 40, GameConstants.Currency.battlePoint),
     ItemList['FarmHandJamie'],
+    ItemList['HatcheryHelperNoel'],
 ]);
 
 //Hoenn Berry Master
