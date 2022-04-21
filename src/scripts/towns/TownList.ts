@@ -2304,6 +2304,7 @@ const PaniolaTownShop = new Shop([
 ]);
 const RoadsideMotelShop = new Shop([
     ItemList['Beastball'],
+], undefined, [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 0),
 ]);
 const KonikoniCityShop = new Shop([
     ItemList['Fire_stone'],
