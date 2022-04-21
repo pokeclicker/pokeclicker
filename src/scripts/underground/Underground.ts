@@ -98,11 +98,11 @@ class Underground implements Feature {
     }
 
     getEnergyGain() {
-        return Math.round(Underground.BASE_ENERGY_GAIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Gain).calculateBonus() * fluteEffectRunner.getFluteMultiplier('Moon_Flute'));
+        return Math.round(Underground.BASE_ENERGY_GAIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Gain).calculateBonus() * FluteEffectRunner.getFluteMultiplier('Moon_Flute'));
     }
 
     getEnergyRegenTime() {
-        return Math.round(Underground.BASE_ENERGY_REGEN_TIME - this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time).calculateBonus() * fluteEffectRunner.getFluteMultiplier('Moon_Flute'));
+        return Math.round(Underground.BASE_ENERGY_REGEN_TIME - this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time).calculateBonus() * FluteEffectRunner.getFluteMultiplier('Moon_Flute'));
     }
 
     getDailyDealsMax() {

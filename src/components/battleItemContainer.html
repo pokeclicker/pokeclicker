@@ -74,12 +74,12 @@
                                 disabled: !player.itemList[$data]()
                             },
                             css: {
-                                'bg-primary': fluteEffectRunner.getEffect($data) > 30,
-                                'bg-warning': fluteEffectRunner.getEffect($data) <= 30 && fluteEffectRunner.getEffect($data) > 0,
-                                'bg-secondary': !fluteEffectRunner.isActive($data)(),
+                                'bg-primary': FluteEffectRunner.getEffect($data) > 30,
+                                'bg-warning': FluteEffectRunner.getEffect($data) <= 30 && FluteEffectRunner.getEffect($data) > 0,
+                                'bg-secondary': !FluteEffectRunner.isActive($data)(),
                             },
                             style: {
-                                'opacity': player.itemList[$data]() || fluteEffectRunner.isActive($data)() ? '1' : '0.1'
+                                'opacity': player.itemList[$data]() || FluteEffectRunner.isActive($data)() ? '1' : '0.1'
                             },
                             event: {
                                 click: function(){ItemHandler.useItem($data)}
@@ -96,11 +96,11 @@
             </tr>
             <tr data-bind="foreach: $data">
                 <td class="text-light p-0">
-              <!-- ko if: fluteEffectRunner.getEffect($data) > 0 -->
+              <!-- ko if: FluteEffectRunner.getEffect($data) > 0 -->
                 <code data-bind="
                 text: player.effectTimer[$data](),
                 tooltip: {
-                  title: fluteEffectRunner.fluteTooltip($data),
+                  title: FluteEffectRunner.fluteTooltip($data),
                   trigger:'hover',
                   placement:'bottom',
                   html:true

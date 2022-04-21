@@ -66,7 +66,7 @@ class Game {
         AchievementHandler.initialize(this.multiplier, this.challenges);
         FarmController.initialize();
         EffectEngineRunner.initialize(this.multiplier);
-        fluteEffectRunner.initialize(this.multiplier);
+        FluteEffectRunner.initialize(this.multiplier);
         ItemHandler.initilizeEvoStones();
         this.profile.initialize();
         this.breeding.initialize();
@@ -359,9 +359,9 @@ class Game {
         if (EffectEngineRunner.counter >= GameConstants.EFFECT_ENGINE_TICK) {
             EffectEngineRunner.tick();
         }
-        fluteEffectRunner.counter += GameConstants.TICK_TIME;
-        if (fluteEffectRunner.counter >= GameConstants.EFFECT_ENGINE_TICK) {
-            fluteEffectRunner.tick();
+        FluteEffectRunner.counter += GameConstants.TICK_TIME;
+        if (FluteEffectRunner.counter >= GameConstants.EFFECT_ENGINE_TICK) {
+            FluteEffectRunner.tick();
         }
 
         // Game timers

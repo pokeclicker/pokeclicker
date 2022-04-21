@@ -1,10 +1,10 @@
-class fluteEffectRunner {
+class FluteEffectRunner {
     public static counter = 0;
     public static numActiveFlutes: KnockoutObservable<number> = ko.observable(0);
     public static activeGemTypes: KnockoutObservableArray<number> = ko.observableArray();
 
     public static initialize(multiplier: Multiplier) {
-        fluteEffectRunner.numActiveFlutes(0);
+        FluteEffectRunner.numActiveFlutes(0);
         GameHelper.enumStrings(GameConstants.FluteItemType).forEach((itemName) => {
             const item = (ItemList[itemName] as FluteItem);
             if (item.multiplierType) {
@@ -49,7 +49,7 @@ class fluteEffectRunner {
         this.activeGemTypes.removeAll();
         let gemNames = [];
         for (const itemName in GameConstants.FluteItemType) {
-            if (fluteEffectRunner.isActive(GameConstants.FluteItemType[itemName])()) {
+            if (FluteEffectRunner.isActive(GameConstants.FluteItemType[itemName])()) {
                 const item = (ItemList[itemName] as FluteItem);
                 item.gemTypes.forEach(idx => gemNames.push(PokemonType[idx]));
             }
@@ -72,7 +72,7 @@ class fluteEffectRunner {
     public static toggleEffect(itemName: string) {
 
         //NOTE: this if statement is untested
-        if (fluteEffectRunner.getLowestGem(itemName) == 0) {
+        if (FluteEffectRunner.getLowestGem(itemName) == 0) {
             Notifier.notify({
                 message: 'You don\'t have enough gems to use this Flute',
                 type: NotificationConstants.NotificationOption.danger,
@@ -84,7 +84,7 @@ class fluteEffectRunner {
             return;
         }
 
-        player.effectList[itemName](Math.max(0, player.effectList[itemName]() + fluteEffectRunner.getLowestGem(itemName)));
+        player.effectList[itemName](Math.max(0, player.effectList[itemName]() + FluteEffectRunner.getLowestGem(itemName)));
         GameHelper.incrementObservable(this.numActiveFlutes,1);
         this.updateFormattedTimeLeft(itemName);
         this.updateActiveGemTypes();
@@ -104,7 +104,7 @@ class fluteEffectRunner {
 
     public static fluteTooltip(itemName: string): string {
         const str = [];
-        str.push(`Gems/Second: ${fluteEffectRunner.numActiveFlutes()} <br><br>Gem Types Used:`);
+        str.push(`Gems/Second: ${FluteEffectRunner.numActiveFlutes()} <br><br>Gem Types Used:`);
         const item = (ItemList[itemName] as FluteItem);
         item.gemTypes.forEach(t => {
             str.push(`${t}: ${App.game.gems.gemWallet[PokemonType[t]]()}`);

@@ -249,8 +249,8 @@ class PokemonFactory {
             chance /= 1.5;
         }
 
-        if (fluteEffectRunner.isActive(GameConstants.FluteItemType.Black_Flute)()) {
-            chance /= (fluteEffectRunner.getFluteMultiplier('Black_Flute') * AchievementHandler.achievementBonus());
+        if (FluteEffectRunner.isActive(GameConstants.FluteItemType.Black_Flute)()) {
+            chance /= (FluteEffectRunner.getFluteMultiplier('Black_Flute') * AchievementHandler.achievementBonus());
         }
 
         if (Rand.chance(chance)) {

@@ -18,7 +18,7 @@ class FluteItem extends Item {
     }
 
     use(): boolean {
-        fluteEffectRunner.toggleEffect(this.name);
+        FluteEffectRunner.toggleEffect(this.name);
         return true;
     }
 
@@ -28,7 +28,7 @@ class FluteItem extends Item {
     }
 
     isSoldOut(): boolean {
-        return player.itemList[this.name]() > 0 || fluteEffectRunner.isActive(GameConstants.FluteItemType[this.name])();
+        return player.itemList[this.name]() > 0 || FluteEffectRunner.isActive(GameConstants.FluteItemType[this.name])();
     }
 
     checkCanUse(): boolean {
@@ -48,7 +48,7 @@ class FluteItem extends Item {
             });
             return false;
         }
-        if (!fluteEffectRunner.isActive(GameConstants.FluteItemType[this.name])() && !player.itemList[this.name]()) {
+        if (!FluteEffectRunner.isActive(GameConstants.FluteItemType[this.name])() && !player.itemList[this.name]()) {
             Notifier.notify({
                 message: `You don't have any ${this.displayName}s...`,
                 type: NotificationConstants.NotificationOption.danger,
