@@ -106,12 +106,12 @@ class HatcheryHelpers {
     public available: KnockoutComputed<HatcheryHelper[]>;
     public hired: KnockoutComputed<HatcheryHelper[]>;
     public canHire: KnockoutComputed<boolean>;
-    public requirement = new BerriesUnlockedRequirement(8);
+    public requirement = new HatchRequirement(100);
 
     constructor(public hatchery: Breeding) {
         this.available = ko.pureComputed(() => HatcheryHelpers.list.filter(f => f.isUnlocked()));
         this.hired = ko.pureComputed(() => HatcheryHelpers.list.filter(f => f.hired()));
-        this.canHire =  ko.pureComputed(() => this.hired().length < this.MAX_HIRES);
+        this.canHire =  ko.pureComputed(() => this.hired().length < Math.min(this.MAX_HIRES, this.hatchery.eggSlots));
     }
 
     public isUnlocked() {
@@ -162,8 +162,8 @@ HatcheryHelpers.add(new HatcheryHelper('Sam', new Amount(1000, GameConstants.Cur
 HatcheryHelpers.add(new HatcheryHelper('Blake', new Amount(10000, GameConstants.Currency.money), 10, 15, new HatchRequirement(500)));
 HatcheryHelpers.add(new HatcheryHelper('Parker', new Amount(1000, GameConstants.Currency.dungeonToken), 15, 25, new HatchRequirement(1000)));
 HatcheryHelpers.add(new HatcheryHelper('Dakota', new Amount(10000, GameConstants.Currency.dungeonToken), 50, 50, new ItemOwnedRequirement('HatcheryHelperDakota')));
-HatcheryHelpers.add(new HatcheryHelper('Justice', new Amount(5, GameConstants.Currency.questPoint), 100, 50, new QuestRequirement(200)));
-HatcheryHelpers.add(new HatcheryHelper('Carey', new Amount(10, GameConstants.Currency.questPoint), 50, 120, new ItemOwnedRequirement('HatcheryHelperCarey')));
+HatcheryHelpers.add(new HatcheryHelper('Justice', new Amount(10, GameConstants.Currency.questPoint), 100, 50, new QuestRequirement(200)));
+HatcheryHelpers.add(new HatcheryHelper('Carey', new Amount(20, GameConstants.Currency.questPoint), 50, 125, new ItemOwnedRequirement('HatcheryHelperCarey')));
 HatcheryHelpers.add(new HatcheryHelper('Aiden', new Amount(5, GameConstants.Currency.diamond), 100, 100, new UndergroundLayersMinedRequirement(100)));
 HatcheryHelpers.add(new HatcheryHelper('Kris', new Amount(10, GameConstants.Currency.diamond), 150, 100, new ItemOwnedRequirement('HatcheryHelperKris')));
 HatcheryHelpers.add(new HatcheryHelper('Noel', new Amount(50, GameConstants.Currency.battlePoint), 100, 200, new ItemOwnedRequirement('HatcheryHelperNoel')));
