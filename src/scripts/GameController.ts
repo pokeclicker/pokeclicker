@@ -289,7 +289,7 @@ class GameController {
                         }
                         return e.preventDefault();
                     } else if (isNumberKey) {
-                        // Check if a number higher than 0 and less than total Gyms was pressed
+                        // Check if a number higher than 0 and less than our towns content was pressed
                         if (numberKey < player.town().content.length) {
                             player.town().content[numberKey].protectedOnclick();
                         } else if (player.town().npcs && numberKey < player.town().content.length + player.town().npcs.length) {
