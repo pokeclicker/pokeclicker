@@ -2816,7 +2816,7 @@ TownList['Hulbury'] = new Town(
 TownList['Stow-on-Side'] = new Town(
     'Stow-on-Side',
     GameConstants.Region.galar,
-    [StowonSideShop],
+    [GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 15)],
     }
@@ -2840,7 +2840,7 @@ TownList['Hammerlocke'] = new Town(
 TownList['Circhester'] = new Town(
     'Circhester',
     GameConstants.Region.galar,
-    [CirchesterShop],
+    [GymList['Circhester1'], GymList['Circhester2'], CirchesterShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 18)],
     }
@@ -2864,7 +2864,7 @@ TownList['Wyndon'] = new Town(
 TownList['Wyndon Stadium'] = new Town(
     'Wyndon Stadium',
     GameConstants.Region.galar,
-    [GymList['Trainer Marnie'], GymList['Gym Leader Bede'], GymList['Trainer |Hop'], GymList['Champion Leon'], pokeLeagueShop()],
+    [GymList['Trainer Marnie'], GymList['Gym Leader Bede'], GymList['Trainer Hop'], GymList['Champion Leon'], pokeLeagueShop()],
     {
         requirements: [
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower')),
