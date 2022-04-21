@@ -19,38 +19,24 @@ class GymRunner {
         this.autoRestart(autoRestart);
         this.running(false);
         this.gymObservable(gym);
-        if (Gym.isUnlocked(gym)) {
-            if (gym instanceof Champion) {
-                gym.setPokemon(player.starter());
-            }
-            App.game.gameState = GameConstants.GameState.idle;
-            GymRunner.timeLeft(GameConstants.GYM_TIME);
-            GymRunner.timeLeftPercentage(100);
-
-            GymBattle.gym = gym;
-            GymBattle.totalPokemons(gym.pokemons.length);
-            GymBattle.index(0);
-            GymBattle.generateNewEnemy();
-            App.game.gameState = GameConstants.GameState.gym;
-            this.running(true);
-            this.resetGif();
-
-            setTimeout(() => {
-                this.hideGif();
-            }, GameConstants.GYM_COUNTDOWN);
-
-        } else {
-            const reqsList = [];
-            gym.requirements?.forEach(requirement => {
-                if (!requirement.isCompleted()) {
-                    reqsList.push(requirement.hint());
-                }
-            });
-            Notifier.notify({
-                message: `You don't have access to ${gym.leaderName}s Gym yet.\n${reqsList.join('\n')}`,
-                type: NotificationConstants.NotificationOption.warning,
-            });
+        if (gym instanceof Champion) {
+            gym.setPokemon(player.starter());
         }
+        App.game.gameState = GameConstants.GameState.idle;
+        GymRunner.timeLeft(GameConstants.GYM_TIME);
+        GymRunner.timeLeftPercentage(100);
+
+        GymBattle.gym = gym;
+        GymBattle.totalPokemons(gym.pokemons.length);
+        GymBattle.index(0);
+        GymBattle.generateNewEnemy();
+        App.game.gameState = GameConstants.GameState.gym;
+        this.running(true);
+        this.resetGif();
+
+        setTimeout(() => {
+            this.hideGif();
+        }, GameConstants.GYM_COUNTDOWN);
     }
 
     private static hideGif() {
@@ -121,7 +107,7 @@ class GymRunner {
             // Award money for defeating gym
             App.game.wallet.gainMoney(gym.moneyReward);
             // Send the player back to the town they were in
-            player.town(TownList[gym.town]);
+            player.town(gym.parent);
             App.game.gameState = GameConstants.GameState.town;
         }
     }
