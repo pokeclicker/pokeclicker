@@ -2442,10 +2442,9 @@ TownList['Hau\'oli City'] = new Town(
 TownList['Roadside Motel'] = new Town(
     'Roadside Motel',
     GameConstants.Region.alola,
-    [],
+    [RoadsideMotelShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
-        shops: [RoadsideMotelShop],
     }
 );
 
