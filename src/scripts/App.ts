@@ -47,8 +47,10 @@ class App {
                 multiplier
             );
 
-            console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#8e44ad;font-weight:900;');
+            console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#2ecc71;font-weight:900;');
             Notifier.notify({ message: 'Game loaded', type: NotificationConstants.NotificationOption.info });
+
+            console.log(`[${GameConstants.formatDate(new Date())}] %cStarting game..`, 'color:#8e44ad;font-weight:900;');
 
             GameController.bindToolTips();
             GameController.addKeyListeners();

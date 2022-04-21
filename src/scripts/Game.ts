@@ -178,7 +178,7 @@ class Game {
         }
 
         try {
-            console.log('starting web worker...');
+            console.log(`[${GameConstants.formatDate(new Date())}] %cStarting web worker..`, 'color:#8e44ad;font-weight:900;');
             const blob = new Blob([
                 `
                 // Window visibility state
@@ -236,7 +236,12 @@ class Game {
                 }
             });
             this.worker.postMessage({'pageHidden': pageHidden});
-        } catch (e) {}
+            if (this.worker) {
+                console.log(`[${GameConstants.formatDate(new Date())}] %cWeb worker started`, 'color:#2ecc71;font-weight:900;');
+            }
+        } catch (e) {
+            console.error(`[${GameConstants.formatDate(new Date())}] Web worker error`, e);
+        }
 
         this.interval = setInterval(() => !this.worker || !Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null, GameConstants.TICK_TIME);
         window.onbeforeunload = () => {
