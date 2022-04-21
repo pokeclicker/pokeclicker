@@ -1668,7 +1668,7 @@ GymList['Gym Leader Bede'] = new Gym(
     'I couldn\'t win, but at least I was able to show everyone how great Fairy types are.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Marnie)]
 );
-GymList['Trainer Hop'] = new Champion(
+GymList['Trainer Hop'] = new Gym(
     'Hop',
     'Trainer Hop',
     [
@@ -1677,17 +1677,19 @@ GymList['Trainer Hop'] = new Champion(
         new GymPokemon('Pincurchin', 117521346, 58),
         new GymPokemon('Snorlax', 117521346, 58),
         new GymPokemon('Corviknight', 130579274, 59),
+        new GymPokemon('Inteleon', 137833678, 60),
     ],
     BadgeEnums.Elite_Hop,
     200000,
     'Thanks, mate. I\'m really glad you were the one here with me.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Bede)],
+    [new GymBadgeRequirement(BadgeEnums.Elite_Bede)]
+    // TODO: Add ability to change gym leaders pokemon based on your starter
     // Bulbasaur
-    [new GymPokemon('Inteleon', 137833678, 60)],
+    // [new GymPokemon('Inteleon', 137833678, 60)],
     // Charmander
-    [new GymPokemon('Rillaboom', 137833678, 60)],
+    // [new GymPokemon('Rillaboom', 137833678, 60)],
     // Squirtle/Pikachu
-    [new GymPokemon('Cinderace', 137833678, 60)]
+    // [new GymPokemon('Cinderace', 137833678, 60)]
 );
 // Galar Champion
 //TODO: rewards/hp rebalance
