@@ -29,7 +29,7 @@ class PokemonHelper {
                 }
             }
             return false;
-        });
+        }).sort((a, b) => a.id - b.id);
     }
 
     public static getEvolution(id: number, evoType: GameConstants.StoneType): string {
