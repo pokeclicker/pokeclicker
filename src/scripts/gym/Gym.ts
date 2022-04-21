@@ -2,6 +2,7 @@
 ///<reference path="../pokemons/PokemonFactory.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 ///<reference path="../../declarations/enums/Badges.d.ts"/>
+///<reference path="../towns/TownContent.ts"/>
 
 /**
  * Data list that contains all gymLeaders, accessible by townName.
@@ -14,11 +15,46 @@ interface gymFlags {
 /**
  * Gym class.
  */
-class Gym {
+class Gym extends TownContent {
+    buttonText: string;
+    public tooltip = 'Battle Gym Leaders to earn badges';
+    public cssClass() {
+        if (App.game.badgeCase.hasBadge(this.badgeReward)) {
+            return 'btn btn-success';
+        }
+        return 'btn btn-secondary';
+    }
+    public text(): string {
+        return this.buttonText;
+    }
+    public isVisible(): boolean {
+        return true;
+    }
+    public onclick(): void {
+        GymRunner.startGym(this);
+    }
     public flags = {
         quest: true,
         achievement: true,
     };
+
+    public areaStatus(): areaStatus {
+        if (this.isUnlocked()) {
+            if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
+                return areaStatus.unlockedUnfinished;
+            } else if (!Gym.isAchievementsComplete(this)) {
+                return areaStatus.missingAchievement;
+            }
+        }
+        return areaStatus.completed;
+    }
+
+    public clears() {
+        if (!QuestLineHelper.isQuestLineCompleted('Tutorial Quests')) {
+            return undefined;
+        }
+        return App.game.statistics.gymsDefeated[GameConstants.getGymIndex(this.town)]();
+    }
 
     constructor(
         public leaderName: string,
@@ -27,34 +63,23 @@ class Gym {
         public badgeReward: BadgeEnums,
         public moneyReward: number,
         public defeatMessage: string,
-        public requirements: (OneFromManyRequirement | Requirement)[] = [],
+        requirements: (OneFromManyRequirement | Requirement)[] = [],
         public rewardFunction = () => {},
         {
             quest = true,
             achievement = true,
         }: gymFlags = {}
     ) {
+        super(requirements);
         this.flags.quest = quest;
         this.flags.achievement = achievement;
-    }
-
-    public static isUnlocked(gym: Gym): boolean {
-        return gym.requirements.every(requirement => requirement.isCompleted());
+        this.buttonText = leaderName.replace(/\d/g,'');
     }
 
     public static isAchievementsComplete(gym: Gym) {
         const gymIndex = GameConstants.getGymIndex(gym.town);
         return AchievementHandler.achievementList.every(achievement => {
             return !(achievement.property instanceof ClearGymRequirement && achievement.property.gymIndex === gymIndex && !achievement.isCompleted());
-        });
-    }
-
-    public static calculateCssClass(gym: Gym): KnockoutComputed<string> {
-        return ko.pureComputed(() => {
-            if (App.game.badgeCase.hasBadge(gym.badgeReward)) {
-                return 'btn btn-success';
-            }
-            return 'btn btn-secondary';
         });
     }
 

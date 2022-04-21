@@ -106,8 +106,7 @@ class PokemonFactory {
      * @param index index of the Pokémon that is being generated.
      * @returns {any}
      */
-    public static generateGymPokemon(gymName: string, index: number): BattlePokemon {
-        const gym = GymList[gymName];
+    public static generateGymPokemon(gym: Gym, index: number): BattlePokemon {
         const pokemon = gym.pokemons[index];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
