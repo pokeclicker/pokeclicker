@@ -2702,15 +2702,12 @@ TownList['Poni Meadow'] = new DungeonTown(
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 28)]
 );
-//TODO: Change requirement when UB questline is merged.
 TownList['Resolution Cave'] = new DungeonTown(
     'Resolution Cave',
     GameConstants.Region.alola,
     [
-        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
-        new ObtainedPokemonRequirement(pokemonMap.Stakataka, 5), //TODO: Clear Requirement tied to completion of Stakataka step of UB Quest
+        new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 8),
     ]
-    //new NullRequirement()
 );
 //Galar Shops
 
