@@ -14,6 +14,7 @@ Change the type of `PokemonListData -> name` back to `PokemonNameType`
 
 export type PokemonNameType
     = 'Bulbasaur'
+    | 'Bulbasaur (Rose)'
     | 'Ivysaur'
     | 'Venusaur'
     | 'Charmander'
