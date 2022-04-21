@@ -1134,7 +1134,7 @@ const SnowpointYoungGirl = new NPC('Young Girl', [
 const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
     'Oh! I don’t get visitors often. My husband is a sailor who visits far away lands… he always tells me these fantastic things.',
     'One time he came back and his Wailmer looked funny. We took it to the Pokécenter and they said it had caught some weird virus called Pokérus!',
-    'They said that it is a virus that can spread in the Pokémon Day Care, and that only Pokémon that aren’nt fully leveled up can spread it',
+    'They said that it is a virus that can spread in the Pokémon Day Care, and that only Pokémon that aren’nt ready to hatch can spread it',
     'Oddly enough, Wailmer seemed stronger than ever! If you have a Pokémon with Pokérus, try catching more of that type of Pokémon!',
 ]);
 
