@@ -136,43 +136,11 @@ class MapHelper {
             }
         }
         const town = TownList[townName];
-        if (town.gym) {
-            const gym = town.gym;
-            if (Gym.isUnlocked(gym)) {
-                if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
-                    states.push(areaStatus.unlockedUnfinished);
-                } else if (!Gym.isAchievementsComplete(gym)) {
-                    states.push(areaStatus.missingAchievement);
-                }
-            }
-        }
-        // We don't want to re-process DungeonTowns
-        if (!(town instanceof DungeonTown) && town?.dungeon) {
-            const dungeonAccess = MapHelper.calculateTownCssClass(town?.dungeon.name);
-            switch (dungeonAccess) {
-                // if dungeon completed or locked, ignore it
-                case 'completed':
-                case 'locked':
-                    break;
-                // Return the dungeons state
-                default:
-                    states.push(areaStatus[dungeonAccess]);
-            }
-        }
+        town.content.forEach(c => {
+            states.push(c.areaStatus());
+        });
         if (states.length) {
             return areaStatus[Math.min(...states)];
-        }
-        if (town instanceof PokemonLeague && (town as PokemonLeague)?.gymList) {
-            for (const gym of (town as PokemonLeague)?.gymList) {
-                if (Gym.isUnlocked(gym) && !App.game.badgeCase.hasBadge(gym.badgeReward)) {
-                    return areaStatus[areaStatus.unlockedUnfinished];
-                }
-            }
-            for (const gym of (town as PokemonLeague)?.gymList) {
-                if (Gym.isUnlocked(gym) && !Gym.isAchievementsComplete(gym)) {
-                    return areaStatus[areaStatus.missingAchievement];
-                }
-            }
         }
         return areaStatus[areaStatus.completed];
     }
