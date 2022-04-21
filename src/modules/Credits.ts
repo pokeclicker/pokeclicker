@@ -250,7 +250,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
 export const CodeCredits: Credit[] = [
     {
         resources: [
-            1262,
+            1266,
         ],
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
@@ -282,7 +282,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            106,
+            112,
         ],
         name: 'Ultima1990',
         link: 'https://github.com/Ultima1990',
@@ -330,19 +330,19 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
+            30,
+        ],
+        name: 'Jaaslet',
+        link: 'https://github.com/Jaaslet',
+        image: 'https://avatars.githubusercontent.com/u/2961347?v=4',
+    },
+    {
+        resources: [
             28,
         ],
         name: 'tkatchen',
         link: 'https://github.com/tkatchen',
         image: 'https://avatars.githubusercontent.com/u/26515965?v=4',
-    },
-    {
-        resources: [
-            27,
-        ],
-        name: 'Jaaslet',
-        link: 'https://github.com/Jaaslet',
-        image: 'https://avatars.githubusercontent.com/u/2961347?v=4',
     },
     {
         resources: [
@@ -370,7 +370,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            17,
+            18,
         ],
         name: 'amative1',
         link: 'https://github.com/amative1',
@@ -450,7 +450,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            6,
+            7,
         ],
         name: 'JapuDCret',
         link: 'https://github.com/JapuDCret',

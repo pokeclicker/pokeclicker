@@ -69,6 +69,7 @@ class Preload {
                     Preload.minimumTime(),
                 ]).then(() => {
                     clearTimeout(forceLoad);
+                    console.log(`[${GameConstants.formatDate(new Date())}] %cPreloaded images`, 'color:#2ecc71;font-weight:900;');
                     // Give the progress bar a little bit of time to finish the animation
                     setTimeout(() => {
                         resolve();

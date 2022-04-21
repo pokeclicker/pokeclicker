@@ -119,6 +119,8 @@ class GameController {
         const $hatcheryModal = $('#breedingModal');
         $hatcheryModal.on('hidden.bs.modal shown.bs.modal', _ => $hatcheryModal.data('disable-toggle', false));
         const hatchery = App.game.breeding;
+        // ship
+        const $shipModal = $('#ShipModal');
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
@@ -207,6 +209,17 @@ class GameController {
                     return e.preventDefault();
                 }
             }
+            if ($shipModal.data('bs.modal')?._isShown) {
+                if (isNumberKey) {
+                    if (numberKey <= player.highestRegion()) {
+                        const regionButton = $('.ship-modal-region-button').eq(numberKey);
+                        if (regionButton && !regionButton.prop('disabled')) {
+                            regionButton.trigger('click');
+                        }
+                    }
+                    return e.preventDefault();
+                }
+            }
 
             // Only run if no modals are open
             if (visibleModals === 0) {
@@ -269,24 +282,20 @@ class GameController {
                 // Within towns
                 if (App.game.gameState === GameConstants.GameState.town) {
                     if (key === Settings.getSetting('hotkey.town.start').value) {
-                        if (player.town().gym) {
-                            GymRunner.startGym(player.town().gym);
-                        } else if (player.town().dungeon) {
-                            if (player.town() instanceof DungeonTown) {
-                                DungeonRunner.initializeDungeon(player.town().dungeon);
-                            } else {
-                                MapHelper.moveToTown(player.town().dungeon.name);
-                            }
+                        if (player.town() instanceof DungeonTown) {
+                            DungeonRunner.initializeDungeon(player.town().dungeon);
+                        } else {
+                            player.town().content[0].protectedOnclick();
                         }
                         return e.preventDefault();
-                    } else if ('gymList' in player.town()) {
-                        if (isNumberKey) {
-                            // Check if a number higher than 0 and less than total Gyms was pressed
-                            if (numberKey < player.town().gymList.length) {
-                                GymRunner.startGym(player.town().gymList[numberKey]);
-                            }
-                            return e.preventDefault();
+                    } else if (isNumberKey) {
+                        // Check if a number higher than 0 and less than our towns content was pressed
+                        if (numberKey < player.town().content.length) {
+                            player.town().content[numberKey].protectedOnclick();
+                        } else if (player.town().npcs && numberKey < player.town().content.length + player.town().npcs.length) {
+                            player.town().npcs[numberKey - player.town().content.length].openDialog();
                         }
+                        return e.preventDefault();
                     }
                 }
             }

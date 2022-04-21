@@ -6,7 +6,7 @@
  * Main game class.
  */
 class Game {
-    interval;
+    frameRequest;
     public static achievementCounter = 0;
 
     // Features
@@ -177,23 +177,54 @@ class Game {
             StartSequenceRunner.start();
         }
 
+        let pageHidden = document.hidden;
+
+        // requestAnimationFrame (consistent if page visible)
+        let lastFrameTime = 0;
+        let ticks = 0;
+        const tick = (currentFrameTime) => {
+            // Don't process while page hidden
+            if (pageHidden) {
+                this.frameRequest = requestAnimationFrame(tick);
+                return;
+            }
+
+            const delta = currentFrameTime - lastFrameTime;
+            ticks += delta;
+            lastFrameTime = currentFrameTime;
+            if (ticks >= GameConstants.TICK_TIME) {
+                // Skip the ticks if we have too many...
+                if (ticks >= GameConstants.TICK_TIME * 2) {
+                    ticks = 0;
+                } else {
+                    ticks -= GameConstants.TICK_TIME;
+                }
+                this.gameTick();
+            }
+            this.frameRequest = requestAnimationFrame(tick);
+        };
+        this.frameRequest = requestAnimationFrame(tick);
+
+        // Try start our webworker so we can process stuff while the page isn't focused
         try {
-            console.log('starting web worker...');
+            console.log(`[${GameConstants.formatDate(new Date())}] %cStarting web worker..`, 'color:#8e44ad;font-weight:900;');
             const blob = new Blob([
                 `
-                let _time = 0;
-                let ticks = 0;
-                const tick = (time) => {
-                    const delta = time - _time;
-                    ticks += delta;
-                    _time = time;
-                    if (ticks >= ${GameConstants.TICK_TIME}) {
-                        ticks -= ${GameConstants.TICK_TIME};
-                        postMessage('tick');
+                // Window visibility state
+                let pageHidden = false;
+                self.onmessage = function(e) {
+                    if (e.data.pageHidden != undefined) {
+                        pageHidden = e.data.pageHidden;
                     }
-                    requestAnimationFrame(tick);
                 };
-                requestAnimationFrame(tick);
+
+                // setInterval (slightly slower on FireFox)
+                const tickInterval = setInterval(() => {
+                    // Don't process while page visible
+                    if (!pageHidden) return;
+
+                    postMessage('tick')
+                }, ${GameConstants.TICK_TIME});
                 `,
             ]);
             const blobURL = window.URL.createObjectURL(blob);
@@ -201,16 +232,29 @@ class Game {
             this.worker = new Worker(blobURL);
             // use a setTimeout to queue the event
             this.worker?.addEventListener('message', () => Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null);
-        } catch (e) {}
 
-        this.interval = setInterval(() => !this.worker || !Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null, GameConstants.TICK_TIME);
+            // Let our worker know if the page is visible or not
+            document.addEventListener('visibilitychange', () => {
+                if (pageHidden != document.hidden) {
+                    pageHidden = document.hidden;
+                    this.worker.postMessage({'pageHidden': pageHidden});
+                }
+            });
+            this.worker.postMessage({'pageHidden': pageHidden});
+            if (this.worker) {
+                console.log(`[${GameConstants.formatDate(new Date())}] %cWeb worker started`, 'color:#2ecc71;font-weight:900;');
+            }
+        } catch (e) {
+            console.error(`[${GameConstants.formatDate(new Date())}] Web worker error`, e);
+        }
+
         window.onbeforeunload = () => {
             this.save();
         };
     }
 
     stop() {
-        clearTimeout(this.interval);
+        cancelAnimationFrame(this.frameRequest);
         window.onbeforeunload = () => {};
     }
 

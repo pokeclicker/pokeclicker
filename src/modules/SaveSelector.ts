@@ -1,3 +1,4 @@
+import { formatDate } from './GameConstants';
 import NotificationConstants from './notifications/NotificationConstants';
 import Notifier from './notifications/Notifier';
 import Profile from './profile/Profile';
@@ -76,7 +77,7 @@ export default class SaveSelector {
             );
         } catch (e) {
             // eslint-disable-next-line no-console
-            console.log('Failed to load save:', key, e);
+            console.log(`[${formatDate(new Date())}] %cFailed to load save:`, 'color:#e74c3c;font-weight:900;', key, e);
             return document.createElement('div');
         }
     }
