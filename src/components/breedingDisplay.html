@@ -21,6 +21,17 @@
             <div data-bind="visible: $index() > App.game.breeding.eggSlots" style="margin-top: 20px;">
                 <img src="assets/images/breeding/lock.svg">
             </div>
+            <div data-bind="if: App.game.breeding.hatcheryHelpers.hired()[$index()]">
+              <div data-bind="with: App.game.breeding.hatcheryHelpers.hired()[$index()]">
+                <img class="hatcheryHelperImage" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }, 
+                  tooltip: {
+                    title: $data.tooltip(),
+                    trigger: 'hover',
+                    placement:'top',
+                    html: true,
+                  }" />
+              </div>
+            </div>
             <!-- ko ifnot: $data.isNone() -->
             <div style="margin-top: 20px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
                 <!-- ko if: $data.type == EggType.Fossil -->
