@@ -73,7 +73,11 @@ class Gym extends TownContent {
         super(requirements);
         this.flags.quest = quest;
         this.flags.achievement = achievement;
-        this.buttonText = leaderName.replace(/\d/g,'');
+        if (!town.includes('Elite') && !town.includes('Champion')) {
+            this.buttonText = `${leaderName}'s gym`;
+        } else {
+            this.buttonText = leaderName;
+        }
     }
 
     public static isAchievementsComplete(gym: Gym) {
