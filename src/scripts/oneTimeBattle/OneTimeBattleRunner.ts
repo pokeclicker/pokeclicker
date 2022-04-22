@@ -68,7 +68,7 @@ class OneTimeBattleRunner {
         if (this.running()) {
             this.running(false);
             Notifier.notify({
-                message: `Congratulations, you defeated ${battle.name}!`,
+                message: battle.defeatMessage, // TODO: make a popup for the message
                 type: NotificationConstants.NotificationOption.success,
             });
             battle.completed = true;
