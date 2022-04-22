@@ -52,6 +52,13 @@ class FluteItem extends Item {
             });
             return false;
         }
+        if (FluteEffectRunner.getLowestGem(this.name) <= FluteEffectRunner.numActiveFlutes() + 1) {
+            Notifier.notify({
+                message: 'You don\'t have enough gems to use this Flute',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
         return true;
     }
 

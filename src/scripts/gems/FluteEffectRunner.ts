@@ -71,14 +71,6 @@ class FluteEffectRunner {
 
     public static toggleEffect(itemName: string) {
 
-        //NOTE: this if statement is untested
-        if (FluteEffectRunner.getLowestGem(itemName) == 0) {
-            Notifier.notify({
-                message: 'You don\'t have enough gems to use this Flute',
-                type: NotificationConstants.NotificationOption.danger,
-            });
-            return;
-        }
         if (this.isActive(GameConstants.FluteItemType[itemName])()) {
             this.removeEffect(itemName);
             return;
