@@ -2404,7 +2404,7 @@ const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke
 
 const RoadsideMotelAnabel = new NPC('Anabel', [
     '(Insert Text Here for how Beast Balls work.)',
-]);
+], { requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 0) });
 
 //Alola Towns
 
