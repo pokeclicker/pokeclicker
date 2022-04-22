@@ -34,6 +34,8 @@ namespace GameConstants {
     declare const MAX_LOAD_TIME: number;
     declare const MUTATION_TICK: number;
     declare const WANDER_TICK: number;
+    declare const ONETIMEBATTLE_TIME: number;
+    declare const ONETIMEBATTLE_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
     declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
@@ -141,7 +143,8 @@ namespace GameConstants {
         safari,
         town,
         shop,
-        battleFrontier
+        battleFrontier,
+        oneTimeBattle
     }
     declare enum Pokeball {
         'None',

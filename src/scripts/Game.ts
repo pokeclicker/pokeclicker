@@ -300,6 +300,14 @@ class Game {
                 BattleFrontierRunner.tick();
                 break;
             }
+            case GameConstants.GameState.oneTimeBattle: {
+                OneTimeBattleBattle.counter += GameConstants.TICK_TIME;
+                if (OneTimeBattleBattle.counter >= GameConstants.BATTLE_TICK) {
+                    OneTimeBattleBattle.tick();
+                }
+                OneTimeBattleRunner.tick();
+                break;
+            }
         }
 
         // Auto Save
