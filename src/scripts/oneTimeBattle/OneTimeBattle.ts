@@ -1,5 +1,6 @@
 class OneTimeBattle extends TownContent {
-    public completed: boolean;
+    public defeated: boolean;
+    completeRequirements: (Requirement | OneFromManyRequirement)[];
 
     public cssClass(): string {
         return 'btn btn-secondary';
@@ -8,7 +9,7 @@ class OneTimeBattle extends TownContent {
         return `Fight ${this.name}`;
     }
     public isVisible(): boolean {
-        return this.isUnlocked() && !this.completed;
+        return this.isUnlocked() && !this.completeRequirements.every(r => r.isCompleted());
     }
     public onclick(): void {
         OneTimeBattleRunner.startBattle(this);
@@ -18,8 +19,14 @@ class OneTimeBattle extends TownContent {
         public name: string,
         public pokemons: GymPokemon[],
         public defeatMessage: string,
-        requirements: (Requirement | OneFromManyRequirement)[] = []
+        requirements: (Requirement | OneFromManyRequirement)[] = [],
+        completeRequirements: (Requirement | OneFromManyRequirement)[] = [],
+        public isTrainerBattle = true
     ) {
         super(requirements);
+        if (completeRequirements.length == 0) {
+            completeRequirements = [new OneTimeBattleRequirement(name)];
+        }
+        this.completeRequirements = completeRequirements;
     }
 }

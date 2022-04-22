@@ -20,7 +20,7 @@ class OneTimeBattleBattle extends Battle {
      * Award the player with exp, and go to the next pokemon
      */
     public static defeatPokemon() {
-        OneTimeBattleBattle.enemyPokemon().defeat(true);
+        OneTimeBattleBattle.enemyPokemon().defeat(this.battle.isTrainerBattle);
 
         // Make gym "route" regionless
         // App.game.breeding.progressEggsBattle(0, GameConstants.Region.none); TODO: set this

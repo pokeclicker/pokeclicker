@@ -71,7 +71,7 @@ class OneTimeBattleRunner {
                 message: battle.defeatMessage, // TODO: make a popup for the message
                 type: NotificationConstants.NotificationOption.success,
             });
-            battle.completed = true;
+            battle.defeated = true;
             player.town(battle.parent);
             App.game.gameState = GameConstants.GameState.town;
         }
