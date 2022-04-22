@@ -146,6 +146,7 @@ class Pokeballs implements Feature {
     public calculatePokeballToUse(id: number, isShiny: boolean): GameConstants.Pokeball {
         const alreadyCaught = App.game.party.alreadyCaughtPokemon(id);
         const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(id, true);
+        const pokemon = PokemonHelper.getPokemonById(id);
         let pref: GameConstants.Pokeball;
 
         // just check against alreadyCaughtShiny as this returns false when you don't have the pokemon yet.
@@ -168,12 +169,18 @@ class Pokeballs implements Feature {
 
         let use: GameConstants.Pokeball = GameConstants.Pokeball.None;
 
-        // Workaround for UB quest, a better solution would be good
-        if (typeof GameConstants.UltraBeastType[Battle.enemyPokemon().name] === 'number') {
-            if (this.pokeballs[GameConstants.Pokeball.Beastball].quantity() > 0) {
-                pref = GameConstants.Pokeball.Beastball;
+        console.log(pref);
+        if (pref == GameConstants.Pokeball.Beastball) {
+            if (GameConstants.UltraBeastType[pokemon.name] != undefined && this.pokeballs[GameConstants.Pokeball.Beastball].quantity() > 0) {
+                return GameConstants.Pokeball.Beastball;
             } else {
-                pref = GameConstants.Pokeball.None;
+                return GameConstants.Pokeball.None;
+            }
+        } else if (GameConstants.UltraBeastType[pokemon.name] != undefined) {
+            if (this.pokeballs[GameConstants.Pokeball.Beastball].quantity() > 0) {
+                return GameConstants.Pokeball.Beastball;
+            } else {
+                return GameConstants.Pokeball.None;
             }
         }
 
