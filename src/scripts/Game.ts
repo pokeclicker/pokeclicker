@@ -41,7 +41,8 @@ class Game {
         public achievementTracker: AchievementTracker,
         public challenges: Challenges,
         public battleFrontier: BattleFrontier,
-        public multiplier: Multiplier
+        public multiplier: Multiplier,
+        public oneTimeBattleList: { [battleName: string]: OneTimeBattle }
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
     }
