@@ -479,7 +479,6 @@ class QuestLineHelper {
         const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts');
 
         const AnabelReward = () => {
-            Notifier.notify({ message: 'You Beat Anabel!', type: NotificationConstants.NotificationOption.success });
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,5,false);
         };
 
@@ -500,13 +499,14 @@ class QuestLineHelper {
                     title: UltraBeastQuestLine.name,
                     message: `An Ultra Beast is hiding somewhere.\n${hint}`,
                     type: NotificationConstants.NotificationOption.info,
+                    timeout: 3e1,
                 });
             };
 
             const catchUltraBeast = new CustomQuest(
                 numberCaught,
                 undefined,
-                `Find and capture the rare Ultra Beast ${numberCaught} times!\nHint: ${hint}.`,
+                `Find and capture the rare Ultra Beast ${numberCaught} times!\nHint: ${hint}`,
                 App.game.statistics.pokemonCaptured[pokemonMap[ultrabeast].id],
                 undefined,
                 ultraBeastUnlock

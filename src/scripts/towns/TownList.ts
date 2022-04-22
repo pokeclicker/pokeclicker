@@ -2402,6 +2402,10 @@ const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke
     'Some very rare Pokémon have been sighted on {ROUTE_NAME}. I hope we can learn more about them.',
 ], GameConstants.Region.alola);
 
+const RoadsideMotelAnabel = new NPC('Anabel', [
+    '(Insert Text Here for how Beast Balls work.)',
+]);
+
 //Alola Towns
 
 TownList['Iki Town Outskirts'] = new Town(
@@ -2446,6 +2450,7 @@ TownList['Roadside Motel'] = new Town(
     [RoadsideMotelShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+        npcs: [RoadsideMotelAnabel],
     }
 );
 
