@@ -6045,7 +6045,7 @@ dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
     [
         {pokemon: 'Zubat', options: { weight: 6.5 }},
         {pokemon: 'Alolan Diglett', options: { weight: 6.5 }},
-        {pokemon: 'Nihilego', options: { weight: 6.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1)}},
+        {pokemon: 'Nihilego', options: { weight: 6.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 0)}},
         new DungeonTrainer('Worker',
             [new GymPokemon('Shieldon', 13215839, 22)], { weight: 1 }, 'Frank'),
         new DungeonTrainer('Worker',
