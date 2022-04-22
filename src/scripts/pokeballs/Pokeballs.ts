@@ -176,7 +176,7 @@ class Pokeballs implements Feature {
                 return GameConstants.Pokeball.None;
             }
         } else if (GameConstants.UltraBeastType[pokemon.name] != undefined) {
-            if (this.pokeballs[GameConstants.Pokeball.Beastball].quantity() > 0) {
+            if (pref != GameConstants.Pokeball.None && this.pokeballs[GameConstants.Pokeball.Beastball].quantity() > 0) {
                 return GameConstants.Pokeball.Beastball;
             } else {
                 return GameConstants.Pokeball.None;
