@@ -169,7 +169,6 @@ class Pokeballs implements Feature {
 
         let use: GameConstants.Pokeball = GameConstants.Pokeball.None;
 
-        console.log(pref);
         if (pref == GameConstants.Pokeball.Beastball) {
             if (GameConstants.UltraBeastType[pokemon.name] != undefined && this.pokeballs[GameConstants.Pokeball.Beastball].quantity() > 0) {
                 return GameConstants.Pokeball.Beastball;
