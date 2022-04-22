@@ -2403,7 +2403,9 @@ const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke
 ], GameConstants.Region.alola);
 
 const RoadsideMotelAnabel = new NPC('Anabel', [
-    '(Insert Text Here for how Beast Balls work.)',
+    'Catching lots of Ultra Beasts? Oh you want to know more about Beast Balls!',
+    'Beast Balls can only be used to catch Ultra Beasts. You can\'t even try use them against normal Pokémon, and any other Pokéball type won\'t work against Ultra Beasts.',
+    'If you\'re looking to most effectively hunt the Ultra Beasts down, try putting Beast Balls in your "Already Caught" and "New" selectors.',
 ], { requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 0) });
 
 //Alola Towns
