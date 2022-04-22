@@ -111,18 +111,20 @@ enum BadgeEnums {
     'Galar_Water',
     'Galar_Fire',
     'Galar_Fighting',
+    'Galar_Ghost',
     'Galar_Fairy',
     'Galar_Rock',
+    'Galar_Ice',
     'Galar_Dark',
     'Galar_Dragon',
     'Elite_Marnie',
-    'Elite_Hop',
     'Elite_Bede',
+    'Elite_Hop',
     'Elite_GalarChampion',
     // TODO: figure out a better way to handle DLC/non main regions
     // Armor
-    'Armor_Poison',
-    'Armor_Psychic',
+    'Elite_ArmorPoison',
+    'Elite_ArmorPsychic',
     'Elite_ArmorChampion',
     // Crown
     'Elite_CrownChampion',
