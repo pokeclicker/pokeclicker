@@ -1226,6 +1226,14 @@ TownList['Eterna City'] = new Town(
         npcs: [EternaLassCaroline],
     }
 );
+TownList['Mt. Coronet'] = new Town(
+    'Mt. Coronet',
+    GameConstants.Region.sinnoh,
+    [new MoveToDungeon(dungeonList['Mt. Coronet South']), new MoveToDungeon(dungeonList['Mt. Coronet North']), new MoveToDungeon(dungeonList['Spear Pillar']), new MoveToDungeon(dungeonList['Hall of Origin'])],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 207)],
+    }
+);
 TownList['Hearthome City'] = new Town(
     'Hearthome City',
     GameConstants.Region.sinnoh,
