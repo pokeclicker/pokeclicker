@@ -83,7 +83,7 @@ export default class KeyItems implements Feature {
                 () => App.game.statistics.routeKills[Region.kanto][6]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Fishing Rod'),
             new KeyItem(KeyItemType.HM03_surf, 'Can be used for crossing water.', undefined, undefined, undefined, 'HM03 Surf'),
             new KeyItem(KeyItemType.TM02_headbutt, 'Can be used to knock wild Pokémon from trees. Warning, may cause concussion.', () => {
-                () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ilex Forest')]() > 0, undefined, undefined, 'TM02 Headbutt'),
+                () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ilex Forest')]() > 0;, undefined, undefined, 'TM02 Headbutt'),
             new KeyItem(KeyItemType.HM08_dive, 'Can be used to dive to the bottom of the ocean to find new kinds of Pokémon.', undefined, undefined, undefined, 'HM08 Dive'),
             // TODO obtain somewhere at the start
             new KeyItem(KeyItemType.Holo_caster, 'A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others', undefined, undefined, undefined, 'Holo Caster'),
