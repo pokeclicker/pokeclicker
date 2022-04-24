@@ -280,6 +280,7 @@ class Underground implements Feature {
         Notifier.notify({
             message: `You restored ${gain} mining energy!`,
             type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.General.underground_energy_restore,
         });
     }
 
