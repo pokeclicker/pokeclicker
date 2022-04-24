@@ -21,6 +21,7 @@ class OneTimeBattle extends TownContent {
         public defeatMessage: string,
         requirements: (Requirement | OneFromManyRequirement)[] = [],
         completeRequirements: (Requirement | OneFromManyRequirement)[] = [],
+        public rewardFunction: () => void = () => {},
         public isTrainerBattle = true
     ) {
         super(requirements);

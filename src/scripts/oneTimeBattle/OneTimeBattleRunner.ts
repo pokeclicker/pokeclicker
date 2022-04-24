@@ -67,6 +67,7 @@ class OneTimeBattleRunner {
     public static battleWon(battle: OneTimeBattle) {
         if (this.running()) {
             this.running(false);
+            battle.rewardFunction();
             Notifier.notify({
                 message: battle.defeatMessage, // TODO: make a popup for the message
                 type: NotificationConstants.NotificationOption.success,
