@@ -66,6 +66,7 @@ class Game {
         AchievementHandler.initialize(this.multiplier, this.challenges);
         FarmController.initialize();
         EffectEngineRunner.initialize(this.multiplier);
+        FluteEffectRunner.initialize(this.multiplier);
         ItemHandler.initilizeEvoStones();
         this.profile.initialize();
         this.breeding.initialize();
@@ -94,6 +95,7 @@ class Game {
         DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
         BerryDeal.generateDeals(now);
         Weather.generateWeather(now);
+        GemDeal.generateDeals();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
         this.computeOfflineEarnings();
@@ -352,10 +354,14 @@ class Game {
         // Farm
         this.farming.update(GameConstants.TICK_TIME / GameConstants.SECOND);
 
-        // Effect Engine (battle items)
+        // Effect Engine (battle items and flutes)
         EffectEngineRunner.counter += GameConstants.TICK_TIME;
         if (EffectEngineRunner.counter >= GameConstants.EFFECT_ENGINE_TICK) {
             EffectEngineRunner.tick();
+        }
+        FluteEffectRunner.counter += GameConstants.TICK_TIME;
+        if (FluteEffectRunner.counter >= GameConstants.EFFECT_ENGINE_TICK) {
+            FluteEffectRunner.tick();
         }
 
         // Game timers
