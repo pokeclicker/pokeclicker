@@ -79,14 +79,14 @@ export default class KeyItems implements Feature {
                 });
             }, 'Dungeon Ticket'),
             // Fishing Rods and other Pokémon unlockers
-            new KeyItem(KeyItems.KeyItem.Fishing_rod, 'The best fishing rod for catching wild water Pokémon', () => {
+            new KeyItem(KeyItemType.Fishing_rod, 'The best fishing rod for catching wild water Pokémon', () => {
                 return App.game.statistics.routeKills[GameConstants.Region.kanto][6]() >= GameConstants.ROUTE_KILLS_NEEDED;
             }, undefined, undefined, 'Fishing Rod'),
-            new KeyItem(KeyItems.KeyItem.HM03_surf, 'Can be used for crossing water.', undefined, undefined, undefined, 'HM03 Surf'),
-            new KeyItem(KeyItems.KeyItem.TM02_headbutt, 'Can be used to knock wild Pokémon from trees. Warning, may cause concussion.', () => {
+            new KeyItem(KeyItemType.HM03_surf, 'Can be used for crossing water.', undefined, undefined, undefined, 'HM03 Surf'),
+            new KeyItem(KeyItemType.TM02_headbutt, 'Can be used to knock wild Pokémon from trees. Warning, may cause concussion.', () => {
                 return App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ilex Forest')]() > 0;
             }, undefined, undefined, 'TM02 Headbutt'),
-            new KeyItem(KeyItems.KeyItem.HM08_dive, 'Can be used to dive to the bottom of the ocean to find new kinds of Pokémon.', undefined, undefined, undefined, 'HM08 Dive'),
+            new KeyItem(KeyItemType.HM08_dive, 'Can be used to dive to the bottom of the ocean to find new kinds of Pokémon.', undefined, undefined, undefined, 'HM08 Dive'),
             // TODO obtain somewhere at the start
             new KeyItem(KeyItemType.Holo_caster, 'A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others', undefined, undefined, undefined, 'Holo Caster'),
             new KeyItem(KeyItemType.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémons attack; some baby Pokémon can only be found through breeding too!',
