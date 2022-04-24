@@ -39,6 +39,7 @@ const NotificationConstants = {
             encountered_shiny: new NotificationSetting('notification.encountered_shiny', 'Encountered a shiny Pokémon', true),
             quest_ready_to_complete: new NotificationSetting('notification.quest_ready_to_complete', 'Quest is ready to be completed', true),
             underground_energy_full: new NotificationSetting('notification.underground_energy_full', 'Mining energy reached maximum capacity', true),
+            underground_energy_restore: new NotificationSetting('notification.underground_energy_restore', 'Mining energy restored', true),
             event_start_end: new NotificationSetting('notification.event_start_end', 'Event start/end information', true),
             gym_won: new NotificationSetting('notification.gym_won', 'Gym leader defeated', true),
             offline_earnings: new NotificationSetting('notification.offline_earnings', 'Offline earnings', true),
