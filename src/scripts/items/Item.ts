@@ -145,8 +145,27 @@ class Item {
         return false;
     }
 
+    checkCanUse(): boolean {
+        if (!player.itemList[this.name]()) {
+            Notifier.notify({
+                message: `You don't have any ${ItemList[this.name].displayName}s left...`,
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+        return true;
+    }
+
     isAvailable(): boolean {
         return true;
+    }
+
+    isSoldOut(): boolean {
+        return false;
+    }
+
+    getDescription(): string {
+        return this._description;
     }
 
     increasePriceMultiplier(amount = 1) {

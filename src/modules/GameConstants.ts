@@ -49,7 +49,9 @@ export const MaxIDPerRegion = [
     898, // 89 - Galar
 ];
 
+// Battle Items
 export const ITEM_USE_TIME = 30;
+export const FLUTE_TYPE_ATTACK_MULTIPLIER = 1.005;
 
 export const ROAMING_MIN_CHANCE = 8192;
 export const ROAMING_MAX_CHANCE = 4096;
@@ -632,6 +634,21 @@ export enum BattleItemType {
     'Lucky_incense' = 'Lucky_incense',
 }
 
+export enum FluteItemType {
+    'Red_Flute' = 'Red_Flute',
+    'White_Flute' = 'White_Flute',
+    'Black_Flute' = 'Black_Flute',
+    'Yellow_Flute' = 'Yellow_Flute',
+    'Blue_Flute' = 'Blue_Flute',
+    'Poke_Flute' = 'Poke_Flute',
+    'Azure_Flute' = 'Azure_Flute',
+    'Eon_Flute' = 'Eon_Flute',
+    'Sun_Flute' = 'Sun_Flute',
+    'Moon_Flute' = 'Moon_Flute',
+    'Time_Flute' = 'Time_Flute',
+    'Grass_Flute' = 'Grass_Flute',
+}
+
 export enum PokemonItemType {
     'Eevee',
     'Porygon',
@@ -854,14 +871,16 @@ export const GalarGyms = [
     'Turffield',
     'Hulbury',
     'Motostoke',
-    'Stow-on-Side',
+    'Stow-on-Side1',
+    'Stow-on-Side2',
     'Ballonlea',
-    'Circhester',
+    'Circhester1',
+    'Circhester2',
     'Spikemuth',
     'Hammerlocke',
     'Trainer Marnie',
     'Trainer Hop',
-    'Trainer Bede',
+    'Gym Leader Bede',
     'Champion Leon',
 ];
 
