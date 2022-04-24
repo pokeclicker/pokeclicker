@@ -174,13 +174,21 @@
                                     <span id="animateCurrency-questPoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.questPoint]()) : App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
-                            <td class="col" data-bind="visible: App.game.wallet.currencies[GameConstants.Currency.diamond]() > 0">
+                        </tr>
+                        <tr class="row" data-bind="visible: Settings.getSetting('currencyMainDisplayExtended').observableValue()">
+                            <td class="col">
+                                <span style="display: inline; position: relative;">
+                                    <img title="Quest points" src="assets/images/currency/farmPoint.svg" height="25px">
+                                    <span id="animateCurrency-farmPoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.farmPoint]()) : App.game.wallet.currencies[GameConstants.Currency.farmPoint]().toLocaleString('en-US')">0</span>
+                                </span>
+                            </td>
+                            <td class="col">
                                 <span style="display: inline; position: relative;">
                                     <img title="Quest points" src="assets/images/currency/diamond.svg" height="25px">
                                     <span id="animateCurrency-diamond" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.diamond]()) : App.game.wallet.currencies[GameConstants.Currency.diamond]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
-                            <td class="col" data-bind="visible: App.game.wallet.currencies[GameConstants.Currency.battlePoint]() > 0">
+                            <td class="col">
                                 <span style="display: inline; position: relative;">
                                     <img title="Quest points" src="assets/images/currency/battlePoint.svg" height="25px">
                                     <span id="animateCurrency-battlePoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.battlePoint]()) : App.game.wallet.currencies[GameConstants.Currency.battlePoint]().toLocaleString('en-US')">0</span>
