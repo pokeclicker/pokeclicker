@@ -6,7 +6,7 @@ class OneTimeBattle extends TownContent {
         return 'btn btn-secondary';
     }
     public text(): string {
-        return `Fight ${this.name}`;
+        return `Fight ${this.displayName}`;
     }
     public isVisible(): boolean {
         return this.isUnlocked() && !this.completeRequirements.every(r => r.isCompleted());
@@ -17,6 +17,7 @@ class OneTimeBattle extends TownContent {
 
     constructor(
         public name: string,
+        public displayName: string,
         public pokemons: GymPokemon[],
         public defeatMessage: string,
         requirements: (Requirement | OneFromManyRequirement)[] = [],

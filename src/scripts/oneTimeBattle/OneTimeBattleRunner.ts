@@ -68,10 +68,7 @@ class OneTimeBattleRunner {
         if (this.running()) {
             this.running(false);
             battle.rewardFunction();
-            Notifier.notify({
-                message: battle.defeatMessage, // TODO: make a popup for the message
-                type: NotificationConstants.NotificationOption.success,
-            });
+            $('#oneTimeBattleWonModal').modal('show');
             battle.defeated = true;
             player.town(battle.parent);
             App.game.gameState = GameConstants.GameState.town;
