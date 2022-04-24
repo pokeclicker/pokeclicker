@@ -1963,7 +1963,12 @@ Routes.add(new RegionRoute(
         land: ['Lotad', 'Seedot', 'Purrloin', 'Blipbug', 'Gossifleur','Chewtle', 'Galarian Zigzagoon', 'Nickit', 'Yamper', 'Obstagoon'],
         water: ['Lapras', 'Drednaw', 'Gyarados', 'Arrokuda','Barraskewda', 'Magikarp', 'Feebas'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Galar_Rock)]
+    [
+        new MultiRequirement([
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Water')),
+        ]),
+    ]
 ));
 Routes.add(new RegionRoute(
     'Galar Route 9', GameConstants.Region.galar, 20,
@@ -1971,7 +1976,12 @@ Routes.add(new RegionRoute(
         land: ['Cramorant', 'Octillery', 'Kingler', 'Pyukumuku', 'Gastrodon (east)', 'Jellicent', 'Mareanie', 'Glalie'],
         water: ['Wishiwashi (Solo)', 'Qwilfish', 'Mantyke'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Galar_Rock)]
+    [
+        new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Galar_Rock),
+            new GymBadgeRequirement(BadgeEnums.Galar_Ice),
+        ]),
+    ]
 ));
 Routes.add(new RegionRoute(
     'Circhester Bay', GameConstants.Region.galar, 21,
