@@ -2,6 +2,8 @@
 ///<reference path="DungeonBossPokemon.ts"/>
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/SeededDateRequirement.d.ts"/>
+///<reference path="../../declarations/utilities/SeededDateRand.d.ts"/>
 ///<reference path="../achievements/ObtainedPokemonRequirement.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
 ///<reference path="../gym/GymPokemon.ts"/>
@@ -10,6 +12,7 @@ interface EnemyOptions {
     weight?: number,
     requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
     reward?: Amount,
+    hide?: boolean,
 }
 
 interface DetailedPokemon {
@@ -31,6 +34,7 @@ type Boss = DungeonBossPokemon | DungeonTrainer;
 interface EncounterInfo {
     image: string,
     shiny: boolean,
+    hide: boolean,
     hidden: boolean,
     locked: boolean,
     lockMessage: string,
@@ -43,6 +47,7 @@ const DungeonGainGymBadge = (gym: Gym, badge: BadgeEnums) => {
         // Set the set to our expected gym
         // This updates our modal values
         GymRunner.gymObservable(gym);
+        GymBattle.gym = gym;
         // Give the player the badge
         App.game.badgeCase.gainBadge(badge);
         // Show the modal
@@ -68,7 +73,7 @@ class Dungeon {
 
     public isUnlocked(): boolean {
         // Player requires the Dungeon Ticket to access the dungeons
-        if (!App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket)) {
+        if (!App.game.keyItems.hasKeyItem(KeyItemType.Dungeon_ticket)) {
             Notifier.notify({
                 message: 'You need the Dungeon ticket to access dungeons',
                 type: NotificationConstants.NotificationOption.danger,
@@ -125,6 +130,51 @@ class Dungeon {
                 return (!ignoreRequirement && enemy.options?.requirement) ? enemy.options.requirement.isCompleted() : true;
             }
         });
+    }
+
+    /**
+     * Gets all available Pokemon in the dungeon
+     */
+    public allAvailablePokemon(): PokemonNameType[] {
+        const encounterInfo = [];
+
+        // Handling minions
+        this.enemyList.forEach((enemy) => {
+            // Handling Pokemon
+            if (typeof enemy === 'string' || enemy.hasOwnProperty('pokemon')) {
+                let pokemonName: PokemonNameType;
+                if (enemy.hasOwnProperty('pokemon')) {
+                    // Check if requirements have been met
+                    if ((enemy as DetailedPokemon).options?.requirement) {
+                        if (!(enemy as DetailedPokemon).options.requirement.isCompleted()) {
+                            return;
+                        }
+                    }
+                    pokemonName = (<DetailedPokemon>enemy).pokemon;
+                } else {
+                    pokemonName = <PokemonNameType>enemy;
+                }
+                encounterInfo.push(pokemonName);
+            // Handling Trainers
+            } else { /* We don't include Trainers */ }
+        });
+
+        // Handling Bosses
+        this.bossList.forEach((boss) => {
+            // Handling Pokemon
+            if (boss instanceof DungeonBossPokemon) {
+                if (boss.options?.requirement) {
+                    if (!boss.options.requirement.isCompleted()) {
+                        return;
+                    }
+                }
+                const pokemonName = boss.name;
+                encounterInfo.push(pokemonName);
+            // Handling Trainer
+            } else { /* We don't include Trainers */ }
+        });
+
+        return encounterInfo;
     }
 
     /**
@@ -247,6 +297,7 @@ class Dungeon {
                 const encounter = {
                     image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
                     shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
+                    hide: boss.options?.hide ? (boss.options?.requirement ? !boss.options?.requirement.isCompleted() : boss.options?.hide) : false,
                     hidden: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
                     lock: boss.options?.requirement ? !boss.options?.requirement.isCompleted() : false,
                     lockMessage: boss.options?.requirement ? boss.options?.requirement.hint() : '',
@@ -257,6 +308,7 @@ class Dungeon {
                 const encounter = {
                     image: boss.image,
                     shiny:  false,
+                    hide: boss.options?.hide ? (boss.options?.requirement ? !boss.options?.requirement.isCompleted() : boss.options?.hide) : false,
                     hidden: false,
                     lock: boss.options?.requirement ? !boss.options?.requirement.isCompleted() : false,
                     lockMessage: boss.options?.requirement ? boss.options?.requirement.hint() : '',
@@ -907,6 +959,10 @@ dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
     ],
     2500, 31);
 
+// All Unown except "E?!"
+SeededRand.seed(1337);
+const AlphUnownList = SeededRand.shuffleArray('ABCDFGHIJKLMNOPQRSTUVWXYZ'.split(''));
+
 dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     [
         {pokemon: 'Poliwag', options: { weight: 0.6 }},
@@ -937,13 +993,10 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     ],
     60600,
     [
-        new DungeonBossPokemon('Unown (A)', 280000, 14),
-        new DungeonBossPokemon('Unown (F)', 280000, 14),
-        new DungeonBossPokemon('Unown (H)', 280000, 14),
-        new DungeonBossPokemon('Unown (L)', 280000, 14),
-        new DungeonBossPokemon('Unown (N)', 280000, 14),
-        new DungeonBossPokemon('Unown (P)', 280000, 14),
-        new DungeonBossPokemon('Unown (U)', 280000, 14),
+        ...AlphUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 280000, 14, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(AlphUnownList) == char),
+        })),
     ],
     3000, 32);
 
@@ -2236,7 +2289,23 @@ dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
 // Sinnoh
 
 dungeonList['Oreburgh Gate'] = new Dungeon('Oreburgh Gate',
-    ['Zubat', 'Psyduck', 'Geodude', 'Golduck', 'Magikarp', 'Barboach'],
+    [
+        {pokemon: 'Zubat', options: { weight: 1.1 }},
+        {pokemon: 'Golbat', options: { weight: 1.1 }},
+        {pokemon: 'Psyduck', options: { weight: 1.1 }},
+        {pokemon: 'Golduck', options: { weight: 1.1 }},
+        {pokemon: 'Geodude', options: { weight: 1.1 }},
+        {pokemon: 'Magikarp', options: { weight: 1.1 }},
+        {pokemon: 'Barboach', options: { weight: 1.1 }},
+        new DungeonTrainer('Camper',
+            [
+                new GymPokemon('Starly', 720600, 7),
+                new GymPokemon('Shinx', 720600, 7),
+            ], { weight: 1 }, 'Curtis'),
+        new DungeonTrainer('Picnicker',
+            [new GymPokemon('Bidoof', 720600, 9)],
+            { weight: 1 }, 'Diana'),
+    ],
     [
         {loot: 'xAttack', weight: 3.75},
         {loot: 'Item_magnet', weight: 3.5},
@@ -2251,10 +2320,30 @@ dungeonList['Oreburgh Gate'] = new Dungeon('Oreburgh Gate',
         new DungeonBossPokemon('Gyarados', 3703000, 14),
         new DungeonBossPokemon('Whiscash', 3703000, 14),
     ],
-    39000, 201);
+    39000, 203);
 
-dungeonList['Ravaged Path'] = new Dungeon('Ravaged Path',
-    ['Zubat', 'Psyduck',  'Golduck', 'Magikarp', 'Barboach'],
+dungeonList['Valley Windworks'] = new Dungeon('Valley Windworks',
+    [
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Glameow', 756000, 13)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Zubat', 756000, 13)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Glameow', 756000, 11),
+                new GymPokemon('Stunky', 756000, 11),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Stunky', 756000, 13)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Zubat', 756000, 11),
+                new GymPokemon('Zubat', 756000, 11),
+            ], { weight: 1 }, undefined, '(male)'),
+    ],
     [
         {loot: 'Lucky_incense', weight: 4},
         {loot: 'Pamtre', weight: 3.5},
@@ -2265,13 +2354,52 @@ dungeonList['Ravaged Path'] = new Dungeon('Ravaged Path',
     ],
     756000,
     [
-        new DungeonBossPokemon('Gyarados', 3803000, 14),
-        new DungeonBossPokemon('Whiscash', 3803000, 14),
+        new DungeonTrainer('Commander',
+            [
+                new GymPokemon('Zubat', 1901500, 15),
+                new GymPokemon('Purugly', 1901500, 17),
+            ], { weight: 1 }, 'Mars', '(mars)'),
+        new DungeonBossPokemon('Drifloon', 3803000, 14, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Valley Windworks'))}),
     ],
-    43000, 201);
+    43000, 204);
 
 dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
-    ['Gastly', 'Hoothoot', 'Wurmple', 'Silcoon', 'Cascoon', 'Bidoof', 'Kricketot', 'Budew', 'Buneary'],
+    [
+        {pokemon: 'Gastly', options: { weight: 1.8 }},
+        {pokemon: 'Hoothoot', options: { weight: 1.8 }},
+        {pokemon: 'Wurmple', options: { weight: 1.8 }},
+        {pokemon: 'Silcoon', options: { weight: 1.8 }},
+        {pokemon: 'Cascoon', options: { weight: 1.8 }},
+        {pokemon: 'Bidoof', options: { weight: 1.8 }},
+        {pokemon: 'Kricketot', options: { weight: 1.8 }},
+        {pokemon: 'Budew', options: { weight: 1.8 }},
+        {pokemon: 'Buneary', options: { weight: 1.8 }},
+        new DungeonTrainer('Bookworms',
+            [
+                new GymPokemon('Wurmple', 812000, 9),
+                new GymPokemon('Silcoon', 812000, 11),
+                new GymPokemon('Beautifly', 812000, 13),
+                new GymPokemon('Pachirisu', 812000, 14),
+            ], { weight: 1 }, 'Jack & Briana'),
+        new DungeonTrainer('Melded Minds',
+            [
+                new GymPokemon('Abra', 812000, 15),
+                new GymPokemon('Abra', 812000, 15),
+            ], { weight: 1 }, 'Linsey & Elijah', '(both)'),
+        new DungeonTrainer('Bug Buds',
+            [
+                new GymPokemon('Wurmple', 812000, 9),
+                new GymPokemon('Cascoon', 812000, 11),
+                new GymPokemon('Dustox', 812000, 13),
+                new GymPokemon('Burmy (plant)', 812000, 12),
+                new GymPokemon('Kricketune', 812000, 12),
+            ], { weight: 1 }, 'Philip & Donald'),
+        new DungeonTrainer('Melded Minds',
+            [
+                new GymPokemon('Meditite', 812000, 15),
+                new GymPokemon('Psyduck', 812000, 15),
+            ], { weight: 1 }, 'Kody & Rachael', '(both)'),
+    ],
     [
         {loot: 'Cheri', weight: 4},
         {loot: 'Oran', weight: 4},
@@ -2288,7 +2416,7 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
         new DungeonBossPokemon('Beautifly', 3950000, 30),
         new DungeonBossPokemon('Dustox', 3950000, 30),
     ],
-    48000, 201);
+    48000, 205);
 
 dungeonList['Old Chateau'] = new Dungeon('Old Chateau',
     ['Gastly', 'Haunter', 'Gengar'],
@@ -2302,18 +2430,104 @@ dungeonList['Old Chateau'] = new Dungeon('Old Chateau',
         {loot: 'Odd Keystone', weight: 1.75},
     ],
     853000,
+    [new DungeonBossPokemon('Rotom', 4200000, 100)],
+    52500, 205);
+
+dungeonList['Team Galactic Eterna Building'] = new Dungeon('Team Galactic Eterna Building',
     [
-        new DungeonBossPokemon('Rotom', 4200000, 100),
-        new DungeonBossPokemon('Rotom (heat)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
-        new DungeonBossPokemon('Rotom (wash)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
-        new DungeonBossPokemon('Rotom (frost)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
-        new DungeonBossPokemon('Rotom (fan)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
-        new DungeonBossPokemon('Rotom (mow)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Zubat', 877000, 17),
+                new GymPokemon('Stunky', 877000, 17),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Zubat', 877000, 16),
+                new GymPokemon('Glameow', 877000, 18),
+            ], { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Glameow', 877000, 19)],
+            { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Croagunk', 877000, 19)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Stunky', 877000, 16),
+                new GymPokemon('Croagunk', 877000, 16),
+                new GymPokemon('Glameow', 877000, 16),
+            ], { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Scientist',
+            [new GymPokemon('Kadabra', 877000, 20)],
+            { weight: 1 }, 'Travon', '(male)'),
     ],
-    52500, 230);
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    877000,
+    [
+        new DungeonTrainer('Commander',
+            [
+                new GymPokemon('Zubat', 2150000, 21),
+                new GymPokemon('Skuntank', 2150000, 23),
+            ], { weight: 1 }, 'Jupiter', '(jupiter)'),
+        new DungeonBossPokemon('Rotom (heat)', 4300000, 100, {requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap.Rotom),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
+        ])}),
+        new DungeonBossPokemon('Rotom (wash)', 4300000, 100, {requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap.Rotom),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
+        ])}),
+        new DungeonBossPokemon('Rotom (frost)', 4300000, 100, {requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap.Rotom),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
+        ])}),
+        new DungeonBossPokemon('Rotom (fan)', 4300000, 100, {requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap.Rotom),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
+        ])}),
+        new DungeonBossPokemon('Rotom (mow)', 4300000, 100, {requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap.Rotom),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
+        ])}),
+    ],
+    54250, 205);
 
 dungeonList['Wayward Cave'] = new Dungeon('Wayward Cave',
-    ['Zubat', 'Geodude', 'Onix'],
+    [
+        {pokemon: 'Zubat', options: { weight: 6.7 }},
+        {pokemon: 'Geodude', options: { weight: 6.7 }},
+        {pokemon: 'Onix', options: { weight: 6.7 }},
+        new DungeonTrainer('Mountain Men',
+            [
+                new GymPokemon('Geodude', 903000, 20),
+                new GymPokemon('Geodude', 903000, 20),
+                new GymPokemon('Onix', 903000, 22),
+            ], { weight: 1 }, 'Reginald & Lorenzo'),
+        new DungeonTrainer('Siblings',
+            [
+                new GymPokemon('Buneary', 903000, 22),
+                new GymPokemon('Staravia', 903000, 17),
+                new GymPokemon('Ponyta', 903000, 20),
+                new GymPokemon('Shellos (west)', 903000, 20),
+            ], { weight: 1 }, 'Cassidy & Wayne'),
+        new DungeonTrainer('Nature Friends',
+            [
+                new GymPokemon('Psyduck', 903000, 22),
+                new GymPokemon('Aipom', 903000, 22),
+            ], { weight: 1 }, 'Tori & Diego'),
+        new DungeonTrainer('Nature Friends',
+            [
+                new GymPokemon('Hoothoot', 903000, 22),
+                new GymPokemon('Buizel', 903000, 20),
+                new GymPokemon('Shinx', 903000, 20),
+            ], { weight: 1 }, 'Ana & Parker'),
+        new DungeonTrainer('Amateur Archaeologists',
+            [
+                new GymPokemon('Gible', 903000, 22),
+                new GymPokemon('Geodude', 903000, 19),
+                new GymPokemon('Bronzor', 903000, 21),
+            ], { weight: 1 }, 'Terry & Gerald'),
+    ],
     [
         {loot: 'Token_collector', weight: 4},
         {loot: 'Rawst', weight: 3.75},
@@ -2328,10 +2542,10 @@ dungeonList['Wayward Cave'] = new Dungeon('Wayward Cave',
     ],
     903000,
     [new DungeonBossPokemon('Bronzor', 4400000, 100)],
-    56500, 230);
+    56500, 206);
 
 dungeonList['Mt. Coronet South'] = new Dungeon('Mt. Coronet South',
-    [{pokemon: 'Clefairy', options: { weight: 2 }}, 'Zubat', 'Machop', 'Geodude', 'Cleffa', 'Nosepass', 'Meditite', 'Chingling', 'Bronzor', 'Magikarp', 'Barboach'],
+    ['Clefairy', 'Zubat', 'Machop', 'Geodude', 'Magikarp', 'Cleffa', 'Barboach', 'Chingling'],
     [
         {loot: 'xAttack', weight: 3.75},
         {loot: 'Lucky_incense', weight: 3.5},
@@ -2342,14 +2556,30 @@ dungeonList['Mt. Coronet South'] = new Dungeon('Mt. Coronet South',
     ],
     951500,
     [
-        new DungeonBossPokemon('Machoke', 4000000, 35),
-        new DungeonBossPokemon('Bronzong', 4000000, 50),
-        new DungeonBossPokemon('Absol', 4000000, 50),
+        new DungeonBossPokemon('Nosepass', 4000000, 35),
+        new DungeonBossPokemon('Meditite', 4000000, 50),
+        new DungeonBossPokemon('Bronzor', 4000000, 50),
     ],
-    60500, 201);
+    60500, 207);
+
+// All Unown except "FHP?!"
+SeededRand.seed(420);
+const SolaceonUnownList = SeededRand.shuffleArray('ABCDEGIJKLMNOQRSTUVWXYZ'.split(''));
 
 dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
-    ['Zubat', 'Geodude', 'Natu', 'Bronzor', 'Hippopotas'],
+    [
+        {pokemon: 'Zubat', options: { weight: 0.8 }},
+        {pokemon: 'Geodude', options: { weight: 0.8 }},
+        {pokemon: 'Natu', options: { weight: 0.8 }},
+        {pokemon: 'Bronzor', options: { weight: 0.8 }},
+        {pokemon: 'Hippopotas', options: { weight: 0.8 }},
+        new DungeonTrainer('Ruin Maniac',
+            [
+                new GymPokemon('Geodude', 960000, 19),
+                new GymPokemon('Geodude', 960000, 21),
+                new GymPokemon('Bronzor', 960000, 23),
+            ], { weight: 1 }, 'Karl'),
+    ],
     [
         {loot: 'Lucky_incense', weight: 3.75},
         {loot: 'Persim', weight: 3.25},
@@ -2362,16 +2592,74 @@ dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
     ],
     960000,
     [
-        new DungeonBossPokemon('Unown (A)', 4100000, 30),
-        new DungeonBossPokemon('Unown (E)', 4100000, 30),
-        new DungeonBossPokemon('Unown (L)', 4100000, 30),
-        new DungeonBossPokemon('Unown (N)', 4100000, 30),
-        new DungeonBossPokemon('Unown (U)', 4100000, 30),
+        ...SolaceonUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(SolaceonUnownList) == char),
+        })),
     ],
     62500, 209);
 
 dungeonList['Iron Island'] = new Dungeon('Iron Island',
-    ['Zubat', 'Golbat', 'Tentacool', 'Tentacruel', 'Geodude', 'Graveler', 'Onix', 'Wingull', 'Pelipper', 'Finneon'],
+    [
+        {pokemon: 'Zubat', options: { weight: 3.3 }},
+        {pokemon: 'Golbat', options: { weight: 3.3 }},
+        {pokemon: 'Tentacool', options: { weight: 3.3 }},
+        {pokemon: 'Tentacruel', options: { weight: 3.3 }},
+        {pokemon: 'Geodude', options: { weight: 3.3 }},
+        {pokemon: 'Graveler', options: { weight: 3.3 }},
+        {pokemon: 'Onix', options: { weight: 3.3 }},
+        {pokemon: 'Steelix', options: { weight: 3.3 }},
+        {pokemon: 'Wingull', options: { weight: 3.3 }},
+        {pokemon: 'Pelipper', options: { weight: 3.3 }},
+        {pokemon: 'Finneon', options: { weight: 3.3 }},
+        new DungeonTrainer('Camper',
+            [
+                new GymPokemon('Aipom', 983000, 34),
+                new GymPokemon('Floatzel', 983000, 36),
+            ], { weight: 1 }, 'Lawrence'),
+        new DungeonTrainer('Picnicker',
+            [new GymPokemon('Raichu', 983000, 37)],
+            { weight: 1 }, 'Summer'),
+        new DungeonTrainer('Worker',
+            [
+                new GymPokemon('Magnemite', 983000, 34),
+                new GymPokemon('Magnemite', 983000, 36),
+            ], { weight: 1 }, 'Noel'),
+        new DungeonTrainer('Worker',
+            [new GymPokemon('Steelix', 983000, 37)],
+            { weight: 1 }, 'Braden'),
+        new DungeonTrainer('Mountain Men',
+            [
+                new GymPokemon('Nosepass', 983000, 35),
+                new GymPokemon('Onix', 983000, 33),
+                new GymPokemon('Steelix', 983000, 34),
+                new GymPokemon('Graveler', 983000, 35),
+                new GymPokemon('Rhyhorn', 983000, 35),
+            ], { weight: 1 }, 'Damon & Maurice'),
+        new DungeonTrainer('Crush Kin',
+            [
+                new GymPokemon('Toxicroak', 983000, 38),
+                new GymPokemon('Medicham', 983000, 38),
+            ], { weight: 1 }, 'Kendal & Tyler'),
+        new DungeonTrainer('Co-workers',
+            [
+                new GymPokemon('Geodude', 983000, 33),
+                new GymPokemon('Geodude', 983000, 33),
+                new GymPokemon('Machoke', 983000, 36),
+                new GymPokemon('Magnemite', 983000, 34),
+                new GymPokemon('Graveler', 983000, 34),
+                new GymPokemon('Machop', 983000, 34),
+            ], { weight: 1 }, 'Brendon & Quentin'),
+        new DungeonTrainer('Ace Duo',
+            [
+                new GymPokemon('Quagsire', 983000, 35),
+                new GymPokemon('Staraptor', 983000, 36),
+                new GymPokemon('Hippopotas', 983000, 38),
+                new GymPokemon('Lopunny', 983000, 38),
+                new GymPokemon('Medicham', 983000, 35),
+                new GymPokemon('Kirlia', 983000, 36),
+            ], { weight: 1 }, 'Jonah & Brenda'),
+    ],
     [
         {loot: 'Item_magnet', weight: 3.75},
         {loot: 'Pokeball', weight: 3.5},
@@ -2385,11 +2673,113 @@ dungeonList['Iron Island'] = new Dungeon('Iron Island',
         {loot: 'Protector', weight: 0},
     ],
     983000,
-    [new DungeonBossPokemon('Steelix', 4210000, 100)],
-    66500, 230);
+    [
+        new DungeonTrainer('Galactic Grunts',
+            [
+                new GymPokemon('Zubat', 701667, 34),
+                new GymPokemon('Houndour', 701667, 34),
+                new GymPokemon('Golbat', 701667, 34),
+                new GymPokemon('Glameow', 701667, 34),
+                new GymPokemon('Croagunk', 701667, 34),
+                new GymPokemon('Stunky', 701667, 34),
+            ], { weight: 1 }, undefined, '(male)'),
+    ],
+    66500, 218);
+
+dungeonList['Lake Valor'] = new Dungeon('Lake Valor',
+    [
+        {pokemon: 'Psyduck', options: { weight: 2 }},
+        {pokemon: 'Golduck', options: { weight: 2 }},
+        {pokemon: 'Goldeen', options: { weight: 2 }},
+        {pokemon: 'Magikarp', options: { weight: 2 }},
+        {pokemon: 'Staravia', options: { weight: 2 }},
+        {pokemon: 'Bibarel', options: { weight: 2 }},
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Glameow', 1015000, 35),
+                new GymPokemon('Murkrow', 1015000, 35),
+            ], { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Golbat', 1015000, 37)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Croagunk', 1015000, 33),
+                new GymPokemon('Houndour', 1015000, 33),
+                new GymPokemon('Stunky', 1015000, 33),
+                new GymPokemon('Glameow', 1015000, 33),
+            ], { weight: 1 }, undefined, '(male)'),
+    ],
+    [
+        {loot: 'Token_collector', weight: 4},
+        {loot: 'Sitrus', weight: 3.75},
+        {loot: 'Mind Plate', weight: 2.5},
+        {loot: 'Electric_egg', weight: 1},
+        {loot: 'Kebia', weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Lake Valor'))},
+        {loot: 'Chople', weight: 1, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Lake Valor'))},
+        {loot: 'Thunder_stone', weight: 0},
+    ],
+    1015000,
+    [
+        new DungeonTrainer('Commander',
+            [
+                new GymPokemon('Golbat', 1533334, 38),
+                new GymPokemon('Bronzor', 1533334, 38),
+                new GymPokemon('Toxicroak', 1533334, 40),
+            ], { weight: 1 }, 'Saturn', '(saturn)'),
+        new DungeonBossPokemon('Azelf', 10060000, 50, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
+    ],
+    69500, 218);
+
+dungeonList['Lake Verity'] = new Dungeon('Lake Verity',
+    [
+        {pokemon: 'Psyduck', options: { weight: 2.7 }},
+        {pokemon: 'Golduck', options: { weight: 2.7 }},
+        {pokemon: 'Goldeen', options: { weight: 2.7 }},
+        {pokemon: 'Magikarp', options: { weight: 2.7 }},
+        {pokemon: 'Starly', options: { weight: 2.7 }},
+        {pokemon: 'Bidoof', options: { weight: 2.7 }},
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Glameow', 1068735, 33),
+                new GymPokemon('Golbat', 1068735, 33),
+                new GymPokemon('Murkrow', 1068735, 36),
+            ], { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Croagunk', 1068735, 37)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Stunky', 1068735, 35),
+                new GymPokemon('Houndour', 1068735, 35),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Houndour', 1068735, 34),
+                new GymPokemon('Glameow', 1068735, 36),
+            ], { weight: 1 }, undefined, '(female)'),
+    ],
+    [
+        {loot: 'xAttack', weight: 4},
+        {loot: 'Sitrus', weight: 3.75},
+        {loot: 'Mind Plate', weight: 2.5},
+        {loot: 'Fire_egg', weight: 1},
+        {loot: 'Chilan', weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Lake Verity'))},
+        {loot: 'Fire_stone', weight: 0},
+    ],
+    1068735,
+    [
+        new DungeonTrainer('Commander',
+            [
+                new GymPokemon('Golbat', 1606667, 38),
+                new GymPokemon('Bronzor', 1606667, 38),
+                new GymPokemon('Toxicroak', 1606667, 40),
+            ], { weight: 1 }, 'Mars', '(mars)'),
+    ],
+    72500, 218);
 
 dungeonList['Mt. Coronet North'] = new Dungeon('Mt. Coronet North',
-    [{pokemon: 'Clefairy', options: { weight: 2 }}, 'Zubat', 'Machop', 'Geodude', 'Meditite', 'Chingling', 'Bronzor', 'Magikarp', 'Barboach', 'Noctowl', 'Snover'],
+    ['Clefairy', 'Zubat', 'Machop', 'Geodude', 'Magikarp', 'Noctowl', 'Meditite', 'Barboach', 'Chingling', 'Bronzor', 'Snover'],
     [
         {loot: 'xClick', weight: 4},
         {loot: 'Kelpsy', weight: 3.5},
@@ -2403,51 +2793,16 @@ dungeonList['Mt. Coronet North'] = new Dungeon('Mt. Coronet North',
         {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(350, GameConstants.getDungeonIndex('Mt. Coronet North'))},
         {loot: 'Max Revive', weight: 0},
     ],
-    1015000,
-    [
-        new DungeonBossPokemon('Graveler', 4600000, 35),
-        new DungeonBossPokemon('Feebas', 4600000, 50),
-        new DungeonBossPokemon('Medicham', 4600000, 50),
-    ],
-    69500, 201);
-
-dungeonList['Lake Verity'] = new Dungeon('Lake Verity',
-    ['Starly', 'Bidoof', 'Psyduck', 'Goldeen', 'Magikarp'],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Sitrus', weight: 3.75},
-        {loot: 'Mind Plate', weight: 2.5},
-        {loot: 'Fire_egg', weight: 1},
-        {loot: 'Chilan', weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Lake Verity'))},
-        {loot: 'Fire_stone', weight: 0},
-    ],
-    1068735,
-    [
-        new DungeonBossPokemon('Golduck', 4820000, 10),
-        new DungeonBossPokemon('Seaking', 4820000, 10),
-    ],
-    72500, 201);
-
-dungeonList['Lake Valor'] = new Dungeon('Lake Valor',
-    ['Psyduck', 'Golduck', 'Goldeen', 'Magikarp', 'Staravia'],
-    [
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Sitrus', weight: 3.75},
-        {loot: 'Mind Plate', weight: 2.5},
-        {loot: 'Electric_egg', weight: 1},
-        {loot: 'Kebia', weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Lake Valor'))},
-        {loot: 'Chople', weight: 1, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Lake Valor'))},
-        {loot: 'Thunder_stone', weight: 0},
-    ],
     1111500,
     [
-        new DungeonBossPokemon('Bibarel', 4960000, 35),
-        new DungeonBossPokemon('Azelf', 10060000, 35),
+        new DungeonBossPokemon('Graveler', 4960000, 35),
+        new DungeonBossPokemon('Feebas', 4960000, 50),
+        new DungeonBossPokemon('Medicham', 4960000, 50),
     ],
-    74500, 201);
+    74500, 218);
 
 dungeonList['Lake Acuity'] = new Dungeon('Lake Acuity',
-    ['Sneasel', 'Bibarel', 'Psyduck', 'Golduck', 'Magikarp', 'Goldeen', 'Snover', 'Snorunt'],
+    ['Psyduck', 'Golduck', 'Goldeen', 'Magikarp', 'Gyarados', 'Sneasel', 'Snorunt', 'Bibarel', 'Snover'],
     [
         {loot: 'Lucky_egg', weight: 4},
         {loot: 'Sitrus', weight: 3.75},
@@ -2459,13 +2814,177 @@ dungeonList['Lake Acuity'] = new Dungeon('Lake Acuity',
     ],
     1261800,
     [
-        new DungeonBossPokemon('Gyarados', 5070000, 40),
-        new DungeonBossPokemon('Uxie', 10070000, 40),
+        new DungeonTrainer('Commander',
+            [
+                new GymPokemon('Bronzor', 1690000, 38),
+                new GymPokemon('Zubat', 1690000, 38),
+                new GymPokemon('Skuntank', 1690000, 40),
+            ], { weight: 1 }, 'Jupiter', '(jupiter)'),
+        new DungeonBossPokemon('Uxie', 10070000, 50, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
     ],
-    78000, 201);
+    78000, 217);
+
+dungeonList['Team Galactic HQ'] = new Dungeon('Team Galactic HQ',
+    [
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Glameow', 1295400, 41)],
+            { weight: 2 }, undefined, '(female)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Glameow', 1295400, 37),
+                new GymPokemon('Murkrow', 1295400, 38),
+                new GymPokemon('Croagunk', 1295400, 39),
+            ], { weight: 2 }, undefined, '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Kirlia', 1295400, 40),
+                new GymPokemon('Kadabra', 1295400, 40),
+            ], { weight: 2 }, 'Frederick', '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Stunky', 1295400, 41)],
+            { weight: 2 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Murkrow', 1295400, 41),
+                new GymPokemon('Stunky', 1295400, 41),
+            ], { weight: 2 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Golbat', 1295400, 40),
+                new GymPokemon('Golbat', 1295400, 38),
+            ], { weight: 2 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Golbat', 1295400, 39),
+                new GymPokemon('Houndour', 1295400, 39),
+            ], { weight: 2 }, undefined, '(female)'),
+        new DungeonTrainer('Scientist',
+            [new GymPokemon('Porygon2', 1295400, 42)],
+            { weight: 2 }, 'Darrius', '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Stunky', 1295400, 38),
+                new GymPokemon('Croagunk', 1295400, 40),
+            ], { weight: 2 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Croagunk', 1295400, 38),
+                new GymPokemon('Stunky', 1295400, 38),
+                new GymPokemon('Glameow', 1295400, 38),
+            ], { weight: 2 }, undefined, '(female)'),
+        new DungeonTrainer('Commander',
+            [
+                new GymPokemon('Golbat', 1295400, 42),
+                new GymPokemon('Bronzor', 1295400, 42),
+                new GymPokemon('Toxicroak', 1295400, 42),
+            ], { weight: 1 }, 'Saturn', '(saturn)'),
+    ],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    1295400,
+    [
+        new DungeonTrainer('Galactic Boss',
+            [
+                new GymPokemon('Sneasel', 1725000, 44),
+                new GymPokemon('Crobat', 1725000, 44),
+                new GymPokemon('Honchkrow', 1725000, 46),
+            ], { weight: 1 }, 'Cyrus', '(cyrus)'),
+    ],
+    82500, 217);
+
+dungeonList['Spear Pillar'] = new Dungeon('Spear Pillar',
+    [
+        {pokemon: 'Clefairy', options: { weight: 3 }},
+        {pokemon: 'Golbat', options: { weight: 3 }},
+        {pokemon: 'Machoke', options: { weight: 3 }},
+        {pokemon: 'Graveler', options: { weight: 3 }},
+        {pokemon: 'Nosepass', options: { weight: 3 }},
+        {pokemon: 'Noctowl', options: { weight: 3 }},
+        {pokemon: 'Medicham', options: { weight: 3 }},
+        {pokemon: 'Chimecho', options: { weight: 3 }},
+        {pokemon: 'Absol', options: { weight: 3 }},
+        {pokemon: 'Chingling', options: { weight: 3 }},
+        {pokemon: 'Bronzong', options: { weight: 3 }},
+        {pokemon: 'Snover', options: { weight: 3 }},
+        {pokemon: 'Abomasnow', options: { weight: 3 }},
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Stunky', 1322100, 43)],
+            { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Murkrow', 1322100, 43)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Houndour', 1322100, 40),
+                new GymPokemon('Golbat', 1322100, 40),
+                new GymPokemon('Houndour', 1322100, 40),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Stunky', 1322100, 42),
+                new GymPokemon('Golbat', 1322100, 40),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [new GymPokemon('Golbat', 1322100, 43)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Murkrow', 1322100, 39),
+                new GymPokemon('Glameow', 1322100, 42),
+                new GymPokemon('Murkrow', 1322100, 39),
+            ], { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Croagunk', 1322100, 38),
+                new GymPokemon('Croagunk', 1322100, 42),
+                new GymPokemon('Stunky', 1322100, 40),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Houndour', 1322100, 40),
+                new GymPokemon('Glameow', 1322100, 42),
+            ], { weight: 1 }, undefined, '(female)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Glameow', 1322100, 41),
+                new GymPokemon('Golbat', 1322100, 41),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Galactic Grunt',
+            [
+                new GymPokemon('Golbat', 1322100, 39),
+                new GymPokemon('Croagunk', 1322100, 40),
+                new GymPokemon('Murkrow', 1322100, 41),
+            ], { weight: 1 }, undefined, '(female)'),
+    ],
+    [
+        {loot: 'xClick', weight: 4},
+        {loot: 'Item_magnet', weight: 3.75},
+        {loot: 'Iron Plate', weight: 2.5},
+        {loot: 'Draco Plate', weight: 2.5},
+        {loot: 'Splash Plate', weight: 2.5},
+        {loot: 'Babiri', weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Spear Pillar'))},
+        {loot: 'Passho', weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Spear Pillar'))},
+        {loot: 'Haban', weight: 0, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Spear Pillar'))},
+        {loot: 'Apicot', weight: 0, requirement: new ClearDungeonRequirement(1500, GameConstants.getDungeonIndex('Spear Pillar'))},
+        {loot: 'Lansat', weight: 0, requirement: new ClearDungeonRequirement(1500, GameConstants.getDungeonIndex('Spear Pillar'))},
+    ],
+    1322100,
+    [
+        new DungeonTrainer('Commanders',
+            [
+                new GymPokemon('Bronzor', 880000, 44),
+                new GymPokemon('Golbat', 880000, 44),
+                new GymPokemon('Purugly', 880000, 46),
+                new GymPokemon('Bronzor', 880000, 44),
+                new GymPokemon('Golbat', 880000, 44),
+                new GymPokemon('Skuntank', 880000, 46),
+            ], { weight: 1 }, 'Mars & Jupiter', '(marsjupiter)'),
+        new DungeonBossPokemon('Palkia', 11880000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)}),
+        new DungeonBossPokemon('Dialga', 11880000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)}),
+    ],
+    84500, 217);
 
 dungeonList['Distortion World'] = new Dungeon('Distortion World',
-    ['Golbat', 'Gastly', 'Haunter', 'Duskull', 'Chimecho', 'Chingling', 'Bronzor'],
+    ['Golbat', 'Gastly', 'Duskull', 'Dusclops', 'Chimecho', 'Chingling', 'Bronzor', 'Bronzong'],
     [
         {loot: 'xClick', weight: 4},
         {loot: 'Nomel', weight: 3.5},
@@ -2478,16 +2997,103 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
         {loot: 'Haban', weight: 0, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Distortion World'))},
         {loot: 'Reaper_cloth', weight: 0},
     ],
-    1322100,
+    1350400,
     [
-        new DungeonBossPokemon('Dusclops', 5280000, 45),
-        new DungeonBossPokemon('Bronzong', 5280000, 45),
-        new DungeonBossPokemon('Giratina (altered)', 11880000, 45),
+        new DungeonTrainer('Galactic Boss',
+            [
+                new GymPokemon('Houndoom', 1128000, 45),
+                new GymPokemon('Honchkrow', 1128000, 47),
+                new GymPokemon('Crobat', 1128000, 46),
+                new GymPokemon('Gyarados', 1128000, 46),
+                new GymPokemon('Weavile', 1128000, 47),
+            ], { weight: 1 }, 'Cyrus', '(cyrus)'),
+        new DungeonBossPokemon('Giratina (altered)', 11880000, 45, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)}),
     ],
-    82500, 201);
+    86500, 217);
 
 dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
-    ['Golbat', 'Graveler', 'Onix', 'Rhyhorn', 'Magneton', 'Azumarill', 'Floatzel'],
+    [
+        {pokemon: 'Golbat', options: { weight: 9.3 }},
+        {pokemon: 'Graveler', options: { weight: 9.3 }},
+        {pokemon: 'Onix', options: { weight: 9.3 }},
+        {pokemon: 'Rhyhorn', options: { weight: 9.3 }},
+        {pokemon: 'Magneton', options: { weight: 9.3 }},
+        {pokemon: 'Floatzel', options: { weight: 9.3 }},
+        new DungeonTrainer('Psychic',
+            [
+                new GymPokemon('Haunter', 1503000, 43),
+                new GymPokemon('Gengar', 1503000, 46),
+                new GymPokemon('Gardevoir', 1503000, 46),
+            ], { weight: 1 }, 'Bryce', '(male)'),
+        new DungeonTrainer('Bird Keeper',
+            [
+                new GymPokemon('Noctowl', 1503000, 45),
+                new GymPokemon('Togetic', 1503000, 47),
+            ], { weight: 1 }, 'Hana'),
+        new DungeonTrainer('Ace Trainer',
+            [
+                new GymPokemon('Blissey', 1503000, 45),
+                new GymPokemon('Glalie', 1503000, 46),
+                new GymPokemon('Magnezone', 1503000, 48),
+            ], { weight: 1 }, 'Mariah', '(female)'),
+        new DungeonTrainer('Ace Trainer',
+            [
+                new GymPokemon('Mamoswine', 1503000, 45),
+                new GymPokemon('Mothim', 1503000, 46),
+                new GymPokemon('Rampardos', 1503000, 48),
+            ], { weight: 1 }, 'Omar', '(male)'),
+        new DungeonTrainer('Ace Trainer',
+            [
+                new GymPokemon('Clefable', 1503000, 47),
+                new GymPokemon('Torterra', 1503000, 48),
+            ], { weight: 1 }, 'Sydney', '(female)'),
+        new DungeonTrainer('Veteran',
+            [
+                new GymPokemon('Staraptor', 1503000, 47),
+                new GymPokemon('Lickilicky', 1503000, 47),
+            ], { weight: 1 }, 'Clayton', '(male)'),
+        new DungeonTrainer('Double Team',
+            [
+                new GymPokemon('Staraptor', 1503000, 50),
+                new GymPokemon('Ambipom', 1503000, 50),
+            ], { weight: 1 }, 'Al & Kay'),
+        new DungeonTrainer('Black Belt',
+            [new GymPokemon('Machamp', 1503000, 48)],
+            { weight: 1 }, 'Miles'),
+        new DungeonTrainer('Psychic',
+            [
+                new GymPokemon('Chimecho', 1503000, 44),
+                new GymPokemon('Absol', 1503000, 45),
+                new GymPokemon('Dusknoir', 1503000, 46),
+            ], { weight: 1 }, 'Valencia', '(female)'),
+        new DungeonTrainer('Double Team',
+            [
+                new GymPokemon('Lumineon', 1503000, 50),
+                new GymPokemon('Rapidash', 1503000, 50),
+            ], { weight: 1 }, 'Pat & Jo'),
+        new DungeonTrainer('Ace Trainer',
+            [
+                new GymPokemon('Rhydon', 1503000, 47),
+                new GymPokemon('Carnivine', 1503000, 48),
+            ], { weight: 1 }, 'Henry', '(male)'),
+        new DungeonTrainer('Dragon Tamer',
+            [
+                new GymPokemon('Altaria', 1503000, 45),
+                new GymPokemon('Gabite', 1503000, 47),
+            ], { weight: 1 }, 'Ondrej'),
+        new DungeonTrainer('Veteran',
+            [
+                new GymPokemon('Porygon-Z', 1503000, 46),
+                new GymPokemon('Tangrowth', 1503000, 46),
+                new GymPokemon('Empoleon', 1503000, 46),
+            ], { weight: 1 }, 'Edgar', '(male)'),
+        new DungeonTrainer('Dragon Tamer',
+            [
+                new GymPokemon('Gible', 1503000, 43),
+                new GymPokemon('Swablu', 1503000, 45),
+                new GymPokemon('Gabite', 1503000, 47),
+            ], { weight: 1 }, 'Clinton'),
+    ],
     [
         {loot: 'Lucky_incense', weight: 4},
         {loot: 'Oran', weight: 3.75},
@@ -2504,28 +3110,17 @@ dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
     [
         new DungeonBossPokemon('Rhydon', 7000000, 100),
         new DungeonBossPokemon('Steelix', 7000000, 100),
-        new DungeonBossPokemon('Gabite', 7000000, 100),
     ],
-    86500, 230);
+    89500, 223);
 
-dungeonList['Spear Pillar'] = new Dungeon('Spear Pillar',
-    ['Croagunk', 'Stunky', 'Glameow', 'Bronzor', 'Golbat'],
+dungeonList['Sendoff Spring'] = new Dungeon('Sendoff Spring',
+    ['Golbat', 'Golduck', 'Graveler', 'Goldeen', 'Magikarp', 'Staravia', 'Bibarel', 'Chingling'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    2603000,
     [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Item_magnet', weight: 3.75},
-        {loot: 'Iron Plate', weight: 2.5},
-        {loot: 'Draco Plate', weight: 2.5},
-        {loot: 'Splash Plate', weight: 2.5},
-        {loot: 'Babiri', weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Spear Pillar'))},
-        {loot: 'Passho', weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Spear Pillar'))},
-        {loot: 'Haban', weight: 0, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Spear Pillar'))},
-        {loot: 'Apicot', weight: 0, requirement: new ClearDungeonRequirement(1500, GameConstants.getDungeonIndex('Spear Pillar'))},
-        {loot: 'Lansat', weight: 0, requirement: new ClearDungeonRequirement(1500, GameConstants.getDungeonIndex('Spear Pillar'))},
-    ],
-    2353000,
-    [
-        new DungeonBossPokemon('Palkia', 11880000, 100),
-        new DungeonBossPokemon('Dialga', 11880000, 100),
+        new DungeonBossPokemon('Seaking', 10000000, 100),
+        new DungeonBossPokemon('Gyarados', 10000000, 100),
+        new DungeonBossPokemon('Dusclops', 10000000, 100),
     ],
     96500, 230);
 
@@ -2622,7 +3217,7 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
         new DungeonBossPokemon('Shaymin (land)', 11000000, 50),
         new DungeonBossPokemon('Shaymin (sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement(pokemonMap['Shaymin (land)'])}),
     ],
-    96500, 201);
+    96500, 230);
 
 dungeonList['Snowpoint Temple'] = new Dungeon('Snowpoint Temple',
     ['Golbat', 'Sneasel', 'Smoochum'],
@@ -2631,8 +3226,8 @@ dungeonList['Snowpoint Temple'] = new Dungeon('Snowpoint Temple',
         {loot: 'Aspear', weight: 3.75},
         {loot: 'Icicle Plate', weight: 2.5},
         {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Chilan', weight: 0.5, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Flower Paradise'))},
-        {loot: 'Roseli', weight: 0.5, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Flower Paradise'))},
+        {loot: 'Chilan', weight: 0.5, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Snowpoint Temple'))},
+        {loot: 'Roseli', weight: 0.5, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Snowpoint Temple'))},
         {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(350, GameConstants.getDungeonIndex('Snowpoint Temple'))},
     ],
     2603000,
@@ -2643,7 +3238,97 @@ dungeonList['Snowpoint Temple'] = new Dungeon('Snowpoint Temple',
     96500, 230);
 
 dungeonList['Stark Mountain'] = new Dungeon('Stark Mountain',
-    ['Golbat', 'Graveler', 'Fearow', 'Weezing', 'Rhyhorn', 'Rhydon', 'Numel', 'Slugma', 'Magcargo', 'Camerupt'],
+    [
+        {pokemon: 'Fearow', options: { weight: 4 }},
+        {pokemon: 'Golbat', options: { weight: 4 }},
+        {pokemon: 'Graveler', options: { weight: 4 }},
+        {pokemon: 'Weezing', options: { weight: 4 }},
+        {pokemon: 'Rhyhorn', options: { weight: 4 }},
+        {pokemon: 'Rhydon', options: { weight: 4 }},
+        {pokemon: 'Slugma', options: { weight: 4 }},
+        {pokemon: 'Magcargo', options: { weight: 4 }},
+        {pokemon: 'Numel', options: { weight: 4 }},
+        {pokemon: 'Camerupt', options: { weight: 4 }},
+        {pokemon: 'Machoke', options: { weight: 4 }},
+        new DungeonTrainer('Dragon Tamer',
+            [new GymPokemon('Dragonite', 2603000, 60)],
+            { weight: 1 }, 'Darien'),
+        new DungeonTrainer('Commander',
+            [
+                new GymPokemon('Bronzong', 2603000, 58),
+                new GymPokemon('Golbat', 2603000, 58),
+                new GymPokemon('Purugly', 2603000, 60),
+            ], { weight: 1 }, 'Mars', '(mars)'),
+        new DungeonTrainer('Commander',
+            [
+                new GymPokemon('Bronzong', 2603000, 58),
+                new GymPokemon('Golbat', 2603000, 58),
+                new GymPokemon('Skuntank', 2603000, 60),
+            ], { weight: 1 }, 'Jupiter', '(jupiter)'),
+        new DungeonTrainer('Ace Duo',
+            [
+                new GymPokemon('Primeape', 2603000, 58),
+                new GymPokemon('Banette', 2603000, 59),
+                new GymPokemon('Electabuzz', 2603000, 58),
+                new GymPokemon('Jumpluff', 2603000, 58),
+                new GymPokemon('Ampharos', 2603000, 59),
+                new GymPokemon('Onix', 2603000, 58),
+            ], { weight: 1 }, 'Keenan & Kassandra'),
+        new DungeonTrainer('Ace Duo',
+            [
+                new GymPokemon('Pupitar', 2603000, 58),
+                new GymPokemon('Torterra', 2603000, 61),
+                new GymPokemon('Drapion', 2603000, 61),
+            ], { weight: 1 }, 'Stefan & Jasmin'),
+        new DungeonTrainer('Fight & Flight',
+            [
+                new GymPokemon('Staravia', 2603000, 55),
+                new GymPokemon('Fearow', 2603000, 57),
+                new GymPokemon('Noctowl', 2603000, 59),
+                new GymPokemon('Breloom', 2603000, 58),
+                new GymPokemon('Toxicroak', 2603000, 58),
+            ], { weight: 1 }, 'Krystal & Ray'),
+        new DungeonTrainer('Ace Duo',
+            [
+                new GymPokemon('Glalie', 2603000, 59),
+                new GymPokemon('Crobat', 2603000, 60),
+                new GymPokemon('Luxray', 2603000, 58),
+                new GymPokemon('Ursaring', 2603000, 59),
+                new GymPokemon('Gliscor', 2603000, 58),
+            ], { weight: 1 }, 'Abel & Monique'),
+        new DungeonTrainer('Melded Minds',
+            [
+                new GymPokemon('Lunatone', 2603000, 57),
+                new GymPokemon('Gardevoir', 2603000, 59),
+                new GymPokemon('Solrock', 2603000, 57),
+                new GymPokemon('Gallade', 2603000, 59),
+            ], { weight: 1 }, 'Chelsey & Sterling', '(both)'),
+        new DungeonTrainer('Dragon Warriors',
+            [
+                new GymPokemon('Raticate', 2603000, 57),
+                new GymPokemon('Drifblim', 2603000, 58),
+                new GymPokemon('Shiftry', 2603000, 59),
+                new GymPokemon('Bagon', 2603000, 57),
+                new GymPokemon('Shelgon', 2603000, 57),
+                new GymPokemon('Vibrava', 2603000, 57),
+            ], { weight: 1 }, 'Harlan & Kenny'),
+        new DungeonTrainer('Ace Duo',
+            [
+                new GymPokemon('Loudred', 2603000, 58),
+                new GymPokemon('Rampardos', 2603000, 59),
+                new GymPokemon('Pelipper', 2603000, 58),
+                new GymPokemon('Wigglytuff', 2603000, 58),
+                new GymPokemon('Gardevoir', 2603000, 59),
+                new GymPokemon('Medicham', 2603000, 58),
+            ], { weight: 1 }, 'Skylar & Narasha'),
+        new DungeonTrainer('Hidden Dragons',
+            [
+                new GymPokemon('Gible', 2603000, 57),
+                new GymPokemon('Gabite', 2603000, 57),
+                new GymPokemon('Dragonair', 2603000, 57),
+                new GymPokemon('Machamp', 2603000, 60),
+            ], { weight: 1 }, 'Drake & Jarrett'),
+    ],
     [
         {loot: 'Token_collector', weight: 4},
         {loot: 'Rawst', weight: 3.75},
@@ -4710,7 +5395,7 @@ dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
             { weight: 1 }, 'Era', '(female)'),
         new DungeonTrainer('Artist',
             [new GymPokemon('Smeargle', 8537490, 44)],
-            { weight: 1 }, 'Salvador', ('male')),
+            { weight: 1 }, 'Salvador', '(male)'),
         new DungeonTrainer('Ace Trainer',
             [new GymPokemon('Doublade', 8537490, 46)],
             { weight: 1 }, 'Cordelia', '(female)'),
@@ -4777,8 +5462,8 @@ dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
         {loot: 'Duskball', weight: 2},
         {loot: 'MediumRestore', weight: 1.75},
         {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Coba', weight: 1, requirement: new ClearDungeonRequirement(25, GameConstants.getDungeonIndex('Connecting Cave'))},
-        {loot: 'Passho', weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Connecting Cave'))},
+        {loot: 'Coba', weight: 1, requirement: new ClearDungeonRequirement(25, GameConstants.getDungeonIndex('Frost Cavern'))},
+        {loot: 'Passho', weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Frost Cavern'))},
         {loot: 'Heart Scale', weight: 0},
     ],
     8537490,
@@ -4845,7 +5530,7 @@ dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
                 new GymPokemon('Mienshao', 22464940, 49),
                 new GymPokemon('Honchkrow', 22564950, 49),
                 new GymPokemon('Pyroar', 23375580, 51),
-                new GymPokemon('Gyarados', 27385730, 53),
+                new GymPokemon('Mega Gyarados', 27385730, 53),
             ],
             { weight: 2 }),
         new DungeonBossPokemon('Xerneas', 93659460, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
@@ -5041,7 +5726,7 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
                 new GymPokemon('Leafeon', 3500000, 59),
             ], { weight: 1 }, 'Gerard'),
         new DungeonTrainer('Artist',
-            [new GymPokemon('Smeargle', 3500000, 58)], { weight: 1 }, 'Vincent', ('male')),
+            [new GymPokemon('Smeargle', 3500000, 58)], { weight: 1 }, 'Vincent', '(male)'),
         new DungeonTrainer('Hiker',
             [
                 new GymPokemon('Torkoal', 3500000, 56),
@@ -5167,7 +5852,7 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
         new DungeonBossPokemon('Totem Gumshoos', 82543791, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     805000, 2,
-    () => DungeonGainGymBadge(gymList['Ilima\'s Trial'], BadgeEnums.NormaliumZ));
+    () => DungeonGainGymBadge(GymList['Ilima\'s Trial'], BadgeEnums.NormaliumZ));
 
 dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
     [
@@ -5211,7 +5896,7 @@ dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
 
 
 dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
-    ['Pikachu', 'Pichu'],
+    ['Pikachu', 'Pichu', 'Plusle', 'Minun', 'Pachirisu', 'Emolga', 'Dedenne'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     11952804,
     [
@@ -5221,7 +5906,6 @@ dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
         new DungeonBossPokemon('Pikachu (Unova cap)', 59764020, 15),
         new DungeonBossPokemon('Pikachu (Kalos cap)', 59764020, 15),
         new DungeonBossPokemon('Pikachu (Alola cap)', 59764020, 15),
-        new DungeonBossPokemon('Pikachu (Partner cap)', 59764020, 15),
     ],
     850000, 4);
 
@@ -5295,7 +5979,7 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
         new DungeonBossPokemon('Totem Araquanid', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     875000, 5,
-    () => DungeonGainGymBadge(gymList['Lana\'s Trial'], BadgeEnums.WateriumZ));
+    () => DungeonGainGymBadge(GymList['Lana\'s Trial'], BadgeEnums.WateriumZ));
 
 dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
     [
@@ -5324,7 +6008,7 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
         new DungeonBossPokemon('Totem Salazzle', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     900000, 7,
-    () => DungeonGainGymBadge(gymList['Kiawe\'s Trial'], BadgeEnums.FiriumZ));
+    () => DungeonGainGymBadge(GymList['Kiawe\'s Trial'], BadgeEnums.FiriumZ));
 
 dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
     ['Metapod', 'Paras', 'Pinsir', 'Hoothoot', 'Bonsly', 'Trumbeak', 'Fomantis', 'Bounsweet', 'Steenee', 'Comfey', 'Oranguru', 'Passimian'],
@@ -5335,7 +6019,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
         new DungeonBossPokemon('Totem Lurantis', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     925000, 8,
-    () => DungeonGainGymBadge(gymList['Mallow\'s Trial'], BadgeEnums.GrassiumZ));
+    () => DungeonGainGymBadge(GymList['Mallow\'s Trial'], BadgeEnums.GrassiumZ));
 
 dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
     [
@@ -5439,7 +6123,7 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
         new DungeonBossPokemon('Totem Togedemaru', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     1000000, 22,
-    () => DungeonGainGymBadge(gymList['Sophocles\' Trial'], BadgeEnums.ElectriumZ));
+    () => DungeonGainGymBadge(GymList['Sophocles\' Trial'], BadgeEnums.ElectriumZ));
 
 dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
     ['Golbat', 'Gastly', 'Haunter', 'Gengar', 'Shuppet', 'Banette', 'Jellicent', 'Klefki'],
@@ -5450,7 +6134,7 @@ dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
         new DungeonBossPokemon('Totem Mimikyu', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     1025000, 14,
-    () => DungeonGainGymBadge(gymList['Acerola\'s Trial'], BadgeEnums.GhostiumZ));
+    () => DungeonGainGymBadge(GymList['Acerola\'s Trial'], BadgeEnums.GhostiumZ));
 
 dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
     [
@@ -5740,7 +6424,7 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
         new DungeonBossPokemon('Totem Kommo-o', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     1125000, 25,
-    () => DungeonGainGymBadge(gymList['Vast Poni Canyon Trial'], BadgeEnums.DragoniumZ));
+    () => DungeonGainGymBadge(GymList['Vast Poni Canyon Trial'], BadgeEnums.DragoniumZ));
 
 dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
     ['Chansey', 'Wingull', 'Pelipper', 'Spritzee', 'Swirlix', 'Cutiefly', 'Comfey', 'Dhelmise'],
@@ -5748,7 +6432,7 @@ dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
     16217412,
     [new DungeonBossPokemon('Ribombee', 81087060, 55)],
     1150000, 25,
-    () => DungeonGainGymBadge(gymList['Mina\'s Trial'], BadgeEnums.FairiumZ));
+    () => DungeonGainGymBadge(GymList['Mina\'s Trial'], BadgeEnums.FairiumZ));
 
 dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
     [
@@ -6062,11 +6746,43 @@ dungeonList['Tower of Water'] = new Dungeon('Tower of Water',
 
 
 //Crown Tundra
-dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
-    ['Golurk', 'Electivire', 'Dragapult', 'Araquanid', 'Cryogonal', 'Bronzong', 'Claydol', 'Absol', 'Galvantula', 'Audino'],
+dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
+    ['Trevenant', 'Stonjourner', 'Heatmor', 'Conkeldurr', 'Rhyperior', 'Aerodactyl'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
+        new DungeonBossPokemon('Relicanth', 8000000, 70),
+        new DungeonBossPokemon('Regirock', 8000000, 70),
+    ],
+    96500, 201);
+
+dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
+    ['Metang', 'Bronzong', 'Dragapult', 'Snorlax', 'Magmortar'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    2203000,
+    [
+        new DungeonBossPokemon('Metagross', 8000000, 70),
+        new DungeonBossPokemon('Registeel', 8000000, 70),
+    ],
+    96500, 201);
+
+dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
+    ['Cryogonal', 'Beartic', 'Galarian Darmanitan', 'Aurorus', 'Weavile', 'Vanilluxe', 'Absol', 'Froslass', 'Delibird'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    2203000,
+    [
+        new DungeonBossPokemon('Glalie', 8000000, 70),
+        new DungeonBossPokemon('Regice', 8000000, 70),
+    ],
+    96500, 201);
+
+dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
+    ['Golurk', 'Electabuzz', 'Drakloak', 'Araquanid', 'Cryogonal', 'Bronzong', 'Claydol', 'Absol', 'Galvantula', 'Audino'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    2203000,
+    [
+        new DungeonBossPokemon('Dragapult', 8000000, 70),
+        new DungeonBossPokemon('Electivire', 8000000, 70),
         new DungeonBossPokemon('Regidrago', 8000000, 70),
         new DungeonBossPokemon('Regieleki', 8000000, 70),
     ],

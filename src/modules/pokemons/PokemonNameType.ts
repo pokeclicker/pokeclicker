@@ -14,6 +14,7 @@ Change the type of `PokemonListData -> name` back to `PokemonNameType`
 
 export type PokemonNameType
     = 'Bulbasaur'
+    | 'Bulbasaur (Rose)'
     | 'Ivysaur'
     | 'Venusaur'
     | 'Charmander'
@@ -1009,6 +1010,7 @@ export type PokemonNameType
     | 'Necrozma (Dawn Wings)'
     | 'Necrozma (Ultra)'
     | 'Magearna'
+    | 'Magearna (Original Color)'
     | 'Marshadow'
     | 'Poipole'
     | 'Naganadel'
@@ -1182,6 +1184,7 @@ export type PokemonNameType
     | 'Armored Mewtwo'
     | 'Santa Snorlax'
     | 'Spooky Togepi'
+    | 'Surprise Togepi'
     | 'Spooky Bulbasaur'
     | 'Pikachu (Gengar)'
     | 'Let\'s Go Pikachu'
@@ -1198,5 +1201,6 @@ export type PokemonNameType
     | 'Mega Venusaur'
     | 'Mega Charizard X'
     | 'Mega Gyarados'
+    | 'Mega Gardevoir'
     | 'Mega Rayquaza'
     | '???';
