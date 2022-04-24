@@ -1,17 +1,15 @@
 ///<reference path="Item.ts"/>
 class FluteItem extends Item {
-
-    type: GameConstants.FluteItemType;
+    name: GameConstants.FluteItemType;
 
     constructor(
-        type: GameConstants.FluteItemType,
+        name: GameConstants.FluteItemType,
         description: string,
         public gemTypes: (keyof typeof PokemonType)[],
         public multiplierType: keyof typeof MultiplierType,
         public multiplyBy: number
     ) {
-        super(GameConstants.FluteItemType[type], Infinity, undefined, { maxAmount : 1 }, undefined, description, 'fluteItem');
-        this.type = type;
+        super(name, Infinity, undefined, { maxAmount : 1 }, undefined, description, 'fluteItem');
     }
 
     use(): boolean {

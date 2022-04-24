@@ -5,7 +5,7 @@ class FluteEffectRunner {
 
     public static initialize(multiplier: Multiplier) {
         FluteEffectRunner.numActiveFlutes(0);
-        GameHelper.enumStrings(GameConstants.FluteItemType).forEach((itemName) => {
+        GameHelper.enumStrings(GameConstants.FluteItemType).forEach((itemName: GameConstants.FluteItemType) => {
             const item = (ItemList[itemName] as FluteItem);
             if (item.multiplierType) {
                 multiplier.addBonus(item.multiplierType, () => this.getFluteMultiplier(itemName));
@@ -20,7 +20,7 @@ class FluteEffectRunner {
     public static tick() {
         this.counter = 0;
 
-        for (const itemName in GameConstants.FluteItemType) {
+        GameHelper.enumStrings(GameConstants.FluteItemType).forEach((itemName: GameConstants.FluteItemType) => {
             if (this.getLowestGem(itemName) > 0 && this.isActive(itemName)()) {
                 player.effectList[itemName](Math.max(0, this.getLowestGem(itemName) - this.numActiveFlutes()));
                 this.updateFormattedTimeLeft(itemName);
@@ -34,7 +34,7 @@ class FluteEffectRunner {
                     });
                 }
             }
-        }
+        });
         this.gemCost();
     }
 
@@ -47,29 +47,28 @@ class FluteEffectRunner {
 
     public static updateActiveGemTypes() {
         this.activeGemTypes.removeAll();
-        let gemNames = [];
-        for (const itemName in GameConstants.FluteItemType) {
+        const gemTypes: Set<number> = new Set();
+        GameHelper.enumStrings(GameConstants.FluteItemType).forEach((itemName: GameConstants.FluteItemType) => {
             if (FluteEffectRunner.isActive(itemName)()) {
                 const item = (ItemList[itemName] as FluteItem);
-                item.gemTypes.forEach(idx => gemNames.push(PokemonType[idx]));
+                item.gemTypes.forEach(idx => gemTypes.add(PokemonType[idx]));
             }
-        }
-        gemNames = [...new Set(gemNames)];
-        gemNames.forEach(x => this.activeGemTypes.push(x));
+        });
+        [...gemTypes].forEach(x => this.activeGemTypes.push(x));
     }
 
     public static gemCost() {
         this.activeGemTypes().forEach(idx => App.game.gems.gainGems(-this.numActiveFlutes(), idx));
     }
 
-    public static getEffect(itemName: string) {
+    public static getEffect(itemName: GameConstants.FluteItemType) {
         if (!player) {
             return 0;
         }
         return player.effectList[itemName]();
     }
 
-    public static toggleEffect(itemName: string) {
+    public static toggleEffect(itemName: GameConstants.FluteItemType) {
 
         if (this.isActive(itemName)()) {
             this.removeEffect(itemName);
@@ -82,7 +81,7 @@ class FluteEffectRunner {
         this.updateActiveGemTypes();
     }
 
-    public static removeEffect(itemName: string) {
+    public static removeEffect(itemName: GameConstants.FluteItemType) {
         player.effectList[itemName](0);
         GameHelper.incrementObservable(this.numActiveFlutes, -1);
         this.updateFormattedTimeLeft(itemName);
@@ -90,11 +89,11 @@ class FluteEffectRunner {
         this.updateActiveGemTypes();
     }
 
-    public static fluteFormattedTime(itemName: string): number {
+    public static fluteFormattedTime(itemName: GameConstants.FluteItemType): number {
         return (player.effectList[itemName]() / this.numActiveFlutes());
     }
 
-    public static fluteTooltip(itemName: string): string {
+    public static fluteTooltip(itemName: GameConstants.FluteItemType): string {
         const str = [];
         str.push(`Gems/Second: ${FluteEffectRunner.numActiveFlutes()} <br><br>Gem Types Used:`);
         const item = (ItemList[itemName] as FluteItem);
@@ -105,7 +104,7 @@ class FluteEffectRunner {
         return str.join('<br>');
     }
 
-    public static updateFormattedTimeLeft(itemName: string) {
+    public static updateFormattedTimeLeft(itemName: GameConstants.FluteItemType) {
         const times = GameConstants.formatTime(this.fluteFormattedTime(itemName)).split(':');
         if (+times[0] > 99) {
             return player.effectTimer[itemName]('99h+');
@@ -116,13 +115,13 @@ class FluteEffectRunner {
         player.effectTimer[itemName](times.join(':'));
     }
 
-    public static getFluteMultiplier(itemName: string) {
+    public static getFluteMultiplier(itemName: GameConstants.FluteItemType) {
         const flute = (ItemList[itemName] as FluteItem);
         return this.isActive(flute.name)() ? (1 + (flute.multiplyBy - 1) * AchievementHandler.achievementBonus()) : 1;
     }
 
 
-    public static isActive(itemName: string): KnockoutComputed<boolean> {
+    public static isActive(itemName: GameConstants.FluteItemType): KnockoutComputed<boolean> {
         return ko.pureComputed(() => {
             if (!player) {
                 return false;
