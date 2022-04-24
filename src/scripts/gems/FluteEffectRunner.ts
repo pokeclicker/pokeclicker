@@ -10,7 +10,7 @@ class FluteEffectRunner {
             if (item.multiplierType) {
                 multiplier.addBonus(item.multiplierType, () => this.getFluteMultiplier(itemName));
             }
-            if (this.isActive(GameConstants.FluteItemType[itemName])()) {
+            if (this.isActive(itemName)()) {
                 GameHelper.incrementObservable(this.numActiveFlutes,1);
             }
         });
@@ -21,7 +21,7 @@ class FluteEffectRunner {
         this.counter = 0;
 
         for (const itemName in GameConstants.FluteItemType) {
-            if (this.getLowestGem(itemName) > 0 && this.isActive(GameConstants.FluteItemType[itemName])()) {
+            if (this.getLowestGem(itemName) > 0 && this.isActive(itemName)()) {
                 player.effectList[itemName](Math.max(0, this.getLowestGem(itemName) - this.numActiveFlutes()));
                 this.updateFormattedTimeLeft(itemName);
                 if (this.numActiveFlutes() >= this.getLowestGem(itemName)) {
@@ -49,7 +49,7 @@ class FluteEffectRunner {
         this.activeGemTypes.removeAll();
         let gemNames = [];
         for (const itemName in GameConstants.FluteItemType) {
-            if (FluteEffectRunner.isActive(GameConstants.FluteItemType[itemName])()) {
+            if (FluteEffectRunner.isActive(itemName)()) {
                 const item = (ItemList[itemName] as FluteItem);
                 item.gemTypes.forEach(idx => gemNames.push(PokemonType[idx]));
             }
@@ -71,7 +71,7 @@ class FluteEffectRunner {
 
     public static toggleEffect(itemName: string) {
 
-        if (this.isActive(GameConstants.FluteItemType[itemName])()) {
+        if (this.isActive(itemName)()) {
             this.removeEffect(itemName);
             return;
         }
