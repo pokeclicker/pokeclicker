@@ -1323,7 +1323,6 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Unova Route 6', GameConstants.Region.unova, 6,
     new RoutePokemon({
-        land: ['Marill', 'Deerling (Spring)', 'Deerling (Autumn)', 'Karrablast', 'Tranquill', 'Foongus', 'Swadloon', 'Vanillite', 'Shelmet'],
         land: ['Marill', 'Tranquill', 'Swadloon', 'Vanillite', 'Deerling (Spring)', 'Deerling (Autumn)', 'Karrablast', 'Foongus', 'Shelmet'],
         unovasuperrod: ['Poliwag', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
         unovasurf: ['Marill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
@@ -1364,7 +1363,6 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Unova Route 14', GameConstants.Region.unova, 14,
     new RoutePokemon({
-        land: ['Golduck', 'Swablu', 'Mienfoo', 'Drifblim', 'Absol', 'Altaria'],
         land: ['Golduck', 'Swablu', 'Altaria', 'Absol', 'Drifblim', 'Mienfoo'],
         unovasuperrod: ['Goldeen', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
         unovasurf: ['Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],

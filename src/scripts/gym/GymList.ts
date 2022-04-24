@@ -169,7 +169,7 @@ GymList['Elite Agatha'] = new Gym(
     7500,
     'You win! I see what the old duff sees in you now. I\'ve nothing else to say. Run along now, child!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Bruno)]
-);=
+);
 GymList['Elite Lance'] = new Gym(
     'Lance',
     'Elite Lance',

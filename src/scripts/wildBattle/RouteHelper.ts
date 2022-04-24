@@ -27,12 +27,12 @@ class RouteHelper {
         }
 
         // Headbutt Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.TM02_headbutt) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItemType.TM02_headbutt) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.headbutt);
         }
 
         // Kanto Old Rod Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Fishing_rod) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItemType.Fishing_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kantooldrod);
         }
 
@@ -47,7 +47,7 @@ class RouteHelper {
         }
 
         // Kanto Surf Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.HM03_surf) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItemType.HM03_surf) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kantosurf);
         }
 
@@ -67,7 +67,7 @@ class RouteHelper {
         }
 
         // Johto Headbutt Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.TM02_headbutt) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItemType.TM02_headbutt) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.johtoheadbutt);
         }
 
@@ -97,7 +97,7 @@ class RouteHelper {
         }
 
         // Hoenn Dive Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.HM08_dive) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItemType.HM08_dive) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.hoenndive);
         }
 
