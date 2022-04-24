@@ -67,8 +67,12 @@ class OneTimeBattleRunner {
     public static battleWon(battle: OneTimeBattle) {
         if (this.running()) {
             this.running(false);
-            battle.rewardFunction();
-            $('#oneTimeBattleWonModal').modal('show');
+            if (!battle.defeated) {
+                battle.rewardFunction();
+                if (battle.defeatMessage) {
+                    $('#oneTimeBattleWonModal').modal('show');
+                }
+            }
             battle.defeated = true;
             player.town(battle.parent);
             App.game.gameState = GameConstants.GameState.town;
