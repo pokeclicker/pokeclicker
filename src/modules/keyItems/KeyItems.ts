@@ -1,4 +1,11 @@
-class KeyItems implements Feature {
+import KeyItem from './KeyItem';
+import KeyItemType from '../enums/KeyItemType';
+import Information from '../utilities/Information';
+import KeyItemController from './KeyItemController';
+import { Feature } from '../DataStore/common/Feature';
+import { getDungeonIndex, Region, ROUTE_KILLS_NEEDED } from '../GameConstants';
+
+export default class KeyItems implements Feature {
     name = 'Key Items';
     saveKey = 'keyItems';
 
@@ -10,26 +17,27 @@ class KeyItems implements Feature {
         this.itemList = [];
     }
 
-    initialize() {
+    initialize(): void {
         this.itemList = [
-            new KeyItem(KeyItems.KeyItem.Teachy_tv, 'A television set that is tuned to a program with useful tips for novice TRAINERS', null, true, undefined, 'Teachy TV'),
-            new KeyItem(KeyItems.KeyItem.Coin_case, 'A case for holding money', null, true, undefined, 'Coin Case'),
-            new KeyItem(KeyItems.KeyItem.Pokeball_bag, 'A small bag that can hold many different types of PokéBalls', null, true, undefined, 'Pokéball Bag'),
-            new KeyItem(KeyItems.KeyItem.Town_map, 'A very convenient map that can be viewed anytime. It even shows you your present location in the region', () => {
-                return App.game.statistics.routeKills[GameConstants.Region.kanto][1]() >= GameConstants.ROUTE_KILLS_NEEDED;
-            }, false, () => {
-                Information.show({
-                    steps: [
-                        {
-                            element: document.getElementById('townMap'),
-                            intro: 'This is the Town Map,<br/>Use this to move to between different Routes, Towns and Dungeons.',
-                        },
-                    ],
-                });
-            }, 'Town Map'),
+            new KeyItem(KeyItemType.Teachy_tv, 'A television set that is tuned to a program with useful tips for novice TRAINERS', null, true, undefined, 'Teachy TV'),
+            new KeyItem(KeyItemType.Coin_case, 'A case for holding money', null, true, undefined, 'Coin Case'),
+            new KeyItem(KeyItemType.Pokeball_bag, 'A small bag that can hold many different types of PokéBalls', null, true, undefined, 'Pokéball Bag'),
+            new KeyItem(KeyItemType.Town_map, 'A very convenient map that can be viewed anytime. It even shows you your present location in the region',
+                () => App.game.statistics.routeKills[Region.kanto][1]() >= ROUTE_KILLS_NEEDED,
+                false,
+                () => {
+                    Information.show({
+                        steps: [
+                            {
+                                element: document.getElementById('townMap'),
+                                intro: 'This is the Town Map,<br/>Use this to move to between different Routes, Towns and Dungeons.',
+                            },
+                        ],
+                    });
+                }, 'Town Map'),
             // TODO obtain somewhere at the start
-            new KeyItem(KeyItems.KeyItem.Factory_key, 'This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13', undefined, undefined, undefined, 'Factory Key'),
-            new KeyItem(KeyItems.KeyItem.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region and beyond,<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon', null, false, () => {
+            new KeyItem(KeyItemType.Factory_key, 'This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13', undefined, undefined, undefined, 'Factory Key'),
+            new KeyItem(KeyItemType.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region and beyond,<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon', null, false, () => {
                 Information.show({
                     steps: [
                         {
@@ -62,11 +70,11 @@ class KeyItems implements Feature {
                         const selectPokeball = document.querySelectorAll('#pokeballSelectorModal .clickable')[1];
                         selectPokeball.addEventListener('click', () => {
                             Information.hide();
-                        },{
+                        }, {
                             once: true,
                         });
                     });
-                },{
+                }, {
                     once: true,
                 });
             }, 'Dungeon Ticket'),
@@ -80,33 +88,31 @@ class KeyItems implements Feature {
             }, undefined, undefined, 'TM02 Headbutt'),
             new KeyItem(KeyItems.KeyItem.HM08_dive, 'Can be used to dive to the bottom of the ocean to find new kinds of Pokémon.', undefined, undefined, undefined, 'HM08 Dive'),
             // TODO obtain somewhere at the start
-            new KeyItem(KeyItems.KeyItem.Holo_caster, 'A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others', undefined, undefined, undefined, 'Holo Caster'),
-            new KeyItem(KeyItems.KeyItem.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémons attack; some baby Pokémon can only be found through breeding too!', () => {
-                return App.game.statistics.routeKills[GameConstants.Region.kanto][5]() >= GameConstants.ROUTE_KILLS_NEEDED;
-            }, undefined, undefined, 'Mystery Egg'),
-            new KeyItem(KeyItems.KeyItem.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City'),
-            new KeyItem(KeyItems.KeyItem.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.', () => {
-                return MapHelper.accessToRoute(14, GameConstants.Region.kanto);
-            }, undefined, undefined, 'Wailmer Pail'),
+            new KeyItem(KeyItemType.Holo_caster, 'A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others', undefined, undefined, undefined, 'Holo Caster'),
+            new KeyItem(KeyItemType.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémons attack; some baby Pokémon can only be found through breeding too!',
+                () => App.game.statistics.routeKills[Region.kanto][5]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Mystery Egg'),
+            new KeyItem(KeyItemType.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City'),
+            new KeyItem(KeyItemType.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.',
+                () => MapHelper.accessToRoute(14, Region.kanto), undefined, undefined, 'Wailmer Pail'),
 
-            new KeyItem(KeyItems.KeyItem.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground', undefined, undefined, undefined, 'Explorer Kit'),
+            new KeyItem(KeyItemType.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground', undefined, undefined, undefined, 'Explorer Kit'),
             // TODO buy for 500 quest points
-            new KeyItem(KeyItems.KeyItem.Event_calendar, 'This calendar will keep you up to date on the latest events', undefined, undefined, undefined, 'Event Calender'),
-            new KeyItem(KeyItems.KeyItem.Gem_case, 'A case specifically designed for holding gems', undefined, undefined, undefined, 'Gem Case'),
-            new KeyItem(KeyItems.KeyItem.DNA_splicers, 'A splicer that fuses certain Pokémon', () => {
-                return App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]() > 0;
-            }, undefined, undefined, 'DNA Splicers'),
+            new KeyItem(KeyItemType.Event_calendar, 'This calendar will keep you up to date on the latest events', undefined, undefined, undefined, 'Event Calender'),
+            new KeyItem(KeyItemType.Gem_case, 'A case specifically designed for holding gems', undefined, undefined, undefined, 'Gem Case'),
+            new KeyItem(KeyItemType.DNA_splicers, 'A splicer that fuses certain Pokémon',
+                () => App.game.statistics.dungeonsCleared[getDungeonIndex('Giant Chasm')]() > 0,
+                undefined, undefined, 'DNA Splicers'),
         ];
     }
 
-    hasKeyItem(item: KeyItems.KeyItem) {
-        if (this.itemList[item] == undefined) {
+    hasKeyItem(item: KeyItemType): boolean {
+        if (this.itemList[item] === undefined) {
             return false;
         }
-        return this.itemList[item].isUnlocked;
+        return this.itemList[item].isUnlocked();
     }
 
-    gainKeyItem(item: KeyItems.KeyItem, silent = false) {
+    gainKeyItem(item: KeyItemType, silent = false): void {
         if (!this.hasKeyItem(item)) {
             if (!silent) {
                 KeyItemController.showGainModal(item);
@@ -115,62 +121,42 @@ class KeyItems implements Feature {
         }
     }
 
+    // eslint-disable-next-line class-methods-use-this
     canAccess(): boolean {
         return true;
     }
 
     fromJSON(json: Record<string, any>): void {
-        for (const key in json) {
-            if (json.hasOwnProperty(key)) {
+        Object.keys(json).forEach((key) => {
+            if (json[key] !== undefined) {
                 if (json[key] === true) {
                     // Unlock to dispose unlocker if needed
-                    this.itemList[KeyItems.KeyItem[key]].unlock();
+                    this.itemList[KeyItemType[key]].unlock();
                 }
             }
-        }
+        });
 
         // Gain the item in case the requirements changed.
-        for (const keyItem of this.itemList) {
+        this.itemList.forEach((keyItem) => {
             if (!keyItem.isUnlocked && keyItem.unlockReq !== null) {
                 if (keyItem.unlockReq()) {
                     App.game.keyItems.gainKeyItem(keyItem.name);
                 }
             }
-        }
+        });
     }
 
     toJSON(): Record<string, any> {
         const save = {};
         for (let i = 0; i < this.itemList.length; i++) {
-            save[KeyItems.KeyItem[this.itemList[i].name]] = this.itemList[i].isUnlocked;
+            save[KeyItemType[this.itemList[i].name]] = this.itemList[i].isUnlocked();
         }
         return save;
     }
 
-    update(delta: number): void {
-        // This method intentionally left blank
-    }
+    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
+    update(delta: number): void {}
 }
 
 namespace KeyItems {
-    export enum KeyItem {
-        'Teachy_tv',
-        'Coin_case',
-        'Pokeball_bag',
-        'Town_map',
-        'Factory_key',
-        'Dungeon_ticket',
-        'Fishing_rod',
-        'HM03_surf',
-        'TM02_headbutt',
-        'HM08_dive',
-        'Holo_caster',
-        'Mystery_egg',
-        'Safari_ticket',
-        'Wailmer_pail',
-        'Explorer_kit',
-        'Event_calendar',
-        'Gem_case',
-        'DNA_splicers'
-    }
 }
