@@ -2384,7 +2384,7 @@ const IkiKahuna = new NPC('Kahuna Hala', [
     'Welcome to Alola!',
     'Here we don\'t have gyms. We have the Island Challenge. On each of our four islands you will complete one or more trials.',
     'After completing all of an island\'s trials you will battle that island\'s Kahuna in a Grand trial.',
-    'This island only has one trial: Captain Ilima\'s trial in Verdant Cavern. Come back here after clearing that challenge for your Grand trial battle.',
+    'This island only has one trial: Captain Ilima\'s trial in Verdant Cavern, below the Melemele Woods. Come back here after clearing that challenge for your Grand trial battle.',
 ]);
 const HeaheaCafeOwner = new NPC('Café Owner', [
     'Akala Island has three trials.',
@@ -2453,6 +2453,14 @@ TownList['Hau\'oli City'] = new Town(
     [HauoliCityShop],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
+    }
+);
+TownList['Melemele Woods'] = new Town(
+    'Melemele Woods',
+    GameConstants.Region.alola,
+    [new MoveToDungeon(dungeonList['Verdant Cavern']), new MoveToDungeon(dungeonList['Melemele Meadow']), new MoveToDungeon(dungeonList['Ruins of Conflict'])],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 2)],
     }
 );
 //TODO: Change requirement when UB questline is merged.
