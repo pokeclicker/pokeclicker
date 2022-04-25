@@ -483,7 +483,7 @@ class QuestLineHelper {
         const meltanCatch50 = new CustomQuest(1, undefined, 'Catch 50 Pokémon', () => App.game.statistics.totalPokemonCaptured());
         meltanQuestLine.addQuest(meltanCatch50);
 
-        const meltanBreed50 = new CustomQuest(1, undefined, 'Hatch 50 Pokémon', () => App.game.statistics.pokemonHatched());
+        const meltanBreed50 = new CustomQuest(1, undefined, 'Hatch 50 Pokémon', () => App.game.statistics.totalPokemonHatched());
         meltanQuestLine.addQuest(meltanBreed50);
 
         const meltanObtain15kFP = new CustomQuest(1, 0, 'Earn 15,000 Farm Points', () => App.game.statistics.totalFarmPoints());
