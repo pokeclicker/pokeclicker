@@ -76,7 +76,7 @@ class Gym extends TownContent {
         if (!town.includes('Elite') && !town.includes('Champion')) {
             this.buttonText = `${leaderName}'s gym`;
         } else {
-            this.buttonText = leaderName;
+            this.buttonText = leaderName.replace(/\d/g,'');
         }
     }
 
