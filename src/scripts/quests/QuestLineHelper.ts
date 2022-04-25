@@ -474,6 +474,115 @@ class QuestLineHelper {
         App.game.quests.questLines().push(galacticSinnohQuestLine);
     }
 
+    public static createMeltanQuestLine() {
+        const meltanQuestLine = new QuestLine('Let\'s Go, Meltan!', 'I need your assistance in learning more about the newly discovered Pokémon that has really sent me and other Pokémon researchers into quite a tizzy.');
+
+        const meltanMine25 = new CustomQuest(1, 0, 'Mine 25 items from the Underground', () => App.game.statistics.undergroundItemsFound());
+        meltanQuestLine.addQuest(meltanMine25);
+
+        const meltanCatch50 = new CustomQuest(1, undefined, 'Catch 50 Pokémon', () => App.game.statistics.totalPokemonCaptured());
+        meltanQuestLine.addQuest(meltanCatch50);
+
+        const meltanBreed50 = new CustomQuest(1, undefined, 'Hatch 50 Pokémon', () => App.game.statistics.pokemonHatched());
+        meltanQuestLine.addQuest(meltanBreed50);
+
+        const meltanObtain15kFP = new CustomQuest(1, 0, 'Earn 15,000 Farm Points', () => App.game.statistics.totalFarmPoints());
+        meltanQuestLine.addQuest(meltanObtain15kFP);
+
+        const meltanCatch15Ditto = new CustomQuest(1, 0, 'Catch 15 Ditto', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Ditto').id]());
+        meltanQuestLine.addQuest(meltanCatch15Ditto);
+
+        const meltanDefeatMolayne10 = new CustomQuest(1, 0, 'Defeat Elite Molayne 10 times.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Elite Molayne')]());
+        meltanQuestLine.addQuest(meltanDefeatMolayne10);
+
+        const meltanCatch150Steel = new CustomQuest(1, undefined, 'Catch 150 Steel type Pokémon', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Steel)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
+        });
+        meltanQuestLine.addQuest(meltanCatch150Steel);
+
+        const meltanCatch150Electric = new CustomQuest(1, undefined, 'Catch 150 Electric type Pokémon', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Electric)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
+        });
+        meltanQuestLine.addQuest(meltanCatch150Electric);
+
+        const meltanDefeatOlivia10 = new CustomQuest(1, 0, 'Defeat Elite Olivia 10 times.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Elite Olivia')]());
+        meltanQuestLine.addQuest(meltanDefeatOlivia10);
+
+        const meltanCatch20Grimer = new CustomQuest(1, 0, 'Catch 20 Grimer', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Grimer').id]());
+        meltanQuestLine.addQuest(meltanCatch20Grimer);
+
+        const meltanCatch25Slugma = new CustomQuest(1, 0, 'Catch 25 Slugma', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Slugma').id]());
+        meltanQuestLine.addQuest(meltanCatch25Slugma);
+
+        const meltanCatch30Gulpin = new CustomQuest(1, 0, 'Catch 30 Gulpin', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Gulpin').id]());
+        meltanQuestLine.addQuest(meltanCatch30Gulpin);
+
+        const meltanObtain10MB = new CustomQuest(1, 0, 'Obtain 10 Masterballs', () => App.game.statistics.pokeballsBought[GameConstants.Pokeball.Masterball]());
+        meltanQuestLine.addQuest(meltanObtain10MB);
+
+        const meltanCatch35Magnemite = new CustomQuest(1, 0, 'Catch 35 Magnemite', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Magnemite').id]());
+        meltanQuestLine.addQuest(meltanCatch35Magnemite);
+
+        const meltanCatch40Exeggcute = new CustomQuest(1, 0, 'Catch 40 Exeggcute', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Exeggcute').id]());
+        meltanQuestLine.addQuest(meltanCatch40Exeggcute);
+
+        const meltanDefeatAcerola10 = new CustomQuest(1, 0, 'Defeat Elite Acerola 10 times.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Elite Acerola')]());
+        meltanQuestLine.addQuest(meltanDefeatAcerola10);
+
+        const meltanCatch45Drowzee = new CustomQuest(1, 0, 'Catch 45 Drowzee', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Drowzee').id]());
+        meltanQuestLine.addQuest(meltanCatch45Drowzee);
+
+        const meltanCatch50Cubone = new CustomQuest(1, 0, 'Catch 50 Cubone', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Cubone').id]());
+        meltanQuestLine.addQuest(meltanCatch50Cubone);
+
+        const meltanCatch50Scyther = new CustomQuest(1, 0, 'Catch 50 Scyther', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Scyther').id]());
+        meltanQuestLine.addQuest(meltanCatch50Scyther);
+
+        const meltanDefeatKahili10 = new CustomQuest(1, 0, 'Defeat Elite Kahili 10 times.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Elite Kahili')]());
+        meltanQuestLine.addQuest(meltanDefeatKahili10);
+
+        const meltanCatch50Kabuto = new CustomQuest(1, 0, 'Catch 50 Kabuto', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Kabuto').id]());
+        meltanQuestLine.addQuest(meltanCatch50Kabuto);
+
+        const meltanCatch50Omanyte = new CustomQuest(1, 0, 'Catch 50 Omanyte', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Omanyte').id]()); // Praise Lord Helix
+        meltanQuestLine.addQuest(meltanCatch50Omanyte);
+
+        const meltanDig30 = new CustomQuest(1, 0, 'Mine 30 layers in the Underground', () => App.game.statistics.undergroundLayersMined());
+        meltanQuestLine.addQuest(meltanDig30);
+
+        const meltanCatch50Anorith = new CustomQuest(1, 0, 'Catch 50 Anorith', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Anorith').id]());
+        meltanQuestLine.addQuest(meltanCatch50Anorith);
+
+        const meltanCatch50Lileep = new CustomQuest(1, 0, 'Catch 50 Lileep', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Lileep').id]());
+        meltanQuestLine.addQuest(meltanCatch50Lileep);
+
+        const meltanCatch50Aerodactyl = new CustomQuest(1, 0, 'Catch 50 Aerodactyl', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Aerodactyl').id]());
+        meltanQuestLine.addQuest(meltanCatch50Aerodactyl);
+
+        const meltanDefeatHau15 = new CustomQuest(1, 0, 'Defeat Champion Hau 10 times.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Hau')]());
+        meltanQuestLine.addQuest(meltanDefeatHau15);
+
+        // Ultima can put Rainbow Rocket stuff here
+
+        // Meltan now should be added to random routes, day-seeded similar to multi-route Event
+
+        const meltanGetMelmetal = () => {
+            App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Melmetal').id);
+            Notifier.notify({
+                title: meltanQuestLine.name,
+                message: 'You found Melmetal!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const meltanCatch400Meltan = new CustomQuest(400, meltanGetMelmetal, 'Catch 400 Meltan', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Meltan').id]());
+        meltanQuestLine.addQuest(meltanCatch400Meltan);
+
+        App.game.quests.questLines().push(meltanQuestLine);
+
+    }
+
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
@@ -489,5 +598,6 @@ class QuestLineHelper {
         this.createSkullAetherAlolaQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createGalacticSinnohQuestLine();
+        this.createMeltanQuestLine();
     }
 }
