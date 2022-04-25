@@ -1,4 +1,4 @@
-class OneTimeBattle extends TownContent {
+class TemporaryBattle extends TownContent {
     public defeated: boolean;
     completeRequirements: (Requirement | OneFromManyRequirement)[];
 
@@ -12,7 +12,7 @@ class OneTimeBattle extends TownContent {
         return this.isUnlocked() && !this.completeRequirements.every(r => r.isCompleted());
     }
     public onclick(): void {
-        OneTimeBattleRunner.startBattle(this);
+        TemporaryBattleRunner.startBattle(this);
     }
 
     constructor(
@@ -27,7 +27,7 @@ class OneTimeBattle extends TownContent {
     ) {
         super(requirements);
         if (completeRequirements.length == 0) {
-            completeRequirements = [new OneTimeBattleRequirement(name)];
+            completeRequirements = [new TemporaryBattleRequirement(name)];
         }
         this.completeRequirements = completeRequirements;
     }

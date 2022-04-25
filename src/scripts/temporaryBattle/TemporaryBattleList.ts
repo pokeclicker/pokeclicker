@@ -1,6 +1,6 @@
-const oneTimeBattleList: { [battleName: string]: OneTimeBattle } = {};
+const temporaryBattleList: { [battleName: string]: TemporaryBattle } = {};
 
-oneTimeBattleList['UltraWormhole'] = new OneTimeBattle(
+temporaryBattleList['UltraWormhole'] = new TemporaryBattle(
     'UltraWormhole',
     'Ultra Wormhole',
     [new GymPokemon('???', 264590972, 27)],

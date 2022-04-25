@@ -176,7 +176,7 @@ class PokemonFactory {
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_BOSS_GEMS, heldItem);
     }
 
-    public static generateOneTimeBattlePokemon(battle: OneTimeBattle, index: number): BattlePokemon {
+    public static generateTemporaryBattlePokemon(battle: TemporaryBattle, index: number): BattlePokemon {
         const pokemon = battle.pokemons[index];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
 

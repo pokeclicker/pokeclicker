@@ -2495,7 +2495,7 @@ TownList['Konikoni City'] = new Town(
 TownList['Aether Paradise'] = new Town(
     'Aether Paradise',
     GameConstants.Region.alola,
-    [oneTimeBattleList['UltraWormhole'], AetherParadiseShop, new MoveToDungeon(dungeonList['Aether Foundation'])],
+    [temporaryBattleList['UltraWormhole'], AetherParadiseShop, new MoveToDungeon(dungeonList['Aether Foundation'])],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
         npcs: [AetherParadiseAlolaRoamerNPC],
@@ -2506,7 +2506,7 @@ TownList['Malie City'] = new Town(
     GameConstants.Region.alola,
     [MalieCityShop, new DockTownContent()],
     {
-        requirements: [new OneTimeBattleRequirement('UltraWormhole')],
+        requirements: [new TemporaryBattleRequirement('UltraWormhole')],
         npcs: [MalieKahuna],
     }
 );
@@ -2624,7 +2624,7 @@ TownList['Memorial Hill'] = new DungeonTown(
 TownList['Malie Garden'] = new DungeonTown(
     'Malie Garden',
     GameConstants.Region.alola,
-    [new OneTimeBattleRequirement('UltraWormhole')] //Replace with Ather Paradise 1 if implemented
+    [new TemporaryBattleRequirement('UltraWormhole')] //Replace with Ather Paradise 1 if implemented
 );
 TownList['Hokulani Observatory'] = new DungeonTown(
     'Hokulani Observatory',

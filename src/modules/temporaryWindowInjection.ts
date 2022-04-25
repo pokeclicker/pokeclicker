@@ -109,7 +109,7 @@ import Achievement from './achievements/Achievement';
 import Gems from './gems/Gems';
 import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequirement';
 import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompletedRequirement';
-import OneTimeBattleRequirement from './requirements/OneTimeBattleRequirement';
+import TemporaryBattleRequirement from './requirements/TemporaryBattleRequirement';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -225,5 +225,5 @@ Object.assign(<any>window, {
     Gems,
     QuestLineCompletedRequirement,
     QuestLineStepCompletedRequirement,
-    OneTimeBattleRequirement,
+    TemporaryBattleRequirement,
 });

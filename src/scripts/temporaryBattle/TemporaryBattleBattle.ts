@@ -1,18 +1,18 @@
 ///<reference path="../Battle.ts"/>
-class OneTimeBattleBattle extends Battle {
+class TemporaryBattleBattle extends Battle {
 
-    static battle: OneTimeBattle;
+    static battle: TemporaryBattle;
     static index: KnockoutObservable<number> = ko.observable(0);
     static totalPokemons: KnockoutObservable<number> = ko.observable(0);
 
     public static pokemonAttack() {
-        if (OneTimeBattleRunner.running()) {
+        if (TemporaryBattleRunner.running()) {
             super.pokemonAttack();
         }
     }
 
     public static clickAttack() {
-        if (OneTimeBattleRunner.running()) {
+        if (TemporaryBattleRunner.running()) {
             super.clickAttack();
         }
     }
@@ -20,16 +20,16 @@ class OneTimeBattleBattle extends Battle {
      * Award the player with exp, and go to the next pokemon
      */
     public static defeatPokemon() {
-        OneTimeBattleBattle.enemyPokemon().defeat(this.battle.isTrainerBattle);
+        TemporaryBattleBattle.enemyPokemon().defeat(this.battle.isTrainerBattle);
 
         // Make gym "route" regionless
         // App.game.breeding.progressEggsBattle(0, GameConstants.Region.none); TODO: set this
-        OneTimeBattleBattle.index(OneTimeBattleBattle.index() + 1);
+        TemporaryBattleBattle.index(TemporaryBattleBattle.index() + 1);
 
-        if (OneTimeBattleBattle.index() >= OneTimeBattleBattle.battle.pokemons.length) {
-            OneTimeBattleRunner.battleWon(OneTimeBattleBattle.battle);
+        if (TemporaryBattleBattle.index() >= TemporaryBattleBattle.battle.pokemons.length) {
+            TemporaryBattleRunner.battleWon(TemporaryBattleBattle.battle);
         } else {
-            OneTimeBattleBattle.generateNewEnemy();
+            TemporaryBattleBattle.generateNewEnemy();
         }
         player.lowerItemMultipliers(MultiplierDecreaser.Battle);
     }
@@ -38,15 +38,15 @@ class OneTimeBattleBattle extends Battle {
      * Reset the counter.
      */
     public static generateNewEnemy() {
-        OneTimeBattleBattle.counter = 0;
-        OneTimeBattleBattle.enemyPokemon(PokemonFactory.generateOneTimeBattlePokemon(OneTimeBattleBattle.battle, OneTimeBattleBattle.index()));
+        TemporaryBattleBattle.counter = 0;
+        TemporaryBattleBattle.enemyPokemon(PokemonFactory.generateTemporaryBattlePokemon(TemporaryBattleBattle.battle, TemporaryBattleBattle.index()));
     }
 
     public static pokemonsDefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {
-        return OneTimeBattleBattle.index();
+        return TemporaryBattleBattle.index();
     });
 
     public static pokemonsUndefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {
-        return OneTimeBattleBattle.totalPokemons() - OneTimeBattleBattle.index();
+        return TemporaryBattleBattle.totalPokemons() - TemporaryBattleBattle.index();
     })
 }

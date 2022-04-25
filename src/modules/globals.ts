@@ -46,7 +46,7 @@ type TmpGameType = {
     achievementTracker: any,
     challenges: Challenges,
     multiplier: Multiplier
-    oneTimeBattleList: any;
+    temporaryBattleList: any;
 
     // There are functions we could mention too,
     // but they aren't mentioned in any modules (yet?)

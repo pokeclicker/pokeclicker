@@ -42,7 +42,7 @@ class Game {
         public challenges: Challenges,
         public battleFrontier: BattleFrontier,
         public multiplier: Multiplier,
-        public oneTimeBattleList: { [battleName: string]: OneTimeBattle }
+        public temporaryBattleList: { [battleName: string]: TemporaryBattle }
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
     }
@@ -303,12 +303,12 @@ class Game {
                 BattleFrontierRunner.tick();
                 break;
             }
-            case GameConstants.GameState.oneTimeBattle: {
-                OneTimeBattleBattle.counter += GameConstants.TICK_TIME;
-                if (OneTimeBattleBattle.counter >= GameConstants.BATTLE_TICK) {
-                    OneTimeBattleBattle.tick();
+            case GameConstants.GameState.temporaryBattle: {
+                TemporaryBattleBattle.counter += GameConstants.TICK_TIME;
+                if (TemporaryBattleBattle.counter >= GameConstants.BATTLE_TICK) {
+                    TemporaryBattleBattle.tick();
                 }
-                OneTimeBattleRunner.tick();
+                TemporaryBattleRunner.tick();
                 break;
             }
         }
