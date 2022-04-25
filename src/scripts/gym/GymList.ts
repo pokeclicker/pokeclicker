@@ -1179,6 +1179,109 @@ GymList['Champion Diantha'] = new Champion(
     [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]
 );
 
+//Ash Ketchum gyms
+gymList['AshinKanto'] = new Gym(
+    'Ash Ketchum',
+    'AshinKanto',
+    [
+        new GymPokemon('Pikachu', 48300, 58),
+        new GymPokemon('Pidgeot', 52000, 56),
+        new GymPokemon('Bulbasaur', 57000, 56),
+        new GymPokemon('Charizard', 60250, 60),
+        new GymPokemon('Squirtle', 66000, 62),
+        new GymPokemon('Muk', 66000, 62),
+    ],
+    BadgeEnums.KantoAsh,
+    7500,
+    'Insert quote here.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+    undefined,
+    {
+        quest: false,
+        achievement: false,
+    }
+);
+gymList['Cherrygrove City'] = new Gym(
+    'Ash Ketchum 2',
+    'Cherrygrove City',
+    [
+        new GymPokemon('Pikachu', 48300, 58),
+        new GymPokemon('Heracross', 52000, 56),
+        new GymPokemon('Noctowl', 57000, 56),
+        new GymPokemon('Bayleef', 60250, 60),
+        new GymPokemon('Cyndaquil', 66000, 62),
+        new GymPokemon('Totodile', 66000, 62),
+    ],
+    BadgeEnums.JohtoAsh,
+    7500,
+    'Insert quote here.',
+    [new GymBadgeRequirement(BadgeEnums.KantoAsh)]
+);
+gymList['LilyCove City'] = new Gym(
+    'Ash Ketchum 3',
+    'LilyCove City',
+    [
+        new GymPokemon('Pikachu', 48300, 58),
+        new GymPokemon('Swellow', 52000, 56),
+        new GymPokemon('Grovyle', 57000, 56),
+        new GymPokemon('Corphish', 60250, 60),
+        new GymPokemon('Torkoal', 66000, 62),
+        new GymPokemon('Glalie', 66000, 62),
+    ],
+    BadgeEnums.HoennAsh,
+    7500,
+    'Insert quote here.',
+    [new GymBadgeRequirement(BadgeEnums.JohtoAsh)]
+);
+gymList['Survival Area'] = new Gym(
+    'Ash Ketchum 4',
+    'Survival Area',
+    [
+        new GymPokemon('Pikachu', 48300, 58),
+        new GymPokemon('Staraptor', 52000, 56),
+        new GymPokemon('Torterra', 57000, 56),
+        new GymPokemon('Infernape', 60250, 60),
+        new GymPokemon('Buizel', 66000, 62),
+        new GymPokemon('Gible', 66000, 62),
+    ],
+    BadgeEnums.SinnohAsh,
+    7500,
+    'Insert quote here.',
+    [new GymBadgeRequirement(BadgeEnums.HoennAsh)]
+);
+gymList['Icirrus City'] = new Gym(
+    'Ash Ketchum 5',
+    'Icirrus City',
+    [
+        new GymPokemon('Pikachu', 48300, 58),
+        new GymPokemon('Unfezant', 52000, 56),
+        new GymPokemon('Oshawott', 57000, 56),
+        new GymPokemon('Pignite', 60250, 60),
+        new GymPokemon('Leavanny', 66000, 62),
+        new GymPokemon('Krookodile', 66000, 62),
+    ],
+    BadgeEnums.UnovaAsh,
+    7500,
+    'Insert quote here.',
+    [new GymBadgeRequirement(BadgeEnums.SinnohAsh)]
+);
+gymList['Kiloude City'] = new Gym(
+    'Ash Ketchum 6',
+    'Kiloude City',
+    [
+        new GymPokemon('Pikachu', 48300, 58),
+        new GymPokemon('Talonflame', 52000, 56),
+        new GymPokemon('Hawlucha', 57000, 56),
+        new GymPokemon('Goodra', 60250, 60),
+        new GymPokemon('Noivern', 66000, 62),
+        new GymPokemon('Ash Greninja', 66000, 62),
+    ],
+    BadgeEnums.KalosAsh,
+    7500,
+    'Insert quote here.',
+    [new GymBadgeRequirement(BadgeEnums.UnovaAsh)]
+);
+
 //Alola Gyms
 //TODO: Balancing of gym Pokemon HP & rewards.
 GymList['Iki Town'] = new Gym(
