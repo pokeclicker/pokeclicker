@@ -5,38 +5,38 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-right">
         <li>
-            <a class="dropdown-item" href="#profileModal" data-toggle="modal">Profile</a>
+            <a class="dropdown-item" href="#pokedexModal" data-toggle="modal">Pokédex</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#pokedexModal" data-toggle="modal">Pokédex</a>
+            <a class="dropdown-item" href="#showItemsModal" data-toggle="modal">Items</a>
+        </li>
+        <li data-bind="attr: {  title: App.game.gems.canAccess() ? '' : 'Progress further to unlock...'}">
+            <a class="dropdown-item" href="#" data-bind="click:function(){App.game.gems.openGemModal()},
+            attr: {class: App.game.gems.canAccess() ? 'dropdown-item' : 'dropdown-item disabled all-pointers'}">Gems</a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="#profileModal" data-toggle="modal">Profile</a>
         </li>
         <li>
             <a class="dropdown-item" href="#badgeCaseModal" data-toggle="modal">Badge Case</a>
         </li>
         <li>
-            <button class="dropdown-item" href="#statisticsModal" data-toggle="modal">Statistics</button>
-        </li>
-        <li>
-            <a class="dropdown-item" href="#achievementsModal" data-toggle="modal">Achievements</a>
-        </li>
-        <li>
-            <a class="dropdown-item" href="#logBookModal" data-toggle="modal">Log Book</a>
-        </li>
-        <li data-bind="attr: {  title: App.game.shards.canAccess() ? '' : 'Progress further to unlock...'}">
-            <a class="dropdown-item" href="#" data-bind="click:function(){App.game.shards.openShardModal()},
-            attr: {class: App.game.shards.canAccess() ? 'dropdown-item' : 'dropdown-item disabled all-pointers'}">Shards</a>
-        </li>
-        <li>
-            <a class="dropdown-item" href="#showItemsModal" data-toggle="modal">Items</a>
+            <a class="dropdown-item" href="#saveModal" data-toggle="modal">Save</a>
         </li>
         <li>
             <a class="dropdown-item" href="#settingsModal" data-toggle="modal">Settings</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#damageCalculatorModal" data-toggle="modal">Damage Calculator</a>
+            <button class="dropdown-item" href="#statisticsModal" data-toggle="modal">Statistics</button>
         </li>
         <li>
-            <a class="dropdown-item" href="#saveModal" data-toggle="modal">Save</a>
+            <a class="dropdown-item" href="#achievementsModal" data-toggle="modal" onclick="AchievementHandler.filterAchievementList(true);">Achievements</a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="#logBookModal" data-toggle="modal">Log Book</a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="#damageCalculatorModal" data-toggle="modal">Damage Calculator</a>
         </li>
         <li>
             <a class="dropdown-item" href="#challengeModeModal" data-toggle="modal">Challenge Modes</a>

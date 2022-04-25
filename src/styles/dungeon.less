@@ -20,16 +20,10 @@
 .tile-player {
   background-color: #2ecc71;
   position: relative;
-  &::after {
-    position: absolute;
-    top: calc(50% - 16px);
-    left: calc(50% - 16px);
-    content: '';
-    display: block;
-    width: 32px;
-    height: 32px;
-    background: url('../assets/images/safari/walkdown.png') no-repeat top left;
-  }
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: var(--trainer-image);
+  image-rendering: pixelated;
 }
 
 .tile-empty {
@@ -83,7 +77,14 @@
 }
 
 .dungeon-chest {
-  margin-top: 50px;
+  margin-top: 25px;
+}
+
+.chest-button {
+  p {
+    font-size: small;
+    margin-bottom: 0;
+  }
 }
 
 .dungeon-button {

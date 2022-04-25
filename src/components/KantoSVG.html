@@ -619,7 +619,27 @@
          })
       %>
 
-    <%- include('templates/mapOverlay',
+     <%- include('templates/mapOverlay',
+         { name: "Professor Oak's Blimp"
+         , x: 27, y: 37
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('Pallet Town')}, attr:{ class: MapHelper.calculateTownCssClass('Pallet Town') }"
+         , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+         , image: "assets/images/map/blimp_empty.png"
+         })
+      %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Professor Oak's Blimp"
+         , x: 27, y: 37
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('Pallet Town')}, attr:{ class: MapHelper.calculateTownCssClass('Pallet Town') }"
+         , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+         , image: "assets/images/map/blimp_pikachu.png"
+         })
+      %>
+
+      <%- include('templates/mapOverlay',
          { name: "Ash in Kanto"
          , x: 18, y: 33
          , width: 4, height: 4
@@ -628,4 +648,5 @@
          , image: "assets/images/ashketchumoverworld.png"
          })
       %>
+
 </g>

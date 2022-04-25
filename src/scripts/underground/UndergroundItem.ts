@@ -1,4 +1,5 @@
-///<reference path="../achievements/MaxRegionRequirement.ts"/>
+///<reference path="../../declarations/requirements/MaxRegionRequirement.d.ts"/>
+///<reference path="StoneUnlockedRequirement.ts"/>
 
 class UndergroundItem {
     public space: Array<Array<any>>;
@@ -42,7 +43,7 @@ class UndergroundItem {
 
     public static getFullResourceName(valuetype: string, amt: number): string {
         if (valuetype != 'Diamond' && amt >= 50) {
-            valuetype += ' shard';
+            valuetype += ' gem';
         }
         if (amt > 1) {
             valuetype += 's';
@@ -98,7 +99,7 @@ UndergroundItem.addItem('Heat Rock',    13, [[1,0,1,0], [1,1,1,1], [1,1,1,1]], 2
 UndergroundItem.addItem('Icy Rock',     14, [[0,1,1,0], [1,1,1,1], [1,1,1,1], [1,0,0,1]], 2);
 UndergroundItem.addItem('Damp Rock',    15, [[1,1,1], [1,1,1], [1,0,1]], 2);
 
-// Shard Plates
+// Gem Plates
 UndergroundItem.addItem('Draco Plate',  100, [[1,1,1,1], [1,1,1,1], [1,1,1,1]], 100, 'dragon');
 UndergroundItem.addItem('Dread Plate',  101, [[1,1,1,1], [1,1,1,1], [1,1,1,1]], 100, 'dark');
 UndergroundItem.addItem('Earth Plate',  102, [[1,1,1,1], [1,1,1,1], [1,1,1,1]], 100, 'ground');
@@ -131,9 +132,9 @@ UndergroundItem.addItem('Jaw Fossil',   209, [[0,0,1,1,1], [0,1,1,1,1], [1,1,1,1
 UndergroundItem.addItem('Sail Fossil',  210, [[1,1,1,0,0], [1,1,1,1,1], [0,1,1,1,1], [0,1,1,1,0]], 0, 'Mine Egg', new MaxRegionRequirement(GameConstants.Region.kalos));
 
 // Evolution Stones
-UndergroundItem.addItem('Fire Stone',    300, [[1,1,1], [1,1,1], [1,1,1]], 1, 'Fire_stone');
-UndergroundItem.addItem('Water Stone',   301, [[1,1,1], [1,1,1], [1,1,0]], 1, 'Water_stone');
-UndergroundItem.addItem('Thunder Stone', 302, [[0,1,1], [1,1,1], [1,1,0]], 1, 'Thunder_stone');
-UndergroundItem.addItem('Leaf Stone',    303, [[0,1,0], [1,1,1], [1,1,1], [0,1,0]], 1, 'Leaf_stone');
-UndergroundItem.addItem('Moon Stone',    304, [[0,1,1,1], [1,1,1,0]], 1, 'Moon_stone');
-UndergroundItem.addItem('Sun Stone',     305, [[0,1,0], [1,1,1], [1,1,1]], 1, 'Sun_stone', new MaxRegionRequirement(GameConstants.Region.johto));
+UndergroundItem.addItem('Fire Stone',    300, [[1,1,1], [1,1,1], [1,1,1]], 1, GameConstants.StoneType[GameConstants.StoneType.Fire_stone]);
+UndergroundItem.addItem('Water Stone',   301, [[1,1,1], [1,1,1], [1,1,0]], 1, GameConstants.StoneType[GameConstants.StoneType.Water_stone]);
+UndergroundItem.addItem('Thunder Stone', 302, [[0,1,1], [1,1,1], [1,1,0]], 1, GameConstants.StoneType[GameConstants.StoneType.Thunder_stone]);
+UndergroundItem.addItem('Leaf Stone',    303, [[0,1,0], [1,1,1], [1,1,1], [0,1,0]], 1, GameConstants.StoneType[GameConstants.StoneType.Leaf_stone]);
+UndergroundItem.addItem('Moon Stone',    304, [[0,1,1,1], [1,1,1,0]], 1, GameConstants.StoneType[GameConstants.StoneType.Moon_stone]);
+UndergroundItem.addItem('Sun Stone',     305, [[0,1,0], [1,1,1], [1,1,1]], 1, GameConstants.StoneType[GameConstants.StoneType.Sun_stone], new StoneUnlockedRequirement(GameConstants.StoneType.Sun_stone));

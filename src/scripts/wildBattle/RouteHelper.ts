@@ -1,4 +1,5 @@
-///<reference path="RoutePokemon.ts"/>
+///<reference path="../../declarations/routes/Routes.d.ts"/>
+///<reference path="../../declarations/routes/RoutePokemon.d.ts"/>
 
 /**
  * Helper class to retrieve information from RoutePokemon
@@ -22,7 +23,7 @@ class RouteHelper {
         let pokemonList = possiblePokemons.land;
 
         // Water Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Super_rod) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItemType.Super_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.water);
         }
 
@@ -61,6 +62,12 @@ class RouteHelper {
             }
         }
         return true;
+    }
+
+    public static isAchievementsComplete(route: number, region: GameConstants.Region) {
+        return AchievementHandler.achievementList.every(achievement => {
+            return !(achievement.property instanceof RouteKillRequirement && achievement.property.region === region && achievement.property.route === route && !achievement.isCompleted());
+        });
     }
 
 }

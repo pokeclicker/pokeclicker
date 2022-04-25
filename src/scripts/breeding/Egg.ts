@@ -74,15 +74,15 @@ class Egg implements Saveable {
                 Notifier.notify({
                     message: `${this.pokemon} is ready to hatch!`,
                     type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.ready_to_hatch,
-                    setting: NotificationConstants.NotificationSetting.ready_to_hatch,
+                    sound: NotificationConstants.NotificationSound.Hatchery.ready_to_hatch,
+                    setting: NotificationConstants.NotificationSetting.Hatchery.ready_to_hatch,
                 });
             } else {
                 Notifier.notify({
                     message: 'An egg is ready to hatch!',
                     type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.ready_to_hatch,
-                    setting: NotificationConstants.NotificationSetting.ready_to_hatch,
+                    sound: NotificationConstants.NotificationSound.Hatchery.ready_to_hatch,
+                    setting: NotificationConstants.NotificationSetting.Hatchery.ready_to_hatch,
                 });
             }
             this.notified = true;
@@ -93,7 +93,7 @@ class Egg implements Saveable {
         return !this.isNone() && this.steps() >= this.totalSteps;
     }
 
-    hatch(): boolean {
+    hatch(efficiency = 100): boolean {
         if (!this.canHatch()) {
             return false;
         }
@@ -103,8 +103,8 @@ class Egg implements Saveable {
         // If the party pokemon exist, increase it's damage output
         if (partyPokemon) {
             // Increase attack
-            partyPokemon.attackBonusPercent += GameConstants.BREEDING_ATTACK_BONUS;
-            partyPokemon.attackBonusAmount += partyPokemon.proteinsUsed();
+            partyPokemon.attackBonusPercent += Math.max(1, Math.round(GameConstants.BREEDING_ATTACK_BONUS * (efficiency / 100)));
+            partyPokemon.attackBonusAmount += Math.max(0, Math.round(partyPokemon.proteinsUsed() * (efficiency / 100)));
 
             // If breeding (not store egg), reset level, reset evolution check
             if (partyPokemon.breeding) {
@@ -130,8 +130,8 @@ class Egg implements Saveable {
             Notifier.notify({
                 message: `✨ You hatched a shiny ${this.pokemon}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
-                sound: NotificationConstants.NotificationSound.shiny_long,
-                setting: NotificationConstants.NotificationSetting.hatched_shiny,
+                sound: NotificationConstants.NotificationSound.General.shiny_long,
+                setting: NotificationConstants.NotificationSetting.Hatchery.hatched_shiny,
             });
             App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}!`);
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonHatched[pokemonID]);
@@ -140,7 +140,7 @@ class Egg implements Saveable {
             Notifier.notify({
                 message: `You hatched ${GameHelper.anOrA(this.pokemon)} ${this.pokemon}!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.hatched,
+                setting: NotificationConstants.NotificationSetting.Hatchery.hatched,
             });
         }
 
@@ -150,6 +150,8 @@ class Egg implements Saveable {
             Notifier.notify({
                 message: `You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`,
                 type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+                setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
             App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(baseForm).id);
         }
@@ -157,7 +159,7 @@ class Egg implements Saveable {
         // Update statistics
         GameHelper.incrementObservable(App.game.statistics.pokemonHatched[pokemonID]);
         GameHelper.incrementObservable(App.game.statistics.totalPokemonHatched);
-        App.game.oakItems.use(OakItems.OakItem.Blaze_Cassette);
+        App.game.oakItems.use(OakItemType.Blaze_Cassette);
         return true;
     }
 
