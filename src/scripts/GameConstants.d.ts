@@ -395,4 +395,6 @@ namespace GameConstants {
     declare const StartingTowns: string[];
     declare const StartingRoutes: number[];
     declare const DockTowns: string[];
+    declare const TemporaryBattles: string[];
+    declare function getTemporaryBattlesIndex(temporaryBattle: string): number;
 }

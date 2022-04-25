@@ -44,8 +44,7 @@ class App {
                 new AchievementTracker(),
                 new Challenges(),
                 new BattleFrontier(),
-                multiplier,
-                temporaryBattleList
+                multiplier
             );
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#2ecc71;font-weight:900;');

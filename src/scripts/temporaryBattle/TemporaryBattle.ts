@@ -1,12 +1,11 @@
 class TemporaryBattle extends TownContent {
-    public defeated: boolean;
     completeRequirements: (Requirement | OneFromManyRequirement)[];
 
     public cssClass(): string {
         return 'btn btn-secondary';
     }
     public text(): string {
-        return `Fight ${this.displayName}`;
+        return `Fight ${this.name}`;
     }
     public isVisible(): boolean {
         return this.isUnlocked() && !this.completeRequirements.every(r => r.isCompleted());
@@ -17,7 +16,6 @@ class TemporaryBattle extends TownContent {
 
     constructor(
         public name: string,
-        public displayName: string,
         public pokemons: GymPokemon[],
         public defeatMessage: string,
         requirements: (Requirement | OneFromManyRequirement)[] = [],

@@ -67,13 +67,13 @@ class TemporaryBattleRunner {
     public static battleWon(battle: TemporaryBattle) {
         if (this.running()) {
             this.running(false);
-            if (!battle.defeated) {
+            if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(battle.name)]() == 0) {
                 battle.rewardFunction();
                 if (battle.defeatMessage) {
                     $('#temporaryBattleWonModal').modal('show');
                 }
             }
-            battle.defeated = true;
+            GameHelper.incrementObservable(App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(battle.name)]);
             player.town(battle.parent);
             App.game.gameState = GameConstants.GameState.town;
         }

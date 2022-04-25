@@ -3,16 +3,16 @@ import * as GameConstants from '../GameConstants';
 
 export default class TemporaryBattleRequirement extends Requirement {
     public battleName: string;
-    constructor(battleName: any) {
-        super(1, GameConstants.AchievementOption.equal);
+    constructor(battleName: any, defeatsRequired = 1) {
+        super(defeatsRequired, GameConstants.AchievementOption.equal);
         this.battleName = battleName;
     }
 
     public getProgress() {
-        return App.game.temporaryBattleList[this.battleName].defeated ? 1 : 0;
+        return App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.battleName)]();
     }
 
     public hint(): string {
-        return `Requires beating ${App.game.temporaryBattleList[this.battleName].name}.`;
+        return `Requires beating ${this.battleName}.`;
     }
 }
