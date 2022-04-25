@@ -1180,7 +1180,7 @@ GymList['Champion Diantha'] = new Champion(
 );
 
 //Ash Ketchum gyms
-gymList['AshinKanto'] = new Gym(
+GymList['AshinKanto'] = new Gym(
     'Ash Ketchum',
     'AshinKanto',
     [
@@ -1201,7 +1201,7 @@ gymList['AshinKanto'] = new Gym(
         achievement: false,
     }
 );
-gymList['Cherrygrove City'] = new Gym(
+GymList['Cherrygrove City'] = new Gym(
     'Ash Ketchum 2',
     'Cherrygrove City',
     [
@@ -1217,7 +1217,7 @@ gymList['Cherrygrove City'] = new Gym(
     'Insert quote here.',
     [new GymBadgeRequirement(BadgeEnums.KantoAsh)]
 );
-gymList['LilyCove City'] = new Gym(
+GymList['LilyCove City'] = new Gym(
     'Ash Ketchum 3',
     'LilyCove City',
     [
@@ -1233,7 +1233,7 @@ gymList['LilyCove City'] = new Gym(
     'Insert quote here.',
     [new GymBadgeRequirement(BadgeEnums.JohtoAsh)]
 );
-gymList['Survival Area'] = new Gym(
+GymList['Survival Area'] = new Gym(
     'Ash Ketchum 4',
     'Survival Area',
     [
@@ -1249,7 +1249,7 @@ gymList['Survival Area'] = new Gym(
     'Insert quote here.',
     [new GymBadgeRequirement(BadgeEnums.HoennAsh)]
 );
-gymList['Icirrus City'] = new Gym(
+GymList['Icirrus City'] = new Gym(
     'Ash Ketchum 5',
     'Icirrus City',
     [
@@ -1265,7 +1265,7 @@ gymList['Icirrus City'] = new Gym(
     'Insert quote here.',
     [new GymBadgeRequirement(BadgeEnums.SinnohAsh)]
 );
-gymList['Kiloude City'] = new Gym(
+GymList['Kiloude City'] = new Gym(
     'Ash Ketchum 6',
     'Kiloude City',
     [
