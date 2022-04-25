@@ -4,7 +4,7 @@ import * as GameConstants from '../GameConstants';
 export default class TemporaryBattleRequirement extends Requirement {
     public battleName: string;
     constructor(battleName: any, defeatsRequired = 1) {
-        super(defeatsRequired, GameConstants.AchievementOption.equal);
+        super(defeatsRequired, GameConstants.AchievementOption.more);
         this.battleName = battleName;
     }
 
