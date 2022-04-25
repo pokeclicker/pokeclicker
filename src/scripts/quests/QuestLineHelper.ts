@@ -564,7 +564,11 @@ class QuestLineHelper {
 
         // Ultima can put Rainbow Rocket stuff here
 
-        // Meltan now should be added to random routes, day-seeded similar to multi-route Event
+        // For now, adding Meltan to all Alola routes
+
+        Routes.getRoutesByRegion(GameConstants.Region.alola).forEach(route => {
+            route.pokemon.land.push('Meltan')
+        });
 
         const meltanGetMelmetal = () => {
             App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Melmetal').id);

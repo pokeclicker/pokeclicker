@@ -729,7 +729,7 @@ class Update implements Saveable {
             // If player has defeated the Alola Champ, start the Meltan quest line
             saveData.badgeCase = saveData.badgeCase || [];
             // Not using game constants incase the value isn't 97 in the future
-            if (saveData.badgeCase[97]) { // Iceberg badge
+            if (saveData.badgeCase[97]) { // Champion Hau
                 saveData.quests.questLines.push({state: 1, name: 'Let\'s Go, Meltan!', quest: 0});
             };
         },
