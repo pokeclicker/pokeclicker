@@ -731,7 +731,7 @@ class Update implements Saveable {
             // Not using game constants incase the value isn't 97 in the future
             if (saveData.badgeCase[97]) { // Champion Hau
                 saveData.quests.questLines.push({state: 1, name: 'Let\'s Go, Meltan!', quest: 0});
-            };
+            }
         },
     };
 

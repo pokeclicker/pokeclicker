@@ -567,7 +567,7 @@ class QuestLineHelper {
         // For now, adding Meltan to all Alola routes
 
         Routes.getRoutesByRegion(GameConstants.Region.alola).forEach(route => {
-            route.pokemon.land.push('Meltan')
+            route.pokemon.land.push('Meltan');
         });
 
         const meltanGetMelmetal = () => {
