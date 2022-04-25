@@ -49,7 +49,9 @@ export const MaxIDPerRegion = [
     898, // 89 - Galar
 ];
 
+// Battle Items
 export const ITEM_USE_TIME = 30;
+export const FLUTE_TYPE_ATTACK_MULTIPLIER = 1.005;
 
 export const ROAMING_MIN_CHANCE = 8192;
 export const ROAMING_MAX_CHANCE = 4096;
@@ -516,7 +518,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kanto]: new Set(['Pewter City', 'Digletts Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road']),
         [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave', 'Victory Road Johto']),
         [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn', 'Seafloor Cavern']),
-        [Region.sinnoh]: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
+        [Region.sinnoh]: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
         [Region.unova]: new Set(['Seaside Cave', 'Twist Mountain', 'Reversal Mountain', 'Relic Passage', 'Relic Castle', 'Victory Road Unova']),
         [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Terminus Cave', 'Victory Road Kalos']),
         [Region.alola]: new Set([7, 12, 22, 29, 'Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Wela Volcano Park', 'Diglett\'s Tunnel', 'Vast Poni Canyon']),
@@ -630,6 +632,21 @@ export enum BattleItemType {
     'Token_collector' = 'Token_collector',
     'Item_magnet' = 'Item_magnet',
     'Lucky_incense' = 'Lucky_incense',
+}
+
+export enum FluteItemType {
+    'Red_Flute' = 'Red_Flute',
+    'White_Flute' = 'White_Flute',
+    'Black_Flute' = 'Black_Flute',
+    'Yellow_Flute' = 'Yellow_Flute',
+    'Blue_Flute' = 'Blue_Flute',
+    'Poke_Flute' = 'Poke_Flute',
+    'Azure_Flute' = 'Azure_Flute',
+    'Eon_Flute' = 'Eon_Flute',
+    'Sun_Flute' = 'Sun_Flute',
+    'Moon_Flute' = 'Moon_Flute',
+    'Time_Flute' = 'Time_Flute',
+    'Grass_Flute' = 'Grass_Flute',
 }
 
 export enum PokemonItemType {
