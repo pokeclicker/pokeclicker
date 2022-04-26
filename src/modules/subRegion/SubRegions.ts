@@ -42,7 +42,14 @@ SubRegions.addSubRegion(Region.johto, new SubRegion('Johto'));
 SubRegions.addSubRegion(Region.hoenn, new SubRegion('Hoenn'));
 SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Sinnoh'));
 SubRegions.addSubRegion(Region.unova, new SubRegion('Unova'));
-SubRegions.addSubRegion(Region.kalos, new SubRegion('Kalos'));
+SubRegions.addSubRegion(Region.kalos, new SubRegion('Kalos', undefined, 'Coumarine City'));
+SubRegions.addSubRegion(Region.kalos, new SubRegion('Delta Episode', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), 'Delta Slateport City'));
+
+export enum KalosSubRegions {
+    Kalos = 0,
+    DeltaEpisode,
+}
+
 SubRegions.addSubRegion(Region.alola, new SubRegion('Melemele island', undefined, 'Hau\'oli City'));
 SubRegions.addSubRegion(Region.alola, new SubRegion('Akala island', new GymBadgeRequirement(BadgeEnums.FightiniumZ), 'Heahea City'));
 SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula & Poni islands', new GymBadgeRequirement(BadgeEnums.Elite_Nihilego), 'Malie City'));

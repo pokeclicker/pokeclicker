@@ -2219,6 +2219,182 @@ TownList['Pokémon League Kalos'] = new Town(
         ],
     }
 );
+TownList['Delta Littleroot Town'] = new Town(
+    'Delta Littleroot Town',
+    GameConstants.Region.kalos,
+    [LittleRootTownShop],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 101)],
+        npcs: [LittlerootAide],
+    }
+);
+TownList['Delta Oldale Town'] = new Town(
+    'Delta Oldale Town',
+    GameConstants.Region.kalos,
+    [],
+    {
+        requirements: [
+            new OneFromManyRequirement([
+                new RouteKillRequirement(10, GameConstants.Region.kalos, 102),
+                new RouteKillRequirement(10, GameConstants.Region.kalos, 103),
+            ]),
+        ],
+        npcs: [OldaleTrackingScientist],
+    }
+);
+TownList['Delta Petalburg City'] = new Town(
+    'Delta Petalburg City',
+    GameConstants.Region.kalos,
+    [PetalburgCityShop],
+    {
+        requirements: [
+            new OneFromManyRequirement([
+                new RouteKillRequirement(10, GameConstants.Region.kalos, 102),
+                new RouteKillRequirement(10, GameConstants.Region.kalos, 104),
+            ]),
+        ],
+    }
+);
+TownList['Delta Rustboro City'] = new Town(
+    'Delta Rustboro City',
+    GameConstants.Region.kalos,
+    [RustboroCityShop],
+    {
+        requirements: [
+            new OneFromManyRequirement([
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Delta Petalburg Woods')),
+                new RouteKillRequirement(10, GameConstants.Region.kalos, 115),
+                new RouteKillRequirement(10, GameConstants.Region.kalos, 116),
+            ]),
+        ],
+    }
+);
+TownList['Delta Dewford Town'] = new Town(
+    'Delta Dewford Town',
+    GameConstants.Region.kalos,
+    [DewfordTownShop],
+    {
+        requirements: [
+            new OneFromManyRequirement([
+                new RouteKillRequirement(10, GameConstants.Region.kalos, 106),
+                new RouteKillRequirement(10, GameConstants.Region.kalos, 107),
+            ]),
+        ],
+    }
+);
+TownList['Delta Slateport City'] = new Town(
+    'Delta Slateport City',
+    GameConstants.Region.kalos,
+    [SlateportCityShop],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+        npcs: [SlateportHoennRoamerNPC],
+    }
+);
+TownList['Delta Mauville City'] = new Town(
+    'Delta Mauville City',
+    GameConstants.Region.kalos,
+    [MauvilleCityShop, HoennBerryMaster],
+    {
+        requirements: [
+            new OneFromManyRequirement([
+                new RouteKillRequirement(10, GameConstants.Region.kalos, 110),
+                new RouteKillRequirement(10, GameConstants.Region.kalos, 117),
+            ]),
+        ],
+    }
+);
+TownList['Delta Verdanturf Town'] = new Town(
+    'Delta Verdanturf Town',
+    GameConstants.Region.kalos,
+    [VerdanturfTownShop],
+    {
+        requirements: [
+            new OneFromManyRequirement([
+                new RouteKillRequirement(10, GameConstants.Region.kalos, 116),
+                new RouteKillRequirement(10, GameConstants.Region.kalos, 117),
+            ]),
+        ],
+    }
+);
+TownList['Delta Lavaridge Town'] = new Town(
+    'Delta Lavaridge Town',
+    GameConstants.Region.kalos,
+    [LavaridgeTownShop],
+    {
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Delta Jagged Pass'))],
+    }
+);
+TownList['Delta Fallarbor Town'] = new Town(
+    'Delta Fallarbor Town',
+    GameConstants.Region.kalos,
+    [FallarborTownShop, HoennFluteMaster],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 113)],
+        npcs: [FallarborProfessorCozmo],
+    }
+);
+TownList['Delta Fortree City'] = new Town(
+    'Delta Fortree City',
+    GameConstants.Region.kalos,
+    [FortreeCityShop],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 119)],
+        npcs: [FortreeWeatherman],
+    }
+);
+TownList['Delta LilyCove City'] = new Town(
+    'Delta LilyCove City',
+    GameConstants.Region.kalos,
+    [DepartmentStoreShop],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 121)],
+        npcs: [BigSpender],
+    }
+);
+TownList['Delta Mossdeep City'] = new Town(
+    'Delta Mossdeep City',
+    GameConstants.Region.kalos,
+    [MossdeepCityShop],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 125)],
+        npcs: [MossdeepAstronomer],
+    }
+);
+TownList['Delta Pacifidlog Town'] = new Town(
+    'Delta Pacifidlog Town',
+    GameConstants.Region.kalos,
+    [PacifidlogTownShop],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 131)],
+        npcs: [PacifidlogDiver],
+    }
+);
+TownList['Delta Sootopolis City'] = new Town(
+    'Delta Sootopolis City',
+    GameConstants.Region.kalos,
+    [SootopolisCityShop],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 126)],
+        npcs: [SootopolisWallace],
+    }
+);
+TownList['Delta Ever Grande City'] = new Town(
+    'Delta Ever Grande City',
+    GameConstants.Region.kalos,
+    [EverGrandeCityShop],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 128)],
+    }
+);
+TownList['Delta Pokémon League Hoenn'] = new Town(
+    'Delta Pokémon League Hoenn',
+    GameConstants.Region.kalos,
+    [],
+    {
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Delta Victory Road Hoenn'))],
+    }
+);
 
 //Kalos Dungeons
 TownList['Santalune Forest'] = new DungeonTown(
@@ -2297,6 +2473,87 @@ TownList['Victory Road Kalos'] = new DungeonTown(
             new RouteKillRequirement(10, GameConstants.Region.kalos, 22),
         ]),
     ]
+);
+TownList['Delta Petalburg Woods'] = new DungeonTown(
+    'Delta Petalburg Woods',
+    GameConstants.Region.kalos,
+    [
+        new OneFromManyRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.kalos, 104),
+            new RouteKillRequirement(10, GameConstants.Region.kalos, 115),
+            new RouteKillRequirement(10, GameConstants.Region.kalos, 116),
+        ]),
+    ]
+);
+TownList['Delta Rusturf Tunnel'] = new DungeonTown(
+    'Delta Rusturf Tunnel',
+    GameConstants.Region.kalos,
+    [
+        new OneFromManyRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.kalos, 116),
+            new RouteKillRequirement(10, GameConstants.Region.kalos, 117),
+        ]),
+    ]
+);
+TownList['Delta Granite Cave'] = new DungeonTown(
+    'Delta Granite Cave',
+    GameConstants.Region.kalos,
+    [
+        new OneFromManyRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.kalos, 106),
+            new RouteKillRequirement(10, GameConstants.Region.kalos, 107),
+        ]),
+    ]
+);
+TownList['Delta Fiery Path'] = new DungeonTown(
+    'Delta Fiery Path',
+    GameConstants.Region.kalos,
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 112)]
+);
+TownList['Delta Meteor Falls'] = new DungeonTown(
+    'Delta Meteor Falls',
+    GameConstants.Region.kalos,
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 114)]
+);
+TownList['Delta Jagged Pass'] = new DungeonTown(
+    'Delta Jagged Pass',
+    GameConstants.Region.kalos,
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 112)]
+);
+TownList['Delta New Mauville'] = new DungeonTown(
+    'Delta New Mauville',
+    GameConstants.Region.kalos,
+    [
+        new OneFromManyRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.kalos, 110),
+            new RouteKillRequirement(10, GameConstants.Region.kalos, 117),
+        ]),
+    ]
+);
+TownList['Delta Mt. Pyre'] = new DungeonTown(
+    'Delta Mt. Pyre',
+    GameConstants.Region.kalos,
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 122)]
+);
+TownList['Delta Shoal Cave'] = new DungeonTown(
+    'Delta Shoal Cave',
+    GameConstants.Region.kalos,
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 125)]
+);
+TownList['Delta Cave of Origin'] = new DungeonTown(
+    'Delta Cave of Origin',
+    GameConstants.Region.kalos,
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 126)]
+);
+TownList['Delta Sky Pillar'] = new DungeonTown(
+    'Delta Sky Pillar',
+    GameConstants.Region.kalos,
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 131)]
+);
+TownList['Delta Victory Road Hoenn'] = new DungeonTown(
+    'Delta Victory Road Hoenn',
+    GameConstants.Region.kalos,
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 128)]
 );
 //Unknown Cave?
 

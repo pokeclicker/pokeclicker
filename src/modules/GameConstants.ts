@@ -1050,6 +1050,18 @@ export const KalosDungeons = [
     'Terminus Cave',
     'Pokémon Village',
     'Victory Road Kalos',
+    'Delta Petalburg Woods',
+    'Delta Rusturf Tunnel',
+    'Delta Granite Cave',
+    'Delta Fiery Path',
+    'Delta Meteor Falls',
+    'Delta Jagged Pass',
+    'Delta New Mauville',
+    'Delta Mt. Pyre',
+    'Delta Shoal Cave',
+    'Delta Cave of Origin',
+    'Delta Sky Pillar',
+    'Delta Victory Road Hoenn',
     // 'Unknown Dungeon',
 ];
 
