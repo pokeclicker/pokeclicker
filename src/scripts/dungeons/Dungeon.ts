@@ -823,7 +823,7 @@ dungeonList['Berry Forest'] = new Dungeon('Mt. Ember',
         new DungeonBossPokemon('Venomoth', 101427, 30),
         new DungeonBossPokemon('Hypno', 101427, 30),
     ],
-    1750, 27);
+    1750, 29);
 
 dungeonList['Victory Road'] = new Dungeon('Victory Road',
     [
