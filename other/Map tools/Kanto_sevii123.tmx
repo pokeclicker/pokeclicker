@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="1">
+ <tileset firstgid="1" source="tiles_FRLG.tsx"/>
+ <tileset firstgid="1317" source="tiles_Advanced.tsx"/>
+ <layer id="2" name="Water Dark" width="100" height="60" tintcolor="#c8c8c8">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXGUAACBcAQAAAQC53bsjAg==
+  </data>
+ </layer>
+ <layer id="10" name="Routes" width="100" height="60">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXD0FACQCACAAAAAEAAAAIQACAAAAAQAAAAMAPToAAAAFHwAeHjs8Ai+gkM2yGeACizOxDv3jx1DZU/t6+f53Ah8StCmpDjnYlFBVPnY1ncealPpFYkCki/oG6pxnFeSN+slRtzAXBKJdVUG1YGrBbqutV6q0Aqumm6eNVPWFpg2TVNfCtEesb5LqogUR4pus+s8Kvn1UFdT60optEXXtT+7PIDUNUg3+/IcE
+  </data>
+ </layer>
+ <layer id="12" name="Other" width="100" height="60">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXD0BAIAAtQYAgAC9BgCAAMUGAADGByBggg8RioNdBUSxvQmIYr/JB+EjGw==
+  </data>
+ </layer>
+ <layer id="11" name="Dungeons" width="100" height="60">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXNUBAOAAEAYAABESBgAYBgAAGRogBgAAIQYAACoGAAAiCAC9vKlrD+UV8AAgqA84uRTbuc8Pp9zOfWTyOyE=
+  </data>
+ </layer>
+ <layer id="9" name="Towns" width="100" height="60">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXH0DAIQDAF8RAABgEQAAYREAAGIRAEURAABGEQAARxEAAEhnEQAAaBEAAGkRAABqTREAAE4RAABPEQAAUBERoHCXv26Qw3JbDcXVBygJ1QA1IdTQy6PaFT9ATaAGqAnVOBRVwmmVFFIDTlLNb1RBa/BIBw==
+  </data>
+ </layer>
+</map>

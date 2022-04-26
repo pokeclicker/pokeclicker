@@ -272,7 +272,30 @@ TownList['Indigo Plateau Kanto'] = new Town(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road')),
         ],
     }
-
+);
+TownList['One Island'] = new Town(
+    'One Island',
+    GameConstants.Region.kanto,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Volcano)],
+    }
+);
+TownList['Two Island'] = new Town(
+    'Two Island',
+    GameConstants.Region.kanto,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Volcano)],
+    }
+);
+TownList['Three Island'] = new Town(
+    'Three Island',
+    GameConstants.Region.kanto,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Volcano)],
+    }
 );
 
 //Kanto Dungeons
@@ -327,6 +350,16 @@ TownList['Pokemon Mansion'] = new DungeonTown(
         new RouteKillRequirement(10, GameConstants.Region.kanto, 20),
         new RouteKillRequirement(10, GameConstants.Region.kanto, 21),
     ])]
+);
+TownList['Mt. Ember'] = new DungeonTown(
+    'Mt. Ember',
+    GameConstants.Region.kanto,
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)]
+);
+TownList['Berry Forest'] = new DungeonTown(
+    'Berry Forest',
+    GameConstants.Region.kanto,
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 29)]
 );
 TownList['Victory Road'] = new DungeonTown(
     'Victory Road',

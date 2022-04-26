@@ -774,6 +774,57 @@ dungeonList['Pokemon Mansion'] = new Dungeon('Pokemon Mansion',
     [new DungeonBossPokemon('Magmar', 88800, 40)],
     1500, 16);
 
+dungeonList['Mt. Ember'] = new Dungeon('Mt. Ember',
+    [
+        {pokemon: 'Spearow', options: { weight: 1.5 }},
+        {pokemon: 'Fearow', options: { weight: 1.5 }},
+        {pokemon: 'Machop', options: { weight: 1.5 }},
+        {pokemon: 'Machoke', options: { weight: 1.5 }},
+        {pokemon: 'Geodude', options: { weight: 1.5 }},
+        {pokemon: 'Graveler', options: { weight: 1.5 }},
+        {pokemon: 'Ponyta', options: { weight: 1.5 }},
+        {pokemon: 'Rapidash', options: { weight: 1.5 }},
+        new DungeonTrainer('Pokémon Ranger',
+            [
+                new GymPokemon('Bellsprout', 18120, 38),
+                new GymPokemon('Gloom', 18120, 38),
+                new GymPokemon('Gloom', 18120, 38),
+            ], { weight: 1 }, 'Beth', '(female)'),
+        new DungeonTrainer('Crush Girl',
+            [
+                new GymPokemon('Hitmonchan', 18120, 38),
+                new GymPokemon('Hitmonchan', 18120, 38),
+            ], { weight: 1 }, 'Jocelyn'),
+        new DungeonTrainer('Pokémon Ranger',
+            [
+                new GymPokemon('Exeggcute', 18120, 37),
+                new GymPokemon('Exeggutor', 18120, 40),
+            ], { weight: 1 }, 'Logan', '(male)'),
+    ],
+    [
+        {loot: 'xClick', weight: 3.75},
+        {loot: 'Lucky_egg', weight: 3.75},
+    ],
+    18120,
+    [
+        new DungeonBossPokemon('Magmar', 101427, 40),
+        new DungeonBossPokemon('Moltres', 184462, 50),
+    ],
+    1750, 27);
+
+dungeonList['Berry Forest'] = new Dungeon('Mt. Ember',
+    ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Psyduck', 'Golduck', 'Poliwag', 'Bellsprout', 'Weepinbell', 'Slowpoke', 'Slowbro', 'Drowzee', 'Exeggcute', 'Goldeen', 'Magikarp'],
+    [
+        {loot: 'xClick', weight: 3.75},
+        {loot: 'Lucky_egg', weight: 3.75},
+    ],
+    18120,
+    [
+        new DungeonBossPokemon('Venomoth', 101427, 30),
+        new DungeonBossPokemon('Hypno', 101427, 30),
+    ],
+    1750, 27);
+
 dungeonList['Victory Road'] = new Dungeon('Victory Road',
     [
         {pokemon: 'Zubat', options: { weight: 8.8 }},
@@ -871,7 +922,6 @@ dungeonList['Victory Road'] = new Dungeon('Victory Road',
     24595,
     [
         new DungeonBossPokemon('Machoke', 122975, 42),
-        new DungeonBossPokemon('Moltres', 184462, 50),
         new DungeonTrainer('Cool Couple',
             [
                 new GymPokemon('Nidoking', 122975, 45),

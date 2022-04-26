@@ -37,7 +37,14 @@ export default class SubRegions {
     }
 }
 
-SubRegions.addSubRegion(Region.kanto, new SubRegion('Kanto'));
+SubRegions.addSubRegion(Region.kanto, new SubRegion('Kanto', undefined, 'Vermilion City'));
+SubRegions.addSubRegion(Region.kanto, new SubRegion('Sevii Islands 123', new GymBadgeRequirement(BadgeEnums.Volcano), 'One Island'));
+
+export enum KantoSubRegions {
+    Kanto = 0,
+    Sevii123,
+}
+
 SubRegions.addSubRegion(Region.johto, new SubRegion('Johto'));
 SubRegions.addSubRegion(Region.hoenn, new SubRegion('Hoenn'));
 SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Sinnoh'));
