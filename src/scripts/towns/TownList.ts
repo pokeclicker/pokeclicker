@@ -2068,6 +2068,9 @@ const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
 const KiloudeConfusedHiker = new NPC('Confused Hiker', [
     'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
 ]);
+const DeltaPokemonLeagueHoennNobody = new NPC('Challenge the Pokémon League', [
+    'But nobody came...',
+]);
 
 //Kalos Towns
 
@@ -2393,6 +2396,7 @@ TownList['Delta Pokémon League Hoenn'] = new Town(
     [],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Delta Victory Road Hoenn'))],
+        npcs: [DeltaPokemonLeagueHoennNobody],
     }
 );
 
@@ -2554,6 +2558,16 @@ TownList['Delta Victory Road Hoenn'] = new DungeonTown(
     'Delta Victory Road Hoenn',
     GameConstants.Region.kalos,
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 128)]
+);
+TownList['Marine Cave'] = new DungeonTown(
+    'Marine Cave',
+    GameConstants.Region.kalos,
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 133)]
+);
+TownList['Terra Cave'] = new DungeonTown(
+    'Terra Cave',
+    GameConstants.Region.kalos,
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 113)]
 );
 //Unknown Cave?
 

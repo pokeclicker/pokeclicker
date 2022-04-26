@@ -5776,6 +5776,8 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
     ],
     750500, 21);
 
+//Unknown Dungeon? Contains Mewtwo.
+
 dungeonList['Delta Petalburg Woods'] = new Dungeon('Delta Petalburg Woods',
     [
         {pokemon: 'Poochyena', options: { weight: 1.33 }},
@@ -6251,9 +6253,19 @@ dungeonList['Delta Victory Road Hoenn'] = new Dungeon('Delta Victory Road Hoenn'
     ],
     37000, 101);
 
-//Unknown Dungeon? Contains Mewtwo.
+dungeonList['Marine Cave'] = new Dungeon('Marine Cave',
+    ['Zubat'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    11845338,
+    [new DungeonBossPokemon('Kyogre', 66079195, 23)],
+    830000, 3);
 
-
+dungeonList['Terra Cave'] = new Dungeon('Terra Cave',
+    ['Zubat'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    11845338,
+    [new DungeonBossPokemon('Groudon', 66079195, 23)],
+    830000, 3);
 
 // Alola
 // TODO: Balancing of dungeon Pokemon HP & rewards.

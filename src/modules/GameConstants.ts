@@ -1050,6 +1050,7 @@ export const KalosDungeons = [
     'Terminus Cave',
     'Pokémon Village',
     'Victory Road Kalos',
+    // 'Unknown Dungeon',
     'Delta Petalburg Woods',
     'Delta Rusturf Tunnel',
     'Delta Granite Cave',
@@ -1062,7 +1063,8 @@ export const KalosDungeons = [
     'Delta Cave of Origin',
     'Delta Sky Pillar',
     'Delta Victory Road Hoenn',
-    // 'Unknown Dungeon',
+    'Marine Cave',
+    'Terra Cave',
 ];
 
 export const AlolaDungeons = [

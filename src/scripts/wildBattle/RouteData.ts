@@ -1497,7 +1497,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, GameConstants.Region.kalos, 104),
         ]),
     ],
-    21.3,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1512,7 +1512,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, GameConstants.Region.kalos, 110),
         ]),
     ],
-    21.2,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1527,7 +1527,7 @@ Routes.add(new RegionRoute(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Delta Petalburg Woods')),
         ]),
     ],
-    21.4,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1541,7 +1541,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, GameConstants.Region.kalos, 106),
         ]),
     ],
-    21.13,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1555,7 +1555,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, GameConstants.Region.kalos, 107),
         ]),
     ],
-    21.14,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1569,7 +1569,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, GameConstants.Region.kalos, 108),
         ]),
     ],
-    21.15,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1583,7 +1583,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, GameConstants.Region.kalos, 109),
         ]),
     ],
-    21.16,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1592,7 +1592,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-    21.17,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1602,7 +1602,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-    21.6,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1618,7 +1618,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, GameConstants.Region.kalos, 117),
         ]),
     ],
-    21.8,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1627,7 +1627,7 @@ Routes.add(new RegionRoute(
         land: ['Numel', 'Marill'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 111)],
-    21.9,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1636,7 +1636,7 @@ Routes.add(new RegionRoute(
         land: ['Spinda', 'Slugma', 'Skarmory'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Delta Fiery Path'))],
-    21.10,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1647,7 +1647,7 @@ Routes.add(new RegionRoute(
         headbutt: ['Geodude'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 113)],
-    21.11,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1657,7 +1657,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Delta Meteor Falls'))],
-    21.12,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1672,7 +1672,7 @@ Routes.add(new RegionRoute(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Delta Rusturf Tunnel')),
         ]),
     ],
-    21.5,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1687,7 +1687,7 @@ Routes.add(new RegionRoute(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Delta Rusturf Tunnel')),
         ]),
     ],
-    21.7,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1702,7 +1702,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, GameConstants.Region.kalos, 117),
         ]),
     ],
-    21.18,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1727,7 +1727,7 @@ Routes.add(new RegionRoute(
       ],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 118)],
-    21.19,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1737,7 +1737,7 @@ Routes.add(new RegionRoute(
         water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 119)],
-    21.20,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1747,7 +1747,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 120)],
-    21.21,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1756,7 +1756,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 121)],
-    21.22,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1766,7 +1766,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 122)],
-    21.23,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1775,7 +1775,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Clamperl', 'Relicanth'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 121)],
-    21.24,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1784,7 +1784,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 124)],
-    21.25,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1793,7 +1793,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Clamperl', 'Relicanth'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 124)],
-    21.26,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1807,7 +1807,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, GameConstants.Region.kalos, 126),
         ]),
     ],
-    21.27,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1816,7 +1816,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Luvdisc', 'Wailmer', 'Corsola'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 127)],
-    21.28,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1825,7 +1825,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Wailord', 'Magikarp', 'Wailmer', 'Sharpedo'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 128)],
-    21.29,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1835,7 +1835,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 129)],
-    21.30,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1844,7 +1844,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 130)],
-    21.31,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1853,7 +1853,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Horsea'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 131)],
-    21.32,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1862,7 +1862,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Horsea'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 132)],
-    21.33,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 Routes.add(new RegionRoute(
@@ -1871,7 +1871,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Horsea'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 133)],
-    21.34,
+    21.1,
     KalosSubRegions.DeltaEpisode
 ));
 
