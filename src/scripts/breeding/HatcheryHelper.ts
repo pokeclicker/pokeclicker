@@ -12,6 +12,9 @@ class HatcheryHelper {
     public sortOption: KnockoutObservable<SortOptions> = ko.observable(SortOptions.id).extend({ numeric: 0 });
     public sortDirection: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
     public hatched: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
+    public hatchBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
+    public stepEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
+    public attackEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
     // public level: number;
     // public experience: number;
 
@@ -31,18 +34,17 @@ class HatcheryHelper {
             Attack Efficiency: ${this.attackEfficiency()}%<br/>
             Hatched: ${this.hatched().toLocaleString('en-US')}<br/>`
         );
+
+        // Update our bonus values
+        this.updateBonus();
+        // Update our bonus values whenever our hatched amount changes
+        this.hatched.subscribe(() => this.updateBonus());
     }
 
-    get hatchBonus(): KnockoutComputed<number> {
-        return ko.pureComputed(() => Math.min(50, +Math.sqrt(this.hatched() / 50).toFixed(1)));
-    }
-
-    get stepEfficiency(): KnockoutComputed<number> {
-        return ko.pureComputed(() => this.stepEfficiencyBase + this.hatchBonus());
-    }
-
-    get attackEfficiency(): KnockoutComputed<number> {
-        return ko.pureComputed(() => this.attackEfficiencyBase + this.hatchBonus());
+    updateBonus(): void {
+        this.hatchBonus(Math.min(50, +Math.sqrt(this.hatched() / 50).toFixed(1)));
+        this.stepEfficiency(this.stepEfficiencyBase + this.hatchBonus());
+        this.attackEfficiency(this.attackEfficiencyBase + this.hatchBonus());
     }
 
     isUnlocked(): boolean {
