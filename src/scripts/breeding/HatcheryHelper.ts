@@ -182,9 +182,10 @@ class HatcheryHelpers {
     }
 }
 
-// Note: Gender-neutral names used as the trainer sprite is (seeded) randomly generated
+// Note: Mostly Gender-neutral names used as the trainer sprite is (seeded) randomly generated, or check the sprite
 HatcheryHelpers.add(new HatcheryHelper('Sam', new Amount(1000, GameConstants.Currency.money), 10, 10, new HatchRequirement(100)));
-HatcheryHelpers.add(new HatcheryHelper('Blake', new Amount(10000, GameConstants.Currency.money), 10, 15, new HatchRequirement(500)));
+HatcheryHelpers.add(new HatcheryHelper('Blake', new Amount(10000, GameConstants.Currency.money), 10, 20, new HatchRequirement(500)));
+HatcheryHelpers.add(new HatcheryHelper('Jasmine', new Amount(50000, GameConstants.Currency.money), 15, 50, new ItemOwnedRequirement('HatcheryHelperJasmine')));
 HatcheryHelpers.add(new HatcheryHelper('Parker', new Amount(1000, GameConstants.Currency.dungeonToken), 15, 25, new HatchRequirement(1000)));
 HatcheryHelpers.add(new HatcheryHelper('Dakota', new Amount(10000, GameConstants.Currency.dungeonToken), 50, 50, new ItemOwnedRequirement('HatcheryHelperDakota')));
 HatcheryHelpers.add(new HatcheryHelper('Justice', new Amount(10, GameConstants.Currency.questPoint), 100, 50, new QuestRequirement(200)));

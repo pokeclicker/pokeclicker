@@ -663,6 +663,7 @@ const MauvilleCityShop = new Shop([
     ItemList['Electric_egg'],
     ItemList['Thunder_stone'],
     ItemList['Metal_coat'],
+    ItemList['HatcheryHelperJasmine'],
 ]);
 const VerdanturfTownShop = new Shop([
     ItemList['Grass_egg'],
