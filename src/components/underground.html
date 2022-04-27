@@ -84,6 +84,9 @@
                             <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player.mineInventory()}">
                             </tbody>
                         </table>
+                        <button type="button" class="btn btn-success btn-block" onclick="App.game.underground.openUndergroundSellAllModal()">
+                            <span>Sell all treasures</span>
+                        </button>
                     </div>
                     <div data-bind="ifnot:player.hasMineItems()">
                         You don't have any treasures yet...
@@ -210,9 +213,6 @@
                     }">
                     <span>Total net worth: <b><span data-bind="text: Underground.getDiamondNetWorth().toLocaleString('en-US')">-</span></b></span>
                     <img src='assets/images/underground/diamond.svg' width="20px'">
-                </button>
-                <button type="button" class="btn btn-success" onclick="App.game.underground.openUndergroundSellAllModal()">
-                    <span>Sell all treasures</span>
                 </button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
