@@ -50,7 +50,7 @@
                       </tr>
                   </thead>
                   <tbody data-bind="foreach: PartyController.getHeldItemSortedList()">
-                    <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected()), visible: !$data.heldItem()">
+                    <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected()), visible: !$data.heldItem() && HeldItem.heldItemSelected().canUse($data)">
                       <td class="text-left" colspan="2"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                     </tr>
                   </tbody>

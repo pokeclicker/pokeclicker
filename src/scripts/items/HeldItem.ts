@@ -12,7 +12,8 @@ class HeldItem extends Item {
         shopOptions : ShopOptions,
         displayName: string,
         description: string,
-        regionUnlocked: GameConstants.Region) {
+        regionUnlocked: GameConstants.Region,
+        public canUse: (pokemon: PartyPokemon) => boolean) {
         super(name, basePrice, currency, shopOptions, displayName, description, 'heldItems');
         this.regionUnlocked = regionUnlocked;
     }
@@ -34,8 +35,10 @@ class AttackBonusHeldItem extends HeldItem {
         shopOptions : ShopOptions,
         displayName: string,
         public attackBonus: number,
-        regionUnlocked: GameConstants.Region) {
-        super(name, basePrice, currency, shopOptions, displayName, `A held item that raises the attack of the pokémon by ${((attackBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked);
+        regionUnlocked: GameConstants.Region,
+        pokemonDescription = 'the pokémon',
+        canUse = (pokemon: PartyPokemon) => true) {
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that raises the attack of ${pokemonDescription} by ${((attackBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked, canUse);
     }
 }
 
@@ -47,8 +50,9 @@ class EVsGainedBonusHeldItem extends HeldItem { // TODO: make sure this class do
         shopOptions : ShopOptions,
         displayName: string,
         public gainedBonus: number,
-        regionUnlocked: GameConstants.Region) {
-        super(name, basePrice, currency, shopOptions, displayName, `A held item that increases the EVs the pokémon gains by ${((gainedBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked);
+        regionUnlocked: GameConstants.Region,
+        canUse = (pokemon: PartyPokemon) => true) {
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that increases the EVs the pokémon gains by ${((gainedBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked, canUse);
     }
 }
 
@@ -60,10 +64,14 @@ class ExpGainedBonusHeldItem extends HeldItem {
         shopOptions : ShopOptions,
         displayName: string,
         public gainedBonus: number,
-        regionUnlocked: GameConstants.Region) {
-        super(name, basePrice, currency, shopOptions, displayName, `A held item that earns the Pokémon ${((gainedBonus - 1) * 100).toFixed(0)}% bonus Experience Points.`, regionUnlocked);
+        regionUnlocked: GameConstants.Region,
+        canUse = (pokemon: PartyPokemon) => true) {
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that earns the Pokémon ${((gainedBonus - 1) * 100).toFixed(0)}% bonus Experience Points.`, regionUnlocked, canUse);
     }
 }
 
 ItemList['Wonder_Chest'] = new ExpGainedBonusHeldItem('Wonder_Chest', 10000, GameConstants.Currency.money, undefined, 'Wonder Chest', 1.15, GameConstants.Region.johto);
+ItemList['Light_Ball'] = new AttackBonusHeldItem('Light_Ball', 10000, GameConstants.Currency.money, undefined, 'Light Ball', 1.2, GameConstants.Region.final /* GameConstants.Region.johto */, 'any Pikachu',
+    (pokemon) => Math.floor(pokemon.id) == 25 );
 ItemList['Macho_Brace'] = new EVsGainedBonusHeldItem('Macho_Brace', 6655321, GameConstants.Currency.money, undefined, 'Macho Brace', 2, GameConstants.Region.final /* GameConstants.Region.sinnoh */);
+
