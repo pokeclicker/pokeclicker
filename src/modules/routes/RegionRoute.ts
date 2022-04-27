@@ -12,6 +12,7 @@ export default class RegionRoute {
         public orderNumber?: number,
         public subRegion?: number,
         public ignoreRouteInCalculations = false,
+        public routeHealth = undefined,
     ) {
         this.orderNumber = orderNumber || number;
     }
