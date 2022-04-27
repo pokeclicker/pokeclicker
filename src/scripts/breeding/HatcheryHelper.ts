@@ -11,14 +11,15 @@ class HatcheryHelper {
     public tooltip: KnockoutComputed<string>;
     public sortOption: KnockoutObservable<SortOptions> = ko.observable(SortOptions.id).extend({ numeric: 0 });
     public sortDirection: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
+    public hatched: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
     // public level: number;
     // public experience: number;
 
     constructor(
         public name: string,
         public cost: Amount,
-        public stepEfficiency: number, // 1 - 200
-        public attackEfficiency: number,
+        public stepEfficiencyBase: number, // 1 - 200
+        public attackEfficiencyBase: number,
         public unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement
     ) {
         SeededRand.seed(parseInt(this.name, 36));
@@ -26,9 +27,22 @@ class HatcheryHelper {
 
         this.tooltip = ko.pureComputed(() => `<strong>${this.name}</strong><br/>
             Cost: <img src="assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" width="20px">&nbsp;${(this.cost.amount).toLocaleString('en-US')}/hatch<br/>
-            Step Efficiency: ${this.stepEfficiency}%<br/>
-            Attack Efficiency: ${this.attackEfficiency}%`
+            Step Efficiency: ${this.stepEfficiency()}%<br/>
+            Attack Efficiency: ${this.attackEfficiency()}%<br/>
+            Hatched: ${this.hatched().toLocaleString('en-US')}<br/>`
         );
+    }
+
+    get hatchBonus(): KnockoutComputed<number> {
+        return ko.pureComputed(() => Math.min(50, +Math.sqrt(this.hatched() / 50).toFixed(1)));
+    }
+
+    get stepEfficiency(): KnockoutComputed<number> {
+        return ko.pureComputed(() => this.stepEfficiencyBase + this.hatchBonus());
+    }
+
+    get attackEfficiency(): KnockoutComputed<number> {
+        return ko.pureComputed(() => this.attackEfficiencyBase + this.hatchBonus());
     }
 
     isUnlocked(): boolean {
@@ -93,6 +107,7 @@ class HatcheryHelper {
         this.hired(json.hired || false);
         this.sortOption(json.sortOption || 0);
         this.sortDirection(json.sortDirection || false);
+        this.hatched(json.hatched || 0);
     }
 }
 
@@ -122,12 +137,19 @@ class HatcheryHelpers {
     public addSteps(amount: number, multiplier: Multiplier): void {
         // Add steps and attack based on efficiency
         this.hired().forEach((helper, index) => {
-            const steps = Math.max(1, Math.round(amount * (helper.stepEfficiency / 100)));
+            // Calculate how many steps should be applied
+            const steps = Math.max(1, Math.round(amount * (helper.stepEfficiency() / 100)));
+
+            // Add steps to the egg we are managing
             const egg = this.hatchery.eggList[index]();
             egg.addSteps(steps, multiplier);
+
+            // Check if the egg is ready to hatch
             if (egg.progress() >= 100 || egg.isNone()) {
-                egg.hatch(helper.attackEfficiency);
+                egg.hatch(helper.attackEfficiency());
                 this.hatchery.eggList[index](new Egg());
+
+                // Check if there's a pokemon we can chuck into an egg
                 const pokemon = App.game.party.caughtPokemon
                     .sort(PartyController.compareBy(helper.sortOption(), helper.sortDirection()))
                     .find(p => BreedingController.visible(p)());
@@ -135,6 +157,8 @@ class HatcheryHelpers {
                     this.hatchery.gainPokemonEgg(pokemon);
                     // Charge the player when we put a pokemon in the hatchery
                     helper.charge();
+                    // Increment our hatched counter
+                    GameHelper.incrementObservable(helper.hatched, 1);
                 }
             }
         });
