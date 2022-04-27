@@ -117,7 +117,7 @@ class FluteEffectRunner {
 
     public static getFluteMultiplier(itemName: GameConstants.FluteItemType) {
         const flute = (ItemList[itemName] as FluteItem);
-        return this.isActive(flute.name)() ? (1 + (flute.multiplyBy - 1) * AchievementHandler.achievementBonus()) : 1;
+        return this.isActive(flute.name)() ? flute.getMultiplier() : 1;
     }
 
 
