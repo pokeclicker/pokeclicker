@@ -727,7 +727,6 @@ class Update implements Saveable {
         },
     };
 
-
     constructor() {
         const saveData = this.getSaveData();
         if (saveData) {
