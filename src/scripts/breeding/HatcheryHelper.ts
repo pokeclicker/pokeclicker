@@ -15,6 +15,8 @@ class HatcheryHelper {
     public hatchBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
     public stepEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
     public attackEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
+    public nextBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
+    public prevBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
     // public level: number;
     // public experience: number;
 
@@ -42,9 +44,11 @@ class HatcheryHelper {
     }
 
     updateBonus(): void {
-        this.hatchBonus(Math.min(50, +Math.sqrt(this.hatched() / 50).toFixed(1)));
+        this.hatchBonus(Math.min(50, Math.floor(Math.sqrt(this.hatched() / 50) * 10) / 10));
         this.stepEfficiency(this.stepEfficiencyBase + this.hatchBonus());
         this.attackEfficiency(this.attackEfficiencyBase + this.hatchBonus());
+        this.nextBonus(Math.floor(Math.pow(this.hatchBonus() + 0.1, 2) * 50) + 1);
+        this.prevBonus(Math.min(this.hatched(), Math.floor(Math.pow(this.hatchBonus(), 2) * 50) + 1));
     }
 
     isUnlocked(): boolean {
