@@ -36,10 +36,16 @@ export default class Routes {
         return this.regionRoutes[normalizedRoute - 1].number;
     }
 
-    public static normalizedNumber(region: GameConstants.Region, route: number): number {
+    public static normalizedNumber(region: GameConstants.Region, route: number, skipIgnoredRoutes: boolean): number {
         if (region === GameConstants.Region.none) {
             return route;
         }
-        return this.regionRoutes.findIndex((routeData) => routeData.region === region && routeData.number === route) + 1;
+        if (skipIgnoredRoutes && this.regionRoutes.find((routeData) => routeData.region === region && routeData.number === route).ignoreRouteInCalculations) {
+            if (route === 0) {
+                throw new Error('Not implemented for ignoreRouteInCalculations = true on first region route');
+            }
+            return this.normalizedNumber(region, route - 1, skipIgnoredRoutes);
+        }
+        return this.regionRoutes.filter((r) => !skipIgnoredRoutes || !r.ignoreRouteInCalculations).findIndex((routeData) => routeData.region === region && routeData.number === route) + 1;
     }
 }
