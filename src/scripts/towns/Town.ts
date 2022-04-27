@@ -36,7 +36,6 @@ class Town {
 
         if (GymList[name]) {
             const gym = GymList[name];
-            gym.buttonText = 'Gym';
             this.content.unshift(gym);
         }
         if (GameConstants.DockTowns.includes(name)) {

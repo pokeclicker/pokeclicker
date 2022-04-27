@@ -23,7 +23,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 <li class="nav-item"><a class="nav-link active" href="#breeding-pokemon" data-toggle="tab">Pokémon</a></li>
                 <li class="nav-item"><a class="nav-link" href="#breeding-eggs" data-toggle="tab">Eggs</a></li>
                 <li class="nav-item"><a class="nav-link" href="#breeding-fossils" data-toggle="tab">Fossils</a></li>
-                <li class="nav-item"><a class="nav-link" href="#breeding-helpers" data-toggle="tab" data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()">Helpers (BETA)</a></li>
+                <li class="nav-item" data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()"><a class="nav-link" href="#breeding-helpers" data-toggle="tab">Helpers (BETA)</a></li>
                 <li class="nav-item"><a class="nav-link" href="#breeding-help" data-toggle="tab">Help</a></li>
             </ul>
 
@@ -197,13 +197,25 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         <tr>
                                             <td class="text-left">Step Efficiency:</td>
                                             <td class="text-right">
-                                                <knockout data-bind="text: $data.stepEfficiency.toLocaleString('en-US') + '%'">100%</knockout>
+                                                <knockout data-bind="text: `${$data.stepEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="text-left text-nowrap">Attack Efficiency:</td>
                                             <td class="text-right">
-                                                <knockout data-bind="text: $data.attackEfficiency.toLocaleString('en-US') + '%'">100%</knockout>
+                                                <knockout data-bind="text: `${$data.attackEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left text-nowrap">Hatched:</td>
+                                            <td class="text-right">
+                                                <knockout data-bind="text: $data.hatched().toLocaleString('en-US')">0</knockout>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left text-nowrap">Bonus to Efficiency:</td>
+                                            <td class="text-right">
+                                                <knockout data-bind="text: `+ ${$data.hatchBonus().toLocaleString('en-US')}%`">0%</knockout>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -269,6 +281,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     <p>They will only breed Pokémon based on your current Hatchery filters.</p>
                     <p>All of the Helpers have different step efficiencies and will hatch eggs faster or slower depending on their value.</p>
                     <p>They each also have different attack efficiencies which will determine how much attack you gain compared to manually hatching the pokemon yourself.</p>
+                    <p>These efficiencies will gain a bonus based on how many times you've used the helper to hatch eggs.</p>
                     <p><i>More Hatchery Helpers can be unlocked through shops and hatching more Pokémon</i></p>
                 </div>
 
