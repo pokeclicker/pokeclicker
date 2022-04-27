@@ -276,7 +276,7 @@ TownList['Indigo Plateau Kanto'] = new Town(
 TownList['One Island'] = new Town(
     'One Island',
     GameConstants.Region.kanto,
-    [],
+    [new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Volcano)],
     }

@@ -301,7 +301,8 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Volcano)],
     21.1,
-    KantoSubRegions.Sevii123
+    KantoSubRegions.Sevii123,
+    true
 ));
 Routes.add(new RegionRoute(
     'Kindle Road', GameConstants.Region.kanto, 27,
@@ -311,7 +312,8 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Volcano)],
     21.2,
-    KantoSubRegions.Sevii123
+    KantoSubRegions.Sevii123,
+    true
 ));
 Routes.add(new RegionRoute(
     'Cape Brink', GameConstants.Region.kanto, 28,
@@ -321,7 +323,8 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Volcano)],
     21.3,
-    KantoSubRegions.Sevii123
+    KantoSubRegions.Sevii123,
+    true
 ));
 Routes.add(new RegionRoute(
     'Bond Bridge', GameConstants.Region.kanto, 29,
@@ -331,7 +334,8 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Volcano)],
     21.4,
-    KantoSubRegions.Sevii123
+    KantoSubRegions.Sevii123,
+    true
 ));
 
 /*

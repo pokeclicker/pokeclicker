@@ -60,8 +60,8 @@ class MapHelper {
         return !!Routes.getRoute(region, route);
     }
 
-    public static normalizeRoute(route: number, region: GameConstants.Region): number {
-        return Routes.normalizedNumber(region, route);
+    public static normalizeRoute(route: number, region: GameConstants.Region, skipIgnoredRoutes = true): number {
+        return Routes.normalizedNumber(region, route, skipIgnoredRoutes);
     }
 
     public static accessToRoute = function (route: number, region: GameConstants.Region) {
