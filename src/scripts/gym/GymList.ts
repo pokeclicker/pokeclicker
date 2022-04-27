@@ -114,7 +114,7 @@ GymList['Viridian City'] = new Gym(
     6000,
     'Ha! That was a truly intense fight! You have won! As proof, here is the Earth Badge!',
     [
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Berry Forest')),
+        new QuestLineCompletedRequirement('Bill\'s Errand'),
         new GymBadgeRequirement(BadgeEnums.Marsh),
         new GymBadgeRequirement(BadgeEnums.Thunder),
     ],

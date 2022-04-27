@@ -41,7 +41,7 @@ export default class Routes {
             return route;
         }
         const filteredRegionRoutes = this.regionRoutes.filter((r) => !skipIgnoredRoutes || !r.ignoreRouteInCalculations);
-        if (skipIgnoredRoutes && this.regionRoutes.find((routeData) => routeData.region === region && routeData.number === route).ignoreRouteInCalculations) {
+        if (skipIgnoredRoutes && this.regionRoutes.find((routeData) => routeData.region === region && routeData.number === route)?.ignoreRouteInCalculations) {
             for (let i = this.regionRoutes.findIndex((routeData) => routeData.region === region && routeData.number === route) - 1; i >= 0; i--) {
                 if (!this.regionRoutes[i].ignoreRouteInCalculations) {
                     return i + 1;

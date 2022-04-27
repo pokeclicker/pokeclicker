@@ -162,6 +162,28 @@ const CinnabarIslandResearcher = new NPC('Researcher', [
     'They were trying to clone an ancient Pokémon in the mansion, I wonder if they succeeded.',
     'Apparently the ancient Pokémon escaped, And can be found roaming around Kanto!',
 ]);
+const OneIslandCelio1 = new NPC ('Celio', [
+    'Ah, yes. Welcome! Welcome! Almost didn\'t see you there. I\'m just so bussy trying to get this darned thing to work. Once it\'s complete we can finally have a direct communications network between the Sevii Islands and Kanto!',
+    'I don\'t even have time to go and pick up an important package. A meteorite, found by the owner of the game corner on Two Island. It contains important materials for my machine.',
+    'You seem like the adventuring type. Tell you what. How about Bill stay here with me to work on this machine, and you go fetch my Meteorite for me.',
+]);
+const OneIslandCelio2 = new NPC ('Celio', [
+    'Back already? That didn\'t take very long.',
+    'What? It did take long? You went on a whole rescue mission? Seems like I lost track of the time while tinkering with Bill. It\'s been a lot of fun.',
+    'I\'m glad to hear Lostelle is all right. You can hand the meteorite to me. Bill, thank you for your assistance. I\'ll take it from here. I can see that your friend is eager to get back to Kanto and challenge the Pokémon League.',
+    'Thank you both very much.',
+],
+{ requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Berry Forest')) });
+const GameCornerOwner1 = new NPC ('Game Corner Owner', [
+    'Hello stranger. I\'m afraid the Game Corner is currently closed.',
+    'What? The meteorite for Celio? Yes, I can give that to you. But I need you to do something for me first.',
+    'My daughter Lostelle is missing. She likes to pick berries in the Berry Forest on Three Island. She does it all the time. But this time she hasn\'t come back. Please go find her.',
+]);
+const GameCornerOwner2 = new NPC ('Game Corner Owner', [
+    'My sweet Lostelle! I\'m so glad you\'re all right.',
+    'Thank you very much kind stranger. Please take the Meteorite.',
+],
+{ requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Berry Forest')) });
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
@@ -279,6 +301,15 @@ TownList['One Island'] = new Town(
     [new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Volcano)],
+        npcs: [OneIslandCelio1, OneIslandCelio2],
+    }
+);
+TownList['Mt. Ember'] = new Town(
+    'Mt. Ember',
+    GameConstants.Region.kanto,
+    [new MoveToDungeon(dungeonList['Mt. Ember Summit'])],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)],
     }
 );
 TownList['Two Island'] = new Town(
@@ -287,6 +318,7 @@ TownList['Two Island'] = new Town(
     [],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Volcano)],
+        npcs: [GameCornerOwner1, GameCornerOwner2],
     }
 );
 TownList['Three Island'] = new Town(
@@ -351,8 +383,8 @@ TownList['Pokemon Mansion'] = new DungeonTown(
         new RouteKillRequirement(10, GameConstants.Region.kanto, 21),
     ])]
 );
-TownList['Mt. Ember'] = new DungeonTown(
-    'Mt. Ember',
+TownList['Mt. Ember Summit'] = new DungeonTown(
+    'Mt. Ember Summit',
     GameConstants.Region.kanto,
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)]
 );

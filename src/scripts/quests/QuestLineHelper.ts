@@ -474,6 +474,23 @@ class QuestLineHelper {
         App.game.quests.questLines().push(galacticSinnohQuestLine);
     }
 
+    public static createBillSeviiQuestLine() {
+        const billSeviiQuestLine = new QuestLine('Bill\'s Errand', 'Bill has asked you to journey to the Sevii islands with him to set up a digital connection to mainland Kanto.');
+
+        //const talktoCelio1 = new CustomQuest -- Get Meteorite from Game Corner Owner on 2 island. Unlocks Two Island and Cape Brink.
+
+        //const talktoGameCornerOwner1 = new CustomQuest -- Rescure Game Corner Owner's Daughter. Unlocks Three Island and Bond Bridge.
+
+        const clearBerryForest = new CustomQuest(1, 0, 'Find Lostelle. Clear Berry Forest.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Berry Forest')]());
+        billSeviiQuestLine.addQuest(clearBerryForest);
+
+        //const TalktoGameCornerOwner2 = new CustomQuest -- Obtain Meteorite.
+
+        //const talktoCelio2 = new CustomQuest -- Deliver Meteorite, connection established, questline complete.
+
+        App.game.quests.questLines().push(billSeviiQuestLine);
+    }
+
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
@@ -489,5 +506,6 @@ class QuestLineHelper {
         this.createSkullAetherAlolaQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createGalacticSinnohQuestLine();
+        this.createBillSeviiQuestLine();
     }
 }

@@ -774,7 +774,7 @@ dungeonList['Pokemon Mansion'] = new Dungeon('Pokemon Mansion',
     [new DungeonBossPokemon('Magmar', 88800, 40)],
     1500, 16);
 
-dungeonList['Mt. Ember'] = new Dungeon('Mt. Ember',
+dungeonList['Mt. Ember Summit'] = new Dungeon('Mt. Ember Summit',
     [
         {pokemon: 'Spearow', options: { weight: 1.5 }},
         {pokemon: 'Fearow', options: { weight: 1.5 }},
