@@ -812,7 +812,7 @@ dungeonList['Mt. Ember Summit'] = new Dungeon('Mt. Ember Summit',
     ],
     1750, 27);
 
-dungeonList['Berry Forest'] = new Dungeon('Mt. Ember',
+dungeonList['Berry Forest'] = new Dungeon('Berry Forest',
     ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Psyduck', 'Golduck', 'Poliwag', 'Bellsprout', 'Weepinbell', 'Slowpoke', 'Slowbro', 'Drowzee', 'Exeggcute', 'Goldeen', 'Magikarp'],
     [
         {loot: 'xClick', weight: 3.75},
