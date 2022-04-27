@@ -40,12 +40,17 @@ export default class Routes {
         if (region === GameConstants.Region.none) {
             return route;
         }
+        const filteredRegionRoutes = this.regionRoutes.filter((r) => !skipIgnoredRoutes || !r.ignoreRouteInCalculations);
         if (skipIgnoredRoutes && this.regionRoutes.find((routeData) => routeData.region === region && routeData.number === route).ignoreRouteInCalculations) {
-            if (route === 0) {
-                throw new Error('Not implemented for ignoreRouteInCalculations = true on first region route');
+            for (let i = this.regionRoutes.findIndex((routeData) => routeData.region === region && routeData.number === route) - 1; i >= 0; i--) {
+                if (!this.regionRoutes[i].ignoreRouteInCalculations) {
+                    return i + 1;
+                }
+                if (i === 0) {
+                    throw new Error('Not implemented for ignoreRouteInCalculations = true on first region route');
+                }
             }
-            return this.normalizedNumber(region, route - 1, skipIgnoredRoutes);
         }
-        return this.regionRoutes.filter((r) => !skipIgnoredRoutes || !r.ignoreRouteInCalculations).findIndex((routeData) => routeData.region === region && routeData.number === route) + 1;
+        return filteredRegionRoutes.findIndex((routeData) => routeData.region === region && routeData.number === route) + 1;
     }
 }
