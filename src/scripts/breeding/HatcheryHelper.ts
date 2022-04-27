@@ -51,8 +51,8 @@ class HatcheryHelper {
         this.hatchBonus(Math.min(50, Math.floor(Math.sqrt(this.hatched() / 50) * 10) / 10));
         this.stepEfficiency(this.stepEfficiencyBase + this.hatchBonus());
         this.attackEfficiency(this.attackEfficiencyBase + this.hatchBonus());
-        this.prevBonus(Math.min(this.hatched(), Math.floor(Math.pow(this.hatchBonus(), 2) * 50) + (this.hatchBonus() <= 1 ? 1 : 0)));
-        this.nextBonus(Math.floor(Math.pow(this.hatchBonus() + 0.1, 2) * 50) + (this.hatchBonus() <= 0.9 ? 1 : 0));
+        this.prevBonus(Math.min(this.hatched(), Math.floor(Math.pow(this.hatchBonus(), 2) * 50) + (this.hatchBonus() < 1 ? 1 : 0)));
+        this.nextBonus(Math.floor(Math.pow(this.hatchBonus() + 0.1, 2) * 50) + (this.hatchBonus() < 0.9 ? 1 : 0));
     }
 
     isUnlocked(): boolean {
