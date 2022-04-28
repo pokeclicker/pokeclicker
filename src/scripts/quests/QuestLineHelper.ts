@@ -481,7 +481,7 @@ class QuestLineHelper {
 
         //const talktoGameCornerOwner1 = new CustomQuest -- Rescure Game Corner Owner's Daughter. Unlocks Three Island and Bond Bridge.
 
-        const clearBerryForest = new CustomQuest(1, 0, 'Find Lostelle. Clear Berry Forest.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Berry Forest')]());
+        const clearBerryForest = new CustomQuest(1, 1000, 'Find Lostelle. Clear Berry Forest.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Berry Forest')]());
         billSeviiQuestLine.addQuest(clearBerryForest);
 
         //const TalktoGameCornerOwner2 = new CustomQuest -- Obtain Meteorite.
