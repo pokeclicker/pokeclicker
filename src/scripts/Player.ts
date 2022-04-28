@@ -26,6 +26,7 @@ class Player {
     private starter: KnockoutObservable<GameConstants.Starter>;
     private _timeTraveller = false;
     private _origins: Array<any>;
+    public regionStarters: Array<KnockoutObservable<number>>;
 
     constructor(savedPlayer?) {
         const saved: boolean = (savedPlayer != null);
@@ -56,6 +57,18 @@ class Player {
         this._town = ko.observable(TownList[this._townName]);
         this._town.subscribe(value => this._townName = value.name);
         this.starter = ko.observable(savedPlayer.starter != undefined ? savedPlayer.starter : GameConstants.Starter.None);
+        this.regionStarters = new Array<KnockoutObservable<number>>();
+        for (let i = 0; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
+            if (savedPlayer.regionStarters && (savedPlayer.highestRegion ?? 0) >= i) {
+                this.regionStarters.push(ko.observable(savedPlayer.regionStarters[i]));
+            } else {
+                if (i == 0 && savedPlayer.starter) {
+                    this.regionStarters.push(ko.observable(savedPlayer.starter));
+                } else {
+                    this.regionStarters.push(ko.observable(0));
+                }
+            }
+        }
 
         this._itemList = Save.initializeItemlist();
         if (savedPlayer._itemList) {
@@ -230,6 +243,7 @@ class Player {
             'effectTimer',
             'highestRegion',
             'highestSubRegion',
+            'regionStarters',
         ];
         const plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep);

@@ -12,12 +12,12 @@ aria-labelledby="pickStarterModalLabel" aria-hidden="true">
            <p>Pick a starter for your next region</p>
            <div class="row justify-content-center">
                <div class="col-lg-8">
-                   <div id="starterSelection" class="row" data-bind="foreach: GameConstants.RegionalStarters[player._region()]">
+                   <div id="starterSelection" class="row" data-bind="foreach: GameConstants.RegionalStarters[player.region]">
                        <div class="col">
                            <input class="image-starter" type="image"
                                   data-bind="
                                     attr: { src: 'assets/images/pokemon/' + $data + '.png' },
-                                    click: () => { App.game.party.gainPokemonById($data); $('#pickStarterModal').modal('hide'); }
+                                    click: () => { App.game.party.gainPokemonById($data); player.regionStarters[player.region]($index()); $('#pickStarterModal').modal('hide'); }
                                     ">
                        </div>
                    </div>
