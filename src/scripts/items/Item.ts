@@ -83,7 +83,7 @@ class Item {
             const maxCost = (this.basePrice * 100 * (amount - incAmount));
             const total = incCost + maxCost;
 
-            return Math.max(0, Math.floor(total));
+            return Math.max(0, Math.round(total));
         }
     }
 
@@ -145,8 +145,27 @@ class Item {
         return false;
     }
 
+    checkCanUse(): boolean {
+        if (!player.itemList[this.name]()) {
+            Notifier.notify({
+                message: `You don't have any ${ItemList[this.name].displayName}s left...`,
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+        return true;
+    }
+
     isAvailable(): boolean {
         return true;
+    }
+
+    isSoldOut(): boolean {
+        return false;
+    }
+
+    getDescription(): string {
+        return this._description;
     }
 
     increasePriceMultiplier(amount = 1) {

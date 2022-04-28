@@ -33,7 +33,7 @@ class DungeonRunner {
         DungeonBattle.trainerPokemonIndex(0);
         DungeonBattle.enemyPokemon(null);
 
-        DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
+        DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
         // Dungeon size increases with each region
         let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + player.region;
         // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
@@ -217,7 +217,7 @@ class DungeonRunner {
     })
 
     public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
-        const possiblePokemon: PokemonNameType[] = dungeon.allPokemon;
+        const possiblePokemon: PokemonNameType[] = dungeon.allAvailablePokemon();
         return RouteHelper.listCompleted(possiblePokemon, includeShiny);
     }
 

@@ -807,20 +807,17 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 205', GameConstants.Region.sinnoh, 205,
     new RoutePokemon({
-        land: ['Hoothoot', 'Wurmple', 'Silcoon', 'Beautifly', 'Cascoon', 'Dustox', 'Bidoof', 'Kricketot', 'Budew', 'Buizel', 'Shellos (west)', 'Drifloon'],
+        land: ['Hoothoot', 'Wurmple', 'Silcoon', 'Beautifly', 'Cascoon', 'Dustox', 'Bidoof', 'Kricketot', 'Budew', 'Buizel', 'Shellos (west)'],
         water: ['Psyduck', 'Golduck', 'Tentacool', 'Tentacruel', 'Shellder', 'Magikarp', 'Gyarados', 'Shellos (west)', 'Gastrodon (west)', 'Finneon', 'Lumineon', 'Barboach', 'Whiscash'],
     }),
-    [
-        new RouteKillRequirement(10, GameConstants.Region.sinnoh, 204),
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ravaged Path')),
-    ]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Valley Windworks'))]
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 206', GameConstants.Region.sinnoh, 206,
     new RoutePokemon({
         land: ['Zubat', 'Machop', 'Geodude', 'Ponyta', 'Gligar', 'Kricketune', 'Stunky'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Forest)]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building'))]
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 207', GameConstants.Region.sinnoh, 207,
@@ -1963,7 +1960,12 @@ Routes.add(new RegionRoute(
         land: ['Lotad', 'Seedot', 'Purrloin', 'Blipbug', 'Gossifleur','Chewtle', 'Galarian Zigzagoon', 'Nickit', 'Yamper', 'Obstagoon'],
         water: ['Lapras', 'Drednaw', 'Gyarados', 'Arrokuda','Barraskewda', 'Magikarp', 'Feebas'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Galar_Rock)]
+    [
+        new MultiRequirement([
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Water')),
+        ]),
+    ]
 ));
 Routes.add(new RegionRoute(
     'Galar Route 9', GameConstants.Region.galar, 20,
@@ -1971,7 +1973,12 @@ Routes.add(new RegionRoute(
         land: ['Cramorant', 'Octillery', 'Kingler', 'Pyukumuku', 'Gastrodon (east)', 'Jellicent', 'Mareanie', 'Glalie'],
         water: ['Wishiwashi (Solo)', 'Qwilfish', 'Mantyke'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Galar_Rock)]
+    [
+        new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Galar_Rock),
+            new GymBadgeRequirement(BadgeEnums.Galar_Ice),
+        ]),
+    ]
 ));
 Routes.add(new RegionRoute(
     'Circhester Bay', GameConstants.Region.galar, 21,

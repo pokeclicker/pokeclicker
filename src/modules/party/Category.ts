@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable class-methods-use-this */
-/* eslint-disable no-plusplus  */
 import {
     Observable as KnockoutObservable,
     Subscription as KnockoutSubscription,
