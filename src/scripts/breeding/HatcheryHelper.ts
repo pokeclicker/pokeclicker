@@ -202,4 +202,4 @@ HatcheryHelpers.add(new HatcheryHelper('Justice', new Amount(10, GameConstants.C
 HatcheryHelpers.add(new HatcheryHelper('Carey', new Amount(20, GameConstants.Currency.questPoint), 50, 125, new ItemOwnedRequirement('HatcheryHelperCarey')));
 HatcheryHelpers.add(new HatcheryHelper('Aiden', new Amount(5, GameConstants.Currency.diamond), 100, 100, new UndergroundLayersMinedRequirement(100)));
 HatcheryHelpers.add(new HatcheryHelper('Kris', new Amount(10, GameConstants.Currency.diamond), 150, 100, new ItemOwnedRequirement('HatcheryHelperKris')));
-HatcheryHelpers.add(new HatcheryHelper('Noel', new Amount(50, GameConstants.Currency.battlePoint), 100, 200, new ItemOwnedRequirement('HatcheryHelperNoel')));
+HatcheryHelpers.add(new HatcheryHelper('Noel', new Amount(25, GameConstants.Currency.battlePoint), 100, 200, new ItemOwnedRequirement('HatcheryHelperNoel')));
