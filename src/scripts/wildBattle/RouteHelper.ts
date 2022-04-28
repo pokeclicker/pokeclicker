@@ -32,12 +32,12 @@ class RouteHelper {
         }
 
         // Kanto Old Rod Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItemType.Fishing_rod) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 0) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kantooldrod);
         }
 
         // Kanto Good Rod Pokémon
-        if (MapHelper.accessToTown('Fuchsia City') || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 1) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kantogoodrod);
         }
 
