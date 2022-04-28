@@ -5,6 +5,22 @@ const HatcheryHelperSkills = [
     'cost',
 ];
 
+const HatcheryHelperCalcHatchBonus = (hatched) => Math.min(50, Math.floor(Math.sqrt(hatched / 50) * 10) / 10);
+
+const HatcheryHelperMinBonusMap: Record<number, number> = {};
+// Generate our bonus amounts map
+(() => {
+    let bonus = -1;
+    for (let hatched = 0; bonus < 50; hatched++) {
+        const b = HatcheryHelperCalcHatchBonus(hatched);
+        if (b > bonus) {
+            HatcheryHelperMinBonusMap[b] = hatched;
+            bonus = b;
+        }
+    }
+})();
+
+
 class HatcheryHelper {
     public trainerSprite = 0;
     public hired: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
@@ -15,6 +31,8 @@ class HatcheryHelper {
     public hatchBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
     public stepEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
     public attackEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
+    public prevBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
+    public nextBonus: KnockoutObservable<number> = ko.observable(1).extend({ numeric: 0 });
     // public level: number;
     // public experience: number;
 
@@ -38,13 +56,19 @@ class HatcheryHelper {
         // Update our bonus values
         this.updateBonus();
         // Update our bonus values whenever our hatched amount changes
-        this.hatched.subscribe(() => this.updateBonus());
+        this.hatched.subscribe((hatched) => {
+            if (hatched >= this.nextBonus() || hatched <= this.prevBonus()) {
+                this.updateBonus();
+            }
+        });
     }
 
     updateBonus(): void {
-        this.hatchBonus(Math.min(50, +Math.sqrt(this.hatched() / 50).toFixed(1)));
+        this.hatchBonus(HatcheryHelperCalcHatchBonus(this.hatched()));
         this.stepEfficiency(this.stepEfficiencyBase + this.hatchBonus());
         this.attackEfficiency(this.attackEfficiencyBase + this.hatchBonus());
+        this.prevBonus(HatcheryHelperMinBonusMap[this.hatchBonus()] || 0);
+        this.nextBonus(HatcheryHelperMinBonusMap[((this.hatchBonus() * 10) + 1) / 10] || 1);
     }
 
     isUnlocked(): boolean {
@@ -194,4 +218,4 @@ HatcheryHelpers.add(new HatcheryHelper('Justice', new Amount(10, GameConstants.C
 HatcheryHelpers.add(new HatcheryHelper('Carey', new Amount(20, GameConstants.Currency.questPoint), 50, 125, new ItemOwnedRequirement('HatcheryHelperCarey')));
 HatcheryHelpers.add(new HatcheryHelper('Aiden', new Amount(5, GameConstants.Currency.diamond), 100, 100, new UndergroundLayersMinedRequirement(100)));
 HatcheryHelpers.add(new HatcheryHelper('Kris', new Amount(10, GameConstants.Currency.diamond), 150, 100, new ItemOwnedRequirement('HatcheryHelperKris')));
-HatcheryHelpers.add(new HatcheryHelper('Noel', new Amount(50, GameConstants.Currency.battlePoint), 100, 200, new ItemOwnedRequirement('HatcheryHelperNoel')));
+HatcheryHelpers.add(new HatcheryHelper('Noel', new Amount(25, GameConstants.Currency.battlePoint), 100, 200, new ItemOwnedRequirement('HatcheryHelperNoel')));
