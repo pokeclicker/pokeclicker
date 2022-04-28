@@ -1149,3 +1149,14 @@ export const DockTowns = [
     'Hau\'oli City', // Alola
     'Hulbury', // Galar
 ];
+
+export const RegionalStarters = [
+    [1, 4, 7], // Kanto
+    [152, 155, 158], // Johto
+    [252, 255, 258], // Hoenn
+    [387, 390, 393], // Sinnoh
+    [495, 498, 501], // Unova
+    [650, 653, 656], // Kalos
+    [722, 725, 728], // Alola
+    [810, 813, 816], // Galar
+]
