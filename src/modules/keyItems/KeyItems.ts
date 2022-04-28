@@ -4,6 +4,7 @@ import Information from '../utilities/Information';
 import KeyItemController from './KeyItemController';
 import { Feature } from '../DataStore/common/Feature';
 import { getDungeonIndex, Region, ROUTE_KILLS_NEEDED } from '../GameConstants';
+import LevelableKeyItem, { KeyItemLevel } from './LevelableKeyItem';
 
 export default class KeyItems implements Feature {
     name = 'Key Items';
@@ -79,8 +80,11 @@ export default class KeyItems implements Feature {
                 });
             }, 'Dungeon Ticket'),
             // Fishing Rods and other Pokémon unlockers
-            new KeyItem(KeyItemType.Fishing_rod, 'The best fishing rod for catching wild water Pokémon',
-                () => App.game.statistics.routeKills[Region.kanto][6]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Fishing Rod'),
+            new LevelableKeyItem(KeyItemType.Fishing_rod, [
+                new KeyItemLevel('Allows you to encounter some common Pokémon that live in the water', () => App.game.statistics.routeKills[Region.kanto][6]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter more rare Pokémon that live in the water', () => MapHelper.accessToTown('Fuchsia City')),
+            ], undefined, undefined, 'Fishing Rod'),
+
             new KeyItem(KeyItemType.HM03_surf, 'Can be used for crossing water.', undefined, undefined, undefined, 'HM03 Surf'),
             new KeyItem(KeyItemType.TM02_headbutt, 'Can be used to knock wild Pokémon from trees. Warning, may cause concussion.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Ilex Forest')]() > 0,
@@ -109,6 +113,13 @@ export default class KeyItems implements Feature {
             return false;
         }
         return this.itemList[item].isUnlocked();
+    }
+
+    hasKeyItemLevel(item: KeyItemType, level: number): boolean {
+        if (this.itemList[item] === undefined) {
+            return false;
+        }
+        return this.itemList[item].isUnlocked() && this.itemList[item] instanceof LevelableKeyItem && (this.itemList[item] as LevelableKeyItem).level >= level;
     }
 
     gainKeyItem(item: KeyItemType, silent = false): void {
