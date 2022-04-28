@@ -5,6 +5,22 @@ const HatcheryHelperSkills = [
     'cost',
 ];
 
+const HatcheryHelperCalcHatchBonus = (hatched) => Math.min(50, Math.floor(Math.sqrt(hatched / 50) * 10) / 10);
+
+const HatcheryHelperMinBonusMap: Record<number, number> = {};
+// Generate our bonus amounts map
+(() => {
+    let bonus = -1;
+    for (let hatched = 0; bonus < 50; hatched++) {
+        const b = HatcheryHelperCalcHatchBonus(hatched);
+        if (b > bonus) {
+            HatcheryHelperMinBonusMap[b] = hatched;
+            bonus = b;
+        }
+    }
+})();
+
+
 class HatcheryHelper {
     public trainerSprite = 0;
     public hired: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
@@ -15,8 +31,8 @@ class HatcheryHelper {
     public hatchBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
     public stepEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
     public attackEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
-    public nextBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
     public prevBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
+    public nextBonus: KnockoutObservable<number> = ko.observable(1).extend({ numeric: 0 });
     // public level: number;
     // public experience: number;
 
@@ -48,11 +64,11 @@ class HatcheryHelper {
     }
 
     updateBonus(): void {
-        this.hatchBonus(Math.min(50, Math.floor(Math.sqrt(this.hatched() / 50) * 10) / 10));
+        this.hatchBonus(HatcheryHelperCalcHatchBonus(this.hatched()));
         this.stepEfficiency(this.stepEfficiencyBase + this.hatchBonus());
         this.attackEfficiency(this.attackEfficiencyBase + this.hatchBonus());
-        this.prevBonus(Math.min(this.hatched(), Math.floor(Math.pow(this.hatchBonus(), 2) * 50) + (this.hatchBonus() < 1 ? 1 : 0)));
-        this.nextBonus(Math.floor(Math.pow(this.hatchBonus() + 0.1, 2) * 50) + (this.hatchBonus() < 0.9 ? 1 : 0));
+        this.prevBonus(HatcheryHelperMinBonusMap[this.hatchBonus()] || 0);
+        this.nextBonus(HatcheryHelperMinBonusMap[((this.hatchBonus() * 10) + 1) / 10] || 1);
     }
 
     isUnlocked(): boolean {
