@@ -147,7 +147,39 @@ class PartyPokemon implements Saveable {
     }
 
     public giveHeldItem = (heldItem: HeldItem): void => {
-        if (this.heldItem() && this.heldItem().displayName == heldItem.displayName) {
+        if (!this.heldItem() || heldItem.name != this.heldItem().name) {
+            if (heldItem && !heldItem.canUse(this)) {
+                Notifier.notify({
+                    message: `This pokémon cannot use ${heldItem.displayName}.`,
+                    type: NotificationConstants.NotificationOption.warning,
+                });
+                return;
+            }
+            if (player.amountOfItem(heldItem.name) < 1) {
+                Notifier.notify({
+                    message: `You don't have any ${heldItem.displayName} left.`,
+                    type: NotificationConstants.NotificationOption.warning,
+                });
+                return;
+            }
+            if (App.game.party.caughtPokemon.some(p => p.heldItem() && p.heldItem().name == heldItem.name)) {
+                Notifier.notify({
+                    message: 'Only one of each held items can be used.',
+                    type: NotificationConstants.NotificationOption.warning,
+                });
+                return;
+            }
+
+            if (App.game.party.caughtPokemon.filter(p => p.heldItem()).length >= 6) {
+                Notifier.notify({
+                    message: 'Only 6 pokemons can hold items at a time.',
+                    type: NotificationConstants.NotificationOption.warning,
+                });
+                return;
+            }
+        }
+
+        if (this.heldItem()) {
             Notifier.confirm({
                 title: 'Remove held item',
                 message: 'Held items are one time use only.\nRemoved items will be lost.\nAre you sure you want to remove it?',
@@ -155,42 +187,21 @@ class PartyPokemon implements Saveable {
                 type: NotificationConstants.NotificationOption.warning,
             }).then((confirmed) => {
                 if (confirmed) {
-                    this.heldItem(undefined);
+                    this.addOrRemoveHeldItem(heldItem);
                 }
             });
-
-            return;
+        } else { // Notifier.confirm is async
+            this.addOrRemoveHeldItem(heldItem);
         }
 
-        if (player.amountOfItem(heldItem.name) < 1) {
-            Notifier.notify({
-                message: `You don't have any ${heldItem.displayName} left.`,
-                type: NotificationConstants.NotificationOption.warning,
-            });
-            return;
+    }
+    private addOrRemoveHeldItem(heldItem: HeldItem) {
+        if (this.heldItem() && this.heldItem().name == heldItem.name) {
+            this.heldItem(undefined);
+        } else {
+            player.loseItem(heldItem.name, 1);
+            this.heldItem(heldItem);
         }
-
-        if (App.game.party.caughtPokemon.some(p => p.heldItem() && p.heldItem().name == heldItem.name)) {
-            Notifier.notify({
-                message: 'Only one of each held items can be used.',
-                type: NotificationConstants.NotificationOption.warning,
-            });
-            return;
-        }
-
-        if (App.game.party.caughtPokemon.filter(p => p.heldItem()).length >= 6) {
-            Notifier.notify({
-                message: 'Only 6 pokemons can hold items at a time.',
-                type: NotificationConstants.NotificationOption.warning,
-            });
-            return;
-        }
-
-        if (this.heldItem()) {
-            player.gainItem(this.heldItem().name, 1);
-        }
-        player.loseItem(heldItem.name, 1);
-        this.heldItem(heldItem);
     }
 
     public fromJSON(json: Record<string, any>): void {
