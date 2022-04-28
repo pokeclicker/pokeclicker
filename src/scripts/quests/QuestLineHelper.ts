@@ -562,7 +562,14 @@ class QuestLineHelper {
         const meltanDefeatHau15 = new CustomQuest(15, 0, 'Defeat Champion Hau 10 times.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Hau')]());
         meltanQuestLine.addQuest(meltanDefeatHau15);
 
-        // Ultima can put Rainbow Rocket stuff here
+        // Rainbow Rocket @ Aether Foundation, series of one-time battles
+        // Giovanni: Claydol, Bruxish, Hypno
+        // Team Aqua Archie: Mightyena, Crobat, Muk, Sharpedo, Kyogre
+        // Team Magma Maxie: Mightyena, Crobat, Weezing, Camerupt, Groudon
+        // Team Galactic Cyrus: Houndoom, Honchkrow, Crobat, Weavile, Dialga, Palkia
+        // Team Flare Lysandre: Mienshao, Pyroar, Honchkrow, Gyarados, Xerneas, Yveltal
+        // Team Plasma Ghetsis: Cofagrigus, Bouffalant, Bisharp, Hydreigon, Zekrom, Reshiram
+        // Giovanni: Dugtrio, Nidoking, Nidoqueen, Rhyperior, Mewtwo
 
         Routes.getRoutesByRegion(GameConstants.Region.alola).forEach(route => {
             route.pokemon.land.push('Meltan');
