@@ -1159,4 +1159,4 @@ export const RegionalStarters = [
     [650, 653, 656], // Kalos
     [722, 725, 728], // Alola
     [810, 813, 816], // Galar
-]
+];
