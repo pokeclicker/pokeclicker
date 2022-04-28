@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="1">
  <tileset firstgid="1" source="tiles_FRLG.tsx"/>
  <tileset firstgid="1317" source="tiles_Advanced.tsx"/>
+ <tileset firstgid="9301" source="no-bg.tsx"/>
  <layer id="2" name="Water Dark" width="100" height="60" tintcolor="#c8c8c8">
   <data encoding="base64" compression="zstd">
    KLUv/WDAXGUAACBcAQAAAQC53bsjAg==
@@ -9,17 +10,22 @@
  </layer>
  <layer id="14" name="Land" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXG0FANAAqQkAp6SjJQWsCQAAsAmfCaAJsKuxCa8AAEGggKvWAAMSiRaoDQHMluXiI3VIGnXKaqzGpZoMJnA7VsXyL45tlaZevZuk+wuWRCETJ7/P8oETaZP6HAhB2/MUrgTlqT6iO3a17YqqjevaCle77/8P10Z/nRyetj1tZeBW9tZNUr2DvTRqHC4ujQqHg0uTOughtk+puQ5wXrQ0D/7xTULN4E6bUDs7dIcohn9s
+   KLUv/WDAXIUMACQDAKkJAKekoyUFrAkAALAJq58Jsa+gCaOkCayxry0tLa+hvAOppDIOMw7ZDdoNJQWhq6mAlqCQO2twgiIiweC4DYUBflNmfPpHo8M4GbXeuO9QdRv69MghsTWKW14tl0Rn0+sgZMZMRgZRD+AmHuA9TMqAKjsngTB0uQf2ayAVm6u6lXmI4/892uEKEPAsHXw7pUSQIQ4ej44f+n1x9H5VrlVntlFhfLARpM6XQJ9x64d0aS54hJnLT8dJvCupgN+f6RgF1NWMHhz5Pvw0ybSkDeGa0hxINzVZTF3NJv2e82FEdpkRozUDI6KMucTWJvgQ2J1YKrMJoxS3COIkP/XbkfpreY2pKlNgm4yKY3nghKhPAhX4LxUfGdSPCtbnyV8ZLDP1R+h++tF0x8lV4Z+Mulm6fiw9GRzgy6HwsR/P4rnCpicTN3iD6Eg+LiJZ/n9z21SuJoenbW9l7eBWfNVNRhWDe2mqycWNk4Yqh1zctKlPh2X3AZ0rBs+rVvP4j28S1YPptBV10w71EMXwgw0=
   </data>
  </layer>
- <layer id="15" name="Decoration" width="100" height="60">
+ <layer id="15" name="Decoration Tier 1" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXHUGAOQCABAGAAASBgARGAYAABoZEAcGAAAiICErBQAALAUAMQUAADI5BQAAOhAQCBEHIUmgkC0XAzCDCRNLCg8NWRFp1TftrS//Xai8CylvYPWNo3rxxDjljSPiqoZ06EXtPF/y3baozj1E3cxT5RJpgjeIm3mizpVQE7xfwY2PpHI8huvl11Gh86jTeWqm561YhcyLCnSTVKKDbpKKDnKshs3T/V337rsK95Hq0XWvVIFV2Sqs7amWcfKrMFz9ct4C2MNuGKW6nC9QfQTA6D0J
+   KLUv/WDAXB0LAAKFEh+gNel/AAAAAAAAAPD+cEMsCZ+RNcm2Nilsx2qthVoKhQ6PhIHg+TrfZlXJF/keuVzD91iRGXgEUI+T9OjwNSj6ErkwX4Vd45sHaKBgTWkaA2ACIhKIIJU65UIP4ORKExtklfw+5Ni+jywFavk/UPYJRpDtGnUyK3PBiFWxQCsl+l6rTkbOitVztqK4reKk7EtxlJCKpRj6Vju/L5sDImosQwbCoBginkQU371Mbl+U0pg0angG9VbMfCovKSeYYE6XZDEfk0YMZFAQ2oBFwjNP1FwJNcH79iISSpDxkWqOR8I8qHYcyUqfoRKMWOUB6TqUaf0BU/1nP2XSkca8lPaoKKUVQdU/R+kLTld8UPvClMrf6SsgxB0ZtSDTjUT9R7RxduAmV/9NB90l6mAiiVFfq/5z7hkvMNzH1dPrXpFqwOps19bvXWechGoYQfW+vIPao24YQW1fugcMhwCMXqE=
+  </data>
+ </layer>
+ <layer id="17" name="Decoration Tier 2" width="100" height="60">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXI0BALAAKwUAACwFADEFAAAyOQUAADoQBhIGCAA1jOtgh/HKgAAJiKBqxMmlakOgGi2Hd1c=
   </data>
  </layer>
  <layer id="10" name="Routes" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXJUFANQCACAAAAAEAAAAIQACAAAAAQAAAAMARQUAAEYFAABHBQA9OgAAAAUfAB4eOzwCLqCATWXjwIKLK9U8/ePHpLJA7evl/e8MNORoU1IHObApX608GqrsFGuy6ovcgEgX9Q2rLnJBJDjqJ6d2mhYE0jVVbbv5tzYV6eZpYUoBtTpdMWTUsTCREe+brLrQhRPxTa7Ot4KvPmrFqlrSim0Rdc1Mct84yFQqLn4aVJWDqMKfH7Y=
+   KLUv/WDAXL0EANQCACAAAAAEAAAAIQACAAAAAQAAAAMARQUAAEYFAABHBQA9OgAAAAUfAB4EAQU7I6BgT6VmA9ACjJESFwMVBn3jC6nOBDeJ6gnTUusj095yag3ZC3Vno/n3DRUZs1Gdqe2Uhqj+kKfoAGn7Rt/k6g8yLwHfZOr5JvjqQ91HNYbSnxeimmYyeo2DXF3i6udgVQarDn9+gQI=
   </data>
  </layer>
  <layer id="13" name="Water Routes" width="100" height="60">
@@ -34,17 +40,22 @@
  </layer>
  <layer id="11" name="Dungeons Tier 1" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXM0DADLEDReAydAYeIQ34vBJYGAG5ukxxZVOS+qrU871XM3FLMqVLOS4jIUhgXiKdxAUXvQGDwo8wgGmJw0XoLBSQOHi8tCCtcwDDagHoKqAkynMnR+p3p1e4aebXMWNLB5Tl/LSe/3oW4BVfRSWuQOcRG0u5Ej1J8CiihM=
+   KLUv/WDAXFUEAHIEEB6gJ2kM/E/eKqGqqu/bv/bxf86ttQEAAIDh1mygrqRJOSUn5HE5rkYxrsWlqARiYCi8wyNEgsc8wFugF7jHec0doCBPCotbDSADE+MBqdy3scpD2VaNZrYNVR2KtKonFsxt8JOXblIqX/HF8bqUS+/18WuAVX316u4BnLTKd60cVnEmhkUdIw==
   </data>
  </layer>
  <layer id="16" name="Dungeons Tier 2" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXN0AAGAAcA8AAG0Pbw8AAHIEAO0b2AA4/YIVLaq7Ag==
+   KLUv/WDAXH0CAMQCAHAPAABtD28PAAByvQPYAwAA2QMAANoD9AMAAPUDAAD2AxAEAAARBAAAEgQMIAADeomsB2djGhWcjWlUcG0so4JzMFLjodMXrGhRzxU=
+  </data>
+ </layer>
+ <layer id="18" name="Dungeons Tier 3" width="100" height="60">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXBUCACQCAL0DANgDAADZAwAA2gP0AwAA9QMAAPYDEAQAABEEAAASBAog8IIKHmmpB0PBNioYCralgqFgGhUGAnAM4YfPVw==
   </data>
  </layer>
  <layer id="9" name="Towns" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXH0DAIQDAF8RAABgEQAAYREAAGIRAEURAABGEQAARxEAAEhnEQAAaBEAAGkRAABqTREAAE4RAABPEQAAUBERoHCXv26Qw3JbDcXVBygJ1QA1IdTQy6PaFT9ATaAGqAnVOBRVwmmVFFIDTlLNb1RBa/BIBw==
+   KLUv/WDAXHUDAIQDAF8RAABgEQAAYREAAGIRAEURAABGEQAARxEAAEhnEQAAaBEAAGkRAABqTREAAE4RAABPEQAAUBERoHCXv26Qw3JbDX3VZyjxVIYaDyr3/qh2xc9Q46gMNZ6KW1HFf1NkAGXASar5jSpoDR7p
   </data>
  </layer>
 </map>
