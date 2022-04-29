@@ -1,4 +1,5 @@
 import { AchievementOption } from '../GameConstants';
+import QuestLineState from '../quests/QuestLineState';
 
 import Requirement from './Requirement';
 

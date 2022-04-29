@@ -21,6 +21,7 @@ import ItemType from './enums/ItemType';
 import KeyItemType from './enums/KeyItemType';
 import MulchType from './enums/MulchType';
 import PlotStage from './enums/PlotStage';
+import QuestLineState from './quests/QuestLineState';
 // end enums
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
@@ -132,6 +133,7 @@ Object.assign(<any>window, {
     KeyItemType,
     MulchType,
     PlotStage,
+    QuestLineState,
     BooleanSetting,
     RangeSetting,
     Setting,
