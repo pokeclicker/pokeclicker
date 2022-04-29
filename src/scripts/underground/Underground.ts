@@ -12,6 +12,9 @@ class Underground implements Feature {
     public static energyTick: KnockoutObservable<number> = ko.observable(60);
     public static counter = 0;
 
+    public static dailyDealsTaken: Array<KnockoutObservable<number>> = [ko.observable(0),ko.observable(0),ko.observable(0),ko.observable(0),ko.observable(0)]; //There is a better way to do this, I just can't be bothered
+    public dealDate = new Date();
+
     public static sortDirection = -1;
     public static lastPropSort = 'none';
 
@@ -436,6 +439,14 @@ class Underground implements Feature {
         }
         this.energy = json['energy'] || 0;
 
+        const deals = json['deals'];
+        if(deals && this.dealDate.toDateString() == new Date().toDateString()){
+          console.log("old");
+          console.log(deals);
+          Underground.dailyDealsTaken = deals.map(deal => ko.observable(deal));
+        }
+        DailyDeal.generateDeals(this.getDailyDealsMax(), new Date());
+
         const mine = json['mine'];
         if (mine) {
             Mine.loadSavedMine(mine);
@@ -455,6 +466,8 @@ class Underground implements Feature {
         undergroundSave['upgrades'] = upgradesSave;
         undergroundSave['energy'] = this.energy;
         undergroundSave['mine'] = Mine.save();
+        undergroundSave['deals'] = Underground.dailyDealsTaken.map(deals => deals());
+        this.dealDate = new Date();
         return undergroundSave;
     }
 

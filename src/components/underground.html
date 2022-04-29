@@ -186,7 +186,7 @@
                                             </button>
                                             <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !DailyDeal.canUse($index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             </button>
-                                            <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
+                                            <div class="dropdown-menu" data-bind="foreach: [1, 5, 10, 25]">
                                                 <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data"></button>
                                             </div>
                                         </div>

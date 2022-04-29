@@ -5,6 +5,7 @@ class DailyDeal {
     public item2: UndergroundItem;
     public amount1: number;
     public amount2: number;
+    public static maxDeals = GameConstants.UNDERGROUND_MAX_DAILY_DEALS;
 
     public static list: KnockoutObservableArray<DailyDeal> = ko.observableArray();
 
@@ -87,6 +88,9 @@ class DailyDeal {
 
     public static canUse(i: number): boolean {
         const deal = DailyDeal.list.peek()[i];
+        if(Underground.dailyDealsTaken[i]() >= this.maxDeals){
+          return false;
+        }
         const amount = player.getUndergroundItemAmount(deal.item1.id);
         return amount >= deal.amount1;
     }
@@ -96,10 +100,11 @@ class DailyDeal {
         const item1Index = player.mineInventoryIndex(deal.item1.id);
         if (DailyDeal.canUse(i)) {
             const amt = player.mineInventory()[item1Index].amount();
-            const maxTrades = Math.floor(amt / deal.amount1);
+            const maxTrades = Math.min(this.maxDeals - Underground.dailyDealsTaken[i](), Math.floor(amt / deal.amount1));
             tradeTimes = Math.min(tradeTimes, maxTrades);
             player.mineInventory()[item1Index].amount(amt - (deal.amount1 * tradeTimes));
             Underground.gainMineItem(deal.item2.id, deal.amount2 * tradeTimes);
+            GameHelper.incrementObservable(Underground.dailyDealsTaken[i], tradeTimes);
             GameHelper.incrementObservable(App.game.statistics.undergroundDailyDealTrades, tradeTimes);
             Underground.sortMineItems(Underground.lastPropSort, false);
         }

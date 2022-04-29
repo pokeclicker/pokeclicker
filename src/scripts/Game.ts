@@ -91,7 +91,6 @@ class Game {
 
         const now = new Date();
         SeededDateRand.seedWithDate(now);
-        DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
         BerryDeal.generateDeals(now);
         Weather.generateWeather(now);
         RoamingPokemonList.generateIncreasedChanceRoutes(now);

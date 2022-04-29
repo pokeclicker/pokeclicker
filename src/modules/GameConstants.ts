@@ -221,6 +221,9 @@ export const QUEST_CLICKS_PER_SECOND = 5;
 
 export const QUESTS_PER_SET = 10;
 
+// Underground
+export const UNDERGROUND_MAX_DAILY_DEALS = 25;
+
 /**
  * idle: The game is not doing anything, the battle view isn't shown
  * paused: The battle view is shown, but there are no game ticks
