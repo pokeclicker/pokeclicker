@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.9.2"></script>
+    <script src="scripts/modules.min.js?v=0.9.3"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.9.2"></script>
+    <script src="scripts/script.min.js?v=0.9.3"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.9.2" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.9.3" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -445,7 +445,7 @@
                         <hr/>
 
                         <div class="row justify-content-sm-center" >
-                            <div class="row col-lg-10 col-md-12 offset-md-0 col-sm-12 offset-sm-0"
+                            <div class="row col-lg-11 offset-md-0"
                                 data-bind="foreach: PokemonHelper.getPokemonsWithEvolution(GameConstants.StoneType[ItemHandler.stoneSelected()])">
                                 <div class="col-md-6 col-sm-10 col-lg-4 offset-sm-1 offset-md-0 offset-md-0 breedingListItem">
                                     <button class="btn btn-secondary smallButton list-group-item-action" style="padding-right:15px"
@@ -717,13 +717,15 @@
       <p data-bind="visible: App.game.challenges.list.disableBattleItems.active()" class="bg-danger my-0">
           Battle Items are disabled.
       </p>
+      <!-- Battle Items -->
       <table class="table table-bordered m-0">
         <tbody>
-          <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
-            <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data](),trigger:'hover',placement:'top',animation:false}"></td>
-          </tr>
-          <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
-            <td class="p-0" data-bind="attr: {
+          <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem'))">
+            <tr data-bind="foreach: $data">
+                 <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data](),trigger:'hover',placement:'top',animation:false}"></td>
+            </tr>
+            <tr data-bind="foreach: $data">
+                 <td class="p-0" data-bind="attr: {
                                 disabled: !player.itemList[$data]()
                             },
                             css: {
@@ -743,18 +745,73 @@
                 <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
 
             </td>
-          </tr>
-          <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
-            <td class="text-light p-0">
+            </tr>
+            <tr data-bind="foreach: $data">
+                <td class="text-light p-0">
               <!-- ko if: EffectEngineRunner.getEffect($data) > 0 -->
                 <code data-bind="text: player.effectTimer[$data](),tooltip: {title:GameConstants.formatSecondsToTime(player.effectList[$data]()),trigger:'hover',placement:'bottom',html:true}"></code>
               <!-- /ko -->
-            </td>
-          </tr>
+                </td>
+            </tr>
+          </tbody>
         </tbody>
       </table>
     </div>
+    <div class="card-header p-0" data-toggle="collapse" href="#fluteItemContainerBody" data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
+      <span>Flutes</span>
+    </div>
+    <div id="fluteItemContainerBody" class="card-body p-0 show">
+      <p data-bind="visible: App.game.challenges.list.disableBattleItems.active() || App.game.challenges.list.disableGems.active()" class="bg-danger my-0">
+          Flutes are disabled.
+      </p>
+      <!-- Flutes -->
+      <table class="table table-bordered m-0" data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
+        <tbody>
+          <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'FluteItem'))">
+            <tr data-bind="foreach: $data">
+                 <td class="p-0" data-bind="attr: {
+                                disabled: !player.itemList[$data]()
+                            },
+                            css: {
+                                'bg-primary': FluteEffectRunner.getEffect($data) > 30,
+                                'bg-warning': FluteEffectRunner.getEffect($data) <= 30 && FluteEffectRunner.getEffect($data) > 0,
+                                'bg-secondary': !FluteEffectRunner.isActive($data)(),
+                            },
+                            style: {
+                                'opacity': player.itemList[$data]() || FluteEffectRunner.isActive($data)() ? '1' : '0.1'
+                            },
+                            event: {
+                                click: function(){ItemHandler.useItem($data)}
+                            },
+                            tooltip: {
+                              title: ItemList[$data].displayName + '<br/>' + ItemList[$data].getDescription() + '<br/>' + 'Consumes: ' + ItemList[$data].gemTypes[0] + ', ' + ItemList[$data].gemTypes[1] + ', and ' + ItemList[$data].gemTypes[2] + ' Gems',
+                              trigger: 'hover',
+                              placement:'bottom',
+                              html: true
+                            }">
+                <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
 
+            </td>
+            </tr>
+            <tr data-bind="foreach: $data">
+                <td class="text-light p-0">
+              <!-- ko if: FluteEffectRunner.getEffect($data) > 0 -->
+                <code data-bind="
+                text: player.effectTimer[$data](),
+                tooltip: {
+                  title: FluteEffectRunner.fluteTooltip($data),
+                  trigger:'hover',
+                  placement:'bottom',
+                  html:true
+                }">
+                </code>
+              <!-- /ko -->
+                </td>
+            </tr>
+          </tbody>
+        </tbody>
+      </table>
+    </div>
 </div>
 
 
@@ -920,23 +977,43 @@
                                      App.game.gameState === GameConstants.GameState.gym ||
                                      App.game.gameState == GameConstants.GameState.battleFrontier)">
                     <table width="100%">
-                        <tr>
-                            <td width="33.33%">
+                        <tr class="row">
+                            <td class="col">
                                 <span style="display: inline; position: relative;">
                                     <img title="Money" src="assets/images/currency/money.svg" height="25px">
                                     <span id="animateCurrency-money" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.money]()) : App.game.wallet.currencies[GameConstants.Currency.money]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
-                            <td width="33.33%">
+                            <td class="col">
                                 <span style="display: inline; position: relative;">
                                     <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px">
                                     <span id="animateCurrency-dungeonToken" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.dungeonToken]()) : App.game.wallet.currencies[GameConstants.Currency.dungeonToken]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
-                            <td width="33.33%">
+                            <td class="col">
                                 <span style="display: inline; position: relative;">
                                     <img title="Quest points" src="assets/images/currency/questPoint.svg" height="25px">
                                     <span id="animateCurrency-questPoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.questPoint]()) : App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">0</span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="row" data-bind="visible: Settings.getSetting('currencyMainDisplayExtended').observableValue()">
+                            <td class="col">
+                                <span style="display: inline; position: relative;">
+                                    <img title="Quest points" src="assets/images/currency/farmPoint.svg" height="25px">
+                                    <span id="animateCurrency-farmPoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.farmPoint]()) : App.game.wallet.currencies[GameConstants.Currency.farmPoint]().toLocaleString('en-US')">0</span>
+                                </span>
+                            </td>
+                            <td class="col">
+                                <span style="display: inline; position: relative;">
+                                    <img title="Quest points" src="assets/images/currency/diamond.svg" height="25px">
+                                    <span id="animateCurrency-diamond" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.diamond]()) : App.game.wallet.currencies[GameConstants.Currency.diamond]().toLocaleString('en-US')">0</span>
+                                </span>
+                            </td>
+                            <td class="col">
+                                <span style="display: inline; position: relative;">
+                                    <img title="Quest points" src="assets/images/currency/battlePoint.svg" height="25px">
+                                    <span id="animateCurrency-battlePoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.battlePoint]()) : App.game.wallet.currencies[GameConstants.Currency.battlePoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                         </tr>
@@ -1241,17 +1318,9 @@
     <div class="row justify-content-center no-gutters">
         <div class="col no-gutters">
             <button type="button" class="btn btn-outline-info" style="float: right;"
-            data-bind="visible: player.town().gym || player.town().shop, tooltip: { title: 'In towns you can battle Gym Leaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
-            <button type="button" class="btn btn-outline-info" style="float: right;"
             data-bind="visible: player.town() instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'), tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
             <h2 class="pageItemTitle">
               <knockout data-bind="text: player.town().name">Town Name</knockout>
-              <knockout data-bind="if: player.town().gym && QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">
-                  <knockout class="left" data-bind="using: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town().name)]()">
-                      <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
-                      <knockout data-bind="visible: player.town().gym">clears</knockout>
-                  </knockout>
-              </knockout>
               <knockout data-bind="if: player.town() instanceof DungeonTown && player.town().dungeon">
                   <!-- ko if: QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->
                   <knockout class="right" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]()">
@@ -1276,66 +1345,35 @@
         </div>
     </div>
     <div class="row no-gutters">
-       <div class="col-3 no-gutters">
-           <div class="list-group" data-bind="if: player.town() instanceof PokemonLeague">
-                <!-- ko foreach: player.town().gymList -->
-                    <div class="btn-group btn-block mt-0">
-                        <button data-bind="text: $data.leaderName.replace(/\d/g,''),
-                                        disable: !Gym.isUnlocked($data),
-                                        click: function() {GymRunner.startGym($data)},
-                                        attr: { class: Gym.calculateCssClass($data)}">
-                            E4 Leader
-                        </button>
-                        <button class="btn btn-info p-0 btn-gym-auto-restart"
-                            data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex($data.town)]() >= 100,
-                            tooltip: { html: true, title: `Auto restart Elite 4 fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${($data.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive money for clearing the gym</i>`, trigger: 'hover', placement:'right' },
-                            click: () => GymRunner.startGym($data, true)">
-                            ↻
-                        </button>
-                    </div>
-                <!-- /ko -->
-           </div>
+       <div class="col-4 no-gutters">
            <div class="list-group">
-                <div class="btn-group btn-block" data-bind="if: player.town().gym">
-                    <button data-bind="attr: { class: Gym.calculateCssClass(player.town().gym) }"
-                            onclick="GymRunner.startGym(player.town().gym)">
-                        Gym
-                    </button>
-                    <button class="btn btn-info p-0 btn-gym-auto-restart" data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town().gym.town)]() >= 100, tooltip: { html: true, title: `Auto restart Gym fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${(player.town().gym.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive money for clearing the gym</i>`, trigger: 'hover', placement:'right' }"
-                            onclick="GymRunner.startGym(player.town().gym, true)">
-                        ↻
-                    </button>
-                </div>
-                <!-- ko foreach: player.town().shops -->
-                    <a class="btn btn-secondary" href="#shopModal" data-bind="attr: { href: $data.href }, event: { click: () => ShopHandler.showShop($data) }, text: $data.name" data-toggle="modal">Shop</a>
-                <!-- /ko -->
-                <button class="btn btn-warning"
-                        href="#nextRegionModal" data-toggle="modal"
-                        data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name), text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">
-                    Travel To Next Region
-                </button>
-                <button class="btn btn-info" onclick="MapHelper.openShipModal();" data-bind="visible: player.highestRegion() > 0 && GameConstants.DockTowns.includes(player.town().name)">
-                    Dock
-                </button>
                 <button class="btn btn-secondary p-0"
                         onclick="DungeonRunner.initializeDungeon(player.town().dungeon)"
                         data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon, attr: { class: player.town().dungeon && App.game.wallet.currencies[GameConstants.Currency.dungeonToken]() >= player.town().dungeon.tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0' }">
                     Start<br/>
                         <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town().dungeon.tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
                 </button>
-                <button class="btn btn-secondary"
-                        onclick="MapHelper.moveToTown(player.town().dungeon.name)"
-                        data-bind="visible: player.town().dungeon && (!(player.town() instanceof DungeonTown) && player.town() instanceof Town), if: player.town().dungeon">
-                        <span data-bind="text: player.town().dungeon.name"></span>
-                </button>
-                <button class="btn btn-primary"
-                        onclick="App.game.battleFrontier.enter()"
-                        data-bind="visible: player.town().name == 'Battle Frontier'">
-                    Enter Battle Frontier
-                </button>
+
+                <!-- ko foreach: player.town().content -->
+                <div class="btn-group btn-block" style="margin-top: 0px;">
+                    <button data-bind="
+                        class: $data.cssClass() + ($data.isUnlocked() ? '' : ' disabled'),
+                        text: $data.text(),
+                        visible: $data.isVisible(),
+                        click: $data.protectedOnclick,
+                        tooltip: ($data.tooltip || $data.clears() ? { title: $data.clears() != undefined ? `Total Clears: ${$data.clears()}` : $data.tooltip, trigger: 'hover', placement: 'left' } : undefined)
+                        "></button>
+                    <!-- ko if: $data instanceof Gym -->
+                    <button class="btn btn-info p-0 btn-gym-auto-restart" data-bind="
+                        tooltip: { html: true, title: `Auto restart Gym fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${($data.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive money for clearing the gym</i>`, trigger: 'hover', placement:'right' },
+                        click: () => GymRunner.startGym($data, true),
+                        visible: $data.isUnlocked() && App.game.statistics.gymsDefeated[GameConstants.getGymIndex($data.town)]() >= 100">↻</button>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
            </div>
        </div>
-       <div class="col-6"></div>
+       <div class="col-5"></div>
        <div class="col-3 no-gutters">
            <div class="list-group" data-bind="foreach: player.town().npcs">
                <!-- ko if: $data.isVisible() -->
@@ -6690,6 +6728,97 @@
         ">
 </rect>
 
+    <!--Mt. Coronet-->
+    
+
+<rect class="city"
+    data-town="Mt. Coronet" 
+    x="640"
+    y="352"
+    height="64"
+    width="96"
+    data-bind="click:function(){MapHelper.moveToTown('Mt. Coronet')},
+        attr: { class: MapHelper.calculateTownCssClass('Mt. Coronet') }">
+</rect>
+
+    <!--Mt. Coronet Extension-->
+    
+
+<rect class="city"
+    data-town="Mt. Coronet" 
+    x="704"
+    y="416"
+    height="16"
+    width="32"
+    data-bind="click:function(){MapHelper.moveToTown('Mt. Coronet')},
+        attr: { class: MapHelper.calculateTownCssClass('Mt. Coronet') }">
+</rect>
+
+    <!--Mt. Coronet Extension-->
+    
+
+<rect class="city"
+    data-town="Mt. Coronet" 
+    x="640"
+    y="288"
+    height="64"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Mt. Coronet')},
+        attr: { class: MapHelper.calculateTownCssClass('Mt. Coronet') }">
+</rect>
+
+    <!--Mt. Coronet Extension-->
+    
+
+<rect class="city"
+    data-town="Mt. Coronet" 
+    x="640"
+    y="496"
+    height="96"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Mt. Coronet')},
+        attr: { class: MapHelper.calculateTownCssClass('Mt. Coronet') }">
+</rect>
+
+    <!--Mt. Coronet Extension-->
+    
+
+<rect class="city"
+    data-town="Mt. Coronet" 
+    x="624"
+    y="416"
+    height="80"
+    width="80"
+    data-bind="click:function(){MapHelper.moveToTown('Mt. Coronet')},
+        attr: { class: MapHelper.calculateTownCssClass('Mt. Coronet') }">
+</rect>
+
+    <!--Mt. Coronet Extension-->
+    
+
+<rect class="city"
+    data-town="Mt. Coronet" 
+    x="592"
+    y="528"
+    height="128"
+    width="48"
+    data-bind="click:function(){MapHelper.moveToTown('Mt. Coronet')},
+        attr: { class: MapHelper.calculateTownCssClass('Mt. Coronet') }">
+</rect>
+
+    <!--Mt. Coronet Extension-->
+    
+
+<rect class="city"
+    data-town="Mt. Coronet" 
+    x="640"
+    y="592"
+    height="64"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Mt. Coronet')},
+        attr: { class: MapHelper.calculateTownCssClass('Mt. Coronet') }">
+</rect>
+
     <!--Hearthome City-->
     
 
@@ -6997,96 +7126,6 @@
         attr: { class: MapHelper.calculateTownCssClass('Wayward Cave') }">
 </rect>
 
-    <!--Mt. Coronet North-->
-    
-
-<rect class="city"
-    data-town="Mt. Coronet North" 
-    x="640"
-    y="352"
-    height="64"
-    width="96"
-    data-bind="click:function(){MapHelper.moveToTown('Mt. Coronet North')},
-        attr: { class: MapHelper.calculateTownCssClass('Mt. Coronet North') }">
-</rect>
-
-    <!--Mt. Coronet North extra-->
-    
-
-<rect class="city"
-    data-town="Mt. Coronet North" 
-    x="704"
-    y="416"
-    height="16"
-    width="32"
-    data-bind="click:function(){MapHelper.moveToTown('Mt. Coronet North')},
-        attr: { class: MapHelper.calculateTownCssClass('Mt. Coronet North') }">
-</rect>
-
-    <!--Mt. Coronet North extra 2-->
-    
-
-<rect class="city"
-    data-town="Mt. Coronet North" 
-    x="640"
-    y="288"
-    height="64"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Mt. Coronet North')},
-        attr: { class: MapHelper.calculateTownCssClass('Mt. Coronet North') }">
-</rect>
-
-    <!--Spear Pillar-->
-    
-
-<rect class="city"
-    data-town="Spear Pillar" 
-    x="640"
-    y="496"
-    height="96"
-    width="64"
-    data-bind="click:function(){MapHelper.moveToTown('Spear Pillar')},
-        attr: { class: MapHelper.calculateTownCssClass('Spear Pillar') }">
-</rect>
-
-    <!--Hall of Origin-->
-    
-
-<rect class="city"
-    data-town="Hall of Origin" 
-    x="624"
-    y="416"
-    height="80"
-    width="80"
-    data-bind="click:function(){MapHelper.moveToTown('Hall of Origin')},
-        attr: { class: MapHelper.calculateTownCssClass('Hall of Origin') }">
-</rect>
-
-    <!--Mt. Coronet South-->
-    
-
-<rect class="city"
-    data-town="Mt. Coronet South" 
-    x="592"
-    y="528"
-    height="128"
-    width="48"
-    data-bind="click:function(){MapHelper.moveToTown('Mt. Coronet South')},
-        attr: { class: MapHelper.calculateTownCssClass('Mt. Coronet South') }">
-</rect>
-
-    <!--Mt. Coronet South extra-->
-    
-
-<rect class="city"
-    data-town="Mt. Coronet South" 
-    x="640"
-    y="592"
-    height="64"
-    width="16"
-    data-bind="click:function(){MapHelper.moveToTown('Mt. Coronet South')},
-        attr: { class: MapHelper.calculateTownCssClass('Mt. Coronet South') }">
-</rect>
     <!--Solaceon Ruins-->
     
 
@@ -12539,6 +12578,96 @@
         ">
 </rect>
 
+        <!--Melemele Woods-->
+        
+
+<rect class="city"
+    data-town="Melemele Woods" 
+    x="448"
+    y="208"
+    height="48"
+    width="224"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Melemele Woods')},
+        attr: { class: MapHelper.calculateTownCssClass('Melemele Woods') },
+        ">
+</rect>
+
+        <!--Melemele Woods Extension-->
+        
+
+<rect class="city"
+    data-town="Melemele Woods" 
+    x="464"
+    y="160"
+    height="48"
+    width="208"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Melemele Woods')},
+        attr: { class: MapHelper.calculateTownCssClass('Melemele Woods') },
+        ">
+</rect>
+
+        <!--Melemele Woods Extension-->
+        
+
+<rect class="city"
+    data-town="Melemele Woods" 
+    x="528"
+    y="128"
+    height="32"
+    width="128"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Melemele Woods')},
+        attr: { class: MapHelper.calculateTownCssClass('Melemele Woods') },
+        ">
+</rect>
+
+        <!--Melemele Woods Extension-->
+        
+
+<rect class="city"
+    data-town="Melemele Woods" 
+    x="656"
+    y="144"
+    height="16"
+    width="48"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Melemele Woods')},
+        attr: { class: MapHelper.calculateTownCssClass('Melemele Woods') },
+        ">
+</rect>
+
+        <!--Melemele Woods Extension-->
+        
+
+<rect class="city"
+    data-town="Melemele Woods" 
+    x="672"
+    y="160"
+    height="16"
+    width="48"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Melemele Woods')},
+        attr: { class: MapHelper.calculateTownCssClass('Melemele Woods') },
+        ">
+</rect>
+
+        <!--Melemele Woods Extension-->
+        
+
+<rect class="city"
+    data-town="Melemele Woods" 
+    x="496"
+    y="144"
+    height="16"
+    width="32"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Melemele Woods')},
+        attr: { class: MapHelper.calculateTownCssClass('Melemele Woods') },
+        ">
+</rect>
+
         <!--Roadside Motel-->
         
 
@@ -12608,84 +12737,6 @@
     width="64"
     data-bind="click:function(){MapHelper.moveToTown('Hau\&#39;oli Cemetery')},
         attr: { class: MapHelper.calculateTownCssClass('Hau\&#39;oli Cemetery') }">
-</rect>
-
-        <!-- Verdant Cavern-->
-        
-
-<rect class="city"
-    data-town="Verdant Cavern" 
-    x="464"
-    y="160"
-    height="48"
-    width="80"
-    data-bind="click:function(){MapHelper.moveToTown('Verdant Cavern')},
-        attr: { class: MapHelper.calculateTownCssClass('Verdant Cavern') }">
-</rect>
-
-        <!--Melemele Meadow-->
-        
-
-<rect class="city"
-    data-town="Melemele Meadow" 
-    x="608"
-    y="144"
-    height="32"
-    width="96"
-    data-bind="click:function(){MapHelper.moveToTown('Melemele Meadow')},
-        attr: { class: MapHelper.calculateTownCssClass('Melemele Meadow') }">
-</rect>
-
-        <!--Melemele Meadow extension-->
-        
-
-<rect class="city"
-    data-town="Melemele Meadow" 
-    x="704"
-    y="160"
-    height="16"
-    width="16"
-    data-bind="click:function(){MapHelper.moveToTown('Melemele Meadow')},
-        attr: { class: MapHelper.calculateTownCssClass('Melemele Meadow') }">
-</rect>
-
-        <!--Melemele Meadow extension-->
-        
-
-<rect class="city"
-    data-town="Melemele Meadow" 
-    x="576"
-    y="128"
-    height="32"
-    width="32"
-    data-bind="click:function(){MapHelper.moveToTown('Melemele Meadow')},
-        attr: { class: MapHelper.calculateTownCssClass('Melemele Meadow') }">
-</rect>
-
-        <!--Melemele Meadow extension-->
-        
-
-<rect class="city"
-    data-town="Melemele Meadow" 
-    x="560"
-    y="128"
-    height="16"
-    width="16"
-    data-bind="click:function(){MapHelper.moveToTown('Melemele Meadow')},
-        attr: { class: MapHelper.calculateTownCssClass('Melemele Meadow') }">
-</rect>
-
-        <!--Melemele Meadow extension-->
-        
-
-<rect class="city"
-    data-town="Melemele Meadow" 
-    x="608"
-    y="128"
-    height="16"
-    width="16"
-    data-bind="click:function(){MapHelper.moveToTown('Melemele Meadow')},
-        attr: { class: MapHelper.calculateTownCssClass('Melemele Meadow') }">
 </rect>
 
         <!--Seaward Cave-->
@@ -12922,19 +12973,6 @@
     width="16"
     data-bind="click:function(){MapHelper.moveToTown('Ten Carat Hill')},
         attr: { class: MapHelper.calculateTownCssClass('Ten Carat Hill') }">
-</rect>
-
-        <!--Ruins of Conflict-->
-        
-
-<rect class="city"
-    data-town="Ruins of Conflict" 
-    x="560"
-    y="192"
-    height="64"
-    width="80"
-    data-bind="click:function(){MapHelper.moveToTown('Ruins of Conflict')},
-        attr: { class: MapHelper.calculateTownCssClass('Ruins of Conflict') }">
 </rect>
 
         <!-- ------------------ -->
@@ -16860,6 +16898,17 @@
             <div data-bind="visible: $index() > App.game.breeding.eggSlots" style="margin-top: 20px;">
                 <img src="assets/images/breeding/lock.svg">
             </div>
+            <div data-bind="if: App.game.breeding.hatcheryHelpers.hired()[$index()]">
+              <div data-bind="with: App.game.breeding.hatcheryHelpers.hired()[$index()]">
+                <img class="hatcheryHelperImage" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }, 
+                  tooltip: {
+                    title: $data.tooltip(),
+                    trigger: 'hover',
+                    placement:'top',
+                    html: true,
+                  }" />
+              </div>
+            </div>
             <!-- ko ifnot: $data.isNone() -->
             <div style="margin-top: 20px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
                 <!-- ko if: $data.type == EggType.Fossil -->
@@ -17130,7 +17179,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 data-bind="tooltip: { title: 'As you earn achievements, you gain up to 100% (per region) more Click Attack, Money, Dungeon Tokens and Experience from all sources.', trigger: 'hover', placement:'right' }">Achievements Bonus: <u class="text-primary" data-bind="text: AchievementHandler.achievementBonusPercent()"></u></h5>
+                <h5 data-bind="tooltip: { title: 'As you earn achievements, you gain up to 100% (per region) more Click Attack, Money, Dungeon Tokens, Flute effects and Experience from all sources.', trigger: 'hover', placement:'right' }">Achievements Bonus: <u class="text-primary" data-bind="text: AchievementHandler.achievementBonusPercent()"></u></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -17506,6 +17555,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
                                 <tr data-bind="visible: Object.values(App.game.challenges.list).filter(c => c.active()).length > 0, template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideChallengeRelatedModules')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayReduced')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayExtended')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGymGoAnimation')}"></tr>
                                 <tr><th colspan="2">Map Colors</th></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
@@ -18383,9 +18433,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 <li class="nav-item"><a class="nav-link active" href="#breeding-pokemon" data-toggle="tab">Pokémon</a></li>
                 <li class="nav-item"><a class="nav-link" href="#breeding-eggs" data-toggle="tab">Eggs</a></li>
                 <li class="nav-item"><a class="nav-link" href="#breeding-fossils" data-toggle="tab">Fossils</a></li>
+                <li class="nav-item" data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()"><a class="nav-link" href="#breeding-helpers" data-toggle="tab">Helpers (BETA)</a></li>
+                <li class="nav-item"><a class="nav-link" href="#breeding-help" data-toggle="tab">Help</a></li>
             </ul>
 
-            <p class="bg-danger my-0" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
+            <p class="bg-warning my-0" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
                 You don't have any free eggslots.
             </p>
             <p class="bg-danger my-0" data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots()">
@@ -18530,9 +18582,151 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     </ul>
                     <!-- /ko -->
                 </div>
+
+                <div class="tab-pane" id="breeding-helpers">
+                    <div class="row m-0 justify-content-center" data-bind="foreach: App.game.breeding.hatcheryHelpers.available()" style="max-width: 100%;">
+                        <div class="card text-left col-md-4 col-sm-6 col-xs-12 p-0">
+                            <h5 class="card-header">
+                                <knockout data-bind="text: $data.name">Name</knockout>
+                                <img class="float-right pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                            </h5>
+                            <div class="card-body p-0">
+                                <table class="table table-striped table-hover table-bordered table-sm m-0">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2" class="text-center text-light bg-dark">
+                                                <h5 class="m-0">Information</h5>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-left align-middle">Cost:</td>
+                                            <td class="text-right" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.cost.amount, 'currency': $data.cost.currency, 'reducedThreshold': 1e10}}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Step Efficiency:</td>
+                                            <td class="text-right">
+                                                <knockout data-bind="text: `${$data.stepEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left text-nowrap">Attack Efficiency:</td>
+                                            <td class="text-right">
+                                                <knockout data-bind="text: `${$data.attackEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left text-nowrap">Hatched:</td>
+                                            <td class="text-right">
+                                                <knockout data-bind="text: $data.hatched().toLocaleString('en-US')">0</knockout>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left text-nowrap">Bonus to Efficiency:</td>
+                                            <td class="text-right">
+                                                <knockout data-bind="text: `+ ${$data.hatchBonus().toLocaleString('en-US')}%`">0%</knockout>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="p-0">
+                                                <div class="progress hitpoints" style="height: 25px;">
+                                                    <!-- ko if: $data.hatchBonus() < 50 -->
+                                                    <div class="progress-bar bg-primary" role="progressbar"
+                                                        data-bind="attr:{ style: 'width:' + (($data.hatched() - $data.prevBonus()) / ($data.nextBonus() - $data.prevBonus())) * 100 + '%' }"
+                                                        aria-valuemin="0" aria-valuemax="100">
+                                                        <span data-bind="text: `${$data.hatchBonus()}%`" class="text-left pl-1">0%</span>
+                                                        <span data-bind="text: ($data.hatched() - $data.prevBonus()) + ' / ' + ($data.nextBonus() - $data.prevBonus()) + ' hatches'"></span>
+                                                        <span data-bind="text: `${($data.hatchBonus() + 0.1).toFixed(1)}%`" class="text-right pr-1">0.1%</span>
+                                                    </div>
+                                                    <!-- /ko -->
+                                                    <!-- ko if: $data.hatchBonus() >= 50 -->
+                                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 100%">
+                                                        <span>MAX BONUS!</span>
+                                                    </div>
+                                                    <!-- /ko -->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2" class="text-center text-light bg-dark">
+                                                <h5 class="m-0">Settings</h5>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-left align-middle">Sort:</td>
+                                            <td class="text-center align-middle">
+                                                <div class="input-group input-group-sm">
+                                                    <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions), optionsValue: 'value', optionsText: i => GameConstants.camelCaseToString(i.name), value: $data.sortOption"></select>
+                                                    <div class="input-group-append bg-primary text-light">
+                                                        <label class="clickable m-0 px-2" style="font-size: 20px;" data-bind="attr: { for: 'hatcheryHelperSortDirection' + $index() }, text: $data.sortDirection() ? '⥄' : '⥂'">⥂</label>
+                                                        <input class="hidden" type="checkbox"
+                                                            data-bind="attr: { id: 'hatcheryHelperSortDirection' + $index() }, checked:  $data.sortDirection" />
+                                                    </div>
+                                                </div>
+                                                
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button class="btn btn-block" data-bind="attr: { disabled: !$data.hired() && !App.game.breeding.hatcheryHelpers.canHire() }, css: { 'btn-success': !$data.hired(), 'btn-danger': $data.hired() }, click: () => !$data.hired() ? $data.hire() : $data.fire(), text: !$data.hired() ? 'Hire!' : 'Fire!'">Hire!</button>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <p class="card-text">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="breeding-help" class="tab-pane fade col-10 offset-1">
+                    <h4><u>Hatchery</u></h4>
+                    <p>In the hatchery you can leave Pokémon here to gain an egg.</p>
+
+                    <p>Once an egg hatches your Pokémon will gain a bonus of 25% of their base attack.</p>
+
+                    <p class="text-warning"><i>NOTE: Base attack is the value your Pokémon originally has at level 100 before any breeding buffs.</i></p>
+
+                    <p>Any Proteins applied to Pokémon will also give them an additional 1 attack per hatch.</p>
+
+                    <p>There is no limit to breeding, this will be your main source of attack gain.</p>
+
+                    <h4><u>Queue</u></h4>
+                    <p>You will gain access to a queue in the hatchery once you reach the Johto region and more slots for each new region after that.</p>
+
+                    <h4><u>Hatchery Helpers (BETA)</u></h4>
+                    <p><i>(unlocked after hatching 100 total Pokémon)</i></p>
+                    <p>Hatchery Helpers will help out by automatically breeding your Pokémon for you.</p>
+                    <p class="text-danger"><i>NOTE: This is a <strong>beta</strong> feature, things will likely change in the future, feel free to post any feedback/bugs in the <a href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>.</i></p>
+                    <p>The cost displayed is how much you will be charged per hatch.</p>
+                    <p>They will only breed Pokémon based on your current Hatchery filters.</p>
+                    <p>All of the Helpers have different step efficiencies and will hatch eggs faster or slower depending on their value.</p>
+                    <p>They each also have different attack efficiencies which will determine how much attack you gain compared to manually hatching the pokemon yourself.</p>
+                    <p>These efficiencies will gain a bonus based on how many times you've used the helper to hatch eggs.</p>
+                    <p><i>More Hatchery Helpers can be unlocked through shops and hatching more Pokémon</i></p>
+                </div>
+
             </div>
        </div>
        <div class="modal-footer">
+            <knockout class="mr-auto" data-bind="foreach: App.game.breeding.hatcheryHelpers.hired()">
+                <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` },
+                tooltip: {
+                    title: $data.tooltip(),
+                    trigger: 'hover',
+                    placement:'top',
+                    html: true,
+                }">
+            </knockout>
            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
        </div>
    </div>
@@ -18627,6 +18821,9 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player.mineInventory()}">
                             </tbody>
                         </table>
+                        <button type="button" class="btn btn-success btn-block" onclick="App.game.underground.openUndergroundSellAllModal()">
+                            <span>Sell all treasures</span>
+                        </button>
                     </div>
                     <div data-bind="ifnot:player.hasMineItems()">
                         You don't have any treasures yet...
@@ -18753,9 +18950,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     }">
                     <span>Total net worth: <b><span data-bind="text: Underground.getDiamondNetWorth().toLocaleString('en-US')">-</span></b></span>
                     <img src='assets/images/underground/diamond.svg' width="20px'">
-                </button>
-                <button type="button" class="btn btn-success" onclick="App.game.underground.openUndergroundSellAllModal()">
-                    <span>Sell all treasures</span>
                 </button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
@@ -20011,6 +20205,83 @@ aria-labelledby="badgeCaseModalLabel">
                 <!-- ko if: !shopVisible() -->
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 <!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Shard Master Modal-->
+<div class="modal fade noselect" id="gemMasterModal" tabindex="-1" role="dialog"
+     aria-labelledby="gemMasterModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4>Gem Master</h4>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
+            </div>
+            <div>
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#gemMasterTrade">Trades</a></li>
+                </ul>
+            </div>
+            <div class="modal-body tab-content">
+                <div id="gemMasterTrade" class="tab-pane fade in active show">
+                    <div class="table-responsive" id="gemDealsBody">
+                        <table class="table table-sm table-hover table-striped m-0 text-left">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Inv</th>
+                                    <th></th>
+                                    <th>Gems</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Item</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind='foreach: GemDeal.getDeals(player.region)'>
+                                <!-- ko foreach: gems -->
+                                <tr>
+                                    <td data-bind="text: App.game.gems.gemWallet[$data.gemType]()"></td>
+                                    <td><img height="24px" data-bind="attr: {src: Gems.image($data.gemType) }"></img></td>
+                                    <td data-bind="text: amount + ' x ' + PokemonType[$data.gemType]"></td>
+                                    <!-- ko if: $index() === 0 -->
+                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">→</td>
+                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">
+                                          <img class='mineInventoryItem' data-bind="attr: {
+                                            src: $parent.item.itemType.image
+                                          },
+                                          tooltip: {
+                                            title: ItemList[$parent.item.itemType.name].getDescription(),
+                                            trigger: 'hover',
+                                            placement:'bottom',
+                                            html: true
+                                          }">
+                                    </td>
+                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.gems.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
+                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">
+                                        <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
+                                            <button class='btn btn-success btn-block' data-bind='click: function(){GemDeal.use(player.region, $parentContext.$index(), tradeAmount())}, css: { disabled: !GemDeal.canUse(player.region, $parentContext.$index()) }'>
+                                                <knockout data-bind="text: !ItemList[$parent.item.itemType.name].isSoldOut() ? 'Trade' : 'Sold out'"></knockout>
+                                            </button>
+                                            <button type="button" data-bind="visible: ItemList[$parent.item.itemType.name].maxAmount > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'>
+                                            </button>
+                                            <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
+                                                <button class="dropdown-item" type="button" data-bind="visible: ItemList[$parents[1].item.itemType.name].maxAmount > 1, click: function(){tradeAmount($data)}, text: $data"></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <!-- /ko -->
+                                </tr>
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
