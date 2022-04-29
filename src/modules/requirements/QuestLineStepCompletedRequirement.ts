@@ -13,7 +13,7 @@ export default class QuestLineStepCompletedRequirement extends Requirement {
     }
 
     public getProgress(): number {
-        return App.game.quests.getQuestLine(this.questLineName).quests()[this.questIndex].isCompleted() ? 1 : 0;
+        return (App.game.quests.getQuestLine(this.questLineName).state() === 2 || App.game.quests.getQuestLine(this.questLineName).curQuest() > this.questIndex) ? 1 : 0;
     }
 
     public hint(): string {
