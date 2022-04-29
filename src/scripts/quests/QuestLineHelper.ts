@@ -477,7 +477,8 @@ class QuestLineHelper {
     public static createBillSeviiQuestLine() {
         const billSeviiQuestLine = new QuestLine('Bill\'s Errand', 'Bill has asked you to journey to the Sevii islands with him to set up a digital connection to mainland Kanto.');
 
-        //const talktoCelio1 = new CustomQuest -- Get Meteorite from Game Corner Owner on 2 island. Unlocks Two Island and Cape Brink.
+        const talktoCelio1 = new TalkToNPCQuest(OneIslandCelio2, 'Get Meteorite from Game Corner Owner on 2 island.', () => undefined/*player.gainItem('Meteorite', 1)*/);
+        billSeviiQuestLine.addQuest(talktoCelio1);
 
         //const talktoGameCornerOwner1 = new CustomQuest -- Rescure Game Corner Owner's Daughter. Unlocks Three Island and Bond Bridge.
 
