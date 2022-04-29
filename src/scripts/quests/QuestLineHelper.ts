@@ -480,13 +480,13 @@ class QuestLineHelper {
         const talktoCelio1 = new TalkToNPCQuest(OneIslandCelio1, 'Use the Subregional Travel button at the top of the map to travel to the Sevii Islands and speak with Celio on One Island.');
         billSeviiQuestLine.addQuest(talktoCelio1);
 
-        const talktoGameCornerOwner1 = new TalkToNPCQuest(GameCornerOwner1, 'Ask the Game Corner owner on Two Island about the meteorite.');
+        const talktoGameCornerOwner1 = new TalkToNPCQuest(TwoIslandGameCornerOwner1, 'Ask the Game Corner owner on Two Island about the meteorite.');
         billSeviiQuestLine.addQuest(talktoGameCornerOwner1);
 
         const clearBerryForest = new CustomQuest(1, 0, 'Find Lostelle. Clear Berry Forest.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Berry Forest')]());
         billSeviiQuestLine.addQuest(clearBerryForest);
 
-        const talktoGameCornerOwner2 = new TalkToNPCQuest(GameCornerOwner2, 'Lostelle has been found. Return to the Game Corner owner on Two Island.');
+        const talktoGameCornerOwner2 = new TalkToNPCQuest(TwoIslandGameCornerOwner2, 'Lostelle has been found. Return to the Game Corner owner on Two Island.');
         billSeviiQuestLine.addQuest(talktoGameCornerOwner2);
 
         const talktoCelio2 = new TalkToNPCQuest(OneIslandCelio2, 'Deliver the meteorite to Celio on One Island.', () => App.game.wallet.gainQuestPoints(1000, true));
