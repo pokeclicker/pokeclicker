@@ -440,10 +440,10 @@ class Underground implements Feature {
         this.energy = json['energy'] || 0;
 
         const deals = json['deals'];
-        if(deals && this.dealDate.toDateString() == new Date().toDateString()){
-          console.log("old");
-          console.log(deals);
-          Underground.dailyDealsTaken = deals.map(deal => ko.observable(deal));
+        if (deals && this.dealDate.toDateString() == new Date().toDateString()) {
+            console.log('old');
+            console.log(deals);
+            Underground.dailyDealsTaken = deals.map(deal => ko.observable(deal));
         }
         DailyDeal.generateDeals(this.getDailyDealsMax(), new Date());
 

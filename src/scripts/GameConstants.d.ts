@@ -133,7 +133,7 @@ namespace GameConstants {
     declare const QUESTS_PER_SET: number;
     declare const DNA_ITEM_CHANCE: number;
     declare const UNDERGROUND_MAX_DAILY_DEALS: number;
-    
+
     declare enum GameState {
         idle,
         paused,

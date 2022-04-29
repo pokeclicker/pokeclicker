@@ -88,8 +88,8 @@ class DailyDeal {
 
     public static canUse(i: number): boolean {
         const deal = DailyDeal.list.peek()[i];
-        if(Underground.dailyDealsTaken[i]() >= this.maxDeals){
-          return false;
+        if (Underground.dailyDealsTaken[i]() >= this.maxDeals) {
+            return false;
         }
         const amount = player.getUndergroundItemAmount(deal.item1.id);
         return amount >= deal.amount1;
