@@ -6,8 +6,8 @@ export default class QuestLineStepCompletedRequirement extends Requirement {
     questLineName: string;
     questIndex: number;
 
-    constructor(questLineName: string, questIndex: number) {
-        super(1, AchievementOption.equal);
+    constructor(questLineName: string, questIndex: number, option = AchievementOption.equal) {
+        super(1, option);
         this.questLineName = questLineName;
         this.questIndex = questIndex;
     }

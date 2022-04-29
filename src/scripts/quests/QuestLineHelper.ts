@@ -477,17 +477,20 @@ class QuestLineHelper {
     public static createBillSeviiQuestLine() {
         const billSeviiQuestLine = new QuestLine('Bill\'s Errand', 'Bill has asked you to journey to the Sevii islands with him to set up a digital connection to mainland Kanto.');
 
-        const talktoCelio1 = new TalkToNPCQuest(OneIslandCelio2, 'Get Meteorite from Game Corner Owner on 2 island.', () => undefined/*player.gainItem('Meteorite', 1)*/);
+        const talktoCelio1 = new TalkToNPCQuest(OneIslandCelio1, 'Use the Subregional Travel button at the top of the map to travel to the Sevii Islands and speak with Celio on One Island.');
         billSeviiQuestLine.addQuest(talktoCelio1);
 
-        //const talktoGameCornerOwner1 = new CustomQuest -- Rescure Game Corner Owner's Daughter. Unlocks Three Island and Bond Bridge.
+        const talktoGameCornerOwner1 = new TalkToNPCQuest(GameCornerOwner1, 'Ask the Game Corner owner on Two Island about the meteorite.');
+        billSeviiQuestLine.addQuest(talktoGameCornerOwner1);
 
-        const clearBerryForest = new CustomQuest(1, 1000, 'Find Lostelle. Clear Berry Forest.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Berry Forest')]());
+        const clearBerryForest = new CustomQuest(1, 0, 'Find Lostelle. Clear Berry Forest.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Berry Forest')]());
         billSeviiQuestLine.addQuest(clearBerryForest);
 
-        //const TalktoGameCornerOwner2 = new CustomQuest -- Obtain Meteorite.
+        const talktoGameCornerOwner2 = new TalkToNPCQuest(GameCornerOwner2, 'Lostelle has been found. Return to the Game Corner owner on Two Island.');
+        billSeviiQuestLine.addQuest(talktoGameCornerOwner2);
 
-        //const talktoCelio2 = new CustomQuest -- Deliver Meteorite, connection established, questline complete.
+        const talktoCelio2 = new TalkToNPCQuest(OneIslandCelio2, 'Deliver the meteorite to Celio on One Island.', () => App.game.wallet.gainQuestPoints(1000, true));
+        billSeviiQuestLine.addQuest(talktoCelio2);
 
         App.game.quests.questLines().push(billSeviiQuestLine);
     }

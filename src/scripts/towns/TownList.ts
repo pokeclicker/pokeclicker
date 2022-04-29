@@ -2,6 +2,7 @@
 ///<reference path="../../declarations/requirements/RouteKillRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 
 const TownList: { [name: string]: Town } = {};
 
@@ -167,25 +168,25 @@ const OneIslandCelio1 = new NPC ('Celio', [
     'I don\'t even have time to go and pick up an important package. A meteorite, found by the owner of the game corner on Two Island. It contains important materials for my machine.',
     'You seem like the adventuring type. Tell you what. How about Bill stay here with me to work on this machine, and you go fetch my Meteorite for me.',
 ],
-{ requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Berry Forest'), GameConstants.AchievementOption.less ) });
+{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 1, GameConstants.AchievementOption.less ) });
 const OneIslandCelio2 = new NPC ('Celio', [
     'Back already? That didn\'t take very long.',
-    'What? It did take long? You went on a whole rescue mission? Seems like I lost track of the time while tinkering with Bill. It\'s been a lot of fun.',
-    'I\'m glad to hear Lostelle is all right. You can hand the meteorite to me. Bill, thank you for your assistance. I\'ll take it from here. I can see that your friend is eager to get back to Kanto and challenge the Pokémon League.',
+    'What? It did take long? You went on a whole rescue mission? Seems like I lost track of time while working on my machine with Bill. It\'s been a lot of fun.',
+    'I\'m glad to hear Lostelle is all right. You can hand the meteorite to me. Bill, thank you for your assistance, I\'ll take it from here. I can see that your friend is eager to get back to Kanto and challenge the Pokémon League.',
     'Thank you both very much.',
 ],
-{ requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Berry Forest')) });
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 3), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less )]) });
 const GameCornerOwner1 = new NPC ('Game Corner Owner', [
     'Hello stranger. I\'m afraid the Game Corner is currently closed.',
     'What? The meteorite for Celio? Yes, I can give that to you. But I need you to do something for me first.',
     'My daughter Lostelle is missing. She likes to pick berries in the Berry Forest on Three Island. She does it all the time. But this time she hasn\'t come back. Please go find her.',
 ],
-{ requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Berry Forest'), GameConstants.AchievementOption.less ) });
+{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 2, GameConstants.AchievementOption.less ) });
 const GameCornerOwner2 = new NPC ('Game Corner Owner', [
     'My sweet Lostelle! I\'m so glad you\'re all right.',
     'Thank you very much kind stranger. Please take the Meteorite.',
 ],
-{ requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Berry Forest')) });
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 2), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less)]) });
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
@@ -319,7 +320,7 @@ TownList['Two Island'] = new Town(
     GameConstants.Region.kanto,
     [],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Volcano)],
+        requirements: [new QuestLineStepCompletedRequirement('Bill\'s Errand', 0)],
         npcs: [GameCornerOwner1, GameCornerOwner2],
     }
 );
@@ -328,7 +329,7 @@ TownList['Three Island'] = new Town(
     GameConstants.Region.kanto,
     [],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Volcano)],
+        requirements: [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
     }
 );
 

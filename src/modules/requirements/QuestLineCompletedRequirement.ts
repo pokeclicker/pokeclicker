@@ -5,8 +5,8 @@ import Requirement from './Requirement';
 export default class QuestLineCompletedRequirement extends Requirement {
     questLineName: string;
 
-    constructor(questLineName: string) {
-        super(1, AchievementOption.equal);
+    constructor(questLineName: string, option = AchievementOption.equal) {
+        super(1, option);
         this.questLineName = questLineName;
     }
 

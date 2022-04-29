@@ -726,7 +726,7 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
         },
 
-        '0.9.3': ({ playerData, saveData }) => {
+        '0.9.4': ({ playerData, saveData }) => {
             // Add Mt. Ember Summit
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 8);
             // Add Berry Forest
