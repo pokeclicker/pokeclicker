@@ -4,7 +4,7 @@ class BattleFrontierRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
     static stage: KnockoutObservable<number> = ko.observable(1); // Start at stage 1
-    public static highest: KnockoutObservable<number> = ko.observable(App.game.statistics.battleFrontierHighestStageCompleted());
+    public static highest: KnockoutObservable<number> = ko.observable(1);
 
     public static counter = 0;
 
@@ -26,6 +26,7 @@ class BattleFrontierRunner {
     public static start() {
         this.started(true);
         this.stage(1);
+        this.highest(App.game.statistics.battleFrontierHighestStageCompleted())
         BattleFrontierBattle.pokemonIndex(0);
         BattleFrontierBattle.generateNewEnemy();
         BattleFrontierRunner.timeLeft(GameConstants.GYM_TIME);
