@@ -1693,8 +1693,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 118', GameConstants.Region.kalos, 118,
     new RoutePokemon({
-        land: ['Zigzagoon', 'Linoone', 'Wingull', 'Kecleon'],
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Carvanha', 'Sharpedo'],
+        land: ['Raticate', 'Aipom', 'Linoone', 'Wingull', 'Pelipper', 'Electrike' 'Kecleon', 'Luxio'],
+        water: ['Tentacool', 'Magikarp', 'Wingull', 'Pelipper', 'Carvanha', 'Sharpedo'],
     }),
     [
         new OneFromManyRequirement([
@@ -1708,23 +1708,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 119', GameConstants.Region.kalos, 119,
     new RoutePokemon({
-        land: ['Zigzagoon', 'Linoone', 'Oddish', 'Tropius', 'Kecleon'],
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Carvanha'],
-        special:
-      [
-          new SpecialRoutePokemon(['Castform (sunny)'], new MultiRequirement([
-              new ObtainedPokemonRequirement(pokemonMap.Castform),
-              new WeatherRequirement([WeatherType.Sunny]),
-          ])),
-          new SpecialRoutePokemon(['Castform (rainy)'], new MultiRequirement([
-              new ObtainedPokemonRequirement(pokemonMap.Castform),
-              new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm]),
-          ])),
-          new SpecialRoutePokemon(['Castform (snowy)'], new MultiRequirement([
-              new ObtainedPokemonRequirement(pokemonMap.Castform),
-              new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail, WeatherType.Fog]),
-          ])),
-      ],
+        land: ['Oddish', 'Gloom', 'Linoone', 'Kecleon', 'Tropius'],
+        water: ['Tentacool', 'Magikarp', 'Wingull', 'Pelipper', 'Carvanha', 'Sharpedo', 'Feebas'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 118)],
     21.1,
@@ -1733,8 +1718,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 120', GameConstants.Region.kalos, 120,
     new RoutePokemon({
-        land: ['Surskit', 'Poochyena', 'Mightyena', 'Oddish', 'Marill', 'Absol', 'Kecleon', 'Seedot'],
-        water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
+        land: ['Oddish', 'Gloom', 'Marill', 'Linoone', 'Kecleon', 'Tropius', 'Absol'],
+        water: ['Tentacool', 'Magikarp', 'Azumarill', 'Surskit', 'Masquerain', 'Barboach'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 119)],
     21.1,
@@ -1743,8 +1728,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 121', GameConstants.Region.kalos, 121,
     new RoutePokemon({
-        land: ['Poochyena', 'Shuppet', 'Mightyena', 'Oddish', 'Gloom', 'Wingull', 'Kecleon'],
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+        land: ['Gloom', 'Hypno', 'Aipom', 'Linoone', 'Wingull', 'Pelipper', 'Kecleon', 'Shuppet', 'Elgyem'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 120)],
     21.1,
@@ -1753,7 +1737,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 122', GameConstants.Region.kalos, 122,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+        water: ['Tentacool', 'Magikarp', 'Wingull', 'Pelipper', 'Wailmer', 'Finneon', 'Frillish', 'Alomomola'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 121)],
     21.1,
@@ -1762,8 +1746,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 123', GameConstants.Region.kalos, 123,
     new RoutePokemon({
-        land: ['Poochyena', 'Shuppet', 'Mightyena', 'Oddish', 'Gloom', 'Wingull', 'Kecleon'],
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+        land: ['Gloom', 'Linoone', 'Wingull', 'Pelipper', 'Kecleon', 'Shuppet'],
+        water: ['Tentacool', 'Magikarp', 'Marill', 'Azumarill', 'Surskit', 'Masquerain', 'Corphish'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 122)],
     21.1,
@@ -1772,7 +1756,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 124', GameConstants.Region.kalos, 124,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Clamperl', 'Relicanth'],
+        water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Chinchou', 'Lanturn', 'Pelipper', 'Wailmer', 'Clamperl', 'Relicanth', 'Finneon', 'Frillish', 'Alomomola'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 121)],
     21.1,
@@ -1781,7 +1765,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 125', GameConstants.Region.kalos, 125,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+        water: ['Tentacool', 'Tentacruel', 'Seel', 'Magikarp', 'Pelipper', 'Wailmer', 'Finneon', 'Frillish'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 124)],
     21.1,
@@ -1790,7 +1774,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 126', GameConstants.Region.kalos, 126,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Clamperl', 'Relicanth'],
+        water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Chinchou', 'Lanturn', 'Pelipper', 'Wailmer', 'Clamperl', 'Relicanth', 'Finneon', 'Frillish', 'Alomomola'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 124)],
     21.1,
@@ -1799,7 +1783,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 127', GameConstants.Region.kalos, 127,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+        ['Tentacool', 'Tentacruel', 'Magikarp', 'Pelipper', 'Wailmer', 'Finneon', 'Frillish', 'Alomomola'],
     }),
     [
         new OneFromManyRequirement([
@@ -1813,7 +1797,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 128', GameConstants.Region.kalos, 128,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Luvdisc', 'Wailmer', 'Corsola'],
+        water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Chinchou', 'Lanturn', 'Corsola', 'Pelipper', 'Wailmer', 'Clamperl', 'Relicanth', 'Luvdisc', 'Finneon', 'Frillish', 'Alomomola'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 127)],
     21.1,
@@ -1822,7 +1806,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 129', GameConstants.Region.kalos, 129,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Wailord', 'Magikarp', 'Wailmer', 'Sharpedo'],
+        water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Chinchou', 'Lanturn', 'Pelipper', 'Wailmer', 'Clamperl', 'Relicanth', 'Finneon', 'Frillish', 'Alomomola'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 128)],
     21.1,
@@ -1832,7 +1816,7 @@ Routes.add(new RegionRoute(
     'Delta Route 130', GameConstants.Region.kalos, 130,
     new RoutePokemon({
         land: ['Wynaut'],
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+        water: ['Tentacool', 'Tentacruel', 'Horsea', 'Seadra', 'Magikarp', 'Chinchou', 'Lanturn', 'Pelipper', 'Wailmer', 'Clamperl', 'Relicanth', 'Finneon', 'Frillish', 'Alomomola'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 129)],
     21.1,
@@ -1841,7 +1825,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 131', GameConstants.Region.kalos, 131,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+        water: ['Tentacool', 'Tentacruel', 'Horsea', 'Seadra', 'Magikarp', 'Pelipper', 'Wailmer', 'Finneon', 'Frillish', 'Alomomola'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 130)],
     21.1,
@@ -1850,7 +1834,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 132', GameConstants.Region.kalos, 132,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Horsea'],
+        water: ['Tentacool', 'Tentacruel', 'Horsea', 'Seadra', 'Magikarp', 'Pelipper', 'Wailmer', 'Finneon', 'Frillish', 'Alomomola'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 131)],
     21.1,
@@ -1859,7 +1843,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 133', GameConstants.Region.kalos, 133,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Horsea'],
+        water: ['Tentacool', 'Tentacruel', 'Horsea', 'Seadra', 'Magikarp', 'Pelipper', 'Wailmer', 'Finneon', 'Frillish', 'Alomomola'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 132)],
     21.1,
@@ -1868,7 +1852,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 134', GameConstants.Region.kalos, 134,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Horsea'],
+        water: ['Tentacool', 'Tentacruel', 'Horsea', 'Seadra', 'Magikarp', 'Pelipper', 'Wailmer', 'Finneon', 'Frillish', 'Alomomola'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 133)],
     21.1,
