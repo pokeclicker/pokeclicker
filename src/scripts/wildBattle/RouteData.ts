@@ -1679,7 +1679,7 @@ Routes.add(new RegionRoute(
     'Delta Route 117', GameConstants.Region.kalos, 117,
     new RoutePokemon({
         land: ['Rattata', 'Oddish', 'Marill', 'Zigzagoon', 'Surskit', 'Volbeat', 'Illumise', 'Roselia', 'Tympole', 'Deerling (Spring)'],
-        water: ['Goldeen', 'Magikarp', 'Marill', 'Azumarill', 'Surskit', 'Masquerain', 'Corphish'],
+        water: ['Goldeen', 'Magikarp', 'Marill', 'Azumarill', 'Surskit', 'Masquerain', 'Corphish', 'Crawdaunt'],
     }),
     [
         new OneFromManyRequirement([
@@ -1719,7 +1719,7 @@ Routes.add(new RegionRoute(
     'Delta Route 120', GameConstants.Region.kalos, 120,
     new RoutePokemon({
         land: ['Oddish', 'Gloom', 'Marill', 'Linoone', 'Kecleon', 'Tropius', 'Absol'],
-        water: ['Tentacool', 'Magikarp', 'Azumarill', 'Surskit', 'Masquerain', 'Barboach'],
+        water: ['Tentacool', 'Goldeen', 'Magikarp', 'Azumarill', 'Surskit', 'Masquerain', 'Barboach'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 119)],
     21.1,
@@ -1737,7 +1737,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 122', GameConstants.Region.kalos, 122,
     new RoutePokemon({
-        water: ['Tentacool', 'Magikarp', 'Wingull', 'Pelipper', 'Wailmer', 'Finneon', 'Frillish', 'Alomomola'],
+        water: ['Tentacool', 'Magikarp', 'Wingull', 'Pelipper', 'Sharpedo', 'Wailmer', 'Finneon', 'Frillish', 'Alomomola'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 121)],
     21.1,
@@ -1747,7 +1747,7 @@ Routes.add(new RegionRoute(
     'Delta Route 123', GameConstants.Region.kalos, 123,
     new RoutePokemon({
         land: ['Gloom', 'Linoone', 'Wingull', 'Pelipper', 'Kecleon', 'Shuppet'],
-        water: ['Tentacool', 'Magikarp', 'Marill', 'Azumarill', 'Surskit', 'Masquerain', 'Corphish'],
+        water: ['Tentacool', 'Magikarp', 'Marill', 'Azumarill', 'Surskit', 'Masquerain', 'Corphish', 'Crawdaunt'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 122)],
     21.1,
