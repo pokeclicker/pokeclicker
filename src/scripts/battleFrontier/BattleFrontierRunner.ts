@@ -26,7 +26,7 @@ class BattleFrontierRunner {
     public static start() {
         this.started(true);
         this.stage(1);
-        this.highest(App.game.statistics.battleFrontierHighestStageCompleted())
+        this.highest(App.game.statistics.battleFrontierHighestStageCompleted());
         BattleFrontierBattle.pokemonIndex(0);
         BattleFrontierBattle.generateNewEnemy();
         BattleFrontierRunner.timeLeft(GameConstants.GYM_TIME);
