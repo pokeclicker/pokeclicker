@@ -5793,7 +5793,7 @@ dungeonList['Delta Petalburg Woods'] = new Dungeon('Delta Petalburg Woods',
                 new GymPokemon('Wurmple', 10795422, 5),
             ], { weight: 1 }, 'Lyle'),
         new DungeonTrainer('Bug Catcher',
-            [new GymPokemon('Nincada', 10795422, 8)]
+            [new GymPokemon('Nincada', 10795422, 8)],
             { weight: 1 }, 'James'),
     ],
     [
