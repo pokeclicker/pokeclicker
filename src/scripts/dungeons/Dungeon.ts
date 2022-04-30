@@ -5834,6 +5834,10 @@ dungeonList['Delta Granite Cave'] = new Dungeon('Delta Granite Cave',
     [
         new DungeonBossPokemon('Sableye', 53977110, 20),
         new DungeonBossPokemon('Mawile', 53977110, 20),
+        new DungeonTrainer('Mega Challenge',
+            [new GymPokemon('Mega Sableye', 53977110, 50)], { weight: 1 }, undefined),
+        new DungeonTrainer('Mega Challenge',
+            [new GymPokemon('Mega Mawile', 53977110, 50)], { weight: 1 }, undefined),
     ],
     754000, 106);
 
