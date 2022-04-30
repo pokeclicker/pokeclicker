@@ -5807,6 +5807,7 @@ dungeonList['Delta Petalburg Woods'] = new Dungeon('Delta Petalburg Woods',
             { weight: 1 }, undefined),
     ],
     754000, 104);
+
 dungeonList['Delta Rusturf Tunnel'] = new Dungeon('Delta Rusturf Tunnel',
     [
         {pokemon: 'Whismur', options: { weight: 4 }},
@@ -5823,6 +5824,7 @@ dungeonList['Delta Rusturf Tunnel'] = new Dungeon('Delta Rusturf Tunnel',
     10795422,
     [new DungeonBossPokemon('Whismur', 53977110, 10)],
     754000, 116);
+
 dungeonList['Delta Granite Cave'] = new Dungeon('Delta Granite Cave',
     ['Zubat', 'Abra', 'Geodude', 'Onix', 'Makuhita', 'Nosepass', 'Aron', 'Timburr', 'Axew'],
     [
@@ -5842,6 +5844,7 @@ dungeonList['Delta Granite Cave'] = new Dungeon('Delta Granite Cave',
             { weight: 1 }, undefined),
     ],
     754000, 106);
+
 dungeonList['Delta Fiery Path'] = new Dungeon('Delta Fiery Path',
     ['Diglett', 'Machop', 'Grimer', 'Koffing', 'Slugma', 'Tyrogue', 'Numel', 'Roggenrola'],
     [
@@ -5856,6 +5859,7 @@ dungeonList['Delta Fiery Path'] = new Dungeon('Delta Fiery Path',
             { weight: 1 }, undefined),
     ],
     754000, 112);
+
 dungeonList['Delta Meteor Falls'] = new Dungeon('Delta Meteor Falls',
     [
         {pokemon: 'Clefairy', options: { weight: 1.6 }},
@@ -5900,6 +5904,7 @@ dungeonList['Delta Meteor Falls'] = new Dungeon('Delta Meteor Falls',
             { weight: 1 }, undefined),
     ],
     754000, 114);
+
 dungeonList['Delta Jagged Pass'] = new Dungeon('Delta Jagged Pass',
     [
         {pokemon: 'Mankey', options: { weight: 2.7 }},
@@ -5938,6 +5943,7 @@ dungeonList['Delta Jagged Pass'] = new Dungeon('Delta Jagged Pass',
             ], { weight: 1 }, 'Shelby', '(female)'),
     ],
     754000, 115);
+
 dungeonList['Delta New Mauville'] = new Dungeon('Delta New Mauville',
     ['Magnemite', 'Voltorb', 'Electrike', 'Manectric'],
     [
@@ -5953,6 +5959,7 @@ dungeonList['Delta New Mauville'] = new Dungeon('Delta New Mauville',
             { weight: 1 }, undefined),
     ],
     754000, 115);
+
 dungeonList['Delta Mt. Pyre'] = new Dungeon('Delta Mt. Pyre',
     [
         {pokemon: 'Vulpix', options: { weight: 4.5 }},
@@ -6017,6 +6024,7 @@ dungeonList['Delta Mt. Pyre'] = new Dungeon('Delta Mt. Pyre',
             { weight: 1 }, undefined),
     ],
     754000, 122);
+
 dungeonList['Delta Shoal Cave'] = new Dungeon('Delta Shoal Cave',
     ['Zubat', 'Golbat', 'Tentacool', 'Tentacruel', 'Dewgong', 'Magikarp', 'Delibird', 'Spheal', 'Sealeo', 'Wailmer', 'Cubchoo'],
     [
@@ -6031,6 +6039,7 @@ dungeonList['Delta Shoal Cave'] = new Dungeon('Delta Shoal Cave',
             { weight: 1 }, undefined),
     ],
     754000, 125);
+
 dungeonList['Delta Cave of Origin'] = new Dungeon('Delta Cave of Origin',
     ['Zubat', 'Golbat', 'Sableye', 'Mawile'],
     [
@@ -6041,6 +6050,7 @@ dungeonList['Delta Cave of Origin'] = new Dungeon('Delta Cave of Origin',
         new DungeonBossPokemon('Exploud', 53977110, 50),
     ],
     754000, 126);
+
 dungeonList['Delta Sky Pillar'] = new Dungeon('Delta Sky Pillar',
     ['Golbat', 'Ariados', 'Sableye', 'Mawile', 'Swablu', 'Claydol'],
     [
@@ -6055,6 +6065,7 @@ dungeonList['Delta Sky Pillar'] = new Dungeon('Delta Sky Pillar',
             { weight: 1 }, undefined),
     ],
     754000, 131);
+
 dungeonList['Delta Victory Road Hoenn'] = new Dungeon('Delta Victory Road Hoenn',
     [
         {pokemon: 'Zubat', options: { weight: 4 }},
@@ -6136,6 +6147,7 @@ dungeonList['Delta Victory Road Hoenn'] = new Dungeon('Delta Victory Road Hoenn'
             { weight: 1 }, undefined),
     ],
     754000, 128);
+
 dungeonList['Marine Cave'] = new Dungeon('Marine Cave',
     ['Zubat', 'Golbat', 'Geodude', 'Graveler', 'Slugma', 'Magcargo', 'Loudred', 'Numel', 'Camerupt', 'Torkoal', 'Roggenrola', 'Boldore'],
     [
@@ -6151,10 +6163,11 @@ dungeonList['Marine Cave'] = new Dungeon('Marine Cave',
             { weight: 1 }, undefined),
     ],
     754000, 133);
+
 dungeonList['Terra Cave'] = new Dungeon('Terra Cave',
     ['Zubat', 'Golbat', 'Geodude', 'Graveler', 'Chinchou', 'Lanturn', 'Loudred', 'Wailord', 'Finneon', 'Lumineon', 'Roggenrola', 'Boldore'],
     [
-        {loot: 'xClick', weight: 4}, 
+        {loot: 'xClick', weight: 4},
         {loot: 'Item_magnet', weight: 4},
     ],
     10795422,
