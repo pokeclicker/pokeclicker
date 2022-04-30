@@ -531,7 +531,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.hoenn]: new Set(['Cave of Origin', 'Sky Pillar', 'Sealed Chamber']),
         [Region.sinnoh]: new Set(['Spear Pillar', 'Hall of Origin', 'Stark Mountain']),
         [Region.unova]: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
-        [Region.kalos]: new Set(['Glittering Cave', 'Reflection Cave', 'Delta Cave of Origin', 'Delta Sky Pillar']),
+        [Region.kalos]: new Set(['Glittering Cave', 'Reflection Cave', 'Delta Cave of Origin', 'Delta Sky Pillar', 'Marine Cave', 'Terra Cave']),
         [Region.alola]: new Set(['Altar of the Sunne and Moone', 'Resolution Cave']),
         [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2']),
     },

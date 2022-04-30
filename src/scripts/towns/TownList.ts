@@ -2071,6 +2071,14 @@ const KiloudeConfusedHiker = new NPC('Confused Hiker', [
 const DeltaSlateportHoennReporter = new NPC('Reporter Gabby', [
     'I don\'t report on roaming Pokémon anymore. But what I can report on is that a whole bunch of strange Pokémon from other regions have moved in! I don\'t know what caused it. They are just... here now.',
 ]);
+const DeltaFallarborGemMaster = new NPC('Gem Master', [
+    'Yep. My shop\'s still open. Don\'t act surprised, I know how to run a business.',
+]);
+const DeltaSootopolisGentleman = new NPC('Gentleman', [
+    'Somehow we never figured out Exploud\'s connection to Kyogre and Groudon. There was never any reason to think they are connected in any way. We just thought they occupied the same cave for no real reason.',
+    'But now Kyogre and Groudon have not been seen in the Cave of Origin in a long time, and Exploud seems to be very upset about that. It\'s been making a lot of noise. I mean, more than usual.',
+    'Why doesn\'t Exploud just go out and look for its friends? I\'d certainly like to know where they went. Maybe it can\'t swim...',
+]);
 const DeltaPokemonLeagueHoennNobody = new NPC('Challenge the Pokémon League', [
     'But nobody came...',
 ]);
@@ -2231,7 +2239,6 @@ TownList['Delta Littleroot Town'] = new Town(
     [LittleRootTownShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 101)],
-        npcs: [LittlerootAide],
     }
 );
 TownList['Delta Oldale Town'] = new Town(
@@ -2245,7 +2252,6 @@ TownList['Delta Oldale Town'] = new Town(
                 new RouteKillRequirement(10, GameConstants.Region.kalos, 103),
             ]),
         ],
-        npcs: [OldaleTrackingScientist],
     }
 );
 TownList['Delta Petalburg City'] = new Town(
@@ -2337,7 +2343,7 @@ TownList['Delta Fallarbor Town'] = new Town(
     [FallarborTownShop, HoennFluteMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 113)],
-        npcs: [FallarborProfessorCozmo],
+        npcs: [DeltaFallarborGemMaster],
     }
 );
 TownList['Delta Fortree City'] = new Town(
@@ -2346,7 +2352,6 @@ TownList['Delta Fortree City'] = new Town(
     [FortreeCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 119)],
-        npcs: [FortreeWeatherman],
     }
 );
 TownList['Delta LilyCove City'] = new Town(
@@ -2355,7 +2360,6 @@ TownList['Delta LilyCove City'] = new Town(
     [DepartmentStoreShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 121)],
-        npcs: [BigSpender],
     }
 );
 TownList['Delta Mossdeep City'] = new Town(
@@ -2364,7 +2368,6 @@ TownList['Delta Mossdeep City'] = new Town(
     [MossdeepCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 125)],
-        npcs: [MossdeepAstronomer],
     }
 );
 TownList['Delta Pacifidlog Town'] = new Town(
@@ -2373,16 +2376,15 @@ TownList['Delta Pacifidlog Town'] = new Town(
     [PacifidlogTownShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 131)],
-        npcs: [PacifidlogDiver],
     }
 );
 TownList['Delta Sootopolis City'] = new Town(
     'Delta Sootopolis City',
     GameConstants.Region.kalos,
-    [SootopolisCityShop],
+    [SootopolisCityShop, new MoveToDungeon(dungeonList['Delta Cave of Origin'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 126)],
-        npcs: [SootopolisWallace],
+        npcs: [DeltaSootopolisGentleman],
     }
 );
 TownList['Delta Ever Grande City'] = new Town(
