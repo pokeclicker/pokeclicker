@@ -1727,7 +1727,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 118', GameConstants.Region.kalos, 118,
     new RoutePokemon({
-        land: ['Raticate', 'Aipom', 'Linoone', 'Wingull', 'Pelipper', 'Electrike' 'Kecleon', 'Luxio'],
+        land: ['Raticate', 'Aipom', 'Linoone', 'Wingull', 'Pelipper', 'Electrike', 'Kecleon', 'Luxio'],
         water: ['Tentacool', 'Magikarp', 'Wingull', 'Pelipper', 'Carvanha', 'Sharpedo'],
     }),
     [
@@ -1835,7 +1835,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 127', GameConstants.Region.kalos, 127,
     new RoutePokemon({
-        ['Tentacool', 'Tentacruel', 'Magikarp', 'Pelipper', 'Wailmer', 'Finneon', 'Frillish', 'Alomomola'],
+        water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Pelipper', 'Wailmer', 'Finneon', 'Frillish', 'Alomomola'],
     }),
     [
         new OneFromManyRequirement([

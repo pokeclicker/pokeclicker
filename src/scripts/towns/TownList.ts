@@ -2068,6 +2068,9 @@ const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
 const KiloudeConfusedHiker = new NPC('Confused Hiker', [
     'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
 ]);
+const DeltaSlateportHoennReporter = new NPC('Reporter Gabby', [
+    'I don\'t report on roaming Pokémon anymore. But what I can report on is that a whole bunch of strange Pokémon from other regions have moved in! I don\'t know what caused it. They are just... here now.',
+]);
 const DeltaPokemonLeagueHoennNobody = new NPC('Challenge the Pokémon League', [
     'But nobody came...',
 ]);
@@ -2291,7 +2294,7 @@ TownList['Delta Slateport City'] = new Town(
     [SlateportCityShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-        npcs: [SlateportHoennRoamerNPC],
+        npcs: [DeltaSlateportHoennReporter],
     }
 );
 TownList['Delta Mauville City'] = new Town(
