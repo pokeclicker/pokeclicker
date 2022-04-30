@@ -5802,7 +5802,11 @@ dungeonList['Delta Petalburg Woods'] = new Dungeon('Delta Petalburg Woods',
         {loot: 'Token_collector', weight: 3.75},
     ],
     10795422,
-    [new DungeonBossPokemon('Slakoth', 53977110, 10)],
+    [
+        new DungeonBossPokemon('Slakoth', 53977110, 10),
+        new DungeonTrainer('Mega Challenge',
+            [new GymPokemon('Mega Beedrill', 53977110, 50)], { weight: 1 }, undefined),
+    ],
     754000, 104);
 
 dungeonList['Delta Rusturf Tunnel'] = new Dungeon('Delta Rusturf Tunnel',
@@ -5848,7 +5852,11 @@ dungeonList['Delta Fiery Path'] = new Dungeon('Delta Fiery Path',
         {loot: 'Item_magnet', weight: 3.75},
     ],
     10795422,
-    [new DungeonBossPokemon('Torkoal', 53977110, 20)],
+    [
+        new DungeonBossPokemon('Torkoal', 53977110, 20),
+        new DungeonTrainer('Mega Challenge',
+            [new GymPokemon('Mega Camerupt', 53977110, 50)], { weight: 1 }, undefined),
+    ],
     754000, 112);
 
 dungeonList['Delta Meteor Falls'] = new Dungeon('Delta Meteor Falls',
@@ -5890,6 +5898,8 @@ dungeonList['Delta Meteor Falls'] = new Dungeon('Delta Meteor Falls',
                 new GymPokemon('Altaria', 26988555, 37),
                 new GymPokemon('Altaria', 26988555, 37),
             ], { weight: 1 }, 'Nicolas'),
+        new DungeonTrainer('Mega Challenge',
+            [new GymPokemon('Mega Salamence', 53977110, 50)], { weight: 1 }, undefined),
     ],
     754000, 114);
 
@@ -5934,7 +5944,7 @@ dungeonList['Delta Jagged Pass'] = new Dungeon('Delta Jagged Pass',
     754000, 115);
 
 dungeonList['Delta New Mauville'] = new Dungeon('Delta New Mauville',
-    ['Magnemite', 'Voltorb'],
+    ['Magnemite', 'Voltorb', 'Electrike', 'Manectric'],
     [
         {loot: 'Lucky_incense', weight: 4},
         {loot: 'Voltorb', weight: 3.25},
@@ -5943,6 +5953,8 @@ dungeonList['Delta New Mauville'] = new Dungeon('Delta New Mauville',
     [
         new DungeonBossPokemon('Magneton', 53977110, 20),
         new DungeonBossPokemon('Electrode', 53977110, 20),
+        new DungeonTrainer('Mega Challenge',
+            [new GymPokemon('Mega Manectric', 53977110, 50)], { weight: 1 }, undefined),
     ],
     754000, 115);
 
@@ -6006,6 +6018,8 @@ dungeonList['Delta Mt. Pyre'] = new Dungeon('Delta Mt. Pyre',
         new DungeonBossPokemon('Shuppet', 53977110, 20),
         new DungeonBossPokemon('Duskull', 53977110, 20),
         new DungeonBossPokemon('Chimecho', 53977110, 20),
+        new DungeonTrainer('Mega Challenge',
+            [new GymPokemon('Mega Banette', 53977110, 50)], { weight: 1 }, undefined),
     ],
     754000, 122);
 
@@ -6022,7 +6036,11 @@ dungeonList['Delta Shoal Cave'] = new Dungeon('Delta Shoal Cave',
         {loot: 'Heart Scale', weight: 0},
     ],
     10795422,
-    [new DungeonBossPokemon('Snorunt', 53977110, 20)],
+    [
+        new DungeonBossPokemon('Snorunt', 53977110, 20),
+        new DungeonTrainer('Mega Challenge',
+            [new GymPokemon('Mega Glalie', 53977110, 50)], { weight: 1 }, undefined),
+    ],
     754000, 125);
 
 dungeonList['Delta Cave of Origin'] = new Dungeon('Delta Cave of Origin',
@@ -6043,7 +6061,10 @@ dungeonList['Delta Sky Pillar'] = new Dungeon('Delta Sky Pillar',
     ],
     10795422,
     [
-        new DungeonBossPokemon('Dusclops', 53977110, 20),
+        new DungeonBossPokemon('Dusclops', 53977110, 50),
+        new DungeonBossPokemon('Rayquaza', 53977110, 70),
+        new DungeonTrainer('Mega Challenge',
+            [new GymPokemon('Mega Rayquaza', 53977110, 50)], { weight: 1 }, undefined),
     ],
     754000, 131);
 
@@ -6123,6 +6144,8 @@ dungeonList['Delta Victory Road Hoenn'] = new Dungeon('Delta Victory Road Hoenn'
                 new GymPokemon('Magneton', 10295422, 46),
                 new GymPokemon('Mega Gallade', 12795422, 48),
             ], { weight: 1 }, 'Wally', '(wally)'),
+        new DungeonTrainer('Mega Challenge',
+            [new GymPokemon('Mega Gallade', 53977110, 50)], { weight: 1 }, undefined),
     ],
     754000, 128);
 
@@ -6136,6 +6159,8 @@ dungeonList['Marine Cave'] = new Dungeon('Marine Cave',
     [
         new DungeonBossPokemon('Exploud', 53977110, 50),
         new DungeonBossPokemon('Kyogre', 53977110, 50),
+        new DungeonTrainer('Mega Challenge',
+            [new GymPokemon('Primal Kyogre', 53977110, 50)], { weight: 1 }, undefined),
     ],
     754000, 133);
 
@@ -6149,6 +6174,8 @@ dungeonList['Terra Cave'] = new Dungeon('Terra Cave',
     [
         new DungeonBossPokemon('Exploud', 53977110, 50),
         new DungeonBossPokemon('Groudon', 53977110, 50),
+        new DungeonTrainer('Mega Challenge',
+            [new GymPokemon('Primal Groudon', 53977110, 50)], { weight: 1 }, undefined),
     ],
     754000, 113);
 
