@@ -1474,7 +1474,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 101', GameConstants.Region.kalos, 101,
     new RoutePokemon({
-        land: ['Wurmple', 'Poochyena', 'Zigzagoon'],
+        land: ['Poochyena', 'Zigzagoon', 'Wurmple', 'Lillipup', 'Sewaddle', 'Zorua'],
     }),
     [
         new OneFromManyRequirement([
@@ -1488,8 +1488,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 102', GameConstants.Region.kalos, 102,
     new RoutePokemon({
-        land: ['Surskit', 'Poochyena', 'Wurmple', 'Lotad', 'Zigzagoon', 'Ralts', 'Seedot'],
-        water: ['Marill', 'Goldeen', 'Magikarp', 'Corphish'],
+        land: ['Poochyena', 'Zigzagoon', 'Wurmple', 'Lotad', 'Seedot', 'Ralts', 'Surskit', 'Lillipup', 'Tympole', 'Gothita'],
+        water: ['Goldeen', 'Magikarp', 'Marill', 'Azumarill', 'Surskit', 'Masquerain', 'Corphish'],
     }),
     [
         new OneFromManyRequirement([
@@ -1503,8 +1503,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 103', GameConstants.Region.kalos, 103,
     new RoutePokemon({
-        land: ['Poochyena', 'Wingull', 'Zigzagoon'],
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+        land: ['Poochyena', 'Zigzagoon', 'Wingull', 'Shellos (west)', 'Shellos (east)', 'Chatot', 'Lillipup'],
+        water: ['Tentacool', 'Magikarp', 'Wingull', 'Pelipper', 'Wailmer'],
     }),
     [
         new OneFromManyRequirement([
@@ -1518,7 +1518,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 104', GameConstants.Region.kalos, 104,
     new RoutePokemon({
-        land: ['Poochyena', 'Wurmple', 'Marill', 'Taillow', 'Wingull'],
+        land: ['Zigzagoon', 'Wurmple', 'Taillow', 'Wingull', 'Chatot', 'Pidove', 'Sewaddle'],
         water: ['Wingull', 'Pelipper', 'Magikarp'],
     }),
     [
@@ -1533,7 +1533,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 105', GameConstants.Region.kalos, 105,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+        water: ['Tentacool', 'Krabby', 'Magikarp', 'Wingull', 'Pelipper', 'Wailmer', 'Frillish', 'Skrelp', 'Clauncher'],
     }),
     [
         new OneFromManyRequirement([
@@ -1547,7 +1547,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 106', GameConstants.Region.kalos, 106,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+        water: ['Tentacool', 'Krabby', 'Magikarp', 'Wingull', 'Pelipper', 'Wailmer', 'Frillish', 'Skrelp', 'Clauncher'],
     }),
     [
         new OneFromManyRequirement([
@@ -1561,7 +1561,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 107', GameConstants.Region.kalos, 107,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+        water: ['Tentacool', 'Krabby', 'Magikarp', 'Chinchou', 'Lanturn', 'Wingull', 'Pelipper', 'Wailmer', 'Clamperl', 'Relicanth', 'Frillish', 'Skrelp', 'Clauncher'],
     }),
     [
         new OneFromManyRequirement([
@@ -1575,7 +1575,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 108', GameConstants.Region.kalos, 108,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+        water: ['Tentacool', 'Krabby', 'Magikarp', 'Wingull', 'Pelipper', 'Wailmer', 'Frillish', 'Skrelp', 'Clauncher'],
     }),
     [
         new OneFromManyRequirement([
@@ -1589,7 +1589,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 109', GameConstants.Region.kalos, 109,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+        water: ['Tentacool', 'Krabby', 'Magikarp', 'Wingull', 'Pelipper', 'Wailmer', 'Frillish', 'Skrelp', 'Clauncher'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
     21.1,
@@ -1598,8 +1598,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 110', GameConstants.Region.kalos, 110,
     new RoutePokemon({
-        land: ['Poochyena', 'Gulpin', 'Minun', 'Oddish', 'Wingull', 'Plusle'],
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+        land: ['Oddish', 'Magnemite', 'Voltorb', 'Zigzagoon', 'Wingull', 'Electrike', 'Plusle', 'Minun', 'Gulpin', 'Shellos (west)', 'Shellos (east)', 'Trubbish', 'Chatot'],
+        water: ['Tentacool', 'Magikarp', 'Wingull', 'Pelipper', 'Wailmer'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
     21.1,
@@ -1608,8 +1608,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 111', GameConstants.Region.kalos, 111,
     new RoutePokemon({
-        land: ['Sandshrew', 'Trapinch', 'Baltoy', 'Cacnea'],
-        water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
+        land: ['Sandshrew', 'Trapinch', 'Cacnea', 'Baltoy', 'Gible', 'Sandile', 'Dwebble'],
+        water: ['Goldeen', 'Magikarp', 'Marill', 'Azumarill', 'Surskit', 'Masquerain', 'Barboach'],
         headbutt: ['Geodude'],
     }),
     [
@@ -1624,7 +1624,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 112', GameConstants.Region.kalos, 112,
     new RoutePokemon({
-        land: ['Numel', 'Marill'],
+        land: ['Machop', 'Ponyta', 'Tyrogue', 'Numel', 'Sawk', 'Throh'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 111)],
     21.1,
@@ -1633,7 +1633,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 113', GameConstants.Region.kalos, 113,
     new RoutePokemon({
-        land: ['Spinda', 'Slugma', 'Skarmory'],
+        land: ['Sandshrew', 'Skarmory', 'Spinda', 'Scraggy', 'Bouffalant', 'Klefki'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Delta Fiery Path'))],
     21.1,
@@ -1642,8 +1642,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 114', GameConstants.Region.kalos, 114,
     new RoutePokemon({
-        land: ['Zangoose', 'Surskit', 'Swablu', 'Lotad', 'Lombre', 'Seviper', 'Nuzleaf'],
-        water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
+        land: ['Misdreavus', 'Lotad', 'Lombre', 'Seedot', 'Nuzleaf', 'Surskit', 'Swablu', 'Zangoose', 'Seviper', 'Skorupi', 'Tympole'],
+        water: ['Goldeen', 'Magikarp', 'Marill', 'Azumarill', 'Surskit', 'Masquerain', 'Barboach'],
         headbutt: ['Geodude'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 113)],
@@ -1653,8 +1653,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 115', GameConstants.Region.kalos, 115,
     new RoutePokemon({
-        land: ['Swablu', 'Taillow', 'Swellow', 'Jigglypuff', 'Wingull'],
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+        land: ['Clefairy', 'Jigglypuff', 'Misdreavus', 'Taillow', 'Wingull', 'Swablu', 'Pidove'],
+        water: ['Tentacool', 'Magikarp', 'Wingull', 'Pelipper', 'Wailmer'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Delta Meteor Falls'))],
     21.1,
@@ -1663,7 +1663,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 116', GameConstants.Region.kalos, 116,
     new RoutePokemon({
-        land: ['Poochyena', 'Whismur', 'Nincada', 'Abra', 'Taillow', 'Skitty'],
+        land: ['Eevee', 'Zigzagoon', 'Taillow', 'Nincada', 'Abra', 'Whismur', 'Skitty', 'Pidove', 'Joltik'],
     }),
     [
         new OneFromManyRequirement([
@@ -1678,8 +1678,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 117', GameConstants.Region.kalos, 117,
     new RoutePokemon({
-        land: ['Surskit', 'Poochyena', 'Oddish', 'Marill', 'Illumise', 'Volbeat', 'Seedot'],
-        water: ['Marill', 'Goldeen', 'Magikarp', 'Corphish'],
+        land: ['Rattata', 'Oddish', 'Marill', 'Zigzagoon', 'Surskit', 'Volbeat', 'Illumise', 'Roselia', 'Tympole', 'Deerling (Spring)'],
+        water: ['Goldeen', 'Magikarp', 'Marill', 'Azumarill', 'Surskit', 'Masquerain', 'Corphish'],
     }),
     [
         new OneFromManyRequirement([
