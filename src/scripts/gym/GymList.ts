@@ -430,7 +430,7 @@ GymList['Dewford Town'] = new Gym(
     ],
     BadgeEnums.Knuckle,
     2000,
-    'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Gym Badge!'
+    'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Gym Badge!',
     [new GymBadgeRequirement(BadgeEnums.Stone)],
     () => {
         App.game.keyItems.gainKeyItem(KeyItemType.Fishing_rod, true);
