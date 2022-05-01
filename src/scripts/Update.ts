@@ -725,6 +725,25 @@ class Update implements Saveable {
             // Add Sendoff Spring
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
         },
+
+        '0.9.4': ({ playerData, saveData }) => {
+            const PartyKeyMap = {
+                'attackBonusPercent': 0,
+                'attackBonusAmount': 1,
+                'proteinsUsed': 2,
+                'exp': 3,
+                'breeding': 4,
+                'shiny': 5,
+                'category': 6,
+                'levelEvolutionTriggered': 7,
+            };
+            Object.entries(PartyKeyMap).forEach(([oldKey, newKey]) => {
+                saveData.party.caughtPokemon.forEach(p => {
+                    p[newKey] = p[oldKey];
+                    delete p[oldKey];
+                });
+            });
+        },
     };
 
     constructor() {
