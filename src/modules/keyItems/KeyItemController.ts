@@ -11,7 +11,7 @@ export default class KeyItemController {
     static showGainModal(item: KeyItemType) {
         this.latestGainedItem(item);
         $('.modal').modal('hide');
-        $('#keyItemModal').modal({
+        return $('#keyItemModal').modal({
             backdrop: 'static',
             keyboard: false,
         });
