@@ -708,7 +708,7 @@ class Update implements Saveable {
                 });
             });
 
-            saveData.farming.mutations = saveData.farming.mutations.map(m => m.hintSeen);
+            saveData.farming.mutations = saveData.farming.mutations.map(m => m.hintsSeen || m.hintSeen);
         },
     };
 

@@ -29,6 +29,14 @@ abstract class Mutation {
         this._hintSeen = ko.observable(false);
     }
 
+    toJSON(): boolean | boolean[] {
+        return this.hintSeen;
+    }
+
+    fromJSON(hintSeen: boolean | boolean[]): void {
+        this.hintSeen = !!hintSeen;
+    }
+
     /**
      * Determines which plots can mutate
      * @return The plot indices that can mutate
