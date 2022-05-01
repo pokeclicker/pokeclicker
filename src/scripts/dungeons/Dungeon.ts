@@ -5800,9 +5800,7 @@ dungeonList['Delta Petalburg Woods'] = new Dungeon('Delta Petalburg Woods',
             [new GymPokemon('Nincada', 10795422, 8)],
             { weight: 1 }, 'James'),
     ],
-    [
-        {loot: 'Token_collector', weight: 3.75},
-    ],
+    [{loot: 'Token_collector', weight: 3.75}],
     10795422,
     [
         new DungeonBossPokemon('Slakoth', 53977110, 10),
@@ -5822,9 +5820,7 @@ dungeonList['Delta Rusturf Tunnel'] = new Dungeon('Delta Rusturf Tunnel',
                 new GymPokemon('Machop', 10795422, 16),
             ], { weight: 1 }, 'Mike'),
     ],
-    [
-        {loot: 'xClick', weight: 3.75},
-    ],
+    [{loot: 'xClick', weight: 3.75}],
     10795422,
     [new DungeonBossPokemon('Whismur', 53977110, 10)],
     754000, 116);
@@ -5891,9 +5887,7 @@ dungeonList['Delta Meteor Falls'] = new Dungeon('Delta Meteor Falls',
             [new GymPokemon('Altaria', 10795422, 47)],
             { weight: 1 }, 'Dray'),
     ],
-    [
-        {loot: 'Lucky_incense', weight: 4},
-    ],
+    [{loot: 'Lucky_incense', weight: 4}],
     10795422,
     [
         new DungeonBossPokemon('Solrock', 53977110, 20),
@@ -6046,20 +6040,14 @@ dungeonList['Delta Shoal Cave'] = new Dungeon('Delta Shoal Cave',
 
 dungeonList['Delta Cave of Origin'] = new Dungeon('Delta Cave of Origin',
     ['Zubat', 'Golbat', 'Sableye', 'Mawile'],
-    [
-        {loot: 'xAttack', weight: 3.75},
-    ],
+    [{loot: 'xAttack', weight: 3.75}],
     10795422,
-    [
-        new DungeonBossPokemon('Exploud', 53977110, 50),
-    ],
+    [new DungeonBossPokemon('Exploud', 53977110, 50)],
     754000, 126);
 
 dungeonList['Delta Sky Pillar'] = new Dungeon('Delta Sky Pillar',
     ['Golbat', 'Ariados', 'Sableye', 'Mawile', 'Swablu', 'Claydol'],
-    [
-        {loot: 'xAttack', weight: 4},
-    ],
+    [{loot: 'xAttack', weight: 4}],
     10795422,
     [
         new DungeonBossPokemon('Dusclops', 53977110, 50),
