@@ -214,14 +214,10 @@ class Player {
             'starter',
             // TODO(@Isha) remove.
             'mineInventory',
-            // TODO(@Isha) remove.
-            '_mineLayersCleared',
             '_lastSeen',
             '_timeTraveller',
             '_origins',
-            'gymDefeats',
             'effectList',
-            'effectTimer',
             'highestRegion',
             'highestSubRegion',
         ];
