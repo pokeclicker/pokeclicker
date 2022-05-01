@@ -489,7 +489,17 @@ class QuestLineHelper {
         const talktoGameCornerOwner2 = new TalkToNPCQuest(TwoIslandGameCornerOwner2, 'Lostelle has been found. Return to the Game Corner owner on Two Island.');
         billSeviiQuestLine.addQuest(talktoGameCornerOwner2);
 
-        const talktoCelio2 = new TalkToNPCQuest(OneIslandCelio2, 'Deliver the meteorite to Celio on One Island.', () => App.game.wallet.gainQuestPoints(1000, true));
+        const BillsErrandReward = () => {
+            App.game.wallet.gainQuestPoints(1000, true);
+            Notifier.notify({
+                title: billSeviiQuestLine.name,
+                message: 'Cecil has rewarded you with 1000 Quest Points!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talktoCelio2 = new TalkToNPCQuest(OneIslandCelio2, 'Deliver the meteorite to Celio on One Island.', BillsErrandReward);
         billSeviiQuestLine.addQuest(talktoCelio2);
 
         App.game.quests.questLines().push(billSeviiQuestLine);
