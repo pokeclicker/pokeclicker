@@ -76,7 +76,7 @@ class Player {
         this.mineInventory = ko.observableArray(mineInventory);
 
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
-        this.effectTimer = Save.initializeEffectTimer(savedPlayer.effectTimer || {});
+        this.effectTimer = Save.initializeEffectTimer();
         this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
         this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
 
