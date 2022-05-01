@@ -743,6 +743,8 @@ class Update implements Saveable {
                     delete p[oldKey];
                 });
             });
+
+            saveData.farming.mutations = saveData.farming.mutations.map(m => m.hintSeen);
         },
     };
 

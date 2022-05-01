@@ -192,6 +192,8 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.levelEvolutionTriggered]: levelEvolutionTriggered,
             [PartyPokemonSaveKeys.category]: this.category,
         };
+
+        // Don't save anything that is the default option
         Object.entries(output).forEach(([key, value]) => {
             if (value === this.defaults[PartyPokemonSaveKeys[key]]) {
                 delete output[key];

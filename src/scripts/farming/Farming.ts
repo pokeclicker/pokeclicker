@@ -1313,7 +1313,7 @@ class Farming implements Feature {
             plotList: this.plotList.map(plot => plot.toJSON()),
             shovelAmt: this.shovelAmt(),
             mulchShovelAmt: this.mulchShovelAmt(),
-            mutations: this.mutations.map(mutation => mutation.toJSON()),
+            mutations: this.mutations.map(mutation => mutation.hintSeen),
             farmHands: this.farmHands.toJSON(),
         };
     }
@@ -1376,10 +1376,8 @@ class Farming implements Feature {
         }
 
         const mutations = json['mutations'];
-        if (mutations == null) {
-            this.mutations.forEach(mutation => mutation.fromJSON({}));
-        } else {
-            this.mutations.forEach((mutation, i) => mutation.fromJSON(mutations[i]));
+        if (mutations) {
+            this.mutations.forEach((mutation, i) => mutation.hintSeen = mutations[i] ?? false);
         }
 
         this.farmHands.fromJSON(json.farmHands);
