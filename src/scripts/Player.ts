@@ -222,6 +222,21 @@ class Player {
             'highestSubRegion',
         ];
         const plainJS = ko.toJS(this);
+        Object.entries(plainJS._itemMultipliers).forEach(([key, value]) => {
+            if (value <= 1) {
+                delete plainJS._itemMultipliers[key];
+            }
+        });
+        Object.entries(plainJS._itemList).forEach(([key, value]) => {
+            if (!value) {
+                delete plainJS._itemList[key];
+            }
+        });
+        Object.entries(plainJS.effectList).forEach(([key, value]) => {
+            if (!value) {
+                delete plainJS.effectList[key];
+            }
+        });
         return Save.filter(plainJS, keep);
     }
 }
