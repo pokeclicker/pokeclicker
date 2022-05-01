@@ -129,8 +129,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
             KeyItemController.showGainModal(KeyItemType.Gem_case);
         }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Fog) {
+            KeyItemController.showGainModal(KeyItemType.HM03_surf);
+        }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Knuckle) {
+            KeyItemController.showGainModal(KeyItemType.Fishing_rod);
+        }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Balance) {
+            KeyItemController.showGainModal(KeyItemType.HM03_surf);
+        }
         if (GymBattle.gym.badgeReward == BadgeEnums.Mind) {
             KeyItemController.showGainModal(KeyItemType.HM08_dive);
+        }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Fen) {
+            KeyItemController.showGainModal(KeyItemType.HM03_surf);
+        }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Quake) {
+            KeyItemController.showGainModal(KeyItemType.HM03_surf);
+        }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Rumble) {
+            KeyItemController.showGainModal(KeyItemType.HM03_surf);
         }
     });
 });

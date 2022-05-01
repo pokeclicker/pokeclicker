@@ -270,6 +270,7 @@ GymList['Ecruteak City'] = new Gym(
     'I\'m not good enough yet... All right. This Badge is yours.',
     [new GymBadgeRequirement(BadgeEnums.Plain)],
     () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
         App.game.quests.getQuestLine('Team Rocket Again').beginQuest();
     }
 );
@@ -430,6 +431,10 @@ GymList['Dewford Town'] = new Gym(
     BadgeEnums.Knuckle,
     2000,
     'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Gym Badge!'
+    [new GymBadgeRequirement(BadgeEnums.Stone)],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.Fishing_rod, true);
+    }
 );
 GymList['Mauville City'] = new Gym(
     'Wattson',
@@ -473,7 +478,10 @@ GymList['Petalburg City'] = new Gym(
     BadgeEnums.Balance,
     5000,
     '… I… I can\'t… I can\'t believe it. I lost to you? But, rules are rules! Here, take this.',
-    [new GymBadgeRequirement(BadgeEnums.Heat)]
+    [new GymBadgeRequirement(BadgeEnums.Heat)],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
+    }
 );
 GymList['Fortree City'] = new Gym(
     'Winona',
@@ -675,7 +683,10 @@ GymList['Pastoria City'] = new Gym(
     BadgeEnums.Fen,
     2500,
     'It seems the undertow pulled me under... But I had a great time battling with you! You\'ve earned this!',
-    [new GymBadgeRequirement(BadgeEnums.Cobble)]
+    [new GymBadgeRequirement(BadgeEnums.Cobble)],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
+    }
 );
 GymList['Canalave City'] = new Gym(
     'Byron',
@@ -867,7 +878,10 @@ GymList['Driftveil City'] = new Gym(
     BadgeEnums.Quake,
     4800,
     'Phew… You\'re really somethin\'! Li\'l whippersnapper Trainers who pack a real punch keep showin\' up one after another. Mrmph. Here! Take this!',
-    [new GymBadgeRequirement(BadgeEnums.Bolt)]
+    [new GymBadgeRequirement(BadgeEnums.Bolt)],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
+    }
 );
 GymList['Mistralton City'] = new Gym(
     'Skyla',
@@ -1037,7 +1051,10 @@ GymList['Shalour City'] = new Gym(
     BadgeEnums.Rumble,
     3800,
     'Oh! I have been defeated! Alack, alay! Lady Korrina gave a terrible display! This is it. I must give up my title and admit that your strength far exceeds-- Just teasing! But here\'s your Badge. Boy, you\'ll be rolling in \'em soon!',
-    [new GymBadgeRequirement(BadgeEnums.Cliff)]
+    [new GymBadgeRequirement(BadgeEnums.Cliff)],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
+    }
 );
 GymList['Coumarine City'] = new Gym(
     'Ramos',
