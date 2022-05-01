@@ -78,6 +78,9 @@ class Game {
         this.specialEvents.initialize();
         this.load();
 
+        // Update if the achievements are already completed
+        AchievementHandler.preCheckAchievements();
+
         // TODO refactor to proper initialization methods
         if (player.starter() != GameConstants.Starter.None) {
             Battle.generateNewEnemy();

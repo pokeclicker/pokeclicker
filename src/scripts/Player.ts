@@ -16,8 +16,6 @@
 
 class Player {
 
-    public achievementsCompleted: { [name: string]: boolean };
-
     private _route: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
     private _subregion: KnockoutObservable<number>;
@@ -76,8 +74,6 @@ class Player {
                 sellLocked: ko.observable(v.sellLocked),
             }));
         this.mineInventory = ko.observableArray(mineInventory);
-
-        this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
 
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
         this.effectTimer = Save.initializeEffectTimer(savedPlayer.effectTimer || {});
@@ -220,12 +216,10 @@ class Player {
             'mineInventory',
             // TODO(@Isha) remove.
             '_mineLayersCleared',
-            'achievementsCompleted',
             '_lastSeen',
             '_timeTraveller',
             '_origins',
             'gymDefeats',
-            'achievementsCompleted',
             'effectList',
             'effectTimer',
             'highestRegion',
