@@ -10,6 +10,7 @@ class PartyPokemon implements Saveable {
         breeding: false,
         shiny: false,
         category: 0,
+        levelEvolutionTriggered: false,
     };
 
     _breeding: KnockoutObservable<boolean>;
@@ -154,7 +155,7 @@ class PartyPokemon implements Saveable {
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
                 if (evolution instanceof LevelEvolution) {
-                    evolution.triggered = json['levelEvolutionTriggered'];
+                    evolution.triggered = json['levelEvolutionTriggered'] ?? this.defaults.levelEvolutionTriggered;
                 }
             }
         }
@@ -170,7 +171,7 @@ class PartyPokemon implements Saveable {
                 }
             }
         }
-        return {
+        const output = {
             id: this.id,
             attackBonusPercent: this.attackBonusPercent,
             attackBonusAmount: this.attackBonusAmount,
@@ -181,6 +182,13 @@ class PartyPokemon implements Saveable {
             levelEvolutionTriggered: levelEvolutionTriggered,
             category: this.category,
         };
+        Object.entries(output).forEach(([key, value]) => {
+            if (value === this.defaults[key]) {
+                delete output[key];
+            }
+        });
+
+        return output;
     }
 
     // Knockout getters/setter
