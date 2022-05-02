@@ -89,19 +89,23 @@ class ExpGainedBonusHeldItem extends HeldItem {
 }
 
 ItemList['Wonder_Chest'] = new ExpGainedBonusHeldItem('Wonder_Chest', 10000, GameConstants.Currency.money, undefined, 'Wonder Chest', 1.15, GameConstants.Region.johto);
-//Pokemon specific items
+// Pokemon specific items
 ItemList['Light_Ball'] = new AttackBonusHeldItem('Light_Ball', 10000, GameConstants.Currency.money, undefined, 'Light Ball', 1.2, GameConstants.Region.final /* GameConstants.Region.johto */, 'any Pikachu',
     (pokemon) => Math.floor(pokemon.id) == 25 );
 ItemList['Leek'] = new AttackBonusHeldItem('Leek', 10000, GameConstants.Currency.money, undefined, 'Leek', 1.2, GameConstants.Region.final /* GameConstants.Region.johto */, 'any Pikachu',
     (pokemon) => Math.floor(pokemon.id) == 83 ||  Math.floor(pokemon.id) == 865);
-//Typebased attack items
+// Typebased attack items
 ItemList['Black_Belt'] = new TypeRestrictedAttackBonusHeldItem('Black_Belt', 10000, GameConstants.Currency.money, undefined, 'Black Belt', 1.1, PokemonType.Fighting, GameConstants.Region.final /* GameConstants.Region.johto */);
 ItemList['Black_Glasses'] = new TypeRestrictedAttackBonusHeldItem('Black_Glasses', 10000, GameConstants.Currency.money, undefined, 'Black Glasses', 1.1, PokemonType.Dark, GameConstants.Region.final /* GameConstants.Region.johto */);
 ItemList['Charcoal'] = new TypeRestrictedAttackBonusHeldItem('Charcoal', 10000, GameConstants.Currency.money, undefined, 'Charcoal', 1.1, PokemonType.Fire, GameConstants.Region.final /* GameConstants.Region.johto */);
 ItemList['Dragon_Fang'] = new TypeRestrictedAttackBonusHeldItem('Dragon_Fang', 10000, GameConstants.Currency.money, undefined, 'Dragon Fang', 1.1, PokemonType.Dragon, GameConstants.Region.final /* GameConstants.Region.johto */);
+// TODO: Hard Stone is in the underground. We can keep it there, and give it two uses.
+// TODO: Magnet is used as battle item
+// TODO: Metal Coat is a evo-stone. Can be turned into a held item evolution
 ItemList['Miracle_Seed'] = new TypeRestrictedAttackBonusHeldItem('Miracle_Seed', 10000, GameConstants.Currency.money, undefined, 'Miracle Seed', 1.1, PokemonType.Grass, GameConstants.Region.final /* GameConstants.Region.johto */);
 ItemList['Mystic_Water'] = new TypeRestrictedAttackBonusHeldItem('Mystic_Water', 10000, GameConstants.Currency.money, undefined, 'Mystic Water', 1.1, PokemonType.Water, GameConstants.Region.final /* GameConstants.Region.johto */);
 ItemList['Never_Melt_Ice'] = new TypeRestrictedAttackBonusHeldItem('Never_Melt_Ice', 10000, GameConstants.Currency.money, undefined, 'Never-Melt Ice', 1.1, PokemonType.Ice, GameConstants.Region.final /* GameConstants.Region.johto */);
+// TODO: Poison Barb is used as an Oak item
 ItemList['Sharp_Beak'] = new TypeRestrictedAttackBonusHeldItem('Sharp_Beak', 10000, GameConstants.Currency.money, undefined, 'Sharp Beak', 1.1, PokemonType.Flying, GameConstants.Region.final /* GameConstants.Region.johto */);
 ItemList['Silk_Scarf'] = new TypeRestrictedAttackBonusHeldItem('Silk_Scarf', 10000, GameConstants.Currency.money, undefined, 'Silk Scarf', 1.1, PokemonType.Normal, GameConstants.Region.final /* GameConstants.Region.johto */);
 ItemList['Silver_Powder'] = new TypeRestrictedAttackBonusHeldItem('Silver_Powder', 10000, GameConstants.Currency.money, undefined, 'Silver Powder', 1.1, PokemonType.Bug, GameConstants.Region.final /* GameConstants.Region.johto */);
