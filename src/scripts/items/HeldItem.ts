@@ -92,6 +92,8 @@ ItemList['Wonder_Chest'] = new ExpGainedBonusHeldItem('Wonder_Chest', 10000, Gam
 //Pokemon specific items
 ItemList['Light_Ball'] = new AttackBonusHeldItem('Light_Ball', 10000, GameConstants.Currency.money, undefined, 'Light Ball', 1.2, GameConstants.Region.final /* GameConstants.Region.johto */, 'any Pikachu',
     (pokemon) => Math.floor(pokemon.id) == 25 );
+ItemList['Leek'] = new AttackBonusHeldItem('Leek', 10000, GameConstants.Currency.money, undefined, 'Leek', 1.2, GameConstants.Region.final /* GameConstants.Region.johto */, 'any Pikachu',
+    (pokemon) => Math.floor(pokemon.id) == 83 ||  Math.floor(pokemon.id) == 865);
 //Typebased attack items
 ItemList['Charcoal'] = new TypeRestrictedAttackBonusHeldItem('Charcoal', 10000, GameConstants.Currency.money, undefined, 'Charcoal', 1.1, PokemonType.Fire, GameConstants.Region.final /* GameConstants.Region.johto */);
 
