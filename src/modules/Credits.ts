@@ -51,6 +51,7 @@ export const SpriteCredits: Credit[] = [
             'Dancer (female)',
             'Aether Foundation Employee (masked)',
             'Artist (male)',
+            'Wonder Chest',
         ],
         // Notes: DaleArwin aka IanWalder, a GitHub contributor to this project, gives his permission
     },
