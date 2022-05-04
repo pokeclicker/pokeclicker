@@ -36,7 +36,7 @@ export const SpriteCredits: Credit[] = [
             'Sightseer (female)',
             'Sophocles',
             'Team Skull Boss (guzma)',
-            'Youth Athlete (female)',  
+            'Youth Athlete (female)',
         ],
         // Notes: Found in spritesheet description: "Feel free to use them, just give me credit."
     },
