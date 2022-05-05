@@ -58,4 +58,8 @@ type UndergroundItemNameType
     | 'Thunder Stone'
     | 'Leaf Stone'
     | 'Moon Stone'
-    | 'Sun Stone';
+    | 'Sun Stone'
+    | 'Shiny Stone'
+    | 'Dusk Stone'
+    | 'Dawn Stone'
+    | 'Ice Stone';
