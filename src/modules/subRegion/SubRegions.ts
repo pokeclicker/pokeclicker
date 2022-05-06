@@ -79,3 +79,11 @@ SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', new MultiReq
     new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
     new NullRequirement(),
 ])));
+
+export enum GalarSubRegions {
+    Galar = 0,
+    // GalarSouth = 0,
+    // GalarNorth,
+    IsleOfArmor,
+    CrownTundra,
+}
