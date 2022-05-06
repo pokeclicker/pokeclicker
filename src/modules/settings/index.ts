@@ -199,6 +199,7 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Breeding Efficiency', 'breedingEfficiency'),
         new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
         new SettingOption('Pokedex ID', 'dexId'),
+        new SettingOption('Proteins used', 'protiens'),
     ],
     'attack'));
 
