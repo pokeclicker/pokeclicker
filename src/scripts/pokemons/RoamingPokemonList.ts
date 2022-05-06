@@ -48,7 +48,7 @@ class RoamingPokemonList {
 }
 
 // Kanto
-RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Mew'));
+RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Mew', new SubregionRequirement(GameConstants.Region.kanto, KantoSubRegions.Kanto)));
 
 // Johto
 RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Raikou', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))));
@@ -85,33 +85,34 @@ RoamingPokemonList.add(GameConstants.Region.alola, new RoamingPokemon('Zeraora',
 //Galar
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Galarian Articuno', new MultiRequirement([
     new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill')),
+    new SubregionRequirement(GameConstants.Region.galar, GalarSubRegions.Galar),
     // TODO: uncomment this once Galar split into 2
     // new OneFromManyRequirement([
-    //     new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'Galar North').id),
-    //     new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'Galar South').id),
+    //     new SubregionRequirement(GameConstants.Region.galar, GalarSubRegions.GalarNorth),
+    //     new SubregionRequirement(GameConstants.Region.galar, GalarSubRegions.GalarSouth),
     // ]),
 ])));
 
 //Galar - Isle of Armor
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Zarude', new MultiRequirement([
     new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
-    new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id),
+    new SubregionRequirement(GameConstants.Region.galar, GalarSubRegions.IsleOfArmor),
 ])));
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Galarian Moltres', new MultiRequirement([
     new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill')),
-    new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id),
+    new SubregionRequirement(GameConstants.Region.galar, GalarSubRegions.IsleOfArmor),
 ])));
 
 //Galar - Crown Tundra
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Spectrier', new MultiRequirement([
     new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
-    new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id),
+    new SubregionRequirement(GameConstants.Region.galar, GalarSubRegions.CrownTundra),
 ])));
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Glastrier', new MultiRequirement([
     new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
-    new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id),
+    new SubregionRequirement(GameConstants.Region.galar, GalarSubRegions.CrownTundra),
 ])));
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Galarian Zapdos', new MultiRequirement([
     new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill')),
-    new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id),
+    new SubregionRequirement(GameConstants.Region.galar, GalarSubRegions.CrownTundra),
 ])));
