@@ -15,28 +15,28 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/beliot419',
         image: 'https://a.deviantart.net/avatars-big/b/e/beliot419.png',
         resources: [
-            'Youth Athlete (female)',
-            'Rising Star (male)',
-            'Team Skull Boss (guzma)',
-            'Aether Foundation Employee (male)',
-            'Aether Foundation Employee (female)',
+            'Acerola',
             'Aether Branch Chief Faba',
+            'Aether Foundation Employee (female)',
+            'Aether Foundation Employee (male)',
             'Aether President Lusamine',
-            'Ilima',
             'Hala',
-            'Lana',
-            'Kiawe',
-            'Mallow',
-            'Olivia',
-            'Sophocles',
-            'Acerola',
-            'Nanu',
-            'Mina',
             'Hapu',
-            'Molayne',
-            'Acerola',
-            'Kahili',
             'Hau',
+            'Ilima',
+            'Kahili',
+            'Kiawe',
+            'Lana',
+            'Mallow',
+            'Mina',
+            'Molayne',
+            'Nanu',
+            'Olivia',
+            'Rising Star (male)',
+            'Sightseer (female)',
+            'Sophocles',
+            'Team Skull Boss (guzma)',
+            'Youth Athlete (female)',
         ],
         // Notes: Found in spritesheet description: "Feel free to use them, just give me credit."
     },
@@ -94,8 +94,19 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/gnomowladny',
         image: 'https://a.deviantart.net/avatars-big/g/n/gnomowladny.gif',
         resources: [
-            'Team Flare Bryony',
+            'Clemont',
+            'Drasna',
+            'Korrina',
+            'Malva',
+            'Onympia',
             'Piers',
+            'Ramos',
+            'Siebold',
+            'Team Flare Bryony',
+            'Valerie',
+            'Viola',
+            'Wikstrom',
+            'Wulfric',
         ],
         // NOTES: Feel free to use it if you like, but don\'t forget to give me credit~!
     },
@@ -119,6 +130,14 @@ export const SpriteCredits: Credit[] = [
         // NOTES: Permission given via PRs
     },
     {
+        name: 'Kilima',
+        link: 'https://archive.pokecharms.com/works/diantha-sprite.52739/',
+        resources: [
+            'Diantha',
+        ],
+        // NOTES: Permission given to Krush via Discord DM
+    },
+    {
         name: 'Krokotips',
         link: 'https://www.deviantart.com/krokotips',
         resources: [
@@ -126,6 +145,23 @@ export const SpriteCredits: Credit[] = [
             'Team Flare Mable',
         ],
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
+    },
+    {
+        name: 'Kyle-Dove',
+        link: 'https://www.deviantart.com/kyle-dove',
+        image: 'https://a.deviantart.net/avatars-big/k/y/kyle-dove.png',
+        resources: [
+            'Fairy Tale Girl',
+            'Hex Maniac',
+            'Punk Girl',
+            'Punk Guy',
+            'Sightseer (male)',
+            'Sky Trainer (female)',
+            'Sky Trainer (male)',
+            'Tourist (female)',
+            'Tourist (male)',
+        ],
+        // Notes: Permission given on image page if credited.
     },
     {
         name: 'Leaf',
@@ -212,13 +248,13 @@ export const SpriteCredits: Credit[] = [
         // NOTES: free for non-profit use.
     },
     {
-        name: 'Someone Alive',
-        link: 'https://discordapp.com/users/824384977633411082',
+        name: 'tebited15',
+        link: 'https://www.deviantart.com/tebited15',
+        image: 'https://a.deviantart.net/avatars-big/t/e/tebited15.png',
         resources: [
-            'Team Flare Aliana',
-            'Team Flare Admins',
+            'Grant',
         ],
-        // Notes: Permission given via Discord #development-chat.
+        // Notes: Permission given on image page if credited.
     },
 ].map((c) => {
     SeededRand.seed(parseInt(c.name, 36));
