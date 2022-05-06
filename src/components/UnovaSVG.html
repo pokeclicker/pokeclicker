@@ -325,8 +325,8 @@
     <!--Extra bit of Route 23-->
     <%- include('templates/mapRoute',
         { route: 23, region: 4
-        , width: 0.5, height: 3
-        , x: 65.5, y: 2
+        , width: 1, height: 3
+        , x: 65, y: 2
         , noText: true
         })
     %>
@@ -539,8 +539,16 @@
     <!--Pokémon League Unova-->
     <%- include('templates/mapTown',
         { name: "Pokémon League Unova"
-        , x: 55.5, y: 0.25
-        , width: 10, height: 6.75
+        , x: 56, y: 0
+        , width: 9, height: 5.5
+        })
+    %>
+
+    <!--Pokémon League Unova Extension-->
+    <%- include('templates/mapTown',
+        { name: "Pokémon League Unova"
+        , x: 59, y: 5.5
+        , width: 3, height: 0.5
         })
     %>
 
