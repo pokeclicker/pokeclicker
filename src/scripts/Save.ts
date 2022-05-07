@@ -1,3 +1,5 @@
+///<reference path="../declarations/Sortable.d.ts"/>
+
 class Save {
 
     static counter = 0;
@@ -80,7 +82,8 @@ class Save {
             localStorage.removeItem(`player${Save.key}`);
             localStorage.removeItem(`save${Save.key}`);
             localStorage.removeItem(`settings${Save.key}`);
-
+            // Prevent the old save from being saved again
+            window.onbeforeunload = () => {};
             location.reload();
         }
     }
@@ -146,12 +149,18 @@ class Save {
         for (const obj in GameConstants.BattleItemType) {
             res[obj] = ko.observable(saved ? saved[obj] || 0 : 0);
         }
+        for (const obj in GameConstants.FluteItemType) {
+            res[obj] = ko.observable(saved ? saved[obj] || 0 : 0);
+        }
         return res;
     }
 
     public static initializeEffectTimer(saved?: Array<string>): { [name: string]: KnockoutObservable<string> } {
         const res = {};
         for (const obj in GameConstants.BattleItemType) {
+            res[obj] = ko.observable(saved ? saved[obj] || '00:00' : '00:00');
+        }
+        for (const obj in GameConstants.FluteItemType) {
             res[obj] = ko.observable(saved ? saved[obj] || '00:00' : '00:00');
         }
         return res;
@@ -176,6 +185,8 @@ class Save {
                     } else {
                         localStorage.removeItem(`settings${Save.key}`);
                     }
+                    // Prevent the old save from being saved again
+                    window.onbeforeunload = () => {};
                     location.reload();
                 } else {
                     Notifier.notify({

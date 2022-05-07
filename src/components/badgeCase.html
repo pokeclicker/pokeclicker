@@ -16,19 +16,23 @@ aria-labelledby="badgeCaseModalLabel">
            </button>
        </div>
        <div class="modal-body">
-           <div class="row no-gutters justify-content-center"
-                data-bind="foreach: BadgeCaseController.getDisplayableBadges()">
-               <div class="col-3 badgeEntry">
-                   <img src="" width="60px"
-                        data-bind="attr:{ src: 'assets/images/badges/'+ $data +'.png'},
-                        css: { 'badge-not-acquired': !App.game.badgeCase.hasBadge(BadgeEnums[$data])}">
+            <div data-bind="foreach: Object.entries(BadgeCaseController.getDisplayableBadges())">
+                <div>
+                    <h4 data-bind="text: $data[0]"></h4>
+                    <div class="row no-gutters justify-content-center"
+                        data-bind="foreach: $data[1]">
+                        <div class="col-3 badgeEntry">
+                            <img src="" width="60px"
+                                data-bind="attr:{ src: 'assets/images/badges/'+ $data +'.png'},
+                                css: { 'badge-not-acquired': !App.game.badgeCase.hasBadge(BadgeEnums[$data])}">
 
-                   <p style="bottom: 0;"
-                      data-bind="text: $data">name</p>
-
-               </div>
-           </div>
-       </div>
+                            <p style="bottom: 0;"
+                                data-bind="text: $data">name</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
        <div class="modal-footer">
            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

@@ -642,6 +642,89 @@ class Update implements Saveable {
             // Challenge update
             saveData.challenges.list.disableGems = saveData.challenges?.list?.disableShards ?? false;
         },
+
+        '0.9.0': ({ playerData, saveData }) => {
+            // Migrate event negative ID's to decimals of base form
+            const eventIDs = [
+                [-1, 25.08],
+                [-2, 25.09],
+                [-3, 150.1],
+                [-4, 143.1],
+                [-5, 175.1],
+                [-6, 1.2],
+                [-7, 25.1],
+                [-8, 25.11],
+                [-9, 133.1],
+                [-10, 1.1],
+                [-11, 2.1],
+                [-12, 3.1],
+                [-13, 4.1],
+                [-14, 5.1],
+                [-15, 6.1],
+                [-16, 7.1],
+                [-17, 8.1],
+                [-18, 9.1],
+            ];
+
+            eventIDs.forEach(([oldID, newID]) => {
+                const pokemon = saveData.party.caughtPokemon.find(p => p.id === oldID);
+                // If player hasn't caught this mon yet, return.
+                if (pokemon == undefined) {
+                    return;
+                }
+                // Update our ID
+                pokemon.id = newID;
+                if (!saveData.statistics.pokemonHatched) {
+                    saveData.statistics.pokemonHatched = {};
+                }
+                if (!saveData.statistics.shinyPokemonHatched) {
+                    saveData.statistics.shinyPokemonHatched = {};
+                }
+                // Update our statistics
+                saveData.statistics.pokemonEncountered[newID] = saveData.statistics.pokemonEncountered[oldID] || 0;
+                saveData.statistics.pokemonDefeated[newID] = saveData.statistics.pokemonDefeated[oldID] || 0;
+                saveData.statistics.pokemonCaptured[newID] = saveData.statistics.pokemonCaptured[oldID] || 0;
+                saveData.statistics.pokemonHatched[newID] = saveData.statistics.pokemonHatched[oldID] || 0;
+                saveData.statistics.shinyPokemonEncountered[newID] = saveData.statistics.shinyPokemonEncountered[oldID] || 0;
+                saveData.statistics.shinyPokemonDefeated[newID] = saveData.statistics.shinyPokemonDefeated[oldID] || 0;
+                saveData.statistics.shinyPokemonCaptured[newID] = saveData.statistics.shinyPokemonCaptured[oldID] || 0;
+                saveData.statistics.shinyPokemonHatched[newID] = saveData.statistics.shinyPokemonHatched[oldID] || 0;
+                // Delete our old statistics
+                delete saveData.statistics.pokemonEncountered[oldID];
+                delete saveData.statistics.pokemonDefeated[oldID];
+                delete saveData.statistics.pokemonCaptured[oldID];
+                delete saveData.statistics.pokemonHatched[oldID];
+                delete saveData.statistics.shinyPokemonEncountered[oldID];
+                delete saveData.statistics.shinyPokemonDefeated[oldID];
+                delete saveData.statistics.shinyPokemonCaptured[oldID];
+                delete saveData.statistics.shinyPokemonHatched[oldID];
+            });
+
+            playerData.mineInventory = playerData.mineInventory?.map(i => {
+                i.sellLocked = false;
+                return i;
+            }) || [];
+
+            // Start Galactic questline if player has Coal Badge already
+            if (saveData.badgeCase[40]) {
+                saveData.quests.questLines.push({state: 1, name: 'A new world', quest: 0});
+            }
+
+            // Clear Valley Windworks Clears
+            saveData.statistics.dungeonsCleared[44] = 0;
+            // Add Team Galactic Eterna Building
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 47);
+            // Move Lake Verity
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 53, 52);
+            // Move Lake Valor
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 52, 54);
+            // Add Team Galactic HQ
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 56);
+            // Move Spear Pillar
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 57, 59);
+            // Add Sendoff Spring
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
+        },
     };
 
     constructor() {
@@ -668,7 +751,7 @@ class Update implements Saveable {
                             clearInterval(checkForNewVersionInterval);
                             Notifier.notify({
                                 title: `[UPDATE] v${result.version}`,
-                                message: 'A newer version of the game is available:<br/><br/><a class="btn btn-warning btn-block" href="#" onclick="location.reload(true);">Reload Page</a>',
+                                message: 'A newer version of the game is available:\n\n<a class="btn btn-warning btn-block" href="#" onclick="location.reload(true);">Reload Page</a>',
                                 timeout: GameConstants.DAY,
                             });
                         }
@@ -778,7 +861,7 @@ class Update implements Saveable {
                     console.error(`Caught error while applying update v${version}`, e, { beforeUpdate, updateData });
                     Notifier.notify({
                         title: `Failed to update to v${this.version}!`,
-                        message: `Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a> along with your save file.<br /><br />${backupButton.outerHTML}<br />${resetButton.outerHTML}`,
+                        message: `Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a> along with your save file.\n\n${backupButton.outerHTML}\n${resetButton.outerHTML}`,
                         type: NotificationConstants.NotificationOption.primary,
                         timeout: GameConstants.DAY,
                     });
@@ -813,7 +896,7 @@ class Update implements Saveable {
             this.automaticallyDownloadBackup(backupButton, settingsData);
             Notifier.notify({
                 title: `[v${this.version}] Game has been updated!`,
-                message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${backupButton.outerHTML}`,
+                message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!\n\n${backupButton.outerHTML}`,
                 type: NotificationConstants.NotificationOption.primary,
                 timeout: 6e4,
             });
@@ -821,7 +904,7 @@ class Update implements Saveable {
             console.error('Error trying to convert backup save', err);
             Notifier.notify({
                 title: `[v${this.version}] Game has been updated!`,
-                message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/><i>Failed to download old save, Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a>.</i>',
+                message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!\n\n<i>Failed to download old save, Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a>.</i>',
                 type: NotificationConstants.NotificationOption.primary,
                 timeout: 6e4,
             });

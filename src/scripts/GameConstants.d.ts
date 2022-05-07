@@ -37,6 +37,7 @@ namespace GameConstants {
     declare const MAX_AVAILABLE_REGION: number;
     declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
+    declare const FLUTE_TYPE_ATTACK_MULTIPLIER: number;
     declare const ROAMING_MIN_CHANCE: number;
     declare const ROAMING_MAX_CHANCE: number;
     declare const SHINY_CHANCE_BATTLE: number;
@@ -84,7 +85,6 @@ namespace GameConstants {
         'Captured',
         'Defeated',
         'Caught Pokemon',
-        'Caught Unique Pokemons By Region',
         'Shiny Pokemon',
         'Hatch',
         'Pokeball',
@@ -166,7 +166,7 @@ namespace GameConstants {
         dungeonToken,
         diamond,
         farmPoint,
-        battlePoint
+        battlePoint,
     }
     declare enum TypeEffectiveness {
         Immune,
@@ -186,6 +186,7 @@ namespace GameConstants {
     declare function formatTime(input: number | Date): string;
     declare function formatTimeFullLetters(input: number): string;
     declare function formatTimeShortWords(input: number): string;
+    declare function formatSecondsToTime(input: number): string;
     declare function formatNumber(input: number): string;
     declare enum Region {
         none,
@@ -265,7 +266,21 @@ namespace GameConstants {
         'Lucky_egg' = '',
         'Token_collector' = '',
         'Item_magnet' = '',
-        'Lucky_incense' = ''
+        'Lucky_incense' = '',
+    }
+    declare enum FluteItemType {
+        'Red_Flute' = '',
+        'White_Flute' = '',
+        'Black_Flute' = '',
+        'Yellow_Flute' = '',
+        'Blue_Flute' = '',
+        'Poke_Flute' = '',
+        'Azure_Flute' = '',
+        'Eon_Flute' = '',
+        'Sun_Flute' = '',
+        'Moon_Flute' = '',
+        'Time_Flute' = '',
+        'Grass_Flute' = '',
     }
     declare enum PokemonItemType {
         'Eevee',

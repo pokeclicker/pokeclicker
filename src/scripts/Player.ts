@@ -71,7 +71,10 @@ class Player {
         // TODO(@Isha) move to underground classes.
         const mineInventory = (savedPlayer.mineInventory || [])
             // TODO: Convert this to object spread after we're on TS modules
-            .map((v) => Object.assign({}, v, { amount: ko.observable(v.amount) }));
+            .map((v) => Object.assign({}, v, {
+                amount: ko.observable(v.amount),
+                sellLocked: ko.observable(v.sellLocked),
+            }));
         this.mineInventory = ko.observableArray(mineInventory);
 
         this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
@@ -79,6 +82,7 @@ class Player {
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
         this.effectTimer = Save.initializeEffectTimer(savedPlayer.effectTimer || {});
         this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
+        this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
 
         // Save game origins, useful for tracking down any errors that may not be related to the main game
         this._origins = [...new Set((savedPlayer.origin || [])).add(window.location?.origin)];
@@ -94,7 +98,8 @@ class Player {
     public effectList: { [name: string]: KnockoutObservable<number> } = {};
     public effectTimer: { [name: string]: KnockoutObservable<string> } = {};
 
-    private highestRegion: KnockoutObservable<GameConstants.Region>;
+    public highestRegion: KnockoutObservable<GameConstants.Region>;
+    public highestSubRegion: KnockoutObservable<number>;
 
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
         this._itemList = value;
@@ -102,6 +107,10 @@ class Player {
 
     get itemList(): { [p: string]: KnockoutObservable<number> } {
         return this._itemList;
+    }
+
+    public amountOfItem(itemName: string) {
+        return this._itemList[itemName]();
     }
 
     private _itemMultipliers: { [name: string]: number };
@@ -131,7 +140,16 @@ class Player {
     }
 
     set subregion(value: number) {
+        if (value < 0) {
+            value = Math.max(...SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id));
+        }
+        if (value > Math.max(...SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id))) {
+            value = 0;
+        }
         this._subregion(value);
+        if (value > this.highestSubRegion()) {
+            this.highestSubRegion(value);
+        }
         const subregion = SubRegions.getSubRegionById(this.region, value);
 
         if (subregion.startRoute) {
@@ -211,6 +229,7 @@ class Player {
             'effectList',
             'effectTimer',
             'highestRegion',
+            'highestSubRegion',
         ];
         const plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep);

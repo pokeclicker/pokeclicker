@@ -10,6 +10,74 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.3
+    new ChangelogUpdate('v0.9.3', new Date(2022, 3, 28)),
+    new Changelog(changelogType.NEW, 'Added Hatchery Helpers [BETA]'),
+    new Changelog(changelogType.NEW, 'Added Flutes [BETA]'),
+    new Changelog(changelogType.CHANGE, 'Changed default setting for Farm timer'),
+    new Changelog(changelogType.CHANGE, 'Added some more settings'),
+    new Changelog(changelogType.CHANGE, 'Grouped Mt. Coronet and Melemele Woods surrounding Dungeons'),
+    new Changelog(changelogType.CHANGE, 'Moved sell all button in Underground to the Treasures tab'),
+    new Changelog(changelogType.CHANGE, 'Ruins of Alph added Unown (A) as a boss until caught'),
+    new Changelog(changelogType.FIXED, 'Pokémon now sorted by ID in the evolution stone menu'),
+
+    // v0.9.2
+    new ChangelogUpdate('v0.9.2', new Date(2022, 3, 21)),
+    new Changelog(changelogType.NEW, 'Updated Alola Akala map'),
+    new Changelog(changelogType.NEW, 'Select region with number keys while dock modal is open'),
+    new Changelog(changelogType.CHANGE, 'Updated save selector view on mobile'),
+    new Changelog(changelogType.CHANGE, 'Badge case split up by region'),
+    new Changelog(changelogType.CHANGE, 'Updated some dungeon encounters'),
+    new Changelog(changelogType.CHANGE, 'Updated Unown encounters'),
+    new Changelog(changelogType.CHANGE, 'Updated webworker and game ticks'),
+    new Changelog(changelogType.CHANGE, 'Updated some sprite inconsistencies'),
+    new Changelog(changelogType.FIXED, 'Underground sell all no longer starts breeding fossils'),
+
+    // v0.9.1
+    new ChangelogUpdate('v0.9.1', new Date(2022, 3, 14)),
+    new Changelog(changelogType.FIXED, 'Easter quest line not starting on new saves'),
+    new Changelog(changelogType.FIXED, 'Save deletion/importing in game'),
+    new Changelog(changelogType.FIXED, 'Shop Pokémon prices rounding'),
+    new Changelog(changelogType.FIXED, 'On screen Safari Zone controls not working'),
+    new Changelog(changelogType.FIXED, 'Achievement filtering'),
+    new Changelog(changelogType.FIXED, 'Dungeon showing as incomplete if locked Pokémon not obtained yet'),
+
+    // v0.9.0
+    new ChangelogUpdate('v0.9.0 - Alola', new Date(2022, 3, 13)),
+    new Changelog(changelogType.NEW, 'The Alola region is now available'),
+    new Changelog(changelogType.NEW, 'More hotkeys'),
+    new Changelog(changelogType.NEW, 'Customizable hotkeys'),
+    new Changelog(changelogType.NEW, 'Desktop notifications'),
+    new Changelog(changelogType.NEW, 'Added Sell-all button to Underground'),
+    new Changelog(changelogType.NEW, 'Sinnoh Quest Line'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Dungeon Achievement amounts required'),
+    new Changelog(changelogType.CHANGE, 'Adjusted shop Evolution Stone caught indicator'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some sprites'),
+    new Changelog(changelogType.CHANGE, 'Indicate HP buff when opening chests in Dungeons'),
+    new Changelog(changelogType.CHANGE, 'Changed some Sinnoh Dungeons'),
+    new Changelog(changelogType.CHANGE, 'Ruins of Alph Unown encounters'),
+    new Changelog(changelogType.FIXED, 'Save profiles not loading if they contained a % symbol'),
+
+    // v0.8.17
+    new ChangelogUpdate('v0.8.17', new Date(2022, 2, 31)),
+    new Changelog(changelogType.NEW, 'Added Shiny achievements per region'),
+    new Changelog(changelogType.CHANGE, 'Show Evolution Stones from future regions in the items menu if you have at least 1'),
+    new Changelog(changelogType.FIXED, 'Incorrect regions for some evolution items'),
+    new Changelog(changelogType.FIXED, 'Damage calculator showing NaN'),
+
+    // v0.8.16
+    new ChangelogUpdate('v0.8.16', new Date(2022, 2, 30)),
+    new Changelog(changelogType.NEW, 'Added map colors for Achievement not yet complete'),
+    new Changelog(changelogType.NEW, 'Show Dungeon and Gym clears'),
+    new Changelog(changelogType.NEW, 'Can re-order saves on the save selection screen'),
+    new Changelog(changelogType.CHANGE, 'Notification and sounds settings now grouped'),
+    new Changelog(changelogType.CHANGE, 'Increased size of Gem icons'),
+    new Changelog(changelogType.CHANGE, 'Added option to damage calculator that ignores Pokémon level'),
+    new Changelog(changelogType.CHANGE, 'Updated the Quest Point cost for some Pokémon'),
+    new Changelog(changelogType.CHANGE, 'Different Champion defeat message per region'),
+    new Changelog(changelogType.CHANGE, 'Hide Evolution Stones from future regions in the items menu'),
+    new Changelog(changelogType.FIXED, 'Progress bar showing as incomplete when an Oak Item is ready to be upgraded'),
+
     // v0.8.15
     new ChangelogUpdate('v0.8.15', new Date(2022, 2, 14)),
     new Changelog(changelogType.NEW, 'Team Plasma questline'),

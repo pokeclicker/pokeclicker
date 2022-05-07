@@ -29,7 +29,7 @@ class PokemonHelper {
                 }
             }
             return false;
-        });
+        }).sort((a, b) => a.id - b.id);
     }
 
     public static getEvolution(id: number, evoType: GameConstants.StoneType): string {
@@ -200,13 +200,14 @@ class PokemonHelper {
         const shops = [];
         Object.entries(TownList).forEach(([townName, town]) => {
             // Check if the shop has items
-            if (town.shops && town.shops.find(s => s.items)) {
+            const townShops = town.content.filter(c => c instanceof Shop && c.items);
+            if (townShops.length) {
                 // If we only want to check up to a maximum region
                 const region = town.region;
                 if (maxRegion != GameConstants.Region.none && region > maxRegion) {
                     return false;
                 }
-                const hasPokemon = town.shops.find(s => s.items?.find(item => item.name == pokemonName));
+                const hasPokemon = townShops.find(ts => (ts as Shop).items?.find(item => item.name == pokemonName));
                 if (hasPokemon) {
                     shops.push(townName);
                 }
