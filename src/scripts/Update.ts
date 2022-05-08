@@ -725,12 +725,13 @@ class Update implements Saveable {
             // Add Sendoff Spring
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
         },
-        '0.9.3': ({ playerData, saveData }) => {
+        '0.9.4': ({ playerData, saveData }) => {
             // Change Ultra Wormhole to a Temporary Battle
             saveData.statistics.temporaryBattleDefeated = new Array<number>();
             saveData.statistics.temporaryBattleDefeated[0] = saveData.statistics.gymsDefeated[84];
-            saveData.statistics.gymsDefeated = saveData.statistics.gymsDefeated.slice(0, 84).concat(saveData.statistics.gymsDefeated.slice(85, saveData.statistics.gymsDefeated.length));
-            saveData.badgeCase = saveData.badgeCase.slice(0, 84).concat(saveData.badgeCase.slice(85, saveData.badgeCase.length));
+            // Remove the Elite_Nihilego Gym, now a temporary battle instead of a gym
+            saveData.statistics.gymsDefeated.splice(84, 1);
+            saveData.badgeCase.splice(84, 1);
         },
     };
 
