@@ -56,17 +56,27 @@ class Player {
         this._townName = TownList[savedPlayer._townName] ? savedPlayer._townName : GameConstants.StartingTowns[this._region()];
         this._town = ko.observable(TownList[this._townName]);
         this._town.subscribe(value => this._townName = value.name);
+
         this.starter = ko.observable(savedPlayer.starter != undefined ? savedPlayer.starter : GameConstants.Starter.None);
         this.regionStarters = new Array<KnockoutObservable<number>>();
-        for (let i = 0; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
-            if (savedPlayer.regionStarters && (savedPlayer.highestRegion ?? 0) >= i) {
+        this.regionStarters.push(ko.observable(0)); //TODO: fix this
+        for (let i = 1; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
+            if (savedPlayer.regionStarters && savedPlayer.regionStarters[i]) {
                 this.regionStarters.push(ko.observable(savedPlayer.regionStarters[i]));
-            } else {
-                if (i == 0 && savedPlayer.starter) {
-                    this.regionStarters.push(ko.observable(savedPlayer.starter));
-                } else {
-                    this.regionStarters.push(ko.observable(0));
+            } else if (i < (savedPlayer.highestRegion ?? 0)) {
+                this.regionStarters.push(ko.observable(0));
+            } else if (i == (savedPlayer.highestRegion ?? 0)) {
+                this.regionStarters.push(ko.observable(undefined));
+                if (this._region() != i) {
+                    this._region(i);
+                    this._subregion(0);
+                    this.route(undefined);
+                    this._townName = GameConstants.StartingTowns[i];
+                    this._town = ko.observable(TownList[this._townName]);
                 }
+                $('#pickStarterModal').modal('show');
+            } else {
+                this.regionStarters.push(ko.observable(undefined));
             }
         }
 
