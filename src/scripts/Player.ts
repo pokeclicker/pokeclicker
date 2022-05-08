@@ -59,7 +59,24 @@ class Player {
 
         this.starter = ko.observable(savedPlayer.starter != undefined ? savedPlayer.starter : GameConstants.Starter.None);
         this.regionStarters = new Array<KnockoutObservable<number>>();
-        this.regionStarters.push(ko.observable(0)); //TODO: fix this
+        if (savedPlayer.regionStarters && savedPlayer.regionStarters[0]) {
+            this.regionStarters.push(ko.observable(savedPlayer.regionStarters[0]));
+        } else {
+            switch (this.starter()) {
+                case GameConstants.Starter.None:
+                    this.regionStarters.push(ko.observable(undefined));
+                    break;
+                case GameConstants.Starter.Bulbasaur:
+                    this.regionStarters.push(ko.observable(0));
+                    break;
+                case GameConstants.Starter.Charmander:
+                    this.regionStarters.push(ko.observable(1));
+                    break;
+                case GameConstants.Starter.Squirtle:
+                    this.regionStarters.push(ko.observable(2));
+                    break;
+            }
+        }
         for (let i = 1; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
             if (savedPlayer.regionStarters && savedPlayer.regionStarters[i]) {
                 this.regionStarters.push(ko.observable(savedPlayer.regionStarters[i]));
