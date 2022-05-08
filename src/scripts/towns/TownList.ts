@@ -2512,7 +2512,7 @@ TownList['Konikoni City'] = new Town(
 TownList['Aether Paradise'] = new Town(
     'Aether Paradise',
     GameConstants.Region.alola,
-    [temporaryBattleList['Ultra Wormhole'], AetherParadiseShop, new MoveToDungeon(dungeonList['Aether Foundation'])],
+    [TemporaryBattleList['Ultra Wormhole'], AetherParadiseShop, new MoveToDungeon(dungeonList['Aether Foundation'])],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
         npcs: [AetherParadiseAlolaRoamerNPC],

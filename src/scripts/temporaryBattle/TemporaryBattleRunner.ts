@@ -2,7 +2,7 @@
 /// <reference path="../../declarations/enums/Badges.d.ts" />
 
 class TemporaryBattleRunner {
-    public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.ONETIMEBATTLE_TIME);
+    public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.TEMP_BATTLE_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
 
     public static battleObservable: KnockoutObservable<TemporaryBattle> = ko.observable();
@@ -14,7 +14,7 @@ class TemporaryBattleRunner {
         this.running(false);
         this.battleObservable(battle);
         App.game.gameState = GameConstants.GameState.idle;
-        this.timeLeft(GameConstants.ONETIMEBATTLE_TIME);
+        this.timeLeft(GameConstants.TEMP_BATTLE_TIME);
         this.timeLeftPercentage(100);
 
         TemporaryBattleBattle.battle = battle;
@@ -51,8 +51,8 @@ class TemporaryBattleRunner {
         if (this.timeLeft() < 0) {
             this.battleLost();
         }
-        this.timeLeft(this.timeLeft() - GameConstants.ONETIMEBATTLE_TICK);
-        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.ONETIMEBATTLE_TIME * 100));
+        this.timeLeft(this.timeLeft() - GameConstants.TEMP_BATTLE_TICK);
+        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.TEMP_BATTLE_TIME * 100));
     }
 
     public static battleLost() {
