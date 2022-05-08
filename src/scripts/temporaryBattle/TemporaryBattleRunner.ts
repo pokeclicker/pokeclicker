@@ -35,6 +35,9 @@ class TemporaryBattleRunner {
     }
 
     public static resetGif() {
+        if (!Settings.getSetting('showGymGoAnimation').value) {
+            return;
+        }
         $('#temporaryBattleGoContainer').show();
         setTimeout(() => {
             $('#temporaryBattleGo').attr('src', 'assets/gifs/go.gif');
