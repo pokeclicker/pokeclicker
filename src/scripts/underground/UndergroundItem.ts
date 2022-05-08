@@ -144,3 +144,4 @@ UndergroundItem.addItem('Red Shard', 400, [[1,1,1], [1,1,0], [1,1,1]], 1);
 UndergroundItem.addItem('Yellow Shard', 401, [[1,0,1,0], [1,1,1,0], [1,1,1,1]], 1);
 UndergroundItem.addItem('Green Shard', 402, [[1,1,1,1], [1,1,1,1], [1,1,0,1]], 1);
 UndergroundItem.addItem('Blue Shard', 403, [[1,1,1], [1,1,1], [1,1,0]], 1);
+UndergroundItem.addItem('Grey Shard', 404, [[1,1,1], [1,1,1], [0,0,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.johto));
