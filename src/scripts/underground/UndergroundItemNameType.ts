@@ -65,4 +65,5 @@ type UndergroundItemNameType
     | 'Blue Shard'
     | 'Grey Shard'
     | 'Purple Shard'
-    | 'Ochre Shard';
+    | 'Ochre Shard'
+    | 'Black Shard';
