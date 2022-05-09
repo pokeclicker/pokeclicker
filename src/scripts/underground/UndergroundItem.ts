@@ -149,3 +149,4 @@ UndergroundItem.addItem('Purple Shard', 405, [[1,1,1], [1,1,1]], 1, undefined, n
 UndergroundItem.addItem('Ochre Shard', 406, [[1,1,0], [1,1,1], [1,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.hoenn));
 UndergroundItem.addItem('Black Shard', 407, [[1,1,1], [0,1,1], [0,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.sinnoh));
 UndergroundItem.addItem('Crimson Shard', 408, [[0,1,1,1], [0,1,1,1], [0,1,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.sinnoh));
+UndergroundItem.addItem('Lime Shard', 409, [[0,0,0,0], [0,1,1,1], [1,1,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.sinnoh));
