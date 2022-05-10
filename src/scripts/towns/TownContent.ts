@@ -90,6 +90,13 @@ class NextRegionTownContent extends TownContent {
         return MapHelper.ableToTravel();
     }
 
+    public protectedOnclick(): void {
+        if (!MapHelper.ableToTravel()) {
+            return;
+        }
+        this.onclick();
+    }
+
     public onclick(): void {
         $('#nextRegionModal').modal('show');
     }

@@ -993,6 +993,10 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     ],
     60600,
     [
+        new DungeonBossPokemon('Unown (A)', 800000, 50, {
+            hide: true,
+            requirement: new ObtainedPokemonRequirement(pokemonMap['Unown (A)'], true),
+        }),
         ...AlphUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 280000, 14, {
             hide: true,
             requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(AlphUnownList) == char),
@@ -6754,11 +6758,43 @@ dungeonList['Tower of Water'] = new Dungeon('Tower of Water',
 
 
 //Crown Tundra
-dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
-    ['Golurk', 'Electivire', 'Dragapult', 'Araquanid', 'Cryogonal', 'Bronzong', 'Claydol', 'Absol', 'Galvantula', 'Audino'],
+dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
+    ['Trevenant', 'Stonjourner', 'Heatmor', 'Conkeldurr', 'Rhyperior', 'Aerodactyl'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
+        new DungeonBossPokemon('Relicanth', 8000000, 70),
+        new DungeonBossPokemon('Regirock', 8000000, 70),
+    ],
+    96500, 201);
+
+dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
+    ['Metang', 'Bronzong', 'Dragapult', 'Snorlax', 'Magmortar'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    2203000,
+    [
+        new DungeonBossPokemon('Metagross', 8000000, 70),
+        new DungeonBossPokemon('Registeel', 8000000, 70),
+    ],
+    96500, 201);
+
+dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
+    ['Cryogonal', 'Beartic', 'Galarian Darmanitan', 'Aurorus', 'Weavile', 'Vanilluxe', 'Absol', 'Froslass', 'Delibird'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    2203000,
+    [
+        new DungeonBossPokemon('Glalie', 8000000, 70),
+        new DungeonBossPokemon('Regice', 8000000, 70),
+    ],
+    96500, 201);
+
+dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
+    ['Golurk', 'Electabuzz', 'Drakloak', 'Araquanid', 'Cryogonal', 'Bronzong', 'Claydol', 'Absol', 'Galvantula', 'Audino'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    2203000,
+    [
+        new DungeonBossPokemon('Dragapult', 8000000, 70),
+        new DungeonBossPokemon('Electivire', 8000000, 70),
         new DungeonBossPokemon('Regidrago', 8000000, 70),
         new DungeonBossPokemon('Regieleki', 8000000, 70),
     ],

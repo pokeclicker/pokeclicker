@@ -10,6 +10,17 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.3
+    new ChangelogUpdate('v0.9.3', new Date(2022, 3, 28)),
+    new Changelog(changelogType.NEW, 'Added Hatchery Helpers [BETA]'),
+    new Changelog(changelogType.NEW, 'Added Flutes [BETA]'),
+    new Changelog(changelogType.CHANGE, 'Changed default setting for Farm timer'),
+    new Changelog(changelogType.CHANGE, 'Added some more settings'),
+    new Changelog(changelogType.CHANGE, 'Grouped Mt. Coronet and Melemele Woods surrounding Dungeons'),
+    new Changelog(changelogType.CHANGE, 'Moved sell all button in Underground to the Treasures tab'),
+    new Changelog(changelogType.CHANGE, 'Ruins of Alph added Unown (A) as a boss until caught'),
+    new Changelog(changelogType.FIXED, 'Pokémon now sorted by ID in the evolution stone menu'),
+
     // v0.9.2
     new ChangelogUpdate('v0.9.2', new Date(2022, 3, 21)),
     new Changelog(changelogType.NEW, 'Updated Alola Akala map'),

@@ -290,10 +290,11 @@ class GameController {
                         return e.preventDefault();
                     } else if (isNumberKey) {
                         // Check if a number higher than 0 and less than our towns content was pressed
-                        if (numberKey < player.town().content.length) {
-                            player.town().content[numberKey].protectedOnclick();
-                        } else if (player.town().npcs && numberKey < player.town().content.length + player.town().npcs.length) {
-                            player.town().npcs[numberKey - player.town().content.length].openDialog();
+                        const filteredConent = player.town().content.filter(c => c.isVisible());
+                        if (numberKey < filteredConent.length) {
+                            filteredConent[numberKey].protectedOnclick();
+                        } else if (player.town().npcs && numberKey < filteredConent.length + player.town().npcs.length) {
+                            player.town().npcs[numberKey - filteredConent.length].openDialog();
                         }
                         return e.preventDefault();
                     }

@@ -98,10 +98,11 @@ class Party implements Feature {
      * @param type2 types of the enemy we're calculating damage against.
      * @returns {number} damage to be done.
      */
-    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeBreeding = false, useBaseAttack = false, includeWeather = true, ignoreLevel = false): number {
+
+    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeBreeding = false, useBaseAttack = false, includeWeather = true, ignoreLevel = false, includeFlute = true): number {
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
-            attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, includeWeather, ignoreLevel);
+            attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, includeWeather, ignoreLevel, includeFlute);
         }
 
         const bonus = this.multiplier.getBonus('pokemonAttack');
@@ -109,7 +110,7 @@ class Party implements Feature {
         return Math.round(attack * bonus);
     }
 
-    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, includeWeather = true, ignoreLevel = false): number {
+    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, includeWeather = true, ignoreLevel = false, includeFlute = true): number {
         let multiplier = 1, attack = 0;
         const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : (pokemon.attack * (this.calculateEVAttackBonus(pokemon))));
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
@@ -143,6 +144,19 @@ class Party implements Feature {
                 }
                 if (value.type == dataPokemon.type2) {
                     attack *= value.multiplier;
+                }
+            });
+        }
+
+        // Should we take flute boost into account
+        if (includeFlute) {
+            const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+            FluteEffectRunner.activeGemTypes().forEach(value => {
+                if (value == dataPokemon.type1) {
+                    attack *= GameConstants.FLUTE_TYPE_ATTACK_MULTIPLIER;
+                }
+                if (value == dataPokemon.type2) {
+                    attack *= GameConstants.FLUTE_TYPE_ATTACK_MULTIPLIER;
                 }
             });
         }
