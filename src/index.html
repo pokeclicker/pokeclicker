@@ -395,7 +395,10 @@
                             visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1,
                             css: { 'slow-flash': player.highestRegion() == player.region && SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > player.highestSubRegion() + 1 }">
                             <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion - 1">&lt;</button>
-                            <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="click: () => SubRegions.openModal()">Subregional Travel</button>
+                            <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="
+                                click: () => SubRegions.openModal(),
+                                text: 'Subregional Travel (' + SubRegions.getSubRegionById(player.region, player.subregion)?.name + ')'"
+                                >Subregional Travel</button>
                             <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion + 1">&gt;</button>
                         </div>
                         <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
