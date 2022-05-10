@@ -70,7 +70,7 @@ SpecialEvents.newEvent('Easter', 'Encounter Surprise Togepi for a limited time w
 SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu and Red Spearow for a limited time roaming Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 6, 1), () => {
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Flying Pikachu'));    
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Flying Pikachu'));
         RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Red Spearow'));
     },
     // End
