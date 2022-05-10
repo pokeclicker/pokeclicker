@@ -663,6 +663,7 @@ const MauvilleCityShop = new Shop([
     ItemList['Electric_egg'],
     ItemList['Thunder_stone'],
     ItemList['Metal_coat'],
+    ItemList['HatcheryHelperJasmine'],
 ]);
 const VerdanturfTownShop = new Shop([
     ItemList['Grass_egg'],
@@ -719,6 +720,9 @@ const HoennBerryMaster = new BerryMasterShop([
     ItemList['FarmHandKerry'],
 ]);
 
+//Hoenn Flute Master
+const HoennFluteMaster = new GemMasterShop([]);
+
 //Hoenn NPCs
 
 const LittlerootAide = new NPC('Professor Birch\'s Aide', [
@@ -739,6 +743,12 @@ const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
     'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...',
+]);
+
+const LavaridgeSootCollector = new NPC('Soot Collector', [
+    'Blegh! I\'ve taken three soaks in the hot springs and I can still taste the soot!',
+    'The Flute Trader in Fallarbor Town has been paying me to go collect soot to make Flutes, but I\'m sick of it.',
+    'People say they have truly mystical powers, but that they require Gems of different types to use. Also, using more Flutes at the same time costs more Gems to use',
 ]);
 
 const FortreeWeatherman = new NPC('Weatherman', [
@@ -845,7 +855,7 @@ TownList['Lavaridge Town'] = new Town(
 TownList['Fallarbor Town'] = new Town(
     'Fallarbor Town',
     GameConstants.Region.hoenn,
-    [FallarborTownShop],
+    [FallarborTownShop, HoennFluteMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 113)],
         npcs: [FallarborProfessorCozmo],
@@ -1226,6 +1236,14 @@ TownList['Eterna City'] = new Town(
         npcs: [EternaLassCaroline],
     }
 );
+TownList['Mt. Coronet'] = new Town(
+    'Mt. Coronet',
+    GameConstants.Region.sinnoh,
+    [new MoveToDungeon(dungeonList['Mt. Coronet South']), new MoveToDungeon(dungeonList['Mt. Coronet North']), new MoveToDungeon(dungeonList['Spear Pillar']), new MoveToDungeon(dungeonList['Hall of Origin'])],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 207)],
+    }
+);
 TownList['Hearthome City'] = new Town(
     'Hearthome City',
     GameConstants.Region.sinnoh,
@@ -1563,6 +1581,9 @@ const AnvilleTownShop = new Shop([
     ItemList['Meloetta (pirouette)'],
 ]);
 
+//Unova Gem Master
+const UnovaFluteMaster = new GemMasterShop([]);
+
 //Unova NPCs
 const ExcitedChild = new NPC('Excited Child', [
     'Did you hear? Did you see? It was on TV!',
@@ -1671,7 +1692,7 @@ TownList['Lentimas Town'] = new Town(
 TownList['Undella Town'] = new Town(
     'Undella Town',
     GameConstants.Region.unova,
-    [UndellaTownShop],
+    [UndellaTownShop, UnovaFluteMaster],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))],
     }
@@ -2364,7 +2385,7 @@ const IkiKahuna = new NPC('Kahuna Hala', [
     'Welcome to Alola!',
     'Here we don\'t have gyms. We have the Island Challenge. On each of our four islands you will complete one or more trials.',
     'After completing all of an island\'s trials you will battle that island\'s Kahuna in a Grand trial.',
-    'This island only has one trial: Captain Ilima\'s trial in Verdant Cavern. Come back here after clearing that challenge for your Grand trial battle.',
+    'This island only has one trial: Captain Ilima\'s trial in Verdant Cavern, below the Melemele Woods. Come back here after clearing that challenge for your Grand trial battle.',
 ]);
 const HeaheaCafeOwner = new NPC('Café Owner', [
     'Akala Island has three trials.',
@@ -2433,6 +2454,14 @@ TownList['Hau\'oli City'] = new Town(
     [HauoliCityShop],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
+    }
+);
+TownList['Melemele Woods'] = new Town(
+    'Melemele Woods',
+    GameConstants.Region.alola,
+    [new MoveToDungeon(dungeonList['Verdant Cavern']), new MoveToDungeon(dungeonList['Melemele Meadow']), new MoveToDungeon(dungeonList['Ruins of Conflict'])],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 2)],
     }
 );
 //TODO: Change requirement when UB questline is merged.
