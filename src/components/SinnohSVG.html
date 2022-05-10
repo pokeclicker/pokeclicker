@@ -332,8 +332,8 @@
     <!--Route 224 Extension-->
     <%- include('templates/mapRoute',
         { route: 224, region: 3
-        , height: 0.5, width: 3
-        , x: 90.5, y: 26
+        , height: 1, width: 3
+        , x: 90, y: 26
         , rotate: true
         , noText: true
         })
@@ -644,8 +644,16 @@
     <!--Pokémon League Sinnoh-->
     <%- include('templates/mapTown',
         { name: "Pokémon League Sinnoh"
-        , x: 80.5, y: 24.2
-        , height: 6.8, width: 10
+        , x: 81, y: 25
+        , width: 9, height: 5.5
+        })
+    %>
+
+    <!--Pokémon League Sinnoh Extension-->
+    <%- include('templates/mapTown',
+        { name: "Pokémon League Sinnoh"
+        , x: 84, y: 30.5
+        , width: 3, height: 0.5
         })
     %>
 
