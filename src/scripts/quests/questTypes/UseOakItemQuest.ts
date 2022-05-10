@@ -49,6 +49,8 @@ class UseOakItemQuest extends Quest implements QuestInterface {
             desc.push('earn PokéDollars');
         } else if (OakItemType[this.item].match('Exp_Share')) {
             desc.push('defeat Pokémon');
+        } else {
+            desc.push('gain it\'s benefit');
         }
         desc.push(`${this.amount.toLocaleString('en-US')} times.`);
         return desc.join(' ');
