@@ -54,6 +54,7 @@ class PokemonFactory {
     }
 
     public static routeLevel(route: number, region: GameConstants.Region): number {
+        return Math.floor(Math.pow(20 * MapHelper.normalizeRoute(route, region),(1 / 2.25)));
     }
 
     public static routeHealth(route: number, region: GameConstants.Region): number {
