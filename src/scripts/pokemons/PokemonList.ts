@@ -667,7 +667,7 @@ const pokemonList = createPokemonArray(
             'speed': 70,
         },
     },
-        {
+    {
         'id': 21.1,
         'name': 'Red Spearow',
         'catchRate': 255,
