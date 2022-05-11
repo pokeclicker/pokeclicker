@@ -5,28 +5,28 @@
     <!-- ROUTES -->
     <!-- ------ -->
 
-    <!--Route 201 extra (behind because of text)-->
-    <%- include('templates/mapRoute',
-        { route: 201, region: 3
-        , height: 2.5, width: 5
-        , x: 7, y: 50
-        , noText: true
-        })
-    %>
     <!--Route 201-->
     <%- include('templates/mapRoute',
         { route: 201, region: 3
-        , height: 3, width: 5
-        , x: 12, y: 50
-        , textX: -40
+        , height: 1.5, width: 8
+        , x: 11, y: 51
+        })
+    %>
+
+    <!--Route 201 Extension-->
+    <%- include('templates/mapRoute',
+        { route: 201, region: 3
+        , height: 0.5, width: 1.5
+        , x: 14.5, y: 52.5
+        , noText: true
         })
     %>
 
     <!--Route 202-->
     <%- include('templates/mapRoute',
         { route: 202, region: 3
-        , height: 3, width: 4
-        , x: 18, y: 45
+        , height: 1.5, width: 4
+        , x: 21.5, y: 45.5
         , rotate:true
         })
     %>
@@ -34,48 +34,42 @@
     <!--Route 203-->
     <%- include('templates/mapRoute',
         { route: 203, region: 3
-        , height: 3, width: 5
-        , x: 23, y: 42
+        , height: 1.5, width: 5
+        , x: 23.5, y: 41
         })
     %>
 
     <!--Route 204-->
     <%- include('templates/mapRoute',
         { route: 204, region: 3
-        , height: 3, width: 4.5
-        , x: 18, y: 36
+        , height: 1.5, width: 4
+        , x: 17.5, y: 36
         , rotate: true
-        })
-    %>
-    <!--Route 204 Extension-->
-    <%- include('templates/mapRoute',
-        { route: 204, region: 3
-        , height: 0.5, width: 2
-        , x: 19, y: 40.5
-        , noText: true
         })
     %>
 
     <!--Route 205-->
     <%- include('templates/mapRoute',
         { route: 205, region: 3
-        , height: 3, width: 9
-        , x: 22, y: 27
+        , height: 1.5, width: 4.5
+        , x: 25.5, y: 23.5, name: "205N"
         })
     %>
+
     <!--Route 205 Extension-->
     <%- include('templates/mapRoute',
         { route: 205, region: 3
-        , height: 2, width: 6
-        , x: 18, y: 30
-        , noText: true
+        , height: 1.5, width: 8.5
+        , x: 22, y: 26, name: "205S"
+        , rotate: true
         })
     %>
+
     <!--Route 205 Extension-->
     <%- include('templates/mapRoute',
         { route: 205, region: 3
-        , height: 4, width: 3
-        , x: 21, y: 32
+        , height: 1.5, width: 5
+        , x: 20.5, y: 34.5
         , noText: true
         })
     %>
@@ -83,43 +77,34 @@
     <!--Route 206-->
     <%- include('templates/mapRoute',
         { route: 206, region: 3
-        , height: 3, width: 4
-        , x: 32, y: 30
+        , height: 1.5, width: 10.5
+        , x: 33, y: 27.5
         , rotate: true
-        })
-    %>
-    <!--Route 206 Extension-->
-    <%- include('templates/mapRoute',
-        { route: 206, region: 3
-        , height: 3, width: 4
-        , x: 32, y: 37
-        , rotate: true
-        , noText: true
         })
     %>
 
     <!--Route 207-->
     <%- include('templates/mapRoute',
         { route: 207, region: 3
-        , height: 3, width: 6
-        , x: 32, y: 41
+        , height: 1.5, width: 5.5
+        , x: 33, y: 38
+        })
+    %>
+
+    <!--Route 207-->
+    <%- include('templates/mapRoute',
+        { route: 207, region: 3
+        , height: 1, width: 1.5
+        , x: 33, y: 39.5
+        , noText: true
         })
     %>
 
     <!--Route 208-->
     <%- include('templates/mapRoute',
         { route: 208, region: 3
-        , height: 3, width: 6
-        , x: 38, y: 41
-        })
-    %>
-
-    <!--Route 208 extra-->
-    <%- include('templates/mapRoute',
-        { route: 208, region: 3
-        , height: 1, width: 3
-        , x: 44, y: 43
-        , noText: true
+        , height: 3, width: 1.5
+        , x: 42.5, y: 38
         })
     %>
 
@@ -171,8 +156,8 @@
     <!--Route 211-->
     <%- include('templates/mapRoute',
         { route: 211, region: 3
-        , height: 3, width: 4
-        , x: 35, y: 27
+        , height: 1.5, width: 4
+        , x: 35, y: 23.5, name: "211W"
         })
     %>
 
@@ -230,25 +215,16 @@
     <!--Route 216-->
     <%- include('templates/mapRoute',
         { route: 216, region: 3
-        , height: 3, width: 10
-        , x: 30, y: 17
-        })
-    %>
-
-    <!--Route 216 extra-->
-    <%- include('templates/mapRoute',
-        { route: 216, region: 3
-        , height: 1, width: 4
-        , x: 40, y: 17
-        , noText: true
+        , height: 1.5, width: 6
+        , x: 32.5, y: 16.5
         })
     %>
 
     <!--Route 217-->
     <%- include('templates/mapRoute',
         { route: 217, region: 3
-        , height: 3, width: 12
-        , x: 30, y: 5
+        , height: 1.5, width: 12
+        , x: 32.5, y: 4.5
         , rotate: true
         })
     %>
@@ -256,17 +232,8 @@
     <!--Route 217 extra-->
     <%- include('templates/mapRoute',
         { route: 217, region: 3
-        , height: 1, width: 8
-        , x: 33, y: 6
-        , noText: true
-        })
-    %>
-
-    <!--Route 217 extra-->
-    <%- include('templates/mapRoute',
-        { route: 217, region: 3
-        , height: 2, width: 1
-        , x: 29, y: 5
+        , height: 1.5, width: 2.5
+        , x: 34, y: 4.5
         , noText: true
         })
     %>
@@ -274,16 +241,16 @@
     <!--Route 218-->
     <%- include('templates/mapRoute',
         { route: 218, region: 3
-        , height: 3, width: 5
-        , x: 9, y: 42
+        , height: 1.5, width: 9.5
+        , x: 7.5, y: 42.5
         })
     %>
 
     <!--Route 219-->
     <%- include('templates/mapRoute',
         { route: 219, region: 3
-        , height: 3, width: 5
-        , x: 18, y: 53
+        , height: 1.5, width: 4
+        , x: 21.5, y: 54.5
         , rotate: true
         })
     %>
@@ -291,16 +258,16 @@
     <!--Route 220-->
     <%- include('templates/mapRoute',
         { route: 220, region: 3
-        , height: 3, width: 6
-        , x: 21, y: 55
+        , height: 1.5, width: 7
+        , x: 23, y: 57
         })
     %>
 
     <!--Route 221-->
     <%- include('templates/mapRoute',
         { route: 221, region: 3
-        , height: 3, width: 6
-        , x: 27, y: 55
+        , height: 1.5, width: 6
+        , x: 30, y: 57
         })
     %>
 
@@ -415,8 +382,8 @@
     <!--Twinleaf Town-->
     <%- include('templates/mapTown',
         { name: "Twinleaf Town"
-        , x: 7, y: 52.5
-        , height: 4.5, width: 5
+        , x: 12.5, y: 53
+        , height: 3, width: 5.5
         , home: true
         })
     %>
@@ -424,108 +391,112 @@
     <!--Sandgem Town-->
     <%- include('templates/mapTown',
         { name: "Sandgem Town"
-        , x: 17, y: 49
-        , height: 4, width: 4
-        })
-    %>
-
-    <!--Canalave City-->
-    <%- include('templates/mapTown',
-        { name: "Canalave City"
-        , x: 5, y: 41
-        , height: 4, width: 4
+        , x: 19, y: 49.5
+        , height: 5, width: 5.5
         })
     %>
 
     <!--Jubilife City-->
     <%- include('templates/mapTown',
         { name: "Jubilife City"
-        , x: 14, y: 41
-        , height: 4, width: 9
-        })
-    %>
-    <!--Jubilife City extra-->
-    <%- include('templates/mapTown',
-        { name: "Jubilife City"
-        , x: 14, y: 40.5
-        , height: 0.5, width: 5
+        , x: 17, y: 40
+        , height: 5.5, width: 6.5
         })
     %>
 
     <!--Oreburgh City-->
     <%- include('templates/mapTown',
         { name: "Oreburgh City"
-        , x: 28, y: 41
+        , x: 34, y: 41.5
+        , height: 3.5, width: 3
+        })
+    %>
+
+    <!--Oreburgh City Extension-->
+    <%- include('templates/mapTown',
+        { name: "Oreburgh City"
+        , x: 32, y: 40.5
+        , height: 1, width: 4.5
+        })
+    %>
+
+    <!--Oreburgh City Extension-->
+    <%- include('templates/mapTown',
+        { name: "Oreburgh City"
+        , x: 32, y: 41.5
+        , height: 1.5, width: 2
+        })
+    %>
+
+    <!--Oreburgh City Extension-->
+    <%- include('templates/mapTown',
+        { name: "Oreburgh City"
+        , x: 33, y: 43
+        , height: 1.5, width: 1
+        })
+    %>
+
+    <!--Oreburgh City Extension-->
+    <%- include('templates/mapTown',
+        { name: "Oreburgh City"
+        , x: 32.5, y: 43
+        , height: 1, width: 0.5
+        })
+    %>
+
+    <!--Oreburgh City Extension-->
+    <%- include('templates/mapTown',
+        { name: "Oreburgh City"
+        , x: 33.5, y: 44.5
+        , height: 0.5, width: 0.5
+        })
+    %>
+
+    <!--Oreburgh City Extension-->
+    <%- include('templates/mapTown',
+        { name: "Oreburgh City"
+        , x: 34, y: 45
+        , height: 0.5, width: 2.5
         })
     %>
 
     <!--Floaroma Town-->
     <%- include('templates/mapTown',
         { name: "Floaroma Town"
-        , x: 17, y: 32
+        , x: 16, y: 33.5
+        , height: 2.5, width: 4.5
         })
     %>
 
     <!--Eterna City-->
     <%- include('templates/mapTown',
         { name: "Eterna City"
-        , x: 31, y: 26
+        , x: 30, y: 22.5
+        , height: 5, width: 2
+        })
+    %>
+
+    <!--Eterna City-->
+    <%- include('templates/mapTown',
+        { name: "Eterna City"
+        , x: 32, y: 23.5
+        , height: 4, width: 3
+        })
+    %>
+
+    <!--Eterna City-->
+    <%- include('templates/mapTown',
+        { name: "Eterna City"
+        , x: 31.5, y: 22
+        , height: 0.5, width: 0.5
         })
     %>
 
     <!--Mt. Coronet-->
     <%- include('templates/mapDungeon',
         { name: "Mt. Coronet"
-        , x: 40, y: 22
-        , height: 4, width: 6
-        })
-    %>
-
-    <!--Mt. Coronet Extension-->
-    <%- include('templates/mapDungeon',
-        { name: "Mt. Coronet"
-        , x: 44, y: 26
-        , height: 1, width: 2
-        })
-    %>
-
-    <!--Mt. Coronet Extension-->
-    <%- include('templates/mapDungeon',
-        { name: "Mt. Coronet"
-        , x: 40, y: 18
-        , height: 4, width: 4
-        })
-    %>
-
-    <!--Mt. Coronet Extension-->
-    <%- include('templates/mapDungeon',
-        { name: "Mt. Coronet"
-        , x: 40, y: 31
-        , height: 6, width: 4
-        })
-    %>
-
-    <!--Mt. Coronet Extension-->
-    <%- include('templates/mapDungeon',
-        { name: "Mt. Coronet"
-        , x: 39, y: 26
-        , height: 5, width: 5
-        })
-    %>
-
-    <!--Mt. Coronet Extension-->
-    <%- include('templates/mapDungeon',
-        { name: "Mt. Coronet"
-        , x: 37, y: 33
-        , height: 8, width: 3
-        })
-    %>
-
-    <!--Mt. Coronet Extension-->
-    <%- include('templates/mapDungeon',
-        { name: "Mt. Coronet"
-        , x: 40, y: 37
-        , height: 4, width: 1
+        , x: 39, y: 23
+        , height: 17, width: 3.5
         })
     %>
 
@@ -585,6 +556,38 @@
         })
     %>
 
+    <!--Canalave City-->
+    <%- include('templates/mapTown',
+        { name: "Canalave City"
+        , x: 3, y: 41
+        , height: 5, width: 4.5
+        })
+    %>
+
+    <!--Canalave City Extension-->
+    <%- include('templates/mapTown',
+        { name: "Canalave City"
+        , x: 3, y: 40.75
+        , height: 0.25, width: 2
+        })
+    %>
+
+    <!--Snowpoint City-->
+    <%- include('templates/mapTown',
+        { name: "Snowpoint City"
+        , x: 36.5, y: 1.5
+        , height: 4.5, width: 3.5
+        })
+    %>
+
+    <!--Snowpoint City-->
+    <%- include('templates/mapTown',
+        { name: "Snowpoint City"
+        , x: 40, y: 4.5
+        , height: 1.5, width: 1.5
+        })
+    %>
+
     <!--Sunyshore City-->
     <%- include('templates/mapTown',
         { name: "Sunyshore City"
@@ -598,14 +601,6 @@
         { name: "Sunyshore City"
         , x: 78, y: 47.5
         , height: 0.5, width: 5
-        })
-    %>
-
-    <!--Snowpoint City-->
-    <%- include('templates/mapTown',
-        { name: "Snowpoint City"
-        , x: 33, y: 1.5
-        , height: 4.5, width: 5
         })
     %>
 
@@ -636,7 +631,7 @@
     <!--Pal Park-->
     <%- include('templates/mapTown',
         { name: "Pal Park"
-        , x: 33, y: 54
+        , x: 32, y: 53
         , height: 4, width: 4
         })
     %>
@@ -664,47 +659,47 @@
     <!--Lake Verity-->
     <%- include('templates/mapDungeon',
         { name: "Lake Verity"
-        , x: 3, y: 49
-        , height: 4, width: 4
+        , x: 5.5, y: 48.5
+        , height: 4, width: 5.5
         })
     %>
 
     <!--Valley Windworks-->
     <%- include('templates/mapDungeon',
         { name: "Valley Windworks"
-        , x: 24, y: 33
-        , height: 3, width: 4
+        , x: 25.5, y: 33
+        , height: 3.5, width: 5.5
         })
     %>
 
     <!--Eterna Forest-->
     <%- include('templates/mapDungeon',
         { name: "Eterna Forest"
-        , x: 18, y: 27
-        , height: 3, width: 4
+        , x: 21, y: 22.5
+        , height: 3.5, width: 4.5
         })
     %>
 
-    <!--Old Chateau-->
+    <!--Team Galactic Eterna Building-->
     <%- include('templates/mapDungeon',
-        { name: "Old Chateau"
-        , x: 14, y: 29
-        , height: 3, width: 4
+        { name: "Team Galactic Eterna Building"
+        , x: 32, y: 21
+        , height: 2.5, width: 3
         })
     %>
 
     <!--Oreburgh Gate-->
     <%- include('templates/mapDungeon',
         { name: "Oreburgh Gate"
-        , x: 24, y: 39
-        , height: 3, width: 4
+        , x: 28.5, y: 40.5
+        , height: 2.5, width: 3.5
         })
     %>
 
     <!--Wayward Cave-->
     <%- include('templates/mapDungeon',
         { name: "Wayward Cave"
-        , x: 32, y: 34
+        , x: 29, y: 29.5
         , height: 3, width: 3
         })
     %>
@@ -716,6 +711,7 @@
         , height: 3, width: 4
         })
     %>
+
     <!--Lake Valor-->
     <%- include('templates/mapDungeon',
         { name: "Lake Valor"
@@ -727,16 +723,16 @@
     <!--Lake Acuity-->
     <%- include('templates/mapDungeon',
         { name: "Lake Acuity"
-        , x: 29, y: 1
-        , height: 4, width: 4
+        , x: 30.5, y: 0.5
+        , height: 4, width: 5.5
         })
     %>
 
     <!--Snowpoint Temple-->
     <%- include('templates/mapDungeon',
         { name: "Snowpoint Temple"
-        , x: 38, y: 0
-        , height: 6, width: 3
+        , x: 40, y: 1.5
+        , height: 3, width: 1.5
         })
     %>
 
@@ -810,8 +806,8 @@
 
     <%- include('templates/mapPOI',
         { name: "Dock"
-        , x: 6, y: 37
-        , height: 4, width: 3
+        , x: 6, y: 39
+        , height: 2, width: 1.5
         , databind: "click: function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Canalave City') }"
         })
      %>
@@ -862,7 +858,7 @@
 
      <%- include('templates/mapOverlay',
          { name: "Professor Rowan's Blimp"
-         , x: 12, y: 53
+         , x: 6.5, y: 53
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('Twinleaf Town')}, attr:{ class: MapHelper.calculateTownCssClass('Twinleaf Town') }"
          , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
@@ -872,7 +868,7 @@
 
      <%- include('templates/mapOverlay',
          { name: "Professor Rowan's Blimp"
-         , x: 12, y: 53
+         , x: 6.5, y: 53
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('Twinleaf Town')}, attr:{ class: MapHelper.calculateTownCssClass('Twinleaf Town') }"
          , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
