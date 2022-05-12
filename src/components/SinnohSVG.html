@@ -249,7 +249,7 @@
     <!--Route 219-->
     <%- include('templates/mapRoute',
         { route: 219, region: 3
-        , height: 1.5, width: 4
+        , height: 1.5, width: 4.5
         , x: 21.5, y: 54.5
         , rotate: true
         })
@@ -259,7 +259,7 @@
     <%- include('templates/mapRoute',
         { route: 220, region: 3
         , height: 1.5, width: 7
-        , x: 23, y: 57
+        , x: 23, y: 57.5
         })
     %>
 
@@ -267,7 +267,7 @@
     <%- include('templates/mapRoute',
         { route: 221, region: 3
         , height: 1.5, width: 6
-        , x: 30, y: 57
+        , x: 30, y: 57.5
         })
     %>
 
@@ -572,6 +572,14 @@
         })
     %>
 
+    <!--Pal Park-->
+    <%- include('templates/mapTown',
+        { name: "Pal Park"
+        , x: 33.5, y: 52.5
+        , height: 5, width: 3
+        })
+    %>
+
     <!--Snowpoint City-->
     <%- include('templates/mapTown',
         { name: "Snowpoint City"
@@ -624,14 +632,6 @@
     <%- include('templates/mapTown',
         { name: "Resort Area"
         , x: 79, y: 18
-        , height: 4, width: 4
-        })
-    %>
-
-    <!--Pal Park-->
-    <%- include('templates/mapTown',
-        { name: "Pal Park"
-        , x: 32, y: 53
         , height: 4, width: 4
         })
     %>
