@@ -23,7 +23,7 @@ TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ash Ketchum',
-        returnTown: 'Pewter City',
+        returnTown: 'Pallet Town',
     }
 );
 TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
@@ -41,6 +41,7 @@ TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ash Ketchum',
+        returnTown: 'Cianwood City',
     }
 );
 TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
@@ -58,6 +59,7 @@ TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ash Ketchum',
+        returnTown: 'LilyCove City',
     }
 );
 TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
@@ -75,6 +77,7 @@ TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ash Ketchum',
+        returnTown: 'Survival Area',
     }
 );
 TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
@@ -92,6 +95,7 @@ TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ash Ketchum',
+        returnTown: 'Mistralton City',
     }
 );
 TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
@@ -109,6 +113,7 @@ TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ash Ketchum',
+        returnTown: 'Kiloude City',
     }
 );
 
@@ -124,9 +129,10 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
     ],
     'Fine. I quit. Take my Pikachu.',
     [new TemporaryBattleRequirement('Ash Ketchum Kalos'), new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
-      undefined,
+    undefined,
     {
         displayName: 'Ash Ketchum',
+        returnTown: 'Seafolk Village',
         firstTimeRewardFunction: () => {
             App.game.party.gainPokemonById(25.07);
         },

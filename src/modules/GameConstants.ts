@@ -1160,6 +1160,7 @@ export const TemporaryBattles = [
     'Ash Ketchum Sinnoh',
     'Ash Ketchum Unova',
     'Ash Ketchum Kalos',
+    'Ash Ketchum Alola',
 ];
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
