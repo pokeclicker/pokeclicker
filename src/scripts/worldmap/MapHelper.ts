@@ -116,7 +116,9 @@ class MapHelper {
 
     public static calculateTownCssClass(townName: string): string {
         // Check if we are currently at this location
-        if (!player.route() && player.town() && player.town().name == townName) {
+        if (!player.route() &&
+            (App.game.gameState != GameConstants.GameState.temporaryBattle || TemporaryBattleRunner.battleObservable().parent?.name == townName) &&
+            player.town().name == townName) {
             return areaStatus[areaStatus.currentLocation];
         }
         // Check if this location is locked

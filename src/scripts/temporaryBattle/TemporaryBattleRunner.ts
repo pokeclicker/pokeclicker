@@ -18,7 +18,6 @@ class TemporaryBattleRunner {
         this.timeLeftPercentage(100);
 
         player.route(0);
-        player.town(battle.getTown());
         Battle.route = 0;
         Battle.catching(!(battle.optionalArgs.isTrainerBattle ?? true));
         TemporaryBattleBattle.battle = battle;
