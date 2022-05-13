@@ -153,7 +153,8 @@
                                      App.game.gameState === GameConstants.GameState.town ||
                                      App.game.gameState === GameConstants.GameState.shop ||
                                      App.game.gameState === GameConstants.GameState.gym ||
-                                     App.game.gameState == GameConstants.GameState.battleFrontier)">
+                                     App.game.gameState === GameConstants.GameState.battleFrontier ||
+                                     App.game.gameState === GameConstants.GameState.temporaryBattle)">
                     <table width="100%">
                         <tr class="row">
                             <td class="col">
@@ -202,7 +203,7 @@
                 <!--Use the base battle layout for fighting, dungeons and battle frontier.-->
 
                 <div class="battle-view card-body p-0 justify-content-center no-gutters no-select"
-                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier),
+                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier) || App.game.gameState == GameConstants.GameState.temporaryBattle,
                         class: MapHelper.calculateBattleCssClass()">
 
                     <!-- Route Battles -->
@@ -267,6 +268,9 @@
 
                     <!-- Gym Battles -->
                     @import "gymView.html"
+
+                    <!-- One Time Battles -->
+                    @import "temporaryBattleView.html"
 
                     <!-- Battle Frontier Battles -->
                     @import "battleFrontierView.html"
@@ -455,6 +459,9 @@
 
 <!-- Receive gym badge Modal -->
 @import "receiveGymBadge.html"
+
+<!-- One time battle won Modal -->
+@import "temporaryBattleWonModal.html"
 
 <!-- Achievements Modal -->
 @import "achievementsModal.html"
