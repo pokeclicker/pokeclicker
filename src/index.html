@@ -32,9 +32,6 @@
     <!--Notify-->
     <script src="libs/bootstrap-notify.min.js"></script>
 
-    <!--Motio-->
-    <script src="libs/motio.js"></script>
-
     <!--Intro.js-->
     <script src="libs/intro.min.js"></script>
     <link href="libs/introjs.css" rel="stylesheet">
@@ -153,7 +150,8 @@
                                      App.game.gameState === GameConstants.GameState.town ||
                                      App.game.gameState === GameConstants.GameState.shop ||
                                      App.game.gameState === GameConstants.GameState.gym ||
-                                     App.game.gameState == GameConstants.GameState.battleFrontier)">
+                                     App.game.gameState === GameConstants.GameState.battleFrontier ||
+                                     App.game.gameState === GameConstants.GameState.temporaryBattle)">
                     <table width="100%">
                         <tr class="row">
                             <td class="col">
@@ -202,7 +200,7 @@
                 <!--Use the base battle layout for fighting, dungeons and battle frontier.-->
 
                 <div class="battle-view card-body p-0 justify-content-center no-gutters no-select"
-                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier),
+                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier) || App.game.gameState == GameConstants.GameState.temporaryBattle,
                         class: MapHelper.calculateBattleCssClass()">
 
                     <!-- Route Battles -->
@@ -267,6 +265,9 @@
 
                     <!-- Gym Battles -->
                     @import "gymView.html"
+
+                    <!-- One Time Battles -->
+                    @import "temporaryBattleView.html"
 
                     <!-- Battle Frontier Battles -->
                     @import "battleFrontierView.html"
@@ -395,7 +396,10 @@
                             visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1,
                             css: { 'slow-flash': player.highestRegion() == player.region && SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > player.highestSubRegion() + 1 }">
                             <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion - 1">&lt;</button>
-                            <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="click: () => SubRegions.openModal()">Subregional Travel</button>
+                            <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="
+                                click: () => SubRegions.openModal(),
+                                text: 'Subregional Travel (' + SubRegions.getSubRegionById(player.region, player.subregion)?.name + ')'"
+                                >Subregional Travel</button>
                             <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion + 1">&gt;</button>
                         </div>
                         <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
@@ -455,6 +459,9 @@
 
 <!-- Receive gym badge Modal -->
 @import "receiveGymBadge.html"
+
+<!-- One time battle won Modal -->
+@import "temporaryBattleWonModal.html"
 
 <!-- Achievements Modal -->
 @import "achievementsModal.html"
