@@ -34,6 +34,8 @@ namespace GameConstants {
     declare const MAX_LOAD_TIME: number;
     declare const MUTATION_TICK: number;
     declare const WANDER_TICK: number;
+    declare const TEMP_BATTLE_TIME: number;
+    declare const TEMP_BATTLE_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
     declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
@@ -142,7 +144,8 @@ namespace GameConstants {
         safari,
         town,
         shop,
-        battleFrontier
+        battleFrontier,
+        temporaryBattle
     }
     declare enum Pokeball {
         'None',
@@ -408,4 +411,6 @@ namespace GameConstants {
     declare const StartingTowns: string[];
     declare const StartingRoutes: number[];
     declare const DockTowns: string[];
+    declare const TemporaryBattles: string[];
+    declare function getTemporaryBattlesIndex(temporaryBattle: string): number;
 }
