@@ -153,7 +153,8 @@
                                      App.game.gameState === GameConstants.GameState.town ||
                                      App.game.gameState === GameConstants.GameState.shop ||
                                      App.game.gameState === GameConstants.GameState.gym ||
-                                     App.game.gameState == GameConstants.GameState.battleFrontier)">
+                                     App.game.gameState === GameConstants.GameState.battleFrontier ||
+                                     App.game.gameState === GameConstants.GameState.temporaryBattle)">
                     <table width="100%">
                         <tr class="row">
                             <td class="col">
@@ -170,7 +171,7 @@
                             </td>
                             <td class="col">
                                 <span style="display: inline; position: relative;">
-                                    <img title="Quest points" src="assets/images/currency/questPoint.svg" height="25px">
+                                    <img title="Quest Points&#013;&#010;Gained by completing Quests" src="assets/images/currency/questPoint.svg" height="25px">
                                     <span id="animateCurrency-questPoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.questPoint]()) : App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
@@ -178,19 +179,19 @@
                         <tr class="row" data-bind="visible: Settings.getSetting('currencyMainDisplayExtended').observableValue()">
                             <td class="col">
                                 <span style="display: inline; position: relative;">
-                                    <img title="Quest points" src="assets/images/currency/farmPoint.svg" height="25px">
+                                    <img title="Farm Points&#013;&#010;Gained at the Farm" src="assets/images/currency/farmPoint.svg" height="25px">
                                     <span id="animateCurrency-farmPoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.farmPoint]()) : App.game.wallet.currencies[GameConstants.Currency.farmPoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td class="col">
                                 <span style="display: inline; position: relative;">
-                                    <img title="Quest points" src="assets/images/currency/diamond.svg" height="25px">
+                                    <img title="Diamonds&#013;&#010;Gained in the Underground" src="assets/images/currency/diamond.svg" height="25px">
                                     <span id="animateCurrency-diamond" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.diamond]()) : App.game.wallet.currencies[GameConstants.Currency.diamond]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td class="col">
                                 <span style="display: inline; position: relative;">
-                                    <img title="Quest points" src="assets/images/currency/battlePoint.svg" height="25px">
+                                    <img title="Battle Points&#013;&#010;Gained at the Battle Frontier" src="assets/images/currency/battlePoint.svg" height="25px">
                                     <span id="animateCurrency-battlePoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.battlePoint]()) : App.game.wallet.currencies[GameConstants.Currency.battlePoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
@@ -202,7 +203,7 @@
                 <!--Use the base battle layout for fighting, dungeons and battle frontier.-->
 
                 <div class="battle-view card-body p-0 justify-content-center no-gutters no-select"
-                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier),
+                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier) || App.game.gameState == GameConstants.GameState.temporaryBattle,
                         class: MapHelper.calculateBattleCssClass()">
 
                     <!-- Route Battles -->
@@ -267,6 +268,9 @@
 
                     <!-- Gym Battles -->
                     @import "gymView.html"
+
+                    <!-- One Time Battles -->
+                    @import "temporaryBattleView.html"
 
                     <!-- Battle Frontier Battles -->
                     @import "battleFrontierView.html"
@@ -455,6 +459,9 @@
 
 <!-- Receive gym badge Modal -->
 @import "receiveGymBadge.html"
+
+<!-- One time battle won Modal -->
+@import "temporaryBattleWonModal.html"
 
 <!-- Achievements Modal -->
 @import "achievementsModal.html"
