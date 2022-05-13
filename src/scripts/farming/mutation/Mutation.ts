@@ -5,7 +5,7 @@ interface MutationOptions {
     showHint?: boolean,
 }
 
-abstract class Mutation implements Saveable {
+abstract class Mutation {
 
     saveKey: string;
 
@@ -29,14 +29,12 @@ abstract class Mutation implements Saveable {
         this._hintSeen = ko.observable(false);
     }
 
-    toJSON(): Record<string, any> {
-        return {
-            hintSeen: this.hintSeen,
-        };
+    toJSON(): boolean | boolean[] {
+        return this.hintSeen;
     }
 
-    fromJSON(json: Record<string, any>): void {
-        this.hintSeen = json?.hintSeen ?? false;
+    fromJSON(hintSeen: boolean | boolean[]): void {
+        this.hintSeen = !!hintSeen;
     }
 
     /**
