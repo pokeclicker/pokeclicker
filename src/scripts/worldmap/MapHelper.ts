@@ -194,48 +194,14 @@ class MapHelper {
         const openModal = () => {
             $('#ShipModal').modal('show');
         };
-        switch (player.region) {
-            case GameConstants.Region.kanto:
-                if (TownList['Vermilion City'].isUnlocked() && player.highestRegion() > 0) {
-                    openModal();
-                    return;
-                }
-            case GameConstants.Region.johto:
-                if (TownList['Olivine City'].isUnlocked()) {
-                    openModal();
-                    return;
-                }
-            case GameConstants.Region.hoenn:
-                if (TownList['Slateport City'].isUnlocked()) {
-                    openModal();
-                    return;
-                }
-            case GameConstants.Region.sinnoh:
-                if (TownList['Canalave City'].isUnlocked()) {
-                    openModal();
-                    return;
-                }
-            case GameConstants.Region.unova:
-                if (TownList['Castelia City'].isUnlocked()) {
-                    openModal();
-                    return;
-                }
-            case GameConstants.Region.kalos:
-                if (TownList['Coumarine City'].isUnlocked()) {
-                    openModal();
-                    return;
-                }
-            case GameConstants.Region.alola:
-                if (TownList['Hau\'oli City'].isUnlocked()) {
-                    openModal();
-                    return;
-                }
+        if (player.highestRegion() > 0 && (TownList[GameConstants.DockTowns[player.region]].isUnlocked())) {
+            openModal();
+        } else {
+            Notifier.notify({
+                message: 'You cannot access this dock yet',
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
-
-        Notifier.notify({
-            message: 'You cannot access this dock yet',
-            type: NotificationConstants.NotificationOption.warning,
-        });
     }
 
     public static ableToTravel() {
