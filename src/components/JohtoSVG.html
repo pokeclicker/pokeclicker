@@ -678,7 +678,7 @@
      %>
 
      <%- include('templates/mapOverlay',
-     { name: "Ash Ketchum"
+     { name: TemporaryBattleList['Ash Ketchum Johto'].getDisplayName()
      , x: 0, y: 21
      , width: 4, height: 4
      , databind: "click: () => TemporaryBattleList['Ash Ketchum Johto'].protectedOnclick()"
