@@ -16,8 +16,6 @@
 
 class Player {
 
-    public achievementsCompleted: { [name: string]: boolean };
-
     private _route: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
     private _subregion: KnockoutObservable<number>;
@@ -117,10 +115,8 @@ class Player {
             }));
         this.mineInventory = ko.observableArray(mineInventory);
 
-        this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
-
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
-        this.effectTimer = Save.initializeEffectTimer(savedPlayer.effectTimer || {});
+        this.effectTimer = Save.initializeEffectTimer();
         this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
         this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
 
@@ -258,21 +254,30 @@ class Player {
             'starter',
             // TODO(@Isha) remove.
             'mineInventory',
-            // TODO(@Isha) remove.
-            '_mineLayersCleared',
-            'achievementsCompleted',
             '_lastSeen',
             '_timeTraveller',
             '_origins',
-            'gymDefeats',
-            'achievementsCompleted',
             'effectList',
-            'effectTimer',
             'highestRegion',
             'highestSubRegion',
             'regionStarters',
         ];
         const plainJS = ko.toJS(this);
+        Object.entries(plainJS._itemMultipliers).forEach(([key, value]) => {
+            if (value <= 1) {
+                delete plainJS._itemMultipliers[key];
+            }
+        });
+        Object.entries(plainJS._itemList).forEach(([key, value]) => {
+            if (!value) {
+                delete plainJS._itemList[key];
+            }
+        });
+        Object.entries(plainJS.effectList).forEach(([key, value]) => {
+            if (!value) {
+                delete plainJS.effectList[key];
+            }
+        });
         return Save.filter(plainJS, keep);
     }
 }

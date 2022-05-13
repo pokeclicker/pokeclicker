@@ -132,22 +132,20 @@ class EnigmaMutation extends GrowMutation {
         return tempHint;
     }
 
-    toJSON(): Record<string, any> {
-        const json = super.toJSON();
-        json['hintsSeen'] = this.hintsSeen.map(ko.unwrap);
-        return json;
+    toJSON(): boolean[] {
+        return this.hintsSeen.map(h => h());
     }
-    fromJSON(json: Record<string, any>): void {
-        super.fromJSON(json);
 
-        const hintsSeen = json['hintsSeen'];
-        if (hintsSeen == null) {
-            this.hintsSeen = Array<boolean>(4).fill(false).map((v) => ko.observable<boolean>(v));
-        } else {
-            (hintsSeen as boolean[]).forEach((value: boolean, index: number) => {
-                this.hintsSeen[index](value);
-            });
+    fromJSON(hintsSeen: boolean[]): void {
+        if (!hintsSeen || typeof hintsSeen !== 'object') {
+            return;
         }
+        (hintsSeen as boolean[]).forEach((value: boolean, index: number) => {
+            if (value) {
+                this.hintSeen = true;
+            }
+            this.hintsSeen[index](value);
+        });
     }
 
 }
