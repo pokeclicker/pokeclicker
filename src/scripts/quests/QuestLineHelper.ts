@@ -477,6 +477,14 @@ class QuestLineHelper {
     public static createAshQuestLine() {
         const ashQuestLine = new QuestLine('Defeat Ash', 'Beat up a kid! Everyone will be proud.');
 
+        // TODO: Tmp quest. questLineStepCompletedRequirement needs atleast one quest completed. Can be fixed after merge with Sevii island PR
+        const captureAPokemon = new CustomQuest(1, 0,
+            'Capture 1 Pokémon. Just to distract you, while we fix our requirement',
+            () => App.game.statistics.totalPokemonCaptured(),
+            1
+        );
+        ashQuestLine.addQuest(captureAPokemon);
+
         const kantoAsh = new CustomQuest(1, 0, 'The kid is hiding in Kanto!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kanto')]());
         ashQuestLine.addQuest(kantoAsh);
 
@@ -492,7 +500,7 @@ class QuestLineHelper {
         const unovaAsh = new CustomQuest(1, 0, 'The kid is hiding in Unova!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Unova')]());
         ashQuestLine.addQuest(unovaAsh);
 
-        const kalosAsh = new CustomQuest(1, 0, 'The kid is hiding in Kalos!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kalos')]());
+        const kalosAsh = new CustomQuest(1, () => App.game.party.gainPokemonById(658.01), 'The kid is hiding in Kalos!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kalos')]());
         ashQuestLine.addQuest(kalosAsh);
 
         App.game.quests.questLines().push(ashQuestLine);
@@ -513,5 +521,6 @@ class QuestLineHelper {
         this.createSkullAetherAlolaQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createGalacticSinnohQuestLine();
+        this.createAshQuestLine();
     }
 }
