@@ -23,6 +23,7 @@ TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ash Ketchum',
+        returnTown: 'Pewter City',
     }
 );
 TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
