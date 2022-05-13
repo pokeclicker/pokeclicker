@@ -1313,15 +1313,6 @@ GymList['Konikoni City'] = new Gym(
         App.game.quests.getQuestLine('Eater of Light').beginQuest();
     }
 );
-GymList['Aether Paradise'] = new Gym(
-    'Ultra Wormhole',
-    'Aether Paradise',
-    [new GymPokemon('???', 132295486, 27)],
-    BadgeEnums.Elite_Nihilego,
-    128000,
-    'The creature escaped back into the ultra wormhole.',
-    [new GymBadgeRequirement(BadgeEnums.RockiumZ)]
-);
 GymList['Malie City'] = new Gym(
     'Nanu',
     'Malie City',
