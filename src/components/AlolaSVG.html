@@ -3010,5 +3010,15 @@
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Malie City') }"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+         { name: "Ash Ketchum Alola"
+           , x: 32, y: 19
+           , width: 4, height: 4
+           , databind: "click: () => TemporaryBattleList['Ash Ketchum Alola'].protectedOnclick()"
+           , visible:  "TemporaryBattleList['Ash Ketchum Alola'] && TemporaryBattleList['Ash Ketchum Alola'].isVisible()"
+           , image: "assets/images/ashketchumoverworld.png"
+           })
+        %>
     </g>
 </g>

@@ -474,36 +474,38 @@ class QuestLineHelper {
         App.game.quests.questLines().push(galacticSinnohQuestLine);
     }
 
-    public static createAshQuestLine() {
-        const ashQuestLine = new QuestLine('Defeat Ash', 'Beat up a kid! Everyone will be proud.');
+    public static createAshKetchumQuestLine() {
+        const ashKetchumQuestLine = new QuestLine('The new kid', 'A new kid from your home town is making waves. Show him who is the real progidy of Pallet.');
 
-        // TODO: Tmp quest. questLineStepCompletedRequirement needs atleast one quest completed. Can be fixed after merge with Sevii island PR
-        const captureAPokemon = new CustomQuest(1, 0,
-            'Capture 1 Pokémon. Just to distract you, while we fix our requirement',
-            () => App.game.statistics.totalPokemonCaptured(),
-            1
-        );
-        ashQuestLine.addQuest(captureAPokemon);
+        const clearKantoAsh = new CustomQuest(1, 0, 'Defeat Ash Ketchum near Pallet Town.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kanto')]());
+        ashKetchumQuestLine.addQuest(clearKantoAsh);
 
-        const kantoAsh = new CustomQuest(1, 0, 'The kid is hiding in Kanto!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kanto')]());
-        ashQuestLine.addQuest(kantoAsh);
+        const clearJohtoAsh = new CustomQuest(1, 0, 'He\'s not stopping. Find the kid in Johto.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Johto')]());
+        ashKetchumQuestLine.addQuest(clearJohtoAsh);
 
-        const johtoAsh = new CustomQuest(1, 0, 'The kid is hiding in Johto!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Johto')]());
-        ashQuestLine.addQuest(johtoAsh);
+        const clearHoennAsh = new CustomQuest(1, 0, 'He just will not learn his lesson. Defeat Ash Ketchum in Hoenn.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Hoenn')]());
+        ashKetchumQuestLine.addQuest(clearHoennAsh);
 
-        const hoennAsh = new CustomQuest(1, 0, 'The kid is hiding in Hoenn!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Hoenn')]());
-        ashQuestLine.addQuest(hoennAsh);
+        const clearSinnohAsh = new CustomQuest(1, 0, 'Who does he think he is anyway? Pretending he\'s the main character. He\'s in Sinnoh now.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Sinnoh')]());
+        ashKetchumQuestLine.addQuest(clearSinnohAsh);
 
-        const sinnohAsh = new CustomQuest(1, 0, 'The kid is hiding in Sinnoh!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Sinnoh')]());
-        ashQuestLine.addQuest(sinnohAsh);
+        const clearUnovaAsh = new CustomQuest(1, 0, 'The kid is hiding in Unova!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Unova')]());
+        ashKetchumQuestLine.addQuest(clearUnovaAsh);
 
-        const unovaAsh = new CustomQuest(1, 0, 'The kid is hiding in Unova!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Unova')]());
-        ashQuestLine.addQuest(unovaAsh);
+        const AshKetchumReward = () => {
+            App.game.party.gainPokemonById(658.01);
+            Notifier.notify({
+                title: ashKetchumQuestLine.name,
+                message: 'You obtained Ash Greninja!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
 
-        const kalosAsh = new CustomQuest(1, () => App.game.party.gainPokemonById(658.01), 'The kid is hiding in Kalos!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kalos')]());
-        ashQuestLine.addQuest(kalosAsh);
+        const clearKalosAsh = new CustomQuest(1, AshKetchumReward, 'One more time! Battle him into submission in Kalos!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kalos')]());
+        ashKetchumQuestLine.addQuest(clearKalosAsh);
 
-        App.game.quests.questLines().push(ashQuestLine);
+        App.game.quests.questLines().push(ashKetchumQuestLine);
     }
 
     public static isQuestLineCompleted(name: string) {
@@ -521,6 +523,6 @@ class QuestLineHelper {
         this.createSkullAetherAlolaQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createGalacticSinnohQuestLine();
-        this.createAshQuestLine();
+        this.createAshKetchumQuestLine();
     }
 }
