@@ -716,6 +716,11 @@ class Update implements Saveable {
             // Remove the Elite_Nihilego Gym, now a temporary battle instead of a gym
             saveData.statistics.gymsDefeated.splice(84, 1);
             saveData.badgeCase.splice(84, 1);
+
+            // Start Ash quest, if the player has beaten Kalos champion
+            if (saveData.badgeCase[78]) {
+                saveData.quests.questLines.push({state: 1, name: 'Defeat Ash', quest: 0});
+            }
         },
     };
 
