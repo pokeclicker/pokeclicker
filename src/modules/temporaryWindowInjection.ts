@@ -109,6 +109,7 @@ import Achievement from './achievements/Achievement';
 import Gems from './gems/Gems';
 import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequirement';
 import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompletedRequirement';
+import TemporaryBattleRequirement from './requirements/TemporaryBattleRequirement';
 import { asyncEvent } from './utilities/UI';
 
 Object.assign(<any>window, {
@@ -225,5 +226,6 @@ Object.assign(<any>window, {
     Gems,
     QuestLineCompletedRequirement,
     QuestLineStepCompletedRequirement,
+    TemporaryBattleRequirement,
     asyncEvent,
 });
