@@ -90,6 +90,14 @@ export const SpriteCredits: Credit[] = [
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
     },
     {
+        name: 'Fanking Omega',
+        link: 'https://fanart.pokefans.net/tutorials/mapping/tilesets',
+        resources: [
+            'Snow Tileset',
+        ],
+        // NOTES: Free to use with credit according to the website
+    },
+    {
         name: 'Gnomowladny',
         link: 'https://www.deviantart.com/gnomowladny',
         image: 'https://a.deviantart.net/avatars-big/g/n/gnomowladny.gif',
