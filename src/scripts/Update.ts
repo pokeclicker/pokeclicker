@@ -691,7 +691,7 @@ class Update implements Saveable {
         },
 
         '0.9.4': ({ playerData, saveData }) => {
-            // Modifications relating to small save file sizes
+            // Modifications relating to smaller save file sizes
             const PartyKeyMap = {
                 'attackBonusPercent': 0,
                 'attackBonusAmount': 1,
@@ -709,7 +709,7 @@ class Update implements Saveable {
                 });
             });
             saveData.farming.mutations = saveData.farming.mutations.map(m => m.hintsSeen || m.hintSeen);
-          
+
             // Change Ultra Wormhole to a Temporary Battle
             saveData.statistics.temporaryBattleDefeated = new Array<number>();
             saveData.statistics.temporaryBattleDefeated[0] = saveData.statistics.gymsDefeated[84];
