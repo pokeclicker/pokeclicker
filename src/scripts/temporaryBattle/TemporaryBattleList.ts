@@ -32,7 +32,7 @@ TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
         new GymPokemon('Totodile', 66000, 62),
     ],
     'Insert quote here.',
-    [new QuestLineStepCompletedRequirement('Defeat Ash', 1)]
+    [new QuestLineStepCompletedRequirement('Defeat Ash', 1), new RouteKillRequirement(10, GameConstants.Region.johto, 48)]
 );
 TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
     'Ash Ketchum Hoenn',
