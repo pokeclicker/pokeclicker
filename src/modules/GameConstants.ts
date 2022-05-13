@@ -882,7 +882,6 @@ export const AlolaGyms = [
     'Elite Acerola',
     'Elite Kahili',
     'Champion Hau',
-    'Roadside Motel',
 ];
 
 export const GalarGyms = [
@@ -1170,6 +1169,7 @@ export const DockTowns = [
 
 export const TemporaryBattles = [
     'Ultra Wormhole',
+    'Anabel',
 ];
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

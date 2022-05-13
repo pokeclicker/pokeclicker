@@ -2477,7 +2477,7 @@ TownList['Melemele Woods'] = new Town(
 TownList['Roadside Motel'] = new Town(
     'Roadside Motel',
     GameConstants.Region.alola,
-    [RoadsideMotelShop],
+    [TemporaryBattleList['Anabel'], RoadsideMotelShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
         npcs: [RoadsideMotelAnabel],

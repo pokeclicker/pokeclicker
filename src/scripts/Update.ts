@@ -734,7 +734,7 @@ class Update implements Saveable {
             saveData.statistics.gymsDefeated.splice(84, 1);
             saveData.badgeCase.splice(84, 1);
 
-            if (saveData.badgeCase[97]) {
+            if (saveData.badgeCase[96]) {
                 saveData.quests.questLines.push({state: 1, name: 'Ultra Beast Hunt', quest: 0});
             }
         },
