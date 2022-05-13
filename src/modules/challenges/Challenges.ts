@@ -13,7 +13,7 @@ export default class Challenges implements Saveable {
         disableBattleItems: new Challenge('No Battle Item', 'Disables the usage of Battle Items'),
         disableMasterballs: new Challenge('No Masterball', 'Disables the usage of Masterballs'),
         disableOakItems: new Challenge('No Oak Item', 'Disables the usage of all Oak Items'),
-        disableShards: new Challenge('No Shard', 'Disables the usage of Shards for increasing damage multipliers'),
+        disableGems: new Challenge('No Gem', 'Disables the usage of Gems for increasing damage multipliers'),
         disableProteins: new Challenge('No Protein', 'Disables the usage of Proteins'),
     };
 

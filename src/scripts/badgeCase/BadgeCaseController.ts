@@ -3,8 +3,12 @@
 class BadgeCaseController {
     static getDisplayableBadges() {
         const region = player.highestRegion();
-        return GameConstants.RegionGyms.slice(0, region + 1).flat()
-            .map(gym => BadgeEnums[gymList[gym].badgeReward])
-            .filter(b => !b.startsWith('Elite') && b != 'None');
+        const result = {};
+        GameConstants.RegionGyms.slice(0, region + 1).forEach((region, index) => {
+            result[GameConstants.Region[index].charAt(0).toUpperCase() + GameConstants.Region[index].slice(1)] = region
+                .map(gym => BadgeEnums[GymList[gym].badgeReward])
+                .filter(b => !b.startsWith('Elite') && b != 'None');
+        });
+        return result;
     }
 }

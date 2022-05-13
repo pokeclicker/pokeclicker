@@ -1,8 +1,7 @@
 import NotificationOption from './NotificationOption';
 import Sound from '../utilities/Sound';
-import BooleanSetting from '../settings/BooleanSetting';
-import Settings from '../settings/Settings';
 import Rand from '../utilities/Rand';
+import type NotificationSetting from '../settings/NotificationSetting';
 
 export default class Notifier {
     public static notify({
@@ -14,6 +13,7 @@ export default class Notifier {
         sound = null,
         setting = null,
         image = null,
+        strippedMessage = null,
     }: {
         message: string;
         type?: NotificationOption;
@@ -21,8 +21,9 @@ export default class Notifier {
         timeout?: number;
         time?: string;
         sound?: Sound;
-        setting?: BooleanSetting;
+        setting?: NotificationSetting;
         image?: string;
+        strippedMessage?: string;
     }): void {
         $(document).ready(() => {
             // If we have sounds enabled for this, play it now
@@ -30,8 +31,22 @@ export default class Notifier {
                 sound.play();
             }
 
+            if (setting && setting.desktopNotification.value && Notification.permission === 'granted') {
+                const tempEl = document.createElement('div');
+                tempEl.innerHTML = strippedMessage ?? message.replace(/<br\s*[/]?>/gi, '\n');
+                const msg = tempEl.innerText.replace(/  +/g, ' ');
+                const desktopNotification = new Notification(title, {
+                    body: msg,
+                    icon: image,
+                    silent: true,
+                });
+                setTimeout(() => {
+                    desktopNotification.close();
+                }, timeout);
+            }
+
             // Check if this type of notification is disabled
-            if (setting && !Settings.getSetting(setting.name).value) {
+            if (setting && setting.inGameNotification && !setting.inGameNotification.value) {
                 return;
             }
 

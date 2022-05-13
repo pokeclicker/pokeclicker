@@ -1,4 +1,6 @@
-///<reference path="./BerryType.ts"/>
+/// <reference path="../../declarations/enums/BerryType.d.ts"/>
+/// <reference path="../../declarations/enums/FlavorType.d.ts"/>
+/// <reference path="../../declarations/enums/BerryColor.d.ts"/>
 
 interface BerryFlavor {
     type: FlavorType,
@@ -15,6 +17,7 @@ class Berry {
         'Volbeat', 'Illumise',
         'Burmy (plant)', 'Combee', 'Cherubi', 'Munchlax',
         'Sewaddle', 'Karrablast',
+        'Cutiefly', 'Bounsweet',
     ];
 
     constructor(

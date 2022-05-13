@@ -31,7 +31,7 @@
                            'btn-outline-secondary': !$data.isActive
                          }">
                         <img class="clickable" style="width: 80%;" src=""
-                             data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
+                             data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[$data.name] + '.png'},
                               css: {
                                 'oak-item-locked': !App.game.oakItems.isUnlocked($data.name)
                               },
@@ -64,7 +64,7 @@
                           'btn-outline-secondary': !App.game.oakItemLoadouts.hasItem($index())(),
                         }">
                         <img class="clickable" style="width: 80%;" src=""
-                            data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
+                            data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[$data.name] + '.png'},
                               css: {
                                 'oak-item-locked': !App.game.oakItems.isUnlocked($data.name)
                               },
@@ -81,7 +81,7 @@
         <table class="table table-bordered text-center m-0">
           <thead>
             <th colspan="2">
-              <strong data-bind="text: GameConstants.humanifyString(OakItems.OakItem[OakItemController.inspectedItem])"></strong>
+              <strong data-bind="text: GameConstants.humanifyString(OakItemType[OakItemController.inspectedItem])"></strong>
             </th>
           </thead>
           <tbody>

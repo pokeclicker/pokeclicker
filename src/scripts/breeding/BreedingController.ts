@@ -1,4 +1,4 @@
-///<reference path="../party/CaughtStatus.ts"/>
+///<reference path="../../declarations/enums/CaughtStatus.d.ts"/>
 /// <reference path="../../declarations/breeding/EggType.d.ts" />
 
 class BreedingController {
@@ -96,7 +96,7 @@ class BreedingController {
             $('#breedingModal').modal('show');
         } else {
             Notifier.notify({
-                message: 'You do not have access to the Day Care yet.<br/><i>Clear route 5 first</i>',
+                message: 'You do not have access to the Day Care yet.\n<i>Clear route 5 first</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -213,6 +213,7 @@ class BreedingController {
             case 'breedingEfficiency': return `Efficiency: ${((pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + pokemon.proteinsUsed()) / pokemonMap[pokemon.name].eggCycles).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
             case 'stepsPerAttack': return `Steps/Att: ${(App.game.breeding.getSteps(pokemonMap[pokemon.name].eggCycles) / (pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + pokemon.proteinsUsed())).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
             case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
+            case 'protiens': return `Proteins: ${pokemon.proteinsUsed()}`;
         }
     }
 }

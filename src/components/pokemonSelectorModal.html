@@ -11,7 +11,7 @@
             <div class="modal-body p-0">
                 <img src="assets/images/items/Protein.png" width="40%"/>
                 <br/>
-                <div class="sticky-top">
+                <div class="sticky-top bg-dark text-light">
                   <!-- ko if: App.game.challenges.list.disableProteins.active() -->
                   <span class="btn btn-block btn-danger btn-static m-0">
                     Proteins are disabled.
@@ -37,12 +37,19 @@
                           <option data-bind="text: $data.text, value: $data.value"></option>
                       </select>
                       <div class="input-group-append bg-primary text-light">
-                          <label for="proteinSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('proteinSortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
+                          <label for="proteinSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                            text: Settings.getSetting('proteinSortDirection').observableValue() ? '⥄' : '⥂',
+                            tooltip: { title: Settings.getSetting('proteinSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
+                            ">⥂</label>
                           <input id="proteinSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
                               data-bind="checked: Settings.getSetting('proteinSortDirection').observableValue()"
                               onchange="Settings.setSettingByName('proteinSortDirection', this.checked)"/>
                       </div>
                   </div>
+                  <input type="checkbox" id="hide-max-protein-pokemons" class="form-check-input"
+                      data-bind="checked: Settings.getSetting('proteinHideMaxedPokemon').observableValue()"
+                      onchange="Settings.setSettingByName('proteinHideMaxedPokemon', this.checked)"/>
+                  <label for="hide-max-protein-pokemons" class="form-check-label">Hide Pokémon with max protein</label>
                 </div>
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
@@ -53,7 +60,7 @@
                     </tr>
                   </thead>
                   <tbody data-bind="foreach: PartyController.getProteinSortedList()">
-                    <tr class="clickable" data-bind="click: () => $data.useProtein(VitaminController.getMultiplier()), hidden: $data.breeding">
+                    <tr class="clickable" data-bind="click: () => $data.useProtein(VitaminController.getMultiplier()), hidden: $data.hideFromProteinList()">
                       <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="text: $data.proteinsUsed().toLocaleString('en-US')">-</td>
                       <td class="text-center tight" data-bind="text: Math.floor($data.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + $data.proteinsUsed()).toLocaleString('en-US')">-</td>
