@@ -20,7 +20,7 @@ class TemporaryBattleBattle extends Battle {
      * Award the player with exp, and go to the next pokemon
      */
     public static defeatPokemon() {
-        TemporaryBattleBattle.enemyPokemon().defeat(this.battle.isTrainerBattle);
+        TemporaryBattleBattle.enemyPokemon().defeat(this.battle.optionalArgs.isTrainerBattle ?? true);
 
         // Make gym "route" regionless
         // App.game.breeding.progressEggsBattle(0, GameConstants.Region.none); TODO: set this

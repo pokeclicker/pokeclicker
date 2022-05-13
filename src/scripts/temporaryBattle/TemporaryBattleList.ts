@@ -19,7 +19,12 @@ TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
         new GymPokemon('Muk', 66000, 62),
     ],
     'That was a fun battle!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Pewter City',
+    }
 );
 TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
     'Ash Ketchum Johto',
@@ -32,7 +37,11 @@ TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
         new GymPokemon('Totodile', 66000, 62),
     ],
     'That was a nice rematch...',
-    [new TemporaryBattleRequirement('Ash Ketchum Kanto'), new RouteKillRequirement(10, GameConstants.Region.johto, 48)]
+    [new TemporaryBattleRequirement('Ash Ketchum Kanto'), new RouteKillRequirement(10, GameConstants.Region.johto, 48)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+    }
 );
 TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
     'Ash Ketchum Hoenn',
@@ -45,7 +54,11 @@ TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
         new GymPokemon('Glalie', 66000, 62),
     ],
     'Are you following me?',
-    [new TemporaryBattleRequirement('Ash Ketchum Johto')]
+    [new TemporaryBattleRequirement('Ash Ketchum Johto')],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+    }
 );
 TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
     'Ash Ketchum Sinnoh',
@@ -58,7 +71,11 @@ TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
         new GymPokemon('Gible', 66000, 62),
     ],
     'Please leave me alone.',
-    [new TemporaryBattleRequirement('Ash Ketchum Hoenn')]
+    [new TemporaryBattleRequirement('Ash Ketchum Hoenn')],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+    }
 );
 TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
     'Ash Ketchum Unova',
@@ -71,7 +88,11 @@ TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
         new GymPokemon('Krookodile', 66000, 62),
     ],
     'Stop it!',
-    [new TemporaryBattleRequirement('Ash Ketchum Sinnoh')]
+    [new TemporaryBattleRequirement('Ash Ketchum Sinnoh')],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+    }
 );
 TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
     'Ash Ketchum Kalos',
@@ -84,7 +105,11 @@ TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
         new GymPokemon('Ash Greninja', 66000, 62),
     ],
     'Will you leave me alone if I give you my Greninja? I was gonna release it anyway.',
-    [new TemporaryBattleRequirement('Ash Ketchum Unova')]
+    [new TemporaryBattleRequirement('Ash Ketchum Unova')],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+    }
 );
 
 TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
@@ -99,7 +124,11 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
     ],
     'Fine. I quit. Take my Pikachu.',
     [new TemporaryBattleRequirement('Ash Ketchum Kalos'), new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
-    () => {
-        App.game.party.gainPokemonById(25.07);
+      undefined,
+    {
+        displayName: 'Ash Ketchum',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonById(25.07);
+        },
     }
 );
