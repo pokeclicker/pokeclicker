@@ -19,7 +19,11 @@ TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
         new GymPokemon('Muk', 66000, 62),
     ],
     'Insert quote here.',
-    [new QuestLineStepCompletedRequirement('Defeat Ash', 0)]
+    [new QuestLineStepCompletedRequirement('Defeat Ash', 0)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+    }
 );
 TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
     'Ash Ketchum Johto',
@@ -32,7 +36,11 @@ TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
         new GymPokemon('Totodile', 66000, 62),
     ],
     'Insert quote here.',
-    [new QuestLineStepCompletedRequirement('Defeat Ash', 1), new RouteKillRequirement(10, GameConstants.Region.johto, 48)]
+    [new QuestLineStepCompletedRequirement('Defeat Ash', 1), new RouteKillRequirement(10, GameConstants.Region.johto, 48)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+    }
 );
 TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
     'Ash Ketchum Hoenn',
@@ -45,7 +53,11 @@ TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
         new GymPokemon('Glalie', 66000, 62),
     ],
     'Insert quote here.',
-    [new QuestLineStepCompletedRequirement('Defeat Ash', 2)]
+    [new QuestLineStepCompletedRequirement('Defeat Ash', 2)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+    }
 );
 TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
     'Ash Ketchum Sinnoh',
@@ -58,7 +70,11 @@ TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
         new GymPokemon('Gible', 66000, 62),
     ],
     'Insert quote here.',
-    [new QuestLineStepCompletedRequirement('Defeat Ash', 3)]
+    [new QuestLineStepCompletedRequirement('Defeat Ash', 3)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+    }
 );
 TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
     'Ash Ketchum Unova',
@@ -71,7 +87,11 @@ TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
         new GymPokemon('Krookodile', 66000, 62),
     ],
     'Insert quote here.',
-    [new QuestLineStepCompletedRequirement('Defeat Ash', 4)]
+    [new QuestLineStepCompletedRequirement('Defeat Ash', 4)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+    }
 );
 TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
     'Ash Ketchum Kalos',
@@ -84,5 +104,9 @@ TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
         new GymPokemon('Ash Greninja', 66000, 62),
     ],
     'Insert quote here.',
-    [new QuestLineStepCompletedRequirement('Defeat Ash', 5)]
+    [new QuestLineStepCompletedRequirement('Defeat Ash', 5)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+    }
 );

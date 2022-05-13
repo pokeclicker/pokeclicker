@@ -59,7 +59,7 @@ class TemporaryBattleRunner {
         if (this.running()) {
             this.running(false);
             Notifier.notify({
-                message: `It appears you are not strong enough to defeat ${TemporaryBattleBattle.battle.name}`,
+                message: `It appears you are not strong enough to defeat ${TemporaryBattleBattle.battle.getDisplayName()}`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             player.town(TemporaryBattleBattle.battle.parent);
@@ -71,13 +71,14 @@ class TemporaryBattleRunner {
         if (this.running()) {
             this.running(false);
             if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(battle.name)]() == 0) {
-                battle.rewardFunction();
+                battle.optionalArgs.firstTimeRewardFunction?.();
                 if (battle.defeatMessage) {
                     $('#temporaryBattleWonModal').modal('show');
                 }
             }
+            battle.optionalArgs.rewardFunction?.();
             GameHelper.incrementObservable(App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(battle.name)]);
-            player.town(battle.parent ?? TownList[GameConstants.DockTowns[player.region]]);
+            player.town(battle.parent ?? TownList[battle.optionalArgs.returnTown] ?? TownList[GameConstants.DockTowns[player.region]]);
             App.game.gameState = GameConstants.GameState.town;
         }
     }
