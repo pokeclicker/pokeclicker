@@ -69,9 +69,9 @@ class MapHelper {
     };
 
     public static getCurrentEnvironment(): GameConstants.Environment {
-        const area = player.route() ??
-            (player.gameState == GameConstants.GameState.temporaryBattle ? TemporaryBattleRunner.battleObservable()?.parent?.name ?? TemporaryBattleRunner.battleObservable()?.optionalArgs.returnTown : undefined) ??
-            player.town()?.name ??
+        const area = player.route() ||
+            (App.game.gameState == GameConstants.GameState.temporaryBattle ? TemporaryBattleRunner.battleObservable()?.parent?.name ?? TemporaryBattleRunner.battleObservable()?.optionalArgs.returnTown : undefined) ||
+            player.town()?.name ||
             undefined;
 
         const [env] = Object.entries(GameConstants.Environments).find(
@@ -116,7 +116,7 @@ class MapHelper {
 
     public static calculateTownCssClass(townName: string): string {
         // Check if we are currently at this location
-        if (!player.route() && player.town().name == townName) {
+        if (!player.route() && player.town() && player.town().name == townName) {
             return areaStatus[areaStatus.currentLocation];
         }
         // Check if this location is locked
