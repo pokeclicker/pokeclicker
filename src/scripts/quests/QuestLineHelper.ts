@@ -486,7 +486,7 @@ class QuestLineHelper {
             1,
             AnabelReward,
             'Defeat Agent Anabel at the Roadside Motel.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex("Anabel")](),
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anabel')](),
             0
         );
 

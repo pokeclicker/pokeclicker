@@ -10,11 +10,11 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
 TemporaryBattleList['Anabel'] = new TemporaryBattle(
     'Anabel',
     [
-      new GymPokemon('Alakazam', 90000000, 61),
-      new GymPokemon('Weavile', 90000000, 61),
-      new GymPokemon('Mismagius', 90000000, 61),
-      new GymPokemon('Salamence', 90000000, 61),
-      new GymPokemon('Snorlax', 90000000, 61),
+        new GymPokemon('Alakazam', 90000000, 61),
+        new GymPokemon('Weavile', 90000000, 61),
+        new GymPokemon('Mismagius', 90000000, 61),
+        new GymPokemon('Salamence', 90000000, 61),
+        new GymPokemon('Snorlax', 90000000, 61),
     ],
     'Oh you\'re good! You might just have a shot, here are some Beast Balls. Go hunt down those strange Ultra Beasts! If you need more Beast Balls, you can buy them here.',
     [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
