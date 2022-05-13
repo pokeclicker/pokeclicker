@@ -60,6 +60,13 @@ class AchievementHandler {
         }
     }
 
+    public static preCheckAchievements() {
+        // Check if our achievements are completed, we don't want to re-notify if already done
+        for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
+            AchievementHandler.achievementList[i].unlocked = AchievementHandler.achievementList[i].isCompleted();
+        }
+    }
+
     public static checkAchievements() {
         for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
             if (!AchievementHandler.achievementList[i].unlocked) {
@@ -69,8 +76,7 @@ class AchievementHandler {
     }
 
     public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, region = GameConstants.Region.none, achievableFunction: () => boolean | null = null) {
-        const unlocked: boolean = player.achievementsCompleted[name];
-        AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, region, unlocked, achievableFunction));
+        AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, region, achievableFunction));
     }
 
     public static calculateBonus(): void {
