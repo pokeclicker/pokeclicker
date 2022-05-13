@@ -1154,6 +1154,13 @@ export const DockTowns = [
 
 export const TemporaryBattles = [
     'Ultra Wormhole',
+    'Team Rocket Leader Giovanni',
+    'Team Aqua Leader Archie',
+    'Team Magma Leader Maxie',
+    'Team Galactic Leader Cyrus',
+    'Team Flare Leader Lysandre',
+    'Team Plasma Leader Ghetsis',
+    'Team Rainbow Leader Giovanni',
 ];
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

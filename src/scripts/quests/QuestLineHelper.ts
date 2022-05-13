@@ -559,21 +559,37 @@ class QuestLineHelper {
         const meltanCatch50Aerodactyl = new CustomQuest(50, 0, 'Catch 50 Aerodactyl', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Aerodactyl').id]());
         meltanQuestLine.addQuest(meltanCatch50Aerodactyl);
 
-        const meltanDefeatHau15 = new CustomQuest(15, 0, 'Defeat Champion Hau 10 times.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Hau')]());
+        const meltanDefeatHau15 = new CustomQuest(10, 0, 'Defeat Champion Hau 10 times.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Hau')]());
         meltanQuestLine.addQuest(meltanDefeatHau15);
 
         // Rainbow Rocket @ Aether Foundation, series of one-time battles
-        // Giovanni: Claydol, Bruxish, Hypno
-        // Team Aqua Archie: Mightyena, Crobat, Muk, Sharpedo, Kyogre
-        // Team Magma Maxie: Mightyena, Crobat, Weezing, Camerupt, Groudon
-        // Team Galactic Cyrus: Houndoom, Honchkrow, Crobat, Weavile, Dialga, Palkia
-        // Team Flare Lysandre: Mienshao, Pyroar, Honchkrow, Gyarados, Xerneas, Yveltal
-        // Team Plasma Ghetsis: Cofagrigus, Bouffalant, Bisharp, Hydreigon, Zekrom, Reshiram
-        // Giovanni: Dugtrio, Nidoking, Nidoqueen, Rhyperior, Mewtwo
 
-        Routes.getRoutesByRegion(GameConstants.Region.alola).forEach(route => {
-            route.pokemon.land.push('Meltan');
-        });
+        const meltanRainbow1 = new CustomQuest(1, 0, 'Defeat Team Rocket Leader Giovanni.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Rocket Leader Giovanni')]());
+        meltanQuestLine.addQuest(meltanRainbow1);
+
+        const meltanRainbow2 = new CustomQuest(1, 0, 'Defeat Team Aqua Leader Archie.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Aqua Leader Archie')]());
+        meltanQuestLine.addQuest(meltanRainbow2);
+
+        const meltanRainbow3 = new CustomQuest(1, 0, 'Defeat Team Magma Leader Maxie.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Magma Leader Maxie')]());
+        meltanQuestLine.addQuest(meltanRainbow3);
+
+        const meltanRainbow4 = new CustomQuest(1, 0, 'Defeat Team Galactic Leader Cyrus.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Galactic Leader Cyrus')]());
+        meltanQuestLine.addQuest(meltanRainbow4);
+
+        const meltanRainbow5 = new CustomQuest(1, 0, 'Defeat Team Flare Leader Lysandre.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Leader Lysandre')]());
+        meltanQuestLine.addQuest(meltanRainbow5);
+
+        const meltanRainbow6 = new CustomQuest(1, 0, 'Defeat Team Plasma Leader Ghetsis.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Leader Ghetsis')]());
+        meltanQuestLine.addQuest(meltanRainbow6);
+
+        const afterBeatingRainbowRocket = () => {
+            Routes.getRoutesByRegion(GameConstants.Region.alola).forEach(route => {
+                route.pokemon.land.push('Meltan');
+            });
+        };
+
+        const meltanRainbow7 = new CustomQuest(1, afterBeatingRainbowRocket, 'Defeat Team Rainbow Leader Giovanni.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Rainbow Leader Giovanni')]());
+        meltanQuestLine.addQuest(meltanRainbow7);
 
         const meltanGetMelmetal = () => {
             App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Melmetal').id);

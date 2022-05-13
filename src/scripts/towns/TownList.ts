@@ -2512,7 +2512,18 @@ TownList['Konikoni City'] = new Town(
 TownList['Aether Paradise'] = new Town(
     'Aether Paradise',
     GameConstants.Region.alola,
-    [TemporaryBattleList['Ultra Wormhole'], AetherParadiseShop, new MoveToDungeon(dungeonList['Aether Foundation'])],
+    [
+        TemporaryBattleList['Ultra Wormhole'],
+        TemporaryBattleList['Team Rocket Leader Giovanni'],
+        TemporaryBattleList['Team Aqua Leader Archie'],
+        TemporaryBattleList['Team Magma Leader Maxie'],
+        TemporaryBattleList['Team Galactic Leader Cyrus'],
+        TemporaryBattleList['Team Flare Leader Lysandre'],
+        TemporaryBattleList['Team Plasma Leader Ghetsis'],
+        TemporaryBattleList['Team Rainbow Leader Giovanni'],
+        AetherParadiseShop,
+        new MoveToDungeon(dungeonList['Aether Foundation']),
+    ],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
         npcs: [AetherParadiseAlolaRoamerNPC],
