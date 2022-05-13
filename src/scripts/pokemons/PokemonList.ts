@@ -14358,7 +14358,7 @@ const pokemonList = createPokemonArray(
         'id': 658.01,
         'name': 'Ash Greninja',
         'type': [PokemonType.Water, PokemonType.Dark],
-        'eggCycles': 20,
+        'eggCycles': 45,
         'levelType': LevelType.mediumslow,
         'exp': 239,
         'catchRate': 45,
