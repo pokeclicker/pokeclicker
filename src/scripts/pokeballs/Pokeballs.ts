@@ -103,7 +103,7 @@ class Pokeballs implements Feature {
                     return 10;
                 }
                 return -100;
-            }, 1000, 'Can only capture Ultra Beasts', new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 0)),
+            }, 1000, 'Can only capture Ultra Beasts', new TemporaryBattleRequirement('Anabel')),
         ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);
