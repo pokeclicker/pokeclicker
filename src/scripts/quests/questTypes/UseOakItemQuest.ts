@@ -43,11 +43,11 @@ class UseOakItemQuest extends Quest implements QuestInterface {
     get description(): string {
         const desc = [];
         desc.push(`Equip the ${GameConstants.humanifyString(OakItemType[this.item])} and`);
-        if (OakItemType[this.item].match('Magic_Ball')) {
+        if (this.item == OakItemType.Magic_Ball) {
             desc.push(`capture ${this.amount.toLocaleString('en-US')} wild Pokémon.`);
-        } else if (OakItemType[this.item].match('Amulet_Coin')) {
+        } else if (this.item == OakItemType.Amulet_Coin) {
             desc.push(`earn ${this.amount.toLocaleString('en-US')} PokéDollars.`);
-        } else if (OakItemType[this.item].match('Exp_Share')) {
+        } else if (this.item == OakItemType.Exp_Share) {
             desc.push(`defeat ${this.amount.toLocaleString('en-US')} Pokémon.`);
         } else {
             desc.push(`gain it\'s benefit ${this.amount.toLocaleString('en-US')} times.`);
