@@ -726,7 +726,14 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
         },
 
-        '0.9.3': ({ playerData, saveData }) => {
+        '0.9.4': ({ playerData, saveData }) => {
+            // Change Ultra Wormhole to a Temporary Battle
+            saveData.statistics.temporaryBattleDefeated = new Array<number>();
+            saveData.statistics.temporaryBattleDefeated[0] = saveData.statistics.gymsDefeated[84];
+            // Remove the Elite_Nihilego Gym, now a temporary battle instead of a gym
+            saveData.statistics.gymsDefeated.splice(84, 1);
+            saveData.badgeCase.splice(84, 1);
+
             // Add Mt. Ember Summit
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 8);
             // Add Berry Forest
@@ -735,7 +742,6 @@ class Update implements Saveable {
             // Start Sevii questline if player has Volcano Badge already
             if (saveData.badgeCase[7]) {
                 saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
-            }
         },
     };
 
