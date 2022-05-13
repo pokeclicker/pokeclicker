@@ -691,6 +691,7 @@ class Update implements Saveable {
         },
 
         '0.9.4': ({ playerData, saveData }) => {
+            // Modifications relating to small save file sizes
             const PartyKeyMap = {
                 'attackBonusPercent': 0,
                 'attackBonusAmount': 1,
@@ -707,8 +708,14 @@ class Update implements Saveable {
                     delete p[oldKey];
                 });
             });
-
             saveData.farming.mutations = saveData.farming.mutations.map(m => m.hintsSeen || m.hintSeen);
+          
+            // Change Ultra Wormhole to a Temporary Battle
+            saveData.statistics.temporaryBattleDefeated = new Array<number>();
+            saveData.statistics.temporaryBattleDefeated[0] = saveData.statistics.gymsDefeated[84];
+            // Remove the Elite_Nihilego Gym, now a temporary battle instead of a gym
+            saveData.statistics.gymsDefeated.splice(84, 1);
+            saveData.badgeCase.splice(84, 1);
         },
     };
 

@@ -73,6 +73,7 @@ export default class Statistics implements Saveable {
     routeKills: Record<string, Record<string, KnockoutObservable<number>>>;
     gymsDefeated: Array<KnockoutObservable<number>>;
     dungeonsCleared: Array<KnockoutObservable<number>>;
+    temporaryBattleDefeated: Array<KnockoutObservable<number>>;
 
     /*
      * objectObservables
@@ -131,6 +132,7 @@ export default class Statistics implements Saveable {
         'berriesHarvested',
         'berriesObtained',
         'mulchesUsed',
+        'temporaryBattleDefeated',
     ];
     // These will allow negative values (special events etc)
     objectObservables = [
