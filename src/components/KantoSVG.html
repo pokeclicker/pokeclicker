@@ -30,7 +30,7 @@
          , noText: true
          })
       %>
- 
+
     <!--Route 3-->
     <%- include('templates/mapRoute',
         { route: 3, region: 0
@@ -98,7 +98,7 @@
         , x: 71, y: 9
         })
      %>
-	 
+
 	   <!--Extra bit of Route 9-->
     <%- include('templates/mapRoute',
         { route: 9, region: 0
@@ -322,14 +322,14 @@
          , x: 23, y: 25
          })
       %>
-	  
+
    <!--Viridian City extended-->
     <%- include('templates/mapTown',
          { name: "Viridian City"
          , x: 27, y: 26
 		 , width: 1, height: 3
          })
-      %>	  
+      %>
 
     <!--Pewter City-->
     <%- include('templates/mapTown',
@@ -344,7 +344,7 @@
         , x: 23, y: 6
 		, width: 7, height: 3
         })
-     %>	 
+     %>
 
     <!--Cerulean City-->
     <%- include('templates/mapTown',
@@ -366,7 +366,7 @@
     <%- include('templates/mapTown',
          { name: "Lavender Town"
          , x: 85, y: 19
-		 , width: 4, height: 5		 
+		 , width: 4, height: 5
          })
       %>
 
@@ -377,14 +377,14 @@
 		, width: 9, height: 10.5
         })
      %>
-	 
+
     <!--Celadon City extended-->
     <%- include('templates/mapTown',
         { name: "Celadon City"
         , x: 40, y: 14
 		, width: 5, height: 1.5
         })
-     %>	 
+     %>
 
     <!--Saffron City-->
     <%- include('templates/mapTown',
@@ -393,7 +393,7 @@
 		, width: 11, height: 8
         })
      %>
-	 
+
 	    <!--Saffron City extended-->
     <%- include('templates/mapTown',
         { name: "Saffron City"
@@ -424,16 +424,16 @@
         , x: 15, y: 58
 		, width: 8, height: 1
         })
-     %>	 
-	 
+     %>
+
     <!--Cinnabar Island ext2-->
     <%- include('templates/mapTown',
         { name: "Cinnabar Island"
         , x: 15, y: 55
 		, width: 7, height: 3
         })
-     %>	 	 
-	 
+     %>
+
     <!--Indigo Plateau Kanto-->
     <%- include('templates/mapTown',
         { name: "Indigo Plateau Kanto"
@@ -452,7 +452,7 @@
     <!--Viridian Forest-->
     <%- include('templates/mapDungeon',
         { name: "Viridian Forest"
-        , x: 21, y: 17.5		
+        , x: 21, y: 17.5
 		, width: 7, height: 4.5
         })
      %>
@@ -477,7 +477,7 @@
         , x: 41, y: 8
         })
      %>
-	 
+
     <!--Mt. Moon extended-->
     <%- include('templates/mapDungeon',
         { name: "Mt. Moon"
@@ -522,7 +522,7 @@
         , x: 37, y: 54
         })
      %>
-	 
+
     <!--Seafoam Islands extended-->
     <%- include('templates/mapDungeon',
         { name: "Seafoam Islands"
@@ -640,11 +640,11 @@
       %>
 
       <%- include('templates/mapOverlay',
-         { name: "Ash in Kanto"
+         { name: "Ash Ketchum Kanto"
          , x: 18, y: 33
          , width: 4, height: 4
-         , databind: "click: function(){GymRunner.startGym(gymList.AshinKanto)}, attr: { class: MapHelper.calculateTownCssClass('AshinKanto') }"
-         , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Diantha')]() >= 1 && App.game.statistics.gymsDefeated[GameConstants.getGymIndex('AshinKanto')]() == 0"
+         , databind: "click: () => TemporaryBattleList['Ash Ketchum Kanto'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Ash Ketchum Kanto'] && TemporaryBattleList['Ash Ketchum Kanto'].isVisible()"
          , image: "assets/images/ashketchumoverworld.png"
          })
       %>

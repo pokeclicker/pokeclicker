@@ -1154,6 +1154,12 @@ export const DockTowns = [
 
 export const TemporaryBattles = [
     'Ultra Wormhole',
+    'Ash Ketchum Kanto',
+    'Ash Ketchum Johto',
+    'Ash Ketchum Hoenn',
+    'Ash Ketchum Sinnoh',
+    'Ash Ketchum Unova',
+    'Ash Ketchum Kalos',
 ];
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
