@@ -40,31 +40,26 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.attack]: {
         text: 'Attack',
         getValue: (p) => p.calculateAttack(),
-        invert: true,
     },
 
     [SortOptions.level]: {
         text: 'Level',
         getValue: (p) => p.level,
-        invert: true,
     },
 
     [SortOptions.shiny]: {
         text: 'Shiny',
         getValue: (p) => p.shiny,
-        invert: true,
     },
 
     [SortOptions.baseAttack]: {
         text: 'Base Attack',
         getValue: (p) => p.baseAttack,
-        invert: true,
     },
 
     [SortOptions.breedingEfficiency]: {
         text: 'Breeding Efficiency',
         getValue: (p) => ((p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed()) / pokemonMap[p.name].eggCycles),
-        invert: true,
     },
 
     [SortOptions.eggCycles]: {
