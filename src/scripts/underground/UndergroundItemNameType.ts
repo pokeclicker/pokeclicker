@@ -69,4 +69,5 @@ type UndergroundItemNameType
     | 'Black Shard'
     | 'Crimson Shard'
     | 'Lime Shard'
-    | 'White Shard';
+    | 'White Shard'
+    | 'Pink Shard';
