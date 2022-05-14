@@ -6,21 +6,48 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
             <h5 class="modal-title" id="bulletinBoardModalLabel">Bulletin board</h5>
         </div>
         <div class="modal-body p-0">
-            <table class="table m-0" data-bind="foreach: App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard)">
-                <tr style="background-image: url('assets/images/bulletinBoard/top.png'); background-size: cover; color: black;">
-                    <td class="col-md-3" style="background-image: url('assets/images/bulletinBoard/paper1.png'); background-size: cover; min-height: 200px; height: 200px;">
-                        <div class="text-left p-3">
-                            <h5>
-                                <knockout data-bind="text: $data.name">Name</knockout>
-                            </h5>
-                            <div class="p-0">
-                                <knockout data-bind="text: $data.description">Description</knockout>
+            <table class="table m-0" style="border: 0px;">
+                <tbody style="border: 0px;">
+                    <!-- ko foreach: GameHelper.chunk(3, App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard)) -->
+                    <tr style="background-size: cover; color: black; font-family: 'Brush Script MT'; font-size: 1.2rem; border: 0px;"
+                        data-bind="style: { backgroundImage: 'url(\'assets/images/bulletinBoard/' +
+                            ($index() == 0 ? 'top' : ($index() == Math.ceil(App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard).length / 3) - 1 ? 'bot' : 'mid')) +
+                            '.png\')' }">
+                        <!-- ko foreach: $data -->
+                        <td class="col-md-3" style="border: 0px;">
+                            <div class="text-left p-5" style="background-image: url('assets/images/bulletinBoard/paper1.png'); background-size: cover; min-height: 365px; height: 365px;">
+                                <h5>
+                                    <knockout data-bind="text: $data.name" style="color: black; font-family: 'Brush Script MT'; font-size: 1.5rem;">Name</knockout>
+                                </h5>
+                                <div class="p-0">
+                                    <knockout data-bind="text: $data.description">Description</knockout>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                    <td class="col-md-3"></td>
-                    <td class="col-md-3"></td>
-                </tr>
+                        </td>
+                        <!-- /ko -->
+                        <!-- ko if: $data.length < 2 -->
+                        <td class="col-md-3" style="border: 0px;"></td>
+                        <!-- /ko -->
+                        <!-- ko if: $data.length < 3 -->
+                        <td class="col-md-3" style="border: 0px;"></td>
+                        <!-- /ko -->
+                    </tr >
+                    <!-- /ko -->
+                    <!-- ko if: App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard).length == 0 -->
+                    <tr style="background-size: cover; color: black; font-family: 'Brush Script MT'; font-size: 1.2rem; border: 0px; background-image: url('assets/images/bulletinBoard/top.png');">
+                        <td style="border: 0px;">
+                            <div style="min-height: 365px; height: 365px;"></div>
+                        </td>
+                    </tr>
+                    <!-- /ko -->
+                    <!-- ko if: App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard).length <= 3 -->
+                    <tr style="background-size: cover; color: black; font-family: 'Brush Script MT'; font-size: 1.2rem; border: 0px; background-image: url('assets/images/bulletinBoard/bot.png');">
+                        <td style="border: 0px;">
+                            <div style="min-height: 365px; height: 365px;"></div>
+                        </td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
             </table>
         </div>
         <div class="modal-footer">
