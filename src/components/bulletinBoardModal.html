@@ -21,6 +21,7 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                                 <div class="p-0">
                                     <knockout data-bind="text: $data.description" style="font-size: 1.2rem;">Description</knockout>
                                 </div>
+                                <button class="btn absolute-bottom" style="position: absolute; bottom: 30px;" data-bind="click: () => { $data.beginQuest(0, undefined, true); }">Accept</button>
                             </div>
                         </td>
                         <!-- /ko -->
@@ -34,16 +35,14 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                     <!-- /ko -->
                     <!-- ko if: App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard).length == 0 -->
                     <tr style="background-image: url('assets/images/bulletinBoard/top.png');">
-                        <td>
-                            <div class="bulletin-paper"></div>
-                        </td>
+                        <td><div class="bulletin-paper"></div></td>
                     </tr>
                     <!-- /ko -->
                     <!-- ko if: App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard).length <= 3 -->
                     <tr style="background-image: url('assets/images/bulletinBoard/bot.png');">
-                        <td>
-                            <div class="bulletin-paper"></div>
-                        </td>
+                        <td><div class="bulletin-paper"></div></td>
+                        <td><div class="bulletin-paper"></div></td>
+                        <td><div class="bulletin-paper"></div></td>
                     </tr>
                     <!-- /ko -->
                 </tbody>
