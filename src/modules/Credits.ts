@@ -256,6 +256,15 @@ export const SpriteCredits: Credit[] = [
         ],
         // Notes: Permission given on image page if credited.
     },
+    {
+        name: 'Ulithium_Dragon',
+        link: 'https://www.pokecommunity.com/showthread.php?t=397580',
+        image: 'https://www.pokecommunity.com/customavatars/avatar531836_2.gif',
+        resources: [
+            'Ultra Wormhole',
+        ],
+        // Notes: Permission given on image page if credited.
+    },
 ].map((c) => {
     SeededRand.seed(parseInt(c.name, 36));
     // eslint-disable-next-line no-param-reassign
