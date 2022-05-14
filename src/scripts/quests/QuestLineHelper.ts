@@ -163,7 +163,7 @@ class QuestLineHelper {
     }
 
     public static createVivillonQuestLine() {
-        const vivillonQuestLine = new QuestLine('The Great Vivillon Hunt!', 'Discover the beauty of Vivillon');
+        const vivillonQuestLine = new QuestLine('The Great Vivillon Hunt!', 'Discover the beauty of Vivillon', true);
 
         const createVivillonQuest = (type: PokemonType, vivillon: PokemonNameType, dungeons: Array<string>, hint: string) => {
             // Capture 100 Water type Pokemon

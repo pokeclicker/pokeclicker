@@ -2,6 +2,7 @@ enum QuestLineState {
     inactive,
     started,
     ended,
+    onBulletinBoard,
 }
 
 class QuestLine {
@@ -13,14 +14,16 @@ class QuestLine {
     curQuestObject: KnockoutComputed<any>;
     curQuestInitial: KnockoutObservable<number>;
     totalQuests: number;
+    optional: boolean;
 
     autoBegin: KnockoutSubscription;
 
-    constructor(name: string, description: string) {
+    constructor(name: string, description: string, optional = false) {
         this.name = name;
         this.description = description;
         this.quests = ko.observableArray();
         this.totalQuests = 0;
+        this.optional = optional;
         this.curQuest = ko.pureComputed(() => {
             const acc = 0;
             return this.quests().map((quest) => {
@@ -69,7 +72,11 @@ class QuestLine {
         this.quests.push(quest);
     }
 
-    beginQuest(index = 0, initial?: number) {
+    beginQuest(index = 0, initial?: number, force = false) {
+        if (index == 0 && this.optional && !force) {
+            this.state(QuestLineState.onBulletinBoard);
+            return;
+        }
         const quest = this.quests()[index];
         if (initial != undefined) {
             quest.initial(initial);
