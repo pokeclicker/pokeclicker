@@ -6,44 +6,43 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
             <h5 class="modal-title" id="bulletinBoardModalLabel">Bulletin board</h5>
         </div>
         <div class="modal-body p-0">
-            <table class="table m-0" style="border: 0px;">
-                <tbody style="border: 0px;">
+            <table class="table m-0">
+                <tbody>
                     <!-- ko foreach: GameHelper.chunk(3, App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard)) -->
-                    <tr style="background-size: cover; color: black; font-family: 'Brush Script MT'; font-size: 1.2rem; border: 0px;"
-                        data-bind="style: { backgroundImage: 'url(\'assets/images/bulletinBoard/' +
+                    <tr data-bind="style: { backgroundImage: 'url(\'assets/images/bulletinBoard/' +
                             ($index() == 0 ? 'top' : ($index() == Math.ceil(App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard).length / 3) - 1 ? 'bot' : 'mid')) +
                             '.png\')' }">
                         <!-- ko foreach: $data -->
-                        <td class="col-md-3" style="border: 0px;">
-                            <div class="text-left p-5" style="background-image: url('assets/images/bulletinBoard/paper1.png'); background-size: cover; min-height: 365px; height: 365px;">
+                        <td class="col-md-3">
+                            <div class="text-left p-5 bulletin-paper" style="background-image: url('assets/images/bulletinBoard/paper1.png');">
                                 <h5>
-                                    <knockout data-bind="text: $data.name" style="color: black; font-family: 'Brush Script MT'; font-size: 1.5rem;">Name</knockout>
+                                    <knockout data-bind="text: $data.name" style="font-size: 1.5rem;">Name</knockout>
                                 </h5>
                                 <div class="p-0">
-                                    <knockout data-bind="text: $data.description">Description</knockout>
+                                    <knockout data-bind="text: $data.description" style="font-size: 1.2rem;">Description</knockout>
                                 </div>
                             </div>
                         </td>
                         <!-- /ko -->
                         <!-- ko if: $data.length < 2 -->
-                        <td class="col-md-3" style="border: 0px;"></td>
+                        <td class="col-md-3"></td>
                         <!-- /ko -->
                         <!-- ko if: $data.length < 3 -->
-                        <td class="col-md-3" style="border: 0px;"></td>
+                        <td class="col-md-3"></td>
                         <!-- /ko -->
                     </tr >
                     <!-- /ko -->
                     <!-- ko if: App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard).length == 0 -->
-                    <tr style="background-size: cover; color: black; font-family: 'Brush Script MT'; font-size: 1.2rem; border: 0px; background-image: url('assets/images/bulletinBoard/top.png');">
-                        <td style="border: 0px;">
-                            <div style="min-height: 365px; height: 365px;"></div>
+                    <tr style="background-image: url('assets/images/bulletinBoard/top.png');">
+                        <td>
+                            <div class="bulletin-paper"></div>
                         </td>
                     </tr>
                     <!-- /ko -->
                     <!-- ko if: App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard).length <= 3 -->
-                    <tr style="background-size: cover; color: black; font-family: 'Brush Script MT'; font-size: 1.2rem; border: 0px; background-image: url('assets/images/bulletinBoard/bot.png');">
-                        <td style="border: 0px;">
-                            <div style="min-height: 365px; height: 365px;"></div>
+                    <tr style="background-image: url('assets/images/bulletinBoard/bot.png');">
+                        <td>
+                            <div class="bulletin-paper"></div>
                         </td>
                     </tr>
                     <!-- /ko -->
