@@ -263,7 +263,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Ultra Wormhole',
         ],
-        // Notes: Permission given on image page if credited.
+        // Notes: Permission given on image page, credit optional, still given cuz we're nice like that.
     },
 ].map((c) => {
     SeededRand.seed(parseInt(c.name, 36));
