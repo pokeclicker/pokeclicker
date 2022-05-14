@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development gulp",
+    "build": "cross-env NODE_ENV=production gulp website && cp -R index.js package.json node_modules build/. && electron-builder -wl --project build",
     "test": "npm run ts-test && npm run eslint",
     "ts-test": "gulp scripts",
     "eslint": "eslint --ext ts ./src/scripts ./src/modules",
@@ -39,6 +40,8 @@
     "browser-sync": "^2.26.12",
     "cross-env": "^7.0.2",
     "del": "^5.1.0",
+    "electron": "^18.2.3",
+    "electron-builder": "^23.0.3",
     "es6-promise": "^4.2.8",
     "eslint-config-airbnb-typescript": "^11.0.0",
     "eslint-plugin-import": "^2.22.1",

@@ -1,6 +1,7 @@
 node_modules/
 .idea/
 build/
+dist/
 *.db
 config.js
 src/declarations/
