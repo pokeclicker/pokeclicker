@@ -1,0 +1,31 @@
+<div class="modal fade" id="bulletinBoardModal" tabindex="-1" role="dialog"
+aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+       <div class="modal-header justify-content-start align-items-center">
+            <h5 class="modal-title" id="bulletinBoardModalLabel">Bulletin board</h5>
+        </div>
+        <div class="modal-body p-0">
+            <table class="table m-0" data-bind="foreach: App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard)">
+                <tr style="background-image: url('assets/images/bulletinBoard/top.png'); background-size: cover; color: black;">
+                    <td class="col-md-3" style="background-image: url('assets/images/bulletinBoard/paper1.png'); background-size: cover; min-height: 200px; height: 200px;">
+                        <div class="text-left p-3">
+                            <h5>
+                                <knockout data-bind="text: $data.name">Name</knockout>
+                            </h5>
+                            <div class="p-0">
+                                <knockout data-bind="text: $data.description">Description</knockout>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="col-md-3"></td>
+                    <td class="col-md-3"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+</div>
