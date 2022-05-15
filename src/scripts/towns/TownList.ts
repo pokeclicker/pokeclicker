@@ -1473,7 +1473,12 @@ TownList['Sendoff Spring'] = new DungeonTown(
 TownList['Hall of Origin'] = new DungeonTown(
     'Hall of Origin',
     GameConstants.Region.sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
+    [
+        new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion),
+        new ObtainedPokemonRequirement(pokemonMap.Dialga),
+        new ObtainedPokemonRequirement(pokemonMap.Palkia),
+        new ObtainedPokemonRequirement(pokemonMap['Giratina (altered)']),
+    ]
 );
 TownList['Fullmoon Island'] = new DungeonTown(
     'Fullmoon Island',
