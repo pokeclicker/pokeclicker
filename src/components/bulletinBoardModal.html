@@ -15,13 +15,13 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                         <!-- ko foreach: $data -->
                         <td class="col-md-3">
                             <div class="text-left p-4 bulletin-paper" style="background-image: url('assets/images/bulletinBoard/paper1.png');">
-                                <h5>
+                                <h5 style="padding-right: 20px;">
                                     <knockout data-bind="text: $data.name" style="font-size: 1.5rem; font-weight: bold;">Name</knockout>
                                 </h5>
                                 <div class="p-0">
                                     <knockout data-bind="text: $data.description" style="font-size: 1.3rem;">Description</knockout>
                                 </div>
-                                <button class="btn absolute-bottom" style="position: absolute; bottom: 30px;" data-bind="click: () => { $data.beginQuest(0, undefined, true); }">Accept</button>
+                                <button class="btn btn-primary absolute-bottom" style="position: absolute; bottom: 30px;" data-bind="click: () => { $data.beginQuest(0, undefined, true); }">Accept</button>
                             </div>
                         </td>
                         <!-- /ko -->
