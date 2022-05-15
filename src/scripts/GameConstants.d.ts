@@ -331,6 +331,10 @@ namespace GameConstants {
         'Pokemon_egg',
         'Mystery_egg'
     }
+    export enum BulletinBoards {
+        All,
+        Kalos,
+    }
     declare const EnergyRestoreEffect: {
         SmallRestore: number;
         MediumRestore: number;

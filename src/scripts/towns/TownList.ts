@@ -168,7 +168,7 @@ const CinnabarIslandResearcher = new NPC('Researcher', [
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
     GameConstants.Region.kanto,
-    [new BulletinBoard()],
+    [],
     {
         npcs: [PalletProfOak],
     }
@@ -2076,7 +2076,7 @@ const KiloudeConfusedHiker = new NPC('Confused Hiker', [
 TownList['Vaniville Town'] = new Town(
     'Vaniville Town',
     GameConstants.Region.kalos,
-    [VanivilleTownShop],
+    [VanivilleTownShop, new BulletinBoard(GameConstants.BulletinBoards.Kalos)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
     }

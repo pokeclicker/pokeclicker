@@ -15,15 +15,17 @@ class QuestLine {
     curQuestInitial: KnockoutObservable<number>;
     totalQuests: number;
     optional: boolean;
+    bulletinBoard: GameConstants.BulletinBoards;
 
     autoBegin: KnockoutSubscription;
 
-    constructor(name: string, description: string, optional = false) {
+    constructor(name: string, description: string, optional = false, bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.All) {
         this.name = name;
         this.description = description;
         this.quests = ko.observableArray();
         this.totalQuests = 0;
         this.optional = optional;
+        this.bulletinBoard = bulletinBoard;
         this.curQuest = ko.pureComputed(() => {
             const acc = 0;
             return this.quests().map((quest) => {

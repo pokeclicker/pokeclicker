@@ -1,6 +1,6 @@
 <div class="modal fade" id="bulletinBoardModal" tabindex="-1" role="dialog"
 aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document" data-bind="if: BulletinBoard.selectedBulletinBoard()">
     <div class="modal-content">
        <div class="modal-header justify-content-start align-items-center">
             <h5 class="modal-title" id="bulletinBoardModalLabel">Bulletin board</h5>
@@ -8,9 +8,9 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
         <div class="modal-body p-0">
             <table class="table m-0">
                 <tbody>
-                    <!-- ko foreach: GameHelper.chunk(3, App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard)) -->
+                    <!-- ko foreach: GameHelper.chunk(3, BulletinBoard.selectedBulletinBoard().getQuests()) -->
                     <tr data-bind="style: { backgroundImage: 'url(\'assets/images/bulletinBoard/' +
-                            ($index() == 0 ? 'top' : ($index() == Math.ceil(App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard).length / 3) - 1 ? 'bot' : 'mid')) +
+                            ($index() == 0 ? 'top' : ($index() == Math.ceil(BulletinBoard.selectedBulletinBoard().getQuests().length / 3) - 1 ? 'bot' : 'mid')) +
                             '.png\')' }">
                         <!-- ko foreach: $data -->
                         <td class="col-md-3">
@@ -33,12 +33,14 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                         <!-- /ko -->
                     </tr >
                     <!-- /ko -->
-                    <!-- ko if: App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard).length == 0 -->
+                    <!-- ko if: BulletinBoard.selectedBulletinBoard().getQuests().length == 0 -->
                     <tr style="background-image: url('assets/images/bulletinBoard/top.png');">
+                        <td><div class="bulletin-paper"></div></td>
+                        <td><div class="bulletin-paper"></div></td>
                         <td><div class="bulletin-paper"></div></td>
                     </tr>
                     <!-- /ko -->
-                    <!-- ko if: App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard).length <= 3 -->
+                    <!-- ko if: BulletinBoard.selectedBulletinBoard().getQuests().length <= 3 -->
                     <tr style="background-image: url('assets/images/bulletinBoard/bot.png');">
                         <td><div class="bulletin-paper"></div></td>
                         <td><div class="bulletin-paper"></div></td>

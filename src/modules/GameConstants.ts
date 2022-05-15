@@ -705,6 +705,11 @@ export enum EggItemType {
     'Mystery_egg',
 }
 
+export enum BulletinBoards {
+    All,
+    Kalos,
+}
+
 export const EnergyRestoreEffect = {
     SmallRestore: 0.1,
     MediumRestore: 0.2,
