@@ -4968,12 +4968,12 @@ dungeonList['Santalune Forest'] = new Dungeon('Santalune Forest',
     ],
     5569766,
     [
+        new DungeonBossPokemon('Pikachu', 27848828, 4),
         new DungeonTrainer('Lass',
             [
                 new GymPokemon('Weedle', 13924414, 2),
                 new GymPokemon('Bunnelby', 13924414, 4),
             ], { weight: 1 }, 'Lise'),
-        new DungeonBossPokemon('Pikachu', 27848828, 4),
     ],
     400000, 2
 );
@@ -5008,6 +5008,7 @@ dungeonList['Connecting Cave'] = new Dungeon('Connecting Cave',
     ],
     6202973,
     [
+        new DungeonBossPokemon('Axew', 31014863, 20),
         new DungeonTrainer('Pokémon Breeder',
             [
                 new GymPokemon('Ducklett', 7753716, 12),
@@ -5016,7 +5017,6 @@ dungeonList['Connecting Cave'] = new Dungeon('Connecting Cave',
                 new GymPokemon('Oddish', 7753716, 12),
             ],
             { weight: 1 }, 'Mercy', '(female)'),
-        new DungeonBossPokemon('Axew', 31014863, 20),
     ],
     475000, 7);
 
@@ -5057,13 +5057,13 @@ dungeonList['Glittering Cave'] = new Dungeon('Glittering Cave',
     ],
     6423260,
     [
+        new DungeonBossPokemon('Kangaskhan', 32116298, 20),
+        new DungeonBossPokemon('Mawile', 32116298, 20),
         new DungeonTrainer('Team Flare Grunt Duo',
             [
                 new GymPokemon('Scraggy', 16058149, 20),
                 new GymPokemon('Croagunk', 16058149, 20),
             ], { weight: 1 }, undefined),
-        new DungeonBossPokemon('Kangaskhan', 32116298, 20),
-        new DungeonBossPokemon('Mawile', 32116298, 20),
     ],
     505000, 9);
 
@@ -5123,6 +5123,7 @@ dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
     ],
     6648213,
     [
+        new DungeonBossPokemon('Diancie', 127687090, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)}),
         new DungeonTrainer('Ace Trainer',
             [
                 new GymPokemon('Absol', 16620533, 26),
@@ -5134,7 +5135,6 @@ dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
                 new GymPokemon('Granbull', 11080355, 24),
                 new GymPokemon('Helioptile', 11080355, 25),
             ], { weight: 1 }, 'Monique', '(female)'),
-        new DungeonBossPokemon('Diancie', 127687090, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)}),
     ],
     555000, 11);
 
@@ -5193,14 +5193,14 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
     ],
     6994464,
     [
-        new DungeonTrainer('Team Flare Aliana',
-            [new GymPokemon('Mightyena', 34972320, 38)], { weight: 1 }),
-        new DungeonBossPokemon('Volcanion', 127687090, 100,
+        new DungeonBossPokemon('Volcanion', 42108495, 100,
             {
                 requirement: new MultiRequirement([
                     new ClearDungeonRequirement(5, GameConstants.getDungeonIndex('Kalos Power Plant')),
                     new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
                 ])}),
+        new DungeonTrainer('Team Flare Aliana',
+            [new GymPokemon('Mightyena', 34972320, 38)], { weight: 1 }),
     ],
     575000, 13);
 
@@ -5318,12 +5318,12 @@ dungeonList['Lost Hotel'] = new Dungeon('Lost Hotel',
     ],
     7351403,
     [
+        new DungeonBossPokemon('Rotom', 36757013, 38),
         new DungeonTrainer('Punk Couple',
             [
                 new GymPokemon('Garbodor', 18378507, 42),
                 new GymPokemon('Pangoro', 18378507, 42),
             ], { weight: 2 }, 'Zoya & Asa'),
-        new DungeonBossPokemon('Rotom', 36757013, 38),
     ],
     635000, 15);
 
@@ -5426,10 +5426,10 @@ dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
     ],
     7231229,
     [
+        new DungeonBossPokemon('Abomasnow', 36156143, 50),
         new DungeonTrainer('Team Flare Mable',
             [new GymPokemon('Houndoom', 36156143, 48)],
             { weight: 1 }),
-        new DungeonBossPokemon('Abomasnow', 36156143, 50),
     ],
     665500, 15);
 
@@ -5480,6 +5480,8 @@ dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
     ],
     7472777,
     [
+        new DungeonBossPokemon('Xerneas', 37363883, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
+        new DungeonBossPokemon('Yveltal', 37363883, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
         new DungeonTrainer('Team Flare Lysandre',
             [
                 new GymPokemon('Mienshao', 9240971, 49),
@@ -5488,8 +5490,6 @@ dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
                 new GymPokemon('Mega Gyarados', 9640971, 53),
             ],
             { weight: 2 }),
-        new DungeonBossPokemon('Xerneas', 37363883, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
-        new DungeonBossPokemon('Yveltal', 37363883, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
     ],
     675000, 17);
 
@@ -5560,12 +5560,12 @@ dungeonList['Terminus Cave'] = new Dungeon('Terminus Cave',
     ],
     7595354,
     [
+        new DungeonBossPokemon('Zygarde', 42108495, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)}),
         new DungeonTrainer('Pokémon Rangers',
             [
                 new GymPokemon('Nidoqueen', 18988384, 51),
                 new GymPokemon('Nidoking', 18988384, 51),
             ], { weight: 3 }, 'Fern & Lee'),
-        new DungeonBossPokemon('Zygarde', 127687090, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)}),
     ],
     700000, 18);
 
