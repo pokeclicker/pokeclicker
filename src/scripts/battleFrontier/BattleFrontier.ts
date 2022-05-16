@@ -29,8 +29,8 @@ class BattleFrontier implements Feature {
         App.game.gameState = GameConstants.GameState.battleFrontier;
     }
 
-    public start(): void {
-        BattleFrontierRunner.start();
+    public start(useCheckpoint: boolean): void {
+        BattleFrontierRunner.start(useCheckpoint);
     }
 
     public leave(): void {
@@ -41,6 +41,7 @@ class BattleFrontier implements Feature {
     toJSON(): Record<string, any> {
         return {
             milestones: this.milestones.milestoneRewards.filter(m => m.obtained()).map(m => [m.stage, m.description]),
+            checkpoint: BattleFrontierRunner.checkpoint(),
         };
     }
 
@@ -52,5 +53,7 @@ class BattleFrontier implements Feature {
         json.milestones?.forEach(([stage, description]) => {
             this.milestones.milestoneRewards.find(m => m.stage == stage && m.description == description)?.obtained(true);
         });
+
+        BattleFrontierRunner.checkpoint(json.checkpoint);
     }
 }

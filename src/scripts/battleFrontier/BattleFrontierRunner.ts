@@ -4,6 +4,7 @@ class BattleFrontierRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
     static stage: KnockoutObservable<number> = ko.observable(1); // Start at stage 1
+    public static checkpoint: KnockoutObservable<number> = ko.observable(1); // Start at stage 1
 
     public static counter = 0;
 
@@ -22,9 +23,9 @@ class BattleFrontierRunner {
         this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.GYM_TIME * 100));
     }
 
-    public static start() {
+    public static start(useCheckpoint: boolean) {
         this.started(true);
-        this.stage(1);
+        this.stage(useCheckpoint ? this.checkpoint() : 1);
         BattleFrontierBattle.pokemonIndex(0);
         BattleFrontierBattle.generateNewEnemy();
         BattleFrontierRunner.timeLeft(GameConstants.GYM_TIME);
@@ -45,6 +46,7 @@ class BattleFrontierRunner {
         BattleFrontierRunner.timeLeft(GameConstants.GYM_TIME);
         BattleFrontierRunner.timeLeftPercentage(100);
 
+        this.checkpoint(this.stage());
     }
 
     public static end() {
@@ -73,6 +75,8 @@ class BattleFrontierRunner {
         App.game.wallet.gainBattlePoints(battlePointsEarned);
         App.game.wallet.gainMoney(moneyEarned);
         const reward = BattleFrontierMilestones.nextMileStone();
+
+        this.checkpoint(1);
 
         this.end();
     }
@@ -107,5 +111,9 @@ class BattleFrontierRunner {
             str += `<img class="pokeball-smallest" src="assets/images/pokeball/Pokeball.svg"${BattleFrontierBattle.pokemonIndex() > i ? ' style="filter: saturate(0);"' : ''}>`;
         }
         return str;
+    })
+
+    public static hasCheckpoint = ko.computed(() => {
+        return BattleFrontierRunner.checkpoint() > 1;
     })
 }
