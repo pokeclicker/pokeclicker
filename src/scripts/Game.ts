@@ -78,6 +78,9 @@ class Game {
         this.specialEvents.initialize();
         this.load();
 
+        // Update if the achievements are already completed
+        AchievementHandler.preCheckAchievements();
+
         // TODO refactor to proper initialization methods
         if (player.starter() != GameConstants.Starter.None) {
             Battle.generateNewEnemy();
@@ -300,6 +303,14 @@ class Game {
                     BattleFrontierBattle.tick();
                 }
                 BattleFrontierRunner.tick();
+                break;
+            }
+            case GameConstants.GameState.temporaryBattle: {
+                TemporaryBattleBattle.counter += GameConstants.TICK_TIME;
+                if (TemporaryBattleBattle.counter >= GameConstants.BATTLE_TICK) {
+                    TemporaryBattleBattle.tick();
+                }
+                TemporaryBattleRunner.tick();
                 break;
             }
         }

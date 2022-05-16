@@ -73,6 +73,7 @@ export default class Statistics implements Saveable {
     routeKills: Record<string, Record<string, KnockoutObservable<number>>>;
     gymsDefeated: Array<KnockoutObservable<number>>;
     dungeonsCleared: Array<KnockoutObservable<number>>;
+    temporaryBattleDefeated: Array<KnockoutObservable<number>>;
 
     /*
      * objectObservables
@@ -131,6 +132,7 @@ export default class Statistics implements Saveable {
         'berriesHarvested',
         'berriesObtained',
         'mulchesUsed',
+        'temporaryBattleDefeated',
     ];
     // These will allow negative values (special events etc)
     objectObservables = [
@@ -260,6 +262,9 @@ export default class Statistics implements Saveable {
             if (typeof input === 'object' && !ko.isObservable(input)) {
                 // Recurse objects through getSaveDataValue, to get any observable values
                 return Object.entries(input).reduce((acc, [nextKey, nextValue]) => {
+                    if (nextValue === 0) {
+                        return acc;
+                    }
                     acc[nextKey] = getSaveDataValue(nextValue);
                     return acc;
                 }, {});
