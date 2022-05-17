@@ -157,7 +157,7 @@ const SaffronBattleItemRival = new NPC('Battle Item Master', [
 
 const FuchsiaKantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
     'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
-], GameConstants.Region.kanto);
+], GameConstants.Region.kanto, 0);
 
 const CinnabarIslandResearcher = new NPC('Researcher', [
     'They were trying to clone an ancient Pokémon in the mansion, I wonder if they succeeded.',
@@ -530,7 +530,7 @@ const MahoganySouvenirShopAttendant = new NPC('Souvenir Shop Attendant', [
 
 const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
     'On the news they are getting more reports of roaming Pokémon appearing on {ROUTE_NAME}!',
-], GameConstants.Region.johto);
+], GameConstants.Region.johto, 0);
 
 
 //Johto Towns
@@ -816,7 +816,7 @@ const OldaleTrackingScientist = new NPC('Tracking Scientist', [
 
 const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
     'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
-], GameConstants.Region.hoenn);
+], GameConstants.Region.hoenn, 0);
 
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
@@ -1255,7 +1255,7 @@ const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
 
 const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
     'I spotted a bunch of roaming Pokémon on {ROUTE_NAME}!',
-], GameConstants.Region.sinnoh);
+], GameConstants.Region.sinnoh, 0);
 
 //Sinnoh Towns
 TownList['Twinleaf Town'] = new Town(
@@ -1689,7 +1689,7 @@ const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
 
 const UnovaRoamerNPC = new RoamerNPC('Professor Juniper\'s Aide', [
     'Our research indicates a higher concentration of roaming Pokémon on {ROUTE_NAME}!',
-], GameConstants.Region.unova);
+], GameConstants.Region.unova, 0);
 
 //Unova Towns
 TownList['Aspertia City'] = new Town(
@@ -2142,7 +2142,7 @@ const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
 
 const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
     'The spirits tell me roaming Pokémon have been spotted on {ROUTE_NAME}!',
-], GameConstants.Region.kalos);
+], GameConstants.Region.kalos, 0);
 
 const KiloudeConfusedHiker = new NPC('Confused Hiker', [
     'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
@@ -2495,7 +2495,7 @@ const SeafolkCaptain = new NPC('Captain Mina', [
 ]);
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [
     'Some very rare Pokémon have been sighted on {ROUTE_NAME}. I hope we can learn more about them.',
-], GameConstants.Region.alola);
+], GameConstants.Region.alola, 0);
 
 //Alola Towns
 

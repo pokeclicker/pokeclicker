@@ -38,8 +38,8 @@ export default class SubRegions {
     }
 }
 
-SubRegions.addSubRegion(Region.kanto, new SubRegion('Kanto', undefined, 'Vermilion City'));
-SubRegions.addSubRegion(Region.kanto, new SubRegion('Sevii Islands 123', new GymBadgeRequirement(BadgeEnums.Volcano), 'One Island'));
+SubRegions.addSubRegion(Region.kanto, new SubRegion('Kanto', undefined, 'Vermilion City', undefined, 0));
+SubRegions.addSubRegion(Region.kanto, new SubRegion('Sevii Islands 123', new GymBadgeRequirement(BadgeEnums.Volcano), 'One Island', undefined, 1));
 
 export enum KantoSubRegions {
     Kanto = 0,
@@ -67,19 +67,19 @@ export enum AlolaSubRegions {
     // PoniIsland,
 }
 
-SubRegions.addSubRegion(Region.galar, new SubRegion('Galar', undefined, 'Postwick'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('Galar', undefined, 'Postwick', undefined, 0));
 // For once Galar is split into 2 regions
-// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar South', undefined, 'Postwick'));
-// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar North', new RouteKillRequirement(10, GameConstants.Region.galar, 14), 'Hammerlocke'));
+// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar South', undefined, 'Postwick', undefined, 0));
+// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar North', new RouteKillRequirement(10, GameConstants.Region.galar, 14), 'Hammerlocke', undefined, 0));
 // Galar DLC islands
 SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', new MultiRequirement([
     new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
     new NullRequirement(),
-])));
+]), undefined, undefined, 1));
 SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', new MultiRequirement([
     new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
     new NullRequirement(),
-])));
+]), undefined, undefined, 2));
 
 export enum GalarSubRegions {
     Galar = 0,
