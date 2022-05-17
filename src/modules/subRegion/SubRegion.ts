@@ -8,6 +8,7 @@ export default class SubRegion {
         public requirement?: Requirement,
         public startTown?: string,
         public startRoute?: number,
+        public roamerSubRegionGroup = 0,
     ) {}
 
     public unlocked(): boolean {
