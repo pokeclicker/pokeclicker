@@ -262,6 +262,9 @@ export default class Statistics implements Saveable {
             if (typeof input === 'object' && !ko.isObservable(input)) {
                 // Recurse objects through getSaveDataValue, to get any observable values
                 return Object.entries(input).reduce((acc, [nextKey, nextValue]) => {
+                    if (nextValue === 0) {
+                        return acc;
+                    }
                     acc[nextKey] = getSaveDataValue(nextValue);
                     return acc;
                 }, {});

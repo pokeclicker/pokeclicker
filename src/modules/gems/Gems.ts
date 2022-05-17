@@ -131,9 +131,9 @@ export default class Gems implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-            gemWallet: this.gemWallet.map(ko.unwrap),
-            gemUpgrades: this.gemUpgrades.map(ko.unwrap),
-            gemCollapsed: this.gemCollapsed,
+            gemWallet: GameHelper.filterArrayEnd(this.gemWallet.map(ko.unwrap)),
+            gemUpgrades: GameHelper.filterArrayEnd(this.gemUpgrades.map(ko.unwrap)),
+            gemCollapsed: GameHelper.filterArrayEnd(this.gemCollapsed),
         };
     }
 
