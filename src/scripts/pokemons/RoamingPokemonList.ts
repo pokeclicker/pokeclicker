@@ -5,18 +5,19 @@
 
 class RoamingPokemonList {
     public static list: Partial<Record<GameConstants.Region, Array<Array<RoamingPokemon>>>> = {};
-    public static increasedChanceRoute: Array<Array<KnockoutObservable<RegionRoute>>> = [];
+    // TODO: Right now increasedChanceRoute limits our subRegionGroups to 3.
+    // This is hardcoded because we cannot get number of subregiongroups at this point in the code.
+    public static increasedChanceRoute: Array<Array<KnockoutObservable<RegionRoute>>> = new Array(GameHelper.enumLength(GameConstants.Region))
+        .fill(0).map(() => new Array(3).fill(0).map(() => ko.observable(undefined)));
 
     constructor() { }
 
     public static add(region: GameConstants.Region, subRegionGroup: number, roamer: RoamingPokemon): void {
         if (!RoamingPokemonList.list[region]) {
             RoamingPokemonList.list[region] = [];
-            RoamingPokemonList.increasedChanceRoute[region] = [];
         }
         if (!RoamingPokemonList.list[region][subRegionGroup]) {
             RoamingPokemonList.list[region][subRegionGroup] = [];
-            RoamingPokemonList.increasedChanceRoute[region][subRegionGroup] = ko.observable(undefined);
         }
         RoamingPokemonList.list[region][subRegionGroup].push(roamer);
     }
