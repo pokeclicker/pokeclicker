@@ -691,7 +691,6 @@ class Update implements Saveable {
             // Add Sendoff Spring
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
         },
-
         '0.9.4': ({ playerData, saveData }) => {
             // Modifications relating to smaller save file sizes
             const PartyKeyMap = {
@@ -701,8 +700,9 @@ class Update implements Saveable {
                 'exp': 3,
                 'breeding': 4,
                 'shiny': 5,
-                'category': 6,
-                'levelEvolutionTriggered': 7,
+                'pokerus': 6,
+                'category': 7,
+                'levelEvolutionTriggered': 8,
             };
             Object.entries(PartyKeyMap).forEach(([oldKey, newKey]) => {
                 saveData.party.caughtPokemon.forEach(p => {
@@ -718,13 +718,6 @@ class Update implements Saveable {
             // Remove the Elite_Nihilego Gym, now a temporary battle instead of a gym
             saveData.statistics.gymsDefeated.splice(84, 1);
             saveData.badgeCase.splice(84, 1);
-
-            saveData.keyItems['Pokerus_virus'] = true;
-
-            saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
-                p.effortPoints = 0;
-                return p;
-            });
         },
     };
 
