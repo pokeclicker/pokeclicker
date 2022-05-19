@@ -244,6 +244,8 @@ Settings.add(new HotkeySetting('hotkey.dungeon.interact', 'Interact', 'Space'));
 Settings.add(new HotkeySetting('hotkey.town.start', 'Start Gym/Dungeon', 'Space'));
 Settings.add(new HotkeySetting('hotkey.forceSave', 'Force save game', 'S', { prefix: 'Shift + ' }));
 
+Settings.add(new HotkeySetting('hotkey.shop.buy', 'Buy item', 'B'));
+
 /*
  * SUBSCRIBERS
  */

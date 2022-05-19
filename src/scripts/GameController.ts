@@ -119,8 +119,10 @@ class GameController {
         const $hatcheryModal = $('#breedingModal');
         $hatcheryModal.on('hidden.bs.modal shown.bs.modal', _ => $hatcheryModal.data('disable-toggle', false));
         const hatchery = App.game.breeding;
-        // ship
+        // Ship
         const $shipModal = $('#ShipModal');
+        // Shop
+        const $shopModal = $('#shopModal');
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
@@ -218,6 +220,19 @@ class GameController {
                         }
                     }
                     return e.preventDefault();
+                }
+            }
+            if ($shopModal.data('bs.modal')?._isShown) {
+                if (isNumberKey) {
+                    if (numberKey <= ShopHandler.shopObservable().items.length) {
+                        ShopHandler.setSelected(numberKey);
+                    }
+                    return e.preventDefault();
+                }
+                switch (key) {
+                    case Settings.getSetting('hotkey.shop.buy').value:
+                        ShopHandler.buyItem();
+                        return e.preventDefault();
                 }
             }
 
