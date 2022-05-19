@@ -24,6 +24,9 @@ abstract class TownContent {
     }
 
     public protectedOnclick(): void {
+        if (!this.isVisible()) {
+            return;
+        }
         const reqsList = [];
         this.requirements?.forEach(requirement => {
             if (!requirement.isCompleted()) {
@@ -88,13 +91,6 @@ class NextRegionTownContent extends TownContent {
 
     public isVisible() {
         return MapHelper.ableToTravel();
-    }
-
-    public protectedOnclick(): void {
-        if (!MapHelper.ableToTravel()) {
-            return;
-        }
-        this.onclick();
     }
 
     public onclick(): void {

@@ -37,7 +37,10 @@
                           <option data-bind="text: $data.text, value: $data.value"></option>
                       </select>
                       <div class="input-group-append bg-primary text-light">
-                          <label for="proteinSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('proteinSortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
+                          <label for="proteinSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                            text: Settings.getSetting('proteinSortDirection').observableValue() ? '⥄' : '⥂',
+                            tooltip: { title: Settings.getSetting('proteinSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
+                            ">⥂</label>
                           <input id="proteinSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
                               data-bind="checked: Settings.getSetting('proteinSortDirection').observableValue()"
                               onchange="Settings.setSettingByName('proteinSortDirection', this.checked)"/>

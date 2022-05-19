@@ -59,17 +59,9 @@ export default class BadgeCase implements Feature {
     }
 
     toJSON(): Record<string, any> {
-        let shouldReturn = false;
         // We only want to save upto the highest badge we have obtained,
         // everything else is assumed to be false
-        return this.badgeList
-            .map(ko.unwrap)
-            .reverse()
-            .filter((hasBadge) => {
-                shouldReturn = shouldReturn || hasBadge;
-                return shouldReturn;
-            })
-            .reverse();
+        return GameHelper.filterArrayEnd(this.badgeList.map(ko.unwrap));
     }
 
     // This method intentionally left blank
