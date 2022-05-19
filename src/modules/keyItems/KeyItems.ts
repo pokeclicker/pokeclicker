@@ -3,7 +3,9 @@ import KeyItemType from '../enums/KeyItemType';
 import Information from '../utilities/Information';
 import KeyItemController from './KeyItemController';
 import { Feature } from '../DataStore/common/Feature';
-import { getDungeonIndex, Region, ROUTE_KILLS_NEEDED, Starter } from '../GameConstants';
+import {
+    getDungeonIndex, Region, ROUTE_KILLS_NEEDED, Starter,
+} from '../GameConstants';
 
 export default class KeyItems implements Feature {
     name = 'Key Items';
