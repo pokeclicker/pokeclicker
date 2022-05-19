@@ -5,6 +5,7 @@ enum PartyPokemonSaveKeys {
     exp,
     breeding,
     shiny,
+    pokerus,
     category,
     levelEvolutionTriggered,
 }
