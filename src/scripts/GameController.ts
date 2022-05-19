@@ -233,6 +233,12 @@ class GameController {
                     case Settings.getSetting('hotkey.shop.buy').value:
                         ShopHandler.buyItem();
                         return e.preventDefault();
+                    case Settings.getSetting('hotkey.shop.max').value:
+                        ShopHandler.maxAmount();
+                        return e.preventDefault();
+                    case Settings.getSetting('hotkey.shop.reset').value:
+                        ShopHandler.resetAmount();
+                        return e.preventDefault();
                 }
             }
 

@@ -245,6 +245,8 @@ Settings.add(new HotkeySetting('hotkey.town.start', 'Starts first content in the
 Settings.add(new HotkeySetting('hotkey.forceSave', 'Force save game', 'S', { prefix: 'Shift + ' }));
 
 Settings.add(new HotkeySetting('hotkey.shop.buy', 'Buy item', 'B'));
+Settings.add(new HotkeySetting('hotkey.shop.max', 'Buy item', 'M'));
+Settings.add(new HotkeySetting('hotkey.shop.reset', 'Select max amount', 'R'));
 
 /*
  * SUBSCRIBERS
