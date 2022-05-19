@@ -247,6 +247,7 @@ Settings.add(new HotkeySetting('hotkey.forceSave', 'Force save game', 'S', { pre
 Settings.add(new HotkeySetting('hotkey.shop.buy', 'Buy item', 'B'));
 Settings.add(new HotkeySetting('hotkey.shop.max', 'Buy item', 'M'));
 Settings.add(new HotkeySetting('hotkey.shop.reset', 'Select max amount', 'R'));
+Settings.add(new HotkeySetting('hotkey.shop.increase', 'Increase amount', 'I'));
 
 /*
  * SUBSCRIBERS

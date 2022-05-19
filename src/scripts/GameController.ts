@@ -239,6 +239,33 @@ class GameController {
                     case Settings.getSetting('hotkey.shop.reset').value:
                         ShopHandler.resetAmount();
                         return e.preventDefault();
+                    case Settings.getSetting('hotkey.shop.increase').value:
+                        if (GameController.keyHeld['Shift']) {
+                            switch (Settings.getSetting('shopButtons').value) {
+                                case 'original':
+                                    ShopHandler.increaseAmount(100);
+                                    break;
+                                case 'multiplication':
+                                    ShopHandler.multiplyAmount(0.1);
+                                    break;
+                                case 'bigplus':
+                                    ShopHandler.increaseAmount(1000);
+                                    break;
+                            }
+                        } else {
+                            switch (Settings.getSetting('shopButtons').value) {
+                                case 'original':
+                                    ShopHandler.increaseAmount(10);
+                                    break;
+                                case 'multiplication':
+                                    ShopHandler.multiplyAmount(10);
+                                    break;
+                                case 'bigplus':
+                                    ShopHandler.increaseAmount(100);
+                                    break;
+                            }
+                        }
+                        return e.preventDefault();
                 }
             }
 
