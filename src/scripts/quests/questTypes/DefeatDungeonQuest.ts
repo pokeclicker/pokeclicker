@@ -6,7 +6,7 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
     constructor(
         amount: number,
         reward: number,
-        private dungeon: string
+        public dungeon: string
     ) {
         super(amount, reward);
         this.region = GameConstants.getDungeonRegion(this.dungeon);
