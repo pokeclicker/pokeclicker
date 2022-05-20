@@ -668,6 +668,23 @@ const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 21.1,
+        'name': 'Red Spearow',
+        'catchRate': 255,
+        'type': [PokemonType.Normal, PokemonType.Flying],
+        'levelType': LevelType.mediumfast,
+        'exp': 52,
+        'eggCycles': 15,
+        'base': {
+            'hitpoints': 40,
+            'attack': 60,
+            'specialAttack': 31,
+            'defense': 30,
+            'specialDefense': 31,
+            'speed': 70,
+        },
+    },
+    {
         'id': 22,
         'name': 'Fearow',
         'catchRate': 90,
