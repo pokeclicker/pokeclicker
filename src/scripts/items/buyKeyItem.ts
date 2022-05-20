@@ -32,3 +32,5 @@ class BuyKeyItem extends Item {
 
 ItemList['Dungeon_ticket'] = new BuyKeyItem(KeyItemType.Dungeon_ticket, 100, undefined, undefined, 'Dungeon Ticket');
 ItemList['Explorer_kit']   = new BuyKeyItem(KeyItemType.Explorer_kit, 5000, undefined, undefined, 'Explorer Kit');
+//TODO: Make Event calendar into a trade
+ItemList['Event_calendar'] = new BuyKeyItem(KeyItemType.Event_calendar, 100000, undefined, undefined, 'Event Calendar');

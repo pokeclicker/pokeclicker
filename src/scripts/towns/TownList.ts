@@ -2372,6 +2372,7 @@ const AltaroftheSunneandMooneShop = new Shop([
     ItemList['Poipole'],
     ItemList['Sun_stone'],
     ItemList['Moon_stone'],
+    ItemList['Event_calendar'],
 ]);
 
 //Alola NPCs

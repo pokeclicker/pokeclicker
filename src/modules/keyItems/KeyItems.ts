@@ -88,11 +88,10 @@ export default class KeyItems implements Feature {
             new KeyItem(KeyItemType.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.',
                 () => MapHelper.accessToRoute(14, Region.kanto), undefined, undefined, 'Wailmer Pail'),
 
-            new KeyItem(KeyItemType.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground', undefined, undefined, undefined, 'Explorer Kit'),
-            // TODO buy for 500 quest points
-            new KeyItem(KeyItemType.Event_calendar, 'This calendar will keep you up to date on the latest events', undefined, undefined, undefined, 'Event Calender'),
-            new KeyItem(KeyItemType.Gem_case, 'A case specifically designed for holding gems', undefined, undefined, undefined, 'Gem Case'),
-            new KeyItem(KeyItemType.DNA_splicers, 'A splicer that fuses certain Pokémon',
+            new KeyItem(KeyItemType.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground.', undefined, undefined, undefined, 'Explorer Kit'),
+            new KeyItem(KeyItemType.Event_calendar, 'This calendar will keep you up to date on the latest events and start them early.', undefined, undefined, undefined, 'Event Calender'),
+            new KeyItem(KeyItemType.Gem_case, 'A case specifically designed for holding gems.', undefined, undefined, undefined, 'Gem Case'),
+            new KeyItem(KeyItemType.DNA_splicers, 'A splicer that fuses certain Pokémon.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Giant Chasm')]() > 0,
                 undefined, undefined, 'DNA Splicers'),
         ];
