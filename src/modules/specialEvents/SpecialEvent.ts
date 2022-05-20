@@ -1,3 +1,6 @@
+import {
+    Computed as KnockoutComputed,
+} from 'knockout';
 import SpecialEventNotifiedStatus from './SpecialEventsNotifiedStatus';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
@@ -48,6 +51,22 @@ export default class SpecialEvent {
 
     timeTillEnd(): number {
         return +this.endTime - Date.now();
+    }
+
+    timeTillEndFormatted(): KnockoutComputed<string> {
+        return ko.computed<string>(() => {
+            const secondsLeft = this.timeTillEnd() / 1000;
+            if (secondsLeft < 60) {
+                return `${secondsLeft} seconds`;
+            }
+            if (secondsLeft < 3600) {
+                return `${Math.floor(secondsLeft / 60)} minutes`;
+            }
+            if (secondsLeft < 3600 * 24) {
+                return `${Math.floor(secondsLeft / 3600 / 24)} hours`;
+            }
+            return `${Math.floor((secondsLeft / 3600 / 24))} days`;
+        });
     }
 
     hasStarted(): boolean {
