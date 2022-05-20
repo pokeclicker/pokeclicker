@@ -123,7 +123,13 @@ class HatcheryHelper {
     }
 
     toJSON(): Record<string, any> {
-        return ko.toJS(this);
+        return {
+            name: this.name,
+            hired: this.hired(),
+            sortOption: this.sortOption(),
+            sortDirection: this.sortDirection(),
+            hatched: this.hatched(),
+        };
     }
 
     fromJSON(json: Record<string, any>): void {
