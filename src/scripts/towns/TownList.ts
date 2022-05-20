@@ -2338,6 +2338,14 @@ TownList['Delta Verdanturf Town'] = new Town(
         ],
     }
 );
+TownList['Delta Mt. Chimney'] = new Town(
+    'Delta Mt. Chimney',
+    GameConstants.Region.kalos,
+    [new MoveToDungeon(dungeonList['Delta Fiery Path']), new MoveToDungeon(dungeonList['Delta Jagged Pass'])],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 112)],
+    }
+);
 TownList['Delta Lavaridge Town'] = new Town(
     'Delta Lavaridge Town',
     GameConstants.Region.kalos,
