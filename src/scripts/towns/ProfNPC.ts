@@ -2,10 +2,10 @@ class ProfNPC extends NPC {
 
     constructor(
         public name: string,
-        public dialog: string[],
-        public region: GameConstants.Region
+        public region: GameConstants.Region,
+        image: string = undefined
     ) {
-        super(name, dialog, { image: 'assets/images/oak.png' });
+        super(name, undefined, { image: image });
     }
 
     get dialogHTML(): string {
