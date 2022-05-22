@@ -1698,7 +1698,7 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
     ],
     18000, 101);
 
-dungeonList['Mt. Chimney'] = new Dungeon('Mt. Chimney',
+dungeonList['Mt. Chimney Crater'] = new Dungeon('Mt. Chimney Crater',
     [
         new DungeonTrainer('Team Magma Grunt',
             [new GymPokemon('Numel', 583463, 20)],
@@ -1719,7 +1719,7 @@ dungeonList['Mt. Chimney'] = new Dungeon('Mt. Chimney',
         {loot: 'Token_collector', weight: 3.5},
         {loot: 'Flame Plate', weight: 2},
         {loot: 'Fire_egg', weight: 1.5},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Mt. Chimney'))},
+        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Mt. Chimney Crater'))},
     ],
     583463,
     [

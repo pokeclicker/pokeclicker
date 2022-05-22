@@ -70,4 +70,10 @@ class RouteHelper {
         });
     }
 
+    public static isThereQuestAtLocation(route: number, region: GameConstants.Region) {
+        return App.game.quests.currentQuests().some(q => {
+            return q instanceof DefeatPokemonsQuest && q.route == route && q.region == region;
+        });
+    }
+
 }

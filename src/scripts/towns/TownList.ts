@@ -844,6 +844,14 @@ TownList['Verdanturf Town'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 117)],
     }
 );
+TownList['Mt. Chimney'] = new Town(
+    'Mt. Chimney',
+    GameConstants.Region.hoenn,
+    [new MoveToDungeon(dungeonList['Fiery Path']), new MoveToDungeon(dungeonList['Mt. Chimney Crater']), new MoveToDungeon(dungeonList['Jagged Pass']), new MoveToDungeon(dungeonList['Magma Hideout'])],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 112)],
+    }
+);
 TownList['Lavaridge Town'] = new Town(
     'Lavaridge Town',
     GameConstants.Region.hoenn,
@@ -963,15 +971,15 @@ TownList['Meteor Falls'] = new DungeonTown(
     GameConstants.Region.hoenn,
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 114)]
 );
-TownList['Mt. Chimney'] = new DungeonTown(
-    'Mt. Chimney',
+TownList['Mt. Chimney Crater'] = new DungeonTown(
+    'Mt. Chimney Crater',
     GameConstants.Region.hoenn,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Meteor Falls'))]
 );
 TownList['Jagged Pass'] = new DungeonTown(
     'Jagged Pass',
     GameConstants.Region.hoenn,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Chimney'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Chimney Crater'))]
 );
 TownList['New Mauville'] = new DungeonTown(
     'New Mauville',
