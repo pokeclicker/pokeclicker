@@ -30,6 +30,7 @@ class PartyPokemon implements Saveable {
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
+    _displayName: KnockoutObservable<string>;
     proteinsUsed: KnockoutObservable<number>;
 
     constructor(
@@ -53,6 +54,7 @@ class PartyPokemon implements Saveable {
         this._attackBonusAmount = ko.observable(attackBonusAmount);
         this._attack = ko.observable(this.calculateAttack());
         this._category = ko.observable(category);
+        this._displayName = PokemonHelper.displayName(id);
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -263,5 +265,9 @@ class PartyPokemon implements Saveable {
 
     set category(index: number) {
         this._category(index);
+    }
+
+    get displayName(): string {
+        return this._displayName();
     }
 }
