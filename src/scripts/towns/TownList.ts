@@ -1212,7 +1212,7 @@ TownList['Twinleaf Town'] = new Town(
     [TwinleafTownShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
-        npcs: [ProfRowan, TwinleafContestChampion],
+        npcs: [TwinleafContestChampion],
     }
 );
 TownList['Sandgem Town'] = new Town(
@@ -1221,7 +1221,7 @@ TownList['Sandgem Town'] = new Town(
     [],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 201)],
-        npcs: [SandgemBeachcomber],
+        npcs: [ProfRowan, SandgemBeachcomber],
     }
 );
 TownList['Jubilife City'] = new Town(
@@ -1651,7 +1651,7 @@ TownList['Aspertia City'] = new Town(
     [AspertiaCityShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
-        npcs: [ProfJuniper],
+        npcs: [],
     }
 );
 TownList['Floccesy Town'] = new Town(
@@ -1818,7 +1818,7 @@ TownList['Nuvema Town'] = new Town(
     [NuvemaTownShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 1)],
-        npcs: [UnovaRoamerNPC],
+        npcs: [ProfJuniper, UnovaRoamerNPC],
     }
 );
 TownList['Anville Town'] = new Town(
@@ -2115,7 +2115,7 @@ TownList['Vaniville Town'] = new Town(
     [VanivilleTownShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
-        npcs: [ProfSycamore],
+        npcs: [],
     }
 );
 TownList['Aquacorde Town'] = new Town(
@@ -2140,7 +2140,7 @@ TownList['Lumiose City'] = new Town(
     [DepartmentStoreShop,FriseurFurfrouShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
-        npcs: [LumioseEngineer],
+        npcs: [ProfSycamore, LumioseEngineer],
     }
 );
 TownList['Camphrier Town'] = new Town(
@@ -2478,7 +2478,7 @@ TownList['Iki Town'] = new Town(
     [],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
-        npcs: [IkiKahuna/*ProfKukui*/], // TODO: replace the NPC when all pokemons are catchable
+        npcs: [IkiKahuna],
     }
 );
 TownList['Professor Kukui\'s Lab'] = new Town(
@@ -2487,7 +2487,7 @@ TownList['Professor Kukui\'s Lab'] = new Town(
     [],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
-        npcs: [KukuisLabProfessor],
+        npcs: [KukuisLabProfessor/*ProfKukui*/], // TODO: replace the NPC when all pokemons are catchable
     }
 );
 TownList['Hau\'oli City'] = new Town(
