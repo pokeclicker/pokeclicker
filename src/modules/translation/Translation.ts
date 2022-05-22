@@ -20,8 +20,9 @@ export default class Translate {
             });
 
         languageSetting.observableValue.subscribe((val) => {
-            i18next.changeLanguage(val);
-            GameHelper.incrementObservable(this.languageUpdated);
+            i18next.changeLanguage(val, () => {
+                GameHelper.incrementObservable(this.languageUpdated);
+            });
         });
     }
 
