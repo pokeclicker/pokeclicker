@@ -115,10 +115,10 @@ const LavenderTownShop = new Shop([
 
 // Kanto NPCs
 
-const PalletProfOak = new ProfOakNPC('Prof. Oak', [
+const PalletProfOak = new ProfNPC('Prof. Oak', [
     'Good luck on your journey!',
     'Come visit me when you complete your Pokédex!',
-]);
+], GameConstants.Region.kanto);
 
 const ViridianCityOldMan = new NPC('Old Man', [
     'Ahh, I\'ve had my coffee now and I feel great!',
@@ -454,6 +454,11 @@ const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
     'On the news they are getting more reports of roaming Pokémon appearing on {ROUTE_NAME}!',
 ], GameConstants.Region.johto);
 
+const ProfElm = new ProfNPC('Prof. Elm', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
+], GameConstants.Region.johto);
+
 
 //Johto Towns
 TownList['New Bark Town'] = new Town(
@@ -462,7 +467,7 @@ TownList['New Bark Town'] = new Town(
     [NewBarkTownShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
-        npcs: [NewBarkTechnologyEnthusiast],
+        npcs: [ProfElm, NewBarkTechnologyEnthusiast],
     }
 );
 TownList['Cherrygrove City'] = new Town(
@@ -773,6 +778,11 @@ const SootopolisWallace = new NPC('Gym Leader Wallace', [
     'You will have to overcome the Pokémon League before you have any chance to encounter them.',
 ]);
 
+const ProfBirch = new ProfNPC('Prof. Birch', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
+], GameConstants.Region.hoenn);
+
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
@@ -780,7 +790,7 @@ TownList['Littleroot Town'] = new Town(
     [LittleRootTownShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
-        npcs: [LittlerootAide],
+        npcs: [ProfBirch, LittlerootAide],
     }
 );
 TownList['Oldale Town'] = new Town(
@@ -1187,6 +1197,13 @@ const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
     'I spotted a bunch of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.sinnoh);
 
+const ProfRowan = new ProfNPC('Prof. Rowan', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
+], GameConstants.Region.sinnoh);
+
+
+
 //Sinnoh Towns
 TownList['Twinleaf Town'] = new Town(
     'Twinleaf Town',
@@ -1194,7 +1211,7 @@ TownList['Twinleaf Town'] = new Town(
     [TwinleafTownShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
-        npcs: [TwinleafContestChampion],
+        npcs: [ProfRowan, TwinleafContestChampion],
     }
 );
 TownList['Sandgem Town'] = new Town(
@@ -1621,6 +1638,11 @@ const UnovaRoamerNPC = new RoamerNPC('Professor Juniper\'s Aide', [
     'Our research indicates a higher concentration of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.unova);
 
+const ProfJuniper = new ProfNPC('Prof. Juniper', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
+], GameConstants.Region.unova);
+
 //Unova Towns
 TownList['Aspertia City'] = new Town(
     'Aspertia City',
@@ -1628,6 +1650,7 @@ TownList['Aspertia City'] = new Town(
     [AspertiaCityShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
+        npcs: [ProfJuniper],
     }
 );
 TownList['Floccesy Town'] = new Town(
@@ -2078,6 +2101,11 @@ const KiloudeConfusedHiker = new NPC('Confused Hiker', [
     'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
 ]);
 
+const ProfSycamore = new ProfNPC('Prof. Sycamore', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
+], GameConstants.Region.kalos);
+
 //Kalos Towns
 
 TownList['Vaniville Town'] = new Town(
@@ -2086,6 +2114,7 @@ TownList['Vaniville Town'] = new Town(
     [VanivilleTownShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+        npcs: [ProfSycamore],
     }
 );
 TownList['Aquacorde Town'] = new Town(
@@ -2426,6 +2455,10 @@ const SeafolkCaptain = new NPC('Captain Mina', [
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [
     'Some very rare Pokémon have been sighted on {ROUTE_NAME}. I hope we can learn more about them.',
 ], GameConstants.Region.alola);
+const ProfKukui = new ProfNPC('Prof. Kukui', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
+], GameConstants.Region.alola);
 
 //Alola Towns
 
@@ -2435,7 +2468,7 @@ TownList['Iki Town Outskirts'] = new Town(
     [IkiTownOutskirtsShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-        npcs: [IkiOutskirtsMom],
+        npcs: [ProfKukui, IkiOutskirtsMom],
     }
 );
 TownList['Iki Town'] = new Town(
@@ -2804,6 +2837,10 @@ const TrainStationGuy = new NPC('Train Station Guy', [
     'One is sparsely populated, but the other is teeming with Pokemon.',
     'There are plenty of unique, powerful ones there, too!',
 ]);
+const ProfMagnolia = new ProfNPC('Prof. Magnolia', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
+], GameConstants.Region.galar);
 
 
 //Galar towns
@@ -2814,7 +2851,7 @@ TownList['Postwick'] = new Town(
     [PostwickShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
-        npcs: [Mom],
+        npcs: [ProfMagnolia, Mom],
     }
 );
 TownList['Wedgehurst'] = new Town(
