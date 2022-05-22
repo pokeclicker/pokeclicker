@@ -2104,8 +2104,8 @@ const KiloudeConfusedHiker = new NPC('Confused Hiker', [
 
 const ProfSycamore = new ProfNPC('Prof. Sycamore',
     GameConstants.Region.kalos,
-    'TODO',
-    'TODO');
+    'You\'re encountering Pokémon at a really good clip, aren\'t you? Congratulations! You completed the Pokédex!',
+    'Onward to Alola, shall we?');
 
 //Kalos Towns
 
@@ -2459,7 +2459,7 @@ const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke
 const ProfKukui = new ProfNPC('Prof. Kukui',
     GameConstants.Region.alola,
     'TODO',
-    'I am still trying to figure out how to get you to Galar...');
+    'TODO');
 
 //Alola Towns
 
@@ -2469,7 +2469,7 @@ TownList['Iki Town Outskirts'] = new Town(
     [IkiTownOutskirtsShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-        npcs: [ProfKukui, IkiOutskirtsMom],
+        npcs: [IkiOutskirtsMom],
     }
 );
 TownList['Iki Town'] = new Town(
@@ -2478,7 +2478,7 @@ TownList['Iki Town'] = new Town(
     [],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
-        npcs: [IkiKahuna],
+        npcs: [IkiKahuna/*ProfKukui*/], // TODO: replace the NPC when all pokemons are catchable
     }
 );
 TownList['Professor Kukui\'s Lab'] = new Town(
