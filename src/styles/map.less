@@ -1,9 +1,5 @@
 @import "variables.less";
 
-@locked: rgba(0, 0, 0, 0.5);
-@currentPlace: rgba(85, 255, 0, 0.5);
-@incomplete: rgba(255, 145, 0, 0.7);
-
 #map {
   rect, path {
     cursor: pointer;
@@ -14,49 +10,55 @@
     pointer-events: none;
   }
 
-  .currentRoute {
-    fill: @currentPlace;
-  }
-  
-  .unlockedUnfinishedRoute {
-    fill: @incomplete;
-  }
-  
-  .lockedRoute {
-    fill: @locked;
+  .currentLocation {
+    fill: var(--currentPlace);
+    opacity: 0.5;
   }
 
-  .city {
-    fill: @locked;
-
-    &.currentTown {
-      fill: @currentPlace;
-    }
-
-    &.unlockedUnfinishedTown {
-      fill: @incomplete;
-    }
-
-    &.unlockedTown {
-      fill: transparent;
-
-      &.flash {
-        fill: #FFD700;
-        stroke: black;
-      }
-    }
+  .locked {
+    fill: var(--locked);
+    opacity: 0.5;
   }
 
-  .dungeon {
-    fill: @locked;
+  .unlockedUnfinished {
+    fill: var(--incomplete);
+    opacity: 0.6;
+  }
 
-    &.unlockedDungeon {
-      fill: @incomplete;
-    }
+  .questAtLocation {
+    fill: var(--questAtLocation);
+    opacity: 0.6;
+  }
 
-    &.completedDungeon {
-      fill: transparent;
-    }
+  .uncaughtPokemon {
+    fill: var(--uncaughtPokemon);
+    opacity: 0.6;
+  }
+
+  .uncaughtShinyPokemon {
+    fill: var(--uncaughtShinyPokemon);
+    opacity: 0.6;
+  }
+
+  .uncaughtShinyPokemonAndMissingAchievement {
+    fill: var(--uncaughtShinyPokemonAndMissingAchievement);
+    opacity: 0.6;
+  }
+
+  .missingAchievement {
+    fill: var(--missingAchievement);
+    opacity: 0.6;
+  }
+
+  .completed {
+    fill: var(--completed);
+    opacity: 0.6;
+  }
+
+  .flash, .slow-flash {
+    opacity: 1;
+    fill: #FFD700;
+    stroke: black;
   }
 }
 

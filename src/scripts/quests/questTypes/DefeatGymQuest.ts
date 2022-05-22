@@ -6,7 +6,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     constructor(
         amount: number,
         reward: number,
-        private gymTown: string
+        public gymTown: string
     ) {
         super(amount, reward);
         this.region = GameConstants.getGymRegion(this.gymTown);
@@ -15,25 +15,21 @@ class DefeatGymQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         const amount = SeededRand.intBetween(5, 20);
-        let attempts = 0;
-        let region = GameConstants.Region.kanto;
-        let gymTown = GameConstants.RegionGyms[region][0];
-        // Try to find unlocked gym, end after 10 attempts
-        do {
-            region = SeededRand.intBetween(0, player.highestRegion());
-            gymTown = SeededRand.fromArray(GameConstants.RegionGyms[region]);
-        } while (!Gym.isUnlocked(gymList[gymTown]) && ++attempts < 10);
-
+        const region = SeededRand.intBetween(0, player.highestRegion());
+        // Only use unlocked gyms
+        const possibleGyms = GameConstants.RegionGyms[region].filter(gymTown => GymList[gymTown].flags.quest && GymList[gymTown].isUnlocked());
+        // If no gyms unlocked in this region, just use the first gym of the region
+        const gymTown = possibleGyms.length ? SeededRand.fromArray(possibleGyms) : GameConstants.RegionGyms[region][0];
         const reward = this.calcReward(amount, gymTown);
         return [amount, reward, gymTown];
     }
 
     private static calcReward(amount: number, gymTown: string): number {
-        const gym = gymList[gymTown];
+        const gym = GymList[gymTown];
         if (gym instanceof Champion) {
             gym.setPokemon(player.starter());
         }
-        const playerDamage = App.game.party.calculatePokemonAttack();
+        const playerDamage = App.game.party.pokemonAttackObservable();
         let attacksToWin = 0;
         for (const pokemon of gym.pokemons) {
             attacksToWin += Math.ceil( Math.min( 4, pokemon.maxHealth / Math.max(1, playerDamage) ) );

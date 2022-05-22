@@ -5,7 +5,7 @@ interface MutationOptions {
     showHint?: boolean,
 }
 
-abstract class Mutation implements Saveable {
+abstract class Mutation {
 
     saveKey: string;
 
@@ -29,14 +29,12 @@ abstract class Mutation implements Saveable {
         this._hintSeen = ko.observable(false);
     }
 
-    toJSON(): Record<string, any> {
-        return {
-            hintSeen: this.hintSeen,
-        };
+    toJSON(): boolean | boolean[] {
+        return this.hintSeen;
     }
 
-    fromJSON(json: Record<string, any>): void {
-        this.hintSeen = json?.hintSeen ?? false;
+    fromJSON(hintSeen: boolean | boolean[]): void {
+        this.hintSeen = !!hintSeen;
     }
 
     /**
@@ -98,12 +96,12 @@ abstract class Mutation implements Saveable {
         let mutated = false;
 
         plots.forEach((idx) => {
-            const willMutate =  Math.random() < this.mutationChance(idx) * App.game.farming.getMutationMultiplier() * App.game.farming.plotList[idx].getMutationMultiplier();
+            const willMutate =  Rand.chance(this.mutationChance(idx) * App.game.farming.getMutationMultiplier() * App.game.farming.plotList[idx].getMutationMultiplier());
             if (!willMutate) {
                 return;
             }
             this.handleMutation(idx);
-            App.game.oakItems.use(OakItems.OakItem.Squirtbottle);
+            App.game.oakItems.use(OakItemType.Squirtbottle);
             mutated = true;
         });
 

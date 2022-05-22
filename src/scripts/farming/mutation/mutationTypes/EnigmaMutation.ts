@@ -10,7 +10,7 @@ class EnigmaMutation extends GrowMutation {
     constructor(mutationChance: number) {
         super(mutationChance, BerryType.Enigma, {
             unlockReq: function(): boolean {
-                if (App.game.discord.ID === null) {
+                if (!App.game.discord.ID()) {
                     return false;
                 }
                 return EnigmaMutation.getReqs().every(req => App.game.farming.unlockedBerries[req]());
@@ -72,14 +72,14 @@ class EnigmaMutation extends GrowMutation {
 
     get hintIndex(): number {
         SeededRand.seedWithDate(new Date());
-        return Math.floor(SeededRand.next() * 4);
+        return SeededRand.floor(4);
     }
 
     /**
      * Handles getting the hint for this mutation for the Kanto Berry Master
      */
     get partialHint(): string {
-        if (App.game.discord.ID === null) {
+        if (!App.game.discord.ID()) {
             return 'There is a Berry that requires a linked <u>Discord</u> account to appear...';
         }
         const idx = this.hintIndex;
@@ -109,7 +109,7 @@ class EnigmaMutation extends GrowMutation {
      * Handles getting the full hint for the BerryDex
      */
     get hint(): string {
-        if (App.game.discord.ID === null) {
+        if (!App.game.discord.ID()) {
             return 'There is a Berry that requires a linked <u>Discord</u> account to appear...';
         }
 
@@ -132,22 +132,20 @@ class EnigmaMutation extends GrowMutation {
         return tempHint;
     }
 
-    toJSON(): Record<string, any> {
-        const json = super.toJSON();
-        json['hintsSeen'] = this.hintsSeen.map(ko.unwrap);
-        return json;
+    toJSON(): boolean[] {
+        return this.hintsSeen.map(h => h());
     }
-    fromJSON(json: Record<string, any>): void {
-        super.fromJSON(json);
 
-        const hintsSeen = json['hintsSeen'];
-        if (hintsSeen == null) {
-            this.hintsSeen = Array<boolean>(4).fill(false).map((v) => ko.observable<boolean>(v));
-        } else {
-            (hintsSeen as boolean[]).forEach((value: boolean, index: number) => {
-                this.hintsSeen[index](value);
-            });
+    fromJSON(hintsSeen: boolean[]): void {
+        if (!hintsSeen || typeof hintsSeen !== 'object') {
+            return;
         }
+        (hintsSeen as boolean[]).forEach((value: boolean, index: number) => {
+            if (value) {
+                this.hintSeen = true;
+            }
+            this.hintsSeen[index](value);
+        });
     }
 
 }

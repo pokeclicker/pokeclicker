@@ -1,5 +1,3 @@
-/// <reference path="../../libs/motio.d.ts" />
-
 class Safari {
     static grid: Array<Array<number>>;
     static pokemonGrid: KnockoutObservableArray<SafariPokemon> = ko.observableArray([]);
@@ -15,7 +13,6 @@ class Safari {
     static inProgress: KnockoutObservable<boolean> = ko.observable(false);
     static inBattle: KnockoutObservable<boolean> = ko.observable(false);
     static balls: KnockoutObservable<number> = ko.observable();
-    static sprite: Motio;
 
     public static sizeX(): number {
         return Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32);
@@ -80,7 +77,7 @@ class Safari {
     }
 
     private static getRandomCoord(max: number): number {
-        return Math.floor(Math.random() * (max - 3)) + 1;
+        return Rand.intBetween(1, max - 3);
     }
 
     private static canAddBody(x: number, y: number, body: SafariBody): boolean {
@@ -128,7 +125,7 @@ class Safari {
             $('#safariModal').modal({backdrop: 'static', keyboard: false});
         } else {
             Notifier.notify({
-                message: 'You need the Safari Pass to access this location.<br/><i>Visit the Gym in Fuschia City</i>',
+                message: 'You need the Safari Pass to access this location.\n<i>Visit the Gym in Fuschia City</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -159,7 +156,7 @@ class Safari {
     }
 
     private static canAccess() {
-        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Safari_ticket);
+        return App.game.keyItems.hasKeyItem(KeyItemType.Safari_ticket);
     }
 
     static show() {
@@ -193,23 +190,12 @@ class Safari {
             left: 32 * i + topLeft.left,
         };
         $('#safariBody').append('<div id="sprite"></div>');
-        $('#sprite').css('background',  `url('assets/images/safari/walk${Safari.lastDirection}.png')`);
+        document.getElementById('sprite').classList.value = `walk${Safari.lastDirection}`;
         $('#sprite').css('position', 'absolute');
         $('#sprite').offset( offset );
         Safari.playerXY.x = i;
         Safari.playerXY.y = j;
         Safari.origin = offset;
-
-
-        const element = document.querySelector('#sprite');
-        Safari.sprite = new Motio(element, {
-            fps: 8,
-            frames: 4,
-        }).on('frame', () => {
-            if (Safari.sprite.frame % 2 == 0) {
-                Safari.sprite.pause();
-            }
-        });
     }
 
     public static move(dir: string) {
@@ -231,20 +217,12 @@ class Safari {
         Safari.nextDirection = dir;
 
         if (!Safari.isMoving) {
-            if (Safari.sprite.frame == 2) {
-                Safari.sprite.to(0, true, () => {
-                    Safari.step(dir);
-                });
-            } else {
-                Safari.step(dir);
-            }
+            Safari.step(dir);
         }
     }
 
     private static step(direction: string) {
         Safari.lastDirection = direction;
-
-        Safari.sprite.toggle();
         const directionOffset = Safari.directionToXY(direction);
 
         Safari.isMoving = true;
@@ -261,7 +239,7 @@ class Safari {
                 left: `+=${directionOffset.x * 32}`,
             };
 
-            $('#sprite').css('background', `url('assets/images/safari/walk${direction}.png')`);
+            document.getElementById('sprite').classList.value = `walk${direction} moving`;
             Safari.playerXY.x = newPos.x;
             Safari.playerXY.y = newPos.y;
             $('#sprite').animate(offset, 250, 'linear', () => {
@@ -270,14 +248,18 @@ class Safari {
                 if (Safari.walking) {
                     if (!Safari.checkBattle() && Safari.queue[0]) {
                         Safari.step(Safari.queue[0]);
+                    } else {
+                        document.getElementById('sprite').classList.value = `walk${direction}`;
                     }
+                } else {
+                    document.getElementById('sprite').classList.value = `walk${direction}`;
                 }
             });
             App.game.breeding.progressEggs(1);
             this.spawnPokemonCheck();
             this.despawnPokemonCheck();
         } else {
-            $('#sprite').css('background', `url('assets/images/safari/walk${direction}.png')`);
+            document.getElementById('sprite').classList.value = `walk${direction}`;
             setTimeout(() => {
                 Safari.walking = false;
                 Safari.isMoving = false;
@@ -292,7 +274,7 @@ class Safari {
 
     public static spawnPokemonCheck() {
         this.steps++;
-        if (this.steps % 10 === 0 && Math.round(Math.random())) {
+        if (this.steps % 10 === 0 && Rand.boolean()) {
             this.spawnRandomPokemon();
         }
     }
@@ -307,8 +289,8 @@ class Safari {
     }
 
     private static spawnRandomPokemon() {
-        const y = Math.floor(Math.random() * this.sizeY());
-        const x = Math.floor(Math.random() * this.sizeX());
+        const y = Rand.floor(this.sizeY());
+        const x = Rand.floor(this.sizeX());
         if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) || this.pokemonGrid().find(p => p.x === x && p.y === y)) {
             return;
         }
@@ -316,7 +298,7 @@ class Safari {
 
         pokemon.x = x;
         pokemon.y = y;
-        pokemon.steps = this.sizeX() + this.sizeY() + Math.floor(Math.random() * 21);
+        pokemon.steps = this.sizeX() + this.sizeY() + Rand.floor(21);
         this.pokemonGrid.push(pokemon);
     }
 
@@ -380,7 +362,7 @@ class Safari {
             return true;
         }
         if (Safari.grid[Safari.playerXY.y][Safari.playerXY.x] === 10) {
-            if (Math.random() * GameConstants.SAFARI_BATTLE_CHANCE < 1) {
+            if (Rand.chance(GameConstants.SAFARI_BATTLE_CHANCE)) {
                 SafariBattle.load();
                 return true;
             }

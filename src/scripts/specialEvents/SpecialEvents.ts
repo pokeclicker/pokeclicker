@@ -15,7 +15,9 @@ class SpecialEvents implements Feature {
         }
     }
 
-    initialize(): void {}
+    initialize(): void {
+        SpecialEvents.events.forEach(event => event.initialize());
+    }
 
     fromJSON(json: any): void {
         if (!json) {
@@ -37,15 +39,8 @@ class SpecialEvents implements Feature {
 }
 
 // TODO: Fetch events from a server each 1/2/3/6/12/24 hours?
-// Create our events here for now
+// Create our events here for now (yearly)
 
-/*
- *  ONE TIME/TEMP EVENTS
- */
-
-/*
- *  YEARLY EVENTS
- */
 // Lunar New Year
 SpecialEvents.newEvent('Lunar New Year', 'Encounter Fancy Pattern Vivillon for a limited time roaming Kalos.',
     // Start
@@ -57,15 +52,31 @@ SpecialEvents.newEvent('Lunar New Year', 'Encounter Fancy Pattern Vivillon for a
         RoamingPokemonList.remove(GameConstants.Region.kalos, 'Vivillon (Fancy)');
     }
 );
+// Easter
+SpecialEvents.newEvent('Easter', 'Encounter Surprise Togepi for a limited time with a dedicated Quest Line.',
+    // Start
+    new Date(new Date().getFullYear(), 3, 8, 1), () => {
+        const togepiEggHuntQuestLine = App.game.quests.getQuestLine('Togepi Egg Hunt');
+        if (togepiEggHuntQuestLine.state() == QuestLineState.inactive) {
+            App.game.quests.getQuestLine('Togepi Egg Hunt').beginQuest();
+        }
+    },
+    // End
+    new Date(new Date().getFullYear(), 3, 29, 23), () => {
+        // do not end questline, so ppl can finish it
+    }
+);
 // First Event
-SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu for a limited time roaming Kanto.',
+SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu and Red Spearow for a limited time roaming Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 6, 1), () => {
         RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Flying Pikachu'));
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Red Spearow'));
     },
     // End
     new Date(new Date().getFullYear(), 6, 12, 23), () => {
         RoamingPokemonList.remove(GameConstants.Region.kanto, 'Flying Pikachu');
+        RoamingPokemonList.remove(GameConstants.Region.kanto, 'Red Spearow');
     }
 );
 // Pokemon the first movie release date
@@ -123,13 +134,14 @@ SpecialEvents.newEvent('Let\'s GO!', 'Encounter special Eevee and Pikachu roamin
     }
 );
 // Christmas
-SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax for a limited time roaming around Kanto, Johto and Hoenn.',
+SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and discover the Grinch of Ilex Forest.',
     // Start
     new Date(new Date().getFullYear(), 11, 24, 1), () => {
         // Add to every region excluding None
         GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
             RoamingPokemonList.add(region, new RoamingPokemon('Santa Snorlax'));
         });
+        dungeonList['Ilex Forest'].bossList.push(new DungeonBossPokemon('Grinch Celebi', 1600000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)}));
     },
     // End
     new Date(new Date().getFullYear(), 11, 30, 23), () => {
@@ -137,6 +149,17 @@ SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax for a limite
         GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
             RoamingPokemonList.remove(region, 'Santa Snorlax');
         });
+        dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Grinch Celebi');
     }
 );
-
+// Golden Week
+SpecialEvents.newEvent('Golden Week', 'Enjoy your time off in the "Golden Week"! Travel tip: Visit the Flower Paradise in Sinnoh on your well earned vacation and enjoy the bloom of roses.',
+    // Start
+    new Date(new Date().getFullYear(), 3, 29, 1), () => {
+        dungeonList['Flower Paradise'].bossList.push(new DungeonBossPokemon('Bulbasaur (Rose)', 1600000, 100, {requirement: new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Flower Paradise'))}));
+    },
+    // End
+    new Date(new Date().getFullYear(), 4, 6, 23), () => {
+        dungeonList['Flower Paradise'].bossList = dungeonList['Flower Paradise'].bossList.filter(boss => boss.name != 'Bulbasaur (Rose)');
+    }
+);

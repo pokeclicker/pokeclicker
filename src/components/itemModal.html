@@ -24,7 +24,8 @@
                             <div class="row col-10" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
                                 <div class="col-2" style="cursor: pointer"
                                         data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
-                                            click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}">
+                                            click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')},
+                                            visible: ItemList[$data].unlockedRegion <= player.highestRegion() || player.amountOfItem($data) > 0">
                                     <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;">
                                     <div data-bind="text: player._itemList[$data]()"></div>
                                 </div>
@@ -34,7 +35,7 @@
                         <hr/>
 
                         <div class="row justify-content-sm-center" >
-                            <div class="row col-lg-10 col-md-12 offset-md-0 col-sm-12 offset-sm-0"
+                            <div class="row col-lg-11 offset-md-0"
                                 data-bind="foreach: PokemonHelper.getPokemonsWithEvolution(GameConstants.StoneType[ItemHandler.stoneSelected()])">
                                 <div class="col-md-6 col-sm-10 col-lg-4 offset-sm-1 offset-md-0 offset-md-0 breedingListItem">
                                     <button class="btn btn-secondary smallButton list-group-item-action" style="padding-right:15px"
@@ -42,9 +43,11 @@
                                         <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data.id, true) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
                                         <span data-bind="text: name" style="margin-left: 20px">Name</span>
 
-                                        <span style="float:right; margin-top:8px" data-bind="template: { name: 'caughtStatusTemplate', data: {'status':
-                                            PartyController.getEvolutionsCaughtStatus($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()])
-                                            }}"></span>
+                                        <span style="float:right; margin-top:8px"  data-bind="using: { statuses: PartyController.getStoneEvolutionsCaughtStatus($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">
+                                            <div class="row" data-bind="foreach: statuses">
+                                                <div class="col-2" data-bind="template: { name: 'caughtStatusTemplate', data: { 'status': $data } }"></div>
+                                            </div>
+                                        </span>
                                     </button>
                                 </div>
                             </div>
@@ -60,6 +63,9 @@
                                                   }">
                         </div>
                         <p><i>Stops using evolution stones once a shiny is encountered</i></p>
+                        <p data-bind="visible: PartyController.hasMultipleStoneEvolutionsAvailable(ItemHandler.pokemonSelected(), GameConstants.StoneType[ItemHandler.stoneSelected()])">
+                            <i>If the requirements for more than one evolution is fulfilled, a random evolution will be selected</i>
+                        </p>
                         <div class="row no-gutters justify-content-sm-center">
                             <div class="row justify-content-center" style="padding:15px;">
                                 <button data-bind="click: function(){ItemHandler.useStones()}" class="btn btn-lg btn-success">Use evolution stones!</button>
@@ -82,9 +88,9 @@
                                 <div class="col-2">
                                     <img class="clickable key-item" src=""
                                         data-bind="attr:{
-                                        src: 'assets/images/keyitems/' + KeyItems.KeyItem[$data.name] + '.png'},
+                                        src: 'assets/images/keyitems/' + KeyItemType[$data.name] + '.png'},
                                 css: {'key-item-locked': !App.game.keyItems.hasKeyItem($data.name),
-                                'key-item-selected': KeyItemController.inspectedItem == $data.name
+                                'key-item-selected': KeyItemController.inspectedItem() == $data.name
                                 },
                                 event: {
                                     mouseover: function(){KeyItemController.hover($data.name)},
@@ -96,15 +102,15 @@
                             <div class="oak-item-info">
                                 <div class="row justify-content-sm-center">
                                     <div class="col-xs-10">
-                                        <b><span data-bind="text: App.game.keyItems.itemList[KeyItemController.inspectedItem].displayName"></span></b>
+                                        <b><span data-bind="text: App.game.keyItems.itemList[KeyItemController.inspectedItem()].displayName"></span></b>
                                     </div>
                                 </div>
                                 <div class="row justify-content-sm-center">
                                     <div class="col-xs-10">
-                                        <knockout data-bind="if: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem)">
-                                            <p data-bind="html: App.game.keyItems.itemList[KeyItemController.inspectedItem].description"></p>
+                                        <knockout data-bind="if: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem())">
+                                            <p data-bind="html: App.game.keyItems.itemList[KeyItemController.inspectedItem()].description"></p>
                                         </knockout>
-                                        <knockout data-bind="ifnot: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem)">
+                                        <knockout data-bind="ifnot: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem())">
                                             <p>?????</p>
                                         </knockout>
                                     </div>

@@ -48,6 +48,10 @@
     cursor:url('../assets/images/farm/shovel.png'), auto;
 }
 
+.MulchShovelSelected {
+  cursor:url('../assets/images/farm/mulchShovel.png'), auto;
+}
+
 .Boost_Mulch {
     filter: hue-rotate(200deg);
 }
@@ -96,5 +100,19 @@
     width: 100%;
     height: 100%;
     position: absolute;
+  }
+}
+
+#farmHandsView {
+  .plot:hover {
+    cursor: pointer;
+  }
+
+  .plotEnabled {
+    filter: hue-rotate(90deg);
+  }
+
+  .plotDisabled {
+    filter: brightness(50%) opacity(90%);
   }
 }

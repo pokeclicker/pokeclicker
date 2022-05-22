@@ -1,8 +1,10 @@
 /// <reference path="./questTypes/DefeatPokemonsQuest.ts" />
 /// <reference path="./questTypes/CapturePokemonsQuest.ts" />
+/// <reference path="./questTypes/CapturePokemonTypesQuest.ts" />
+/// <reference path="./questTypes/GainFarmPointsQuest.ts" />
 /// <reference path="./questTypes/GainMoneyQuest.ts" />
 /// <reference path="./questTypes/GainTokensQuest.ts" />
-/// <reference path="./questTypes/GainShardsQuest.ts" />
+/// <reference path="./questTypes/GainGemsQuest.ts" />
 /// <reference path="./questTypes/HatchEggsQuest.ts" />
 /// <reference path="./questTypes/MineLayersQuest.ts" />
 /// <reference path="./questTypes/MineItemsQuest.ts" />
@@ -18,9 +20,11 @@ class QuestHelper {
     public static quests = {
         DefeatPokemonsQuest,
         CapturePokemonsQuest,
+        CapturePokemonTypesQuest,
+        GainFarmPointsQuest,
         GainMoneyQuest,
         GainTokensQuest,
-        GainShardsQuest,
+        GainGemsQuest,
         HatchEggsQuest,
         MineLayersQuest,
         MineItemsQuest,
@@ -50,16 +54,12 @@ class QuestHelper {
 
         SeededRand.seed(+seed);
 
-        const QuestTypes = new Set(Object.keys(this.quests));
-        const maxAttempts = 20;
-        let attempts = 0;
-        while (quests.length < amount && attempts++ < maxAttempts) {
+        // Only use unlocked quest types
+        const QuestTypes = new Set(Object.entries(this.quests).filter(([key, quest]) => quest.canComplete()).map(([key]) => key));
+        while (quests.length < amount && QuestTypes.size) {
             const questType = SeededRand.fromArray(Array.from(QuestTypes));
             if (uniqueQuestTypes) {
                 QuestTypes.delete(questType);
-            }
-            if (questType == 'UseOakItemQuest' && App.game.challenges.list.disableOakItems.active()) {
-                continue;
             }
             const quest = this.createQuest(questType);
             quest.index = quests.length;

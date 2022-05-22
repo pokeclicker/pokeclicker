@@ -1,13 +1,14 @@
+///<reference path="../declarations/Sortable.d.ts"/>
+
 class Save {
 
     static counter = 0;
     static key = '';
 
     public static store(player: Player) {
-        const json = JSON.stringify(player);
-        localStorage.setItem(`player${Save.key}`, json);
-        localStorage.setItem('settings', Settings.save());
+        localStorage.setItem(`player${Save.key}`, JSON.stringify(player));
         localStorage.setItem(`save${Save.key}`, JSON.stringify(this.getSaveObject()));
+        localStorage.setItem(`settings${Save.key}`, JSON.stringify(Settings.toJSON()));
 
         this.counter = 0;
         console.log('%cGame saved', 'color:#3498db;font-weight:900;');
@@ -26,8 +27,12 @@ class Save {
     public static load(): Player {
         const saved = localStorage.getItem(`player${Save.key}`);
 
-        const settings = localStorage.getItem('settings');
-        Settings.load(JSON.parse(settings));
+        // Load our settings, or the saved default settings, or no settings
+        const settings = localStorage.getItem(`settings${Save.key}`) || localStorage.getItem('settings') || '{}';
+        Settings.fromJSON(JSON.parse(settings));
+
+        // Sort modules now, save settings, load settings
+        SortModules();
 
         if (saved !== 'null') {
             return new Player(JSON.parse(saved));
@@ -37,7 +42,7 @@ class Save {
     }
 
     public static download() {
-        const backupSaveData = {player, save: this.getSaveObject()};
+        const backupSaveData = {player, save: this.getSaveObject(), settings: Settings.toJSON()};
         try {
             const element = document.createElement('a');
             element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(backupSaveData)))}`);
@@ -76,7 +81,9 @@ class Save {
         if (confirmDelete == 'DELETE') {
             localStorage.removeItem(`player${Save.key}`);
             localStorage.removeItem(`save${Save.key}`);
-
+            localStorage.removeItem(`settings${Save.key}`);
+            // Prevent the old save from being saved again
+            window.onbeforeunload = () => {};
             location.reload();
         }
     }
@@ -113,7 +120,7 @@ class Save {
         return res;
     }
 
-    public static initializeShards(saved?: Array<Array<number>>): Array<Array<KnockoutObservable<number>>> {
+    public static initializeGems(saved?: Array<Array<number>>): Array<Array<KnockoutObservable<number>>> {
         let res;
         if (saved) {
             res = saved.map((type) => {
@@ -142,13 +149,19 @@ class Save {
         for (const obj in GameConstants.BattleItemType) {
             res[obj] = ko.observable(saved ? saved[obj] || 0 : 0);
         }
+        for (const obj in GameConstants.FluteItemType) {
+            res[obj] = ko.observable(saved ? saved[obj] || 0 : 0);
+        }
         return res;
     }
 
-    public static initializeEffectTimer(saved?: Array<string>): { [name: string]: KnockoutObservable<string> } {
+    public static initializeEffectTimer(): { [name: string]: KnockoutObservable<string> } {
         const res = {};
         for (const obj in GameConstants.BattleItemType) {
-            res[obj] = ko.observable(saved ? saved[obj] || '00:00' : '00:00');
+            res[obj] = ko.observable('00:00');
+        }
+        for (const obj in GameConstants.FluteItemType) {
+            res[obj] = ko.observable('00:00');
         }
         return res;
     }
@@ -167,6 +180,13 @@ class Save {
                 if (decoded && json && json.player && json.save) {
                     localStorage.setItem(`player${Save.key}`, JSON.stringify(json.player));
                     localStorage.setItem(`save${Save.key}`, JSON.stringify(json.save));
+                    if (json.settings) {
+                        localStorage.setItem(`settings${Save.key}`, JSON.stringify(json.settings));
+                    } else {
+                        localStorage.removeItem(`settings${Save.key}`);
+                    }
+                    // Prevent the old save from being saved again
+                    window.onbeforeunload = () => {};
                     location.reload();
                 } else {
                     Notifier.notify({
@@ -223,9 +243,3 @@ class Save {
         }
     }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    $('#saveModal').on('show.bs.modal', () => {
-        $('#saveTextArea').text(JSON.stringify(player));
-    });
-});

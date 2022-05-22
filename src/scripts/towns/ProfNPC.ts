@@ -5,14 +5,14 @@ class ProfNPC extends NPC {
         public dialog: string[],
         public region: GameConstants.Region
     ) {
-        super(name, dialog);// { image: 'assets/images/oak.png' }
+        super(name, dialog, { image: 'assets/images/oak.png' });
     }
 
     get dialogHTML(): string {
         const uniquePokemonCaught = new Set(App.game.party.caughtPokemon.filter(p => p.id > 0).map(p => Math.floor(p.id))).size;
 
         const caughtPokemonCount = new Set(App.game.party.caughtPokemon.filter(p => p.id > 0 && PokemonHelper.calcNativeRegion(p.name) <= this.region).map(p => Math.floor(p.id))).size;
-        const remainingPokemon = GameConstants.TotalPokemonsPerRegion[this.region] - caughtPokemonCount;
+        const remainingPokemon = GameConstants.MaxIDPerRegion[this.region] - caughtPokemonCount;
 
         const championBadge = new Map<GameConstants.Region, BadgeEnums>();
         championBadge.set(GameConstants.Region.kanto, BadgeEnums.Elite_KantoChampion);
@@ -36,31 +36,31 @@ class ProfNPC extends NPC {
             html += '<p>Come see me once you\'ve beat the Elite Four!</p>';
         }
 
-        if (uniquePokemonCaught >= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.unova]) {
+        if (uniquePokemonCaught >= GameConstants.MaxIDPerRegion[GameConstants.Region.unova]) {
             html += `<p>Let me see your progress...Ah, fantastic, as usual!</p>
                     <p>Allow me some time to arrange tickets for your next destination.</p>`;
             return html;
         }
 
-        if (uniquePokemonCaught >= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.sinnoh]) {
+        if (uniquePokemonCaught >= GameConstants.MaxIDPerRegion[GameConstants.Region.sinnoh]) {
             html += `<p>Congratulations, you're more than half-way completed on the national Pokédex!</p>
                     <p>Next stop is Unova! I've always wanted to visit Castelia City personally...</p>`;
             return html;
         }
 
-        if (uniquePokemonCaught >= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.hoenn]) {
+        if (uniquePokemonCaught >= GameConstants.MaxIDPerRegion[GameConstants.Region.hoenn]) {
             html += `<p>That's another regional Pokédex completed! Fantastic.</p>
                     <p>I really appreciate being able to see your outstanding progress, thank you!</p>`;
             return html;
         }
 
-        if (uniquePokemonCaught >= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.johto]) {
+        if (uniquePokemonCaught >= GameConstants.MaxIDPerRegion[GameConstants.Region.johto]) {
             html += `<p>Oh, another regional Pokédex completed so soon?</p>
                     <p>Amazing! Next stop is Hoenn, enjoy the sunshine while you're there!</p>`;
             return html;
         }
 
-        if (uniquePokemonCaught >= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.kanto]) {
+        if (uniquePokemonCaught >= GameConstants.MaxIDPerRegion[GameConstants.Region.kanto]) {
             html += `<p>Congratulations on completing your Kanto Pokédex!</p>
                     <p>Your journey isn't over yet, a whole world awaits you! Onwards to Johto!</p>`;
             return html;

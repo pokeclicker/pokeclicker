@@ -1,4 +1,6 @@
 class BattleFrontierMilestone {
+    public obtained = ko.observable(false);
+
     constructor (
         public stage: number,
         public rewardFunction: () => void,
@@ -7,7 +9,10 @@ class BattleFrontierMilestone {
     ) {}
 
     gain () {
-        this.rewardFunction();
+        if (!this.obtained()) {
+            this.rewardFunction();
+            this.obtained(true);
+        }
     }
 
     get image() {

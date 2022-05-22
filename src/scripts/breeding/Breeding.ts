@@ -14,6 +14,7 @@ class Breeding implements Feature {
         queueList: [],
         queueSlots: 0,
     };
+    hatcheryHelpers = new HatcheryHelpers(this);
 
     private _eggList: Array<KnockoutObservable<Egg>>;
     private _eggSlots: KnockoutObservable<number>;
@@ -108,7 +109,7 @@ class Breeding implements Feature {
     }
 
     canAccess(): boolean {
-        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Mystery_egg);
+        return App.game.keyItems.hasKeyItem(KeyItemType.Mystery_egg);
     }
 
     fromJSON(json: Record<string, any>): void {
@@ -133,6 +134,7 @@ class Breeding implements Feature {
         }
         this.queueSlots(json['queueSlots'] ?? this.defaults.queueSlots);
         this.queueList(json['queueList'] ? json['queueList'] : this.defaults.queueList);
+        this.hatcheryHelpers.fromJSON(json.hatcheryHelpers || []);
     }
 
 
@@ -142,6 +144,7 @@ class Breeding implements Feature {
             eggSlots: this.eggSlots,
             queueList: this.queueList(),
             queueSlots: this.queueSlots(),
+            hatcheryHelpers: this.hatcheryHelpers.toJSON(),
         };
     }
 
@@ -193,12 +196,17 @@ class Breeding implements Feature {
         amount = Math.round(amount);
         let index =  this.eggList.length;
         while (index-- > 0) {
+            const helper = this.hatcheryHelpers.hired()[index];
+            if (helper) {
+                continue;
+            }
             const egg = this.eggList[index]();
             egg.addSteps(amount, this.multiplier);
             if (this.queueList().length && egg.progress() >= 100) {
                 this.hatchPokemonEgg(index);
             }
         }
+        this.hatcheryHelpers.addSteps(amount, this.multiplier);
     }
 
     private getStepMultiplier() {
@@ -276,8 +284,8 @@ class Breeding implements Feature {
                         message: 'Hatchery queue is empty',
                         type: NotificationConstants.NotificationOption.success,
                         timeout: 1e4,
-                        sound: NotificationConstants.NotificationSound.empty_queue,
-                        setting: NotificationConstants.NotificationSetting.empty_queue,
+                        sound: NotificationConstants.NotificationSound.Hatchery.empty_queue,
+                        setting: NotificationConstants.NotificationSetting.Hatchery.empty_queue,
                     });
                 }
             }
@@ -306,12 +314,12 @@ class Breeding implements Feature {
         const ratio = 2;
         const possibleHatches = GameConstants.expRandomElement(hatchable, ratio);
 
-        const pokemon = GameConstants.randomElement(possibleHatches);
+        const pokemon = Rand.fromArray(possibleHatches);
         return this.createEgg(pokemon, type);
     }
 
     public createRandomEgg(): Egg {
-        const type = Math.floor(Math.random() * Object.keys(this.hatchList).length);
+        const type = +Rand.fromArray(Object.keys(this.hatchList));
         const egg = this.createTypedEgg(type);
         egg.type = EggType.Mystery;
         return egg;
@@ -358,8 +366,7 @@ class Breeding implements Feature {
 
     public buyEggSlot(): void {
         const cost: Amount = this.nextEggSlotCost();
-        if (App.game.wallet.hasAmount(cost)) {
-            App.game.wallet.loseAmount(cost);
+        if (App.game.wallet.loseAmount(cost)) {
             this.gainEggSlot();
         }
     }
@@ -390,7 +397,8 @@ class Breeding implements Feature {
     }
 
     public queueSlotsGainedFromRegion(region: GameConstants.Region): number {
-        return Math.max(4, 4 * Math.pow(2, region - 1));
+        // bewtween 4 → 32 queue slots gained when completing a region
+        return Math.min(32, Math.max(4, 4 * Math.pow(2, region - 1)));
     }
 
     get eggList(): Array<KnockoutObservable<Egg>> {

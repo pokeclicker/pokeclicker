@@ -5,7 +5,7 @@ class EggItem extends CaughtIndicatingItem {
     type: GameConstants.EggItemType;
 
     constructor(type: GameConstants.EggItemType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, displayName?: string) {
-        super(GameConstants.EggItemType[type], basePrice, currency, undefined, displayName, undefined, 'egg');
+        super(GameConstants.EggItemType[type], basePrice, currency, undefined, displayName, 'An egg. Can be hatched in the Day Care.', 'egg');
         this.type = type;
     }
 
@@ -16,7 +16,7 @@ class EggItem extends CaughtIndicatingItem {
 
         let success: boolean;
         if (this.type === GameConstants.EggItemType.Pokemon_egg) {
-            success = App.game.breeding.gainPokemonEgg(pokemonMap.random(GameConstants.TotalPokemonsPerRegion[player.highestRegion()]));
+            success = App.game.breeding.gainPokemonEgg(pokemonMap.randomRegion(player.highestRegion()));
         } else if (this.type === GameConstants.EggItemType.Mystery_egg) {
             success = App.game.breeding.gainRandomEgg();
         } else {

@@ -94,7 +94,7 @@ class PokedexHelper {
             }
 
             // Check if the name contains the string
-            if (filter['name'] && !pokemon.name.toLowerCase().includes(filter['name'].toLowerCase())) {
+            if (filter['name'] && !pokemon.name.toLowerCase().includes(filter['name'].toLowerCase().trim())) {
                 return false;
             }
 
@@ -161,7 +161,7 @@ class PokedexHelper {
         return res;
     }
 
-    private static getImage(id: number, name: string) {
+    public static getImage(id: number) {
         let src = 'assets/images/';
         if (App.game.party.alreadyCaughtPokemon(id, true) && this.toggleAllShiny()) {
             src += 'shiny';
@@ -170,7 +170,7 @@ class PokedexHelper {
         return src;
     }
 
-    private static getImageStatistics(id: number) {
+    public static getImageStatistics(id: number) {
         let src = 'assets/images/';
         if (App.game.party.alreadyCaughtPokemon(id, true) && this.toggleStatisticShiny()) {
             src += 'shiny';

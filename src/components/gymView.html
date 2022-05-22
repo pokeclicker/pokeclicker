@@ -30,7 +30,7 @@
             </div>
         </h2>
 
-        <div id="gymCountdown">
+        <div id="gymGoContainer" data-bind="if: Settings.getSetting('showGymGoAnimation').observableValue">
           <div class="row" style="display: inline-block; vertical-align: middle;">
             <div class="col-sm-6 offset-sm-3">
               <img style="width:100%" id="gymGo" src="assets/gifs/go.gif">
@@ -39,10 +39,8 @@
         </div>
 
         <div>
-            <!-- TODO: HLXII - Add after all Gym Leader images are formatted correctly
-            <div style="position:absolute; left:65%;">
-                <img height=80px data-bind="attr:{ src: GymBattle.gym.imagePath }"/>
-            </div>
+            <!-- TODO: Add after all Gym Leader images are formatted correctly (same sizes, style etc)
+            <img style="position:absolute; left:65%; top: 64px; height: 64px" data-bind="attr:{ src: GymBattle.gym.imagePath }" onerror="this.src = 'assets/images/transparent.png'"/>
             -->
             <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(GymBattle.enemyPokemon(), GymBattle.enemyPokemon().shiny) }" src=""/>
         </div>
@@ -54,5 +52,10 @@
                 <span data-bind="text: GymBattle.enemyPokemon().health() + ' / ' + GymBattle.enemyPokemon().maxHealth()" style="font-size: 12px;"></span>
             </div>
         </div>
+
+        <button class="btn btn-sm btn-danger" style="position: absolute; top: 68px; left: 10px;" data-bind="visible: GymRunner.autoRestart()"
+                onclick="GymRunner.autoRestart(false)">
+            Stop Auto
+        </button>
     </div>
 </div>

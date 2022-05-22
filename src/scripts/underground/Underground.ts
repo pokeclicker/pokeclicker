@@ -98,11 +98,11 @@ class Underground implements Feature {
     }
 
     getEnergyGain() {
-        return Underground.BASE_ENERGY_GAIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Gain).calculateBonus();
+        return Math.round(Underground.BASE_ENERGY_GAIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Gain).calculateBonus() * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Moon_Flute));
     }
 
     getEnergyRegenTime() {
-        return Underground.BASE_ENERGY_REGEN_TIME - this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time).calculateBonus();
+        return Math.round(Underground.BASE_ENERGY_REGEN_TIME - this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time).calculateBonus() * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Moon_Flute));
     }
 
     getDailyDealsMax() {
@@ -184,6 +184,7 @@ class Underground implements Feature {
                 id: id,
                 value: item.value,
                 valueType: item.valueType,
+                sellLocked: ko.observable(false),
             };
             player.mineInventory.push(tempItem);
         } else {
@@ -192,6 +193,56 @@ class Underground implements Feature {
             this.sortMineItems(this.lastPropSort, false);
         }
     }
+
+    public static getDiamondNetWorth(): number {
+        let diamondNetWorth = 0;
+        player.mineInventory().forEach(mineItem => {
+            if (mineItem.valueType == 'Diamond') {
+                diamondNetWorth += mineItem.value * mineItem.amount();
+            }
+        });
+
+        return diamondNetWorth + App.game.wallet.currencies[GameConstants.Currency.diamond]();
+    }
+
+    public static getCumulativeValues(): Record<string, { cumulativeValue: number, imgSrc: string }> {
+        const cumulativeValues = {};
+        player.mineInventory().forEach(mineItem => {
+            if (mineItem.valueType != 'Mine Egg' && mineItem.amount() > 0 && !mineItem.sellLocked()) {
+                let cumulativeValueOfType = cumulativeValues[mineItem.valueType];
+                if (!cumulativeValueOfType) {
+                    cumulativeValueOfType = { cumulativeValue: 0, imgSrc: null };
+                    cumulativeValues[mineItem.valueType] = cumulativeValueOfType;
+                }
+
+                if (mineItem.valueType == 'Diamond') {
+                    cumulativeValueOfType.imgSrc = 'assets/images/underground/diamond.svg';
+                } else {
+                    cumulativeValueOfType.imgSrc = Underground.getMineItemById(mineItem.id).image;
+                }
+                cumulativeValueOfType.cumulativeValue += mineItem.value * mineItem.amount();
+            }
+        });
+
+        return cumulativeValues;
+    }
+
+    public static netWorthTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
+        let nMineItems = 0;
+        let nFossils = 0;
+        let nPlates = 0;
+        player.mineInventory().forEach(mineItem => {
+            if (mineItem.valueType == 'Diamond') {
+                nMineItems += mineItem.amount();
+            } else if (mineItem.valueType == 'Mine Egg') {
+                nFossils += mineItem.amount();
+            } else {
+                nPlates += mineItem.amount();
+            }
+        });
+
+        return `<u>Owned:</u><br>Mine items: ${nMineItems.toLocaleString('en-US')}<br>Fossils: ${nFossils.toLocaleString('en-US')}<br>Plates: ${nPlates.toLocaleString('en-US')}`;
+    });
 
     public static getMineItemByName(name: string): UndergroundItem {
         return UndergroundItem.list.find(i => i.name == name);
@@ -207,15 +258,15 @@ class Underground implements Feature {
 
     gainEnergy() {
         if (this.energy < this.getMaxEnergy()) {
-            const oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
+            const oakMultiplier = App.game.oakItems.calculateBonus(OakItemType.Cell_Battery);
             this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
             if (this.energy === this.getMaxEnergy()) {
                 Notifier.notify({
                     message: 'Your mining energy has reached maximum capacity!',
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 1e4,
-                    sound: NotificationConstants.NotificationSound.underground_energy_full,
-                    setting: NotificationConstants.NotificationSetting.underground_energy_full,
+                    sound: NotificationConstants.NotificationSound.General.underground_energy_full,
+                    setting: NotificationConstants.NotificationSetting.General.underground_energy_full,
                 });
             }
         }
@@ -229,6 +280,7 @@ class Underground implements Feature {
         Notifier.notify({
             message: `You restored ${gain} mining energy!`,
             type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.General.underground_energy_restore,
         });
     }
 
@@ -269,6 +321,13 @@ class Underground implements Feature {
         for (let i = 0; i < player.mineInventory().length; i++) {
             const item = player.mineInventory()[i];
             if (item.id == id) {
+                if (item.sellLocked()) {
+                    Notifier.notify({
+                        message: 'Item is locked for selling, you first have to unlock it.',
+                        type: NotificationConstants.NotificationOption.warning,
+                    });
+                    return;
+                }
                 if (item.valueType == 'Mine Egg') {
                     amount = 1;
                 }
@@ -282,6 +341,26 @@ class Underground implements Feature {
                     }
                     return;
                 }
+            }
+        }
+    }
+
+    public static sellAllMineItems() {
+        for (let i = 0; i < player.mineInventory().length; i++) {
+            const item = player.mineInventory()[i];
+            if (!item.sellLocked() && item.valueType != 'Mine Egg') {
+                Underground.sellMineItem(item.id, Infinity);
+            }
+        }
+        $('#mineSellAllTreasuresModal').modal('hide');
+    }
+
+    public static setSellLockOfMineItem(id: number, sellLocked: boolean) {
+        for (let i = 0; i < player.mineInventory().length; i++) {
+            const item = player.mineInventory()[i];
+            if (item.id == id) {
+                player.mineInventory()[i].sellLocked(sellLocked);
+                return;
             }
         }
     }
@@ -301,7 +380,7 @@ class Underground implements Feature {
             default:
                 const type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string
                 const typeNum = PokemonType[type];
-                App.game.shards.gainShards(GameConstants.PLATE_VALUE * amount, typeNum);
+                App.game.gems.gainGems(GameConstants.PLATE_VALUE * amount, typeNum);
         }
         return success;
     }
@@ -311,14 +390,32 @@ class Underground implements Feature {
             $('#mineModal').modal('show');
         } else {
             Notifier.notify({
-                message: 'You need the Explorer Kit to access this location.<br/><i>Check out the shop at Cinnabar Island</i>',
+                message: 'You need the Explorer Kit to access this location.\n<i>Check out the shop at Cinnabar Island</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
     }
 
-    canAccess() {
-        return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
+    openUndergroundSellAllModal() {
+        if (this.canAccess()) {
+            if (Object.keys(Underground.getCumulativeValues()).length == 0) {
+                Notifier.notify({
+                    message: 'You have no items selected for selling.',
+                    type: NotificationConstants.NotificationOption.warning,
+                });
+                return;
+            }
+            $('#mineSellAllTreasuresModal').modal('show');
+        } else {
+            Notifier.notify({
+                message: 'You need the Explorer Kit to access this location.\n<i>Check out the shop at Cinnabar Island</i>',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+        }
+    }
+
+    public canAccess() {
+        return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit);
     }
 
     calculateItemEffect(item: GameConstants.EnergyRestoreSize) {

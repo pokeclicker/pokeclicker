@@ -40,13 +40,6 @@ class SafariPokemon implements PokemonInterface {
         { name: 'Tangela', weight: 4 },
     ];
 
-    public static listWeight(): number {
-        return SafariPokemon.list.reduce((sum: number, pokemon) => {
-            // double the chance if pokemon has not been captured yet
-            return sum += this.calcPokemonWeight(pokemon);
-        }, 0);
-    }
-
     public static calcPokemonWeight(pokemon): number {
         return pokemon.weight * (App.game.party.alreadyCaughtPokemonByName(pokemon.name) ? 1 : 2);
     }
@@ -69,8 +62,8 @@ class SafariPokemon implements PokemonInterface {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${name}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
-                sound: NotificationConstants.NotificationSound.shiny_long,
-                setting: NotificationConstants.NotificationSetting.encountered_shiny,
+                sound: NotificationConstants.NotificationSound.General.shiny_long,
+                setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
             });
 
             // Track shinies encountered, and rate of shinies
@@ -85,7 +78,7 @@ class SafariPokemon implements PokemonInterface {
     }
 
     public get catchFactor(): number {
-        const oakBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Magic_Ball);
+        const oakBonus = App.game.oakItems.calculateBonus(OakItemType.Magic_Ball);
         let catchF = this.baseCatchFactor + oakBonus;
         if (this.eating > 0) {
             catchF /= 2;
@@ -140,9 +133,7 @@ class SafariPokemon implements PokemonInterface {
     }
 
     public static random() {
-        const rand = Math.random() * SafariPokemon.listWeight();
-        let i = 0;
-        const pokemon = SafariPokemon.list.find(p => (i += this.calcPokemonWeight(p)) && rand < i);
+        const pokemon = Rand.fromWeightedArray(SafariPokemon.list, SafariPokemon.list.map(p => p.weight));
         return new SafariPokemon(pokemon.name);
     }
 }

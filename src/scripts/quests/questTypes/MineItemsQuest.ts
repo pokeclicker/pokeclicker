@@ -7,6 +7,10 @@ class MineItemsQuest extends Quest implements QuestInterface {
         this.focus = App.game.statistics.undergroundItemsFound;
     }
 
+    public static canComplete() {
+        return App.game.underground.canAccess();
+    }
+
     public static generateData(): any[] {
         const amount = SeededRand.intBetween(3, 15);
         const reward = this.calcReward(amount);

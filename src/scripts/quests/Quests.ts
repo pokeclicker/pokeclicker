@@ -109,10 +109,10 @@ class Quests implements Saveable {
         // Refresh the list each time a player levels up
         if (this.level() > currentLevel) {
             Notifier.notify({
-                message: 'Your quest level has increased!<br/><i>You have a free quest refresh.</i>',
+                message: 'Your quest level has increased!\n<i>You have a free quest refresh.</i>',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 1e4,
-                sound: NotificationConstants.NotificationSound.quest_level_increased,
+                sound: NotificationConstants.NotificationSound.Quests.quest_level_increased,
             });
             this.freeRefresh(true);
             // Track when users gains a quest level and how long it took in seconds
@@ -235,31 +235,44 @@ class Quests implements Saveable {
         return 100 * (this.xp() - requiredForCurrent) / (requiredForNext - requiredForCurrent);
     }
 
+    public isDailyQuestsUnlocked() {
+        return QuestLineHelper.isQuestLineCompleted('Tutorial Quests');
+    }
+
     loadQuestList(questList) {
         // Sanity Check
         this.questList.removeAll();
         questList.forEach(questData => {
-            if (questData.hasOwnProperty('name')) {
-                const quest = QuestHelper.createQuest(questData.name, questData.data);
-                quest.fromJSON(questData);
-                this.questList.push(quest);
-            } else {
-                this.questList.push(new CapturePokemonsQuest(1, 0));
+            try {
+                if (questData.hasOwnProperty('name')) {
+                    const quest = QuestHelper.createQuest(questData.name, questData.data);
+                    quest.fromJSON(questData);
+                    this.questList.push(quest);
+                } else {
+                    this.questList.push(new CapturePokemonsQuest(10, 1));
+                }
+            } catch (e) {
+                console.error(`Quest "${questData.name}" failed to load`, questData);
+                this.questList.push(new CapturePokemonsQuest(10, 1));
             }
         });
     }
 
     loadQuestLines(questLines) {
         questLines.forEach(questLine => {
-            if (questLine.state == QuestLineState.inactive) {
-                return;
-            }
-            const ql = this.questLines().find(ql => ql.name == questLine.name);
-            if (ql) {
-                ql.state(questLine.state);
-                if (questLine.state == QuestLineState.started) {
-                    ql.resumeAt(questLine.quest, questLine.initial);
+            try {
+                if (questLine.state == QuestLineState.inactive) {
+                    return;
                 }
+                const ql = this.getQuestLine(questLine.name);
+                if (ql) {
+                    ql.state(questLine.state);
+                    if (questLine.state == QuestLineState.started) {
+                        ql.resumeAt(questLine.quest, questLine.initial);
+                    }
+                }
+            } catch (e) {
+                console.error(`Quest line "${questLine.name}" failed to load`, questLine);
             }
         });
     }
@@ -278,11 +291,12 @@ class Quests implements Saveable {
     }
 
     fromJSON(json: any) {
+        // Generate the questLines (statistics not yet loaded when constructing)
+        QuestLineHelper.loadQuestLines();
+
         if (!json) {
             // Generate the questList
             this.generateQuestList();
-            // Generate the questLines
-            QuestLineHelper.loadQuestLines();
             return;
         }
 
@@ -305,9 +319,7 @@ class Quests implements Saveable {
             this.loadQuestList(json.questList);
         }
 
-        // Generate the questLines
-        QuestLineHelper.loadQuestLines();
-        // Load our quest line quest
+        // Load our quest line progress
         if (json.questLines) {
             this.loadQuestLines(json.questLines);
         }

@@ -25,6 +25,10 @@
   .toast-body .close {
     color: whitesmoke;
   }
+  img.icon {
+    height: 28px;
+    margin-right: 5px;
+  }
 }
 
 
@@ -87,6 +91,16 @@
   color:#f2f;
 	-webkit-animation: flash linear 0.5s infinite;
 	animation: flash linear 0.5s infinite;
+}
+
+.slow-flash{
+    color:#f2f;
+      -webkit-animation: flash linear 1s infinite;
+      animation: flash linear 1s infinite;
+  }
+
+img.pixelated {
+  image-rendering: pixelated;
 }
 
 @-webkit-keyframes flash {
@@ -219,6 +233,11 @@ body:hover {
       max-height: 350px;
     }
   }
+}
+
+// Firefox fix for background covering borders in tables
+td {
+  background-clip: padding-box;
 }
 
 #pokemonList {
@@ -354,8 +373,6 @@ img {
 
 .battle-view {
   min-height: 220px !important;
-
-  color: whitesmoke;
 
   background-image: url(../assets/images/battleBackground/default.png);
   background-size: cover;
@@ -516,5 +533,52 @@ td.tight {
 
 .introjs-fixParent.modal,
 .introjs-fixParent.modal-dialog {
-  position: absolute !important;  
+  position: absolute !important;
+}
+
+.bg-locked {
+  background-color: var(--locked);
+}
+.bg-currentPlace {
+  background-color: var(--currentPlace);
+}
+.bg-incomplete {
+  background-color: var(--incomplete);
+}
+.bg-questAtLocation {
+    background-color: var(--questAtLocation);
+  }
+.bg-uncaughtPokemon {
+  background-color: var(--uncaughtPokemon);
+}
+.bg-uncaughtShinyPokemon {
+  background-color: var(--uncaughtShinyPokemon);
+}
+.bg-uncaughtShinyPokemonAndMissingAchievement {
+    background-color: var(--uncaughtShinyPokemonAndMissingAchievement);
+  }
+.bg-missingAchievement {
+    background-color: var(--missingAchievement);
+}
+.bg-completed {
+  background-color: var(--completed);
+}
+
+.text-locked {
+  color: var(--locked);
+}
+.text-currentPlace {
+  color: var(--currentPlace);
+}
+.text-incomplete {
+  color: var(--incomplete);
+}
+.text-uncaughtPokemon {
+  color: var(--uncaughtPokemon);
+}
+.text-uncaughtShinyPokemon {
+  color: var(--uncaughtShinyPokemon);
+}
+.text-completed {
+  color: var(--completed);
 }

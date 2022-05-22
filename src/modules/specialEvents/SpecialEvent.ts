@@ -30,8 +30,6 @@ export default class SpecialEvent {
         this.startFunction = startFunction;
         this.endTime = endTime;
         this.endFunction = endFunction;
-
-        this.initialize();
     }
 
     initialize(): void {
@@ -63,18 +61,18 @@ export default class SpecialEvent {
     notify(time: string, timeout: number, type = NotificationConstants.NotificationOption.info) {
         Notifier.notify({
             title: `[EVENT] ${this.title}`,
-            message: `${this.description}<br/><br/><strong>Start time:</strong> ${this.startTime.toLocaleString()}<br/><strong>End time:</strong> ${this.endTime.toLocaleString()}`,
+            message: `${this.description}\n\n<strong>Start time:</strong> ${this.startTime.toLocaleString()}\n<strong>End time:</strong> ${this.endTime.toLocaleString()}`,
             type,
             time,
             timeout,
-            setting: NotificationConstants.NotificationSetting.event_start_end,
+            setting: NotificationConstants.NotificationSetting.General.event_start_end,
         });
     }
 
     checkStart() {
-        // If event already over, do nothing
+        // If event already over, move it to next year
         if (this.timeTillEnd() <= 0) {
-            this.status = SpecialEventStatus.ended;
+            this.updateDate();
             return;
         }
 
@@ -165,8 +163,16 @@ export default class SpecialEvent {
 
     end() {
         // Update event status
-        this.status = SpecialEventStatus.ended;
         this.notify('just ended!', 1 * HOUR, NotificationConstants.NotificationOption.danger);
         this.endFunction();
+        this.status = SpecialEventStatus.none;
+        this.updateDate();
+    }
+
+    // Move the event to the next year
+    updateDate() {
+        this.endTime.setFullYear(this.endTime.getFullYear() + 1);
+        this.startTime.setFullYear(this.startTime.getFullYear() + 1);
+        this.checkStart();
     }
 }

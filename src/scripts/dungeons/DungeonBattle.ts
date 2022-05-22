@@ -1,4 +1,5 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../Battle.ts" />
 
 class DungeonBattle extends Battle {
 
@@ -25,7 +26,7 @@ class DungeonBattle extends Battle {
     public static defeatPokemon() {
         const enemyPokemon: BattlePokemon = this.enemyPokemon();
 
-        // Handle Rrainer Pokemon defeat
+        // Handle Trainer Pokemon defeat
         if (this.trainer()) {
             this.defeatTrainerPokemon();
             return;
@@ -38,6 +39,7 @@ class DungeonBattle extends Battle {
         }
         enemyPokemon.defeat();
         App.game.breeding.progressEggsBattle(DungeonRunner.dungeon.difficultyRoute, player.region);
+        player.lowerItemMultipliers(MultiplierDecreaser.Battle);
 
         // Clearing Dungeon tile
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
@@ -70,16 +72,22 @@ class DungeonBattle extends Battle {
 
         GameHelper.incrementObservable(this.trainerPokemonIndex);
         App.game.breeding.progressEggsBattle(DungeonRunner.dungeon.difficultyRoute, player.region);
+        player.lowerItemMultipliers(MultiplierDecreaser.Battle);
 
         // No Pokemon left, trainer defeated
         if (this.trainerPokemonIndex() >= this.trainer().team.length) {
+            // rewards for defeating trainer
             if (this.trainer().options.reward) {
                 // Custom reward amount on defeat
                 App.game.wallet.addAmount(this.trainer().options.reward);
             } else {
-                // Reward back 50% or 100% (boss) of the total dungeon DT cost as money
-                const money = Math.round(DungeonRunner.dungeon.tokenCost * (DungeonRunner.fightingBoss() ? 1 : 0.5));
-                App.game.wallet.gainMoney(money);
+                const dungeonCost = DungeonRunner.dungeon.tokenCost;
+                // Reward back 50% or 100% (boss) of the total dungeon DT cost as money (excludes achievement multiplier)
+                const money = Math.round(dungeonCost * (DungeonRunner.fightingBoss() ? 1 : 0.5));
+                App.game.wallet.gainMoney(money, true);
+                // Reward back 4% or 10% (boss) of the total dungeon DT cost (excludes achievement multiplier)
+                const tokens = Math.round(dungeonCost * (DungeonRunner.fightingBoss() ? 0.1 : 0.04));
+                App.game.wallet.gainDungeonTokens(tokens, true);
             }
 
             DungeonRunner.fighting(false);
@@ -107,11 +115,11 @@ class DungeonBattle extends Battle {
         this.counter = 0;
 
         // Finding enemy from enemyList
-        const enemy = GameHelper.fromWeightedArray(DungeonRunner.dungeon.availableMinions(), DungeonRunner.dungeon.weightList);
+        const enemy = Rand.fromWeightedArray(DungeonRunner.dungeon.availableMinions(), DungeonRunner.dungeon.weightList);
         // Pokemon
         if (typeof enemy === 'string' || enemy.hasOwnProperty('pokemon')) {
             const pokemon = (typeof enemy === 'string') ? enemy : (<DetailedPokemon>enemy).pokemon;
-            const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon, DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeon.level);
+            const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon, DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeonLevel());
             this.enemyPokemon(enemyPokemon);
 
             GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[enemyPokemon.id]);
@@ -119,9 +127,9 @@ class DungeonBattle extends Battle {
             if (enemyPokemon.shiny) {
                 GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[enemyPokemon.id]);
                 GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
-                App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a Shiny ${this.enemyPokemon().name} at ${player.town().dungeon.name}.`);
+                App.game.logbook.newLog(LogBookTypes.SHINY, `[${player.town().dungeon.name}] You encountered a Shiny ${this.enemyPokemon().name}.`);
             } else if (!App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id)) {
-                App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${this.enemyPokemon().name} at ${player.town().dungeon.name}.`);
+                App.game.logbook.newLog(LogBookTypes.NEW, `[${player.town().dungeon.name}] You encountered a wild ${this.enemyPokemon().name}.`);
             }
         // Trainer
         } else {
@@ -135,6 +143,25 @@ class DungeonBattle extends Battle {
         DungeonRunner.fighting(true);
     }
 
+    public static generateNewLootEnemy(pokemon: PokemonNameType) {
+        this.catching(false);
+        this.counter = 0;
+        const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon
+            , DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth * 2, DungeonRunner.dungeonLevel());
+        this.enemyPokemon(enemyPokemon);
+
+        GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[enemyPokemon.id]);
+        GameHelper.incrementObservable(App.game.statistics.totalPokemonEncountered);
+        if (enemyPokemon.shiny) {
+            GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[enemyPokemon.id]);
+            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `[${player.town().dungeon.name}] You encountered a Shiny ${this.enemyPokemon().name}.`);
+        } else if (!App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id)) {
+            App.game.logbook.newLog(LogBookTypes.NEW, `[${player.town().dungeon.name}] You encountered a wild ${this.enemyPokemon().name}.`);
+        }
+        DungeonRunner.fighting(true);
+    }
+
     /**
      * Handles generating the enemy Trainer Pokemon
      */
@@ -143,7 +170,7 @@ class DungeonBattle extends Battle {
 
         const pokemon = this.trainer().team[this.trainerPokemonIndex()];
         const baseHealth = DungeonRunner.fightingBoss() ? pokemon.maxHealth : DungeonRunner.dungeon.baseHealth;
-        const level = DungeonRunner.fightingBoss() ? pokemon.level : DungeonRunner.dungeon.level;
+        const level = DungeonRunner.fightingBoss() ? pokemon.level : DungeonRunner.dungeonLevel();
         const enemyPokemon = PokemonFactory.generateDungeonTrainerPokemon(pokemon, DungeonRunner.chestsOpened, baseHealth, level);
 
         this.enemyPokemon(enemyPokemon);
@@ -155,7 +182,7 @@ class DungeonBattle extends Battle {
         this.counter = 0;
 
         // Finding boss from bossList
-        const enemy = GameHelper.fromWeightedArray(DungeonRunner.dungeon.availableBosses(), DungeonRunner.dungeon.bossWeightList);
+        const enemy = Rand.fromWeightedArray(DungeonRunner.dungeon.availableBosses(), DungeonRunner.dungeon.bossWeightList);
         // Pokemon
         if (enemy instanceof DungeonBossPokemon) {
             this.enemyPokemon(PokemonFactory.generateDungeonBoss(enemy, DungeonRunner.chestsOpened));
@@ -165,9 +192,9 @@ class DungeonBattle extends Battle {
             if (this.enemyPokemon().shiny) {
                 GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[this.enemyPokemon().id]);
                 GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
-                App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a Shiny ${this.enemyPokemon().name} at ${player.town().dungeon.name}.`);
+                App.game.logbook.newLog(LogBookTypes.SHINY, `[${player.town().dungeon.name}] You encountered a Shiny ${this.enemyPokemon().name}.`);
             } else if (!App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id)) {
-                App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${this.enemyPokemon().name} at ${player.town().dungeon.name}.`);
+                App.game.logbook.newLog(LogBookTypes.NEW, `[${player.town().dungeon.name}] You encountered a wild ${this.enemyPokemon().name}.`);
             }
         } else {
             this.trainer(enemy);

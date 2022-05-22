@@ -1,4 +1,4 @@
-/// <reference path="upgrades/Upgrade.ts" />
+/// <reference path="../declarations/upgrades/Upgrade.d.ts" />
 
 /**
  * Required modules before porting:
@@ -16,19 +16,21 @@
 
 class Player {
 
-    public achievementsCompleted: { [name: string]: boolean };
-
     private _route: KnockoutObservable<number>;
-
     private _region: KnockoutObservable<GameConstants.Region>;
     private _subregion: KnockoutObservable<number>;
+    private _townName: string;
     private _town: KnockoutObservable<Town>;
     private starter: KnockoutObservable<GameConstants.Starter>;
     private _timeTraveller = false;
+    private _origins: Array<any>;
 
     constructor(savedPlayer?) {
         const saved: boolean = (savedPlayer != null);
-        savedPlayer = savedPlayer || {};
+        savedPlayer = savedPlayer || {
+            _region: GameConstants.Region.kanto,
+            _route: 1,
+        };
         this._lastSeen = savedPlayer._lastSeen || 0;
         this._timeTraveller = savedPlayer._timeTraveller || false;
         if (this._lastSeen > Date.now()) {
@@ -42,29 +44,15 @@ class Player {
         }
         this._region = ko.observable(savedPlayer._region);
         this._subregion = ko.observable(savedPlayer._subregion || 0);
-        if (MapHelper.validRoute(savedPlayer._route, savedPlayer._region)) {
-            this._route = ko.observable(savedPlayer._route);
-        } else {
-            switch (savedPlayer._region) {
-                case 0:
-                    this._route = ko.observable(1);
-                    break;
-                case 1:
-                    this._route = ko.observable(29);
-                    break;
-                case 2:
-                    this._route = ko.observable(101);
-                    break;
-                case 3:
-                    this._route = ko.observable(201);
-                    break;
-                default:
-                    this._route = ko.observable(1);
-                    this._region = ko.observable(GameConstants.Region.kanto);
-            }
+        this._route = ko.observable(savedPlayer._route);
+        // Check that the route is valid, otherwise set it to the regions starting route (route 0 means they are in a town)
+        if (this._route() > 0 && !MapHelper.validRoute(this._route(), this._region())) {
+            this._route(GameConstants.StartingRoutes[this._region()]);
         }
-
-        this._town = ko.observable(TownList['Pallet Town']);
+        // Return player to last town or starter town if their town no longer exist for whatever reason
+        this._townName = TownList[savedPlayer._townName] ? savedPlayer._townName : GameConstants.StartingTowns[this._region()];
+        this._town = ko.observable(TownList[this._townName]);
+        this._town.subscribe(value => this._townName = value.name);
         this.starter = ko.observable(savedPlayer.starter != undefined ? savedPlayer.starter : GameConstants.Starter.None);
 
         this._itemList = Save.initializeItemlist();
@@ -81,20 +69,19 @@ class Player {
         // TODO(@Isha) move to underground classes.
         const mineInventory = (savedPlayer.mineInventory || [])
             // TODO: Convert this to object spread after we're on TS modules
-            .map((v) => Object.assign({}, v, { amount: ko.observable(v.amount) }));
+            .map((v) => Object.assign({}, v, {
+                amount: ko.observable(v.amount),
+                sellLocked: ko.observable(v.sellLocked),
+            }));
         this.mineInventory = ko.observableArray(mineInventory);
 
-        this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
-
-        const today = new Date();
-        const lastSeen = new Date(this._lastSeen);
-
-        this._lastSeen = Date.now();
-
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
-        this.effectTimer = Save.initializeEffectTimer(savedPlayer.effectTimer || {});
+        this.effectTimer = Save.initializeEffectTimer();
         this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
+        this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
 
+        // Save game origins, useful for tracking down any errors that may not be related to the main game
+        this._origins = [...new Set((savedPlayer.origin || [])).add(window.location?.origin)];
     }
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
@@ -107,7 +94,8 @@ class Player {
     public effectList: { [name: string]: KnockoutObservable<number> } = {};
     public effectTimer: { [name: string]: KnockoutObservable<string> } = {};
 
-    private highestRegion: KnockoutObservable<GameConstants.Region>;
+    public highestRegion: KnockoutObservable<GameConstants.Region>;
+    public highestSubRegion: KnockoutObservable<number>;
 
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
         this._itemList = value;
@@ -115,6 +103,10 @@ class Player {
 
     get itemList(): { [p: string]: KnockoutObservable<number> } {
         return this._itemList;
+    }
+
+    public amountOfItem(itemName: string) {
+        return this._itemList[itemName]();
     }
 
     private _itemMultipliers: { [name: string]: number };
@@ -144,7 +136,16 @@ class Player {
     }
 
     set subregion(value: number) {
+        if (value < 0) {
+            value = Math.max(...SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id));
+        }
+        if (value > Math.max(...SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id))) {
+            value = 0;
+        }
         this._subregion(value);
+        if (value > this.highestSubRegion()) {
+            this.highestSubRegion(value);
+        }
         const subregion = SubRegions.getSubRegionById(this.region, value);
 
         if (subregion.startRoute) {
@@ -207,23 +208,35 @@ class Player {
             '_route',
             '_region',
             '_subregion',
+            '_townName',
             '_itemList',
             '_itemMultipliers',
             'starter',
             // TODO(@Isha) remove.
             'mineInventory',
-            // TODO(@Isha) remove.
-            '_mineLayersCleared',
-            'achievementsCompleted',
             '_lastSeen',
             '_timeTraveller',
-            'gymDefeats',
-            'achievementsCompleted',
+            '_origins',
             'effectList',
-            'effectTimer',
             'highestRegion',
+            'highestSubRegion',
         ];
         const plainJS = ko.toJS(this);
+        Object.entries(plainJS._itemMultipliers).forEach(([key, value]) => {
+            if (value <= 1) {
+                delete plainJS._itemMultipliers[key];
+            }
+        });
+        Object.entries(plainJS._itemList).forEach(([key, value]) => {
+            if (!value) {
+                delete plainJS._itemList[key];
+            }
+        });
+        Object.entries(plainJS.effectList).forEach(([key, value]) => {
+            if (!value) {
+                delete plainJS.effectList[key];
+            }
+        });
         return Save.filter(plainJS, keep);
     }
 }

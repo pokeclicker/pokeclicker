@@ -1,7 +1,7 @@
 import NotificationOption from './NotificationOption';
 import Sound from '../utilities/Sound';
-import BooleanSetting from '../settings/BooleanSetting';
-import Settings from '../settings/Settings';
+import Rand from '../utilities/Rand';
+import type NotificationSetting from '../settings/NotificationSetting';
 
 export default class Notifier {
     public static notify({
@@ -12,14 +12,18 @@ export default class Notifier {
         time = 'just now',
         sound = null,
         setting = null,
+        image = null,
+        strippedMessage = null,
     }: {
         message: string;
         type?: NotificationOption;
         title?: string;
         timeout?: number;
-        time?: string,
-        sound?: Sound,
-        setting?: BooleanSetting,
+        time?: string;
+        sound?: Sound;
+        setting?: NotificationSetting;
+        image?: string;
+        strippedMessage?: string;
     }): void {
         $(document).ready(() => {
             // If we have sounds enabled for this, play it now
@@ -27,20 +31,36 @@ export default class Notifier {
                 sound.play();
             }
 
+            if (setting && setting.desktopNotification.value && Notification.permission === 'granted') {
+                const tempEl = document.createElement('div');
+                tempEl.innerHTML = strippedMessage ?? message.replace(/<br\s*[/]?>/gi, '\n');
+                const msg = tempEl.innerText.replace(/  +/g, ' ');
+                const desktopNotification = new Notification(title, {
+                    body: msg,
+                    icon: image,
+                    silent: true,
+                });
+                setTimeout(() => {
+                    desktopNotification.close();
+                }, timeout);
+            }
+
             // Check if this type of notification is disabled
-            if (setting && !Settings.getSetting(setting.name).value) {
+            if (setting && setting.inGameNotification && !setting.inGameNotification.value) {
                 return;
             }
 
             // Get the notification ready to display
-            const toastID = Math.random().toString(36).substr(2, 9);
+            const toastID = Rand.string(7);
             const toastHTML = `<div id="${toastID}" class="toast bg-${NotificationOption[type]}" data-autohide="false">
                 ${title ? `<div class="toast-header">
+                    ${image ? `<img src="${image}" class="icon" />` : ''}
                     <strong class="mr-auto text-primary">${title || ''}</strong>
                     <small class="text-muted">${time}</small>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">×</button>
                 </div>` : ''}
                 <div class="toast-body text-light">
+                    ${!title && image ? `<img src="${image}" class="icon" />` : ''}
                     ${message.replace(/\n/g, '<br/>')}
                     ${title ? '' : '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast">×</button>'}
                 </div>
@@ -85,7 +105,7 @@ export default class Notifier {
 
         return new Promise((resolve) => {
             // Get the notification ready to display
-            const modalID = Math.random().toString(36).substr(2, 9);
+            const modalID = Rand.string(7);
             const html = `
 <div class="modal fade noselect" id="modal${modalID}" tabindex="-1" role="dialog" aria-badgeledby="prompt">
     <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
@@ -165,7 +185,7 @@ export default class Notifier {
 
         return new Promise((resolve) => {
             // Get the notification ready to display
-            const modalID = Math.random().toString(36).substr(2, 9);
+            const modalID = Rand.string(7);
             const html = `
 <div class="modal fade noselect" id="modal${modalID}" tabindex="-1" role="dialog" aria-badgeledby="prompt">
     <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">

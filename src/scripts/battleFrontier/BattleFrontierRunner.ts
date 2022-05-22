@@ -4,6 +4,7 @@ class BattleFrontierRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
     static stage: KnockoutObservable<number> = ko.observable(1); // Start at stage 1
+    public static highest: KnockoutObservable<number> = ko.observable(1);
 
     public static counter = 0;
 
@@ -25,6 +26,7 @@ class BattleFrontierRunner {
     public static start() {
         this.started(true);
         this.stage(1);
+        this.highest(App.game.statistics.battleFrontierHighestStageCompleted());
         BattleFrontierBattle.pokemonIndex(0);
         BattleFrontierBattle.generateNewEnemy();
         BattleFrontierRunner.timeLeft(GameConstants.GYM_TIME);
@@ -33,9 +35,9 @@ class BattleFrontierRunner {
     }
 
     public static nextStage() {
+        // Gain any rewards we should have earned for defeating this stage
+        BattleFrontierMilestones.gainReward(this.stage());
         if (App.game.statistics.battleFrontierHighestStageCompleted() < this.stage()) {
-            // Gain any rewards we should have earned for defeating this stage
-            BattleFrontierMilestones.gainReward(this.stage());
             // Update our highest stage
             App.game.statistics.battleFrontierHighestStageCompleted(this.stage());
         }
@@ -63,8 +65,9 @@ class BattleFrontierRunner {
 
         Notifier.notify({
             title: 'Battle Frontier',
-            message: `You managed to beat stage ${stageBeaten}.<br/>You received ${battlePointsEarned} BP`,
+            message: `You managed to beat stage ${stageBeaten}.\nYou received ${battlePointsEarned} BP`,
             type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.General.battle_frontier,
             timeout: 5 * GameConstants.MINUTE,
         });
 
@@ -88,7 +91,7 @@ class BattleFrontierRunner {
                     title: 'Battle Frontier',
                     message: `You made it to stage ${this.stage()}`,
                     type: NotificationConstants.NotificationOption.info,
-                    timeout: 5 * GameConstants.MINUTE,
+                    timeout: 1 * GameConstants.MINUTE,
                 });
 
                 this.end();
@@ -97,7 +100,7 @@ class BattleFrontierRunner {
     }
 
     public static timeLeftSeconds = ko.pureComputed(() => {
-        return (Math.ceil(BattleFrontierRunner.timeLeft() / 10) / 10).toFixed(1);
+        return (Math.ceil(BattleFrontierRunner.timeLeft() / 100) / 10).toFixed(1);
     })
 
     public static pokemonLeftImages = ko.pureComputed(() => {
