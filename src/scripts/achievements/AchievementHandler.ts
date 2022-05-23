@@ -41,7 +41,7 @@ class AchievementHandler {
     }
 
     public static getAchievementListWithIndex() {
-        return this.achievementListFiltered().slice(this.navigateIndex() * 10, (this.navigateIndex() * 10) + 10);
+        return this.getAchievementSortedList().slice(this.navigateIndex() * 10, (this.navigateIndex() * 10) + 10);
     }
 
     public static filterAchievementList(retainPage = false) {
@@ -58,6 +58,40 @@ class AchievementHandler {
         } else if (this.getAchievementListWithIndex().length === 0 && this.navigateIndex() > 0) {
             this.setNavigateIndex(this.numberOfTabs() - 1);
         }
+    }
+
+    static getAchievementSortedList = ko.pureComputed( () => {
+        return AchievementHandler.achievementListFiltered().sort(AchievementHandler.compareBy(
+            Settings.getSetting('achievementSort').observableValue(), Settings.getSetting('achievementSortDirection').observableValue()
+        ));
+    }).extend({ rateLimit: 500 })
+
+    public static compareBy(option: AchievementSortOptions, direction: boolean): (a: Achievement, b: Achievement) => number {
+        return function (a, b) {
+            let res, dir = (direction) ? -1 : 1;
+            const config = AchievementSortOptionConfigs[option];
+
+            const aValue = config.getValue(a);
+            const bValue = config.getValue(b);
+
+            if (config.invert) {
+                dir *= -1;
+            }
+
+            //Compare by provided property
+            if (aValue == bValue) {
+                //If they are equal according to provided property, sort by name
+                return a.name.localeCompare(b.name);
+            } else if (aValue < bValue) {
+                res = -1;
+            } else if (aValue > bValue) {
+                res = 1;
+            } else {
+                res = 0;
+            }
+
+            return res * dir;
+        };
     }
 
     public static preCheckAchievements() {

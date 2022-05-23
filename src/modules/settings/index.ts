@@ -8,6 +8,7 @@ import PokemonType from '../enums/PokemonType';
 import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
 import { SortOptionConfigs, SortOptions } from './SortOptions';
+import { AchievementSortOptionConfigs, AchievementSortOptions } from '../achievements/AchievementSortOptions';
 import { Region, AchievementType } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 
@@ -196,6 +197,13 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Proteins used', 'protiens'),
     ],
     'attack'));
+
+// Achievement sorting
+const achievementSortSettings = Object.keys(AchievementSortOptionConfigs).map((opt) => (
+    new SettingOption<number>(AchievementSortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('achievementSort', 'Sort:', achievementSortSettings, AchievementSortOptions.default));
+Settings.add(new BooleanSetting('achievementSortDirection', 'reverse', false));
 
 // Achievements Filters
 Settings.add(new Setting<number>('achievementsPage', 'achievementsPage', [], 0));
