@@ -1848,7 +1848,10 @@ TownList['Castelia Sewers'] = new DungeonTown(
 TownList['Relic Passage'] = new DungeonTown(
     'Relic Passage',
     GameConstants.Region.unova,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Castelia Sewers'))]
+    [
+        new RouteKillRequirement(10, GameConstants.Region.unova,5),
+        new GymBadgeRequirement(BadgeEnums.Bolt),
+    ]
 );
 TownList['Relic Castle'] = new DungeonTown(
     'Relic Castle',
