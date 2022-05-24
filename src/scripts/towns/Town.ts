@@ -1,7 +1,7 @@
 ///<reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="NPC.ts"/>
 ///<reference path="KantoBerryMasterNPC.ts"/>
-///<reference path="ProfOakNPC.ts"/>
+///<reference path="ProfNPC.ts"/>
 ///<reference path="RoamerNPC.ts"/>
 ///<reference path="TownContent.ts"/>
 
