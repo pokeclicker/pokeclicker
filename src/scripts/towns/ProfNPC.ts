@@ -27,7 +27,7 @@ class ProfNPC extends NPC {
             html += `<p>${this.pokedexCompleteText}</p>`;
         } else {
             if (requiresCompleteDex) {
-                html += '<p>To progress to the next region, you need to catch all Pokémons in this region.</p>';
+                html += '<p>To progress to the next region, you need to catch all Pokémon native to this region.</p>';
             }
             html += `<p>You still have ${completeDexAchievement.property.requiredValue - completeDexAchievement.getProgress()} left to catch in this region! You're almost there!</p>`;
         }
