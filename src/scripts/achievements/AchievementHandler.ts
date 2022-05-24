@@ -41,7 +41,23 @@ class AchievementHandler {
     }
 
     public static getAchievementListWithIndex() {
-        return this.getAchievementSortedList().slice(this.navigateIndex() * 10, (this.navigateIndex() * 10) + 10);
+        return this.getAchievementList().slice(this.navigateIndex() * 10, (this.navigateIndex() * 10) + 10);
+    }
+
+    public static getAchievementList() {
+        const achievementSortValue = Settings.getSetting('achievementSort').observableValue();
+
+        // Checks if the user has selected the default sorting option
+        if (achievementSortValue === AchievementSortOptions.default) {
+            // ... in this case, returns the filtered list without sorting.
+            return this.achievementListFiltered();
+        }
+
+        // ... otherwise, returns a copy of the filtered list sorted by provided property.
+        const achievementSortedList = [...this.achievementListFiltered()];
+        return achievementSortedList.sort(AchievementHandler.compareBy(
+            achievementSortValue, Settings.getSetting('achievementSortDirection').observableValue()
+        ));
     }
 
     public static filterAchievementList(retainPage = false) {
@@ -59,12 +75,6 @@ class AchievementHandler {
             this.setNavigateIndex(this.numberOfTabs() - 1);
         }
     }
-
-    static getAchievementSortedList = ko.pureComputed( () => {
-        return AchievementHandler.achievementListFiltered().sort(AchievementHandler.compareBy(
-            Settings.getSetting('achievementSort').observableValue(), Settings.getSetting('achievementSortDirection').observableValue()
-        ));
-    }).extend({ rateLimit: 500 })
 
     public static compareBy(option: AchievementSortOptions, direction: boolean): (a: Achievement, b: Achievement) => number {
         return function (a, b) {

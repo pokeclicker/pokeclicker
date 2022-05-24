@@ -1,6 +1,7 @@
 export enum AchievementSortOptions {
     default = 0,
     progress = 1,
+    bonus = 2,
 }
 
 export type AchievementSortOptionConfig = {
@@ -17,11 +18,16 @@ export type AchievementSortOptionConfig = {
 export const AchievementSortOptionConfigs: Record<AchievementSortOptions, AchievementSortOptionConfig> = {
     [AchievementSortOptions.default]: {
         text: 'Default',
-        getValue: (a) => a.bonusWeight,
+        getValue: () => null,
     },
 
     [AchievementSortOptions.progress]: {
         text: 'Progress',
         getValue: (a) => parseInt(a.getProgressPercentage(), 10),
+    },
+
+    [AchievementSortOptions.bonus]: {
+        text: 'Bonus %',
+        getValue: (a) => a.bonusWeight,
     },
 };

@@ -45,7 +45,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                         <div class="text-left">
                             <div class="form-row">
                                 <div class="form-group col-md-4 col-4">
-                                    <label>Sort by:</label>
+                                    <label>Sort</label>
                                     <div class="input-group" data-bind="with: Settings.getSetting('achievementSort')">
                                         <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, AchievementSortOptions[AchievementSortOptions[this.value]])"
                                                 data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
