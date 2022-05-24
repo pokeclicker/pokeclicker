@@ -49,41 +49,15 @@ aria-labelledby="pokedexModalLabel">
                     </div>
 
                     <div class="form-group row justify-content-left">
-                        <!--Caught/Uncaught-->
-                        <div class="col-sm-2">
-                            <div class="form-check text-left">
-                                <input type="radio" id="pokedex-filter-caught-all" value="all" class="form-check-input" checked
-                                    onclick="PokedexHelper.updateList()" name="caught-uncaught">
-                                <label for="pokedex-filter-caught-all" class="form-check-label">All</label>
-                            </div>
-                            <div class="form-check text-left">
-                                <input type="radio" id="pokedex-filter-caught" value="caught" class="form-check-input"
-                                    onclick="PokedexHelper.updateList()" name="caught-uncaught">
-                                <label for="pokedex-filter-caught" class="form-check-label">Caught</label>
-                            </div>
-                            <div class="form-check text-left">
-                                <input type="radio" id="pokedex-filter-uncaught" value="uncaught" class="form-check-input"
-                                    onclick="PokedexHelper.updateList()" name="caught-uncaught">
-                                <label for="pokedex-filter-uncaught" class="form-check-label">Uncaught</label>
-                            </div>
-                        </div>
-                        <!--Shiny-->
-                        <div class="col-sm-2">
-                            <div class=" form-check text-left">
-                                <input type="radio" id="pokedex-filter-shiny-all" value="all" class="form-check-input" checked
-                                    onclick="PokedexHelper.updateList()" name="shiny-notshiny">
-                                <label for="pokedex-filter-shiny-all" class="form-check-label">All</label>
-                            </div>
-                            <div class=" form-check text-left">
-                                <input type="radio" id="pokedex-filter-shiny" value="shiny" class="form-check-input"
-                                    onclick="PokedexHelper.updateList()" name="shiny-notshiny">
-                                <label for="pokedex-filter-shiny" class="form-check-label">Shiny</label>
-                            </div>
-                            <div class="form-check text-left">
-                                <input type="radio" id="pokedex-filter-not-shiny" value="notshiny" class="form-check-input"
-                                    onclick="PokedexHelper.updateList()" name="shiny-notshiny">
-                                <label for="pokedex-filter-not-shiny" class="form-check-label">Not Shiny</label>
-                            </div>
+                        <div class="form-group col-sm-3">
+                            <label for="pokedex-filter-shiny-caught">Caught Status</label>
+                            <select id="pokedex-filter-shiny-caught" autocomplete="off" class="custom-select" onchange="PokedexHelper.updateList()">
+                                <option value="all" selected>All</option>
+                                <option value="uncaught">Uncaught</option>
+                                <option value="caught">Caught</option>
+                                <option value="caught-not-shiny">Caught not Shiny</option>
+                                <option value="caught-shiny">Caught Shiny</option>
+                            </select>
                         </div>
                        <!--Rare Hold Item-->
                        <div class="col-sm-2">
