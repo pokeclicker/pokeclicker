@@ -711,17 +711,6 @@ export const EnergyRestoreEffect = {
     LargeRestore: 0.5,
 };
 
-export const KeyCodeToDirection = {
-    ArrowUp: 'up',
-    ArrowLeft: 'left',
-    ArrowDown: 'down',
-    ArrowRight: 'right',
-    W: 'up',
-    A: 'left',
-    S: 'down',
-    D: 'right',
-};
-
 export const FossilToPokemon = {
     'Helix Fossil': 'Omanyte',
     'Dome Fossil': 'Kabuto',

@@ -141,10 +141,25 @@ class GameController {
 
             // Safari Zone
             if (App.game.gameState === GameConstants.GameState.safari) {
-                const dir = GameConstants.KeyCodeToDirection[key];
-                if (dir) {
-                    Safari.move(dir);
+                switch (key) {
+                    case 'ArrowUp':
+                    case Settings.getSetting('hotkey.dungeon.up').value:
+                        Safari.move('up');
+                        break;
+                    case 'ArrowLeft':
+                    case Settings.getSetting('hotkey.dungeon.left').value:
+                        Safari.move('left');
+                        break;
+                    case 'ArrowDown':
+                    case Settings.getSetting('hotkey.dungeon.down').value:
+                        Safari.move('down');
+                        break;
+                    case 'ArrowRight':
+                    case Settings.getSetting('hotkey.dungeon.right').value:
+                        Safari.move('right');
+                        break;
                 }
+
                 // We don't want to process any other keys while in the Safari zone
                 return e.preventDefault();
             }
@@ -375,10 +390,23 @@ class GameController {
             delete GameController.keyHeld[key];
 
             if (App.game.gameState === GameConstants.GameState.safari) {
-                const dir = GameConstants.KeyCodeToDirection[key];
-                if (dir) {
-                    e.preventDefault();
-                    Safari.stop(dir);
+                switch (key) {
+                    case 'ArrowUp':
+                    case Settings.getSetting('hotkey.dungeon.up').value:
+                        Safari.stop('up');
+                        return e.preventDefault();
+                    case 'ArrowLeft':
+                    case Settings.getSetting('hotkey.dungeon.left').value:
+                        Safari.stop('left');
+                        return e.preventDefault();
+                    case 'ArrowDown':
+                    case Settings.getSetting('hotkey.dungeon.down').value:
+                        Safari.stop('down');
+                        return e.preventDefault();
+                    case 'ArrowRight':
+                    case Settings.getSetting('hotkey.dungeon.right').value:
+                        Safari.stop('right');
+                        return e.preventDefault();
                 }
             }
 
