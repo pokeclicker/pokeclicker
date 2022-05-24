@@ -717,11 +717,10 @@ class Update implements Saveable {
             saveData.statistics.gymsDefeated.splice(84, 1);
             saveData.badgeCase.splice(84, 1);
             // Change Ultra Megalopolis to a Temporary Battle
-            saveData.statistics.temporaryBattleDefeated = new Array<number>();
-            saveData.statistics.temporaryBattleDefeated[1] = saveData.statistics.gymsDefeated[89];
+            saveData.statistics.temporaryBattleDefeated[1] = saveData.statistics.gymsDefeated[88];
             // Remove the Elite_ULtraNecrozma Gym, now a temporary battle instead of a gym
-            saveData.statistics.gymsDefeated.splice(89, 1);
-            saveData.badgeCase.splice(89, 1);
+            saveData.statistics.gymsDefeated.splice(88, 1);
+            saveData.badgeCase.splice(88, 1);
         },
     };
 
