@@ -844,6 +844,14 @@ TownList['Verdanturf Town'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 117)],
     }
 );
+TownList['Mt. Chimney'] = new Town(
+    'Mt. Chimney',
+    GameConstants.Region.hoenn,
+    [new MoveToDungeon(dungeonList['Fiery Path']), new MoveToDungeon(dungeonList['Mt. Chimney Crater']), new MoveToDungeon(dungeonList['Jagged Pass']), new MoveToDungeon(dungeonList['Magma Hideout'])],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 112)],
+    }
+);
 TownList['Lavaridge Town'] = new Town(
     'Lavaridge Town',
     GameConstants.Region.hoenn,
@@ -963,15 +971,15 @@ TownList['Meteor Falls'] = new DungeonTown(
     GameConstants.Region.hoenn,
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 114)]
 );
-TownList['Mt. Chimney'] = new DungeonTown(
-    'Mt. Chimney',
+TownList['Mt. Chimney Crater'] = new DungeonTown(
+    'Mt. Chimney Crater',
     GameConstants.Region.hoenn,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Meteor Falls'))]
 );
 TownList['Jagged Pass'] = new DungeonTown(
     'Jagged Pass',
     GameConstants.Region.hoenn,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Chimney'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Chimney Crater'))]
 );
 TownList['New Mauville'] = new DungeonTown(
     'New Mauville',
@@ -2396,6 +2404,13 @@ const HeaheaCafeOwner = new NPC('Café Owner', [
     'For what it\'s worth, I say don\'t go to any of those places. Too wet, too hot and too... jungly. Why not stay here? Have a coffee! Enjoy the city!',
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
 ]);
+const PaniolaTownActor = new NPC('Actor Meredith', [
+    'I love Oricorio. I can tell you all about it!',
+    'Each of the four islands in Alola has its own meadow, and each meadow has its own form of Oricorio. Each island, except for Akala Island. So you\'d think there\'s only three forms of Oricorio, right?',
+    'Wrong! There is a fourth! Did you know you can find all of the Oricorio forms on the farm? One of them doesn\'t appear anywhere else!',
+    'Each Oricorio form is attracted to the berry color that matches its own style. Red for Baile style, yellow for Pom-Pom style, pink for Pa\'u style and purple for Sensu style.',
+    'You want to know which one can only be found on the farm? I\'m sure you can figure that out yourself. Simple process of elimination really.',
+]);
 const RoyalAvenueSpectator = new NPC('Spectator', [
     'I think battles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
     'Evolving Pikachu or Exeggcute in Alola can result in a new form! Sometimes.',
@@ -2492,6 +2507,7 @@ TownList['Paniola Town'] = new Town(
     [PaniolaTownShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 4)],
+        npcs: [PaniolaTownActor],
     }
 );
 TownList['Royal Avenue'] = new Town(
