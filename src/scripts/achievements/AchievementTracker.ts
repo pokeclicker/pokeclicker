@@ -16,7 +16,7 @@ class AchievementTracker implements Feature {
     }
 
     canAccess(): boolean {
-        return App.game.party.caughtPokemon.length >= 110;
+        return App.game.keyItems.hasKeyItem(KeyItemType.Holo_caster);
     }
 
     update(delta: number): void {

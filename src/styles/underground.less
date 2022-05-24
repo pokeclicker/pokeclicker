@@ -614,12 +614,17 @@
 }
 
 .HammerSelected {
-    cursor:url('../assets/images/underground/hammer.png'), auto;
+    cursor:url('../assets/images/underground/Hammer.png') 5 15, auto;
+    &:active {
+        cursor:url('../assets/images/underground/Hammer.png') 5 10, auto;
+    }
 }
 
 .ChiselSelected {
-    cursor: url('../assets/images/underground/chissel.png'), auto;
-
+    cursor: url('../assets/images/underground/Chisel.png') 5 25, auto;
+    &:active {
+        cursor: url('../assets/images/underground/Chisel.png') 5 20, auto;
+    }
     &.mineSquare:after {
         content: "";
         position: absolute;

@@ -153,7 +153,7 @@ const ChangelogItems = [
     new Changelog(changelogType.CHANGE, 'Updated Logbook encounter message formatting'),
     new Changelog(changelogType.CHANGE, 'Reduced Plume Fossil sizing'),
     new Changelog(changelogType.CHANGE, 'Adjusted Castform encounters'),
-    new Changelog(changelogType.CHANGE, 'Adjusted some Pokémons encounter locations'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some Pokémon encounter locations'),
     new Changelog(changelogType.CHANGE, 'Adjusted some items purchase locations'),
     new Changelog(changelogType.CHANGE, 'Shuffled around some item orders in menus'),
     new Changelog(changelogType.FIXED, 'Minor text fixes'),
@@ -553,7 +553,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Underground hammer will display red box when on edge tiles'),
     new Changelog(changelogType.FIXED, 'Mine should no longer soft lock players'),
     new Changelog(changelogType.FIXED, 'Alternate Form Pokémon statistics shown correctly'),
-    new Changelog(changelogType.FIXED, 'When hatching shop eggs, the Pokémons level will no longer be reset'),
+    new Changelog(changelogType.FIXED, 'When hatching shop eggs, the Pokémon level will no longer be reset'),
     new Changelog(changelogType.FIXED, 'Underground daily trades statistic will increment correctly when doing multiple trades'),
     new Changelog(changelogType.FIXED, 'Minor display and text fixes'),
 
