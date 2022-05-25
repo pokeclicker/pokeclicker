@@ -352,16 +352,6 @@ namespace GameConstants {
         MediumRestore: number;
         LargeRestore: number;
     };
-    declare const KeyCodeToDirection: {
-        ArrowUp: string;
-        ArrowLeft: string;
-        ArrowDown: string;
-        ArrowRight: string;
-        KeyW: string;
-        KeyA: string;
-        KeyS: string;
-        KeyD: string;
-    };
     declare const FossilToPokemon: {
         'Helix Fossil': string;
         'Dome Fossil': string;

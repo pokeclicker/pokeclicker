@@ -115,10 +115,11 @@ const LavenderTownShop = new Shop([
 
 // Kanto NPCs
 
-const PalletProfOak = new ProfOakNPC('Prof. Oak', [
-    'Good luck on your journey!',
-    'Come visit me when you complete your Pokédex!',
-]);
+const PalletProfOak = new ProfNPC('Prof. Oak',
+    GameConstants.Region.kanto,
+    'Congratulations on completing your Kanto Pokédex!',
+    'Your journey isn\'t over yet, a whole world awaits you! Onwards to Johto!',
+    'assets/images/oak.png');
 
 const ViridianCityOldMan = new NPC('Old Man', [
     'Ahh, I\'ve had my coffee now and I feel great!',
@@ -454,6 +455,11 @@ const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
     'On the news they are getting more reports of roaming Pokémon appearing on {ROUTE_NAME}!',
 ], GameConstants.Region.johto);
 
+const ProfElm = new ProfNPC('Prof. Elm',
+    GameConstants.Region.johto,
+    'Oh, another regional Pokédex completed so soon?',
+    'Amazing! Next stop is Hoenn, enjoy the sunshine while you\'re there!');
+
 
 //Johto Towns
 TownList['New Bark Town'] = new Town(
@@ -462,7 +468,7 @@ TownList['New Bark Town'] = new Town(
     [NewBarkTownShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
-        npcs: [NewBarkTechnologyEnthusiast],
+        npcs: [ProfElm, NewBarkTechnologyEnthusiast],
     }
 );
 TownList['Cherrygrove City'] = new Town(
@@ -773,6 +779,11 @@ const SootopolisWallace = new NPC('Gym Leader Wallace', [
     'You will have to overcome the Pokémon League before you have any chance to encounter them.',
 ]);
 
+const ProfBirch = new ProfNPC('Prof. Birch',
+    GameConstants.Region.hoenn,
+    'That\'s another regional Pokédex completed! Fantastic.',
+    'I really appreciate being able to see your outstanding progress, thank you! Sinnoh is next up.');
+
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
@@ -780,7 +791,7 @@ TownList['Littleroot Town'] = new Town(
     [LittleRootTownShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
-        npcs: [LittlerootAide],
+        npcs: [ProfBirch, LittlerootAide],
     }
 );
 TownList['Oldale Town'] = new Town(
@@ -842,6 +853,14 @@ TownList['Verdanturf Town'] = new Town(
     [VerdanturfTownShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 117)],
+    }
+);
+TownList['Mt. Chimney'] = new Town(
+    'Mt. Chimney',
+    GameConstants.Region.hoenn,
+    [new MoveToDungeon(dungeonList['Fiery Path']), new MoveToDungeon(dungeonList['Mt. Chimney Crater']), new MoveToDungeon(dungeonList['Jagged Pass']), new MoveToDungeon(dungeonList['Magma Hideout'])],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 112)],
     }
 );
 TownList['Lavaridge Town'] = new Town(
@@ -963,15 +982,15 @@ TownList['Meteor Falls'] = new DungeonTown(
     GameConstants.Region.hoenn,
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 114)]
 );
-TownList['Mt. Chimney'] = new DungeonTown(
-    'Mt. Chimney',
+TownList['Mt. Chimney Crater'] = new DungeonTown(
+    'Mt. Chimney Crater',
     GameConstants.Region.hoenn,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Meteor Falls'))]
 );
 TownList['Jagged Pass'] = new DungeonTown(
     'Jagged Pass',
     GameConstants.Region.hoenn,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Chimney'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Chimney Crater'))]
 );
 TownList['New Mauville'] = new DungeonTown(
     'New Mauville',
@@ -1179,6 +1198,13 @@ const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
     'I spotted a bunch of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.sinnoh);
 
+const ProfRowan = new ProfNPC('Prof. Rowan',
+    GameConstants.Region.sinnoh,
+    'Congratulations, you\'re more than half-way completed on the national Pokédex!',
+    'Next stop is Unova! I\'ve always wanted to visit Castelia City personally...');
+
+
+
 //Sinnoh Towns
 TownList['Twinleaf Town'] = new Town(
     'Twinleaf Town',
@@ -1195,7 +1221,7 @@ TownList['Sandgem Town'] = new Town(
     [],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 201)],
-        npcs: [SandgemBeachcomber],
+        npcs: [ProfRowan, SandgemBeachcomber],
     }
 );
 TownList['Jubilife City'] = new Town(
@@ -1613,6 +1639,11 @@ const UnovaRoamerNPC = new RoamerNPC('Professor Juniper\'s Aide', [
     'Our research indicates a higher concentration of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.unova);
 
+const ProfJuniper = new ProfNPC('Prof. Juniper',
+    GameConstants.Region.unova,
+    'Let me see your progress...Ah, fantastic, as usual!',
+    'Allow me some time to arrange tickets for your next destination.');
+
 //Unova Towns
 TownList['Aspertia City'] = new Town(
     'Aspertia City',
@@ -1620,6 +1651,7 @@ TownList['Aspertia City'] = new Town(
     [AspertiaCityShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
+        npcs: [],
     }
 );
 TownList['Floccesy Town'] = new Town(
@@ -1786,7 +1818,7 @@ TownList['Nuvema Town'] = new Town(
     [NuvemaTownShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 1)],
-        npcs: [UnovaRoamerNPC],
+        npcs: [ProfJuniper, UnovaRoamerNPC],
     }
 );
 TownList['Anville Town'] = new Town(
@@ -1840,7 +1872,10 @@ TownList['Castelia Sewers'] = new DungeonTown(
 TownList['Relic Passage'] = new DungeonTown(
     'Relic Passage',
     GameConstants.Region.unova,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Castelia Sewers'))]
+    [
+        new RouteKillRequirement(10, GameConstants.Region.unova,5),
+        new GymBadgeRequirement(BadgeEnums.Bolt),
+    ]
 );
 TownList['Relic Castle'] = new DungeonTown(
     'Relic Castle',
@@ -2070,6 +2105,11 @@ const KiloudeConfusedHiker = new NPC('Confused Hiker', [
     'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
 ]);
 
+const ProfSycamore = new ProfNPC('Prof. Sycamore',
+    GameConstants.Region.kalos,
+    'You\'re encountering Pokémon at a really good clip, aren\'t you? Congratulations! You completed the Pokédex!',
+    'Onward to Alola, shall we?');
+
 //Kalos Towns
 
 TownList['Vaniville Town'] = new Town(
@@ -2078,6 +2118,7 @@ TownList['Vaniville Town'] = new Town(
     [VanivilleTownShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+        npcs: [],
     }
 );
 TownList['Aquacorde Town'] = new Town(
@@ -2102,7 +2143,7 @@ TownList['Lumiose City'] = new Town(
     [DepartmentStoreShop,FriseurFurfrouShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
-        npcs: [LumioseEngineer],
+        npcs: [ProfSycamore, LumioseEngineer],
     }
 );
 TownList['Camphrier Town'] = new Town(
@@ -2397,6 +2438,13 @@ const HeaheaCafeOwner = new NPC('Café Owner', [
     'For what it\'s worth, I say don\'t go to any of those places. Too wet, too hot and too... jungly. Why not stay here? Have a coffee! Enjoy the city!',
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
 ]);
+const PaniolaTownActor = new NPC('Actor Meredith', [
+    'I love Oricorio. I can tell you all about it!',
+    'Each of the four islands in Alola has its own meadow, and each meadow has its own form of Oricorio. Each island, except for Akala Island. So you\'d think there\'s only three forms of Oricorio, right?',
+    'Wrong! There is a fourth! Did you know you can find all of the Oricorio forms on the farm? One of them doesn\'t appear anywhere else!',
+    'Each Oricorio form is attracted to the berry color that matches its own style. Red for Baile style, yellow for Pom-Pom style, pink for Pa\'u style and purple for Sensu style.',
+    'You want to know which one can only be found on the farm? I\'m sure you can figure that out yourself. Simple process of elimination really.',
+]);
 const RoyalAvenueSpectator = new NPC('Spectator', [
     'I think battles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
     'Evolving Pikachu or Exeggcute in Alola can result in a new form! Sometimes.',
@@ -2422,6 +2470,10 @@ const SeafolkCaptain = new NPC('Captain Mina', [
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [
     'Some very rare Pokémon have been sighted on {ROUTE_NAME}. I hope we can learn more about them.',
 ], GameConstants.Region.alola);
+const ProfKukui = new ProfNPC('Prof. Kukui',
+    GameConstants.Region.alola,
+    'TODO',
+    'TODO');
 
 const RoadsideMotelAnabel = new NPC('Anabel', [
     'Catching lots of Ultra Beasts? Oh you want to know more about Beast Balls!',
@@ -2455,7 +2507,7 @@ TownList['Professor Kukui\'s Lab'] = new Town(
     [],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
-        npcs: [KukuisLabProfessor],
+        npcs: [KukuisLabProfessor/*ProfKukui*/], // TODO: replace the NPC when all pokemons are catchable
     }
 );
 TownList['Hau\'oli City'] = new Town(
@@ -2499,6 +2551,7 @@ TownList['Paniola Town'] = new Town(
     [PaniolaTownShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 4)],
+        npcs: [PaniolaTownActor],
     }
 );
 
@@ -2807,6 +2860,10 @@ const TrainStationGuy = new NPC('Train Station Guy', [
     'One is sparsely populated, but the other is teeming with Pokemon.',
     'There are plenty of unique, powerful ones there, too!',
 ]);
+const ProfMagnolia = new ProfNPC('Prof. Magnolia',
+    GameConstants.Region.galar,
+    'TODO: Add text before Galar is released',
+    'TODO: Add text before Galar is released');
 
 
 //Galar towns
@@ -2817,7 +2874,7 @@ TownList['Postwick'] = new Town(
     [PostwickShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
-        npcs: [Mom],
+        npcs: [ProfMagnolia, Mom],
     }
 );
 TownList['Wedgehurst'] = new Town(
