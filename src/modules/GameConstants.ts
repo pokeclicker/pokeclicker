@@ -1086,6 +1086,15 @@ export const GalarDungeons = [
     'Watchtower Ruins',
     'Dusty Bowl',
     'Lake of Outrage',
+    'Master Dojo Trial',
+    'Tower of Darkness',
+    'Tower of Water',
+    'Rock Peak Ruins',
+    'Iron Ruins',
+    'Iceberg Ruins',
+    'Split-Decision Ruins',
+    'Dyna Tree Hill',
+    'Crown Shrine',
 ];
 
 export const RegionDungeons = [
