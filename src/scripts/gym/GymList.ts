@@ -1614,7 +1614,7 @@ GymList['Spikemuth'] = new Gym(
         new GymPokemon('Scrafty', 99141007, 44),
         new GymPokemon('Malamar', 100184597, 45),
         new GymPokemon('Skuntank', 100184597, 45),
-        new GymPokemon('Gigantamax Obstagoon', 104348955, 46),
+        new GymPokemon('Obstagoon', 104348955, 46),
     ],
     BadgeEnums.Galar_Dark,
     96000,
