@@ -6632,13 +6632,6 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
 //Galar Dungeons
 
 dungeonList['Slumbering Weald'] = new Dungeon('Slumbering Weald',
-    ['Hoothoot', 'Grubbin', 'Skwovet', 'Rookidee'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
-    [new DungeonBossPokemon('Blipbug', 8000000, 70)],
-    96500, 201);
-
-dungeonList['Inner Slumbering Weald'] = new Dungeon('Inner Slumbering Weald',
     ['Galarian Weezing', 'Corviknight', 'Galarian Stunfisk', 'Munna', 'Butterfree', 'Orbeetle'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,

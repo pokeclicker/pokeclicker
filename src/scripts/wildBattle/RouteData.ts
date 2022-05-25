@@ -1725,7 +1725,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Skwovet', 'Rookidee', 'Blipbug', 'Wooloo', 'Nickit', 'Caterpie', 'Hoothoot', 'Grubbin'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Slumbering Weald'))]
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
 ));
 Routes.add(new RegionRoute(
     'Galar Route 2', GameConstants.Region.galar, 2,
