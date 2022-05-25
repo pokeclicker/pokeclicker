@@ -633,7 +633,6 @@ export enum StoneType {
     'Flower_sweet',
     'Star_sweet',
     'Ribbon_sweet',
-    'Wishing_star',
 
 }
 

@@ -269,7 +269,6 @@ namespace GameConstants {
         'Flower_sweet',
         'Star_sweet',
         'Ribbon_sweet',
-        'Wishing_star',
     }
     declare enum BattleItemType {
         'xAttack' = '',
