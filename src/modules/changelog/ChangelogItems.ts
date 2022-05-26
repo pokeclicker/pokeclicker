@@ -10,6 +10,14 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.5
+    new ChangelogUpdate('v0.9.5', new Date(2022, 4, 26)),
+    new Changelog(changelogType.FIXED, 'Starter modal appearing multiple times when grass type picked'),
+    new Changelog(changelogType.FIXED, 'Error when obtaining a badge'),
+    new Changelog(changelogType.FIXED, 'Key items not being obtained'),
+    new Changelog(changelogType.FIXED, 'Underground hammer sprite not appearing'),
+    new Changelog(changelogType.FIXED, 'Misc text changes'),
+
     // v0.9.4
     new ChangelogUpdate('v0.9.4', new Date(2022, 4, 26)),
     new Changelog(changelogType.NEW, 'Quest locations now highlighted where possible'),
