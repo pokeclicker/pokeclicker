@@ -174,6 +174,17 @@ class Game {
                 App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest(App.game.quests.getQuestLine('Mystery of Deoxys').curQuest());
             }
         }
+        // Mining expedition questline
+        if (App.game.quests.getQuestLine('Mining Expedition').state() == QuestLineState.inactive) {
+            if (App.game.party.alreadyCaughtPokemon(142)) {
+                // Has obtained Aerodactyl
+                App.game.quests.getQuestLine('Mining Expedition').state(QuestLineState.ended);
+            } else if (App.game.badgeCase.badgeList[BadgeEnums.Soul]()) {
+                // Has the soul badge, Quest is started
+                App.game.quests.getQuestLine('Mining Expedition').state(QuestLineState.started);
+                App.game.quests.getQuestLine('Mining Expedition').beginQuest(App.game.quests.getQuestLine('Mining Expedition').curQuest());
+            }
+        }
         // Check if Koga has been defeated, but have no safari ticket yet
         if (App.game.badgeCase.badgeList[BadgeEnums.Soul]() && !App.game.keyItems.itemList[KeyItemType.Safari_ticket].isUnlocked()) {
             App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
