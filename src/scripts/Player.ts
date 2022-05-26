@@ -82,6 +82,13 @@ class Player {
                 this.regionStarters.push(ko.observable(0));
             } else if (i == (savedPlayer.highestRegion ?? 0)) {
                 this.regionStarters.push(ko.observable(undefined));
+                if (this._region() != i) {
+                    this._region(i);
+                    this._subregion(0);
+                    this.route(undefined);
+                    this._townName = GameConstants.StartingTowns[i];
+                    this._town = ko.observable(TownList[this._townName]);
+                }
                 $('#pickStarterModal').modal('show');
             } else {
                 this.regionStarters.push(ko.observable(undefined));
