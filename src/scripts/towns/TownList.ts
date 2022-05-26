@@ -189,6 +189,10 @@ const OneIslandCelio3 = new NPC ('Celio', [
     'You\'ve been a great help. Thanks again. Maybe we\'ll meet again some day...',
 ],
 { requirement: new QuestLineCompletedRequirement('Bill\'s Errand') });
+const OneIslandYoungster = new NPC ('Youngster', [
+    'Isn\'t it strange how Mol<span style="font-style: italic; font-weight: bold">tres</span> lives on <span style="font-style: italic; font-weight: bold">One</span> Island?',
+],
+{ requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Ember Summit')) });
 const TwoIslandGameCornerOwner1 = new NPC ('Game Corner Owner', [
     'Hello stranger. I\'m afraid the Game Corner is currently closed.',
     'What? The meteorite for Celio? Yes, I can give that to you. But I need you to do something for me first.',
@@ -333,7 +337,7 @@ TownList['One Island'] = new Town(
     [new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Volcano)],
-        npcs: [OneIslandCelio1, OneIslandCelio2, OneIslandCelio3],
+        npcs: [OneIslandCelio1, OneIslandCelio2, OneIslandCelio3, OneIslandYoungster],
     }
 );
 TownList['Mt. Ember'] = new Town(
