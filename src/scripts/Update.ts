@@ -716,6 +716,11 @@ class Update implements Saveable {
             // Remove the Elite_Nihilego Gym, now a temporary battle instead of a gym
             saveData.statistics.gymsDefeated.splice(84, 1);
             saveData.badgeCase.splice(84, 1);
+            // Change Ultra Megalopolis to a Temporary Battle
+            saveData.statistics.temporaryBattleDefeated[1] = saveData.statistics.gymsDefeated[88];
+            // Remove the Elite_ULtraNecrozma Gym, now a temporary battle instead of a gym
+            saveData.statistics.gymsDefeated.splice(88, 1);
+            saveData.badgeCase.splice(88, 1);
         },
     };
 
