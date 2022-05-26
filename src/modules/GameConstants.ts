@@ -848,7 +848,6 @@ export const AlolaGyms = [
     'Acerola\'s Trial',
     'Malie City',
     'Vast Poni Canyon Trial',
-    'Altar of the Sunne and Moone',
     'Mina\'s Trial',
     'Exeggutor Island',
     'Elite Molayne',
@@ -1143,6 +1142,7 @@ export const DockTowns = [
 
 export const TemporaryBattles = [
     'Ultra Wormhole',
+    'Ultra Megalopolis',
 ];
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
