@@ -15,7 +15,8 @@ class PokemonFactory {
         }
         let name: PokemonNameType;
 
-        if (PokemonFactory.roamingEncounter(route, region)) {
+        const roamer = PokemonFactory.roamingEncounter(route, region)
+        if (roamer) {
             name = PokemonFactory.generateRoamingEncounter(route, region);
         } else {
             name = Rand.fromArray(RouteHelper.getAvailablePokemonList(route, region));
@@ -49,6 +50,14 @@ class PokemonFactory {
             // Track shinies encountered, and rate of shinies
             LogEvent('encountered shiny', 'shiny pokemon', 'wild encounter',
                 Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
+        }
+        if (roamer) {
+            Notifier.notify({
+                message: `🌠 You encountered a roamer ${name}! 🌠`,
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.General.roamer,
+                setting: NotificationConstants.NotificationSetting.General.encountered_roamer,
+            });
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, 1, heldItem);
     }
