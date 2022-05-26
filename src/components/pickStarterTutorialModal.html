@@ -1,15 +1,15 @@
-<div class="modal" id="pickStarterModal" tabindex="-1" role="dialog"
-aria-labelledby="pickStarterModalLabel" aria-hidden="true">
+<div class="modal" id="pickStarterTutorialModal" tabindex="-1" role="dialog"
+aria-labelledby="pickStarterTutorialModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
    <div class="modal-content">
        <div class="modal-header">
            <div style="width: 100%;">
                <img src="assets/images/oak.png">
-               <h5 class="modal-title" id="pickStarterModalLabel">Professor Oak</h5>
+               <h5 class="modal-title" id="pickStarterTutorialModalLabel">Professor Oak</h5>
            </div>
        </div>
        <div class="modal-body">
-           <p id="pickStarterModalText">Oh No! We got ambushed by these Pokémon!<br>
+           <p id="pickStarterTutorialModalText">Oh No! We got ambushed by these Pokémon!<br>
                I can only hold off two! Pick the one you want to fight!</p>
            <div class="row justify-content-center">
                <div class="col-lg-8">
@@ -17,17 +17,17 @@ aria-labelledby="pickStarterModalLabel" aria-hidden="true">
                        <div class="col">
                            <input class="image-starter" type="image"
                                   src="assets/images/pokemon/1.png"
-                                  onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Bulbasaur)">
+                                  onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Bulbasaur); player.regionStarters[0](0);">
                        </div>
                        <div class="col">
                            <input class="image-starter" type="image"
                                   src="assets/images/pokemon/4.png"
-                                  onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Charmander)">
+                                  onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Charmander); player.regionStarters[0](1);">
                        </div>
                        <div class="col">
                            <input class="image-starter" type="image"
                                   src="assets/images/pokemon/7.png"
-                                  onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Squirtle)">
+                                  onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Squirtle); player.regionStarters[0](2);">
                        </div>
                    </div>
                </div>

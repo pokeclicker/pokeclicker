@@ -848,7 +848,6 @@ export const AlolaGyms = [
     'Acerola\'s Trial',
     'Malie City',
     'Vast Poni Canyon Trial',
-    'Altar of the Sunne and Moone',
     'Mina\'s Trial',
     'Exeggutor Island',
     'Elite Molayne',
@@ -1155,8 +1154,20 @@ export const DockTowns = [
     'Hulbury', // Galar
 ];
 
+export const RegionalStarters = [
+    [1, 4, 7], // Kanto
+    [152, 155, 158], // Johto
+    [252, 255, 258], // Hoenn
+    [387, 390, 393], // Sinnoh
+    [495, 498, 501], // Unova
+    [650, 653, 656], // Kalos
+    [722, 725, 728], // Alola
+    [810, 813, 816], // Galar
+];
+
 export const TemporaryBattles = [
     'Ultra Wormhole',
+    'Ultra Megalopolis',
 ];
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
