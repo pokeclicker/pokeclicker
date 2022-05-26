@@ -14,7 +14,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                     <div class="tab-pane active">
                         <div class="text-left">
                             <div class="form-row">
-                                <div class="form-group col-md-4 col-4">
+                                <div class="form-group col-md-3 col-3">
                                     <label>Status</label>
                                     <select name="achievementsStatus" class="custom-select" onchange="AchievementHandler.filter.status(this.value), Settings.setSettingByName(this.name, this.value)">
                                         <!-- ko foreach: Settings.getSetting('achievementsStatus').options -->
@@ -22,7 +22,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                         <!-- /ko -->
                                     </select>
                                 </div>
-                                <div class="form-group col-md-4 col-4">
+                                <div class="form-group col-md-3 col-3">
                                     <label>Type</label>
                                     <select name="achievementsType" class="custom-select" onchange="AchievementHandler.filter.type(this.value), Settings.setSettingByName(this.name, this.value)">
                                         <!-- ko foreach: Settings.getSetting('achievementsType').options.filter(r => r.value !== -1) -->
@@ -30,7 +30,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                         <!-- /ko -->
                                     </select>
                                 </div>
-                                <div class="form-group col-md-4 col-4">
+                                <div class="form-group col-md-3 col-3">
                                     <label>Region</label>
                                     <select name="achievementsRegion" class="custom-select" onchange="AchievementHandler.filter.region(this.value), Settings.setSettingByName(this.name, this.value)">
                                         <!-- ko foreach: Settings.getSetting('achievementsRegion').options.filter(r => r.value <= player.highestRegion()) -->
@@ -38,14 +38,8 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                         <!-- /ko -->
                                     </select>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane active">
-                        <div class="text-left">
-                            <div class="form-row">
-                                <div class="form-group col-md-4 col-4">
-                                    <label>Sort by:</label>
+                                <div class="form-group col-md-3 col-3">
+                                    <label>Sort</label>
                                     <div class="input-group" data-bind="with: Settings.getSetting('achievementSort')">
                                         <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, AchievementSortOptions[AchievementSortOptions[this.value]])"
                                                 data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
