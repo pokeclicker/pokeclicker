@@ -235,6 +235,7 @@ class MapHelper {
             LogEvent('attack measurement', 'new region',
                 GameConstants.Region[player.highestRegion()],
                 App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, false));
+            $('#pickStarterModal').modal('show');
         }
     }
 
