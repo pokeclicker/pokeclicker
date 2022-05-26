@@ -400,8 +400,8 @@ class QuestLineHelper {
     public static createSkullAetherAlolaQuestLine() {
         const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
 
-        const clearAetherParadiseGym = new CustomQuest(1, 0, 'A strange creature has appeared in Aether Paradise. Make it go away. Clear the Aether Paradise gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Aether Paradise')]());
-        skullAetherAlolaQuestLine.addQuest(clearAetherParadiseGym);
+        const clearUltraWormhole = new CustomQuest(1, 0, 'A strange creature has appeared in Aether Paradise. Make it go away. Clear the Ultra Wormhole.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ultra Wormhole')]());
+        skullAetherAlolaQuestLine.addQuest(clearUltraWormhole);
 
         const clearMalieGarden = new CustomQuest(1, 0, 'Team Skull are being annoying. Get rid of them. Clear the Malie Garden dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Malie Garden')]());
         skullAetherAlolaQuestLine.addQuest(clearMalieGarden);
@@ -412,7 +412,7 @@ class QuestLineHelper {
         const clearAetherFoundation = new CustomQuest(1, 0, 'Aether president Lusamine has recruited Team Skull in her own plan to stop the Eater of Light. She\'s an idiot. Stop her. Clear the Aether Foundation dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')]());
         skullAetherAlolaQuestLine.addQuest(clearAetherFoundation);
 
-        const AltaroftheSunnandMooneGymReward = () => {
+        const UltraMegalopolisReward = () => {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
             Notifier.notify({
                 title: skullAetherAlolaQuestLine.name,
@@ -422,8 +422,8 @@ class QuestLineHelper {
             });
         };
 
-        const clearAltaroftheSunnandMooneGym = new CustomQuest(1, AltaroftheSunnandMooneGymReward, 'Stop the Eater of Light from absorbing all light in Alola. Clear the Altar of the Sunne and Moone gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Altar of the Sunne and Moone')]());
-        skullAetherAlolaQuestLine.addQuest(clearAltaroftheSunnandMooneGym);
+        const clearUltraMegalopolis = new CustomQuest(1, UltraMegalopolisReward, 'Stop the Eater of Light from absorbing all light in Alola. Clear Ultra Megalopolis at the Altar of the Sunne and Moone.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ultra Megalopolis')]());
+        skullAetherAlolaQuestLine.addQuest(clearUltraMegalopolis);
 
         App.game.quests.questLines().push(skullAetherAlolaQuestLine);
     }
