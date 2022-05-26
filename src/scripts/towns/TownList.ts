@@ -52,6 +52,9 @@ const PewterCityShop = new Shop([
     ItemList['Lucky_egg'],
     ItemList['Mystery_egg'],
 ]);
+const Route3Shop = new Shop([
+    ItemList['Magikarp'],
+]);
 const CeruleanCityShop = new Shop([
     ItemList['Water_stone'],
     ItemList['xAttack'],
@@ -131,6 +134,11 @@ const PewterBattleItemRival = new NPC('Battle Item Master', [
     'Use them to help you out whenever you feel like time is against you!',
 ]);
 
+const Route3ShadySalesman = new NPC('Shady Salesman', [
+    'Have I got a deal just for you!',
+    'I\'ll let you have a super secret Pokémon. For the right price!',
+]);
+
 const CeruleanKantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
     'Bah! You younglings have no appreciation of the art of Berry farming!',
     'Come back when you are ready to learn!',
@@ -183,6 +191,17 @@ TownList['Pewter City'] = new Town(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Viridian Forest')),
         ],
         npcs: [PewterBattleItemRival],
+    }
+);
+TownList['Route 3 Pokémon Center'] = new Town(
+    'Route 3 Pokémon Center',
+    GameConstants.Region.kanto,
+    [Route3Shop],
+    {
+        requirements: [
+            new RouteKillRequirement(10, GameConstants.Region.kanto, 3),
+        ],
+        npcs: [Route3ShadySalesman],
     }
 );
 TownList['Cerulean City'] = new Town(
