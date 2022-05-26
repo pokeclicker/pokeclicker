@@ -721,7 +721,9 @@ class Update implements Saveable {
             // Remove the Elite_ULtraNecrozma Gym, now a temporary battle instead of a gym
             saveData.statistics.gymsDefeated.splice(88, 1);
             saveData.badgeCase.splice(88, 1);
+        },
 
+        '0.9.6': ({ playerData, saveData }) => {
             // Add Mt. Ember Summit
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 8);
             // Add Berry Forest
