@@ -76,19 +76,12 @@ class Player {
             }
         }
         for (let i = 1; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
-            if (savedPlayer.regionStarters && savedPlayer.regionStarters[i]) {
+            if (savedPlayer.regionStarters && savedPlayer.regionStarters[i] != undefined) {
                 this.regionStarters.push(ko.observable(savedPlayer.regionStarters[i]));
             } else if (i < (savedPlayer.highestRegion ?? 0)) {
                 this.regionStarters.push(ko.observable(0));
             } else if (i == (savedPlayer.highestRegion ?? 0)) {
                 this.regionStarters.push(ko.observable(undefined));
-                if (this._region() != i) {
-                    this._region(i);
-                    this._subregion(0);
-                    this.route(undefined);
-                    this._townName = GameConstants.StartingTowns[i];
-                    this._town = ko.observable(TownList[this._townName]);
-                }
                 $('#pickStarterModal').modal('show');
             } else {
                 this.regionStarters.push(ko.observable(undefined));
