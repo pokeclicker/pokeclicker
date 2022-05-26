@@ -28,6 +28,6 @@ export const AchievementSortOptionConfigs: Record<AchievementSortOptions, Achiev
 
     [AchievementSortOptions.bonus]: {
         text: 'Bonus %',
-        getValue: (a) => a.bonusWeight,
+        getValue: (a) => a.bonus,
     },
 };
