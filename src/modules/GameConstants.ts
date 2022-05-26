@@ -553,7 +553,7 @@ export const Environments: Record<string, EnvironmentData> = {
     Mansion: {
         [Region.kanto]: new Set(['Cinnabar Island', 'Pokemon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Burned Tower']),
-        [Region.hoenn]: new Set(['Lavaridge Town', 'Petalburg City', 'Jagged Pass', 'Fiery Path', 'Mt. Chimney']),
+        [Region.hoenn]: new Set(['Lavaridge Town', 'Petalburg City', 'Mt. Chimney', 'Jagged Pass', 'Fiery Path', 'Mt. Chimney Crater']),
         [Region.sinnoh]: new Set(['Old Chateau', 'Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Liberty Garden', 'Dreamyard', 'Mistralton City', 'Opelucid City']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
@@ -711,17 +711,6 @@ export const EnergyRestoreEffect = {
     LargeRestore: 0.5,
 };
 
-export const KeyCodeToDirection = {
-    ArrowUp: 'up',
-    ArrowLeft: 'left',
-    ArrowDown: 'down',
-    ArrowRight: 'right',
-    W: 'up',
-    A: 'left',
-    S: 'down',
-    D: 'right',
-};
-
 export const FossilToPokemon = {
     'Helix Fossil': 'Omanyte',
     'Dome Fossil': 'Kabuto',
@@ -859,7 +848,6 @@ export const AlolaGyms = [
     'Acerola\'s Trial',
     'Malie City',
     'Vast Poni Canyon Trial',
-    'Altar of the Sunne and Moone',
     'Mina\'s Trial',
     'Exeggutor Island',
     'Elite Molayne',
@@ -944,7 +932,7 @@ export const HoennDungeons = [
     'Granite Cave',
     'Fiery Path',
     'Meteor Falls',
-    'Mt. Chimney',
+    'Mt. Chimney Crater',
     'Jagged Pass',
     'New Mauville',
     'Weather Institute',
@@ -1154,8 +1142,20 @@ export const DockTowns = [
     'Hulbury', // Galar
 ];
 
+export const RegionalStarters = [
+    [1, 4, 7], // Kanto
+    [152, 155, 158], // Johto
+    [252, 255, 258], // Hoenn
+    [387, 390, 393], // Sinnoh
+    [495, 498, 501], // Unova
+    [650, 653, 656], // Kalos
+    [722, 725, 728], // Alola
+    [810, 813, 816], // Galar
+];
+
 export const TemporaryBattles = [
     'Ultra Wormhole',
+    'Ultra Megalopolis',
 ];
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

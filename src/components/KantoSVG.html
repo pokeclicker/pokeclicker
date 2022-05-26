@@ -1,7 +1,10 @@
 <g data-bind='visible: player.region == GameConstants.Region.kanto'>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Kanto').id">
-        <image width="1600" height="960" xlink:href="assets/images/kanto-kanto.png" href="assets/images/kanto-kanto.png"></image>
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/kanto-kanto.png?v=$VERSION',
+            href:'assets/images/kanto-kanto.png?v=$VERSION'
+        }"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
@@ -530,7 +533,7 @@
             , x: 37, y: 54
             })
         %>
-	 
+
         <!--Seafoam Islands extension-->
         <%- include('templates/mapDungeon',
             { name: "Seafoam Islands"
