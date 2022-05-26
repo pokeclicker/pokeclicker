@@ -47,8 +47,8 @@ class Preload {
             return new Promise(resolve => {
                 //If you want to skip waiting, resolve immediately
                 resolve();
-                Preload.loadTowns();
-                Preload.loadUndergroundItems();
+                // Preload.loadTowns();
+                // Preload.loadUndergroundItems();
                 // Preload.loadMap();
                 // Preload.loadPokemon(),
                 Preload.hideSplashScreen(true);
@@ -62,8 +62,8 @@ class Preload {
                 }, GameConstants.MAX_LOAD_TIME);
 
                 Promise.all([
-                    Preload.loadTowns(),
-                    Preload.loadUndergroundItems(),
+                    // Preload.loadTowns(),
+                    // Preload.loadUndergroundItems(),
                     // Preload.loadMap(),
                     // Preload.loadPokemon(),
                     Preload.minimumTime(),

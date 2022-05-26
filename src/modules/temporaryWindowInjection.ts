@@ -33,6 +33,7 @@ import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
 import Settings from './settings/index';
 import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
+import { AchievementSortOptionConfigs, AchievementSortOptions } from './achievements/AchievementSortOptions';
 import NotificationConstants from './notifications/NotificationConstants';
 import Notifier from './notifications/Notifier';
 import LogBook from './logbook/LogBook';
@@ -147,6 +148,8 @@ Object.assign(<any>window, {
     Notifier,
     SortOptionConfigs,
     SortOptions,
+    AchievementSortOptionConfigs,
+    AchievementSortOptions,
     LogBook,
     LogBookTypes,
     ChangelogItems,
