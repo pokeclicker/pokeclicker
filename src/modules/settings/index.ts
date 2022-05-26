@@ -251,8 +251,13 @@ Settings.add(new HotkeySetting('hotkey.dungeon.down', 'Move Down', 'S', { prefix
 Settings.add(new HotkeySetting('hotkey.dungeon.right', 'Move Right', 'D', { prefix: '→ or ' }));
 Settings.add(new HotkeySetting('hotkey.dungeon.interact', 'Interact', 'Space'));
 
-Settings.add(new HotkeySetting('hotkey.town.start', 'Start Gym/Dungeon', 'Space'));
+Settings.add(new HotkeySetting('hotkey.town.start', 'Starts first content in the town', 'Space'));
 Settings.add(new HotkeySetting('hotkey.forceSave', 'Force save game', 'S', { prefix: 'Shift + ' }));
+
+Settings.add(new HotkeySetting('hotkey.shop.buy', 'Buy item', 'B'));
+Settings.add(new HotkeySetting('hotkey.shop.max', 'Select max amount', 'M'));
+Settings.add(new HotkeySetting('hotkey.shop.reset', 'Reset amount', 'R'));
+Settings.add(new HotkeySetting('hotkey.shop.increase', 'Increase amount', 'I'));
 
 /*
  * SUBSCRIBERS
