@@ -85,7 +85,7 @@ class BattleFrontierRunner {
     public static battleQuit() {
         Notifier.confirm({
             title: 'Battle Frontier',
-            message: 'Are you sure you want to leave?\n\nYou will not receive any Battle Points for the stages already completed.',
+            message: 'Are you sure you want to leave?\n\nYou can always return later and start off where you left.',
             type: NotificationConstants.NotificationOption.danger,
             confirm: 'leave',
         }).then(confirmed => {
@@ -93,7 +93,7 @@ class BattleFrontierRunner {
                 // Don't give any points, user quit the challenge
                 Notifier.notify({
                     title: 'Battle Frontier',
-                    message: `You made it to stage ${this.stage()}`,
+                    message: `Checkpoint set for stage ${this.stage()}`,
                     type: NotificationConstants.NotificationOption.info,
                     timeout: 1 * GameConstants.MINUTE,
                 });
