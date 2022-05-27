@@ -93,7 +93,7 @@ class Egg implements Saveable {
         return !this.isNone() && this.steps() >= this.totalSteps;
     }
 
-    hatch(efficiency = 100): boolean {
+    hatch(efficiency = 100, helper = false): boolean {
         if (!this.canHatch()) {
             return false;
         }
@@ -114,7 +114,7 @@ class Egg implements Saveable {
                 partyPokemon.exp = 0;
                 partyPokemon.level = 1;
                 partyPokemon.breeding = false;
-                if (partyPokemon.canCatchPokerus()) {
+                if (partyPokemon.canCatchPokerus() && !helper) {
                     if (!partyPokemon.pokerus) {
                         partyPokemon.pokerus = partyPokemon.calculatePokerus();
                     }
