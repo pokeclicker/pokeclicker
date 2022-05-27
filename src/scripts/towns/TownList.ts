@@ -113,6 +113,9 @@ const LavenderTownShop = new Shop([
     ItemList['Grass_egg'],
 ]);
 
+//Kanto Shard Master
+const KantoShardMaster = new ShardMasterShop([]);
+
 // Kanto NPCs
 
 const PalletProfOak = new ProfOakNPC('Prof. Oak', [
@@ -167,7 +170,7 @@ const CinnabarIslandResearcher = new NPC('Researcher', [
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
     GameConstants.Region.kanto,
-    [],
+    [KantoShardMaster],
     {
         npcs: [PalletProfOak],
     }

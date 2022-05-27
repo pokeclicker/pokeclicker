@@ -99,6 +99,7 @@ class Game {
         BerryDeal.generateDeals(now);
         Weather.generateWeather(now);
         GemDeal.generateDeals();
+        ShardDeal.generateDeals();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
         this.computeOfflineEarnings();
