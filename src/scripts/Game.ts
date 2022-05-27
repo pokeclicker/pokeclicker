@@ -193,6 +193,13 @@ class Game {
         if (App.game.badgeCase.badgeList[BadgeEnums.Earth]() && !App.game.keyItems.itemList[KeyItemType.Gem_case].isUnlocked()) {
             App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
         }
+        // Check that none of our quest are less than their initial value
+        App.game.quests.questLines().filter(q => q.state() == 1).forEach(questLine => {
+            const quest = questLine.curQuestObject();
+            if (quest.initial() > quest.focus()) {
+                quest.initial(quest.focus());
+            }
+        });
     }
 
     start() {
