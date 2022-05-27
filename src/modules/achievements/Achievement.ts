@@ -12,6 +12,7 @@ export default class Achievement {
     public isCompleted: KnockoutComputed<boolean> = ko.pureComputed(() => this.achievable() && (this.unlocked || this.property.isCompleted()));
     public getProgressText: KnockoutComputed<string> = ko.pureComputed(() => `${this.getProgress()}/${this.property.requiredValue}`);
     public bonus = 0;
+    public unlocked = false;
 
     constructor(
         public name: string,
@@ -19,7 +20,6 @@ export default class Achievement {
         public property: AchievementRequirement,
         public bonusWeight: number,
         public region: GameConstants.Region,
-        public unlocked = false,
         public achievableFunction: () => boolean | null = null,
     ) {}
 
@@ -37,7 +37,6 @@ export default class Achievement {
                 LogBookTypes.ACHIEVE,
                 `Earned "${this.name}".`,
             );
-            player.achievementsCompleted[this.name] = true;
             this.unlocked = true;
             // TODO: refilter within achievement bonus
             // AchievementHandler.filterAchievementList(true);

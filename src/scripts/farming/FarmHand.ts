@@ -37,6 +37,15 @@ const FarmHandBerryTypes = {
 type FarmHandBerryTypes = (typeof FarmHandBerryTypes)[keyof typeof FarmHandBerryTypes];
 
 class FarmHand {
+    public defaults = {
+        focus: BerryType.None,
+        shouldHarvest: false,
+        workTicks: 0,
+        costTicks: 0,
+        energy: 0,
+        hired: false,
+        plots: [],
+    };
     // Maximum Efficiency value
     public maxEfficiency = 50;
     // Negative value so they are charged on the first tick and work on the first tick
@@ -266,20 +275,37 @@ class FarmHand {
     }
 
     toJSON(): Record<string, any> {
-        return ko.toJS(this);
+        const output = {
+            focus: this.focus(),
+            shouldHarvest: this.shouldHarvest(),
+            workTicks: this.workTicks(),
+            costTicks: this.costTicks(),
+            energy: this.energy(),
+            hired: this.hired(),
+            plots: this.plots(),
+        };
+
+        // Don't save anything that is the default option
+        Object.entries(output).forEach(([key, value]) => {
+            if (value === this.defaults[key]) {
+                delete output[key];
+            }
+        });
+
+        return output;
     }
 
     fromJSON(json: Record<string, any>): void {
         if (!json) {
             return;
         }
-        this.focus(json.focus || BerryType.None);
-        this.shouldHarvest(json.shouldHarvest || false);
-        this.workTicks(json.workTicks || 0);
-        this.costTicks(json.costTicks || 0);
-        this.energy(json.energy || 0);
-        this.hired(json.hired || false);
-        this.plots(json.plots || []);
+        this.focus(json.focus || this.defaults.focus);
+        this.shouldHarvest(json.shouldHarvest || this.defaults.shouldHarvest);
+        this.workTicks(json.workTicks || this.defaults.workTicks);
+        this.costTicks(json.costTicks || this.defaults.costTicks);
+        this.energy(json.energy || this.defaults.energy);
+        this.hired(json.hired || this.defaults.hired);
+        this.plots(json.plots || this.defaults.plots);
     }
 }
 

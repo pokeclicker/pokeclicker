@@ -1210,15 +1210,6 @@ GymList['Konikoni City'] = new Gym(
         App.game.quests.getQuestLine('Eater of Light').beginQuest();
     }
 );
-GymList['Aether Paradise'] = new Gym(
-    'Ultra Wormhole',
-    'Aether Paradise',
-    [new GymPokemon('???', 132295486, 27)],
-    BadgeEnums.Elite_Nihilego,
-    128000,
-    'The creature escaped back into the ultra wormhole.',
-    [new GymBadgeRequirement(BadgeEnums.RockiumZ)]
-);
 GymList['Malie City'] = new Gym(
     'Nanu',
     'Malie City',
@@ -1231,15 +1222,6 @@ GymList['Malie City'] = new Gym(
     128000,
     'Hmph...',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))]
-);
-GymList['Altar of the Sunne and Moone'] = new Gym(
-    'Ultra Megalopolis',
-    'Altar of the Sunne and Moone',
-    [new GymPokemon('Necrozma (Ultra)', 141300960, 60)],
-    BadgeEnums.Elite_UltraNecrozma,
-    128000,
-    'Necrozma fled.',
-    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)]
 );
 GymList['Exeggutor Island'] = new Gym(
     'Hapu',
