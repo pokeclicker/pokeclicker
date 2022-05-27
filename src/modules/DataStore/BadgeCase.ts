@@ -4,6 +4,7 @@ import BadgeEnums from '../enums/Badges';
 import GameHelper from '../GameHelper';
 import { camelCaseToString } from '../GameConstants';
 import LogEvent from '../LogEvent';
+import WeatherType from '../weather/WeatherType';
 
 const emptyBadgeList = new Array(GameHelper.enumLength(BadgeEnums)).fill(false);
 
@@ -33,7 +34,7 @@ export default class BadgeCase implements Feature {
 
         // Track when users gains a badge and their total attack
         LogEvent('gained badge', 'badges', `gained badge (${camelCaseToString(BadgeEnums[badge])})`,
-            App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, false));
+            App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, WeatherType.Clear));
     }
 
     hasBadge(badge: BadgeEnums): boolean {
