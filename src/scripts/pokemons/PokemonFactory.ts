@@ -176,6 +176,15 @@ class PokemonFactory {
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_BOSS_GEMS, heldItem);
     }
 
+    public static generateTemporaryBattlePokemon(battle: TemporaryBattle, index: number): BattlePokemon {
+        const pokemon = battle.pokemons[index];
+        const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
+
+        const exp: number = basePokemon.exp * 1.5;
+        const shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS);
+    }
+
     private static generateRoamingEncounter(route: number, region: GameConstants.Region): PokemonNameType {
         const possible = RoamingPokemonList.getRegionalRoamers(region);
 
