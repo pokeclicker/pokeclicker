@@ -3135,7 +3135,7 @@ TownList['Split-Decision Ruins'] = new DungeonTown(
             new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Iron Ruins')),
             new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Iceberg Ruins')),
         ]),
-    ],
+    ]
 );
 TownList['Lakeside Cave'] = new DungeonTown(
     'Lakeside Cave',
