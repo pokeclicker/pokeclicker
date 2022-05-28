@@ -148,11 +148,11 @@
                                 <!-- /ko -->
                                 <div class="plot col" data-bind="css: { plotLocked : !$data.isUnlocked }">
                                     <div class="plot-content" data-bind="class: FarmController.calculateCssClass()">
-                                        <div class="plotImage" style="position:relative;">
+                                        <div class="plotImage">
                                             <img style="width: 100%" src="assets/images/farm/soil.png"
                                                 data-bind="class: FarmController.calcMulchClass($data)">
                                             <!-- ko if: $data.isSafeLocked -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#fff" style="position:absolute;bottom: 5px;right:5px;height: 1rem;width: 1rem;">
+                                            <svg class="plotLockSignIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#fff">
                                                 <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
                                             </svg>
                                             <!-- /ko -->
