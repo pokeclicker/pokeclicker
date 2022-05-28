@@ -1083,6 +1083,10 @@ class Farming implements Feature {
 
     //#endregion
 
+    togglePlotSafeLock(index: number) {
+        this.plotList[index].isSafeLocked = !this.plotList[index].isSafeLocked;
+    }
+
     plant(index: number, berry: BerryType, suppressResetAura = false) {
         const plot = this.plotList[index];
         if (!plot.isEmpty() || !plot.isUnlocked || !this.hasBerry(berry)) {
@@ -1110,7 +1114,7 @@ class Farming implements Feature {
      */
     harvest(index: number, suppressResetAura = false): void {
         const plot = this.plotList[index];
-        if (plot.berry === BerryType.None || plot.stage() != PlotStage.Berry) {
+        if (plot.berry === BerryType.None || plot.stage() != PlotStage.Berry || plot.isSafeLocked) {
             return;
         }
 
@@ -1149,6 +1153,9 @@ class Farming implements Feature {
     public shovel(index: number): void {
         const plot = this.plotList[index];
         if (!plot.isUnlocked) {
+            return;
+        }
+        if (plot.isSafeLocked) {
             return;
         }
         if (plot.isEmpty()) {
@@ -1233,7 +1240,7 @@ class Farming implements Feature {
 
     private canMulch(index: number, mulch: MulchType) {
         const plot = this.plotList[index];
-        if (!plot.isUnlocked || !this.hasMulch(mulch)) {
+        if (!plot.isUnlocked || !this.hasMulch(mulch) || plot.isSafeLocked) {
             return false;
         }
         if (plot.mulch != MulchType.None && plot.mulch != mulch) {

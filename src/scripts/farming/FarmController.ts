@@ -80,25 +80,42 @@ class FarmController {
         return MulchType[plot.mulch];
     }
 
-    public static plotClick(index: number) {
+    public static plotClick(index: number, event: MouseEvent) {
         const plot: Plot = App.game.farming.plotList[index];
+
+        if (event.shiftKey) {
+            this.handleShiftClickActions(plot, index);
+        } else {
+            this.handleClickActions(plot, index);
+        }
+    }
+
+    private static handleShiftClickActions(plot: Plot, index: number) {
+        if (!plot.isUnlocked) {
+            return;
+        }
+
+        App.game.farming.togglePlotSafeLock(index);
+    }
+
+    private static handleClickActions(plot: Plot, index: number) {
         // Unlocking Plot
         if (!plot.isUnlocked) {
             App.game.farming.unlockPlot(index);
-        // Handle Shovel
+            // Handle Shovel
         } else if (this.selectedShovel()) {
             App.game.farming.shovel(index);
-        //Handle Mulch Shovel
+            //Handle Mulch Shovel
         } else if (this.selectedMulchShovel()) {
             App.game.farming.shovelMulch(index);
-        // Handle Berries
+            // Handle Berries
         } else if (this.berryListVisible()) {
             if (plot.isEmpty()) {
                 App.game.farming.plant(index, this.selectedBerry());
             } else {
                 App.game.farming.harvest(index);
             }
-        // Handle Mulches
+            // Handle Mulches
         } else {
             App.game.farming.addMulch(index, this.selectedMulch(), this.getAmount());
         }
