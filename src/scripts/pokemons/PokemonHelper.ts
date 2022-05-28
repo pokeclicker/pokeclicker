@@ -385,7 +385,7 @@ class PokemonHelper {
         return encounterTypes;
     }
 
-    public static displayName(id: number): KnockoutComputed<string> {
-        return App.translation.get(String(id), 'pokemon');
+    public static displayName(englishName: string): KnockoutComputed<string> {
+        return App.translation.get(englishName, 'pokemon');
     }
 }
