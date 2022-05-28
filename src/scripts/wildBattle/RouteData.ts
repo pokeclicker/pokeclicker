@@ -1725,7 +1725,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Skwovet', 'Rookidee', 'Blipbug', 'Wooloo', 'Nickit', 'Caterpie', 'Hoothoot', 'Grubbin'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)]
 ));
 Routes.add(new RegionRoute(
     'Galar Route 2', GameConstants.Region.galar, 2,
@@ -1912,7 +1912,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, GameConstants.Region.galar, 6),
             new RouteKillRequirement(10, GameConstants.Region.galar, 25),
         ]),
-    ],
+    ]
 ));
 Routes.add(new RegionRoute(
     'Watchtower Ruins', GameConstants.Region.galar, 11,
@@ -1994,7 +1994,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, GameConstants.Region.galar, 9),
             new GymBadgeRequirement(BadgeEnums.Galar_Fire),
         ]),
-    ],
+    ]
 ));
 Routes.add(new RegionRoute(
     'Bridge Field', GameConstants.Region.galar, 17,
@@ -2060,7 +2060,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, GameConstants.Region.galar, 18),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dusty Bowl')),
         ]),
-    ],
+    ]
 ));
 Routes.add(new RegionRoute(
     'Giant\'s Cap', GameConstants.Region.galar, 20,
@@ -2072,7 +2072,7 @@ Routes.add(new RegionRoute(
       [
           new SpecialRoutePokemon(['Noctowl', 'Galarian Linoone', 'Liepard', 'Scraggy', 'Croagunk', 'Nuzleaf', 'Lombre', 'Dottler', 'Eldegoss', 'Stunky', 'Doublade', 'Cinccino', 'Gengar'], new WeatherRequirement([WeatherType.Clear])),
           new SpecialRoutePokemon(['Galarian Linoone', 'Scraggy', 'Croagunk', 'Gloom', 'Noctowl', 'Eldegoss', 'Dottler', 'Munna', 'Karrablast', 'Shelmet', 'Doublade', 'Cinccino', 'Gengar'], new WeatherRequirement([WeatherType.Overcast])),
-          new SpecialRoutePokemon(['Quagsire', 'Noctowl', 'Galarian Linoone', 'Palpitoad', 'Shellos (east)', 'Dottler', 'Eldegoss', 'Doublade', 'Seismitoad','Golisopod',], new WeatherRequirement([WeatherType.Rain])),
+          new SpecialRoutePokemon(['Quagsire', 'Noctowl', 'Galarian Linoone', 'Palpitoad', 'Shellos (east)', 'Dottler', 'Eldegoss', 'Doublade', 'Seismitoad','Golisopod'], new WeatherRequirement([WeatherType.Rain])),
           new SpecialRoutePokemon(['Quagsire', 'Manectric', 'Noctowl', 'Joltik', 'Toxel', 'Shellos (east)', 'Dottler', 'Doublade', 'Galvantula', 'Gengar'], new WeatherRequirement([WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Vanillite', 'Sneasel', 'Galarian Linoone', 'Noctowl', 'Snover', 'Snorunt', 'Delibird', 'Dottler', 'Doublade', 'Glalie', 'Beartic'], new WeatherRequirement([WeatherType.Snow])),
           new SpecialRoutePokemon(['Sneasel', 'Vanillite', 'Galarian Linoone', 'Riolu', 'Snorunt', 'Pawniard', 'Delibird', 'Dottler', 'Doublade', 'Glalie', 'Gengar'], new WeatherRequirement([WeatherType.Blizzard])),
@@ -2087,7 +2087,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, GameConstants.Region.galar, 21),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dusty Bowl')),
         ]),
-    ],
+    ]
 ));
 Routes.add(new RegionRoute(
     'Lake of Outrage', GameConstants.Region.galar, 21,
@@ -2113,7 +2113,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, GameConstants.Region.galar, 20),
             new RouteKillRequirement(10, GameConstants.Region.galar, 25),
         ]),
-    ],
+    ]
 ));
 Routes.add(new RegionRoute(
     'Hammerlocke Hills', GameConstants.Region.galar, 22,
@@ -2138,7 +2138,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, GameConstants.Region.galar, 20),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dusty Bowl')),
         ]),
-    ],
+    ]
 ));
 Routes.add(new RegionRoute(
     'Galar Route 6', GameConstants.Region.galar, 23,
