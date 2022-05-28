@@ -17,6 +17,7 @@ export default class Translate {
                 lng: languageSetting.value,
                 debug: true,
                 ns: ['test', 'pokemon'],
+                fallbackLng: 'en',
             });
 
         languageSetting.observableValue.subscribe((val) => {
