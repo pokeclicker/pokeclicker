@@ -90,4 +90,3 @@ ItemList['Clover_sweet']      = new EvolutionStone(GameConstants.StoneType.Clove
 ItemList['Flower_sweet']      = new EvolutionStone(GameConstants.StoneType.Flower_sweet, 2500, undefined , 'Flower Sweet');
 ItemList['Star_sweet']        = new EvolutionStone(GameConstants.StoneType.Star_sweet, 2500, undefined , 'Star Sweet');
 ItemList['Ribbon_sweet']      = new EvolutionStone(GameConstants.StoneType.Ribbon_sweet, 2500, undefined , 'Ribbon Sweet');
-ItemList['Wishing_star']      = new EvolutionStone(GameConstants.StoneType.Wishing_star, 25000, undefined , 'Wishing Star');

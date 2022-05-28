@@ -3051,6 +3051,7 @@ TownList['Glimwood Tangle'] = new DungeonTown(
             new GymBadgeRequirement(BadgeEnums.Galar_Fighting),
             new GymBadgeRequirement(BadgeEnums.Galar_Ghost),
         ]),
+    ]
 );
 TownList['Rose Tower'] = new DungeonTown(
     'Rose Tower',

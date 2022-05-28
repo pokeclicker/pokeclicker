@@ -6643,7 +6643,7 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
         96500, 201);
 
     dungeonList['Courageous Cavern'] = new Dungeon('Courageous Cavern',
-        ['Pincurchin', 'Dwebble', 'Crustle', 'Swoobat', 'Magikarp'. 'Shellder', 'Cloyster', 'Tentacool', 'Clobbopus', 'Chewtle', 'Tentacruel', 'Whiscash'],
+        ['Pincurchin', 'Dwebble', 'Crustle', 'Swoobat', 'Magikarp', 'Shellder', 'Cloyster', 'Tentacool', 'Clobbopus', 'Chewtle', 'Tentacruel', 'Whiscash'],
         [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
         2203000,
         [
