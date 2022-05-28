@@ -149,13 +149,19 @@ class Save {
         for (const obj in GameConstants.BattleItemType) {
             res[obj] = ko.observable(saved ? saved[obj] || 0 : 0);
         }
+        for (const obj in GameConstants.FluteItemType) {
+            res[obj] = ko.observable(saved ? saved[obj] || 0 : 0);
+        }
         return res;
     }
 
-    public static initializeEffectTimer(saved?: Array<string>): { [name: string]: KnockoutObservable<string> } {
+    public static initializeEffectTimer(): { [name: string]: KnockoutObservable<string> } {
         const res = {};
         for (const obj in GameConstants.BattleItemType) {
-            res[obj] = ko.observable(saved ? saved[obj] || '00:00' : '00:00');
+            res[obj] = ko.observable('00:00');
+        }
+        for (const obj in GameConstants.FluteItemType) {
+            res[obj] = ko.observable('00:00');
         }
         return res;
     }
