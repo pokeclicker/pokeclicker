@@ -52,6 +52,9 @@ const PewterCityShop = new Shop([
     ItemList['Lucky_egg'],
     ItemList['Mystery_egg'],
 ]);
+const Route3Shop = new Shop([
+    ItemList['Magikarp'],
+]);
 const CeruleanCityShop = new Shop([
     ItemList['Water_stone'],
     ItemList['xAttack'],
@@ -115,10 +118,11 @@ const LavenderTownShop = new Shop([
 
 // Kanto NPCs
 
-const PalletProfOak = new ProfOakNPC('Prof. Oak', [
-    'Good luck on your journey!',
-    'Come visit me when you complete your Pokédex!',
-]);
+const PalletProfOak = new ProfNPC('Prof. Oak',
+    GameConstants.Region.kanto,
+    'Congratulations on completing your Kanto Pokédex!',
+    'Your journey isn\'t over yet, a whole world awaits you! Onwards to Johto!',
+    'assets/images/oak.png');
 
 const ViridianCityOldMan = new NPC('Old Man', [
     'Ahh, I\'ve had my coffee now and I feel great!',
@@ -128,6 +132,11 @@ const ViridianCityOldMan = new NPC('Old Man', [
 const PewterBattleItemRival = new NPC('Battle Item Master', [
     'Hey kid, you look new! Let me offer some advice, Battle Items like xAttack can be acquired along Routes, inside Dungeons and in Shops!',
     'Use them to help you out whenever you feel like time is against you!',
+]);
+
+const Route3ShadySalesman = new NPC('Shady Salesman', [
+    'Have I got a deal just for you!',
+    'I\'ll let you have a super secret Pokémon. For the right price!',
 ]);
 
 const CeruleanKantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
@@ -182,6 +191,17 @@ TownList['Pewter City'] = new Town(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Viridian Forest')),
         ],
         npcs: [PewterBattleItemRival],
+    }
+);
+TownList['Route 3 Pokémon Center'] = new Town(
+    'Route 3 Pokémon Center',
+    GameConstants.Region.kanto,
+    [Route3Shop],
+    {
+        requirements: [
+            new RouteKillRequirement(10, GameConstants.Region.kanto, 3),
+        ],
+        npcs: [Route3ShadySalesman],
     }
 );
 TownList['Cerulean City'] = new Town(
@@ -454,6 +474,11 @@ const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
     'On the news they are getting more reports of roaming Pokémon appearing on {ROUTE_NAME}!',
 ], GameConstants.Region.johto);
 
+const ProfElm = new ProfNPC('Prof. Elm',
+    GameConstants.Region.johto,
+    'Oh, another regional Pokédex completed so soon?',
+    'Amazing! Next stop is Hoenn, enjoy the sunshine while you\'re there!');
+
 
 //Johto Towns
 TownList['New Bark Town'] = new Town(
@@ -462,7 +487,7 @@ TownList['New Bark Town'] = new Town(
     [NewBarkTownShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
-        npcs: [NewBarkTechnologyEnthusiast],
+        npcs: [ProfElm, NewBarkTechnologyEnthusiast],
     }
 );
 TownList['Cherrygrove City'] = new Town(
@@ -663,6 +688,7 @@ const MauvilleCityShop = new Shop([
     ItemList['Electric_egg'],
     ItemList['Thunder_stone'],
     ItemList['Metal_coat'],
+    ItemList['HatcheryHelperJasmine'],
 ]);
 const VerdanturfTownShop = new Shop([
     ItemList['Grass_egg'],
@@ -719,6 +745,9 @@ const HoennBerryMaster = new BerryMasterShop([
     ItemList['FarmHandKerry'],
 ]);
 
+//Hoenn Flute Master
+const HoennFluteMaster = new GemMasterShop([]);
+
 //Hoenn NPCs
 
 const LittlerootAide = new NPC('Professor Birch\'s Aide', [
@@ -739,6 +768,12 @@ const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
     'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...',
+]);
+
+const LavaridgeSootCollector = new NPC('Soot Collector', [
+    'Blegh! I\'ve taken three soaks in the hot springs and I can still taste the soot!',
+    'The Flute Trader in Fallarbor Town has been paying me to go collect soot to make Flutes, but I\'m sick of it.',
+    'People say they have truly mystical powers, but that they require Gems of different types to use. Also, using more Flutes at the same time costs more Gems to use',
 ]);
 
 const FortreeWeatherman = new NPC('Weatherman', [
@@ -763,6 +798,11 @@ const SootopolisWallace = new NPC('Gym Leader Wallace', [
     'You will have to overcome the Pokémon League before you have any chance to encounter them.',
 ]);
 
+const ProfBirch = new ProfNPC('Prof. Birch',
+    GameConstants.Region.hoenn,
+    'That\'s another regional Pokédex completed! Fantastic.',
+    'I really appreciate being able to see your outstanding progress, thank you! Sinnoh is next up.');
+
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
@@ -770,7 +810,7 @@ TownList['Littleroot Town'] = new Town(
     [LittleRootTownShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
-        npcs: [LittlerootAide],
+        npcs: [ProfBirch, LittlerootAide],
     }
 );
 TownList['Oldale Town'] = new Town(
@@ -834,6 +874,14 @@ TownList['Verdanturf Town'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 117)],
     }
 );
+TownList['Mt. Chimney'] = new Town(
+    'Mt. Chimney',
+    GameConstants.Region.hoenn,
+    [new MoveToDungeon(dungeonList['Fiery Path']), new MoveToDungeon(dungeonList['Mt. Chimney Crater']), new MoveToDungeon(dungeonList['Jagged Pass']), new MoveToDungeon(dungeonList['Magma Hideout'])],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 112)],
+    }
+);
 TownList['Lavaridge Town'] = new Town(
     'Lavaridge Town',
     GameConstants.Region.hoenn,
@@ -845,7 +893,7 @@ TownList['Lavaridge Town'] = new Town(
 TownList['Fallarbor Town'] = new Town(
     'Fallarbor Town',
     GameConstants.Region.hoenn,
-    [FallarborTownShop],
+    [FallarborTownShop, HoennFluteMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 113)],
         npcs: [FallarborProfessorCozmo],
@@ -953,15 +1001,15 @@ TownList['Meteor Falls'] = new DungeonTown(
     GameConstants.Region.hoenn,
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 114)]
 );
-TownList['Mt. Chimney'] = new DungeonTown(
-    'Mt. Chimney',
+TownList['Mt. Chimney Crater'] = new DungeonTown(
+    'Mt. Chimney Crater',
     GameConstants.Region.hoenn,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Meteor Falls'))]
 );
 TownList['Jagged Pass'] = new DungeonTown(
     'Jagged Pass',
     GameConstants.Region.hoenn,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Chimney'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Chimney Crater'))]
 );
 TownList['New Mauville'] = new DungeonTown(
     'New Mauville',
@@ -1169,6 +1217,13 @@ const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
     'I spotted a bunch of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.sinnoh);
 
+const ProfRowan = new ProfNPC('Prof. Rowan',
+    GameConstants.Region.sinnoh,
+    'Congratulations, you\'re more than half-way completed on the national Pokédex!',
+    'Next stop is Unova! I\'ve always wanted to visit Castelia City personally...');
+
+
+
 //Sinnoh Towns
 TownList['Twinleaf Town'] = new Town(
     'Twinleaf Town',
@@ -1185,7 +1240,7 @@ TownList['Sandgem Town'] = new Town(
     [],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 201)],
-        npcs: [SandgemBeachcomber],
+        npcs: [ProfRowan, SandgemBeachcomber],
     }
 );
 TownList['Jubilife City'] = new Town(
@@ -1224,6 +1279,14 @@ TownList['Eterna City'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Eterna Forest'))],
         npcs: [EternaLassCaroline],
+    }
+);
+TownList['Mt. Coronet'] = new Town(
+    'Mt. Coronet',
+    GameConstants.Region.sinnoh,
+    [new MoveToDungeon(dungeonList['Mt. Coronet South']), new MoveToDungeon(dungeonList['Mt. Coronet North']), new MoveToDungeon(dungeonList['Spear Pillar']), new MoveToDungeon(dungeonList['Hall of Origin'])],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 207)],
     }
 );
 TownList['Hearthome City'] = new Town(
@@ -1563,6 +1626,9 @@ const AnvilleTownShop = new Shop([
     ItemList['Meloetta (pirouette)'],
 ]);
 
+//Unova Gem Master
+const UnovaFluteMaster = new GemMasterShop([]);
+
 //Unova NPCs
 const ExcitedChild = new NPC('Excited Child', [
     'Did you hear? Did you see? It was on TV!',
@@ -1592,6 +1658,11 @@ const UnovaRoamerNPC = new RoamerNPC('Professor Juniper\'s Aide', [
     'Our research indicates a higher concentration of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.unova);
 
+const ProfJuniper = new ProfNPC('Prof. Juniper',
+    GameConstants.Region.unova,
+    'Let me see your progress...Ah, fantastic, as usual!',
+    'Allow me some time to arrange tickets for your next destination.');
+
 //Unova Towns
 TownList['Aspertia City'] = new Town(
     'Aspertia City',
@@ -1599,6 +1670,7 @@ TownList['Aspertia City'] = new Town(
     [AspertiaCityShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
+        npcs: [],
     }
 );
 TownList['Floccesy Town'] = new Town(
@@ -1671,7 +1743,7 @@ TownList['Lentimas Town'] = new Town(
 TownList['Undella Town'] = new Town(
     'Undella Town',
     GameConstants.Region.unova,
-    [UndellaTownShop],
+    [UndellaTownShop, UnovaFluteMaster],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))],
     }
@@ -1765,7 +1837,7 @@ TownList['Nuvema Town'] = new Town(
     [NuvemaTownShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 1)],
-        npcs: [UnovaRoamerNPC],
+        npcs: [ProfJuniper, UnovaRoamerNPC],
     }
 );
 TownList['Anville Town'] = new Town(
@@ -1819,7 +1891,10 @@ TownList['Castelia Sewers'] = new DungeonTown(
 TownList['Relic Passage'] = new DungeonTown(
     'Relic Passage',
     GameConstants.Region.unova,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Castelia Sewers'))]
+    [
+        new RouteKillRequirement(10, GameConstants.Region.unova,5),
+        new GymBadgeRequirement(BadgeEnums.Bolt),
+    ]
 );
 TownList['Relic Castle'] = new DungeonTown(
     'Relic Castle',
@@ -2049,6 +2124,11 @@ const KiloudeConfusedHiker = new NPC('Confused Hiker', [
     'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
 ]);
 
+const ProfSycamore = new ProfNPC('Prof. Sycamore',
+    GameConstants.Region.kalos,
+    'You\'re encountering Pokémon at a really good clip, aren\'t you? Congratulations! You completed the Pokédex!',
+    'Onward to Alola, shall we?');
+
 //Kalos Towns
 
 TownList['Vaniville Town'] = new Town(
@@ -2057,6 +2137,7 @@ TownList['Vaniville Town'] = new Town(
     [VanivilleTownShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+        npcs: [],
     }
 );
 TownList['Aquacorde Town'] = new Town(
@@ -2081,7 +2162,7 @@ TownList['Lumiose City'] = new Town(
     [DepartmentStoreShop,FriseurFurfrouShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
-        npcs: [LumioseEngineer],
+        npcs: [ProfSycamore, LumioseEngineer],
     }
 );
 TownList['Camphrier Town'] = new Town(
@@ -2364,13 +2445,20 @@ const IkiKahuna = new NPC('Kahuna Hala', [
     'Welcome to Alola!',
     'Here we don\'t have gyms. We have the Island Challenge. On each of our four islands you will complete one or more trials.',
     'After completing all of an island\'s trials you will battle that island\'s Kahuna in a Grand trial.',
-    'This island only has one trial: Captain Ilima\'s trial in Verdant Cavern. Come back here after clearing that challenge for your Grand trial battle.',
+    'This island only has one trial: Captain Ilima\'s trial in Verdant Cavern, below the Melemele Woods. Come back here after clearing that challenge for your Grand trial battle.',
 ]);
 const HeaheaCafeOwner = new NPC('Café Owner', [
     'Akala Island has three trials.',
     'Captain Lana\'s trial in Brooklet Hill, Captain Kiawe\'s trial in Wela Volcano Park and Captain Mallow\'s trial in Lush Jungle.',
     'For what it\'s worth, I say don\'t go to any of those places. Too wet, too hot and too... jungly. Why not stay here? Have a coffee! Enjoy the city!',
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
+]);
+const PaniolaTownActor = new NPC('Actor Meredith', [
+    'I love Oricorio. I can tell you all about it!',
+    'Each of the four islands in Alola has its own meadow, and each meadow has its own form of Oricorio. Each island, except for Akala Island. So you\'d think there\'s only three forms of Oricorio, right?',
+    'Wrong! There is a fourth! Did you know you can find all of the Oricorio forms on the farm? One of them doesn\'t appear anywhere else!',
+    'Each Oricorio form is attracted to the berry color that matches its own style. Red for Baile style, yellow for Pom-Pom style, pink for Pa\'u style and purple for Sensu style.',
+    'You want to know which one can only be found on the farm? I\'m sure you can figure that out yourself. Simple process of elimination really.',
 ]);
 const RoyalAvenueSpectator = new NPC('Spectator', [
     'I think battles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
@@ -2397,6 +2485,10 @@ const SeafolkCaptain = new NPC('Captain Mina', [
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [
     'Some very rare Pokémon have been sighted on {ROUTE_NAME}. I hope we can learn more about them.',
 ], GameConstants.Region.alola);
+const ProfKukui = new ProfNPC('Prof. Kukui',
+    GameConstants.Region.alola,
+    'TODO',
+    'TODO');
 
 //Alola Towns
 
@@ -2424,7 +2516,7 @@ TownList['Professor Kukui\'s Lab'] = new Town(
     [],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
-        npcs: [KukuisLabProfessor],
+        npcs: [KukuisLabProfessor/*ProfKukui*/], // TODO: replace the NPC when all pokemons are catchable
     }
 );
 TownList['Hau\'oli City'] = new Town(
@@ -2433,6 +2525,14 @@ TownList['Hau\'oli City'] = new Town(
     [HauoliCityShop],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
+    }
+);
+TownList['Melemele Woods'] = new Town(
+    'Melemele Woods',
+    GameConstants.Region.alola,
+    [new MoveToDungeon(dungeonList['Verdant Cavern']), new MoveToDungeon(dungeonList['Melemele Meadow']), new MoveToDungeon(dungeonList['Ruins of Conflict'])],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 2)],
     }
 );
 //TODO: Change requirement when UB questline is merged.
@@ -2460,6 +2560,7 @@ TownList['Paniola Town'] = new Town(
     [PaniolaTownShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 4)],
+        npcs: [PaniolaTownActor],
     }
 );
 TownList['Royal Avenue'] = new Town(
@@ -2483,7 +2584,7 @@ TownList['Konikoni City'] = new Town(
 TownList['Aether Paradise'] = new Town(
     'Aether Paradise',
     GameConstants.Region.alola,
-    [AetherParadiseShop, new MoveToDungeon(dungeonList['Aether Foundation'])],
+    [TemporaryBattleList['Ultra Wormhole'], AetherParadiseShop, new MoveToDungeon(dungeonList['Aether Foundation'])],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
         npcs: [AetherParadiseAlolaRoamerNPC],
@@ -2494,7 +2595,7 @@ TownList['Malie City'] = new Town(
     GameConstants.Region.alola,
     [MalieCityShop, new DockTownContent()],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_Nihilego)],
+        requirements: [new TemporaryBattleRequirement('Ultra Wormhole')],
         npcs: [MalieKahuna],
     }
 );
@@ -2527,7 +2628,7 @@ TownList['Exeggutor Island'] = new Town(
 TownList['Altar of the Sunne and Moone'] = new Town(
     'Altar of the Sunne and Moone',
     GameConstants.Region.alola,
-    [AltaroftheSunneandMooneShop],
+    [TemporaryBattleList['Ultra Megalopolis'], AltaroftheSunneandMooneShop],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
     }
@@ -2612,7 +2713,7 @@ TownList['Memorial Hill'] = new DungeonTown(
 TownList['Malie Garden'] = new DungeonTown(
     'Malie Garden',
     GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.Elite_Nihilego)] //Replace with Ather Paradise 1 if implemented
+    [new TemporaryBattleRequirement('Ultra Wormhole')] //Replace with Ather Paradise 1 if implemented
 );
 TownList['Hokulani Observatory'] = new DungeonTown(
     'Hokulani Observatory',
@@ -2652,7 +2753,7 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
 TownList['Mina\'s Houseboat'] = new DungeonTown(
     'Mina\'s Houseboat',
     GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.Elite_UltraNecrozma)]
+    [new TemporaryBattleRequirement('Ultra Megalopolis')]
 );
 TownList['Mount Lanakila'] = new DungeonTown(
     'Mount Lanakila',
@@ -2715,25 +2816,35 @@ const WedgehurstShop = new Shop([
     ItemList['Greatball'],
     ItemList['Mystery_egg'],
 ]);
-const CirchesterShop = new Shop([
-    ItemList['Ice_stone'],
-]);
 const TurffieldShop = new Shop([
     ItemList['Grass_egg'],
+    ItemList['Sweet_apple'],
+    ItemList['Tart_apple'],
 ]);
 const HulburyShop = new Shop([
     ItemList['Water_egg'],
-    ItemList['Toxel'],
 ]);
 const MotostokeShop = new Shop([
     ItemList['Fire_egg'],
 ]);
 const HammerlockeShop = new Shop([
     ItemList['Dragon_egg'],
-    ItemList['Eternatus'],
 ]);
 const StowonSideShop: Shop = new Shop([
     ItemList['Fighting_egg'],
+]);
+const BallonleaShop = new Shop([
+    ItemList['Cracked_pot'],
+    ItemList['Strawberry_sweet'],
+    ItemList['Berry_sweet'],
+    ItemList['Love_sweet'],
+    ItemList['Star_sweet'],
+    ItemList['Clover_sweet'],
+    ItemList['Flower_sweet'],
+    ItemList['Ribbon_sweet'],
+]);
+const CirchesterShop = new Shop([
+    ItemList['Ice_stone'],
 ]);
 const SpikemuthShop = new Shop([
     ItemList['Electric_egg'],
@@ -2752,6 +2863,10 @@ const WyndonShop = new Shop([
     ItemList['Item_magnet'],
     ItemList['Lucky_incense'],
 ]);
+const MasterDojoShop = new Shop([
+    ItemList['Galarica_cuff'],
+    ItemList['Galarica_wreath'],
+]);
 
 
 //Galar NPC
@@ -2767,6 +2882,10 @@ const TrainStationGuy = new NPC('Train Station Guy', [
     'One is sparsely populated, but the other is teeming with Pokemon.',
     'There are plenty of unique, powerful ones there, too!',
 ]);
+const ProfMagnolia = new ProfNPC('Prof. Magnolia',
+    GameConstants.Region.galar,
+    'TODO: Add text before Galar is released',
+    'TODO: Add text before Galar is released');
 
 
 //Galar towns
@@ -2777,7 +2896,7 @@ TownList['Postwick'] = new Town(
     [PostwickShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
-        npcs: [Mom],
+        npcs: [ProfMagnolia, Mom],
     }
 );
 TownList['Wedgehurst'] = new Town(
@@ -2792,7 +2911,7 @@ TownList['Wedgehurst'] = new Town(
 TownList['Motostoke'] = new Town(
     'Motostoke',
     GameConstants.Region.galar,
-    [MotostokeShop],
+    [GymList['Motostoke'], MotostokeShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
     }
@@ -2800,17 +2919,17 @@ TownList['Motostoke'] = new Town(
 TownList['Turffield'] = new Town(
     'Turffield',
     GameConstants.Region.galar,
-    [TurffieldShop],
+    [GymList['Turffield'], TurffieldShop],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 11)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 13)],
     }
 );
 TownList['Hulbury'] = new Town(
     'Hulbury',
     GameConstants.Region.galar,
-    [HulburyShop],
+    [GymList['Hulbury'], HulburyShop],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 12)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 14)],
     }
 );
 TownList['Stow-on-Side'] = new Town(
@@ -2818,13 +2937,13 @@ TownList['Stow-on-Side'] = new Town(
     GameConstants.Region.galar,
     [GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 15)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
     }
 );
 TownList['Ballonlea'] = new Town(
     'Ballonlea',
     GameConstants.Region.galar,
-    [],
+    [GymList['Ballonlea'], BallonleaShop],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glimwood Tangle'))],
     }
@@ -2832,9 +2951,9 @@ TownList['Ballonlea'] = new Town(
 TownList['Hammerlocke'] = new Town(
     'Hammerlocke',
     GameConstants.Region.galar,
-    [HammerlockeShop],
+    [GymList['Hammerlocke'], HammerlockeShop],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 14)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
     }
 );
 TownList['Circhester'] = new Town(
@@ -2842,15 +2961,15 @@ TownList['Circhester'] = new Town(
     GameConstants.Region.galar,
     [GymList['Circhester1'], GymList['Circhester2'], CirchesterShop],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 18)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
     }
 );
 TownList['Spikemuth'] = new Town(
     'Spikemuth',
     GameConstants.Region.galar,
-    [SpikemuthShop],
+    [GymList['Spikemuth'], SpikemuthShop],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 30)],
     }
 );
 TownList['Wyndon'] = new Town(
@@ -2858,7 +2977,7 @@ TownList['Wyndon'] = new Town(
     GameConstants.Region.galar,
     [WyndonShop, new MoveToDungeon(dungeonList['Rose Tower'])],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 24)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 32)],
     }
 );
 TownList['Wyndon Stadium'] = new Town(
@@ -2876,7 +2995,7 @@ TownList['Wyndon Stadium'] = new Town(
 TownList['Master Dojo'] = new Town(
     'Master Dojo',
     GameConstants.Region.galar,
-    [new MoveToDungeon(dungeonList['Master Dojo Trial'])],
+    [MasterDojoShop, new MoveToDungeon(dungeonList['Master Dojo Trial'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
     }
@@ -2912,17 +3031,12 @@ TownList['Freezington'] = new Town(
 TownList['Slumbering Weald'] = new DungeonTown(
     'Slumbering Weald',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
-);
-TownList['Inner Slumbering Weald'] = new DungeonTown(
-    'Inner Slumbering Weald',
-    GameConstants.Region.galar,
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
 );
 TownList['Galar Mine'] = new DungeonTown(
     'Galar Mine',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 10)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 12)]
 );
 TownList['Galar Mine No. 2'] = new DungeonTown(
     'Galar Mine No. 2',
@@ -2934,80 +3048,111 @@ TownList['Glimwood Tangle'] = new DungeonTown(
     GameConstants.Region.galar,
     [
         new MultiRequirement([
-            new GymBadgeRequirement(BadgeEnums.Galar_Rock),
-            new GymBadgeRequirement(BadgeEnums.Galar_Ice),
+            new GymBadgeRequirement(BadgeEnums.Galar_Fighting),
+            new GymBadgeRequirement(BadgeEnums.Galar_Ghost),
         ]),
-    ]
 );
 TownList['Rose Tower'] = new DungeonTown(
     'Rose Tower',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 24)]
-);
-TownList['Watchtower Ruins'] = new DungeonTown(
-    'Watchtower Ruins',
-    GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 4)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 32)]
 );
 TownList['Dusty Bowl'] = new DungeonTown(
     'Dusty Bowl',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Galar_Fire)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 18)]
 );
-TownList['Lake of Outrage'] = new DungeonTown(
-    'Lake of Outrage',
+TownList['Courageous Cavern'] = new DungeonTown(
+    'Courageous Cavern',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [
+        new OneFromManyRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.galar, 33),
+            new RouteKillRequirement(10, GameConstants.Region.galar, 34),
+            new RouteKillRequirement(10, GameConstants.Region.galar, 36),
+            new RouteKillRequirement(10, GameConstants.Region.galar, 37),
+        ]),
+    ]
+);
+TownList['Brawlers Cave'] = new DungeonTown(
+    'Brawlers Cave',
+    GameConstants.Region.galar,
+    [
+        new OneFromManyRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.galar, 34),
+            new RouteKillRequirement(10, GameConstants.Region.galar, 40),
+        ]),
+    ]
+);
+TownList['Warm-Up Tunnel'] = new DungeonTown(
+    'Warm-Up Tunnel',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 38)]
 );
 TownList['Master Dojo Trial'] = new DungeonTown(
     'Master Dojo Trial',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 25)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
 );
 TownList['Tower of Darkness'] = new DungeonTown(
     'Tower of Darkness',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 34)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 40)]
 );
 TownList['Tower of Water'] = new DungeonTown(
     'Tower of Water',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 28)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 36)]
+);
+TownList['Roaring-Sea Caves'] = new DungeonTown(
+    'Roaring-Sea Caves',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 50)]
 );
 TownList['Rock Peak Ruins'] = new DungeonTown(
     'Rock Peak Ruins',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 43)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 48)]
 );
 TownList['Iron Ruins'] = new DungeonTown(
     'Iron Ruins',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 43)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 48)]
 );
 TownList['Iceberg Ruins'] = new DungeonTown(
     'Iceberg Ruins',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 51)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)]
 );
 TownList['Split-Decision Ruins'] = new DungeonTown(
     'Split-Decision Ruins',
     GameConstants.Region.galar,
     [
         new MultiRequirement([
-            new RouteKillRequirement(10, GameConstants.Region.galar, 48),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Iron Ruins')),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Iceberg Ruins')),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rock Peak Ruins')),
+            new RouteKillRequirement(10, GameConstants.Region.galar, 52),
+            new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Rock Peak Ruins')),
+            new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Iron Ruins')),
+            new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Iceberg Ruins')),
         ]),
-    ]
+    ],
+);
+TownList['Lakeside Cave'] = new DungeonTown(
+    'Lakeside Cave',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 53)]
 );
 TownList['Dyna Tree Hill'] = new DungeonTown(
     'Dyna Tree Hill',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 50)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 53)]
+);
+TownList['Tunnel to the Top'] = new DungeonTown(
+    'Tunnel to the Top',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)]
 );
 TownList['Crown Shrine'] = new DungeonTown(
     'Crown Shrine',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 53)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 55)]
 );
