@@ -2975,6 +2975,25 @@ const pokemonList = createPokemonArray(
         'heldItem': {type: ItemType.underground, id: 'Oval Stone'},
     },
     {
+        'id': 113.01,
+        'name': 'Charity Chansey',
+        'catchRate': 30,
+        'type': [PokemonType.Normal],
+        'levelType': LevelType.fast,
+        'exp': 395,
+        'eggCycles': 40,
+        'evolutions': [new StoneEvolution('Charity Chansey', 'Blessing Blissey', GameConstants.StoneType.Soothe_bell)],
+        'base': {
+            'hitpoints': 250,
+            'attack': 5,
+            'specialAttack': 35,
+            'defense': 5,
+            'specialDefense': 105,
+            'speed': 50,
+        },
+        'heldItem': {type: ItemType.underground, id: 'Oval Stone'},
+    },
+    {
         'id': 114,
         'name': 'Tangela',
         'catchRate': 45,
@@ -5917,6 +5936,24 @@ const pokemonList = createPokemonArray(
     {
         'id': 242,
         'name': 'Blissey',
+        'catchRate': 30,
+        'type': [PokemonType.Normal],
+        'levelType': LevelType.fast,
+        'exp': 608,
+        'eggCycles': 40,
+        'base': {
+            'hitpoints': 255,
+            'attack': 10,
+            'specialAttack': 75,
+            'defense': 10,
+            'specialDefense': 135,
+            'speed': 55,
+        },
+        'heldItem': {type: ItemType.underground, id: 'Oval Stone'},
+    },
+    {
+        'id': 242.01,
+        'name': 'Blessing Blissey',
         'catchRate': 30,
         'type': [PokemonType.Normal],
         'levelType': LevelType.fast,
@@ -9741,6 +9778,29 @@ const pokemonList = createPokemonArray(
         'evolutions': [
             // TODO: Evolves while holding an Oval Stone during the Day time
             new StoneEvolution('Happiny', 'Chansey', GameConstants.StoneType.None),
+        ],
+        'baby': true,
+        'base': {
+            'hitpoints': 100,
+            'attack': 5,
+            'specialAttack': 15,
+            'defense': 5,
+            'specialDefense': 65,
+            'speed': 30,
+        },
+        'heldItem': {type: ItemType.underground, id: 'Oval Stone'},
+    },
+    {
+        'id': 440.01,
+        'name': 'Handout Happiny',
+        'type': [PokemonType.Normal],
+        'eggCycles': 40,
+        'levelType': LevelType.fast,
+        'exp': 110,
+        'catchRate': 130,
+        'evolutions': [
+            // TODO: Evolves while holding an Oval Stone during the Day time
+            new StoneEvolution('Handout Happiny', 'Charity Chansey', GameConstants.StoneType.None),
         ],
         'baby': true,
         'base': {
