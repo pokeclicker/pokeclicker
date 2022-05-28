@@ -2816,7 +2816,7 @@ const WedgehurstShop = new Shop([
     ItemList['Greatball'],
     ItemList['Mystery_egg'],
 ]);
-const TurffieldShop = new TownShop([
+const TurffieldShop = new Shop([
     ItemList['Grass_egg'],
     ItemList['Sweet_apple'],
     ItemList['Tart_apple'],
@@ -2833,7 +2833,7 @@ const HammerlockeShop = new Shop([
 const StowonSideShop: Shop = new Shop([
     ItemList['Fighting_egg'],
 ]);
-const BallonleaShop = new TownShop([
+const BallonleaShop = new Shop([
     ItemList['Cracked_pot'],
     ItemList['Strawberry_sweet'],
     ItemList['Berry_sweet'],
@@ -2843,10 +2843,10 @@ const BallonleaShop = new TownShop([
     ItemList['Flower_sweet'],
     ItemList['Ribbon_sweet'],
 ]);
-const CirchesterShop = new TownShop([
+const CirchesterShop = new Shop([
     ItemList['Ice_stone'],
 ]);
-const SpikemuthShop = new TownShop([
+const SpikemuthShop = new Shop([
     ItemList['Electric_egg'],
 ]);
 const WyndonShop = new Shop([
@@ -2863,7 +2863,7 @@ const WyndonShop = new Shop([
     ItemList['Item_magnet'],
     ItemList['Lucky_incense'],
 ]);
-const MasterDojoShop = new TownShop([
+const MasterDojoShop = new Shop([
     ItemList['Galarica_cuff'],
     ItemList['Galarica_wreath'],
 ]);
@@ -2995,9 +2995,8 @@ TownList['Wyndon Stadium'] = new Town(
 TownList['Master Dojo'] = new Town(
     'Master Dojo',
     GameConstants.Region.galar,
-    [new MoveToDungeon(dungeonList['Master Dojo Trial'])],
+    [MasterDojoShop, new MoveToDungeon(dungeonList['Master Dojo Trial'])],
     {
-        shops: [MasterDojoShop],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
     }
 );
