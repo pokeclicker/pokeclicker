@@ -7,20 +7,8 @@ class ItemHandler {
     public static amountToUse = 1;
 
     public static useItem(name: string, amount = 1): boolean {
-        if (!player.itemList[name]()) {
-            Notifier.notify({
-                message: `You don't have any ${ItemList[name].displayName}s left...`,
-                type: NotificationConstants.NotificationOption.danger,
-            });
-            return false;
-        }
 
-        if (ItemList[name] instanceof BattleItem && App.game.challenges.list.disableBattleItems.active()) {
-            Notifier.notify({
-                title: 'Challenge Mode',
-                message: 'Battle Items are disabled',
-                type: NotificationConstants.NotificationOption.danger,
-            });
+        if (!ItemList[name].checkCanUse()) {
             return false;
         }
 

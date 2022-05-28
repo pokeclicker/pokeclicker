@@ -1,5 +1,8 @@
 <g data-bind='visible: player.region == GameConstants.Region.unova'>
-    <image width="1600" height="960" xlink:href="assets/images/unova.png" href="assets/images/unova.png"></image>
+    <image width="1600" height="960" data-bind="attr: {
+        'xlink:href':'assets/images/unova.png?v=$VERSION',
+        href:'assets/images/unova.png?v=$VERSION'
+    }"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -325,8 +328,8 @@
     <!--Extra bit of Route 23-->
     <%- include('templates/mapRoute',
         { route: 23, region: 4
-        , width: 0.5, height: 3
-        , x: 65.5, y: 2
+        , width: 1, height: 3
+        , x: 65, y: 2
         , noText: true
         })
     %>
@@ -539,8 +542,16 @@
     <!--Pokémon League Unova-->
     <%- include('templates/mapTown',
         { name: "Pokémon League Unova"
-        , x: 55.5, y: 0.25
-        , width: 10, height: 6.75
+        , x: 56, y: 0
+        , width: 9, height: 5.5
+        })
+    %>
+
+    <!--Pokémon League Unova Extension-->
+    <%- include('templates/mapTown',
+        { name: "Pokémon League Unova"
+        , x: 59, y: 5.5
+        , width: 3, height: 0.5
         })
     %>
 
@@ -607,8 +618,56 @@
     <!--Relic Passage-->
     <%- include('templates/mapDungeon',
         { name: "Relic Passage"
-        , x: 37, y: 40
-        , width: 6, height: 3
+        , x: 40, y: 39
+        , width: 2, height: 6
+        })
+    %>
+
+    <!--Relic Passage Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Relic Passage"
+        , x: 42, y: 39
+        , width: 1, height: 4.5
+        })
+    %>
+
+    <!--Relic Passage Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Relic Passage"
+        , x: 38, y: 37
+        , width: 2, height: 4
+        })
+    %>
+    
+    <!--Relic Passage Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Relic Passage"
+        , x: 37, y: 35
+        , width: 1, height: 5
+        })
+    %>
+    
+    <!--Relic Passage Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Relic Passage"
+        , x: 36, y: 35
+        , width: 1, height: 4
+        })
+    %>
+
+    <!--Relic Passage Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Relic Passage"
+        , x: 38, y: 36
+        , width: 1, height: 1
+        })
+    %>
+
+    <!--Relic Passage Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Relic Passage"
+        , x: 40, y: 38
+        , width: 1, height: 1
         })
     %>
 

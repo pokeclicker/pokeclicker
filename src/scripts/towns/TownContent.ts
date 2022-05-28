@@ -24,6 +24,9 @@ abstract class TownContent {
     }
 
     public protectedOnclick(): void {
+        if (!this.isVisible()) {
+            return;
+        }
         const reqsList = [];
         this.requirements?.forEach(requirement => {
             if (!requirement.isCompleted()) {

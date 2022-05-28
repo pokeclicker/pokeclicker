@@ -866,13 +866,13 @@ class Farming implements Feature {
 
     getGrowthMultiplier(): number {
         let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprayduck);
+        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprayduck) * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Grass_Flute);
         return multiplier;
     }
 
     getReplantMultiplier(): number {
         let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprinklotad);
+        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprinklotad) * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Grass_Flute);
         return multiplier;
     }
 
@@ -1376,9 +1376,7 @@ class Farming implements Feature {
         }
 
         const mutations = json['mutations'];
-        if (mutations == null) {
-            this.mutations.forEach(mutation => mutation.fromJSON({}));
-        } else {
+        if (mutations) {
             this.mutations.forEach((mutation, i) => mutation.fromJSON(mutations[i]));
         }
 

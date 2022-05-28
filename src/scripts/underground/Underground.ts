@@ -98,11 +98,11 @@ class Underground implements Feature {
     }
 
     getEnergyGain() {
-        return Underground.BASE_ENERGY_GAIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Gain).calculateBonus();
+        return Math.round(Underground.BASE_ENERGY_GAIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Gain).calculateBonus() * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Moon_Flute));
     }
 
     getEnergyRegenTime() {
-        return Underground.BASE_ENERGY_REGEN_TIME - this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time).calculateBonus();
+        return Math.round(Underground.BASE_ENERGY_REGEN_TIME - this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time).calculateBonus() * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Moon_Flute));
     }
 
     getDailyDealsMax() {
@@ -280,6 +280,7 @@ class Underground implements Feature {
         Notifier.notify({
             message: `You restored ${gain} mining energy!`,
             type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.General.underground_energy_restore,
         });
     }
 
