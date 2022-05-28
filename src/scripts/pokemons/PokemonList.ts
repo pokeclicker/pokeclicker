@@ -93,6 +93,24 @@ const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 1.3,
+        'name': 'Bulbasaur (Rose)',
+        'nativeRegion': GameConstants.Region.kanto,
+        'catchRate': 25,
+        'type': [PokemonType.Grass, PokemonType.Fairy],
+        'levelType': LevelType.mediumslow,
+        'exp': 64,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 45,
+            'attack': 49,
+            'specialAttack': 65,
+            'defense': 49,
+            'specialDefense': 65,
+            'speed': 45,
+        },
+    },
+    {
         'id': 2,
         'name': 'Ivysaur',
         'catchRate': 45,
@@ -18350,6 +18368,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 808,
         'name': 'Meltan',
+        'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Steel],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -18368,6 +18387,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 809,
         'name': 'Melmetal',
+        'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Steel],
         'eggCycles': 120,
         'levelType': LevelType.slow,

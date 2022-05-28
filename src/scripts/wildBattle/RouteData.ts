@@ -2185,7 +2185,12 @@ Routes.add(new RegionRoute(
         land: ['Cramorant', 'Octillery', 'Kingler', 'Pyukumuku', 'Gastrodon (east)', 'Jellicent', 'Mareanie', 'Glalie'],
         water: ['Wishiwashi (Solo)', 'Qwilfish', 'Mantyke'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Galar_Rock)]
+    [
+        new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Galar_Rock),
+            new GymBadgeRequirement(BadgeEnums.Galar_Ice),
+        ]),
+    ]
 ));
 Routes.add(new RegionRoute(
     'Circhester Bay', GameConstants.Region.galar, 29,

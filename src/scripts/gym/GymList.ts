@@ -1498,7 +1498,7 @@ GymList['Champion Hau'] = new Champion(
 
 
 //Galar Leaders
-//TODO  Balancing of levels, rewards, and hp
+//TODO Addition of G-Max forms?
 GymList['Turffield'] = new Gym(
     'Milo',
     'Turffield',

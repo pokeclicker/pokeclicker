@@ -10,6 +10,18 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.2
+    new ChangelogUpdate('v0.9.2', new Date(2022, 3, 21)),
+    new Changelog(changelogType.NEW, 'Updated Alola Akala map'),
+    new Changelog(changelogType.NEW, 'Select region with number keys while dock modal is open'),
+    new Changelog(changelogType.CHANGE, 'Updated save selector view on mobile'),
+    new Changelog(changelogType.CHANGE, 'Badge case split up by region'),
+    new Changelog(changelogType.CHANGE, 'Updated some dungeon encounters'),
+    new Changelog(changelogType.CHANGE, 'Updated Unown encounters'),
+    new Changelog(changelogType.CHANGE, 'Updated webworker and game ticks'),
+    new Changelog(changelogType.CHANGE, 'Updated some sprite inconsistencies'),
+    new Changelog(changelogType.FIXED, 'Underground sell all no longer starts breeding fossils'),
+
     // v0.9.1
     new ChangelogUpdate('v0.9.1', new Date(2022, 3, 14)),
     new Changelog(changelogType.FIXED, 'Easter quest line not starting on new saves'),

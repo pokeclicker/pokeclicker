@@ -14,6 +14,7 @@ class Breeding implements Feature {
         queueList: [],
         queueSlots: 0,
     };
+    hatcheryHelpers = new HatcheryHelpers(this);
 
     private _eggList: Array<KnockoutObservable<Egg>>;
     private _eggSlots: KnockoutObservable<number>;
@@ -133,6 +134,7 @@ class Breeding implements Feature {
         }
         this.queueSlots(json['queueSlots'] ?? this.defaults.queueSlots);
         this.queueList(json['queueList'] ? json['queueList'] : this.defaults.queueList);
+        this.hatcheryHelpers.fromJSON(json.hatcheryHelpers || []);
     }
 
 
@@ -142,6 +144,7 @@ class Breeding implements Feature {
             eggSlots: this.eggSlots,
             queueList: this.queueList(),
             queueSlots: this.queueSlots(),
+            hatcheryHelpers: this.hatcheryHelpers.toJSON(),
         };
     }
 
@@ -193,12 +196,17 @@ class Breeding implements Feature {
         amount = Math.round(amount);
         let index =  this.eggList.length;
         while (index-- > 0) {
+            const helper = this.hatcheryHelpers.hired()[index];
+            if (helper) {
+                continue;
+            }
             const egg = this.eggList[index]();
             egg.addSteps(amount, this.multiplier);
             if (this.queueList().length && egg.progress() >= 100) {
                 this.hatchPokemonEgg(index);
             }
         }
+        this.hatcheryHelpers.addSteps(amount, this.multiplier);
     }
 
     private getStepMultiplier() {
