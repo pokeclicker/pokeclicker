@@ -6686,30 +6686,6 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
         ],
         96500, 201);
 
-    dungeonList['Watchtower Ruins'] = new Dungeon('Watchtower Ruins',
-        ['Gastly', 'Noibat', 'Purrloin', 'Duskull', 'Woobat', 'Haunter', 'Shuckle', 'Ralts', 'Golett', 'Electrike', 'Snorunt'],
-        [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-        2203000,
-        [
-            new DungeonBossPokemon('Corviknight', 8000000, 70),
-            new DungeonBossPokemon('Golurk', 8000000, 70),
-            new DungeonBossPokemon('Drifblim', 8000000, 70),
-            new DungeonBossPokemon('Glalie', 8000000, 70),
-        ],
-        96500, 201);
-
-    dungeonList['Lake of Outrage'] = new Dungeon('Lake of Outrage',
-        ['Stonjourner', 'Cramorant', 'Galarian Mr. Mime', 'Morpeko', 'Coalossal', 'Sandaconda', 'Galarian Stunfisk', 'Copperajah', 'Indeedee', 'Obstagoon', 'Grimmsnarl'],
-        [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-        2203000,
-        [
-            new DungeonBossPokemon('Hatterene', 8000000, 70),
-            new DungeonBossPokemon('Perrserker', 8000000, 70),
-            new DungeonBossPokemon('Barraskewda', 8000000, 70),
-            new DungeonBossPokemon('Drakloak', 8000000, 70),
-        ],
-        96500, 201);
-
     dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
         ['Gurdurr', 'Ferrothorn', 'Klang', 'Meowstic', 'Barbaracle', 'Applin', 'Hattrem', 'Qwilfish', 'Hitmonlee', 'Hitmonchan', 'Koffing'],
         [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
@@ -6732,6 +6708,35 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
         [new DungeonBossPokemon('Kubfu', 8000000, 70)],
         96500, 201);
 
+    dungeonList['Warm-Up Tunnel'] = new Dungeon('Warm-Up Tunnel',
+        ['Sandshrew', 'Cubone', 'Torkoal'],
+        [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+        2203000,
+        [new DungeonBossPokemon('Kangaskhan', 8000000, 70)],
+        96500, 201);
+
+    dungeonList['Courageous Cavern'] = new Dungeon('Courageous Cavern',
+        ['Pincurchin', 'Dwebble', 'Crustle', 'Swoobat', 'Magikarp'. 'Shellder', 'Cloyster', 'Tentacool', 'Clobbopus', 'Chewtle', 'Tentacruel', 'Whiscash'],
+        [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+        2203000,
+        [
+            new DungeonBossPokemon('Golisopod', 8000000, 70),
+            new DungeonBossPokemon('Druddigon', 8000000, 70),
+            new DungeonBossPokemon('Drednaw', 8000000, 70),
+        ],
+        96500, 201);
+
+    dungeonList['Brawlers Cave'] = new Dungeon('Brawlers Cave',
+        ['Whismur', 'Woobat', 'Azurill', 'Lickitung', 'Loudred', 'Swoobat', 'Golduck', 'Poliwag', 'Barboach', 'Whiscash', 'Chansey', 'Psyduck'],
+        [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+        2203000,
+        [
+            new DungeonBossPokemon('Gigalith', 8000000, 70),
+            new DungeonBossPokemon('Druddigon', 8000000, 70),
+            new DungeonBossPokemon('Poliwrath', 8000000, 70),
+        ],
+        96500, 201);
+
     dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
         ['Zorua', 'Scraggy', 'Inkay', 'Krokorok'],
         [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
@@ -6748,6 +6753,19 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
 
 
     //Crown Tundra
+    dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
+        ['Zubat', 'Carbink', 'Piloswine', 'Deino', 'Larvitar', 'Riolu', 'Audino', 'Golbat', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Magikarp', 'Omanyte', 'Kabuto', 'Feebas'],
+        [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+        2203000,
+        [
+            new DungeonBossPokemon('Kabutops', 8000000, 70),
+            new DungeonBossPokemon('Omastar', 8000000, 70),
+            new DungeonBossPokemon('Tyranitar', 8000000, 70),
+            new DungeonBossPokemon('Hydreigon', 8000000, 70),
+            new DungeonBossPokemon('Lucario', 8000000, 70),
+        ],
+        96500, 201);
+
     dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
         ['Trevenant', 'Stonjourner', 'Heatmor', 'Conkeldurr', 'Rhyperior', 'Aerodactyl'],
         [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
@@ -6790,6 +6808,17 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
         ],
         96500, 201);
 
+    dungeonList['Lakeside Cave'] = new Dungeon('Lakeside Cave',
+        ['Zubat', 'Aron', 'Carbink', 'Carkol', 'Ferroseed', 'Mawile', 'Sableye', 'Audino', 'Lairon'],
+        [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+        2203000,
+        [
+            new DungeonBossPokemon('Noivern', 8000000, 70),
+            new DungeonBossPokemon('Aggron', 8000000, 70),
+            new DungeonBossPokemon('Coalossal', 8000000, 70),
+        ],
+        96500, 201);
+
     dungeonList['Dyna Tree Hill'] = new Dungeon('Dyna Tree Hill',
         ['Magmar', 'Absol', 'Beartic', 'Cryogonal', 'Dubwool', 'Glalie', 'Clefable'],
         [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
@@ -6797,6 +6826,16 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
         [new DungeonBossPokemon('Greedent', 8000000, 70)],
         96500, 201);
 
+    dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
+        ['Zubat', 'Aron', 'Carbink', 'Carkol', 'Ferroseed', 'Mawile', 'Sableye', 'Audino', 'Lairon'],
+        [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+        2203000,
+        [
+            new DungeonBossPokemon('Noivern', 8000000, 70),
+            new DungeonBossPokemon('Aggron', 8000000, 70),
+            new DungeonBossPokemon('Coalossal', 8000000, 70),
+        ],
+        96500, 201);
     dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
         ['Snom', 'Hatenna', 'Solosis', 'Jynx', 'Piloswine', 'Dubwool'],
         [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],

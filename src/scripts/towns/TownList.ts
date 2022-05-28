@@ -2743,7 +2743,7 @@ TownList['Turffield'] = new Town(
     GameConstants.Region.galar,
     {
         shops: [TurffieldShop],
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 11)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 13)],
     }
 );
 TownList['Hulbury'] = new Town(
@@ -2751,7 +2751,7 @@ TownList['Hulbury'] = new Town(
     GameConstants.Region.galar,
     {
         shops: [HulburyShop],
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 12)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 14)],
     }
 );
 TownList['Stow-on-Side'] = new Town(
@@ -2759,7 +2759,7 @@ TownList['Stow-on-Side'] = new Town(
     GameConstants.Region.galar,
     {
         shops: [StowonSideShop],
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 15)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
     }
 );
 TownList['Ballonlea'] = new Town(
@@ -2775,7 +2775,7 @@ TownList['Hammerlocke'] = new Town(
     GameConstants.Region.galar,
     {
         shops: [HammerlockeShop],
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 14)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
     }
 );
 TownList['Circhester'] = new Town(
@@ -2783,7 +2783,7 @@ TownList['Circhester'] = new Town(
     GameConstants.Region.galar,
     {
         shops: [CirchesterShop],
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 18)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
     }
 );
 TownList['Spikemuth'] = new Town(
@@ -2791,7 +2791,7 @@ TownList['Spikemuth'] = new Town(
     GameConstants.Region.galar,
     {
         shops: [SpikemuthShop],
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 30)],
     }
 );
 TownList['Wyndon'] = new Town(
@@ -2799,7 +2799,7 @@ TownList['Wyndon'] = new Town(
     GameConstants.Region.galar,
     {
         shops: [WyndonShop],
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 24)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 32)],
         dungeon: dungeonList['Rose Tower'],
     }
 );
@@ -2838,17 +2838,12 @@ TownList['Freezington'] = new Town(
 TownList['Slumbering Weald'] = new DungeonTown(
     'Slumbering Weald',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
-);
-TownList['Inner Slumbering Weald'] = new DungeonTown(
-    'Inner Slumbering Weald',
-    GameConstants.Region.galar,
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
 );
 TownList['Galar Mine'] = new DungeonTown(
     'Galar Mine',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 10)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 12)]
 );
 TownList['Galar Mine No. 2'] = new DungeonTown(
     'Galar Mine No. 2',
@@ -2858,45 +2853,114 @@ TownList['Galar Mine No. 2'] = new DungeonTown(
 TownList['Glimwood Tangle'] = new DungeonTown(
     'Glimwood Tangle',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Galar_Fighting)]
+    [
+        new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Galar_Fighting),
+            new GymBadgeRequirement(BadgeEnums.Galar_Ghost),
+        ]),
+    ],
 );
 TownList['Rose Tower'] = new DungeonTown(
     'Rose Tower',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 24)]
-);
-TownList['Watchtower Ruins'] = new DungeonTown(
-    'Watchtower Ruins',
-    GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 4)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 32)]
 );
 TownList['Dusty Bowl'] = new DungeonTown(
     'Dusty Bowl',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Galar_Fire)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 18)]
 );
-TownList['Lake of Outrage'] = new DungeonTown(
-    'Lake of Outrage',
+TownList['Courageous Cavern'] = new DungeonTown(
+    'Courageous Cavern',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [
+        new OneFromManyRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.galar, 33),
+            new RouteKillRequirement(10, GameConstants.Region.galar, 34),
+            new RouteKillRequirement(10, GameConstants.Region.galar, 36),
+            new RouteKillRequirement(10, GameConstants.Region.galar, 37),
+        ]),
+    ]
 );
-TownList['Towers of Two Fists'] = new DungeonTown(
-    'Towers of Two Fists',
+TownList['Brawlers Cave'] = new DungeonTown(
+    'Brawlers Cave',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [
+        new OneFromManyRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.galar, 34),
+            new RouteKillRequirement(10, GameConstants.Region.galar, 40),
+        ]),
+    ]
+);
+TownList['Warm-Up Tunnel'] = new DungeonTown(
+    'Warm-Up Tunnel',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 38)]
+);
+TownList['Master Dojo Trial'] = new DungeonTown(
+    'Master Dojo Trial',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
+);
+TownList['Tower of Darkness'] = new DungeonTown(
+    'Tower of Darkness',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 40)]
+);
+TownList['Tower of Water'] = new DungeonTown(
+    'Tower of Water',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 36)]
+);
+TownList['Roaring-Sea Caves'] = new DungeonTown(
+    'Roaring-Sea Caves',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 50)]
+);
+TownList['Rock Peak Ruins'] = new DungeonTown(
+    'Rock Peak Ruins',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 48)]
+);
+TownList['Iron Ruins'] = new DungeonTown(
+    'Iron Ruins',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 48)]
+);
+TownList['Iceberg Ruins'] = new DungeonTown(
+    'Iceberg Ruins',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)]
 );
 TownList['Split-Decision Ruins'] = new DungeonTown(
     'Split-Decision Ruins',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [
+        new MultiRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.galar, 52),
+            new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Rock Peak Ruins')),
+            new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Iron Ruins')),
+            new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Iceberg Ruins')),
+        ]),
+    ],
 );
-TownList['The Crown Tundra'] = new DungeonTown(
-    'The Crown Tundra',
+TownList['Lakeside Cave'] = new DungeonTown(
+    'Lakeside Cave',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 53)]
 );
-TownList['Freezington Ruins'] = new DungeonTown(
-    'Freezington Ruins',
+TownList['Dyna Tree Hill'] = new DungeonTown(
+    'Dyna Tree Hill',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 53)]
+);
+TownList['Tunnel to the Top'] = new DungeonTown(
+    'Tunnel to the Top',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)]
+);
+TownList['Crown Shrine'] = new DungeonTown(
+    'Crown Shrine',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 55)]
 );
