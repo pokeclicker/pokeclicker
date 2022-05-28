@@ -1245,15 +1245,6 @@ GymList['Malie City'] = new Gym(
     'Hmph...',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))]
 );
-GymList['Altar of the Sunne and Moone'] = new Gym(
-    'Ultra Megalopolis',
-    'Altar of the Sunne and Moone',
-    [new GymPokemon('Necrozma (Ultra)', 141300960, 60)],
-    BadgeEnums.Elite_UltraNecrozma,
-    128000,
-    'Necrozma fled.',
-    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)]
-);
 GymList['Exeggutor Island'] = new Gym(
     'Hapu',
     'Exeggutor Island',

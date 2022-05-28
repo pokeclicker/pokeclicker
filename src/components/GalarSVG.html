@@ -1,6 +1,9 @@
 <g data-bind='visible: player.region == GameConstants.Region.galar'>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Galar').id">
-        <image width="1600" height="960" xlink:href="assets/images/galar.png" href="assets/images/galar.png"></image>
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/galar.png?v=$VERSION',
+            href:'assets/images/galar.png?v=$VERSION'
+        }"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->

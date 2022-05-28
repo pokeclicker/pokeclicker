@@ -1800,7 +1800,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 6', GameConstants.Region.alola, 6,
     new RoutePokemon({
-        land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray', 'Oricorio (Pa\'u)'],
+        land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill'))],
     undefined,
