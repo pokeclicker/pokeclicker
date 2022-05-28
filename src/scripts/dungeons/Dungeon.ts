@@ -6556,7 +6556,7 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
 
 
 
-    //Galar Dungeons
+//Galar Dungeons
 
 dungeonList['Slumbering Weald'] = new Dungeon('Slumbering Weald',
     ['Galarian Weezing', 'Corviknight', 'Galarian Stunfisk', 'Munna', 'Butterfree', 'Orbeetle'],
@@ -6627,7 +6627,7 @@ dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
 
 
 
-    //Isle of Armor
+//Isle of Armor
 dungeonList['Master Dojo Trial'] = new Dungeon('Master Dojo Trial',
     ['Mienfoo', 'Shinx', 'Kadabra', 'Whirlipede'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
@@ -6679,7 +6679,7 @@ dungeonList['Tower of Water'] = new Dungeon('Tower of Water',
     96500, 201);
 
 
-    //Crown Tundra
+//Crown Tundra
 dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
     ['Zubat', 'Carbink', 'Piloswine', 'Deino', 'Larvitar', 'Riolu', 'Audino', 'Golbat', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Magikarp', 'Omanyte', 'Kabuto', 'Feebas'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
