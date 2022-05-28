@@ -536,6 +536,17 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.galar]: new Set(['Motostoke']),
     },
 
+    Fire: {
+        [Region.kanto]: new Set(['Cinnabar Island']),
+        [Region.johto]: new Set(),
+        [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney']),
+        [Region.sinnoh]: new Set(['Stark Mountain']),
+        [Region.unova]: new Set(['Reversal Mountain']),
+        [Region.kalos]: new Set(),
+        [Region.alola]: new Set([7, 'Wela Volcano Park']),
+        [Region.galar]: new Set(['Motostoke']),
+    },
+
     Forest: {
         [Region.kanto]: new Set([25, 30, 'Fuchsia City', 'Viridian Forest', 'Berry Forest', 'Pattern Bush', 'Valencia Island', 'Pinkan Forest']),
         [Region.johto]: new Set([36, 38, 43, 'Azalea Town', 'Ilex Forest']),
