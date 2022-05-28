@@ -1098,7 +1098,7 @@ export const GalarDungeons = [
     'Glimwood Tangle',
     'Rose Tower',
     'Dusty Bowl',
-    'Courageous Cavern'
+    'Courageous Cavern',
     'Brawlers Cave',
     'Master Dojo Trial',
     'Warm-Up Tunnel',
