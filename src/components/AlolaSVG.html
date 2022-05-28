@@ -1,7 +1,10 @@
 <g data-bind='visible: player.region == GameConstants.Region.alola'>
     
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele island').id">
-        <image width="1600" height="960" xlink:href="assets/images/alola-melemele.png" href="assets/images/alola-melemele.png"></image>
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/alola-melemele.png?v=$VERSION',
+            href:'assets/images/alola-melemele.png?v=$VERSION'
+        }"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
@@ -1533,7 +1536,10 @@
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala island').id">
-        <image width="1600" height="960" xlink:href="assets/images/alola.png" href="assets/images/alola-akala.png"></image>
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/alola-akala.png?v=$VERSION',
+            href:'assets/images/alola-akala.png?v=$VERSION'
+        }"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
@@ -2460,7 +2466,10 @@
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula & Poni islands').id">
-        <image width="1600" height="960" xlink:href="assets/images/kanto.png" href="assets/images/alola2.png"></image>
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/alola2.png?v=$VERSION',
+            href:'assets/images/alola2.png?v=$VERSION'
+        }"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
