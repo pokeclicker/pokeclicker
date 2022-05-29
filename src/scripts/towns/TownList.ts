@@ -134,6 +134,14 @@ const PewterBattleItemRival = new NPC('Battle Item Master', [
     'Use them to help you out whenever you feel like time is against you!',
 ]);
 
+const PewterScientist = new NPC('Gem Scientist', [
+    'I see you are carrying a Shard Case. Here at the museum we study space, fossils and gems!',
+    'When you defeat a Pokémon you gain a gem of that Pokémon\'s type. If the Pokémon has two types you gain one for each! Defeating very strong Pokémon, such as those owned by gym leaders, gets you five!',
+    'You can click Gems in the Start Menu to boost your damage using these gems. For example, using rock gems you can boost the super effective damage of your rock type Pokémon! Those flying types had better watch out for your might!',
+    'You can even use this to eliminate immunities! By using electric gems to boost your electric type immune damage, your electric Pokémon can suddenly do damage against ground types!',
+],
+{ requirement: new GymBadgeRequirement(BadgeEnums.Earth) });
+
 const Route3ShadySalesman = new NPC('Shady Salesman', [
     'Have I got a deal just for you!',
     'I\'ll let you have a super secret Pokémon. For the right price!',
@@ -163,6 +171,13 @@ const SaffronBattleItemRival = new NPC('Battle Item Master', [
     'I bet he forget to tell you that although all Battle Items only last for 30 seconds they can stack and last for days! Now scram!',
 ]);
 
+const SaffronBreeder = new NPC('Breeder', [
+    'You can leave your level 100 Pokémon with us up at the Hatchery. Breeding them will reset their level, but they will be stronger! They gain 25% of their base attack!',
+    'And the best part is you can keep doing it over and over and over again! The sky is the limit! Reach for the stars!',
+    'With Protein your Pokémon will become even stronger when you breed them. I hear they sell it at the Indigo Plateau.',
+],
+{ requirement: new GymBadgeRequirement(BadgeEnums.Earth) });
+
 const FuchsiaKantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
     'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.kanto);
@@ -190,7 +205,7 @@ TownList['Pewter City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 2),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Viridian Forest')),
         ],
-        npcs: [PewterBattleItemRival],
+        npcs: [PewterBattleItemRival, PewterScientist],
     }
 );
 TownList['Route 3 Pokémon Center'] = new Town(
@@ -246,7 +261,7 @@ TownList['Saffron City'] = new Town(
     [SaffronCityShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Rainbow)],
-        npcs: [SaffronBattleItemRival],
+        npcs: [SaffronBattleItemRival, SaffronBreeder],
     }
 );
 TownList['Fuchsia City'] = new Town(
