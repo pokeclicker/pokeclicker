@@ -21,6 +21,8 @@ export const MIN_LOAD_TIME = 0.5 * SECOND;
 export const MAX_LOAD_TIME = 20 * SECOND;
 export const MUTATION_TICK = 1 * SECOND;
 export const WANDER_TICK = 1.5 * SECOND;
+export const TEMP_BATTLE_TIME = 60 * SECOND;
+export const TEMP_BATTLE_TICK = 0.1 * SECOND;
 
 export enum Region {
     none = -1,
@@ -49,7 +51,9 @@ export const MaxIDPerRegion = [
     898, // 89 - Galar
 ];
 
+// Battle Items
 export const ITEM_USE_TIME = 30;
+export const FLUTE_TYPE_ATTACK_MULTIPLIER = 1.005;
 
 export const ROAMING_MIN_CHANCE = 8192;
 export const ROAMING_MAX_CHANCE = 4096;
@@ -240,6 +244,7 @@ export enum GameState {
     town = 6,
     shop = 7,
     battleFrontier = 8,
+    temporaryBattle = 9,
 }
 
 export enum Pokeball {
@@ -521,6 +526,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kalos]: new Set([1, 14, 20, 'Laverre City', 'Santalune Forest', 'Pokémon Village']),
         [Region.alola]: new Set([27, 'Melemele Woods', 'Lush Jungle', 'Malie Garden', 'Ula\'ula Meadow', 'Poni Meadow']),
         [Region.galar]: new Set(['Slumbering Weald', 'Glimwood Tangle', 'Ballonlea', 4]),
+
     },
 
     Cave: {
@@ -657,6 +663,21 @@ export enum BattleItemType {
     'Lucky_incense' = 'Lucky_incense',
 }
 
+export enum FluteItemType {
+    'Red_Flute' = 'Red_Flute',
+    'White_Flute' = 'White_Flute',
+    'Black_Flute' = 'Black_Flute',
+    'Yellow_Flute' = 'Yellow_Flute',
+    'Blue_Flute' = 'Blue_Flute',
+    'Poke_Flute' = 'Poke_Flute',
+    'Azure_Flute' = 'Azure_Flute',
+    'Eon_Flute' = 'Eon_Flute',
+    'Sun_Flute' = 'Sun_Flute',
+    'Moon_Flute' = 'Moon_Flute',
+    'Time_Flute' = 'Time_Flute',
+    'Grass_Flute' = 'Grass_Flute',
+}
+
 export enum PokemonItemType {
     'Eevee',
     'Porygon',
@@ -711,17 +732,6 @@ export const EnergyRestoreEffect = {
     SmallRestore: 0.1,
     MediumRestore: 0.2,
     LargeRestore: 0.5,
-};
-
-export const KeyCodeToDirection = {
-    ArrowUp: 'up',
-    ArrowLeft: 'left',
-    ArrowDown: 'down',
-    ArrowRight: 'right',
-    W: 'up',
-    A: 'left',
-    S: 'down',
-    D: 'right',
 };
 
 export const FossilToPokemon = {
@@ -857,12 +867,10 @@ export const AlolaGyms = [
     'Kiawe\'s Trial',
     'Mallow\'s Trial',
     'Konikoni City',
-    'Aether Paradise',
     'Sophocles\' Trial',
     'Acerola\'s Trial',
     'Malie City',
     'Vast Poni Canyon Trial',
-    'Altar of the Sunne and Moone',
     'Mina\'s Trial',
     'Exeggutor Island',
     'Elite Molayne',
@@ -945,7 +953,7 @@ export const HoennDungeons = [
     'Granite Cave',
     'Fiery Path',
     'Meteor Falls',
-    'Mt. Chimney',
+    'Mt. Chimney Crater',
     'Jagged Pass',
     'New Mauville',
     'Weather Institute',
@@ -1165,3 +1173,38 @@ export const DockTowns = [
     'Hau\'oli City', // Alola
     'Hulbury', // Galar
 ];
+
+export const RegionalStarters = [
+    [1, 4, 7], // Kanto
+    [152, 155, 158], // Johto
+    [252, 255, 258], // Hoenn
+    [387, 390, 393], // Sinnoh
+    [495, 498, 501], // Unova
+    [650, 653, 656], // Kalos
+    [722, 725, 728], // Alola
+    [810, 813, 816], // Galar
+];
+
+export const TemporaryBattles = [
+    'Ultra Wormhole',
+    'Ultra Megalopolis',
+    'Hop1',
+    'Mirages',
+    'Hop2',
+    'Hop3',
+    'Bede1',
+    'Hop4',
+    'Bede2',
+    'Marnie1',
+    'Hop5',
+    'Bede3',
+    'Hop6',
+    'Hop7',
+    'Marnie2',
+    'The Darkest Day',
+    'Hop8',
+];
+
+export function getTemporaryBattlesIndex(temporaryBattle: string): number {
+    return TemporaryBattles.findIndex((t) => t === temporaryBattle);
+}
