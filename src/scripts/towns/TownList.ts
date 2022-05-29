@@ -1213,6 +1213,10 @@ const PalParkWarden = new NPC('Pal Park Warden', [
     'Hey! Welcome to the Pal Park, have you been to my Dad’s Safari Zone in Kanto? We don’t have as many Pokémon here, but I’ve heard that a flower Pokémon found here can bloom when it’s sunny outside!',
 ]);
 
+const CanalaveRiley = new NPC('Riley', [
+    'My partner Lucario evolved from a Riolu during daytime when I used a Soothe Bell.',
+]);
+
 const CanalaveYoungBoy = new NPC('Young Boy', [
     'Oh hello! Say, have you ever heard of Cresselia? Once when I was really little I had a really bad dream I couldn’t wake up from, but then a kind trainer went to an island near here and got help from Cresselia to cure me!',
     'Maybe if you can prove yourself by conquering that island you could find Cresselia roaming around the region...',
@@ -1361,7 +1365,7 @@ TownList['Canalave City'] = new Town(
     [CanalaveCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
-        npcs: [CanalaveYoungBoy],
+        npcs: [CanalaveRiley, CanalaveYoungBoy],
     }
 );
 TownList['Snowpoint City'] = new Town(
