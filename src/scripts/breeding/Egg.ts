@@ -72,7 +72,7 @@ class Egg implements Saveable {
         if (this.canHatch()) {
             if (this.type == EggType.Pokemon) {
                 Notifier.notify({
-                    message: `${this.pokemon} is ready to hatch!`,
+                    message: `${PokemonHelper.displayName(this.pokemon)()} is ready to hatch!`,
                     type: NotificationConstants.NotificationOption.success,
                     sound: NotificationConstants.NotificationSound.Hatchery.ready_to_hatch,
                     setting: NotificationConstants.NotificationSetting.Hatchery.ready_to_hatch,
@@ -128,17 +128,17 @@ class Egg implements Saveable {
 
         if (shiny) {
             Notifier.notify({
-                message: `✨ You hatched a shiny ${this.pokemon}! ✨`,
+                message: `✨ You hatched a shiny ${PokemonHelper.displayName(this.pokemon)()}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched_shiny,
             });
-            App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}!`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${PokemonHelper.displayName(this.pokemon)()}!`);
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonHatched[pokemonID]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonHatched);
         } else {
             Notifier.notify({
-                message: `You hatched ${GameHelper.anOrA(this.pokemon)} ${this.pokemon}!`,
+                message: `You hatched ${GameHelper.anOrA(this.pokemon)} ${PokemonHelper.displayName(this.pokemon)()}!`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched,
             });
