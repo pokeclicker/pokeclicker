@@ -185,7 +185,7 @@ class Game {
                 App.game.quests.getQuestLine('Mining Expedition').beginQuest(App.game.quests.getQuestLine('Mining Expedition').curQuest());
             }
         }
-        // Mining expedition questline
+        // Vivillon questline (if not started due to gym bug)
         if (App.game.quests.getQuestLine('The Great Vivillon Hunt!').state() == QuestLineState.inactive) {
             if (App.game.party.alreadyCaughtPokemon(666.01)) {
                 // Has obtained Aerodactyl
