@@ -2893,7 +2893,7 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
 TownList['Postwick'] = new Town(
     'Postwick',
     GameConstants.Region.galar,
-    [PostwickShop],
+    [TemporaryBattleList['Hop1'], PostwickShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
         npcs: [ProfMagnolia, Mom],
@@ -2908,10 +2908,18 @@ TownList['Wedgehurst'] = new Town(
         npcs: [TrainStationGuy],
     }
 );
+TownList['Professor Magnolia\'s House'] = new Town(
+    'Professor Magnolia\'s House',
+    GameConstants.Region.galar,
+    [TemporaryBattleList['Hop2']],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 2)],
+    }
+);
 TownList['Motostoke'] = new Town(
     'Motostoke',
     GameConstants.Region.galar,
-    [GymList['Motostoke'], MotostokeShop],
+    [TemporaryBattleList['Hop3'], TemporaryBattleList['Marnie1'], MotostokeShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
     }
@@ -2919,7 +2927,7 @@ TownList['Motostoke'] = new Town(
 TownList['Turffield'] = new Town(
     'Turffield',
     GameConstants.Region.galar,
-    [GymList['Turffield'], TurffieldShop],
+    [TurffieldShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 13)],
     }
@@ -2927,7 +2935,7 @@ TownList['Turffield'] = new Town(
 TownList['Hulbury'] = new Town(
     'Hulbury',
     GameConstants.Region.galar,
-    [GymList['Hulbury'], HulburyShop],
+    [TemporaryBattleList['Hop4'], HulburyShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 14)],
     }
@@ -2935,7 +2943,7 @@ TownList['Hulbury'] = new Town(
 TownList['Stow-on-Side'] = new Town(
     'Stow-on-Side',
     GameConstants.Region.galar,
-    [GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop],
+    [TemporaryBattleList['Hop5'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], TemporaryBattleList['Bede3'], StowonSideShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
     }
@@ -2943,7 +2951,7 @@ TownList['Stow-on-Side'] = new Town(
 TownList['Ballonlea'] = new Town(
     'Ballonlea',
     GameConstants.Region.galar,
-    [GymList['Ballonlea'], BallonleaShop],
+    [BallonleaShop],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glimwood Tangle'))],
     }
@@ -2951,7 +2959,7 @@ TownList['Ballonlea'] = new Town(
 TownList['Hammerlocke'] = new Town(
     'Hammerlocke',
     GameConstants.Region.galar,
-    [GymList['Hammerlocke'], HammerlockeShop],
+    [TemporaryBattleList['Hop6'], TemporaryBattleList['The Darkest Day'], HammerlockeShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
     }
@@ -2959,7 +2967,7 @@ TownList['Hammerlocke'] = new Town(
 TownList['Circhester'] = new Town(
     'Circhester',
     GameConstants.Region.galar,
-    [GymList['Circhester1'], GymList['Circhester2'], CirchesterShop],
+    [TemporaryBattleList['Hop7'], GymList['Circhester1'], GymList['Circhester2'], CirchesterShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
     }
@@ -2967,7 +2975,7 @@ TownList['Circhester'] = new Town(
 TownList['Spikemuth'] = new Town(
     'Spikemuth',
     GameConstants.Region.galar,
-    [GymList['Spikemuth'], SpikemuthShop],
+    [TemporaryBattleList['Marnie2'], SpikemuthShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 30)],
     }
@@ -3046,17 +3054,12 @@ TownList['Galar Mine No. 2'] = new DungeonTown(
 TownList['Glimwood Tangle'] = new DungeonTown(
     'Glimwood Tangle',
     GameConstants.Region.galar,
-    [
-        new MultiRequirement([
-            new GymBadgeRequirement(BadgeEnums.Galar_Fighting),
-            new GymBadgeRequirement(BadgeEnums.Galar_Ghost),
-        ]),
-    ]
+    [new TemporaryBattleRequirement['Bede3']]
 );
 TownList['Rose Tower'] = new DungeonTown(
     'Rose Tower',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 32)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Hop)]
 );
 TownList['Dusty Bowl'] = new DungeonTown(
     'Dusty Bowl',

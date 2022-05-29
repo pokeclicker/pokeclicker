@@ -1491,7 +1491,7 @@ GymList['Turffield'] = new Gym(
     BadgeEnums.Galar_Grass,
     40000,
     'The power of Grass has wilted... What an incredible Gym Challenger!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 4)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 13)]
 );
 GymList['Hulbury'] = new Gym(
     'Nessa',
@@ -1504,7 +1504,7 @@ GymList['Hulbury'] = new Gym(
     BadgeEnums.Galar_Water,
     60000,
     'I may proudly be the strongest member of this Gym, but I was totally washed away!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 5)]
+    [new TemporaryBattleRequirement('Hop4')]
 );
 GymList['Motostoke'] = new Gym(
     'Kabu',
@@ -1517,7 +1517,7 @@ GymList['Motostoke'] = new Gym(
     BadgeEnums.Galar_Fire,
     60000,
     'I\'m often regarded as the first real roadblock of the Gym Challenge, and yet you defeated me! Clearly, your talent surpassed my many years of experience. I still have much to learn!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 13)]
+    [new TemporaryBattleRequirement('Marnie1')]
 );
 GymList['Stow-on-Side1'] = new Gym(
     'Bea',
@@ -1531,7 +1531,7 @@ GymList['Stow-on-Side1'] = new Gym(
     BadgeEnums.Galar_Fighting,
     80000,
     'Your strength nearly made me want to turn and run in my bare feet',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 15)]
+    [new TemporaryBattleRequirement('Hop5')]
 );
 GymList['Stow-on-Side2'] = new Gym(
     'Allister',
@@ -1545,7 +1545,7 @@ GymList['Stow-on-Side2'] = new Gym(
     BadgeEnums.Galar_Ghost,
     80000,
     'Maybe my mask... kept me from seeing just how strong you really are...',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 15)]
+    [new TemporaryBattleRequirement('Hop5')]
 );
 GymList['Ballonlea'] = new Gym(
     'Opal',
@@ -1573,7 +1573,7 @@ GymList['Circhester1'] = new Gym(
     BadgeEnums.Galar_Rock,
     80000,
     'I just want to climb into a hole... Well, I guess it\'d be more like falling from here.',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 18)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
 );
 GymList['Circhester2'] = new Gym(
     'Melony',
@@ -1587,7 +1587,7 @@ GymList['Circhester2'] = new Gym(
     BadgeEnums.Galar_Ice,
     80000,
     'I think you took breaking the ice a little too literally...',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 18)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
 );
 GymList['Spikemuth'] = new Gym(
     'Piers',
@@ -1601,7 +1601,7 @@ GymList['Spikemuth'] = new Gym(
     BadgeEnums.Galar_Dark,
     96000,
     'Me an\' my team gave it our best. Let\'s meet up again for a battle some time...',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 22)]
+    [new TemporaryBattleRequirement('Marnie2')]
 );
 GymList['Hammerlocke'] = new Gym(
     'Raihan',
@@ -1615,10 +1615,7 @@ GymList['Hammerlocke'] = new Gym(
     BadgeEnums.Galar_Dragon,
     128000,
     'I might have lost, but I still look good. Maybe I should snap a quick selfie...',
-    [
-        new RouteKillRequirement(10, GameConstants.Region.galar, 22),
-        new GymBadgeRequirement(BadgeEnums.Galar_Dark),
-    ]
+    [new GymBadgeRequirement(BadgeEnums.Galar_Dark)]
 );
 GymList['Trainer Marnie'] = new Gym(
     'Marnie',
@@ -1655,11 +1652,10 @@ GymList['Trainer Hop'] = new Gym(
     'Trainer Hop',
     [
         new GymPokemon('Dubwool', 130579274, 59),
-        new GymPokemon('Cramorant', 117521346, 58),
         new GymPokemon('Pincurchin', 117521346, 58),
         new GymPokemon('Snorlax', 117521346, 58),
-        new GymPokemon('Gigantamax Corviknight', 130579274, 59),
-        new GymPokemon('Inteleon', 137833678, 60),
+        new GymPokemon('Inteleon', 130579274, 59),
+        new GymPokemon('Gigantamax Corviknight', 137833678, 60),
     ],
     BadgeEnums.Elite_Hop,
     200000,
@@ -1686,7 +1682,7 @@ GymList['Champion Leon'] = new Champion(
     BadgeEnums.Elite_GalarChampion,
     250000,
     'My time as Champion is over... But what a champion time it\'s been! Thank you for the greatest battle I\'ve ever had!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Hop)],
+    [new TemporaryBattleRequirement('The Darkest Day')],
     // Bulbasaur
     [
         new GymPokemon('Seismitoad', 133481036, 64),

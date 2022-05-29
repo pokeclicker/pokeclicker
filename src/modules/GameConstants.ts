@@ -1188,6 +1188,21 @@ export const RegionalStarters = [
 export const TemporaryBattles = [
     'Ultra Wormhole',
     'Ultra Megalopolis',
+    'Hop1',
+    'Mirages',
+    'Hop2',
+    'Hop3',
+    'Bede1',
+    'Hop4',
+    'Bede2',
+    'Marnie1',
+    'Hop5',
+    'Bede3',
+    'Hop6',
+    'Hop7',
+    'Marnie2',
+    'The Darkest Day',
+    'Hop8',
 ];
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

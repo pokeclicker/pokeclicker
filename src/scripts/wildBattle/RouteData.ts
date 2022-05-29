@@ -1945,7 +1945,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Gossifleur', 'Corvisquire', 'Rookidee', 'Skwovet', 'Rolycoly', 'Sizzlipede', 'Vulpix', 'Growlithe', 'Tyrogue', 'Galarian Zigzagoon', 'Stunky', 'Trubbish', 'Cherubi', 'Mudbray','Pancham', 'Klink', 'Machop'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 6)]
+    [new TemporaryBattleRequirement('Hop3')]
 ));
 Routes.add(new RegionRoute(
     'Galar Route 4', GameConstants.Region.galar, 13,
@@ -1953,7 +1953,7 @@ Routes.add(new RegionRoute(
         land: ['Yamper', 'Cutiefly', 'Wooloo', 'Milcery', 'Galarian Meowth', 'Budew', 'Ferroseed', 'Joltik', 'Pikachu', 'Eevee', 'Electrike', 'Pumpkaboo', 'Diglett'],
         water: ['Magikarp', 'Goldeen', 'Chewtle'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine'))]
+    [new TemporaryBattleRequirement('Bede1')]
 ));
 Routes.add(new RegionRoute(
     'Galar Route 5', GameConstants.Region.galar, 14,
@@ -1968,7 +1968,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Impidimp', 'Chewtle', 'Koffing', 'Hatenna', 'Noctowl', 'Throh', 'Sawk', 'Sudowoodo', 'Salandit', 'Pawniard', 'Scraggy', 'Croagunk', 'Roggenrola'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine No. 2'))]
+    [new TemporaryBattleRequirement('Bede1')]
 ));
 Routes.add(new RegionRoute(
     'Motostoke Riverbank', GameConstants.Region.galar, 16,
@@ -2155,7 +2155,7 @@ Routes.add(new RegionRoute(
         land: ['Thievul', 'Corviknight', 'Perrserker', 'Morpeko', 'Morpeko (hangry)', 'Liepard', 'Seismitoad', 'Karrablast', 'Shelmet', 'Meowstic', 'Corviknight', 'Galvantula', 'Inkay', 'Thievul', 'Perrserker', 'Morpeko'],
         headbutt: ['Greedent'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Galar_Fairy)]
+    [new TemporaryBattleRequirement('Hop6')]
 ));
 Routes.add(new RegionRoute(
     'Galar Route 8', GameConstants.Region.galar, 25,
@@ -2185,12 +2185,7 @@ Routes.add(new RegionRoute(
         land: ['Cramorant', 'Octillery', 'Kingler', 'Pyukumuku', 'Gastrodon (east)', 'Jellicent', 'Mareanie', 'Glalie'],
         water: ['Wishiwashi (Solo)', 'Qwilfish', 'Mantyke'],
     }),
-    [
-        new MultiRequirement([
-            new GymBadgeRequirement(BadgeEnums.Galar_Rock),
-            new GymBadgeRequirement(BadgeEnums.Galar_Ice),
-        ]),
-    ]
+    [new TemporaryBattleRequirement('Hop7')]
 ));
 Routes.add(new RegionRoute(
     'Circhester Bay', GameConstants.Region.galar, 29,
