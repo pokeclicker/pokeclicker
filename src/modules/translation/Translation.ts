@@ -18,6 +18,9 @@ export default class Translate {
                 debug: true,
                 ns: ['test', 'pokemon'],
                 fallbackLng: 'en',
+                backend: {
+                    loadPath: './locales/{{lng}}/{{ns}}.json',
+                },
             });
 
         languageSetting.observableValue.subscribe((val) => {
