@@ -59,7 +59,7 @@ TemporaryBattleList['Bede1'] = new TemporaryBattle(
     [
       new GymPokemon('Solosis', 282601920, 60),
       new GymPokemon('Gothita', 282601920, 60),
-      new GymPokemon('Hattena', 282601920, 60),
+      new GymPokemon('Hatenna', 282601920, 60),
     ],
     'I see... Well, that\'s fine. I wasn\'t really trying all that hard anyway.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine'))]
@@ -80,7 +80,7 @@ TemporaryBattleList['Bede2'] = new TemporaryBattle(
       new GymPokemon('Solosis', 282601920, 60),
       new GymPokemon('Gothita', 282601920, 60),
       new GymPokemon('Galarian Ponyta', 282601920, 60),
-      new GymPokemon('Hattena', 282601920, 60),
+      new GymPokemon('Hatenna', 282601920, 60),
     ],
     'You showed at least a little effort, so I decided I should let you win!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine No. 2'))]
