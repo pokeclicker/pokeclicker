@@ -40,7 +40,7 @@ class PokemonFactory {
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         if (shiny) {
             Notifier.notify({
-                message: `✨ You encountered a shiny ${name}! ✨`,
+                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
@@ -126,7 +126,7 @@ class PokemonFactory {
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         if (shiny) {
             Notifier.notify({
-                message: `✨ You encountered a shiny ${name}! ✨`,
+                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
@@ -163,7 +163,7 @@ class PokemonFactory {
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         if (shiny) {
             Notifier.notify({
-                message: `✨ You encountered a shiny ${name}! ✨`,
+                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,

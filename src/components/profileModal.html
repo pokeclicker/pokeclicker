@@ -17,7 +17,7 @@
                         <label>Pokemon</label>
                         <select autocomplete="off" class="custom-select" onchange="App.game.profile.pokemon(+this.value)">
                             <!-- ko foreach: App.game.party.caughtPokemon -->
-                            <option data-bind="attr: { value: $data.id, selected: App.game.profile.pokemon() === $data.id }, text: $data.name">Pokemon</option>
+                            <option data-bind="attr: { value: $data.id, selected: App.game.profile.pokemon() === $data.id }, text: $data.displayName">Pokemon</option>
                             <!-- /ko -->
                         </select>
                     </div>

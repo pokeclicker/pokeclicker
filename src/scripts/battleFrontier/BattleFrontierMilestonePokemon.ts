@@ -1,7 +1,5 @@
 class BattleFrontierMilestonePokemon extends BattleFrontierMilestone {
-    pokemonName: string;
-
-    constructor (stage: number, pokemonName: string, image = 'assets/images/items/pokeball/Premierball.png') {
+    constructor (stage: number, private pokemonName: string, image = 'assets/images/items/pokeball/Premierball.png') {
         super(
             stage,
             () => {
@@ -10,5 +8,9 @@ class BattleFrontierMilestonePokemon extends BattleFrontierMilestone {
             image,
             pokemonName
         );
+    }
+
+    get displayName() {
+        return PokemonHelper.displayName(this.pokemonName);
     }
 }

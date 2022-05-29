@@ -16,6 +16,7 @@ class SafariPokemon implements PokemonInterface {
     private _angry: KnockoutObservable<number>;
     private _eating: KnockoutObservable<number>;
     private _eatingBait: KnockoutObservable<BaitType>;
+    private _displayName: KnockoutObservable<string>;
 
     // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
     static readonly list: {
@@ -55,12 +56,14 @@ class SafariPokemon implements PokemonInterface {
         GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[this.id]);
         GameHelper.incrementObservable(App.game.statistics.totalPokemonEncountered);
 
+        this._displayName = PokemonHelper.displayName(name);
+
         if (this.shiny) {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[this.id]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
 
             Notifier.notify({
-                message: `✨ You encountered a shiny ${name}! ✨`,
+                message: `✨ You encountered a shiny ${this.displayName}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
@@ -135,5 +138,9 @@ class SafariPokemon implements PokemonInterface {
     public static random() {
         const pokemon = Rand.fromWeightedArray(SafariPokemon.list, SafariPokemon.list.map(p => p.weight));
         return new SafariPokemon(pokemon.name);
+    }
+
+    public get displayName() {
+        return this._displayName();
     }
 }
