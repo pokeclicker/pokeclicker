@@ -81,6 +81,7 @@
     "bootstrap": "^4.5.3",
     "eslint": "^7.4.0",
     "i18next": "^21.8.3",
+    "i18next-browser-languagedetector": "^6.1.4",
     "i18next-http-backend": "^1.4.0",
     "intro.js": "^2.9.3",
     "jquery": "^3.5.1",

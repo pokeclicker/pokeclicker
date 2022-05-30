@@ -1,5 +1,6 @@
 import i18next, { TOptions } from 'i18next';
 import Backend from 'i18next-http-backend';
+import LanguageDetector from 'i18next-browser-languagedetector';
 import type { PureComputed, Observable } from 'knockout';
 import GameHelper from '../GameHelper';
 import type Setting from '../settings/Setting';
@@ -39,8 +40,9 @@ export default class Translate {
 
         i18next
             .use(Backend)
+            .use(LanguageDetector)
             .init({
-                lng: languageSetting.value,
+                load: 'languageOnly',
                 debug: true,
                 ns: ['test', 'pokemon'],
                 fallbackLng: 'en',
@@ -48,6 +50,16 @@ export default class Translate {
                     loadPath: './locales/{{lng}}/{{ns}}.json',
                 },
             });
+
+        i18next.on('initialized', () => {
+            const lang = i18next.language;
+
+            if (lang in Language) {
+                languageSetting.observableValue(lang as Language);
+            } else {
+                i18next.changeLanguage(languageSetting.value);
+            }
+        });
 
         languageSetting.observableValue.subscribe((val) => {
             i18next.changeLanguage(val, () => {
