@@ -11,7 +11,7 @@ import { SortOptionConfigs, SortOptions } from './SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from '../achievements/AchievementSortOptions';
 import { Region, AchievementType } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
-import Language from '../translation/Language';
+import Language, { LanguageNames } from '../translation/Language';
 
 export default Settings;
 
@@ -269,4 +269,4 @@ Settings.getSetting('backgroundImage').observableValue.subscribe((newValue) => {
 });
 
 // Translation
-Settings.add(new Setting<Language>('translation.language', 'Language', Settings.enumToSettingOptionArray(Language) as unknown as SettingOption<Language>[], Language.en));
+Settings.add(new Setting<Language>('translation.language', 'Language', Settings.enumToSettingOptionArray(Language, () => true, LanguageNames) as unknown as SettingOption<Language>[], Language.en));
