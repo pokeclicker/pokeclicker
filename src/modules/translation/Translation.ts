@@ -1,11 +1,37 @@
-import i18next from 'i18next';
+import i18next, { TOptions } from 'i18next';
 import Backend from 'i18next-http-backend';
 import type { PureComputed, Observable } from 'knockout';
 import GameHelper from '../GameHelper';
 import type Setting from '../settings/Setting';
+import memoize from '../utilities/memoize';
 import Language from './Language';
 
+const getTranslatedMemoResolver = (
+    key: string,
+    namespace: string,
+    otherOptions?: TOptions,
+) => {
+    if (otherOptions) {
+        return null;
+    }
+
+    return `${namespace}:${key}`;
+};
 export default class Translate {
+    get = memoize((
+        key: string,
+        namespace: string,
+        otherOptions?: TOptions,
+    ): PureComputed<string> => ko.pureComputed(() => {
+        // recompute when language changes
+        this.languageUpdated();
+
+        return i18next.t(key, {
+            ...(otherOptions ?? {}),
+            ns: namespace,
+        });
+    }), getTranslatedMemoResolver);
+
     private languageUpdated: Observable<number>;
 
     constructor(languageSetting: Setting<Language>) {
@@ -26,17 +52,6 @@ export default class Translate {
         languageSetting.observableValue.subscribe((val) => {
             i18next.changeLanguage(val, () => {
                 GameHelper.incrementObservable(this.languageUpdated);
-            });
-        });
-    }
-
-    get(key: string, namespace: string): PureComputed<string> {
-        return ko.pureComputed(() => {
-            // recompute when language changes
-            this.languageUpdated();
-
-            return i18next.t(key, {
-                ns: namespace,
             });
         });
     }
