@@ -151,7 +151,7 @@ class BreedingController {
                 return false;
             }
 
-            if (!BreedingController.filter.search().test(partyPokemon.name)) {
+            if (!BreedingController.filter.search().test(partyPokemon.displayName)) {
                 return false;
             }
 
