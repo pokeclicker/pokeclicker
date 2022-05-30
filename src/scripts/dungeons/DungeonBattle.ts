@@ -69,10 +69,30 @@ class DungeonBattle extends Battle {
      */
     private static defeatTrainerPokemon() {
         this.enemyPokemon().defeat(true);
-
+        const enemyPokemon = this.enemyPokemon();
+        const isShiny: boolean = enemyPokemon.shiny;
+        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny);
+        const monotypeIsActivated = App.game.challenges.list.monoType.active();
+        const teamRocketIsActivated = App.game.challenges.list.teamRocket.active() || true;
+        const isAllowedToCatch : boolean =
+        (
+            (monotypeIsActivated && PokemonType[enemyPokemon.type1] === App.game.challenges.list.monoType.data()[0]) ||
+            (monotypeIsActivated && PokemonType[enemyPokemon.type2] === App.game.challenges.list.monoType.data()[0])
+        );
         GameHelper.incrementObservable(this.trainerPokemonIndex);
         App.game.breeding.progressEggsBattle(DungeonRunner.dungeon.difficultyRoute, player.region);
         player.lowerItemMultipliers(MultiplierDecreaser.Battle);
+
+        if (pokeBall !== GameConstants.Pokeball.None && teamRocketIsActivated && !monotypeIsActivated) {
+            this.prepareCatch(enemyPokemon, pokeBall);
+            setTimeout(
+                () => {
+                    this.attemptCatch(enemyPokemon);
+                },
+                App.game.pokeballs.calculateCatchTime(pokeBall)
+            )
+            ;
+        }
 
         // No Pokemon left, trainer defeated
         if (this.trainerPokemonIndex() >= this.trainer().team.length) {

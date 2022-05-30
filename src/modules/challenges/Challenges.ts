@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Saveable } from '../DataStore/common/Saveable';
 import Challenge from './Challenge';
 
@@ -17,6 +18,7 @@ export default class Challenges implements Saveable {
         disableProteins: new Challenge('No Protein', 'Disables the usage of Proteins'),
         customStarter: new Challenge('Custom Starter', 'Choose a starter', false, true),
         monoType: new Challenge('Monotype', 'Choose type', false, true),
+        teamRocket: new Challenge('Team Rocket', 'THIEFFFFFFF'),
     };
 
     fromJSON(json): void {
@@ -25,14 +27,16 @@ export default class Challenges implements Saveable {
         }
 
         Object.entries(json.list).forEach(([challenge, value]) => {
-            this.list[challenge]?.active(!!value);
+            console.log(challenge);
+            console.log(value);
+            this.list[challenge]?.fromJSON(value);
         });
     }
 
     toJSON(): Record<string, any> {
         const list = {};
         Object.entries(this.list).forEach(([c, v]) => {
-            list[c] = v.active();
+            list[c] = v.toJSON();
         });
         return {
             list,

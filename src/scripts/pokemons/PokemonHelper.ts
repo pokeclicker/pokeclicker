@@ -48,6 +48,10 @@ class PokemonHelper {
         return this.getPokemonByName(pokemonMap[id].name);
     }
 
+    public static getPokemonCatchRateById(id: number): number {
+        return this.getPokemonByName(pokemonMap[id].name).catchRate;
+    }
+
     public static getPokemonByName(name: PokemonNameType): DataPokemon {
         const basePokemon = pokemonMap[name];
         if (!basePokemon) {

@@ -38,13 +38,20 @@
           </div>
         </div>
 
-        <div>
+        <div data-bind="visible: !Battle.catching()">
             <!-- TODO: Add after all Gym Leader images are formatted correctly (same sizes, style etc)
             <img style="position:absolute; left:65%; top: 64px; height: 64px" data-bind="attr:{ src: GymBattle.gym.imagePath }" onerror="this.src = 'assets/images/transparent.png'"/>
             -->
             <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(GymBattle.enemyPokemon(), GymBattle.enemyPokemon().shiny) }" src=""/>
         </div>
-
+        <div data-bind="visible: Battle.catching()" class="catchChance">
+            <img class="pokeball-animated"
+                 data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.svg'}"
+                 src=""/>
+            <br>
+            Catch Chance:
+            <knockout data-bind="text: Math.floor(Battle.catchRateActual()) + '%'">Catch Rate</knockout>
+        </div>
         <div class="progress hitpoints" style="height: 20px;">
             <div class="progress-bar bg-danger" role="progressbar"
                     data-bind="attr:{ style: 'width:' + GymBattle.enemyPokemon().healthPercentage() + '%' }"

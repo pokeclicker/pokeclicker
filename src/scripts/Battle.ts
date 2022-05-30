@@ -81,8 +81,13 @@ class Battle {
         App.game.breeding.progressEggsBattle(Battle.route, player.region);
         const isShiny: boolean = enemyPokemon.shiny;
         const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny);
-        const isAllowedToCatch : boolean = App.game.challenges.list.monoType.active() && (PokemonType[enemyPokemon.type1] === App.game.challenges.list.monoType.data()[0] || PokemonType[enemyPokemon.type2] === App.game.challenges.list.monoType.data()[0]);
-        if (pokeBall !== GameConstants.Pokeball.None && isAllowedToCatch) {
+        const MonotypeIsActivated = App.game.challenges.list.monoType.active();
+        const isAllowedToCatch : boolean =
+        (
+            MonotypeIsActivated && PokemonType[enemyPokemon.type1] === App.game.challenges.list.monoType.data()[0] ||
+            MonotypeIsActivated && PokemonType[enemyPokemon.type2] === App.game.challenges.list.monoType.data()[0]
+        );
+        if (pokeBall !== GameConstants.Pokeball.None && ( isAllowedToCatch || !MonotypeIsActivated)) {
             this.prepareCatch(enemyPokemon, pokeBall);
             setTimeout(
                 () => {
@@ -124,7 +129,9 @@ class Battle {
     protected static calculateActualCatchRate(enemyPokemon: BattlePokemon, pokeBall: GameConstants.Pokeball) {
         const pokeballBonus = App.game.pokeballs.getCatchBonus(pokeBall);
         const oakBonus = App.game.oakItems.calculateBonus(OakItemType.Magic_Ball);
-        const totalChance = GameConstants.clipNumber(enemyPokemon.catchRate + pokeballBonus + oakBonus, 0, 100);
+        //Gym pokemon are by default at 0
+        const getCatchRate = PokemonHelper.getPokemonCatchRateById(enemyPokemon.id);
+        const totalChance = GameConstants.clipNumber(getCatchRate + pokeballBonus + oakBonus, 0, 100);
         return totalChance;
     }
 

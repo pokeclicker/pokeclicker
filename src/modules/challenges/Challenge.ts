@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
     Observable as KnockoutObservable,
 } from 'knockout';
@@ -38,8 +39,17 @@ export default class Challenge {
             this.active(false);
         }
     }
-
-    toJSON(): boolean {
-        return this.active();
+    toJSON(): Record<string, any> {
+        return {
+            active: this.active(),
+            data: this.data(),
+            needDataInput: this.needDataInput(),
+        };
+    }
+    fromJSON(json: Record<string, any>) {
+        console.log(json);
+        this.active(json.active);
+        this.data(json.data);
+        this.needDataInput(json.needDataInput);
     }
 }
