@@ -72,7 +72,7 @@ class Battle {
      * Award the player with money and exp, and throw a Pokéball if applicable
      */
     public static defeatPokemon() {
-        const enemyPokemon = this.enemyPokemon();
+        const enemyPokemon = this.enemyPokemon() as BattlePokemon;
         Battle.route = player.route();
         enemyPokemon.defeat();
 
@@ -81,8 +81,8 @@ class Battle {
         App.game.breeding.progressEggsBattle(Battle.route, player.region);
         const isShiny: boolean = enemyPokemon.shiny;
         const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny);
-
-        if (pokeBall !== GameConstants.Pokeball.None) {
+        const isAllowedToCatch : boolean = App.game.challenges.list.monoType.active() && (PokemonType[enemyPokemon.type1] === App.game.challenges.list.monoType.data()[0] || PokemonType[enemyPokemon.type2] === App.game.challenges.list.monoType.data()[0]);
+        if (pokeBall !== GameConstants.Pokeball.None && isAllowedToCatch) {
             this.prepareCatch(enemyPokemon, pokeBall);
             setTimeout(
                 () => {
