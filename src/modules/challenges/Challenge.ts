@@ -7,8 +7,7 @@ import Notifier from '../notifications/Notifier';
 export default class Challenge {
     public active: KnockoutObservable<boolean>;
     public needDataInput : KnockoutObservable<boolean>;
-    public data : KnockoutObservable<string>;
-
+    public data : KnockoutObservable<any>;
     constructor(
         public type: string,
         public description: string,
