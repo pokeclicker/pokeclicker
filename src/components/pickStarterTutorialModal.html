@@ -29,12 +29,12 @@ aria-labelledby="pickStarterTutorialModalLabel" aria-hidden="true">
                                   src="assets/images/pokemon/7.png"
                                   onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Squirtle); player.regionStarters[0](2);">
                        </div>
-                   <div class="col" data-bind="visible: App.game.challenges.list.customStarter.active()">
-                       <div  data-bind="if: App.game.challenges.list.customStarter.active() && !!App.game.challenges.list.customStarter.data()" >
-                        <input class="image-starter" type="image" data-bind="attr: { src: 'assets/images/pokemon/' + App.game.challenges.list.customStarter.data()[0].id + '.png' },"
-                               onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Squirtle); player.regionStarters[0](2);">
+                        <div class="col" data-bind="visible: App.game.challenges.list.customStarter.active()">
+                            <div  data-bind="if: App.game.challenges.list.customStarter.active() && !!App.game.challenges.list.customStarter.data()" >
+                                <input class="image-starter" type="image" data-bind="attr: { src: 'assets/images/pokemon/' + App.game.challenges.list.customStarter.data()[0].id + '.png' },"
+                                    onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Squirtle); player.regionStarters[0](2);">
+                                </div>
                         </div>
-                   </div>
                    </div>
                </div>
            </div>
