@@ -42,7 +42,6 @@ export default class Translate {
             .use(Backend)
             .use(LanguageDetector)
             .init({
-                load: 'languageOnly',
                 debug: true,
                 ns: ['test', 'pokemon'],
                 fallbackLng: 'en',
