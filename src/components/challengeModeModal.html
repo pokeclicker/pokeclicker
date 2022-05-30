@@ -26,6 +26,9 @@
                                 <!-- ko if: !$data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-secondary btn-block disabled">DISABLED</button><!-- /ko -->
                                 <!-- ko if: $data.active() --><button class="btn btn-success btn-block" data-bind="click: ()=>{$data.disable();}">ACTIVE</button><!-- /ko -->
                             </td>
+                            <td class="p-2" data-bind="visible: $data.needDataInput">
+                                <input data-bind="textInput: $data.data">
+                            </td>
                         </tr>
                     </tbody>
                 </table>

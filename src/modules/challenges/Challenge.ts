@@ -6,13 +6,18 @@ import Notifier from '../notifications/Notifier';
 
 export default class Challenge {
     public active: KnockoutObservable<boolean>;
+    public needDataInput : KnockoutObservable<boolean>;
+    public data : KnockoutObservable<string>;
 
     constructor(
         public type: string,
         public description: string,
         active = false,
+        needDataInput = false,
     ) {
         this.active = ko.observable(active);
+        this.needDataInput = ko.observable(needDataInput);
+        this.data = ko.observable('');
     }
 
     activate(): void {

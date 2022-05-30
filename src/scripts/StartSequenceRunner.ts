@@ -15,7 +15,12 @@ class StartSequenceRunner {
         App.game.quests.getQuestLine('Tutorial Quests').beginQuest(0);
         this.starterPicked = s;
         $('#pickStarterTutorialModal').modal('hide');
-        const dataPokemon = PokemonHelper.getPokemonByName(GameConstants.Starter[this.starterPicked]);
+        let dataPokemon = null;
+        if (App.game.challenges.list.customStarter.active) {
+            dataPokemon = PokemonHelper.getPokemonById(Number.parseInt(App.game.challenges.list.customStarter.data()));
+        } else {
+            dataPokemon = PokemonHelper.getPokemonByName(GameConstants.Starter[this.starterPicked]);
+        }
         const shiny: boolean = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
 
         App.game.gameState = GameConstants.GameState.fighting;
