@@ -27,8 +27,20 @@
                                 <!-- ko if: $data.active() --><button class="btn btn-success btn-block" data-bind="click: ()=>{$data.disable();}">ACTIVE</button><!-- /ko -->
                             </td>
                             <td class="p-2" data-bind="visible: $data.needDataInput">
-                                <select data-bind="options: pokemonList,optionsText: 'name',value: 'id' , selectedOptions: $data.data">
-                                </select>
+                                <div data-bind="visible: $data.type =='Custom Starter'">
+                                    <select data-bind="options: pokemonList,optionsText: 'name',value: 'id' , selectedOptions: $data.data">
+                                    </select>
+                                </div>
+                                <div data-bind="visible: $data.type =='Monotype'">
+                                    <!-- <select data-bind="options: PokemonType[$pokemonTypeSelect],optionsText: 'Text',value: 'Value' , selectedOptions: $data.data">
+                                    </select> -->
+                                    <select autocomplete="off" class="custom-select" data-bind="value: $data.data">
+                                        <!-- ko foreach: GameHelper.enumStrings(PokemonType) -->
+                                        <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                                        <!-- /ko -->
+                                    </select>
+                                </div>
+                            </div>
                             </td>
                             <!-- <input type="number" min="1" max="962" data-bind="textInput: $data.data"> -->
                         </tr>
