@@ -43,7 +43,7 @@ export default class Translate {
             .use(LanguageDetector)
             .init({
                 debug: true,
-                ns: ['test', 'pokemon'],
+                ns: ['pokemon'],
                 fallbackLng: 'en',
                 backend: {
                     loadPath: './locales/{{lng}}/{{ns}}.json',
