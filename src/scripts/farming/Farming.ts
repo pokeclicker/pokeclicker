@@ -384,7 +384,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Maranga]   = new Berry(BerryType.Maranga,  [5040, 10080, 20160, 40320, 80640],
             1, 0.05, 3100, 20,
             [10, 10, 30, 30, 10], BerryColor.Blue,
-            ['This Berry resembles the Durin Berry; however, its spikes are less pronounced. It is quite delicious when roasted.'], undefined, ['Flabébé (Blue)']);
+            ['This Berry resembles the Durin Berry, though its spikes are less pronounced. It is quite delicious when roasted.'], undefined, ['Flabébé (Blue)']);
 
         this.berryData[BerryType.Liechi]    = new Berry(BerryType.Liechi,   [21600, 43200, 86400, 172800, 345600],
             0.5, 0, 10000, 20,
