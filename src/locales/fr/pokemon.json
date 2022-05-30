@@ -1,4 +1,8 @@
 {
+  "alt": {
+    "mega": "Méga",
+    "mega-sep": "-"
+  },
   "Bulbasaur": "Bulbizarre",
   "Ivysaur": "Herbizarre",
   "Venusaur": "Florizarre",
