@@ -27,8 +27,10 @@
                                 <!-- ko if: $data.active() --><button class="btn btn-success btn-block" data-bind="click: ()=>{$data.disable();}">ACTIVE</button><!-- /ko -->
                             </td>
                             <td class="p-2" data-bind="visible: $data.needDataInput">
-                                <input data-bind="textInput: $data.data">
+                                <select data-bind="options: pokemonList,optionsText: 'name',value: 'id' , selectedOptions: $data.data">
+                                </select>
                             </td>
+                            <!-- <input type="number" min="1" max="962" data-bind="textInput: $data.data"> -->
                         </tr>
                     </tbody>
                 </table>

@@ -17,7 +17,7 @@ class StartSequenceRunner {
         $('#pickStarterTutorialModal').modal('hide');
         let dataPokemon = null;
         if (App.game.challenges.list.customStarter.active) {
-            dataPokemon = PokemonHelper.getPokemonById(Number.parseInt(App.game.challenges.list.customStarter.data()));
+            dataPokemon = PokemonHelper.getPokemonById(Number.parseInt(App.game.challenges.list.customStarter.data().id));
         } else {
             dataPokemon = PokemonHelper.getPokemonByName(GameConstants.Starter[this.starterPicked]);
         }
