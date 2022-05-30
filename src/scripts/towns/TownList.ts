@@ -468,6 +468,26 @@ const AzaleaOldMan = new NPC('Wise Old Man', [
     'It says that the mythical Pokémon Celebi will appear before anyone who has proven they are a Champion Pokémon Trainer.',
 ]);
 
+const EcruteakBill = new NPC('Bill', [
+    'I traveled here all the way from Goldenrod to buy a Soothe Bell for my Eevee.',
+    'When I use a Soothe Bell on Eevee it can evolve into Espeon or Umbreon. It depends on the time. Espeon during the day, Umbreon at night.',
+    'I only brought enough QP for one Soothe Bell. It\'s so hard to choose...',
+]);
+
+const EcruteakEusine = new NPC('Eusine', [
+    'Legends say that when the Brass Tower burned down and became the Burned Tower three unnamed Pokémon perished in the flames.',
+    'Ho-oh came down from the Tin Tower and revived those Pokémon. They became the Legendary Beasts. Some say these Beasts still inhabit the basement of the Burned Tower.',
+    'Could you please clear Burned Tower for me and see if this is true?',
+],
+{ requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'), GameConstants.AchievementOption.less ) });
+
+const EcruteakPokéfan = new NPC('Pokéfan Mike', [
+    'I saw it! Did you see it?! I saw you go in there! I don\'t know what you did in the Burned Tower, but three great Beasts came running out of there!',
+    'It was a great sight to behold. They all went in different directions. I think they are just roaming the region now. My friend Trevor in Blackthorn City can tell you more.',
+    'Eusine was here a second ago. He seemed very excited, but then he suddenly left. I don\'t know where he went. I was a bit distracted by those majestic Beasts...',
+],
+{ requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower')) });
+
 const EcruteakKimonoGirl = new NPC('Kimono Girl', [
     'Legends say that Ho-Oh is searching for a trainer of pure heart.',
     'To prove yourself, you must tame the three legendary beasts of Johto, and bring them to the nearby Tin Tower.',
@@ -544,10 +564,10 @@ TownList['Goldenrod City'] = new Town(
 TownList['Ecruteak City'] = new Town(
     'Ecruteak City',
     GameConstants.Region.johto,
-    [EcruteakCityShop],
+    [EcruteakCityShop, new MoveToDungeon(dungeonList['Burned Tower']), new MoveToDungeon(dungeonList['Tin Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 37)],
-        npcs: [EcruteakKimonoGirl],
+        npcs: [EcruteakBill, EcruteakEusine, EcruteakPokéfan, EcruteakKimonoGirl],
     }
 );
 TownList['Olivine City'] = new Town(
