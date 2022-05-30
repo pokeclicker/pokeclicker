@@ -3,10 +3,12 @@
 class PokemonItem extends CaughtIndicatingItem {
 
     type: PokemonNameType;
+    private _translatedName: KnockoutObservable<string>;
 
     constructor(pokemon: PokemonNameType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint) {
         super(pokemon, basePrice, currency, undefined, undefined, undefined, 'pokemonItem');
         this.type = pokemon;
+        this._translatedName = PokemonHelper.displayName(pokemon);
     }
 
     gain(amt: number) {
@@ -31,6 +33,10 @@ class PokemonItem extends CaughtIndicatingItem {
     get image() {
         const subDirectory = this.imageDirectory ? `${this.imageDirectory}/` : '';
         return `assets/images/items/${subDirectory}${this.name.replace(/[^\s\w.()-]/g, '')}.png`;
+    }
+
+    get displayName(): string {
+        return this._translatedName();
     }
 }
 
