@@ -3,15 +3,14 @@ import Requirement from './Requirement';
 
 export default class WeekdayRequirement extends Requirement {
     // 0 -> Sunday, 1 -> Monday, 2 -> Tuesday, 3 -> Wednesday, 4 -> Thursday, 5 -> Friday, 6 -> Saturday
-    date = new Date();
-    day: number;
-    constructor(day: number, option: AchievementOption = AchievementOption.equal) {
+    WeekdayFunction: ()=>boolean;
+    constructor(WeekdayFunction: ()=>boolean, option: AchievementOption = AchievementOption.equal) {
         super(1, option);
-        this.day = day;
+        this.WeekdayFunction = WeekdayFunction;
     }
 
     public getProgress(): number {
-        return this.date.getDay() === this.day ? 1 : 0;
+        return +this.WeekdayFunction();
     }
 
     // eslint-disable-next-line class-methods-use-this
