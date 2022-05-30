@@ -1939,7 +1939,7 @@ TownList['Relic Passage'] = new DungeonTown(
     'Relic Passage',
     GameConstants.Region.unova,
     [
-        new RouteKillRequirement(10, GameConstants.Region.unova,5),
+        new RouteKillRequirement(10, GameConstants.Region.unova, 5),
         new GymBadgeRequirement(BadgeEnums.Bolt),
     ]
 );
