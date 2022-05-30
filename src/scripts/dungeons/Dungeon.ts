@@ -3,6 +3,7 @@
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/SeededDateRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/WeekdayRequirement.d.ts"/>
 ///<reference path="../../declarations/utilities/SeededDateRand.d.ts"/>
 ///<reference path="../achievements/ObtainedPokemonRequirement.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
@@ -1041,6 +1042,12 @@ dungeonList['Union Cave'] = new Dungeon('Union Cave',
     ],
     63600,
     [
+        new DungeonBossPokemon('Lapras', 450000, 20, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new GymBadgeRequirement(BadgeEnums.Fog),
+                new WeekdayRequirement(() => new Date().getDay() == 5), // Friday
+            ])}),
         new DungeonTrainer('Hiker',
             [new GymPokemon('Onix', 300000, 11)],
             { weight: 1 }, 'Daniel'),
