@@ -1,5 +1,7 @@
 import BadgeEnums from '../enums/Badges';
 import { Region } from '../GameConstants';
+import * as GameConstants from '../GameConstants';
+import RouteKillRequirement from '../requirements/RouteKillRequirement';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
 import MultiRequirement from '../requirements/MultiRequirement';
 import NullRequirement from '../requirements/NullRequirement';
