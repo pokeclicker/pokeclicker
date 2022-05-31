@@ -4,7 +4,7 @@
         <h2 class="pageItemTitle" style="display: block;">
 
             <knockout class="left">
-                <knockout data-bind="text: GymBattle.gym.leaderName.replace(/\d/g,'')"></knockout>
+                <knockout data-bind="text: GymBattle.gym.leaderName.replace(/[0-9]/g, '')"></knockout>
             </knockout>
 
             <knockout>
