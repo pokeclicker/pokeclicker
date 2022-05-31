@@ -4,7 +4,7 @@
         <h2 class="pageItemTitle" style="display: block;">
 
             <knockout class="left">
-                <knockout data-bind="text: TemporaryBattleBattle.battle.name"></knockout>
+                <knockout data-bind="text: TemporaryBattleBattle.battle.name.replace(/[0-9]/g, '')"></knockout>
             </knockout>
 
             <knockout>
