@@ -114,7 +114,8 @@ const LavenderTownShop = new Shop([
 ]);
 
 //Kanto Shard Master
-const KantoShardMaster = new ShardMasterShop([]);
+const PalletShardMaster = new ShardMasterShop([]);
+const PewterShardMaster = new ShardMasterShop([]);
 
 // Kanto NPCs
 
@@ -170,7 +171,7 @@ const CinnabarIslandResearcher = new NPC('Researcher', [
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
     GameConstants.Region.kanto,
-    [KantoShardMaster],
+    [PalletShardMaster],
     {
         npcs: [PalletProfOak],
     }
@@ -178,7 +179,7 @@ TownList['Pallet Town'] = new Town(
 TownList['Pewter City'] = new Town(
     'Pewter City',
     GameConstants.Region.kanto,
-    [PewterCityShop],
+    [PewterCityShop, PewterShardMaster],
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.kanto, 2),

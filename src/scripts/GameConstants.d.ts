@@ -397,4 +397,8 @@ namespace GameConstants {
     declare const DockTowns: string[];
     declare const TemporaryBattles: string[];
     declare function getTemporaryBattlesIndex(temporaryBattle: string): number;
+    declare enum ShardTraderLocations {
+      'Pallet Town',
+      'Pewter City',
+    }
 }
