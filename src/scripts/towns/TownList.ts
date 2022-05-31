@@ -124,6 +124,10 @@ const PalletProfOak = new ProfNPC('Prof. Oak',
     'Your journey isn\'t over yet, a whole world awaits you! Onwards to Johto!',
     'assets/images/oak.png');
 
+const PalletMom = new NPC('Mom', [
+    'Traveling on your own can be scary. But remember that there are nice people everywhere you go. So strike up a converstation. You will probably learn something useful.',
+]);
+
 const ViridianCityOldMan = new NPC('Old Man', [
     'Ahh, I\'ve had my coffee now and I feel great!',
     'You can use the Pokéball Selector to select which type of Pokéball to use on specific Pokémon based on caught status.',
@@ -150,6 +154,12 @@ const Route3ShadySalesman = new NPC('Shady Salesman', [
 const CeruleanKantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
     'Bah! You younglings have no appreciation of the art of Berry farming!',
     'Come back when you are ready to learn!',
+]);
+
+const CeruleanSuperNerd = new NPC('Super Nerd Jovan', [
+    'In my spare time I like to play this kickass browser game. It takes ages to get all the best stuff.',
+    'Then one day, all my progress was gone. I don\'t know exactly what happened. Something updated, some cookies got cleaned up, I don\'t know. I had to start all over from the beginning.',
+    'That day I learned that I should frequently download a save.',
 ]);
 
 const VermilionFanClubChairman = new NPC('Fan Club Chairman', [
@@ -193,7 +203,7 @@ TownList['Pallet Town'] = new Town(
     GameConstants.Region.kanto,
     [],
     {
-        npcs: [PalletProfOak],
+        npcs: [PalletProfOak, PalletMom],
     }
 );
 TownList['Pewter City'] = new Town(
@@ -225,7 +235,7 @@ TownList['Cerulean City'] = new Town(
     [CeruleanCityShop, new MoveToDungeon(dungeonList['Cerulean Cave'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
-        npcs: [CeruleanKantoBerryMaster],
+        npcs: [CeruleanKantoBerryMaster, CeruleanSuperNerd],
     }
 );
 TownList['Vermilion City'] = new Town(
