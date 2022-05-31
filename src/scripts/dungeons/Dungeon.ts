@@ -1046,7 +1046,7 @@ dungeonList['Union Cave'] = new Dungeon('Union Cave',
             hide: true,
             requirement: new MultiRequirement([
                 new GymBadgeRequirement(BadgeEnums.Fog),
-                new WeekdayRequirement(() => new Date().getDay() == 5), // Friday
+                new WeekdayRequirement(() => new Date().getDay() == GameConstants['DayOfWeek'].Tuesday),
             ])}),
         new DungeonTrainer('Hiker',
             [new GymPokemon('Onix', 300000, 11)],
