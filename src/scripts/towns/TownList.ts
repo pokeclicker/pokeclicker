@@ -448,6 +448,11 @@ const VioletEarlDervish = new NPC('Earl Dervish', [
     'Some Pokémon babies, only from Day Care they come! Hatch! Hatch! Hatch!',
 ]);
 
+const UnionCavePokemaniac = new NPC('PokéManic Larry', [
+    'Every Friday, you can hear Pokémon roars from deep inside the cave.',
+],
+{ requirement: new GymBadgeRequirement(BadgeEnums.Fog) });
+
 const AzaleaOldMan = new NPC('Wise Old Man', [
     'There is an old tale about the Guardian of Ilex Forest.',
     'It says that the mythical Pokémon Celebi will appear before anyone who has proven they are a Champion Pokémon Trainer.',
@@ -600,7 +605,8 @@ TownList['Ruins of Alph'] = new DungeonTown(
 TownList['Union Cave'] = new DungeonTown(
     'Union Cave',
     GameConstants.Region.johto,
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 32)]
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 32)],
+    [UnionCavePokemaniac]
 );
 TownList['Slowpoke Well'] = new DungeonTown(
     'Slowpoke Well',
