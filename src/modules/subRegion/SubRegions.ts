@@ -48,9 +48,12 @@ SubRegions.addSubRegion(Region.alola, new SubRegion('Melemele island', undefined
 SubRegions.addSubRegion(Region.alola, new SubRegion('Akala island', new GymBadgeRequirement(BadgeEnums.FightiniumZ), 'Heahea City'));
 SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula & Poni islands', new TemporaryBattleRequirement('Ultra Wormhole'), 'Malie City'));
 // For when Alola is split into 4 regions
-// SubRegions.addSubRegion(Region.alola, new SubRegion('Akala island', new GymBadgeRequirement(BadgeEnums.MelemeleKahuna), 'Heahea City'));
 // SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula island', new TemporaryBattleRequirement('Ultra Wormhole'), 'Malie City'));
 // SubRegions.addSubRegion(Region.alola, new SubRegion('Poni island', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation')), 'Seafolk Village'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('South Galar', undefined, 'Hulbury'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('North Galar', new RouteKillRequirement(10, GameConstants.Region.galar, 22), 'Spikemuth'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Master Dojo'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Freezington'));
 
 export enum AlolaSubRegions {
     MelemeleIsland = 0,
@@ -60,16 +63,9 @@ export enum AlolaSubRegions {
     // PoniIsland,
 }
 
-SubRegions.addSubRegion(Region.galar, new SubRegion('Galar', undefined, 'Postwick'));
-// For once Galar is split into 2 regions
-// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar South', undefined, 'Postwick'));
-// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar North', new RouteKillRequirement(10, GameConstants.Region.galar, 14), 'Hammerlocke'));
-// Galar DLC islands
-SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', new MultiRequirement([
-    new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
-    new NullRequirement(),
-])));
-SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', new MultiRequirement([
-    new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
-    new NullRequirement(),
-])));
+export enum GalarSubRegions {
+  SouthGalar = 0,
+  NorthGalar,
+  IsleofArmor,
+  CrownTundra,
+}
