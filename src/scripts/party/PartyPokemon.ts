@@ -161,7 +161,7 @@ class PartyPokemon implements Saveable {
             const type: (PokemonType | null) = ProteinFilters.type.value() > -2 ? ProteinFilters.type.value() : null;
             if (type !== null) {
                 const { type: types } = pokemonMap[this.name];
-               if(type !== null && !types.includes(type)) {
+                if (type !== null && !types.includes(type)) {
                     return true;
                 }
             }
@@ -169,7 +169,7 @@ class PartyPokemon implements Saveable {
         }, this)();
         return this.breeding || hidden ||
             (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue()) ||
-            (this.shiny && Settings.getSetting('proteinHideShinyPokemon').observableValue())
+            (this.shiny && Settings.getSetting('proteinHideShinyPokemon').observableValue());
     }
 
     public fromJSON(json: Record<string, any>): void {

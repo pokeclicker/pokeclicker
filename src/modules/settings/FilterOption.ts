@@ -1,5 +1,6 @@
 import { Observable } from 'knockout';
 import SettingOption from './SettingOption';
+
 export default class FilterOption<T = any> {
     public displayName: string;
     public value: Observable<T>;

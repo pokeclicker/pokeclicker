@@ -15,7 +15,7 @@ const ProteinFilters: Record<string, FilterOption> = {
         'proteinTypeFilter',
         [
             new SettingOption('All', '-2'),
-            ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None')        ],
+            ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None')],
     ),
     region: new FilterOption<number>(
         'Region',
@@ -23,7 +23,7 @@ const ProteinFilters: Record<string, FilterOption> = {
         'proteinRegionFilter',
         [
             new SettingOption('All', '-2'),
-            ...Settings.enumToSettingOptionArray(Region, (t) => t !== 'None')        ],
+            ...Settings.enumToSettingOptionArray(Region, (t) => t !== 'None')],
     ),
 };
 
