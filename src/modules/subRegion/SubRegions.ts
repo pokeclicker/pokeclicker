@@ -1,21 +1,9 @@
 import BadgeEnums from '../enums/Badges';
-import {
-    Region,
-    KantoSubRegions,
-    JohtoSubRegions,
-    HoennSubRegions,
-    SinnohSubRegions,
-    UnovaSubRegions,
-    KalosSubRegions,
-    AlolaSubRegions,
-    GalarSubRegions,
-} from '../GameConstants';
+import { Region } from '../GameConstants';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
+import MultiRequirement from '../requirements/MultiRequirement';
+import NullRequirement from '../requirements/NullRequirement';
 import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
-import RouteKillRequirement from '../requirements/RouteKillRequirement';
-import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
-import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepCompletedRequirement';
-import * as GameConstants from '../GameConstants';
 import SubRegion from './SubRegion';
 
 export default class SubRegions {
@@ -26,6 +14,11 @@ export default class SubRegions {
             this.list[region] = [];
         }
         this.list[region].push(subregion);
+        this.list[region].forEach((r, i) => {
+            // eslint-disable-next-line no-param-reassign
+            r.id = i;
+            return r;
+        });
     }
 
     public static getSubRegions(region: Region): SubRegion[] {
@@ -45,19 +38,34 @@ export default class SubRegions {
     }
 }
 
-SubRegions.addSubRegion(Region.kanto, new SubRegion('Kanto', KantoSubRegions.Kanto, undefined, 'Vermilion City', undefined));
-SubRegions.addSubRegion(Region.kanto, new SubRegion('Sevii Islands 123', KantoSubRegions.Sevii123, new GymBadgeRequirement(BadgeEnums.Volcano), 'One Island', undefined));
-SubRegions.addSubRegion(Region.kanto, new SubRegion('Sevii Islands 4567', KantoSubRegions.Sevii4567, new QuestLineStepCompletedRequirement('Celio\'s Errand', 5), 'Four Island', undefined));
-SubRegions.addSubRegion(Region.johto, new SubRegion('Johto', JohtoSubRegions.Johto));
-SubRegions.addSubRegion(Region.hoenn, new SubRegion('Hoenn', HoennSubRegions.Hoenn));
-SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Sinnoh', SinnohSubRegions.Sinnoh));
-SubRegions.addSubRegion(Region.unova, new SubRegion('Unova', UnovaSubRegions.Unova));
-SubRegions.addSubRegion(Region.kalos, new SubRegion('Kalos', KalosSubRegions.Kalos));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Melemele Island', AlolaSubRegions.MelemeleIsland, undefined, 'Hau\'oli City'));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Akala Island', AlolaSubRegions.AkalaIsland, new GymBadgeRequirement(BadgeEnums.FightiniumZ), 'Heahea City'));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula Island', AlolaSubRegions.UlaulaIsland, new TemporaryBattleRequirement('Ultra Wormhole'), 'Malie City'));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Poni Island', AlolaSubRegions.PoniIsland, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation')), 'Seafolk Village'));
-SubRegions.addSubRegion(Region.galar, new SubRegion('South Galar', GalarSubRegions.SouthGalar, undefined, 'Hulbury'));
-SubRegions.addSubRegion(Region.galar, new SubRegion('North Galar', GalarSubRegions.NorthGalar, new RouteKillRequirement(10, GameConstants.Region.galar, 22), 'Hammerlocke'));
-SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', GalarSubRegions.IsleofArmor, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Armor Station'));
-SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', GalarSubRegions.CrownTundra, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Crown Tundra Station'));
+SubRegions.addSubRegion(Region.kanto, new SubRegion('Kanto'));
+SubRegions.addSubRegion(Region.johto, new SubRegion('Johto'));
+SubRegions.addSubRegion(Region.hoenn, new SubRegion('Hoenn'));
+SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Sinnoh'));
+SubRegions.addSubRegion(Region.unova, new SubRegion('Unova'));
+SubRegions.addSubRegion(Region.kalos, new SubRegion('Kalos'));
+SubRegions.addSubRegion(Region.alola, new SubRegion('Melemele island', undefined, 'Hau\'oli City'));
+SubRegions.addSubRegion(Region.alola, new SubRegion('Akala island', new GymBadgeRequirement(BadgeEnums.FightiniumZ), 'Heahea City'));
+SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula & Poni islands', new TemporaryBattleRequirement('Ultra Wormhole'), 'Malie City'));
+// For when Alola is split into 4 regions
+// SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula island', new TemporaryBattleRequirement('Ultra Wormhole'), 'Malie City'));
+// SubRegions.addSubRegion(Region.alola, new SubRegion('Poni island', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation')), 'Seafolk Village'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('South Galar', undefined, 'Hulbury'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('North Galar', new RouteKillRequirement(10, GameConstants.Region.galar, 22), 'Spikemuth'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Master Dojo'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Freezington'));
+
+export enum AlolaSubRegions {
+    MelemeleIsland = 0,
+    AkalaIsland,
+    UlaulaAndPoniIslands,
+    // UlaulaIsland,
+    // PoniIsland,
+}
+
+export enum GalarSubRegions {
+  SouthGalar = 0,
+  NorthGalar,
+  IsleofArmor,
+  CrownTundra,
+}
