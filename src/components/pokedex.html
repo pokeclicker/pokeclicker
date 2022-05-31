@@ -6,56 +6,61 @@ aria-labelledby="pokedexModalLabel">
            <h4 style="margin-bottom: 0">Pokédex</h4>
            <button style="float:right;" class="btn btn-secondary" type="button" data-toggle="collapse"
                    data-target="#pokedex-filter-container" aria-expanded="false" aria-controls="pokedex-filter-container">
-               Filters
+               Options
            </button>
        </div>
        <div class="modal-body">
             <div class="collapse" id="pokedex-filter-container">
-                <div class="container-fluid" style="border-bottom: 1px solid #eceeef">
-                    <div class="form-row text-left">
-
-                        <!--Name-->
+                <div class="text-left">
+                    <div class="form-row" id="breeding-filter">
                         <div class="form-group col-md-6 col-6">
-                            <label>Name</label>
-                            <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
-                                   oninput="PokedexHelper.updateList()">
+                            <label>Search</label>
+                            <input id="nameFilter" autocomplete="off" class="form-control" oninput="PokedexHelper.updateList()" placeholder="Search here"/>
                         </div>
-
-                        <!--Region-->
-                        <div class="form-group col-md-6 col-6">
+                        <div class="form-group col-md-3 col-6">
                             <label>Region</label>
-                            <select id="pokedex-filter-region" class="custom-select"
-                                    oninput="PokedexHelper.updateList()" style="margin-right: 8px">
-                                <option value="" selected>All</option>
+                            <select id="pokedex-filter-region" name="pokedexRegionFilter" autocomplete="off" class="custom-select" onchange="PokedexHelper.updateList(), Settings.setSettingByName(this.name, this.value)">
+                                <!-- ko foreach: Settings.getSetting('pokedexRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
+                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('pokedexRegionFilter').value === $data.value }, text: $data.text">Type</option>
+                                <!-- /ko -->
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3 col-6">
+                            <label>Shiny Status</label>
+                            <select id="pokedex-filter-shiny-caught" name="pokedexFilterShinyCaught" autocomplete="off" class="custom-select" onchange="PokedexHelper.updateList(), Settings.setSettingByName(this.name, this.value)">
+                                <option value="all" data-bind="attr: { selected: Settings.getSetting('pokedexFilterShinyCaught').value === '-1' }">All</option>
+                                <option value="uncaught" data-bind="attr: { selected: Settings.getSetting('pokedexFilterShinyCaught').value === '0' }">Uncaught</option>
+                                <option value="caught" data-bind="attr: { selected: Settings.getSetting('pokedexFilterShinyCaught').value === '1' }">Caught</option>
+                                <option value="caught-not-shiny" data-bind="attr: { selected: Settings.getSetting('pokedexFilterShinyCaught').value === '2' }">Caught Not Shiny</option>
+                                <option value="caught-shiny" data-bind="attr: { selected: Settings.getSetting('pokedexFilterShinyCaught').value === '3' }">Caught Shiny</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3 col-6">
+                            <label>Type</label>
+                            <select id="pokedex-filter-type1" name="pokedexTypeFilter1" autocomplete="off" class="custom-select" onchange="PokedexHelper.updateList(), Settings.setSettingByName(this.name, this.value)">
+                                <!-- ko foreach: Settings.getSetting('pokedexTypeFilter1').options -->
+                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('pokedexTypeFilter1').value === $data.value }, text: $data.text">Type</option>
+                                <!-- /ko -->
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3 col-6">
+                            <label>Type</label>
+                            <select id="pokedex-filter-type2" name="pokedexTypeFilter2" autocomplete="off" class="custom-select" onchange="PokedexHelper.updateList(), Settings.setSettingByName(this.name, this.value)">
+                                <!-- ko foreach: Settings.getSetting('pokedexTypeFilter2').options -->
+                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('pokedexTypeFilter2').value === $data.value }, text: $data.text">Type</option>
+                                <!-- /ko -->
                             </select>
                         </div>
 
-                        <!--Types-->
-                        <div class="form-group col-md-6 col-6">
-                            <label>Type</label>
-                            <select id="pokedex-filter-type1" class="custom-select"
-                                    oninput="PokedexHelper.updateList()" style="margin-right: 8px">
-                                <option value="" selected>All</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6 col-6">
-                            <label>Type</label>
-                            <select id="pokedex-filter-type2" class="custom-select"
-                                    oninput="PokedexHelper.updateList()">
-                                <option value="" selected>All</option>
+                        <div class="form-group col-md-3 col-6">
+                            <label>Display Value</label>
+                            <select name="pokedexDisplayFilter" autocomplete="off" class="custom-select" onchange="PokedexHelper.displayValue(this.value), Settings.setSettingByName(this.name, this.value)">
+                                <!-- ko foreach: Settings.getSetting('pokedexDisplayFilter').options -->
+                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('pokedexDisplayFilter').value === $data.value }, text: $data.text">Type</option>
+                                <!-- /ko -->
                             </select>
                         </div>
 
-                        <div class="form-group col-md-6 col-6">
-                            <label for="pokedex-filter-shiny-caught">Caught Status</label>
-                            <select id="pokedex-filter-shiny-caught" autocomplete="off" class="custom-select" onchange="PokedexHelper.updateList()">
-                                <option value="all" selected>All</option>
-                                <option value="uncaught">Uncaught</option>
-                                <option value="caught">Caught</option>
-                                <option value="caught-not-shiny">Caught not Shiny</option>
-                                <option value="caught-shiny">Caught Shiny</option>
-                            </select>
-                        </div>
                         <div class="form-group col-md-6 col-6">
                             <!--Rare Hold Item-->
                             <div class="col-12">
@@ -73,15 +78,34 @@ aria-labelledby="pokedexModalLabel">
                             </div>
                         </div>
 
-                   </div>
+                    </div>
+                    <div class="form-row" id="pokedex-sort">
+                        <div class="form-group col" data-bind="with: Settings.getSetting('pokedexSort')">
+                            <label>Sort</label>
+                            <div class="input-group">
+                                <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]]), PokedexHelper.updateList()"
+                                    data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                                    <option data-bind="text: $data.text, value: $data.value"></option>
+                                </select>
+                                <div class="input-group-append bg-primary text-light">
+                                    <label for="pokedexSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                                    text: Settings.getSetting('pokedexSortDirection').observableValue() ? '⥄' : '⥂',
+                                    tooltip: { title: Settings.getSetting('pokedexSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
 
-                   <div class="row justify-content-center">
-                      <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length} Pokémon`"></h4>
-                   </div>
-               </div>
-
+                                    ">⥂</label>
+                                    <input id="pokedexSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
+                                        data-bind="checked: Settings.getSetting('pokedexSortDirection').observableValue()"
+                                        onchange="Settings.setSettingByName('pokedexSortDirection', this.checked), PokedexHelper.updateList()"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
            </div>
            <div>
+                <div class="row justify-content-center">
+                    <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length} Pokémon`"></h4>
+                </div>
                <ul class="row justify-content-center p-0" data-bind="foreach: PokedexHelper.filteredList()"
                    style="max-width: 100%; padding:0; margin:0;">
                    <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
@@ -91,8 +115,8 @@ aria-labelledby="pokedexModalLabel">
                                 <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}.svg`}"/>
                             </div>
                             <img src="" width="80px" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokedexHelper.getImage($data.id)}">
-                            <!-- ko if: PokedexHelper.pokemonSeen($data.id) -->
-                            <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: $data.name">name</span>
+                            <!-- ko if: PokedexHelper.hasDisplayValue($data) -->
+                            <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: PokedexHelper.getDisplayValue($data)">name</span>
                             <a class="overlay" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="click: ()=>{App.game.statistics.selectedPokemonID($data.id)}, tooltip: { html: true, title: `<u>Information:</u><br/>Base Attack: <strong>${$data.attack}</strong><br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate, true)}%</strong><br/>Hatch Steps: <strong>${App.game.breeding.getSteps($data.eggCycles).toLocaleString('en-US')}</strong>`, trigger: 'hover', placement:'bottom' }"></a>
                             <!-- /ko -->
                    </li>

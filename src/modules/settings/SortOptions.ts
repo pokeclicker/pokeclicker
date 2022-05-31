@@ -39,7 +39,7 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.attack]: {
         text: 'Attack',
-        getValue: (p) => p.calculateAttack(),
+        getValue: (p) => p.calculateAttack ? p.calculateAttack() : null,
     },
 
     [SortOptions.level]: {
@@ -54,12 +54,12 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.baseAttack]: {
         text: 'Base Attack',
-        getValue: (p) => p.baseAttack,
+        getValue: (p) => p.baseAttack | p.attack,
     },
 
     [SortOptions.breedingEfficiency]: {
         text: 'Breeding Efficiency',
-        getValue: (p) => ((p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed()) / pokemonMap[p.name].eggCycles),
+        getValue: (p) => ((p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + (p.proteinsUsed ? p.proteinsUsed() : 0)) / pokemonMap[p.name].eggCycles),
     },
 
     [SortOptions.eggCycles]: {
@@ -80,6 +80,6 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.proteinsUsed]: {
         text: 'Proteins Used',
-        getValue: (p) => p.proteinsUsed() || 0,
+        getValue: (p) => p.proteinsUsed ? p.proteinsUsed() || 0 : 0,
     },
 };

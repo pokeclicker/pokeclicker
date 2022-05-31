@@ -33,26 +33,6 @@ class PokedexHelper {
 
     public static filteredList: KnockoutObservableArray<Record<string, any>> = ko.observableArray([]);
 
-    public static populateFilters() {
-        let options = $('#pokedex-filter-type1');
-        $.each(PokemonType, function () {
-            if (isNaN(Number(this)) && this != PokemonType.None) {
-                options.append($('<option />').val(PokemonType[this]).text(this));
-            }
-        });
-
-        options = $('#pokedex-filter-type2');
-        $.each(PokemonType, function () {
-            if (isNaN(Number(this)) && this != PokemonType.None) {
-                options.append($('<option />').val(PokemonType[this]).text(this));
-            }
-        });
-
-        options = $('#pokedex-filter-region');
-        for (let i = 0; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
-            options.append($('<option />').val(i).text(GameConstants.camelCaseToString(GameConstants.Region[i])));
-        }
-    }
 
     public static updateList() {
         PokedexHelper.filteredList(PokedexHelper.getList());
@@ -79,7 +59,7 @@ class PokedexHelper {
 
             // If not showing this region
             const region: (GameConstants.Region | null) = filter['region'] ? parseInt(filter['region'], 10) : null;
-            if (region != null && region != nativeRegion) {
+            if (region != null && region != nativeRegion && region > -1) {
                 return false;
             }
 
@@ -99,8 +79,8 @@ class PokedexHelper {
             }
 
             // Check if either of the types match
-            const type1: (PokemonType | null) = filter['type1'] ? parseInt(filter['type1'], 10) : null;
-            const type2: (PokemonType | null) = filter['type2'] ? parseInt(filter['type2'], 10) : null;
+            const type1: (PokemonType | null) = filter['type1'] > -2 ? parseInt(filter['type1'], 10) : null;
+            const type2: (PokemonType | null) = filter['type2'] > -2 ? parseInt(filter['type2'], 10) : null;
             if ([type1, type2].includes(PokemonType.None)) {
                 const type = (type1 == PokemonType.None) ? type2 : type1;
                 if (!PokedexHelper.isPureType(pokemon, type)) {
@@ -141,6 +121,13 @@ class PokedexHelper {
             }
 
             return true;
+        }).sort((a:PokemonListData,b:PokemonListData) => { 
+            let sortFn = PokedexHelper.compareBy(Settings.getSetting('pokedexSort').value, Settings.getSetting('pokedexSortDirection').value);
+            const pokemonA:PokemonListData & Partial<PartyPokemon> = {...a, ...App.game.party.getPokemon(a.id)}
+            const pokemonB:PokemonListData & Partial<PartyPokemon> = {...b, ...App.game.party.getPokemon(b.id)}
+
+            return sortFn(pokemonA,pokemonB)
+
         });
     }
 
@@ -176,6 +163,102 @@ class PokedexHelper {
     private static isPureType(pokemon: PokemonListData, type: (PokemonType | null)): boolean {
         return (pokemon.type.length === 1 && (type == null || pokemon.type[0] === type));
     }
+
+    // Default value displayed at bottom of image
+    public static displayValue = Settings.getSetting('pokedexDisplayFilter').observableValue || ko.observable('name');
+
+    /**
+     * Returns the string to display in the html
+     * @param {PokemonListData} pokemon
+     * @returns {string}
+     */
+    public static getDisplayValue(pokemon:PokemonListData): string {
+        //If the pokemon is unseen we don't have any informations to display.
+        if (!PokedexHelper.pokemonSeen(pokemon.id)()) {
+            return null;
+        }
+
+        try {
+            const partyPokemon:PartyPokemon = App.game.party.getPokemon(pokemon.id);
+            switch (this.displayValue()) {
+                case 'name': return pokemon.name;
+                case 'attack': return `Attack: ${partyPokemon.attack.toLocaleString('en-US')}`;
+                case 'attackBonus': return `Attack Bonus: ${Math.floor(partyPokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + partyPokemon.proteinsUsed()).toLocaleString('en-US')}`;
+                case 'baseAttack': return `Base Attack: ${pokemon.attack.toLocaleString('en-US')}`;
+                case 'eggSteps': return `Egg Steps: ${App.game.breeding.getSteps(pokemon.eggCycles).toLocaleString('en-US')}`;
+                case 'timesHatched': return `Hatches: ${App.game.statistics.pokemonHatched[pokemon.id]().toLocaleString('en-US')}`;
+                case 'breedingEfficiency': return `Efficiency: ${((pokemon.attack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + partyPokemon.proteinsUsed()) / pokemonMap[pokemon.name].eggCycles).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
+                case 'stepsPerAttack': return `Steps/Att: ${(App.game.breeding.getSteps(pokemonMap[pokemon.name].eggCycles) / (partyPokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + partyPokemon.proteinsUsed())).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
+                case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
+                case 'proteins': return `Proteins: ${partyPokemon.proteinsUsed()}`;
+                case 'level' : return `Level: ${partyPokemon.level}`;
+            }
+        } catch { // Mostly because the pokemon is uncaught hence partyPokemon is undefined
+            return null;
+        }
+    }
+
+    /**
+     * Returns true if the informations required about the pokemon is available
+     * @param {PokemonListData} pokemon
+     * @returns {boolean}
+     */
+    public static hasDisplayValue(pokemon:PokemonListData): KnockoutComputed<boolean> {
+        return ko.pureComputed(() => {
+            return Boolean(PokedexHelper.getDisplayValue(pokemon))
+        });
+    }
+
+    public static compareBy(option: SortOptions, direction: boolean): (a: PokemonListData & Partial<PartyPokemon>, b: PokemonListData & Partial<PartyPokemon>) => number {
+        return function (a, b) {
+            let res = 0;
+            let dir = (direction) ? -1 : 1;
+            const config = SortOptionConfigs[option]
+
+            const seenA = PokedexHelper.pokemonSeen(a.id)()
+            const seenB = PokedexHelper.pokemonSeen(b.id)()
+
+            //If one is not seen and we are sorting by something else than id.
+            if ( !(seenA && seenB) && (option !== SortOptions.id) ) {
+                if (seenA || seenB) {
+                    return seenA ? -1 : 1;
+                }
+                //Both not seen, sort by id.
+                return a.id - b.id;
+            }
+
+            // Getting the value (nullable)
+            const aValue = config.getValue(a);
+            const bValue = config.getValue(b);
+
+            if (aValue && bValue) {
+                if (config.invert) {
+                    dir *= -1;
+                }
+    
+                //Compare by provided property
+                if (aValue == bValue) {
+                    //If they are equal according to provided property, sort by id
+                    return a.id - b.id;
+                } else if (aValue < bValue) {
+                    res = -1;
+                } else if (aValue > bValue) {
+                    res = 1;
+                } else {
+                    res = 0;
+                }
+
+                return res * dir;
+            }
+
+            if (aValue || bValue) {
+                return aValue ? -1 : 1;
+            }
+            
+            return 0;
+        };
+    }
+
 }
 
 $(document).ready(() => {

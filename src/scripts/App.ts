@@ -55,7 +55,6 @@ class App {
             GameController.bindToolTips();
             GameController.addKeyListeners();
 
-            PokedexHelper.populateFilters();
             PokedexHelper.updateList();
 
             App.game.initialize();

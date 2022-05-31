@@ -153,6 +153,64 @@ Settings.add(new BooleanSetting('proteinSortDirection', 'reverse', false));
 Settings.add(new BooleanSetting('proteinHideMaxedPokemon', 'Hide Pokémon with max protein', false));
 Settings.add(new BooleanSetting('proteinHideShinyPokemon', 'Hide shiny Pokémon', false));
 
+// Pokedex Sorting
+const pokedexSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('pokedexSort', 'Sort:', pokedexSortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('pokedexSortDirection', 'reverse', false));
+
+
+// Pokedex Filters
+Settings.add(new Setting<string>('pokedexCategoryFilter', 'pokedexCategoryFilter',
+    [],
+    '-1'));
+Settings.add(new Setting<string>('pokedexRegionFilter', 'pokedexRegionFilter',
+    [
+        new SettingOption('All', '-2'),
+        ...Settings.enumToSettingOptionArray(Region, (r) => r !== 'none'),
+    ],
+    '-2'));
+Settings.add(new Setting<string>('pokedexTypeFilter1', 'pokedexTypeFilter1',
+    [
+        new SettingOption('All', '-2'),
+        ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
+        new SettingOption('None', '-1'),
+    ],
+    '-2'));
+Settings.add(new Setting<string>('pokedexTypeFilter2', 'pokedexTypeFilter2',
+    [
+        new SettingOption('All', '-2'),
+        ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
+        new SettingOption('None', '-1'),
+    ],
+    '-2'));
+Settings.add(new Setting<string>('pokedexFilterShinyCaught', 'pokedexFilterShinyCaught',
+    [
+        new SettingOption('All', '-1'),
+        new SettingOption('Uncaught', '0'),
+        new SettingOption('Caught', '1'),
+        new SettingOption('Caught not shiny', '2'),
+        new SettingOption('Caught shiny', '3'),
+    ],
+    '-1'));
+Settings.add(new Setting<string>('pokedexDisplayFilter', 'pokedexDisplayFilter',
+    [
+        new SettingOption('Name', 'name'),
+        new SettingOption('Attack', 'attack'),
+        new SettingOption('Attack Bonus', 'attackBonus'),
+        new SettingOption('Base Attack', 'baseAttack'),
+        new SettingOption('Egg Steps', 'eggSteps'),
+        new SettingOption('Times Hatched', 'timesHatched'),
+        new SettingOption('Breeding Efficiency', 'breedingEfficiency'),
+        new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
+        new SettingOption('Pokedex ID', 'dexId'),
+        new SettingOption('Proteins used', 'proteins'),
+        new SettingOption('Level', 'level'),
+    ],
+    'attack'));
+
+
 // Breeding Filters
 Settings.add(new Setting<string>('breedingCategoryFilter', 'breedingCategoryFilter',
     [],
