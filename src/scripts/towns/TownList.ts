@@ -448,15 +448,17 @@ const VioletEarlDervish = new NPC('Earl Dervish', [
     'Some Pokémon babies, only from Day Care they come! Hatch! Hatch! Hatch!',
 ]);
 
-const UnionCavePokemaniac = new NPC('PokéManic Larry', [
-    'Every Friday, you can hear Pokémon roars from deep inside the cave.',
-],
-{ requirement: new GymBadgeRequirement(BadgeEnums.Fog) });
-
 const AzaleaOldMan = new NPC('Wise Old Man', [
     'There is an old tale about the Guardian of Ilex Forest.',
     'It says that the mythical Pokémon Celebi will appear before anyone who has proven they are a Champion Pokémon Trainer.',
 ]);
+
+const AzaleaUnionCaveHiker = new NPC('Hiker Anthony', [
+    'The PokéManic’s in Union Cave seem restless.',
+    'They belive there is a weekly visitor.',
+    'As every Friday, you can hear Pokémon roars from deep inside the cave.',
+],
+{ requirement: new GymBadgeRequirement(BadgeEnums.Fog) });
 
 const EcruteakKimonoGirl = new NPC('Kimono Girl', [
     'Legends say that Ho-Oh is searching for a trainer of pure heart.',
@@ -519,7 +521,7 @@ TownList['Azalea Town'] = new Town(
     [AzaleaTownShop, new MoveToDungeon(dungeonList['Slowpoke Well'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 33)],
-        npcs: [AzaleaOldMan],
+        npcs: [AzaleaOldMan, AzaleaUnionCaveHiker],
     }
 );
 TownList['Goldenrod City'] = new Town(
@@ -605,8 +607,7 @@ TownList['Ruins of Alph'] = new DungeonTown(
 TownList['Union Cave'] = new DungeonTown(
     'Union Cave',
     GameConstants.Region.johto,
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 32)],
-    [UnionCavePokemaniac]
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 32)]
 );
 TownList['Slowpoke Well'] = new DungeonTown(
     'Slowpoke Well',
