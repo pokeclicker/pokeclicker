@@ -86,6 +86,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                         data-bind="style: {'flex-grow': $data,
                                             'background-color': '#' + TypeHelper.typeColorsLocked[$index()]
                                           },
+                                    visible: $data > 0,
                                     tooltip: {title: `${PokemonType[$index()]}: ${Math.round($data).toLocaleString('en-US')}`,
                                               trigger: 'hover',
                                               placement:'bottom'
