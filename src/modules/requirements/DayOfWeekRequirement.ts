@@ -1,21 +1,21 @@
 import { Observable as KnockoutObservable } from 'knockout';
-import { AchievementOption } from '../GameConstants';
+import * as GameConstants from '../GameConstants';
 import Requirement from './Requirement';
 
 export default class DayOfWeekRequirement extends Requirement {
     public static date: KnockoutObservable<Number> = ko.observable(new Date().getDay());
-    DayOfWeek: number;
-    constructor(DayOfWeek: number, option: AchievementOption = AchievementOption.equal) {
+    DayOfWeekNum: number;
+    constructor(DayOfWeekNum: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.equal) {
         super(1, option);
-        this.DayOfWeek = DayOfWeek;
+        this.DayOfWeekNum = DayOfWeekNum;
     }
 
     public getProgress(): number {
-        return +(DayOfWeekRequirement.date() === this.DayOfWeek);
+        return +(DayOfWeekRequirement.date() === this.DayOfWeekNum);
     }
 
     // eslint-disable-next-line class-methods-use-this
     public hint(): string {
-        return 'Try again another day.';
+        return `Come back on ${GameConstants.DayOfWeek[this.DayOfWeekNum]}.`;
     }
 }

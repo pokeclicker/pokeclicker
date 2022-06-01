@@ -1042,18 +1042,18 @@ dungeonList['Union Cave'] = new Dungeon('Union Cave',
     ],
     63600,
     [
-        new DungeonBossPokemon('Lapras', 450000, 20, {
-            hide: true,
-            requirement: new MultiRequirement([
-                new GymBadgeRequirement(BadgeEnums.Fog),
-                new DayOfWeekRequirement(GameConstants['DayOfWeek'].Friday),
-            ])}),
         new DungeonTrainer('Hiker',
             [new GymPokemon('Onix', 300000, 11)],
             { weight: 1 }, 'Daniel'),
         new DungeonTrainer('Firebreather',
             [new GymPokemon('Vulpix', 300000, 9)],
             { weight: 1 }, 'Ray'),
+        new DungeonBossPokemon('Lapras', 450000, 20, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new GymBadgeRequirement(BadgeEnums.Fog),
+                new DayOfWeekRequirement(GameConstants.DayOfWeek.Friday),
+            ])}),
     ],
     3000, 32);
 
