@@ -3054,7 +3054,7 @@ TownList['Galar Mine No. 2'] = new DungeonTown(
 TownList['Glimwood Tangle'] = new DungeonTown(
     'Glimwood Tangle',
     GameConstants.Region.galar,
-    [new TemporaryBattleRequirement['Bede3']]
+    [new TemporaryBattleRequirement('Bede3')]
 );
 TownList['Rose Tower'] = new DungeonTown(
     'Rose Tower',
