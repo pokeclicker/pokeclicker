@@ -1996,7 +1996,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Impidimp', 'Chewtle', 'Koffing', 'Hatenna', 'Noctowl', 'Throh', 'Sawk', 'Sudowoodo', 'Salandit', 'Pawniard', 'Scraggy', 'Croagunk', 'Roggenrola'],
     }),
-    [new TemporaryBattleRequirement('Bede1')],
+    [new TemporaryBattleRequirement('Bede2')],
     undefined,
     GalarSubRegions.SouthGalar
 ));
