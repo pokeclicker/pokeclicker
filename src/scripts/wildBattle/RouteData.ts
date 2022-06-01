@@ -2231,7 +2231,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 25)],
     undefined,
-    GalarSubRegions.NorthGalar
+    GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Galar Route 9', GameConstants.Region.galar, 28,
