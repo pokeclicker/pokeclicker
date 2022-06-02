@@ -23,7 +23,7 @@ export const AchievementSortOptionConfigs: Record<AchievementSortOptions, Achiev
 
     [AchievementSortOptions.progress]: {
         text: 'Progress',
-        getValue: (a) => parseInt(a.getProgressPercentage(), 10),
+        getValue: (a) => parseFloat(a.getProgressPercentage()),
     },
 
     [AchievementSortOptions.bonus]: {
