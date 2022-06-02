@@ -1996,7 +1996,6 @@ TownList['Reversal Mountain'] = new DungeonTown(
 TownList['Team Plasma Assault'] = new DungeonTown(
     'Team Plasma Assault',
     GameConstants.Region.unova,
-
     [
         new GymBadgeRequirement(BadgeEnums.Legend),
     ]
@@ -2788,7 +2787,6 @@ TownList['Hokulani Observatory'] = new DungeonTown(
 TownList['Thrifty Megamart'] = new DungeonTown(
     'Thrifty Megamart',
     GameConstants.Region.alola,
-
     [new RouteKillRequirement(10, GameConstants.Region.alola, 14)]
 );
 TownList['Ula\'ula Meadow'] = new DungeonTown(
