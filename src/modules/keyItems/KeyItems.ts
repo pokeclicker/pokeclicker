@@ -90,7 +90,7 @@ export default class KeyItems implements Feature {
 
             new KeyItem(KeyItemType.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground.', undefined, undefined, undefined, 'Explorer Kit'),
             // TODO buy for 500 quest points
-            new KeyItem(KeyItemType.Event_calendar, 'This calendar will keep you up to date on the latest events.', undefined, undefined, undefined, 'Event Calender'),
+            new KeyItem(KeyItemType.Event_calendar, 'This calendar will keep you up to date on the latest events.', undefined, undefined, undefined, 'Event Calendar'),
             new KeyItem(KeyItemType.Gem_case, 'A case specifically designed for holding gems.', undefined, undefined, undefined, 'Gem Case'),
             new KeyItem(KeyItemType.DNA_splicers, 'A splicer that fuses certain Pokémon.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Giant Chasm')]() > 0,
