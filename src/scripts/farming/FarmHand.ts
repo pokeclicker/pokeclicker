@@ -45,6 +45,7 @@ class FarmHand {
         energy: 0,
         hired: false,
         plots: [],
+        name: undefined,
     };
     // Maximum Efficiency value
     public maxEfficiency = 50;
@@ -283,6 +284,8 @@ class FarmHand {
             energy: this.energy(),
             hired: this.hired(),
             plots: this.plots(),
+            // It uses the name to look up the farmhand on load
+            name: this.name,
         };
 
         // Don't save anything that is the default option
