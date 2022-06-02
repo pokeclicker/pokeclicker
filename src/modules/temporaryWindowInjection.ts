@@ -111,6 +111,7 @@ import Gems from './gems/Gems';
 import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequirement';
 import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompletedRequirement';
 import TemporaryBattleRequirement from './requirements/TemporaryBattleRequirement';
+import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -229,4 +230,5 @@ Object.assign(<any>window, {
     QuestLineCompletedRequirement,
     QuestLineStepCompletedRequirement,
     TemporaryBattleRequirement,
+    DayOfWeekRequirement,
 });
