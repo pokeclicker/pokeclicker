@@ -127,7 +127,7 @@ class EnigmaMutation extends GrowMutation {
             tempHint += 'a specific configuration of Berries';
         }
 
-        tempHint += (hints.length !== 4) ? '. However there\'s still something missing...' : '.';
+        tempHint += (hints.length !== 4) ? '. However, there\'s still something missing...' : '.';
 
         return tempHint;
     }
