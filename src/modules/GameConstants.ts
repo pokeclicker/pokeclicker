@@ -1159,3 +1159,13 @@ export const TemporaryBattles = [
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
     return TemporaryBattles.findIndex((t) => t === temporaryBattle);
 }
+
+export enum DayOfWeek {
+    'Sunday' = 0,
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+}

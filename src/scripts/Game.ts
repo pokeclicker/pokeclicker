@@ -364,6 +364,7 @@ class Game {
                         timeout: 3e4,
                     });
                 }
+                DayOfWeekRequirement.date(now.getDay());
             }
 
             // Check if it's a new hour
