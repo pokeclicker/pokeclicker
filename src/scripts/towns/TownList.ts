@@ -124,6 +124,10 @@ const PalletProfOak = new ProfNPC('Prof. Oak',
     'Your journey isn\'t over yet, a whole world awaits you! Onwards to Johto!',
     'assets/images/oak.png');
 
+const PalletMom = new NPC('Mom', [
+    'Traveling on your own can be scary. But remember that there are nice people everywhere you go. So strike up a converstation. You will probably learn something useful.',
+]);
+
 const ViridianCityOldMan = new NPC('Old Man', [
     'Ahh, I\'ve had my coffee now and I feel great!',
     'You can use the Pokéball Selector to select which type of Pokéball to use on specific Pokémon based on caught status.',
@@ -134,6 +138,14 @@ const PewterBattleItemRival = new NPC('Battle Item Master', [
     'Use them to help you out whenever you feel like time is against you!',
 ]);
 
+const PewterScientist = new NPC('Gem Scientist', [
+    'I see you are carrying a Shard Case. Here at the museum we study space, fossils and gems!',
+    'When you defeat a Pokémon you gain a gem of that Pokémon\'s type. If the Pokémon has two types you gain one for each! Defeating very strong Pokémon, such as those owned by gym leaders, gets you five!',
+    'You can click Gems in the Start Menu to boost your damage using these gems. For example, using rock gems you can boost the super effective damage of your rock type Pokémon! Those flying types had better watch out for your might!',
+    'You can even use this to eliminate immunities! By using electric gems to boost your electric type immune damage, your electric Pokémon can suddenly do damage against ground types!',
+],
+{ requirement: new GymBadgeRequirement(BadgeEnums.Earth) });
+
 const Route3ShadySalesman = new NPC('Shady Salesman', [
     'Have I got a deal just for you!',
     'I\'ll let you have a super secret Pokémon. For the right price!',
@@ -142,6 +154,12 @@ const Route3ShadySalesman = new NPC('Shady Salesman', [
 const CeruleanKantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
     'Bah! You younglings have no appreciation of the art of Berry farming!',
     'Come back when you are ready to learn!',
+]);
+
+const CeruleanSuperNerd = new NPC('Super Nerd Jovan', [
+    'In my spare time I like to play this kickass browser game. It takes ages to get all the best stuff.',
+    'Then one day, all my progress was gone. I don\'t know exactly what happened. Something updated, some cookies got cleaned up, I don\'t know. I had to start all over from the beginning.',
+    'That day I learned that I should frequently download a save.',
 ]);
 
 const VermilionFanClubChairman = new NPC('Fan Club Chairman', [
@@ -163,6 +181,13 @@ const SaffronBattleItemRival = new NPC('Battle Item Master', [
     'I bet he forget to tell you that although all Battle Items only last for 30 seconds they can stack and last for days! Now scram!',
 ]);
 
+const SaffronBreeder = new NPC('Breeder', [
+    'You can leave your level 100 Pokémon with us up at the Hatchery. Breeding them will reset their level, but they will be stronger! They gain 25% of their base attack!',
+    'And the best part is you can keep doing it over and over and over again! The sky is the limit! Reach for the stars!',
+    'With Protein your Pokémon will become even stronger when you breed them. I hear they sell it at the Indigo Plateau.',
+],
+{ requirement: new GymBadgeRequirement(BadgeEnums.Earth) });
+
 const FuchsiaKantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
     'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.kanto);
@@ -178,7 +203,7 @@ TownList['Pallet Town'] = new Town(
     GameConstants.Region.kanto,
     [],
     {
-        npcs: [PalletProfOak],
+        npcs: [PalletProfOak, PalletMom],
     }
 );
 TownList['Pewter City'] = new Town(
@@ -190,7 +215,7 @@ TownList['Pewter City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 2),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Viridian Forest')),
         ],
-        npcs: [PewterBattleItemRival],
+        npcs: [PewterBattleItemRival, PewterScientist],
     }
 );
 TownList['Route 3 Pokémon Center'] = new Town(
@@ -210,7 +235,7 @@ TownList['Cerulean City'] = new Town(
     [CeruleanCityShop, new MoveToDungeon(dungeonList['Cerulean Cave'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
-        npcs: [CeruleanKantoBerryMaster],
+        npcs: [CeruleanKantoBerryMaster, CeruleanSuperNerd],
     }
 );
 TownList['Vermilion City'] = new Town(
@@ -246,7 +271,7 @@ TownList['Saffron City'] = new Town(
     [SaffronCityShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Rainbow)],
-        npcs: [SaffronBattleItemRival],
+        npcs: [SaffronBattleItemRival, SaffronBreeder],
     }
 );
 TownList['Fuchsia City'] = new Town(
@@ -460,10 +485,31 @@ const AzaleaUnionCaveHiker = new NPC('Hiker Anthony', [
 ],
 { requirement: new GymBadgeRequirement(BadgeEnums.Fog) });
 
+const EcruteakBill = new NPC('Bill', [
+    'I traveled here all the way from Goldenrod to buy a Soothe Bell for my Eevee.',
+    'When I use a Soothe Bell on Eevee it can evolve into Espeon or Umbreon. It depends on the time. Espeon during the day, Umbreon at night.',
+    'I only brought enough QP for one Soothe Bell. It\'s so hard to choose...',
+]);
+
+const EcruteakEusine = new NPC('Eusine', [
+    'Legends say that when the Brass Tower burned down and became the Burned Tower three unnamed Pokémon perished in the flames.',
+    'Ho-oh came down from the Tin Tower and revived those Pokémon. They became the Legendary Beasts. Some say these Beasts still inhabit the basement of the Burned Tower.',
+    'Could you please clear Burned Tower for me and see if this is true?',
+],
+{ requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'), GameConstants.AchievementOption.less ) });
+
+const EcruteakPokéfan = new NPC('Pokéfan Derek', [
+    'I saw it! Did you see it?! I saw you go in there! I don\'t know what you did in the Burned Tower, but three great Beasts came running out of there!',
+    'It was a great sight to behold. They all went in different directions. I think they are just roaming the region now. My friend Trevor in Blackthorn City can tell you more.',
+    'Eusine was here a second ago. He seemed very excited, but then he suddenly left. I don\'t know where he went. I was a bit distracted by those majestic Beasts...',
+],
+{ requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower')) });
+
 const EcruteakKimonoGirl = new NPC('Kimono Girl', [
     'Legends say that Ho-Oh is searching for a trainer of pure heart.',
     'To prove yourself, you must tame the three legendary beasts of Johto, and bring them to the nearby Tin Tower.',
-]);
+],
+{ requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower')) });
 
 const OlivineSSAquaCaptain = new NPC('SS Aqua Captain', [
     'Aye! At this here dock you can travel to far away regions! But only ones you’ve travelled to before, I’ve heard the Professor has his own vessel to take ye’ to new lands!',
@@ -536,10 +582,10 @@ TownList['Goldenrod City'] = new Town(
 TownList['Ecruteak City'] = new Town(
     'Ecruteak City',
     GameConstants.Region.johto,
-    [EcruteakCityShop],
+    [EcruteakCityShop, new MoveToDungeon(dungeonList['Burned Tower']), new MoveToDungeon(dungeonList['Tin Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 37)],
-        npcs: [EcruteakKimonoGirl],
+        npcs: [EcruteakBill, EcruteakEusine, EcruteakPokéfan, EcruteakKimonoGirl],
     }
 );
 TownList['Olivine City'] = new Town(
@@ -1205,6 +1251,10 @@ const PalParkWarden = new NPC('Pal Park Warden', [
     'Hey! Welcome to the Pal Park, have you been to my Dad’s Safari Zone in Kanto? We don’t have as many Pokémon here, but I’ve heard that a flower Pokémon found here can bloom when it’s sunny outside!',
 ]);
 
+const CanalaveRiley = new NPC('Riley', [
+    'My partner Lucario evolved from a Riolu during daytime when I used a Soothe Bell.',
+]);
+
 const CanalaveYoungBoy = new NPC('Young Boy', [
     'Oh hello! Say, have you ever heard of Cresselia? Once when I was really little I had a really bad dream I couldn’t wake up from, but then a kind trainer went to an island near here and got help from Cresselia to cure me!',
     'Maybe if you can prove yourself by conquering that island you could find Cresselia roaming around the region...',
@@ -1218,6 +1268,12 @@ const SnowpointYoungGirl = new NPC('Young Girl', [
 const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
     'Oh! I don’t get visitors often. My husband is a sailor who visits far away lands… he always tells me these fantastic things.',
     'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine… maybe they should try the Day Care?',
+]);
+
+const FightAreaAceTrainer = new NPC('Ace Trainer Quinn', [
+    'Something amazing happened on top of Mt. Coronet. We could see it all the way from here. I\'m sure everyone in the entire region saw it.',
+    'What? You were there? What happened? What was that purple thing?',
+    'The Distortion World? Hold on, I think I\'ve read about that in an old book in the Canalave City library. But according to that book the only entrance to the Distortion World is hidden deep within Sendoff Spring. This is quite the discovery my friend.',
 ]);
 
 const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
@@ -1353,7 +1409,7 @@ TownList['Canalave City'] = new Town(
     [CanalaveCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
-        npcs: [CanalaveYoungBoy],
+        npcs: [CanalaveRiley, CanalaveYoungBoy],
     }
 );
 TownList['Snowpoint City'] = new Town(
@@ -1388,6 +1444,7 @@ TownList['Fight Area'] = new Town(
     [],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
+        npcs: [FightAreaAceTrainer],
     }
 );
 TownList['Survival Area'] = new Town(
