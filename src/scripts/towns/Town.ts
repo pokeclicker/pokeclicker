@@ -58,7 +58,7 @@ class DungeonTown extends Town {
     dungeon: Dungeon
 
     constructor(name: string, region: GameConstants.Region, content:  TownContent[] = [], requirements: (Requirement | OneFromManyRequirement)[] = []) {
-        super(name, region, content, { requirements });
+        super(name, region, { requirements }, content);
         this.dungeon = dungeonList[name];
     }
 }
