@@ -123,7 +123,7 @@ class FarmHand {
         if (!App.game.wallet.hasAmount(this.cost)) {
             Notifier.notify({
                 title: `[FARM HAND] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
-                message: `You don't have enough Farm Points to hire me..\nCost: <img src="./assets/images/currency/farmPoint.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
+                message: `You don't have enough Farm Points to hire me...\nCost: <img src="./assets/images/currency/farmPoint.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
                 type: NotificationConstants.NotificationOption.warning,
                 timeout: 30 * GameConstants.SECOND,
             });
@@ -142,7 +142,7 @@ class FarmHand {
     fire(): void {
         Notifier.notify({
             title: `[FARM HAND] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
-            message: 'Thanks for the work,\nLet me know when you\'re hiring again!',
+            message: 'Thanks for the work.\nLet me know when you\'re hiring again!',
             type: NotificationConstants.NotificationOption.info,
             timeout: 30 * GameConstants.SECOND,
         });
@@ -258,7 +258,7 @@ class FarmHand {
         if (!App.game.wallet.loseAmount(this.cost)) {
             Notifier.notify({
                 title: `[FARM HAND] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
-                message: `It looks like you are a little short on Farm Points right now..\nLet me know when you're hiring again!\nCost: <img src="./assets/images/currency/farmPoint.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
+                message: `It looks like you are a little short on Farm Points right now...\nLet me know when you're hiring again!\nCost: <img src="./assets/images/currency/farmPoint.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
                 type: NotificationConstants.NotificationOption.danger,
                 timeout: 30 * GameConstants.MINUTE,
             });
