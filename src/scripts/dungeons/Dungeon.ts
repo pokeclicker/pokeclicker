@@ -3,6 +3,7 @@
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/SeededDateRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/DayOfWeekRequirement.d.ts"/>
 ///<reference path="../../declarations/utilities/SeededDateRand.d.ts"/>
 ///<reference path="../achievements/ObtainedPokemonRequirement.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
@@ -1047,6 +1048,12 @@ dungeonList['Union Cave'] = new Dungeon('Union Cave',
         new DungeonTrainer('Firebreather',
             [new GymPokemon('Vulpix', 300000, 9)],
             { weight: 1 }, 'Ray'),
+        new DungeonBossPokemon('Lapras', 450000, 20, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new GymBadgeRequirement(BadgeEnums.Fog),
+                new DayOfWeekRequirement(GameConstants.DayOfWeek.Friday),
+            ])}),
     ],
     3000, 32);
 

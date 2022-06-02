@@ -478,6 +478,13 @@ const AzaleaOldMan = new NPC('Wise Old Man', [
     'It says that the mythical Pokémon Celebi will appear before anyone who has proven they are a Champion Pokémon Trainer.',
 ]);
 
+const AzaleaUnionCaveHiker = new NPC('Hiker Anthony', [
+    'The PokéManic’s in Union Cave seem restless.',
+    'They belive there is a weekly visitor.',
+    'As every Friday, you can hear Pokémon roars from deep inside the cave.',
+],
+{ requirement: new GymBadgeRequirement(BadgeEnums.Fog) });
+
 const EcruteakBill = new NPC('Bill', [
     'I traveled here all the way from Goldenrod to buy a Soothe Bell for my Eevee.',
     'When I use a Soothe Bell on Eevee it can evolve into Espeon or Umbreon. It depends on the time. Espeon during the day, Umbreon at night.',
@@ -560,7 +567,7 @@ TownList['Azalea Town'] = new Town(
     [AzaleaTownShop, new MoveToDungeon(dungeonList['Slowpoke Well'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 33)],
-        npcs: [AzaleaOldMan],
+        npcs: [AzaleaOldMan, AzaleaUnionCaveHiker],
     }
 );
 TownList['Goldenrod City'] = new Town(
