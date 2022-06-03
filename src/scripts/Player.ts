@@ -76,7 +76,7 @@ class Player {
             }
         }
         for (let i = 1; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
-            if (savedPlayer.regionStarters && savedPlayer.regionStarters[i]) {
+            if (savedPlayer.regionStarters && savedPlayer.regionStarters[i] != undefined) {
                 this.regionStarters.push(ko.observable(savedPlayer.regionStarters[i]));
             } else if (i < (savedPlayer.highestRegion ?? 0)) {
                 this.regionStarters.push(ko.observable(0));
