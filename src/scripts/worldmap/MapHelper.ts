@@ -5,6 +5,7 @@ enum areaStatus {
     currentLocation,
     locked,
     unlockedUnfinished,
+    questAtLocation,
     uncaughtPokemon,
     uncaughtShinyPokemonAndMissingAchievement,
     uncaughtShinyPokemon,
@@ -91,6 +92,8 @@ class MapHelper {
             cls = areaStatus[areaStatus.locked];
         } else  if (App.game.statistics.routeKills[region][route]() < GameConstants.ROUTE_KILLS_NEEDED) {
             cls = areaStatus[areaStatus.unlockedUnfinished];
+        } else  if (RouteHelper.isThereQuestAtLocation(route, region)) {
+            cls = areaStatus[areaStatus.questAtLocation];
         } else if (!RouteHelper.routeCompleted(route, region, false)) {
             cls = areaStatus[areaStatus.uncaughtPokemon];
         } else if (!RouteHelper.routeCompleted(route, region, true) && !RouteHelper.isAchievementsComplete(route, region)) {
@@ -125,6 +128,8 @@ class MapHelper {
         if (dungeonList[townName]) {
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(townName)]()) {
                 return areaStatus[areaStatus.unlockedUnfinished];
+            } else  if (DungeonRunner.isThereQuestAtLocation(dungeonList[townName])) {
+                return areaStatus[areaStatus.questAtLocation];
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], false)) {
                 return areaStatus[areaStatus.uncaughtPokemon];
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], true) && !DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
@@ -229,7 +234,8 @@ class MapHelper {
             // Gather users attack when they moved regions
             LogEvent('attack measurement', 'new region',
                 GameConstants.Region[player.highestRegion()],
-                App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, false));
+                App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, WeatherType.Clear));
+            $('#pickStarterModal').modal('show');
         }
     }
 

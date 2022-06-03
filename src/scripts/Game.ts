@@ -78,6 +78,9 @@ class Game {
         this.specialEvents.initialize();
         this.load();
 
+        // Update if the achievements are already completed
+        AchievementHandler.preCheckAchievements();
+
         // TODO refactor to proper initialization methods
         if (player.starter() != GameConstants.Starter.None) {
             Battle.generateNewEnemy();
@@ -139,9 +142,9 @@ class Game {
 
             Notifier.notify({
                 type: NotificationConstants.NotificationOption.info,
-                title: 'Offline progress',
+                title: 'Offline-time bonus',
                 message: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
-                strippedMessage: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: ${moneyToEarn.toLocaleString('en-US')} money`,
+                strippedMessage: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: ${moneyToEarn.toLocaleString('en-US')} Pokédollars`,
                 timeout: 2 * GameConstants.MINUTE,
                 setting: NotificationConstants.NotificationSetting.General.offline_earnings,
             });
@@ -171,6 +174,32 @@ class Game {
                 App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest(App.game.quests.getQuestLine('Mystery of Deoxys').curQuest());
             }
         }
+        // Mining expedition questline
+        if (App.game.quests.getQuestLine('Mining Expedition').state() == QuestLineState.inactive) {
+            if (App.game.party.alreadyCaughtPokemon(142)) {
+                // Has obtained Aerodactyl
+                App.game.quests.getQuestLine('Mining Expedition').state(QuestLineState.ended);
+            } else if (App.game.badgeCase.badgeList[BadgeEnums.Soul]()) {
+                // Has the soul badge, Quest is started
+                App.game.quests.getQuestLine('Mining Expedition').state(QuestLineState.started);
+                App.game.quests.getQuestLine('Mining Expedition').beginQuest(App.game.quests.getQuestLine('Mining Expedition').curQuest());
+            }
+        }
+        // Check if Koga has been defeated, but have no safari ticket yet
+        if (App.game.badgeCase.badgeList[BadgeEnums.Soul]() && !App.game.keyItems.itemList[KeyItemType.Safari_ticket].isUnlocked()) {
+            App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
+        }
+        // Check if Giovanni has been defeated, but have no gem case yet
+        if (App.game.badgeCase.badgeList[BadgeEnums.Earth]() && !App.game.keyItems.itemList[KeyItemType.Gem_case].isUnlocked()) {
+            App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
+        }
+        // Check that none of our quest are less than their initial value
+        App.game.quests.questLines().filter(q => q.state() == 1).forEach(questLine => {
+            const quest = questLine.curQuestObject();
+            if (quest.initial() > quest.focus()) {
+                quest.initial(quest.focus());
+            }
+        });
     }
 
     start() {
@@ -335,6 +364,7 @@ class Game {
                         timeout: 3e4,
                     });
                 }
+                DayOfWeekRequirement.date(now.getDay());
             }
 
             // Check if it's a new hour

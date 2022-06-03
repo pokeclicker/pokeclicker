@@ -20,7 +20,7 @@ class GymRunner {
         this.running(false);
         this.gymObservable(gym);
         if (gym instanceof Champion) {
-            gym.setPokemon(player.starter());
+            gym.setPokemon(player.regionStarters[player.region]());
         }
         App.game.gameState = GameConstants.GameState.idle;
         GymRunner.timeLeft(GameConstants.GYM_TIME);

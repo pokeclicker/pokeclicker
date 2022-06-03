@@ -1,5 +1,8 @@
 <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
-    <image width="1600" height="960" xlink:href="assets/images/hoenn.png" href="assets/images/hoenn.png"></image>
+    <image width="1600" height="960" data-bind="attr: {
+        'xlink:href':'assets/images/hoenn.png?v=$VERSION',
+        href:'assets/images/hoenn.png?v=$VERSION'
+    }"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -520,6 +523,22 @@
         , x: 14, y: 23
         })
      %>
+     
+    <!--Mt. Chimney-->
+    <%- include('templates/mapTown',
+        { name: "Mt. Chimney"
+        , x: 21, y: 11
+        , width: 8, height: 5
+        })
+    %>
+
+    <!--Mt. Chimney Extension-->
+    <%- include('templates/mapTown',
+        { name: "Mt. Chimney"
+        , x: 22, y: 16
+        , width: 7, height: 1
+        })
+    %>
 
     <!--Fallarbor Town-->
     <%- include('templates/mapTown',
@@ -542,16 +561,16 @@
         })
      %>
 
-    <!--LilyCove City-->
+    <!--Lilycove City-->
     <%- include('templates/mapTown',
-        { name: "LilyCove City"
+        { name: "Lilycove City"
         , x: 65, y: 12.5
         , width: 5, height: 4.5
         })
     %>
-    <!--LilyCove City Extension-->
+    <!--Lilycove City Extension-->
     <%- include('templates/mapTown',
-        { name: "LilyCove City"
+        { name: "Lilycove City"
         , x: 70, y: 13
         })
     %>
@@ -665,27 +684,6 @@
         , x: 3, y: 10
         })
      %>
-
-    <!--Fiery Path-->
-    <%- include('templates/mapDungeon',
-        { name: "Fiery Path"
-        , x: 25, y: 14
-        })
-     %>
-
-    <!--Jagged Pass-->
-    <%- include('templates/mapDungeon',
-        { name: "Jagged Pass"
-        , x: 21, y: 14
-        })
-     %>
-
-    <!--Mt. Chimney-->
-    <%- include('templates/mapDungeon',
-        { name: "Mt. Chimney"
-        , x: 21, y: 11
-        })
-     %>
     
     <!--Weather Institute-->
     <%- include('templates/mapDungeon',
@@ -708,13 +706,6 @@
         , width: 1, height: 3
         })
     %>
-
-    <!--Magma Hideout-->
-    <%- include('templates/mapDungeon',
-        { name: "Magma Hideout"
-        , x: 25, y: 11
-        })
-     %>
      
     <!--Aqua Hideout-->
     <%- include('templates/mapDungeon',
@@ -815,7 +806,7 @@
      %>
 
      <%- include('templates/mapPOI',
-        { name: "Pokemon Day Care"
+        { name: "Pokémon Day Care"
         , x: 18, y: 27
         , width: 4, height: 4
         , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"

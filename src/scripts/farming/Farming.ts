@@ -82,11 +82,11 @@ class Farming implements Feature {
         this.berryData[BerryType.Chesto]    = new Berry(BerryType.Chesto,   [5, 15, 25, 40, 80],
             3, 0.5, 6, 2,
             [0, 10, 0, 0, 0], BerryColor.Purple,
-            ['This Berry\'s thick skin and fruit are very tough and dry tasting. However, every bit of it can be eaten.'], undefined, ['Oricorio (Sensu)']);
+            ['This Berry\'s thick skin and fruit are very tough and dry-tasting. However, every bit of it can be eaten.'], undefined, ['Oricorio (Sensu)']);
         this.berryData[BerryType.Pecha]     = new Berry(BerryType.Pecha,    [10, 35, 50, 60, 120],
             4, 0.5, 7, 3,
             [0, 0, 10, 0, 0], BerryColor.Pink,
-            ['Because of its hollow inside pocket, there isn\'t a lot to eat. What can be eaten is very sweet and delicious'], undefined, ['Oricorio (Pa\'u)']);
+            ['Because of its hollow inside pocket, there isn\'t a lot to eat. What can be eaten is very sweet and delicious.'], undefined, ['Oricorio (Pa\'u)']);
         this.berryData[BerryType.Rawst]     = new Berry(BerryType.Rawst,    [15, 30, 45, 80, 160],
             5, 0.5, 8, 4,
             [0, 0, 0, 10, 0], BerryColor.Green,
@@ -106,7 +106,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [150, 300, 450, 600, 1200],
             9, 0.5, 30, 8,
             [0, 10, 10, 10, 10], BerryColor.Yellow,
-            ['Sitrus came from the same family as Oran. It is larger and smoother tasting than Oran.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-pom)']);
+            ['Sitrus came from the same family as Oran. It is larger and smoother-tasting than Oran.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-pom)']);
         //#endregion
 
         //#region Second Generation
@@ -121,7 +121,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Bluk]      = new Berry(BerryType.Bluk,     [200, 250, 300, 330, 660],
             9, 0.4, 20, 2,
             [0, 10, 10, 0, 0], BerryColor.Purple,
-            ['Though this small, delicately skinned Berry is blue in color, it dyes the mouth black when eaten.'], undefined, ['Oricorio (Sensu)']);
+            ['Though this small, delicately-skinned Berry is blue in color, it dyes the mouth black when eaten.'], undefined, ['Oricorio (Sensu)']);
         this.berryData[BerryType.Nanab]     = new Berry(BerryType.Nanab,    [25, 30, 35, 250, 500],
             11, 0.4, 25, 2,
             [0, 0, 10, 10, 0], BerryColor.Pink,
@@ -307,7 +307,7 @@ class Farming implements Feature {
             [20, 0, 0, 0, 10], BerryColor.Green,
             [
                 'The flower grows at the tip of this Berry. It attracts Bug Pokémon by letting its stringy petals stream out.',
-                'The attracted Bug Pokémon decreases the amount of harvestable Berries in nearby plants',
+                'The attracted Bug Pokémon decrease the amount of harvestable Berries in nearby plants.',
             ], new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]), ['Nincada']);
         this.berryData[BerryType.Charti]    = new Berry(BerryType.Charti,   [8600, 12960, 23040, 37800, 75600],
             32, 0.05, 2000, 15,
@@ -384,7 +384,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Maranga]   = new Berry(BerryType.Maranga,  [5040, 10080, 20160, 40320, 80640],
             1, 0.05, 3100, 20,
             [10, 10, 30, 30, 10], BerryColor.Blue,
-            ['This Berry resembles the Durin Berry, however its spikes are less pronounced. It is quite delicious when roasted.'], undefined, ['Flabébé (Blue)']);
+            ['This Berry resembles the Durin Berry, though its spikes are less pronounced. It is quite delicious when roasted.'], undefined, ['Flabébé (Blue)']);
 
         this.berryData[BerryType.Liechi]    = new Berry(BerryType.Liechi,   [21600, 43200, 86400, 172800, 345600],
             0.5, 0, 10000, 20,
@@ -737,7 +737,7 @@ class Farming implements Feature {
         berryReqs = {};
         berryReqs[BerryType.Chople] = 3;
         this.mutations.push(new EvolveNearBerryMinMutation(.0001, BerryType.Chilan, BerryType.Chople, berryReqs, {
-            hint: 'I\'ve heard that Chople Berries will turn into a different Berry if surrounded by more than two of its own kind',
+            hint: 'I\'ve heard that Chople Berries will turn into a different Berry if surrounded by more than two of their own kind.',
         }));
         // Roseli
         this.mutations.push(new GrowNearBerryMutation(.0001, BerryType.Roseli,
@@ -847,7 +847,7 @@ class Farming implements Feature {
         // Kasib
         this.mutations.push(new BlankMutation(0, BerryType.Kasib,
             {
-                hint: 'I\'ve heard of a Berry that only appears after a Berry plant has withered, but is repelled by Colbur Plants.',
+                hint: 'I\'ve heard of a Berry that only appears after a Berry plant has withered, but is repelled by Colbur plants.',
                 unlockReq: () => App.game.farming.highestUnlockedBerry() >= BerryType.Occa,
             }));
 
@@ -1376,9 +1376,7 @@ class Farming implements Feature {
         }
 
         const mutations = json['mutations'];
-        if (mutations == null) {
-            this.mutations.forEach(mutation => mutation.fromJSON({}));
-        } else {
+        if (mutations) {
             this.mutations.forEach((mutation, i) => mutation.fromJSON(mutations[i]));
         }
 

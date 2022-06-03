@@ -1,5 +1,8 @@
 <g data-bind='visible: player.region == GameConstants.Region.unova'>
-    <image width="1600" height="960" xlink:href="assets/images/unova.png" href="assets/images/unova.png"></image>
+    <image width="1600" height="960" data-bind="attr: {
+        'xlink:href':'assets/images/unova.png?v=$VERSION',
+        href:'assets/images/unova.png?v=$VERSION'
+    }"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -615,8 +618,56 @@
     <!--Relic Passage-->
     <%- include('templates/mapDungeon',
         { name: "Relic Passage"
-        , x: 37, y: 40
-        , width: 6, height: 3
+        , x: 40, y: 39
+        , width: 2, height: 6
+        })
+    %>
+
+    <!--Relic Passage Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Relic Passage"
+        , x: 42, y: 39
+        , width: 1, height: 4.5
+        })
+    %>
+
+    <!--Relic Passage Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Relic Passage"
+        , x: 38, y: 37
+        , width: 2, height: 4
+        })
+    %>
+    
+    <!--Relic Passage Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Relic Passage"
+        , x: 37, y: 35
+        , width: 1, height: 5
+        })
+    %>
+    
+    <!--Relic Passage Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Relic Passage"
+        , x: 36, y: 35
+        , width: 1, height: 4
+        })
+    %>
+
+    <!--Relic Passage Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Relic Passage"
+        , x: 38, y: 36
+        , width: 1, height: 1
+        })
+    %>
+
+    <!--Relic Passage Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Relic Passage"
+        , x: 40, y: 38
+        , width: 1, height: 1
         })
     %>
 
@@ -813,7 +864,7 @@
      %>
 
      <%- include('templates/mapPOI',
-        { name: "Pokemon Day Care"
+        { name: "Pokémon Day Care"
         , x: 81, y: 36
         , width: 4, height: 4
         , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"

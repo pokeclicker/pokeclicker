@@ -4,6 +4,7 @@ import BadgeEnums from '../enums/Badges';
 import GameHelper from '../GameHelper';
 import { camelCaseToString } from '../GameConstants';
 import LogEvent from '../LogEvent';
+import WeatherType from '../weather/WeatherType';
 
 const emptyBadgeList = new Array(GameHelper.enumLength(BadgeEnums)).fill(false);
 
@@ -21,7 +22,7 @@ export default class BadgeCase implements Feature {
     badgeCaseTooltip: PureComputed<string> = ko.pureComputed(() => {
         const maxLevel = this.maxLevel();
 
-        return `Earning badges raises your Pokémons' maximum level, up to 100.<br>The max level of your Pokémon is <b>${maxLevel}</b>.`;
+        return `Earning badges raises the maximum possible level of your Pokémon, up to 100.<br>The max level your Pokémon can currently reach is <b>${maxLevel}</b>.`;
     });
 
     badgeCount(): number {
@@ -33,7 +34,7 @@ export default class BadgeCase implements Feature {
 
         // Track when users gains a badge and their total attack
         LogEvent('gained badge', 'badges', `gained badge (${camelCaseToString(BadgeEnums[badge])})`,
-            App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, false));
+            App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, WeatherType.Clear));
     }
 
     hasBadge(badge: BadgeEnums): boolean {
@@ -59,17 +60,9 @@ export default class BadgeCase implements Feature {
     }
 
     toJSON(): Record<string, any> {
-        let shouldReturn = false;
         // We only want to save upto the highest badge we have obtained,
         // everything else is assumed to be false
-        return this.badgeList
-            .map(ko.unwrap)
-            .reverse()
-            .filter((hasBadge) => {
-                shouldReturn = shouldReturn || hasBadge;
-                return shouldReturn;
-            })
-            .reverse();
+        return GameHelper.filterArrayEnd(this.badgeList.map(ko.unwrap));
     }
 
     // This method intentionally left blank

@@ -7,6 +7,14 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     [new GymBadgeRequirement(BadgeEnums.RockiumZ)]
 );
 
+TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
+    'Ultra Megalopolis',
+    [new GymPokemon('Necrozma (Ultra)', 282601920, 60)],
+    'Necrozma fled.',
+    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)]
+);
+
+
 TemporaryBattleList['Team Rocket Leader Giovanni'] = new TemporaryBattle(
     'Team Rocket Leader Giovanni',
     [

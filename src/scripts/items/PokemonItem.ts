@@ -39,6 +39,7 @@ ItemList['Porygon']              = new PokemonItem('Porygon', 2000);
 ItemList['Jynx']                 = new PokemonItem('Jynx', 2000);
 ItemList['Mr. Mime']             = new PokemonItem('Mr. Mime', 1000);
 ItemList['Lickitung']            = new PokemonItem('Lickitung', 1000);
+ItemList['Magikarp']             = new PokemonItem('Magikarp', 50000, Currency.money);
 ItemList['Togepi']               = new PokemonItem('Togepi', 15000);
 ItemList['Beldum']               = new PokemonItem('Beldum', 22500);
 ItemList['Skorupi']              = new PokemonItem('Skorupi', 6750);
