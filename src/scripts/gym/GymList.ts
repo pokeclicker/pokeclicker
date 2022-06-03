@@ -98,7 +98,7 @@ GymList['Cinnabar Island'] = new Gym(
     BadgeEnums.Volcano,
     5000,
     'I\'ve burnt out! You have earned the Volcano Badge!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokemon Mansion'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Mansion'))]
 );
 GymList['Viridian City'] = new Gym(
     'Giovanni',
