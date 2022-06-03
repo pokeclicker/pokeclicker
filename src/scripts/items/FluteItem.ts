@@ -56,7 +56,7 @@ class FluteItem extends Item {
         }
         if (FluteEffectRunner.getLowestGem(this.name) <= FluteEffectRunner.numActiveFlutes() + 1) {
             Notifier.notify({
-                message: 'You don\'t have enough gems to use this Flute',
+                message: 'You don\'t have enough gems to use this Flute.',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;
@@ -69,7 +69,7 @@ class FluteItem extends Item {
 ItemList['Red_Flute']         = new FluteItem(GameConstants.FluteItemType.Red_Flute, 'Click Attack', ['Fighting', 'Fire', 'Poison'], 'clickAttack', 1.02);
 ItemList['White_Flute']       = new FluteItem(GameConstants.FluteItemType.White_Flute, 'Exp Yield', ['Normal', 'Bug', 'Rock'], 'exp', 1.02);
 ItemList['Black_Flute']       = new FluteItem(GameConstants.FluteItemType.Black_Flute, 'Item Drop Rate', ['Normal', 'Flying', 'Poison'], undefined, 1.02);
-ItemList['Yellow_Flute']      = new FluteItem(GameConstants.FluteItemType.Yellow_Flute, 'Pokedollar Yield', ['Dark', 'Electric', 'Steel'], 'money', 1.02);
+ItemList['Yellow_Flute']      = new FluteItem(GameConstants.FluteItemType.Yellow_Flute, 'Pokédollar Yield', ['Dark', 'Electric', 'Steel'], 'money', 1.02);
 ItemList['Blue_Flute']        = new FluteItem(GameConstants.FluteItemType.Blue_Flute, 'Dungeon Token Yield', ['Dark', 'Ghost', 'Ice'], 'dungeonToken', 1.02);
 ItemList['Poke_Flute']        = new FluteItem(GameConstants.FluteItemType.Poke_Flute, 'Pokémon Attack', ['Fighting', 'Ice', 'Fairy'], 'pokemonAttack', 1.02);
 ItemList['Azure_Flute']       = new FluteItem(GameConstants.FluteItemType.Azure_Flute, 'Shiny Chance', ['Dragon', 'Ghost', 'Steel'], 'shiny', 1.02);
