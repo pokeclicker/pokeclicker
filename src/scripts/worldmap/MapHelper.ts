@@ -234,7 +234,8 @@ class MapHelper {
             // Gather users attack when they moved regions
             LogEvent('attack measurement', 'new region',
                 GameConstants.Region[player.highestRegion()],
-                App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, false));
+                App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, WeatherType.Clear));
+            $('#pickStarterModal').modal('show');
         }
     }
 

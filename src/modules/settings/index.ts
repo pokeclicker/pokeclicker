@@ -8,6 +8,7 @@ import PokemonType from '../enums/PokemonType';
 import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
 import { SortOptionConfigs, SortOptions } from './SortOptions';
+import { AchievementSortOptionConfigs, AchievementSortOptions } from '../achievements/AchievementSortOptions';
 import { Region, AchievementType } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 
@@ -151,6 +152,7 @@ const proteinSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 Settings.add(new Setting<number>('proteinSort', 'Sort:', proteinSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('proteinSortDirection', 'reverse', false));
 Settings.add(new BooleanSetting('proteinHideMaxedPokemon', 'Hide Pokémon with max protein', false));
+Settings.add(new BooleanSetting('proteinHideShinyPokemon', 'Hide shiny Pokémon', false));
 
 // Breeding Filters
 Settings.add(new Setting<string>('breedingCategoryFilter', 'breedingCategoryFilter',
@@ -194,9 +196,16 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Breeding Efficiency', 'breedingEfficiency'),
         new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
         new SettingOption('Pokedex ID', 'dexId'),
-        new SettingOption('Proteins used', 'protiens'),
+        new SettingOption('Proteins used', 'proteins'),
     ],
     'attack'));
+
+// Achievement sorting
+const achievementSortSettings = Object.keys(AchievementSortOptionConfigs).map((opt) => (
+    new SettingOption<number>(AchievementSortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('achievementSort', 'Sort:', achievementSortSettings, AchievementSortOptions.default));
+Settings.add(new BooleanSetting('achievementSortDirection', 'reverse', false));
 
 // Achievements Filters
 Settings.add(new Setting<number>('achievementsPage', 'achievementsPage', [], 0));
@@ -243,8 +252,13 @@ Settings.add(new HotkeySetting('hotkey.dungeon.down', 'Move Down', 'S', { prefix
 Settings.add(new HotkeySetting('hotkey.dungeon.right', 'Move Right', 'D', { prefix: '→ or ' }));
 Settings.add(new HotkeySetting('hotkey.dungeon.interact', 'Interact', 'Space'));
 
-Settings.add(new HotkeySetting('hotkey.town.start', 'Start Gym/Dungeon', 'Space'));
+Settings.add(new HotkeySetting('hotkey.town.start', 'Starts first content in the town', 'Space'));
 Settings.add(new HotkeySetting('hotkey.forceSave', 'Force save game', 'S', { prefix: 'Shift + ' }));
+
+Settings.add(new HotkeySetting('hotkey.shop.buy', 'Buy item', 'B'));
+Settings.add(new HotkeySetting('hotkey.shop.max', 'Select max amount', 'M'));
+Settings.add(new HotkeySetting('hotkey.shop.reset', 'Reset amount', 'R'));
+Settings.add(new HotkeySetting('hotkey.shop.increase', 'Increase amount', 'I'));
 
 /*
  * SUBSCRIBERS

@@ -10,6 +10,45 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.5
+    new ChangelogUpdate('v0.9.5', new Date(2022, 4, 26)),
+    new Changelog(changelogType.FIXED, 'Starter modal appearing multiple times when grass type picked'),
+    new Changelog(changelogType.FIXED, 'Error when obtaining a badge'),
+    new Changelog(changelogType.FIXED, 'Key items not being obtained'),
+    new Changelog(changelogType.FIXED, 'Underground hammer sprite not appearing'),
+    new Changelog(changelogType.FIXED, 'Misc text changes'),
+
+    // v0.9.4
+    new ChangelogUpdate('v0.9.4', new Date(2022, 4, 26)),
+    new Changelog(changelogType.NEW, 'Quest locations now highlighted where possible'),
+    new Changelog(changelogType.NEW, 'Battle Frontier now saves your stage if you leave early'),
+    new Changelog(changelogType.NEW, 'You will now choose a starter each time you reach a new region'),
+    new Changelog(changelogType.NEW, 'Added weather selection to Damage Calculator'),
+    new Changelog(changelogType.NEW, 'Added Shop hotkeys'),
+    new Changelog(changelogType.NEW, 'Added ability to sort Achievements'),
+    new Changelog(changelogType.CHANGE, 'Show current sub region name'),
+    new Changelog(changelogType.CHANGE, 'Updated Hammer and Chisel sprites in Underground'),
+    new Changelog(changelogType.CHANGE, 'Updated Hatchery sort options and directions, Added a tooltip'),
+    new Changelog(changelogType.CHANGE, 'Display highest stage reached while in Battle Frontier'),
+    new Changelog(changelogType.CHANGE, 'Added option to display Proteins used in Hatchery'),
+    new Changelog(changelogType.CHANGE, 'Updated Pokémon League sprites on map'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some themes'),
+    new Changelog(changelogType.CHANGE, 'Adjusted dungeon loot'),
+    new Changelog(changelogType.CHANGE, 'Grouped Mt. Chimney surrounding Dungeons'),
+    new Changelog(changelogType.CHANGE, 'Can now change movement keys for Safari Zone'),
+    new Changelog(changelogType.CHANGE, 'Timer now starts in Dungeons once you have moved'),
+    new Changelog(changelogType.CHANGE, 'Professor Oak will now tell you how many Pokémon you still need to obtain to move on'),
+    new Changelog(changelogType.CHANGE, 'Reduce load time, no longer preload all town images'),
+    new Changelog(changelogType.CHANGE, 'Fossils display caught status in Hatchery'),
+    new Changelog(changelogType.CHANGE, 'Links on the Save Selector screen will now open in a new tab'),
+    new Changelog(changelogType.CHANGE, 'Updated Pokédex filtering options'),
+    new Changelog(changelogType.CHANGE, 'Added option to hide Shiny Pokémon in the Protein menu'),
+    new Changelog(changelogType.FIXED, 'Berry Master shop buttons'),
+    new Changelog(changelogType.FIXED, 'Safari Zone movement animations'),
+    new Changelog(changelogType.FIXED, 'Shiny code wrong name displayed occasionally'),
+    new Changelog(changelogType.FIXED, 'Damage calculator updates correctly when you hatch Pokémon'),
+    new Changelog(changelogType.FIXED, 'Misc text changes'),
+
     // v0.9.3
     new ChangelogUpdate('v0.9.3', new Date(2022, 3, 28)),
     new Changelog(changelogType.NEW, 'Added Hatchery Helpers [BETA]'),

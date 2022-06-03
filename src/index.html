@@ -156,13 +156,13 @@
                         <tr class="row">
                             <td class="col">
                                 <span style="display: inline; position: relative;">
-                                    <img title="Money" src="assets/images/currency/money.svg" height="25px">
+                                    <img title="Pokédollars&#013;&#010;Gained by defeating Pokémon and trainers in battle" src="assets/images/currency/money.svg" height="25px">
                                     <span id="animateCurrency-money" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.money]()) : App.game.wallet.currencies[GameConstants.Currency.money]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td class="col">
                                 <span style="display: inline; position: relative;">
-                                    <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px">
+                                    <img title="Dungeon Tokens&#013;&#010;Gained by catching wild Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px">
                                     <span id="animateCurrency-dungeonToken" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.dungeonToken]()) : App.game.wallet.currencies[GameConstants.Currency.dungeonToken]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
@@ -495,8 +495,11 @@
 <!-- Start Sequence Modal-->
 @import "startSequence.html"
 
+<!-- Pick Starter Tutorial Modal-->
+@import "pickStarterTutorialModal.html"
+
 <!-- Pick Starter Modal-->
-@import "pickStarter.html"
+@import "pickStarterModal.html"
 
 <!-- Starter Caught Modal-->
 @import "starterCaught.html"
