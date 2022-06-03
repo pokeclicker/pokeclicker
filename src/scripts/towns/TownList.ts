@@ -3103,17 +3103,20 @@ TownList['Freezington'] = new Town(
 TownList['Slumbering Weald'] = new DungeonTown(
     'Slumbering Weald',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    [TemporaryBattleList['Mirages']]
 );
 TownList['Galar Mine'] = new DungeonTown(
     'Galar Mine',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 12)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 12)],
+  [TemporaryBattleList['Bede1']]
 );
 TownList['Galar Mine No. 2'] = new DungeonTown(
     'Galar Mine No. 2',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Galar_Water)]
+    [new GymBadgeRequirement(BadgeEnums.Galar_Water)],
+    [TemporaryBattleList['Bede2']]
 );
 TownList['Glimwood Tangle'] = new DungeonTown(
     'Glimwood Tangle',
