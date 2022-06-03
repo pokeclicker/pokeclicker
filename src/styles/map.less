@@ -25,9 +25,28 @@
     opacity: 0.6;
   }
 
+  @keyframes questFlash {
+    0% {
+      fill: var(--questAtLocation);
+      opacity: 0.6;
+    }
+    
+    50% {
+      fill: var(--questAtLocationFlash);
+      opacity: 0.7;
+    }
+    
+    100% {
+      fill: var(--questAtLocation);
+      opacity: 0.6;
+    }
+  }
+
   .questAtLocation {
-    fill: var(--questAtLocation);
-    opacity: 0.6;
+    animation: questFlash ease;
+    animation-iteration-count: infinite;
+    animation-duration: 2.5s;
+    animation-fill-mode: both;
   }
 
   .uncaughtPokemon {
