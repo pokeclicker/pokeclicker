@@ -2076,8 +2076,6 @@ dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
         {loot: 'Mystery_egg', weight: 1},
         {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Cave of Origin'))},
         {loot: 'Lum', weight: 0, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Cave of Origin'))},
-        {loot: 'Liechi', weight: 0, requirement: new ClearDungeonRequirement(1500, GameConstants.getDungeonIndex('Cave of Origin'))},
-        {loot: 'Ganlon', weight: 0, requirement: new ClearDungeonRequirement(1500, GameConstants.getDungeonIndex('Cave of Origin'))},
     ],
     590000,
     [
