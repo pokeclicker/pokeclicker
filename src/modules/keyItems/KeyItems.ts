@@ -20,7 +20,7 @@ export default class KeyItems implements Feature {
     initialize(): void {
         this.itemList = [
             new KeyItem(KeyItemType.Teachy_tv, 'A television set that is tuned to a program with useful tips for novice TRAINERS.', null, true, undefined, 'Teachy TV'),
-            new KeyItem(KeyItemType.Coin_case, 'A case for holding money.', null, true, undefined, 'Coin Case'),
+            new KeyItem(KeyItemType.Coin_case, 'A case for holding Pokédollars.', null, true, undefined, 'Coin Case'),
             new KeyItem(KeyItemType.Pokeball_bag, 'A small bag that can hold many different types of Pokéballs.', null, true, undefined, 'Pokéball Bag'),
             new KeyItem(KeyItemType.Town_map, 'A very convenient map that can be viewed anytime. It even shows you your present location in the region.',
                 () => App.game.statistics.routeKills[Region.kanto][1]() >= ROUTE_KILLS_NEEDED,
