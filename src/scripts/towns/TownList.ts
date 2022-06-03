@@ -3110,7 +3110,7 @@ TownList['Galar Mine'] = new DungeonTown(
     'Galar Mine',
     GameConstants.Region.galar,
     [new RouteKillRequirement(10, GameConstants.Region.galar, 12)],
-  [TemporaryBattleList['Bede1']]
+    [TemporaryBattleList['Bede1']]
 );
 TownList['Galar Mine No. 2'] = new DungeonTown(
     'Galar Mine No. 2',
