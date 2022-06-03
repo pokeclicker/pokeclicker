@@ -15,6 +15,6 @@ export default class QuestLineCompletedRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `Questline ${this.questLineName} needs to be completed`;
+        return `Questline ${this.questLineName} needs to be completed.`;
     }
 }

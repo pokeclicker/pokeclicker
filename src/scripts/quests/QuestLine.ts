@@ -45,9 +45,7 @@ class QuestLine {
         this.autoBegin = this.curQuest.subscribe((num) => {
             if (this.curQuest() < this.totalQuests) {
                 if (this.curQuestObject().initial() == null) {
-                    setTimeout(() => {
-                        this.beginQuest(this.curQuest());
-                    }, 2000);
+                    this.beginQuest(this.curQuest());
                 }
             } else {
                 this.state(QuestLineState.ended);

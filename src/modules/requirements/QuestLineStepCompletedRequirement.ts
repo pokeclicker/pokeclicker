@@ -18,6 +18,6 @@ export default class QuestLineStepCompletedRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `Progress further in questline ${this.questLineName}`;
+        return `Progress further in questline ${this.questLineName}.`;
     }
 }

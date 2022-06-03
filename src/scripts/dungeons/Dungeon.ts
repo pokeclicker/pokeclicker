@@ -3,6 +3,7 @@
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/SeededDateRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/DayOfWeekRequirement.d.ts"/>
 ///<reference path="../../declarations/utilities/SeededDateRand.d.ts"/>
 ///<reference path="../achievements/ObtainedPokemonRequirement.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
@@ -377,12 +378,12 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
     ],
     50, 1);
 
-dungeonList['Digletts Cave'] = new Dungeon('Digletts Cave',
+dungeonList['Diglett\'s Cave'] = new Dungeon('Diglett\'s Cave',
     ['Diglett'],
     [
         {loot: 'xClick', weight: 4},
         {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Mystery_egg', weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Digletts Cave'))},
+        {loot: 'Mystery_egg', weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Diglett\'s Cave'))},
         {loot: 'Max Revive', weight: 0},
         {loot: 'Wiki', weight: 0},
     ],
@@ -609,7 +610,7 @@ dungeonList['Power Plant'] = new Dungeon('Power Plant',
     ],
     1000, 8);
 
-dungeonList['Pokemon Tower'] = new Dungeon('Pokemon Tower',
+dungeonList['Pokémon Tower'] = new Dungeon('Pokémon Tower',
     [
         {pokemon: 'Gastly', options: { weight: 21.3 }},
         {pokemon: 'Haunter', options: { weight: 21.3 }},
@@ -681,15 +682,15 @@ dungeonList['Pokemon Tower'] = new Dungeon('Pokemon Tower',
         {loot: 'xAttack', weight: 4},
         {loot: 'Chesto', weight: 3.5},
         {loot: 'Greatball', weight: 2.5},
-        {loot: 'Fighting_egg', weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Pokemon Tower'))},
+        {loot: 'Fighting_egg', weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Pokémon Tower'))},
         {loot: 'MediumRestore', weight: 0.5},
         {loot: 'Star Piece', weight: 0.5},
         {loot: 'Revive', weight: 0.5},
         {loot: 'Rare Bone', weight: 0},
         {loot: 'Ultraball', weight: 0},
         {loot: 'LargeRestore', weight: 0},
-        {loot: 'Soothe_bell', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Pokemon Tower'))},
-        {loot: 'Trade_stone', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Pokemon Tower'))},
+        {loot: 'Soothe_bell', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Pokémon Tower'))},
+        {loot: 'Trade_stone', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Pokémon Tower'))},
     ],
     7523,
     [new DungeonBossPokemon('Marowak', 37615, 30)],
@@ -712,7 +713,7 @@ dungeonList['Seafoam Islands'] = new Dungeon('Seafoam Islands',
     ],
     1250, 15);
 
-dungeonList['Pokemon Mansion'] = new Dungeon('Pokemon Mansion',
+dungeonList['Pokémon Mansion'] = new Dungeon('Pokémon Mansion',
     [
         {pokemon: 'Rattata', options: { weight: 3.5 }},
         {pokemon: 'Raticate', options: { weight: 3.5 }},
@@ -763,12 +764,12 @@ dungeonList['Pokemon Mansion'] = new Dungeon('Pokemon Mansion',
         {loot: 'Rawst', weight: 3.5},
         {loot: 'Figy', weight: 3},
         {loot: 'Ultraball', weight: 1.75},
-        {loot: 'Mystery_egg', weight: 1.5, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Pokemon Mansion'))},
-        {loot: 'Fire_egg', weight: 0.5, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Pokemon Mansion'))},
+        {loot: 'Mystery_egg', weight: 1.5, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Pokémon Mansion'))},
+        {loot: 'Fire_egg', weight: 0.5, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Pokémon Mansion'))},
         {loot: 'Max Revive', weight: 0},
         {loot: 'Moon_stone', weight: 0},
         {loot: 'Fire_stone', weight: 0},
-        {loot: 'Magmarizer', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Pokemon Mansion'))},
+        {loot: 'Magmarizer', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Pokémon Mansion'))},
     ],
     17760,
     [new DungeonBossPokemon('Magmar', 88800, 40)],
@@ -1097,6 +1098,12 @@ dungeonList['Union Cave'] = new Dungeon('Union Cave',
         new DungeonTrainer('Firebreather',
             [new GymPokemon('Vulpix', 300000, 9)],
             { weight: 1 }, 'Ray'),
+        new DungeonBossPokemon('Lapras', 450000, 20, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new GymBadgeRequirement(BadgeEnums.Fog),
+                new DayOfWeekRequirement(GameConstants.DayOfWeek.Friday),
+            ])}),
     ],
     3000, 32);
 
@@ -1228,7 +1235,7 @@ dungeonList['Whirl Islands'] = new Dungeon('Whirl Islands',
     [new DungeonBossPokemon('Dewgong', 400000, 40), new DungeonBossPokemon('Kingler', 400000, 40), new DungeonBossPokemon('Lugia', 1410000, 100)],
     5000, 41);
 
-dungeonList['Mt Mortar'] = new Dungeon('Mt Mortar',
+dungeonList['Mt. Mortar'] = new Dungeon('Mt. Mortar',
     [
         {pokemon: 'Rattata', options: { weight: 0.5 }},
         {pokemon: 'Raticate', options: { weight: 0.5 }},
@@ -1260,9 +1267,9 @@ dungeonList['Mt Mortar'] = new Dungeon('Mt Mortar',
         {loot: 'LargeRestore', weight: 1.75},
         {loot: 'Revive', weight: 1.75},
         {loot: 'Fighting_egg', weight: 1},
-        {loot: 'Dragon_scale', weight: 0.75, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Mt Mortar'))},
+        {loot: 'Dragon_scale', weight: 0.75, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Mt. Mortar'))},
         {loot: 'Max Revive', weight: 0},
-        {loot: 'Protector', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Mt Mortar'))},
+        {loot: 'Protector', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Mt. Mortar'))},
     ],
     104100,
     [
@@ -1275,7 +1282,7 @@ dungeonList['Mt Mortar'] = new Dungeon('Mt Mortar',
     ],
     5500, 42);
 
-dungeonList['Team Rockets Hideout'] = new Dungeon('Team Rockets Hideout',
+dungeonList['Team Rocket\'s Hideout'] = new Dungeon('Team Rocket\'s Hideout',
     [
         {pokemon: 'Geodude', options: { weight: 0.5 }},
         {pokemon: 'Voltorb', options: { weight: 0.5 }},
@@ -1345,7 +1352,7 @@ dungeonList['Team Rockets Hideout'] = new Dungeon('Team Rockets Hideout',
         {loot: 'Ultraball', weight: 1.75},
         {loot: 'Revive', weight: 1.75},
         {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Team Rockets Hideout'))},
+        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Team Rocket\'s Hideout'))},
     ],
     104100,
     [
@@ -1574,7 +1581,7 @@ dungeonList['Victory Road Johto'] = new Dungeon('Victory Road Johto',
     ],
     7000, 46);
 
-dungeonList['Mt Silver'] = new Dungeon('Mt Silver',
+dungeonList['Mt. Silver'] = new Dungeon('Mt. Silver',
     ['Ponyta', 'Doduo', 'Tangela', 'Sneasel', 'Ursaring', 'Donphan', 'Teddiursa', 'Phanpy', 'Quagsire', 'Misdreavus'],
     [
         {loot: 'Token_collector', weight: 3.75},
@@ -1587,8 +1594,8 @@ dungeonList['Mt Silver'] = new Dungeon('Mt Silver',
         {loot: 'Star Piece', weight: 1},
         {loot: 'Max Revive', weight: 0},
         {loot: 'Heart Scale', weight: 0},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(450, GameConstants.getDungeonIndex('Mt Silver'))},
-        {loot: 'Dawn_stone', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Mt Silver'))},
+        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(450, GameConstants.getDungeonIndex('Mt. Silver'))},
+        {loot: 'Dawn_stone', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Mt. Silver'))},
     ],
     130500,
     [new DungeonBossPokemon('Larvitar', 840000, 60)],
