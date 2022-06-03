@@ -6,7 +6,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     constructor(
         amount: number,
         reward: number,
-        private gymTown: string
+        public gymTown: string
     ) {
         super(amount, reward);
         this.region = GameConstants.getGymRegion(this.gymTown);

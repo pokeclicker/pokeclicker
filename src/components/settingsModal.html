@@ -44,6 +44,7 @@
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--currentPlace')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--incomplete')}"></tr>
+                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--questAtLocation')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtPokemon')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShinyPokemonAndMissingAchievement')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShinyPokemon')}"></tr>
@@ -171,10 +172,46 @@
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.town.start')}"></tr>
                                 <tr>
                                     <td class="p-2">
-                                        <knockout>Start Elite 4:</knockout>
+                                        <knockout>Access the towns content:</knockout>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
-                                        title: 'Each number refers to a specific Elite 4 member',
+                                        title: 'Can access anything from Gyms to NPCs. Each number is a button.',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Shop</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Select item:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Each number selects an item in the shop.',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.shop.buy')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.shop.max')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.shop.reset')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.shop.increase')}"></tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Ship</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Select region:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Each number selects a region.',
                                         trigger: 'hover',
                                     }">
                                         <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>

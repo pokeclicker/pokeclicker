@@ -21,6 +21,10 @@
     filter: brightness(0%) invert(100%);
     opacity: 0.3;
   }
+
+  code {
+      color: #f291bf;
+  }
 }
 
 /* Individual themes */
@@ -88,11 +92,44 @@
       color: whitesmoke !important;
     }
   }
+
+  // Evolution items modal
+  #showItemsModal {
+    .item-selected {
+      color: whitesmoke;
+    }
+
+    .pokemon-selected {
+      background-image: linear-gradient(#4e5458, #565b60 40%, #5b6165);
+    }
+  }
+
+  // Main page
+  .card.border-secondary {
+    color: #ddd;
+  }
 }
 
 .solar {
+  // Farming
   .seed-list-item.active {
     background: rgba(255, 255, 255, 0.2);
+  }
+
+  // Evolution items modal
+  #showItemsModal {
+    .item-selected {
+      color: whitesmoke;
+    }
+
+    .list-group-item-action {
+      color: #5c5f60;
+    }
+  }
+
+  // Main page
+  .card.border-secondary, #pokemonList {
+    color: #a0b6b8;
   }
 }
 
@@ -100,5 +137,4 @@
   .text-light {
     color: whitesmoke !important;
   }
-
 }

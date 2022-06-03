@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 <head>
     <title>Pokéclicker</title>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -31,9 +31,6 @@
 
     <!--Notify-->
     <script src="libs/bootstrap-notify.min.js"></script>
-
-    <!--Motio-->
-    <script src="libs/motio.js"></script>
 
     <!--Intro.js-->
     <script src="libs/intro.min.js"></script>
@@ -153,18 +150,19 @@
                                      App.game.gameState === GameConstants.GameState.town ||
                                      App.game.gameState === GameConstants.GameState.shop ||
                                      App.game.gameState === GameConstants.GameState.gym ||
-                                     App.game.gameState == GameConstants.GameState.battleFrontier)">
+                                     App.game.gameState === GameConstants.GameState.battleFrontier ||
+                                     App.game.gameState === GameConstants.GameState.temporaryBattle)">
                     <table width="100%">
                         <tr class="row">
                             <td class="col">
                                 <span style="display: inline; position: relative;">
-                                    <img title="Money" src="assets/images/currency/money.svg" height="25px">
+                                    <img title="Pokédollars&#013;&#010;Gained by defeating Pokémon and trainers in battle" src="assets/images/currency/money.svg" height="25px">
                                     <span id="animateCurrency-money" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.money]()) : App.game.wallet.currencies[GameConstants.Currency.money]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td class="col">
                                 <span style="display: inline; position: relative;">
-                                    <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px">
+                                    <img title="Dungeon Tokens&#013;&#010;Gained by catching wild Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px">
                                     <span id="animateCurrency-dungeonToken" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.dungeonToken]()) : App.game.wallet.currencies[GameConstants.Currency.dungeonToken]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
@@ -202,7 +200,7 @@
                 <!--Use the base battle layout for fighting, dungeons and battle frontier.-->
 
                 <div class="battle-view card-body p-0 justify-content-center no-gutters no-select"
-                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier),
+                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier) || App.game.gameState == GameConstants.GameState.temporaryBattle,
                         class: MapHelper.calculateBattleCssClass()">
 
                     <!-- Route Battles -->
@@ -267,6 +265,9 @@
 
                     <!-- Gym Battles -->
                     @import "gymView.html"
+
+                    <!-- One Time Battles -->
+                    @import "temporaryBattleView.html"
 
                     <!-- Battle Frontier Battles -->
                     @import "battleFrontierView.html"
@@ -368,6 +369,8 @@
                     <span class='float-right px-4 bg-locked'>&nbsp;</span>
                     <br/><span>Incomplete:</span>
                     <span class='float-right px-4 bg-incomplete'>&nbsp;</span>
+                    <br/><span>Quest at Location:</span>
+                    <span class='float-right px-4 bg-questAtLocation'>&nbsp;</span>
                     <br/><span>Uncaught Pokemon:</span>
                     <span class='float-right px-4 bg-uncaughtPokemon'>&nbsp;</span>
                     <br/><span>Uncaught Shiny Pokemon and Missing Achievement:</span>
@@ -395,7 +398,10 @@
                             visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1,
                             css: { 'slow-flash': player.highestRegion() == player.region && SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > player.highestSubRegion() + 1 }">
                             <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion - 1">&lt;</button>
-                            <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="click: () => SubRegions.openModal()">Subregional Travel</button>
+                            <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="
+                                click: () => SubRegions.openModal(),
+                                text: 'Subregional Travel (' + SubRegions.getSubRegionById(player.region, player.subregion)?.name + ')'"
+                                >Subregional Travel</button>
                             <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion + 1">&gt;</button>
                         </div>
                         <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
@@ -456,6 +462,9 @@
 <!-- Receive gym badge Modal -->
 @import "receiveGymBadge.html"
 
+<!-- One time battle won Modal -->
+@import "temporaryBattleWonModal.html"
+
 <!-- Achievements Modal -->
 @import "achievementsModal.html"
 
@@ -486,8 +495,11 @@
 <!-- Start Sequence Modal-->
 @import "startSequence.html"
 
+<!-- Pick Starter Tutorial Modal-->
+@import "pickStarterTutorialModal.html"
+
 <!-- Pick Starter Modal-->
-@import "pickStarter.html"
+@import "pickStarterModal.html"
 
 <!-- Starter Caught Modal-->
 @import "starterCaught.html"

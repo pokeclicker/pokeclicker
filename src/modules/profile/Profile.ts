@@ -106,27 +106,9 @@ export default class Profile implements Saveable {
     }
 
     initialize() {
+        const throttledTimePlayed = ko.pureComputed(() => App.game.statistics.secondsPlayed()).extend({ rateLimit: 60 * 1000 });
         // Load trainer card preview
-        this.name.subscribe(() => this.updatePreview());
-        this.trainer.subscribe((val) => {
-            this.updatePreview();
-            // Update trainer image in css
-            document.documentElement.style.setProperty('--trainer-image', `url('../assets/images/profile/trainer-${val}.png')`);
-        });
-        this.pokemon.subscribe((value: number) => {
-            const shiny = App.game.party.alreadyCaughtPokemon(value, true);
-            this.pokemonShiny(shiny);
-            // Update preview after checking for shiny
-            this.updatePreview();
-        });
-        this.background.subscribe(() => this.updatePreview());
-        this.textColor.subscribe(() => this.updatePreview());
-        this.updatePreview();
-    }
-
-    updatePreview(): void {
-        document.getElementById('profile-trainer-card').innerHTML = '';
-        document.getElementById('profile-trainer-card').appendChild(Profile.getTrainerCard(
+        const preview = ko.pureComputed(() => Profile.getTrainerCard(
             this.name(),
             this.trainer(),
             this.pokemon(),
@@ -135,10 +117,15 @@ export default class Profile implements Saveable {
             this.textColor(),
             App.game.badgeCase.badgeList.filter((b: () => boolean) => b()).length,
             App.game.party.caughtPokemon.length,
-            App.game.statistics.secondsPlayed(),
+            throttledTimePlayed(),
             App.game.update.version,
             App.game.challenges.toJSON().list,
         ));
+
+        preview.subscribe((previewElement) => {
+            document.getElementById('profile-trainer-card').innerHTML = '';
+            document.getElementById('profile-trainer-card').appendChild(previewElement);
+        });
     }
 
     fromJSON(json): void {

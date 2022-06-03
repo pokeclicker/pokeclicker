@@ -4,6 +4,7 @@ class DamageCalculator {
     static type1 = ko.observable(PokemonType.None).extend({ numeric: 0 });
     static type2 = ko.observable(PokemonType.None).extend({ numeric: 0 });
     static region = ko.observable(GameConstants.Region.none);
+    static weather = ko.observable(WeatherType.Clear);
     static includeBreeding = ko.observable(false);
     static baseAttackOnly = ko.observable(false);
     static ignoreLevel = ko.observable(false);
@@ -23,7 +24,7 @@ class DamageCalculator {
             DamageCalculator.region(),
             DamageCalculator.includeBreeding(),
             DamageCalculator.baseAttackOnly(),
-            false,
+            DamageCalculator.weather(),
             DamageCalculator.ignoreLevel()
         );
     }
@@ -38,8 +39,7 @@ class DamageCalculator {
                 continue;
             }
 
-            const includeWeather = false;
-            const attack = App.game.party.calculateOnePokemonAttack(pokemon, this.type1(), this.type2(), this.region(), ignoreRegionMultiplier, this.includeBreeding(), this.baseAttackOnly(), includeWeather, this.ignoreLevel());
+            const attack = App.game.party.calculateOnePokemonAttack(pokemon, this.type1(), this.type2(), this.region(), ignoreRegionMultiplier, this.includeBreeding(), this.baseAttackOnly(), this.weather(), this.ignoreLevel());
 
             typedamage[dataPokemon.type1] += attack / 2;
             const otherType = dataPokemon.type2 !== PokemonType.None ? dataPokemon.type2 : dataPokemon.type1;
@@ -75,7 +75,7 @@ class DamageCalculator {
                 ignoreRegionMultiplier,
                 DamageCalculator.includeBreeding(),
                 DamageCalculator.baseAttackOnly(),
-                false,
+                DamageCalculator.weather(),
                 DamageCalculator.ignoreLevel()
             ),
         };
