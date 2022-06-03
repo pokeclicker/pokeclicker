@@ -101,7 +101,7 @@ class Game {
         GemDeal.generateDeals();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
-        if (Settings.getSetting('enableOfflineProgress').value === true) {
+        if (Settings.getSetting('disableOfflineProgress').value === false) {
             this.computeOfflineEarnings();
         }
         this.checkAndFix();
