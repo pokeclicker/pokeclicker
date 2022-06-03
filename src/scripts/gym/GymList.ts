@@ -1476,9 +1476,6 @@ GymList['Champion Hau'] = new Champion(
         new GymPokemon('Leafeon', 89636471, 58),
         new GymPokemon('Incineroar', 96725389, 60),
     ]
-//    () => {
-//        App.game.quests.getQuestLine('Let\'s Go, Meltan!').beginQuest();
-//    }
 );
 
 
