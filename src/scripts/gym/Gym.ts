@@ -43,7 +43,11 @@ class Gym extends TownContent {
             if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
                 return areaStatus.unlockedUnfinished;
             } else if (this.isThereQuestAtLocation()) {
-                return areaStatus.questAtLocation;
+                if(Settings.getSetting('addQuestLocationFlash').observableValue()){
+                    return areaStatus.questAtLocationFlash
+                } else {
+                    return areaStatus.questAtLocation
+                }
             } else if (!this.isAchievementsComplete()) {
                 return areaStatus.missingAchievement;
             }

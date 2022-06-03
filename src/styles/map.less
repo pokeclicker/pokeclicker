@@ -24,29 +24,45 @@
     fill: var(--incomplete);
     opacity: 0.6;
   }
+  
+  .questOnRoute {
+    fill: var(--questAtLocation);
+    opacity: 0.6;
+  }
+  
+  .questAtLocation {
+    fill: var(--questAtLocation);
+    opacity: 0.6;
+    stroke: #333;
+  }
 
   @keyframes questFlash {
     0% {
-      fill: var(--questAtLocation);
+      fill: #bbb;
       opacity: 0.6;
     }
-    
-    50% {
-      fill: var(--questAtLocationFlash);
+
+    30% {
+      fill: var(--questAtLocation);
       opacity: 0.7;
     }
     
-    100% {
+    70% {
       fill: var(--questAtLocation);
+      opacity: 0.7;
+    }
+
+    100% {
+      fill: #bbb;
       opacity: 0.6;
     }
   }
 
-  .questAtLocation {
+  .questAtLocationFlash {
     animation: questFlash ease;
     animation-iteration-count: infinite;
-    animation-duration: 2.5s;
-    animation-fill-mode: both;
+    animation-duration: 4s;
+    stroke: #333;
   }
 
   .uncaughtPokemon {
