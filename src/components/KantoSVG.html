@@ -460,16 +460,16 @@
         })
      %>
 
-    <!--Digletts Cave Pewter-->
+    <!--Diglett's Cave Pewter-->
     <%- include('templates/mapDungeon',
-        { name: "Digletts Cave"
+        { name: "Diglett\'s Cave"
         , x: 27, y: 14
 		, width: 3, height: 3
         })
      %>
-    <!--Digletts Cave Vermilion-->
+    <!--Diglett's Cave Vermilion-->
     <%- include('templates/mapDungeon',
-        { name: "Digletts Cave"
+        { name: "Diglett\'s Cave"
         , x: 72, y: 29
 		, width: 3, height: 3
         })
@@ -513,7 +513,7 @@
 
     <!--Pokémon Tower-->
     <%- include('templates/mapDungeon',
-        { name: "Pokemon Tower"
+        { name: "Pokémon Tower"
         , x: 89, y: 16
         , width: 4, height: 8
         })
@@ -536,7 +536,7 @@
 
     <!--Pokémon Mansion-->
     <%- include('templates/mapDungeon',
-        { name: "Pokemon Mansion"
+        { name: "Pokémon Mansion"
         , x: 15, y: 50
         , width: 7, height: 5
         })
@@ -573,7 +573,7 @@
     <!-- ------------------ -->
 
     <%- include('templates/mapPOI',
-        { name: "Pokemon Day Care"
+        { name: "Pokémon Day Care"
         , x: 68, y: 13
         , width: 4, height: 4
         , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
@@ -613,7 +613,7 @@
      %>
 
     <%- include('templates/mapOverlay',
-         { name: "SS-Anne"
+         { name: "S. S. Anne"
          , x: 58, y: 35
          , width: 8, height: 3
          , databind: "click:function(){MapHelper.openShipModal()}, attr:{ class: player.highestRegion() >= 1 ? 'completed' : 'locked'}"
@@ -632,7 +632,7 @@
          })
       %>
 
-     <%- include('templates/mapOverlay',
+    <%- include('templates/mapOverlay',
          { name: "Professor Oak's Blimp"
          , x: 27, y: 37
          , width: 6, height: 3
@@ -652,7 +652,17 @@
         })
     %>
 
-      <%- include('templates/mapOverlay',
+    <%- include('templates/mapOverlay',
+        { name: "Professor Oak"
+        , x: 27, y: 37
+        , width: 4, height: 4
+        , databind: "click:function(){MapHelper.moveToTown('Pallet Town')}, attr:{ class: MapHelper.calculateTownCssClass('Pallet Town') }"
+        , visible:  "!MapHelper.ableToTravel() && player.highestRegion() == 0 && App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Blue')]() >= 1"
+        , image: "assets/images/map/professor_oak.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
          { name: "Ash Ketchum"
          , x: 18, y: 33
          , width: 4, height: 4
@@ -660,6 +670,6 @@
          , visible:  "TemporaryBattleList['Ash Ketchum Kanto'] && TemporaryBattleList['Ash Ketchum Kanto'].isVisible()"
          , image: "assets/images/map/ashketchumoverworld.png"
          })
-      %>
+     %>
 
 </g>

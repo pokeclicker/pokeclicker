@@ -16,13 +16,13 @@
                   <!-- /ko -->
                   <!--If all Pokémon in the dungeon are caught-->
                   <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(player.town().dungeon, true) && DungeonRunner.dungeonCompleted(player.town().dungeon, false))">
-                      <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
+                      <img title="You have captured all Pokémon in this dungeon!" class="pokeball-smallest"
                            src="assets/images/pokeball/Pokeball.svg"/>
                   </knockout>
 
                   <!--If all Pokémon in the dungeon are caught shiny-->
                   <knockout data-bind="if: DungeonRunner.dungeonCompleted(player.town().dungeon, true)">
-                      <img title="You have captured all Pokémon shiny on this route!"
+                      <img title="You have captured all Pokémon shiny in this dungeon!"
                            class="pokeball-smallest"
                            src="assets/images/pokeball/Pokeball-shiny.svg"/>
                   </knockout>

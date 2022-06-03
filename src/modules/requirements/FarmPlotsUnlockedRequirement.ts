@@ -11,6 +11,6 @@ export default class FarmPlotsUnlockedRequirement extends AchievementRequirement
     }
 
     public hint(): string {
-        return `${this.requiredValue} Plots in the Farm need to be unlocked .`;
+        return `${this.requiredValue} Plots in the Farm need to be unlocked.`;
     }
 }

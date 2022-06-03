@@ -50,7 +50,7 @@ class UseOakItemQuest extends Quest implements QuestInterface {
         } else if (this.item == OakItemType.Exp_Share) {
             desc.push(`defeat ${this.amount.toLocaleString('en-US')} Pokémon.`);
         } else {
-            desc.push(`gain it\'s benefit ${this.amount.toLocaleString('en-US')} times.`);
+            desc.push(`gain its benefit ${this.amount.toLocaleString('en-US')} times.`);
         }
         return desc.join(' ');
     }
