@@ -108,6 +108,7 @@ Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#fff
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
 Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web workers for game ticks (more consistent game speed)', true));
+Settings.add(new BooleanSetting('disableOfflineProgress', 'Disable offline progress', false));
 
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((soundGroup) => {
