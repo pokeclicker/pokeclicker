@@ -397,4 +397,32 @@ namespace GameConstants {
         'Friday',
         'Saturday',
     }
+    declare enum RoamerGroupsKanto {
+        Kanto,
+        Sevii123,
+    }
+    declare enum RoamerGroupsJohto {
+        All,
+    }
+    declare enum RoamerGroupsHoenn {
+        All,
+    }
+    declare enum RoamerGroupsSinnoh {
+        All,
+    }
+    declare enum RoamerGroupsUnova {
+        All,
+    }
+    declare enum RoamerGroupsKalos {
+        All,
+    }
+    declare enum RoamerGroupsAlola {
+        All,
+    }
+    declare enum RoamerGroupsGalar {
+        Galar,
+        IsleofArmor,
+        CrownTundra,
+    }
+    declare const RoamerGroups: enum[];
 }

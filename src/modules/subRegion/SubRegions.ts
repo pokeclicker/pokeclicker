@@ -1,5 +1,7 @@
 import BadgeEnums from '../enums/Badges';
-import { Region } from '../GameConstants';
+import {
+    Region, RoamerGroupsKanto, RoamerGroupsGalar,
+} from '../GameConstants';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
 import MultiRequirement from '../requirements/MultiRequirement';
 import NullRequirement from '../requirements/NullRequirement';
@@ -38,8 +40,8 @@ export default class SubRegions {
     }
 }
 
-SubRegions.addSubRegion(Region.kanto, new SubRegion('Kanto', undefined, 'Vermilion City', undefined, 0));
-SubRegions.addSubRegion(Region.kanto, new SubRegion('Sevii Islands 123', new GymBadgeRequirement(BadgeEnums.Volcano), 'One Island', undefined, 1));
+SubRegions.addSubRegion(Region.kanto, new SubRegion('Kanto', undefined, 'Vermilion City', undefined, RoamerGroupsKanto.Kanto));
+SubRegions.addSubRegion(Region.kanto, new SubRegion('Sevii Islands 123', new GymBadgeRequirement(BadgeEnums.Volcano), 'One Island', undefined, RoamerGroupsKanto.Sevii123));
 
 export enum KantoSubRegions {
     Kanto = 0,
@@ -67,19 +69,19 @@ export enum AlolaSubRegions {
     // PoniIsland,
 }
 
-SubRegions.addSubRegion(Region.galar, new SubRegion('Galar', undefined, 'Postwick', undefined, 0));
+SubRegions.addSubRegion(Region.galar, new SubRegion('Galar', undefined, 'Postwick', undefined, RoamerGroupsGalar.Galar));
 // For once Galar is split into 2 regions
-// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar South', undefined, 'Postwick', undefined, 0));
-// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar North', new RouteKillRequirement(10, GameConstants.Region.galar, 14), 'Hammerlocke', undefined, 0));
+// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar South', undefined, 'Postwick', undefined, RoamerGroupsGalar.Galar));
+// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar North', new RouteKillRequirement(10, GameConstants.Region.galar, 14), 'Hammerlocke', undefined, RoamerGroupsGalar.Galar));
 // Galar DLC islands
 SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', new MultiRequirement([
     new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
     new NullRequirement(),
-]), undefined, undefined, 1));
+]), undefined, undefined, RoamerGroupsGalar.IsleofArmor));
 SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', new MultiRequirement([
     new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
     new NullRequirement(),
-]), undefined, undefined, 2));
+]), undefined, undefined, RoamerGroupsGalar.CrownTundra));
 
 export enum GalarSubRegions {
     Galar = 0,
