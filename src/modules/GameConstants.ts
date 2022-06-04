@@ -1156,6 +1156,12 @@ export const TemporaryBattles = [
     'Ultra Megalopolis',
 ];
 
+export enum ShardTraderLocations {
+    'None' = -1,
+    'Pallet Town' = 0,
+    'Pewter City',
+}
+
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
     return TemporaryBattles.findIndex((t) => t === temporaryBattle);
 }

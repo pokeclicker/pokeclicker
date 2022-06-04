@@ -388,4 +388,8 @@ namespace GameConstants {
     declare const RegionalStarters: number[][];
     declare const TemporaryBattles: string[];
     declare function getTemporaryBattlesIndex(temporaryBattle: string): number;
+    declare enum ShardTraderLocations {
+      'Pallet Town',
+      'Pewter City',
+    }
 }
