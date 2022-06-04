@@ -108,7 +108,7 @@ class Battle {
      */
     public static generateNewEnemy() {
         this.counter = 0;
-        this.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region, SubRegions.getSubRegionById(player.region, player.subregion)));
+        this.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region, player.subregionObject()));
         const enemyPokemon = this.enemyPokemon();
         GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[enemyPokemon.id]);
         GameHelper.incrementObservable(App.game.statistics.totalPokemonEncountered);

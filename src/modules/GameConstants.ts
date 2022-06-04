@@ -1171,3 +1171,50 @@ export enum DayOfWeek {
     'Friday',
     'Saturday',
 }
+
+// Roamer groups
+export enum RoamerGroupsKanto {
+    Kanto = 0,
+    Sevii123,
+}
+
+export enum RoamerGroupsJohto {
+    All = 0,
+}
+
+export enum RoamerGroupsHoenn {
+    All = 0,
+}
+
+export enum RoamerGroupsSinnoh {
+    All = 0,
+}
+
+export enum RoamerGroupsUnova {
+    All = 0,
+}
+
+export enum RoamerGroupsKalos {
+    All = 0,
+}
+
+export enum RoamerGroupsAlola {
+    All = 0,
+}
+
+export enum RoamerGroupsGalar {
+    Galar = 0,
+    IsleofArmor,
+    CrownTundra,
+}
+
+export const RoamerGroups = [
+    RoamerGroupsKanto,
+    RoamerGroupsJohto,
+    RoamerGroupsHoenn,
+    RoamerGroupsSinnoh,
+    RoamerGroupsUnova,
+    RoamerGroupsKalos,
+    RoamerGroupsAlola,
+    RoamerGroupsGalar,
+];

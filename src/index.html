@@ -400,7 +400,7 @@
                             <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion - 1">&lt;</button>
                             <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="
                                 click: () => SubRegions.openModal(),
-                                text: 'Subregional Travel (' + SubRegions.getSubRegionById(player.region, player.subregion)?.name + ')'"
+                                text: 'Subregional Travel (' + player.subregionObject()?.name + ')'"
                                 >Subregional Travel</button>
                             <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion + 1">&gt;</button>
                         </div>

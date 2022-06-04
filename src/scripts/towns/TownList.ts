@@ -191,7 +191,7 @@ const SaffronBreeder = new NPC('Breeder', [
 
 const FuchsiaKantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
     'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
-], GameConstants.Region.kanto, 0);
+], GameConstants.Region.kanto, GameConstants.RoamerGroupsKanto.Kanto);
 
 const CinnabarIslandResearcher = new NPC('Researcher', [
     'They were trying to clone an ancient Pokémon in the mansion... I wonder if they succeeded.',
@@ -607,7 +607,7 @@ const MahoganySouvenirShopAttendant = new NPC('Souvenir Shop Attendant', [
 
 const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
     'On the news, they are getting more reports of roaming Pokémon appearing on {ROUTE_NAME}!',
-], GameConstants.Region.johto, 0);
+], GameConstants.Region.johto, GameConstants.RoamerGroupsJohto.All);
 
 const ProfElm = new ProfNPC('Prof. Elm',
     GameConstants.Region.johto,
@@ -898,7 +898,7 @@ const OldaleTrackingScientist = new NPC('Tracking Scientist', [
 
 const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
     'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
-], GameConstants.Region.hoenn, 0);
+], GameConstants.Region.hoenn, GameConstants.RoamerGroupsHoenn.All);
 
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
@@ -1360,7 +1360,7 @@ const FightAreaAceTrainer = new NPC('Ace Trainer Quinn', [
 
 const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
     'I spotted a bunch of roaming Pokémon on {ROUTE_NAME}!',
-], GameConstants.Region.sinnoh, 0);
+], GameConstants.Region.sinnoh, GameConstants.RoamerGroupsSinnoh.All);
 
 const ProfRowan = new ProfNPC('Prof. Rowan',
     GameConstants.Region.sinnoh,
@@ -1802,7 +1802,7 @@ const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
 
 const UnovaRoamerNPC = new RoamerNPC('Professor Juniper\'s Aide', [
     'Our research indicates a higher concentration of roaming Pokémon on {ROUTE_NAME}!',
-], GameConstants.Region.unova, 0);
+], GameConstants.Region.unova, GameConstants.RoamerGroupsUnova.All);
 
 const ProfJuniper = new ProfNPC('Prof. Juniper',
     GameConstants.Region.unova,
@@ -2264,7 +2264,7 @@ const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
 
 const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
     'The spirits tell me roaming Pokémon have been spotted on {ROUTE_NAME}!',
-], GameConstants.Region.kalos, 0);
+], GameConstants.Region.kalos, GameConstants.RoamerGroupsKalos.All);
 
 const KiloudeConfusedHiker = new NPC('Confused Hiker', [
     'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
@@ -2630,7 +2630,7 @@ const SeafolkCaptain = new NPC('Captain Mina', [
 ]);
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [
     'Some very rare Pokémon have been sighted on {ROUTE_NAME}. I hope we can learn more about them.',
-], GameConstants.Region.alola, 0);
+], GameConstants.Region.alola, GameConstants.RoamerGroupsAlola.All);
 const ProfKukui = new ProfNPC('Prof. Kukui',
     GameConstants.Region.alola,
     'TODO',
