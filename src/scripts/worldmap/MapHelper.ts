@@ -131,8 +131,8 @@ class MapHelper {
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(townName)]()) {
                 return areaStatus[areaStatus.unlockedUnfinished];
             } else if (DungeonRunner.isThereQuestAtLocation(dungeonList[townName])) {
-                if(Settings.getSetting('addQuestLocationFlash').observableValue()){
-                    return areaStatus[areaStatus.questAtLocationFlash]
+                if (Settings.getSetting('addQuestLocationFlash').observableValue()) {
+                    return areaStatus[areaStatus.questAtLocationFlash];
                 } else {
                     return areaStatus[areaStatus.questAtLocation];
                 }
