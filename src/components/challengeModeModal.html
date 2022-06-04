@@ -1,48 +1,170 @@
-<div class="modal noselect fade" id="challengeModeModal" tabindex="-1" role="dialog" aria-labelledby="challengeModeModal">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+<div
+    class="modal noselect fade"
+    id="challengeModeModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="challengeModeModal"
+>
+    <div
+        class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md"
+        role="document"
+    >
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Challenge Modes</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>
-                    <strong>Activate in game challenge modes!</strong><br/>
-                    Challenges can be disabled later, but cannot be re-enabled.
-                </p>
-                <br/>
-                <table class="table" width="100%">
-                    <tbody data-bind="foreach: { data: Object.values(App.game.challenges.list), as: 'displayedChallenge'}">
-                        <tr data-bind="tooltip: {
-                            title: displayedChallenge.description,
-                            placement: 'bottom',
-                            trigger: 'hover'
-                        }">
-                            <td class="text-left font-weight-bold" data-bind="text: displayedChallenge.type"></td>
-                            <td class="p-1">
-                                <!-- ko if: !$data.active() && player.starter() == GameConstants.Starter.None --><button class="btn btn-warning btn-block" data-bind="click: ()=>{displayedChallenge.activate();}">ACTIVATE</button><!-- /ko -->
-                                <!-- ko if: !$data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-secondary btn-block disabled">DISABLED</button><!-- /ko -->
-                                <!-- ko if: $data.active() --><button class="btn btn-success btn-block" data-bind="click: ()=>{displayedChallenge.disable();}">ACTIVE</button><!-- /ko -->
-                            </td>
-                            <td class="p-2" data-bind="visible: displayedChallenge.needDataInput">
-                                <!-- ko if: displayedChallenge.type =='Custom Starter' -->
-                                    <select data-bind="options: pokemonList,optionsText: 'name',value: 'id' , selectedOptions: displayedChallenge.data">
-                                    </select>
-                                <!-- /ko -->
-                                <!-- ko if: displayedChallenge.type =='Monotype' -->
-                                <select data-bind="options: GameHelper.enumStrings(PokemonType),optionsText: $data,value: PokemonType[$data] , selectedOptions: displayedChallenge.data">
-                                </select>
-                                <!-- /ko -->
-                            </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br/>
-               <button class="btn btn-primary btn-block" data-dismiss="modal">Done!</button>
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item">
+                        <a
+                            class="nav-link active"
+                            href="#challenge"
+                            data-toggle="tab"
+                            >Challenges</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#mods" data-toggle="tab"
+                            >Mods</a
+                        >
+                    </li>
+                </ul>
+
+                <div class="tab-content p-3">
+                    <div class="tab-pane active" id="challenge">
+                        <p>
+                            <strong>Activate in game challenge modes!</strong
+                            ><br />
+                            Challenges can be disabled later, but cannot be
+                            re-enabled.
+                        </p>
+                        <br />
+                        <table class="table" width="100%">
+                            <tbody
+                                data-bind="foreach: { data: Object.values(App.game.challenges.list), as: 'displayedChallenge'}"
+                            >
+                                <tr
+                                    data-bind="tooltip: {
+                    title: displayedChallenge.description,
+                    placement: 'bottom',
+                    trigger: 'hover'
+                }"
+                                >
+                                    <!-- ko ifnot: displayedChallenge.isMod() -->
+                                    <td
+                                        class="text-left font-weight-bold"
+                                        data-bind="text: displayedChallenge.type"
+                                    ></td>
+                                    <td class="p-1">
+                                        <!-- ko if: !displayedChallenge.active() && player.starter() == GameConstants.Starter.None --><button
+                                            class="btn btn-warning btn-block"
+                                            data-bind="click: ()=>{displayedChallenge.activate();}"
+                                        >
+                                            ACTIVATE</button
+                                        ><!-- /ko -->
+                                        <!-- ko if: !displayedChallenge.active() && player.starter() != GameConstants.Starter.None --><button
+                                            class="btn btn-secondary btn-block disabled"
+                                        >
+                                            DISABLED</button
+                                        ><!-- /ko -->
+                                        <!-- ko if: displayedChallenge.active() --><button
+                                            class="btn btn-success btn-block"
+                                            data-bind="click: ()=>{displayedChallenge.disable();}"
+                                        >
+                                            ACTIVE</button
+                                        ><!-- /ko -->
+                                    </td>
+                                    <td
+                                        class="p-2"
+                                        data-bind="visible: displayedChallenge.needDataInput"
+                                    >
+                                        <!-- ko if: displayedChallenge.type =='Custom Starter' -->
+                                        <select
+                                            data-bind="options: pokemonList,optionsText: 'name',value: 'id' , selectedOptions: displayedChallenge.data"
+                                        ></select>
+                                        <!-- /ko -->
+                                        <!-- ko if: displayedChallenge.type =='Monotype' -->
+                                        <select
+                                            data-bind="options: GameHelper.enumStrings(PokemonType),optionsText: $data,value: PokemonType[$data] , selectedOptions: displayedChallenge.data"
+                                        ></select>
+                                        <!-- /ko -->
+                                    </td>
+                                    <!-- /ko -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="mods">
+                        <br />
+                        <table class="table" width="100%">
+                            <tbody
+                                data-bind="foreach: { data: Object.values(App.game.challenges.list), as: 'displayedMod'}"
+                            >
+                                <tr
+                                    data-bind="tooltip: {
+                    title: displayedMod.description,
+                    placement: 'bottom',
+                    trigger: 'hover'
+                }"
+                                >
+                                    <!-- ko if: displayedMod.isMod() -->
+                                    <td
+                                        class="text-left font-weight-bold"
+                                        data-bind="text: displayedMod.type"
+                                    ></td>
+                                    <td class="p-1">
+                                        <!-- ko if: !displayedMod.active() && player.starter() == GameConstants.Starter.None --><button
+                                            class="btn btn-warning btn-block"
+                                            data-bind="click: ()=>{displayedMod.activate();}"
+                                        >
+                                            ACTIVATE</button
+                                        ><!-- /ko -->
+                                        <!-- ko if: !displayedMod.active() && player.starter() != GameConstants.Starter.None --><button
+                                            class="btn btn-secondary btn-block disabled"
+                                        >
+                                            DISABLED</button
+                                        ><!-- /ko -->
+                                        <!-- ko if: displayedMod.active() --><button
+                                            class="btn btn-success btn-block"
+                                            data-bind="click: ()=>{displayedMod.disable();}"
+                                        >
+                                            ACTIVE</button
+                                        ><!-- /ko -->
+                                    </td>
+                                    <td
+                                        class="p-2"
+                                        data-bind="visible: displayedMod.needDataInput"
+                                    >
+                                        <!-- ko if: displayedMod.type =='Custom Starter' -->
+                                        <select
+                                            data-bind="options: pokemonList,optionsText: 'name',value: 'id' , selectedOptions: displayedMod.data"
+                                        ></select>
+                                        <!-- /ko -->
+                                        <!-- ko if: displayedMod.type =='Monotype' -->
+                                        <select
+                                            data-bind="options: GameHelper.enumStrings(PokemonType),optionsText: $data,value: PokemonType[$data] , selectedOptions: displayedMod.data"
+                                        ></select>
+                                        <!-- /ko -->
+                                    </td>
+                                    <!-- /ko -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-block" data-dismiss="modal">
+                    Done!
+                </button>
             </div>
-       </div>
+        </div>
     </div>
 </div>
