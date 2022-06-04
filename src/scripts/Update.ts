@@ -716,11 +716,18 @@ class Update implements Saveable {
             // Remove the Elite_Nihilego Gym, now a temporary battle instead of a gym
             saveData.statistics.gymsDefeated.splice(84, 1);
             saveData.badgeCase.splice(84, 1);
-
-            if (saveData.badgeCase[96]) {
+            // Change Ultra Megalopolis to a Temporary Battle
+            saveData.statistics.temporaryBattleDefeated[1] = saveData.statistics.gymsDefeated[88];
+            // Remove the Elite_ULtraNecrozma Gym, now a temporary battle instead of a gym
+            saveData.statistics.gymsDefeated.splice(88, 1);
+            saveData.badgeCase.splice(88, 1);
+        },
+      
+        '0.9.6': ({ playerData, saveData }) => {
+            if (saveData.badgeCase[95]) {
                 saveData.quests.questLines.push({state: 1, name: 'Ultra Beast Hunt', quest: 0});
             }
-        },
+        }
     };
 
     constructor() {

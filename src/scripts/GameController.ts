@@ -119,8 +119,10 @@ class GameController {
         const $hatcheryModal = $('#breedingModal');
         $hatcheryModal.on('hidden.bs.modal shown.bs.modal', _ => $hatcheryModal.data('disable-toggle', false));
         const hatchery = App.game.breeding;
-        // ship
+        // Ship
         const $shipModal = $('#ShipModal');
+        // Shop
+        const $shopModal = $('#shopModal');
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
@@ -233,6 +235,52 @@ class GameController {
                         }
                     }
                     return e.preventDefault();
+                }
+            }
+            if ($shopModal.data('bs.modal')?._isShown) {
+                if (isNumberKey) {
+                    if (numberKey <= ShopHandler.shopObservable().items.length) {
+                        ShopHandler.setSelected(numberKey);
+                    }
+                    return e.preventDefault();
+                }
+                switch (key) {
+                    case Settings.getSetting('hotkey.shop.buy').value:
+                        ShopHandler.buyItem();
+                        return e.preventDefault();
+                    case Settings.getSetting('hotkey.shop.max').value:
+                        ShopHandler.maxAmount();
+                        return e.preventDefault();
+                    case Settings.getSetting('hotkey.shop.reset').value:
+                        ShopHandler.resetAmount();
+                        return e.preventDefault();
+                    case Settings.getSetting('hotkey.shop.increase').value:
+                        if (GameController.keyHeld['Shift']) {
+                            switch (Settings.getSetting('shopButtons').value) {
+                                case 'original':
+                                    ShopHandler.increaseAmount(100);
+                                    break;
+                                case 'multiplication':
+                                    ShopHandler.multiplyAmount(0.1);
+                                    break;
+                                case 'bigplus':
+                                    ShopHandler.increaseAmount(1000);
+                                    break;
+                            }
+                        } else {
+                            switch (Settings.getSetting('shopButtons').value) {
+                                case 'original':
+                                    ShopHandler.increaseAmount(10);
+                                    break;
+                                case 'multiplication':
+                                    ShopHandler.multiplyAmount(10);
+                                    break;
+                                case 'bigplus':
+                                    ShopHandler.increaseAmount(100);
+                                    break;
+                            }
+                        }
+                        return e.preventDefault();
                 }
             }
 

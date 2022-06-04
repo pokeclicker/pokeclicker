@@ -35,10 +35,14 @@ class Preload {
     public static hideSplashScreen(fast = false) {
         $('#game').removeClass('loading');
         if (fast) {
-            $('.loader').hide();
+            $('#loader').hide();
         } else {
-            $('.loader').fadeOut('slow');
+            $('#loader').fadeOut('slow');
         }
+        // Remove the splash screen
+        setTimeout(() => {
+            $('#loader').remove();
+        }, 1000);
     }
 
     public static load(skipWait = false): Promise<void> {
