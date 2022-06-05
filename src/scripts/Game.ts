@@ -101,7 +101,9 @@ class Game {
         GemDeal.generateDeals();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
-        this.computeOfflineEarnings();
+        if (Settings.getSetting('disableOfflineProgress').value === false) {
+            this.computeOfflineEarnings();
+        }
         this.checkAndFix();
 
         // If the player isn't on a route, they're in a town/dungeon
