@@ -156,7 +156,7 @@ Routes.add(new RegionRoute(
         kantosuperrod: ['Horsea', 'Seadra'],
         kantosurf: ['Slowpoke', 'Slowbro'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokemon Tower'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))]
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 13', GameConstants.Region.kanto, 13,
@@ -203,7 +203,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Rattata', 'Raticate', 'Spearow', 'Fearow', 'Doduo', 'Snorlax'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokemon Tower'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))]
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 17', GameConstants.Region.kanto, 17,
@@ -445,7 +445,7 @@ Routes.add(new RegionRoute(
     [
         new OneFromManyRequirement([
             new MultiRequirement([
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt Mortar')),
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Mortar')),
                 new GymBadgeRequirement(BadgeEnums.Fog),
             ]),
             new RouteKillRequirement(10, GameConstants.Region.johto, 42),
