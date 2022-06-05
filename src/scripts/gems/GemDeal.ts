@@ -33,9 +33,9 @@ class GemDeal {
 
         list.push(new GemDeal(
             [
-                {gemType: PokemonType['Fire'], amount: 50000},
-                {gemType: PokemonType['Fighting'], amount: 50000},
-                {gemType: PokemonType['Poison'], amount: 50000},
+                {gemType: PokemonType['Fire'], amount: 10000},
+                {gemType: PokemonType['Fighting'], amount: 10000},
+                {gemType: PokemonType['Poison'], amount: 10000},
             ],
             ItemList['Red_Flute'],
             1
