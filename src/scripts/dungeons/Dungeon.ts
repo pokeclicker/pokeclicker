@@ -3,6 +3,7 @@
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/SeededDateRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/DayOfWeekRequirement.d.ts"/>
 ///<reference path="../../declarations/utilities/SeededDateRand.d.ts"/>
 ///<reference path="../achievements/ObtainedPokemonRequirement.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
@@ -375,7 +376,7 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
     ],
     50, 1);
 
-dungeonList['Digletts Cave'] = new Dungeon('Digletts Cave',
+dungeonList['Diglett\'s Cave'] = new Dungeon('Diglett\'s Cave',
     ['Diglett'],
     [
         {loot: 'xClick', weight: 4},
@@ -604,7 +605,7 @@ dungeonList['Power Plant'] = new Dungeon('Power Plant',
     ],
     1000, 8);
 
-dungeonList['Pokemon Tower'] = new Dungeon('Pokemon Tower',
+dungeonList['Pokémon Tower'] = new Dungeon('Pokémon Tower',
     [
         {pokemon: 'Gastly', options: { weight: 21.3 }},
         {pokemon: 'Haunter', options: { weight: 21.3 }},
@@ -704,7 +705,7 @@ dungeonList['Seafoam Islands'] = new Dungeon('Seafoam Islands',
     ],
     1250, 15);
 
-dungeonList['Pokemon Mansion'] = new Dungeon('Pokemon Mansion',
+dungeonList['Pokémon Mansion'] = new Dungeon('Pokémon Mansion',
     [
         {pokemon: 'Rattata', options: { weight: 3.5 }},
         {pokemon: 'Raticate', options: { weight: 3.5 }},
@@ -1041,6 +1042,12 @@ dungeonList['Union Cave'] = new Dungeon('Union Cave',
         new DungeonTrainer('Firebreather',
             [new GymPokemon('Vulpix', 300000, 9)],
             { weight: 1 }, 'Ray'),
+        new DungeonBossPokemon('Lapras', 450000, 20, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new GymBadgeRequirement(BadgeEnums.Fog),
+                new DayOfWeekRequirement(GameConstants.DayOfWeek.Friday),
+            ])}),
     ],
     3000, 32);
 
@@ -1171,7 +1178,7 @@ dungeonList['Whirl Islands'] = new Dungeon('Whirl Islands',
     [new DungeonBossPokemon('Dewgong', 400000, 40), new DungeonBossPokemon('Kingler', 400000, 40), new DungeonBossPokemon('Lugia', 1410000, 100)],
     5000, 41);
 
-dungeonList['Mt Mortar'] = new Dungeon('Mt Mortar',
+dungeonList['Mt. Mortar'] = new Dungeon('Mt. Mortar',
     [
         {pokemon: 'Rattata', options: { weight: 0.5 }},
         {pokemon: 'Raticate', options: { weight: 0.5 }},
@@ -1217,7 +1224,7 @@ dungeonList['Mt Mortar'] = new Dungeon('Mt Mortar',
     ],
     5500, 42);
 
-dungeonList['Team Rockets Hideout'] = new Dungeon('Team Rockets Hideout',
+dungeonList['Team Rocket\'s Hideout'] = new Dungeon('Team Rocket\'s Hideout',
     [
         {pokemon: 'Geodude', options: { weight: 0.5 }},
         {pokemon: 'Voltorb', options: { weight: 0.5 }},
@@ -1527,7 +1534,7 @@ dungeonList['Victory Road Johto'] = new Dungeon('Victory Road Johto',
     ],
     7000, 46);
 
-dungeonList['Mt Silver'] = new Dungeon('Mt Silver',
+dungeonList['Mt. Silver'] = new Dungeon('Mt. Silver',
     ['Ponyta', 'Doduo', 'Tangela', 'Sneasel', 'Ursaring', 'Donphan', 'Teddiursa', 'Phanpy', 'Quagsire', 'Misdreavus'],
     [
         {loot: 'Token_collector', weight: 3.75},
@@ -2082,8 +2089,6 @@ dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
         {loot: 'Revive', weight: 2},
         {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Cave of Origin'))},
         {loot: 'Lum', weight: 0, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Cave of Origin'))},
-        {loot: 'Liechi', weight: 0, requirement: new ClearDungeonRequirement(1500, GameConstants.getDungeonIndex('Cave of Origin'))},
-        {loot: 'Ganlon', weight: 0, requirement: new ClearDungeonRequirement(1500, GameConstants.getDungeonIndex('Cave of Origin'))},
         {loot: 'Green Shard', weight: 3},
         {loot: 'Ochre Shard', weight: 3},
     ],
@@ -2158,7 +2163,6 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
         {loot: 'Sky Plate', weight: 2},
         {loot: 'Mind Plate', weight: 2},
         {loot: 'Dragon_scale', weight: 2},
-        {loot: 'Salac', weight: 0, requirement: new ClearDungeonRequirement(1750, GameConstants.getDungeonIndex('Sky Pillar'))},
         {loot: 'Yellow Shard', weight: 3},
         {loot: 'Ochre Shard', weight: 3},
     ],
@@ -2334,8 +2338,6 @@ dungeonList['Oreburgh Gate'] = new Dungeon('Oreburgh Gate',
         {loot: 'Item_magnet', weight: 3.5},
         {loot: 'Earth Plate', weight: 2.5},
         {loot: 'Fist Plate', weight: 2.5},
-        {loot: 'Shuca', weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Oreburgh Gate'))},
-        {loot: 'Chople', weight: 0, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Oreburgh Gate'))},
         {loot: 'Blue Shard', weight: 3},
         {loot: 'Green Shard', weight: 3},
     ],
@@ -2374,7 +2376,6 @@ dungeonList['Valley Windworks'] = new Dungeon('Valley Windworks',
         {loot: 'Greatball', weight: 3.5},
         {loot: 'Stone Plate', weight: 2.75},
         {loot: 'SmallRestore', weight: 1.75},
-        {loot: 'Charti', weight: 0, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Ravaged Path'))},
         {loot: 'Yellow Shard', weight: 3},
     ],
     756000,
@@ -2451,7 +2452,6 @@ dungeonList['Old Chateau'] = new Dungeon('Old Chateau',
         {loot: 'Dread Plate', weight: 2.75},
         {loot: 'Spooky Plate', weight: 2.75},
         {loot: 'Zap Plate', weight: 2.75},
-        {loot: 'Kasib', weight: 2, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Old Chateau'))},
         {loot: 'Odd Keystone', weight: 1.75},
         {loot: 'Red Shard', weight: 3},
         {loot: 'Blue Shard', weight: 3},

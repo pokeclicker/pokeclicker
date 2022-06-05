@@ -388,6 +388,15 @@ namespace GameConstants {
     declare const RegionalStarters: number[][];
     declare const TemporaryBattles: string[];
     declare function getTemporaryBattlesIndex(temporaryBattle: string): number;
+    declare enum DayOfWeek {
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+    }
     declare enum ShardTraderLocations {
       'Pallet Town',
       'Pewter City',
