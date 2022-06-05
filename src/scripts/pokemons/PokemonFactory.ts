@@ -15,7 +15,7 @@ class PokemonFactory {
         }
         let name: PokemonNameType;
 
-        const roaming = PokemonFactory.roamingEncounter(route, region)
+        const roaming = PokemonFactory.roamingEncounter(route, region);
         if (roaming) {
             name = PokemonFactory.generateRoamingEncounter(route, region);
         } else {
