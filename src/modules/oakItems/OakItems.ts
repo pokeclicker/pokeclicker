@@ -1,3 +1,4 @@
+import { Observable as KnockoutObservable } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
 import OakItemType from '../enums/OakItemType';
 import { Currency } from '../GameConstants';
@@ -17,9 +18,12 @@ export default class OakItems implements Feature {
 
     defaults: Record<string, any>;
 
+    maxLevelOakItems: KnockoutObservable<number>;
+
     constructor(unlockRequirements: number[], private multiplier: Multiplier) {
         this.itemList = [];
         this.unlockRequirements = unlockRequirements;
+        this.maxLevelOakItems = ko.observable(0);
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -60,6 +64,8 @@ export default class OakItems implements Feature {
         this.addMultiplier('money', OakItemType.Amulet_Coin);
         this.addMultiplier('shiny', OakItemType.Shiny_Charm);
         this.addMultiplier('eggStep', OakItemType.Blaze_Cassette);
+
+        this.itemList.forEach((i) => i.levelKO.subscribe(() => this.maxLevelOakItems(this.itemList.filter((i2) => i2.isMaxLevel()).length)));
     }
 
     calculateBonus(item: OakItemType, useItem = false): number {
@@ -124,6 +130,8 @@ export default class OakItems implements Feature {
                 this.itemList[OakItemType[oakItem]].fromJSON(json[oakItem]);
             }
         });
+
+        this.maxLevelOakItems(this.itemList.filter((i) => i.isMaxLevel()).length);
     }
 
     toJSON(): Record<string, any> {
