@@ -112,7 +112,6 @@ export default class KeyItems implements Feature {
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Ilex Forest')]() > 0,
                 undefined, undefined, 'TM02 Headbutt'),
             new KeyItem(KeyItemType.HM08_dive, 'Can be used to dive to the bottom of the ocean to find new kinds of Pokémon.', undefined, undefined, undefined, 'HM08 Dive'),
-            // TODO obtain somewhere at the start
             new KeyItem(KeyItemType.Holo_caster, 'A device that allows users to see and track Achievements. Completing Achievements gives useful bonuses.',
                 () => App.game.party.caughtPokemon.length >= 110, undefined, undefined, 'Holo Caster'),
             new KeyItem(KeyItemType.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémon Attack. Some baby Pokémon can only be found through breeding, too!',
