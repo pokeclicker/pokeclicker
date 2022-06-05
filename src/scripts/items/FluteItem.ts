@@ -72,17 +72,3 @@ ItemList['Black_Flute']        = new FluteItem(GameConstants.FluteItemType.Black
 ItemList['Red_Flute']         = new FluteItem(GameConstants.FluteItemType.Red_Flute, 'Egg Steps', ['Fire', 'Rock', 'Dragon'], 'eggStep', 1.02);
 ItemList['White_Flute']         = new FluteItem(GameConstants.FluteItemType.White_Flute, 'Shiny Chance', ['Normal', 'Fairy', 'Ice'], 'shiny', 1.02);
 ItemList['Blue_Flute']        = new FluteItem(GameConstants.FluteItemType.Blue_Flute, 'Dungeon Token Yield', ['Water', 'Bug', 'Ghost'], 'dungeonToken', 1.02);
-
-/*
-//Hoenn Flutes
-Yellow - Grass, Flying, Electric - Pokémon Attack
-Time - Ground, Poison, Steel - Dungeon and Underground Timers
-Black - Dark, Psychic, Fighting - Click Attack
-
-//Unova Flutes
-Red - Fire, Rock, Dragon - Egg Steps
-White - Normal, Fairy, Ice - Shiny Chance
-Blue - Water, Bug, Ghost - Dungeon Token Yield
-
-
-*/
