@@ -102,7 +102,7 @@ class Underground implements Feature {
     }
 
     getEnergyRegenTime() {
-        return Math.round(Underground.BASE_ENERGY_REGEN_TIME - this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time).calculateBonus() * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Black_Flute));
+        return Math.round(Underground.BASE_ENERGY_REGEN_TIME - this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time).calculateBonus());
     }
 
     getDailyDealsMax() {

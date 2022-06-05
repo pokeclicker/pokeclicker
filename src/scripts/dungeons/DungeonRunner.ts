@@ -65,7 +65,7 @@ class DungeonRunner {
         }
         if (this.map.playerMoved()) {
             this.timeLeft(this.timeLeft() - GameConstants.DUNGEON_TICK);
-            this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.DUNGEON_TIME * 100));
+            this.timeLeftPercentage(Math.floor(this.timeLeft() / (GameConstants.DUNGEON_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
         }
         const currentFluteBonus = FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute);
         if (currentFluteBonus != this.timeBonus()) {
