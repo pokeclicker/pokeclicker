@@ -387,9 +387,9 @@ dungeonList['Diglett\'s Cave'] = new Dungeon('Diglett\'s Cave',
         {loot: 'Max Revive', weight: 0},
         {loot: 'Wiki', weight: 0},
     ],
-    1208,
-    [new DungeonBossPokemon('Dugtrio', 6040, 31)],
-    95, 2);
+    2962,
+    [new DungeonBossPokemon('Dugtrio', 16040, 31)],
+    250, 11);
 
 dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
     [
