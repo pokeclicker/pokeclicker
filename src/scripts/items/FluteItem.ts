@@ -67,7 +67,7 @@ class FluteItem extends Item {
 }
 
 ItemList['Yellow_Flute']       = new FluteItem(GameConstants.FluteItemType.Yellow_Flute, 'Pokémon Attack', ['Grass', 'Flying', 'Electric'], 'pokemonAttack', 1.02);
-ItemList['Time_Flute']        = new FluteItem(GameConstants.FluteItemType.Time_Flute, 'Gym and Underground Timers', ['Ground', 'Poison', 'Steel'], undefined, 1.02);
+ItemList['Time_Flute']        = new FluteItem(GameConstants.FluteItemType.Time_Flute, 'Gym and Dungeon Timers', ['Ground', 'Poison', 'Steel'], undefined, 1.02);
 ItemList['Black_Flute']        = new FluteItem(GameConstants.FluteItemType.Black_Flute, 'Click Attack', ['Dark', 'Psychic', 'Fighting'], 'clickAttack', 1.02);
 ItemList['Red_Flute']         = new FluteItem(GameConstants.FluteItemType.Red_Flute, 'Egg Steps', ['Fire', 'Rock', 'Dragon'], 'eggStep', 1.02);
 ItemList['White_Flute']         = new FluteItem(GameConstants.FluteItemType.White_Flute, 'Shiny Chance', ['Normal', 'Fairy', 'Ice'], 'shiny', 1.02);
