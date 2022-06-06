@@ -24,7 +24,7 @@
                   </td>
                   <td data-bind="contentEditable: $data.name"></td>
                   <td>
-                    <button type="button" class="close text-danger" style="opacity: 1;" data-bind="click: () => { PokemonCategories.removeCategory($index()) }">
+                    <button type="button" class="close text-danger" title="Remove Category" style="opacity: 1;" data-bind="click: () => { PokemonCategories.removeCategory($index()) }">
                         <span aria-hidden="true">&times;</span>
                     </button>
                   </td>
@@ -37,7 +37,7 @@
             </table>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger mr-auto" data-bind="click: async () => { if (await Notifier.confirm({ title: 'Reset Categories', message: 'Are you sure you want to reset all of your categories?', confirm: 'Reset' })) PokemonCategories.reset(); }">Reset</button>
+            <button type="button" class="btn btn-danger mr-auto" data-bind="click: async () => { if (await Notifier.confirm({ title: 'Reset Categories', message: 'Are you sure you want to reset all of your categories to defaults?', confirm: 'Reset' })) PokemonCategories.reset(); }">Reset</button>
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
           </div>
       </div>
