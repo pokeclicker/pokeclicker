@@ -190,7 +190,7 @@ class Game {
         // Vivillon questline (if not started due to gym bug)
         if (App.game.quests.getQuestLine('The Great Vivillon Hunt!').state() == QuestLineState.inactive) {
             if (App.game.party.alreadyCaughtPokemon(666.01)) {
-                // Has obtained Aerodactyl
+                // Has obtained Vivillon (Pokéball)
                 App.game.quests.getQuestLine('The Great Vivillon Hunt!').state(QuestLineState.ended);
             } else if (App.game.badgeCase.badgeList[BadgeEnums.Iceberg]()) {
                 // Has the soul badge, Quest is started
