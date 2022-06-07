@@ -8,7 +8,12 @@ import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
 import { SortOptionConfigs, SortOptions } from './SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from '../achievements/AchievementSortOptions';
-import { Region, AchievementType } from '../GameConstants';
+import {
+    Region,
+    AchievementType,
+    HOUR,
+    DAY,
+} from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import BreedingFilters from './BreedingFilters';
 import ProteinFilters from './ProteinFilters';
@@ -109,6 +114,22 @@ Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#fff
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
 Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web workers for game ticks (more consistent game speed)', true));
 Settings.add(new BooleanSetting('disableOfflineProgress', 'Disable offline progress', false));
+Settings.add(new Setting<string>('saveReminder', 'Save Reminder Interval:',
+    [
+        new SettingOption('Never', 'never'),
+        new SettingOption('1 Hour', (1 * HOUR).toString()),
+        new SettingOption('3 Hours', (3 * HOUR).toString()),
+        new SettingOption('6 Hours', (6 * HOUR).toString()),
+        new SettingOption('12 Hours', (12 * HOUR).toString()),
+        new SettingOption('24 Hours', (24 * HOUR).toString()),
+        new SettingOption('2 Days', (2 * DAY).toString()),
+        new SettingOption('3 Days', (3 * DAY).toString()),
+        new SettingOption('4 Days', (4 * DAY).toString()),
+        new SettingOption('5 Days', (5 * DAY).toString()),
+        new SettingOption('6 Days', (6 * DAY).toString()),
+        new SettingOption('7 Days', (7 * DAY).toString()),
+    ],
+    (12 * HOUR).toString()));
 
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((soundGroup) => {
