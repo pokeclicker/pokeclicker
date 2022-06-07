@@ -116,7 +116,7 @@ Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web wor
 Settings.add(new BooleanSetting('disableOfflineProgress', 'Disable offline progress', false));
 Settings.add(new Setting<string>('saveReminder', 'Save Reminder Interval:',
     [
-        new SettingOption('Never', 'never'),
+        new SettingOption('Never', '0'),
         new SettingOption('1 Hour', (1 * HOUR).toString()),
         new SettingOption('3 Hours', (3 * HOUR).toString()),
         new SettingOption('6 Hours', (6 * HOUR).toString()),

@@ -21,9 +21,14 @@ export default class SaveReminder implements Saveable {
 
     static tick() {
         this.counter = 0;
+
+        // Check if reminders are disabled
+        if (!+Settings.getSetting('saveReminder').value) return;
+
         let timeSinceSaveReminder = App.game.statistics.secondsPlayed() - Math.max(App.game.saveReminder.lastDownloaded(), App.game.saveReminder.lastReminder());
         // Adjust to measure against ms
         timeSinceSaveReminder *= 1000;
+
         if (timeSinceSaveReminder >= +Settings.getSetting('saveReminder').value) {
             // Show reminder notification
             Notifier.notify({
