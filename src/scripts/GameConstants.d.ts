@@ -398,7 +398,11 @@ namespace GameConstants {
         'Saturday',
     }
     declare enum ShardTraderLocations {
-      'Pallet Town',
-      'Pewter City',
+      'Cerulean City',
+      'Vermilion City',
+      'Lavender Town',
+      'Saffron City',
+      'Fuchsia City',
+      'Cinnabar Island',
     }
 }

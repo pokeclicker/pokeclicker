@@ -1158,8 +1158,12 @@ export const TemporaryBattles = [
 
 export enum ShardTraderLocations {
     'None' = -1,
-    'Pallet Town' = 0,
-    'Pewter City',
+    'Cerulean City' = 0,
+    'Vermilion City',
+    'Lavender Town',
+    'Saffron City',
+    'Fuchsia City',
+    'Cinnabar Island',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

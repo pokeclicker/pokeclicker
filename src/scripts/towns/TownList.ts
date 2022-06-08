@@ -117,8 +117,12 @@ const LavenderTownShop = new Shop([
 ]);
 
 //Kanto Shard Master
-const PalletShardMaster = new ShardMasterShop([]);
-const PewterShardMaster = new ShardMasterShop([]);
+const CeruleanShardMaster = new ShardMasterShop([]);
+const VermilionShardMaster = new ShardMasterShop([]);
+const LavenderShardMaster = new ShardMasterShop([]);
+const SaffronShardMaster = new ShardMasterShop([]);
+const FuchsiaShardMaster = new ShardMasterShop([]);
+const CinnabarShardMaster = new ShardMasterShop([]);
 
 // Kanto NPCs
 
@@ -205,7 +209,7 @@ const CinnabarIslandResearcher = new NPC('Researcher', [
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
     GameConstants.Region.kanto,
-    [PalletShardMaster],
+    [],
     {
         npcs: [PalletProfOak, PalletMom],
     }
@@ -213,7 +217,7 @@ TownList['Pallet Town'] = new Town(
 TownList['Pewter City'] = new Town(
     'Pewter City',
     GameConstants.Region.kanto,
-    [PewterCityShop, PewterShardMaster],
+    [PewterCityShop],
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.kanto, 2),
@@ -236,7 +240,7 @@ TownList['Route 3 Pokémon Center'] = new Town(
 TownList['Cerulean City'] = new Town(
     'Cerulean City',
     GameConstants.Region.kanto,
-    [CeruleanCityShop, new MoveToDungeon(dungeonList['Cerulean Cave'])],
+    [CeruleanCityShop, CeruleanShardMaster, new MoveToDungeon(dungeonList['Cerulean Cave'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
         npcs: [CeruleanKantoBerryMaster, CeruleanSuperNerd],
@@ -245,7 +249,7 @@ TownList['Cerulean City'] = new Town(
 TownList['Vermilion City'] = new Town(
     'Vermilion City',
     GameConstants.Region.kanto,
-    [VermilionCityShop],
+    [VermilionCityShop, VermilionShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
         npcs: [VermilionFanClubChairman],
@@ -254,7 +258,7 @@ TownList['Vermilion City'] = new Town(
 TownList['Lavender Town'] = new Town(
     'Lavender Town',
     GameConstants.Region.kanto,
-    [LavenderTownShop, new MoveToDungeon(dungeonList['Pokémon Tower'])],
+    [LavenderTownShop, LavenderShardMaster, new MoveToDungeon(dungeonList['Pokémon Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
         npcs: [LavenderMrFuji],
@@ -272,7 +276,7 @@ TownList['Celadon City'] = new Town(
 TownList['Saffron City'] = new Town(
     'Saffron City',
     GameConstants.Region.kanto,
-    [SaffronCityShop],
+    [SaffronCityShop, SaffronShardMaster],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Rainbow)],
         npcs: [SaffronBattleItemRival, SaffronBreeder],
@@ -281,7 +285,7 @@ TownList['Saffron City'] = new Town(
 TownList['Fuchsia City'] = new Town(
     'Fuchsia City',
     GameConstants.Region.kanto,
-    [FuchsiaCityShop],
+    [FuchsiaCityShop, FuchsiaShardMaster],
     {
         requirements: [new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.kanto, 18),
@@ -293,7 +297,7 @@ TownList['Fuchsia City'] = new Town(
 TownList['Cinnabar Island'] = new Town(
     'Cinnabar Island',
     GameConstants.Region.kanto,
-    [CinnabarIslandShop, new MoveToDungeon(dungeonList['Pokémon Mansion'])],
+    [CinnabarIslandShop, CinnabarShardMaster, new MoveToDungeon(dungeonList['Pokémon Mansion'])],
     {
         requirements: [new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.kanto, 20),
