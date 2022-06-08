@@ -1164,6 +1164,12 @@ export enum ShardTraderLocations {
     'Saffron City',
     'Fuchsia City',
     'Cinnabar Island',
+    'Azalea Town',
+    'Ecruteak City',
+    'Olivine City',
+    'Cianwood City',
+    'Mahogany Town',
+    'Blackthorn City',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

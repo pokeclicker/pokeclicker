@@ -449,6 +449,14 @@ const BlackthornCityShop = new Shop([
     ItemList['Dragon_egg'],
 ]);
 
+//Johto Shard Master
+const AzaleaShardMaster = new ShardMasterShop([]);
+const EcruteakShardMaster = new ShardMasterShop([]);
+const OlivineShardMaster = new ShardMasterShop([]);
+const CianwoodShardMaster = new ShardMasterShop([]);
+const MahoganyShardMaster = new ShardMasterShop([]);
+const BlackthornShardMaster = new ShardMasterShop([]);
+
 // Johto NPCs
 
 const JohtoBerryMaster = new BerryMasterShop([
@@ -572,7 +580,7 @@ TownList['Violet City'] = new Town(
 TownList['Azalea Town'] = new Town(
     'Azalea Town',
     GameConstants.Region.johto,
-    [AzaleaTownShop, new MoveToDungeon(dungeonList['Slowpoke Well'])],
+    [AzaleaTownShop, AzaleaShardMaster, new MoveToDungeon(dungeonList['Slowpoke Well'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 33)],
         npcs: [AzaleaOldMan, AzaleaUnionCaveHiker],
@@ -590,7 +598,7 @@ TownList['Goldenrod City'] = new Town(
 TownList['Ecruteak City'] = new Town(
     'Ecruteak City',
     GameConstants.Region.johto,
-    [EcruteakCityShop, new MoveToDungeon(dungeonList['Burned Tower']), new MoveToDungeon(dungeonList['Tin Tower'])],
+    [EcruteakCityShop, EcruteakShardMaster, new MoveToDungeon(dungeonList['Burned Tower']), new MoveToDungeon(dungeonList['Tin Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 37)],
         npcs: [EcruteakBill, EcruteakEusine, EcruteakPokéfan, EcruteakKimonoGirl],
@@ -599,7 +607,7 @@ TownList['Ecruteak City'] = new Town(
 TownList['Olivine City'] = new Town(
     'Olivine City',
     GameConstants.Region.johto,
-    [OlivineCityShop],
+    [OlivineCityShop, OlivineShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 39)],
         npcs: [OlivineSSAquaCaptain],
@@ -608,7 +616,7 @@ TownList['Olivine City'] = new Town(
 TownList['Cianwood City'] = new Town(
     'Cianwood City',
     GameConstants.Region.johto,
-    [CianwoodCityShop],
+    [CianwoodCityShop, CianwoodShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 41)],
         npcs: [CianwoodPhotographyAide],
@@ -617,7 +625,7 @@ TownList['Cianwood City'] = new Town(
 TownList['Mahogany Town'] = new Town(
     'Mahogany Town',
     GameConstants.Region.johto,
-    [MahoganyTownShop, new MoveToDungeon(dungeonList['Team Rocket\'s Hideout'])],
+    [MahoganyTownShop, MahoganyShardMaster, new MoveToDungeon(dungeonList['Team Rocket\'s Hideout'])],
     {
         requirements: [new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.johto, 42),
@@ -629,7 +637,7 @@ TownList['Mahogany Town'] = new Town(
 TownList['Blackthorn City'] = new Town(
     'Blackthorn City',
     GameConstants.Region.johto,
-    [BlackthornCityShop],
+    [BlackthornCityShop, BlackthornShardMaster],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ice Path'))],
         npcs: [BlackthornJohtoRoamerNPC],

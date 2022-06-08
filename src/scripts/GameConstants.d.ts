@@ -404,5 +404,11 @@ namespace GameConstants {
       'Saffron City',
       'Fuchsia City',
       'Cinnabar Island',
+      'Azalea Town',
+      'Ecruteak City',
+      'Olivine City',
+      'Cianwood City',
+      'Mahogany Town',
+      'Blackthorn City',
     }
 }
