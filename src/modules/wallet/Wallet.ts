@@ -6,7 +6,7 @@ import GameHelper from '../GameHelper';
 import { Currency } from '../GameConstants';
 import Multiplier from '../multiplier/Multiplier';
 import Amount from './Amount';
-import { animateCurrency, animateCurrencyLost } from '../utilities/UI';
+import { animateCurrency } from '../utilities/UI';
 
 export default class Wallet implements Feature {
     name = 'Wallet';
@@ -72,7 +72,7 @@ export default class Wallet implements Feature {
         }
 
         GameHelper.incrementObservable(this.currencies[amount.currency], amount.amount);
-        animateCurrency(amount);
+        animateCurrency(amount, true);
 
         switch (amount.currency) {
             case Currency.money:
@@ -116,7 +116,7 @@ export default class Wallet implements Feature {
         }
 
         GameHelper.incrementObservable(this.currencies[amount.currency], -amount.amount);
-        animateCurrencyLost(amount);
+        animateCurrency(amount, false);
 
         return true;
     }
