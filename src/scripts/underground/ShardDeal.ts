@@ -50,7 +50,7 @@ class ShardDeal {
                 {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
                 {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
             ],
-            ItemList['Fire_stone'],
+            ItemList['Fire_egg'],
             1
         ));
         return list;
