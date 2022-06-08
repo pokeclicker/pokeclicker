@@ -43,7 +43,7 @@
                                           <img src='assets/images/currency/questPoint.svg' width="20px'">
                                     </td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">→</td>
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }, text: player.getUndergroundItemAmount(Underground.getMineItemByName($parent.item.itemType.displayName).id)"></td>
+                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }, text: player.itemList[$parent.item.itemType.name]()"></td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
                                           <img class='mineInventoryItem' data-bind="attr: {
                                             src: $parent.item.itemType.image
