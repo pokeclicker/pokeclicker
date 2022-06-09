@@ -1,6 +1,14 @@
 @import "variables.less";
 
+
+
 #map {
+  @keyframes faintLight {
+    0% { filter:brightness(1) }
+    50% { filter:brightness(2) }
+    100% { filter:brightness(1) }
+  }
+
   rect, path {
     cursor: pointer;
     fill: transparent;
@@ -28,6 +36,9 @@
   .questAtLocation {
     fill: var(--questAtLocation);
     opacity: 0.6;
+    animation-duration: 3s;
+    animation-name: faintLight;
+    animation-iteration-count: infinite;
   }
 
   .uncaughtPokemon {
