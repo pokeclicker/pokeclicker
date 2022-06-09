@@ -175,9 +175,9 @@ const VermilionFanClubChairman = new NPC('Fan Club Chairman', [
 ]);
 
 const VermilionShardApprentice = new NPC('Shard Apprentice', [
-    'Are you looking for some shards? You can find them in many dungeons! Except in Viridan Forest and Mt. Moon. I\'ve never found any shards there for some reason.',
-    'I happen to know that there are some Yellow and Blue shards in Diglett\'s Cave. Just look inside the chests!',
-    'Shards can have lots of different colors. Different dungeons will have different colors, so keep an eye out! Most of them can\'t even be found in Kanto!'
+    'Are you looking for some Shards? You can find them in many dungeons! Except in Viridan Forest and Mt. Moon. I\'ve never found any Shards there for some reason.',
+    'I happen to know that there are some Yellow and Blue Shards in Diglett\'s Cave. Just look inside the chests!',
+    'Shards can have lots of different colors. Different dungeons will have different colors, so keep an eye out! Most of them can\'t even be found in Kanto!',
 ]);
 
 const LavenderMrFuji = new NPC('Mr. Fuji', [
