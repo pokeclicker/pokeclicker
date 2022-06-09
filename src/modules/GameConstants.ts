@@ -1220,6 +1220,16 @@ export enum ShardTraderLocations {
     'Anistar City',
     'Couriway Town',
     'Snowbelle City',
+    'Hau\'oli City',
+    'Heahea City',
+    'Paniola Town',
+    'Konikoni City',
+    'Aether Paradise',
+    'Malie City',
+    'Tapu Village',
+    'Seafolk Village',
+    'Exeggutor Island',
+    'Altar of the Sunne and Moone',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

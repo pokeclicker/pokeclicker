@@ -2565,6 +2565,18 @@ const AltaroftheSunneandMooneShop = new Shop([
     ItemList['Moon_stone'],
 ]);
 
+//Alola Shard Master
+const HauoliShardMaster = new ShardMasterShop([]);
+const HeaheaShardMaster = new ShardMasterShop([]);
+const PaniolaShardMaster = new ShardMasterShop([]);
+const KonikoniShardMaster = new ShardMasterShop([]);
+const AetherparadiseShardMaster = new ShardMasterShop([]);
+const MalieShardMaster = new ShardMasterShop([]);
+const TapuShardMaster = new ShardMasterShop([]);
+const SeafolkShardMaster = new ShardMasterShop([]);
+const ExeggutorislandShardMaster = new ShardMasterShop([]);
+const AltarsunnemooneShardMaster = new ShardMasterShop([]);
+
 //Alola NPCs
 
 const IkiOutskirtsMom = new NPC('Scratch Cat Girl', [
@@ -2661,7 +2673,7 @@ TownList['Professor Kukui\'s Lab'] = new Town(
 TownList['Hau\'oli City'] = new Town(
     'Hau\'oli City',
     GameConstants.Region.alola,
-    [HauoliCityShop],
+    [HauoliCityShop, HauoliShardMaster],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
     }
@@ -2687,7 +2699,7 @@ TownList['Roadside Motel'] = new Town(
 TownList['Heahea City'] = new Town(
     'Heahea City',
     GameConstants.Region.alola,
-    [HeaheaCityShop, new DockTownContent()],
+    [HeaheaCityShop, HeaheaShardMaster, new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
         npcs: [HeaheaCafeOwner],
@@ -2696,7 +2708,7 @@ TownList['Heahea City'] = new Town(
 TownList['Paniola Town'] = new Town(
     'Paniola Town',
     GameConstants.Region.alola,
-    [PaniolaTownShop],
+    [PaniolaTownShop, PaniolaShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 4)],
         npcs: [PaniolaTownActor],
@@ -2714,7 +2726,7 @@ TownList['Royal Avenue'] = new Town(
 TownList['Konikoni City'] = new Town(
     'Konikoni City',
     GameConstants.Region.alola,
-    [KonikoniCityShop],
+    [KonikoniCityShop, KonikoniShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
         npcs: [KonikoniKahuna],
@@ -2723,7 +2735,7 @@ TownList['Konikoni City'] = new Town(
 TownList['Aether Paradise'] = new Town(
     'Aether Paradise',
     GameConstants.Region.alola,
-    [TemporaryBattleList['Ultra Wormhole'], AetherParadiseShop, new MoveToDungeon(dungeonList['Aether Foundation'])],
+    [TemporaryBattleList['Ultra Wormhole'], AetherParadiseShop, AetherparadiseShardMaster, new MoveToDungeon(dungeonList['Aether Foundation'])],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
         npcs: [AetherParadiseAlolaRoamerNPC],
@@ -2732,7 +2744,7 @@ TownList['Aether Paradise'] = new Town(
 TownList['Malie City'] = new Town(
     'Malie City',
     GameConstants.Region.alola,
-    [MalieCityShop, new DockTownContent()],
+    [MalieCityShop, MalieShardMaster, new DockTownContent()],
     {
         requirements: [new TemporaryBattleRequirement('Ultra Wormhole')],
         npcs: [MalieKahuna],
@@ -2741,7 +2753,7 @@ TownList['Malie City'] = new Town(
 TownList['Tapu Village'] = new Town(
     'Tapu Village',
     GameConstants.Region.alola,
-    [TapuVillageShop],
+    [TapuVillageShop, TapuShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
         npcs: [TapuWorker],
@@ -2750,7 +2762,7 @@ TownList['Tapu Village'] = new Town(
 TownList['Seafolk Village'] = new Town(
     'Seafolk Village',
     GameConstants.Region.alola,
-    [SeafolkVillageShop, new MoveToDungeon(dungeonList['Mina\'s Houseboat'])],
+    [SeafolkVillageShop, SeafolkShardMaster, new MoveToDungeon(dungeonList['Mina\'s Houseboat'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
         npcs: [SeafolkCaptain],
@@ -2759,7 +2771,7 @@ TownList['Seafolk Village'] = new Town(
 TownList['Exeggutor Island'] = new Town(
     'Exeggutor Island',
     GameConstants.Region.alola,
-    [ExeggutorIslandShop, new MoveToDungeon(dungeonList['Exeggutor Island Hill'])],
+    [ExeggutorIslandShop, ExeggutorislandShardMaster, new MoveToDungeon(dungeonList['Exeggutor Island Hill'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
     }
@@ -2767,7 +2779,7 @@ TownList['Exeggutor Island'] = new Town(
 TownList['Altar of the Sunne and Moone'] = new Town(
     'Altar of the Sunne and Moone',
     GameConstants.Region.alola,
-    [TemporaryBattleList['Ultra Megalopolis'], AltaroftheSunneandMooneShop],
+    [TemporaryBattleList['Ultra Megalopolis'], AltaroftheSunneandMooneShop, AltarsunnemooneShardMaster],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
     }
