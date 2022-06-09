@@ -1245,6 +1245,21 @@ const SinnohBerryMaster = new BerryMasterShop([
     ItemList['FarmHandRiley'],
 ]);
 
+//Sinnoh Shard Master
+const JubilifeShardMaster = new ShardMasterShop([]);
+const FloaromaShardMaster = new ShardMasterShop([]);
+const EternaShardMaster = new ShardMasterShop([]);
+const HearthomeShardMaster = new ShardMasterShop([]);
+const SolaceonShardMaster = new ShardMasterShop([]);
+const PastoriaShardMaster = new ShardMasterShop([]);
+const CelesticShardMaster = new ShardMasterShop([]);
+const PalparkShardMaster = new ShardMasterShop([]);
+const CanalaveShardMaster = new ShardMasterShop([]);
+const SnowpointShardMaster = new ShardMasterShop([]);
+const SunyshoreShardMaster = new ShardMasterShop([]);
+const SurvivalareaShardMaster = new ShardMasterShop([]);
+const ResortareaShardMaster = new ShardMasterShop([]);
+
 //Sinnoh NPCs
 
 const TwinleafContestChampion = new NPC('Contest Champion', [
@@ -1339,7 +1354,7 @@ TownList['Sandgem Town'] = new Town(
 TownList['Jubilife City'] = new Town(
     'Jubilife City',
     GameConstants.Region.sinnoh,
-    [JubilifeCityShop],
+    [JubilifeCityShop, JubilifeShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 202)],
     }
@@ -1356,7 +1371,7 @@ TownList['Oreburgh City'] = new Town(
 TownList['Floaroma Town'] = new Town(
     'Floaroma Town',
     GameConstants.Region.sinnoh,
-    [FloaromaTownShop],
+    [FloaromaTownShop, FloaromaShardMaster],
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.sinnoh, 204),
@@ -1368,7 +1383,7 @@ TownList['Floaroma Town'] = new Town(
 TownList['Eterna City'] = new Town(
     'Eterna City',
     GameConstants.Region.sinnoh,
-    [EternaCityShop, new MoveToDungeon(dungeonList['Team Galactic Eterna Building'])],
+    [EternaCityShop, EternaShardMaster, new MoveToDungeon(dungeonList['Team Galactic Eterna Building'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Eterna Forest'))],
         npcs: [EternaLassCaroline],
@@ -1385,7 +1400,7 @@ TownList['Mt. Coronet'] = new Town(
 TownList['Hearthome City'] = new Town(
     'Hearthome City',
     GameConstants.Region.sinnoh,
-    [HearthomeCityShop, SinnohBerryMaster],
+    [HearthomeCityShop, HearthomeShardMaster, SinnohBerryMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208)],
         npcs: [HearthomeContestFan],
@@ -1394,7 +1409,7 @@ TownList['Hearthome City'] = new Town(
 TownList['Solaceon Town'] = new Town(
     'Solaceon Town',
     GameConstants.Region.sinnoh,
-    [SolaceonTownShop],
+    [SolaceonTownShop, SolaceonShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 209)],
     }
@@ -1411,7 +1426,7 @@ TownList['Veilstone City'] = new Town(
 TownList['Pastoria City'] = new Town(
     'Pastoria City',
     GameConstants.Region.sinnoh,
-    [PastoriaShop],
+    [PastoriaShop, PastoriaShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 213)],
     }
@@ -1419,7 +1434,7 @@ TownList['Pastoria City'] = new Town(
 TownList['Celestic Town'] = new Town(
     'Celestic Town',
     GameConstants.Region.sinnoh,
-    [CelesticTownShop],
+    [CelesticTownShop, CelesticShardMaster],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Fen)],
     }
@@ -1427,7 +1442,7 @@ TownList['Celestic Town'] = new Town(
 TownList['Pal Park'] = new Town(
     'Pal Park',
     GameConstants.Region.sinnoh,
-    [PalParkShop],
+    [PalParkShop, PalparkShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 221)],
         npcs: [PalParkWarden],
@@ -1436,7 +1451,7 @@ TownList['Pal Park'] = new Town(
 TownList['Canalave City'] = new Town(
     'Canalave City',
     GameConstants.Region.sinnoh,
-    [CanalaveCityShop],
+    [CanalaveCityShop, CanalaveShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
         npcs: [CanalaveRiley, CanalaveYoungBoy],
@@ -1445,7 +1460,7 @@ TownList['Canalave City'] = new Town(
 TownList['Snowpoint City'] = new Town(
     'Snowpoint City',
     GameConstants.Region.sinnoh,
-    [SnowpointCityShop],
+    [SnowpointCityShop, SnowpointShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 217)],
         npcs: [SnowpointYoungGirl],
@@ -1454,7 +1469,7 @@ TownList['Snowpoint City'] = new Town(
 TownList['Sunyshore City'] = new Town(
     'Sunyshore City',
     GameConstants.Region.sinnoh,
-    [SunyshoreCityShop],
+    [SunyshoreCityShop, SunyshoreShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 222)],
         npcs: [SunyshoreRibbonerJulia],
@@ -1480,7 +1495,7 @@ TownList['Fight Area'] = new Town(
 TownList['Survival Area'] = new Town(
     'Survival Area',
     GameConstants.Region.sinnoh,
-    [SurvivalAreaShop],
+    [SurvivalAreaShop, SurvivalareaShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 225)],
         npcs: [SurvivalAreaSinnohRoamerNPC],
@@ -1489,7 +1504,7 @@ TownList['Survival Area'] = new Town(
 TownList['Resort Area'] = new Town(
     'Resort Area',
     GameConstants.Region.sinnoh,
-    [ResortAreaShop],
+    [ResortAreaShop, ResortareaShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 229)],
     }

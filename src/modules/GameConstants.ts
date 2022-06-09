@@ -1182,6 +1182,19 @@ export enum ShardTraderLocations {
     'Pacifidlog Town',
     'Sootopolis City',
     'Ever Grande City',
+    'Jubilife City',
+    'Floaroma Town',
+    'Eterna City',
+    'Hearthome City',
+    'Solaceon Town',
+    'Pastoria City',
+    'Celestic Town',
+    'Pal Park',
+    'Canalave City',
+    'Snowpoint City',
+    'Sunyshore City',
+    'Survival Area',
+    'Resort Area',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
