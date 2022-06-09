@@ -74,6 +74,17 @@ class ShardDeal {
             GameConstants.ShardTraderLocations['Striaton City'],
             GameConstants.ShardTraderLocations['Accumula Town'],
             GameConstants.ShardTraderLocations['Nuvema Town'],
+            //Kalos
+            GameConstants.ShardTraderLocations['Camphrier Town'],
+            GameConstants.ShardTraderLocations['Ambrette Town'],
+            GameConstants.ShardTraderLocations['Geosenge Town'],
+            GameConstants.ShardTraderLocations['Shalour City'],
+            GameConstants.ShardTraderLocations['Coumarine City'],
+            GameConstants.ShardTraderLocations['Laverre City'],
+            GameConstants.ShardTraderLocations['Dendemille Town'],
+            GameConstants.ShardTraderLocations['Anistar City'],
+            GameConstants.ShardTraderLocations['Couriway Town'],
+            GameConstants.ShardTraderLocations['Snowbelle City'],
         ];
 
         for (const town of shardMasterTowns) {
@@ -141,7 +152,17 @@ class ShardDeal {
         ShardDeal.list[GameConstants.ShardTraderLocations['Striaton City']].push(...this.generateStriatonShardDeals());
         ShardDeal.list[GameConstants.ShardTraderLocations['Accumula Town']].push(...this.generateAccumulaShardDeals());
         ShardDeal.list[GameConstants.ShardTraderLocations['Nuvema Town']].push(...this.generateNuvemaShardDeals());
-        //ShardDeal.list[GameConstants.Region.kalos].push(...this.generateKalosShardDeals());
+        //Kalos
+        ShardDeal.list[GameConstants.ShardTraderLocations['Camphrier Town']].push(...this.generateCamphrierShardDeals());
+        ShardDeal.list[GameConstants.ShardTraderLocations['Ambrette Town']].push(...this.generateAmbretteShardDeals());
+        ShardDeal.list[GameConstants.ShardTraderLocations['Geosenge Town']].push(...this.generateGeosengeShardDeals());
+        ShardDeal.list[GameConstants.ShardTraderLocations['Shalour City']].push(...this.generateShalourShardDeals());
+        ShardDeal.list[GameConstants.ShardTraderLocations['Coumarine City']].push(...this.generateCoumarineShardDeals());
+        ShardDeal.list[GameConstants.ShardTraderLocations['Laverre City']].push(...this.generateLaverreShardDeals());
+        ShardDeal.list[GameConstants.ShardTraderLocations['Dendemille Town']].push(...this.generateDendemilleShardDeals());
+        ShardDeal.list[GameConstants.ShardTraderLocations['Anistar City']].push(...this.generateAnistarShardDeals());
+        ShardDeal.list[GameConstants.ShardTraderLocations['Couriway Town']].push(...this.generateCouriwayShardDeals());
+        ShardDeal.list[GameConstants.ShardTraderLocations['Snowbelle City']].push(...this.generateSnowbelleShardDeals());
     }
 
     //Kanto
@@ -1241,6 +1262,301 @@ class ShardDeal {
                 {shardType: Underground.getMineItemByName('White Shard'), amount: 75},
             ],
             ItemList['Magmarizer'],
+            1
+        ));
+        return list;
+    }
+
+    //Kalos
+    private static generateCamphrierShardDeals() {
+        const list = [];
+
+        list.push(new ShardDeal(
+            [{shardType: Underground.getMineItemByName('Yellow Shard'), amount: 100}],
+            ItemList['Thunder_stone'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [{shardType: Underground.getMineItemByName('Yellow Shard'), amount: 100}],
+            ItemList['Electric_egg'],
+            1
+        ));
+        return list;
+    }
+
+    private static generateAmbretteShardDeals() {
+        const list = [];
+
+        list.push(new ShardDeal(
+            [{shardType: Underground.getMineItemByName('Blue Shard'), amount: 100}],
+            ItemList['Water_egg'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [{shardType: Underground.getMineItemByName('Blue Shard'), amount: 100}],
+            ItemList['Water_stone'],
+            1
+        ));
+        return list;
+    }
+
+    private static generateGeosengeShardDeals() {
+        const list = [];
+
+        list.push(new ShardDeal(
+            [{shardType: Underground.getMineItemByName('Red Shard'), amount: 100}],
+            ItemList['Fire_egg'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [{shardType: Underground.getMineItemByName('Red Shard'), amount: 100}],
+            ItemList['Fire_stone'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Blue Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Grey Shard'), amount: 75},
+            ],
+            ItemList['Kings_rock'],
+            1
+        ));
+        return list;
+    }
+
+    private static generateShalourShardDeals() {
+        const list = [];
+
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Yellow Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Blue Shard'), amount: 50},
+            ],
+            ItemList['Fighting_egg'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Yellow Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Grey Shard'), amount: 75},
+            ],
+            ItemList['Metal_coat'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Red Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Yellow Shard'), amount: 50},
+            ],
+            ItemList['Trade_stone'],
+            1
+        ));
+        return list;
+    }
+
+    private static generateCoumarineShardDeals() {
+        const list = [];
+
+        list.push(new ShardDeal(
+            [{shardType: Underground.getMineItemByName('Green Shard'), amount: 100}],
+            ItemList['Grass_egg'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [{shardType: Underground.getMineItemByName('Green Shard'), amount: 100}],
+            ItemList['Leaf_stone'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Yellow Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('White Shard'), amount: 75},
+            ],
+            ItemList['Electirizer'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Red Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('White Shard'), amount: 75},
+            ],
+            ItemList['Magmarizer'],
+            1
+        ));
+        return list;
+    }
+
+    private static generateLaverreShardDeals() {
+        const list = [];
+
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Red Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Pink Shard'), amount: 75},
+            ],
+            ItemList['Sachet'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Green Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Pink Shard'), amount: 75},
+            ],
+            ItemList['Whipped_dream'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Green Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 75},
+            ],
+            ItemList['Deepsea_scale'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Red Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 75},
+            ],
+            ItemList['Deepsea_tooth'],
+            1
+        ));
+        return list;
+    }
+
+    private static generateDendemilleShardDeals() {
+        const list = [];
+
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Blue Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Crimson Shard'), amount: 75},
+            ],
+            ItemList['Dusk_stone'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Yellow Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Crimson Shard'), amount: 75},
+            ],
+            ItemList['Shiny_stone'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Green Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Crimson Shard'), amount: 75},
+            ],
+            ItemList['Dawn_stone'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Yellow Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Purple Shard'), amount: 75},
+            ],
+            ItemList['Upgrade'],
+            1
+        ));
+        return list;
+    }
+
+    private static generateAnistarShardDeals() {
+        const list = [];
+
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Red Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Grey Shard'), amount: 75},
+            ],
+            ItemList['Sun_stone'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Green Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Blue Shard'), amount: 50},
+            ],
+            ItemList['Moon_stone'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Red Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Lime Shard'), amount: 75},
+            ],
+            ItemList['Razor_claw'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Blue Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Lime Shard'), amount: 75},
+            ],
+            ItemList['Razor_fang'],
+            1
+        ));
+        return list;
+    }
+
+    private static generateCouriwayShardDeals() {
+        const list = [];
+
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Red Shard'), amount: 25},
+                {shardType: Underground.getMineItemByName('Yellow Shard'), amount: 25},
+                {shardType: Underground.getMineItemByName('Green Shard'), amount: 25},
+                {shardType: Underground.getMineItemByName('Blue Shard'), amount: 25},
+            ],
+            ItemList['Dragon_egg'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Blue Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Purple Shard'), amount: 75},
+            ],
+            ItemList['Dragon_scale'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Blue Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 75},
+            ],
+            ItemList['Prism_scale'],
+            1
+        ));
+        return list;
+    }
+
+    private static generateSnowbelleShardDeals() {
+        const list = [];
+
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Green Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Black Shard'), amount: 75},
+            ],
+            ItemList['Protector'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Blue Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Black Shard'), amount: 75},
+            ],
+            ItemList['Reaper_cloth'],
+            1
+        ));
+        list.push(new ShardDeal(
+            [
+                {shardType: Underground.getMineItemByName('Yellow Shard'), amount: 50},
+                {shardType: Underground.getMineItemByName('Black Shard'), amount: 75},
+            ],
+            ItemList['Dubious_disc'],
             1
         ));
         return list;

@@ -1210,6 +1210,16 @@ export enum ShardTraderLocations {
     'Striaton City',
     'Accumula Town',
     'Nuvema Town',
+    'Camphrier Town',
+    'Ambrette Town',
+    'Geosenge Town',
+    'Shalour City',
+    'Coumarine City',
+    'Laverre City',
+    'Dendemille Town',
+    'Anistar City',
+    'Couriway Town',
+    'Snowbelle City',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

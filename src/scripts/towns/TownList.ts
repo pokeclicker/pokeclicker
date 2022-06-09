@@ -1738,7 +1738,7 @@ const AnvilleTownShop = new Shop([
 //Unova Gem Master
 const UnovaFluteMaster = new GemMasterShop([]);
 
-//Sinnoh Shard Master
+//Unova Shard Master
 const CasteliaShardMaster = new ShardMasterShop([]);
 const NimbasaShardMaster = new ShardMasterShop([]);
 const DriftveilShardMaster = new ShardMasterShop([]);
@@ -2219,6 +2219,18 @@ const SnowbelleCityShop = new Shop([
     ItemList['Dubious_disc'],
 ]);
 
+//Kalos Shard Master
+const CamphrierShardMaster = new ShardMasterShop([]);
+const AmbretteShardMaster = new ShardMasterShop([]);
+const GeosengeShardMaster = new ShardMasterShop([]);
+const ShalourShardMaster = new ShardMasterShop([]);
+const CoumarineShardMaster = new ShardMasterShop([]);
+const LaverreShardMaster = new ShardMasterShop([]);
+const DendemilleShardMaster = new ShardMasterShop([]);
+const AnistarShardMaster = new ShardMasterShop([]);
+const CouriwayShardMaster = new ShardMasterShop([]);
+const SnowbelleShardMaster = new ShardMasterShop([]);
+
 //Kalos NPCs
 
 const LumioseEngineer = new NPC('Engineer', [
@@ -2295,7 +2307,7 @@ TownList['Lumiose City'] = new Town(
 TownList['Camphrier Town'] = new Town(
     'Camphrier Town',
     GameConstants.Region.kalos,
-    [CamphrierTownShop],
+    [CamphrierTownShop, CamphrierShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 5)],
         npcs: [CamphrierFlabébéEnthusiast],
@@ -2304,7 +2316,7 @@ TownList['Camphrier Town'] = new Town(
 TownList['Ambrette Town'] = new Town(
     'Ambrette Town',
     GameConstants.Region.kalos,
-    [AmbretteTownShop],
+    [AmbretteTownShop, AmbretteShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 8)],
     }
@@ -2320,7 +2332,7 @@ TownList['Cyllage City'] = new Town(
 TownList['Geosenge Town'] = new Town(
     'Geosenge Town',
     GameConstants.Region.kalos,
-    [GeosengeTownShop, new MoveToDungeon(dungeonList['Team Flare Secret HQ'])],
+    [GeosengeTownShop, GeosengeShardMaster, new MoveToDungeon(dungeonList['Team Flare Secret HQ'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 10)],
     }
@@ -2328,7 +2340,7 @@ TownList['Geosenge Town'] = new Town(
 TownList['Shalour City'] = new Town(
     'Shalour City',
     GameConstants.Region.kalos,
-    [ShalourCityShop],
+    [ShalourCityShop, ShalourShardMaster],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reflection Cave'))],
     }
@@ -2336,7 +2348,7 @@ TownList['Shalour City'] = new Town(
 TownList['Coumarine City'] = new Town(
     'Coumarine City',
     GameConstants.Region.kalos,
-    [CoumarineCityShop],
+    [CoumarineCityShop, CoumarineShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)],
         npcs: [CoumarineBirdwatcher],
@@ -2345,7 +2357,7 @@ TownList['Coumarine City'] = new Town(
 TownList['Laverre City'] = new Town(
     'Laverre City',
     GameConstants.Region.kalos,
-    [LaverreCityShop],
+    [LaverreCityShop, LaverreShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 14)],
         npcs: [LaverreFurisodeGirlKatherine],
@@ -2354,7 +2366,7 @@ TownList['Laverre City'] = new Town(
 TownList['Dendemille Town'] = new Town(
     'Dendemille Town',
     GameConstants.Region.kalos,
-    [DendemilleTownShop],
+    [DendemilleTownShop, DendemilleShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 15)],
     }
@@ -2362,7 +2374,7 @@ TownList['Dendemille Town'] = new Town(
 TownList['Anistar City'] = new Town(
     'Anistar City',
     GameConstants.Region.kalos,
-    [AnistarCityShop],
+    [AnistarCityShop, AnistarShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 17)],
         npcs: [AnistarKalosRoamerNPC],
@@ -2371,7 +2383,7 @@ TownList['Anistar City'] = new Town(
 TownList['Couriway Town'] = new Town(
     'Couriway Town',
     GameConstants.Region.kalos,
-    [CouriwayTownShop],
+    [CouriwayTownShop, CouriwayShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 18)],
     }
@@ -2379,7 +2391,7 @@ TownList['Couriway Town'] = new Town(
 TownList['Snowbelle City'] = new Town(
     'Snowbelle City',
     GameConstants.Region.kalos,
-    [SnowbelleCityShop],
+    [SnowbelleCityShop, SnowbelleShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 19)],
     }
