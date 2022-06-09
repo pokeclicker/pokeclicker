@@ -116,6 +116,7 @@ class Item {
             Notifier.notify({
                 message: `You bought ${n} ${GameConstants.humanifyString(this.displayName)}${multiple}`,
                 type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Items.item_bought,
             });
         } else {
             let curr = GameConstants.camelCaseToString(GameConstants.Currency[this.currency]);

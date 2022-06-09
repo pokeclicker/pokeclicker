@@ -122,7 +122,7 @@ class DungeonRunner {
             Notifier.notify({
                 message: `Found ${amount} × ${GameConstants.humanifyString(input)} Berry in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+                setting: NotificationConstants.NotificationSetting.Dungeons.dungeon_item_found,
             });
 
             return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount, false);
@@ -131,7 +131,7 @@ class DungeonRunner {
             Notifier.notify({
                 message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+                setting: NotificationConstants.NotificationSetting.Dungeons.dungeon_item_found,
             });
 
             return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount, false);
@@ -140,7 +140,7 @@ class DungeonRunner {
             Notifier.notify({
                 message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+                setting: NotificationConstants.NotificationSetting.Dungeons.dungeon_item_found,
             });
 
             return Underground.gainMineItem(Underground.getMineItemByName(input).id, amount);
@@ -149,7 +149,7 @@ class DungeonRunner {
             Notifier.notify({
                 message: `Found ${1} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+                setting: NotificationConstants.NotificationSetting.Dungeons.dungeon_item_found,
             });
 
             return DungeonBattle.generateNewLootEnemy(input);
@@ -158,7 +158,7 @@ class DungeonRunner {
             Notifier.notify({
                 message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+                setting: NotificationConstants.NotificationSetting.Dungeons.dungeon_item_found,
             });
 
             return player.gainItem(ItemList[input].name, amount);
@@ -177,15 +177,23 @@ class DungeonRunner {
         DungeonBattle.generateNewBoss();
     }
 
-    public static dungeonLeave() {
+    public static async dungeonLeave(shouldConfirm = true): Promise<void> {
         if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.entrance || DungeonRunner.dungeonFinished() || !DungeonRunner.map.playerMoved()) {
             return;
         }
 
-        DungeonRunner.dungeonFinished(true);
-        DungeonRunner.fighting(false);
-        DungeonRunner.fightingBoss(false);
-        MapHelper.moveToTown(DungeonRunner.dungeon.name);
+        if (!shouldConfirm || await Notifier.confirm({
+            title: 'Dungeon',
+            message: 'Leave the dungeon?\n\nCurrent progress will be lost, but you will keep any items obtained from chests.',
+            type: NotificationConstants.NotificationOption.warning,
+            confirm: 'Leave',
+            timeout: 1 * GameConstants.MINUTE,
+        })) {
+            DungeonRunner.dungeonFinished(true);
+            DungeonRunner.fighting(false);
+            DungeonRunner.fightingBoss(false);
+            MapHelper.moveToTown(DungeonRunner.dungeon.name);
+        }
     }
 
     private static dungeonLost() {
@@ -195,7 +203,7 @@ class DungeonRunner {
             DungeonRunner.fightingBoss(false);
             MapHelper.moveToTown(DungeonRunner.dungeon.name);
             Notifier.notify({
-                message: 'You could not complete the dungeon in time',
+                message: 'You could not complete the dungeon in time.',
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
@@ -209,8 +217,9 @@ class DungeonRunner {
             DungeonRunner.dungeon.rewardFunction();
             // TODO award loot with a special screen
             Notifier.notify({
-                message: 'You have successfully completed the dungeon',
+                message: 'You have successfully completed the dungeon.',
                 type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Dungeons.dungeon_complete,
             });
         }
     }

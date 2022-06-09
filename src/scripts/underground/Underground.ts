@@ -266,7 +266,7 @@ class Underground implements Feature {
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 1e4,
                     sound: NotificationConstants.NotificationSound.General.underground_energy_full,
-                    setting: NotificationConstants.NotificationSetting.General.underground_energy_full,
+                    setting: NotificationConstants.NotificationSetting.Underground.underground_energy_full,
                 });
             }
         }
@@ -280,7 +280,7 @@ class Underground implements Feature {
         Notifier.notify({
             message: `You restored ${gain} mining energy!`,
             type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.General.underground_energy_restore,
+            setting: NotificationConstants.NotificationSetting.Underground.underground_energy_restore,
         });
     }
 

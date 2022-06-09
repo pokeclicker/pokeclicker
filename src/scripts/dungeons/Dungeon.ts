@@ -76,7 +76,7 @@ class Dungeon {
         // Player requires the Dungeon Ticket to access the dungeons
         if (!App.game.keyItems.hasKeyItem(KeyItemType.Dungeon_ticket)) {
             Notifier.notify({
-                message: 'You need the Dungeon ticket to access dungeons',
+                message: 'You need the Dungeon Ticket to access dungeons.',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;
@@ -481,9 +481,8 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
             const item = Rand.boolean() ? 'Dome Fossil' : 'Helix Fossil';
             Underground.gainMineItem(Underground.getMineItemByName(item).id, 1);
             Notifier.notify({
-                message: `You were awarded a ${GameConstants.humanifyString(item)} for defeating the Super Nerd`,
+                message: `You were awarded a ${GameConstants.humanifyString(item)} for defeating the Super Nerd!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
             });
         }
     });

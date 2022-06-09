@@ -1251,9 +1251,9 @@ class Farming implements Feature {
         const berry = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
         if (!disableNotification) {
             Notifier.notify({
-                message: `You got a ${BerryType[berry]} berry!`,
+                message: `You found ${GameHelper.anOrA(BerryType[berry])} ${BerryType[berry]} Berry!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.route_item_found,
+                setting: NotificationConstants.NotificationSetting.Items.route_berry_found,
             });
         }
         this.gainBerry(berry, amount, false);
@@ -1288,10 +1288,12 @@ class Farming implements Feature {
     unlockBerry(berry: BerryType) {
         if (!this.unlockedBerries[berry]()) {
             Notifier.notify({
-                message: `You've discovered a ${BerryType[berry]} Berry!`,
+                message: `You've discovered the ${BerryType[berry]} Berry!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.route_item_found,
+                setting: NotificationConstants.NotificationSetting.Farming.berry_discovered,
+                sound: NotificationConstants.NotificationSound.Farming.berry_discovered,
             });
+            App.game.logbook.newLog(LogBookTypes.NEW, `You've registered the ${BerryType[berry]} Berry in your BerryDex!`);
             this.unlockedBerries[berry](true);
         }
     }
