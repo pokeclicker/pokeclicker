@@ -1,4 +1,5 @@
 import { BREEDING_ATTACK_BONUS } from '../GameConstants';
+import PokemonHelper from '../GameHelper';
 
 export enum SortOptions {
     id = 0,
@@ -8,10 +9,11 @@ export enum SortOptions {
     shiny = 4,
     baseAttack = 5,
     breedingEfficiency = 6,
-    eggCycles = 7,
-    timesHatched = 8,
-    category = 9,
-    proteinsUsed = 10,
+    breedingEfficiencyCurrentRegion = 7,
+    eggCycles = 8,
+    timesHatched = 9,
+    category = 10,
+    proteinsUsed = 11,
 }
 
 export type SortOptionConfig = {
@@ -60,6 +62,11 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.breedingEfficiency]: {
         text: 'Breeding Efficiency',
         getValue: (p) => ((p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed()) / pokemonMap[p.name].eggCycles),
+    },
+
+    [SortOptions.breedingEfficiencyCurrentRegion]: {
+        text: 'Breeding Efficiency (Current region)',
+        getValue: (p) => ((((pokemonMap[p.name].nativeRegion !== player.region && App.game.challenges.list.regionalAttackDebuff.active()) ? App.game.party.getRegionAttackMultiplier() : 1) * (p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed())) / pokemonMap[p.name].eggCycles),
     },
 
     [SortOptions.eggCycles]: {

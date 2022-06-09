@@ -184,6 +184,7 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Egg Steps', 'eggSteps'),
         new SettingOption('Times Hatched', 'timesHatched'),
         new SettingOption('Breeding Efficiency', 'breedingEfficiency'),
+        new SettingOption('Breeding Efficiency (Current region)', 'breedingEfficiencyCurrentRegion'),
         new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
         new SettingOption('Pokedex ID', 'dexId'),
         new SettingOption('Proteins used', 'proteins'),
