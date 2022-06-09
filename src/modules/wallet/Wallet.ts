@@ -72,7 +72,7 @@ export default class Wallet implements Feature {
         }
 
         GameHelper.incrementObservable(this.currencies[amount.currency], amount.amount);
-        animateCurrency(amount, true);
+        animateCurrency(amount);
 
         switch (amount.currency) {
             case Currency.money:
@@ -116,8 +116,7 @@ export default class Wallet implements Feature {
         }
 
         GameHelper.incrementObservable(this.currencies[amount.currency], -amount.amount);
-        animateCurrency(amount, false);
-
+        animateCurrency({ ...amount, amount: -amount.amount });
         return true;
     }
 
