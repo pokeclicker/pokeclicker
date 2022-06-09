@@ -1,5 +1,4 @@
 import { BREEDING_ATTACK_BONUS } from '../GameConstants';
-import PokemonHelper from '../GameHelper';
 
 export enum SortOptions {
     id = 0,
