@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/settings/ProteinFilters.d.ts" />
+
 enum PartyPokemonSaveKeys {
     attackBonusPercent = 0,
     attackBonusAmount,
@@ -158,7 +160,29 @@ class PartyPokemon implements Saveable {
     };
 
     public hideFromProteinList = (): boolean => {
-        return this.breeding ||
+        const hidden = ko.pureComputed(() => {
+            if (!ProteinFilters.search.value().test(this.name)) {
+                return true;
+            }
+
+            // Check based on native region
+            if (ProteinFilters.region.value() > -2) {
+                if (PokemonHelper.calcNativeRegion(this.name) !== ProteinFilters.region.value()) {
+                    return true;
+                }
+            }
+
+            // Check if either of the types match
+            const type: (PokemonType | null) = ProteinFilters.type.value() > -2 ? ProteinFilters.type.value() : null;
+            if (type !== null) {
+                const { type: types } = pokemonMap[this.name];
+                if (type !== null && !types.includes(type)) {
+                    return true;
+                }
+            }
+            return false;
+        }, this)();
+        return this.breeding || hidden ||
             (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue()) ||
             (this.shiny && Settings.getSetting('proteinHideShinyPokemon').observableValue());
     }
