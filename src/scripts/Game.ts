@@ -101,7 +101,9 @@ class Game {
         GemDeal.generateDeals();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
-        this.computeOfflineEarnings();
+        if (Settings.getSetting('disableOfflineProgress').value === false) {
+            this.computeOfflineEarnings();
+        }
         this.checkAndFix();
 
         // If the player isn't on a route, they're in a town/dungeon
@@ -183,6 +185,17 @@ class Game {
                 // Has the soul badge, Quest is started
                 App.game.quests.getQuestLine('Mining Expedition').state(QuestLineState.started);
                 App.game.quests.getQuestLine('Mining Expedition').beginQuest(App.game.quests.getQuestLine('Mining Expedition').curQuest());
+            }
+        }
+        // Vivillon questline (if not started due to gym bug)
+        if (App.game.quests.getQuestLine('The Great Vivillon Hunt!').state() == QuestLineState.inactive) {
+            if (App.game.party.alreadyCaughtPokemon(666.01)) {
+                // Has obtained Vivillon (Pokéball)
+                App.game.quests.getQuestLine('The Great Vivillon Hunt!').state(QuestLineState.ended);
+            } else if (App.game.badgeCase.badgeList[BadgeEnums.Iceberg]()) {
+                // Has the Iceberg badge, Quest is started
+                App.game.quests.getQuestLine('The Great Vivillon Hunt!').state(QuestLineState.started);
+                App.game.quests.getQuestLine('The Great Vivillon Hunt!').beginQuest(App.game.quests.getQuestLine('The Great Vivillon Hunt!').curQuest());
             }
         }
         // Check if Koga has been defeated, but have no safari ticket yet

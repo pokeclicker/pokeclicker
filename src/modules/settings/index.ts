@@ -4,13 +4,14 @@ import SettingOption from './SettingOption';
 import BooleanSetting from './BooleanSetting';
 import CssVariableSetting from './CssVariableSetting';
 import RangeSetting from './RangeSetting';
-import PokemonType from '../enums/PokemonType';
 import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
 import { SortOptionConfigs, SortOptions } from './SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from '../achievements/AchievementSortOptions';
 import { Region, AchievementType } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
+import BreedingFilters from './BreedingFilters';
+import ProteinFilters from './ProteinFilters';
 
 export default Settings;
 
@@ -61,6 +62,7 @@ Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons:',
     'original'));
 Settings.add(new BooleanSetting('resetShopAmountOnPurchase', 'Reset buy quantity after each purchase', true));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
+Settings.add(new BooleanSetting('showCurrencyLostAnimation', 'Show currency lost animation', true));
 Settings.add(new BooleanSetting('hideChallengeRelatedModules', 'Hide challenge related modules', false));
 Settings.add(new Setting<string>('backgroundImage', 'Background image:',
     [
@@ -107,6 +109,7 @@ Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#fff
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
 Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web workers for game ticks (more consistent game speed)', true));
+Settings.add(new BooleanSetting('disableOfflineProgress', 'Disable offline progress', false));
 
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((soundGroup) => {
@@ -153,7 +156,6 @@ Settings.add(new BooleanSetting('proteinSortDirection', 'reverse', false));
 Settings.add(new BooleanSetting('proteinHideMaxedPokemon', 'Hide Pokémon with max protein', false));
 Settings.add(new BooleanSetting('proteinHideShinyPokemon', 'Hide shiny Pokémon', false));
 
-// Pokedex Sorting
 const pokedexSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
@@ -210,39 +212,27 @@ Settings.add(new Setting<string>('pokedexDisplayFilter', 'pokedexDisplayFilter',
     ],
     'attack'));
 
+// Protein filters
+Object.keys(ProteinFilters).forEach((key) => {
+    // One-off because search isn't stored in settings
+    if (key === 'search') {
+        return;
+    }
+    const filter = ProteinFilters[key];
+    Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
+});
+
 
 // Breeding Filters
-Settings.add(new Setting<string>('breedingCategoryFilter', 'breedingCategoryFilter',
-    [],
-    '-1'));
-Settings.add(new Setting<string>('breedingRegionFilter', 'breedingRegionFilter',
-    [
-        new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(Region, (r) => r !== 'none'),
-        new SettingOption('None', '-1'),
-    ],
-    '-2'));
-Settings.add(new Setting<string>('breedingTypeFilter1', 'breedingTypeFilter1',
-    [
-        new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
-        new SettingOption('None', '-1'),
-    ],
-    '-2'));
-Settings.add(new Setting<string>('breedingTypeFilter2', 'breedingTypeFilter2',
-    [
-        new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
-        new SettingOption('None', '-1'),
-    ],
-    '-2'));
-Settings.add(new Setting<string>('breedingShinyFilter', 'breedingShinyFilter',
-    [
-        new SettingOption('All', '-1'),
-        new SettingOption('Not Shiny', '0'),
-        new SettingOption('Shiny', '1'),
-    ],
-    '-1'));
+Object.keys(BreedingFilters).forEach((key) => {
+    // One-off because search isn't stored in settings
+    if (key === 'search') {
+        return;
+    }
+    const filter = BreedingFilters[key];
+    Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
+});
+
 Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter',
     [
         new SettingOption('Attack', 'attack'),
