@@ -276,7 +276,7 @@ class Mine {
             title: 'Underground',
             message: 'Skip this mine layer?',
             type: NotificationConstants.NotificationOption.warning,
-            confirm: 'skip',
+            confirm: 'Skip',
         })) {
             setTimeout(Mine.completed, 1500);
             Mine.loadingNewLayer = true;

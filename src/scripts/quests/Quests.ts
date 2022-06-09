@@ -139,10 +139,10 @@ class Quests implements Saveable {
         if (free || this.canAffordRefresh()) {
             if (!free) {
                 if (shouldConfirm && !await Notifier.confirm({
-                    title: 'Refresh quest list',
+                    title: 'Refresh Quest List',
                     message: 'Are you sure you want to refresh the quest list?',
                     type: NotificationConstants.NotificationOption.warning,
-                    confirm: 'refresh',
+                    confirm: 'Refresh',
                 })) {
                     return;
                 }
