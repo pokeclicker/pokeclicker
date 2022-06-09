@@ -174,6 +174,12 @@ const VermilionFanClubChairman = new NPC('Fan Club Chairman', [
     'You won’t find a Pokémon as wonderful as my favorite Rapidash in those Typed Eggs in the shops, but they might hatch rare Pokémon you can’t find anywhere else!',
 ]);
 
+const VermilionShardApprentice = new NPC('Shard Apprentice', [
+    'Are you looking for some shards? You can find them in many dungeons! Except in Viridan Forest and Mt. Moon. I\'ve never found any shards there for some reason.',
+    'I happen to know that there are some Yellow and Blue shards in Diglett\'s Cave. Just look inside the chests!',
+    'Shards can have lots of different colors. Different dungeons will have different colors, so keep an eye out! Most of them can\'t even be found in Kanto!'
+]);
+
 const LavenderMrFuji = new NPC('Mr. Fuji', [
     'Welcome. In our Volunteer House here we take in all kinds of Pokémon to care for them.',
     'Did you know that sparkling Pokémon are more often found in Dungeons, on Farms, from Eggs, and even from Shops, the Safari Zone, and Evolutions from Items?',
@@ -252,7 +258,7 @@ TownList['Vermilion City'] = new Town(
     [VermilionCityShop, VermilionShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
-        npcs: [VermilionFanClubChairman],
+        npcs: [VermilionFanClubChairman, VermilionShardApprentice],
     }
 );
 TownList['Lavender Town'] = new Town(
