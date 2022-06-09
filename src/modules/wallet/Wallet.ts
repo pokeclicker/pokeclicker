@@ -116,6 +116,7 @@ export default class Wallet implements Feature {
         }
 
         GameHelper.incrementObservable(this.currencies[amount.currency], -amount.amount);
+        animateCurrency({ ...amount, amount: -amount.amount });
         return true;
     }
 
