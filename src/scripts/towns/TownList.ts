@@ -817,6 +817,20 @@ const HoennBerryMaster = new BerryMasterShop([
 //Hoenn Flute Master
 const HoennFluteMaster = new GemMasterShop([]);
 
+//Hoenn Shard Master
+const PetalburgShardMaster = new ShardMasterShop([]);
+const DewfordShardMaster = new ShardMasterShop([]);
+const SlateportShardMaster = new ShardMasterShop([]);
+const MauvilleShardMaster = new ShardMasterShop([]);
+const VerdanturfShardMaster = new ShardMasterShop([]);
+const LavaridgeShardMaster = new ShardMasterShop([]);
+const FallarborShardMaster = new ShardMasterShop([]);
+const FortreeShardMaster = new ShardMasterShop([]);
+const MossdeepShardMaster = new ShardMasterShop([]);
+const PacifidlogShardMaster = new ShardMasterShop([]);
+const SootopolisShardMaster = new ShardMasterShop([]);
+const EvergrandeShardMaster = new ShardMasterShop([]);
+
 //Hoenn NPCs
 
 const LittlerootAide = new NPC('Professor Birch\'s Aide', [
@@ -894,7 +908,7 @@ TownList['Oldale Town'] = new Town(
 TownList['Petalburg City'] = new Town(
     'Petalburg City',
     GameConstants.Region.hoenn,
-    [PetalburgCityShop],
+    [PetalburgCityShop, PetalburgShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 102)],
     }
@@ -910,7 +924,7 @@ TownList['Rustboro City'] = new Town(
 TownList['Dewford Town'] = new Town(
     'Dewford Town',
     GameConstants.Region.hoenn,
-    [DewfordTownShop],
+    [DewfordTownShop, DewfordShardMaster],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rusturf Tunnel'))],
     }
@@ -918,7 +932,7 @@ TownList['Dewford Town'] = new Town(
 TownList['Slateport City'] = new Town(
     'Slateport City',
     GameConstants.Region.hoenn,
-    [SlateportCityShop],
+    [SlateportCityShop, SlateportShardMaster],
     {
         requirements: [
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Granite Cave')),
@@ -930,7 +944,7 @@ TownList['Slateport City'] = new Town(
 TownList['Mauville City'] = new Town(
     'Mauville City',
     GameConstants.Region.hoenn,
-    [MauvilleCityShop, HoennBerryMaster],
+    [MauvilleCityShop, MauvilleShardMaster, HoennBerryMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 110)],
     }
@@ -938,7 +952,7 @@ TownList['Mauville City'] = new Town(
 TownList['Verdanturf Town'] = new Town(
     'Verdanturf Town',
     GameConstants.Region.hoenn,
-    [VerdanturfTownShop],
+    [VerdanturfTownShop, VerdanturfShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 117)],
     }
@@ -954,7 +968,7 @@ TownList['Mt. Chimney'] = new Town(
 TownList['Lavaridge Town'] = new Town(
     'Lavaridge Town',
     GameConstants.Region.hoenn,
-    [LavaridgeTownShop],
+    [LavaridgeTownShop, LavaridgeShardMaster],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Jagged Pass'))],
     }
@@ -962,7 +976,7 @@ TownList['Lavaridge Town'] = new Town(
 TownList['Fallarbor Town'] = new Town(
     'Fallarbor Town',
     GameConstants.Region.hoenn,
-    [FallarborTownShop, HoennFluteMaster],
+    [FallarborTownShop, FallarborShardMaster, HoennFluteMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 113)],
         npcs: [FallarborProfessorCozmo],
@@ -971,7 +985,7 @@ TownList['Fallarbor Town'] = new Town(
 TownList['Fortree City'] = new Town(
     'Fortree City',
     GameConstants.Region.hoenn,
-    [FortreeCityShop],
+    [FortreeCityShop, FortreeShardMaster],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))],
         npcs: [FortreeWeatherman],
@@ -989,7 +1003,7 @@ TownList['Lilycove City'] = new Town(
 TownList['Mossdeep City'] = new Town(
     'Mossdeep City',
     GameConstants.Region.hoenn,
-    [MossdeepCityShop],
+    [MossdeepCityShop, MossdeepShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 125)],
         npcs: [MossdeepAstronomer],
@@ -998,7 +1012,7 @@ TownList['Mossdeep City'] = new Town(
 TownList['Pacifidlog Town'] = new Town(
     'Pacifidlog Town',
     GameConstants.Region.hoenn,
-    [PacifidlogTownShop],
+    [PacifidlogTownShop, PacifidlogShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 131)],
         npcs: [PacifidlogDiver],
@@ -1007,7 +1021,7 @@ TownList['Pacifidlog Town'] = new Town(
 TownList['Sootopolis City'] = new Town(
     'Sootopolis City',
     GameConstants.Region.hoenn,
-    [SootopolisCityShop],
+    [SootopolisCityShop, SootopolisShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 126), new GymBadgeRequirement(BadgeEnums.Mind)],
         npcs: [SootopolisWallace],
@@ -1016,7 +1030,7 @@ TownList['Sootopolis City'] = new Town(
 TownList['Ever Grande City'] = new Town(
     'Ever Grande City',
     GameConstants.Region.hoenn,
-    [EverGrandeCityShop],
+    [EverGrandeCityShop, EvergrandeShardMaster],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Rain)],
     }

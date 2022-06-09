@@ -1170,6 +1170,18 @@ export enum ShardTraderLocations {
     'Cianwood City',
     'Mahogany Town',
     'Blackthorn City',
+    'Petalburg City',
+    'Dewford Town',
+    'Slateport City',
+    'Mauville City',
+    'Verdanturf Town',
+    'Lavaridge Town',
+    'Fallarbor Town',
+    'Fortree City',
+    'Mossdeep City',
+    'Pacifidlog Town',
+    'Sootopolis City',
+    'Ever Grande City',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
