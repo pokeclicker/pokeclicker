@@ -1738,7 +1738,25 @@ const AnvilleTownShop = new Shop([
 //Unova Gem Master
 const UnovaFluteMaster = new GemMasterShop([]);
 
+//Sinnoh Shard Master
+const CasteliaShardMaster = new ShardMasterShop([]);
+const NimbasaShardMaster = new ShardMasterShop([]);
+const DriftveilShardMaster = new ShardMasterShop([]);
+const MistraltonShardMaster = new ShardMasterShop([]);
+const LentimasShardMaster = new ShardMasterShop([]);
+const UndellaShardMaster = new ShardMasterShop([]);
+const LacunosaShardMaster = new ShardMasterShop([]);
+const OpelucidShardMaster = new ShardMasterShop([]);
+const HumilauShardMaster = new ShardMasterShop([]);
+const IcirrusShardMaster = new ShardMasterShop([]);
+const BlackwhiteparkShardMaster = new ShardMasterShop([]);
+const NacreneShardMaster = new ShardMasterShop([]);
+const StriatonShardMaster = new ShardMasterShop([]);
+const AccumulaShardMaster = new ShardMasterShop([]);
+const NuvemaShardMaster = new ShardMasterShop([]);
+
 //Unova NPCs
+
 const ExcitedChild = new NPC('Excited Child', [
     'Did you hear? Did you see? It was on TV!',
     'I was just watching my favorite show, The National Gymquirer. It was a live segment! Some hot shot trainer from Kanto defeated Drayden! It was amazing! That trainer is so cool! Drayden is like unbeatable.',
@@ -1801,7 +1819,7 @@ TownList['Virbank City'] = new Town(
 TownList['Castelia City'] = new Town(
     'Castelia City',
     GameConstants.Region.unova,
-    [CasteliaCityShop, new MoveToDungeon(dungeonList['Castelia Sewers'])],
+    [CasteliaCityShop, CasteliaShardMaster, new MoveToDungeon(dungeonList['Castelia Sewers'])],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Toxic)],
         npcs: [CasteliaMusician],
@@ -1810,7 +1828,7 @@ TownList['Castelia City'] = new Town(
 TownList['Nimbasa City'] = new Town(
     'Nimbasa City',
     GameConstants.Region.unova,
-    [NimbasaCityShop],
+    [NimbasaCityShop, NimbasaShardMaster],
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.unova, 4),
@@ -1822,7 +1840,7 @@ TownList['Nimbasa City'] = new Town(
 TownList['Driftveil City'] = new Town(
     'Driftveil City',
     GameConstants.Region.unova,
-    [DriftveilCityShop],
+    [DriftveilCityShop, DriftveilShardMaster],
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.unova,5),
@@ -1833,7 +1851,7 @@ TownList['Driftveil City'] = new Town(
 TownList['Mistralton City'] = new Town(
     'Mistralton City',
     GameConstants.Region.unova,
-    [MistraltonCityShop],
+    [MistraltonCityShop, MistraltonShardMaster],
     {
         requirements: [
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Chargestone Cave')),
@@ -1844,7 +1862,7 @@ TownList['Mistralton City'] = new Town(
 TownList['Lentimas Town'] = new Town(
     'Lentimas Town',
     GameConstants.Region.unova,
-    [LentimasTownShop],
+    [LentimasTownShop, LentimasShardMaster],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Jet)],
     }
@@ -1852,7 +1870,7 @@ TownList['Lentimas Town'] = new Town(
 TownList['Undella Town'] = new Town(
     'Undella Town',
     GameConstants.Region.unova,
-    [UndellaTownShop, UnovaFluteMaster],
+    [UndellaTownShop, UndellaShardMaster, UnovaFluteMaster],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))],
     }
@@ -1860,7 +1878,7 @@ TownList['Undella Town'] = new Town(
 TownList['Lacunosa Town'] = new Town(
     'Lacunosa Town',
     GameConstants.Region.unova,
-    [LacunosaTownShop],
+    [LacunosaTownShop, LacunosaShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 13)],
     }
@@ -1868,7 +1886,7 @@ TownList['Lacunosa Town'] = new Town(
 TownList['Opelucid City'] = new Town(
     'Opelucid City',
     GameConstants.Region.unova,
-    [OpelucidCityShop, new MoveToDungeon(dungeonList['Team Plasma Assault'])],
+    [OpelucidCityShop, OpelucidShardMaster, new MoveToDungeon(dungeonList['Team Plasma Assault'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 11)],
     }
@@ -1884,7 +1902,7 @@ TownList['Shopping Mall Nine'] = new Town(
 TownList['Humilau City'] = new Town(
     'Humilau City',
     GameConstants.Region.unova,
-    [HumilauCityShop],
+    [HumilauCityShop, HumilauShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 21)],
         npcs: [ExcitedChild],
@@ -1893,7 +1911,7 @@ TownList['Humilau City'] = new Town(
 TownList['Icirrus City'] = new Town(
     'Icirrus City',
     GameConstants.Region.unova,
-    [IcirrusCityShop],
+    [IcirrusCityShop, IcirrusShardMaster],
     {
         requirements: [new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.unova, 8),
@@ -1905,7 +1923,7 @@ TownList['Icirrus City'] = new Town(
 TownList['Black and White Park'] = new Town(
     'Black and White Park',
     GameConstants.Region.unova,
-    [BlackAndWhiteParkShop],
+    [BlackAndWhiteParkShop, BlackwhiteparkShardMaster],
     {
         requirements: [new OneFromManyRequirement([
             new MultiRequirement([
@@ -1919,7 +1937,7 @@ TownList['Black and White Park'] = new Town(
 TownList['Nacrene City'] = new Town(
     'Nacrene City',
     GameConstants.Region.unova,
-    [NacreneCityShop],
+    [NacreneCityShop, NacreneShardMaster],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinwheel Forest'))],
     }
@@ -1927,7 +1945,7 @@ TownList['Nacrene City'] = new Town(
 TownList['Striaton City'] = new Town(
     'Striaton City',
     GameConstants.Region.unova,
-    [StriatonCityShop],
+    [StriatonCityShop, StriatonShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 3)],
     }
@@ -1935,7 +1953,7 @@ TownList['Striaton City'] = new Town(
 TownList['Accumula Town'] = new Town(
     'Accumula Town',
     GameConstants.Region.unova,
-    [AccumulaTownShop],
+    [AccumulaTownShop, AccumulaShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 2)],
     }
@@ -1943,7 +1961,7 @@ TownList['Accumula Town'] = new Town(
 TownList['Nuvema Town'] = new Town(
     'Nuvema Town',
     GameConstants.Region.unova,
-    [NuvemaTownShop],
+    [NuvemaTownShop, NuvemaShardMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 1)],
         npcs: [ProfJuniper, UnovaRoamerNPC],

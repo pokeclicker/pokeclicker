@@ -1195,6 +1195,21 @@ export enum ShardTraderLocations {
     'Sunyshore City',
     'Survival Area',
     'Resort Area',
+    'Castelia City',
+    'Nimbasa City',
+    'Driftveil City',
+    'Mistralton City',
+    'Lentimas Town',
+    'Undella Town',
+    'Lacunosa Town',
+    'Opelucid City',
+    'Humilau City',
+    'Icirrus City',
+    'Black and White Park',
+    'Nacrene City',
+    'Striaton City',
+    'Accumula Town',
+    'Nuvema Town',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
