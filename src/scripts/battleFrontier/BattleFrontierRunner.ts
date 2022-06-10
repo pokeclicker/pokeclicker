@@ -72,6 +72,7 @@ class BattleFrontierRunner {
             setting: NotificationConstants.NotificationSetting.General.battle_frontier,
             timeout: 30 * GameConstants.MINUTE,
         });
+        App.game.logbook.newLog(LogBookTypes.FRONTIER, `You defeated stage ${stageBeaten} and received ${battlePointsEarned.toLocaleString('en-US')} Battle Points`);
 
         // Award battle points
         App.game.wallet.gainBattlePoints(battlePointsEarned);

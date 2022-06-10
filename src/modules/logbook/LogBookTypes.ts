@@ -40,4 +40,8 @@ export const LogBookTypes: Record<string, LogBookType> = {
         display: 'dark',
         label: 'OTHER',
     },
+    FRONTIER: {
+        display: 'success',
+        label: 'FRONTIER',
+    },
 };
