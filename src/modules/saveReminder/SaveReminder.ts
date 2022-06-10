@@ -28,15 +28,16 @@ export default class SaveReminder implements Saveable {
         let timeSinceSaveReminder = App.game.statistics.secondsPlayed() - Math.max(App.game.saveReminder.lastDownloaded(), App.game.saveReminder.lastReminder());
         // Adjust to measure against ms
         timeSinceSaveReminder *= 1000;
-
-        if (timeSinceSaveReminder >= +Settings.getSetting('saveReminder').value) {
+        const saveReminderInterval = +Settings.getSetting('saveReminder').value;
+        if (timeSinceSaveReminder >= saveReminderInterval) {
             // Show reminder notification
             Notifier.notify({
                 title: 'Save Reminder',
-                message: `It has been ${GameConstants.formatTimeShortWords(+Settings.getSetting('saveReminder').value)} since your last save download, Would you like to download a backup now?
+                message: `It has been ${GameConstants.formatTimeShortWords(saveReminderInterval)} since your last save download, Would you like to download a backup now?
 
                 <button class="btn btn-block btn-success" onclick="Save.download()" data-dismiss="toast">Download Save</button>`,
-                timeout: 3 * GameConstants.HOUR,
+                // Timeout either the reminder interval or 3 hours, whichever is lower
+                timeout: Math.min(saveReminderInterval, 3 * GameConstants.HOUR),
             });
             App.game.saveReminder.lastReminder(App.game.statistics.secondsPlayed());
         }
