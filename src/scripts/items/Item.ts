@@ -114,7 +114,7 @@ class Item {
             this.gain(n);
             this.increasePriceMultiplier(n);
             Notifier.notify({
-                message: `You bought ${n} ${GameConstants.humanifyString(this.displayName)}${multiple}`,
+                message: `You bought ${n.toLocaleString('en-US')} ${GameConstants.humanifyString(this.displayName)}${multiple}`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.item_bought,
             });

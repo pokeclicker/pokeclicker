@@ -32,9 +32,9 @@ export const LogBookTypes: Record<string, LogBookType> = {
         display: 'info',
         label: 'QUEST',
     },
-    BATTLE: {
-        display: 'dark',
-        label: 'BATTLE',
+    FRONTIER: {
+        display: 'success',
+        label: 'FRONTIER',
     },
     WANDER: {
         display: 'primary',
