@@ -62,7 +62,7 @@
       <span>Flutes</span>
     </div>
     <div id="fluteItemContainerBody" class="card-body p-0 show">
-      <p data-bind="visible: App.game.challenges.list.disableBattleItems.active() && App.game.badgeCase.hasBadge(BadgeEnums.Heat) || App.game.challenges.list.disableGems.active() && App.game.badgeCase.hasBadge(BadgeEnums.Heat)" class="bg-danger my-0">
+      <p data-bind="visible: (App.game.challenges.list.disableBattleItems.active() || App.game.challenges.list.disableGems.active()) && App.game.badgeCase.hasBadge(BadgeEnums.Heat)" class="bg-danger my-0">
           Flutes are disabled.
       </p>
       <!-- Flutes -->

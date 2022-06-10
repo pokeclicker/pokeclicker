@@ -73,8 +73,14 @@ class GymRunner {
         const currentFluteBonus = FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute);
         if (currentFluteBonus != this.timeBonus()) {
             if (currentFluteBonus > this.timeBonus()) {
-                this.timeBonus(currentFluteBonus);
-                this.timeLeft(this.timeLeft() * this.timeBonus());
+                if (this.timeBonus() = 1) {
+                    this.timeBonus(currentFluteBonus);
+                    this.timeLeft(this.timeLeft() * this.timeBonus());
+                } else {
+                    this.timeLeft(this.timeLeft() / this.timeBonus());
+                    this.timeBonus(currentFluteBonus);
+                    this.timeLeft(this.timeLeft() * this.timeBonus());
+                }
             } else {
                 this.timeLeft(this.timeLeft() / this.timeBonus());
                 this.timeBonus(currentFluteBonus);
