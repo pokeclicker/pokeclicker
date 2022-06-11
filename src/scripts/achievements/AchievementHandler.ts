@@ -274,10 +274,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Masterball 2', 'Purchase 10 Masterballs', new PokeballRequirement(10, GameConstants.Pokeball.Masterball), 0.30);
         AchievementHandler.addAchievement('Masterball 3', 'Purchase 100 Masterballs', new PokeballRequirement(100, GameConstants.Pokeball.Masterball), 0.40);
 
-        AchievementHandler.addAchievement('A Few Clicks In', 'Click 10 Times', new ClickRequirement(10, 1), 0.02, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
-        AchievementHandler.addAchievement('Clicking Pro', 'Click 100 Times', new ClickRequirement(100, 1), 0.05, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
-        AchievementHandler.addAchievement('Ultra Clicker', 'Click 1,000 Times', new ClickRequirement(1000, 1), 0.10, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
-        AchievementHandler.addAchievement('Need a new mouse yet?', 'Click 10,000 Times', new ClickRequirement(10000, 1), 0.25, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('A Few Clicks In', 'Click 10 times', new ClickRequirement(10, 1), 0.02, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Clicking Pro', 'Click 100 times', new ClickRequirement(100, 1), 0.05, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Ultra Clicker', 'Click 1,000 times', new ClickRequirement(1000, 1), 0.10, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Need a new mouse yet?', 'Click 10,000 times', new ClickRequirement(10000, 1), 0.25, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
 
         AchievementHandler.addAchievement('My new dirty hobby', 'Unlock 3 Plots in the Farm', new FarmPlotsUnlockedRequirement(3), 0.05);
         AchievementHandler.addAchievement('Allotment gardener', 'Unlock 9 Plots in the Farm', new FarmPlotsUnlockedRequirement(9), 0.15);

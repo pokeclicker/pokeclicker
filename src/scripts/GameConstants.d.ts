@@ -272,18 +272,18 @@ namespace GameConstants {
         'Lucky_incense' = '',
     }
     declare enum FluteItemType {
+        'Yellow_Flute' = '',
+        'Time_Flute' = '',
+        'Black_Flute' = '',
         'Red_Flute' = '',
         'White_Flute' = '',
-        'Black_Flute' = '',
-        'Yellow_Flute' = '',
         'Blue_Flute' = '',
-        'Poke_Flute' = '',
-        'Azure_Flute' = '',
-        'Eon_Flute' = '',
-        'Sun_Flute' = '',
-        'Moon_Flute' = '',
-        'Time_Flute' = '',
-        'Grass_Flute' = '',
+        //'Poke_Flute' = '',
+        //'Azure_Flute' = '',
+        //'Eon_Flute' = '',
+        //'Sun_Flute' = '',
+        //'Moon_Flute' = '',
+        //'Grass_Flute' = '',
     }
     declare enum PokemonItemType {
         'Eevee',
@@ -388,4 +388,13 @@ namespace GameConstants {
     declare const RegionalStarters: number[][];
     declare const TemporaryBattles: string[];
     declare function getTemporaryBattlesIndex(temporaryBattle: string): number;
+    declare enum DayOfWeek {
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+    }
 }
