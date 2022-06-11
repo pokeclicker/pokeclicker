@@ -4,6 +4,7 @@
 class TemporaryBattleRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.TEMP_BATTLE_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
+    public static timeBonus: KnockoutObservable<number> = ko.observable(1);
 
     public static battleObservable: KnockoutObservable<TemporaryBattle> = ko.observable();
     public static running: KnockoutObservable<boolean> = ko.observable(false);
@@ -14,7 +15,8 @@ class TemporaryBattleRunner {
         this.running(false);
         this.battleObservable(battle);
         App.game.gameState = GameConstants.GameState.idle;
-        this.timeLeft(GameConstants.TEMP_BATTLE_TIME);
+        DungeonRunner.timeBonus(FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
+        this.timeLeft(GameConstants.TEMP_BATTLE_TIME * this.timeBonus());
         this.timeLeftPercentage(100);
 
         TemporaryBattleBattle.battle = battle;
@@ -52,7 +54,24 @@ class TemporaryBattleRunner {
             this.battleLost();
         }
         this.timeLeft(this.timeLeft() - GameConstants.TEMP_BATTLE_TICK);
-        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.TEMP_BATTLE_TIME * 100));
+        this.timeLeftPercentage(Math.floor(this.timeLeft() / (GameConstants.TEMP_BATTLE_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
+
+        const currentFluteBonus = FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute);
+        if (currentFluteBonus != this.timeBonus()) {
+            if (currentFluteBonus > this.timeBonus()) {
+                if (this.timeBonus() === 1) {
+                    this.timeBonus(currentFluteBonus);
+                    this.timeLeft(this.timeLeft() * this.timeBonus());
+                } else {
+                    this.timeLeft(this.timeLeft() / this.timeBonus());
+                    this.timeBonus(currentFluteBonus);
+                    this.timeLeft(this.timeLeft() * this.timeBonus());
+                }
+            } else {
+                this.timeLeft(this.timeLeft() / this.timeBonus());
+                this.timeBonus(currentFluteBonus);
+            }
+        }
     }
 
     public static battleLost() {
