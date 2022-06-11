@@ -59,7 +59,7 @@ class TemporaryBattleRunner {
         const currentFluteBonus = FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute);
         if (currentFluteBonus != this.timeBonus()) {
             if (currentFluteBonus > this.timeBonus()) {
-                if (this.timeBonus() > 1) {
+                if (this.timeBonus() === 1) {
                     this.timeBonus(currentFluteBonus);
                     this.timeLeft(this.timeLeft() * this.timeBonus());
                 } else {
