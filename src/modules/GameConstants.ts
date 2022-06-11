@@ -557,7 +557,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.sinnoh]: new Set(['Old Chateau', 'Maylene', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Liberty Garden', 'Dreamyard', 'Skyla', 'Drayden']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
-        [Region.alola]: new Set(['Trainers\' School', 'Ruins of Conflict', 'Ruins of Life', 'Thrifty Megamart', 'Ruins of Abundance', 'Ruins of Hope']),
+        [Region.alola]: new Set(['Trainers\' School', 'Ruins of Conflict', 'Ruins of Life', 'Thrifty Megamart', 'Po Town', 'Ruins of Abundance', 'Ruins of Hope']),
         [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side']),
     },
 
