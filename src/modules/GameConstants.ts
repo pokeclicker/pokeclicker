@@ -573,13 +573,13 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     DefaultGym: {
-        [Region.kanto]: new Set('Lance','Blue'),
+        [Region.kanto]: new Set('Lance', 'Blue'),
         [Region.johto]: new Set('Karen', 'Lance2'),
         [Region.hoenn]: new Set('Drake'),
         [Region.sinnoh]: new Set('Bertha', 'Flint', 'Cynthia'),
         [Region.unova]: new Set('Marshal', 'Caitlin', 'Iris'),
         [Region.kalos]: new Set('Malva', 'Wikstrom', 'Drasna', 'Diantha'),
-        [Region.alola]: new Set('Molayne','Olivia', 'Kahili', 'Hau'),
+        [Region.alola]: new Set('Molayne', 'Olivia', 'Kahili', 'Hau'),
         [Region.galar]: new Set(),
     },
 };
