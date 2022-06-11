@@ -722,6 +722,15 @@ class Update implements Saveable {
             saveData.statistics.gymsDefeated.splice(88, 1);
             saveData.badgeCase.splice(88, 1);
         },
+
+        '0.9.6': ({ playerData, saveData }) => {
+            // Set our last save reminder/download to our current in game time
+            // This way we won't get a reminder notification for at least 12 hours
+            saveData.saveReminder = {
+                lastReminder: saveData.statistics.secondsPlayed,
+                lastDownloaded: saveData.statistics.secondsPlayed,
+            };
+        },
     };
 
     constructor() {
