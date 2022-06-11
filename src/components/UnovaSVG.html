@@ -753,21 +753,6 @@
         })
     %>
 
-    <!--Plasma Frigate-->
-    <%- include('templates/mapDungeon',
-        { name: "Plasma Frigate"
-        , x: 96, y: 18
-        , width: 4, height: 3
-        })
-    %>
-    <!--Plasma Frigate extension-->
-    <%- include('templates/mapDungeon',
-        { name: "Plasma Frigate"
-        , x: 95, y: 19
-        , width: 1, height: 1
-        })
-    %>
-
     <!-- ------------------ -->
     <!-- PLACES OF INTEREST -->
     <!-- ------------------ -->
@@ -843,6 +828,89 @@
         , databind: "click:function(){MapHelper.moveToTown('Aspertia City')}, attr:{ class: MapHelper.calculateTownCssClass('Aspertia City') }"
         , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
         , image: "assets/images/map/blimp_pikachu.png"
+        })
+    %>
+
+    <!--Plasma Frigate 1, Castelia City-->
+    <%- include('templates/mapOverlay',
+        { name: "A very normal frigate"
+        , x: 39, y: 52
+        , width: 4, height: 9
+        , databind: `attr: { class: App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Virbank City')]() >= 1 },
+                click: () => {
+                    Notifier.notify({message: 'Nothing out of the ordinary.'});
+                }`
+        , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Virbank City')]() >= 1 && App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Driftveil City')]() == 0"
+        , image: "assets/images/map/plasmafrigate_ship.png"
+        })
+    %>
+
+    <!--Plasma Frigate 2, Driftveil City-->
+    <%- include('templates/mapOverlay',
+        { name: "A totally unsuspicious frigate"
+        , x: 36, y: 35
+        , width: 4, height: 9
+        , databind: `attr: { class: App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Driftveil City')]() >= 1 },
+                click: () => {
+                    Notifier.notify({message: 'Nope, nothing suspicious here.'});
+                }`
+        , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Driftveil City')]() >= 1 && App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]() == 0"
+        , image: "assets/images/map/plasmafrigate_ship.png"
+        })
+    %>
+
+    <!--Plasma Frigate 3, Team Plasma Assault dungeon 1-->
+    <%- include('templates/mapOverlay',
+        { name: "Team Plasma Assault"
+        , x: 47, y: 5
+        , width: 9, height: 6.5
+        , databind: "click:function(){MapHelper.moveToTown('Team Plasma Assault')}, attr:{ class: MapHelper.calculateTownCssClass('Team Plasma Assault') }"
+        , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Plasma Assault')]() == 0"
+        , image: "assets/images/map/plasmafrigate_airship.png"
+        })
+    %>
+
+    <!--Plasma Frigate 4, Team Plasma Assault dungeon 2-->
+    <%- include('templates/mapOverlay',
+        { name: "Team Plasma Assault"
+        , x: 47, y: 5
+        , width: 9, height: 6.5
+        , databind: "click:function(){MapHelper.moveToTown('Team Plasma Assault')}, attr:{ class: MapHelper.calculateTownCssClass('Team Plasma Assault') }"
+        , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]() >= 1"
+        , image: "assets/images/map/plasmafrigate_airship.png"
+        })
+    %>
+
+    <!--Plasma Frigate 5, Plasma Frigate dungeon 1-->
+    <%- include('templates/mapOverlay',
+        { name: "Plasma Frigate"
+        , x: 95, y: 16
+        , width: 4, height: 9
+        , databind: "click:function(){MapHelper.moveToTown('Plasma Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('Plasma Frigate') }"
+        , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Plasma Assault')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() == 0"
+        , image: "assets/images/map/plasmafrigate_ship.png"
+        })
+    %>
+
+    <!--Plasma Frigate 6, Plasma Frigate dungeon 2-->
+    <%- include('templates/mapOverlay',
+        { name: "Plasma Frigate"
+        , x: 95, y: 16
+        , width: 4, height: 9
+        , databind: "click:function(){MapHelper.moveToTown('Plasma Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('Plasma Frigate') }"
+        , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]() >= 1"
+        , image: "assets/images/map/plasmafrigate_ship.png"
+        })
+    %>
+
+    <!--Plasma Frigate 7, Giant Chasm-->
+    <%- include('templates/mapOverlay',
+        { name: "Giant Chasm"
+        , x: 77, y: 0.5
+        , width: 9, height: 6.5
+        , databind: "click:function(){MapHelper.moveToTown('Giant Chasm')}, attr:{ class: MapHelper.calculateTownCssClass('Giant Chasm') }"
+        , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]() == 0"
+        , image: "assets/images/map/plasmafrigate_airship.png"
         })
     %>
 
