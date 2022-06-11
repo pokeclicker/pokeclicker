@@ -26,6 +26,8 @@ import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
 import SettingOption from './settings/SettingOption';
+import BreedingFilters from './settings/BreedingFilters';
+import ProteinFilters from './settings/ProteinFilters';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
 import SeededRand from './utilities/SeededRand';
@@ -33,6 +35,7 @@ import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
 import Settings from './settings/index';
 import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
+import { AchievementSortOptionConfigs, AchievementSortOptions } from './achievements/AchievementSortOptions';
 import NotificationConstants from './notifications/NotificationConstants';
 import Notifier from './notifications/Notifier';
 import LogBook from './logbook/LogBook';
@@ -109,6 +112,9 @@ import Achievement from './achievements/Achievement';
 import Gems from './gems/Gems';
 import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequirement';
 import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompletedRequirement';
+import TemporaryBattleRequirement from './requirements/TemporaryBattleRequirement';
+import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
+import SaveReminder from './saveReminder/SaveReminder';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -144,8 +150,12 @@ Object.assign(<any>window, {
     Settings,
     NotificationConstants,
     Notifier,
+    ProteinFilters,
+    BreedingFilters,
     SortOptionConfigs,
     SortOptions,
+    AchievementSortOptionConfigs,
+    AchievementSortOptions,
     LogBook,
     LogBookTypes,
     ChangelogItems,
@@ -224,4 +234,7 @@ Object.assign(<any>window, {
     Gems,
     QuestLineCompletedRequirement,
     QuestLineStepCompletedRequirement,
+    TemporaryBattleRequirement,
+    DayOfWeekRequirement,
+    SaveReminder,
 });

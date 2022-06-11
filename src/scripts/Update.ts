@@ -166,32 +166,6 @@ class Update implements Saveable {
             }, {});
             saveData.statistics.routeKills = result;
 
-            // Migrate the achievements so we don't spam players with notifications
-            const renamedAchievements = Object.entries(playerData.achievementsCompleted)
-                .map(([name, isCompleted]) => {
-                    const matchRoute = name.match(/^Route (\d+) (?:traveler|explorer|conqueror)/);
-                    // If the name doesn't match a route, return the old key-value pair
-                    if (matchRoute === null) {
-                        return [name, isCompleted];
-                    }
-                    const routeNumber = matchRoute ? Number(matchRoute[1]) : null;
-                    if (Number.isNaN(routeNumber)) {
-                        console.trace('[Update] Could not map region into achievement name:', name);
-                        return [name, isCompleted];
-                    }
-                    // Look up the region for the route, and rename the achievement
-                    const [region] = Object.entries(regionRoutes).find(([, check]) => (
-                        // Find the region that contains this index
-                        check[0] <= routeNumber && routeNumber <= check[1]
-                    )) || ['none'];
-                    if (region === 'none') {
-                        console.trace('[Update] Could not map region into achievement name:', name);
-                        return [name, isCompleted];
-                    }
-                    return [`${GameConstants.camelCaseToString(region)} ${name}`, isCompleted];
-                });
-            playerData.achievementsCompleted = Object.fromEntries(renamedAchievements);
-
             // Refund any shards spent on shard upgrades that have no effect
             // Using magic number incase any of these values change in the future
             const invalidUpgrades = {
@@ -441,16 +415,6 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 72);
             // Add Plasma Frigate
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 74);
-
-            // Update achievement names
-            Update.updateAchievementName(playerData, 'These pokémon must be sick', 'These Pokémon must be sick');
-            Update.updateAchievementName(playerData, 'The earth is like unions', 'The earth is like onions');
-        },
-
-        '0.8.2': ({ playerData, saveData }) => {
-            // Update achievement names
-            Update.updateAchievementName(playerData, 'Doomsday Bunker stocked with Pokeballs!', 'Doomsday Bunker stocked with Pokéballs!');
-            Update.updateAchievementName(playerData, 'Prepared for anything!', 'Professor Oak is the best!');
         },
 
         '0.8.3': ({ playerData, saveData }) => {
@@ -725,6 +689,48 @@ class Update implements Saveable {
             // Add Sendoff Spring
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
         },
+
+        '0.9.4': ({ playerData, saveData }) => {
+            // Modifications relating to smaller save file sizes
+            const PartyKeyMap = {
+                'attackBonusPercent': 0,
+                'attackBonusAmount': 1,
+                'proteinsUsed': 2,
+                'exp': 3,
+                'breeding': 4,
+                'shiny': 5,
+                'category': 6,
+                'levelEvolutionTriggered': 7,
+            };
+            Object.entries(PartyKeyMap).forEach(([oldKey, newKey]) => {
+                saveData.party.caughtPokemon.forEach(p => {
+                    p[newKey] = p[oldKey];
+                    delete p[oldKey];
+                });
+            });
+            saveData.farming.mutations = saveData.farming.mutations.map(m => m.hintsSeen || m.hintSeen);
+
+            // Change Ultra Wormhole to a Temporary Battle
+            saveData.statistics.temporaryBattleDefeated = new Array<number>();
+            saveData.statistics.temporaryBattleDefeated[0] = saveData.statistics.gymsDefeated[84];
+            // Remove the Elite_Nihilego Gym, now a temporary battle instead of a gym
+            saveData.statistics.gymsDefeated.splice(84, 1);
+            saveData.badgeCase.splice(84, 1);
+            // Change Ultra Megalopolis to a Temporary Battle
+            saveData.statistics.temporaryBattleDefeated[1] = saveData.statistics.gymsDefeated[88];
+            // Remove the Elite_ULtraNecrozma Gym, now a temporary battle instead of a gym
+            saveData.statistics.gymsDefeated.splice(88, 1);
+            saveData.badgeCase.splice(88, 1);
+        },
+
+        '0.9.6': ({ playerData, saveData }) => {
+            // Set our last save reminder/download to our current in game time
+            // This way we won't get a reminder notification for at least 12 hours
+            saveData.saveReminder = {
+                lastReminder: saveData.statistics.secondsPlayed,
+                lastDownloaded: saveData.statistics.secondsPlayed,
+            };
+        },
     };
 
     constructor() {
@@ -933,14 +939,6 @@ class Update implements Saveable {
         const end = arr.splice(to);
         arr = [...arr, ...temp, ...end];
         return arr;
-    }
-
-    static updateAchievementName = (playerData, oldName, newName) => {
-        const val = playerData.achievementsCompleted[oldName];
-        if (val != undefined) {
-            playerData.achievementsCompleted[newName] = val;
-            delete playerData.achievementsCompleted[oldName];
-        }
     }
 
     static addPokemonToSaveData = (saveData, pokemonId) => {

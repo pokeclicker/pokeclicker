@@ -9,5 +9,7 @@ class BerryMasterShop extends Shop {
         ShopHandler.showShop(this);
         $('#berryMasterModal').modal('show');
     }
+
+    public amountInput = () => $('#berryMasterModal').find('input[name="amountOfItems"]');
 }
 

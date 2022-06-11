@@ -5,7 +5,7 @@ class EvolutionStone extends CaughtIndicatingItem {
     public unlockedRegion: GameConstants.Region;
 
     constructor(type: GameConstants.StoneType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, displayName: string, unlockedRegion?: GameConstants.Region) {
-        super(GameConstants.StoneType[type], basePrice, currency, undefined, displayName, undefined, 'evolution');
+        super(GameConstants.StoneType[type], basePrice, currency, undefined, displayName, 'An evolution item. See your Item Bag for more information.', 'evolution');
         this.type = type;
         this.unlockedRegion = unlockedRegion;
     }
