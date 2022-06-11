@@ -883,7 +883,7 @@
         <!--Delta Route 118-->
         <%- include('templates/mapRoute',
             { route: 118, region: 5
-            , width: 6, height: 3
+            , width: 7, height: 3
             , x: 36, y: 24
             })
         %>
@@ -892,7 +892,7 @@
         <%- include('templates/mapRoute',
             { route: 119, region: 5
             , width: 20, height: 3
-            , x: 39, y: 4
+            , x: 40, y: 4
             , rotate: true
             })
         %>
@@ -901,7 +901,7 @@
         <%- include('templates/mapRoute',
             { route: 120, region: 5
             , width: 13, height: 3
-            , x: 46, y: 4
+            , x: 47, y: 4
             , rotate: true
             })
         %>
@@ -909,8 +909,8 @@
         <!--Delta Route 121-->
         <%- include('templates/mapRoute',
             { route: 121, region: 5
-            , width: 16, height: 3
-            , x: 49, y: 14
+            , width: 15, height: 3
+            , x: 50, y: 14
             })
         %>
 
@@ -944,8 +944,8 @@
         <!--Delta Route 123-->
         <%- include('templates/mapRoute',
             { route: 123, region: 5
-            , width: 21, height: 3
-            , x: 42, y: 24
+            , width: 20, height: 3
+            , x: 43, y: 24
         })
         %>
 
@@ -1264,10 +1264,18 @@
             })
         %>
 
+        <!--Delta Weather Institute-->
+        <%- include('templates/mapTown',
+            { name: "Delta Weather Institute"
+            , x: 35, y: 5
+            , width: 5, height: 4
+            })
+        %>
+
         <!--Delta Fortree City-->
         <%- include('templates/mapTown',
             { name: "Delta Fortree City"
-            , x: 42, y: 3
+            , x: 43, y: 3
             })
         %>
 
@@ -1454,7 +1462,7 @@
 
         <%- include('templates/mapPOI',
         { name: "Farm"
-            , x: 45, y: 21
+            , x: 46, y: 21
             , width: 3, height: 3
             , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
             })

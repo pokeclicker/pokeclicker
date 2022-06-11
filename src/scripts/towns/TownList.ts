@@ -2479,6 +2479,14 @@ TownList['Delta Fallarbor Town'] = new Town(
         npcs: [DeltaFallarborGemMaster],
     }
 );
+TownList['Delta Weather Institute'] = new Town(
+    'Delta Weather Institute',
+    GameConstants.Region.kalos,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 119)],
+    }
+);
 TownList['Delta Fortree City'] = new Town(
     'Delta Fortree City',
     GameConstants.Region.kalos,
