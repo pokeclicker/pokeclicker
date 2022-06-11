@@ -14,6 +14,7 @@ import { PokemonNameType } from './pokemons/PokemonNameType';
 import PokemonCategories from './party/Category';
 import OakItems from './oakItems/OakItems';
 import OakItemLoadouts from './oakItems/OakItemLoadouts';
+import SaveReminder from './saveReminder/SaveReminder';
 
 // These types are only temporary while we are converting things to modules
 // As things are converted, we should import their types here for use,
@@ -45,7 +46,8 @@ type TmpGameType = {
     discord: any,
     achievementTracker: any,
     challenges: Challenges,
-    multiplier: Multiplier
+    multiplier: Multiplier,
+    saveReminder: SaveReminder,
 
     // There are functions we could mention too,
     // but they aren't mentioned in any modules (yet?)
