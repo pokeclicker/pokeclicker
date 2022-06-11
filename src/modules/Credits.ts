@@ -204,6 +204,9 @@ export const SpriteCredits: Credit[] = [
         name: 'NiCeDiCe',
         link: 'https://github.com/NiCeDiCe90',
         resources: [
+            'Blessing Blissey',
+            'Charity Chansey',
+            'Handout Happiny',
             'Red Spearow',
             'Weather Institute world sprite',
         ],
