@@ -54,7 +54,7 @@ class TemporaryBattleRunner {
             this.battleLost();
         }
         this.timeLeft(this.timeLeft() - GameConstants.TEMP_BATTLE_TICK);
-        this.timeLeftPercentage(Math.floor(this.timeLeft() / (GameConstants.GYM_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
+        this.timeLeftPercentage(Math.floor(this.timeLeft() / (GameConstants.TEMP_BATTLE_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
 
         const currentFluteBonus = FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute);
         if (currentFluteBonus != this.timeBonus()) {
