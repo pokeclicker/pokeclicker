@@ -70,7 +70,7 @@ class MapHelper {
     };
 
     public static getCurrentEnvironment(): GameConstants.Environment {
-        const area = player.route() || player.town()?.name || undefined;
+        const area = GymRunner.running() ? GymRunner.gymObservable().leaderName : player.route() || player.town()?.name || undefined;
 
         const [env] = Object.entries(GameConstants.Environments).find(
             ([, regions]) => regions[player.region]?.has(area)

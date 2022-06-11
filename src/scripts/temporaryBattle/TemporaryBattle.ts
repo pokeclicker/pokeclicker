@@ -36,4 +36,8 @@ class TemporaryBattle extends TownContent {
         }
         this.completeRequirements = completeRequirements;
     }
+
+    get imagePath(): string {
+        return `assets/images/temporaryBattle/${TemporaryBattle.name}.png`;
+    }
 }
