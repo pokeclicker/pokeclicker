@@ -5,6 +5,7 @@ class App {
 
     static readonly debug = false;
     static game: Game;
+    static isUsingClient = false;
 
     static start() {
         if (!App.debug) {

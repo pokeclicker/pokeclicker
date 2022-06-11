@@ -15,13 +15,14 @@
             </a>
         </div>
         <div class="save-container justify-content-center container row"></div>
-        
+
         <div class="new-import-buttons justify-content-center container row">
             <label class="btn btn-success col-md-4 col-xs-12 mx-1" onclick="Save.key = Rand.string(6); document.querySelector('#saveSelector').remove(); App.start();">New Save</label>
             <label for="import-save" class="btn btn-warning col-md-4 col-xs-12 mx-1" onclick="Save.key = Rand.string(6);">Import Save</label>
         </div>
+        <div id="use-our-client-message" style="color: #FF00FF; display: none;">Please try our client</div>
     </div>
-    
+
     <div class="dropdown-menu py-0" id="saveSelectorContextMenu">
         <a class="dropdown-item" href="#">Action</a>
         <a class="dropdown-item" href="#">Another action</a>
