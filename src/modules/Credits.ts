@@ -205,6 +205,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://github.com/NiCeDiCe90',
         resources: [
             'Blessing Blissey',
+            'Bulbasaur (Rose)',
             'Charity Chansey',
             'Handout Happiny',
             'Red Spearow',
