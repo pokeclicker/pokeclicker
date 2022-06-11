@@ -41,7 +41,8 @@ class Game {
         public achievementTracker: AchievementTracker,
         public challenges: Challenges,
         public battleFrontier: BattleFrontier,
-        public multiplier: Multiplier
+        public multiplier: Multiplier,
+        public saveReminder: SaveReminder
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
     }
@@ -419,6 +420,12 @@ class Game {
         GameHelper.counter += GameConstants.TICK_TIME;
         if (GameHelper.counter >= GameConstants.MINUTE) {
             GameHelper.tick();
+        }
+
+        // Check our save reminder once every 5 minutes
+        SaveReminder.counter += GameConstants.TICK_TIME;
+        if (SaveReminder.counter >= 5 * GameConstants.MINUTE) {
+            SaveReminder.tick();
         }
     }
 
