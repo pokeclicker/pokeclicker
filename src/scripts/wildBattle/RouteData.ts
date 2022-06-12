@@ -138,7 +138,7 @@ Routes.add(new RegionRoute(
         land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Farfetch\'d', 'Snorlax'],
         water: ['Slowpoke', 'Slowbro', 'Magikarp', 'Poliwag', 'Goldeen', 'Horsea', 'Seadra'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokemon Tower'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))]
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 13', GameConstants.Region.kanto, 13,
@@ -183,7 +183,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Rattata', 'Raticate', 'Spearow', 'Fearow', 'Doduo', 'Snorlax'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokemon Tower'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))]
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 17', GameConstants.Region.kanto, 17,
@@ -382,7 +382,7 @@ Routes.add(new RegionRoute(
     [
         new OneFromManyRequirement([
             new MultiRequirement([
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt Mortar')),
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Mortar')),
                 new GymBadgeRequirement(BadgeEnums.Fog),
             ]),
             new RouteKillRequirement(10, GameConstants.Region.johto, 42),
@@ -1514,7 +1514,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 6', GameConstants.Region.alola, 6,
     new RoutePokemon({
-        land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray', 'Oricorio (Pa\'u)'],
+        land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill'))],
     undefined,

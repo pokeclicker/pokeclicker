@@ -210,13 +210,11 @@ class MapHelper {
             return false;
         }
 
-        // Check if player doesn't require complete dex to move on to the next region and has access to next regions starter town
-        if (!App.game.challenges.list.requireCompletePokedex.active()) {
-            return TownList[GameConstants.StartingTowns[player.highestRegion() + 1]]?.isUnlocked() ?? false;
-        }
+        const challengeActive = App.game.challenges.list.requireCompletePokedex.active();
+        const nextStartingTownUnlocked = TownList[GameConstants.StartingTowns[player.highestRegion() + 1]]?.isUnlocked() ?? false;
+        const fullDex = AchievementHandler.findByName(`${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion()])} Master`).isCompleted();
 
-        // Check if all regional pokemon are obtained
-        return AchievementHandler.findByName(`${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion()])} Master`).isCompleted();
+        return nextStartingTownUnlocked && (fullDex || !challengeActive);
     }
 
     public static travelToNextRegion() {
@@ -234,7 +232,8 @@ class MapHelper {
             // Gather users attack when they moved regions
             LogEvent('attack measurement', 'new region',
                 GameConstants.Region[player.highestRegion()],
-                App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, false));
+                App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, WeatherType.Clear));
+            $('#pickStarterModal').modal('show');
         }
     }
 

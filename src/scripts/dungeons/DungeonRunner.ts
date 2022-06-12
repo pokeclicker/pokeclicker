@@ -5,6 +5,7 @@ class DungeonRunner {
     public static dungeon: Dungeon;
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.DUNGEON_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
+    public static timeBonus: KnockoutObservable<number> = ko.observable(1);
 
     public static fighting: KnockoutObservable<boolean> = ko.observable(false);
     public static map: DungeonMap;
@@ -32,8 +33,10 @@ class DungeonRunner {
         DungeonBattle.trainer(null);
         DungeonBattle.trainerPokemonIndex(0);
         DungeonBattle.enemyPokemon(null);
+        DungeonRunner.timeBonus(FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
+        DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME * this.timeBonus());
 
-        DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
+        DungeonRunner.timeLeftPercentage(100);
         // Dungeon size increases with each region
         let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + player.region;
         // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
@@ -60,8 +63,26 @@ class DungeonRunner {
                 this.dungeonLost();
             }
         }
-        this.timeLeft(this.timeLeft() - GameConstants.DUNGEON_TICK);
-        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.DUNGEON_TIME * 100));
+        if (this.map.playerMoved()) {
+            this.timeLeft(this.timeLeft() - GameConstants.DUNGEON_TICK);
+            this.timeLeftPercentage(Math.floor(this.timeLeft() / (GameConstants.DUNGEON_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
+        }
+        const currentFluteBonus = FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute);
+        if (currentFluteBonus != this.timeBonus()) {
+            if (currentFluteBonus > this.timeBonus()) {
+                if (this.timeBonus() === 1) {
+                    this.timeBonus(currentFluteBonus);
+                    this.timeLeft(this.timeLeft() * this.timeBonus());
+                } else {
+                    this.timeLeft(this.timeLeft() / this.timeBonus());
+                    this.timeBonus(currentFluteBonus);
+                    this.timeLeft(this.timeLeft() * this.timeBonus());
+                }
+            } else {
+                this.timeLeft(this.timeLeft() / this.timeBonus());
+                this.timeBonus(currentFluteBonus);
+            }
+        }
     }
 
     /**

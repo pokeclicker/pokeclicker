@@ -14,7 +14,7 @@ class StartSequenceRunner {
         AchievementHandler.load();
         App.game.quests.getQuestLine('Tutorial Quests').beginQuest(0);
         this.starterPicked = s;
-        $('#pickStarterModal').modal('hide');
+        $('#pickStarterTutorialModal').modal('hide');
         const dataPokemon = PokemonHelper.getPokemonByName(GameConstants.Starter[this.starterPicked]);
         const shiny: boolean = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
 
@@ -65,15 +65,15 @@ class StartSequenceRunner {
 
 document.addEventListener('DOMContentLoaded', () => {
     $('#startSequenceModal').on('hidden.bs.modal', () => {
-        $('#pickStarterModal').modal('show');
+        $('#pickStarterTutorialModal').modal('show');
     });
 
-    $('#pickStarterModal').on('hidden.bs.modal', () => {
+    $('#pickStarterTutorialModal').on('hidden.bs.modal', () => {
         if (StartSequenceRunner.starterPicked == GameConstants.Starter.None) {
             StartSequenceRunner.noStarterCount++;
             const startersCount = StartSequenceRunner.noStarterCount >= 5 ? 'four' : 'three';
-            $('#pickStarterModalText').text(`I can't hold off all ${startersCount}! Please pick the Pokémon you want to fight!`);
-            $('#pickStarterModal').modal('show');
+            $('#pickStarterTutorialModalText').text(`I can't hold off all ${startersCount}! Please pick the Pokémon you want to fight!`);
+            $('#pickStarterTutorialModal').modal('show');
             if (StartSequenceRunner.noStarterCount == 5) {
                 // Add Pikachu to the selections
                 $('#starterSelection').append(`<div class="col">

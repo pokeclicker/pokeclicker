@@ -10,7 +10,7 @@ class RouteHelper {
      * @param route
      * @param region
      * @param includeHeadbutt
-     * @returns {string[]} list of all Pokémons that can be caught
+     * @returns {string[]} list of all Pokémon that can be caught
      */
     public static getAvailablePokemonList(route: number, region: GameConstants.Region, includeHeadbutt = true): PokemonNameType[] {
         // If the route is somehow higher than allowed, use the first route to generateWildPokemon Pokémon
@@ -39,7 +39,7 @@ class RouteHelper {
     }
 
     /**
-     * Checks if all Pokémons on this route are caught by the player.
+     * Checks if all Pokémon on this route are caught by the player.
      * @param route
      * @param region
      * @param includeShiny

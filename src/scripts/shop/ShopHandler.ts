@@ -43,7 +43,7 @@ class ShopHandler {
         this.shopObservable().amountInput().val(newVal > 1 ? newVal : 1).change();
     }
 
-    public static maxAmount(n: number) {
+    public static maxAmount() {
         const item: Item = this.shopObservable().items[ShopHandler.selected()];
 
         if (!item || !item.isAvailable()) {
