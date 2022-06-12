@@ -5,7 +5,7 @@ class App {
 
     static readonly debug = false;
     static game: Game;
-    static isUsingClient = false;
+    static readonly isUsingClient = typeof navigator === 'object' && typeof navigator.userAgent === 'string' && navigator.userAgent.indexOf('Electron') >= 0;
 
     static start() {
         if (!App.debug) {
