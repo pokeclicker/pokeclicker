@@ -70,7 +70,7 @@ import RoutePokemon from './routes/RoutePokemon';
 import RegionRoute from './routes/RegionRoute';
 import Routes from './routes/Routes';
 import SubRegion from './subRegion/SubRegion';
-import SubRegions, { AlolaSubRegions } from './subRegion/SubRegions';
+import SubRegions, { AlolaSubRegions, GalarSubRegions } from './subRegion/SubRegions';
 import Requirement from './requirements/Requirement';
 import AchievementRequirement from './requirements/AchievementRequirement';
 import NullRequirement from './requirements/NullRequirement';
@@ -192,6 +192,7 @@ Object.assign(<any>window, {
     SubRegion,
     SubRegions,
     AlolaSubRegions,
+    GalarSubRegions,
     Requirement,
     AchievementRequirement,
     NullRequirement,
