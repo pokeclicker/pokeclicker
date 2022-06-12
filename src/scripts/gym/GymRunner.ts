@@ -4,8 +4,9 @@
 class GymRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
+    public static timeBonus: KnockoutObservable<number> = ko.observable(1);
 
-    public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList['Pewter City']);
+    public static gymObservable: KnockoutObservable<Gym> = ko.observable(GymList['Pewter City']);
     public static running: KnockoutObservable<boolean> = ko.observable(false);
     public static autoRestart: KnockoutObservable<boolean> = ko.observable(false);
     public static initialRun = true;
@@ -19,47 +20,39 @@ class GymRunner {
         this.autoRestart(autoRestart);
         this.running(false);
         this.gymObservable(gym);
-        if (Gym.isUnlocked(gym)) {
-            if (gym instanceof Champion) {
-                gym.setPokemon(player.starter());
-            }
-            App.game.gameState = GameConstants.GameState.idle;
-            GymRunner.timeLeft(GameConstants.GYM_TIME);
-            GymRunner.timeLeftPercentage(100);
-
-            GymBattle.gym = gym;
-            GymBattle.totalPokemons(gym.pokemons.length);
-            GymBattle.index(0);
-            GymBattle.generateNewEnemy();
-            App.game.gameState = GameConstants.GameState.gym;
-            this.running(true);
-            this.resetGif();
-
-            setTimeout(() => {
-                this.hideGif();
-            }, GameConstants.GYM_COUNTDOWN);
-
-        } else {
-            const reqsList = [];
-            gym.requirements?.forEach(requirement => {
-                if (!requirement.isCompleted()) {
-                    reqsList.push(requirement.hint());
-                }
-            });
-            Notifier.notify({
-                message: `You don't have access to ${gym.leaderName}s Gym yet.<br/>${reqsList.join('<br/>')}`,
-                type: NotificationConstants.NotificationOption.warning,
-            });
+        if (gym instanceof Champion) {
+            gym.setPokemon(player.regionStarters[player.region]());
         }
+        App.game.gameState = GameConstants.GameState.idle;
+        DungeonRunner.timeBonus(FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
+        GymRunner.timeLeft(GameConstants.GYM_TIME * this.timeBonus());
+        GymRunner.timeLeftPercentage(100);
+
+        GymBattle.gym = gym;
+        GymBattle.totalPokemons(gym.pokemons.length);
+        GymBattle.index(0);
+        GymBattle.generateNewEnemy();
+        App.game.gameState = GameConstants.GameState.gym;
+        this.running(true);
+        this.resetGif();
+
+        setTimeout(() => {
+            this.hideGif();
+        }, GameConstants.GYM_COUNTDOWN);
     }
 
     private static hideGif() {
-        $('#gymCountdown').hide();
+        $('#gymGoContainer').hide();
     }
 
     public static resetGif() {
+        // If the user doesn't want the animation, just return
+        if (!Settings.getSetting('showGymGoAnimation').value) {
+            return;
+        }
+
         if (!this.autoRestart() || this.initialRun) {
-            $('#gymCountdown').show();
+            $('#gymGoContainer').show();
             setTimeout(() => {
                 $('#gymGo').attr('src', 'assets/gifs/go.gif');
             }, 0);
@@ -73,8 +66,26 @@ class GymRunner {
         if (this.timeLeft() < 0) {
             GymRunner.gymLost();
         }
+
         this.timeLeft(this.timeLeft() - GameConstants.GYM_TICK);
-        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.GYM_TIME * 100));
+        this.timeLeftPercentage(Math.floor(this.timeLeft() / (GameConstants.GYM_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
+
+        const currentFluteBonus = FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute);
+        if (currentFluteBonus != this.timeBonus()) {
+            if (currentFluteBonus > this.timeBonus()) {
+                if (this.timeBonus() === 1) {
+                    this.timeBonus(currentFluteBonus);
+                    this.timeLeft(this.timeLeft() * this.timeBonus());
+                } else {
+                    this.timeLeft(this.timeLeft() / this.timeBonus());
+                    this.timeBonus(currentFluteBonus);
+                    this.timeLeft(this.timeLeft() * this.timeBonus());
+                }
+            } else {
+                this.timeLeft(this.timeLeft() / this.timeBonus());
+                this.timeBonus(currentFluteBonus);
+            }
+        }
     }
 
     public static gymLost() {
@@ -94,7 +105,7 @@ class GymRunner {
             Notifier.notify({
                 message: `Congratulations, you defeated ${GymBattle.gym.leaderName}!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.gym_won,
+                setting: NotificationConstants.NotificationSetting.General.gym_won,
             });
             // If this is the first time defeating this gym
             if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
@@ -116,7 +127,7 @@ class GymRunner {
             // Award money for defeating gym
             App.game.wallet.gainMoney(gym.moneyReward);
             // Send the player back to the town they were in
-            player.town(TownList[gym.town]);
+            player.town(gym.parent);
             App.game.gameState = GameConstants.GameState.town;
         }
     }
@@ -130,10 +141,10 @@ class GymRunner {
 document.addEventListener('DOMContentLoaded', () => {
     $('#receiveBadgeModal').on('hidden.bs.modal', () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Soul) {
-            KeyItemController.showGainModal(KeyItems.KeyItem.Safari_ticket);
+            KeyItemController.showGainModal(KeyItemType.Safari_ticket);
         }
         if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
-            KeyItemController.showGainModal(KeyItems.KeyItem.Shard_case);
+            KeyItemController.showGainModal(KeyItemType.Gem_case);
         }
     });
 });

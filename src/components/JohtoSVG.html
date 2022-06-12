@@ -1,5 +1,8 @@
 <g data-bind='visible: player.region == GameConstants.Region.johto'>
-    <image width="1600" height="960" xlink:href="assets/images/johto.png" href="assets/images/johto.png"></image>
+    <image width="1600" height="960" data-bind="attr: {
+        'xlink:href':'assets/images/johto.png?v=$VERSION',
+        href:'assets/images/johto.png?v=$VERSION'
+    }"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -429,8 +432,16 @@
     <!--Indigo Plateau 2.0-->
     <%- include('templates/mapTown',
         { name: "Indigo Plateau Johto"
-        , x: 89, y: 3
-        , width: 11, height: 8
+        , x: 90, y: 4
+        , width: 9, height: 5.5
+        })
+     %>
+
+    <!--Indigo Plateau 2.0 Extension-->
+    <%- include('templates/mapTown',
+        { name: "Indigo Plateau Johto"
+        , x: 93, y: 9.5
+        , width: 3, height: 9.5
         })
      %>
 
@@ -523,15 +534,15 @@
         })
      %>
 
-    <!--Mt Mortar-->
+    <!--Mt. Mortar-->
     <%- include('templates/mapDungeon',
-        { name: "Mt Mortar"
+        { name: "Mt. Mortar"
         , x: 48, y: 8
         })
      %>
-     <!--Mt Mortar Extension-->
+     <!--Mt. Mortar Extension-->
      <%- include('templates/mapDungeon',
-         { name: "Mt Mortar"
+         { name: "Mt. Mortar"
          , x: 52, y: 6
          , width: 2, height: 4
          })
@@ -595,16 +606,16 @@
         })
      %>
 
-    <!--Mt Silver-->
+    <!--Mt. Silver-->
     <%- include('templates/mapDungeon',
-        { name: "Mt Silver"
+        { name: "Mt. Silver"
         , x: 74, y: 31
         , width: 7, height: 5
         })
      %>
-     <!--Mt Silver Extension-->
+     <!--Mt. Silver Extension-->
      <%- include('templates/mapDungeon',
-         { name: "Mt Silver"
+         { name: "Mt. Silver"
          , x: 78, y: 36
          , width: 1, height: 1
          })
@@ -642,11 +653,31 @@
      %>
 
      <%- include('templates/mapPOI',
-        { name: "Pokemon Day Care"
+        { name: "Pokémon Day Care"
         , x: 28, y: 38
         , width: 4, height: 4
         , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Professor Elm's Blimp"
+         , x: 74, y: 45
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('New Bark Town')}, attr:{ class: MapHelper.calculateTownCssClass('New Bark Town') }"
+         , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+         , image: "assets/images/map/blimp_empty.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Professor Elm's Blimp"
+         , x: 74, y: 45
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('New Bark Town')}, attr:{ class: MapHelper.calculateTownCssClass('New Bark Town') }"
+         , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+         , image: "assets/images/map/blimp_pikachu.png"
+         })
      %>
 
 </g>

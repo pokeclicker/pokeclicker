@@ -4,7 +4,7 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
    <div class="modal-content">
        <div class="modal-header">
            <div style="width: 100%;">
-               <img src=""
+               <img src="" onerror="this.src='assets/images/trainers/Mysterious Trainer.png'"
                     data-bind="attr:{ src: 'assets/images/gymLeaders/' + GymRunner.gymObservable().leaderName + '.png'}">
                <h5 class="modal-title" id="receiveBadgeModalLabel"
                    data-bind="text: GymRunner.gymObservable().leaderName.replace(/\d/g,'')">Modal title</h5>
@@ -14,7 +14,7 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
        <div class="modal-body">
            <p data-bind="text: GymRunner.gymObservable().defeatMessage"></p>
            <!-- ko if: !BadgeEnums[GymRunner.gymObservable().badgeReward].startsWith('Elite') -->
-           <img src="" width="56px" data-bind="attr:{ src: 'assets/images/badges/' + BadgeEnums[GymRunner.gymObservable().badgeReward] + '.png'}">
+           <img src="" width="56px" data-bind="attr:{ src: 'assets/images/badges/' + BadgeEnums[GymRunner.gymObservable().badgeReward] + '.png'}" onerror="this.src='assets/images/badges/Unknown.png'">
            <!-- /ko -->
 
        </div>

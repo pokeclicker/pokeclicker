@@ -1,539 +1,544 @@
 <g data-bind='visible: player.region == GameConstants.Region.galar'>
-    <image width="1600" height="960" xlink:href="assets/images/galar.png" href="assets/images/galar.png"></image>
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Galar').id">
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/galar.png?v=$VERSION',
+            href:'assets/images/galar.png?v=$VERSION'
+        }"></image>
 
-    <!-- ------ -->
-    <!-- ROUTES -->
-    <!-- ------ -->
+        <!-- ------ -->
+        <!-- ROUTES -->
+        <!-- ------ -->
 
-    <!--Route 1-->
-    <%- include('templates/mapRoute',
-        { route: 1, region: 7
-        , width: 4, height: 2
-        , x: 45, y: 54
-        , rotate: true
-        , textY: 19
-        })
-    %>
+        <!--Route 1-->
+        <%- include('templates/mapRoute',
+            { route: 1, region: 7
+            , width: 4, height: 2
+            , x: 45, y: 54
+            , rotate: true
+            , textY: 19
+            })
+        %>
 
-    <!--Route 2-->
-    <%- include('templates/mapRoute',
-        { route: 2, region: 7
-        , width: 3, height: 2
-        , x: 48, y: 52
-        })
-    %>
-    <!--extra Route 2-->
-    <%- include('templates/mapRoute',
-        { route: 2, region: 7
-        , width: 1, height: 2
-        , x: 49, y: 51
-        , rotate: true
-        , noText: true
-        })
-    %>
+        <!--Route 2-->
+        <%- include('templates/mapRoute',
+            { route: 2, region: 7
+            , width: 3, height: 2
+            , x: 48, y: 52
+            })
+        %>
+        <!--extra Route 2-->
+        <%- include('templates/mapRoute',
+            { route: 2, region: 7
+            , width: 1, height: 2
+            , x: 49, y: 51
+            , rotate: true
+            , noText: true
+            })
+        %>
 
-    <!--Rolling Fields-->
-    <%- include('templates/mapRoute',
-        { route: 3, region: 7
-        , width: 5, height: 2
-        , x: 45, y: 45, name: "R.F."
-        , rotate: true
-        , textY: 19
-        , textX: 5
-        })
-    %>
+        <!--Rolling Fields-->
+        <%- include('templates/mapRoute',
+            { route: 3, region: 7
+            , width: 5, height: 2
+            , x: 45, y: 45, name: "R.F."
+            , rotate: true
+            , textY: 19
+            , textX: 5
+            })
+        %>
 
-    <!--Dappled Grove-->
-    <%- include('templates/mapRoute',
-        { route: 4, region: 7
-        , width: 6, height: 2
-        , x: 39, y: 47, name: "D.G."
-        })
-    %>
-    <!--DG Extras-->
-    <%- include('templates/mapRoute',
-        { route: 4, region: 7
-        , width: 4, height: 2
-        , x: 39, y: 43
-        , rotate: true
-        , noText: true
-        })
-    %>
+        <!--Dappled Grove-->
+        <%- include('templates/mapRoute',
+            { route: 4, region: 7
+            , width: 6, height: 2
+            , x: 39, y: 47, name: "D.G."
+            })
+        %>
+        <!--DG Extras-->
+        <%- include('templates/mapRoute',
+            { route: 4, region: 7
+            , width: 4, height: 2
+            , x: 39, y: 43
+            , rotate: true
+            , noText: true
+            })
+        %>
 
-    <!--West Lake Axwell-->
-    <%- include('templates/mapRoute',
-        { route: 5, region: 7
-        , width: 5, height: 2
-        , x: 43, y: 42, name: "W.L.A."
-        , rotate: true
-        , textY: 19
-        , textX: -10
-        })
-    %>
-    <!--WLA Extra-->
-    <%- include('templates/mapRoute',
-        { route: 5, region: 7
-        , width: 4, height: 2
-        , x: 42, y: 40, name: "W.L.A"
-        , noText: true
-        })
-    %>
+        <!--West Lake Axwell-->
+        <%- include('templates/mapRoute',
+            { route: 5, region: 7
+            , width: 5, height: 2
+            , x: 43, y: 42, name: "W.L.A."
+            , rotate: true
+            , textY: 19
+            , textX: -10
+            })
+        %>
+        <!--WLA Extra-->
+        <%- include('templates/mapRoute',
+            { route: 5, region: 7
+            , width: 4, height: 2
+            , x: 42, y: 40, name: "W.L.A"
+            , noText: true
+            })
+        %>
 
-    <!--East Lake Axwell-->
-    <%- include('templates/mapRoute',
-        { route: 6, region: 7
-        , width: 8, height: 2
-        , x: 46, y: 40, name: "E.L.A"
-        })
-    %>
-    <!--ELA Extras-->
-    <%- include('templates/mapRoute',
-        { route: 6, region: 7
-        , width: 1, height: 2
-        , x: 49, y: 39, name: "E.L.A"
-        , noText: true
-        , rotate: true
-        })
-    %>
+        <!--East Lake Axwell-->
+        <%- include('templates/mapRoute',
+            { route: 6, region: 7
+            , width: 8, height: 2
+            , x: 46, y: 40, name: "E.L.A"
+            })
+        %>
+        <!--ELA Extras-->
+        <%- include('templates/mapRoute',
+            { route: 6, region: 7
+            , width: 1, height: 2
+            , x: 49, y: 39, name: "E.L.A"
+            , noText: true
+            , rotate: true
+            })
+        %>
 
-    <!--North Lake Miloch-->
-    <%- include('templates/mapRoute',
-        { route: 9, region: 7
-        , width: 7, height: 2
-        , x: 54, y: 40, name: "N.L.M."
-        , rotate: true
-        , textY: 19
-        , textX: 3
-        })
-    %>
+        <!--North Lake Miloch-->
+        <%- include('templates/mapRoute',
+            { route: 9, region: 7
+            , width: 7, height: 2
+            , x: 54, y: 40, name: "N.L.M."
+            , rotate: true
+            , textY: 19
+            , textX: 3
+            })
+        %>
 
-    <!--South Lake Miloch-->
-    <%- include('templates/mapRoute',
-        { route: 8, region: 7
-        , width: 7, height: 2
-        , x: 47, y: 45, name: "S.L.M."
-        })
-    %>
-     <!--SLM Extras-->
-    <%- include('templates/mapRoute',
-        { route: 8, region: 7
-        , width: 3, height: 2
-        , x: 49, y: 42, name: "S.L.M"
-        , noText: true
-        , rotate: true
-        })
-    %>
+        <!--South Lake Miloch-->
+        <%- include('templates/mapRoute',
+            { route: 8, region: 7
+            , width: 7, height: 2
+            , x: 47, y: 45, name: "S.L.M."
+            })
+        %>
+        <!--SLM Extras-->
+        <%- include('templates/mapRoute',
+            { route: 8, region: 7
+            , width: 3, height: 2
+            , x: 49, y: 42, name: "S.L.M"
+            , noText: true
+            , rotate: true
+            })
+        %>
 
-    <!--Giant's Seat-->
-    <%- include('templates/mapRoute',
-        { route: 7, region: 7
-        , width: 9, height: 2
-        , x: 47, y: 47, name: "G.S"
-        })
-    %>
+        <!--Giant's Seat-->
+        <%- include('templates/mapRoute',
+            { route: 7, region: 7
+            , width: 9, height: 2
+            , x: 47, y: 47, name: "G.S"
+            })
+        %>
 
-    <!--Route 3-->
-    <%- include('templates/mapRoute',
-        { route: 10, region: 7
-        , width: 6, height: 2
-        , x: 39, y: 36, name: "3"
-        })
-    %>
+        <!--Route 3-->
+        <%- include('templates/mapRoute',
+            { route: 10, region: 7
+            , width: 6, height: 2
+            , x: 39, y: 36, name: "3"
+            })
+        %>
 
-    <!--Route 4-->
-    <%- include('templates/mapRoute',
-        { route: 11, region: 7
-        , width: 3, height: 2
-        , x: 35, y: 32, name: "4"
-        , rotate: true
-        , textY: 19
-        })
-    %>
+        <!--Route 4-->
+        <%- include('templates/mapRoute',
+            { route: 11, region: 7
+            , width: 3, height: 2
+            , x: 35, y: 32, name: "4"
+            , rotate: true
+            , textY: 19
+            })
+        %>
 
-    <!--Route 5-->
-    <%- include('templates/mapRoute',
-        { route: 12, region: 7
-        , width: 20, height: 2
-        , x: 38, y: 30, name: "5"
-        })
-    %>
-    <!--Extra bits of Route 5-->
-    <%- include('templates/mapRoute',
-        { route: 12, region: 7
-        , width: 1, height: 1
-        , x: 57, y: 32
-        , noText: true
-        })
-    %>
+        <!--Route 5-->
+        <%- include('templates/mapRoute',
+            { route: 12, region: 7
+            , width: 20, height: 2
+            , x: 38, y: 30, name: "5"
+            })
+        %>
+        <!--Extra bits of Route 5-->
+        <%- include('templates/mapRoute',
+            { route: 12, region: 7
+            , width: 1, height: 1
+            , x: 57, y: 32
+            , noText: true
+            })
+        %>
 
-    <!--Motostoke Outskirts-->
-    <%- include('templates/mapRoute',
-        { route: 13, region: 7
-        , width: 5, height: 2
-        , x: 54, y: 36, name: "M.S."
-        })
-    %>
+        <!--Motostoke Outskirts-->
+        <%- include('templates/mapRoute',
+            { route: 13, region: 7
+            , width: 5, height: 2
+            , x: 54, y: 36, name: "M.S."
+            })
+        %>
 
-    <!--Hammerlocke Hills-->
-    <%- include('templates/mapRoute',
-        { route: 14, region: 7
-        , width: 3, height: 1.75
-        , x: 47, y: 33, name: "H.H."
-        })
-     %>
-     <!--HH extras-->
-    <%- include('templates/mapRoute',
-        { route: 14, region: 7
-        , width: 1, height: 1
-        , x: 49, y: 32, name: "H.H."
-        , noText: true
-        })
-     %>
-     <!--HH extras-->
-    <%- include('templates/mapRoute',
-        { route: 1146, region: 7
-        , width: 1, height: 2
-        , x: 49, y: 29, name: "H.H."
-        , noText: true
-        , rotate: true
-        })
-     %>
+        <!--Hammerlocke Hills-->
+        <%- include('templates/mapRoute',
+            { route: 14, region: 7
+            , width: 3, height: 1.75
+            , x: 47, y: 33, name: "H.H."
+            })
+        %>
+        <!--HH extras-->
+        <%- include('templates/mapRoute',
+            { route: 14, region: 7
+            , width: 1, height: 1
+            , x: 49, y: 32, name: "H.H."
+            , noText: true
+            })
+        %>
+        <!--HH extras-->
+        <%- include('templates/mapRoute',
+            { route: 1146, region: 7
+            , width: 1, height: 2
+            , x: 49, y: 29, name: "H.H."
+            , noText: true
+            , rotate: true
+            })
+        %>
 
-    <!--Route 6-->
-    <%- include('templates/mapRoute',
-        { route: 15, region: 7
-        , width: 4, height: 1
-        , x: 45, y: 25
-        , rotate: true
-        , noText: true
-        })
-    %>
-    <!--Extra bit of Route 6-->
-    <%- include('templates/mapRoute',
-        { route: 15, region: 7
-        , width: 5, height: 2
-        , x: 42, y: 23, name: "6"
-        })
-    %>
-    <!--Extra bit of Route 6-->
-    <%- include('templates/mapRoute',
-        { route: 15, region: 7
-        , width: 3, height: 2
-        , x: 42, y: 20
-        , noText: true
-        , rotate: true
-        })
-    %>
-    <!--Extra bit of Route 6-->
-    <%- include('templates/mapRoute',
-        { route: 15, region: 7
-        , width: 2, height: 2
-        , x: 40, y: 20
-        , noText: true
-        })
-    %>
+        <!--Route 6-->
+        <%- include('templates/mapRoute',
+            { route: 15, region: 7
+            , width: 4, height: 1
+            , x: 45, y: 25
+            , rotate: true
+            , noText: true
+            })
+        %>
+        <!--Extra bit of Route 6-->
+        <%- include('templates/mapRoute',
+            { route: 15, region: 7
+            , width: 5, height: 2
+            , x: 42, y: 23, name: "6"
+            })
+        %>
+        <!--Extra bit of Route 6-->
+        <%- include('templates/mapRoute',
+            { route: 15, region: 7
+            , width: 3, height: 2
+            , x: 42, y: 20
+            , noText: true
+            , rotate: true
+            })
+        %>
+        <!--Extra bit of Route 6-->
+        <%- include('templates/mapRoute',
+            { route: 15, region: 7
+            , width: 2, height: 2
+            , x: 40, y: 20
+            , noText: true
+            })
+        %>
 
-    <!--Route 7-->
-    <%- include('templates/mapRoute',
-        { route: 16, region: 7
-        , width: 5, height: 2
-        , x: 51, y: 27, name: "7"
-        })
-    %>
+        <!--Route 7-->
+        <%- include('templates/mapRoute',
+            { route: 16, region: 7
+            , width: 5, height: 2
+            , x: 51, y: 27, name: "7"
+            })
+        %>
 
-    <!--Route 8-->
-    <%- include('templates/mapRoute',
-        { route: 17, region: 7
-        , width: 6, height: 2
-        , x: 52, y: 21, name: "8"
-        , rotate: true
-        , textY: 19
-        })
-    %>
+        <!--Route 8-->
+        <%- include('templates/mapRoute',
+            { route: 17, region: 7
+            , width: 6, height: 2
+            , x: 52, y: 21, name: "8"
+            , rotate: true
+            , textY: 19
+            })
+        %>
 
-    <!--Steamdrift Way-->
-    <%- include('templates/mapRoute',
-        { route: 18, region: 7
-        , width: 4, height: 2
-        , x: 54, y: 19, name: "S.W."
-        , rotate: true
-        , textY: 19
-        })
-    %>
+        <!--Steamdrift Way-->
+        <%- include('templates/mapRoute',
+            { route: 18, region: 7
+            , width: 4, height: 2
+            , x: 54, y: 19, name: "S.W."
+            , rotate: true
+            , textY: 19
+            })
+        %>
 
-    <!--Route 2 Lakeside-->
-     <%- include('templates/mapRoute',
-        { route: 19, region: 7
-        , width: 3, height: 2
-        , x: 49, y: 49, name: "L.S."
-        , textX: 10
-        })
-    %>
-    <!--Route 2 LS extras-->
-    <%- include('templates/mapRoute',
-        { route: 19, region: 7
-        , width: 2, height: 2
-        , x: 51, y: 50
-        , noText: true
-        })
-    %>
+        <!--Route 2 Lakeside-->
+        <%- include('templates/mapRoute',
+            { route: 19, region: 7
+            , width: 3, height: 2
+            , x: 49, y: 49, name: "L.S."
+            , textX: 10
+            })
+        %>
+        <!--Route 2 LS extras-->
+        <%- include('templates/mapRoute',
+            { route: 19, region: 7
+            , width: 2, height: 2
+            , x: 51, y: 50
+            , noText: true
+            })
+        %>
 
-    <!--Route 9-->
-    <%- include('templates/mapRoute',
-        { route: 20, region: 7
-        , width: 3, height: 2
-        , x: 59, y: 19, name: "9"
-        , rotate: true
-        , textY: 19
-        })
-     %>
+        <!--Route 9-->
+        <%- include('templates/mapRoute',
+            { route: 20, region: 7
+            , width: 3, height: 2
+            , x: 59, y: 19, name: "9"
+            , rotate: true
+            , textY: 19
+            })
+        %>
 
-    <!--Circhester Bay-->
-    <%- include('templates/mapRoute',
-        { route: 21, region: 7
-        , width: 5, height: 2
-        , x: 59, y: 22, name: "C.B."
-        , rotate: true
-        , textY: 19
-        })
-     %>
+        <!--Circhester Bay-->
+        <%- include('templates/mapRoute',
+            { route: 21, region: 7
+            , width: 5, height: 2
+            , x: 59, y: 22, name: "C.B."
+            , rotate: true
+            , textY: 19
+            })
+        %>
 
-    <!--Outer Spikemuth-->
-    <%- include('templates/mapRoute',
-        { route: 22, region: 7
-        , width: 5, height: 2
-        , x: 56, y: 27, name: "O.S."
-        })
-    %>
+        <!--Outer Spikemuth-->
+        <%- include('templates/mapRoute',
+            { route: 22, region: 7
+            , width: 5, height: 2
+            , x: 56, y: 27, name: "O.S."
+            })
+        %>
 
-    <!--Route 10-->
-    <%- include('templates/mapRoute',
-        { route: 23, region: 7
-        , width: 4, height: 2
-        , x: 47, y: 15, name: "10 S."
-        , rotate: true
-        , textY: 19
-        })
-    %>
+        <!--Route 10-->
+        <%- include('templates/mapRoute',
+            { route: 23, region: 7
+            , width: 4, height: 2
+            , x: 47, y: 15, name: "10 S."
+            , rotate: true
+            , textY: 19
+            })
+        %>
 
-    <!--Route 10 North-->
-    <%- include('templates/mapRoute',
-        { route: 24, region: 7
-        , width: 7, height: 2
-        , x: 48, y: 8, name: "10 N."
-        , rotate: true
-        , textY: 19
-        })
-    %>
-    <!--Route 10 North extras-->
-    <%- include('templates/mapRoute',
-        { route: 24, region: 7
-        , width: 1, height: 2
-        , x: 47, y: 13, name: "10 N."
-        , noText: true
-        })
-    %>
+        <!--Route 10 North-->
+        <%- include('templates/mapRoute',
+            { route: 24, region: 7
+            , width: 7, height: 2
+            , x: 48, y: 8, name: "10 N."
+            , rotate: true
+            , textY: 19
+            })
+        %>
+        <!--Route 10 North extras-->
+        <%- include('templates/mapRoute',
+            { route: 24, region: 7
+            , width: 1, height: 2
+            , x: 47, y: 13, name: "10 N."
+            , noText: true
+            })
+        %>
 
-    <!-- ----- -->
-    <!-- TOWNS -->
-    <!-- ----- -->
+        <!-- ----- -->
+        <!-- TOWNS -->
+        <!-- ----- -->
 
-    <!--Postwick-->
-    <%- include('templates/mapTown',
-        { name: "Postwick"
-        , x: 40, y: 54.5
-        , width: 5, height: 4.5
-        , home: true
-        })
-    %>
+        <!--Postwick-->
+        <%- include('templates/mapTown',
+            { name: "Postwick"
+            , x: 40, y: 54.5
+            , width: 5, height: 4.5
+            , home: true
+            })
+        %>
 
-    <!--Wedgehurst-->
-    <%- include('templates/mapTown',
-        { name: "Wedgehurst"
-        , x: 44, y: 50
-        })
-    %>
+        <!--Wedgehurst-->
+        <%- include('templates/mapTown',
+            { name: "Wedgehurst"
+            , x: 44, y: 50
+            })
+        %>
 
-    <!--Motostoke-->
-    <%- include('templates/mapTown',
-        { name: "Motostoke"
-        , x: 45, y: 34.75
-        , width: 5, height: 4.25
-        })
-    %>
-    <!--Motostoke Extension-->
-    <%- include('templates/mapTown',
-        { name: "Motostoke"
-        , x: 50, y: 35
-        })
-    %>
+        <!--Motostoke-->
+        <%- include('templates/mapTown',
+            { name: "Motostoke"
+            , x: 45, y: 34.75
+            , width: 5, height: 4.25
+            })
+        %>
+        <!--Motostoke Extension-->
+        <%- include('templates/mapTown',
+            { name: "Motostoke"
+            , x: 50, y: 35
+            })
+        %>
 
-    <!--Turffield-->
-    <%- include('templates/mapTown',
-        { name: "Turffield"
-        , x: 34, y: 28
-        })
-    %>
+        <!--Turffield-->
+        <%- include('templates/mapTown',
+            { name: "Turffield"
+            , x: 34, y: 28
+            })
+        %>
 
-    <!--Hulbury-->
-    <%- include('templates/mapTown',
-        { name: "Hulbury"
-        , x: 58, y: 29
-        })
-    %>
+        <!--Hulbury-->
+        <%- include('templates/mapTown',
+            { name: "Hulbury"
+            , x: 58, y: 29
+            })
+        %>
 
-    <!--Hammerlocke-->
-    <%- include('templates/mapTown',
-        { name: "Hammerlocke"
-        , x: 46, y: 24.5
-        , width: 5, height: 4.5
-        })
-    %>
+        <!--Hammerlocke-->
+        <%- include('templates/mapTown',
+            { name: "Hammerlocke"
+            , x: 46, y: 24.5
+            , width: 5, height: 4.5
+            })
+        %>
 
-    <!--Stow-on-Side-->
-    <%- include('templates/mapTown',
-        { name: "Stow-on-Side"
-        , x: 36, y: 18
-        })
-    %>
+        <!--Stow-on-Side-->
+        <%- include('templates/mapTown',
+            { name: "Stow-on-Side"
+            , x: 36, y: 18
+            })
+        %>
 
-    <!--Ballonlea-->
-    <%- include('templates/mapTown',
-        { name: "Ballonlea"
-        , x: 35, y: 11
-        })
-    %>
+        <!--Ballonlea-->
+        <%- include('templates/mapTown',
+            { name: "Ballonlea"
+            , x: 35, y: 11
+            })
+        %>
 
-    <!--Circhester-->
-    <%- include('templates/mapTown',
-        { name: "Circhester"
-        , x: 54, y: 14.5
-        , width: 5, height: 4.5
-        })
-    %>
-    <!--Circhester extension-->
-    <%- include('templates/mapTown',
-        { name: "Circhester"
-        , x: 59, y: 15
-        })
-    %>
+        <!--Circhester-->
+        <%- include('templates/mapTown',
+            { name: "Circhester"
+            , x: 54, y: 14.5
+            , width: 5, height: 4.5
+            })
+        %>
+        <!--Circhester extension-->
+        <%- include('templates/mapTown',
+            { name: "Circhester"
+            , x: 59, y: 15
+            })
+        %>
 
-    <!--Spikemuth-->
-    <%- include('templates/mapTown',
-        { name: "Spikemuth"
-        , x: 61, y: 25
-        })
-    %>
+        <!--Spikemuth-->
+        <%- include('templates/mapTown',
+            { name: "Spikemuth"
+            , x: 61, y: 25
+            })
+        %>
 
-    <!--Wyndon-->
-    <%- include('templates/mapTown',
-        { name: "Wyndon"
-        , x: 44, y: 3.5
-        , width: 5, height: 4.5
-        })
-    %>
-    <!--Wyndon Extension-->
-    <%- include('templates/mapTown',
-        { name: "Wyndon"
-        , x: 49, y: 4
-        })
-    %>
+        <!--Wyndon-->
+        <%- include('templates/mapTown',
+            { name: "Wyndon"
+            , x: 44, y: 3.5
+            , width: 5, height: 4.5
+            })
+        %>
+        <!--Wyndon Extension-->
+        <%- include('templates/mapTown',
+            { name: "Wyndon"
+            , x: 49, y: 4
+            })
+        %>
 
-    <!--Wyndon Stadium-->
-    <%- include('templates/mapTown',
-        { name: "Wyndon Stadium"
-        , x: 53.5, y: 0.25
-        , width: 10, height: 7.5
-        })
-    %>
+        <!--Wyndon Stadium-->
+        <%- include('templates/mapTown',
+            { name: "Wyndon Stadium"
+            , x: 53.5, y: 0.25
+            , width: 10, height: 7.5
+            })
+        %>
 
 
-    <!-- -------- -->
-    <!-- DUNGEONS -->
-    <!-- -------- -->
+        <!-- -------- -->
+        <!-- DUNGEONS -->
+        <!-- -------- -->
 
-    <!--Slumbering Weald-->
-    <%- include('templates/mapDungeon',
-        { name: "Slumbering Weald"
-        , x: 36, y: 57
-        , width: 4, height: 3
-        })
-    %>
+        <!--Slumbering Weald-->
+        <%- include('templates/mapDungeon',
+            { name: "Slumbering Weald"
+            , x: 36, y: 57
+            , width: 4, height: 3
+            })
+        %>
 
-    <!--Inner Slumbering Weald-->
-    <%- include('templates/mapDungeon',
-        { name: "Inner Slumbering Weald"
-        , x: 36, y: 54
-        , width: 4, height: 3
-        })
-    %>
+        <!--Inner Slumbering Weald-->
+        <%- include('templates/mapDungeon',
+            { name: "Inner Slumbering Weald"
+            , x: 36, y: 54
+            , width: 4, height: 3
+            })
+        %>
 
-    <!--Watchtower Ruins-->
-    <%- include('templates/mapDungeon',
-        { name: "Watchtower Ruins"
-        , x: 38, y: 40
-        , width: 4, height: 3
-        })
-    %>
+        <!--Watchtower Ruins-->
+        <%- include('templates/mapDungeon',
+            { name: "Watchtower Ruins"
+            , x: 38, y: 40
+            , width: 4, height: 3
+            })
+        %>
 
-    <!--Galar Mine-->
-    <%- include('templates/mapDungeon',
-        { name: "Galar Mine"
-        , x: 35, y: 35
-        , width: 4, height: 3
-        })
-    %>
+        <!--Galar Mine-->
+        <%- include('templates/mapDungeon',
+            { name: "Galar Mine"
+            , x: 35, y: 35
+            , width: 4, height: 3
+            })
+        %>
 
-    <!--Galar Mine No. 2-->
-    <%- include('templates/mapDungeon',
-        { name: "Galar Mine No. 2"
-        , x: 55, y: 33
-        , width: 4, height: 3
-        })
-    %>
+        <!--Galar Mine No. 2-->
+        <%- include('templates/mapDungeon',
+            { name: "Galar Mine No. 2"
+            , x: 55, y: 33
+            , width: 4, height: 3
+            })
+        %>
 
-    <!--Dusty Bowl-->
-    <%- include('templates/mapDungeon',
-        { name: "Dusty Bowl"
-        , x: 50, y: 32
-        , width: 4, height: 3
-        })
-    %>
+        <!--Dusty Bowl-->
+        <%- include('templates/mapDungeon',
+            { name: "Dusty Bowl"
+            , x: 50, y: 32
+            , width: 4, height: 3
+            })
+        %>
 
-    <!--Lake of Outrage-->
-    <%- include('templates/mapDungeon',
-        { name: "Lake of Outrage"
-        , x: 43, y: 32
-        , width: 4, height: 3
-        })
-    %>
+        <!--Lake of Outrage-->
+        <%- include('templates/mapDungeon',
+            { name: "Lake of Outrage"
+            , x: 43, y: 32
+            , width: 4, height: 3
+            })
+        %>
 
-    <!--Glimwood Tangle-->
-    <%- include('templates/mapDungeon',
-        { name: "Glimwood Tangle"
-        , x: 36, y: 15
-        , width: 4, height: 3
-        })
-    %>
+        <!--Glimwood Tangle-->
+        <%- include('templates/mapDungeon',
+            { name: "Glimwood Tangle"
+            , x: 36, y: 15
+            , width: 4, height: 3
+            })
+        %>
 
-    <!--Rose Tower-->
-    <%- include('templates/mapDungeon',
-        { name: "Rose Tower"
-        , x: 50, y: 5
-        , moveToTown: "Wyndon"
-        , width: 1, height: 1
-        })
-    %>
+        <!--Rose Tower-->
+        <%- include('templates/mapDungeon',
+            { name: "Rose Tower"
+            , x: 50, y: 5
+            , moveToTown: "Wyndon"
+            , width: 1, height: 1
+            })
+        %>
 
-    <!-- ------------------ -->
-    <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
 
-    <!-- ------------------ -->
-    <%- include('templates/mapPOI',
-        { name: "Dock"
-        , x: 60, y: 33
-        , width: 2, height: 3
-        , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hulbury') }"
-        })
-     %>
+        <!-- ------------------ -->
+        <%- include('templates/mapPOI',
+            { name: "Dock"
+            , x: 60, y: 33
+            , width: 2, height: 3
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hulbury') }"
+            })
+        %>
+    </g>
 </g>

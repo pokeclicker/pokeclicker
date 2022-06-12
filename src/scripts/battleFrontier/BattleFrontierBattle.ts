@@ -34,7 +34,7 @@ class BattleFrontierBattle extends Battle {
     }
 
     /**
-     * Award the player with exp, shards and go to the next pokemon
+     * Award the player with exp, gems and go to the next pokemon
      */
     public static defeatPokemon() {
         // This needs to stay as none so the stage number isn't adjusted
@@ -66,10 +66,10 @@ class BattleFrontierBattle extends Battle {
         // Don't award money per pokemon defeated, award money at the end
         const money = 0;
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        // Give 1 extra shard per pokemon defeated after every 80 stages
-        const shards = Math.ceil(BattleFrontierRunner.stage() / 80);
+        // Give 1 extra gem per pokemon defeated after every 80 stages
+        const gems = Math.ceil(BattleFrontierRunner.stage() / 80);
 
-        const enemyPokemon = new BattlePokemon(enemy.name, enemy.id, enemy.type[0], enemy.type[1], health, level, 0, enemy.exp, new Amount(money, GameConstants.Currency.money), shiny, shards);
+        const enemyPokemon = new BattlePokemon(enemy.name, enemy.id, enemy.type[0], enemy.type[1], health, level, 0, enemy.exp, new Amount(money, GameConstants.Currency.money), shiny, gems);
         this.enemyPokemon(enemyPokemon);
     }
 }

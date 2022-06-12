@@ -35,10 +35,14 @@ class Preload {
     public static hideSplashScreen(fast = false) {
         $('#game').removeClass('loading');
         if (fast) {
-            $('.loader').hide();
+            $('#loader').hide();
         } else {
-            $('.loader').fadeOut('slow');
+            $('#loader').fadeOut('slow');
         }
+        // Remove the splash screen
+        setTimeout(() => {
+            $('#loader').remove();
+        }, 1000);
     }
 
     public static load(skipWait = false): Promise<void> {
@@ -47,8 +51,8 @@ class Preload {
             return new Promise(resolve => {
                 //If you want to skip waiting, resolve immediately
                 resolve();
-                Preload.loadTowns();
-                Preload.loadUndergroundItems();
+                // Preload.loadTowns();
+                // Preload.loadUndergroundItems();
                 // Preload.loadMap();
                 // Preload.loadPokemon(),
                 Preload.hideSplashScreen(true);
@@ -62,13 +66,14 @@ class Preload {
                 }, GameConstants.MAX_LOAD_TIME);
 
                 Promise.all([
-                    Preload.loadTowns(),
-                    Preload.loadUndergroundItems(),
+                    // Preload.loadTowns(),
+                    // Preload.loadUndergroundItems(),
                     // Preload.loadMap(),
                     // Preload.loadPokemon(),
                     Preload.minimumTime(),
                 ]).then(() => {
                     clearTimeout(forceLoad);
+                    console.log(`[${GameConstants.formatDate(new Date())}] %cPreloaded images`, 'color:#2ecc71;font-weight:900;');
                     // Give the progress bar a little bit of time to finish the animation
                     setTimeout(() => {
                         resolve();
@@ -117,7 +122,7 @@ class Preload {
 
     private static loadPokemon() {
         const p = Array<Promise<void>>();
-        for (let i = 1; i <= GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION]; i++) {
+        for (let i = 1; i <= GameConstants.MaxIDPerRegion[GameConstants.MAX_AVAILABLE_REGION]; i++) {
             Preload.itemLoading(i);
             p.push(new Promise<void>(resolve => {
                 const img = new Image();

@@ -1,3 +1,4 @@
+///<reference path="../../../declarations/enums/EvolutionType.d.ts"/>
 abstract class Evolution {
     type: EvolutionType[];
 
@@ -27,6 +28,8 @@ abstract class Evolution {
             Notifier.notify({
                 message: `Your ${this.basePokemon} evolved into a ${evolvedPokemon}`,
                 type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+                setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
         }
 

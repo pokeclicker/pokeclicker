@@ -119,7 +119,7 @@ class DungeonBattle extends Battle {
         // Pokemon
         if (typeof enemy === 'string' || enemy.hasOwnProperty('pokemon')) {
             const pokemon = (typeof enemy === 'string') ? enemy : (<DetailedPokemon>enemy).pokemon;
-            const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon, DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeon.level);
+            const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon, DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeonLevel());
             this.enemyPokemon(enemyPokemon);
 
             GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[enemyPokemon.id]);
@@ -147,7 +147,7 @@ class DungeonBattle extends Battle {
         this.catching(false);
         this.counter = 0;
         const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon
-            , DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth * 2, DungeonRunner.dungeon.level);
+            , DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth * 2, DungeonRunner.dungeonLevel());
         this.enemyPokemon(enemyPokemon);
 
         GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[enemyPokemon.id]);
@@ -170,7 +170,7 @@ class DungeonBattle extends Battle {
 
         const pokemon = this.trainer().team[this.trainerPokemonIndex()];
         const baseHealth = DungeonRunner.fightingBoss() ? pokemon.maxHealth : DungeonRunner.dungeon.baseHealth;
-        const level = DungeonRunner.fightingBoss() ? pokemon.level : DungeonRunner.dungeon.level;
+        const level = DungeonRunner.fightingBoss() ? pokemon.level : DungeonRunner.dungeonLevel();
         const enemyPokemon = PokemonFactory.generateDungeonTrainerPokemon(pokemon, DungeonRunner.chestsOpened, baseHealth, level);
 
         this.enemyPokemon(enemyPokemon);

@@ -93,6 +93,12 @@
 	animation: flash linear 0.5s infinite;
 }
 
+.slow-flash{
+    color:#f2f;
+      -webkit-animation: flash linear 1s infinite;
+      animation: flash linear 1s infinite;
+  }
+
 img.pixelated {
   image-rendering: pixelated;
 }
@@ -368,8 +374,6 @@ img {
 .battle-view {
   min-height: 220px !important;
 
-  color: whitesmoke;
-
   background-image: url(../assets/images/battleBackground/default.png);
   background-size: cover;
   background-position: bottom;
@@ -529,7 +533,7 @@ td.tight {
 
 .introjs-fixParent.modal,
 .introjs-fixParent.modal-dialog {
-  position: absolute !important;  
+  position: absolute !important;
 }
 
 .bg-locked {
@@ -541,11 +545,20 @@ td.tight {
 .bg-incomplete {
   background-color: var(--incomplete);
 }
+.bg-questAtLocation {
+    background-color: var(--questAtLocation);
+  }
 .bg-uncaughtPokemon {
   background-color: var(--uncaughtPokemon);
 }
 .bg-uncaughtShinyPokemon {
   background-color: var(--uncaughtShinyPokemon);
+}
+.bg-uncaughtShinyPokemonAndMissingAchievement {
+    background-color: var(--uncaughtShinyPokemonAndMissingAchievement);
+  }
+.bg-missingAchievement {
+    background-color: var(--missingAchievement);
 }
 .bg-completed {
   background-color: var(--completed);
@@ -568,4 +581,11 @@ td.tight {
 }
 .text-completed {
   color: var(--completed);
+}
+
+.animated-currency {
+  pointer-events: none;
+  position: absolute;
+  opacity: 1;
+  z-index: 50;
 }

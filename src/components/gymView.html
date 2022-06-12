@@ -30,7 +30,7 @@
             </div>
         </h2>
 
-        <div id="gymCountdown">
+        <div id="gymGoContainer" data-bind="if: Settings.getSetting('showGymGoAnimation').observableValue">
           <div class="row" style="display: inline-block; vertical-align: middle;">
             <div class="col-sm-6 offset-sm-3">
               <img style="width:100%" id="gymGo" src="assets/gifs/go.gif">

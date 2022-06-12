@@ -10,6 +10,7 @@ class Update implements Saveable {
 
     updateSteps = {
         '0.4.0': ({ playerData, saveData }) => {
+            saveData.update = { version: '0.0.0' };
             // Update the save data as it is no longer a part of player data
             saveData.statistics = {
                 ...playerData.statistics || {},
@@ -165,32 +166,6 @@ class Update implements Saveable {
             }, {});
             saveData.statistics.routeKills = result;
 
-            // Migrate the achievements so we don't spam players with notifications
-            const renamedAchievements = Object.entries(playerData.achievementsCompleted)
-                .map(([name, isCompleted]) => {
-                    const matchRoute = name.match(/^Route (\d+) (?:traveler|explorer|conqueror)/);
-                    // If the name doesn't match a route, return the old key-value pair
-                    if (matchRoute === null) {
-                        return [name, isCompleted];
-                    }
-                    const routeNumber = matchRoute ? Number(matchRoute[1]) : null;
-                    if (Number.isNaN(routeNumber)) {
-                        console.trace('[Update] Could not map region into achievement name:', name);
-                        return [name, isCompleted];
-                    }
-                    // Look up the region for the route, and rename the achievement
-                    const [region] = Object.entries(regionRoutes).find(([, check]) => (
-                        // Find the region that contains this index
-                        check[0] <= routeNumber && routeNumber <= check[1]
-                    )) || ['none'];
-                    if (region === 'none') {
-                        console.trace('[Update] Could not map region into achievement name:', name);
-                        return [name, isCompleted];
-                    }
-                    return [`${GameConstants.camelCaseToString(region)} ${name}`, isCompleted];
-                });
-            playerData.achievementsCompleted = Object.fromEntries(renamedAchievements);
-
             // Refund any shards spent on shard upgrades that have no effect
             // Using magic number incase any of these values change in the future
             const invalidUpgrades = {
@@ -268,11 +243,11 @@ class Update implements Saveable {
             // Only update if save is from v0.6.0+
             if (this.minUpdateVersion('0.6.0', saveData)) {
                 if (saveData.oakItems.purchaseList) {
-                    if (saveData.oakItems.purchaseList[OakItems.OakItem.Squirtbottle]) {
-                        saveData.oakItems[OakItems.OakItem[OakItems.OakItem.Squirtbottle]]['purchased'] = true;
+                    if (saveData.oakItems.purchaseList[OakItemType.Squirtbottle]) {
+                        saveData.oakItems[OakItemType[OakItemType.Squirtbottle]]['purchased'] = true;
                     }
-                    if (saveData.oakItems.purchaseList[OakItems.OakItem.Sprinklotad]) {
-                        saveData.oakItems[OakItems.OakItem[OakItems.OakItem.Sprinklotad]]['purchased'] = true;
+                    if (saveData.oakItems.purchaseList[OakItemType.Sprinklotad]) {
+                        saveData.oakItems[OakItemType[OakItemType.Sprinklotad]]['purchased'] = true;
                     }
                 }
             }
@@ -330,7 +305,7 @@ class Update implements Saveable {
 
         '0.7.4': ({ playerData, saveData }) => {
             // Clear old quest data
-            delete saveData.quests.questList;
+            saveData.quests.questList = [];
 
             // Update starter selection
             playerData.starter = playerData._starter;
@@ -338,6 +313,8 @@ class Update implements Saveable {
             /*
              * Challenge Modes
              */
+            // Create empty challenges object
+            saveData.challenges = { list: {} };
             // Disable Click Attacks
             if (saveData.statistics.clickAttacks <= 100) {
                 Notifier.notify({
@@ -438,16 +415,6 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 72);
             // Add Plasma Frigate
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 74);
-
-            // Update achievement names
-            Update.updateAchievementName(playerData, 'These pokémon must be sick', 'These Pokémon must be sick');
-            Update.updateAchievementName(playerData, 'The earth is like unions', 'The earth is like onions');
-        },
-
-        '0.8.2': ({ playerData, saveData }) => {
-            // Update achievement names
-            Update.updateAchievementName(playerData, 'Doomsday Bunker stocked with Pokeballs!', 'Doomsday Bunker stocked with Pokéballs!');
-            Update.updateAchievementName(playerData, 'Prepared for anything!', 'Professor Oak is the best!');
         },
 
         '0.8.3': ({ playerData, saveData }) => {
@@ -530,7 +497,7 @@ class Update implements Saveable {
             };
 
             // Only run if save is from v0.8.7 (a forked version which is breaking stuff)
-            if (saveData.update.version == '0.8.7') {
+            if (saveData.update?.version == '0.8.7') {
                 // Check if the save has the Vivillon quest line, otherwise it's not from the main website
                 const questLines = saveData.quests?.questLines?.length || 0;
                 if (questLines < 4) {
@@ -545,7 +512,7 @@ class Update implements Saveable {
             }
         },
 
-        '0.8.12': async ({ playerData, saveData }) => {
+        '0.8.12': ({ playerData, saveData }) => {
             // Add Team Rockets Hideout
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 19);
             // Add Radio Tower
@@ -559,13 +526,210 @@ class Update implements Saveable {
                 saveData.quests.questLines.push({state: 1, name: 'Team Rocket Again', quest: 0});
             }
 
-            // Check if player wants to activate the new challenge modes
-            if (!await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be changed later)', confirm: 'enable', cancel: 'disable' })) {
-                App.game.challenges.list.regionalAttackDebuff.disable();
+            setTimeout(async () => {
+                // Check if player wants to activate the new challenge modes
+                if (!await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
+                    App.game.challenges.list.regionalAttackDebuff.disable();
+                }
+                if (!await Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
+                    App.game.challenges.list.requireCompletePokedex.disable();
+                }
+            }, GameConstants.SECOND);
+        },
+
+        '0.8.14': ({ playerData, saveData }) => {
+            // Start Aqua Magma questline if player has Dynamo Badge already
+            if (saveData.badgeCase[29]) {
+                saveData.quests.questLines.push({state: 1, name: 'Land vs Water', quest: 0});
             }
-            if (!await Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be changed later)', confirm: 'enable', cancel: 'disable' })) {
-                App.game.challenges.list.requireCompletePokedex.disable();
+
+            // Just incase statistics is not set
+            saveData.statistics = saveData.statistics || {};
+
+            // Rename from the old statistic name
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalBerriesObtained: saveData.statistics.totalBerriesHarvested || 0,
+                pokeballsObtained: saveData.statistics.pokeballsBought || 0,
+                berriesObtained:  saveData.statistics.berriesHarvested || 0,
+
+            };
+        },
+
+        '0.8.15': ({ playerData, saveData }) => {
+            // Start Plasma questline if player has Jet Badge already
+            if (saveData.badgeCase[58]) {
+                saveData.quests.questLines.push({state: 1, name: 'Quest for the DNA Splicers', quest: 0});
             }
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 2, 1); // Digletts Cave
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 5, 4); // Power Plant
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 31, 28); // Jagged Pass
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 29, 30); // Mt. Chimney
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 32, 34); // New Mauville
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 84, 64); // Pledge Grove
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 78, 79); // Abundant Shrine
+
+            // Shards -> Gems
+
+            //Questlist update
+            saveData.quests.questList = saveData.quests.questList?.map(q => {
+                if (q.name == 'GainShardsQuest') {
+                    q.name = 'GainGemsQuest';
+                }
+                return q;
+            }) || [];
+
+            //Setting gems = shards
+            saveData.gems = {
+                gemWallet: saveData.shards.shardWallet || [],
+                gemCollapsed: saveData.shards.shardCollapsed || [],
+                gemUpgrades: saveData.shards.shardUpgrades || [],
+            };
+
+            delete saveData.keyItems['Shard_case'];
+
+            // Swapping Shard Case for Gem Case
+            if (saveData.badgeCase[8]) {
+                saveData.keyItems['Gem_case'] = true;
+            }
+
+            // Just incase statistics is not set
+            saveData.statistics = saveData.statistics || {};
+
+            // Rename from the old statistic name
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalGemsGained: saveData.statistics.totalShardsGained || 0,
+                gemsGained: saveData.statistics.shardsGained || 0,
+            };
+
+            // Challenge update
+            saveData.challenges.list.disableGems = saveData.challenges?.list?.disableShards ?? false;
+        },
+
+        '0.9.0': ({ playerData, saveData }) => {
+            // Migrate event negative ID's to decimals of base form
+            const eventIDs = [
+                [-1, 25.08],
+                [-2, 25.09],
+                [-3, 150.1],
+                [-4, 143.1],
+                [-5, 175.1],
+                [-6, 1.2],
+                [-7, 25.1],
+                [-8, 25.11],
+                [-9, 133.1],
+                [-10, 1.1],
+                [-11, 2.1],
+                [-12, 3.1],
+                [-13, 4.1],
+                [-14, 5.1],
+                [-15, 6.1],
+                [-16, 7.1],
+                [-17, 8.1],
+                [-18, 9.1],
+            ];
+
+            eventIDs.forEach(([oldID, newID]) => {
+                const pokemon = saveData.party.caughtPokemon.find(p => p.id === oldID);
+                // If player hasn't caught this mon yet, return.
+                if (pokemon == undefined) {
+                    return;
+                }
+                // Update our ID
+                pokemon.id = newID;
+                if (!saveData.statistics.pokemonHatched) {
+                    saveData.statistics.pokemonHatched = {};
+                }
+                if (!saveData.statistics.shinyPokemonHatched) {
+                    saveData.statistics.shinyPokemonHatched = {};
+                }
+                // Update our statistics
+                saveData.statistics.pokemonEncountered[newID] = saveData.statistics.pokemonEncountered[oldID] || 0;
+                saveData.statistics.pokemonDefeated[newID] = saveData.statistics.pokemonDefeated[oldID] || 0;
+                saveData.statistics.pokemonCaptured[newID] = saveData.statistics.pokemonCaptured[oldID] || 0;
+                saveData.statistics.pokemonHatched[newID] = saveData.statistics.pokemonHatched[oldID] || 0;
+                saveData.statistics.shinyPokemonEncountered[newID] = saveData.statistics.shinyPokemonEncountered[oldID] || 0;
+                saveData.statistics.shinyPokemonDefeated[newID] = saveData.statistics.shinyPokemonDefeated[oldID] || 0;
+                saveData.statistics.shinyPokemonCaptured[newID] = saveData.statistics.shinyPokemonCaptured[oldID] || 0;
+                saveData.statistics.shinyPokemonHatched[newID] = saveData.statistics.shinyPokemonHatched[oldID] || 0;
+                // Delete our old statistics
+                delete saveData.statistics.pokemonEncountered[oldID];
+                delete saveData.statistics.pokemonDefeated[oldID];
+                delete saveData.statistics.pokemonCaptured[oldID];
+                delete saveData.statistics.pokemonHatched[oldID];
+                delete saveData.statistics.shinyPokemonEncountered[oldID];
+                delete saveData.statistics.shinyPokemonDefeated[oldID];
+                delete saveData.statistics.shinyPokemonCaptured[oldID];
+                delete saveData.statistics.shinyPokemonHatched[oldID];
+            });
+
+            playerData.mineInventory = playerData.mineInventory?.map(i => {
+                i.sellLocked = false;
+                return i;
+            }) || [];
+
+            // Start Galactic questline if player has Coal Badge already
+            if (saveData.badgeCase[40]) {
+                saveData.quests.questLines.push({state: 1, name: 'A new world', quest: 0});
+            }
+
+            // Clear Valley Windworks Clears
+            saveData.statistics.dungeonsCleared[44] = 0;
+            // Add Team Galactic Eterna Building
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 47);
+            // Move Lake Verity
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 53, 52);
+            // Move Lake Valor
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 52, 54);
+            // Add Team Galactic HQ
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 56);
+            // Move Spear Pillar
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 57, 59);
+            // Add Sendoff Spring
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
+        },
+
+        '0.9.4': ({ playerData, saveData }) => {
+            // Modifications relating to smaller save file sizes
+            const PartyKeyMap = {
+                'attackBonusPercent': 0,
+                'attackBonusAmount': 1,
+                'proteinsUsed': 2,
+                'exp': 3,
+                'breeding': 4,
+                'shiny': 5,
+                'category': 6,
+                'levelEvolutionTriggered': 7,
+            };
+            Object.entries(PartyKeyMap).forEach(([oldKey, newKey]) => {
+                saveData.party.caughtPokemon.forEach(p => {
+                    p[newKey] = p[oldKey];
+                    delete p[oldKey];
+                });
+            });
+            saveData.farming.mutations = saveData.farming.mutations.map(m => m.hintsSeen || m.hintSeen);
+
+            // Change Ultra Wormhole to a Temporary Battle
+            saveData.statistics.temporaryBattleDefeated = new Array<number>();
+            saveData.statistics.temporaryBattleDefeated[0] = saveData.statistics.gymsDefeated[84];
+            // Remove the Elite_Nihilego Gym, now a temporary battle instead of a gym
+            saveData.statistics.gymsDefeated.splice(84, 1);
+            saveData.badgeCase.splice(84, 1);
+            // Change Ultra Megalopolis to a Temporary Battle
+            saveData.statistics.temporaryBattleDefeated[1] = saveData.statistics.gymsDefeated[88];
+            // Remove the Elite_ULtraNecrozma Gym, now a temporary battle instead of a gym
+            saveData.statistics.gymsDefeated.splice(88, 1);
+            saveData.badgeCase.splice(88, 1);
+        },
+
+        '0.9.6': ({ playerData, saveData }) => {
+            // Set our last save reminder/download to our current in game time
+            // This way we won't get a reminder notification for at least 12 hours
+            saveData.saveReminder = {
+                lastReminder: saveData.statistics.secondsPlayed,
+                lastDownloaded: saveData.statistics.secondsPlayed,
+            };
         },
     };
 
@@ -593,7 +757,7 @@ class Update implements Saveable {
                             clearInterval(checkForNewVersionInterval);
                             Notifier.notify({
                                 title: `[UPDATE] v${result.version}`,
-                                message: 'A newer version of the game is available:<br/><br/><a class="btn btn-warning btn-block" href="#" onclick="location.reload(true);">Reload Page</a>',
+                                message: 'A newer version of the game is available:\n\n<a class="btn btn-warning btn-block" href="#" onclick="location.reload(true);">Reload Page</a>',
                                 timeout: GameConstants.DAY,
                             });
                         }
@@ -607,7 +771,7 @@ class Update implements Saveable {
 
     // check if save version is newer or equal to version
     minUpdateVersion(version, saveData): boolean {
-        return !this.isOlderVersion(saveData.update.version, version);
+        return !this.isOlderVersion(saveData.update?.version, version);
     }
 
     // potentially newer version > check against version
@@ -652,7 +816,7 @@ class Update implements Saveable {
     }
 
     check() {
-        if (this.saveVersion === this.version || this.saveVersion === '0.0.0') {
+        if (this.saveVersion === this.version) {
             return;
         }
 
@@ -703,7 +867,7 @@ class Update implements Saveable {
                     console.error(`Caught error while applying update v${version}`, e, { beforeUpdate, updateData });
                     Notifier.notify({
                         title: `Failed to update to v${this.version}!`,
-                        message: `Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a> along with your save file.<br /><br />${backupButton.outerHTML}<br />${resetButton.outerHTML}`,
+                        message: `Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a> along with your save file.\n\n${backupButton.outerHTML}\n${resetButton.outerHTML}`,
                         type: NotificationConstants.NotificationOption.primary,
                         timeout: GameConstants.DAY,
                     });
@@ -738,7 +902,7 @@ class Update implements Saveable {
             this.automaticallyDownloadBackup(backupButton, settingsData);
             Notifier.notify({
                 title: `[v${this.version}] Game has been updated!`,
-                message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${backupButton.outerHTML}`,
+                message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!\n\n${backupButton.outerHTML}`,
                 type: NotificationConstants.NotificationOption.primary,
                 timeout: 6e4,
             });
@@ -746,7 +910,7 @@ class Update implements Saveable {
             console.error('Error trying to convert backup save', err);
             Notifier.notify({
                 title: `[v${this.version}] Game has been updated!`,
-                message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/><i>Failed to download old save, Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a>.</i>',
+                message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!\n\n<i>Failed to download old save, Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a>.</i>',
                 type: NotificationConstants.NotificationOption.primary,
                 timeout: 6e4,
             });
@@ -775,14 +939,6 @@ class Update implements Saveable {
         const end = arr.splice(to);
         arr = [...arr, ...temp, ...end];
         return arr;
-    }
-
-    static updateAchievementName = (playerData, oldName, newName) => {
-        const val = playerData.achievementsCompleted[oldName];
-        if (val != undefined) {
-            playerData.achievementsCompleted[newName] = val;
-            delete playerData.achievementsCompleted[oldName];
-        }
     }
 
     static addPokemonToSaveData = (saveData, pokemonId) => {

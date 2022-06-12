@@ -34,9 +34,12 @@ namespace GameConstants {
     declare const MAX_LOAD_TIME: number;
     declare const MUTATION_TICK: number;
     declare const WANDER_TICK: number;
+    declare const TEMP_BATTLE_TIME: number;
+    declare const TEMP_BATTLE_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
-    declare const TotalPokemonsPerRegion: number[];
+    declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
+    declare const FLUTE_TYPE_ATTACK_MULTIPLIER: number;
     declare const ROAMING_MIN_CHANCE: number;
     declare const ROAMING_MAX_CHANCE: number;
     declare const SHINY_CHANCE_BATTLE: number;
@@ -84,7 +87,6 @@ namespace GameConstants {
         'Captured',
         'Defeated',
         'Caught Pokemon',
-        'Caught Unique Pokemons By Region',
         'Shiny Pokemon',
         'Hatch',
         'Pokeball',
@@ -109,9 +111,12 @@ namespace GameConstants {
     declare const DUNGEON_BOSS_HELD_ITEM_MODIFIER: number;
     declare const HELD_ITEM_CHANCE: number;
     declare const HELD_UNDERGROUND_ITEM_CHANCE: number;
-    declare const DUNGEON_SHARDS: number;
-    declare const DUNGEON_BOSS_SHARDS: number;
-    declare const GYM_SHARDS: number;
+    declare const GEM_UPGRADE_COST: number;
+    declare const GEM_UPGRADE_STEP: number;
+    declare const MAX_GEM_UPGRADES: number;
+    declare const DUNGEON_GEMS: number;
+    declare const DUNGEON_BOSS_GEMS: number;
+    declare const GYM_GEMS: number;
     declare const SAFARI_BATTLE_CHANCE: number;
     declare const SAFARI_BASE_POKEBALL_COUNT: number;
     declare const LEGAL_WALK_BLOCKS: number[];
@@ -139,7 +144,8 @@ namespace GameConstants {
         safari,
         town,
         shop,
-        battleFrontier
+        battleFrontier,
+        temporaryBattle
     }
     declare enum Pokeball {
         'None',
@@ -152,6 +158,10 @@ namespace GameConstants {
         'Timerball',
         'Duskball',
         'Luxuryball',
+        'Diveball',
+        'Lureball',
+        'Nestball',
+        'Repeatball',
     }
     declare enum Currency {
         money,
@@ -159,18 +169,18 @@ namespace GameConstants {
         dungeonToken,
         diamond,
         farmPoint,
-        battlePoint
+        battlePoint,
     }
     declare enum TypeEffectiveness {
         Immune,
         NotVery,
-        Normal,
+        Neutral,
         Very
     }
     declare enum TypeEffectivenessValue {
         Immune,
         NotVery,
-        Normal,
+        Neutral,
         Very
     }
     declare function humanifyString(str: string): string;
@@ -179,6 +189,7 @@ namespace GameConstants {
     declare function formatTime(input: number | Date): string;
     declare function formatTimeFullLetters(input: number): string;
     declare function formatTimeShortWords(input: number): string;
+    declare function formatSecondsToTime(input: number): string;
     declare function formatNumber(input: number): string;
     declare enum Region {
         none,
@@ -190,8 +201,7 @@ namespace GameConstants {
         kalos,
         alola,
         galar,
-        armor,
-        crown
+        final,
     }
     declare function clipNumber(num: number, min: number, max: number): number;
     declare function expRandomElement<T>(array: T[], ratio: number): T;
@@ -259,7 +269,21 @@ namespace GameConstants {
         'Lucky_egg' = '',
         'Token_collector' = '',
         'Item_magnet' = '',
-        'Lucky_incense' = ''
+        'Lucky_incense' = '',
+    }
+    declare enum FluteItemType {
+        'Yellow_Flute' = '',
+        'Time_Flute' = '',
+        'Black_Flute' = '',
+        'Red_Flute' = '',
+        'White_Flute' = '',
+        'Blue_Flute' = '',
+        //'Poke_Flute' = '',
+        //'Azure_Flute' = '',
+        //'Eon_Flute' = '',
+        //'Sun_Flute' = '',
+        //'Moon_Flute' = '',
+        //'Grass_Flute' = '',
     }
     declare enum PokemonItemType {
         'Eevee',
@@ -312,16 +336,6 @@ namespace GameConstants {
         MediumRestore: number;
         LargeRestore: number;
     };
-    declare const KeyCodeToDirection: {
-        ArrowUp: string;
-        ArrowLeft: string;
-        ArrowDown: string;
-        ArrowRight: string;
-        KeyW: string;
-        KeyA: string;
-        KeyS: string;
-        KeyD: string;
-    };
     declare const FossilToPokemon: {
         'Helix Fossil': string;
         'Dome Fossil': string;
@@ -371,4 +385,16 @@ namespace GameConstants {
     declare const StartingTowns: string[];
     declare const StartingRoutes: number[];
     declare const DockTowns: string[];
+    declare const RegionalStarters: number[][];
+    declare const TemporaryBattles: string[];
+    declare function getTemporaryBattlesIndex(temporaryBattle: string): number;
+    declare enum DayOfWeek {
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+    }
 }

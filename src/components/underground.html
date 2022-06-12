@@ -38,7 +38,7 @@
                         <div class='progress'>
                             <div id='mineEnergyBar' class='progress-bar bg-warning' role='progressbar'
                                  aria-valuemin='0' aria-valuemax='100'
-                                 data-bind="style: { width: Math.floor(App.game.underground.energy/App.game.underground.getMaxEnergy()*100) + '%' }">
+                                 data-bind="style: { width: (Math.floor(App.game.underground.energy)/App.game.underground.getMaxEnergy()*100).toFixed(2) + '%' }">
                                 <span data-bind="text: 'Energy: ' + Math.floor(App.game.underground.energy) + ' / ' + App.game.underground.getMaxEnergy() + (Math.floor(App.game.underground.energy) < App.game.underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
                             </div>
                         </div>
@@ -84,6 +84,9 @@
                             <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player.mineInventory()}">
                             </tbody>
                         </table>
+                        <button type="button" class="btn btn-success btn-block" onclick="App.game.underground.openUndergroundSellAllModal()">
+                            <span>Sell all treasures</span>
+                        </button>
                     </div>
                     <div data-bind="ifnot:player.hasMineItems()">
                         You don't have any treasures yet...
@@ -125,10 +128,10 @@
                 </div>
                 <div id="help" class="tab-pane fade pl-5 pr-5">
                     <h4><u>Dig</u></h4>
-                    <p>In the underground you can mine for hidden treasures.</p>
+                    <p>In the Underground you can mine for hidden treasures.</p>
 
-                    <p>There are 3 main ways of breaking tiles:
-                    <br/>Chisel will mine two layers on a single tile.
+                    <p>There are three main ways of breaking tiles:
+                    <br/>Chisel will mine 2 layers on a single tile.
                     <br/>Hammer will mine 1 layer on all nine tiles of a 3x3 square.
                     <br/>Bomb will mine 2 layers of 10 random tiles.</p>
 
@@ -140,16 +143,16 @@
                     <br/>Every time you mine out all items in a level, you will recover one Skip.</p>
 
                     <h4><u>Treasures</u></h4>
-                    <p>Sell your treasures for shards or diamonds!</p>
+                    <p>Sell your treasures for gems or diamonds!</p>
                     <p>If you have found any fossils, you can hatch the Pokémon they contain from the Treasures tab, or from the Day Care.</p>
 
                     <h4><u>Upgrades</u></h4>
                     <p>You can use your diamonds to buy all kinds of upgrades that will help you explore the underground even further!</p>
-                    <p>Some upgrades will make the Underground harder and are less cost efficient.
+                    <p>Some upgrades will make the Underground harder and are less cost-efficient.
                     <br/>Avoid these until you have the other available upgrades!</p>
 
                     <h4><u>Daily deals</u></h4>
-                    <p>In the Daily deals tab you can trade your items.</p>
+                    <p>In the Daily deals tab you can trade your items. The trades available change each day at midnight.</p>
                 </div>
                 <div id="dailyDeals" class="tab-pane fade">
                     <div class="table-responsive" id="dailyDealsBody">
@@ -246,20 +249,75 @@
             <!-- /ko -->
             <td class='vertical-middle'>
                 <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
+                    <!-- ko ifnot: valueType == "Mine Egg" -->
+                    <label
+                    class="input-group-prepend btn btn-success active clickable m-0"
+                        data-bind="text: sellLocked() ? '🔒' : '🔓', attr: { for: 'sellLockedIndicatorOfItem' + id }"
+                    >🔓</label>
+                    <input
+                        class="hidden"
+                        type="checkbox"
+                        data-bind="checked: sellLocked(), attr: { id: 'sellLockedIndicatorOfItem' + id }, event: { change: function(){Underground.setSellLockOfMineItem(id, !sellLocked())} }"
+                    />
+                    <!-- /ko -->
                     <button class='btn btn-success btn-block'
                             data-bind="attr: { 'data-itemid': id },
-                            css: { disabled: amount() <= 0 || (valueType === 'Mine Egg' && !App.game.breeding.hasFreeEggSlot()) },
+                            css: { disabled: amount() <= 0 || sellLocked() || (valueType === 'Mine Egg' && !App.game.breeding.hasFreeEggSlot()) },
                                     text: valueType === 'Mine Egg' ? 'Breed' : 'Sell',
                                     click: function(){Underground.sellMineItem($element.dataset.itemid, sellAmount() || 1)}">
                     </button>
                     <!-- ko if: valueType !== 'Mine Egg' -->
-                    <button type="button" data-bind="text: sellAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" data-bind="text: sellAmount() + '&nbsp;', css: { disabled: sellLocked() }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
                         <button class="dropdown-item" type="button" data-bind="click: function(){sellAmount($data)}, text: $data"></button>
                     </div>
                     <!-- /ko -->
                 </div>
+            </td>
+        </tr>
+    </script>
+</div>
+
+<div aria-labelledby="mineSellAllTreasuresModalLabel" class="modal fade noselect mt-5" id="mineSellAllTreasuresModal" role="dialog"
+     style="cursor:default" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document" data-bind="let: { filteredMineInvetory: player.mineInventory().filter(t => t.amount() > 0 && t.valueType != 'Mine Egg') }">
+        <div class="modal-content">
+            <div class="modal-header d-block">
+                <h4 class="mb-0">
+                    Sell all selected treasures
+                </h4>
+                (<span data-bind="text: filteredMineInvetory.filter(t => !t.sellLocked()).length + ' of ' + filteredMineInvetory.length"></span>)
+            </div>
+            <div class="modal-body p-0">
+                <table class="table table-sm table-hover table-striped m-0">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Cumulative Value</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="template: { name: 'cumulativeValueListTemplate', foreach: Object.keys(Underground.getCumulativeValues()).sort() }">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn mr-auto btn-danger" data-bind="click: function(){Underground.sellAllMineItems()}">
+                    <span>Confirm sell</span>
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/html" id="cumulativeValueListTemplate">
+        <tr data-bind="let: { valueType: $data, cumulativeValue: Underground.getCumulativeValues()[$data].cumulativeValue, imgSrc: Underground.getCumulativeValues()[$data].imgSrc }">
+            <td>
+                <img width="20px'" data-bind="attr: { src: imgSrc }">
+            </td>
+            <td>
+                <span data-bind="text: cumulativeValue + ' ' + UndergroundItem.getFullResourceName(valueType, cumulativeValue)"></span>
             </td>
         </tr>
     </script>

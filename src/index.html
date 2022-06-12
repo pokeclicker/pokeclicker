@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 <head>
-    <title>Pokéclicker</title>
+    <title>PokéClicker</title>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="utf-8"/>
     <link href="assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
@@ -31,9 +31,6 @@
 
     <!--Notify-->
     <script src="libs/bootstrap-notify.min.js"></script>
-
-    <!--Motio-->
-    <script src="libs/motio.js"></script>
 
     <!--Intro.js-->
     <script src="libs/intro.min.js"></script>
@@ -119,7 +116,7 @@
 <div id="game" class="container loading">
     <div class="row justify-content-center">
         <!--The id title is needed for a default marker for money animation to display when not in a wild battle where the playerMoney span is not visible-->
-        <h1 id="gameTitle">Pokéclicker</h1>
+        <h1 id="gameTitle">PokéClicker</h1>
     </div>
     <div class="row justify-content-lg-center" style="text-align: center">
 
@@ -153,25 +150,46 @@
                                      App.game.gameState === GameConstants.GameState.town ||
                                      App.game.gameState === GameConstants.GameState.shop ||
                                      App.game.gameState === GameConstants.GameState.gym ||
-                                     App.game.gameState == GameConstants.GameState.battleFrontier)">
+                                     App.game.gameState === GameConstants.GameState.battleFrontier ||
+                                     App.game.gameState === GameConstants.GameState.temporaryBattle)">
                     <table width="100%">
-                        <tr>
-                            <td width="33.33%">
+                        <tr class="row">
+                            <td class="col">
                                 <span style="display: inline; position: relative;">
-                                    <img title="Money" src="assets/images/currency/money.svg" height="25px">
+                                    <img title="Pokédollars&#013;&#010;Gained by defeating Pokémon and trainers in battle" src="assets/images/currency/money.svg" height="25px">
                                     <span id="animateCurrency-money" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.money]()) : App.game.wallet.currencies[GameConstants.Currency.money]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
-                            <td width="33.33%">
+                            <td class="col">
                                 <span style="display: inline; position: relative;">
-                                    <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px">
+                                    <img title="Dungeon Tokens&#013;&#010;Gained by catching wild Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px">
                                     <span id="animateCurrency-dungeonToken" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.dungeonToken]()) : App.game.wallet.currencies[GameConstants.Currency.dungeonToken]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
-                            <td width="33.33%">
+                            <td class="col">
                                 <span style="display: inline; position: relative;">
-                                    <img title="Quest points" src="assets/images/currency/questPoint.svg" height="25px">
+                                    <img title="Quest Points&#013;&#010;Gained by completing Quests" src="assets/images/currency/questPoint.svg" height="25px">
                                     <span id="animateCurrency-questPoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.questPoint]()) : App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">0</span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="row" data-bind="visible: Settings.getSetting('currencyMainDisplayExtended').observableValue()">
+                            <td class="col">
+                                <span style="display: inline; position: relative;">
+                                    <img title="Farm Points&#013;&#010;Gained at the Farm" src="assets/images/currency/farmPoint.svg" height="25px">
+                                    <span id="animateCurrency-farmPoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.farmPoint]()) : App.game.wallet.currencies[GameConstants.Currency.farmPoint]().toLocaleString('en-US')">0</span>
+                                </span>
+                            </td>
+                            <td class="col">
+                                <span style="display: inline; position: relative;">
+                                    <img title="Diamonds&#013;&#010;Gained in the Underground" src="assets/images/currency/diamond.svg" height="25px">
+                                    <span id="animateCurrency-diamond" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.diamond]()) : App.game.wallet.currencies[GameConstants.Currency.diamond]().toLocaleString('en-US')">0</span>
+                                </span>
+                            </td>
+                            <td class="col">
+                                <span style="display: inline; position: relative;">
+                                    <img title="Battle Points&#013;&#010;Gained at the Battle Frontier" src="assets/images/currency/battlePoint.svg" height="25px">
+                                    <span id="animateCurrency-battlePoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.battlePoint]()) : App.game.wallet.currencies[GameConstants.Currency.battlePoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                         </tr>
@@ -182,7 +200,7 @@
                 <!--Use the base battle layout for fighting, dungeons and battle frontier.-->
 
                 <div class="battle-view card-body p-0 justify-content-center no-gutters no-select"
-                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier),
+                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier) || App.game.gameState == GameConstants.GameState.temporaryBattle,
                         class: MapHelper.calculateBattleCssClass()">
 
                     <!-- Route Battles -->
@@ -247,6 +265,9 @@
 
                     <!-- Gym Battles -->
                     @import "gymView.html"
+
+                    <!-- One Time Battles -->
+                    @import "temporaryBattleView.html"
 
                     <!-- Battle Frontier Battles -->
                     @import "battleFrontierView.html"
@@ -334,7 +355,7 @@
             @import "battleFrontierInfo.html"
 
             <div id="middle-bottom-sort-column">
-                <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
+                <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
                     App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
                         <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
@@ -348,10 +369,16 @@
                     <span class='float-right px-4 bg-locked'>&nbsp;</span>
                     <br/><span>Incomplete:</span>
                     <span class='float-right px-4 bg-incomplete'>&nbsp;</span>
+                    <br/><span>Quest at Location:</span>
+                    <span class='float-right px-4 bg-questAtLocation'>&nbsp;</span>
                     <br/><span>Uncaught Pokemon:</span>
                     <span class='float-right px-4 bg-uncaughtPokemon'>&nbsp;</span>
+                    <br/><span>Uncaught Shiny Pokemon and Missing Achievement:</span>
+                    <span class='float-right px-4 bg-uncaughtShinyPokemonAndMissingAchievement'>&nbsp;</span>
                     <br/><span>Uncaught Shiny Pokemon:</span>
                     <span class='float-right px-4 bg-uncaughtShinyPokemon'>&nbsp;</span>
+                    <br/><span>Missing Achievement:</span>
+                    <span class='float-right px-4 bg-missingAchievement'>&nbsp;</span>
                     <br/><span>Completed:</span>
                     <span class='float-right px-4 bg-completed'>&nbsp;</span>
                     <br/>
@@ -367,7 +394,16 @@
                         <img width=30px src="" data-bind="attr: { src: Weather.image() }"/>
                     </button>
                     <div id="mapBody" class="card-body p-0 show">
-                        <button class='btn btn-sm btn-block btn-info' data-bind="click: () => SubRegions.openModal(), visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1">Subregional Travel</button>
+                        <div id="subregion-travel-buttons" class="btn-group mr-2" role="group" style="width: 100%;" data-bind="
+                            visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1,
+                            css: { 'slow-flash': player.highestRegion() == player.region && SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > player.highestSubRegion() + 1 }">
+                            <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion - 1">&lt;</button>
+                            <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="
+                                click: () => SubRegions.openModal(),
+                                text: 'Subregional Travel (' + SubRegions.getSubRegionById(player.region, player.subregion)?.name + ')'"
+                                >Subregional Travel</button>
+                            <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion + 1">&gt;</button>
+                        </div>
                         <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
                         <svg id="map" viewBox="0 0 1600 960" preserveAspectRatio="xMaxYMax meet">
                             <defs>
@@ -426,6 +462,9 @@
 <!-- Receive gym badge Modal -->
 @import "receiveGymBadge.html"
 
+<!-- One time battle won Modal -->
+@import "temporaryBattleWonModal.html"
+
 <!-- Achievements Modal -->
 @import "achievementsModal.html"
 
@@ -456,8 +495,11 @@
 <!-- Start Sequence Modal-->
 @import "startSequence.html"
 
+<!-- Pick Starter Tutorial Modal-->
+@import "pickStarterTutorialModal.html"
+
 <!-- Pick Starter Modal-->
-@import "pickStarter.html"
+@import "pickStarterModal.html"
 
 <!-- Starter Caught Modal-->
 @import "starterCaught.html"
@@ -468,8 +510,8 @@
 <!-- Log Book Modal-->
 @import "nextRegionModal.html"
 
-<!-- Shards Modal -->
-@import "shardsModal.html"
+<!-- Gems Modal -->
+@import "gemsModal.html"
 
 <!-- Breeding Modal-->
 @import "breedingModal.html"
@@ -503,6 +545,9 @@
 
 <!-- Berry Master Modal-->
 @import "berryMasterModal.html"
+
+<!-- Shard Master Modal-->
+@import "gemMasterModal.html"
 
 <!-- Subregion Modal-->
 @import "subregionModal.html"

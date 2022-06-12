@@ -1,5 +1,5 @@
-///<reference path="Item.ts"/>
-///<reference path="../farming/MulchType.ts"/>
+/// <reference path="Item.ts"/>
+/// <reference path="../../declarations/enums/MulchType.d.ts"/>
 
 class MulchItem extends Item {
     type: MulchType;

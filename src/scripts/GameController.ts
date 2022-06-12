@@ -17,12 +17,20 @@ class GameController {
         });
     }
 
+    static convertKey(key: string) {
+        let newKey = key.length > 1 ? key : key.toUpperCase();
+        if (newKey == ' ') {
+            newKey = 'Space';
+        }
+        return newKey;
+    }
+
     static simulateKey(code: string, type = 'keydown', modifiers = {}) {
         const evtName = type.startsWith('key') ? type : `key${type}`;
 
         const event = document.createEvent('HTMLEvents') as KeyboardEvent;
         Object.defineProperties(event, {
-            code: {value: code},
+            key: {value: code},
         });
         event.initEvent(evtName, true, false);
 
@@ -101,6 +109,20 @@ class GameController {
         const pokeballs = App.game.pokeballs;
         // Underground
         const $undergroundModal = $('#mineModal');
+        $undergroundModal.on('hidden.bs.modal shown.bs.modal', _ => $undergroundModal.data('disable-toggle', false));
+        const underground = App.game.underground;
+        // Farm
+        const $farmsModal = $('#farmModal');
+        $farmsModal.on('hidden.bs.modal shown.bs.modal', _ => $farmsModal.data('disable-toggle', false));
+        const farms = App.game.farming;
+        // Hatchery
+        const $hatcheryModal = $('#breedingModal');
+        $hatcheryModal.on('hidden.bs.modal shown.bs.modal', _ => $hatcheryModal.data('disable-toggle', false));
+        const hatchery = App.game.breeding;
+        // Ship
+        const $shipModal = $('#ShipModal');
+        // Shop
+        const $shopModal = $('#shopModal');
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
@@ -108,135 +130,300 @@ class GameController {
                 return;
             }
 
-            // Set flags for any key currently pressed down (used to check if key held down currently)
-            GameController.keyHeld[e.code] = true;
+            const key = GameController.convertKey(e.key);
 
-            switch (e.code) {
-                case 'KeyO':
-                    // Open oak items with 'O'
+            // Set flags for any key currently pressed down (used to check if key held down currently)
+            GameController.keyHeld[key] = true;
+
+            // Set our number key if defined (-1 for 0 indexed)
+            const numberKey = (+key) - 1;
+            const isNumberKey = !isNaN(numberKey);
+
+            const visibleModals = $('.modal:visible').length;
+
+            // Safari Zone
+            if (App.game.gameState === GameConstants.GameState.safari) {
+                switch (key) {
+                    case 'ArrowUp':
+                    case Settings.getSetting('hotkey.dungeon.up').value:
+                        Safari.move('up');
+                        break;
+                    case 'ArrowLeft':
+                    case Settings.getSetting('hotkey.dungeon.left').value:
+                        Safari.move('left');
+                        break;
+                    case 'ArrowDown':
+                    case Settings.getSetting('hotkey.dungeon.down').value:
+                        Safari.move('down');
+                        break;
+                    case 'ArrowRight':
+                    case Settings.getSetting('hotkey.dungeon.right').value:
+                        Safari.move('right');
+                        break;
+                }
+
+                // We don't want to process any other keys while in the Safari zone
+                return e.preventDefault();
+            }
+
+            // Within modals
+            if ($farmsModal.data('bs.modal')?._isShown) {
+                if (key == Settings.getSetting('hotkey.farm.toggleShovel').value) {
+                    FarmController.selectedShovel() ? FarmController.selectedShovel(false) : FarmController.selectedShovel(true);
+                    return e.preventDefault();
+                }
+            }
+            if ($undergroundModal.data('bs.modal')?._isShown) {
+                switch (key) {
+                    case Settings.getSetting('hotkey.underground.hammer').value:
+                        Mine.toolSelected(Mine.Tool.Hammer);
+                        return e.preventDefault();
+                    case Settings.getSetting('hotkey.underground.chisel').value:
+                        Mine.toolSelected(Mine.Tool.Chisel);
+                        return e.preventDefault();
+                    case Settings.getSetting('hotkey.underground.survey').value:
+                        Mine.survey();
+                        return e.preventDefault();
+                    case Settings.getSetting('hotkey.underground.bomb').value:
+                        Mine.bomb();
+                        return e.preventDefault();
+                }
+                if (isNumberKey) {
+                    if (numberKey === 0) {
+                        ItemList['SmallRestore'].use();
+                    } else if (numberKey === 1) {
+                        ItemList['MediumRestore'].use();
+                    } else if (numberKey === 2) {
+                        ItemList['LargeRestore'].use();
+                    }
+                    return e.preventDefault();
+                }
+            }
+            if ($oakItemsModal.data('bs.modal')?._isShown) {
+                // Toggle oak items
+                if (isNumberKey) {
+                    if (oakItems.isUnlocked(numberKey)) {
+                        if (oakItems.isActive(numberKey)) {
+                            oakItems.deactivate(numberKey);
+                        } else {
+                            oakItems.activate(numberKey);
+                        }
+                    }
+                    return e.preventDefault();
+                }
+            }
+            if ($pokeballSelector.data('bs.modal')?._isShown) {
+                if (isNumberKey) {
+                    // Switch selection type
+                    if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
+                        $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numberKey)?.trigger('click');
+                        return e.preventDefault();
+                    }
+                    // Select Pokeball from pokeball selector (0 = none)
+                    if (numberKey < App.game.pokeballs.pokeballs.length) {
+                        pokeballs.selectedSelection()(numberKey);
+                    }
+                    return e.preventDefault();
+                }
+            }
+            if ($shipModal.data('bs.modal')?._isShown) {
+                if (isNumberKey) {
+                    if (numberKey <= player.highestRegion()) {
+                        const regionButton = $('.ship-modal-region-button').eq(numberKey);
+                        if (regionButton && !regionButton.prop('disabled')) {
+                            regionButton.trigger('click');
+                        }
+                    }
+                    return e.preventDefault();
+                }
+            }
+            if ($shopModal.data('bs.modal')?._isShown) {
+                if (isNumberKey) {
+                    if (numberKey <= ShopHandler.shopObservable().items.length) {
+                        ShopHandler.setSelected(numberKey);
+                    }
+                    return e.preventDefault();
+                }
+                switch (key) {
+                    case Settings.getSetting('hotkey.shop.buy').value:
+                        ShopHandler.buyItem();
+                        return e.preventDefault();
+                    case Settings.getSetting('hotkey.shop.max').value:
+                        ShopHandler.maxAmount();
+                        return e.preventDefault();
+                    case Settings.getSetting('hotkey.shop.reset').value:
+                        ShopHandler.resetAmount();
+                        return e.preventDefault();
+                    case Settings.getSetting('hotkey.shop.increase').value:
+                        if (GameController.keyHeld['Shift']) {
+                            switch (Settings.getSetting('shopButtons').value) {
+                                case 'original':
+                                    ShopHandler.increaseAmount(100);
+                                    break;
+                                case 'multiplication':
+                                    ShopHandler.multiplyAmount(0.1);
+                                    break;
+                                case 'bigplus':
+                                    ShopHandler.increaseAmount(1000);
+                                    break;
+                            }
+                        } else {
+                            switch (Settings.getSetting('shopButtons').value) {
+                                case 'original':
+                                    ShopHandler.increaseAmount(10);
+                                    break;
+                                case 'multiplication':
+                                    ShopHandler.multiplyAmount(10);
+                                    break;
+                                case 'bigplus':
+                                    ShopHandler.increaseAmount(100);
+                                    break;
+                            }
+                        }
+                        return e.preventDefault();
+                }
+            }
+
+            // Only run if no modals are open
+            if (visibleModals === 0) {
+                // Route Battles
+                if (App.game.gameState === GameConstants.GameState.fighting) {
+                    const initialRoute = MapHelper.normalizeRoute(player.route(),player.region);
+                    const firstRoute = Routes.getRoutesByRegion(player.region)[0].number;
+                    const lastRoute = Routes.getRoutesByRegion(player.region)[Routes.getRoutesByRegion(player.region).length - 1].number;
+                    // Allow '=' to fallthrough to '+' since they share a key on many keyboards
+                    switch (key) {
+                        case '=':
+                        case '+':
+                            if (initialRoute + 1 > MapHelper.normalizeRoute(lastRoute, player.region)) {
+                                MapHelper.moveToRoute(firstRoute, player.region);
+                            } else {
+                                MapHelper.moveToRoute(Routes.unnormalizeRoute(initialRoute + 1), player.region);
+                            }
+                            return e.preventDefault();
+                        case '-':
+                            if (initialRoute - 1 < MapHelper.normalizeRoute(firstRoute, player.region)) {
+                                MapHelper.moveToRoute(lastRoute, player.region);
+                            } else {
+                                MapHelper.moveToRoute(Routes.unnormalizeRoute(initialRoute - 1), player.region);
+                            }
+                            return e.preventDefault();
+                    }
+                }
+
+                // Dungeons
+                if (App.game.gameState === GameConstants.GameState.dungeon) {
+                    switch (key) {
+                        case 'ArrowUp':
+                        case Settings.getSetting('hotkey.dungeon.up').value:
+                            DungeonRunner.map.moveUp();
+                            return e.preventDefault();
+                        case 'ArrowLeft':
+                        case Settings.getSetting('hotkey.dungeon.left').value:
+                            DungeonRunner.map.moveLeft();
+                            return e.preventDefault();
+                        case 'ArrowDown':
+                        case Settings.getSetting('hotkey.dungeon.down').value:
+                            DungeonRunner.map.moveDown();
+                            return e.preventDefault();
+                        case 'ArrowRight':
+                        case Settings.getSetting('hotkey.dungeon.right').value:
+                            DungeonRunner.map.moveRight();
+                            return e.preventDefault();
+                        case Settings.getSetting('hotkey.dungeon.interact').value:
+                            if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
+                                DungeonRunner.dungeonLeave();
+                            } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
+                                DungeonRunner.openChest();
+                            } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
+                                DungeonRunner.startBossFight();
+                            }
+                            return e.preventDefault();
+                    }
+                }
+
+                // Within towns
+                if (App.game.gameState === GameConstants.GameState.town) {
+                    if (key === Settings.getSetting('hotkey.town.start').value) {
+                        if (player.town() instanceof DungeonTown) {
+                            DungeonRunner.initializeDungeon(player.town().dungeon);
+                        } else {
+                            player.town().content[0].protectedOnclick();
+                        }
+                        return e.preventDefault();
+                    } else if (isNumberKey) {
+                        // Check if a number higher than 0 and less than our towns content was pressed
+                        const filteredConent = player.town().content.filter(c => c.isVisible());
+                        if (numberKey < filteredConent.length) {
+                            filteredConent[numberKey].protectedOnclick();
+                        } else if (player.town().npcs && numberKey < filteredConent.length + player.town().npcs.length) {
+                            player.town().npcs[numberKey - filteredConent.length].openDialog();
+                        }
+                        return e.preventDefault();
+                    }
+                }
+            }
+
+            // Anywhere keys
+            switch (key) {
+                case Settings.getSetting('hotkey.farm').value:
+                    // Open the Farm
+                    if (farms.canAccess() && !$farmsModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $farmsModal.data('disable-toggle', true);
+                        $farmsModal.modal('toggle');
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.hatchery').value:
+                    // Open the Hatchery
+                    if (hatchery.canAccess() && !$hatcheryModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $hatcheryModal.data('disable-toggle', true);
+                        $hatcheryModal.modal('toggle');
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.oakItems').value:
+                    // Open oak items
                     if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
                         $oakItemsModal.data('disable-toggle', true);
                         $oakItemsModal.modal('toggle');
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.underground').value:
+                    // Open the Underground
+                    if (underground.canAccess() && !$undergroundModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $undergroundModal.data('disable-toggle', true);
+                        $undergroundModal.modal('toggle');
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.forceSave').value:
+                    if (GameController.keyHeld['Shift']) {
+                        Save.store(player);
+                        return e.preventDefault();
                     }
                     break;
                 default:
-                    let numKey = +e.key;
                     // Check for a number key being pressed
-                    if (!isNaN(numKey)) {
-                        // Make our number keys 1 indexed instead of 0
-                        numKey -= 1;
-
-                        if (GameController.keyHeld['KeyP']) {
+                    if (isNumberKey) {
+                        if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
                             // Open pokeball selector modal using P + (1-4) for each condition
                             if (!($pokeballSelector.data('bs.modal')?._isShown)) {
                                 $('.modal').modal('hide');
                             }
-                            $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numKey)?.trigger('click');
-
-                        } else if ($pokeballSelector.data('bs.modal')?._isShown) {
-                            // Select Pokeball from pokeball selector (0 = none)
-                            if (numKey < App.game.pokeballs.pokeballs.length) {
-                                pokeballs.selectedSelection()(numKey);
-                            }
-
-                        } else if ($oakItemsModal.data('bs.modal')?._isShown) {
-                            // Toggle oak items
-                            if (oakItems.isUnlocked(numKey)) {
-                                if (oakItems.isActive(numKey)) {
-                                    oakItems.deactivate(numKey);
-                                } else {
-                                    oakItems.activate(numKey);
-                                }
-                            }
-                        } else if ($undergroundModal.data('bs.modal')?._isShown) {
-                            if (numKey == 0) {
-                                ItemList['SmallRestore'].use();
-                            } else if (numKey == 1) {
-                                ItemList['MediumRestore'].use();
-                            } else if (numKey == 2) {
-                                ItemList['LargeRestore'].use();
-                            }
+                            $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numberKey)?.trigger('click');
+                            return e.preventDefault();
                         }
                     }
             }
 
-            if (App.game.gameState === GameConstants.GameState.dungeon) {
-                switch (e.code) {
-                    case 'ArrowUp':
-                    case 'KeyW':
-                        DungeonRunner.map.moveUp();
-                        break;
-                    case 'ArrowLeft':
-                    case 'KeyA':
-                        DungeonRunner.map.moveLeft();
-                        break;
-                    case 'ArrowDown':
-                    case 'KeyS':
-                        DungeonRunner.map.moveDown();
-                        break;
-                    case 'ArrowRight':
-                    case 'KeyD':
-                        DungeonRunner.map.moveRight();
-                        break;
-                    case 'Space':
-                        if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
-                            DungeonRunner.dungeonLeave();
-                        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
-                            DungeonRunner.openChest();
-                        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
-                            DungeonRunner.startBossFight();
-                        }
-                        break;
-                    default: // any other key (ignore)
-                        return;
-                }
-                e.preventDefault();
-            } else if (App.game.gameState === GameConstants.GameState.town) {
-                if (e.code === 'Space') {
-                    if (player.town().gym) {
-                        GymRunner.startGym(player.town().gym);
-                    } else if (player.town().dungeon) {
-                        if (player.town() instanceof DungeonTown) {
-                            DungeonRunner.initializeDungeon(player.town().dungeon);
-                        } else {
-                            MapHelper.moveToTown(player.town().dungeon.name);
-                        }
-                    }
-                    e.preventDefault();
-                } else if ('gymList' in player.town()) {
-                    // Dont start if modal is show/shown
-                    if (!$('#receiveBadgeModal').data('bs.modal')?._isShown) {
-                        const number = Number(e.key);
-                        // Check if a number higher than 0 and less than total Gyms was pressed
-                        if (number && number <= player.town().gymList.length) {
-                            GymRunner.startGym(player.town().gymList[number - 1]);
-                        }
-                    }
-                }
-            } else if (App.game.gameState === GameConstants.GameState.fighting) {
-                // Allow '=' to fallthrough to '+' since they share a key on many keyboards
-                switch (e.key) {
-                    case '=':
-                    case '+':
-                        MapHelper.moveToRoute(player.route() + 1, player.region);
-                        break;
-                    case '-':
-                        MapHelper.moveToRoute(player.route() - 1, player.region);
-                        break;
-                    default: // any other key (ignore)
-                        return;
-                }
-                e.preventDefault();
-            } else if (App.game.gameState === GameConstants.GameState.safari) {
-                const dir = GameConstants.KeyCodeToDirection[e.code];
-                if (dir) {
-                    e.preventDefault();
-                    Safari.move(dir);
-                }
-                if (e.code === 'Space') {
-                    e.preventDefault();
-                }
+            if (key === 'Space') {
+                return e.preventDefault();
             }
         });
 
@@ -246,17 +433,33 @@ class GameController {
                 return;
             }
 
+            const key = GameController.convertKey(e.key);
             // Our key is no longer being held down
-            delete GameController.keyHeld[e.code];
+            delete GameController.keyHeld[key];
 
             if (App.game.gameState === GameConstants.GameState.safari) {
-                const dir = GameConstants.KeyCodeToDirection[e.code];
-                if (dir) {
-                    e.preventDefault();
-                    Safari.stop(dir);
-                } else if (e.code === 'Space') {
-                    e.preventDefault();
+                switch (key) {
+                    case 'ArrowUp':
+                    case Settings.getSetting('hotkey.dungeon.up').value:
+                        Safari.stop('up');
+                        return e.preventDefault();
+                    case 'ArrowLeft':
+                    case Settings.getSetting('hotkey.dungeon.left').value:
+                        Safari.stop('left');
+                        return e.preventDefault();
+                    case 'ArrowDown':
+                    case Settings.getSetting('hotkey.dungeon.down').value:
+                        Safari.stop('down');
+                        return e.preventDefault();
+                    case 'ArrowRight':
+                    case Settings.getSetting('hotkey.dungeon.right').value:
+                        Safari.stop('right');
+                        return e.preventDefault();
                 }
+            }
+
+            if (key === 'Space') {
+                return e.preventDefault();
             }
         });
     }

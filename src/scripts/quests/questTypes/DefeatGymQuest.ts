@@ -6,7 +6,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     constructor(
         amount: number,
         reward: number,
-        private gymTown: string
+        public gymTown: string
     ) {
         super(amount, reward);
         this.region = GameConstants.getGymRegion(this.gymTown);
@@ -17,7 +17,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         const amount = SeededRand.intBetween(5, 20);
         const region = SeededRand.intBetween(0, player.highestRegion());
         // Only use unlocked gyms
-        const possibleGyms = GameConstants.RegionGyms[region].filter(gymTown => gymList[gymTown].flags.quest && Gym.isUnlocked(gymList[gymTown]));
+        const possibleGyms = GameConstants.RegionGyms[region].filter(gymTown => GymList[gymTown].flags.quest && GymList[gymTown].isUnlocked());
         // If no gyms unlocked in this region, just use the first gym of the region
         const gymTown = possibleGyms.length ? SeededRand.fromArray(possibleGyms) : GameConstants.RegionGyms[region][0];
         const reward = this.calcReward(amount, gymTown);
@@ -25,7 +25,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     }
 
     private static calcReward(amount: number, gymTown: string): number {
-        const gym = gymList[gymTown];
+        const gym = GymList[gymTown];
         if (gym instanceof Champion) {
             gym.setPokemon(player.starter());
         }

@@ -24,13 +24,13 @@
 
                 <!--If all Pokémon in the dungeon are caught-->
                 <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) && DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, false))">
-                    <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
+                    <img title="You have captured all Pokémon in this dungeon!" class="pokeball-smallest"
                          src="assets/images/pokeball/Pokeball.svg"/>
                 </knockout>
 
                 <!--If all Pokémon in the dungeon are caught shiny-->
                 <knockout data-bind="if: DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true)">
-                    <img title="You have captured all Pokémon shiny on this route!"
+                    <img title="You have captured all Pokémon shiny in this dungeon!"
                          class="pokeball-smallest"
                          src="assets/images/pokeball/Pokeball-shiny.svg"/>
                 </knockout>
@@ -94,7 +94,13 @@
         <!-- /ko -->
         <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest -->
         <div>
-            <img class="dungeon-chest" src="assets/images/dungeons/chest.png"/>
+            <div class="dungeon-chest" style="height: 95px">
+                <img src="assets/images/dungeons/chest.png"/>
+            </div>
+            <button class="btn btn-warning chest-button">
+                <p>Open</p>
+                <p>(+20% Enemy HP)</p>
+            </button>
         </div>
         <!-- /ko -->
         <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) -->

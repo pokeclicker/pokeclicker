@@ -5,12 +5,16 @@ import type Profile from './profile/Profile';
 import type Statistics from './DataStore/StatisticStore';
 import type Challenges from './challenges/Challenges';
 import type Multiplier from './multiplier/Multiplier';
-import type { GameState, Region } from './GameConstants';
+import type { Environment, GameState, Region } from './GameConstants';
 import type PokemonType from './enums/PokemonType';
 import type BagItem from './interfaces/BagItem';
 import type LevelType from './party/LevelType';
 import type Wallet from './wallet/Wallet';
 import { PokemonNameType } from './pokemons/PokemonNameType';
+import PokemonCategories from './party/Category';
+import OakItems from './oakItems/OakItems';
+import OakItemLoadouts from './oakItems/OakItemLoadouts';
+import SaveReminder from './saveReminder/SaveReminder';
 
 // These types are only temporary while we are converting things to modules
 // As things are converted, we should import their types here for use,
@@ -27,11 +31,11 @@ type TmpGameType = {
     wallet: Wallet,
     keyItems: any,
     badgeCase: BadgeCase,
-    oakItems: any,
-    oakItemLoadouts: any,
-    categories: any,
+    oakItems: OakItems,
+    oakItemLoadouts: OakItemLoadouts,
+    categories: PokemonCategories,
     party: any,
-    shards: any,
+    gems: any,
     underground: any,
     farming: any,
     logbook: LogBook,
@@ -42,14 +46,16 @@ type TmpGameType = {
     discord: any,
     achievementTracker: any,
     challenges: Challenges,
-    multiplier: Multiplier
+    multiplier: Multiplier,
+    saveReminder: SaveReminder,
 
     // There are functions we could mention too,
     // but they aren't mentioned in any modules (yet?)
 };
 
 type TmpAppType = {
-    game: TmpGameType
+    game: TmpGameType,
+    start: ()=>void
 };
 
 type TmpPokemonListData = {
@@ -75,6 +81,27 @@ type TmpPokemonListData = {
     heldItem?: BagItem;
 };
 
+type TmpSaveType = {
+    key: string;
+};
+
+type TmpMapHelperType = {
+    moveToRoute: (route: number, region: Region)=>void;
+    routeExist: (route: number, region: Region)=>boolean;
+    normalizeRoute: (route: number, region: Region)=>number;
+    accessToRoute: (route: number, region: Region)=>boolean;
+    getCurrentEnvironment: ()=>Environment;
+    calculateBattleCssClass: ()=>string;
+    calculateRouteCssClass: (route: number, region: Region)=>string;
+    calculateTownCssClass: (townName: string)=>string;
+    accessToTown: (townName: string)=>boolean;
+    moveToTown: (townName: string)=>void;
+    validRoute: (route: number, region: Region)=>boolean;
+    openShipModal: ()=>void;
+    ableToTravel: ()=>boolean;
+    travelToNextRegion: ()=>void;
+};
+
 type TmpPokemonMapProxy
     = Record<PokemonNameType | number, TmpPokemonListData>
     & {
@@ -88,4 +115,6 @@ declare global {
     const App: TmpAppType;
     const pokemonMap: TmpPokemonMapProxy;
     const player: any;
+    const Save: TmpSaveType;
+    const MapHelper: TmpMapHelperType;
 }

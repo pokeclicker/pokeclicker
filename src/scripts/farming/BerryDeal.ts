@@ -22,7 +22,7 @@ class BerryDeal {
     }
 
     private static randomEvoItem(): Item {
-        const evoItem = SeededRand.fromArray(GameHelper.enumStrings(GameConstants.StoneType).filter(name => name != 'None'));
+        const evoItem = SeededRand.fromArray(GameHelper.enumStrings(GameConstants.StoneType).filter(name => !(['None', 'Black_DNA', 'White_DNA']).includes(name)));
         return ItemList[evoItem];
     }
 

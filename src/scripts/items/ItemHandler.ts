@@ -7,20 +7,8 @@ class ItemHandler {
     public static amountToUse = 1;
 
     public static useItem(name: string, amount = 1): boolean {
-        if (!player.itemList[name]()) {
-            Notifier.notify({
-                message: `You don't have any ${ItemList[name].displayName}s left...`,
-                type: NotificationConstants.NotificationOption.danger,
-            });
-            return false;
-        }
 
-        if (ItemList[name] instanceof BattleItem && App.game.challenges.list.disableBattleItems.active()) {
-            Notifier.notify({
-                title: 'Challenge Mode',
-                message: 'Battle Items are disabled',
-                type: NotificationConstants.NotificationOption.danger,
-            });
+        if (!ItemList[name].checkCanUse()) {
             return false;
         }
 
@@ -81,6 +69,30 @@ class ItemHandler {
             // TODO: PMX - Update plural system to handle all cases
             message: `You used ${amountUsed} ${ItemList[this.stoneSelected()].displayName}${multiple}`,
             type: NotificationConstants.NotificationOption.success,
+        });
+    }
+
+    public static initilizeEvoStones() {
+        // Set our unlock regions
+        Object.values(ItemList).filter(item => item instanceof EvolutionStone).forEach(evoStone => {
+            // If a region has already been manually set
+            if ((evoStone as EvolutionStone).unlockedRegion > GameConstants.Region.none) {
+                return false;
+            }
+
+            // Get a list of evolutions that use this stone, set the unlock region to the lowest region
+            (evoStone as EvolutionStone).unlockedRegion = Math.min(...pokemonList.filter(p =>
+                // Filter to only include pokemon that make use of this evolution stone
+                (p as PokemonListData).nativeRegion > GameConstants.Region.none &&
+                (p as PokemonListData).evolutions != undefined &&
+                (p as PokemonListData).evolutions.some(e => e instanceof StoneEvolution && e.stone == evoStone.type)
+            ).map(p => {
+                // Map to the native region for evolutions that use this stone
+                return Math.min(...(p as PokemonListData).evolutions.filter(e => e instanceof StoneEvolution && e.stone == evoStone.type)
+                    .map(e => Math.max((p as PokemonListData).nativeRegion, PokemonHelper.calcNativeRegion(e.getEvolvedPokemon())))
+                    .filter(r => r > GameConstants.Region.none));
+            })
+            );
         });
     }
 }

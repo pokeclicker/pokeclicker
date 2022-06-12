@@ -1,5 +1,5 @@
 <div id="questDisplayContainer" class="card sortable border-secondary mb-3">
-    <!-- ko if: QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->
+    <!-- ko if: App.game.quests.isDailyQuestsUnlocked() -->
         <div class="card-header p-0" data-toggle="collapse" href="#questDisplayBody">
             <span data-bind='text: "Quests (" + App.game.quests.currentQuests().length + "/" + App.game.quests.questSlots() + ")"'></span>
         </div>
@@ -10,7 +10,7 @@
     <!-- /ko -->
 
     <div id="questDisplayBody" class="card-body p-0 show">
-        <!-- ko if: App.game.quests.currentQuests().length == 0 && QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->
+        <!-- ko if: App.game.quests.currentQuests().length == 0 && App.game.quests.isDailyQuestsUnlocked() -->
             <span class="pt-2 pb-2">No active quest</span>
         <!-- /ko -->
         <table width="100%">
@@ -37,7 +37,7 @@
                         <!-- /ko -->
                         <!-- ko if: $data.isCompleted() -->
                         <button class="btn btn-success btn-sm btn-block p-0" data-bind="click: () => { App.game.quests.claimQuest($data.index) }">
-                            claim
+                            Claim
                         </button>
                         <!-- /ko -->
                     </td>

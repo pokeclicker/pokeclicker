@@ -9,7 +9,7 @@ class BerryItem extends Item {
     }
 
     gain(amt: number) {
-        App.game.farming.gainBerry(this.berry, amt);
+        App.game.farming.gainBerry(this.berry, amt, false);
     }
 
     get description(): string {

@@ -1,25 +1,28 @@
 <knockout data-bind="if: App.game.gameState === GameConstants.GameState.town">
-<div id="townView" data-bind="style: { backgroundImage: 'url(\'assets/images/towns/' + player.town().name + '.png\')' }"
+<div id="townView" data-bind="style: { backgroundImage: `url('assets/images/towns/${player.town().name.replace(/'/, `\\'`)}.png')` }"
      class="justify-content-center no-gutters no-select">
     <div class="row justify-content-center no-gutters">
         <div class="col no-gutters">
             <button type="button" class="btn btn-outline-info" style="float: right;"
-            data-bind="visible: player.town().gym || player.town().shop, tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
-            <button type="button" class="btn btn-outline-info" style="float: right;"
-            data-bind="visible: player.town() instanceof DungeonTown, tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
+            data-bind="visible: player.town() instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'), tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
             <h2 class="pageItemTitle">
               <knockout data-bind="text: player.town().name">Town Name</knockout>
-
               <knockout data-bind="if: player.town() instanceof DungeonTown && player.town().dungeon">
+                  <!-- ko if: QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->
+                  <knockout class="right" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]()">
+                      <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
+                      <knockout data-bind="visible: QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">clears</knockout>
+                  </knockout>
+                  <!-- /ko -->
                   <!--If all Pokémon in the dungeon are caught-->
                   <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(player.town().dungeon, true) && DungeonRunner.dungeonCompleted(player.town().dungeon, false))">
-                      <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
+                      <img title="You have captured all Pokémon in this dungeon!" class="pokeball-smallest"
                            src="assets/images/pokeball/Pokeball.svg"/>
                   </knockout>
 
                   <!--If all Pokémon in the dungeon are caught shiny-->
                   <knockout data-bind="if: DungeonRunner.dungeonCompleted(player.town().dungeon, true)">
-                      <img title="You have captured all Pokémon shiny on this route!"
+                      <img title="You have captured all Pokémon shiny in this dungeon!"
                            class="pokeball-smallest"
                            src="assets/images/pokeball/Pokeball-shiny.svg"/>
                   </knockout>
@@ -28,66 +31,35 @@
         </div>
     </div>
     <div class="row no-gutters">
-       <div class="col-3 no-gutters">
-           <div class="list-group" data-bind="if: player.town() instanceof PokemonLeague">
-                <!-- ko foreach: player.town().gymList -->
-                    <div class="btn-group btn-block mt-0">
-                        <button data-bind="text: $data.leaderName.replace(/\d/g,''),
-                                        disable: !Gym.isUnlocked($data),
-                                        click: function() {GymRunner.startGym($data)},
-                                        attr: { class: Gym.calculateCssClass($data)}">
-                            E4 Leader
-                        </button>
-                        <button class="btn btn-info p-0 btn-gym-auto-restart"
-                            data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex($data.town)]() >= 100,
-                            tooltip: { html: true, title: `Auto restart Elite 4 fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${($data.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive money for clearing the gym</i>`, trigger: 'hover', placement:'right' },
-                            click: () => GymRunner.startGym($data, true)">
-                            ↻
-                        </button>
-                    </div>
-                <!-- /ko -->
-           </div>
+       <div class="col-4 no-gutters">
            <div class="list-group">
-                <div class="btn-group btn-block" data-bind="if: player.town().gym">
-                    <button data-bind="attr: { class: Gym.calculateCssClass(player.town().gym) }"
-                            onclick="GymRunner.startGym(player.town().gym)">
-                        Gym
-                    </button>
-                    <button class="btn btn-info p-0 btn-gym-auto-restart" data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town().gym.town)]() >= 100, tooltip: { html: true, title: `Auto restart Gym fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${(player.town().gym.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive money for clearing the gym</i>`, trigger: 'hover', placement:'right' }"
-                            onclick="GymRunner.startGym(player.town().gym, true)">
-                        ↻
-                    </button>
-                </div>
-                <!-- ko foreach: player.town().shops -->
-                    <a class="btn btn-secondary" href="#shopModal" data-bind="attr: { href: $data.href }, event: { click: () => ShopHandler.showShop($data) }, text: $data.name" data-toggle="modal">Shop</a>
-                <!-- /ko -->
-                <button class="btn btn-warning"
-                        href="#nextRegionModal" data-toggle="modal"
-                        data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name), text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">
-                    Travel To Next Region
-                </button>
-                <button class="btn btn-info" onclick="MapHelper.openShipModal();" data-bind="visible: player.highestRegion() > 0 && GameConstants.DockTowns.includes(player.town().name)">
-                    Dock
-                </button>
                 <button class="btn btn-secondary p-0"
                         onclick="DungeonRunner.initializeDungeon(player.town().dungeon)"
                         data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon, attr: { class: player.town().dungeon && App.game.wallet.currencies[GameConstants.Currency.dungeonToken]() >= player.town().dungeon.tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0' }">
                     Start<br/>
                         <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town().dungeon.tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
                 </button>
-                <button class="btn btn-secondary"
-                        onclick="MapHelper.moveToTown(player.town().dungeon.name)"
-                        data-bind="visible: player.town().dungeon && (!(player.town() instanceof DungeonTown) && player.town() instanceof Town), if: player.town().dungeon">
-                        <span data-bind="text: player.town().dungeon.name"></span>
-                </button>
-                <button class="btn btn-primary"
-                        onclick="App.game.battleFrontier.enter()"
-                        data-bind="visible: player.town().name == 'Battle Frontier'">
-                    Enter Battle Frontier
-                </button>
+
+                <!-- ko foreach: player.town().content -->
+                <div class="btn-group btn-block" style="margin-top: 0px;">
+                    <button data-bind="
+                        class: $data.cssClass() + ($data.isUnlocked() ? '' : ' disabled'),
+                        text: $data.text(),
+                        visible: $data.isVisible(),
+                        click: $data.protectedOnclick,
+                        tooltip: ($data.tooltip || $data.clears() ? { title: $data.clears() != undefined ? `Total Clears: ${$data.clears()}` : $data.tooltip, trigger: 'hover', placement: 'left' } : undefined)
+                        "></button>
+                    <!-- ko if: $data instanceof Gym -->
+                    <button class="btn btn-info p-0 btn-gym-auto-restart" data-bind="
+                        tooltip: { html: true, title: `Auto restart Gym fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${($data.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive Pokédollars for clearing the gym</i>`, trigger: 'hover', placement:'right' },
+                        click: () => GymRunner.startGym($data, true),
+                        visible: $data.isUnlocked() && App.game.statistics.gymsDefeated[GameConstants.getGymIndex($data.town)]() >= 100">↻</button>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
            </div>
        </div>
-       <div class="col-6"></div>
+       <div class="col-5"></div>
        <div class="col-3 no-gutters">
            <div class="list-group" data-bind="foreach: player.town().npcs">
                <!-- ko if: $data.isVisible() -->
@@ -110,17 +82,30 @@
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
             css: { 'dungeon-pokemon-locked': $data.hidden }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
-            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock">
+            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="
+            hidden: !$data.lock,
+            tooltip: {
+                title: 'Try talking to the locals. Sometimes they know more than you think.',
+                html: true,
+                placement: 'bottom',
+                trigger: 'hover'
+            }">
           </li>
           <!-- /ko -->
           <!--Display all available bosses in this dungeon-->
           <!-- ko foreach: player.town().dungeon.bossEncounterList -->
-          <li class="list-inline-item">
+          <li class="list-inline-item" data-bind="hidden: $data.hide">
             <img class="boss" src="assets/images/dungeons/boss.svg"/>
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
             css: { 'dungeon-pokemon-locked': $data.hidden }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
-            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock">
+            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock,
+            tooltip: {
+                title: 'Try talking to the locals. Sometimes they know more than you think.',
+                html: true,
+                placement: 'bottom',
+                trigger: 'hover'
+            }">
           </li>
           <!-- /ko -->
         </ul>

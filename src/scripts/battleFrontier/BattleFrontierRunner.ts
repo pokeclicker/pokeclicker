@@ -4,6 +4,8 @@ class BattleFrontierRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
     static stage: KnockoutObservable<number> = ko.observable(1); // Start at stage 1
+    public static checkpoint: KnockoutObservable<number> = ko.observable(1); // Start at stage 1
+    public static highest: KnockoutObservable<number> = ko.observable(1);
 
     public static counter = 0;
 
@@ -22,9 +24,10 @@ class BattleFrontierRunner {
         this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.GYM_TIME * 100));
     }
 
-    public static start() {
+    public static start(useCheckpoint: boolean) {
         this.started(true);
-        this.stage(1);
+        this.stage(useCheckpoint ? this.checkpoint() : 1);
+        this.highest(App.game.statistics.battleFrontierHighestStageCompleted());
         BattleFrontierBattle.pokemonIndex(0);
         BattleFrontierBattle.generateNewEnemy();
         BattleFrontierRunner.timeLeft(GameConstants.GYM_TIME);
@@ -45,6 +48,7 @@ class BattleFrontierRunner {
         BattleFrontierRunner.timeLeft(GameConstants.GYM_TIME);
         BattleFrontierRunner.timeLeftPercentage(100);
 
+        this.checkpoint(this.stage());
     }
 
     public static end() {
@@ -63,9 +67,10 @@ class BattleFrontierRunner {
 
         Notifier.notify({
             title: 'Battle Frontier',
-            message: `You managed to beat stage ${stageBeaten}.<br/>You received ${battlePointsEarned} BP`,
+            message: `You managed to beat stage ${stageBeaten}.\nYou received <img src="./assets/images/currency/battlePoint.svg" height="18px"/> ${battlePointsEarned.toLocaleString('en-US')}.\nYou received <img src="./assets/images/currency/money.svg" height="18px"/> ${moneyEarned.toLocaleString('en-US')}.`,
             type: NotificationConstants.NotificationOption.success,
-            timeout: 5 * GameConstants.MINUTE,
+            setting: NotificationConstants.NotificationSetting.General.battle_frontier,
+            timeout: 30 * GameConstants.MINUTE,
         });
 
         // Award battle points
@@ -73,12 +78,14 @@ class BattleFrontierRunner {
         App.game.wallet.gainMoney(moneyEarned);
         const reward = BattleFrontierMilestones.nextMileStone();
 
+        this.checkpoint(1);
+
         this.end();
     }
     public static battleQuit() {
         Notifier.confirm({
             title: 'Battle Frontier',
-            message: 'Are you sure you want to leave?\n\nYou will not receive any Battle Points for the stages already completed.',
+            message: 'Are you sure you want to leave?\n\nYou can always return later and start off where you left.',
             type: NotificationConstants.NotificationOption.danger,
             confirm: 'leave',
         }).then(confirmed => {
@@ -86,7 +93,7 @@ class BattleFrontierRunner {
                 // Don't give any points, user quit the challenge
                 Notifier.notify({
                     title: 'Battle Frontier',
-                    message: `You made it to stage ${this.stage()}`,
+                    message: `Checkpoint set for stage ${this.stage()}`,
                     type: NotificationConstants.NotificationOption.info,
                     timeout: 1 * GameConstants.MINUTE,
                 });
@@ -106,5 +113,9 @@ class BattleFrontierRunner {
             str += `<img class="pokeball-smallest" src="assets/images/pokeball/Pokeball.svg"${BattleFrontierBattle.pokemonIndex() > i ? ' style="filter: saturate(0);"' : ''}>`;
         }
         return str;
+    })
+
+    public static hasCheckpoint = ko.computed(() => {
+        return BattleFrontierRunner.checkpoint() > 1;
     })
 }

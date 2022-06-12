@@ -4,7 +4,7 @@
 /// <reference path="./questTypes/GainFarmPointsQuest.ts" />
 /// <reference path="./questTypes/GainMoneyQuest.ts" />
 /// <reference path="./questTypes/GainTokensQuest.ts" />
-/// <reference path="./questTypes/GainShardsQuest.ts" />
+/// <reference path="./questTypes/GainGemsQuest.ts" />
 /// <reference path="./questTypes/HatchEggsQuest.ts" />
 /// <reference path="./questTypes/MineLayersQuest.ts" />
 /// <reference path="./questTypes/MineItemsQuest.ts" />
@@ -24,7 +24,7 @@ class QuestHelper {
         GainFarmPointsQuest,
         GainMoneyQuest,
         GainTokensQuest,
-        GainShardsQuest,
+        GainGemsQuest,
         HatchEggsQuest,
         MineLayersQuest,
         MineItemsQuest,
@@ -72,7 +72,7 @@ class QuestHelper {
         const routes = Routes.getRoutesByRegion(region).map(r => r.number);
         const first = Math.min(...routes);
         const last = Math.max(...routes);
-        const attack = Math.max(1, App.game.party.calculatePokemonAttack(PokemonType.None, PokemonType.None, false, region, true, false, false));
+        const attack = Math.max(1, App.game.party.calculatePokemonAttack(PokemonType.None, PokemonType.None, false, region, true, false, WeatherType.Clear));
 
         for (let route = last; route >= first; route--) {
             if (PokemonFactory.routeHealth(route, region) < attack) {

@@ -177,7 +177,7 @@ gulp.task('scripts', () => {
         // Convert exports to declarations so that ./src/scripts can use them
         .pipe(replace(/(^|\n)export (?!declare)(default )?/, '$1declare '))
         // Remove any remaining 'export'
-        .pipe(replace(/(^|\n)export/g, ''))
+        .pipe(replace(/(^|\n)export/g, '\n'))
         // Fix broken declarations for things like temporaryWindowInjection
         .pipe(replace('declare {};', ''))
         .pipe(gulp.dest(dests.declarations));
@@ -196,7 +196,7 @@ gulp.task('scripts', () => {
         ]))
         .then(() => {
             // Compile the old scripts
-            const tsProject = typescript.createProject('tsconfig.json');
+            const tsProject = typescript.createProject('tsconfig.json', { typescript: require('typescript') });
             const compileScripts = tsProject.src()
                 .pipe(replace('$VERSION', version))
                 .pipe(replace('$DISCORD_ENABLED', !!config.DISCORD_LOGIN_PROXY))

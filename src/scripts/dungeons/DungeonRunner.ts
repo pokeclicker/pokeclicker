@@ -5,6 +5,7 @@ class DungeonRunner {
     public static dungeon: Dungeon;
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.DUNGEON_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
+    public static timeBonus: KnockoutObservable<number> = ko.observable(1);
 
     public static fighting: KnockoutObservable<boolean> = ko.observable(false);
     public static map: DungeonMap;
@@ -32,8 +33,10 @@ class DungeonRunner {
         DungeonBattle.trainer(null);
         DungeonBattle.trainerPokemonIndex(0);
         DungeonBattle.enemyPokemon(null);
+        DungeonRunner.timeBonus(FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
+        DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME * this.timeBonus());
 
-        DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
+        DungeonRunner.timeLeftPercentage(100);
         // Dungeon size increases with each region
         let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + player.region;
         // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
@@ -60,8 +63,26 @@ class DungeonRunner {
                 this.dungeonLost();
             }
         }
-        this.timeLeft(this.timeLeft() - GameConstants.DUNGEON_TICK);
-        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.DUNGEON_TIME * 100));
+        if (this.map.playerMoved()) {
+            this.timeLeft(this.timeLeft() - GameConstants.DUNGEON_TICK);
+            this.timeLeftPercentage(Math.floor(this.timeLeft() / (GameConstants.DUNGEON_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
+        }
+        const currentFluteBonus = FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute);
+        if (currentFluteBonus != this.timeBonus()) {
+            if (currentFluteBonus > this.timeBonus()) {
+                if (this.timeBonus() === 1) {
+                    this.timeBonus(currentFluteBonus);
+                    this.timeLeft(this.timeLeft() * this.timeBonus());
+                } else {
+                    this.timeLeft(this.timeLeft() / this.timeBonus());
+                    this.timeBonus(currentFluteBonus);
+                    this.timeLeft(this.timeLeft() * this.timeBonus());
+                }
+            } else {
+                this.timeLeft(this.timeLeft() / this.timeBonus());
+                this.timeBonus(currentFluteBonus);
+            }
+        }
     }
 
     /**
@@ -119,26 +140,25 @@ class DungeonRunner {
             Notifier.notify({
                 message: `Found ${amount} × ${GameConstants.humanifyString(input)} Berry in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
             });
 
-            return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount);
+            return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount, false);
 
-        } else if (typeof GameConstants.Pokeball[input] == 'number') {
+        } else if (ItemList[input] instanceof PokeballItem) {
             Notifier.notify({
                 message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
             });
 
-            GameHelper.incrementObservable(App.game.statistics.pokeballsBought[GameConstants.Pokeball[GameConstants.humanifyString(input)]],amount);
-            return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount);
+            return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount, false);
 
-        }  else if (Underground.getMineItemByName(input) != undefined && Underground.getMineItemByName(input).isStone() === false) {
+        }  else if (Underground.getMineItemByName(input) instanceof UndergroundItem) {
             Notifier.notify({
                 message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
             });
 
             return Underground.gainMineItem(Underground.getMineItemByName(input).id, amount);
@@ -147,16 +167,16 @@ class DungeonRunner {
             Notifier.notify({
                 message: `Found ${1} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
             });
 
             return DungeonBattle.generateNewLootEnemy(input);
 
-        }   else if (ItemList[input].constructor.name == 'EvolutionStone' || 'EggItem' || 'BattleItem' || 'Vitamin' || 'EnergyRestore') {
+        }   else if (ItemList[input] instanceof EvolutionStone || EggItem || BattleItem || Vitamin || EnergyRestore) {
             Notifier.notify({
                 message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
             });
 
             return player.gainItem(ItemList[input].name, amount);
@@ -218,11 +238,28 @@ class DungeonRunner {
     })
 
     public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
-        const possiblePokemon: PokemonNameType[] = dungeon.allPokemon;
+        const possiblePokemon: PokemonNameType[] = dungeon.allAvailablePokemon();
         return RouteHelper.listCompleted(possiblePokemon, includeShiny);
+    }
+
+    public static isAchievementsComplete(dungeon: Dungeon) {
+        const dungeonIndex = GameConstants.getDungeonIndex(dungeon.name);
+        return AchievementHandler.achievementList.every(achievement => {
+            return !(achievement.property instanceof ClearDungeonRequirement && achievement.property.dungeonIndex === dungeonIndex && !achievement.isCompleted());
+        });
+    }
+
+    public static isThereQuestAtLocation(dungeon: Dungeon) {
+        return App.game.quests.currentQuests().some(q => {
+            return q instanceof DefeatDungeonQuest && q.dungeon == dungeon.name;
+        });
     }
 
     public static hasEnoughTokens() {
         return App.game.wallet.hasAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
+    }
+
+    public static dungeonLevel(): number {
+        return PokemonFactory.routeLevel(this.dungeon.difficultyRoute, player.region);
     }
 }

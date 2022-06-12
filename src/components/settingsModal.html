@@ -13,6 +13,7 @@
                     <li class="nav-item"><a class="nav-link active" href="#settings-display" data-toggle="tab">Display</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings-sound" data-toggle="tab">Sound</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings-notifications" data-toggle="tab">Notifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings-hotkeys" data-toggle="tab">Hotkeys</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings-other" data-toggle="tab">Other</a></li>
                 </ul>
 
@@ -35,13 +36,20 @@
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('hideHatchery')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('farmDisplay')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyLostAnimation')}"></tr>
                                 <tr data-bind="visible: Object.values(App.game.challenges.list).filter(c => c.active()).length > 0, template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideChallengeRelatedModules')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayReduced')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayExtended')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGymGoAnimation')}"></tr>
+                                <tr><th colspan="2">Map Colors</th></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--currentPlace')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--incomplete')}"></tr>
+                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--questAtLocation')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtPokemon')}"></tr>
+                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShinyPokemonAndMissingAchievement')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShinyPokemon')}"></tr>
+                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--missingAchievement')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--completed')}"></tr>
                             </tbody>
                         </table>
@@ -49,17 +57,184 @@
 
                     <div class="tab-pane" id="settings-sound">
                         <div data-bind="template: {name: 'RangeSettingTemplate', data: Settings.getSetting('sound.volume')}"></div>
-                        <table class="table table-striped table-hover m-0">
-                            <tbody data-bind="foreach: Object.values(NotificationConstants.NotificationSound)">
-                              <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting(`sound.${$data.name}`)}"></tr>
-                            </tbody>
-                        </table>
+                        <!-- ko foreach: Object.keys(NotificationConstants.NotificationSound) -->
+                        <span class="btn btn-block btn-dark clickable mt-1" data-toggle="collapse" data-bind="text: $data, attr: { href: '#settingsSound' + $data }"></span>
+                        <div class="collapse show" data-bind="attr: { id: 'settingsSound' + $data }">
+                            <table class="table table-striped table-hover m-0">
+                                <tbody>
+                                <!-- ko foreach: Object.values(NotificationConstants.NotificationSound[$data]) -->
+                                    <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting(`sound.${$data.name}`)}"></tr>
+                                <!-- /ko -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /ko -->
                     </div>
 
                     <div class="tab-pane" id="settings-notifications">
+                        <!-- ko foreach: Object.keys(NotificationConstants.NotificationSetting) -->
+                        <span class="btn btn-block btn-dark clickable mt-1" data-toggle="collapse" data-bind="text: $data, attr: { href: '#settingsNotification' + $data }"></span>
+                        <div class="collapse show" data-bind="attr: { id: 'settingsNotification' + $data }">
+                            <table class="table table-striped table-hover m-0">
+                                <tbody>
+                                <!-- ko foreach: Object.values(NotificationConstants.NotificationSetting[$data]) -->
+                                    <tr data-bind="template: { name: 'NotificationSettingTemplate', data: $data }"></tr>
+                                <!-- /ko -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+
+                    <div class="tab-pane" id="settings-hotkeys">
                         <table class="table table-striped table-hover m-0">
-                            <tbody data-bind="foreach: Object.values(NotificationConstants.NotificationSetting)">
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
+                            <thead>
+                                <tr><th colspan="2">Modals</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.farm')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.hatchery')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.oakItems')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.pokeballSelection')}"></tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Farm</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.farm.toggleShovel')}"></tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Underground</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.hammer')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.chisel')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.survey')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.bomb')}"></tr>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Use Restore:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Each number refers to a specific Restore',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Oak Items</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Toggle Oak Item:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Each number refers to a specific Oak Item',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Pokéball Selector</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Select Pokéball Type:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Each number refers to a specific Pokéball',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Dungeon</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dungeon.up')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dungeon.left')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dungeon.down')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dungeon.right')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dungeon.interact')}"></tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Town</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.town.start')}"></tr>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Access the towns content:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Can access anything from Gyms to NPCs. Each number is a button.',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Shop</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Select item:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Each number selects an item in the shop.',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.shop.buy')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.shop.max')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.shop.reset')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.shop.increase')}"></tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Ship</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Select region:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Each number selects a region.',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Other</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-2">
+                                        <knockout>Change Routes:</knockout>
+                                    </td>
+                                    <td class="p-0" data-bind="tooltip: {
+                                        title: 'Change routes based on route order',
+                                        trigger: 'hover',
+                                    }">
+                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>- or +</code></kbd>
+                                    </td>
+                                </tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.forceSave')}"></tr>
                             </tbody>
                         </table>
                     </div>
@@ -67,8 +242,10 @@
                     <div class="tab-pane" id="settings-other">
                         <table class="table table-striped table-hover m-0">
                             <tbody>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('saveReminder')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('useWebWorkerForGameTicks')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableOfflineProgress')}"></tr>
                             </tbody>
                         </table>
                         <div class="btn-group btn-block">
@@ -105,7 +282,39 @@
     </td>
     <td class="p-2">
         <input class="clickable" type="checkbox"
-            data-bind="checked: Settings.getSetting($data.name).observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
+            data-bind="checked: $data.observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
+            onchange="Settings.setSettingByName(this.name, this.checked)"/>
+    </td>
+</script>
+
+<script type="text/html" id="NotificationSettingTemplate">
+    <td class="p-2">
+        <label class="m-0" data-bind="attr: { for: 'checkbox-game-' + $data.name }, text: `${$data.displayName}:`">
+            setting name
+        </label>
+    </td>
+    <td class="p-2 tight" data-bind="tooltip: {
+        title: 'In game notifications',
+        trigger: 'hover',
+    }">
+        <!-- ko if: $data.inGameNotification != undefined -->
+        <label data-bind="attr: { for: 'checkbox-game-' + $data.inGameNotification.name }">🎮</label>
+        <input class="clickable" type="checkbox"
+            data-bind="checked: $data.inGameNotification.observableValue(), attr: { name: $data.inGameNotification.name, id: 'checkbox-game-' + $data.inGameNotification.name }"
+            onchange="Settings.setSettingByName(this.name, this.checked)"/>
+        <!-- /ko -->
+        <!-- ko if: $data.inGameNotification == undefined -->
+        <label>🎮</label>
+        <input type="checkbox" checked disabled/>
+        <!-- /ko -->
+    </td>
+    <td class="p-2 tight" data-bind="tooltip: {
+        title: 'Desktop notifications, these can be seen even if the game is not in focus',
+        trigger: 'hover',
+    }">
+        <label data-bind="attr: { for: 'checkbox-desktop-' + $data.desktopNotification.name }">🖥️</label>
+        <input class="clickable" type="checkbox"
+            data-bind="checked: $data.desktopNotification.observableValue(), attr: { name: $data.desktopNotification.name, id: 'checkbox-desktop-' + $data.desktopNotification.name }",
             onchange="Settings.setSettingByName(this.name, this.checked)"/>
     </td>
 </script>
@@ -118,7 +327,6 @@
             oninput="Settings.setSettingByName(this.name, this.value)">
 </script>
 
-
 <script type="text/html" id="ColorChoiceSettingTemplate">
     <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
     <td class="p-0" data-bind="style: { background: $data.observableValue },
@@ -127,5 +335,47 @@
         trigger: 'hover',
     }">
         <label style="width:100%; min-height: 36px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: $data.observableValue"/></label>
+    </td>
+</script>
+
+<script type="text/html" id="KeyChoiceSettingTemplate">
+    <td class="p-2">
+        <knockout data-bind="text: `${$data.displayName}:`">setting name</knockout>
+    </td>
+    <td class="p-0" data-bind="tooltip: {
+        title: 'Click here to set a new key',
+        trigger: 'hover',
+    }">
+
+        <kbd contenteditable="true" spellcheck="false"
+            class="btn-block"
+            style="padding: 10px 0;"
+            data-bind="event: {
+                keydown: (s, e) => {
+                    const key = GameController.convertKey(e.key);
+                    switch(key) {
+                        case 'Backspace':
+                        case 'Escape':
+                            s.set('None');
+                            break;
+                        case 'Shift':
+                        case 'Ctrl':
+                        case 'Alt':
+                        case 'Meta':
+                            return;
+                        default:
+                            s.set(key);
+                    }
+                    e.currentTarget.blur();
+                    e.stopPropagation();
+                    return false;
+                },
+                click: (s, e) => {
+                    e.currentTarget.innerHTML = `<code>${s.prefix}</code>...<code>${s.suffix}</code>`;
+                },
+                blur: (s, e) => {
+                    e.currentTarget.innerHTML = `<code>${s.prefix}</code>${s.observableValue()}<code>${s.suffix}</code>`;
+                }
+            }, html: `<code>${$data.prefix}</code>${$data.observableValue()}<code>${$data.suffix}</code>`">Key</kbd>
     </td>
 </script>

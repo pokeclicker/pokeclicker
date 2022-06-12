@@ -5,9 +5,9 @@
  */
 class OakMutation extends EvolveMutation {
 
-    oakItem: OakItems.OakItem;
+    oakItem: OakItemType;
 
-    constructor(mutationChance: number, mutatedBerry: BerryType, originalBerry: BerryType, oakItem: OakItems.OakItem, options?: MutationOptions) {
+    constructor(mutationChance: number, mutatedBerry: BerryType, originalBerry: BerryType, oakItem: OakItemType, options?: MutationOptions) {
         super(mutationChance, mutatedBerry, originalBerry, options);
         this.oakItem = oakItem;
     }

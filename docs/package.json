@@ -1,6 +1,6 @@
 {
   "name": "pokeclicker",
-  "version": "0.8.13",
+  "version": "0.9.5",
   "description": "PokéClicker repository",
   "main": "index.js",
   "scripts": {
@@ -85,10 +85,5 @@
     "knockout": "^3.5.1",
     "popper.js": "^1.16.0",
     "sortablejs": "^1.10.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run eslint"
-    }
   }
 }

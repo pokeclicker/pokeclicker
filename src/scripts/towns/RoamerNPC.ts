@@ -14,7 +14,7 @@ class RoamerNPC extends NPC {
 
         // If no roaming Pokemon yet
         if (!roamers.length) {
-            return `There hasn't been any reports of roaming Pokémon around ${GameConstants.camelCaseToString(GameConstants.Region[this.region])} lately..`;
+            return `There hasn't been any reports of roaming Pokémon around ${GameConstants.camelCaseToString(GameConstants.Region[this.region])} lately.`;
         }
 
         const roamersHTML = roamers.map(r => `<img width="64px" src="assets/images/pokemon/${r.pokemon.id}.png" />`).join('');

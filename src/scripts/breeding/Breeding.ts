@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/settings/BreedingFilters.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 /// <reference path="../../declarations/breeding/EggType.d.ts" />
@@ -14,6 +15,7 @@ class Breeding implements Feature {
         queueList: [],
         queueSlots: 0,
     };
+    hatcheryHelpers = new HatcheryHelpers(this);
 
     private _eggList: Array<KnockoutObservable<Egg>>;
     private _eggSlots: KnockoutObservable<number>;
@@ -32,11 +34,11 @@ class Breeding implements Feature {
         this._eggList.forEach((egg) => {
             egg.extend({deferred: true});
         });
-        BreedingController.filter.category(Settings.getSetting('breedingCategoryFilter').value);
-        BreedingController.filter.region(Settings.getSetting('breedingRegionFilter').value);
-        BreedingController.filter.type1(Settings.getSetting('breedingTypeFilter1').value);
-        BreedingController.filter.type2(Settings.getSetting('breedingTypeFilter2').value);
-        BreedingController.filter.shinyStatus(Settings.getSetting('breedingShinyFilter').value);
+        BreedingFilters.category.value(Settings.getSetting('breedingCategoryFilter').value);
+        BreedingFilters.region.value(Settings.getSetting('breedingRegionFilter').value);
+        BreedingFilters.type1.value(Settings.getSetting('breedingTypeFilter1').value);
+        BreedingFilters.type2.value(Settings.getSetting('breedingTypeFilter2').value);
+        BreedingFilters.shinyStatus.value(Settings.getSetting('breedingShinyFilter').value);
         BreedingController.displayValue(Settings.getSetting('breedingDisplayFilter').value);
     }
 
@@ -108,7 +110,7 @@ class Breeding implements Feature {
     }
 
     canAccess(): boolean {
-        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Mystery_egg);
+        return App.game.keyItems.hasKeyItem(KeyItemType.Mystery_egg);
     }
 
     fromJSON(json: Record<string, any>): void {
@@ -133,6 +135,7 @@ class Breeding implements Feature {
         }
         this.queueSlots(json['queueSlots'] ?? this.defaults.queueSlots);
         this.queueList(json['queueList'] ? json['queueList'] : this.defaults.queueList);
+        this.hatcheryHelpers.fromJSON(json.hatcheryHelpers || []);
     }
 
 
@@ -142,6 +145,7 @@ class Breeding implements Feature {
             eggSlots: this.eggSlots,
             queueList: this.queueList(),
             queueSlots: this.queueSlots(),
+            hatcheryHelpers: this.hatcheryHelpers.toJSON(),
         };
     }
 
@@ -193,12 +197,17 @@ class Breeding implements Feature {
         amount = Math.round(amount);
         let index =  this.eggList.length;
         while (index-- > 0) {
+            const helper = this.hatcheryHelpers.hired()[index];
+            if (helper) {
+                continue;
+            }
             const egg = this.eggList[index]();
             egg.addSteps(amount, this.multiplier);
             if (this.queueList().length && egg.progress() >= 100) {
                 this.hatchPokemonEgg(index);
             }
         }
+        this.hatcheryHelpers.addSteps(amount, this.multiplier);
     }
 
     private getStepMultiplier() {
@@ -276,8 +285,8 @@ class Breeding implements Feature {
                         message: 'Hatchery queue is empty',
                         type: NotificationConstants.NotificationOption.success,
                         timeout: 1e4,
-                        sound: NotificationConstants.NotificationSound.empty_queue,
-                        setting: NotificationConstants.NotificationSetting.empty_queue,
+                        sound: NotificationConstants.NotificationSound.Hatchery.empty_queue,
+                        setting: NotificationConstants.NotificationSetting.Hatchery.empty_queue,
                     });
                 }
             }

@@ -29,7 +29,7 @@ class PokemonHelper {
                 }
             }
             return false;
-        });
+        }).sort((a, b) => a.id - b.id);
     }
 
     public static getEvolution(id: number, evoType: GameConstants.StoneType): string {
@@ -59,7 +59,7 @@ class PokemonHelper {
         const type2: PokemonType = basePokemon['type'][1] ?? PokemonType.None;
 
         const eggCycles: number = basePokemon['eggCycles'] || 20;
-        return new DataPokemon(basePokemon['id'], basePokemon['name'], basePokemon['catchRate'], basePokemon['evolutions'], type1, type2, basePokemon['attack'], basePokemon['levelType'], basePokemon['exp'], eggCycles, basePokemon['heldItem']);
+        return new DataPokemon(basePokemon['id'], basePokemon['name'], basePokemon['catchRate'], basePokemon['evolutions'], type1, type2, basePokemon['attack'], basePokemon['base']['hitpoints'], basePokemon['levelType'], basePokemon['exp'], eggCycles, basePokemon['heldItem']);
     }
 
     public static typeStringToId(id: string) {
@@ -98,16 +98,12 @@ class PokemonHelper {
             return pokemon.nativeRegion;
         }
         const id = pokemon.id;
-        const region = GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(id));
+        const region = GameConstants.MaxIDPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(id));
         return region >= 0 ? region : GameConstants.Region.none;
     }
 
     public static calcUniquePokemonsByRegion(region: GameConstants.Region) {
-        if (region != 0) {
-            return GameConstants.TotalPokemonsPerRegion[region] - Number(GameConstants.TotalPokemonsPerRegion[region - 1]);
-        } else {
-            return GameConstants.TotalPokemonsPerRegion[region];
-        }
+        return new Set(pokemonList.filter(p => p.id > 0 && PokemonHelper.calcNativeRegion(p.name) === region).map(p => Math.floor(p.id))).size;
     }
 
     /*
@@ -204,13 +200,14 @@ class PokemonHelper {
         const shops = [];
         Object.entries(TownList).forEach(([townName, town]) => {
             // Check if the shop has items
-            if (town.shops && town.shops.find(s => s.items)) {
+            const townShops = town.content.filter(c => c instanceof Shop && c.items);
+            if (townShops.length) {
                 // If we only want to check up to a maximum region
                 const region = town.region;
                 if (maxRegion != GameConstants.Region.none && region > maxRegion) {
                     return false;
                 }
-                const hasPokemon = town.shops.find(s => s.items?.find(item => item.name == pokemonName));
+                const hasPokemon = townShops.find(ts => (ts as Shop).items?.find(item => item.name == pokemonName));
                 if (hasPokemon) {
                     shops.push(townName);
                 }

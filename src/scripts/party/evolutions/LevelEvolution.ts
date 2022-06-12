@@ -1,5 +1,4 @@
 ///<reference path="Evolution.ts"/>
-///<reference path="EvolutionType.ts"/>
 class LevelEvolution extends Evolution {
     triggered: boolean;
 

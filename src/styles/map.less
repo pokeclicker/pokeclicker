@@ -14,14 +14,19 @@
     fill: var(--currentPlace);
     opacity: 0.5;
   }
-  
+
   .locked {
     fill: var(--locked);
     opacity: 0.5;
   }
-  
+
   .unlockedUnfinished {
     fill: var(--incomplete);
+    opacity: 0.6;
+  }
+
+  .questAtLocation {
+    fill: var(--questAtLocation);
     opacity: 0.6;
   }
 
@@ -35,12 +40,22 @@
     opacity: 0.6;
   }
 
+  .uncaughtShinyPokemonAndMissingAchievement {
+    fill: var(--uncaughtShinyPokemonAndMissingAchievement);
+    opacity: 0.6;
+  }
+
+  .missingAchievement {
+    fill: var(--missingAchievement);
+    opacity: 0.6;
+  }
+
   .completed {
     fill: var(--completed);
     opacity: 0.6;
   }
 
-  .flash {
+  .flash, .slow-flash {
     opacity: 1;
     fill: #FFD700;
     stroke: black;

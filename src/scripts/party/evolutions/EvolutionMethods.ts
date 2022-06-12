@@ -43,3 +43,9 @@ const EnvironmentDungeonLevelEvolution = EnvironmentRestricted(AnyDungeonLevelEv
 
 // new EnvironmentGymLevelEvolution(environment: Environment, basePokemon: string, evolvedPokemon: string, level: number)
 const EnvironmentGymLevelEvolution = EnvironmentRestricted(AnyGymLevelEvolution);
+
+// RegionStoneEvolution(region: GameConstants.Region, basePokemon: string, evolvedPokemon: string, stone: GameConstants.StoneType)
+const RegionStoneEvolution = RegionRestricted(StoneEvolution);
+
+// new RegionLevelEvolution(region: GameConstants.Region, basePokemon: string, evolvedPokemon: string, level: number)
+const RegionLevelEvolution = RegionRestricted(LevelEvolution);

@@ -1,10 +1,10 @@
 import { MINUTE, HOUR } from '../GameConstants';
 
 export default class SeededRand {
-    private static state = 12345;
-    private static readonly MOD: number = 233280;
-    private static readonly OFFSET: number = 49297;
-    private static readonly MULTIPLIER: number = 9301;
+    public static state = 12345;
+    public static readonly MOD: number = 233280;
+    public static readonly OFFSET: number = 49297;
+    public static readonly MULTIPLIER: number = 9301;
 
     public static next(): number {
         this.state = (this.state * this.MULTIPLIER + this.OFFSET) % this.MOD;
@@ -79,5 +79,17 @@ export default class SeededRand {
     // Get a string of letters and numbers (lowercase)
     public static string(length: number): string {
         return [...Array(length)].map(() => this.next().toString(36)[2]).join('');
+    }
+
+    // Shuffle an array
+    public static shuffleArray<T>(arr: Array<T>): Array<T> {
+        const output = [...arr];
+        for (let i = output.length; i; i--) {
+            const j = this.floor(i);
+            const x = output[i - 1];
+            output[i - 1] = output[j];
+            output[j] = x;
+        }
+        return output;
     }
 }

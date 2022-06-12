@@ -1,7 +1,7 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/achievements/Achievement.d.ts" />
 
 class AchievementHandler {
-
     public static achievementList: Achievement[] = [];
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static maxBonus: KnockoutObservableArray<number> = ko.observableArray([]);
@@ -41,7 +41,23 @@ class AchievementHandler {
     }
 
     public static getAchievementListWithIndex() {
-        return this.achievementListFiltered().slice(this.navigateIndex() * 10, (this.navigateIndex() * 10) + 10);
+        return this.getAchievementList().slice(this.navigateIndex() * 10, (this.navigateIndex() * 10) + 10);
+    }
+
+    public static getAchievementList() {
+        const achievementSortValue = Settings.getSetting('achievementSort').observableValue();
+
+        // Checks if the user has selected the default sorting option
+        if (achievementSortValue === AchievementSortOptions.default) {
+            // ... in this case, returns the filtered list without sorting.
+            return this.achievementListFiltered();
+        }
+
+        // ... otherwise, returns a copy of the filtered list sorted by provided property.
+        const achievementSortedList = [...this.achievementListFiltered()];
+        return achievementSortedList.sort(AchievementHandler.compareBy(
+            achievementSortValue, Settings.getSetting('achievementSortDirection').observableValue()
+        ));
     }
 
     public static filterAchievementList(retainPage = false) {
@@ -60,6 +76,41 @@ class AchievementHandler {
         }
     }
 
+    public static compareBy(option: AchievementSortOptions, direction: boolean): (a: Achievement, b: Achievement) => number {
+        return function (a, b) {
+            let res, dir = (direction) ? -1 : 1;
+            const config = AchievementSortOptionConfigs[option];
+
+            const aValue = config.getValue(a);
+            const bValue = config.getValue(b);
+
+            if (config.invert) {
+                dir *= -1;
+            }
+
+            //Compare by provided property
+            if (aValue == bValue) {
+                //If they are equal according to provided property, sort by name
+                return a.name.localeCompare(b.name);
+            } else if (aValue < bValue) {
+                res = -1;
+            } else if (aValue > bValue) {
+                res = 1;
+            } else {
+                res = 0;
+            }
+
+            return res * dir;
+        };
+    }
+
+    public static preCheckAchievements() {
+        // Check if our achievements are completed, we don't want to re-notify if already done
+        for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
+            AchievementHandler.achievementList[i].unlocked = AchievementHandler.achievementList[i].isCompleted();
+        }
+    }
+
     public static checkAchievements() {
         for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
             if (!AchievementHandler.achievementList[i].unlocked) {
@@ -69,20 +120,30 @@ class AchievementHandler {
     }
 
     public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, region = GameConstants.Region.none, achievableFunction: () => boolean | null = null) {
-        const unlocked: boolean = player.achievementsCompleted[name];
-        AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, region, unlocked, achievableFunction));
+        AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, region, achievableFunction));
+    }
+
+    public static calculateBonus(): void {
+        AchievementHandler.achievementList.forEach((achievement) => {
+            if (!achievement.achievable()) {
+                return 0;
+            }
+            const max = AchievementHandler.maxBonus()[achievement.region];
+            achievement.bonus = (achievement.bonusWeight / max) * 100;
+        });
     }
 
     public static calculateMaxBonus() {
         GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
-            AchievementHandler.maxBonus()[region] = AchievementHandler.achievementList.filter(a => a.region == region && a.achievable()).reduce((sum, a) => sum + a.bonus, 0);
+            AchievementHandler.maxBonus()[region] = AchievementHandler.achievementList.filter(a => a.region == region && a.achievable()).reduce((sum, a) => sum + a.bonusWeight, 0);
         });
+        AchievementHandler.calculateBonus();
     }
 
     public static bonusUnlocked(): number {
         let sum = 0;
         GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
-            sum += AchievementHandler.achievementList.filter(a => a.region == region && a.isCompleted()).reduce((sum, a) => sum + a.bonus, 0);
+            sum += AchievementHandler.achievementList.filter(a => a.region == region && a.isCompleted()).reduce((sum, a) => sum + a.bonusWeight, 0);
         });
         return sum;
     }
@@ -90,7 +151,7 @@ class AchievementHandler {
     public static achievementBonus(): number {
         let sum = 0;
         GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
-            const total = AchievementHandler.achievementList.filter(a => a.region == region && a.isCompleted()).reduce((sum, a) => sum + a.bonus, 0) / AchievementHandler.maxBonus()[region];
+            const total = AchievementHandler.achievementList.filter(a => a.region == region && a.isCompleted()).reduce((sum, a) => sum + a.bonusWeight, 0) / AchievementHandler.maxBonus()[region];
             if (!isNaN(total)) {
                 sum += total;
             }
@@ -188,35 +249,35 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Egg Factory', 'Hatch 1,000 eggs', new HatchRequirement(1000), 0.3);
         AchievementHandler.addAchievement('Offical Easter Bunny', 'Hatch 10,000 eggs', new HatchRequirement(10000), 0.4);
 
-        AchievementHandler.addAchievement('Why is my Voltorb Upside Down?', 'Obtain your first Pokéball', new PokeballRequirement(1, GameConstants.Pokeball.Pokeball), 0.01);
-        AchievementHandler.addAchievement('Starting a Collection', 'Obtain 10 Pokéballs', new PokeballRequirement(10, GameConstants.Pokeball.Pokeball), 0.03);
-        AchievementHandler.addAchievement('Stocking Up', 'Obtain 100 Pokéballs', new PokeballRequirement(100, GameConstants.Pokeball.Pokeball), 0.05);
-        AchievementHandler.addAchievement('Fully Stocked', 'Obtain 1,000 Pokéballs', new PokeballRequirement(1000, GameConstants.Pokeball.Pokeball), 0.10);
-        AchievementHandler.addAchievement('Maybe just a few more for the bunker', 'Obtain 10,000 Pokéballs', new PokeballRequirement(10000, GameConstants.Pokeball.Pokeball), 0.15);
-        AchievementHandler.addAchievement('Doomsday Bunker stocked with Pokéballs!', 'Obtain 100,000 Pokéballs', new PokeballRequirement(100000, GameConstants.Pokeball.Pokeball), 0.20);
+        AchievementHandler.addAchievement('Why is my Voltorb Upside Down?', 'Purchase your first Pokéball', new PokeballRequirement(1, GameConstants.Pokeball.Pokeball), 0.01);
+        AchievementHandler.addAchievement('Starting a Collection', 'Purchase 10 Pokéballs', new PokeballRequirement(10, GameConstants.Pokeball.Pokeball), 0.03);
+        AchievementHandler.addAchievement('Stocking Up', 'Purchase 100 Pokéballs', new PokeballRequirement(100, GameConstants.Pokeball.Pokeball), 0.05);
+        AchievementHandler.addAchievement('Fully Stocked', 'Purchase 1,000 Pokéballs', new PokeballRequirement(1000, GameConstants.Pokeball.Pokeball), 0.10);
+        AchievementHandler.addAchievement('Maybe just a few more for the bunker', 'Purchase 10,000 Pokéballs', new PokeballRequirement(10000, GameConstants.Pokeball.Pokeball), 0.15);
+        AchievementHandler.addAchievement('Doomsday Bunker stocked with Pokéballs!', 'Purchase 100,000 Pokéballs', new PokeballRequirement(100000, GameConstants.Pokeball.Pokeball), 0.20);
 
-        AchievementHandler.addAchievement('ooooo A blue one!', 'Obtain your first Greatball', new PokeballRequirement(1, GameConstants.Pokeball.Greatball), 0.03);
-        AchievementHandler.addAchievement('Greatball 2', 'Obtain 10 Greatballs', new PokeballRequirement(10, GameConstants.Pokeball.Greatball), 0.05);
-        AchievementHandler.addAchievement('Greatball 3', 'Obtain 100 Greatballs', new PokeballRequirement(100, GameConstants.Pokeball.Greatball), 0.10);
-        AchievementHandler.addAchievement('Greatball 4', 'Obtain 1,000 Greatballs', new PokeballRequirement(1000, GameConstants.Pokeball.Greatball), 0.15);
-        AchievementHandler.addAchievement('Greatball 5', 'Obtain 10,000 Greatballs', new PokeballRequirement(10000, GameConstants.Pokeball.Greatball), 0.20);
-        AchievementHandler.addAchievement('Greatball 6', 'Obtain 100,000 Greatballs', new PokeballRequirement(100000, GameConstants.Pokeball.Greatball), 0.30);
+        AchievementHandler.addAchievement('ooooo A blue one!', 'Purchase your first Greatball', new PokeballRequirement(1, GameConstants.Pokeball.Greatball), 0.03);
+        AchievementHandler.addAchievement('Greatball 2', 'Purchase 10 Greatballs', new PokeballRequirement(10, GameConstants.Pokeball.Greatball), 0.05);
+        AchievementHandler.addAchievement('Greatball 3', 'Purchase 100 Greatballs', new PokeballRequirement(100, GameConstants.Pokeball.Greatball), 0.10);
+        AchievementHandler.addAchievement('Greatball 4', 'Purchase 1,000 Greatballs', new PokeballRequirement(1000, GameConstants.Pokeball.Greatball), 0.15);
+        AchievementHandler.addAchievement('Greatball 5', 'Purchase 10,000 Greatballs', new PokeballRequirement(10000, GameConstants.Pokeball.Greatball), 0.20);
+        AchievementHandler.addAchievement('Greatball 6', 'Purchase 100,000 Greatballs', new PokeballRequirement(100000, GameConstants.Pokeball.Greatball), 0.30);
 
-        AchievementHandler.addAchievement('Ultraball 1', 'Obtain your first Ultraball', new PokeballRequirement(1, GameConstants.Pokeball.Ultraball), 0.05);
-        AchievementHandler.addAchievement('Ultraball 2', 'Obtain 10 Ultraballs', new PokeballRequirement(10, GameConstants.Pokeball.Ultraball), 0.10);
-        AchievementHandler.addAchievement('Ultraball 3', 'Obtain 100 Ultraballs', new PokeballRequirement(100, GameConstants.Pokeball.Ultraball), 0.15);
-        AchievementHandler.addAchievement('Ultraball 4', 'Obtain 1,000 Ultraballs', new PokeballRequirement(1000, GameConstants.Pokeball.Ultraball), 0.20);
-        AchievementHandler.addAchievement('Ultraball 5', 'Obtain 10,000 Ultraballs', new PokeballRequirement(10000, GameConstants.Pokeball.Ultraball), 0.30);
-        AchievementHandler.addAchievement('Ultraball 6', 'Obtain 100,000 Ultraballs', new PokeballRequirement(100000, GameConstants.Pokeball.Ultraball), 0.40);
+        AchievementHandler.addAchievement('Ultraball 1', 'Purchase your first Ultraball', new PokeballRequirement(1, GameConstants.Pokeball.Ultraball), 0.05);
+        AchievementHandler.addAchievement('Ultraball 2', 'Purchase 10 Ultraballs', new PokeballRequirement(10, GameConstants.Pokeball.Ultraball), 0.10);
+        AchievementHandler.addAchievement('Ultraball 3', 'Purchase 100 Ultraballs', new PokeballRequirement(100, GameConstants.Pokeball.Ultraball), 0.15);
+        AchievementHandler.addAchievement('Ultraball 4', 'Purchase 1,000 Ultraballs', new PokeballRequirement(1000, GameConstants.Pokeball.Ultraball), 0.20);
+        AchievementHandler.addAchievement('Ultraball 5', 'Purchase 10,000 Ultraballs', new PokeballRequirement(10000, GameConstants.Pokeball.Ultraball), 0.30);
+        AchievementHandler.addAchievement('Ultraball 6', 'Purchase 100,000 Ultraballs', new PokeballRequirement(100000, GameConstants.Pokeball.Ultraball), 0.40);
 
-        AchievementHandler.addAchievement('Masterball 1', 'Obtain your first Masterball', new PokeballRequirement(1, GameConstants.Pokeball.Masterball), 0.20);
-        AchievementHandler.addAchievement('Masterball 2', 'Obtain 10 Masterballs', new PokeballRequirement(10, GameConstants.Pokeball.Masterball), 0.30);
-        AchievementHandler.addAchievement('Masterball 3', 'Obtain 100 Masterballs', new PokeballRequirement(100, GameConstants.Pokeball.Masterball), 0.40);
+        AchievementHandler.addAchievement('Masterball 1', 'Purchase your first Masterball', new PokeballRequirement(1, GameConstants.Pokeball.Masterball), 0.20);
+        AchievementHandler.addAchievement('Masterball 2', 'Purchase 10 Masterballs', new PokeballRequirement(10, GameConstants.Pokeball.Masterball), 0.30);
+        AchievementHandler.addAchievement('Masterball 3', 'Purchase 100 Masterballs', new PokeballRequirement(100, GameConstants.Pokeball.Masterball), 0.40);
 
-        AchievementHandler.addAchievement('A Few Clicks In', 'Click 10 Times', new ClickRequirement(10, 1), 0.02, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
-        AchievementHandler.addAchievement('Clicking Pro', 'Click 100 Times', new ClickRequirement(100, 1), 0.05, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
-        AchievementHandler.addAchievement('Ultra Clicker', 'Click 1,000 Times', new ClickRequirement(1000, 1), 0.10, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
-        AchievementHandler.addAchievement('Need a new mouse yet?', 'Click 10,000 Times', new ClickRequirement(10000, 1), 0.25, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('A Few Clicks In', 'Click 10 times', new ClickRequirement(10, 1), 0.02, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Clicking Pro', 'Click 100 times', new ClickRequirement(100, 1), 0.05, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Ultra Clicker', 'Click 1,000 times', new ClickRequirement(1000, 1), 0.10, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Need a new mouse yet?', 'Click 10,000 times', new ClickRequirement(10000, 1), 0.25, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
 
         AchievementHandler.addAchievement('My new dirty hobby', 'Unlock 3 Plots in the Farm', new FarmPlotsUnlockedRequirement(3), 0.05);
         AchievementHandler.addAchievement('Allotment gardener', 'Unlock 9 Plots in the Farm', new FarmPlotsUnlockedRequirement(9), 0.15);
@@ -265,7 +326,7 @@ class AchievementHandler {
             // Gyms
             GameConstants.RegionGyms[region]?.forEach(gym => {
                 const gymTitle: string = gym.includes('Elite') || gym.includes('Champion') ? gym : `${gym} Gym`;
-                if (gymList[gym]?.flags?.achievement) {
+                if (GymList[gym]?.flags?.achievement) {
                     AchievementHandler.addAchievement(`${gym} Gym regular`, `Clear ${gymTitle} 10 times`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[0], GameConstants.getGymIndex(gym)), 1, region);
                     AchievementHandler.addAchievement(`${gym} Gym ruler`, `Clear ${gymTitle} 100 times`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[1], GameConstants.getGymIndex(gym)), 2, region);
                     AchievementHandler.addAchievement(`${gym} Gym owner`, `Clear ${gymTitle} 1,000 times`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[2], GameConstants.getGymIndex(gym)), 3, region);
@@ -273,17 +334,23 @@ class AchievementHandler {
             });
             // Dungeons
             GameConstants.RegionDungeons[region]?.forEach(dungeon => {
-                AchievementHandler.addAchievement(`${dungeon} explorer`, `Clear ${dungeon} 10 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex(dungeon)), 1, region);
-                AchievementHandler.addAchievement(`${dungeon} expert`, `Clear ${dungeon} 100 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex(dungeon)), 2, region);
-                AchievementHandler.addAchievement(`${dungeon} hermit`, `Clear ${dungeon} 1,000 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex(dungeon)), 3, region);
+                AchievementHandler.addAchievement(`${dungeon} explorer`, `Clear ${dungeon} 10 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex(dungeon)), 0.8, region);
+                AchievementHandler.addAchievement(`${dungeon} expert`, `Clear ${dungeon} 100 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex(dungeon)), 1.2, region);
+                AchievementHandler.addAchievement(`${dungeon} hermit`, `Clear ${dungeon} 250 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex(dungeon)), 1.6, region);
+                AchievementHandler.addAchievement(`${dungeon} dweller`, `Clear ${dungeon} 500 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[3], GameConstants.getDungeonIndex(dungeon)), 2.4, region);
             });
             // Unique Pokémon
             const amt10 = Math.floor(PokemonHelper.calcUniquePokemonsByRegion(region) * .1);
             const amt50 = Math.floor(PokemonHelper.calcUniquePokemonsByRegion(region) * .5);
             const amtAll = Math.floor(PokemonHelper.calcUniquePokemonsByRegion(region));
+            // Caught unique pokemon
             AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Trainer`, `Catch ${amt10} unique Pokémon native to the ${GameConstants.camelCaseToString(GameConstants.Region[region])} region`, new CaughtUniquePokemonsByRegionRequirement(region, amt10), 2, region);
             AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Ace`, `Catch ${amt50} unique Pokémon native to the ${GameConstants.camelCaseToString(GameConstants.Region[region])} region`, new CaughtUniquePokemonsByRegionRequirement(region, amt50), 4, region);
             AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Master`, `Complete the ${GameConstants.camelCaseToString(GameConstants.Region[region])} Pokédex!`, new CaughtUniquePokemonsByRegionRequirement(region, amtAll), 6, region);
+            // Caught unique shiny pokemon
+            AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Shiny Trainer`, `Catch ${amt10} unique Shiny Pokémon native to the ${GameConstants.camelCaseToString(GameConstants.Region[region])} region`, new CaughtUniqueShinyPokemonsByRegionRequirement(region, amt10), 3, region);
+            AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Shiny Ace`, `Catch ${amt50} unique Shiny Pokémon native to the ${GameConstants.camelCaseToString(GameConstants.Region[region])} region`, new CaughtUniqueShinyPokemonsByRegionRequirement(region, amt50), 6, region);
+            AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Shiny Master`, `Complete the ${GameConstants.camelCaseToString(GameConstants.Region[region])} Shiny Pokédex!`, new CaughtUniqueShinyPokemonsByRegionRequirement(region, amtAll), 9, region);
         });
 
         // load filters, filter the list & calculate number of tabs

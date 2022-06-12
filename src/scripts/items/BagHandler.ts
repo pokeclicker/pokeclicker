@@ -18,8 +18,8 @@ class BagHandler {
                 return this.getUndergroundItem(item.id).displayName;
             case ItemType.berry:
                 return `${BerryType[this.getBerry(item.id)]} Berry`;
-            case ItemType.shard:
-                return `${PokemonType[this.getShard(item.id)]} Shard`;
+            case ItemType.gem:
+                return `${PokemonType[this.getGem(item.id)]} Gem`;
         }
     }
 
@@ -38,8 +38,8 @@ class BagHandler {
                 return this.getUndergroundItem(item.id).image;
             case ItemType.berry:
                 return FarmController.getBerryImage(this.getBerry(item.id));
-            case ItemType.shard:
-                return Shards.image(this.getShard(item.id));
+            case ItemType.gem:
+                return Gems.image(this.getGem(item.id));
         }
     }
 
@@ -59,8 +59,8 @@ class BagHandler {
                 return player.mineInventory()[player.mineInventoryIndex(this.getUndergroundItem(item.id).id)].amount;
             case ItemType.berry:
                 return App.game.farming.berryList[this.getBerry(item.id)];
-            case ItemType.shard:
-                return App.game.shards.shardWallet[this.getShard(item.id)];
+            case ItemType.gem:
+                return App.game.gems.gemWallet[this.getGem(item.id)];
         }
     }
 
@@ -82,10 +82,10 @@ class BagHandler {
                 Underground.gainMineItem(this.getUndergroundItem(item.id).id, amount);
                 return;
             case ItemType.berry:
-                App.game.farming.gainBerry(this.getBerry(item.id), amount);
+                App.game.farming.gainBerry(this.getBerry(item.id), amount, false);
                 return;
-            case ItemType.shard:
-                App.game.shards.gainShards(amount, this.getShard(item.id));
+            case ItemType.gem:
+                App.game.gems.gainGems(amount, this.getGem(item.id));
                 return;
         }
     }
@@ -111,7 +111,7 @@ class BagHandler {
         return id;
     }
 
-    private static getShard(id: string | number): PokemonType {
+    private static getGem(id: string | number): PokemonType {
         if (typeof id === 'string') {
             id = <number>PokemonType[id];
         }

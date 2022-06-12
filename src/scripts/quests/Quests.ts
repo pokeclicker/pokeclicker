@@ -109,10 +109,10 @@ class Quests implements Saveable {
         // Refresh the list each time a player levels up
         if (this.level() > currentLevel) {
             Notifier.notify({
-                message: 'Your quest level has increased!<br/><i>You have a free quest refresh.</i>',
+                message: 'Your quest level has increased!\n<i>You have a free quest refresh.</i>',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 1e4,
-                sound: NotificationConstants.NotificationSound.quest_level_increased,
+                sound: NotificationConstants.NotificationSound.Quests.quest_level_increased,
             });
             this.freeRefresh(true);
             // Track when users gains a quest level and how long it took in seconds
@@ -233,6 +233,10 @@ class Quests implements Saveable {
         const requiredForCurrent = this.levelToXP(current);
         const requiredForNext = this.levelToXP(current + 1);
         return 100 * (this.xp() - requiredForCurrent) / (requiredForNext - requiredForCurrent);
+    }
+
+    public isDailyQuestsUnlocked() {
+        return QuestLineHelper.isQuestLineCompleted('Tutorial Quests');
     }
 
     loadQuestList(questList) {

@@ -1,12 +1,14 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 
 class DamageCalculator {
-    static type1 = ko.observable(PokemonType.None);
-    static type2 = ko.observable(PokemonType.None);
+    static type1 = ko.observable(PokemonType.None).extend({ numeric: 0 });
+    static type2 = ko.observable(PokemonType.None).extend({ numeric: 0 });
     static region = ko.observable(GameConstants.Region.none);
+    static weather = ko.observable(WeatherType.Clear);
     static includeBreeding = ko.observable(false);
     static baseAttackOnly = ko.observable(false);
-    static detailType = ko.observable(PokemonType.None);
+    static ignoreLevel = ko.observable(false);
+    static detailType = ko.observable(PokemonType.None).extend({ numeric: 0 });
 
     static observableTypeDamageArray = ko.pureComputed(DamageCalculator.getDamageByTypes, DamageCalculator);
     static observableTypeDetails = ko.pureComputed(DamageCalculator.getTypeDetail);
@@ -22,7 +24,8 @@ class DamageCalculator {
             DamageCalculator.region(),
             DamageCalculator.includeBreeding(),
             DamageCalculator.baseAttackOnly(),
-            false
+            DamageCalculator.weather(),
+            DamageCalculator.ignoreLevel()
         );
     }
 
@@ -36,7 +39,7 @@ class DamageCalculator {
                 continue;
             }
 
-            const attack = App.game.party.calculateOnePokemonAttack(pokemon, this.type1(), this.type2(), this.region(), ignoreRegionMultiplier, this.includeBreeding(), this.baseAttackOnly());
+            const attack = App.game.party.calculateOnePokemonAttack(pokemon, this.type1(), this.type2(), this.region(), ignoreRegionMultiplier, this.includeBreeding(), this.baseAttackOnly(), this.weather(), this.ignoreLevel());
 
             typedamage[dataPokemon.type1] += attack / 2;
             const otherType = dataPokemon.type2 !== PokemonType.None ? dataPokemon.type2 : dataPokemon.type1;
@@ -71,7 +74,9 @@ class DamageCalculator {
                 DamageCalculator.region(),
                 ignoreRegionMultiplier,
                 DamageCalculator.includeBreeding(),
-                DamageCalculator.baseAttackOnly()
+                DamageCalculator.baseAttackOnly(),
+                DamageCalculator.weather(),
+                DamageCalculator.ignoreLevel()
             ),
         };
     }

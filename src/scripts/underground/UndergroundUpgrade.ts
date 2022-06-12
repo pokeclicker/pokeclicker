@@ -10,7 +10,7 @@ class UndergroundUpgrade extends Upgrade {
 
 
     canBuy(): boolean {
-        return super.canBuy() && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
+        return super.canBuy() && App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit);
     }
 }
 

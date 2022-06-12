@@ -33,7 +33,7 @@
                                     <ul id="seedList" class="list-group p-0">
                                         <!-- ko foreach: FarmController.getBerryListWithIndex() -->
                                         <li class="list-group-item list-group-item-action seed-list-item p-2"
-                                            data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
+                                            data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
                                             <img src="" height="28px"
                                                 data-bind="attr:{ src: FarmController.getBerryImage($data) },
                                                 css: {'berryLocked': !App.game.farming.unlockedBerries[$data]() }">
@@ -81,11 +81,11 @@
                                     <ul id="mulchList" class="list-group p-0">
                                         <!-- ko foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1) -->
                                         <li class="list-group-item list-group-item-action seed-list-item p-2"
-                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);},
+                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);},
                                                 css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() },
                                                 tooltip: {title: ItemList[MulchType[$data]].description, trigger: 'hover', animation: false}">
                                             <img src="" width="24px"
-                                                data-bind="attr:{ src: ItemList[MulchType[$data]].image }">
+                                                 data-bind="attr:{ src: ItemList[MulchType[$data]].image }">
                                             <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
                                             <span class="float-right" data-bind="text: App.game.farming.mulchList[$data]().toLocaleString('en-US')"></span>
                                         </li>
@@ -114,8 +114,9 @@
                             </div>
 
                             <ul id="shovelList" class="list-group">
+                                <!-- ko if: FarmController.berryListVisible() -->
                                 <li class="list-group-item list-group-item-action seed-list-item p-2"
-                                    data-bind="click: function() {FarmController.selectedShovel(true);},
+                                    data-bind="click: function() {FarmController.selectedShovel(true);FarmController.selectedMulchShovel(false);},
                                     css: { 'active': FarmController.selectedShovel() },
                                     tooltip: {title: 'Clear a Plant from a plot.', trigger: 'hover', animation: false}">
                                     <img src="" height="24px"
@@ -123,6 +124,20 @@
                                     <span>Shovel</span>
                                     <span class="float-right" data-bind="text: App.game.farming.shovelAmt().toLocaleString('en-US')"></span>
                                 </li>
+                                <!-- /ko -->
+                            </ul>
+                            <ul id="shovelMulch" class="list-group p-0">
+                                <!-- ko if: !FarmController.berryListVisible() -->
+                                <li class="list-group-item list-group-item-action seed-list-item p-3"
+                                    data-bind="click: function() {FarmController.selectedMulchShovel(true);FarmController.selectedShovel(false);FarmController.selectedMulch(-1);},
+                            css: { 'active': FarmController.selectedMulchShovel() },
+                            tooltip: {title: 'Clear a Mulch from a plot.', trigger: 'hover', animation: false}">
+                                    <img src="" height="21px"
+                                         data-bind="attr:{ src: ItemList['Mulch_Shovel'].image }">
+                                    <span>MulchShovel</span>
+                                    <span class="float-right" data-bind="text: App.game.farming.mulchShovelAmt().toLocaleString('en-US')"></span>
+                                </li>
+                                <!-- /ko -->
                             </ul>
                         </div>
 
@@ -192,11 +207,11 @@
                     <h4><u>Farm</u></h4>
                     <p>In the farm you can plant and harvest Berries.</p>
 
-                    <p>Each Berry type takes a different amount of time to grow,
+                    <p>Each Berry type takes a different amount of time to grow.
                     <br/>Once fully grown, the Berry plant can be clicked to manually harvest the Berries and gain some Farm Points.</p>
 
-                    <p>Otherwise after some time being fully grown, the Berry plant will wither away,
-                    dropping half of the expected Berries but may also be re-planted automatically.
+                    <p>Otherwise, after some time being fully grown, the Berry plant will wither away,
+                    dropping half of the expected Berries, though it may also be re-planted automatically.
                     <br/><i>(Farm Points are only gained by manually harvesting Berries)</i><p>
 
                     <p>Additional plots can be unlocked by spending Berries.</p>
@@ -233,17 +248,17 @@
                     <br/><i>(shovels can be purchased in later regions from Berry Masters)</i></p>
 
                     <h4><u>Trades</u></h4>
-                    <p>Berries can be traded with Berry Masters in later regions for other useful items</p>
+                    <p>Berries can be traded with Berry Masters in later regions for other useful items.</p>
 
                     <h4><u>Wandering Pokémon</u></h4>
                     <p>Ripe Berry plants may attract wild Pokémon that will join your party. Some Pokémon can only be found using certain Berry species.</p>
                     
                     <h4><u>Farm Hands (BETA)</u></h4>
                     <p><i>(unlocked after obtaining 8 unique berries)</i></p>
-                    <p>Farm Hands can help around the Farm, they will harvest and plant berries as needed.</p>
-                    <p class="text-danger"><i>NOTE: This is a <strong>beta</strong> feature, things will likely change in the future, feel free to post any feedback/bugs in the <a href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>.</i></p>
+                    <p>Farm Hands can help around the Farm; they will harvest and plant berries as needed.</p>
+                    <p class="text-danger"><i>NOTE: This is a <strong>beta</strong> feature, so things will likely change in the future; feel free to post any feedback/bugs in the <a href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>.</i></p>
                     <p>Up to 3 Farm Hands can be hired at a time.</p>
-                    <p>If they run out of energy, they won't do any work for that cycle but will regenerate some energy instead, if there's no work to do currently, they will also regenerate some energy.</p>
+                    <p>If they run out of energy, they won't do any work for that cycle, but will regenerate some energy instead. If there's no work to do currently, they will also regenerate some energy.</p>
                     <p>Efficiency refers to how many actions they can do per work cycle.</p>
                     <p><i>More Farm Hands can be unlocked through shops and unlocking unique berries</i></p>
                 </div>

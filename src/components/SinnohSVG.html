@@ -1,5 +1,8 @@
 <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
-    <image width="1600" height="960" xlink:href="assets/images/sinnoh.png" href="assets/images/sinnoh.png"></image>
+    <image width="1600" height="960" data-bind="attr: {
+        'xlink:href':'assets/images/sinnoh.png?v=$VERSION',
+        href:'assets/images/sinnoh.png?v=$VERSION'
+    }"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -76,14 +79,6 @@
         { route: 205, region: 3
         , height: 4, width: 3
         , x: 21, y: 32
-        , noText: true
-        })
-    %>
-     <!--Route 205 Extension-->
-    <%- include('templates/mapRoute',
-        { route: 205, region: 3
-        , height: 3, width: 2
-        , x: 24, y: 33
         , noText: true
         })
     %>
@@ -227,15 +222,6 @@
         })
     %>
 
-    <!--Route 214 extra-->
-    <%- include('templates/mapRoute',
-        { route: 214, region: 3
-        , height: 4, width: 1
-        , x: 73, y: 40
-        , noText: true
-        })
-    %>
-
     <!--Route 215-->
     <%- include('templates/mapRoute',
         { route: 215, region: 3
@@ -349,8 +335,8 @@
     <!--Route 224 Extension-->
     <%- include('templates/mapRoute',
         { route: 224, region: 3
-        , height: 0.5, width: 3
-        , x: 90.5, y: 26
+        , height: 1, width: 3
+        , x: 90, y: 26
         , rotate: true
         , noText: true
         })
@@ -490,6 +476,62 @@
         })
     %>
 
+    <!--Mt. Coronet-->
+    <%- include('templates/mapDungeon',
+        { name: "Mt. Coronet"
+        , x: 40, y: 22
+        , height: 4, width: 6
+        })
+    %>
+
+    <!--Mt. Coronet Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Mt. Coronet"
+        , x: 44, y: 26
+        , height: 1, width: 2
+        })
+    %>
+
+    <!--Mt. Coronet Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Mt. Coronet"
+        , x: 40, y: 18
+        , height: 4, width: 4
+        })
+    %>
+
+    <!--Mt. Coronet Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Mt. Coronet"
+        , x: 40, y: 31
+        , height: 6, width: 4
+        })
+    %>
+
+    <!--Mt. Coronet Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Mt. Coronet"
+        , x: 39, y: 26
+        , height: 5, width: 5
+        })
+    %>
+
+    <!--Mt. Coronet Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Mt. Coronet"
+        , x: 37, y: 33
+        , height: 8, width: 3
+        })
+    %>
+
+    <!--Mt. Coronet Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Mt. Coronet"
+        , x: 40, y: 37
+        , height: 4, width: 1
+        })
+    %>
+
     <!--Hearthome City-->
     <%- include('templates/mapTown',
         { name: "Hearthome City"
@@ -605,8 +647,16 @@
     <!--Pokémon League Sinnoh-->
     <%- include('templates/mapTown',
         { name: "Pokémon League Sinnoh"
-        , x: 80.5, y: 24.2
-        , height: 6.8, width: 10
+        , x: 81, y: 25
+        , width: 9, height: 5.5
+        })
+    %>
+
+    <!--Pokémon League Sinnoh Extension-->
+    <%- include('templates/mapTown',
+        { name: "Pokémon League Sinnoh"
+        , x: 84, y: 30.5
+        , width: 3, height: 0.5
         })
     %>
 
@@ -622,10 +672,10 @@
         })
     %>
 
-    <!--Ravaged Path-->
+    <!--Valley Windworks-->
     <%- include('templates/mapDungeon',
-        { name: "Ravaged Path"
-        , x: 14, y: 37
+        { name: "Valley Windworks"
+        , x: 24, y: 33
         , height: 3, width: 4
         })
     %>
@@ -662,61 +712,6 @@
         })
     %>
 
-    <!--Mt. Coronet North-->
-    <%- include('templates/mapDungeon',
-        { name: "Mt. Coronet North"
-        , x: 40, y: 22
-        , height: 4, width: 6
-        })
-    %>
-
-    <!--Mt. Coronet North extra-->
-    <%- include('templates/mapDungeon',
-        { name: "Mt. Coronet North"
-        , x: 44, y: 26
-        , height: 1, width: 2
-        })
-    %>
-
-    <!--Mt. Coronet North extra 2-->
-    <%- include('templates/mapDungeon',
-        { name: "Mt. Coronet North"
-        , x: 40, y: 18
-        , height: 4, width: 4
-        })
-    %>
-
-    <!--Spear Pillar-->
-    <%- include('templates/mapDungeon',
-        { name: "Spear Pillar"
-        , x: 40, y: 31
-        , height: 6, width: 4
-        })
-    %>
-
-    <!--Hall of Origin-->
-    <%- include('templates/mapDungeon',
-        { name: "Hall of Origin"
-        , x: 39, y: 26
-        , height: 5, width: 5
-        })
-    %>
-
-    <!--Mt. Coronet South-->
-    <%- include('templates/mapDungeon',
-        { name: "Mt. Coronet South"
-        , x: 37, y: 33
-        , height: 8, width: 3
-        })
-    %>
-
-    <!--Mt. Coronet South extra-->
-    <%- include('templates/mapDungeon',
-        { name: "Mt. Coronet South"
-        , x: 40, y: 37
-        , height: 4, width: 1
-        })
-    %>
     <!--Solaceon Ruins-->
     <%- include ('templates/mapDungeon',
         { name: "Solaceon Ruins"
@@ -796,6 +791,22 @@
         })
     %>
 
+    <!--Sendoff Spring-->
+    <%- include('templates/mapDungeon',
+        { name: "Sendoff Spring"
+        , x: 75, y: 40
+        , height: 4, width: 4
+        })
+    %>
+
+    <!--Sendoff Spring Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Sendoff Spring"
+        , x: 73, y: 41
+        , height: 3, width: 2
+        })
+    %>
+
     <!-- ------------------ -->
     <!-- PLACES OF INTEREST -->
     <!-- ------------------ -->
@@ -825,7 +836,7 @@
      %>
 
      <%- include('templates/mapPOI',
-        { name: "Pokemon Day Care"
+        { name: "Pokémon Day Care"
         , x: 49, y: 35
         , width: 4, height: 4
         , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
@@ -837,18 +848,39 @@
          , x: 39, y: 26
          , width: 5, height: 5
          , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: MapHelper.calculateTownCssClass('Distortion World') }"
-         , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Snowpoint City')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]() == 0"
+         , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Spear Pillar')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]() == 0"
          , image: "assets/images/map/distortion_world.png"
          })
      %>
 
      <%- include('templates/mapOverlay',
          { name: "Distortion World"
-         , x: 74, y: 39
+         , x: 74, y: 35
          , width: 5, height: 5
          , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: MapHelper.calculateTownCssClass('Distortion World') }"
-         , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]() >= 1"
+         , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Sendoff Spring')]() >= 1"
          , image: "assets/images/map/distortion_world.png"
          })
      %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Professor Rowan's Blimp"
+         , x: 12, y: 53
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('Twinleaf Town')}, attr:{ class: MapHelper.calculateTownCssClass('Twinleaf Town') }"
+         , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+         , image: "assets/images/map/blimp_empty.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Professor Rowan's Blimp"
+         , x: 12, y: 53
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('Twinleaf Town')}, attr:{ class: MapHelper.calculateTownCssClass('Twinleaf Town') }"
+         , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+         , image: "assets/images/map/blimp_pikachu.png"
+         })
+     %>
+
 </g>

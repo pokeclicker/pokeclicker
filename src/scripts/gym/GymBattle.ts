@@ -21,6 +21,7 @@ class GymBattle extends Battle {
      */
     public static defeatPokemon() {
         this.enemyPokemon().defeat(true);
+
         // Make gym "route" regionless
         App.game.breeding.progressEggsBattle(this.gym.badgeReward * 3 + 1, GameConstants.Region.none);
         this.index(this.index() + 1);
@@ -38,7 +39,7 @@ class GymBattle extends Battle {
      */
     public static generateNewEnemy() {
         this.counter = 0;
-        this.enemyPokemon(PokemonFactory.generateGymPokemon(this.gym.town, this.index()));
+        this.enemyPokemon(PokemonFactory.generateGymPokemon(this.gym, this.index()));
     }
 
     public static pokemonsDefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {

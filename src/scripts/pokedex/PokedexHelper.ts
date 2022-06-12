@@ -94,7 +94,7 @@ class PokedexHelper {
             }
 
             // Check if the name contains the string
-            if (filter['name'] && !pokemon.name.toLowerCase().includes(filter['name'].toLowerCase())) {
+            if (filter['name'] && !pokemon.name.toLowerCase().includes(filter['name'].toLowerCase().trim())) {
                 return false;
             }
 
@@ -115,23 +115,23 @@ class PokedexHelper {
                 return false;
             }
 
-            // If not caught
-            if (filter['caught'] && !alreadyCaught) {
+            // Only uncaught
+            if (filter['caught-shiny'] == 'uncaught' && alreadyCaught) {
                 return false;
             }
 
-            // If not caught shiny variant
-            if (filter['shiny'] && !alreadyCaughtShiny) {
+            // All caught
+            if (filter['caught-shiny'] == 'caught' && !alreadyCaught) {
                 return false;
             }
 
-            // If not caught, or already caught shiny
-            if (filter['not-shiny'] && (!alreadyCaught || alreadyCaughtShiny)) {
+            // Only caught not shiny
+            if (filter['caught-shiny'] == 'caught-not-shiny' && (!alreadyCaught || alreadyCaughtShiny)) {
                 return false;
             }
 
-            // If already caught
-            if (filter['uncaught'] && alreadyCaught) {
+            // Only caught shiny
+            if (filter['caught-shiny'] == 'caught-shiny' && !alreadyCaughtShiny) {
                 return false;
             }
 
@@ -146,22 +146,16 @@ class PokedexHelper {
 
     private static getFilters() {
         const res = {};
-        res['name'] = (<HTMLInputElement>document.getElementById('nameFilter')).value;
-        const type1 = <HTMLSelectElement>document.getElementById('pokedex-filter-type1');
-        res['type1'] = type1.options[type1.selectedIndex].value;
-        const type2 = <HTMLSelectElement>document.getElementById('pokedex-filter-type2');
-        res['type2'] = type2.options[type2.selectedIndex].value;
-        const region = <HTMLSelectElement>document.getElementById('pokedex-filter-region');
-        res['region'] = region.options[region.selectedIndex].value;
-        res['caught'] = (<HTMLInputElement> document.getElementById('pokedex-filter-caught')).checked;
-        res['uncaught'] = (<HTMLInputElement> document.getElementById('pokedex-filter-uncaught')).checked;
-        res['shiny'] = (<HTMLInputElement> document.getElementById('pokedex-filter-shiny')).checked;
-        res['not-shiny'] = (<HTMLInputElement> document.getElementById('pokedex-filter-not-shiny')).checked;
-        res['held-item'] = (<HTMLInputElement> document.getElementById('pokedex-filter-held-item')).checked;
+        res['name'] = $('#nameFilter').val();
+        res['type1'] = $('#pokedex-filter-type1').val();
+        res['type2'] = $('#pokedex-filter-type2').val();
+        res['region'] = $('#pokedex-filter-region').val();
+        res['caught-shiny'] = $('#pokedex-filter-shiny-caught').val();
+        res['held-item'] = $('#pokedex-filter-held-item').is(':checked');
         return res;
     }
 
-    private static getImage(id: number, name: string) {
+    public static getImage(id: number) {
         let src = 'assets/images/';
         if (App.game.party.alreadyCaughtPokemon(id, true) && this.toggleAllShiny()) {
             src += 'shiny';
@@ -170,7 +164,7 @@ class PokedexHelper {
         return src;
     }
 
-    private static getImageStatistics(id: number) {
+    public static getImageStatistics(id: number) {
         let src = 'assets/images/';
         if (App.game.party.alreadyCaughtPokemon(id, true) && this.toggleStatisticShiny()) {
             src += 'shiny';

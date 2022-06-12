@@ -21,7 +21,7 @@ export default class Statistics implements Saveable {
     secondsPlayed: KnockoutObservable<number>;
     clickAttacks: KnockoutObservable<number>;
     questsCompleted: KnockoutObservable<number>;
-    totalShardsGained: KnockoutObservable<number>;
+    totalGemsGained: KnockoutObservable<number>;
     totalProteinsObtained: KnockoutObservable<number>;
     // Currency
     totalMoney: KnockoutObservable<number>;
@@ -45,6 +45,7 @@ export default class Statistics implements Saveable {
     undergroundDailyDealTrades: KnockoutObservable<number>;
     // Farm
     totalManualHarvests: KnockoutObservable<number>;
+    totalBerriesObtained: KnockoutObservable<number>;
     totalBerriesHarvested: KnockoutObservable<number>;
     totalBerriesReplanted: KnockoutObservable<number>;
     totalBerriesMutated: KnockoutObservable<number>;
@@ -60,16 +61,19 @@ export default class Statistics implements Saveable {
      */
     pokeballsUsed: Array<KnockoutObservable<number>>;
     pokeballsBought: Array<KnockoutObservable<number>>;
+    pokeballsObtained: Array<KnockoutObservable<number>>;
     // Other
-    shardsGained: Array<KnockoutObservable<number>>;
+    gemsGained: Array<KnockoutObservable<number>>;
     oakItemUses: Array<KnockoutObservable<number>>;
     // Farm
     berriesHarvested: Array<KnockoutObservable<number>>;
+    berriesObtained: KnockoutObservable<number>;
     mulchesUsed: Array<KnockoutObservable<number>>;
     // Battle
     routeKills: Record<string, Record<string, KnockoutObservable<number>>>;
     gymsDefeated: Array<KnockoutObservable<number>>;
     dungeonsCleared: Array<KnockoutObservable<number>>;
+    temporaryBattleDefeated: Array<KnockoutObservable<number>>;
 
     /*
      * objectObservables
@@ -87,7 +91,7 @@ export default class Statistics implements Saveable {
         'secondsPlayed',
         'clickAttacks',
         'questsCompleted',
-        'totalShardsGained',
+        'totalGemsGained',
         'totalProteinsObtained',
         'totalMoney',
         'totalDungeonTokens',
@@ -108,6 +112,7 @@ export default class Statistics implements Saveable {
         'undergroundDailyDealTrades',
         'totalManualHarvests',
         'totalBerriesHarvested',
+        'totalBerriesObtained',
         'totalBerriesReplanted',
         'totalBerriesMutated',
         'totalMulchesUsed',
@@ -121,10 +126,13 @@ export default class Statistics implements Saveable {
         'dungeonsCleared',
         'pokeballsUsed',
         'pokeballsBought',
-        'shardsGained',
+        'pokeballsObtained',
+        'gemsGained',
         'oakItemUses',
         'berriesHarvested',
+        'berriesObtained',
         'mulchesUsed',
+        'temporaryBattleDefeated',
     ];
     // These will allow negative values (special events etc)
     objectObservables = [
@@ -254,6 +262,9 @@ export default class Statistics implements Saveable {
             if (typeof input === 'object' && !ko.isObservable(input)) {
                 // Recurse objects through getSaveDataValue, to get any observable values
                 return Object.entries(input).reduce((acc, [nextKey, nextValue]) => {
+                    if (nextValue === 0) {
+                        return acc;
+                    }
                     acc[nextKey] = getSaveDataValue(nextValue);
                     return acc;
                 }, {});

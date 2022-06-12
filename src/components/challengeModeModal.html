@@ -9,8 +9,8 @@
             </div>
             <div class="modal-body">
                 <p>
-                    <strong>Activate in game challenge modes!</strong><br/>
-                    Once you activate a challenge you will not be able to disable it later on, decide carefully.
+                    <strong>Activate in-game challenge modes!</strong><br/>
+                    Challenges can be disabled later, but cannot be re-enabled.
                 </p>
                 <br/>
                 <table class="table" width="100%">
@@ -23,9 +23,8 @@
                             <td class="text-left font-weight-bold" data-bind="text: $data.type"></td>
                             <td class="p-1">
                                 <!-- ko if: !$data.active() && player.starter() == GameConstants.Starter.None --><button class="btn btn-warning btn-block" data-bind="click: ()=>{$data.activate();}">ACTIVATE</button><!-- /ko -->
-                                <!-- ko if: $data.active() && player.starter() == GameConstants.Starter.None --><button class="btn btn-success btn-block" data-bind="click: ()=>{$data.disable();}">ACTIVE</button><!-- /ko -->
                                 <!-- ko if: !$data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-secondary btn-block disabled">DISABLED</button><!-- /ko -->
-                                <!-- ko if: $data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-success btn-block disabled">ACTIVE</button><!-- /ko -->
+                                <!-- ko if: $data.active() --><button class="btn btn-success btn-block" data-bind="click: ()=>{$data.disable();}">ACTIVE</button><!-- /ko -->
                             </td>
                         </tr>
                     </tbody>

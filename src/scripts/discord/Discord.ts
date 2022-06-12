@@ -8,13 +8,14 @@ class Discord implements Saveable {
 
     ID: KnockoutObservable<string> = ko.observable(null);
     codes: Array<DiscordCode> = [
-        new DiscordPokemonCode(pokemonMap['Unown (D)'], 700, 'Alternate form of Unown'),
-        new DiscordPokemonCode(pokemonMap['Unown (I)'], 700, 'Alternate form of Unown'),
-        new DiscordPokemonCode(pokemonMap['Unown (S)'], 700, 'Alternate form of Unown'),
-        new DiscordPokemonCode(pokemonMap['Unown (C)'], 700, 'Alternate form of Unown'),
-        new DiscordPokemonCode(pokemonMap['Unown (O)'], 700, 'Alternate form of Unown'),
-        new DiscordPokemonCode(pokemonMap['Unown (R)'], 700, 'Alternate form of Unown'),
+        new DiscordPokemonCode(pokemonMap['Unown (D)'], 700, 'An alternate form of Unown.'),
+        new DiscordPokemonCode(pokemonMap['Unown (I)'], 700, 'An alternate form of Unown.'),
+        new DiscordPokemonCode(pokemonMap['Unown (S)'], 700, 'An alternate form of Unown.'),
+        new DiscordPokemonCode(pokemonMap['Unown (C)'], 700, 'An alternate form of Unown.'),
+        new DiscordPokemonCode(pokemonMap['Unown (O)'], 700, 'An alternate form of Unown.'),
+        new DiscordPokemonCode(pokemonMap['Unown (R)'], 700, 'An alternate form of Unown.'),
         new DiscordPokemonCode(pokemonMap['Surfing Pikachu'], 1500, 'It\'s a Pikachu on a surfboard!'),
+        new DiscordPokemonCode(pokemonMap['Rotom (discord)'], 10000, 'A Discord-style Rotom!'),
     ];
 
     get enabled(): boolean {
@@ -48,6 +49,8 @@ class Discord implements Saveable {
 
     logout(): void {
         this.ID(this.defaults.id);
+        // Save now
+        Save.store(player);
     }
 
     calcCode(code) {
@@ -96,7 +99,7 @@ class Discord implements Saveable {
         // User not logged in to Discord
         if (!this.ID()) {
             Notifier.notify({
-                message: 'You must sign in to Discord before attempting this code',
+                message: 'You must sign in to Discord before attempting to use this code',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;
