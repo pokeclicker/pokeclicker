@@ -836,9 +836,8 @@
         { name: "A very normal frigate"
         , x: 39, y: 52
         , width: 4, height: 9
-        , databind: `attr: { class: App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Virbank City')]() >= 1 },
-                click: () => {
-                    Notifier.notify({message: 'Nothing out of the ordinary.'});
+        , databind: `click: () => {
+                Notifier.notify({message: 'Nothing out of the ordinary.'});
                 }`
         , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Virbank City')]() >= 1 && App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Driftveil City')]() == 0"
         , image: "assets/images/map/plasmafrigate_ship.png"
@@ -850,9 +849,8 @@
         { name: "A totally unsuspicious frigate"
         , x: 36, y: 35
         , width: 4, height: 9
-        , databind: `attr: { class: App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Driftveil City')]() >= 1 },
-                click: () => {
-                    Notifier.notify({message: 'Nope, nothing suspicious here.'});
+        , databind: `click: () => {
+                Notifier.notify({message: 'Nope, nothing suspicious here.'});
                 }`
         , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Driftveil City')]() >= 1 && App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]() == 0"
         , image: "assets/images/map/plasmafrigate_ship.png"
