@@ -15,69 +15,41 @@ class ShardDeal {
         this.questPointCost = this.item.itemType.basePrice / 5 || 1;
     }
 
-    public static generateDeals() {
-        const shardMasterTowns = [
-            GameConstants.ShardTraderLocations['Pallet Town'],
-            GameConstants.ShardTraderLocations['Pewter City'],
-        ];
-
-        for (const town of shardMasterTowns) {
-            if (!ShardDeal.list[town]) {
-                ShardDeal.list[town] = ko.observableArray();
-            } else {
-                ShardDeal.list[town].removeAll();
-            }
-        }
-
-        ShardDeal.list[GameConstants.ShardTraderLocations['Pallet Town']].push(...this.generatePalletShardDeals());
-        ShardDeal.list[GameConstants.ShardTraderLocations['Pewter City']].push(...this.generatePewterShardDeals());
-        //ShardDeal.list[GameConstants.Region.johto].push(...this.generateJohtoShardDeals());
-        //ShardDeal.list[GameConstants.Region.hoenn].push(...this.generateHoennShardDeals());
-        //ShardDeal.list[GameConstants.Region.sinnoh].push(...this.generateSinnohShardDeals());
-        //ShardDeal.list[GameConstants.Region.kalos].push(...this.generateKalosShardDeals());
-    }
-
-    private static generatePalletShardDeals() {
-        const list = [];
-
-        list.push(new ShardDeal(
-            [{shardType: Underground.getMineItemByName('Rare Bone'), amount: 1}],
-            ItemList['Fire_stone'],
-            1
-        ));
-        list.push(new ShardDeal(
-            [
-                {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
-                {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
-            ],
-            ItemList['Fire_egg'],
-            1
-        ));
-        return list;
-    }
-
-    private static generatePewterShardDeals() {
-        const list = [];
-
-        list.push(new ShardDeal(
-            [{shardType: Underground.getMineItemByName('Rare Bone'), amount: 1}],
-            ItemList['Leaf_stone'],
-            1
-        ));
-        list.push(new ShardDeal(
-            [
-                {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
-                {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
-            ],
-            ItemList['Leaf_stone'],
-            1
-        ));
-        return list;
-    }
-
-
     public static getDeals(town: GameConstants.ShardTraderLocations) {
         return ShardDeal.list[GameConstants.ShardTraderLocations[town]];
+    }
+
+    public static generateDeals() {
+        ShardDeal.list[GameConstants.ShardTraderLocations['Pallet Town']] = ko.observableArray(
+            [
+                new ShardDeal(
+                    [{shardType: Underground.getMineItemByName('Rare Bone'), amount: 1}],
+                    ItemList['Fire_stone'],
+                    1
+                ),
+                new ShardDeal(
+                    [
+                        {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
+                        {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
+                    ],
+                    ItemList['Fire_egg'],
+                    1),
+            ]);
+        ShardDeal.list[GameConstants.ShardTraderLocations['Pewter City']] = ko.observableArray(
+            [
+                new ShardDeal(
+                    [{shardType: Underground.getMineItemByName('Yellow Shard'), amount: 1}],
+                    ItemList['Leaf_stone'],
+                    1
+                ),
+                new ShardDeal(
+                    [
+                        {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
+                        {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
+                    ],
+                    ItemList['Grass_egg'],
+                    1),
+            ]);
     }
 
     public static canUse(town: GameConstants.ShardTraderLocations, i: number): boolean {
