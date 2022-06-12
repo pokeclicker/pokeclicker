@@ -13,7 +13,6 @@ export default class ClientRequirement extends Requirement {
         return App.isUsingClient ? 1 : 0;
     }
 
-    // eslint-disable-next-line class-methods-use-this
     public hint(): string {
         return this.usingClient ? 'Use the client' : 'Use the browser version';
     }
