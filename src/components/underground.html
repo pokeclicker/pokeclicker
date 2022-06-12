@@ -262,7 +262,7 @@
                     <!-- /ko -->
                     <button class='btn btn-success btn-block'
                             data-bind="attr: { 'data-itemid': id },
-                            css: { disabled: amount() <= 0 || sellLocked() || (valueType === 'Mine Egg' && !App.game.breeding.hasFreeEggSlot()) },
+                            css: { disabled: amount() <= 0 || sellLocked() || (valueType === 'Mine Egg' && (!App.game.breeding.hasFreeEggSlot() && !App.game.breeding.hasFreeQueueSlot())) },
                                     text: valueType === 'Mine Egg' ? 'Breed' : 'Sell',
                                     click: function(){Underground.sellMineItem($element.dataset.itemid, sellAmount() || 1)}">
                     </button>

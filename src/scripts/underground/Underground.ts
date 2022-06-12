@@ -317,7 +317,7 @@ class Underground implements Feature {
         });
     }
 
-    public static sellMineItem(id: number, amount = 1) {
+    public static sellMineItem(id: number, amount = 1): boolean {
         for (let i = 0; i < player.mineInventory().length; i++) {
             const item = player.mineInventory()[i];
             if (item.id == id) {
@@ -326,7 +326,7 @@ class Underground implements Feature {
                         message: 'Item is locked for selling, you first have to unlock it.',
                         type: NotificationConstants.NotificationOption.warning,
                     });
-                    return;
+                    return false;
                 }
                 if (item.valueType == 'Mine Egg') {
                     amount = 1;
@@ -339,7 +339,7 @@ class Underground implements Feature {
                         player.mineInventory()[i].amount(curAmt - sellAmt);
                         this.sortMineItems(this.lastPropSort, false);
                     }
-                    return;
+                    return success;
                 }
             }
         }
@@ -372,10 +372,13 @@ class Underground implements Feature {
                 App.game.wallet.gainDiamonds(item.value * amount);
                 break;
             case 'Mine Egg':
-                if (!App.game.breeding.hasFreeEggSlot()) {
-                    return false;
+                if (App.game.breeding.hasFreeEggSlot()) {
+                    success = App.game.breeding.gainEgg(App.game.breeding.createFossilEgg(item.name));
+                } else if (App.game.breeding.hasFreeQueueSlot()){
+                    success = App.game.breeding.addToQueue(item.name as HatcheryQueueEntry)
+                } else {
+                    return false
                 }
-                success = App.game.breeding.gainEgg(App.game.breeding.createFossilEgg(item.name));
                 break;
             default:
                 const type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string

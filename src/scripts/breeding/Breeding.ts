@@ -2,6 +2,7 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 /// <reference path="../../declarations/breeding/EggType.d.ts" />
+/// <reference path="../../declarations/breeding/HatcheryQueueEntry.d.ts" />
 
 import Currency = GameConstants.Currency;
 
@@ -20,7 +21,7 @@ class Breeding implements Feature {
     private _eggList: Array<KnockoutObservable<Egg>>;
     private _eggSlots: KnockoutObservable<number>;
 
-    private queueList: KnockoutObservableArray<PokemonNameType>;
+    private queueList: KnockoutObservableArray<HatcheryQueueEntry>;
     private queueSlots: KnockoutObservable<number>;
 
     public hatchList: { [name: number]: PokemonNameType[][] } = {};
@@ -214,6 +215,31 @@ class Breeding implements Feature {
         return this.multiplier.getBonus('eggStep');
     }
 
+    public addToHatchery(entry: PartyPokemon | HatcheryQueueEntry) {
+        let added = false;
+        if (HatcheryQueue.isHatcheryEgg(entry)) {
+            added = this.addEggToHatchery(entry);
+        } else if (HatcheryQueue.isHatcheryFossil(entry)) {
+            added = this.addFossilToHatchery(entry);
+        } else if ((entry as PartyPokemon).baseAttack) {
+            // Type assertion based on key in PartyPokemon
+            added = this.addPokemonToHatchery(entry as PartyPokemon);
+        }
+
+        if (!added) {
+            let message = 'You don\'t have any free egg slots';
+            if (this.queueSlots()) {
+                message += '<br/>Your queue is full';
+            }
+            Notifier.notify({
+                message,
+                type: NotificationConstants.NotificationOption.warning,
+            });
+        }
+
+        return added;
+    }
+
     public addPokemonToHatchery(pokemon: PartyPokemon): boolean {
         // If they have a free eggslot, add the pokemon to the egg now
         if (this.hasFreeEggSlot()) {
@@ -221,24 +247,52 @@ class Breeding implements Feature {
         }
         // If they have a free queue, add the pokemon to the queue now
         if (this.hasFreeQueueSlot()) {
-            return this.addToQueue(pokemon);
+            return this.addToQueue(pokemon.name);
         }
-        let message = 'You don\'t have any free egg slots';
-        if (this.queueSlots()) {
-            message += '<br/>Your queue is full';
-        }
-        Notifier.notify({
-            message,
-            type: NotificationConstants.NotificationOption.warning,
-        });
         return false;
     }
 
-    public addToQueue(pokemon: PartyPokemon): boolean {
+    public addEggToHatchery(eggType: EggNameType): boolean {
+        // If eggType is invalid or player has no eggs of the passed type
+        if (!player.itemList[eggType]()) {
+            return false;
+        }
+
+        let added = false
+        const type = HatcheryQueue.eggItemTypeToEggType(eggType)
+        if (this.hasFreeEggSlot()) {
+            // If they have a free egg slot, create egg and add to hatchery
+            added = type !== EggType.None && this.gainEgg(eggType === "Mystery_egg" ? this.createRandomEgg() : this.createTypedEgg(type));
+        } else if (this.hasFreeQueueSlot()) {
+            // If they have a free queue slot, add the generic-looking egg to the queue
+            added = this.addToQueue(eggType);
+        }
+
+        if (added) {
+            // Decrement item count if successful
+            player.loseItem(eggType, 1);
+        }
+
+        return added;
+    }
+
+
+    public addFossilToHatchery(fossil: FossilNameType): boolean {
+        // If they have a free egg slot or queue slot, create fossil egg and add to hatchery
+        if (this.hasFreeEggSlot() || this.hasFreeQueueSlot()) {
+            return Underground.sellMineItem(Underground.getMineItemByName(fossil).id);
+        }
+
+        return
+    }
+
+    public addToQueue(queueEntry: HatcheryQueueEntry): boolean {
         const queueSize = this.queueList().length;
         if (queueSize < this.queueSlots()) {
-            pokemon.breeding = true;
-            this.queueList.push(pokemon.name);
+            if (HatcheryQueue.isHatcheryPokemon(queueEntry)) {
+                App.game.party._caughtPokemon().find(p => p.name == queueEntry).breeding = true;
+            }
+            this.queueList.push(queueEntry);
             return true;
         }
         return false;
@@ -247,10 +301,20 @@ class Breeding implements Feature {
     public removeFromQueue(index: number): boolean {
         const queueSize = this.queueList().length;
         if (queueSize > index) {
-            const pokemonName = this.queueList.splice(index, 1)[0];
-            App.game.party._caughtPokemon().find(p => p.name == pokemonName).breeding = false;
-            return true;
+            const queueEntry = this.queueList.splice(index, 1)[0];
+            if (HatcheryQueue.isHatcheryPokemon(queueEntry)) {
+                App.game.party._caughtPokemon().find(p => p.name == queueEntry).breeding = false;
+            } else if (HatcheryQueue.isHatcheryFossil(queueEntry)) {
+                // Add fossil back to inventory
+                Underground.gainMineItem(Underground.getMineItemByName(queueEntry).id);
+            } else if (HatcheryQueue.isHatcheryEgg(queueEntry)) {
+                // Add egg back to inventory
+                player.gainItem(queueEntry, 1);
+            } else {
+                return false;
+            }
         }
+
         return false;
     }
 
@@ -301,9 +365,14 @@ class Breeding implements Feature {
         });
     }
 
-    public createEgg(pokemonName: PokemonNameType, type = EggType.Pokemon): Egg {
-        const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(pokemonName);
-        return new Egg(type, this.getSteps(dataPokemon.eggCycles), pokemonName);
+    public createEgg(queueItem: HatcheryQueueEntry, type = EggType.Pokemon): Egg {
+        if (HatcheryQueue.isHatcheryPokemon(queueItem)) {
+            const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(queueItem);
+            return new Egg(type, this.getSteps(dataPokemon.eggCycles), queueItem);
+        }
+
+        // Is an egg or fossil
+        return queueItem === "Mystery_egg" ? this.createRandomEgg() : HatcheryQueue.isHatcheryFossil(queueItem) ? this.createFossilEgg(queueItem) : this.createTypedEgg(HatcheryQueue.eggItemTypeToEggType(queueItem));
     }
 
     public createTypedEgg(type: EggType): Egg {
