@@ -67,14 +67,16 @@ SpecialEvents.newEvent('Easter', 'Encounter Surprise Togepi for a limited time w
     }
 );
 // First Event
-SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu for a limited time roaming Kanto.',
+SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu and Red Spearow for a limited time roaming Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 6, 1), () => {
         RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Flying Pikachu'));
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Red Spearow'));
     },
     // End
     new Date(new Date().getFullYear(), 6, 12, 23), () => {
         RoamingPokemonList.remove(GameConstants.Region.kanto, 'Flying Pikachu');
+        RoamingPokemonList.remove(GameConstants.Region.kanto, 'Red Spearow');
     }
 );
 // Pokemon the first movie release date

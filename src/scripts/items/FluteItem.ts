@@ -56,7 +56,7 @@ class FluteItem extends Item {
         }
         if (FluteEffectRunner.getLowestGem(this.name) <= FluteEffectRunner.numActiveFlutes() + 1) {
             Notifier.notify({
-                message: 'You don\'t have enough gems to use this Flute',
+                message: 'You don\'t have enough gems to use this Flute.',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;
@@ -66,15 +66,9 @@ class FluteItem extends Item {
 
 }
 
-ItemList['Red_Flute']         = new FluteItem(GameConstants.FluteItemType.Red_Flute, 'Click Attack', ['Fighting', 'Fire', 'Poison'], 'clickAttack', 1.02);
-ItemList['White_Flute']       = new FluteItem(GameConstants.FluteItemType.White_Flute, 'Exp Yield', ['Normal', 'Bug', 'Rock'], 'exp', 1.02);
-ItemList['Black_Flute']       = new FluteItem(GameConstants.FluteItemType.Black_Flute, 'Item Drop Rate', ['Normal', 'Flying', 'Poison'], undefined, 1.02);
-ItemList['Yellow_Flute']      = new FluteItem(GameConstants.FluteItemType.Yellow_Flute, 'Pokedollar Yield', ['Dark', 'Electric', 'Steel'], 'money', 1.02);
-ItemList['Blue_Flute']        = new FluteItem(GameConstants.FluteItemType.Blue_Flute, 'Dungeon Token Yield', ['Dark', 'Ghost', 'Ice'], 'dungeonToken', 1.02);
-ItemList['Poke_Flute']        = new FluteItem(GameConstants.FluteItemType.Poke_Flute, 'Pokémon Attack', ['Fighting', 'Ice', 'Fairy'], 'pokemonAttack', 1.02);
-ItemList['Azure_Flute']       = new FluteItem(GameConstants.FluteItemType.Azure_Flute, 'Shiny Chance', ['Dragon', 'Ghost', 'Steel'], 'shiny', 1.02);
-ItemList['Eon_Flute']         = new FluteItem(GameConstants.FluteItemType.Eon_Flute, 'Roaming Chance', ['Flying', 'Dragon', 'Psychic'], 'roaming', 1.02);
-ItemList['Sun_Flute']         = new FluteItem(GameConstants.FluteItemType.Sun_Flute, 'Egg Steps', ['Fire', 'Ground', 'Water'], 'eggStep', 1.02);
-ItemList['Moon_Flute']        = new FluteItem(GameConstants.FluteItemType.Moon_Flute, 'Mining Energy Regeneration Yield and Time', ['Rock', 'Ground', 'Electric'], undefined, 1.02);
-ItemList['Time_Flute']        = new FluteItem(GameConstants.FluteItemType.Time_Flute, 'Dungeon Timer', ['Grass', 'Psychic', 'Water'], undefined, 1.02);
-ItemList['Grass_Flute']       = new FluteItem(GameConstants.FluteItemType.Grass_Flute, 'Berry Replant and Growth Multipliers', ['Grass', 'Bug', 'Fairy'], undefined, 1.02);
+ItemList['Yellow_Flute']       = new FluteItem(GameConstants.FluteItemType.Yellow_Flute, 'Pokémon Attack', ['Grass', 'Flying', 'Electric'], 'pokemonAttack', 1.02);
+ItemList['Time_Flute']        = new FluteItem(GameConstants.FluteItemType.Time_Flute, 'Gym and Dungeon Timers', ['Ground', 'Poison', 'Steel'], undefined, 1.02);
+ItemList['Black_Flute']        = new FluteItem(GameConstants.FluteItemType.Black_Flute, 'Click Attack', ['Dark', 'Psychic', 'Fighting'], 'clickAttack', 1.02);
+ItemList['Red_Flute']         = new FluteItem(GameConstants.FluteItemType.Red_Flute, 'Egg Steps', ['Fire', 'Rock', 'Dragon'], 'eggStep', 1.02);
+ItemList['White_Flute']         = new FluteItem(GameConstants.FluteItemType.White_Flute, 'Shiny Chance', ['Normal', 'Fairy', 'Ice'], 'shiny', 1.02);
+ItemList['Blue_Flute']        = new FluteItem(GameConstants.FluteItemType.Blue_Flute, 'Dungeon Token Yield', ['Water', 'Bug', 'Ghost'], 'dungeonToken', 1.02);

@@ -105,6 +105,15 @@ export default class GameHelper {
         return array;
     }
 
+    // Filter out any falsy values from the end of an array
+    public static filterArrayEnd(arr) {
+        let check = false;
+        return [...arr].reverse().filter((v) => {
+            check = check || !!v;
+            return check;
+        }).reverse();
+    }
+
     public static anOrA(name: string): string {
         return ['a', 'e', 'i', 'o', 'u'].includes(name[0].toLowerCase()) ? 'an' : 'a';
     }

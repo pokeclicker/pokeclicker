@@ -38,6 +38,7 @@ export type PokemonNameType
     | 'Alolan Raticate'
     | 'Totem Raticate'
     | 'Spearow'
+    | 'Red Spearow'
     | 'Fearow'
     | 'Ekans'
     | 'Arbok'

@@ -10,7 +10,7 @@ class RouteHelper {
      * @param route
      * @param region
      * @param includeHeadbutt
-     * @returns {string[]} list of all Pokémons that can be caught
+     * @returns {string[]} list of all Pokémon that can be caught
      */
     public static getAvailablePokemonList(route: number, region: GameConstants.Region, includeHeadbutt = true): PokemonNameType[] {
         // If the route is somehow higher than allowed, use the first route to generateWildPokemon Pokémon
@@ -39,7 +39,7 @@ class RouteHelper {
     }
 
     /**
-     * Checks if all Pokémons on this route are caught by the player.
+     * Checks if all Pokémon on this route are caught by the player.
      * @param route
      * @param region
      * @param includeShiny
@@ -67,6 +67,12 @@ class RouteHelper {
     public static isAchievementsComplete(route: number, region: GameConstants.Region) {
         return AchievementHandler.achievementList.every(achievement => {
             return !(achievement.property instanceof RouteKillRequirement && achievement.property.region === region && achievement.property.route === route && !achievement.isCompleted());
+        });
+    }
+
+    public static isThereQuestAtLocation(route: number, region: GameConstants.Region) {
+        return App.game.quests.currentQuests().some(q => {
+            return q instanceof DefeatPokemonsQuest && q.route == route && q.region == region;
         });
     }
 

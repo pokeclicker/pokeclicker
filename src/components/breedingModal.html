@@ -12,6 +12,9 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     data-target="#breeding-sort" aria-expanded="false" aria-controls="breeding-sort">
                 Sort
             </button>
+            <button class="btn btn-secondary" type="button" style="margin-left: 25px;" href="#categoryModal" data-toggle="modal">
+                Categories
+            </button>
             <button type="button" class="btn btn-info"
             style="position: absolute; right: 0px; top: 0px; width: auto; height: 69px; padding: 10px;"
             data-bind="tooltip: { title: `You can trade your level 100 Pokémon for an egg of the same Pokémon. Hatched Pokémon will gain a ${GameConstants.BREEDING_ATTACK_BONUS}% bonus of their base attack and have a higher chance of becoming shiny!`, trigger: 'hover', placement:'left' }">
@@ -40,7 +43,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         <div class="form-row collapse" id="breeding-filter">
                             <div class="form-group col-md-6 col-6">
                                 <label>Search</label>
-                                <input autocomplete="off" class="form-control" oninput="BreedingController.filter.search(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
+                                <input autocomplete="off" class="form-control" oninput="BreedingFilters.search.value(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Display Value</label>
@@ -52,7 +55,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Category</label>
-                                <select name="breedingCategoryFilter" autocomplete="off" class="custom-select" onchange="BreedingController.filter.category(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                <select name="breedingCategoryFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.category.value(+this.value), Settings.setSettingByName(this.name, this.value)">
                                     <option value="-1">All</option>
                                     <!-- ko foreach: PokemonCategories.categories -->
                                     <option style="color: whitesmoke" data-bind="attr: { value: $index, selected: Settings.getSetting('breedingCategoryFilter').value == $index() }, text: $data.name, style: { background: $data.color }">Category</option>
@@ -61,15 +64,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Region</label>
-                                <select name="breedingRegionFilter" autocomplete="off" class="custom-select" onchange="BreedingController.filter.region(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                <select name="breedingRegionFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.region.value(+this.value), Settings.setSettingByName(this.name, this.value)">
                                     <!-- ko foreach: Settings.getSetting('breedingRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
-                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingRegionFilter').value === $data.value }, text: $data.text">Type</option>
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingRegionFilter').value === $data.value }, text: $data.text">Region</option>
                                     <!-- /ko -->
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Shiny Status</label>
-                                <select name="breedingShinyFilter" autocomplete="off" class="custom-select" onchange="BreedingController.filter.shinyStatus(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                <select name="breedingShinyFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.shinyStatus.value(+this.value), Settings.setSettingByName(this.name, this.value)">
                                     <option value="-1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '-1' }">All</option>
                                     <option value="0" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '0' }">Not Shiny</option>
                                     <option value="1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '1' }">Shiny</option>
@@ -77,7 +80,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Type</label>
-                                <select name="breedingTypeFilter1" autocomplete="off" class="custom-select" onchange="BreedingController.filter.type1(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                <select name="breedingTypeFilter1" autocomplete="off" class="custom-select" onchange="BreedingFilters.type1.value(+this.value), Settings.setSettingByName(this.name, this.value)">
                                     <!-- ko foreach: Settings.getSetting('breedingTypeFilter1').options -->
                                     <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter1').value === $data.value }, text: $data.text">Type</option>
                                     <!-- /ko -->
@@ -85,7 +88,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Type</label>
-                                <select name="breedingTypeFilter2" autocomplete="off" class="custom-select" onchange="BreedingController.filter.type2(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                <select name="breedingTypeFilter2" autocomplete="off" class="custom-select" onchange="BreedingFilters.type2.value(+this.value), Settings.setSettingByName(this.name, this.value)">
                                     <!-- ko foreach: Settings.getSetting('breedingTypeFilter2').options -->
                                     <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter2').value === $data.value }, text: $data.text">Type</option>
                                     <!-- /ko -->
@@ -101,7 +104,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         <option data-bind="text: $data.text, value: $data.value"></option>
                                     </select>
                                     <div class="input-group-append bg-primary text-light">
-                                        <label for="hatcherySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('hatcherySortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
+                                        <label for="hatcherySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                                        text: Settings.getSetting('hatcherySortDirection').observableValue() ? '⥄' : '⥂',
+                                        tooltip: { title: Settings.getSetting('hatcherySortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
+
+                                        ">⥂</label>
                                         <input id="hatcherySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
                                             data-bind="checked: Settings.getSetting('hatcherySortDirection').observableValue()"
                                             onchange="Settings.setSettingByName('hatcherySortDirection', this.checked)"/>
@@ -168,6 +175,8 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">
                             <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + $data.amount()">amount</span>
                             <a class="overlay" href="#breed" data-bind="click: function() { Underground.sellMineItem($data.id); App.game.breeding.checkCloseModal(); }"></a>
+                            <knockout style="position: absolute; right: 2px; top: -14px;"
+                                data-bind="template: { name: 'caughtStatusTemplate', data: { status: PartyController.getCaughtStatusByName(GameConstants.FossilToPokemon[$data.name]) } }"/>
                         </li>
                     </ul>
                     <!-- /ko -->
@@ -191,7 +200,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="text-left align-middle">Cost:</td>
+                                            <td class="text-left align-middle">Cost / Hatch:</td>
                                             <td class="text-right" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.cost.amount, 'currency': $data.cost.currency, 'reducedThreshold': 1e10}}"></td>
                                         </tr>
                                         <tr>
@@ -253,12 +262,16 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <div class="input-group input-group-sm">
                                                     <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions), optionsValue: 'value', optionsText: i => GameConstants.camelCaseToString(i.name), value: $data.sortOption"></select>
                                                     <div class="input-group-append bg-primary text-light">
-                                                        <label class="clickable m-0 px-2" style="font-size: 20px;" data-bind="attr: { for: 'hatcheryHelperSortDirection' + $index() }, text: $data.sortDirection() ? '⥄' : '⥂'">⥂</label>
+                                                        <label class="clickable m-0 px-2" style="font-size: 20px;" data-bind="
+                                                            attr: {for: 'hatcheryHelperSortDirection' + $index() },
+                                                            text: $data.sortDirection() ? '⥄' : '⥂',
+                                                            tooltip: { title: $data.sortDirection() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
+                                                            ">⥂</label>
                                                         <input class="hidden" type="checkbox"
                                                             data-bind="attr: { id: 'hatcheryHelperSortDirection' + $index() }, checked:  $data.sortDirection" />
                                                     </div>
                                                 </div>
-                                                
+
                                             </td>
                                         </tr>
                                     </tbody>
@@ -280,27 +293,27 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 
                 <div id="breeding-help" class="tab-pane fade col-10 offset-1">
                     <h4><u>Hatchery</u></h4>
-                    <p>In the hatchery you can leave Pokémon here to gain an egg.</p>
+                    <p>You can leave Pokémon here in the hatchery to gain an egg.</p>
 
-                    <p>Once an egg hatches your Pokémon will gain a bonus of 25% of their base attack.</p>
+                    <p>Once an egg hatches, your Pokémon will gain a bonus of 25% of their base attack.</p>
 
-                    <p class="text-warning"><i>NOTE: Base attack is the value your Pokémon originally has at level 100 before any breeding buffs.</i></p>
+                    <p class="text-warning"><i>NOTE: Base attack is the value your Pokémon originally has at level 100, before any breeding buffs.</i></p>
 
                     <p>Any Proteins applied to Pokémon will also give them an additional 1 attack per hatch.</p>
 
-                    <p>There is no limit to breeding, this will be your main source of attack gain.</p>
+                    <p>There is no limit to breeding, so this will be your main source of attack gain.</p>
 
                     <h4><u>Queue</u></h4>
-                    <p>You will gain access to a queue in the hatchery once you reach the Johto region and more slots for each new region after that.</p>
+                    <p>You will gain access to a queue in the hatchery once you reach the Johto region, and more queue slots for each new region reached after that.</p>
 
                     <h4><u>Hatchery Helpers (BETA)</u></h4>
                     <p><i>(unlocked after hatching 100 total Pokémon)</i></p>
                     <p>Hatchery Helpers will help out by automatically breeding your Pokémon for you.</p>
-                    <p class="text-danger"><i>NOTE: This is a <strong>beta</strong> feature, things will likely change in the future, feel free to post any feedback/bugs in the <a href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>.</i></p>
+                    <p class="text-danger"><i>NOTE: This is a <strong>beta</strong> feature, so things will likely change in the future; feel free to post any feedback/bugs in the <a href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>.</i></p>
                     <p>The cost displayed is how much you will be charged per hatch.</p>
                     <p>They will only breed Pokémon based on your current Hatchery filters.</p>
                     <p>All of the Helpers have different step efficiencies and will hatch eggs faster or slower depending on their value.</p>
-                    <p>They each also have different attack efficiencies which will determine how much attack you gain compared to manually hatching the pokemon yourself.</p>
+                    <p>They each also have different attack efficiencies, which will determine how much attack you gain compared to manually hatching the Pokémon yourself.</p>
                     <p>These efficiencies will gain a bonus based on how many times you've used the helper to hatch eggs.</p>
                     <p><i>More Hatchery Helpers can be unlocked through shops and hatching more Pokémon</i></p>
                 </div>

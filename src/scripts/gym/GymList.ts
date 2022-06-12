@@ -104,7 +104,7 @@ GymList['Cinnabar Island'] = new Gym(
     BadgeEnums.Volcano,
     5000,
     'I have burned down to nothing! Not even ashes remain! You have earned the VolcanoBadge.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokemon Mansion'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Mansion'))]
 );
 GymList['Viridian City'] = new Gym(
     'Giovanni',
@@ -258,7 +258,7 @@ GymList['Goldenrod City'] = new Gym(
     ],
     BadgeEnums.Plain,
     1000,
-    '...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here\'s Plain Badge.',
+    '...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here\'s the Plain Badge.',
     [new RouteKillRequirement(10, GameConstants.Region.johto, 34)]
 );
 GymList['Ecruteak City'] = new Gym(
@@ -287,7 +287,7 @@ GymList['Cianwood City'] = new Gym(
     ],
     BadgeEnums.Storm,
     2500,
-    'Wha? Huh? I lost? How about that! You\'re worthy of Storm Badge!',
+    'Wha? Huh? I lost? How about that! You\'re worthy of the Storm Badge!',
     [new GymBadgeRequirement(BadgeEnums.Fog)]
 );
 GymList['Olivine City'] = new Gym(
@@ -314,7 +314,7 @@ GymList['Mahogany Town'] = new Gym(
     BadgeEnums.Glacier,
     4000,
     'Ah, I am impressed by your prowess. With your strong will, I know you will overcome all life\'s obstacles. You are worthy of this Badge!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rockets Hideout'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rocket\'s Hideout'))]
 );
 GymList['Blackthorn City'] = new Gym(
     'Clair',
@@ -505,7 +505,7 @@ GymList['Mossdeep City'] = new Gym(
     ],
     BadgeEnums.Mind,
     8000,
-    'What? Our combination... Was shattered! It can\'t be helped. You\'ve won... So, in recognition, take this Gym Badge.'
+    'What? Our combination... was shattered! It can\'t be helped. You\'ve won... So, in recognition, take this Gym Badge.'
 );
 GymList['Sootopolis City'] = new Gym(
     'Juan',
@@ -796,7 +796,7 @@ GymList['Champion Cynthia'] = new Champion(
     ],
     BadgeEnums.Elite_SinnohChampion,
     32000,
-    'That was excellent. Truly, an outstanding battle. You gave the support your Pokémon needed to maximize their power. And you guided them with certainty to secure victory. You have both passion and calculating coolness. Together, you and your Pokémon can overcome any challenge that may come your way. Those are the impressions I got from our battle. I\'m glad I got to take part in the crowning of Sinnoh\'s new Champion! Come with me. We\'ll take the lift.',
+    'That was excellent. Truly, an outstanding battle. You gave the support your Pokémon needed to maximize their power. And you guided them with certainty to secure victory. You have both passion and calculating coolness. Together, you and your Pokémon can overcome any challenge that may come your way. Those are the impressions I got from our battle. I\'m glad I got to take part in the crowning of Sinnoh\'s new Champion!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Lucian)]
 );
 
@@ -979,7 +979,7 @@ GymList['Elite Caitlin'] = new Gym(
     ],
     BadgeEnums.Elite_Caitlin,
     32000,
-    'You and your Pokémon are both excellent and elegant. To have been able to battle against such a splendid team... My Pokémon and I learned a lot! I offer you my thanks',
+    'You and your Pokémon are both excellent and elegant. To have been able to battle against such a splendid team... My Pokémon and I learned a lot! I offer you my thanks.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Grimsley)]
 );
 
@@ -1216,15 +1216,6 @@ GymList['Konikoni City'] = new Gym(
         App.game.quests.getQuestLine('Eater of Light').beginQuest();
     }
 );
-GymList['Aether Paradise'] = new Gym(
-    'Ultra Wormhole',
-    'Aether Paradise',
-    [new GymPokemon('???', 132295486, 27)],
-    BadgeEnums.Elite_Nihilego,
-    128000,
-    'The creature escaped back into the ultra wormhole.',
-    [new GymBadgeRequirement(BadgeEnums.RockiumZ)]
-);
 GymList['Malie City'] = new Gym(
     'Nanu',
     'Malie City',
@@ -1237,15 +1228,6 @@ GymList['Malie City'] = new Gym(
     128000,
     'Hmph...',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))]
-);
-GymList['Altar of the Sunne and Moone'] = new Gym(
-    'Ultra Megalopolis',
-    'Altar of the Sunne and Moone',
-    [new GymPokemon('Necrozma (Ultra)', 141300960, 60)],
-    BadgeEnums.Elite_UltraNecrozma,
-    128000,
-    'Necrozma fled.',
-    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)]
 );
 GymList['Exeggutor Island'] = new Gym(
     'Hapu',
@@ -1554,7 +1536,7 @@ GymList['Stow-on-Side1'] = new Gym(
     ],
     BadgeEnums.Galar_Fighting,
     80000,
-    'Your strength nearly made me want to turn and run in my bare feet',
+    'Your strength nearly made me want to turn and run in my bare feet!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 15)]
 );
 GymList['Stow-on-Side2'] = new Gym(
