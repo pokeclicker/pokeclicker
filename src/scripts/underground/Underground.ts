@@ -374,10 +374,10 @@ class Underground implements Feature {
             case 'Mine Egg':
                 if (App.game.breeding.hasFreeEggSlot()) {
                     success = App.game.breeding.gainEgg(App.game.breeding.createFossilEgg(item.name));
-                } else if (App.game.breeding.hasFreeQueueSlot()){
-                    success = App.game.breeding.addToQueue(item.name as HatcheryQueueEntry)
+                } else if (App.game.breeding.hasFreeQueueSlot()) {
+                    success = App.game.breeding.addToQueue(item.name as HatcheryQueueEntry);
                 } else {
-                    return false
+                    return false;
                 }
                 break;
             default:

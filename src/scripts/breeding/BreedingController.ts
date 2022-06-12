@@ -108,7 +108,7 @@ class BreedingController {
         let eggType = EggType[egg.type].toLowerCase();
         if (eggType == 'pokemon') {
             const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(egg.pokemon);
-            const eggItemType = HatcheryQueue.pokemonTypeToEggItemType(dataPokemon.type1)
+            const eggItemType = HatcheryQueue.pokemonTypeToEggItemType(dataPokemon.type1);
             return `assets/images/breeding/${eggItemType}.png`;
         } else if (eggType == 'fossil') {
             eggType = GameConstants.PokemonToFossil[egg.pokemon];
@@ -119,7 +119,7 @@ class BreedingController {
     public static getEggQueueImage(eggType: HatcheryQueueEntry): string {
         if (HatcheryQueue.isHatcheryPokemon(eggType)) {
             const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(eggType);
-            const eggItemType = HatcheryQueue.pokemonTypeToEggItemType(dataPokemon.type1)
+            const eggItemType = HatcheryQueue.pokemonTypeToEggItemType(dataPokemon.type1);
             return `assets/images/breeding/${eggItemType}.png`;
         }
 

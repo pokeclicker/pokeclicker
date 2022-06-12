@@ -258,11 +258,11 @@ class Breeding implements Feature {
             return false;
         }
 
-        let added = false
-        const type = HatcheryQueue.eggItemTypeToEggType(eggType)
+        let added = false;
+        const type = HatcheryQueue.eggItemTypeToEggType(eggType);
         if (this.hasFreeEggSlot()) {
             // If they have a free egg slot, create egg and add to hatchery
-            added = type !== EggType.None && this.gainEgg(eggType === "Mystery_egg" ? this.createRandomEgg() : this.createTypedEgg(type));
+            added = type !== EggType.None && this.gainEgg(eggType === 'Mystery_egg' ? this.createRandomEgg() : this.createTypedEgg(type));
         } else if (this.hasFreeQueueSlot()) {
             // If they have a free queue slot, add the generic-looking egg to the queue
             added = this.addToQueue(eggType);
@@ -283,7 +283,7 @@ class Breeding implements Feature {
             return Underground.sellMineItem(Underground.getMineItemByName(fossil).id);
         }
 
-        return
+        return;
     }
 
     public addToQueue(queueEntry: HatcheryQueueEntry): boolean {
@@ -372,7 +372,7 @@ class Breeding implements Feature {
         }
 
         // Is an egg or fossil
-        return queueItem === "Mystery_egg" ? this.createRandomEgg() : HatcheryQueue.isHatcheryFossil(queueItem) ? this.createFossilEgg(queueItem) : this.createTypedEgg(HatcheryQueue.eggItemTypeToEggType(queueItem));
+        return queueItem === 'Mystery_egg' ? this.createRandomEgg() : HatcheryQueue.isHatcheryFossil(queueItem) ? this.createFossilEgg(queueItem) : this.createTypedEgg(HatcheryQueue.eggItemTypeToEggType(queueItem));
     }
 
     public createTypedEgg(type: EggType): Egg {
