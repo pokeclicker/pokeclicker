@@ -5278,7 +5278,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 86,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Gligar', 'Gliscor', GameConstants.StoneType.Razor_fang)],
+        'evolutions': [new NightTimedStoneEvolution('Gligar', 'Gliscor', GameConstants.StoneType.Razor_fang)],
         'base': {
             'hitpoints': 65,
             'attack': 75,
@@ -5417,7 +5417,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 86,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Sneasel', 'Weavile', GameConstants.StoneType.Razor_claw)],
+        'evolutions': [new NightTimedStoneEvolution('Sneasel', 'Weavile', GameConstants.StoneType.Razor_claw)],
         'base': {
             'hitpoints': 55,
             'attack': 95,

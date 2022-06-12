@@ -56,6 +56,8 @@ class Save {
             element.click();
 
             document.body.removeChild(element);
+
+            App.game.saveReminder.lastDownloaded(App.game.statistics.secondsPlayed());
         } catch (err) {
             console.error('Error trying to download save', err);
             Notifier.notify({
