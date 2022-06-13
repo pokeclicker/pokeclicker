@@ -51,9 +51,9 @@ SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula & Poni islands', n
 // SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula island', new TemporaryBattleRequirement('Ultra Wormhole'), 'Malie City'));
 // SubRegions.addSubRegion(Region.alola, new SubRegion('Poni island', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation')), 'Seafolk Village'));
 SubRegions.addSubRegion(Region.galar, new SubRegion('South Galar', undefined, 'Hulbury'));
-SubRegions.addSubRegion(Region.galar, new SubRegion('North Galar', new RouteKillRequirement(10, GameConstants.Region.galar, 22), 'Spikemuth'));
-SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Master Dojo'));
-SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Freezington'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('North Galar', new RouteKillRequirement(10, GameConstants.Region.galar, 22), 'Hammerlocke'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Armor Station'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Crown Tundra Station'));
 
 export enum AlolaSubRegions {
     MelemeleIsland = 0,

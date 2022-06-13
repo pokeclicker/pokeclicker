@@ -1732,7 +1732,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 2', GameConstants.Region.galar, 2,
     new RoutePokemon({
-        land: ['Skwovet', 'Rookidee', 'Nickit', 'Chewtle', 'Yamper', 'Galarian Zigzagoon', 'Seedot', 'Hoothoot', 'Lotad', 'Purrloin'],
+        land: ['Skwovet', 'Rookidee', 'Nickit', 'Chewtle', 'Yamper', 'Galarian Zigzagoon', 'Blipbug', 'Seedot', 'Hoothoot', 'Lotad', 'Purrloin'],
         water: ['Magikarp', 'Arrokuda'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
@@ -1965,7 +1965,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 3', GameConstants.Region.galar, 12,
     new RoutePokemon({
-        land: ['Gossifleur', 'Corvisquire', 'Rookidee', 'Skwovet', 'Rolycoly', 'Sizzlipede', 'Vulpix', 'Growlithe', 'Tyrogue', 'Galarian Zigzagoon', 'Stunky', 'Trubbish', 'Cherubi', 'Mudbray','Pancham', 'Klink', 'Machop'],
+        land: ['Gossifleur', 'Corvisquire', 'Rookidee', 'Rolycoly', 'Sizzlipede', 'Vulpix', 'Growlithe', 'Tyrogue', 'Galarian Zigzagoon', 'Stunky', 'Trubbish', 'Cherubi', 'Mudbray','Pancham', 'Klink', 'Machop'],
+        headbutt: ['Skwovet', 'Cherubi'],
     }),
     [new TemporaryBattleRequirement('Hop3')],
     undefined,
@@ -1976,6 +1977,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Yamper', 'Cutiefly', 'Wooloo', 'Milcery', 'Galarian Meowth', 'Budew', 'Ferroseed', 'Joltik', 'Pikachu', 'Eevee', 'Electrike', 'Pumpkaboo', 'Diglett'],
         water: ['Magikarp', 'Goldeen', 'Chewtle'],
+        headbutt: ['Skwovet'],
     }),
     [new TemporaryBattleRequirement('Bede1')],
     undefined,
@@ -1986,6 +1988,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Dottler', 'Drifloon', 'Applin', 'Eldegoss', 'Galarian Farfetch\'d', 'Wobbuffet', 'Minccino', 'Spritzee', 'Swirlix', 'Stufful', 'Espurr', 'Nincada', 'Dewpider', 'Nuzleaf', 'Lombre'],
         water: ['Magikarp', 'Chewtle', 'Goldeen'],
+        headbutt: ['Skwovet'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Galar_Grass)],
     undefined,
@@ -2197,7 +2200,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 7', GameConstants.Region.galar, 24,
     new RoutePokemon({
-        land: ['Thievul', 'Corviknight', 'Perrserker', 'Morpeko', 'Morpeko (hangry)', 'Liepard', 'Seismitoad', 'Karrablast', 'Shelmet', 'Meowstic', 'Corviknight', 'Galvantula', 'Inkay', 'Thievul', 'Perrserker', 'Morpeko'],
+        land: ['Thievul', 'Corviknight', 'Perrserker', 'Morpeko', 'Morpeko (hangry)', 'Liepard', 'Seismitoad', 'Karrablast', 'Shelmet', 'Meowstic', 'Galvantula', 'Inkay'],
         headbutt: ['Greedent'],
     }),
     [new TemporaryBattleRequirement('Hop6')],
@@ -2207,7 +2210,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 8', GameConstants.Region.galar, 25,
     new RoutePokemon({
-        land: ['Sandaconda', 'Haunter', 'Rhyhorn', 'Dusclops', 'Bronzong', 'Hippowdon', 'Drapion', 'Solrock', 'Lunatone', 'Boldore', 'Gurdurr', 'Golett', 'Pawniard', 'Rufflet','Vullaby', 'Togedemaru', 'Crustle'],
+        land: ['Sandaconda', 'Haunter', 'Rhyhorn', 'Dusclops', 'Bronzong', 'Hippowdon', 'Drapion', 'Solrock', 'Lunatone', 'Boldore', 'Gurdurr', 'Golett', 'Pawniard', 'Rufflet', 'Vullaby', 'Togedemaru', 'Crustle'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 24)],
     undefined,
@@ -2235,7 +2238,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 9', GameConstants.Region.galar, 28,
     new RoutePokemon({
-        land: ['Cramorant', 'Octillery', 'Kingler', 'Pyukumuku', 'Gastrodon (east)', 'Jellicent', 'Mareanie', 'Glalie'],
+        land: ['Cramorant', 'Octillery', 'Kingler', 'Pyukumuku', 'Gastrodon (east)', 'Jellicent', 'Mareanie', 'Glalie', 'Pelipper', 'Pincurchin'],
         water: ['Wishiwashi (Solo)', 'Qwilfish', 'Mantyke'],
     }),
     [new TemporaryBattleRequirement('Hop7')],
@@ -2245,7 +2248,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Circhester Bay', GameConstants.Region.galar, 29,
     new RoutePokemon({
-        land: ['Gastrodon (east)', 'Inkay', 'Cramorant', 'Octillery', 'Barbaracle', 'Bergmite', 'Toxapex', 'Dhelmise', 'Clobbopus'],
+        land: ['Gastrodon (east)', 'Inkay', 'Cramorant', 'Octillery', 'Barbaracle', 'Bergmite', 'Toxapex', 'Dhelmise', 'Clobbopus', 'Pincurchin'],
         water: ['Lapras', 'Mantine', 'Mantyke', 'Wailmer', 'Wailord', 'Remoraid', 'Grapploct'],
         headbutt: ['Greedent'],
     }),
@@ -2264,7 +2267,7 @@ Routes.add(new RegionRoute(
     GalarSubRegions.NorthGalar
 ));
 Routes.add(new RegionRoute(
-    'Galar Route 10 Station', GameConstants.Region.galar, 31,
+    'Winter Hill Station', GameConstants.Region.galar, 31,
     new RoutePokemon({
         land: ['Snom', 'Rhydon', 'Galarian Darumaka','Galarian Mr. Mime', 'Vanillish', 'Klang', 'Glalie', 'Snover', 'Vanilluxe', 'Cubchoo'],
     }),
@@ -2273,7 +2276,7 @@ Routes.add(new RegionRoute(
     GalarSubRegions.NorthGalar
 ));
 Routes.add(new RegionRoute(
-    'Galar Route 10 North', GameConstants.Region.galar, 32,
+    'Galar Route 10', GameConstants.Region.galar, 32,
     new RoutePokemon({
         land: ['Snom', 'Duraludon', 'Stonjourner', 'Eiscue (iceface)', 'Beartic', 'Vanillish', 'Abomasnow', 'Galarian Darumaka','Galarian Mr. Mime', 'Sneasel', 'Snover', 'Cubchoo'],
     }),
@@ -2286,7 +2289,7 @@ Routes.add(new RegionRoute(
 ISLE OF ARMOR
 */
 Routes.add(new RegionRoute(
-    'Fields of Honor', GameConstants.Region.galar, 33,
+    'Fields of Honour', GameConstants.Region.galar, 33,
     new RoutePokemon({
         land: ['Galarian Slowpoke', 'Buneary', 'Jigglypuff', 'Abra', 'Klefki', 'Blipbug', 'Happiny'],
         water: ['Magikarp', 'Remoraid', 'Octillery', 'Tentacool', 'Wingull', 'Mantyke', 'Starmie'],
@@ -2302,7 +2305,12 @@ Routes.add(new RegionRoute(
       ],
         headbutt: ['Skwovet', 'Applin'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    [
+        new MultiRequirement([
+            new TemporaryBattleRequirement('Klara1'),
+            new TemporaryBattleRequirement('Avery1'),
+        ]),
+    ],
     undefined,
     GalarSubRegions.IsleofArmor
 ));
@@ -2633,7 +2641,7 @@ Routes.add(new RegionRoute(
       ],
         headbutt: ['Skwovet', 'Greedent'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    [new TemporaryBattleRequirement('Peony')],
     undefined,
     GalarSubRegions.CrownTundra
 ));
@@ -2652,7 +2660,7 @@ Routes.add(new RegionRoute(
       ],
         headbutt: ['Skwovet', 'Greedent'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 46)],
+    [new TemporaryBattleRequirement('Calyrex')],
     undefined,
     GalarSubRegions.CrownTundra
 ));
