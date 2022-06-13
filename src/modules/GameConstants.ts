@@ -695,6 +695,8 @@ export enum PokemonItemType {
     'Meloetta (pirouette)',
     'Type: Null',
     'Poipole',
+    'Eternatus',
+    'Kubfu',
 }
 
 export enum PokeBlockColor {

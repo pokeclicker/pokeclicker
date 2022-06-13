@@ -3001,9 +3001,7 @@ TownList['Wyndon Stadium'] = new Town(
     GameConstants.Region.galar,
     [GymList['Trainer Marnie'], GymList['Gym Leader Bede'], GymList['Trainer Hop'], GymList['Champion Leon'], pokeLeagueShop()],
     {
-        requirements: [
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower')),
-        ],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 32)],
     }
 );
 //Isle of Armor towns
@@ -3047,7 +3045,8 @@ TownList['Freezington'] = new Town(
 TownList['Slumbering Weald Shrine'] = new DungeonTown(
     'Slumbering Weald Shrine',
     GameConstants.Region.galar,
-    [new TemporaryBattleRequirement('Hop1')]
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    [TemporaryBattleList['Hop8']]
 );
 TownList['Galar Mine'] = new DungeonTown(
     'Galar Mine',
