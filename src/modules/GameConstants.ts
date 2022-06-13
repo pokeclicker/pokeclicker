@@ -525,7 +525,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set([6, 'Lostlorn Forest', 'Pinwheel Forest', 'Pledge Grove', 'Floccesy Town']),
         [Region.kalos]: new Set([1, 14, 20, 'Laverre City', 'Santalune Forest', 'Pokémon Village']),
         [Region.alola]: new Set([27, 'Melemele Woods', 'Lush Jungle', 'Malie Garden', 'Ula\'ula Meadow', 'Poni Meadow']),
-        [Region.galar]: new Set(['Slumbering Weald', 'Glimwood Tangle', 'Ballonlea', 4]),
+        [Region.galar]: new Set(['Slumbering Weald', 'Slumbering Weald Shrine', 'Glimwood Tangle', 'Ballonlea', 4]),
 
     },
 
@@ -1100,7 +1100,7 @@ export const AlolaDungeons = [
 ];
 
 export const GalarDungeons = [
-    'Slumbering Weald',
+    'Slumbering Weald Shrine',
     'Galar Mine',
     'Galar Mine No. 2',
     'Glimwood Tangle',

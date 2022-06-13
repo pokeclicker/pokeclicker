@@ -1725,7 +1725,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Skwovet', 'Rookidee', 'Blipbug', 'Wooloo', 'Nickit', 'Caterpie', 'Hoothoot', 'Grubbin'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+    [new TemporaryBattleRequirement('Mirages')],
     undefined,
     GalarSubRegions.SouthGalar
 ));
@@ -1757,7 +1757,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Mudsdale', 'Natu', 'Munna', 'Ralts', 'Kirlia', 'Roselia', 'Gardevoir'], new WeatherRequirement([WeatherType.Fog])),
       ],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 2)],
+    [new TemporaryBattleRequirement('Hop2')],
     undefined,
     GalarSubRegions.SouthGalar
 ));
