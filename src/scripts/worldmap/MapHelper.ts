@@ -148,7 +148,11 @@ class MapHelper {
             }
         });
         if (states.length) {
-            return areaStatus[Math.min(...states)];
+            const importantState = Math.min(...states);
+            if (importantState >= areaStatus.uncaughtShinyPokemon && states.includes(areaStatus.uncaughtShinyPokemon) && states.includes(areaStatus.missingAchievement)) {
+                return areaStatus[areaStatus.uncaughtShinyPokemonAndMissingAchievement];
+            }
+            return areaStatus[importantState];
         }
         return areaStatus[areaStatus.completed];
     }
