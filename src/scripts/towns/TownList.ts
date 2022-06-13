@@ -259,7 +259,7 @@ TownList['Lavender Town'] = new Town(
 TownList['Celadon City'] = new Town(
     'Celadon City',
     GameConstants.Region.kanto,
-    [CeladonDepartmentStoreShop, CeladonCityShop],
+    [CeladonDepartmentStoreShop, CeladonCityShop, new MoveToDungeon(dungeonList['Rocket Game Corner'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
         npcs: [BigSpender],
@@ -344,20 +344,25 @@ TownList['Rock Tunnel'] = new DungeonTown(
         new GymBadgeRequirement(BadgeEnums.Cascade),
     ]
 );
+TownList['Rocket Game Corner'] = new DungeonTown(
+    'Rocket Game Corner',
+    GameConstants.Region.kanto,
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)]
+);
+TownList['Pokémon Tower'] = new DungeonTown(
+    'Pokémon Tower',
+    GameConstants.Region.kanto,
+    [
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 7),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
+    ]
+);
 TownList['Power Plant'] = new DungeonTown(
     'Power Plant',
     GameConstants.Region.kanto,
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 9),
         new GymBadgeRequirement(BadgeEnums.Soul),
-    ]
-);
-TownList['Pokémon Tower'] = new DungeonTown(
-    'Pokémon Tower',
-    GameConstants.Region.kanto,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.kanto, 10),
-        new GymBadgeRequirement(BadgeEnums.Rainbow),
     ]
 );
 TownList['Seafoam Islands'] = new DungeonTown(

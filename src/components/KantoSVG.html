@@ -372,22 +372,28 @@
 		 , width: 4, height: 5		 
          })
       %>
-
+	 
     <!--Celadon City-->
     <%- include('templates/mapTown',
         { name: "Celadon City"
-        , x: 40, y: 15.5
-		, width: 9, height: 10.5
+        , x: 40, y: 14
+		, width: 5, height: 9
         })
-     %>
-	 
-    <!--Celadon City extended-->
+    %>
+    <!--Celadon City extension-->
     <%- include('templates/mapTown',
         { name: "Celadon City"
-        , x: 40, y: 14
-		, width: 5, height: 1.5
+        , x: 45, y: 15.5
+		, width: 4, height: 7.5
         })
-     %>	 
+    %>
+    <!--Celadon City extension-->
+    <%- include('templates/mapTown',
+        { name: "Celadon City"
+        , x: 40, y: 23
+		, width: 3, height: 3
+        })
+    %>
 
     <!--Saffron City-->
     <%- include('templates/mapTown',
@@ -493,6 +499,14 @@
     <%- include('templates/mapDungeon',
         { name: "Rock Tunnel"
         , x: 87, y: 10
+        })
+     %>
+
+    <!--Rocket Game Corner-->
+    <%- include('templates/mapDungeon',
+        { name: "Rocket Game Corner"
+        , x: 43, y: 23
+        , width: 6, height: 3
         })
      %>
 

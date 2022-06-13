@@ -730,6 +730,8 @@ class Update implements Saveable {
                 lastReminder: saveData.statistics.secondsPlayed,
                 lastDownloaded: saveData.statistics.secondsPlayed,
             };
+            // Add Rocket Game Corner
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 4);
         },
     };
 
