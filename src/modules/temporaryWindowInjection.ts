@@ -114,6 +114,7 @@ import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequ
 import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompletedRequirement';
 import TemporaryBattleRequirement from './requirements/TemporaryBattleRequirement';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
+import SaveReminder from './saveReminder/SaveReminder';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -235,4 +236,5 @@ Object.assign(<any>window, {
     QuestLineStepCompletedRequirement,
     TemporaryBattleRequirement,
     DayOfWeekRequirement,
+    SaveReminder,
 });
