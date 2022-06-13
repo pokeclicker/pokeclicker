@@ -1828,7 +1828,7 @@ TownList['Lacunosa Town'] = new Town(
 TownList['Opelucid City'] = new Town(
     'Opelucid City',
     GameConstants.Region.unova,
-    [OpelucidCityShop, new MoveToDungeon(dungeonList['Team Plasma Assault'])],
+    [OpelucidCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 11)],
     }
