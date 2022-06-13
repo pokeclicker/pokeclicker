@@ -166,7 +166,7 @@ TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     'The Darkest Day',
     [new GymPokemon('Eternamax Eternatus', 282601920, 60)],
     'You caught Eternatus!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))],
     [],
     () => {
         App.game.party.gainPokemon(Eternatus);
