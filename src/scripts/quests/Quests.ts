@@ -54,7 +54,7 @@ class Quests implements Saveable {
             quest.begin();
         } else {
             Notifier.notify({
-                message: 'You cannot start more quests',
+                message: 'You cannot start more quests.',
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
@@ -67,7 +67,7 @@ class Quests implements Saveable {
             quest.quit(shouldConfirm);
         } else {
             Notifier.notify({
-                message: 'You cannot quit this quest',
+                message: 'You cannot quit this quest.',
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
@@ -93,7 +93,7 @@ class Quests implements Saveable {
         } else {
             console.trace('cannot claim quest..');
             Notifier.notify({
-                message: 'You cannot claim this quest',
+                message: 'You cannot claim this quest.',
                 type: NotificationConstants.NotificationOption.danger,
             });
         }

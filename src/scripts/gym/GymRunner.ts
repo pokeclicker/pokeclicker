@@ -72,7 +72,7 @@ class GymRunner {
         if (this.running()) {
             this.running(false);
             Notifier.notify({
-                message: `It appears you are not strong enough to defeat ${GymBattle.gym.leaderName}`,
+                message: `It appears you are not strong enough to defeat ${GymBattle.gym.leaderName}.`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             App.game.gameState = GameConstants.GameState.town;

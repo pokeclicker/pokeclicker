@@ -128,7 +128,7 @@ class Item {
                     break;
             }
             Notifier.notify({
-                message: `You don't have enough ${curr} to buy ${n} ${GameConstants.humanifyString(this.displayName) + multiple}`,
+                message: `You don't have enough ${curr} to buy ${n} ${GameConstants.humanifyString(this.displayName) + multiple}!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
         }

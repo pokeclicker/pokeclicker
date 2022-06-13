@@ -390,7 +390,7 @@ class Underground implements Feature {
             $('#mineModal').modal('show');
         } else {
             Notifier.notify({
-                message: 'You need the Explorer Kit to access this location.\n<i>Check out the shop at Cinnabar Island</i>',
+                message: 'You need the Explorer Kit to access this location.\n<i>Check out the shop at Cinnabar Island.</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -408,7 +408,7 @@ class Underground implements Feature {
             $('#mineSellAllTreasuresModal').modal('show');
         } else {
             Notifier.notify({
-                message: 'You need the Explorer Kit to access this location.\n<i>Check out the shop at Cinnabar Island</i>',
+                message: 'You need the Explorer Kit to access this location.\n<i>Check out the shop at Cinnabar Island.</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }

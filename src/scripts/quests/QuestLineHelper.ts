@@ -61,7 +61,7 @@ class QuestLineHelper {
                 steps: [
                     {
                         element: document.getElementById('questDisplayContainer'),
-                        intro: 'Click "List" to see the current quests that can be completed for <img title="Quest points" src="assets/images/currency/questPoint.svg" height="25px"> Quest Points.',
+                        intro: 'Click "List" to see the current quests that can be completed for <img title="Quest points" src="assets/images/currency/questPoint.svg" height="24px"> Quest Points.',
                     },
                     {
                         element: document.getElementById('startMenu'),

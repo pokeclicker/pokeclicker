@@ -59,7 +59,7 @@ class TemporaryBattleRunner {
         if (this.running()) {
             this.running(false);
             Notifier.notify({
-                message: `It appears you are not strong enough to defeat ${TemporaryBattleBattle.battle.name}`,
+                message: `It appears you are not strong enough to defeat ${TemporaryBattleBattle.battle.name}.`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             player.town(TemporaryBattleBattle.battle.parent);

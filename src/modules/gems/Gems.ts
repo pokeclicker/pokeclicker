@@ -156,7 +156,7 @@ export default class Gems implements Feature {
             $('#gemModal').modal('show');
         } else {
             Notifier.notify({
-                message: 'You do not have the Gem Case',
+                message: 'You do not have the Gem Case.\n<i>Requires the Earth Badge.</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }

@@ -51,7 +51,7 @@ class MapHelper {
             });
 
             Notifier.notify({
-                message: `You don't have access to that route yet.\n${reqsList.join('\n')}`,
+                message: `You don't have access to that route yet.\n<i>${reqsList.join('\n')}</i>`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -180,7 +180,7 @@ class MapHelper {
             });
 
             Notifier.notify({
-                message: `You don't have access to that location yet.\n${reqsList.join('\n')}`,
+                message: `You don't have access to that location yet.\n<i>${reqsList.join('\n')}</i>`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -198,7 +198,7 @@ class MapHelper {
             openModal();
         } else {
             Notifier.notify({
-                message: 'You cannot access this dock yet',
+                message: 'You cannot access this dock yet!\n<i>Progress further to return to previous regions!</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }

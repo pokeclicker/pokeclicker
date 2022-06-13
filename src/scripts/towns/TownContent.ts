@@ -35,7 +35,7 @@ abstract class TownContent {
         });
         if (reqsList.length) {
             Notifier.notify({
-                message: `You don't have access yet.\n${reqsList.join('\n')}`,
+                message: `You don't have access yet.\n<i>${reqsList.join('\n')}</i>`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         } else {

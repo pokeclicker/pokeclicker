@@ -67,7 +67,7 @@ class ItemHandler {
         const multiple = amountUsed == 1 ? '' : 's';
         Notifier.notify({
             // TODO: PMX - Update plural system to handle all cases
-            message: `You used ${amountUsed} ${ItemList[this.stoneSelected()].displayName}${multiple}`,
+            message: `You used ${amountUsed} ${ItemList[this.stoneSelected()].displayName}${multiple}.`,
             type: NotificationConstants.NotificationOption.success,
         });
     }

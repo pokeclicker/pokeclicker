@@ -58,7 +58,7 @@ abstract class Quest {
             if (this.pointsReward) {
                 App.game.wallet.gainQuestPoints(this.pointsReward);
                 Notifier.notify({
-                    message: `You have completed your quest!\nYou claimed <img src="./assets/images/currency/questPoint.svg" height="22px"/> ${this.pointsReward.toLocaleString('en-US')}!`,
+                    message: `You have completed your quest!\nYou claimed <img src="./assets/images/currency/questPoint.svg" height="24px"/> ${this.pointsReward.toLocaleString('en-US')}!`,
                     strippedMessage: `You have completed your quest and claimed ${this.pointsReward.toLocaleString('en-US')} Quest Points!`,
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.General.quest_completed,
@@ -140,7 +140,7 @@ abstract class Quest {
             const completed = this.progress() == 1 || this.claimed();
             if (!this.autoComplete && completed && !this.notified) {
                 Notifier.notify({
-                    message: `You can complete your quest for <img src="./assets/images/currency/questPoint.svg" height="22px"/> ${this.pointsReward.toLocaleString('en-US')}!`,
+                    message: `You can complete your quest for <img src="./assets/images/currency/questPoint.svg" height="24px"/> ${this.pointsReward.toLocaleString('en-US')}!`,
                     strippedMessage: `You can complete your quest for ${this.pointsReward.toLocaleString('en-US')} Quest Points!`,
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 5e3,

@@ -76,7 +76,7 @@ class Dungeon {
         // Player requires the Dungeon Ticket to access the dungeons
         if (!App.game.keyItems.hasKeyItem(KeyItemType.Dungeon_ticket)) {
             Notifier.notify({
-                message: 'You need the Dungeon Ticket to access dungeons.',
+                message: 'You need the Dungeon Ticket to access dungeons.\n<i>Check out the shop at Viridian City.</i>',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;

@@ -22,7 +22,7 @@ class DungeonRunner {
 
         if (!DungeonRunner.hasEnoughTokens()) {
             Notifier.notify({
-                message: 'You don\'t have enough dungeon tokens',
+                message: 'You don\'t have enough Dungeon Tokens.',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;
