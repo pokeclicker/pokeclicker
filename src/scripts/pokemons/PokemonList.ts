@@ -185,7 +185,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 3.2,
         'name': 'Gigantamax Venusaur',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.none,
         'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Poison],
         'levelType': LevelType.mediumslow,
@@ -312,7 +312,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 6.2,
         'name': 'Gigantamax Charizard',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.none,
         'catchRate': 45,
         'type': [PokemonType.Fire, PokemonType.Flying],
         'levelType': LevelType.mediumslow,
@@ -439,7 +439,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 9.2,
         'name': 'Gigantamax Blastoise',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.none,
         'catchRate': 45,
         'type': [PokemonType.Water],
         'levelType': LevelType.mediumslow,
@@ -510,7 +510,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 12.1,
         'name': 'Gigantamax Butterfree',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.none,
         'catchRate': 45,
         'type': [PokemonType.Bug, PokemonType.Flying],
         'levelType': LevelType.mediumfast,
@@ -1023,7 +1023,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 25.12,
         'name': 'Gigantamax Pikachu',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.none,
         'catchRate': 190,
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
@@ -1688,7 +1688,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 52.3,
         'name': 'Gigantamax Meowth',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.none,
         'catchRate': 255,
         'type': [PokemonType.Normal],
         'levelType': LevelType.mediumfast,
@@ -2007,7 +2007,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 68.1,
         'name': 'Gigantamax Machamp',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.none,
         'catchRate': 45,
         'type': [PokemonType.Fighting],
         'levelType': LevelType.mediumslow,
@@ -2687,7 +2687,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 94.1,
         'name': 'Gigantamax Gengar',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.none,
         'catchRate': 45,
         'type': [PokemonType.Ghost, PokemonType.Poison],
         'levelType': LevelType.mediumslow,
@@ -2794,7 +2794,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 99.1,
         'name': 'Gigantamax Kingler',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.none,
         'catchRate': 60,
         'type': [PokemonType.Water],
         'levelType': LevelType.mediumfast,
@@ -3481,7 +3481,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 131.1,
         'name': 'Gigantamax Lapras',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.none,
         'catchRate': 45,
         'type': [PokemonType.Water, PokemonType.Ice],
         'levelType': LevelType.slow,
@@ -3567,7 +3567,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 133.2,
         'name': 'Gigantamax Eevee',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.none,
         'catchRate': 255,
         'type': [PokemonType.Normal],
         'levelType': LevelType.mediumfast,
@@ -3776,7 +3776,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 143.2,
         'name': 'Gigantamax Snorlax',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.none,
         'catchRate': 25,
         'type': [PokemonType.Normal],
         'levelType': LevelType.slow,
@@ -12791,7 +12791,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 569.1,
         'name': 'Gigantamax Garbodor',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Poison],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
@@ -18422,7 +18422,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 809.1,
         'name': 'Gigantamax Melmetal',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Steel],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -18493,6 +18493,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 812.1,
         'name': 'Gigantamax Rillaboom',
+        'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Grass],
         'base': {
             'hitpoints': 200,
@@ -18563,6 +18564,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 815.1,
         'name': 'Gigantamax Cinderace',
+        'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Fire],
         'base': {
             'hitpoints': 160,
@@ -18633,6 +18635,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 818.1,
         'name': 'Gigantamax Inteleon',
+        'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Water],
         'base': {
             'hitpoints': 140,
@@ -18741,6 +18744,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 823.1,
         'name': 'Gigantamax Corviknight',
+        'nativeRegion': GameConstants.Region.none,
         'type': [
             PokemonType.Flying,
             PokemonType.Steel,
@@ -18820,6 +18824,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 826.1,
         'name': 'Gigantamax Orbeetle',
+        'nativeRegion': GameConstants.Region.none,
         'type': [
             PokemonType.Bug,
             PokemonType.Psychic,
@@ -18983,6 +18988,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 834.1,
         'name': 'Gigantamax Drednaw',
+        'nativeRegion': GameConstants.Region.none,
         'type': [
             PokemonType.Water,
             PokemonType.Rock,
@@ -19097,6 +19103,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 839.1,
         'name': 'Gigantamax Coalossal',
+        'nativeRegion': GameConstants.Region.none,
         'type': [
             PokemonType.Rock,
             PokemonType.Fire,
@@ -19161,6 +19168,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 841.1,
         'name': 'Gigantamax Flapple',
+        'nativeRegion': GameConstants.Region.none,
         'type': [
             PokemonType.Grass,
             PokemonType.Dragon,
@@ -19201,6 +19209,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 842.1,
         'name': 'Gigantamax Appletun',
+        'nativeRegion': GameConstants.Region.none,
         'type': [
             PokemonType.Grass,
             PokemonType.Dragon,
@@ -19256,6 +19265,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 844.1,
         'name': 'Gigantamax Sandaconda',
+        'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Ground],
         'base': {
             'hitpoints': 144,
@@ -19392,6 +19402,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 849.2,
         'name': 'Gigantamax Toxtricity',
+        'nativeRegion': GameConstants.Region.none,
         'type': [
             PokemonType.Electric,
             PokemonType.Poison,
@@ -19453,6 +19464,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 851.1,
         'name': 'Gigantamax Centiskorch',
+        'nativeRegion': GameConstants.Region.none,
         'type': [
             PokemonType.Fire,
             PokemonType.Bug,
@@ -19599,6 +19611,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 858.1,
         'name': 'Gigantamax Hatterene',
+        'nativeRegion': GameConstants.Region.none,
         'type': [
             PokemonType.Psychic,
             PokemonType.Fairy,
@@ -19681,6 +19694,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 861.1,
         'name': 'Gigantamax Grimmsnarl',
+        'nativeRegion': GameConstants.Region.none,
         'type': [
             PokemonType.Dark,
             PokemonType.Fairy,
@@ -20994,6 +21008,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 869.7,
         'name': 'Gigantamax Alcremie',
+        'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Fairy],
         'base': {
             'hitpoints': 130,
@@ -21233,6 +21248,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 879.1,
         'name': 'Gigantamax Copperajah',
+        'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Steel],
         'base': {
             'hitpoints': 244,
@@ -21350,6 +21366,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 884.1,
         'name': 'Gigantamax Duraludon',
+        'nativeRegion': GameConstants.Region.none,
         'type': [
             PokemonType.Steel,
             PokemonType.Dragon,
@@ -21601,6 +21618,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 892.2,
         'name': 'Gigantamax Urshifu (Single Strike)',
+        'nativeRegion': GameConstants.Region.none,
         'type': [
             PokemonType.Fighting,
             PokemonType.Dark,
@@ -21621,6 +21639,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 892.3,
         'name': 'Gigantamax Urshifu (Rapid Strike)',
+        'nativeRegion': GameConstants.Region.none,
         'type': [
             PokemonType.Fighting,
             PokemonType.Water,

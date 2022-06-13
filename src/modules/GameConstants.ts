@@ -1110,7 +1110,6 @@ export const GalarDungeons = [
     'Dusty Bowl',
     'Courageous Cavern',
     'Brawlers Cave',
-    'Master Dojo Trial',
     'Warm-Up Tunnel',
     'Tower of Darkness',
     'Tower of Water',
@@ -1205,6 +1204,17 @@ export const TemporaryBattles = [
     'Marnie2',
     'The Darkest Day',
     'Hop8',
+    'Mustard',
+    'Klara1',
+    'Avery1',
+    'Klara2',
+    'Avery2',
+    'Klara3',
+    'Avery3',
+    'Peony',
+    'Calyrex',
+    'Glastrier',
+    'Spectrier',
 ];
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

@@ -167,6 +167,10 @@ TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     [new GymPokemon('Eternamax Eternatus', 282601920, 60)],
     'You caught Eternatus!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))]
+    [],
+    () => {
+        App.game.party.gainPokemon(Eternatus);
+    }
 );
 TemporaryBattleList['Hop8'] = new TemporaryBattle(
     'Hop8',
@@ -180,4 +184,100 @@ TemporaryBattleList['Hop8'] = new TemporaryBattle(
     ],
     'I didn\'t expect there to be such a gap between you and me, mate...',
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+);
+TemporaryBattleList['Klara1'] = new TemporaryBattle(
+    'Klara1',
+    [
+        new GymPokemon('Venipede', 282601920, 58),
+        new GymPokemon('Galarian Slowpoke', 282601920, 60),
+    ],
+    'Oh, my next Pokémon\'s gonna make short work-- Huh? That was my last one?',
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+);
+TemporaryBattleList['Avery1'] = new TemporaryBattle(
+    'Avery1',
+    [
+        new GymPokemon('Abra', 282601920, 58),
+        new GymPokemon('Galarian Slowbro', 282601920, 60),
+    ],
+    'Such strength! I\'m in Psyshock!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+);
+TemporaryBattleList['Mustard'] = new TemporaryBattle(
+    'Mustard',
+    [
+        new GymPokemon('Mienfoo', 282601920, 60),
+        new GymPokemon('Shinx', 282601920, 60),
+    ],
+    'That was everything I hoped for and more!',
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
+);
+TemporaryBattleList['Klara2'] = new TemporaryBattle(
+    'Avery2',
+    [
+        new GymPokemon('Galarian Slowpoke', 282601920, 62),
+        new GymPokemon('Koffing', 282601920, 62),
+        new GymPokemon('Whirlipede', 282601920, 63),
+    ],
+    'Just what have you got that I don\'t?',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel'))]
+);
+TemporaryBattleList['Avery2'] = new TemporaryBattle(
+    'Avery2',
+    [
+        new GymPokemon('Galarian Slowpoke', 282601920, 62),
+        new GymPokemon('Woobat', 282601920, 62),
+        new GymPokemon('Kadabra', 282601920, 63),
+    ],
+    'What a Psystrike to my poor pride...',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel'))]
+);
+TemporaryBattleList['Klara3'] = new TemporaryBattle(
+    'Klara3',
+    [
+        new GymPokemon('Skorupi', 282601920, 65),
+        new GymPokemon('Galarian Weezing', 282601920, 66),
+        new GymPokemon('Whirlipede', 282601920, 66),
+        new GymPokemon('Galarian Slowbro', 282601920, 67),
+    ],
+    'But I didn\'t hold back! I gave it everything I\'ve got...',
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
+);
+TemporaryBattleList['Avery3'] = new TemporaryBattle(
+    'Avery3',
+    [
+        new GymPokemon('Galarian Ponyta', 282601920, 65),
+        new GymPokemon('Swoobat', 282601920, 66),
+        new GymPokemon('Kadabra', 282601920, 66),
+        new GymPokemon('Galarian Slowbro', 282601920, 67),
+    ],
+    'Oh, I should just Imprison myself for this!',
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
+);
+TemporaryBattleList['Peony'] = new TemporaryBattle(
+    'Peony',
+    [
+        new GymPokemon('Copperajah', 282601920, 70),
+        new GymPokemon('Aggron', 282601920, 70),
+    ],
+    'Gahahaaa! Look at me, takin\' a thrashin\' from a youngster like you!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+);
+TemporaryBattleList['Calyrex'] = new TemporaryBattle(
+    'Calyrex',
+    [new GymPokemon('Calyrex', 264590972, 80)],
+    'Cracrown crow. Roooooowwwn rown crown.',
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 46)]
+);
+TemporaryBattleList['Glastrier'] = new TemporaryBattle(
+    'Glastrier',
+    [new GymPokemon('Glastrier', 264590972, 75)],
+    'The Pokémon ran away!',
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 49)]
+);
+TemporaryBattleList['Spectrier'] = new TemporaryBattle(
+    'Spectrier',
+    [new GymPokemon('Spectrier', 264590972, 75)],
+    'The Pokémon ran away!',
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)]
 );

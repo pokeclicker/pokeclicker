@@ -6559,7 +6559,7 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
 //Galar Dungeons
 
 dungeonList['Slumbering Weald Shrine'] = new Dungeon('Slumbering Weald Shrine',
-    ['Galarian Weezing', 'Corviknight', 'Galarian Stunfisk', 'Munna', 'Butterfree', 'Orbeetle'],
+    ['Galarian Weezing', 'Corviknight', 'Galarian Stunfisk', 'Munna', 'Butterfree', 'Orbeetle', 'Whiscash', 'Barboach', 'Magikarp'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
@@ -6569,17 +6569,66 @@ dungeonList['Slumbering Weald Shrine'] = new Dungeon('Slumbering Weald Shrine',
     96500, 201);
 
 dungeonList['Galar Mine'] = new Dungeon('Galar Mine',
-    ['Diglett', 'Roggenrola', 'Woobat', 'Drilbur', 'Timburr', 'Rolycoly'],
+    [
+        {pokemon: 'Rolycoly', options: { weight: 2.7 }},
+        {pokemon: 'Timburr', options: { weight: 2.7 }},
+        {pokemon: 'Roggenrola', options: { weight: 2.7 }},
+        {pokemon: 'Woobat', options: { weight: 2.7 }},
+        {pokemon: 'Diglett', options: { weight: 2.7 }},
+        {pokemon: 'Drilbur', options: { weight: 2.7 }},
+        new DungeonTrainer('Worker',
+            [new GymPokemon('Roggenrola', 17114462, 14)], { weight: 1 }, 'Keith', '(male)'),
+        new DungeonTrainer('Worker',
+            [
+                new GymPokemon('Timburr', 17114462, 14),
+                new GymPokemon('Timburr', 17114462, 14),
+                new GymPokemon('Timburr', 17114462, 14),
+            ], { weight: 1 }, 'Georgia', '(female)'),
+        new DungeonTrainer('Worker',
+            [
+                new GymPokemon('Diglett', 17114462, 14),
+                new GymPokemon('Drilbur', 17114462, 15),
+            ], { weight: 1 }, 'Sandra', '(female)'),
+        new DungeonTrainer('Worker',
+            [new GymPokemon('Rolycoly', 17114462, 14)], { weight: 1 }, 'Russell', '(male)'),
+    ]
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
-    [
-        new DungeonBossPokemon('Carkol', 8000000, 70),
-        new DungeonBossPokemon('Woobat', 8000000, 70),
-    ],
+    [new DungeonBossPokemon('Carkol', 8000000, 70)],
     96500, 201);
 
 dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
-    ['Shuckle', 'Shellos (east)', 'Croagunk', 'Scraggy', 'Binacle', 'Noibat', 'Chewtle'],
+    [
+        {pokemon: 'Shellos (east)', options: { weight: 1.6 }},
+        {pokemon: 'Wimpod', options: { weight: 1.6 }},
+        {pokemon: 'Binacle', options: { weight: 1.6 }},
+        {pokemon: 'Chewtle', options: { weight: 1.6 }},
+        {pokemon: 'Scraggy', options: { weight: 1.6 }},
+        {pokemon: 'Croagunk', options: { weight: 1.6 }},
+        {pokemon: 'Shuckle', options: { weight: 1.6 }},
+        {pokemon: 'Noibat', options: { weight: 1.6 }},
+        {pokemon: 'Barboach', options: { weight: 1.6 }},
+        {pokemon: 'Corphish', options: { weight: 1.6 }},
+        new DungeonTrainer('Worker',
+            [new GymPokemon('Carkol', 17114462, 21)], { weight: 1 }, 'Francis', '(male)'),
+        new DungeonTrainer('Worker',
+            [
+                new GymPokemon('Roggenrola', 17114462, 20),
+                new GymPokemon('Timburr', 17114462, 21),
+            ], { weight: 1 }, 'Yvonne', '(female)'),
+        new DungeonTrainer('Team Yell',
+            [
+                new GymPokemon('Thievul', 17114462, 21),
+                new GymPokemon('Galarian Linoone', 17114462, 22),
+                new GymPokemon('Liepard', 17114462, 22),
+                new GymPokemon('Pancham', 17114462, 21),
+            ], { weight: 1 }, 'Grunts',
+        new DungeonTrainer('Rail Staff',
+            [
+                new GymPokemon('Drilbur', 17114462, 22),
+                new GymPokemon('Onix', 17114462, 23)
+            ], { weight: 1 }, 'Vincent',
+    ]
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
@@ -6590,20 +6639,62 @@ dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
     96500, 201);
 
 dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
-    ['Cufant', 'Bronzong', 'Klang', 'Mawile', 'Steelix', 'Galarian Stunfisk'],
+    [
+        new DungeonTrainer('Macro Cosmos,
+            [new GymPokemon('Durant', 17114462, 48)], { weight: 1 }, 'Francis', '(male)'),
+        new DungeonTrainer('Macro Cosmos,
+            [new GymPokemon('Cufant', 17114462, 48)], { weight: 1 }, 'Francis', '(male)'),
+        new DungeonTrainer('Macro Cosmos,
+            [new GymPokemon('Bronzong', 17114462, 48)], { weight: 1 }, 'Francis', '(male)'),
+        new DungeonTrainer('Macro Cosmos,
+            [new GymPokemon('Klang', 17114462, 48)], { weight: 1 }, 'Francis', '(male)'),
+        new DungeonTrainer('Macro Cosmos,
+            [new GymPokemon('Mawile', 17114462, 48)], { weight: 1 }, 'Francis', '(male)'),
+        new DungeonTrainer('Macro Cosmos,
+            [new GymPokemon('Steelix', 17114462, 49)], { weight: 1 }, 'Francis', '(male)'),
+        new DungeonTrainer('Macro Cosmos,
+            [new GymPokemon('Galarian Stunfisk', 17114462, 49)], { weight: 1 }, 'Francis', '(male)'),
+    ]
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
-    [
-        new DungeonBossPokemon('Froslass', 8000000, 70),
-        new DungeonBossPokemon('Tsareena', 8000000, 70),
-        new DungeonBossPokemon('Salazzle', 8000000, 70),
-        new DungeonBossPokemon('Milotic', 8000000, 70),
-        new DungeonBossPokemon('Garbodor', 8000000, 70),
+    [new DungeonTrainer('Macro Cosmos',
+        [
+            new GymPokemon('Froslass', 17114462, 50),
+            new GymPokemon('Tsareena', 17114462, 50),
+            new GymPokemon('Salazzle', 17114462, 50),
+            new GymPokemon('Milotic', 17114462, 51),
+            new GymPokemon('Gigantamax Garbodor', 17114462, 52),
+        ], { weight: 1 }, 'Oleana')
     ],
     96500, 201);
 
 dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
-    ['Galarian Ponyta', 'Spritzee', 'Swirlix', 'Phantump', 'Oranguru', 'Passimian', 'Sinistea'],
+[
+    {pokemon: 'Shiinotic', options: { weight: 1.8 }},
+    {pokemon: 'Galarian Ponyta', options: { weight: 1.8 }},
+    {pokemon: 'Sinistea', options: { weight: 1.8 }},
+    {pokemon: 'Phantump', options: { weight: 1.8 }},
+    {pokemon: 'Swirlix', options: { weight: 1.8 }},
+    {pokemon: 'Spritzee', options: { weight: 1.8 }},
+    {pokemon: 'Passimian', options: { weight: 1.8 }},
+    {pokemon: 'Oranguru', options: { weight: 1.8 }},
+    {pokemon: 'Impidimp', options: { weight: 1.8 }},
+    new DungeonTrainer('Rail Staff',
+        [new GymPokemon('Ninetales', 17114462, 34)], { weight: 1 }, 'Robert',
+    new DungeonTrainer('Cook',
+        [
+            new GymPokemon('Milcery', 17114462, 33),
+            new GymPokemon('Sinistea', 17114462, 33),
+            new GymPokemon('Shiinotic', 17114462, 34),
+        ], { weight: 1 }, 'Derek',
+    new DungeonTrainer('Madame',
+        [
+            new GymPokemon('Indeedee', 17114462, 33),
+            new GymPokemon('Indeedee', 17114462, 33),
+        ], { weight: 1 }, 'Judy',
+    new DungeonTrainer('Beauty',
+        [new GymPokemon('Kirlia', 17114462, 34)], { weight: 1 }, 'Jacqueline',
+]
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
@@ -6626,15 +6717,7 @@ dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
     96500, 201);
 
 
-
 //Isle of Armor
-dungeonList['Master Dojo Trial'] = new Dungeon('Master Dojo Trial',
-    ['Mienfoo', 'Shinx', 'Kadabra', 'Whirlipede'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
-    2203000,
-    [new DungeonBossPokemon('Kubfu', 8000000, 70)],
-    96500, 201);
-
 dungeonList['Warm-Up Tunnel'] = new Dungeon('Warm-Up Tunnel',
     ['Sandshrew', 'Cubone', 'Torkoal'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],

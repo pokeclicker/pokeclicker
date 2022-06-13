@@ -3074,19 +3074,26 @@ TownList['Wyndon Stadium'] = new Town(
     }
 );
 //Isle of Armor towns
-
+TownList['Armor Station'] = new Town(
+    'Master Dojo',
+    GameConstants.Region.galar,
+    [TemporaryBattleList['Klara1'], TemporaryBattleList['Avery1']],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    }
+);
 TownList['Master Dojo'] = new Town(
     'Master Dojo',
     GameConstants.Region.galar,
-    [MasterDojoShop, new MoveToDungeon(dungeonList['Master Dojo Trial'])],
+    [MasterDojoShop, TemporaryBattleList['Mustard']],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
     }
 );
 TownList['Master Dojo Battlefield'] = new Town(
     'Master Dojo Battlefield',
     GameConstants.Region.galar,
-    [GymList['Gym Leader Klara'], GymList['Gym Leader Avery'], GymList['Dojo Master Mustard'], pokeLeagueShop()],
+    [TemporaryBattleList['Klara3'], TemporaryBattleList['Avery3'], GymList['Gym Leader Klara'], GymList['Gym Leader Avery'], GymList['Dojo Master Mustard'], pokeLeagueShop()],
     {
         requirements: [
             new MultiRequirement([
@@ -3098,12 +3105,20 @@ TownList['Master Dojo Battlefield'] = new Town(
 );
 
 //Crown Tundra Towns
+TownList['Crown Tundra Station'] = new Town(
+    'Crown Tundra Station',
+    GameConstants.Region.galar,
+    [TemporaryBattleList['Peony']],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    }
+);
 TownList['Freezington'] = new Town(
     'Freezington',
     GameConstants.Region.galar,
-    [],
+    [TemporaryBattleList['Calyrex'], TemporaryBattleList['Glastrier'], TemporaryBattleList['Spectrier']],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 46)],
     }
 );
 
@@ -3169,7 +3184,8 @@ TownList['Brawlers Cave'] = new DungeonTown(
 TownList['Warm-Up Tunnel'] = new DungeonTown(
     'Warm-Up Tunnel',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 38)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 38)],
+    [TemporaryBattleList['Klara2'], TemporaryBattleList['Avery2']]
 );
 TownList['Master Dojo Trial'] = new DungeonTown(
     'Master Dojo Trial',
