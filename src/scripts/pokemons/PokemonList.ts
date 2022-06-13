@@ -16667,7 +16667,7 @@ const pokemonList = createPokemonArray(
             'speed': 124,
         },
     },
-        {
+    {
         'id': 743.01,
         'name': 'Totem Ribombee',
         'type': [PokemonType.Bug, PokemonType.Fairy],
