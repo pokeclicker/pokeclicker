@@ -127,17 +127,17 @@ class MapHelper {
         // Is this location a dungeon
         if (dungeonList[townName]) {
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(townName)]()) {
-                return areaStatus[areaStatus.unlockedUnfinished];
+                states.push(areaStatus.unlockedUnfinished);
             } else  if (DungeonRunner.isThereQuestAtLocation(dungeonList[townName])) {
-                return areaStatus[areaStatus.questAtLocation];
+                states.push(areaStatus.questAtLocation);
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], false)) {
-                return areaStatus[areaStatus.uncaughtPokemon];
+                states.push(areaStatus.uncaughtPokemon);
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], true) && !DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
-                return areaStatus[areaStatus.uncaughtShinyPokemonAndMissingAchievement];
+                states.push(areaStatus.uncaughtShinyPokemonAndMissingAchievement);
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], true)) {
-                return areaStatus[areaStatus.uncaughtShinyPokemon];
+                states.push(areaStatus.uncaughtShinyPokemon);
             } else if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
-                return areaStatus[areaStatus.missingAchievement];
+                states.push(areaStatus.missingAchievement);
             }
         }
         const town = TownList[townName];
