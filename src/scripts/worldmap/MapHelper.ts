@@ -142,7 +142,10 @@ class MapHelper {
         }
         const town = TownList[townName];
         town.content.forEach(c => {
-            states.push(c.areaStatus());
+            // If the town itself is not locked, it should never show locked
+            if (c.areaStatus() != areaStatus.locked) {
+                states.push(c.areaStatus());
+            }
         });
         if (states.length) {
             return areaStatus[Math.min(...states)];
