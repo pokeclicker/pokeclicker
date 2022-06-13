@@ -2899,6 +2899,14 @@ TownList['Postwick'] = new Town(
         npcs: [ProfMagnolia, Mom],
     }
 );
+TownList['Slumbering Weald'] = new Town(
+    'Slumbering Weald',
+    GameConstants.Region.galar,
+    [TemporaryBattleList['Mirages'], new MoveToDungeon(dungeonList['Slumbering Weald Shrine'])],
+    {
+        requirements: [new TemporaryBattleRequirement('Hop1')],
+    }
+);
 TownList['Wedgehurst'] = new Town(
     'Wedgehurst',
     GameConstants.Region.galar,
@@ -3036,11 +3044,10 @@ TownList['Freezington'] = new Town(
 //Galar Dungeons
 
 
-TownList['Slumbering Weald'] = new DungeonTown(
-    'Slumbering Weald',
+TownList['Slumbering Weald Shrine'] = new DungeonTown(
+    'Slumbering Weald Shrine',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
-    [TemporaryBattleList['Mirages']]
+    [new TemporaryBattleRequirement('Hop1')]
 );
 TownList['Galar Mine'] = new DungeonTown(
     'Galar Mine',

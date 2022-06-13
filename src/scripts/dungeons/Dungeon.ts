@@ -6558,7 +6558,7 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
 
 //Galar Dungeons
 
-dungeonList['Slumbering Weald'] = new Dungeon('Slumbering Weald',
+dungeonList['Slumbering Weald Shrine'] = new Dungeon('Slumbering Weald Shrine',
     ['Galarian Weezing', 'Corviknight', 'Galarian Stunfisk', 'Munna', 'Butterfree', 'Orbeetle'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
