@@ -2723,7 +2723,7 @@ TownList['Hau\'oli Cemetery'] = new DungeonTown(
     'Hau\'oli Cemetery',
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 2)],
-    [TemporaryBattleList['Captain Ilima']],
+    [TemporaryBattleList['Captain Ilima']]
 );
 TownList['Verdant Cavern'] = new DungeonTown(
     'Verdant Cavern',
@@ -2764,13 +2764,13 @@ TownList['Wela Volcano Park'] = new DungeonTown(
     'Wela Volcano Park',
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 7)],
-    [TemporaryBattleList['Captain Kiawe']],
+    [TemporaryBattleList['Captain Kiawe']]
 );
 TownList['Lush Jungle'] = new DungeonTown(
     'Lush Jungle',
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 8)],
-    [TemporaryBattleList['Captain Mallow'], TemporaryBattleList['Captain Lana']],
+    [TemporaryBattleList['Captain Mallow'], TemporaryBattleList['Captain Lana']]
 );
 TownList['Diglett\'s Tunnel'] = new DungeonTown(
     'Diglett\'s Tunnel',
@@ -2791,7 +2791,7 @@ TownList['Hokulani Observatory'] = new DungeonTown(
     'Hokulani Observatory',
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 22)],
-    [TemporaryBattleList['Captain Sophocles']],
+    [TemporaryBattleList['Captain Sophocles']]
 );
 TownList['Thrifty Megamart'] = new DungeonTown(
     'Thrifty Megamart',
