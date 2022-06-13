@@ -30,9 +30,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 <li class="nav-item"><a class="nav-link" href="#breeding-help" data-toggle="tab">Help</a></li>
             </ul>
 
-            <p class="bg-warning my-0" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
-                You don't have any free eggslots.
-            </p>
             <p class="bg-danger my-0" data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots()">
                 Your breeding queue is full.
             </p>

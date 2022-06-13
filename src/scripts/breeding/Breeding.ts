@@ -227,12 +227,8 @@ class Breeding implements Feature {
         }
 
         if (!added) {
-            let message = 'You don\'t have any free egg slots';
-            if (this.queueSlots()) {
-                message += '<br/>Your queue is full';
-            }
             Notifier.notify({
-                message,
+                message: '<br/>Your queue is full',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -320,10 +316,6 @@ class Breeding implements Feature {
 
     public gainPokemonEgg(pokemon: PartyPokemon | PokemonListData): boolean {
         if (!this.hasFreeEggSlot()) {
-            Notifier.notify({
-                message: 'You don\'t have any free egg slots',
-                type: NotificationConstants.NotificationOption.warning,
-            });
             return false;
         }
         const egg = this.createEgg(pokemon.name);
