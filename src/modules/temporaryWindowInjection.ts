@@ -26,6 +26,8 @@ import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
 import SettingOption from './settings/SettingOption';
+import BreedingFilters from './settings/BreedingFilters';
+import ProteinFilters from './settings/ProteinFilters';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
 import SeededRand from './utilities/SeededRand';
@@ -112,6 +114,7 @@ import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequ
 import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompletedRequirement';
 import TemporaryBattleRequirement from './requirements/TemporaryBattleRequirement';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
+import SaveReminder from './saveReminder/SaveReminder';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -147,6 +150,8 @@ Object.assign(<any>window, {
     Settings,
     NotificationConstants,
     Notifier,
+    ProteinFilters,
+    BreedingFilters,
     SortOptionConfigs,
     SortOptions,
     AchievementSortOptionConfigs,
@@ -231,4 +236,5 @@ Object.assign(<any>window, {
     QuestLineStepCompletedRequirement,
     TemporaryBattleRequirement,
     DayOfWeekRequirement,
+    SaveReminder,
 });
