@@ -169,7 +169,7 @@ TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))],
     [],
     () => {
-        App.game.party.gainPokemon(Eternatus);
+        App.game.party.gainPokemonById(890);
     }
 );
 TemporaryBattleList['Hop8'] = new TemporaryBattle(
