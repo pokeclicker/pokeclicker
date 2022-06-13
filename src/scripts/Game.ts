@@ -41,7 +41,8 @@ class Game {
         public achievementTracker: AchievementTracker,
         public challenges: Challenges,
         public battleFrontier: BattleFrontier,
-        public multiplier: Multiplier
+        public multiplier: Multiplier,
+        public saveReminder: SaveReminder
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
     }
@@ -101,7 +102,9 @@ class Game {
         GemDeal.generateDeals();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
-        this.computeOfflineEarnings();
+        if (Settings.getSetting('disableOfflineProgress').value === false) {
+            this.computeOfflineEarnings();
+        }
         this.checkAndFix();
 
         // If the player isn't on a route, they're in a town/dungeon
@@ -183,6 +186,17 @@ class Game {
                 // Has the soul badge, Quest is started
                 App.game.quests.getQuestLine('Mining Expedition').state(QuestLineState.started);
                 App.game.quests.getQuestLine('Mining Expedition').beginQuest(App.game.quests.getQuestLine('Mining Expedition').curQuest());
+            }
+        }
+        // Vivillon questline (if not started due to gym bug)
+        if (App.game.quests.getQuestLine('The Great Vivillon Hunt!').state() == QuestLineState.inactive) {
+            if (App.game.party.alreadyCaughtPokemon(666.01)) {
+                // Has obtained Vivillon (Pokéball)
+                App.game.quests.getQuestLine('The Great Vivillon Hunt!').state(QuestLineState.ended);
+            } else if (App.game.badgeCase.badgeList[BadgeEnums.Iceberg]()) {
+                // Has the Iceberg badge, Quest is started
+                App.game.quests.getQuestLine('The Great Vivillon Hunt!').state(QuestLineState.started);
+                App.game.quests.getQuestLine('The Great Vivillon Hunt!').beginQuest(App.game.quests.getQuestLine('The Great Vivillon Hunt!').curQuest());
             }
         }
         // Check if Koga has been defeated, but have no safari ticket yet
@@ -406,6 +420,12 @@ class Game {
         GameHelper.counter += GameConstants.TICK_TIME;
         if (GameHelper.counter >= GameConstants.MINUTE) {
             GameHelper.tick();
+        }
+
+        // Check our save reminder once every 5 minutes
+        SaveReminder.counter += GameConstants.TICK_TIME;
+        if (SaveReminder.counter >= 5 * GameConstants.MINUTE) {
+            SaveReminder.tick();
         }
     }
 

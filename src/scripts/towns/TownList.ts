@@ -1333,6 +1333,11 @@ const PalParkWarden = new NPC('Pal Park Warden', [
     'Hey, welcome to the Pal Park! Have you been to my Dad’s Safari Zone in Kanto? We don’t have as many Pokémon here, but I’ve heard that a flower Pokémon found here can bloom when it’s sunny outside!',
 ]);
 
+const PalParkBurglar = new NPC('Burglar', [
+    'A lot of scary stuff can happen at night. For example, I only see people using Razor Claw and Razor Fang at night.',
+    'I wonder why that is? Maybe it doesn\'t work during the day?',
+]);
+
 const CanalaveRiley = new NPC('Riley', [
     'My partner Lucario evolved from a Riolu during daytime when I used a Soothe Bell.',
 ]);
@@ -1482,7 +1487,7 @@ TownList['Pal Park'] = new Town(
     [PalParkShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 221)],
-        npcs: [PalParkWarden],
+        npcs: [PalParkWarden, PalParkBurglar],
     }
 );
 TownList['Canalave City'] = new Town(
@@ -1905,7 +1910,7 @@ TownList['Lacunosa Town'] = new Town(
 TownList['Opelucid City'] = new Town(
     'Opelucid City',
     GameConstants.Region.unova,
-    [OpelucidCityShop, new MoveToDungeon(dungeonList['Team Plasma Assault'])],
+    [OpelucidCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 11)],
     }
