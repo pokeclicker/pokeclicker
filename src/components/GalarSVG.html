@@ -13,7 +13,7 @@
         <!--Route 1-->
         <%- include('templates/mapRoute',
             { route: 1, region: 7
-            , width: 4, height: 2
+            , width: 5, height: 2
             , x: 49, y: 52
             , rotate: true
             })
@@ -223,7 +223,7 @@
         <!--East Lake Axwell extention-->
         <%- include('templates/mapRoute',
             { route: 6, region: 7
-            , width: 7, height: 2
+            , width: 8, height: 2
             , x: 44, y: 24, name: "ELA"
             , noText: true
             })
@@ -436,7 +436,7 @@
         <%- include('templates/mapRoute',
             { route: 12, region: 7
             , width: 10, height: 2
-            , x: 30, y: 18
+            , x: 30, y: 18, name: "3"
             })
         %>
 
@@ -444,7 +444,7 @@
         <%- include('templates/mapRoute',
             { route: 13, region: 7
             , width: 2, height: 4
-            , x: 30, y: 10
+            , x: 30, y: 10, name: "4"
             })
         %>
 
@@ -452,7 +452,7 @@
         <%- include('templates/mapRoute',
             { route: 14, region: 7
             , width: 26, height: 2
-            , x: 34, y: 8
+            , x: 34, y: 8, name: "5"
             })
         %>
 
@@ -468,7 +468,7 @@
         <%- include('templates/mapRoute',
             { route: 16, region: 7
             , width: 7, height: 2
-            , x: 53, y: 16, name: "MO"
+            , x: 53, y: 16, name: "MR"
             })
         %>
 
@@ -476,7 +476,7 @@
         <%- include('templates/mapRoute',
             { route: 16, region: 7
             , width: 7, height: 1
-            , x: 53, y: 20, name: "MO"
+            , x: 53, y: 20, name: "MR"
             , noText: true
             })
         %>
@@ -698,6 +698,7 @@
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hulbury') }"
             })
         %>
+    </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
             'xlink:href':'assets/images/galar-north.png?v=$VERSION',
@@ -712,7 +713,7 @@
         <%- include('templates/mapRoute',
             { route: 23, region: 7
             , width: 2, height: 9
-            , x: 34, y: 49
+            , x: 34, y: 49, name: "6"
             })
         %>
 
@@ -720,7 +721,8 @@
         <%- include('templates/mapRoute',
             { route: 23, region: 7
             , width: 10, height: 2
-            , x: 36, y: 56
+            , x: 36, y: 56, name: "6"
+            , noText: true
             })
         %>
 
@@ -728,7 +730,7 @@
         <%- include('templates/mapRoute',
             { route: 24, region: 7
             , width: 13, height: 2
-            , x: 55, y: 56
+            , x: 55, y: 56, name: "7"
             })
         %>
 
@@ -736,7 +738,7 @@
         <%- include('templates/mapRoute',
             { route: 25, region: 7
             , width: 2, height: 5
-            , x: 62, y: 46
+            , x: 62, y: 46, name: "8"
             })
         %>
 
@@ -744,7 +746,8 @@
         <%- include('templates/mapRoute',
             { route: 25, region: 7
             , width: 2, height: 7
-            , x: 60, y: 49
+            , x: 60, y: 49, name: "8"
+            , noText: true
             })
         %>
 
@@ -769,7 +772,7 @@
         <%- include('templates/mapRoute',
             { route: 28, region: 7
             , width: 2, height: 4
-            , x: 71, y: 44
+            , x: 71, y: 44, name: "9"
             })
         %>
 

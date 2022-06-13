@@ -2178,7 +2178,6 @@ Routes.add(new RegionRoute(
         new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.galar, 19),
             new RouteKillRequirement(10, GameConstants.Region.galar, 20),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dusty Bowl')),
         ]),
     ],
     undefined,

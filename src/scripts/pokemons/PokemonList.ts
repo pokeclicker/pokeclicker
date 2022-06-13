@@ -19451,7 +19451,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 75,
     },
     {
-        'id': 851.2,
+        'id': 851.1,
         'name': 'Gigantamax Centiskorch',
         'type': [
             PokemonType.Fire,
