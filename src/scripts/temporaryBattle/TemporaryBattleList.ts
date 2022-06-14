@@ -91,9 +91,7 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
 );
 TemporaryBattleList['Excited Fisherkid'] = new TemporaryBattle(
     'Excited Fisherkid',
-    [
-        new GymPokemon('Tiny-fin Magikarp', 20, 5),
-    ],
+    [new GymPokemon('Tiny-fin Magikarp', 20, 5)],
     '<p>Your Magikarp defeated mine? But the helpful Salesman told me that he sold me the best Magikarp in the world!</p>' +
     '<p>I have been playing the mobile game "Magikarp Jump", and i want a Magikarp, that can jump as much as the one in the game can.</p>' +
     '<p>Maybe we should both train our Magikarps? Let\'s do as they do in the game. Let\'s collect some Oran berries.</p>' +
