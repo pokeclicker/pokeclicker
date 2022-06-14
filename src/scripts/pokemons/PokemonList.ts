@@ -3279,6 +3279,23 @@ const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 129.01,
+        'name': 'Tiny-fin Magikarp',
+        'catchRate': 255,
+        'type': [PokemonType.Water],
+        'levelType': LevelType.slow,
+        'exp': 40,
+        'eggCycles': 5,
+        'base': {
+            'hitpoints': 20,
+            'attack': 5,
+            'specialAttack': 15,
+            'defense': 55,
+            'specialDefense': 20,
+            'speed': 80,
+        },
+    },
+    {
         'id': 130,
         'name': 'Gyarados',
         'catchRate': 45,

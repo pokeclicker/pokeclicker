@@ -214,6 +214,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Red Spearow',
             'shiny Totem Ribombee',
+            'Tiny-fin Magikarp',
             'Weather Institute world sprite',
         ],
         // NOTES: Created specifically for PokéClicker.

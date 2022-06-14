@@ -179,6 +179,7 @@ export type PokemonNameType
     | 'Pinsir'
     | 'Tauros'
     | 'Magikarp'
+    | 'Tiny-fin Magikarp'
     | 'Gyarados'
     | 'Lapras'
     | 'Ditto'
