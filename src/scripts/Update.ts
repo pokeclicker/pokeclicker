@@ -724,6 +724,16 @@ class Update implements Saveable {
         },
 
         '0.9.6': ({ playerData, saveData }) => {
+            // Set our last save reminder/download to our current in game time
+            // This way we won't get a reminder notification for at least 12 hours
+            saveData.saveReminder = {
+                lastReminder: saveData.statistics.secondsPlayed,
+                lastDownloaded: saveData.statistics.secondsPlayed,
+            };
+            // Start Mina's Trial questline if player has cleared Ultra Necrozma already
+            if (saveData.statistics.temporaryBattleDefeated[1]) {
+                saveData.quests.questLines.push({state: 1, name: 'Mina\'s Trial', quest: 0});
+            // Start UB questline
             if (saveData.badgeCase[95]) {
                 saveData.quests.questLines.push({state: 1, name: 'Ultra Beast Hunt', quest: 0});
             }

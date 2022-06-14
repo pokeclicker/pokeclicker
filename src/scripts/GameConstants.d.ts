@@ -175,13 +175,13 @@ namespace GameConstants {
     declare enum TypeEffectiveness {
         Immune,
         NotVery,
-        Normal,
+        Neutral,
         Very
     }
     declare enum TypeEffectivenessValue {
         Immune,
         NotVery,
-        Normal,
+        Neutral,
         Very
     }
     declare function humanifyString(str: string): string;
@@ -273,18 +273,18 @@ namespace GameConstants {
         'Lucky_incense' = '',
     }
     declare enum FluteItemType {
+        'Yellow_Flute' = '',
+        'Time_Flute' = '',
+        'Black_Flute' = '',
         'Red_Flute' = '',
         'White_Flute' = '',
-        'Black_Flute' = '',
-        'Yellow_Flute' = '',
         'Blue_Flute' = '',
-        'Poke_Flute' = '',
-        'Azure_Flute' = '',
-        'Eon_Flute' = '',
-        'Sun_Flute' = '',
-        'Moon_Flute' = '',
-        'Time_Flute' = '',
-        'Grass_Flute' = '',
+        //'Poke_Flute' = '',
+        //'Azure_Flute' = '',
+        //'Eon_Flute' = '',
+        //'Sun_Flute' = '',
+        //'Moon_Flute' = '',
+        //'Grass_Flute' = '',
     }
     declare enum PokemonItemType {
         'Eevee',

@@ -15,7 +15,8 @@ class PokemonFactory {
         }
         let name: PokemonNameType;
 
-        if (PokemonFactory.roamingEncounter(route, region)) {
+        const roaming = PokemonFactory.roamingEncounter(route, region);
+        if (roaming) {
             name = PokemonFactory.generateRoamingEncounter(route, region);
         } else {
             name = Rand.fromArray(RouteHelper.getAvailablePokemonList(route, region));
@@ -49,11 +50,19 @@ class PokemonFactory {
             LogEvent('encountered shiny', 'shiny pokemon', 'wild encounter',
                 Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
+        if (roaming) {
+            Notifier.notify({
+                message: `You encountered a roaming ${name}!`,
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.General.roaming,
+                setting: NotificationConstants.NotificationSetting.General.encountered_roaming,
+            });
+        }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, 1, heldItem);
     }
 
     public static routeLevel(route: number, region: GameConstants.Region): number {
-        return Math.floor(MapHelper.normalizeRoute(route, region) * 2 + 20 * Math.pow(region, 2.3));
+        return Math.floor(Math.pow(20 * MapHelper.normalizeRoute(route, region),(1 / 2.25)));
     }
 
     public static routeHealth(route: number, region: GameConstants.Region): number {
@@ -109,7 +118,7 @@ class PokemonFactory {
         const pokemon = gym.pokemons[index];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
-        const exp: number = basePokemon.exp * 1.5;
+        const exp: number = basePokemon.exp;
         const shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS);
     }
@@ -179,7 +188,7 @@ class PokemonFactory {
         const pokemon = battle.pokemons[index];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
-        const exp: number = basePokemon.exp * 1.5;
+        const exp: number = basePokemon.exp;
         const shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS);
     }
@@ -255,10 +264,6 @@ class PokemonFactory {
 
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             chance /= 1.5;
-        }
-
-        if (FluteEffectRunner.isActive(GameConstants.FluteItemType.Black_Flute)()) {
-            chance /= (FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Black_Flute) * AchievementHandler.achievementBonus());
         }
 
         if (Rand.chance(chance)) {

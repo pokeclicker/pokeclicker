@@ -277,14 +277,14 @@ export enum Currency {
 export enum TypeEffectiveness {
     Immune,
     NotVery,
-    Normal,
+    Neutral,
     Very,
 }
 
 export enum TypeEffectivenessValue {
     Immune = 0,
     NotVery = 0.5,
-    Normal = 1,
+    Neutral = 1,
     Very = 2,
 }
 
@@ -639,18 +639,18 @@ export enum BattleItemType {
 }
 
 export enum FluteItemType {
+    'Yellow_Flute' = 'Yellow_Flute',
+    'Time_Flute' = 'Time_Flute',
+    'Black_Flute' = 'Black_Flute',
     'Red_Flute' = 'Red_Flute',
     'White_Flute' = 'White_Flute',
-    'Black_Flute' = 'Black_Flute',
-    'Yellow_Flute' = 'Yellow_Flute',
     'Blue_Flute' = 'Blue_Flute',
-    'Poke_Flute' = 'Poke_Flute',
-    'Azure_Flute' = 'Azure_Flute',
-    'Eon_Flute' = 'Eon_Flute',
-    'Sun_Flute' = 'Sun_Flute',
-    'Moon_Flute' = 'Moon_Flute',
-    'Time_Flute' = 'Time_Flute',
-    'Grass_Flute' = 'Grass_Flute',
+    // 'Poke_Flute' = 'Poke_Flute',
+    // 'Azure_Flute' = 'Azure_Flute',
+    // 'Eon_Flute' = 'Eon_Flute',
+    // 'Sun_Flute' = 'Sun_Flute',
+    // 'Moon_Flute' = 'Moon_Flute',
+    // 'Grass_Flute' = 'Grass_Flute',
 }
 
 export enum PokemonItemType {
@@ -1169,6 +1169,13 @@ export const RegionalStarters = [
 export const TemporaryBattles = [
     'Ultra Wormhole',
     'Ultra Megalopolis',
+    'Captain Mina',
+    'Captain Ilima',
+    'Captain Mallow',
+    'Captain Lana',
+    'Captain Kiawe',
+    'Captain Sophocles',
+    'Kahuna Nanu',
     'Anabel',
 ];
 
