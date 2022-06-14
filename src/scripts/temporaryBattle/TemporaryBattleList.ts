@@ -11,9 +11,11 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     [new GymPokemon('Necrozma (Ultra)', 282601920, 60)],
     'Necrozma fled.',
     [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
-    [],
-    () => {
-        App.game.quests.getQuestLine('Mina\'s Trial').beginQuest();
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.quests.getQuestLine('Mina\'s Trial').beginQuest();
+        },
     }
 );
 TemporaryBattleList['Captain Mina'] = new TemporaryBattle(
