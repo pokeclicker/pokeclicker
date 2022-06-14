@@ -3006,7 +3006,7 @@ TownList['Wyndon Stadium'] = new Town(
 );
 //Isle of Armor towns
 TownList['Armor Station'] = new Town(
-    'Master Dojo',
+    'Armor Station',
     GameConstants.Region.galar,
     [TemporaryBattleList['Klara1'], TemporaryBattleList['Avery1']],
     {
