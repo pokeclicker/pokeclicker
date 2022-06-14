@@ -6633,7 +6633,7 @@ dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
         new DungeonTrainer('Rail Staff',
             [
                 new GymPokemon('Drilbur', 17114462, 22),
-                new GymPokemon('Onix', 17114462, 23)
+                new GymPokemon('Onix', 17114462, 23),
             ],
             { weight: 1 }, 'Vincent'),
     ],
@@ -6681,7 +6681,7 @@ dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
                 new GymPokemon('Milotic', 17114462, 51),
                 new GymPokemon('Gigantamax Garbodor', 17114462, 52),
             ],
-            { weight: 1 }, 'Oleana')
+            { weight: 1 }, 'Oleana'),
     ],
     96500, 201);
 
