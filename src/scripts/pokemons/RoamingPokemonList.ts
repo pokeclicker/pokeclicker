@@ -104,11 +104,11 @@ RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Galarian 
 
 //Galar - Crown Tundra
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Spectrier', new MultiRequirement([
-    new TemporaryBattleRequirement('Spectrier')
+    new TemporaryBattleRequirement('Spectrier'),
     new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id),
 ])));
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Glastrier', new MultiRequirement([
-    new TemporaryBattleRequirement('Glastrier')
+    new TemporaryBattleRequirement('Glastrier'),
     new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id),
 ])));
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Galarian Articuno', new MultiRequirement([
