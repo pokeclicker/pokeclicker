@@ -738,6 +738,10 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 4);
             // Add Silph Co.
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 6);
+            // Start Team Rocket Kanto questline if player has Cascade Badge already
+            if (saveData.badgeCase[2]) {
+                saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
+            }
         },
     };
 

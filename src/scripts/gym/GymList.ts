@@ -24,7 +24,10 @@ GymList['Cerulean City'] = new Gym(
     BadgeEnums.Cascade,
     500,
     'Wow! You\'re too much, all right! You can have the Cascade Badge to show that you beat me.',
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
+    () => {
+        App.game.quests.getQuestLine('Team Rocket').beginQuest();
+    }
 );
 GymList['Vermilion City'] = new Gym(
     'Lt. Surge',

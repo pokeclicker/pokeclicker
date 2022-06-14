@@ -551,7 +551,7 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     Mansion: {
-        [Region.kanto]: new Set(['Cinnabar Island', 'Pokémon Mansion']),
+        [Region.kanto]: new Set(['Cinnabar Island', 'Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Burned Tower']),
         [Region.hoenn]: new Set(['Lavaridge Town', 'Petalburg City', 'Mt. Chimney', 'Jagged Pass', 'Fiery Path', 'Mt. Chimney Crater']),
         [Region.sinnoh]: new Set(['Old Chateau', 'Veilstone City', 'Canalave City', 'Snowpoint Temple']),
