@@ -16909,7 +16909,7 @@ const pokemonList = createPokemonArray(
         'id': 743.01,
         'name': 'Totem Ribombee',
         'type': [PokemonType.Bug, PokemonType.Fairy],
-        'eggCycles': 20,
+        'eggCycles': 30,
         'levelType': LevelType.mediumfast,
         'exp': 162,
         'catchRate': 75,
