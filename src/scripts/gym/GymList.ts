@@ -107,6 +107,7 @@ GymList['Cinnabar Island'] = new Gym(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Mansion'))],
     () => {
         App.game.quests.getQuestLine('Bill\'s Errand').beginQuest();
+    }
 );
 GymList['Viridian City'] = new Gym(
     'Giovanni',
