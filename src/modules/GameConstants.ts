@@ -900,6 +900,7 @@ export const KantoDungeons = [
     'Rock Tunnel',
     'Rocket Game Corner',
     'Pokémon Tower',
+    'Silph Co.',
     'Power Plant',
     'Seafoam Islands',
     'Pokémon Mansion',

@@ -736,6 +736,8 @@ class Update implements Saveable {
             }
             // Add Rocket Game Corner
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 4);
+            // Add Silph Co.
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 6);
         },
     };
 

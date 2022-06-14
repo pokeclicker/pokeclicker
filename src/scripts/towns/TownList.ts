@@ -268,7 +268,7 @@ TownList['Celadon City'] = new Town(
 TownList['Saffron City'] = new Town(
     'Saffron City',
     GameConstants.Region.kanto,
-    [SaffronCityShop],
+    [SaffronCityShop, new MoveToDungeon(dungeonList['Silph Co.'])],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Rainbow)],
         npcs: [SaffronBattleItemRival, SaffronBreeder],
@@ -356,6 +356,11 @@ TownList['Pokémon Tower'] = new DungeonTown(
         new RouteKillRequirement(10, GameConstants.Region.kanto, 7),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
     ]
+);
+TownList['Silph Co.'] = new DungeonTown(
+    'Silph Co.',
+    GameConstants.Region.kanto,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))]
 );
 TownList['Power Plant'] = new DungeonTown(
     'Power Plant',
