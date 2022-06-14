@@ -6,6 +6,7 @@ import OakItemType from '../enums/OakItemType';
 export default class OakItemController {
     private static inspectedItemKO: KnockoutObservable<OakItemType> = ko.observable(OakItemType.Magic_Ball);
     private static selectedItemKO: KnockoutObservable<OakItemType> = ko.observable(OakItemType.Magic_Ball);
+    private static isEditingLoadoutNameKO: KnockoutObservable<boolean> = ko.observable(false);
 
     public static click(item: OakItemType) {
         this.selectedItem = item;
@@ -44,5 +45,13 @@ export default class OakItemController {
 
     static set selectedItem(item: OakItemType) {
         this.selectedItemKO(item);
+    }
+
+    public static isEditingLoadoutName(): boolean {
+        return this.isEditingLoadoutNameKO();
+    }
+
+    public static toggleEditingLoadoutName() {
+        this.isEditingLoadoutNameKO(!this.isEditingLoadoutNameKO());
     }
 }

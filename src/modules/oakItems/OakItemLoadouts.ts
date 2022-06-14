@@ -1,10 +1,10 @@
 import {
     Observable as KnockoutObservable,
-    ObservableArray as KnockoutObservableArray,
     Computed as KnockoutComputed,
 } from 'knockout';
 import { Saveable } from '../DataStore/common/Saveable';
 import OakItemType from '../enums/OakItemType';
+import OakItemLoadout from './OakItemLoadout';
 
 export default class OakItemLoadouts implements Saveable {
     private static MAX_SLOTS = 3;
@@ -13,7 +13,7 @@ export default class OakItemLoadouts implements Saveable {
 
     defaults = {};
 
-    loadouts: Array<KnockoutObservableArray<number>> = Array(OakItemLoadouts.MAX_SLOTS).fill(0).map(() => ko.observableArray());
+    loadouts: Array<OakItemLoadout> = Array(OakItemLoadouts.MAX_SLOTS).fill(0).map((_, i) => new OakItemLoadout(`Loadout ${i + 1}`));
     selectedLoadout: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
 
     activateLoadout(index: number) {
@@ -22,7 +22,7 @@ export default class OakItemLoadouts implements Saveable {
         }
 
         App.game.oakItems.deactivateAll();
-        this.loadouts[index]().forEach((item: OakItemType) => {
+        this.loadouts[index].loadout().forEach((item: OakItemType) => {
             App.game.oakItems.activate(item);
         });
     }
@@ -32,7 +32,7 @@ export default class OakItemLoadouts implements Saveable {
             return;
         }
 
-        const loadout = this.loadouts[this.selectedLoadout()];
+        const { loadout } = this.loadouts[this.selectedLoadout()];
         if (loadout().includes(item)) {
             const index = loadout().indexOf(item);
             if (index !== -1) {
@@ -44,12 +44,16 @@ export default class OakItemLoadouts implements Saveable {
     }
 
     hasItem(item: OakItemType): KnockoutComputed<boolean> {
-        return ko.pureComputed(() => this.loadouts[this.selectedLoadout()]().includes(item));
+        return ko.pureComputed(() => this.loadouts[this.selectedLoadout()].loadout().includes(item));
     }
 
-    fromJSON(json: Array<Array<number>>) {
+    getSelectedLoadout(): OakItemLoadout {
+        return this.loadouts[this.selectedLoadout()];
+    }
+
+    fromJSON(json: Array<{name: string, loadout: Array<number>}>) {
         json?.forEach((loadout, index) => {
-            loadout.forEach((item) => this.loadouts[index]?.push(item));
+            this.loadouts[index] = new OakItemLoadout(loadout.name, loadout.loadout);
         });
     }
 
