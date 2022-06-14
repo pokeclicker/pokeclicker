@@ -504,6 +504,20 @@ class QuestLineHelper {
         App.game.quests.questLines().push(minasTrialAlolaQuestLine);
     }
 
+    public static createMagikarpJumpQuestLine() {
+        const magikarpJumpQuestLine = new QuestLine('Can a Magikarp jump?', 'Fisherkid Charlotte wants to make her Magikarp jump, just like in the mobile game "Magikarp Jump".');
+
+        const collectOran = new HarvestBerriesQuest(100, 0, BerryType.Oran, 'Collect some Orans. They help train the Magikarp, in the game!');
+        magikarpJumpQuestLine.addQuest(collectOran);
+
+        //const talkToCharlotte1 = new TalkToNPCQuest(Charlotte1NPC, 'Go back and talk with Charlotte at the Route 3 Pokémon Center.');
+        //magikarpJumpQuestLine.addQuest(talkToCharlotte1);
+
+        //const defeatDwebbleQuest =
+
+        App.game.quests.questLines().push(magikarpJumpQuestLine);
+    }
+
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
@@ -520,5 +534,6 @@ class QuestLineHelper {
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createGalacticSinnohQuestLine();
         this.createMinasTrialAlolaQuestLine();
+        this.createMagikarpJumpQuestLine();
     }
 }

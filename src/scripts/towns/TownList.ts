@@ -221,7 +221,7 @@ TownList['Pewter City'] = new Town(
 TownList['Route 3 Pokémon Center'] = new Town(
     'Route 3 Pokémon Center',
     GameConstants.Region.kanto,
-    [Route3Shop],
+    [Route3Shop, TemporaryBattleList['Excited Fisherkid']],
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.kanto, 3),

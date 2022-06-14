@@ -4,10 +4,11 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
 
     private berryType: BerryType;
 
-    constructor(amount: number, reward: number, berryType: BerryType) {
+    constructor(amount: number, reward: number, berryType: BerryType, customDescription: string = undefined) {
         super(amount, reward);
         this.berryType = berryType;
         this.focus = App.game.statistics.berriesHarvested[this.berryType];
+        this.customDescription = customDescription;
     }
 
     public static canComplete() {
@@ -37,7 +38,7 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return `Harvest ${this.amount.toLocaleString('en-US')} ${BerryType[this.berryType]} berries at the farm.`;
+        return this.customDescription ?? `Harvest ${this.amount.toLocaleString('en-US')} ${BerryType[this.berryType]} berries at the farm.`;
     }
 
     toJSON() {
