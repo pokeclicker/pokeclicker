@@ -473,7 +473,7 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(galacticSinnohQuestLine);
     }
-  
+
     public static createMinasTrialAlolaQuestLine() {
         const minasTrialAlolaQuestLine = new QuestLine('Mina\'s Trial', 'Mina has asked you to battle the Trial captains of the other islands to earn access to her Trial site.');
 
