@@ -1161,6 +1161,7 @@ export const TemporaryBattles = [
     'Captain Kiawe',
     'Captain Sophocles',
     'Kahuna Nanu',
+    'Excited Fisherkid',
 ];
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

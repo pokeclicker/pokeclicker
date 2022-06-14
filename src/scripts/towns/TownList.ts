@@ -197,6 +197,52 @@ const CinnabarIslandResearcher = new NPC('Researcher', [
     'Apparently the ancient Pokémon escaped, and can be found roaming around Kanto!',
 ]);
 
+// Magikarp Jump NPCs
+const Charlotte1NPC = new NPC('Fisherkid Charlotte', [
+    'Oh hey, you are back! Did you collect the Orans? Did your Magikarp refuse to eat them too?',
+    'Maybe you just need to rub them on him, like with a Water Stone!. Then you get to keep the berries too.',
+    'Let\'s see how high they can jump. Magikarp, jump!',
+    '*Both Magikarps used Splash*',
+    'Oh, they did not go far. It was hard to see who won.',
+    'I have seen Magikarps jump up to 15 meters in the game! We just need to find more berries.',
+    'Go find 40 Rindo berries!',
+]); //TODO: requirements
+const Charlotte2NPC = new NPC('Fisherkid Charlotte', [
+    'Did you find them all?',
+    'Let\'s try again! Magikarp, jump!',
+    '*Both Magikarps used Splash*',
+    'I think I can see a small improvement... But this won\'t even beat the Fiend League!',
+    'Let\'s try one of the trainings instead. Come back when your Magikarp has defeated 35 Dwebbles',
+]); //TODO: requirements
+const Charlotte3NPC = new NPC('Fisherkid Charlotte', [
+    'I tried to defeat a Dwebble, but it was asleep the whole time... Wait, did you defeat all 35 of them?',
+    'Shall we see if it helped? Magikarp, jump!',
+    '*Both Magikarps used Splash*',
+    'Ha! I think my Magikarp won! This is working!',
+    'More training! Defeat some Steelixs\'!',
+]); //TODO: requirements
+const Charlotte4NPC = new NPC('Fisherkid Charlotte', [
+    'How can your Magikarp defeat a Steelix? Did you cheat? Did it get help?',
+    'I knew i should had bought some Friendship Items! But again, Magikarp, jump!',
+    '*Both Magikarps used Splash*',
+    'Your Magikarp seams stronger... I lost...',
+    'Let\'s go back to berries. Gather 20 Wacans.',
+]); //TODO: requirements
+const Charlotte5NPC = new NPC('Fisherkid Charlotte', [
+    'I am starting to think this does not work... I should not had spend my Dad\'s money on this Magikarp...',
+    'But it was so cheap! The nice salesman gave me a special price! Only 100.000!',
+    'Oh well, we are only here for one thing! Magikarp, jump!',
+    '*Both Magikarps used Splash*',
+    'How did it do that? It jumped like 2 meters!',
+    'Let\'s try one last thing. Defeat 10 Boldores!',
+]); //TODO: requirements
+const Charlotte6NPC = new NPC('Fisherkid Charlotte', [
+    'Okay, one last time. Magikarp, jump!',
+    '*Both Magikarps used Splash*',
+    'I give up. This is a waste of time. I am starting to think that the game is lying to me...',
+    'Here, take my Magikarp! I don\'t want it anymore...',
+]); //TODO: requirements
+
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
@@ -226,7 +272,7 @@ TownList['Route 3 Pokémon Center'] = new Town(
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.kanto, 3),
         ],
-        npcs: [Route3ShadySalesman],
+        npcs: [Route3ShadySalesman, Charlotte1NPC, Charlotte2NPC, Charlotte3NPC, Charlotte4NPC, Charlotte5NPC, Charlotte6NPC],
     }
 );
 TownList['Cerulean City'] = new Town(

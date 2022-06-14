@@ -513,7 +513,36 @@ class QuestLineHelper {
         //const talkToCharlotte1 = new TalkToNPCQuest(Charlotte1NPC, 'Go back and talk with Charlotte at the Route 3 Pokémon Center.');
         //magikarpJumpQuestLine.addQuest(talkToCharlotte1);
 
-        //const defeatDwebbleQuest =
+        const collectRindo = new HarvestBerriesQuest(40, 0, BerryType.Rindo, 'Rindo might be better. Collect some.');
+        magikarpJumpQuestLine.addQuest(collectRindo);
+
+        //const talkToCharlotte2 = new TalkToNPCQuest(Charlotte2NPC, 'Go back and talk with Charlotte at the Route 3 Pokémon Center.');
+        //magikarpJumpQuestLine.addQuest(talkToCharlotte2);
+
+        //const defeatDwebbleQuest = new DefeatSpecificPokemonQuest('Dwebble', 35, 'Defeat 35 Dwebbles to train your Magikarp.');
+        //magikarpJumpQuestLine.addQuest(defeatDwebbleQuest);
+
+        //const talkToCharlotte3 = new TalkToNPCQuest(Charlotte3NPC, 'Go back and talk with Charlotte at the Route 3 Pokémon Center.');
+        //magikarpJumpQuestLine.addQuest(talkToCharlotte3);
+
+        //const defeatSteelixQuest = new DefeatSpecificPokemonQuest('Steelix', 5, 'This is not going anywhere, but do you have anything better to do? Defeat 5 Steelix\'');
+        //magikarpJumpQuestLine.addQuest(defeatSteelixQuest);
+
+        //const talkToCharlotte4 = new TalkToNPCQuest(Charlotte4NPC, 'Go back and talk with Charlotte at the Route 3 Pokémon Center.');
+        //magikarpJumpQuestLine.addQuest(talkToCharlotte4);
+
+        const collectWacan = new HarvestBerriesQuest(20, 0, BerryType.Wacan, 'This is getting tiresome. Collect Wacan berries.');
+        magikarpJumpQuestLine.addQuest(collectRindo);
+
+        //const talkToCharlotte5 = new TalkToNPCQuest(Charlotte5NPC, 'Go back and talk with Charlotte at the Route 3 Pokémon Center.');
+        //magikarpJumpQuestLine.addQuest(talkToCharlotte5);
+
+        //const defeatBoldoreQuest = new DefeatSpecificPokemonQuest('Boldore', 10, 'This should be the last one. What will the reward be? Defeat 10 Boldores');
+        //magikarpJumpQuestLine.addQuest(defeatBoldoreQuest);
+
+        //const talkToCharlotte6 = new TalkToNPCQuest(Charlotte6NPC, 'Go back and talk with Charlotte at the Route 3 Pokémon Center.',
+        //() => App.game.party.gainPokemonById(129.01));
+        //magikarpJumpQuestLine.addQuest(talkToCharlotte6);
 
         App.game.quests.questLines().push(magikarpJumpQuestLine);
     }
