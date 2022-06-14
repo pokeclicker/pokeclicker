@@ -5278,7 +5278,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 86,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Gligar', 'Gliscor', GameConstants.StoneType.Razor_fang)],
+        'evolutions': [new NightTimedStoneEvolution('Gligar', 'Gliscor', GameConstants.StoneType.Razor_fang)],
         'base': {
             'hitpoints': 65,
             'attack': 75,
@@ -5417,7 +5417,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 86,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Sneasel', 'Weavile', GameConstants.StoneType.Razor_claw)],
+        'evolutions': [new NightTimedStoneEvolution('Sneasel', 'Weavile', GameConstants.StoneType.Razor_claw)],
         'base': {
             'hitpoints': 55,
             'attack': 95,
@@ -16665,6 +16665,23 @@ const pokemonList = createPokemonArray(
             'defense': 60,
             'specialDefense': 70,
             'speed': 124,
+        },
+    },
+    {
+        'id': 743.01,
+        'name': 'Totem Ribombee',
+        'type': [PokemonType.Bug, PokemonType.Fairy],
+        'eggCycles': 30,
+        'levelType': LevelType.mediumfast,
+        'exp': 162,
+        'catchRate': 75,
+        'base': {
+            'hitpoints': 60,
+            'attack': 75,
+            'specialAttack': 115,
+            'defense': 80,
+            'specialDefense': 90,
+            'speed': 144,
         },
     },
     {
