@@ -16685,6 +16685,23 @@ const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 743.01,
+        'name': 'Totem Ribombee',
+        'type': [PokemonType.Bug, PokemonType.Fairy],
+        'eggCycles': 30,
+        'levelType': LevelType.mediumfast,
+        'exp': 162,
+        'catchRate': 75,
+        'base': {
+            'hitpoints': 60,
+            'attack': 75,
+            'specialAttack': 115,
+            'defense': 80,
+            'specialDefense': 90,
+            'speed': 144,
+        },
+    },
+    {
         'id': 744,
         'name': 'Rockruff',
         'type': [PokemonType.Rock],

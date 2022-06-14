@@ -735,6 +735,10 @@ class Update implements Saveable {
                 lastReminder: saveData.statistics.secondsPlayed,
                 lastDownloaded: saveData.statistics.secondsPlayed,
             };
+            // Start Mina's Trial questline if player has cleared Ultra Necrozma already
+            if (saveData.statistics.temporaryBattleDefeated[1]) {
+                saveData.quests.questLines.push({state: 1, name: 'Mina\'s Trial', quest: 0});
+            }
         },
     };
 

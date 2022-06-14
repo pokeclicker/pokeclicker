@@ -213,6 +213,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://github.com/NiCeDiCe90',
         resources: [
             'Red Spearow',
+            'shiny Totem Ribombee',
             'Weather Institute world sprite',
         ],
         // NOTES: Created specifically for PokéClicker.
@@ -253,6 +254,7 @@ export const SpriteCredits: Credit[] = [
             'Santa Snorlax',
             'Spooky Bulbasaur',
             'Spooky Togepi',
+            'Totem Ribombee',
         ],
     },
     {
