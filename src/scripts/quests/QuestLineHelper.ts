@@ -503,8 +503,8 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(minasTrialAlolaQuestLine);
     }
-  
-      public static createBillSeviiQuestLine() {
+
+    public static createBillSeviiQuestLine() {
         const billSeviiQuestLine = new QuestLine('Bill\'s Errand', 'Bill has asked you to journey to the Sevii islands with him to set up a digital connection to mainland Kanto.');
 
         const talktoCelio1 = new TalkToNPCQuest(OneIslandCelio1, 'Use the Subregional Travel button at the top of the map to travel to the Sevii Islands and speak with Celio on One Island.');
