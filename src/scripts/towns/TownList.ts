@@ -270,7 +270,10 @@ TownList['Saffron City'] = new Town(
     GameConstants.Region.kanto,
     [SaffronCityShop, new MoveToDungeon(dungeonList['Silph Co.'])],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Rainbow)],
+        requirements: [new OneFromManyRequirement([
+            new GymBadgeRequirement(BadgeEnums.Rainbow),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
+        ])],
         npcs: [SaffronBattleItemRival, SaffronBreeder],
     }
 );
@@ -373,7 +376,10 @@ TownList['Power Plant'] = new DungeonTown(
 TownList['Seafoam Islands'] = new DungeonTown(
     'Seafoam Islands',
     GameConstants.Region.kanto,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 19)]
+    [
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 19),
+        new GymBadgeRequirement(BadgeEnums.Rainbow),
+    ]
 );
 TownList['Pokémon Mansion'] = new DungeonTown(
     'Pokémon Mansion',

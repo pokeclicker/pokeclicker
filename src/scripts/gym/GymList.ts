@@ -120,9 +120,10 @@ GymList['Viridian City'] = new Gym(
     6000,
     'Ha! That was a truly intense fight. You have won! As proof, here is the Earth Badge!',
     [
-        new GymBadgeRequirement(BadgeEnums.Volcano),
-        new GymBadgeRequirement(BadgeEnums.Marsh),
         new GymBadgeRequirement(BadgeEnums.Thunder),
+        new GymBadgeRequirement(BadgeEnums.Rainbow),
+        new GymBadgeRequirement(BadgeEnums.Marsh),
+        new GymBadgeRequirement(BadgeEnums.Volcano),
     ],
     () => {
         App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
