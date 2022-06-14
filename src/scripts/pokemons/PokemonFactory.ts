@@ -17,7 +17,7 @@ class PokemonFactory {
 
         const roaming = PokemonFactory.roamingEncounter(route, region, subRegion);
         if (roaming) {
-            name = PokemonFactory.generateRoamingEncounter(route, region);
+            name = PokemonFactory.generateRoamingEncounter(region, subRegion);
         } else {
             name = Rand.fromArray(RouteHelper.getAvailablePokemonList(route, region));
         }
