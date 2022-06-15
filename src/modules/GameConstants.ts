@@ -559,7 +559,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City']),
         [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Pokéball Factory', 'Team Flare Secret HQ']),
         [Region.alola]: new Set(['Aether Paradise', 'Hokulani Observatory', 'Aether Foundation']),
-        [Region.galar]: new Set(['Spikemuth']),
+        [Region.galar]: new Set(['Spikemuth', 'Energy Plant']),
     },
 
     Mansion: {
@@ -1107,6 +1107,7 @@ export const GalarDungeons = [
     'Galar Mine No. 2',
     'Glimwood Tangle',
     'Rose Tower',
+    'Energy Plant',
     'Dusty Bowl',
     'Courageous Cavern',
     'Brawlers Cave',
@@ -1209,6 +1210,7 @@ export const TemporaryBattles = [
     'Hop6',
     'Hop7',
     'Marnie2',
+    'Eternatus',
     'The Darkest Day',
     'Hop8',
     'Mustard',

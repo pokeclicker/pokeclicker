@@ -504,6 +504,39 @@ class QuestLineHelper {
         App.game.quests.questLines().push(minasTrialAlolaQuestLine);
     }
 
+    public static createDarkestDayQuestLine() {
+        const darkestDayQuestLine = new QuestLine('The Darkest Day', 'Stop the return of the Darkest Day!');
+
+        const clearHop7 = new CustomQuest(1, 0, 'Learn more about the heroes who stopped the Darkest Day, and have a battle with Hop.', ( => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hop7')]));
+        darkestDayQuestLine.addQuest(clearHop7);
+
+        const clearHammerlockeGym = new CustomQuest(1, 0, 'Defeat Raihan to gain the last badge of Galar and gain entry to the Champion Cup.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Hammerlocke')]());
+        darkestDayQuestLine.addQuest(clearHammerlockeGym);
+
+        const clearTrainerMarnie = new CustomQuest(1, 0, 'Defeat Marnie to reach the quarter-finals of the Champion Cup.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Trainer Marnie')]());
+        darkestDayQuestLine.addQuest(clearTrainerMarnie);
+
+        const clearGymLeaderBede = new CustomQuest(1, 0, 'Defeat Bede to reach the semi-finals of the Champion Cup.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Gym Leader Bede')]());
+        darkestDayQuestLine.addQuest(clearGymLeaderBede);
+
+        const clearTrainerHop = new CustomQuest(1, 0, 'Defeat Hop to reach the final of the Champion Cup!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Trainer Hop')]());
+        darkestDayQuestLine.addQuest(clearTrainerHop);
+
+        const clearRoseTower = new CustomQuest(1, 0, 'Champion Leon was seen heading to Rose Tower. Ascend Rose Tower so you can find him.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rose Tower')]());
+        darkestDayQuestLine.addQuest(clearRoseTower);
+
+        const clearEnergyPlant = new CustomQuest(1, 0, 'Chairman Rose has interupted your fight with Leon and brought about the Darkest Day. Go to the Energy Plant in Hammerlocke to put an end to his plans!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Energy Plant')]());
+        darkestDayQuestLine.addQuest(clearEnergyPlant);
+
+        const clearEternatus = new CustomQuest(1, 0, 'Leon failed to capture Eternatus. Defeat it before it can cause any more damage!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Eternatus')]());
+        darkestDayQuestLine.addQuest(clearEternatus);
+
+        const clearTheDarkestDay = new CustomQuest(1, 0, 'Eternatus has ascended to it\'s Eternamax form! Catch it to put an end to the Darkest Day!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('The Darkest Day')]());
+        darkestDayQuestLine.addQuest(clearTheDarkestDay);
+
+        App.game.quests.questLines().push(darkestDayQuestLine);
+    }
+
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
@@ -520,5 +553,6 @@ class QuestLineHelper {
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createGalacticSinnohQuestLine();
         this.createMinasTrialAlolaQuestLine();
+        this.createDarkestDayQuestLine();
     }
 }
