@@ -28,7 +28,7 @@
                                     <th>Inv</th>
                                 </tr>
                             </thead>
-                            <tbody data-bind='foreach: ShardDeal.getDeals(player.town().name)'>
+                            <tbody data-bind='foreach: ShardDeal.getDeals(ShopHandler.shopObservable().location)'>
                                 <!-- ko foreach: shards -->
                                 <tr>
                                     <td data-bind="text: player.getUndergroundItemAmount($data.shardType.id)"></td>
@@ -37,7 +37,7 @@
                                     </td>
                                     <td data-bind="text: amount + ' x ' + $data.shardType.name"></td>
                                     <!-- ko if: $index() === 0 -->
-                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.shards.length }, text: $parent.questPointCost'</td>
+                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.shards.length }, text: $parent.questPointCost'></td>
                                     <!-- TODO: Make the QP symbol appear in the same TD as the QP Cost -->
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
                                           <img src='assets/images/currency/questPoint.svg' width="20px'">
