@@ -2967,7 +2967,7 @@ TownList['Ballonlea'] = new Town(
 TownList['Hammerlocke'] = new Town(
     'Hammerlocke',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop6'], TemporaryBattleList['The Darkest Day'], HammerlockeShop],
+    [TemporaryBattleList['Hop6'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
     }
@@ -3084,6 +3084,12 @@ TownList['Rose Tower'] = new DungeonTown(
     'Rose Tower',
     GameConstants.Region.galar,
     [new GymBadgeRequirement(BadgeEnums.Elite_Hop)]
+);
+TownList['Energy Plant'] = new DungeonTown(
+    'Energy Plant',
+    GameConstants.Region.galar,
+    [new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Rose Tower'))],
+    [TemporaryBattleList['Eternatus'], TemporaryBattleList['The Darkest Day']]
 );
 TownList['Dusty Bowl'] = new DungeonTown(
     'Dusty Bowl',

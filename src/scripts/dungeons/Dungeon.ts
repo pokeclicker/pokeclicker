@@ -6685,6 +6685,23 @@ dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
     ],
     96500, 201);
 
+dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
+    ['Steelix', 'Mawile', 'Bronzong', 'Durant', 'Bisharp', 'Doublade', 'Golisopod', 'Galarian Stunfisk', 'Sirfetch\'d', 'Falinks'],
+    [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
+    2203000,
+    [
+        new DungeonTrainer('Macro Cosmos',
+            [
+                new GymPokemon('Escavalier', 17114462, 50),
+                new GymPokemon('Ferrothorn', 17114462, 50),
+                new GymPokemon('Perrserker', 17114462, 50),
+                new GymPokemon('Klinklang', 17114462, 51),
+                new GymPokemon('Gigantamax Copperajah', 17114462, 52),
+            ],
+            { weight: 1 }, 'Rose'),
+    ],
+    96500, 201);
+
 dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
     [
         {pokemon: 'Shiinotic', options: { weight: 1.8 }},
