@@ -227,7 +227,7 @@ export const SpriteCredits: Credit[] = [
         // NOTES: Granted permission on devianart to NiceDice via PN
     },
     {
-        name: 'Pokémon Reborn',
+        name: 'Pokémon Reborn\'s cass and Amethyst',
         link: 'https://www.rebornevo.com/pr/index.html/',
         resources: [
             'Underground Shiny stone',
