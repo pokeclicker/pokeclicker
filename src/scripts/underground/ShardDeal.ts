@@ -19,6 +19,35 @@ class ShardDeal {
         return ShardDeal.list[GameConstants.ShardTraderLocations[town]];
     }
 
+    public static canUse(town: GameConstants.ShardTraderLocations, i: number): boolean {
+        const deal = ShardDeal.list[GameConstants.ShardTraderLocations[town]].peek()[i];
+        if (ItemList[deal.item.itemType.name].isSoldOut()) {
+            return false;
+        } else if (deal.questPointCost > App.game.wallet.currencies[GameConstants.Currency.questPoint]()) {
+            return false;
+        } else {
+            return deal.shards.every((value) => player.getUndergroundItemAmount(value.shardType.id) >= value.amount);
+        }
+    }
+
+    public static use(town: GameConstants.ShardTraderLocations, i: number, tradeTimes = 1) {
+        const deal = ShardDeal.list[GameConstants.ShardTraderLocations[town]].peek()[i];
+        if (ShardDeal.canUse(town, i)) {
+            const trades = deal.shards.map(shard => {
+                const amt = player.getUndergroundItemAmount(shard.shardType.id);
+                const maxShardTrades = Math.floor(amt / shard.amount);
+                return maxShardTrades;
+            });
+            const qp = App.game.wallet.currencies[GameConstants.Currency.questPoint]();
+            const maxCurrencyTrades = Math.floor(qp / deal.questPointCost);
+            const maxTrades = Math.min(maxCurrencyTrades,trades.reduce((a,b) => Math.min(a,b), tradeTimes));
+            deal.shards.forEach((value) =>
+                Underground.gainMineItem(value.shardType.id, -value.amount * maxTrades));
+            deal.item.itemType.gain(deal.item.amount * maxTrades);
+            App.game.wallet.loseAmount(new Amount(deal.questPointCost * maxTrades, GameConstants.Currency.questPoint));
+        }
+    }
+
     public static generateDeals() {
         ShardDeal.list[GameConstants.ShardTraderLocations['Pallet Town']] = ko.observableArray(
             [
@@ -1929,33 +1958,4 @@ class ShardDeal {
         ));
         return list;
     }*/
-
-    public static canUse(town: GameConstants.ShardTraderLocations, i: number): boolean {
-        const deal = ShardDeal.list[GameConstants.ShardTraderLocations[town]].peek()[i];
-        if (ItemList[deal.item.itemType.name].isSoldOut()) {
-            return false;
-        } else if (deal.questPointCost > App.game.wallet.currencies[GameConstants.Currency.questPoint]()) {
-            return false;
-        } else {
-            return deal.shards.every((value) => player.getUndergroundItemAmount(value.shardType.id) >= value.amount);
-        }
-    }
-
-    public static use(town: GameConstants.ShardTraderLocations, i: number, tradeTimes = 1) {
-        const deal = ShardDeal.list[GameConstants.ShardTraderLocations[town]].peek()[i];
-        if (ShardDeal.canUse(town, i)) {
-            const trades = deal.shards.map(shard => {
-                const amt = player.getUndergroundItemAmount(shard.shardType.id);
-                const maxShardTrades = Math.floor(amt / shard.amount);
-                return maxShardTrades;
-            });
-            const qp = App.game.wallet.currencies[GameConstants.Currency.questPoint]();
-            const maxCurrencyTrades = Math.floor(qp / deal.questPointCost);
-            const maxTrades = Math.min(maxCurrencyTrades,trades.reduce((a,b) => Math.min(a,b), tradeTimes));
-            deal.shards.forEach((value) =>
-                Underground.gainMineItem(value.shardType.id, -value.amount * maxTrades));
-            deal.item.itemType.gain(deal.item.amount * maxTrades);
-            App.game.wallet.loseAmount(new Amount(deal.questPointCost * maxTrades, GameConstants.Currency.questPoint));
-        }
-    }
 }
