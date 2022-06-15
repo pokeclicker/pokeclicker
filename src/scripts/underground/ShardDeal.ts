@@ -14,7 +14,7 @@ class ShardDeal {
         this.item = {itemType: item, amount: itemAmount};
         this.questPointCost = this.item.itemType.basePrice / 4 || 1;
     }
-  
+
     public static getDeals(town: GameConstants.ShardTraderLocations) {
         return ShardDeal.list[GameConstants.ShardTraderLocations[town]];
     }
@@ -50,6 +50,7 @@ class ShardDeal {
                     ItemList['Grass_egg'],
                     1),
             ]);
+    }
     /*public static generateDeals() {
         const shardMasterTowns = [
             //Kanto
