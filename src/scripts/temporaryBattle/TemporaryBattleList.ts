@@ -170,7 +170,7 @@ TemporaryBattleList['Eternatus'] = new TemporaryBattle(
     'Eternatus',
     [new GymPokemon('Eternatus', 282601920, 60)],
     'You defeated Eternatus, but it looks like it\'s not over yet!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))],
 TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     'The Darkest Day',
     [new GymPokemon('Eternamax Eternatus', 282601920, 60)],
