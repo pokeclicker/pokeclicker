@@ -1154,6 +1154,13 @@ export const RegionalStarters = [
 export const TemporaryBattles = [
     'Ultra Wormhole',
     'Ultra Megalopolis',
+    'Captain Mina',
+    'Captain Ilima',
+    'Captain Mallow',
+    'Captain Lana',
+    'Captain Kiawe',
+    'Captain Sophocles',
+    'Kahuna Nanu',
 ];
 
 export enum ShardTraderLocations {
