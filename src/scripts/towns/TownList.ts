@@ -117,12 +117,14 @@ const LavenderTownShop = new Shop([
 ]);
 
 //Kanto Shard Master
-const CeruleanShardMaster = new ShardMasterShop([]);
+const PalletShardMaster = new ShardTraderShop();
+const PewterShardMaster = new ShardTraderShop();
+/*const CeruleanShardMaster = new ShardMasterShop([]);
 const VermilionShardMaster = new ShardMasterShop([]);
 const LavenderShardMaster = new ShardMasterShop([]);
 const SaffronShardMaster = new ShardMasterShop([]);
 const FuchsiaShardMaster = new ShardMasterShop([]);
-const CinnabarShardMaster = new ShardMasterShop([]);
+const CinnabarShardMaster = new ShardMasterShop([]);*/
 
 // Kanto NPCs
 

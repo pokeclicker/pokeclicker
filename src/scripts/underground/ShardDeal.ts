@@ -14,8 +14,43 @@ class ShardDeal {
         this.item = {itemType: item, amount: itemAmount};
         this.questPointCost = this.item.itemType.basePrice / 4 || 1;
     }
+  
+    public static getDeals(town: GameConstants.ShardTraderLocations) {
+        return ShardDeal.list[GameConstants.ShardTraderLocations[town]];
+    }
 
     public static generateDeals() {
+        ShardDeal.list[GameConstants.ShardTraderLocations['Pallet Town']] = ko.observableArray(
+            [
+                new ShardDeal(
+                    [{shardType: Underground.getMineItemByName('Rare Bone'), amount: 1}],
+                    ItemList['Fire_stone'],
+                    1
+                ),
+                new ShardDeal(
+                    [
+                        {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
+                        {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
+                    ],
+                    ItemList['Fire_egg'],
+                    1),
+            ]);
+        ShardDeal.list[GameConstants.ShardTraderLocations['Pewter City']] = ko.observableArray(
+            [
+                new ShardDeal(
+                    [{shardType: Underground.getMineItemByName('Yellow Shard'), amount: 1}],
+                    ItemList['Leaf_stone'],
+                    1
+                ),
+                new ShardDeal(
+                    [
+                        {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
+                        {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
+                    ],
+                    ItemList['Grass_egg'],
+                    1),
+            ]);
+    /*public static generateDeals() {
         const shardMasterTowns = [
             //Kanto
             GameConstants.ShardTraderLocations['Cerulean City'],
@@ -1892,12 +1927,7 @@ class ShardDeal {
             1
         ));
         return list;
-    }
-
-
-    public static getDeals(town: GameConstants.ShardTraderLocations) {
-        return ShardDeal.list[GameConstants.ShardTraderLocations[town]];
-    }
+    }*/
 
     public static canUse(town: GameConstants.ShardTraderLocations, i: number): boolean {
         const deal = ShardDeal.list[GameConstants.ShardTraderLocations[town]].peek()[i];
