@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/settings/ProteinFilters.d.ts" />
+
 enum PartyPokemonSaveKeys {
     attackBonusPercent = 0,
     attackBonusAmount,
@@ -27,6 +29,8 @@ class PartyPokemon implements Saveable {
     _shiny: KnockoutObservable<boolean>;
     _level: KnockoutObservable<number>;
     _attack: KnockoutObservable<number>;
+    _attackBonusPercent: KnockoutObservable<number>;
+    _attackBonusAmount: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
     proteinsUsed: KnockoutObservable<number>;
 
@@ -35,8 +39,8 @@ class PartyPokemon implements Saveable {
         public name: PokemonNameType,
         public evolutions: Evolution[],
         public baseAttack: number,
-        public attackBonusPercent: number = 0,
-        public attackBonusAmount: number = 0,
+        attackBonusPercent = 0,
+        attackBonusAmount = 0,
         proteinsUsed,
         public exp: number = 0,
         breeding = false,
@@ -47,6 +51,8 @@ class PartyPokemon implements Saveable {
         this._breeding = ko.observable(breeding);
         this._shiny = ko.observable(shiny);
         this._level = ko.observable(1);
+        this._attackBonusPercent = ko.observable(attackBonusPercent);
+        this._attackBonusAmount = ko.observable(attackBonusAmount);
         this._attack = ko.observable(this.calculateAttack());
         this._category = ko.observable(category);
     }
@@ -139,8 +145,31 @@ class PartyPokemon implements Saveable {
     };
 
     public hideFromProteinList = (): boolean => {
-        return this.breeding ||
-            (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue());
+        const hidden = ko.pureComputed(() => {
+            if (!ProteinFilters.search.value().test(this.name)) {
+                return true;
+            }
+
+            // Check based on native region
+            if (ProteinFilters.region.value() > -2) {
+                if (PokemonHelper.calcNativeRegion(this.name) !== ProteinFilters.region.value()) {
+                    return true;
+                }
+            }
+
+            // Check if either of the types match
+            const type: (PokemonType | null) = ProteinFilters.type.value() > -2 ? ProteinFilters.type.value() : null;
+            if (type !== null) {
+                const { type: types } = pokemonMap[this.name];
+                if (type !== null && !types.includes(type)) {
+                    return true;
+                }
+            }
+            return false;
+        }, this)();
+        return this.breeding || hidden ||
+            (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue()) ||
+            (this.shiny && Settings.getSetting('proteinHideShinyPokemon').observableValue());
     }
 
     public fromJSON(json: Record<string, any>): void {
@@ -218,6 +247,22 @@ class PartyPokemon implements Saveable {
 
     set attack(attack: number) {
         this._attack(attack);
+    }
+
+    get attackBonusAmount(): number {
+        return this._attackBonusAmount();
+    }
+
+    set attackBonusAmount(attackBonusAmount: number) {
+        this._attackBonusAmount(attackBonusAmount);
+    }
+
+    get attackBonusPercent(): number {
+        return this._attackBonusPercent();
+    }
+
+    set attackBonusPercent(attackBonusPercent: number) {
+        this._attackBonusPercent(attackBonusPercent);
     }
 
     get breeding(): boolean {

@@ -46,51 +46,32 @@ aria-labelledby="pokedexModalLabel">
                             </select>
                         </div>
 
-                    </div>
-
-                    <div class="form-group row justify-content-center">
-                       <!--Uncaught-->
-                       <div class="col-sm-2">
-                           <label class="form-check-label">
-                               <input class="form-check-input" type="checkbox" id="pokedex-filter-uncaught"
-                                      value="false" onclick="PokedexHelper.updateList()"> Uncaught
-                           </label>
-                       </div>
-                       <!--Caught-->
-                       <div class="col-sm-2">
-                           <label class="form-check-label">
-                               <input class="form-check-input" type="checkbox" id="pokedex-filter-caught"
-                                      value="false" onclick="PokedexHelper.updateList()"> Caught
-                           </label>
-                       </div>
-                       <!--Shiny-->
-                       <div class="col-sm-2">
-                           <label class="form-check-label">
-                               <input class="form-check-input" type="checkbox" id="pokedex-filter-shiny"
-                                      value="false" onclick="PokedexHelper.updateList()"> Shiny
-                           </label>
-                       </div>
-                       <!--Not Shiny-->
-                       <div class="col-sm-2">
-                           <label class="form-check-label">
-                               <input class="form-check-input" type="checkbox" id="pokedex-filter-not-shiny"
-                                      value="false" onclick="PokedexHelper.updateList()"> Not Shiny
-                           </label>
-                       </div>
-                       <!--Rare Hold Item-->
-                       <div class="col-sm-2">
-                           <label class="form-check-label">
-                               <input class="form-check-input" type="checkbox" id="pokedex-filter-held-item"
-                                      value="false" onclick="PokedexHelper.updateList()"> Rare Hold Item
-                           </label>
-                       </div>
-                       <!--Hide shiny images-->
-                       <div class="col-sm-2">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" id="pokedex-filter-held-item"
-                                   value="false" onclick="PokedexHelper.toggleAllShiny(!PokedexHelper.toggleAllShiny())"> Hide shiny image
-                        </label>
-                    </div>
+                        <div class="form-group col-md-6 col-6">
+                            <label for="pokedex-filter-shiny-caught">Caught Status</label>
+                            <select id="pokedex-filter-shiny-caught" autocomplete="off" class="custom-select" onchange="PokedexHelper.updateList()">
+                                <option value="all" selected>All</option>
+                                <option value="uncaught">Uncaught</option>
+                                <option value="caught">Caught</option>
+                                <option value="caught-not-shiny">Caught not Shiny</option>
+                                <option value="caught-shiny">Caught Shiny</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 col-6">
+                            <!--Rare Hold Item-->
+                            <div class="col-12">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" id="pokedex-filter-held-item"
+                                            value="false" onclick="PokedexHelper.updateList()"> Rare Hold Item
+                                </label>
+                            </div>
+                            <!--Hide shiny images-->
+                            <div class="col-12">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" id="pokedex-filter-held-item"
+                                        value="false" onclick="PokedexHelper.toggleAllShiny(!PokedexHelper.toggleAllShiny())"> Hide shiny image
+                                </label>
+                            </div>
+                        </div>
 
                    </div>
 

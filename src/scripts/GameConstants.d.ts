@@ -174,13 +174,13 @@ namespace GameConstants {
     declare enum TypeEffectiveness {
         Immune,
         NotVery,
-        Normal,
+        Neutral,
         Very
     }
     declare enum TypeEffectivenessValue {
         Immune,
         NotVery,
-        Normal,
+        Neutral,
         Very
     }
     declare function humanifyString(str: string): string;
@@ -272,18 +272,18 @@ namespace GameConstants {
         'Lucky_incense' = '',
     }
     declare enum FluteItemType {
+        'Yellow_Flute' = '',
+        'Time_Flute' = '',
+        'Black_Flute' = '',
         'Red_Flute' = '',
         'White_Flute' = '',
-        'Black_Flute' = '',
-        'Yellow_Flute' = '',
         'Blue_Flute' = '',
-        'Poke_Flute' = '',
-        'Azure_Flute' = '',
-        'Eon_Flute' = '',
-        'Sun_Flute' = '',
-        'Moon_Flute' = '',
-        'Time_Flute' = '',
-        'Grass_Flute' = '',
+        //'Poke_Flute' = '',
+        //'Azure_Flute' = '',
+        //'Eon_Flute' = '',
+        //'Sun_Flute' = '',
+        //'Moon_Flute' = '',
+        //'Grass_Flute' = '',
     }
     declare enum PokemonItemType {
         'Eevee',
@@ -336,16 +336,6 @@ namespace GameConstants {
         MediumRestore: number;
         LargeRestore: number;
     };
-    declare const KeyCodeToDirection: {
-        ArrowUp: string;
-        ArrowLeft: string;
-        ArrowDown: string;
-        ArrowRight: string;
-        KeyW: string;
-        KeyA: string;
-        KeyS: string;
-        KeyD: string;
-    };
     declare const FossilToPokemon: {
         'Helix Fossil': string;
         'Dome Fossil': string;
@@ -395,10 +385,90 @@ namespace GameConstants {
     declare const StartingTowns: string[];
     declare const StartingRoutes: number[];
     declare const DockTowns: string[];
+    declare const RegionalStarters: number[][];
     declare const TemporaryBattles: string[];
     declare function getTemporaryBattlesIndex(temporaryBattle: string): number;
+    declare enum DayOfWeek {
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+    }
     declare enum ShardTraderLocations {
-      'Pallet Town',
-      'Pewter City',
+        'Cerulean City',
+        'Vermilion City',
+        'Lavender Town',
+        'Saffron City',
+        'Fuchsia City',
+        'Cinnabar Island',
+        'Azalea Town',
+        'Ecruteak City',
+        'Olivine City',
+        'Cianwood City',
+        'Mahogany Town',
+        'Blackthorn City',
+        'Petalburg City',
+        'Dewford Town',
+        'Slateport City',
+        'Mauville City',
+        'Verdanturf Town',
+        'Lavaridge Town',
+        'Fallarbor Town',
+        'Fortree City',
+        'Mossdeep City',
+        'Pacifidlog Town',
+        'Sootopolis City',
+        'Ever Grande City',
+        'Jubilife City',
+        'Floaroma Town',
+        'Eterna City',
+        'Hearthome City',
+        'Solaceon Town',
+        'Pastoria City',
+        'Celestic Town',
+        'Pal Park',
+        'Canalave City',
+        'Snowpoint City',
+        'Sunyshore City',
+        'Survival Area',
+        'Resort Area',
+        'Castelia City',
+        'Nimbasa City',
+        'Driftveil City',
+        'Mistralton City',
+        'Lentimas Town',
+        'Undella Town',
+        'Lacunosa Town',
+        'Opelucid City',
+        'Humilau City',
+        'Icirrus City',
+        'Black and White Park',
+        'Nacrene City',
+        'Striaton City',
+        'Accumula Town',
+        'Nuvema Town',
+        'Camphrier Town',
+        'Ambrette Town',
+        'Geosenge Town',
+        'Shalour City',
+        'Coumarine City',
+        'Laverre City',
+        'Dendemille Town',
+        'Anistar City',
+        'Couriway Town',
+        'Snowbelle City',
+        'Hau\'oli City',
+        'Heahea City',
+        'Paniola Town',
+        'Konikoni City',
+        'Aether Paradise',
+        'Malie City',
+        'Tapu Village',
+        'Seafolk Village',
+        'Exeggutor Island',
+        'Altar of the Sunne and Moone',
     }
 }

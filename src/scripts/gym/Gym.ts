@@ -42,7 +42,9 @@ class Gym extends TownContent {
         if (this.isUnlocked()) {
             if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
                 return areaStatus.unlockedUnfinished;
-            } else if (!Gym.isAchievementsComplete(this)) {
+            } else if (this.isThereQuestAtLocation()) {
+                return areaStatus.questAtLocation;
+            } else if (!this.isAchievementsComplete()) {
                 return areaStatus.missingAchievement;
             }
         }
@@ -80,10 +82,16 @@ class Gym extends TownContent {
         }
     }
 
-    public static isAchievementsComplete(gym: Gym) {
-        const gymIndex = GameConstants.getGymIndex(gym.town);
+    private isAchievementsComplete() {
+        const gymIndex = GameConstants.getGymIndex(this.town);
         return AchievementHandler.achievementList.every(achievement => {
             return !(achievement.property instanceof ClearGymRequirement && achievement.property.gymIndex === gymIndex && !achievement.isCompleted());
+        });
+    }
+
+    private isThereQuestAtLocation() {
+        return App.game.quests.currentQuests().some(q => {
+            return q instanceof DefeatGymQuest && q.gymTown == this.town;
         });
     }
 
