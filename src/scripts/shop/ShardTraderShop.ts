@@ -1,5 +1,6 @@
 class ShardTraderShop extends Shop {
     constructor(
+        public location: GameConstants.ShardTraderLocations,
         public name: string = 'Shard Trader'
     ) {
         super([], name);

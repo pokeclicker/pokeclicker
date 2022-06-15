@@ -1,5 +1,6 @@
 type ShardCost = {
-    shardType: UndergroundItem,
+    shardTypeString: string,
+    shardType?: UndergroundItem,
     amount: number,
 }
 
@@ -11,6 +12,7 @@ class ShardDeal {
 
     constructor(shardCosts: ShardCost[], item: Item, itemAmount: number) {
         this.shards = shardCosts;
+        this.shards.forEach(s => s.shardType = Underground.getMineItemByName(s.shardTypeString));
         this.item = {itemType: item, amount: itemAmount};
         this.questPointCost = this.item.itemType.basePrice / 4 || 1;
     }
@@ -20,34 +22,16 @@ class ShardDeal {
     }
 
     public static generateDeals() {
-        ShardDeal.list[GameConstants.ShardTraderLocations['Pallet Town']] = ko.observableArray(
+        ShardDeal.list[GameConstants.ShardTraderLocations['Cerulean City']] = ko.observableArray(
             [
                 new ShardDeal(
-                    [{shardType: Underground.getMineItemByName('Rare Bone'), amount: 1}],
-                    ItemList['Fire_stone'],
+                    [{shardTypeString: 'Blue Shard', amount: 100}],
+                    ItemList['Water_stone'],
                     1
                 ),
                 new ShardDeal(
-                    [
-                        {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
-                        {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
-                    ],
-                    ItemList['Fire_egg'],
-                    1),
-            ]);
-        ShardDeal.list[GameConstants.ShardTraderLocations['Pewter City']] = ko.observableArray(
-            [
-                new ShardDeal(
-                    [{shardType: Underground.getMineItemByName('Yellow Shard'), amount: 1}],
-                    ItemList['Leaf_stone'],
-                    1
-                ),
-                new ShardDeal(
-                    [
-                        {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
-                        {shardType: Underground.getMineItemByName('Ochre Shard'), amount: 1},
-                    ],
-                    ItemList['Grass_egg'],
+                    [{shardTypeString: 'Blue Shard', amount: 100}],
+                    ItemList['Water_egg'],
                     1),
             ]);
     }
