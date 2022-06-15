@@ -1,5 +1,6 @@
 type ShardCost = {
-    shardType: UndergroundItem,
+    shardTypeString: string,
+    shardType?: UndergroundItem,
     amount: number,
 }
 
@@ -11,6 +12,7 @@ class ShardDeal {
 
     constructor(shardCosts: ShardCost[], item: Item, itemAmount: number) {
         this.shards = shardCosts;
+        this.shards.forEach(s => s.shardType = Underground.getMineItemByName(s.shardTypeString));
         this.item = {itemType: item, amount: itemAmount};
         this.questPointCost = this.item.itemType.basePrice / 4 || 1;
     }
@@ -23,12 +25,12 @@ class ShardDeal {
         ShardDeal.list[GameConstants.ShardTraderLocations['Cerulean City']] = ko.observableArray(
             [
                 new ShardDeal(
-                    [{shardType: Underground.getMineItemByName('Blue Shard'), amount: 100}],
+                    [{shardTypeString: 'Blue Shard', amount: 100}],
                     ItemList['Water_stone'],
                     1
                 ),
                 new ShardDeal(
-                    [{shardType: Underground.getMineItemByName('Blue Shard'), amount: 100}],
+                    [{shardTypeString: 'Blue Shard', amount: 100}],
                     ItemList['Water_egg'],
                     1),
             ]);
