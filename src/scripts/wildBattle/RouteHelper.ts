@@ -151,6 +151,16 @@ class RouteHelper {
             pokemonList = pokemonList.concat(possiblePokemons.kalossurf);
         }
 
+        // Alola Fishing Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 16) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.alolafishingrod);
+        }
+
+        // Alola Surf Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.HM03_surf, 6) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.alolasurf);
+        }
+
         // Special requirement Pokémon
         pokemonList = pokemonList.concat(...possiblePokemons.special.filter(p => p.isAvailable()).map(p => p.pokemon));
 

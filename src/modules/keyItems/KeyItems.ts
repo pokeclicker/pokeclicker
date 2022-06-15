@@ -97,6 +97,7 @@ export default class KeyItems implements Feature {
                 new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s, Hoenn\'s, Sinnoh\'s and Unova\'s waters and common Pokémon that live in Kalos\' waters.', () => App.game.statistics.routeKills[Region.kalos][8]() >= ROUTE_KILLS_NEEDED),
                 new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s, Hoenn\'s, Sinnoh\'s and Unova\'s waters and uncommon Pokémon that live in Kalos\' waters.', () => App.game.statistics.routeKills[Region.kalos][12]() >= ROUTE_KILLS_NEEDED),
                 new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s, Hoenn\'s, Sinnoh\'s, Unova\'s and Kalos\' waters.', () => App.game.statistics.routeKills[Region.kalos][16]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s, Hoenn\'s, Sinnoh\'s, Unova\'s, Kalos\' and Alola\'s waters.', () => App.game.statistics.dungeonsCleared[getDungeonIndex('Brooklet Hill')]() > 0),
             ], undefined, undefined, 'Fishing Rod'),
 
             new LevelableKeyItem(KeyItemType.HM03_surf, [
@@ -106,6 +107,7 @@ export default class KeyItems implements Feature {
                 new KeyItemLevel('Can be used for crossing water in Kanto, Johto, Hoenn and Sinnoh', undefined),
                 new KeyItemLevel('Can be used for crossing water in Kanto, Johto, Hoenn, Sinnoh and Unova', undefined),
                 new KeyItemLevel('Can be used for crossing water in Kanto, Johto, Hoenn, Sinnoh, Unova and Kalos', undefined),
+                new KeyItemLevel('Can be used for crossing water in Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos and Alola', () => App.game.statistics.dungeonsCleared[getDungeonIndex('Brooklet Hill')]() > 0),
             ], undefined, undefined, 'HM03 Surf'),
 
             new KeyItem(KeyItemType.TM02_headbutt, 'Can be used to knock wild Pokémon from trees. Warning, may cause concussion.',

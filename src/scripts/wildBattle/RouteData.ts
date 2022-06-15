@@ -1733,7 +1733,7 @@ Routes.add(new RegionRoute(
     'Route 1 Hau\'oli Outskirts', GameConstants.Region.alola, 18,
     new RoutePokemon({
         land: ['Slowpoke', 'Wingull', 'Inkay'],
-        water: ['Tentacool', 'Mantyke', 'Finneon'],
+        alolasurf: ['Tentacool', 'Wingull', 'Finneon', 'Mantyke'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
     1.1,
@@ -1760,7 +1760,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Melemele Sea', GameConstants.Region.alola, 19,
     new RoutePokemon({
-        water: ['Tentacool', 'Magikarp', 'Corsola', 'Remoraid', 'Wingull', 'Clamperl', 'Luvdisc', 'Mantyke', 'Finneon', 'Wishiwashi (Solo)'],
+        land: ['Tentacool', 'Wingull', 'Mantyke', 'Finneon'],
+        alolafishingrod: ['Magikarp', 'Corsola', 'Remoraid', 'Clamperl', 'Luvdisc', 'Wishiwashi (Solo)'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill'))],
     5.1,
@@ -1770,7 +1771,8 @@ Routes.add(new RegionRoute(
     'Kala\'e Bay', GameConstants.Region.alola, 20,
     new RoutePokemon({
         land: ['Alolan Rattata', 'Slowpoke', 'Wingull', 'Bagon', 'Yungoos'],
-        water: ['Tentacool', 'Shellder', 'Magikarp', 'Remoraid', 'Wingull', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
+        alolafishingrod: ['Shellder', 'Magikarp', 'Remoraid', 'Wishiwashi (Solo)'],
+        alolasurf: ['Tentacool', 'Wingull', 'Finneon', 'Mantyke'],
     }),
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Seaward Cave')),
@@ -1809,7 +1811,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 7', GameConstants.Region.alola, 7,
     new RoutePokemon({
-        water: ['Tentacool', 'Staryu', 'Magikarp', 'Wingull', 'Finneon', 'Wishiwashi (Solo)', 'Pyukumuku'],
+        land: ['Tentacool', 'Wingull', 'Finneon', 'Pyukumuku'],
+        alolafishingrod: ['Staryu', 'Magikarp', 'Wishiwashi (Solo)'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
     undefined,
@@ -1819,7 +1822,8 @@ Routes.add(new RegionRoute(
     'Alola Route 8', GameConstants.Region.alola, 8,
     new RoutePokemon({
         land: ['Alolan Rattata', 'Fletchling', 'Trumbeak', 'Yungoos', 'Stufful'],
-        water: ['Tentacool', 'Magikarp', 'Chinchou', 'Remoraid', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
+        alolafishingrod: ['Magikarp', 'Chinchou', 'Remoraid', 'Wishiwashi (Solo)'],
+        alolasurf: ['Tentacool', 'Wingull', 'Finneon', 'Mantyke'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Wela Volcano Park'))],
     undefined,
@@ -1828,7 +1832,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 9', GameConstants.Region.alola, 9,
     new RoutePokemon({
-        water: ['Magikarp', 'Corsola', 'Luvdisc', 'Wishiwashi (Solo)', 'Mareanie'],
+        land: ['Magikarp', 'Corsola', 'Luvdisc', 'Wishiwashi (Solo)', 'Mareanie'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Diglett\'s Tunnel'))],
     undefined,
@@ -1838,7 +1842,7 @@ Routes.add(new RegionRoute(
     'Akala Outskirts', GameConstants.Region.alola, 21,
     new RoutePokemon({
         land: ['Alolan Raticate', 'Natu', 'Wingull', 'Nosepass', 'Gumshoos', 'Stufful'],
-        water: ['Magikarp', 'Chinchou', 'Wishiwashi (Solo)'],
+        alolafishingrod: ['Magikarp', 'Chinchou', 'Wishiwashi (Solo)'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Memorial Hill'))],
     9.1,
@@ -1886,7 +1890,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 13', GameConstants.Region.alola, 13,
     new RoutePokemon({
-        water: ['Magikarp', 'Wishiwashi (Solo)', 'Bruxish'],
+        land: ['Magikarp', 'Wishiwashi (Solo)', 'Bruxish'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 12)],
     undefined,
@@ -1895,7 +1899,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 14', GameConstants.Region.alola, 14,
     new RoutePokemon({
-        water: ['Tentacruel', 'Magikarp', 'Pelipper', 'Finneon', 'Frillish', 'Wishiwashi (Solo)', 'Bruxish'],
+        land: ['Tentacruel', 'Pelipper', 'Finneon', 'Frillish'],
+        alolafishingrod: ['Magikarp', 'Wishiwashi (Solo)', 'Bruxish'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
     undefined,
@@ -1914,7 +1919,8 @@ Routes.add(new RegionRoute(
     'Alola Route 15', GameConstants.Region.alola, 15,
     new RoutePokemon({
         land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Gumshoos', 'Sandygast'],
-        water: ['Tentacruel', 'Magikarp', 'Clamperl', 'Finneon', 'Wishiwashi (Solo)', 'Bruxish'],
+        alolasurf: ['Tentacruel', 'Pelipper', 'Finneon'],
+        alolafishingrod: ['Magikarp', 'Clamperl', 'Wishiwashi (Solo)', 'Bruxish'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))],
     undefined,
@@ -1959,7 +1965,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Poni Breaker Coast', GameConstants.Region.alola, 26,
     new RoutePokemon({
-        water: ['Tentacruel', 'Lapras', 'Magikarp', 'Pelipper', 'Carvanha', 'Wailmer', 'Relicanth', 'Gastrodon (east)', 'Lumineon'],
+        land: ['Tentacruel', 'Lapras', 'Magikarp', 'Pelipper', 'Gastrodon (east)', 'Lumineon'],
+        alolafishingrod: ['Magikarp', 'Carvanha', 'Wailmer', 'Relicanth'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
     undefined,
@@ -1996,7 +2003,7 @@ Routes.add(new RegionRoute(
     'Poni Gauntlet', GameConstants.Region.alola, 30,
     new RoutePokemon({
         land: ['Pelipper', 'Lickitung', 'Golduck', 'Granbull', 'Inkay', 'Bewear'],
-        water: ['Magikarp', 'Dratini', 'Barboach'],
+        alolafishingrod: ['Magikarp', 'Dratini', 'Barboach'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 29)],
     undefined,
