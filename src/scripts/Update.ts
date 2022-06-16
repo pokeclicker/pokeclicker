@@ -735,7 +735,7 @@ class Update implements Saveable {
                 saveData.quests.questLines.push({state: 1, name: 'Mina\'s Trial', quest: 0});
             };
             // Add AZ TemporaryBattle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0)
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
         },
     };
 
