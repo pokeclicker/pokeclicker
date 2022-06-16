@@ -200,7 +200,7 @@ class ShardDeal {
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Yellow_egg'],
+                    ItemList['Electric_egg'],
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
