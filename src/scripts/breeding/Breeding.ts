@@ -202,10 +202,10 @@ class Breeding implements Feature {
                 continue;
             }
             const egg = this.eggList[index]();
-            const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == egg.pokemon)
+            const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == egg.pokemon);
             if (!egg.isNone()) {
                 if (partyPokemon.canCatchPokerus() && !partyPokemon.pokerus) {
-                      partyPokemon.pokerus = partyPokemon.calculatePokerus();
+                    partyPokemon.pokerus = partyPokemon.calculatePokerus();
                 }
             }
             egg.addSteps(amount, this.multiplier);
