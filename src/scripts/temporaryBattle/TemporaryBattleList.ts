@@ -1,6 +1,6 @@
 const TemporaryBattleList: { [battleName: string]: TemporaryBattle } = {};
 
-//Alola Temporary Battles
+//Kalos Temporary Battles
 TemporaryBattleList['AZ'] = new TemporaryBattle(
     'AZ',
     [
@@ -21,6 +21,8 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'The creature escaped back into the ultra wormhole.',
     [new GymBadgeRequirement(BadgeEnums.RockiumZ)]
 );
+
+//Alola Temporary Battles
 TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     'Ultra Megalopolis',
     [new GymPokemon('Necrozma (Ultra)', 282601920, 60)],
