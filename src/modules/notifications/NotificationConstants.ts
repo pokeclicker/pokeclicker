@@ -57,7 +57,8 @@ const NotificationConstants = {
         },
         Items: {
             route_item_found: new NotificationSetting('notification.route_item_found', 'Item found during route battle', true),
-            dungeon_item_found: new NotificationSetting('notification.dungeon_item_found', 'Item found in dungeon chest', true),
+            common_dungeon_item_found: new NotificationSetting('notification.common_dungeon_item_found', 'Item found in dungeon chest', true),
+            rare_dungeon_item_found: new NotificationSetting('notification.rare_dungeon_item_found', 'Item found in dungeon chest', true),
             battle_item_timer: new NotificationSetting('notification.battle_item_timer', 'Battle item about to wear off', true),
             dropped_item: new NotificationSetting('notification.dropped_item', 'Enemy Pokémon dropped an item', true),
         },

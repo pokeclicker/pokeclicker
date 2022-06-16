@@ -164,7 +164,7 @@ class DungeonRunner {
     public static lootNotification(input, amount, weight, image) {
         let message = `Found ${amount} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} in a dungeon chest`;
         let type = NotificationConstants.NotificationOption.success;
-        const setting = NotificationConstants.NotificationSetting.Items.dungeon_item_found;
+        let setting = NotificationConstants.NotificationSetting.Items.common_dungeon_item_found;
 
         if (typeof BerryType[input] == 'number') {
             const berryPlural = (amount < 2) ? 'Berry' : 'Berries';
@@ -174,6 +174,7 @@ class DungeonRunner {
         }
 
         if (weight <= 2) {
+            setting = NotificationConstants.NotificationSetting.Items.rare_dungeon_item_found;
             if (weight <= 0.5) {
                 type = NotificationConstants.NotificationOption.danger;
             } else {

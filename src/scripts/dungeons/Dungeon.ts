@@ -480,7 +480,7 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
             Notifier.notify({
                 message: `You were awarded a ${GameConstants.humanifyString(item)} for defeating the Super Nerd`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+                setting: NotificationConstants.NotificationSetting.Items.rare_dungeon_item_found,
             });
         }
     });
