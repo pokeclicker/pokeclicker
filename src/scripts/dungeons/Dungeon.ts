@@ -6369,7 +6369,10 @@ dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
     ['Chansey', 'Wingull', 'Pelipper', 'Spritzee', 'Swirlix', 'Cutiefly', 'Comfey', 'Dhelmise'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     16217412,
-    [new DungeonBossPokemon('Ribombee', 81087060, 55)],
+    [
+        new DungeonBossPokemon('Ribombee', 81087060, 55),
+        new DungeonBossPokemon('Totem Ribombee', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+    ],
     1150000, 25,
     () => DungeonGainGymBadge(GymList['Mina\'s Trial'], BadgeEnums.FairiumZ));
 
