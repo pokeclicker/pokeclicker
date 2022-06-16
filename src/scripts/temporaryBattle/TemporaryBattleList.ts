@@ -9,9 +9,11 @@ TemporaryBattleList['AZ'] = new TemporaryBattle(
     ],
     'Thank you very much for battling with me. Now I finally feel free…',
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-    [],
-    () => {
-        App.game.party.gainPokemonById(670.05);
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonById(670.05);
+        },
     }
 );
 TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
