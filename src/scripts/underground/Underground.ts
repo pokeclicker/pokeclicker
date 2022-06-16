@@ -1,5 +1,8 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 ///<reference path="../underground/UndergroundUpgrade.ts"/>
+/// <reference path="../../declarations/breeding/HatcheryQueueEntry.d.ts" />
+/// <reference path="../../declarations/breeding/HatcheryNameTypes.d.ts" />
+
 class Underground implements Feature {
     name = 'Underground';
     saveKey = 'underground';
@@ -375,7 +378,7 @@ class Underground implements Feature {
                 if (App.game.breeding.hasFreeEggSlot()) {
                     success = App.game.breeding.gainEgg(App.game.breeding.createFossilEgg(item.name));
                 } else if (App.game.breeding.hasFreeQueueSlot()) {
-                    success = App.game.breeding.addToQueue(item.name as HatcheryQueueEntry);
+                    success = App.game.breeding.addToQueue(new HatcheryQueueEntry(item.name as FossilNameType));
                 } else {
                     return false;
                 }

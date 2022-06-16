@@ -1,7 +1,6 @@
 /// <reference path="../../declarations/settings/BreedingFilters.d.ts" />
 /// <reference path="../../declarations/enums/CaughtStatus.d.ts"/>
 /// <reference path="../../declarations/breeding/EggType.d.ts" />
-/// <reference path="../../declarations/breeding/HatcheryQueueEntry.d.ts" />
 
 class BreedingController {
     public static spotTypes = [
@@ -108,22 +107,11 @@ class BreedingController {
         let eggType = EggType[egg.type].toLowerCase();
         if (eggType == 'pokemon') {
             const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(egg.pokemon);
-            const eggItemType = HatcheryQueue.pokemonTypeToEggItemType(dataPokemon.type1);
-            return `assets/images/breeding/${eggItemType}.png`;
+            const type = PokemonType[PokemonType[dataPokemon.type1]];
+            return `assets/images/breeding/${type}.png`;
         } else if (eggType == 'fossil') {
             eggType = GameConstants.PokemonToFossil[egg.pokemon];
         }
-        return `assets/images/breeding/${eggType}.png`;
-    }
-
-    public static getEggQueueImage(eggType: HatcheryQueueEntry): string {
-        if (HatcheryQueue.isHatcheryPokemon(eggType)) {
-            const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(eggType);
-            const eggItemType = HatcheryQueue.pokemonTypeToEggItemType(dataPokemon.type1);
-            return `assets/images/breeding/${eggItemType}.png`;
-        }
-
-        // Should only be eggs and fossils here
         return `assets/images/breeding/${eggType}.png`;
     }
 

@@ -115,11 +115,14 @@ import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompl
 import TemporaryBattleRequirement from './requirements/TemporaryBattleRequirement';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
-import HatcheryQueue, * as HatcheryQueueTypes from './breeding/HatcheryQueueEntry';
+import HatcheryQueueEntry from './breeding/HatcheryQueueEntry';
+import HatcheryTypeGuards from './breeding/HatcheryTypeGuards';
+import * as HatcheryNameTypes from './breeding/HatcheryNameTypes';
 
 Object.assign(<any>window, {
-    HatcheryQueue,
-    HatcheryQueueTypes,
+    HatcheryQueueEntry,
+    HatcheryTypeGuards,
+    HatcheryNameTypes,
     SaveSelector,
     Profile,
     GameConstants,
