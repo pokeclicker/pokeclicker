@@ -552,7 +552,7 @@ class QuestLineHelper {
             Notifier.notify({
                 title: ashKetchumQuestLine.name,
                 message: 'You obtained Ash Greninja!',
-                 type: NotificationConstants.NotificationOption.success,
+                type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
         };
