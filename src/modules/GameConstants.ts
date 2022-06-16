@@ -540,7 +540,7 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     PowerPlant: {
-        [Region.kanto]: new Set(['Vermilion City', 'Power Plant']),
+        [Region.kanto]: new Set(['Vermilion City', 'Rocket Game Corner', 'Power Plant']),
         [Region.johto]: new Set(['Tin Tower', 'Team Rocket\'s Hideout', 'Radio Tower']),
         [Region.hoenn]: new Set(['Mauville City']),
         [Region.sinnoh]: new Set(['Team Galactic Eterna Building', 'Team Galactic HQ', 'Sunyshore City']),
@@ -551,7 +551,7 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     Mansion: {
-        [Region.kanto]: new Set(['Cinnabar Island', 'Pokémon Mansion']),
+        [Region.kanto]: new Set(['Cinnabar Island', 'Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Burned Tower']),
         [Region.hoenn]: new Set(['Lavaridge Town', 'Petalburg City', 'Mt. Chimney', 'Jagged Pass', 'Fiery Path', 'Mt. Chimney Crater']),
         [Region.sinnoh]: new Set(['Old Chateau', 'Veilstone City', 'Canalave City', 'Snowpoint Temple']),
@@ -898,7 +898,9 @@ export const KantoDungeons = [
     'Mt. Moon',
     'Diglett\'s Cave',
     'Rock Tunnel',
+    'Rocket Game Corner',
     'Pokémon Tower',
+    'Silph Co.',
     'Power Plant',
     'Seafoam Islands',
     'Pokémon Mansion',
