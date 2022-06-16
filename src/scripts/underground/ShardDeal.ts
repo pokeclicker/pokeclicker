@@ -18,7 +18,7 @@ class ShardDeal {
     }
 
     public static getDeals(town: GameConstants.ShardTraderLocations) {
-        return ShardDeal.list[GameConstants.ShardTraderLocations[town]];
+        return ShardDeal.list[town];
     }
 
     public static canUse(town: GameConstants.ShardTraderLocations, i: number): boolean {
