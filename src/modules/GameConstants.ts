@@ -1155,6 +1155,12 @@ export const RegionalStarters = [
 
 export const TemporaryBattles = [
     'AZ',
+    'Ash Ketchum Kanto',
+    'Ash Ketchum Johto',
+    'Ash Ketchum Hoenn',
+    'Ash Ketchum Sinnoh',
+    'Ash Ketchum Unova',
+    'Ash Ketchum Kalos',
     'Ultra Wormhole',
     'Ultra Megalopolis',
     'Captain Mina',
@@ -1164,12 +1170,6 @@ export const TemporaryBattles = [
     'Captain Kiawe',
     'Captain Sophocles',
     'Kahuna Nanu',
-    'Ash Ketchum Kanto',
-    'Ash Ketchum Johto',
-    'Ash Ketchum Hoenn',
-    'Ash Ketchum Sinnoh',
-    'Ash Ketchum Unova',
-    'Ash Ketchum Kalos',
     'Ash Ketchum Alola',
 ];
 
