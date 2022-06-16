@@ -1,6 +1,20 @@
 const TemporaryBattleList: { [battleName: string]: TemporaryBattle } = {};
 
 //Alola Temporary Battles
+TemporaryBattleList['AZ'] = new TemporaryBattle(
+    'AZ',
+    [
+        new GymPokemon('Torkoal', 247996000, 60),
+        new GymPokemon('Golurk', 247996000, 60),
+        new GymPokemon('Sigilyph', 247996000, 60),
+    ],
+    'Thank you very much for battling with me. Now I finally feel free…',
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+    [],
+    () => {
+        App.game.party.gainPokemonById(670.05);
+    }
+);
 TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
     [new GymPokemon('???', 264590972, 27)],

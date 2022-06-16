@@ -734,6 +734,7 @@ class Update implements Saveable {
             if (saveData.statistics.temporaryBattleDefeated[1]) {
                 saveData.quests.questLines.push({state: 1, name: 'Mina\'s Trial', quest: 0});
             }
+
             // Add Rocket Game Corner
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 4);
             // Add Silph Co.
@@ -742,6 +743,9 @@ class Update implements Saveable {
             if (saveData.badgeCase[2]) {
                 saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
             }
+
+            // Add AZ TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
         },
     };
 

@@ -2244,7 +2244,7 @@ TownList['Santalune City'] = new Town(
 TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
-    [DepartmentStoreShop,FriseurFurfrouShop],
+    [DepartmentStoreShop,FriseurFurfrouShop, TemporaryBattleList['AZ']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
         npcs: [ProfSycamore, LumioseEngineer],
