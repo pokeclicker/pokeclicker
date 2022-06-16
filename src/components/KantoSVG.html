@@ -53,19 +53,9 @@
     <!--Route 5-->
     <%- include('templates/mapRoute',
         { route: 5, region: 0
-        , width: 1.5, height: 3
-        , x: 66, y: 16.5
-		, rotate: true
-        })
-     %>
-    <!--Extra bit of Route 5-->
-    <%- include('templates/mapRoute',
-        { route: 5, region: 0
-        , width: 3.5, height: 2
+        , width: 5, height: 3
         , x: 66, y: 13
-        , rotate: true
-        , noText: true
-
+		, rotate: true
         })
     %>
 
@@ -271,17 +261,8 @@
     <!--Route 23-->
     <%- include('templates/mapRoute',
         { route: 23, region: 0
-        , width: 3, height: 3
-        , x: 7, y: 23
-        , rotate: true
-        })
-    %>
-    <!--Extra bit of Route 23-->
-    <%- include('templates/mapRoute',
-        { route: 23, region: 0
         , width: 6, height: 3
-        , x: 7, y: 12
-        , noText: true
+        , x: 7, y: 20
         , rotate: true
         })
     %>
@@ -289,8 +270,8 @@
     <!--Route 24-->
     <%- include('templates/mapRoute',
         { route: 24, region: 0
-        , width: 4, height: 3
-        , x: 66, y: 5
+        , width: 7, height: 3
+        , x: 66, y: 2
         , rotate: true
         })
      %>
@@ -298,8 +279,8 @@
     <!--Route 25-->
     <%- include('templates/mapRoute',
         { route: 25, region: 0
-        , width: 17, height: 3
-        , x: 66, y: 2
+        , width: 14, height: 3
+        , x: 69, y: 2
         })
      %>
 
@@ -577,17 +558,10 @@
     <!--Victory Road-->
     <%- include('templates/mapDungeon',
         { name: "Victory Road"
-        , x: 6, y: 18
-        , width: 5, height: 4
+        , x: 6, y: 12
+        , width: 5, height: 8
         })
-     %>
-    <!--Victory Road Extension-->
-    <%- include('templates/mapDungeon',
-        { name: "Victory Road"
-        , x: 7, y: 22
-        , width: 3, height: 1
-        })
-     %>
+    %>
 
     <!--Cerulean Cave-->
     <%- include('templates/mapDungeon',
@@ -606,8 +580,8 @@
 
     <%- include('templates/mapPOI',
         { name: "Pokémon Day Care"
-        , x: 68, y: 13
-        , width: 4, height: 4
+        , x: 69, y: 13
+        , width: 4, height: 3.5
         , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
         })
      %>
