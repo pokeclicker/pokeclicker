@@ -414,6 +414,7 @@ TownList['Cerulean Cave'] = new DungeonTown(
 const CherrygroveCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['SmallRestore'],
+    ItemList['MediumRestore'],
 ]);
 const VioletCityShop = new Shop([
     ItemList['Pokeball'],
