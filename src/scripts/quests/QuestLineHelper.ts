@@ -562,6 +562,7 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(darkestDayQuestLine);
 
+    }
 
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
