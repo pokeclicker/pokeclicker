@@ -87,7 +87,7 @@
                 <div class="progress-bar bg-danger" role="progressbar"
                      data-bind="attr:{ style: 'width:' + DungeonBattle.enemyPokemon().healthPercentage() + '%'}, css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunner.fightingBoss()}"
                      aria-valuemin="0" aria-valuemax="100">
-                     <span data-bind="text: DungeonBattle.enemyPokemon().health() + ' / ' + DungeonBattle.enemyPokemon().maxHealth()" style="font-size: 12px;"></span>
+                     <span data-bind="text: DungeonBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + DungeonBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
                 </div>
             </div>
         </div>
