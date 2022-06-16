@@ -259,7 +259,7 @@ TownList['Lavender Town'] = new Town(
 TownList['Celadon City'] = new Town(
     'Celadon City',
     GameConstants.Region.kanto,
-    [CeladonDepartmentStoreShop, CeladonCityShop],
+    [CeladonDepartmentStoreShop, CeladonCityShop, new MoveToDungeon(dungeonList['Rocket Game Corner'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
         npcs: [BigSpender],
@@ -268,9 +268,12 @@ TownList['Celadon City'] = new Town(
 TownList['Saffron City'] = new Town(
     'Saffron City',
     GameConstants.Region.kanto,
-    [SaffronCityShop],
+    [SaffronCityShop, new MoveToDungeon(dungeonList['Silph Co.'])],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Rainbow)],
+        requirements: [new OneFromManyRequirement([
+            new GymBadgeRequirement(BadgeEnums.Rainbow),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
+        ])],
         npcs: [SaffronBattleItemRival, SaffronBreeder],
     }
 );
@@ -344,6 +347,24 @@ TownList['Rock Tunnel'] = new DungeonTown(
         new GymBadgeRequirement(BadgeEnums.Cascade),
     ]
 );
+TownList['Rocket Game Corner'] = new DungeonTown(
+    'Rocket Game Corner',
+    GameConstants.Region.kanto,
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)]
+);
+TownList['Pokémon Tower'] = new DungeonTown(
+    'Pokémon Tower',
+    GameConstants.Region.kanto,
+    [
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 7),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
+    ]
+);
+TownList['Silph Co.'] = new DungeonTown(
+    'Silph Co.',
+    GameConstants.Region.kanto,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))]
+);
 TownList['Power Plant'] = new DungeonTown(
     'Power Plant',
     GameConstants.Region.kanto,
@@ -352,18 +373,13 @@ TownList['Power Plant'] = new DungeonTown(
         new GymBadgeRequirement(BadgeEnums.Soul),
     ]
 );
-TownList['Pokémon Tower'] = new DungeonTown(
-    'Pokémon Tower',
-    GameConstants.Region.kanto,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.kanto, 10),
-        new GymBadgeRequirement(BadgeEnums.Rainbow),
-    ]
-);
 TownList['Seafoam Islands'] = new DungeonTown(
     'Seafoam Islands',
     GameConstants.Region.kanto,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 19)]
+    [
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 19),
+        new GymBadgeRequirement(BadgeEnums.Rainbow),
+    ]
 );
 TownList['Pokémon Mansion'] = new DungeonTown(
     'Pokémon Mansion',
@@ -2228,7 +2244,7 @@ TownList['Santalune City'] = new Town(
 TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
-    [DepartmentStoreShop,FriseurFurfrouShop],
+    [DepartmentStoreShop,FriseurFurfrouShop, TemporaryBattleList['AZ']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
         npcs: [ProfSycamore, LumioseEngineer],
@@ -2671,7 +2687,7 @@ TownList['Malie City'] = new Town(
 TownList['Tapu Village'] = new Town(
     'Tapu Village',
     GameConstants.Region.alola,
-    [TapuVillageShop],
+    [TapuVillageShop, TemporaryBattleList['Kahuna Nanu']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
         npcs: [TapuWorker],
@@ -2680,7 +2696,7 @@ TownList['Tapu Village'] = new Town(
 TownList['Seafolk Village'] = new Town(
     'Seafolk Village',
     GameConstants.Region.alola,
-    [SeafolkVillageShop, new MoveToDungeon(dungeonList['Mina\'s Houseboat'])],
+    [SeafolkVillageShop, new MoveToDungeon(dungeonList['Mina\'s Houseboat']), TemporaryBattleList['Captain Mina']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
         npcs: [SeafolkCaptain],
@@ -2722,7 +2738,8 @@ TownList['Trainers\' School'] = new DungeonTown(
 TownList['Hau\'oli Cemetery'] = new DungeonTown(
     'Hau\'oli Cemetery',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 2)],
+    [TemporaryBattleList['Captain Ilima']]
 );
 TownList['Verdant Cavern'] = new DungeonTown(
     'Verdant Cavern',
@@ -2762,12 +2779,14 @@ TownList['Brooklet Hill'] = new DungeonTown(
 TownList['Wela Volcano Park'] = new DungeonTown(
     'Wela Volcano Park',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 7)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 7)],
+    [TemporaryBattleList['Captain Kiawe']]
 );
 TownList['Lush Jungle'] = new DungeonTown(
     'Lush Jungle',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 8)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 8)],
+    [TemporaryBattleList['Captain Mallow'], TemporaryBattleList['Captain Lana']]
 );
 TownList['Diglett\'s Tunnel'] = new DungeonTown(
     'Diglett\'s Tunnel',
@@ -2787,7 +2806,8 @@ TownList['Malie Garden'] = new DungeonTown(
 TownList['Hokulani Observatory'] = new DungeonTown(
     'Hokulani Observatory',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 22)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 22)],
+    [TemporaryBattleList['Captain Sophocles']]
 );
 TownList['Thrifty Megamart'] = new DungeonTown(
     'Thrifty Megamart',
@@ -2822,7 +2842,7 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
 TownList['Mina\'s Houseboat'] = new DungeonTown(
     'Mina\'s Houseboat',
     GameConstants.Region.alola,
-    [new TemporaryBattleRequirement('Ultra Megalopolis')]
+    [new TemporaryBattleRequirement('Kahuna Nanu')]
 );
 TownList['Mount Lanakila'] = new DungeonTown(
     'Mount Lanakila',
