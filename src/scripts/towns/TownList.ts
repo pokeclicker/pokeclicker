@@ -200,7 +200,7 @@ const CinnabarIslandResearcher = new NPC('Researcher', [
 const OneIslandCelio1 = new NPC ('Celio', [
     'Ah, yes. Welcome! Welcome! Almost didn\'t see you there. I\'m just so bussy trying to get this darned thing to work. Once it\'s complete we can finally have a direct communications network between the Sevii Islands and Kanto!',
     'I don\'t even have time to go and pick up an important package. A meteorite, found by the owner of the game corner on Two Island. It contains important materials for my machine.',
-    'You seem like the adventuring type. Tell you what. How about Bill stay here with me to work on this machine, and you go fetch my Meteorite for me.',
+    'You seem like the adventuring type. Tell you what. How about Bill stays here with me to work on this machine, and you go fetch my Meteorite for me.',
 ],
 { requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 1, GameConstants.AchievementOption.less ) });
 const OneIslandCelio2 = new NPC ('Celio', [
@@ -232,7 +232,7 @@ const TwoIslandGameCornerOwner2 = new NPC ('Game Corner Owner', [
 const ThreeIslandBiker = new NPC ('Biker', [
     'You know what sucks? The other islands are off limits for some arbitrary reason. There is no explanation. Just can\'t go there.',
     'Alright, you want the real truth? Some weird old dude told me this: "The other islands don\'t exist. Yet. Gotta wait for the devs to put them in."',
-    'I don\'t know what half those words mean. I know the other islands exist! I have family there! I gotta stop listening to crazy people. I\'m sure we can\'t go there right now because of some freak weather event or something.',
+    'I don\'t know what half those words mean. I know the other islands exist! I have family there! I gotta stop listening to crazy people. I\'m sure we can\'t go there right now because of some freak weather event or whatever.',
 ]);
 
 //Kanto Towns
