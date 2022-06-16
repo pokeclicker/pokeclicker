@@ -124,6 +124,7 @@ class DungeonRunner {
         }
 
         DungeonRunner.gainLoot(loot.loot, amount);
+        DungeonRunner.lootNotification(loot.loot, amount, loot.weight);
 
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
@@ -136,54 +137,50 @@ class DungeonRunner {
     }
 
     public static gainLoot(input, amount) {
-        if (typeof BerryType[input] == 'number') {
-            Notifier.notify({
-                message: `Found ${amount} × ${GameConstants.humanifyString(input)} Berry in a dungeon chest`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
-            });
-
-            return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount, false);
-
-        } else if (ItemList[input] instanceof PokeballItem) {
-            Notifier.notify({
-                message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
-            });
-
-            return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount, false);
-
-        }  else if (Underground.getMineItemByName(input) instanceof UndergroundItem) {
-            Notifier.notify({
-                message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
-            });
-
-            return Underground.gainMineItem(Underground.getMineItemByName(input).id, amount);
-
-        }  else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
-            Notifier.notify({
-                message: `Found ${1} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
-            });
-
-            return DungeonBattle.generateNewLootEnemy(input);
-
-        }   else if (ItemList[input] instanceof EvolutionStone || EggItem || BattleItem || Vitamin || EnergyRestore) {
-            Notifier.notify({
-                message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
-            });
-
-            return player.gainItem(ItemList[input].name, amount);
-
-        }  else {
-            return player.gainItem(ItemList['xAttack'], 1);
+        if (typeof BerryType[input] == 'number'){
+          return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount, false);
+        } else if (ItemList[input] instanceof PokeballItem){
+          return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount, false);
+        } else if (Underground.getMineItemByName(input) instanceof UndergroundItem) {
+          return Underground.gainMineItem(Underground.getMineItemByName(input).id, amount);
+        } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.'){
+          return DungeonBattle.generateNewLootEnemy(input);
+        } else if (ItemList[input] instanceof EvolutionStone || EggItem || BattleItem || Vitamin || EnergyRestore){
+          if(ItemList[input] instanceof Vitamin){
+            GameHelper.incrementObservable(App.game.statistics.totalProteinsObtained, amount);
+          }
+          return player.gainItem(ItemList[input].name, amount);
+        } else {
+          return player.gainItem(ItemList['xAttack'], 1);
         }
+
+    }
+
+    public static lootNotification(input, amount, weight) {
+      let message = `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`;
+      let type = NotificationConstants.NotificationOption.success;
+      let setting = NotificationConstants.NotificationSetting.Items.dungeon_item_found;
+
+      if (typeof BerryType[input] == 'number'){
+        let berryPlural = (amount < 2) ? 'Berry' : 'Berries';
+        message = `Found ${Math.floor(amount)} × ${GameConstants.humanifyString(input)} ${berryPlural} in a dungeon chest`;
+      } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
+        message = `Found a ${GameConstants.humanifyString(input)} in a dungeon chest`;
+      }
+
+      if(weight <= 2){
+        if(weight <= 0.5){
+          type = NotificationConstants.NotificationOption.danger;
+        } else {
+          type = NotificationConstants.NotificationOption.warning;
+        }
+      }
+
+      return Notifier.notify({
+        message: message,
+        type: type,
+        setting: setting,
+      });
     }
 
     public static startBossFight() {
