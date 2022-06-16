@@ -57,7 +57,7 @@
             { route: 5, region: 0
             , width: 5, height: 3
             , x: 66, y: 13
-	    	    , rotate: true
+            , rotate: true
             })
         %>
 
@@ -98,7 +98,7 @@
             { route: 9, region: 0
             , width: 1, height: 1
             , x: 87, y: 9
-	    	, noText: true
+            , noText: true
             })
         %>
 
@@ -118,7 +118,7 @@
             , rotate: true
             })
         %>
-	    <!--Route 10 extension-->
+        <!--Route 10 extension-->
         <%- include('templates/mapRoute',
             { route: 10, region: 0
             , width: 1, height: 3
@@ -431,6 +431,20 @@
             })
         %>
 
+        <!--Mt. Moon-->
+        <%- include('templates/mapDungeon',
+            { name: "Mt. Moon"
+            , x: 41, y: 8
+            })
+        %>
+        <!--Mt. Moon extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Mt. Moon"
+            , x: 45, y: 8
+            , width: 5, height: 6
+            })
+        %>
+
         <!--Diglett's Cave Pewter-->
         <%- include('templates/mapDungeon',
             { name: "Diglett\'s Cave"
@@ -443,20 +457,6 @@
             { name: "Diglett\'s Cave"
             , x: 72, y: 29
             , width: 3, height: 3
-            })
-        %>
-
-        <!--Mt. Moon-->
-        <%- include('templates/mapDungeon',
-            { name: "Mt. Moon"
-            , x: 41, y: 8
-            })
-        %>
-        <!--Mt. Moon extension-->
-        <%- include('templates/mapDungeon',
-            { name: "Mt. Moon"
-            , x: 45, y: 8
-            , width: 5, height: 6
             })
         %>
 
