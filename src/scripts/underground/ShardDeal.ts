@@ -613,7 +613,6 @@ class ShardDeal {
             ItemList['Kings_rock'],
             1
         ));
-        
         return list;
     }
 
@@ -1243,7 +1242,6 @@ class ShardDeal {
         return list;
     }
 
-    
     private static generateGeosengeShardDeals() {
         const list = [];
 
