@@ -1253,7 +1253,7 @@ class Farming implements Feature {
             Notifier.notify({
                 message: `You found ${GameHelper.anOrA(BerryType[berry])} ${BerryType[berry]} Berry!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.route_berry_found,
+                setting: NotificationConstants.NotificationSetting.Items.route_item_found,
             });
         }
         this.gainBerry(berry, amount, false);
