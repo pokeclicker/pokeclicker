@@ -116,6 +116,26 @@ const LavenderTownShop = new Shop([
     ItemList['Lucky_incense'],
     ItemList['Grass_egg'],
 ]);
+const OneIslandShop = new Shop([
+    ItemList['Pokeball'],
+    ItemList['Greatball'],
+    ItemList['Ultraball'],
+    ItemList['xAttack'],
+    ItemList['Lucky_incense'],
+]);
+const TwoIslandShop = new Shop([
+    ItemList['Pokeball'],
+    ItemList['Greatball'],
+    ItemList['Ultraball'],
+    ItemList['xClick'],
+    ItemList['Item_magnet'],
+]);
+const ThreeIslandShop = new Shop([
+    ItemList['Pokeball'],
+    ItemList['Greatball'],
+    ItemList['Ultraball'],
+    ItemList['Token_collector'],
+]);
 
 // Kanto NPCs
 
@@ -362,7 +382,7 @@ TownList['Indigo Plateau Kanto'] = new Town(
 TownList['One Island'] = new Town(
     'One Island',
     GameConstants.Region.kanto,
-    [new DockTownContent()],
+    [OneIslandShop, new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Volcano)],
         npcs: [OneIslandCelio1, OneIslandCelio2, OneIslandCelio3, OneIslandYoungster],
@@ -379,7 +399,7 @@ TownList['Mt. Ember'] = new Town(
 TownList['Two Island'] = new Town(
     'Two Island',
     GameConstants.Region.kanto,
-    [],
+    [TwoIslandShop],
     {
         requirements: [new QuestLineStepCompletedRequirement('Bill\'s Errand', 0)],
         npcs: [TwoIslandGameCornerOwner1, TwoIslandGameCornerOwner2],
@@ -388,7 +408,7 @@ TownList['Two Island'] = new Town(
 TownList['Three Island'] = new Town(
     'Three Island',
     GameConstants.Region.kanto,
-    [],
+    [ThreeIslandShop],
     {
         requirements: [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
         npcs: [ThreeIslandBiker],
