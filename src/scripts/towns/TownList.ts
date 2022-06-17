@@ -2418,8 +2418,8 @@ const SnowbelleCityShop = new Shop([
     ItemList['Greatball'],
     ItemList['Ultraball'],
     ItemList['Protector'],
-    ItemList['Reaper_cloth'],
     ItemList['Dubious_disc'],
+    ItemList['Reaper_cloth'],
 ]);
 
 //Kalos NPCs
@@ -2746,8 +2746,8 @@ const MalieCityShop = new Shop([
     ItemList['LargeRestore'],
     ItemList['Thunder_stone'],
     ItemList['Electric_egg'],
-    ItemList['Magmarizer'],
     ItemList['Electirizer'],
+    ItemList['Magmarizer'],
 ]);
 const TapuVillageShop = new Shop([
     ItemList['Pokeball'],
