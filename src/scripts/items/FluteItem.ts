@@ -49,7 +49,7 @@ class FluteItem extends Item {
         }
         if (!FluteEffectRunner.isActive(GameConstants.FluteItemType[this.name])() && !player.itemList[this.name]()) {
             Notifier.notify({
-                message: `You don't have any ${this.displayName}s...`,
+                message: `You don't have the ${this.displayName}...`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;
