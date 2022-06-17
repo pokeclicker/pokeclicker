@@ -474,6 +474,61 @@ class QuestLineHelper {
         App.game.quests.questLines().push(galacticSinnohQuestLine);
     }
 
+    public static createMinasTrialAlolaQuestLine() {
+        const minasTrialAlolaQuestLine = new QuestLine('Mina\'s Trial', 'Mina has asked you to battle the Trial captains of the other islands to earn access to her Trial site.');
+
+        const clearCaptainMina = new CustomQuest(1, 0, 'Defeat Captain Mina in Seafolk Village.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Mina')]());
+        minasTrialAlolaQuestLine.addQuest(clearCaptainMina);
+
+        const clearCaptainIlima = new CustomQuest(1, 0, 'Defeat Captain Ilima in Hau\'oli Cemetery.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Ilima')]());
+        minasTrialAlolaQuestLine.addQuest(clearCaptainIlima);
+
+        const clearCaptainMallow = new CustomQuest(1, 0, 'Defeat Captain Mallow in Lush Jungle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Mallow')]());
+        minasTrialAlolaQuestLine.addQuest(clearCaptainMallow);
+
+        const clearCaptainLana = new CustomQuest(1, 0, 'Defeat Captain Lana in Lush Jungle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Lana')]());
+        minasTrialAlolaQuestLine.addQuest(clearCaptainLana);
+
+        const clearCaptainKiawe = new CustomQuest(1, 0, 'Defeat Captain Kiawe in Wela Volcano Park.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Kiawe')]());
+        minasTrialAlolaQuestLine.addQuest(clearCaptainKiawe);
+
+        const clearCaptainSophocles = new CustomQuest(1, 0, 'Defeat Captain Sophocles in Hokulani Observatory.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Sophocles')]());
+        minasTrialAlolaQuestLine.addQuest(clearCaptainSophocles);
+
+        const clearKahunaNanu = new CustomQuest(1, 0, 'Captain Acerola is apparently busy with something at to top of Mount Lanakila. Defeat Kahuna Nanu in Tapu Village instead.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahuna Nanu')]());
+        minasTrialAlolaQuestLine.addQuest(clearKahunaNanu);
+
+        const clearMinasHouseboat = new CustomQuest(1, 0, 'Complete the Trial! Clear Mina\'s Houseboat in Seafolk Village.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mina\'s Houseboat')]());
+        minasTrialAlolaQuestLine.addQuest(clearMinasHouseboat);
+
+        App.game.quests.questLines().push(minasTrialAlolaQuestLine);
+    }
+
+    public static createRocketKantoQuestLine() {
+        const rocketKantoQuestLine = new QuestLine('Team Rocket', 'Some nasty villains are up to no good.');
+
+        const clearRocketGameCorner = new CustomQuest(1, 0, 'Illegal activity is afoot. Clear the Rocket Game Corner in Celadon City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rocket Game Corner')]());
+        rocketKantoQuestLine.addQuest(clearRocketGameCorner);
+
+        const clearSilphCo = new CustomQuest(1, 0, 'Team Rocket has occupied Silph Co. Clear Silph Co. in Saffron City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Silph Co.')]());
+        rocketKantoQuestLine.addQuest(clearSilphCo);
+
+        const ViridianGymReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            Notifier.notify({
+                title: rocketKantoQuestLine.name,
+                message: 'The President of Silph Co. has rewarded you with a Masterball!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearViridianGym = new CustomQuest(1, ViridianGymReward, 'If you take down Team Rocket\'s leader one more time they will surely never come back from this! Clear Viridian City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Viridian City')]());
+        rocketKantoQuestLine.addQuest(clearViridianGym);
+
+        App.game.quests.questLines().push(rocketKantoQuestLine);
+    }
+
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
@@ -489,5 +544,7 @@ class QuestLineHelper {
         this.createSkullAetherAlolaQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createGalacticSinnohQuestLine();
+        this.createMinasTrialAlolaQuestLine();
+        this.createRocketKantoQuestLine();
     }
 }
