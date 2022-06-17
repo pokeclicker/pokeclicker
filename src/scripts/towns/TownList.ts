@@ -417,14 +417,12 @@ const CherrygroveCityShop = new Shop([
 ]);
 const VioletCityShop = new Shop([
     ItemList['Pokeball'],
-    ItemList['SmallRestore'],
     ItemList['MediumRestore'],
     ItemList['Mystery_egg'],
     ItemList['Togepi'],
 ]);
 const AzaleaTownShop = new Shop([
     ItemList['Pokeball'],
-    ItemList['SmallRestore'],
     ItemList['Grass_egg'],
     ItemList['Leaf_stone'],
     ItemList['Kings_rock'],
@@ -445,8 +443,6 @@ const GoldenrodDepartmentStoreShop = new Shop([
 const EcruteakCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Fire_egg'],
     ItemList['Fire_stone'],
     ItemList['Soothe_bell'],
@@ -454,8 +450,6 @@ const EcruteakCityShop = new Shop([
 const OlivineCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Water_egg'],
     ItemList['Electric_egg'],
     ItemList['Water_stone'],
@@ -466,8 +460,6 @@ const OlivineCityShop = new Shop([
 const CianwoodCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Fighting_egg'],
     ItemList['Moon_stone'],
     ItemList['Sun_stone'],
@@ -475,8 +467,6 @@ const CianwoodCityShop = new Shop([
 const MahoganyTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Trade_stone'],
     ItemList['Upgrade'],
     ItemList['HatcheryHelperDakota'],
@@ -485,8 +475,6 @@ const BlackthornCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['LargeRestore'],
     ItemList['Dragon_egg'],
     ItemList['Dragon_scale'],
@@ -777,23 +765,19 @@ const OldaleTownShop = new Shop([
 ]);
 const PetalburgCityShop = new Shop([
     ItemList['Pokeball'],
-    ItemList['SmallRestore'],
     ItemList['Kings_rock'],
 ]);
 const RustboroCityShop = new Shop([
     ItemList['Pokeball'],
-    ItemList['SmallRestore'],
     ItemList['Mystery_egg'],
 ]);
 const DewfordTownShop = new Shop([
     ItemList['Pokeball'],
-    ItemList['SmallRestore'],
     ItemList['Fighting_egg'],
 ]);
 const SlateportCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
     ItemList['MediumRestore'],
     ItemList['Water_egg'],
     ItemList['Trade_stone'],
@@ -801,8 +785,6 @@ const SlateportCityShop = new Shop([
 const MauvilleCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Electric_egg'],
     ItemList['Thunder_stone'],
     ItemList['Metal_coat'],
@@ -811,24 +793,18 @@ const MauvilleCityShop = new Shop([
 const VerdanturfTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Grass_egg'],
     ItemList['Soothe_bell'],
 ]);
 const LavaridgeTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Fire_egg'],
     ItemList['Fire_stone'],
 ]);
 const FallarborTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Moon_stone'],
     ItemList['Sun_stone'],
 ]);
@@ -836,8 +812,6 @@ const FortreeCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['LargeRestore'],
     ItemList['Leaf_stone'],
 ]);
@@ -845,9 +819,6 @@ const MossdeepCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Upgrade'],
     ItemList['Prism_scale'],
     ItemList['Beldum'],
@@ -856,18 +827,12 @@ const SootopolisCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Water_stone'],
 ]);
 const PacifidlogTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Deepsea_tooth'],
     ItemList['Deepsea_scale'],
 ]);
@@ -875,9 +840,6 @@ const EverGrandeCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Dragon_egg'],
     ItemList['Dragon_scale'],
 ]);
@@ -1245,31 +1207,26 @@ const SandgemTownShop = new Shop([
 ]);
 const JubilifeCityShop = new Shop([
     ItemList['Pokeball'],
-    ItemList['SmallRestore'],
     ItemList['Moon_stone'],
     ItemList['Sun_stone'],
 ]);
 const OreburghCityShop = new Shop([
     ItemList['Pokeball'],
-    ItemList['SmallRestore'],
     ItemList['Mystery_egg'],
 ]);
 const FloaromaTownShop = new Shop([
     ItemList['Pokeball'],
-    ItemList['SmallRestore'],
     ItemList['Trade_stone'],
     ItemList['Kings_rock'],
 ]);
 const EternaCityShop = new Shop([
     ItemList['Pokeball'],
-    ItemList['SmallRestore'],
     ItemList['Grass_egg'],
     ItemList['Leaf_stone'],
 ]);
 const HearthomeCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
     ItemList['MediumRestore'],
     ItemList['Fire_egg'],
     ItemList['Fire_stone'],
@@ -1278,8 +1235,6 @@ const HearthomeCityShop = new Shop([
 const SolaceonTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Shiny_stone'],
     ItemList['Dusk_stone'],
     ItemList['Dawn_stone'],
@@ -1289,8 +1244,6 @@ const PastoriaShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['LargeRestore'],
     ItemList['Water_egg'],
     ItemList['Water_stone'],
@@ -1301,9 +1254,6 @@ const CelesticTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Dragon_egg'],
     ItemList['Dragon_scale'],
 ]);
@@ -1311,9 +1261,6 @@ const CanalaveCityShop = new Shop ([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Fighting_egg'],
     ItemList['Metal_coat'],
 ]);
@@ -1328,18 +1275,12 @@ const SnowpointCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Upgrade'],
 ]);
 const SunyshoreCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Electric_egg'],
     ItemList['Thunder_stone'],
     ItemList['Deepsea_tooth'],
@@ -1349,17 +1290,11 @@ const FightAreaShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
 ]);
 const SurvivalAreaShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
+    ItemList['Ultraball'],,
     ItemList['Electirizer'],
     ItemList['Magmarizer'],
 ]);
@@ -1367,9 +1302,6 @@ const ResortAreaShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Protector'],
     ItemList['Dubious_disc'],
     ItemList['Reaper_cloth'],
@@ -1798,14 +1730,11 @@ const FloccesyTownShop = new Shop([
 const VirbankCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
     ItemList['MediumRestore'],
 ]);
 const CasteliaCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Water_egg'],
     ItemList['Trade_stone'],
     ItemList['Kings_rock'],
@@ -1813,8 +1742,6 @@ const CasteliaCityShop = new Shop([
 const NimbasaCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Grass_egg'],
     ItemList['Electric_egg'],
     ItemList['Metal_coat'],
@@ -1822,8 +1749,6 @@ const NimbasaCityShop = new Shop([
 const DriftveilCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Razor_claw'],
     ItemList['Razor_fang'],
     ItemList['Zorua'],
@@ -1832,8 +1757,6 @@ const MistraltonCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['LargeRestore'],
     ItemList['Thunder_stone'],
     ItemList['Upgrade'],
@@ -1842,18 +1765,12 @@ const LentimasTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Fire_egg'],
 ]);
 const UndellaTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Deepsea_tooth'],
     ItemList['Deepsea_scale'],
 ]);
@@ -1861,18 +1778,12 @@ const LacunosaTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Fighting_egg'],
 ]);
 const OpelucidCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Dragon_egg'],
     ItemList['Dragon_scale'],
 ]);
@@ -1880,18 +1791,12 @@ const HumilauCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Prism_scale'],
 ]);
 const IcirrusCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Protector'],
     ItemList['Dubious_disc'],
     ItemList['Reaper_cloth'],
@@ -1900,9 +1805,6 @@ const BlackAndWhiteParkShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Moon_stone'],
     ItemList['Sun_stone'],
 ]);
@@ -1910,18 +1812,12 @@ const NacreneCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Soothe_bell'],
 ]);
 const StriatonCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Leaf_stone'],
     ItemList['Fire_stone'],
     ItemList['Water_stone'],
@@ -1930,9 +1826,6 @@ const AccumulaTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Shiny_stone'],
     ItemList['Dusk_stone'],
     ItemList['Dawn_stone'],
@@ -1941,9 +1834,6 @@ const NuvemaTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Electirizer'],
     ItemList['Magmarizer'],
 ]);
@@ -2354,7 +2244,6 @@ const AquacordeTownShop = new Shop([
 ]);
 const SantaluneCityShop = new Shop([
     ItemList['Pokeball'],
-    ItemList['SmallRestore'],
     ItemList['Mystery_egg'],
 ]);
 const FriseurFurfrouShop = new Shop([
@@ -2368,7 +2257,6 @@ const FriseurFurfrouShop = new Shop([
 const CamphrierTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
     ItemList['MediumRestore'],
     ItemList['Electric_egg'],
     ItemList['Thunder_stone'],
@@ -2376,24 +2264,18 @@ const CamphrierTownShop = new Shop([
 const AmbretteTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Water_egg'],
     ItemList['Water_stone'],
 ]);
 const CyllageCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Upgrade'],
     ItemList['Prism_scale'],
 ]);
 const GeosengeTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Fire_egg'],
     ItemList['Fire_stone'],
     ItemList['Kings_rock'],
@@ -2401,8 +2283,6 @@ const GeosengeTownShop = new Shop([
 const ShalourCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Fighting_egg'],
     ItemList['Trade_stone'],
     ItemList['Metal_coat'],
@@ -2411,8 +2291,6 @@ const CoumarineCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['LargeRestore'],
     ItemList['Grass_egg'],
     ItemList['Leaf_stone'],
@@ -2423,9 +2301,6 @@ const LaverreCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Deepsea_tooth'],
     ItemList['Deepsea_scale'],
     ItemList['Sachet'],
@@ -2435,9 +2310,6 @@ const DendemilleTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Shiny_stone'],
     ItemList['Dusk_stone'],
     ItemList['Dawn_stone'],
@@ -2446,9 +2318,6 @@ const AnistarCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Moon_stone'],
     ItemList['Sun_stone'],
     ItemList['Razor_claw'],
@@ -2458,9 +2327,6 @@ const CouriwayTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Dragon_egg'],
     ItemList['Dragon_scale'],
 ]);
@@ -2468,9 +2334,6 @@ const SnowbelleCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Protector'],
     ItemList['Reaper_cloth'],
     ItemList['Dubious_disc'],
@@ -2753,7 +2616,6 @@ const IkiTownShop = new Shop([
 ]);
 const HauoliCityShop = new Shop([
     ItemList['Pokeball'],
-    ItemList['SmallRestore'],
     ItemList['Mystery_egg'],
     ItemList['Shiny_stone'],
     ItemList['Dusk_stone'],
@@ -2762,7 +2624,6 @@ const HauoliCityShop = new Shop([
 const HeaheaCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
     ItemList['MediumRestore'],
     ItemList['Water_stone'],
     ItemList['Kings_rock'],
@@ -2771,8 +2632,6 @@ const HeaheaCityShop = new Shop([
 const PaniolaTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Grass_egg'],
     ItemList['Fire_egg'],
     ItemList['Water_egg'],
@@ -2780,8 +2639,6 @@ const PaniolaTownShop = new Shop([
 const KonikoniCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['Fire_stone'],
     ItemList['Trade_stone'],
     ItemList['Soothe_bell'],
@@ -2794,8 +2651,6 @@ const MalieCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
     ItemList['LargeRestore'],
     ItemList['Thunder_stone'],
     ItemList['Electric_egg'],
@@ -2806,9 +2661,6 @@ const TapuVillageShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Razor_claw'],
     ItemList['Razor_fang'],
     ItemList['Ice_stone'],
@@ -2817,9 +2669,6 @@ const SeafolkVillageShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
     ItemList['Ultraball'],
-    ItemList['SmallRestore'],
-    ItemList['MediumRestore'],
-    ItemList['LargeRestore'],
     ItemList['Fighting_egg'],
     ItemList['Deepsea_tooth'],
     ItemList['Deepsea_scale'],
