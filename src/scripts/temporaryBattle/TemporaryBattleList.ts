@@ -15,14 +15,14 @@ TemporaryBattleList['AZ'] = new TemporaryBattle(
         App.game.party.gainPokemonById(670.05);
     }
 );
+
+//Alola Temporary Battles
 TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
     [new GymPokemon('???', 264590972, 27)],
     'The creature escaped back into the ultra wormhole.',
     [new GymBadgeRequirement(BadgeEnums.RockiumZ)]
 );
-
-//Alola Temporary Battles
 TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     'Ultra Megalopolis',
     [new GymPokemon('Necrozma (Ultra)', 282601920, 60)],
