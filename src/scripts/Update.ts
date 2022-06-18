@@ -724,7 +724,6 @@ class Update implements Saveable {
         },
 
         '0.9.6': ({ playerData, saveData }) => {
-            
 
             // Set our last save reminder/download to our current in game time
             // This way we won't get a reminder notification for at least 12 hours
