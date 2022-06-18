@@ -724,16 +724,6 @@ class Update implements Saveable {
         },
 
         '0.9.6': ({ playerData, saveData }) => {
-            // Add Mt. Ember Summit
-            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 8);
-            // Add Berry Forest
-            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 9);
-
-            // Start Sevii questline if player has Volcano Badge already
-            if (saveData.badgeCase[7]) {
-                saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
-            }
-
             // Set our last save reminder/download to our current in game time
             // This way we won't get a reminder notification for at least 12 hours
             saveData.saveReminder = {
@@ -744,15 +734,23 @@ class Update implements Saveable {
             if (saveData.statistics.temporaryBattleDefeated[1]) {
                 saveData.quests.questLines.push({state: 1, name: 'Mina\'s Trial', quest: 0});
             }
+            // Start Team Rocket Kanto questline if player has Cascade Badge already
+            if (saveData.badgeCase[2]) {
+                saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
+            }
+            // Start Sevii questline if player has Volcano Badge already
+            if (saveData.badgeCase[7]) {
+                saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
+            }
 
             // Add Rocket Game Corner
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 4);
             // Add Silph Co.
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 6);
-            // Start Team Rocket Kanto questline if player has Cascade Badge already
-            if (saveData.badgeCase[2]) {
-                saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
-            }
+            // Add Mt. Ember Summit
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 10);
+            // Add Berry Forest
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 11);
 
             // Add AZ TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
