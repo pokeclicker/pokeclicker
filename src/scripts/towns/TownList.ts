@@ -181,6 +181,11 @@ const LavenderMrFuji = new NPC('Mr. Fuji', [
     'Did you know that sparkling Pokémon are more often found in Dungeons, on Farms, from Eggs, and even from Shops, the Safari Zone, and Evolutions from Items?',
 ]);
 
+const LavenderChanneler = new NPC('Channeler Karina', [
+    'I know a lot of useful stuff. Like the odds of finding a shiny Pokémon or how to increase Click Attack.',
+    'No, I didn\'t learn this from talking to ghosts, don\'t be silly. There\'s a FAQ button in the Start Menu. It\'s very useful.',
+]);
+
 const BigSpender = new NPC('Big Spender', [
     'I love shopping! When I come in, the cashiers know I want tons of items.',
     'You can use the Shop Amount Button settings to make it easy for big purchases, too!',
@@ -272,7 +277,7 @@ TownList['Lavender Town'] = new Town(
     [LavenderTownShop, new MoveToDungeon(dungeonList['Pokémon Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
-        npcs: [LavenderMrFuji],
+        npcs: [LavenderMrFuji, LavenderChanneler],
     }
 );
 TownList['Celadon City'] = new Town(
