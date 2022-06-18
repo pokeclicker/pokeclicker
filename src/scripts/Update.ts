@@ -724,10 +724,7 @@ class Update implements Saveable {
         },
 
         '0.9.6': ({ playerData, saveData }) => {
-            // Start Ash questline if the player has beaten Kalos champion
-            if (saveData.badgeCase[78]) {
-                saveData.quests.questLines.push({state: 1, name: 'The new kid', quest: 0});
-            }
+            
 
             // Set our last save reminder/download to our current in game time
             // This way we won't get a reminder notification for at least 12 hours
@@ -735,23 +732,28 @@ class Update implements Saveable {
                 lastReminder: saveData.statistics.secondsPlayed,
                 lastDownloaded: saveData.statistics.secondsPlayed,
             };
+
             // Start Mina's Trial questline if player has cleared Ultra Necrozma already
             if (saveData.statistics.temporaryBattleDefeated[1]) {
                 saveData.quests.questLines.push({state: 1, name: 'Mina\'s Trial', quest: 0});
+            }
+            // Start Team Rocket Kanto questline if player has Cascade Badge already
+            if (saveData.badgeCase[2]) {
+                saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
+            }
+            // Start Ash questline if the player has beaten Kalos champion
+            if (saveData.badgeCase[78]) {
+                saveData.quests.questLines.push({state: 1, name: 'The new kid', quest: 0});
             }
 
             // Add Rocket Game Corner
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 4);
             // Add Silph Co.
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 6);
-            // Start Team Rocket Kanto questline if player has Cascade Badge already
-            if (saveData.badgeCase[2]) {
-                saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
-            }
+            
 
             // Add AZ TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
-
             // Add Ash Ketchum Kanto TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
             // Add Ash Ketchum Johto TemporaryBattle
