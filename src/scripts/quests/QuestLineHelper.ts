@@ -477,7 +477,7 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(minasTrialAlolaQuestLine);
     }
-  
+
     public static createDarkestDayQuestLine() {
         const darkestDayQuestLine = new QuestLine('The Darkest Day', 'Stop the return of the Darkest Day!');
 
