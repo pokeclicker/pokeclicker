@@ -316,7 +316,7 @@ TemporaryBattleList['Dynamax Tsareena'] = new TemporaryBattle(
     'The Dynamax Tsareena fainted.',
     [
         new MultiRequirement([
-            new TemporaryBattleRequirement('Swordward1'),
+            new TemporaryBattleRequirement('Sordward1'),
             new TemporaryBattleRequirement('Shielbert1'),
         ]),
     ]
