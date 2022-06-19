@@ -1639,7 +1639,7 @@ GymList['Trainer Marnie'] = new Gym(
     ],
     BadgeEnums.Elite_Marnie,
     150000,
-    'I mean, If you\'re gonna win, you could at least win in a way that makes me look good, right?',
+    'OK, so I lost... but I got to see a lot of the good points of you and your Pokémon!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
 );
 GymList['Gym Leader Bede'] = new Gym(

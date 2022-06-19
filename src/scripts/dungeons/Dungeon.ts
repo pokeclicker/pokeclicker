@@ -6846,8 +6846,8 @@ dungeonList['Slumbering Weald Shrine'] = new Dungeon('Slumbering Weald Shrine',
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Zamazenta (Battle Hero)', 8000000, 70),
-        new DungeonBossPokemon('Zacian (Battle Hero)', 8000000, 70),
+        new DungeonBossPokemon('Corviknight', 8000000, 70),
+        new DungeonBossPokemon('Galarian Weezing', 8000000, 70),
     ],
     96500, 201);
 
@@ -6982,6 +6982,8 @@ dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
                 new GymPokemon('Gigantamax Copperajah', 17114462, 52),
             ],
             { weight: 1 }, 'Rose'),
+        new DungeonBossPokemon('Zacian (Battle Hero)', 8000000, 70, {requirement: new TemporaryBattleRequirement('Sordward2')}),
+        new DungeonBossPokemon('Zamazenta (Battle Hero)', 8000000, 70, {requirement: new TemporaryBattleRequirement('Shielbert2')}),
     ],
     96500, 201);
 

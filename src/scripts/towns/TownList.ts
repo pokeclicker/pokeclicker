@@ -3294,7 +3294,7 @@ TownList['Professor Magnolia\'s House'] = new Town(
 TownList['Motostoke'] = new Town(
     'Motostoke',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop3'], TemporaryBattleList['Marnie1'], MotostokeShop],
+    [TemporaryBattleList['Hop3'], TemporaryBattleList['Marnie1'], TemporaryBattleList['Dynamax Torkoal'], MotostokeShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
     }
@@ -3302,7 +3302,7 @@ TownList['Motostoke'] = new Town(
 TownList['Turffield'] = new Town(
     'Turffield',
     GameConstants.Region.galar,
-    [TurffieldShop],
+    [TemporaryBattleList['Dynamax Tsareena'], TurffieldShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 13)],
     }
@@ -3310,7 +3310,7 @@ TownList['Turffield'] = new Town(
 TownList['Hulbury'] = new Town(
     'Hulbury',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop4'], HulburyShop],
+    [TemporaryBattleList['Hop4'], TemporaryBattleList['Dynamax Gyarados'], HulburyShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 14)],
     }
@@ -3318,7 +3318,7 @@ TownList['Hulbury'] = new Town(
 TownList['Stow-on-Side'] = new Town(
     'Stow-on-Side',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop5'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], TemporaryBattleList['Bede3'], StowonSideShop],
+    [TemporaryBattleList['Hop5'], TemporaryBattleList['Bede3'], TemporaryBattleList['Dynamax Conkeldurr'], TemporaryBattleList['Dynamax Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
     }
@@ -3326,7 +3326,7 @@ TownList['Stow-on-Side'] = new Town(
 TownList['Ballonlea'] = new Town(
     'Ballonlea',
     GameConstants.Region.galar,
-    [BallonleaShop],
+    [TemporaryBattleList['Bede4'], BallonleaShop],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glimwood Tangle'))],
     }
@@ -3334,7 +3334,7 @@ TownList['Ballonlea'] = new Town(
 TownList['Hammerlocke'] = new Town(
     'Hammerlocke',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop6'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop],
+    [TemporaryBattleList['Hop6'], TemporaryBattleList['Dynamax Haxorus'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
     }
@@ -3342,7 +3342,7 @@ TownList['Hammerlocke'] = new Town(
 TownList['Circhester'] = new Town(
     'Circhester',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop7'], GymList['Circhester1'], GymList['Circhester2'], CirchesterShop],
+    [TemporaryBattleList['Hop7'], TemporaryBattleList['Dynamax Gigalith'], TemporaryBattleList['Dynamax Froslass'], GymList['Circhester1'], GymList['Circhester2'], CirchesterShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
     }
@@ -3350,7 +3350,7 @@ TownList['Circhester'] = new Town(
 TownList['Spikemuth'] = new Town(
     'Spikemuth',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Marnie2'], SpikemuthShop],
+    [TemporaryBattleList['Marnie2'], TemporaryBattleList['Marnie3'], SpikemuthShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 30)],
     }
@@ -3428,7 +3428,7 @@ TownList['Slumbering Weald Shrine'] = new DungeonTown(
     'Slumbering Weald Shrine',
     GameConstants.Region.galar,
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
-    [TemporaryBattleList['Hop8']]
+    [TemporaryBattleList['Hop8'], TemporaryBattleList['Sordward1'], TemporaryBattleList['Shielbert1']]
 );
 TownList['Galar Mine'] = new DungeonTown(
     'Galar Mine',
@@ -3456,7 +3456,7 @@ TownList['Energy Plant'] = new DungeonTown(
     'Energy Plant',
     GameConstants.Region.galar,
     [new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Rose Tower'))],
-    [TemporaryBattleList['Eternatus'], TemporaryBattleList['The Darkest Day']]
+    [TemporaryBattleList['Eternatus'], TemporaryBattleList['Sordward2'], TemporaryBattleList['Shielbert2'], TemporaryBattleList['The Darkest Day']]
 );
 TownList['Dusty Bowl'] = new DungeonTown(
     'Dusty Bowl',
