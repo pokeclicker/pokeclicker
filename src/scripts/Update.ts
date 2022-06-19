@@ -747,7 +747,7 @@ class Update implements Saveable {
             // Add AZ TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
 
-             // Give the players Dowsing Machines in place of Item Magnets
+            // Give the players Dowsing Machines in place of Item Magnets
             playerData._itemList.Dowsing_machine = playerData._itemList.Item_magnet;
             delete playerData._itemList.Item_magnet;
             delete localStorage.mine;
