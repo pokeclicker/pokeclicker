@@ -289,7 +289,7 @@ TemporaryBattleList['Hop8'] = new TemporaryBattle(
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
 );
 TemporaryBattleList['Sordward1'] = new TemporaryBattle(
-    'Swordward1',
+    'Sordward1',
     [
         new GymPokemon('Sirfetch\'d', 282601920, 60),
         new GymPokemon('Golisopod', 282601920, 60),
