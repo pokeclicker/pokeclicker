@@ -2919,7 +2919,7 @@ TownList['Wedgehurst'] = new Town(
 TownList['Professor Magnolia\'s House'] = new Town(
     'Professor Magnolia\'s House',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop2']],
+    [TemporaryBattleList['Hop2'], TemporaryBattleList['Sordward & Shielbert']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 2)],
     }
