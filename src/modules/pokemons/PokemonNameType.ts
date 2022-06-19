@@ -936,6 +936,7 @@ export type PokemonNameType
     | 'Oricorio (Sensu)'
     | 'Cutiefly'
     | 'Ribombee'
+    | 'Totem Ribombee'
     | 'Rockruff'
     | 'Lycanroc (Midday)'
     | 'Lycanroc (Midnight)'

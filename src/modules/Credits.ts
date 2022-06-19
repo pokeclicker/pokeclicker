@@ -41,6 +41,14 @@ export const SpriteCredits: Credit[] = [
         // Notes: Found in spritesheet description: "Feel free to use them, just give me credit."
     },
     {
+        name: 'Croak',
+        link: 'https://discordapp.com/users/206839451069054976/',
+        resources: [
+            'Plasma Frigate overworld sprite',
+        ],
+        // Notes: Made specifically for PokéClicker."
+    },
+    {
         name: 'DaleArwin',
         link: 'https://www.deviantart.com/dalearwin',
         resources: [
@@ -209,6 +217,7 @@ export const SpriteCredits: Credit[] = [
             'Charity Chansey',
             'Handout Happiny',
             'Red Spearow',
+            'shiny Totem Ribombee',
             'Weather Institute world sprite',
         ],
         // NOTES: Created specifically for PokéClicker.
@@ -241,6 +250,7 @@ export const SpriteCredits: Credit[] = [
             'Santa Snorlax',
             'Spooky Bulbasaur',
             'Spooky Togepi',
+            'Totem Ribombee',
         ],
     },
     {
