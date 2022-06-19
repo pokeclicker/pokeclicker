@@ -114,7 +114,7 @@ class DungeonRunner {
         const loot = DungeonRunner.lootInput();
         let amount = loot.amount || 1;
 
-        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
+        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Dowsing_machine)()) {
             // Decreasing chance for rarer items (62.5% → 12.5%)
             const magnetChance = 0.5 / (4 / (loot.weight + 1));
             if (Rand.chance(magnetChance)) {
