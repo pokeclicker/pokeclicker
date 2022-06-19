@@ -868,13 +868,13 @@ class Farming implements Feature {
 
     getGrowthMultiplier(): number {
         let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprayduck) * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Grass_Flute);
+        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprayduck);
         return multiplier;
     }
 
     getReplantMultiplier(): number {
         let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprinklotad) * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Grass_Flute);
+        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprinklotad);
         return multiplier;
     }
 
