@@ -332,12 +332,10 @@ const dungeonList: { [dungeonName: string]: Dungeon } = {};
 
 dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
     [
-        {pokemon: 'Caterpie', options: { weight: 2.67 }},
-        {pokemon: 'Metapod', options: { weight: 2.67 }},
-        {pokemon: 'Weedle', options: { weight: 2.67 }},
-        {pokemon: 'Kakuna', options: { weight: 2.67 }},
-        {pokemon: 'Pidgey', options: { weight: 2.67 }},
-        {pokemon: 'Pidgeotto', options: { weight: 2.67 }},
+        {pokemon: 'Caterpie', options: { weight: 4 }},
+        {pokemon: 'Metapod', options: { weight: 4 }},
+        {pokemon: 'Weedle', options: { weight: 4 }},
+        {pokemon: 'Kakuna', options: { weight: 4 }},
         new DungeonTrainer('Bug Catcher',
             [
                 new GymPokemon('Weedle', 50, 6),
@@ -378,26 +376,12 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
     ],
     50, 1);
 
-dungeonList['Diglett\'s Cave'] = new Dungeon('Diglett\'s Cave',
-    ['Diglett'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Mystery_egg', weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Diglett\'s Cave'))},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Wiki', weight: 0},
-    ],
-    2962,
-    [new DungeonBossPokemon('Dugtrio', 16040, 31)],
-    250, 11);
-
 dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
     [
-        {pokemon: 'Sandshrew', options: { weight: 8.8 }},
-        {pokemon: 'Clefairy', options: { weight: 8.8 }},
-        {pokemon: 'Zubat', options: { weight: 8.8 }},
-        {pokemon: 'Paras', options: { weight: 8.8 }},
-        {pokemon: 'Geodude', options: { weight: 8.8 }},
+        {pokemon: 'Clefairy', options: { weight: 11 }},
+        {pokemon: 'Zubat', options: { weight: 11 }},
+        {pokemon: 'Paras', options: { weight: 11 }},
+        {pokemon: 'Geodude', options: { weight: 11 }},
         new DungeonTrainer('Bug Catcher',
             [
                 new GymPokemon('Weedle', 75, 11),
@@ -488,11 +472,25 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
         }
     });
 
+dungeonList['Diglett\'s Cave'] = new Dungeon('Diglett\'s Cave',
+    ['Diglett'],
+    [
+        {loot: 'xClick', weight: 4},
+        {loot: 'Lucky_incense', weight: 4},
+        {loot: 'Mystery_egg', weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Diglett\'s Cave'))},
+        {loot: 'Max Revive', weight: 0},
+        {loot: 'Wiki', weight: 0},
+    ],
+    2962,
+    [new DungeonBossPokemon('Dugtrio', 16040, 31)],
+    250, 11);
+
 dungeonList['Rock Tunnel'] = new Dungeon('Rock Tunnel',
     [
-        {pokemon: 'Zubat', options: { weight: 20 }},
-        {pokemon: 'Geodude', options: { weight: 20 }},
-        {pokemon: 'Machop', options: { weight: 20 }},
+        {pokemon: 'Zubat', options: { weight: 14 }},
+        {pokemon: 'Mankey', options: { weight: 14 }},
+        {pokemon: 'Geodude', options: { weight: 14 }},
+        {pokemon: 'Machop', options: { weight: 14 }},
         new DungeonTrainer('PokéManiac',
             [
                 new GymPokemon('Cubone', 500, 23),
@@ -589,26 +587,93 @@ dungeonList['Rock Tunnel'] = new Dungeon('Rock Tunnel',
                 new GymPokemon('Bellsprout', 5147, 19),
             ], { weight: 1 }, 'Ariana'),
     ],
-    500, 5);
+    500, 9);
 
-dungeonList['Power Plant'] = new Dungeon('Power Plant',
-    ['Pikachu', 'Raichu', 'Magnemite', 'Magneton', 'Grimer', 'Muk', 'Voltorb', 'Electrode'],
+dungeonList['Rocket Game Corner'] = new Dungeon('Rocket Game Corner',
     [
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Drowzee', 2910, 21),
+                new GymPokemon('Machop', 2910, 21),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Raticate', 2910, 21),
+                new GymPokemon('Raticate', 2910, 21),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Rattata', 1455, 19),
+                new GymPokemon('Raticate', 1455, 19),
+                new GymPokemon('Raticate', 1455, 19),
+                new GymPokemon('Rattata', 1455, 19),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Grimer', 1940, 20),
+                new GymPokemon('Koffing', 1940, 20),
+                new GymPokemon('Koffing', 1940, 20),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Grimer', 2910, 22),
+                new GymPokemon('Koffing', 2910, 22),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Zubat', 1164, 17),
+                new GymPokemon('Koffing', 1164, 17),
+                new GymPokemon('Grimer', 1164, 17),
+                new GymPokemon('Zubat', 1164, 17),
+                new GymPokemon('Raticate', 1164, 17),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Machop', 2910, 21),
+                new GymPokemon('Machop', 2910, 21),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Rattata', 1940, 20),
+                new GymPokemon('Raticate', 1940, 20),
+                new GymPokemon('Drowzee', 1940, 20),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Koffing', 2910, 21),
+                new GymPokemon('Zubat', 2910, 21),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Sandshrew', 1940, 23),
+                new GymPokemon('Ekans', 1940, 23),
+                new GymPokemon('Sandslash', 1940, 23),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Ekans', 1940, 23),
+                new GymPokemon('Sandshrew', 1940, 23),
+                new GymPokemon('Arbok', 1940, 23),
+            ], { weight: 1 }, undefined, '(male)'),
+    ],
+    [
+        {loot: 'xAttack', weight: 4},
         {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Cheri', weight: 3.5},
-        {loot: 'Electrode', weight: 3.5},
-        {loot: 'Electric_egg', weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Power Plant'))},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Thunder_stone', weight: 0},
-        {loot: 'Metal_coat', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Power Plant'))},
-        {loot: 'Electirizer', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Power Plant'))},
+        {loot: 'Pokeball', weight: 3},
+        {loot: 'Greatball', weight: 2},
+        {loot: 'Revive', weight: 1.75},
+        {loot: 'Star Piece', weight: 0},
     ],
-    13507,
+    5820,
     [
-        new DungeonBossPokemon('Electabuzz', 67535, 35),
-        new DungeonBossPokemon('Zapdos', 101302, 50),
+        new DungeonTrainer('Team Rocket Boss',
+            [
+                new GymPokemon('Onix', 9501, 25),
+                new GymPokemon('Rhyhorn', 9501, 24),
+                new GymPokemon('Kangaskhan', 10101, 29),
+            ], { weight: 1 }, 'Giovanni', '(giovanni)'),
     ],
-    1000, 8);
+    625, 7);
 
 dungeonList['Pokémon Tower'] = new Dungeon('Pokémon Tower',
     [
@@ -694,10 +759,220 @@ dungeonList['Pokémon Tower'] = new Dungeon('Pokémon Tower',
     ],
     7523,
     [new DungeonBossPokemon('Marowak', 37615, 30)],
-    750, 10);
+    750, 7);
+
+dungeonList['Silph Co.'] = new Dungeon('Silph Co.',
+    [
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Golbat', 2103, 25),
+                new GymPokemon('Zubat', 2103, 25),
+                new GymPokemon('Zubat', 2103, 25),
+                new GymPokemon('Raticate', 2103, 25),
+                new GymPokemon('Zubat', 2103, 25),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Magnemite', 3505, 28),
+                new GymPokemon('Voltorb', 3505, 28),
+                new GymPokemon('Magneton', 3505, 28),
+            ], { weight: 1 }, 'Jerry', '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Cubone', 5258, 29),
+                new GymPokemon('Zubat', 5258, 29),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Grimer', 2629, 26),
+                new GymPokemon('Weezing', 2629, 26),
+                new GymPokemon('Koffing', 2629, 26),
+                new GymPokemon('Weezing', 2629, 26),
+            ], { weight: 1 }, 'Connor', '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Raticate', 3505, 28),
+                new GymPokemon('Hypno', 3505, 28),
+                new GymPokemon('Raticate', 3505, 28),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Electrode', 5258, 29),
+                new GymPokemon('Weezing', 5258, 29),
+            ], { weight: 1 }, 'Jose', '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Ekans', 3505, 28),
+                new GymPokemon('Zubat', 3505, 28),
+                new GymPokemon('Cubone', 3505, 28),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Machop', 5258, 29),
+                new GymPokemon('Drowzee', 5258, 29),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Scientist',
+            [new GymPokemon('Electrode', 10515, 33)],
+            { weight: 1 }, 'Rodney', '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [new GymPokemon('Hypno', 10515, 33)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Juggler',
+            [
+                new GymPokemon('Kadabra', 5258, 29),
+                new GymPokemon('Mr. Mime', 5258, 29),
+            ], { weight: 1 }, 'Dalton'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Magneton', 2629, 26),
+                new GymPokemon('Magnemite', 2629, 26),
+                new GymPokemon('Koffing', 2629, 26),
+                new GymPokemon('Weezing', 2629, 26),
+            ], { weight: 1 }, 'Beau', '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [new GymPokemon('Arbok', 10515, 33)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Machop', 5258, 29),
+                new GymPokemon('Machoke', 5258, 29),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Zubat', 3505, 28),
+                new GymPokemon('Zubat', 3505, 28),
+                new GymPokemon('Golbat', 3505, 28),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Voltorb', 2103, 25),
+                new GymPokemon('Koffing', 2103, 25),
+                new GymPokemon('Magneton', 2103, 25),
+                new GymPokemon('Magnemite', 2103, 25),
+                new GymPokemon('Koffing', 2103, 25),
+            ], { weight: 1 }, 'Taylor', '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Cubone', 5258, 29),
+                new GymPokemon('Cubone', 5258, 29),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Raticate', 2629, 26),
+                new GymPokemon('Zubat', 2629, 26),
+                new GymPokemon('Golbat', 2629, 26),
+                new GymPokemon('Rattata', 2629, 26),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Electrode', 5258, 29),
+                new GymPokemon('Muk', 5258, 29),
+            ], { weight: 1 }, 'Joshua', '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Sandshrew', 5258, 29),
+                new GymPokemon('Sandslash', 5258, 29),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Raticate', 2629, 26),
+                new GymPokemon('Golbat', 2629, 26),
+                new GymPokemon('Arbok', 2629, 26),
+                new GymPokemon('Koffing', 2629, 26),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Weezing', 3505, 28),
+                new GymPokemon('Golbat', 3505, 28),
+                new GymPokemon('Koffing', 3505, 28),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Grimer', 5258, 29),
+                new GymPokemon('Electrode', 5258, 29),
+            ], { weight: 1 }, 'Parker', '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Golbat', 3505, 28),
+                new GymPokemon('Drowzee', 3505, 28),
+                new GymPokemon('Hypno', 3505, 28),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Drowzee', 3505, 28),
+                new GymPokemon('Grimer', 3505, 28),
+                new GymPokemon('Machop', 3505, 28),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Voltorb', 3505, 28),
+                new GymPokemon('Magneton', 3505, 28),
+                new GymPokemon('Koffing', 3505, 28),
+            ], { weight: 1 }, 'Ed', '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [new GymPokemon('Machoke', 10515, 33)],
+            { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Magnemite', 5258, 29),
+                new GymPokemon('Koffing', 5258, 29),
+            ], { weight: 1 }, 'Travis', '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Rattata', 2103, 25),
+                new GymPokemon('Zubat', 2103, 25),
+                new GymPokemon('Ekans', 2103, 25),
+                new GymPokemon('Rattata', 2103, 25),
+                new GymPokemon('Rattata', 2103, 25),
+            ], { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Cubone', 3505, 32),
+                new GymPokemon('Drowzee', 3505, 32),
+                new GymPokemon('Marowak', 3505, 32),
+            ], { weight: 1 }, undefined, '(male)'),
+    ],
+    [
+        {loot: 'Item_magnet', weight: 4},
+        {loot: 'Lucky_incense', weight: 4},
+        {loot: 'Pokeball', weight: 3},
+        {loot: 'Greatball', weight: 2},
+        {loot: 'Ultraball', weight: 1},
+        {loot: 'Electrode', weight: 3.5},
+    ],
+    10515,
+    [
+        new DungeonTrainer('Team Rocket Boss',
+            [
+                new GymPokemon('Nidorino', 12144, 37),
+                new GymPokemon('Rhyhorn', 12144, 37),
+                new GymPokemon('Kangaskhan', 12144, 35),
+                new GymPokemon('Nidoqueen', 16144, 41),
+            ], { weight: 1 }, 'Giovanni', '(giovanni)'),
+    ],
+    875, 7);
+
+dungeonList['Power Plant'] = new Dungeon('Power Plant',
+    ['Pikachu', 'Magnemite', 'Magneton', 'Voltorb', 'Electrode'],
+    [
+        {loot: 'Lucky_incense', weight: 4},
+        {loot: 'Cheri', weight: 3.5},
+        {loot: 'Electrode', weight: 3.5},
+        {loot: 'Electric_egg', weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Power Plant'))},
+        {loot: 'Max Revive', weight: 0},
+        {loot: 'Thunder_stone', weight: 0},
+        {loot: 'Metal_coat', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Power Plant'))},
+        {loot: 'Electirizer', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Power Plant'))},
+    ],
+    13507,
+    [
+        new DungeonBossPokemon('Electabuzz', 67535, 35),
+        new DungeonBossPokemon('Zapdos', 101302, 50),
+    ],
+    1000, 18);
 
 dungeonList['Seafoam Islands'] = new Dungeon('Seafoam Islands',
-    ['Zubat', 'Golbat', 'Goldeen', 'Poliwag', 'Magikarp', 'Slowpoke', 'Slowbro', 'Tentacool', 'Krabby', 'Kingler', 'Staryu'],
+    ['Zubat', 'Golbat', 'Psyduck', 'Golduck', 'Slowpoke', 'Slowbro', 'Krabby', 'Horsea', 'Magikarp'],
     [
         {loot: 'xAttack', weight: 4},
         {loot: 'Aspear', weight: 3.5},
@@ -711,18 +986,19 @@ dungeonList['Seafoam Islands'] = new Dungeon('Seafoam Islands',
         new DungeonBossPokemon('Seel', 86130, 35),
         new DungeonBossPokemon('Articuno', 129195, 50),
     ],
-    1250, 15);
+    1250, 19);
 
 dungeonList['Pokémon Mansion'] = new Dungeon('Pokémon Mansion',
     [
-        {pokemon: 'Rattata', options: { weight: 3.5 }},
-        {pokemon: 'Raticate', options: { weight: 3.5 }},
-        {pokemon: 'Growlithe', options: { weight: 3.5 }},
-        {pokemon: 'Grimer', options: { weight: 3.5 }},
-        {pokemon: 'Muk', options: { weight: 3.5 }},
-        {pokemon: 'Koffing', options: { weight: 3.5 }},
-        {pokemon: 'Weezing', options: { weight: 3.5 }},
-        {pokemon: 'Ditto', options: { weight: 3.5 }},
+        {pokemon: 'Rattata', options: { weight: 3.11 }},
+        {pokemon: 'Raticate', options: { weight: 3.11 }},
+        {pokemon: 'Vulpix', options: { weight: 3.11 }},
+        {pokemon: 'Growlithe', options: { weight: 3.11 }},
+        {pokemon: 'Grimer', options: { weight: 3.11 }},
+        {pokemon: 'Muk', options: { weight: 3.11 }},
+        {pokemon: 'Koffing', options: { weight: 3.11 }},
+        {pokemon: 'Weezing', options: { weight: 3.11 }},
+        {pokemon: 'Ditto', options: { weight: 3.11 }},
         new DungeonTrainer('Youngster',
             [
                 new GymPokemon('Ekans', 1500, 33),
@@ -773,15 +1049,19 @@ dungeonList['Pokémon Mansion'] = new Dungeon('Pokémon Mansion',
     ],
     17760,
     [new DungeonBossPokemon('Magmar', 88800, 40)],
-    1500, 16);
+    1500, 20);
 
 dungeonList['Victory Road'] = new Dungeon('Victory Road',
     [
-        {pokemon: 'Zubat', options: { weight: 8.8 }},
-        {pokemon: 'Golbat', options: { weight: 8.8 }},
-        {pokemon: 'Geodude', options: { weight: 8.8 }},
-        {pokemon: 'Graveler', options: { weight: 8.8 }},
-        {pokemon: 'Onix', options: { weight: 8.8 }},
+        {pokemon: 'Arbok', options: { weight: 4.88 }},
+        {pokemon: 'Sandslash', options: { weight: 4.88 }},
+        {pokemon: 'Zubat', options: { weight: 4.88 }},
+        {pokemon: 'Golbat', options: { weight: 4.88 }},
+        {pokemon: 'Primeape', options: { weight: 4.88 }},
+        {pokemon: 'Machop', options: { weight: 4.88 }},
+        {pokemon: 'Geodude', options: { weight: 4.88 }},
+        {pokemon: 'Onix', options: { weight: 4.88 }},
+        {pokemon: 'Marowak', options: { weight: 4.88 }},
         new DungeonTrainer('Cooltrainer',
             [
                 new GymPokemon('Persian', 2000, 42),
@@ -879,10 +1159,10 @@ dungeonList['Victory Road'] = new Dungeon('Victory Road',
                 new GymPokemon('Nidoqueen', 61488, 45),
             ], { weight: 1 }, 'Ray & Tyra'),
     ],
-    2000, 20);
+    2000, 23);
 
 dungeonList['Cerulean Cave'] = new Dungeon('Cerulean Cave',
-    ['Arbok', 'Raichu', 'Sandslash', 'Golbat', 'Gloom', 'Parasect', 'Venomoth', 'Weepinbell', 'Graveler', 'Ditto', 'Chansey', 'Magikarp', 'Poliwag', 'Goldeen', 'Seaking'],
+    ['Golbat', 'Parasect', 'Psyduck', 'Golduck', 'Primeape', 'Poliwag', 'Machoke', 'Slowpoke', 'Slowbro', 'Magneton', 'Electrode', 'Goldeen', 'Magikarp', 'Ditto'],
     [
         {loot: 'Pokeball', weight: 4},
         {loot: 'Token_collector', weight: 4},
@@ -898,10 +1178,10 @@ dungeonList['Cerulean Cave'] = new Dungeon('Cerulean Cave',
     ],
     28735,
     [
-        new DungeonBossPokemon('Rhydon', 183675, 60),
+        new DungeonBossPokemon('Kadabra', 183675, 60),
         new DungeonBossPokemon('Mewtwo', 255512, 100),
     ],
-    2500, 20);
+    2500, 23);
 
 // Johto Dungeons
 
@@ -6366,7 +6646,10 @@ dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
     ['Chansey', 'Wingull', 'Pelipper', 'Spritzee', 'Swirlix', 'Cutiefly', 'Comfey', 'Dhelmise'],
     [{loot: 'xClick', weight: 4}, {loot: 'Item_magnet', weight: 4}],
     16217412,
-    [new DungeonBossPokemon('Ribombee', 81087060, 55)],
+    [
+        new DungeonBossPokemon('Ribombee', 81087060, 55),
+        new DungeonBossPokemon('Totem Ribombee', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+    ],
     1150000, 25,
     () => DungeonGainGymBadge(GymList['Mina\'s Trial'], BadgeEnums.FairiumZ));
 

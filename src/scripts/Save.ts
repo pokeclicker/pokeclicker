@@ -137,7 +137,7 @@ class Save {
                     res[item] = [];
                     res[item][GameConstants.TypeEffectiveness.Immune] = ko.observable(0);
                     res[item][GameConstants.TypeEffectiveness.NotVery] = ko.observable(0);
-                    res[item][GameConstants.TypeEffectiveness.Normal] = ko.observable(0);
+                    res[item][GameConstants.TypeEffectiveness.Neutral] = ko.observable(0);
                     res[item][GameConstants.TypeEffectiveness.Very] = ko.observable(0);
                 }
             }
