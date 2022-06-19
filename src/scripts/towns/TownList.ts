@@ -943,7 +943,7 @@ const FortreeWeatherman = new NPC('Weatherman', [
 ]);
 
 const FortreeRanger = new NPC('Pokémon Ranger Catherine', [
-    'Have you seen this? It\'s horrific. Absolutely despicable',
+    'Have you seen this? It\'s horrific. Absolutely despicable.',
     'Disposable Dowsing Machines! Who even came up with this?! People leave these everywhere. It\'s absolutely terrible for the environment. Some poor innocent Pokémon could choke on it!',
     'Please recycle your used Dowsing Machines.',
 ]);
