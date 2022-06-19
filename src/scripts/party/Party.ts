@@ -168,7 +168,7 @@ class Party implements Feature {
     }
 
     public getEffortValues(pokemon: PartyPokemon): KnockoutObservable<number> {
-        const power = App.game.challenges.list.slowEVs.active() ? 10 : 1;
+        const power = App.game.challenges.list.slowEVs.active() ? GameConstants.EP_EV_RATIO : 1;
         return ko.observable(Math.floor(App.game.statistics.effortPoints[pokemon.id]() / GameConstants.EP_EV_RATIO / power));
     }
 
