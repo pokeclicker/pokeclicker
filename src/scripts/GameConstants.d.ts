@@ -139,6 +139,7 @@ namespace GameConstants {
     declare const DUNGEON_EP_YIELD: number;
     declare const STONE_EP_YIELD: number;
     declare const EP_EV_RATIO: number;
+    declare const EP_CHALLENGE_MODIFIER: number;
     declare const DNA_ITEM_CHANCE: number;
     declare enum GameState {
         idle,
