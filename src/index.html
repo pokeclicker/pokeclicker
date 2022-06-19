@@ -254,7 +254,7 @@
                                 <div class="progress-bar bg-danger" role="progressbar"
                                      data-bind="attr:{ style: 'width:' + Battle.enemyPokemon().healthPercentage() + '%' }"
                                      aria-valuemin="0" aria-valuemax="100">
-                                     <span data-bind="text: Battle.enemyPokemon().health() + ' / ' + Battle.enemyPokemon().maxHealth()" style="font-size: 12px;"></span>
+                                     <span data-bind="text: Battle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + Battle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
                                 </div>
                             </div>
                         </div>
