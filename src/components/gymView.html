@@ -49,7 +49,7 @@
             <div class="progress-bar bg-danger" role="progressbar"
                     data-bind="attr:{ style: 'width:' + GymBattle.enemyPokemon().healthPercentage() + '%' }"
                     aria-valuemin="0" aria-valuemax="100">
-                <span data-bind="text: GymBattle.enemyPokemon().health() + ' / ' + GymBattle.enemyPokemon().maxHealth()" style="font-size: 12px;"></span>
+                <span data-bind="text: GymBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + GymBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
             </div>
         </div>
 
