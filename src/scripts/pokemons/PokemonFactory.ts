@@ -267,7 +267,7 @@ class PokemonFactory {
 
         chance /= modifier;
 
-        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
+        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Dowsing_machine)()) {
             chance /= 1.5;
         }
 
