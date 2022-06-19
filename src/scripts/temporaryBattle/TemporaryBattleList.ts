@@ -405,7 +405,7 @@ TemporaryBattleList['Dynamax Haxorus'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Sordward & Shielbert')]
 );
 TemporaryBattleList['Sordward2'] = new TemporaryBattle(
-    'Swordward2',
+    'Sordward2',
     [
         new GymPokemon('Sirfetch\'d', 282601920, 60),
         new GymPokemon('Golisopod', 282601920, 60),
