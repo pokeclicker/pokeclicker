@@ -48,6 +48,7 @@ export const SpriteCredits: Credit[] = [
         ],
         // Notes: Copyright description: "a link back here will be fine."
     },
+    {
         name: 'Croak',
         link: 'https://discordapp.com/users/206839451069054976/',
         resources: [
