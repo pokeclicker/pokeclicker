@@ -750,6 +750,10 @@ class Update implements Saveable {
             //Replace Poison Barb with Rocky Helmet
             saveData.oakItems.Rocky_Helmet = saveData.oakItems.Poison_Barb;
             delete saveData.oakItems['Poison_Barb'];
+
+            // Give the players Dowsing Machines in place of Item Magnets
+            playerData._itemList.Dowsing_machine = playerData._itemList.Item_magnet;
+            delete playerData._itemList.Item_magnet;
         },
     };
 
