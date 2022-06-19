@@ -127,7 +127,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                 <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
                                 <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 0px;top: 0px;">✨</div>
-                                <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id) && App.game.party.getPokemon($data.id).pokerus" style="position: absolute;left: 2px;top:5px;">
+                                <div data-bind="visible: App.game.party.getPokemon($data.id).pokerus" style="position: absolute;left: 2px;top:5px;">
                                     <img width="30px" src="" data-bind="attr: { src: `assets/images/breeding/Pokerus.png`}"/>
                                 </div>
                                 <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">

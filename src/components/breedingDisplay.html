@@ -39,7 +39,7 @@
                 <!-- /ko -->
                 <!-- ko ifnot: $data.type == EggType.Fossil -->
                 <div data-bind="template: { name: 'eggSVGTemplate', data: $data}, class: BreedingController.getEggCssClass($data)"></div>
-                <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data.pokemon) && App.game.party.getPokemon(PokemonHelper.getPokemonByName($data.pokemon).id).pokerus" style="position: absolute;right: 2px;top: -5px;">
+                <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data.pokemon) && App.game.party.getPokemon(PokemonHelper.getPokemonByName($data.pokemon).id).pokerus" style="position: absolute;right: 2px;top: -7px;">
                     <img width="40px" src="" data-bind="attr: { src: `assets/images/breeding/Pokerus.png`}"/>
                 </div>
                 <!-- /ko -->

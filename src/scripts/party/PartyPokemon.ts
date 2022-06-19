@@ -7,9 +7,9 @@ enum PartyPokemonSaveKeys {
     exp,
     breeding,
     shiny,
-    pokerus,
     category,
     levelEvolutionTriggered,
+    pokerus,
 }
 
 class PartyPokemon implements Saveable {
@@ -19,23 +19,22 @@ class PartyPokemon implements Saveable {
         attackBonusPercent: 0,
         attackBonusAmount: 0,
         proteinsUsed: 0,
-        effortPoints: 0,
         exp: 0,
         breeding: false,
         shiny: false,
-        pokerus: false,
         category: 0,
         levelEvolutionTriggered: false,
+        pokerus: false,
     };
 
     _breeding: KnockoutObservable<boolean>;
     _shiny: KnockoutObservable<boolean>;
-    _pokerus: KnockoutObservable<boolean>;
     _level: KnockoutObservable<number>;
     _attack: KnockoutObservable<number>;
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
+    _pokerus: KnockoutObservable<boolean>;
     proteinsUsed: KnockoutObservable<number>;
     effortPoints: KnockoutObservable<number>;
 
@@ -51,19 +50,19 @@ class PartyPokemon implements Saveable {
         public exp: number = 0,
         breeding = false,
         shiny = false,
-        pokerus = false,
-        category = 0
+        category = 0,
+        pokerus = false
     ) {
         this.proteinsUsed = ko.observable(proteinsUsed);
         this.effortPoints = ko.observable(effortPoints);
         this._breeding = ko.observable(breeding);
         this._shiny = ko.observable(shiny);
-        this._pokerus = ko.observable(pokerus);
         this._level = ko.observable(1);
         this._attackBonusPercent = ko.observable(attackBonusPercent);
         this._attackBonusAmount = ko.observable(attackBonusAmount);
         this._attack = ko.observable(this.calculateAttack());
         this._category = ko.observable(category);
+        this._pokerus = ko.observable(pokerus);
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -210,10 +209,10 @@ class PartyPokemon implements Saveable {
         this.exp = json[PartyPokemonSaveKeys.exp] ?? this.defaults.exp;
         this.breeding = json[PartyPokemonSaveKeys.breeding] ?? this.defaults.breeding;
         this.shiny = json[PartyPokemonSaveKeys.shiny] ?? this.defaults.shiny;
-        this.pokerus = json[PartyPokemonSaveKeys.pokerus] ?? this.defaults.pokerus;
         this.category = json[PartyPokemonSaveKeys.category] ?? this.defaults.category;
         this.level = this.calculateLevelFromExp();
         this.attack = this.calculateAttack();
+        this.pokerus = json[PartyPokemonSaveKeys.pokerus] ?? this.defaults.pokerus;
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
@@ -242,9 +241,9 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.exp]: this.exp,
             [PartyPokemonSaveKeys.breeding]: this.breeding,
             [PartyPokemonSaveKeys.shiny]: this.shiny,
-            [PartyPokemonSaveKeys.pokerus]: this.pokerus,
             [PartyPokemonSaveKeys.levelEvolutionTriggered]: levelEvolutionTriggered,
             [PartyPokemonSaveKeys.category]: this.category,
+            [PartyPokemonSaveKeys.pokerus]: this.pokerus,
         };
 
         // Don't save anything that is the default option

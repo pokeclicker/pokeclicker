@@ -15,7 +15,7 @@ export default class Challenges implements Saveable {
         disableOakItems: new Challenge('No Oak Item', 'Disables the usage of all Oak Items'),
         disableGems: new Challenge('No Gem', 'Disables the usage of Gems for increasing damage multipliers'),
         disableProteins: new Challenge('No Protein', 'Disables the usage of Proteins'),
-        slowEVs: new Challenge('SlowEVs', 'Gain EVs 10x slower'),
+        slowEVs: new Challenge('Slow EVs', 'Gain EVs 10x slower'),
     };
 
     fromJSON(json): void {

@@ -605,7 +605,6 @@ class Update implements Saveable {
 
             // Challenge update
             saveData.challenges.list.disableGems = saveData.challenges?.list?.disableShards ?? false;
-
         },
 
         '0.9.0': ({ playerData, saveData }) => {
@@ -700,9 +699,8 @@ class Update implements Saveable {
                 'exp': 3,
                 'breeding': 4,
                 'shiny': 5,
-                'pokerus': 6,
-                'category': 7,
-                'levelEvolutionTriggered': 8,
+                'category': 6,
+                'levelEvolutionTriggered': 7,
             };
             Object.entries(PartyKeyMap).forEach(([oldKey, newKey]) => {
                 saveData.party.caughtPokemon.forEach(p => {
@@ -751,7 +749,7 @@ class Update implements Saveable {
 
             setTimeout(async () => {
                 // Check if player wants to activate the new challenge modes
-                if (!await Notifier.confirm({ title: 'Slow EVs', message: 'New challenge mode added: Slow EVs.\n\nDiminishes the rate at which EVs are gained.\n\nThis is not the default and recommended way to play, and is an optional challenge.\n\nPlease choose if you would like this challenge mode to be disabled (reccomended, cannot be re-enabled later) or activated', confirm: 'disable', cancel: 'activate' })) {
+                if (!await Notifier.confirm({ title: 'Slow EVs', message: 'New challenge mode added: Slow EVs.\n\nDiminishes the rate at which EVs are gained.\n\nThis is not the default and recommended way to play, and is an optional challenge.\n\nPlease choose if you would like this challenge mode to be disabled (reccomended, cannot be re-enabled later) or activated', confirm: 'Disable', cancel: 'Activate' })) {
                     App.game.challenges.list.slowEVs.activate();
                 }
             }, GameConstants.SECOND);
