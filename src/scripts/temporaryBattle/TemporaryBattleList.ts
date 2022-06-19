@@ -360,7 +360,7 @@ TemporaryBattleList['Dynamax Conkeldurr'] = new TemporaryBattle(
 TemporaryBattleList['Dynamax Dusknoir'] = new TemporaryBattle(
     'Dynamax Dusknoir',
     [new GymPokemon('Dusknoir', 264590972, 27)],
-    'The Dynamax Torkoal fainted.',
+    'The Dynamax Dusknoir fainted.',
     [new TemporaryBattleRequirement('Sordward & Shielbert')]
 );
 TemporaryBattleList['Bede4'] = new TemporaryBattle(

@@ -1223,7 +1223,7 @@ export const TemporaryBattles = [
     'Dynamax Torkoal',
     'Sordward & Shielbert',
     'Dynamax Conkeldurr',
-    'Dynamax Duskball',
+    'Dynamax Dusknoir',
     'Bede4',
     'Dynamax Gigalith',
     'Dynamax Froslass',
