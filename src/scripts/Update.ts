@@ -746,7 +746,7 @@ class Update implements Saveable {
 
             // Add AZ TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
-            
+
             //Replace Poison Barb with Rocky Helmet
             saveData.oakItems.Rocky_Helmet = saveData.oakItems.Poison_Barb;
             delete saveData.oakItems['Poison_Barb'];
