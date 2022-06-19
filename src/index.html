@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" translate="no">
 <head>
-    <title>Pokéclicker</title>
+    <title>PokéClicker</title>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="utf-8"/>
     <link href="assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
@@ -116,7 +116,7 @@
 <div id="game" class="container loading">
     <div class="row justify-content-center">
         <!--The id title is needed for a default marker for money animation to display when not in a wild battle where the playerMoney span is not visible-->
-        <h1 id="gameTitle">Pokéclicker</h1>
+        <h1 id="gameTitle">PokéClicker</h1>
     </div>
     <div class="row justify-content-lg-center" style="text-align: center">
 
@@ -156,13 +156,13 @@
                         <tr class="row">
                             <td class="col">
                                 <span style="display: inline; position: relative;">
-                                    <img title="Money" src="assets/images/currency/money.svg" height="25px">
+                                    <img title="Pokédollars&#013;&#010;Gained by defeating Pokémon and trainers in battle" src="assets/images/currency/money.svg" height="25px">
                                     <span id="animateCurrency-money" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.money]()) : App.game.wallet.currencies[GameConstants.Currency.money]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td class="col">
                                 <span style="display: inline; position: relative;">
-                                    <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px">
+                                    <img title="Dungeon Tokens&#013;&#010;Gained by catching wild Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px">
                                     <span id="animateCurrency-dungeonToken" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.dungeonToken]()) : App.game.wallet.currencies[GameConstants.Currency.dungeonToken]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
@@ -254,7 +254,7 @@
                                 <div class="progress-bar bg-danger" role="progressbar"
                                      data-bind="attr:{ style: 'width:' + Battle.enemyPokemon().healthPercentage() + '%' }"
                                      aria-valuemin="0" aria-valuemax="100">
-                                     <span data-bind="text: Battle.enemyPokemon().health() + ' / ' + Battle.enemyPokemon().maxHealth()" style="font-size: 12px;"></span>
+                                     <span data-bind="text: Battle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + Battle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
                                 </div>
                             </div>
                         </div>

@@ -56,6 +56,8 @@ class Save {
             element.click();
 
             document.body.removeChild(element);
+
+            App.game.saveReminder.lastDownloaded(App.game.statistics.secondsPlayed());
         } catch (err) {
             console.error('Error trying to download save', err);
             Notifier.notify({
@@ -145,7 +147,7 @@ class Save {
                     res[item] = [];
                     res[item][GameConstants.TypeEffectiveness.Immune] = ko.observable(0);
                     res[item][GameConstants.TypeEffectiveness.NotVery] = ko.observable(0);
-                    res[item][GameConstants.TypeEffectiveness.Normal] = ko.observable(0);
+                    res[item][GameConstants.TypeEffectiveness.Neutral] = ko.observable(0);
                     res[item][GameConstants.TypeEffectiveness.Very] = ko.observable(0);
                 }
             }
