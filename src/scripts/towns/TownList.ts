@@ -3455,7 +3455,7 @@ TownList['Rose Tower'] = new DungeonTown(
 TownList['Energy Plant'] = new DungeonTown(
     'Energy Plant',
     GameConstants.Region.galar,
-    [new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Rose Tower'))],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))],
     [TemporaryBattleList['Eternatus'], TemporaryBattleList['Sordward2'], TemporaryBattleList['Shielbert2'], TemporaryBattleList['The Darkest Day']]
 );
 TownList['Dusty Bowl'] = new DungeonTown(
