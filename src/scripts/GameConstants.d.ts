@@ -281,7 +281,7 @@ namespace GameConstants {
         'xClick' = '',
         'Lucky_egg' = '',
         'Token_collector' = '',
-        'Item_magnet' = '',
+        'Dowsing_machine' = '',
         'Lucky_incense' = '',
     }
     declare enum FluteItemType {

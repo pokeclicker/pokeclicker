@@ -13,7 +13,7 @@ const pokeMartShop = new Shop([
     ItemList['xClick'],
     ItemList['Lucky_egg'],
     ItemList['Token_collector'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Lucky_incense'],
     ItemList['SmallRestore'],
     ItemList['MediumRestore'],
@@ -27,7 +27,7 @@ const DepartmentStoreShop = new Shop([
     ItemList['xAttack'],
     ItemList['xClick'],
     ItemList['Lucky_egg'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Token_collector'],
     ItemList['Lucky_incense'],
     ItemList['SmallRestore'],
@@ -76,7 +76,7 @@ const VermilionCityShop = new Shop([
 const LavenderTownShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Lucky_incense'],
     ItemList['Grass_egg'],
 ]);
@@ -93,7 +93,7 @@ const CeladonDepartmentStoreShop = new Shop([
     ItemList['xAttack'],
     ItemList['xClick'],
     ItemList['Lucky_egg'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Token_collector'],
     ItemList['Lucky_incense'],
 ], 'Department Store');
@@ -445,7 +445,7 @@ const GoldenrodDepartmentStoreShop = new Shop([
     ItemList['xAttack'],
     ItemList['xClick'],
     ItemList['Lucky_egg'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Token_collector'],
     ItemList['Lucky_incense'],
     ItemList['SmallRestore'],
@@ -462,7 +462,7 @@ const EcruteakCityShop = new Shop([
 const OlivineCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Lucky_incense'],
     ItemList['Water_egg'],
     ItemList['Electric_egg'],
@@ -801,7 +801,7 @@ const DewfordTownShop = new Shop([
 const SlateportCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Lucky_incense'],
     ItemList['MediumRestore'],
     ItemList['Water_egg'],
@@ -843,7 +843,7 @@ const FortreeCityShop = new Shop([
     ItemList['Greatball'],
     ItemList['Ultraball'],
     ItemList['xClick'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['LargeRestore'],
     ItemList['Leaf_stone'],
 ]);
@@ -869,7 +869,7 @@ const PacifidlogTownShop = new Shop([
     ItemList['Greatball'],
     ItemList['Ultraball'],
     ItemList['Token_collector'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Deepsea_tooth'],
     ItemList['Deepsea_scale'],
 ]);
@@ -940,6 +940,12 @@ const FortreeWeatherman = new NPC('Weatherman', [
     'Castform is a very finicky pokemon.',
     'It changes forms when the weather is drastically different.',
     'If you want to collect them all, wait for the weather to change.',
+]);
+
+const FortreeRanger = new NPC('Pokémon Ranger Catherine', [
+    'Have you seen this? It\'s horrific. Absolutely despicable.',
+    'Disposable Dowsing Machines! Who even came up with this?! People leave these everywhere. It\'s absolutely terrible for the environment. Some poor innocent Pokémon could choke on it!',
+    'Please recycle your used Dowsing Machines.',
 ]);
 
 const MossdeepAstronomer = new NPC('Astronomer', [
@@ -1065,7 +1071,7 @@ TownList['Fortree City'] = new Town(
     [FortreeCityShop],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))],
-        npcs: [FortreeWeatherman],
+        npcs: [FortreeWeatherman, FortreeRanger],
     }
 );
 TownList['Lilycove City'] = new Town(
@@ -1266,7 +1272,7 @@ const FloaromaTownShop = new Shop([
 ]);
 const EternaCityShop = new Shop([
     ItemList['Pokeball'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Lucky_incense'],
     ItemList['Grass_egg'],
     ItemList['Leaf_stone'],
@@ -1314,7 +1320,7 @@ const CanalaveCityShop = new Shop ([
     ItemList['Greatball'],
     ItemList['Ultraball'],
     ItemList['xClick'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Fighting_egg'],
     ItemList['Metal_coat'],
 ]);
@@ -1812,7 +1818,7 @@ const NimbasaCityShop = new Shop([
 const DriftveilCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Lucky_incense'],
     ItemList['Razor_claw'],
     ItemList['Razor_fang'],
@@ -1855,7 +1861,7 @@ const OpelucidCityShop = new Shop([
     ItemList['Greatball'],
     ItemList['Ultraball'],
     ItemList['xClick'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Dragon_egg'],
     ItemList['Dragon_scale'],
 ]);
@@ -2349,7 +2355,7 @@ const AmbretteTownShop = new Shop([
 const CyllageCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Lucky_incense'],
     ItemList['Upgrade'],
     ItemList['Prism_scale'],
@@ -2397,7 +2403,7 @@ const DendemilleTownShop = new Shop([
     ItemList['Greatball'],
     ItemList['Ultraball'],
     ItemList['xClick'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Shiny_stone'],
     ItemList['Dusk_stone'],
     ItemList['Dawn_stone'],
@@ -2733,7 +2739,7 @@ const PaniolaTownShop = new Shop([
 const KonikoniCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Lucky_incense'],
     ItemList['Fire_stone'],
     ItemList['Trade_stone'],
@@ -3227,7 +3233,7 @@ const WyndonShop = new Shop([
     ItemList['xClick'],
     ItemList['Lucky_egg'],
     ItemList['Token_collector'],
-    ItemList['Item_magnet'],
+    ItemList['Dowsing_machine'],
     ItemList['Lucky_incense'],
 ]);
 const MasterDojoShop = new Shop([

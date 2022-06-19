@@ -659,7 +659,7 @@ export enum BattleItemType {
     'xClick' = 'xClick',
     'Lucky_egg' = 'Lucky_egg',
     'Token_collector' = 'Token_collector',
-    'Item_magnet' = 'Item_magnet',
+    'Dowsing_machine' = 'Dowsing_machine',
     'Lucky_incense' = 'Lucky_incense',
 }
 
