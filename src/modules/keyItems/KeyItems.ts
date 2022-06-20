@@ -112,10 +112,10 @@ export default class KeyItems implements Feature {
 
     gainKeyItem(item: KeyItemType, silent = false): void {
         if (!this.hasKeyItem(item)) {
+            this.itemList[item].unlock();
             if (!silent) {
                 KeyItemController.showGainModal(item);
             }
-            this.itemList[item].unlock();
         }
     }
 
