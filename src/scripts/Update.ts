@@ -664,6 +664,7 @@ class Update implements Saveable {
                 delete saveData.statistics.shinyPokemonHatched[oldID];
             });
 
+
             playerData.mineInventory = playerData.mineInventory?.map(i => {
                 i.sellLocked = false;
                 return i;
@@ -689,7 +690,6 @@ class Update implements Saveable {
             // Add Sendoff Spring
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
         },
-
         '0.9.4': ({ playerData, saveData }) => {
             // Modifications relating to smaller save file sizes
             const PartyKeyMap = {
@@ -734,6 +734,34 @@ class Update implements Saveable {
             if (saveData.statistics.temporaryBattleDefeated[1]) {
                 saveData.quests.questLines.push({state: 1, name: 'Mina\'s Trial', quest: 0});
             }
+
+            // Add Rocket Game Corner
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 4);
+            // Add Silph Co.
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 6);
+            // Start Team Rocket Kanto questline if player has Cascade Badge already
+            if (saveData.badgeCase[2]) {
+                saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
+            }
+
+            // Add AZ TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
+
+            //Replace Poison Barb with Rocky Helmet
+            saveData.oakItems.Rocky_Helmet = saveData.oakItems.Poison_Barb;
+            delete saveData.oakItems['Poison_Barb'];
+
+            // Give the players Dowsing Machines in place of Item Magnets
+            playerData._itemList.Dowsing_machine = playerData._itemList.Item_magnet;
+            delete playerData._itemList.Item_magnet;
+
+            // Start pokerus
+            setTimeout(async () => {
+                // Check if player wants to activate the new challenge modes
+                if (!await Notifier.confirm({ title: 'Slow EVs', message: 'New challenge mode added: Slow EVs.\n\nDiminishes the rate at which EVs are gained.\n\nThis is not the default and recommended way to play, and is an optional challenge.\n\nPlease choose if you would like this challenge mode to be disabled (reccomended, cannot be re-enabled later) or activated', confirm: 'Disable', cancel: 'Activate' })) {
+                    App.game.challenges.list.slowEVs.activate();
+                }
+            }, GameConstants.SECOND);
         },
     };
 

@@ -15090,7 +15090,7 @@ const pokemonList = createPokemonArray(
         'id': 670.05,
         'name': 'Floette (Eternal)',
         'type': [PokemonType.Fairy],
-        'eggCycles': 20,
+        'eggCycles': 30,
         'levelType': LevelType.mediumfast,
         'exp': 130,
         'catchRate': 120,
