@@ -225,6 +225,14 @@ export const QUEST_CLICKS_PER_SECOND = 5;
 
 export const QUESTS_PER_SET = 10;
 
+// EVs
+export const BASE_EP_YIELD = 1;
+export const SHINY_EP_YIELD = 5;
+export const DUNGEON_EP_YIELD = 2;
+export const STONE_EP_YIELD = 10;
+export const EP_EV_RATIO = 10;
+export const EP_CHALLENGE_MODIFIER = 10;
+
 /**
  * idle: The game is not doing anything, the battle view isn't shown
  * paused: The battle view is shown, but there are no game ticks
