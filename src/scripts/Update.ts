@@ -744,6 +744,13 @@ class Update implements Saveable {
                 saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
             }
 
+            // Rename Land vs. Water questline, so QuestLineCompletedRequirement will work
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'Land vs Water') {
+                    v.name = 'Land vs. Water';
+                }
+            });
+
             // Add AZ TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
 
