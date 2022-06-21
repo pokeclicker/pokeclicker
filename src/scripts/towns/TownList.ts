@@ -1066,7 +1066,7 @@ TownList['Fallarbor Town'] = new Town(
 TownList['Lavaridge Town'] = new Town(
     'Lavaridge Town',
     GameConstants.Region.hoenn,
-    [LavaridgeTownShop],
+    [LavaridgeTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lavaridge Town'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Jagged Pass'))],
     }
