@@ -540,7 +540,7 @@ class Update implements Saveable {
         '0.8.14': ({ playerData, saveData }) => {
             // Start Aqua Magma questline if player has Dynamo Badge already
             if (saveData.badgeCase[29]) {
-                saveData.quests.questLines.push({state: 1, name: 'Land vs Water', quest: 0});
+                saveData.quests.questLines.push({state: 1, name: 'Land vs. Water', quest: 0});
             }
 
             // Just incase statistics is not set
@@ -743,6 +743,13 @@ class Update implements Saveable {
             if (saveData.badgeCase[2]) {
                 saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
             }
+
+            // Rename Land vs. Water questline, so QuestLineCompletedRequirement will work
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'Land vs Water') {
+                    v.name = 'Land vs. Water';
+                }
+            });
 
             // Add AZ TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
