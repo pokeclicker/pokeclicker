@@ -515,6 +515,17 @@ TemporaryBattleList['Avery3'] = new TemporaryBattle(
     'Oh, I should just Imprison myself for this!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
 );
+TemporaryBattleList['Dynamax Vespiquen'] = new TemporaryBattle(
+    'Dynamax Vespiquen',
+    [new GymPokemon('Vespiquen', 264590972, 27)],
+    'The Dynamax Vespiquen fainted and dropped a Max Honey!',
+    [
+        new MultiRequirement([
+          new ObtainedPokemonRequirement(pokemonMap.Urshifu (Single Strike)),
+          new ObtainedPokemonRequirement(pokemonMap.Urshifu (Rapid Strike),
+        ]),
+    ]
+);
 TemporaryBattleList['Peony'] = new TemporaryBattle(
     'Peony',
     [

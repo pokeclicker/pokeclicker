@@ -1228,6 +1228,7 @@ export const TemporaryBattles = [
     'Avery2',
     'Klara3',
     'Avery3',
+    'Dynamax Vespiquen',
     'Peony',
     'Calyrex',
     'Glastrier',
