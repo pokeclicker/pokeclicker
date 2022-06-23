@@ -2391,6 +2391,7 @@ Routes.add(new RegionRoute(
         new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.galar, 34),
             new RouteKillRequirement(10, GameConstants.Region.galar, 35),
+            new RouteKillRequirement(10, GameConstants.Region.galar, 42),
             new RouteKillRequirement(10, GameConstants.Region.galar, 44),
         ]),
     ],
