@@ -521,8 +521,8 @@ TemporaryBattleList['Dynamax Vespiquen'] = new TemporaryBattle(
     'The Dynamax Vespiquen fainted and dropped a Max Honey!',
     [
         new MultiRequirement([
-          new ObtainedPokemonRequirement(pokemonMap.Urshifu (Single Strike)),
-          new ObtainedPokemonRequirement(pokemonMap.Urshifu (Rapid Strike),
+          new ObtainedPokemonRequirement(pokemonMap.'Urshifu (Single Strike)'),
+          new ObtainedPokemonRequirement(pokemonMap.'Urshifu (Rapid Strike)'),
         ]),
     ]
 );
