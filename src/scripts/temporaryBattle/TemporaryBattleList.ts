@@ -110,7 +110,7 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
 //Galar Temporary Battles
 //TODO: Have Hop's starter depend on the players Galar starter
 TemporaryBattleList['Hop1'] = new TemporaryBattle(
-    'Hop1',
+    'Hop',
     [
         new GymPokemon('Wooloo', 282601920, 60),
         new GymPokemon('Sobble', 282601920, 60),
@@ -128,7 +128,7 @@ TemporaryBattleList['Mirages'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Hop1')]
 );
 TemporaryBattleList['Hop2'] = new TemporaryBattle(
-    'Hop2',
+    'Hop',
     [
         new GymPokemon('Wooloo', 282601920, 60),
         new GymPokemon('Rookidee', 282601920, 60),
@@ -138,7 +138,7 @@ TemporaryBattleList['Hop2'] = new TemporaryBattle(
     [new RouteKillRequirement(10, GameConstants.Region.galar, 2)]
 );
 TemporaryBattleList['Hop3'] = new TemporaryBattle(
-    'Hop3',
+    'Hop',
     [
         new GymPokemon('Wooloo', 282601920, 60),
         new GymPokemon('Rookidee', 282601920, 60),
@@ -148,7 +148,7 @@ TemporaryBattleList['Hop3'] = new TemporaryBattle(
     [new RouteKillRequirement(10, GameConstants.Region.galar, 6)]
 );
 TemporaryBattleList['Bede1'] = new TemporaryBattle(
-    'Bede1',
+    'Bede',
     [
         new GymPokemon('Solosis', 282601920, 60),
         new GymPokemon('Gothita', 282601920, 60),
@@ -158,7 +158,7 @@ TemporaryBattleList['Bede1'] = new TemporaryBattle(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine'))]
 );
 TemporaryBattleList['Hop4'] = new TemporaryBattle(
-    'Hop4',
+    'Hop',
     [
         new GymPokemon('Wooloo', 282601920, 60),
         new GymPokemon('Corvisquire', 282601920, 60),
@@ -168,7 +168,7 @@ TemporaryBattleList['Hop4'] = new TemporaryBattle(
     [new RouteKillRequirement(10, GameConstants.Region.galar, 14)]
 );
 TemporaryBattleList['Bede2'] = new TemporaryBattle(
-    'Bede2',
+    'Bede',
     [
         new GymPokemon('Solosis', 282601920, 60),
         new GymPokemon('Gothita', 282601920, 60),
@@ -179,7 +179,7 @@ TemporaryBattleList['Bede2'] = new TemporaryBattle(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine No. 2'))]
 );
 TemporaryBattleList['Marnie1'] = new TemporaryBattle(
-    'Marnie1',
+    'Marnie',
     [
         new GymPokemon('Croagunk', 282601920, 60),
         new GymPokemon('Scraggy', 282601920, 60),
@@ -189,7 +189,7 @@ TemporaryBattleList['Marnie1'] = new TemporaryBattle(
     [new RouteKillRequirement(10, GameConstants.Region.galar, 15)]
 );
 TemporaryBattleList['Hop5'] = new TemporaryBattle(
-    'Hop5',
+    'Hop',
     [
         new GymPokemon('Cramorant', 282601920, 60),
         new GymPokemon('Toxel', 282601920, 60),
@@ -200,7 +200,7 @@ TemporaryBattleList['Hop5'] = new TemporaryBattle(
     [new RouteKillRequirement(10, GameConstants.Region.galar, 23)]
 );
 TemporaryBattleList['Bede3'] = new TemporaryBattle(
-    'Bede3',
+    'Bede',
     [
         new GymPokemon('Duosion', 282601920, 60),
         new GymPokemon('Gothorita', 282601920, 60),
@@ -220,7 +220,7 @@ TemporaryBattleList['Bede3'] = new TemporaryBattle(
     }
 );
 TemporaryBattleList['Hop6'] = new TemporaryBattle(
-    'Hop6',
+    'Hop',
     [
         new GymPokemon('Trevenant', 282601920, 60),
         new GymPokemon('Heatmor', 282601920, 60),
@@ -232,7 +232,7 @@ TemporaryBattleList['Hop6'] = new TemporaryBattle(
     [new GymBadgeRequirement(BadgeEnums.Galar_Fairy)]
 );
 TemporaryBattleList['Hop7'] = new TemporaryBattle(
-    'Hop7',
+    'Hop',
     [
         new GymPokemon('Dubwool', 282601920, 60),
         new GymPokemon('Corviknight', 282601920, 60),
@@ -249,7 +249,7 @@ TemporaryBattleList['Hop7'] = new TemporaryBattle(
     ]
 );
 TemporaryBattleList['Marnie2'] = new TemporaryBattle(
-    'Marnie2',
+    'Marnie',
     [
         new GymPokemon('Liepard', 282601920, 60),
         new GymPokemon('Toxicroak', 282601920, 60),
@@ -276,7 +276,7 @@ TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     }
 );
 TemporaryBattleList['Hop8'] = new TemporaryBattle(
-    'Hop8',
+    'Hop',
     [
         new GymPokemon('Dubwool', 282601920, 60),
         new GymPokemon('Pincurchin', 282601920, 60),
@@ -289,7 +289,7 @@ TemporaryBattleList['Hop8'] = new TemporaryBattle(
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
 );
 TemporaryBattleList['Sordward1'] = new TemporaryBattle(
-    'Sordward1',
+    'Sordward',
     [
         new GymPokemon('Sirfetch\'d', 282601920, 60),
         new GymPokemon('Golisopod', 282601920, 60),
@@ -300,7 +300,7 @@ TemporaryBattleList['Sordward1'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Hop8')]
 );
 TemporaryBattleList['Shielbert1'] = new TemporaryBattle(
-    'Shielbert1',
+    'Shielbert',
     [
         new GymPokemon('Sirfetch\'d', 282601920, 60),
         new GymPokemon('Bronzong', 282601920, 60),
@@ -364,7 +364,7 @@ TemporaryBattleList['Dynamax Dusknoir'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Sordward & Shielbert')]
 );
 TemporaryBattleList['Bede4'] = new TemporaryBattle(
-    'Bede4',
+    'Bede',
     [
         new GymPokemon('Mawile', 282601920, 60),
         new GymPokemon('Gardevoir', 282601920, 60),
@@ -387,7 +387,7 @@ TemporaryBattleList['Dynamax Froslass'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Sordward & Shielbert')]
 );
 TemporaryBattleList['Marnie3'] = new TemporaryBattle(
-    'Marnie3',
+    'Marnie',
     [
         new GymPokemon('Liepard', 282601920, 60),
         new GymPokemon('Toxicroak', 282601920, 60),
@@ -405,7 +405,7 @@ TemporaryBattleList['Dynamax Haxorus'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Sordward & Shielbert')]
 );
 TemporaryBattleList['Sordward2'] = new TemporaryBattle(
-    'Sordward2',
+    'Sordward',
     [
         new GymPokemon('Sirfetch\'d', 282601920, 60),
         new GymPokemon('Golisopod', 282601920, 60),
@@ -426,7 +426,7 @@ TemporaryBattleList['Sordward2'] = new TemporaryBattle(
     ]
 );
 TemporaryBattleList['Shielbert2'] = new TemporaryBattle(
-    'Shielbert2',
+    'Shielbert',
     [
         new GymPokemon('Sirfetch\'d', 282601920, 60),
         new GymPokemon('Bronzong', 282601920, 60),
@@ -447,7 +447,7 @@ TemporaryBattleList['Shielbert2'] = new TemporaryBattle(
     ]
 );
 TemporaryBattleList['Klara1'] = new TemporaryBattle(
-    'Klara1',
+    'Klara',
     [
         new GymPokemon('Venipede', 282601920, 58),
         new GymPokemon('Galarian Slowpoke', 282601920, 60),
@@ -456,7 +456,7 @@ TemporaryBattleList['Klara1'] = new TemporaryBattle(
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
 );
 TemporaryBattleList['Avery1'] = new TemporaryBattle(
-    'Avery1',
+    'Avery',
     [
         new GymPokemon('Abra', 282601920, 58),
         new GymPokemon('Galarian Slowbro', 282601920, 60),
@@ -474,7 +474,7 @@ TemporaryBattleList['Mustard'] = new TemporaryBattle(
     [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
 );
 TemporaryBattleList['Klara2'] = new TemporaryBattle(
-    'Avery2',
+    'Klara',
     [
         new GymPokemon('Galarian Slowpoke', 282601920, 62),
         new GymPokemon('Koffing', 282601920, 62),
@@ -484,7 +484,7 @@ TemporaryBattleList['Klara2'] = new TemporaryBattle(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel'))]
 );
 TemporaryBattleList['Avery2'] = new TemporaryBattle(
-    'Avery2',
+    'Avery',
     [
         new GymPokemon('Galarian Slowpoke', 282601920, 62),
         new GymPokemon('Woobat', 282601920, 62),
@@ -494,7 +494,7 @@ TemporaryBattleList['Avery2'] = new TemporaryBattle(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel'))]
 );
 TemporaryBattleList['Klara3'] = new TemporaryBattle(
-    'Klara3',
+    'Klara',
     [
         new GymPokemon('Skorupi', 282601920, 65),
         new GymPokemon('Galarian Weezing', 282601920, 66),
@@ -505,7 +505,7 @@ TemporaryBattleList['Klara3'] = new TemporaryBattle(
     [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
 );
 TemporaryBattleList['Avery3'] = new TemporaryBattle(
-    'Avery3',
+    'Avery',
     [
         new GymPokemon('Galarian Ponyta', 282601920, 65),
         new GymPokemon('Swoobat', 282601920, 66),
