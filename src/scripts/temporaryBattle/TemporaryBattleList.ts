@@ -522,7 +522,7 @@ TemporaryBattleList['Dynamax Vespiquen'] = new TemporaryBattle(
     [
         new MultiRequirement([
           new ObtainedPokemonRequirement(pokemonMap['Urshifu (Single Strike)']),
-          new ObtainedPokemonRequirement(pokemonMap['Urshifu (Rapid Strike)']'),
+          new ObtainedPokemonRequirement(pokemonMap['Urshifu (Rapid Strike)']),
         ]),
     ]
 );
