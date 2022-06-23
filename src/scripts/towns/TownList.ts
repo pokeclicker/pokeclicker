@@ -3406,7 +3406,7 @@ TownList['Master Dojo'] = new Town(
 TownList['Master Dojo Battlefield'] = new Town(
     'Master Dojo Battlefield',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Klara3'], TemporaryBattleList['Avery3'], GymList['Gym Leader Klara'], GymList['Gym Leader Avery'], GymList['Dojo Master Mustard'], pokeLeagueShop()],
+    [TemporaryBattleList['Klara3'], TemporaryBattleList['Avery3'], GymList['Gym Leader Klara'], GymList['Gym Leader Avery'], GymList['Dojo Master Mustard']],
     {
         requirements: [
             new MultiRequirement([
