@@ -1727,12 +1727,7 @@ GymList['Gym Leader Klara'] = new Gym(
     BadgeEnums.Elite_ArmorPoison,
     150000,
     'Aww, come on! What a drag! But...I guess it was also kinda fun!',
-    [
-        new MultiRequirement([
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Water')),
-        ]),
-    ]
+    [new TemporaryBattleRequirement('Dynamax Vespiquen')],
 );
 GymList['Gym Leader Avery'] = new Gym(
     'Avery',
