@@ -2535,7 +2535,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Chansey', 'Mantyke'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Blissey', 'Drifloon', 'Jellicent'], new WeatherRequirement([WeatherType.Fog])),
       ],
-        headbutt: ['Skwovet', 'Applin', 'Flapple', 'Appletun'],
+        headbutt: ['Skwovet', 'Applin'],
     }),
     [
         new OneFromManyRequirement([
