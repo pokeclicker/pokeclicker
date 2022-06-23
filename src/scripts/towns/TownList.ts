@@ -3506,11 +3506,6 @@ TownList['Warm-Up Tunnel'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.galar, 38)],
     [TemporaryBattleList['Klara2'], TemporaryBattleList['Avery2']]
 );
-TownList['Master Dojo Trial'] = new DungeonTown(
-    'Master Dojo Trial',
-    GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
-);
 TownList['Tower of Darkness'] = new DungeonTown(
     'Tower of Darkness',
     GameConstants.Region.galar,
