@@ -1727,7 +1727,7 @@ GymList['Gym Leader Klara'] = new Gym(
     BadgeEnums.Elite_ArmorPoison,
     150000,
     'Aww, come on! What a drag! But...I guess it was also kinda fun!',
-    [new TemporaryBattleRequirement('Dynamax Vespiquen')],
+    [new TemporaryBattleRequirement('Dynamax Vespiquen')]
 );
 GymList['Gym Leader Avery'] = new Gym(
     'Avery',
