@@ -1581,7 +1581,7 @@ GymList['Circhester2'] = new Gym(
     [
         new GymPokemon('Frosmoth', 84261781, 40),
         new GymPokemon('Galarian Darmanitan', 84261781, 40),
-        new GymPokemon('Eiscue (iceface)', 86035713, 41),
+        new GymPokemon('Eiscue (Ice Face)', 86035713, 41),
         new GymPokemon('Gigantamax Lapras', 88696611, 42),
     ],
     BadgeEnums.Galar_Ice,

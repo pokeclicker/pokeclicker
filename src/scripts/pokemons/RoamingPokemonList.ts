@@ -85,11 +85,7 @@ RoamingPokemonList.add(GameConstants.Region.alola, new RoamingPokemon('Zeraora',
 //Galar
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Galarian Zapdos', new MultiRequirement([
     new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill')),
-    // TODO: uncomment this once Galar split into 2
-    // new OneFromManyRequirement([
-    //     new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'Galar North').id),
-    //     new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'Galar South').id),
-    // ]),
+    new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'South Galar').id),
 ])));
 
 //Galar - Isle of Armor

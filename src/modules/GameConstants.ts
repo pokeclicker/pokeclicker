@@ -526,7 +526,6 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kalos]: new Set([1, 14, 20, 'Laverre City', 'Santalune Forest', 'Pokémon Village']),
         [Region.alola]: new Set([27, 'Melemele Woods', 'Lush Jungle', 'Malie Garden', 'Ula\'ula Meadow', 'Poni Meadow']),
         [Region.galar]: new Set(['Slumbering Weald', 'Slumbering Weald Shrine', 'Glimwood Tangle', 'Ballonlea', 'Dyna Tree Hill', 2, 12, 13, 35]),
-
     },
 
     Cave: {
@@ -651,7 +650,6 @@ export enum StoneType {
     'Flower_sweet',
     'Star_sweet',
     'Ribbon_sweet',
-
 }
 
 export enum BattleItemType {
