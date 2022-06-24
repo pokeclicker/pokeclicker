@@ -1413,6 +1413,11 @@ const HearthomeContestFan = new NPC('Contest Fan', [
     'I\'m so happy for them, all of that training in Mt. Coronet must have paid off!',
 ]);
 
+const CelesticGrandma = new NPC('Cynthia\s Grandmother', [
+    'Hello young one, have you come here to learn of Sinnoh’s mysteries?',
+    'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine… maybe they should try the Day Care?',
+]);
+
 const PalParkWarden = new NPC('Pal Park Warden', [
     'Hey, welcome to the Pal Park! Have you been to my Dad’s Safari Zone in Kanto? We don’t have as many Pokémon here, but I’ve heard that a flower Pokémon found here can bloom when it’s sunny outside!',
 ]);
@@ -1438,7 +1443,10 @@ const SnowpointYoungGirl = new NPC('Young Girl', [
 
 const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
     'Oh! I don’t get visitors often. My husband is a sailor who visits far away lands… he always tells me these fantastic things.',
-    'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine… maybe they should try the Day Care?',
+    'One time he came back and his Wailmer looked funny. We took it to the Pokécenter and they said it had caught some weird virus called Pokérus!',
+    'They said that it is a virus that can spread in the Pokémon Day Care. However, not every Pokémon that is infected can spread it...',
+    'You need some kind of "special bond" or something with the infected Pokémon for it to spread the virus. His Wailmer was his Starter Pokémon, so maybe that was it? They also said that Pokémon can only spread the virus if they are\’nt ready to hatch.',
+    'If you have a Pokémon with Pokérus, try catching more of that type of Pokémon. When he got back from his next trip, oddly enough Wailmer seemed stronger than ever!',
 ]);
 
 const FightAreaAceTrainer = new NPC('Ace Trainer Quinn', [
@@ -1563,6 +1571,7 @@ TownList['Celestic Town'] = new Town(
     [CelesticTownShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Fen)],
+        npcs: [CelesticGrandma],
     }
 );
 TownList['Pal Park'] = new Town(
@@ -1948,6 +1957,14 @@ const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
     'I\'ve never seen it, but supposedly it works just like any evolution stone.',
 ]);
 
+const P2LaboratoryColress = new NPC('Colress', [
+    'So you defeated Ghetsis. Interesting. You must be a very strong trainer.',
+    'A rare Pokémon is hiding somewhere inside this abandoned laboratory. You can catch it if you want. I have no interest in it.',
+    'However, I do have an interest in you! I want to taste your power. Defeat me, and I\'ll let you search for the rare Pokémon.',
+    'I\'ll be waiting for you inside.',
+],
+{ requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'), GameConstants.AchievementOption.less ) });
+
 const UnovaRoamerNPC = new RoamerNPC('Professor Juniper\'s Aide', [
     'Our research indicates a higher concentration of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.unova);
@@ -2313,7 +2330,9 @@ TownList['Dreamyard'] = new DungeonTown(
 TownList['P2 Laboratory'] = new DungeonTown(
     'P2 Laboratory',
     GameConstants.Region.unova,
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 17)]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 17)],
+    [],
+    [P2LaboratoryColress]
 );
 
 //Kalos Shops

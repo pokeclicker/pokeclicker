@@ -93,7 +93,7 @@ class Egg implements Saveable {
         return !this.isNone() && this.steps() >= this.totalSteps;
     }
 
-    hatch(efficiency = 100): boolean {
+    hatch(efficiency = 100, helper = false): boolean {
         if (!this.canHatch()) {
             return false;
         }

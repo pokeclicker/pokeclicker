@@ -9,6 +9,7 @@ enum PartyPokemonSaveKeys {
     shiny,
     category,
     levelEvolutionTriggered,
+    pokerus,
 }
 
 class PartyPokemon implements Saveable {
@@ -23,6 +24,7 @@ class PartyPokemon implements Saveable {
         shiny: false,
         category: 0,
         levelEvolutionTriggered: false,
+        pokerus: false,
     };
 
     _breeding: KnockoutObservable<boolean>;
@@ -32,7 +34,9 @@ class PartyPokemon implements Saveable {
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
+    _pokerus: KnockoutObservable<boolean>;
     proteinsUsed: KnockoutObservable<number>;
+    effortPoints: KnockoutObservable<number>;
 
     constructor(
         public id: number,
@@ -42,12 +46,15 @@ class PartyPokemon implements Saveable {
         attackBonusPercent = 0,
         attackBonusAmount = 0,
         proteinsUsed,
+        effortPoints,
         public exp: number = 0,
         breeding = false,
         shiny = false,
-        category = 0
+        category = 0,
+        pokerus = false
     ) {
         this.proteinsUsed = ko.observable(proteinsUsed);
+        this.effortPoints = ko.observable(effortPoints);
         this._breeding = ko.observable(breeding);
         this._shiny = ko.observable(shiny);
         this._level = ko.observable(1);
@@ -55,12 +62,27 @@ class PartyPokemon implements Saveable {
         this._attackBonusAmount = ko.observable(attackBonusAmount);
         this._attack = ko.observable(this.calculateAttack());
         this._category = ko.observable(category);
+        this._pokerus = ko.observable(pokerus);
     }
 
     public calculateAttack(ignoreLevel = false): number {
         const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
         const levelMultiplier = ignoreLevel ? 1 : this.level / 100;
         return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier));
+    }
+
+    public canCatchPokerus(): boolean {
+        return App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
+    }
+
+    public calculatePokerus(): boolean {
+        // Egg can't hatch and Egg has pokerus
+        return App.game.breeding.eggList.some(e => {
+            if (!e().canHatch() && !e().isNone() && !(e().pokemon != GameConstants.Starter[player.starter()])) {
+                const pokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(e().pokemon).id);
+                return pokemon.pokerus;
+            }
+        });
     }
 
     calculateLevelFromExp() {
@@ -190,6 +212,7 @@ class PartyPokemon implements Saveable {
         this.category = json[PartyPokemonSaveKeys.category] ?? this.defaults.category;
         this.level = this.calculateLevelFromExp();
         this.attack = this.calculateAttack();
+        this.pokerus = json[PartyPokemonSaveKeys.pokerus] ?? this.defaults.pokerus;
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
@@ -220,6 +243,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.shiny]: this.shiny,
             [PartyPokemonSaveKeys.levelEvolutionTriggered]: levelEvolutionTriggered,
             [PartyPokemonSaveKeys.category]: this.category,
+            [PartyPokemonSaveKeys.pokerus]: this.pokerus,
         };
 
         // Don't save anything that is the default option
@@ -271,6 +295,14 @@ class PartyPokemon implements Saveable {
 
     set breeding(bool: boolean) {
         this._breeding(bool);
+    }
+
+    get pokerus(): boolean {
+        return this._pokerus();
+    }
+
+    set pokerus(bool: boolean) {
+        this._pokerus(bool);
     }
 
     get shiny(): boolean {
