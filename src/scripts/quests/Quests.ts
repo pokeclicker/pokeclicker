@@ -113,6 +113,12 @@ class Quests implements Saveable {
                 this.refreshQuests(true);
                 // Give player a free refresh
                 this.freeRefresh(true);
+                Notifier.notify({
+                    message: '<i>All quests completed. Your quest list has been refreshed.</i>',
+                    type: NotificationConstants.NotificationOption.info,
+                    timeout: 1e4,
+                    setting: NotificationConstants.NotificationSetting.General.quest_completed,
+                });
             }
 
             // Track quest completion and total quest completed
@@ -139,12 +145,13 @@ class Quests implements Saveable {
         // Refresh the list each time a player levels up
         if (this.level() > currentLevel) {
             Notifier.notify({
-                message: 'Your quest level has increased!\n<i>You have a free quest refresh.</i>',
+                message: `Your quest level has increased to ${this.level()}!\n<i>You have a free quest refresh.</i>`,
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 1e4,
                 sound: NotificationConstants.NotificationSound.Quests.quest_level_increased,
             });
             this.freeRefresh(true);
+            App.game.logbook.newLog(LogBookTypes.QUEST, `Quest level increased to level ${this.level()}!`);
             // Track when users gains a quest level and how long it took in seconds
             LogEvent('gain quest level', 'quests', `level (${this.level()})`, App.game.statistics.secondsPlayed());
         }
