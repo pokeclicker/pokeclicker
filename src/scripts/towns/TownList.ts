@@ -2657,7 +2657,7 @@ TownList['Pokémon League Kalos'] = new Town(
 TownList['Delta Littleroot Town'] = new Town(
     'Delta Littleroot Town',
     GameConstants.Region.kalos,
-    [LittleRootTownShop],
+    [],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 101)],
     }
@@ -2665,7 +2665,7 @@ TownList['Delta Littleroot Town'] = new Town(
 TownList['Delta Oldale Town'] = new Town(
     'Delta Oldale Town',
     GameConstants.Region.kalos,
-    [],
+    [OldaleTownShop],
     {
         requirements: [
             new OneFromManyRequirement([
