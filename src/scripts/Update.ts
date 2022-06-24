@@ -760,7 +760,9 @@ class Update implements Saveable {
 
             // Give the players Dowsing Machines in place of Item Magnets
             playerData._itemList.Dowsing_machine = playerData._itemList.Item_magnet;
+            playerData.effectList.Dowsing_machine = playerData.effectList.Item_magnet;
             delete playerData._itemList.Item_magnet;
+            delete playerData.effectList.Item_magnet;
 
             // Start pokerus
             setTimeout(async () => {
