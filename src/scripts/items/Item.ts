@@ -94,7 +94,7 @@ class Item {
 
         if (n > this.maxAmount) {
             Notifier.notify({
-                message: `You can only buy ${this.maxAmount} &times; ${GameConstants.humanifyString(this.displayName)}!`,
+                message: `You can only buy ${this.maxAmount.toLocaleString('en-US')} &times; ${GameConstants.humanifyString(this.displayName)}!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             n = this.maxAmount;
@@ -128,7 +128,7 @@ class Item {
                     break;
             }
             Notifier.notify({
-                message: `You don't have enough ${curr} to buy ${n} ${GameConstants.humanifyString(this.displayName) + multiple}!`,
+                message: `You don't have enough ${curr} to buy ${n.toLocaleString('en-US')} ${GameConstants.humanifyString(this.displayName) + multiple}!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
         }

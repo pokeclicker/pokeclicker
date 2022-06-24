@@ -18,6 +18,6 @@ class BattleFrontierMilestoneItem extends BattleFrontierMilestone {
     }
 
     get description() {
-        return `${this.amount.toLocaleString('en-US')} x ${ItemList[this.itemName].displayName}`;
+        return `${this.amount} x ${ItemList[this.itemName].displayName}`;
     }
 }
