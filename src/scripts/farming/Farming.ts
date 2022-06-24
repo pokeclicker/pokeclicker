@@ -37,6 +37,7 @@ class Farming implements Feature {
     unlockedBerries: KnockoutObservable<boolean>[];
     mulchList: KnockoutObservable<number>[];
     plotList: Array<Plot>;
+    unlockedPlotCount: KnockoutObservable<number>;
     shovelAmt: KnockoutObservable<number>;
     mulchShovelAmt: KnockoutObservable<number>;
 
@@ -47,6 +48,7 @@ class Farming implements Feature {
         this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
         this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
         this.plotList = this.defaults.plotList;
+        this.unlockedPlotCount = ko.observable(0);
         this.shovelAmt = ko.observable(this.defaults.shovelAmt);
         this.mulchShovelAmt = ko.observable(this.defaults.mulchShovelAmt);
 
@@ -1052,6 +1054,7 @@ class Farming implements Feature {
             const cost = this.plotFPCost(index);
             App.game.wallet.loseAmount(new Amount(cost, GameConstants.Currency.farmPoint));
             this.plotList[index].isUnlocked = true;
+            this.unlockedPlotCount(this.plotList.filter(p => p.isUnlocked).length);
         }
     }
 
@@ -1362,6 +1365,7 @@ class Farming implements Feature {
                 this.plotList[index] = plot;
             });
         }
+        this.unlockedPlotCount(this.plotList.filter(p => p.isUnlocked).length);
 
         const shovelAmt = json['shovelAmt'];
         if (shovelAmt == null) {
