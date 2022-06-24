@@ -24,7 +24,10 @@ GymList['Cerulean City'] = new Gym(
     BadgeEnums.Cascade,
     500,
     'Wow! You\'re too much, all right! You can have the Cascade Badge to show that you beat me.',
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
+    () => {
+        App.game.quests.getQuestLine('Team Rocket').beginQuest();
+    }
 );
 GymList['Vermilion City'] = new Gym(
     'Lt. Surge',
@@ -67,7 +70,7 @@ GymList['Saffron City'] = new Gym(
     BadgeEnums.Marsh,
     2500,
     'This loss shocks me! But a loss is a loss. I admit I didn\'t work hard enough to win. You earned the MarshBadge.',
-    [new GymBadgeRequirement(BadgeEnums.Rainbow)]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Silph Co.'))]
 );
 GymList['Fuchsia City'] = new Gym(
     'Koga',
@@ -120,9 +123,10 @@ GymList['Viridian City'] = new Gym(
     6000,
     'Ha! That was a truly intense fight. You have won! As proof, here is the Earth Badge!',
     [
-        new GymBadgeRequirement(BadgeEnums.Volcano),
-        new GymBadgeRequirement(BadgeEnums.Marsh),
         new GymBadgeRequirement(BadgeEnums.Thunder),
+        new GymBadgeRequirement(BadgeEnums.Rainbow),
+        new GymBadgeRequirement(BadgeEnums.Marsh),
+        new GymBadgeRequirement(BadgeEnums.Volcano),
     ],
     () => {
         App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
@@ -450,7 +454,7 @@ GymList['Mauville City'] = new Gym(
     'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!',
     [new GymBadgeRequirement(BadgeEnums.Knuckle)],
     () => {
-        App.game.quests.getQuestLine('Land vs Water').beginQuest();
+        App.game.quests.getQuestLine('Land vs. Water').beginQuest();
     }
 );
 GymList['Lavaridge Town'] = new Gym(
