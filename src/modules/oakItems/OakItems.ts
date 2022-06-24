@@ -37,7 +37,7 @@ export default class OakItems implements Feature {
                 true, [5, 6, 7, 8, 9, 10], 0, 20, 2, undefined, undefined, undefined, '%'),
             new OakItem(OakItemType.Amulet_Coin, 'Amulet Coin', 'Gain more Pokédollars from battling',
                 true, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 30, 1),
-            new OakItem(OakItemType.Poison_Barb, 'Poison Barb', 'Clicks do more damage',
+            new OakItem(OakItemType.Rocky_Helmet, 'Rocky Helmet', 'Clicks do more damage',
                 true, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 40, 3),
             new OakItem(OakItemType.Exp_Share, 'EXP Share', 'Gain more exp from battling',
                 true, [1.15, 1.18, 1.21, 1.24, 1.27, 1.30], 1, 50, 1),
@@ -59,7 +59,7 @@ export default class OakItems implements Feature {
                 true, [4, 8, 12, 16, 20, 24], 1, 25, undefined, undefined, AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], Currency.money), '%'),
         ];
 
-        this.addMultiplier('clickAttack', OakItemType.Poison_Barb);
+        this.addMultiplier('clickAttack', OakItemType.Rocky_Helmet);
         this.addMultiplier('exp', OakItemType.Exp_Share);
         this.addMultiplier('money', OakItemType.Amulet_Coin);
         this.addMultiplier('shiny', OakItemType.Shiny_Charm);
