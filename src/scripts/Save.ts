@@ -77,7 +77,7 @@ class Save {
         navigator.clipboard.writeText(btoa(JSON.stringify(backupSaveData)));
         Notifier.notify({
             title: 'Save copied',
-            message: 'Please paste the content into a new \'.txt\'-file.',
+            message: 'Please paste the clipboard contents into a new \'.txt\' file.',
             type: NotificationConstants.NotificationOption.info,
         });
     }
