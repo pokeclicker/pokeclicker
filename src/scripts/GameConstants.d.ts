@@ -134,6 +134,12 @@ namespace GameConstants {
     declare const ACTIVE_QUEST_MULTIPLIER: number;
     declare const QUEST_CLICKS_PER_SECOND: number;
     declare const QUESTS_PER_SET: number;
+    declare const BASE_EP_YIELD: number;
+    declare const SHINY_EP_YIELD: number;
+    declare const DUNGEON_EP_YIELD: number;
+    declare const STONE_EP_YIELD: number;
+    declare const EP_EV_RATIO: number;
+    declare const EP_CHALLENGE_MODIFIER: number;
     declare const DNA_ITEM_CHANCE: number;
     declare enum GameState {
         idle,
@@ -174,13 +180,13 @@ namespace GameConstants {
     declare enum TypeEffectiveness {
         Immune,
         NotVery,
-        Normal,
+        Neutral,
         Very
     }
     declare enum TypeEffectivenessValue {
         Immune,
         NotVery,
-        Normal,
+        Neutral,
         Very
     }
     declare function humanifyString(str: string): string;
@@ -214,6 +220,7 @@ namespace GameConstants {
     declare const Environments: {
         Water: EnvironmentData,
         Ice: EnvironmentData,
+        Fire: EnvironmentData,
         Forest: EnvironmentData,
         Cave: EnvironmentData,
         GemCave: EnvironmentData,
@@ -268,7 +275,7 @@ namespace GameConstants {
         'xClick' = '',
         'Lucky_egg' = '',
         'Token_collector' = '',
-        'Item_magnet' = '',
+        'Dowsing_machine' = '',
         'Lucky_incense' = '',
     }
     declare enum FluteItemType {

@@ -225,6 +225,14 @@ export const QUEST_CLICKS_PER_SECOND = 5;
 
 export const QUESTS_PER_SET = 10;
 
+// EVs
+export const BASE_EP_YIELD = 1;
+export const SHINY_EP_YIELD = 5;
+export const DUNGEON_EP_YIELD = 2;
+export const STONE_EP_YIELD = 10;
+export const EP_EV_RATIO = 10;
+export const EP_CHALLENGE_MODIFIER = 10;
+
 /**
  * idle: The game is not doing anything, the battle view isn't shown
  * paused: The battle view is shown, but there are no game ticks
@@ -276,14 +284,14 @@ export enum Currency {
 export enum TypeEffectiveness {
     Immune,
     NotVery,
-    Normal,
+    Neutral,
     Very,
 }
 
 export enum TypeEffectivenessValue {
     Immune = 0,
     NotVery = 0.5,
-    Normal = 1,
+    Neutral = 1,
     Very = 2,
 }
 
@@ -506,6 +514,17 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.galar]: new Set(['Circhester', 20, 23, 24]),
     },
 
+    Fire: {
+        [Region.kanto]: new Set(['Cinnabar Island']),
+        [Region.johto]: new Set(),
+        [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater']),
+        [Region.sinnoh]: new Set(['Stark Mountain']),
+        [Region.unova]: new Set(['Reversal Mountain']),
+        [Region.kalos]: new Set(),
+        [Region.alola]: new Set([7, 'Wela Volcano Park']),
+        [Region.galar]: new Set(['Motostoke']),
+    },
+
     Forest: {
         [Region.kanto]: new Set([25, 'Fuchsia City', 'Viridian Forest']),
         [Region.johto]: new Set([36, 38, 43, 'Azalea Town', 'Ilex Forest']),
@@ -515,6 +534,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kalos]: new Set([1, 14, 20, 119, 'Laverre City', 'Santalune Forest', 'Pokémon Village', 'Delta Petalburg Woods']),
         [Region.alola]: new Set([27, 'Melemele Woods', 'Lush Jungle', 'Malie Garden', 'Ula\'ula Meadow', 'Poni Meadow']),
         [Region.galar]: new Set(['Slumbering Weald', 'Inner Slumbering Weald', 'Glimwood Tangle', 'Ballonlea', 4]),
+
     },
 
     Cave: {
@@ -522,17 +542,17 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt. Mortar', 'Dark Cave', 'Victory Road Johto']),
         [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Victory Road Hoenn', 'Seafloor Cavern']),
         [Region.sinnoh]: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
-        [Region.unova]: new Set(['Seaside Cave', 'Twist Mountain', 'Reversal Mountain', 'Relic Passage', 'Relic Castle', 'Victory Road Unova']),
+        [Region.unova]: new Set(['Seaside Cave', 'Twist Mountain', 'Relic Passage', 'Relic Castle', 'Victory Road Unova']),
         [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Terminus Cave', 'Victory Road Kalos', 'Delta Rustboro City', 'Delta Dewford Town', 'Delta Rusturf Tunnel', 'Delta Granite Cave', 'Delta Meteor Falls', 'Delta Victory Road Hoenn']),
-        [Region.alola]: new Set([7, 12, 22, 29, 'Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Wela Volcano Park', 'Diglett\'s Tunnel', 'Vast Poni Canyon']),
-        [Region.galar]: new Set(['Watchtower Ruins']),
+        [Region.alola]: new Set([12, 22, 29, 'Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon']),
+        [Region.galar]: new Set(),
     },
 
     GemCave: {
         [Region.kanto]: new Set(['Viridian City', 'Cerulean Cave']),
         [Region.johto]: new Set(['Blackthorn City', 'Mt. Silver', 'Whirl Islands']),
         [Region.hoenn]: new Set(['Cave of Origin', 'Sky Pillar', 'Sealed Chamber']),
-        [Region.sinnoh]: new Set(['Spear Pillar', 'Hall of Origin', 'Stark Mountain']),
+        [Region.sinnoh]: new Set(['Spear Pillar', 'Hall of Origin']),
         [Region.unova]: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
         [Region.kalos]: new Set(['Glittering Cave', 'Reflection Cave', 'Delta Cave of Origin', 'Delta Sky Pillar', 'Marine Cave', 'Terra Cave']),
         [Region.alola]: new Set(['Altar of the Sunne and Moone', 'Resolution Cave']),
@@ -540,20 +560,20 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     PowerPlant: {
-        [Region.kanto]: new Set(['Vermilion City', 'Power Plant']),
+        [Region.kanto]: new Set(['Vermilion City', 'Rocket Game Corner', 'Power Plant']),
         [Region.johto]: new Set(['Tin Tower', 'Team Rocket\'s Hideout', 'Radio Tower']),
         [Region.hoenn]: new Set(['Mauville City', 'New Mauville']),
         [Region.sinnoh]: new Set(['Team Galactic Eterna Building', 'Team Galactic HQ', 'Sunyshore City']),
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City']),
         [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Pokéball Factory', 'Team Flare Secret HQ', 'Delta Mauville City', 'Delta New Mauville']),
         [Region.alola]: new Set(['Aether Paradise', 'Hokulani Observatory', 'Aether Foundation']),
-        [Region.galar]: new Set(['Motostoke', 'Spikemuth']),
+        [Region.galar]: new Set(['Spikemuth']),
     },
 
     Mansion: {
-        [Region.kanto]: new Set(['Cinnabar Island', 'Pokémon Mansion']),
+        [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Burned Tower']),
-        [Region.hoenn]: new Set(['Lavaridge Town', 'Petalburg City', 'Mt. Chimney', 'Jagged Pass', 'Fiery Path', 'Mt. Chimney Crater']),
+        [Region.hoenn]: new Set(['Petalburg City', 'Jagged Pass']),
         [Region.sinnoh]: new Set(['Old Chateau', 'Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Liberty Garden', 'Dreamyard', 'Mistralton City', 'Opelucid City']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel', 'Delta Lavaridge Town', ' Delta Petalburg City', 'Delta Jagged Pass', 'Delta Fiery Path', 'Delta Mt. Chimney']),
@@ -578,6 +598,7 @@ export type Environment = keyof typeof Environments;
 export const EnvironmentCssClass: Record<Environment, string> = {
     Water: 'water',
     Ice: 'ice',
+    Fire: 'fire',
     Forest: 'forest',
     Cave: 'cave',
     GemCave: 'cave-gem',
@@ -633,7 +654,7 @@ export enum BattleItemType {
     'xClick' = 'xClick',
     'Lucky_egg' = 'Lucky_egg',
     'Token_collector' = 'Token_collector',
-    'Item_magnet' = 'Item_magnet',
+    'Dowsing_machine' = 'Dowsing_machine',
     'Lucky_incense' = 'Lucky_incense',
 }
 
@@ -898,7 +919,9 @@ export const KantoDungeons = [
     'Mt. Moon',
     'Diglett\'s Cave',
     'Rock Tunnel',
+    'Rocket Game Corner',
     'Pokémon Tower',
+    'Silph Co.',
     'Power Plant',
     'Seafoam Islands',
     'Pokémon Mansion',
@@ -1166,8 +1189,16 @@ export const RegionalStarters = [
 ];
 
 export const TemporaryBattles = [
+    'AZ',
     'Ultra Wormhole',
     'Ultra Megalopolis',
+    'Captain Mina',
+    'Captain Ilima',
+    'Captain Mallow',
+    'Captain Lana',
+    'Captain Kiawe',
+    'Captain Sophocles',
+    'Kahuna Nanu',
 ];
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

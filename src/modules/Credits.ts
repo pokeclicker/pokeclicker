@@ -41,6 +41,14 @@ export const SpriteCredits: Credit[] = [
         // Notes: Found in spritesheet description: "Feel free to use them, just give me credit."
     },
     {
+        name: 'Croak',
+        link: 'https://discordapp.com/users/206839451069054976/',
+        resources: [
+            'Plasma Frigate overworld sprite',
+        ],
+        // Notes: Made specifically for PokéClicker."
+    },
+    {
         name: 'DaleArwin',
         link: 'https://www.deviantart.com/dalearwin',
         resources: [
@@ -138,6 +146,14 @@ export const SpriteCredits: Credit[] = [
         // NOTES: Permission given to Krush via Discord DM
     },
     {
+        name: 'Kita',
+        link: 'https://discordapp.com/users/312651496766308352/',
+        resources: [
+            'Dynamic Background sprite recolors (shiny Bounsweet, nonshiny Decidueye, nonshiny Incineroar)',
+        ],
+        // Notes: This wording is a bit clunky, but information on who made the original later-gen DB sprites that these were based on doesn't seem to be available, so..."
+    },
+    {
         name: 'Krokotips',
         link: 'https://www.deviantart.com/krokotips',
         resources: [
@@ -205,6 +221,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://github.com/NiCeDiCe90',
         resources: [
             'Red Spearow',
+            'shiny Totem Ribombee',
             'Weather Institute world sprite',
         ],
         // NOTES: Created specifically for PokéClicker.
@@ -237,6 +254,7 @@ export const SpriteCredits: Credit[] = [
             'Santa Snorlax',
             'Spooky Bulbasaur',
             'Spooky Togepi',
+            'Totem Ribombee',
         ],
     },
     {
