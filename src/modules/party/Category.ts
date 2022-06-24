@@ -20,7 +20,7 @@ export default class PokemonCategories implements Saveable {
     defaults: Record<string, any> = {};
 
     public static initialize() {
-        this.addCategory('None', '#333'); // dark grey
+        this.addCategory('None', '#333333'); // dark grey
         this.addCategory('Favorite', '#e74c3c'); // red
     }
 
