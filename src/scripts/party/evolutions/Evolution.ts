@@ -37,7 +37,7 @@ abstract class Evolution {
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, true);
 
         if (shiny) {
-            App.game.logbook.newLog(LogBookTypes.SHINY, `Your ${this.basePokemon} evolved into a shiny ${evolvedPokemon}!`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `Your ${this.basePokemon} evolved into a shiny ${evolvedPokemon}! ${App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(evolvedPokemon).id, true) ? '(duplicate)' : ''}`);
         }
 
         return shiny;

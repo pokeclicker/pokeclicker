@@ -20,7 +20,7 @@ class PokemonItem extends CaughtIndicatingItem {
                 message: `✨ You obtained a shiny ${pokemonName}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
             });
-            App.game.logbook.newLog(LogBookTypes.SHINY, `The ${pokemonName} you bought turned out to be shiny!`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `The purchased ${pokemonName} turned out to be shiny! ${App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true) ? '(duplicate)' : ''}`);
         }
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(pokemonName).id, shiny, true);
     }
