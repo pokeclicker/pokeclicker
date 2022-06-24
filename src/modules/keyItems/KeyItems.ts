@@ -3,7 +3,9 @@ import KeyItemType from '../enums/KeyItemType';
 import Information from '../utilities/Information';
 import KeyItemController from './KeyItemController';
 import { Feature } from '../DataStore/common/Feature';
-import { getDungeonIndex, Region, ROUTE_KILLS_NEEDED } from '../GameConstants';
+import {
+    getDungeonIndex, Region, ROUTE_KILLS_NEEDED, Starter,
+} from '../GameConstants';
 
 export default class KeyItems implements Feature {
     name = 'Key Items';
@@ -95,6 +97,9 @@ export default class KeyItems implements Feature {
             new KeyItem(KeyItemType.DNA_splicers, 'A splicer that fuses certain Pokémon.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Giant Chasm')]() > 0,
                 undefined, undefined, 'DNA Splicers'),
+            new KeyItem(KeyItemType.Pokerus_virus, 'A virus sample collected from the Hatchery',
+                () => App.game.statistics.dungeonsCleared[getDungeonIndex('Distortion World')]() > 0,
+                undefined, () => { App.game.party.getPokemon(pokemonMap[(Starter[player.starter()])].id).pokerus = true; }, 'Pokerus Virus'),
         ];
     }
 

@@ -35,6 +35,8 @@ abstract class Evolution {
 
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, true);
+        const EPYield = (shiny ? GameConstants.STONE_EP_YIELD * 2 : GameConstants.STONE_EP_YIELD);
+        GameHelper.incrementObservable(App.game.statistics.effortPoints[PokemonHelper.getPokemonByName(evolvedPokemon).id], EPYield);
         return shiny;
     }
 

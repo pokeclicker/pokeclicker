@@ -540,7 +540,7 @@ class Update implements Saveable {
         '0.8.14': ({ playerData, saveData }) => {
             // Start Aqua Magma questline if player has Dynamo Badge already
             if (saveData.badgeCase[29]) {
-                saveData.quests.questLines.push({state: 1, name: 'Land vs Water', quest: 0});
+                saveData.quests.questLines.push({state: 1, name: 'Land vs. Water', quest: 0});
             }
 
             // Just incase statistics is not set
@@ -664,6 +664,7 @@ class Update implements Saveable {
                 delete saveData.statistics.shinyPokemonHatched[oldID];
             });
 
+
             playerData.mineInventory = playerData.mineInventory?.map(i => {
                 i.sellLocked = false;
                 return i;
@@ -689,7 +690,6 @@ class Update implements Saveable {
             // Add Sendoff Spring
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
         },
-
         '0.9.4': ({ playerData, saveData }) => {
             // Modifications relating to smaller save file sizes
             const PartyKeyMap = {
@@ -752,6 +752,13 @@ class Update implements Saveable {
             // Add Berry Forest
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 11);
 
+            // Rename Land vs. Water questline, so QuestLineCompletedRequirement will work
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'Land vs Water') {
+                    v.name = 'Land vs. Water';
+                }
+            });
+
             // Add AZ TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
 
@@ -762,6 +769,14 @@ class Update implements Saveable {
             // Give the players Dowsing Machines in place of Item Magnets
             playerData._itemList.Dowsing_machine = playerData._itemList.Item_magnet;
             delete playerData._itemList.Item_magnet;
+
+            // Start pokerus
+            setTimeout(async () => {
+                // Check if player wants to activate the new challenge modes
+                if (!await Notifier.confirm({ title: 'Slow EVs', message: 'New challenge mode added: Slow EVs.\n\nDiminishes the rate at which EVs are gained.\n\nThis is not the default and recommended way to play, and is an optional challenge.\n\nPlease choose if you would like this challenge mode to be disabled (reccomended, cannot be re-enabled later) or activated', confirm: 'Disable', cancel: 'Activate' })) {
+                    App.game.challenges.list.slowEVs.activate();
+                }
+            }, GameConstants.SECOND);
         },
     };
 
