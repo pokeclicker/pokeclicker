@@ -1,0 +1,53 @@
+
+<div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.temporaryBattle">
+    <div class="col no-gutters clickable" data-bind="click: function() {TemporaryBattleBattle.clickAttack()}" style="height: 220px; display: block;">
+        <h2 class="pageItemTitle" style="display: block;">
+
+            <knockout class="left">
+                <knockout data-bind="text: TemporaryBattleBattle.battle.name"></knockout>
+            </knockout>
+
+            <knockout>
+                <knockout data-bind="text: TemporaryBattleBattle.enemyPokemon().name">Pokémon name</knockout>
+            </knockout>
+
+            <knockout class="right">
+                <span data-bind="foreach: new Array(TemporaryBattleBattle.pokemonsDefeatedComputable())">
+                    <img src="assets/images/pokeball/Pokeball.svg" class="pokeball-smallest pokeball-defeated"/>
+                </span>
+                <span data-bind="foreach: new Array(TemporaryBattleBattle.pokemonsUndefeatedComputable())">
+                    <img src="assets/images/pokeball/Pokeball.svg" class="pokeball-smallest"/>
+                </span>
+            </knockout>
+
+            <div class="progress timer">
+                <div class="progress-bar bg-danger" role="progressbar"
+                     data-bind="attr:{ style: 'width:' + TemporaryBattleRunner.timeLeftPercentage() + '%' },
+                     css: { 'bg-danger': TemporaryBattleRunner.timeLeftSeconds() < 10, 'bg-primary': TemporaryBattleRunner.timeLeftSeconds() >= 10 }"
+                     aria-valuemin="0" aria-valuemax="100">
+                     <span data-bind="text: TemporaryBattleRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
+                </div>
+            </div>
+        </h2>
+
+        <div id="temporaryBattleGoContainer" data-bind="if: Settings.getSetting('showGymGoAnimation').observableValue">
+          <div class="row" style="display: inline-block; vertical-align: middle;">
+            <div class="col-sm-6 offset-sm-3">
+              <img style="width:100%" id="temporaryBattleGo" src="assets/gifs/go.gif">
+            </div>
+          </div>
+        </div>
+
+        <div>
+            <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(TemporaryBattleBattle.enemyPokemon(), TemporaryBattleBattle.enemyPokemon().shiny) }" src=""/>
+        </div>
+
+        <div class="progress hitpoints" style="height: 20px;">
+            <div class="progress-bar bg-danger" role="progressbar"
+                    data-bind="attr:{ style: 'width:' + TemporaryBattleBattle.enemyPokemon().healthPercentage() + '%' }"
+                    aria-valuemin="0" aria-valuemax="100">
+                <span data-bind="text: TemporaryBattleBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + TemporaryBattleBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+            </div>
+        </div>
+    </div>
+</div>

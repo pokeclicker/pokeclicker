@@ -393,6 +393,11 @@ img {
       background-position: top;
   }
 
+  &.fire {
+      background-image: url(../assets/images/battleBackground/fire.png);
+      background-position: 0px -20px;
+  }
+
   &.cave {
       background-image: url(../assets/images/battleBackground/cave.png);
       background-position: top;
@@ -545,6 +550,9 @@ td.tight {
 .bg-incomplete {
   background-color: var(--incomplete);
 }
+.bg-questAtLocation {
+    background-color: var(--questAtLocation);
+  }
 .bg-uncaughtPokemon {
   background-color: var(--uncaughtPokemon);
 }
@@ -578,4 +586,11 @@ td.tight {
 }
 .text-completed {
   color: var(--completed);
+}
+
+.animated-currency {
+  pointer-events: none;
+  position: absolute;
+  opacity: 1;
+  z-index: 50;
 }

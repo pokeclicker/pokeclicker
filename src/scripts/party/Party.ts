@@ -99,10 +99,10 @@ class Party implements Feature {
      * @returns {number} damage to be done.
      */
 
-    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeBreeding = false, useBaseAttack = false, includeWeather = true, ignoreLevel = false, includeFlute = true): number {
+    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeBreeding = false, useBaseAttack = false, overrideWeather?: WeatherType, ignoreLevel = false, includeFlute = true): number {
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
-            attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, includeWeather, ignoreLevel, includeFlute);
+            attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeFlute);
         }
 
         const bonus = this.multiplier.getBonus('pokemonAttack');
@@ -110,9 +110,9 @@ class Party implements Feature {
         return Math.round(attack * bonus);
     }
 
-    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, includeWeather = true, ignoreLevel = false, includeFlute = true): number {
+    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeFlute = true): number {
         let multiplier = 1, attack = 0;
-        const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : pokemon.attack);
+        const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : (pokemon.attack * (this.calculateEVAttackBonus(pokemon))));
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
 
         // Check if the pokemon is in their native region
@@ -134,19 +134,17 @@ class Party implements Feature {
             }
         }
 
-        // Should we take weather boost into account
-        if (includeWeather) {
-            const weather = Weather.weatherConditions[Weather.currentWeather()];
-            const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
-            weather.multipliers?.forEach(value => {
-                if (value.type == dataPokemon.type1) {
-                    attack *= value.multiplier;
-                }
-                if (value.type == dataPokemon.type2) {
-                    attack *= value.multiplier;
-                }
-            });
-        }
+        // Weather boost
+        const weather = Weather.weatherConditions[overrideWeather ?? Weather.currentWeather()];
+        const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+        weather.multipliers?.forEach(value => {
+            if (value.type == dataPokemon.type1) {
+                attack *= value.multiplier;
+            }
+            if (value.type == dataPokemon.type2) {
+                attack *= value.multiplier;
+            }
+        });
 
         // Should we take flute boost into account
         if (includeFlute) {
@@ -167,6 +165,19 @@ class Party implements Feature {
     public getRegionAttackMultiplier(highestRegion = player.highestRegion()): number {
         // between 0.2 -> 1 based on highest region
         return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
+    }
+
+    public getEffortValues(pokemon: PartyPokemon): KnockoutObservable<number> {
+        const power = App.game.challenges.list.slowEVs.active() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
+        return ko.observable(Math.floor(App.game.statistics.effortPoints[pokemon.id]() / GameConstants.EP_EV_RATIO / power));
+    }
+
+    public calculateEVAttackBonus(pokemon: PartyPokemon): number {
+        const EVs = this.getEffortValues(pokemon)();
+        if (!pokemon.pokerus) {
+            return 1;
+        }
+        return (EVs < 50) ? (1 + 0.01 * EVs) : (1 + Math.min(1, Math.pow((EVs - 30),0.075) - 0.75));
     }
 
     public pokemonAttackObservable: KnockoutComputed<number> = ko.pureComputed(() => {

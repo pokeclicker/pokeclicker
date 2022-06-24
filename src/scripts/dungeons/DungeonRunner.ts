@@ -5,6 +5,7 @@ class DungeonRunner {
     public static dungeon: Dungeon;
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.DUNGEON_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
+    public static timeBonus: KnockoutObservable<number> = ko.observable(1);
 
     public static fighting: KnockoutObservable<boolean> = ko.observable(false);
     public static map: DungeonMap;
@@ -32,8 +33,10 @@ class DungeonRunner {
         DungeonBattle.trainer(null);
         DungeonBattle.trainerPokemonIndex(0);
         DungeonBattle.enemyPokemon(null);
+        DungeonRunner.timeBonus(FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
+        DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME * this.timeBonus());
 
-        DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
+        DungeonRunner.timeLeftPercentage(100);
         // Dungeon size increases with each region
         let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + player.region;
         // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
@@ -60,8 +63,26 @@ class DungeonRunner {
                 this.dungeonLost();
             }
         }
-        this.timeLeft(this.timeLeft() - GameConstants.DUNGEON_TICK);
-        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.DUNGEON_TIME * 100));
+        if (this.map.playerMoved()) {
+            this.timeLeft(this.timeLeft() - GameConstants.DUNGEON_TICK);
+            this.timeLeftPercentage(Math.floor(this.timeLeft() / (GameConstants.DUNGEON_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
+        }
+        const currentFluteBonus = FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute);
+        if (currentFluteBonus != this.timeBonus()) {
+            if (currentFluteBonus > this.timeBonus()) {
+                if (this.timeBonus() === 1) {
+                    this.timeBonus(currentFluteBonus);
+                    this.timeLeft(this.timeLeft() * this.timeBonus());
+                } else {
+                    this.timeLeft(this.timeLeft() / this.timeBonus());
+                    this.timeBonus(currentFluteBonus);
+                    this.timeLeft(this.timeLeft() * this.timeBonus());
+                }
+            } else {
+                this.timeLeft(this.timeLeft() / this.timeBonus());
+                this.timeBonus(currentFluteBonus);
+            }
+        }
     }
 
     /**
@@ -93,7 +114,7 @@ class DungeonRunner {
         const loot = DungeonRunner.lootInput();
         let amount = loot.amount || 1;
 
-        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
+        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Dowsing_machine)()) {
             // Decreasing chance for rarer items (62.5% → 12.5%)
             const magnetChance = 0.5 / (4 / (loot.weight + 1));
             if (Rand.chance(magnetChance)) {
@@ -225,6 +246,12 @@ class DungeonRunner {
         const dungeonIndex = GameConstants.getDungeonIndex(dungeon.name);
         return AchievementHandler.achievementList.every(achievement => {
             return !(achievement.property instanceof ClearDungeonRequirement && achievement.property.dungeonIndex === dungeonIndex && !achievement.isCompleted());
+        });
+    }
+
+    public static isThereQuestAtLocation(dungeon: Dungeon) {
+        return App.game.quests.currentQuests().some(q => {
+            return q instanceof DefeatDungeonQuest && q.dungeon == dungeon.name;
         });
     }
 

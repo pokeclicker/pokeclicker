@@ -21,6 +21,8 @@ export const MIN_LOAD_TIME = 0.5 * SECOND;
 export const MAX_LOAD_TIME = 20 * SECOND;
 export const MUTATION_TICK = 1 * SECOND;
 export const WANDER_TICK = 1.5 * SECOND;
+export const TEMP_BATTLE_TIME = 60 * SECOND;
+export const TEMP_BATTLE_TICK = 0.1 * SECOND;
 
 export enum Region {
     none = -1,
@@ -223,6 +225,14 @@ export const QUEST_CLICKS_PER_SECOND = 5;
 
 export const QUESTS_PER_SET = 10;
 
+// EVs
+export const BASE_EP_YIELD = 1;
+export const SHINY_EP_YIELD = 5;
+export const DUNGEON_EP_YIELD = 2;
+export const STONE_EP_YIELD = 10;
+export const EP_EV_RATIO = 10;
+export const EP_CHALLENGE_MODIFIER = 10;
+
 /**
  * idle: The game is not doing anything, the battle view isn't shown
  * paused: The battle view is shown, but there are no game ticks
@@ -242,6 +252,7 @@ export enum GameState {
     town = 6,
     shop = 7,
     battleFrontier = 8,
+    temporaryBattle = 9,
 }
 
 export enum Pokeball {
@@ -273,14 +284,14 @@ export enum Currency {
 export enum TypeEffectiveness {
     Immune,
     NotVery,
-    Normal,
+    Neutral,
     Very,
 }
 
 export enum TypeEffectivenessValue {
     Immune = 0,
     NotVery = 0.5,
-    Normal = 1,
+    Neutral = 1,
     Very = 2,
 }
 
@@ -482,54 +493,65 @@ export const ACHIEVEMENT_DEFEAT_DUNGEON_VALUES = [
 export type EnvironmentData = Partial<Record<Region, Set<string | number>>>;
 export const Environments: Record<string, EnvironmentData> = {
     Water: {
-        [Region.kanto]: new Set(['Cerulean City', 19, 20, 21, 24]),
+        [Region.kanto]: new Set([12, 13, 19, 20, 21, 24, 'Cerulean City']),
         [Region.johto]: new Set([40, 41, 'Slowpoke Well']),
         [Region.hoenn]: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134]),
-        [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Lake Verity', 'Lake Valor', 'Pastoria City', 'Sendoff Spring']),
+        [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Pastoria City', 'Lake Verity', 'Lake Valor', 'Sendoff Spring']),
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City', 'Plasma Frigate']),
         [Region.kalos]: new Set([8, 23, 'Coumarine City', 'Couriway Town', 'Sea Spirit\'s Den']),
         [Region.alola]: new Set([15, 19, 20, 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
-        [Region.galar]: new Set(['Hulbury', 5, 6, 8, 9, 19, 21]),
+        [Region.galar]: new Set([5, 6, 8, 9, 19, 21, 'Hulbury']),
     },
 
     Ice: {
         [Region.kanto]: new Set(['Seafoam Islands']),
         [Region.johto]: new Set(['Mahogany Town', 'Ice Path']),
-        [Region.hoenn]: new Set(['Shoal Cave', 'Sootopolis City']),
-        [Region.sinnoh]: new Set([216, 217, 'Lake Acuity', 'Snowpoint City']),
-        [Region.unova]: new Set(['Giant Chasm', 'Plasma Assault']),
+        [Region.hoenn]: new Set(['Sootopolis City', 'Shoal Cave']),
+        [Region.sinnoh]: new Set([216, 217, 'Snowpoint City', 'Lake Acuity']),
+        [Region.unova]: new Set(['Giant Chasm', 'Team Plasma Assault']),
         [Region.kalos]: new Set([17, 'Dendemille Town', 'Snowbelle City', 'Frost Cavern']),
         [Region.alola]: new Set(['Mount Lanakila']),
         [Region.galar]: new Set(['Circhester', 20, 23, 24]),
+    },
+
+    Fire: {
+        [Region.kanto]: new Set(['Cinnabar Island']),
+        [Region.johto]: new Set(),
+        [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater']),
+        [Region.sinnoh]: new Set(['Stark Mountain']),
+        [Region.unova]: new Set(['Reversal Mountain']),
+        [Region.kalos]: new Set(),
+        [Region.alola]: new Set(['Wela Volcano Park']),
+        [Region.galar]: new Set(['Motostoke']),
     },
 
     Forest: {
         [Region.kanto]: new Set([25, 'Fuchsia City', 'Viridian Forest']),
         [Region.johto]: new Set([36, 38, 43, 'Azalea Town', 'Ilex Forest']),
         [Region.hoenn]: new Set([119, 'Petalburg Woods']),
-        [Region.sinnoh]: new Set([201, 204, 'Eterna Forest', 'Eterna City', 'Fullmoon Island', 'Newmoon Island']),
-        [Region.unova]: new Set([6, 'Lostlorn Forest', 'Pinwheel Forest', 'Pledge Grove', 'Floccesy Town']),
+        [Region.sinnoh]: new Set([201, 204, 'Eterna City', 'Eterna Forest', 'Fullmoon Island', 'Newmoon Island']),
+        [Region.unova]: new Set([6, 'Floccesy Town', 'Lostlorn Forest', 'Pinwheel Forest', 'Pledge Grove']),
         [Region.kalos]: new Set([1, 14, 20, 'Laverre City', 'Santalune Forest', 'Pokémon Village']),
         [Region.alola]: new Set([27, 'Melemele Woods', 'Lush Jungle', 'Malie Garden', 'Ula\'ula Meadow', 'Poni Meadow']),
-        [Region.galar]: new Set(['Slumbering Weald', 'Inner Slumbering Weald', 'Glimwood Tangle', 'Ballonlea', 4]),
+        [Region.galar]: new Set([4, 'Ballonlea', 'Slumbering Weald', 'Inner Slumbering Weald', 'Glimwood Tangle']),
     },
 
     Cave: {
-        [Region.kanto]: new Set(['Pewter City', 'Digletts Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road']),
-        [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave', 'Victory Road Johto']),
-        [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn', 'Seafloor Cavern']),
-        [Region.sinnoh]: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
-        [Region.unova]: new Set(['Seaside Cave', 'Twist Mountain', 'Reversal Mountain', 'Relic Passage', 'Relic Castle', 'Victory Road Unova']),
+        [Region.kanto]: new Set(['Pewter City', 'Diglett\'s Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road']),
+        [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt. Mortar', 'Dark Cave', 'Victory Road Johto']),
+        [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Seafloor Cavern', 'Victory Road Hoenn']),
+        [Region.sinnoh]: new Set(['Oreburgh City', 'Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
+        [Region.unova]: new Set(['Relic Castle', 'Relic Passage', 'Seaside Cave', 'Victory Road Unova', 'Twist Mountain']),
         [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Terminus Cave', 'Victory Road Kalos']),
-        [Region.alola]: new Set([7, 12, 22, 29, 'Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Wela Volcano Park', 'Diglett\'s Tunnel', 'Vast Poni Canyon']),
-        [Region.galar]: new Set(['Watchtower Ruins']),
+        [Region.alola]: new Set([12, 22, 29, 'Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon']),
+        [Region.galar]: new Set(),
     },
 
     GemCave: {
         [Region.kanto]: new Set(['Viridian City', 'Cerulean Cave']),
-        [Region.johto]: new Set(['Blackthorn City', 'Mt Silver', 'Whirl Islands']),
+        [Region.johto]: new Set(['Blackthorn City', 'Mt. Silver', 'Whirl Islands']),
         [Region.hoenn]: new Set(['Cave of Origin', 'Sky Pillar', 'Sealed Chamber']),
-        [Region.sinnoh]: new Set(['Spear Pillar', 'Hall of Origin', 'Stark Mountain']),
+        [Region.sinnoh]: new Set(['Spear Pillar', 'Hall of Origin']),
         [Region.unova]: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
         [Region.kalos]: new Set(['Glittering Cave', 'Reflection Cave']),
         [Region.alola]: new Set(['Altar of the Sunne and Moone', 'Resolution Cave']),
@@ -537,32 +559,32 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     PowerPlant: {
-        [Region.kanto]: new Set(['Vermilion City', 'Power Plant']),
-        [Region.johto]: new Set(['Tin Tower', 'Team Rockets Hideout', 'Radio Tower']),
-        [Region.hoenn]: new Set(['Mauville City']),
-        [Region.sinnoh]: new Set(['Team Galactic Eterna Building', 'Team Galactic HQ', 'Sunyshore City']),
+        [Region.kanto]: new Set(['Vermilion City', 'Rocket Game Corner', 'Power Plant']),
+        [Region.johto]: new Set(['Tin Tower', 'Team Rocket\'s Hideout', 'Radio Tower']),
+        [Region.hoenn]: new Set(['Mauville City', 'New Mauville', 'Weather Institute']),
+        [Region.sinnoh]: new Set(['Sunyshore City', 'Valley Windworks', 'Team Galactic Eterna Building', 'Team Galactic HQ']),
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City']),
         [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Pokéball Factory', 'Team Flare Secret HQ']),
         [Region.alola]: new Set(['Aether Paradise', 'Hokulani Observatory', 'Aether Foundation']),
-        [Region.galar]: new Set(['Motostoke', 'Spikemuth']),
+        [Region.galar]: new Set(['Spikemuth']),
     },
 
     Mansion: {
-        [Region.kanto]: new Set(['Cinnabar Island', 'Pokemon Mansion']),
+        [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Burned Tower']),
-        [Region.hoenn]: new Set(['Lavaridge Town', 'Petalburg City', 'Jagged Pass', 'Fiery Path', 'Mt. Chimney']),
-        [Region.sinnoh]: new Set(['Old Chateau', 'Veilstone City', 'Canalave City', 'Snowpoint Temple']),
-        [Region.unova]: new Set(['Castelia City', 'Liberty Garden', 'Dreamyard', 'Mistralton City', 'Opelucid City']),
+        [Region.hoenn]: new Set(['Petalburg City', 'Jagged Pass']),
+        [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
+        [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
-        [Region.alola]: new Set(['Trainers\' School', 'Ruins of Conflict', 'Ruins of Life', 'Thrifty Megamart', 'Po Town', 'Ruins of Abundance', 'Ruins of Hope']),
+        [Region.alola]: new Set(['Trainers\' School', 'Thrifty Megamart', 'Po Town', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
         [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side']),
     },
 
     Graveyard: {
-        [Region.kanto]: new Set(['Saffron City', 'Pokemon Tower']),
+        [Region.kanto]: new Set(['Saffron City', 'Pokémon Tower']),
         [Region.johto]: new Set(['Ecruteak City']),
         [Region.hoenn]: new Set(['Mossdeep City', 'Mt. Pyre']),
-        [Region.sinnoh]: new Set(['Hearthome City', 'Solaceon Ruins', 'Distortion World']),
+        [Region.sinnoh]: new Set(['Hearthome City', 'Old Chateau', 'Solaceon Ruins', 'Distortion World']),
         [Region.unova]: new Set(['Celestial Tower']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(['Hau\'oli Cemetery', 'Memorial Hill']),
@@ -575,6 +597,7 @@ export type Environment = keyof typeof Environments;
 export const EnvironmentCssClass: Record<Environment, string> = {
     Water: 'water',
     Ice: 'ice',
+    Fire: 'fire',
     Forest: 'forest',
     Cave: 'cave',
     GemCave: 'cave-gem',
@@ -630,23 +653,23 @@ export enum BattleItemType {
     'xClick' = 'xClick',
     'Lucky_egg' = 'Lucky_egg',
     'Token_collector' = 'Token_collector',
-    'Item_magnet' = 'Item_magnet',
+    'Dowsing_machine' = 'Dowsing_machine',
     'Lucky_incense' = 'Lucky_incense',
 }
 
 export enum FluteItemType {
+    'Yellow_Flute' = 'Yellow_Flute',
+    'Time_Flute' = 'Time_Flute',
+    'Black_Flute' = 'Black_Flute',
     'Red_Flute' = 'Red_Flute',
     'White_Flute' = 'White_Flute',
-    'Black_Flute' = 'Black_Flute',
-    'Yellow_Flute' = 'Yellow_Flute',
     'Blue_Flute' = 'Blue_Flute',
-    'Poke_Flute' = 'Poke_Flute',
-    'Azure_Flute' = 'Azure_Flute',
-    'Eon_Flute' = 'Eon_Flute',
-    'Sun_Flute' = 'Sun_Flute',
-    'Moon_Flute' = 'Moon_Flute',
-    'Time_Flute' = 'Time_Flute',
-    'Grass_Flute' = 'Grass_Flute',
+    // 'Poke_Flute' = 'Poke_Flute',
+    // 'Azure_Flute' = 'Azure_Flute',
+    // 'Eon_Flute' = 'Eon_Flute',
+    // 'Sun_Flute' = 'Sun_Flute',
+    // 'Moon_Flute' = 'Moon_Flute',
+    // 'Grass_Flute' = 'Grass_Flute',
 }
 
 export enum PokemonItemType {
@@ -706,17 +729,6 @@ export const EnergyRestoreEffect = {
     SmallRestore: 0.1,
     MediumRestore: 0.2,
     LargeRestore: 0.5,
-};
-
-export const KeyCodeToDirection = {
-    ArrowUp: 'up',
-    ArrowLeft: 'left',
-    ArrowDown: 'down',
-    ArrowRight: 'right',
-    W: 'up',
-    A: 'left',
-    S: 'down',
-    D: 'right',
 };
 
 export const FossilToPokemon = {
@@ -852,12 +864,10 @@ export const AlolaGyms = [
     'Kiawe\'s Trial',
     'Mallow\'s Trial',
     'Konikoni City',
-    'Aether Paradise',
     'Sophocles\' Trial',
     'Acerola\'s Trial',
     'Malie City',
     'Vast Poni Canyon Trial',
-    'Altar of the Sunne and Moone',
     'Mina\'s Trial',
     'Exeggutor Island',
     'Elite Molayne',
@@ -906,12 +916,14 @@ export function getGymRegion(gym: string): Region {
 export const KantoDungeons = [
     'Viridian Forest',
     'Mt. Moon',
-    'Digletts Cave',
+    'Diglett\'s Cave',
     'Rock Tunnel',
-    'Pokemon Tower',
+    'Rocket Game Corner',
+    'Pokémon Tower',
+    'Silph Co.',
     'Power Plant',
     'Seafoam Islands',
-    'Pokemon Mansion',
+    'Pokémon Mansion',
     'Victory Road',
     'Cerulean Cave',
 ];
@@ -925,13 +937,13 @@ export const JohtoDungeons = [
     'Burned Tower',
     'Tin Tower',
     'Whirl Islands',
-    'Mt Mortar',
-    'Team Rockets Hideout',
+    'Mt. Mortar',
+    'Team Rocket\'s Hideout',
     'Radio Tower',
     'Ice Path',
     'Dark Cave',
     'Victory Road Johto',
-    'Mt Silver',
+    'Mt. Silver',
 ];
 
 export const HoennDungeons = [
@@ -940,7 +952,7 @@ export const HoennDungeons = [
     'Granite Cave',
     'Fiery Path',
     'Meteor Falls',
-    'Mt. Chimney',
+    'Mt. Chimney Crater',
     'Jagged Pass',
     'New Mauville',
     'Weather Institute',
@@ -1149,3 +1161,41 @@ export const DockTowns = [
     'Hau\'oli City', // Alola
     'Hulbury', // Galar
 ];
+
+export const RegionalStarters = [
+    [1, 4, 7], // Kanto
+    [152, 155, 158], // Johto
+    [252, 255, 258], // Hoenn
+    [387, 390, 393], // Sinnoh
+    [495, 498, 501], // Unova
+    [650, 653, 656], // Kalos
+    [722, 725, 728], // Alola
+    [810, 813, 816], // Galar
+];
+
+export const TemporaryBattles = [
+    'AZ',
+    'Ultra Wormhole',
+    'Ultra Megalopolis',
+    'Captain Mina',
+    'Captain Ilima',
+    'Captain Mallow',
+    'Captain Lana',
+    'Captain Kiawe',
+    'Captain Sophocles',
+    'Kahuna Nanu',
+];
+
+export function getTemporaryBattlesIndex(temporaryBattle: string): number {
+    return TemporaryBattles.findIndex((t) => t === temporaryBattle);
+}
+
+export enum DayOfWeek {
+    'Sunday' = 0,
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+}
