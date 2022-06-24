@@ -73,7 +73,7 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(150, 'Medi
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(151, 'Deoxys (attack)'));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(160, 'Lucky_egg', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(170, 'Lucky_incense', 100));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(180, 'Item_magnet', 100));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(180, 'Dowsing_machine', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(190, 'Mystery_egg', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(200, 'LargeRestore', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(210, 'Water_stone', 40));

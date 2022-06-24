@@ -189,7 +189,7 @@ class HatcheryHelpers {
 
             // Check if the egg is ready to hatch
             if (egg.progress() >= 100 || egg.isNone()) {
-                egg.hatch(helper.attackEfficiency());
+                egg.hatch(helper.attackEfficiency(), true);
                 this.hatchery.eggList[index](new Egg());
 
                 // Check if there's a pokemon we can chuck into an egg

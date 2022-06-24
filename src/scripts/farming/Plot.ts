@@ -300,7 +300,7 @@ class Plot implements Saveable {
      * Returns how many berries will be harvested
      */
     harvestAmount(): number {
-        return this.berryData.harvestAmount * this.getHarvestMultiplier();
+        return Math.floor(this.berryData.harvestAmount * this.getHarvestMultiplier());
     }
 
     /**

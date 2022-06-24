@@ -35,10 +35,15 @@ abstract class Evolution {
 
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, true);
-
+        
+        // Add to logbook
         if (shiny) {
             App.game.logbook.newLog(LogBookTypes.SHINY, `Your ${this.basePokemon} evolved into a shiny ${evolvedPokemon}! ${App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(evolvedPokemon).id, true) ? '(duplicate)' : ''}`);
         }
+
+        // EVs
+        const EPYield = (shiny ? GameConstants.STONE_EP_YIELD * 2 : GameConstants.STONE_EP_YIELD);
+        GameHelper.incrementObservable(App.game.statistics.effortPoints[PokemonHelper.getPokemonByName(evolvedPokemon).id], EPYield);
 
         return shiny;
     }
