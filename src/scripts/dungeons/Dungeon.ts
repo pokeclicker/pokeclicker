@@ -6061,7 +6061,7 @@ dungeonList['Delta Fiery Path'] = new Dungeon('Delta Fiery Path',
     ['Diglett', 'Machop', 'Grimer', 'Koffing', 'Slugma', 'Tyrogue', 'Numel', 'Roggenrola'],
     [
         {loot: 'xAttack', weight: 3.75},
-        {loot: 'Item_magnet', weight: 3.75},
+        {loot: 'Dowsing_machine', weight: 3.75},
     ],
     10795422,
     [
@@ -6356,7 +6356,7 @@ dungeonList['Marine Cave'] = new Dungeon('Marine Cave',
     ['Zubat', 'Golbat', 'Geodude', 'Graveler', 'Slugma', 'Magcargo', 'Loudred', 'Numel', 'Camerupt', 'Torkoal', 'Roggenrola', 'Boldore'],
     [
         {loot: 'xClick', weight: 4},
-        {loot: 'Item_magnet', weight: 4},
+        {loot: 'Dowsing_machine', weight: 4},
     ],
     10795422,
     [
@@ -6372,7 +6372,7 @@ dungeonList['Terra Cave'] = new Dungeon('Terra Cave',
     ['Zubat', 'Golbat', 'Geodude', 'Graveler', 'Chinchou', 'Lanturn', 'Loudred', 'Wailord', 'Finneon', 'Lumineon', 'Roggenrola', 'Boldore'],
     [
         {loot: 'xClick', weight: 4},
-        {loot: 'Item_magnet', weight: 4},
+        {loot: 'Dowsing_machine', weight: 4},
     ],
     10795422,
     [
