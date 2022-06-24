@@ -17,7 +17,7 @@ You can reach out on discord to discuss your ideas and how to implement them: ht
 ## Rules
 - Make sure the build script is a success. We won't test PRs that fail the building script.
 - We won't accept balance PRs, unless it's from a developer or Code Contributor (discord roles).
-- Don't submit anything in the Docs-folder.
+- Don't submit any changes within the `/docs` folder.
 
 ## Editor/IDE setup
 
