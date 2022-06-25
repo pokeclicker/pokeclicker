@@ -154,6 +154,11 @@ class Mine {
     }
 
     public static survey() {
+        // Disable survey while loading new layer
+        if (this.loadingNewLayer == true) {
+            return;
+        }
+
         if (Mine.surveyResult()) {
             $('#mine-survey-result').tooltip('show');
             return;
@@ -256,6 +261,11 @@ class Mine {
     }
 
     public static bomb() {
+        // Disable bomb while loading new layer
+        if (this.loadingNewLayer == true) {
+            return;
+        }
+
         let tiles = App.game.underground.getBombEfficiency();
         if (App.game.underground.energy >= Underground.BOMB_ENERGY) {
             while (tiles-- > 0) {
@@ -401,7 +411,6 @@ class Mine {
     private static completed() {
         Notifier.notify({
             message: 'You dig deeper...',
-            type: NotificationConstants.NotificationOption.info,
         });
         ko.cleanNode(document.getElementById('mineBody'));
         App.game.oakItems.use(OakItemType.Explosive_Charge);
