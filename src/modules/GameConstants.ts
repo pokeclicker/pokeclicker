@@ -1174,6 +1174,7 @@ export const RegionalStarters = [
 ];
 
 export const TemporaryBattles = [
+    'Fighting Dojo',
     'AZ',
     'Ultra Wormhole',
     'Ultra Megalopolis',
