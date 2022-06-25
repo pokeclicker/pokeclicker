@@ -22,7 +22,9 @@ class TemporaryBattle extends TownContent {
         TemporaryBattleRunner.startBattle(this);
     }
     public areaStatus() {
-        if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.name)]() == 0) {
+        if (!this.isUnlocked()) {
+            return areaStatus.locked;
+        } else if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.name)]() == 0) {
             return areaStatus.unlockedUnfinished;
         } else {
             return areaStatus.completed;

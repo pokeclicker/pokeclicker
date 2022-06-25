@@ -146,6 +146,14 @@ export const SpriteCredits: Credit[] = [
         // NOTES: Permission given to Krush via Discord DM
     },
     {
+        name: 'Kita',
+        link: 'https://discordapp.com/users/312651496766308352/',
+        resources: [
+            'Dynamic Background sprite recolors (shiny Bounsweet, nonshiny Decidueye, nonshiny Incineroar)',
+        ],
+        // Notes: This wording is a bit clunky, but information on who made the original later-gen DB sprites that these were based on doesn't seem to be available, so..."
+    },
+    {
         name: 'Krokotips',
         link: 'https://www.deviantart.com/krokotips',
         resources: [
