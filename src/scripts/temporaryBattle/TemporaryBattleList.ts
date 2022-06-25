@@ -7,15 +7,17 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
         new GymPokemon('Hitmonchan', 108985, 37),
     ],
     'Hwa! Arrgh! Beaten!',
-    [new OneFromManyRequirement([
-        new GymBadgeRequirement(BadgeEnums.Rainbow),
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
-    ])],
+    [
+        new OneFromManyRequirement([
+            new GymBadgeRequirement(BadgeEnums.Rainbow),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
+    ]),
+    ],
     [],
     () => {
         BagHandler.gainItem({type: ItemType.item, id: 'Fighting_egg'}, 1);
         Notifier.notify({
-            message: `You were awarded a Fighting Egg for defeating the Fighting Dojo`,
+            message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo',
             type: NotificationConstants.NotificationOption.success,
             setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
         });
