@@ -2971,7 +2971,15 @@ dungeonList['Iron Island'] = new Dungeon('Iron Island',
                 new GymPokemon('Stunky', 701667, 34),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    66500, 218);
+    66500, 218,
+    () => {
+        BagHandler.gainItem({type: ItemType.item, id: 'Fighting_egg'}, 1);
+        Notifier.notify({
+            message: `You were awarded a Fighting Egg for defeating the Galactic Grunts`,
+            type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+        });
+    });
 
 dungeonList['Lake Valor'] = new Dungeon('Lake Valor',
     [
