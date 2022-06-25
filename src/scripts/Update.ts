@@ -751,7 +751,7 @@ class Update implements Saveable {
                 }
             });
 
-            // Add Black Belt Kiochi TemporaryBattle
+            // Add Fighting Dojo TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
             // Add AZ TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
