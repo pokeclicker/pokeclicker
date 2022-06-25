@@ -17,7 +17,13 @@ class CaptureSpecificPokemonQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Capture ${this.pokemon.name} Pokémon.`;
+        if (this.customDescription) {
+            return this.customDescription;
+        }
+        if (this.amount === 1) {
+            return `Capture ${this.pokemon.name}.`;
+        }
+        return `Capture ${this.pokemon.name} ${this.amount} times.`;
     }
 
     claim(): boolean {
