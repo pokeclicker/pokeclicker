@@ -39,14 +39,14 @@ class Gym extends TownContent {
     };
 
     public areaStatus(): areaStatus {
-        if (this.isUnlocked()) {
-            if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
-                return areaStatus.unlockedUnfinished;
-            } else if (this.isThereQuestAtLocation()) {
-                return areaStatus.questAtLocation;
-            } else if (!this.isAchievementsComplete()) {
-                return areaStatus.missingAchievement;
-            }
+        if (!this.isUnlocked()) {
+            return areaStatus.locked;
+        } else if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
+            return areaStatus.unlockedUnfinished;
+        } else if (this.isThereQuestAtLocation()) {
+            return areaStatus.questAtLocation;
+        } else if (!this.isAchievementsComplete()) {
+            return areaStatus.missingAchievement;
         }
         return areaStatus.completed;
     }
