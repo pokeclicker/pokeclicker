@@ -404,32 +404,37 @@ namespace GameConstants {
         'Friday',
         'Saturday',
     }
-    declare enum RoamerGroupsKanto {
+    declare enum KantoSubRegions {
         Kanto,
         Sevii123,
     }
-    declare enum RoamerGroupsJohto {
-        All,
+    declare enum JohtoSubRegions {
+        Johto,
     }
-    declare enum RoamerGroupsHoenn {
-        All,
+    declare enum HoennSubRegions {
+        Hoenn,
     }
-    declare enum RoamerGroupsSinnoh {
-        All,
+    declare enum SinnohSubRegions {
+        Sinnoh,
     }
-    declare enum RoamerGroupsUnova {
-        All,
+    declare enum UnovaSubRegions {
+        Unova,
     }
-    declare enum RoamerGroupsKalos {
-        All,
+    declare enum KalosSubRegions {
+        Kalos,
     }
-    declare enum RoamerGroupsAlola {
-        All,
+    declare enum AlolaSubRegions {
+        MelemeleIsland,
+        AkalaIsland,
+        UlaulaAndPoniIslands,
+        // UlaulaIsland,
+        // PoniIsland,
     }
-    declare enum RoamerGroupsGalar {
+    declare enum GalarSubRegions {
         Galar,
-        IsleofArmor,
+        // GalarSouth,
+        // GalarNorth,
+        IsleOfArmor,
         CrownTundra,
     }
-    declare const RoamerGroups: enum[];
 }

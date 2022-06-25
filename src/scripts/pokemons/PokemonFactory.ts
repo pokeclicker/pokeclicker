@@ -199,7 +199,7 @@ class PokemonFactory {
     }
 
     private static generateRoamingEncounter(region: GameConstants.Region, subRegion: SubRegion): PokemonNameType {
-        const possible = RoamingPokemonList.getSubRegionalGroupRoamers(region, subRegion.roamerSubRegionGroup);
+        const possible = RoamingPokemonList.getSubRegionalGroupRoamers(region, RoamingPokemonList.findGroup(region, subRegion.id));
 
         // Double the chance of encountering a roaming Pokemon you have not yet caught
         return Rand.fromWeightedArray(possible, possible.map(r => App.game.party.alreadyCaughtPokemonByName(r.pokemon.name) ? 1 : 2)).pokemon.name;
@@ -217,7 +217,7 @@ class PokemonFactory {
         }
 
         // There is likely to be a roamer available, so we can check this last
-        const roamingPokemon = RoamingPokemonList.getSubRegionalGroupRoamers(region, subRegion.roamerSubRegionGroup);
+        const roamingPokemon = RoamingPokemonList.getSubRegionalGroupRoamers(region, RoamingPokemonList.findGroup(region, subRegion.id));
         if (!routes || !routes.length || !roamingPokemon || !roamingPokemon.length) {
             return false;
         }
@@ -230,7 +230,7 @@ class PokemonFactory {
         const bonus = skipBonus ? 1 : App.game.multiplier.getBonus('roaming');
         const routeNum = MapHelper.normalizeRoute(curRoute?.number, region);
         // Check if we should have increased chances on this route (3 x rate)
-        const increasedChance = RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(player.region, subRegion.roamerSubRegionGroup)()?.number == curRoute?.number;
+        const increasedChance = RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(player.region, RoamingPokemonList.findGroup(region, subRegion.id))()?.number == curRoute?.number;
         const roamingChance = (max + ( (min - max) * (maxRoute - routeNum) / (maxRoute - minRoute))) / ((increasedChance ? 3 : 1) * bonus);
         return Rand.chance(roamingChance);
     }

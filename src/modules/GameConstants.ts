@@ -1202,49 +1202,44 @@ export enum DayOfWeek {
     'Saturday',
 }
 
-// Roamer groups
-export enum RoamerGroupsKanto {
+// Subregions
+export enum KantoSubRegions {
     Kanto = 0,
     Sevii123,
 }
 
-export enum RoamerGroupsJohto {
-    All = 0,
+export enum JohtoSubRegions {
+    Johto = 0,
 }
 
-export enum RoamerGroupsHoenn {
-    All = 0,
+export enum HoennSubRegions {
+    Hoenn = 0,
 }
 
-export enum RoamerGroupsSinnoh {
-    All = 0,
+export enum SinnohSubRegions {
+    Sinnoh = 0,
 }
 
-export enum RoamerGroupsUnova {
-    All = 0,
+export enum UnovaSubRegions {
+    Unova = 0,
 }
 
-export enum RoamerGroupsKalos {
-    All = 0,
+export enum KalosSubRegions {
+    Kalos = 0,
 }
 
-export enum RoamerGroupsAlola {
-    All = 0,
+export enum AlolaSubRegions {
+    MelemeleIsland = 0,
+    AkalaIsland,
+    UlaulaAndPoniIslands,
+    // UlaulaIsland,
+    // PoniIsland,
 }
 
-export enum RoamerGroupsGalar {
+export enum GalarSubRegions {
     Galar = 0,
-    IsleofArmor,
+    // GalarSouth = 0,
+    // GalarNorth,
+    IsleOfArmor,
     CrownTundra,
 }
-
-export const RoamerGroups = [
-    RoamerGroupsKanto,
-    RoamerGroupsJohto,
-    RoamerGroupsHoenn,
-    RoamerGroupsSinnoh,
-    RoamerGroupsUnova,
-    RoamerGroupsKalos,
-    RoamerGroupsAlola,
-    RoamerGroupsGalar,
-];

@@ -1,5 +1,4 @@
 import * as GameConstants from '../GameConstants';
-import SubRegions from '../subRegion/SubRegions';
 import RegionRoute from './RegionRoute';
 
 export default class Routes {
@@ -23,11 +22,6 @@ export default class Routes {
 
     public static getRoutesByRegion(region: GameConstants.Region): RegionRoute[] {
         return this.regionRoutes.filter((routeData) => routeData.region === region);
-    }
-
-    public static getRoutesBySubRegionRoamerGroup(region: GameConstants.Region, subRegionGroup: number): RegionRoute[] {
-        return this.regionRoutes.filter((routeData) => routeData.region === region
-            && SubRegions.getSubRegionById(routeData.region, routeData.subRegion ?? 0).roamerSubRegionGroup === subRegionGroup);
     }
 
     public static getRegionByRoute(route: number): GameConstants.Region {
