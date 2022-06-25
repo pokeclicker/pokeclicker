@@ -11,7 +11,7 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
         new OneFromManyRequirement([
             new GymBadgeRequirement(BadgeEnums.Rainbow),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
-    ]),
+        ]),
     ],
     [],
     () => {
