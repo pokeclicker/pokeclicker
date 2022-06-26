@@ -72,6 +72,16 @@ class Save {
         }
     }
 
+    public static copySaveToClipboard() {
+        const backupSaveData = {player, save: this.getSaveObject(), settings: Settings.toJSON()};
+        navigator.clipboard.writeText(btoa(JSON.stringify(backupSaveData)));
+        Notifier.notify({
+            title: 'Save copied',
+            message: 'Please paste the clipboard contents into a new \'.txt\' file.',
+            type: NotificationConstants.NotificationOption.info,
+        });
+    }
+
     public static async delete(): Promise<void> {
         const confirmDelete = await Notifier.prompt({
             title: 'Delete save file',
