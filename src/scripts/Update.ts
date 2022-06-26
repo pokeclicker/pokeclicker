@@ -734,23 +734,15 @@ class Update implements Saveable {
             if (saveData.statistics.temporaryBattleDefeated[1]) {
                 saveData.quests.questLines.push({state: 1, name: 'Mina\'s Trial', quest: 0});
             }
-            // Start Team Rocket Kanto questline if player has Cascade Badge already
-            if (saveData.badgeCase[2]) {
-                saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
-            }
-            // Start Sevii questline if player has Volcano Badge already
-            if (saveData.badgeCase[7]) {
-                saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
-            }
 
             // Add Rocket Game Corner
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 4);
             // Add Silph Co.
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 6);
-            // Add Mt. Ember Summit
-            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 10);
-            // Add Berry Forest
-            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 11);
+            // Start Team Rocket Kanto questline if player has Cascade Badge already
+            if (saveData.badgeCase[2]) {
+                saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
+            }
 
             // Rename Land vs. Water questline, so QuestLineCompletedRequirement will work
             saveData.quests.questLines.forEach(v => {
@@ -779,6 +771,18 @@ class Update implements Saveable {
                     App.game.challenges.list.slowEVs.activate();
                 }
             }, GameConstants.SECOND);
+        },
+
+        '0.9.7': ({ playerData, saveData }) => {
+            // Start Sevii questline if player has Volcano Badge already
+            if (saveData.badgeCase[7]) {
+                saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
+            }
+
+            // Add Mt. Ember Summit
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 10);
+            // Add Berry Forest
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 11);
         },
     };
 
