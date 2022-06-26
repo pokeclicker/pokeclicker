@@ -751,10 +751,8 @@ class Update implements Saveable {
                 }
             });
 
-            // Add Fighting Dojo TemporaryBattle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
             // Add AZ TemporaryBattle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
 
             //Replace Poison Barb with Rocky Helmet
             saveData.oakItems.Rocky_Helmet = saveData.oakItems.Poison_Barb;
@@ -773,6 +771,12 @@ class Update implements Saveable {
                     App.game.challenges.list.slowEVs.activate();
                 }
             }, GameConstants.SECOND);
+        },
+
+        '0.9.7': ({ playerData, saveData }) => {
+            // Add Fighting Dojo TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
+            
         },
     };
 
