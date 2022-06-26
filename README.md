@@ -14,6 +14,11 @@ You can reach out on discord to discuss your ideas and how to implement them: ht
 
 # Developer instructions
 
+## Rules
+- Make sure the build script is a success. We won't test PRs that fail the building script.
+- We won't accept balance PRs, unless it's from a developer or Code Contributor (discord roles).
+- Don't submit any changes within the `/docs` folder.
+
 ## Editor/IDE setup
 
 We have an [EditorConfig](https://editorconfig.org/) and linting configured, to help everyone write similar code. You will find our recommended plugins for VSCode below, however you should be able to find a plugin for other IDEs as well.
