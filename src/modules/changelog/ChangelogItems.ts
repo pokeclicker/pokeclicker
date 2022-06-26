@@ -18,6 +18,7 @@ const ChangelogItems = [
     new Changelog(changelogType.NEW, 'Currency lost animation'),
     new Changelog(changelogType.NEW, 'Save reminder notifications'),
     new Changelog(changelogType.NEW, 'Kanto Team Rocket quest line'),
+    new Changelog(changelogType.NEW, 'Mina\'s Trial quest line'),
     new Changelog(changelogType.NEW, 'Added EVs and Pokérus'),
     new Changelog(changelogType.CHANGE, 'Open links in a new tab'),
     new Changelog(changelogType.CHANGE, 'Buffed Diglett\'s cave'),
@@ -28,6 +29,9 @@ const ChangelogItems = [
     new Changelog(changelogType.CHANGE, 'Updated encounter environment backgrounds'),
     new Changelog(changelogType.CHANGE, 'Discord Pokémon can no longer be obtained before you reach the respective regions'),
     new Changelog(changelogType.CHANGE, 'Save data can be copied to clipboard if unable to download'),
+    new Changelog(changelogType.CHANGE, 'Changed Kanto encounters to follow Fire Red and Leaf Green instead of Yellow version'),
+    new Changelog(changelogType.CHANGE, 'Misc map changes'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
     new Changelog(changelogType.FIXED, 'Town and Route requirements'),
     new Changelog(changelogType.FIXED, 'Having negative quest amounts'),
     new Changelog(changelogType.FIXED, 'Unown (A) HP in Ruins of Alph'),
@@ -38,7 +42,6 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Some achievements not showing as completed'),
     new Changelog(changelogType.FIXED, 'Hatchery queue not filling empty slots occasionally'),
     new Changelog(changelogType.FIXED, 'Area completion status highlighting'),
-    new Changelog(changelogType.FIXED, 'Misc text changes'),
 
     // v0.9.5
     new ChangelogUpdate('v0.9.5', new Date(2022, 4, 26)),
