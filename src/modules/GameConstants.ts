@@ -225,6 +225,14 @@ export const QUEST_CLICKS_PER_SECOND = 5;
 
 export const QUESTS_PER_SET = 10;
 
+// EVs
+export const BASE_EP_YIELD = 1;
+export const SHINY_EP_YIELD = 5;
+export const DUNGEON_EP_YIELD = 2;
+export const STONE_EP_YIELD = 10;
+export const EP_EV_RATIO = 10;
+export const EP_CHALLENGE_MODIFIER = 10;
+
 /**
  * idle: The game is not doing anything, the battle view isn't shown
  * paused: The battle view is shown, but there are no game ticks
@@ -540,7 +548,7 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     PowerPlant: {
-        [Region.kanto]: new Set(['Vermilion City', 'Power Plant']),
+        [Region.kanto]: new Set(['Vermilion City', 'Rocket Game Corner', 'Power Plant']),
         [Region.johto]: new Set(['Tin Tower', 'Team Rocket\'s Hideout', 'Radio Tower']),
         [Region.hoenn]: new Set(['Mauville City']),
         [Region.sinnoh]: new Set(['Team Galactic Eterna Building', 'Team Galactic HQ', 'Sunyshore City']),
@@ -551,7 +559,7 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     Mansion: {
-        [Region.kanto]: new Set(['Cinnabar Island', 'Pokémon Mansion']),
+        [Region.kanto]: new Set(['Cinnabar Island', 'Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Burned Tower']),
         [Region.hoenn]: new Set(['Lavaridge Town', 'Petalburg City', 'Mt. Chimney', 'Jagged Pass', 'Fiery Path', 'Mt. Chimney Crater']),
         [Region.sinnoh]: new Set(['Old Chateau', 'Veilstone City', 'Canalave City', 'Snowpoint Temple']),
@@ -633,7 +641,7 @@ export enum BattleItemType {
     'xClick' = 'xClick',
     'Lucky_egg' = 'Lucky_egg',
     'Token_collector' = 'Token_collector',
-    'Item_magnet' = 'Item_magnet',
+    'Dowsing_machine' = 'Dowsing_machine',
     'Lucky_incense' = 'Lucky_incense',
 }
 
@@ -898,7 +906,9 @@ export const KantoDungeons = [
     'Mt. Moon',
     'Diglett\'s Cave',
     'Rock Tunnel',
+    'Rocket Game Corner',
     'Pokémon Tower',
+    'Silph Co.',
     'Power Plant',
     'Seafoam Islands',
     'Pokémon Mansion',
@@ -1152,6 +1162,7 @@ export const RegionalStarters = [
 ];
 
 export const TemporaryBattles = [
+    'AZ',
     'Ultra Wormhole',
     'Ultra Megalopolis',
     'Captain Mina',
