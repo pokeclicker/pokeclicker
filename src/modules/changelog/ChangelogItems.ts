@@ -10,6 +10,36 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.6
+    new ChangelogUpdate('v0.9.6', new Date(2022, 5, 26)),
+    new Changelog(changelogType.NEW, 'Able to disable offline money gains in settngs menu'),
+    new Changelog(changelogType.NEW, 'Added a some more NPCs to towns'),
+    new Changelog(changelogType.NEW, 'Able to filter Pokémon in Protein menu'),
+    new Changelog(changelogType.NEW, 'Currency lost animation'),
+    new Changelog(changelogType.NEW, 'Save reminder notifications'),
+    new Changelog(changelogType.NEW, 'Kanto Team Rocket quest line'),
+    new Changelog(changelogType.NEW, 'Added EVs and Pokérus'),
+    new Changelog(changelogType.CHANGE, 'Open links in a new tab'),
+    new Changelog(changelogType.CHANGE, 'Buffed Diglett\'s cave'),
+    new Changelog(changelogType.CHANGE, 'Roaming Pokémon encounters now use their own sound and notification'),
+    new Changelog(changelogType.CHANGE, 'Experience gain has been rebalanced'),
+    new Changelog(changelogType.CHANGE, 'Flutes have been adjusted'),
+    new Changelog(changelogType.CHANGE, 'Adjusted shops stock of items'),
+    new Changelog(changelogType.CHANGE, 'Updated encounter environment backgrounds'),
+    new Changelog(changelogType.CHANGE, 'Discord Pokémon can no longer be obtained before you reach the respective regions'),
+    new Changelog(changelogType.CHANGE, 'Save data can be copied to clipboard if unable to download'),
+    new Changelog(changelogType.FIXED, 'Town and Route requirements'),
+    new Changelog(changelogType.FIXED, 'Having negative quest amounts'),
+    new Changelog(changelogType.FIXED, 'Unown (A) HP in Ruins of Alph'),
+    new Changelog(changelogType.FIXED, 'Being able to leave the region early if pokédex challenge enabled'),
+    new Changelog(changelogType.FIXED, 'Some quest lines not starting when they should have'),
+    new Changelog(changelogType.FIXED, 'Farm hands being reset on reload'),
+    new Changelog(changelogType.FIXED, 'Some battle modals not closing'),
+    new Changelog(changelogType.FIXED, 'Some achievements not showing as completed'),
+    new Changelog(changelogType.FIXED, 'Hatchery queue not filling empty slots occasionally'),
+    new Changelog(changelogType.FIXED, 'Area completion status highlighting'),
+    new Changelog(changelogType.FIXED, 'Misc text changes'),
+
     // v0.9.5
     new ChangelogUpdate('v0.9.5', new Date(2022, 4, 26)),
     new Changelog(changelogType.FIXED, 'Starter modal appearing multiple times when grass type picked'),
