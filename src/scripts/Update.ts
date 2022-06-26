@@ -776,7 +776,6 @@ class Update implements Saveable {
         '0.9.7': ({ playerData, saveData }) => {
             // Add Fighting Dojo TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
-            
         },
     };
 
