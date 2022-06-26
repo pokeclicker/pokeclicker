@@ -772,6 +772,7 @@ class Update implements Saveable {
                 }
             }, GameConstants.SECOND);
         },
+
         '0.9.7': ({ playerData, saveData }) => {
             // Start Ash questline if the player has beaten Kalos champion
             if (saveData.badgeCase[78]) {
