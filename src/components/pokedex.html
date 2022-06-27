@@ -100,13 +100,12 @@ aria-labelledby="pokedexModalLabel">
                                 tooltip: {
                                     html: true,
                                     title: `<u>Information:</u>
-                                        <br/>Base Attack:
-                                        <strong>${$data.attack}</strong>
+                                        <br/>Base Attack: <strong>${$data.attack}</strong>
                                         <br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate, true)}%</strong>
                                         <br/>Hatch Steps: <strong>${App.game.breeding.getSteps($data.eggCycles).toLocaleString('en-US')}</strong>` +
                                         (App.game.party.getPokemon($data.id)?.pokerus ?
                                             `<br/>EVs: <strong>${App.game.party.getEffortValues(App.game.party.getPokemon($data.id))().toLocaleString('en-US')}</strong>
-                                            <br/>EV bonus: <strong>x${App.game.party.calculateEVAttackBonus(App.game.party.getPokemon($data.id)).toLocaleString('en-US')}</strong>`
+                                            <br/>EV bonus: <strong>×${App.game.party.calculateEVAttackBonus(App.game.party.getPokemon($data.id)).toLocaleString('en-US')}</strong>`
                                             : ''),
                                     trigger: 'hover',
                                     placement:'bottom'
