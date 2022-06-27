@@ -99,7 +99,7 @@ export default class KeyItems implements Feature {
                 undefined, undefined, 'DNA Splicers'),
             new KeyItem(KeyItemType.Pokerus_virus, 'A virus sample collected from the Hatchery',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Distortion World')]() > 0,
-                undefined, () => { App.game.party.getPokemon(pokemonMap[(Starter[player.starter()])].id).pokerus = true; }, 'Pokerus Virus'),
+                undefined, () => {}, 'Pokerus Virus', () => { App.game.party.getPokemon(pokemonMap[(Starter[player.starter()])].id).pokerus = true; }),
         ];
     }
 
@@ -112,10 +112,11 @@ export default class KeyItems implements Feature {
 
     gainKeyItem(item: KeyItemType, silent = false): void {
         if (!this.hasKeyItem(item)) {
+            this.itemList[item].unlock();
+            this.itemList[item].unlockRewardOnUnlock();
             if (!silent) {
                 KeyItemController.showGainModal(item);
             }
-            this.itemList[item].unlock();
         }
     }
 

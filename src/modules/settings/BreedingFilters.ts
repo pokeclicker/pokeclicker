@@ -50,8 +50,7 @@ const BreedingFilters: Record<string, FilterOption> = {
         'breedingRegionFilter',
         [
             new SettingOption('All', '-2'),
-            ...Settings.enumToSettingOptionArray(Region, (t) => t !== 'None'),
-            new SettingOption('None', '-1'),
+            ...Settings.enumToSettingOptionArray(Region, (t) => t !== 'none'),
         ],
     ),
 };
