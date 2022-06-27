@@ -33,6 +33,16 @@
                       <td class="text-left">Proteins Used</td>
                       <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).proteinsUsed() : 0).toLocaleString('en-US')">-</code></td>
                     </tr>
+                    <!-- ko if: App.game.party.getPokemon($data)?.pokerus -->
+                      <tr>
+                        <td class="text-left">EVs</td>
+                        <td class="text-left tight"><code data-bind="text: App.game.party.getEffortValues(App.game.party.getPokemon($data))().toLocaleString('en-US')">-</code></td>
+                      </tr>
+                      <tr>
+                        <td class="text-left">EV bonus</td>
+                        <td class="text-left tight"><code data-bind="text: '×' + App.game.party.calculateEVAttackBonus(App.game.party.getPokemon($data)).toLocaleString('en-US')">-</code></td>
+                      </tr>
+                    <!-- /ko -->
                     <tr>
                       <td class="text-left">Type</td>
                       <td class="text-left tight">
