@@ -411,6 +411,7 @@ class Mine {
     private static completed() {
         Notifier.notify({
             message: 'You dig deeper...',
+            type: NotificationConstants.NotificationOption.info,
         });
         ko.cleanNode(document.getElementById('mineBody'));
         App.game.oakItems.use(OakItemType.Explosive_Charge);
