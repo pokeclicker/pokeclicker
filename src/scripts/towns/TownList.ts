@@ -1357,7 +1357,7 @@ const FightAreaShop = new Shop([
 const SurvivalAreaShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['Ultraball'],,
+    ItemList['Ultraball'],
     ItemList['Electirizer'],
     ItemList['Magmarizer'],
 ]);
