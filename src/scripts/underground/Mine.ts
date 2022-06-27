@@ -262,7 +262,7 @@ class Mine {
 
     public static bomb() {
         // Disable bomb while loading new layer
-        if (this.loadingNewLayer == true) {
+        if (this.loadingNewLayer) {
             return;
         }
 
