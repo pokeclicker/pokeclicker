@@ -509,7 +509,57 @@ class QuestLineHelper {
         darkestDayQuestLine.addQuest(clearTheDarkestDay);
 
         App.game.quests.questLines().push(darkestDayQuestLine);
+    }
 
+    public static createSwordShieldQuestLine() {
+        const swordShieldQuestLine = new QuestLine('Sword and Shield', 'Stop the weapons from making a mess.');
+
+        const clearSordward1 = new CustomQuest(1, 0, 'A guy with weird hair has taken the Rusted Sword. Defeat him to take it back.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sordward1')]());
+        swordShieldQuestLine.addQuest(clearSordward1);
+
+        const clearShielbert1 = new CustomQuest(1, 0, 'A guy with weird hair has taken the Rusted Shield. Defeat him to take it back.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Shielbert1')]());
+        swordShieldQuestLine.addQuest(clearShielbert1);
+
+        const clearDynamaxTsareena = new CustomQuest(1, 0, 'Sordward and Shielbert are forcing Pokémon to Dynamax in Galar\'s Stadiums. First is a Tsareena in Turffield Stadium. Defeat it.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dynamax Tsareena')]());
+        swordShieldQuestLine.addQuest(clearDynamaxTsareena);
+
+        const clearDynamaxGyarados = new CustomQuest(1, 0, 'Sordward and Shielbert have forced a Gyarados to Dynamax in Hulbury Stadium. Defeat it as well.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dynamax Gyarados')]());
+        swordShieldQuestLine.addQuest(clearDynamaxGyarados);
+
+        const clearDynamaxTorkoal = new CustomQuest(1, 0, 'Sordward and Shielbert have forced a Torkoal to Dynamax in Motostoke Stadium. Defeat it as well.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dynamax Torkoal')]());
+        swordShieldQuestLine.addQuest(clearDynamaxTorkoal);
+
+        const clearSordwardandShielbert = new CustomQuest(1, 0, 'Sordward and Shielbert are trying to steal the Wishing Stars at Professor Magnolia\'s Lab. Stop them.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sordward & Shielbert')]());
+        swordShieldQuestLine.addQuest(clearSordwardandShielbert);
+
+        const clearDynamaxConkeldurr = new CustomQuest(1, 0, 'Sordward and Shielbert have forced a Conkeldurr and a Dusknoir to Dynamax in Stow-on-Side Stadium. Conkeldurr is blocking the way to Dusknoir, so deal with it first.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dynamax Conkeldurr')]());
+        swordShieldQuestLine.addQuest(clearDynamaxConkeldurr);
+
+        const clearDynamaxDusknoir = new CustomQuest(1, 0, 'Now the Conkeldurr is dealt with you can access the Dusknoir. Defeat it as well.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dynamax Dusknoir')]());
+        swordShieldQuestLine.addQuest(clearDynamaxDusknoir);
+
+        const clearGymLeaderBede2 = new CustomQuest(1, 0, 'There were Dynamax Pokémon at Ballonlea Stadium but Bede already defeated them. There are no more Dynamax Pokémon for now, and he wants to battle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Gym Leader Bede')]());
+        swordShieldQuestLine.addQuest(clearGymLeaderBede2);
+
+        const clearDynamaxGigalith = new CustomQuest(1, 0, 'Sordward and Shielbert have forced a Gigalith and a Froslass to Dynamax in Circhester Stadium. Gigalith is blocking the way to Froslass, so deal with it first.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dynamax Gigalith')]());
+        swordShieldQuestLine.addQuest(clearDynamaxGigalith);
+
+        const clearDynamaxFroslass = new CustomQuest(1, 0, 'Now the Gigalith is dealt with you can access the Froslass. Defeat it as well.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dynamax Froslass')]());
+        swordShieldQuestLine.addQuest(clearDynamaxFroslass);
+
+        const clearGymLeaderMarnie = new CustomQuest(1, 0, 'There are no more Dynamax Pokémon for now, and Marnie wants to battle you in Spikemuth.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Gym Leader Marnie')]());
+        swordShieldQuestLine.addQuest(clearGymLeaderMarnie);
+
+        const clearDynamaxHaxorus = new CustomQuest(1, 0, 'Sordward and Shielbert have forced a Haxorus to Dynamax in Hammerlocke Stadium. Hopefully this is the last one.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dynamax Haxorus')]());
+        swordShieldQuestLine.addQuest(clearDynamaxHaxorus);
+
+        const clearSordward2 = new CustomQuest(1, 0, 'Sordward is trying to make Zamazenta go on a rampage. Stop him.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sordward2')]());
+        swordShieldQuestLine.addQuest(clearSordward2);
+
+        const clearShielbert2 = new CustomQuest(1, 0, 'Shielbert is trying to make Zacian go on a rampage. Stop him.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Shielbert2')]());
+        swordShieldQuestLine.addQuest(clearShielbert2);
+
+        App.game.quests.questLines().push(swordShieldQuestLine);
     }
 
     // Event QuestLines
@@ -588,6 +638,7 @@ class QuestLineHelper {
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
         this.createDarkestDayQuestLine();
+        this.createSwordShieldQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
     }
 }
