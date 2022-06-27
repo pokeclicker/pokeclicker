@@ -106,7 +106,7 @@ aria-labelledby="pokedexModalLabel">
                                         <br/>Hatch Steps: <strong>${App.game.breeding.getSteps($data.eggCycles).toLocaleString('en-US')}</strong>` +
                                         (App.game.party.getPokemon($data.id)?.pokerus ?
                                             `<br/>EVs: <strong>${App.game.party.getEffortValues(App.game.party.getPokemon($data.id))()}</strong>
-                                            <br/>EV bonus: <strong>${App.game.party.calculateEVAttackBonus(App.game.party.getPokemon($data.id))}</strong>`
+                                            <br/>EV bonus: <strong>x${App.game.party.calculateEVAttackBonus(App.game.party.getPokemon($data.id))}</strong>`
                                             : ''),
                                     trigger: 'hover',
                                     placement:'bottom'
