@@ -1122,6 +1122,7 @@ export const GalarDungeons = [
     'Warm-Up Tunnel',
     'Tower of Darkness',
     'Tower of Water',
+    'Roaring-Sea Caves',
     'Rock Peak Ruins',
     'Iron Ruins',
     'Iceberg Ruins',
