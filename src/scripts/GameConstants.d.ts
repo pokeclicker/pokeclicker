@@ -459,6 +459,7 @@ namespace GameConstants {
         'Nuvema Town',
         'Camphrier Town',
         'Ambrette Town',
+        'Cyllage City',
         'Geosenge Town',
         'Shalour City',
         'Coumarine City',
