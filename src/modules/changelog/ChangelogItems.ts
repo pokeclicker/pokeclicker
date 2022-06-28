@@ -10,6 +10,21 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.7
+    new ChangelogUpdate('v0.9.7', new Date(2022, 5, 28)),
+    new Changelog(changelogType.NEW, 'Added Fighting Dojo to Saffron City'),
+    new Changelog(changelogType.CHANGE, 'Removed \'None\' region from hatchery filters'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some dungeons environments'),
+    new Changelog(changelogType.CHANGE, 'Updated Floette (Eternal) stats'),
+    new Changelog(changelogType.CHANGE, 'Display EV stats in pokédex'),
+    new Changelog(changelogType.CHANGE, 'Recieve fighting eggs from some fights'),
+    new Changelog(changelogType.FIXED, 'Survival Area shop breaking other shops'),
+    new Changelog(changelogType.FIXED, 'Incorrect trainer showing in dungeons'),
+    new Changelog(changelogType.FIXED, 'Fixed incorrect experience debuff'),
+    new Changelog(changelogType.FIXED, 'Not applying Pokérus if modal was not closed correctly'),
+    new Changelog(changelogType.FIXED, 'Can no longer bomb/survey before new layer loaded in the Underground'),
+    new Changelog(changelogType.FIXED, 'Missing town images'),
+
     // v0.9.6
     new ChangelogUpdate('v0.9.6', new Date(2022, 5, 26)),
     new Changelog(changelogType.NEW, 'Able to disable offline money gains in settngs menu'),
