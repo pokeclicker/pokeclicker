@@ -23,14 +23,17 @@ abstract class Evolution {
             return false;
         }
 
-        // Notify the player if they haven't already caught the evolution, or notifications are forced
         if (!App.game.party.alreadyCaughtPokemonByName(evolvedPokemon) || notification) {
+            // Notify the player if they haven't already caught the evolution, or notifications are forced
             Notifier.notify({
                 message: `Your ${this.basePokemon} evolved into a ${evolvedPokemon}`,
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
+            if (App.game.challenges.list.realEvolutions.active()) {
+                App.game.party.removePokemon(this.basePokemon);
+            }
         }
 
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
