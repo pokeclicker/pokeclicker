@@ -314,23 +314,23 @@ TemporaryBattleList['Shielbert1'] = new TemporaryBattle(
     'Oh... How can this be? My...my Pokémon...',
     [new TemporaryBattleRequirement('Sordward1')]
 );
-TemporaryBattleList['Dynamax Tsareena'] = new TemporaryBattle(
-    'Dynamax Tsareena',
+TemporaryBattleList['Rampaging Tsareena'] = new TemporaryBattle(
+    'Rampaging Tsareena',
     [new GymPokemon('Tsareena', 264590972, 60)],
-    'The Dynamax Tsareena fainted.',
+    'The Rampaging Tsareena fainted.',
     [new TemporaryBattleRequirement('Shielbert1')]
 );
-TemporaryBattleList['Dynamax Gyarados'] = new TemporaryBattle(
-    'Dynamax Gyarados',
+TemporaryBattleList['Rampaging Gyarados'] = new TemporaryBattle(
+    'Rampaging Gyarados',
     [new GymPokemon('Gyarados', 264590972, 60)],
-    'The Dynamax Gyarados fainted.',
-    [new TemporaryBattleRequirement('Dynamax Tsareena')]
+    'The Rampaging Gyarados fainted.',
+    [new TemporaryBattleRequirement('Rampaging Tsareena')]
 );
-TemporaryBattleList['Dynamax Torkoal'] = new TemporaryBattle(
-    'Dynamax Torkoal',
+TemporaryBattleList['Rampaging Torkoal'] = new TemporaryBattle(
+    'Rampaging Torkoal',
     [new GymPokemon('Torkoal', 264590972, 60)],
-    'The Dynamax Torkoal fainted.',
-    [new TemporaryBattleRequirement('Dynamax Gyarados')]
+    'The Rampaging Torkoal fainted.',
+    [new TemporaryBattleRequirement('Rampaging Gyarados')]
 );
 TemporaryBattleList['Sordward & Shielbert'] = new TemporaryBattle(
     'Sordward & Shielbert',
@@ -343,19 +343,19 @@ TemporaryBattleList['Sordward & Shielbert'] = new TemporaryBattle(
         new GymPokemon('Klinklang', 282601920, 60),
     ],
     'Quite the vexing predicament indeed, surely this must be some kind of mistake...',
-    [new TemporaryBattleRequirement('Dynamax Torkoal')]
+    [new TemporaryBattleRequirement('Rampaging Torkoal')]
 );
-TemporaryBattleList['Dynamax Conkeldurr'] = new TemporaryBattle(
-    'Dynamax Conkeldurr',
+TemporaryBattleList['Rampaging Conkeldurr'] = new TemporaryBattle(
+    'Rampaging Conkeldurr',
     [new GymPokemon('Conkeldurr', 264590972, 60)],
-    'The Dynamax Conkeldurr fainted.',
+    'The Rampaging Conkeldurr fainted.',
     [new TemporaryBattleRequirement('Sordward & Shielbert')]
 );
-TemporaryBattleList['Dynamax Dusknoir'] = new TemporaryBattle(
-    'Dynamax Dusknoir',
+TemporaryBattleList['Rampaging Dusknoir'] = new TemporaryBattle(
+    'Rampaging Dusknoir',
     [new GymPokemon('Dusknoir', 264590972, 60)],
-    'The Dynamax Dusknoir fainted.',
-    [new TemporaryBattleRequirement('Dynamax Conkeldurr')]
+    'The Rampaging Dusknoir fainted.',
+    [new TemporaryBattleRequirement('Rampaging Conkeldurr')]
 );
 TemporaryBattleList['Gym Leader Bede'] = new TemporaryBattle(
     'Gym Leader Bede',
@@ -366,19 +366,19 @@ TemporaryBattleList['Gym Leader Bede'] = new TemporaryBattle(
         new GymPokemon('Hatterene', 282601920, 63),
     ],
     'Thank you for the battle. I can now accept you as the Champion. It\'s painful to admit, but I\'ve come to realise a few of my weaknesses. But I\'ll keep getting stronger.',
-    [new TemporaryBattleRequirement('Dynamax Dusknoir')]
+    [new TemporaryBattleRequirement('Rampaging Dusknoir')]
 );
-TemporaryBattleList['Dynamax Gigalith'] = new TemporaryBattle(
-    'Dynamax Gigalith',
+TemporaryBattleList['Rampaging Gigalith'] = new TemporaryBattle(
+    'Rampaging Gigalith',
     [new GymPokemon('Gigalith', 264590972, 60)],
-    'The Dynamax Gigalith fainted.',
+    'The Rampaging Gigalith fainted.',
     [new TemporaryBattleRequirement('Gym Leader Bede')]
 );
-TemporaryBattleList['Dynamax Froslass'] = new TemporaryBattle(
-    'Dynamax Froslass',
+TemporaryBattleList['Rampaging Froslass'] = new TemporaryBattle(
+    'Rampaging Froslass',
     [new GymPokemon('Froslass', 264590972, 60)],
-    'The Dynamax Froslass fainted.',
-    [new TemporaryBattleRequirement('Dynamax Gigalith')]
+    'The Rampaging Froslass fainted.',
+    [new TemporaryBattleRequirement('Rampaging Gigalith')]
 );
 TemporaryBattleList['Gym Leader Marnie'] = new TemporaryBattle(
     'Gym Leader Marnie',
@@ -390,12 +390,12 @@ TemporaryBattleList['Gym Leader Marnie'] = new TemporaryBattle(
         new GymPokemon('Grimmsnarl', 282601920, 60),
     ],
     'Yeah I lost, but I\'m gonna learn from your battle style and everythin\'!',
-    [new TemporaryBattleRequirement('Dynamax Froslass')]
+    [new TemporaryBattleRequirement('Rampaging Froslass')]
 );
-TemporaryBattleList['Dynamax Haxorus'] = new TemporaryBattle(
-    'Dynamax Haxorus',
+TemporaryBattleList['Rampaging Haxorus'] = new TemporaryBattle(
+    'Rampaging Haxorus',
     [new GymPokemon('Haxorus', 264590972, 60)],
-    'The Dynamax Haxorus fainted.',
+    'The Rampaging Haxorus fainted.',
     [new TemporaryBattleRequirement('Gym Leader Marnie')]
 );
 TemporaryBattleList['Sordward2'] = new TemporaryBattle(
@@ -407,7 +407,7 @@ TemporaryBattleList['Sordward2'] = new TemporaryBattle(
         new GymPokemon('Bisharp', 282601920, 64),
     ],
     'Oho... My noble Pokémon...',
-    [new TemporaryBattleRequirement('Dynamax Haxorus')]
+    [new TemporaryBattleRequirement('Rampaging Haxorus')]
 );
 TemporaryBattleList['Shielbert2'] = new TemporaryBattle(
     'Shielbert2',
@@ -488,17 +488,6 @@ TemporaryBattleList['Avery3'] = new TemporaryBattle(
     ],
     'Oh, I should just Imprison myself for this!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
-);
-TemporaryBattleList['Dynamax Vespiquen'] = new TemporaryBattle(
-    'Dynamax Vespiquen',
-    [new GymPokemon('Vespiquen', 264590972, 60)],
-    'The Dynamax Vespiquen fainted and dropped a Max Honey!',
-    [
-        new MultiRequirement([
-            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Single Strike)']),
-            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Rapid Strike)']),
-        ]),
-    ]
 );
 TemporaryBattleList['Peony'] = new TemporaryBattle(
     'Peony',
