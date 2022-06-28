@@ -15316,12 +15316,12 @@ const pokemonList = createPokemonArray(
         'exp': 130,
         'catchRate': 120,
         'base': {
-            'hitpoints': 54,
-            'attack': 45,
-            'specialAttack': 75,
-            'defense': 47,
-            'specialDefense': 98,
-            'speed': 52,
+            'hitpoints': 74,
+            'attack': 65,
+            'specialAttack': 125,
+            'defense': 67,
+            'specialDefense': 128,
+            'speed': 92,
         },
     },
     {
