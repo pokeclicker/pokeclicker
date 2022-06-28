@@ -429,7 +429,7 @@ namespace GameConstants {
         'Pacifidlog Town',
         'Sootopolis City',
         'Ever Grande City',
-        'Jubilife City',
+        'Oreburgh City',
         'Floaroma Town',
         'Eterna City',
         'Hearthome City',
