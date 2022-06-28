@@ -23,6 +23,9 @@ class ShardDeal {
 
     public static canUse(town: GameConstants.ShardTraderLocations, i: number): boolean {
         const deal = ShardDeal.list[GameConstants.ShardTraderLocations[town]].peek()[i];
+        if(!deal) {
+            return false;
+        }
         if (ItemList[deal.item.itemType.name].isSoldOut()) {
             return false;
         } else if (deal.questPointCost > App.game.wallet.currencies[GameConstants.Currency.questPoint]()) {
@@ -279,6 +282,7 @@ class ShardDeal {
             ]
         );
     }
+    
     public static generateHoennDeals() {
         ShardDeal.list[GameConstants.ShardTraderLocations['Petalburg City']] = ko.observableArray(
             [
@@ -343,15 +347,12 @@ class ShardDeal {
                     ItemList['Grass_egg'],
                     1),
                 new ShardDeal(
-                    [
-                        {shardTypeString: 'Green Shard', amount: 50},
-                        {shardTypeString: 'Grey Shard', amount: 75},
-                    ],
+                    [{shardTypeString: 'Yellow Shard', amount: 100}],
                     ItemList['Thunder_stone'],
                     1),
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Yellow Shard', amount: 50},
+                        {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
                     ItemList['Soothe_bell'],
@@ -461,6 +462,7 @@ class ShardDeal {
             ]
         );
     }
+    
     public static generateSinnohDeals() {
         ShardDeal.list[GameConstants.ShardTraderLocations['Oreburgh City']] = ko.observableArray(
             [
@@ -710,6 +712,7 @@ class ShardDeal {
             ]
         );
     }
+
     public static generateUnovaDeals() {
         ShardDeal.list[GameConstants.ShardTraderLocations['Castelia City']] = ko.observableArray(
             [
@@ -790,6 +793,24 @@ class ShardDeal {
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
                     ItemList['Fire_egg'],
+                    1),
+            ]
+        );
+        ShardDeal.list[GameConstants.ShardTraderLocations['Undella Town']] = ko.observableArray(
+            [
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Red Shard', amount: 50},
+                        {shardTypeString: 'Ochre Shard', amount: 75},
+                    ],
+                    ItemList['Deepsea_tooth'],
+                    1),
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Green Shard', amount: 50},
+                        {shardTypeString: 'Ochre Shard', amount: 75},
+                    ],
+                    ItemList['Deepsea_scale'],
                     1),
             ]
         );
@@ -949,6 +970,7 @@ class ShardDeal {
             ]
         );
     }
+
     public static generateKalosDeals() {
         ShardDeal.list[GameConstants.ShardTraderLocations['Camphrier Town']] = ko.observableArray(
             [
@@ -1313,32 +1335,6 @@ class ShardDeal {
                         {shardTypeString: 'Purple Shard', amount: 75},
                     ],
                     ItemList['Upgrade'],
-                    1),
-            ]
-        );
-        ShardDeal.list[GameConstants.ShardTraderLocations['Malie City']] = ko.observableArray(
-            [
-                new ShardDeal(
-                    [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Electric_egg'],
-                    1),
-                new ShardDeal(
-                    [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Thunder_stone'],
-                    1),
-                new ShardDeal(
-                    [
-                        {shardTypeString: 'Yellow Shard', amount: 50},
-                        {shardTypeString: 'White Shard', amount: 75},
-                    ],
-                    ItemList['Electirizer'],
-                    1),
-                new ShardDeal(
-                    [
-                        {shardTypeString: 'Red Shard', amount: 50},
-                        {shardTypeString: 'White Shard', amount: 75},
-                    ],
-                    ItemList['Magmarizer'],
                     1),
             ]
         );
