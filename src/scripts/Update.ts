@@ -540,7 +540,7 @@ class Update implements Saveable {
         '0.8.14': ({ playerData, saveData }) => {
             // Start Aqua Magma questline if player has Dynamo Badge already
             if (saveData.badgeCase[29]) {
-                saveData.quests.questLines.push({state: 1, name: 'Land vs Water', quest: 0});
+                saveData.quests.questLines.push({state: 1, name: 'Land vs. Water', quest: 0});
             }
 
             // Just incase statistics is not set
@@ -744,6 +744,13 @@ class Update implements Saveable {
                 saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
             }
 
+            // Rename Land vs. Water questline, so QuestLineCompletedRequirement will work
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'Land vs Water') {
+                    v.name = 'Land vs. Water';
+                }
+            });
+
             // Add AZ TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
 
@@ -753,15 +760,46 @@ class Update implements Saveable {
 
             // Give the players Dowsing Machines in place of Item Magnets
             playerData._itemList.Dowsing_machine = playerData._itemList.Item_magnet;
+            playerData.effectList.Dowsing_machine = playerData.effectList.Item_magnet;
             delete playerData._itemList.Item_magnet;
+            delete playerData.effectList.Item_magnet;
 
             // Start pokerus
             setTimeout(async () => {
                 // Check if player wants to activate the new challenge modes
-                if (!await Notifier.confirm({ title: 'Slow EVs', message: 'New challenge mode added: Slow EVs.\n\nDiminishes the rate at which EVs are gained.\n\nThis is not the default and recommended way to play, and is an optional challenge.\n\nPlease choose if you would like this challenge mode to be disabled (reccomended, cannot be re-enabled later) or activated', confirm: 'Disable', cancel: 'Activate' })) {
+                if (!await Notifier.confirm({ title: 'Slow EVs', message: 'New challenge mode added: Slow EVs.\n\nDiminishes the rate at which EVs are gained.\n\nThis is an optional challenge and is NOT the recommended way to play.\n\nPlease choose if you would like this challenge mode to be disabled or enabled.\n\nCan be disabled later. Can NOT be enabled later!', confirm: 'Disable', cancel: 'Enable' })) {
                     App.game.challenges.list.slowEVs.activate();
                 }
             }, GameConstants.SECOND);
+        },
+
+        '0.9.7': ({ playerData, saveData }) => {
+            // Fix people not getting the pokerus
+            if (saveData.keyItems.Pokerus_virus) {
+                let starter;
+                switch (playerData.starter) {
+                    case 0:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 1);
+                        break;
+                    case 1:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 4);
+                        break;
+                    case 2:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 7);
+                        break;
+                    case 3:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 25);
+                        break;
+                }
+                starter[8] = true;
+            }
+
+            // Add Fighting Dojo TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
+        },
+
+        '0.9.8': ({ playerData, saveData }) => {
+            saveData.oakItemLoadouts = saveData.oakItemLoadouts.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
         },
     };
 
