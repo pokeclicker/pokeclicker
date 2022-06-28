@@ -172,7 +172,6 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
         },
     }
 );
-
 TemporaryBattleList['Captain Mina'] = new TemporaryBattle(
     'Captain Mina',
     [
@@ -246,7 +245,6 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
     '...',
     [new TemporaryBattleRequirement('Captain Sophocles')]
 );
-
 TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
     'Ash Ketchum Alola',
     [
