@@ -700,7 +700,7 @@ class ShardDeal {
             ]
         );
     }
-    
+
 /*
     }
     //Unova
