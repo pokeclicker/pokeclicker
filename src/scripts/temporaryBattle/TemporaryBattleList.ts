@@ -14,14 +14,16 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
         ]),
     ],
-    [],
-    () => {
-        BagHandler.gainItem({type: ItemType.item, id: 'Fighting_egg'}, 1);
-        Notifier.notify({
-            message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo',
-            type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
-        });
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Fighting_egg'}, 1);
+            Notifier.notify({
+                message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo',
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+            });
+        },
     }
 );
 // Kalos
