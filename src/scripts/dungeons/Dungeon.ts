@@ -7071,7 +7071,7 @@ dungeonList['Brawlers Cave'] = new Dungeon('Brawlers Cave',
     96500, 201);
 
 dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
-[
+    [
         new DungeonTrainer('Master Dojo',
             [new GymPokemon('Zorua', 17114462, 65)],
             { weight: 1 }, 'Student'),
