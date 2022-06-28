@@ -3351,7 +3351,7 @@ TownList['Stow-on-Side'] = new Town(
 TownList['Ballonlea'] = new Town(
     'Ballonlea',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Bede4'], BallonleaShop],
+    [TemporaryBattleList['Gym Leader Bede'], BallonleaShop],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glimwood Tangle'))],
     }
@@ -3375,7 +3375,7 @@ TownList['Circhester'] = new Town(
 TownList['Spikemuth'] = new Town(
     'Spikemuth',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Marnie2'], TemporaryBattleList['Marnie3'], SpikemuthShop],
+    [TemporaryBattleList['Marnie2'], TemporaryBattleList['Gym Leader Marnie'], SpikemuthShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 30)],
     }
