@@ -299,7 +299,7 @@ TownList['Celadon City'] = new Town(
 TownList['Saffron City'] = new Town(
     'Saffron City',
     GameConstants.Region.kanto,
-    [SaffronCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Saffron City']), new MoveToDungeon(dungeonList['Silph Co.'])],
+    [SaffronCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Saffron City']), new MoveToDungeon(dungeonList['Silph Co.']), TemporaryBattleList['Fighting Dojo']],
     {
         requirements: [new OneFromManyRequirement([
             new GymBadgeRequirement(BadgeEnums.Rainbow),
@@ -1363,7 +1363,7 @@ const FightAreaShop = new Shop([
 const SurvivalAreaShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['Ultraball'],,
+    ItemList['Ultraball'],
     ItemList['Electirizer'],
     ItemList['Magmarizer'],
 ]);
@@ -1964,6 +1964,14 @@ const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
     'I\'ve never seen it, but supposedly it works just like any evolution stone.',
 ]);
 
+const P2LaboratoryColress = new NPC('Colress', [
+    'So you defeated Ghetsis. Interesting. You must be a very strong trainer.',
+    'A rare Pokémon is hiding somewhere inside this abandoned laboratory. You can catch it if you want. I have no interest in it.',
+    'However, I do have an interest in you! I want to taste your power. Defeat me, and I\'ll let you search for the rare Pokémon.',
+    'I\'ll be waiting for you inside.',
+],
+{ requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'), GameConstants.AchievementOption.less ) });
+
 const UnovaRoamerNPC = new RoamerNPC('Professor Juniper\'s Aide', [
     'Our research indicates a higher concentration of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.unova);
@@ -2329,7 +2337,9 @@ TownList['Dreamyard'] = new DungeonTown(
 TownList['P2 Laboratory'] = new DungeonTown(
     'P2 Laboratory',
     GameConstants.Region.unova,
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 17)]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 17)],
+    [],
+    [P2LaboratoryColress]
 );
 
 //Kalos Shops

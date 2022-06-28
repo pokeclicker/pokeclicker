@@ -153,10 +153,10 @@ class Breeding implements Feature {
         return App.game.party.hasMaxLevelPokemon() && (this.hasFreeEggSlot() || this.hasFreeQueueSlot());
     }
 
-    public hasFreeEggSlot(): boolean {
+    public hasFreeEggSlot(isHelper = false): boolean {
         let counter = 0;
-        for (const egg of this._eggList) {
-            if (!egg().isNone()) {
+        for (let i = 0; i < this._eggList.length; i++) {
+            if (!this._eggList[i]().isNone() || (!isHelper && this.hatcheryHelpers.hired()[i])) {
                 counter++;
             }
         }
@@ -168,12 +168,12 @@ class Breeding implements Feature {
         return slots && this.queueList().length < slots;
     }
 
-    public gainEgg(e: Egg) {
+    public gainEgg(e: Egg, isHelper = false) {
         if (e.isNone()) {
             return false;
         }
         for (let i = 0; i < this._eggList.length; i++) {
-            if (this._eggList[i]().isNone()) {
+            if (this._eggList[i]().isNone() && (isHelper || !this.hatcheryHelpers.hired()[i])) {
                 this._eggList[i](e);
                 return true;
             }
@@ -203,10 +203,8 @@ class Breeding implements Feature {
             }
             const egg = this.eggList[index]();
             const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == egg.pokemon);
-            if (!egg.isNone()) {
-                if (partyPokemon.canCatchPokerus() && !partyPokemon.pokerus) {
-                    partyPokemon.pokerus = partyPokemon.calculatePokerus();
-                }
+            if (!egg.isNone() && partyPokemon && partyPokemon.canCatchPokerus() && !partyPokemon.pokerus) {
+                partyPokemon.pokerus = partyPokemon.calculatePokerus();
             }
             egg.addSteps(amount, this.multiplier);
             if (this.queueList().length && egg.progress() >= 100) {
@@ -260,8 +258,8 @@ class Breeding implements Feature {
         return false;
     }
 
-    public gainPokemonEgg(pokemon: PartyPokemon | PokemonListData): boolean {
-        if (!this.hasFreeEggSlot()) {
+    public gainPokemonEgg(pokemon: PartyPokemon | PokemonListData, isHelper = false): boolean {
+        if (!this.hasFreeEggSlot(isHelper)) {
             Notifier.notify({
                 message: 'You don\'t have any free egg slots',
                 type: NotificationConstants.NotificationOption.warning,
@@ -274,7 +272,7 @@ class Breeding implements Feature {
             pokemon.breeding = true;
         }
 
-        return this.gainEgg(egg);
+        return this.gainEgg(egg, isHelper);
     }
 
     public hatchPokemonEgg(index: number): void {
