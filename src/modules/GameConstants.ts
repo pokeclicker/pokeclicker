@@ -1199,3 +1199,9 @@ export enum DayOfWeek {
     'Friday',
     'Saturday',
 }
+
+export enum ChallengeType {
+    Recommended,
+    Hard,
+    Nightmare,
+}

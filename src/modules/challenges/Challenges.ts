@@ -1,5 +1,6 @@
 import { Saveable } from '../DataStore/common/Saveable';
 import Challenge from './Challenge';
+import { ChallengeType } from '../GameConstants';
 
 export default class Challenges implements Saveable {
     saveKey = 'challenges';
@@ -7,15 +8,16 @@ export default class Challenges implements Saveable {
     defaults: Record<string, any> = {};
 
     list: Record<string, Challenge> = {
-        regionalAttackDebuff: new Challenge('Regional Attack Debuff (recommended)', 'Lowers Pokémon attack based on native region and highest-reached region', true),
-        requireCompletePokedex: new Challenge('Require Complete Pokédex (recommended)', 'Requires a complete regional Pokédex before moving on to the next region', true),
-        disableClickAttack: new Challenge('No Click Attack', 'Disables the ability to use Click Attacks'),
-        disableBattleItems: new Challenge('No Battle Item', 'Disables the usage of Battle Items'),
-        disableMasterballs: new Challenge('No Masterball', 'Disables the usage of Masterballs'),
-        disableOakItems: new Challenge('No Oak Item', 'Disables the usage of all Oak Items'),
-        disableGems: new Challenge('No Gem', 'Disables the usage of Gems for increasing damage multipliers'),
-        disableProteins: new Challenge('No Protein', 'Disables the usage of Proteins'),
-        slowEVs: new Challenge('Slow EVs', 'Gain EVs 10x slower'),
+        regionalAttackDebuff: new Challenge('Regional Attack Debuff', 'Lowers Pokémon attack based on native region and highest-reached region', ChallengeType.Recommended),
+        requireCompletePokedex: new Challenge('Require Complete Pokédex', 'Requires a complete regional Pokédex before moving on to the next region', ChallengeType.Recommended),
+        disableClickAttack: new Challenge('No Click Attack', 'Disables the ability to use Click Attacks', ChallengeType.Hard),
+        disableBattleItems: new Challenge('No Battle Item', 'Disables the usage of Battle Items', ChallengeType.Hard),
+        disableMasterballs: new Challenge('No Masterball', 'Disables the usage of Masterballs', ChallengeType.Hard),
+        disableOakItems: new Challenge('No Oak Item', 'Disables the usage of all Oak Items', ChallengeType.Hard),
+        disableGems: new Challenge('No Gem', 'Disables the usage of Gems for increasing damage multipliers', ChallengeType.Hard),
+        disableProteins: new Challenge('No Protein', 'Disables the usage of Proteins', ChallengeType.Hard),
+        slowEVs: new Challenge('Slow EVs', 'Gain EVs 10x slower', ChallengeType.Hard),
+        requireCompleteShinyPokedex: new Challenge('Require Complete Shiny Pokédex', 'Requires a complete regional Shiny Pokédex before moving on to the next region', ChallengeType.Nightmare),
     };
 
     fromJSON(json): void {

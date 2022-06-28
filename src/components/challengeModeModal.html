@@ -13,14 +13,19 @@
                     Challenges can be disabled later, but cannot be re-enabled.
                 </p>
                 <br/>
-                <table class="table" width="100%">
-                    <tbody data-bind="foreach: Object.values(App.game.challenges.list)">
+                <table class="table" width="100%" data-bind="foreach: GameHelper.enumStrings(GameConstants.ChallengeType)">
+                    <thead>
+                        <tr>
+                            <th data-bind="text: $data" colspan="2"></th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: Object.values(App.game.challenges.list).filter(c => c.type == GameConstants.ChallengeType[$data])">
                         <tr data-bind="tooltip: {
                             title: $data.description,
                             placement: 'bottom',
                             trigger: 'hover'
                         }">
-                            <td class="text-left font-weight-bold" data-bind="text: $data.type"></td>
+                            <td class="text-left font-weight-bold" data-bind="text: $data.name"></td>
                             <td class="p-1">
                                 <!-- ko if: !$data.active() && player.starter() == GameConstants.Starter.None --><button class="btn btn-warning btn-block" data-bind="click: ()=>{$data.activate();}">ACTIVATE</button><!-- /ko -->
                                 <!-- ko if: !$data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-secondary btn-block disabled">DISABLED</button><!-- /ko -->

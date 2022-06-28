@@ -3,16 +3,17 @@ import {
 } from 'knockout';
 import * as GameConstants from '../GameConstants';
 import Notifier from '../notifications/Notifier';
+import { ChallengeType } from '../GameConstants';
 
 export default class Challenge {
     public active: KnockoutObservable<boolean>;
 
     constructor(
-        public type: string,
+        public name: string,
         public description: string,
-        active = false,
+        public type: ChallengeType,
     ) {
-        this.active = ko.observable(active);
+        this.active = ko.observable(type === ChallengeType.Recommended);
     }
 
     activate(): void {
@@ -28,7 +29,7 @@ export default class Challenge {
 
         // Confirm they want to disable the challenge mode
         if (await Notifier.confirm({
-            title: `Disable "${this.type}" challenge`,
+            title: `Disable "${this.name}" challenge`,
             message: 'Are you sure you want to disable this challenge?\n\nOnce disabled, you will not be able to enable it again later!',
         })) {
             this.active(false);

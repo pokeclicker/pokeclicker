@@ -404,4 +404,9 @@ namespace GameConstants {
         'Friday',
         'Saturday',
     }
+    declare enum ChallengeType {
+        Recommended,
+        Hard,
+        Nightmare,
+    }
 }
