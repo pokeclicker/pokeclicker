@@ -553,10 +553,10 @@ class QuestLineHelper {
         const clearDynamaxHaxorus = new CustomQuest(1, 0, 'Sordward and Shielbert have forced a Haxorus to Dynamax in Hammerlocke Stadium. Hopefully this is the last one.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dynamax Haxorus')]());
         swordShieldQuestLine.addQuest(clearDynamaxHaxorus);
 
-        const clearSordward2 = new CustomQuest(1, 0, 'Sordward is trying to make Zacian go on a rampage. Stop him.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sordward2')]());
+        const clearSordward2 = new CustomQuest(1, 0, 'Sordward is trying to make Zacian go on a rampage in the Energy Plant. Stop him.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sordward2')]());
         swordShieldQuestLine.addQuest(clearSordward2);
 
-        const clearShielbert2 = new CustomQuest(1, 0, 'Shielbert is trying to make Zamazenta go on a rampage. Stop him.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Shielbert2')]());
+        const clearShielbert2 = new CustomQuest(1, 0, 'Shielbert is trying to make Zamazenta go on a rampage in the Energy Plant. Stop him.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Shielbert2')]());
         swordShieldQuestLine.addQuest(clearShielbert2);
 
         App.game.quests.questLines().push(swordShieldQuestLine);
