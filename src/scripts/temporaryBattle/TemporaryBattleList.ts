@@ -19,7 +19,7 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
         Notifier.notify({
             message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo',
             type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+            setting: NotificationConstants.NotificationSetting.Dungeons.dungeon_item_found,
         });
     }
 );
