@@ -53,12 +53,14 @@ export default class OakItemLoadouts implements Saveable {
 
     fromJSON(json: Array<{name: string, loadout: Array<number>}>) {
         json?.forEach((loadout, index) => {
-            this.loadouts[index] = new OakItemLoadout(loadout.name, loadout.loadout);
+            this.loadouts[index] = new OakItemLoadout(decodeURI(loadout.name), loadout.loadout);
         });
     }
 
-    // eslint-disable-next-line class-methods-use-this
     toJSON() {
-        return ko.toJS(App.game.oakItemLoadouts.loadouts);
+        return ko.toJS(this.loadouts.map((loadout) => ({
+            ...loadout,
+            name: encodeURI(loadout.name()),
+        })));
     }
 }
