@@ -26,6 +26,7 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
         },
     }
 );
+
 // Kalos
 TemporaryBattleList['AZ'] = new TemporaryBattle(
     'AZ',
@@ -43,7 +44,6 @@ TemporaryBattleList['AZ'] = new TemporaryBattle(
         },
     }
 );
-
 TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
     'Ash Ketchum Kanto',
     [
