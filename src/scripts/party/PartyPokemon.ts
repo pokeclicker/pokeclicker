@@ -80,7 +80,7 @@ class PartyPokemon implements Saveable {
         return App.game.breeding.eggList.some(e => {
             if (!e().canHatch() && !e().isNone() && e().pokemon == GameConstants.Starter[player.starter()]) {
                 App.game.breeding.eggList.forEach(p => {
-                    const pokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(p().pokemon).id);
+                    const pokemon = p().partyPokemon;
                     if (pokemon && pokemon.pokerus == 0) {
                         pokemon.pokerus++;
                     }

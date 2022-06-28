@@ -13,6 +13,7 @@ class Egg implements Saveable {
     progress: KnockoutComputed<number>;
     progressText: KnockoutComputed<string>;
     stepsRemaining: KnockoutComputed<number>;
+    partyPokemon: PartyPokemon;
 
     constructor(
         public type = EggType.None,
@@ -24,6 +25,7 @@ class Egg implements Saveable {
     ) {
         this.steps = ko.observable(steps);
         this.init();
+        this.partyPokemon = type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonByName(pokemon).id) : null;
     }
 
     private init() {

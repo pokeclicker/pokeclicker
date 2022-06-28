@@ -113,7 +113,7 @@
                       <td class="text-left">Shinies Hatched</td>
                       <td class="text-left tight"><code data-bind="text: App.game.statistics.shinyPokemonHatched[$data]().toLocaleString('en-US')">-</code></td>
                     </tr>
-                    <!-- ko if: App.game.party.getPokemon($data).?pokerus >= 2 -->
+                    <!-- ko if: App.game.party.getPokemon($data)?.pokerus >= 2 -->
                     <tr>
                       <td class="text-left">Effort Values</td>
                       <td class="text-left tight"><code data-bind="text: App.game.party.getEffortValues(App.game.party.getPokemon($data))().toLocaleString('en-US')">-</code></td>
