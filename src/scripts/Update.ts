@@ -798,7 +798,7 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
         },
 
-        '0.9.7': ({ playerData, saveData }) => {
+        '0.9.8': ({ playerData, saveData }) => {
             saveData.oakItemLoadouts = saveData.oakItemLoadouts.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
         },
     };
