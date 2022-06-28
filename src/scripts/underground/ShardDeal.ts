@@ -100,7 +100,7 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Yellow Shard', amount: 100},
+                        {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
                     ItemList['Fighting_egg'],
@@ -229,6 +229,13 @@ class ShardDeal {
                     1),
                 new ShardDeal(
                     [
+                        {shardTypeString: 'Green Shard', amount: 50},
+                        {shardTypeString: 'Blue Shard', amount: 50},
+                    ],
+                    ItemList['Moon_stone'],
+                    1),
+                new ShardDeal(
+                    [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
@@ -275,6 +282,7 @@ class ShardDeal {
             ]
         );
     }
+    
     public static generateHoennDeals() {
         ShardDeal.list[GameConstants.ShardTraderLocations['Petalburg City']] = ko.observableArray(
             [
@@ -325,7 +333,7 @@ class ShardDeal {
                     1),
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Yellow Shard', amount: 100},
+                        {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
                     ItemList['Metal_coat'],
@@ -358,7 +366,7 @@ class ShardDeal {
                     ItemList['Fire_egg'],
                     1),
                 new ShardDeal(
-                    [{shardTypeString: 'Red Shard', amount: 75}],
+                    [{shardTypeString: 'Red Shard', amount: 100}],
                     ItemList['Fire_stone'],
                     1),
             ]
@@ -428,7 +436,7 @@ class ShardDeal {
         ShardDeal.list[GameConstants.ShardTraderLocations['Sootopolis City']] = ko.observableArray(
             [
                 new ShardDeal(
-                    [{shardTypeString: 'Blue Shard', amount: 75}],
+                    [{shardTypeString: 'Blue Shard', amount: 100}],
                     ItemList['Water_egg'],
                     1),
             ]
@@ -454,9 +462,9 @@ class ShardDeal {
             ]
         );
     }
-
+    
     public static generateSinnohDeals() {
-        ShardDeal.list[GameConstants.ShardTraderLocations['Jubilife City']] = ko.observableArray(
+        ShardDeal.list[GameConstants.ShardTraderLocations['Oreburgh City']] = ko.observableArray(
             [
                 new ShardDeal(
                     [
@@ -478,17 +486,17 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Blue Shard', amount: 50},
-                        {shardTypeString: 'Grey Shard', amount: 75},
-                    ],
-                    ItemList['Kings_rock'],
-                    1),
-                new ShardDeal(
-                    [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Yellow Shard', amount: 50},
                     ],
                     ItemList['Trade_stone'],
+                    1),
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Blue Shard', amount: 50},
+                        {shardTypeString: 'Grey Shard', amount: 75},
+                    ],
+                    ItemList['Kings_rock'],
                     1),
             ]
         );
@@ -507,13 +515,6 @@ class ShardDeal {
         ShardDeal.list[GameConstants.ShardTraderLocations['Hearthome City']] = ko.observableArray(
             [
                 new ShardDeal(
-                    [
-                        {shardTypeString: 'Green Shard', amount: 50},
-                        {shardTypeString: 'Grey Shard', amount: 75},
-                    ],
-                    ItemList['Soothe_bell'],
-                    1),
-                new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
                     ItemList['Fire_egg'],
                     1),
@@ -521,21 +522,28 @@ class ShardDeal {
                     [{shardTypeString: 'Red Shard', amount: 100}],
                     ItemList['Fire_stone'],
                     1),
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Green Shard', amount: 50},
+                        {shardTypeString: 'Grey Shard', amount: 75},
+                    ],
+                    ItemList['Soothe_bell'],
+                    1),
             ]
         );
         ShardDeal.list[GameConstants.ShardTraderLocations['Solaceon Town']] = ko.observableArray(
             [
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Green Shard', amount: 50},
+                        {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Crimson Shard', amount: 75},
                     ],
-                    ItemList['Dawn_stone'],
+                    ItemList['Shiny_stone'],
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
-                        {shardTypeString: 'Yellow Shard', amount: 75},
+                        {shardTypeString: 'Crimson Shard', amount: 75},
                     ],
                     ItemList['Dusk_stone'],
                     1),
@@ -544,7 +552,7 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Crimson Shard', amount: 75},
                     ],
-                    ItemList['Shiny_stone'],
+                    ItemList['Dawn_stone'],
                     1),
             ]
         );
@@ -632,6 +640,10 @@ class ShardDeal {
                     ],
                     ItemList['Upgrade'],
                     1),
+            ]
+        );
+        ShardDeal.list[GameConstants.ShardTraderLocations['Sunyshore City']] = ko.observableArray(
+            [
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
                     ItemList['Electric_egg'],
@@ -642,14 +654,14 @@ class ShardDeal {
                     1),
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Green Shard', amount: 50},
+                        {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Deepsea_scale'],
+                    ItemList['Deepsea_tooth'],
                     1),
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Red Shard', amount: 50},
+                        {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
                     ItemList['Deepsea_scale'],
@@ -678,10 +690,10 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Blue Shard', amount: 50},
+                        {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Reaper_cloth'],
+                    ItemList['Protector'],
                     1),
                 new ShardDeal(
                     [
@@ -692,10 +704,10 @@ class ShardDeal {
                     1),
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Green Shard', amount: 50},
+                        {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Protector'],
+                    ItemList['Reaper_cloth'],
                     1),
             ]
         );
@@ -740,24 +752,6 @@ class ShardDeal {
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
                     ItemList['Metal_coat'],
-                    1),
-            ]
-        );
-        ShardDeal.list[GameConstants.ShardTraderLocations['Driftveil City']] = ko.observableArray(
-            [
-                new ShardDeal(
-                    [
-                        {shardTypeString: 'Red Shard', amount: 50},
-                        {shardTypeString: 'Lime Shard', amount: 75},
-                    ],
-                    ItemList['Razor_claw'],
-                    1),
-                new ShardDeal(
-                    [
-                        {shardTypeString: 'Blue Shard', amount: 50},
-                        {shardTypeString: 'Lime Shard', amount: 75},
-                    ],
-                    ItemList['Razor_fang'],
                     1),
             ]
         );
@@ -860,7 +854,6 @@ class ShardDeal {
                     ],
                     ItemList['Prism_scale'],
                     1),
-
             ]
         );
         ShardDeal.list[GameConstants.ShardTraderLocations['Icirrus City']] = ko.observableArray(
@@ -978,8 +971,6 @@ class ShardDeal {
         );
     }
 
-
-
     public static generateKalosDeals() {
         ShardDeal.list[GameConstants.ShardTraderLocations['Camphrier Town']] = ko.observableArray(
             [
@@ -1080,13 +1071,6 @@ class ShardDeal {
                 new ShardDeal(
                     [
                         {shardTypeString: 'Yellow Shard', amount: 50},
-                        {shardTypeString: 'Grey Shard', amount: 75},
-                    ],
-                    ItemList['Metal_coat'],
-                    1),
-                new ShardDeal(
-                    [
-                        {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'White Shard', amount: 75},
                     ],
                     ItemList['Electirizer'],
@@ -1129,13 +1113,6 @@ class ShardDeal {
                         {shardTypeString: 'Pink Shard', amount: 75},
                     ],
                     ItemList['Whipped_dream'],
-                    1),
-                new ShardDeal(
-                    [
-                        {shardTypeString: 'Red Shard', amount: 50},
-                        {shardTypeString: 'White Shard', amount: 75},
-                    ],
-                    ItemList['Magmarizer'],
                     1),
             ]
         );
@@ -1220,10 +1197,10 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Blue Shard', amount: 50},
+                        {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Reaper_cloth'],
+                    ItemList['Protector'],
                     1),
                 new ShardDeal(
                     [
@@ -1234,10 +1211,10 @@ class ShardDeal {
                     1),
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Green Shard', amount: 50},
+                        {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Protector'],
+                    ItemList['Reaper_cloth'],
                     1),
             ]
         );
@@ -1301,8 +1278,30 @@ class ShardDeal {
                     ItemList['Fire_egg'],
                     1),
                 new ShardDeal(
-                    [{shardTypeString: 'Water Shard', amount: 100}],
+                    [{shardTypeString: 'Blue Shard', amount: 100}],
                     ItemList['Water_egg'],
+                    1),
+            ]
+        );
+        ShardDeal.list[GameConstants.ShardTraderLocations['Konikoni City']] = ko.observableArray(
+            [
+                new ShardDeal(
+                    [{shardTypeString: 'Red Shard', amount: 100}],
+                    ItemList['Fire_stone'],
+                    1),
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Red Shard', amount: 50},
+                        {shardTypeString: 'Yellow Shard', amount: 50},
+                    ],
+                    ItemList['Trade_stone'],
+                    1),
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Green Shard', amount: 50},
+                        {shardTypeString: 'Grey Shard', amount: 75},
+                    ],
+                    ItemList['Soothe_bell'],
                     1),
             ]
         );
@@ -1343,11 +1342,11 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Thunder_stone'],
+                    ItemList['Electric_egg'],
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Electric_egg'],
+                    ItemList['Thunder_stone'],
                     1),
                 new ShardDeal(
                     [
@@ -1415,6 +1414,13 @@ class ShardDeal {
                     1),
                 new ShardDeal(
                     [
+                        {shardTypeString: 'Blue Shard', amount: 50},
+                        {shardTypeString: 'Ochre Shard', amount: 75},
+                    ],
+                    ItemList['Prism_scale'],
+                    1),
+                new ShardDeal(
+                    [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Pink Shard', amount: 75},
                     ],
@@ -1426,13 +1432,6 @@ class ShardDeal {
                         {shardTypeString: 'Pink Shard', amount: 75},
                     ],
                     ItemList['Whipped_dream'],
-                    1),
-                new ShardDeal(
-                    [
-                        {shardTypeString: 'Blue Shard', amount: 50},
-                        {shardTypeString: 'Ochre Shard', amount: 75},
-                    ],
-                    ItemList['Prism_scale'],
                     1),
             ]
         );
@@ -1448,15 +1447,15 @@ class ShardDeal {
                     ItemList['Dragon_egg'],
                     1),
                 new ShardDeal(
+                    [{shardTypeString: 'Green Shard', amount: 100}],
+                    ItemList['Leaf_stone'],
+                    1),
+                new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Purple Shard', amount: 75},
                     ],
                     ItemList['Dragon_scale'],
-                    1),
-                new ShardDeal(
-                    [{shardTypeString: 'Green Shard', amount: 100}],
-                    ItemList['Leaf_stone'],
                     1),
                 new ShardDeal(
                     [
