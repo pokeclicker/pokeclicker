@@ -203,8 +203,8 @@ class Breeding implements Feature {
             }
             const egg = this.eggList[index]();
             const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == egg.pokemon);
-            if (!egg.isNone() && partyPokemon && partyPokemon.canCatchPokerus() && !partyPokemon.pokerus) {
-                partyPokemon.pokerus = partyPokemon.calculatePokerus();
+            if (!egg.isNone() && partyPokemon && partyPokemon.canCatchPokerus() && partyPokemon.pokerus < 1) {
+                partyPokemon.calculatePokerus();
             }
             egg.addSteps(amount, this.multiplier);
             if (this.queueList().length && egg.progress() >= 100) {

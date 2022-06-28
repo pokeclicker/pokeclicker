@@ -24,7 +24,7 @@ class PartyPokemon implements Saveable {
         shiny: false,
         category: 0,
         levelEvolutionTriggered: false,
-        pokerus: false,
+        pokerus: 0,
     };
 
     _breeding: KnockoutObservable<boolean>;
@@ -34,7 +34,7 @@ class PartyPokemon implements Saveable {
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
-    _pokerus: KnockoutObservable<boolean>;
+    _pokerus: KnockoutObservable<number>;
     proteinsUsed: KnockoutObservable<number>;
     effortPoints: KnockoutObservable<number>;
 
@@ -51,7 +51,7 @@ class PartyPokemon implements Saveable {
         breeding = false,
         shiny = false,
         category = 0,
-        pokerus = false
+        pokerus = 0
     ) {
         this.proteinsUsed = ko.observable(proteinsUsed);
         this.effortPoints = ko.observable(effortPoints);
@@ -75,12 +75,16 @@ class PartyPokemon implements Saveable {
         return App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
     }
 
-    public calculatePokerus(): boolean {
+    public calculatePokerus() {
         // Egg can't hatch and Egg has pokerus
         return App.game.breeding.eggList.some(e => {
-            if (!e().canHatch() && !e().isNone() && !(e().pokemon != GameConstants.Starter[player.starter()])) {
-                const pokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(e().pokemon).id);
-                return pokemon.pokerus;
+            if (!e().canHatch() && !e().isNone() && e().pokemon == GameConstants.Starter[player.starter()]) {
+                App.game.breeding.eggList.forEach(p => {
+                    const pokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(p().pokemon).id);
+                    if (pokemon && pokemon.pokerus == 0) {
+                        pokemon.pokerus++;
+                    }
+                });
             }
         });
     }
@@ -221,7 +225,6 @@ class PartyPokemon implements Saveable {
                 }
             }
         }
-
     }
 
     public toJSON() {
@@ -297,12 +300,12 @@ class PartyPokemon implements Saveable {
         this._breeding(bool);
     }
 
-    get pokerus(): boolean {
+    get pokerus(): number {
         return this._pokerus();
     }
 
-    set pokerus(bool: boolean) {
-        this._pokerus(bool);
+    set pokerus(index: number) {
+        this._pokerus(index);
     }
 
     get shiny(): boolean {

@@ -1199,3 +1199,10 @@ export enum DayOfWeek {
     'Friday',
     'Saturday',
 }
+
+export enum Pokerus {
+    'Uninfected' = 0,
+    'Infected',
+    'Contagious',
+    'Cured',
+}
