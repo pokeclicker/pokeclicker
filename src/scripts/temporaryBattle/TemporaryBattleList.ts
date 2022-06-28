@@ -232,7 +232,7 @@ TemporaryBattleList['Hop6'] = new TemporaryBattle(
     [new GymBadgeRequirement(BadgeEnums.Galar_Fairy)]
 );
 TemporaryBattleList['Hop7'] = new TemporaryBattle(
-    'Hop6',
+    'Hop7',
     [
         new GymPokemon('Dubwool', 282601920, 40),
         new GymPokemon('Corviknight', 282601920, 40),
