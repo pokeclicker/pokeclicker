@@ -23,7 +23,7 @@ class ShardDeal {
 
     public static canUse(town: GameConstants.ShardTraderLocations, i: number): boolean {
         const deal = ShardDeal.list[GameConstants.ShardTraderLocations[town]].peek()[i];
-        if(!deal) {
+        if (!deal) {
             return false;
         }
         if (ItemList[deal.item.itemType.name].isSoldOut()) {
@@ -282,7 +282,7 @@ class ShardDeal {
             ]
         );
     }
-    
+
     public static generateHoennDeals() {
         ShardDeal.list[GameConstants.ShardTraderLocations['Petalburg City']] = ko.observableArray(
             [
@@ -462,7 +462,7 @@ class ShardDeal {
             ]
         );
     }
-    
+
     public static generateSinnohDeals() {
         ShardDeal.list[GameConstants.ShardTraderLocations['Oreburgh City']] = ko.observableArray(
             [
@@ -1219,6 +1219,7 @@ class ShardDeal {
             ]
         );
     }
+
     public static generateAlolaDeals() {
         ShardDeal.list[GameConstants.ShardTraderLocations['Hau\'oli City']] = ko.observableArray(
             [
