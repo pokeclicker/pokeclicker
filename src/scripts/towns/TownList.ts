@@ -3421,7 +3421,7 @@ TownList['Master Dojo Battlefield'] = new Town(
         requirements: [
             new MultiRequirement([
                 new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Water')),
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Waters')),
             ]),
         ],
     }
