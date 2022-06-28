@@ -1560,7 +1560,15 @@ dungeonList['Mt. Mortar'] = new Dungeon('Mt. Mortar',
             ], { weight: 1 }, 'Kiyo'),
         new DungeonBossPokemon('Tyrogue', 420000, 45, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Mortar'))}),
     ],
-    5500, 42);
+    5500, 42,
+    () => {
+        BagHandler.gainItem({type: ItemType.item, id: 'Fighting_egg'}, 1);
+        Notifier.notify({
+            message: 'You were awarded a Fighting Egg for defeating Black Belt Kiyo',
+            type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+        });
+    });
 
 dungeonList['Team Rocket\'s Hideout'] = new Dungeon('Team Rocket\'s Hideout',
     [
@@ -3013,7 +3021,15 @@ dungeonList['Iron Island'] = new Dungeon('Iron Island',
                 new GymPokemon('Stunky', 701667, 34),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    66500, 218);
+    66500, 218,
+    () => {
+        BagHandler.gainItem({type: ItemType.item, id: 'Fighting_egg'}, 1);
+        Notifier.notify({
+            message: 'You were awarded a Fighting Egg for defeating the Galactic Grunts',
+            type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+        });
+    });
 
 dungeonList['Lake Valor'] = new Dungeon('Lake Valor',
     [
