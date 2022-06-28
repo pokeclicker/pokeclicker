@@ -6846,8 +6846,8 @@ dungeonList['Slumbering Weald Shrine'] = new Dungeon('Slumbering Weald Shrine',
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Corviknight', 8000000, 70),
-        new DungeonBossPokemon('Galarian Weezing', 8000000, 70),
+        new DungeonBossPokemon('Corviknight', 8000000, 60),
+        new DungeonBossPokemon('Galarian Weezing', 8000000, 60),
     ],
     96500, 201);
 
@@ -6881,7 +6881,7 @@ dungeonList['Galar Mine'] = new Dungeon('Galar Mine',
     ],
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
-    [new DungeonBossPokemon('Carkol', 8000000, 70)],
+    [new DungeonBossPokemon('Carkol', 8000000, 18)],
     96500, 201);
 
 dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
@@ -6923,9 +6923,9 @@ dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Galarian Stunfisk', 8000000, 70),
-        new DungeonBossPokemon('Gastrodon (east)', 8000000, 70),
-        new DungeonBossPokemon('Drednaw', 8000000, 70),
+        new DungeonBossPokemon('Galarian Stunfisk', 8000000, 25),
+        new DungeonBossPokemon('Gastrodon (east)', 8000000, 50),
+        new DungeonBossPokemon('Drednaw', 8000000, 24),
     ],
     96500, 201);
 
@@ -7021,9 +7021,9 @@ dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Hattrem', 8000000, 70),
-        new DungeonBossPokemon('Morgrem', 8000000, 70),
-        new DungeonBossPokemon('Indeedee', 8000000, 70),
+        new DungeonBossPokemon('Hattrem', 8000000, 36),
+        new DungeonBossPokemon('Morgrem', 8000000, 36),
+        new DungeonBossPokemon('Indeedee', 8000000, 36),
     ],
     96500, 201);
 
@@ -7032,10 +7032,10 @@ dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Gigalith', 8000000, 70),
-        new DungeonBossPokemon('Flygon', 8000000, 70),
-        new DungeonBossPokemon('Sigilyph', 8000000, 70),
-        new DungeonBossPokemon('Tyranitar', 8000000, 70),
+        new DungeonBossPokemon('Gigalith', 8000000, 60),
+        new DungeonBossPokemon('Flygon', 8000000, 60),
+        new DungeonBossPokemon('Sigilyph', 8000000, 60),
+        new DungeonBossPokemon('Tyranitar', 8000000, 60),
     ],
     96500, 201);
 
@@ -7045,7 +7045,7 @@ dungeonList['Warm-Up Tunnel'] = new Dungeon('Warm-Up Tunnel',
     ['Sandshrew', 'Cubone', 'Torkoal'],
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
-    [new DungeonBossPokemon('Kangaskhan', 8000000, 70)],
+    [new DungeonBossPokemon('Kangaskhan', 8000000, 60)],
     96500, 201);
 
 dungeonList['Courageous Cavern'] = new Dungeon('Courageous Cavern',
@@ -7053,9 +7053,9 @@ dungeonList['Courageous Cavern'] = new Dungeon('Courageous Cavern',
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Golisopod', 8000000, 70),
-        new DungeonBossPokemon('Druddigon', 8000000, 70),
-        new DungeonBossPokemon('Drednaw', 8000000, 70),
+        new DungeonBossPokemon('Golisopod', 8000000, 60),
+        new DungeonBossPokemon('Druddigon', 8000000, 60),
+        new DungeonBossPokemon('Drednaw', 8000000, 60),
     ],
     96500, 201);
 
@@ -7064,24 +7064,56 @@ dungeonList['Brawlers Cave'] = new Dungeon('Brawlers Cave',
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Gigalith', 8000000, 70),
-        new DungeonBossPokemon('Druddigon', 8000000, 70),
-        new DungeonBossPokemon('Poliwrath', 8000000, 70),
+        new DungeonBossPokemon('Gigalith', 8000000, 60),
+        new DungeonBossPokemon('Druddigon', 8000000, 60),
+        new DungeonBossPokemon('Poliwrath', 8000000, 60),
     ],
     96500, 201);
 
 dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
-    ['Zorua', 'Scraggy', 'Inkay', 'Krokorok'],
+[
+        new DungeonTrainer('Master Dojo',
+            [new GymPokemon('Zorua', 17114462, 65)],
+            { weight: 1 }, 'Student'),
+        new DungeonTrainer('Master Dojo',
+            [new GymPokemon('Scraggy', 17114462, 66)],
+            { weight: 1 }, 'Student'),
+        new DungeonTrainer('Master Dojo',
+            [new GymPokemon('Inkay', 17114462, 67)],
+            { weight: 1 }, 'Student'),
+        new DungeonTrainer('Master Dojo',
+            [new GymPokemon('Krokorok', 17114462, 68)],
+            { weight: 1 }, 'Student'),
+    ],
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
-    [new DungeonBossPokemon('Kubfu', 8000000, 70)],
+    [
+        new DungeonTrainer('Dojo Master',
+            [new GymPokemon('Kubfu', 66430120, 70)], { weight: 1 }, 'Mustard'
+    ],
     96500, 201);
 
-dungeonList['Tower of Water'] = new Dungeon('Tower of Water',
-    ['Psyduck', 'Krabby', 'Marill', 'Poliwhirl'],
+dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters ',
+    [
+        new DungeonTrainer('Master Dojo',
+            [new GymPokemon('Psyduck', 17114462, 65)],
+            { weight: 1 }, 'Student'),
+        new DungeonTrainer('Master Dojo',
+            [new GymPokemon('Krabby', 17114462, 66)],
+            { weight: 1 }, 'Student'),
+        new DungeonTrainer('Master Dojo',
+            [new GymPokemon('Marill', 17114462, 67)],
+            { weight: 1 }, 'Student'),
+        new DungeonTrainer('Master Dojo',
+            [new GymPokemon('Poliwhirl', 17114462, 68)],
+            { weight: 1 }, 'Student'),
+    ],
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
-    [new DungeonBossPokemon('Kubfu', 8000000, 70)],
+    [
+        new DungeonTrainer('Dojo Master',
+            [new GymPokemon('Kubfu', 66430120, 70)], { weight: 1 }, 'Mustard'
+    ],
     96500, 201);
 
 
@@ -7091,11 +7123,11 @@ dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Kabutops', 8000000, 70),
-        new DungeonBossPokemon('Omastar', 8000000, 70),
-        new DungeonBossPokemon('Tyranitar', 8000000, 70),
-        new DungeonBossPokemon('Hydreigon', 8000000, 70),
-        new DungeonBossPokemon('Lucario', 8000000, 70),
+        new DungeonBossPokemon('Kabutops', 8000000, 60),
+        new DungeonBossPokemon('Omastar', 8000000, 60),
+        new DungeonBossPokemon('Tyranitar', 8000000, 60),
+        new DungeonBossPokemon('Hydreigon', 8000000, 60),
+        new DungeonBossPokemon('Lucario', 8000000, 60),
     ],
     96500, 201);
 
@@ -7104,7 +7136,7 @@ dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Relicanth', 8000000, 70),
+        new DungeonBossPokemon('Relicanth', 8000000, 60),
         new DungeonBossPokemon('Regirock', 8000000, 70),
     ],
     96500, 201);
@@ -7114,7 +7146,7 @@ dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Metagross', 8000000, 70),
+        new DungeonBossPokemon('Metagross', 8000000, 60),
         new DungeonBossPokemon('Registeel', 8000000, 70),
     ],
     96500, 201);
@@ -7124,7 +7156,7 @@ dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Glalie', 8000000, 70),
+        new DungeonBossPokemon('Glalie', 8000000, 60),
         new DungeonBossPokemon('Regice', 8000000, 70),
     ],
     96500, 201);
@@ -7134,8 +7166,8 @@ dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Dragapult', 8000000, 70),
-        new DungeonBossPokemon('Electivire', 8000000, 70),
+        new DungeonBossPokemon('Dragapult', 8000000, 60),
+        new DungeonBossPokemon('Electivire', 8000000, 60),
         new DungeonBossPokemon('Regidrago', 8000000, 70),
         new DungeonBossPokemon('Regieleki', 8000000, 70),
     ],
@@ -7146,9 +7178,9 @@ dungeonList['Lakeside Cave'] = new Dungeon('Lakeside Cave',
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Noivern', 8000000, 70),
-        new DungeonBossPokemon('Aggron', 8000000, 70),
-        new DungeonBossPokemon('Coalossal', 8000000, 70),
+        new DungeonBossPokemon('Noivern', 8000000, 60),
+        new DungeonBossPokemon('Aggron', 8000000, 60),
+        new DungeonBossPokemon('Coalossal', 8000000, 60),
     ],
     96500, 201);
 
@@ -7156,7 +7188,7 @@ dungeonList['Dyna Tree Hill'] = new Dungeon('Dyna Tree Hill',
     ['Magmar', 'Absol', 'Beartic', 'Cryogonal', 'Dubwool', 'Glalie', 'Clefable'],
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
-    [new DungeonBossPokemon('Greedent', 8000000, 70)],
+    [new DungeonBossPokemon('Greedent', 8000000, 60)],
     96500, 201);
 
 dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
@@ -7164,9 +7196,9 @@ dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Noivern', 8000000, 70),
-        new DungeonBossPokemon('Aggron', 8000000, 70),
-        new DungeonBossPokemon('Coalossal', 8000000, 70),
+        new DungeonBossPokemon('Noivern', 8000000, 60),
+        new DungeonBossPokemon('Aggron', 8000000, 60),
+        new DungeonBossPokemon('Coalossal', 8000000, 60),
     ],
     96500, 201);
 dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
@@ -7174,8 +7206,8 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
     [
-        new DungeonBossPokemon('Sneasel', 8000000, 70),
-        new DungeonBossPokemon('Calyrex', 8000000, 70, {
+        new DungeonBossPokemon('Sneasel', 8000000, 60),
+        new DungeonBossPokemon('Calyrex', 8000000, 80, {
             requirement: new MultiRequirement([
                 new ObtainedPokemonRequirement(pokemonMap.Spectrier),
                 new ObtainedPokemonRequirement(pokemonMap.Glastrier),

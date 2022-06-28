@@ -1398,8 +1398,8 @@
         <!--Workout Sea extension-->
         <%- include('templates/mapRoute',
             { route: 41, region: 7
-            , width: 17, height: 2
-            , x: 63, y: 42, name: "WS"
+            , width: 15, height: 2
+            , x: 65, y: 42, name: "WS"
             , noText: true
             })
         %>
@@ -2056,6 +2056,17 @@
             , width: 4, height: 5.5
             })
         %>
+
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+        <%- include('templates/mapPOI',
+            { name: "Dock"
+            , x: 63, y: 42
+            , width: 2, height: 2
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Master Dojo') }"
+            })
+        %>
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
@@ -2692,6 +2703,17 @@
             { name: "Crown Shrine"
             , x: 49.67, y: 3.34
             , width: 1.66, height: 1.41
+            })
+        %>
+
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+        <%- include('templates/mapPOI',
+            { name: "Dock"
+            , x: 26, y: 15
+            , width: 3, height: 2
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Crown Tundra Station') }"
             })
         %>
     </g>
