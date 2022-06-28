@@ -293,7 +293,7 @@ TownList['Celadon City'] = new Town(
 TownList['Saffron City'] = new Town(
     'Saffron City',
     GameConstants.Region.kanto,
-    [SaffronCityShop, new MoveToDungeon(dungeonList['Silph Co.'])],
+    [SaffronCityShop, new MoveToDungeon(dungeonList['Silph Co.']), TemporaryBattleList['Fighting Dojo']],
     {
         requirements: [new OneFromManyRequirement([
             new GymBadgeRequirement(BadgeEnums.Rainbow),
@@ -1357,7 +1357,7 @@ const FightAreaShop = new Shop([
 const SurvivalAreaShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Greatball'],
-    ItemList['Ultraball'],,
+    ItemList['Ultraball'],
     ItemList['Electirizer'],
     ItemList['Magmarizer'],
 ]);
