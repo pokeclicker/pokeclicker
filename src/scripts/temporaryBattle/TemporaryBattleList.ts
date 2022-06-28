@@ -1,6 +1,30 @@
 const TemporaryBattleList: { [battleName: string]: TemporaryBattle } = {};
 
-//Kalos
+// Kanto
+TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
+    'Fighting Dojo',
+    [
+        new GymPokemon('Hitmonlee', 108985, 37),
+        new GymPokemon('Hitmonchan', 108985, 37),
+    ],
+    'Hwa! Arrgh! Beaten!',
+    [
+        new OneFromManyRequirement([
+            new GymBadgeRequirement(BadgeEnums.Rainbow),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
+        ]),
+    ],
+    [],
+    () => {
+        BagHandler.gainItem({type: ItemType.item, id: 'Fighting_egg'}, 1);
+        Notifier.notify({
+            message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo',
+            type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+        });
+    }
+);
+// Kalos
 TemporaryBattleList['AZ'] = new TemporaryBattle(
     'AZ',
     [
@@ -127,7 +151,7 @@ TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
     }
 );
 
-//Alola
+// Alola
 TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
     [new GymPokemon('???', 264590972, 27)],

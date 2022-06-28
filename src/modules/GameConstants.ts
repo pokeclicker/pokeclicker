@@ -571,7 +571,7 @@ export const Environments: Record<string, EnvironmentData> = {
 
     Mansion: {
         [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
-        [Region.johto]: new Set(['Olivine City', 'Burned Tower']),
+        [Region.johto]: new Set(['Olivine City', 'Sprout Tower', 'Burned Tower']),
         [Region.hoenn]: new Set(['Petalburg City', 'Jagged Pass']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
@@ -1174,6 +1174,7 @@ export const RegionalStarters = [
 ];
 
 export const TemporaryBattles = [
+    'Fighting Dojo',
     'AZ',
     'Ash Ketchum Kanto',
     'Ash Ketchum Johto',

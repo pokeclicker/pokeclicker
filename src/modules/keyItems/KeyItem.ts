@@ -12,15 +12,16 @@ export default class KeyItem {
     public description: string;
     public unlockReq: KnockoutComputed<boolean>;
     public unlocker: KnockoutSubscription;
-    public unlockReward: () => void;
     public isUnlocked: KnockoutObservable<boolean>;
 
-    constructor(name: KeyItemType, description: string, unlockReq?: () => boolean, isUnlocked = false, unlockReward = () => {}, displayName?: string) {
+    constructor(name: KeyItemType, description: string, unlockReq?: () => boolean, isUnlocked = false,
+        public unlockRewardOnClose = () => {},
+        displayName?: string,
+        public unlockRewardOnUnlock = () => {}) {
         this.name = name;
         this.displayName = displayName ?? GameConstants.humanifyString(KeyItemType[this.name]);
         this.description = description;
         this.isUnlocked = ko.observable(isUnlocked ?? false);
-        this.unlockReward = unlockReward;
 
         if (this.isUnlocked() || typeof unlockReq !== 'function') {
             this.unlockReq = null;
