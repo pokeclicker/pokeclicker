@@ -76,13 +76,13 @@ class HatcheryHelper {
     }
 
     // String for currency in Notifications and Logs
-    currencyString(string: string): any {
-        if (GameConstants.humanifyString(GameConstants.Currency[this.cost.currency]) != 'money') {
-            string = (`${GameConstants.camelCaseToString(GameConstants.Currency[this.cost.currency])}s`);
-        } else {
-            string = ('Pokédollars');
+    currencyString(string: string) {
+        switch (GameConstants.humanifyString(GameConstants.Currency[this.cost.currency])) {
+            case 'money':
+                return string = 'Pokédollars';
+            default:
+                return string = `${GameConstants.camelCaseToString(GameConstants.Currency[this.cost.currency])}s`;
         }
-        return string;
     }
 
     hire(): void {
