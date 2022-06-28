@@ -6985,7 +6985,7 @@ dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
     96500, 201);
 
 dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
-    ['Steelix', 'Mawile', 'Bronzong', 'Durant', 'Bisharp', 'Doublade', 'Golisopod', 'Galarian Stunfisk', 'Sirfetch\'d', 'Falinks'],
+    ['Steelix', 'Mawile', 'Bronzong', 'Durant', 'Bisharp', 'Doublade', 'Golisopod', 'Galarian Stunfisk', 'Sirfetch\'d'],
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     2203000,
     [
