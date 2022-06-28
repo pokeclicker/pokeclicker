@@ -12,8 +12,11 @@ class ProfNPC extends NPC {
 
     get dialogHTML(): string {
         const requiresCompleteDex = App.game.challenges.list.requireCompletePokedex.active();
+        const requiresCompleteShinyDex = App.game.challenges.list.requireCompleteShinyPokedex.active();
         const nextRegionUnlocked = TownList[GameConstants.StartingTowns[this.region + 1]]?.isUnlocked() ?? false;
-        const completeDexAchievement = AchievementHandler.findByName(`${GameConstants.camelCaseToString(GameConstants.Region[this.region])} Master`);
+        const completeDexAchievement = AchievementHandler.findByName(
+            `${GameConstants.camelCaseToString(GameConstants.Region[this.region])} ${(requiresCompleteShinyDex ? 'Shiny' : '')} Master`
+        );
 
 
         if (!nextRegionUnlocked) {
