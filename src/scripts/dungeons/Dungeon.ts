@@ -7089,7 +7089,7 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     2203000,
     [
         new DungeonTrainer('Dojo Master',
-            [new GymPokemon('Kubfu', 66430120, 70)], { weight: 1 }, 'Mustard'
+            [new GymPokemon('Kubfu', 66430120, 70)], { weight: 1 }, 'Mustard',
     ],
     96500, 201);
 
@@ -7112,7 +7112,7 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters ',
     2203000,
     [
         new DungeonTrainer('Dojo Master',
-            [new GymPokemon('Kubfu', 66430120, 70)], { weight: 1 }, 'Mustard'
+            [new GymPokemon('Kubfu', 66430120, 70)], { weight: 1 }, 'Mustard',
     ],
     96500, 201);
 
