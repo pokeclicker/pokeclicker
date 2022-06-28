@@ -154,6 +154,11 @@ class Mine {
     }
 
     public static survey() {
+        // Disable survey while loading new layer
+        if (this.loadingNewLayer) {
+            return;
+        }
+
         if (Mine.surveyResult()) {
             $('#mine-survey-result').tooltip('show');
             return;
@@ -256,6 +261,11 @@ class Mine {
     }
 
     public static bomb() {
+        // Disable bomb while loading new layer
+        if (this.loadingNewLayer) {
+            return;
+        }
+
         let tiles = App.game.underground.getBombEfficiency();
         if (App.game.underground.energy >= Underground.BOMB_ENERGY) {
             while (tiles-- > 0) {
