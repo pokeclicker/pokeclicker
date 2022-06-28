@@ -1727,7 +1727,12 @@ GymList['Gym Leader Klara'] = new Gym(
     BadgeEnums.Elite_ArmorPoison,
     150000,
     'Aww, come on! What a drag! But...I guess it was also kinda fun!',
-    [new TemporaryBattleRequirement('Dynamax Vespiquen')]
+    [
+        new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Single Strike)']),
+            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Rapid Strike)']),
+        ]),
+    ]
 );
 GymList['Gym Leader Avery'] = new Gym(
     'Avery',

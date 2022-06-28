@@ -3319,7 +3319,7 @@ TownList['Professor Magnolia\'s House'] = new Town(
 TownList['Motostoke'] = new Town(
     'Motostoke',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop3'], TemporaryBattleList['Marnie1'], TemporaryBattleList['Dynamax Torkoal'], MotostokeShop],
+    [TemporaryBattleList['Hop3'], TemporaryBattleList['Marnie1'], TemporaryBattleList['Rampaging Torkoal'], MotostokeShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
     }
@@ -3327,7 +3327,7 @@ TownList['Motostoke'] = new Town(
 TownList['Turffield'] = new Town(
     'Turffield',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Dynamax Tsareena'], TurffieldShop],
+    [TemporaryBattleList['Rampaging Tsareena'], TurffieldShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 13)],
     }
@@ -3335,7 +3335,7 @@ TownList['Turffield'] = new Town(
 TownList['Hulbury'] = new Town(
     'Hulbury',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop4'], TemporaryBattleList['Dynamax Gyarados'], HulburyShop],
+    [TemporaryBattleList['Hop4'], TemporaryBattleList['Rampaging Gyarados'], HulburyShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 14)],
     }
@@ -3343,7 +3343,7 @@ TownList['Hulbury'] = new Town(
 TownList['Stow-on-Side'] = new Town(
     'Stow-on-Side',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop5'], TemporaryBattleList['Bede3'], TemporaryBattleList['Dynamax Conkeldurr'], TemporaryBattleList['Dynamax Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop],
+    [TemporaryBattleList['Hop5'], TemporaryBattleList['Bede3'], TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
     }
@@ -3359,7 +3359,7 @@ TownList['Ballonlea'] = new Town(
 TownList['Hammerlocke'] = new Town(
     'Hammerlocke',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop6'], TemporaryBattleList['Dynamax Haxorus'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop],
+    [TemporaryBattleList['Hop6'], TemporaryBattleList['Rampaging Haxorus'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
     }
@@ -3367,7 +3367,7 @@ TownList['Hammerlocke'] = new Town(
 TownList['Circhester'] = new Town(
     'Circhester',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop7'], TemporaryBattleList['Dynamax Gigalith'], TemporaryBattleList['Dynamax Froslass'], GymList['Circhester1'], GymList['Circhester2'], CirchesterShop],
+    [TemporaryBattleList['Hop7'], TemporaryBattleList['Rampaging Gigalith'], TemporaryBattleList['Rampaging Froslass'], GymList['Circhester1'], GymList['Circhester2'], CirchesterShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
     }
