@@ -113,10 +113,7 @@ export const SpriteCredits: Credit[] = [
     {
         name: 'Brumirage, Altthiel, Pujolly, Irpachuza',
         link: 'https://www.smogon.com/forums/threads/revamped-add-sword-and-shield-trainer-avatars-for-everyone.3672829/',
-        image: 'https://www.smogon.com/forums/media/data/avatars/m/459/459351.jpg?1632079664',
-        image: 'https://www.smogon.com/forums/media/data/avatars/m/463/463420.jpg?1655574805',
-        image: 'https://www.smogon.com/forums/media/data/avatars/m/432/432798.jpg?1653910200',
-        image: 'https://www.smogon.com/forums/media/data/avatars/m/61/61967.jpg?1638199764',
+        image: 'https://www.smogon.com/media/zracknel-beta.svg.m.1',
         resources: [
             'Allister',
             'Avery',
@@ -129,6 +126,7 @@ export const SpriteCredits: Credit[] = [
             'Klara',
             'Leon',
             'Marnie',
+            'Master Dojo Student',
             'Melony',
             'Milo',
             'Mustard',
@@ -139,6 +137,8 @@ export const SpriteCredits: Credit[] = [
             'Piers',
             'Raihan',
             'Rose',
+            'Shielbert',
+            'Sordward',
             'Team Yell Grunts',
         ],
         // NOTES: No notes about credit, but is made for public use. Unclear who made what, so credited together
