@@ -137,8 +137,8 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
 TemporaryBattleList['Hop1'] = new TemporaryBattle(
     'Hop1',
     [
-        new GymPokemon('Wooloo', 282601920, 3),
-        new GymPokemon('Sobble', 282601920, 5),
+        new GymPokemon('Wooloo', 20965216, 3),
+        new GymPokemon('Sobble', 21820939, 5),
     ],
     'Well, that was a shock! Guess I know now why Lee thought he should give you a Pokémon, too...',
     [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
@@ -146,8 +146,8 @@ TemporaryBattleList['Hop1'] = new TemporaryBattle(
 TemporaryBattleList['Mirages'] = new TemporaryBattle(
     'Mirages',
     [
-        new GymPokemon('Zacian (Battle Hero)', 282601920, 70),
-        new GymPokemon('Zamazenta (Battle Hero)', 282601920, 70),
+        new GymPokemon('Zacian (Battle Hero)', 22514480, 70),
+        new GymPokemon('Zamazenta (Battle Hero)', 22514480, 70),
     ],
     'The Pokémon fled.',
     [new TemporaryBattleRequirement('Hop1')]
@@ -155,9 +155,9 @@ TemporaryBattleList['Mirages'] = new TemporaryBattle(
 TemporaryBattleList['Hop2'] = new TemporaryBattle(
     'Hop2',
     [
-        new GymPokemon('Wooloo', 282601920, 6),
-        new GymPokemon('Rookidee', 282601920, 5),
-        new GymPokemon('Sobble', 282601920, 8),
+        new GymPokemon('Wooloo', 60232887, 6),
+        new GymPokemon('Rookidee', 60232887, 5),
+        new GymPokemon('Sobble', 62058126, 8),
     ],
     'And I even got my Pokéball throw perfect too!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 2)]
@@ -165,9 +165,9 @@ TemporaryBattleList['Hop2'] = new TemporaryBattle(
 TemporaryBattleList['Hop3'] = new TemporaryBattle(
     'Hop3',
     [
-        new GymPokemon('Wooloo', 282601920, 11),
-        new GymPokemon('Rookidee', 282601920, 12),
-        new GymPokemon('Sobble', 282601920, 14),
+        new GymPokemon('Wooloo', 63475599, 11),
+        new GymPokemon('Rookidee', 63475599, 12),
+        new GymPokemon('Sobble', 65399102, 14),
     ],
     'Was that really good training? Looks like I\'d better keep my guard up!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 6)]
@@ -175,9 +175,9 @@ TemporaryBattleList['Hop3'] = new TemporaryBattle(
 TemporaryBattleList['Bede1'] = new TemporaryBattle(
     'Bede1',
     [
-        new GymPokemon('Solosis', 282601920, 13),
-        new GymPokemon('Gothita', 282601920, 15),
-        new GymPokemon('Hatenna', 282601920, 16),
+        new GymPokemon('Solosis', 68533871, 13),
+        new GymPokemon('Gothita', 68533871, 15),
+        new GymPokemon('Hatenna', 70610655, 16),
     ],
     'I see... Well, that\'s fine. I wasn\'t really trying all that hard anyway.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine'))]
@@ -185,9 +185,9 @@ TemporaryBattleList['Bede1'] = new TemporaryBattle(
 TemporaryBattleList['Hop4'] = new TemporaryBattle(
     'Hop4',
     [
-        new GymPokemon('Wooloo', 282601920, 18),
-        new GymPokemon('Corvisquire', 282601920, 19),
-        new GymPokemon('Drizzile', 282601920, 21),
+        new GymPokemon('Wooloo', 87840389, 18),
+        new GymPokemon('Corvisquire', 87840389, 19),
+        new GymPokemon('Drizzile', 90502219, 21),
     ],
     'We both got ourselves the same Grass Badge, so how come you\'re so much stronger?',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 14)]
@@ -195,10 +195,10 @@ TemporaryBattleList['Hop4'] = new TemporaryBattle(
 TemporaryBattleList['Bede2'] = new TemporaryBattle(
     'Bede2',
     [
-        new GymPokemon('Solosis', 282601920, 21),
-        new GymPokemon('Gothita', 282601920, 22),
-        new GymPokemon('Galarian Ponyta', 282601920, 22),
-        new GymPokemon('Hatenna', 282601920, 23),
+        new GymPokemon('Solosis', 79056351, 21),
+        new GymPokemon('Gothita', 79056351, 22),
+        new GymPokemon('Galarian Ponyta', 79056351, 22),
+        new GymPokemon('Hatenna', 82250547, 23),
     ],
     'You showed at least a little effort, so I decided I should let you win!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine No. 2'))]
@@ -206,9 +206,9 @@ TemporaryBattleList['Bede2'] = new TemporaryBattle(
 TemporaryBattleList['Marnie1'] = new TemporaryBattle(
     'Marnie1',
     [
-        new GymPokemon('Croagunk', 282601920, 24),
-        new GymPokemon('Scraggy', 282601920, 24),
-        new GymPokemon('Morpeko', 282601920, 26),
+        new GymPokemon('Croagunk', 106727128, 24),
+        new GymPokemon('Scraggy', 106727128, 24),
+        new GymPokemon('Morpeko', 109961283, 26),
     ],
     'You beat me... Guess you must not be so bad after all, huh?',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 15)]
@@ -216,10 +216,10 @@ TemporaryBattleList['Marnie1'] = new TemporaryBattle(
 TemporaryBattleList['Hop5'] = new TemporaryBattle(
     'Hop5',
     [
-        new GymPokemon('Cramorant', 282601920, 28),
-        new GymPokemon('Toxel', 282601920, 29),
-        new GymPokemon('Silicobra', 282601920, 30),
-        new GymPokemon('Drizzile', 282601920, 33),
+        new GymPokemon('Cramorant', 88226998, 28),
+        new GymPokemon('Toxel', 88226998, 29),
+        new GymPokemon('Silicobra', 88226998, 30),
+        new GymPokemon('Drizzile', 91791725, 33),
     ],
     'My strategy goes right to pot when I\'ve got all these bad thoughts running through my head...',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 23)]
@@ -227,10 +227,10 @@ TemporaryBattleList['Hop5'] = new TemporaryBattle(
 TemporaryBattleList['Bede3'] = new TemporaryBattle(
     'Bede3',
     [
-        new GymPokemon('Duosion', 282601920, 32),
-        new GymPokemon('Gothorita', 282601920, 32),
-        new GymPokemon('Galarian Ponyta', 282601920, 33),
-        new GymPokemon('Hattrem', 282601920, 35),
+        new GymPokemon('Duosion', 94108792, 32),
+        new GymPokemon('Gothorita', 94108792, 32),
+        new GymPokemon('Galarian Ponyta', 94108792, 33),
+        new GymPokemon('Hattrem', 96960579, 35),
     ],
     'This has to be some kind of mistake. I demand a do-over!',
     [
@@ -247,11 +247,11 @@ TemporaryBattleList['Bede3'] = new TemporaryBattle(
 TemporaryBattleList['Hop6'] = new TemporaryBattle(
     'Hop6',
     [
-        new GymPokemon('Trevenant', 282601920, 34),
-        new GymPokemon('Heatmor', 282601920, 34),
-        new GymPokemon('Snorlax', 282601920, 35),
-        new GymPokemon('Boltund', 282601920, 35),
-        new GymPokemon('Inteleon', 282601920, 37),
+        new GymPokemon('Trevenant', 83541888, 34),
+        new GymPokemon('Heatmor', 83541888, 34),
+        new GymPokemon('Snorlax', 83541888, 35),
+        new GymPokemon('Boltund', 83541888, 35),
+        new GymPokemon('Inteleon', 86698382, 37),
     ],
     'This is rubbish... My team can\'t perform if I can\'t get my own head straight as their Trainer...',
     [new GymBadgeRequirement(BadgeEnums.Galar_Fairy)]
@@ -259,11 +259,11 @@ TemporaryBattleList['Hop6'] = new TemporaryBattle(
 TemporaryBattleList['Hop7'] = new TemporaryBattle(
     'Hop7',
     [
-        new GymPokemon('Dubwool', 282601920, 40),
-        new GymPokemon('Corviknight', 282601920, 40),
-        new GymPokemon('Pincurchin', 282601920, 39),
-        new GymPokemon('Snorlax', 282601920, 39),
-        new GymPokemon('Inteleon', 282601920, 41),
+        new GymPokemon('Dubwool', 85540774, 40),
+        new GymPokemon('Corviknight', 85540774, 40),
+        new GymPokemon('Pincurchin', 85540774, 39),
+        new GymPokemon('Snorlax', 85540774, 39),
+        new GymPokemon('Inteleon', 88772793, 41),
     ],
     'I still can\'t even beat you, my true rival... But I think I\'m starting to see the light!',
     [
@@ -276,23 +276,23 @@ TemporaryBattleList['Hop7'] = new TemporaryBattle(
 TemporaryBattleList['Marnie2'] = new TemporaryBattle(
     'Marnie2',
     [
-        new GymPokemon('Liepard', 282601920, 42),
-        new GymPokemon('Toxicroak', 282601920, 43),
-        new GymPokemon('Scrafty', 282601920, 43),
-        new GymPokemon('Morpeko', 282601920, 44),
+        new GymPokemon('Liepard', 111748623, 42),
+        new GymPokemon('Toxicroak', 111748623, 43),
+        new GymPokemon('Scrafty', 111748623, 43),
+        new GymPokemon('Morpeko', 116263718, 44),
     ],
     'What\'s with that?! My Pokémon didn\'t get a chance to really do their thing at all. Ugh!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 30)]
 );
 TemporaryBattleList['Eternatus'] = new TemporaryBattle(
     'Eternatus',
-    [new GymPokemon('Eternatus', 282601920, 60)],
+    [new GymPokemon('Eternatus', 415813261, 60)],
     'You defeated Eternatus, but it looks like it\'s not over yet!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Energy Plant'))]
 );
 TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     'The Darkest Day',
-    [new GymPokemon('Eternamax Eternatus', 282601920, 60)],
+    [new GymPokemon('Eternamax Eternatus', 462014735, 60)],
     'You caught Eternatus!',
     [new TemporaryBattleRequirement('Eternatus')],
     [],
@@ -303,12 +303,12 @@ TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
 TemporaryBattleList['Hop8'] = new TemporaryBattle(
     'Hop8',
     [
-        new GymPokemon('Dubwool', 282601920, 59),
-        new GymPokemon('Pincurchin', 282601920, 59),
-        new GymPokemon('Cramorant', 282601920, 58),
-        new GymPokemon('Snorlax', 282601920, 58),
-        new GymPokemon('Corviknight', 282601920, 58),
-        new GymPokemon('Inteleon', 282601920, 60),
+        new GymPokemon('Dubwool', 114810660, 59),
+        new GymPokemon('Pincurchin', 114810660, 59),
+        new GymPokemon('Cramorant', 114810660, 58),
+        new GymPokemon('Snorlax', 114810660, 58),
+        new GymPokemon('Corviknight', 114810660, 58),
+        new GymPokemon('Inteleon', 118968793, 60),
     ],
     'I didn\'t expect there to be such a gap between you and me, mate...',
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
@@ -320,10 +320,10 @@ TemporaryBattleList['Hop8'] = new TemporaryBattle(
 TemporaryBattleList['Sordward1'] = new TemporaryBattle(
     'Sordward1',
     [
-        new GymPokemon('Sirfetch\'d', 282601920, 60),
-        new GymPokemon('Golisopod', 282601920, 60),
-        new GymPokemon('Doublade', 282601920, 60),
-        new GymPokemon('Bisharp', 282601920, 60),
+        new GymPokemon('Sirfetch\'d', 137218376, 60),
+        new GymPokemon('Golisopod', 137218376, 60),
+        new GymPokemon('Doublade', 137218376, 60),
+        new GymPokemon('Bisharp', 142762552, 60),
     ],
     'Oh... How can this be? My...my Pokémon...',
     [new TemporaryBattleRequirement('Hop8')]
@@ -331,105 +331,105 @@ TemporaryBattleList['Sordward1'] = new TemporaryBattle(
 TemporaryBattleList['Shielbert1'] = new TemporaryBattle(
     'Shielbert1',
     [
-        new GymPokemon('Sirfetch\'d', 282601920, 60),
-        new GymPokemon('Bronzong', 282601920, 60),
-        new GymPokemon('Falinks', 282601920, 60),
-        new GymPokemon('Klinklang', 282601920, 60),
+        new GymPokemon('Sirfetch\'d', 137218376, 60),
+        new GymPokemon('Bronzong', 137218376, 60),
+        new GymPokemon('Falinks', 137218376, 60),
+        new GymPokemon('Klinklang', 142762552, 60),
     ],
     'Oh... How can this be? My...my Pokémon...',
     [new TemporaryBattleRequirement('Sordward1')]
 );
 TemporaryBattleList['Rampaging Tsareena'] = new TemporaryBattle(
     'Rampaging Tsareena',
-    [new GymPokemon('Tsareena', 264590972, 60)],
+    [new GymPokemon('Tsareena', 508216208, 60)],
     'The Rampaging Tsareena fainted.',
     [new TemporaryBattleRequirement('Shielbert1')]
 );
 TemporaryBattleList['Rampaging Gyarados'] = new TemporaryBattle(
     'Rampaging Gyarados',
-    [new GymPokemon('Gyarados', 264590972, 60)],
+    [new GymPokemon('Gyarados', 508216208, 60)],
     'The Rampaging Gyarados fainted.',
     [new TemporaryBattleRequirement('Rampaging Tsareena')]
 );
 TemporaryBattleList['Rampaging Torkoal'] = new TemporaryBattle(
     'Rampaging Torkoal',
-    [new GymPokemon('Torkoal', 264590972, 60)],
+    [new GymPokemon('Torkoal', 508216208, 60)],
     'The Rampaging Torkoal fainted.',
     [new TemporaryBattleRequirement('Rampaging Gyarados')]
 );
 TemporaryBattleList['Sordward & Shielbert'] = new TemporaryBattle(
     'Sordward & Shielbert',
     [
-        new GymPokemon('Golisopod', 282601920, 62),
-        new GymPokemon('Bronzong', 282601920, 62),
-        new GymPokemon('Doublade', 282601920, 62),
-        new GymPokemon('Falinks', 282601920, 60),
-        new GymPokemon('Bisharp', 282601920, 62),
-        new GymPokemon('Klinklang', 282601920, 60),
+        new GymPokemon('Golisopod', 99102160, 62),
+        new GymPokemon('Bronzong', 99102160, 62),
+        new GymPokemon('Doublade', 99102160, 62),
+        new GymPokemon('Falinks', 99102160, 62),
+        new GymPokemon('Bisharp', 102105255, 62),
+        new GymPokemon('Klinklang', 102105255, 62),
     ],
     'Quite the vexing predicament indeed, surely this must be some kind of mistake...',
     [new TemporaryBattleRequirement('Rampaging Torkoal')]
 );
 TemporaryBattleList['Rampaging Conkeldurr'] = new TemporaryBattle(
     'Rampaging Conkeldurr',
-    [new GymPokemon('Conkeldurr', 264590972, 60)],
+    [new GymPokemon('Conkeldurr', 554417682, 60)],
     'The Rampaging Conkeldurr fainted.',
     [new TemporaryBattleRequirement('Sordward & Shielbert')]
 );
 TemporaryBattleList['Rampaging Dusknoir'] = new TemporaryBattle(
     'Rampaging Dusknoir',
-    [new GymPokemon('Dusknoir', 264590972, 60)],
+    [new GymPokemon('Dusknoir', 554417682, 60)],
     'The Rampaging Dusknoir fainted.',
     [new TemporaryBattleRequirement('Rampaging Conkeldurr')]
 );
 TemporaryBattleList['Gym Leader Bede'] = new TemporaryBattle(
     'Gym Leader Bede',
     [
-        new GymPokemon('Mawile', 282601920, 61),
-        new GymPokemon('Gardevoir', 282601920, 61),
-        new GymPokemon('Galarian Rapidash', 282601920, 62),
-        new GymPokemon('Hatterene', 282601920, 63),
+        new GymPokemon('Mawile', 171522969, 61),
+        new GymPokemon('Gardevoir', 171522969, 61),
+        new GymPokemon('Galarian Rapidash', 171522969, 62),
+        new GymPokemon('Hatterene', 178453190, 63),
     ],
     'Thank you for the battle. I can now accept you as the Champion. It\'s painful to admit, but I\'ve come to realise a few of my weaknesses. But I\'ll keep getting stronger.',
     [new TemporaryBattleRequirement('Rampaging Dusknoir')]
 );
 TemporaryBattleList['Rampaging Gigalith'] = new TemporaryBattle(
     'Rampaging Gigalith',
-    [new GymPokemon('Gigalith', 264590972, 60)],
+    [new GymPokemon('Gigalith', 554417682, 60)],
     'The Rampaging Gigalith fainted.',
     [new TemporaryBattleRequirement('Gym Leader Bede')]
 );
 TemporaryBattleList['Rampaging Froslass'] = new TemporaryBattle(
     'Rampaging Froslass',
-    [new GymPokemon('Froslass', 264590972, 60)],
+    [new GymPokemon('Froslass', 554417682, 60)],
     'The Rampaging Froslass fainted.',
     [new TemporaryBattleRequirement('Rampaging Gigalith')]
 );
 TemporaryBattleList['Gym Leader Marnie'] = new TemporaryBattle(
     'Gym Leader Marnie',
     [
-        new GymPokemon('Liepard', 282601920, 59),
-        new GymPokemon('Toxicroak', 282601920, 59),
-        new GymPokemon('Scrafty', 282601920, 59),
-        new GymPokemon('Morpeko', 282601920, 60),
-        new GymPokemon('Grimmsnarl', 282601920, 60),
+        new GymPokemon('Liepard', 137564886, 59),
+        new GymPokemon('Toxicroak', 137564886, 59),
+        new GymPokemon('Scrafty', 137564886, 59),
+        new GymPokemon('Morpeko', 137564886, 60),
+        new GymPokemon('Grimmsnarl', 142762552, 60),
     ],
     'Yeah I lost, but I\'m gonna learn from your battle style and everythin\'!',
     [new TemporaryBattleRequirement('Rampaging Froslass')]
 );
 TemporaryBattleList['Rampaging Haxorus'] = new TemporaryBattle(
     'Rampaging Haxorus',
-    [new GymPokemon('Haxorus', 264590972, 60)],
+    [new GymPokemon('Haxorus', 600619155, 60)],
     'The Rampaging Haxorus fainted.',
     [new TemporaryBattleRequirement('Gym Leader Marnie')]
 );
 TemporaryBattleList['Sordward2'] = new TemporaryBattle(
     'Sordward2',
     [
-        new GymPokemon('Sirfetch\'d', 282601920, 64),
-        new GymPokemon('Golisopod', 282601920, 64),
-        new GymPokemon('Doublade', 282601920, 64),
-        new GymPokemon('Bisharp', 282601920, 64),
+        new GymPokemon('Sirfetch\'d', 160088105, 64),
+        new GymPokemon('Golisopod', 160088105, 64),
+        new GymPokemon('Doublade', 160088105, 64),
+        new GymPokemon('Bisharp', 166556311, 64),
     ],
     'Oho... My noble Pokémon...',
     [new TemporaryBattleRequirement('Rampaging Haxorus')]
@@ -437,10 +437,10 @@ TemporaryBattleList['Sordward2'] = new TemporaryBattle(
 TemporaryBattleList['Shielbert2'] = new TemporaryBattle(
     'Shielbert2',
     [
-        new GymPokemon('Sirfetch\'d', 282601920, 64),
-        new GymPokemon('Bronzong', 282601920, 64),
-        new GymPokemon('Falinks', 282601920, 64),
-        new GymPokemon('Klinklang', 282601920, 64),
+        new GymPokemon('Sirfetch\'d', 160088105, 64),
+        new GymPokemon('Bronzong', 160088105, 64),
+        new GymPokemon('Falinks', 160088105, 64),
+        new GymPokemon('Klinklang', 166556311, 64),
     ],
     'Oho... My noble Pokémon...',
     [new TemporaryBattleRequirement('Sordward2')]
@@ -448,8 +448,8 @@ TemporaryBattleList['Shielbert2'] = new TemporaryBattle(
 TemporaryBattleList['Klara1'] = new TemporaryBattle(
     'Klara1',
     [
-        new GymPokemon('Venipede', 282601920, 58),
-        new GymPokemon('Galarian Slowpoke', 282601920, 60),
+        new GymPokemon('Venipede', 231324474, 58),
+        new GymPokemon('Galarian Slowpoke', 235997695, 60),
     ],
     'Oh, my next Pokémon\'s gonna make short work-- Huh? That was my last one?',
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
@@ -457,8 +457,8 @@ TemporaryBattleList['Klara1'] = new TemporaryBattle(
 TemporaryBattleList['Avery1'] = new TemporaryBattle(
     'Avery1',
     [
-        new GymPokemon('Abra', 282601920, 58),
-        new GymPokemon('Galarian Slowbro', 282601920, 60),
+        new GymPokemon('Abra', 231324474, 58),
+        new GymPokemon('Galarian Slowbro', 235997695, 60),
     ],
     'Such strength! I\'m in Psyshock!',
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
@@ -466,8 +466,8 @@ TemporaryBattleList['Avery1'] = new TemporaryBattle(
 TemporaryBattleList['Mustard'] = new TemporaryBattle(
     'Mustard',
     [
-        new GymPokemon('Mienfoo', 282601920, 60),
-        new GymPokemon('Shinx', 282601920, 60),
+        new GymPokemon('Mienfoo', 242890697, 60),
+        new GymPokemon('Shinx', 247797580, 60),
     ],
     'That was everything I hoped for and more!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
@@ -475,9 +475,9 @@ TemporaryBattleList['Mustard'] = new TemporaryBattle(
 TemporaryBattleList['Klara2'] = new TemporaryBattle(
     'Klara2',
     [
-        new GymPokemon('Galarian Slowpoke', 282601920, 62),
-        new GymPokemon('Koffing', 282601920, 62),
-        new GymPokemon('Whirlipede', 282601920, 63),
+        new GymPokemon('Galarian Slowpoke', 163155876, 62),
+        new GymPokemon('Koffing', 163155876, 62),
+        new GymPokemon('Whirlipede', 168099994, 63),
     ],
     'Just what have you got that I don\'t?',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel'))]
@@ -485,9 +485,9 @@ TemporaryBattleList['Klara2'] = new TemporaryBattle(
 TemporaryBattleList['Avery2'] = new TemporaryBattle(
     'Avery2',
     [
-        new GymPokemon('Galarian Slowpoke', 282601920, 62),
-        new GymPokemon('Woobat', 282601920, 62),
-        new GymPokemon('Kadabra', 282601920, 63),
+        new GymPokemon('Galarian Slowpoke', 163155876, 62),
+        new GymPokemon('Woobat', 163155876, 62),
+        new GymPokemon('Kadabra', 168099994, 63),
     ],
     'What a Psystrike to my poor pride...',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel'))]
@@ -495,10 +495,10 @@ TemporaryBattleList['Avery2'] = new TemporaryBattle(
 TemporaryBattleList['Klara3'] = new TemporaryBattle(
     'Klara3',
     [
-        new GymPokemon('Skorupi', 282601920, 65),
-        new GymPokemon('Galarian Weezing', 282601920, 66),
-        new GymPokemon('Whirlipede', 282601920, 66),
-        new GymPokemon('Galarian Slowbro', 282601920, 67),
+        new GymPokemon('Skorupi', 130716093, 65),
+        new GymPokemon('Galarian Weezing', 130716093, 66),
+        new GymPokemon('Whirlipede', 130716093, 66),
+        new GymPokemon('Galarian Slowbro', 135997551, 67),
     ],
     'But I didn\'t hold back! I gave it everything I\'ve got...',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
@@ -506,10 +506,10 @@ TemporaryBattleList['Klara3'] = new TemporaryBattle(
 TemporaryBattleList['Avery3'] = new TemporaryBattle(
     'Avery3',
     [
-        new GymPokemon('Galarian Ponyta', 282601920, 65),
-        new GymPokemon('Swoobat', 282601920, 66),
-        new GymPokemon('Kadabra', 282601920, 66),
-        new GymPokemon('Galarian Slowbro', 282601920, 67),
+        new GymPokemon('Galarian Ponyta', 130716093, 65),
+        new GymPokemon('Swoobat', 130716093, 66),
+        new GymPokemon('Kadabra', 130716093, 66),
+        new GymPokemon('Galarian Slowbro', 135997551, 67),
     ],
     'Oh, I should just Imprison myself for this!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
@@ -517,27 +517,27 @@ TemporaryBattleList['Avery3'] = new TemporaryBattle(
 TemporaryBattleList['Peony'] = new TemporaryBattle(
     'Peony',
     [
-        new GymPokemon('Copperajah', 282601920, 70),
-        new GymPokemon('Aggron', 282601920, 70),
+        new GymPokemon('Copperajah', 267146977, 70),
+        new GymPokemon('Aggron', 272543886, 70),
     ],
     'Gahahaaa! Look at me, takin\' a thrashin\' from a youngster like you!',
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
 );
 TemporaryBattleList['Calyrex'] = new TemporaryBattle(
     'Calyrex',
-    [new GymPokemon('Calyrex', 264590972, 80)],
+    [new GymPokemon('Calyrex', 545520080, 80)],
     'Cracrown crow. Roooooowwwn rown crown.',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 46)]
 );
 TemporaryBattleList['Glastrier'] = new TemporaryBattle(
     'Glastrier',
-    [new GymPokemon('Glastrier', 264590972, 75)],
+    [new GymPokemon('Glastrier', 587390930, 75)],
     'The Pokémon ran away!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 49)]
 );
 TemporaryBattleList['Spectrier'] = new TemporaryBattle(
     'Spectrier',
-    [new GymPokemon('Spectrier', 264590972, 75)],
+    [new GymPokemon('Spectrier', 587390930, 75)],
     'The Pokémon ran away!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 54)]
 );
