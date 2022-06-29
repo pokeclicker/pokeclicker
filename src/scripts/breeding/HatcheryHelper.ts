@@ -76,12 +76,12 @@ class HatcheryHelper {
     }
 
     // String for currency in Notifications and Logs
-    currencyString(string: string) {
-        switch (GameConstants.humanifyString(GameConstants.Currency[this.cost.currency])) {
+    currencyString() {
+        switch (GameConstants.Currency[this.cost.currency]) {
             case 'money':
-                return string = 'Pokédollars';
+                return 'Pokédollars';
             default:
-                return string = `${GameConstants.camelCaseToString(GameConstants.Currency[this.cost.currency])}s`;
+                return `${GameConstants.camelCaseToString(GameConstants.Currency[this.cost.currency])}s`;
         }
     }
 
@@ -91,7 +91,7 @@ class HatcheryHelper {
         if (!App.game.wallet.hasAmount(this.cost)) {
             Notifier.notify({
                 title: `[HATCHERY HELPER] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
-                message: `You don't have enough ${this.currencyString('')} to hire me...\nCost: <img src="./assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
+                message: `You don't have enough ${this.currencyString()} to hire me...\nCost: <img src="./assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
                 type: NotificationConstants.NotificationOption.warning,
                 timeout: 30 * GameConstants.SECOND,
             });
@@ -123,12 +123,12 @@ class HatcheryHelper {
         if (!App.game.wallet.loseAmount(this.cost)) {
             Notifier.notify({
                 title: `[HATCHERY HELPER] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
-                message: `It looks like you are a little short on ${this.currencyString('')} right now...\nLet me know when you're hiring again!\nCost: <img src="./assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
+                message: `It looks like you are a little short on ${this.currencyString()} right now...\nLet me know when you're hiring again!\nCost: <img src="./assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
                 type: NotificationConstants.NotificationOption.danger,
                 timeout: 30 * GameConstants.MINUTE,
             });
             this.hired(false);
-            App.game.logbook.newLog(LogBookTypes.OTHER, `You ran out of ${this.currencyString('')} to pay Hatchery Helper ${this.name}!`);
+            App.game.logbook.newLog(LogBookTypes.OTHER, `You ran out of ${this.currencyString()} to pay Hatchery Helper ${this.name}!`);
             return;
         }
     }
