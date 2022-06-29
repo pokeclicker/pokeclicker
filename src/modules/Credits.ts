@@ -201,7 +201,7 @@ export const SpriteCredits: Credit[] = [
             'Sky Trainer (male)',
             'Tourist (female)',
             'Tourist (male)',
-            'Worker (female)'
+            'Worker (female)',
         ],
         // Notes: Permission given on image page if credited.
     },
