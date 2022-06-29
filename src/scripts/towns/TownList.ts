@@ -3028,8 +3028,8 @@ TownList['Master Dojo Battlefield'] = new Town(
     {
         requirements: [
             new MultiRequirement([
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Waters')),
+                new TemporaryBattleRequirement('Klara2'),
+                new TemporaryBattleRequirement('Avery2'),
             ]),
         ],
     }
@@ -3127,12 +3127,12 @@ TownList['Warm-Up Tunnel'] = new DungeonTown(
 TownList['Tower of Darkness'] = new DungeonTown(
     'Tower of Darkness',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 40)]
+    [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 3)]
 );
 TownList['Tower of Waters'] = new DungeonTown(
     'Tower of Waters',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 36)]
+    [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 4)]
 );
 TownList['Roaring-Sea Caves'] = new DungeonTown(
     'Roaring-Sea Caves',
@@ -3160,9 +3160,9 @@ TownList['Split-Decision Ruins'] = new DungeonTown(
     [
         new MultiRequirement([
             new RouteKillRequirement(10, GameConstants.Region.galar, 52),
-            new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Rock Peak Ruins')),
-            new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Iron Ruins')),
-            new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Iceberg Ruins')),
+            new QuestLineStepCompletedRequirement('The Ancient Golems', 4),
+            new QuestLineStepCompletedRequirement('The Ancient Golems', 5),
+            new QuestLineStepCompletedRequirement('The Ancient Golems', 6),
         ]),
     ]
 );
@@ -3174,7 +3174,8 @@ TownList['Lakeside Cave'] = new DungeonTown(
 TownList['Dyna Tree Hill'] = new DungeonTown(
     'Dyna Tree Hill',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 53)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 53)],
+    [TemporaryBattleList['Dyna Tree Birds']]
 );
 TownList['Tunnel to the Top'] = new DungeonTown(
     'Tunnel to the Top',

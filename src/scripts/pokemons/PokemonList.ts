@@ -21491,10 +21491,6 @@ const pokemonList = createPokemonArray(
             'speed': 72,
         },
         'catchRate': 3,
-        'evolutions': [
-            new DungeonRestrictedLevelEvolution('Tower of Waters', 'Kubfu', 'Urshifu (Single Strike)', 30),
-            new DungeonRestrictedLevelEvolution('Tower of Darkness', 'Kubfu', 'Urshifu (Rapid Strike)', 30),
-        ],
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,

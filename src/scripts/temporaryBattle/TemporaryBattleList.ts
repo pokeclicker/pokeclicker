@@ -286,7 +286,7 @@ TemporaryBattleList['Hop8'] = new TemporaryBattle(
         new GymPokemon('Inteleon', 118968793, 60),
     ],
     'I didn\'t expect there to be such a gap between you and me, mate...',
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Slumbering Weald Shrine'))],
     [],
     () => {
         App.game.quests.getQuestLine('Sword and Shield').beginQuest();
@@ -445,7 +445,11 @@ TemporaryBattleList['Mustard'] = new TemporaryBattle(
         new GymPokemon('Shinx', 247797580, 60),
     ],
     'That was everything I hoped for and more!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
+    [],
+    () => {
+        App.game.quests.getQuestLine('The Dojo\'s Armor').beginQuest();
+    }
 );
 TemporaryBattleList['Klara2'] = new TemporaryBattle(
     'Klara2',
@@ -455,7 +459,12 @@ TemporaryBattleList['Klara2'] = new TemporaryBattle(
         new GymPokemon('Whirlipede', 168099994, 63),
     ],
     'Just what have you got that I don\'t?',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel'))]
+    [
+        new MultiRequirement([
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel')),
+            new TemporaryBattleRequirement('Mustard'),
+        ]),
+    ]
 );
 TemporaryBattleList['Avery2'] = new TemporaryBattle(
     'Avery2',
@@ -465,7 +474,12 @@ TemporaryBattleList['Avery2'] = new TemporaryBattle(
         new GymPokemon('Kadabra', 168099994, 63),
     ],
     'What a Psystrike to my poor pride...',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel'))]
+    [
+        new MultiRequirement([
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel')),
+            new TemporaryBattleRequirement('Klara2'),
+        ]),
+    ]
 );
 TemporaryBattleList['Klara3'] = new TemporaryBattle(
     'Klara3',
@@ -476,7 +490,7 @@ TemporaryBattleList['Klara3'] = new TemporaryBattle(
         new GymPokemon('Galarian Slowbro', 135997551, 67),
     ],
     'But I didn\'t hold back! I gave it everything I\'ve got...',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
+    [new TemporaryBattleRequirement('Avery2')]
 );
 TemporaryBattleList['Avery3'] = new TemporaryBattle(
     'Avery3',
@@ -487,7 +501,11 @@ TemporaryBattleList['Avery3'] = new TemporaryBattle(
         new GymPokemon('Galarian Slowbro', 135997551, 67),
     ],
     'Oh, I should just Imprison myself for this!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
+    [new TemporaryBattleRequirement('Klara3')],
+    [],
+    () => {
+        App.game.party.gainPokemonById(891);
+    }
 );
 TemporaryBattleList['Peony'] = new TemporaryBattle(
     'Peony',
@@ -496,7 +514,13 @@ TemporaryBattleList['Peony'] = new TemporaryBattle(
         new GymPokemon('Aggron', 272543886, 70),
     ],
     'Gahahaaa! Look at me, takin\' a thrashin\' from a youngster like you!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    [],
+    () => {
+        App.game.quests.getQuestLine('The Crown of Galar').beginQuest();
+        App.game.quests.getQuestLine('The Birds of the Dyna Tree').beginQuest();
+        App.game.quests.getQuestLine('The Ancient Golems').beginQuest();
+    }
 );
 TemporaryBattleList['Calyrex'] = new TemporaryBattle(
     'Calyrex',
@@ -508,11 +532,32 @@ TemporaryBattleList['Glastrier'] = new TemporaryBattle(
     'Glastrier',
     [new GymPokemon('Glastrier', 587390930, 75)],
     'The Pokémon ran away!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 49)]
+    [new QuestLineStepCompletedRequirement('The Crown of Galar', 3)]
 );
 TemporaryBattleList['Spectrier'] = new TemporaryBattle(
     'Spectrier',
     [new GymPokemon('Spectrier', 587390930, 75)],
     'The Pokémon ran away!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)]
+    [new QuestLineStepCompletedRequirement('The Crown of Galar', 2)]
+);
+TemporaryBattleList['Dyna Tree Birds'] = new TemporaryBattle(
+    'Dyna Tree Birds',
+    [
+        new GymPokemon('Galarian Articuno', 267146977, 70),
+        new GymPokemon('Galarian Zapdos', 272543886, 70),
+        new GymPokemon('Galarian Moltres', 272543886, 70),
+    ],
+    'The legendary birds fled to roam the region.',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill'))]
+);
+TemporaryBattleList['Regigigas'] = new TemporaryBattle(
+    'Regigigas',
+    [new GymPokemon('Regigigas', 587390930, 100)],
+    'The ancient giant was defeated!',
+    [
+        new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap.Regieleki),
+            new ObtainedPokemonRequirement(pokemonMap.Regidrago),
+        ]),
+    ]
 );
