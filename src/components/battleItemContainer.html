@@ -40,7 +40,7 @@
                             tooltip: {
                               title: ItemList[$data].displayName + '<br/>' + ItemList[$data].description,
                               trigger: 'hover',
-                              placement:'left',
+                              placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
                               html: true
                             }">
                 <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
@@ -87,7 +87,7 @@
                             tooltip: {
                               title: ItemList[$data].displayName + '<br/>' + ItemList[$data].getDescription() + '<br/>' + 'Consumes: ' + ItemList[$data].gemTypes[0] + ', ' + ItemList[$data].gemTypes[1] + ', and ' + ItemList[$data].gemTypes[2] + ' Gems',
                               trigger: 'hover',
-                              placement:'left',
+                              placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
                               html: true
                             }">
                 <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
