@@ -478,6 +478,27 @@ class QuestLineHelper {
         App.game.quests.questLines().push(minasTrialAlolaQuestLine);
     }
 
+    public static createMelmetalQuestLine() {
+        const melmetalQuestLine = new QuestLine('Mystery Box Quest', 'Investigate the Mystery Box Pokémon: Meltan and Melmetal.');
+
+        const catchMeltan = new CustomQuest(400, undefined, 'Capture 400 Meltan.', () => {
+            return pokemonMap.filter(p => p.name == 'Meltan').map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a, b) => a + b, 0);
+        });
+        melmetalQuestLine.addQuest(catchMeltan);
+
+        const melmetalReward = () => {
+            App.game.party.gainPokemonById(809)
+            Notifier.notify({
+                title: melmetalQuestLine.name,
+                message: 'Your Meltan received a mystery force that allowed it to evolve into Melmetal!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+
+            App.game.quests.questLines().push(melmetalQuestLine);
+        }
+    }
+
     // Event QuestLines
     public static createFindSurpriseTogepiForEasterQuestLine() {
         const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted, but cannot be found!');
@@ -553,6 +574,7 @@ class QuestLineHelper {
         this.createVivillonQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
+        this.createMelmetalQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
     }
 }
