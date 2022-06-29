@@ -84,7 +84,7 @@ RoamingPokemonList.add(GameConstants.Region.alola, new RoamingPokemon('Zeraora',
 
 //Galar
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Galarian Zapdos', new MultiRequirement([
-    new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill')),
+    new TemporaryBattleRequirement('Dyna Tree Birds'),
     new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'South Galar').id),
 ])));
 
@@ -94,7 +94,7 @@ RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Zarude', 
     new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id),
 ])));
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Galarian Moltres', new MultiRequirement([
-    new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill')),
+    new TemporaryBattleRequirement('Dyna Tree Birds'),
     new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id),
 ])));
 
@@ -108,6 +108,6 @@ RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Glastrier
     new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id),
 ])));
 RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon('Galarian Articuno', new MultiRequirement([
-    new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill')),
+    new TemporaryBattleRequirement('Dyna Tree Birds'),
     new SubregionRequirement(GameConstants.Region.galar, SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id),
 ])));

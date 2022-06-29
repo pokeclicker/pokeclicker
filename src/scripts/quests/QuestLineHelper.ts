@@ -505,7 +505,17 @@ class QuestLineHelper {
         const clearEternatus = new CustomQuest(1, 0, 'Leon failed to capture Eternatus. Defeat it before it can cause any more damage!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Eternatus')]());
         darkestDayQuestLine.addQuest(clearEternatus);
 
-        const clearTheDarkestDay = new CustomQuest(1, 0, 'Eternatus has ascended to it\'s Eternamax form! Catch it to put an end to the Darkest Day!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('The Darkest Day')]());
+        const TheDarkestDayReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            Notifier.notify({
+                title: darkestDayQuestLine.name,
+                message: 'You found a Masterball!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearTheDarkestDay = new CustomQuest(1, TheDarkestDayReward, 'Eternatus has ascended to it\'s Eternamax form! Catch it to put an end to the Darkest Day!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('The Darkest Day')]());
         darkestDayQuestLine.addQuest(clearTheDarkestDay);
 
         App.game.quests.questLines().push(darkestDayQuestLine);
@@ -560,6 +570,125 @@ class QuestLineHelper {
         swordShieldQuestLine.addQuest(clearShielbert2);
 
         App.game.quests.questLines().push(swordShieldQuestLine);
+    }
+
+    public static createDojoArmorQuestLine() {
+        const dojoArmorQuestLine = new QuestLine('The Dojo\'s Armor', 'Obtain the Secret Armor of the Master Dojo.');
+
+        const clearKlara2 = new CustomQuest(1, 0, 'Both you and Klara have happened upon the same Max Mushroom in Warm-Up Tunnel. Defeat her to win it.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Klara2')]());
+        dojoArmorQuestLine.addQuest(clearKlara2);
+
+        const clearAvery2 = new CustomQuest(1, 0, 'Both you and Avery have happened upon the same Max Mushroom in Warm-Up Tunnel. Defeat him to win it.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Avery2')]());
+        dojoArmorQuestLine.addQuest(clearAvery2);
+
+        const clearKlara3 = new CustomQuest(1, 0, 'For the final trial, you must defeat both Klara and Avery at the Master Dojo Battlefield. First, defeat Klara.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('clearKlara3')]());
+        dojoArmorQuestLine.addQuest(clearKlara3);
+
+        const clearAvery3 = new CustomQuest(1, 0, 'Now Klara is defeated, defeat Avery', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Avery3')]());
+        dojoArmorQuestLine.addQuest(clearAvery3);
+
+        const TowerofDarknessReward = () => {
+            App.game.party.gainPokemonById(892);
+            Notifier.notify({
+                title: dojoArmorQuestLine.name,
+                message: 'Kubfu evolved into Urshifu (Single Strike)!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearTowerofDarkness = new CustomQuest(1, TowerofDarknessReward, 'Train Kubfu in the Tower of Darkness so it can evolve!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Tower of Darkness')]());
+        dojoArmorQuestLine.addQuest(clearTowerofDarkness);
+
+        const TowerofWatersReward = () => {
+            App.game.party.gainPokemonById(892.1);
+            Notifier.notify({
+                title: dojoArmorQuestLine.name,
+                message: 'Kubfu evolved into Urshifu (Rapid Strike)!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearTowerofWaters = new CustomQuest(1, TowerofWatersReward, 'Train Kubfu in the Tower of Waters so it can evolve!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Tower of Waters')]());
+        dojoArmorQuestLine.addQuest(clearTowerofWaters);
+
+        App.game.quests.questLines().push(dojoArmorQuestLine);
+    }
+
+    public static createGalarCrownQuestLine() {
+        const galarCrownQuestLine = new QuestLine('The Crown of Galar', 'Help the ancient king of Galar, Calyrex, return to its former glory.');
+
+        const clearCalyrex = new CustomQuest(1, 0, 'A mysterious Pokémon has appeared and challenged you to a battle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Calyrex')]());
+        galarCrownQuestLine.addQuest(clearCalyrex);
+
+        const oldCemetery = new CustomQuest(30, 0, 'Calyrex is going to Old Cemetery to grow a Shaderoot Carrot. Protect it from wild Pokémon so it can concentrate.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['49'](), 0);
+        galarCrownQuestLine.addQuest(oldCemetery);
+
+        const slipperySlope = new CustomQuest(30, 0, 'Calyrex is going to Slippery Slope to grow a Iceroot Carrot. Protect it from wild Pokémon so it can concentrate.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['54'](), 0);
+        galarCrownQuestLine.addQuest(slipperySlope);
+
+        const clearSpectrier = new CustomQuest(1, 0, 'A mysterious Pokémon has appeared and challenged you to a battle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Spectrier')]());
+        galarCrownQuestLine.addQuest(clearSpectrier);
+
+        const catchSpectrier = new CustomQuest(1, 0, 'Spectrier is now roaming the Crown Tundra. Catch it when the opportunity arises.', () => App.game.statistics.pokemonCaptured[pokemonMap['Spectrier'].id](), 0);
+        galarCrownQuestLine.addQuest(catchSpectrier);
+
+        const catchGlastrier = new CustomQuest(1, 0, 'Glastrier is now roaming the Crown Tundra. Catch it when the opportunity arises.', () => App.game.statistics.pokemonCaptured[pokemonMap['Glastrier'].id](), 0);
+        galarCrownQuestLine.addQuest(catchGlastrier);
+
+        const catchCalyrex = new CustomQuest(1, 0, 'Now you have found and caught Glastrier and Spectrier, Calyrex wants to challenge you at Crown Shrine. Catch it!', () => App.game.statistics.pokemonCaptured[pokemonMap['Calyrex'].id](), 0);
+        galarCrownQuestLine.addQuest(catchCalyrex);
+
+        App.game.quests.questLines().push(galarCrownQuestLine);
+    }
+
+    public static createDynaTreeBirdsQuestLine() {
+        const dynaTreeBirdsQuestLine = new QuestLine('The Birds of the Dyna Tree', 'Find the Legendary birds of the Dyna Tree.');
+
+        const clearDynaTreeHill = new CustomQuest(1, 0, 'Some unknown bird Pokémon have been sighted near Dyna Tree Hill in Ballimere Lake. Explore the area to see for yourself.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Dyna Tree Hill')]());
+        dynaTreeBirdsQuestLine.addQuest(clearDynaTreeHill);
+
+        const clearDynaTreeBirds = new CustomQuest(1, 0, 'You witnessed 3 powerful looking bird pokemon resembling Articuno, Zapdos and Moltres fighting over the fruit of the Dyna Tree. Upon noticing you, they attack!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dyna Tree Birds')]());
+        dynaTreeBirdsQuestLine.addQuest(clearDynaTreeBirds);
+
+        const catchGalarianArticuno = new CustomQuest(1, 0, 'The bird resembling Articuno didn\'t fly far, it is now roaming the Crown Tundra. Catch it when you get the chance.', () => App.game.statistics.pokemonCaptured[pokemonMap['Galarian Articuno'].id](), 0);
+        dynaTreeBirdsQuestLine.addQuest(catchGalarianArticuno);
+
+        const catchGalarianZapdos = new CustomQuest(1, 0, 'The bird resembling Zapdos ran to South Galar, where it is now roaming. Catch it when you get the chance.', () => App.game.statistics.pokemonCaptured[pokemonMap['Galarian Zapdos'].id](), 0);
+        dynaTreeBirdsQuestLine.addQuest(catchGalarianZapdos);
+
+        const catchGalarianMoltres = new CustomQuest(1, 0, 'The bird resembling Moltres flew to the Isle of Armor, around which it is now roaming. Catch it when you get the chance', () => App.game.statistics.pokemonCaptured[pokemonMap['Galarian Moltres'].id](), 0);
+        dynaTreeBirdsQuestLine.addQuest(catchGalarianMoltres);
+
+        App.game.quests.questLines().push(dynaTreeBirdsQuestLine);
+    }
+
+    public static createAncientGolemsQuestLine() {
+        const ancientGolemsQuestLine = new QuestLine('The Ancient Golems', 'Discover the ancient Golems in the ruins of the Crown Tundra.');
+
+        const threePointPass = new CustomQuest(25, 0, 'Peony told you of a peculiar ruin located at Three-Point Pass. Explore the area to find it.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['52'](), 0);
+        ancientGolemsQuestLine.addQuest(threePointPass);
+
+        const clearRockPeakRuins1 = new CustomQuest(1, 0, 'Peony has directed you to the Rock Peak Ruins in Giants Bed. Explore it to look for any clues to opening the peculiar ruin.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rock Peak Ruins')]());
+        ancientGolemsQuestLine.addQuest(clearRockPeakRuins1);
+
+        const clearIcebergRuins1 = new CustomQuest(1, 0, 'Peony has directed you to the Iceberg Ruins in Snowslide Slope. Explore it to look for any clues to opening the peculiar ruin.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iceberg Ruins')]());
+        ancientGolemsQuestLine.addQuest(clearIcebergRuins1);
+
+        const clearIronRuins1 = new CustomQuest(1, 0, 'Peony has directed you to the Iron Ruins in Giants Bed. Explore it to look for any clues to opening the peculiar ruin.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iron Ruins')]());
+        ancientGolemsQuestLine.addQuest(clearIronRuins1);
+
+        const clearRockPeakRuins2 = new CustomQuest(9, 0, 'Peony had advised you keep exploring the ruins. Continue until the area seems to get smaller...', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rock Peak Ruins')]());
+        ancientGolemsQuestLine.addQuest(clearRockPeakRuins2);
+
+        const clearIcebergRuins2 = new CustomQuest(9, 0, 'Peony had advised you keep exploring the ruins. Continue until the area seems to get smaller...', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iceberg Ruins')]());
+        ancientGolemsQuestLine.addQuest(clearIcebergRuins2);
+
+        const clearIronRuins2 = new CustomQuest(9, 0, 'Peony had advised you keep exploring the ruins. Continue until the area seems to get smaller...', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iron Ruins')]());
+        ancientGolemsQuestLine.addQuest(clearIronRuins2);
+
+        App.game.quests.questLines().push(ancientGolemsQuestLine);
     }
 
     // Event QuestLines
@@ -639,6 +768,10 @@ class QuestLineHelper {
         this.createMinasTrialAlolaQuestLine();
         this.createDarkestDayQuestLine();
         this.createSwordShieldQuestLine();
+        this.createDojoArmorQuestLine();
+        this.createGalarCrownQuestLine();
+        this.createDynaTreeBirdsQuestLine();
+        this.createAncientGolemsQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
     }
 }

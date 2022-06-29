@@ -1250,6 +1250,8 @@ export const TemporaryBattles = [
     'Calyrex',
     'Glastrier',
     'Spectrier',
+    'Dyna Tree Birds',
+    'Regigigas',
 ];
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
