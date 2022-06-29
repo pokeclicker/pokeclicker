@@ -51,7 +51,7 @@ class PartyPokemon implements Saveable {
         breeding = false,
         shiny = false,
         category = 0,
-        pokerus = 0
+        pokerus = GameConstants.Pokerus['Uninfected']
     ) {
         this.proteinsUsed = ko.observable(proteinsUsed);
         this.effortPoints = ko.observable(effortPoints);
@@ -76,13 +76,13 @@ class PartyPokemon implements Saveable {
     }
 
     public calculatePokerus() {
-        // Egg can't hatch and Egg has pokerus
+        // Egg can't hatch and valid Egg has pokerus
         return App.game.breeding.eggList.some(e => {
             if (!e().canHatch() && !e().isNone() && e().pokemon == GameConstants.Starter[player.starter()]) {
                 App.game.breeding.eggList.forEach(p => {
                     const pokemon = p().partyPokemon;
-                    if (pokemon && pokemon.pokerus == 0) {
-                        pokemon.pokerus++;
+                    if (pokemon && pokemon.pokerus == GameConstants.Pokerus['Uninfected']) {
+                        pokemon.pokerus = GameConstants.Pokerus['Infected'];
                     }
                 });
             }
