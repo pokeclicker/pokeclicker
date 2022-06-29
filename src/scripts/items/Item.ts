@@ -122,6 +122,7 @@ class Item {
             let curr = GameConstants.camelCaseToString(GameConstants.Currency[this.currency]);
             switch (this.currency) {
                 case GameConstants.Currency.money:
+                    curr = 'Pokédollars';
                     break;
                 default:
                     curr += 's';
