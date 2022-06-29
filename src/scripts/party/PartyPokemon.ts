@@ -24,7 +24,7 @@ class PartyPokemon implements Saveable {
         shiny: false,
         category: 0,
         levelEvolutionTriggered: false,
-        pokerus: 0,
+        pokerus: GameConstants.Pokerus['Uninfected'],
     };
 
     _breeding: KnockoutObservable<boolean>;
@@ -75,16 +75,36 @@ class PartyPokemon implements Saveable {
         return App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
     }
 
-    public calculatePokerus() {
+    public calculatePokerusTypes(): Set<number> {
         // Egg can't hatch and valid Egg has pokerus
-        return App.game.breeding.eggList.some(e => {
-            if (!e().canHatch() && !e().isNone() && e().pokemon == GameConstants.Starter[player.starter()]) {
-                App.game.breeding.eggList.forEach(p => {
-                    const pokemon = p().partyPokemon;
-                    if (pokemon && pokemon.pokerus == GameConstants.Pokerus['Uninfected']) {
-                        pokemon.pokerus = GameConstants.Pokerus['Infected'];
+        const eggTypes: Set<number> = new Set();
+        for (let i = 0; i < App.game.breeding.eggList.length; i++) {
+            if (i > App.game.breeding.hatcheryHelpers.hired().length - 1) {
+                const egg = App.game.breeding.eggList[i]();
+                if (!egg.canHatch() && !egg.isNone()) {
+                    const pokerus = App.game.party.getPokemon(pokemonMap[egg.pokemon].id).pokerus;
+                    if (pokerus && pokerus == GameConstants.Pokerus['Contagious']) {
+                        eggTypes.add(PokemonHelper.getPokemonByName(pokemonMap[App.game.breeding.eggList[i]().pokemon].name).type1);
+                        eggTypes.add(PokemonHelper.getPokemonByName(pokemonMap[App.game.breeding.eggList[i]().pokemon].name).type2);
                     }
-                });
+                }
+            }
+        }
+        if (eggTypes.has(PokemonType['None'])) {
+            eggTypes.delete(PokemonType['None']);
+        }
+        return eggTypes;
+    }
+
+    public calculatePokerus() {
+        const eggTypes = this.calculatePokerusTypes();
+        return App.game.breeding.eggList.forEach(p => {
+            const pokemon = p().partyPokemon;
+            if (pokemon && pokemon.pokerus == GameConstants.Pokerus['Uninfected']) {
+                const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+                if (eggTypes.has(dataPokemon.type1) || eggTypes.has(dataPokemon.type2)) {
+                    pokemon.pokerus = GameConstants.Pokerus['Infected'];
+                }
             }
         });
     }
