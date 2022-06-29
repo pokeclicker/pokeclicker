@@ -62,8 +62,7 @@
             <div class="form-group col-md-6 col-6 p-0">
                 <label for="protein-search">Search</label>
                 <input id="protein-search" autocomplete="off" class="form-control" placeholder="search here"
-                    oninput="ProteinFilters.search.value(this.value)"
-                    data-bind="value: ProteinFilters.search.value()"
+                    data-bind="textInput: ProteinFilters.search.value"
                 />
             </div>
             <div class="form-group col-md-3 col-3 p-0">
