@@ -49,7 +49,7 @@ class RoamingPokemonList {
 
 // Kanto
 RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Mew'));
-
+RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Meltan', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
 // Johto
 RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Raikou', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))));
 RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Entei', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))));
