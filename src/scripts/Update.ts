@@ -799,6 +799,8 @@ class Update implements Saveable {
         },
 
         '0.9.8': ({ playerData, saveData }) => {
+            saveData.oakItemLoadouts = saveData.oakItemLoadouts.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
+
             // Start Sevii questline if player has Volcano Badge already
             if (saveData.badgeCase[7]) {
                 saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
