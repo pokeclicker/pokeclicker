@@ -1,6 +1,7 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 ///<reference path="../../declarations/enums/CaughtStatus.d.ts"/>
+///<reference path="../../declarations/utilities/UnsortableArray.d.ts"/>
 
 class Party implements Feature {
     name = 'Pokemon Party';
@@ -244,12 +245,12 @@ class Party implements Feature {
         // This method intentionally left blank
     }
 
-    get caughtPokemon() {
+    get caughtPokemon(): UnsortableArray<PartyPokemon> {
         return this._caughtPokemon();
     }
 
-    set caughtPokemon(pokemon: PartyPokemon[]) {
-        this._caughtPokemon(pokemon);
+    set caughtPokemon(pokemon: UnsortableArray<PartyPokemon>) {
+        this._caughtPokemon(pokemon as PartyPokemon[]);
     }
 
 }
