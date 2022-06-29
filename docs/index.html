@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.9.6"></script>
+    <script src="scripts/modules.min.js?v=0.9.7"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.9.6"></script>
+    <script src="scripts/script.min.js?v=0.9.7"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -38,7 +38,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.9.6" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.9.7" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -304,7 +304,7 @@
                 <span data-bind="html:  App.game.keyItems.itemList[KeyItemController.latestGainedItem()].description">Description</span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: App.game.keyItems.itemList[KeyItemController.latestGainedItem()].unlockReward">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: App.game.keyItems.itemList[KeyItemController.latestGainedItem()].unlockRewardOnClose">Close</button>
             </div>
         </div>
     </div>
@@ -1683,8 +1683,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.kanto'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/kanto.png?v=0.9.6',
-        href:'assets/images/kanto.png?v=0.9.6'
+        'xlink:href':'assets/images/kanto.png?v=0.9.7',
+        href:'assets/images/kanto.png?v=0.9.7'
     }"></image>
 
     <!-- ------ -->
@@ -2946,8 +2946,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/johto.png?v=0.9.6',
-        href:'assets/images/johto.png?v=0.9.6'
+        'xlink:href':'assets/images/johto.png?v=0.9.7',
+        href:'assets/images/johto.png?v=0.9.7'
     }"></image>
 
     <!-- ------ -->
@@ -4242,8 +4242,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hoenn.png?v=0.9.6',
-        href:'assets/images/hoenn.png?v=0.9.6'
+        'xlink:href':'assets/images/hoenn.png?v=0.9.7',
+        href:'assets/images/hoenn.png?v=0.9.7'
     }"></image>
 
     <!-- ------ -->
@@ -5868,8 +5868,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/sinnoh.png?v=0.9.6',
-        href:'assets/images/sinnoh.png?v=0.9.6'
+        'xlink:href':'assets/images/sinnoh.png?v=0.9.7',
+        href:'assets/images/sinnoh.png?v=0.9.7'
     }"></image>
 
     <!-- ------ -->
@@ -7527,8 +7527,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/unova.png?v=0.9.6',
-        href:'assets/images/unova.png?v=0.9.6'
+        'xlink:href':'assets/images/unova.png?v=0.9.7',
+        href:'assets/images/unova.png?v=0.9.7'
     }"></image>
 
     <!-- ------ -->
@@ -9240,8 +9240,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/kalos.png?v=0.9.6',
-        href:'assets/images/kalos.png?v=0.9.6'
+        'xlink:href':'assets/images/kalos.png?v=0.9.7',
+        href:'assets/images/kalos.png?v=0.9.7'
     }"></image>
 
     <!-- ------ -->
@@ -10586,8 +10586,8 @@
     
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-melemele.png?v=0.9.6',
-            href:'assets/images/alola-melemele.png?v=0.9.6'
+            'xlink:href':'assets/images/alola-melemele.png?v=0.9.7',
+            href:'assets/images/alola-melemele.png?v=0.9.7'
         }"></image>
 
         <!-- ------ -->
@@ -13299,8 +13299,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-akala.png?v=0.9.6',
-            href:'assets/images/alola-akala.png?v=0.9.6'
+            'xlink:href':'assets/images/alola-akala.png?v=0.9.7',
+            href:'assets/images/alola-akala.png?v=0.9.7'
         }"></image>
 
         <!-- ------ -->
@@ -14936,8 +14936,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula & Poni islands').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola2.png?v=0.9.6',
-            href:'assets/images/alola2.png?v=0.9.6'
+            'xlink:href':'assets/images/alola2.png?v=0.9.7',
+            href:'assets/images/alola2.png?v=0.9.7'
         }"></image>
 
         <!-- ------ -->
@@ -15966,8 +15966,8 @@
                             <g data-bind='visible: player.region == GameConstants.Region.galar'>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar.png?v=0.9.6',
-            href:'assets/images/galar.png?v=0.9.6'
+            'xlink:href':'assets/images/galar.png?v=0.9.7',
+            href:'assets/images/galar.png?v=0.9.7'
         }"></image>
 
         <!-- ------ -->
@@ -19604,13 +19604,26 @@ aria-labelledby="pokedexModalLabel">
                             <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
                                 <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}.svg`}"/>
                             </div>
-                            <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name) && App.game.party.getPokemon($data.id).pokerus" style="position: absolute;left: 2px;top: -15px;">
+                            <div data-bind="visible: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -15px;">
                                 <img width="30px" src="" data-bind="attr: { src: `assets/images/breeding/Pokerus.png`}"/>
                             </div>
                             <img src="" width="80px" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokedexHelper.getImage($data.id)}">
                             <!-- ko if: PokedexHelper.pokemonSeen($data.id) -->
                             <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: $data.name">name</span>
-                            <a class="overlay" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="click: ()=>{App.game.statistics.selectedPokemonID($data.id)}, tooltip: { html: true, title: `<u>Information:</u><br/>Base Attack: <strong>${$data.attack}</strong><br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate, true)}%</strong><br/>Hatch Steps: <strong>${App.game.breeding.getSteps($data.eggCycles).toLocaleString('en-US')}</strong>`, trigger: 'hover', placement:'bottom' }"></a>
+                            <a class="overlay" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="click: ()=>{App.game.statistics.selectedPokemonID($data.id)},
+                                tooltip: {
+                                    html: true,
+                                    title: `<u>Information:</u>
+                                        <br/>Base Attack: <strong>${$data.attack}</strong>
+                                        <br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate, true)}%</strong>
+                                        <br/>Hatch Steps: <strong>${App.game.breeding.getSteps($data.eggCycles).toLocaleString('en-US')}</strong>` +
+                                        (App.game.party.getPokemon($data.id)?.pokerus ?
+                                            `<br/>EVs: <strong>${App.game.party.getEffortValues(App.game.party.getPokemon($data.id))().toLocaleString('en-US')}</strong>
+                                            <br/>EV bonus: <strong>×${App.game.party.calculateEVAttackBonus(App.game.party.getPokemon($data.id)).toLocaleString('en-US')}</strong>`
+                                            : ''),
+                                    trigger: 'hover',
+                                    placement:'bottom'
+                                }"></a>
                             <!-- /ko -->
                    </li>
                </ul>
@@ -19661,6 +19674,16 @@ aria-labelledby="pokedexModalLabel">
                       <td class="text-left">Proteins Used</td>
                       <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).proteinsUsed() : 0).toLocaleString('en-US')">-</code></td>
                     </tr>
+                    <!-- ko if: App.game.party.getPokemon($data)?.pokerus -->
+                      <tr>
+                        <td class="text-left">EVs</td>
+                        <td class="text-left tight"><code data-bind="text: App.game.party.getEffortValues(App.game.party.getPokemon($data))().toLocaleString('en-US')">-</code></td>
+                      </tr>
+                      <tr>
+                        <td class="text-left">EV bonus</td>
+                        <td class="text-left tight"><code data-bind="text: '×' + App.game.party.calculateEVAttackBonus(App.game.party.getPokemon($data)).toLocaleString('en-US')">-</code></td>
+                      </tr>
+                    <!-- /ko -->
                     <tr>
                       <td class="text-left">Type</td>
                       <td class="text-left tight">
@@ -19728,7 +19751,7 @@ aria-labelledby="pokedexModalLabel">
                       <td class="text-left">Shinies Hatched</td>
                       <td class="text-left tight"><code data-bind="text: App.game.statistics.shinyPokemonHatched[$data]().toLocaleString('en-US')">-</code></td>
                     </tr>
-                    <!-- ko if: App.game.party.caughtPokemon.length > 0 && App.game.party.getPokemon($data) && App.game.party.getPokemon($data).pokerus -->
+                    <!-- ko if: App.game.party.getPokemon($data)?.pokerus -->
                     <tr>
                       <td class="text-left">Effort Values</td>
                       <td class="text-left tight"><code data-bind="text: App.game.party.getEffortValues(App.game.party.getPokemon($data))().toLocaleString('en-US')">-</code></td>
