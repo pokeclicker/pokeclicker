@@ -48,5 +48,6 @@ module.exports = {
         'quotes': ['error', 'single'],
         'prefer-arrow-callback': 'error',
         'no-alert': 'error',
+        'dot-notation': 'error',
     },
 };
