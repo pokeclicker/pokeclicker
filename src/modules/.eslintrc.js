@@ -52,6 +52,7 @@ module.exports = {
         '@typescript-eslint/lines-between-class-members': ['error', { exceptAfterSingleLine: true }],
         '@typescript-eslint/member-ordering': ['error'],
         'no-alert': 'error',
+        'no-sparse-arrays': 'error',
         'dot-notation': 'error',
     },
 };

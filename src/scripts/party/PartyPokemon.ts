@@ -168,7 +168,7 @@ class PartyPokemon implements Saveable {
 
     public hideFromProteinList = (): boolean => {
         const hidden = ko.pureComputed(() => {
-            if (!ProteinFilters.search.value().test(this.name)) {
+            if (!new RegExp(ProteinFilters.search.value(), 'i').test(this.name)) {
                 return true;
             }
 
