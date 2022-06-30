@@ -7146,7 +7146,7 @@ dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
     96500, 50);
 
 dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
-    ['Trevenant', 'Stonjourner', 'Heatmor', 'Conkeldurr', 'Rhyperior', 'Aerodactyl'],
+    ['Stonjourner', 'Rhyperior', 'Aerodactyl', 'Aggron', 'Coalossal', 'Barbaracle', 'Gigalith', 'Crustle'],
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     31507840,
     [
@@ -7156,7 +7156,7 @@ dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
     96500, 48);
 
 dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
-    ['Metang', 'Bronzong', 'Dragapult', 'Snorlax', 'Magmortar'],
+    ['Bronzong', 'Duraludon', 'Copperajah', 'Corviknight', 'Perrserker', 'Bisharp', 'Ferrothorn', 'Excadrill'],
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     31507840,
     [
@@ -7166,7 +7166,7 @@ dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
     96500, 48);
 
 dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
-    ['Cryogonal', 'Beartic', 'Galarian Darumaka', 'Aurorus', 'Weavile', 'Vanilluxe', 'Absol', 'Froslass', 'Delibird'],
+    ['Cryogonal', 'Beartic', 'Galarian Darumaka', 'Aurorus', 'Weavile', 'Vanilluxe', 'Froslass', 'Delibird'],
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     31507840,
     [
@@ -7176,7 +7176,7 @@ dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
     96500, 54);
 
 dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
-    ['Golurk', 'Electabuzz', 'Drakloak', 'Araquanid', 'Cryogonal', 'Bronzong', 'Claydol', 'Absol', 'Galvantula', 'Audino'],
+    ['Electabuzz', 'Drakloak', 'Cryogonal', 'Bronzong', 'Stonjourner', 'Galvantula', 'Altaria', 'Relicanth', 'Glalie', 'Metagross'],
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     32870660,
     [
@@ -7216,7 +7216,7 @@ dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
     ],
     96500, 54);
 dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
-    ['Snom', 'Hatenna', 'Solosis', 'Jynx', 'Piloswine', 'Dubwool'],
+    ['Frosmoth', 'Hatterene', 'Reuniclus', 'Mr. Rime', 'Mamoswine', 'Dubwool'],
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     33915762,
     [
