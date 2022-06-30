@@ -33,7 +33,7 @@
          , noText: true
          })
       %>
- 
+
     <!--Route 3-->
     <%- include('templates/mapRoute',
         { route: 3, region: 0
@@ -91,7 +91,7 @@
         , x: 71, y: 9
         })
      %>
-	 
+
 	   <!--Extra bit of Route 9-->
     <%- include('templates/mapRoute',
         { route: 9, region: 0
@@ -304,16 +304,17 @@
     <%- include('templates/mapTown',
          { name: "Viridian City"
          , x: 23, y: 25
+         , width: 4, height: 4
          })
       %>
-	  
+
    <!--Viridian City extended-->
     <%- include('templates/mapTown',
          { name: "Viridian City"
          , x: 27, y: 26
-		 , width: 1, height: 3
+		 , width: 1, height: 3, notMain: true
          })
-      %>	  
+      %>
 
     <!--Pewter City-->
     <%- include('templates/mapTown',
@@ -326,9 +327,9 @@
     <%- include('templates/mapTown',
         { name: "Pewter City"
         , x: 23, y: 6
-		, width: 7, height: 3
+		, width: 7, height: 3, notMain: true
         })
-     %>	 
+     %>
 
     <!--Cerulean City-->
     <%- include('templates/mapTown',
@@ -350,10 +351,10 @@
     <%- include('templates/mapTown',
          { name: "Lavender Town"
          , x: 85, y: 19
-		 , width: 4, height: 5		 
+		 , width: 4, height: 5
          })
       %>
-	 
+
     <!--Celadon City-->
     <%- include('templates/mapTown',
         { name: "Celadon City"
@@ -365,14 +366,14 @@
     <%- include('templates/mapTown',
         { name: "Celadon City"
         , x: 45, y: 15.5
-		, width: 4, height: 7.5
+		, width: 4, height: 7.5, notMain: true
         })
     %>
     <!--Celadon City extension-->
     <%- include('templates/mapTown',
         { name: "Celadon City"
         , x: 40, y: 23
-		, width: 3, height: 3
+		, width: 3, height: 3, notMain: true
         })
     %>
 
@@ -382,19 +383,19 @@
         , x: 66, y: 18
 		, width: 5, height: 3.5
         })
-    %>	 
+    %>
 	<!--Saffron City extension-->
     <%- include('templates/mapTown',
         { name: "Saffron City"
         , x: 64, y: 21.5
-		, width: 7, height: 4.5
+		, width: 7, height: 4.5, notMain: true
         })
     %>
     <!--Saffron City extension-->
     <%- include('templates/mapTown',
         { name: "Saffron City"
         , x: 60, y: 24
-		, width: 4, height: 2
+		, width: 4, height: 2, notMain: true
         })
     %>
 
@@ -418,18 +419,18 @@
     <%- include('templates/mapTown',
         { name: "Cinnabar Island"
         , x: 15, y: 58
-		, width: 8, height: 1
+		, width: 8, height: 1, notMain: true
         })
-     %>	 
-	 
+     %>
+
     <!--Cinnabar Island ext2-->
     <%- include('templates/mapTown',
         { name: "Cinnabar Island"
         , x: 15, y: 55
-		, width: 7, height: 3
+		, width: 7, height: 3, notMain: true
         })
-     %>	 	 
-	 
+     %>
+
     <!--Indigo Plateau Kanto-->
     <%- include('templates/mapTown',
         { name: "Indigo Plateau Kanto"
@@ -445,7 +446,7 @@
     <!--Viridian Forest-->
     <%- include('templates/mapDungeon',
         { name: "Viridian Forest"
-        , x: 21, y: 17.5		
+        , x: 21, y: 17.5
 		, width: 7, height: 4.5
         })
      %>
@@ -470,12 +471,12 @@
         , x: 41, y: 8
         })
      %>
-	 
+
     <!--Mt. Moon extended-->
     <%- include('templates/mapDungeon',
         { name: "Mt. Moon"
         , x: 45, y: 8
-		, width: 5, height: 6
+		, width: 5, height: 6, notMain: true
         })
      %>
 
@@ -513,7 +514,7 @@
     <%- include('templates/mapDungeon',
         { name: "Power Plant"
         , x: 91, y: 14
-		, width: 2, height: 2
+		, width: 2, height: 2, notMain: true
         })
     %>
 
@@ -528,7 +529,7 @@
     <%- include('templates/mapDungeon',
         { name: "Silph Co."
         , x: 60, y: 21.5
-		, width: 4, height: 2.5
+		, width: 4, height: 2.5, notMain: true
         })
     %>
 
@@ -538,12 +539,12 @@
         , x: 37, y: 54
         })
      %>
-	 
+
     <!--Seafoam Islands extended-->
     <%- include('templates/mapDungeon',
         { name: "Seafoam Islands"
         , x: 35, y: 54
-        , width: 2, height: 4
+        , width: 2, height: 4, notMain: true
         })
      %>
 
@@ -647,7 +648,7 @@
          , image: "assets/images/map/blimp_pikachu.png"
          })
       %>
-      
+
     <%- include('templates/mapOverlay',
         { name: "Route 3 Pokémon Center"
         , x: 40, y: 10

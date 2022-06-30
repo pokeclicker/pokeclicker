@@ -25,6 +25,9 @@ Parameters:
     - visible : Required : String
         A knockout data-bind for visibility when true
 
+    - moveToTown : Optional : String
+        Name to the dungeon or town link to the overlay to display player icon
+
 <% */ %>
 
 <image href="<%= locals.image %>" xlink:href="<%= locals.image %>"
@@ -34,10 +37,17 @@ Parameters:
     width="<%= locals.width * 16 %>"
     data-bind="visible: <%= locals.visible %>"/>
 <rect class="city"
-    data-town="<%= locals.name %>" 
+    data-town="<%= locals.name %>"
     x="<%= locals.x * 16 %>"
     y="<%= locals.y * 16 %>"
     height="<%= locals.height * 16 %>"
     width="<%= locals.width * 16 %>"
     data-bind="visible: <%= locals.visible %>, <%= locals.databind %>">
 </rect>
+<image width="48" height="48"
+    x="<%= locals.x * 16 + (locals.width * 16) / 2 - 24 %>"
+    y="<%= locals.y * 16 + (locals.height * 16) / 2 - 24 %>"
+    class="iconLocation"
+    data-bind="visible: MapHelper.calculateTownIsCurrentLocation('<%= locals.moveToTown %>') && <%= locals.visible %>
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
