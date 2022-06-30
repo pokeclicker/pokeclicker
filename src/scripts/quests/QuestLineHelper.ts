@@ -581,7 +581,7 @@ class QuestLineHelper {
         const clearAvery2 = new CustomQuest(1, 0, 'Both you and Avery have happened upon the same Max Mushroom in Warm-Up Tunnel. Defeat him to win it.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Avery2')]());
         dojoArmorQuestLine.addQuest(clearAvery2);
 
-        const clearKlara3 = new CustomQuest(1, 0, 'For the final trial, you must defeat both Klara and Avery at the Master Dojo Battlefield. First, defeat Klara.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('clearKlara3')]());
+        const clearKlara3 = new CustomQuest(1, 0, 'For the final trial, you must defeat both Klara and Avery at the Master Dojo Battlefield. First, defeat Klara.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Klara3')]());
         dojoArmorQuestLine.addQuest(clearKlara3);
 
         const clearAvery3 = new CustomQuest(1, 0, 'Now Klara is defeated, defeat Avery', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Avery3')]());
