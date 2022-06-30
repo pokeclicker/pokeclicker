@@ -3227,13 +3227,6 @@ const StowonSideShop: Shop = new Shop([
 ]);
 const BallonleaShop = new Shop([
     ItemList['Cracked_pot'],
-    ItemList['Strawberry_sweet'],
-    ItemList['Berry_sweet'],
-    ItemList['Love_sweet'],
-    ItemList['Star_sweet'],
-    ItemList['Clover_sweet'],
-    ItemList['Flower_sweet'],
-    ItemList['Ribbon_sweet'],
 ]);
 const CirchesterShop = new Shop([
     ItemList['Ice_stone'],
