@@ -461,14 +461,14 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
     ],
     75, 4,
     () => {
-            const item = Rand.boolean() ? 'Dome Fossil' : 'Helix Fossil';
-            
-            Underground.gainMineItem(Underground.getMineItemByName(item).id, 1);
-            Notifier.notify({
-                message: `You were awarded a ${GameConstants.humanifyString(item)} for defeating the Super Nerd!`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Dungeons.dungeon_item_found,
-            });
+        const item = Rand.boolean() ? 'Dome Fossil' : 'Helix Fossil';
+
+        Underground.gainMineItem(Underground.getMineItemByName(item).id, 1);
+        Notifier.notify({
+            message: `You were awarded a ${GameConstants.humanifyString(item)} for defeating the Super Nerd!`,
+            type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.Dungeons.dungeon_item_found,
+        });
     });
 
 dungeonList['Diglett\'s Cave'] = new Dungeon('Diglett\'s Cave',
