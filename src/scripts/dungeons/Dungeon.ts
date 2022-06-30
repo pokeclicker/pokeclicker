@@ -7152,7 +7152,7 @@ dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
     96500, 48);
 
 dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
-    ['Cryogonal', 'Beartic', 'Galarian Darmanitan', 'Aurorus', 'Weavile', 'Vanilluxe', 'Absol', 'Froslass', 'Delibird'],
+    ['Cryogonal', 'Beartic', 'Galarian Darumaka', 'Aurorus', 'Weavile', 'Vanilluxe', 'Absol', 'Froslass', 'Delibird'],
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     31507840,
     [
