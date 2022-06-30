@@ -628,8 +628,11 @@ class QuestLineHelper {
         const slipperySlope = new CustomQuest(30, 0, 'Calyrex is going to Slippery Slope to grow a Iceroot Carrot. Protect it from wild Pokémon so it can concentrate.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['54'](), 0);
         galarCrownQuestLine.addQuest(slipperySlope);
 
-        const clearSpectrier = new CustomQuest(1, 0, 'A mysterious Pokémon has appeared and challenged you to a battle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Spectrier')]());
+        const clearSpectrier = new CustomQuest(1, 0, 'A mysterious spectral Pokémon has appeared and challenged you to a battle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Spectrier')]());
         galarCrownQuestLine.addQuest(clearSpectrier);
+
+        const clearGlastrier = new CustomQuest(1, 0, 'A mysterious frozen Pokémon has appeared and challenged you to a battle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Glastrier')]());
+        galarCrownQuestLine.addQuest(clearGlastrier);
 
         const catchSpectrier = new CustomQuest(1, 0, 'Spectrier is now roaming the Crown Tundra. Catch it when the opportunity arises.', () => App.game.statistics.pokemonCaptured[pokemonMap['Spectrier'].id](), 0);
         galarCrownQuestLine.addQuest(catchSpectrier);
