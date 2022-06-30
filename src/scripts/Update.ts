@@ -801,7 +801,7 @@ class Update implements Saveable {
 
         '0.9.8': ({ playerData, saveData }) => {
             saveData.oakItemLoadouts = saveData.oakItemLoadouts.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
-            
+
             // Start Ash questline if the player has beaten Kalos champion
             if (saveData.badgeCase[78]) {
                 saveData.quests.questLines.push({state: 1, name: 'The new kid', quest: 0});
