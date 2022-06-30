@@ -244,12 +244,8 @@ class Party implements Feature {
         // This method intentionally left blank
     }
 
-    get caughtPokemon() {
+    get caughtPokemon(): ReadonlyArray<PartyPokemon> {
         return this._caughtPokemon();
-    }
-
-    set caughtPokemon(pokemon: PartyPokemon[]) {
-        this._caughtPokemon(pokemon);
     }
 
 }
