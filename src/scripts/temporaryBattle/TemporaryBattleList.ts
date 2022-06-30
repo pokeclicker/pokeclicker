@@ -109,7 +109,7 @@ TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
         new GymPokemon('Gible', 123998000, 62),
     ],
     'Please leave me alone.',
-    [new TemporaryBattleRequirement('Ash Ketchum Hoenn')],
+    [new TemporaryBattleRequirement('Ash Ketchum Hoenn'), new RouteKillRequirement(10, GameConstants.Region.sinnoh, 226)],
     undefined,
     {
         displayName: 'Ash Ketchum',
