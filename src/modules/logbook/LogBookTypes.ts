@@ -24,6 +24,10 @@ export const LogBookTypes: Record<string, LogBookType> = {
         display: 'primary',
         label: 'FOUND',
     },
+    ROAMER: {
+        display: 'info',
+        label: 'ROAMER',
+    },
     ACHIEVE: {
         display: 'warning',
         label: 'ACHIEVE',
