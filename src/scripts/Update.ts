@@ -802,12 +802,12 @@ class Update implements Saveable {
             saveData.oakItemLoadouts = saveData.oakItemLoadouts.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
             //UNTESTED POKERUS UPDATE FUNCTION - MAKE SURE THIS WORKS!!!!
             saveData.party.caughtPokemon.forEach(p => {
-                if (p.pokerus) {
-                    delete p.pokerus;
-                    p.pokerus = GameConstants.Pokerus['Contagious'];
+                if (p[8]) {
+                    delete p[8];
+                    p[8] = GameConstants.Pokerus['Contagious'];
                 } else {
-                    delete p.pokerus;
-                    p.pokerus = GameConstants.Pokerus['None'];
+                    delete p[8];
+                    p[8] = GameConstants.Pokerus['None'];
                 }
             });
         },
