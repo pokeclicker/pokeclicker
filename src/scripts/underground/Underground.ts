@@ -446,7 +446,7 @@ class Underground implements Feature {
     }
 
     toJSON(): Record<string, any> {
-        const undergroundSave = {};
+        const undergroundSave: Record<string, any> = {};
         const upgradesSave = {};
         for (const item in UndergroundUpgrade.Upgrades) {
             if (isNaN(Number(item))) {

@@ -172,7 +172,7 @@ abstract class Quest {
 
     //#endregion
 
-    toJSON() {
+    toJSON(): Record<string, any> {
         return {
             index: this.index || 0,
             customDescription: this.customDescription,

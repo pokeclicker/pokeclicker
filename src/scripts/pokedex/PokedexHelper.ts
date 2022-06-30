@@ -59,7 +59,7 @@ class PokedexHelper {
     }
 
     public static getList(): Array<Record<string, any>> {
-        const filter = PokedexHelper.getFilters();
+        const filter: Record<string, any> = PokedexHelper.getFilters();
 
         const highestEncountered = App.game.statistics.pokemonEncountered.highestID;
         const highestDefeated = App.game.statistics.pokemonDefeated.highestID;
@@ -145,7 +145,7 @@ class PokedexHelper {
     }
 
     private static getFilters() {
-        const res = {};
+        const res: Record<string, any> = {};
         res.name = $('#nameFilter').val();
         res.type1 = $('#pokedex-filter-type1').val();
         res.type2 = $('#pokedex-filter-type2').val();

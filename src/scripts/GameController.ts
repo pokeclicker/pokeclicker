@@ -98,7 +98,7 @@ class GameController {
     }
 
     // Store keys for multi-key combinations
-    static keyHeld = {}
+    static keyHeld: Record<string, any> = {}
     static addKeyListeners() {
         // Oak Items
         const $oakItemsModal = $('#oakItemsModal');
