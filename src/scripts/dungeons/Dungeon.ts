@@ -7107,7 +7107,7 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     ],
     96500, 40);
 
-dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters ',
+dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
     [
         new DungeonTrainer('Master Dojo',
             [new GymPokemon('Psyduck', 28886112, 65)],
