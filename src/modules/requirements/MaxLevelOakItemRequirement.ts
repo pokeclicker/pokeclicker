@@ -1,5 +1,4 @@
 import * as GameConstants from '../GameConstants';
-import OakItem from '../oakItems/OakItem';
 import AchievementRequirement from './AchievementRequirement';
 
 export default class MaxLevelOakItemRequirement extends AchievementRequirement {
@@ -8,7 +7,7 @@ export default class MaxLevelOakItemRequirement extends AchievementRequirement {
     }
 
     public getProgress() {
-        return Math.min(App.game.oakItems.itemList.filter((item : OakItem) => item.isMaxLevel()).length, this.requiredValue);
+        return Math.min(App.game.oakItems.maxLevelOakItems(), this.requiredValue);
     }
 
     public hint(): string {
