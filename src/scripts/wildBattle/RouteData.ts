@@ -2656,7 +2656,7 @@ Routes.add(new RegionRoute(
       ],
         headbutt: ['Skwovet', 'Greedent'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 47)],
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 46)],
     undefined,
     GalarSubRegions.CrownTundra
 ));
