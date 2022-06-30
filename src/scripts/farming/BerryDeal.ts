@@ -216,7 +216,7 @@ class BerryDeal {
                 SeededRand.intBetween(50, 100),
                 SeededRand.intBetween(10, 50),
             ],
-            ItemList['Masterball'],
+            ItemList.Masterball,
             1
         ));
         list.push(new BerryDeal(
@@ -228,7 +228,7 @@ class BerryDeal {
                 SeededRand.intBetween(50, 100),
                 SeededRand.intBetween(10, 50),
             ],
-            ItemList['Protein'],
+            ItemList.Protein,
             1
         ));
 

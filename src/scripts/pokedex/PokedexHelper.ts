@@ -78,7 +78,7 @@ class PokedexHelper {
             }
 
             // If not showing this region
-            const region: (GameConstants.Region | null) = filter['region'] ? parseInt(filter['region'], 10) : null;
+            const region: (GameConstants.Region | null) = filter.region ? parseInt(filter.region, 10) : null;
             if (region != null && region != nativeRegion) {
                 return false;
             }
@@ -94,13 +94,13 @@ class PokedexHelper {
             }
 
             // Check if the name contains the string
-            if (filter['name'] && !pokemon.name.toLowerCase().includes(filter['name'].toLowerCase().trim())) {
+            if (filter.name && !pokemon.name.toLowerCase().includes(filter.name.toLowerCase().trim())) {
                 return false;
             }
 
             // Check if either of the types match
-            const type1: (PokemonType | null) = filter['type1'] ? parseInt(filter['type1'], 10) : null;
-            const type2: (PokemonType | null) = filter['type2'] ? parseInt(filter['type2'], 10) : null;
+            const type1: (PokemonType | null) = filter.type1 ? parseInt(filter.type1, 10) : null;
+            const type2: (PokemonType | null) = filter.type2 ? parseInt(filter.type2, 10) : null;
             if ([type1, type2].includes(PokemonType.None)) {
                 const type = (type1 == PokemonType.None) ? type2 : type1;
                 if (!PokedexHelper.isPureType(pokemon, type)) {
@@ -146,10 +146,10 @@ class PokedexHelper {
 
     private static getFilters() {
         const res = {};
-        res['name'] = $('#nameFilter').val();
-        res['type1'] = $('#pokedex-filter-type1').val();
-        res['type2'] = $('#pokedex-filter-type2').val();
-        res['region'] = $('#pokedex-filter-region').val();
+        res.name = $('#nameFilter').val();
+        res.type1 = $('#pokedex-filter-type1').val();
+        res.type2 = $('#pokedex-filter-type2').val();
+        res.region = $('#pokedex-filter-region').val();
         res['caught-shiny'] = $('#pokedex-filter-shiny-caught').val();
         res['held-item'] = $('#pokedex-filter-held-item').is(':checked');
         return res;
