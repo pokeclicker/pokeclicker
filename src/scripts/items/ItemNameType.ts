@@ -107,8 +107,6 @@ type ItemNameType
     | 'Type: Null'
     | 'Poipole'
     | 'Cosmog'
-    | 'Eternatus'
-    | 'Toxel'
     | 'Berry_Shovel'
     | 'RareCandy'
     | 'Protein'
