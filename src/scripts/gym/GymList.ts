@@ -1747,7 +1747,12 @@ GymList['Gym Leader Avery'] = new Gym(
     BadgeEnums.Elite_ArmorPsychic,
     150000,
     'More! I require more! Show me your Stored Power!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_ArmorPoison)]
+    [
+        new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Single Strike)']),
+            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Rapid Strike)']),
+        ]),
+    ]
 );
 GymList['Dojo Master Mustard'] = new Gym(
     'Mustard',
@@ -1763,7 +1768,12 @@ GymList['Dojo Master Mustard'] = new Gym(
     BadgeEnums.Elite_ArmorChampion,
     250000,
     'That strength of yours doesn\'t bend easily!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_ArmorPsychic)]
+    [
+        new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Elite_ArmorPoison),
+            new GymBadgeRequirement(BadgeEnums.Elite_ArmorPsychic),
+        ]),
+    ]
 );
 GymList['Trainer Peony'] = new Gym(
     'Freezington',
