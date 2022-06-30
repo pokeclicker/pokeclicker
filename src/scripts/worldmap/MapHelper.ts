@@ -221,7 +221,7 @@ class MapHelper {
         const shinyChallengeActive = App.game.challenges.list.requireCompleteShinyPokedex.active();
         const nextStartingTownUnlocked = TownList[GameConstants.StartingTowns[player.highestRegion() + 1]]?.isUnlocked() ?? false;
         const fullDex = AchievementHandler.findByName(
-            `${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion()])} ${(shinyChallengeActive ? 'Shiny' : '')} Master`
+            `${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion()])} ${(shinyChallengeActive ? 'Shiny ' : '')}Master`
         ).isCompleted();
 
         return nextStartingTownUnlocked && (fullDex || !challengeActive);
