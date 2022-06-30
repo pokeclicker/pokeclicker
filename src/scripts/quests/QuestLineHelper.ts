@@ -679,13 +679,13 @@ class QuestLineHelper {
         const clearIronRuins1 = new CustomQuest(1, 0, 'Peony has directed you to the Iron Ruins in Giants Bed. Explore it to look for any clues to opening the peculiar ruin.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iron Ruins')]());
         ancientGolemsQuestLine.addQuest(clearIronRuins1);
 
-        const clearRockPeakRuins2 = new CustomQuest(9, 0, 'Peony had advised you keep exploring the ruins. Continue until the area seems to get smaller...', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rock Peak Ruins')]());
+        const clearRockPeakRuins2 = new CustomQuest(9, 0, 'Peony had advised you keep exploring Rock Peak Ruins. Continue until the area seems to get smaller...', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rock Peak Ruins')]());
         ancientGolemsQuestLine.addQuest(clearRockPeakRuins2);
 
-        const clearIcebergRuins2 = new CustomQuest(9, 0, 'Peony had advised you keep exploring the ruins. Continue until the area seems to get smaller...', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iceberg Ruins')]());
+        const clearIcebergRuins2 = new CustomQuest(9, 0, 'Peony had advised you keep exploring Iceberg Ruins. Continue until the area seems to get smaller...', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iceberg Ruins')]());
         ancientGolemsQuestLine.addQuest(clearIcebergRuins2);
 
-        const clearIronRuins2 = new CustomQuest(9, 0, 'Peony had advised you keep exploring the ruins. Continue until the area seems to get smaller...', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iron Ruins')]());
+        const clearIronRuins2 = new CustomQuest(9, 0, 'Peony had advised you keep exploring Iron Ruins. Continue until the area seems to get smaller...', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iron Ruins')]());
         ancientGolemsQuestLine.addQuest(clearIronRuins2);
 
         App.game.quests.questLines().push(ancientGolemsQuestLine);
