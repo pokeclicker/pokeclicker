@@ -651,13 +651,6 @@ export enum StoneType {
     'Cracked_pot',
     'Galarica_cuff',
     'Galarica_wreath',
-    'Strawberry_sweet',
-    'Love_sweet',
-    'Berry_sweet',
-    'Clover_sweet',
-    'Flower_sweet',
-    'Star_sweet',
-    'Ribbon_sweet',
 }
 
 export enum BattleItemType {
