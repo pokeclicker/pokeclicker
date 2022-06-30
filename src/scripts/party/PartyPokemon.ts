@@ -24,7 +24,7 @@ class PartyPokemon implements Saveable {
         shiny: false,
         category: 0,
         levelEvolutionTriggered: false,
-        pokerus: GameConstants.Pokerus['Uninfected'],
+        pokerus: GameConstants.Pokerus.None,
     };
 
     _breeding: KnockoutObservable<boolean>;
@@ -51,7 +51,7 @@ class PartyPokemon implements Saveable {
         breeding = false,
         shiny = false,
         category = 0,
-        pokerus = GameConstants.Pokerus['Uninfected']
+        pokerus = GameConstants.Pokerus.None
     ) {
         this.proteinsUsed = ko.observable(proteinsUsed);
         this.effortPoints = ko.observable(effortPoints);
@@ -83,7 +83,7 @@ class PartyPokemon implements Saveable {
                 const egg = App.game.breeding.eggList[i]();
                 if (!egg.canHatch() && !egg.isNone()) {
                     const pokerus = App.game.party.getPokemon(pokemonMap[egg.pokemon].id).pokerus;
-                    if (pokerus && pokerus == GameConstants.Pokerus['Contagious']) {
+                    if (pokerus && pokerus == GameConstants.Pokerus.Contagious) {
                         eggTypes.add(PokemonHelper.getPokemonByName(pokemonMap[App.game.breeding.eggList[i]().pokemon].name).type1);
                         eggTypes.add(PokemonHelper.getPokemonByName(pokemonMap[App.game.breeding.eggList[i]().pokemon].name).type2);
                     }
@@ -100,10 +100,10 @@ class PartyPokemon implements Saveable {
         const eggTypes = this.calculatePokerusTypes();
         return App.game.breeding.eggList.forEach(p => {
             const pokemon = p().partyPokemon;
-            if (pokemon && pokemon.pokerus == GameConstants.Pokerus['Uninfected']) {
+            if (pokemon && pokemon.pokerus == GameConstants.Pokerus.None) {
                 const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
                 if (eggTypes.has(dataPokemon.type1) || eggTypes.has(dataPokemon.type2)) {
-                    pokemon.pokerus = GameConstants.Pokerus['Infected'];
+                    pokemon.pokerus = GameConstants.Pokerus.Infected;
                 }
             }
         });

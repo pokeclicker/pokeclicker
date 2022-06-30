@@ -807,7 +807,7 @@ class Update implements Saveable {
                     p.pokerus = GameConstants.Pokerus['Contagious'];
                 } else {
                     delete p.pokerus;
-                    p.pokerus = GameConstants.Pokerus['Uninfected'];
+                    p.pokerus = GameConstants.Pokerus['None'];
                 }
             });
         },
