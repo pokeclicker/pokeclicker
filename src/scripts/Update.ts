@@ -804,10 +804,10 @@ class Update implements Saveable {
             saveData.party.caughtPokemon.forEach(p => {
                 if (p[8]) {
                     delete p[8];
-                    p[8] = GameConstants.Pokerus['Contagious'];
+                    p[8] = GameConstants.Pokerus.Contagious;
                 } else {
                     delete p[8];
-                    p[8] = GameConstants.Pokerus['None'];
+                    p[8] = GameConstants.Pokerus.None;
                 }
             });
         },
