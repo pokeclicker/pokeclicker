@@ -2073,13 +2073,13 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Giant\'s Mirror', GameConstants.Region.galar, 19,
     new RoutePokemon({
-        land: ['Koffing', 'Machop', 'Steelix', 'Perrserker', 'Shellos (east)', 'Gastrodon (east)', 'Dugtrio', 'Boldore', 'Excadrill', 'Tranquill', 'Corvisquire'],
+        land: ['Koffing', 'Machop', 'Steelix', 'Perrserker', 'Shellos (east)', 'Gastrodon (east)', 'Dugtrio', 'Galarian Corsola', 'Boldore', 'Excadrill', 'Tranquill', 'Corvisquire'],
         water: ['Drednaw', 'Mareanie', 'Chinchou', 'Gyarados'],
         headbutt: ['Greedent', 'Cherubi'],
         special:
       [
           new SpecialRoutePokemon(['Woobat', 'Pumpkaboo', 'Nickit', 'Gloom', 'Skorupi', 'Dottler', 'Budew', 'Machamp', 'Bellossom', 'Unfezant', 'Frillish'], new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Butterfree', 'Sawk', 'Throh', 'Galarian Farfetch\'d', 'Galarian Corsola', 'Gloom', 'Skorupi', 'Roselia', 'Dottler', 'Machamp', 'Vileplume', 'Unfezant', 'Frillish'], new WeatherRequirement([WeatherType.Overcast])),
+          new SpecialRoutePokemon(['Butterfree', 'Sawk', 'Throh', 'Galarian Farfetch\'d', 'Gloom', 'Skorupi', 'Roselia', 'Dottler', 'Machamp', 'Vileplume', 'Unfezant', 'Frillish'], new WeatherRequirement([WeatherType.Overcast])),
           new SpecialRoutePokemon(['Wimpod', 'Palpitoad', 'Natu', 'Chewtle', 'Gloom', 'Skorupi', 'Dottler', 'Seismitoad', 'Vileplume', 'Xatu', 'Frillish'], new WeatherRequirement([WeatherType.Rain])),
           new SpecialRoutePokemon(['Helioptile', 'Joltik', 'Yamper', 'Natu', 'Gloom', 'Applin', 'Skorupi', 'Machamp', 'Vileplume', 'Xatu', 'Frillish'], new WeatherRequirement([WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Vanillite', 'Cubchoo', 'Natu', 'Delibird', 'Swinub', 'Snover', 'Abomasnow', 'Vileplume', 'Xatu', 'Vikavolt', 'Inkay'], new WeatherRequirement([WeatherType.Snow])),
