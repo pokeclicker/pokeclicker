@@ -220,7 +220,7 @@ export const SpriteCredits: Credit[] = [
         name: 'NiCeDiCe',
         link: 'https://github.com/NiCeDiCe90',
         resources: [
-            'Require Complete Shiny Pokedex Challenge Ribbin',
+            'Require Complete Shiny Pokedex Challenge Ribbon',
             'Red Spearow',
             'shiny Totem Ribombee',
             'Weather Institute world sprite',
