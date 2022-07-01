@@ -296,7 +296,7 @@ class PokemonHelper {
     public static getPokemonBattleFrontier(pokemonName: PokemonNameType): Array<string> {
         const stages = [];
         BattleFrontierMilestones.milestoneRewards.filter(m => m instanceof BattleFrontierMilestonePokemon).forEach(milestone => {
-            if (milestone.pokemonName == pokemonName) {
+            if (milestone._description == pokemonName) {
                 stages.push(milestone.stage);
             }
         });
