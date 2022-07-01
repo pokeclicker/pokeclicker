@@ -90,8 +90,8 @@ class PartyPokemon implements Saveable {
                 }
             }
         }
-        if (eggTypes.has(PokemonType['None'])) {
-            eggTypes.delete(PokemonType['None']);
+        if (eggTypes.has(PokemonType.None)) {
+            eggTypes.delete(PokemonType.None);
         }
         return eggTypes;
     }
