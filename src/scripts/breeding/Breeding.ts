@@ -118,12 +118,12 @@ class Breeding implements Feature {
             return;
         }
 
-        this.eggSlots = json['eggSlots'] ?? this.defaults.eggSlots;
+        this.eggSlots = json.eggSlots ?? this.defaults.eggSlots;
 
-        if (json['eggList'] == null) {
+        if (json.eggList == null) {
             this._eggList = this.defaults.eggList;
         } else {
-            const saveEggList: Record<string, any>[] = json['eggList'];
+            const saveEggList: Record<string, any>[] = json.eggList;
 
             for (let i = 0; i < this._eggList.length; i++) {
                 if (saveEggList[i] != null) {
@@ -133,8 +133,8 @@ class Breeding implements Feature {
                 }
             }
         }
-        this.queueSlots(json['queueSlots'] ?? this.defaults.queueSlots);
-        this.queueList(json['queueList'] ? json['queueList'] : this.defaults.queueList);
+        this.queueSlots(json.queueSlots ?? this.defaults.queueSlots);
+        this.queueList(json.queueList ? json.queueList : this.defaults.queueList);
         this.hatcheryHelpers.fromJSON(json.hatcheryHelpers || []);
     }
 

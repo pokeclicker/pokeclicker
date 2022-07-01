@@ -26,7 +26,7 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
 );
 
 //Kalos Temporary Battles
-TemporaryBattleList['AZ'] = new TemporaryBattle(
+TemporaryBattleList.AZ = new TemporaryBattle(
     'AZ',
     [
         new GymPokemon('Torkoal', 247996000, 60),
@@ -134,7 +134,7 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
 
 //Galar Temporary Battles
 //TODO: Have Hop's starter depend on the players Galar starter
-TemporaryBattleList['Hop1'] = new TemporaryBattle(
+TemporaryBattleList.Hop1 = new TemporaryBattle(
     'Hop1',
     [
         new GymPokemon('Wooloo', 20965216, 3),
@@ -143,7 +143,7 @@ TemporaryBattleList['Hop1'] = new TemporaryBattle(
     'Well, that was a shock! Guess I know now why Lee thought he should give you a Pokémon, too...',
     [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
 );
-TemporaryBattleList['Mirages'] = new TemporaryBattle(
+TemporaryBattleList.Mirages = new TemporaryBattle(
     'Mirages',
     [
         new GymPokemon('Zacian (Battle Hero)', 22514480, 70),
@@ -152,7 +152,7 @@ TemporaryBattleList['Mirages'] = new TemporaryBattle(
     'The Pokémon fled.',
     [new TemporaryBattleRequirement('Hop1')]
 );
-TemporaryBattleList['Hop2'] = new TemporaryBattle(
+TemporaryBattleList.Hop2 = new TemporaryBattle(
     'Hop2',
     [
         new GymPokemon('Wooloo', 60232887, 6),
@@ -162,7 +162,7 @@ TemporaryBattleList['Hop2'] = new TemporaryBattle(
     'And I even got my Pokéball throw perfect too!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 2)]
 );
-TemporaryBattleList['Hop3'] = new TemporaryBattle(
+TemporaryBattleList.Hop3 = new TemporaryBattle(
     'Hop3',
     [
         new GymPokemon('Wooloo', 63475599, 11),
@@ -172,7 +172,7 @@ TemporaryBattleList['Hop3'] = new TemporaryBattle(
     'Was that really good training? Looks like I\'d better keep my guard up!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 6)]
 );
-TemporaryBattleList['Bede1'] = new TemporaryBattle(
+TemporaryBattleList.Bede1 = new TemporaryBattle(
     'Bede1',
     [
         new GymPokemon('Solosis', 68533871, 13),
@@ -182,7 +182,7 @@ TemporaryBattleList['Bede1'] = new TemporaryBattle(
     'I see... Well, that\'s fine. I wasn\'t really trying all that hard anyway.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine'))]
 );
-TemporaryBattleList['Hop4'] = new TemporaryBattle(
+TemporaryBattleList.Hop4 = new TemporaryBattle(
     'Hop4',
     [
         new GymPokemon('Wooloo', 87840389, 18),
@@ -192,7 +192,7 @@ TemporaryBattleList['Hop4'] = new TemporaryBattle(
     'We both got ourselves the same Grass Badge, so how come you\'re so much stronger?',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 14)]
 );
-TemporaryBattleList['Bede2'] = new TemporaryBattle(
+TemporaryBattleList.Bede2 = new TemporaryBattle(
     'Bede2',
     [
         new GymPokemon('Solosis', 79056351, 21),
@@ -203,7 +203,7 @@ TemporaryBattleList['Bede2'] = new TemporaryBattle(
     'You showed at least a little effort, so I decided I should let you win!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine No. 2'))]
 );
-TemporaryBattleList['Marnie1'] = new TemporaryBattle(
+TemporaryBattleList.Marnie1 = new TemporaryBattle(
     'Marnie1',
     [
         new GymPokemon('Croagunk', 106727128, 24),
@@ -213,7 +213,7 @@ TemporaryBattleList['Marnie1'] = new TemporaryBattle(
     'You beat me... Guess you must not be so bad after all, huh?',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 15)]
 );
-TemporaryBattleList['Hop5'] = new TemporaryBattle(
+TemporaryBattleList.Hop5 = new TemporaryBattle(
     'Hop5',
     [
         new GymPokemon('Cramorant', 88226998, 28),
@@ -224,7 +224,7 @@ TemporaryBattleList['Hop5'] = new TemporaryBattle(
     'My strategy goes right to pot when I\'ve got all these bad thoughts running through my head...',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 23)]
 );
-TemporaryBattleList['Bede3'] = new TemporaryBattle(
+TemporaryBattleList.Bede3 = new TemporaryBattle(
     'Bede3',
     [
         new GymPokemon('Duosion', 94108792, 32),
@@ -244,7 +244,7 @@ TemporaryBattleList['Bede3'] = new TemporaryBattle(
         App.game.quests.getQuestLine('The Darkest Day').beginQuest();
     }
 );
-TemporaryBattleList['Hop6'] = new TemporaryBattle(
+TemporaryBattleList.Hop6 = new TemporaryBattle(
     'Hop6',
     [
         new GymPokemon('Trevenant', 83541888, 34),
@@ -256,7 +256,7 @@ TemporaryBattleList['Hop6'] = new TemporaryBattle(
     'This is rubbish... My team can\'t perform if I can\'t get my own head straight as their Trainer...',
     [new GymBadgeRequirement(BadgeEnums.Galar_Fairy)]
 );
-TemporaryBattleList['Hop7'] = new TemporaryBattle(
+TemporaryBattleList.Hop7 = new TemporaryBattle(
     'Hop7',
     [
         new GymPokemon('Dubwool', 85540774, 40),
@@ -273,7 +273,7 @@ TemporaryBattleList['Hop7'] = new TemporaryBattle(
         ]),
     ]
 );
-TemporaryBattleList['Marnie2'] = new TemporaryBattle(
+TemporaryBattleList.Marnie2 = new TemporaryBattle(
     'Marnie2',
     [
         new GymPokemon('Liepard', 111748623, 42),
@@ -284,7 +284,7 @@ TemporaryBattleList['Marnie2'] = new TemporaryBattle(
     'What\'s with that?! My Pokémon didn\'t get a chance to really do their thing at all. Ugh!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 30)]
 );
-TemporaryBattleList['Eternatus'] = new TemporaryBattle(
+TemporaryBattleList.Eternatus = new TemporaryBattle(
     'Eternatus',
     [new GymPokemon('Eternatus', 415813261, 60)],
     'You defeated Eternatus, but it looks like it\'s not over yet!',
@@ -300,7 +300,7 @@ TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
         App.game.party.gainPokemonById(890);
     }
 );
-TemporaryBattleList['Hop8'] = new TemporaryBattle(
+TemporaryBattleList.Hop8 = new TemporaryBattle(
     'Hop8',
     [
         new GymPokemon('Dubwool', 114810660, 59),
@@ -317,7 +317,7 @@ TemporaryBattleList['Hop8'] = new TemporaryBattle(
         App.game.quests.getQuestLine('Sword and Shield').beginQuest();
     }
 );
-TemporaryBattleList['Sordward1'] = new TemporaryBattle(
+TemporaryBattleList.Sordward1' = new TemporaryBattle(
     'Sordward1',
     [
         new GymPokemon('Sirfetch\'d', 137218376, 60),
@@ -328,7 +328,7 @@ TemporaryBattleList['Sordward1'] = new TemporaryBattle(
     'Oh... How can this be? My...my Pokémon...',
     [new TemporaryBattleRequirement('Hop8')]
 );
-TemporaryBattleList['Shielbert1'] = new TemporaryBattle(
+TemporaryBattleList.Shielbert1 = new TemporaryBattle(
     'Shielbert1',
     [
         new GymPokemon('Sirfetch\'d', 137218376, 60),
@@ -423,7 +423,7 @@ TemporaryBattleList['Rampaging Haxorus'] = new TemporaryBattle(
     'The Rampaging Haxorus fainted.',
     [new TemporaryBattleRequirement('Gym Leader Marnie')]
 );
-TemporaryBattleList['Sordward2'] = new TemporaryBattle(
+TemporaryBattleList.Sordward2 = new TemporaryBattle(
     'Sordward2',
     [
         new GymPokemon('Sirfetch\'d', 160088105, 64),
@@ -434,7 +434,7 @@ TemporaryBattleList['Sordward2'] = new TemporaryBattle(
     'Oho... My noble Pokémon...',
     [new TemporaryBattleRequirement('Rampaging Haxorus')]
 );
-TemporaryBattleList['Shielbert2'] = new TemporaryBattle(
+TemporaryBattleList.Shielbert2 = new TemporaryBattle(
     'Shielbert2',
     [
         new GymPokemon('Sirfetch\'d', 160088105, 64),
@@ -445,7 +445,7 @@ TemporaryBattleList['Shielbert2'] = new TemporaryBattle(
     'Oho... My noble Pokémon...',
     [new TemporaryBattleRequirement('Sordward2')]
 );
-TemporaryBattleList['Klara1'] = new TemporaryBattle(
+TemporaryBattleList.Klara1 = new TemporaryBattle(
     'Klara1',
     [
         new GymPokemon('Venipede', 231324474, 58),
@@ -454,7 +454,7 @@ TemporaryBattleList['Klara1'] = new TemporaryBattle(
     'Oh, my next Pokémon\'s gonna make short work-- Huh? That was my last one?',
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
 );
-TemporaryBattleList['Avery1'] = new TemporaryBattle(
+TemporaryBattleList.Avery1 = new TemporaryBattle(
     'Avery1',
     [
         new GymPokemon('Abra', 231324474, 58),
@@ -463,7 +463,7 @@ TemporaryBattleList['Avery1'] = new TemporaryBattle(
     'Such strength! I\'m in Psyshock!',
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
 );
-TemporaryBattleList['Mustard'] = new TemporaryBattle(
+TemporaryBattleList.Mustard = new TemporaryBattle(
     'Mustard',
     [
         new GymPokemon('Mienfoo', 242890697, 60),
@@ -476,7 +476,7 @@ TemporaryBattleList['Mustard'] = new TemporaryBattle(
         App.game.quests.getQuestLine('The Dojo\'s Armor').beginQuest();
     }
 );
-TemporaryBattleList['Klara2'] = new TemporaryBattle(
+TemporaryBattleList.Klara2 = new TemporaryBattle(
     'Klara2',
     [
         new GymPokemon('Galarian Slowpoke', 163155876, 62),
@@ -491,7 +491,7 @@ TemporaryBattleList['Klara2'] = new TemporaryBattle(
         ]),
     ]
 );
-TemporaryBattleList['Avery2'] = new TemporaryBattle(
+TemporaryBattleList.Avery2 = new TemporaryBattle(
     'Avery2',
     [
         new GymPokemon('Galarian Slowpoke', 163155876, 62),
@@ -506,7 +506,7 @@ TemporaryBattleList['Avery2'] = new TemporaryBattle(
         ]),
     ]
 );
-TemporaryBattleList['Klara3'] = new TemporaryBattle(
+TemporaryBattleList.Klara3 = new TemporaryBattle(
     'Klara3',
     [
         new GymPokemon('Skorupi', 130716093, 65),
@@ -517,7 +517,7 @@ TemporaryBattleList['Klara3'] = new TemporaryBattle(
     'But I didn\'t hold back! I gave it everything I\'ve got...',
     [new TemporaryBattleRequirement('Avery2')]
 );
-TemporaryBattleList['Avery3'] = new TemporaryBattle(
+TemporaryBattleList.Avery3 = new TemporaryBattle(
     'Avery3',
     [
         new GymPokemon('Galarian Ponyta', 130716093, 65),
@@ -532,7 +532,7 @@ TemporaryBattleList['Avery3'] = new TemporaryBattle(
         App.game.party.gainPokemonById(891);
     }
 );
-TemporaryBattleList['Peony'] = new TemporaryBattle(
+TemporaryBattleList.Peony = new TemporaryBattle(
     'Peony',
     [
         new GymPokemon('Copperajah', 267146977, 70),
@@ -547,19 +547,19 @@ TemporaryBattleList['Peony'] = new TemporaryBattle(
         App.game.quests.getQuestLine('The Ancient Golems').beginQuest();
     }
 );
-TemporaryBattleList['Calyrex'] = new TemporaryBattle(
+TemporaryBattleList.Calyrex = new TemporaryBattle(
     'Calyrex',
     [new GymPokemon('Calyrex', 545520080, 80)],
     'Cracrown crow. Roooooowwwn rown crown.',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 46)]
 );
-TemporaryBattleList['Glastrier'] = new TemporaryBattle(
+TemporaryBattleList.Glastrier = new TemporaryBattle(
     'Glastrier',
     [new GymPokemon('Glastrier', 587390930, 75)],
     'The Pokémon ran away!',
     [new QuestLineStepCompletedRequirement('The Crown of Galar', 3)]
 );
-TemporaryBattleList['Spectrier'] = new TemporaryBattle(
+TemporaryBattleList.Spectrier = new TemporaryBattle(
     'Spectrier',
     [new GymPokemon('Spectrier', 587390930, 75)],
     'The Pokémon ran away!',
@@ -575,7 +575,7 @@ TemporaryBattleList['Dyna Tree Birds'] = new TemporaryBattle(
     'The legendary birds fled to roam the region.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill'))]
 );
-TemporaryBattleList['Regigigas'] = new TemporaryBattle(
+TemporaryBattleList.Regigigas = new TemporaryBattle(
     'Regigigas',
     [new GymPokemon('Regigigas', 587390930, 100)],
     'The ancient giant was defeated!',

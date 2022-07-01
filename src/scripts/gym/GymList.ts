@@ -1491,7 +1491,7 @@ GymList['Champion Hau'] = new Champion(
 
 //Galar Leaders
 //TODO Addition of G-Max forms?
-GymList['Turffield'] = new Gym(
+GymList.Turffield = new Gym(
     'Milo',
     'Turffield',
     [
@@ -1503,7 +1503,7 @@ GymList['Turffield'] = new Gym(
     'The power of Grass has wilted... What an incredible Gym Challenger!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 13)]
 );
-GymList['Hulbury'] = new Gym(
+GymList.Hulbury = new Gym(
     'Nessa',
     'Hulbury',
     [
@@ -1516,7 +1516,7 @@ GymList['Hulbury'] = new Gym(
     'I may proudly be the strongest member of this Gym, but I was totally washed away!',
     [new TemporaryBattleRequirement('Hop4')]
 );
-GymList['Motostoke'] = new Gym(
+GymList.Motostoke = new Gym(
     'Kabu',
     'Motostoke',
     [
@@ -1557,7 +1557,7 @@ GymList['Stow-on-Side2'] = new Gym(
     'Maybe my mask... kept me from seeing just how strong you really are...',
     [new TemporaryBattleRequirement('Hop5')]
 );
-GymList['Ballonlea'] = new Gym(
+GymList.Ballonlea = new Gym(
     'Opal',
     'Ballonlea',
     [
@@ -1571,7 +1571,7 @@ GymList['Ballonlea'] = new Gym(
     'Your pink is still lacking, but you\'re an excellent Trainer with some excellent Pokémon.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glimwood Tangle'))]
 );
-GymList['Circhester1'] = new Gym(
+GymList.Circhester1 = new Gym(
     'Gordie',
     'Circhester1',
     [
@@ -1585,7 +1585,7 @@ GymList['Circhester1'] = new Gym(
     'I just want to climb into a hole... Well, I guess it\'d be more like falling from here.',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
 );
-GymList['Circhester2'] = new Gym(
+GymList.Circhester2 = new Gym(
     'Melony',
     'Circhester2',
     [
@@ -1599,7 +1599,7 @@ GymList['Circhester2'] = new Gym(
     'I think you took breaking the ice a little too literally...',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
 );
-GymList['Spikemuth'] = new Gym(
+GymList.Spikemuth = new Gym(
     'Piers',
     'Spikemuth',
     [
@@ -1613,7 +1613,7 @@ GymList['Spikemuth'] = new Gym(
     'Me an\' my team gave it our best. Let\'s meet up again for a battle some time...',
     [new TemporaryBattleRequirement('Marnie2')]
 );
-GymList['Hammerlocke'] = new Gym(
+GymList.Hammerlocke = new Gym(
     'Raihan',
     'Hammerlocke',
     [
