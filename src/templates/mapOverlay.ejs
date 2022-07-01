@@ -25,7 +25,7 @@ Parameters:
     - visible : Required : String
         A knockout data-bind for visibility when true
 
-    - moveToTown : Optional : String
+    - connectedToTown : Optional : String
         Name to the dungeon or town link to the overlay to display player icon
 
 <% */ %>
@@ -48,6 +48,6 @@ Parameters:
     x="<%= locals.x * 16 + (locals.width * 16) / 2 - 24 %>"
     y="<%= locals.y * 16 + (locals.height * 16) / 2 - 24 %>"
     class="iconLocation"
-    data-bind="visible: MapHelper.calculateTownIsCurrentLocation('<%= locals.moveToTown %>') && <%= locals.visible %>
+    data-bind="visible: MapHelper.townIsCurrentLocation('<%= locals.connectedToTown %>') && <%= locals.visible %>
     , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
 </image>

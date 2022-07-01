@@ -48,7 +48,7 @@ Parameters:
     <text style="font-size: 32px"
         x="<%= (locals.x * 16 + (locals.width * 16) / 2 - ((locals.name || locals.route).toString().length * 8)) + (locals.textX || 0) %>"
         y="<%= (locals.y * 16 + (locals.height * 16) / 2 + (locals.rotate ? -38 : 10)) + (locals.textY || 0) %>"
-        data-bind="visible: !MapHelper.calculateRouteIsCurrentLocation(<%= locals.route %>, <%= locals.region %>)">
+        data-bind="visible: !MapHelper.routeIsCurrentLocation(<%= locals.route %>, <%= locals.region %>)">
         <%= locals.name || locals.route %>
     </text>
     <image width="48" height="48"
@@ -56,7 +56,7 @@ Parameters:
         y="<%= locals.y * 16 + (locals.height * 16) / 2 - 24 - (locals.rotate ? locals.height * 16 : 0) %>"
         class="iconLocation"
         transform='rotate(<%= (locals.rotate ? -90 : 0) %>)'
-        data-bind="visible: MapHelper.calculateRouteIsCurrentLocation(<%= locals.route %>, <%= locals.region %>),
+        data-bind="visible: MapHelper.routeIsCurrentLocation(<%= locals.route %>, <%= locals.region %>),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
     <% } %>

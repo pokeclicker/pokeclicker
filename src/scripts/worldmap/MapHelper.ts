@@ -111,14 +111,14 @@ class MapHelper {
         return cls;
     }
 
-    public static calculateRouteIsCurrentLocation(route: number, region: GameConstants.Region): boolean {
+    public static routeIsCurrentLocation(route: number, region: GameConstants.Region): boolean {
         if (player.route() == route && player.region == region) {
             return true;
         }
         return false;
     }
 
-    public static calculateTownIsCurrentLocation(townName: string): boolean {
+    public static townIsCurrentLocation(townName: string): boolean {
         if (!player.route() && player.town().name == townName) {
             return true;
         }

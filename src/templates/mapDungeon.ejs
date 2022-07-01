@@ -29,12 +29,12 @@ Parameters:
     data-bind="click:function(){MapHelper.moveToTown('<%= (locals.moveToTown) ? locals.moveToTown.replace(/'/g, '\\\'') : locals.name.replace(/'/g, '\\\'') %>')},
         attr: { class: MapHelper.calculateTownCssClass('<%= locals.name.replace(/'/g, '\\\'') %>') }">
 </rect>
-<% if (!locals.notMain) { %>
+<% if (!locals.isExtension) { %>
     <image width="48" height="48"
         x="<%= locals.x * 16 + ((locals.width || 4) * 16) / 2 - 24 %>"
         y="<%= locals.y * 16 + ((locals.height || 3) * 16) / 2 - 24 %>"
         class="iconLocation"
-        data-bind="visible: MapHelper.calculateTownIsCurrentLocation('<%= locals.name.replace(/'/g, '\\\'') %>')
+        data-bind="visible: MapHelper.townIsCurrentLocation('<%= locals.name.replace(/'/g, '\\\'') %>')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
 <% } %>

@@ -442,7 +442,8 @@
     <%- include('templates/mapTown',
         { name: "Jubilife City"
         , x: 14, y: 40.5
-        , height: 0.5, width: 5, notMain: true
+        , height: 0.5, width: 5
+        , isExtension: true
         })
     %>
 
@@ -479,7 +480,8 @@
     <%- include('templates/mapDungeon',
         { name: "Mt. Coronet"
         , x: 44, y: 26
-        , height: 1, width: 2, notMain: true
+        , height: 1, width: 2
+        , isExtension: true
         })
     %>
 
@@ -487,7 +489,8 @@
     <%- include('templates/mapDungeon',
         { name: "Mt. Coronet"
         , x: 40, y: 18
-        , height: 4, width: 4, notMain: true
+        , height: 4, width: 4
+        , isExtension: true
         })
     %>
 
@@ -495,7 +498,8 @@
     <%- include('templates/mapDungeon',
         { name: "Mt. Coronet"
         , x: 40, y: 31
-        , height: 6, width: 4, notMain: true
+        , height: 6, width: 4
+        , isExtension: true
         })
     %>
 
@@ -503,7 +507,8 @@
     <%- include('templates/mapDungeon',
         { name: "Mt. Coronet"
         , x: 39, y: 26
-        , height: 5, width: 5, notMain: true
+        , height: 5, width: 5
+        , isExtension: true
         })
     %>
 
@@ -511,7 +516,8 @@
     <%- include('templates/mapDungeon',
         { name: "Mt. Coronet"
         , x: 37, y: 33
-        , height: 8, width: 3, notMain: true
+        , height: 8, width: 3
+        , isExtension: true
         })
     %>
 
@@ -519,7 +525,8 @@
     <%- include('templates/mapDungeon',
         { name: "Mt. Coronet"
         , x: 40, y: 37
-        , height: 4, width: 1, notMain: true
+        , height: 4, width: 1
+        , isExtension: true
         })
     %>
 
@@ -535,7 +542,8 @@
     <%- include('templates/mapTown',
         { name: "Hearthome City"
         , x: 44, y: 38.5
-        , height: 0.5, width: 5, notMain: true
+        , height: 0.5, width: 5
+        , isExtension: true
         })
     %>
 
@@ -559,7 +567,8 @@
     <%- include('templates/mapTown',
         { name: "Veilstone City"
         , x: 64, y: 28.5
-        , height: 0.5, width: 5, notMain: true
+        , height: 0.5, width: 5
+        , isExtension: true
         })
     %>
 
@@ -591,7 +600,8 @@
     <%- include('templates/mapTown',
         { name: "Sunyshore City"
         , x: 78, y: 47.5
-        , height: 0.5, width: 5, notMain: true
+        , height: 0.5, width: 5
+        , isExtension: true
         })
     %>
 
@@ -647,7 +657,8 @@
     <%- include('templates/mapTown',
         { name: "Pokémon League Sinnoh"
         , x: 84, y: 30.5
-        , width: 3, height: 0.5, notMain: true
+        , width: 3, height: 0.5
+        , isExtension: true
         })
     %>
 
@@ -794,7 +805,8 @@
     <%- include('templates/mapDungeon',
         { name: "Sendoff Spring"
         , x: 73, y: 41
-        , height: 3, width: 2, notMain: true
+        , height: 3, width: 2
+        , isExtension: true
         })
     %>
 
@@ -841,7 +853,7 @@
          , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: MapHelper.calculateTownCssClass('Distortion World') }"
          , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Spear Pillar')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]() == 0"
          , image: "assets/images/map/distortion_world.png"
-         , moveToTown: "Distortion World"
+         , connectedToTown: "Distortion World"
          })
      %>
 
@@ -852,7 +864,7 @@
          , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: MapHelper.calculateTownCssClass('Distortion World') }"
          , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Sendoff Spring')]() >= 1"
          , image: "assets/images/map/distortion_world.png"
-         , moveToTown: "Distortion World"
+         , connectedToTown: "Distortion World"
          })
      %>
 

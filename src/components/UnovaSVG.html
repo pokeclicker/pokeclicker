@@ -383,7 +383,8 @@
     <!--Castelia City extension-->
     <%- include('templates/mapTown',
         { name: "Castelia City"
-        , x: 53, y: 49, notMain: true
+        , x: 53, y: 49
+        , isExtension: true
         })
     %>
 
@@ -397,7 +398,8 @@
     <!--Nimbasa City extension-->
     <%- include('templates/mapTown',
         { name: "Nimbasa City"
-        , x: 52, y: 31, notMain: true
+        , x: 52, y: 31
+        , isExtension: true
         })
     %>
 
@@ -411,7 +413,8 @@
     <!--Driftveil City extension-->
     <%- include('templates/mapTown',
         { name: "Driftveil City"
-        , x: 30, y: 31, notMain: true
+        , x: 30, y: 31
+        , isExtension: true
         })
     %>
 
@@ -425,7 +428,8 @@
     <!--Mistralton City extension-->
     <%- include('templates/mapTown',
         { name: "Mistralton City"
-        , x: 17, y: 22, notMain: true
+        , x: 17, y: 22
+        , isExtension: true
         })
     %>
 
@@ -439,7 +443,8 @@
     <!--Icirrus City extension-->
     <%- include('templates/mapTown',
         { name: "Icirrus City"
-        , x: 30, y: 12, notMain: true
+        , x: 30, y: 12
+        , isExtension: true
         })
     %>
 
@@ -453,7 +458,8 @@
     <!--Opelucid City extension-->
     <%- include('templates/mapTown',
         { name: "Opelucid City"
-        , x: 52, y: 12, notMain: true
+        , x: 52, y: 12
+        , isExtension: true
         })
     %>
 
@@ -482,7 +488,8 @@
     <!--Undella Town extension-->
     <%- include('templates/mapTown',
         { name: "Undella Town"
-        , x: 84, y: 20, notMain: true
+        , x: 84, y: 20
+        , isExtension: true
         })
     %>
 
@@ -503,7 +510,8 @@
     <!--Black and White Park extension-->
     <%- include('templates/mapTown',
         { name: "Black and White Park"
-        , x: 73, y: 31, notMain: true
+        , x: 73, y: 31
+        , isExtension: true
         })
     %>
 
@@ -556,7 +564,8 @@
     <%- include('templates/mapTown',
         { name: "Pokémon League Unova"
         , x: 59, y: 5.5
-        , width: 3, height: 0.5, notMain: true
+        , width: 3, height: 0.5
+        , isExtension: true
         })
     %>
 
@@ -686,7 +695,8 @@
     <%- include('templates/mapDungeon',
         { name: "Reversal Mountain"
         , x: 71, y: 21
-        , width: 3, height: 3, notMain: true
+        , width: 3, height: 3
+        , isExtension: true
         })
     %>
 
@@ -865,7 +875,7 @@
         , databind: "click:function(){MapHelper.moveToTown('Team Plasma Assault')}, attr:{ class: MapHelper.calculateTownCssClass('Team Plasma Assault') }"
         , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Plasma Assault')]() == 0"
         , image: "assets/images/map/plasmafrigate_airship.png"
-        , moveToTown: "Team Plasma Assault"
+        , connectedToTown: "Team Plasma Assault"
         })
     %>
 
@@ -877,7 +887,7 @@
         , databind: "click:function(){MapHelper.moveToTown('Team Plasma Assault')}, attr:{ class: MapHelper.calculateTownCssClass('Team Plasma Assault') }"
         , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]() >= 1"
         , image: "assets/images/map/plasmafrigate_airship.png"
-        , moveToTown: "Team Plasma Assault"
+        , connectedToTown: "Team Plasma Assault"
         })
     %>
 
@@ -889,7 +899,7 @@
         , databind: "click:function(){MapHelper.moveToTown('Plasma Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('Plasma Frigate') }"
         , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Plasma Assault')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() == 0"
         , image: "assets/images/map/plasmafrigate_ship.png"
-        , moveToTown: "Plasma Frigate"
+        , connectedToTown: "Plasma Frigate"
         })
     %>
 
@@ -901,7 +911,7 @@
         , databind: "click:function(){MapHelper.moveToTown('Plasma Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('Plasma Frigate') }"
         , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]() >= 1"
         , image: "assets/images/map/plasmafrigate_ship.png"
-        , moveToTown: "Plasma Frigate"
+        , connectedToTown: "Plasma Frigate"
         })
     %>
 
@@ -913,7 +923,7 @@
         , databind: "click:function(){MapHelper.moveToTown('Giant Chasm')}, attr:{ class: MapHelper.calculateTownCssClass('Giant Chasm') }"
         , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]() == 0"
         , image: "assets/images/map/plasmafrigate_airship.png"
-        , moveToTown: "Giant Chasm"
+        , connectedToTown: "Giant Chasm"
         })
     %>
 
