@@ -34,7 +34,7 @@ class PartyPokemon implements Saveable {
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
-    _pokerus: KnockoutObservable<number>;
+    _pokerus: KnockoutObservable<GameConstants.Pokerus>;
     proteinsUsed: KnockoutObservable<number>;
     effortPoints: KnockoutObservable<number>;
 
@@ -320,11 +320,11 @@ class PartyPokemon implements Saveable {
         this._breeding(bool);
     }
 
-    get pokerus(): number {
+    get pokerus(): GameConstants.Pokerus {
         return this._pokerus();
     }
 
-    set pokerus(index: number) {
+    set pokerus(index: GameConstants.Pokerus) {
         this._pokerus(index);
     }
 
