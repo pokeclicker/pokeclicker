@@ -3360,7 +3360,7 @@ TownList.Hammerlocke = new Town(
 TownList.Circhester = new Town(
     'Circhester',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Hop7, TemporaryBattleList['Rampaging Gigalith'], TemporaryBattleList['Rampaging Froslass'], GymList['Circhester1'], GymList['Circhester2'], CirchesterShop],
+    [TemporaryBattleList.Hop7, TemporaryBattleList['Rampaging Gigalith'], TemporaryBattleList['Rampaging Froslass'], GymList.Circhester1, GymList.Circhester2, CirchesterShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
     }
