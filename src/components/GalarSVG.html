@@ -598,8 +598,8 @@
         <!--Slumbering Weald-->
         <%- include('templates/mapTown',
             { name: "Slumbering Weald"
-            , x: 37, y: 54
-            , width: 5, height: 3
+            , x: 36, y: 53
+            , width: 6, height: 5
             })
         %>
 
@@ -978,6 +978,22 @@
             { name: "Glimwood Tangle"
             , x: 25, y: 38
             , width: 6, height: 6
+            })
+        %>
+
+        <!--Glimwood Tangle extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Glimwood Tangle"
+            , x: 27, y: 44
+            , width: 1, height: 1
+            })
+        %>
+
+        <!--Glimwood Tangle extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Glimwood Tangle"
+            , x: 28, y: 44
+            , width: 3, height: 0.5
             })
         %>
 
@@ -2021,15 +2037,7 @@
         <%- include('templates/mapDungeon',
             { name: "Brawlers Cave"
             , x: 56, y: 30
-            , width: 7, height: 2
-            })
-        %>
-
-        <!--Brawlers Cave extension-->
-        <%- include('templates/mapDungeon',
-            { name: "Brawlers Cave"
-            , x: 56, y: 32
-            , width: 5, height: 1
+            , width: 7, height: 3
             })
         %>
 
@@ -2513,7 +2521,7 @@
         <!--Path to the Peak-->
         <%- include('templates/mapRoute',
             { route: 55, region: 7
-            , width: 8, height: 2
+            , width: 7, height: 1
             , x: 49, y: 5, name: "PttP"
             })
         %>
@@ -2521,8 +2529,8 @@
         <!--Path to the Peak extension-->
         <%- include('templates/mapRoute',
             { route: 55, region: 7
-            , width: 6, height: 1
-            , x: 50, y: 7, name: "PttP"
+            , width: 5, height: 1
+            , x: 51, y: 6, name: "PttP"
             , noText: true
             })
         %>
@@ -2661,16 +2669,24 @@
         <!--Tunnel to the Top-->
         <%- include('templates/mapDungeon',
             { name: "Tunnel to the Top"
-            , x: 54, y: 3
-            , width: 6, height: 2
+            , x: 53, y: 3
+            , width: 5, height: 2
             })
         %>
 
         <!--Tunnel to the Top extension-->
         <%- include('templates/mapDungeon',
             { name: "Tunnel to the Top"
-            , x: 58, y: 5
-            , width: 2, height: 6
+            , x: 56, y: 5
+            , width: 2, height: 4
+            })
+        %>
+
+        <!--Tunnel to the Top extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Tunnel to the Top"
+            , x: 48, y: 7
+            , width: 8, height: 2
             })
         %>
 
@@ -2678,15 +2694,7 @@
         <%- include('templates/mapDungeon',
             { name: "Tunnel to the Top"
             , x: 48, y: 9
-            , width: 10, height: 2
-            })
-        %>
-
-        <!--Tunnel to the Top extension-->
-        <%- include('templates/mapDungeon',
-            { name: "Tunnel to the Top"
-            , x: 48, y: 11
-            , width: 3, height: 3
+            , width: 3, height: 5
             })
         %>
 
