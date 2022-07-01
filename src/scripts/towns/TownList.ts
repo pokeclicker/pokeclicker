@@ -234,7 +234,7 @@ const CinnabarIslandResearcher = new NPC('Researcher', [
     'Apparently the ancient Pokémon escaped, and can be found roaming around Kanto!',
 ]);
 const OneIslandCelio1 = new NPC ('Celio', [
-    'Ah, yes. Welcome! Welcome! Almost didn\'t see you there. I\'m just so bussy trying to get this darned thing to work. Once it\'s complete we can finally have a direct communications network between the Sevii Islands and Kanto!',
+    'Ah, yes. Welcome! Welcome! Almost didn\'t see you there. I\'m just so busy trying to get this darned thing to work. Once it\'s complete we can finally have a direct communications network between the Sevii Islands and Kanto!',
     'I don\'t even have time to go and pick up an important package. A meteorite, found by the owner of the game corner on Two Island. It contains important materials for my machine.',
     'You seem like the adventuring type. Tell you what. How about Bill stays here with me to work on this machine, and you go fetch my Meteorite for me.',
 ],
