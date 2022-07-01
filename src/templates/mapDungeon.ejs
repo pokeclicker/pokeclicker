@@ -15,20 +15,25 @@ Parameters:
     - y : Required : Number
         y axis position of the dungeon icon.
 
-    - notMain : Optional : Boolean
+    - isExtension : Optional : Boolean
         Used to indicate that this is a extension to dungeon, to not add two player icons in the same dungeon.
+
+    - invisible : Optional : Boolean
+        Used to display player icon for dungeons without icon (like Team Rocket's Hideout)
 
 <% */ %>
 
-<rect class="city"
-    data-town="<%= locals.name %>"
-    x="<%= locals.x * 16 %>"
-    y="<%= locals.y * 16 %>"
-    height="<%= (locals.height || 3) * 16 %>"
-    width="<%= (locals.width || 4) * 16 %>"
-    data-bind="click:function(){MapHelper.moveToTown('<%= (locals.moveToTown) ? locals.moveToTown.replace(/'/g, '\\\'') : locals.name.replace(/'/g, '\\\'') %>')},
-        attr: { class: MapHelper.calculateTownCssClass('<%= locals.name.replace(/'/g, '\\\'') %>') }">
-</rect>
+<% if (!locals.invisible) { %>
+    <rect class="city"
+        data-town="<%= locals.name %>"
+        x="<%= locals.x * 16 %>"
+        y="<%= locals.y * 16 %>"
+        height="<%= (locals.height || 3) * 16 %>"
+        width="<%= (locals.width || 4) * 16 %>"
+        data-bind="click:function(){MapHelper.moveToTown('<%= (locals.moveToTown) ? locals.moveToTown.replace(/'/g, '\\\'') : locals.name.replace(/'/g, '\\\'') %>')},
+            attr: { class: MapHelper.calculateTownCssClass('<%= locals.name.replace(/'/g, '\\\'') %>') }">
+    </rect>
+<% } %>
 <% if (!locals.isExtension) { %>
     <image width="48" height="48"
         x="<%= locals.x * 16 + ((locals.width || 4) * 16) / 2 - 24 %>"
