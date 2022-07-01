@@ -5119,7 +5119,7 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
     ],
     356500, 3);
 
-dungeonList['Dreamyard'] = new Dungeon('Dreamyard',
+dungeonList.Dreamyard = new Dungeon('Dreamyard',
     [
         {pokemon: 'Raticate', options: { weight: 4.67 }},
         {pokemon: 'Jigglypuff', options: { weight: 4.67 }},

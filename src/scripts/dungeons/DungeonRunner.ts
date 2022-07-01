@@ -182,7 +182,7 @@ class DungeonRunner {
             return player.gainItem(ItemList[input].name, amount);
 
         }  else {
-            return player.gainItem(ItemList['xAttack'], 1);
+            return player.gainItem(ItemList.xAttack, 1);
         }
     }
 

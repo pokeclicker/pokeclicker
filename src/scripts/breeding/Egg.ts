@@ -44,8 +44,8 @@ class Egg implements Saveable {
             this.pokemonType1 = dataPokemon.type1;
             this.pokemonType2 = dataPokemon.type2 === PokemonType.None ? dataPokemon.type1 : dataPokemon.type2;
         } else {
-            this.pokemonType1 = PokemonType['Normal'];
-            this.pokemonType2 = PokemonType['Normal'];
+            this.pokemonType1 = PokemonType.Normal;
+            this.pokemonType2 = PokemonType.Normal;
         }
     }
 
@@ -175,12 +175,12 @@ class Egg implements Saveable {
     }
 
     fromJSON(json: Record<string, any>): void {
-        this.totalSteps = json['totalSteps'];
-        this.steps = ko.observable(json['steps']);
-        this.shinyChance = json['shinyChance'];
-        this.pokemon = json['pokemon'];
-        this.type = json['type'];
-        this.notified = json['notified'];
+        this.totalSteps = json.totalSteps;
+        this.steps = ko.observable(json.steps);
+        this.shinyChance = json.shinyChance;
+        this.pokemon = json.pokemon;
+        this.type = json.type;
+        this.notified = json.notified;
         this.init();
     }
 }

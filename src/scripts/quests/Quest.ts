@@ -176,7 +176,7 @@ abstract class Quest {
 
     //#endregion
 
-    toJSON() {
+    toJSON(): Record<string, any> {
         return {
             index: this.index || 0,
             customDescription: this.customDescription,
@@ -194,9 +194,9 @@ abstract class Quest {
             this.initial(null);
             this.notified = false;
         }
-        this.index = json.hasOwnProperty('index') ? json['index'] : 0;
-        this.claimed(json.hasOwnProperty('claimed') ? json['claimed'] : false);
-        this.initial(json.hasOwnProperty('initial') ? json['initial'] : null);
-        this.notified = json.hasOwnProperty('notified') ? json['notified'] : false;
+        this.index = json.hasOwnProperty('index') ? json.index : 0;
+        this.claimed(json.hasOwnProperty('claimed') ? json.claimed : false);
+        this.initial(json.hasOwnProperty('initial') ? json.initial : null);
+        this.notified = json.hasOwnProperty('notified') ? json.notified : false;
     }
 }
