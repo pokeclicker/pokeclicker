@@ -57,8 +57,8 @@ class UseOakItemQuest extends Quest implements QuestInterface {
 
     toJSON() {
         const json = super.toJSON();
-        json['name'] = this.constructor.name;
-        json['data'].push(this.item);
+        json.name = this.constructor.name;
+        json.data.push(this.item);
         return json;
     }
 }

@@ -56,8 +56,8 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
 
     toJSON() {
         const json = super.toJSON();
-        json['name'] = this.constructor.name;
-        json['data'].push(this.dungeon);
+        json.name = this.constructor.name;
+        json.data.push(this.dungeon);
         return json;
     }
 }

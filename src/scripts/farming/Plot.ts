@@ -507,12 +507,12 @@ class Plot implements Saveable {
             return;
         }
 
-        this.isUnlocked = json['isUnlocked'] ?? this.defaults.isUnlocked;
-        this.berry = json['berry'] ?? this.defaults.berry;
-        this.age = json['age'] ?? this.defaults.age;
-        this.mulch = json['mulch'] ?? this.defaults.mulch;
-        this.mulchTimeLeft = json['mulchTimeLeft'] ?? this.defaults.mulchTimeLeft;
-        this.lastPlanted = json['lastPlanted'] ?? json['berry'] ?? this.defaults.berry;
+        this.isUnlocked = json.isUnlocked ?? this.defaults.isUnlocked;
+        this.berry = json.berry ?? this.defaults.berry;
+        this.age = json.age ?? this.defaults.age;
+        this.mulch = json.mulch ?? this.defaults.mulch;
+        this.mulchTimeLeft = json.mulchTimeLeft ?? this.defaults.mulchTimeLeft;
+        this.lastPlanted = json.lastPlanted ?? json.berry ?? this.defaults.berry;
     }
 
     toJSON(): Record<string, any> {
