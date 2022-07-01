@@ -800,6 +800,9 @@ class Update implements Saveable {
 
         '0.9.8': ({ playerData, saveData }) => {
             saveData.oakItemLoadouts = saveData.oakItemLoadouts.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
+            if (document.documentElement.style.getPropertyValue('--questAtLocation') == '#34BF45') {
+                document.documentElement.style.setProperty('--questAtLocation', '#ff0033');
+            }
         },
     };
 
