@@ -23,15 +23,18 @@ class PokemonFactory {
         }
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
-        const routeAvgHp = (region, route) => {
+        const routeHpModifier = (region, route, pokemonHP = basePokemon.hitpoints) => {
             const poke = [...new Set(Object.values(Routes.getRoute(region, route).pokemon).flat().map(p => p.pokemon ?? p).flat())];
-            const total = poke.map(p => pokemonMap[p].base.hitpoints).reduce((s, a) => s + a, 0);
-            return total / poke.length;
+            const hitpoints = poke.map(p => pokemonMap[p].base.hitpoints);
+            const avg = hitpoints.reduce((s, a) => s + a, 0) / poke.length;
+            const modPercent = (pokemonHP - avg) / Math.abs((pokemonHP > avg ? Math.max(...hitpoints) : Math.min(...hitpoints)) - avg) * 0.1 || 0;
+            return modPercent;
         };
 
         // TODO this monster formula needs to be improved. Preferably with graphs :D
         // Health has a +/- 10% variable based on base health stat compared to the average of the route
-        const maxHealth: number = Math.round((PokemonFactory.routeHealth(route, region) - (PokemonFactory.routeHealth(route, region) / 10)) + (PokemonFactory.routeHealth(route, region) / 10 / routeAvgHp(region, route) * basePokemon.hitpoints));
+        const baseHealth: number = PokemonFactory.routeHealth(route, region);
+        const maxHealth: number = Math.round(baseHealth + (baseHealth * routeHpModifier(region, route)));
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const level: number = this.routeLevel(route, region);
