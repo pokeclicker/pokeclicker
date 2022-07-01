@@ -1326,7 +1326,7 @@ class Farming implements Feature {
             return;
         }
 
-        const savedBerries = json['berryList'];
+        const savedBerries = json.berryList;
         if (savedBerries == null) {
             this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
         } else {
@@ -1335,7 +1335,7 @@ class Farming implements Feature {
             });
         }
 
-        const savedUnlockedBerries = json['unlockedBerries'];
+        const savedUnlockedBerries = json.unlockedBerries;
         if (savedUnlockedBerries == null) {
             this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
         } else {
@@ -1344,7 +1344,7 @@ class Farming implements Feature {
             });
         }
 
-        const savedMulches = json['mulchList'];
+        const savedMulches = json.mulchList;
         if (savedMulches == null) {
             this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
         } else {
@@ -1353,7 +1353,7 @@ class Farming implements Feature {
             });
         }
 
-        const savedPlots = json['plotList'];
+        const savedPlots = json.plotList;
         if (savedPlots == null) {
             this.plotList = this.defaults.plotList;
         } else {
@@ -1365,21 +1365,21 @@ class Farming implements Feature {
         }
         this.unlockedPlotCount(this.plotList.filter(p => p.isUnlocked).length);
 
-        const shovelAmt = json['shovelAmt'];
+        const shovelAmt = json.shovelAmt;
         if (shovelAmt == null) {
             this.shovelAmt = ko.observable(this.defaults.shovelAmt);
         } else {
             this.shovelAmt(shovelAmt);
         }
 
-        const mulchShovelAmt = json['mulchShovelAmt'];
+        const mulchShovelAmt = json.mulchShovelAmt;
         if (mulchShovelAmt == null) {
             this.mulchShovelAmt = ko.observable(this.defaults.mulchShovelAmt);
         } else {
             this.mulchShovelAmt(mulchShovelAmt);
         }
 
-        const mutations = json['mutations'];
+        const mutations = json.mutations;
         if (mutations) {
             this.mutations.forEach((mutation, i) => mutation.fromJSON(mutations[i]));
         }

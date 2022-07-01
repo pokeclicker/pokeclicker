@@ -244,10 +244,10 @@ class Update implements Saveable {
             if (this.minUpdateVersion('0.6.0', saveData)) {
                 if (saveData.oakItems.purchaseList) {
                     if (saveData.oakItems.purchaseList[OakItemType.Squirtbottle]) {
-                        saveData.oakItems[OakItemType[OakItemType.Squirtbottle]]['purchased'] = true;
+                        saveData.oakItems[OakItemType[OakItemType.Squirtbottle]].purchased = true;
                     }
                     if (saveData.oakItems.purchaseList[OakItemType.Sprinklotad]) {
-                        saveData.oakItems[OakItemType[OakItemType.Sprinklotad]]['purchased'] = true;
+                        saveData.oakItems[OakItemType[OakItemType.Sprinklotad]].purchased = true;
                     }
                 }
             }
@@ -586,11 +586,11 @@ class Update implements Saveable {
                 gemUpgrades: saveData.shards.shardUpgrades || [],
             };
 
-            delete saveData.keyItems['Shard_case'];
+            delete saveData.keyItems.Shard_case;
 
             // Swapping Shard Case for Gem Case
             if (saveData.badgeCase[8]) {
-                saveData.keyItems['Gem_case'] = true;
+                saveData.keyItems.Gem_case = true;
             }
 
             // Just incase statistics is not set
@@ -756,7 +756,7 @@ class Update implements Saveable {
 
             //Replace Poison Barb with Rocky Helmet
             saveData.oakItems.Rocky_Helmet = saveData.oakItems.Poison_Barb;
-            delete saveData.oakItems['Poison_Barb'];
+            delete saveData.oakItems.Poison_Barb;
 
             // Give the players Dowsing Machines in place of Item Magnets
             playerData._itemList.Dowsing_machine = playerData._itemList.Item_magnet;
