@@ -3278,7 +3278,7 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
 TownList.Postwick = new Town(
     'Postwick',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop1'], PostwickShop],
+    [TemporaryBattleList.Hop1, PostwickShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
         npcs: [ProfMagnolia, Mom],
@@ -3287,7 +3287,7 @@ TownList.Postwick = new Town(
 TownList['Slumbering Weald'] = new Town(
     'Slumbering Weald',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Mirages'], new MoveToDungeon(dungeonList['Slumbering Weald Shrine'])],
+    [TemporaryBattleList.Mirages, new MoveToDungeon(dungeonList['Slumbering Weald Shrine'])],
     {
         requirements: [new TemporaryBattleRequirement('Hop1')],
     }
@@ -3304,7 +3304,7 @@ TownList.Wedgehurst = new Town(
 TownList['Professor Magnolia\'s House'] = new Town(
     'Professor Magnolia\'s House',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop2'], TemporaryBattleList['Sordward & Shielbert']],
+    [TemporaryBattleList.Hop2, TemporaryBattleList['Sordward & Shielbert']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 2)],
     }
@@ -3312,7 +3312,7 @@ TownList['Professor Magnolia\'s House'] = new Town(
 TownList.Motostoke = new Town(
     'Motostoke',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop3'], TemporaryBattleList['Marnie1'], TemporaryBattleList['Rampaging Torkoal'], MotostokeShop],
+    [TemporaryBattleList.Hop3, TemporaryBattleList.Marnie1, TemporaryBattleList['Rampaging Torkoal'], MotostokeShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
     }
@@ -3328,7 +3328,7 @@ TownList.Turffield = new Town(
 TownList.Hulbury = new Town(
     'Hulbury',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop4'], TemporaryBattleList['Rampaging Gyarados'], HulburyShop],
+    [TemporaryBattleList.Hop4, TemporaryBattleList['Rampaging Gyarados'], HulburyShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 14)],
     }
@@ -3336,7 +3336,7 @@ TownList.Hulbury = new Town(
 TownList['Stow-on-Side'] = new Town(
     'Stow-on-Side',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop5'], TemporaryBattleList['Bede3'], TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop],
+    [TemporaryBattleList.Hop5, TemporaryBattleList.Bede3, TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
     }
@@ -3352,7 +3352,7 @@ TownList.Ballonlea = new Town(
 TownList.Hammerlocke = new Town(
     'Hammerlocke',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop6'], TemporaryBattleList['Rampaging Haxorus'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop],
+    [TemporaryBattleList.Hop6, TemporaryBattleList['Rampaging Haxorus'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
     }
@@ -3360,7 +3360,7 @@ TownList.Hammerlocke = new Town(
 TownList.Circhester = new Town(
     'Circhester',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Hop7'], TemporaryBattleList['Rampaging Gigalith'], TemporaryBattleList['Rampaging Froslass'], GymList['Circhester1'], GymList['Circhester2'], CirchesterShop],
+    [TemporaryBattleList.Hop7, TemporaryBattleList['Rampaging Gigalith'], TemporaryBattleList['Rampaging Froslass'], GymList['Circhester1'], GymList['Circhester2'], CirchesterShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
     }
@@ -3368,7 +3368,7 @@ TownList.Circhester = new Town(
 TownList.Spikemuth = new Town(
     'Spikemuth',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Marnie2'], TemporaryBattleList['Gym Leader Marnie'], SpikemuthShop],
+    [TemporaryBattleList.Marnie2, TemporaryBattleList['Gym Leader Marnie'], SpikemuthShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 30)],
     }
@@ -3393,7 +3393,7 @@ TownList['Wyndon Stadium'] = new Town(
 TownList['Armor Station'] = new Town(
     'Armor Station',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Klara1'], TemporaryBattleList['Avery1']],
+    [TemporaryBattleList.Klara1, TemporaryBattleList.Avery1],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
     }
@@ -3401,7 +3401,7 @@ TownList['Armor Station'] = new Town(
 TownList['Master Dojo'] = new Town(
     'Master Dojo',
     GameConstants.Region.galar,
-    [MasterDojoShop, TemporaryBattleList['Mustard']],
+    [MasterDojoShop, TemporaryBattleList.Mustard],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
     }
@@ -3409,7 +3409,7 @@ TownList['Master Dojo'] = new Town(
 TownList['Master Dojo Battlefield'] = new Town(
     'Master Dojo Battlefield',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Klara3'], TemporaryBattleList['Avery3'], GymList['Gym Leader Klara'], GymList['Gym Leader Avery'], GymList['Dojo Master Mustard']],
+    [TemporaryBattleList.Klara3, TemporaryBattleList.Avery3, GymList['Gym Leader Klara'], GymList['Gym Leader Avery'], GymList['Dojo Master Mustard']],
     {
         requirements: [
             new MultiRequirement([
@@ -3424,7 +3424,7 @@ TownList['Master Dojo Battlefield'] = new Town(
 TownList['Crown Tundra Station'] = new Town(
     'Crown Tundra Station',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Peony']],
+    [TemporaryBattleList.Peony],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
     }
@@ -3432,7 +3432,7 @@ TownList['Crown Tundra Station'] = new Town(
 TownList.Freezington = new Town(
     'Freezington',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Calyrex'], TemporaryBattleList['Glastrier'], TemporaryBattleList['Spectrier']],
+    [TemporaryBattleList.Calyrex, TemporaryBattleList.Glastrier, TemporaryBattleList.Spectrier],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 46)],
     }
@@ -3446,19 +3446,19 @@ TownList['Slumbering Weald Shrine'] = new DungeonTown(
     'Slumbering Weald Shrine',
     GameConstants.Region.galar,
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
-    [TemporaryBattleList['Hop8'], TemporaryBattleList['Sordward1'], TemporaryBattleList['Shielbert1']]
+    [TemporaryBattleList.Hop8, TemporaryBattleList.Sordward1, TemporaryBattleList.Shielbert1]
 );
 TownList['Galar Mine'] = new DungeonTown(
     'Galar Mine',
     GameConstants.Region.galar,
     [new RouteKillRequirement(10, GameConstants.Region.galar, 12)],
-    [TemporaryBattleList['Bede1']]
+    [TemporaryBattleList.Bede1]
 );
 TownList['Galar Mine No. 2'] = new DungeonTown(
     'Galar Mine No. 2',
     GameConstants.Region.galar,
     [new GymBadgeRequirement(BadgeEnums.Galar_Water)],
-    [TemporaryBattleList['Bede2']]
+    [TemporaryBattleList.Bede2]
 );
 TownList['Glimwood Tangle'] = new DungeonTown(
     'Glimwood Tangle',
@@ -3474,7 +3474,7 @@ TownList['Energy Plant'] = new DungeonTown(
     'Energy Plant',
     GameConstants.Region.galar,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))],
-    [TemporaryBattleList['Eternatus'], TemporaryBattleList['Sordward2'], TemporaryBattleList['Shielbert2'], TemporaryBattleList['The Darkest Day']]
+    [TemporaryBattleList.Eternatus, TemporaryBattleList.Sordward2, TemporaryBattleList.Shielbert2, TemporaryBattleList['The Darkest Day']]
 );
 TownList['Dusty Bowl'] = new DungeonTown(
     'Dusty Bowl',
@@ -3507,7 +3507,7 @@ TownList['Warm-Up Tunnel'] = new DungeonTown(
     'Warm-Up Tunnel',
     GameConstants.Region.galar,
     [new RouteKillRequirement(10, GameConstants.Region.galar, 38)],
-    [TemporaryBattleList['Klara2'], TemporaryBattleList['Avery2']]
+    [TemporaryBattleList.Klara2, TemporaryBattleList.Avery2]
 );
 TownList['Tower of Darkness'] = new DungeonTown(
     'Tower of Darkness',

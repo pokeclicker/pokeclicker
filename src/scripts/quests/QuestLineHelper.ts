@@ -634,13 +634,13 @@ class QuestLineHelper {
         const clearGlastrier = new CustomQuest(1, 0, 'A mysterious frozen Pokémon has appeared and challenged you to a battle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Glastrier')]());
         galarCrownQuestLine.addQuest(clearGlastrier);
 
-        const catchSpectrier = new CustomQuest(1, 0, 'Spectrier is now roaming the Crown Tundra. Catch it when the opportunity arises.', () => App.game.statistics.pokemonCaptured[pokemonMap['Spectrier'].id](), 0);
+        const catchSpectrier = new CustomQuest(1, 0, 'Spectrier is now roaming the Crown Tundra. Catch it when the opportunity arises.', () => App.game.statistics.pokemonCaptured[pokemonMap.Spectrier.id](), 0);
         galarCrownQuestLine.addQuest(catchSpectrier);
 
-        const catchGlastrier = new CustomQuest(1, 0, 'Glastrier is now roaming the Crown Tundra. Catch it when the opportunity arises.', () => App.game.statistics.pokemonCaptured[pokemonMap['Glastrier'].id](), 0);
+        const catchGlastrier = new CustomQuest(1, 0, 'Glastrier is now roaming the Crown Tundra. Catch it when the opportunity arises.', () => App.game.statistics.pokemonCaptured[pokemonMap.Glastrier.id](), 0);
         galarCrownQuestLine.addQuest(catchGlastrier);
 
-        const catchCalyrex = new CustomQuest(1, 0, 'Now you have found and caught Glastrier and Spectrier, Calyrex wants to challenge you at Crown Shrine. Catch it!', () => App.game.statistics.pokemonCaptured[pokemonMap['Calyrex'].id](), 0);
+        const catchCalyrex = new CustomQuest(1, 0, 'Now you have found and caught Glastrier and Spectrier, Calyrex wants to challenge you at Crown Shrine. Catch it!', () => App.game.statistics.pokemonCaptured[pokemonMap.Calyrex.id](), 0);
         galarCrownQuestLine.addQuest(catchCalyrex);
 
         App.game.quests.questLines().push(galarCrownQuestLine);
