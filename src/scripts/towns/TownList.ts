@@ -139,7 +139,7 @@ const TwoIslandShop = new Shop([
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.xClick,
-    ItemList.Item_magnet,
+    ItemList.Dowsing_machine,
 ]);
 const ThreeIslandShop = new Shop([
     ItemList.Pokeball,
