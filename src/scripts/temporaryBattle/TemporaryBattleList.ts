@@ -317,7 +317,7 @@ TemporaryBattleList.Hop8 = new TemporaryBattle(
         App.game.quests.getQuestLine('Sword and Shield').beginQuest();
     }
 );
-TemporaryBattleList.Sordward1' = new TemporaryBattle(
+TemporaryBattleList.Sordward1 = new TemporaryBattle(
     'Sordward1',
     [
         new GymPokemon('Sirfetch\'d', 137218376, 60),
