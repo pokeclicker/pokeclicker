@@ -26,6 +26,6 @@ class EnergyRestore extends Item {
 
 }
 
-ItemList['SmallRestore']  = new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 30000, undefined, 'Small Restore');
-ItemList['MediumRestore'] = new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 100000, undefined, 'Medium Restore');
-ItemList['LargeRestore']  = new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 400000, undefined, 'Large Restore');
+ItemList.SmallRestore  = new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 30000, undefined, 'Small Restore');
+ItemList.MediumRestore = new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 100000, undefined, 'Medium Restore');
+ItemList.LargeRestore  = new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 400000, undefined, 'Large Restore');

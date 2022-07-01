@@ -28,7 +28,7 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
 );
 
 // Kalos
-TemporaryBattleList['AZ'] = new TemporaryBattle(
+TemporaryBattleList.AZ = new TemporaryBattle(
     'AZ',
     [
         new GymPokemon('Torkoal', 247996000, 60),

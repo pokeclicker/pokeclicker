@@ -49,5 +49,6 @@ module.exports = {
         'prefer-arrow-callback': 'error',
         'no-alert': 'error',
         'no-sparse-arrays': 'error',
+        'dot-notation': 'error',
     },
 };
