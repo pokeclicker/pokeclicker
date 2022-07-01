@@ -222,10 +222,11 @@ class DungeonRunner {
     public static dungeonWon() {
         if (!DungeonRunner.dungeonFinished()) {
             DungeonRunner.dungeonFinished(true);
+            if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]()) {
+                DungeonRunner.dungeon.rewardFunction();
+            }
             GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]);
             MapHelper.moveToTown(DungeonRunner.dungeon.name);
-            DungeonRunner.dungeon.rewardFunction();
-            // TODO award loot with a special screen
             Notifier.notify({
                 message: 'You have successfully completed the dungeon',
                 type: NotificationConstants.NotificationOption.success,
