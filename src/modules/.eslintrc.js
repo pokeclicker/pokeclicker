@@ -53,5 +53,6 @@ module.exports = {
         '@typescript-eslint/member-ordering': ['error'],
         'no-alert': 'error',
         'no-sparse-arrays': 'error',
+        'dot-notation': 'error',
     },
 };

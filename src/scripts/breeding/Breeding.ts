@@ -118,13 +118,13 @@ class Breeding implements Feature {
             return;
         }
 
-        this.eggSlots = json['eggSlots'] ?? this.defaults.eggSlots;
+        this.eggSlots = json.eggSlots ?? this.defaults.eggSlots;
 
         this._eggList = this.defaults.eggList;
-        if (json['eggList'] !== null) {
+        if (json.eggList !== null) {
             // Deferring this because Egg constructor wants to access App.game.party, which isn't avaliable yet
             setTimeout(() => {
-                const saveEggList: Record<string, any>[] = json['eggList'];
+                const saveEggList: Record<string, any>[] = json.eggList;
 
                 for (let i = 0; i < this._eggList.length; i++) {
                     if (saveEggList[i] != null) {
@@ -135,8 +135,8 @@ class Breeding implements Feature {
                 }
             }, 0);
         }
-        this.queueSlots(json['queueSlots'] ?? this.defaults.queueSlots);
-        this.queueList(json['queueList'] ? json['queueList'] : this.defaults.queueList);
+        this.queueSlots(json.queueSlots ?? this.defaults.queueSlots);
+        this.queueList(json.queueList ? json.queueList : this.defaults.queueList);
         this.hatcheryHelpers.fromJSON(json.hatcheryHelpers || []);
     }
 

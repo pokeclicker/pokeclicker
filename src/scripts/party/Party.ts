@@ -223,7 +223,7 @@ class Party implements Feature {
             return;
         }
 
-        const caughtPokemonSave = json['caughtPokemon'];
+        const caughtPokemonSave = json.caughtPokemon;
         for (let i = 0; i < caughtPokemonSave.length; i++) {
             const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
             partyPokemon.fromJSON(caughtPokemonSave[i]);

@@ -223,7 +223,7 @@ class PartyPokemon implements Saveable {
             return;
         }
 
-        if (json['id'] == null) {
+        if (json.id == null) {
             return;
         }
 
