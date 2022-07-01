@@ -46,10 +46,7 @@ class Player {
         }
         this._region = ko.observable(savedPlayer._region);
         this._subregion = ko.observable(savedPlayer._subregion || 0);
-        this.subregionObject = ko.observable(SubRegions.getSubRegionById(this._region(), this._subregion()));
-        this._region.subscribe(r => this.subregionObject(SubRegions.getSubRegionById(r, this._subregion())));
-        this._subregion.subscribe(sr => this.subregionObject(SubRegions.getSubRegionById(this._region(), sr)));
-
+        this.subregionObject = ko.pureComputed(() => SubRegions.getSubRegionById(this._region(), this._subregion()));
         this._route = ko.observable(savedPlayer._route);
         // Check that the route is valid, otherwise set it to the regions starting route (route 0 means they are in a town)
         if (this._route() > 0 && !MapHelper.validRoute(this._route(), this._region())) {
