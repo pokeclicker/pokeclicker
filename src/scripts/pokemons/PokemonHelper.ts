@@ -6,6 +6,7 @@ enum PokemonLocationType {
     Roaming,
     Dungeon,
     DungeonBoss,
+    DungeonChest,
     Evolution,
     Egg,
     Baby,
@@ -181,6 +182,30 @@ class PokemonHelper {
         return dungeons;
     }
 
+    public static getPokemonChestDungeons(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
+        const dungeons = [];
+        Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
+            // If we only want to check up to a maximum region
+            if (maxRegion != GameConstants.Region.none) {
+                const region = GameConstants.RegionDungeons.findIndex(d => d.includes(dungeonName));
+                if (region > maxRegion) {
+                    return false;
+                }
+            }
+            // Dungeon Chest
+            dungeon.itemList.forEach(i => {
+                if (i.loot == pokemonName) {
+                    const data = {
+                        dungeon: dungeonName,
+                        requirements: i.requirement?.hint(),
+                    };
+                    dungeons.push(data);
+                }
+            });
+        });
+        return dungeons;
+    }
+
     public static getPokemonEggs(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
         const eggTypes = [];
         Object.entries(App.game.breeding.hatchList).forEach(([eggType, eggArr]) => {
@@ -343,6 +368,11 @@ class PokemonHelper {
         const bossDungeons = PokemonHelper.getPokemonBossDungeons(pokemonName, maxRegion);
         if (bossDungeons.length) {
             encounterTypes[PokemonLocationType.DungeonBoss] = bossDungeons;
+        }
+        // Dungeon Chest
+        const chestDungeons = PokemonHelper.getPokemonChestDungeons(pokemonName, maxRegion);
+        if (chestDungeons.length) {
+            encounterTypes[PokemonLocationType.DungeonChest] = chestDungeons;
         }
         // Eggs
         const eggs = PokemonHelper.getPokemonEggs(pokemonName, maxRegion);
