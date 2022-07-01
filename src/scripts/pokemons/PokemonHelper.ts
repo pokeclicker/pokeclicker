@@ -14,6 +14,7 @@ enum PokemonLocationType {
     Safari,
     BattleFrontier,
     Wandering,
+    Discord,
 }
 
 class PokemonHelper {
@@ -293,7 +294,7 @@ class PokemonHelper {
         return (evolutionPokemon as PokemonListData)?.evolutions?.find(e => e.getEvolvedPokemon() == pokemonName);
     }
 
-    public static getPokemonBattleFrontier(pokemonName: PokemonNameType): Array<string> {
+    public static getPokemonBattleFrontier(pokemonName: PokemonNameType): Array<number> {
         const stages = [];
         BattleFrontierMilestones.milestoneRewards.filter(m => m instanceof BattleFrontierMilestonePokemon).forEach(milestone => {
             if (milestone._description == pokemonName) {
@@ -314,6 +315,16 @@ class PokemonHelper {
             }
         });
         return berries;
+    }
+
+    public static getPokemonDiscord(pokemonName: PokemonNameType): Array<number> {
+        const codes = [];
+        App.game.discord.codes.forEach(code => {
+            if (code.name == pokemonName) {
+                codes.push(code.price);
+            }
+        });
+        return codes;
     }
 
     public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none) => {
@@ -379,6 +390,12 @@ class PokemonHelper {
         const wandering = PokemonHelper.getPokemonWandering(pokemonName);
         if (wandering.length) {
             encounterTypes[PokemonLocationType.Wandering] = wandering;
+        }
+
+        // Wandering
+        const discord = PokemonHelper.getPokemonDiscord(pokemonName);
+        if (discord.length) {
+            encounterTypes[PokemonLocationType.Discord] = discord;
         }
 
         // Return the list of items
