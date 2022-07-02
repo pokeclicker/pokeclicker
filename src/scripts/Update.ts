@@ -730,6 +730,7 @@ class Update implements Saveable {
                 lastReminder: saveData.statistics.secondsPlayed,
                 lastDownloaded: saveData.statistics.secondsPlayed,
             };
+
             // Start Mina's Trial questline if player has cleared Ultra Necrozma already
             if (saveData.statistics.temporaryBattleDefeated[1]) {
                 saveData.quests.questLines.push({state: 1, name: 'Mina\'s Trial', quest: 0});
@@ -798,8 +799,45 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
         },
 
-        '0.9.8': ({ playerData, saveData }) => {
+        '0.9.8': ({ playerData, saveData, settingsData }) => {
             saveData.oakItemLoadouts = saveData.oakItemLoadouts.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
+
+            // Fix pokerus
+            saveData.party.caughtPokemon.forEach(p => {
+                let status = (p[8]) ? 2 : 0;
+                const requiredForCured = saveData.challenges.list.slowEVs ? 5000 : 500;
+                if (saveData.statistics.effortPoints[p.id] >= requiredForCured) {
+                    status = 3;
+                }
+                p[8] = status;
+            });
+
+            // Fix quest default color
+            if (settingsData) {
+                if (settingsData && settingsData['--questAtLocation'] && settingsData['--questAtLocation'] === '#34BF45') {
+                    settingsData['--questAtLocation'] = '#55ff00';
+                }
+                delete settingsData['--currentPlace'];
+            }
+
+            // Add total proteins obtained
+            // Just incase statistics is not set
+            saveData.statistics = saveData.statistics || {};
+            // Set new statistic
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalProteinsPurchased: saveData.statistics.totalProteinsObtained || 0,
+            };
+
+            // Split dungeon loot notification into two
+            if (settingsData) {
+                settingsData['notification.common_dungeon_item_found'] = settingsData['notification.dungeon_item_found'] ?? true;
+                settingsData['notification.common_dungeon_item_found.desktop'] = settingsData['notification.dungeon_item_found.desktop'] ?? false;
+                settingsData['notification.rare_dungeon_item_found'] = settingsData['notification.dungeon_item_found'] ?? true;
+                settingsData['notification.rare_dungeon_item_found.desktop'] = settingsData['notification.dungeon_item_found.desktop'] ?? false;
+                delete settingsData['notification.dungeon_item_found'];
+                delete settingsData['notification.dungeon_item_found.desktop'];
+            }
         },
     };
 

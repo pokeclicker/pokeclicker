@@ -10,11 +10,6 @@
     pointer-events: none;
   }
 
-  .currentLocation {
-    fill: var(--currentPlace);
-    opacity: 0.5;
-  }
-
   .locked {
     fill: var(--locked);
     opacity: 0.5;
@@ -60,6 +55,12 @@
     fill: #FFD700;
     stroke: black;
   }
+
+  .iconLocation {
+    transform-box: fill-box;
+    transform-origin:center;
+  }
+
 }
 
 #mapTooltip {
