@@ -35,7 +35,7 @@ class PokemonHelper {
     }
 
     public static getEvolution(id: number, evoType: GameConstants.StoneType): string {
-        const pokemon = App.game.party.caughtPokemon.find(p => p.id == id);
+        const pokemon = App.game.party.getPokemon(id);
         if (pokemon) {
             for (const evolution of pokemon.evolutions) {
                 if (evolution instanceof StoneEvolution && evolution.stone == evoType) {
