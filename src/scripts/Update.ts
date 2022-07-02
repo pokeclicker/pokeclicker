@@ -731,15 +731,6 @@ class Update implements Saveable {
                 lastDownloaded: saveData.statistics.secondsPlayed,
             };
 
-            // Just incase statistics is not set
-            saveData.statistics = saveData.statistics || {};
-
-            // Rename from the old statistic name
-            saveData.statistics = {
-                ...saveData.statistics,
-                totalProteinsPurchased: saveData.statistics.totalProteinsObtained || 0,
-            };
-
             // Start Mina's Trial questline if player has cleared Ultra Necrozma already
             if (saveData.statistics.temporaryBattleDefeated[1]) {
                 saveData.quests.questLines.push({state: 1, name: 'Mina\'s Trial', quest: 0});
@@ -810,6 +801,14 @@ class Update implements Saveable {
 
         '0.9.8': ({ playerData, saveData }) => {
             saveData.oakItemLoadouts = saveData.oakItemLoadouts.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
+            // Just incase statistics is not set
+            saveData.statistics = saveData.statistics || {};
+
+            // Set new statistic
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalProteinsPurchased: saveData.statistics.totalProteinsObtained || 0,
+            };
         },
     };
 
