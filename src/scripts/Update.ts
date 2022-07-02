@@ -798,7 +798,7 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
         },
 
-        '0.9.8': ({ playerData, saveData }) => {
+        '0.9.8': ({ playerData, saveData, settingsData }) => {
             saveData.oakItemLoadouts = saveData.oakItemLoadouts.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
 
             // Fix pokerus
@@ -810,6 +810,14 @@ class Update implements Saveable {
                 }
                 p[8] = status;
             });
+
+            // Fix quest default color
+            if (settingsData) {
+                if (settingsData && settingsData['--questAtLocation'] && settingsData['--questAtLocation'] === '#34BF45') {
+                    settingsData['--questAtLocation'] = '#55ff00';
+                }
+                delete settingsData['--currentPlace'];
+            }
         },
     };
 
