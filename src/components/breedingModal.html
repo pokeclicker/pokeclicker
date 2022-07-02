@@ -94,6 +94,14 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <!-- /ko -->
                                 </select>
                             </div>
+                            <div class="form-group col-md-3 col-6">
+                                <label>Pokerus Status</label>
+                                <select name="breedingPokerusFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.pokerus.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <!-- ko foreach: Settings.getSetting('breedingPokerusFilter').options -->
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingPokerusFilter').value === $data.value }, text: $data.text"></option>
+                                    <!-- /ko -->
+                                </select>
+                            </div>
                         </div>
                         <div class="form-row collapse" id="breeding-sort">
                             <div class="form-group col" data-bind="with: Settings.getSetting('hatcherySort')">
