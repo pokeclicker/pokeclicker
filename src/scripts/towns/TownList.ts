@@ -534,10 +534,10 @@ const AzaleaOldMan = new NPC('Wise Old Man', [
     'It says that the mythical Pokémon Celebi will appear before anyone who has proven they are a Champion Pokémon Trainer.',
 ]);
 
-const AzaleaUnionCaveHiker = new NPC('Hiker Anthony', [
-    'The PokéManic’s in Union Cave seem restless.',
-    'They belive there is a weekly visitor.',
-    'As every Friday, you can hear Pokémon roars from deep inside the cave.',
+const AzaleaHiker = new NPC('Hiker Daniel', [
+    'The PokéManiacs in Union Cave are restless. They have been ranting and raving about a weekly visitor.',
+    'According to them a strange Pokémon\'s cries can be heard from a lake deep inside the cave.',
+    'I\'ve never heard it myself. Apparently it only happens on Fridays.',
 ],
 { requirement: new GymBadgeRequirement(BadgeEnums.Fog) });
 
@@ -623,7 +623,7 @@ TownList['Azalea Town'] = new Town(
     [AzaleaTownShop, new MoveToDungeon(dungeonList['Slowpoke Well'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 33)],
-        npcs: [AzaleaOldMan, AzaleaUnionCaveHiker],
+        npcs: [AzaleaOldMan, AzaleaHiker],
     }
 );
 TownList['Goldenrod City'] = new Town(
