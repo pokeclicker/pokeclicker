@@ -6,6 +6,7 @@ enum PokemonLocationType {
     Roaming,
     Dungeon,
     DungeonBoss,
+    DungeonChest,
     Evolution,
     Egg,
     Baby,
@@ -14,6 +15,7 @@ enum PokemonLocationType {
     Safari,
     BattleFrontier,
     Wandering,
+    Discord,
 }
 
 class PokemonHelper {
@@ -180,6 +182,30 @@ class PokemonHelper {
         return dungeons;
     }
 
+    public static getPokemonChestDungeons(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
+        const dungeons = [];
+        Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
+            // If we only want to check up to a maximum region
+            if (maxRegion != GameConstants.Region.none) {
+                const region = GameConstants.RegionDungeons.findIndex(d => d.includes(dungeonName));
+                if (region > maxRegion) {
+                    return false;
+                }
+            }
+            // Dungeon Chest
+            dungeon.itemList.forEach(i => {
+                if (i.loot == pokemonName) {
+                    const data = {
+                        dungeon: dungeonName,
+                        requirements: i.requirement?.hint(),
+                    };
+                    dungeons.push(data);
+                }
+            });
+        });
+        return dungeons;
+    }
+
     public static getPokemonEggs(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
         const eggTypes = [];
         Object.entries(App.game.breeding.hatchList).forEach(([eggType, eggArr]) => {
@@ -293,10 +319,10 @@ class PokemonHelper {
         return (evolutionPokemon as PokemonListData)?.evolutions?.find(e => e.getEvolvedPokemon() == pokemonName);
     }
 
-    public static getPokemonBattleFrontier(pokemonName: PokemonNameType): Array<string> {
+    public static getPokemonBattleFrontier(pokemonName: PokemonNameType): Array<number> {
         const stages = [];
         BattleFrontierMilestones.milestoneRewards.filter(m => m instanceof BattleFrontierMilestonePokemon).forEach(milestone => {
-            if (milestone.pokemonName == pokemonName) {
+            if (milestone._description == pokemonName) {
                 stages.push(milestone.stage);
             }
         });
@@ -316,6 +342,16 @@ class PokemonHelper {
         return berries;
     }
 
+    public static getPokemonDiscord(pokemonName: PokemonNameType): Array<number> {
+        const codes = [];
+        App.game.discord.codes.forEach(code => {
+            if (code.name == pokemonName) {
+                codes.push(code.price);
+            }
+        });
+        return codes;
+    }
+
     public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none) => {
         const encounterTypes = {};
         // Routes
@@ -332,6 +368,11 @@ class PokemonHelper {
         const bossDungeons = PokemonHelper.getPokemonBossDungeons(pokemonName, maxRegion);
         if (bossDungeons.length) {
             encounterTypes[PokemonLocationType.DungeonBoss] = bossDungeons;
+        }
+        // Dungeon Chest
+        const chestDungeons = PokemonHelper.getPokemonChestDungeons(pokemonName, maxRegion);
+        if (chestDungeons.length) {
+            encounterTypes[PokemonLocationType.DungeonChest] = chestDungeons;
         }
         // Eggs
         const eggs = PokemonHelper.getPokemonEggs(pokemonName, maxRegion);
@@ -379,6 +420,12 @@ class PokemonHelper {
         const wandering = PokemonHelper.getPokemonWandering(pokemonName);
         if (wandering.length) {
             encounterTypes[PokemonLocationType.Wandering] = wandering;
+        }
+
+        // Wandering
+        const discord = PokemonHelper.getPokemonDiscord(pokemonName);
+        if (discord.length) {
+            encounterTypes[PokemonLocationType.Discord] = discord;
         }
 
         // Return the list of items
