@@ -105,7 +105,7 @@ aria-labelledby="pokedexModalLabel">
                                         <br/>Base Attack: <strong>${$data.attack}</strong>
                                         <br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate, true)}%</strong>
                                         <br/>Hatch Steps: <strong>${App.game.breeding.getSteps($data.eggCycles).toLocaleString('en-US')}</strong>` +
-                                        (App.game.party.getPokemon($data.id)?.pokerus > GameConstants.Pokerus.Infected ?
+                                        (App.game.party.getPokemon($data.id)?.pokerus >= GameConstants.Pokerus.Contagious ?
                                             `<br/>EVs: <strong>${App.game.party.getEffortValues(App.game.party.getPokemon($data.id))().toLocaleString('en-US')}</strong>
                                             <br/>EV bonus: <strong>×${App.game.party.calculateEVAttackBonus(App.game.party.getPokemon($data.id)).toLocaleString('en-US')}</strong>`
                                             : ''),
