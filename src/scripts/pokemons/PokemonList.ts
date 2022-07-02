@@ -21076,7 +21076,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 876,
-        'name': 'Indeedee',
+        'name': 'Indeedee (male)',
         'type': [
             PokemonType.Psychic,
             PokemonType.Normal,
@@ -21088,6 +21088,26 @@ const pokemonList = createPokemonArray(
             'defense': 55,
             'specialDefense': 95,
             'speed': 95,
+        },
+        'eggCycles': 40,
+        'levelType': LevelType.fast,
+        'exp': 166,
+        'catchRate': 30,
+    },
+    {
+        'id': 876.1,
+        'name': 'Indeedee (female)',
+        'type': [
+            PokemonType.Psychic,
+            PokemonType.Normal,
+        ],
+        'base': {
+            'hitpoints': 70,
+            'attack': 55,
+            'specialAttack': 95,
+            'defense': 65,
+            'specialDefense': 105,
+            'speed': 85,
         },
         'eggCycles': 40,
         'levelType': LevelType.fast,
