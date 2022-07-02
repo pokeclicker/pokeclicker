@@ -101,7 +101,7 @@ class Egg implements Saveable {
         }
         const shiny = PokemonFactory.generateShiny(this.shinyChance, true);
 
-        const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == this.pokemon);
+        const partyPokemon = this.partyPokemon;
         // If the party pokemon exist, increase it's damage output
 
         const pokemonID = PokemonHelper.getPokemonByName(this.pokemon).id;
