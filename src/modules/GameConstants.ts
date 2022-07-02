@@ -1175,6 +1175,7 @@ export const RegionalStarters = [
 
 export const TemporaryBattles = [
     'Fighting Dojo',
+    'Galactic Boss Cyrus',
     'AZ',
     'Ultra Wormhole',
     'Ultra Megalopolis',
