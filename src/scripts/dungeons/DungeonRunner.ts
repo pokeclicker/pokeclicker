@@ -189,7 +189,6 @@ class DungeonRunner {
         });
     }
 
-
     public static startBossFight() {
         if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.boss || DungeonRunner.fightingBoss()) {
             return;
