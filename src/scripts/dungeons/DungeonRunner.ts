@@ -170,7 +170,7 @@ class DungeonRunner {
             const berryPlural = (amount < 2) ? 'Berry' : 'Berries';
             message = `Found ${Math.floor(amount)} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} ${berryPlural} in a dungeon chest`;
         } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
-            message = `Encountered a <img src="${image}" height="40px"/> ${GameConstants.humanifyString(input)} in a dungeon chest`;
+            message = `Encountered ${GameHelper.anOrA(input)} <img src="${image}" height="40px"/> ${GameConstants.humanifyString(input)} in a dungeon chest`;
         }
 
         if (weight <= 2) {
