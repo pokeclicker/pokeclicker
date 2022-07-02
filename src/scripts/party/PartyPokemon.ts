@@ -24,7 +24,7 @@ class PartyPokemon implements Saveable {
         shiny: false,
         category: 0,
         levelEvolutionTriggered: false,
-        pokerus: false,
+        pokerus: GameConstants.Pokerus.None,
     };
 
     _breeding: KnockoutObservable<boolean>;
@@ -34,7 +34,7 @@ class PartyPokemon implements Saveable {
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
-    _pokerus: KnockoutObservable<boolean>;
+    _pokerus: KnockoutObservable<GameConstants.Pokerus>;
     proteinsUsed: KnockoutObservable<number>;
     effortPoints: KnockoutObservable<number>;
 
@@ -51,7 +51,7 @@ class PartyPokemon implements Saveable {
         breeding = false,
         shiny = false,
         category = 0,
-        pokerus = false
+        pokerus = GameConstants.Pokerus.None
     ) {
         this.proteinsUsed = ko.observable(proteinsUsed).extend({ numeric: 0 });
         this.effortPoints = ko.observable(effortPoints).extend({ numeric: 0 });
@@ -62,7 +62,7 @@ class PartyPokemon implements Saveable {
         this._attackBonusAmount = ko.observable(attackBonusAmount).extend({ numeric: 0 });
         this._attack = ko.observable(this.calculateAttack()).extend({ numeric: 0 });
         this._category = ko.observable(category).extend({ numeric: 0 });
-        this._pokerus = ko.observable(pokerus);
+        this._pokerus = ko.observable(pokerus).extend({ numeric: 0 });
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -75,12 +75,36 @@ class PartyPokemon implements Saveable {
         return App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
     }
 
-    public calculatePokerus(): boolean {
-        // Egg can't hatch and Egg has pokerus
-        return App.game.breeding.eggList.some(e => {
-            if (!e().canHatch() && !e().isNone() && !(e().pokemon != GameConstants.Starter[player.starter()])) {
-                const pokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(e().pokemon).id);
-                return pokemon.pokerus;
+    public calculatePokerusTypes(): Set<number> {
+        // Egg can't hatch and valid Egg has pokerus
+        const eggTypes: Set<number> = new Set();
+        for (let i = 0; i < App.game.breeding.eggList.length; i++) {
+            if (i > App.game.breeding.hatcheryHelpers.hired().length - 1) {
+                const egg = App.game.breeding.eggList[i]();
+                if (!egg.canHatch() && !egg.isNone()) {
+                    const pokerus = App.game.party.getPokemon(pokemonMap[egg.pokemon].id).pokerus;
+                    if (pokerus && pokerus >= GameConstants.Pokerus.Contagious) {
+                        eggTypes.add(PokemonHelper.getPokemonByName(pokemonMap[App.game.breeding.eggList[i]().pokemon].name).type1);
+                        eggTypes.add(PokemonHelper.getPokemonByName(pokemonMap[App.game.breeding.eggList[i]().pokemon].name).type2);
+                    }
+                }
+            }
+        }
+        if (eggTypes.has(PokemonType.None)) {
+            eggTypes.delete(PokemonType.None);
+        }
+        return eggTypes;
+    }
+
+    public calculatePokerus() {
+        const eggTypes = this.calculatePokerusTypes();
+        return App.game.breeding.eggList.forEach(p => {
+            const pokemon = p().partyPokemon;
+            if (pokemon && pokemon.pokerus == GameConstants.Pokerus.None) {
+                const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+                if (eggTypes.has(dataPokemon.type1) || eggTypes.has(dataPokemon.type2)) {
+                    pokemon.pokerus = GameConstants.Pokerus.Infected;
+                }
             }
         });
     }
@@ -221,7 +245,6 @@ class PartyPokemon implements Saveable {
                 }
             }
         }
-
     }
 
     public toJSON() {
@@ -297,12 +320,12 @@ class PartyPokemon implements Saveable {
         this._breeding(bool);
     }
 
-    get pokerus(): boolean {
+    get pokerus(): GameConstants.Pokerus {
         return this._pokerus();
     }
 
-    set pokerus(bool: boolean) {
-        this._pokerus(bool);
+    set pokerus(index: GameConstants.Pokerus) {
+        this._pokerus(index);
     }
 
     get shiny(): boolean {
