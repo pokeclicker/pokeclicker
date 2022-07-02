@@ -1,5 +1,6 @@
 const TemporaryBattleList: { [battleName: string]: TemporaryBattle } = {};
 
+// Kanto Temporarybattles
 TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
     'Fighting Dojo',
     [
@@ -23,6 +24,20 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
         });
     }
 );
+
+// Sinnoh Temporarybattles
+TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
+    'Galactic Boss Cyrus',
+    [
+        new GymPokemon('Sneasel', 3255000, 34),
+        new GymPokemon('Golbat', 3460000, 34),
+        new GymPokemon('Murkrow', 3665000, 36),
+    ],
+    'Impressive. Your prowess is notable.',
+    [new GymBadgeRequirement(BadgeEnums.Fen)]
+);
+
+// Kalos Temporarybattles
 TemporaryBattleList.AZ = new TemporaryBattle(
     'AZ',
     [
@@ -37,6 +52,8 @@ TemporaryBattleList.AZ = new TemporaryBattle(
         App.game.party.gainPokemonById(670.05);
     }
 );
+
+// Alola Temporarybattles
 TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
     [new GymPokemon('???', 264590972, 27)],

@@ -838,6 +838,9 @@ class Update implements Saveable {
                 delete settingsData['notification.dungeon_item_found'];
                 delete settingsData['notification.dungeon_item_found.desktop'];
             }
+
+            // Add Galactic Boss Cyrus TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
         },
     };
 

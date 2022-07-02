@@ -1568,7 +1568,7 @@ TownList['Pastoria City'] = new Town(
 TownList['Celestic Town'] = new Town(
     'Celestic Town',
     GameConstants.Region.sinnoh,
-    [CelesticTownShop],
+    [CelesticTownShop, TemporaryBattleList['Galactic Boss Cyrus']],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Fen)],
         npcs: [CelesticGrandma],
