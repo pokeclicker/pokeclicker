@@ -119,16 +119,13 @@ class MapHelper {
     }
 
     public static isTownCurrentLocation(townName: string): boolean {
+        if (App.game.gameState == GameConstants.GameState.temporaryBattle) {
+            return TemporaryBattleRunner.battleObservable().getTown().name == townName;
+        }
         return !player.route() && player.town().name == townName;
     }
 
     public static calculateTownCssClass(townName: string): string {
-        // Check if we are currently at this location
-        if (!player.route() &&
-            (App.game.gameState != GameConstants.GameState.temporaryBattle || TemporaryBattleRunner.battleObservable().parent?.name == townName) &&
-            player.town().name == townName) {
-            return areaStatus[areaStatus.currentLocation];
-        }
         // Check if this location is locked
         if (!MapHelper.accessToTown(townName)) {
             return areaStatus[areaStatus.locked];
