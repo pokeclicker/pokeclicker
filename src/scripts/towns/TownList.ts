@@ -111,7 +111,7 @@ const FuchsiaCityShop = new Shop([
     ItemList.Ultraball,
     ItemList.Lucky_egg,
     ItemList.Dragon_egg,
-    ItemList.Trade_stone,
+    ItemList.Linking_cord,
 ]);
 const CinnabarIslandShop = new Shop([
     ItemList.Pokeball,
@@ -483,7 +483,7 @@ const MahoganyTownShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Lucky_egg,
-    ItemList.Trade_stone,
+    ItemList.Linking_cord,
     ItemList.Upgrade,
     ItemList.HatcheryHelperDakota,
 ]);
@@ -805,7 +805,7 @@ const SlateportCityShop = new Shop([
     ItemList.Lucky_incense,
     ItemList.MediumRestore,
     ItemList.Water_egg,
-    ItemList.Trade_stone,
+    ItemList.Linking_cord,
 ]);
 const MauvilleCityShop = new Shop([
     ItemList.Pokeball,
@@ -1267,7 +1267,7 @@ const OreburghCityShop = new Shop([
 const FloaromaTownShop = new Shop([
     ItemList.Pokeball,
     ItemList.Lucky_egg,
-    ItemList.Trade_stone,
+    ItemList.Linking_cord,
     ItemList.Kings_rock,
 ]);
 const EternaCityShop = new Shop([
@@ -1813,7 +1813,7 @@ const CasteliaCityShop = new Shop([
     ItemList.Greatball,
     ItemList.xAttack,
     ItemList.Water_egg,
-    ItemList.Trade_stone,
+    ItemList.Linking_cord,
     ItemList.Kings_rock,
 ]);
 const NimbasaCityShop = new Shop([
@@ -2392,7 +2392,7 @@ const ShalourCityShop = new Shop([
     ItemList.Greatball,
     ItemList.Lucky_egg,
     ItemList.Fighting_egg,
-    ItemList.Trade_stone,
+    ItemList.Linking_cord,
     ItemList.Metal_coat,
 ]);
 const CoumarineCityShop = new Shop([
@@ -2761,7 +2761,7 @@ const KonikoniCityShop = new Shop([
     ItemList.Dowsing_machine,
     ItemList.Lucky_incense,
     ItemList.Fire_stone,
-    ItemList.Trade_stone,
+    ItemList.Linking_cord,
     ItemList.Soothe_bell,
 ]);
 const AetherParadiseShop = new Shop([
