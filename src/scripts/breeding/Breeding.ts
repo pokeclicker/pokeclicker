@@ -118,23 +118,25 @@ class Breeding implements Feature {
             return;
         }
 
-        this.eggSlots = json['eggSlots'] ?? this.defaults.eggSlots;
+        this.eggSlots = json.eggSlots ?? this.defaults.eggSlots;
 
-        if (json['eggList'] == null) {
-            this._eggList = this.defaults.eggList;
-        } else {
-            const saveEggList: Record<string, any>[] = json['eggList'];
+        this._eggList = this.defaults.eggList;
+        if (json.eggList !== null) {
+            // Deferring this because Egg constructor wants to access App.game.party, which isn't avaliable yet
+            setTimeout(() => {
+                const saveEggList: Record<string, any>[] = json.eggList;
 
-            for (let i = 0; i < this._eggList.length; i++) {
-                if (saveEggList[i] != null) {
-                    const egg: Egg = new Egg(null, null, null);
-                    egg.fromJSON(saveEggList[i]);
-                    this._eggList[i](egg);
+                for (let i = 0; i < this._eggList.length; i++) {
+                    if (saveEggList[i] != null) {
+                        const egg: Egg = new Egg(null, null, null);
+                        egg.fromJSON(saveEggList[i]);
+                        this._eggList[i](egg);
+                    }
                 }
-            }
+            }, 0);
         }
-        this.queueSlots(json['queueSlots'] ?? this.defaults.queueSlots);
-        this.queueList(json['queueList'] ? json['queueList'] : this.defaults.queueList);
+        this.queueSlots(json.queueSlots ?? this.defaults.queueSlots);
+        this.queueList(json.queueList ? json.queueList : this.defaults.queueList);
         this.hatcheryHelpers.fromJSON(json.hatcheryHelpers || []);
     }
 
@@ -202,9 +204,9 @@ class Breeding implements Feature {
                 continue;
             }
             const egg = this.eggList[index]();
-            const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == egg.pokemon);
-            if (!egg.isNone() && partyPokemon && partyPokemon.canCatchPokerus() && !partyPokemon.pokerus) {
-                partyPokemon.pokerus = partyPokemon.calculatePokerus();
+            const partyPokemon = egg.partyPokemon;
+            if (!egg.isNone() && partyPokemon && partyPokemon.canCatchPokerus() && partyPokemon.pokerus == GameConstants.Pokerus.None) {
+                partyPokemon.calculatePokerus();
             }
             egg.addSteps(amount, this.multiplier);
             if (this.queueList().length && egg.progress() >= 100) {

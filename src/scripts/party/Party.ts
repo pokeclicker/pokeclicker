@@ -174,7 +174,7 @@ class Party implements Feature {
 
     public calculateEVAttackBonus(pokemon: PartyPokemon): number {
         const EVs = this.getEffortValues(pokemon)();
-        if (!pokemon.pokerus) {
+        if (pokemon.pokerus < GameConstants.Pokerus.Contagious) {
             return 1;
         }
         return (EVs < 50) ? (1 + 0.01 * EVs) : (1 + Math.min(1, Math.pow((EVs - 30),0.075) - 0.75));
@@ -223,7 +223,7 @@ class Party implements Feature {
             return;
         }
 
-        const caughtPokemonSave = json['caughtPokemon'];
+        const caughtPokemonSave = json.caughtPokemon;
         for (let i = 0; i < caughtPokemonSave.length; i++) {
             const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
             partyPokemon.fromJSON(caughtPokemonSave[i]);

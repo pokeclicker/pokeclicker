@@ -162,7 +162,7 @@ class Battle {
     public static calculateEffortPoints(enemyPokemon: BattlePokemon): number {
         let EPNum = GameConstants.BASE_EP_YIELD;
 
-        if (!App.game.party.getPokemon(enemyPokemon.id) || !App.game.party.getPokemon(enemyPokemon.id).pokerus) {
+        if (!App.game.party.getPokemon(enemyPokemon.id) || App.game.party.getPokemon(enemyPokemon.id).pokerus < GameConstants.Pokerus.Contagious) {
             return 0;
         }
 
