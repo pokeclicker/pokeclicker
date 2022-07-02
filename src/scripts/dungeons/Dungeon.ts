@@ -466,7 +466,7 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
         Notifier.notify({
             message: `You were awarded a ${GameConstants.humanifyString(item)} for defeating the Super Nerd`,
             type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+            setting: NotificationConstants.NotificationSetting.Items.rare_dungeon_item_found,
         });
     });
 
@@ -1564,7 +1564,7 @@ dungeonList['Mt. Mortar'] = new Dungeon('Mt. Mortar',
         Notifier.notify({
             message: 'You were awarded a Fighting Egg for defeating Black Belt Kiyo',
             type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+            setting: NotificationConstants.NotificationSetting.Items.rare_dungeon_item_found,
         });
     });
 
@@ -3025,7 +3025,7 @@ dungeonList['Iron Island'] = new Dungeon('Iron Island',
         Notifier.notify({
             message: 'You were awarded a Fighting Egg for defeating the Galactic Grunts',
             type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+            setting: NotificationConstants.NotificationSetting.Items.rare_dungeon_item_found,
         });
     });
 

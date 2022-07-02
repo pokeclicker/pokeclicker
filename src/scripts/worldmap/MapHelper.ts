@@ -2,7 +2,6 @@
 /// <reference path="../GameConstants.d.ts" />
 
 enum areaStatus {
-    currentLocation,
     locked,
     unlockedUnfinished,
     questAtLocation,
@@ -86,9 +85,7 @@ class MapHelper {
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
         let cls = '';
 
-        if (player.route() == route && player.region == region) {
-            cls = areaStatus[areaStatus.currentLocation];
-        } else if (!MapHelper.accessToRoute(route, region)) {
+        if (!MapHelper.accessToRoute(route, region)) {
             cls = areaStatus[areaStatus.locked];
         } else  if (App.game.statistics.routeKills[region][route]() < GameConstants.ROUTE_KILLS_NEEDED) {
             cls = areaStatus[areaStatus.unlockedUnfinished];
@@ -114,11 +111,15 @@ class MapHelper {
         return cls;
     }
 
+    public static isRouteCurrentLocation(route: number, region: GameConstants.Region): boolean {
+        return player.route() == route && player.region == region;
+    }
+
+    public static isTownCurrentLocation(townName: string): boolean {
+        return !player.route() && player.town().name == townName;
+    }
+
     public static calculateTownCssClass(townName: string): string {
-        // Check if we are currently at this location
-        if (!player.route() && player.town().name == townName) {
-            return areaStatus[areaStatus.currentLocation];
-        }
         // Check if this location is locked
         if (!MapHelper.accessToTown(townName)) {
             return areaStatus[areaStatus.locked];

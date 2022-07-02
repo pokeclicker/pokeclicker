@@ -404,6 +404,12 @@ namespace GameConstants {
         'Friday',
         'Saturday',
     }
+    declare enum Pokerus {
+        'None',
+        'Infected',
+        'Contagious',
+        'Cured',
+    }
     declare enum KantoSubRegions {
         Kanto,
         Sevii123,
