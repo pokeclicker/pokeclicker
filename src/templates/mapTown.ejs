@@ -45,7 +45,7 @@ Parameters:
         x="<%= locals.x * 16 + ((locals.width || 4) * 16) / 2 - 24 %>"
         y="<%= locals.y * 16 + ((locals.height || 4) * 16) / 2 - 24 %>"
         class="iconLocation"
-        data-bind="visible: MapHelper.townIsCurrentLocation('<%= locals.name.replace(/'/g, '\\\'') %>')
+        data-bind="visible: MapHelper.isTownCurrentLocation('<%= locals.name.replace(/'/g, '\\\'') %>')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
 <% } %>
