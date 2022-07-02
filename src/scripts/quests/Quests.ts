@@ -23,7 +23,7 @@ class Quests implements Saveable {
     });
     public questSlots: KnockoutComputed<number> = ko.pureComputed((): number => {
         // Minimum of 1, Maximum of 4
-        return Math.min(4, Math.max(1, Math.floor(this.level() / 5)));
+        return Math.min(4, Math.max(1, Math.floor((this.level() + 5) / 5)));
     });
 
     // Get current quests by status
