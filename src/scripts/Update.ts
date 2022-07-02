@@ -828,6 +828,16 @@ class Update implements Saveable {
                 ...saveData.statistics,
                 totalProteinsPurchased: saveData.statistics.totalProteinsObtained || 0,
             };
+
+            // Split dungeon loot notification into two
+            if (settingsData) {
+                settingsData['notification.common_dungeon_item_found'] = settingsData['notification.dungeon_item_found'] ?? true;
+                settingsData['notification.common_dungeon_item_found.desktop'] = settingsData['notification.dungeon_item_found.desktop'] ?? false;
+                settingsData['notification.rare_dungeon_item_found'] = settingsData['notification.dungeon_item_found'] ?? true;
+                settingsData['notification.rare_dungeon_item_found.desktop'] = settingsData['notification.dungeon_item_found.desktop'] ?? false;
+                delete settingsData['notification.dungeon_item_found'];
+                delete settingsData['notification.dungeon_item_found.desktop'];
+            }
         },
     };
 
