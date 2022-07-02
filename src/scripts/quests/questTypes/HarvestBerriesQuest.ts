@@ -42,8 +42,8 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
 
     toJSON() {
         const json = super.toJSON();
-        json['name'] = this.constructor.name;
-        json['data'].push(this.berryType);
+        json.name = this.constructor.name;
+        json.data.push(this.berryType);
         return json;
     }
 }

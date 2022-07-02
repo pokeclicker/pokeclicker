@@ -223,7 +223,7 @@ class Party implements Feature {
             return;
         }
 
-        const caughtPokemonSave = json['caughtPokemon'];
+        const caughtPokemonSave = json.caughtPokemon;
         for (let i = 0; i < caughtPokemonSave.length; i++) {
             const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
             partyPokemon.fromJSON(caughtPokemonSave[i]);
@@ -244,12 +244,8 @@ class Party implements Feature {
         // This method intentionally left blank
     }
 
-    get caughtPokemon() {
+    get caughtPokemon(): ReadonlyArray<PartyPokemon> {
         return this._caughtPokemon();
-    }
-
-    set caughtPokemon(pokemon: PartyPokemon[]) {
-        this._caughtPokemon(pokemon);
     }
 
 }

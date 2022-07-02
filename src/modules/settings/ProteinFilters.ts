@@ -5,9 +5,9 @@ import SettingOption from './SettingOption';
 import Settings from './Settings';
 
 const ProteinFilters: Record<string, FilterOption> = {
-    search: new FilterOption<RegExp>(
+    search: new FilterOption<string>(
         'Search',
-        ko.observable(new RegExp('', 'i')),
+        ko.observable(''),
     ),
     type: new FilterOption<number>(
         'Type',
