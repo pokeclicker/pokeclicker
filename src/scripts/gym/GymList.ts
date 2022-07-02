@@ -1187,6 +1187,9 @@ GymList['Champion Diantha'] = new Champion(
     128000,
     'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart...',
     [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)],
+    undefined,
+    undefined,
+    undefined,
     () => {
         App.game.quests.getQuestLine('The new kid').beginQuest();
     }
