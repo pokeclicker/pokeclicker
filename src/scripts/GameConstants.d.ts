@@ -410,4 +410,10 @@ namespace GameConstants {
         'Friday',
         'Saturday',
     }
+    declare enum Pokerus {
+        'None',
+        'Infected',
+        'Contagious',
+        'Cured',
+    }
 }
