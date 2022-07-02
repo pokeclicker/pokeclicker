@@ -800,13 +800,13 @@ class Update implements Saveable {
         },
 
         '0.9.8': ({ playerData, saveData, settingsData }) => {
-            saveData.oakItemLoadouts = saveData.oakItemLoadouts.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
+            saveData.oakItemLoadouts = saveData.oakItemLoadouts?.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
 
             // Fix pokerus
             saveData.party.caughtPokemon.forEach(p => {
                 let status = (p[8]) ? 2 : 0;
                 const requiredForCured = saveData.challenges.list.slowEVs ? 5000 : 500;
-                if (saveData.statistics.effortPoints[p.id] >= requiredForCured) {
+                if (saveData.statistics.effortPoints?.[p.id] >= requiredForCured) {
                     status = 3;
                 }
                 p[8] = status;
