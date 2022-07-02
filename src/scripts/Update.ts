@@ -800,8 +800,15 @@ class Update implements Saveable {
 
         '0.9.8': ({ playerData, saveData }) => {
             saveData.oakItemLoadouts = saveData.oakItemLoadouts.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
+
+            // Fix pokerus
             saveData.party.caughtPokemon.forEach(p => {
-                p[8] = (p[8]) ? 2 : 0;
+                let status = (p[8]) ? 2 : 0;
+                const requiredForCured = saveData.challenges.list.slowEVs ? 5000 : 500;
+                if (saveData.statistics.effortPoints[p.id] >= requiredForCured) {
+                    status = 3;
+                }
+                p[8] = status;
             });
         },
     };
