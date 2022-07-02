@@ -515,7 +515,7 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     Fire: {
-        [Region.kanto]: new Set(['Mt. Ember', 'Cinnabar Island', 'Mt. Ember Summit']),
+        [Region.kanto]: new Set(['Cinnabar Island', 'Mt. Ember', 'Mt. Ember Summit']),
         [Region.johto]: new Set(),
         [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater']),
         [Region.sinnoh]: new Set(['Stark Mountain']),
