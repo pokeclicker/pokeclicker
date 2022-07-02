@@ -53,15 +53,15 @@ class PartyPokemon implements Saveable {
         category = 0,
         pokerus = GameConstants.Pokerus.None
     ) {
-        this.proteinsUsed = ko.observable(proteinsUsed);
-        this.effortPoints = ko.observable(effortPoints);
-        this._breeding = ko.observable(breeding);
-        this._shiny = ko.observable(shiny);
-        this._level = ko.observable(1);
-        this._attackBonusPercent = ko.observable(attackBonusPercent);
-        this._attackBonusAmount = ko.observable(attackBonusAmount);
-        this._attack = ko.observable(this.calculateAttack());
-        this._category = ko.observable(category);
+        this.proteinsUsed = ko.observable(proteinsUsed).extend({ numeric: 0 });
+        this.effortPoints = ko.observable(effortPoints).extend({ numeric: 0 });
+        this._breeding = ko.observable(breeding).extend({ boolean: null });
+        this._shiny = ko.observable(shiny).extend({ boolean: null });
+        this._level = ko.observable(1).extend({ numeric: 0 });
+        this._attackBonusPercent = ko.observable(attackBonusPercent).extend({ numeric: 0 });
+        this._attackBonusAmount = ko.observable(attackBonusAmount).extend({ numeric: 0 });
+        this._attack = ko.observable(this.calculateAttack()).extend({ numeric: 0 });
+        this._category = ko.observable(category).extend({ numeric: 0 });
         this._pokerus = ko.observable(pokerus).extend({ numeric: 0 });
     }
 
