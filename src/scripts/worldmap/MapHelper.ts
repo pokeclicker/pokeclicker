@@ -111,18 +111,12 @@ class MapHelper {
         return cls;
     }
 
-    public static routeIsCurrentLocation(route: number, region: GameConstants.Region): boolean {
-        if (player.route() == route && player.region == region) {
-            return true;
-        }
-        return false;
+    public static isRouteCurrentLocation(route: number, region: GameConstants.Region): boolean {
+        return player.route() == route && player.region == region;
     }
 
-    public static townIsCurrentLocation(townName: string): boolean {
-        if (!player.route() && player.town().name == townName) {
-            return true;
-        }
-        return false;
+    public static isTownCurrentLocation(townName: string): boolean {
+        return !player.route() && player.town().name == townName;
     }
 
     public static calculateTownCssClass(townName: string): string {
