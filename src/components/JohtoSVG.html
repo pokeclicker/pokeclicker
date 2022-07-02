@@ -362,12 +362,13 @@
         , width: 5, height: 4.5
         })
      %>
-    
+
     <!--Goldenrod City Extension-->
     <%- include('templates/mapTown',
         { name: "Goldenrod City"
         , x: 23, y: 36
         , width: 5, height: 5
+        , isExtension: true
         })
      %>
 
@@ -376,6 +377,7 @@
         { name: "Goldenrod City"
         , x: 22, y: 35
         , width: 3, height: 1
+        , isExtension: true
         })
      %>
 
@@ -384,6 +386,7 @@
         { name: "Goldenrod City"
         , x: 27, y: 31
         , width: 3, height: 0.5
+        , isExtension: true
         })
      %>
 
@@ -405,6 +408,7 @@
      <%- include('templates/mapTown',
          { name: "Olivine City"
          , x: 14, y: 19
+         , isExtension: true
          })
       %>
 
@@ -442,6 +446,7 @@
         { name: "Indigo Plateau Johto"
         , x: 93, y: 9.5
         , width: 3, height: 9.5
+        , isExtension: true
         })
      %>
 
@@ -464,6 +469,7 @@
         { name: "Sprout Tower"
         , x: 45, y: 18
         , width: 3, height: 1
+        , isExtension: true
         })
     %>
 
@@ -509,6 +515,7 @@
          { name: "Burned Tower"
          , x: 26, y: 9
          , width: 6, height: 1
+         , isExtension: true
          })
       %>
 
@@ -524,6 +531,7 @@
         { name: "Tin Tower"
          , x: 36, y: 9
          , width: 6, height: 1
+         , isExtension: true
          })
       %>
 
@@ -545,8 +553,19 @@
          { name: "Mt. Mortar"
          , x: 52, y: 6
          , width: 2, height: 4
+         , isExtension: true
          })
       %>
+
+    <!--Team Rocket's Hideout-->
+    <%- include('templates/mapDungeon',
+        { name: "Team Rocket's Hideout"
+        , x: 55, y: 9
+        , height: 4
+        , moveToTown: "Mahogany Town"
+        , invisible: true
+        })
+    %>
 
     <!--Radio Tower-->
     <%- include('templates/mapDungeon',
@@ -561,6 +580,7 @@
         { name: "Radio Tower"
         , x: 25, y: 29
         , width: 2, height: 2.5
+        , isExtension: true
         })
      %>
 
@@ -575,6 +595,7 @@
          { name: "Ice Path"
          , x: 73, y: 11
          , width: 1, height: 1
+         , isExtension: true
          })
       %>
 
@@ -589,6 +610,7 @@
          { name: "Dark Cave"
          , x: 70, y: 30
          , width: 1, height: 1
+         , isExtension: true
          })
       %>
      <!--Dark Cave Extension-->
@@ -618,6 +640,7 @@
          { name: "Mt. Silver"
          , x: 78, y: 36
          , width: 1, height: 1
+         , isExtension: true
          })
       %>
 

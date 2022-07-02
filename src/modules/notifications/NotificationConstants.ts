@@ -58,10 +58,11 @@ const NotificationConstants = {
         },
         Dungeons: {
             dungeon_complete: new NotificationSetting('notification.dungeon_complete', 'Dungeon completed', true),
-            dungeon_item_found: new NotificationSetting('notification.dungeon_item_found', 'Item found in dungeon chest', true),
+            common_dungeon_item_found: new NotificationSetting('notification.common_dungeon_item_found', 'Common Item found in dungeon chest', true),
+            rare_dungeon_item_found: new NotificationSetting('notification.rare_dungeon_item_found', 'Rare Item found in dungeon chest', true),
         },
         Items: {
-            route_item_found: new NotificationSetting('notification.route_item_found', 'Berry found on a route', true),
+            route_item_found: new NotificationSetting('notification.route_item_found', 'Berry found during route battle', true),
             battle_item_timer: new NotificationSetting('notification.battle_item_timer', 'Battle item about to wear off', true),
             dropped_item: new NotificationSetting('notification.dropped_item', 'Enemy Pokémon dropped an item', true),
             item_bought: new NotificationSetting('notification.item_bought', 'Item bought', true),
@@ -81,7 +82,7 @@ const NotificationConstants = {
             berry_replanted: new NotificationSetting('notification.berry_replanted', 'Berry has been replanted', true),
             berry_dropped: new NotificationSetting('notification.berry_dropped', 'Berry has been dropped', true),
             mulch_ran_out: new NotificationSetting('notification.mulch_ran_out', 'Mulch has run out', true),
-            wandering_pokemon: new NotificationSetting('notification.wandering_pokemon', 'Encountered a Wandering Pokémon', true),
+            wandering_pokemon: new NotificationSetting('notification.wandering_pokemon', 'Wandering Pokémon encountered', true),
         },
     },
 };

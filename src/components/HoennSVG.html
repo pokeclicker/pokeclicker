@@ -511,6 +511,7 @@
     <%- include('templates/mapTown',
         { name: "Mauville City"
         , x: 32, y: 23
+        , isExtension: true
         })
     %>
 
@@ -520,7 +521,7 @@
         , x: 14, y: 23
         })
     %>
-     
+
     <!--Mt. Chimney-->
     <%- include('templates/mapTown',
         { name: "Mt. Chimney"
@@ -533,6 +534,7 @@
         { name: "Mt. Chimney"
         , x: 22, y: 16
         , width: 7, height: 1
+        , isExtension: true
         })
     %>
 
@@ -568,6 +570,7 @@
     <%- include('templates/mapTown',
         { name: "Lilycove City"
         , x: 70, y: 13
+        , isExtension: true
         })
     %>
 
@@ -582,6 +585,7 @@
     <%- include('templates/mapTown',
         { name: "Mossdeep City"
         , x: 88, y: 19
+        , isExtension: true
         })
     %>
 
@@ -618,6 +622,7 @@
         { name: "Pokémon League Hoenn"
         , x: 94, y: 32.5
         , width: 3, height: 0.5
+        , isExtension: true
         })
     %>
 
@@ -633,6 +638,7 @@
         { name: "Battle Frontier"
         , x: 79.5, y: 46
         , width: 2, height: 0.5
+        , isExtension: true
         })
     %>
 
@@ -660,6 +666,46 @@
         { name: "Granite Cave"
         , x: 4, y: 54
         , width: 4, height: 4
+        })
+    %>
+
+    <!--Fiery Path-->
+    <%- include('templates/mapDungeon',
+        { name: "Fiery Path"
+        , x: 21, y: 11
+        , width: 8, height: 5
+        , moveToTown: "Mt. Chimney"
+        , invisible: true
+        })
+    %>
+
+    <!--Mt. Chimney Crater-->
+    <%- include('templates/mapDungeon',
+        { name: "Mt. Chimney Crater"
+        , x: 21, y: 11
+        , width: 8, height: 5
+        , moveToTown: "Mt. Chimney"
+        , invisible: true
+        })
+    %>
+
+    <!--Jagged Pass-->
+    <%- include('templates/mapDungeon',
+        { name: "Jagged Pass"
+        , x: 21, y: 11
+        , width: 8, height: 5
+        , moveToTown: "Mt. Chimney"
+        , invisible: true
+        })
+    %>
+
+    <!--Magma Hideout-->
+    <%- include('templates/mapDungeon',
+        { name: "Magma Hideout"
+        , x: 21, y: 11
+        , width: 8, height: 5
+        , moveToTown: "Mt. Chimney"
+        , invisible: true
         })
     %>
 
@@ -697,6 +743,7 @@
         { name: "Mt. Pyre"
         , x: 62, y: 19
         , width: 1, height: 3
+        , isExtension: true
         })
     %>
 
@@ -711,6 +758,7 @@
         { name: "Aqua Hideout"
         , x: 73, y: 11
         , width: 1, height: 2
+        , isExtension: true
         })
     %>
 
@@ -755,6 +803,7 @@
         { name: "Victory Road Hoenn"
         , x: 95, y: 34
         , width: 3, height: 1
+        , isExtension: true
         })
     %>
 

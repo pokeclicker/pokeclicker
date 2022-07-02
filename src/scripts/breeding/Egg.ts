@@ -13,6 +13,7 @@ class Egg implements Saveable {
     progress: KnockoutComputed<number>;
     progressText: KnockoutComputed<string>;
     stepsRemaining: KnockoutComputed<number>;
+    partyPokemon: PartyPokemon;
 
     constructor(
         public type = EggType.None,
@@ -24,6 +25,7 @@ class Egg implements Saveable {
     ) {
         this.steps = ko.observable(steps);
         this.init();
+        this.partyPokemon = type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonByName(pokemon).id) : null;
     }
 
     private init() {
@@ -101,6 +103,8 @@ class Egg implements Saveable {
 
         const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == this.pokemon);
         // If the party pokemon exist, increase it's damage output
+
+        const pokemonID = PokemonHelper.getPokemonByName(this.pokemon).id;
         if (partyPokemon) {
             // Increase attack
             partyPokemon.attackBonusPercent += Math.max(1, Math.round(GameConstants.BREEDING_ATTACK_BONUS * (efficiency / 100)));
@@ -116,13 +120,16 @@ class Egg implements Saveable {
                 partyPokemon.breeding = false;
                 partyPokemon.level = partyPokemon.calculateLevelFromExp();
                 partyPokemon.checkForLevelEvolution();
+                if (partyPokemon.pokerus == GameConstants.Pokerus.Infected) {
+                    partyPokemon.pokerus = GameConstants.Pokerus.Contagious;
+                }
+                if (App.game.statistics.effortPoints[pokemonID] >= 50 && partyPokemon.pokerus == GameConstants.Pokerus.Contagious) {
+                    partyPokemon.pokerus = GameConstants.Pokerus.Cured;
+                }
             }
-
             // Recalculate current attack
             partyPokemon.attack = partyPokemon.calculateAttack();
         }
-
-        const pokemonID = PokemonHelper.getPokemonByName(this.pokemon).id;
 
         if (shiny) {
             Notifier.notify({
