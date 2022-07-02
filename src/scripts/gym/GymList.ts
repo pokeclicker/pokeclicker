@@ -1485,8 +1485,8 @@ GymList['Turffield'] = new Gym(
     'Milo',
     'Turffield',
     [
-        new GymPokemon('Gossifleur', 40466361, 19),
-        new GymPokemon('Eldegoss', 42596169, 20),
+        new GymPokemon('Gossifleur', 81538851, 19),
+        new GymPokemon('Eldegoss', 90598724, 20),
     ],
     BadgeEnums.Galar_Grass,
     40000,
@@ -1497,9 +1497,9 @@ GymList['Hulbury'] = new Gym(
     'Nessa',
     'Hulbury',
     [
-        new GymPokemon('Goldeen', 47607484, 22),
-        new GymPokemon('Arrokuda', 48108615, 23),
-        new GymPokemon('Gigantamax Drednaw', 50113141, 24),
+        new GymPokemon('Goldeen', 87532510, 22),
+        new GymPokemon('Arrokuda', 87532510, 23),
+        new GymPokemon('Gigantamax Drednaw', 901850  11, 24),
     ],
     BadgeEnums.Galar_Water,
     60000,
@@ -1510,9 +1510,9 @@ GymList['Motostoke'] = new Gym(
     'Kabu',
     'Motostoke',
     [
-        new GymPokemon('Ninetales', 56008804, 25),
-        new GymPokemon('Arcanine', 56008804, 25),
-        new GymPokemon('Gigantamax Centiskorch', 58936636, 27),
+        new GymPokemon('Ninetales', 91921207, 25),
+        new GymPokemon('Arcanine', 91921207, 25),
+        new GymPokemon('Gigantamax Centiskorch', 97666283, 27),
     ],
     BadgeEnums.Galar_Fire,
     60000,
@@ -1523,10 +1523,10 @@ GymList['Stow-on-Side1'] = new Gym(
     'Bea',
     'Stow-on-Side1',
     [
-        new GymPokemon('Hitmontop', 65892712, 34),
-        new GymPokemon('Pangoro', 65892712, 34),
-        new GymPokemon('Sirfetch\'d', 66586319, 35),
-        new GymPokemon('Gigantamax Machamp', 69360749, 36),
+        new GymPokemon('Hitmontop', 96582649, 34),
+        new GymPokemon('Pangoro', 96582649, 34),
+        new GymPokemon('Sirfetch\'d', 96582649, 35),
+        new GymPokemon('Gigantamax Machamp', 104466958, 36),
     ],
     BadgeEnums.Galar_Fighting,
     80000,
@@ -1537,10 +1537,10 @@ GymList['Stow-on-Side2'] = new Gym(
     'Allister',
     'Stow-on-Side2',
     [
-        new GymPokemon('Galarian Yamask', 65892712, 34),
-        new GymPokemon('Mimikyu', 65892712, 34),
-        new GymPokemon('Cursola', 66586319, 35),
-        new GymPokemon('Gigantamax Gengar', 69360749, 36),
+        new GymPokemon('Galarian Yamask', 96582649, 34),
+        new GymPokemon('Mimikyu', 96582649, 34),
+        new GymPokemon('Cursola', 96582649, 35),
+        new GymPokemon('Gigantamax Gengar', 104466958, 36),
     ],
     BadgeEnums.Galar_Ghost,
     80000,
@@ -1551,10 +1551,10 @@ GymList['Ballonlea'] = new Gym(
     'Opal',
     'Ballonlea',
     [
-        new GymPokemon('Galarian Weezing', 71622513, 36),
-        new GymPokemon('Mawile', 71622513, 36),
-        new GymPokemon('Togekiss', 73130355, 37),
-        new GymPokemon('Gigantamax Alcremie', 75392119, 38),
+        new GymPokemon('Galarian Weezing', 99999999, 36),
+        new GymPokemon('Mawile', 99999999, 36),
+        new GymPokemon('Togekiss', 99999999, 37),
+        new GymPokemon('Gigantamax Alcremie', 108160234, 38),
     ],
     BadgeEnums.Galar_Fairy,
     80000,
@@ -1565,10 +1565,10 @@ GymList['Circhester1'] = new Gym(
     'Gordie',
     'Circhester1',
     [
-        new GymPokemon('Barbaracle', 84261781, 40),
-        new GymPokemon('Shuckle', 84261781, 40),
-        new GymPokemon('Stonjourner', 86035713, 41),
-        new GymPokemon('Gigantamax Coalossal', 88696611, 42),
+        new GymPokemon('Barbaracle', 103122110, 40),
+        new GymPokemon('Shuckle', 103122110, 40),
+        new GymPokemon('Stonjourner', 103122110, 41),
+        new GymPokemon('Gigantamax Coalossal', 111540241, 42),
     ],
     BadgeEnums.Galar_Rock,
     80000,
@@ -1579,10 +1579,10 @@ GymList['Circhester2'] = new Gym(
     'Melony',
     'Circhester2',
     [
-        new GymPokemon('Frosmoth', 84261781, 40),
-        new GymPokemon('Galarian Darmanitan', 84261781, 40),
-        new GymPokemon('Eiscue (Ice Face)', 86035713, 41),
-        new GymPokemon('Gigantamax Lapras', 88696611, 42),
+        new GymPokemon('Frosmoth', 103122110, 40),
+        new GymPokemon('Galarian Darmanitan', 103122110, 40),
+        new GymPokemon('Eiscue (Ice Face)', 103122110, 41),
+        new GymPokemon('Gigantamax Lapras', 111540241, 42),
     ],
     BadgeEnums.Galar_Ice,
     80000,
@@ -1593,10 +1593,10 @@ GymList['Spikemuth'] = new Gym(
     'Piers',
     'Spikemuth',
     [
-        new GymPokemon('Scrafty', 99141007, 44),
-        new GymPokemon('Malamar', 100184597, 45),
-        new GymPokemon('Skuntank', 100184597, 45),
-        new GymPokemon('Obstagoon', 104348955, 46),
+        new GymPokemon('Scrafty', 107024027, 44),
+        new GymPokemon('Malamar', 107024027, 45),
+        new GymPokemon('Skuntank', 107024027, 45),
+        new GymPokemon('Obstagoon', 115760683, 46),
     ],
     BadgeEnums.Galar_Dark,
     96000,
@@ -1607,10 +1607,10 @@ GymList['Hammerlocke'] = new Gym(
     'Raihan',
     'Hammerlocke',
     [
-        new GymPokemon('Gigalith', 111645278, 46),
-        new GymPokemon('Flygon', 112820492, 47),
-        new GymPokemon('Sandaconda', 111645278, 46),
-        new GymPokemon('Gigantamax Duraludon', 117521346, 48),
+        new GymPokemon('Gigalith', 111232838, 46),
+        new GymPokemon('Flygon', 111232838, 47),
+        new GymPokemon('Sandaconda', 111232838, 46),
+        new GymPokemon('Gigantamax Duraludon', 120313069, 48),
     ],
     BadgeEnums.Galar_Dragon,
     128000,
@@ -1621,11 +1621,11 @@ GymList['Trainer Marnie'] = new Gym(
     'Marnie',
     'Trainer Marnie',
     [
-        new GymPokemon('Liepard', 117521346, 47),
-        new GymPokemon('Toxicroak', 117521346, 47),
-        new GymPokemon('Scrafty', 117521346, 47),
-        new GymPokemon('Morpeko', 127967688, 48),
-        new GymPokemon('Gigantamax Grimmsnarl', 130579274, 49),
+        new GymPokemon('Liepard', 117681650, 47),
+        new GymPokemon('Toxicroak', 117681650, 47),
+        new GymPokemon('Scrafty', 117681650, 47),
+        new GymPokemon('Morpeko', 121675557, 48),
+        new GymPokemon('Gigantamax Grimmsnarl', 126153272, 49),
     ],
     BadgeEnums.Elite_Marnie,
     150000,
@@ -1636,11 +1636,11 @@ GymList['Gym Leader Bede'] = new Gym(
     'Bede',
     'Gym Leader Bede',
     [
-        new GymPokemon('Mawile', 117521346, 51),
-        new GymPokemon('Sylveon', 117521346, 51),
-        new GymPokemon('Gardevoir', 117521346, 51),
-        new GymPokemon('Galarian Rapidash', 127967688, 52),
-        new GymPokemon('Gigantamax Hatterene', 130579274, 53),
+        new GymPokemon('Mawile', 117681650, 51),
+        new GymPokemon('Sylveon', 117681650, 51),
+        new GymPokemon('Gardevoir', 117681650, 51),
+        new GymPokemon('Galarian Rapidash', 121675557, 52),
+        new GymPokemon('Gigantamax Hatterene', 126153272, 53),
     ],
     BadgeEnums.Elite_Bede,
     150000,
@@ -1651,22 +1651,22 @@ GymList['Trainer Hop'] = new Gym(
     'Hop',
     'Trainer Hop',
     [
-        new GymPokemon('Dubwool', 130579274, 59),
-        new GymPokemon('Pincurchin', 117521346, 58),
-        new GymPokemon('Snorlax', 117521346, 58),
-        new GymPokemon('Inteleon', 130579274, 59),
-        new GymPokemon('Gigantamax Corviknight', 137833678, 60),
+        new GymPokemon('Dubwool', 127578161, 59),
+        new GymPokemon('Pincurchin', 124130462, 58),
+        new GymPokemon('Snorlax', 124130462, 58),
+        new GymPokemon('Inteleon', 131993475, 59),
+        new GymPokemon('Gigantamax Corviknight', 139216928, 60),
     ],
     BadgeEnums.Elite_Hop,
     200000,
     'Thanks, mate. I\'m really glad you were the one here with me.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Bede)]
     // TODO: Add ability to change gym leaders pokemon based on your starter
-    // Bulbasaur
+    // Grookey
     // [new GymPokemon('Inteleon', 137833678, 60)],
-    // Charmander
+    // Scorbunny
     // [new GymPokemon('Rillaboom', 137833678, 60)],
-    // Squirtle/Pikachu
+    // Sobble
     // [new GymPokemon('Cinderace', 137833678, 60)]
 );
 // Galar Champion
@@ -1683,23 +1683,23 @@ GymList['Champion Leon'] = new Champion(
     250000,
     'My time as Champion is over... But what a champion time it\'s been! Thank you for the greatest battle I\'ve ever had!',
     [new TemporaryBattleRequirement('The Darkest Day')],
-    // Bulbasaur
+    // Grookey
     [
         new GymPokemon('Seismitoad', 133481036, 64),
         new GymPokemon('Cinderace', 137833678, 64),
-        new GymPokemon('Gigantamax Charizard', 145088083, 65),
+        new GymPokemon('Gigantamax Charizard', 145088815, 65),
     ],
-    // Charmander
+    // Scorbunny
     [
         new GymPokemon('Mr. Rime', 133481036, 64),
         new GymPokemon('Inteleon', 137833678, 64),
-        new GymPokemon('Gigantamax Charizard', 145088083, 65),
+        new GymPokemon('Gigantamax Charizard', 145088818, 65),
     ],
-    // Squirtle/Pikachu
+    // Sobbke
     [
         new GymPokemon('Rhyperior', 133481036, 64),
         new GymPokemon('Rillaboom', 137833678, 64),
-        new GymPokemon('Gigantamax Charizard', 145088083, 65),
+        new GymPokemon('Gigantamax Charizard', 145088812, 65),
     ]
 );
 
