@@ -62,7 +62,7 @@ class PartyPokemon implements Saveable {
         this._attackBonusAmount = ko.observable(attackBonusAmount).extend({ numeric: 0 });
         this._attack = ko.observable(this.calculateAttack()).extend({ numeric: 0 });
         this._category = ko.observable(category).extend({ numeric: 0 });
-        this._pokerus = ko.observable(pokerus).extend({ boolean: null });
+        this._pokerus = ko.observable(pokerus);
     }
 
     public calculateAttack(ignoreLevel = false): number {
