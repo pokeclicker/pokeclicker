@@ -458,7 +458,7 @@ TemporaryBattleList.Avery1 = new TemporaryBattle(
     'Avery1',
     [
         new GymPokemon('Abra', 799982445, 58),
-        new GymPokemon('Galarian Slowbro', 816143704, 60),
+        new GymPokemon('Galarian Slowpoke', 816143704, 60),
     ],
     'Such strength! I\'m in Psyshock!',
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
