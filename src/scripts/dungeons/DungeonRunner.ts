@@ -162,7 +162,8 @@ class DungeonRunner {
     }
 
     public static lootNotification(input, amount, weight, image) {
-        let message = `Found ${amount} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} in a dungeon chest`;
+        const multiples = (amount < 2) ? '' : 's';
+        let message = `Found ${amount} × <img src="${image}" height="24px"/> ${GameConstants.camelCaseToString(GameConstants.humanifyString(input))}${multiples} in a dungeon chest`;
         let type = NotificationConstants.NotificationOption.success;
         let setting = NotificationConstants.NotificationSetting.Dungeons.common_dungeon_item_found;
 
