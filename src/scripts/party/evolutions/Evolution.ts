@@ -32,7 +32,7 @@ abstract class Evolution {
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
             if (App.game.challenges.list.realEvolutions.active()) {
-                App.game.party.removePokemon(this.basePokemon);
+                App.game.party.removePokemonByName(this.basePokemon);
             }
         }
 

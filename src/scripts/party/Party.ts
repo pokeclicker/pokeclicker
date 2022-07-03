@@ -79,7 +79,7 @@ class Party implements Feature {
         this._caughtPokemon.push(pokemon);
     }
 
-    public removePokemon(name: PokemonNameType) {
+    public removePokemonByName(name: PokemonNameType) {
         this._caughtPokemon.remove(p => p.name == name);
     }
 
