@@ -6995,7 +6995,7 @@ dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
                 new GymPokemon('Klinklang', 26704124, 51),
                 new GymPokemon('Gigantamax Copperajah', 26704124, 52),
             ],
-            { weight: 1 }, 'Rose', '(rose)'),
+            { weight: 3 }, 'Rose', '(rose)'),
         new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {requirement: new TemporaryBattleRequirement('Sordward2')}),
         new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {requirement: new TemporaryBattleRequirement('Shielbert2')}),
     ],
@@ -7217,10 +7217,13 @@ dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
     ],
     96500, 54);
 dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
-    ['Frosmoth', 'Hatterene', 'Reuniclus', 'Mr. Rime', 'Mamoswine', 'Dubwool'],
+    ['Dhelmise', 'Hatterene', 'Reuniclus', 'Mr. Rime', 'Mamoswine', 'Roserade'],
     [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
     33915762,
     [
+        new DungeonBossPokemon('Galarian Rapidash', 161099869, 60),
+        new DungeonBossPokemon('Abomasnow', 161099869, 60),
+        new DungeonBossPokemon('Trevenant', 161099869, 60),
         new DungeonBossPokemon('Weavile', 161099869, 60),
         new DungeonBossPokemon('Calyrex', 169578810, 80, {
             requirement: new MultiRequirement([
