@@ -2791,8 +2791,8 @@ TownList['Delta Fortree City'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 119)],
     }
 );
-TownList['Delta LilyCove City'] = new Town(
-    'Delta LilyCove City',
+TownList['Delta Lilycove City'] = new Town(
+    'Delta Lilycove City',
     GameConstants.Region.kalos,
     [DepartmentStoreShop],
     {
