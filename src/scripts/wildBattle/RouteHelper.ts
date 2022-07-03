@@ -121,8 +121,18 @@ class RouteHelper {
             pokemonList = pokemonList.concat(possiblePokemons.sinnohsurf);
         }
 
-        // Unova Super Rod Pokémon
+        // Unova Old Rod Pokémon
         if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 12) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.unovaoldrod);
+        }
+
+        // Unova Good Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 13) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.unovagoodrod);
+        }
+
+        // Unova Super Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 14) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.unovasuperrod);
         }
 
@@ -132,17 +142,17 @@ class RouteHelper {
         }
 
         // Kalos Old rod Pokémon
-        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 13) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 15) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kalosoldrod);
         }
 
         // Kalos Good Rod Pokémon
-        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 14) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 16) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kalosgoodrod);
         }
 
         // Kalos Super Rod Pokémon
-        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 15) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 17) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kalossuperrod);
         }
 
@@ -152,7 +162,7 @@ class RouteHelper {
         }
 
         // Alola Fishing Rod Pokémon
-        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 16) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 18) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.alolafishingrod);
         }
 

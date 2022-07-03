@@ -29,6 +29,8 @@ export default class RoutePokemon {
     public sinnohgoodrod: PokemonNameType [];
     public sinnohsuperrod: PokemonNameType [];
     public sinnohsurf: PokemonNameType[];
+    public unovaoldrod: PokemonNameType [];
+    public unovagoodrod: PokemonNameType [];
     public unovasuperrod: PokemonNameType [];
     public unovasurf: PokemonNameType[];
     public kalosoldrod: PokemonNameType [];
@@ -61,6 +63,8 @@ export default class RoutePokemon {
         sinnohgoodrod = [],
         sinnohsuperrod = [],
         sinnohsurf = [],
+        unovaoldrod = [],
+        unovagoodrod = [],
         unovasuperrod = [],
         unovasurf = [],
         kalosoldrod = [],
@@ -92,6 +96,8 @@ export default class RoutePokemon {
         sinnohgoodrod?: PokemonNameType[],
         sinnohsuperrod?: PokemonNameType[],
         sinnohsurf?: PokemonNameType[],
+        unovaoldrod?: PokemonNameType[],
+        unovagoodrod?: PokemonNameType[],
         unovasuperrod?: PokemonNameType[],
         unovasurf?: PokemonNameType[],
         kalosoldrod?: PokemonNameType[],
@@ -123,6 +129,8 @@ export default class RoutePokemon {
         this.sinnohgoodrod = sinnohgoodrod;
         this.sinnohsuperrod = sinnohsuperrod;
         this.sinnohsurf = sinnohsurf;
+        this.unovaoldrod = unovaoldrod;
+        this.unovagoodrod = unovagoodrod;
         this.unovasuperrod = unovasuperrod;
         this.unovasurf = unovasurf;
         this.kalosoldrod = kalosoldrod;
