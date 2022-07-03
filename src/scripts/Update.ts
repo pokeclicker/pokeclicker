@@ -469,7 +469,7 @@ class Update implements Saveable {
                 [240, '40 x Moon Stone'],
                 [250, '6400 x Ultraball'],
                 [251, 'Deoxys (defense)'],
-                [300, '100 x Trade Stone'],
+                [300, '100 x Linking Cord'],
                 [386, 'Deoxys (speed)'],
             ];
             const highestStageCompleted = saveData.statistics?.battleFrontierHighestStageCompleted || 0;
@@ -811,6 +811,10 @@ class Update implements Saveable {
                 }
                 p[8] = status;
             });
+
+            // Give the players Linking Cords in place of Trade Stones
+            playerData._itemList.Linking_cord = playerData._itemList.Trade_stone;
+            delete playerData._itemList.Trade_stone;
 
             // Fix quest default color
             if (settingsData) {

@@ -111,7 +111,7 @@ const FuchsiaCityShop = new Shop([
     ItemList.Ultraball,
     ItemList.Lucky_egg,
     ItemList.Dragon_egg,
-    ItemList.Trade_stone,
+    ItemList.Linking_cord,
 ]);
 const CinnabarIslandShop = new Shop([
     ItemList.Pokeball,
@@ -483,7 +483,7 @@ const MahoganyTownShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Lucky_egg,
-    ItemList.Trade_stone,
+    ItemList.Linking_cord,
     ItemList.Upgrade,
     ItemList.HatcheryHelperDakota,
 ]);
@@ -534,10 +534,10 @@ const AzaleaOldMan = new NPC('Wise Old Man', [
     'It says that the mythical Pokémon Celebi will appear before anyone who has proven they are a Champion Pokémon Trainer.',
 ]);
 
-const AzaleaUnionCaveHiker = new NPC('Hiker Anthony', [
-    'The PokéManic’s in Union Cave seem restless.',
-    'They belive there is a weekly visitor.',
-    'As every Friday, you can hear Pokémon roars from deep inside the cave.',
+const AzaleaHiker = new NPC('Hiker Daniel', [
+    'The PokéManiacs in Union Cave are restless. They have been ranting and raving about a weekly visitor.',
+    'According to them a strange Pokémon\'s cries can be heard from a lake deep inside the cave.',
+    'I\'ve never heard it myself. Apparently it only happens on Fridays.',
 ],
 { requirement: new GymBadgeRequirement(BadgeEnums.Fog) });
 
@@ -623,7 +623,7 @@ TownList['Azalea Town'] = new Town(
     [AzaleaTownShop, new MoveToDungeon(dungeonList['Slowpoke Well'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 33)],
-        npcs: [AzaleaOldMan, AzaleaUnionCaveHiker],
+        npcs: [AzaleaOldMan, AzaleaHiker],
     }
 );
 TownList['Goldenrod City'] = new Town(
@@ -805,7 +805,7 @@ const SlateportCityShop = new Shop([
     ItemList.Lucky_incense,
     ItemList.MediumRestore,
     ItemList.Water_egg,
-    ItemList.Trade_stone,
+    ItemList.Linking_cord,
 ]);
 const MauvilleCityShop = new Shop([
     ItemList.Pokeball,
@@ -1267,7 +1267,7 @@ const OreburghCityShop = new Shop([
 const FloaromaTownShop = new Shop([
     ItemList.Pokeball,
     ItemList.Lucky_egg,
-    ItemList.Trade_stone,
+    ItemList.Linking_cord,
     ItemList.Kings_rock,
 ]);
 const EternaCityShop = new Shop([
@@ -1813,7 +1813,7 @@ const CasteliaCityShop = new Shop([
     ItemList.Greatball,
     ItemList.xAttack,
     ItemList.Water_egg,
-    ItemList.Trade_stone,
+    ItemList.Linking_cord,
     ItemList.Kings_rock,
 ]);
 const NimbasaCityShop = new Shop([
@@ -2392,7 +2392,7 @@ const ShalourCityShop = new Shop([
     ItemList.Greatball,
     ItemList.Lucky_egg,
     ItemList.Fighting_egg,
-    ItemList.Trade_stone,
+    ItemList.Linking_cord,
     ItemList.Metal_coat,
 ]);
 const CoumarineCityShop = new Shop([
@@ -2761,7 +2761,7 @@ const KonikoniCityShop = new Shop([
     ItemList.Dowsing_machine,
     ItemList.Lucky_incense,
     ItemList.Fire_stone,
-    ItemList.Trade_stone,
+    ItemList.Linking_cord,
     ItemList.Soothe_bell,
 ]);
 const AetherParadiseShop = new Shop([
