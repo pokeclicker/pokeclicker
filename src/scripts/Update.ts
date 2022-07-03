@@ -800,7 +800,7 @@ class Update implements Saveable {
         },
 
         '0.9.8': ({ playerData, saveData, settingsData }) => {
-            saveData.oakItemLoadouts = saveData.oakItemLoadouts?.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
+            saveData.oakItemLoadouts = saveData.oakItemLoadouts?.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list })) || [];
 
             // Fix pokerus
             saveData.party.caughtPokemon.forEach(p => {
