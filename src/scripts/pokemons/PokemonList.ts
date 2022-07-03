@@ -1816,7 +1816,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 140,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Kadabra', 'Alakazam', GameConstants.StoneType.Trade_stone)],
+        'evolutions': [new StoneEvolution('Kadabra', 'Alakazam', GameConstants.StoneType.Linking_cord)],
         'base': {
             'hitpoints': 40,
             'attack': 35,
@@ -1869,7 +1869,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Machoke', 'Machamp', GameConstants.StoneType.Trade_stone)],
+        'evolutions': [new StoneEvolution('Machoke', 'Machamp', GameConstants.StoneType.Linking_cord)],
         'base': {
             'hitpoints': 80,
             'attack': 100,
@@ -2030,7 +2030,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 137,
         'eggCycles': 15,
-        'evolutions': [new StoneEvolution('Graveler', 'Golem', GameConstants.StoneType.Trade_stone)],
+        'evolutions': [new StoneEvolution('Graveler', 'Golem', GameConstants.StoneType.Linking_cord)],
         'base': {
             'hitpoints': 55,
             'attack': 95,
@@ -2050,7 +2050,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 137,
         'eggCycles': 15,
-        'evolutions': [new StoneEvolution('Alolan Graveler', 'Alolan Golem', GameConstants.StoneType.Trade_stone)],
+        'evolutions': [new StoneEvolution('Alolan Graveler', 'Alolan Golem', GameConstants.StoneType.Linking_cord)],
         'base': {
             'hitpoints': 55,
             'attack': 95,
@@ -2527,7 +2527,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Haunter', 'Gengar', GameConstants.StoneType.Trade_stone)],
+        'evolutions': [new StoneEvolution('Haunter', 'Gengar', GameConstants.StoneType.Linking_cord)],
         'base': {
             'hitpoints': 45,
             'attack': 50,
@@ -5278,7 +5278,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 86,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Gligar', 'Gliscor', GameConstants.StoneType.Razor_fang)],
+        'evolutions': [new NightTimedStoneEvolution('Gligar', 'Gliscor', GameConstants.StoneType.Razor_fang)],
         'base': {
             'hitpoints': 65,
             'attack': 75,
@@ -5417,7 +5417,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 86,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Sneasel', 'Weavile', GameConstants.StoneType.Razor_claw)],
+        'evolutions': [new NightTimedStoneEvolution('Sneasel', 'Weavile', GameConstants.StoneType.Razor_claw)],
         'base': {
             'hitpoints': 55,
             'attack': 95,
@@ -11675,7 +11675,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 137,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Boldore', 'Gigalith', GameConstants.StoneType.Trade_stone)],
+        'evolutions': [new StoneEvolution('Boldore', 'Gigalith', GameConstants.StoneType.Linking_cord)],
         'base': {
             'hitpoints': 70,
             'attack': 105,
@@ -11817,7 +11817,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'catchRate': 90,
-        'evolutions': [new StoneEvolution('Gurdurr', 'Conkeldurr', GameConstants.StoneType.Trade_stone)],
+        'evolutions': [new StoneEvolution('Gurdurr', 'Conkeldurr', GameConstants.StoneType.Linking_cord)],
         'base': {
             'hitpoints': 85,
             'attack': 105,
@@ -12997,7 +12997,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 63,
         'catchRate': 200,
-        'evolutions': [new StoneEvolution('Karrablast', 'Escavalier', GameConstants.StoneType.Trade_stone)],
+        'evolutions': [new StoneEvolution('Karrablast', 'Escavalier', GameConstants.StoneType.Linking_cord)],
         'base': {
             'hitpoints': 50,
             'attack': 75,
@@ -13488,7 +13488,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 200,
-        'evolutions': [new StoneEvolution('Shelmet', 'Accelgor', GameConstants.StoneType.Trade_stone)],
+        'evolutions': [new StoneEvolution('Shelmet', 'Accelgor', GameConstants.StoneType.Linking_cord)],
         'base': {
             'hitpoints': 50,
             'attack': 40,
@@ -15073,17 +15073,17 @@ const pokemonList = createPokemonArray(
         'id': 670.05,
         'name': 'Floette (Eternal)',
         'type': [PokemonType.Fairy],
-        'eggCycles': 20,
+        'eggCycles': 30,
         'levelType': LevelType.mediumfast,
         'exp': 130,
         'catchRate': 120,
         'base': {
-            'hitpoints': 54,
-            'attack': 45,
-            'specialAttack': 75,
-            'defense': 47,
-            'specialDefense': 98,
-            'speed': 52,
+            'hitpoints': 74,
+            'attack': 65,
+            'specialAttack': 125,
+            'defense': 67,
+            'specialDefense': 128,
+            'speed': 92,
         },
     },
     {
@@ -15961,7 +15961,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 62,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Phantump', 'Trevenant', GameConstants.StoneType.Trade_stone)],
+        'evolutions': [new StoneEvolution('Phantump', 'Trevenant', GameConstants.StoneType.Linking_cord)],
         'base': {
             'hitpoints': 43,
             'attack': 70,
@@ -15996,7 +15996,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 67,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Pumpkaboo', 'Gourgeist', GameConstants.StoneType.Trade_stone)],
+        'evolutions': [new StoneEvolution('Pumpkaboo', 'Gourgeist', GameConstants.StoneType.Linking_cord)],
         'base': {
             'hitpoints': 44,
             'attack': 66,
@@ -16665,6 +16665,23 @@ const pokemonList = createPokemonArray(
             'defense': 60,
             'specialDefense': 70,
             'speed': 124,
+        },
+    },
+    {
+        'id': 743.01,
+        'name': 'Totem Ribombee',
+        'type': [PokemonType.Bug, PokemonType.Fairy],
+        'eggCycles': 30,
+        'levelType': LevelType.mediumfast,
+        'exp': 162,
+        'catchRate': 75,
+        'base': {
+            'hitpoints': 60,
+            'attack': 75,
+            'specialAttack': 115,
+            'defense': 80,
+            'specialDefense': 90,
+            'speed': 144,
         },
     },
     {

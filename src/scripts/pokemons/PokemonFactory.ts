@@ -63,7 +63,7 @@ class PokemonFactory {
     }
 
     public static routeLevel(route: number, region: GameConstants.Region): number {
-        return Math.floor(MapHelper.normalizeRoute(route, region) * 2 + 20 * Math.pow(region, 2.3));
+        return Math.floor(20 * Math.pow(MapHelper.normalizeRoute(route, region),(1 / 2.25)));
     }
 
     public static routeHealth(route: number, region: GameConstants.Region): number {
@@ -106,7 +106,7 @@ class PokemonFactory {
 
     public static generatePartyPokemon(id: number, shiny = false): PartyPokemon {
         const dataPokemon = PokemonHelper.getPokemonById(id);
-        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, 0, 0, false, shiny);
+        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, 0, 0, 0, false, shiny);
     }
 
     /**
@@ -119,7 +119,7 @@ class PokemonFactory {
         const pokemon = gym.pokemons[index];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
-        const exp: number = basePokemon.exp * 1.5;
+        const exp: number = basePokemon.exp;
         const shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS);
     }
@@ -189,7 +189,7 @@ class PokemonFactory {
         const pokemon = battle.pokemons[index];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
-        const exp: number = basePokemon.exp * 1.5;
+        const exp: number = basePokemon.exp;
         const shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS);
     }
@@ -263,12 +263,8 @@ class PokemonFactory {
 
         chance /= modifier;
 
-        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
+        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Dowsing_machine)()) {
             chance /= 1.5;
-        }
-
-        if (FluteEffectRunner.isActive(GameConstants.FluteItemType.Black_Flute)()) {
-            chance /= (FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Black_Flute) * AchievementHandler.achievementBonus());
         }
 
         if (Rand.chance(chance)) {

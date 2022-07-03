@@ -37,6 +37,7 @@ class Farming implements Feature {
     unlockedBerries: KnockoutObservable<boolean>[];
     mulchList: KnockoutObservable<number>[];
     plotList: Array<Plot>;
+    unlockedPlotCount: KnockoutObservable<number>;
     shovelAmt: KnockoutObservable<number>;
     mulchShovelAmt: KnockoutObservable<number>;
 
@@ -47,6 +48,7 @@ class Farming implements Feature {
         this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
         this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
         this.plotList = this.defaults.plotList;
+        this.unlockedPlotCount = ko.observable(0);
         this.shovelAmt = ko.observable(this.defaults.shovelAmt);
         this.mulchShovelAmt = ko.observable(this.defaults.mulchShovelAmt);
 
@@ -676,7 +678,7 @@ class Farming implements Feature {
         // Chople
         this.mutations.push(new OakMutation(.0001, BerryType.Chople, BerryType.Spelon, OakItemType.Blaze_Cassette));
         // Kebia
-        this.mutations.push(new OakMutation(.0001, BerryType.Kebia, BerryType.Pamtre, OakItemType.Poison_Barb));
+        this.mutations.push(new OakMutation(.0001, BerryType.Kebia, BerryType.Pamtre, OakItemType.Rocky_Helmet));
         // Kebia Parasite
         this.mutations.push(new ParasiteMutation(.0004, BerryType.Kebia));
         // Shuca
@@ -866,13 +868,13 @@ class Farming implements Feature {
 
     getGrowthMultiplier(): number {
         let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprayduck) * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Grass_Flute);
+        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprayduck);
         return multiplier;
     }
 
     getReplantMultiplier(): number {
         let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprinklotad) * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Grass_Flute);
+        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprinklotad);
         return multiplier;
     }
 
@@ -1052,6 +1054,7 @@ class Farming implements Feature {
             const cost = this.plotFPCost(index);
             App.game.wallet.loseAmount(new Amount(cost, GameConstants.Currency.farmPoint));
             this.plotList[index].isUnlocked = true;
+            this.unlockedPlotCount(this.plotList.filter(p => p.isUnlocked).length);
         }
     }
 
@@ -1323,7 +1326,7 @@ class Farming implements Feature {
             return;
         }
 
-        const savedBerries = json['berryList'];
+        const savedBerries = json.berryList;
         if (savedBerries == null) {
             this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
         } else {
@@ -1332,7 +1335,7 @@ class Farming implements Feature {
             });
         }
 
-        const savedUnlockedBerries = json['unlockedBerries'];
+        const savedUnlockedBerries = json.unlockedBerries;
         if (savedUnlockedBerries == null) {
             this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
         } else {
@@ -1341,7 +1344,7 @@ class Farming implements Feature {
             });
         }
 
-        const savedMulches = json['mulchList'];
+        const savedMulches = json.mulchList;
         if (savedMulches == null) {
             this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
         } else {
@@ -1350,7 +1353,7 @@ class Farming implements Feature {
             });
         }
 
-        const savedPlots = json['plotList'];
+        const savedPlots = json.plotList;
         if (savedPlots == null) {
             this.plotList = this.defaults.plotList;
         } else {
@@ -1360,22 +1363,23 @@ class Farming implements Feature {
                 this.plotList[index] = plot;
             });
         }
+        this.unlockedPlotCount(this.plotList.filter(p => p.isUnlocked).length);
 
-        const shovelAmt = json['shovelAmt'];
+        const shovelAmt = json.shovelAmt;
         if (shovelAmt == null) {
             this.shovelAmt = ko.observable(this.defaults.shovelAmt);
         } else {
             this.shovelAmt(shovelAmt);
         }
 
-        const mulchShovelAmt = json['mulchShovelAmt'];
+        const mulchShovelAmt = json.mulchShovelAmt;
         if (mulchShovelAmt == null) {
             this.mulchShovelAmt = ko.observable(this.defaults.mulchShovelAmt);
         } else {
             this.mulchShovelAmt(mulchShovelAmt);
         }
 
-        const mutations = json['mutations'];
+        const mutations = json.mutations;
         if (mutations) {
             this.mutations.forEach((mutation, i) => mutation.fromJSON(mutations[i]));
         }

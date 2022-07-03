@@ -7,6 +7,9 @@
                 <h5 class="modal-title text-light">
                     <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true) && PokedexHelper.toggleStatisticShiny() ? '-shiny' : ''}.svg`}, click: () => PokedexHelper.toggleStatisticShiny(!PokedexHelper.toggleStatisticShiny())"/>
                 </h5>
+                <h5 class="modal-title text-light">
+                    <img width="18px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus]}.png`}"/>
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -33,6 +36,16 @@
                       <td class="text-left">Proteins Used</td>
                       <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).proteinsUsed() : 0).toLocaleString('en-US')">-</code></td>
                     </tr>
+                    <!-- ko if: App.game.party.getPokemon($data)?.pokerus -->
+                      <tr>
+                        <td class="text-left">EVs</td>
+                        <td class="text-left tight"><code data-bind="text: App.game.party.getEffortValues(App.game.party.getPokemon($data))().toLocaleString('en-US')">-</code></td>
+                      </tr>
+                      <tr>
+                        <td class="text-left">EV bonus</td>
+                        <td class="text-left tight"><code data-bind="text: '×' + App.game.party.calculateEVAttackBonus(App.game.party.getPokemon($data)).toLocaleString('en-US')">-</code></td>
+                      </tr>
+                    <!-- /ko -->
                     <tr>
                       <td class="text-left">Type</td>
                       <td class="text-left tight">
@@ -100,6 +113,12 @@
                       <td class="text-left">Shinies Hatched</td>
                       <td class="text-left tight"><code data-bind="text: App.game.statistics.shinyPokemonHatched[$data]().toLocaleString('en-US')">-</code></td>
                     </tr>
+                    <!-- ko if: App.game.party.getPokemon($data)?.pokerus >= GameConstants.Pokerus.Infected -->
+                    <tr>
+                      <td class="text-left">Effort Values</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.party.getEffortValues(App.game.party.getPokemon($data))().toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <!-- /ko -->
                   </tbody>
                 </table>
             </div>

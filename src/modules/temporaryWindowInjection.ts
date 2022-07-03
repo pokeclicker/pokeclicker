@@ -64,6 +64,7 @@ import OakItem from './oakItems/OakItem';
 import OakItems from './oakItems/OakItems';
 import BoughtOakItem from './oakItems/BoughtOakItem';
 import OakItemController from './oakItems/OakItemController';
+import OakItemLoadout from './oakItems/OakItemLoadout';
 import OakItemLoadouts from './oakItems/OakItemLoadouts';
 import SpecialRoutePokemon from './routes/SpecialRoutePokemon';
 import RoutePokemon from './routes/RoutePokemon';
@@ -114,6 +115,7 @@ import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequ
 import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompletedRequirement';
 import TemporaryBattleRequirement from './requirements/TemporaryBattleRequirement';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
+import SaveReminder from './saveReminder/SaveReminder';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -183,6 +185,7 @@ Object.assign(<any>window, {
     OakItems,
     BoughtOakItem,
     OakItemController,
+    OakItemLoadout,
     OakItemLoadouts,
     SpecialRoutePokemon,
     RoutePokemon,
@@ -235,4 +238,5 @@ Object.assign(<any>window, {
     QuestLineStepCompletedRequirement,
     TemporaryBattleRequirement,
     DayOfWeekRequirement,
+    SaveReminder,
 });

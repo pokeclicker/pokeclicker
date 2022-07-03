@@ -8,7 +8,12 @@ import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
 import { SortOptionConfigs, SortOptions } from './SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from '../achievements/AchievementSortOptions';
-import { Region, AchievementType } from '../GameConstants';
+import {
+    Region,
+    AchievementType,
+    HOUR,
+    DAY,
+} from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import BreedingFilters from './BreedingFilters';
 import ProteinFilters from './ProteinFilters';
@@ -97,9 +102,8 @@ Settings.add(new BooleanSetting('showGymGoAnimation', 'Show Gym GO animation', t
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
-Settings.add(new CssVariableSetting('currentPlace', 'Current Location', [], '#55ff00'));
 Settings.add(new CssVariableSetting('incomplete', 'Incomplete Area', [], '#ff9100'));
-Settings.add(new CssVariableSetting('questAtLocation', 'Quest at Location', [], '#34BF45'));
+Settings.add(new CssVariableSetting('questAtLocation', 'Quest at Location', [], '#55ff00'));
 Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokemon', [], '#3498db'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Achievement', [], '#c939fe'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokemon', [], '#ffee00'));
@@ -110,6 +114,22 @@ Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#fff
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
 Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web workers for game ticks (more consistent game speed)', true));
 Settings.add(new BooleanSetting('disableOfflineProgress', 'Disable offline progress', false));
+Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in game time):',
+    [
+        new SettingOption('Never', '0'),
+        new SettingOption('1 Hour', (1 * HOUR).toString()),
+        new SettingOption('3 Hours', (3 * HOUR).toString()),
+        new SettingOption('6 Hours', (6 * HOUR).toString()),
+        new SettingOption('12 Hours', (12 * HOUR).toString()),
+        new SettingOption('24 Hours', (24 * HOUR).toString()),
+        new SettingOption('2 Days', (2 * DAY).toString()),
+        new SettingOption('3 Days', (3 * DAY).toString()),
+        new SettingOption('4 Days', (4 * DAY).toString()),
+        new SettingOption('5 Days', (5 * DAY).toString()),
+        new SettingOption('6 Days', (6 * DAY).toString()),
+        new SettingOption('7 Days', (7 * DAY).toString()),
+    ],
+    (12 * HOUR).toString()));
 
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((soundGroup) => {

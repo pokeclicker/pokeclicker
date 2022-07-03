@@ -257,22 +257,22 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Doomsday Bunker stocked with Pokéballs!', 'Purchase 100,000 Pokéballs', new PokeballRequirement(100000, GameConstants.Pokeball.Pokeball), 0.20);
 
         AchievementHandler.addAchievement('ooooo A blue one!', 'Purchase your first Greatball', new PokeballRequirement(1, GameConstants.Pokeball.Greatball), 0.03);
-        AchievementHandler.addAchievement('Greatball 2', 'Purchase 10 Greatballs', new PokeballRequirement(10, GameConstants.Pokeball.Greatball), 0.05);
-        AchievementHandler.addAchievement('Greatball 3', 'Purchase 100 Greatballs', new PokeballRequirement(100, GameConstants.Pokeball.Greatball), 0.10);
-        AchievementHandler.addAchievement('Greatball 4', 'Purchase 1,000 Greatballs', new PokeballRequirement(1000, GameConstants.Pokeball.Greatball), 0.15);
-        AchievementHandler.addAchievement('Greatball 5', 'Purchase 10,000 Greatballs', new PokeballRequirement(10000, GameConstants.Pokeball.Greatball), 0.20);
-        AchievementHandler.addAchievement('Greatball 6', 'Purchase 100,000 Greatballs', new PokeballRequirement(100000, GameConstants.Pokeball.Greatball), 0.30);
+        AchievementHandler.addAchievement('Greatball 2', 'Obtain 10 Greatballs', new PokeballRequirement(10, GameConstants.Pokeball.Greatball), 0.05);
+        AchievementHandler.addAchievement('Greatball 3', 'Obtain 100 Greatballs', new PokeballRequirement(100, GameConstants.Pokeball.Greatball), 0.10);
+        AchievementHandler.addAchievement('Greatball 4', 'Obtain 1,000 Greatballs', new PokeballRequirement(1000, GameConstants.Pokeball.Greatball), 0.15);
+        AchievementHandler.addAchievement('Greatball 5', 'Obtain 10,000 Greatballs', new PokeballRequirement(10000, GameConstants.Pokeball.Greatball), 0.20);
+        AchievementHandler.addAchievement('Greatball 6', 'Obtain 100,000 Greatballs', new PokeballRequirement(100000, GameConstants.Pokeball.Greatball), 0.30);
 
-        AchievementHandler.addAchievement('Ultraball 1', 'Purchase your first Ultraball', new PokeballRequirement(1, GameConstants.Pokeball.Ultraball), 0.05);
-        AchievementHandler.addAchievement('Ultraball 2', 'Purchase 10 Ultraballs', new PokeballRequirement(10, GameConstants.Pokeball.Ultraball), 0.10);
-        AchievementHandler.addAchievement('Ultraball 3', 'Purchase 100 Ultraballs', new PokeballRequirement(100, GameConstants.Pokeball.Ultraball), 0.15);
-        AchievementHandler.addAchievement('Ultraball 4', 'Purchase 1,000 Ultraballs', new PokeballRequirement(1000, GameConstants.Pokeball.Ultraball), 0.20);
-        AchievementHandler.addAchievement('Ultraball 5', 'Purchase 10,000 Ultraballs', new PokeballRequirement(10000, GameConstants.Pokeball.Ultraball), 0.30);
-        AchievementHandler.addAchievement('Ultraball 6', 'Purchase 100,000 Ultraballs', new PokeballRequirement(100000, GameConstants.Pokeball.Ultraball), 0.40);
+        AchievementHandler.addAchievement('Ultraball 1', 'Obtain your first Ultraball', new PokeballRequirement(1, GameConstants.Pokeball.Ultraball), 0.05);
+        AchievementHandler.addAchievement('Ultraball 2', 'Obtain 10 Ultraballs', new PokeballRequirement(10, GameConstants.Pokeball.Ultraball), 0.10);
+        AchievementHandler.addAchievement('Ultraball 3', 'Obtain 100 Ultraballs', new PokeballRequirement(100, GameConstants.Pokeball.Ultraball), 0.15);
+        AchievementHandler.addAchievement('Ultraball 4', 'Obtain 1,000 Ultraballs', new PokeballRequirement(1000, GameConstants.Pokeball.Ultraball), 0.20);
+        AchievementHandler.addAchievement('Ultraball 5', 'Obtain 10,000 Ultraballs', new PokeballRequirement(10000, GameConstants.Pokeball.Ultraball), 0.30);
+        AchievementHandler.addAchievement('Ultraball 6', 'Obtain 100,000 Ultraballs', new PokeballRequirement(100000, GameConstants.Pokeball.Ultraball), 0.40);
 
-        AchievementHandler.addAchievement('Masterball 1', 'Purchase your first Masterball', new PokeballRequirement(1, GameConstants.Pokeball.Masterball), 0.20);
-        AchievementHandler.addAchievement('Masterball 2', 'Purchase 10 Masterballs', new PokeballRequirement(10, GameConstants.Pokeball.Masterball), 0.30);
-        AchievementHandler.addAchievement('Masterball 3', 'Purchase 100 Masterballs', new PokeballRequirement(100, GameConstants.Pokeball.Masterball), 0.40);
+        AchievementHandler.addAchievement('Masterball 1', 'Obtain your first Masterball', new PokeballRequirement(1, GameConstants.Pokeball.Masterball), 0.20);
+        AchievementHandler.addAchievement('Masterball 2', 'Obtain 10 Masterballs', new PokeballRequirement(10, GameConstants.Pokeball.Masterball), 0.30);
+        AchievementHandler.addAchievement('Masterball 3', 'Obtain 100 Masterballs', new PokeballRequirement(100, GameConstants.Pokeball.Masterball), 0.40);
 
         AchievementHandler.addAchievement('A Few Clicks In', 'Click 10 times', new ClickRequirement(10, 1), 0.02, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
         AchievementHandler.addAchievement('Clicking Pro', 'Click 100 times', new ClickRequirement(100, 1), 0.05, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
