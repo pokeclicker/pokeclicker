@@ -456,15 +456,13 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
     ],
     75, 4,
     () => {
-        if (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Moon')]() <= 1) {
-            const item = Rand.boolean() ? 'Dome Fossil' : 'Helix Fossil';
-            Underground.gainMineItem(Underground.getMineItemByName(item).id, 1);
-            Notifier.notify({
-                message: `You were awarded a ${GameConstants.humanifyString(item)} for defeating the Super Nerd`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
-            });
-        }
+        const item = Rand.boolean() ? 'Dome Fossil' : 'Helix Fossil';
+        Underground.gainMineItem(Underground.getMineItemByName(item).id, 1);
+        Notifier.notify({
+            message: `You were awarded a ${GameConstants.humanifyString(item)} for defeating the Super Nerd`,
+            type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.Items.rare_dungeon_item_found,
+        });
     });
 
 dungeonList['Diglett\'s Cave'] = new Dungeon('Diglett\'s Cave',
@@ -754,6 +752,8 @@ dungeonList['Pokémon Tower'] = new Dungeon('Pokémon Tower',
         {loot: 'Ultraball', weight: 0},
         {loot: 'LargeRestore', weight: 0},
         {loot: 'Green Shard', weight: 3},
+        {loot: 'Soothe_bell', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Pokémon Tower'))},
+        {loot: 'Linking_cord', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Pokémon Tower'))},
     ],
     7523,
     [new DungeonBossPokemon('Marowak', 37615, 30)],
@@ -1512,7 +1512,7 @@ dungeonList['Mt. Mortar'] = new Dungeon('Mt. Mortar',
         Notifier.notify({
             message: 'You were awarded a Fighting Egg for defeating Black Belt Kiyo',
             type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+            setting: NotificationConstants.NotificationSetting.Items.rare_dungeon_item_found,
         });
     });
 
@@ -3011,7 +3011,7 @@ dungeonList['Iron Island'] = new Dungeon('Iron Island',
         Notifier.notify({
             message: 'You were awarded a Fighting Egg for defeating the Galactic Grunts',
             type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+            setting: NotificationConstants.NotificationSetting.Items.rare_dungeon_item_found,
         });
     });
 
@@ -4993,6 +4993,13 @@ dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
         {loot: 'Ultraball', weight: 3.5},
         {loot: 'Splash Plate', weight: 2.5},
         {loot: 'Fist Plate', weight: 2.5},
+        {loot: 'Fire_stone', weight: 0},
+        {loot: 'Water_stone', weight: 0},
+        {loot: 'Leaf_stone', weight: 0},
+        {loot: 'Thunder_stone', weight: 0},
+        {loot: 'Linking_cord', weight: 0},
+        {loot: 'Sun_stone', weight: 0},
+        {loot: 'Soothe_bell', weight: 0},
         {loot: 'Red Shard', weight: 3},
         {loot: 'Green Shard', weight: 3},
     ],
@@ -5176,7 +5183,7 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
     ],
     356500, 3);
 
-dungeonList['Dreamyard'] = new Dungeon('Dreamyard',
+dungeonList.Dreamyard = new Dungeon('Dreamyard',
     [
         {pokemon: 'Raticate', options: { weight: 4.67 }},
         {pokemon: 'Jigglypuff', options: { weight: 4.67 }},

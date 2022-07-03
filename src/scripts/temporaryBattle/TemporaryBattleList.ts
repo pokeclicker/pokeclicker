@@ -19,11 +19,11 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
         Notifier.notify({
             message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo',
             type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+            setting: NotificationConstants.NotificationSetting.Items.rare_dungeon_item_found,
         });
     }
 );
-TemporaryBattleList['AZ'] = new TemporaryBattle(
+TemporaryBattleList.AZ = new TemporaryBattle(
     'AZ',
     [
         new GymPokemon('Torkoal', 247996000, 60),
