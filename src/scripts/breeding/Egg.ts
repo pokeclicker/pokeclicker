@@ -123,7 +123,7 @@ class Egg implements Saveable {
                 if (partyPokemon.pokerus == GameConstants.Pokerus.Infected) {
                     partyPokemon.pokerus = GameConstants.Pokerus.Contagious;
                 }
-                if (App.game.statistics.effortPoints[pokemonID] >= 50 && partyPokemon.pokerus == GameConstants.Pokerus.Contagious) {
+                if (partyPokemon.evs() >= 50 && partyPokemon.pokerus == GameConstants.Pokerus.Contagious) {
                     partyPokemon.pokerus = GameConstants.Pokerus.Cured;
                 }
             }
