@@ -244,10 +244,10 @@ class Update implements Saveable {
             if (this.minUpdateVersion('0.6.0', saveData)) {
                 if (saveData.oakItems.purchaseList) {
                     if (saveData.oakItems.purchaseList[OakItemType.Squirtbottle]) {
-                        saveData.oakItems[OakItemType[OakItemType.Squirtbottle]]['purchased'] = true;
+                        saveData.oakItems[OakItemType[OakItemType.Squirtbottle]].purchased = true;
                     }
                     if (saveData.oakItems.purchaseList[OakItemType.Sprinklotad]) {
-                        saveData.oakItems[OakItemType[OakItemType.Sprinklotad]]['purchased'] = true;
+                        saveData.oakItems[OakItemType[OakItemType.Sprinklotad]].purchased = true;
                     }
                 }
             }
@@ -469,7 +469,7 @@ class Update implements Saveable {
                 [240, '40 x Moon Stone'],
                 [250, '6400 x Ultraball'],
                 [251, 'Deoxys (defense)'],
-                [300, '100 x Trade Stone'],
+                [300, '100 x Linking Cord'],
                 [386, 'Deoxys (speed)'],
             ];
             const highestStageCompleted = saveData.statistics?.battleFrontierHighestStageCompleted || 0;
@@ -586,11 +586,11 @@ class Update implements Saveable {
                 gemUpgrades: saveData.shards.shardUpgrades || [],
             };
 
-            delete saveData.keyItems['Shard_case'];
+            delete saveData.keyItems.Shard_case;
 
             // Swapping Shard Case for Gem Case
             if (saveData.badgeCase[8]) {
-                saveData.keyItems['Gem_case'] = true;
+                saveData.keyItems.Gem_case = true;
             }
 
             // Just incase statistics is not set
@@ -730,6 +730,7 @@ class Update implements Saveable {
                 lastReminder: saveData.statistics.secondsPlayed,
                 lastDownloaded: saveData.statistics.secondsPlayed,
             };
+
             // Start Mina's Trial questline if player has cleared Ultra Necrozma already
             if (saveData.statistics.temporaryBattleDefeated[1]) {
                 saveData.quests.questLines.push({state: 1, name: 'Mina\'s Trial', quest: 0});
@@ -756,19 +757,91 @@ class Update implements Saveable {
 
             //Replace Poison Barb with Rocky Helmet
             saveData.oakItems.Rocky_Helmet = saveData.oakItems.Poison_Barb;
-            delete saveData.oakItems['Poison_Barb'];
+            delete saveData.oakItems.Poison_Barb;
 
             // Give the players Dowsing Machines in place of Item Magnets
             playerData._itemList.Dowsing_machine = playerData._itemList.Item_magnet;
+            playerData.effectList.Dowsing_machine = playerData.effectList.Item_magnet;
             delete playerData._itemList.Item_magnet;
+            delete playerData.effectList.Item_magnet;
 
             // Start pokerus
             setTimeout(async () => {
                 // Check if player wants to activate the new challenge modes
-                if (!await Notifier.confirm({ title: 'Slow EVs', message: 'New challenge mode added: Slow EVs.\n\nDiminishes the rate at which EVs are gained.\n\nThis is not the default and recommended way to play, and is an optional challenge.\n\nPlease choose if you would like this challenge mode to be disabled (reccomended, cannot be re-enabled later) or activated', confirm: 'Disable', cancel: 'Activate' })) {
+                if (!await Notifier.confirm({ title: 'Slow EVs', message: 'New challenge mode added: Slow EVs.\n\nDiminishes the rate at which EVs are gained.\n\nThis is an optional challenge and is NOT the recommended way to play.\n\nPlease choose if you would like this challenge mode to be disabled or enabled.\n\nCan be disabled later. Can NOT be enabled later!', confirm: 'Disable', cancel: 'Enable' })) {
                     App.game.challenges.list.slowEVs.activate();
                 }
             }, GameConstants.SECOND);
+        },
+
+        '0.9.7': ({ playerData, saveData }) => {
+            // Fix people not getting the pokerus
+            if (saveData.keyItems.Pokerus_virus) {
+                let starter;
+                switch (playerData.starter) {
+                    case 0:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 1);
+                        break;
+                    case 1:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 4);
+                        break;
+                    case 2:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 7);
+                        break;
+                    case 3:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 25);
+                        break;
+                }
+                starter[8] = true;
+            }
+
+            // Add Fighting Dojo TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
+        },
+
+        '0.9.8': ({ playerData, saveData, settingsData }) => {
+            saveData.oakItemLoadouts = saveData.oakItemLoadouts.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
+
+            // Fix pokerus
+            saveData.party.caughtPokemon.forEach(p => {
+                let status = (p[8]) ? 2 : 0;
+                const requiredForCured = saveData.challenges.list.slowEVs ? 5000 : 500;
+                if (saveData.statistics.effortPoints[p.id] >= requiredForCured) {
+                    status = 3;
+                }
+                p[8] = status;
+            });
+
+            // Give the players Linking Cords in place of Trade Stones
+            playerData._itemList.Linking_cord = playerData._itemList.Trade_stone;
+            delete playerData._itemList.Trade_stone;
+
+            // Fix quest default color
+            if (settingsData) {
+                if (settingsData && settingsData['--questAtLocation'] && settingsData['--questAtLocation'] === '#34BF45') {
+                    settingsData['--questAtLocation'] = '#55ff00';
+                }
+                delete settingsData['--currentPlace'];
+            }
+
+            // Add total proteins obtained
+            // Just incase statistics is not set
+            saveData.statistics = saveData.statistics || {};
+            // Set new statistic
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalProteinsPurchased: saveData.statistics.totalProteinsObtained || 0,
+            };
+
+            // Split dungeon loot notification into two
+            if (settingsData) {
+                settingsData['notification.common_dungeon_item_found'] = settingsData['notification.dungeon_item_found'] ?? true;
+                settingsData['notification.common_dungeon_item_found.desktop'] = settingsData['notification.dungeon_item_found.desktop'] ?? false;
+                settingsData['notification.rare_dungeon_item_found'] = settingsData['notification.dungeon_item_found'] ?? true;
+                settingsData['notification.rare_dungeon_item_found.desktop'] = settingsData['notification.dungeon_item_found.desktop'] ?? false;
+                delete settingsData['notification.dungeon_item_found'];
+                delete settingsData['notification.dungeon_item_found.desktop'];
+            }
         },
     };
 

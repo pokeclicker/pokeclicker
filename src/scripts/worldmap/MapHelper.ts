@@ -2,7 +2,6 @@
 /// <reference path="../GameConstants.d.ts" />
 
 enum areaStatus {
-    currentLocation,
     locked,
     unlockedUnfinished,
     questAtLocation,
@@ -86,9 +85,7 @@ class MapHelper {
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
         let cls = '';
 
-        if (player.route() == route && player.region == region) {
-            cls = areaStatus[areaStatus.currentLocation];
-        } else if (!MapHelper.accessToRoute(route, region)) {
+        if (!MapHelper.accessToRoute(route, region)) {
             cls = areaStatus[areaStatus.locked];
         } else  if (App.game.statistics.routeKills[region][route]() < GameConstants.ROUTE_KILLS_NEEDED) {
             cls = areaStatus[areaStatus.unlockedUnfinished];
@@ -114,11 +111,15 @@ class MapHelper {
         return cls;
     }
 
+    public static isRouteCurrentLocation(route: number, region: GameConstants.Region): boolean {
+        return player.route() == route && player.region == region;
+    }
+
+    public static isTownCurrentLocation(townName: string): boolean {
+        return !player.route() && player.town().name == townName;
+    }
+
     public static calculateTownCssClass(townName: string): string {
-        // Check if we are currently at this location
-        if (!player.route() && player.town().name == townName) {
-            return areaStatus[areaStatus.currentLocation];
-        }
         // Check if this location is locked
         if (!MapHelper.accessToTown(townName)) {
             return areaStatus[areaStatus.locked];
@@ -127,25 +128,32 @@ class MapHelper {
         // Is this location a dungeon
         if (dungeonList[townName]) {
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(townName)]()) {
-                return areaStatus[areaStatus.unlockedUnfinished];
+                states.push(areaStatus.unlockedUnfinished);
             } else  if (DungeonRunner.isThereQuestAtLocation(dungeonList[townName])) {
-                return areaStatus[areaStatus.questAtLocation];
+                states.push(areaStatus.questAtLocation);
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], false)) {
-                return areaStatus[areaStatus.uncaughtPokemon];
+                states.push(areaStatus.uncaughtPokemon);
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], true) && !DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
-                return areaStatus[areaStatus.uncaughtShinyPokemonAndMissingAchievement];
+                states.push(areaStatus.uncaughtShinyPokemonAndMissingAchievement);
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], true)) {
-                return areaStatus[areaStatus.uncaughtShinyPokemon];
+                states.push(areaStatus.uncaughtShinyPokemon);
             } else if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
-                return areaStatus[areaStatus.missingAchievement];
+                states.push(areaStatus.missingAchievement);
             }
         }
         const town = TownList[townName];
         town.content.forEach(c => {
-            states.push(c.areaStatus());
+            // If the town itself is not locked, it should never show locked
+            if (c.areaStatus() != areaStatus.locked) {
+                states.push(c.areaStatus());
+            }
         });
         if (states.length) {
-            return areaStatus[Math.min(...states)];
+            const importantState = Math.min(...states);
+            if (importantState >= areaStatus.uncaughtShinyPokemon && states.includes(areaStatus.uncaughtShinyPokemon) && states.includes(areaStatus.missingAchievement)) {
+                return areaStatus[areaStatus.uncaughtShinyPokemonAndMissingAchievement];
+            }
+            return areaStatus[importantState];
         }
         return areaStatus[areaStatus.completed];
     }

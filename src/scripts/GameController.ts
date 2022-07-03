@@ -98,7 +98,7 @@ class GameController {
     }
 
     // Store keys for multi-key combinations
-    static keyHeld = {}
+    static keyHeld: Record<string, any> = {}
     static addKeyListeners() {
         // Oak Items
         const $oakItemsModal = $('#oakItemsModal');
@@ -190,11 +190,11 @@ class GameController {
                 }
                 if (isNumberKey) {
                     if (numberKey === 0) {
-                        ItemList['SmallRestore'].use();
+                        ItemList.SmallRestore.use();
                     } else if (numberKey === 1) {
-                        ItemList['MediumRestore'].use();
+                        ItemList.MediumRestore.use();
                     } else if (numberKey === 2) {
-                        ItemList['LargeRestore'].use();
+                        ItemList.LargeRestore.use();
                     }
                     return e.preventDefault();
                 }
@@ -255,7 +255,7 @@ class GameController {
                         ShopHandler.resetAmount();
                         return e.preventDefault();
                     case Settings.getSetting('hotkey.shop.increase').value:
-                        if (GameController.keyHeld['Shift']) {
+                        if (GameController.keyHeld.Shift) {
                             switch (Settings.getSetting('shopButtons').value) {
                                 case 'original':
                                     ShopHandler.increaseAmount(100);
@@ -403,7 +403,7 @@ class GameController {
                     }
                     break;
                 case Settings.getSetting('hotkey.forceSave').value:
-                    if (GameController.keyHeld['Shift']) {
+                    if (GameController.keyHeld.Shift) {
                         Save.store(player);
                         return e.preventDefault();
                     }

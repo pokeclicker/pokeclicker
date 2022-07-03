@@ -12,7 +12,7 @@ class ShovelItem extends Item {
 
 }
 
-ItemList['Berry_Shovel']   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
+ItemList.Berry_Shovel   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
 
 class MulchShovelItem extends Item {
 
@@ -26,4 +26,4 @@ class MulchShovelItem extends Item {
 
 }
 
-ItemList['Mulch_Shovel'] = new MulchShovelItem(300, 'Mulch Shovel', 'Removes Mulch from a plot in the Farm.');
+ItemList.Mulch_Shovel = new MulchShovelItem(300, 'Mulch Shovel', 'Removes Mulch from a plot in the Farm.');

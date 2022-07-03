@@ -182,11 +182,11 @@ class HatcheryHelpers {
                 this.hatchery.eggList[index](new Egg());
 
                 // Check if there's a pokemon we can chuck into an egg
-                const pokemon = App.game.party.caughtPokemon
+                const pokemon = [...App.game.party.caughtPokemon]
                     .sort(PartyController.compareBy(helper.sortOption(), helper.sortDirection()))
                     .find(p => BreedingController.visible(p)());
                 if (pokemon) {
-                    this.hatchery.gainPokemonEgg(pokemon);
+                    this.hatchery.gainPokemonEgg(pokemon, true);
                     // Charge the player when we put a pokemon in the hatchery
                     helper.charge();
                     // Increment our hatched counter

@@ -123,7 +123,7 @@ class DungeonRunner {
             }
         }
 
-        DungeonRunner.gainLoot(loot.loot, amount);
+        DungeonRunner.gainLoot(loot.loot, amount, loot.weight);
 
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
@@ -135,55 +135,58 @@ class DungeonRunner {
         }
     }
 
-    public static gainLoot(input, amount) {
+    public static gainLoot(input, amount, weight) {
         if (typeof BerryType[input] == 'number') {
-            Notifier.notify({
-                message: `Found ${amount} × ${GameConstants.humanifyString(input)} Berry in a dungeon chest`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
-            });
-
+            DungeonRunner.lootNotification(input, amount, weight, FarmController.getBerryImage(BerryType[GameConstants.humanifyString(input)]));
             return App.game.farming.gainBerry(BerryType[GameConstants.humanifyString(input)], amount, false);
-
         } else if (ItemList[input] instanceof PokeballItem) {
-            Notifier.notify({
-                message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
-            });
-
+            DungeonRunner.lootNotification(input, amount, weight, ItemList[input].image);
             return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount, false);
-
-        }  else if (Underground.getMineItemByName(input) instanceof UndergroundItem) {
-            Notifier.notify({
-                message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
-            });
-
+        } else if (Underground.getMineItemByName(input) instanceof UndergroundItem) {
+            DungeonRunner.lootNotification(input, amount, weight, Underground.getMineItemByName(input).image);
             return Underground.gainMineItem(Underground.getMineItemByName(input).id, amount);
-
-        }  else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
-            Notifier.notify({
-                message: `Found ${1} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
-            });
-
+        } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
+            const image = `assets/images/pokemon/${PokemonHelper.getPokemonByName(input).id}.png`;
+            DungeonRunner.lootNotification(input, amount, weight, image);
             return DungeonBattle.generateNewLootEnemy(input);
-
-        }   else if (ItemList[input] instanceof EvolutionStone || EggItem || BattleItem || Vitamin || EnergyRestore) {
-            Notifier.notify({
-                message: `Found ${amount} × ${GameConstants.humanifyString(input)} in a dungeon chest`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
-            });
-
+        } else if (ItemList[input] instanceof EvolutionStone || EggItem || BattleItem || Vitamin || EnergyRestore) {
+            if (ItemList[input] instanceof Vitamin) {
+                GameHelper.incrementObservable(App.game.statistics.totalProteinsObtained, amount);
+            }
+            DungeonRunner.lootNotification(input, amount, weight, ItemList[input].image);
             return player.gainItem(ItemList[input].name, amount);
-
-        }  else {
-            return player.gainItem(ItemList['xAttack'], 1);
+        } else {
+            DungeonRunner.lootNotification(input, amount, weight, ItemList[input].image);
+            return player.gainItem(ItemList.xAttack, 1);
         }
+    }
+
+    public static lootNotification(input, amount, weight, image) {
+        let message = `Found ${amount} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} in a dungeon chest`;
+        let type = NotificationConstants.NotificationOption.success;
+        let setting = NotificationConstants.NotificationSetting.Items.common_dungeon_item_found;
+
+        if (typeof BerryType[input] == 'number') {
+            const berryPlural = (amount < 2) ? 'Berry' : 'Berries';
+            message = `Found ${Math.floor(amount)} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} ${berryPlural} in a dungeon chest`;
+        } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
+            message = `Found a <img src="${image}" height="40px"/> ${GameConstants.humanifyString(input)} in a dungeon chest`;
+        }
+
+        if (weight <= 2) {
+            setting = NotificationConstants.NotificationSetting.Items.rare_dungeon_item_found;
+            if (weight <= 0.5) {
+                type = NotificationConstants.NotificationOption.danger;
+            } else {
+                type = NotificationConstants.NotificationOption.warning;
+            }
+        }
+
+        return Notifier.notify({
+            message: message,
+            type: type,
+            setting: setting,
+        });
     }
 
     public static startBossFight() {
@@ -222,10 +225,11 @@ class DungeonRunner {
     public static dungeonWon() {
         if (!DungeonRunner.dungeonFinished()) {
             DungeonRunner.dungeonFinished(true);
+            if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]()) {
+                DungeonRunner.dungeon.rewardFunction();
+            }
             GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]);
             MapHelper.moveToTown(DungeonRunner.dungeon.name);
-            DungeonRunner.dungeon.rewardFunction();
-            // TODO award loot with a special screen
             Notifier.notify({
                 message: 'You have successfully completed the dungeon',
                 type: NotificationConstants.NotificationOption.success,
