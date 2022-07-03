@@ -646,7 +646,7 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemListElectric_egg,
+                    ItemList.Electric_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
