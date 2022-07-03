@@ -2014,8 +2014,8 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Tentacruel', 'Lapras', 'Magikarp', 'Pelipper', 'Gastrodon (east)', 'Lumineon'],
         alolaoldrod: ['Magikarp'],
-        alolagoodgrod: ['Magikarp', 'Carvanha', 'Wailmer', 'Relicanth'],
-        alolasupergrod: ['Gyarados', 'Sharpedo', 'Wailord', 'Relicanth'],
+        alolagoodrod: ['Magikarp', 'Carvanha', 'Wailmer', 'Relicanth'],
+        alolasuperrod: ['Gyarados', 'Sharpedo', 'Wailord', 'Relicanth'],
         alolasurf: ['Tentacruel', 'Lapras', 'Pelipper', 'Gastrodon (east)', 'Lumineon'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
