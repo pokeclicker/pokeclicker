@@ -88,7 +88,7 @@ class PartyController {
     private static heldItemSortedList = [];
     static getHeldItemSortedList = ko.pureComputed(() => {
         // If the held item modal is open, we should sort it.
-        if (modalUtils.observableState['heldItemModal'] === 'show') {
+        if (modalUtils.observableState.heldItemModal === 'show') {
             PartyController.heldItemSortedList = [...App.game.party.caughtPokemon];
             return PartyController.heldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
         }
@@ -98,7 +98,7 @@ class PartyController {
     private static pokemonsWithHeldItemSortedList = [];
     static getPokemonsWithHeldItemSortedList = ko.pureComputed(() => {
         // If the held item modal is open, we should sort it.
-        if (modalUtils.observableState['heldItemModal'] === 'show') {
+        if (modalUtils.observableState.heldItemModal === 'show') {
             PartyController.pokemonsWithHeldItemSortedList = [...App.game.party.caughtPokemon.filter(p => p.heldItem())];
             return PartyController.pokemonsWithHeldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
         }
