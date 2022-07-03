@@ -1284,7 +1284,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Sandile', 'Darumaka', 'Trubbish', 'Minccino', 'Scraggy'],
         unovaoldrod: ['Tentacool', 'Magikarp'],
-        unovagoodrod: ['Krabby', 'Qwilfish', 'Clamperl'],
+        unovagoodrod: ['Qwilfish', 'Clamperl', 'Finneon'],
         unovasuperrod: ['Qwilfish', 'Huntail', 'Gorebyss', 'Relicanth', 'Lumineon'],
         unovasurf: ['Frillish'],
     }),
