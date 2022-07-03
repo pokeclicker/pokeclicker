@@ -3,6 +3,9 @@ import KeyItemType from '../enums/KeyItemType';
 import Information from '../utilities/Information';
 import KeyItemController from './KeyItemController';
 import { Feature } from '../DataStore/common/Feature';
+import {
+    getDungeonIndex, Region, ROUTE_KILLS_NEEDED, Starter, Pokerus,
+} from '../GameConstants';
 import { getDungeonIndex, Region, ROUTE_KILLS_NEEDED } from '../GameConstants';
 import LevelableKeyItem, { KeyItemLevel } from './LevelableKeyItem';
 
@@ -129,6 +132,9 @@ export default class KeyItems implements Feature {
             new KeyItem(KeyItemType.DNA_splicers, 'A splicer that fuses certain Pokémon.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Giant Chasm')]() > 0,
                 undefined, undefined, 'DNA Splicers'),
+            new KeyItem(KeyItemType.Pokerus_virus, 'A virus sample collected from the Hatchery',
+                () => App.game.statistics.dungeonsCleared[getDungeonIndex('Distortion World')]() > 0,
+                undefined, () => { App.game.party.getPokemon(pokemonMap[(Starter[player.starter()])].id).pokerus = Pokerus.Contagious; }, 'Pokerus Virus'),
         ];
     }
 
@@ -148,10 +154,11 @@ export default class KeyItems implements Feature {
 
     gainKeyItem(item: KeyItemType, silent = false): void {
         if (!this.hasKeyItem(item)) {
+            this.itemList[item].unlock();
+            this.itemList[item].unlockRewardOnUnlock();
             if (!silent) {
                 KeyItemController.showGainModal(item);
             }
-            this.itemList[item].unlock();
         }
     }
 

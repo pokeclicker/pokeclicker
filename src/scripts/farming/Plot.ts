@@ -300,7 +300,7 @@ class Plot implements Saveable {
      * Returns how many berries will be harvested
      */
     harvestAmount(): number {
-        return this.berryData.harvestAmount * this.getHarvestMultiplier();
+        return Math.floor(this.berryData.harvestAmount * this.getHarvestMultiplier());
     }
 
     /**
@@ -310,7 +310,7 @@ class Plot implements Saveable {
     die(harvested = false): void {
         if (!harvested) {
             // Withered Berry plant drops half of the berries
-            const amount = Math.ceil(this.harvestAmount() / 2);
+            const amount = Math.max(1, Math.ceil(this.harvestAmount() / 2));
             if (amount) {
                 App.game.farming.gainBerry(this.berry, amount);
                 this.notifications.push(FarmNotificationType.Dropped);
@@ -507,12 +507,12 @@ class Plot implements Saveable {
             return;
         }
 
-        this.isUnlocked = json['isUnlocked'] ?? this.defaults.isUnlocked;
-        this.berry = json['berry'] ?? this.defaults.berry;
-        this.age = json['age'] ?? this.defaults.age;
-        this.mulch = json['mulch'] ?? this.defaults.mulch;
-        this.mulchTimeLeft = json['mulchTimeLeft'] ?? this.defaults.mulchTimeLeft;
-        this.lastPlanted = json['lastPlanted'] ?? json['berry'] ?? this.defaults.berry;
+        this.isUnlocked = json.isUnlocked ?? this.defaults.isUnlocked;
+        this.berry = json.berry ?? this.defaults.berry;
+        this.age = json.age ?? this.defaults.age;
+        this.mulch = json.mulch ?? this.defaults.mulch;
+        this.mulchTimeLeft = json.mulchTimeLeft ?? this.defaults.mulchTimeLeft;
+        this.lastPlanted = json.lastPlanted ?? json.berry ?? this.defaults.berry;
     }
 
     toJSON(): Record<string, any> {

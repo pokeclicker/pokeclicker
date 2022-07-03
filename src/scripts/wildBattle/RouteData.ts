@@ -1291,10 +1291,8 @@ Routes.add(new RegionRoute(
         water: [],
     }),
     [
-        new MultiRequirement([
-            new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-            new GymBadgeRequirement(BadgeEnums.Insect),
-        ]),
+        new RouteKillRequirement(10, GameConstants.Region.unova, 4),
+        new GymBadgeRequirement(BadgeEnums.Insect),
     ],
     4
 ));

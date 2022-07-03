@@ -1,5 +1,42 @@
 const TemporaryBattleList: { [battleName: string]: TemporaryBattle } = {};
 
+TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
+    'Fighting Dojo',
+    [
+        new GymPokemon('Hitmonlee', 108985, 37),
+        new GymPokemon('Hitmonchan', 108985, 37),
+    ],
+    'Hwa! Arrgh! Beaten!',
+    [
+        new OneFromManyRequirement([
+            new GymBadgeRequirement(BadgeEnums.Rainbow),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
+        ]),
+    ],
+    [],
+    () => {
+        BagHandler.gainItem({type: ItemType.item, id: 'Fighting_egg'}, 1);
+        Notifier.notify({
+            message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo',
+            type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.Items.rare_dungeon_item_found,
+        });
+    }
+);
+TemporaryBattleList.AZ = new TemporaryBattle(
+    'AZ',
+    [
+        new GymPokemon('Torkoal', 247996000, 60),
+        new GymPokemon('Golurk', 247996000, 60),
+        new GymPokemon('Sigilyph', 247996000, 60),
+    ],
+    'Thank you very much for battling with me. Now I finally feel free…',
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+    [],
+    () => {
+        App.game.party.gainPokemonById(670.05);
+    }
+);
 TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
     [new GymPokemon('???', 264590972, 27)],
