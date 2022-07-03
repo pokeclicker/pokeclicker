@@ -82,5 +82,5 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(230, 'Thun
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(240, 'Moon_stone', 40));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(250, 'Ultraball', 6400));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(251, 'Deoxys (defense)'));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(300, 'Trade_stone', 100));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(300, 'Linking_cord', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(386, 'Deoxys (speed)'));
