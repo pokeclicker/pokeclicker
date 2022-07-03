@@ -199,7 +199,7 @@ class DungeonRunner {
         DungeonBattle.generateNewBoss();
     }
 
-    public static async dungeonLeave(shouldConfirm = true): Promise<void> {
+    public static async dungeonLeave(shouldConfirm = Settings.getSetting('confirmLeaveDungeon').observableValue()): Promise<void> {
         if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.entrance || DungeonRunner.dungeonFinished() || !DungeonRunner.map.playerMoved()) {
             return;
         }
