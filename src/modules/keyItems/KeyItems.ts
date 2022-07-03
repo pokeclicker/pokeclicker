@@ -6,7 +6,6 @@ import { Feature } from '../DataStore/common/Feature';
 import {
     getDungeonIndex, Region, ROUTE_KILLS_NEEDED, Starter, Pokerus,
 } from '../GameConstants';
-import { getDungeonIndex, Region, ROUTE_KILLS_NEEDED } from '../GameConstants';
 import LevelableKeyItem, { KeyItemLevel } from './LevelableKeyItem';
 
 export default class KeyItems implements Feature {
