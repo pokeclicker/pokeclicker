@@ -40,6 +40,7 @@ class Breeding implements Feature {
         BreedingFilters.type2.value(Settings.getSetting('breedingTypeFilter2').value);
         BreedingFilters.shinyStatus.value(Settings.getSetting('breedingShinyFilter').value);
         BreedingController.displayValue(Settings.getSetting('breedingDisplayFilter').value);
+        BreedingController.regionalAttackDebuff(+Settings.getSetting('breedingRegionalAttackDebuffSetting').value);
     }
 
     initialize(): void {
