@@ -65,7 +65,13 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.breedingEfficiencyCurrentRegion]: {
         text: 'Breeding Efficiency (Current region)',
-        getValue: (p) => ((((pokemonMap[p.name].nativeRegion !== player.region && App.game.challenges.list.regionalAttackDebuff.active()) ? App.game.party.getRegionAttackMultiplier() : 1) * (p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed())) / pokemonMap[p.name].eggCycles),
+        getValue: (p) => (
+            (
+                ((pokemonMap[p.name].nativeRegion !== player.region && App.game.challenges.list.regionalAttackDebuff.active()) ? App.game.party.getRegionAttackMultiplier() : 1)
+                * (p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed())
+            )
+            / pokemonMap[p.name].eggCycles
+        ),
     },
 
     [SortOptions.eggCycles]: {
