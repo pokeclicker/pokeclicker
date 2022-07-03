@@ -68,11 +68,11 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
-                    ItemList['Water_egg'],
+                    ItemList.Water_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
-                    ItemList['Water_stone'],
+                    ItemList.Water_stone,
                     1),
             ]
         );
@@ -80,11 +80,11 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Electric_egg'],
+                    ItemList.Electric_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Thunder_stone'],
+                    ItemList.Thunder_stone,
                     1),
             ]
         );
@@ -92,7 +92,7 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
-                    ItemList['Grass_egg'],
+                    ItemList.Grass_egg,
                     1),
             ]
         );
@@ -103,18 +103,18 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
-                    ItemList['Fighting_egg'],
+                    ItemList.Fighting_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
-                    ItemList['Leaf_stone'],
+                    ItemList.Leaf_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
-                    ItemList['Moon_stone'],
+                    ItemList.Moon_stone,
                     1),
             ]
         );
@@ -127,14 +127,14 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 25},
                         {shardTypeString: 'Blue Shard', amount: 25},
                     ],
-                    ItemList['Dragon_egg'],
+                    ItemList.Dragon_egg,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Yellow Shard', amount: 50},
                     ],
-                    ItemList['Trade_stone'],
+                    ItemList.Trade_stone,
                     1),
             ]
         );
@@ -142,11 +142,11 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
-                    ItemList['Fire_egg'],
+                    ItemList.Fire_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
-                    ItemList['Fire_stone'],
+                    ItemList.Fire_stone,
                     1),
             ]
         );
@@ -157,18 +157,18 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
-                    ItemList['Grass_egg'],
+                    ItemList.Grass_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
-                    ItemList['Leaf_stone'],
+                    ItemList.Leaf_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Kings_rock'],
+                    ItemList.Kings_rock,
                     1),
             ]
         );
@@ -176,18 +176,18 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
-                    ItemList['Fire_egg'],
+                    ItemList.Fire_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
-                    ItemList['Fire_stone'],
+                    ItemList.Fire_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Soothe_bell'],
+                    ItemList.Soothe_bell,
                     1),
             ]
         );
@@ -195,26 +195,26 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
-                    ItemList['Water_egg'],
+                    ItemList.Water_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Electric_egg'],
+                    ItemList.Electric_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
-                    ItemList['Water_stone'],
+                    ItemList.Water_stone,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Thunder_stone'],
+                    ItemList.Thunder_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Metal_coat'],
+                    ItemList.Metal_coat,
                     1),
             ]
         );
@@ -225,21 +225,21 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
-                    ItemList['Fighting_egg'],
+                    ItemList.Fighting_egg,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
-                    ItemList['Moon_stone'],
+                    ItemList.Moon_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Sun_stone'],
+                    ItemList.Sun_stone,
                     1),
             ]
         );
@@ -250,14 +250,14 @@ class ShardDeal {
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Yellow Shard', amount: 50},
                     ],
-                    ItemList['Trade_stone'],
+                    ItemList.Trade_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Purple Shard', amount: 75},
                     ],
-                    ItemList['Upgrade'],
+                    ItemList.Upgrade,
                     1),
             ]
         );
@@ -270,14 +270,14 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 25},
                         {shardTypeString: 'Blue Shard', amount: 25},
                     ],
-                    ItemList['Dragon_egg'],
+                    ItemList.Dragon_egg,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Purple Shard', amount: 75},
                     ],
-                    ItemList['Dragon_scale'],
+                    ItemList.Dragon_scale,
                     1),
             ]
         );
@@ -291,7 +291,7 @@ class ShardDeal {
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Kings_rock'],
+                    ItemList.Kings_rock,
                     1),
             ]
         );
@@ -302,7 +302,7 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
-                    ItemList['Fighting_egg'],
+                    ItemList.Fighting_egg,
                     1),
             ]
         );
@@ -310,14 +310,14 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
-                    ItemList['Water_egg'],
+                    ItemList.Water_egg,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Yellow Shard', amount: 50},
                     ],
-                    ItemList['Trade_stone'],
+                    ItemList.Trade_stone,
                     1),
             ]
         );
@@ -325,18 +325,18 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Electric_egg'],
+                    ItemList.Electric_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Thunder_stone'],
+                    ItemList.Thunder_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Metal_coat'],
+                    ItemList.Metal_coat,
                     1),
             ]
         );
@@ -344,18 +344,18 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
-                    ItemList['Grass_egg'],
+                    ItemList.Grass_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Thunder_stone'],
+                    ItemList.Thunder_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Soothe_bell'],
+                    ItemList.Soothe_bell,
                     1),
             ]
         );
@@ -363,11 +363,11 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
-                    ItemList['Fire_egg'],
+                    ItemList.Fire_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
-                    ItemList['Fire_stone'],
+                    ItemList.Fire_stone,
                     1),
             ]
         );
@@ -378,14 +378,14 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
-                    ItemList['Moon_stone'],
+                    ItemList.Moon_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Sun_stone'],
+                    ItemList.Sun_stone,
                     1),
             ]
         );
@@ -393,7 +393,7 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
-                    ItemList['Leaf_stone'],
+                    ItemList.Leaf_stone,
                     1),
             ]
         );
@@ -404,14 +404,14 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Purple Shard', amount: 75},
                     ],
-                    ItemList['Upgrade'],
+                    ItemList.Upgrade,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Prism_scale'],
+                    ItemList.Prism_scale,
                     1),
             ]
         );
@@ -422,14 +422,14 @@ class ShardDeal {
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Deepsea_tooth'],
+                    ItemList.Deepsea_tooth,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Deepsea_scale'],
+                    ItemList.Deepsea_scale,
                     1),
             ]
         );
@@ -437,7 +437,7 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
-                    ItemList['Water_egg'],
+                    ItemList.Water_egg,
                     1),
             ]
         );
@@ -450,14 +450,14 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 25},
                         {shardTypeString: 'Blue Shard', amount: 25},
                     ],
-                    ItemList['Dragon_egg'],
+                    ItemList.Dragon_egg,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Purple Shard', amount: 75},
                     ],
-                    ItemList['Dragon_scale'],
+                    ItemList.Dragon_scale,
                     1),
             ]
         );
@@ -471,14 +471,14 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
-                    ItemList['Moon_stone'],
+                    ItemList.Moon_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Sun_stone'],
+                    ItemList.Sun_stone,
                     1),
             ]
         );
@@ -489,14 +489,14 @@ class ShardDeal {
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Yellow Shard', amount: 50},
                     ],
-                    ItemList['Trade_stone'],
+                    ItemList.Trade_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Kings_rock'],
+                    ItemList.Kings_rock,
                     1),
             ]
         );
@@ -504,11 +504,11 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
-                    ItemList['Grass_egg'],
+                    ItemList.Grass_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
-                    ItemList['Leaf_stone'],
+                    ItemList.Leaf_stone,
                     1),
             ]
         );
@@ -516,18 +516,18 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
-                    ItemList['Fire_egg'],
+                    ItemList.Fire_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
-                    ItemList['Fire_stone'],
+                    ItemList.Fire_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Soothe_bell'],
+                    ItemList.Soothe_bell,
                     1),
             ]
         );
@@ -538,21 +538,21 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Crimson Shard', amount: 75},
                     ],
-                    ItemList['Shiny_stone'],
+                    ItemList.Shiny_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Crimson Shard', amount: 75},
                     ],
-                    ItemList['Dusk_stone'],
+                    ItemList.Dusk_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Crimson Shard', amount: 75},
                     ],
-                    ItemList['Dawn_stone'],
+                    ItemList.Dawn_stone,
                     1),
             ]
         );
@@ -560,18 +560,18 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
-                    ItemList['Water_egg'],
+                    ItemList.Water_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
-                    ItemList['Water_stone'],
+                    ItemList.Water_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Prism_scale'],
+                    ItemList.Prism_scale,
                     1),
             ]
         );
@@ -584,14 +584,14 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 25},
                         {shardTypeString: 'Blue Shard', amount: 25},
                     ],
-                    ItemList['Dragon_egg'],
+                    ItemList.Dragon_egg,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Purple Shard', amount: 75},
                     ],
-                    ItemList['Dragon_scale'],
+                    ItemList.Dragon_scale,
                     1),
             ]
         );
@@ -602,14 +602,14 @@ class ShardDeal {
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Lime Shard', amount: 75},
                     ],
-                    ItemList['Razor_claw'],
+                    ItemList.Razor_claw,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Lime Shard', amount: 75},
                     ],
-                    ItemList['Razor_fang'],
+                    ItemList.Razor_fang,
                     1),
             ]
         );
@@ -620,14 +620,14 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
-                    ItemList['Fighting_egg'],
+                    ItemList.Fighting_egg,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Metal_coat'],
+                    ItemList.Metal_coat,
                     1),
             ]
         );
@@ -638,7 +638,7 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Purple Shard', amount: 75},
                     ],
-                    ItemList['Upgrade'],
+                    ItemList.Upgrade,
                     1),
             ]
         );
@@ -646,25 +646,25 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Electric_egg'],
+                    ItemListElectric_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Thunder_stone'],
+                    ItemList.Thunder_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Deepsea_tooth'],
+                    ItemList.Deepsea_tooth,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Deepsea_scale'],
+                    ItemList.Deepsea_scale,
                     1),
             ]
         );
@@ -675,14 +675,14 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'White Shard', amount: 75},
                     ],
-                    ItemList['Electirizer'],
+                    ItemList.Electirizer,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'White Shard', amount: 75},
                     ],
-                    ItemList['Magmarizer'],
+                    ItemList.Magmarizer,
                     1),
             ]
         );
@@ -693,21 +693,21 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Protector'],
+                    ItemList.Protector,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Dubious_disc'],
+                    ItemList.Dubious_disc,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Reaper_cloth'],
+                    ItemList.Reaper_cloth,
                     1),
             ]
         );
@@ -718,21 +718,21 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
-                    ItemList['Water_egg'],
+                    ItemList.Water_egg,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Yellow Shard', amount: 50},
                     ],
-                    ItemList['Trade_stone'],
+                    ItemList.Trade_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Kings_rock'],
+                    ItemList.Kings_rock,
                     1),
             ]
         );
@@ -740,18 +740,18 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
-                    ItemList['Grass_egg'],
+                    ItemList.Grass_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Electric_egg'],
+                    ItemList.Electric_egg,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Metal_coat'],
+                    ItemList.Metal_coat,
                     1),
             ]
         );
@@ -762,14 +762,14 @@ class ShardDeal {
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Lime Shard', amount: 75},
                     ],
-                    ItemList['Razor_claw'],
+                    ItemList.Razor_claw,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Lime Shard', amount: 75},
                     ],
-                    ItemList['Razor_fang'],
+                    ItemList.Razor_fang,
                     1),
             ]
         );
@@ -777,14 +777,14 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Thunder_stone'],
+                    ItemList.Thunder_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Purple Shard', amount: 75},
                     ],
-                    ItemList['Upgrade'],
+                    ItemList.Upgrade,
                     1),
             ]
         );
@@ -792,7 +792,7 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
-                    ItemList['Fire_egg'],
+                    ItemList.Fire_egg,
                     1),
             ]
         );
@@ -803,14 +803,14 @@ class ShardDeal {
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Deepsea_tooth'],
+                    ItemList.Deepsea_tooth,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Deepsea_scale'],
+                    ItemList.Deepsea_scale,
                     1),
             ]
         );
@@ -821,7 +821,7 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
-                    ItemList['Fighting_egg'],
+                    ItemList.Fighting_egg,
                     1),
             ]
         );
@@ -834,14 +834,14 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 25},
                         {shardTypeString: 'Blue Shard', amount: 25},
                     ],
-                    ItemList['Dragon_egg'],
+                    ItemList.Dragon_egg,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Purple Shard', amount: 75},
                     ],
-                    ItemList['Dragon_scale'],
+                    ItemList.Dragon_scale,
                     1),
             ]
         );
@@ -852,7 +852,7 @@ class ShardDeal {
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Prism_scale'],
+                    ItemList.Prism_scale,
                     1),
             ]
         );
@@ -863,21 +863,21 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Protector'],
+                    ItemList.Protector,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Dubious_disc'],
+                    ItemList.Dubious_disc,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Reaper_cloth'],
+                    ItemList.Reaper_cloth,
                     1),
             ]
         );
@@ -888,14 +888,14 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
-                    ItemList['Moon_stone'],
+                    ItemList.Moon_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Sun_stone'],
+                    ItemList.Sun_stone,
                     1),
             ]
         );
@@ -906,7 +906,7 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Soothe_bell'],
+                    ItemList.Soothe_bell,
                     1),
             ]
         );
@@ -914,15 +914,15 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
-                    ItemList['Leaf_stone'],
+                    ItemList.Leaf_stone,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
-                    ItemList['Fire_stone'],
+                    ItemList.Fire_stone,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
-                    ItemList['Water_stone'],
+                    ItemList.Water_stone,
                     1),
             ]
         );
@@ -933,21 +933,21 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Crimson Shard', amount: 75},
                     ],
-                    ItemList['Shiny_stone'],
+                    ItemList.Shiny_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Crimson Shard', amount: 75},
                     ],
-                    ItemList['Dusk_stone'],
+                    ItemList.Dusk_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Crimson Shard', amount: 75},
                     ],
-                    ItemList['Dawn_stone'],
+                    ItemList.Dawn_stone,
                     1),
             ]
         );
@@ -958,14 +958,14 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'White Shard', amount: 75},
                     ],
-                    ItemList['Electirizer'],
+                    ItemList.Electirizer,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'White Shard', amount: 75},
                     ],
-                    ItemList['Magmarizer'],
+                    ItemList.Magmarizer,
                     1),
             ]
         );
@@ -976,11 +976,11 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Electric_egg'],
+                    ItemList.Electric_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Thunder_stone'],
+                    ItemList.Thunder_stone,
                     1),
             ]
         );
@@ -988,11 +988,11 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
-                    ItemList['Water_egg'],
+                    ItemList.Water_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
-                    ItemList['Water_stone'],
+                    ItemList.Water_stone,
                     1),
             ]
         );
@@ -1003,14 +1003,14 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Purple Shard', amount: 75},
                     ],
-                    ItemList['Upgrade'],
+                    ItemList.Upgrade,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Prism_scale'],
+                    ItemList.Prism_scale,
                     1),
             ]
         );
@@ -1018,18 +1018,18 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
-                    ItemList['Fire_egg'],
+                    ItemList.Fire_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
-                    ItemList['Fire_stone'],
+                    ItemList.Fire_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Kings_rock'],
+                    ItemList.Kings_rock,
                     1),
             ]
         );
@@ -1040,21 +1040,21 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
-                    ItemList['Fighting_egg'],
+                    ItemList.Fighting_egg,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Yellow Shard', amount: 50},
                     ],
-                    ItemList['Trade_stone'],
+                    ItemList.Trade_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Metal_coat'],
+                    ItemList.Metal_coat,
                     1),
             ]
         );
@@ -1062,25 +1062,25 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
-                    ItemList['Grass_egg'],
+                    ItemList.Grass_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
-                    ItemList['Leaf_stone'],
+                    ItemList.Leaf_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'White Shard', amount: 75},
                     ],
-                    ItemList['Electirizer'],
+                    ItemList.Electirizer,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'White Shard', amount: 75},
                     ],
-                    ItemList['Magmarizer'],
+                    ItemList.Magmarizer,
                     1),
             ]
         );
@@ -1091,28 +1091,28 @@ class ShardDeal {
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Deepsea_tooth'],
+                    ItemList.Deepsea_tooth,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Deepsea_scale'],
+                    ItemList.Deepsea_scale,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Pink Shard', amount: 75},
                     ],
-                    ItemList['Sachet'],
+                    ItemList.Sachet,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Pink Shard', amount: 75},
                     ],
-                    ItemList['Whipped_dream'],
+                    ItemList.Whipped_dream,
                     1),
             ]
         );
@@ -1123,21 +1123,21 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Crimson Shard', amount: 75},
                     ],
-                    ItemList['Shiny_stone'],
+                    ItemList.Shiny_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Crimson Shard', amount: 75},
                     ],
-                    ItemList['Dusk_stone'],
+                    ItemList.Dusk_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Crimson Shard', amount: 75},
                     ],
-                    ItemList['Dawn_stone'],
+                    ItemList.Dawn_stone,
                     1),
             ]
         );
@@ -1148,28 +1148,28 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
-                    ItemList['Moon_stone'],
+                    ItemList.Moon_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Sun_stone'],
+                    ItemList.Sun_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Lime Shard', amount: 75},
                     ],
-                    ItemList['Razor_claw'],
+                    ItemList.Razor_claw,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Lime Shard', amount: 75},
                     ],
-                    ItemList['Razor_fang'],
+                    ItemList.Razor_fang,
                     1),
             ]
         );
@@ -1182,14 +1182,14 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 25},
                         {shardTypeString: 'Blue Shard', amount: 25},
                     ],
-                    ItemList['Dragon_egg'],
+                    ItemList.Dragon_egg,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Purple Shard', amount: 75},
                     ],
-                    ItemList['Dragon_scale'],
+                    ItemList.Dragon_scale,
                     1),
             ]
         );
@@ -1200,21 +1200,21 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Protector'],
+                    ItemList.Protector,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Dubious_disc'],
+                    ItemList.Dubious_disc,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Reaper_cloth'],
+                    ItemList.Reaper_cloth,
                     1),
             ]
         );
@@ -1228,21 +1228,21 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Crimson Shard', amount: 75},
                     ],
-                    ItemList['Shiny_stone'],
+                    ItemList.Shiny_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Crimson Shard', amount: 75},
                     ],
-                    ItemList['Dusk_stone'],
+                    ItemList.Dusk_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Crimson Shard', amount: 75},
                     ],
-                    ItemList['Dawn_stone'],
+                    ItemList.Dawn_stone,
                     1),
             ]
         );
@@ -1250,21 +1250,21 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
-                    ItemList['Water_stone'],
+                    ItemList.Water_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Kings_rock'],
+                    ItemList.Kings_rock,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Metal_coat'],
+                    ItemList.Metal_coat,
                     1),
             ]
         );
@@ -1272,15 +1272,15 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
-                    ItemList['Grass_egg'],
+                    ItemList.Grass_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
-                    ItemList['Fire_egg'],
+                    ItemList.Fire_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
-                    ItemList['Water_egg'],
+                    ItemList.Water_egg,
                     1),
             ]
         );
@@ -1288,43 +1288,21 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
-                    ItemList['Fire_stone'],
+                    ItemList.Fire_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Yellow Shard', amount: 50},
                     ],
-                    ItemList['Trade_stone'],
+                    ItemList.Trade_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Soothe_bell'],
-                    1),
-            ]
-        );
-        ShardDeal.list[GameConstants.ShardTraderLocations['Konikoni City']] = ko.observableArray(
-            [
-                new ShardDeal(
-                    [{shardTypeString: 'Red Shard', amount: 100}],
-                    ItemList['Fire_stone'],
-                    1),
-                new ShardDeal(
-                    [
-                        {shardTypeString: 'Red Shard', amount: 50},
-                        {shardTypeString: 'Yellow Shard', amount: 50},
-                    ],
-                    ItemList['Trade_stone'],
-                    1),
-                new ShardDeal(
-                    [
-                        {shardTypeString: 'Green Shard', amount: 50},
-                        {shardTypeString: 'Grey Shard', amount: 75},
-                    ],
-                    ItemList['Soothe_bell'],
+                    ItemList.Soothe_bell,
                     1),
             ]
         );
@@ -1335,7 +1313,7 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Purple Shard', amount: 75},
                     ],
-                    ItemList['Upgrade'],
+                    ItemList.Upgrade,
                     1),
             ]
         );
@@ -1343,25 +1321,25 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Electric_egg'],
+                    ItemList.Electric_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],
-                    ItemList['Thunder_stone'],
+                    ItemList.Thunder_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'White Shard', amount: 75},
                     ],
-                    ItemList['Electirizer'],
+                    ItemList.Electirizer,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'White Shard', amount: 75},
                     ],
-                    ItemList['Magmarizer'],
+                    ItemList.Magmarizer,
                     1),
             ]
         );
@@ -1372,21 +1350,21 @@ class ShardDeal {
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Lime Shard', amount: 75},
                     ],
-                    ItemList['Razor_claw'],
+                    ItemList.Razor_claw,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Lime Shard', amount: 75},
                     ],
-                    ItemList['Razor_fang'],
+                    ItemList.Razor_fang,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Cyan Shard', amount: 75},
                     ],
-                    ItemList['Ice_stone'],
+                    ItemList.Ice_stone,
                     1),
             ]
         );
@@ -1397,42 +1375,42 @@ class ShardDeal {
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
-                    ItemList['Fighting_egg'],
+                    ItemList.Fighting_egg,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Deepsea_tooth'],
+                    ItemList.Deepsea_tooth,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Deepsea_scale'],
+                    ItemList.Deepsea_scale,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Ochre Shard', amount: 75},
                     ],
-                    ItemList['Prism_scale'],
+                    ItemList.Prism_scale,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Pink Shard', amount: 75},
                     ],
-                    ItemList['Sachet'],
+                    ItemList.Sachet,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Pink Shard', amount: 75},
                     ],
-                    ItemList['Whipped_dream'],
+                    ItemList.Whipped_dream,
                     1),
             ]
         );
@@ -1445,39 +1423,39 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 25},
                         {shardTypeString: 'Blue Shard', amount: 25},
                     ],
-                    ItemList['Dragon_egg'],
+                    ItemList.Dragon_egg,
                     1),
                 new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
-                    ItemList['Leaf_stone'],
+                    ItemList.Leaf_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Purple Shard', amount: 75},
                     ],
-                    ItemList['Dragon_scale'],
+                    ItemList.Dragon_scale,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Protector'],
+                    ItemList.Protector,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Yellow Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Dubious_disc'],
+                    ItemList.Dubious_disc,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Blue Shard', amount: 50},
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
-                    ItemList['Reaper_cloth'],
+                    ItemList.Reaper_cloth,
                     1),
             ]
         );
@@ -1488,14 +1466,14 @@ class ShardDeal {
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
-                    ItemList['Moon_stone'],
+                    ItemList.Moon_stone,
                     1),
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Grey Shard', amount: 75},
                     ],
-                    ItemList['Sun_stone'],
+                    ItemList.Sun_stone,
                     1),
             ]
         );
