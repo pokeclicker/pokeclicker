@@ -842,6 +842,11 @@ class Update implements Saveable {
                 delete settingsData['notification.dungeon_item_found'];
                 delete settingsData['notification.dungeon_item_found.desktop'];
             }
+
+            // Moved EVs from statistics
+            saveData.party.caughtPokemon.forEach(p => {
+                p[9] = saveData.statistics.effortPoints[p.id];
+            });
         },
     };
 
