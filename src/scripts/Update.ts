@@ -166,32 +166,6 @@ class Update implements Saveable {
             }, {});
             saveData.statistics.routeKills = result;
 
-            // Migrate the achievements so we don't spam players with notifications
-            const renamedAchievements = Object.entries(playerData.achievementsCompleted)
-                .map(([name, isCompleted]) => {
-                    const matchRoute = name.match(/^Route (\d+) (?:traveler|explorer|conqueror)/);
-                    // If the name doesn't match a route, return the old key-value pair
-                    if (matchRoute === null) {
-                        return [name, isCompleted];
-                    }
-                    const routeNumber = matchRoute ? Number(matchRoute[1]) : null;
-                    if (Number.isNaN(routeNumber)) {
-                        console.trace('[Update] Could not map region into achievement name:', name);
-                        return [name, isCompleted];
-                    }
-                    // Look up the region for the route, and rename the achievement
-                    const [region] = Object.entries(regionRoutes).find(([, check]) => (
-                        // Find the region that contains this index
-                        check[0] <= routeNumber && routeNumber <= check[1]
-                    )) || ['none'];
-                    if (region === 'none') {
-                        console.trace('[Update] Could not map region into achievement name:', name);
-                        return [name, isCompleted];
-                    }
-                    return [`${GameConstants.camelCaseToString(region)} ${name}`, isCompleted];
-                });
-            playerData.achievementsCompleted = Object.fromEntries(renamedAchievements);
-
             // Refund any shards spent on shard upgrades that have no effect
             // Using magic number incase any of these values change in the future
             const invalidUpgrades = {
@@ -270,10 +244,10 @@ class Update implements Saveable {
             if (this.minUpdateVersion('0.6.0', saveData)) {
                 if (saveData.oakItems.purchaseList) {
                     if (saveData.oakItems.purchaseList[OakItemType.Squirtbottle]) {
-                        saveData.oakItems[OakItemType[OakItemType.Squirtbottle]]['purchased'] = true;
+                        saveData.oakItems[OakItemType[OakItemType.Squirtbottle]].purchased = true;
                     }
                     if (saveData.oakItems.purchaseList[OakItemType.Sprinklotad]) {
-                        saveData.oakItems[OakItemType[OakItemType.Sprinklotad]]['purchased'] = true;
+                        saveData.oakItems[OakItemType[OakItemType.Sprinklotad]].purchased = true;
                     }
                 }
             }
@@ -441,16 +415,6 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 72);
             // Add Plasma Frigate
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 74);
-
-            // Update achievement names
-            Update.updateAchievementName(playerData, 'These pokémon must be sick', 'These Pokémon must be sick');
-            Update.updateAchievementName(playerData, 'The earth is like unions', 'The earth is like onions');
-        },
-
-        '0.8.2': ({ playerData, saveData }) => {
-            // Update achievement names
-            Update.updateAchievementName(playerData, 'Doomsday Bunker stocked with Pokeballs!', 'Doomsday Bunker stocked with Pokéballs!');
-            Update.updateAchievementName(playerData, 'Prepared for anything!', 'Professor Oak is the best!');
         },
 
         '0.8.3': ({ playerData, saveData }) => {
@@ -505,7 +469,7 @@ class Update implements Saveable {
                 [240, '40 x Moon Stone'],
                 [250, '6400 x Ultraball'],
                 [251, 'Deoxys (defense)'],
-                [300, '100 x Trade Stone'],
+                [300, '100 x Linking Cord'],
                 [386, 'Deoxys (speed)'],
             ];
             const highestStageCompleted = saveData.statistics?.battleFrontierHighestStageCompleted || 0;
@@ -576,7 +540,7 @@ class Update implements Saveable {
         '0.8.14': ({ playerData, saveData }) => {
             // Start Aqua Magma questline if player has Dynamo Badge already
             if (saveData.badgeCase[29]) {
-                saveData.quests.questLines.push({state: 1, name: 'Land vs Water', quest: 0});
+                saveData.quests.questLines.push({state: 1, name: 'Land vs. Water', quest: 0});
             }
 
             // Just incase statistics is not set
@@ -622,11 +586,11 @@ class Update implements Saveable {
                 gemUpgrades: saveData.shards.shardUpgrades || [],
             };
 
-            delete saveData.keyItems['Shard_case'];
+            delete saveData.keyItems.Shard_case;
 
             // Swapping Shard Case for Gem Case
             if (saveData.badgeCase[8]) {
-                saveData.keyItems['Gem_case'] = true;
+                saveData.keyItems.Gem_case = true;
             }
 
             // Just incase statistics is not set
@@ -700,6 +664,7 @@ class Update implements Saveable {
                 delete saveData.statistics.shinyPokemonHatched[oldID];
             });
 
+
             playerData.mineInventory = playerData.mineInventory?.map(i => {
                 i.sellLocked = false;
                 return i;
@@ -724,6 +689,159 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 57, 59);
             // Add Sendoff Spring
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
+        },
+        '0.9.4': ({ playerData, saveData }) => {
+            // Modifications relating to smaller save file sizes
+            const PartyKeyMap = {
+                'attackBonusPercent': 0,
+                'attackBonusAmount': 1,
+                'proteinsUsed': 2,
+                'exp': 3,
+                'breeding': 4,
+                'shiny': 5,
+                'category': 6,
+                'levelEvolutionTriggered': 7,
+            };
+            Object.entries(PartyKeyMap).forEach(([oldKey, newKey]) => {
+                saveData.party.caughtPokemon.forEach(p => {
+                    p[newKey] = p[oldKey];
+                    delete p[oldKey];
+                });
+            });
+            saveData.farming.mutations = saveData.farming.mutations.map(m => m.hintsSeen || m.hintSeen);
+
+            // Change Ultra Wormhole to a Temporary Battle
+            saveData.statistics.temporaryBattleDefeated = new Array<number>();
+            saveData.statistics.temporaryBattleDefeated[0] = saveData.statistics.gymsDefeated[84];
+            // Remove the Elite_Nihilego Gym, now a temporary battle instead of a gym
+            saveData.statistics.gymsDefeated.splice(84, 1);
+            saveData.badgeCase.splice(84, 1);
+            // Change Ultra Megalopolis to a Temporary Battle
+            saveData.statistics.temporaryBattleDefeated[1] = saveData.statistics.gymsDefeated[88];
+            // Remove the Elite_ULtraNecrozma Gym, now a temporary battle instead of a gym
+            saveData.statistics.gymsDefeated.splice(88, 1);
+            saveData.badgeCase.splice(88, 1);
+        },
+
+        '0.9.6': ({ playerData, saveData }) => {
+            // Set our last save reminder/download to our current in game time
+            // This way we won't get a reminder notification for at least 12 hours
+            saveData.saveReminder = {
+                lastReminder: saveData.statistics.secondsPlayed,
+                lastDownloaded: saveData.statistics.secondsPlayed,
+            };
+
+            // Start Mina's Trial questline if player has cleared Ultra Necrozma already
+            if (saveData.statistics.temporaryBattleDefeated[1]) {
+                saveData.quests.questLines.push({state: 1, name: 'Mina\'s Trial', quest: 0});
+            }
+
+            // Add Rocket Game Corner
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 4);
+            // Add Silph Co.
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 6);
+            // Start Team Rocket Kanto questline if player has Cascade Badge already
+            if (saveData.badgeCase[2]) {
+                saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
+            }
+
+            // Rename Land vs. Water questline, so QuestLineCompletedRequirement will work
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'Land vs Water') {
+                    v.name = 'Land vs. Water';
+                }
+            });
+
+            // Add AZ TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
+
+            //Replace Poison Barb with Rocky Helmet
+            saveData.oakItems.Rocky_Helmet = saveData.oakItems.Poison_Barb;
+            delete saveData.oakItems.Poison_Barb;
+
+            // Give the players Dowsing Machines in place of Item Magnets
+            playerData._itemList.Dowsing_machine = playerData._itemList.Item_magnet;
+            playerData.effectList.Dowsing_machine = playerData.effectList.Item_magnet;
+            delete playerData._itemList.Item_magnet;
+            delete playerData.effectList.Item_magnet;
+
+            // Start pokerus
+            setTimeout(async () => {
+                // Check if player wants to activate the new challenge modes
+                if (!await Notifier.confirm({ title: 'Slow EVs', message: 'New challenge mode added: Slow EVs.\n\nDiminishes the rate at which EVs are gained.\n\nThis is an optional challenge and is NOT the recommended way to play.\n\nPlease choose if you would like this challenge mode to be disabled or enabled.\n\nCan be disabled later. Can NOT be enabled later!', confirm: 'Disable', cancel: 'Enable' })) {
+                    App.game.challenges.list.slowEVs.activate();
+                }
+            }, GameConstants.SECOND);
+        },
+
+        '0.9.7': ({ playerData, saveData }) => {
+            // Fix people not getting the pokerus
+            if (saveData.keyItems.Pokerus_virus) {
+                let starter;
+                switch (playerData.starter) {
+                    case 0:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 1);
+                        break;
+                    case 1:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 4);
+                        break;
+                    case 2:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 7);
+                        break;
+                    case 3:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 25);
+                        break;
+                }
+                starter[8] = true;
+            }
+
+            // Add Fighting Dojo TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
+        },
+
+        '0.9.8': ({ playerData, saveData, settingsData }) => {
+            saveData.oakItemLoadouts = saveData.oakItemLoadouts.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
+
+            // Fix pokerus
+            saveData.party.caughtPokemon.forEach(p => {
+                let status = (p[8]) ? 2 : 0;
+                const requiredForCured = saveData.challenges.list.slowEVs ? 5000 : 500;
+                if (saveData.statistics.effortPoints[p.id] >= requiredForCured) {
+                    status = 3;
+                }
+                p[8] = status;
+            });
+
+            // Give the players Linking Cords in place of Trade Stones
+            playerData._itemList.Linking_cord = playerData._itemList.Trade_stone;
+            delete playerData._itemList.Trade_stone;
+
+            // Fix quest default color
+            if (settingsData) {
+                if (settingsData && settingsData['--questAtLocation'] && settingsData['--questAtLocation'] === '#34BF45') {
+                    settingsData['--questAtLocation'] = '#55ff00';
+                }
+                delete settingsData['--currentPlace'];
+            }
+
+            // Add total proteins obtained
+            // Just incase statistics is not set
+            saveData.statistics = saveData.statistics || {};
+            // Set new statistic
+            saveData.statistics = {
+                ...saveData.statistics,
+                totalProteinsPurchased: saveData.statistics.totalProteinsObtained || 0,
+            };
+
+            // Split dungeon loot notification into two
+            if (settingsData) {
+                settingsData['notification.common_dungeon_item_found'] = settingsData['notification.dungeon_item_found'] ?? true;
+                settingsData['notification.common_dungeon_item_found.desktop'] = settingsData['notification.dungeon_item_found.desktop'] ?? false;
+                settingsData['notification.rare_dungeon_item_found'] = settingsData['notification.dungeon_item_found'] ?? true;
+                settingsData['notification.rare_dungeon_item_found.desktop'] = settingsData['notification.dungeon_item_found.desktop'] ?? false;
+                delete settingsData['notification.dungeon_item_found'];
+                delete settingsData['notification.dungeon_item_found.desktop'];
+            }
         },
     };
 
@@ -933,14 +1051,6 @@ class Update implements Saveable {
         const end = arr.splice(to);
         arr = [...arr, ...temp, ...end];
         return arr;
-    }
-
-    static updateAchievementName = (playerData, oldName, newName) => {
-        const val = playerData.achievementsCompleted[oldName];
-        if (val != undefined) {
-            playerData.achievementsCompleted[newName] = val;
-            delete playerData.achievementsCompleted[oldName];
-        }
     }
 
     static addPokemonToSaveData = (saveData, pokemonId) => {

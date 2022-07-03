@@ -40,7 +40,7 @@
                             tooltip: {
                               title: ItemList[$data].displayName + '<br/>' + ItemList[$data].description,
                               trigger: 'hover',
-                              placement:'bottom',
+                              placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
                               html: true
                             }">
                 <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
@@ -62,7 +62,7 @@
       <span>Flutes</span>
     </div>
     <div id="fluteItemContainerBody" class="card-body p-0 show">
-      <p data-bind="visible: App.game.challenges.list.disableBattleItems.active() || App.game.challenges.list.disableGems.active()" class="bg-danger my-0">
+      <p data-bind="visible: (App.game.challenges.list.disableBattleItems.active() || App.game.challenges.list.disableGems.active()) && App.game.badgeCase.hasBadge(BadgeEnums.Heat)" class="bg-danger my-0">
           Flutes are disabled.
       </p>
       <!-- Flutes -->
@@ -87,7 +87,7 @@
                             tooltip: {
                               title: ItemList[$data].displayName + '<br/>' + ItemList[$data].getDescription() + '<br/>' + 'Consumes: ' + ItemList[$data].gemTypes[0] + ', ' + ItemList[$data].gemTypes[1] + ', and ' + ItemList[$data].gemTypes[2] + ' Gems',
                               trigger: 'hover',
-                              placement:'bottom',
+                              placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
                               html: true
                             }">
                 <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">

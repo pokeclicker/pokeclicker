@@ -56,6 +56,8 @@ class Save {
             element.click();
 
             document.body.removeChild(element);
+
+            App.game.saveReminder.lastDownloaded(App.game.statistics.secondsPlayed());
         } catch (err) {
             console.error('Error trying to download save', err);
             Notifier.notify({
@@ -68,6 +70,16 @@ class Save {
                 localStorage.backupSave = JSON.stringify(backupSaveData);
             } catch (e) {}
         }
+    }
+
+    public static copySaveToClipboard() {
+        const backupSaveData = {player, save: this.getSaveObject(), settings: Settings.toJSON()};
+        navigator.clipboard.writeText(btoa(JSON.stringify(backupSaveData)));
+        Notifier.notify({
+            title: 'Save copied',
+            message: 'Please paste the clipboard contents into a new \'.txt\' file.',
+            type: NotificationConstants.NotificationOption.info,
+        });
     }
 
     public static async delete(): Promise<void> {
@@ -135,7 +147,7 @@ class Save {
                     res[item] = [];
                     res[item][GameConstants.TypeEffectiveness.Immune] = ko.observable(0);
                     res[item][GameConstants.TypeEffectiveness.NotVery] = ko.observable(0);
-                    res[item][GameConstants.TypeEffectiveness.Normal] = ko.observable(0);
+                    res[item][GameConstants.TypeEffectiveness.Neutral] = ko.observable(0);
                     res[item][GameConstants.TypeEffectiveness.Very] = ko.observable(0);
                 }
             }
@@ -155,13 +167,13 @@ class Save {
         return res;
     }
 
-    public static initializeEffectTimer(saved?: Array<string>): { [name: string]: KnockoutObservable<string> } {
+    public static initializeEffectTimer(): { [name: string]: KnockoutObservable<string> } {
         const res = {};
         for (const obj in GameConstants.BattleItemType) {
-            res[obj] = ko.observable(saved ? saved[obj] || '00:00' : '00:00');
+            res[obj] = ko.observable('00:00');
         }
         for (const obj in GameConstants.FluteItemType) {
-            res[obj] = ko.observable(saved ? saved[obj] || '00:00' : '00:00');
+            res[obj] = ko.observable('00:00');
         }
         return res;
     }

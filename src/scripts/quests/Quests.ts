@@ -23,7 +23,7 @@ class Quests implements Saveable {
     });
     public questSlots: KnockoutComputed<number> = ko.pureComputed((): number => {
         // Minimum of 1, Maximum of 4
-        return Math.min(4, Math.max(1, Math.floor(this.level() / 5)));
+        return Math.min(4, Math.max(1, Math.floor((this.level() + 5) / 5)));
     });
 
     // Get current quests by status
@@ -36,8 +36,38 @@ class Quests implements Saveable {
     public incompleteQuests: KnockoutComputed<Array<Quest>> =  ko.pureComputed(() => {
         return this.questList().filter(quest => !quest.isCompleted());
     });
+    public sortedQuestList: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {
+        const list = [...this.questList()];
+        return list.sort(Quests.questCompareBy);
+    });
 
     constructor() {}
+
+    static questCompareBy(quest1, quest2): number {
+        if (Quests.getQuestSortStatus(quest1) < Quests.getQuestSortStatus(quest2)) {
+            return -1;
+        } else if (Quests.getQuestSortStatus(quest1) > Quests.getQuestSortStatus(quest2)) {
+            return 1;
+        } else if (quest1.pointsReward > quest2.pointsReward) {
+            return -1;
+        } else if (quest1.pointsReward < quest2.pointsReward) {
+            return 1;
+        }
+
+        return 0;
+    }
+
+    static getQuestSortStatus(quest): number {
+        if (quest.isCompleted() && !quest.claimed()) {
+            return 0;
+        } else if (quest.isCompleted()) {
+            return 3;
+        } else if (quest.inProgress()) {
+            return 1;
+        }
+
+        return 2;
+    }
 
     /**
      * Gets a quest line by name

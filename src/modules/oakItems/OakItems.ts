@@ -1,3 +1,4 @@
+import { Observable as KnockoutObservable } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
 import OakItemType from '../enums/OakItemType';
 import { Currency } from '../GameConstants';
@@ -17,9 +18,12 @@ export default class OakItems implements Feature {
 
     defaults: Record<string, any>;
 
+    maxLevelOakItems: KnockoutObservable<number>;
+
     constructor(unlockRequirements: number[], private multiplier: Multiplier) {
         this.itemList = [];
         this.unlockRequirements = unlockRequirements;
+        this.maxLevelOakItems = ko.observable(0);
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -31,9 +35,9 @@ export default class OakItems implements Feature {
         this.itemList = [
             new OakItem(OakItemType.Magic_Ball, 'Magic Ball', 'Gives a bonus to your catchrate',
                 true, [5, 6, 7, 8, 9, 10], 0, 20, 2, undefined, undefined, undefined, '%'),
-            new OakItem(OakItemType.Amulet_Coin, 'Amulet Coin', 'Gain more coins from battling',
+            new OakItem(OakItemType.Amulet_Coin, 'Amulet Coin', 'Gain more Pokédollars from battling',
                 true, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 30, 1),
-            new OakItem(OakItemType.Poison_Barb, 'Poison Barb', 'Clicks do more damage',
+            new OakItem(OakItemType.Rocky_Helmet, 'Rocky Helmet', 'Clicks do more damage',
                 true, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 40, 3),
             new OakItem(OakItemType.Exp_Share, 'EXP Share', 'Gain more exp from battling',
                 true, [1.15, 1.18, 1.21, 1.24, 1.27, 1.30], 1, 50, 1),
@@ -55,11 +59,13 @@ export default class OakItems implements Feature {
                 true, [4, 8, 12, 16, 20, 24], 1, 25, undefined, undefined, AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], Currency.money), '%'),
         ];
 
-        this.addMultiplier('clickAttack', OakItemType.Poison_Barb);
+        this.addMultiplier('clickAttack', OakItemType.Rocky_Helmet);
         this.addMultiplier('exp', OakItemType.Exp_Share);
         this.addMultiplier('money', OakItemType.Amulet_Coin);
         this.addMultiplier('shiny', OakItemType.Shiny_Charm);
         this.addMultiplier('eggStep', OakItemType.Blaze_Cassette);
+
+        this.itemList.forEach((i) => i.levelKO.subscribe(() => this.maxLevelOakItems(this.itemList.filter((i2) => i2.isMaxLevel()).length)));
     }
 
     calculateBonus(item: OakItemType, useItem = false): number {
@@ -124,6 +130,8 @@ export default class OakItems implements Feature {
                 this.itemList[OakItemType[oakItem]].fromJSON(json[oakItem]);
             }
         });
+
+        this.maxLevelOakItems(this.itemList.filter((i) => i.isMaxLevel()).length);
     }
 
     toJSON(): Record<string, any> {

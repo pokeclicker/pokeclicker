@@ -11,6 +11,6 @@ export default class BerriesUnlockedRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
-        return `${this.requiredValue} different Berry types need to be unlocked .`;
+        return `${this.requiredValue} different Berry types need to be unlocked.`;
     }
 }

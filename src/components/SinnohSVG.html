@@ -1,5 +1,8 @@
 <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
-    <image width="3200" height="1920" xlink:href="assets/images/sinnoh.png" href="assets/images/sinnoh.png"></image>
+    <image width="3200" height="1920" data-bind="attr: {
+        'xlink:href':'assets/images/sinnoh.png?v=$VERSION',
+        href:'assets/images/sinnoh.png?v=$VERSION'
+    }"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -12,7 +15,6 @@
         , x: 22, y: 102
         })
     %>
-
     <!--Route 201 Extension-->
     <%- include('templates/mapRoute',
         { route: 201, region: 3
@@ -650,6 +652,7 @@
         { name: "Oreburgh City"
         , x: 64, y: 83
         , height: 3, width: 10
+        , isExtension: true
         })
     %>
     <!--Oreburgh City extension-->
@@ -657,6 +660,7 @@
         { name: "Oreburgh City"
         , x: 65, y: 86
         , height: 2, width: 9
+        , isExtension: true
         })
     %>
     <!--Oreburgh City extension-->
@@ -664,6 +668,7 @@
         { name: "Oreburgh City"
         , x: 66, y: 88
         , height: 1, width: 8
+        , isExtension: true
         })
     %>
     <!--Oreburgh City extension-->
@@ -671,6 +676,7 @@
         { name: "Oreburgh City"
         , x: 67, y: 89
         , height: 1, width: 7
+        , isExtension: true
         })
     %>
     <!--Oreburgh City extension-->
@@ -678,6 +684,7 @@
         { name: "Oreburgh City"
         , x: 68, y: 90
         , height: 1, width: 5
+        , isExtension: true
         })
     %>
 
@@ -694,6 +701,7 @@
         { name: "Floaroma Town"
         , x: 41, y: 69
         , height: 3, width: 10
+        , isExtension: true
         })
     %>
 
@@ -709,6 +717,7 @@
         { name: "Eterna City"
         , x: 60, y: 45
         , height: 2, width: 4
+        , isExtension: true
         })
     %>
     <!--Eterna City extension-->
@@ -716,6 +725,7 @@
         { name: "Eterna City"
         , x: 63, y: 44
         , height: 1, width: 1
+        , isExtension: true
         })
     %>
 
@@ -731,6 +741,7 @@
         { name: "Mt. Coronet"
         , x: 80, y: 31
         , height: 26, width: 5
+        , isExtension: true
         })
     %>
     <!--Mt. Coronet extension-->
@@ -738,6 +749,7 @@
         { name: "Mt. Coronet"
         , x: 78, y: 79
         , height: 1, width: 4
+        , isExtension: true
         })
     %>
     <!--Mt. Coronet extension-->
@@ -745,6 +757,7 @@
         { name: "Mt. Coronet"
         , x: 78, y: 55
         , height: 2, width: 2
+        , isExtension: true
         })
     %>
     <!--Mt. Coronet extension-->
@@ -752,6 +765,7 @@
         { name: "Mt. Coronet"
         , x: 79, y: 54
         , height: 1, width: 1
+        , isExtension: true
         })
     %>
     <!--Mt. Coronet extension-->
@@ -759,6 +773,7 @@
         { name: "Mt. Coronet"
         , x: 83, y: 57
         , height: 7, width: 2
+        , isExtension: true
         })
     %>
     <!--Mt. Coronet extension-->
@@ -773,6 +788,7 @@
         { name: "Mt. Coronet"
         , x: 87, y: 55
         , height: 7, width: 1
+        , isExtension: true
         })
     %>
     <!--Mt. Coronet extension-->
@@ -780,6 +796,7 @@
         { name: "Mt. Coronet"
         , x: 88, y: 56
         , height: 5, width: 1
+        , isExtension: true
         })
     %>
     <!--Mt. Coronet extension-->
@@ -787,6 +804,7 @@
         { name: "Mt. Coronet"
         , x: 72, y: 30
         , height: 3, width: 8
+        , isExtension: true
         })
     %>
     <!--Mt. Coronet extension-->
@@ -794,6 +812,7 @@
         { name: "Mt. Coronet"
         , x: 80, y: 30
         , height: 1, width: 3
+        , isExtension: true
         })
     %>
     <!--Mt. Coronet extension-->
@@ -808,6 +827,7 @@
         { name: "Mt. Coronet"
         , x: 78, y: 33
         , height: 3, width: 2
+        , isExtension: true
         })
     %>
     <!--Mt. Coronet extension-->
@@ -815,6 +835,7 @@
         { name: "Mt. Coronet"
         , x: 79, y: 36
         , height: 3, width: 1
+        , isExtension: true
         })
     %>
     <!--Mt. Coronet extension-->
@@ -822,6 +843,7 @@
         { name: "Mt. Coronet"
         , x: 75, y: 29
         , height: 1, width: 4
+        , isExtension: true
         })
     %>
 
@@ -853,6 +875,7 @@
         { name: "Veilstone City"
         , x: 140, y: 58
         , height: 5, width: 7
+        , isExtension: true
         })
     %>
     <!--Veilstone City extension-->
@@ -860,6 +883,7 @@
         { name: "Veilstone City"
         , x: 140, y: 57
         , height: 1, width: 6
+        , isExtension: true
         })
     %>
     <!--Veilstone City extension-->
@@ -867,6 +891,7 @@
         { name: "Veilstone City"
         , x: 141, y: 56
         , height: 1, width: 5
+        , isExtension: true
         })
     %>
 
@@ -882,6 +907,7 @@
         { name: "Pastoria City"
         , x: 117, y: 104
         , height: 1, width: 10
+        , isExtension: true
         })
     %>
     <!--Pastoria City extension-->
@@ -889,6 +915,7 @@
         { name: "Pastoria City"
         , x: 117, y: 105
         , height: 1, width: 8
+        , isExtension: true
         })
     %>
     <!--Pastoria City extension-->
@@ -896,6 +923,7 @@
         { name: "Pastoria City"
         , x: 117, y: 106
         , height: 1, width: 6
+        , isExtension: true
         })
     %>
     <!--Pastoria City extension-->
@@ -903,6 +931,7 @@
         { name: "Pastoria City"
         , x: 117, y: 107
         , height: 1, width: 3
+        , isExtension: true
         })
     %>
 
@@ -918,6 +947,7 @@
         { name: "Celestic Town"
         , x: 95, y: 44.5
         , height: 0.5, width: 5
+        , isExtension: true
         })
     %>
 
@@ -933,6 +963,7 @@
         { name: "Canalave City"
         , x: 6, y: 81.5
         , height: 0.5, width: 4
+        , isExtension: true
         })
     %>
 
@@ -956,6 +987,7 @@
         { name: "Snowpoint City"
         , x: 80, y: 9
         , height: 3, width: 3
+        , isExtension: true
         })
     %>
 
@@ -971,6 +1003,7 @@
         { name: "Sunyshore City"
         , x: 180, y: 83
         , height: 9, width: 3
+        , isExtension: true
         })
     %>
     <!--Sunyshore City extension-->
@@ -978,6 +1011,7 @@
         { name: "Sunyshore City"
         , x: 180, y: 92
         , height: 2, width: 1
+        , isExtension: true
         })
     %>
 
@@ -1018,6 +1052,7 @@
         { name: "Pokémon League Sinnoh"
         , x: 176, y: 56.5
         , width: 3, height: 1.5
+        , isExtension: true
         })
     %>
 
@@ -1077,6 +1112,7 @@
         { name: "Wayward Cave"
         , x: 63, y: 65
         , height: 1, width: 3
+        , isExtension: true
         })
     %>
     <!--Wayward Cave extension-->
@@ -1084,6 +1120,7 @@
         { name: "Wayward Cave"
         , x: 60, y: 59
         , height: 2, width: 4
+        , isExtension: true
         })
     %>
     <!--Wayward Cave extension-->
@@ -1091,6 +1128,17 @@
         { name: "Wayward Cave"
         , x: 64, y: 60
         , height: 1, width: 1
+        , isExtension: true
+        })
+    %>
+
+    <!--Mt. Coronet South-->
+    <%- include('templates/mapDungeon',
+        { name: "Mt. Coronet South"
+        , x: 77, y: 57
+        , height: 22, width: 6
+        , moveToTown: "Mt. Coronet"
+        , invisible: true
         })
     %>
 
@@ -1106,6 +1154,7 @@
         { name: "Solaceon Ruins"
         , x: 126, y: 66
         , height: 3, width: 2
+        , isExtension: true
         })
     %>
 
@@ -1121,6 +1170,7 @@
         { name: "Iron Island"
         , x: 17, y: 47
         , height: 5, width: 2
+        , isExtension: true
         })
     %>
     <!--Iron Island extension-->
@@ -1128,6 +1178,7 @@
         { name: "Iron Island"
         , x: 23, y: 46
         , height: 7, width: 1
+        , isExtension: true
         })
     %>
     <!--Iron Island extension-->
@@ -1135,6 +1186,7 @@
         { name: "Iron Island"
         , x: 24, y: 48
         , height: 4, width: 2
+        , isExtension: true
         })
     %>
     <!--Iron Island extension-->
@@ -1142,6 +1194,7 @@
         { name: "Iron Island"
         , x: 24, y: 47
         , height: 1, width: 1
+        , isExtension: true
         })
     %>
 
@@ -1161,6 +1214,16 @@
         })
     %>
 
+    <!--Mt. Coronet North-->
+    <%- include('templates/mapDungeon',
+        { name: "Mt. Coronet North"
+        , x: 77, y: 57
+        , height: 22, width: 6
+        , moveToTown: "Mt. Coronet"
+        , invisible: true
+        })
+    %>
+
     <!--Lake Acuity-->
     <%- include('templates/mapDungeon',
         { name: "Lake Acuity"
@@ -1174,6 +1237,16 @@
         { name: "Team Galactic HQ"
         , x: 147, y: 53
         , height: 10, width: 6
+        })
+    %>
+
+    <!--Spear Pillar-->
+    <%- include('templates/mapDungeon',
+        { name: "Spear Pillar"
+        , x: 77, y: 57
+        , height: 22, width: 6
+        , moveToTown: "Mt. Coronet"
+        , invisible: true
         })
     %>
 
@@ -1200,6 +1273,7 @@
         { name: "Victory Road Sinnoh"
         , x: 179, y: 57
         , height: 2, width: 5
+        , isExtension: true
         })
     %>
     <!--Victory Road Sinnoh extension-->
@@ -1207,6 +1281,7 @@
         { name: "Victory Road Sinnoh"
         , x: 175, y: 58
         , height: 1, width: 4
+        , isExtension: true
         })
     %>
     <!--Victory Road Sinnoh extension-->
@@ -1214,6 +1289,7 @@
         { name: "Victory Road Sinnoh"
         , x: 173, y: 65
         , height: 3, width: 9
+        , isExtension: true
         })
     %>
     <!--Victory Road Sinnoh extension-->
@@ -1221,6 +1297,7 @@
         { name: "Victory Road Sinnoh"
         , x: 172, y: 65
         , height: 1, width: 1
+        , isExtension: true
         })
     %>
     <!--Victory Road Sinnoh extension-->
@@ -1228,6 +1305,7 @@
         { name: "Victory Road Sinnoh"
         , x: 182, y: 65
         , height: 1, width: 2
+        , isExtension: true
         })
     %>
     <!--Victory Road Sinnoh extension-->
@@ -1235,6 +1313,7 @@
         { name: "Victory Road Sinnoh"
         , x: 182, y: 66
         , height: 1, width: 1
+        , isExtension: true
         })
     %>
     <!--Victory Road Sinnoh extension-->
@@ -1242,6 +1321,7 @@
         { name: "Victory Road Sinnoh"
         , x: 175, y: 68
         , height: 1, width: 5
+        , isExtension: true
         })
     %>
 
@@ -1252,12 +1332,12 @@
         , height: 6, width: 9
         })
     %>
-
     <!--Sendoff Spring extension-->
     <%- include('templates/mapDungeon',
         { name: "Sendoff Spring"
         , x: 149, y: 82
         , height: 3, width: 7
+        , isExtension: true
         })
     %>
 
@@ -1292,6 +1372,7 @@
         { name: "Fullmoon Island"
         , x: 7, y: 7
         , height: 3, width: 9
+        , isExtension: true
         })
     %>
     <!--Fullmoon Island extension-->
@@ -1299,6 +1380,7 @@
         { name: "Fullmoon Island"
         , x: 9, y: 6
         , height: 1, width: 4
+        , isExtension: true
         })
     %>
     <!--Fullmoon Island extension-->
@@ -1306,6 +1388,7 @@
         { name: "Fullmoon Island"
         , x: 5, y: 15
         , height: 3, width: 13
+        , isExtension: true
         })
     %>
     <!--Fullmoon Island extension-->
@@ -1313,6 +1396,7 @@
         { name: "Fullmoon Island"
         , x: 4, y: 11
         , height: 4, width: 2
+        , isExtension: true
         })
     %>
     <!--Fullmoon Island extension-->
@@ -1320,6 +1404,7 @@
         { name: "Fullmoon Island"
         , x: 16, y: 9
         , height: 1, width: 1
+        , isExtension: true
         })
     %>
     <!--Fullmoon Island extension-->
@@ -1327,6 +1412,7 @@
         { name: "Fullmoon Island"
         , x: 18, y: 15
         , height: 1, width: 1
+        , isExtension: true
         })
     %>
     <!--Fullmoon Island extension-->
@@ -1334,6 +1420,7 @@
         { name: "Fullmoon Island"
         , x: 4, y: 15
         , height: 1, width: 1
+        , isExtension: true
         })
     %>
     <!--Fullmoon Island extension-->
@@ -1341,6 +1428,7 @@
         { name: "Fullmoon Island"
         , x: 6, y: 18
         , height: 2, width: 9
+        , isExtension: true
         })
     %>
     <!--Fullmoon Island extension-->
@@ -1348,6 +1436,7 @@
         { name: "Fullmoon Island"
         , x: 15, y: 18
         , height: 1, width: 1
+        , isExtension: true
         })
     %>
     <!--Fullmoon Island extension-->
@@ -1355,6 +1444,7 @@
         { name: "Fullmoon Island"
         , x: 7, y: 20
         , height: 1, width: 8
+        , isExtension: true
         })
     %>
 
@@ -1370,6 +1460,7 @@
         { name: "Newmoon Island"
         , x: 28, y: 13
         , height: 3, width: 1
+        , isExtension: true
         })
     %>
     <!--Newmoon Island extension-->
@@ -1377,6 +1468,7 @@
         { name: "Newmoon Island"
         , x: 34, y: 16
         , height: 2, width: 6
+        , isExtension: true
         })
     %>
     <!--Newmoon Island extension-->
@@ -1384,6 +1476,7 @@
         { name: "Newmoon Island"
         , x: 31, y: 16
         , height: 1, width: 3
+        , isExtension: true
         })
     %>
     <!--Newmoon Island extension-->
@@ -1391,6 +1484,7 @@
         { name: "Newmoon Island"
         , x: 29, y: 11
         , height: 1, width: 13
+        , isExtension: true
         })
     %>
     <!--Newmoon Island extension-->
@@ -1398,6 +1492,7 @@
         { name: "Newmoon Island"
         , x: 31, y: 10
         , height: 1, width: 10
+        , isExtension: true
         })
     %>
     <!--Newmoon Island extension-->
@@ -1405,19 +1500,7 @@
         { name: "Newmoon Island"
         , x: 33, y: 9
         , height: 1, width: 6
-        })
-    %>
-
-    <!--Seabreak Path-->
-    <%- include('templates/mapOverlay',
-        { name: "Seabreak Path"
-        , x: 189, y: 10
-        , width: 3, height: 38
-        , databind: `click: () => {
-            Notifier.notify({message: 'The path to Flower Paradise'});
-            }`
-        , visible:  "App.game.statistics.routeKills[GameConstants.Region.sinnoh][224]() >= 10"
-        , image: "assets/images/map/seabreak_path.png"
+        , isExtension: true
         })
     %>
 
@@ -1430,18 +1513,6 @@
         , image: "assets/images/map/flower_paradise.png"
         })
     %>
-
-    <!--Flower Paradise extension-->
-    <%- include('templates/mapOverlay',
-        { name: "Flower Paradise"
-        , x: 187, y: 1
-        , width: 7, height: 1
-        , databind: "click:function(){MapHelper.moveToTown('Flower Paradise')}, attr:{ class: MapHelper.calculateTownCssClass('Flower Paradise') }"
-        , visible:  "App.game.statistics.routeKills[GameConstants.Region.sinnoh][224]() >= 10"
-        , image: "assets/images/map/transparent.png"
-        })
-    %>
-
     <!--Flower Paradise extension-->
     <%- include('templates/mapOverlay',
         { name: "Flower Paradise"
@@ -1452,7 +1523,17 @@
         , image: "assets/images/map/transparent.png"
         })
     %>
-
+    <!--Flower Paradise extension-->
+    <%- include('templates/mapOverlay',
+        { name: "Flower Paradise"
+        , x: 187, y: 1
+        , width: 7, height: 1
+        , databind: "click:function(){MapHelper.moveToTown('Flower Paradise')}, attr:{ class: MapHelper.calculateTownCssClass('Flower Paradise') }"
+        , visible:  "App.game.statistics.routeKills[GameConstants.Region.sinnoh][224]() >= 10"
+        , image: "assets/images/map/transparent.png"
+        , isExtension: true
+        })
+    %>
     <!--Flower Paradise extension-->
     <%- include('templates/mapOverlay',
         { name: "Flower Paradise"
@@ -1461,9 +1542,9 @@
         , databind: "click:function(){MapHelper.moveToTown('Flower Paradise')}, attr:{ class: MapHelper.calculateTownCssClass('Flower Paradise') }"
         , visible:  "App.game.statistics.routeKills[GameConstants.Region.sinnoh][224]() >= 10"
         , image: "assets/images/map/transparent.png"
+        , isExtension: true
         })
     %>
-
     <!--Flower Paradise extension-->
     <%- include('templates/mapOverlay',
         { name: "Flower Paradise"
@@ -1472,9 +1553,9 @@
         , databind: "click:function(){MapHelper.moveToTown('Flower Paradise')}, attr:{ class: MapHelper.calculateTownCssClass('Flower Paradise') }"
         , visible:  "App.game.statistics.routeKills[GameConstants.Region.sinnoh][224]() >= 10"
         , image: "assets/images/map/transparent.png"
+        , isExtension: true
         })
     %>
-
     <!--Flower Paradise extension-->
     <%- include('templates/mapOverlay',
         { name: "Flower Paradise"
@@ -1483,6 +1564,7 @@
         , databind: "click:function(){MapHelper.moveToTown('Flower Paradise')}, attr:{ class: MapHelper.calculateTownCssClass('Flower Paradise') }"
         , visible:  "App.game.statistics.routeKills[GameConstants.Region.sinnoh][224]() >= 10"
         , image: "assets/images/map/transparent.png"
+        , isExtension: true
         })
     %>
 
@@ -1512,6 +1594,17 @@
         { name: "Stark Mountain"
         , x: 154, y: 3
         , height: 2, width: 1
+        , isExtension: true
+        })
+    %>
+    
+    <!--Hall of Origin-->
+    <%- include('templates/mapDungeon',
+        { name: "Hall of Origin"
+        , x: 77, y: 57
+        , height: 22, width: 6
+        , moveToTown: "Mt. Coronet"
+        , invisible: true
         })
     %>
 
@@ -1568,6 +1661,19 @@
         , databind: "click:function(){MapHelper.moveToTown('Twinleaf Town')}, attr:{ class: MapHelper.calculateTownCssClass('Twinleaf Town') }"
         , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
         , image: "assets/images/map/blimp_pikachu.png"
+        })
+    %>
+    
+    <!--Seabreak Path-->
+    <%- include('templates/mapOverlay',
+        { name: "Seabreak Path"
+        , x: 189, y: 10
+        , width: 3, height: 38
+        , databind: `click: () => {
+            Notifier.notify({message: 'The path to Flower Paradise'});
+            }`
+        , visible:  "App.game.statistics.routeKills[GameConstants.Region.sinnoh][224]() >= 10"
+        , image: "assets/images/map/seabreak_path.png"
         })
     %>
 

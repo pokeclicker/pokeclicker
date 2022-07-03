@@ -10,11 +10,6 @@
     pointer-events: none;
   }
 
-  .currentLocation {
-    fill: var(--currentPlace);
-    opacity: 0.5;
-  }
-
   .locked {
     fill: var(--locked);
     opacity: 0.5;
@@ -22,6 +17,11 @@
 
   .unlockedUnfinished {
     fill: var(--incomplete);
+    opacity: 0.6;
+  }
+
+  .questAtLocation {
+    fill: var(--questAtLocation);
     opacity: 0.6;
   }
 
@@ -55,6 +55,13 @@
     fill: #FFD700;
     stroke: black;
   }
+
+  .iconLocation {
+    transform-box: fill-box;
+    transform-origin: center;
+    pointer-events: none;
+  }
+
 }
 
 #mapTooltip {

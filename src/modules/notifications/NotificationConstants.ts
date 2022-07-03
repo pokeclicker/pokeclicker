@@ -12,6 +12,7 @@ const NotificationConstants = {
         General: {
             shiny_long: new Sound('shiny_long', 'Shiny Pokémon encountered/hatched'),
             new_catch: new Sound('new_catch', 'New Pokémon/shiny captured'),
+            roaming: new Sound('roaming', 'Roaming Pokémon encountered'),
             achievement: new Sound('achievement', 'New achievement earned'),
             battle_item_timer: new Sound('battle_item_timer', 'Battle item about to wear off'),
             underground_energy_full: new Sound('underground_energy_full', 'Mining energy reached maximum capacity'),
@@ -37,6 +38,7 @@ const NotificationConstants = {
     NotificationSetting: {
         General: {
             encountered_shiny: new NotificationSetting('notification.encountered_shiny', 'Encountered a shiny Pokémon', true),
+            encountered_roaming: new NotificationSetting('notification.encountered_roaming', 'Encountered a roaming Pokémon', true),
             quest_ready_to_complete: new NotificationSetting('notification.quest_ready_to_complete', 'Quest is ready to be completed', true),
             underground_energy_full: new NotificationSetting('notification.underground_energy_full', 'Mining energy reached maximum capacity', true),
             underground_energy_restore: new NotificationSetting('notification.underground_energy_restore', 'Mining energy restored', true),
@@ -55,7 +57,8 @@ const NotificationConstants = {
         },
         Items: {
             route_item_found: new NotificationSetting('notification.route_item_found', 'Item found during route battle', true),
-            dungeon_item_found: new NotificationSetting('notification.dungeon_item_found', 'Item found in dungeon chest', true),
+            common_dungeon_item_found: new NotificationSetting('notification.common_dungeon_item_found', 'Common Item found in dungeon chest', true),
+            rare_dungeon_item_found: new NotificationSetting('notification.rare_dungeon_item_found', 'Rare Item found in dungeon chest', true),
             battle_item_timer: new NotificationSetting('notification.battle_item_timer', 'Battle item about to wear off', true),
             dropped_item: new NotificationSetting('notification.dropped_item', 'Enemy Pokémon dropped an item', true),
         },

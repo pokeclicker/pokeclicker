@@ -98,11 +98,11 @@ class Underground implements Feature {
     }
 
     getEnergyGain() {
-        return Math.round(Underground.BASE_ENERGY_GAIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Gain).calculateBonus() * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Moon_Flute));
+        return Math.round(Underground.BASE_ENERGY_GAIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Gain).calculateBonus());
     }
 
     getEnergyRegenTime() {
-        return Math.round(Underground.BASE_ENERGY_REGEN_TIME - this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time).calculateBonus() * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Moon_Flute));
+        return Math.round(Underground.BASE_ENERGY_REGEN_TIME - this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time).calculateBonus());
     }
 
     getDailyDealsMax() {
@@ -429,15 +429,15 @@ class Underground implements Feature {
             return;
         }
 
-        const upgrades = json['upgrades'];
+        const upgrades = json.upgrades;
         for (const item in UndergroundUpgrade.Upgrades) {
             if (isNaN(Number(item))) {
                 this.getUpgrade((<any>UndergroundUpgrade.Upgrades)[item]).level = upgrades[item] || 0;
             }
         }
-        this.energy = json['energy'] || 0;
+        this.energy = json.energy || 0;
 
-        const mine = json['mine'];
+        const mine = json.mine;
         if (mine) {
             Mine.loadSavedMine(mine);
         } else {
@@ -446,16 +446,16 @@ class Underground implements Feature {
     }
 
     toJSON(): Record<string, any> {
-        const undergroundSave = {};
+        const undergroundSave: Record<string, any> = {};
         const upgradesSave = {};
         for (const item in UndergroundUpgrade.Upgrades) {
             if (isNaN(Number(item))) {
                 upgradesSave[item] = this.getUpgrade((<any>UndergroundUpgrade.Upgrades)[item]).level;
             }
         }
-        undergroundSave['upgrades'] = upgradesSave;
-        undergroundSave['energy'] = this.energy;
-        undergroundSave['mine'] = Mine.save();
+        undergroundSave.upgrades = upgradesSave;
+        undergroundSave.energy = this.energy;
+        undergroundSave.mine = Mine.save();
         return undergroundSave;
     }
 

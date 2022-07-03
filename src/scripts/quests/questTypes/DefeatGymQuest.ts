@@ -6,7 +6,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     constructor(
         amount: number,
         reward: number,
-        private gymTown: string
+        public gymTown: string
     ) {
         super(amount, reward);
         this.region = GameConstants.getGymRegion(this.gymTown);
@@ -51,8 +51,8 @@ class DefeatGymQuest extends Quest implements QuestInterface {
 
     toJSON() {
         const json = super.toJSON();
-        json['name'] = this.constructor.name;
-        json['data'].push(this.gymTown);
+        json.name = this.constructor.name;
+        json.data.push(this.gymTown);
         return json;
     }
 }

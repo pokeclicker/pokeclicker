@@ -1,8 +1,21 @@
+/// <reference path="../../declarations/settings/ProteinFilters.d.ts" />
+
+enum PartyPokemonSaveKeys {
+    attackBonusPercent = 0,
+    attackBonusAmount,
+    proteinsUsed,
+    exp,
+    breeding,
+    shiny,
+    category,
+    levelEvolutionTriggered,
+    pokerus,
+}
+
 class PartyPokemon implements Saveable {
     saveKey: string;
 
     defaults = {
-        evolved: false,
         attackBonusPercent: 0,
         attackBonusAmount: 0,
         proteinsUsed: 0,
@@ -10,40 +23,90 @@ class PartyPokemon implements Saveable {
         breeding: false,
         shiny: false,
         category: 0,
+        levelEvolutionTriggered: false,
+        pokerus: GameConstants.Pokerus.None,
     };
 
     _breeding: KnockoutObservable<boolean>;
     _shiny: KnockoutObservable<boolean>;
     _level: KnockoutObservable<number>;
     _attack: KnockoutObservable<number>;
+    _attackBonusPercent: KnockoutObservable<number>;
+    _attackBonusAmount: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
+    _pokerus: KnockoutObservable<GameConstants.Pokerus>;
     proteinsUsed: KnockoutObservable<number>;
+    effortPoints: KnockoutObservable<number>;
 
     constructor(
         public id: number,
         public name: PokemonNameType,
         public evolutions: Evolution[],
         public baseAttack: number,
-        public attackBonusPercent: number = 0,
-        public attackBonusAmount: number = 0,
+        attackBonusPercent = 0,
+        attackBonusAmount = 0,
         proteinsUsed,
+        effortPoints,
         public exp: number = 0,
         breeding = false,
         shiny = false,
-        category = 0
+        category = 0,
+        pokerus = GameConstants.Pokerus.None
     ) {
-        this.proteinsUsed = ko.observable(proteinsUsed);
-        this._breeding = ko.observable(breeding);
-        this._shiny = ko.observable(shiny);
-        this._level = ko.observable(1);
-        this._attack = ko.observable(this.calculateAttack());
-        this._category = ko.observable(category);
+        this.proteinsUsed = ko.observable(proteinsUsed).extend({ numeric: 0 });
+        this.effortPoints = ko.observable(effortPoints).extend({ numeric: 0 });
+        this._breeding = ko.observable(breeding).extend({ boolean: null });
+        this._shiny = ko.observable(shiny).extend({ boolean: null });
+        this._level = ko.observable(1).extend({ numeric: 0 });
+        this._attackBonusPercent = ko.observable(attackBonusPercent).extend({ numeric: 0 });
+        this._attackBonusAmount = ko.observable(attackBonusAmount).extend({ numeric: 0 });
+        this._attack = ko.observable(this.calculateAttack()).extend({ numeric: 0 });
+        this._category = ko.observable(category).extend({ numeric: 0 });
+        this._pokerus = ko.observable(pokerus).extend({ numeric: 0 });
     }
 
     public calculateAttack(ignoreLevel = false): number {
         const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
         const levelMultiplier = ignoreLevel ? 1 : this.level / 100;
         return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier));
+    }
+
+    public canCatchPokerus(): boolean {
+        return App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
+    }
+
+    public calculatePokerusTypes(): Set<number> {
+        // Egg can't hatch and valid Egg has pokerus
+        const eggTypes: Set<number> = new Set();
+        for (let i = 0; i < App.game.breeding.eggList.length; i++) {
+            if (i > App.game.breeding.hatcheryHelpers.hired().length - 1) {
+                const egg = App.game.breeding.eggList[i]();
+                if (!egg.canHatch() && !egg.isNone()) {
+                    const pokerus = App.game.party.getPokemon(pokemonMap[egg.pokemon].id).pokerus;
+                    if (pokerus && pokerus >= GameConstants.Pokerus.Contagious) {
+                        eggTypes.add(PokemonHelper.getPokemonByName(pokemonMap[App.game.breeding.eggList[i]().pokemon].name).type1);
+                        eggTypes.add(PokemonHelper.getPokemonByName(pokemonMap[App.game.breeding.eggList[i]().pokemon].name).type2);
+                    }
+                }
+            }
+        }
+        if (eggTypes.has(PokemonType.None)) {
+            eggTypes.delete(PokemonType.None);
+        }
+        return eggTypes;
+    }
+
+    public calculatePokerus() {
+        const eggTypes = this.calculatePokerusTypes();
+        return App.game.breeding.eggList.forEach(p => {
+            const pokemon = p().partyPokemon;
+            if (pokemon && pokemon.pokerus == GameConstants.Pokerus.None) {
+                const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+                if (eggTypes.has(dataPokemon.type1) || eggTypes.has(dataPokemon.type2)) {
+                    pokemon.pokerus = GameConstants.Pokerus.Infected;
+                }
+            }
+        });
     }
 
     calculateLevelFromExp() {
@@ -128,8 +191,31 @@ class PartyPokemon implements Saveable {
     };
 
     public hideFromProteinList = (): boolean => {
-        return this.breeding ||
-            (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue());
+        const hidden = ko.pureComputed(() => {
+            if (!new RegExp(ProteinFilters.search.value(), 'i').test(this.name)) {
+                return true;
+            }
+
+            // Check based on native region
+            if (ProteinFilters.region.value() > -2) {
+                if (PokemonHelper.calcNativeRegion(this.name) !== ProteinFilters.region.value()) {
+                    return true;
+                }
+            }
+
+            // Check if either of the types match
+            const type: (PokemonType | null) = ProteinFilters.type.value() > -2 ? ProteinFilters.type.value() : null;
+            if (type !== null) {
+                const { type: types } = pokemonMap[this.name];
+                if (type !== null && !types.includes(type)) {
+                    return true;
+                }
+            }
+            return false;
+        }, this)();
+        return this.breeding || hidden ||
+            (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue()) ||
+            (this.shiny && Settings.getSetting('proteinHideShinyPokemon').observableValue());
     }
 
     public fromJSON(json: Record<string, any>): void {
@@ -137,28 +223,28 @@ class PartyPokemon implements Saveable {
             return;
         }
 
-        if (json['id'] == null) {
+        if (json.id == null) {
             return;
         }
 
-        this.attackBonusPercent = json['attackBonusPercent'] ?? this.defaults.attackBonusPercent;
-        this.attackBonusAmount = json['attackBonusAmount'] ?? this.defaults.attackBonusAmount;
-        this.proteinsUsed = ko.observable(json['proteinsUsed'] ?? this.defaults.proteinsUsed);
-        this.exp = json['exp'] ?? this.defaults.exp;
-        this.breeding = json['breeding'] ?? this.defaults.breeding;
-        this.shiny = json['shiny'] ?? this.defaults.shiny;
-        this.category = json['category'] ?? this.defaults.category;
+        this.attackBonusPercent = json[PartyPokemonSaveKeys.attackBonusPercent] ?? this.defaults.attackBonusPercent;
+        this.attackBonusAmount = json[PartyPokemonSaveKeys.attackBonusAmount] ?? this.defaults.attackBonusAmount;
+        this.proteinsUsed = ko.observable(json[PartyPokemonSaveKeys.proteinsUsed] ?? this.defaults.proteinsUsed);
+        this.exp = json[PartyPokemonSaveKeys.exp] ?? this.defaults.exp;
+        this.breeding = json[PartyPokemonSaveKeys.breeding] ?? this.defaults.breeding;
+        this.shiny = json[PartyPokemonSaveKeys.shiny] ?? this.defaults.shiny;
+        this.category = json[PartyPokemonSaveKeys.category] ?? this.defaults.category;
         this.level = this.calculateLevelFromExp();
         this.attack = this.calculateAttack();
+        this.pokerus = json[PartyPokemonSaveKeys.pokerus] ?? this.defaults.pokerus;
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
                 if (evolution instanceof LevelEvolution) {
-                    evolution.triggered = json['levelEvolutionTriggered'];
+                    evolution.triggered = json[PartyPokemonSaveKeys.levelEvolutionTriggered] ?? this.defaults.levelEvolutionTriggered;
                 }
             }
         }
-
     }
 
     public toJSON() {
@@ -170,17 +256,27 @@ class PartyPokemon implements Saveable {
                 }
             }
         }
-        return {
+        const output = {
             id: this.id,
-            attackBonusPercent: this.attackBonusPercent,
-            attackBonusAmount: this.attackBonusAmount,
-            proteinsUsed: this.proteinsUsed(),
-            exp: this.exp,
-            breeding: this.breeding,
-            shiny: this.shiny,
-            levelEvolutionTriggered: levelEvolutionTriggered,
-            category: this.category,
+            [PartyPokemonSaveKeys.attackBonusPercent]: this.attackBonusPercent,
+            [PartyPokemonSaveKeys.attackBonusAmount]: this.attackBonusAmount,
+            [PartyPokemonSaveKeys.proteinsUsed]: this.proteinsUsed(),
+            [PartyPokemonSaveKeys.exp]: this.exp,
+            [PartyPokemonSaveKeys.breeding]: this.breeding,
+            [PartyPokemonSaveKeys.shiny]: this.shiny,
+            [PartyPokemonSaveKeys.levelEvolutionTriggered]: levelEvolutionTriggered,
+            [PartyPokemonSaveKeys.category]: this.category,
+            [PartyPokemonSaveKeys.pokerus]: this.pokerus,
         };
+
+        // Don't save anything that is the default option
+        Object.entries(output).forEach(([key, value]) => {
+            if (value === this.defaults[PartyPokemonSaveKeys[key]]) {
+                delete output[key];
+            }
+        });
+
+        return output;
     }
 
     // Knockout getters/setter
@@ -200,12 +296,36 @@ class PartyPokemon implements Saveable {
         this._attack(attack);
     }
 
+    get attackBonusAmount(): number {
+        return this._attackBonusAmount();
+    }
+
+    set attackBonusAmount(attackBonusAmount: number) {
+        this._attackBonusAmount(attackBonusAmount);
+    }
+
+    get attackBonusPercent(): number {
+        return this._attackBonusPercent();
+    }
+
+    set attackBonusPercent(attackBonusPercent: number) {
+        this._attackBonusPercent(attackBonusPercent);
+    }
+
     get breeding(): boolean {
         return this._breeding();
     }
 
     set breeding(bool: boolean) {
         this._breeding(bool);
+    }
+
+    get pokerus(): GameConstants.Pokerus {
+        return this._pokerus();
+    }
+
+    set pokerus(index: GameConstants.Pokerus) {
+        this._pokerus(index);
     }
 
     get shiny(): boolean {

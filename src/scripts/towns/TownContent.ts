@@ -24,6 +24,9 @@ abstract class TownContent {
     }
 
     public protectedOnclick(): void {
+        if (!this.isVisible()) {
+            return;
+        }
         const reqsList = [];
         this.requirements?.forEach(requirement => {
             if (!requirement.isCompleted()) {
@@ -90,13 +93,6 @@ class NextRegionTownContent extends TownContent {
         return MapHelper.ableToTravel();
     }
 
-    public protectedOnclick(): void {
-        if (!MapHelper.ableToTravel()) {
-            return;
-        }
-        this.onclick();
-    }
-
     public onclick(): void {
         $('#nextRegionModal').modal('show');
     }
@@ -129,16 +125,7 @@ class MoveToDungeon extends TownContent {
         return TownList[this.dungeon.name].isUnlocked();
     }
     public areaStatus(): areaStatus {
-        const dungeonAccess = MapHelper.calculateTownCssClass(this.dungeon.name);
-        switch (dungeonAccess) {
-            // if dungeon completed or locked, ignore it
-            case 'completed':
-            case 'locked':
-                return areaStatus.completed;
-            // Return the dungeons state
-            default:
-                return areaStatus[dungeonAccess];
-        }
+        return areaStatus[MapHelper.calculateTownCssClass(this.dungeon.name)];
     }
     public clears() {
         if (!QuestLineHelper.isQuestLineCompleted('Tutorial Quests')) {

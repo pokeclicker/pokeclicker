@@ -51,7 +51,7 @@
         <tfoot>
           <tr>
             <td class="clickable table-warning text-light" colspan="2" href="#oakItemsModal" data-toggle="modal">
-              Equip another oak item!
+              Equip another Oak Item!
             </td>
           </tr>
         </tfoot>
@@ -73,7 +73,7 @@
         <tr data-bind="foreach: App.game.oakItemLoadouts.loadouts">
           <td class="p-1 tight">
             <button class='btn btn-block btn-primary' style="height: 100%;"
-              data-bind='click: function(){ App.game.oakItemLoadouts.activateLoadout($index()) }, text: $index() + 1'>
+              data-bind='click: function(){ App.game.oakItemLoadouts.activateLoadout($index()) }, text: $index() + 1, tooltip: { title: $data.name(), trigger: "hover", placement: "bottom" }'>
               1
             </button>
           </td>
