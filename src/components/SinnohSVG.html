@@ -1570,13 +1570,6 @@
         })
     %>
 
-    <!--Stark Mountain-->
-    <%- include('templates/mapDungeon',
-        { name: "Stark Mountain"
-        , x: 148, y: 6
-        , height: 3, width: 9
-        })
-    %>
     <!--Stark Mountain extension-->
     <%- include('templates/mapDungeon',
         { name: "Stark Mountain"
@@ -1584,11 +1577,20 @@
         , height: 6, width: 7
         })
     %>
+    <!--Stark Mountain-->
+    <%- include('templates/mapDungeon',
+        { name: "Stark Mountain"
+        , x: 148, y: 6
+        , height: 3, width: 9
+        , isExtension: true
+        })
+    %>
     <!--Stark Mountain extension-->
     <%- include('templates/mapDungeon',
         { name: "Stark Mountain"
         , x: 154, y: 5
         , height: 1, width: 2
+        , isExtension: true
         })
     %>
     <!--Stark Mountain extension-->
