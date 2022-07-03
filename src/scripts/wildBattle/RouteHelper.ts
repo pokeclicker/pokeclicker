@@ -161,8 +161,18 @@ class RouteHelper {
             pokemonList = pokemonList.concat(possiblePokemons.kalossurf);
         }
 
-        // Alola Fishing Rod Pokémon
+        // Alola Old Rod Pokémon
         if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 18) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.alolafishingrod);
+        }
+
+        // Alola Good Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 19) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.alolafishingrod);
+        }
+
+        // Alola Super Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 20) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.alolafishingrod);
         }
 
