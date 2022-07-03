@@ -466,7 +466,7 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
         Notifier.notify({
             message: `You were awarded a ${GameConstants.humanifyString(item)} for defeating the Super Nerd`,
             type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+            setting: NotificationConstants.NotificationSetting.Items.rare_dungeon_item_found,
         });
     });
 
@@ -753,7 +753,7 @@ dungeonList['Pokémon Tower'] = new Dungeon('Pokémon Tower',
         {loot: 'Ultraball', weight: 0},
         {loot: 'LargeRestore', weight: 0},
         {loot: 'Soothe_bell', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Pokémon Tower'))},
-        {loot: 'Trade_stone', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Pokémon Tower'))},
+        {loot: 'Linking_cord', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Pokémon Tower'))},
     ],
     7523,
     [new DungeonBossPokemon('Marowak', 37615, 30)],
@@ -1523,7 +1523,7 @@ dungeonList['Mt. Mortar'] = new Dungeon('Mt. Mortar',
         Notifier.notify({
             message: 'You were awarded a Fighting Egg for defeating Black Belt Kiyo',
             type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+            setting: NotificationConstants.NotificationSetting.Items.rare_dungeon_item_found,
         });
     });
 
@@ -2989,7 +2989,7 @@ dungeonList['Iron Island'] = new Dungeon('Iron Island',
         Notifier.notify({
             message: 'You were awarded a Fighting Egg for defeating the Galactic Grunts',
             type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
+            setting: NotificationConstants.NotificationSetting.Items.rare_dungeon_item_found,
         });
     });
 
@@ -4947,7 +4947,7 @@ dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
         {loot: 'Water_stone', weight: 0},
         {loot: 'Leaf_stone', weight: 0},
         {loot: 'Thunder_stone', weight: 0},
-        {loot: 'Trade_stone', weight: 0},
+        {loot: 'Linking_cord', weight: 0},
         {loot: 'Sun_stone', weight: 0},
         {loot: 'Soothe_bell', weight: 0},
     ],
@@ -5132,7 +5132,7 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
     ],
     356500, 3);
 
-dungeonList['Dreamyard'] = new Dungeon('Dreamyard',
+dungeonList.Dreamyard = new Dungeon('Dreamyard',
     [
         {pokemon: 'Raticate', options: { weight: 4.67 }},
         {pokemon: 'Jigglypuff', options: { weight: 4.67 }},
