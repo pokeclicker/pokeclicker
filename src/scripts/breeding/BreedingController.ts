@@ -212,6 +212,7 @@ class BreedingController {
             case 'stepsPerAttack': return `Steps/Att: ${(App.game.breeding.getSteps(pokemonMap[pokemon.name].eggCycles) / (pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + pokemon.proteinsUsed())).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
             case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
             case 'proteins': return `Proteins: ${pokemon.proteinsUsed()}`;
+            case 'evs': return `EVs: ${App.game.party.getEffortValues(pokemon)()}`;
         }
     }
 }
