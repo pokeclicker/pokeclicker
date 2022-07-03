@@ -67,7 +67,7 @@ class PartyPokemon implements Saveable {
         this._pokerus = ko.observable(pokerus).extend({ numeric: 0 });
         this.heldItem = ko.observable(undefined);
         this.heldItem.subscribe(hi => {
-        this.attack = this.calculateAttack();
+            this.attack = this.calculateAttack();
         });
     }
 
