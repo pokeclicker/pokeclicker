@@ -49,13 +49,20 @@
         <!--Route 5-->
         <%- include('templates/mapRoute',
             { route: 5, region: 5
+            , width: 6, height: 3
+            , x: 41, y: 27
+            })
+        %>
+        <!--Route 5 extension-->
+        <%- include('templates/mapRoute',
+            { route: 5, region: 5
             , width: 4, height: 3
             , x: 47, y: 26
             , rotate: true
             , noText: true
             })
         %>
-        <!--Route 5 Extension-->
+        <!--Route 5 extension-->
         <%- include('templates/mapRoute',
             { route: 5, region: 5
             , width: 1, height: 1
@@ -63,14 +70,7 @@
             , noText: true
             })
         %>
-        <!--Route 5 Extension-->
-        <%- include('templates/mapRoute',
-            { route: 5, region: 5
-            , width: 6, height: 3
-            , x: 41, y: 27
-            })
-        %>
-        <!--Route 5 Extension-->
+        <!--Route 5 extension-->
         <%- include('templates/mapRoute',
             { route: 5, region: 5
             , width: 5, height: 3
@@ -79,7 +79,7 @@
             , noText: true
             })
         %>
-        <!--Route 5 Extension-->
+        <!--Route 5 extension-->
         <%- include('templates/mapRoute',
             { route: 5, region: 5
             , width: 2, height: 3
@@ -95,7 +95,7 @@
             , x: 35, y: 27
             })
         %>
-        <!--Route 6 Extension-->
+        <!--Route 6 extension-->
         <%- include('templates/mapRoute',
             { route: 6, region: 5
             , width: 2, height: 3
@@ -136,7 +136,7 @@
             , x: 7, y: 29
             })
         %>
-        <!--Route 10 extras-->
+        <!--Route 10 extension-->
         <%- include('templates/mapRoute',
             { route: 10, region: 5
             , width: 4, height: 2
@@ -168,7 +168,7 @@
             , x: 36, y: 17
             })
         %>
-        <!--Route 13 Extension-->
+        <!--Route 13 extension-->
         <%- include('templates/mapRoute',
             { route: 13, region: 5
             , width: 5, height: 3
@@ -177,7 +177,7 @@
             , rotate: true
             })
         %>
-        <!--Route 13 Extension-->
+        <!--Route 13 extension-->
         <%- include('templates/mapRoute',
             { route: 13, region: 5
             , width: 2, height: 3
@@ -194,7 +194,7 @@
             , rotate: true
             })
         %>
-        <!--Route 14 Extension-->
+        <!--Route 14 extension-->
         <%- include('templates/mapRoute',
             { route: 14, region: 5
             , width: .5, height: 2
@@ -212,7 +212,7 @@
             , noText: true
             })
         %>
-        <!--Route 15 Extension-->
+        <!--Route 15 extension-->
         <%- include('templates/mapRoute',
             { route: 15, region: 5
             , width: 12, height: 3
@@ -220,7 +220,7 @@
             , rotate: true
             })
         %>
-        <!--Route 15 Extension-->
+        <!--Route 15 extension-->
         <%- include('templates/mapRoute',
             { route: 15, region: 5
             , width: 10, height: 2
@@ -228,7 +228,7 @@
             , noText: true
             })
         %>
-        <!--Route 15 Extension-->
+        <!--Route 15 extension-->
         <%- include('templates/mapRoute',
            { route: 15, region: 5
             , width: 2, height: 1
@@ -236,7 +236,7 @@
             , noText: true
             })
         %>
-        <!--Route 15 Extension-->
+        <!--Route 15 extension-->
         <%- include('templates/mapRoute',
             { route: 15, region: 5
             , width: 4, height: 1
@@ -252,7 +252,7 @@
             , x: 58, y: 18
             })
         %>
-        <!--Route 16 Extension-->
+        <!--Route 16 extension-->
         <%- include('templates/mapRoute',
             { route: 16, region: 5
             , width: 5, height: 3
@@ -261,7 +261,7 @@
             , noText: true
             })
         %>
-        <!--Route 16 Extension-->
+        <!--Route 16 extension-->
         <%- include('templates/mapRoute',
             { route: 16, region: 5
             , width: 1, height: 3
@@ -279,7 +279,7 @@
             , noText: true
             })
         %>
-        <!--Route 17 Extension-->
+        <!--Route 17 extension-->
         <%- include('templates/mapRoute',
             { route: 17, region: 5
             , width: 4, height: 3
@@ -294,7 +294,7 @@
             , x: 81, y: 23
             })
         %>
-        <!--Route 18 Extension-->
+        <!--Route 18 extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 5
             , width: 2, height: 1
@@ -311,14 +311,14 @@
             , noText: true
             })
         %>
-        <!--Route 19 Extension-->
+        <!--Route 19 extension-->
         <%- include('templates/mapRoute',
             { route: 19, region: 5
             , width: 3, height: 7
             , x: 78, y: 29
             })
         %>
-        <!--Route 19 Extension-->
+        <!--Route 19 extension-->
         <%- include('templates/mapRoute',
             { route: 19, region: 5
             , width: 2, height: 3
@@ -335,7 +335,7 @@
             , rotate: true
             })
         %>
-        <!--Route 20 Extension-->
+        <!--Route 20 extension-->
         <%- include('templates/mapRoute',
             { route: 20, region: 5
             , width: 1, height: 3
@@ -363,18 +363,19 @@
         <!--Azure Bay-->
         <%- include('templates/mapRoute',
             { route: 23, region: 5
+            , width: 10, height: 3
+            , x: 21, y: 13, name: "A.B."
+            })
+        %>
+        <!--Azure Bay extension-->
+        <%- include('templates/mapRoute',
+            { route: 23, region: 5
             , width: 4, height: 3
             , x: 28, y: 17, name: "A.B."
             , noText: true
             })
         %>
-       <!--Azure Bay Extension-->
-        <%- include('templates/mapRoute',
-            { route: 23, region: 5
-            , width: 10, height: 3
-            , x: 21, y: 13, name: "A.B."
-            })
-        %><!--Azure Bay Extension-->
+        <!--Azure Bay extension-->
         <%- include('templates/mapRoute',
             { route: 23, region: 5
             , width: 1, height: 3
@@ -519,7 +520,6 @@
             , width: 9, height: 5.5
             })
         %>
-
         <!--Pokémon League Kalos extension-->
         <%- include('templates/mapTown',
             { name: "Pokémon League Kalos"
@@ -540,6 +540,7 @@
         <!--DUNGEONS-->
         <!-- ----- -->
 
+        <!--Santalune Forest-->
         <%- include('templates/mapDungeon',
             { name: "Santalune Forest"
             , x: 53, y: 38
@@ -547,6 +548,7 @@
             })
         %>
 
+        <!--Parfum Palace-->
         <%- include('templates/mapDungeon',
             { name: "Parfum Palace"
             , x: 29, y: 27
@@ -554,6 +556,7 @@
             })
         %>
 
+        <!--Connecting Cave-->
         <%- include('templates/mapDungeon',
             { name: "Connecting Cave"
             , x: 24, y: 32
@@ -561,6 +564,7 @@
             })
         %>
 
+        <!--Glittering Cave-->
         <%- include('templates/mapDungeon',
             { name: "Glittering Cave"
             , x: 31, y: 45
@@ -568,6 +572,7 @@
             })
         %>
 
+        <!--Reflection Cave-->
         <%- include('templates/mapDungeon',
             { name: "Reflection Cave"
             , x: 13, y: 23
@@ -575,27 +580,15 @@
             })
         %>
 
+        <!--Sea Spirit's Den-->
         <%- include('templates/mapDungeon',
-            { name: "Lost Hotel"
-            , x: 58, y: 10
+            { name: "Sea Spirit's Den"
+            , x: 17, y: 13
             , width: 4, height: 3
             })
         %>
 
-        <%- include('templates/mapDungeon',
-            { name: "Frost Cavern"
-            , x: 75, y: 15
-            , width: 4, height: 3
-            })
-       %>
-
-        <%- include('templates/mapDungeon',
-            { name: "Pokéball Factory"
-            , x: 57, y: 0
-            , width: 4, height: 3
-            })
-        %>
-
+        <!--Kalos Power Plant-->
         <%- include('templates/mapDungeon',
             { name: "Kalos Power Plant"
             , x: 37, y: 20
@@ -603,12 +596,38 @@
             })
         %>
 
+        <!--Pokéball Factory"-->
+        <%- include('templates/mapDungeon',
+            { name: "Pokéball Factory"
+            , x: 57, y: 0
+            , width: 4, height: 3
+            })
+        %>
+
+        <!--Lost Hotel-->
+        <%- include('templates/mapDungeon',
+            { name: "Lost Hotel"
+            , x: 58, y: 10
+            , width: 4, height: 3
+            })
+        %>
+
+        <!--Frost Cavern-->
+        <%- include('templates/mapDungeon',
+            { name: "Frost Cavern"
+            , x: 75, y: 15
+            , width: 4, height: 3
+            })
+        %>
+
+        <!--Team Flare Secret HQ-->
         <%- include('templates/mapDungeon',
             { name: "Team Flare Secret HQ"
             , x: 4, y: 22
             })
         %>
 
+        <!--Terminus Cave-->
         <%- include('templates/mapDungeon',
             { name: "Terminus Cave"
             , x: 86, y: 21
@@ -616,6 +635,7 @@
             })
         %>
 
+        <!--Pokémon Village-->
         <%- include('templates/mapDungeon',
             { name: "Pokémon Village"
             , x: 67, y: 39
@@ -623,16 +643,10 @@
             })
         %>
 
+        <!--Victory Road Kalos-->
         <%- include('templates/mapDungeon',
             { name: "Victory Road Kalos"
             , x: 61, y: 30
-            , width: 4, height: 3
-            })
-        %>
-
-        <%- include('templates/mapDungeon',
-            { name: "Sea Spirit's Den"
-            , x: 17, y: 13
             , width: 4, height: 3
             })
         %>
@@ -736,8 +750,7 @@
             , rotate: true
             })
         %>
-
-        <!--Delta Route 104 Extension-->
+        <!--Delta Route 104 extension-->
         <%- include('templates/mapRoute',
             { route: 104, region: 5
             , width: 3, height: 1
@@ -830,8 +843,7 @@
             , rotate: true
             })
         %>
-
-        <!--Delta Route 114 Extension-->
+        <!--Delta Route 114 extension-->
         <%- include('templates/mapRoute',
             { route: 114, region: 5
             , width: 1, height: 3
@@ -848,8 +860,7 @@
             , rotate: true
             })
         %>
-
-        <!--Delta Route 115 Extension-->
+        <!--Delta Route 115 extension-->
         <%- include('templates/mapRoute',
             { route: 115, region: 5
             , width: 2, height: 3
@@ -865,8 +876,7 @@
             , x: 5, y: 21
             })
         %>
-
-        <!--Delta Route 116 Extension-->
+        <!--Delta Route 116 extension-->
         <%- include('templates/mapRoute',
             { route: 116, region: 5
             , width: 1, height: 1
@@ -925,8 +935,7 @@
             , rotate: true
             })
         %>
-
-        <!--Delta Route 122 Extension-->
+        <!--Delta Route 122 extension-->
         <%- include('templates/mapRoute',
             { route: 122, region: 5
             , width: 3, height: 1
@@ -934,8 +943,7 @@
             , noText: true
             })
         %>
-
-        <!--Delta Route 122 Extension-->
+        <!--Delta Route 122 extension-->
         <%- include('templates/mapRoute',
             { route: 122, region: 5
             , width: 3, height: 2
@@ -959,8 +967,7 @@
             , x: 74, y:14
             })
         %>
-
-        <!--Delta Route 124 Extension-->
+        <!--Delta Route 124 extension-->
         <%- include('templates/mapRoute',
             { route: 124, region: 5
             , width: 5, height: 4
@@ -968,8 +975,7 @@
             , noText: true
             })
         %>
-
-        <!--Delta Route 124 Extension-->
+        <!--Delta Route 124 extension-->
         <%- include('templates/mapRoute',
             { route: 124, region: 5
             , width: 1, height: 6
@@ -985,8 +991,7 @@
             , x: 83, y: 10
             })
         %>
-
-        <!--Delta Route 125 Extension-->
+        <!--Delta Route 125 extension-->
         <%- include('templates/mapRoute',
             { route: 125, region: 5
             , width: 4, height: 3
@@ -994,8 +999,7 @@
             , noText: true
             })
         %>
-
-        <!--Delta Route 125 Extension-->
+        <!--Delta Route 125 extension-->
         <%- include('templates/mapRoute',
             { route: 125, region: 5
             , width: 2, height: 3
@@ -1003,8 +1007,7 @@
             , noText: true
             })
         %>
-
-        <!--Delta Route 125 Extension-->
+        <!--Delta Route 125 extension-->
         <%- include('templates/mapRoute',
             { route: 125, region: 5
             , width: 5, height: 2.5
@@ -1012,8 +1015,7 @@
             , noText: true
             })
         %>
-
-        <!--Delta Route 125 Extension-->
+        <!--Delta Route 125 extension-->
         <%- include('templates/mapRoute',
             { route: 125, region: 5
             , width: 5, height: 3
@@ -1029,8 +1031,7 @@
             , x: 75, y: 24
             })
         %>
-
-        <!--Delta Route 126 Extension-->
+        <!--Delta Route 126 extension-->
         <%- include('templates/mapRoute',
             { route: 126, region: 5
             , width: 2, height: 3
@@ -1038,8 +1039,7 @@
             , noText: true
             })
         %>
-
-        <!--Delta Route 126 Extension-->
+        <!--Delta Route 126 extension-->
         <%- include('templates/mapRoute',
             { route: 126, region: 5
             , width: 2, height: 4
@@ -1047,8 +1047,7 @@
             , noText: true
             })
         %>
-
-        <!--Delta Route 126 Extension-->
+        <!--Delta Route 126 extension-->
         <%- include('templates/mapRoute',
             { route: 126, region: 5
             , width: 4, height: 6
@@ -1056,8 +1055,7 @@
             , noText: true
             })
         %>
-
-        <!--Delta Route 126 Extension-->
+        <!--Delta Route 126 extension-->
         <%- include('templates/mapRoute',
             { route: 126, region: 5
             , width: 4, height: 2
@@ -1073,8 +1071,7 @@
             , x: 83, y: 24
             })
         %>
-
-        <!--Delta Route 127 Extension-->
+        <!--Delta Route 127 extension-->
         <%- include('templates/mapRoute',
             { route: 127, region: 5
             , width: 3, height: 3
@@ -1082,8 +1079,7 @@
             , noText: true
             })
         %>
-
-        <!--Delta Route 127 Extension-->
+        <!--Delta Route 127 extension-->
         <%- include('templates/mapRoute',
             { route: 127, region: 5
             , width: 2, height: 5
@@ -1091,8 +1087,7 @@
             , noText: true
             })
         %>
-
-        <!--Delta Route 127 Extension-->
+        <!--Delta Route 127 extension-->
         <%- include('templates/mapRoute',
             { route: 127, region: 5
             , width: 1, height: 1
@@ -1100,8 +1095,7 @@
             , noText: true
             })
         %>
-
-        <!--Delta Route 127 Extension-->
+        <!--Delta Route 127 extension-->
         <%- include('templates/mapRoute',
             { route: 127, region: 5
             , width: 1, height: 2
@@ -1222,11 +1216,11 @@
             , width: 5, height: 4.5
             })
         %>
-
-        <!--Delta Mauville City Extension-->
+        <!--Delta Mauville City extension-->
         <%- include('templates/mapTown',
             { name: "Delta Mauville City"
             , x: 32, y: 23
+            , isExtension: true
             })
         %>
 
@@ -1244,12 +1238,12 @@
             , width: 8, height: 5
             })
         %>
-
-        <!--Delta Mt. Chimney Extension-->
+        <!--Delta Mt. Chimney extension-->
         <%- include('templates/mapTown',
             { name: "Delta Mt. Chimney"
             , x: 22, y: 16
             , width: 7, height: 1
+            , isExtension: true
             })
         %>
 
@@ -1289,11 +1283,11 @@
             , width: 5, height: 4.5
             })
         %>
-
-        <!--Delta LilyCove City Extension-->
+        <!--Delta LilyCove City extension-->
         <%- include('templates/mapTown',
             { name: "Delta LilyCove City"
             , x: 70, y: 13
+            , isExtension: true
             })
         %>
 
@@ -1304,10 +1298,11 @@
             , width: 5, height: 4.5
             })
         %>
-        <!--Delta Mossdeep City Extension-->
+        <!--Delta Mossdeep City extension-->
         <%- include('templates/mapTown',
             { name: "Delta Mossdeep City"
             , x: 88, y: 19
+            , isExtension: true
             })
         %>
 
@@ -1339,12 +1334,12 @@
             , width: 9, height: 5.5
             })
         %>
-
-        <!--Delta Pokémon League Hoenn Extension-->
+        <!--Delta Pokémon League Hoenn extension-->
         <%- include('templates/mapTown',
             { name: "Delta Pokémon League Hoenn"
             , x: 94, y: 32.5
             , width: 3, height: 0.5
+            , isExtension: true
             })
         %>
 
@@ -1375,10 +1370,13 @@
             })
         %>
 
-        <!--Delta New Mauville-->
+        <!--Delta Fiery Path-->
         <%- include('templates/mapDungeon',
-            { name: "Delta New Mauville"
-            , x: 32, y: 27
+            { name: "Delta Fiery Path"
+            , x: 21, y: 11
+            , width: 8, height: 5
+            , moveToTown: "Delta Mt. Chimney"
+            , invisible: true
             })
         %>
 
@@ -1389,6 +1387,23 @@
             })
         %>
 
+        <!--Delta Jagged Pass-->
+        <%- include('templates/mapDungeon',
+            { name: "Delta Jagged Pass"
+            , x: 21, y: 11
+            , width: 8, height: 5
+            , moveToTown: "Delta Mt. Chimney"
+            , invisible: true
+            })
+        %>
+
+        <!--Delta New Mauville-->
+        <%- include('templates/mapDungeon',
+            { name: "Delta New Mauville"
+            , x: 32, y: 27
+            })
+        %>
+
         <!--Delta Mt. Pyre-->
         <%- include('templates/mapDungeon',
             { name: "Delta Mt. Pyre"
@@ -1396,12 +1411,12 @@
             , width: 4, height: 4
             })
         %>
-
-        <!--Delta Mt. Pyre Extension-->
+        <!--Delta Mt. Pyre extension-->
         <%- include('templates/mapDungeon',
             { name: "Delta Mt. Pyre"
             , x: 62, y: 19
             , width: 1, height: 3
+            , isExtension: true
             })
         %>
 
@@ -1434,12 +1449,34 @@
             , width: 7, height: 4
             })
         %>
-
-        <!--Delta Hoenn Victory Road Extension-->
+        <!--Delta Hoenn Victory Road extension-->
         <%- include('templates/mapDungeon',
             { name: "Delta Victory Road Hoenn"
             , x: 95, y: 34
             , width: 3, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Marine Cave-->
+        <%- include('templates/mapOverlay',
+            { name: "Marine Cave"
+            , x: 48, y: 38
+            , width: 4, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Marine Cave')}, attr:{ class: MapHelper.calculateTownCssClass('Marine Cave') }"
+            , visible:  "Weather.currentWeather() == WeatherType.Rain"
+            , image: "assets/images/map/marine_cave.png"
+            })
+        %>
+
+        <!--Terra Cave-->
+        <%- include('templates/mapOverlay',
+            { name: "Terra Cave"
+            , x: 25, y: 1
+            , width: 4, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Terra Cave')}, attr:{ class: MapHelper.calculateTownCssClass('Terra Cave') }"
+            , visible:  "Weather.currentWeather() == WeatherType.Sunny"
+            , image: "assets/images/map/terra_cave.png"
             })
         %>
 
@@ -1476,26 +1513,6 @@
             , x: 18, y: 27
             , width: 4, height: 4
             , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
-            })
-        %>
-
-        <%- include('templates/mapOverlay',
-            { name: "Marine Cave"
-            , x: 48, y: 38
-            , width: 4, height: 3
-            , databind: "click:function(){MapHelper.moveToTown('Marine Cave')}, attr:{ class: MapHelper.calculateTownCssClass('Marine Cave') }"
-            , visible:  "Weather.currentWeather() == WeatherType.Rain"
-            , image: "assets/images/map/marine_cave.png"
-            })
-        %>
-
-        <%- include('templates/mapOverlay',
-            { name: "Terra Cave"
-            , x: 25, y: 1
-            , width: 4, height: 3
-            , databind: "click:function(){MapHelper.moveToTown('Terra Cave')}, attr:{ class: MapHelper.calculateTownCssClass('Terra Cave') }"
-            , visible:  "Weather.currentWeather() == WeatherType.Sunny"
-            , image: "assets/images/map/terra_cave.png"
             })
         %>
     </g>
