@@ -63,6 +63,7 @@ class PartyPokemon implements Saveable {
         this._effortPoints.subscribe((ep) => {
             const power = App.game.challenges.list.slowEVs.active() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
             this.evs(Math.floor(ep / GameConstants.EP_EV_RATIO / power));
+            this.attack = this.calculateAttack();
         });
         this._attack = ko.observable(this.calculateAttack()).extend({ numeric: 0 });
     }
@@ -245,9 +246,9 @@ class PartyPokemon implements Saveable {
         this.shiny = json[PartyPokemonSaveKeys.shiny] ?? this.defaults.shiny;
         this.category = json[PartyPokemonSaveKeys.category] ?? this.defaults.category;
         this.level = this.calculateLevelFromExp();
-        this.attack = this.calculateAttack();
         this.pokerus = json[PartyPokemonSaveKeys.pokerus] ?? this.defaults.pokerus;
         this.effortPoints = json[PartyPokemonSaveKeys.effortPoints] ?? this.defaults.effortPoints;
+        this.attack = this.calculateAttack();
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
