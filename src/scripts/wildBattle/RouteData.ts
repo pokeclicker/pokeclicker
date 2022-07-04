@@ -2772,7 +2772,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Ballimere Lake', GameConstants.Region.galar, 53,
     new RoutePokemon({
-        land: ['Boltund', 'Tyrunt', 'Audino', 'Skwovet', 'Yamper', 'Mime Jr.', 'Spiritomb', 'Tyrantrum', 'Aron'],
+        land: ['Boltund', 'Tyrunt', 'Audino', 'Skwovet', 'Yamper', 'Mime Jr.', 'Tyrantrum', 'Aron'],
         water: ['Magikarp', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Barboach', 'Gyarados', 'Whiscash', 'Feebas', 'Dratini', 'Anorith', 'Relicanth'],
         special:
       [
