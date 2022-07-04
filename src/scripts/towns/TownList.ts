@@ -3212,54 +3212,54 @@ const TurffieldShop = new Shop([
     ItemList.Grass_egg,
     ItemList.Sweet_apple,
     ItemList.Tart_apple,
-    Itemlist.Leaf_stone,
-    Itemlist.Sun_stone,
+    ItemList.Leaf_stone,
+    ItemList.Sun_stone,
 ]);
 const HulburyShop = new Shop([
     ItemList.Water_egg,
-    Itemlist.Water_stone,
-    Itemlist.Kings_rock,
-    Itemlist.Prism_scale,
-    Itemlist.Deepsea_tooth,
-    Itemlist.Deepsea_scale,
+    ItemList.Water_stone,
+    ItemList.Kings_rock,
+    ItemList.Prism_scale,
+    ItemList.Deepsea_tooth,
+    ItemList.Deepsea_scale,
 ]);
 const MotostokeShop = new Shop([
     ItemList.Fire_egg,
-    Itemlist.Fire_stone,
-    Itemlist.Linking_cord,
-    Itemlist.Magmarizer,
+    ItemList.Fire_stone,
+    ItemList.Linking_cord,
+    ItemList.Magmarizer,
 ]);
 const HammerlockeShop = new Shop([
     ItemList.Dragon_egg,
-    Itemlist.Metal_coat,
-    Itemlist.Upgrade,
-    Itemlist.Dragon_scale,
+    ItemList.Metal_coat,
+    ItemList.Upgrade,
+    ItemList.Dragon_scale,
 ]);
 const StowonSideShop: Shop = new Shop([
     ItemList.Fighting_egg,
-    Itemlist.Soothe_bell,
-    Itemlist.Dawn_stone,
-    Itemlist.Dubious_disc,
-    Itemlist.Reaper_cloth,
+    ItemList.Soothe_bell,
+    ItemList.Dawn_stone,
+    ItemList.Dubious_disc,
+    ItemList.Reaper_cloth,
 ]);
 const BallonleaShop = new Shop([
     ItemList.Cracked_pot,
-    Itemlist.Moon_stone,
-    Itemlist.Shiny_stone,
-    Itemlist.Sachet,
-    Itemlist.Whipped_dream,
+    ItemList.Moon_stone,
+    ItemList.Shiny_stone,
+    ItemList.Sachet,
+    ItemList.Whipped_dream,
 ]);
 const CirchesterShop = new Shop([
-    Itemlist.Razor_claw,
-    Itemlist.Razor_fang,
-    Itemlist.Protector,
+    ItemList.Razor_claw,
+    ItemList.Razor_fang,
+    ItemList.Protector,
     ItemList.Ice_stone,
 ]);
 const SpikemuthShop = new Shop([
     ItemList.Electric_egg,
-    Itemlist.Thunder_stone,
-    Itemlist.Dusk_stone,
-    Itemlist.Electirizer,
+    ItemList.Thunder_stone,
+    ItemList.Dusk_stone,
+    ItemList.Electirizer,
 ]);
 const WyndonShop = new Shop([
     ItemList.Pokeball,
