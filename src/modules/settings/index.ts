@@ -208,6 +208,7 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
         new SettingOption('Pokedex ID', 'dexId'),
         new SettingOption('Proteins used', 'proteins'),
+        new SettingOption('EVs', 'evs'),
     ],
     'attack'));
 

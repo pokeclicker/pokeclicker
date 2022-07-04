@@ -12,6 +12,7 @@ export enum SortOptions {
     timesHatched = 8,
     category = 9,
     proteinsUsed = 10,
+    evs = 11,
 }
 
 export type SortOptionConfig = {
@@ -81,5 +82,10 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.proteinsUsed]: {
         text: 'Proteins Used',
         getValue: (p) => p.proteinsUsed() || 0,
+    },
+
+    [SortOptions.evs]: {
+        text: 'EVs',
+        getValue: (p) => App.game.party.getEffortValues(p)() || 0,
     },
 };
