@@ -1,5 +1,5 @@
 import PokemonType from '../enums/PokemonType';
-import { Region } from '../GameConstants';
+import { Region, Pokerus } from '../GameConstants';
 import SettingOption from './SettingOption';
 import Settings from './Settings';
 import FilterOption from './FilterOption';
@@ -51,6 +51,15 @@ const BreedingFilters: Record<string, FilterOption> = {
         [
             new SettingOption('All', '-2'),
             ...Settings.enumToSettingOptionArray(Region, (t) => t !== 'none'),
+        ],
+    ),
+    pokerus: new FilterOption<number>(
+        'Pokerus',
+        ko.observable(-1).extend({ numeric: 0 }),
+        'breedingPokerusFilter',
+        [
+            new SettingOption('All', '-1'),
+            ...Settings.enumToSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
         ],
     ),
 };
