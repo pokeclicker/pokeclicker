@@ -40,7 +40,7 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.attack]: {
         text: 'Attack',
-        getValue: (p) => p.calculateAttack(),
+        getValue: (p) => p.attack,
     },
 
     [SortOptions.level]: {

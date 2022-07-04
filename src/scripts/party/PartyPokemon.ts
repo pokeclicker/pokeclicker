@@ -63,9 +63,8 @@ class PartyPokemon implements Saveable {
         this._effortPoints.subscribe((ep) => {
             const power = App.game.challenges.list.slowEVs.active() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
             this.evs(Math.floor(ep / GameConstants.EP_EV_RATIO / power));
-            this.attack = this.calculateAttack();
         });
-        this._attack = ko.observable(this.calculateAttack()).extend({ numeric: 0 });
+        this._attack = ko.pureComputed(() => this.calculateAttack());
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -136,7 +135,6 @@ class PartyPokemon implements Saveable {
         const newLevel = this.calculateLevelFromExp();
         if (oldLevel !== newLevel) {
             this.level = newLevel;
-            this.attack = this.calculateAttack();
             this.checkForLevelEvolution();
         }
     }
@@ -248,7 +246,6 @@ class PartyPokemon implements Saveable {
         this.level = this.calculateLevelFromExp();
         this.pokerus = json[PartyPokemonSaveKeys.pokerus] ?? this.defaults.pokerus;
         this.effortPoints = json[PartyPokemonSaveKeys.effortPoints] ?? this.defaults.effortPoints;
-        this.attack = this.calculateAttack();
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
@@ -303,10 +300,6 @@ class PartyPokemon implements Saveable {
 
     get attack(): number {
         return this._attack();
-    }
-
-    set attack(attack: number) {
-        this._attack(attack);
     }
 
     get attackBonusAmount(): number {

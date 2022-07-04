@@ -127,8 +127,6 @@ class Egg implements Saveable {
                     partyPokemon.pokerus = GameConstants.Pokerus.Cured;
                 }
             }
-            // Recalculate current attack
-            partyPokemon.attack = partyPokemon.calculateAttack();
         }
 
         App.game.party.gainPokemonById(pokemonID, shiny);
