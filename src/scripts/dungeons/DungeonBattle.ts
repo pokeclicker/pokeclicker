@@ -10,7 +10,7 @@ class DungeonBattle extends Battle {
         if (!DungeonBattle.trainer()) {
             return 0;
         }
-        return DungeonBattle.trainer().team.length - DungeonBattle.trainerPokemonIndex();
+        return DungeonBattle.trainer().getTeam().length - DungeonBattle.trainerPokemonIndex();
     });
 
     public static defeatedTrainerPokemon: KnockoutComputed<number> = ko.pureComputed(() => {
@@ -75,7 +75,7 @@ class DungeonBattle extends Battle {
         player.lowerItemMultipliers(MultiplierDecreaser.Battle);
 
         // No Pokemon left, trainer defeated
-        if (this.trainerPokemonIndex() >= this.trainer().team.length) {
+        if (this.trainerPokemonIndex() >= this.trainer().getTeam().length) {
             // rewards for defeating trainer
             if (this.trainer().options.reward) {
                 // Custom reward amount on defeat
@@ -168,7 +168,7 @@ class DungeonBattle extends Battle {
     public static generateTrainerPokemon() {
         this.counter = 0;
 
-        const pokemon = this.trainer().team[this.trainerPokemonIndex()];
+        const pokemon = this.trainer().getTeam()[this.trainerPokemonIndex()];
         const baseHealth = DungeonRunner.fightingBoss() ? pokemon.maxHealth : DungeonRunner.dungeon.baseHealth;
         const level = DungeonRunner.fightingBoss() ? pokemon.level : DungeonRunner.dungeonLevel();
         const enemyPokemon = PokemonFactory.generateDungeonTrainerPokemon(pokemon, DungeonRunner.chestsOpened, baseHealth, level);
