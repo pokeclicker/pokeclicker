@@ -67,11 +67,14 @@ class BattleFrontierRunner {
 
         Notifier.notify({
             title: 'Battle Frontier',
-            message: `You managed to beat stage ${stageBeaten}.\nYou received <img src="./assets/images/currency/battlePoint.svg" height="18px"/> ${battlePointsEarned.toLocaleString('en-US')}.\nYou received <img src="./assets/images/currency/money.svg" height="18px"/> ${moneyEarned.toLocaleString('en-US')}.`,
+            message: `You managed to beat stage ${stageBeaten.toLocaleString('en-US')}.\nYou received <img src="./assets/images/currency/battlePoint.svg" height="24px"/> ${battlePointsEarned.toLocaleString('en-US')}.\nYou received <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyEarned.toLocaleString('en-US')}.`,
+            strippedMessage: `You managed to beat stage ${stageBeaten.toLocaleString('en-US')}.\nYou received ${battlePointsEarned.toLocaleString('en-US')} Battle Points.\nYou received ${moneyEarned.toLocaleString('en-US')} Pokédollars.`,
             type: NotificationConstants.NotificationOption.success,
             setting: NotificationConstants.NotificationSetting.General.battle_frontier,
+            sound: NotificationConstants.NotificationSound.General.battle_frontier,
             timeout: 30 * GameConstants.MINUTE,
         });
+        App.game.logbook.newLog(LogBookTypes.FRONTIER, `Cleared stage ${stageBeaten.toLocaleString('en-US')} of the Battle Frontier and received ${battlePointsEarned.toLocaleString('en-US')} Battle Points.`);
 
         // Award battle points
         App.game.wallet.gainBattlePoints(battlePointsEarned);
@@ -87,13 +90,13 @@ class BattleFrontierRunner {
             title: 'Battle Frontier',
             message: 'Are you sure you want to leave?\n\nYou can always return later and start off where you left.',
             type: NotificationConstants.NotificationOption.danger,
-            confirm: 'leave',
+            confirm: 'Leave',
         }).then(confirmed => {
             if (confirmed) {
                 // Don't give any points, user quit the challenge
                 Notifier.notify({
                     title: 'Battle Frontier',
-                    message: `Checkpoint set for stage ${this.stage()}`,
+                    message: `Checkpoint set for stage ${this.stage()}.`,
                     type: NotificationConstants.NotificationOption.info,
                     timeout: 1 * GameConstants.MINUTE,
                 });

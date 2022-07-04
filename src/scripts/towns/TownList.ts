@@ -1451,7 +1451,7 @@ const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
     'Oh! I don’t get visitors often. My husband is a sailor who visits far away lands… he always tells me these fantastic things.',
     'One time he came back and his Wailmer looked funny. We took it to the Pokécenter and they said it had caught some weird virus called Pokérus!',
     'They said that it is a virus that can spread in the Pokémon Day Care. However, not every Pokémon that is infected can spread it...',
-    'You need some kind of "special bond" or something with the infected Pokémon for it to spread the virus. His Wailmer was his Starter Pokémon, so maybe that was it? They also said that Pokémon can only spread the virus if they are\’nt ready to hatch.',
+    'You need some kind of "special bond" or something with the infected Pokémon for it to spread the virus. His Wailmer was his Starter Pokémon, so maybe that was it? They also said that Pokémon can only spread the virus if they aren’t ready to hatch.',
     'If you have a Pokémon with Pokérus, try catching more of that type of Pokémon. When he got back from his next trip, oddly enough Wailmer seemed stronger than ever!',
 ]);
 
