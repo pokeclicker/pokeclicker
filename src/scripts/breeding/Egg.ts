@@ -34,7 +34,7 @@ class Egg implements Saveable {
         }, this);
 
         this.progressText = ko.pureComputed(function () {
-            return `${this.steps()} / ${this.totalSteps}`;
+            return `${this.steps().toLocaleString('en-US')} / ${this.totalSteps.toLocaleString('en-US')}`;
         }, this);
 
         this.stepsRemaining = ko.pureComputed(function () {
