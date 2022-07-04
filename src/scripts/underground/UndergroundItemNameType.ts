@@ -62,7 +62,7 @@ type UndergroundItemNameType
     | 'Shiny Stone'
     | 'Dusk Stone'
     | 'Dawn Stone'
-    | 'Ice Stone';
+    | 'Ice Stone'
     | 'Red Shard'
     | 'Yellow Shard'
     | 'Green Shard'
