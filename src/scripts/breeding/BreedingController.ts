@@ -97,7 +97,7 @@ class BreedingController {
             $('#breedingModal').modal('show');
         } else {
             Notifier.notify({
-                message: 'You do not have access to the Day Care yet.\n<i>Clear route 5 first</i>',
+                message: 'You do not have access to the Day Care yet.\n<i>Clear Route 5 first.</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
