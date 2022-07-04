@@ -17,7 +17,7 @@ export default class RedeemableCode {
     redeem() {
         if (this.isRedeemed) {
             Notifier.notify({
-                message: 'You have already redeemed this code',
+                message: 'You have already redeemed this code.',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return;
