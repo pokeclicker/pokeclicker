@@ -20,9 +20,9 @@ export const LogBookTypes: Record<string, LogBookType> = {
         display: 'danger',
         label: 'ESCAPED',
     },
-    FOUND: {
-        display: 'primary',
-        label: 'FOUND',
+    ROAMER: {
+        display: 'info',
+        label: 'ROAMER',
     },
     ACHIEVE: {
         display: 'warning',
@@ -31,6 +31,14 @@ export const LogBookTypes: Record<string, LogBookType> = {
     QUEST: {
         display: 'info',
         label: 'QUEST',
+    },
+    FOUND: {
+        display: 'primary',
+        label: 'FOUND',
+    },
+    FRONTIER: {
+        display: 'success',
+        label: 'FRONTIER',
     },
     WANDER: {
         display: 'primary',
