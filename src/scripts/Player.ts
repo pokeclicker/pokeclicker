@@ -37,7 +37,7 @@ class Player {
         if (this._lastSeen > Date.now()) {
             Notifier.notify({
                 title: 'Welcome Time Traveller!',
-                message: 'Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.\n\nAny Pokemon you may have obtained in the future could cease to exist which could corrupt your save file!',
+                message: 'Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.\n\nAny Pokémon you may have obtained in the future could cease to exist which could corrupt your save file!',
                 type: NotificationConstants.NotificationOption.danger,
                 timeout: GameConstants.HOUR,
             });

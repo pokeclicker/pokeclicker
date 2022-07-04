@@ -33,7 +33,7 @@ export default class SaveReminder implements Saveable {
             // Show reminder notification
             Notifier.notify({
                 title: 'Save Reminder',
-                message: `It has been ${GameConstants.formatTimeShortWords(saveReminderInterval)} since your last save download, Would you like to download a backup now?
+                message: `It has been ${GameConstants.formatTimeShortWords(saveReminderInterval)} since your last save download. Would you like to download a backup now?
 
                 <button class="btn btn-block btn-success" onclick="Save.download()" data-dismiss="toast">Download Save</button>`,
                 // Timeout either the reminder interval or 3 hours, whichever is lower
