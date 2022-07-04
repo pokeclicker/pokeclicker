@@ -36,7 +36,7 @@ abstract class Evolution {
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, true);
 
-        const evolvedPartyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(evolvedPokemon).id);
+        const evolvedPartyPokemon = App.game.party.getPokemonByName(evolvedPokemon);
         if (evolvedPartyPokemon.pokerus >= GameConstants.Pokerus.Contagious) {
             const EPYield = (shiny ? GameConstants.SHINY_EP_YIELD : 1) * GameConstants.STONE_EP_YIELD;
             evolvedPartyPokemon.effortPoints +=  EPYield;
