@@ -46,25 +46,36 @@ function waitForLoad(el, fnc) {
 }
 
 waitForLoad('map', () => {
-    console.log('applying zoom functions');
     const svgImage = document.getElementById('map');
     const svgContainer = document.getElementById('mapBody');
 
-    const viewBox = {
-        x: 0, y: 0, w: 1600, h: 960,
+    const viewBox: Record<string, number> = {
+        x: 0,
+        y: 0,
+        w: 1600,
+        h: 960,
     };
     svgImage.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
     // svgSize = {w:svgImage.clientWidth,h:svgImage.clientHeight};
-    const svgSize = { w: 1600, h: 960 };
+    const svgSize: Record<string, number> = { w: 1600, h: 960 };
     let isPanning = false;
     let startPoint = { x: 0, y: 0 };
     let endPoint = { x: 0, y: 0 };
     let scale = 1;
 
+    // player.region.subscribe(() => {
+    //     const mapImage = svgImage.querySelector('image').getBBox() as any;
+    //     mapImage.w = mapImage.width;
+    //     mapImage.h = mapImage.height;
+    //     viewBox = mapImage;
+    //     svgImage.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
+    //     svgSize = mapImage;
+    // });
+
     svgContainer.onwheel = (e) => {
         e.preventDefault();
         // If already max/max scale, return;
-        const canScale = e.deltaY > 0 ? scale > 1 : scale < 2.5;
+        const canScale = e.deltaY > 0 ? scale > 1 : scale < 3;
         if (!canScale) return;
 
         // Mouse pos
