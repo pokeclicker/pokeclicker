@@ -1480,7 +1480,7 @@ class ShardDeal {
         );
     }
     public static generateGalarDeals() {
-        ShardDeal.list[GameConstants.ShardTraderLocations.'Turffield'] = ko.observableArray(
+        ShardDeal.list[GameConstants.ShardTraderLocations.Turffield] = ko.observableArray(
             [
                 new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
@@ -1499,7 +1499,7 @@ class ShardDeal {
                     1),
             ]
         );
-        ShardDeal.list[GameConstants.ShardTraderLocations.'Hulbury'] = ko.observableArray(
+        ShardDeal.list[GameConstants.ShardTraderLocations.Hulbury] = ko.observableArray(
             [
                 new ShardDeal(
                     [{shardTypeString: 'Blue Shard', amount: 100}],
@@ -1539,7 +1539,7 @@ class ShardDeal {
                     1),
             ]
         );
-        ShardDeal.list[GameConstants.ShardTraderLocations.'Motostoke'] = ko.observableArray(
+        ShardDeal.list[GameConstants.ShardTraderLocations.Motostoke] = ko.observableArray(
             [
                 new ShardDeal(
                     [{shardTypeString: 'Red Shard', amount: 100}],
@@ -1565,7 +1565,7 @@ class ShardDeal {
                     1),
             ]
         );
-        ShardDeal.list[GameConstants.ShardTraderLocations.'Hammerlocke'] = ko.observableArray(
+        ShardDeal.list[GameConstants.ShardTraderLocations.Hammerlocke] = ko.observableArray(
             [
                 new ShardDeal(
                     [
@@ -1638,7 +1638,7 @@ class ShardDeal {
                     1),
             ]
         );
-        ShardDeal.list[GameConstants.ShardTraderLocations.'Ballonlea'] = ko.observableArray(
+        ShardDeal.list[GameConstants.ShardTraderLocations.Ballonlea] = ko.observableArray(
             [
                 new ShardDeal(
                     [
@@ -1670,7 +1670,7 @@ class ShardDeal {
                     1),
             ]
         );
-        ShardDeal.list[GameConstants.ShardTraderLocations.'Circhester'] = ko.observableArray(
+        ShardDeal.list[GameConstants.ShardTraderLocations.Circhester] = ko.observableArray(
             [
                 new ShardDeal(
                     [
@@ -1702,7 +1702,7 @@ class ShardDeal {
                     1),
             ]
         );
-        ShardDeal.list[GameConstants.ShardTraderLocations.'Spikemuth'] = ko.observableArray(
+        ShardDeal.list[GameConstants.ShardTraderLocations.Spikemuth] = ko.observableArray(
             [
                 new ShardDeal(
                     [{shardTypeString: 'Yellow Shard', amount: 100}],

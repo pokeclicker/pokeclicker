@@ -1322,6 +1322,14 @@ export enum ShardTraderLocations {
     'Seafolk Village',
     'Exeggutor Island',
     'Altar of the Sunne and Moone',
+    'Turffield',
+    'Hulbury',
+    'Motostoke',
+    'Hammerlocke',
+    'Stow-on-Side',
+    'Ballonlea',
+    'Circhester',
+    'Spikemuth',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
