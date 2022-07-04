@@ -16,7 +16,8 @@ enum PartyPokemonSaveKeys {
 class PartyPokemon implements Saveable {
     saveKey: string;
     public exp = 0;
-    public evs: KnockoutObservable<number>;
+    public evs: KnockoutComputed<number>;
+    _attack: KnockoutComputed<number>;
 
     defaults = {
         attackBonusPercent: 0,
@@ -35,7 +36,6 @@ class PartyPokemon implements Saveable {
     _breeding: KnockoutObservable<boolean>;
     _shiny: KnockoutObservable<boolean>;
     _level: KnockoutObservable<number>;
-    _attack: KnockoutObservable<number>;
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
@@ -59,10 +59,9 @@ class PartyPokemon implements Saveable {
         this._category = ko.observable(0).extend({ numeric: 0 });
         this._pokerus = ko.observable(GameConstants.Pokerus.None).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
-        this.evs = ko.observable(0).extend({numeric: 0});
-        this._effortPoints.subscribe((ep) => {
+        this.evs = ko.pureComputed(() => {
             const power = App.game.challenges.list.slowEVs.active() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
-            this.evs(Math.floor(ep / GameConstants.EP_EV_RATIO / power));
+            return Math.floor(this.effortPoints / GameConstants.EP_EV_RATIO / power);
         });
         this._attack = ko.pureComputed(() => this.calculateAttack());
     }
