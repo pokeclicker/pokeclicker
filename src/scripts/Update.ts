@@ -845,7 +845,7 @@ class Update implements Saveable {
 
             // Moved EVs from statistics
             saveData.party.caughtPokemon.forEach(p => {
-                p[9] = saveData.statistics.effortPoints[p.id];
+                p[9] = saveData.statistics.effortPoints?.[p.id] || 0;
             });
         },
     };
