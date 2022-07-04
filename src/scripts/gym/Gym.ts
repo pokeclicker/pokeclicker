@@ -10,6 +10,7 @@
 interface gymFlags {
     quest?: boolean;
     achievement?: boolean;
+    champion?: boolean;
 }
 
 /**
@@ -17,6 +18,7 @@ interface gymFlags {
  */
 class Gym extends TownContent {
     buttonText: string;
+    pokemons: GymPokemon[];
     public tooltip = 'Battle Gym Leaders to earn badges';
     public cssClass() {
         if (App.game.badgeCase.hasBadge(this.badgeReward)) {
@@ -61,7 +63,7 @@ class Gym extends TownContent {
     constructor(
         public leaderName: string,
         public town: string,
-        public pokemons: GymPokemon[],
+        pokemons: GymPokemon[],
         public badgeReward: BadgeEnums,
         public moneyReward: number,
         public defeatMessage: string,
@@ -75,6 +77,7 @@ class Gym extends TownContent {
         super(requirements);
         this.flags.quest = quest;
         this.flags.achievement = achievement;
+        this.pokemons = pokemons;
         if (!town.includes('Elite') && !town.includes('Champion')) {
             this.buttonText = `${leaderName.replace(/\d/g,'')}'s gym`;
         } else {
@@ -116,5 +119,9 @@ class Gym extends TownContent {
 
     get imagePath(): string {
         return `assets/images/gymLeaders/${GymBattle.gym.leaderName}.png`;
+    }
+
+    public getPokemonList() {
+        return this.pokemons.filter((p) => p.requirements.every((r => r.isCompleted())));
     }
 }

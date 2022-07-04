@@ -195,36 +195,32 @@ GymList['Elite Lance'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Agatha)]
 );
 // Kanto Champion
-GymList['Champion Blue'] = new Champion(
+GymList['Champion Blue'] = new Gym(
     'Blue',
     'Champion Blue',
     [
         new GymPokemon('Pidgeot', 52340, 59),
         new GymPokemon('Alakazam', 56320, 57),
         new GymPokemon('Rhydon', 58340, 59),
+        new GymPokemon('Exeggutor', 57520, 59, new StarterRequirement(GameConstants.Region.kanto, 0)),
+        new GymPokemon('Gyarados', 65340, 61, new StarterRequirement(GameConstants.Region.kanto, 0)),
+        new GymPokemon('Charizard', 70000, 63, new StarterRequirement(GameConstants.Region.kanto, 0)),
+        new GymPokemon('Arcanine', 57520, 59, new StarterRequirement(GameConstants.Region.kanto, 1)),
+        new GymPokemon('Exeggutor', 65340, 61, new StarterRequirement(GameConstants.Region.kanto, 1)),
+        new GymPokemon('Blastoise', 70000, 63, new StarterRequirement(GameConstants.Region.kanto, 1)),
+        new GymPokemon('Gyarados', 57520, 59, new StarterRequirement(GameConstants.Region.kanto, 2)),
+        new GymPokemon('Arcanine', 65340, 61, new StarterRequirement(GameConstants.Region.kanto, 2)),
+        new GymPokemon('Venusaur', 70000, 63, new StarterRequirement(GameConstants.Region.kanto, 2)),
+        new GymPokemon('Gyarados', 57520, 59, new StarterRequirement(GameConstants.Region.kanto, 3)),
+        new GymPokemon('Arcanine', 65340, 61, new StarterRequirement(GameConstants.Region.kanto, 3)),
+        new GymPokemon('Venusaur', 70000, 63, new StarterRequirement(GameConstants.Region.kanto, 3)),
     ],
     BadgeEnums.Elite_KantoChampion,
     10000,
     'NO! That can\'t be! You beat me at my best! After all that work to become the League Champ? My reign is over already? It\'s not fair!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Lance)],
-    // Bulbasaur
-    [
-        new GymPokemon('Exeggutor', 57520, 59),
-        new GymPokemon('Gyarados', 65340, 61),
-        new GymPokemon('Charizard', 70000, 63),
-    ],
-    // Charmander
-    [
-        new GymPokemon('Arcanine', 57520, 59),
-        new GymPokemon('Exeggutor', 65340, 61),
-        new GymPokemon('Blastoise', 70000, 63),
-    ],
-    // Squirtle/Pikachu
-    [
-        new GymPokemon('Gyarados', 57520, 59),
-        new GymPokemon('Arcanine', 65340, 61),
-        new GymPokemon('Venusaur', 70000, 63),
-    ]
+    () => {},
+    { champion: true }
 );
 
 //Johto Gyms
@@ -397,7 +393,7 @@ GymList['Elite Karen'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Bruno2)]
 );
 // Johto Champion
-GymList['Champion Lance'] = new Champion(
+GymList['Champion Lance'] = new Gym(
     'Lance2',
     'Champion Lance',
     [
@@ -411,7 +407,9 @@ GymList['Champion Lance'] = new Champion(
     BadgeEnums.Elite_JohtoChampion,
     7500,
     '…It\'s over. But it\'s an odd feeling. I\'m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Karen)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Karen)],
+    () => {},
+    { champion: true }
 );
 
 // Hoenn Gyms
@@ -590,7 +588,7 @@ GymList['Elite Drake'] = new Gym(
 );
 
 // Hoenn Champion
-GymList['Champion Wallace'] = new Champion(
+GymList['Champion Wallace'] = new Gym(
     'Wallace',
     'Champion Wallace',
     [
@@ -605,12 +603,10 @@ GymList['Champion Wallace'] = new Champion(
     16000,
     'I, the Champion, fall in defeat… That was wonderful work. You were elegant, infuriatingly so. And yet it was utterly glorious! Kudos to you! You are a truly noble Pokémon Trainer!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Drake)],
-    undefined,
-    undefined,
-    undefined,
     () => {
         App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest();
-    }
+    },
+    { champion: true }
 );
 
 //Sinnoh Gyms
@@ -787,7 +783,7 @@ GymList['Elite Lucian'] = new Gym(
 );
 
 // Sinnoh Champion
-GymList['Champion Cynthia'] = new Champion(
+GymList['Champion Cynthia'] = new Gym(
     'Cynthia',
     'Champion Cynthia',
     [
@@ -801,7 +797,9 @@ GymList['Champion Cynthia'] = new Champion(
     BadgeEnums.Elite_SinnohChampion,
     32000,
     'That was excellent. Truly, an outstanding battle. You gave the support your Pokémon needed to maximize their power. And you guided them with certainty to secure victory. You have both passion and calculating coolness. Together, you and your Pokémon can overcome any challenge that may come your way. Those are the impressions I got from our battle. I\'m glad I got to take part in the crowning of Sinnoh\'s new Champion!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Lucian)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Lucian)],
+    () => {},
+    { champion: true }
 );
 
 //Unova Gyms
@@ -988,7 +986,7 @@ GymList['Elite Caitlin'] = new Gym(
 );
 
 // Unova Champion
-GymList['Champion Iris'] = new Champion(
+GymList['Champion Iris'] = new Gym(
     'Iris',
     'Champion Iris',
     [
@@ -1002,7 +1000,9 @@ GymList['Champion Iris'] = new Champion(
     BadgeEnums.Elite_UnovaChampion,
     64000,
     'I\'m upset I couldn\'t win! But you know what? More than that, I\'m happy! I mean, come on. By having a serious battle, you and your Pokémon, and me and my Pokémon, we all got to know one another better than before! Yep, we sure did! OK, let\'s go!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Caitlin)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Caitlin)],
+    () => {},
+    { champion: true }
 );
 
 //Kalos Gyms
@@ -1172,7 +1172,7 @@ GymList['Elite Drasna'] = new Gym(
 );
 
 // Kalos Champion
-GymList['Champion Diantha'] = new Champion(
+GymList['Champion Diantha'] = new Gym(
     'Diantha',
     'Champion Diantha',
     [
@@ -1186,7 +1186,9 @@ GymList['Champion Diantha'] = new Champion(
     BadgeEnums.Elite_KalosChampion,
     128000,
     'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart...',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)],
+    () => {},
+    { champion: true }
 );
 
 //Alola Gyms
@@ -1458,7 +1460,7 @@ GymList['Elite Kahili'] = new Gym(
 
 // Alola Champion
 // TODO: Balancing - Set HP
-GymList['Champion Hau'] = new Champion(
+GymList['Champion Hau'] = new Gym(
     'Hau',
     'Champion Hau',
     [
@@ -1466,26 +1468,19 @@ GymList['Champion Hau'] = new Champion(
         new GymPokemon('Tauros', 89636471, 58),
         new GymPokemon('Noivern', 89636471, 58),
         new GymPokemon('Crabominable', 91545555, 59),
+        new GymPokemon('Flareon', 89636471, 58, new StarterRequirement(GameConstants.Region.alola, 0)),
+        new GymPokemon('Primarina', 96725389, 60, new StarterRequirement(GameConstants.Region.alola, 0)),
+        new GymPokemon('Vaporeon', 89636471, 58, new StarterRequirement(GameConstants.Region.alola, 1)),
+        new GymPokemon('Decidueye', 96725389, 60, new StarterRequirement(GameConstants.Region.alola, 1)),
+        new GymPokemon('Leafeon', 89636471, 58, new StarterRequirement(GameConstants.Region.alola, 2)),
+        new GymPokemon('Incineroar', 96725389, 60, new StarterRequirement(GameConstants.Region.alola, 2)),
     ],
     BadgeEnums.Elite_AlolaChampion,
     100000,
     'We\'re gonna keep moving forward, by staying at full power all the time!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Kahili)],
-    // Bulbasaur
-    [
-        new GymPokemon('Flareon', 89636471, 58),
-        new GymPokemon('Primarina', 96725389, 60),
-    ],
-    // Charmander
-    [
-        new GymPokemon('Vaporeon', 89636471, 58),
-        new GymPokemon('Decidueye', 96725389, 60),
-    ],
-    // Squirtle/Pikachu
-    [
-        new GymPokemon('Leafeon', 89636471, 58),
-        new GymPokemon('Incineroar', 96725389, 60),
-    ]
+    () => {},
+    { champion: true }
 );
 
 
@@ -1685,36 +1680,29 @@ GymList['Trainer Hop'] = new Gym(
 );
 // Galar Champion
 //TODO: rewards/hp rebalance
-GymList['Champion Leon'] = new Champion(
+GymList['Champion Leon'] = new Gym(
     'Leon',
     'Champion Leon',
     [
         new GymPokemon('Aegislash', 130579274, 62),
         new GymPokemon('Dragapult', 130579274, 62),
         new GymPokemon('Haxorus', 130579274, 63),
+        new GymPokemon('Seismitoad', 133481036, 64, new StarterRequirement(GameConstants.Region.alola, 0)),
+        new GymPokemon('Cinderace', 137833678, 64, new StarterRequirement(GameConstants.Region.alola, 0)),
+        new GymPokemon('Charizard', 145088083, 65, new StarterRequirement(GameConstants.Region.alola, 0)),
+        new GymPokemon('Mr. Rime', 133481036, 64, new StarterRequirement(GameConstants.Region.alola, 1)),
+        new GymPokemon('Inteleon', 137833678, 64, new StarterRequirement(GameConstants.Region.alola, 1)),
+        new GymPokemon('Charizard', 145088083, 65, new StarterRequirement(GameConstants.Region.alola, 1)),
+        new GymPokemon('Rhyperior', 133481036, 64, new StarterRequirement(GameConstants.Region.alola, 2)),
+        new GymPokemon('Rillaboom', 137833678, 64, new StarterRequirement(GameConstants.Region.alola, 2)),
+        new GymPokemon('Charizard', 145088083, 65, new StarterRequirement(GameConstants.Region.alola, 2)),
     ],
     BadgeEnums.Elite_GalarChampion,
     250000,
     'My time as Champion is over... But what a champion time it\'s been! Thank you for the greatest battle I\'ve ever had!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Hop)],
-    // Bulbasaur
-    [
-        new GymPokemon('Seismitoad', 133481036, 64),
-        new GymPokemon('Cinderace', 137833678, 64),
-        new GymPokemon('Charizard', 145088083, 65),
-    ],
-    // Charmander
-    [
-        new GymPokemon('Mr. Rime', 133481036, 64),
-        new GymPokemon('Inteleon', 137833678, 64),
-        new GymPokemon('Charizard', 145088083, 65),
-    ],
-    // Squirtle/Pikachu
-    [
-        new GymPokemon('Rhyperior', 133481036, 64),
-        new GymPokemon('Rillaboom', 137833678, 64),
-        new GymPokemon('Charizard', 145088083, 65),
-    ]
+    () => {},
+    { champion: true }
 );
 
 // Armor + crown gyms

@@ -117,7 +117,7 @@ class PokemonFactory {
      * @returns {any}
      */
     public static generateGymPokemon(gym: Gym, index: number): BattlePokemon {
-        const pokemon = gym.pokemons[index];
+        const pokemon = gym.getPokemonList()[index];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
         const exp: number = basePokemon.exp;

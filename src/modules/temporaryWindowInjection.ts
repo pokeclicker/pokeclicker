@@ -101,6 +101,7 @@ import RouteKillRequirement from './requirements/RouteKillRequirement';
 import SeededDateRequirement from './requirements/SeededDateRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
+import StarterRequirement from './requirements/StarterRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
 import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
@@ -223,6 +224,7 @@ Object.assign(<any>window, {
     SeededDateRequirement,
     ShinyPokemonRequirement,
     SubregionRequirement,
+    StarterRequirement,
     TokenRequirement,
     UndergroundItemsFoundRequirement,
     UndergroundLayersMinedRequirement,

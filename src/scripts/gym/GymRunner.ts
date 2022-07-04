@@ -20,16 +20,13 @@ class GymRunner {
         this.autoRestart(autoRestart);
         this.running(false);
         this.gymObservable(gym);
-        if (gym instanceof Champion) {
-            gym.setPokemon(player.regionStarters[player.region]());
-        }
         App.game.gameState = GameConstants.GameState.idle;
         DungeonRunner.timeBonus(FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
         GymRunner.timeLeft(GameConstants.GYM_TIME * this.timeBonus());
         GymRunner.timeLeftPercentage(100);
 
         GymBattle.gym = gym;
-        GymBattle.totalPokemons(gym.pokemons.length);
+        GymBattle.totalPokemons(gym.getPokemonList().length);
         GymBattle.index(0);
         GymBattle.generateNewEnemy();
         App.game.gameState = GameConstants.GameState.gym;

@@ -26,7 +26,7 @@ class GymBattle extends Battle {
         App.game.breeding.progressEggsBattle(this.gym.badgeReward * 3 + 1, GameConstants.Region.none);
         this.index(this.index() + 1);
 
-        if (this.index() >= this.gym.pokemons.length) {
+        if (this.index() >= this.gym.getPokemonList().length) {
             GymRunner.gymWon(this.gym);
         } else {
             this.generateNewEnemy();
