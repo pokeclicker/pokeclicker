@@ -26,7 +26,7 @@ class TemporaryBattleBattle extends Battle {
         // App.game.breeding.progressEggsBattle(0, GameConstants.Region.none); TODO: set this
         TemporaryBattleBattle.index(TemporaryBattleBattle.index() + 1);
 
-        if (TemporaryBattleBattle.index() >= TemporaryBattleBattle.battle.pokemons.length) {
+        if (TemporaryBattleBattle.index() >= TemporaryBattleBattle.battle.getPokemonList().length) {
             TemporaryBattleRunner.battleWon(TemporaryBattleBattle.battle);
         } else {
             TemporaryBattleBattle.generateNewEnemy();

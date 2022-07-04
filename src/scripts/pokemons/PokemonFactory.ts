@@ -187,7 +187,7 @@ class PokemonFactory {
     }
 
     public static generateTemporaryBattlePokemon(battle: TemporaryBattle, index: number): BattlePokemon {
-        const pokemon = battle.pokemons[index];
+        const pokemon = battle.getPokemonList()[index];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
         const exp: number = basePokemon.exp;

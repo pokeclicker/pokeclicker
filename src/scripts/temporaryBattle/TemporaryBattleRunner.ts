@@ -20,7 +20,7 @@ class TemporaryBattleRunner {
         this.timeLeftPercentage(100);
 
         TemporaryBattleBattle.battle = battle;
-        TemporaryBattleBattle.totalPokemons(battle.pokemons.length);
+        TemporaryBattleBattle.totalPokemons(battle.getPokemonList().length);
         TemporaryBattleBattle.index(0);
         TemporaryBattleBattle.generateNewEnemy();
         App.game.gameState = GameConstants.GameState.temporaryBattle;

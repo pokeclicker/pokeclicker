@@ -1,5 +1,6 @@
 class TemporaryBattle extends TownContent {
     completeRequirements: (Requirement | OneFromManyRequirement)[];
+    pokemons: GymPokemon[];
 
     public cssClass(): string {
         return 'btn btn-secondary';
@@ -25,7 +26,7 @@ class TemporaryBattle extends TownContent {
 
     constructor(
         public name: string,
-        public pokemons: GymPokemon[],
+        pokemons: GymPokemon[],
         public defeatMessage: string,
         requirements: (Requirement | OneFromManyRequirement)[] = [],
         completeRequirements: (Requirement | OneFromManyRequirement)[] = [],
@@ -37,5 +38,10 @@ class TemporaryBattle extends TownContent {
             completeRequirements = [new TemporaryBattleRequirement(name)];
         }
         this.completeRequirements = completeRequirements;
+        this.pokemons = pokemons;
+    }
+
+    public getPokemonList() {
+        return this.pokemons.filter((p) => p.requirements.every((r => r.isCompleted())));
     }
 }
