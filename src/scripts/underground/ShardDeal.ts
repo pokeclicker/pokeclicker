@@ -134,7 +134,7 @@ class ShardDeal {
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Yellow Shard', amount: 50},
                     ],
-                    ItemList.Trade_stone,
+                    ItemList.Linking_cord,
                     1),
             ]
         );
@@ -250,7 +250,7 @@ class ShardDeal {
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Yellow Shard', amount: 50},
                     ],
-                    ItemList.Trade_stone,
+                    ItemList.Linking_cord,
                     1),
                 new ShardDeal(
                     [
@@ -317,7 +317,7 @@ class ShardDeal {
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Yellow Shard', amount: 50},
                     ],
-                    ItemList.Trade_stone,
+                    ItemList.Linking_cord,
                     1),
             ]
         );
@@ -489,7 +489,7 @@ class ShardDeal {
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Yellow Shard', amount: 50},
                     ],
-                    ItemList.Trade_stone,
+                    ItemList.Linking_cord,
                     1),
                 new ShardDeal(
                     [
@@ -725,7 +725,7 @@ class ShardDeal {
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Yellow Shard', amount: 50},
                     ],
-                    ItemList.Trade_stone,
+                    ItemList.Linking_cord,
                     1),
                 new ShardDeal(
                     [
@@ -1047,7 +1047,7 @@ class ShardDeal {
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Yellow Shard', amount: 50},
                     ],
-                    ItemList.Trade_stone,
+                    ItemList.Linking_cord,
                     1),
                 new ShardDeal(
                     [
@@ -1295,7 +1295,7 @@ class ShardDeal {
                         {shardTypeString: 'Red Shard', amount: 50},
                         {shardTypeString: 'Yellow Shard', amount: 50},
                     ],
-                    ItemList.Trade_stone,
+                    ItemList.Linking_cord,
                     1),
                 new ShardDeal(
                     [
