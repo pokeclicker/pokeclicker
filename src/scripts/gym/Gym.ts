@@ -38,6 +38,7 @@ class Gym extends TownContent {
     public flags = {
         quest: true,
         achievement: true,
+        champion: false,
     };
 
     public areaStatus(): areaStatus {
@@ -72,11 +73,13 @@ class Gym extends TownContent {
         {
             quest = true,
             achievement = true,
+            champion = false,
         }: gymFlags = {}
     ) {
         super(requirements);
         this.flags.quest = quest;
         this.flags.achievement = achievement;
+        this.flags.champion = champion;
         this.pokemons = pokemons;
         if (!town.includes('Elite') && !town.includes('Champion')) {
             this.buttonText = `${leaderName.replace(/\d/g,'')}'s gym`;
