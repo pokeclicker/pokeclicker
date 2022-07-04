@@ -469,7 +469,7 @@ class Update implements Saveable {
                 [240, '40 x Moon Stone'],
                 [250, '6400 x Ultraball'],
                 [251, 'Deoxys (defense)'],
-                [300, '100 x Trade Stone'],
+                [300, '100 x Linking Cord'],
                 [386, 'Deoxys (speed)'],
             ];
             const highestStageCompleted = saveData.statistics?.battleFrontierHighestStageCompleted || 0;
@@ -801,17 +801,21 @@ class Update implements Saveable {
         },
 
         '0.9.8': ({ playerData, saveData, settingsData }) => {
-            saveData.oakItemLoadouts = saveData.oakItemLoadouts.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list }));
+            saveData.oakItemLoadouts = saveData.oakItemLoadouts?.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list })) || [];
 
             // Fix pokerus
             saveData.party.caughtPokemon.forEach(p => {
                 let status = (p[8]) ? 2 : 0;
                 const requiredForCured = saveData.challenges.list.slowEVs ? 5000 : 500;
-                if (saveData.statistics.effortPoints[p.id] >= requiredForCured) {
+                if (saveData.statistics.effortPoints?.[p.id] >= requiredForCured) {
                     status = 3;
                 }
                 p[8] = status;
             });
+
+            // Give the players Linking Cords in place of Trade Stones
+            playerData._itemList.Linking_cord = playerData._itemList.Trade_stone;
+            delete playerData._itemList.Trade_stone;
 
             // Fix quest default color
             if (settingsData) {
