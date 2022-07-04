@@ -44,12 +44,13 @@ class BattleFrontierMilestones {
         const reward = this.nextMileStone();
         if (reward && reward.stage == defeatedStage) {
             Notifier.notify({
-                title: '[Battle Frontier]',
-                message: `You've successfully defeated stage ${defeatedStage} and earned:\n<span>${reward.description}</span>!`,
+                title: 'Battle Frontier',
+                message: `You've successfully defeated stage ${defeatedStage.toLocaleString('en-US')} and earned:\n<span>${reward.description}</span>!`,
                 type: NotificationConstants.NotificationOption.info,
                 setting: NotificationConstants.NotificationSetting.General.battle_frontier,
                 timeout: 1e4,
             });
+            App.game.logbook.newLog(LogBookTypes.FRONTIER, `Received ${reward.description} for defeating stage ${defeatedStage.toLocaleString('en-US')} of the Battle Frontier!`);
             reward.gain();
         }
     }
