@@ -490,5 +490,13 @@ namespace GameConstants {
         'Seafolk Village',
         'Exeggutor Island',
         'Altar of the Sunne and Moone',
+        'Turffield',
+        'Hulbury',
+        'Motostoke',
+        'Hammerlocke',
+        'Stow-on-Side',
+        'Ballonlea',
+        'Circhester',
+        'Spikemuth',
     }
 }
