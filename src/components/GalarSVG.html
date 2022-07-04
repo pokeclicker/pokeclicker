@@ -13,9 +13,8 @@
         <!--Route 1-->
         <%- include('templates/mapRoute',
             { route: 1, region: 7
-            , width: 5, height: 2
+            , width: 2, height: 5
             , x: 49, y: 52
-            , rotate: true
             })
         %>
 
@@ -38,16 +37,16 @@
         <!--Rolling Fields-->
         <%- include('templates/mapRoute',
             { route: 3, region: 7
-            , width: 4, height: 1
-            , x: 42, y: 40, name: "RF"
+            , width: 5, height: 2
+            , x: 41, y: 38, name: "RF"
             })
         %>
 
         <!--Rolling Fields extension-->
         <%- include('templates/mapRoute',
             { route: 3, region: 7
-            , width: 5, height: 2
-            , x: 41, y: 38, name: "RF"
+            , width: 4, height: 1
+            , x: 42, y: 40, name: "RF"
             , noText: true
             })
         %>
@@ -127,8 +126,8 @@
         <!--Dappled Grove-->
         <%- include('templates/mapRoute',
             { route: 4, region: 7
-            , width: 3, height: 2
-            , x: 36, y: 32, name: "DG"
+            , width: 4, height: 2
+            , x: 36, y: 37, name: "DG"
             })
         %>
 
@@ -137,15 +136,6 @@
             { route: 4, region: 7
             , width: 2, height: 3
             , x: 36, y: 34, name: "DG"
-            , noText: true
-            })
-        %>
-
-        <!--Dappled Grove extension-->
-        <%- include('templates/mapRoute',
-            { route: 4, region: 7
-            , width: 4, height: 2
-            , x: 36, y: 37, name: "DG"
             , noText: true
             })
         %>
@@ -162,6 +152,15 @@
         <!--Dappled Grove extension-->
         <%- include('templates/mapRoute',
             { route: 4, region: 7
+            , width: 3, height: 2
+            , x: 36, y: 32, name: "DG"
+            , noText: true
+            })
+        %>
+
+        <!--Dappled Grove extension-->
+        <%- include('templates/mapRoute',
+            { route: 4, region: 7
             , width: 1, height: 1
             , x: 40, y: 38, name: "DG"
             , noText: true
@@ -171,7 +170,16 @@
         <!--West Lake Axwell-->
         <%- include('templates/mapRoute',
             { route: 5, region: 7
-            , width: 5, height: 5
+            , width: 1, height: 5
+            , x: 43, y: 27, name: "WLA"
+            , noText: true
+            })
+        %>
+
+        <!--West Lake Axwell extension-->
+        <%- include('templates/mapRoute',
+            { route: 5, region: 7
+            , width: 4, height: 5
             , x: 39, y: 27, name: "WLA"
             })
         %>
@@ -215,8 +223,8 @@
         <!--East Lake Axwell-->
         <%- include('templates/mapRoute',
             { route: 6, region: 7
-            , width: 6, height: 1
-            , x: 44, y: 23, name: "ELA"
+            , width: 7, height: 3
+            , x: 44, y: 26, name: "ELA"
             })
         %>
 
@@ -232,8 +240,8 @@
         <!--East Lake Axwell extension-->
         <%- include('templates/mapRoute',
             { route: 6, region: 7
-            , width: 7, height: 3
-            , x: 44, y: 26, name: "ELA"
+            , width: 6, height: 1
+            , x: 44, y: 23, name: "ELA"
             , noText: true
             })
         %>
@@ -321,16 +329,16 @@
         <!--South Lake Miloch-->
         <%- include('templates/mapRoute',
             { route: 8, region: 7
-            , width: 2, height: 1
-            , x: 53, y: 28, name: "SLM"
+            , width: 5, height: 10
+            , x: 52, y: 29, name: "SLM"
             })
         %>
 
         <!--South Lake Miloch extension-->
         <%- include('templates/mapRoute',
             { route: 8, region: 7
-            , width: 5, height: 10
-            , x: 52, y: 29, name: "SLM"
+            , width: 2, height: 1
+            , x: 53, y: 28, name: "SLM"
             , noText: true
             })
         %>
@@ -347,16 +355,16 @@
         <!--North Lake Miloch-->
         <%- include('templates/mapRoute',
             { route: 9, region: 7
-            , width: 6, height: 2
-            , x: 54, y: 22, name: "NLM"
+            , width: 8, height: 2
+            , x: 52, y: 24, name: "NLM"
             })
         %>
 
         <!--North Lake Miloch extension-->
         <%- include('templates/mapRoute',
             { route: 9, region: 7
-            , width: 8, height: 2
-            , x: 52, y: 24, name: "NLM"
+            , width: 6, height: 2
+            , x: 54, y: 22, name: "NLM"
             , noText: true
             })
         %>
@@ -391,17 +399,16 @@
         <!--Axew's Eye-->
         <%- include('templates/mapRoute',
             { route: 10, region: 7
-            , width: 1, height: 1
-            , x: 45, y: 29, name: "AE"
-            , noText: true
+            , width: 2, height: 2
+            , x: 45, y: 30, name: "AE"
             })
         %>
 
         <!--Axew's Eye extension-->
         <%- include('templates/mapRoute',
             { route: 10, region: 7
-            , width: 2, height: 2
-            , x: 45, y: 30, name: "AE"
+            , width: 1, height: 1
+            , x: 45, y: 29, name: "AE"
             , noText: true
             })
         %>
@@ -409,16 +416,16 @@
         <!--Watchtower Ruins-->
         <%- include('templates/mapRoute',
             { route: 11, region: 7
-            , width: 7, height: 1
-            , x: 37, y: 23, name: "WR"
+            , width: 8, height: 3
+            , x: 36, y: 24, name: "WR"
             })
         %>
 
         <!--Watchtower Ruins extension-->
         <%- include('templates/mapRoute',
             { route: 11, region: 7
-            , width: 8, height: 3
-            , x: 36, y: 24, name: "WR"
+            , width: 7, height: 1
+            , x: 37, y: 23, name: "WR"
             , noText: true
             })
         %>
@@ -501,16 +508,16 @@
         <!--Stony Wilderness-->
         <%- include('templates/mapRoute',
             { route: 18, region: 7
-            , width: 9, height: 1
-            , x: 49, y: 10, name: "SW"
+            , width: 10, height: 2
+            , x: 49, y: 11, name: "SW"
             })
         %>
 
         <!--Stony Wilderness extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 7
-            , width: 10, height: 2
-            , x: 49, y: 11, name: "SW"
+            , width: 9, height: 1
+            , x: 49, y: 10, name: "SW"
             , noText: true
             })
         %>
@@ -518,16 +525,16 @@
         <!--Giant's Mirror-->
         <%- include('templates/mapRoute',
             { route: 19, region: 7
-            , width: 4, height: 2
-            , x: 55, y: 2, name: "GM"
+            , width: 2, height: 4
+            , x: 55, y: 4, name: "GM"
             })
         %>
 
         <!--Giant's Mirror extension-->
         <%- include('templates/mapRoute',
             { route: 19, region: 7
-            , width: 2, height: 4
-            , x: 55, y: 4, name: "GM"
+            , width: 4, height: 2
+            , x: 55, y: 2, name: "GM"
             , noText: true
             })
         %>
@@ -543,8 +550,9 @@
         <!--Lake of Outrage-->
         <%- include('templates/mapRoute',
             { route: 21, region: 7
-            , width: 3, height: 7
+            , width: 7, height: 3
             , x: 46, y: 0, name: "LoO"
+            , rotate: true
             })
         %>
 
@@ -665,6 +673,14 @@
         <!-- DUNGEONS -->
         <!-- -------- -->
 
+        <!--Slumbering Weald Shrine-->
+        <%- include('templates/mapDungeon',
+            { name: "Slumbering Weald Shrine"
+            , x: 36, y: 53
+            , width: 6, height: 5
+            , invisible: true
+            })
+        %>
 
         <!--Galar Mine-->
         <%- include('templates/mapDungeon',
@@ -781,8 +797,8 @@
         <!--Circhester Bay-->
         <%- include('templates/mapRoute',
             { route: 29, region: 7
-            , width: 2, height: 3
-            , x: 71, y: 48, name: "CB"
+            , width: 2, height: 4
+            , x: 70, y: 51, name: "CB"
             })
         %>
 
@@ -798,8 +814,8 @@
         <!--Circhester Bay extension-->
         <%- include('templates/mapRoute',
             { route: 29, region: 7
-            , width: 2, height: 4
-            , x: 70, y: 51, name: "CB"
+            , width: 2, height: 3
+            , x: 71, y: 48, name: "CB"
             , noText: true
             })
         %>
@@ -807,16 +823,16 @@
         <!--Outer Spikemuth-->
         <%- include('templates/mapRoute',
             { route: 30, region: 7
-            , width: 2, height: 1
-            , x: 70, y: 55, name: "OS"
+            , width: 5, height: 2
+            , x: 68, y: 56, name: "OS"
             })
         %>
 
         <!--Outer Spikemuth extension-->
         <%- include('templates/mapRoute',
             { route: 30, region: 7
-            , width: 5, height: 2
-            , x: 68, y: 56, name: "OS"
+            , width: 2, height: 1
+            , x: 70, y: 55, name: "OS"
             , noText: true
             })
         %>
@@ -862,8 +878,8 @@
         <!--Hammerlocke-->
         <%- include('templates/mapTown',
             { name: "Hammerlocke"
-            , x: 45, y: 48.5
-            , width: 7, height: 2
+            , x: 46, y: 56
+            , width: 9, height: 3
             })
         %>
 
@@ -876,11 +892,11 @@
             })
         %>
 
-        <!--Hammerlocke-->
+        <!--Hammerlocke extension-->
         <%- include('templates/mapTown',
             { name: "Hammerlocke"
-            , x: 46, y: 56
-            , width: 9, height: 3
+            , x: 45, y: 48.5
+            , width: 7, height: 2
             , isExtension: true
             })
         %>
@@ -976,16 +992,16 @@
         <!--Glimwood Tangle-->
         <%- include('templates/mapDungeon',
             { name: "Glimwood Tangle"
-            , x: 27, y: 37
-            , width: 4, height: 1
+            , x: 25, y: 38
+            , width: 6, height: 6
             })
         %>
 
         <!--Glimwood Tangle extension-->
         <%- include('templates/mapDungeon',
             { name: "Glimwood Tangle"
-            , x: 25, y: 38
-            , width: 6, height: 6
+            , x: 27, y: 37
+            , width: 4, height: 1
             , isExtension: true
             })
         %>
@@ -1011,8 +1027,8 @@
         <!--Rose Tower-->
         <%- include('templates/mapDungeon',
             { name: "Rose Tower"
-            , x: 45, y: 2.5
-            , width: 3, height: 14
+            , x: 48, y: 13
+            , width: 3, height: 4
             })
         %>
 
@@ -1020,7 +1036,16 @@
         <%- include('templates/mapDungeon',
             { name: "Rose Tower"
             , x: 48, y: 2
-            , width: 3, height: 15
+            , width: 3, height: 11
+            , isExtension: true
+            })
+        %>
+
+        <!--Rose Tower extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Rose Tower"
+            , x: 45, y: 2.5
+            , width: 3, height: 14
             , isExtension: true
             })
         %>
@@ -1031,6 +1056,15 @@
             , x: 51, y: 2.5
             , width: 3, height: 14
             , isExtension: true
+            })
+        %>
+
+        <!--Energy Plant-->
+        <%- include('templates/mapDungeon',
+            { name: "Energy Plant"
+            , x: 46, y: 56
+            , width: 9, height: 3
+            , invisible: true
             })
         %>
 
@@ -1058,8 +1092,8 @@
         <!--Fields of Honour-->
         <%- include('templates/mapRoute',
             { route: 33, region: 7
-            , width: 5, height: 1
-            , x: 52, y: 42, name: "FoO"
+            , width: 9, height: 3
+            , x: 52, y: 45, name: "FoO"
             })
         %>
 
@@ -1084,8 +1118,8 @@
         <!--Fields of Honour extension-->
         <%- include('templates/mapRoute',
             { route: 33, region: 7
-            , width: 9, height: 3
-            , x: 52, y: 45, name: "FoO"
+            , width: 5, height: 1
+            , x: 52, y: 42, name: "FoO"
             , noText: true
             })
         %>
@@ -1129,8 +1163,8 @@
         <!--Soothing Wetlands-->
         <%- include('templates/mapRoute',
             { route: 34, region: 7
-            , width: 5, height: 3
-            , x: 47, y: 30, name: "SW"
+            , width: 8, height: 2.5
+            , x: 50, y: 36, name: "SW"
             })
         %>
 
@@ -1155,8 +1189,8 @@
         <!--Soothing Wetlands extension-->
         <%- include('templates/mapRoute',
             { route: 34, region: 7
-            , width: 8, height: 2.5
-            , x: 50, y: 36, name: "SW"
+            , width: 5, height: 3
+            , x: 47, y: 30, name: "SW"
             , noText: true
             })
         %>
@@ -1182,16 +1216,16 @@
         <!--Forest of Focus-->
         <%- include('templates/mapRoute',
             { route: 35, region: 7
-            , width: 11, height: 2
-            , x: 46, y: 23, name: "FoF"
+            , width: 13, height: 5
+            , x: 45, y: 25, name: "FoF"
             })
         %>
 
         <!--Forest of Focus extension-->
         <%- include('templates/mapRoute',
             { route: 35, region: 7
-            , width: 13, height: 5
-            , x: 45, y: 25, name: "FoF"
+            , width: 11, height: 2
+            , x: 46, y: 23, name: "FoF"
             , noText: true
             })
         %>
@@ -1199,8 +1233,8 @@
         <!--Challenge Beach-->
         <%- include('templates/mapRoute',
             { route: 36, region: 7
-            , width: 2, height: 3
-            , x: 43, y: 25, name: "CB"
+            , width: 11, height: 6
+            , x: 36, y: 30, name: "CB"
             })
         %>
 
@@ -1225,8 +1259,8 @@
         <!--Challenge Beach extension-->
         <%- include('templates/mapRoute',
             { route: 36, region: 7
-            , width: 11, height: 6
-            , x: 36, y: 30, name: "CB"
+            , width: 2, height: 3
+            , x: 43, y: 25, name: "CB"
             , noText: true
             })
         %>
@@ -1243,16 +1277,16 @@
         <!--Loop Lagoon-->
         <%- include('templates/mapRoute',
             { route: 37, region: 7
-            , width: 8, height: 1
-            , x: 36, y: 40, name: "LL"
+            , width: 11, height: 6
+            , x: 36, y: 41, name: "LL"
             })
         %>
 
         <!--Loop Lagoon extension-->
         <%- include('templates/mapRoute',
             { route: 37, region: 7
-            , width: 11, height: 6
-            , x: 36, y: 41, name: "LL"
+            , width: 8, height: 1
+            , x: 36, y: 40, name: "LL"
             , noText: true
             })
         %>
@@ -1313,7 +1347,7 @@
         <%- include('templates/mapRoute',
             { route: 40, region: 7
             , width: 4, height: 1
-            , x: 63, y: 16, name: "CR"
+            , x: 63, y: 18, name: "CR"
             })
         %>
 
@@ -1330,7 +1364,7 @@
         <%- include('templates/mapRoute',
             { route: 40, region: 7
             , width: 4, height: 1
-            , x: 63, y: 18, name: "CR"
+            , x: 63, y: 16, name: "CR"
             , noText: true
             })
         %>
@@ -1365,8 +1399,17 @@
         <!--Workout Sea-->
         <%- include('templates/mapRoute',
             { route: 41, region: 7
-            , width: 10, height: 1
-            , x: 69, y: 22, name: "WS"
+            , width: 13, height: 4
+            , x: 67, y: 38, name: "WS"
+            })
+        %>
+
+        <!--Workout Sea-->
+        <%- include('templates/mapRoute',
+            { route: 41, region: 7
+            , width: 3, height: 4
+            , x: 64, y: 38, name: "WS"
+            , noText: true
             })
         %>
 
@@ -1418,8 +1461,8 @@
         <!--Workout Sea extension-->
         <%- include('templates/mapRoute',
             { route: 41, region: 7
-            , width: 16, height: 4
-            , x: 64, y: 38, name: "WS"
+            , width: 10, height: 1
+            , x: 69, y: 22, name: "WS"
             , noText: true
             })
         %>
@@ -1669,8 +1712,8 @@
         <!--Insular Sea-->
         <%- include('templates/mapRoute',
             { route: 43, region: 7
-            , width: 4, height: 1
-            , x: 33, y: 1, name: "IS"
+            , width: 14, height: 2
+            , x: 23, y: 9, name: "IS"
             })
         %>
 
@@ -1683,7 +1726,7 @@
             })
         %>
 
-        <!--Insular Seaextension-->
+        <!--Insular Sea extension-->
         <%- include('templates/mapRoute',
             { route: 43, region: 7
             , width: 8, height: 1
@@ -1731,8 +1774,8 @@
         <!--Insular Sea extension-->
         <%- include('templates/mapRoute',
             { route: 43, region: 7
-            , width: 14, height: 2
-            , x: 23, y: 9, name: "IS"
+            , width: 4, height: 1
+            , x: 33, y: 1, name: "IS"
             , noText: true
             })
         %>
@@ -1767,8 +1810,8 @@
         <!--Honeycalm Sea-->
         <%- include('templates/mapRoute',
             { route: 44, region: 7
-            , width: 27, height: 1
-            , x: 37, y: 0, name: "HS"
+            , width: 11, height: 3
+            , x: 37, y: 13, name: "HS"
             })
         %>
 
@@ -1865,8 +1908,8 @@
         <!--Honeycalm Sea extension-->
         <%- include('templates/mapRoute',
             { route: 44, region: 7
-            , width: 11, height: 3
-            , x: 37, y: 13 , name: "HS"
+            , width: 27, height: 1
+            , x: 37, y: 0 , name: "HS"
             , noText: true
             })
         %>
@@ -1919,16 +1962,16 @@
         <!--Honeycalm Island-->
         <%- include('templates/mapRoute',
             { route: 45, region: 7
-            , width: 5, height: 1
-            , x: 39, y: 2, name: "HI"
+            , width: 7, height: 5
+            , x: 38, y: 3, name: "HI"
             })
         %>
 
         <!--Honeycalm Island extension-->
         <%- include('templates/mapRoute',
             { route: 45, region: 7
-            , width: 7, height: 5
-            , x: 38, y: 3, name: "HI"
+            , width: 5, height: 1
+            , x: 39, y: 2, name: "HI"
             , noText: true
             })
         %>
@@ -1986,8 +2029,17 @@
         <!--Courageous Cavern-->
         <%- include('templates/mapDungeon',
             { name: "Courageous Cavern"
+            , x: 47, y: 41
+            , width: 5, height: 3
+            })
+        %>
+
+        <!--Courageous Cavern extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Courageous Cavern"
             , x: 46, y: 36
             , width: 4, height: 4
+            , isExtension: true
             })
         %>
 
@@ -2000,20 +2052,11 @@
             })
         %>
 
-        <!--Courageous Cavern extension-->
-        <%- include('templates/mapDungeon',
-            { name: "Courageous Cavern"
-            , x: 47, y: 41
-            , width: 5, height: 3
-            , isExtension: true
-            })
-        %>
-
         <!--Brawlers Cave-->
         <%- include('templates/mapDungeon',
             { name: "Brawlers Cave"
-            , x: 59, y: 23
-            , width: 1, height: 1
+            , x: 59, y: 26
+            , width: 7, height: 3
             })
         %>
 
@@ -2038,8 +2081,8 @@
         <!--Brawlers Cave extension-->
         <%- include('templates/mapDungeon',
             { name: "Brawlers Cave"
-            , x: 59, y: 26
-            , width: 7, height: 3
+            , x: 59, y: 23
+            , width: 1, height: 1
             , isExtension: true
             })
         %>
@@ -2110,8 +2153,8 @@
         <!--Slippery Slope-->
         <%- include('templates/mapRoute',
             { route: 46, region: 7
-            , width: 5, height: 1
-            , x: 32, y: 14, name: "SS"
+            , width: 7, height: 2
+            , x: 33, y: 17, name: "SS"
             })
         %>
 
@@ -2136,8 +2179,8 @@
         <!--Slippery Slope extension-->
         <%- include('templates/mapRoute',
             { route: 46, region: 7
-            , width: 7, height: 2
-            , x: 33, y: 17, name: "SS"
+            , width: 5, height: 1
+            , x: 32, y: 14, name: "SS"
             , noText: true
             })
         %>
@@ -2154,16 +2197,16 @@
         <!--Frostpoint Field-->
         <%- include('templates/mapRoute',
             { route: 47, region: 7
-            , width: 3, height: 2
-            , x: 35, y: 21, name: "FF"
+            , width: 8, height: 3
+            , x: 30, y: 23, name: "FF"
             })
         %>
 
         <!--Frostpoint Field extension-->
         <%- include('templates/mapRoute',
             { route: 47, region: 7
-            , width: 8, height: 3
-            , x: 30, y: 23, name: "FF"
+            , width: 3, height: 2
+            , x: 35, y: 21, name: "FF"
             , noText: true
             })
         %>
@@ -2171,16 +2214,16 @@
         <!--Giants Bed-->
         <%- include('templates/mapRoute',
             { route: 48, region: 7
-            , width: 26, height: 2
-            , x: 30, y: 26, name: "GB"
+            , width: 27, height: 8
+            , x: 30, y: 28, name: "GB"
             })
         %>
 
         <!--Giants Bed extension-->
         <%- include('templates/mapRoute',
             { route: 48, region: 7
-            , width: 27, height: 8
-            , x: 30, y: 28, name: "GB"
+            , width: 26, height: 2
+            , x: 30, y: 26, name: "GB"
             , noText: true
             })
         %>
@@ -2267,8 +2310,8 @@
         <!--Frigid Sea-->
         <%- include('templates/mapRoute',
             { route: 51, region: 7
-            , width: 4, height: 2
-            , x: 71, y: 19, name: "FS"
+            , width: 3, height: 15
+            , x: 78, y: 15, name: "FS"
             })
         %>
 
@@ -2302,8 +2345,8 @@
         <!--Frigid Sea extension-->
         <%- include('templates/mapRoute',
             { route: 51, region: 7
-            , width: 3, height: 15
-            , x: 78, y: 15, name: "FS"
+            , width: 4, height: 2
+            , x: 71, y: 19, name: "FS"
             , noText: true
             })
         %>
@@ -2355,8 +2398,8 @@
         <!--Ballimere Lake-->
         <%- include('templates/mapRoute',
             { route: 53, region: 7
-            , width: 9, height: 2
-            , x: 38, y: 46, name: "BL"
+            , width: 14, height: 2
+            , x: 51, y: 53, name: "BL"
             })
         %>
 
@@ -2453,8 +2496,8 @@
         <!--Ballimere Lake extension-->
         <%- include('templates/mapRoute',
             { route: 53, region: 7
-            , width: 14, height: 2
-            , x: 51, y: 53, name: "BL"
+            , width: 9, height: 2
+            , x: 38, y: 46, name: "BL"
             , noText: true
             })
         %>
@@ -2471,16 +2514,16 @@
         <!--Snowslide Slope-->
         <%- include('templates/mapRoute',
             { route: 54, region: 7
-            , width: 4, height: 1
-            , x: 44, y: 13, name: "SS"
+            , width: 6, height: 4
+            , x: 44, y: 14, name: "SS"
             })
         %>
 
         <!--Snowslide Slope extension-->
         <%- include('templates/mapRoute',
             { route: 54, region: 7
-            , width: 6, height: 4
-            , x: 44, y: 14, name: "SS"
+            , width: 4, height: 1
+            , x: 44, y: 13, name: "SS"
             , noText: true
             })
         %>
@@ -2610,16 +2653,16 @@
         <!--Roaring-Sea Caves-->
         <%- include('templates/mapDungeon',
             { name: "Roaring-Sea Caves"
-            , x: 63, y: 16
-            , width: 10, height: 2
+            , x: 63, y: 18
+            , width: 3, height: 10
             })
         %>
 
         <!--Roaring-Sea Caves extension-->
         <%- include('templates/mapDungeon',
             { name: "Roaring-Sea Caves"
-            , x: 63, y: 18
-            , width: 3, height: 10
+            , x: 63, y: 16
+            , width: 10, height: 2
             , isExtension: true
             })
         %>
@@ -2693,8 +2736,8 @@
         <!--Tunnel to the Top-->
         <%- include('templates/mapDungeon',
             { name: "Tunnel to the Top"
-            , x: 53, y: 3
-            , width: 5, height: 2
+            , x: 48, y: 9
+            , width: 3, height: 5
             })
         %>
 
@@ -2719,8 +2762,8 @@
         <!--Tunnel to the Top extension-->
         <%- include('templates/mapDungeon',
             { name: "Tunnel to the Top"
-            , x: 48, y: 9
-            , width: 3, height: 5
+            , x: 53, y: 3
+            , width: 5, height: 2
             , isExtension: true
             })
         %>
