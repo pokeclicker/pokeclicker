@@ -3372,7 +3372,7 @@ TownList.Motostoke = new Town(
 TownList.Turffield = new Town(
     'Turffield',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Rampaging Tsareena'], TurffieldShopnew ShardTraderShop(GameConstants.ShardTraderLocations['Turffield'])],
+    [TemporaryBattleList['Rampaging Tsareena'], TurffieldShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Turffield'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 13)],
     }
@@ -3380,7 +3380,7 @@ TownList.Turffield = new Town(
 TownList.Hulbury = new Town(
     'Hulbury',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Hop4, TemporaryBattleList['Rampaging Gyarados'], HulburyShopnew ShardTraderShop(GameConstants.ShardTraderLocations['Hulbury'])],
+    [TemporaryBattleList.Hop4, TemporaryBattleList['Rampaging Gyarados'], HulburyShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hulbury'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 14)],
     }
@@ -3388,7 +3388,7 @@ TownList.Hulbury = new Town(
 TownList['Stow-on-Side'] = new Town(
     'Stow-on-Side',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Hop5, TemporaryBattleList.Bede3, TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShopnew ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side'])],
+    [TemporaryBattleList.Hop5, TemporaryBattleList.Bede3, TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
     }
@@ -3396,7 +3396,7 @@ TownList['Stow-on-Side'] = new Town(
 TownList.Ballonlea = new Town(
     'Ballonlea',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Gym Leader Bede'], BallonleaShopnew ShardTraderShop(GameConstants.ShardTraderLocations['Ballonlea'])],
+    [TemporaryBattleList['Gym Leader Bede'], BallonleaShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Ballonlea'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glimwood Tangle'))],
     }
@@ -3404,7 +3404,7 @@ TownList.Ballonlea = new Town(
 TownList.Hammerlocke = new Town(
     'Hammerlocke',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Hop6, TemporaryBattleList['Rampaging Haxorus'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShopnew ShardTraderShop(GameConstants.ShardTraderLocations['Hammerlocke'])],
+    [TemporaryBattleList.Hop6, TemporaryBattleList['Rampaging Haxorus'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hammerlocke'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
     }
@@ -3412,7 +3412,7 @@ TownList.Hammerlocke = new Town(
 TownList.Circhester = new Town(
     'Circhester',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Hop7, TemporaryBattleList['Rampaging Gigalith'], TemporaryBattleList['Rampaging Froslass'], GymList.Circhester1, GymList.Circhester2, CirchesterShopnew ShardTraderShop(GameConstants.ShardTraderLocations['Circhester'])],
+    [TemporaryBattleList.Hop7, TemporaryBattleList['Rampaging Gigalith'], TemporaryBattleList['Rampaging Froslass'], GymList.Circhester1, GymList.Circhester2, CirchesterShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Circhester'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
     }
@@ -3420,7 +3420,7 @@ TownList.Circhester = new Town(
 TownList.Spikemuth = new Town(
     'Spikemuth',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Marnie2, TemporaryBattleList['Gym Leader Marnie'], SpikemuthShopnew ShardTraderShop(GameConstants.ShardTraderLocations['Spikemuth'])],
+    [TemporaryBattleList.Marnie2, TemporaryBattleList['Gym Leader Marnie'], SpikemuthShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Spikemuth'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 30)],
     }
