@@ -3205,10 +3205,11 @@ const PostwickShop = new Shop([
     ItemList.Pokeball,
 ]);
 const WedgehurstShop = new Shop([
-    ItemList.Greatball,
+    ItemList.Pokeball,
     ItemList.Mystery_egg,
 ]);
 const TurffieldShop = new Shop([
+    Itemlist.Pokeball,
     ItemList.Grass_egg,
     ItemList.Sweet_apple,
     ItemList.Tart_apple,
@@ -3216,6 +3217,8 @@ const TurffieldShop = new Shop([
     ItemList.Sun_stone,
 ]);
 const HulburyShop = new Shop([
+    Itemlist.Pokeball,
+    Itemlist.Greatball,
     ItemList.Water_egg,
     ItemList.Water_stone,
     ItemList.Kings_rock,
@@ -3224,18 +3227,24 @@ const HulburyShop = new Shop([
     ItemList.Deepsea_scale,
 ]);
 const MotostokeShop = new Shop([
+    Itemlist.Pokeball,
+    Itemlist.Greatball,
     ItemList.Fire_egg,
     ItemList.Fire_stone,
     ItemList.Linking_cord,
     ItemList.Magmarizer,
 ]);
 const HammerlockeShop = new Shop([
+    Itemlist.Pokeball,
+    Itemlist.Greatball,
     ItemList.Dragon_egg,
     ItemList.Metal_coat,
     ItemList.Upgrade,
     ItemList.Dragon_scale,
 ]);
 const StowonSideShop: Shop = new Shop([
+    Itemlist.Pokeball,
+    Itemlist.Greatball,
     ItemList.Fighting_egg,
     ItemList.Soothe_bell,
     ItemList.Dawn_stone,
@@ -3243,6 +3252,9 @@ const StowonSideShop: Shop = new Shop([
     ItemList.Reaper_cloth,
 ]);
 const BallonleaShop = new Shop([
+    Itemlist.Pokeball,
+    Itemlist.Greatball,
+    Itemlist.Ultraball,
     ItemList.Cracked_pot,
     ItemList.Moon_stone,
     ItemList.Shiny_stone,
@@ -3250,12 +3262,18 @@ const BallonleaShop = new Shop([
     ItemList.Whipped_dream,
 ]);
 const CirchesterShop = new Shop([
+    Itemlist.Pokeball,
+    Itemlist.Greatball,
+    Itemlist.Ultraball,
     ItemList.Razor_claw,
     ItemList.Razor_fang,
     ItemList.Protector,
     ItemList.Ice_stone,
 ]);
 const SpikemuthShop = new Shop([
+    Itemlist.Pokeball,
+    Itemlist.Greatball,
+    Itemlist.Ultraball,
     ItemList.Electric_egg,
     ItemList.Thunder_stone,
     ItemList.Dusk_stone,
@@ -3276,10 +3294,17 @@ const WyndonShop = new Shop([
     ItemList.Lucky_incense,
 ]);
 const MasterDojoShop = new Shop([
+    Itemlist.Pokeball,
+    Itemlist.Greatball,
+    Itemlist.Ultraball,
     ItemList.Galarica_cuff,
     ItemList.Galarica_wreath,
 ]);
-
+const FreezingtonShop = new Shop([
+    Itemlist.Pokeball,
+    Itemlist.Greatball,
+    Itemlist.Ultraball,
+]);
 
 //Galar NPC
 
@@ -3291,8 +3316,8 @@ const Mom = new NPC('Mom', [
 ]);
 const TrainStationGuy = new NPC('Train Station Guy', [
     'There are some areas around Galar that you can only reach after beating the Champion.',
-    'One is sparsely populated, but the other is teeming with Pokemon.',
-    'There are plenty of unique, powerful ones there, too!',
+    'One is an island paradise, and the other a freezing wasteland.',
+    'I\m sure if you go to these places you\'ll find many unique and powerful Pokémon!',
 ]);
 const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     GameConstants.Region.galar,
@@ -3459,7 +3484,7 @@ TownList['Crown Tundra Station'] = new Town(
 TownList.Freezington = new Town(
     'Freezington',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Calyrex, TemporaryBattleList.Glastrier, TemporaryBattleList.Spectrier],
+    [TemporaryBattleList.Calyrex, TemporaryBattleList.Glastrier, TemporaryBattleList.Spectrier, FreezingtonShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 46)],
     }
