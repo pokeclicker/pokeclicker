@@ -643,15 +643,15 @@
     <!--Oreburgh City-->
     <%- include('templates/mapTown',
         { name: "Oreburgh City"
-        , x: 64, y: 81
-        , height: 2, width: 9
+        , x: 64, y: 83
+        , height: 3, width: 10
         })
     %>
     <!--Oreburgh City extension-->
     <%- include('templates/mapTown',
         { name: "Oreburgh City"
-        , x: 64, y: 83
-        , height: 3, width: 10
+        , x: 64, y: 81
+        , height: 2, width: 9
         , isExtension: true
         })
     %>
@@ -729,11 +729,12 @@
         })
     %>
 
-    <!--Mt. Coronet-->
+    <!--Mt. Coronet extension-->
     <%- include('templates/mapDungeon',
         { name: "Mt. Coronet"
         , x: 77, y: 57
         , height: 22, width: 6
+        , isExtension: true
         })
     %>
     <!--Mt. Coronet extension-->
@@ -846,6 +847,15 @@
         , x: 75, y: 29
         , height: 1, width: 4
         , isExtension: true
+        })
+    %>
+    <!--Mt. Coronet-->
+    <%- include('templates/mapDungeon',
+        { name: "Mt. Coronet"
+        , x: 78, y: 60
+        , height: 4, width: 4
+        , moveToTown: "Mt. Coronet"
+        , invisible: true
         })
     %>
 
@@ -1137,8 +1147,8 @@
     <!--Mt. Coronet South-->
     <%- include('templates/mapDungeon',
         { name: "Mt. Coronet South"
-        , x: 77, y: 57
-        , height: 22, width: 6
+        , x: 78, y: 75
+        , height: 4, width: 4
         , moveToTown: "Mt. Coronet"
         , invisible: true
         })
@@ -1219,8 +1229,8 @@
     <!--Mt. Coronet North-->
     <%- include('templates/mapDungeon',
         { name: "Mt. Coronet North"
-        , x: 77, y: 57
-        , height: 22, width: 6
+        , x: 81, y: 38
+        , height: 4, width: 4
         , moveToTown: "Mt. Coronet"
         , invisible: true
         })
@@ -1245,8 +1255,8 @@
     <!--Spear Pillar-->
     <%- include('templates/mapDungeon',
         { name: "Spear Pillar"
-        , x: 77, y: 57
-        , height: 22, width: 6
+        , x: 78, y: 60
+        , height: 4, width: 4
         , moveToTown: "Mt. Coronet"
         , invisible: true
         })
@@ -1608,8 +1618,8 @@
     <!--Hall of Origin-->
     <%- include('templates/mapDungeon',
         { name: "Hall of Origin"
-        , x: 77, y: 57
-        , height: 22, width: 6
+        , x: 78, y: 60
+        , height: 4, width: 4
         , moveToTown: "Mt. Coronet"
         , invisible: true
         })
