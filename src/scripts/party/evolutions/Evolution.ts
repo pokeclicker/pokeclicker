@@ -45,6 +45,11 @@ abstract class Evolution {
         if (newPokemon && App.game.challenges.list.realEvolutions.active()) {
             const basePokemonParty = App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.basePokemon).id);
             const evolvedPokemonParty = App.game.party.getPokemon(PokemonHelper.getPokemonByName(evolvedPokemon).id);
+            evolvedPokemonParty.effortPoints = basePokemonParty.effortPoints;
+            evolvedPokemonParty.pokerus = basePokemonParty.pokerus;
+            evolvedPokemonParty.shiny = basePokemonParty.shiny;
+            evolvedPokemonParty.attackBonusAmount = basePokemonParty.attackBonusAmount;
+            // TODO: add attackBonusProcent
             App.game.party.removePokemonByName(this.basePokemon);
         }
 
