@@ -244,7 +244,7 @@ namespace GameConstants {
         'Water_stone',
         'Thunder_stone',
         'Moon_stone',
-        'Trade_stone',
+        'Linking_cord',
         'Sun_stone',
         'Soothe_bell',
         'Metal_coat',
