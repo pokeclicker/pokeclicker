@@ -5,16 +5,12 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
        <div class="modal-header justify-content-start align-items-center">
             <h5 class="modal-title" id="breedingModalLabel">Day Care</h5>
             <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
-                    data-target="#breeding-settings" aria-expanded="false" aria-controls="breeding-settings">
-                Settings
-            </button>
-            <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
                     data-target="#breeding-filter" aria-expanded="false" aria-controls="breeding-filter">
                 Filters
             </button>
             <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
-                    data-target="#breeding-sort" aria-expanded="false" aria-controls="breeding-sort">
-                Sort
+                    data-target="#breeding-settings" aria-expanded="false" aria-controls="breeding-settings">
+                Settings
             </button>
             <button class="btn btn-secondary" type="button" style="margin-left: 25px;" href="#categoryModal" data-toggle="modal">
                 Categories
@@ -44,26 +40,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
             <div class="tab-content p-3">
                 <div class="tab-pane active" id="breeding-pokemon">
                     <div class="text-left">
-                        <div class="form-row collapse" id="breeding-settings">
-                            <div class="form-group col-md-3 col-6">
-                                <label>Display Value</label>
-                                <select name="breedingDisplayFilter" autocomplete="off" class="custom-select" onchange="BreedingController.displayValue(this.value), Settings.setSettingByName(this.name, this.value)">
-                                    <!-- ko foreach: Settings.getSetting('breedingDisplayFilter').options -->
-                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingDisplayFilter').value === $data.value }, text: $data.text">Type</option>
-                                    <!-- /ko -->
-                                </select>
-                            </div>
-                            <!-- ko if: App.game.challenges.list.regionalAttackDebuff.active() -->
-                            <div class="form-group col-md-3 col-6">
-                                <label>Regional Debuff</label>
-                                <select name="breedingRegionalAttackDebuffSetting" autocomplete="off" class="custom-select" onchange="BreedingController.regionalAttackDebuff(+this.value), Settings.setSettingByName(this.name, this.value)">
-                                    <!-- ko foreach: Settings.getSetting('breedingRegionalAttackDebuffSetting').options.filter(r => r.value <= player.highestRegion()) -->
-                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingRegionalAttackDebuffSetting').value === $data.value }, text: $data.text">Type</option>
-                                    <!-- /ko -->
-                                </select>
-                            </div>
-                            <!-- /ko -->
-                        </div>
                         <div class="form-row collapse" id="breeding-filter">
                             <div class="form-group col-md-6 col-6">
                                 <label>Search</label>
@@ -119,8 +95,26 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </select>
                             </div>
                         </div>
-                        <div class="form-row collapse" id="breeding-sort">
-                            <div class="form-group col" data-bind="with: Settings.getSetting('hatcherySort')">
+                        <div class="form-row collapse" id="breeding-settings">
+                            <div class="form-group col-md-3 col-6">
+                                <label>Display Value</label>
+                                <select name="breedingDisplayFilter" autocomplete="off" class="custom-select" onchange="BreedingController.displayValue(this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <!-- ko foreach: Settings.getSetting('breedingDisplayFilter').options -->
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingDisplayFilter').value === $data.value }, text: $data.text">Type</option>
+                                    <!-- /ko -->
+                                </select>
+                            </div>
+                            <!-- ko if: App.game.challenges.list.regionalAttackDebuff.active() -->
+                            <div class="form-group col-md-3 col-6">
+                                <label>Regional Debuff</label>
+                                <select name="breedingRegionalAttackDebuffSetting" autocomplete="off" class="custom-select" onchange="BreedingController.regionalAttackDebuff(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <!-- ko foreach: Settings.getSetting('breedingRegionalAttackDebuffSetting').options.filter(r => r.value <= player.highestRegion()) -->
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingRegionalAttackDebuffSetting').value === $data.value }, text: $data.text">Type</option>
+                                    <!-- /ko -->
+                                </select>
+                            </div>
+                            <!-- /ko -->
+                            <div class="form-group col-md-6 col-12" style="max-width: 100%; flex-grow: 1" data-bind="with: Settings.getSetting('hatcherySort')">
                                 <label>Sort</label>
                                 <div class="input-group">
                                     <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
