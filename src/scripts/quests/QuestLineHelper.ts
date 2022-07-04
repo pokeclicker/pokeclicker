@@ -143,6 +143,9 @@ class QuestLineHelper {
         const talktoGameCornerOwner1 = new TalkToNPCQuest(TwoIslandGameCornerOwner1, 'Ask the Game Corner owner on Two Island about the meteorite.');
         billSeviiQuestLine.addQuest(talktoGameCornerOwner1);
 
+        const clearBikerGangTemporaryBattle = new CustomQuest(1, 0, 'A biker gang has invaded Three island. They will not let you continue to Berry Forest. You\'ll have to take out all the Biker Goons before you can get to their leader.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Cue Ball Paxton')]());
+        billSeviiQuestLine.addQuest(clearBikerGangTemporaryBattle);
+
         const clearBerryForest = new CustomQuest(1, 0, 'Find Lostelle. Clear Berry Forest.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Berry Forest')]());
         billSeviiQuestLine.addQuest(clearBerryForest);
 

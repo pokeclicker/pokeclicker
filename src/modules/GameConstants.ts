@@ -1177,6 +1177,10 @@ export const RegionalStarters = [
 
 export const TemporaryBattles = [
     'Fighting Dojo',
+    'Biker Goon 1',
+    'Biker Goon 2',
+    'Biker Goon 3',
+    'Cue Ball Paxton',
     'AZ',
     'Ultra Wormhole',
     'Ultra Megalopolis',

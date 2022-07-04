@@ -245,7 +245,7 @@ const OneIslandCelio2 = new NPC ('Celio', [
     'I\'m glad to hear Lostelle is all right. You can hand the meteorite to me. Bill, thank you for your assistance, I\'ll take it from here. I can see that your friend is eager to get back to Kanto and challenge the Pokémon League.',
     'Thank you both very much.',
 ],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 3), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less )]) });
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 4), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less )]) });
 const OneIslandCelio3 = new NPC ('Celio', [
     'You\'ve been a great help. Thanks again. Maybe we\'ll meet again some day...',
 ],
@@ -259,17 +259,18 @@ const TwoIslandGameCornerOwner1 = new NPC ('Game Corner Owner', [
     'What? The meteorite for Celio? Yes, I can give that to you. But I need you to do something for me first.',
     'My daughter Lostelle is missing. She likes to pick berries in the Berry Forest on Three Island. She does it all the time. But this time she hasn\'t come back. Please go find her.',
 ],
-{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 2, GameConstants.AchievementOption.less ) });
+{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 3, GameConstants.AchievementOption.less ) });
 const TwoIslandGameCornerOwner2 = new NPC ('Game Corner Owner', [
     'My sweet Lostelle! I\'m so glad you\'re all right.',
     'Thank you very much kind stranger. Please take the Meteorite.',
 ],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 2), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less)]) });
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 3), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less)]) });
 const ThreeIslandBiker = new NPC ('Biker', [
     'You know what sucks? The other islands are off limits for some arbitrary reason. There is no explanation. Just can\'t go there.',
     'Alright, you want the real truth? Some weird old dude told me this: "The other islands don\'t exist. Yet. Gotta wait for the devs to put them in."',
-    'I don\'t know what half those words mean. I know the other islands exist! I have family there! I gotta stop listening to crazy people. I\'m sure we can\'t go there right now because of some freak weather event or whatever.',
-]);
+    'I don\'t know what half those words mean. All I know is I can\'t go back to Kanto with the rest of the gang. This sucks.',
+],
+{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 2) });
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
@@ -424,7 +425,7 @@ TownList['Two Island'] = new Town(
 TownList['Three Island'] = new Town(
     'Three Island',
     GameConstants.Region.kanto,
-    [ThreeIslandShop],
+    [ThreeIslandShop, TemporaryBattleList['Biker Goon 1'], TemporaryBattleList['Biker Goon 2'], TemporaryBattleList['Biker Goon 3'], TemporaryBattleList['Cue Ball Paxton']],
     {
         requirements: [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
         npcs: [ThreeIslandBiker],
