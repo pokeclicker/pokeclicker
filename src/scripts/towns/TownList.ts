@@ -3212,27 +3212,54 @@ const TurffieldShop = new Shop([
     ItemList.Grass_egg,
     ItemList.Sweet_apple,
     ItemList.Tart_apple,
+    Itemlist.Leaf_stone,
+    Itemlist.Sun_stone,
 ]);
 const HulburyShop = new Shop([
     ItemList.Water_egg,
+    Itemlist.Water_stone,
+    Itemlist.Kings_rock,
+    Itemlist.Prism_scale,
+    Itemlist.Deepsea_tooth,
+    Itemlist.Deepsea_scale,
 ]);
 const MotostokeShop = new Shop([
     ItemList.Fire_egg,
+    Itemlist.Fire_stone,
+    Itemlist.Linking_cord,
+    Itemlist.Magmarizer,
 ]);
 const HammerlockeShop = new Shop([
     ItemList.Dragon_egg,
+    Itemlist.Metal_coat,
+    Itemlist.Upgrade,
+    Itemlist.Dragon_scale,
 ]);
 const StowonSideShop: Shop = new Shop([
     ItemList.Fighting_egg,
+    Itemlist.Soothe_bell,
+    Itemlist.Dawn_stone,
+    Itemlist.Dubious_disc,
+    Itemlist.Reaper_cloth,
 ]);
 const BallonleaShop = new Shop([
     ItemList.Cracked_pot,
+    Itemlist.Moon_stone,
+    Itemlist.Shiny_stone,
+    Itemlist.Sachet,
+    Itemlist.Whipped_dream,
 ]);
 const CirchesterShop = new Shop([
+    Itemlist.Razor_claw,
+    Itemlist.Razor_fang,
+    Itemlist.Protector,
     ItemList.Ice_stone,
 ]);
 const SpikemuthShop = new Shop([
     ItemList.Electric_egg,
+    Itemlist.Thunder_stone,
+    Itemlist.Dusk_stone,
+    Itemlist.Electirizer,
 ]);
 const WyndonShop = new Shop([
     ItemList.Pokeball,
