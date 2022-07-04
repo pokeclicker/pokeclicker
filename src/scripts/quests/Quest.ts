@@ -120,9 +120,9 @@ abstract class Quest {
 
         this.progressText = ko.pureComputed(() => {
             if (this.initial() !== null) {
-                return `${Math.min((this.focus() - this.initial()), this.amount)} / ${this.amount}`;
+                return `${Math.min((this.focus() - this.initial()), this.amount).toLocaleString('en-US')} / ${this.amount.toLocaleString('en-US')}`;
             } else {
-                return `0 / ${this.amount}`;
+                return `0 / ${this.amount.toLocaleString('en-US')}`;
             }
         });
 

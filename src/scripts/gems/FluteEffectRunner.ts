@@ -98,7 +98,7 @@ class FluteEffectRunner {
         str.push(`Gems/Second: ${FluteEffectRunner.numActiveFlutes()} <br><br>Gem Types Used:`);
         const item = (ItemList[itemName] as FluteItem);
         item.gemTypes.forEach(t => {
-            str.push(`${t}: ${App.game.gems.gemWallet[PokemonType[t]]()}`);
+            str.push(`${t}: ${App.game.gems.gemWallet[PokemonType[t]]().toLocaleString('en-US')}`);
         });
         str.push(`<br>Time Remaining:<br> ${GameConstants.formatSecondsToTime(this.fluteFormattedTime(itemName))}`);
         return str.join('<br>');
