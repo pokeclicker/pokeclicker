@@ -39,3 +39,84 @@ export function animateCurrency({ amount, currency }: Amount) {
         $(aniElement).remove();
     });
 }
+
+function waitForLoad(el, fnc) {
+    if (!document.getElementById(el)) return setTimeout(() => waitForLoad(el, fnc), 1000);
+    return fnc();
+}
+
+waitForLoad('map', () => {
+    console.log('applying zoom functions');
+    const svgImage = document.getElementById('map');
+    const svgContainer = document.getElementById('mapBody');
+
+    const viewBox = {
+        x: 0, y: 0, w: 1600, h: 960,
+    };
+    svgImage.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
+    // svgSize = {w:svgImage.clientWidth,h:svgImage.clientHeight};
+    const svgSize = { w: 1600, h: 960 };
+    let isPanning = false;
+    let startPoint = { x: 0, y: 0 };
+    let endPoint = { x: 0, y: 0 };
+    let scale = 1;
+
+    svgContainer.onwheel = (e) => {
+        e.preventDefault();
+        // If already max/max scale, return;
+        const canScale = e.deltaY > 0 ? scale > 1 : scale < 2.5;
+        if (!canScale) return;
+
+        // Mouse pos
+        const mx = e.offsetX;
+        const my = e.offsetY;
+        // New dimensions
+        const dw = viewBox.w * Math.sign(-e.deltaY) * 0.07;
+        const dh = viewBox.h * Math.sign(-e.deltaY) * 0.07;
+
+        const dx = (dw * mx) / svgContainer.clientWidth;
+        const dy = (dh * my) / svgContainer.clientHeight;
+        viewBox.w = Math.min(svgSize.w, viewBox.w - dw);
+        viewBox.h = Math.min(svgSize.h, viewBox.h - dh);
+        viewBox.x = Math.max(0, Math.min(svgSize.w - viewBox.w, viewBox.x + dx));
+        viewBox.y = Math.max(0, Math.min(svgSize.h - viewBox.h, viewBox.y + dy));
+        scale = svgSize.w / viewBox.w;
+        svgImage.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
+    };
+
+    svgContainer.onmousedown = (e) => {
+        isPanning = true;
+        startPoint = { x: e.x, y: e.y };
+    };
+
+    svgContainer.onmousemove = (e) => {
+        if (!isPanning) {
+            return;
+        }
+        endPoint = { x: e.x, y: e.y };
+        const dx = (startPoint.x - endPoint.x) / (scale / 3);
+        const dy = (startPoint.y - endPoint.y) / (scale / 3);
+        const movedViewBox = {
+            x: Math.max(0, Math.min(svgSize.w - viewBox.w, viewBox.x + dx)),
+            y: Math.max(0, Math.min(svgSize.h - viewBox.h, viewBox.y + dy)),
+        };
+        svgImage.setAttribute('viewBox', `${movedViewBox.x} ${movedViewBox.y} ${viewBox.w} ${viewBox.h}`);
+    };
+
+    svgContainer.onmouseup = (e) => {
+        if (!isPanning) {
+            return;
+        }
+        endPoint = { x: e.x, y: e.y };
+        const dx = (startPoint.x - endPoint.x) / (scale / 3);
+        const dy = (startPoint.y - endPoint.y) / (scale / 3);
+        viewBox.x = Math.max(0, Math.min(svgSize.w - viewBox.w, viewBox.x + dx));
+        viewBox.y = Math.max(0, Math.min(svgSize.h - viewBox.h, viewBox.y + dy));
+        svgImage.setAttribute('viewBox', `${Math.max(0, viewBox.x)} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
+        isPanning = false;
+    };
+
+    svgContainer.onmouseleave = (e) => {
+        svgContainer.onmouseup(e);
+    };
+});
