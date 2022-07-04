@@ -52,7 +52,7 @@
                                         <button class='btn btn-block btn-primary'
                                                 data-bind='click: function(){App.game.gems.buyGemUpgrade($parentContext.$index(), $index())},
                                                     css: {disabled: !App.game.gems.canBuyGemUpgrade($parentContext.$index(), $index())},
-                                                    text: (App.game.gems.hasMaxUpgrade($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + App.game.gems.getGemUpgradeCost($parentContext.$index(), $index()) + ")")'>
+                                                    text: (App.game.gems.hasMaxUpgrade($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + App.game.gems.getGemUpgradeCost($parentContext.$index(), $index()).toLocaleString("en-US") + ")")'>
                                         </button>
                                     </td>
                                 </tr>

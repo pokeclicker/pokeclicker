@@ -34,8 +34,8 @@ class PartyController {
         return statuses;
     }
 
-    static hasMultipleStoneEvolutionsAvailable(pokemonName: string, evoType: GameConstants.StoneType) {
-        const pokemon = App.game.party.caughtPokemon.find(p => p.name == pokemonName);
+    static hasMultipleStoneEvolutionsAvailable(pokemonName: PokemonNameType, evoType: GameConstants.StoneType) {
+        const pokemon = App.game.party.getPokemonByName(pokemonName);
         // We only want to check against pokemon that have multiple possible evolutions that can happen now
         let found = false;
         if (pokemon) {
@@ -67,7 +67,7 @@ class PartyController {
     private static hatcherySortedList = [];
     static getHatcherySortedList = ko.pureComputed(() => {
         // If the breeding modal is open, we should sort it.
-        if (modalUtils.observableState['breedingModal'] === 'show') {
+        if (modalUtils.observableState.breedingModal === 'show') {
             PartyController.hatcherySortedList = [...App.game.party.caughtPokemon];
             return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue()));
         }
@@ -78,7 +78,7 @@ class PartyController {
     private static proteinSortedList = [];
     static getProteinSortedList = ko.pureComputed(() => {
         // If the protein modal is open, we should sort it.
-        if (modalUtils.observableState['pokemonSelectorModal'] === 'show') {
+        if (modalUtils.observableState.pokemonSelectorModal === 'show') {
             PartyController.proteinSortedList = [...App.game.party.caughtPokemon];
             return PartyController.proteinSortedList.sort(PartyController.compareBy(Settings.getSetting('proteinSort').observableValue(), Settings.getSetting('proteinSortDirection').observableValue()));
         }

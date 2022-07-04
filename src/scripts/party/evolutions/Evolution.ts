@@ -26,7 +26,7 @@ abstract class Evolution {
         // Notify the player if they haven't already caught the evolution, or notifications are forced
         if (!App.game.party.alreadyCaughtPokemonByName(evolvedPokemon) || notification) {
             Notifier.notify({
-                message: `Your ${this.basePokemon} evolved into a ${evolvedPokemon}`,
+                message: `Your ${this.basePokemon} evolved into ${GameHelper.anOrA(evolvedPokemon)} ${evolvedPokemon}!`,
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
@@ -35,6 +35,17 @@ abstract class Evolution {
 
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, true);
+
+        // Add shiny to logbook
+        if (shiny) {
+            App.game.logbook.newLog(LogBookTypes.SHINY, `Your ${this.basePokemon} evolved into a shiny ${evolvedPokemon}! ${App.game.party.alreadyCaughtPokemonByName(evolvedPokemon, true) ? '(duplicate)' : ''}`);
+        }
+
+        // EVs
+        if (App.game.party.getPokemon(PokemonHelper.getPokemonByName(evolvedPokemon).id).pokerus >= GameConstants.Pokerus.Contagious) {
+            const EPYield = (shiny ? GameConstants.SHINY_EP_YIELD : 1) * GameConstants.STONE_EP_YIELD;
+            GameHelper.incrementObservable(App.game.statistics.effortPoints[PokemonHelper.getPokemonByName(evolvedPokemon).id], EPYield);
+        }
         return shiny;
     }
 

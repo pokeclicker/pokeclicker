@@ -143,7 +143,7 @@ class Battle {
         if (Rand.chance(this.catchRateActual() / 100)) { // Caught
             this.catchPokemon(enemyPokemon);
         } else if (enemyPokemon.shiny) { // Failed to catch, Shiny
-            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The Shiny ${enemyPokemon.name} escaped!`);
+            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The shiny ${enemyPokemon.name} escaped!`);
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id)) { // Failed to catch, Uncaught
             App.game.logbook.newLog(LogBookTypes.ESCAPED, `The wild ${enemyPokemon.name} escaped!`);
         }
@@ -154,8 +154,26 @@ class Battle {
     public static catchPokemon(enemyPokemon: BattlePokemon) {
         const catchRoute = Battle.route || player.town()?.dungeon?.difficultyRoute || 1;
         App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(catchRoute, player.region));
+        GameHelper.incrementObservable(App.game.statistics.effortPoints[enemyPokemon.id],this.calculateEffortPoints(enemyPokemon));
         App.game.oakItems.use(OakItemType.Magic_Ball);
         App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny);
+    }
+
+    public static calculateEffortPoints(enemyPokemon: BattlePokemon): number {
+        let EPNum = GameConstants.BASE_EP_YIELD;
+
+        if (!App.game.party.getPokemon(enemyPokemon.id) || App.game.party.getPokemon(enemyPokemon.id).pokerus < GameConstants.Pokerus.Contagious) {
+            return 0;
+        }
+
+        if (enemyPokemon.shiny) {
+            EPNum *= GameConstants.SHINY_EP_YIELD;
+        }
+
+        if (player.town().dungeon) {
+            return EPNum *= GameConstants.DUNGEON_EP_YIELD;
+        }
+        return EPNum;
     }
 
     static gainItem() {

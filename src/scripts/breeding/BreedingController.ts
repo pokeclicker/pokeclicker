@@ -97,7 +97,7 @@ class BreedingController {
             $('#breedingModal').modal('show');
         } else {
             Notifier.notify({
-                message: 'You do not have access to the Day Care yet.\n<i>Clear route 5 first</i>',
+                message: 'You do not have access to the Day Care yet.\n<i>Clear Route 5 first.</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -167,6 +167,13 @@ class BreedingController {
                 }
             }
 
+            // check based on Pokerus status
+            if (BreedingFilters.pokerus.value() > -1) {
+                if (partyPokemon.pokerus !== BreedingFilters.pokerus.value()) {
+                    return false;
+                }
+            }
+
             // Check if either of the types match
             const type1: (PokemonType | null) = BreedingFilters.type1.value() > -2 ? BreedingFilters.type1.value() : null;
             const type2: (PokemonType | null) = BreedingFilters.type2.value() > -2 ? BreedingFilters.type2.value() : null;
@@ -205,6 +212,7 @@ class BreedingController {
             case 'stepsPerAttack': return `Steps/Att: ${(App.game.breeding.getSteps(pokemonMap[pokemon.name].eggCycles) / (pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + pokemon.proteinsUsed())).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
             case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
             case 'proteins': return `Proteins: ${pokemon.proteinsUsed()}`;
+            case 'evs': return `EVs: ${App.game.party.getEffortValues(pokemon)()}`;
         }
     }
 }
