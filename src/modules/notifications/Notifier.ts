@@ -164,8 +164,8 @@ export default class Notifier {
     public static confirm({
         title,
         message,
-        confirm = 'ok',
-        cancel = 'cancel',
+        confirm = 'Ok',
+        cancel = 'Cancel',
         type = NotificationOption.primary,
         timeout = 0,
         sound = null,

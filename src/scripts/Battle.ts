@@ -143,7 +143,7 @@ class Battle {
         if (Rand.chance(this.catchRateActual() / 100)) { // Caught
             this.catchPokemon(enemyPokemon);
         } else if (enemyPokemon.shiny) { // Failed to catch, Shiny
-            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The Shiny ${enemyPokemon.name} escaped!`);
+            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The shiny ${enemyPokemon.name} escaped!`);
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id)) { // Failed to catch, Uncaught
             App.game.logbook.newLog(LogBookTypes.ESCAPED, `The wild ${enemyPokemon.name} escaped!`);
         }
@@ -162,7 +162,7 @@ class Battle {
     public static calculateEffortPoints(enemyPokemon: BattlePokemon): number {
         let EPNum = GameConstants.BASE_EP_YIELD;
 
-        if (!App.game.party.getPokemon(enemyPokemon.id) || !App.game.party.getPokemon(enemyPokemon.id).pokerus) {
+        if (!App.game.party.getPokemon(enemyPokemon.id) || App.game.party.getPokemon(enemyPokemon.id).pokerus < GameConstants.Pokerus.Contagious) {
             return 0;
         }
 

@@ -98,13 +98,13 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
     'ripeDeath'));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points and Battle Points on main screen', false));
+Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
 Settings.add(new BooleanSetting('showGymGoAnimation', 'Show Gym GO animation', true));
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
-Settings.add(new CssVariableSetting('currentPlace', 'Current Location', [], '#55ff00'));
 Settings.add(new CssVariableSetting('incomplete', 'Incomplete Area', [], '#ff9100'));
-Settings.add(new CssVariableSetting('questAtLocation', 'Quest at Location', [], '#34BF45'));
+Settings.add(new CssVariableSetting('questAtLocation', 'Quest at Location', [], '#55ff00'));
 Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokemon', [], '#3498db'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Achievement', [], '#c939fe'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokemon', [], '#ffee00'));
@@ -208,6 +208,7 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
         new SettingOption('Pokedex ID', 'dexId'),
         new SettingOption('Proteins used', 'proteins'),
+        new SettingOption('EVs', 'evs'),
     ],
     'attack'));
 

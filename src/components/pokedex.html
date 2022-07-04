@@ -68,7 +68,7 @@ aria-labelledby="pokedexModalLabel">
                             <div class="col-12">
                                 <label class="form-check-label">
                                     <input class="form-check-input" type="checkbox" id="pokedex-filter-held-item"
-                                        value="false" onclick="PokedexHelper.toggleAllShiny(!PokedexHelper.toggleAllShiny())"> Hide shiny image
+                                        data-bind="checked: PokedexHelper.hideShinyImages"> Hide shiny image
                                 </label>
                             </div>
                         </div>
@@ -90,9 +90,11 @@ aria-labelledby="pokedexModalLabel">
                             <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
                                 <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}.svg`}"/>
                             </div>
-                            <div data-bind="visible: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -15px;">
-                                <img width="30px" src="" data-bind="attr: { src: `assets/images/breeding/Pokerus.png`}"/>
+                            <!-- ko ifnot: App.game.party.getPokemon($data.id) == undefined -->
+                            <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name) && App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -15px;">
+                                <img width="18px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id)?.pokerus]}.png`}"/>
                             </div>
+                            <!-- /ko -->
                             <img src="" width="80px" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokedexHelper.getImage($data.id)}">
                             <!-- ko if: PokedexHelper.pokemonSeen($data.id) -->
                             <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: $data.name">name</span>
@@ -103,7 +105,7 @@ aria-labelledby="pokedexModalLabel">
                                         <br/>Base Attack: <strong>${$data.attack}</strong>
                                         <br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate, true)}%</strong>
                                         <br/>Hatch Steps: <strong>${App.game.breeding.getSteps($data.eggCycles).toLocaleString('en-US')}</strong>` +
-                                        (App.game.party.getPokemon($data.id)?.pokerus ?
+                                        (App.game.party.getPokemon($data.id)?.pokerus >= GameConstants.Pokerus.Contagious ?
                                             `<br/>EVs: <strong>${App.game.party.getEffortValues(App.game.party.getPokemon($data.id))().toLocaleString('en-US')}</strong>
                                             <br/>EV bonus: <strong>×${App.game.party.calculateEVAttackBonus(App.game.party.getPokemon($data.id)).toLocaleString('en-US')}</strong>`
                                             : ''),
