@@ -1525,6 +1525,7 @@
         , databind: "click:function(){MapHelper.moveToTown('Flower Paradise')}, attr:{ class: MapHelper.calculateTownCssClass('Flower Paradise') }"
         , visible:  "App.game.statistics.routeKills[GameConstants.Region.sinnoh][224]() >= 10"
         , image: "assets/images/map/transparent.png"
+        , connectedToTown: "Flower Paradise"
         })
     %>
     <!--Flower Paradise extension-->
@@ -1569,15 +1570,6 @@
         , visible:  "App.game.statistics.routeKills[GameConstants.Region.sinnoh][224]() >= 10"
         , image: "assets/images/map/transparent.png"
         , isExtension: true
-        })
-    %>
-    <!--Flower Paradise extension-->
-    <%- include('templates/mapDungeon',
-        { name: "Flower Paradise"
-        , x: 184, y: 2
-        , width: 13, height: 4
-        , moveToTown: "Flower Paradise"
-        , invisible: true
         })
     %>
 
