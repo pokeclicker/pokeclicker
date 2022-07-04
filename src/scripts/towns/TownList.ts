@@ -3209,7 +3209,7 @@ const WedgehurstShop = new Shop([
     ItemList.Mystery_egg,
 ]);
 const TurffieldShop = new Shop([
-    Itemlist.Pokeball,
+    ItemList.Pokeball,
     ItemList.Grass_egg,
     ItemList.Sweet_apple,
     ItemList.Tart_apple,
@@ -3217,8 +3217,8 @@ const TurffieldShop = new Shop([
     ItemList.Sun_stone,
 ]);
 const HulburyShop = new Shop([
-    Itemlist.Pokeball,
-    Itemlist.Greatball,
+    ItemList.Pokeball,
+    ItemList.Greatball,
     ItemList.Water_egg,
     ItemList.Water_stone,
     ItemList.Kings_rock,
@@ -3227,24 +3227,24 @@ const HulburyShop = new Shop([
     ItemList.Deepsea_scale,
 ]);
 const MotostokeShop = new Shop([
-    Itemlist.Pokeball,
-    Itemlist.Greatball,
+    ItemList.Pokeball,
+    ItemList.Greatball,
     ItemList.Fire_egg,
     ItemList.Fire_stone,
     ItemList.Linking_cord,
     ItemList.Magmarizer,
 ]);
 const HammerlockeShop = new Shop([
-    Itemlist.Pokeball,
-    Itemlist.Greatball,
+    ItemList.Pokeball,
+    ItemList.Greatball,
     ItemList.Dragon_egg,
     ItemList.Metal_coat,
     ItemList.Upgrade,
     ItemList.Dragon_scale,
 ]);
 const StowonSideShop: Shop = new Shop([
-    Itemlist.Pokeball,
-    Itemlist.Greatball,
+    ItemList.Pokeball,
+    ItemList.Greatball,
     ItemList.Fighting_egg,
     ItemList.Soothe_bell,
     ItemList.Dawn_stone,
@@ -3252,9 +3252,9 @@ const StowonSideShop: Shop = new Shop([
     ItemList.Reaper_cloth,
 ]);
 const BallonleaShop = new Shop([
-    Itemlist.Pokeball,
-    Itemlist.Greatball,
-    Itemlist.Ultraball,
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
     ItemList.Cracked_pot,
     ItemList.Moon_stone,
     ItemList.Shiny_stone,
@@ -3262,18 +3262,18 @@ const BallonleaShop = new Shop([
     ItemList.Whipped_dream,
 ]);
 const CirchesterShop = new Shop([
-    Itemlist.Pokeball,
-    Itemlist.Greatball,
-    Itemlist.Ultraball,
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
     ItemList.Razor_claw,
     ItemList.Razor_fang,
     ItemList.Protector,
     ItemList.Ice_stone,
 ]);
 const SpikemuthShop = new Shop([
-    Itemlist.Pokeball,
-    Itemlist.Greatball,
-    Itemlist.Ultraball,
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
     ItemList.Electric_egg,
     ItemList.Thunder_stone,
     ItemList.Dusk_stone,
@@ -3294,16 +3294,16 @@ const WyndonShop = new Shop([
     ItemList.Lucky_incense,
 ]);
 const MasterDojoShop = new Shop([
-    Itemlist.Pokeball,
-    Itemlist.Greatball,
-    Itemlist.Ultraball,
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
     ItemList.Galarica_cuff,
     ItemList.Galarica_wreath,
 ]);
 const FreezingtonShop = new Shop([
-    Itemlist.Pokeball,
-    Itemlist.Greatball,
-    Itemlist.Ultraball,
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
 ]);
 
 //Galar NPC
