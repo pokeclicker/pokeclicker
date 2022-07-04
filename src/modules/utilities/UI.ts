@@ -123,7 +123,7 @@ waitForLoad('map', () => {
         const dy = (startPoint.y - endPoint.y) / (scale / 3);
         viewBox.x = Math.max(0, Math.min(svgSize.w - viewBox.w, viewBox.x + dx));
         viewBox.y = Math.max(0, Math.min(svgSize.h - viewBox.h, viewBox.y + dy));
-        svgImage.setAttribute('viewBox', `${Math.max(0, viewBox.x)} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
+        svgImage.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
         isPanning = false;
     };
 
