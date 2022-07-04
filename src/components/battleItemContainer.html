@@ -23,7 +23,7 @@
         <tbody>
           <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem'))">
             <tr data-bind="foreach: $data">
-                 <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data](),trigger:'hover',placement:'top',animation:false}"></td>
+                 <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data]().toLocaleString('en-US'),trigger:'hover',placement:'top',animation:false}"></td>
             </tr>
             <tr data-bind="foreach: $data">
                  <td class="p-0" data-bind="attr: {
