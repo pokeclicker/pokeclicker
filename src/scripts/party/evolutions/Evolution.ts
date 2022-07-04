@@ -23,7 +23,8 @@ abstract class Evolution {
             return false;
         }
 
-        if (!App.game.party.alreadyCaughtPokemonByName(evolvedPokemon) || notification) {
+        const newPokemon = !App.game.party.alreadyCaughtPokemonByName(evolvedPokemon);
+        if (newPokemon || notification) {
             // Notify the player if they haven't already caught the evolution, or notifications are forced
             Notifier.notify({
                 message: `Your ${this.basePokemon} evolved into a ${evolvedPokemon}`,
@@ -31,13 +32,17 @@ abstract class Evolution {
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
-            if (App.game.challenges.list.realEvolutions.active()) {
-                App.game.party.removePokemonByName(this.basePokemon);
-            }
         }
 
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, true);
+
+        if (newPokemon && App.game.challenges.list.realEvolutions.active()) {
+            const basePokemonParty = App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.basePokemon).id);
+            const evolvedPokemonParty = App.game.party.getPokemon(PokemonHelper.getPokemonByName(evolvedPokemon).id);
+            App.game.party.removePokemonByName(this.basePokemon);
+        }
+
         const EPYield = (shiny ? GameConstants.STONE_EP_YIELD * 2 : GameConstants.STONE_EP_YIELD);
         GameHelper.incrementObservable(App.game.statistics.effortPoints[PokemonHelper.getPokemonByName(evolvedPokemon).id], EPYield);
         return shiny;
