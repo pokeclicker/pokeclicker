@@ -109,6 +109,13 @@ class GemDeal {
 
     public static use(region: GameConstants.Region, i: number, tradeTimes = 1) {
         const deal = GemDeal.list[region].peek()[i];
+        if (!App.game.badgeCase.hasBadge(BadgeEnums.Heat)) {
+            Notifier.notify({
+                message: 'You are unable to use Flutes yet.\n<i>Visit the Gym in Lavaridge Town.</i>',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
         if (GemDeal.canUse(region, i)) {
             const trades = deal.gems.map(gem => {
                 const amt = App.game.gems.gemWallet[gem.gemType]();

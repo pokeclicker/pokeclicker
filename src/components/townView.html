@@ -47,7 +47,7 @@
                         text: $data.text(),
                         visible: $data.isVisible(),
                         click: $data.protectedOnclick,
-                        tooltip: ($data.tooltip || $data.clears() ? { title: $data.clears() != undefined ? `Total Clears: ${$data.clears()}` : $data.tooltip, trigger: 'hover', placement: 'left' } : undefined)
+                        tooltip: ($data.tooltip || $data.clears() ? { title: $data.clears() != undefined ? `Total Clears: ${$data.clears().toLocaleString('en-US')}` : $data.tooltip, trigger: 'hover', placement: 'left' } : undefined)
                         "></button>
                     <!-- ko if: $data instanceof Gym -->
                     <button class="btn btn-info p-0 btn-gym-auto-restart" data-bind="
