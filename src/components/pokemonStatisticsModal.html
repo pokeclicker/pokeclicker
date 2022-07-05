@@ -39,11 +39,11 @@
                     <!-- ko if: App.game.party.getPokemon($data)?.pokerus -->
                       <tr>
                         <td class="text-left">EVs</td>
-                        <td class="text-left tight"><code data-bind="text: App.game.party.getEffortValues(App.game.party.getPokemon($data))().toLocaleString('en-US')">-</code></td>
+                        <td class="text-left tight"><code data-bind="text: App.game.party.getPokemon($data).evs().toLocaleString('en-US')">-</code></td>
                       </tr>
                       <tr>
                         <td class="text-left">EV bonus</td>
-                        <td class="text-left tight"><code data-bind="text: '×' + App.game.party.calculateEVAttackBonus(App.game.party.getPokemon($data)).toLocaleString('en-US')">-</code></td>
+                        <td class="text-left tight"><code data-bind="text: '×' + App.game.party.getPokemon($data).calculateEVAttackBonus().toLocaleString('en-US')">-</code></td>
                       </tr>
                     <!-- /ko -->
                     <tr>
@@ -113,12 +113,6 @@
                       <td class="text-left">Shinies Hatched</td>
                       <td class="text-left tight"><code data-bind="text: App.game.statistics.shinyPokemonHatched[$data]().toLocaleString('en-US')">-</code></td>
                     </tr>
-                    <!-- ko if: App.game.party.getPokemon($data)?.pokerus >= GameConstants.Pokerus.Infected -->
-                    <tr>
-                      <td class="text-left">Effort Values</td>
-                      <td class="text-left tight"><code data-bind="text: App.game.party.getEffortValues(App.game.party.getPokemon($data))().toLocaleString('en-US')">-</code></td>
-                    </tr>
-                    <!-- /ko -->
                   </tbody>
                 </table>
             </div>
