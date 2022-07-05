@@ -847,8 +847,8 @@ class Update implements Saveable {
             saveData.party.caughtPokemon.forEach(p => {
                 p[9] = saveData.statistics.effortPoints?.[p.id] || 0;
             });
-            
-             // Add Galactic Boss Cyrus TemporaryBattle
+
+            // Add Galactic Boss Cyrus TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
         },
     };
