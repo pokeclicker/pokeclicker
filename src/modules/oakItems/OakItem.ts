@@ -87,7 +87,7 @@ export default class OakItem extends ExpUpgrade {
 
     get progressString(): string {
         const nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
-        return `${Math.ceil(this.normalizedExp / this.expGain)} / ${Math.ceil(nextLevelExp / this.expGain)}`;
+        return `${Math.ceil(this.normalizedExp / this.expGain).toLocaleString('en-US')} / ${Math.ceil(nextLevelExp / this.expGain).toLocaleString('en-US')}`;
     }
 
     get isActive() {
