@@ -843,11 +843,15 @@ class Update implements Saveable {
                 delete settingsData['notification.dungeon_item_found.desktop'];
             }
 
+            // Moved EVs from statistics
+            saveData.party.caughtPokemon.forEach(p => {
+                p[9] = saveData.statistics.effortPoints?.[p.id] || 0;
+            });
+
             // Start Sevii questline if player has Volcano Badge already
             if (saveData.badgeCase[7]) {
                 saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
             }
-
             // Add Mt. Ember Summit
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 10);
             // Add Berry Forest

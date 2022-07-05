@@ -212,6 +212,12 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
     ],
     'attack'));
 
+Settings.add(new Setting<string>('breedingRegionalAttackDebuffSetting', 'breedingRegionalAttackDebuffSetting',
+    [
+        ...Settings.enumToSettingOptionArray(Region),
+    ],
+    '-1'));
+
 // Achievement sorting
 const achievementSortSettings = Object.keys(AchievementSortOptionConfigs).map((opt) => (
     new SettingOption<number>(AchievementSortOptionConfigs[opt].text, parseInt(opt, 10))
