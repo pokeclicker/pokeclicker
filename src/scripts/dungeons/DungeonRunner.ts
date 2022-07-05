@@ -23,7 +23,7 @@ class DungeonRunner {
 
         if (!DungeonRunner.hasEnoughTokens()) {
             Notifier.notify({
-                message: 'You don\'t have enough dungeon tokens',
+                message: 'You don\'t have enough Dungeon Tokens.',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;
@@ -162,19 +162,20 @@ class DungeonRunner {
     }
 
     public static lootNotification(input, amount, weight, image) {
-        let message = `Found ${amount} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} in a dungeon chest`;
+        const multiple = (amount < 2) ? '' : 's';
+        let message = `Found ${amount} × <img src="${image}" height="24px"/> ${GameConstants.camelCaseToString(GameConstants.humanifyString(input))}${multiple} in a dungeon chest`;
         let type = NotificationConstants.NotificationOption.success;
-        let setting = NotificationConstants.NotificationSetting.Items.common_dungeon_item_found;
+        let setting = NotificationConstants.NotificationSetting.Dungeons.common_dungeon_item_found;
 
         if (typeof BerryType[input] == 'number') {
             const berryPlural = (amount < 2) ? 'Berry' : 'Berries';
             message = `Found ${Math.floor(amount)} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} ${berryPlural} in a dungeon chest`;
         } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
-            message = `Found a <img src="${image}" height="40px"/> ${GameConstants.humanifyString(input)} in a dungeon chest`;
+            message = `Encountered ${GameHelper.anOrA(input)} <img src="${image}" height="40px"/> ${GameConstants.humanifyString(input)} in a dungeon chest`;
         }
 
         if (weight <= 2) {
-            setting = NotificationConstants.NotificationSetting.Items.rare_dungeon_item_found;
+            setting = NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found;
             if (weight <= 0.5) {
                 type = NotificationConstants.NotificationOption.danger;
             } else {
@@ -198,15 +199,23 @@ class DungeonRunner {
         DungeonBattle.generateNewBoss();
     }
 
-    public static dungeonLeave() {
+    public static async dungeonLeave(shouldConfirm = Settings.getSetting('confirmLeaveDungeon').observableValue()): Promise<void> {
         if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.entrance || DungeonRunner.dungeonFinished() || !DungeonRunner.map.playerMoved()) {
             return;
         }
 
-        DungeonRunner.dungeonFinished(true);
-        DungeonRunner.fighting(false);
-        DungeonRunner.fightingBoss(false);
-        MapHelper.moveToTown(DungeonRunner.dungeon.name);
+        if (!shouldConfirm || await Notifier.confirm({
+            title: 'Dungeon',
+            message: 'Leave the dungeon?\n\nCurrent progress will be lost, but you will keep any items obtained from chests.',
+            type: NotificationConstants.NotificationOption.warning,
+            confirm: 'Leave',
+            timeout: 1 * GameConstants.MINUTE,
+        })) {
+            DungeonRunner.dungeonFinished(true);
+            DungeonRunner.fighting(false);
+            DungeonRunner.fightingBoss(false);
+            MapHelper.moveToTown(DungeonRunner.dungeon.name);
+        }
     }
 
     private static dungeonLost() {
@@ -216,7 +225,7 @@ class DungeonRunner {
             DungeonRunner.fightingBoss(false);
             MapHelper.moveToTown(DungeonRunner.dungeon.name);
             Notifier.notify({
-                message: 'You could not complete the dungeon in time',
+                message: 'You could not complete the dungeon in time.',
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
@@ -231,8 +240,9 @@ class DungeonRunner {
             GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]);
             MapHelper.moveToTown(DungeonRunner.dungeon.name);
             Notifier.notify({
-                message: 'You have successfully completed the dungeon',
+                message: 'You have successfully completed the dungeon.',
                 type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Dungeons.dungeon_complete,
             });
         }
     }

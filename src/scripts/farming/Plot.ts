@@ -361,8 +361,11 @@ class Plot implements Saveable {
             const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
 
             // Add to log book
-            const pokemonStr = shiny ? `shiny ${wanderPokemon}` : wanderPokemon;
-            App.game.logbook.newLog(LogBookTypes.WANDER, `A wild ${pokemonStr} has wandered onto the farm!`);
+            if (shiny) {
+                App.game.logbook.newLog(LogBookTypes.SHINY, `A shiny ${wanderPokemon} has wandered onto the farm! ${App.game.party.alreadyCaughtPokemonByName(wanderPokemon, true) ? '(duplicate)' : ''}`);
+            } else {
+                App.game.logbook.newLog(LogBookTypes.WANDER, `A wild ${wanderPokemon} has wandered onto the farm!`);
+            }
 
             // Gain Pokemon
             App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(wanderPokemon).id, shiny, true);

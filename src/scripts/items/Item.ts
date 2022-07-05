@@ -94,7 +94,7 @@ class Item {
 
         if (n > this.maxAmount) {
             Notifier.notify({
-                message: `You can only buy ${this.maxAmount} &times; ${GameConstants.humanifyString(this.displayName)}!`,
+                message: `You can only buy ${this.maxAmount.toLocaleString('en-US')} &times; ${GameConstants.humanifyString(this.displayName)}!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             n = this.maxAmount;
@@ -114,20 +114,22 @@ class Item {
             this.gain(n);
             this.increasePriceMultiplier(n);
             Notifier.notify({
-                message: `You bought ${n} ${GameConstants.humanifyString(this.displayName)}${multiple}`,
+                message: `You bought ${n.toLocaleString('en-US')} ${GameConstants.humanifyString(this.displayName)}${multiple}`,
                 type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Items.item_bought,
             });
         } else {
             let curr = GameConstants.camelCaseToString(GameConstants.Currency[this.currency]);
             switch (this.currency) {
                 case GameConstants.Currency.money:
+                    curr = 'Pokédollars';
                     break;
                 default:
                     curr += 's';
                     break;
             }
             Notifier.notify({
-                message: `You don't have enough ${curr} to buy ${n} ${GameConstants.humanifyString(this.displayName) + multiple}`,
+                message: `You don't have enough ${curr} to buy ${n.toLocaleString('en-US')} ${GameConstants.humanifyString(this.displayName) + multiple}!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
         }

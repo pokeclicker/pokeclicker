@@ -52,7 +52,7 @@ class DungeonMap {
     }
 
     public moveToTile(point: Point): boolean {
-        if (this.hasAccesToTile(point)) {
+        if (this.hasAccessToTile(point)) {
             this.currentTile().hasPlayer = false;
             this.playerPosition(point);
             if (this.flash) {
@@ -100,7 +100,7 @@ class DungeonMap {
         return tiles.filter(t => t);
     }
 
-    public hasAccesToTile(point: Point): boolean {
+    public hasAccessToTile(point: Point): boolean {
         // If player fighting/catching they cannot move right now
         if (DungeonRunner.fighting() || DungeonBattle.catching()) {
             return false;
