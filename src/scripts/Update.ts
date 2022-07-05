@@ -843,7 +843,12 @@ class Update implements Saveable {
                 delete settingsData['notification.dungeon_item_found.desktop'];
             }
 
-            // Add Galactic Boss Cyrus TemporaryBattle
+            // Moved EVs from statistics
+            saveData.party.caughtPokemon.forEach(p => {
+                p[9] = saveData.statistics.effortPoints?.[p.id] || 0;
+            });
+            
+             // Add Galactic Boss Cyrus TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
         },
     };
