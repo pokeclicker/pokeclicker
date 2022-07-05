@@ -58,6 +58,7 @@ class PokemonFactory {
                 sound: NotificationConstants.NotificationSound.General.roaming,
                 setting: NotificationConstants.NotificationSetting.General.encountered_roaming,
             });
+            App.game.logbook.newLog(LogBookTypes.ROAMER, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a ${shiny ? 'shiny' : ''} roaming ${name}!`);
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, 1, heldItem);
     }
@@ -106,7 +107,7 @@ class PokemonFactory {
 
     public static generatePartyPokemon(id: number, shiny = false): PartyPokemon {
         const dataPokemon = PokemonHelper.getPokemonById(id);
-        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, 0, 0, 0, false, shiny);
+        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, shiny);
     }
 
     /**

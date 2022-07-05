@@ -27,7 +27,7 @@
                                             click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')},
                                             visible: ItemList[$data].unlockedRegion <= player.highestRegion() || player.amountOfItem($data) > 0">
                                     <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;">
-                                    <div data-bind="text: player._itemList[$data]()"></div>
+                                    <div data-bind="text: player._itemList[$data]().toLocaleString('en-US')"></div>
                                 </div>
                             </div>
                         </div>
@@ -140,6 +140,6 @@
         boundary: document.getElementById('showItemsModal'),
     }">
         <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;">
-        <div data-bind="text: player._itemList[$data]()"></div>
+        <div data-bind="text: player._itemList[$data]().toLocaleString('en-US')"></div>
     </div>
 </script>

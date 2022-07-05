@@ -34,7 +34,7 @@ class Egg implements Saveable {
         }, this);
 
         this.progressText = ko.pureComputed(function () {
-            return `${this.steps()} / ${this.totalSteps}`;
+            return `${this.steps().toLocaleString('en-US')} / ${this.totalSteps.toLocaleString('en-US')}`;
         }, this);
 
         this.stepsRemaining = ko.pureComputed(function () {
@@ -123,15 +123,11 @@ class Egg implements Saveable {
                 if (partyPokemon.pokerus == GameConstants.Pokerus.Infected) {
                     partyPokemon.pokerus = GameConstants.Pokerus.Contagious;
                 }
-                if (App.game.statistics.effortPoints[pokemonID] >= 50 && partyPokemon.pokerus == GameConstants.Pokerus.Contagious) {
+                if (partyPokemon.evs() >= 50 && partyPokemon.pokerus == GameConstants.Pokerus.Contagious) {
                     partyPokemon.pokerus = GameConstants.Pokerus.Cured;
                 }
             }
-            // Recalculate current attack
-            partyPokemon.attack = partyPokemon.calculateAttack();
         }
-
-        App.game.party.gainPokemonById(pokemonID, shiny);
 
         if (shiny) {
             Notifier.notify({
@@ -140,7 +136,7 @@ class Egg implements Saveable {
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched_shiny,
             });
-            App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}!`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}! ${App.game.party.alreadyCaughtPokemon(partyPokemon.id, true) ? '(duplicate)' : ''}`);
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonHatched[pokemonID]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonHatched);
         } else {
@@ -150,6 +146,7 @@ class Egg implements Saveable {
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched,
             });
         }
+        App.game.party.gainPokemonById(pokemonID, shiny);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
         const baseForm = App.game.breeding.calculateBaseForm(this.pokemon);
