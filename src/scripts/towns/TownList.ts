@@ -1574,7 +1574,7 @@ TownList['Pastoria City'] = new Town(
 TownList['Celestic Town'] = new Town(
     'Celestic Town',
     GameConstants.Region.sinnoh,
-    [CelesticTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Celestic Town'])],
+    [CelesticTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Celestic Town']), TemporaryBattleList['Galactic Boss Cyrus']],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Fen)],
         npcs: [CelesticGrandma],
