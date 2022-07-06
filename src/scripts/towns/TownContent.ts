@@ -35,7 +35,7 @@ abstract class TownContent {
         });
         if (reqsList.length) {
             Notifier.notify({
-                message: `You don't have access yet.\n${reqsList.join('\n')}`,
+                message: `You don't have access yet.\n<i>${reqsList.join('\n')}</i>`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         } else {
@@ -125,16 +125,7 @@ class MoveToDungeon extends TownContent {
         return TownList[this.dungeon.name].isUnlocked();
     }
     public areaStatus(): areaStatus {
-        const dungeonAccess = MapHelper.calculateTownCssClass(this.dungeon.name);
-        switch (dungeonAccess) {
-            // if dungeon completed or locked, ignore it
-            case 'completed':
-            case 'locked':
-                return areaStatus.completed;
-            // Return the dungeons state
-            default:
-                return areaStatus[dungeonAccess];
-        }
+        return areaStatus[MapHelper.calculateTownCssClass(this.dungeon.name)];
     }
     public clears() {
         if (!QuestLineHelper.isQuestLineCompleted('Tutorial Quests')) {

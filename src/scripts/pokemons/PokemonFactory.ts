@@ -9,15 +9,15 @@ class PokemonFactory {
      * @param region region that the player is in.
      * @returns {any}
      */
-    public static generateWildPokemon(route: number, region: GameConstants.Region): BattlePokemon {
+    public static generateWildPokemon(route: number, region: GameConstants.Region, subRegion: SubRegion): BattlePokemon {
         if (!MapHelper.validRoute(route, region)) {
             return new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0);
         }
         let name: PokemonNameType;
 
-        const roaming = PokemonFactory.roamingEncounter(route, region);
+        const roaming = PokemonFactory.roamingEncounter(route, region, subRegion);
         if (roaming) {
-            name = PokemonFactory.generateRoamingEncounter(route, region);
+            name = PokemonFactory.generateRoamingEncounter(region, subRegion);
         } else {
             name = Rand.fromArray(RouteHelper.getAvailablePokemonList(route, region));
         }
@@ -58,15 +58,20 @@ class PokemonFactory {
                 sound: NotificationConstants.NotificationSound.General.roaming,
                 setting: NotificationConstants.NotificationSetting.General.encountered_roaming,
             });
+            App.game.logbook.newLog(LogBookTypes.ROAMER, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a ${shiny ? 'shiny' : ''} roaming ${name}!`);
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, 1, heldItem);
     }
 
     public static routeLevel(route: number, region: GameConstants.Region): number {
-        return Math.floor(Math.pow(20 * MapHelper.normalizeRoute(route, region),(1 / 2.25)));
+        return Math.floor(20 * Math.pow(MapHelper.normalizeRoute(route, region),(1 / 2.25)));
     }
 
     public static routeHealth(route: number, region: GameConstants.Region): number {
+        const regionRoute = Routes.regionRoutes.find((routeData) => routeData.region === region && routeData.number === route);
+        if (regionRoute.routeHealth) {
+            return regionRoute.routeHealth;
+        }
         route = MapHelper.normalizeRoute(route, region);
         const health: number = Math.max(20, Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15) * (1 + region / 20))) || 20;
         return health;
@@ -106,7 +111,7 @@ class PokemonFactory {
 
     public static generatePartyPokemon(id: number, shiny = false): PartyPokemon {
         const dataPokemon = PokemonHelper.getPokemonById(id);
-        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, 0, 0, 0, false, shiny);
+        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, shiny);
     }
 
     /**
@@ -194,26 +199,26 @@ class PokemonFactory {
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS);
     }
 
-    private static generateRoamingEncounter(route: number, region: GameConstants.Region): PokemonNameType {
-        const possible = RoamingPokemonList.getRegionalRoamers(region);
+    private static generateRoamingEncounter(region: GameConstants.Region, subRegion: SubRegion): PokemonNameType {
+        const possible = RoamingPokemonList.getSubRegionalGroupRoamers(region, RoamingPokemonList.findGroup(region, subRegion.id));
 
         // Double the chance of encountering a roaming Pokemon you have not yet caught
         return Rand.fromWeightedArray(possible, possible.map(r => App.game.party.alreadyCaughtPokemonByName(r.pokemon.name) ? 1 : 2)).pokemon.name;
     }
 
-    private static roamingEncounter(routeNum: number, region: GameConstants.Region): boolean {
+    private static roamingEncounter(routeNum: number, region: GameConstants.Region, subRegion: SubRegion): boolean {
         // Map to the route numbers
         const route = Routes.getRoute(region, routeNum);
         const routes = Routes.getRoutesByRegion(region).map(r => MapHelper.normalizeRoute(r.number, region));
 
         // Check if the dice rolls in their favor
-        const encounter = PokemonFactory.roamingChance(Math.max(...routes), Math.min(...routes), route, region);
+        const encounter = PokemonFactory.roamingChance(Math.max(...routes), Math.min(...routes), route, region, subRegion);
         if (!encounter) {
             return false;
         }
 
         // There is likely to be a roamer available, so we can check this last
-        const roamingPokemon = RoamingPokemonList.getRegionalRoamers(region);
+        const roamingPokemon = RoamingPokemonList.getSubRegionalGroupRoamers(region, RoamingPokemonList.findGroup(region, subRegion.id));
         if (!routes || !routes.length || !roamingPokemon || !roamingPokemon.length) {
             return false;
         }
@@ -222,11 +227,11 @@ class PokemonFactory {
         return true;
     }
 
-    private static roamingChance(maxRoute: number, minRoute: number, curRoute: RegionRoute, region: GameConstants.Region, max = GameConstants.ROAMING_MAX_CHANCE, min = GameConstants.ROAMING_MIN_CHANCE, skipBonus = false) {
+    private static roamingChance(maxRoute: number, minRoute: number, curRoute: RegionRoute, region: GameConstants.Region, subRegion: SubRegion, max = GameConstants.ROAMING_MAX_CHANCE, min = GameConstants.ROAMING_MIN_CHANCE, skipBonus = false) {
         const bonus = skipBonus ? 1 : App.game.multiplier.getBonus('roaming');
         const routeNum = MapHelper.normalizeRoute(curRoute?.number, region);
         // Check if we should have increased chances on this route (3 x rate)
-        const increasedChance = RoamingPokemonList.getIncreasedChanceRouteByRegion(player.region)()?.number == curRoute?.number;
+        const increasedChance = RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(player.region, RoamingPokemonList.findGroup(region, subRegion.id))()?.number == curRoute?.number;
         const roamingChance = (max + ( (min - max) * (maxRoute - routeNum) / (maxRoute - minRoute))) / ((increasedChance ? 3 : 1) * bonus);
         return Rand.chance(roamingChance);
     }
