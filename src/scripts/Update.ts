@@ -855,7 +855,6 @@ class Update implements Saveable {
             if (saveData.badgeCase[7]) {
                 saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
             }
-
             // Add Mt. Ember Summit
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 10);
             // Add Berry Forest
@@ -870,7 +869,6 @@ class Update implements Saveable {
             if (saveData.badgeCase[78]) {
                 saveData.quests.questLines.push({state: 1, name: 'The new kid', quest: 0});
             }
-
             // Add Ash Ketchum Kanto TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
             // Add Ash Ketchum Johto TemporaryBattle
