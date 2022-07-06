@@ -287,10 +287,13 @@ class QuestLineHelper {
         const clearTeamGalacticEternaBuilding = new CustomQuest(1, 0, 'Team Galactic is kidnapping Pokémon now. Clear Team Galactic Eterna Building in Eterna City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Galactic Eterna Building')]());
         galacticSinnohQuestLine.addQuest(clearTeamGalacticEternaBuilding);
 
-        const clearVeilstoneCityGym = new CustomQuest(1, 0, 'All is quiet. Team Galactic isn\'t doing anything. Guess they learned their lesson. Just keep traveling, I guess. Clear the Veilstone City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Veilstone City')]());
-        galacticSinnohQuestLine.addQuest(clearVeilstoneCityGym);
+        const clearPastoriaCityGym = new CustomQuest(1, 0, 'All is quiet. Team Galactic isn\'t doing anything. Guess they learned their lesson. Just keep traveling, I guess. Clear the Pastoria City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pastoria City')]());
+        galacticSinnohQuestLine.addQuest(clearPastoriaCityGym);
 
-        const clearCanalaveCityGym = new CustomQuest(1, 0, 'That sure is a strange building in Veilstone City. Oh well, no use worrying about that now. Adventure awaits! Clear the Canalave City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Canalave City')]());
+        const clearCyrus1TemporaryBattle = new CustomQuest(1, 0, 'The boss of Team Galactic has been spotted in Celestic Town!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galactic Boss Cyrus')]());
+        galacticSinnohQuestLine.addQuest(clearCyrus1TemporaryBattle);
+
+        const clearCanalaveCityGym = new CustomQuest(1, 0, 'Cyrus is gone. Nowhere to be found. Nothing to do but proceed. Adventure awaits! Clear the Canalave City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Canalave City')]());
         galacticSinnohQuestLine.addQuest(clearCanalaveCityGym);
 
         const clearLakeValor = new CustomQuest(1, 0, 'A commotion was heard at Lake Valor. You must protect the lake\'s guardian! Clear Lake Valor.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Lake Valor')]());

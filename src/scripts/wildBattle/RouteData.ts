@@ -991,7 +991,7 @@ Routes.add(new RegionRoute(
         land: ['Mr. Mime', 'Floatzel', 'Gastrodon (west)', 'Glameow', 'Chatot'],
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Shellos (west)', 'Gastrodon (west)', 'Finneon', 'Lumineon'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Fen)],
+    [new TemporaryBattleRequirement('Galactic Boss Cyrus')],
     210.6
 ));
 Routes.add(new RegionRoute(
@@ -1013,7 +1013,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Wingull', 'Pelipper', 'Clamperl', 'Finneon', 'Lumineon'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Fen)]
+    [new TemporaryBattleRequirement('Galactic Boss Cyrus')]
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 220', GameConstants.Region.sinnoh, 220,

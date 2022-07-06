@@ -848,6 +848,9 @@ class Update implements Saveable {
                 p[9] = saveData.statistics.effortPoints?.[p.id] || 0;
             });
 
+            // Add Galactic Boss Cyrus TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
+            
             // Start Sevii questline if player has Volcano Badge already
             if (saveData.badgeCase[7]) {
                 saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});

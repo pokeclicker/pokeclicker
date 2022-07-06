@@ -1181,6 +1181,7 @@ export const TemporaryBattles = [
     'Biker Goon 2',
     'Biker Goon 3',
     'Cue Ball Paxton',
+    'Galactic Boss Cyrus',
     'AZ',
     'Ultra Wormhole',
     'Ultra Megalopolis',
