@@ -526,10 +526,9 @@ namespace GameConstants {
         // PoniIsland,
     }
     declare enum GalarSubRegions {
-        Galar,
-        // GalarSouth,
-        // GalarNorth,
-        IsleOfArmor,
+        SouthGalar,
+        NorthGalar,
+        IsleofArmor,
         CrownTundra,
     }
 }
