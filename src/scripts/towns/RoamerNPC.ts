@@ -3,14 +3,15 @@ class RoamerNPC extends NPC {
     constructor(
         public name: string,
         public dialog: string[],
-        public region: GameConstants.Region
+        public region: GameConstants.Region,
+        public subRegionRoamerGroup: number
     ) {
         super(name, dialog);
     }
 
     get dialogHTML(): string {
-        const route = RoamingPokemonList.getIncreasedChanceRouteByRegion(this.region);
-        const roamers = RoamingPokemonList.getRegionalRoamers(this.region);
+        const route = RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(this.region, this.subRegionRoamerGroup);
+        const roamers = RoamingPokemonList.getSubRegionalGroupRoamers(this.region, this.subRegionRoamerGroup);
 
         // If no roaming Pokemon yet
         if (!roamers.length) {

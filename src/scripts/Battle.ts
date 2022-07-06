@@ -108,7 +108,7 @@ class Battle {
      */
     public static generateNewEnemy() {
         this.counter = 0;
-        this.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region));
+        this.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region, player.subregionObject()));
         const enemyPokemon = this.enemyPokemon();
         GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[enemyPokemon.id]);
         GameHelper.incrementObservable(App.game.statistics.totalPokemonEncountered);
@@ -154,7 +154,7 @@ class Battle {
     public static catchPokemon(enemyPokemon: BattlePokemon) {
         const catchRoute = Battle.route || player.town()?.dungeon?.difficultyRoute || 1;
         App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(catchRoute, player.region));
-        GameHelper.incrementObservable(App.game.statistics.effortPoints[enemyPokemon.id],this.calculateEffortPoints(enemyPokemon));
+        App.game.party.getPokemon(enemyPokemon.id).effortPoints += this.calculateEffortPoints(enemyPokemon);
         App.game.oakItems.use(OakItemType.Magic_Ball);
         App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny);
     }

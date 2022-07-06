@@ -134,6 +134,40 @@ class QuestLineHelper {
         App.game.quests.questLines().push(undergroundQuestLine);
     }
 
+    public static createBillSeviiQuestLine() {
+        const billSeviiQuestLine = new QuestLine('Bill\'s Errand', 'Bill has asked you to journey to the Sevii Islands with him to set up a digital connection to mainland Kanto.');
+
+        const talktoCelio1 = new TalkToNPCQuest(OneIslandCelio1, 'Use the Subregional Travel button at the top of the map to travel to the Sevii Islands and speak with Celio on One Island.');
+        billSeviiQuestLine.addQuest(talktoCelio1);
+
+        const talktoGameCornerOwner1 = new TalkToNPCQuest(TwoIslandGameCornerOwner1, 'Ask the Game Corner owner on Two Island about the meteorite.');
+        billSeviiQuestLine.addQuest(talktoGameCornerOwner1);
+
+        const clearBikerGangTemporaryBattle = new CustomQuest(1, 0, 'A biker gang has invaded Three island. They will not let you continue to Berry Forest. You\'ll have to take out all the Biker Goons before you can get to their leader.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Cue Ball Paxton')]());
+        billSeviiQuestLine.addQuest(clearBikerGangTemporaryBattle);
+
+        const clearBerryForest = new CustomQuest(1, 0, 'Find Lostelle. Clear Berry Forest.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Berry Forest')]());
+        billSeviiQuestLine.addQuest(clearBerryForest);
+
+        const talktoGameCornerOwner2 = new TalkToNPCQuest(TwoIslandGameCornerOwner2, 'Lostelle has been found. Return to the Game Corner owner on Two Island.');
+        billSeviiQuestLine.addQuest(talktoGameCornerOwner2);
+
+        const BillsErrandReward = () => {
+            App.game.wallet.gainQuestPoints(1000, true);
+            Notifier.notify({
+                title: billSeviiQuestLine.name,
+                message: 'Cecil has rewarded you with 1000 Quest Points!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talktoCelio2 = new TalkToNPCQuest(OneIslandCelio2, 'Deliver the meteorite to Celio on One Island.', BillsErrandReward);
+        billSeviiQuestLine.addQuest(talktoCelio2);
+
+        App.game.quests.questLines().push(billSeviiQuestLine);
+    }
+
     // Johto QuestLines
     public static createRocketJohtoQuestLine() {
         const rocketJohtoQuestLine = new QuestLine('Team Rocket Again', 'Team Rocket is up to no good again!');
@@ -253,10 +287,13 @@ class QuestLineHelper {
         const clearTeamGalacticEternaBuilding = new CustomQuest(1, 0, 'Team Galactic is kidnapping Pokémon now. Clear Team Galactic Eterna Building in Eterna City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Galactic Eterna Building')]());
         galacticSinnohQuestLine.addQuest(clearTeamGalacticEternaBuilding);
 
-        const clearVeilstoneCityGym = new CustomQuest(1, 0, 'All is quiet. Team Galactic isn\'t doing anything. Guess they learned their lesson. Just keep traveling, I guess. Clear the Veilstone City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Veilstone City')]());
-        galacticSinnohQuestLine.addQuest(clearVeilstoneCityGym);
+        const clearPastoriaCityGym = new CustomQuest(1, 0, 'All is quiet. Team Galactic isn\'t doing anything. Guess they learned their lesson. Just keep traveling, I guess. Clear the Pastoria City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pastoria City')]());
+        galacticSinnohQuestLine.addQuest(clearPastoriaCityGym);
 
-        const clearCanalaveCityGym = new CustomQuest(1, 0, 'That sure is a strange building in Veilstone City. Oh well, no use worrying about that now. Adventure awaits! Clear the Canalave City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Canalave City')]());
+        const clearCyrus1TemporaryBattle = new CustomQuest(1, 0, 'The boss of Team Galactic has been spotted in Celestic Town!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galactic Boss Cyrus')]());
+        galacticSinnohQuestLine.addQuest(clearCyrus1TemporaryBattle);
+
+        const clearCanalaveCityGym = new CustomQuest(1, 0, 'Cyrus is gone. Nowhere to be found. Nothing to do but proceed. Adventure awaits! Clear the Canalave City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Canalave City')]());
         galacticSinnohQuestLine.addQuest(clearCanalaveCityGym);
 
         const clearLakeValor = new CustomQuest(1, 0, 'A commotion was heard at Lake Valor. You must protect the lake\'s guardian! Clear Lake Valor.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Lake Valor')]());
@@ -579,6 +616,7 @@ class QuestLineHelper {
         this.createTutorial();
         this.createRocketKantoQuestLine();
         this.createUndergroundQuestLine();
+        this.createBillSeviiQuestLine();
         this.createRocketJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
         this.createDeoxysQuestLine();

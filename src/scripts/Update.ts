@@ -844,23 +844,44 @@ class Update implements Saveable {
                 delete settingsData['notification.dungeon_item_found.desktop'];
             }
 
+            // Moved EVs from statistics
+            saveData.party.caughtPokemon.forEach(p => {
+                p[9] = saveData.statistics.effortPoints?.[p.id] || 0;
+            });
+
+            // Add Galactic Boss Cyrus TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
+
+            // Start Sevii questline if player has Volcano Badge already
+            if (saveData.badgeCase[7]) {
+                saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
+            }
             // Start Ash questline if the player has beaten Kalos champion
             if (saveData.badgeCase[78]) {
                 saveData.quests.questLines.push({state: 1, name: 'The new kid', quest: 0});
             }
 
-            // Add Ash Ketchum Kanto TemporaryBattle
+            // Add Mt. Ember Summit
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 10);
+            // Add Berry Forest
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 11);
+            // Add Biker Gang TemporaryBattles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
-            // Add Ash Ketchum Johto TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 3);
-            // Add Ash Ketchum Hoenn TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 4);
-            // Add Ash Ketchum Sinnoh TemporaryBattle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 5);
-            // Add Ash Ketchum Unova TemporaryBattle
+            // Add Ash Ketchum Kanto TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 6);
-            // Add Ash Ketchum Kalos TemporaryBattle
+            // Add Ash Ketchum Johto TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+            // Add Ash Ketchum Hoenn TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 8);
+            // Add Ash Ketchum Sinnoh TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 9);
+            // Add Ash Ketchum Unova TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 10);
+            // Add Ash Ketchum Kalos TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
         },
     };
 
