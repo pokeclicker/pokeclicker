@@ -12,7 +12,7 @@ class RoamingPokemonList {
         [[GameConstants.UnovaSubRegions.Unova]],
         [[GameConstants.KalosSubRegions.Kalos]],
         [[GameConstants.AlolaSubRegions.MelemeleIsland, GameConstants.AlolaSubRegions.AkalaIsland, GameConstants.AlolaSubRegions.UlaulaAndPoniIslands]],
-        [[GameConstants.GalarSubRegions.SouthGalar], [GameConstants.GalarSubRegions.NorthGalar], [GameConstants.GalarSubRegions.IsleOfArmor], [GameConstants.GalarSubRegions.CrownTundra]],
+        [[GameConstants.GalarSubRegions.SouthGalar], [GameConstants.GalarSubRegions.NorthGalar], [GameConstants.GalarSubRegions.IsleofArmor], [GameConstants.GalarSubRegions.CrownTundra]],
     ];
 
     public static list: Partial<Record<GameConstants.Region, Array<Array<RoamingPokemon>>>> = {};
