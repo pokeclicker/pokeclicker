@@ -22,6 +22,7 @@ export default class Statistics implements Saveable {
     clickAttacks: KnockoutObservable<number>;
     questsCompleted: KnockoutObservable<number>;
     totalGemsGained: KnockoutObservable<number>;
+    totalProteinsPurchased: KnockoutObservable<number>;
     totalProteinsObtained: KnockoutObservable<number>;
     // Currency
     totalMoney: KnockoutObservable<number>;
@@ -92,6 +93,7 @@ export default class Statistics implements Saveable {
         'clickAttacks',
         'questsCompleted',
         'totalGemsGained',
+        'totalProteinsPurchased',
         'totalProteinsObtained',
         'totalMoney',
         'totalDungeonTokens',

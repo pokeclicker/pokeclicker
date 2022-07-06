@@ -4,6 +4,8 @@ type NPCOptionalArgument = {
 };
 
 class NPC {
+    public talkedTo = ko.observable<boolean>(false); // Used for custom quests
+
     constructor(
         public name: string,
         public dialog: string[],
@@ -28,6 +30,7 @@ class NPC {
             $('#npc-modal .npc-image').hide();
         }
         $('#npc-modal').modal();
+        this.talkedTo(true);
         return;
     }
 }

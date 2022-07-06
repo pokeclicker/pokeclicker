@@ -44,12 +44,13 @@ class BattleFrontierMilestones {
         const reward = this.nextMileStone();
         if (reward && reward.stage == defeatedStage) {
             Notifier.notify({
-                title: '[Battle Frontier]',
-                message: `You've successfully defeated stage ${defeatedStage} and earned:\n<span>${reward.description}</span>!`,
+                title: 'Battle Frontier',
+                message: `You've successfully defeated stage ${defeatedStage.toLocaleString('en-US')} and earned:\n<span>${reward.description}</span>!`,
                 type: NotificationConstants.NotificationOption.info,
                 setting: NotificationConstants.NotificationSetting.General.battle_frontier,
                 timeout: 1e4,
             });
+            App.game.logbook.newLog(LogBookTypes.FRONTIER, `Received ${reward.description} for defeating stage ${defeatedStage.toLocaleString('en-US')} of the Battle Frontier!`);
             reward.gain();
         }
     }
@@ -72,7 +73,7 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(150, 'Medi
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(151, 'Deoxys (attack)'));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(160, 'Lucky_egg', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(170, 'Lucky_incense', 100));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(180, 'Item_magnet', 100));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(180, 'Dowsing_machine', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(190, 'Mystery_egg', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(200, 'LargeRestore', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(210, 'Water_stone', 40));
@@ -81,5 +82,5 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(230, 'Thun
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(240, 'Moon_stone', 40));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(250, 'Ultraball', 6400));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(251, 'Deoxys (defense)'));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(300, 'Trade_stone', 100));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(300, 'Linking_cord', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(386, 'Deoxys (speed)'));
