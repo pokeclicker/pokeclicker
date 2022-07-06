@@ -12,7 +12,7 @@ class RoamingPokemonList {
         [[GameConstants.UnovaSubRegions.Unova]],
         [[GameConstants.KalosSubRegions.Kalos]],
         [[GameConstants.AlolaSubRegions.MelemeleIsland, GameConstants.AlolaSubRegions.AkalaIsland, GameConstants.AlolaSubRegions.UlaulaAndPoniIslands]],
-        [[GameConstants.GalarSubRegions.Galar], [GameConstants.GalarSubRegions.IsleOfArmor], [GameConstants.GalarSubRegions.CrownTundra]],
+        [[GameConstants.GalarSubRegions.SouthGalar], [GameConstants.GalarSubRegions.NorthGalar], [GameConstants.GalarSubRegions.IsleOfArmor], [GameConstants.GalarSubRegions.CrownTundra]],
     ];
 
     public static list: Partial<Record<GameConstants.Region, Array<Array<RoamingPokemon>>>> = {};
@@ -107,7 +107,7 @@ RoamingPokemonList.add(GameConstants.Region.alola, 0, new RoamingPokemon('Marsha
 RoamingPokemonList.add(GameConstants.Region.alola, 0, new RoamingPokemon('Zeraora', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
 
 //Galar
-RoamingPokemonList.add(GameConstants.Region.galar, 1, new RoamingPokemon('Galarian Zapdos', new TemporaryBattleRequirement('Dyna Tree Birds')));
+RoamingPokemonList.add(GameConstants.Region.galar, 0, new RoamingPokemon('Galarian Zapdos', new TemporaryBattleRequirement('Dyna Tree Birds')));
 
 //Galar - Isle of Armor
 RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Zarude', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
