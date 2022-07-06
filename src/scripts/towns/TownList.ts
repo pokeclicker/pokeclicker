@@ -2866,7 +2866,7 @@ const PaniolaTownShop = new Shop([
     ItemList.Water_egg,
 ]);
 const RoadsideMotelShop = new Shop([
-    ItemList['Beastball'],
+    ItemList.Beastball,
 ], undefined, [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 0),
 ]);
 const KonikoniCityShop = new Shop([
@@ -3046,7 +3046,7 @@ TownList['Melemele Woods'] = new Town(
 TownList['Roadside Motel'] = new Town(
     'Roadside Motel',
     GameConstants.Region.alola,
-    [TemporaryBattleList['Anabel'], RoadsideMotelShop],
+    [TemporaryBattleList.Anabel, RoadsideMotelShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
         npcs: [RoadsideMotelAnabel],
