@@ -2,6 +2,7 @@
 ///<reference path="../../declarations/requirements/RouteKillRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 
 const TownList: { [name: string]: Town } = {};
 
@@ -126,6 +127,26 @@ const CinnabarIslandShop = new Shop([
     ItemList.Treasure_Scanner,
     ItemList.HatcheryHelperKris,
 ]);
+const OneIslandShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.xAttack,
+    ItemList.Lucky_incense,
+]);
+const TwoIslandShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.xClick,
+    ItemList.Dowsing_machine,
+]);
+const ThreeIslandShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.Token_collector,
+]);
 
 // Kanto NPCs
 
@@ -212,12 +233,50 @@ const SaffronBreeder = new NPC('Breeder', [
 
 const FuchsiaKantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
     'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
-], GameConstants.Region.kanto);
+], GameConstants.Region.kanto, RoamingPokemonList.findGroup(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Kanto));
 
 const CinnabarIslandResearcher = new NPC('Researcher', [
     'They were trying to clone an ancient Pokémon in the mansion... I wonder if they succeeded.',
     'Apparently the ancient Pokémon escaped, and can be found roaming around Kanto!',
 ]);
+const OneIslandCelio1 = new NPC ('Celio', [
+    'Ah, yes. Welcome! Welcome! Almost didn\'t see you there. I\'m just so busy trying to get this darned thing to work. Once it\'s complete we can finally have a direct communications network between the Sevii Islands and Kanto!',
+    'I don\'t even have time to go and pick up an important package. A meteorite, found by the owner of the game corner on Two Island. It contains important materials for my machine.',
+    'You seem like the adventuring type. Tell you what. How about Bill stays here with me to work on this machine, and you go fetch my Meteorite for me.',
+],
+{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 1, GameConstants.AchievementOption.less ) });
+const OneIslandCelio2 = new NPC ('Celio', [
+    'Back already? That didn\'t take very long.',
+    'What? It did take long? You went on a whole rescue mission? Seems like I lost track of time while working on my machine with Bill. It\'s been a lot of fun.',
+    'I\'m glad to hear Lostelle is all right. You can hand the meteorite to me. Bill, thank you for your assistance, I\'ll take it from here. I can see that your friend is eager to get back to Kanto and challenge the Pokémon League.',
+    'Thank you both very much.',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 4), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less )]) });
+const OneIslandCelio3 = new NPC ('Celio', [
+    'You\'ve been a great help. Thanks again. Maybe we\'ll meet again some day...',
+],
+{ requirement: new QuestLineCompletedRequirement('Bill\'s Errand') });
+const OneIslandYoungster = new NPC ('Youngster', [
+    'Isn\'t it strange how Mol<span style="font-style: italic; font-weight: bold">tres</span> lives on <span style="font-style: italic; font-weight: bold">One</span> Island?',
+],
+{ requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Ember Summit')) });
+const TwoIslandGameCornerOwner1 = new NPC ('Game Corner Owner', [
+    'Hello stranger. I\'m afraid the Game Corner is currently closed.',
+    'What? The meteorite for Celio? Yes, I can give that to you. But I need you to do something for me first.',
+    'My daughter Lostelle is missing. She likes to pick berries in the Berry Forest on Three Island. She does it all the time. But this time she hasn\'t come back. Please go find her.',
+],
+{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 3, GameConstants.AchievementOption.less ) });
+const TwoIslandGameCornerOwner2 = new NPC ('Game Corner Owner', [
+    'My sweet Lostelle! I\'m so glad you\'re all right.',
+    'Thank you very much kind stranger. Please take the Meteorite.',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 3), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less)]) });
+const ThreeIslandBiker = new NPC ('Biker', [
+    'You know what sucks? The other islands are off limits for some arbitrary reason. There is no explanation. Just can\'t go there.',
+    'Alright, you want the real truth? Some weird old dude told me this: "The other islands don\'t exist. Yet. Gotta wait for the devs to put them in."',
+    'I don\'t know what half those words mean. All I know is I can\'t go back to Kanto with the rest of the gang. This sucks.',
+],
+{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 2) });
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
@@ -342,7 +401,41 @@ TownList['Indigo Plateau Kanto'] = new Town(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road')),
         ],
     }
-
+);
+TownList['One Island'] = new Town(
+    'One Island',
+    GameConstants.Region.kanto,
+    [OneIslandShop, new DockTownContent()],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Volcano)],
+        npcs: [OneIslandCelio1, OneIslandCelio2, OneIslandCelio3, OneIslandYoungster],
+    }
+);
+TownList['Mt. Ember'] = new Town(
+    'Mt. Ember',
+    GameConstants.Region.kanto,
+    [new MoveToDungeon(dungeonList['Mt. Ember Summit'])],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)],
+    }
+);
+TownList['Two Island'] = new Town(
+    'Two Island',
+    GameConstants.Region.kanto,
+    [TwoIslandShop],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('Bill\'s Errand', 0)],
+        npcs: [TwoIslandGameCornerOwner1, TwoIslandGameCornerOwner2],
+    }
+);
+TownList['Three Island'] = new Town(
+    'Three Island',
+    GameConstants.Region.kanto,
+    [ThreeIslandShop, TemporaryBattleList['Biker Goon 1'], TemporaryBattleList['Biker Goon 2'], TemporaryBattleList['Biker Goon 3'], TemporaryBattleList['Cue Ball Paxton']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
+        npcs: [ThreeIslandBiker],
+    }
 );
 
 //Kanto Dungeons
@@ -410,6 +503,16 @@ TownList['Pokémon Mansion'] = new DungeonTown(
         new RouteKillRequirement(10, GameConstants.Region.kanto, 20),
         new RouteKillRequirement(10, GameConstants.Region.kanto, 21),
     ])]
+);
+TownList['Mt. Ember Summit'] = new DungeonTown(
+    'Mt. Ember Summit',
+    GameConstants.Region.kanto,
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)]
+);
+TownList['Berry Forest'] = new DungeonTown(
+    'Berry Forest',
+    GameConstants.Region.kanto,
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 29)]
 );
 TownList['Victory Road'] = new DungeonTown(
     'Victory Road',
@@ -587,7 +690,7 @@ const MahoganySouvenirShopAttendant = new NPC('Souvenir Shop Attendant', [
 
 const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
     'On the news, they are getting more reports of roaming Pokémon appearing on {ROUTE_NAME}!',
-], GameConstants.Region.johto);
+], GameConstants.Region.johto, RoamingPokemonList.findGroup(GameConstants.Region.johto, GameConstants.JohtoSubRegions.Johto));
 
 const ProfElm = new ProfNPC('Prof. Elm',
     GameConstants.Region.johto,
@@ -929,7 +1032,7 @@ const OldaleTrackingScientist = new NPC('Tracking Scientist', [
 
 const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
     'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
-], GameConstants.Region.hoenn);
+], GameConstants.Region.hoenn, RoamingPokemonList.findGroup(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Hoenn));
 
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
@@ -1463,7 +1566,7 @@ const FightAreaAceTrainer = new NPC('Ace Trainer Quinn', [
 
 const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
     'I spotted a bunch of roaming Pokémon on {ROUTE_NAME}!',
-], GameConstants.Region.sinnoh);
+], GameConstants.Region.sinnoh, RoamingPokemonList.findGroup(GameConstants.Region.sinnoh, GameConstants.SinnohSubRegions.Sinnoh));
 
 const ProfRowan = new ProfNPC('Prof. Rowan',
     GameConstants.Region.sinnoh,
@@ -1974,7 +2077,7 @@ const P2LaboratoryColress = new NPC('Colress', [
 
 const UnovaRoamerNPC = new RoamerNPC('Professor Juniper\'s Aide', [
     'Our research indicates a higher concentration of roaming Pokémon on {ROUTE_NAME}!',
-], GameConstants.Region.unova);
+], GameConstants.Region.unova, RoamingPokemonList.findGroup(GameConstants.Region.unova, GameConstants.UnovaSubRegions.Unova));
 
 const ProfJuniper = new ProfNPC('Prof. Juniper',
     GameConstants.Region.unova,
@@ -2485,7 +2588,7 @@ const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
 
 const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
     'The spirits tell me roaming Pokémon have been spotted on {ROUTE_NAME}!',
-], GameConstants.Region.kalos);
+], GameConstants.Region.kalos, RoamingPokemonList.findGroup(GameConstants.Region.kalos, GameConstants.KalosSubRegions.Kalos));
 
 const KiloudeConfusedHiker = new NPC('Confused Hiker', [
     'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
@@ -2879,7 +2982,7 @@ const SeafolkCaptain = new NPC('Captain Mina', [
 ]);
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [
     'Some very rare Pokémon have been sighted on {ROUTE_NAME}. I hope we can learn more about them.',
-], GameConstants.Region.alola);
+], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.AkalaIsland));
 const ProfKukui = new ProfNPC('Prof. Kukui',
     GameConstants.Region.alola,
     'TODO',
