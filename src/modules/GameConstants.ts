@@ -1395,9 +1395,8 @@ export enum AlolaSubRegions {
 }
 
 export enum GalarSubRegions {
-    Galar = 0,
-    // GalarSouth = 0,
-    // GalarNorth,
-    IsleOfArmor,
+    SouthGalar = 0,
+    NorthGalar,
+    IsleofArmor,
     CrownTundra,
 }
