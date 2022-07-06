@@ -154,9 +154,9 @@ class Battle {
     public static catchPokemon(enemyPokemon: BattlePokemon) {
         const catchRoute = Battle.route || player.town()?.dungeon?.difficultyRoute || 1;
         App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(catchRoute, player.region));
-        App.game.party.getPokemon(enemyPokemon.id).effortPoints += this.calculateEffortPoints(enemyPokemon);
         App.game.oakItems.use(OakItemType.Magic_Ball);
         App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny);
+        App.game.party.getPokemon(enemyPokemon.id).effortPoints += this.calculateEffortPoints(enemyPokemon);
     }
 
     public static calculateEffortPoints(enemyPokemon: BattlePokemon): number {
