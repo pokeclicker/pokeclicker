@@ -141,7 +141,7 @@ TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ash Ketchum',
-        returnTown: 'LilyCove City',
+        returnTown: 'Lilycove City',
     }
 );
 TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
