@@ -288,21 +288,21 @@ class GameController {
             if (visibleModals === 0) {
                 // Route Battles
                 if (App.game.gameState === GameConstants.GameState.fighting) {
-                    const initialRoute = MapHelper.normalizeRoute(player.route(),player.region);
+                    const initialRoute = MapHelper.normalizeRoute(player.route(),player.region, false);
                     const firstRoute = Routes.getRoutesByRegion(player.region)[0].number;
                     const lastRoute = Routes.getRoutesByRegion(player.region)[Routes.getRoutesByRegion(player.region).length - 1].number;
                     // Allow '=' to fallthrough to '+' since they share a key on many keyboards
                     switch (key) {
                         case '=':
                         case '+':
-                            if (initialRoute + 1 > MapHelper.normalizeRoute(lastRoute, player.region)) {
+                            if (initialRoute + 1 > MapHelper.normalizeRoute(lastRoute, player.region, false)) {
                                 MapHelper.moveToRoute(firstRoute, player.region);
                             } else {
                                 MapHelper.moveToRoute(Routes.unnormalizeRoute(initialRoute + 1), player.region);
                             }
                             return e.preventDefault();
                         case '-':
-                            if (initialRoute - 1 < MapHelper.normalizeRoute(firstRoute, player.region)) {
+                            if (initialRoute - 1 < MapHelper.normalizeRoute(firstRoute, player.region, false)) {
                                 MapHelper.moveToRoute(lastRoute, player.region);
                             } else {
                                 MapHelper.moveToRoute(Routes.unnormalizeRoute(initialRoute - 1), player.region);

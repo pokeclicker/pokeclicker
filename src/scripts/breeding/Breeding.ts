@@ -41,6 +41,7 @@ class Breeding implements Feature {
         BreedingFilters.shinyStatus.value(Settings.getSetting('breedingShinyFilter').value);
         BreedingFilters.pokerus.value(Settings.getSetting('breedingPokerusFilter').value);
         BreedingController.displayValue(Settings.getSetting('breedingDisplayFilter').value);
+        BreedingController.regionalAttackDebuff(+Settings.getSetting('breedingRegionalAttackDebuffSetting').value);
     }
 
     initialize(): void {

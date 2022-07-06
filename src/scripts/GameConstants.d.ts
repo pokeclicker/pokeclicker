@@ -499,4 +499,37 @@ namespace GameConstants {
         'Circhester',
         'Spikemuth',
     }
+    declare enum KantoSubRegions {
+        Kanto,
+        Sevii123,
+    }
+    declare enum JohtoSubRegions {
+        Johto,
+    }
+    declare enum HoennSubRegions {
+        Hoenn,
+    }
+    declare enum SinnohSubRegions {
+        Sinnoh,
+    }
+    declare enum UnovaSubRegions {
+        Unova,
+    }
+    declare enum KalosSubRegions {
+        Kalos,
+    }
+    declare enum AlolaSubRegions {
+        MelemeleIsland,
+        AkalaIsland,
+        UlaulaAndPoniIslands,
+        // UlaulaIsland,
+        // PoniIsland,
+    }
+    declare enum GalarSubRegions {
+        Galar,
+        // GalarSouth,
+        // GalarNorth,
+        IsleOfArmor,
+        CrownTundra,
+    }
 }
