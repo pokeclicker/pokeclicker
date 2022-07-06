@@ -179,7 +179,7 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Captain Sophocles')]
 );
 
-TemporaryBattleList['Anabel'] = new TemporaryBattle(
+TemporaryBattleList.Anabel = new TemporaryBattle(
     'Anabel',
     [
         new GymPokemon('Alakazam', 90000000, 61),
