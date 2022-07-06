@@ -775,7 +775,6 @@ class Update implements Saveable {
         },
 
         '0.9.7': ({ playerData, saveData }) => {
-
             // Fix people not getting the pokerus
             if (saveData.keyItems.Pokerus_virus) {
                 let starter;
