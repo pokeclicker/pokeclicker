@@ -1727,7 +1727,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Mirages')],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Galar Route 2', GameConstants.Region.galar, 2,
@@ -1737,7 +1737,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Rolling Fields', GameConstants.Region.galar, 3,
@@ -1759,7 +1759,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Hop2')],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Dappled Grove', GameConstants.Region.galar, 4,
@@ -1782,7 +1782,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 3)],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'West Lake Axwell', GameConstants.Region.galar, 5,
@@ -1803,7 +1803,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 3)],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'East Lake Axwell', GameConstants.Region.galar, 6,
@@ -1825,7 +1825,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 3)],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Giant\'s Seat', GameConstants.Region.galar, 7,
@@ -1853,7 +1853,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'South Lake Miloch', GameConstants.Region.galar, 8,
@@ -1875,7 +1875,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 3)],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'North Lake Miloch', GameConstants.Region.galar, 9,
@@ -1904,7 +1904,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Axew\'s Eye', GameConstants.Region.galar, 10,
@@ -1932,7 +1932,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Watchtower Ruins', GameConstants.Region.galar, 11,
@@ -1960,7 +1960,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Galar Route 3', GameConstants.Region.galar, 12,
@@ -1970,7 +1970,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Hop3')],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Galar Route 4', GameConstants.Region.galar, 13,
@@ -1981,7 +1981,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Bede1')],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Galar Route 5', GameConstants.Region.galar, 14,
@@ -1992,7 +1992,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Galar_Grass)],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Motostoke Outskirts', GameConstants.Region.galar, 15,
@@ -2001,7 +2001,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Bede2')],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Motostoke Riverbank', GameConstants.Region.galar, 16,
@@ -2029,7 +2029,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Bridge Field', GameConstants.Region.galar, 17,
@@ -2052,7 +2052,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 16)],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Stony Wilderness', GameConstants.Region.galar, 18,
@@ -2073,7 +2073,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 17)],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Giant\'s Mirror', GameConstants.Region.galar, 19,
@@ -2101,7 +2101,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Giant\'s Cap', GameConstants.Region.galar, 20,
@@ -2130,7 +2130,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Lake of Outrage', GameConstants.Region.galar, 21,
@@ -2158,7 +2158,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Hammerlocke Hills', GameConstants.Region.galar, 22,
@@ -2184,7 +2184,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Galar Route 6', GameConstants.Region.galar, 23,
@@ -2195,7 +2195,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Galar_Fire)],
     undefined,
-    GalarSubRegions.NorthGalar
+    GameConstants.GalarSubRegions.NorthGalar
 ));
 Routes.add(new RegionRoute(
     'Galar Route 7', GameConstants.Region.galar, 24,
@@ -2205,7 +2205,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Hop6')],
     undefined,
-    GalarSubRegions.NorthGalar
+    GameConstants.GalarSubRegions.NorthGalar
 ));
 Routes.add(new RegionRoute(
     'Galar Route 8', GameConstants.Region.galar, 25,
@@ -2214,7 +2214,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 24)],
     undefined,
-    GalarSubRegions.NorthGalar
+    GameConstants.GalarSubRegions.NorthGalar
 ));
 Routes.add(new RegionRoute(
     'Steamdrift Way', GameConstants.Region.galar, 26,
@@ -2223,7 +2223,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 25)],
     undefined,
-    GalarSubRegions.NorthGalar
+    GameConstants.GalarSubRegions.NorthGalar
 ));
 Routes.add(new RegionRoute(
     'Galar Route 2 Lakeside', GameConstants.Region.galar, 27,
@@ -2233,7 +2233,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 25)],
     undefined,
-    GalarSubRegions.SouthGalar
+    GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
     'Galar Route 9', GameConstants.Region.galar, 28,
@@ -2243,7 +2243,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Hop7')],
     undefined,
-    GalarSubRegions.NorthGalar
+    GameConstants.GalarSubRegions.NorthGalar
 ));
 Routes.add(new RegionRoute(
     'Circhester Bay', GameConstants.Region.galar, 29,
@@ -2254,7 +2254,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 28)],
     undefined,
-    GalarSubRegions.NorthGalar
+    GameConstants.GalarSubRegions.NorthGalar
 ));
 Routes.add(new RegionRoute(
     'Outer Spikemuth', GameConstants.Region.galar, 30,
@@ -2264,7 +2264,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 29)],
     undefined,
-    GalarSubRegions.NorthGalar
+    GameConstants.GalarSubRegions.NorthGalar
 ));
 Routes.add(new RegionRoute(
     'Winter Hill Station', GameConstants.Region.galar, 31,
@@ -2273,7 +2273,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Galar_Dragon)],
     undefined,
-    GalarSubRegions.NorthGalar
+    GameConstants.GalarSubRegions.NorthGalar
 ));
 Routes.add(new RegionRoute(
     'Galar Route 10', GameConstants.Region.galar, 32,
@@ -2282,7 +2282,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 31)],
     undefined,
-    GalarSubRegions.NorthGalar
+    GameConstants.GalarSubRegions.NorthGalar
 ));
 
 /*
@@ -2312,7 +2312,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor
+    GameConstants.GalarSubRegions.IsleofArmor
 ));
 Routes.add(new RegionRoute(
     'Soothing Wetlands', GameConstants.Region.galar, 34,
@@ -2341,7 +2341,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor
+    GameConstants.GalarSubRegions.IsleofArmor
 ));
 Routes.add(new RegionRoute(
     'Forest of Focus', GameConstants.Region.galar, 35,
@@ -2368,7 +2368,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor
+    GameConstants.GalarSubRegions.IsleofArmor
 ));
 Routes.add(new RegionRoute(
     'Challenge Beach', GameConstants.Region.galar, 36,
@@ -2396,7 +2396,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor
+    GameConstants.GalarSubRegions.IsleofArmor
 ));
 Routes.add(new RegionRoute(
     'Loop Lagoon', GameConstants.Region.galar, 37,
@@ -2422,7 +2422,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor
+    GameConstants.GalarSubRegions.IsleofArmor
 ));
 Routes.add(new RegionRoute(
     'Training Lowlands', GameConstants.Region.galar, 38,
@@ -2449,7 +2449,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor
+    GameConstants.GalarSubRegions.IsleofArmor
 ));
 Routes.add(new RegionRoute(
     'Potbottom Desert', GameConstants.Region.galar, 39,
@@ -2468,7 +2468,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel'))],
     undefined,
-    GalarSubRegions.IsleofArmor
+    GameConstants.GalarSubRegions.IsleofArmor
 ));
 Routes.add(new RegionRoute(
     'Challenge Road', GameConstants.Region.galar, 40,
@@ -2494,7 +2494,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor
+    GameConstants.GalarSubRegions.IsleofArmor
 ));
 Routes.add(new RegionRoute(
     'Workout Sea', GameConstants.Region.galar, 41,
@@ -2521,7 +2521,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor
+    GameConstants.GalarSubRegions.IsleofArmor
 ));
 Routes.add(new RegionRoute(
     'Stepping-Stone Sea', GameConstants.Region.galar, 42,
@@ -2550,7 +2550,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor
+    GameConstants.GalarSubRegions.IsleofArmor
 ));
 Routes.add(new RegionRoute(
     'Insular Sea', GameConstants.Region.galar, 43,
@@ -2576,7 +2576,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor
+    GameConstants.GalarSubRegions.IsleofArmor
 ));
 Routes.add(new RegionRoute(
     'Honeycalm Sea', GameConstants.Region.galar, 44,
@@ -2602,7 +2602,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor
+    GameConstants.GalarSubRegions.IsleofArmor
 ));
 Routes.add(new RegionRoute(
     'Honeycalm Island', GameConstants.Region.galar, 45,
@@ -2623,7 +2623,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 44)],
     undefined,
-    GalarSubRegions.IsleofArmor
+    GameConstants.GalarSubRegions.IsleofArmor
 ));
 
 //Crown Tundra
@@ -2644,7 +2644,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Peony')],
     undefined,
-    GalarSubRegions.CrownTundra
+    GameConstants.GalarSubRegions.CrownTundra
 ));
 Routes.add(new RegionRoute(
     'Frostpoint Field', GameConstants.Region.galar, 47,
@@ -2663,7 +2663,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 46)],
     undefined,
-    GalarSubRegions.CrownTundra
+    GameConstants.GalarSubRegions.CrownTundra
 ));
 Routes.add(new RegionRoute(
     'Giants Bed', GameConstants.Region.galar, 48,
@@ -2685,7 +2685,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 47)],
     undefined,
-    GalarSubRegions.CrownTundra
+    GameConstants.GalarSubRegions.CrownTundra
 ));
 Routes.add(new RegionRoute(
     'Old Cemetery', GameConstants.Region.galar, 49,
@@ -2705,7 +2705,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 48)],
     undefined,
-    GalarSubRegions.CrownTundra
+    GameConstants.GalarSubRegions.CrownTundra
 ));
 Routes.add(new RegionRoute(
     'Giants Foot', GameConstants.Region.galar, 50,
@@ -2727,7 +2727,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 48)],
     undefined,
-    GalarSubRegions.CrownTundra
+    GameConstants.GalarSubRegions.CrownTundra
 ));
 Routes.add(new RegionRoute(
     'Frigid Sea', GameConstants.Region.galar, 51,
@@ -2747,7 +2747,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Roaring-Sea Caves'))],
     undefined,
-    GalarSubRegions.CrownTundra
+    GameConstants.GalarSubRegions.CrownTundra
 ));
 Routes.add(new RegionRoute(
     'Three-Point Pass', GameConstants.Region.galar, 52,
@@ -2767,7 +2767,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 51)],
     undefined,
-    GalarSubRegions.CrownTundra
+    GameConstants.GalarSubRegions.CrownTundra
 ));
 Routes.add(new RegionRoute(
     'Ballimere Lake', GameConstants.Region.galar, 53,
@@ -2788,7 +2788,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 48)],
     undefined,
-    GalarSubRegions.CrownTundra
+    GameConstants.GalarSubRegions.CrownTundra
 ));
 Routes.add(new RegionRoute(
     'Snowslide Slope', GameConstants.Region.galar, 54,
@@ -2807,7 +2807,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 48)],
     undefined,
-    GalarSubRegions.CrownTundra
+    GameConstants.GalarSubRegions.CrownTundra
 ));
 Routes.add(new RegionRoute(
     'Path to the Peak', GameConstants.Region.galar, 55,
@@ -2823,5 +2823,5 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tunnel to the Top'))],
     undefined,
-    GalarSubRegions.CrownTundra
+    GameConstants.GalarSubRegions.CrownTundra
 ));
