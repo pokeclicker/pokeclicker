@@ -18,7 +18,7 @@
                     </li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
                     <btn class="btn btn-primary">
-                        <span id="diamondCounter" data-bind='text: App.game.wallet.currencies[GameConstants.Currency.diamond]()'>x</span>
+                        <span id="diamondCounter" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.diamond]().toLocaleString('en-US')">x</span>
                         <img src='assets/images/underground/diamond.svg' width="20px'">
                     </btn>
                 </ul>
@@ -29,7 +29,7 @@
                         <button class="col-4 btn btn-secondary" data-bind="
                                 click: function(){ ItemList[$data].use();},
                                 css: { disabled: player._itemList[$data]() <= 0}">
-                            <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
+                            <span data-bind="text: '(' + player._itemList[$data]().toLocaleString('en-US') + ')'">(?)</span>
                             <img class="restore-item" data-bind="attr: { src: ItemList[$data].image }">
                             <span data-bind="text: ' +' + App.game.underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])">&nbsp;+? energy</span>
                         </button>
@@ -171,13 +171,13 @@
                             </thead>
                             <tbody data-bind='foreach: DailyDeal.list'>
                                 <tr>
-                                    <td class='vertical-middle text-center' data-bind='text: player.getUndergroundItemAmount(item1.id)'></td>
+                                    <td class='vertical-middle text-center' data-bind="text: player.getUndergroundItemAmount(item1.id).toLocaleString('en-US')"></td>
                                     <td class='vertical-middle'>
                                         <img class='mineInventoryItem' data-bind='attr: {src: item1.image }'>
                                     </td>
                                     <td class='vertical-middle' data-bind='text: amount1 + " × " + item1.name'></td>
                                     <td class='vertical-middle'>→</td>
-                                    <td class='vertical-middle text-center' data-bind='text: player.getUndergroundItemAmount(item2.id)'></td>
+                                    <td class='vertical-middle text-center' data-bind="text: player.getUndergroundItemAmount(item2.id).toLocaleString('en-US')"></td>
                                     <td class='vertical-middle'>
                                         <img class='mineInventoryItem' data-bind='attr: {src: item2.image }'>
                                     </td>
@@ -224,7 +224,7 @@
         <td class='vertical-middle'
             data-bind='text: upgrade.isMaxLevel() ? "" : "(" + (upgrade.increasing ? "+" : "-") + upgrade.upgradeBonus() + ")"'></td>
         <td class='vertical-middle'
-            data-bind='text: upgrade.isMaxLevel() ? "" : upgrade.calculateCost().amount + " diamonds"'></td>
+            data-bind="text: upgrade.isMaxLevel() ? '' : upgrade.calculateCost().amount.toLocaleString('en-US') + ' Diamonds'"></td>
         <td class='vertical-middle'>
             <button class='btn btn-success btn-block'
                     data-bind='css: { disabled: !upgrade.canBuy() },
@@ -238,14 +238,14 @@
         <tr data-bind='if: amount() > 0'>
             <td class='vertical-middle'>
                 <img class='mineInventoryItem' data-bind='attr:{ src: Underground.getMineItemById(id).image }'>
-                <span data-bind='text: "("+$data.amount()+")"'></span>
+                <span data-bind="text: '('+$data.amount().toLocaleString('en-US')+')'"></span>
             </td>
             <td class='vertical-middle' data-bind='text: name'></td>
             <!-- ko if: valueType == "Mine Egg" -->
             <td></td>
             <!-- /ko -->
             <!-- ko ifnot: valueType == "Mine Egg" -->
-            <td class='vertical-middle' data-bind='text: value + " " + UndergroundItem.getFullResourceName(valueType, value)'></td>
+            <td class='vertical-middle' data-bind='text: value + " " + GameConstants.camelCaseToString(UndergroundItem.getFullResourceName(valueType, value))'></td>
             <!-- /ko -->
             <td class='vertical-middle'>
                 <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
@@ -317,7 +317,7 @@
                 <img width="20px'" data-bind="attr: { src: imgSrc }">
             </td>
             <td>
-                <span data-bind="text: cumulativeValue + ' ' + UndergroundItem.getFullResourceName(valueType, cumulativeValue)"></span>
+                <span data-bind="text: cumulativeValue.toLocaleString('en-US') + ' ' + GameConstants.camelCaseToString(UndergroundItem.getFullResourceName(valueType, cumulativeValue))"></span>
             </td>
         </tr>
     </script>

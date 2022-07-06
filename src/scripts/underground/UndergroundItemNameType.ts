@@ -3,8 +3,8 @@ To update this type when adding new items:
 
 Open the game, and run the following code in the browser console
 
-copy(`type ItemNameType
-    = ${[...new Set(Object.values(ItemList).map(i => i.name))].map(i => `'${i.replace(/'/g, "\\'")}'`).join('\n    | ')};`);
+copy(`type UndergroundItemNameType
+    = ${[...new Set(Object.values(UndergroundItem.list).map(i => i.name))].map(i => `'${i.replace(/'/g, "\\'")}'`).join('\n    | ')};`);
 
 Replace the everything in this file (except for this comment) with what was copied
 */
@@ -58,4 +58,17 @@ type UndergroundItemNameType
     | 'Thunder Stone'
     | 'Leaf Stone'
     | 'Moon Stone'
-    | 'Sun Stone';
+    | 'Sun Stone'
+    | 'Red Shard'
+    | 'Yellow Shard'
+    | 'Green Shard'
+    | 'Blue Shard'
+    | 'Grey Shard'
+    | 'Purple Shard'
+    | 'Ochre Shard'
+    | 'Black Shard'
+    | 'Crimson Shard'
+    | 'Lime Shard'
+    | 'White Shard'
+    | 'Pink Shard'
+    | 'Cyan Shard';

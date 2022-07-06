@@ -254,7 +254,7 @@
                                 <div class="progress-bar bg-danger" role="progressbar"
                                      data-bind="attr:{ style: 'width:' + Battle.enemyPokemon().healthPercentage() + '%' }"
                                      aria-valuemin="0" aria-valuemax="100">
-                                     <span data-bind="text: Battle.enemyPokemon().health() + ' / ' + Battle.enemyPokemon().maxHealth()" style="font-size: 12px;"></span>
+                                     <span data-bind="text: Battle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + Battle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
                                 </div>
                             </div>
                         </div>
@@ -363,8 +363,6 @@
                     <button class='btn btn-sm' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" data-toggle="popover" data-trigger="hover" data-html="true" data-title="Map Legend:"
                     data-content="Map locations will be coloured based on the following:
                     <br/>
-                    <br/><span>Current Location:</span>
-                    <span class='float-right px-4 bg-currentPlace'>&nbsp;</span>
                     <br/><span>Locked:</span>
                     <span class='float-right px-4 bg-locked'>&nbsp;</span>
                     <br/><span>Incomplete:</span>
@@ -400,7 +398,7 @@
                             <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion - 1">&lt;</button>
                             <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="
                                 click: () => SubRegions.openModal(),
-                                text: 'Subregional Travel (' + SubRegions.getSubRegionById(player.region, player.subregion)?.name + ')'"
+                                text: 'Subregional Travel (' + player.subregionObject()?.name + ')'"
                                 >Subregional Travel</button>
                             <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion + 1">&gt;</button>
                         </div>
@@ -546,8 +544,11 @@
 <!-- Berry Master Modal-->
 @import "berryMasterModal.html"
 
-<!-- Shard Master Modal-->
+<!-- Gem Master Modal-->
 @import "gemMasterModal.html"
+
+<!-- Shard Master Modal-->
+@import "shardTraderModal.html"
 
 <!-- Subregion Modal-->
 @import "subregionModal.html"

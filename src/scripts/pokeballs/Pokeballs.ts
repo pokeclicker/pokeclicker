@@ -235,13 +235,13 @@ class Pokeballs implements Feature {
             return;
         }
 
-        if (json['pokeballs'] != null) {
-            json['pokeballs'].map((amt: number, type: number) => this.pokeballs[type].quantity(amt));
+        if (json.pokeballs != null) {
+            json.pokeballs.map((amt: number, type: number) => this.pokeballs[type].quantity(amt));
         }
-        this.notCaughtSelection = json['notCaughtSelection'] ?? this.defaults.notCaughtSelection;
-        this.notCaughtShinySelection = json['notCaughtShinySelection'] ?? this.defaults.notCaughtShinySelection;
-        this.alreadyCaughtSelection = json['alreadyCaughtSelection'] ?? this.defaults.alreadyCaughtSelection;
-        this.alreadyCaughtShinySelection = json['alreadyCaughtShinySelection'] ?? this.defaults.alreadyCaughtShinySelection;
+        this.notCaughtSelection = json.notCaughtSelection ?? this.defaults.notCaughtSelection;
+        this.notCaughtShinySelection = json.notCaughtShinySelection ?? this.defaults.notCaughtShinySelection;
+        this.alreadyCaughtSelection = json.alreadyCaughtSelection ?? this.defaults.alreadyCaughtSelection;
+        this.alreadyCaughtShinySelection = json.alreadyCaughtShinySelection ?? this.defaults.alreadyCaughtShinySelection;
     }
 
     toJSON(): Record<string, any> {
