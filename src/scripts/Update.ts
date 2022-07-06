@@ -865,7 +865,7 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 3);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 4);
 
-             // Start UB questline
+            // Start UB questline
             if (saveData.badgeCase[95]) {
                 saveData.quests.questLines.push({state: 1, name: 'Ultra Beast Hunt', quest: 0});
             }
