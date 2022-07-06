@@ -25,6 +25,7 @@ class Player {
     private _timeTraveller = false;
     private _origins: Array<any>;
     public regionStarters: Array<KnockoutObservable<number>>;
+    public subregionObject: KnockoutObservable<SubRegion>;
 
     constructor(savedPlayer?) {
         const saved: boolean = (savedPlayer != null);
@@ -37,7 +38,7 @@ class Player {
         if (this._lastSeen > Date.now()) {
             Notifier.notify({
                 title: 'Welcome Time Traveller!',
-                message: 'Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.\n\nAny Pokemon you may have obtained in the future could cease to exist which could corrupt your save file!',
+                message: 'Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.\n\nAny Pokémon you may have obtained in the future could cease to exist which could corrupt your save file!',
                 type: NotificationConstants.NotificationOption.danger,
                 timeout: GameConstants.HOUR,
             });
@@ -45,6 +46,7 @@ class Player {
         }
         this._region = ko.observable(savedPlayer._region);
         this._subregion = ko.observable(savedPlayer._subregion || 0);
+        this.subregionObject = ko.pureComputed(() => SubRegions.getSubRegionById(this._region(), this._subregion()));
         this._route = ko.observable(savedPlayer._route);
         // Check that the route is valid, otherwise set it to the regions starting route (route 0 means they are in a town)
         if (this._route() > 0 && !MapHelper.validRoute(this._route(), this._region())) {

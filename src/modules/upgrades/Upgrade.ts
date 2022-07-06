@@ -65,7 +65,7 @@ export default class Upgrade implements Saveable {
             this.levelUp();
         } else {
             Notifier.notify({
-                message: 'You cannot afford to buy this upgrade yet',
+                message: 'You cannot afford to buy this upgrade yet.',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }

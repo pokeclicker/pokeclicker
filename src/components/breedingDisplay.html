@@ -23,7 +23,7 @@
             </div>
             <div data-bind="if: App.game.breeding.hatcheryHelpers.hired()[$index()]">
               <div data-bind="with: App.game.breeding.hatcheryHelpers.hired()[$index()]">
-                <img class="hatcheryHelperImage" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }, 
+                <img class="hatcheryHelperImage" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` },
                   tooltip: {
                     title: $data.tooltip(),
                     trigger: 'hover',
@@ -39,6 +39,9 @@
                 <!-- /ko -->
                 <!-- ko ifnot: $data.type == EggType.Fossil -->
                 <div data-bind="template: { name: 'eggSVGTemplate', data: $data}, class: BreedingController.getEggCssClass($data)"></div>
+                <div data-bind="if: $data.partyPokemon?.pokerus > GameConstants.Pokerus.None" style="position: absolute;right: 2px;top: -3px;">
+                    <img width="14px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[$data.partyPokemon?.pokerus]}.png`}"/>
+                </div>
                 <!-- /ko -->
 
                 <div class="progress" data-bind='visible: progress() < 100'>
