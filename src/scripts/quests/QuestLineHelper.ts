@@ -571,7 +571,7 @@ class QuestLineHelper {
             1,
             GuzzlordReward,
             'Catch Guzzlord at Resolution Cave.',
-            () => App.game.statistics.pokemonCaptured[pokemonMap['Guzzlord'].id](),
+            () => App.game.statistics.pokemonCaptured[pokemonMap.Guzzlord.id](),
             0
         );
 
