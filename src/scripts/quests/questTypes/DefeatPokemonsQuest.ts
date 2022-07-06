@@ -30,13 +30,7 @@ class DefeatPokemonsQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        const regionName = GameConstants.camelCaseToString(GameConstants.Region[this.region]);
-        let desc = `Defeat ${this.amount.toLocaleString('en-US')} Pokémon on ${Routes.getName(this.route, this.region)}`;
-        if (!desc.includes(regionName)) {
-            desc += ` in ${regionName}`;
-        }
-        desc += '.';
-        return desc;
+        return `Defeat ${this.amount.toLocaleString('en-US')} Pokémon on ${Routes.getName(this.route, this.region, true)}.`;
     }
 
     toJSON() {
