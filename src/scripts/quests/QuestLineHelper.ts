@@ -45,7 +45,7 @@ class QuestLineHelper {
 
         //Learn about catching from old man
         const OldManReward = () => {
-            $("#npc-modal").one("hidden.bs.modal", () => {
+            $('#npc-modal').one('hidden.bs.modal', () => {
                 Information.show({
                     steps: [
                         {
@@ -86,7 +86,7 @@ class QuestLineHelper {
                     once: true,
                 });
             });
-        }
+        };
         const talkToOldMan = new TalkToNPCQuest(ViridianCityOldMan2, 'Talk to the Old Man in Viridian City to learn about catching. Talk to the Old Man again if you need a reminder.', OldManReward);
         tutorial.addQuest(talkToOldMan);
 
