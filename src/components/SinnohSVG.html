@@ -1522,7 +1522,7 @@
     <%- include('templates/mapOverlay',
         { x: 184, y: 1
         , width: 13, height: 9
-        , databind: "css: { cursor: 'default' }"
+        , databind: "style: {'pointer-events': 'none'}"
         , visible:  "App.game.statistics.routeKills[GameConstants.Region.sinnoh][224]() >= 10"
         , image: "assets/images/map/flower_paradise.png"
         })
