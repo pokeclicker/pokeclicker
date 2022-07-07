@@ -1254,7 +1254,7 @@ class Farming implements Feature {
         const berry = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
         if (!disableNotification) {
             Notifier.notify({
-                message: `You got a ${BerryType[berry]} berry!`,
+                message: `You found ${GameHelper.anOrA(BerryType[berry])} ${BerryType[berry]} Berry!`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.route_item_found,
             });
@@ -1291,10 +1291,12 @@ class Farming implements Feature {
     unlockBerry(berry: BerryType) {
         if (!this.unlockedBerries[berry]()) {
             Notifier.notify({
-                message: `You've discovered a ${BerryType[berry]} Berry!`,
+                message: `You've discovered the ${BerryType[berry]} Berry!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.route_item_found,
+                setting: NotificationConstants.NotificationSetting.Farming.berry_discovered,
+                sound: NotificationConstants.NotificationSound.Farming.berry_discovered,
             });
+            App.game.logbook.newLog(LogBookTypes.NEW, `You've registered the ${BerryType[berry]} Berry in your BerryDex!`);
             this.unlockedBerries[berry](true);
         }
     }
@@ -1326,7 +1328,7 @@ class Farming implements Feature {
             return;
         }
 
-        const savedBerries = json['berryList'];
+        const savedBerries = json.berryList;
         if (savedBerries == null) {
             this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
         } else {
@@ -1335,7 +1337,7 @@ class Farming implements Feature {
             });
         }
 
-        const savedUnlockedBerries = json['unlockedBerries'];
+        const savedUnlockedBerries = json.unlockedBerries;
         if (savedUnlockedBerries == null) {
             this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
         } else {
@@ -1344,7 +1346,7 @@ class Farming implements Feature {
             });
         }
 
-        const savedMulches = json['mulchList'];
+        const savedMulches = json.mulchList;
         if (savedMulches == null) {
             this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
         } else {
@@ -1353,7 +1355,7 @@ class Farming implements Feature {
             });
         }
 
-        const savedPlots = json['plotList'];
+        const savedPlots = json.plotList;
         if (savedPlots == null) {
             this.plotList = this.defaults.plotList;
         } else {
@@ -1365,21 +1367,21 @@ class Farming implements Feature {
         }
         this.unlockedPlotCount(this.plotList.filter(p => p.isUnlocked).length);
 
-        const shovelAmt = json['shovelAmt'];
+        const shovelAmt = json.shovelAmt;
         if (shovelAmt == null) {
             this.shovelAmt = ko.observable(this.defaults.shovelAmt);
         } else {
             this.shovelAmt(shovelAmt);
         }
 
-        const mulchShovelAmt = json['mulchShovelAmt'];
+        const mulchShovelAmt = json.mulchShovelAmt;
         if (mulchShovelAmt == null) {
             this.mulchShovelAmt = ko.observable(this.defaults.mulchShovelAmt);
         } else {
             this.mulchShovelAmt(mulchShovelAmt);
         }
 
-        const mutations = json['mutations'];
+        const mutations = json.mutations;
         if (mutations) {
             this.mutations.forEach((mutation, i) => mutation.fromJSON(mutations[i]));
         }

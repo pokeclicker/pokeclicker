@@ -41,7 +41,7 @@ class FarmController {
             $('#farmModal').modal('show');
         } else {
             Notifier.notify({
-                message: `You need the ${GameConstants.humanifyString(KeyItemType[KeyItemType.Wailmer_pail])} to access this location`,
+                message: `You need the ${GameConstants.humanifyString(KeyItemType[KeyItemType.Wailmer_pail])} to access this location.\n<i>Clear Route 13 or 15 first.</i>`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }

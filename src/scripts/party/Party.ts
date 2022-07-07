@@ -14,6 +14,8 @@ class Party implements Feature {
 
     hasMaxLevelPokemon: KnockoutComputed<boolean>;
 
+    _caughtPokemonLookup: KnockoutComputed<Map<number, PartyPokemon>>;
+
 
     constructor(private multiplier: Multiplier) {
         this._caughtPokemon = ko.observableArray([]);
@@ -26,6 +28,15 @@ class Party implements Feature {
             }
             return false;
         }).extend({rateLimit: 1000});
+
+        // This will be completely rebuilt each time a pokemon is caught.
+        // Not ideal but still better than mutliple locations scanning through the list to find what they want
+        this._caughtPokemonLookup = ko.pureComputed(() => {
+            return this.caughtPokemon.reduce((map, p) => {
+                map.set(p.id, p);
+                return map;
+            }, new Map());
+        });
 
     }
 
@@ -41,7 +52,7 @@ class Party implements Feature {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonCaptured[pokemon.id]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonCaptured);
             // Add all shiny catches to the log book
-            App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured a shiny ${pokemon.name}!`);
+            App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured a shiny ${pokemon.name}! ${this.alreadyCaughtPokemon(pokemon.id, true) ? '(duplicate)' : ''}`);
             // Already caught (shiny)
             if (this.alreadyCaughtPokemon(pokemon.id, true)) {
                 return;
@@ -112,7 +123,7 @@ class Party implements Feature {
 
     public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeFlute = true): number {
         let multiplier = 1, attack = 0;
-        const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : (pokemon.attack * (this.calculateEVAttackBonus(pokemon))));
+        const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : pokemon.attack);
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
 
         // Check if the pokemon is in their native region
@@ -167,29 +178,16 @@ class Party implements Feature {
         return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
     }
 
-    public getEffortValues(pokemon: PartyPokemon): KnockoutObservable<number> {
-        const power = App.game.challenges.list.slowEVs.active() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
-        return ko.observable(Math.floor(App.game.statistics.effortPoints[pokemon.id]() / GameConstants.EP_EV_RATIO / power));
-    }
-
-    public calculateEVAttackBonus(pokemon: PartyPokemon): number {
-        const EVs = this.getEffortValues(pokemon)();
-        if (!pokemon.pokerus) {
-            return 1;
-        }
-        return (EVs < 50) ? (1 + 0.01 * EVs) : (1 + Math.min(1, Math.pow((EVs - 30),0.075) - 0.75));
-    }
-
     public pokemonAttackObservable: KnockoutComputed<number> = ko.pureComputed(() => {
         return App.game.party.calculatePokemonAttack();
     }).extend({rateLimit: 1000});
 
-    public getPokemon(id: number) {
-        for (let i = 0; i < this.caughtPokemon.length; i++) {
-            if (this.caughtPokemon[i].id === id) {
-                return this.caughtPokemon[i];
-            }
-        }
+    public getPokemon(id: number): PartyPokemon | undefined {
+        return this._caughtPokemonLookup().get(id);
+    }
+
+    public getPokemonByName(name: PokemonNameType): PartyPokemon | undefined {
+        return this._caughtPokemonLookup().get(pokemonMap[name].id);
     }
 
     alreadyCaughtPokemonByName(name: PokemonNameType, shiny = false) {
@@ -197,7 +195,7 @@ class Party implements Feature {
     }
 
     alreadyCaughtPokemon(id: number, shiny = false) {
-        const pokemon = this.caughtPokemon.find(p => p.id == id);
+        const pokemon = this.getPokemon(id);
         if (pokemon) {
             return (!shiny || pokemon.shiny);
         }
@@ -223,7 +221,7 @@ class Party implements Feature {
             return;
         }
 
-        const caughtPokemonSave = json['caughtPokemon'];
+        const caughtPokemonSave = json.caughtPokemon;
         for (let i = 0; i < caughtPokemonSave.length; i++) {
             const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
             partyPokemon.fromJSON(caughtPokemonSave[i]);
@@ -244,12 +242,8 @@ class Party implements Feature {
         // This method intentionally left blank
     }
 
-    get caughtPokemon() {
+    get caughtPokemon(): ReadonlyArray<PartyPokemon> {
         return this._caughtPokemon();
-    }
-
-    set caughtPokemon(pokemon: PartyPokemon[]) {
-        this._caughtPokemon(pokemon);
     }
 
 }

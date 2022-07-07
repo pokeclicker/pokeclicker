@@ -286,7 +286,7 @@ class Mine {
             title: 'Underground',
             message: 'Skip this mine layer?',
             type: NotificationConstants.NotificationOption.warning,
-            confirm: 'skip',
+            confirm: 'Skip',
         })) {
             setTimeout(Mine.completed, 1500);
             Mine.loadingNewLayer = true;
@@ -330,6 +330,7 @@ class Mine {
                 Notifier.notify({
                     message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}`,
                     type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
                 });
 
                 if (App.game.oakItems.isActive(OakItemType.Treasure_Scanner)) {
@@ -412,6 +413,7 @@ class Mine {
         Notifier.notify({
             message: 'You dig deeper...',
             type: NotificationConstants.NotificationOption.info,
+            setting: NotificationConstants.NotificationSetting.Underground.underground_dig_deeper,
         });
         ko.cleanNode(document.getElementById('mineBody'));
         App.game.oakItems.use(OakItemType.Explosive_Charge);

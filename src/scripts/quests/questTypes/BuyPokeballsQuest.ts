@@ -16,8 +16,8 @@ class BuyPokeballsQuest extends Quest implements QuestInterface {
 
     toJSON() {
         const json = super.toJSON();
-        json['name'] = this.constructor.name;
-        json['data'].push(this.pokeball);
+        json.name = this.constructor.name;
+        json.data.push(this.pokeball);
         return json;
     }
 }
