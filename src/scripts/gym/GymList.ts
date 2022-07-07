@@ -1744,6 +1744,27 @@ GymList['Gym Leader Avery'] = new Gym(
         ]),
     ]
 );
+GymList['Dojo Matron Honey'] = new Gym(
+    'Honey',
+    'Dojo Matron Honey',
+    [
+        new GymPokemon('Galarian Darmanitan', 151617046, 73),
+        new GymPokemon('Gallade', 151617046, 74),
+        new GymPokemon('Salazzle', 154808984, 73),
+        new GymPokemon('Togekiss', 154808984, 75),
+        new GymPokemon('Gigantamax Venusaur', 159596891, 75),
+        new GymPokemon('Gigantamax Blastoise', 159596891, 75),
+    ],
+    BadgeEnums.Elite_ArmorMatron,
+    250000,
+    'That was a delight! Nice battling, love!',
+    [
+        new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Elite_ArmorPoison),
+            new GymBadgeRequirement(BadgeEnums.Elite_ArmorPsychic),
+        ]),
+    ]
+);
 GymList['Dojo Master Mustard'] = new Gym(
     'Mustard',
     'Dojo Master Mustard',
@@ -1758,12 +1779,7 @@ GymList['Dojo Master Mustard'] = new Gym(
     BadgeEnums.Elite_ArmorChampion,
     250000,
     'That strength of yours doesn\'t bend easily!',
-    [
-        new MultiRequirement([
-            new GymBadgeRequirement(BadgeEnums.Elite_ArmorPoison),
-            new GymBadgeRequirement(BadgeEnums.Elite_ArmorPsychic),
-        ]),
-    ]
+    [new GymBadgeRequirement(BadgeEnums.Elite_ArmorMatron)  ]
 );
 GymList['Trainer Peony'] = new Gym(
     'Freezington',

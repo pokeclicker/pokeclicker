@@ -3319,6 +3319,15 @@ const TrainStationGuy = new NPC('Train Station Guy', [
     'One is an island paradise, and the other a freezing wasteland.',
     'I\m sure if you go to these places you\'ll find many unique and powerful Pokémon!',
 ]);
+const SouthGalarRoamerNPC = new RoamerNPC('Sonia Magnolia', [
+    'I\'ve heard there\'s been sightings of a never-before-seen, superstrong Pokémon on {ROUTE_NAME}! You should go check it out!',
+], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.SouthGalar));
+const IsleofArmorRoamerNPC = new RoamerNPC('Master Dojo Student', [
+    'One of the other students said they saw a rare Pokémon on {ROUTE_NAME}. Might be worth having a look.',
+], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.IsleofArmor));
+const CrownTundraRoamerNPC = new RoamerNPC('Freezington Mayor', [
+    'If my eyes didn\'t decieve me, I saw a rare Pokémon on {ROUTE_NAME}. Go and see if you can find it if you\'re interested.',
+], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.CrownTundra));
 const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     GameConstants.Region.galar,
     'TODO: Add text before Galar is released',
@@ -3350,7 +3359,7 @@ TownList.Wedgehurst = new Town(
     [WedgehurstShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
-        npcs: [TrainStationGuy],
+        npcs: [TrainStationGuy, SouthGalarRoamerNPC],
     }
 );
 TownList['Professor Magnolia\'s House'] = new Town(
@@ -3453,15 +3462,16 @@ TownList['Armor Station'] = new Town(
 TownList['Master Dojo'] = new Town(
     'Master Dojo',
     GameConstants.Region.galar,
-    [MasterDojoShop, TemporaryBattleList.Mustard],
+    [TemporaryBattleList.Mustard, MasterDojoShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
+        npcs: [IsleofArmorRoamerNPC],
     }
 );
-TownList['Master Dojo Battlefield'] = new Town(
-    'Master Dojo Battlefield',
+TownList['Master Dojo Battle Court'] = new Town(
+    'Master Dojo Battle Court',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Klara3, TemporaryBattleList.Avery3, GymList['Gym Leader Klara'], GymList['Gym Leader Avery'], GymList['Dojo Master Mustard']],
+    [TemporaryBattleList.Klara3, TemporaryBattleList.Avery3, GymList['Gym Leader Klara'], GymList['Gym Leader Avery'], GymList['Dojo Matron Honey'], GymList['Dojo Master Mustard']],
     {
         requirements: [
             new MultiRequirement([
@@ -3487,6 +3497,7 @@ TownList.Freezington = new Town(
     [TemporaryBattleList.Calyrex, TemporaryBattleList.Glastrier, TemporaryBattleList.Spectrier, FreezingtonShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 46)],
+        npcs: [Crown TundraRoamerNPC],
     }
 );
 
