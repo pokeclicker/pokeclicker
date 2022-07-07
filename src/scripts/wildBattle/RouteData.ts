@@ -1812,7 +1812,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Skwovet', 'Rookidee', 'Blipbug', 'Wooloo', 'Nickit', 'Caterpie', 'Hoothoot', 'Grubbin'],
     }),
-    [new TemporaryBattleRequirement('Mirages')],
+    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
     undefined,
     GameConstants.GalarSubRegions.SouthGalar
 ));
@@ -1822,7 +1822,10 @@ Routes.add(new RegionRoute(
         land: ['Skwovet', 'Rookidee', 'Nickit', 'Chewtle', 'Yamper', 'Galarian Zigzagoon', 'Blipbug', 'Seedot', 'Hoothoot', 'Lotad', 'Purrloin'],
         water: ['Magikarp', 'Arrokuda'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
+    [
+        new RouteKillRequirement(10, GameConstants.Region.galar, 1),
+        new TemporaryBattleRequirement('Mirages'),
+    ],
     undefined,
     GameConstants.GalarSubRegions.SouthGalar
 ));
