@@ -20,6 +20,7 @@ export const SpriteCredits: Credit[] = [
             'Aether Foundation Employee (female)',
             'Aether Foundation Employee (male)',
             'Aether President Lusamine',
+            'Gladion',
             'Hala',
             'Hapu',
             'Hau',
@@ -28,10 +29,12 @@ export const SpriteCredits: Credit[] = [
             'Kiawe',
             'Lana',
             'Mallow',
+            'Masked Royal',
             'Mina',
             'Molayne',
             'Nanu',
             'Olivia',
+            'Plumeria',
             'Rising Star (male)',
             'Sightseer (female)',
             'Sophocles',
@@ -111,6 +114,7 @@ export const SpriteCredits: Credit[] = [
             'Ramos',
             'Siebold',
             'Team Flare Bryony',
+            'Tierno',
             'Valerie',
             'Viola',
             'Wikstrom',
@@ -291,6 +295,42 @@ export const SpriteCredits: Credit[] = [
             'Ultra Wormhole',
         ],
         // Notes: Permission given on image page, credit optional, still given cuz we're nice like that.
+    },
+    {
+        name: 'Similation',
+        link: 'https://www.deviantart.com/similation',
+        image: 'https://a.deviantart.net/avatars-big/s/i/similation.jpg',
+        resources: [
+            'Professor Sycamore',
+        ],
+        // Notes: Permission given on image page if credited.
+    },
+    {
+        name: 'TintjeMadelintje101',
+        link: 'https://www.deviantart.com/tintjemadelintje101',
+        image: 'https://a.deviantart.net/avatars-big/t/i/tintjemadelintje101.jpg',
+        resources: [
+            'Calem',
+        ],
+        // Notes: Permission given on image page if credited.
+    },
+    {
+        name: 'PhoenixOfLight92',
+        link: 'https://www.deviantart.com/phoenixoflight92',
+        image: 'https://a.deviantart.net/avatars-big/p/h/phoenixoflight92.png',
+        resources: [
+            'Shauna',
+        ],
+        // Notes: Permission given on image page if credited.
+    },
+    {
+        name: 'aveontrainer',
+        link: 'https://www.deviantart.com/aveontrainer',
+        image: 'https://a.deviantart.net/avatars-big/a/v/aveontrainer.png',
+        resources: [
+            'Trevor',
+        ],
+        // Notes: Permission given on image page when asked.
     },
 ].map((c) => {
     SeededRand.seed(parseInt(c.name, 36));

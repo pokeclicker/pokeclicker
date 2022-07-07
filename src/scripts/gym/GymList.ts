@@ -41,7 +41,7 @@ GymList['Vermilion City'] = new Gym(
     1000,
     'Now that\'s a shocker! You\'re the real deal, kid! Fine, then, take the ThunderBadge!',
     [
-        new RouteKillRequirement(10, GameConstants.Region.kanto, 6),
+        new TemporaryBattleRequirement('Blue3'),
         new GymBadgeRequirement(BadgeEnums.Cascade),
     ]
 );
@@ -70,7 +70,7 @@ GymList['Saffron City'] = new Gym(
     BadgeEnums.Marsh,
     2500,
     'This loss shocks me! But a loss is a loss. I admit I didn\'t work hard enough to win. You earned the MarshBadge.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Silph Co.'))]
+    [new TemporaryBattleRequirement('Blue5')]
 );
 GymList['Fuchsia City'] = new Gym(
     'Koga',
@@ -349,7 +349,7 @@ GymList['Elite Will'] = new Gym(
     BadgeEnums.Elite_Will,
     7500,
     'Even though I was defeated, I won\'t change my course. I will continue battling until I stand above all Trainers! Now move on and experience the true ferocity of the Elite Four.',
-    [new GymBadgeRequirement(BadgeEnums.Rising)]
+    [new TemporaryBattleRequirement('Silver5')]
 );
 GymList['Elite Koga'] = new Gym(
     'Koga2',
@@ -452,7 +452,7 @@ GymList['Mauville City'] = new Gym(
     BadgeEnums.Dynamo,
     3000,
     'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!',
-    [new GymBadgeRequirement(BadgeEnums.Knuckle)],
+    [new TemporaryBattleRequirement('Wally1')],
     () => {
         App.game.quests.getQuestLine('Land vs. Water').beginQuest();
     }
@@ -482,7 +482,10 @@ GymList['Petalburg City'] = new Gym(
     BadgeEnums.Balance,
     5000,
     '… I… I can\'t… I can\'t believe it. I lost to you? But, rules are rules! Here, take this.',
-    [new GymBadgeRequirement(BadgeEnums.Heat)]
+    [
+        new GymBadgeRequirement(BadgeEnums.Heat),
+        new GymBadgeRequirement(BadgeEnums.Knuckle),
+    ]
 );
 GymList['Fortree City'] = new Gym(
     'Winona',
@@ -496,7 +499,8 @@ GymList['Fortree City'] = new Gym(
     ],
     BadgeEnums.Feather,
     6000,
-    'Never before have I seen a Trainer command Pokémon with more grace than I... In recognition of your prowess, I present to you this Gym Badge.'
+    'Never before have I seen a Trainer command Pokémon with more grace than I... In recognition of your prowess, I present to you this Gym Badge.',
+    [new TemporaryBattleRequirement('May4')]
 );
 GymList['Mossdeep City'] = new Gym(
     'Tate & Liza',
@@ -541,7 +545,7 @@ GymList['Elite Sidney'] = new Gym(
     BadgeEnums.Elite_Sidney,
     15000,
     'Well, listen to what this loser has to say. You\'ve got what it takes to go far. Now, go on to the next room and enjoy your next battle!',
-    [new GymBadgeRequirement(BadgeEnums.Rain)]
+    [new TemporaryBattleRequirement('Wally2')]
 );
 GymList['Elite Phoebe'] = new Gym(
     'Phoebe',
@@ -680,7 +684,7 @@ GymList['Pastoria City'] = new Gym(
     BadgeEnums.Fen,
     2500,
     'It seems the undertow pulled me under... But I had a great time battling with you! You\'ve earned this!',
-    [new GymBadgeRequirement(BadgeEnums.Cobble)]
+    [new TemporaryBattleRequirement('Barry4')]
 );
 GymList['Canalave City'] = new Gym(
     'Byron',
@@ -693,7 +697,7 @@ GymList['Canalave City'] = new Gym(
     BadgeEnums.Mine,
     4800,
     'You were strong enough to take down my prized team of Pokémon. In recognition of that power, I give you this: the Mine Badge!',
-    [new GymBadgeRequirement(BadgeEnums.Fen)]
+    [new TemporaryBattleRequirement('Barry5')]
 );
 GymList['Snowpoint City'] = new Gym(
     'Candice',
@@ -738,7 +742,7 @@ GymList['Elite Aaron'] = new Gym(
     BadgeEnums.Elite_Aaron,
     18000,
     'I lost with the most beautiful and toughest of the bug Pokémon... We lost because I wasn\'t good enough... That\'s it! Back to training camp! Let\'s hear it for me! No... That was wrong... Anyway... Go on to the next room! Three Trainers are waiting for you. They are all tougher than me.',
-    [new GymBadgeRequirement(BadgeEnums.Beacon)]
+    [new TemporaryBattleRequirement('Barry6')]
 );
 GymList['Elite Bertha'] = new Gym(
     'Bertha',
@@ -1042,7 +1046,7 @@ GymList['Shalour City'] = new Gym(
     BadgeEnums.Rumble,
     3800,
     'Oh! I have been defeated! Alack, alay! Lady Korrina gave a terrible display! This is it. I must give up my title and admit that your strength far exceeds-- Just teasing! But here\'s your Badge. Boy, you\'ll be rolling in \'em soon!',
-    [new GymBadgeRequirement(BadgeEnums.Cliff)]
+    [new TemporaryBattleRequirement('Calem1')]
 );
 GymList['Coumarine City'] = new Gym(
     'Ramos',
@@ -1055,7 +1059,7 @@ GymList['Coumarine City'] = new Gym(
     BadgeEnums.Plant,
     5500,
     'Yeh believe in yer Pokémon... And they believe in yeh, too... Mighty oaks from acorns grow. Go on, then. Yeh\'ve earned it. Here\'s yer own Plant Badge, sprout.',
-    [new GymBadgeRequirement(BadgeEnums.Rumble)]
+    [new TemporaryBattleRequirement('Calem2')]
 );
 GymList['Lumiose City'] = new Gym(
     'Clemont',
@@ -1094,7 +1098,7 @@ GymList['Anistar City'] = new Gym(
     BadgeEnums.Psychic,
     30000,
     'Now, the Psychic Badge. A testament to your skill. Proof of your power.',
-    [new GymBadgeRequirement(BadgeEnums.Fairy)]
+    [new TemporaryBattleRequirement('Calem4')]
 );
 GymList['Snowbelle City'] = new Gym(
     'Wulfric',
@@ -1202,7 +1206,7 @@ GymList['Iki Town'] = new Gym(
     BadgeEnums.FightiniumZ,
     128000,
     'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))]
+    [new TemporaryBattleRequirement('Hau3')]
 );
 GymList['Konikoni City'] = new Gym(
     'Olivia',
@@ -1215,7 +1219,7 @@ GymList['Konikoni City'] = new Gym(
     BadgeEnums.RockiumZ,
     128000,
     'How lovely.',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
+    [new TemporaryBattleRequirement('Team Skull Admin Plumeria1')],
     () => {
         App.game.quests.getQuestLine('Eater of Light').beginQuest();
     }
@@ -1231,7 +1235,7 @@ GymList['Malie City'] = new Gym(
     BadgeEnums.DarkiniumZ,
     128000,
     'Hmph...',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))]
+    [new TemporaryBattleRequirement('Team Skull Gladion2')]
 );
 GymList['Exeggutor Island'] = new Gym(
     'Hapu',

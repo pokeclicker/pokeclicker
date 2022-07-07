@@ -51,9 +51,9 @@ class RoamingPokemonList {
 RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Mew'));
 
 // Johto
-RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Raikou', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))));
-RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Entei', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))));
-RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Suicune', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))));
+RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Raikou', new TemporaryBattleRequirement('Silver3')));
+RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Entei', new TemporaryBattleRequirement('Silver3')));
+RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Suicune', new TemporaryBattleRequirement('Silver3')));
 
 // Hoenn
 RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon('Latios', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));
