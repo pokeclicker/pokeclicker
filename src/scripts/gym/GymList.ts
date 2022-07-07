@@ -1779,7 +1779,7 @@ GymList['Dojo Master Mustard'] = new Gym(
     BadgeEnums.Elite_ArmorChampion,
     250000,
     'That strength of yours doesn\'t bend easily!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_ArmorMatron)  ]
+    [new GymBadgeRequirement(BadgeEnums.Elite_ArmorMatron)]
 );
 GymList['Trainer Peony'] = new Gym(
     'Freezington',
