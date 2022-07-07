@@ -91,7 +91,7 @@ aria-labelledby="pokedexModalLabel">
                                 <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}.svg`}"/>
                             </div>
                             <!-- ko ifnot: App.game.party.getPokemon($data.id) == undefined -->
-                            <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name) && App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -15px;">
+                            <div data-bind="if: App.game.party.alreadyCaughtPokemonByName(name) && App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -15px;">
                                 <img width="18px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id)?.pokerus]}.png`}"/>
                             </div>
                             <!-- /ko -->
