@@ -40,7 +40,7 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.attack]: {
         text: 'Attack',
-        getValue: (p) => p.calculateAttack(),
+        getValue: (p) => p.attack,
     },
 
     [SortOptions.level]: {
@@ -86,6 +86,6 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.evs]: {
         text: 'EVs',
-        getValue: (p) => App.game.party.getEffortValues(p)() || 0,
+        getValue: (p) => p.evs() || 0,
     },
 };
