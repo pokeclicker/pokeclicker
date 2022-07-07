@@ -43,7 +43,7 @@ abstract class TownContent {
         }
     }
 
-    constructor(requirements: (Requirement | OneFromManyRequirement)[] = []) {
+    constructor(requirements: Requirement[] = []) {
         this.requirements = requirements;
     }
 }

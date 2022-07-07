@@ -41,8 +41,8 @@ class TemporaryBattle extends TownContent {
         public name: string,
         public pokemons: GymPokemon[],
         public defeatMessage: string,
-        requirements: (Requirement | OneFromManyRequirement)[] = [],
-        completeRequirements: (Requirement | OneFromManyRequirement)[] = undefined,
+        requirements: Requirement[] = [],
+        completeRequirements: Requirement[] = undefined,
         public optionalArgs: TemporaryBattleOptionalArgument = {}
     ) {
         super(requirements);
