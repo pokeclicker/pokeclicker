@@ -101,7 +101,7 @@ TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
         new GymPokemon('Muk', 123998000, 62),
     ],
     'That was a fun battle!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+    [new QuestLineStartedRequirement('The new kid')],
     undefined,
     {
         displayName: 'Ash Ketchum',
