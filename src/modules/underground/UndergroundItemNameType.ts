@@ -4,7 +4,7 @@ To update this type when adding new items:
 Open the game, and run the following code in the browser console
 
 copy(`type UndergroundItemNameType
-    = ${[...new Set(Object.values(UndergroundItems.list).map(i => i.name))].map(i => `'${i.replace(/'/g, "\\'")}'`).join('\n    | ')};`);
+    = ${[...new Set(Object.values(UndergroundItem.list).map(i => i.name))].map(i => `'${i.replace(/'/g, "\\'")}'`).join('\n    | ')};`);
 
 Replace the everything in this file (except for this comment) with what was copied
 */
@@ -53,20 +53,12 @@ type UndergroundItemNameType
     | 'Plume Fossil'
     | 'Jaw Fossil'
     | 'Sail Fossil'
-    | 'Fossilized Bird'
-    | 'Fossilized Fish'
-    | 'Fossilized Drake'
-    | 'Fossilized Dino'
     | 'Fire Stone'
     | 'Water Stone'
     | 'Thunder Stone'
     | 'Leaf Stone'
     | 'Moon Stone'
     | 'Sun Stone'
-    | 'Shiny Stone'
-    | 'Dusk Stone'
-    | 'Dawn Stone'
-    | 'Ice Stone'
     | 'Red Shard'
     | 'Yellow Shard'
     | 'Green Shard'
@@ -82,5 +74,3 @@ type UndergroundItemNameType
     | 'Cyan Shard'
     | 'Rose Shard'
     | 'Brown Shard';
-
-export default UndergroundItemNameType;

@@ -1337,6 +1337,7 @@ export enum ShardTraderLocations {
     'Ballonlea',
     'Circhester',
     'Spikemuth',
+    'Master Dojo',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

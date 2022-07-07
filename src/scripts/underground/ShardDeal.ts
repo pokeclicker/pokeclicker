@@ -1487,6 +1487,20 @@ class ShardDeal {
                     ItemList.Grass_egg,
                     1),
                 new ShardDeal(
+                    [
+                        {shardTypeString: 'Red Shard', amount: 50},
+                        {shardTypeString: 'Rose Shard', amount: 75},
+                    ],
+                    ItemList.Sweet_apple,
+                    1),
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Green Shard', amount: 50},
+                        {shardTypeString: 'Rose Shard', amount: 75},
+                    ],
+                    ItemList.Tart_apple,
+                    1),
+                new ShardDeal(
                     [{shardTypeString: 'Green Shard', amount: 100}],
                     ItemList.Leaf_stone,
                     1),
@@ -1642,6 +1656,13 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [
+                        {shardTypeString: 'Blue Shard', amount: 50},
+                        {shardTypeString: 'Brown Shard', amount: 75},
+                    ],
+                    ItemList.Cracked_pot,
+                    1),
+                new ShardDeal(
+                    [
                         {shardTypeString: 'Green Shard', amount: 50},
                         {shardTypeString: 'Blue Shard', amount: 50},
                     ],
@@ -1725,6 +1746,24 @@ class ShardDeal {
                         {shardTypeString: 'White Shard', amount: 75},
                     ],
                     ItemList.Electirizer,
+                    1),
+            ]
+        );
+        ShardDeal.list[GameConstants.ShardTraderLocations['Master Dojo']] = ko.observableArray(
+            [
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Yellow Shard', amount: 50},
+                        {shardTypeString: 'Brown Shard', amount: 75},
+                    ],
+                    ItemList.Galarica_cuff,
+                    1),
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Green Shard', amount: 50},
+                        {shardTypeString: 'Brown Shard', amount: 75},
+                    ],
+                    ItemList.Galarica_wreath,
                     1),
             ]
         );
