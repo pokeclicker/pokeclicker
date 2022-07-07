@@ -69,7 +69,7 @@ class PokemonFactory {
 
     public static routeHealth(route: number, region: GameConstants.Region): number {
         const regionRoute = Routes.regionRoutes.find((routeData) => routeData.region === region && routeData.number === route);
-        if (regionRoute.routeHealth) {
+        if (regionRoute?.routeHealth) {
             return regionRoute.routeHealth;
         }
         route = MapHelper.normalizeRoute(route, region);
