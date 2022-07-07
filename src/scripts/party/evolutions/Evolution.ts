@@ -42,19 +42,19 @@ abstract class Evolution {
             App.game.logbook.newLog(LogBookTypes.SHINY, `Your ${this.basePokemon} evolved into a shiny ${evolvedPokemon}! ${App.game.party.alreadyCaughtPokemonByName(evolvedPokemon, true) ? '(duplicate)' : ''}`);
         }
 
+        const evolvedPartyPokemon = App.game.party.getPokemonByName(evolvedPokemon);
         if (newPokemon && App.game.challenges.list.realEvolutions.active()) {
-            const basePokemonParty = App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.basePokemon).id);
-            const evolvedPokemonParty = App.game.party.getPokemon(PokemonHelper.getPokemonByName(evolvedPokemon).id);
-            evolvedPokemonParty.effortPoints = basePokemonParty.effortPoints;
-            evolvedPokemonParty.pokerus = basePokemonParty.pokerus;
-            evolvedPokemonParty.shiny = basePokemonParty.shiny;
-            evolvedPokemonParty.attackBonusAmount = basePokemonParty.attackBonusAmount;
-            // TODO: add attackBonusProcent
+            const basePartyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.basePokemon).id);
+            evolvedPartyPokemon.effortPoints = basePartyPokemon.effortPoints;
+            evolvedPartyPokemon.pokerus = basePartyPokemon.pokerus;
+            evolvedPartyPokemon.shiny = evolvedPartyPokemon.shiny || basePartyPokemon.shiny;
+            evolvedPartyPokemon.attackBonusAmount = basePartyPokemon.attackBonusAmount;
+            evolvedPartyPokemon.attackBonusPercent = basePartyPokemon.attackBonusPercent;
+            evolvedPartyPokemon.proteinsUsed = basePartyPokemon.proteinsUsed;
             App.game.party.removePokemonByName(this.basePokemon);
         }
 
         // EVs
-        const evolvedPartyPokemon = App.game.party.getPokemonByName(evolvedPokemon);
         if (evolvedPartyPokemon.pokerus >= GameConstants.Pokerus.Contagious) {
             const EPYield = (shiny ? GameConstants.SHINY_EP_YIELD : 1) * GameConstants.STONE_EP_YIELD;
             evolvedPartyPokemon.effortPoints +=  EPYield;
