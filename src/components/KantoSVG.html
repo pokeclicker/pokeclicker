@@ -761,7 +761,7 @@
         <%- include('templates/mapOverlay',
             { x: 72, y: 6
             , width: 16, height: 16
-            , databind: "css: { cursor: 'default' }"
+            , databind: "style: {'pointer-events': 'none'}"
             , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Cinnabar Island')]() >= 1"
             , image: "assets/images/map/client_island.png"
             })
