@@ -71,4 +71,6 @@ type UndergroundItemNameType
     | 'Lime Shard'
     | 'White Shard'
     | 'Pink Shard'
-    | 'Cyan Shard';
+    | 'Cyan Shard'
+    | 'Rose Shard'
+    | 'Brown Shard';

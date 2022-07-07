@@ -153,3 +153,5 @@ UndergroundItem.addItem('Lime Shard', 409, [[0,0,0,0], [0,1,1,1], [1,1,1,1]], 1,
 UndergroundItem.addItem('White Shard', 410, [[1,1,1,1], [0,1,1,1], [0,1,1,0]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.sinnoh));
 UndergroundItem.addItem('Pink Shard', 411, [[1,1,1,1], [1,1,1,1], [1,1,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.kalos));
 UndergroundItem.addItem('Cyan Shard', 412, [[1,1,1,1], [0,1,1,1], [0,0,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.alola));
+UndergroundItem.addItem('Rose Shard', 413, [[0,0,1,1], [1,1,1,1], [0,1,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.galar));
+UndergroundItem.addItem('Brown Shard', 414, [[1,1,0], [1,1,1], [1,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.galar));

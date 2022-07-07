@@ -498,6 +498,7 @@ namespace GameConstants {
         'Ballonlea',
         'Circhester',
         'Spikemuth',
+        'Master Dojo',
     }
     declare enum KantoSubRegions {
         Kanto,
