@@ -119,7 +119,7 @@ TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
         new GymPokemon('Totodile', 123998000, 62),
     ],
     'That was a nice rematch...',
-    [new TemporaryBattleRequirement('Ash Ketchum Kanto'), new RouteKillRequirement(10, GameConstants.Region.johto, 48)],
+    [new QuestLineStepCompletedRequirement('The new kid', 0), new RouteKillRequirement(10, GameConstants.Region.johto, 48)],
     undefined,
     {
         displayName: 'Ash Ketchum',
@@ -137,7 +137,7 @@ TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
         new GymPokemon('Glalie', 123998000, 62),
     ],
     'Are you following me?',
-    [new TemporaryBattleRequirement('Ash Ketchum Johto')],
+    [new QuestLineStepCompletedRequirement('The new kid', 1)],
     undefined,
     {
         displayName: 'Ash Ketchum',
@@ -155,7 +155,7 @@ TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
         new GymPokemon('Gible', 123998000, 62),
     ],
     'Please leave me alone.',
-    [new TemporaryBattleRequirement('Ash Ketchum Hoenn'), new RouteKillRequirement(10, GameConstants.Region.sinnoh, 226)],
+    [new QuestLineStepCompletedRequirement('The new kid', 2), new RouteKillRequirement(10, GameConstants.Region.sinnoh, 226)],
     undefined,
     {
         displayName: 'Ash Ketchum',
@@ -173,7 +173,7 @@ TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
         new GymPokemon('Krookodile', 123998000, 62),
     ],
     'Stop it!',
-    [new TemporaryBattleRequirement('Ash Ketchum Sinnoh')],
+    [new QuestLineStepCompletedRequirement('The new kid', 3)],
     undefined,
     {
         displayName: 'Ash Ketchum',
@@ -191,7 +191,7 @@ TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
         new GymPokemon('Ash Greninja', 123998000, 62),
     ],
     'Will you leave me alone if I give you my Greninja? I was gonna release it anyway.',
-    [new TemporaryBattleRequirement('Ash Ketchum Unova')],
+    [new QuestLineStepCompletedRequirement('The new kid', 4)],
     undefined,
     {
         displayName: 'Ash Ketchum',
@@ -302,7 +302,7 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
         new GymPokemon('Melmetal', 182908638, 62),
     ],
     'Fine. I quit. Take my Pikachu.',
-    [new TemporaryBattleRequirement('Ash Ketchum Kalos'), new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
+    [new QuestLineCompletedRequirement('The new kid'), new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
     undefined,
     {
         displayName: 'Ash Ketchum',
