@@ -3607,7 +3607,7 @@ TownList.Freezington = new Town(
     [TemporaryBattleList.Calyrex, TemporaryBattleList.Glastrier, TemporaryBattleList.Spectrier, FreezingtonShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 46)],
-        npcs: [Crown TundraRoamerNPC],
+        npcs: [CrownTundraRoamerNPC],
     }
 );
 
