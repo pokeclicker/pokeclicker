@@ -85,7 +85,7 @@
                                 click: function(){ItemHandler.useItem($data)}
                             },
                             tooltip: {
-                              title: ItemList[$data].displayName + '<br/>' + ItemList[$data].getDescription() + '<br/>' + 'Consumes: ' + ItemList[$data].gemTypes[0] + ', ' + ItemList[$data].gemTypes[1] + ', and ' + ItemList[$data].gemTypes[2] + ' Gems',
+                              title: ItemList[$data].displayName + '<br/>' + ItemList[$data].getDescription() + '<br/>' + 'Consumes: ' + ItemList[$data].gemTypes[0] + ' (' + App.game.gems.gemWallet[PokemonType[ItemList[$data].gemTypes[0]]]() + '), ' + ItemList[$data].gemTypes[1] + ' (' + App.game.gems.gemWallet[PokemonType[ItemList[$data].gemTypes[1]]]() + '), and ' + ItemList[$data].gemTypes[2] + ' (' + App.game.gems.gemWallet[PokemonType[ItemList[$data].gemTypes[2]]]() + ') Gems',
                               trigger: 'hover',
                               placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
                               html: true
