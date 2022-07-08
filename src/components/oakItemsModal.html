@@ -46,10 +46,17 @@
           <div id="oakItemLoadouts" class="tab-pane fade">
             <div class="modal-header p-1">
               <select name="loadoutSelector" autocomplete="off" class="custom-select"
-                onchange="App.game.oakItemLoadouts.selectedLoadout(this.value)"
-                data-bind="foreach: App.game.oakItemLoadouts.loadouts">
-                  <option data-bind="text: `Loadout ${$index() + 1}`, value: $index(), attr:{ selected: App.game.oakItemLoadouts.selectedLoadout() == $data.value}"></option>
+                onchange="App.game.oakItemLoadouts.selectedLoadout(this.value)">
+                <!-- ko foreach: App.game.oakItemLoadouts.loadouts -->
+                <option data-bind="text: $data.name, value: $index(), attr:{ selected: App.game.oakItemLoadouts.selectedLoadout() == $data.value}"></option>
+                <!-- /ko -->
               </select>
+            </div>
+            <div class="form-row p-0" id="loadoutNameEdit">
+                <div class="form-group col-12">
+                    <label>Name</label>
+                    <input autocomplete="off" class="form-control" placeholder="name" data-bind="textInput: App.game.oakItemLoadouts.getSelectedLoadout().name"/>
+                </div>
             </div>
             <ul class="row justify-content-center p-0 my-0"
               data-bind="foreach: App.game.oakItems.itemList"

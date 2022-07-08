@@ -134,6 +134,12 @@ namespace GameConstants {
     declare const ACTIVE_QUEST_MULTIPLIER: number;
     declare const QUEST_CLICKS_PER_SECOND: number;
     declare const QUESTS_PER_SET: number;
+    declare const BASE_EP_YIELD: number;
+    declare const SHINY_EP_YIELD: number;
+    declare const DUNGEON_EP_YIELD: number;
+    declare const STONE_EP_YIELD: number;
+    declare const EP_EV_RATIO: number;
+    declare const EP_CHALLENGE_MODIFIER: number;
     declare const DNA_ITEM_CHANCE: number;
     declare enum GameState {
         idle,
@@ -214,6 +220,7 @@ namespace GameConstants {
     declare const Environments: {
         Water: EnvironmentData,
         Ice: EnvironmentData,
+        Fire: EnvironmentData,
         Forest: EnvironmentData,
         Cave: EnvironmentData,
         GemCave: EnvironmentData,
@@ -237,7 +244,7 @@ namespace GameConstants {
         'Water_stone',
         'Thunder_stone',
         'Moon_stone',
-        'Trade_stone',
+        'Linking_cord',
         'Sun_stone',
         'Soothe_bell',
         'Metal_coat',
@@ -268,7 +275,7 @@ namespace GameConstants {
         'xClick' = '',
         'Lucky_egg' = '',
         'Token_collector' = '',
-        'Item_magnet' = '',
+        'Dowsing_machine' = '',
         'Lucky_incense' = '',
     }
     declare enum FluteItemType {
@@ -396,5 +403,119 @@ namespace GameConstants {
         'Thursday',
         'Friday',
         'Saturday',
+    }
+    declare enum Pokerus {
+        'None',
+        'Infected',
+        'Contagious',
+        'Cured',
+    }
+    declare enum ShardTraderLocations {
+        'Cerulean City',
+        'Vermilion City',
+        'Lavender Town',
+        'Saffron City',
+        'Fuchsia City',
+        'Cinnabar Island',
+        'Azalea Town',
+        'Ecruteak City',
+        'Olivine City',
+        'Cianwood City',
+        'Mahogany Town',
+        'Blackthorn City',
+        'Petalburg City',
+        'Dewford Town',
+        'Slateport City',
+        'Mauville City',
+        'Verdanturf Town',
+        'Lavaridge Town',
+        'Fallarbor Town',
+        'Fortree City',
+        'Mossdeep City',
+        'Pacifidlog Town',
+        'Sootopolis City',
+        'Ever Grande City',
+        'Oreburgh City',
+        'Floaroma Town',
+        'Eterna City',
+        'Hearthome City',
+        'Solaceon Town',
+        'Pastoria City',
+        'Celestic Town',
+        'Pal Park',
+        'Canalave City',
+        'Snowpoint City',
+        'Sunyshore City',
+        'Survival Area',
+        'Resort Area',
+        'Castelia City',
+        'Nimbasa City',
+        'Driftveil City',
+        'Mistralton City',
+        'Lentimas Town',
+        'Undella Town',
+        'Lacunosa Town',
+        'Opelucid City',
+        'Humilau City',
+        'Icirrus City',
+        'Black and White Park',
+        'Nacrene City',
+        'Striaton City',
+        'Accumula Town',
+        'Nuvema Town',
+        'Camphrier Town',
+        'Ambrette Town',
+        'Cyllage City',
+        'Geosenge Town',
+        'Shalour City',
+        'Coumarine City',
+        'Laverre City',
+        'Dendemille Town',
+        'Anistar City',
+        'Couriway Town',
+        'Snowbelle City',
+        'Hau\'oli City',
+        'Heahea City',
+        'Paniola Town',
+        'Konikoni City',
+        'Aether Paradise',
+        'Malie City',
+        'Tapu Village',
+        'Seafolk Village',
+        'Exeggutor Island',
+        'Altar of the Sunne and Moone',
+    }
+    declare enum KantoSubRegions {
+        Kanto,
+        Sevii123,
+    }
+    declare enum JohtoSubRegions {
+        Johto,
+    }
+    declare enum HoennSubRegions {
+        Hoenn,
+    }
+    declare enum SinnohSubRegions {
+        Sinnoh,
+    }
+    declare enum UnovaSubRegions {
+        Unova,
+    }
+    declare enum KalosSubRegions {
+        Kalos,
+    }
+    declare enum AlolaSubRegions {
+        MelemeleIsland,
+        AkalaIsland,
+        UlaulaAndPoniIslands,
+        // UlaulaIsland,
+        // PoniIsland,
+    }
+    declare enum GalarSubRegions {
+        Galar,
+        // GalarSouth,
+        // GalarNorth,
+        IsleOfArmor,
+        CrownTundra,
     }
 }

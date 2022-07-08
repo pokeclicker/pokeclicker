@@ -34,8 +34,8 @@ class PartyController {
         return statuses;
     }
 
-    static hasMultipleStoneEvolutionsAvailable(pokemonName: string, evoType: GameConstants.StoneType) {
-        const pokemon = App.game.party.caughtPokemon.find(p => p.name == pokemonName);
+    static hasMultipleStoneEvolutionsAvailable(pokemonName: PokemonNameType, evoType: GameConstants.StoneType) {
+        const pokemon = App.game.party.getPokemonByName(pokemonName);
         // We only want to check against pokemon that have multiple possible evolutions that can happen now
         let found = false;
         if (pokemon) {
@@ -65,33 +65,48 @@ class PartyController {
     }).extend({ rateLimit: 500 });
 
     private static hatcherySortedList = [];
-    static getHatcherySortedList = ko.pureComputed(() => {
-        // If the breeding modal is open, we should sort it.
-        if (modalUtils.observableState['breedingModal'] === 'show') {
-            PartyController.hatcherySortedList = [...App.game.party.caughtPokemon];
-            return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue()));
-        }
-        return PartyController.hatcherySortedList;
-    }).extend({ rateLimit: 500 });
+    static getHatcherySortedList = (region = -1) => {
+        return ko.pureComputed(() => {
+            // If the breeding modal is open, we should sort it.
+            if (modalUtils.observableState.breedingModal === 'show') {
+                PartyController.hatcherySortedList = [...App.game.party.caughtPokemon];
+                return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
+            }
+            return PartyController.hatcherySortedList;
+        }).extend({ rateLimit: 500 });
+    };
 
 
     private static proteinSortedList = [];
     static getProteinSortedList = ko.pureComputed(() => {
         // If the protein modal is open, we should sort it.
-        if (modalUtils.observableState['pokemonSelectorModal'] === 'show') {
+        if (modalUtils.observableState.pokemonSelectorModal === 'show') {
             PartyController.proteinSortedList = [...App.game.party.caughtPokemon];
             return PartyController.proteinSortedList.sort(PartyController.compareBy(Settings.getSetting('proteinSort').observableValue(), Settings.getSetting('proteinSortDirection').observableValue()));
         }
         return PartyController.proteinSortedList;
     }).extend({ rateLimit: 500 });
 
-    public static compareBy(option: SortOptions, direction: boolean): (a: PartyPokemon, b: PartyPokemon) => number {
+    public static calculateRegionalMultiplier(pokemon: PartyPokemon, region: number): number {
+        if (region > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== region) {
+            return App.game.party.getRegionAttackMultiplier();
+        }
+        return 1.0;
+    }
+
+    public static compareBy(option: SortOptions, direction: boolean, region = -1): (a: PartyPokemon, b: PartyPokemon) => number {
         return function (a, b) {
             let res, dir = (direction) ? -1 : 1;
             const config = SortOptionConfigs[option];
 
-            const aValue = config.getValue(a);
-            const bValue = config.getValue(b);
+            let aValue = config.getValue(a);
+            let bValue = config.getValue(b);
+
+            // Apply regional debuff if needed
+            if (region > -1 && [SortOptions.attack, SortOptions.breedingEfficiency].includes(option)) {
+                aValue *= PartyController.calculateRegionalMultiplier(a, region);
+                bValue *= PartyController.calculateRegionalMultiplier(b, region);
+            }
 
             if (config.invert) {
                 dir *= -1;
