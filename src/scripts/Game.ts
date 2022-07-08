@@ -427,6 +427,12 @@ class Game {
         if (SaveReminder.counter >= 5 * GameConstants.MINUTE) {
             SaveReminder.tick();
         }
+
+        // Special events
+        SpecialEvents.counter += GameConstants.TICK_TIME;
+        if (SpecialEvents.counter >= 10 * GameConstants.SECOND) {
+            SpecialEvents.tick();
+        }
     }
 
     save() {

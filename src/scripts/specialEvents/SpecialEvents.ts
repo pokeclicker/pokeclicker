@@ -5,11 +5,19 @@ class SpecialEvents implements Feature {
     name = 'Events';
     saveKey = 'events';
     defaults: Record<string, any>;
+    static counter: number;
 
     static events: { [event: number]: SpecialEvent } = {};
 
     getEvent(event: GameConstants.SpecialEvents): SpecialEvent {
         return SpecialEvents.events[event];
+    }
+
+    static tick() {
+        this.counter = 0;
+        Object.values(SpecialEvents.events).forEach((event) => {
+            event.tick();
+        });
     }
 
     initialize(): void {

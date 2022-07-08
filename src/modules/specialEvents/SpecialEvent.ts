@@ -15,15 +15,7 @@ export default class SpecialEvent {
         public startTime: Date,
         public endTime: Date,
     ) {
-        if (+endTime < Date.now()) {
-            startTime.setFullYear(new Date().getFullYear());
-            endTime.setFullYear(new Date().getFullYear());
-        }
-        // if this is still true, the event has happend this year
-        if (+endTime < Date.now()) {
-            startTime.setFullYear(new Date().getFullYear() + 1);
-            endTime.setFullYear(new Date().getFullYear() + 1);
-        }
+        this.setYear();
 
         this.manualActiveSecoundsLeft = ko.observable(0);
         this.currentDate = ko.observable(new Date());
@@ -39,6 +31,14 @@ export default class SpecialEvent {
         });
     }
 
+    // Is ran every 10 sec
+    public tick() {
+        this.currentDate(new Date());
+        if (this.manualActiveSecoundsLeft() > 0) {
+            this.manualActiveSecoundsLeft(this.manualActiveSecoundsLeft() - 10);
+        }
+    }
+
     // eslint-disable-next-line class-methods-use-this
     timeTillEndFormatted(secondsLeft: number): string {
         if (secondsLeft < 60) {
@@ -51,5 +51,17 @@ export default class SpecialEvent {
             return `${Math.floor(secondsLeft / 3600 / 24)} hours`;
         }
         return `${Math.floor((secondsLeft / 3600 / 24))} days`;
+    }
+
+    setYear() : void {
+        if (+this.endTime < Date.now()) {
+            this.startTime.setFullYear(new Date().getFullYear());
+            this.endTime.setFullYear(new Date().getFullYear());
+        }
+        // if this is still true, the event has happend this year
+        if (+this.endTime < Date.now()) {
+            this.startTime.setFullYear(new Date().getFullYear() + 1);
+            this.endTime.setFullYear(new Date().getFullYear() + 1);
+        }
     }
 }
