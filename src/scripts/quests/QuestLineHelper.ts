@@ -210,7 +210,7 @@ class QuestLineHelper {
             App.game.wallet.gainQuestPoints(1000, true);
             Notifier.notify({
                 title: billSeviiQuestLine.name,
-                message: 'Cecil has rewarded you with 1000 Quest Points!',
+                message: 'Celio has rewarded you with 1,000 Quest Points!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
