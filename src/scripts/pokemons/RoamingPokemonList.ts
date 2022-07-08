@@ -127,7 +127,7 @@ RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Charma
 RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Squirtle (clone)', new SpecialEventRequirement(GameConstants.SpecialEvents.MewtwoStrikesBack)));
 RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Let\'s Go Pikachu', new SpecialEventRequirement(GameConstants.SpecialEvents.LetsGo)));
 RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Let\'s Go Eevee', new SpecialEventRequirement(GameConstants.SpecialEvents.LetsGo)));
-RoamingPokemonList.add(GameConstants.Region.sinnoh, 0, new RoamingPokemon('Santa Snorlax', new SpecialEventRequirement(GameConstants.SpecialEvents.Christmas)));
+RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Santa Snorlax', new SpecialEventRequirement(GameConstants.SpecialEvents.Christmas)));
 RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Spooky Bulbasaur', new SpecialEventRequirement(GameConstants.SpecialEvents.Halloween)));
 RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Spooky Togepi', new SpecialEventRequirement(GameConstants.SpecialEvents.Halloween)));
 RoamingPokemonList.add(GameConstants.Region.hoenn, 0, new RoamingPokemon('Pikachu (Gengar)', new SpecialEventRequirement(GameConstants.SpecialEvents.Halloween)));
