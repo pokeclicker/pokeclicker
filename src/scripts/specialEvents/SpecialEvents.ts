@@ -62,7 +62,7 @@ SpecialEvents.events[GameConstants.SpecialEvents.LetsGo] = new SpecialEvent('Let
     new Date(new Date().getFullYear(), 10, 23, 23)
 );
 SpecialEvents.events[GameConstants.SpecialEvents.Christmas] = new SpecialEvent('Merry Christmas!',
-    'Encounter Santa Snorlax roaming the regions and discover the Grinch of Ilex Forest.',
+    'Encounter Santa Snorlax roaming Hoenn and discover the Grinch of Ilex Forest.',
     new Date(new Date().getFullYear(), 11, 24, 1),
     new Date(new Date().getFullYear(), 11, 30, 23)
 );

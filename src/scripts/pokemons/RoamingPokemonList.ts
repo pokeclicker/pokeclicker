@@ -121,3 +121,10 @@ RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Galari
 //Events
 RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Flying Pikachu', new SpecialEventRequirement(GameConstants.SpecialEvents.FlyingPikachu)));
 RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Red Spearow', new SpecialEventRequirement(GameConstants.SpecialEvents.FlyingPikachu)));
+RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Fancy)', new SpecialEventRequirement(GameConstants.SpecialEvents.LunarNewYear)));
+RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Bulbasaur (clone)', new SpecialEventRequirement(GameConstants.SpecialEvents.MewtwoStrikesBack)));
+RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Charmander (clone)', new SpecialEventRequirement(GameConstants.SpecialEvents.MewtwoStrikesBack)));
+RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Squirtle (clone)', new SpecialEventRequirement(GameConstants.SpecialEvents.MewtwoStrikesBack)));
+RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Let\'s Go Pikachu', new SpecialEventRequirement(GameConstants.SpecialEvents.LetsGo)));
+RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Let\'s Go Eevee', new SpecialEventRequirement(GameConstants.SpecialEvents.LetsGo)));
+RoamingPokemonList.add(GameConstants.Region.hoenn, 0, new RoamingPokemon('Santa Snorlax', new SpecialEventRequirement(GameConstants.SpecialEvents.Christmas)));
