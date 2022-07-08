@@ -22,12 +22,12 @@
                      <tr>
                         <td data-bind="text: title"></td>
                         <td class="text-left" data-bind="html: description"></td>
-                        <!-- ko ifnot: shouldStartNow()-->
+                        <!-- ko ifnot: isActive()-->
                         <td class="text-left"><code data-bind="text: startTime.toLocaleString()">-</code></td>
                         <td class="text-left"><code data-bind="text: endTime.toLocaleString()">-</code></td>
                         <!-- /ko -->
-                        <!-- ko if: shouldStartNow()-->
-                        <td class="text-left" colspan="2">Time left: <code data-bind="text: timeTillEndFormatted()">-</code></td>
+                        <!-- ko if: isActive()-->
+                        <td class="text-left" colspan="2">Time left: <code data-bind="text: timeLeft()">-</code></td>
                         <!-- /ko -->
                      </tr>
                    </tbody>
