@@ -5,7 +5,7 @@ class SpecialEvents implements Feature {
     name = 'Events';
     saveKey = 'events';
     defaults: Record<string, any>;
-    static counter: number;
+    static counter = 0;
 
     static events: { [event: number]: SpecialEvent } = {};
 
@@ -14,7 +14,7 @@ class SpecialEvents implements Feature {
     }
 
     static tick() {
-        this.counter = 0;
+        SpecialEvents.counter = 0;
         Object.values(SpecialEvents.events).forEach((event) => {
             event.tick();
         });

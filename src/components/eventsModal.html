@@ -33,7 +33,7 @@
                         <td class="text-left" colspan="2">Time left: <code data-bind="text: timeLeft()">-</code></td>
                         <!-- /ko -->
                         <!-- ko if: App.game.keyItems.hasKeyItem(KeyItemType.Event_calendar) -->
-                        <td><button class="btn btn-primary" data-bind="enable: !isActive()">Activate</button></td>
+                        <td><button class="btn btn-primary" data-bind="enable: !isActive(), click: startEarly">Activate</button></td>
                         <!-- /ko -->
                      </tr>
                    </tbody>
