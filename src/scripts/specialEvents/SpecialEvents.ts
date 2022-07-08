@@ -63,7 +63,6 @@ SpecialEvents.events[GameConstants.SpecialEvents.MewtwoStrikesBack] = new Specia
     new Date(new Date().getFullYear(), 6, 18, 1),
     new Date(new Date().getFullYear(), 6, 24, 23)
 );
-// TODO: Find a way to readd these
 SpecialEvents.events[GameConstants.SpecialEvents.Halloween] = new SpecialEvent('Halloween!',
     'Encounter Spooky Pokémon for a limited time around Kanto, Johto and Hoenn.',
     new Date(new Date().getFullYear(), 9, 30, 1),
