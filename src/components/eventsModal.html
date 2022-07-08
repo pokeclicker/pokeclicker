@@ -16,6 +16,9 @@
                        <th>Description</th>
                        <th>Start Time</th>
                        <th>End Time</th>
+                       <!-- ko if: App.game.keyItems.hasKeyItem(KeyItemType.Event_calendar) -->
+                       <th>Activate</th>
+                       <!-- /ko -->
                      </tr>
                    </thead>
                    <tbody data-bind="foreach: Object.values(SpecialEvents.events).sort((a, b) => a.startTime - b.startTime)">
@@ -28,6 +31,9 @@
                         <!-- /ko -->
                         <!-- ko if: isActive()-->
                         <td class="text-left" colspan="2">Time left: <code data-bind="text: timeLeft()">-</code></td>
+                        <!-- /ko -->
+                        <!-- ko if: App.game.keyItems.hasKeyItem(KeyItemType.Event_calendar) -->
+                        <td><button class="btn btn-primary" data-bind="enable: !isActive()">Activate</button></td>
                         <!-- /ko -->
                      </tr>
                    </tbody>
