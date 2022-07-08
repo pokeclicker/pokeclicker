@@ -15,12 +15,19 @@ class SpecialEvents implements Feature {
         if (!json) {
             return;
         }
+        json.forEach(event => {
+            const eventObj = SpecialEvents.events[event.id];
+            eventObj.manualActiveSecoundsLeft(event.manualActiveSecoundsLeft);
+        });
     }
 
     toJSON() {
-        return {
-            // no data to save yet
-        };
+        return Object.keys(SpecialEvents.events).map((key) => {
+            return {
+                id: key,
+                manualActiveSecoundsLeft: SpecialEvents.events[key].manualActiveSecoundsLeft(),
+            };
+        });
     }
 
     canAccess(): boolean {

@@ -76,7 +76,6 @@ class Game {
         this.oakItems.initialize();
         this.underground.initialize();
         this.farming.initialize();
-        this.specialEvents.initialize();
         this.load();
 
         // Update if the achievements are already completed
