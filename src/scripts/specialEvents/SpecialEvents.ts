@@ -6,7 +6,7 @@ class SpecialEvents implements Feature {
     saveKey = 'events';
     defaults: Record<string, any>;
 
-    static events: SpecialEvent[] = [];
+    static events: { [event: number]: SpecialEvent } = {};
 
     static newEvent(title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback) {
         // Check if the event exist before adding it again
@@ -38,130 +38,44 @@ class SpecialEvents implements Feature {
     update(delta: number): void {}  // This method intentionally left blank
 }
 
-// TODO: Fetch events from a server each 1/2/3/6/12/24 hours?
-// Create our events here for now (yearly)
 
-// Lunar New Year
-SpecialEvents.newEvent('Lunar New Year', 'Encounter Fancy Pattern Vivillon for a limited time roaming Kalos.',
-    // Start
-    new Date(new Date().getFullYear(), 0, 24, 1), () => {
-        RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Fancy)'));
-    },
-    // End
-    new Date(new Date().getFullYear(), 1, 7, 23), () => {
-        RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Fancy)');
-    }
+SpecialEvents.events[GameConstants.SpecialEvents.LunarNewYear] = new SpecialEvent('Lunar New Year',
+    'Encounter Fancy Pattern Vivillon for a limited time roaming Kalos.',
+    new Date(new Date().getFullYear(), 0, 24, 1),
+    new Date(new Date().getFullYear(), 1, 7, 23)
 );
-// Easter
-SpecialEvents.newEvent('Easter', 'Encounter Surprise Togepi for a limited time with a dedicated Quest Line.',
-    // Start
-    new Date(new Date().getFullYear(), 3, 8, 1), () => {
-        const togepiEggHuntQuestLine = App.game.quests.getQuestLine('Togepi Egg Hunt');
-        if (togepiEggHuntQuestLine.state() == QuestLineState.inactive) {
-            App.game.quests.getQuestLine('Togepi Egg Hunt').beginQuest();
-        }
-    },
-    // End
-    new Date(new Date().getFullYear(), 3, 29, 23), () => {
-        // do not end questline, so ppl can finish it
-    }
+SpecialEvents.events[GameConstants.SpecialEvents.Easter] = new SpecialEvent('Easter',
+    'Encounter Surprise Togepi for a limited time with a dedicated Quest Line.',
+    new Date(new Date().getFullYear(), 3, 8, 1),
+    new Date(new Date().getFullYear(), 3, 29, 23)
 );
-// First Event
-SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu and Red Spearow for a limited time roaming Kanto.',
-    // Start
-    new Date(new Date().getFullYear(), 6, 6, 1), () => {
-        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Flying Pikachu'));
-        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Red Spearow'));
-    },
-    // End
-    new Date(new Date().getFullYear(), 6, 12, 23), () => {
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Flying Pikachu');
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Red Spearow');
-    }
+SpecialEvents.events[GameConstants.SpecialEvents.FlyingPikachu] = new SpecialEvent('Flying Pikachu',
+    'Encounter Flying Pikachu and Red Spearow for a limited time roaming Kanto.',
+    new Date(new Date().getFullYear(), 6, 6, 1),
+    new Date(new Date().getFullYear(), 6, 12, 23)
 );
-// Pokemon the first movie release date
-SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a limited time in Cerulean Cave.<br/>Encounter clone Pokémon roaming in Kanto.',
-    // Start
-    new Date(new Date().getFullYear(), 6, 18, 1), () => {
-        dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Armored Mewtwo', 1000000, 80));
-        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Bulbasaur (clone)'));
-        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Charmander (clone)'));
-        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Squirtle (clone)'));
-    },
-    // End
-    new Date(new Date().getFullYear(), 6, 24, 23), () => {
-        dungeonList['Cerulean Cave'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Armored Mewtwo');
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Bulbasaur (clone)');
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Charmander (clone)');
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Squirtle (clone)');
-    }
+SpecialEvents.events[GameConstants.SpecialEvents.MewtwoStrikesBack] = new SpecialEvent('Mewtwo strikes back!',
+    'Encounter Armored Mewtwo for a limited time in Cerulean Cave.<br/>Encounter clone Pokémon roaming in Kanto.',
+    new Date(new Date().getFullYear(), 6, 18, 1),
+    new Date(new Date().getFullYear(), 6, 24, 23)
 );
-// Halloween
-SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited time around Kanto, Johto and Hoenn.',
-    // Start
-    new Date(new Date().getFullYear(), 9, 30, 1), () => {
-        SeededRand.seed(new Date().getFullYear());
-        Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => {
-            SeededRand.boolean() ? route.pokemon.land.push('Spooky Bulbasaur') : null;
-            SeededRand.boolean() ? route.pokemon.land.push('Gastly') : null;
-        });
-        Routes.getRoutesByRegion(GameConstants.Region.johto).forEach(route => {
-            SeededRand.boolean() ? route.pokemon.land.push('Spooky Togepi') : null;
-            SeededRand.boolean() ? route.pokemon.land.push('Misdreavus') : null;
-        });
-        Routes.getRoutesByRegion(GameConstants.Region.hoenn).forEach(route => {
-            SeededRand.boolean() ? route.pokemon.land.push('Pikachu (Gengar)') : null;
-            SeededRand.boolean() ? route.pokemon.land.push('Shuppet') : null;
-            SeededRand.boolean() ? route.pokemon.land.push('Duskull') : null;
-        });
-    },
-    // End
-    new Date(new Date().getFullYear(), 10, 5, 23), () => {
-        Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Spooky Bulbasaur', 'Gastly'].includes(p)));
-        Routes.getRoutesByRegion(GameConstants.Region.johto).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Spooky Togepi', 'Misdreavus'].includes(p)));
-        Routes.getRoutesByRegion(GameConstants.Region.hoenn).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Pikachu (Gengar)', 'Shuppet', 'Duskull'].includes(p)));
-    }
+SpecialEvents.events[GameConstants.SpecialEvents.Halloween] = new SpecialEvent('Halloween!',
+    'Encounter Spooky Pokémon for a limited time around Kanto, Johto and Hoenn.',
+    new Date(new Date().getFullYear(), 9, 30, 1),
+    new Date(new Date().getFullYear(), 10, 5, 23)
 );
-// Let's Go P/E release date
-SpecialEvents.newEvent('Let\'s GO!', 'Encounter special Eevee and Pikachu roaming in the Kanto region.',
-    // Start
-    new Date(new Date().getFullYear(), 10, 16, 1), () => {
-        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Let\'s Go Pikachu'));
-        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Let\'s Go Eevee'));
-    },
-    // End
-    new Date(new Date().getFullYear(), 10, 23, 23), () => {
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Let\'s Go Pikachu');
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Let\'s Go Eevee');
-    }
+SpecialEvents.events[GameConstants.SpecialEvents.LetsGo] = new SpecialEvent('Let\'s GO!',
+    'Encounter special Eevee and Pikachu roaming in the Kanto region.',
+    new Date(new Date().getFullYear(), 10, 16, 1),
+    new Date(new Date().getFullYear(), 10, 23, 23)
 );
-// Christmas
-SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and discover the Grinch of Ilex Forest.',
-    // Start
-    new Date(new Date().getFullYear(), 11, 24, 1), () => {
-        // Add to every region excluding None
-        GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
-            RoamingPokemonList.add(region, 0, new RoamingPokemon('Santa Snorlax'));
-        });
-        dungeonList['Ilex Forest'].bossList.push(new DungeonBossPokemon('Grinch Celebi', 1600000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)}));
-    },
-    // End
-    new Date(new Date().getFullYear(), 11, 30, 23), () => {
-        // Remove from every region excluding None
-        GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
-            RoamingPokemonList.remove(region, 0, 'Santa Snorlax');
-        });
-        dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Grinch Celebi');
-    }
+SpecialEvents.events[GameConstants.SpecialEvents.Christmas] = new SpecialEvent('Merry Christmas!',
+    'Encounter Santa Snorlax roaming the regions and discover the Grinch of Ilex Forest.',
+    new Date(new Date().getFullYear(), 11, 24, 1),
+    new Date(new Date().getFullYear(), 11, 30, 23)
 );
-// Golden Week
-SpecialEvents.newEvent('Golden Week', 'Enjoy your time off in the "Golden Week"! Travel tip: Visit the Flower Paradise in Sinnoh on your well earned vacation and enjoy the bloom of roses.',
-    // Start
-    new Date(new Date().getFullYear(), 3, 29, 1), () => {
-        dungeonList['Flower Paradise'].bossList.push(new DungeonBossPokemon('Bulbasaur (Rose)', 1600000, 100, {requirement: new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Flower Paradise'))}));
-    },
-    // End
-    new Date(new Date().getFullYear(), 4, 6, 23), () => {
-        dungeonList['Flower Paradise'].bossList = dungeonList['Flower Paradise'].bossList.filter(boss => boss.name != 'Bulbasaur (Rose)');
-    }
+SpecialEvents.events[GameConstants.SpecialEvents.GoldenWeek] = new SpecialEvent('Golden Week',
+    'Enjoy your time off in the "Golden Week"! Travel tip: Visit the Flower Paradise in Sinnoh on your well earned vacation and enjoy the bloom of roses.',
+    new Date(new Date().getFullYear(), 3, 29, 1),
+    new Date(new Date().getFullYear(), 4, 6, 23)
 );

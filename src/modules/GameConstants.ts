@@ -1333,3 +1333,14 @@ export enum GalarSubRegions {
     IsleOfArmor,
     CrownTundra,
 }
+
+export enum SpecialEvents {
+    LunarNewYear,
+    Easter,
+    FlyingPikachu,
+    MewtwoStrikesBack,
+    Halloween,
+    LetsGo,
+    Christmas,
+    GoldenWeek,
+}

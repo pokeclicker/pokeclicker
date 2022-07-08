@@ -518,4 +518,14 @@ namespace GameConstants {
         IsleOfArmor,
         CrownTundra,
     }
+    declare enum SpecialEvents {
+        LunarNewYear,
+        Easter,
+        FlyingPikachu,
+        MewtwoStrikesBack,
+        Halloween,
+        LetsGo,
+        Christmas,
+        GoldenWeek,
+    }
 }
