@@ -1231,6 +1231,7 @@ dungeonList['Cerulean Cave'] = new Dungeon('Cerulean Cave',
     [
         new DungeonBossPokemon('Kadabra', 183675, 60),
         new DungeonBossPokemon('Mewtwo', 255512, 100),
+        new DungeonBossPokemon('Armored Mewtwo', 1000000, 80, {hide: true, requirement: new SpecialEventRequirement(GameConstants.SpecialEvents.MewtwoStrikesBack)}),
     ],
     2500, 23);
 
@@ -1458,6 +1459,10 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
         new DungeonBossPokemon('Beedrill', 340000, 30),
         new DungeonBossPokemon('Butterfree', 340000, 30),
         new DungeonBossPokemon('Celebi', 800000, 50, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)}),
+        new DungeonBossPokemon('Grinch Celebi', 1600000, 100, {
+            requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion), new SpecialEventRequirement(GameConstants.SpecialEvents.Christmas)]),
+            hide: true,
+        }),
     ],
     4000, 34);
 
@@ -3597,6 +3602,10 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
         new DungeonBossPokemon('Breloom', 11000000, 50),
         new DungeonBossPokemon('Shaymin (land)', 11000000, 50),
         new DungeonBossPokemon('Shaymin (sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement(pokemonMap['Shaymin (land)'])}),
+        new DungeonBossPokemon('Bulbasaur (Rose)', 1600000, 100, {
+            requirement: new MultiRequirement([new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Flower Paradise')), new SpecialEventRequirement(GameConstants.SpecialEvents.GoldenWeek)]),
+            hide: true,
+        }),
     ],
     96500, 230);
 

@@ -36,6 +36,7 @@ SpecialEvents.events[GameConstants.SpecialEvents.LunarNewYear] = new SpecialEven
     new Date(new Date().getFullYear(), 0, 24, 1),
     new Date(new Date().getFullYear(), 1, 7, 23)
 );
+// TODO: Find a way to start the quest
 SpecialEvents.events[GameConstants.SpecialEvents.Easter] = new SpecialEvent('Easter',
     'Encounter Surprise Togepi for a limited time with a dedicated Quest Line.',
     new Date(new Date().getFullYear(), 3, 8, 1),
@@ -51,6 +52,7 @@ SpecialEvents.events[GameConstants.SpecialEvents.MewtwoStrikesBack] = new Specia
     new Date(new Date().getFullYear(), 6, 18, 1),
     new Date(new Date().getFullYear(), 6, 24, 23)
 );
+// TODO: Find a way to readd these
 SpecialEvents.events[GameConstants.SpecialEvents.Halloween] = new SpecialEvent('Halloween!',
     'Encounter Spooky Pokémon for a limited time around Kanto, Johto and Hoenn.',
     new Date(new Date().getFullYear(), 9, 30, 1),
