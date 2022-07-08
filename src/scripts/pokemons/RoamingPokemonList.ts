@@ -117,3 +117,7 @@ RoamingPokemonList.add(GameConstants.Region.galar, 1, new RoamingPokemon('Galari
 RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Spectrier', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
 RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Glastrier', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
 RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Galarian Zapdos', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Dyna Tree Hill'))));
+
+//Events
+RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Flying Pikachu', new SpecialEventRequirement(GameConstants.SpecialEvents.FlyingPikachu)));
+RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Red Spearow', new SpecialEventRequirement(GameConstants.SpecialEvents.FlyingPikachu)));

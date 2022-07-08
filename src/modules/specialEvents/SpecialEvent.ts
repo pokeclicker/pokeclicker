@@ -15,6 +15,16 @@ export default class SpecialEvent {
         public startTime: Date,
         public endTime: Date,
     ) {
+        if (+endTime < Date.now()) {
+            startTime.setFullYear(new Date().getFullYear());
+            endTime.setFullYear(new Date().getFullYear());
+        }
+        // if this is still true, the event has happend this year
+        if (+endTime < Date.now()) {
+            startTime.setFullYear(new Date().getFullYear() + 1);
+            endTime.setFullYear(new Date().getFullYear() + 1);
+        }
+
         this.manualActiveSecoundsLeft = ko.observable(0);
         this.currentDate = ko.observable(new Date());
 

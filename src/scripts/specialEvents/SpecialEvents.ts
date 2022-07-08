@@ -8,15 +8,7 @@ class SpecialEvents implements Feature {
 
     static events: { [event: number]: SpecialEvent } = {};
 
-    static newEvent(title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback) {
-        // Check if the event exist before adding it again
-        if (!SpecialEvents.events.find(event => event.title == title)) {
-            SpecialEvents.events.push(new SpecialEvent(title, description, startTime, startFunction, endTime, endFunction));
-        }
-    }
-
     initialize(): void {
-        SpecialEvents.events.forEach(event => event.initialize());
     }
 
     fromJSON(json: any): void {
