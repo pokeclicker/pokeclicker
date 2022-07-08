@@ -10,10 +10,10 @@ export default class SpecialEventRequirement extends Requirement {
     }
 
     public getProgress(): number {
-        return +(App.game.specialEvents.events[this.specialEvent]?.isActive());
+        return +(App.game.specialEvents.getEvent(this.specialEvent).isActive());
     }
 
     public hint(): string {
-        return `${App.game.specialEvents.events[this.specialEvent]?.title} is not active.`;
+        return `${App.game.specialEvents.getEvent(this.specialEvent).title} is not active.`;
     }
 }

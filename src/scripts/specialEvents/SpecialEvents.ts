@@ -8,6 +8,10 @@ class SpecialEvents implements Feature {
 
     static events: { [event: number]: SpecialEvent } = {};
 
+    getEvent(event: GameConstants.SpecialEvents): SpecialEvent {
+        return SpecialEvents.events[event];
+    }
+
     initialize(): void {
     }
 
