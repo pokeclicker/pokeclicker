@@ -28,9 +28,9 @@ export default class SpecialEvent {
         this.manualActiveSecoundsLeft = ko.observable(0);
         this.currentDate = ko.observable(new Date());
 
-        this.isActive = ko.pureComputed(() => this.currentDate() >= this.startTime
-                && this.currentDate() <= this.endTime
-                && this.manualActiveSecoundsLeft() > 0);
+        this.isActive = ko.pureComputed(() => (this.currentDate() >= this.startTime
+                && this.currentDate() <= this.endTime)
+                || this.manualActiveSecoundsLeft() > 0);
         this.timeLeft = ko.pureComputed(() => {
             if (this.manualActiveSecoundsLeft() > (+this.endTime - +this.currentDate()) / 1000) {
                 return this.timeTillEndFormatted(this.manualActiveSecoundsLeft());
