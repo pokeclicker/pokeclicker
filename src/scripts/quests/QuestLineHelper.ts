@@ -595,7 +595,7 @@ class QuestLineHelper {
         this.createRocketKantoQuestLine();
         this.createUndergroundQuestLine();
         this.createBillSeviiQuestLine();
-        this.createPersonsofInterestQuestLine()
+        this.createPersonsofInterestQuestLine();
         this.createRocketJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
         this.createDeoxysQuestLine();
