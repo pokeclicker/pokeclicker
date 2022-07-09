@@ -1330,6 +1330,7 @@ export enum UnovaSubRegions {
 
 export enum KalosSubRegions {
     Kalos = 0,
+    DeltaEpisode,
 }
 
 export enum AlolaSubRegions {
