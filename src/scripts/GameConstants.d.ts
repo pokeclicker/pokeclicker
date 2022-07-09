@@ -503,6 +503,7 @@ namespace GameConstants {
     }
     declare enum KalosSubRegions {
         Kalos,
+        DeltaEpisode,
     }
     declare enum AlolaSubRegions {
         MelemeleIsland,
