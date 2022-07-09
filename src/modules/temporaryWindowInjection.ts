@@ -21,6 +21,7 @@ import ItemType from './enums/ItemType';
 import KeyItemType from './enums/KeyItemType';
 import MulchType from './enums/MulchType';
 import PlotStage from './enums/PlotStage';
+import QuestLineState from './quests/QuestLineState';
 // end enums
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
@@ -71,7 +72,7 @@ import RoutePokemon from './routes/RoutePokemon';
 import RegionRoute from './routes/RegionRoute';
 import Routes from './routes/Routes';
 import SubRegion from './subRegion/SubRegion';
-import SubRegions, { KalosSubRegions, AlolaSubRegions } from './subRegion/SubRegions';
+import SubRegions, { KalosSubRegions } from './subRegion/SubRegions';
 import Requirement from './requirements/Requirement';
 import AchievementRequirement from './requirements/AchievementRequirement';
 import NullRequirement from './requirements/NullRequirement';
@@ -139,6 +140,7 @@ Object.assign(<any>window, {
     KeyItemType,
     MulchType,
     PlotStage,
+    QuestLineState,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -194,7 +196,6 @@ Object.assign(<any>window, {
     SubRegion,
     SubRegions,
     KalosSubRegions,
-    AlolaSubRegions,
     Requirement,
     AchievementRequirement,
     NullRequirement,

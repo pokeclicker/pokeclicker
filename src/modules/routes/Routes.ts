@@ -28,8 +28,13 @@ export default class Routes {
         return this.regionRoutes.find((routeData) => routeData.number === route).region;
     }
 
-    public static getName(route: number, region: number): string {
-        return this.regionRoutes.find((routeData) => routeData.region === region && routeData.number === route)?.routeName ?? 'Unknown Route';
+    public static getName(route: number, region: number, alwaysIncludeRegionName = false): string {
+        const regionName = GameConstants.camelCaseToString(GameConstants.Region[region]);
+        let routeName = this.regionRoutes.find((routeData) => routeData.region === region && routeData.number === route)?.routeName ?? 'Unknown Route';
+        if (alwaysIncludeRegionName && !routeName.includes(regionName)) {
+            routeName += ` in ${regionName}`;
+        }
+        return routeName;
     }
 
     public static unnormalizeRoute(normalizedRoute: number): number {
@@ -40,7 +45,11 @@ export default class Routes {
         if (region === GameConstants.Region.none) {
             return route;
         }
+        // For some numbers, like pokemon hp, we want to be able to add a new route, without changing the balance of the whole game
+        // For those numbers, skipIgnoredRoutes == true. If It's false, filteredRegionRoutes will just be all routes and the if will never happen
         const filteredRegionRoutes = this.regionRoutes.filter((r) => !skipIgnoredRoutes || !r.ignoreRouteInCalculations);
+        // If this route is ignored, we will find the index of the route before this, which is not ignored
+        // This is done by looping backwards, and checking all routes
         if (skipIgnoredRoutes && this.regionRoutes.find((routeData) => routeData.region === region && routeData.number === route)?.ignoreRouteInCalculations) {
             for (let i = this.regionRoutes.findIndex((routeData) => routeData.region === region && routeData.number === route) - 1; i >= 0; i--) {
                 if (!this.regionRoutes[i].ignoreRouteInCalculations) {

@@ -1,9 +1,3 @@
-enum QuestLineState {
-    inactive,
-    started,
-    ended,
-}
-
 class QuestLine {
     name: string;
     description: string;
