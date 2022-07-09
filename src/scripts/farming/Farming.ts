@@ -1212,6 +1212,8 @@ class Farming implements Feature {
 
         plot.mulch = +mulch;
         plot.mulchTimeLeft += GameConstants.MULCH_USE_TIME * amount;
+
+        this.resetAuras();
     }
 
     /**

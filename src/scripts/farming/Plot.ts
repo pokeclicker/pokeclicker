@@ -195,7 +195,7 @@ class Plot implements Saveable {
 
             // Aura
 
-            if (this.stage() >= PlotStage.Taller && this.berryData.aura) {
+            if (this.stage() >= PlotStage.Taller && this.berryData.aura && this.mulch !== MulchType.Freeze_Mulch) {
                 const berryAuraValue = this.berryData.aura.getAuraValue(this.stage());
                 const lumAuraValue = this._auras[AuraType.Boost]();
                 tooltip.push('<u>Aura Emitted:</u>');
@@ -486,7 +486,7 @@ class Plot implements Saveable {
     }
 
     emitAura(index: number): void {
-        if (this.berry === BerryType.None) {
+        if (this.berry === BerryType.None || this.mulch === MulchType.Freeze_Mulch) {
             return;
         }
         this.berryData.aura?.emitAura(index);
