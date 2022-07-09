@@ -10,7 +10,7 @@ class RoamingPokemonList {
         [[GameConstants.HoennSubRegions.Hoenn]],
         [[GameConstants.SinnohSubRegions.Sinnoh]],
         [[GameConstants.UnovaSubRegions.Unova]],
-        [[GameConstants.KalosSubRegions.Kalos]],
+        [[GameConstants.KalosSubRegions.Kalos], [GameConstants.KalosSubRegions.DeltaEpisode]],
         [[GameConstants.AlolaSubRegions.MelemeleIsland, GameConstants.AlolaSubRegions.AkalaIsland, GameConstants.AlolaSubRegions.UlaulaAndPoniIslands]],
         [[GameConstants.GalarSubRegions.Galar], [GameConstants.GalarSubRegions.IsleOfArmor], [GameConstants.GalarSubRegions.CrownTundra]],
     ];

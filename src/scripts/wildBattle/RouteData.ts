@@ -1343,7 +1343,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 2', GameConstants.Region.kalos, 2,
@@ -1352,7 +1352,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 1)],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 3', GameConstants.Region.kalos, 3,
@@ -1362,7 +1362,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Santalune Forest'))],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 22', GameConstants.Region.kalos, 22,
@@ -1372,7 +1372,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 3)],
     3.1,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 4', GameConstants.Region.kalos, 4,
@@ -1381,7 +1381,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Bug)],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 5', GameConstants.Region.kalos, 5,
@@ -1390,7 +1390,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 6', GameConstants.Region.kalos, 6,
@@ -1399,7 +1399,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 5)],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 7', GameConstants.Region.kalos, 7,
@@ -1408,7 +1408,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Parfum Palace'))],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 8', GameConstants.Region.kalos, 8,
@@ -1418,7 +1418,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Connecting Cave'))],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 9', GameConstants.Region.kalos, 9,
@@ -1427,7 +1427,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 8)],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 10', GameConstants.Region.kalos, 10,
@@ -1436,7 +1436,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glittering Cave'))],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 11', GameConstants.Region.kalos, 11,
@@ -1448,7 +1448,7 @@ Routes.add(new RegionRoute(
         new RouteKillRequirement(10, GameConstants.Region.kalos, 10),
     ],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 12', GameConstants.Region.kalos, 12,
@@ -1458,7 +1458,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Rumble)],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
     // Replace req with Tower of Mastery dungeon if implemented.
 ));
 Routes.add(new RegionRoute(
@@ -1468,7 +1468,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 14', GameConstants.Region.kalos, 14,
@@ -1478,7 +1478,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Voltage)],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 15', GameConstants.Region.kalos, 15,
@@ -1488,7 +1488,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokéball Factory'))],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
     // Replace req with Pokéball Factory dungeon if implemented.
 ));
 Routes.add(new RegionRoute(
@@ -1499,7 +1499,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 15)],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 17', GameConstants.Region.kalos, 17,
@@ -1508,7 +1508,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Frost Cavern'))],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 18', GameConstants.Region.kalos, 18,
@@ -1517,7 +1517,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 19', GameConstants.Region.kalos, 19,
@@ -1527,7 +1527,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 18)],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 20', GameConstants.Region.kalos, 20,
@@ -1536,7 +1536,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 19)],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 21', GameConstants.Region.kalos, 21,
@@ -1546,7 +1546,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 19)],
     undefined,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Azure Bay', GameConstants.Region.kalos, 23,
@@ -1556,7 +1556,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)],
     12,
-    KalosSubRegions.Kalos
+    GameConstants.KalosSubRegions.Kalos
 ));
 Routes.add(new RegionRoute(
     'Delta Route 101', GameConstants.Region.kalos, 101,
@@ -1570,7 +1570,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1587,7 +1587,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1604,7 +1604,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1621,7 +1621,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1637,7 +1637,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1653,7 +1653,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1669,7 +1669,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1685,7 +1685,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1696,7 +1696,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1708,7 +1708,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1726,7 +1726,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1737,7 +1737,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 111)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1748,7 +1748,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Delta Fiery Path'))],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1761,7 +1761,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 113)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1773,7 +1773,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Delta Meteor Falls'))],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1790,7 +1790,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1807,7 +1807,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1824,7 +1824,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1836,7 +1836,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 118)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1848,7 +1848,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 119)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1859,7 +1859,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 120)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1870,7 +1870,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 121)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1882,7 +1882,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 122)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1893,7 +1893,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 121)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1904,7 +1904,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 124)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1915,7 +1915,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 124)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1931,7 +1931,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1942,7 +1942,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 127)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1953,7 +1953,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 128)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1965,7 +1965,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 129)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1976,7 +1976,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 130)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1987,7 +1987,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 131)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -1998,7 +1998,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 132)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
@@ -2009,7 +2009,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 133)],
     21.1,
-    KalosSubRegions.DeltaEpisode,
+    GameConstants.KalosSubRegions.DeltaEpisode,
     true,
     5397711
 ));
