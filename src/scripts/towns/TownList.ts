@@ -156,15 +156,33 @@ const PalletProfOak = new ProfNPC('Prof. Oak',
     'Your journey isn\'t over yet, a whole world awaits you! Onwards to Johto!',
     'assets/images/oak.png');
 
-const PalletMom = new NPC('Mom', [
+const PalletMom1 = new NPC('Mom', [
+    'So you\'re really leaving on your very own Pokémon journey. I\'m so proud of you. Let me give you some words of wisdom for your travels.',
     'Traveling on your own can be scary. But remember that there are nice people everywhere you go. So strike up a converstation. You will probably learn something useful.',
-]);
-
-const ViridianCityOldMan = new NPC('Old Man', [
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Tutorial Quests', 2), new QuestLineStepCompletedRequirement('Tutorial Quests', 3, GameConstants.AchievementOption.less )]) });
+const PalletMom2 = new NPC('Mom', [
+    'Remember that there are nice people everywhere you go. So strike up a converstation. You will probably learn something useful.',
+],
+{ requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 3) });
+const ViridianCityOldMan1 = new NPC('Old Man', [
+    'Leave me alone. I need my coffee.',
+],
+{ requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 4, GameConstants.AchievementOption.less) });
+const ViridianCityOldMan2 = new NPC('Old Man', [
     'Ahh, I\'ve had my coffee now and I feel great!',
-    'You can use the Pokéball Selector to select which type of Pokéball to use on specific Pokémon based on caught status.',
-]);
-
+    'You can use the Pokéball Selector to select which type of Pokéball to use on specific Pokémon based on caught status. The options, from left to right, are Caught, Caught shiny, New, New shiny.',
+    'For example, if you click on the empty ball below the word Caught and assign a Pokéball, you will then start throwing Pokéballs at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
+    'Here, let me show you how it works.',
+    'I\'ll always be here to explain it again if you forget.',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Tutorial Quests', 4), new QuestLineStepCompletedRequirement('Tutorial Quests', 5, GameConstants.AchievementOption.less )]) });
+const ViridianCityOldMan3 = new NPC('Old Man', [
+    'You can use the Pokéball Selector to select which type of Pokéball to use on specific Pokémon based on caught status. The options, from left to right, are Caught, Caught shiny, New, New shiny.',
+    'For example, if you click on the empty ball below the word Caught and assign a Pokéball, you will then start throwing Pokéballs at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
+    'I\'ll always be here to explain it again if you forget.',
+],
+{ requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 5) });
 const PewterBattleItemRival = new NPC('Battle Item Master', [
     'Hey kid, you look new! Let me offer some advice: Battle Items like xAttack can be acquired along Routes, inside Dungeons and in Shops!',
     'Use them to help you out whenever you feel like time is against you!',
@@ -284,7 +302,7 @@ TownList['Pallet Town'] = new Town(
     GameConstants.Region.kanto,
     [],
     {
-        npcs: [PalletProfOak, PalletMom],
+        npcs: [PalletProfOak, PalletMom1, PalletMom2],
     }
 );
 TownList['Viridian City'] = new Town(
@@ -293,7 +311,7 @@ TownList['Viridian City'] = new Town(
     [ViridianCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 1)],
-        npcs: [ViridianCityOldMan],
+        npcs: [ViridianCityOldMan1, ViridianCityOldMan2, ViridianCityOldMan3],
     }
 );
 TownList['Pewter City'] = new Town(
