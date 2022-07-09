@@ -9,8 +9,9 @@ class DungeonRunner {
 
     public static fighting: KnockoutObservable<boolean> = ko.observable(false);
     public static map: DungeonMap;
-    public static chestsOpened: number;
+    public static chestsOpened: KnockoutObservable<number> = ko.observable(0);
     public static currentTileType;
+    public static encountersWon: KnockoutObservable<number> = ko.observable(0);
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
     public static defeatedBoss: KnockoutObservable<boolean> = ko.observable(false);
     public static dungeonFinished: KnockoutObservable<boolean> = ko.observable(false);
@@ -45,7 +46,8 @@ class DungeonRunner {
         // Dungeon size minimum of MIN_DUNGEON_SIZE
         DungeonRunner.map = new DungeonMap(Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize), flash);
 
-        DungeonRunner.chestsOpened = 0;
+        DungeonRunner.chestsOpened(0);
+        DungeonRunner.encountersWon(0);
         DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
         });
@@ -110,7 +112,7 @@ class DungeonRunner {
             return;
         }
 
-        DungeonRunner.chestsOpened++;
+        GameHelper.incrementObservable(DungeonRunner.chestsOpened);
         const loot = DungeonRunner.lootInput();
         let amount = loot.amount || 1;
 
@@ -127,10 +129,10 @@ class DungeonRunner {
 
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
-        if (DungeonRunner.chestsOpened == Math.floor(DungeonRunner.map.size / 3)) {
+        if (DungeonRunner.chestsOpened() == Math.floor(DungeonRunner.map.size / 3)) {
             DungeonRunner.map.showChestTiles();
         }
-        if (DungeonRunner.chestsOpened == Math.ceil(DungeonRunner.map.size / 2)) {
+        if (DungeonRunner.chestsOpened() == Math.ceil(DungeonRunner.map.size / 2)) {
             DungeonRunner.map.showAllTiles();
         }
     }
