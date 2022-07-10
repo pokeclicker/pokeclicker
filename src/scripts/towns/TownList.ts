@@ -2617,11 +2617,49 @@ const DeltaSlateportHoennReporter = new NPC('Reporter Gabby', [
 const DeltaFallarborGemMaster = new NPC('Gem Master', [
     'Yep. My shop\'s still open. Don\'t act surprised, I know how to run a business.',
 ]);
+const WeatherInstituteScientist1 = new NPC('Weather Scientist', [
+    'You\'re here about Kyogre and Groudon? We haven\'t seen any activity from them in a while.',
+    'It\'s got us a bit worried. Both for their safety and our own. Could you please go to Sootopolis City and see what you can find out?',
+],
+{ requirement: new QuestLineStepCompletedRequirement('The Missing Primals', 1, GameConstants.AchievementOption.less ) });
+const WeatherInstituteScientist2 = new NPC('Weather Scientist', [
+    'So the rumors are true. They really have disappeared from the Cave of Origin. This is very worrying.',
+    'You should go take a thorough look around the Cave of Origin. And catch that Exploud while you\'re there. It could be very helpful to us.',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Missing Primals', 1), new QuestLineStepCompletedRequirement('The Missing Primals', 3, GameConstants.AchievementOption.less )]) });
+const WeatherInstituteScientist3 = new NPC('Weather Scientist', [
+    'This Exploud seems to have a connection with Kyogre and Groudon. It might lead us to them. Just leave it here, we\'ll take good care of it.',
+    'In the mean time we should really upgrade our weather prediction capabilities. If only we still had some Castform here. Could you go out and catch some for us?',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Missing Primals', 3), new QuestLineStepCompletedRequirement('The Missing Primals', 5, GameConstants.AchievementOption.less )]) });
+const WeatherInstituteScientist4 = new NPC('Weather Scientist', [
+    'Wow, five of them! Where did you get these?!',
+    'A different version of this very same building? What? This is no time for jokes. You\'re saying it\'s really true? Riiiiiiiight.',
+    'Anyway, thank you very much. Kyogre and Groudon are known to be connected with weather events. These Castform will help us detect such events.',
+    'We haven\'t learned anything from Exploud yet. It\'s being very co-operative and sweet. Sometimes it suddenly wants to go outside, but we can\'t figure out why.',
+    'Maybe you should catch some water and ground type Pokémon. See if you can learn anything from that.',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Missing Primals', 5), new QuestLineStepCompletedRequirement('The Missing Primals', 7, GameConstants.AchievementOption.less )]) });
+const WeatherInstituteScientist5 = new NPC('Weather Scientist', [
+    'We\'ve had a breakthrough! Check this out!',
+    'When the Castform predict a certain kind of weather Exploud wants to go outside. It wants to start heading towards a specific location. I\'m almost certain it thinks it will find its friends at those locations in that weather!',
+    'If Casform predicts sunny weather, Exploud wants to go to route 113.',
+    'If Casform predicts rainy weather, Exploud wants to go to route 133.',
+    'You should go to those locations in that weather! I\'m sure something interesting will happen!',
+],
+{ requirement: new QuestLineStepCompletedRequirement('The Missing Primals', 7) });
+const WeatherInstituteScientist6 = new NPC('Weather Scientist', [
+    'So they moved to some new caves. Caves that appear and disappear based on the weather. Interesting',
+    'Additionally they have transformed into stronger more dangerous forms. That is troubling.',
+    'At least we can now keep an eye on them again. Thank you very much.',
+],
+{ requirement: new QuestLineCompletedRequirement('The Missing Primals') });
 const DeltaSootopolisGentleman = new NPC('Gentleman', [
     'Somehow we never figured out Exploud\'s connection to Kyogre and Groudon. There was never any reason to think they are connected in any way. We just thought they occupied the same cave for no real reason.',
     'But now Kyogre and Groudon have not been seen in the Cave of Origin in a long time, and Exploud seems to be very upset about that. It\'s been making a lot of noise. I mean, more than usual.',
     'Why doesn\'t Exploud just go out and look for its friends? I\'d certainly like to know where they went. Maybe it can\'t swim...',
-]);
+],
+{ requirement: new QuestLineStepCompletedRequirement('The Missing Primals', 0) });
 const DeltaPokemonLeagueHoennNobody = new NPC('Challenge the Pokémon League', [
     'But nobody came...',
 ]);
@@ -2908,7 +2946,8 @@ TownList['Delta Weather Institute'] = new Town(
     GameConstants.Region.kalos,
     [],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 119)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 119)], //add primals questlinestarted requirement
+        npcs: [WeatherInstituteScientist1, WeatherInstituteScientist2, WeatherInstituteScientist3, WeatherInstituteScientist4, WeatherInstituteScientist5, WeatherInstituteScientist6],
     }
 );
 TownList['Delta Fortree City'] = new Town(
@@ -3117,7 +3156,10 @@ TownList['Delta Shoal Cave'] = new DungeonTown(
 TownList['Delta Cave of Origin'] = new DungeonTown(
     'Delta Cave of Origin',
     GameConstants.Region.kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 126)]
+    [
+        new RouteKillRequirement(10, GameConstants.Region.kalos, 126),
+        new QuestLineStepCompletedRequirement('The Missing Primals', 2),
+    ]
 );
 TownList['Delta Sky Pillar'] = new DungeonTown(
     'Delta Sky Pillar',

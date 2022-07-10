@@ -1464,7 +1464,7 @@
             , x: 48, y: 38
             , width: 4, height: 3
             , databind: "click:function(){MapHelper.moveToTown('Marine Cave')}, attr:{ class: MapHelper.calculateTownCssClass('Marine Cave') }"
-            , visible:  "Weather.currentWeather() == WeatherType.Rain"
+            , visible:  "Weather.currentWeather() == WeatherType.Rain && (App.game.quests.getQuestLine('The Missing Primals').state() === QuestLineState.ended || App.game.quests.getQuestLine('The Missing Primals').curQuest() > 8)"
             , image: "assets/images/map/marine_cave.png"
             })
         %>
@@ -1475,7 +1475,7 @@
             , x: 25, y: 1
             , width: 4, height: 3
             , databind: "click:function(){MapHelper.moveToTown('Terra Cave')}, attr:{ class: MapHelper.calculateTownCssClass('Terra Cave') }"
-            , visible:  "Weather.currentWeather() == WeatherType.Sunny"
+            , visible:  "Weather.currentWeather() == WeatherType.Sunny && (App.game.quests.getQuestLine('The Missing Primals').state() === QuestLineState.ended || App.game.quests.getQuestLine('The Missing Primals').curQuest() > 8)"
             , image: "assets/images/map/terra_cave.png"
             })
         %>

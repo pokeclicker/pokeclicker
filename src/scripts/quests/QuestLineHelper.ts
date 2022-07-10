@@ -507,6 +507,47 @@ class QuestLineHelper {
         App.game.quests.questLines().push(vivillonQuestLine);
     }
 
+    public static createPrimalsQuestLine() {
+        const primalsQuestLine = new QuestLine('The Missing Primals', 'The scientists at the Delta Weather Institute need help.');
+
+        const talkToWeatherScientist1 = new TalkToNPCQuest(WeatherInstituteScientist1, 'Talk to the Weather Scientist at the Delta Weather Institute.');
+        primalsQuestLine.addQuest(talkToWeatherScientist1);
+
+        const talkToSootopolisGentleman = new TalkToNPCQuest(DeltaSootopolisGentleman, 'Investigate the disappearance of Kyogre and Groudon in Delta Sootopolis City.');
+        primalsQuestLine.addQuest(talkToSootopolisGentleman);
+
+        const talkToWeatherScientist2 = new TalkToNPCQuest(WeatherInstituteScientist2, 'Report your findings to the Delta Weather Institute.');
+        primalsQuestLine.addQuest(talkToWeatherScientist2);
+
+        const CatchExploud = new CustomQuest(1, 0, 'Catch Exploud.', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Exploud').id]());
+        primalsQuestLine.addQuest(CatchExploud);
+        //Await multiquest and add 5 Delta Cave of Origin clears.
+
+        const talkToWeatherScientist3 = new TalkToNPCQuest(WeatherInstituteScientist3, 'Bring Exploud to the Delta Weather Institute.');
+        primalsQuestLine.addQuest(talkToWeatherScientist3);
+
+        const CatchCastform = new CustomQuest(5, 0, 'Catch some Castform.', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Castform').id]());
+        primalsQuestLine.addQuest(CatchCastform);
+        
+        const talkToWeatherScientist4 = new TalkToNPCQuest(WeatherInstituteScientist4, 'Bring the Castform to the Delta Weather Institute.');
+        primalsQuestLine.addQuest(talkToWeatherScientist4);
+
+        const catchWater = new CustomQuest(100, 0, 'Capture 100 Water-type Pokémon.', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Water)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
+        });
+        primalsQuestLine.addQuest(catchWater);
+        //Await multiquest and add 100 ground type captures.
+
+        const talkToWeatherScientist5 = new TalkToNPCQuest(WeatherInstituteScientist5, 'Check in at the Delta Weather Institute.');
+        primalsQuestLine.addQuest(talkToWeatherScientist5);
+
+        const clearTerraCave = new CustomQuest(1, 0, 'Clear Terra Cave.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Terra Cave')]());
+        primalsQuestLine.addQuest(clearTerraCave);
+        //Await multiquest and add clear Marine Cave.
+
+        App.game.quests.questLines().push(primalsQuestLine);
+    }
+
     // Alola QuestLines
     public static createSkullAetherAlolaQuestLine() {
         const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
@@ -643,6 +684,7 @@ class QuestLineHelper {
         this.createGalacticSinnohQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createVivillonQuestLine();
+        this.createPrimalsQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();

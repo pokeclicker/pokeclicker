@@ -864,6 +864,11 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 3);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 4);
+
+            // Start Primals questline if the player has beaten Kalos champion
+            if (saveData.badgeCase[78]) {
+                saveData.quests.questLines.push({state: 1, name: 'The Missing Primals', quest: 0});
+            }
         },
     };
 
