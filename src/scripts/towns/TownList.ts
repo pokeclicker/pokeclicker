@@ -162,7 +162,7 @@ const PalletMom1 = new NPC('Mom', [
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Tutorial Quests', 2), new QuestLineStepCompletedRequirement('Tutorial Quests', 3, GameConstants.AchievementOption.less )]) });
 const PalletMom2 = new NPC('Mom', [
-    'Remember that there are nice people everywhere you go. So strike up a converstation! You will probably learn something useful.',
+    'Remember that there are nice people everywhere you go. So strike up a conversation! You will probably learn something useful.',
 ],
 { requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 3) });
 const ViridianCityOldMan1 = new NPC('Old Man', [
