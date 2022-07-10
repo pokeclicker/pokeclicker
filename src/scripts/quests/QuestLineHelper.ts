@@ -222,6 +222,18 @@ class QuestLineHelper {
         App.game.quests.questLines().push(billSeviiQuestLine);
     }
 
+    public static createPersonsofInterestQuestLine() {
+        const personsofInterestQuestLine = new QuestLine('Persons of Interest', 'Some people want to talk to you.');
+
+        const talktoBreeder = new TalkToNPCQuest(SaffronBreeder, 'Talk to the Breeder in Saffron City.', 250);
+        personsofInterestQuestLine.addQuest(talktoBreeder);
+
+        const talktoGemScientist = new TalkToNPCQuest(PewterScientist, 'Talk to the Gem Scientist in Pewter City.', 250);
+        personsofInterestQuestLine.addQuest(talktoGemScientist);
+
+        App.game.quests.questLines().push(personsofInterestQuestLine);
+    }
+
     // Johto QuestLines
     public static createRocketJohtoQuestLine() {
         const rocketJohtoQuestLine = new QuestLine('Team Rocket Again', 'Team Rocket is up to no good again!');
@@ -442,14 +454,13 @@ class QuestLineHelper {
                     type: NotificationConstants.NotificationOption.success,
                 });
             };
-            const catchVivillon = new CustomQuest(
-                1,
-                vivillonRemove,
+            const catchVivillon = new CaptureSpecificPokemonQuest(
+                vivillon,
                 `Find and capture the rare Vivillon!\nHint: ${hint}`,
-                App.game.statistics.pokemonCaptured[pokemonMap[vivillon].id],
-                undefined,
-                vivillonAdd
-            );
+                1,
+                false,
+                vivillonRemove,
+                vivillonAdd);
             vivillonQuestLine.addQuest(catchVivillon);
         };
 
@@ -493,14 +504,13 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchBall = new CustomQuest(
-            1,
-            viviBalldone,
+        const catchBall = new CaptureSpecificPokemonQuest(
+            'Vivillon (Pokéball)',
             'Find and capture the rare Vivillon!\nHint: Only the strongest Challengers can reach it.',
-            App.game.statistics.pokemonCaptured[666.01],
-            undefined,
-            viviBallAdd
-        );
+            1,
+            false,
+            viviBalldone,
+            viviBallAdd);
         vivillonQuestLine.addQuest(catchBall);
 
         // Add quest to quest line
@@ -853,6 +863,7 @@ class QuestLineHelper {
         this.createRocketKantoQuestLine();
         this.createUndergroundQuestLine();
         this.createBillSeviiQuestLine();
+        this.createPersonsofInterestQuestLine();
         this.createRocketJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
         this.createDeoxysQuestLine();
