@@ -442,14 +442,13 @@ class QuestLineHelper {
                     type: NotificationConstants.NotificationOption.success,
                 });
             };
-            const catchVivillon = new CustomQuest(
-                1,
-                vivillonRemove,
+            const catchVivillon = new CaptureSpecificPokemonQuest(
+                vivillon,
                 `Find and capture the rare Vivillon!\nHint: ${hint}`,
-                App.game.statistics.pokemonCaptured[pokemonMap[vivillon].id],
-                undefined,
-                vivillonAdd
-            );
+                1,
+                false,
+                vivillonRemove,
+                vivillonAdd);
             vivillonQuestLine.addQuest(catchVivillon);
         };
 
@@ -493,14 +492,13 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchBall = new CustomQuest(
-            1,
-            viviBalldone,
+        const catchBall = new CaptureSpecificPokemonQuest(
+            'Vivillon (Pokéball)',
             'Find and capture the rare Vivillon!\nHint: Only the strongest Challengers can reach it.',
-            App.game.statistics.pokemonCaptured[666.01],
-            undefined,
-            viviBallAdd
-        );
+            1,
+            false,
+            viviBalldone,
+            viviBallAdd);
         vivillonQuestLine.addQuest(catchBall);
 
         // Add quest to quest line
