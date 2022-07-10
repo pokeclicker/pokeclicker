@@ -105,7 +105,20 @@ class FarmController {
     }
 
     public static mulchAll() {
-        App.game.farming.mulchAll(FarmController.selectedMulch(), this.getAmount());
+        if (!Settings.getSetting('confirmBeformeMulchingAllPlots').observableValue()) {
+            return App.game.farming.mulchAll(FarmController.selectedMulch(), this.getAmount());
+        }
+
+        Notifier.confirm({
+            title: 'Farm Mulch',
+            message: `Are you sure to mulch ${this.getAmount()} of ${MulchType[FarmController.selectedMulch()].replace('_', ' ')} ?`,
+            type: NotificationConstants.NotificationOption.info,
+            confirm: 'Mulch',
+        }).then(confirmed => {
+            if (confirmed) {
+                App.game.farming.mulchAll(FarmController.selectedMulch(), this.getAmount());
+            }
+        });
     }
 
     public static navigateRight() {
