@@ -28,6 +28,38 @@ interface Loot {
     amount?: number,
 }
 
+type LootTier = 'common' | 'rare' | 'epic' | 'legendary' | 'mythic';
+type LootTable = Partial<Record<LootTier, Loot[]>>;
+
+// These should add up to 1 if you want to keep it easy to judge chances
+const baseLootTierChance: Record<LootTier, number> = {
+    common: 0.75,
+    rare: 0.2,
+    epic: 0.04,
+    legendary: 0.0099,
+    mythic: 0.0001,
+};
+
+const nerfedLootTierChance: Record<LootTier, number> = {
+    common: 0.75,
+    rare: 0.24,
+    epic: 0.009,
+    legendary: 0.00099,
+    mythic: 0.00001,
+};
+
+// Should sum to 0
+const lootRedistribution: Record<LootTier, number> = {
+    common: -1,
+    rare: 0.33,
+    epic: 0.4,
+    legendary: 0.2,
+    mythic: 0.07,
+};
+
+// Max amount to take from common and redistibute @ 500 clears
+const lootRedistibuteAmount = 0.15;
+
 type Enemy = PokemonNameType | DetailedPokemon | DungeonTrainer;
 
 type Boss = DungeonBossPokemon | DungeonTrainer;
@@ -64,7 +96,7 @@ class Dungeon {
     constructor(
         public name: string,
         public enemyList: Enemy[],
-        public itemList: Loot[],
+        public lootTable: LootTable,
         public baseHealth: number,
         public bossList: Boss[],
         public tokenCost: number,
@@ -178,6 +210,38 @@ class Dungeon {
         return encounterInfo;
     }
 
+    public getRandomLootTier(): LootTier {
+        const tierWeights = this.lootTierWeights;
+        return Rand.fromWeightedArray(Object.keys(tierWeights), Object.values(tierWeights)) as LootTier;
+    }
+
+    public getRandomLoot(tier: LootTier): Loot {
+        return Rand.fromWeightedArray(this.lootTable[tier], this.lootTable[tier].map((loot) => loot.weight ?? 1));
+    }
+
+    get lootTierWeights(): Record<LootTier, number> {
+        if (GameConstants.getDungeonRegion(this.name) < player.highestRegion() - 2) {
+            return Object.entries(nerfedLootTierChance).reduce((chances, [tier, chance]) => {
+                if (tier in this.lootTable) {
+                    chances[tier] = chance;
+                }
+                return chances;
+            }, {} as Record<LootTier, number>);
+        }
+
+        const timesCleared = Math.min(500, Math.max(1, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]()));
+        const redist = lootRedistibuteAmount * timesCleared / 500;
+
+        const updatedChances = Object.entries(baseLootTierChance).reduce((chances, [tier, chance]) => {
+            if (tier in this.lootTable) {
+                chances[tier] = chance + (redist * lootRedistribution[tier]);
+            }
+            return chances;
+        }, {} as Record<LootTier, number>);
+
+        return updatedChances;
+    }
+
     /**
      * Retrieves the weights for all the possible enemies
      */
@@ -190,24 +254,6 @@ class Dungeon {
             } else {
                 return (<DungeonTrainer>enemy).options?.weight ?? 1;
             }
-        });
-    }
-
-    /**
-     * Retrieves the weights for all the possible Loot, weight values are utilized as 10^Weight. Should use values in Dungeon Initialization from 0 (least likely) to 4 (most likely), anything > 4 is probably too much
-     */
-    get lootWeightList(): number[] {
-        return this.itemList.map((loot) => {
-            if (loot.requirement && !loot.requirement.isCompleted()) {
-                return 0;
-            }
-            if (loot.weight < 2 && GameConstants.getDungeonRegion(this.name) < player.highestRegion() - 2) {
-                return 0.1 * Math.max(0.5,loot.weight);
-            }
-            // Minimum of 1 times cleared for division
-            const timesCleared = Math.min(500, Math.max(1, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]()));
-            // Calculate total weight based on times cleared, minimum weight being original number specified
-            return Math.max(loot.weight, Math.pow(15, loot.weight) / timesCleared) + 1 || 1;
         });
     }
 
