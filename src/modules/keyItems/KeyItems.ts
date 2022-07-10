@@ -39,47 +39,7 @@ export default class KeyItems implements Feature {
                 }, 'Town Map'),
             // TODO obtain somewhere at the start
             new KeyItem(KeyItemType.Factory_key, 'This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13.', undefined, undefined, undefined, 'Factory Key'),
-            new KeyItem(KeyItemType.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region and beyond.<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon.', null, false, () => {
-                Information.show({
-                    steps: [
-                        {
-                            element: document.getElementById('pokeballSelector'),
-                            intro: 'Select which Pokéball types to catch Pokémon with based on their caught/shiny status.<br/><i><sup>Hover over the column titles for more info.</sup></i><br/><br/>Capturing Pokémon gains you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens.<br/><br/>Try now by clicking the "Caught" selector to change it.',
-                        },
-                    ],
-                    exitOnEsc: false,
-                    showButtons: false,
-                });
-                const caughtSelector: HTMLElement = document.querySelector('.pokeball-small.clickable.pokeball-selected');
-                caughtSelector.addEventListener('click', () => {
-                    Information.hide();
-                    $('#pokeballSelectorModal').one('shown.bs.modal', null, () => {
-                        // Need to set a timeout, otherwise it messes up the modal layout
-                        setTimeout(() => {
-                            Information.show({
-                                steps: [
-                                    {
-                                        element: document.querySelector('#pokeballSelectorModal .modal-body'),
-                                        intro: 'Select the <img title="Pokéball" src="assets/images/pokeball/Pokeball.svg" height="25px"> Pokéball to use this type of ball to capture already caught Pokémon, which will give you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens when captured.',
-                                    },
-                                ],
-                                // Needed for IntroJs on modals
-                                overlayOpacity: 0,
-                            });
-                        }, 100);
-
-                        // Hide the IntroJS overlay once the user selects the Pokeball
-                        const selectPokeball = document.querySelectorAll('#pokeballSelectorModal .clickable')[1];
-                        selectPokeball.addEventListener('click', () => {
-                            Information.hide();
-                        }, {
-                            once: true,
-                        });
-                    });
-                }, {
-                    once: true,
-                });
-            }, 'Dungeon Ticket'),
+            new KeyItem(KeyItemType.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region and beyond.<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon.', undefined, undefined, undefined, 'Dungeon Ticket'),
             new KeyItem(KeyItemType.Super_rod, 'The best fishing rod for catching wild water Pokémon.',
                 () => App.game.statistics.routeKills[Region.kanto][12]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Super Rod'),
             new KeyItem(KeyItemType.Holo_caster, 'A device that allows users to see and track Achievements. Completing Achievements gives useful bonuses.',
