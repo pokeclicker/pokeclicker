@@ -158,7 +158,7 @@ const PalletProfOak = new ProfNPC('Prof. Oak',
 
 const PalletMom1 = new NPC('Mom', [
     'So you\'re really leaving on your very own Pokémon journey. I\'m so proud of you. Let me give you some words of wisdom for your travels.',
-    'Traveling on your own can be scary. But remember that there are nice people everywhere you go. So strike up a converstation! You will probably learn something useful.',
+    'Traveling on your own can be scary. But remember that there are nice people everywhere you go. So strike up a conversation! You will probably learn something useful.',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Tutorial Quests', 2), new QuestLineStepCompletedRequirement('Tutorial Quests', 3, GameConstants.AchievementOption.less )]) });
 const PalletMom2 = new NPC('Mom', [
