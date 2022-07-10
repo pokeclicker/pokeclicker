@@ -292,6 +292,13 @@ export const SpriteCredits: Credit[] = [
         ],
         // Notes: Permission given on image page, credit optional, still given cuz we're nice like that.
     },
+    {
+        name: 'eugene171',
+        link: 'https://discordapp.com/users/356459678965956613',
+        resources: [
+            'Freeze Mulch',
+        ],
+    },
 ].map((c) => {
     SeededRand.seed(parseInt(c.name, 36));
     // eslint-disable-next-line no-param-reassign
