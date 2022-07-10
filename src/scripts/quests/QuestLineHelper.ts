@@ -406,8 +406,8 @@ class QuestLineHelper {
             'Find and capture the rare Vivillon!\nHint: Only the strongest Challengers can reach it.',
             1,
             false,
-            undefined,
-            viviBalldone);
+            viviBalldone,
+            viviBallAdd);
         vivillonQuestLine.addQuest(catchBall);
 
         // Add quest to quest line
