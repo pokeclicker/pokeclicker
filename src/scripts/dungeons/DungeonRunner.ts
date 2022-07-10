@@ -15,6 +15,7 @@ class DungeonRunner {
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
     public static defeatedBoss: KnockoutObservable<boolean> = ko.observable(false);
     public static dungeonFinished: KnockoutObservable<boolean> = ko.observable(false);
+    public static fightingLootEnemy: boolean;
 
     public static initializeDungeon(dungeon) {
         if (!dungeon.isUnlocked()) {
@@ -51,6 +52,7 @@ class DungeonRunner {
         DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
         });
+        DungeonRunner.fightingLootEnemy = false;
         DungeonRunner.fightingBoss(false);
         DungeonRunner.defeatedBoss(false);
         DungeonRunner.dungeonFinished(false);
@@ -150,6 +152,7 @@ class DungeonRunner {
         } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
             const image = `assets/images/pokemon/${PokemonHelper.getPokemonByName(input).id}.png`;
             DungeonRunner.lootNotification(input, amount, weight, image);
+            DungeonRunner.fightingLootEnemy = true;
             return DungeonBattle.generateNewLootEnemy(input);
         } else if (ItemList[input] instanceof EvolutionStone || EggItem || BattleItem || Vitamin || EnergyRestore) {
             if (ItemList[input] instanceof Vitamin) {

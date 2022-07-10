@@ -339,9 +339,11 @@
                 <div class="card-header p-0">
                     <div style="position: absolute; left: 2px">
                         <img title="Chests opened in current dungeon" src="assets/images/dungeons/chest.png" height="25px" />
-                        <span data-bind="text: `${DungeonRunner.chestsOpened()}`"></span>
-                        <img title="Encounters won in current dungeon" src="assets/images/dungeons/boss.svg" height="25px" />
-                        <span data-bind="text: `${DungeonRunner.encountersWon()}`"></span>
+                        <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.size}`"></span>
+                    </div>
+                    <div style="position: absolute; right: 4px">
+                        <img title="Encounters won in current dungeon" src="assets/images/dungeons/encounter.png" height="25px" />
+                        <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.size * 2 + 3}`"></span>
                     </div>
                     <span data-bind="text: `${DungeonRunner.dungeon.name}`"></span>
                 </div>
