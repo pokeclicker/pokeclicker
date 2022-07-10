@@ -528,7 +528,7 @@ class QuestLineHelper {
 
         const CatchCastform = new CustomQuest(5, 0, 'Catch some Castform.', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Castform').id]());
         primalsQuestLine.addQuest(CatchCastform);
-        
+
         const talkToWeatherScientist4 = new TalkToNPCQuest(WeatherInstituteScientist4, 'Bring the Castform to the Delta Weather Institute.');
         primalsQuestLine.addQuest(talkToWeatherScientist4);
 
