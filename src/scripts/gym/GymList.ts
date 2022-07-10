@@ -133,6 +133,7 @@ GymList['Viridian City'] = new Gym(
     ],
     () => {
         App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
+        App.game.quests.getQuestLine('Persons of Interest').beginQuest();
     }
 );
 

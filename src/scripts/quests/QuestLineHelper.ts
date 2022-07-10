@@ -222,6 +222,18 @@ class QuestLineHelper {
         App.game.quests.questLines().push(billSeviiQuestLine);
     }
 
+    public static createPersonsofInterestQuestLine() {
+        const personsofInterestQuestLine = new QuestLine('Persons of Interest', 'Some people want to talk to you.');
+
+        const talktoBreeder = new TalkToNPCQuest(SaffronBreeder, 'Talk to the Breeder in Saffron City.', 250);
+        personsofInterestQuestLine.addQuest(talktoBreeder);
+
+        const talktoGemScientist = new TalkToNPCQuest(PewterScientist, 'Talk to the Gem Scientist in Pewter City.', 250);
+        personsofInterestQuestLine.addQuest(talktoGemScientist);
+
+        App.game.quests.questLines().push(personsofInterestQuestLine);
+    }
+
     // Johto QuestLines
     public static createRocketJohtoQuestLine() {
         const rocketJohtoQuestLine = new QuestLine('Team Rocket Again', 'Team Rocket is up to no good again!');
@@ -701,6 +713,7 @@ class QuestLineHelper {
         this.createRocketKantoQuestLine();
         this.createUndergroundQuestLine();
         this.createBillSeviiQuestLine();
+        this.createPersonsofInterestQuestLine();
         this.createRocketJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
         this.createDeoxysQuestLine();

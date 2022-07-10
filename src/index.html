@@ -337,7 +337,15 @@
             <!-- ko if: App.game.gameState === GameConstants.GameState.dungeon -->
             <div id="dungeonMap" class="card sortable-disabled border-secondary mb-3 dungeon no-select">
                 <div class="card-header p-0">
-                    <span data-bind="text: DungeonRunner.dungeon.name"></span>
+                    <div style="position: absolute; left: 2px">
+                        <img title="Chests opened in current dungeon" src="assets/images/dungeons/chest.png" height="25px" />
+                        <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.size}`"></span>
+                    </div>
+                    <div style="position: absolute; right: 4px">
+                        <img title="Encounters won in current dungeon" src="assets/images/dungeons/encounter.png" height="25px" />
+                        <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.size * 2 + 3}`"></span>
+                    </div>
+                    <span data-bind="text: `${DungeonRunner.dungeon.name}`"></span>
                 </div>
                 <div class="card-body p-0 text-center">
                     <table class="dungeon-board">
