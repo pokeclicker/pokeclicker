@@ -867,7 +867,8 @@ class Update implements Saveable {
 
             // Start Persons of Interest questline if player has Earth Badge already
             if (saveData.badgeCase[8]) {
-                saveData.quests.questLines.push({state: 1, name: 'Persons of Interest', quest: 0});
+                saveData.quests.questLines.push({state: 1, name: 'Persons of Interest', quest: 0
+            }
                 
             // Start UB questline
             if (saveData.badgeCase[95]) {
