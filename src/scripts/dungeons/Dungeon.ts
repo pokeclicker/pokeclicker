@@ -210,8 +210,8 @@ class Dungeon {
         return encounterInfo;
     }
 
-    public getRandomLootTier(): LootTier {
-        const tierWeights = this.lootTierWeights;
+    public getRandomLootTier(clears: number, highestRegion: GameConstants.Region): LootTier {
+        const tierWeights = this.getLootTierWeights(clears, highestRegion);
         return Rand.fromWeightedArray(Object.keys(tierWeights), Object.values(tierWeights)) as LootTier;
     }
 
@@ -219,8 +219,8 @@ class Dungeon {
         return Rand.fromWeightedArray(this.lootTable[tier], this.lootTable[tier].map((loot) => loot.weight ?? 1));
     }
 
-    get lootTierWeights(): Record<LootTier, number> {
-        if (GameConstants.getDungeonRegion(this.name) < player.highestRegion() - 2) {
+    public getLootTierWeights(clears: number, highestRegion: GameConstants.Region): Record<LootTier, number> {
+        if (GameConstants.getDungeonRegion(this.name) < highestRegion - 2) {
             return Object.entries(nerfedLootTierChance).reduce((chances, [tier, chance]) => {
                 if (tier in this.lootTable) {
                     chances[tier] = chance;
@@ -229,7 +229,7 @@ class Dungeon {
             }, {} as Record<LootTier, number>);
         }
 
-        const timesCleared = Math.min(500, Math.max(1, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]()));
+        const timesCleared = Math.min(500, Math.max(1, clears));
         const redist = lootRedistibuteAmount * timesCleared / 500;
 
         const updatedChances = Object.entries(baseLootTierChance).reduce((chances, [tier, chance]) => {
