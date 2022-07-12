@@ -26,15 +26,4 @@ class MultipleQuestsQuest extends Quest implements QuestInterface {
         }
         return super.claim();
     }
-
-    toJSON(): Record<string, any> {
-        const json = super.toJSON();
-        json.quests = this.quests.map((q) => q.toJSON());
-        return json;
-    }
-
-    fromJSON(json: any) {
-        super.fromJSON(json);
-        this.quests.forEach((q, i) => q.fromJSON(json?.quests[i]));
-    }
 }
