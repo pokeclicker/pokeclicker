@@ -1,30 +1,28 @@
 /// <reference path="../Quest.ts" />
 
 class MultipleQuestsQuest extends Quest implements QuestInterface {
-    questsCompleted: KnockoutComputed<Array<Quest>>;
-    questsCompletedLength: KnockoutObservable<number>;
+    customReward?: () => void;
 
-    constructor(public quests: Quest[], reward: number) {
-        super(quests.length, reward);
-        this.questsCompletedLength = ko.observable(quests.filter(q => q.isCompleted()).length);
-        this.questsCompleted = ko.computed(() => {
-            return quests.filter(q => q.isCompleted());
+    constructor(public quests: Quest[], reward?: number | (() => void)) {
+        super(quests.length, typeof reward == 'number' ? reward : 0);
+        this.customReward = typeof reward == 'function' ? reward : undefined;
+        this.focus = ko.pureComputed(() => {
+            return quests.filter(q => q.isCompleted()).length;
         });
-        this.questsCompleted.subscribe(newValue => {
-            this.questsCompletedLength(newValue.length);
-        });
-        this.focus = ko.observable(quests.length);
     }
 
     begin() {
         this.onLoad();
-        this.initial = this.questsCompletedLength;
         this.quests.forEach(q => {
             q.begin();
         });
+        super.begin();
     }
 
     claim(): boolean {
+        if (this.customReward) {
+            this.customReward();
+        }
         this.quests.forEach(q => {
             q.claim();
         });
