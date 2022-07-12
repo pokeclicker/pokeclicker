@@ -9,8 +9,8 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 Filters
             </button>
             <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
-                    data-target="#breeding-sort" aria-expanded="false" aria-controls="breeding-sort">
-                Sort
+                    data-target="#breeding-settings" aria-expanded="false" aria-controls="breeding-settings">
+                Settings
             </button>
             <button class="btn btn-secondary" type="button" style="margin-left: 25px;" href="#categoryModal" data-toggle="modal">
                 Categories
@@ -41,17 +41,9 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 <div class="tab-pane active" id="breeding-pokemon">
                     <div class="text-left">
                         <div class="form-row collapse" id="breeding-filter">
-                            <div class="form-group col-md-3 col-6">
+                            <div class="form-group col-md-6 col-6">
                                 <label>Search</label>
                                 <input autocomplete="off" class="form-control" oninput="BreedingFilters.search.value(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
-                            </div>
-                            <div class="form-group col-md-3 col-6">
-                                <label>Display Value</label>
-                                <select name="breedingDisplayFilter" autocomplete="off" class="custom-select" onchange="BreedingController.displayValue(this.value), Settings.setSettingByName(this.name, this.value)">
-                                    <!-- ko foreach: Settings.getSetting('breedingDisplayFilter').options -->
-                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingDisplayFilter').value === $data.value }, text: $data.text">Type</option>
-                                    <!-- /ko -->
-                                </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Category</label>
@@ -103,8 +95,26 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </select>
                             </div>
                         </div>
-                        <div class="form-row collapse" id="breeding-sort">
-                            <div class="form-group col" data-bind="with: Settings.getSetting('hatcherySort')">
+                        <div class="form-row collapse" id="breeding-settings">
+                            <div class="form-group col-md-3 col-6">
+                                <label>Display Value</label>
+                                <select name="breedingDisplayFilter" autocomplete="off" class="custom-select" onchange="BreedingController.displayValue(this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <!-- ko foreach: Settings.getSetting('breedingDisplayFilter').options -->
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingDisplayFilter').value === $data.value }, text: $data.text">Type</option>
+                                    <!-- /ko -->
+                                </select>
+                            </div>
+                            <!-- ko if: App.game.challenges.list.regionalAttackDebuff.active() -->
+                            <div class="form-group col-md-3 col-6">
+                                <label>Regional Debuff</label>
+                                <select name="breedingRegionalAttackDebuffSetting" autocomplete="off" class="custom-select" onchange="BreedingController.regionalAttackDebuff(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <!-- ko foreach: Settings.getSetting('breedingRegionalAttackDebuffSetting').options.filter(r => r.value <= player.highestRegion()) -->
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingRegionalAttackDebuffSetting').value === $data.value }, text: $data.text">Type</option>
+                                    <!-- /ko -->
+                                </select>
+                            </div>
+                            <!-- /ko -->
+                            <div class="form-group col-md-6 col-12" style="max-width: 100%; flex-grow: 1" data-bind="with: Settings.getSetting('hatcherySort')">
                                 <label>Sort</label>
                                 <div class="input-group">
                                     <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
@@ -131,11 +141,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             Unfortunately, you don't have any Pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                        <ul class="row justify-content-center p-0" data-bind="foreach: PartyController.getHatcherySortedList()">
+                        <ul class="row justify-content-center p-0" data-bind="foreach: PartyController.getHatcherySortedList(BreedingController.regionalAttackDebuff())">
                             <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                 <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
-                                <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 0px;top: 0px;">✨</div>
-                                <div data-bind="visible: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top:10px;">
+                                <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 1px;top: -2px;height: 24px">✨</div>
+                                <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top:10px;">
                                     <img width="30px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id).pokerus]}.png`}"/>
                                 </div>
                                 <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">

@@ -107,7 +107,10 @@ GymList['Cinnabar Island'] = new Gym(
     BadgeEnums.Volcano,
     5000,
     'I have burned down to nothing! Not even ashes remain! You have earned the VolcanoBadge.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Mansion'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Mansion'))],
+    () => {
+        App.game.quests.getQuestLine('Bill\'s Errand').beginQuest();
+    }
 );
 GymList['Viridian City'] = new Gym(
     'Giovanni',
@@ -126,10 +129,11 @@ GymList['Viridian City'] = new Gym(
         new GymBadgeRequirement(BadgeEnums.Thunder),
         new GymBadgeRequirement(BadgeEnums.Rainbow),
         new GymBadgeRequirement(BadgeEnums.Marsh),
-        new GymBadgeRequirement(BadgeEnums.Volcano),
+        new QuestLineCompletedRequirement('Bill\'s Errand'),
     ],
     () => {
         App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
+        App.game.quests.getQuestLine('Persons of Interest').beginQuest();
     }
 );
 
