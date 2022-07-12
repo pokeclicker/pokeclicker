@@ -4871,7 +4871,6 @@ dungeonList['Celestial Tower'] = new Dungeon('Celestial Tower',
         {loot: 'Mind Plate'},
       ],
       legendary: [
-
         {loot: 'Revive', weight: 2},
         {loot: 'LargeRestore'},
       ],
