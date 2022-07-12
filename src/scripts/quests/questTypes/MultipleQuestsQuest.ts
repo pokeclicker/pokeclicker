@@ -24,9 +24,6 @@ class MultipleQuestsQuest extends Quest implements QuestInterface {
         if (this.customReward) {
             this.customReward();
         }
-        this.quests.forEach(q => {
-            q.claim();
-        });
         return super.claim();
     }
 
