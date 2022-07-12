@@ -104,11 +104,13 @@ class Egg implements Saveable {
         const partyPokemon = this.partyPokemon;
         // If the party pokemon exist, increase it's damage output
 
+        const eggStep = pokemonMap[partyPokemon.name].eggCycles * 40;
+
         const pokemonID = PokemonHelper.getPokemonByName(this.pokemon).id;
         if (partyPokemon) {
             // Increase attack
             partyPokemon.attackBonusPercent += Math.max(1, Math.round(GameConstants.BREEDING_ATTACK_BONUS * (efficiency / 100)));
-            partyPokemon.attackBonusAmount += Math.max(0, Math.round(partyPokemon.proteinsUsed() * (efficiency / 100)));
+            partyPokemon.attackBonusAmount += Math.max(0, Math.round(partyPokemon.proteinsUsed() * ((partyPokemon.baseAttack * eggStep) ** 1.9 / (10 ** 11))) * (efficiency / 100));
 
             // If breeding (not store egg), reset level, reset evolution check
             if (partyPokemon.breeding) {
