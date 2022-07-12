@@ -4,13 +4,19 @@ import SettingOption from './SettingOption';
 import BooleanSetting from './BooleanSetting';
 import CssVariableSetting from './CssVariableSetting';
 import RangeSetting from './RangeSetting';
-import PokemonType from '../enums/PokemonType';
 import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
 import { SortOptionConfigs, SortOptions } from './SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from '../achievements/AchievementSortOptions';
-import { Region, AchievementType } from '../GameConstants';
+import {
+    Region,
+    AchievementType,
+    HOUR,
+    DAY,
+} from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
+import BreedingFilters from './BreedingFilters';
+import ProteinFilters from './ProteinFilters';
 
 export default Settings;
 
@@ -61,6 +67,7 @@ Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons:',
     'original'));
 Settings.add(new BooleanSetting('resetShopAmountOnPurchase', 'Reset buy quantity after each purchase', true));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
+Settings.add(new BooleanSetting('showCurrencyLostAnimation', 'Show currency lost animation', true));
 Settings.add(new BooleanSetting('hideChallengeRelatedModules', 'Hide challenge related modules', false));
 Settings.add(new Setting<string>('backgroundImage', 'Background image:',
     [
@@ -91,13 +98,13 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
     'ripeDeath'));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points and Battle Points on main screen', false));
+Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
 Settings.add(new BooleanSetting('showGymGoAnimation', 'Show Gym GO animation', true));
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
-Settings.add(new CssVariableSetting('currentPlace', 'Current Location', [], '#55ff00'));
 Settings.add(new CssVariableSetting('incomplete', 'Incomplete Area', [], '#ff9100'));
-Settings.add(new CssVariableSetting('questAtLocation', 'Quest at Location', [], '#34BF45'));
+Settings.add(new CssVariableSetting('questAtLocation', 'Quest at Location', [], '#55ff00'));
 Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokemon', [], '#3498db'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Achievement', [], '#c939fe'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokemon', [], '#ffee00'));
@@ -107,6 +114,23 @@ Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#fff
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
 Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web workers for game ticks (more consistent game speed)', true));
+Settings.add(new BooleanSetting('disableOfflineProgress', 'Disable offline progress', false));
+Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in game time):',
+    [
+        new SettingOption('Never', '0'),
+        new SettingOption('1 Hour', (1 * HOUR).toString()),
+        new SettingOption('3 Hours', (3 * HOUR).toString()),
+        new SettingOption('6 Hours', (6 * HOUR).toString()),
+        new SettingOption('12 Hours', (12 * HOUR).toString()),
+        new SettingOption('24 Hours', (24 * HOUR).toString()),
+        new SettingOption('2 Days', (2 * DAY).toString()),
+        new SettingOption('3 Days', (3 * DAY).toString()),
+        new SettingOption('4 Days', (4 * DAY).toString()),
+        new SettingOption('5 Days', (5 * DAY).toString()),
+        new SettingOption('6 Days', (6 * DAY).toString()),
+        new SettingOption('7 Days', (7 * DAY).toString()),
+    ],
+    (12 * HOUR).toString()));
 
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((soundGroup) => {
@@ -153,38 +177,26 @@ Settings.add(new BooleanSetting('proteinSortDirection', 'reverse', false));
 Settings.add(new BooleanSetting('proteinHideMaxedPokemon', 'Hide Pokémon with max protein', false));
 Settings.add(new BooleanSetting('proteinHideShinyPokemon', 'Hide shiny Pokémon', false));
 
+// Protein filters
+Object.keys(ProteinFilters).forEach((key) => {
+    // One-off because search isn't stored in settings
+    if (key === 'search') {
+        return;
+    }
+    const filter = ProteinFilters[key];
+    Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
+});
+
 // Breeding Filters
-Settings.add(new Setting<string>('breedingCategoryFilter', 'breedingCategoryFilter',
-    [],
-    '-1'));
-Settings.add(new Setting<string>('breedingRegionFilter', 'breedingRegionFilter',
-    [
-        new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(Region, (r) => r !== 'none'),
-        new SettingOption('None', '-1'),
-    ],
-    '-2'));
-Settings.add(new Setting<string>('breedingTypeFilter1', 'breedingTypeFilter1',
-    [
-        new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
-        new SettingOption('None', '-1'),
-    ],
-    '-2'));
-Settings.add(new Setting<string>('breedingTypeFilter2', 'breedingTypeFilter2',
-    [
-        new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
-        new SettingOption('None', '-1'),
-    ],
-    '-2'));
-Settings.add(new Setting<string>('breedingShinyFilter', 'breedingShinyFilter',
-    [
-        new SettingOption('All', '-1'),
-        new SettingOption('Not Shiny', '0'),
-        new SettingOption('Shiny', '1'),
-    ],
-    '-1'));
+Object.keys(BreedingFilters).forEach((key) => {
+    // One-off because search isn't stored in settings
+    if (key === 'search') {
+        return;
+    }
+    const filter = BreedingFilters[key];
+    Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
+});
+
 Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter',
     [
         new SettingOption('Attack', 'attack'),
@@ -196,8 +208,15 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
         new SettingOption('Pokedex ID', 'dexId'),
         new SettingOption('Proteins used', 'proteins'),
+        new SettingOption('EVs', 'evs'),
     ],
     'attack'));
+
+Settings.add(new Setting<string>('breedingRegionalAttackDebuffSetting', 'breedingRegionalAttackDebuffSetting',
+    [
+        ...Settings.enumToSettingOptionArray(Region),
+    ],
+    '-1'));
 
 // Achievement sorting
 const achievementSortSettings = Object.keys(AchievementSortOptionConfigs).map((opt) => (

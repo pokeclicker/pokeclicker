@@ -37,13 +37,13 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return `Harvest ${this.amount.toLocaleString('en-US')} ${BerryType[this.berryType]} berries at the farm.`;
+        return `Harvest ${this.amount.toLocaleString('en-US')} ${BerryType[this.berryType]} Berries at the farm.`;
     }
 
     toJSON() {
         const json = super.toJSON();
-        json['name'] = this.constructor.name;
-        json['data'].push(this.berryType);
+        json.name = this.constructor.name;
+        json.data.push(this.berryType);
         return json;
     }
 }
