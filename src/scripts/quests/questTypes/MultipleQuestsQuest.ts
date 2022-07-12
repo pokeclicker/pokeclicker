@@ -3,9 +3,10 @@
 class MultipleQuestsQuest extends Quest implements QuestInterface {
     customReward?: () => void;
 
-    constructor(public quests: Quest[], reward?: number | (() => void)) {
+    constructor(public quests: Quest[], description: string, reward?: number | (() => void)) {
         super(quests.length, typeof reward == 'number' ? reward : 0);
         this.customReward = typeof reward == 'function' ? reward : undefined;
+        this.customDescription = description;
         this.focus = ko.pureComputed(() => {
             return quests.filter(q => q.isCompleted()).length;
         });
