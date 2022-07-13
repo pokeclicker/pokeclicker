@@ -42,7 +42,7 @@ type UndergroundItemNameType
     | 'Toxic Plate'
     | 'Zap Plate'
     | 'Pixie Plate'
-	| 'Blank Plate'
+    | 'Blank Plate'
     | 'Helix Fossil'
     | 'Dome Fossil'
     | 'Old Amber'
