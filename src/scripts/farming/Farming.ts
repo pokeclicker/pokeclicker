@@ -1308,8 +1308,8 @@ class Farming implements Feature {
      * @param berry The Berry type
      * @param stage The stage of the Berry plant. Defaults to PlotStage.Berry
      */
-    berryInFarm(berry: BerryType, stage = PlotStage.Berry) {
-        return this.plotList.some(plot => plot.berry == berry && plot.stage() >= stage);
+    berryInFarm(berry: BerryType, stage = PlotStage.Berry, ignoreFrozen = false) {
+        return this.plotList.some(plot => plot.berry == berry && plot.stage() >= stage && (!ignoreFrozen || plot.mulch !== MulchType.Freeze_Mulch));
     }
 
     toJSON(): Record<string, any> {
