@@ -235,6 +235,17 @@ export const SpriteCredits: Credit[] = [
         // NOTES: Granted permission on devianart to NiceDice via PN
     },
     {
+        name: 'Pokémon Reborn\'s cass and Amethyst',
+        link: 'https://www.rebornevo.com/pr/index.html/',
+        resources: [
+            'Underground Shiny stone',
+            'Underground Dusk stone',
+            'Underground Dawn stone',
+            'Underground Ice stone',
+        ],
+        // Notes: Permission given to SomeoneAlive via Discord DM
+    },
+    {
         name: 'procompyart',
         link: 'https://www.instagram.com/procompyart/',
         resources: [
