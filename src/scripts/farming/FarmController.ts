@@ -110,8 +110,8 @@ class FarmController {
         }
 
         Notifier.confirm({
-            title: 'Farm Mulch',
-            message: `Are you sure to mulch ${this.getAmount()} of ${MulchType[FarmController.selectedMulch()].replace('_', ' ')} ?`,
+            title: 'Mulch All',
+            message: `Are you sure you want to use ${this.getAmount()} ${MulchType[FarmController.selectedMulch()].replace('_', ' ')} on all plots?`,
             type: NotificationConstants.NotificationOption.info,
             confirm: 'Mulch',
         }).then(confirmed => {
