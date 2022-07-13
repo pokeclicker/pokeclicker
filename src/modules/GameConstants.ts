@@ -88,6 +88,7 @@ export const SURPRISE_MULCH_MULTIPLIER = 1.5;
 export const AMAZE_MULCH_GROWTH_MULTIPLIER = 1.25;
 export const AMAZE_MULCH_PRODUCE_MULTIPLIER = 1.5;
 export const AMAZE_MULCH_MUTATE_MULTIPLIER = 1.25;
+export const FREEZE_MULCH_MULTIPLIER = 0;
 
 export const WANDER_RATE = 0.0005;
 
@@ -313,6 +314,7 @@ export function formatDate(date: Date): string {
 
 export function formatTime(input: number | Date): string {
     if (input === 0) { return 'Ready'; }
+    if (input === Infinity) { return '∞'; }
 
     const time = parseInt(`${input}`, 10); // don't forget the second param
     const hours: any = `${Math.floor(time / 3600)}`.padStart(2, '0');

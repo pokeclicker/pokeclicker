@@ -28,8 +28,13 @@ export default class Routes {
         return this.regionRoutes.find((routeData) => routeData.number === route).region;
     }
 
-    public static getName(route: number, region: number): string {
-        return this.regionRoutes.find((routeData) => routeData.region === region && routeData.number === route)?.routeName ?? 'Unknown Route';
+    public static getName(route: number, region: number, alwaysIncludeRegionName = false): string {
+        const regionName = GameConstants.camelCaseToString(GameConstants.Region[region]);
+        let routeName = this.regionRoutes.find((routeData) => routeData.region === region && routeData.number === route)?.routeName ?? 'Unknown Route';
+        if (alwaysIncludeRegionName && !routeName.includes(regionName)) {
+            routeName += ` in ${regionName}`;
+        }
+        return routeName;
     }
 
     public static unnormalizeRoute(normalizedRoute: number): number {

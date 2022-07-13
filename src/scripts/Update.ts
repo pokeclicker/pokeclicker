@@ -865,6 +865,10 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 3);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 4);
 
+            // Start Persons of Interest questline if player has Earth Badge already
+            if (saveData.badgeCase[8]) {
+                saveData.quests.questLines.push({state: 1, name: 'Persons of Interest', quest: 0});
+            }
             // Start Ash questline if the player has beaten Kalos champion
             if (saveData.badgeCase[78]) {
                 saveData.quests.questLines.push({state: 1, name: 'The new kid', quest: 0});

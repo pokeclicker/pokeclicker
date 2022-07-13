@@ -46,7 +46,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Plasma Frigate overworld sprite',
         ],
-        // Notes: Made specifically for PokéClicker."
+        // Notes: Made specifically for PokéClicker.
     },
     {
         name: 'DaleArwin',
@@ -96,6 +96,14 @@ export const SpriteCredits: Credit[] = [
             'Wartortle (clone)',
         ],
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
+    },
+    {
+        name: 'eugene171',
+        link: 'https://discordapp.com/users/356459678965956613',
+        resources: [
+            'Freeze Mulch',
+        ],
+        // Notes: Made specifically for PokéClicker.
     },
     {
         name: 'Gnomowladny',
@@ -241,6 +249,16 @@ export const SpriteCredits: Credit[] = [
             'Ash Ketchum',
         ],
         // NOTES: Permission given on image page if credited.
+    }
+        name: 'Pokémon Reborn\'s cass and Amethyst',
+        link: 'https://www.rebornevo.com/pr/index.html/',
+        resources: [
+            'Underground Shiny stone',
+            'Underground Dusk stone',
+            'Underground Dawn stone',
+            'Underground Ice stone',
+        ],
+        // Notes: Permission given to SomeoneAlive via Discord DM
     },
     {
         name: 'procompyart',
