@@ -101,6 +101,7 @@ Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, F
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
 Settings.add(new BooleanSetting('confirmBeformeMulchingAllPlots', 'Confirm before mulching all plots', false));
 Settings.add(new BooleanSetting('showGymGoAnimation', 'Show Gym GO animation', true));
+Settings.add(new BooleanSetting('fullWidthContainer', 'Increase game width', false));
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
