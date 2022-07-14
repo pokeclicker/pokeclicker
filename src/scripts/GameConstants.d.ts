@@ -63,6 +63,7 @@ namespace GameConstants {
     declare const AMAZE_MULCH_GROWTH_MULTIPLIER: number;
     declare const AMAZE_MULCH_PRODUCE_MULTIPLIER: number;
     declare const AMAZE_MULCH_MUTATE_MULTIPLIER: number;
+    declare const FREEZE_MULCH_MULTIPLIER: number;
     declare const WANDER_RATE: number;
     declare const BerryColor: string[];
     declare const BASE_DUNGEON_SIZE: number;
@@ -484,5 +485,38 @@ namespace GameConstants {
         'Seafolk Village',
         'Exeggutor Island',
         'Altar of the Sunne and Moone',
+    }
+    declare enum KantoSubRegions {
+        Kanto,
+        Sevii123,
+    }
+    declare enum JohtoSubRegions {
+        Johto,
+    }
+    declare enum HoennSubRegions {
+        Hoenn,
+    }
+    declare enum SinnohSubRegions {
+        Sinnoh,
+    }
+    declare enum UnovaSubRegions {
+        Unova,
+    }
+    declare enum KalosSubRegions {
+        Kalos,
+    }
+    declare enum AlolaSubRegions {
+        MelemeleIsland,
+        AkalaIsland,
+        UlaulaAndPoniIslands,
+        // UlaulaIsland,
+        // PoniIsland,
+    }
+    declare enum GalarSubRegions {
+        Galar,
+        // GalarSouth,
+        // GalarNorth,
+        IsleOfArmor,
+        CrownTundra,
     }
 }

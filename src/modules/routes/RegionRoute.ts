@@ -11,6 +11,8 @@ export default class RegionRoute {
         public requirements: Requirement[] = [],
         public orderNumber?: number,
         public subRegion?: number,
+        public ignoreRouteInCalculations = false,
+        public routeHealth = undefined,
     ) {
         this.orderNumber = orderNumber || number;
     }

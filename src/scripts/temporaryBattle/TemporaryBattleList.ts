@@ -1,5 +1,6 @@
 const TemporaryBattleList: { [battleName: string]: TemporaryBattle } = {};
 
+// Kanto Temporarybattles
 TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
     'Fighting Dojo',
     [
@@ -23,6 +24,54 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
         });
     }
 );
+TemporaryBattleList['Biker Goon 1'] = new TemporaryBattle(
+    'Biker Goon 1',
+    [
+        new GymPokemon('Koffing', 198477, 37),
+        new GymPokemon('Grimer', 198477, 37),
+    ],
+    'Wha... What is this kid?!',
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)]
+);
+TemporaryBattleList['Biker Goon 2'] = new TemporaryBattle(
+    'Biker Goon 2',
+    [new GymPokemon('Koffing', 396954, 38)],
+    'Stop fooling around!',
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)]
+);
+TemporaryBattleList['Biker Goon 3'] = new TemporaryBattle(
+    'Biker Goon 3',
+    [new GymPokemon('Grimer', 396954, 38)],
+    '... ... ... ... ... ...',
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)]
+);
+TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
+    'Cue Ball Paxton',
+    [
+        new GymPokemon('Koffing', 221664, 39),
+        new GymPokemon('Grimer', 221664, 39),
+    ],
+    'All right, enough! We\'ll leave like you wanted! We\'ll be happy to see the last of this boring island!',
+    [
+        new TemporaryBattleRequirement('Biker Goon 1'),
+        new TemporaryBattleRequirement('Biker Goon 2'),
+        new TemporaryBattleRequirement('Biker Goon 3'),
+    ]
+);
+
+// Sinnoh Temporarybattles
+TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
+    'Galactic Boss Cyrus',
+    [
+        new GymPokemon('Sneasel', 3255000, 34),
+        new GymPokemon('Golbat', 3460000, 34),
+        new GymPokemon('Murkrow', 3665000, 36),
+    ],
+    'Impressive. Your prowess is notable.',
+    [new GymBadgeRequirement(BadgeEnums.Fen)]
+);
+
+// Kalos Temporarybattles
 TemporaryBattleList.AZ = new TemporaryBattle(
     'AZ',
     [
@@ -37,6 +86,8 @@ TemporaryBattleList.AZ = new TemporaryBattle(
         App.game.party.gainPokemonById(670.05);
     }
 );
+
+// Alola Temporarybattles
 TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
     [new GymPokemon('???', 264590972, 27)],

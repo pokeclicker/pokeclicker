@@ -113,7 +113,7 @@
 @import "templates/eggSVGTemplate.html"
 @import "templates/multiOptionTemplate.html"
 
-<div id="game" class="container loading">
+<div id="game" class="container loading" data-bind="css: {'container': !Settings.getSetting('fullWidthContainer').observableValue(), 'container-fluid': Settings.getSetting('fullWidthContainer').observableValue()}">
     <div class="row justify-content-center">
         <!--The id title is needed for a default marker for money animation to display when not in a wild battle where the playerMoney span is not visible-->
         <h1 id="gameTitle">PokéClicker</h1>
@@ -337,7 +337,15 @@
             <!-- ko if: App.game.gameState === GameConstants.GameState.dungeon -->
             <div id="dungeonMap" class="card sortable-disabled border-secondary mb-3 dungeon no-select">
                 <div class="card-header p-0">
-                    <span data-bind="text: DungeonRunner.dungeon.name"></span>
+                    <div style="position: absolute; left: 2px">
+                        <img title="Chests opened in current dungeon" src="assets/images/dungeons/chest.png" height="25px" />
+                        <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.size}`"></span>
+                    </div>
+                    <div style="position: absolute; right: 4px">
+                        <img title="Encounters won in current dungeon" src="assets/images/dungeons/encounter.png" height="25px" />
+                        <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.size * 2 + 3}`"></span>
+                    </div>
+                    <span data-bind="text: `${DungeonRunner.dungeon.name}`"></span>
                 </div>
                 <div class="card-body p-0 text-center">
                     <table class="dungeon-board">
@@ -398,7 +406,7 @@
                             <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion - 1">&lt;</button>
                             <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="
                                 click: () => SubRegions.openModal(),
-                                text: 'Subregional Travel (' + SubRegions.getSubRegionById(player.region, player.subregion)?.name + ')'"
+                                text: 'Subregional Travel (' + player.subregionObject()?.name + ')'"
                                 >Subregional Travel</button>
                             <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion + 1">&gt;</button>
                         </div>
