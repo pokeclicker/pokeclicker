@@ -7499,9 +7499,7 @@ dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
             {loot: 'Yellow Shard'},
         ],
         epic: [{loot: 'Flame Plate'}],
-        legendary: [
-            //{loot: 'Repeatball'},
-        ],
+        legendary: [{loot: 'Repeatball'}],
     },
     15127052,
     [
