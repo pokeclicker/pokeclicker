@@ -9,11 +9,13 @@ class DungeonRunner {
 
     public static fighting: KnockoutObservable<boolean> = ko.observable(false);
     public static map: DungeonMap;
-    public static chestsOpened: number;
+    public static chestsOpened: KnockoutObservable<number> = ko.observable(0);
     public static currentTileType;
+    public static encountersWon: KnockoutObservable<number> = ko.observable(0);
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
     public static defeatedBoss: KnockoutObservable<boolean> = ko.observable(false);
     public static dungeonFinished: KnockoutObservable<boolean> = ko.observable(false);
+    public static fightingLootEnemy: boolean;
 
     public static initializeDungeon(dungeon) {
         if (!dungeon.isUnlocked()) {
@@ -45,10 +47,12 @@ class DungeonRunner {
         // Dungeon size minimum of MIN_DUNGEON_SIZE
         DungeonRunner.map = new DungeonMap(Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize), flash);
 
-        DungeonRunner.chestsOpened = 0;
+        DungeonRunner.chestsOpened(0);
+        DungeonRunner.encountersWon(0);
         DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
         });
+        DungeonRunner.fightingLootEnemy = false;
         DungeonRunner.fightingBoss(false);
         DungeonRunner.defeatedBoss(false);
         DungeonRunner.dungeonFinished(false);
@@ -105,6 +109,7 @@ class DungeonRunner {
             return;
         }
 
+        GameHelper.incrementObservable(DungeonRunner.chestsOpened);
         DungeonRunner.chestsOpened++;
 
         const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]();
@@ -133,10 +138,10 @@ class DungeonRunner {
 
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
-        if (DungeonRunner.chestsOpened == Math.floor(DungeonRunner.map.size / 3)) {
+        if (DungeonRunner.chestsOpened() == Math.floor(DungeonRunner.map.size / 3)) {
             DungeonRunner.map.showChestTiles();
         }
-        if (DungeonRunner.chestsOpened == Math.ceil(DungeonRunner.map.size / 2)) {
+        if (DungeonRunner.chestsOpened() == Math.ceil(DungeonRunner.map.size / 2)) {
             DungeonRunner.map.showAllTiles();
         }
     }
@@ -154,6 +159,7 @@ class DungeonRunner {
         } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
             const image = `assets/images/pokemon/${PokemonHelper.getPokemonByName(input).id}.png`;
             DungeonRunner.lootNotification(input, amount, weight, image);
+            DungeonRunner.fightingLootEnemy = true;
             return DungeonBattle.generateNewLootEnemy(input);
         } else if (ItemList[input] instanceof EvolutionStone || EggItem || BattleItem || Vitamin || EnergyRestore) {
             if (ItemList[input] instanceof Vitamin) {

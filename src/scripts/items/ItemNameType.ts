@@ -80,6 +80,7 @@ type ItemNameType
     | 'Rich_Mulch'
     | 'Surprise_Mulch'
     | 'Amaze_Mulch'
+    | 'Freeze_Mulch'
     | 'PokeBlock_Black'
     | 'PokeBlock_Red'
     | 'PokeBlock_Gold'
