@@ -28,6 +28,38 @@ interface Loot {
     amount?: number,
 }
 
+type LootTier = 'common' | 'rare' | 'epic' | 'legendary' | 'mythic';
+type LootTable = Partial<Record<LootTier, Loot[]>>;
+
+// These should add up to 1 if you want to keep it easy to judge chances
+const baseLootTierChance: Record<LootTier, number> = {
+    common: 0.75,
+    rare: 0.2,
+    epic: 0.04,
+    legendary: 0.0099,
+    mythic: 0.0001,
+};
+
+const nerfedLootTierChance: Record<LootTier, number> = {
+    common: 0.75,
+    rare: 0.24,
+    epic: 0.009,
+    legendary: 0.00099,
+    mythic: 0.00001,
+};
+
+// Should sum to 0
+const lootRedistribution: Record<LootTier, number> = {
+    common: -1,
+    rare: 0.33,
+    epic: 0.4,
+    legendary: 0.2,
+    mythic: 0.07,
+};
+
+// Max amount to take from common and redistibute @ 500 clears
+const lootRedistibuteAmount = 0.15;
+
 type Enemy = PokemonNameType | DetailedPokemon | DungeonTrainer;
 
 type Boss = DungeonBossPokemon | DungeonTrainer;
@@ -64,7 +96,7 @@ class Dungeon {
     constructor(
         public name: string,
         public enemyList: Enemy[],
-        public itemList: Loot[],
+        public lootTable: LootTable,
         public baseHealth: number,
         public bossList: Boss[],
         public tokenCost: number,
@@ -178,6 +210,38 @@ class Dungeon {
         return encounterInfo;
     }
 
+    public getRandomLootTier(clears: number, highestRegion: GameConstants.Region): LootTier {
+        const tierWeights = this.getLootTierWeights(clears, highestRegion);
+        return Rand.fromWeightedArray(Object.keys(tierWeights), Object.values(tierWeights)) as LootTier;
+    }
+
+    public getRandomLoot(tier: LootTier): Loot {
+        return Rand.fromWeightedArray(this.lootTable[tier], this.lootTable[tier].map((loot) => loot.weight ?? 1));
+    }
+
+    public getLootTierWeights(clears: number, highestRegion: GameConstants.Region): Record<LootTier, number> {
+        if (GameConstants.getDungeonRegion(this.name) < highestRegion - 2) {
+            return Object.entries(nerfedLootTierChance).reduce((chances, [tier, chance]) => {
+                if (tier in this.lootTable) {
+                    chances[tier] = chance;
+                }
+                return chances;
+            }, {} as Record<LootTier, number>);
+        }
+
+        const timesCleared = Math.min(500, Math.max(1, clears));
+        const redist = lootRedistibuteAmount * timesCleared / 500;
+
+        const updatedChances = Object.entries(baseLootTierChance).reduce((chances, [tier, chance]) => {
+            if (tier in this.lootTable) {
+                chances[tier] = chance + (redist * lootRedistribution[tier]);
+            }
+            return chances;
+        }, {} as Record<LootTier, number>);
+
+        return updatedChances;
+    }
+
     /**
      * Retrieves the weights for all the possible enemies
      */
@@ -190,24 +254,6 @@ class Dungeon {
             } else {
                 return (<DungeonTrainer>enemy).options?.weight ?? 1;
             }
-        });
-    }
-
-    /**
-     * Retrieves the weights for all the possible Loot, weight values are utilized as 10^Weight. Should use values in Dungeon Initialization from 0 (least likely) to 4 (most likely), anything > 4 is probably too much
-     */
-    get lootWeightList(): number[] {
-        return this.itemList.map((loot) => {
-            if (loot.requirement && !loot.requirement.isCompleted()) {
-                return 0;
-            }
-            if (loot.weight < 2 && GameConstants.getDungeonRegion(this.name) < player.highestRegion() - 2) {
-                return 0.1 * Math.max(0.5,loot.weight);
-            }
-            // Minimum of 1 times cleared for division
-            const timesCleared = Math.min(500, Math.max(1, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]()));
-            // Calculate total weight based on times cleared, minimum weight being original number specified
-            return Math.max(loot.weight, Math.pow(15, loot.weight) / timesCleared) + 1 || 1;
         });
     }
 
@@ -359,12 +405,14 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
                 new GymPokemon('Metapod', 50, 7),
             ], { weight: 1 }, 'Charlie'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Pecha', weight: 3.5},
-        {loot: 'Pokeball', weight: 3},
-        {loot: 'SmallRestore', weight: 1.75},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 2},
+            {loot: 'Pecha'},
+        ],
+        epic: [{loot: 'Pokeball'}],
+        mythic: [{loot: 'SmallRestore'}],
+    },
     102,
     [
         new DungeonBossPokemon('Pikachu', 510, 7),
@@ -438,13 +486,17 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
                 new GymPokemon('Zubat', 75, 13),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'SmallRestore', weight: 1.75},
-        {loot: 'Greatball', weight: 1},
-        {loot: 'Star Piece', weight: 1},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+        legendary: [{loot: 'Greatball'}],
+        mythic: [
+            {loot: 'SmallRestore'},
+            {loot: 'Star Piece'},
+        ],
+    },
     834,
     [
         new DungeonTrainer('Super Nerd',
@@ -468,14 +520,20 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
 
 dungeonList['Diglett\'s Cave'] = new Dungeon('Diglett\'s Cave',
     ['Diglett'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Wiki', weight: 0},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        mythic: [
+            {loot: 'Wiki', weight: 2},
+            {loot: 'Max Revive'},
+        ],
+    },
     2962,
     [new DungeonBossPokemon('Dugtrio', 16040, 31)],
     250, 11);
@@ -560,19 +618,28 @@ dungeonList['Rock Tunnel'] = new Dungeon('Rock Tunnel',
                 new GymPokemon('Pidgey', 500, 20),
             ], { weight: 1 }, 'Dana'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Leppa', weight: 3.5},
-        {loot: 'Pokeball', weight: 3},
-        {loot: 'Greatball', weight: 2},
-        {loot: 'Revive', weight: 1.75},
-        {loot: 'MediumRestore', weight: 1},
-        {loot: 'Oval Stone', weight: 1},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Star Piece', weight: 0},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick', weight: 2},
+            {loot: 'Leppa', weight: 2},
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Geodude'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        legendary: [
+            {loot: 'Greatball'},
+            {loot: 'MediumRestore'},
+            {loot: 'Oval Stone'},
+            {loot: 'Revive'},
+        ],
+        mythic: [
+            {loot: 'Star Piece', weight: 1.5},
+            {loot: 'Heart Scale'},
+        ],
+    },
     4117,
     [
         new DungeonBossPokemon('Onix', 20585, 17),
@@ -653,16 +720,25 @@ dungeonList['Rocket Game Corner'] = new Dungeon('Rocket Game Corner',
                 new GymPokemon('Arbok', 1940, 23),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Pokeball', weight: 3},
-        {loot: 'Greatball', weight: 2},
-        {loot: 'Revive', weight: 1.75},
-        {loot: 'Star Piece', weight: 0},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [{loot: 'Pokeball'}],
+        legendary: [
+            {loot: 'Greatball', weight: 2},
+            {loot: 'Revive'},
+            {loot: 'MediumRestore'},
+            {loot: 'Oval Stone'},
+            {loot: 'Nestball'},
+            {loot: 'Star Piece'},
+        ],
+    },
     5820,
     [
         new DungeonTrainer('Team Rocket Boss',
@@ -742,20 +818,24 @@ dungeonList['Pokémon Tower'] = new Dungeon('Pokémon Tower',
                 new GymPokemon('Zubat', 750, 23),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Chesto', weight: 3.5},
-        {loot: 'Greatball', weight: 2.5},
-        {loot: 'MediumRestore', weight: 0.5},
-        {loot: 'Star Piece', weight: 0.5},
-        {loot: 'Revive', weight: 0.5},
-        {loot: 'Rare Bone', weight: 0},
-        {loot: 'Ultraball', weight: 0},
-        {loot: 'LargeRestore', weight: 0},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Soothe_bell', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Pokémon Tower'))},
-        {loot: 'Linking_cord', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Pokémon Tower'))},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 2},
+            {loot: 'Chesto'},
+        ],
+        rare: [{loot: 'Green Shard'}],
+        legendary: [
+            {loot: 'Greatball'},
+            {loot: 'MediumRestore'},
+            {loot: 'Star Piece'},
+            {loot: 'Revive'},
+        ],
+        mythic: [
+            {loot: 'Rare Bone'},
+            {loot: 'Ultraball'},
+            {loot: 'LargeRestore'},
+        ],
+    },
     7523,
     [new DungeonBossPokemon('Marowak', 37615, 30)],
     750, 7);
@@ -931,16 +1011,20 @@ dungeonList['Silph Co.'] = new Dungeon('Silph Co.',
                 new GymPokemon('Marowak', 3505, 32),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    [
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Pokeball', weight: 3},
-        {loot: 'Greatball', weight: 2},
-        {loot: 'Ultraball', weight: 1},
-        {loot: 'Electrode', weight: 3.5},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Red Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine', weight: 3},
+            {loot: 'Lucky_incense', weight: 2},
+            {loot: 'Pokeball'},
+            {loot: 'Electrode'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Red Shard'},
+        ],
+        legendary: [{loot: 'Greatball'}],
+        mythic: [{loot: 'Ultraball'}],
+    },
     10515,
     [
         new DungeonTrainer('Team Rocket Boss',
@@ -955,13 +1039,15 @@ dungeonList['Silph Co.'] = new Dungeon('Silph Co.',
 
 dungeonList['Power Plant'] = new Dungeon('Power Plant',
     ['Pikachu', 'Magnemite', 'Magneton', 'Voltorb', 'Electrode'],
-    [
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Cheri', weight: 3.5},
-        {loot: 'Electrode', weight: 3.5},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_incense', weight: 4},
+            {loot: 'Cheri', weight: 2},
+            {loot: 'Electrode'},
+        ],
+        rare: [{loot: 'Yellow Shard'}],
+        mythic: [{loot: 'Max Revive'}],
+    },
     13507,
     [
         new DungeonBossPokemon('Electabuzz', 67535, 35),
@@ -971,13 +1057,15 @@ dungeonList['Power Plant'] = new Dungeon('Power Plant',
 
 dungeonList['Seafoam Islands'] = new Dungeon('Seafoam Islands',
     ['Zubat', 'Golbat', 'Psyduck', 'Golduck', 'Slowpoke', 'Slowbro', 'Krabby', 'Horsea', 'Magikarp'],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Aspear', weight: 3.5},
-        {loot: 'Revive', weight: 1.75},
-        {loot: 'Ultraball', weight: 1},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 2},
+            {loot: 'Aspear'},
+        ],
+        rare: [{loot: 'Blue Shard'}],
+        legendary: [{loot: 'Revive'}],
+        mythic: [{loot: 'Ultraball'}],
+    },
     17226,
     [
         new DungeonBossPokemon('Seel', 86130, 35),
@@ -1032,15 +1120,19 @@ dungeonList['Pokémon Mansion'] = new Dungeon('Pokémon Mansion',
                 new GymPokemon('Electrode', 1500, 34),
             ], { weight: 1 }, 'Ivan', '(male)'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Rawst', weight: 3.5},
-        {loot: 'Figy', weight: 3},
-        {loot: 'Ultraball', weight: 1.75},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 2},
+            {loot: 'Rawst'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+        ],
+        epic: [{loot: 'Figy'}],
+        legendary: [{loot: 'Ultraball'}],
+        mythic: [{loot: 'Max Revive'}],
+    },
     17760,
     [new DungeonBossPokemon('Magmar', 88800, 40)],
     1500, 20);
@@ -1072,11 +1164,14 @@ dungeonList['Mt. Ember Summit'] = new Dungeon('Mt. Ember Summit',
                 new GymPokemon('Exeggutor', 18120, 40),
             ], { weight: 1 }, 'Logan', '(male)'),
     ],
-    [
-        {loot: 'xClick', weight: 3.75},
-        {loot: 'Lucky_egg', weight: 3.75},
-        {loot: 'Red Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [{loot: 'Red Shard'}],
+        legendary: [{loot: 'Ultraball'}],
+    },
     18120,
     [
         new DungeonBossPokemon('Magmar', 101427, 40),
@@ -1086,12 +1181,32 @@ dungeonList['Mt. Ember Summit'] = new Dungeon('Mt. Ember Summit',
 
 dungeonList['Berry Forest'] = new Dungeon('Berry Forest',
     ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Psyduck', 'Golduck', 'Poliwag', 'Bellsprout', 'Weepinbell', 'Slowpoke', 'Slowbro', 'Drowzee', 'Exeggcute', 'Goldeen', 'Magikarp'],
-    [
-        {loot: 'xClick', weight: 3.75},
-        {loot: 'Lucky_egg', weight: 3.75},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Cheri'},
+            {loot: 'Chesto'},
+            {loot: 'Pecha'},
+            {loot: 'Rawst'},
+            {loot: 'Aspear'},
+            {loot: 'Leppa'},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Razz'},
+            {loot: 'Persim'},
+            {loot: 'Bluk'},
+            {loot: 'Nanab'},
+            {loot: 'Wepear'},
+            {loot: 'Iapapa'},
+        ],
+        mythic: [{loot: 'Lum', requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Berry Forest'))}],
+    },
     18120,
     [
         new DungeonBossPokemon('Venomoth', 101427, 30),
@@ -1186,19 +1301,27 @@ dungeonList['Victory Road'] = new Dungeon('Victory Road',
                 new GymPokemon('Parasect', 2000, 42),
             ], { weight: 1 }, 'Caroline', '(female)'),
     ],
-    [
-        {loot: 'xClick', weight: 3.75},
-        {loot: 'Lucky_egg', weight: 3.75},
-        {loot: 'Ultraball', weight: 1.75},
-        {loot: 'SmallRestore', weight: 1.75},
-        {loot: 'Star Piece', weight: 1},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        legendary: [
+            {loot: 'Ultraball'},
+            {loot: 'SmallRestore'},
+        ],
+        mythic: [
+            {loot: 'Max Revive', weight: 2},
+            {loot: 'Star Piece'},
+            {loot: 'Heart Scale'},
+        ],
+    },
     24595,
     [
         new DungeonBossPokemon('Machoke', 122975, 42),
@@ -1212,21 +1335,27 @@ dungeonList['Victory Road'] = new Dungeon('Victory Road',
 
 dungeonList['Cerulean Cave'] = new Dungeon('Cerulean Cave',
     ['Golbat', 'Parasect', 'Psyduck', 'Golduck', 'Primeape', 'Poliwag', 'Machoke', 'Slowpoke', 'Slowbro', 'Magneton', 'Electrode', 'Goldeen', 'Magikarp', 'Ditto'],
-    [
-        {loot: 'Pokeball', weight: 4},
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Graveler', weight: 3.5},
-        {loot: 'Greatball', weight: 3},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'LargeRestore', weight: 1},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(500, GameConstants.getDungeonIndex('Cerulean Cave'))},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Lucky_incense', weight: 2},
+            {loot: 'Graveler'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [{loot: 'Greatball'}],
+        legendary: [{loot: 'Ultraball'}],
+        mythic: [
+            {loot: 'LargeRestore'},
+            {loot: 'Max Revive', weight: 2},
+            {loot: 'Protein', requirement: new ClearDungeonRequirement(500, GameConstants.getDungeonIndex('Cerulean Cave'))},
+        ],
+    },
     28735,
     [
         new DungeonBossPokemon('Kadabra', 183675, 60),
@@ -1271,15 +1400,21 @@ dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
                 new GymPokemon('Hoothoot', 2500, 7),
             ], { weight: 1 }, 'Troy'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Lucky_incense', weight: 3.5},
-        {loot: 'Lucky_egg', weight: 3.5},
-        {loot: 'Meadow Plate', weight: 2},
-        {loot: 'SmallRestore', weight: 1.75},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'Red Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Lucky_incense'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        legendary: [
+            {loot: 'Meadow Plate', weight: 2},
+            {loot: 'SmallRestore'},
+        ],
+    },
     56735,
     [
         new DungeonTrainer('Sage',
@@ -1309,20 +1444,27 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
             [new GymPokemon('Girafarig', 3000, 26)],
             { weight: 1 }, 'Nathan', '(male)'),
     ],
-    [
-        {loot: 'Oran', weight: 4},
-        {loot: 'Greatball', weight: 3.5},
-        {loot: 'Pecha', weight: 3.5},
-        {loot: 'Sitrus', weight: 3.5},
-        {loot: 'Leppa', weight: 2.5},
-        {loot: 'SmallRestore', weight: 1.75},
-        {loot: 'Star Piece', weight: 1},
-        {loot: 'Moon Stone', weight: 0.5},
-        {loot: 'LargeRestore', weight: 0},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Oran', weight: 2},
+            {loot: 'Greatball'},
+            {loot: 'Pecha'},
+            {loot: 'Sitrus'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [{loot: 'Leppa'}],
+        legendary: [
+            {loot: 'SmallRestore', weight: 2},
+            {loot: 'Star Piece'},
+        ],
+        mythic: [
+            {loot: 'LargeRestore'},
+            {loot: 'Max Revive'},
+        ],
+    },
     60600,
     [
         new DungeonBossPokemon('Unown (A)', 280000, 14, {
@@ -1361,18 +1503,24 @@ dungeonList['Union Cave'] = new Dungeon('Union Cave',
             [new GymPokemon('Slowpoke', 3000, 10)],
             { weight: 1 }, 'Larry'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'xClick', weight: 4},
-        {loot: 'Geodude', weight: 3.5},
-        {loot: 'Greatball', weight: 3},
-        {loot: 'SmallRestore', weight: 1.75},
-        {loot: 'Revive', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1},
-        {loot: 'Ultraball', weight: 0},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 2},
+            {loot: 'xClick', weight: 2},
+            {loot: 'Geodude'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [{loot: 'Greatball'}],
+        legendary: [
+            {loot: 'SmallRestore', weight: 2},
+            {loot: 'Revive', weight: 2},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [{loot: 'Ultraball'}],
+    },
     63600,
     [
         new DungeonTrainer('Hiker',
@@ -1411,14 +1559,21 @@ dungeonList['Slowpoke Well'] = new Dungeon('Slowpoke Well',
                 new GymPokemon('Zubat', 3500, 9),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    [
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Dowsing_machine', weight: 3.75},
-        {loot: 'Greatball', weight: 2},
-        {loot: 'Splash Plate', weight: 2},
-        {loot: 'MediumRestore', weight: 0.5},
-        {loot: 'Grey Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Dowsing_machine'},
+        ],
+        rare: [{loot: 'Grey Shard'}],
+        epic: [
+            {loot: 'Greatball'},
+            {loot: 'Lureball'},
+        ],
+        legendary: [
+            {loot: 'Splash Plate', weight: 2},
+            {loot: 'MediumRestore'},
+        ],
+    },
     67900,
     [
         new DungeonTrainer('Rocket Executive',
@@ -1443,15 +1598,19 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
                 new GymPokemon('Paras', 4000, 10),
             ], { weight: 1 }, 'Wayne'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Lucky_egg', weight: 3.75},
-        {loot: 'Insect Plate', weight: 2},
-        {loot: 'Revive', weight: 1.75},
-        {loot: 'MediumRestore', weight: 1},
-        {loot: 'Zap Plate', weight: 0},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 2},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [{loot: 'Green Shard'}],
+        legendary: [
+            {loot: 'Revive'},
+            {loot: 'Insect Plate'},
+            {loot: 'MediumRestore'},
+        ],
+        mythic: [{loot: 'Zap Plate'}],
+    },
     82200,
     [
         new DungeonBossPokemon('Noctowl', 340000, 30),
@@ -1463,32 +1622,42 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
 
 dungeonList['Burned Tower'] = new Dungeon('Burned Tower',
     ['Rattata', 'Raticate', 'Zubat', 'Koffing'],
-    [
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'xAttack', weight: 3.75},
-        {loot: 'Flame Plate', weight: 2},
-        {loot: 'Ultraball', weight: 1.75},
-        {loot: 'Revive', weight: 1.25},
-        {loot: 'Red Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine', weight: 2},
+            {loot: 'xAttack'},
+        ],
+        rare: [{loot: 'Red Shard'}],
+        legendary: [
+            {loot: 'Revive'},
+            {loot: 'Flame Plate'},
+            {loot: 'Ultraball'},
+        ],
+    },
     88500,
     [new DungeonBossPokemon('Golbat', 360000, 35), new DungeonBossPokemon('Weezing', 320000, 35), new DungeonBossPokemon('Shuckle', 610000, 50)],
     4500, 37);
 
 dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
     ['Rattata', 'Gastly'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Spooky Plate', weight: 2},
-        {loot: 'Flame Plate', weight: 2},
-        {loot: 'Sky Plate', weight: 2},
-        {loot: 'MediumRestore', weight: 1.75},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Grey Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Grey Shard'},
+        ],
+        legendary: [
+            {loot: 'MediumRestore'},
+            {loot: 'Ultraball'},
+            {loot: 'Flame Plate'},
+            {loot: 'Spooky Plate'},
+            {loot: 'Sky Plate'},
+        ],
+        mythic: [{loot: 'Max Revive'}],
+    },
     88500,
     [
         new DungeonBossPokemon('Raticate', 380000, 35),
@@ -1503,16 +1672,20 @@ dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
 
 dungeonList['Whirl Islands'] = new Dungeon('Whirl Islands',
     ['Zubat', 'Golbat', 'Seel', 'Krabby', 'Horsea'],
-    [
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Mind Plate', weight: 2},
-        {loot: 'Sky Plate', weight: 2},
-        {loot: 'Revive', weight: 1.75},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_incense'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [{loot: 'Blue Shard'}],
+        legendary: [
+            {loot: 'Revive'},
+            {loot: 'Ultraball'},
+            {loot: 'Mind Plate'},
+            {loot: 'Sky Plate'},
+        ],
+        mythic: [{loot: 'Max Revive'}],
+    },
     92800,
     [new DungeonBossPokemon('Dewgong', 400000, 40), new DungeonBossPokemon('Kingler', 400000, 40), new DungeonBossPokemon('Lugia', 1410000, 100)],
     5000, 41);
@@ -1538,20 +1711,28 @@ dungeonList['Mt. Mortar'] = new Dungeon('Mt. Mortar',
             [new GymPokemon('Seadra', 5500, 39)],
             { weight: 1 }, 'Hugh'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Graveler', weight: 3.25},
-        {loot: 'Iron Plate', weight: 2},
-        {loot: 'Stone Plate', weight: 2},
-        {loot: 'Earth Plate', weight: 2},
-        {loot: 'Draco Plate', weight: 2},
-        {loot: 'Ultraball', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1.75},
-        {loot: 'Revive', weight: 1.75},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Grey Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 6},
+            {loot: 'Graveler'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Grey Shard'},
+        ],
+        epic: [
+            {loot: 'Iron Plate'},
+            {loot: 'Stone Plate'},
+            {loot: 'Earth Plate'},
+            {loot: 'Draco Plate'},
+        ],
+        legendary: [
+            {loot: 'Ultraball'},
+            {loot: 'LargeRestore'},
+            {loot: 'Revive'},
+        ],
+        mythic: [{loot: 'Max Revive'}],
+    },
     104100,
     [
         new DungeonTrainer('Black Belt',
@@ -1632,19 +1813,25 @@ dungeonList['Team Rocket\'s Hideout'] = new Dungeon('Team Rocket\'s Hideout',
             [new GymPokemon('Ditto', 5500, 24)],
             { weight: 1 }, 'Mitch', '(male)'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Electrode', weight: 3.5},
-        {loot: 'Dread Plate', weight: 2},
-        {loot: 'Splash Plate', weight: 2},
-        {loot: 'Ultraball', weight: 1.75},
-        {loot: 'Revive', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Team Rocket\'s Hideout'))},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Purple Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 3},
+            {loot: 'Token_collector', weight: 3},
+            {loot: 'Electrode'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Purple Shard'},
+        ],
+        legendary: [
+            {loot: 'Ultraball', weight: 2},
+            {loot: 'Revive', weight: 2},
+            {loot: 'LargeRestore'},
+            {loot: 'Dread Plate'},
+            {loot: 'Splash Plate'},
+        ],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Team Rocket\'s Hideout'))}],
+    },
     104100,
     [
         new DungeonTrainer('Rocket Executive',
@@ -1774,25 +1961,31 @@ dungeonList['Radio Tower'] = new Dungeon('Radio Tower',
                 new GymPokemon('Gloom', 5750, 24),
             ], { weight: 1 }, undefined, '(female)'),
     ],
-    [
-        {loot: 'xClick', weight: 3.75},
-        {loot: 'Lucky_egg', weight: 3.75},
-        {loot: 'Persim', weight: 2},
-        {loot: 'Razz', weight: 2},
-        {loot: 'Bluk', weight: 2},
-        {loot: 'Nanab', weight: 2},
-        {loot: 'Wepear', weight: 2},
-        {loot: 'Pinap', weight: 2},
-        {loot: 'Figy', weight: 2},
-        {loot: 'Wiki', weight: 2},
-        {loot: 'Mago', weight: 2},
-        {loot: 'Aguav', weight: 2},
-        {loot: 'Iapapa', weight: 2},
-        {loot: 'Ultraball', weight: 1.75},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Lum', weight: 0, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Radio Tower'))},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [{loot: 'Yellow Shard'}],
+        epic: [
+            {loot: 'Persim'},
+            {loot: 'Razz'},
+            {loot: 'Bluk'},
+            {loot: 'Nanab'},
+            {loot: 'Wepear'},
+            {loot: 'Pinap'},
+            {loot: 'Figy'},
+            {loot: 'Wiki'},
+            {loot: 'Mago'},
+            {loot: 'Aguav'},
+            {loot: 'Iapapa'},
+        ],
+        legendary: [{loot: 'Ultraball'}],
+        mythic: [
+            {loot: 'Max Revive'},
+            {loot: 'Lum', requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Radio Tower'))},
+        ],
+    },
     112000,
     [
         new DungeonTrainer('Rocket Executive',
@@ -1824,56 +2017,72 @@ dungeonList['Radio Tower'] = new Dungeon('Radio Tower',
 
 dungeonList['Ice Path'] = new Dungeon('Ice Path',
     ['Zubat', 'Jynx', 'Swinub'],
-    [
-        {loot: 'xClick', weight: 3.5},
-        {loot: 'Lucky_egg', weight: 3.5},
-        {loot: 'Token_collector', weight: 3.5},
-        {loot: 'Icicle Plate', weight: 2},
-        {loot: 'Revive', weight: 1},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(450, GameConstants.getDungeonIndex('Ice Path'))},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'Purple Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Lucky_egg'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [
+            {loot: 'Yellow Shard'},
+            {loot: 'Purple Shard'},
+        ],
+        legendary: [
+            {loot: 'Icicle Plate'},
+            {loot: 'Revive'},
+        ],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(450, GameConstants.getDungeonIndex('Ice Path'))}],
+    },
     120400,
     [new DungeonBossPokemon('Delibird', 440000, 50)],
     6000, 44);
 
 dungeonList['Dark Cave'] = new Dungeon('Dark Cave',
     ['Zubat', 'Golbat', 'Geodude', 'Graveler', 'Wobbuffet'],
-    [
-        {loot: 'Pokeball', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Dread Plate', weight: 2},
-        {loot: 'SmallRestore', weight: 1.5},
-        {loot: 'Revive', weight: 1},
-        {loot: 'Star Piece', weight: 1},
-        {loot: 'LargeRestore', weight: 0.5},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Purple Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Pokeball'},
+            {loot: 'Dowsing_machine'},
+        ],
+        rare: [{loot: 'Purple Shard'}],
+        legendary: [
+            {loot: 'Dread Plate', weight: 2},
+            {loot: 'Revive'},
+            {loot: 'Star Piece'},
+            {loot: 'SmallRestore'},
+        ],
+        mythic: [
+            {loot: 'Heart Scale'},
+            {loot: 'Max Revive'},
+        ],
+    },
     127000,
     [new DungeonBossPokemon('Dunsparce', 460000, 55)],
     6500, 45);
 
 dungeonList['Victory Road Johto'] = new Dungeon('Victory Road Johto',
     ['Golbat', 'Graveler', 'Onix', 'Rhyhorn'],
-    [
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Graveler', weight: 3.25},
-        {loot: 'Earth Plate', weight: 2},
-        {loot: 'Ultraball', weight: 1.75},
-        {loot: 'SmallRestore', weight: 1.5},
-        {loot: 'LargeRestore', weight: 1},
-        {loot: 'Dragon_scale', weight: 0},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'Grey Shard', weight: 3},
-        {loot: 'Purple Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine', weight: 6},
+            {loot: 'Graveler'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
+        ],
+        legendary: [
+            {loot: 'Earth Plate', weight: 2},
+            {loot: 'Ultraball', weight: 2},
+            {loot: 'SmallRestore', weight: 2},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [{loot: 'Max Revive'}],
+    },
     128500,
     [
         new DungeonBossPokemon('Sandslash', 500000, 55),
@@ -1883,25 +2092,33 @@ dungeonList['Victory Road Johto'] = new Dungeon('Victory Road Johto',
 
 dungeonList['Mt. Silver'] = new Dungeon('Mt. Silver',
     ['Ponyta', 'Doduo', 'Tangela', 'Sneasel', 'Ursaring', 'Donphan', 'Teddiursa', 'Phanpy', 'Quagsire', 'Misdreavus'],
-    [
-        {loot: 'Token_collector', weight: 3.75},
-        {loot: 'Lucky_egg', weight: 3.75},
-        {loot: 'Fist Plate', weight: 2},
-        {loot: 'Zap Plate', weight: 2},
-        {loot: 'Ultraball', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1.75},
-        {loot: 'Revive', weight: 1.5},
-        {loot: 'Star Piece', weight: 1},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(450, GameConstants.getDungeonIndex('Mt Silver'))},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'Grey Shard', weight: 3},
-        {loot: 'Purple Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Token_collector'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
+        ],
+        legendary: [
+            {loot: 'Fist Plate', weight: 2},
+            {loot: 'Zap Plate', weight: 2},
+            {loot: 'Ultraball', weight: 2},
+            {loot: 'LargeRestore'},
+            {loot: 'Revive'},
+            {loot: 'Star Piece'},
+        ],
+        mythic: [
+            {loot: 'Max Revive'},
+            {loot: 'Heart Scale'},
+            {loot: 'Protein', requirement: new ClearDungeonRequirement(450, GameConstants.getDungeonIndex('Mt Silver'))},
+        ],
+    },
     130500,
     [new DungeonBossPokemon('Larvitar', 840000, 60)],
     10000, 28);
@@ -1929,16 +2146,20 @@ dungeonList['Petalburg Woods'] = new Dungeon('Petalburg Woods',
                 new GymPokemon('Nincada', 12000, 6),
             ], { weight: 1 }, 'James'),
     ],
-    [
-        {loot: 'Pokeball', weight: 3.75},
-        {loot: 'Token_collector', weight: 3.75},
-        {loot: 'Greatball', weight: 3},
-        {loot: 'Meadow Plate', weight: 2},
-        {loot: 'Insect Plate', weight: 2},
-        {loot: 'Iron Plate', weight: 2},
-        {loot: 'SmallRestore', weight: 1.75},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Pokeball'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [{loot: 'Green Shard'}],
+        epic: [
+            {loot: 'Meadow Plate'},
+            {loot: 'Insect Plate'},
+            {loot: 'Iron Plate'},
+            {loot: 'Greatball'},
+        ],
+        legendary: [{loot: 'SmallRestore'}],
+    },
     380000,
     [
         new DungeonBossPokemon('Slakoth', 860000, 10, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Petalburg Woods'))}),
@@ -1958,20 +2179,26 @@ dungeonList['Rusturf Tunnel'] = new Dungeon('Rusturf Tunnel',
                 new GymPokemon('Machop', 14000, 16),
             ], { weight: 1 }, 'Mike'),
     ],
-    [
-        {loot: 'xClick', weight: 3.75},
-        {loot: 'Pokeball', weight: 3.75},
-        {loot: 'Lucky_egg', weight: 3.75},
-        {loot: 'Stone Plate', weight: 2},
-        {loot: 'Iron Plate', weight: 2},
-        {loot: 'Earth Plate', weight: 2},
-        {loot: 'Revive', weight: 1},
-        {loot: 'Star Piece', weight: 0.5},
-        {loot: 'Hard Stone', weight: 0.5},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Pokeball'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        legendary: [
+            {loot: 'Stone Plate', weight: 2},
+            {loot: 'Iron Plate', weight: 2},
+            {loot: 'Earth Plate', weight: 2},
+            {loot: 'Revive'},
+            {loot: 'Star Piece'},
+            {loot: 'Hard Stone'},
+        ],
+        mythic: [{loot: 'Heart Scale'}],
+    },
     400000,
     [
         new DungeonTrainer('Team Aqua Grunt',
@@ -1982,34 +2209,46 @@ dungeonList['Rusturf Tunnel'] = new Dungeon('Rusturf Tunnel',
 
 dungeonList['Granite Cave'] = new Dungeon('Granite Cave',
     ['Zubat', 'Abra', 'Geodude', 'Makuhita', 'Aron', 'Sableye'],
-    [
-        {loot: 'Pokeball', weight: 3.75},
-        {loot: 'xAttack', weight: 3.75},
-        {loot: 'Lucky_egg', weight: 3.75},
-        {loot: 'Iron Plate', weight: 2},
-        {loot: 'Earth Plate', weight: 2},
-        {loot: 'Everstone', weight: 1.75},
-        {loot: 'Revive', weight: 1.75},
-        {loot: 'MediumRestore', weight: 1},
-        {loot: 'Star Piece', weight: 1},
-        {loot: 'Hard Stone', weight: 1},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Pokeball'},
+            {loot: 'xAttack'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Iron Plate'},
+            {loot: 'Earth Plate'},
+            {loot: 'Everstone'},
+            {loot: 'Revive'},
+        ],
+        legendary: [
+            {loot: 'MediumRestore'},
+            {loot: 'Star Piece'},
+            {loot: 'Hard Stone'},
+        ],
+        mythic: [{loot: 'Heart Scale'}],
+    },
     410000,
     [new DungeonBossPokemon('Mawile', 960000, 20), new DungeonBossPokemon('Nosepass', 660000, 20)],
     16000, 101);
 
 dungeonList['Fiery Path'] = new Dungeon('Fiery Path',
     ['Machop', 'Grimer', 'Koffing', 'Slugma', 'Numel'],
-    [
-        {loot: 'xAttack', weight: 3.75},
-        {loot: 'Dowsing_machine', weight: 3.75},
-        {loot: 'Flame Plate', weight: 2},
-        {loot: 'Draco Plate', weight: 2},
-        {loot: 'Red Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Dowsing_machine'},
+        ],
+        rare: [{loot: 'Red Shard'}],
+        legendary: [
+            {loot: 'Flame Plate'},
+            {loot: 'Draco Plate'},
+        ],
+    },
     424000,
     [new DungeonBossPokemon('Torkoal', 1200000, 20)],
     17000, 101);
@@ -2027,18 +2266,24 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
                 new GymPokemon('Hariyama', 18000, 39),
             ], { weight: 1 }, 'John and Jay'),
     ],
-    [
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Pokeball', weight: 3.5},
-        {loot: 'Greatball', weight: 3},
-        {loot: 'Stone Plate', weight: 2},
-        {loot: 'Iron Plate', weight: 2},
-        {loot: 'Sky Plate', weight: 2},
-        {loot: 'Draco Plate', weight: 2},
-        {loot: 'Star Piece', weight: 1},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_incense', weight: 6},
+            {loot: 'Pokeball', weight: 4},
+            {loot: 'Greatball'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [
+            {loot: 'Stone Plate'},
+            {loot: 'Iron Plate'},
+            {loot: 'Sky Plate'},
+            {loot: 'Draco Plate'},
+        ],
+        legendary: [{loot: 'Star Piece'}],
+    },
     443000,
     [
         new DungeonBossPokemon('Solrock', 1240000, 20),
@@ -2067,14 +2312,18 @@ dungeonList['Mt. Chimney Crater'] = new Dungeon('Mt. Chimney Crater',
                 new GymPokemon('Zubat', 22000, 22),
             ], { weight: 1 }, 'Tabitha'),
     ],
-    [
-        {loot: 'xAttack', weight: 3.75},
-        {loot: 'Token_collector', weight: 3.5},
-        {loot: 'Flame Plate', weight: 2},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Mt. Chimney Crater'))},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 2},
+            {loot: 'Token_collector'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+        ],
+        legendary: [{loot: 'Flame Plate'}],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Mt. Chimney Crater'))}],
+    },
     460000,
     [
         new DungeonTrainer('Magma Leader',
@@ -2114,15 +2363,21 @@ dungeonList['Jagged Pass'] = new Dungeon('Jagged Pass',
                 new GymPokemon('Taillow', 22000, 20),
             ], { weight: 1 }, 'Ethan'),
     ],
-    [
-        {loot: 'xClick', weight: 3.5},
-        {loot: 'Lucky_egg', weight: 3.5},
-        {loot: 'Greatball', weight: 2.5},
-        {loot: 'Dread Plate', weight: 2},
-        {loot: 'Stone Plate', weight: 2},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [{loot: 'Greatball'}],
+        legendary: [
+            {loot: 'Dread Plate'},
+            {loot: 'Stone Plate'},
+        ],
+    },
     460000,
     [
         new DungeonTrainer('Team Magma Grunt',
@@ -2135,15 +2390,19 @@ dungeonList['Jagged Pass'] = new Dungeon('Jagged Pass',
 
 dungeonList['New Mauville'] = new Dungeon('New Mauville',
     ['Magnemite', 'Voltorb'],
-    [
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Cheri', weight: 3.75},
-        {loot: 'Voltorb', weight: 3.25},
-        {loot: 'Razz', weight: 3},
-        {loot: 'Ultraball', weight: 3},
-        {loot: 'Zap Plate', weight: 2.5},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_incense', weight: 3},
+            {loot: 'Cheri', weight: 3},
+            {loot: 'Voltorb'},
+        ],
+        rare: [{loot: 'Yellow Shard'}],
+        epic: [
+            {loot: 'Razz'},
+            {loot: 'Ultraball'},
+        ],
+        legendary: [{loot: 'Zap Plate'}],
+    },
     460000,
     [
         new DungeonBossPokemon('Magneton', 1650000, 20),
@@ -2178,17 +2437,23 @@ dungeonList['Weather Institute'] = new Dungeon('Weather Institute',
                 new GymPokemon('Carvanha', 39000, 26),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    [
-        {loot: 'xAttack', weight: 3.75},
-        {loot: 'Lucky_egg', weight: 3.5},
-        {loot: 'Damp Rock', weight: 2.25},
-        {loot: 'Smooth Rock', weight: 2.25},
-        {loot: 'Heat Rock', weight: 2.25},
-        {loot: 'Icy Rock', weight: 2.25},
-        {loot: 'Splash Plate', weight: 2},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Damp Rock'},
+            {loot: 'Smooth Rock'},
+            {loot: 'Heat Rock'},
+            {loot: 'Icy Rock'},
+        ],
+        legendary: [{loot: 'Splash Plate'}],
+    },
     470000,
     [
         new DungeonTrainer('Aqua Admin',
@@ -2199,7 +2464,7 @@ dungeonList['Weather Institute'] = new Dungeon('Weather Institute',
         new DungeonBossPokemon('Castform', 1820000, 20, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))}),
     ],
     26000, 101);
-//TODO
+
 dungeonList['Mt. Pyre'] = new Dungeon('Mt. Pyre',
     [
         {pokemon: 'Shuppet', options: { weight: 12 }},
@@ -2277,17 +2542,23 @@ dungeonList['Mt. Pyre'] = new Dungeon('Mt. Pyre',
             ],
             { weight: 1 }, undefined, '(female)'),
     ],
-    [
-        {loot: 'xAttack', weight: 3.75},
-        {loot: 'Lucky_incense', weight: 3.75},
-        {loot: 'Ultraball', weight: 2.5},
-        {loot: 'Spooky Plate', weight: 2},
-        {loot: 'Fist Plate', weight: 2},
-        {loot: 'Mind Plate', weight: 2},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Mt. Pyre'))},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Blue Shard'},
+        ],
+        epic: [{loot: 'Ultraball'}],
+        legendary: [
+            {loot: 'Spooky Plate'},
+            {loot: 'Fist Plate'},
+            {loot: 'Mind Plate'},
+        ],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Mt. Pyre'))}],
+    },
     480000,
     [
         new DungeonBossPokemon('Shuppet', 1880000, 20),
@@ -2340,13 +2611,22 @@ dungeonList['Magma Hideout'] = new Dungeon('Magma Hideout',
             ],
             { weight: 1 }, 'Tabitha'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Figy', weight: 3.5},
-        {loot: 'Pinap', weight: 3},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Figy', weight: 2},
+            {loot: 'Pinap'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        legendary: [
+            {loot: 'Flame Plate'},
+            {loot: 'Dread Plate'},
+            {loot: 'Nestball'},
+        ],
+    },
     490000,
     [
         new DungeonTrainer('Magma Leader',
@@ -2389,17 +2669,28 @@ dungeonList['Aqua Hideout'] = new Dungeon('Aqua Hideout',
             [new GymPokemon('Zubat', 30000, 32)],
             { weight: 1 }, undefined, '(female)'),
     ],
-    [
-        {loot: 'Token_collector', weight: 3.75},
-        {loot: 'Pokeball', weight: 3.5},
-        {loot: 'Electrode', weight: 3.25},
-        {loot: 'Dread Plate', weight: 2.5},
-        {loot: 'Splash Plate', weight: 2.5},
-        {loot: 'Duskball', weight: 2},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Ochre Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 4},
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Electrode'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Ochre Shard'},
+        ],
+        epic: [
+            {loot: 'Lureball'},
+            {loot: 'Diveball'},
+        ],
+        legendary: [
+            {loot: 'Dread Plate', weight: 2},
+            {loot: 'Splash Plate', weight: 2},
+            {loot: 'Duskball'},
+            {loot: 'Nestball'},
+        ],
+        mythic: [{loot: 'Max Revive'}],
+    },
     490000,
     [
         new DungeonTrainer('Aqua Admin',
@@ -2413,32 +2704,40 @@ dungeonList['Aqua Hideout'] = new Dungeon('Aqua Hideout',
 
 dungeonList['Shoal Cave'] = new Dungeon('Shoal Cave',
     ['Zubat', 'Golbat', 'Spheal', 'Tentacool', 'Magikarp', 'Wailmer'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Lucky_incense', weight: 3.75},
-        {loot: 'Revive', weight: 2},
-        {loot: 'Star Piece', weight: 2},
-        {loot: 'Icicle Plate', weight: 2},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Ochre Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick', weight: 2},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [{loot: 'Ochre Shard'}],
+        legendary: [
+            {loot: 'Icicle Plate', weight: 2},
+            {loot: 'Star Piece'},
+            {loot: 'Revive'},
+        ],
+        mythic: [
+            {loot: 'Max Revive'},
+            {loot: 'Heart Scale'},
+        ],
+    },
     490000,
     [new DungeonBossPokemon('Snorunt', 1900000, 20)],
     30000, 101);
 
 dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
     ['Zubat', 'Golbat', 'Sableye', 'Mawile'],
-    [
-        {loot: 'xAttack', weight: 3.75},
-        {loot: 'Pomeg', weight: 3.25},
-        {loot: 'Grepa', weight: 3.25},
-        {loot: 'Revive', weight: 2},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Cave of Origin'))},
-        {loot: 'Lum', weight: 0, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Cave of Origin'))},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Ochre Shard', weight: 3},
-    ],
+    {
+        common: [{loot: 'xAttack'}],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Ochre Shard'},
+        ],
+        legendary: [{loot: 'Revive'}],
+        mythic: [
+            {loot: 'Protein', requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Cave of Origin'))},
+            {loot: 'Lum', requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Cave of Origin'))},
+        ],
+    },
     590000,
     [
         new DungeonBossPokemon('Exploud', 2000000, 50),
@@ -2478,16 +2777,19 @@ dungeonList['Seafloor Cavern'] = new Dungeon('Seafloor Cavern',
                 new GymPokemon('Mightyena', 32000, 37),
             ], { weight: 1 }, 'Shelly', '(shelly)'),
     ],
-    [
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Bluk', weight: 3},
-        {loot: 'Rabuta', weight: 2.5},
-        {loot: 'Splash Plate', weight: 2},
-        {loot: 'Earth Plate', weight: 2},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [{loot: 'Blue Shard'}],
+        epic: [{loot: 'Bluk'}],
+        legendary: [
+            {loot: 'Splash Plate'},
+            {loot: 'Earth Plate'},
+        ],
+        mythic: [{loot: 'Heart Scale'}],
+    },
     530000,
     [
         new DungeonTrainer('Aqua Leader',
@@ -2502,17 +2804,22 @@ dungeonList['Seafloor Cavern'] = new Dungeon('Seafloor Cavern',
 
 dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
     ['Golbat', 'Sableye', 'Claydol', 'Banette', 'Mawile', 'Altaria'],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Greatball', weight: 3.5},
-        {loot: 'Ultraball', weight: 2.5},
-        {loot: 'Draco Plate', weight: 2},
-        {loot: 'Sky Plate', weight: 2},
-        {loot: 'Mind Plate', weight: 2},
-        {loot: 'Dragon_scale', weight: 2},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'Ochre Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 4},
+            {loot: 'Greatball'},
+        ],
+        rare: [
+            {loot: 'Yellow Shard'},
+            {loot: 'Ochre Shard'},
+        ],
+        epic: [{loot: 'Ultraball'}],
+        legendary: [
+            {loot: 'Sky Plate'},
+            {loot: 'Mind Plate'},
+            {loot: 'Draco Plate'},
+        ],
+    },
     720000,
     [
         new DungeonBossPokemon('Dusclops', 3200000, 20),
@@ -2522,16 +2829,26 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
 
 dungeonList['Sealed Chamber'] = new Dungeon('Sealed Chamber',
     ['Zubat', 'Golbat', 'Tentacool'],
-    [
-        {loot: 'xClick', weight: 3.5},
-        {loot: 'Token_collector', weight: 3.5},
-        {loot: 'Stone Plate', weight: 2},
-        {loot: 'Icicle Plate', weight: 2},
-        {loot: 'Iron Plate', weight: 2},
-        {loot: 'Hard Stone', weight: 1},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Ochre Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Ochre Shard'},
+        ],
+        epic: [
+            {loot: 'Ultraball'},
+            {loot: 'Diveball'},
+        ],
+        legendary: [
+            {loot: 'Stone Plate', weight: 2},
+            {loot: 'Icicle Plate', weight: 2},
+            {loot: 'Iron Plate', weight: 2},
+            {loot: 'Hard Stone'},
+        ],
+    },
     500000,
     [
         new DungeonBossPokemon('Regirock', 4500000, 20),
@@ -2634,19 +2951,25 @@ dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
                 new GymPokemon('Dusclops', 37000, 43),
             ], { weight: 1 }, 'Quincy', '(male)'),
     ],
-    [
-        {loot: 'xAttack', weight: 3.75},
-        {loot: 'Lucky_egg', weight: 3.75},
-        {loot: 'Ultraball', weight: 2.5},
-        {loot: 'Mind Plate', weight: 2},
-        {loot: 'Flame Plate', weight: 2},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Victory Road Hoenn'))},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'Ochre Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Ochre Shard'},
+        ],
+        epic: [{loot: 'Ultraball'}],
+        legendary: [
+            {loot: 'Mind Plate'},
+            {loot: 'Flame Plate'},
+        ],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Victory Road Hoenn'))}],
+    },
     560000,
     [
         new DungeonTrainer('PKMN Trainer',
@@ -2680,14 +3003,20 @@ dungeonList['Oreburgh Gate'] = new Dungeon('Oreburgh Gate',
             [new GymPokemon('Bidoof', 720600, 9)],
             { weight: 1 }, 'Diana'),
     ],
-    [
-        {loot: 'xAttack', weight: 3.75},
-        {loot: 'Dowsing_machine', weight: 3.5},
-        {loot: 'Earth Plate', weight: 2.5},
-        {loot: 'Fist Plate', weight: 2.5},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 2},
+            {loot: 'Dowsing_machine'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [
+            {loot: 'Earth Plate'},
+            {loot: 'Fist Plate'},
+        ],
+    },
     720600,
     [
         new DungeonBossPokemon('Gyarados', 3703000, 14),
@@ -2717,14 +3046,16 @@ dungeonList['Valley Windworks'] = new Dungeon('Valley Windworks',
                 new GymPokemon('Zubat', 756000, 11),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    [
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Pokeball', weight: 3.5},
-        {loot: 'Greatball', weight: 3.5},
-        {loot: 'Stone Plate', weight: 2.75},
-        {loot: 'SmallRestore', weight: 1.75},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_incense'},
+            {loot: 'Pokeball'},
+            {loot: 'Greatball'},
+        ],
+        rare: [{loot: 'Yellow Shard'}],
+        epic: [{loot: 'Zap Plate'}],
+        legendary: [{loot: 'SmallRestore'}],
+    },
     756000,
     [
         new DungeonTrainer('Commander',
@@ -2773,17 +3104,21 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
                 new GymPokemon('Psyduck', 812000, 15),
             ], { weight: 1 }, 'Kody & Rachael', '(both)'),
     ],
-    [
-        {loot: 'Cheri', weight: 4},
-        {loot: 'Oran', weight: 4},
-        {loot: 'Greatball', weight: 3.5},
-        {loot: 'Razz', weight: 3},
-        {loot: 'Bluk', weight: 3},
-        {loot: 'Insect Plate', weight: 2.75},
-        {loot: 'Meadow Plate', weight: 2.75},
-        {loot: 'SmallRestore', weight: 1.75},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Cheri'},
+            {loot: 'Oran'},
+            {loot: 'Razz'},
+            {loot: 'Bluk'},
+            {loot: 'Greatball'},
+        ],
+        rare: [{loot: 'Green Shard'}],
+        epic: [
+            {loot: 'Insect Plate'},
+            {loot: 'Meadow Plate'},
+        ],
+        legendary: [{loot: 'SmallRestore'}],
+    },
     812000,
     [
         new DungeonBossPokemon('Beautifly', 3950000, 30),
@@ -2793,16 +3128,22 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
 
 dungeonList['Old Chateau'] = new Dungeon('Old Chateau',
     ['Gastly', 'Haunter', 'Gengar'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Dread Plate', weight: 2.75},
-        {loot: 'Spooky Plate', weight: 2.75},
-        {loot: 'Zap Plate', weight: 2.75},
-        {loot: 'Odd Keystone', weight: 1.75},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+        ],
+        epic: [
+            {loot: 'Dread Plate'},
+            {loot: 'Spooky Plate'},
+            {loot: 'Zap Plate'},
+        ],
+        legendary: [{loot: 'Odd Keystone'}],
+    },
     853000,
     [new DungeonBossPokemon('Rotom', 4200000, 100)],
     52500, 205);
@@ -2835,12 +3176,18 @@ dungeonList['Team Galactic Eterna Building'] = new Dungeon('Team Galactic Eterna
             [new GymPokemon('Kadabra', 877000, 20)],
             { weight: 1 }, 'Travon', '(male)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'Red Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [
+            {loot: 'Yellow Shard'},
+            {loot: 'Red Shard'},
+        ],
+        epic: [{loot: 'Toxic Plate'}],
+        legendary: [{loot: 'Revive'}],
+    },
     877000,
     [
         new DungeonTrainer('Commander',
@@ -2907,33 +3254,45 @@ dungeonList['Wayward Cave'] = new Dungeon('Wayward Cave',
                 new GymPokemon('Bronzor', 903000, 21),
             ], { weight: 1 }, 'Terry & Gerald'),
     ],
-    [
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Rawst', weight: 3.75},
-        {loot: 'Razz', weight: 3.5},
-        {loot: 'Greatball', weight: 3},
-        {loot: 'Earth Plate', weight: 2.75},
-        {loot: 'Draco Plate', weight: 2.75},
-        {loot: 'Revive', weight: 2},
-        {loot: 'SmallRestore', weight: 2},
-        {loot: 'MediumRestore', weight: 1.75},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Token_collector'},
+            {loot: 'Rawst', weight: 2},
+            {loot: 'Razz'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [
+            {loot: 'Greatball'},
+            {loot: 'Earth Plate'},
+            {loot: 'Draco Plate'},
+        ],
+        legendary: [
+            {loot: 'Revive', weight: 2},
+            {loot: 'SmallRestore', weight: 2},
+            {loot: 'MediumRestore'},
+        ],
+    },
     903000,
     [new DungeonBossPokemon('Bronzor', 4400000, 100)],
     56500, 206);
 
 dungeonList['Mt. Coronet South'] = new Dungeon('Mt. Coronet South',
     ['Clefairy', 'Zubat', 'Machop', 'Geodude', 'Magikarp', 'Cleffa', 'Barboach', 'Chingling'],
-    [
-        {loot: 'xAttack', weight: 3.75},
-        {loot: 'Lucky_incense', weight: 3.5},
-        {loot: 'Stone Plate', weight: 2.5},
-        {loot: 'Revive', weight: 2},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 2},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [{loot: 'Stone Plate'}],
+        legendary: [{loot: 'Revive', weight: 2}],
+    },
     951500,
     [
         new DungeonBossPokemon('Nosepass', 4000000, 35),
@@ -2960,13 +3319,17 @@ dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
                 new GymPokemon('Bronzor', 960000, 23),
             ], { weight: 1 }, 'Karl'),
     ],
-    [
-        {loot: 'Lucky_incense', weight: 3.75},
-        {loot: 'Persim', weight: 3.25},
-        {loot: 'Mind Plate', weight: 2.5},
-        {loot: 'Sky Plate', weight: 2.5},
-        {loot: 'Crimson Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_incense', weight: 2},
+            {loot: 'Persim'},
+        ],
+        rare: [{loot: 'Crimson Shard'}],
+        epic: [
+            {loot: 'Mind Plate'},
+            {loot: 'Sky Plate'},
+        ],
+    },
     960000,
     [
         ...SolaceonUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
@@ -3037,17 +3400,23 @@ dungeonList['Iron Island'] = new Dungeon('Iron Island',
                 new GymPokemon('Kirlia', 983000, 36),
             ], { weight: 1 }, 'Jonah & Brenda'),
     ],
-    [
-        {loot: 'Dowsing_machine', weight: 3.75},
-        {loot: 'Pokeball', weight: 3.5},
-        {loot: 'Iron Plate', weight: 2.5},
-        {loot: 'Ultraball', weight: 2.25},
-        {loot: 'Revive', weight: 2},
-        {loot: 'Duskball', weight: 1.75},
-        {loot: 'Star Piece', weight: 1.5},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine', weight: 2},
+            {loot: 'Pokeball'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Iron Plate', weight: 2},
+            {loot: 'Ultraball', weight: 2},
+            {loot: 'Revive'},
+            {loot: 'Duskball'},
+        ],
+        legendary: [{loot: 'Star Piece'}],
+    },
     983000,
     [
         new DungeonTrainer('Galactic Grunts',
@@ -3094,12 +3463,17 @@ dungeonList['Lake Valor'] = new Dungeon('Lake Valor',
                 new GymPokemon('Glameow', 1015000, 33),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    [
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Sitrus', weight: 3.75},
-        {loot: 'Mind Plate', weight: 2.5},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Sitrus'},
+        ],
+        rare: [{loot: 'Blue Shard'}],
+        epic: [
+            {loot: 'Mind Plate'},
+            {loot: 'Lureball'},
+        ],
+    },
     1015000,
     [
         new DungeonTrainer('Commander',
@@ -3140,13 +3514,17 @@ dungeonList['Lake Verity'] = new Dungeon('Lake Verity',
                 new GymPokemon('Glameow', 1068735, 36),
             ], { weight: 1 }, undefined, '(female)'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Sitrus', weight: 3.75},
-        {loot: 'Mind Plate', weight: 2.5},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Lime Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 2},
+            {loot: 'Sitrus'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Lime Shard'},
+        ],
+        epic: [{loot: 'Mind Plate'}],
+    },
     1068735,
     [
         new DungeonTrainer('Commander',
@@ -3160,20 +3538,30 @@ dungeonList['Lake Verity'] = new Dungeon('Lake Verity',
 
 dungeonList['Mt. Coronet North'] = new Dungeon('Mt. Coronet North',
     ['Clefairy', 'Zubat', 'Machop', 'Geodude', 'Magikarp', 'Noctowl', 'Meditite', 'Barboach', 'Chingling', 'Bronzor', 'Snover'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Greatball', weight: 3.5},
-        {loot: 'Stone Plate', weight: 2.5},
-        {loot: 'Draco Plate', weight: 2.5},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Light Clay', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1.75},
-        {loot: 'Star Piece', weight: 1.5},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(350, GameConstants.getDungeonIndex('Mt. Coronet North'))},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'Crimson Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick', weight: 2},
+            {loot: 'Greatball'},
+        ],
+        rare: [
+            {loot: 'Yellow Shard'},
+            {loot: 'Crimson Shard'},
+        ],
+        epic: [
+            {loot: 'Stone Plate'},
+            {loot: 'Draco Plate'},
+        ],
+        legendary: [
+            {loot: 'Ultraball', weight: 4},
+            {loot: 'Light Clay', weight: 2},
+            {loot: 'LargeRestore', weight: 2},
+            {loot: 'Star Piece'},
+        ],
+        mythic: [
+            {loot: 'Protein', requirement: new ClearDungeonRequirement(350, GameConstants.getDungeonIndex('Mt. Coronet North'))},
+            {loot: 'Max Revive'},
+        ],
+    },
     1111500,
     [
         new DungeonBossPokemon('Graveler', 4960000, 35),
@@ -3184,14 +3572,20 @@ dungeonList['Mt. Coronet North'] = new Dungeon('Mt. Coronet North',
 
 dungeonList['Lake Acuity'] = new Dungeon('Lake Acuity',
     ['Psyduck', 'Golduck', 'Goldeen', 'Magikarp', 'Gyarados', 'Sneasel', 'Snorunt', 'Bibarel', 'Snover'],
-    [
-        {loot: 'Lucky_egg', weight: 4},
-        {loot: 'Sitrus', weight: 3.75},
-        {loot: 'Icicle Plate', weight: 2.5},
-        {loot: 'Mind Plate', weight: 2.5},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_egg', weight: 2},
+            {loot: 'Sitrus'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+        ],
+        epic: [
+            {loot: 'Mind Plate'},
+            {loot: 'Icicle Plate'},
+        ],
+    },
     1261800,
     [
         new DungeonTrainer('Commander',
@@ -3259,12 +3653,25 @@ dungeonList['Team Galactic HQ'] = new Dungeon('Team Galactic HQ',
                 new GymPokemon('Toxicroak', 1295400, 42),
             ], { weight: 1 }, 'Saturn', '(saturn)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Crimson Shard', weight: 3},
-        {loot: 'Lime Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+        rare: [
+            {loot: 'Crimson Shard'},
+            {loot: 'Lime Shard'},
+        ],
+        epic: [
+            {loot: 'Sky Plate'},
+            {loot: 'Ultraball'},
+        ],
+        legendary: [{loot: 'LargeRestore'}],
+        mythic: [
+            {loot: 'Max Revive'},
+            {loot: 'Protein', requirement: new ClearDungeonRequirement(350, GameConstants.getDungeonIndex('Team Galactic HQ'))},
+        ],
+    },
     1295400,
     [
         new DungeonTrainer('Galactic Boss',
@@ -3340,15 +3747,21 @@ dungeonList['Spear Pillar'] = new Dungeon('Spear Pillar',
                 new GymPokemon('Murkrow', 1322100, 41),
             ], { weight: 1 }, undefined, '(female)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 3.75},
-        {loot: 'Iron Plate', weight: 2.5},
-        {loot: 'Draco Plate', weight: 2.5},
-        {loot: 'Splash Plate', weight: 2.5},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Iron Plate'},
+            {loot: 'Draco Plate'},
+            {loot: 'Splash Plate'},
+        ],
+    },
     1322100,
     [
         new DungeonTrainer('Commanders',
@@ -3367,16 +3780,19 @@ dungeonList['Spear Pillar'] = new Dungeon('Spear Pillar',
 
 dungeonList['Distortion World'] = new Dungeon('Distortion World',
     ['Golbat', 'Gastly', 'Duskull', 'Dusclops', 'Chimecho', 'Chingling', 'Bronzor', 'Bronzong'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Ultraball', weight: 3.5},
-        {loot: 'Banette', weight: 3},
-        {loot: 'Spooky Plate', weight: 2.5},
-        {loot: 'Draco Plate', weight: 2.5},
-        {loot: 'Rare Bone', weight: 1.75},
-        {loot: 'Odd Keystone', weight: 1.75},
-        {loot: 'Lime Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick', weight: 4},
+            {loot: 'Lucky_incense', weight: 2},
+            {loot: 'Banette'},
+        ],
+        rare: [{loot: 'Lime Shard'}],
+        legendary: [
+            {loot: 'Rare Bone'},
+            {loot: 'Odd Keystone'},
+            {loot: 'Ultraball'},
+        ],
+    },
     1350400,
     [
         new DungeonTrainer('Galactic Boss',
@@ -3474,23 +3890,32 @@ dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
                 new GymPokemon('Gabite', 1503000, 47),
             ], { weight: 1 }, 'Clinton'),
     ],
-    [
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Oran', weight: 3.75},
-        {loot: 'Graveler', weight: 3.25},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(350, GameConstants.getDungeonIndex('Victory Road Sinnoh'))},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'Crimson Shard', weight: 3},
-        {loot: 'Lime Shard', weight: 3},
-        {loot: 'White Shard', weight: 3},
-        {loot: 'Black Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Oran', weight: 3},
+            {loot: 'Lucky_incense', weight: 3},
+            {loot: 'Graveler'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Crimson Shard'},
+            {loot: 'Lime Shard'},
+            {loot: 'White Shard'},
+            {loot: 'Black Shard'},
+        ],
+        legendary: [
+            {loot: 'Ultraball'},
+            {loot: 'Repeatball'},
+        ],
+        mythic: [
+            {loot: 'Protein', requirement: new ClearDungeonRequirement(350, GameConstants.getDungeonIndex('Victory Road Sinnoh'))},
+            {loot: 'Max Revive'},
+            {loot: 'Heart Scale'},
+        ],
+    },
     1503000,
     [
         new DungeonBossPokemon('Rhydon', 7000000, 100),
@@ -3500,12 +3925,20 @@ dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
 
 dungeonList['Sendoff Spring'] = new Dungeon('Sendoff Spring',
     ['Golbat', 'Golduck', 'Graveler', 'Goldeen', 'Magikarp', 'Staravia', 'Bibarel', 'Chingling'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'White Shard', weight: 3},
-        {loot: 'Black Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [
+            {loot: 'White Shard'},
+            {loot: 'Black Shard'},
+        ],
+        epic: [
+            {loot: 'Spooky Plate'},
+            {loot: 'Draco Plate'},
+        ],
+    },
     2603000,
     [
         new DungeonBossPokemon('Seaking', 10000000, 100),
@@ -3516,36 +3949,42 @@ dungeonList['Sendoff Spring'] = new Dungeon('Sendoff Spring',
 
 dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
     ['Slowpoke', 'Spearow', 'Garchomp', 'Slakoth', 'Eevee', 'Breloom', 'Absol'],
-    [
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Cheri', weight: 3.75},
-        {loot: 'Ditto', weight: 3.5},
-        {loot: 'Draco Plate', weight: 2.5},
-        {loot: 'Dread Plate', weight: 2.5},
-        {loot: 'Earth Plate', weight: 2.5},
-        {loot: 'Fist Plate', weight: 2.5},
-        {loot: 'Flame Plate', weight: 2.5},
-        {loot: 'Icicle Plate', weight: 2.5},
-        {loot: 'Insect Plate', weight: 2.5},
-        {loot: 'Iron Plate', weight: 2.5},
-        {loot: 'Meadow Plate', weight: 2.5},
-        {loot: 'Mind Plate', weight: 2.5},
-        {loot: 'Pixie Plate', weight: 2.5},
-        {loot: 'Sky Plate', weight: 2.5},
-        {loot: 'Splash Plate', weight: 2.5},
-        {loot: 'Spooky Plate', weight: 2.5},
-        {loot: 'Stone Plate', weight: 2.5},
-        {loot: 'Toxic Plate', weight: 2.5},
-        {loot: 'Zap Plate', weight: 2.5},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'Crimson Shard', weight: 3},
-        {loot: 'Lime Shard', weight: 3},
-        {loot: 'White Shard', weight: 3},
-        {loot: 'Black Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine', weight: 4},
+            {loot: 'Cheri', weight: 2},
+            {loot: 'Ditto'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Crimson Shard'},
+            {loot: 'Lime Shard'},
+            {loot: 'White Shard'},
+            {loot: 'Black Shard'},
+        ],
+        epic: [
+            {loot: 'Draco Plate'},
+            {loot: 'Dread Plate'},
+            {loot: 'Earth Plate'},
+            {loot: 'Fist Plate'},
+            {loot: 'Flame Plate'},
+            {loot: 'Icicle Plate'},
+            {loot: 'Insect Plate'},
+            {loot: 'Iron Plate'},
+            {loot: 'Meadow Plate'},
+            {loot: 'Mind Plate'},
+            {loot: 'Pixie Plate'},
+            {loot: 'Sky Plate'},
+            {loot: 'Splash Plate'},
+            {loot: 'Spooky Plate'},
+            {loot: 'Stone Plate'},
+            {loot: 'Toxic Plate'},
+            {loot: 'Zap Plate'},
+        ],
+    },
     2653000,
     [
         new DungeonBossPokemon('Arceus (normal)', 13000000, 100),
@@ -3558,39 +3997,49 @@ dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
 
 dungeonList['Fullmoon Island'] = new Dungeon('Fullmoon Island',
     ['Illumise', 'Minun', 'Hypno', 'Luvdisc'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Nanab', weight: 3.75},
-        {loot: 'Mind Plate', weight: 2.5},
-        {loot: 'White Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick', weight: 2},
+            {loot: 'Nanab'},
+        ],
+        rare: [{loot: 'White Shard'}],
+        epic: [{loot: 'Mind Plate'}],
+    },
     2603000,
     [new DungeonBossPokemon('Clefable', 11000000, 100)],
     96500, 230);
 
 dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
     ['Volbeat', 'Plusle', 'Absol', 'Luvdisc'],
-    [
-        {loot: 'Lucky_egg', weight: 4},
-        {loot: 'Nanab', weight: 3.75},
-        {loot: 'Dread Plate', weight: 2.5},
-        {loot: 'Black Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_egg', weight: 2},
+            {loot: 'Nanab'},
+        ],
+        rare: [{loot: 'Black Shard'}],
+        epic: [{loot: 'Dread Plate'}],
+    },
     2603000,
     [new DungeonBossPokemon('Darkrai', 11000000, 100)],
     96500, 230);
 
 dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
     ['Gloom', 'Bellsprout', 'Tangela', 'Skiploom', 'Lombre', 'Seedot', 'Roselia'],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Mago', weight: 3.5},
-        {loot: 'Aguav', weight: 3.5},
-        {loot: 'Meadow Plate', weight: 2.5},
-        {loot: 'Sky Plate', weight: 2.25},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Mago'},
+            {loot: 'Aguav'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [
+            {loot: 'Meadow Plate'},
+            {loot: 'Sky Plate'},
+        ],
+    },
     2603000,
     [
         new DungeonBossPokemon('Parasect', 9900000, 50),
@@ -3602,15 +4051,19 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
 
 dungeonList['Snowpoint Temple'] = new Dungeon('Snowpoint Temple',
     ['Golbat', 'Sneasel', 'Smoochum'],
-    [
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Aspear', weight: 3.75},
-        {loot: 'Icicle Plate', weight: 2.5},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(350, GameConstants.getDungeonIndex('Snowpoint Temple'))},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'White Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+        rare: [
+            {loot: 'Yellow Shard'},
+            {loot: 'White Shard'},
+        ],
+        epic: [{loot: 'Icicle Plate'}],
+        legendary: [{loot: 'LargeRestore'}],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(350, GameConstants.getDungeonIndex('Snowpoint Temple'))}],
+    },
     2603000,
     [
         new DungeonBossPokemon('Jynx', 10000000, 100),
@@ -3710,19 +4163,27 @@ dungeonList['Stark Mountain'] = new Dungeon('Stark Mountain',
                 new GymPokemon('Machamp', 2603000, 60),
             ], { weight: 1 }, 'Drake & Jarrett'),
     ],
-    [
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Rawst', weight: 3.75},
-        {loot: 'Flame Plate', weight: 2.5},
-        {loot: 'Iron Plate', weight: 2.5},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Revive', weight: 2},
-        {loot: 'Star Piece', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1.25},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Black Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Rawst'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Black Shard'},
+        ],
+        epic: [
+            {loot: 'Flame Plate'},
+            {loot: 'Iron Plate'},
+        ],
+        legendary: [
+            {loot: 'Ultraball'},
+            {loot: 'Revive'},
+            {loot: 'Star Piece', weight: 2},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [{loot: 'Max Revive'}],
+    },
     2603000,
     [
         new DungeonBossPokemon('Skarmory', 10000000, 100),
@@ -3731,7 +4192,6 @@ dungeonList['Stark Mountain'] = new Dungeon('Stark Mountain',
     96500, 230);
 
 // Unova
-// TODO: Balancing of dungeon Pokemon HP & rewards.
 
 dungeonList['Floccesy Ranch'] = new Dungeon('Floccesy Ranch',
     [
@@ -3757,31 +4217,43 @@ dungeonList['Floccesy Ranch'] = new Dungeon('Floccesy Ranch',
                 new GymPokemon('Psyduck', 126500, 6),
             ], { weight: 1 }, 'Kenny'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Pokeball', weight: 4},
-        {loot: 'Cheri', weight: 3.5},
-        {loot: 'Nanab', weight: 2.5},
-        {loot: 'Wepear', weight: 2.5},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Pokeball'},
+            {loot: 'Cheri'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Nanab'},
+            {loot: 'Wepear'},
+        ],
+    },
     2503000,
     [new DungeonBossPokemon('Riolu', 13000000, 100)],
     126500, 20);
 
 dungeonList['Liberty Garden'] = new Dungeon('Liberty Garden',
     ['Vulpix', 'Sunkern', 'Abra', 'Wingull', 'Pidove', 'Sentret'],
-    [
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Figy', weight: 3.75},
-        {loot: 'Greatball', weight: 3},
-        {loot: 'Flame Plate', weight: 2.5},
-        {loot: 'Mind Plate', weight: 2.5},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Token_collector'},
+            {loot: 'Figy', weight: 2},
+            {loot: 'Greatball'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [
+            {loot: 'Flame Plate'},
+            {loot: 'Mind Plate'},
+        ],
+        legendary: [{loot: 'Ultraball'}],
+    },
     2703000,
     [
         new DungeonBossPokemon('Victini', 14000000, 100),
@@ -3823,21 +4295,29 @@ dungeonList['Castelia Sewers'] = new Dungeon('Castelia Sewers',
                 new GymPokemon('Cinccino', 146500, 31),
             ], { weight: 1 }, 'Brady'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'xAttack', weight: 3.75},
-        {loot: 'Toxic Plate', weight: 2.5},
-        {loot: 'Mind Plate', weight: 2.5},
-        {loot: 'SmallRestore', weight: 2},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Revive', weight: 2},
-        {loot: 'MediumRestore', weight: 1.75},
-        {loot: 'Rare Bone', weight: 1.5},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick', weight: 2},
+            {loot: 'xAttack'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+        ],
+        epic: [
+            {loot: 'Toxic Plate'},
+            {loot: 'Mind Plate'},
+        ],
+        legendary: [
+            {loot: 'SmallRestore'},
+            {loot: 'Ultraball'},
+            {loot: 'Revive'},
+            {loot: 'MediumRestore', weight: 2},
+            {loot: 'Rare Bone'},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [{loot: 'Heart Scale'}],
+    },
     2603000,
     [
         new DungeonTrainer('Team Plasma Grunt',
@@ -3895,16 +4375,19 @@ dungeonList['Relic Passage'] = new Dungeon('Relic Passage',
                 new GymPokemon('Yamask', 176500, 32),
             ], { weight: 1 }, 'Ena', '(female)'),
     ],
-    [
-        {loot: 'Lucky_egg', weight: 4},
-        {loot: 'Dowsing_machine', weight: 3.75},
-        {loot: 'Stone Plate', weight: 2.5},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Hard Stone', weight: 2},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('Relic Passage'))},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_egg', weight: 2},
+            {loot: 'Dowsing_machine'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [{loot: 'Stone Plate'}],
+        legendary: [{loot: 'Hard Stone'}],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('Relic Passage'))}],
+    },
     3203000,
     [
         new DungeonBossPokemon('Onix', 21000000, 100),
@@ -3927,22 +4410,32 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
             [new GymPokemon('Solosis', 156500, 23)],
             { weight: 1 }, 'Low', '(male)'),
     ],
-    [
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Mago', weight: 3.75},
-        {loot: 'Greatball', weight: 3.25},
-        {loot: 'Earth Plate', weight: 2.5},
-        {loot: 'Insect Plate', weight: 2.25},
-        {loot: 'Flame Plate', weight: 2.25},
-        {loot: 'Revive', weight: 2},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'MediumRestore', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Darmanitan (Zen)', weight: 0, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Relic Castle'))},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Token_collector'},
+            {loot: 'Mago', weight: 2},
+            {loot: 'Greatball'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Earth Plate'},
+            {loot: 'Insect Plate'},
+            {loot: 'Flame Plate'},
+        ],
+        legendary: [
+            {loot: 'Revive'},
+            {loot: 'Ultraball'},
+            {loot: 'MediumRestore', weight: 2},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [
+            {loot: 'Heart Scale'},
+            {loot: 'Darmanitan (Zen)'},
+        ],
+    },
     2803000,
     [
         new DungeonTrainer('Psychic',
@@ -3980,16 +4473,20 @@ dungeonList['Lostlorn Forest'] = new Dungeon('Lostlorn Forest',
                 new GymPokemon('Scolipede', 166500, 51),
             ], { weight: 1 }, 'Murphy', '(male)'),
     ],
-    [
-        {loot: 'Iapapa', weight: 4},
-        {loot: 'xClick', weight: 3.75},
-        {loot: 'Greatball', weight: 3.75},
-        {loot: 'Foongus', weight: 3.5},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('Lostlorn Forest'))},
-        {loot: 'Zoroark', weight: 0, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Lostlorn Forest'))},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Iapapa'},
+            {loot: 'xClick', weight: 2},
+            {loot: 'Greatball', weight: 2},
+            {loot: 'Foongus'},
+        ],
+        rare: [{loot: 'Green Shard'}],
+        legendary: [
+            {loot: 'Ultraball'},
+            {loot: 'Zoroark', requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Lostlorn Forest'))},
+        ],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('Lostlorn Forest'))}],
+    },
     3003000,
     [
         new DungeonBossPokemon('Heracross', 18000000, 100),
@@ -4055,16 +4552,23 @@ dungeonList['Chargestone Cave'] = new Dungeon('Chargestone Cave',
                 new GymPokemon('Ferroseed', 186500, 33),
             ], { weight: 1 }, 'Vicki', '(female)'),
     ],
-    [
-        {loot: 'Lucky_egg', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Aguav', weight: 3.75},
-        {loot: 'Zap Plate', weight: 2.5},
-        {loot: 'Revive', weight: 2},
-        {loot: 'Star Piece', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_egg', weight: 2},
+            {loot: 'Dowsing_machine', weight: 2},
+            {loot: 'Aguav'},
+        ],
+        rare: [{loot: 'Yellow Shard'}],
+        epic: [
+            {loot: 'Zap Plate'},
+            {loot: 'Timerball'},
+        ],
+        legendary: [
+            {loot: 'Star Piece', weight: 2},
+            {loot: 'Revive'},
+            {loot: 'LargeRestore'},
+        ],
+    },
     3403000,
     [
         new DungeonTrainer('Ace Trainer',
@@ -4105,20 +4609,28 @@ dungeonList['Mistralton Cave'] = new Dungeon('Mistralton Cave',
                 new GymPokemon('Axew', 196500, 33),
             ], { weight: 1 }, 'Belle', '(female)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Greatball', weight: 3.75},
-        {loot: 'Draco Plate', weight: 2.5},
-        {loot: 'Fist Plate', weight: 2.5},
-        {loot: 'Iron Plate', weight: 2.5},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Revive', weight: 2},
-        {loot: 'Hard Stone', weight: 2},
-        {loot: 'Duskball', weight: 2},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick', weight: 2},
+            {loot: 'Greatball'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [
+            {loot: 'Draco Plate'},
+            {loot: 'Fist Plate'},
+            {loot: 'Iron Plate'},
+        ],
+        legendary: [
+            {loot: 'Ultraball'},
+            {loot: 'Revive'},
+            {loot: 'Hard Stone'},
+            {loot: 'Duskball'},
+            {loot: 'LargeRestore'},
+        ],
+    },
     3603000,
     [
         new DungeonBossPokemon('Drilbur', 23000000, 100),
@@ -4158,16 +4670,24 @@ dungeonList['Celestial Tower'] = new Dungeon('Celestial Tower',
             [new GymPokemon('Umbreon', 206500, 35)],
             { weight: 1 }, 'Daniel'),
     ],
-    [
-        {loot: 'Lucky_egg', weight: 4},
-        {loot: 'Token_collector', weight: 3.75},
-        {loot: 'Spooky Plate', weight: 2.5},
-        {loot: 'Mind Plate', weight: 2.5},
-        {loot: 'Revive', weight: 2},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_egg', weight: 2},
+            {loot: 'Token_collector'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Spooky Plate'},
+            {loot: 'Mind Plate'},
+        ],
+        legendary: [
+            {loot: 'Revive', weight: 2},
+            {loot: 'LargeRestore'},
+        ],
+    },
     3803000,
     [
         new DungeonBossPokemon('Litwick', 25000000, 100),
@@ -4258,17 +4778,23 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
                 new GymPokemon('Camerupt', 226500, 38),
             ], { weight: 1 }, 'Lewis', '(male)'),
     ],
-    [
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Persim', weight: 3.75},
-        {loot: 'Ultraball', weight: 3},
-        {loot: 'Iron Plate', weight: 2.5},
-        {loot: 'Flame Plate', weight: 2.5},
-        {loot: 'Revive', weight: 2},
-        {loot: 'LargeRestore', weight: 1.75},
-        {loot: 'Star Piece', weight: 1.75},
-        {loot: 'Red Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine'},
+            {loot: 'Persim', weight: 2},
+            {loot: 'Ultraball'},
+        ],
+        rare: [{loot: 'Red Shard'}],
+        epic: [
+            {loot: 'Iron Plate'},
+            {loot: 'Flame Plate'},
+        ],
+        legendary: [
+            {loot: 'Revive', weight: 2},
+            {loot: 'LargeRestore'},
+            {loot: 'Star Piece'},
+        ],
+    },
     4003000,
     [
         new DungeonBossPokemon('Cacturne', 24000000, 100),
@@ -4301,15 +4827,21 @@ dungeonList['Team Plasma Assault'] = new Dungeon('Team Plasma Assault',
                 new GymPokemon('Absol', 241500, 46),
             ], { weight: 1 }, 'Shadow', '(shadow)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Greatball', weight: 3.75},
-        {loot: 'Draco Plate', weight: 2.5},
-        {loot: 'Icicle Plate', weight: 2.5},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick', weight: 2},
+            {loot: 'Greatball'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [
+            {loot: 'Draco Plate'},
+            {loot: 'Icicle Plate'},
+        ],
+        legendary: [{loot: 'Ultraball'}],
+    },
     4603000,
     [
         new DungeonTrainer('Team Plasma',
@@ -4361,17 +4893,25 @@ dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
             [new GymPokemon('Gurdurr', 246500, 47)],
             { weight: 1 }, 'Rich'),
     ],
-    [
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Lucky_egg', weight: 4},
-        {loot: 'Persim', weight: 3.75},
-        {loot: 'Insect Plate', weight: 2.5},
-        {loot: 'Stone Plate', weight: 2.5},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('Seaside Cave'))},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Lucky_egg', weight: 2},
+            {loot: 'Persim'},
+        ],
+        rare: [{loot: 'Blue Shard'}],
+        epic: [
+            {loot: 'Insect Plate'},
+            {loot: 'Stone Plate'},
+            {loot: 'Diveball'},
+            {loot: 'Lureball'},
+        ],
+        legendary: [{loot: 'LargeRestore'}],
+        mythic: [
+            {loot: 'Protein', requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('Seaside Cave'))},
+            {loot: 'Heart Scale'},
+        ],
+    },
     4203000,
     [
         new DungeonBossPokemon('Eelektrik', 28000000, 100),
@@ -4445,17 +4985,23 @@ dungeonList['Plasma Frigate'] = new Dungeon('Plasma Frigate',
             [new GymPokemon('Scrafty', 257500, 47)],
             { weight: 1 }, undefined, '(female)'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Pokeball', weight: 4},
-        {loot: 'Iron Plate', weight: 2.5},
-        {loot: 'Zap Plate', weight: 2.5},
-        {loot: 'Icicle Plate', weight: 2.5},
-        {loot: 'Revive', weight: 2},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Pokeball'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Iron Plate'},
+            {loot: 'Zap Plate'},
+            {loot: 'Icicle Plate'},
+        ],
+        legendary: [{loot: 'Revive'}],
+        mythic: [{loot: 'Max Revive'}],
+    },
     4603000,
     [
         new DungeonTrainer('Team Plasma',
@@ -4586,19 +5132,28 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
                 new GymPokemon('Accelgor', 266500, 51),
             ], { weight: 1 }, 'Shadow', '(shadow)'),
     ],
-    [
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Aspear', weight: 3.75},
-        {loot: 'Amoonguss', weight: 3.25},
-        {loot: 'Icicle Plate', weight: 2.5},
-        {loot: 'Draco Plate', weight: 2.25},
-        {loot: 'Dread Plate', weight: 2.25},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Star Piece', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_incense'},
+            {loot: 'Aspear', weight: 2},
+            {loot: 'Amoonguss'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Icicle Plate'},
+            {loot: 'Draco Plate'},
+            {loot: 'Dread Plate'},
+        ],
+        legendary: [
+            {loot: 'Star Piece', weight: 2},
+            {loot: 'Ultraball'},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [{loot: 'Max Revive'}],
+    },
     4403000,
     [
         new DungeonTrainer('Team Plasma',
@@ -4619,17 +5174,21 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
 
 dungeonList['Cave of Being'] = new Dungeon('Cave of Being',
     ['Kadabra', 'Golbat', 'Woobat', 'Gurdurr', 'Graveler', 'Onix'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Lucky_egg', weight: 4},
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Mind Plate', weight: 2.5},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'xAttack'},
+            {loot: 'Lucky_egg'},
+            {loot: 'Token_collector'},
+            {loot: 'Dowsing_machine'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+        ],
+        epic: [{loot: 'Mind Plate'}],
+    },
     4603000,
     [
         new DungeonBossPokemon('Uxie', 35000000, 100),
@@ -4674,16 +5233,23 @@ dungeonList['Abundant Shrine'] = new Dungeon('Abundant Shrine',
                 new GymPokemon('Scolipede', 306500, 37),
             ], { weight: 1 }, 'Jaye'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Mago', weight: 3.75},
-        {loot: 'Ultraball', weight: 3.5},
-        {loot: 'Amoonguss', weight: 3.5},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Mago', weight: 3},
+            {loot: 'xClick', weight: 3},
+            {loot: 'Amoonguss'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [{loot: 'Mind Plate'}],
+        legendary: [
+            {loot: 'Ultraball'},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [{loot: 'Max Revive'}],
+    },
     4803000,
     [
         new DungeonBossPokemon('Bronzong', 38000000, 100),
@@ -4834,20 +5400,33 @@ dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
                 new GymPokemon('Golurk', 326500, 54),
             ], { weight: 1 }, 'Sterling', '(male)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Zoroark', weight: 3.25},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Star Piece', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Dusk_stone', weight: 0},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick', weight: 3},
+            {loot: 'xAttack', weight: 3},
+            {loot: 'Zoroark'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Mind Plate'},
+            {loot: 'Quickball'},
+            {loot: 'Timerball'},
+            {loot: 'Duskball'},
+            {loot: 'Nestball'},
+            {loot: 'Repeatball'},
+        ],
+        legendary: [
+            {loot: 'Ultraball'},
+            {loot: 'Star Piece'},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [{loot: 'Max Revive'}],
+    },
     5003000,
     [
         new DungeonBossPokemon('Golurk', 44000000, 100),
@@ -4935,19 +5514,25 @@ dungeonList['Twist Mountain'] = new Dungeon('Twist Mountain',
                 new GymPokemon('Aggron', 356500, 63),
             ], { weight: 1 }, 'Zach', '(male)'),
     ],
-    [
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Greatball', weight: 3.75},
-        {loot: 'Revive', weight: 2},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Duskball', weight: 2},
-        {loot: 'Rare Bone', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('Twist Mountain'))},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 3},
+            {loot: 'Lucky_incense', weight: 3},
+            {loot: 'Greatball'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        legendary: [
+            {loot: 'Rare Bone', weight: 2},
+            {loot: 'Revive'},
+            {loot: 'Ultraball'},
+            {loot: 'Duskball'},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('Twist Mountain'))}],
+    },
     5203000,
     [
         new DungeonBossPokemon('Durant', 48000000, 100),
@@ -4959,24 +5544,34 @@ dungeonList['Twist Mountain'] = new Dungeon('Twist Mountain',
 
 dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
     ['Dratini', 'Tranquill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Vanillish', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)', 'Beartic', 'Mienfoo', 'Mienshao', 'Druddigon', 'Golett', 'Golurk'],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Razz', weight: 3.5},
-        {loot: 'Pinap', weight: 3.5},
-        {loot: 'Draco Plate', weight: 2.5},
-        {loot: 'Zap Plate', weight: 2.5},
-        {loot: 'Flame Plate', weight: 2.5},
-        {loot: 'Icicle Plate', weight: 2},
-        {loot: 'Spooky Plate', weight: 2},
-        {loot: 'Splash Plate', weight: 2},
-        {loot: 'Iron Plate', weight: 2},
-        {loot: 'Star Piece', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('Dragonspiral Tower'))},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 2},
+            {loot: 'Razz'},
+            {loot: 'Pinap'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Draco Plate'},
+            {loot: 'Zap Plate'},
+            {loot: 'Flame Plate'},
+            {loot: 'Icicle Plate'},
+            {loot: 'Spooky Plate'},
+            {loot: 'Splash Plate'},
+            {loot: 'Iron Plate'},
+        ],
+        legendary: [
+            {loot: 'Star Piece', weight: 2},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [
+            {loot: 'Protein', requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('Dragonspiral Tower'))},
+            {loot: 'Heart Scale'},
+        ],
+    },
     5203000,
     [
         new DungeonBossPokemon('Dragonite', 48000000, 100),
@@ -5018,20 +5613,36 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
                 new GymPokemon('Politoed', 356500, 60),
             ], { weight: 1 }, 'Arnold'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Lucky_egg', weight: 4},
-        {loot: 'Greatball', weight: 3},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Revive', weight: 2},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Lum', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Moor of Icirrus'))},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Dawn_stone', weight: 0},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 3},
+            {loot: 'Lucky_egg', weight: 3},
+            {loot: 'Greatball'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [
+            {loot: 'Draco Plate'},
+            {loot: 'Zap Plate'},
+            {loot: 'Flame Plate'},
+            {loot: 'Icicle Plate'},
+            {loot: 'Spooky Plate'},
+            {loot: 'Splash Plate'},
+            {loot: 'Iron Plate'},
+        ],
+        legendary: [
+            {loot: 'Ultraball', weight: 2},
+            {loot: 'Revive', weight: 2},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [
+            {loot: 'Heart Scale'},
+            {loot: 'Max Revive'},
+            {loot: 'Lum', requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Moor of Icirrus'))},
+        ],
+    },
     5203000,
     [
         new DungeonBossPokemon('Keldeo', 50000000, 100),
@@ -5042,22 +5653,21 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
 
 dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
     ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)'],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Lucky_egg', weight: 3.75},
-        {loot: 'Ultraball', weight: 3.5},
-        {loot: 'Splash Plate', weight: 2.5},
-        {loot: 'Fist Plate', weight: 2.5},
-        {loot: 'Fire_stone', weight: 0},
-        {loot: 'Water_stone', weight: 0},
-        {loot: 'Leaf_stone', weight: 0},
-        {loot: 'Thunder_stone', weight: 0},
-        {loot: 'Linking_cord', weight: 0},
-        {loot: 'Sun_stone', weight: 0},
-        {loot: 'Soothe_bell', weight: 0},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'xAttack'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [
+            {loot: 'Splash Plate'},
+            {loot: 'Fist Plate'},
+        ],
+        legendary: [{loot: 'Ultraball'}],
+    },
     5203000,
     [new DungeonBossPokemon('Keldeo (Resolute)', 52000000, 100)],
     356500, 8);
@@ -5212,24 +5822,35 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
                 new GymPokemon('Venomoth', 356500, 60),
             ], { weight: 1 }, 'Keston', '(male)'),
     ],
-    [
-        {loot: 'Chesto', weight: 4},
-        {loot: 'Pecha', weight: 4},
-        {loot: 'Sitrus', weight: 4},
-        {loot: 'Amoonguss', weight: 3.5},
-        {loot: 'Greatball', weight: 3.5},
-        {loot: 'Meadow Plate', weight: 2.5},
-        {loot: 'Fist Plate', weight: 2.5},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'MediumRestore', weight: 1.75},
-        {loot: 'Star Piece', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Protein', weight: 0},
-        {loot: 'Lum', weight: 0, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Pinwheel Forest'))},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Chesto', weight: 2},
+            {loot: 'Pecha', weight: 2},
+            {loot: 'Sitrus', weight: 2},
+            {loot: 'Amoonguss'},
+            {loot: 'Greatball'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Meadow Plate'},
+            {loot: 'Fist Plate'},
+        ],
+        legendary: [
+            {loot: 'MediumRestore', weight: 2},
+            {loot: 'Star Piece', weight: 2},
+            {loot: 'LargeRestore'},
+            {loot: 'Ultraball'},
+            {loot: 'Nestball'},
+        ],
+        mythic: [
+            {loot: 'Max Revive'},
+            {loot: 'Lum', requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Pinwheel Forest'))},
+            {loot: 'Max Revive', requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('Pinwheel Forest'))},
+        ],
+    },
     5203000,
     [
         new DungeonBossPokemon('Scolipede', 48000000, 100),
@@ -5282,18 +5903,26 @@ dungeonList.Dreamyard = new Dungeon('Dreamyard',
                 new GymPokemon('Lickilicky', 356500, 63),
             ], { weight: 1 }, 'Rita', '(female)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Pokeball', weight: 4},
-        {loot: 'Mind Plate', weight: 2.75},
-        {loot: 'Draco Plate', weight: 2.5},
-        {loot: 'SmallRestore', weight: 2},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Revive', weight: 2},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Pokeball'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+        ],
+        epic: [
+            {loot: 'Mind Plate', weight: 2},
+            {loot: 'Draco Plate'},
+        ],
+        legendary: [
+            {loot: 'SmallRestore', weight: 2},
+            {loot: 'Ultraball', weight: 2},
+            {loot: 'Revive', weight: 2},
+            {loot: 'LargeRestore'},
+        ],
+    },
     5203000,
     [
         new DungeonBossPokemon('Audino', 48000000, 100),
@@ -5305,20 +5934,26 @@ dungeonList.Dreamyard = new Dungeon('Dreamyard',
 
 dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
     ['Scyther', 'Electrode', 'Pineco', 'Forretress', 'Metang', 'Ferroseed', 'Ferrothorn'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'xAttack', weight: 3.5},
-        {loot: 'Token_collector', weight: 3.5},
-        {loot: 'Forretress', weight: 3.25},
-        {loot: 'Iron Plate', weight: 2.75},
-        {loot: 'Insect Plate', weight: 2.75},
-        {loot: 'Zap Plate', weight: 2.5},
-        {loot: 'Revive', weight: 2},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'xAttack', weight: 2},
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Forretress'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Iron Plate', weight: 2},
+            {loot: 'Insect Plate', weight: 2},
+            {loot: 'Zap Plate'},
+        ],
+        legendary: [{loot: 'Revive'}],
+    },
     5403000,
     [
         new DungeonBossPokemon('Ursaring', 58000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
@@ -5341,7 +5976,7 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
     396500, 18);
 
 // Kalos
-// TODO: Balancing of dungeon Pokemon HP & rewards.
+
 dungeonList['Santalune Forest'] = new Dungeon('Santalune Forest',
     [
         {pokemon: 'Caterpie', options: { weight: 0.88 }},
@@ -5362,15 +5997,18 @@ dungeonList['Santalune Forest'] = new Dungeon('Santalune Forest',
             [new GymPokemon('Pikachu', 5803000, 5)],
             { weight: 1 }, 'Anna'),
     ],
-    [
-
-        {loot: 'Pokeball', weight: 4},
-        {loot: 'Lucky_incense', weight: 3.75},
-        {loot: 'Insect Plate', weight: 2.75},
-        {loot: 'Fist Plate', weight: 2.5},
-        {loot: 'SmallRestore', weight: 2},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [{loot: 'Green Shard'}],
+        epic: [
+            {loot: 'Insect Plate'},
+            {loot: 'Fist Plate'},
+        ],
+        legendary: [{loot: 'SmallRestore'}],
+    },
     5803020,
     [
         new DungeonTrainer('Lass',
@@ -5385,15 +6023,21 @@ dungeonList['Santalune Forest'] = new Dungeon('Santalune Forest',
 
 dungeonList['Parfum Palace'] = new Dungeon('Parfum Palace',
     ['Goldeen', 'Seaking', 'Magikarp', 'Gyarados', 'Corphish', 'Crawdaunt'],
-    [
-        {loot: 'Oran', weight: 4},
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Revive', weight: 2},
-        {loot: 'MediumRestore', weight: 1.75},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Red Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Oran'},
+            {loot: 'Lucky_incense'},
+            {loot: 'xAttack'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Red Shard'},
+        ],
+        legendary: [
+            {loot: 'Revive', weight: 2},
+            {loot: 'MediumRestore'},
+        ],
+    },
     6303405,
     [new DungeonBossPokemon('Furfrou', 56375930, 50)],
     445000, 6);
@@ -5404,17 +6048,25 @@ dungeonList['Connecting Cave'] = new Dungeon('Connecting Cave',
         {pokemon: 'Whismur', options: { weight: 1.33 }},
         {pokemon: 'Meditite', options: { weight: 1.33 }},
     ],
-    [
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Pokeball', weight: 3.75},
-        {loot: 'Wepear', weight: 3},
-        {loot: 'Toxic Plate', weight: 2.75},
-        {loot: 'Sky Plate', weight: 2.75},
-        {loot: 'Hard Stone', weight: 2},
-        {loot: 'Damp Rock', weight: 2},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine'},
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Wepear'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Toxic Plate'},
+            {loot: 'Sky Plate'},
+        ],
+        legendary: [
+            {loot: 'Hard Stone'},
+            {loot: 'Damp Rock'},
+        ],
+    },
     6503370,
     [
         new DungeonTrainer('Pokémon Breeder',
@@ -5447,13 +6099,17 @@ dungeonList['Glittering Cave'] = new Dungeon('Glittering Cave',
                 new GymPokemon('Electrike', 7037592, 18),
             ], { weight: 1 }, undefined, '(female)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Hard Stone', weight: 2},
-        {loot: 'Revive', weight: 2},
-        {loot: 'Red Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'xAttack'},
+        ],
+        rare: [{loot: 'Red Shard'}],
+        legendary: [
+            {loot: 'Hard Stone'},
+            {loot: 'Revive'},
+        ],
+    },
     7037500,
     [
         new DungeonTrainer('Team Flare Grunt Duo',
@@ -5510,17 +6166,26 @@ dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
                 new GymPokemon('Vespiquen', 7353000, 26),
             ], { weight: 1 }, 'Yuu & Ami'),
     ],
-    [
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Lucky_egg', weight: 4},
-        {loot: 'Fist Plate', weight: 2.75},
-        {loot: 'Earth Plate', weight: 2.75},
-        {loot: 'Mind Plate', weight: 2.75},
-        {loot: 'Revive', weight: 2},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Red Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Token_collector'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Red Shard'},
+        ],
+        epic: [
+            {loot: 'Fist Plate'},
+            {loot: 'Earth Plate'},
+            {loot: 'Mind Plate'},
+            {loot: 'Nestball'},
+        ],
+        legendary: [
+            {loot: 'Revive', weight: 2},
+            {loot: 'LargeRestore'},
+        ],
+    },
     7353000,
     [
         new DungeonTrainer('Ace Trainer',
@@ -5583,14 +6248,18 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
             [new GymPokemon('Houndoom', 7903570, 36)],
             { weight: 8 }, undefined, '(male)'),
     ],
-    [
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Zap Plate', weight: 2.75},
-        {loot: 'Dread Plate', weight: 2.5},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine'},
+            {loot: 'xAttack'},
+        ],
+        rare: [{loot: 'Yellow Shard'}],
+        epic: [
+            {loot: 'Zap Plate'},
+            {loot: 'Dread Plate'},
+        ],
+        legendary: [{loot: 'LargeRestore'}],
+    },
     7903570,
     [
         new DungeonTrainer('Team Flare Aliana',
@@ -5606,18 +6275,25 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
 
 dungeonList['Sea Spirit\'s Den'] = new Dungeon('Sea Spirit\'s Den',
     ['Lapras', 'Dwebble', 'Lanturn', 'Binacle', 'Woobat', 'Onix'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Bluk', weight: 3.75},
-        {loot: 'Flame Plate', weight: 2.75},
-        {loot: 'Sky Plate', weight: 2.75},
-        {loot: 'Icicle Plate', weight: 2.75},
-        {loot: 'Zap Plate', weight: 2.75},
-        {loot: 'Mind Plate', weight: 2.75},
-        {loot: 'Hard Stone', weight: 2},
-        {loot: 'Damp Rock', weight: 2},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick', weight: 2},
+            {loot: 'Bluk'},
+        ],
+        rare: [{loot: 'Blue Shard'}],
+        epic: [
+            {loot: 'Flame Plate'},
+            {loot: 'Sky Plate'},
+            {loot: 'Icicle Plate'},
+            {loot: 'Zap Plate'},
+            {loot: 'Mind Plate'},
+            {loot: 'Lureball'},
+        ],
+        legendary: [
+            {loot: 'Hard Stone'},
+            {loot: 'Damp Rock'},
+        ],
+    },
     7543000,
     [new DungeonBossPokemon('Lugia', 92375000, 100)],
     600000, 23);
@@ -5645,18 +6321,27 @@ dungeonList['Pokéball Factory'] = new Dungeon('Pokéball Factory',
             ],
             { weight: 4 }, undefined, '(female)'),
     ],
-    [
-        {loot: 'Pokeball', weight: 4},
-        {loot: 'Greatball', weight: 3.5},
-        {loot: 'Ultraball', weight: 2.5},
-        {loot: 'Duskball', weight: 2},
-        {loot: 'Quickball', weight: 2},
-        {loot: 'Fastball', weight: 2},
-        {loot: 'Timerball', weight: 2},
-        {loot: 'Luxuryball', weight: 2},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'Pink Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Pokeball'},
+            {loot: 'Greatball', weight: 2},
+            {loot: 'Ultraball'},
+        ],
+        rare: [
+            {loot: 'Yellow Shard'},
+            {loot: 'Pink Shard'},
+        ],
+        epic: [
+            {loot: 'Duskball'},
+            {loot: 'Quickball'},
+            {loot: 'Fastball'},
+            {loot: 'Timerball'},
+            {loot: 'Luxuryball'},
+            {loot: 'Lureball'},
+            {loot: 'Diveball'},
+            {loot: 'Repeatball'},
+        ],
+    },
     8173950,
     [
         new DungeonTrainer('Team Flare Celosia',
@@ -5703,20 +6388,27 @@ dungeonList['Lost Hotel'] = new Dungeon('Lost Hotel',
             ],
             { weight: 1 }, 'Cecile'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Trubbish', weight: 3.5},
-        {loot: 'Dread Plate', weight: 2.75},
-        {loot: 'Garbodor', weight: 2.5},
-        {loot: 'Rotom (heat)', weight: 0},
-        {loot: 'Rotom (wash)', weight: 0},
-        {loot: 'Rotom (fan)', weight: 0},
-        {loot: 'Rotom (frost)', weight: 0},
-        {loot: 'Rotom (mow)', weight: 0},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Lost Hotel'))},
-        {loot: 'Pink Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick', weight: 8},
+            {loot: 'Lucky_incense', weight: 6},
+            {loot: 'Trubbish', weight: 2},
+            {loot: 'Garbodor'},
+        ],
+        rare: [{loot: 'Pink Shard'}],
+        epic: [
+            {loot: 'Dread Plate'},
+            {loot: 'Duskball'},
+        ],
+        legendary: [
+            {loot: 'Rotom (heat)'},
+            {loot: 'Rotom (wash)'},
+            {loot: 'Rotom (fan)'},
+            {loot: 'Rotom (frost)'},
+            {loot: 'Rotom (mow)'},
+        ],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Lost Hotel'))}],
+    },
     8375300,
     [
         new DungeonTrainer('Punk Couple',
@@ -5812,21 +6504,29 @@ dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
             ],
             { weight: 1 }, undefined, '(female)'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'xClick', weight: 4},
-        {loot: 'Oran', weight: 4},
-        {loot: 'Icicle Plate', weight: 2.75},
-        {loot: 'Meadow Plate', weight: 2.5},
-        {loot: 'Insect Plate', weight: 2.25},
-        {loot: 'Iron Plate', weight: 2.25},
-        {loot: 'Duskball', weight: 2},
-        {loot: 'MediumRestore', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'xClick'},
+            {loot: 'Oran'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Icicle Plate'},
+            {loot: 'Meadow Plate'},
+            {loot: 'Insect Plate'},
+            {loot: 'Iron Plate'},
+            {loot: 'Duskball'},
+        ],
+        legendary: [
+            {loot: 'MediumRestore', weight: 2},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [{loot: 'Heart Scale'}],
+    },
     8537490,
     [
         new DungeonTrainer('Team Flare Mable',
@@ -5873,16 +6573,27 @@ dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
             [new GymPokemon('Golbat', 8739480, 50)],
             { weight: 2 }, undefined, '(male)'),
     ],
-    [
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Pixie Plate', weight: 2.75},
-        {loot: 'Dread Plate', weight: 2.75},
-        {loot: 'Sky Plate', weight: 2.75},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Team Flare Secret HQ'))},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Pink Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine'},
+            {loot: 'xAttack'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Pink Shard'},
+        ],
+        epic: [
+            {loot: 'Pixie Plate'},
+            {loot: 'Dread Plate'},
+            {loot: 'Sky Plate'},
+        ],
+        legendary: [
+            {loot: 'MediumRestore', weight: 2},
+            {loot: 'Duskball'},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}],
+    },
     8739480,
     [
         new DungeonTrainer('Team Flare Lysandre',
@@ -5948,19 +6659,27 @@ dungeonList['Terminus Cave'] = new Dungeon('Terminus Cave',
             [new GymPokemon('Hariyama', 8924330, 52)],
             { weight: 1 }, 'Ricardo'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'Pokeball', weight: 3.75},
-        {loot: 'Iron Plate', weight: 2.75},
-        {loot: 'Earth Plate', weight: 2.75},
-        {loot: 'Draco Plate', weight: 2.75},
-        {loot: 'Duskball', weight: 2},
-        {loot: 'Heat Rock', weight: 2},
-        {loot: 'Star Piece', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Pink Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack', weight: 2},
+            {loot: 'Pokeball'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Pink Shard'},
+        ],
+        epic: [
+            {loot: 'Iron Plate'},
+            {loot: 'Earth Plate'},
+            {loot: 'Draco Plate'},
+        ],
+        legendary: [
+            {loot: 'Star Piece', weight: 2},
+            {loot: 'Duskball'},
+            {loot: 'Heat Rock'},
+            {loot: 'LargeRestore'},
+        ],
+    },
     8924330,
     [
         new DungeonTrainer('Pokémon Rangers',
@@ -5974,19 +6693,26 @@ dungeonList['Terminus Cave'] = new Dungeon('Terminus Cave',
 
 dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
     ['Jigglypuff', 'Poliwhirl', 'Noctowl', 'Lombre', 'Gothorita', 'Amoonguss'],
-    [
-        {loot: 'Token_collector', weight: 4},
-        {loot: 'Rawst', weight: 3.5},
-        {loot: 'Chesto', weight: 3.5},
-        {loot: 'Garbodor', weight: 3.25},
-        {loot: 'Banette', weight: 3.25},
-        {loot: 'Aguav', weight: 3},
-        {loot: 'Wiki', weight: 3},
-        {loot: 'Pixie Plate', weight: 2.75},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Pink Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Token_collector'},
+            {loot: 'Rawst'},
+            {loot: 'Chesto'},
+            {loot: 'Aguav'},
+            {loot: 'Wiki'},
+            {loot: 'Garbodor'},
+            {loot: 'Banette'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Pink Shard'},
+        ],
+        epic: [
+            {loot: 'Pixie Plate'},
+            {loot: 'Repeatball'},
+        ],
+        legendary: [{loot: 'LargeRestore'}],
+    },
     9003000,
     [
         new DungeonBossPokemon('Ditto', 94836530, 50),
@@ -6086,26 +6812,35 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
             ],
             { weight: 1 }, 'Corwin'),
     ],
-    [
-        {loot: 'xAttack', weight: 4},
-        {loot: 'xClick', weight: 4},
-        {loot: 'Ultraball', weight: 2},
-        {loot: 'Smooth Rock', weight: 2},
-        {loot: 'Revive', weight: 2},
-        {loot: 'Duskball', weight: 2},
-        {loot: 'Hard Stone', weight: 2},
-        {loot: 'Damp Rock', weight: 2},
-        {loot: 'Star Piece', weight: 1.75},
-        {loot: 'LargeRestore', weight: 1.5},
-        {loot: 'Max Revive', weight: 0},
-        {loot: 'Protein', weight: 0, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Victory Road Kalos'))},
-        {loot: 'Heart Scale', weight: 0},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'Pink Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'xClick'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Pink Shard'},
+        ],
+        epic: [{loot: 'Pixie Plate'}],
+        legendary: [
+            {loot: 'Star Piece', weight: 2},
+            {loot: 'Ultraball'},
+            {loot: 'Smooth Rock'},
+            {loot: 'Revive'},
+            {loot: 'Duskball'},
+            {loot: 'Hard Stone'},
+            {loot: 'Damp Rock'},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [
+            {loot: 'Max Revive'},
+            {loot: 'Heart Scale'},
+            {loot: 'Protein', requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Victory Road Kalos'))},
+        ],
+    },
     9003000,
     [
         new DungeonTrainer('Ace Trainer',
@@ -6135,10 +6870,8 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
 
 //Unknown Dungeon? Contains Mewtwo.
 
-
-
 // Alola
-// TODO: Balancing of dungeon Pokemon HP & rewards.
+
 dungeonList['Trainers\' School'] = new Dungeon('Trainers\' School',
     [
         {pokemon: 'Alolan Meowth', options: { weight: 2 }},
@@ -6158,12 +6891,22 @@ dungeonList['Trainers\' School'] = new Dungeon('Trainers\' School',
         new DungeonTrainer('Rising Star',
             [new GymPokemon('Ekans', 11407338, 8)], { weight: 1 }, 'Joseph', '(male)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Pokeball'},
+            {loot: 'Oran'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Flame Plate'},
+            {loot: 'Greatball'},
+        ],
+        legendary: [{loot: 'SmallRestore'}],
+    },
     11407338,
     [
         new DungeonTrainer('Teacher',
@@ -6187,12 +6930,18 @@ dungeonList['Hau\'oli Cemetery'] = new Dungeon('Hau\'oli Cemetery',
         new DungeonTrainer('Preschooler',
             [new GymPokemon('Happiny', 11587450, 8)], { weight: 1 }, 'Malia', '(female)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [{loot: 'Spooky Plate'}],
+        legendary: [{loot: 'MediumRestore'}],
+    },
     11587450,
     [
         new DungeonBossPokemon('Drifloon', 28968625, 9),
@@ -6210,12 +6959,25 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
         new DungeonTrainer('Team Skull Grunt',
             [new GymPokemon('Drowzee', 11595673, 11)], { weight: 1 }, undefined, '(male)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Greatball'},
+            {loot: 'Meadow Plate'},
+        ],
+        legendary: [
+            {loot: 'MediumRestore'},
+            {loot: 'Revive'},
+        ],
+    },
     11595673,
     [
         new DungeonBossPokemon('Alolan Raticate', 57978365, 12),
@@ -6237,12 +6999,20 @@ dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
         new DungeonTrainer('Actor',
             [new GymPokemon('Oricorio (Pom-pom)', 11769270, 12)], { weight: 1 }, 'Meredith'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'xClick'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Greatball'},
+            {loot: 'Meadow Plate'},
+        ],
+    },
     11769270,
     [
         new DungeonBossPokemon('Flabébé (Red)', 58846350, 12),
@@ -6252,12 +7022,25 @@ dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
 
 dungeonList['Seaward Cave'] = new Dungeon('Seaward Cave',
     ['Zubat', 'Psyduck', 'Seel', 'Magikarp', 'Smoochum'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Lureball'},
+            {loot: 'Diveball'},
+        ],
+        legendary: [
+            {loot: 'MediumRestore'},
+            {loot: 'Star Piece'},
+        ],
+        mythic: [{loot: 'Max Revive'}],
+    },
     11845338,
     [
         new DungeonBossPokemon('Delibird', 59226690, 12),
@@ -6267,12 +7050,26 @@ dungeonList['Seaward Cave'] = new Dungeon('Seaward Cave',
 
 dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
     ['Zubat', 'Machop', 'Psyduck', 'Mawile', 'Roggenrola'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'xClick'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Greatball'},
+            {loot: 'MediumRestore'},
+        ],
+        legendary: [
+            {loot: 'Hard Stone'},
+            {loot: 'Ultraball'},
+            {loot: 'Star Piece'},
+        ],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Ten Carat Hill'))}],
+    },
     11897821,
     [
         new DungeonBossPokemon('Spinda', 59489105, 14),
@@ -6284,12 +7081,17 @@ dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
 
 dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
     ['Pikachu', 'Pichu', 'Plusle', 'Minun', 'Pachirisu', 'Emolga', 'Dedenne'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine'},
+            {loot: 'Cheri'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [{loot: 'Zap Plate'}],
+    },
     11952804,
     [
         new DungeonBossPokemon('Pikachu (Original cap)', 59764020, 15),
@@ -6320,12 +7122,21 @@ dungeonList['Paniola Ranch'] = new Dungeon('Paniola Ranch',
                 new GymPokemon('Magnemite', 12161328, 16),
             ], { weight: 1 }, 'Micah', '(male)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [{loot: 'Splash Plate'}],
+        legendary: [
+            {loot: 'LargeRestore'},
+            {loot: 'Oval Stone'},
+        ],
+    },
     12111328,
     [
         new DungeonBossPokemon('Tauros', 30278320, 15),
@@ -6367,11 +7178,22 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
                 new GymPokemon('Magikarp', 12138060, 16),
             ], { weight: 1 }, 'Carl'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [{loot: 'Blue Shard'}],
+        epic: [
+            {loot: 'Splash Plate'},
+            {loot: 'Diveball'},
+        ],
+        legendary: [
+            {loot: 'LargeRestore'},
+            {loot: 'Revive'},
+        ],
+        mythic: [{loot: 'Heart Scale'}],
+    },
     12138060,
     [
         new DungeonBossPokemon('Wishiwashi (School)', 60690300, 20),
@@ -6400,11 +7222,18 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
         new DungeonTrainer('Hiker',
             [new GymPokemon('Roggenrola', 12896392, 19)], { weight: 1 }, 'Calhoun'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Red Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine'},
+            {loot: 'Rawst'},
+        ],
+        rare: [{loot: 'Red Shard'}],
+        epic: [
+            {loot: 'Flame Plate'},
+            {loot: 'Quickball'},
+        ],
+        legendary: [{loot: 'LargeRestore'}],
+    },
     12896392,
     [
         new DungeonBossPokemon('Alolan Marowak', 64481960, 22),
@@ -6417,11 +7246,23 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
 
 dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
     ['Metapod', 'Paras', 'Pinsir', 'Hoothoot', 'Bonsly', 'Trumbeak', 'Fomantis', 'Bounsweet', 'Steenee', 'Comfey', 'Oranguru', 'Passimian'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'xAttack'},
+            {loot: 'Mago'},
+        ],
+        rare: [{loot: 'Green Shard'}],
+        epic: [
+            {loot: 'Meadow Plate'},
+            {loot: 'Nestball'},
+        ],
+        legendary: [
+            {loot: 'MediumRestore', weight: 2},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [{loot: 'Max Revive'}],
+    },
     13090332,
     [
         new DungeonBossPokemon('Lurantis', 65451660, 24),
@@ -6448,12 +7289,22 @@ dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
         new DungeonTrainer('Team Skull Grunt',
             [new GymPokemon('Salandit', 13215839, 23)], { weight: 1 }, undefined, '(male)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Earth Plate'},
+            {loot: 'Duskball'},
+        ],
+        legendary: [{loot: 'LargeRestore'}],
+        mythic: [{loot: 'Max Revive'}],
+    },
     13215839,
     [new DungeonBossPokemon('Larvitar', 66079195, 23)],
     930000, 8);
@@ -6478,12 +7329,21 @@ dungeonList['Memorial Hill'] = new Dungeon('Memorial Hill',
         new DungeonTrainer('Punk Girl',
             [new GymPokemon('Ariados', 13286024, 24)], { weight: 1 }, 'Melissa'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Spooky Plate'},
+            {loot: 'Duskball'},
+        ],
+        legendary: [{loot: 'LargeRestore'}],
+    },
     13286024,
     [
         new DungeonTrainer('Team Skull Grunt',
@@ -6519,12 +7379,21 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
                 new GymPokemon('Vulpix', 13483476, 28),
             ], { weight: 1 }, 'Landon and Yukiro'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Blue Shard'},
+        ],
+        epic: [
+            {loot: 'Spooky Plate'},
+            {loot: 'Luxuryball'},
+        ],
+        legendary: [{loot: 'Rare Bone'}],
+    },
     13483476,
     [
         new DungeonTrainer('Team Skull Boss',
@@ -6538,11 +7407,18 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
 
 dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
     ['Grubbin', 'Charjabug', 'Elekid', 'Electabuzz', 'Skarmory', 'Dedenne'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [{loot: 'Yellow Shard'}],
+        epic: [
+            {loot: 'Zap Plate'},
+            {loot: 'Iron Plate'},
+        ],
+        legendary: [{loot: 'Quickball'}],
+    },
     13883676,
     [
         new DungeonBossPokemon('Vikavolt', 69418380, 29),
@@ -6555,12 +7431,18 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
 
 dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
     ['Golbat', 'Gastly', 'Haunter', 'Gengar', 'Shuppet', 'Banette', 'Jellicent', 'Klefki'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+        ],
+        epic: [{loot: 'Spooky Plate'}],
+        mythic: [{loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Thrifty Megamart'))}],
+    },
     14705422,
     [
         new DungeonBossPokemon('Mimikyu', 73527110, 35),
@@ -6596,12 +7478,18 @@ dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
         new DungeonTrainer('Actor',
             [new GymPokemon('Oricorio (Baile)', 15127052, 36)], { weight: 1 }, 'Meredith'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [{loot: 'Flame Plate'}],
+        legendary: [{loot: 'Repeatball'}],
+    },
     15127052,
     [
         new DungeonBossPokemon('Floette (Red)', 75635260, 36),
@@ -6669,12 +7557,25 @@ dungeonList['Po Town'] = new Dungeon('Po Town',
                 new GymPokemon('Golbat', 15340576, 38),
             ], { weight: 1 }, undefined, '(female)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'xClick'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [
+            {loot: 'Insect Plate'},
+            {loot: 'Toxic Plate'},
+            {loot: 'Dread Plate'},
+        ],
+        legendary: [
+            {loot: 'LargeRestore'},
+            {loot: 'Max Revive'},
+        ],
+    },
     15340576,
     [
         new DungeonTrainer('Team Skull Boss',
@@ -6754,11 +7655,23 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
                 new GymPokemon('Pinsir', 15619682, 45),
             ], { weight: 1 }, 'Guzma', '(guzma)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Cyan Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Chesto'},
+        ],
+        rare: [{loot: 'Cyan Shard'}],
+        epic: [
+            {loot: 'Revive'},
+            {loot: 'Iron Ball'},
+            {loot: 'Mind Plate'},
+        ],
+        legendary: [
+            {loot: 'LargeRestore'},
+            {loot: 'Max Revive'},
+            {loot: 'Protein', requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Aether Foundation'))},
+        ],
+    },
     15619682,
     [
         new DungeonTrainer('Aether President',
@@ -6774,12 +7687,23 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
 
 dungeonList['Exeggutor Island Hill'] = new Dungeon('Exeggutor Island Hill',
     ['Exeggcute', 'Pelipper', 'Gastrodon (east)'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [
+            {loot: 'Earth Plate'},
+            {loot: 'Draco Plate'},
+            {loot: 'Meadow Plate'},
+        ],
+        legendary: [{loot: 'Revive'}],
+        mythic: [{loot: 'Heart Scale'}],
+    },
     15773066,
     [
         new DungeonBossPokemon('Pinsir', 78865330, 45),
@@ -6869,12 +7793,31 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
         new DungeonTrainer('Surfer',
             [new GymPokemon('Golduck', 15992044, 47)], { weight: 1 }, 'Joshah'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Cyan Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'xAttack'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Cyan Shard'},
+        ],
+        epic: [
+            {loot: 'Draco Plate'},
+            {loot: 'Pixie Plate'},
+            {loot: 'Duskball'},
+            {loot: 'Repeatball'},
+        ],
+        legendary: [
+            {loot: 'Star Piece'},
+            {loot: 'Max Revive'},
+        ],
+        mythic: [
+            {loot: 'Heart Scale'},
+            {loot: 'Protein', requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Aether Foundation'))},
+        ],
+    },
+
     15992044,
     [
         new DungeonBossPokemon('Kommo-o', 79960220, 49),
@@ -6885,12 +7828,18 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
 
 dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
     ['Chansey', 'Wingull', 'Pelipper', 'Spritzee', 'Swirlix', 'Cutiefly', 'Comfey', 'Dhelmise'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [{loot: 'Pixie Plate'}],
+        mythic: [{loot: 'Heart Scale'}],
+    },
     16217412,
     [
         new DungeonBossPokemon('Ribombee', 81087060, 55),
@@ -6970,15 +7919,21 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
                 new GymPokemon('Gigalith', 16212850, 65),
             ], { weight: 1 }, 'Aristo', '(male)'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'Cyan Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Cyan Shard'},
+        ],
+        epic: [{loot: 'Icicle Plate'}],
+        legendary: [{loot: 'Max Revive'}],
+    },
     16312850,
     [
         new DungeonBossPokemon('Absol', 81064250, 50),
@@ -6990,12 +7945,21 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
 
 dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and Moone',
     ['Clefairy', 'Sunkern', 'Skitty', 'Lunatone', 'Solrock', 'Helioptile'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_incense'},
+            {loot: 'Chesto'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+        ],
+        epic: [
+            {loot: 'Mind Plate', weight: 2},
+            {loot: 'Iron Plate'},
+            {loot: 'Spooky Plate'},
+        ],
+    },
     16435490,
     [
         new DungeonBossPokemon('Cosmog', 82177450, 70),
@@ -7006,12 +7970,20 @@ dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and 
 
 dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
     ['Floette (Red)', 'Comfey', 'Dedenne', 'Ampharos', 'Electabuzz'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'Cyan Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine'},
+            {loot: 'Cheri'},
+        ],
+        rare: [
+            {loot: 'Yellow Shard'},
+            {loot: 'Cyan Shard'},
+        ],
+        epic: [
+            {loot: 'Zap Plate'},
+            {loot: 'Pixie Plate'},
+        ],
+    },
     16435490,
     [
         new DungeonBossPokemon('Luxray', 82177450, 55),
@@ -7022,12 +7994,21 @@ dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
 
 dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
     ['Floette (Red)', 'Comfey', 'Gardevoir', 'Chimecho', 'Munna'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Cyan Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Dowsing_machine'},
+            {loot: 'Cheri'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Cyan Shard'},
+        ],
+        epic: [
+            {loot: 'Stone Plate'},
+            {loot: 'Mind Plate'},
+            {loot: 'Pixie Plate'},
+        ],
+    },
     16435490,
     [
         new DungeonBossPokemon('Wobbuffet', 82177450, 55),
@@ -7038,12 +8019,20 @@ dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
 
 dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
     ['Floette (Red)', 'Comfey', 'Cottonee', 'Gloom', 'Petilil'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Cyan Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Rawst'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Cyan Shard'},
+        ],
+        epic: [
+            {loot: 'Insect Plate'},
+            {loot: 'Fist Plate'},
+        ],
+    },
     16435490,
     [
         new DungeonBossPokemon('Maractus', 82177450, 55),
@@ -7054,12 +8043,20 @@ dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
 
 dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
     ['Floette (Red)', 'Comfey', 'Azumarill', 'Poliwhirl', 'Clamperl'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Cyan Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Aspear'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Cyan Shard'},
+        ],
+        epic: [
+            {loot: 'Splash Plate'},
+            {loot: 'Pixie Plate'},
+        ],
+    },
     16435490,
     [
         new DungeonBossPokemon('Lumineon', 82177450, 55),
@@ -7080,12 +8077,20 @@ dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
         new DungeonTrainer('Actor',
             [new GymPokemon('Oricorio (Sensu)', 16659968, 57)], { weight: 1 }, 'Meredith'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Aspear'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Cyan Shard'},
+        ],
+        epic: [
+            {loot: 'Splash Plate'},
+            {loot: 'Pixie Plate'},
+        ],
+    },
     16659968,
     [
         new DungeonBossPokemon('Oricorio (Sensu)', 83299840, 70),
@@ -7111,15 +8116,24 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
                 new GymPokemon('Mudsdale', 17114462, 59),
             ], { weight: 1 }, 'Travis'),
     ],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-        {loot: 'Red Shard', weight: 3},
-        {loot: 'Blue Shard', weight: 3},
-        {loot: 'Green Shard', weight: 3},
-        {loot: 'Yellow Shard', weight: 3},
-        {loot: 'Cyan Shard', weight: 3},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Pecha'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Cyan Shard'},
+        ],
+        epic: [
+            {loot: 'Dread Plate'},
+            {loot: 'Draco Plate'},
+        ],
+        legendary: [{loot: 'Star Piece'}],
+    },
     17114462,
     [
         new DungeonBossPokemon('Golbat', 85572310, 59),
@@ -7408,7 +8422,6 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
             [new GymPokemon('Kubfu', 144430560, 70)], { weight: 1 }, 'Mustard'),
     ],
     96500, 36);
-
 
 //Crown Tundra
 dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
