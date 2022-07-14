@@ -1,17 +1,14 @@
 
 class Trainer {
-
     public name: string;
-    private team: GymPokemon[];
 
     constructor(
         public trainerClass: string,
-        team: GymPokemon[],
+        private team: GymPokemon[],
         name?: string,
         public subTrainerClass?: string
     ) {
         this.name = name ? `${trainerClass} ${name}` : trainerClass;
-        this.team = team;
     }
 
     get image(): string {
