@@ -249,7 +249,8 @@ export const SpriteCredits: Credit[] = [
             'Ash Ketchum',
         ],
         // NOTES: Permission given on image page if credited.
-    }
+    },
+    {
         name: 'Pokémon Reborn\'s cass and Amethyst',
         link: 'https://www.rebornevo.com/pr/index.html/',
         resources: [
