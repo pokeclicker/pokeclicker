@@ -10,7 +10,7 @@ export default class Statistics implements Saveable {
 
     defaults: Record<string, any> = {};
 
-    selectedPokemonID = ko.observable(1);
+    selectedPokemonID = ko.observable(0);
 
     selectedBerryID = ko.observable(0).extend({ numeric: 0 });
 
