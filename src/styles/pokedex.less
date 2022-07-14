@@ -2,40 +2,28 @@
 
 @pokedexEntryBorderRadius: 6px;
 
-.pokedexEntry {
-  border-radius: @pokedexEntryBorderRadius;
-  list-style-type: none;
-  margin: 12px;
-  max-width: calc(50% - 24px);
+.pokedexEntry > td {
+    border: solid 1px #000;
+    border-style: solid none;
+    padding: 10px;
+}
 
-  img {
-    padding: 16px 0;
-  }
+.pokedexEntry > td:first-child {
+    border-left-style: solid;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: solid 1px #000;
+    border-style: solid none;
+    padding: 10px;
+}
 
-  span {
-    position: absolute;
-    color: whitesmoke;
-    background-color: rgba(0, 0, 0, 0.5);
-    left: 0;
-    right: 0;
-    font-size: 14px;
-  }
-
-  span.id::before {
-    content: '#';
-  }
-
-  span.attack::before {
-    content: 'Attack: ';
-  }
-
-  .overlay {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width:100%;
-    height: 100%;
-  }
+.pokedexEntry > td:last-child {
+    border-right-style: solid;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border: solid 1px #000;
+    border-style: solid none;
+    padding: 10px;
 }
 
 .pokemon-not-seen {
