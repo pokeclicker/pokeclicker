@@ -46,7 +46,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Plasma Frigate overworld sprite',
         ],
-        // Notes: Made specifically for PokéClicker."
+        // Notes: Made specifically for PokéClicker.
     },
     {
         name: 'DaleArwin',
@@ -88,6 +88,14 @@ export const SpriteCredits: Credit[] = [
             'Wartortle (clone)',
         ],
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
+    },
+    {
+        name: 'eugene171',
+        link: 'https://discordapp.com/users/356459678965956613',
+        resources: [
+            'Freeze Mulch',
+        ],
+        // Notes: Made specifically for PokéClicker.
     },
     {
         name: 'Gnomowladny',
