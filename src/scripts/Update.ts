@@ -721,6 +721,9 @@ class Update implements Saveable {
             // Remove the Elite_ULtraNecrozma Gym, now a temporary battle instead of a gym
             saveData.statistics.gymsDefeated.splice(88, 1);
             saveData.badgeCase.splice(88, 1);
+
+            // We now have starters for each region
+            playerData.regionStarters = [playerData.starter];
         },
 
         '0.9.6': ({ playerData, saveData }) => {
