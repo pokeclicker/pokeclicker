@@ -2,7 +2,7 @@ import TypeColor = GameConstants.TypeColor;
 
 class PokedexHelper {
     public static toggleStatisticShiny = ko.observable(true);
-    public static hideShinyImages = ko.observable(false);
+    public static showShinyImages = ko.observable(false);
 
     public static getBackgroundColors(name: PokemonNameType): string {
         const pokemon = PokemonHelper.getPokemonByName(name);
@@ -74,6 +74,11 @@ class PokedexHelper {
             // If the Pokemon shouldn't be unlocked yet
             const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
             if (nativeRegion > GameConstants.MAX_AVAILABLE_REGION || nativeRegion == GameConstants.Region.none) {
+                return false;
+            }
+
+            // If the pokemon is an alternate form or Mega, don't show
+            if (!Number.isInteger(pokemon.id) || Math.sign(pokemon.id) === -1) {
                 return false;
             }
 
@@ -157,16 +162,16 @@ class PokedexHelper {
 
     public static getImage(id: number) {
         let src = 'assets/images/';
-        if (App.game.party.alreadyCaughtPokemon(id, true) && !this.hideShinyImages()) {
+        if (App.game.party.alreadyCaughtPokemon(id, true) && this.showShinyImages()) {
             src += 'shiny';
         }
         src += `pokemon/${id}.png`;
         return src;
     }
 
-    public static getImageStatistics(id: number) {
+    public static getImageStatistics(id: number, shiny = false) {
         let src = 'assets/images/';
-        if (App.game.party.alreadyCaughtPokemon(id, true) && this.toggleStatisticShiny()) {
+        if (App.game.party.alreadyCaughtPokemon(id, true) && this.toggleStatisticShiny() && shiny) {
             src += 'shiny';
         }
         src += `pokemon/${id}.png`;
@@ -176,10 +181,31 @@ class PokedexHelper {
     private static isPureType(pokemon: PokemonListData, type: (PokemonType | null)): boolean {
         return (pokemon.type.length === 1 && (type == null || pokemon.type[0] === type));
     }
-}
 
-$(document).ready(() => {
-    $('#pokemonStatisticsModal').on('hidden.bs.modal', () => {
-        PokedexHelper.toggleStatisticShiny(true);
-    });
-});
+    public static haveAlternateForm(id: number): boolean {
+        const alternateForm = pokemonList.filter((pokemon) => {
+            if (Math.trunc(pokemon.id) === id && this.isObtainable(pokemon)) {
+                return pokemon;
+            }
+        });
+
+        return alternateForm.length > 1 ? true : false;
+    }
+
+    public static getAlternateForm(id: number) {
+        return pokemonList.filter((pokemon) => {
+            if (Math.trunc(pokemon.id) === id && !Number.isInteger(pokemon.id) && this.isObtainable(pokemon)) {
+                return pokemon;
+            }
+        });
+    }
+
+    private static isObtainable(pokemon) : boolean {
+        const unobtainable = [645.1, 642.1, 641.1, 487.1, 201.27, 201.26, 25.07];
+        //check for unobtainable, UC, Galarian form or alternate form of GOD !!!! Arceus not Omanyte
+        if (unobtainable.includes(pokemon.id) || (pokemon.id > 793 && pokemon.id < 800) || pokemon.name.includes('Galarian') || Math.trunc(pokemon.id) == 493) {
+            return false;
+        }
+        return true;
+    }
+}
