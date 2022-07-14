@@ -1,4 +1,4 @@
-<div id="pokeballSelector" class="card sortable border-secondary mb-3" data-bind="visible: player.starter() != GameConstants.Starter.None">
+<div id="pokeballSelector" class="card sortable border-secondary mb-3" data-bind="visible: player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None">
     <div class="card-header p-0" data-toggle="collapse" href="#pokeballSelectorBody">
         <span>Pokéballs</span>
     </div>
@@ -33,7 +33,7 @@
     </div>
 
     <script type="text/html" id="selectedPokeballDisplayTemplate">
-        <img class="pokeball-small clickable pokeball-selected" 
+        <img class="pokeball-small clickable pokeball-selected"
             data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.value] + '.svg'}, click: function() {App.game.pokeballs.selectedSelection($data.field); App.game.pokeballs.selectedTitle($data.title); $('#pokeballSelectorModal').modal('show')}"/>
     </script>
 
