@@ -122,21 +122,38 @@
 
         <!--The next two divs switch around on large screens. This way, battle screen/map is on top on smaller screens-->
         <!--left column-->
-        <div id="left-column" class="col-lg-3 col-md-6 order-lg-first">
+        <div class="col-lg-3 col-md-6 order-lg-first" data-bind="css: {
+            'col-lg-3': !Settings.getSetting('fullWidthContainer').observableValue() || !Settings.getSetting('fiveColumnMode').observableValue(),
+            'col-lg-4': Settings.getSetting('fullWidthContainer').observableValue() && Settings.getSetting('fiveColumnMode').observableValue(),
+        }">
+            <div class="row p-0">
+                <div id="left-column-2" class="col-12" data-bind="css: {
+                    'col-lg-12': !Settings.getSetting('fullWidthContainer').observableValue() || !Settings.getSetting('fiveColumnMode').observableValue(),
+                    'col-lg-6': Settings.getSetting('fullWidthContainer').observableValue() && Settings.getSetting('fiveColumnMode').observableValue(),
+                }"></div>
+                <div id="left-column" class="col-12" data-bind="css: {
+                    'col-lg-12': !Settings.getSetting('fullWidthContainer').observableValue() || !Settings.getSetting('fiveColumnMode').observableValue(),
+                    'col-lg-6': Settings.getSetting('fullWidthContainer').observableValue() && Settings.getSetting('fiveColumnMode').observableValue(),
+                }">
 
-            <!-- pokeball selector -->
-            @import "pokeballSelector.html"
+                    <!-- pokeball selector -->
+                    @import "pokeballSelector.html"
 
-            <!-- Battle Item container-->
-            @import "battleItemContainer.html"
+                    <!-- Battle Item container-->
+                    @import "battleItemContainer.html"
 
-            <!-- Pokémon List container-->
-            @import "pokemonListContainer.html"
+                    <!-- Pokémon List container-->
+                    @import "pokemonListContainer.html"
 
+                </div>
+            </div>
         </div>
 
         <!--Middle column-->
-        <div id="middle-column" class="col-lg-6 col-md-12 order-md-first">
+        <div id="middle-column" class="col-lg-6 col-md-12 order-md-first" data-bind="css: {
+            'col-lg-6': !Settings.getSetting('fullWidthContainer').observableValue() || !Settings.getSetting('fiveColumnMode').observableValue(),
+            'col-lg-4': Settings.getSetting('fullWidthContainer').observableValue() && Settings.getSetting('fiveColumnMode').observableValue(),
+        }">
             <div id="middle-top-sort-column">
                 <!-- Achievement Tracker -->
                 @import "achievementTrackerContainer.html"
@@ -441,19 +458,34 @@
         </div>
 
         <!--Right column-->
-        <div id="right-column" class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6" data-bind="css: {
+            'col-lg-3': !Settings.getSetting('fullWidthContainer').observableValue() || !Settings.getSetting('fiveColumnMode').observableValue(),
+            'col-lg-4': Settings.getSetting('fullWidthContainer').observableValue() && Settings.getSetting('fiveColumnMode').observableValue(),
+        }">
+            <div class="row p-0">
+                <div id="right-column" class="col-12" data-bind="css: {
+                    'col-lg-12': !Settings.getSetting('fullWidthContainer').observableValue() || !Settings.getSetting('fiveColumnMode').observableValue(),
+                    'col-lg-6': Settings.getSetting('fullWidthContainer').observableValue() && Settings.getSetting('fiveColumnMode').observableValue(),
+                }">
 
-            <!-- Oak Items -->
-            @import "oakItemsContainer.html"
+                    <!-- Oak Items -->
+                    @import "oakItemsContainer.html"
 
-            <!-- Current Quest -->
-            @import "questDisplay.html"
+                    <!-- Current Quest -->
+                    @import "questDisplay.html"
 
-            <!-- Egg Slots/Breeding-->
-            @import "breedingDisplay.html"
+                    <!-- Egg Slots/Breeding-->
+                    @import "breedingDisplay.html"
 
-            <!-- Shortcuts Menu -->
-            @import "shortcutsContainer.html"
+                    <!-- Shortcuts Menu -->
+                    @import "shortcutsContainer.html"
+                </div>
+                <div id="right-column-2" class="col-12" data-bind="css: {
+                    'col-lg-12': !Settings.getSetting('fullWidthContainer').observableValue() || !Settings.getSetting('fiveColumnMode').observableValue(),
+                    'col-lg-6': Settings.getSetting('fullWidthContainer').observableValue() && Settings.getSetting('fiveColumnMode').observableValue(),
+                }">
+                </div>
+            </div>
         </div>
 
     </div>
