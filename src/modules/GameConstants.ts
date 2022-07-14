@@ -607,11 +607,11 @@ export const EnvironmentCssClass: Record<Environment, string> = {
 };
 
 export enum Starter {
-    'None' = -1,
-    'Bulbasaur' = 0,
-    'Charmander' = 1,
-    'Squirtle' = 2,
-    'Pikachu' = 3,
+    None = -1,
+    Grass = 0,
+    Fire = 1,
+    Water = 2,
+    Special = 3,
 }
 
 export enum StoneType {

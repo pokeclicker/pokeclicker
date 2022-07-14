@@ -826,7 +826,7 @@
         , x: 10, y: 48
         , width: 6, height: 3
         , databind: "click:function(){MapHelper.moveToTown('Aspertia City')}, attr:{ class: MapHelper.calculateTownCssClass('Aspertia City') }"
-        , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+        , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Special"
         , image: "assets/images/map/blimp_empty.png"
         })
     %>
@@ -836,7 +836,7 @@
         , x: 10, y: 48
         , width: 6, height: 3
         , databind: "click:function(){MapHelper.moveToTown('Aspertia City')}, attr:{ class: MapHelper.calculateTownCssClass('Aspertia City') }"
-        , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+        , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Special"
         , image: "assets/images/map/blimp_pikachu.png"
         })
     %>

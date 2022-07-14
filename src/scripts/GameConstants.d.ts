@@ -231,11 +231,11 @@ namespace GameConstants {
     declare type Environment = keyof typeof Environments;
     declare const EnvironmentCssClass:Record<Environment, string>;
     declare enum Starter {
-        'None' = '',
-        'Bulbasaur',
-        'Charmander',
-        'Squirtle',
-        'Pikachu'
+        None = -1,
+        Grass = 0,
+        Fire = 1,
+        Water = 2,
+        Special = 3,
     }
     declare enum StoneType {
         'None',

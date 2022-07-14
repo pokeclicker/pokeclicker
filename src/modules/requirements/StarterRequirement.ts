@@ -1,10 +1,10 @@
-import { AchievementOption, Region } from '../GameConstants';
+import { AchievementOption, Region, Starter } from '../GameConstants';
 import Requirement from './Requirement';
 
 export default class StarterRequirement extends Requirement {
     region: Region;
-    constructor(region: Region, starterIndex) {
-        super(starterIndex, AchievementOption.equal);
+    constructor(region: Region, starter: Starter) {
+        super(starter, AchievementOption.equal);
         this.region = region;
     }
 
