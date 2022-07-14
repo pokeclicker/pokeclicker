@@ -108,7 +108,7 @@ class DungeonRunner {
         DungeonRunner.chestsOpened++;
 
         const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]();
-        const tier = DungeonRunner.dungeon.getRandomLootTier(clears, player.highestRegion());
+        const tier = DungeonRunner.dungeon.getRandomLootTier();
         const loot = DungeonRunner.dungeon.getRandomLoot(tier);
         let amount = loot.amount || 1;
 
