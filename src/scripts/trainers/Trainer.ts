@@ -2,7 +2,7 @@
 class Trainer {
 
     public name: string;
-    team: GymPokemon[];
+    private team: GymPokemon[];
 
     constructor(
         public trainerClass: string,
