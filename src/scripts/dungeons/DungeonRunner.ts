@@ -110,7 +110,6 @@ class DungeonRunner {
         }
 
         GameHelper.incrementObservable(DungeonRunner.chestsOpened);
-        DungeonRunner.chestsOpened++;
 
         const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]();
         const tier = DungeonRunner.dungeon.getRandomLootTier();
