@@ -7251,21 +7251,21 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
     () => DungeonGainGymBadge(GymList['Kiawe\'s Trial'], BadgeEnums.FiriumZ));
 
 dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
-[
-    {pokemon: 'Metapod', options: { weight: 1 }},
-    {pokemon: 'Paras', options: { weight: 1 }},
-    {pokemon: 'Pinsir', options: { weight: 1 }},
-    {pokemon: 'Hoothoot', options: { weight: 1 }},
-    {pokemon: 'Bonsly', options: { weight: 1 }},
-    {pokemon: 'Trumbeak', options: { weight: 1 }},
-    {pokemon: 'Fomantis', options: { weight: 1 }},
-    {pokemon: 'Bounsweet', options: { weight: 1 }},
-    {pokemon: 'Steenee', options: { weight: 1 }},
-    {pokemon: 'Comfey', options: { weight: 1 }},
-    {pokemon: 'Oranguru', options: { weight: 1 }},
-    {pokemon: 'Passimian', options: { weight: 1 }},
-    {pokemon: 'Xurkitree', options: { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 3)}},
-],    {
+    [
+        {pokemon: 'Metapod', options: { weight: 1 }},
+        {pokemon: 'Paras', options: { weight: 1 }},
+        {pokemon: 'Pinsir', options: { weight: 1 }},
+        {pokemon: 'Hoothoot', options: { weight: 1 }},
+        {pokemon: 'Bonsly', options: { weight: 1 }},
+        {pokemon: 'Trumbeak', options: { weight: 1 }},
+        {pokemon: 'Fomantis', options: { weight: 1 }},
+        {pokemon: 'Bounsweet', options: { weight: 1 }},
+        {pokemon: 'Steenee', options: { weight: 1 }},
+        {pokemon: 'Comfey', options: { weight: 1 }},
+        {pokemon: 'Oranguru', options: { weight: 1 }},
+        {pokemon: 'Passimian', options: { weight: 1 }},
+        {pokemon: 'Xurkitree', options: { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 3)}},
+    ],    {
         common: [
             {loot: 'xClick'},
             {loot: 'xAttack'},

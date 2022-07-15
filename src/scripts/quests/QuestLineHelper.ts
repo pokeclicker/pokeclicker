@@ -607,13 +607,13 @@ class QuestLineHelper {
                 });
             };
 
-            const catchUltraBeast = new CustomQuest(
-                numberCaught,
-                undefined,
+            const catchUltraBeast = new CaptureSpecificPokemonQuest(
+                ultrabeast,
                 `Find and capture the rare Ultra Beast ${numberCaught} times!\nHint: ${hint}`,
-                App.game.statistics.pokemonCaptured[pokemonMap[ultrabeast].id],
-                undefined,
-                ultraBeastUnlock
+                numberCaught,
+                false,
+                ultraBeastUnlock,
+                undefined
             );
             UltraBeastQuestLine.addQuest(catchUltraBeast);
         };
@@ -629,14 +629,16 @@ class QuestLineHelper {
 
         const GuzzlordReward = () => {
             Notifier.notify({ message: 'You caught all the Ultra Beasts!', type: NotificationConstants.NotificationOption.success });
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,50,false);
         };
 
-        const GuzzlordCatch = new CustomQuest(
-            1,
-            GuzzlordReward,
+        const GuzzlordCatch = new CaptureSpecificPokemonQuest(
+            'Guzzlord',
             'Catch Guzzlord at Resolution Cave.',
-            () => App.game.statistics.pokemonCaptured[pokemonMap.Guzzlord.id](),
-            0
+            1,
+            false,
+            GuzzlordReward,
+            undefined
         );
 
         UltraBeastQuestLine.addQuest(GuzzlordCatch);
