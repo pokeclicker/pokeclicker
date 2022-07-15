@@ -9,6 +9,28 @@
 
 const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
+//For regional evolutions, so it evolves in the respective region and not with a random chance
+const alolaOnly: Array<GameConstants.Region> = [GameConstants.Region.alola];
+const galarOnly: Array<GameConstants.Region> = [GameConstants.Region.galar];
+const allButAlola: Array<GameConstants.Region> = [
+    GameConstants.Region.kanto,
+    GameConstants.Region.johto,
+    GameConstants.Region.hoenn,
+    GameConstants.Region.sinnoh,
+    GameConstants.Region.unova,
+    GameConstants.Region.kalos,
+    GameConstants.Region.galar,
+];
+const allButGalar: Array<GameConstants.Region> = [
+    GameConstants.Region.kanto,
+    GameConstants.Region.johto,
+    GameConstants.Region.hoenn,
+    GameConstants.Region.sinnoh,
+    GameConstants.Region.unova,
+    GameConstants.Region.kalos,
+    GameConstants.Region.alola,
+];
+
 type PokemonListData = {
   id: number;
   name: PokemonNameType;
@@ -658,7 +680,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 51,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Alolan Rattata', 'Alolan Raticate', 20)],
+        'evolutions': [new NightTimedLevelEvolution('Alolan Rattata', 'Alolan Raticate', 20)],
         'base': {
             'hitpoints': 30,
             'attack': 56,
@@ -817,8 +839,8 @@ const pokemonList = createPokemonArray(
         'exp': 112,
         'eggCycles': 10,
         'evolutions': [
-            new StoneEvolution('Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone),
-            new RegionStoneEvolution(GameConstants.Region.alola, 'Pikachu', 'Alolan Raichu', GameConstants.StoneType.Thunder_stone),
+            new RegionStoneEvolution(allButAlola, 'Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone),
+            new RegionStoneEvolution(alolaOnly, 'Pikachu', 'Alolan Raichu', GameConstants.StoneType.Thunder_stone),
         ],
         'base': {
             'hitpoints': 35,
@@ -2853,8 +2875,8 @@ const pokemonList = createPokemonArray(
         'exp': 65,
         'eggCycles': 20,
         'evolutions': [
-            new StoneEvolution('Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone),
-            new RegionStoneEvolution(GameConstants.Region.alola, 'Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone),
+            new RegionStoneEvolution(allButAlola, 'Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone),
+            new RegionStoneEvolution(alolaOnly, 'Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone),
         ],
         'base': {
             'hitpoints': 60,
@@ -2909,9 +2931,8 @@ const pokemonList = createPokemonArray(
         'exp': 64,
         'eggCycles': 20,
         'evolutions': [
-            new LevelEvolution('Cubone', 'Marowak', 28),
-            // TODO: Regional restricted as well as night restricted
-            TimeRestrictedLevelEvolution(18, 6, 'Cubone', 'Alolan Marowak', 28),
+            new RegionLevelEvolution(allButAlola, 'Cubone', 'Marowak', 28),
+            new RegionNightTimedLevelEvolution(alolaOnly, 'Cubone', 'Alolan Marowak', 28),
         ],
         'base': {
             'hitpoints': 50,
@@ -3038,8 +3059,8 @@ const pokemonList = createPokemonArray(
         'exp': 68,
         'eggCycles': 20,
         'evolutions': [
-            new LevelEvolution('Koffing', 'Weezing', 35),
-            new RegionLevelEvolution(GameConstants.Region.galar, 'Koffing', 'Galarian Weezing', 35),
+            new RegionLevelEvolution(allButGalar, 'Koffing', 'Weezing', 35),
+            new RegionLevelEvolution(galarOnly, 'Koffing', 'Galarian Weezing', 35),
         ],
         'base': {
             'hitpoints': 40,
@@ -9937,8 +9958,8 @@ const pokemonList = createPokemonArray(
         'evolutions': [
             // Evolves when leveled up while knowing Mimic
             // Learns mimic at level 32
-            new LevelEvolution('Mime Jr.', 'Mr. Mime', 32),
-            new RegionLevelEvolution(GameConstants.Region.galar, 'Mime Jr.', 'Galarian Mr. Mime', 32),
+            new RegionLevelEvolution(allButGalar, 'Mime Jr.', 'Mr. Mime', 32),
+            new RegionLevelEvolution(galarOnly, 'Mime Jr.', 'Galarian Mr. Mime', 32),
         ],
         'baby': true,
         'base': {
@@ -15990,7 +16011,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 72,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Tyrunt', 'Tyrantrum', 39)],
+        'evolutions': [new DayTimedLevelEvolution('Tyrunt', 'Tyrantrum', 39)],
         'base': {
             'hitpoints': 58,
             'attack': 89,
@@ -16025,7 +16046,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 72,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Amaura', 'Aurorus', 39)],
+        'evolutions': [new NightTimedLevelEvolution('Amaura', 'Aurorus', 39)],
         'base': {
             'hitpoints': 77,
             'attack': 59,
@@ -16147,7 +16168,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 158,
         'catchRate': 45,
-        'evolutions': [new WeatherRestrictedLevelEvolution('Sliggoo', 'Goodra', 50, [WeatherType.Rain, WeatherType.Fog])],
+        'evolutions': [new WeatherRestrictedLevelEvolution('Sliggoo', 'Goodra', 50, [WeatherType.Rain, WeatherType.Fog, WeatherType.Thunderstorm])],
         'base': {
             'hitpoints': 68,
             'attack': 75,
@@ -16653,7 +16674,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 51,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Yungoos', 'Gumshoos', 20)],
+        'evolutions': [new DayTimedLevelEvolution('Yungoos', 'Gumshoos', 20)],
         'base': {
             'hitpoints': 48,
             'attack': 70,
@@ -16723,7 +16744,13 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 140,
         'catchRate': 120,
-        'evolutions': [new DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Charjabug', 'Vikavolt', 20)],
+        'evolutions': [
+            new DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Charjabug', 'Vikavolt', 20),
+            new DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Charjabug', 'Vikavolt', 20),
+            new DungeonRestrictedLevelEvolution('Chargestone Cave', 'Charjabug', 'Vikavolt', 20),
+            new DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Charjabug', 'Vikavolt', 20),
+            new DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Charjabug', 'Vikavolt', 20),
+        ],
         'base': {
             'hitpoints': 57,
             'attack': 82,
@@ -17178,7 +17205,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 50,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Fomantis', 'Lurantis', 34)],
+        'evolutions': [new DayTimedLevelEvolution('Fomantis', 'Lurantis', 34)],
         'base': {
             'hitpoints': 40,
             'attack': 55,

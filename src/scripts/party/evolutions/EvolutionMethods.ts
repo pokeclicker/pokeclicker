@@ -51,3 +51,9 @@ const RegionStoneEvolution = RegionRestricted(StoneEvolution);
 
 // new RegionLevelEvolution(region: GameConstants.Region, basePokemon: string, evolvedPokemon: string, level: number)
 const RegionLevelEvolution = RegionRestricted(LevelEvolution);
+
+// new RegionLevelEvolution(region: GameConstants.Region, basePokemon: string, evolvedPokemon: string, level: number)
+const RegionDayTimedLevelEvolution = RegionRestricted(DayTimedLevelEvolution);
+
+// new RegionLevelEvolution(region: GameConstants.Region, basePokemon: string, evolvedPokemon: string, level: number)
+const RegionNightTimedLevelEvolution = RegionRestricted(NightTimedLevelEvolution);
