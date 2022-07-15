@@ -14,18 +14,66 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
         ]),
     ],
-    [],
-    () => {
-        BagHandler.gainItem({type: ItemType.item, id: 'Fighting_egg'}, 1);
-        Notifier.notify({
-            message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo',
-            type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.Items.dungeon_item_found,
-        });
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Fighting_egg'}, 1);
+            Notifier.notify({
+                message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo',
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+            });
+        },
     }
 );
+TemporaryBattleList['Biker Goon 1'] = new TemporaryBattle(
+    'Biker Goon 1',
+    [
+        new GymPokemon('Koffing', 198477, 37),
+        new GymPokemon('Grimer', 198477, 37),
+    ],
+    'Wha... What is this kid?!',
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)]
+);
+TemporaryBattleList['Biker Goon 2'] = new TemporaryBattle(
+    'Biker Goon 2',
+    [new GymPokemon('Koffing', 396954, 38)],
+    'Stop fooling around!',
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)]
+);
+TemporaryBattleList['Biker Goon 3'] = new TemporaryBattle(
+    'Biker Goon 3',
+    [new GymPokemon('Grimer', 396954, 38)],
+    '... ... ... ... ... ...',
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)]
+);
+TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
+    'Cue Ball Paxton',
+    [
+        new GymPokemon('Koffing', 221664, 39),
+        new GymPokemon('Grimer', 221664, 39),
+    ],
+    'All right, enough! We\'ll leave like you wanted! We\'ll be happy to see the last of this boring island!',
+    [
+        new TemporaryBattleRequirement('Biker Goon 1'),
+        new TemporaryBattleRequirement('Biker Goon 2'),
+        new TemporaryBattleRequirement('Biker Goon 3'),
+    ]
+);
 
-//Kalos Temporary Battles
+// Sinnoh Temporary Battles
+TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
+    'Galactic Boss Cyrus',
+    [
+        new GymPokemon('Sneasel', 3255000, 34),
+        new GymPokemon('Golbat', 3460000, 34),
+        new GymPokemon('Murkrow', 3665000, 36),
+    ],
+    'Impressive. Your prowess is notable.',
+    [new GymBadgeRequirement(BadgeEnums.Fen)]
+);
+
+// Kalos Temporary Battles
 TemporaryBattleList.AZ = new TemporaryBattle(
     'AZ',
     [
@@ -35,9 +83,119 @@ TemporaryBattleList.AZ = new TemporaryBattle(
     ],
     'Thank you very much for battling with me. Now I finally feel free…',
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-    [],
-    () => {
-        App.game.party.gainPokemonById(670.05);
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonById(670.05);
+        },
+    }
+);
+TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
+    'Ash Ketchum Kanto',
+    [
+        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Pidgeot', 123998000, 56),
+        new GymPokemon('Bulbasaur', 123998000, 56),
+        new GymPokemon('Charizard', 123998000, 60),
+        new GymPokemon('Squirtle', 123998000, 62),
+        new GymPokemon('Muk', 123998000, 62),
+    ],
+    'That was a fun battle!',
+    [new QuestLineStartedRequirement('The new kid')],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Pallet Town',
+    }
+);
+TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
+    'Ash Ketchum Johto',
+    [
+        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Heracross', 123998000, 56),
+        new GymPokemon('Noctowl', 123998000, 56),
+        new GymPokemon('Bayleef', 123998000, 60),
+        new GymPokemon('Cyndaquil', 123998000, 62),
+        new GymPokemon('Totodile', 123998000, 62),
+    ],
+    'That was a nice rematch...',
+    [new QuestLineStepCompletedRequirement('The new kid', 0), new RouteKillRequirement(10, GameConstants.Region.johto, 48)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Cianwood City',
+    }
+);
+TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
+    'Ash Ketchum Hoenn',
+    [
+        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Swellow', 123998000, 56),
+        new GymPokemon('Grovyle', 123998000, 56),
+        new GymPokemon('Torkoal', 123998000, 62),
+        new GymPokemon('Corphish', 123998000, 60),
+        new GymPokemon('Glalie', 123998000, 62),
+    ],
+    'Are you following me?',
+    [new QuestLineStepCompletedRequirement('The new kid', 1)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Lilycove City',
+    }
+);
+TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
+    'Ash Ketchum Sinnoh',
+    [
+        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Staraptor', 123998000, 56),
+        new GymPokemon('Torterra', 123998000, 56),
+        new GymPokemon('Infernape', 123998000, 60),
+        new GymPokemon('Buizel', 123998000, 62),
+        new GymPokemon('Gible', 123998000, 62),
+    ],
+    'Please leave me alone.',
+    [new QuestLineStepCompletedRequirement('The new kid', 2), new RouteKillRequirement(10, GameConstants.Region.sinnoh, 226)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Survival Area',
+    }
+);
+TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
+    'Ash Ketchum Unova',
+    [
+        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Unfezant', 123998000, 56),
+        new GymPokemon('Snivy', 123998000, 62),
+        new GymPokemon('Pignite', 123998000, 60),
+        new GymPokemon('Oshawott', 123998000, 56),
+        new GymPokemon('Krookodile', 123998000, 62),
+    ],
+    'Stop it!',
+    [new QuestLineStepCompletedRequirement('The new kid', 3)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Mistralton City',
+    }
+);
+TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
+    'Ash Ketchum Kalos',
+    [
+        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Talonflame', 123998000, 56),
+        new GymPokemon('Hawlucha', 123998000, 56),
+        new GymPokemon('Goodra', 123998000, 60),
+        new GymPokemon('Noivern', 123998000, 62),
+        new GymPokemon('Ash Greninja', 123998000, 62),
+    ],
+    'Will you leave me alone if I give you my Greninja? I was gonna release it anyway.',
+    [new QuestLineStepCompletedRequirement('The new kid', 4)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Kiloude City',
     }
 );
 
@@ -53,9 +211,11 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     [new GymPokemon('Necrozma (Ultra)', 282601920, 60)],
     'Necrozma fled.',
     [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
-    [],
-    () => {
-        App.game.quests.getQuestLine('Mina\'s Trial').beginQuest();
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.quests.getQuestLine('Mina\'s Trial').beginQuest();
+        },
     }
 );
 TemporaryBattleList['Captain Mina'] = new TemporaryBattle(
@@ -130,6 +290,27 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
     ],
     '...',
     [new TemporaryBattleRequirement('Captain Sophocles')]
+);
+TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
+    'Ash Ketchum Alola',
+    [
+        new GymPokemon('Pikachu (Partner cap)', 182908638, 58),
+        new GymPokemon('Rowlet', 182908638, 56),
+        new GymPokemon('Incineroar', 182908638, 56),
+        new GymPokemon('Lycanroc (Dusk)', 182908638, 60),
+        new GymPokemon('Naganadel', 182908638, 62),
+        new GymPokemon('Melmetal', 182908638, 62),
+    ],
+    'Fine. I quit. Take my Pikachu.',
+    [new QuestLineCompletedRequirement('The new kid'), new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Seafolk Village',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonById(25.07);
+        },
+    }
 );
 
 //Galar Temporary Battles
@@ -239,9 +420,11 @@ TemporaryBattleList.Bede3 = new TemporaryBattle(
             new GymBadgeRequirement(BadgeEnums.Galar_Ghost),
         ]),
     ],
-    [],
-    () => {
-        App.game.quests.getQuestLine('The Darkest Day').beginQuest();
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.quests.getQuestLine('The Darkest Day').beginQuest();
+        },
     }
 );
 TemporaryBattleList.Hop6 = new TemporaryBattle(
@@ -295,10 +478,13 @@ TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     [new GymPokemon('Eternamax Eternatus', 1597800902, 60)],
     'You caught Eternatus!',
     [new TemporaryBattleRequirement('Eternatus')],
-    [],
-    () => {
-        App.game.party.gainPokemonById(890);
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonById(890);
+        },
     }
+);
 );
 TemporaryBattleList.Hop8 = new TemporaryBattle(
     'Hop8',
@@ -472,8 +658,11 @@ TemporaryBattleList.Mustard = new TemporaryBattle(
     'That was everything I hoped for and more!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
     [],
-    () => {
-        App.game.quests.getQuestLine('The Dojo\'s Armor').beginQuest();
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.quests.getQuestLine('The Dojo\'s Armor').beginQuest();
+        },
     }
 );
 TemporaryBattleList.Klara2 = new TemporaryBattle(
@@ -526,11 +715,7 @@ TemporaryBattleList.Avery3 = new TemporaryBattle(
         new GymPokemon('Galarian Slowbro', 470316225, 67),
     ],
     'Oh, I should just Imprison myself for this!',
-    [new TemporaryBattleRequirement('Klara3')],
-    [],
-    () => {
-        App.game.party.gainPokemonById(891);
-    }
+    [new TemporaryBattleRequirement('Klara3')]
 );
 TemporaryBattleList.Peony = new TemporaryBattle(
     'Peony',
@@ -541,10 +726,13 @@ TemporaryBattleList.Peony = new TemporaryBattle(
     'Gahahaaa! Look at me, takin\' a thrashin\' from a youngster like you!',
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
     [],
-    () => {
-        App.game.quests.getQuestLine('The Crown of Galar').beginQuest();
-        App.game.quests.getQuestLine('The Birds of the Dyna Tree').beginQuest();
-        App.game.quests.getQuestLine('The Ancient Golems').beginQuest();
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.quests.getQuestLine('The Crown of Galar').beginQuest();
+            App.game.quests.getQuestLine('The Birds of the Dyna Tree').beginQuest();
+            App.game.quests.getQuestLine('The Ancient Golems').beginQuest();
+        },
     }
 );
 TemporaryBattleList.Calyrex = new TemporaryBattle(
