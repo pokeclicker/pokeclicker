@@ -6888,7 +6888,20 @@ dungeonList['Delta Petalburg Woods'] = new Dungeon('Delta Petalburg Woods',
             [new GymPokemon('Nincada', 10795422, 8)],
             { weight: 1 }, 'James'),
     ],
-    [{loot: 'Token_collector', weight: 3.75}],
+    {
+        common: [
+            {loot: 'Pokeball'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [{loot: 'Green Shard'}],
+        epic: [
+            {loot: 'Meadow Plate'},
+            {loot: 'Insect Plate'},
+            {loot: 'Iron Plate'},
+            {loot: 'Greatball'},
+        ],
+        legendary: [{loot: 'SmallRestore'}],
+    },
     10795422,
     [
         new DungeonBossPokemon('Slakoth', 53977110, 10),
@@ -6908,18 +6921,55 @@ dungeonList['Delta Rusturf Tunnel'] = new Dungeon('Delta Rusturf Tunnel',
                 new GymPokemon('Machop', 10795422, 16),
             ], { weight: 1 }, 'Mike'),
     ],
-    [{loot: 'xClick', weight: 3.75}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Pokeball'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        legendary: [
+            {loot: 'Stone Plate', weight: 2},
+            {loot: 'Iron Plate', weight: 2},
+            {loot: 'Earth Plate', weight: 2},
+            {loot: 'Revive'},
+            {loot: 'Star Piece'},
+            {loot: 'Hard Stone'},
+        ],
+        mythic: [{loot: 'Heart Scale'}],
+    },
     10795422,
     [new DungeonBossPokemon('Whismur', 53977110, 10)],
     754000, 116);
 
 dungeonList['Delta Granite Cave'] = new Dungeon('Delta Granite Cave',
     ['Zubat', 'Abra', 'Geodude', 'Onix', 'Makuhita', 'Nosepass', 'Aron', 'Timburr', 'Axew'],
-    [
-        {loot: 'Pokeball', weight: 3.75},
-        {loot: 'xAttack', weight: 3.75},
-        {loot: 'Lucky_egg', weight: 3.75},
-    ],
+    {
+        common: [
+            {loot: 'Pokeball'},
+            {loot: 'xAttack'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Iron Plate'},
+            {loot: 'Earth Plate'},
+            {loot: 'Everstone'},
+            {loot: 'Revive'},
+        ],
+        legendary: [
+            {loot: 'MediumRestore'},
+            {loot: 'Star Piece'},
+            {loot: 'Hard Stone'},
+        ],
+        mythic: [{loot: 'Heart Scale'}],
+    },
     10795422,
     [
         new DungeonBossPokemon('Sableye', 53977110, 20),
@@ -6935,10 +6985,17 @@ dungeonList['Delta Granite Cave'] = new Dungeon('Delta Granite Cave',
 
 dungeonList['Delta Fiery Path'] = new Dungeon('Delta Fiery Path',
     ['Diglett', 'Machop', 'Grimer', 'Koffing', 'Slugma', 'Tyrogue', 'Numel', 'Roggenrola'],
-    [
-        {loot: 'xAttack', weight: 3.75},
-        {loot: 'Dowsing_machine', weight: 3.75},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Dowsing_machine'},
+        ],
+        rare: [{loot: 'Red Shard'}],
+        legendary: [
+            {loot: 'Flame Plate'},
+            {loot: 'Draco Plate'},
+        ],
+    },
     10795422,
     [
         new DungeonBossPokemon('Torkoal', 53977110, 20),
@@ -6975,7 +7032,24 @@ dungeonList['Delta Meteor Falls'] = new Dungeon('Delta Meteor Falls',
             [new GymPokemon('Altaria', 10795422, 47)],
             { weight: 1 }, 'Dray'),
     ],
-    [{loot: 'Lucky_incense', weight: 4}],
+    {
+        common: [
+            {loot: 'Lucky_incense', weight: 6},
+            {loot: 'Pokeball', weight: 4},
+            {loot: 'Greatball'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [
+            {loot: 'Stone Plate'},
+            {loot: 'Iron Plate'},
+            {loot: 'Sky Plate'},
+            {loot: 'Draco Plate'},
+        ],
+        legendary: [{loot: 'Star Piece'}],
+    },
     10795422,
     [
         new DungeonBossPokemon('Solrock', 53977110, 20),
@@ -7016,10 +7090,21 @@ dungeonList['Delta Jagged Pass'] = new Dungeon('Delta Jagged Pass',
                 new GymPokemon('Jigglypuff', 10795422, 23),
             ], { weight: 1 }, 'Nellie'),
     ],
-    [
-        {loot: 'xClick', weight: 3.5},
-        {loot: 'Lucky_egg', weight: 3.5},
-    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Green Shard'},
+        ],
+        epic: [{loot: 'Greatball'}],
+        legendary: [
+            {loot: 'Dread Plate'},
+            {loot: 'Stone Plate'},
+        ],
+    },
     10795422,
     [
         new DungeonTrainer('Expert',
@@ -7032,10 +7117,19 @@ dungeonList['Delta Jagged Pass'] = new Dungeon('Delta Jagged Pass',
 
 dungeonList['Delta New Mauville'] = new Dungeon('Delta New Mauville',
     ['Magnemite', 'Voltorb', 'Electrike', 'Manectric'],
-    [
-        {loot: 'Lucky_incense', weight: 4},
-        {loot: 'Voltorb', weight: 3.25},
-    ],
+    {
+        common: [
+            {loot: 'Lucky_incense', weight: 3},
+            {loot: 'Cheri', weight: 3},
+            {loot: 'Voltorb'},
+        ],
+        rare: [{loot: 'Yellow Shard'}],
+        epic: [
+            {loot: 'Razz'},
+            {loot: 'Ultraball'},
+        ],
+        legendary: [{loot: 'Zap Plate'}],
+    },
     10795422,
     [
         new DungeonBossPokemon('Magneton', 53977110, 20),
@@ -7096,10 +7190,23 @@ dungeonList['Delta Mt. Pyre'] = new Dungeon('Delta Mt. Pyre',
             [new GymPokemon('Kecleon', 10795422, 36)],
             { weight: 1 }, 'Darnell', '(male)'),
     ],
-    [
-        {loot: 'xAttack', weight: 3.75},
-        {loot: 'Lucky_incense', weight: 3.75},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Blue Shard'},
+        ],
+        epic: [{loot: 'Ultraball'}],
+        legendary: [
+            {loot: 'Spooky Plate'},
+            {loot: 'Fist Plate'},
+            {loot: 'Mind Plate'},
+        ],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Mt. Pyre'))}],
+    },
     10795422,
     [
         new DungeonBossPokemon('Shuppet', 53977110, 20),
@@ -7113,10 +7220,22 @@ dungeonList['Delta Mt. Pyre'] = new Dungeon('Delta Mt. Pyre',
 
 dungeonList['Delta Shoal Cave'] = new Dungeon('Delta Shoal Cave',
     ['Zubat', 'Golbat', 'Tentacool', 'Tentacruel', 'Dewgong', 'Magikarp', 'Delibird', 'Spheal', 'Sealeo', 'Wailmer', 'Cubchoo'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Lucky_incense', weight: 3.75},
-    ],
+    {
+        common: [
+            {loot: 'xClick', weight: 2},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [{loot: 'Ochre Shard'}],
+        legendary: [
+            {loot: 'Icicle Plate', weight: 2},
+            {loot: 'Star Piece'},
+            {loot: 'Revive'},
+        ],
+        mythic: [
+            {loot: 'Max Revive'},
+            {loot: 'Heart Scale'},
+        ],
+    },
     10795422,
     [
         new DungeonBossPokemon('Snorunt', 53977110, 20),
@@ -7128,14 +7247,40 @@ dungeonList['Delta Shoal Cave'] = new Dungeon('Delta Shoal Cave',
 
 dungeonList['Delta Cave of Origin'] = new Dungeon('Delta Cave of Origin',
     ['Zubat', 'Golbat', 'Sableye', 'Mawile'],
-    [{loot: 'xAttack', weight: 3.75}],
+    {
+        common: [{loot: 'xAttack'}],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Ochre Shard'},
+        ],
+        legendary: [{loot: 'Revive'}],
+        mythic: [
+            {loot: 'Protein', requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Cave of Origin'))},
+            {loot: 'Lum', requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Cave of Origin'))},
+        ],
+    },
     10795422,
     [new DungeonBossPokemon('Exploud', 53977110, 50)],
     754000, 126);
 
 dungeonList['Delta Sky Pillar'] = new Dungeon('Delta Sky Pillar',
     ['Golbat', 'Ariados', 'Sableye', 'Mawile', 'Swablu', 'Claydol'],
-    [{loot: 'xAttack', weight: 4}],
+    {
+        common: [
+            {loot: 'xAttack', weight: 4},
+            {loot: 'Greatball'},
+        ],
+        rare: [
+            {loot: 'Yellow Shard'},
+            {loot: 'Ochre Shard'},
+        ],
+        epic: [{loot: 'Ultraball'}],
+        legendary: [
+            {loot: 'Sky Plate'},
+            {loot: 'Mind Plate'},
+            {loot: 'Draco Plate'},
+        ],
+    },
     10795422,
     [
         new DungeonBossPokemon('Dusclops', 53977110, 50),
@@ -7208,10 +7353,25 @@ dungeonList['Delta Victory Road Hoenn'] = new Dungeon('Delta Victory Road Hoenn'
                 new GymPokemon('Primeape', 10795422, 47),
             ], { weight: 1 }, 'Aden & Finn'),
     ],
-    [
-        {loot: 'xAttack', weight: 3.75},
-        {loot: 'Lucky_egg', weight: 3.75},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Ochre Shard'},
+        ],
+        epic: [{loot: 'Ultraball'}],
+        legendary: [
+            {loot: 'Mind Plate'},
+            {loot: 'Flame Plate'},
+        ],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Victory Road Hoenn'))}],
+    },
     10795422,
     [
         new DungeonTrainer('PKMN Trainer',
@@ -7230,10 +7390,12 @@ dungeonList['Delta Victory Road Hoenn'] = new Dungeon('Delta Victory Road Hoenn'
 
 dungeonList['Marine Cave'] = new Dungeon('Marine Cave',
     ['Zubat', 'Golbat', 'Geodude', 'Graveler', 'Slugma', 'Magcargo', 'Loudred', 'Numel', 'Camerupt', 'Torkoal', 'Roggenrola', 'Boldore'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Lucky_egg'},
+        ],
+    },
     10795422,
     [
         new DungeonBossPokemon('Exploud', 53977110, 50),
@@ -7246,10 +7408,12 @@ dungeonList['Marine Cave'] = new Dungeon('Marine Cave',
 
 dungeonList['Terra Cave'] = new Dungeon('Terra Cave',
     ['Zubat', 'Golbat', 'Geodude', 'Graveler', 'Chinchou', 'Lanturn', 'Loudred', 'Wailord', 'Finneon', 'Lumineon', 'Roggenrola', 'Boldore'],
-    [
-        {loot: 'xClick', weight: 4},
-        {loot: 'Dowsing_machine', weight: 4},
-    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Lucky_egg'},
+        ],
+    },
     10795422,
     [
         new DungeonBossPokemon('Exploud', 53977110, 50),
