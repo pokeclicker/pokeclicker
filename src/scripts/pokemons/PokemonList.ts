@@ -10570,11 +10570,11 @@ const pokemonList = createPokemonArray(
         'catchRate': 45,
         'base': {
             'hitpoints': 50,
-            'attack': 50,
-            'specialAttack': 95,
-            'defense': 77,
-            'specialDefense': 77,
-            'speed': 91,
+            'attack': 65,
+            'specialAttack': 105,
+            'defense': 107,
+            'specialDefense': 107,
+            'speed': 86,
         },
     },
     {

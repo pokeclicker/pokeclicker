@@ -369,26 +369,64 @@
                         <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
                     </div>
                     <button class='btn btn-sm' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" data-toggle="popover" data-trigger="hover" data-html="true" data-title="Map Legend:"
-                    data-content="Map locations will be coloured based on the following:
-                    <br/>
-                    <br/><span>Locked:</span>
-                    <span class='float-right px-4 bg-locked'>&nbsp;</span>
-                    <br/><span>Incomplete:</span>
-                    <span class='float-right px-4 bg-incomplete'>&nbsp;</span>
-                    <br/><span>Quest at Location:</span>
-                    <span class='float-right px-4 bg-questAtLocation'>&nbsp;</span>
-                    <br/><span>Uncaught Pokemon:</span>
-                    <span class='float-right px-4 bg-uncaughtPokemon'>&nbsp;</span>
-                    <br/><span>Uncaught Shiny Pokemon and Missing Achievement:</span>
-                    <span class='float-right px-4 bg-uncaughtShinyPokemonAndMissingAchievement'>&nbsp;</span>
-                    <br/><span>Uncaught Shiny Pokemon:</span>
-                    <span class='float-right px-4 bg-uncaughtShinyPokemon'>&nbsp;</span>
-                    <br/><span>Missing Achievement:</span>
-                    <span class='float-right px-4 bg-missingAchievement'>&nbsp;</span>
-                    <br/><span>Completed:</span>
-                    <span class='float-right px-4 bg-completed'>&nbsp;</span>
-                    <br/>
-                    <br/><i>NOTE:<br/>These colors can be customized in the settings menu</i>" data-placement="bottom">ⓘ</button>
+                    data-content="
+                    <div class='row map-legend'>
+                        <div class='col-12'>
+                            Map locations will be coloured based on the following:
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Locked:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-locked'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Incomplete:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-incomplete'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Quest at Location:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-questAtLocation'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Uncaught Pokemon:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-uncaughtPokemon'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Uncaught Shiny Pokemon and Missing Achievement:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-uncaughtShinyPokemonAndMissingAchievement'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Uncaught Shiny Pokemon:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-uncaughtShinyPokemon'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Missing Achievement:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-missingAchievement'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Completed:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-completed'>&nbsp;</span>
+                        </div>
+                        <div class='col-12'>
+                            <i>NOTE: These colors can be customized in the settings menu</i>
+                        </div>
+                    </div>" 
+                    data-placement="bottom">ⓘ</button>
                     <button class='btn btn-sm' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
                     data-bind='style: { background: Weather.color() },
                         tooltip: {
