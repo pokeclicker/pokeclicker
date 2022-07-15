@@ -485,7 +485,6 @@ TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
         },
     }
 );
-);
 TemporaryBattleList.Hop8 = new TemporaryBattle(
     'Hop8',
     [
@@ -499,8 +498,11 @@ TemporaryBattleList.Hop8 = new TemporaryBattle(
     'I didn\'t expect there to be such a gap between you and me, mate...',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Slumbering Weald Shrine'))],
     [],
-    () => {
-        App.game.quests.getQuestLine('Sword and Shield').beginQuest();
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.quests.getQuestLine('Sword and Shield').beginQuest();
+        },
     }
 );
 TemporaryBattleList.Sordward1 = new TemporaryBattle(
@@ -657,7 +659,6 @@ TemporaryBattleList.Mustard = new TemporaryBattle(
     ],
     'That was everything I hoped for and more!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
-    [],
     undefined,
     {
         firstTimeRewardFunction: () => {
@@ -725,7 +726,6 @@ TemporaryBattleList.Peony = new TemporaryBattle(
     ],
     'Gahahaaa! Look at me, takin\' a thrashin\' from a youngster like you!',
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
-    [],
     undefined,
     {
         firstTimeRewardFunction: () => {
