@@ -178,6 +178,27 @@ class Party implements Feature {
         return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
     }
 
+    public gainEffortPoints(pokemon: PartyPokemon, shiny: boolean, number = GameConstants.BASE_EP_YIELD): number {
+        let EPNum = number;
+
+        if (pokemon.pokerus < GameConstants.Pokerus.Contagious) {
+            return 0;
+        }
+
+        if (App.game.multiplier.getBonus('ev') > 1) {
+            EPNum *= App.game.multiplier.getBonus('ev');
+        }
+
+        if (shiny) {
+            EPNum *= GameConstants.SHINY_EP_YIELD;
+        }
+
+        if (App.game.gameState === GameConstants.GameState.dungeon && DungeonBattle.catching()) {
+            EPNum *= GameConstants.DUNGEON_EP_YIELD;
+        }
+        return Math.floor(EPNum);
+    }
+
     public pokemonAttackObservable: KnockoutComputed<number> = ko.pureComputed(() => {
         return App.game.party.calculatePokemonAttack();
     }).extend({rateLimit: 1000});

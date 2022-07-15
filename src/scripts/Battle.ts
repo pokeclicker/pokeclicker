@@ -156,24 +156,8 @@ class Battle {
         App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(catchRoute, player.region));
         App.game.oakItems.use(OakItemType.Magic_Ball);
         App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny);
-        App.game.party.getPokemon(enemyPokemon.id).effortPoints += this.calculateEffortPoints(enemyPokemon);
-    }
-
-    public static calculateEffortPoints(enemyPokemon: BattlePokemon): number {
-        let EPNum = GameConstants.BASE_EP_YIELD;
-
-        if (!App.game.party.getPokemon(enemyPokemon.id) || App.game.party.getPokemon(enemyPokemon.id).pokerus < GameConstants.Pokerus.Contagious) {
-            return 0;
-        }
-
-        if (enemyPokemon.shiny) {
-            EPNum *= GameConstants.SHINY_EP_YIELD;
-        }
-
-        if (player.town().dungeon) {
-            return EPNum *= GameConstants.DUNGEON_EP_YIELD;
-        }
-        return EPNum;
+        const partyPokemon = App.game.party.getPokemon(enemyPokemon.id);
+        partyPokemon.effortPoints += App.game.party.gainEffortPoints(partyPokemon, enemyPokemon.shiny);
     }
 
     static gainItem() {
