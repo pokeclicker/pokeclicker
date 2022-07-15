@@ -703,4 +703,14 @@
          })
      %>
 
+     <%- include('templates/mapOverlay',
+         { name: "Ash Ketchum"
+         , x: 0, y: 21
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Ash Ketchum Johto'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Ash Ketchum Johto'] && TemporaryBattleList['Ash Ketchum Johto'].isVisible()"
+         , image: "assets/images/map/ashketchumoverworld.png"
+         })
+    %>
+
 </g>

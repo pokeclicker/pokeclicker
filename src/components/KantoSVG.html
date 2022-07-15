@@ -670,6 +670,16 @@
             , image: "assets/images/map/professor_oak.png"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Ash Ketchum"
+            , x: 18, y: 33
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Ash Ketchum Kanto'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Ash Ketchum Kanto'] && TemporaryBattleList['Ash Ketchum Kanto'].isVisible()"
+            , image: "assets/images/map/ashketchumoverworld.png"
+            })
+        %>
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
