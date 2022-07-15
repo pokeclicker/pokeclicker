@@ -8149,7 +8149,12 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
 
 dungeonList['Slumbering Weald Shrine'] = new Dungeon('Slumbering Weald Shrine',
     ['Galarian Stunfisk', 'Munna', 'Butterfree', 'Orbeetle', 'Whiscash', 'Barboach', 'Magikarp'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     27009504,
     [
         new DungeonBossPokemon('Corviknight', 135047520, 60),
@@ -8185,7 +8190,12 @@ dungeonList['Galar Mine'] = new Dungeon('Galar Mine',
             [new GymPokemon('Rolycoly', 20767840, 14)],
             { weight: 1 }, 'Russell', '(male)'),
     ],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     20767840,
     [new DungeonBossPokemon('Carkol', 103839200, 18)],
     96500, 12);
@@ -8226,7 +8236,12 @@ dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
             ],
             { weight: 1 }, 'Vincent'),
     ],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     21294640,
     [
         new DungeonBossPokemon('Galarian Stunfisk', 106473200, 25),
@@ -8259,7 +8274,12 @@ dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
             [new GymPokemon('Galarian Stunfisk', 26400842, 49)],
             { weight: 1 }, 'Justin'),
     ],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     26400842,
     [
         new DungeonTrainer('Macro Cosmos',
@@ -8276,7 +8296,12 @@ dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
 
 dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
     ['Steelix', 'Mawile', 'Bronzong', 'Durant', 'Bisharp', 'Doublade', 'Golisopod', 'Galarian Stunfisk', 'Sirfetch\'d'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     26704124,
     [
         new DungeonTrainer('Macro Cosmos',
@@ -8324,7 +8349,12 @@ dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
             [new GymPokemon('Kirlia', 23764848, 34)],
             { weight: 1 }, 'Jacqueline'),
     ],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     23764848,
     [
         new DungeonBossPokemon('Hattrem', 118824240, 36),
@@ -8336,7 +8366,12 @@ dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
 
 dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
     ['Gurdurr', 'Ferrothorn', 'Klang', 'Meowstic', 'Barbaracle', 'Applin', 'Hattrem', 'Qwilfish', 'Hitmonlee', 'Hitmonchan', 'Koffing'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     22923210,
     [
         new DungeonBossPokemon('Gigalith', 114616050, 60),
@@ -8350,14 +8385,24 @@ dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
 //Isle of Armor
 dungeonList['Warm-Up Tunnel'] = new Dungeon('Warm-Up Tunnel',
     ['Sandshrew', 'Cubone', 'Torkoal'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     28252100,
     [new DungeonBossPokemon('Kangaskhan', 141260500, 60)],
     96500, 38);
 
 dungeonList['Courageous Cavern'] = new Dungeon('Courageous Cavern',
     ['Pincurchin', 'Dwebble', 'Crustle', 'Swoobat', 'Magikarp', 'Shellder', 'Cloyster', 'Tentacool', 'Clobbopus', 'Chewtle', 'Tentacruel', 'Whiscash'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     26704124,
     [
         new DungeonBossPokemon('Golisopod', 133520620, 60),
@@ -8368,7 +8413,12 @@ dungeonList['Courageous Cavern'] = new Dungeon('Courageous Cavern',
 
 dungeonList['Brawlers Cave'] = new Dungeon('Brawlers Cave',
     ['Whismur', 'Woobat', 'Azurill', 'Lickitung', 'Loudred', 'Swoobat', 'Golduck', 'Poliwag', 'Barboach', 'Whiscash', 'Chansey', 'Psyduck'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     27009504,
     [
         new DungeonBossPokemon('Gigalith', 135047520, 60),
@@ -8392,7 +8442,12 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
             [new GymPokemon('Krokorok', 28886112, 68)],
             { weight: 1 }, 'Student'),
     ],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     28886112,
     [
         new DungeonTrainer('Dojo Master',
@@ -8415,7 +8470,12 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
             [new GymPokemon('Poliwhirl', 28886112, 68)],
             { weight: 1 }, 'Student'),
     ],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     28886112,
     [
         new DungeonTrainer('Dojo Master',
@@ -8426,7 +8486,12 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
 //Crown Tundra
 dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
     ['Zubat', 'Carbink', 'Piloswine', 'Deino', 'Larvitar', 'Riolu', 'Audino', 'Golbat', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Magikarp', 'Omanyte', 'Kabuto', 'Feebas'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     32184888,
     [
         new DungeonBossPokemon('Kabutops', 160924440, 60),
@@ -8439,7 +8504,12 @@ dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
 
 dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
     ['Stonjourner', 'Rhyperior', 'Aerodactyl', 'Aggron', 'Coalossal', 'Barbaracle', 'Gigalith', 'Crustle'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     31507840,
     [
         new DungeonBossPokemon('Relicanth', 149662240, 60),
@@ -8449,7 +8519,12 @@ dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
 
 dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
     ['Bronzong', 'Duraludon', 'Copperajah', 'Corviknight', 'Perrserker', 'Bisharp', 'Ferrothorn', 'Excadrill'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     31507840,
     [
         new DungeonBossPokemon('Metagross', 149662240, 60),
@@ -8459,7 +8534,12 @@ dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
 
 dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
     ['Cryogonal', 'Beartic', 'Galarian Darumaka', 'Aurorus', 'Weavile', 'Vanilluxe', 'Froslass', 'Delibird'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     31507840,
     [
         new DungeonBossPokemon('Glalie', 149662240, 60),
@@ -8469,7 +8549,12 @@ dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
 
 dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
     ['Electabuzz', 'Drakloak', 'Cryogonal', 'Bronzong', 'Stonjourner', 'Galvantula', 'Altaria', 'Relicanth', 'Glalie', 'Metagross'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     32870660,
     [
         new DungeonBossPokemon('Dragapult', 156135635, 60),
@@ -8481,7 +8566,12 @@ dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
 
 dungeonList['Lakeside Cave'] = new Dungeon('Lakeside Cave',
     ['Zubat', 'Aron', 'Carbink', 'Carkol', 'Ferroseed', 'Mawile', 'Sableye', 'Audino', 'Lairon'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     33216830,
     [
         new DungeonBossPokemon('Noivern', 166608415, 60),
@@ -8492,14 +8582,24 @@ dungeonList['Lakeside Cave'] = new Dungeon('Lakeside Cave',
 
 dungeonList['Dyna Tree Hill'] = new Dungeon('Dyna Tree Hill',
     ['Magmar', 'Absol', 'Beartic', 'Cryogonal', 'Dubwool', 'Glalie', 'Clefable'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     33216830,
     [new DungeonBossPokemon('Greedent', 166608415, 60)],
     96500, 53);
 
 dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
     ['Zubat', 'Aron', 'Carbink', 'Carkol', 'Ferroseed', 'Mawile', 'Sableye', 'Audino', 'Lairon'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     33565196,
     [
         new DungeonBossPokemon('Noivern', 167825980, 60),
@@ -8509,7 +8609,12 @@ dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
     96500, 54);
 dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
     ['Dhelmise', 'Hatterene', 'Reuniclus', 'Mr. Rime', 'Mamoswine', 'Roserade'],
-    [{loot: 'xClick', weight: 4}, {loot: 'Dowsing_machine', weight: 4}],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Dowsing_machine'},
+        ],
+    },
     33915762,
     [
         new DungeonBossPokemon('Galarian Rapidash', 161099869, 60),
