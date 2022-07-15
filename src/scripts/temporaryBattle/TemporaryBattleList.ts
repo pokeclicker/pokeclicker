@@ -497,7 +497,6 @@ TemporaryBattleList.Hop8 = new TemporaryBattle(
     ],
     'I didn\'t expect there to be such a gap between you and me, mate...',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Slumbering Weald Shrine'))],
-    [],
     undefined,
     {
         firstTimeRewardFunction: () => {
