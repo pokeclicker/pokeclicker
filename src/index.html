@@ -113,7 +113,7 @@
 @import "templates/eggSVGTemplate.html"
 @import "templates/multiOptionTemplate.html"
 
-<div id="game" class="container loading" data-bind="css: {'container': !Settings.getSetting('fullWidthContainer').observableValue(), 'container-fluid': Settings.getSetting('fullWidthContainer').observableValue()}">
+<div id="game" class="container loading" data-bind="css: {'container': Settings.getSetting('gameDisplayStyle').observableValue() === 'standard3', 'container-fluid': Settings.getSetting('gameDisplayStyle').observableValue() !== 'standard3'}">
     <div class="row justify-content-center">
         <!--The id title is needed for a default marker for money animation to display when not in a wild battle where the playerMoney span is not visible-->
         <h1 id="gameTitle">PokéClicker</h1>
@@ -123,17 +123,17 @@
         <!--The next two divs switch around on large screens. This way, battle screen/map is on top on smaller screens-->
         <!--left column-->
         <div class="col-lg-3 col-md-6 order-lg-first" data-bind="css: {
-            'col-lg-3': !Settings.getSetting('fullWidthContainer').observableValue() || !Settings.getSetting('fiveColumnMode').observableValue(),
-            'col-lg-4': Settings.getSetting('fullWidthContainer').observableValue() && Settings.getSetting('fiveColumnMode').observableValue(),
+            'col-lg-3': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+            'col-lg-4': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
         }">
             <div class="row p-0">
                 <div id="left-column-2" class="col-12" data-bind="css: {
-                    'col-lg-12': !Settings.getSetting('fullWidthContainer').observableValue() || !Settings.getSetting('fiveColumnMode').observableValue(),
-                    'col-lg-6': Settings.getSetting('fullWidthContainer').observableValue() && Settings.getSetting('fiveColumnMode').observableValue(),
+                    'col-lg-12': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+                    'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
                 }"></div>
                 <div id="left-column" class="col-12" data-bind="css: {
-                    'col-lg-12': !Settings.getSetting('fullWidthContainer').observableValue() || !Settings.getSetting('fiveColumnMode').observableValue(),
-                    'col-lg-6': Settings.getSetting('fullWidthContainer').observableValue() && Settings.getSetting('fiveColumnMode').observableValue(),
+                    'col-lg-12': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+                    'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
                 }">
 
                     <!-- pokeball selector -->
@@ -151,8 +151,8 @@
 
         <!--Middle column-->
         <div id="middle-column" class="col-lg-6 col-md-12 order-md-first" data-bind="css: {
-            'col-lg-6': !Settings.getSetting('fullWidthContainer').observableValue() || !Settings.getSetting('fiveColumnMode').observableValue(),
-            'col-lg-4': Settings.getSetting('fullWidthContainer').observableValue() && Settings.getSetting('fiveColumnMode').observableValue(),
+            'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+            'col-lg-4': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
         }">
             <div id="middle-top-sort-column">
                 <!-- Achievement Tracker -->
@@ -459,13 +459,13 @@
 
         <!--Right column-->
         <div class="col-lg-3 col-md-6" data-bind="css: {
-            'col-lg-3': !Settings.getSetting('fullWidthContainer').observableValue() || !Settings.getSetting('fiveColumnMode').observableValue(),
-            'col-lg-4': Settings.getSetting('fullWidthContainer').observableValue() && Settings.getSetting('fiveColumnMode').observableValue(),
+            'col-lg-3': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+            'col-lg-4': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
         }">
             <div class="row p-0">
                 <div id="right-column" class="col-12" data-bind="css: {
-                    'col-lg-12': !Settings.getSetting('fullWidthContainer').observableValue() || !Settings.getSetting('fiveColumnMode').observableValue(),
-                    'col-lg-6': Settings.getSetting('fullWidthContainer').observableValue() && Settings.getSetting('fiveColumnMode').observableValue(),
+                    'col-lg-12': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+                    'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
                 }">
 
                     <!-- Oak Items -->
@@ -481,8 +481,8 @@
                     @import "shortcutsContainer.html"
                 </div>
                 <div id="right-column-2" class="col-12" data-bind="css: {
-                    'col-lg-12': !Settings.getSetting('fullWidthContainer').observableValue() || !Settings.getSetting('fiveColumnMode').observableValue(),
-                    'col-lg-6': Settings.getSetting('fullWidthContainer').observableValue() && Settings.getSetting('fiveColumnMode').observableValue(),
+                    'col-lg-12': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+                    'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
                 }">
                 </div>
             </div>
