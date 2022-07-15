@@ -593,8 +593,10 @@ class QuestLineHelper {
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anabel')](),
             0
         );
-
         UltraBeastQuestLine.addQuest(AnabelBattle);
+
+        const talkToAnabel = new TalkToNPCQuest(RoadsideMotelAnabel, 'Talk to Anabel at the Roadside Motel to learn about Beast Balls.');
+        UltraBeastQuestLine.addQuest(talkToAnabel);
 
         const createUltraBeastQuest = (ultrabeast: PokemonNameType, hint: string, numberCaught: number) => {
 
