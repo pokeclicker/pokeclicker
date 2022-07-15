@@ -517,6 +517,40 @@ class QuestLineHelper {
         App.game.quests.questLines().push(vivillonQuestLine);
     }
 
+    public static createAshKetchumQuestLine() {
+        const ashKetchumQuestLine = new QuestLine('The new kid', 'A new kid from your home town is making waves. Show him who is the real progidy of Pallet.');
+
+        const clearKantoAsh = new CustomQuest(1, 0, 'Defeat Ash Ketchum near Pallet Town.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kanto')]());
+        ashKetchumQuestLine.addQuest(clearKantoAsh);
+
+        const clearJohtoAsh = new CustomQuest(1, 0, 'He\'s not stopping. Find the kid in Johto.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Johto')]());
+        ashKetchumQuestLine.addQuest(clearJohtoAsh);
+
+        const clearHoennAsh = new CustomQuest(1, 0, 'He just will not learn his lesson. Defeat Ash Ketchum in Hoenn.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Hoenn')]());
+        ashKetchumQuestLine.addQuest(clearHoennAsh);
+
+        const clearSinnohAsh = new CustomQuest(1, 0, 'Who does he think he is anyway? Pretending he\'s the main character. He\'s in Sinnoh now.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Sinnoh')]());
+        ashKetchumQuestLine.addQuest(clearSinnohAsh);
+
+        const clearUnovaAsh = new CustomQuest(1, 0, 'The kid is hiding in Unova!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Unova')]());
+        ashKetchumQuestLine.addQuest(clearUnovaAsh);
+
+        const AshKetchumReward = () => {
+            App.game.party.gainPokemonById(658.01);
+            Notifier.notify({
+                title: ashKetchumQuestLine.name,
+                message: 'You obtained Ash Greninja!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearKalosAsh = new CustomQuest(1, AshKetchumReward, 'One more time! Battle him into submission in Kalos!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kalos')]());
+        ashKetchumQuestLine.addQuest(clearKalosAsh);
+
+        App.game.quests.questLines().push(ashKetchumQuestLine);
+    }
+
     // Alola QuestLines
     public static createSkullAetherAlolaQuestLine() {
         const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
@@ -870,6 +904,7 @@ class QuestLineHelper {
         this.createGalacticSinnohQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createVivillonQuestLine();
+        this.createAshKetchumQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
         this.createDarkestDayQuestLine();
