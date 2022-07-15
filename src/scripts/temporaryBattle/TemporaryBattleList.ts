@@ -61,7 +61,7 @@ TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
     ]
 );
 
-// Sinnoh Temporarybattles
+// Sinnoh Temporary Battles
 TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
     'Galactic Boss Cyrus',
     [
@@ -420,9 +420,11 @@ TemporaryBattleList.Bede3 = new TemporaryBattle(
             new GymBadgeRequirement(BadgeEnums.Galar_Ghost),
         ]),
     ],
-    [],
-    () => {
-        App.game.quests.getQuestLine('The Darkest Day').beginQuest();
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.quests.getQuestLine('The Darkest Day').beginQuest();
+        },
     }
 );
 TemporaryBattleList.Hop6 = new TemporaryBattle(
@@ -476,10 +478,13 @@ TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     [new GymPokemon('Eternamax Eternatus', 1597800902, 60)],
     'You caught Eternatus!',
     [new TemporaryBattleRequirement('Eternatus')],
-    [],
-    () => {
-        App.game.party.gainPokemonById(890);
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonById(890);
+        },
     }
+);
 );
 TemporaryBattleList.Hop8 = new TemporaryBattle(
     'Hop8',
@@ -653,8 +658,11 @@ TemporaryBattleList.Mustard = new TemporaryBattle(
     'That was everything I hoped for and more!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
     [],
-    () => {
-        App.game.quests.getQuestLine('The Dojo\'s Armor').beginQuest();
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.quests.getQuestLine('The Dojo\'s Armor').beginQuest();
+        },
     }
 );
 TemporaryBattleList.Klara2 = new TemporaryBattle(
@@ -707,11 +715,7 @@ TemporaryBattleList.Avery3 = new TemporaryBattle(
         new GymPokemon('Galarian Slowbro', 470316225, 67),
     ],
     'Oh, I should just Imprison myself for this!',
-    [new TemporaryBattleRequirement('Klara3')],
-    [],
-    () => {
-        App.game.party.gainPokemonById(891);
-    }
+    [new TemporaryBattleRequirement('Klara3')]
 );
 TemporaryBattleList.Peony = new TemporaryBattle(
     'Peony',
@@ -722,10 +726,13 @@ TemporaryBattleList.Peony = new TemporaryBattle(
     'Gahahaaa! Look at me, takin\' a thrashin\' from a youngster like you!',
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
     [],
-    () => {
-        App.game.quests.getQuestLine('The Crown of Galar').beginQuest();
-        App.game.quests.getQuestLine('The Birds of the Dyna Tree').beginQuest();
-        App.game.quests.getQuestLine('The Ancient Golems').beginQuest();
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.quests.getQuestLine('The Crown of Galar').beginQuest();
+            App.game.quests.getQuestLine('The Birds of the Dyna Tree').beginQuest();
+            App.game.quests.getQuestLine('The Ancient Golems').beginQuest();
+        },
     }
 );
 TemporaryBattleList.Calyrex = new TemporaryBattle(
