@@ -1374,6 +1374,15 @@
         })
     %>
 
+    <!--Team Galactic HQ-->
+    <%- include('templates/mapDungeon',
+        { name: "Team Galactic HQ"
+        , x: 64, y: 29
+        , height: 4, width: 9
+        ,invisible: true
+        })
+    %>
+
     <!--Fullmoon Island-->
     <%- include('templates/mapDungeon',
         { name: "Fullmoon Island"
@@ -1693,5 +1702,15 @@
         , image: "assets/images/map/seabreak_path.png"
         })
     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Ash Ketchum"
+         , x: 70, y: 3
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Ash Ketchum Sinnoh'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Ash Ketchum Sinnoh'] && TemporaryBattleList['Ash Ketchum Sinnoh'].isVisible()"
+         , image: "assets/images/map/ashketchumoverworld.png"
+         })
+     %>
 
 </g>

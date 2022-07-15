@@ -152,7 +152,7 @@ class Plot implements Saveable {
                 tooltip.push(`<u>${BerryType[this.berry]}</u>`);
 
                 // Petaya Effect
-                if (App.game.farming.berryInFarm(BerryType.Petaya) && this.berry !== BerryType.Petaya && this.stage() == PlotStage.Berry) {
+                if (App.game.farming.berryInFarm(BerryType.Petaya, PlotStage.Berry, true) && this.berry !== BerryType.Petaya && this.stage() == PlotStage.Berry) {
                     tooltip.push('∞ until death');
                 // Normal Time
                 } else {
@@ -195,7 +195,7 @@ class Plot implements Saveable {
 
             // Aura
 
-            if (this.stage() >= PlotStage.Taller && this.berryData.aura) {
+            if (this.stage() >= PlotStage.Taller && this.berryData.aura && this.mulch !== MulchType.Freeze_Mulch) {
                 const berryAuraValue = this.berryData.aura.getAuraValue(this.stage());
                 const lumAuraValue = this._auras[AuraType.Boost]();
                 tooltip.push('<u>Aura Emitted:</u>');
@@ -237,7 +237,7 @@ class Plot implements Saveable {
             this.age += growthTime;
 
             // Checking for Petaya Berries
-            if (App.game.farming.berryInFarm(BerryType.Petaya) && this.berry !== BerryType.Petaya) {
+            if (App.game.farming.berryInFarm(BerryType.Petaya, PlotStage.Berry, true) && this.berry !== BerryType.Petaya) {
                 this.age = Math.min(this.age, this.berryData.growthTime[3] + 1);
             }
 
@@ -390,12 +390,11 @@ class Plot implements Saveable {
      * Gets the growth multiplier for this plot
      */
     getGrowthMultiplier(): number {
-        let multiplier = 1;
-        if (this.mulch === MulchType.Boost_Mulch) {
-            multiplier = GameConstants.BOOST_MULCH_MULTIPLIER;
-        } else if (this.mulch === MulchType.Amaze_Mulch) {
-            multiplier =  GameConstants.AMAZE_MULCH_GROWTH_MULTIPLIER;
-        }
+        let multiplier = {
+            [MulchType.Boost_Mulch]: GameConstants.BOOST_MULCH_MULTIPLIER,
+            [MulchType.Amaze_Mulch]: GameConstants.AMAZE_MULCH_GROWTH_MULTIPLIER,
+            [MulchType.Freeze_Mulch]: GameConstants.FREEZE_MULCH_MULTIPLIER,
+        }[this.mulch] ?? 1;
 
         multiplier *= this._auras[AuraType.Growth]();
 
@@ -487,7 +486,7 @@ class Plot implements Saveable {
     }
 
     emitAura(index: number): void {
-        if (this.berry === BerryType.None) {
+        if (this.berry === BerryType.None || this.mulch === MulchType.Freeze_Mulch) {
             return;
         }
         this.berryData.aura?.emitAura(index);

@@ -7,7 +7,7 @@
                 <h5 class="modal-title text-light">
                     <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true) && PokedexHelper.toggleStatisticShiny() ? '-shiny' : ''}.svg`}, click: () => PokedexHelper.toggleStatisticShiny(!PokedexHelper.toggleStatisticShiny())"/>
                 </h5>
-                <h5 class="modal-title text-light">
+                <h5 class="modal-title text-light" data-bind="if: App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus">
                     <img width="18px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus]}.png`}"/>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
