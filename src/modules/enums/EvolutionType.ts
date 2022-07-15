@@ -4,6 +4,7 @@ enum EvolutionType {
     Timed,
     Location,
     Environment,
+    Weather,
     Other,
 }
 

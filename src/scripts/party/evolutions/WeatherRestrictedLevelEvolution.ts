@@ -6,7 +6,7 @@ class WeatherRestrictedLevelEvolution extends LevelEvolution {
         public weather: WeatherType[]
     ) {
         super(basePokemon, evolvedPokemon, level);
-        this.type.push(EvolutionType.Other);
+        this.type.push(EvolutionType.Weather);
     }
 
     isSatisfied(): boolean {
