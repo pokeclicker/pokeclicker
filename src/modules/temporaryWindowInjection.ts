@@ -114,6 +114,7 @@ import Achievement from './achievements/Achievement';
 import Gems from './gems/Gems';
 import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequirement';
 import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompletedRequirement';
+import QuestLineStartedRequirement from './requirements/QuestLineStartedRequirement';
 import TemporaryBattleRequirement from './requirements/TemporaryBattleRequirement';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
@@ -237,6 +238,7 @@ Object.assign(<any>window, {
     Gems,
     QuestLineCompletedRequirement,
     QuestLineStepCompletedRequirement,
+    QuestLineStartedRequirement,
     TemporaryBattleRequirement,
     DayOfWeekRequirement,
     SaveReminder,
