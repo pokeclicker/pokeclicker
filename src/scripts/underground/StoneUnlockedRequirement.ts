@@ -1,17 +1,24 @@
 ///<reference path="../../declarations/requirements/Requirement.d.ts"/>
 
 class StoneUnlockedRequirement extends Requirement {
+    stone: EvolutionStone;
+
     constructor(stoneType: GameConstants.StoneType, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
         const stone = ItemList[GameConstants.StoneType[stoneType]] as EvolutionStone;
-        let requiredRegion = GameConstants.Region.kanto;
-        if (stone) {
-            requiredRegion = stone.unlockedRegion;
-        }
+        const requiredRegion = stone?.unlockedRegion ?? GameConstants.Region.none;
         super(requiredRegion, option);
+        this.stone = stone;
     }
 
     public getProgress() {
         return Math.min(player.highestRegion(), this.requiredValue);
+    }
+
+    public isCompleted(): boolean {
+        if (!this.stone) {
+            return true;
+        }
+        return this.stone.unlockedRegion <= player.highestRegion();
     }
 
     public hint(): string {

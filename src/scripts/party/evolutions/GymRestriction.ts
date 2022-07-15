@@ -7,6 +7,7 @@ function ByGym<EvoClass extends MinimalEvo>(Base: EvoClass) {
         constructor(...args: any[]) {
             const [town, ...rest] = args;
             super(...rest);
+            this.type.push(EvolutionType.Gym);
             this.town = town;
         }
 
@@ -29,4 +30,4 @@ function GymRestricted<T extends Constructor<any>>(Base: T): GymRestrictedT<T> {
     return LocationRestricted(ByGym(Base));
 }
 
-const AnyGymRestricted = restrictEvoWith(() => App.game.gameState == GameConstants.GameState.gym, EvolutionType.Location);
+const AnyGymRestricted = restrictEvoWith(() => App.game.gameState == GameConstants.GameState.gym, EvolutionType.Gym);
