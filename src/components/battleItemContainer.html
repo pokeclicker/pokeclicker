@@ -71,9 +71,9 @@
     <div data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
         <button type="button" class="btn btn-sm btn-primary"
                 style="position: absolute; left: 0px; width: auto; height: 41px"
-                onclick="ItemHandler.activateAllFlutes()"
-                oncontextmenu="ItemHandler.deactivateAllFlutes(); return false"
-                title="Enable all Flutes"
+                onclick="ItemHandler.useAllFlutes(true)"
+                oncontextmenu="ItemHandler.useAllFlutes(false); return false"
+                title="Activate/Deactivate all Flutes"
                 data-toggle="popover"
                 data-html="true"
                 data-content="Left/right click to deactivate/activate all Flutes at once"

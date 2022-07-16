@@ -31,21 +31,13 @@ class ItemHandler {
         });
     }
 
-    public static activateAllFlutes() {
-        GameHelper.chunk(6, Object.keys(ItemList).filter(i => ItemList[i].constructor.name == 'FluteItem')).forEach((item,index) => {
-            item.forEach((x) => {
-                if (this.hasItem(x) && !FluteEffectRunner.isActive(GameConstants.FluteItemType[x])()) {
-                    ItemHandler.useItem(x);
-                }
-            });
-        });
-    }
-
-    public static deactivateAllFlutes() {
-        GameHelper.chunk(6, Object.keys(ItemList).filter(i => ItemList[i].constructor.name == 'FluteItem')).forEach((item,index) => {
-            item.forEach((x) => {
-                if (FluteEffectRunner.isActive(GameConstants.FluteItemType[x])()) {
-                    ItemHandler.useItem(x);
+    public static useAllFlutes(enable: boolean) {
+        GameHelper.chunk(6, Object.keys(ItemList).filter(i => ItemList[i].constructor.name == 'FluteItem')).forEach((items,index) => {
+            items.forEach((item) => {
+                if (enable && this.hasItem(item) && !FluteEffectRunner.isActive(GameConstants.FluteItemType[item])()) {
+                    ItemHandler.useItem(item);
+                } else if (!enable && FluteEffectRunner.isActive(GameConstants.FluteItemType[item])()) {
+                    ItemHandler.useItem(item);
                 }
             });
         });
