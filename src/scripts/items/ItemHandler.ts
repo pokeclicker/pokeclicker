@@ -31,12 +31,20 @@ class ItemHandler {
         });
     }
 
-    public static useAllFlutes(action: string) {
+    public static activateAllFlutes() {
         GameHelper.chunk(6, Object.keys(ItemList).filter(i => ItemList[i].constructor.name == 'FluteItem')).forEach((item,index) => {
             item.forEach((x) => {
-                if (this.hasItem(x) && action == 'enable' && !FluteEffectRunner.isActive(GameConstants.FluteItemType[x])()) {
+                if (this.hasItem(x) && !FluteEffectRunner.isActive(GameConstants.FluteItemType[x])()) {
                     ItemHandler.useItem(x);
-                } else if (action == 'disable' && FluteEffectRunner.isActive(GameConstants.FluteItemType[x])()) {
+                }
+            });
+        });
+    }
+
+    public static desactivateAllFlutes() {
+        GameHelper.chunk(6, Object.keys(ItemList).filter(i => ItemList[i].constructor.name == 'FluteItem')).forEach((item,index) => {
+            item.forEach((x) => {
+                if (FluteEffectRunner.isActive(GameConstants.FluteItemType[x])()) {
                     ItemHandler.useItem(x);
                 }
             });
