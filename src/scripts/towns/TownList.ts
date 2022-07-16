@@ -3073,7 +3073,6 @@ TownList['Roadside Motel'] = new Town(
         npcs: [RoadsideMotelAnabel],
     }
 );
-
 TownList['Heahea City'] = new Town(
     'Heahea City',
     GameConstants.Region.alola,
@@ -3092,7 +3091,6 @@ TownList['Paniola Town'] = new Town(
         npcs: [PaniolaTownActor],
     }
 );
-
 TownList['Royal Avenue'] = new Town(
     'Royal Avenue',
     GameConstants.Region.alola,
@@ -3340,9 +3338,8 @@ TownList['Resolution Cave'] = new DungeonTown(
         new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 8),
     ]
 );
+
 //Galar Shops
-
-
 const PostwickShop = new Shop([
     ItemList.Pokeball,
 ]);
