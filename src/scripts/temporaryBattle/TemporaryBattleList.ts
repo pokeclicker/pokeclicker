@@ -322,7 +322,12 @@ TemporaryBattleList.Hop1 = new TemporaryBattle(
         new GymPokemon('Sobble', 30984763, 5),
     ],
     'Well, that was a shock! Guess I know now why Lee thought he should give you a Pokémon, too...',
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hop',
+        returnTown: 'Postwick',
+    }
 );
 TemporaryBattleList.Mirages = new TemporaryBattle(
     'Mirages',
@@ -341,7 +346,12 @@ TemporaryBattleList.Hop2 = new TemporaryBattle(
         new GymPokemon('Sobble', 85208099, 8),
     ],
     'And I even got my Pokéball throw perfect too!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 2)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hop',
+        returnTown: 'Professor Magnolia\'s Lab',
+    }
 );
 TemporaryBattleList.Hop3 = new TemporaryBattle(
     'Hop3',
@@ -351,7 +361,12 @@ TemporaryBattleList.Hop3 = new TemporaryBattle(
         new GymPokemon('Sobble', 105348195, 14),
     ],
     'Was that really good training? Looks like I\'d better keep my guard up!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 6)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hop',
+        returnTown: 'Motostoke',
+    }
 );
 TemporaryBattleList.Bede1 = new TemporaryBattle(
     'Bede1',
@@ -361,7 +376,11 @@ TemporaryBattleList.Bede1 = new TemporaryBattle(
         new GymPokemon('Hatenna', 111200873, 16),
     ],
     'I see... Well, that\'s fine. I wasn\'t really trying all that hard anyway.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Bede',
+    }
 );
 TemporaryBattleList.Hop4 = new TemporaryBattle(
     'Hop4',
@@ -371,7 +390,12 @@ TemporaryBattleList.Hop4 = new TemporaryBattle(
         new GymPokemon('Drizzile', 149566454, 21),
     ],
     'We both got ourselves the same Grass Badge, so how come you\'re so much stronger?',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 14)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 14)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hop',
+        returnTown: 'Hulbury',
+    }
 );
 TemporaryBattleList.Bede2 = new TemporaryBattle(
     'Bede2',
@@ -382,7 +406,11 @@ TemporaryBattleList.Bede2 = new TemporaryBattle(
         new GymPokemon('Hatenna', 139970233, 23),
     ],
     'You showed at least a little effort, so I decided I should let you win!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine No. 2'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine No. 2'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Bede',
+    }
 );
 TemporaryBattleList.Marnie1 = new TemporaryBattle(
     'Marnie1',
@@ -392,7 +420,11 @@ TemporaryBattleList.Marnie1 = new TemporaryBattle(
         new GymPokemon('Morpeko', 188661940, 26),
     ],
     'You beat me... Guess you must not be so bad after all, huh?',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 15)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 15)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Marnie',
+    }
 );
 TemporaryBattleList.Hop5 = new TemporaryBattle(
     'Hop5',
@@ -403,7 +435,12 @@ TemporaryBattleList.Hop5 = new TemporaryBattle(
         new GymPokemon('Drizzile', 190296915, 33),
     ],
     'My strategy goes right to pot when I\'ve got all these bad thoughts running through my head...',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 23)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hop',
+        returnTown: 'Stow-on-Side',
+    }
 );
 TemporaryBattleList.Bede3 = new TemporaryBattle(
     'Bede3',
@@ -422,6 +459,7 @@ TemporaryBattleList.Bede3 = new TemporaryBattle(
     ],
     undefined,
     {
+        displayName: 'Pokémon Trainer Bede',
         firstTimeRewardFunction: () => {
             App.game.quests.getQuestLine('The Darkest Day').beginQuest();
         },
@@ -437,7 +475,12 @@ TemporaryBattleList.Hop6 = new TemporaryBattle(
         new GymPokemon('Inteleon', 169087694, 37),
     ],
     'This is rubbish... My team can\'t perform if I can\'t get my own head straight as their Trainer...',
-    [new GymBadgeRequirement(BadgeEnums.Galar_Fairy)]
+    [new GymBadgeRequirement(BadgeEnums.Galar_Fairy)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hop',
+        returnTown: 'Motostoke',
+    }
 );
 TemporaryBattleList.Hop7 = new TemporaryBattle(
     'Hop7',
@@ -454,7 +497,12 @@ TemporaryBattleList.Hop7 = new TemporaryBattle(
             new GymBadgeRequirement(BadgeEnums.Galar_Rock),
             new GymBadgeRequirement(BadgeEnums.Galar_Ice),
         ]),
-    ]
+    ],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hop',
+        returnTown: 'Circhester',
+    }
 );
 TemporaryBattleList.Marnie2 = new TemporaryBattle(
     'Marnie2',
@@ -465,7 +513,12 @@ TemporaryBattleList.Marnie2 = new TemporaryBattle(
         new GymPokemon('Morpeko', 220940304, 44),
     ],
     'What\'s with that?! My Pokémon didn\'t get a chance to really do their thing at all. Ugh!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 30)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 30)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Marnie',
+        returnTown: 'Spikemuth',
+    }
 );
 TemporaryBattleList.Eternatus = new TemporaryBattle(
     'Eternatus',
@@ -499,6 +552,7 @@ TemporaryBattleList.Hop8 = new TemporaryBattle(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Slumbering Weald Shrine'))],
     undefined,
     {
+        displayName: 'Pokémon Trainer Hop',
         firstTimeRewardFunction: () => {
             App.game.quests.getQuestLine('Sword and Shield').beginQuest();
         },
@@ -513,7 +567,11 @@ TemporaryBattleList.Sordward1 = new TemporaryBattle(
         new GymPokemon('Bisharp', 457925774, 60),
     ],
     'Oh... How can this be? My...my Pokémon...',
-    [new TemporaryBattleRequirement('Hop8')]
+    [new TemporaryBattleRequirement('Hop8')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Sordward',
+    }
 );
 TemporaryBattleList.Shielbert1 = new TemporaryBattle(
     'Shielbert1',
@@ -524,7 +582,11 @@ TemporaryBattleList.Shielbert1 = new TemporaryBattle(
         new GymPokemon('Klinklang', 457925774, 60),
     ],
     'Oh... How can this be? My...my Pokémon...',
-    [new TemporaryBattleRequirement('Sordward1')]
+    [new TemporaryBattleRequirement('Sordward1')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Shielbert',
+    }
 );
 TemporaryBattleList['Rampaging Tsareena'] = new TemporaryBattle(
     'Rampaging Tsareena',
@@ -619,7 +681,11 @@ TemporaryBattleList.Sordward2 = new TemporaryBattle(
         new GymPokemon('Bisharp', 572641343, 64),
     ],
     'Oho... My noble Pokémon...',
-    [new TemporaryBattleRequirement('Rampaging Haxorus')]
+    [new TemporaryBattleRequirement('Rampaging Haxorus')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Sordward',
+    }
 );
 TemporaryBattleList.Shielbert2 = new TemporaryBattle(
     'Shielbert2',
@@ -630,7 +696,11 @@ TemporaryBattleList.Shielbert2 = new TemporaryBattle(
         new GymPokemon('Klinklang', 572641343, 64),
     ],
     'Oho... My noble Pokémon...',
-    [new TemporaryBattleRequirement('Sordward2')]
+    [new TemporaryBattleRequirement('Sordward2')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Shielbert',
+    }
 );
 TemporaryBattleList.Klara1 = new TemporaryBattle(
     'Klara1',
@@ -639,7 +709,12 @@ TemporaryBattleList.Klara1 = new TemporaryBattle(
         new GymPokemon('Galarian Slowpoke', 816143704, 60),
     ],
     'Oh, my next Pokémon\'s gonna make short work-- Huh? That was my last one?',
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Klara',
+        returnTown: 'Armor Station',
+    }
 );
 TemporaryBattleList.Avery1 = new TemporaryBattle(
     'Avery1',
@@ -648,7 +723,12 @@ TemporaryBattleList.Avery1 = new TemporaryBattle(
         new GymPokemon('Galarian Slowpoke', 816143704, 60),
     ],
     'Such strength! I\'m in Psyshock!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Avery',
+        returnTown: 'Armor Station',
+    }
 );
 TemporaryBattleList.Mustard = new TemporaryBattle(
     'Mustard',
@@ -660,6 +740,7 @@ TemporaryBattleList.Mustard = new TemporaryBattle(
     [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
     undefined,
     {
+        displayName: 'Dojo Master Mustard',
         firstTimeRewardFunction: () => {
             App.game.quests.getQuestLine('The Dojo\'s Armor').beginQuest();
         },
@@ -678,7 +759,11 @@ TemporaryBattleList.Klara2 = new TemporaryBattle(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel')),
             new TemporaryBattleRequirement('Mustard'),
         ]),
-    ]
+    ],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Klara',
+    }
 );
 TemporaryBattleList.Avery2 = new TemporaryBattle(
     'Avery2',
@@ -691,9 +776,13 @@ TemporaryBattleList.Avery2 = new TemporaryBattle(
     [
         new MultiRequirement([
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel')),
-            new TemporaryBattleRequirement('Klara2'),
+            new TemporaryBattleRequirement('Mustard'),
         ]),
-    ]
+    ],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Avery',
+    }
 );
 TemporaryBattleList.Klara3 = new TemporaryBattle(
     'Klara3',
@@ -704,7 +793,17 @@ TemporaryBattleList.Klara3 = new TemporaryBattle(
         new GymPokemon('Galarian Slowbro', 470316225, 67),
     ],
     'But I didn\'t hold back! I gave it everything I\'ve got...',
-    [new TemporaryBattleRequirement('Avery2')]
+    [
+        new MultiRequirement([
+            new TemporaryBattleRequirement('Klara2'),
+            new TemporaryBattleRequirement('Avery2'),
+        ]),
+    ],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Klara',
+        returnTown: 'Master Dojo',
+    }
 );
 TemporaryBattleList.Avery3 = new TemporaryBattle(
     'Avery3',
@@ -715,7 +814,17 @@ TemporaryBattleList.Avery3 = new TemporaryBattle(
         new GymPokemon('Galarian Slowbro', 470316225, 67),
     ],
     'Oh, I should just Imprison myself for this!',
-    [new TemporaryBattleRequirement('Klara3')]
+    [
+        new MultiRequirement([
+            new TemporaryBattleRequirement('Klara2'),
+            new TemporaryBattleRequirement('Avery2'),
+        ]),
+    ],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Avery',
+        returnTown: 'Master Dojo',
+    }
 );
 TemporaryBattleList.Peony = new TemporaryBattle(
     'Peony',
@@ -727,6 +836,7 @@ TemporaryBattleList.Peony = new TemporaryBattle(
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
     undefined,
     {
+        displayName: 'Pokémon Trainer Peony',
         firstTimeRewardFunction: () => {
             App.game.quests.getQuestLine('The Crown of Galar').beginQuest();
             App.game.quests.getQuestLine('The Birds of the Dyna Tree').beginQuest();

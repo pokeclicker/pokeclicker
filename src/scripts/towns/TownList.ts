@@ -3470,7 +3470,7 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
 TownList.Postwick = new Town(
     'Postwick',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Hop1, PostwickShop],
+    [PostwickShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
         npcs: [ProfMagnolia, Mom],
@@ -3496,7 +3496,7 @@ TownList.Wedgehurst = new Town(
 TownList['Professor Magnolia\'s House'] = new Town(
     'Professor Magnolia\'s House',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Hop2, TemporaryBattleList['Sordward & Shielbert']],
+    [TemporaryBattleList['Sordward & Shielbert']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 2)],
     }
@@ -3504,7 +3504,7 @@ TownList['Professor Magnolia\'s House'] = new Town(
 TownList.Motostoke = new Town(
     'Motostoke',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Hop3, TemporaryBattleList.Marnie1, TemporaryBattleList['Rampaging Torkoal'], MotostokeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Motostoke)],
+    [TemporaryBattleList.Marnie1, TemporaryBattleList['Rampaging Torkoal'], MotostokeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Motostoke)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
     }
@@ -3520,15 +3520,15 @@ TownList.Turffield = new Town(
 TownList.Hulbury = new Town(
     'Hulbury',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Hop4, TemporaryBattleList['Rampaging Gyarados'], HulburyShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Hulbury)],
+    [TemporaryBattleList['Rampaging Gyarados'], HulburyShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Hulbury)],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 14)],
+        requirements: [new TemporaryBattleRequirement('Hop4')],
     }
 );
 TownList['Stow-on-Side'] = new Town(
     'Stow-on-Side',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Hop5, TemporaryBattleList.Bede3, TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side'])],
+    [TemporaryBattleList.Bede3, TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
     }
@@ -3560,9 +3560,9 @@ TownList.Circhester = new Town(
 TownList.Spikemuth = new Town(
     'Spikemuth',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Marnie2, TemporaryBattleList['Gym Leader Marnie'], SpikemuthShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Spikemuth)],
+    [TemporaryBattleList['Gym Leader Marnie'], SpikemuthShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Spikemuth)],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 30)],
+        requirements: [new TemporaryBattleRequirement('Marnie2')],
     }
 );
 TownList.Wyndon = new Town(
@@ -3585,7 +3585,7 @@ TownList['Wyndon Stadium'] = new Town(
 TownList['Armor Station'] = new Town(
     'Armor Station',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Klara1, TemporaryBattleList.Avery1],
+    [],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
     }
@@ -3602,12 +3602,12 @@ TownList['Master Dojo'] = new Town(
 TownList['Master Dojo Battle Court'] = new Town(
     'Master Dojo Battle Court',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Klara3, TemporaryBattleList.Avery3, GymList['Gym Leader Klara'], GymList['Gym Leader Avery'], GymList['Dojo Matron Honey'], GymList['Dojo Master Mustard']],
+    [GymList['Gym Leader Klara'], GymList['Gym Leader Avery'], GymList['Dojo Matron Honey'], GymList['Dojo Master Mustard']],
     {
         requirements: [
             new MultiRequirement([
-                new TemporaryBattleRequirement('Klara2'),
-                new TemporaryBattleRequirement('Avery2'),
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Waters')),
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
             ]),
         ],
     }
