@@ -17999,7 +17999,6 @@ const pokemonList = createPokemonArray(
             'specialDefense': 53,
             'speed': 43,
         },
-
     },
     {
         'id': 800,
@@ -18137,7 +18136,6 @@ const pokemonList = createPokemonArray(
             'specialDefense': 67,
             'speed': 73,
         },
-
     },
     {
         'id': 804,
