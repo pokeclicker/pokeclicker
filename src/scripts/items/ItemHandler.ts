@@ -23,6 +23,26 @@ class ItemHandler {
         return result == undefined ? true : result;
     }
 
+    public static useAllBattleItems() {
+        GameHelper.chunk(6, Object.keys(ItemList).filter(i => ItemList[i].constructor.name == 'BattleItem')).forEach((item,index) => {
+            item.forEach((x) => {
+                ItemHandler.useItem(x, EffectEngineRunner.amountToUse());
+            });
+        });
+    }
+
+    public static useAllFlutes(action: string) {
+        GameHelper.chunk(6, Object.keys(ItemList).filter(i => ItemList[i].constructor.name == 'FluteItem')).forEach((item,index) => {
+            item.forEach((x) => {
+                if (this.hasItem(x) && action == 'enable' && !FluteEffectRunner.isActive(GameConstants.FluteItemType[x])()) {
+                    ItemHandler.useItem(x);
+                } else if (action == 'disable' && FluteEffectRunner.isActive(GameConstants.FluteItemType[x])()) {
+                    ItemHandler.useItem(x);
+                }
+            });
+        });
+    }
+
     public static hasItem(name: string): boolean {
         return player.itemList[name] ? !!player.itemList[name]() : false;
     }

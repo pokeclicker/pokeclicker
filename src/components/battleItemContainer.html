@@ -1,4 +1,14 @@
 <div id="battleItemContainer" class="card sortable border-secondary mb-3" data-bind="visible: !(Settings.getSetting('hideChallengeRelatedModules').observableValue() && App.game.challenges.list.disableBattleItems.active())">
+    <button type="button" class="btn btn-sm btn-primary"
+            style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;"
+            onclick="ItemHandler.useAllBattleItems()"
+            title="Using all Battle Items"
+            data-toggle="popover"
+            data-html="true"
+            data-content="Click to use all items at the same time"
+            data-placement="left"
+            data-trigger="hover">Use all
+    </button>
     <div class="card-header p-0" data-toggle="collapse" href="#battleItemContainerBody">
       <span>Battle Items</span>
     </div>
@@ -58,8 +68,30 @@
         </tbody>
       </table>
     </div>
-    <div class="card-header p-0" data-toggle="collapse" href="#fluteItemContainerBody" data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
-      <span>Flutes</span>
+    <div data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
+        <button type="button" class="btn btn-sm btn-primary"
+                style="position: absolute; left: 0px; width: auto; height: 41px"
+                onclick="ItemHandler.useAllFlutes('enable')"
+                title="Enable all Flutes"
+                data-toggle="popover"
+                data-html="true"
+                data-content="Click to enable all Flutes at once"
+                data-placement="left"
+                data-trigger="hover">Enable all
+        </button>
+        <button type="button" class="btn btn-sm bg-danger"
+                style="position: absolute; right: 0px; width: auto; height: 41px;"
+                onclick="ItemHandler.useAllFlutes('disable')"
+                title="Disable all Flutes"
+                data-toggle="popover"
+                data-html="true"
+                data-content="Click to disable all Flutes at once"
+                data-placement="right"
+                data-trigger="hover">Disable all
+        </button>
+        <div class="card-header p-0" data-toggle="collapse" href="#fluteItemContainerBody">
+            <span>Flutes</span>
+        </div>
     </div>
     <div id="fluteItemContainerBody" class="card-body p-0 show">
       <p data-bind="visible: (App.game.challenges.list.disableBattleItems.active() || App.game.challenges.list.disableGems.active()) && App.game.badgeCase.hasBadge(BadgeEnums.Heat)" class="bg-danger my-0">
