@@ -179,14 +179,10 @@ class Party implements Feature {
     }
 
     public gainEffortPoints(pokemon: PartyPokemon, shiny: boolean, number = GameConstants.BASE_EP_YIELD): number {
-        let EPNum = number;
+        let EPNum = number * App.game.multiplier.getBonus('ev');
 
         if (pokemon.pokerus < GameConstants.Pokerus.Contagious) {
             return 0;
-        }
-
-        if (App.game.multiplier.getBonus('ev') > 1) {
-            EPNum *= App.game.multiplier.getBonus('ev');
         }
 
         if (shiny) {
