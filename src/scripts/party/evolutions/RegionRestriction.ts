@@ -7,6 +7,7 @@ function ByRegion<EvoClass extends MinimalEvo>(Base: EvoClass) {
         constructor(...args: any[]) {
             const [region, ...rest] = args;
             super(...rest);
+            this.type.push(EvolutionType.Region);
             this.regions = region;
         }
 
