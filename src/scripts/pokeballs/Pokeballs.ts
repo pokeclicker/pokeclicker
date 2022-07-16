@@ -99,11 +99,8 @@ class Pokeballs implements Feature {
             }, 1250, 'Increased catch rate with more catches', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Beastball, () => {
-                if (typeof GameConstants.UltraBeastType[Battle.enemyPokemon().name] === 'number') {
-                    return 10;
-                }
-                return -100;
-            }, 1000, 'Can only capture Ultra Beasts', new TemporaryBattleRequirement('Anabel')),
+                return 10;
+            }, 1000, 'Can only be used on Ultra Beasts', new TemporaryBattleRequirement('Anabel')),
         ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);
