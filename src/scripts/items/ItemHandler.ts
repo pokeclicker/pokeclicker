@@ -41,7 +41,7 @@ class ItemHandler {
         });
     }
 
-    public static desactivateAllFlutes() {
+    public static deactivateAllFlutes() {
         GameHelper.chunk(6, Object.keys(ItemList).filter(i => ItemList[i].constructor.name == 'FluteItem')).forEach((item,index) => {
             item.forEach((x) => {
                 if (FluteEffectRunner.isActive(GameConstants.FluteItemType[x])()) {
