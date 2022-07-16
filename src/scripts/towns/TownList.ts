@@ -3335,7 +3335,7 @@ TownList['Resolution Cave'] = new DungeonTown(
     'Resolution Cave',
     GameConstants.Region.alola,
     [
-        new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 8),
+        new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 6),
     ]
 );
 

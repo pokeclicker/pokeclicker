@@ -629,40 +629,50 @@ class QuestLineHelper {
         );
         UltraBeastQuestLine.addQuest(AnabelBattle);
 
-        const talkToAnabel = new TalkToNPCQuest(RoadsideMotelAnabel, 'Talk to Anabel at the Roadside Motel to learn about Beast Balls.');
-        UltraBeastQuestLine.addQuest(talkToAnabel);
-
         const createUltraBeastQuest = (ultrabeast: PokemonNameType, hint: string, numberCaught: number) => {
 
-            const ultraBeastUnlock = () => {
+            const ultraBeastReward = () => {
                 Notifier.notify({
                     title: UltraBeastQuestLine.name,
                     message: `An Ultra Beast is hiding somewhere.\n${hint}`,
                     type: NotificationConstants.NotificationOption.info,
                     timeout: 3e1,
                 });
+                App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,5,false);
             };
 
             const catchUltraBeast = new CaptureSpecificPokemonQuest(
                 ultrabeast,
-                `Find and capture the rare Ultra Beast ${numberCaught} times!\nHint: ${hint}`,
+                `Find and capture ${ultrabeast} ${numberCaught} times!` + `\n${hint}` ?? '',
                 numberCaught,
                 false,
-                ultraBeastUnlock,
+                ultraBeastReward,
                 undefined
             );
-            UltraBeastQuestLine.addQuest(catchUltraBeast);
+            return catchUltraBeast;
         };
 
-        createUltraBeastQuest('Nihilego', 'It has been spotted at Wela Volcano Park and Diglett\'s Tunnel.', 1);
-        createUltraBeastQuest('Buzzwole', 'It has been spotted at Melemele Meadow.', 2);
-        createUltraBeastQuest('Pheromosa', 'It has been spotted at Verdant Cavern.', 4);
-        createUltraBeastQuest('Xurkitree', 'It has been spotted at Memorial Hill and Lush Jungle.', 2);
-        createUltraBeastQuest('Kartana', 'It has been spotted at Malie Garden and on Route 17.', 4);
-        createUltraBeastQuest('Celesteela', 'It has been spotted at Malie Garden and Haina Desert.', 2);
-        createUltraBeastQuest('Blacephalon', 'It has been spotted at Poni Grove.', 5);
-        createUltraBeastQuest('Stakataka', 'It has been spotted at Poni Grove.', 5);
+        UltraBeastQuestLine.addQuest(createUltraBeastQuest('Nihilego', ' It has been sighted at Wela Volcano Park and Diglett\'s Tunnel.', 1));
 
+        const talkToAnabel = new TalkToNPCQuest(RoadsideMotelAnabel, 'Talk to Anabel at the Roadside Motel to learn about Beast Balls.');
+        UltraBeastQuestLine.addQuest(talkToAnabel);
+
+        UltraBeastQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                createUltraBeastQuest('Buzzwole', undefined, 2),
+                createUltraBeastQuest('Pheromosa', undefined, 4),
+            ], 'Rare Ultra Beasts have been spotted at Melemele Meadow and Verdant Cavern!'));
+        UltraBeastQuestLine.addQuest(createUltraBeastQuest('Xurkitree', ' It has been sighted at Memorial Hill and Lush Jungle.', 2));
+        UltraBeastQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                createUltraBeastQuest('Kartana', undefined, 4),
+                createUltraBeastQuest('Celesteela', undefined, 2),
+            ], 'Rare Ultra Beasts have been spotted at Malie Garden, Route 17, and Verdant Cavern'));
+        UltraBeastQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                createUltraBeastQuest('Blacephalon', undefined, 5),
+                createUltraBeastQuest('Stakataka', undefined, 5),
+            ], 'Rare Ultra Beasts have been spotted at Poni Grove'));
         const GuzzlordReward = () => {
             Notifier.notify({ message: 'You caught all the Ultra Beasts!', type: NotificationConstants.NotificationOption.success });
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,50,false);
