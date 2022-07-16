@@ -271,7 +271,7 @@ namespace GameConstants {
         'Sachet',
         'Whipped_dream',
         'Ice_stone',
-        'Obsidian_stone',
+        'Black_augurite',
     }
     declare enum BattleItemType {
         'xAttack' = '',

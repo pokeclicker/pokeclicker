@@ -78,4 +78,4 @@ ItemList.White_DNA         = new EvolutionStone(GameConstants.StoneType.White_DN
 ItemList.Sachet            = new EvolutionStone(GameConstants.StoneType.Sachet, 2500, undefined , 'Sachet');
 ItemList.Whipped_dream     = new EvolutionStone(GameConstants.StoneType.Whipped_dream, 2500, undefined , 'Whipped Dream');
 ItemList.Ice_stone         = new EvolutionStone(GameConstants.StoneType.Ice_stone, 2500, undefined , 'Ice Stone');
-ItemList.Obsidian_stone    = new EvolutionStone(GameConstants.StoneType.Obsidian_stone, 2500, undefined , 'Obsidian Stone');
+ItemList.Black_augurite    = new EvolutionStone(GameConstants.StoneType.Black_augurite, 2500, undefined , 'Black Augurite');

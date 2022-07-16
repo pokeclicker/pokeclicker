@@ -649,7 +649,7 @@ export enum StoneType {
     'Sachet',
     'Whipped_dream',
     'Ice_stone',
-    'Obsidian_stone',
+    'Black_augurite',
 }
 
 export enum BattleItemType {
