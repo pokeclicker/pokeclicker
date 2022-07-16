@@ -716,6 +716,46 @@
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hulbury') }"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Hop"
+            , x: 51, y: 55
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Hop1'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Hop1'] && TemporaryBattleList['Hop1'].isVisible()"
+            , image: "assets/images/map/hopoverworld.png"
+            })
+         %>
+
+         <%- include('templates/mapOverlay',
+             { name: "Hop"
+             , x: 59, y: 47.5
+             , width: 4, height: 4
+             , databind: "click: () => TemporaryBattleList['Hop2'].protectedOnclick()"
+             , visible:  "TemporaryBattleList['Hop2'] && TemporaryBattleList['Hop2'].isVisible()"
+             , image: "assets/images/map/hopoverworld.png"
+             })
+          %>
+
+          <%- include('templates/mapOverlay',
+              { name: "Hop"
+              , x: 36, y: 16
+              , width: 4, height: 4
+              , databind: "click: () => TemporaryBattleList['Hop3'].protectedOnclick()"
+              , visible:  "TemporaryBattleList['Hop3'] && TemporaryBattleList['Hop3'].isVisible()"
+              , image: "assets/images/map/hopoverworld.png"
+              })
+           %>
+
+           <%- include('templates/mapOverlay',
+               { name: "Hop"
+               , x: 52, y: 6
+               , width: 4, height: 4
+               , databind: "click: () => TemporaryBattleList['Hop4'].protectedOnclick()"
+               , visible:  "TemporaryBattleList['Hop4'] && TemporaryBattleList['Hop4'].isVisible()"
+               , image: "assets/images/map/hopoverworld.png"
+               })
+            %>
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
@@ -1078,6 +1118,46 @@
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Spikemuth') }"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Hop"
+            , x: 36, y: 49
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Hop5'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Hop5'] && TemporaryBattleList['Hop5'].isVisible()"
+            , image: "assets/images/map/hopoverworld.png"
+            })
+         %>
+
+         <%- include('templates/mapOverlay',
+             { name: "Hop"
+             , x: 56, y: 54
+             , width: 4, height: 4
+             , databind: "click: () => TemporaryBattleList['Hop6'].protectedOnclick()"
+             , visible:  "TemporaryBattleList['Hop6'] && TemporaryBattleList['Hop6'].isVisible()"
+             , image: "assets/images/map/hopoverworld.png"
+             })
+          %>
+
+          <%- include('templates/mapOverlay',
+              { name: "Hop"
+              , x: 66, y: 44
+              , width: 4, height: 4
+              , databind: "click: () => TemporaryBattleList['Hop7'].protectedOnclick()"
+              , visible:  "TemporaryBattleList['Hop7'] && TemporaryBattleList['Hop7'].isVisible()"
+              , image: "assets/images/map/hopoverworld.png"
+              })
+           %>
+
+           <%- include('templates/mapOverlay',
+               { name: "Marnie"
+               , x: 69, y: 54
+               , width: 4, height: 4
+               , databind: "click: () => TemporaryBattleList['Marnie2'].protectedOnclick()"
+               , visible:  "TemporaryBattleList['Marnie2'] && TemporaryBattleList['Marnie2'].isVisible()"
+               , image: "assets/images/map/marnieoverworld.png"
+               })
+            %>
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id">
         <image width="1600" height="960" data-bind="attr: {
@@ -2139,6 +2219,46 @@
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Master Dojo') }"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Klara"
+            , x: 52, y: 44
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Klara1'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Klara1'] && TemporaryBattleList['Klara1'].isVisible()"
+            , image: "assets/images/map/klaraoverworld.png"
+            })
+         %>
+
+         <%- include('templates/mapOverlay',
+             { name: "Avery"
+             , x: 56, y: 44
+             , width: 4, height: 4
+             , databind: "click: () => TemporaryBattleList['Avery1'].protectedOnclick()"
+             , visible:  "TemporaryBattleList['Avery1'] && TemporaryBattleList['Avery1'].isVisible()"
+             , image: "assets/images/map/averyoverworld.png"
+             })
+          %>
+
+          <%- include('templates/mapOverlay',
+              { name: "Klara"
+              , x: 57, y: 35
+              , width: 4, height: 4
+              , databind: "click: () => TemporaryBattleList['Klara3'].protectedOnclick()"
+              , visible:  "TemporaryBattleList['Klara3'] && TemporaryBattleList['Klara3'].isVisible()"
+              , image: "assets/images/map/klaraoverworld.png"
+              })
+           %>
+
+           <%- include('templates/mapOverlay',
+               { name: "Avery"
+               , x: 61, y: 35
+               , width: 4, height: 4
+               , databind: "click: () => TemporaryBattleList['Avery3'].protectedOnclick()"
+               , visible:  "TemporaryBattleList['Avery3'] && TemporaryBattleList['Avery3'].isVisible()"
+               , image: "assets/images/map/averyoverworld.png"
+               })
+            %>
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
@@ -2795,5 +2915,15 @@
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Crown Tundra Station') }"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Regigigas"
+            , x: 41, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Regigigas'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Regigigas'] && TemporaryBattleList['Regigigas'].isVisible()"
+            , image: "assets/images/map/regigigasoverworld.png"
+            })
+         %>
     </g>
 </g>

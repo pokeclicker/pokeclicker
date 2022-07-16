@@ -99,7 +99,6 @@ export const SpriteCredits: Credit[] = [
             'Korrina',
             'Malva',
             'Onympia',
-            'Piers',
             'Ramos',
             'Siebold',
             'Team Flare Bryony',
@@ -317,6 +316,34 @@ export const SpriteCredits: Credit[] = [
             'Ultra Wormhole',
         ],
         // Notes: Permission given on image page, credit optional, still given cuz we're nice like that.
+    },
+    {
+        name: 'Wolfang62',
+        link: 'https://www.deviantart.com/wolfang62',
+        image: 'https://a.deviantart.net/avatars-big/w/o/wolfang62.jpg',
+        resources: [
+            'Overworld Hop',
+        ],
+        // Notes: Permission given on image page if credited.
+    },
+    {
+        name: 'izzyvicious',
+        link: 'https://www.deviantart.com/izzyvicious',
+        image: 'https://a.deviantart.net/avatars-big/i/z/izzyvicious.png',
+        resources: [
+            'Overworld Marnie',
+        ],
+        // Notes: Gives credit on image page if asked.
+    },
+    {
+        name: 'aveontrainer',
+        link: 'https://www.deviantart.com/aveontrainer',
+        image: 'https://a.deviantart.net/avatars-big/a/v/aveontrainer.png',
+        resources: [
+            'Overworld Klara',
+            'Overworld Avery',
+        ],
+        // Notes: Gives credit on image page if asked.
     },
 ].map((c) => {
     SeededRand.seed(parseInt(c.name, 36));
