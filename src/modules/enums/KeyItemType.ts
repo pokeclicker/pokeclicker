@@ -7,7 +7,7 @@ enum KeyItemType {
     'Dungeon_ticket',
     'Super_rod',
     'Holo_caster',
-    'Mystery_egg',
+    'Egg_Incubator',
     'Safari_ticket',
     'Wailmer_pail',
     'Explorer_kit',
