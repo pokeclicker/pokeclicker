@@ -21969,8 +21969,8 @@ pokemonList.forEach(p => {
         (p as PokemonListData).evolutions?.forEach(evo => {
             pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon;
             // Do another loop for adding last stade of evolution on "reproductive" pokemon
-            (pokemonList.find(_p => _p.name == evo.getEvolvedPokemon()) as PokemonListData).evolutions?.forEach(lastStade => {
-                pokemonBabyPrevolutionMap[lastStade.getEvolvedPokemon()] = lastStade.basePokemon;
+            (pokemonList.find(_p => _p.name == evo.getEvolvedPokemon()) as PokemonListData).evolutions?.forEach(lastStage => {
+                pokemonBabyPrevolutionMap[lastStage.getEvolvedPokemon()] = lastStage.basePokemon;
             });
 
             const eggCycles = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon()).eggCycles;
