@@ -303,7 +303,7 @@ TemporaryBattleList.Anabel = new TemporaryBattle(
         new GymPokemon('Snorlax', 90000000, 61),
     ],
     'Oh you\'re good! You might just have a shot, here are some Beast Balls. Go hunt down those strange Ultra Beasts! If you need more Beast Balls, you can buy them here.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
+    [new QuestLineStartedRequirement('Ultra Beast Hunt')]
 );
 
 TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
