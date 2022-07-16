@@ -885,6 +885,12 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
             // Add Ash Ketchum Kalos TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+        
+            // Change Mystery Egg Key Item to Egg Incubator
+            delete saveData.keyItems.Mystery_egg
+            if (saveData.statistics.routeKills[10]) {
+                saveData.keyItems.Egg_Incubator = true;
+            
         },
     };
 
