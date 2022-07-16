@@ -1221,5 +1221,6 @@ export type PokemonNameType
     | 'Mega Charizard X'
     | 'Mega Gyarados'
     | 'Mega Gardevoir'
+    | 'Mega Absol'
     | 'Mega Rayquaza'
     | '???';

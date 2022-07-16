@@ -17305,7 +17305,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 107,
         'catchRate': 3,
-        'evolutions': [new StoneEvolution('Type: Null', 'Silvally', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [new StoneEvolution('Type: Null', 'Silvally (normal)', GameConstants.StoneType.Soothe_bell)],
         'base': {
             'hitpoints': 95,
             'attack': 95,
