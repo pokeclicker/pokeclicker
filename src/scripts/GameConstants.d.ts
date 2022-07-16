@@ -208,6 +208,7 @@ namespace GameConstants {
         kalos,
         alola,
         galar,
+        // hisui,
         final,
     }
     declare function clipNumber(num: number, min: number, max: number): number;
@@ -270,6 +271,7 @@ namespace GameConstants {
         'Sachet',
         'Whipped_dream',
         'Ice_stone',
+        'Obsidian_stone',
     }
     declare enum BattleItemType {
         'xAttack' = '',

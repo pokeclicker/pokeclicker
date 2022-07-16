@@ -61,6 +61,7 @@ type ItemNameType
     | 'Sachet'
     | 'Whipped_dream'
     | 'Ice_stone'
+    | 'Obsidian_stone'
     | 'FarmHandBailey'
     | 'FarmHandKerry'
     | 'FarmHandRiley'

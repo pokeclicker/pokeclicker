@@ -34,6 +34,7 @@ export enum Region {
     kalos = 5,
     alola = 6,
     galar = 7,
+    // hisui = 8
     // Throws an error if no region after the final region
     final = 8,
 }
@@ -648,6 +649,7 @@ export enum StoneType {
     'Sachet',
     'Whipped_dream',
     'Ice_stone',
+    'Obsidian_stone',
 }
 
 export enum BattleItemType {
