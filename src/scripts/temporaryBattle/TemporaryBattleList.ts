@@ -206,7 +206,6 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'The creature escaped back into the ultra wormhole.',
     [new GymBadgeRequirement(BadgeEnums.RockiumZ)]
 );
-
 TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     'Ultra Megalopolis',
     [new GymPokemon('Necrozma (Ultra)', 282601920, 60)],
@@ -292,7 +291,6 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
     '...',
     [new TemporaryBattleRequirement('Captain Sophocles')]
 );
-
 TemporaryBattleList.Anabel = new TemporaryBattle(
     'Anabel',
     [
@@ -305,7 +303,6 @@ TemporaryBattleList.Anabel = new TemporaryBattle(
     'Oh you\'re good! You might just have a shot, here are some Beast Balls. Go hunt down those strange Ultra Beasts! If you need more Beast Balls, you can buy them here.',
     [new QuestLineStartedRequirement('Ultra Beast Hunt')]
 );
-
 TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
     'Ash Ketchum Alola',
     [
