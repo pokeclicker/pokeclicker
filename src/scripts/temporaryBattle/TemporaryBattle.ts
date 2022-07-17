@@ -49,6 +49,9 @@ class TemporaryBattle extends TownContent {
         if (!completeRequirements) {
             completeRequirements = [new TemporaryBattleRequirement(name)];
         }
+        if (optionalArgs.isTrainerBattle == undefined) {
+            optionalArgs.isTrainerBattle = true;
+        }
         this.completeRequirements = completeRequirements;
     }
 }
