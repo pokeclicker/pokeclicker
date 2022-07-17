@@ -585,8 +585,8 @@ class QuestLineHelper {
                 clearRampagingZamazenta,
             ], 'Zacian and Zamazenta are rampaging in Energy Plant. Defeat them!'));
 
-        const catchZacian = new CustomQuest(1, 0, 'Catch Zacian.', () => App.game.statistics.pokemonCaptured[pokemonMap.Zacian.id](), 0);
-        const catchZamazenta = new CustomQuest(1, 0, 'Catch Zamazenta.', () => App.game.statistics.pokemonCaptured[pokemonMap.Zamazenta.id](), 0);
+        const catchZacian = new CustomQuest(1, 0, 'Catch Zacian.', () => App.game.statistics.pokemonCaptured[pokemonMap.'Zacian (Battle Hero)'.id](), 0);
+        const catchZamazenta = new CustomQuest(1, 0, 'Catch Zamazenta.', () => App.game.statistics.pokemonCaptured[pokemonMap.'Zamazenta (Battle Hero)'.id](), 0);
         swordShieldQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchZacian,
@@ -638,7 +638,7 @@ class QuestLineHelper {
         dojoArmorQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 clearTowerofDarkness,
-                clearTowerofWater,
+                clearTowerofWaters,
             ], 'Train Kubfu in the Tower of Darkness and the Tower of Waters so it can evolve!'));
 
         App.game.quests.questLines().push(dojoArmorQuestLine);
@@ -737,7 +737,7 @@ class QuestLineHelper {
             ], 'Now it has finally unlocked, catch Regieleki and Regidrago in the Split-Decision Ruins!'));
 
         const clearRegigigas = new CustomQuest(1, 0, 'Now you have caught all of the legendary golems it created, Regigigas has appeared in Giants Bed. Defeat it!,', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Regigigas')]());
-        dynaTreeBirdsQuestLine.addQuest(clearRegigigas);
+        ancientGolemsQuestLine.addQuest(clearRegigigas);
 
         App.game.quests.questLines().push(ancientGolemsQuestLine);
     }
