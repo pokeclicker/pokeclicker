@@ -157,10 +157,10 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kanto Route 12', GameConstants.Region.kanto, 12,
     new RoutePokemon({
-        land: ['Pidgey', 'Oddish', 'Gloom', 'Venonat', 'Bellsprout', 'Weepinbell', 'Farfetch\'d', 'Snorlax'],
+        land: ['Pidgey', 'Oddish', 'Gloom', 'Venonat', 'Bellsprout', 'Weepinbell', 'Farfetch\'d'],
         water: ['Poliwag', 'Slowpoke', 'Slowbro', 'Goldeen', 'Magikarp'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
     undefined,
     GameConstants.KantoSubRegions.Kanto
 ));
@@ -172,7 +172,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new OneFromManyRequirement([
-            new RouteKillRequirement(10, GameConstants.Region.kanto, 12),
+            new MultiRequirement([new TemporaryBattleRequirement('Snorlax route 12'), new SpecificPokemonCaughtRequirement('Snorlax')]),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 14),
         ]),
     ],
@@ -210,9 +210,9 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kanto Route 16', GameConstants.Region.kanto, 16,
     new RoutePokemon({
-        land: ['Rattata', 'Raticate', 'Spearow', 'Doduo', 'Snorlax'],
+        land: ['Rattata', 'Raticate', 'Spearow', 'Doduo'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    [new TemporaryBattleRequirement('Snorlax route 16'), new SpecificPokemonCaughtRequirement('Snorlax')],
     undefined,
     GameConstants.KantoSubRegions.Kanto
 ));

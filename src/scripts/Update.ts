@@ -848,8 +848,9 @@ class Update implements Saveable {
                 p[9] = saveData.statistics.effortPoints?.[p.id] * 100 || 0;
             });
 
-            // Add Galactic Boss Cyrus TemporaryBattle
+            // Add snorlax
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
 
             // Start Sevii questline if player has Volcano Badge already
             if (saveData.badgeCase[7]) {
@@ -860,10 +861,14 @@ class Update implements Saveable {
             // Add Berry Forest
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 11);
             // Add Biker Gang TemporaryBattles
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 3);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 4);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 5);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 6);
+
+            // Add Galactic Boss Cyrus TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+
 
             // Start Persons of Interest questline if player has Earth Badge already
             if (saveData.badgeCase[8]) {
@@ -874,17 +879,17 @@ class Update implements Saveable {
                 saveData.quests.questLines.push({state: 1, name: 'The new kid', quest: 0});
             }
             // Add Ash Ketchum Kanto TemporaryBattle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
-            // Add Ash Ketchum Johto TemporaryBattle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 8);
-            // Add Ash Ketchum Hoenn TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 9);
-            // Add Ash Ketchum Sinnoh TemporaryBattle
+            // Add Ash Ketchum Johto TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 10);
-            // Add Ash Ketchum Unova TemporaryBattle
+            // Add Ash Ketchum Hoenn TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
-            // Add Ash Ketchum Kalos TemporaryBattle
+            // Add Ash Ketchum Sinnoh TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+            // Add Ash Ketchum Unova TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 13);
+            // Add Ash Ketchum Kalos TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 14);
         },
     };
 
