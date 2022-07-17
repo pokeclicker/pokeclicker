@@ -21968,7 +21968,7 @@ pokemonList.forEach(p => {
         // Egg steps should be lower than evolved form
         (p as PokemonListData).evolutions?.forEach(evo => {
             pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon;
-            // Do another loop for adding last stade of evolution on "reproductive" pokemon
+            // Do another loop for adding last stage of evolution on "reproductive" pokemon
             (pokemonList.find(_p => _p.name == evo.getEvolvedPokemon()) as PokemonListData).evolutions?.forEach(lastStage => {
                 pokemonBabyPrevolutionMap[lastStage.getEvolvedPokemon()] = lastStage.basePokemon;
             });
