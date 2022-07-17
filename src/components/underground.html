@@ -247,6 +247,7 @@
             <!-- ko ifnot: valueType == "Mine Egg" -->
             <td class='vertical-middle' data-bind='text: value + " " + GameConstants.camelCaseToString(UndergroundItem.getFullResourceName(valueType, value))'></td>
             <!-- /ko -->
+            <!-- ko ifnot: Underground.getMineItemById(id).isShard() -->
             <td class='vertical-middle'>
                 <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
                     <!-- ko ifnot: valueType == "Mine Egg" -->
@@ -262,7 +263,7 @@
                     <!-- /ko -->
                     <button class='btn btn-success btn-block'
                             data-bind="attr: { 'data-itemid': id },
-                            css: { disabled: amount() <= 0 || sellLocked() || (valueType === 'Mine Egg' && !App.game.breeding.hasFreeEggSlot()) || Underground.getMineItemById(id).isShard() },
+                            css: { disabled: amount() <= 0 || sellLocked() || (valueType === 'Mine Egg' && !App.game.breeding.hasFreeEggSlot()) },
                                     text: valueType === 'Mine Egg' ? 'Breed' : 'Sell',
                                     click: function(){Underground.sellMineItem($element.dataset.itemid, sellAmount() || 1)}">
                     </button>
@@ -275,6 +276,7 @@
                     <!-- /ko -->
                 </div>
             </td>
+            <!-- /ko -->
         </tr>
     </script>
 </div>
