@@ -570,9 +570,15 @@ class QuestLineHelper {
         const talkToWeatherScientist2 = new TalkToNPCQuest(WeatherInstituteScientist2, 'Report your findings to the Delta Weather Institute.');
         primalsQuestLine.addQuest(talkToWeatherScientist2);
 
-        const CatchExploud = new CustomQuest(1, 0, 'Catch Exploud.', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Exploud').id]());
-        primalsQuestLine.addQuest(CatchExploud);
-        //Await multiquest and add 5 Delta Cave of Origin clears.
+        const catchExploud = new CustomQuest(1, 0, 'Catch Exploud.', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Exploud').id]());
+
+        const clearCaveofOrigin = new CustomQuest(5, 0, 'Clear Delta Cave of Origin', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Delta Cave of Origin')]());
+
+        primalsQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchExploud,
+                clearCaveofOrigin
+            ], 'Clear Delta Cave of Origin five times and catch Exploud.'));
 
         const talkToWeatherScientist3 = new TalkToNPCQuest(WeatherInstituteScientist3, 'Bring Exploud to the Delta Weather Institute.');
         primalsQuestLine.addQuest(talkToWeatherScientist3);
@@ -586,15 +592,29 @@ class QuestLineHelper {
         const catchWater = new CustomQuest(100, 0, 'Capture 100 Water-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Water)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
-        primalsQuestLine.addQuest(catchWater);
-        //Await multiquest and add 100 ground type captures.
+
+        const catchGround = new CustomQuest(100, 0, 'Capture 100 Ground-type Pokémon.', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Ground)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
+        });
+
+        primalsQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchWater,
+                catchGround
+            ], 'Catch 100 Water-type and 100 Ground-type Pokémon.'));
 
         const talkToWeatherScientist5 = new TalkToNPCQuest(WeatherInstituteScientist5, 'Check in at the Delta Weather Institute.');
         primalsQuestLine.addQuest(talkToWeatherScientist5);
 
         const clearTerraCave = new CustomQuest(1, 0, 'Clear Terra Cave.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Terra Cave')]());
-        primalsQuestLine.addQuest(clearTerraCave);
-        //Await multiquest and add clear Marine Cave.
+
+        const clearMarineCave = new CustomQuest(1, 0, 'Clear Marine Cave.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Marine Cave')]());
+
+        primalsQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                clearTerraCave,
+                clearMarineCave
+            ], 'Clear Terra Cave and Marine Cave.'));
 
         App.game.quests.questLines().push(primalsQuestLine);
     }

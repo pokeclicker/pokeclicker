@@ -2650,7 +2650,7 @@ const WeatherInstituteScientist5 = new NPC('Weather Scientist', [
     'If Casform predicts rainy weather, Exploud wants to go to route 133.',
     'You should go to those locations in that weather! I\'m sure something interesting will happen!',
 ],
-{ requirement: new QuestLineStepCompletedRequirement('The Missing Primals', 7) });
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Missing Primals', 7), new QuestLineStepCompletedRequirement('The Missing Primals', 9, GameConstants.AchievementOption.less )]) });
 const WeatherInstituteScientist6 = new NPC('Weather Scientist', [
     'So they moved to some new caves. Caves that appear and disappear based on the weather. Interesting',
     'Additionally they have transformed into stronger more dangerous forms. That is troubling.',
