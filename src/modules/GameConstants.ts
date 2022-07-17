@@ -657,6 +657,23 @@ export enum StoneType {
     'Ice_stone',
 }
 
+export enum ShardType {
+    'None' = -1,
+    'Red Shard',
+    'Yellow Shard',
+    'Green Shard',
+    'Blue Shard',
+    'Grey Shard',
+    'Purple Shard',
+    'Ochre Shard',
+    'Black Shard',
+    'Crimson Shard',
+    'Lime Shard',
+    'White Shard',
+    'Pink Shard',
+    'Cyan Shard',
+}
+
 export enum BattleItemType {
     'xAttack' = 'xAttack',
     'xClick' = 'xClick',
