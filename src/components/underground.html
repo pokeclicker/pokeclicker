@@ -247,6 +247,7 @@
             <!-- ko ifnot: valueType == "Mine Egg" -->
             <td class='vertical-middle' data-bind='text: value + " " + GameConstants.camelCaseToString(UndergroundItem.getFullResourceName(valueType, value))'></td>
             <!-- /ko -->
+            <!-- ko ifnot: Underground.getMineItemById(id).isShard() -->
             <td class='vertical-middle'>
                 <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
                     <!-- ko ifnot: valueType == "Mine Egg" -->
@@ -275,13 +276,14 @@
                     <!-- /ko -->
                 </div>
             </td>
+            <!-- /ko -->
         </tr>
     </script>
 </div>
 
 <div aria-labelledby="mineSellAllTreasuresModalLabel" class="modal fade noselect mt-5" id="mineSellAllTreasuresModal" role="dialog"
      style="cursor:default" tabindex="-1">
-    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document" data-bind="let: { filteredMineInvetory: player.mineInventory().filter(t => t.amount() > 0 && t.valueType != 'Mine Egg') }">
+    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document" data-bind="let: { filteredMineInvetory: player.mineInventory().filter(t => t.amount() > 0 && t.valueType != 'Mine Egg' && !Underground.getMineItemById(t.id).isShard()) }">
         <div class="modal-content">
             <div class="modal-header d-block">
                 <h4 class="mb-0">
