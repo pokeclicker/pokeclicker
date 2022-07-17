@@ -582,7 +582,7 @@ TemporaryBattleList.Shielbert1 = new TemporaryBattle(
         new GymPokemon('Klinklang', 457925774, 60),
     ],
     'Oh... How can this be? My...my Pokémon...',
-    [new TemporaryBattleRequirement('Sordward1')],
+    [new TemporaryBattleRequirement('Hop8')],
     undefined,
     {
         displayName: 'Pokémon Trainer Shielbert',
@@ -592,7 +592,10 @@ TemporaryBattleList['Rampaging Tsareena'] = new TemporaryBattle(
     'Rampaging Tsareena',
     [new GymPokemon('Tsareena', 1757548771, 60)],
     'The Rampaging Tsareena fainted.',
-    [new TemporaryBattleRequirement('Shielbert1')]
+    [
+        new TemporaryBattleRequirement('Sordward1'),
+        new TemporaryBattleRequirement('Shielbert1'),
+    ]
 );
 TemporaryBattleList['Rampaging Gyarados'] = new TemporaryBattle(
     'Rampaging Gyarados',
@@ -629,7 +632,7 @@ TemporaryBattleList['Rampaging Dusknoir'] = new TemporaryBattle(
     'Rampaging Dusknoir',
     [new GymPokemon('Dusknoir', 1917325934, 60)],
     'The Rampaging Dusknoir fainted.',
-    [new TemporaryBattleRequirement('Rampaging Conkeldurr')]
+    [new TemporaryBattleRequirement('Sordward & Shielbert')]
 );
 TemporaryBattleList['Gym Leader Bede'] = new TemporaryBattle(
     'Gym Leader Bede',
@@ -640,7 +643,10 @@ TemporaryBattleList['Gym Leader Bede'] = new TemporaryBattle(
         new GymPokemon('Hatterene', 613544294, 63),
     ],
     'Thank you for the battle. I can now accept you as the Champion. It\'s painful to admit, but I\'ve come to realise a few of my weaknesses. But I\'ll keep getting stronger.',
-    [new TemporaryBattleRequirement('Rampaging Dusknoir')]
+    [
+        new TemporaryBattleRequirement('Rampaging Conkeldurr'),
+        new TemporaryBattleRequirement('Rampaging Dusknoir'),
+    ]
 );
 TemporaryBattleList['Rampaging Gigalith'] = new TemporaryBattle(
     'Rampaging Gigalith',
@@ -652,7 +658,7 @@ TemporaryBattleList['Rampaging Froslass'] = new TemporaryBattle(
     'Rampaging Froslass',
     [new GymPokemon('Froslass', 1917325934, 60)],
     'The Rampaging Froslass fainted.',
-    [new TemporaryBattleRequirement('Rampaging Gigalith')]
+    [new TemporaryBattleRequirement('Gym Leader Bede')]
 );
 TemporaryBattleList['Gym Leader Marnie'] = new TemporaryBattle(
     'Gym Leader Marnie',
@@ -664,7 +670,10 @@ TemporaryBattleList['Gym Leader Marnie'] = new TemporaryBattle(
         new GymPokemon('Grimmsnarl', 491314766, 60),
     ],
     'Yeah I lost, but I\'m gonna learn from your battle style and everythin\'!',
-    [new TemporaryBattleRequirement('Rampaging Froslass')]
+    [
+        new TemporaryBattleRequirement('Rampaging Gigalith'),
+        new TemporaryBattleRequirement('Rampaging Froslass'),
+    ]
 );
 TemporaryBattleList['Rampaging Haxorus'] = new TemporaryBattle(
     'Rampaging Haxorus',
@@ -696,11 +705,29 @@ TemporaryBattleList.Shielbert2 = new TemporaryBattle(
         new GymPokemon('Klinklang', 572641343, 64),
     ],
     'Oho... My noble Pokémon...',
-    [new TemporaryBattleRequirement('Sordward2')],
+    [new TemporaryBattleRequirement('Rampaging Haxorus')],
     undefined,
     {
         displayName: 'Pokémon Trainer Shielbert',
     }
+);
+TemporaryBattleList['Rampaging Zacian'] = new TemporaryBattle(
+    'Rampaging Zacian,
+    [new GymPokemon('Zacian (Crowned)', 2357932001, 70)],
+    'Zacian fainted.',
+    [
+        new TemporaryBattleRequirement('Sordward2'),
+        new TemporaryBattleRequirement('Shielbert2'),
+    ]
+);
+TemporaryBattleList['Rampaging Zamazenta'] = new TemporaryBattle(
+    'Rampaging Zamazenta,
+    [new GymPokemon('Zamazenta (Crowned)', 2357932001, 70)],
+    'Zamazenta fainted.',
+    [
+        new TemporaryBattleRequirement('Sordward2'),
+        new TemporaryBattleRequirement('Shielbert2'),
+    ]
 );
 TemporaryBattleList.Klara1 = new TemporaryBattle(
     'Klara1',
@@ -854,7 +881,7 @@ TemporaryBattleList.Glastrier = new TemporaryBattle(
     'Glastrier',
     [new GymPokemon('Glastrier', 2031393560, 75)],
     'The Pokémon ran away!',
-    [new QuestLineStepCompletedRequirement('The Crown of Galar', 3)]
+    [new QuestLineStepCompletedRequirement('The Crown of Galar', 2)]
 );
 TemporaryBattleList.Spectrier = new TemporaryBattle(
     'Spectrier',
@@ -878,6 +905,9 @@ TemporaryBattleList.Regigigas = new TemporaryBattle(
     'The ancient giant was defeated!',
     [
         new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap.Regirock),
+            new ObtainedPokemonRequirement(pokemonMap.Regice),
+            new ObtainedPokemonRequirement(pokemonMap.Registeel),
             new ObtainedPokemonRequirement(pokemonMap.Regieleki),
             new ObtainedPokemonRequirement(pokemonMap.Regidrago),
         ]),
