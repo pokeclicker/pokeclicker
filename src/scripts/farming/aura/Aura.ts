@@ -23,8 +23,12 @@ class Aura {
             case AuraType.Egg:
             case AuraType.Shiny:
             case AuraType.Roaming:
-                const currentMultiplier = App.game.farming.externalAuras[this.auraType]();
-                App.game.farming.externalAuras[this.auraType](currentMultiplier * multiplier);
+                const currentRoamingMultiplier = App.game.farming.externalAuras[this.auraType]();
+                App.game.farming.externalAuras[this.auraType](currentRoamingMultiplier * multiplier);
+                break;
+            case AuraType.Ev:
+                const currentEvMultiplier = App.game.farming.externalAuras[this.auraType]();
+                App.game.farming.externalAuras[this.auraType](currentEvMultiplier * multiplier);
                 break;
             // Auras that are the max magnitude of surroundings
             case AuraType.Death:
