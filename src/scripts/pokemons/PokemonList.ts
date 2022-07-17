@@ -22688,11 +22688,16 @@ pokemonList.forEach(p => {
 
     if ((p as PokemonListData).baby) {
         // Calculate prevolutions/baby pokemon
-        // Egg steos should be lower than evolved form
+        // Egg steps should be lower than evolved form
         (p as PokemonListData).evolutions?.forEach(evo => {
             pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon;
-            const poke = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon());
-            p.eggCycles = Math.round(poke.eggCycles * 0.8);
+            // Do another loop for adding last stage of evolution on "reproductive" pokemon
+            (pokemonList.find(_p => _p.name == evo.getEvolvedPokemon()) as PokemonListData).evolutions?.forEach(lastStage => {
+                pokemonBabyPrevolutionMap[lastStage.getEvolvedPokemon()] = lastStage.basePokemon;
+            });
+
+            const eggCycles = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon()).eggCycles;
+            p.eggCycles = Math.round(eggCycles * 0.8);
         });
     } else {
         // Calculate evolutions egg steps to be higher than the base forms
