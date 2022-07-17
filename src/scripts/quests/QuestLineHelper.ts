@@ -518,7 +518,7 @@ class QuestLineHelper {
     }
 
     public static createAshKetchumQuestLine() {
-        const ashKetchumQuestLine = new QuestLine('The new kid', 'A new kid from your home town is making waves. Show him who is the real progidy of Pallet.');
+        const ashKetchumQuestLine = new QuestLine('The new kid', 'A new kid from your home town is making waves. Show him who is the real progidy of Pallet.', true, GameConstants.BulletinBoards.Kalos);
 
         const clearKantoAsh = new CustomQuest(1, 0, 'Defeat Ash Ketchum near Pallet Town.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kanto')]());
         ashKetchumQuestLine.addQuest(clearKantoAsh);
