@@ -845,7 +845,7 @@ class Update implements Saveable {
 
             // Moved EVs from statistics
             saveData.party.caughtPokemon.forEach(p => {
-                p[9] = saveData.statistics.effortPoints?.[p.id] || 0;
+                p[9] = saveData.statistics.effortPoints?.[p.id] * 100 || 0;
             });
 
             // Add Galactic Boss Cyrus TemporaryBattle
@@ -869,6 +869,22 @@ class Update implements Saveable {
             if (saveData.badgeCase[8]) {
                 saveData.quests.questLines.push({state: 1, name: 'Persons of Interest', quest: 0});
             }
+            // Start Ash questline if the player has beaten Kalos champion
+            if (saveData.badgeCase[78]) {
+                saveData.quests.questLines.push({state: 1, name: 'The new kid', quest: 0});
+            }
+            // Add Ash Ketchum Kanto TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+            // Add Ash Ketchum Johto TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 8);
+            // Add Ash Ketchum Hoenn TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 9);
+            // Add Ash Ketchum Sinnoh TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 10);
+            // Add Ash Ketchum Unova TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
+            // Add Ash Ketchum Kalos TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
         },
     };
 

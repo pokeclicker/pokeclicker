@@ -2,16 +2,23 @@
 
 function ByRegion<EvoClass extends MinimalEvo>(Base: EvoClass) {
     return class extends Base implements LocationRestricted {
-        region: string
+        regions: Array<string>
 
         constructor(...args: any[]) {
             const [region, ...rest] = args;
             super(...rest);
-            this.region = region;
+            this.type.push(EvolutionType.Region);
+            this.regions = region;
         }
 
         atLocation(): boolean {
-            return player.region == this.region;
+            let regionSatisfied = false;
+            for (const region of this.regions) {
+                if (player.region == region) {
+                    regionSatisfied = true;
+                }
+            }
+            return regionSatisfied;
         }
     };
 }
@@ -19,7 +26,7 @@ function ByRegion<EvoClass extends MinimalEvo>(Base: EvoClass) {
 // Utility type so that typescript can figure out
 // the constructor params for our lifted evolution
 type RegionRestrictedT<T extends Constructor<any>> =
-    new (region: GameConstants.Region,
+    new (regionArray: Array<GameConstants.Region>,
          ...rest: ConstructorParameters<T>
         )
     => InstanceType<T>

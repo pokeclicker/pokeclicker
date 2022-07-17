@@ -332,7 +332,7 @@ Routes.add(new RegionRoute(
         land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Meowth', 'Persian', 'Psyduck', 'Bellsprout', 'Weepinbell', 'Slowpoke'],
         water: ['Tentacool', 'Tentacruel', 'Krabby', 'Horsea', 'Magikarp'],
     }),
-    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 2)],
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 3)],
     21.4,
     GameConstants.KantoSubRegions.Sevii123,
     true,

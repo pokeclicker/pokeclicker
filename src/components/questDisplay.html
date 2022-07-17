@@ -46,28 +46,45 @@
             <!-- List of quest line quests -->
             <tbody id="questLines" data-bind="foreach: App.game.quests.questLines()">
                 <!-- ko if: $data.state() == QuestLineState.started -->
-                <tr>
-                    <td colspan="2">
-                        <div class="card-header">
-                            <knockout data-bind="text: $data.name"></knockout>
-                            <knockout class="info text-primary" data-bind="tooltip: { title: $data.description, trigger: 'hover', placement:'left' }">ⓘ</knockout>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="text-center">
-                    <td colspan="2" data-bind="text: $data.curQuestObject().description"></td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="p-0">
-                        <div class="progress p-0">
-                            <div class="progress-bar bg-success" role="progressbar"
-                                data-bind="attr:{ style: 'width:' + ($data.curQuestObject().progress() * 100) + '%'}"
-                                aria-valuemin="0" aria-valuemax="100">
-                                <span data-bind="text: ko.pureComputed(function(){return $data.curQuestObject().progressText()})">0/1000</span>
+                    <tr>
+                        <td colspan="2">
+                            <div class="card-header">
+                                <knockout data-bind="text: $data.name"></knockout>
+                                <knockout class="info text-primary" data-bind="tooltip: { title: $data.description, trigger: 'hover', placement:'left' }">ⓘ</knockout>
                             </div>
-                        </div>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                    <tr class="text-center">
+                        <td colspan="2" data-bind="text: $data.curQuestObject().description"></td>
+                    </tr>
+                    <!-- ko ifnot: $data.curQuestObject().quests -->
+                    <tr>
+                        <td colspan="2" class="p-0">
+                            <div class="progress p-0">
+                                <div class="progress-bar bg-success" role="progressbar"
+                                    data-bind="attr:{ style: 'width:' + ($data.curQuestObject().progress() * 100) + '%'}"
+                                    aria-valuemin="0" aria-valuemax="100">
+                                    <span data-bind="text: ko.pureComputed(function(){return $data.curQuestObject().progressText()})">0/1000</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- /ko -->
+                    <!-- ko if: $data.curQuestObject().quests -->
+                        <!-- ko foreach: $data.curQuestObject().quests -->
+                        <tr>
+                            <td colspan="2">
+                                <div class="progress p-0">
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                        data-bind="attr:{ style: 'width:' + ($data.progress() * 100) + '%'}"
+                                        aria-valuemin="0" aria-valuemax="100">
+                                        <span data-bind="text: ko.pureComputed(function(){return $data.progressText()})">0/1000</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- /ko -->
+                    <!-- /ko -->
                 <!-- /ko -->
             </tbody>
         </table>

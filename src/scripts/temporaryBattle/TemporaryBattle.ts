@@ -1,3 +1,11 @@
+type TemporaryBattleOptionalArgument = {
+    rewardFunction?: () => void,
+    firstTimeRewardFunction?: () => void,
+    isTrainerBattle?: boolean,
+    displayName?: string,
+    returnTown?: string, // If in town, that town will be used. If not in town, this will be used, with the Dock town as default
+};
+
 class TemporaryBattle extends TownContent {
     completeRequirements: (Requirement | OneFromManyRequirement)[];
 
@@ -5,7 +13,7 @@ class TemporaryBattle extends TownContent {
         return 'btn btn-secondary';
     }
     public text(): string {
-        return `Fight ${this.name}`;
+        return `Fight ${this.getDisplayName()}`;
     }
     public isVisible(): boolean {
         return this.isUnlocked() && !this.completeRequirements.every(r => r.isCompleted());
@@ -22,18 +30,23 @@ class TemporaryBattle extends TownContent {
             return areaStatus.completed;
         }
     }
+    public getDisplayName() {
+        return this.optionalArgs.displayName ?? this.name;
+    }
+    public getTown() {
+        return this.parent ?? TownList[this.optionalArgs.returnTown] ?? TownList[GameConstants.DockTowns[player.region]];
+    }
 
     constructor(
         public name: string,
         public pokemons: GymPokemon[],
         public defeatMessage: string,
-        requirements: (Requirement | OneFromManyRequirement)[] = [],
-        completeRequirements: (Requirement | OneFromManyRequirement)[] = [],
-        public rewardFunction: () => void = () => {},
-        public isTrainerBattle = true
+        requirements: Requirement[] = [],
+        completeRequirements: Requirement[] = undefined,
+        public optionalArgs: TemporaryBattleOptionalArgument = {}
     ) {
         super(requirements);
-        if (completeRequirements.length == 0) {
+        if (!completeRequirements) {
             completeRequirements = [new TemporaryBattleRequirement(name)];
         }
         this.completeRequirements = completeRequirements;
