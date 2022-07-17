@@ -96,6 +96,41 @@ SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a l
         RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Squirtle (clone)');
     }
 );
+// Pokemon XD release date
+SpecialEvents.newEvent('Gale of darkness!', 'Encounter Shadow Lugia for a limited time in Whirl Islands.',
+    // Start
+    new Date(new Date().getFullYear(), 7, 4, 1), () => {
+        dungeonList['Whirl Islands'].bossList.push(new DungeonBossPokemon('Shadow Lugia', 1410000, 100));
+    },
+    // End
+    new Date(new Date().getFullYear(), 7, 12, 23), () => {
+        dungeonList['Whirl Islands'].bossList = dungeonList['Whirl Islands'].bossList.filter(boss => boss.name != 'Shadow Lugia');
+    }
+);
+// Pokemon yellow release date
+SpecialEvents.newEvent('Pokémon Yellow!', 'Encounter Classic Pikachu for a limited time in Viridian Forest and evolve it into Classic Raichu.',
+    // Start
+    new Date(new Date().getFullYear(), 8, 4, 1), () => {
+        dungeonList['Viridian Forest'].bossList.push(new DungeonBossPokemon('Classic Pikachu', 510, 7));
+    },
+    // End
+    new Date(new Date().getFullYear(), 8, 12, 23), () => {
+        dungeonList['Viridian Forest'].bossList = dungeonList['Viridian Forest'].bossList.filter(boss => boss.name != 'Classic Pikachu');
+    }
+);
+// Pokemon mystery dungeon explorers release date
+SpecialEvents.newEvent('Explorers of time and darkness!', 'Encounter Primal Dialga for a limited time in Spear Pillar.<br/>Encounter Explorer Piplup roaming in Sinnoh',
+    // Start
+    new Date(new Date().getFullYear(), 8, 13, 1), () => {
+        dungeonList['Spear Pillar'].bossList.push(new DungeonBossPokemon('Primal Dialga', 11880000, 100));
+        RoamingPokemonList.add(GameConstants.Region.sinnoh, 0, new RoamingPokemon('Explorer Piplup'));
+    },
+    // End
+    new Date(new Date().getFullYear(), 8, 20, 23), () => {
+        dungeonList['Spear Pillar'].bossList = dungeonList['Spear Pillar'].bossList.filter(boss => boss.name != 'Primal Dialga');
+        RoamingPokemonList.remove(GameConstants.Region.sinnoh, 0, 'Explorer Piplup');
+    }
+);
 // Halloween
 SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited time around Kanto, Johto and Hoenn.',
     // Start
