@@ -64,6 +64,7 @@ class TemporaryBattleBattle extends Battle {
      * Reset the counter.
      */
     public static generateNewEnemy() {
+        this.catching(false);
         TemporaryBattleBattle.counter = 0;
         TemporaryBattleBattle.enemyPokemon(PokemonFactory.generateTemporaryBattlePokemon(TemporaryBattleBattle.battle, TemporaryBattleBattle.index()));
     }
