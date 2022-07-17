@@ -114,6 +114,6 @@ RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Zarude
 RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Galarian Moltres', new TemporaryBattleRequirement('Dyna Tree Birds')));
 
 //Galar - Crown Tundra
-RoamingPokemonList.add(GameConstants.Region.galar, 3, new RoamingPokemon('Spectrier', new TemporaryBattleRequirement('Spectrier')));
-RoamingPokemonList.add(GameConstants.Region.galar, 3, new RoamingPokemon('Glastrier', new TemporaryBattleRequirement('Glastrier')));
+RoamingPokemonList.add(GameConstants.Region.galar, 3, new RoamingPokemon('Spectrier', new QuestLineStepCompletedRequirement('The Crown of Galar', 3)));
+RoamingPokemonList.add(GameConstants.Region.galar, 3, new RoamingPokemon('Glastrier', new QuestLineStepCompletedRequirement('The Crown of Galar', 3)));
 RoamingPokemonList.add(GameConstants.Region.galar, 3, new RoamingPokemon('Galarian Articuno', new TemporaryBattleRequirement('Dyna Tree Birds')));

@@ -666,11 +666,13 @@ class QuestLineHelper {
     public static createSwordShieldQuestLine() {
         const swordShieldQuestLine = new QuestLine('Sword and Shield', 'Stop the weapons from making a mess.');
 
-        const clearSordward1 = new CustomQuest(1, 0, 'A guy with weird hair has taken the Rusted Sword. Defeat him to take it back.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sordward1')]());
-        swordShieldQuestLine.addQuest(clearSordward1);
-
-        const clearShielbert1 = new CustomQuest(1, 0, 'A guy with weird hair has taken the Rusted Shield. Defeat him to take it back.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Shielbert1')]());
-        swordShieldQuestLine.addQuest(clearShielbert1);
+        const clearSordward1 = new CustomQuest(1, 0, 'Defeat Sordward.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sordward1')]());
+        const clearShielbert1 = new CustomQuest(1, 0, 'Defeat Shielbert.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Shielbert1')]());
+        swordShieldQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                clearSordward1,
+                clearShielbert1,
+            ], 'A pair with weird hair has taken the Rusted Sword and Sworded Shield. Defeat them to take them back.'));
 
         const clearRampagingTsareena = new CustomQuest(1, 0, 'Sordward and Shielbert are forcing Pokémon to rampage in Galar\'s Stadiums. First is a Tsareena in Turffield Stadium. Defeat it.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Tsareena')]());
         swordShieldQuestLine.addQuest(clearRampagingTsareena);
@@ -684,20 +686,24 @@ class QuestLineHelper {
         const clearSordwardandShielbert = new CustomQuest(1, 0, 'Sordward and Shielbert are trying to steal the Wishing Stars at Professor Magnolia\'s Lab. Stop them.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sordward & Shielbert')]());
         swordShieldQuestLine.addQuest(clearSordwardandShielbert);
 
-        const clearRampagingConkeldurr = new CustomQuest(1, 0, 'Sordward and Shielbert have forced a Conkeldurr and a Dusknoir to rampage in Stow-on-Side Stadium. Conkeldurr is blocking the way to Dusknoir, so deal with it first.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Conkeldurr')]());
-        swordShieldQuestLine.addQuest(clearRampagingConkeldurr);
-
-        const clearRampagingDusknoir = new CustomQuest(1, 0, 'Now the Conkeldurr is dealt with you can access the Dusknoir. Defeat it as well.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Dusknoir')]());
-        swordShieldQuestLine.addQuest(clearRampagingDusknoir);
+        const clearRampagingConkeldurr = new CustomQuest(1, 0, 'Defeat Conkeldurr.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Conkeldurr')]());
+        const clearRampagingDusknoir = new CustomQuest(1, 0, 'Defeat Dusknoir.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Dusknoir')]());
+        swordShieldQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                clearRampagingConkeldurr,
+                clearRampagingDusknoir,
+            ], 'Sordward and Shielbert have forced a Conkeldurr and a Dusknoir to rampage in Stow-on-Side Stadium. Defeat them both'));
 
         const clearGymLeaderBede2 = new CustomQuest(1, 0, 'There were rampaging Pokémon at Ballonlea Stadium but Bede already defeated them. There are no more rampaging Pokémon for now, and he wants to battle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Gym Leader Bede')]());
         swordShieldQuestLine.addQuest(clearGymLeaderBede2);
 
-        const clearRampagingGigalith = new CustomQuest(1, 0, 'Sordward and Shielbert have forced a Gigalith and a Froslass to rampage in Circhester Stadium. Gigalith is blocking the way to Froslass, so deal with it first.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Gigalith')]());
-        swordShieldQuestLine.addQuest(clearRampagingGigalith);
-
-        const clearRampagingFroslass = new CustomQuest(1, 0, 'Now the Gigalith is dealt with you can access the Froslass. Defeat it as well.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Froslass')]());
-        swordShieldQuestLine.addQuest(clearRampagingFroslass);
+        const clearRampagingGigalith = new CustomQuest(1, 0, 'Defeat Gigalith.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Gigalith')]());
+        const clearRampagingFroslass = new CustomQuest(1, 0, 'Defeat Froslass.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Froslass')]());
+        swordShieldQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                clearRampagingGigalith,
+                clearRampagingFroslass,
+            ], 'Sordward and Shielbert have forced a Gigalith and a Froslass to rampage in Circhester Stadium. Defeat them both'));
 
         const clearGymLeaderMarnie = new CustomQuest(1, 0, 'There are no more rampaging Pokémon for now, and Marnie wants to battle you in Spikemuth.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Gym Leader Marnie')]());
         swordShieldQuestLine.addQuest(clearGymLeaderMarnie);
@@ -705,11 +711,29 @@ class QuestLineHelper {
         const clearRampagingHaxorus = new CustomQuest(1, 0, 'Sordward and Shielbert have forced a Haxorus to rampage in Hammerlocke Stadium. Hopefully this is the last one.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Haxorus')]());
         swordShieldQuestLine.addQuest(clearRampagingHaxorus);
 
-        const clearSordward2 = new CustomQuest(1, 0, 'Sordward is trying to make Zacian go on a rampage in the Energy Plant. Stop him.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sordward2')]());
-        swordShieldQuestLine.addQuest(clearSordward2);
+        const clearSordward2 = new CustomQuest(1, 0, 'Defeat Sordward.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sordward2')]());
+        const clearShielbert2 = new CustomQuest(1, 0, 'Defeat Shielbert.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Shielbert2')]());
+        swordShieldQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                clearSordward2,
+                clearShielbert2,
+            ], 'Sordward and Shielbert are trying to using the Rusted Sword and Shield to make Zacian and Zamazenta go on a rampage in Energy Plant. Stop them.'));
 
-        const clearShielbert2 = new CustomQuest(1, 0, 'Shielbert is trying to make Zamazenta go on a rampage in the Energy Plant. Stop him.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Shielbert2')]());
-        swordShieldQuestLine.addQuest(clearShielbert2);
+        const clearRampagingZacian = new CustomQuest(1, 0, 'Defeat Zacian.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Zacian')]());
+        const clearRampagingZamazenta = new CustomQuest(1, 0, 'Defeat Zamazenta.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Zamazenta')]());
+        swordShieldQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                clearRampagingZacian,
+                clearRampagingZamazenta,
+            ], 'Zacian and Zamazenta are rampaging in Energy Plant. Defeat them!'));
+
+        const catchZacian = new CustomQuest(1, 0, 'Catch Zacian.', () => App.game.statistics.pokemonCaptured[pokemonMap.Zacian.id](), 0);
+        const catchZamazenta = new CustomQuest(1, 0, 'Catch Zamazenta.', () => App.game.statistics.pokemonCaptured[pokemonMap.Zamazenta.id](), 0);
+        swordShieldQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchZacian,
+                catchZamazenta,
+            ], 'Now they have calmed down, Zacian and Zamazenta seem to want you to catch them!'));
 
         App.game.quests.questLines().push(swordShieldQuestLine);
     }
@@ -717,17 +741,21 @@ class QuestLineHelper {
     public static createDojoArmorQuestLine() {
         const dojoArmorQuestLine = new QuestLine('The Dojo\'s Armor', 'Obtain the Secret Armor of the Master Dojo.');
 
-        const clearKlara2 = new CustomQuest(1, 0, 'Both you and Klara have happened upon the same Max Mushroom in Warm-Up Tunnel. Defeat her to win it.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Klara2')]());
-        dojoArmorQuestLine.addQuest(clearKlara2);
+        const clearKlara2 = new CustomQuest(1, 0, 'Defeat Klara.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Klara2')]());
+        const clearAvery2 = new CustomQuest(1, 0, 'Defeat Avery.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Avery2')]());
+        dojoArmorQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                clearKlara2,
+                clearAvery2,
+            ], 'You, Klara and Avery have happened upon the same Max Mushroom in Warm-Up Tunnel. Defeat them both to win it.'));
 
-        const clearAvery2 = new CustomQuest(1, 0, 'Both you and Avery have happened upon the same Max Mushroom in Warm-Up Tunnel. Defeat him to win it.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Avery2')]());
-        dojoArmorQuestLine.addQuest(clearAvery2);
-
-        const clearKlara3 = new CustomQuest(1, 0, 'For the final trial, you must defeat both Klara and Avery at the Master Dojo Battlefield. First, defeat Klara.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Klara3')]());
-        dojoArmorQuestLine.addQuest(clearKlara3);
-
-        const clearAvery3 = new CustomQuest(1, 0, 'Now Klara is defeated, defeat Avery', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Avery3')]());
-        dojoArmorQuestLine.addQuest(clearAvery3);
+        const clearKlara3 = new CustomQuest(1, 0, 'Defeat Klara.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Klara3')]());
+        const clearAvery3 = new CustomQuest(1, 0, 'Defeat Avery', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Avery3')]());
+        dojoArmorQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                clearKlara2,
+                clearAvery2,
+            ], 'For the final trial, you must defeat both Klara and Avery at the Master Dojo Battlefield.'));
 
         const TowerofDarknessReward = () => {
             App.game.party.gainPokemonById(892);
@@ -738,10 +766,6 @@ class QuestLineHelper {
                 timeout: 3e4,
             });
         };
-
-        const clearTowerofDarkness = new CustomQuest(1, TowerofDarknessReward, 'Train Kubfu in the Tower of Darkness so it can evolve!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Tower of Darkness')]());
-        dojoArmorQuestLine.addQuest(clearTowerofDarkness);
-
         const TowerofWatersReward = () => {
             App.game.party.gainPokemonById(892.1);
             Notifier.notify({
@@ -751,9 +775,13 @@ class QuestLineHelper {
                 timeout: 3e4,
             });
         };
-
-        const clearTowerofWaters = new CustomQuest(1, TowerofWatersReward, 'Train Kubfu in the Tower of Waters so it can evolve!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Tower of Waters')]());
-        dojoArmorQuestLine.addQuest(clearTowerofWaters);
+        const clearTowerofDarkness = new CustomQuest(1, TowerofDarknessReward, 'Defeat Tower of Darkness.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Tower of Darkness')]());
+        const clearTowerofWaters = new CustomQuest(1, TowerofWatersReward, 'Defeat Tower of Waters', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Tower of Waters')]());
+        dojoArmorQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                clearTowerofDarkness,
+                clearTowerofWater,
+            ], 'Train Kubfu in the Tower of Darkness and the Tower of Waters so it can evolve!'));
 
         App.game.quests.questLines().push(dojoArmorQuestLine);
     }
@@ -764,23 +792,29 @@ class QuestLineHelper {
         const clearCalyrex = new CustomQuest(1, 0, 'A mysterious Pokémon has appeared and challenged you to a battle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Calyrex')]());
         galarCrownQuestLine.addQuest(clearCalyrex);
 
-        const oldCemetery = new CustomQuest(30, 0, 'Calyrex is going to Old Cemetery to grow a Shaderoot Carrot. Protect it from wild Pokémon so it can concentrate.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['49'](), 0);
-        galarCrownQuestLine.addQuest(oldCemetery);
+        const oldCemetery = new CustomQuest(30, 0, 'Old Cemetery.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['49'](), 0);
+        const slipperySlope = new CustomQuest(30, 0, 'Slippery Slope.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['54'](), 0);
+        galarCrownQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                oldCemetery,
+                slipperySlope,
+            ], 'Calyrex is going to Old Cemetery and Slippery Slope to grow a Shaderoot Carrot and an Iceroot Carrot. Protect it from wild Pokémon so it can concentrate.'));
 
-        const slipperySlope = new CustomQuest(30, 0, 'Calyrex is going to Slippery Slope to grow a Iceroot Carrot. Protect it from wild Pokémon so it can concentrate.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['54'](), 0);
-        galarCrownQuestLine.addQuest(slipperySlope);
+        const clearSpectrier = new CustomQuest(1, 0, 'Defeat Spectrier.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Spectrier')]());
+        const clearGlastrier = new CustomQuest(1, 0, 'Defeat Glastrier.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Glastrier')]());
+        galarCrownQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                clearSpectrier,
+                clearGlastrier,
+            ], 'Mysterious spectral and frozen Pokémon are challenging you in Freezington'));
 
-        const clearSpectrier = new CustomQuest(1, 0, 'A mysterious spectral Pokémon has appeared and challenged you to a battle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Spectrier')]());
-        galarCrownQuestLine.addQuest(clearSpectrier);
-
-        const clearGlastrier = new CustomQuest(1, 0, 'A mysterious frozen Pokémon has appeared and challenged you to a battle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Glastrier')]());
-        galarCrownQuestLine.addQuest(clearGlastrier);
-
-        const catchSpectrier = new CustomQuest(1, 0, 'Spectrier is now roaming the Crown Tundra. Catch it when the opportunity arises.', () => App.game.statistics.pokemonCaptured[pokemonMap.Spectrier.id](), 0);
-        galarCrownQuestLine.addQuest(catchSpectrier);
-
-        const catchGlastrier = new CustomQuest(1, 0, 'Glastrier is now roaming the Crown Tundra. Catch it when the opportunity arises.', () => App.game.statistics.pokemonCaptured[pokemonMap.Glastrier.id](), 0);
-        galarCrownQuestLine.addQuest(catchGlastrier);
+        const catchSpectrier = new CustomQuest(1, 0, 'Catch Spectrier.', () => App.game.statistics.pokemonCaptured[pokemonMap.Spectrier.id](), 0);
+        const catchGlastrier = new CustomQuest(1, 0, 'Catch Glastrier.', () => App.game.statistics.pokemonCaptured[pokemonMap.Glastrier.id](), 0);
+        galarCrownQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchSpectrier,
+                catchGlastrier,
+            ], 'Spectrier and Glastrier are now roaming the Crown Tundra. Catch them when the opportunity arises!'));
 
         const catchCalyrex = new CustomQuest(1, 0, 'Now you have found and caught Glastrier and Spectrier, Calyrex wants to challenge you at Crown Shrine. Catch it!', () => App.game.statistics.pokemonCaptured[pokemonMap.Calyrex.id](), 0);
         galarCrownQuestLine.addQuest(catchCalyrex);
@@ -797,14 +831,15 @@ class QuestLineHelper {
         const clearDynaTreeBirds = new CustomQuest(1, 0, 'You witnessed 3 powerful looking bird pokemon resembling Articuno, Zapdos and Moltres fighting over the fruit of the Dyna Tree. Upon noticing you, they attack!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dyna Tree Birds')]());
         dynaTreeBirdsQuestLine.addQuest(clearDynaTreeBirds);
 
-        const catchGalarianArticuno = new CustomQuest(1, 0, 'The bird resembling Articuno didn\'t fly far, it is now roaming the Crown Tundra. Catch it when you get the chance.', () => App.game.statistics.pokemonCaptured[pokemonMap['Galarian Articuno'].id](), 0);
-        dynaTreeBirdsQuestLine.addQuest(catchGalarianArticuno);
-
-        const catchGalarianZapdos = new CustomQuest(1, 0, 'The bird resembling Zapdos ran to South Galar, where it is now roaming. Catch it when you get the chance.', () => App.game.statistics.pokemonCaptured[pokemonMap['Galarian Zapdos'].id](), 0);
-        dynaTreeBirdsQuestLine.addQuest(catchGalarianZapdos);
-
-        const catchGalarianMoltres = new CustomQuest(1, 0, 'The bird resembling Moltres flew to the Isle of Armor, around which it is now roaming. Catch it when you get the chance', () => App.game.statistics.pokemonCaptured[pokemonMap['Galarian Moltres'].id](), 0);
-        dynaTreeBirdsQuestLine.addQuest(catchGalarianMoltres);
+        const catchGalarianArticuno = new CustomQuest(1, 0, 'Catch Galarian Articuno.', () => App.game.statistics.pokemonCaptured[pokemonMap['Galarian Articuno'].id](), 0);
+        const catchGalarianZapdos = new CustomQuest(1, 0, 'Catch Galarian Zapdos.', () => App.game.statistics.pokemonCaptured[pokemonMap['Galarian Zapdos'].id](), 0);
+        const catchGalarianMoltres = new CustomQuest(1, 0, 'Catch Galarian Moltres.', () => App.game.statistics.pokemonCaptured[pokemonMap['Galarian Moltres'].id](), 0);
+        dynaTreeBirdsQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchGalarianArticuno,
+                catchGalarianZapdos,
+                catchGalarianMoltres,
+            ], 'The Galarian forms of Articuno, Zapdos and Moltres are roaming in the Crown Tundra, Southern Galar and the Isle of Armor respectively. Catch them when the opportunity arises!'));
 
         App.game.quests.questLines().push(dynaTreeBirdsQuestLine);
     }
@@ -815,23 +850,36 @@ class QuestLineHelper {
         const threePointPass = new CustomQuest(25, 0, 'Peony told you of a peculiar ruin located at Three-Point Pass. Explore the area to find it.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['52'](), 0);
         ancientGolemsQuestLine.addQuest(threePointPass);
 
-        const clearRockPeakRuins1 = new CustomQuest(1, 0, 'Peony has directed you to the Rock Peak Ruins in Giants Bed. Explore it to look for any clues to opening the peculiar ruin.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rock Peak Ruins')]());
-        ancientGolemsQuestLine.addQuest(clearRockPeakRuins1);
+        const catchRegirock = new CustomQuest(1, 0, 'Catch Regirock.', () => App.game.statistics.pokemonCaptured[pokemonMap['Regirock'].id](), 0);
+        const catchRegice = new CustomQuest(1, 0, 'Catch Regice.', () => App.game.statistics.pokemonCaptured[pokemonMap['Regice'].id](), 0);
+        const catchRegisteel = new CustomQuest(1, 0, 'Catch Registeel.', () => App.game.statistics.pokemonCaptured[pokemonMap['Registeel'].id](), 0);
+        ancientGolemsQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchRegirock,
+                catchRegice,
+                catchRegisteel,
+            ], 'Catch Regirock, Regice and Registeel in the Rock Peak Ruins, Iceberg Ruins and Iron Ruins respectively'));
 
-        const clearIcebergRuins1 = new CustomQuest(1, 0, 'Peony has directed you to the Iceberg Ruins in Snowslide Slope. Explore it to look for any clues to opening the peculiar ruin.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iceberg Ruins')]());
-        ancientGolemsQuestLine.addQuest(clearIcebergRuins1);
+        const clearRockPeakRuins = new CustomQuest(10, 0, 'Clear Rock Peak Ruins 10 times.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rock Peak Ruins')]());
+        const clearIcebergRuins = new CustomQuest(10, 0, 'Clear Iceberg Ruins 10 times.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iceberg Ruins')]());
+        const clearIronRuins = new CustomQuest(10, 0, 'Clear Iron Ruins 10 times.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iron Ruins')]());
+        ancientGolemsQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                clearRockPeakRuins,
+                clearIcebergRuins,
+                clearIronRuins,
+            ], 'Clear Rock Peak Ruins, Iceberg Ruins and Iron ruins 10 times each.'));
 
-        const clearIronRuins1 = new CustomQuest(1, 0, 'Peony has directed you to the Iron Ruins in Giants Bed. Explore it to look for any clues to opening the peculiar ruin.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iron Ruins')]());
-        ancientGolemsQuestLine.addQuest(clearIronRuins1);
+        const catchRegieleki = new CustomQuest(1, 0, 'Catch Regieleki.', () => App.game.statistics.pokemonCaptured[pokemonMap['Regieleki'].id](), 0);
+        const catchRegidrago = new CustomQuest(1, 0, 'Catch Regidrago.', () => App.game.statistics.pokemonCaptured[pokemonMap['Regidrago'].id](), 0);
+        ancientGolemsQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchRegieleki,
+                catchRegidrago,
+            ], 'Now it has finally unlocked, catch Regieleki and Regidrago in the Split-Decision Ruins!'));
 
-        const clearRockPeakRuins2 = new CustomQuest(9, 0, 'Peony had advised you keep exploring Rock Peak Ruins. Continue until the area seems to get smaller...', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rock Peak Ruins')]());
-        ancientGolemsQuestLine.addQuest(clearRockPeakRuins2);
-
-        const clearIcebergRuins2 = new CustomQuest(9, 0, 'Peony had advised you keep exploring Iceberg Ruins. Continue until the area seems to get smaller...', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iceberg Ruins')]());
-        ancientGolemsQuestLine.addQuest(clearIcebergRuins2);
-
-        const clearIronRuins2 = new CustomQuest(9, 0, 'Peony had advised you keep exploring Iron Ruins. Continue until the area seems to get smaller...', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iron Ruins')]());
-        ancientGolemsQuestLine.addQuest(clearIronRuins2);
+        const clearRegigigas = new CustomQuest(1, 0, 'Now you have caught all of the legendary golems it created, Regigigas has appeared in Giants Bed. Defeat it!,', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Regigigas')]());
+        dynaTreeBirdsQuestLine.addQuest(clearRegigigas);
 
         App.game.quests.questLines().push(ancientGolemsQuestLine);
     }

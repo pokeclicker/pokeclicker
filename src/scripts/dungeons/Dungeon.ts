@@ -8313,8 +8313,8 @@ dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
                 new GymPokemon('Gigantamax Copperajah', 26704124, 52),
             ],
             { weight: 3 }, 'Rose', '(rose)'),
-        new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {requirement: new TemporaryBattleRequirement('Sordward2')}),
-        new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {requirement: new TemporaryBattleRequirement('Shielbert2')}),
+        new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 12)}),
+        new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 12)}),
     ],
     96500, 32);
 

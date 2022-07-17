@@ -3749,9 +3749,7 @@ TownList['Split-Decision Ruins'] = new DungeonTown(
     [
         new MultiRequirement([
             new RouteKillRequirement(10, GameConstants.Region.galar, 52),
-            new QuestLineStepCompletedRequirement('The Ancient Golems', 4),
-            new QuestLineStepCompletedRequirement('The Ancient Golems', 5),
-            new QuestLineStepCompletedRequirement('The Ancient Golems', 6),
+            new QuestLineStepCompletedRequirement('The Ancient Golems', 3),
         ]),
     ]
 );
