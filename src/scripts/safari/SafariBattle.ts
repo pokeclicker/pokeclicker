@@ -145,7 +145,11 @@ class SafariBattle {
 
     private static capturePokemon() {
         SafariBattle.text(`GOTCHA!<br>${SafariBattle.enemy.name} was caught!`);
-        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(SafariBattle.enemy.name).id, SafariBattle.enemy.shiny);
+        const pokemonID = PokemonHelper.getPokemonByName(SafariBattle.enemy.name).id;
+        App.game.party.gainPokemonById(pokemonID, SafariBattle.enemy.shiny);
+        const partyPokemon = App.game.party.getPokemon(pokemonID);
+        partyPokemon.effortPoints += App.game.party.gainEffortPoints(partyPokemon, shiny, GameConstants.SAFARI_EP_YIELD);
+
     }
 
     public static throwBait(baitType: BaitType) {
