@@ -37,6 +37,7 @@ TemporaryBattleList['Biker Goon 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Biker Goon',
+        imageName: 'Biker Goon',
     }
 );
 TemporaryBattleList['Biker Goon 2'] = new TemporaryBattle(
@@ -47,6 +48,7 @@ TemporaryBattleList['Biker Goon 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Biker Goon',
+        imageName: 'Biker Goon',
     }
 );
 TemporaryBattleList['Biker Goon 3'] = new TemporaryBattle(
@@ -57,6 +59,7 @@ TemporaryBattleList['Biker Goon 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Biker Goon',
+        imageName: 'Biker Goon',
     }
 );
 TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
