@@ -328,6 +328,13 @@ class Underground implements Feature {
                     });
                     return;
                 }
+                if (Underground.getMineItemById(item.id).isShard()) {
+                    Notifier.notify({
+                        message: 'Shards Cannot be sold for Diamonds',
+                        type: NotificationConstants.NotificationOption.warning,
+                    });
+                    return;
+                }
                 if (item.valueType == 'Mine Egg') {
                     amount = 1;
                 }
