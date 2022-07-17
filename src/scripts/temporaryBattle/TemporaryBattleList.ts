@@ -725,7 +725,7 @@ TemporaryBattleList.Shielbert2 = new TemporaryBattle(
 );
 TemporaryBattleList['Rampaging Zacian'] = new TemporaryBattle(
     'Rampaging Zacian',
-    [new GymPokemon('Zacian (Crowned)', 2357932001, 70)],
+    [new GymPokemon('Zacian (Crowned Sword)', 2357932001, 70)],
     'Zacian fainted.',
     [
         new TemporaryBattleRequirement('Sordward2'),
@@ -734,7 +734,7 @@ TemporaryBattleList['Rampaging Zacian'] = new TemporaryBattle(
 );
 TemporaryBattleList['Rampaging Zamazenta'] = new TemporaryBattle(
     'Rampaging Zamazenta',
-    [new GymPokemon('Zamazenta (Crowned)', 2357932001, 70)],
+    [new GymPokemon('Zamazenta (Crowned Shield)', 2357932001, 70)],
     'Zamazenta fainted.',
     [
         new TemporaryBattleRequirement('Sordward2'),
