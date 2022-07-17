@@ -577,7 +577,7 @@ class QuestLineHelper {
         primalsQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchExploud,
-                clearCaveofOrigin
+                clearCaveofOrigin,
             ], 'Clear Delta Cave of Origin five times and catch Exploud.'));
 
         const talkToWeatherScientist3 = new TalkToNPCQuest(WeatherInstituteScientist3, 'Bring Exploud to the Delta Weather Institute.');
@@ -600,7 +600,7 @@ class QuestLineHelper {
         primalsQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchWater,
-                catchGround
+                catchGround,
             ], 'Catch 100 Water-type and 100 Ground-type Pokémon.'));
 
         const talkToWeatherScientist5 = new TalkToNPCQuest(WeatherInstituteScientist5, 'Check in at the Delta Weather Institute.');
@@ -613,7 +613,7 @@ class QuestLineHelper {
         primalsQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 clearTerraCave,
-                clearMarineCave
+                clearMarineCave,
             ], 'Clear Terra Cave and Marine Cave.'));
 
         App.game.quests.questLines().push(primalsQuestLine);
