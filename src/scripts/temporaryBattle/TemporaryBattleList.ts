@@ -118,6 +118,7 @@ TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Pallet Town',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
@@ -136,6 +137,7 @@ TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Cianwood City',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
@@ -154,6 +156,7 @@ TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Lilycove City',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
@@ -172,6 +175,7 @@ TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Survival Area',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
@@ -190,6 +194,7 @@ TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Mistralton City',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
@@ -208,6 +213,7 @@ TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Kiloude City',
+        imageName: 'Ash Ketchum',
     }
 );
 
@@ -319,6 +325,7 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Seafolk Village',
+        imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
             App.game.party.gainPokemonById(25.07);
         },
