@@ -3069,7 +3069,7 @@ TownList['Roadside Motel'] = new Town(
     GameConstants.Region.alola,
     [TemporaryBattleList.Anabel, RoadsideMotelShop],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+        requirements: [new QuestLineStartedRequirement('Ultra Beast Hunt')],
         npcs: [RoadsideMotelAnabel],
     }
 );
