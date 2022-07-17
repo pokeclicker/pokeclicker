@@ -708,9 +708,9 @@ class QuestLineHelper {
         const threePointPass = new CustomQuest(25, 0, 'Peony told you of a peculiar ruin located at Three-Point Pass. Explore the area to find it.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['52'](), 0);
         ancientGolemsQuestLine.addQuest(threePointPass);
 
-        const catchRegirock = new CustomQuest(1, 0, 'Catch Regirock.', () => App.game.statistics.pokemonCaptured[pokemonMap['Regirock'].id](), 0);
-        const catchRegice = new CustomQuest(1, 0, 'Catch Regice.', () => App.game.statistics.pokemonCaptured[pokemonMap['Regice'].id](), 0);
-        const catchRegisteel = new CustomQuest(1, 0, 'Catch Registeel.', () => App.game.statistics.pokemonCaptured[pokemonMap['Registeel'].id](), 0);
+        const catchRegirock = new CustomQuest(1, 0, 'Catch Regirock.', () => App.game.statistics.pokemonCaptured[pokemonMap.Regirock.id](), 0);
+        const catchRegice = new CustomQuest(1, 0, 'Catch Regice.', () => App.game.statistics.pokemonCaptured[pokemonMap.Regice.id](), 0);
+        const catchRegisteel = new CustomQuest(1, 0, 'Catch Registeel.', () => App.game.statistics.pokemonCaptured[pokemonMap.Registeel.id](), 0);
         ancientGolemsQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchRegirock,
@@ -728,8 +728,8 @@ class QuestLineHelper {
                 clearIronRuins,
             ], 'Clear Rock Peak Ruins, Iceberg Ruins and Iron ruins 10 times each.'));
 
-        const catchRegieleki = new CustomQuest(1, 0, 'Catch Regieleki.', () => App.game.statistics.pokemonCaptured[pokemonMap['Regieleki'].id](), 0);
-        const catchRegidrago = new CustomQuest(1, 0, 'Catch Regidrago.', () => App.game.statistics.pokemonCaptured[pokemonMap['Regidrago'].id](), 0);
+        const catchRegieleki = new CustomQuest(1, 0, 'Catch Regieleki.', () => App.game.statistics.pokemonCaptured[pokemonMap.Regieleki.id](), 0);
+        const catchRegidrago = new CustomQuest(1, 0, 'Catch Regidrago.', () => App.game.statistics.pokemonCaptured[pokemonMap.Regidrago.id](), 0);
         ancientGolemsQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchRegieleki,
