@@ -57,10 +57,12 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Egg] = ko.observable<number>(1);
         this.externalAuras[AuraType.Shiny] = ko.observable<number>(1);
         this.externalAuras[AuraType.Roaming] = ko.observable<number>(1);
+        this.externalAuras[AuraType.Ev] = ko.observable<number>(1);
 
         this.multiplier.addBonus('shiny', () => this.externalAuras[AuraType.Shiny]());
         this.multiplier.addBonus('eggStep', () => this.externalAuras[AuraType.Egg]());
         this.multiplier.addBonus('roaming', () => this.externalAuras[AuraType.Roaming]());
+        this.multiplier.addBonus('ev', () => this.externalAuras[AuraType.Ev]());
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {
@@ -378,7 +380,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Rowap]     = new Berry(BerryType.Rowap,    [5760, 9000, 14040, 21240, 42480],
             1, 0.05, 2900, 20,
             [10, 0, 0, 0, 40], BerryColor.Blue,
-            ['In days of old, people worked the top-shaped pieces of this Berry free and used them as toys.'], undefined, ['Flabébé (Blue)']);
+            ['In days of old, people worked the top-shaped pieces of this Berry free and used them as toys.'], new Aura(AuraType.Ev, [1.005, 1.01, 1.015]), ['Flabébé (Blue)']);
         this.berryData[BerryType.Kee]       = new Berry(BerryType.Kee,      [4680, 9360, 18360, 36360, 72720],
             1, 0.05, 3000, 20,
             [30, 30, 10, 10, 10], BerryColor.Yellow,
@@ -1017,6 +1019,7 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Egg](1);
         this.externalAuras[AuraType.Shiny](1);
         this.externalAuras[AuraType.Roaming](1);
+        this.externalAuras[AuraType.Ev](1);
         this.plotList.forEach(plot => plot.clearAuras());
 
         // Handle Boost Auras first
