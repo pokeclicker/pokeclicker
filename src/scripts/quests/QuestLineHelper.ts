@@ -23,7 +23,7 @@ class QuestLineHelper {
         );
         tutorial.addQuest(captureOne);
 
-        //Kill 5 on route 2
+        //Kill 10 on route 2
         const routeTwo = new CustomQuest(10, 20,
             'Defeat 10 Pokémon on Route 2. Click Route 2 on the map to move there and begin fighting.',
             () => App.game.statistics.routeKills[GameConstants.Region.kanto]['2'](),
@@ -31,13 +31,67 @@ class QuestLineHelper {
         );
         tutorial.addQuest(routeTwo);
 
+        //Say bye to mom
+        const talkToMom = new TalkToNPCQuest(PalletMom1, 'Go back to Pallet Town and say bye to mom.');
+        tutorial.addQuest(talkToMom);
+
         //Buy pokeballs
-        const buyPokeballs = new CustomQuest(10, 50,
+        const buyPokeballs = new CustomQuest(10, 20,
             'Buy 10 Pokéballs. You can find these in the Viridian City Shop.',
             () => App.game.statistics.pokeballsBought[GameConstants.Pokeball.Pokeball](),
             0 // Initial of 0 so it auto completes if bugged
         );
         tutorial.addQuest(buyPokeballs);
+
+        //Learn about catching from old man
+        const OldManReward = () => {
+            $('#npc-modal').one('hidden.bs.modal', () => {
+                Information.show({
+                    steps: [
+                        {
+                            element: document.getElementById('pokeballSelector'),
+                            intro: 'Select which Pokéball types to catch Pokémon with based on their caught/shiny status.<br/><i><sup>Hover over the column titles for more info.</sup></i><br/><br/>Capturing Pokémon gains you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens.<br/><br/>Try now by clicking the "Caught" selector to change it.',
+                        },
+                    ],
+                    exitOnEsc: false,
+                    showButtons: false,
+                });
+                const caughtSelector: HTMLElement = document.querySelector('.pokeball-small.clickable.pokeball-selected');
+                caughtSelector.addEventListener('click', () => {
+                    Information.hide();
+                    $('#pokeballSelectorModal').one('shown.bs.modal', null, () => {
+                        // Need to set a timeout, otherwise it messes up the modal layout
+                        setTimeout(() => {
+                            Information.show({
+                                steps: [
+                                    {
+                                        element: document.querySelector('#pokeballSelectorModal .modal-body'),
+                                        intro: 'Select the <img title="Pokéball" src="assets/images/pokeball/Pokeball.svg" height="25px"> Pokéball to use this type of ball to capture already caught Pokémon, which will give you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens when captured.',
+                                    },
+                                ],
+                                // Needed for IntroJs on modals
+                                overlayOpacity: 0,
+                            });
+                        }, 100);
+
+                        // Hide the IntroJS overlay once the user selects the Pokeball
+                        const selectPokeball = document.querySelectorAll('#pokeballSelectorModal .clickable')[1];
+                        selectPokeball.addEventListener('click', () => {
+                            Information.hide();
+                        }, {
+                            once: true,
+                        });
+                    });
+                }, {
+                    once: true,
+                });
+            });
+        };
+        const talkToOldMan = new TalkToNPCQuest(ViridianCityOldMan2, 'Talk to the Old Man in Viridian City to learn about catching.', OldManReward);
+        tutorial.addQuest(talkToOldMan);
+
+        const catch5Pidgey = new CustomQuest(5, 30, 'Use what you\'ve learned to catch 5 Pidgey. Talk to the Old Man again if you need a reminder.', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Pidgey').id]());
+        tutorial.addQuest(catch5Pidgey);
 
         //Buy Dungeon ticket
         const buyDungeonTicket = new CustomQuest(1, 50,
@@ -156,7 +210,7 @@ class QuestLineHelper {
             App.game.wallet.gainQuestPoints(1000, true);
             Notifier.notify({
                 title: billSeviiQuestLine.name,
-                message: 'Cecil has rewarded you with 1000 Quest Points!',
+                message: 'Celio has rewarded you with 1,000 Quest Points!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
@@ -166,6 +220,18 @@ class QuestLineHelper {
         billSeviiQuestLine.addQuest(talktoCelio2);
 
         App.game.quests.questLines().push(billSeviiQuestLine);
+    }
+
+    public static createPersonsofInterestQuestLine() {
+        const personsofInterestQuestLine = new QuestLine('Persons of Interest', 'Some people want to talk to you.');
+
+        const talktoBreeder = new TalkToNPCQuest(SaffronBreeder, 'Talk to the Breeder in Saffron City.', 250);
+        personsofInterestQuestLine.addQuest(talktoBreeder);
+
+        const talktoGemScientist = new TalkToNPCQuest(PewterScientist, 'Talk to the Gem Scientist in Pewter City.', 250);
+        personsofInterestQuestLine.addQuest(talktoGemScientist);
+
+        App.game.quests.questLines().push(personsofInterestQuestLine);
     }
 
     // Johto QuestLines
@@ -388,14 +454,13 @@ class QuestLineHelper {
                     type: NotificationConstants.NotificationOption.success,
                 });
             };
-            const catchVivillon = new CustomQuest(
-                1,
-                vivillonRemove,
+            const catchVivillon = new CaptureSpecificPokemonQuest(
+                vivillon,
                 `Find and capture the rare Vivillon!\nHint: ${hint}`,
-                App.game.statistics.pokemonCaptured[pokemonMap[vivillon].id],
-                undefined,
-                vivillonAdd
-            );
+                1,
+                false,
+                vivillonRemove,
+                vivillonAdd);
             vivillonQuestLine.addQuest(catchVivillon);
         };
 
@@ -439,18 +504,51 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchBall = new CustomQuest(
-            1,
-            viviBalldone,
+        const catchBall = new CaptureSpecificPokemonQuest(
+            'Vivillon (Pokéball)',
             'Find and capture the rare Vivillon!\nHint: Only the strongest Challengers can reach it.',
-            App.game.statistics.pokemonCaptured[666.01],
-            undefined,
-            viviBallAdd
-        );
+            1,
+            false,
+            viviBalldone,
+            viviBallAdd);
         vivillonQuestLine.addQuest(catchBall);
 
         // Add quest to quest line
         App.game.quests.questLines().push(vivillonQuestLine);
+    }
+
+    public static createAshKetchumQuestLine() {
+        const ashKetchumQuestLine = new QuestLine('The new kid', 'A new kid from your home town is making waves. Show him who is the real progidy of Pallet.');
+
+        const clearKantoAsh = new CustomQuest(1, 0, 'Defeat Ash Ketchum near Pallet Town.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kanto')]());
+        ashKetchumQuestLine.addQuest(clearKantoAsh);
+
+        const clearJohtoAsh = new CustomQuest(1, 0, 'He\'s not stopping. Find the kid in Johto.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Johto')]());
+        ashKetchumQuestLine.addQuest(clearJohtoAsh);
+
+        const clearHoennAsh = new CustomQuest(1, 0, 'He just will not learn his lesson. Defeat Ash Ketchum in Hoenn.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Hoenn')]());
+        ashKetchumQuestLine.addQuest(clearHoennAsh);
+
+        const clearSinnohAsh = new CustomQuest(1, 0, 'Who does he think he is anyway? Pretending he\'s the main character. He\'s in Sinnoh now.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Sinnoh')]());
+        ashKetchumQuestLine.addQuest(clearSinnohAsh);
+
+        const clearUnovaAsh = new CustomQuest(1, 0, 'The kid is hiding in Unova!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Unova')]());
+        ashKetchumQuestLine.addQuest(clearUnovaAsh);
+
+        const AshKetchumReward = () => {
+            App.game.party.gainPokemonById(658.01);
+            Notifier.notify({
+                title: ashKetchumQuestLine.name,
+                message: 'You obtained Ash Greninja!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearKalosAsh = new CustomQuest(1, AshKetchumReward, 'One more time! Battle him into submission in Kalos!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kalos')]());
+        ashKetchumQuestLine.addQuest(clearKalosAsh);
+
+        App.game.quests.questLines().push(ashKetchumQuestLine);
     }
 
     // Alola QuestLines
@@ -583,12 +681,14 @@ class QuestLineHelper {
         this.createRocketKantoQuestLine();
         this.createUndergroundQuestLine();
         this.createBillSeviiQuestLine();
+        this.createPersonsofInterestQuestLine();
         this.createRocketJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
         this.createDeoxysQuestLine();
         this.createGalacticSinnohQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createVivillonQuestLine();
+        this.createAshKetchumQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
