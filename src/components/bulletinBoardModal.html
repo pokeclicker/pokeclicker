@@ -9,12 +9,10 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
             <table class="table m-0">
                 <tbody>
                     <!-- ko foreach: GameHelper.chunk(3, BulletinBoard.selectedBulletinBoard().getQuests()) -->
-                    <tr data-bind="style: { backgroundImage: 'url(\'assets/images/bulletinBoard/' +
-                            ($index() == 0 ? 'top' : ($index() == Math.ceil(BulletinBoard.selectedBulletinBoard().getQuests().length / 3) - 1 ? 'bot' : 'mid')) +
-                            '.png\')' }">
+                    <tr>
                         <!-- ko foreach: $data -->
                         <td class="col-md-3">
-                            <div class="text-left p-4 bulletin-paper" style="background-image: url('assets/images/bulletinBoard/paper1.png');">
+                            <div class="text-left p-4 bulletin-paper card">
                                 <h5 style="padding-right: 20px;">
                                     <knockout data-bind="text: $data.name" style="font-size: 1.5rem; font-weight: bold;">Name</knockout>
                                 </h5>
@@ -32,20 +30,6 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                         <td class="col-md-3"></td>
                         <!-- /ko -->
                     </tr >
-                    <!-- /ko -->
-                    <!-- ko if: BulletinBoard.selectedBulletinBoard().getQuests().length == 0 -->
-                    <tr style="background-image: url('assets/images/bulletinBoard/top.png');">
-                        <td><div class="bulletin-paper"></div></td>
-                        <td><div class="bulletin-paper"></div></td>
-                        <td><div class="bulletin-paper"></div></td>
-                    </tr>
-                    <!-- /ko -->
-                    <!-- ko if: BulletinBoard.selectedBulletinBoard().getQuests().length <= 3 -->
-                    <tr style="background-image: url('assets/images/bulletinBoard/bot.png');">
-                        <td><div class="bulletin-paper"></div></td>
-                        <td><div class="bulletin-paper"></div></td>
-                        <td><div class="bulletin-paper"></div></td>
-                    </tr>
                     <!-- /ko -->
                 </tbody>
             </table>
