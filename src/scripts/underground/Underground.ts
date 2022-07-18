@@ -208,7 +208,7 @@ class Underground implements Feature {
     public static getCumulativeValues(): Record<string, { cumulativeValue: number, imgSrc: string }> {
         const cumulativeValues = {};
         player.mineInventory().forEach(mineItem => {
-            if (mineItem.valueType != 'Mine Egg' && mineItem.amount() > 0 && !mineItem.sellLocked()) {
+            if (mineItem.valueType != 'Mine Egg' && mineItem.amount() > 0 && !mineItem.sellLocked() && !Underground.getMineItemById(mineItem.id).isShard()) {
                 let cumulativeValueOfType = cumulativeValues[mineItem.valueType];
                 if (!cumulativeValueOfType) {
                     cumulativeValueOfType = { cumulativeValue: 0, imgSrc: null };
@@ -348,7 +348,7 @@ class Underground implements Feature {
     public static sellAllMineItems() {
         for (let i = 0; i < player.mineInventory().length; i++) {
             const item = player.mineInventory()[i];
-            if (!item.sellLocked() && item.valueType != 'Mine Egg') {
+            if (!item.sellLocked() && item.valueType != 'Mine Egg' && !Underground.getMineItemById(item.id).isShard()) {
                 Underground.sellMineItem(item.id, Infinity);
             }
         }
