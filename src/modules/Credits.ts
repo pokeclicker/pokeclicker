@@ -275,6 +275,8 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Elf Munchlax',
             'Grinch Celebi',
+            'Ivysaur (Rose)',
+            'Venusaur (Rose)',
         ],
         // Notes: Permission given via Discord #development-chat
     },
