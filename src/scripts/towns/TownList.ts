@@ -3462,7 +3462,7 @@ const CrownPeony1 = new NPC ('Peony', [
     'Hey, Chief! I was talking to the locals and they were talking some ancient king Pokémon! They also mentioned a couple of horsey Pokémon that it was ultra-mega-close to. There\'s a statue of it outside and I\'ve heard this rock I\'ve been using as a pillow is part of it!',
     'Could you go and put it back on for me?',
 ],
-{ requirement: new MultiRequirement([new QuestLineStartedRequirement('The Crown of Galar'), new QuestLineStepCompletedRequirement('The Crown of Galar', 1, GameConstants.AchievementOption.less ) ])});
+{ requirement: new MultiRequirement([new QuestLineStartedRequirement('The Crown of Galar'), new QuestLineStepCompletedRequirement('The Crown of Galar', 1, GameConstants.AchievementOption.less )])});
 const Calyrex1 = new NPC ('Calyrex', [
     'Ah, yes. A sturdy body, just as i expected. I hope this man doesn\'t mind that I make use of it for the time being.',
     'I am Calyrex. I am also known as the King of Bountiful Harvests. I have borrowed this man\'s body in order to thank you in person for restoring my statue...so to speak.',
@@ -3497,13 +3497,13 @@ const BirdPeony1 = new NPC ('Peony', [
     'Hey, Chief! I was talking to the locals and they mentioned they had seen some bird Pokémon that looked like the legendary birds of Kanto at that ultra-mega-massive tree in the middle of Ballimere Lake!',
     'You should go check it out!',
 ],
-{ requirement: new MultiRequirement([new QuestLineStartedRequirement('The Birds of the Dyna Tree'), new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 1, GameConstants.AchievementOption.less ) ])});
+{ requirement: new MultiRequirement([new QuestLineStartedRequirement('The Birds of the Dyna Tree'), new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 1, GameConstants.AchievementOption.less )])});
 const BirdPeony2 = new NPC ('Peony', [
     'You\'re saying you saw some Pokémon that looked like.... Hang on, Chief! There\'s breaking news on the telly! They\'re sayin\' dodgy bird Pokémon are poppin\' up left and right!',
     'There\'s this fancy graceful one\'s apparently flyin\' about the Crown Tundra!',
     'And there\'s this pointy feathered one runnin\' about in Southern Galar!',
     'Plus a fiery-lookin\' one out on the Isle of Armor!',
-    'You\'re sayin\' you saw them and that\'s what you were tellin\' me about? Ah, sorry \'bout that. Anyway, you should go find \'em!'
+    'You\'re sayin\' you saw them and that\'s what you were tellin\' me about? Ah, sorry \'bout that. Anyway, you should go find \'em!',
 ],
 { requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3), new QuestLineStepCompletedRequirement('TThe Birds of the Dyna Tree', 4, GameConstants.AchievementOption.less )])});
 const BirdPeony3 = new NPC ('Peony', [
@@ -3515,7 +3515,7 @@ const BirdPeony3 = new NPC ('Peony', [
 const GolemPeony1 = new NPC ('Peony', [
     'Hey, Chief! I was talking to the locals and they mentioned some weird purple and yellow ruins at Three-Point Pass. You should go check \'em out!',
 ],
-{ requirement: new MultiRequirement([new QuestLineStartedRequirement('The Ancient Golems'), new QuestLineStepCompletedRequirement('The Ancient Golems', 1, GameConstants.AchievementOption.less ) ])});
+{ requirement: new MultiRequirement([new QuestLineStartedRequirement('The Ancient Golems'), new QuestLineStepCompletedRequirement('The Ancient Golems', 1, GameConstants.AchievementOption.less )])});
 const GolemPeony2 = new NPC ('Peony', [
     'So they wouldn\'t open... That\'s annoyin\'. Well, there are also 3 more ruins, 2 at opposite ends of Giants Bed, and one at Snowslide Slope. Maybe you should have a look at those?',
     'How \'bout clearin\' em 10 times each, and see if you find anythin\' to open up the ruins at Three-Point Pass.',
