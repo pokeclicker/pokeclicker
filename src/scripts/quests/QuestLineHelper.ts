@@ -647,8 +647,14 @@ class QuestLineHelper {
     public static createGalarCrownQuestLine() {
         const galarCrownQuestLine = new QuestLine('The Crown of Galar', 'Help the ancient king of Galar, Calyrex, return to its former glory.');
 
+        const talktoCrownPeony1 = new TalkToNPCQuest(CrownPeony1, 'Talk to Peony to find out about the ancient king of Galar.');
+        galarCrownQuestLine.addQuest(talktoCrownPeony1);
+
         const clearCalyrex = new CustomQuest(1, 0, 'A mysterious Pokémon has appeared and challenged you to a battle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Calyrex')]());
         galarCrownQuestLine.addQuest(clearCalyrex);
+
+        const talktoCalyrex1 = new TalkToNPCQuest(Calyrex1, 'The Pokémon you just fought has posessed Peony. Talk to it.');
+        galarCrownQuestLine.addQuest(talktoCalyrex1);
 
         const oldCemetery = new CustomQuest(30, 0, 'Old Cemetery.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['49'](), 0);
         const slipperySlope = new CustomQuest(30, 0, 'Slippery Slope.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['54'](), 0);
@@ -658,13 +664,19 @@ class QuestLineHelper {
                 slipperySlope,
             ], 'Calyrex is going to Old Cemetery and Slippery Slope to grow a Shaderoot Carrot and an Iceroot Carrot. Protect it from wild Pokémon so it can concentrate.'));
 
+        const talktoCalyrex2 = new TalkToNPCQuest(Calyrex2, 'Now it has grown both carrots, Calyrex has returned to Freezington. Talk to it.');
+        galarCrownQuestLine.addQuest(talktoCalyrex2);
+
         const clearSpectrier = new CustomQuest(1, 0, 'Defeat Spectrier.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Spectrier')]());
         const clearGlastrier = new CustomQuest(1, 0, 'Defeat Glastrier.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Glastrier')]());
         galarCrownQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 clearSpectrier,
                 clearGlastrier,
-            ], 'Mysterious spectral and frozen Pokémon are challenging you in Freezington'));
+            ], 'Fight Calyrex\'s steeds to get them out of Freezington!'));
+
+        const talktoCalyrex3 = new TalkToNPCQuest(Calyrex3, 'Talk to Calyrex again.');
+        galarCrownQuestLine.addQuest(talktoCalyrex3);
 
         const catchSpectrier = new CustomQuest(1, 0, 'Catch Spectrier.', () => App.game.statistics.pokemonCaptured[pokemonMap.Spectrier.id](), 0);
         const catchGlastrier = new CustomQuest(1, 0, 'Catch Glastrier.', () => App.game.statistics.pokemonCaptured[pokemonMap.Glastrier.id](), 0);
@@ -674,8 +686,14 @@ class QuestLineHelper {
                 catchGlastrier,
             ], 'Spectrier and Glastrier are now roaming the Crown Tundra. Catch them when the opportunity arises!'));
 
+        const talktoCalyrex4 = new TalkToNPCQuest(Calyrex4, 'Now you have captured both of its steeds, talk to Calyrex at the Crown Shrine.');
+        galarCrownQuestLine.addQuest(talktoCalyrex4);
+
         const catchCalyrex = new CustomQuest(1, 0, 'Now you have found and caught Glastrier and Spectrier, Calyrex wants to challenge you at Crown Shrine. Catch it!', () => App.game.statistics.pokemonCaptured[pokemonMap.Calyrex.id](), 0);
         galarCrownQuestLine.addQuest(catchCalyrex);
+
+        const talktoCrownPeony2 = new TalkToNPCQuest(CrownPeony2, 'Now you have captured Calyrex, go report back to Peony!.');
+        galarCrownQuestLine.addQuest(talktoCrownPeony2);
 
         App.game.quests.questLines().push(galarCrownQuestLine);
     }
@@ -683,11 +701,17 @@ class QuestLineHelper {
     public static createDynaTreeBirdsQuestLine() {
         const dynaTreeBirdsQuestLine = new QuestLine('The Birds of the Dyna Tree', 'Find the Legendary birds of the Dyna Tree.');
 
+        const talktoBirdPeony1 = new TalkToNPCQuest(BirdPeony1, 'Talk to Peony to find out about some legendary bird sightings.');
+        dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony1);
+
         const clearDynaTreeHill = new CustomQuest(1, 0, 'Some unknown bird Pokémon have been sighted near Dyna Tree Hill in Ballimere Lake. Explore the area to see for yourself.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Dyna Tree Hill')]());
         dynaTreeBirdsQuestLine.addQuest(clearDynaTreeHill);
 
         const clearDynaTreeBirds = new CustomQuest(1, 0, 'You witnessed 3 powerful looking bird pokemon resembling Articuno, Zapdos and Moltres fighting over the fruit of the Dyna Tree. Upon noticing you, they attack!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dyna Tree Birds')]());
         dynaTreeBirdsQuestLine.addQuest(clearDynaTreeBirds);
+
+        const talktoBirdPeony2 = new TalkToNPCQuest(BirdPeony2, 'Tell Peony about your encounter with the birds resembling Articuno, Zapdos and Moltres');
+        dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony2);
 
         const catchGalarianArticuno = new CustomQuest(1, 0, 'Catch Galarian Articuno.', () => App.game.statistics.pokemonCaptured[pokemonMap['Galarian Articuno'].id](), 0);
         const catchGalarianZapdos = new CustomQuest(1, 0, 'Catch Galarian Zapdos.', () => App.game.statistics.pokemonCaptured[pokemonMap['Galarian Zapdos'].id](), 0);
@@ -699,24 +723,23 @@ class QuestLineHelper {
                 catchGalarianMoltres,
             ], 'The Galarian forms of Articuno, Zapdos and Moltres are roaming in the Crown Tundra, Southern Galar and the Isle of Armor respectively. Catch them when the opportunity arises!'));
 
+        const talktoBirdPeony3 = new TalkToNPCQuest(BirdPeony3, 'Now you have captured Galarian Articuno, Zapdos and Moltres, go report back to Peony!.');
+        dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony3);
+
         App.game.quests.questLines().push(dynaTreeBirdsQuestLine);
     }
 
     public static createAncientGolemsQuestLine() {
         const ancientGolemsQuestLine = new QuestLine('The Ancient Golems', 'Discover the ancient Golems in the ruins of the Crown Tundra.');
 
+        const talktoGolemPeony1 = new TalkToNPCQuest(GolemPeony1, 'Talk to Peony to find out about some ancient ruins.');
+        ancientGolemsQuestLine.addQuest(talktoGolemPeony1);
+
         const threePointPass = new CustomQuest(25, 0, 'Peony told you of a peculiar ruin located at Three-Point Pass. Explore the area to find it.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['52'](), 0);
         ancientGolemsQuestLine.addQuest(threePointPass);
 
-        const catchRegirock = new CustomQuest(1, 0, 'Catch Regirock.', () => App.game.statistics.pokemonCaptured[pokemonMap.Regirock.id](), 0);
-        const catchRegice = new CustomQuest(1, 0, 'Catch Regice.', () => App.game.statistics.pokemonCaptured[pokemonMap.Regice.id](), 0);
-        const catchRegisteel = new CustomQuest(1, 0, 'Catch Registeel.', () => App.game.statistics.pokemonCaptured[pokemonMap.Registeel.id](), 0);
-        ancientGolemsQuestLine.addQuest(new MultipleQuestsQuest(
-            [
-                catchRegirock,
-                catchRegice,
-                catchRegisteel,
-            ], 'Catch Regirock, Regice and Registeel in the Rock Peak Ruins, Iceberg Ruins and Iron Ruins respectively'));
+        const talktoGolemPeony2 = new TalkToNPCQuest(GolemPeony2, 'The ruins were locked, go report back to Peony.');
+        ancientGolemsQuestLine.addQuest(talktoGolemPeony2);
 
         const clearRockPeakRuins = new CustomQuest(10, 0, 'Clear Rock Peak Ruins 10 times.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rock Peak Ruins')]());
         const clearIcebergRuins = new CustomQuest(10, 0, 'Clear Iceberg Ruins 10 times.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Iceberg Ruins')]());
@@ -728,6 +751,19 @@ class QuestLineHelper {
                 clearIronRuins,
             ], 'Clear Rock Peak Ruins, Iceberg Ruins and Iron ruins 10 times each.'));
 
+        const talktoGolemPeony3 = new TalkToNPCQuest(GolemPeony3, 'The ruins are still locked, report to Peony.');
+        ancientGolemsQuestLine.addQuest(talktoGolemPeony3);
+
+        const catchRegirock = new CustomQuest(1, 0, 'Catch Regirock.', () => App.game.statistics.pokemonCaptured[pokemonMap.Regirock.id](), 0);
+        const catchRegice = new CustomQuest(1, 0, 'Catch Regice.', () => App.game.statistics.pokemonCaptured[pokemonMap.Regice.id](), 0);
+        const catchRegisteel = new CustomQuest(1, 0, 'Catch Registeel.', () => App.game.statistics.pokemonCaptured[pokemonMap.Registeel.id](), 0);
+        ancientGolemsQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchRegirock,
+                catchRegice,
+                catchRegisteel,
+            ], 'Catch Regirock, Regice and Registeel in the Rock Peak Ruins, Iceberg Ruins and Iron Ruins respectively'));
+
         const catchRegieleki = new CustomQuest(1, 0, 'Catch Regieleki.', () => App.game.statistics.pokemonCaptured[pokemonMap.Regieleki.id](), 0);
         const catchRegidrago = new CustomQuest(1, 0, 'Catch Regidrago.', () => App.game.statistics.pokemonCaptured[pokemonMap.Regidrago.id](), 0);
         ancientGolemsQuestLine.addQuest(new MultipleQuestsQuest(
@@ -736,8 +772,14 @@ class QuestLineHelper {
                 catchRegidrago,
             ], 'Now it has finally unlocked, catch Regieleki and Regidrago in the Split-Decision Ruins!'));
 
+        const talktoGolemPeony5 = new TalkToNPCQuest(GolemPeony5, 'Now you have captured Regieleki and Regidrago, go report back to Peony.');
+        ancientGolemsQuestLine.addQuest(talktoGolemPeony5);
+
         const clearRegigigas = new CustomQuest(1, 0, 'Now you have caught all of the legendary golems it created, Regigigas has appeared in Giants Bed. Defeat it!,', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Regigigas')]());
         ancientGolemsQuestLine.addQuest(clearRegigigas);
+
+        const talktoGolemPeony6 = new TalkToNPCQuest(GolemPeony6, 'Now you have beaten Regigigas, report back to Peony.');
+        ancientGolemsQuestLine.addQuest(talktoGolemPeony6);
 
         App.game.quests.questLines().push(ancientGolemsQuestLine);
     }
