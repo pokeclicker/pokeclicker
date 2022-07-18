@@ -8513,7 +8513,7 @@ dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
     31507840,
     [
         new DungeonBossPokemon('Relicanth', 149662240, 60),
-        new DungeonBossPokemon('Regirock', 157539200, 70),
+        new DungeonBossPokemon('Regirock', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 5) }),
     ],
     96500, 48);
 
@@ -8528,7 +8528,7 @@ dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
     31507840,
     [
         new DungeonBossPokemon('Metagross', 149662240, 60),
-        new DungeonBossPokemon('Registeel', 157539200, 70),
+        new DungeonBossPokemon('Registeel', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 5) }),
     ],
     96500, 48);
 
@@ -8543,7 +8543,7 @@ dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
     31507840,
     [
         new DungeonBossPokemon('Glalie', 149662240, 60),
-        new DungeonBossPokemon('Regice', 157539200, 70),
+        new DungeonBossPokemon('Regice', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 5) }),
     ],
     96500, 54);
 
@@ -8621,10 +8621,6 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
         new DungeonBossPokemon('Abomasnow', 161099869, 60),
         new DungeonBossPokemon('Trevenant', 161099869, 60),
         new DungeonBossPokemon('Weavile', 161099869, 60),
-        new DungeonBossPokemon('Calyrex', 169578810, 80, {
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement(pokemonMap.Spectrier),
-                new ObtainedPokemonRequirement(pokemonMap.Glastrier),
-            ])}),
+        new DungeonBossPokemon('Calyrex', 169578810, 80, { requirement: new QuestLineStepCompletedRequirement('The Crown of Galar', 9) }),
     ],
     96500, 55);
