@@ -14,14 +14,16 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
         ]),
     ],
-    [],
-    () => {
-        BagHandler.gainItem({type: ItemType.item, id: 'Fighting_egg'}, 1);
-        Notifier.notify({
-            message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo',
-            type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
-        });
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Fighting_egg'}, 1);
+            Notifier.notify({
+                message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo',
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+            });
+        },
     }
 );
 TemporaryBattleList['Biker Goon 1'] = new TemporaryBattle(
@@ -31,19 +33,31 @@ TemporaryBattleList['Biker Goon 1'] = new TemporaryBattle(
         new GymPokemon('Grimer', 198477, 37),
     ],
     'Wha... What is this kid?!',
-    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)]
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
+    undefined,
+    {
+        displayName: 'Biker Goon',
+    }
 );
 TemporaryBattleList['Biker Goon 2'] = new TemporaryBattle(
     'Biker Goon 2',
     [new GymPokemon('Koffing', 396954, 38)],
     'Stop fooling around!',
-    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)]
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
+    undefined,
+    {
+        displayName: 'Biker Goon',
+    }
 );
 TemporaryBattleList['Biker Goon 3'] = new TemporaryBattle(
     'Biker Goon 3',
     [new GymPokemon('Grimer', 396954, 38)],
     '... ... ... ... ... ...',
-    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)]
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
+    undefined,
+    {
+        displayName: 'Biker Goon',
+    }
 );
 TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
     'Cue Ball Paxton',
@@ -81,9 +95,119 @@ TemporaryBattleList.AZ = new TemporaryBattle(
     ],
     'Thank you very much for battling with me. Now I finally feel free…',
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-    [],
-    () => {
-        App.game.party.gainPokemonById(670.05);
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonById(670.05);
+        },
+    }
+);
+TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
+    'Ash Ketchum Kanto',
+    [
+        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Pidgeot', 123998000, 56),
+        new GymPokemon('Bulbasaur', 123998000, 56),
+        new GymPokemon('Charizard', 123998000, 60),
+        new GymPokemon('Squirtle', 123998000, 62),
+        new GymPokemon('Muk', 123998000, 62),
+    ],
+    'That was a fun battle!',
+    [new QuestLineStartedRequirement('The new kid')],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Pallet Town',
+    }
+);
+TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
+    'Ash Ketchum Johto',
+    [
+        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Heracross', 123998000, 56),
+        new GymPokemon('Noctowl', 123998000, 56),
+        new GymPokemon('Bayleef', 123998000, 60),
+        new GymPokemon('Cyndaquil', 123998000, 62),
+        new GymPokemon('Totodile', 123998000, 62),
+    ],
+    'That was a nice rematch...',
+    [new QuestLineStepCompletedRequirement('The new kid', 0), new RouteKillRequirement(10, GameConstants.Region.johto, 48)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Cianwood City',
+    }
+);
+TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
+    'Ash Ketchum Hoenn',
+    [
+        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Swellow', 123998000, 56),
+        new GymPokemon('Grovyle', 123998000, 56),
+        new GymPokemon('Torkoal', 123998000, 62),
+        new GymPokemon('Corphish', 123998000, 60),
+        new GymPokemon('Glalie', 123998000, 62),
+    ],
+    'Are you following me?',
+    [new QuestLineStepCompletedRequirement('The new kid', 1)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Lilycove City',
+    }
+);
+TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
+    'Ash Ketchum Sinnoh',
+    [
+        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Staraptor', 123998000, 56),
+        new GymPokemon('Torterra', 123998000, 56),
+        new GymPokemon('Infernape', 123998000, 60),
+        new GymPokemon('Buizel', 123998000, 62),
+        new GymPokemon('Gible', 123998000, 62),
+    ],
+    'Please leave me alone.',
+    [new QuestLineStepCompletedRequirement('The new kid', 2), new RouteKillRequirement(10, GameConstants.Region.sinnoh, 226)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Survival Area',
+    }
+);
+TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
+    'Ash Ketchum Unova',
+    [
+        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Unfezant', 123998000, 56),
+        new GymPokemon('Snivy', 123998000, 62),
+        new GymPokemon('Pignite', 123998000, 60),
+        new GymPokemon('Oshawott', 123998000, 56),
+        new GymPokemon('Krookodile', 123998000, 62),
+    ],
+    'Stop it!',
+    [new QuestLineStepCompletedRequirement('The new kid', 3)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Mistralton City',
+    }
+);
+TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
+    'Ash Ketchum Kalos',
+    [
+        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Talonflame', 123998000, 56),
+        new GymPokemon('Hawlucha', 123998000, 56),
+        new GymPokemon('Goodra', 123998000, 60),
+        new GymPokemon('Noivern', 123998000, 62),
+        new GymPokemon('Ash Greninja', 123998000, 62),
+    ],
+    'Will you leave me alone if I give you my Greninja? I was gonna release it anyway.',
+    [new QuestLineStepCompletedRequirement('The new kid', 4)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Kiloude City',
     }
 );
 
@@ -99,9 +223,11 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     [new GymPokemon('Necrozma (Ultra)', 282601920, 60)],
     'Necrozma fled.',
     [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
-    [],
-    () => {
-        App.game.quests.getQuestLine('Mina\'s Trial').beginQuest();
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.quests.getQuestLine('Mina\'s Trial').beginQuest();
+        },
     }
 );
 TemporaryBattleList['Captain Mina'] = new TemporaryBattle(
@@ -176,4 +302,25 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
     ],
     '...',
     [new TemporaryBattleRequirement('Captain Sophocles')]
+);
+TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
+    'Ash Ketchum Alola',
+    [
+        new GymPokemon('Pikachu (Partner cap)', 182908638, 58),
+        new GymPokemon('Rowlet', 182908638, 56),
+        new GymPokemon('Incineroar', 182908638, 56),
+        new GymPokemon('Lycanroc (Dusk)', 182908638, 60),
+        new GymPokemon('Naganadel', 182908638, 62),
+        new GymPokemon('Melmetal', 182908638, 62),
+    ],
+    'Fine. I quit. Take my Pikachu.',
+    [new QuestLineCompletedRequirement('The new kid'), new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Seafolk Village',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonById(25.07);
+        },
+    }
 );

@@ -156,22 +156,40 @@ const PalletProfOak = new ProfNPC('Prof. Oak',
     'Your journey isn\'t over yet, a whole world awaits you! Onwards to Johto!',
     'assets/images/oak.png');
 
-const PalletMom = new NPC('Mom', [
-    'Traveling on your own can be scary. But remember that there are nice people everywhere you go. So strike up a converstation. You will probably learn something useful.',
-]);
-
-const ViridianCityOldMan = new NPC('Old Man', [
+const PalletMom1 = new NPC('Mom', [
+    'So you\'re really leaving on your very own Pokémon journey. I\'m so proud of you. Let me give you some words of wisdom for your travels.',
+    'Traveling on your own can be scary. But remember that there are nice people everywhere you go. So strike up a conversation! You will probably learn something useful.',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Tutorial Quests', 2), new QuestLineStepCompletedRequirement('Tutorial Quests', 3, GameConstants.AchievementOption.less )]) });
+const PalletMom2 = new NPC('Mom', [
+    'Remember that there are nice people everywhere you go. So strike up a conversation! You will probably learn something useful.',
+],
+{ requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 3) });
+const ViridianCityOldMan1 = new NPC('Old Man', [
+    'Leave me alone. I need my coffee.',
+],
+{ requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 4, GameConstants.AchievementOption.less) });
+const ViridianCityOldMan2 = new NPC('Old Man', [
     'Ahh, I\'ve had my coffee now and I feel great!',
-    'You can use the Pokéball Selector to select which type of Pokéball to use on specific Pokémon based on caught status.',
-]);
-
+    'You can use the Pokéball Selector to select which type of Pokéball to use on specific Pokémon based on caught status. The options, from left to right, are Caught, Caught shiny, New, New shiny.',
+    'For example, if you click on the empty ball below the word Caught and assign a Pokéball, you will then start throwing Pokéballs at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
+    'Here, let me show you how it works.',
+    'I\'ll always be here to explain it again if you forget.',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Tutorial Quests', 4), new QuestLineStepCompletedRequirement('Tutorial Quests', 5, GameConstants.AchievementOption.less )]) });
+const ViridianCityOldMan3 = new NPC('Old Man', [
+    'You can use the Pokéball Selector to select which type of Pokéball to use on specific Pokémon based on caught status. The options, from left to right, are Caught, Caught shiny, New, New shiny.',
+    'For example, if you click on the empty ball below the word Caught and assign a Pokéball, you will then start throwing Pokéballs at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
+    'I\'ll always be here to explain it again if you forget.',
+],
+{ requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 5) });
 const PewterBattleItemRival = new NPC('Battle Item Master', [
     'Hey kid, you look new! Let me offer some advice: Battle Items like xAttack can be acquired along Routes, inside Dungeons and in Shops!',
     'Use them to help you out whenever you feel like time is against you!',
 ]);
 
 const PewterScientist = new NPC('Gem Scientist', [
-    'I see you are carrying a Shard Case. Here at the museum we study space, fossils and gems!',
+    'I see you are carrying a Gem Case. Here at the museum we study space, fossils and gems!',
     'When you defeat a Pokémon you gain a gem of that Pokémon\'s type. If the Pokémon has two types you gain one for each! Defeating very strong Pokémon, such as those owned by gym leaders, gets you five!',
     'You can click Gems in the Start Menu to boost your damage using these gems. For example, using rock gems you can boost the super effective damage of your rock type Pokémon! Those flying types had better watch out for your might!',
     'You can even use this to eliminate immunities! By using electric gems to boost your electric type immune damage, your electric Pokémon can suddenly do damage against ground types!',
@@ -251,7 +269,7 @@ const OneIslandCelio2 = new NPC ('Celio', [
     'I\'m glad to hear Lostelle is all right. You can hand the meteorite to me. Bill, thank you for your assistance, I\'ll take it from here. I can see that your friend is eager to get back to Kanto and challenge the Pokémon League.',
     'Thank you both very much.',
 ],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 4), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less )]) });
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 5), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less )]) });
 const OneIslandCelio3 = new NPC ('Celio', [
     'You\'ve been a great help. Thanks again. Maybe we\'ll meet again some day...',
 ],
@@ -265,18 +283,18 @@ const TwoIslandGameCornerOwner1 = new NPC ('Game Corner Owner', [
     'What? The meteorite for Celio? Yes, I can give that to you. But I need you to do something for me first.',
     'My daughter Lostelle is missing. She likes to pick berries in the Berry Forest on Three Island. She does it all the time. But this time she hasn\'t come back. Please go find her.',
 ],
-{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 3, GameConstants.AchievementOption.less ) });
+{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 4, GameConstants.AchievementOption.less ) });
 const TwoIslandGameCornerOwner2 = new NPC ('Game Corner Owner', [
     'My sweet Lostelle! I\'m so glad you\'re all right.',
     'Thank you very much kind stranger. Please take the Meteorite.',
 ],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 3), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less)]) });
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 4), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less)]) });
 const ThreeIslandBiker = new NPC ('Biker', [
     'You know what sucks? The other islands are off limits for some arbitrary reason. There is no explanation. Just can\'t go there.',
     'Alright, you want the real truth? Some weird old dude told me this: "The other islands don\'t exist. Yet. Gotta wait for the devs to put them in."',
     'I don\'t know what half those words mean. All I know is I can\'t go back to Kanto with the rest of the gang. This sucks.',
 ],
-{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 2) });
+{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 3) });
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
@@ -284,7 +302,7 @@ TownList['Pallet Town'] = new Town(
     GameConstants.Region.kanto,
     [],
     {
-        npcs: [PalletProfOak, PalletMom],
+        npcs: [PalletProfOak, PalletMom1, PalletMom2],
     }
 );
 TownList['Viridian City'] = new Town(
@@ -293,7 +311,7 @@ TownList['Viridian City'] = new Town(
     [ViridianCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 1)],
-        npcs: [ViridianCityOldMan],
+        npcs: [ViridianCityOldMan1, ViridianCityOldMan2, ViridianCityOldMan3],
     }
 );
 TownList['Pewter City'] = new Town(
@@ -613,6 +631,7 @@ const JohtoBerryMaster = new BerryMasterShop([
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,
     ItemList.Amaze_Mulch,
+    ItemList.Freeze_Mulch,
     ItemList.Berry_Shovel,
     ItemList.Mulch_Shovel,
     ItemList.Squirtbottle,
@@ -645,7 +664,7 @@ const AzaleaOldMan = new NPC('Wise Old Man', [
 
 const AzaleaHiker = new NPC('Hiker Daniel', [
     'The PokéManiacs in Union Cave are restless. They have been ranting and raving about a weekly visitor.',
-    'According to them a strange Pokémon\'s cries can be heard from a lake deep inside the cave.',
+    'According to them, a strange Pokémon\'s cries can be heard from a lake deep inside the cave.',
     'I\'ve never heard it myself. Apparently it only happens on Fridays.',
 ],
 { requirement: new GymBadgeRequirement(BadgeEnums.Fog) });
@@ -657,7 +676,7 @@ const EcruteakBill = new NPC('Bill', [
 ]);
 
 const EcruteakEusine = new NPC('Eusine', [
-    'Legends say that when the Brass Tower burned down and became the Burned Tower three unnamed Pokémon perished in the flames.',
+    'Legends say that when the Brass Tower burned down and became the Burned Tower, three unnamed Pokémon perished in the flames...',
     'Ho-oh came down from the Tin Tower and revived those Pokémon. They became the Legendary Beasts. Some say these Beasts still inhabit the basement of the Burned Tower.',
     'Could you please clear Burned Tower for me and see if this is true?',
 ],
@@ -685,7 +704,7 @@ const CianwoodPhotographyAide = new NPC('Photography Aide', [
 ]);
 
 const MahoganySouvenirShopAttendant = new NPC('Souvenir Shop Attendant', [
-    'We’ve got stuff here nobody else has got! But keep any Item Magnets you have away from the merchandise… especially the RageCandyBars. Keep ‘em outside where they belong! I’ve heard magnets can attract Pokémon with held items more often, and even more so in Dungeons!',
+    'We’ve got stuff here nobody else has got! But keep any Dowsing Machines you have away from the merchandise… especially the RageCandyBars. Keep ‘em outside where they belong! I’ve heard those machines can attract Pokémon with held items more often, and even more so in Dungeons!',
 ]);
 
 const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
@@ -1008,6 +1027,7 @@ const HoennBerryMaster = new BerryMasterShop([
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,
     ItemList.Amaze_Mulch,
+    ItemList.Freeze_Mulch,
     ItemList.Berry_Shovel,
     ItemList.Mulch_Shovel,
     ItemList.Sprinklotad,
@@ -1485,6 +1505,7 @@ const SinnohBerryMaster = new BerryMasterShop([
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,
     ItemList.Amaze_Mulch,
+    ItemList.Freeze_Mulch,
     ItemList.Berry_Shovel,
     ItemList.Mulch_Shovel,
     ItemList.FarmHandRiley,
@@ -1522,7 +1543,7 @@ const HearthomeContestFan = new NPC('Contest Fan', [
     'I\'m so happy for them, all of that training in Mt. Coronet must have paid off!',
 ]);
 
-const CelesticGrandma = new NPC('Cynthia\s Grandmother', [
+const CelesticGrandma = new NPC('Cynthia\'s Grandmother', [
     'Hello young one, have you come here to learn of Sinnoh’s mysteries?',
     'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine… maybe they should try the Day Care?',
 ]);
@@ -1553,8 +1574,7 @@ const SnowpointYoungGirl = new NPC('Young Girl', [
 const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
     'Oh! I don’t get visitors often. My husband is a sailor who visits far away lands… he always tells me these fantastic things.',
     'One time he came back and his Wailmer looked funny. We took it to the Pokécenter and they said it had caught some weird virus called Pokérus!',
-    'They said that it is a virus that can spread in the Pokémon Day Care. However, not every Pokémon that is infected can spread it...',
-    'You need some kind of "special bond" or something with the infected Pokémon for it to spread the virus. His Wailmer was his Starter Pokémon, so maybe that was it? They also said that Pokémon can only spread the virus if they aren’t ready to hatch.',
+    'They said that it is a virus that can spread in the Pokémon Day Care. They said that Pokémon can only spread or catch the virus if they aren’t ready to hatch yet, and that they need to share a type with one another.',
     'If you have a Pokémon with Pokérus, try catching more of that type of Pokémon. When he got back from his next trip, oddly enough Wailmer seemed stronger than ever!',
 ]);
 

@@ -88,6 +88,7 @@ export const SURPRISE_MULCH_MULTIPLIER = 1.5;
 export const AMAZE_MULCH_GROWTH_MULTIPLIER = 1.25;
 export const AMAZE_MULCH_PRODUCE_MULTIPLIER = 1.5;
 export const AMAZE_MULCH_MUTATE_MULTIPLIER = 1.25;
+export const FREEZE_MULCH_MULTIPLIER = 0;
 
 export const WANDER_RATE = 0.0005;
 
@@ -226,11 +227,18 @@ export const QUEST_CLICKS_PER_SECOND = 5;
 export const QUESTS_PER_SET = 10;
 
 // EVs
-export const BASE_EP_YIELD = 1;
-export const SHINY_EP_YIELD = 5;
-export const DUNGEON_EP_YIELD = 2;
-export const STONE_EP_YIELD = 10;
-export const EP_EV_RATIO = 10;
+export const BASE_EP_YIELD = 100;
+export const STONE_EP_YIELD = 1000;
+export const WANDERER_EP_YIELD = 500;
+export const SHOPMON_EP_YIELD = 1000;
+export const SAFARI_EP_YIELD = 1000;
+
+export const SHINY_EP_MODIFIER = 5;
+export const DUNGEON_EP_MODIFIER = 3;
+export const DUNGEON_BOSS_EP_MODIFIER = 10;
+export const ROAMER_EP_MODIFIER = 50;
+
+export const EP_EV_RATIO = 1000;
 export const EP_CHALLENGE_MODIFIER = 10;
 
 /**
@@ -313,6 +321,7 @@ export function formatDate(date: Date): string {
 
 export function formatTime(input: number | Date): string {
     if (input === 0) { return 'Ready'; }
+    if (input === Infinity) { return '∞'; }
 
     const time = parseInt(`${input}`, 10); // don't forget the second param
     const hours: any = `${Math.floor(time / 3600)}`.padStart(2, '0');
@@ -542,7 +551,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Seafloor Cavern', 'Victory Road Hoenn']),
         [Region.sinnoh]: new Set(['Oreburgh City', 'Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
         [Region.unova]: new Set(['Relic Castle', 'Relic Passage', 'Seaside Cave', 'Victory Road Unova', 'Twist Mountain']),
-        [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Terminus Cave', 'Victory Road Kalos']),
+        [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Kiloude City', 'Terminus Cave', 'Victory Road Kalos']),
         [Region.alola]: new Set([12, 22, 29, 'Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon']),
         [Region.galar]: new Set(),
     },
@@ -646,6 +655,23 @@ export enum StoneType {
     'Sachet',
     'Whipped_dream',
     'Ice_stone',
+}
+
+export enum ShardType {
+    'None' = -1,
+    'Red Shard',
+    'Yellow Shard',
+    'Green Shard',
+    'Blue Shard',
+    'Grey Shard',
+    'Purple Shard',
+    'Ochre Shard',
+    'Black Shard',
+    'Crimson Shard',
+    'Lime Shard',
+    'White Shard',
+    'Pink Shard',
+    'Cyan Shard',
 }
 
 export enum BattleItemType {
@@ -1183,6 +1209,12 @@ export const TemporaryBattles = [
     'Cue Ball Paxton',
     'Galactic Boss Cyrus',
     'AZ',
+    'Ash Ketchum Kanto',
+    'Ash Ketchum Johto',
+    'Ash Ketchum Hoenn',
+    'Ash Ketchum Sinnoh',
+    'Ash Ketchum Unova',
+    'Ash Ketchum Kalos',
     'Ultra Wormhole',
     'Ultra Megalopolis',
     'Captain Mina',
@@ -1192,6 +1224,7 @@ export const TemporaryBattles = [
     'Captain Kiawe',
     'Captain Sophocles',
     'Kahuna Nanu',
+    'Ash Ketchum Alola',
 ];
 
 export enum ShardTraderLocations {
