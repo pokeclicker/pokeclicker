@@ -675,7 +675,7 @@ class QuestLineHelper {
             [
                 createUltraBeastQuest('Kartana', undefined, 4),
                 createUltraBeastQuest('Celesteela', undefined, 2),
-            ], 'Rare Ultra Beasts have been spotted! Kartana at Malie Garden and Route 17, and Celesteela at Route 17 and Verdant Cavern!', ultraBeastReward));
+            ], 'Rare Ultra Beasts have been spotted! Kartana at Malie Garden and Route 17, and Celesteela at Malie Garden and Haina Desert!', ultraBeastReward));
         UltraBeastQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 createUltraBeastQuest('Blacephalon', undefined, 5),
