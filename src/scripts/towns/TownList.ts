@@ -3012,11 +3012,61 @@ const ProfKukui = new ProfNPC('Prof. Kukui',
     'TODO',
     'TODO');
 
-const RoadsideMotelAnabel = new NPC('Anabel', [
+const RoadsideMotelLooker1 = new NPC('Looker', [
+    'I\'m very grateful that you accepted my invitation. This here is my boss, Chief Anabel, head of the Taskforce.',
+    'Ever since the incident at Aether Paradise, where you encountered UB-01 Symbiont, also known as Nihilego, we have heard reports of other Symbiont appearing in Alola. And other types of UBs too.',
+    'They came here from a different world. Dropped rudely into our world against their will. We know nothing about them. They could be dangerous. They are almost certainly extremely wary and combative.',
+    'We must find a way to calm their nerves. To make them feel at home in our world. Or we must destroy them. Either way, we must understand them. We must catch them.',
+    'That is where you come in. The Champion of Alola. We do not have the battle power, but hopefully you do. Please allow Anabel to test your battle ability to ensure that you can handle this job.'
+]);
+const RoadsideMotelAnabel1 = new NPC('Anabel', [
+    'The testing is complete. I see no problem at all with your skills. Rather I would have to praise you for them. Welcome to the team!',
+    'There is no more time to waste. UB-01 Symbiont, Nihilego, has been spotted on Akala Island! I will protect the nearby population centers, you must go and confront the Beast!',
+    'Looker will stay here to coordinate reinforcements if needed. You can ask him about the special Beast Balls you will be using on this mission. I have given you a couple of them, but they are expensive so you will have to pitch in if you need more.',
+]);
+const RoadsideMotelLooker2 = new NPC('Anabel', [
     'Catching lots of Ultra Beasts? Oh you want to know more about Beast Balls!',
     'Beast Balls can only be used to catch Ultra Beasts. You can\'t even try use them against normal Pokémon, and any other Pokéball type won\'t work against Ultra Beasts.',
     'If you\'re looking to most effectively hunt the Ultra Beasts down, try putting Beast Balls in your "Already Caught" selector. Beast Balls will never be thrown at Pokémon that aren\'t Ultra Beasts.',
 ], { requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 0) });
+const RoadsideMotelAnabel2 = new NPC('Anabel', [
+    'Congratulations on a job well done. I\'ve had contact with our colleagues at HQ. They have agreed to let you keep the UBs you catch.',
+    'I\'m sure the UBs will truly flourish in the company of a competent trainer like yourself. It\'ll be much better for them than being locked up in some stuffy lab. Just be sure to let us know how they are doing.',
+    'Now, enough chit-chat. UB-02 Absorption and UB-02 Beauty, Buzzwole and Pheromosa, have been sighted on Melemele Island. You know what to do!',
+]);
+const RoadsideMotelAnabel3 = new NPC('Anabel', [
+    'Congratulations once again. Looker told me he wants to take us to a great restaurant to celebrate. I don\'t know how he knows any restaurants around here, we\'ve only just arrived.',
+    'It doesn\'t matter though. There is no rest for us. Captain Mina is here with news, but she insist on battling you before she\'ll tell us anything.',
+]);
+const RoadsideMotelMina = new NPC('Captain Mina', [
+    'Still in tip top shape I see. Good. That means you\'re strong enough to take out this monster I heard about on Akala Island.',
+    'According to your little list here its... uhm... this one! UB-03 Lighting. Xurkitree. These are some strange names you guys come up with.',
+    'Good luck out there!',
+]);
+const RoadsideMotelNanu1 = new NPC('Kahuna Nanu', [
+    '...',
+    'I let myself in. Hope you don\'t mind.',
+    'I\'m here to tell you about sightings of monsters on Ula\'ula Island. I missed some big Kahuna meeting we were all supposed to go to, so I got stuck as the messenger.',
+    'It\'s not like I\'ve seen them or anything. Your friend Looker knew them from the description though. UB-04 Blade and UB-04 Blaster he called them. Kartana and Celesteela.',
+    '...',
+]);
+const RoadsideMotelNanu2 = new NPC('Kahuna Nanu', [
+    '...',
+    'Good job on rounding up those creatures kid.',
+    'Now, how about one more battle? I insist.',
+]);
+const RoadsideMotelAnabel4 = new NPC('Anabel', [
+    'This is tiring work, but I have a feeling that we\'re almost done.',
+    'Looker\'s informants told us about monster sightings on Poni Island. It seems UB Assembly and UB Burst, Stakataka and Blacephalon, have taken up residence.',
+    'Please be careful.',
+]);
+const RoadsideMotelAnabel5 = new NPC('Anabel', [
+    'And so here we are. At the end. And back at the beginning.',
+    'Our final target is UB-05 Glutton. Guzzlord. It is very dangerous. You must not underestimate this beast.',
+    'Ten years ago a very similar incident occured. Looker and his team were assigned to fight Guzzlord. Nanu was there too. They lost. Looker lost a collegue that day.',
+    'After the battle they found something. A strange young girl, alone in the wilderness of Poni Island. They found me. It seems I came from another world as well. Not their world though. These creatures are strange to me too.',
+    'I have made myself at home here. I hope Glutton can do the same. Please catch this Guzzlord. End this once and for all.',
+]);
 
 //Alola Towns
 
@@ -3066,10 +3116,10 @@ TownList['Melemele Woods'] = new Town(
 TownList['Roadside Motel'] = new Town(
     'Roadside Motel',
     GameConstants.Region.alola,
-    [TemporaryBattleList.Anabel, RoadsideMotelShop],
+    [TemporaryBattleList.Anabel, TemporaryBattleList['Captain Mina UB'], TemporaryBattleList['Kahuna Nanu UB'], RoadsideMotelShop],
     {
         requirements: [new QuestLineStartedRequirement('Ultra Beast Hunt')],
-        npcs: [RoadsideMotelAnabel],
+        npcs: [RoadsideMotelLooker1, RoadsideMotelAnabel1, RoadsideMotelLooker2, RoadsideMotelAnabel2, RoadsideMotelAnabel3, RoadsideMotelMina, RoadsideMotelNanu1, RoadsideMotelNanu2, RoadsideMotelAnabel4, RoadsideMotelAnabel5],
     }
 );
 TownList['Heahea City'] = new Town(

@@ -662,8 +662,8 @@ class QuestLineHelper {
 
         UltraBeastQuestLine.addQuest(createUltraBeastQuest('Nihilego', ' Nihilego has been spotted at Wela Volcano Park and Diglett\'s Tunnel!', 1, ultraBeastReward));
 
-        const talkToAnabel = new TalkToNPCQuest(RoadsideMotelAnabel, 'Talk to Anabel at the Roadside Motel to learn about Beast Balls.');
-        UltraBeastQuestLine.addQuest(talkToAnabel);
+        const talkToLooker = new TalkToNPCQuest(RoadsideMotelLooker2, 'Talk to Looker at the Roadside Motel to learn about Beast Balls.');
+        UltraBeastQuestLine.addQuest(talkToLooker);
 
         UltraBeastQuestLine.addQuest(new MultipleQuestsQuest(
             [

@@ -1240,6 +1240,8 @@ export const TemporaryBattles = [
     'Captain Sophocles',
     'Kahuna Nanu',
     'Anabel',
+    'Captain Mina UB',
+    'Kahuna Nanu UB',
     'Ash Ketchum Alola',
 ];
 
