@@ -1218,6 +1218,27 @@ class ShardDeal {
                     1),
             ]
         );
+        ShardDeal.list[GameConstants.ShardTraderLocations['Parfum Palace']] = ko.observableArray(
+            [
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Red Shard', amount: 5000},
+                        {shardTypeString: 'Yellow Shard', amount: 5000},
+                        {shardTypeString: 'Green Shard', amount: 5000},
+                        {shardTypeString: 'Blue Shard', amount: 5000},
+                        {shardTypeString: 'Grey Shard', amount: 2000},
+                        {shardTypeString: 'Purple Shard', amount: 2000},
+                        {shardTypeString: 'Ochre Shard', amount: 2000},
+                        {shardTypeString: 'Black Shard', amount: 1000},
+                        {shardTypeString: 'Crimson Shard', amount: 1000},
+                        {shardTypeString: 'Lime Shard', amount: 1000},
+                        {shardTypeString: 'White Shard', amount: 1000},
+                        {shardTypeString: 'Pink Shard', amount: 500},
+                    ],
+                    ItemList['Furfrou (Star)'],
+                    1),
+            ]
+        );
     }
 
     public static generateAlolaDeals() {

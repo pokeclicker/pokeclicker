@@ -2781,7 +2781,8 @@ TownList['Santalune Forest'] = new DungeonTown(
 TownList['Parfum Palace'] = new DungeonTown(
     'Parfum Palace',
     GameConstants.Region.kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)],
+    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou trader')]
 );
 TownList['Connecting Cave'] = new DungeonTown(
     'Connecting Cave',
