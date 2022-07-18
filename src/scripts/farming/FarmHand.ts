@@ -45,6 +45,7 @@ class FarmHand {
         energy: 0,
         hired: false,
         plots: [],
+        name: undefined,
     };
     // Maximum Efficiency value
     public maxEfficiency = 50;
@@ -263,6 +264,7 @@ class FarmHand {
                 timeout: 30 * GameConstants.MINUTE,
             });
             this.hired(false);
+            App.game.logbook.newLog(LogBookTypes.OTHER, `You ran out of Farm Points to pay Farm Hand ${this.name}!`);
             return;
         }
         // Charge the player for the hour
@@ -283,6 +285,8 @@ class FarmHand {
             energy: this.energy(),
             hired: this.hired(),
             plots: this.plots(),
+            // It uses the name to look up the farmhand on load
+            name: this.name,
         };
 
         // Don't save anything that is the default option

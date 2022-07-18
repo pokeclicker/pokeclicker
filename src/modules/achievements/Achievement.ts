@@ -10,7 +10,7 @@ import LogEvent from '../LogEvent';
 
 export default class Achievement {
     public isCompleted: KnockoutComputed<boolean> = ko.pureComputed(() => this.achievable() && (this.unlocked || this.property.isCompleted()));
-    public getProgressText: KnockoutComputed<string> = ko.pureComputed(() => `${this.getProgress()}/${this.property.requiredValue}`);
+    public getProgressText: KnockoutComputed<string> = ko.pureComputed(() => `${this.getProgress().toLocaleString('en-US')} / ${this.property.requiredValue.toLocaleString('en-US')}`);
     public bonus = 0;
     public unlocked = false;
 

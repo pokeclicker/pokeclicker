@@ -30,6 +30,7 @@ export default class Profile implements Saveable {
     ) {
         this.name = ko.observable(name);
         this.trainer = ko.observable(trainer).extend({ numeric: 0 });
+        this.trainer.subscribe((t) => document.documentElement.style.setProperty('--trainer-image', `url('../assets/images/profile/trainer-${t}.png')`));
         this.pokemon = ko.observable(pokemon).extend({ numeric: 2 });
         this.pokemonShiny = ko.observable(false).extend({ boolean: null });
         this.background = ko.observable(background).extend({ numeric: 0 });
@@ -95,7 +96,7 @@ export default class Profile implements Saveable {
                 const img: HTMLImageElement = document.createElement('img');
                 img.onerror = () => img.remove();
                 img.className = 'm-1';
-                img.width = 24;
+                img.width = 18;
                 img.src = `assets/images/challenges/${c}.png`;
                 img.title = GameConstants.camelCaseToString(c);
                 img.dataset.toggle = 'tooltip';

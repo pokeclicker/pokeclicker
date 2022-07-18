@@ -421,6 +421,7 @@
     <%- include('templates/mapTown',
         { name: "Lumiose City"
         , x: 53, y: 22
+        , isExtension: true
         })
     %>
 
@@ -477,6 +478,7 @@
     <%- include('templates/mapTown',
         { name: "Laverre City"
         , x: 57, y: 3
+        , isExtension: true
         })
     %>
 
@@ -521,6 +523,7 @@
         { name: "Pokémon League Kalos"
         , x: 64, y: 28.5
         , width: 3, height: 0.5
+        , isExtension: true
         })
     %>
 
@@ -685,6 +688,16 @@
          , databind: "click:function(){MapHelper.moveToTown('Vaniville Town')}, attr:{ class: MapHelper.calculateTownCssClass('Vaniville Town') }"
          , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
          , image: "assets/images/map/blimp_pikachu.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Ash Ketchum"
+         , x: 77, y: 51
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Ash Ketchum Kalos'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Ash Ketchum Kalos'] && TemporaryBattleList['Ash Ketchum Kalos'].isVisible()"
+         , image: "assets/images/map/ashketchumoverworld.png"
          })
      %>
 

@@ -11,243 +11,332 @@ Routes.add(new RegionRoute(
     'Kanto Route 1', GameConstants.Region.kanto, 1,
     new RoutePokemon({
         land: ['Pidgey', 'Rattata'],
-    })
+    }),
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 22', GameConstants.Region.kanto, 22,
     new RoutePokemon({
-        land: ['Rattata', 'Spearow', 'Nidoran(F)', 'Nidoran(M)', 'Mankey'],
-        water: ['Magikarp', 'Poliwag', 'Poliwhirl', 'Goldeen'],
+        land: ['Rattata', 'Spearow', 'Mankey'],
+        water: ['Psyduck', 'Poliwag', 'Slowpoke', 'Goldeen', 'Magikarp'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 1)],
-    1.1
+    1.1,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 2', GameConstants.Region.kanto, 2,
     new RoutePokemon({
-        land: ['Pidgey', 'Rattata', 'Nidoran(F)', 'Nidoran(M)'],
+        land: ['Pidgey', 'Rattata', 'Caterpie', 'Weedle'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 1)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 1)],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 3', GameConstants.Region.kanto, 3,
     new RoutePokemon({
-        land: ['Rattata', 'Spearow', 'Sandshrew', 'Mankey'],
+        land: ['Pidgey', 'Spearow', 'Nidoran(F)', 'Nidoran(M)', 'Jigglypuff', 'Mankey'],
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 2),
         new GymBadgeRequirement(BadgeEnums.Boulder),
-    ]
+    ],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 4', GameConstants.Region.kanto, 4,
     new RoutePokemon({
         land: ['Rattata', 'Spearow', 'Ekans', 'Sandshrew', 'Mankey'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Seaking'],
+        water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 3),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Moon')),
-    ]
+    ],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 24', GameConstants.Region.kanto, 24,
     new RoutePokemon({
-        land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Venonat', 'Bellsprout'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Seaking'],
+        land: ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Pidgey', 'Oddish', 'Abra', 'Bellsprout'],
+        water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
-    4.1
+    4.1,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 25', GameConstants.Region.kanto, 25,
     new RoutePokemon({
-        land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Venonat', 'Bellsprout'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Krabby', 'Kingler'],
+        land: ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Pidgey', 'Oddish', 'Abra', 'Bellsprout'],
+        water: ['Psyduck', 'Poliwag', 'Tentacool', 'Slowpoke', 'Goldeen', 'Magikarp'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 24)],
-    4.2
+    4.2,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 5', GameConstants.Region.kanto, 5,
     new RoutePokemon({
-        land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Jigglypuff', 'Meowth', 'Abra'],
+        land: ['Pidgey', 'Meowth', 'Oddish', 'Bellsprout'],
     }),
     [
         // Need to reach bills house
         new RouteKillRequirement(10, GameConstants.Region.kanto, 25),
-    ]
+    ],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 6', GameConstants.Region.kanto, 6,
     new RoutePokemon({
-        land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Jigglypuff', 'Meowth', 'Abra'],
-        water: ['Psyduck', 'Golduck', 'Magikarp', 'Poliwag', 'Goldeen'],
+        land: ['Pidgey', 'Meowth', 'Oddish', 'Bellsprout'],
+        water: ['Psyduck', 'Poliwag', 'Slowpoke', 'Goldeen', 'Magikarp'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 5)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 5)],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 11', GameConstants.Region.kanto, 11,
     new RoutePokemon({
-        land: ['Pidgey', 'Pidgeotto', 'Raticate', 'Rattata', 'Drowzee'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Tentacool', 'Horsea'],
+        land: ['Spearow', 'Ekans', 'Sandshrew', 'Drowzee'],
+        water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
-    6.1
+    6.1,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 9', GameConstants.Region.kanto, 9,
     new RoutePokemon({
-        land: ['Rattata', 'Raticate', 'Spearow', 'Fearow', 'Nidoran(F)', 'Nidoran(M)', 'Nidorina', 'Nidorino'],
+        land: ['Rattata', 'Spearow', 'Ekans', 'Sandshrew'],
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 6),
         new GymBadgeRequirement(BadgeEnums.Cascade),
-    ]
+    ],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 10', GameConstants.Region.kanto, 10,
     new RoutePokemon({
-        land: ['Rattata', 'Raticate', 'Nidoran(F)', 'Nidoran(M)', 'Machop', 'Magnemite'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Krabby', 'Kingler', 'Horsea'],
+        land: ['Spearow', 'Ekans', 'Sandshrew', 'Voltorb'],
+        water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 9),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rock Tunnel')),
-    ]
+    ],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 8', GameConstants.Region.kanto, 8,
     new RoutePokemon({
-        land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Vulpix', 'Jigglypuff', 'Meowth', 'Abra', 'Kadabra'],
+        land: ['Pidgey', 'Ekans', 'Sandshrew', 'Vulpix', 'Meowth', 'Growlithe'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
-    10.1
+    10.1,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 7', GameConstants.Region.kanto, 7,
     new RoutePokemon({
-        land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Vulpix', 'Jigglypuff', 'Meowth', 'Abra'],
+        land: ['Pidgey', 'Vulpix', 'Oddish', 'Meowth', 'Growlithe', 'Bellsprout'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 8)],
-    10.2
+    10.2,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 12', GameConstants.Region.kanto, 12,
     new RoutePokemon({
-        land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Farfetch\'d', 'Snorlax'],
-        water: ['Slowpoke', 'Slowbro', 'Magikarp', 'Poliwag', 'Goldeen', 'Horsea', 'Seadra'],
+        land: ['Pidgey', 'Oddish', 'Gloom', 'Venonat', 'Bellsprout', 'Weepinbell', 'Farfetch\'d', 'Snorlax'],
+        water: ['Poliwag', 'Slowpoke', 'Slowbro', 'Goldeen', 'Magikarp'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 13', GameConstants.Region.kanto, 13,
     new RoutePokemon({
-        land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Farfetch\'d'],
-        water: ['Slowpoke', 'Slowbro', 'Magikarp', 'Poliwag', 'Goldeen', 'Tentacool', 'Horsea', 'Seadra'],
+        land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Bellsprout', 'Weepinbell', 'Farfetch\'d', 'Ditto'],
+        water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
     }),
     [
         new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.kanto, 12),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 14),
         ]),
-    ]
+    ],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 14', GameConstants.Region.kanto, 14,
     new RoutePokemon({
-        land: ['Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Venomoth', 'Bellsprout', 'Weepinbell'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen'],
+        land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Bellsprout', 'Weepinbell', 'Ditto'],
     }),
     [
         new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.kanto, 13),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 15),
         ]),
-    ]
+    ],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 15', GameConstants.Region.kanto, 15,
     new RoutePokemon({
-        land: ['Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Venomoth', 'Bellsprout', 'Weepinbell'],
+        land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Bellsprout', 'Weepinbell', 'Ditto'],
     }),
     [
         new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.kanto, 18),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 14),
         ]),
-    ]
+    ],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 16', GameConstants.Region.kanto, 16,
     new RoutePokemon({
-        land: ['Rattata', 'Raticate', 'Spearow', 'Fearow', 'Doduo', 'Snorlax'],
+        land: ['Rattata', 'Raticate', 'Spearow', 'Doduo', 'Snorlax'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 17', GameConstants.Region.kanto, 17,
     new RoutePokemon({
-        land: ['Fearow', 'Ponyta', 'Doduo', 'Dodrio'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Tentacool', 'Shellder'],
+        land: ['Rattata', 'Raticate', 'Spearow', 'Fearow', 'Doduo'],
     }),
     [
         new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.kanto, 16),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 18),
         ]),
-    ]
+    ],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 18', GameConstants.Region.kanto, 18,
     new RoutePokemon({
         land: ['Rattata', 'Raticate', 'Spearow', 'Fearow', 'Doduo'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Tentacool', 'Shellder'],
     }),
     [
         new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.kanto, 17),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 15),
         ]),
-    ]
+    ],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 19', GameConstants.Region.kanto, 19,
     new RoutePokemon({
-        water: ['Tentacool', 'Magikarp', 'Poliwag', 'Goldeen', 'Tentacruel', 'Staryu'],
+        water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Soul)]
+    [new GymBadgeRequirement(BadgeEnums.Soul)],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 20', GameConstants.Region.kanto, 20,
     new RoutePokemon({
-        water: ['Tentacool', 'Magikarp', 'Poliwag', 'Goldeen', 'Tentacruel', 'Staryu'],
+        water: ['Tentacool', 'Krabby', 'Horsea', 'Shellder', 'Staryu', 'Magikarp'],
     }),
     [
         new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.kanto, 21),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Seafoam Islands')),
         ]),
-    ]
+    ],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 21', GameConstants.Region.kanto, 21,
     new RoutePokemon({
-        land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Raticate', 'Tangela'],
-        water: ['Tentacool', 'Magikarp', 'Poliwag', 'Goldeen', 'Tentacruel', 'Staryu'],
+        land: ['Tangela'],
+        water: ['Tentacool', 'Krabby', 'Horsea', 'Shellder', 'Staryu', 'Magikarp'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Soul)]
+    [new GymBadgeRequirement(BadgeEnums.Soul)],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 23', GameConstants.Region.kanto, 23,
     new RoutePokemon({
-        land: ['Fearow', 'Nidorina', 'Nidorino', 'Mankey', 'Primeape'],
-        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Poliwhirl'],
+        land: ['Spearow', 'Fearow', 'Ekans', 'Arbok', 'Sandshrew', 'Sandslash', 'Mankey', 'Primeape'],
+        water: ['Psyduck', 'Poliwag', 'Slowpoke', 'Goldeen', 'Magikarp'],
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 22),
         new GymBadgeRequirement(BadgeEnums.Earth),
-    ]
+    ],
+    undefined,
+    GameConstants.KantoSubRegions.Kanto
+));
+Routes.add(new RegionRoute(
+    'Treasure Beach', GameConstants.Region.kanto, 26,
+    new RoutePokemon({
+        land: ['Spearow', 'Fearow', 'Meowth', 'Persian', 'Psyduck', 'Slowpoke', 'Tangela'],
+        water: ['Tentacool', 'Tentacruel', 'Krabby', 'Horsea', 'Magikarp'],
+    }),
+    [new GymBadgeRequirement(BadgeEnums.Volcano)],
+    21.1,
+    GameConstants.KantoSubRegions.Sevii123,
+    true,
+    37487
+));
+Routes.add(new RegionRoute(
+    'Kindle Road', GameConstants.Region.kanto, 27,
+    new RoutePokemon({
+        land: ['Spearow', 'Fearow', 'Meowth', 'Persian', 'Psyduck', 'Geodude', 'Ponyta', 'Rapidash', 'Slowpoke'],
+        water: ['Tentacool', 'Tentacruel', 'Krabby', 'Horsea', 'Magikarp'],
+    }),
+    [new GymBadgeRequirement(BadgeEnums.Volcano)],
+    21.2,
+    GameConstants.KantoSubRegions.Sevii123,
+    true,
+    37487
+));
+Routes.add(new RegionRoute(
+    'Cape Brink', GameConstants.Region.kanto, 28,
+    new RoutePokemon({
+        land: ['Spearow', 'Fearow', 'Oddish', 'Gloom', 'Meowth', 'Persian', 'Psyduck', 'Golduck', 'Bellsprout', 'Weepinbell', 'Slowpoke', 'Slowbro'],
+        water: ['Psyduck', 'Golduck', 'Poliwag', 'Slowpoke', 'Slowbro', 'Goldeen', 'Magikarp'],
+    }),
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 0)],
+    21.3,
+    GameConstants.KantoSubRegions.Sevii123,
+    true,
+    37487
+));
+Routes.add(new RegionRoute(
+    'Bond Bridge', GameConstants.Region.kanto, 29,
+    new RoutePokemon({
+        land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Meowth', 'Persian', 'Psyduck', 'Bellsprout', 'Weepinbell', 'Slowpoke'],
+        water: ['Tentacool', 'Tentacruel', 'Krabby', 'Horsea', 'Magikarp'],
+    }),
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 3)],
+    21.4,
+    GameConstants.KantoSubRegions.Sevii123,
+    true,
+    37487
 ));
 
 /*
@@ -902,7 +991,7 @@ Routes.add(new RegionRoute(
         land: ['Mr. Mime', 'Floatzel', 'Gastrodon (west)', 'Glameow', 'Chatot'],
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Shellos (west)', 'Gastrodon (west)', 'Finneon', 'Lumineon'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Fen)],
+    [new TemporaryBattleRequirement('Galactic Boss Cyrus')],
     210.6
 ));
 Routes.add(new RegionRoute(
@@ -924,7 +1013,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Wingull', 'Pelipper', 'Clamperl', 'Finneon', 'Lumineon'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Fen)]
+    [new TemporaryBattleRequirement('Galactic Boss Cyrus')]
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 220', GameConstants.Region.sinnoh, 220,
@@ -1049,10 +1138,8 @@ Routes.add(new RegionRoute(
         water: [],
     }),
     [
-        new MultiRequirement([
-            new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-            new GymBadgeRequirement(BadgeEnums.Insect),
-        ]),
+        new RouteKillRequirement(10, GameConstants.Region.unova, 4),
+        new GymBadgeRequirement(BadgeEnums.Insect),
     ],
     4
 ));
@@ -1441,7 +1528,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
     undefined,
-    AlolaSubRegions.MelemeleIsland
+    GameConstants.AlolaSubRegions.MelemeleIsland
 ));
 Routes.add(new RegionRoute(
     'Route 1 Hau\'oli Outskirts', GameConstants.Region.alola, 18,
@@ -1451,7 +1538,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
     1.1,
-    AlolaSubRegions.MelemeleIsland
+    GameConstants.AlolaSubRegions.MelemeleIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 2', GameConstants.Region.alola, 2,
@@ -1460,7 +1547,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
     undefined,
-    AlolaSubRegions.MelemeleIsland
+    GameConstants.AlolaSubRegions.MelemeleIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 3', GameConstants.Region.alola, 3,
@@ -1469,7 +1556,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Verdant Cavern'))],
     undefined,
-    AlolaSubRegions.MelemeleIsland
+    GameConstants.AlolaSubRegions.MelemeleIsland
 ));
 Routes.add(new RegionRoute(
     'Melemele Sea', GameConstants.Region.alola, 19,
@@ -1478,7 +1565,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill'))],
     5.1,
-    AlolaSubRegions.MelemeleIsland
+    GameConstants.AlolaSubRegions.MelemeleIsland
 ));
 Routes.add(new RegionRoute(
     'Kala\'e Bay', GameConstants.Region.alola, 20,
@@ -1491,7 +1578,7 @@ Routes.add(new RegionRoute(
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill')),
     ],
     5.2,
-    AlolaSubRegions.MelemeleIsland
+    GameConstants.AlolaSubRegions.MelemeleIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 4', GameConstants.Region.alola, 4,
@@ -1500,7 +1587,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
     undefined,
-    AlolaSubRegions.AkalaIsland
+    GameConstants.AlolaSubRegions.AkalaIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 5', GameConstants.Region.alola, 5,
@@ -1509,7 +1596,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Paniola Ranch'))],
     undefined,
-    AlolaSubRegions.AkalaIsland
+    GameConstants.AlolaSubRegions.AkalaIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 6', GameConstants.Region.alola, 6,
@@ -1518,7 +1605,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill'))],
     undefined,
-    AlolaSubRegions.AkalaIsland
+    GameConstants.AlolaSubRegions.AkalaIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 7', GameConstants.Region.alola, 7,
@@ -1527,7 +1614,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
     undefined,
-    AlolaSubRegions.AkalaIsland
+    GameConstants.AlolaSubRegions.AkalaIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 8', GameConstants.Region.alola, 8,
@@ -1537,7 +1624,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Wela Volcano Park'))],
     undefined,
-    AlolaSubRegions.AkalaIsland
+    GameConstants.AlolaSubRegions.AkalaIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 9', GameConstants.Region.alola, 9,
@@ -1546,7 +1633,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Diglett\'s Tunnel'))],
     undefined,
-    AlolaSubRegions.AkalaIsland
+    GameConstants.AlolaSubRegions.AkalaIsland
 ));
 Routes.add(new RegionRoute(
     'Akala Outskirts', GameConstants.Region.alola, 21,
@@ -1556,7 +1643,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Memorial Hill'))],
     9.1,
-    AlolaSubRegions.AkalaIsland
+    GameConstants.AlolaSubRegions.AkalaIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 10', GameConstants.Region.alola, 10,
@@ -1565,7 +1652,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Malie Garden'))],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Mount Hokulani', GameConstants.Region.alola, 22,
@@ -1574,7 +1661,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 10)],
     10.1,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Alola Route 11', GameConstants.Region.alola, 11,
@@ -1583,7 +1670,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Malie Garden'))],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Alola Route 12', GameConstants.Region.alola, 12,
@@ -1595,7 +1682,7 @@ Routes.add(new RegionRoute(
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Hokulani Observatory')),
     ],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Alola Route 13', GameConstants.Region.alola, 13,
@@ -1604,7 +1691,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 12)],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Alola Route 14', GameConstants.Region.alola, 14,
@@ -1613,7 +1700,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Haina Desert', GameConstants.Region.alola, 23,
@@ -1622,7 +1709,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Alola Route 15', GameConstants.Region.alola, 15,
@@ -1632,7 +1719,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Alola Route 16', GameConstants.Region.alola, 16,
@@ -1641,7 +1728,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 15)],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Alola Route 17', GameConstants.Region.alola, 17,
@@ -1650,7 +1737,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ula\'ula Meadow'))],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Poni Wilds', GameConstants.Region.alola, 24,
@@ -1659,7 +1746,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Ancient Poni Path', GameConstants.Region.alola, 25,
@@ -1668,7 +1755,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 24)],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Poni Breaker Coast', GameConstants.Region.alola, 26,
@@ -1677,7 +1764,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Poni Grove', GameConstants.Region.alola, 27,
@@ -1686,7 +1773,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Poni Plains', GameConstants.Region.alola, 28,
@@ -1695,7 +1782,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 27)],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Poni Coast', GameConstants.Region.alola, 29,
@@ -1704,7 +1791,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 28)],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 Routes.add(new RegionRoute(
     'Poni Gauntlet', GameConstants.Region.alola, 30,
@@ -1714,7 +1801,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 29)],
     undefined,
-    AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
 
 /*
