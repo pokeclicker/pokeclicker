@@ -637,7 +637,7 @@ class QuestLineHelper {
         UltraBeastQuestLine.addQuest(AnabelBattle);
 
         const createUltraBeastQuest = (ultrabeast: PokemonNameType, hint: string, numberCaught: number, ultraBeastReward?: (() => void)) => {
-            const time = (numberCaught > 0) ?  'time!' : 'times!';
+            const time = (numberCaught > 0) ?  'times!' : 'time!';
             const validHint = hint ?? '';
 
             const catchUltraBeast = new CaptureSpecificPokemonQuest(
