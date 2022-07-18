@@ -60,7 +60,8 @@ class PokemonFactory {
             });
             App.game.logbook.newLog(LogBookTypes.ROAMER, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a ${shiny ? 'shiny' : ''} roaming ${name}!`);
         }
-        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, 1, heldItem);
+        const ep = GameConstants.BASE_EP_YIELD * (roaming ? GameConstants.ROAMER_EP_MODIFIER : 1);
+        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, 1, heldItem, ep);
     }
 
     public static routeLevel(route: number, region: GameConstants.Region): number {
@@ -150,7 +151,9 @@ class PokemonFactory {
             LogEvent('encountered shiny', 'shiny pokemon', 'dungeon encounter',
                 Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
-        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, heldItem);
+
+        const ep = GameConstants.BASE_EP_YIELD * GameConstants.DUNGEON_EP_MODIFIER;
+        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, heldItem, ep);
     }
 
     public static generateDungeonTrainerPokemon(pokemon: GymPokemon, chestsOpened: number, baseHealth: number, level: number): BattlePokemon {
@@ -187,7 +190,8 @@ class PokemonFactory {
             LogEvent('encountered shiny', 'shiny pokemon', 'dungeon boss encounter',
                 Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
-        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_BOSS_GEMS, heldItem);
+        const ep = GameConstants.BASE_EP_YIELD * GameConstants.DUNGEON_BOSS_EP_MODIFIER;
+        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_BOSS_GEMS, heldItem, ep);
     }
 
     public static generateTemporaryBattlePokemon(battle: TemporaryBattle, index: number): BattlePokemon {
