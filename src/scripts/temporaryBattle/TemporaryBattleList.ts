@@ -313,7 +313,7 @@ TemporaryBattleList.Anabel = new TemporaryBattle(
         new GymPokemon('Snorlax', 234464883, 61),
     ],
     'Oh you\'re good! You might just have a shot, here are some Beast Balls. Go hunt down those strange Ultra Beasts! If you need more Beast Balls, you can buy them here.',
-    [new QuestLineStartedRequirement('Ultra Beast Hunt')]
+    [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 0)]
 );
 TemporaryBattleList['Captain Mina UB'] = new TemporaryBattle(
     'Captain Mina UB',
@@ -325,10 +325,11 @@ TemporaryBattleList['Captain Mina UB'] = new TemporaryBattle(
         new GymPokemon('Ribombee', 244464883, 61),
     ],
     'Your strength is still shocking!',
-    [new QuestLineStartedRequirement('Ultra Beast Hunt')],
+    [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 7)],
     undefined,
     {
         displayName: 'Captain Mina',
+        imageName: 'Captain Mina',
     }
 );
 TemporaryBattleList['Kahuna Nanu UB'] = new TemporaryBattle(
@@ -341,10 +342,11 @@ TemporaryBattleList['Kahuna Nanu UB'] = new TemporaryBattle(
         new GymPokemon('Alolan Persian', 254464883, 63),
     ],
     'I had to be sure. Sure that you\'re ready for what\'s coming...',
-    [new QuestLineStartedRequirement('Ultra Beast Hunt')],
+    [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 13)],
     undefined,
     {
         displayName: 'Kahuna Nanu',
+        imageName: 'Kahuna Nanu',
     }
 );
 TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
