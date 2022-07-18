@@ -12,7 +12,7 @@ Replace the everything in this file (except for this comment) with what was copi
 Change the type of `PokemonListData -> name` back to `PokemonNameType`
 */
 
-export type PokemonNameType
+export type string
     = 'Bulbasaur'
     | 'Bulbasaur (Rose)'
     | 'Ivysaur'
@@ -1201,6 +1201,11 @@ export type PokemonNameType
     | 'Squirtle (clone)'
     | 'Wartortle (clone)'
     | 'Blastoise (clone)'
+    | 'Classic Pikachu'
+    | 'Classic Raichu'
+    | 'Shadow Lugia'
+    | 'Primal Dialga'
+    | 'Explorer Piplup'
     | 'Mega Venusaur'
     | 'Mega Charizard X'
     | 'Mega Gyarados'
