@@ -3352,7 +3352,7 @@ const Calyrex3 = new NPC ('Calyrex', [
     'I think that would be for the best. Once you capture them, I would appreciate it if you could bring them to the Crown Shrine at the mountain\'s peak.',
 ],
 { requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 6), new QuestLineStepCompletedRequirement('The Crown of Galar', 7, GameConstants.AchievementOption.less )])});
-const Calyrex3 = new NPC ('Calyrex', [
+const Calyrex4 = new NPC ('Calyrex', [
     'Finally, my loyal steeds have returned to me. There are truly no words with which to fully express my gratitude to you. So... I have a suggestion',
     'If you are able to capture me, it will prove your worth beyond any doubt, and I will lend you my strength on your journey. Once you have readied yourself, come face me!',
 ],
@@ -3379,7 +3379,7 @@ const BirdPeony2 = new NPC ('Peony', [
 const BirdPeony3 = new NPC ('Peony', [
     'Wait--you really caught Articuno, Moltres and Zapdos from the legends?! Thats\'s ultra-mega-brilliant! Report away!',
     'So that\'s them is it? I can definitely see the resemblance, but they don\'t seem quite the same...',
-    'Maybe they\'re regional variants or somethin\'? At an rate, that\'s good enough for me. Let\'s call this expedition a success!,
+    'Maybe they\'re regional variants or somethin\'? At an rate, that\'s good enough for me. Let\'s call this expedition a success!',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 5), new QuestLineCompletedRequirement('The Birds of the Dyna Tree', GameConstants.AchievementOption.less)]) });
 const GolemPeony1 = new NPC ('Peony', [
