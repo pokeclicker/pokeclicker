@@ -642,7 +642,7 @@ class QuestLineHelper {
 
             const catchUltraBeast = new CaptureSpecificPokemonQuest(
                 ultrabeast,
-                `Find and capture ${ultrabeast} ${numberCaught} ${time} ${validHint}`,
+                `Capture ${ultrabeast} ${numberCaught} ${time} ${validHint}`,
                 numberCaught,
                 false,
                 ultraBeastReward,
