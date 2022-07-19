@@ -847,27 +847,25 @@ class Update implements Saveable {
 
             // Add Mt. Ember Summit
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 10);
+
             // Add Berry Forest
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 11);
 
-            // Add Galactic Boss Cyrus TemporaryBattle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
-            // Add Biker Gang TemporaryBattles
+            // Add Biker Gang Temporary Battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 3);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 4);
-            // Add Ash Ketchum Kanto TemporaryBattle
+
+            // Add Galactic Boss Cyrus Temporary Battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 5);
+
+            // Add Ash Ketchum Temporary Battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
-            // Add Ash Ketchum Johto TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 8);
-            // Add Ash Ketchum Hoenn TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 9);
-            // Add Ash Ketchum Sinnoh TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 10);
-            // Add Ash Ketchum Unova TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
-            // Add Ash Ketchum Kalos TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
 
             // Update settings
