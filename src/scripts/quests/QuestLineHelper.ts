@@ -878,13 +878,23 @@ class QuestLineHelper {
                 clearAvery2,
             ], 'You, Klara and Avery have happened upon the same Max Mushroom in Warm-Up Tunnel. Defeat them both to win it.'));
 
+        const KubfuReward = () => {
+            App.game.party.gainPokemonById(891);
+            Notifier.notify({
+                title: ashKetchumQuestLine.name,
+                message: 'You obtained Kubfu!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
         const clearKlara3 = new CustomQuest(1, 0, 'Defeat Klara.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Klara3')]());
         const clearAvery3 = new CustomQuest(1, 0, 'Defeat Avery', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Avery3')]());
         dojoArmorQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 clearKlara2,
                 clearAvery2,
-            ], 'For the final trial, you must defeat both Klara and Avery at the Master Dojo Battlefield.'));
+            ], 'For the final trial, you must defeat both Klara and Avery at the Master Dojo Battlefield.', KubfuReward));
 
         const TowerofDarknessReward = () => {
             App.game.party.gainPokemonById(892);
