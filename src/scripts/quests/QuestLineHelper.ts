@@ -642,6 +642,9 @@ class QuestLineHelper {
         const talkToAnabel1 = new TalkToNPCQuest(RoadsideMotelAnabel1, 'Talk to Anabel at the Roadside Motel.');
         UltraBeastQuestLine.addQuest(talkToAnabel1);
 
+        const talkToLooker2 = new TalkToNPCQuest(RoadsideMotelLooker2, 'Talk to Looker at the Roadside Motel to learn about Beast Balls.');
+        UltraBeastQuestLine.addQuest(talkToLooker2);
+
         const createUltraBeastQuest = (ultrabeast: PokemonNameType, hint: string, numberCaught: number, ultraBeastReward?: (() => void)) => {
             const time = (numberCaught > 0) ?  'times!' : 'time!';
             const validHint = hint ?? '';
@@ -667,9 +670,6 @@ class QuestLineHelper {
         };
 
         UltraBeastQuestLine.addQuest(createUltraBeastQuest('Nihilego', ' Nihilego has been spotted at Wela Volcano Park and Diglett\'s Tunnel!', 1, ultraBeastReward));
-
-        const talkToLooker2 = new TalkToNPCQuest(RoadsideMotelLooker2, 'Talk to Looker at the Roadside Motel to learn about Beast Balls.');
-        UltraBeastQuestLine.addQuest(talkToLooker2);
 
         const talkToAnabel2 = new TalkToNPCQuest(RoadsideMotelAnabel2, 'Talk to Anabel at the Roadside Motel.');
         UltraBeastQuestLine.addQuest(talkToAnabel2);
