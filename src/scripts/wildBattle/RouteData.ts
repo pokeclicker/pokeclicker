@@ -1129,7 +1129,7 @@ Routes.add(new RegionRoute(
         land: ['Sandile', 'Darumaka', 'Trubbish', 'Minccino', 'Scraggy'],
         water: ['Frillish'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Toxic)]
+    [new TemporaryBattleRequirement('Team Plasma Grunt 1')]
 ));
 Routes.add(new RegionRoute(
     'Desert Resort', GameConstants.Region.unova, 25,
@@ -1139,7 +1139,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-        new GymBadgeRequirement(BadgeEnums.Insect),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ],
     4
 ));
@@ -1173,7 +1173,8 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 5),
-        new GymBadgeRequirement(BadgeEnums.Bolt),
+        new TemporaryBattleRequirement('Team Plasma Grunt 2'),
+        new TemporaryBattleRequirement('Team Plasma Grunt 3'),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1183,7 +1184,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Chargestone Cave')),
-        new GymBadgeRequirement(BadgeEnums.Quake),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 7),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1217,7 +1218,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Pinsir', 'Heracross', 'Roselia', 'Combee', 'Tranquill', 'Sewaddle'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 13)],
+    [new TemporaryBattleRequirement('Zinzolin 1')],
     13.1
 ));
 Routes.add(new RegionRoute(

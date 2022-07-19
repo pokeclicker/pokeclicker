@@ -85,6 +85,180 @@ TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
     [new GymBadgeRequirement(BadgeEnums.Fen)]
 );
 
+// Unova Temporarybattles
+TemporaryBattleList['Team Plasma Grunt 1'] = new TemporaryBattle(
+    'Team Plasma Grunt 1',
+    [new GymPokemon('Patrat', 5492150, 14)],
+    'Plasmaaaa! I lost! This is awful!',
+    [new GymBadgeRequirement(BadgeEnums.Toxic)],
+    undefined,
+    {
+        displayName: 'Team Plasma Grunt',
+    }
+);
+TemporaryBattleList['Team Plasma Grunt 2'] = new TemporaryBattle(
+    'Team Plasma Grunt 2',
+    [new GymPokemon('Trubbish', 35896600, 27)],
+    'Don\'t let it go to your head... But you put up a good fight, kid!',
+    [new GymBadgeRequirement(BadgeEnums.Bolt)],
+    undefined,
+    {
+        displayName: 'Team Plasma Grunt',
+    }
+);
+TemporaryBattleList['Team Plasma Grunt 3'] = new TemporaryBattle(
+    'Team Plasma Grunt 3',
+    [new GymPokemon('Watchog', 35896600, 27)],
+    'What\'s the big idea? This Pokémon I stole is useless!',
+    [new GymBadgeRequirement(BadgeEnums.Bolt)],
+    undefined,
+    {
+        displayName: 'Team Plasma Grunt',
+    }
+);
+TemporaryBattleList['Team Plasma Grunt 4'] = new TemporaryBattle(
+    'Team Plasma Grunt 4',
+    [new GymPokemon('Koffing', 39496600, 30)],
+    'You! So you\'re a Trainer who fights while believing in your Pokémon, are you?',
+    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    undefined,
+    {
+        displayName: 'Team Plasma Grunt',
+    }
+);
+TemporaryBattleList['Team Plasma Grunt 5'] = new TemporaryBattle(
+    'Team Plasma Grunt 5',
+    [new GymPokemon('Trubbish', 39496600, 30)],
+    'Plasmaaaa! Plasmaaaa!!',
+    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    undefined,
+    {
+        displayName: 'Team Plasma Grunt',
+    }
+);
+TemporaryBattleList['Team Plasma Grunts 1'] = new TemporaryBattle(
+    'Team Plasma Grunts 1',
+    [
+        new GymPokemon('Golbat', 9774150, 29),
+        new GymPokemon('Liepard', 9974150, 29),
+        new GymPokemon('Grimer', 9774150, 29),
+        new GymPokemon('Krokorok', 9974150, 29),
+    ],
+    'The Gym Leader is tough, but you... Are you even human?! I tried to use the same combination as you, and yet...',
+    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    undefined,
+    {
+        displayName: 'Team Plasma Grunts',
+    }
+);
+TemporaryBattleList['Team Plasma Grunts 2'] = new TemporaryBattle(
+    'Team Plasma Grunts 2',
+    [
+        new GymPokemon('Koffing', 9774150, 29),
+        new GymPokemon('Watchog', 9974150, 29),
+        new GymPokemon('Grimer', 9774150, 29),
+        new GymPokemon('Raticate', 9974150, 29),
+    ],
+    'No! At this rate, I... I won\'t be able to protect the Plasma Frigate! P-P-P-Plasmaaaa!',
+    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    undefined,
+    {
+        displayName: 'Team Plasma Grunts',
+    }
+);
+TemporaryBattleList['Team Plasma Grunt 6'] = new TemporaryBattle(
+    'Team Plasma Grunt 6',
+    [
+        new GymPokemon('Golbat', 22848300, 39),
+        new GymPokemon('Garbodor', 24848300, 39),
+    ],
+    'What a blunder to have made in front of Zinzolin...',
+    [],
+    undefined,
+    {
+        displayName: 'Team Plasma Grunt',
+    }
+);
+TemporaryBattleList['Zinzolin 1'] = new TemporaryBattle(
+    'Zinzolin 1',
+    [
+        new GymPokemon('Cryogonal', 23848300, 42),
+        new GymPokemon('Sneasel', 25848300, 44),
+    ],
+    'You can\'t stop us! We will use the DNA Splicers to awaken the true power of the legendary Dragon-type Pokémon! We will steal the Splicers from the Opelucid City gym leader!',
+    [new TemporaryBattleRequirement('Team Plasma Grunt 6')],
+    undefined,
+    {
+        displayName: 'Zinzolin',
+    }
+);
+TemporaryBattleList['Team Plasma Grunt 7'] = new TemporaryBattle(
+    'Team Plasma Grunt 7',
+    [
+        new GymPokemon('Watchog', 22848300, 44),
+        new GymPokemon('Muk', 24848300, 44),
+    ],
+    'You little... You knocked out my stupid pawns!',
+    [],
+    undefined,
+    {
+        displayName: 'Team Plasma Grunt',
+    }
+);
+TemporaryBattleList['Team Plasma Grunt 8'] = new TemporaryBattle(
+    'Team Plasma Grunt 8',
+    [
+        new GymPokemon('Golbat', 22848300, 44),
+        new GymPokemon('Garbodor', 24848300, 44),
+    ],
+    'Argh! Lame! Stupid! Fool! Plasmaaaa!',
+    [],
+    undefined,
+    {
+        displayName: 'Team Plasma Grunt',
+    }
+);
+TemporaryBattleList['Team Plasma Grunt 9'] = new TemporaryBattle(
+    'Team Plasma Grunt 9',
+    [
+        new GymPokemon('Seviper', 22848300, 44),
+        new GymPokemon('Weezing', 24848300, 44),
+    ],
+    'Even if I lose, I will not give up on justice for Team Plasma! That\'s all!',
+    [],
+    undefined,
+    {
+        displayName: 'Team Plasma Grunt',
+    }
+);
+TemporaryBattleList['Zinzolin 2'] = new TemporaryBattle(
+    'Zinzolin 2',
+    [
+        new GymPokemon('Cryogonal', 22848300, 46),
+        new GymPokemon('Cryogonal', 22848300, 46),
+        new GymPokemon('Weavile', 24848300, 48),
+    ],
+    'Have you gotten even stronger than you were in Lucanosa Town? How, in such a brief amount of time...',
+    [
+        new TemporaryBattleRequirement('Team Plasma Grunt 7'),
+        new TemporaryBattleRequirement('Team Plasma Grunt 8'),
+        new TemporaryBattleRequirement('Team Plasma Grunt 9'),
+    ],
+    undefined,
+    {
+        displayName: 'Zinzolin',
+    }
+);
+TemporaryBattleList['Plasma Shadow'] = new TemporaryBattle(
+    'Plasma Shadow',
+    [
+        new GymPokemon('Pawniard', 22848300, 46),
+        new GymPokemon('Pawniard', 22848300, 46),
+        new GymPokemon('Absol', 24848300, 48),
+    ],
+    'I hate to admit it, but... You\'re a good trainer. Awww. How unlucky. I don\'t happen to be the one holding the DNA Splicers. I was just buying time for the others to escape. Cheerio, bye-bye, whatever.',
+    [new TemporaryBattleRequirement('Zinzolin 2')]
+);
 // Kalos Temporarybattles
 TemporaryBattleList.AZ = new TemporaryBattle(
     'AZ',

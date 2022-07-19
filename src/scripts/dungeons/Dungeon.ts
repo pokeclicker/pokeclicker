@@ -4806,56 +4806,6 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
     ],
     226500, 14);
 
-dungeonList['Team Plasma Assault'] = new Dungeon('Team Plasma Assault',
-    [
-        new DungeonTrainer('Team Plasma Grunt',
-            [
-                new GymPokemon('Watchog', 241500, 44),
-                new GymPokemon('Muk', 241500, 44),
-            ], { weight: 1 }, undefined, '(male)'),
-        new DungeonTrainer('Team Plasma Grunt',
-            [
-                new GymPokemon('Golbat', 241500, 44),
-                new GymPokemon('Garbodor', 241500, 44),
-            ], { weight: 1 }, undefined, '(female)'),
-        new DungeonTrainer('Team Plasma Grunt',
-            [
-                new GymPokemon('Seviper', 241500, 44),
-                new GymPokemon('Weezing', 241500, 44),
-            ], { weight: 1 }, undefined, '(male)'),
-        new DungeonTrainer('Team Plasma',
-            [
-                new GymPokemon('Pawniard', 241500, 46),
-                new GymPokemon('Pawniard', 241500, 46),
-                new GymPokemon('Absol', 241500, 46),
-            ], { weight: 1 }, 'Shadow', '(shadow)'),
-    ],
-    {
-        common: [
-            {loot: 'xClick', weight: 2},
-            {loot: 'Greatball'},
-        ],
-        rare: [
-            {loot: 'Blue Shard'},
-            {loot: 'Green Shard'},
-        ],
-        epic: [
-            {loot: 'Draco Plate'},
-            {loot: 'Icicle Plate'},
-        ],
-        legendary: [{loot: 'Ultraball'}],
-    },
-    4603000,
-    [
-        new DungeonTrainer('Team Plasma',
-            [
-                new GymPokemon('Cryogonal', 11000000, 46),
-                new GymPokemon('Cryogonal', 11000000, 46),
-                new GymPokemon('Weavile', 12000000, 48),
-            ], { weight: 1 }, 'Zinzolin', '(zinzolin)'),
-    ],
-    241500, 20);
-
 dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
     [
         {pokemon: 'Golduck', options: { weight: 3.5 }},
