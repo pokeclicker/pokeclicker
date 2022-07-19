@@ -896,8 +896,8 @@ class QuestLineHelper {
                 clearAvery3,
             ], 'For the final trial, you must defeat both Klara and Avery at the Master Dojo Battlefield.', KubfuReward));
 
-        const clearTowerofDarkness = new CustomQuest(1, TowerofDarknessReward, 'Defeat Tower of Darkness.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Tower of Darkness')]());
-        const clearTowerofWaters = new CustomQuest(1, TowerofWatersReward, 'Defeat Tower of Waters', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Tower of Waters')]());
+        const clearTowerofDarkness = new CustomQuest(1, 0, 'Defeat Tower of Darkness.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Tower of Darkness')]());
+        const clearTowerofWaters = new CustomQuest(1, 0, 'Defeat Tower of Waters', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Tower of Waters')]());
         dojoArmorQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 clearTowerofDarkness,
