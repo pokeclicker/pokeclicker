@@ -432,7 +432,7 @@ class QuestLineHelper {
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunts 2')]()
         );
         plasmaUnovaQuestLine.addQuest(clearDriftveilGrunts);
-        
+
         const talktoZinzolin1 = new TalkToNPCQuest(DriftveilZinzolin, 'Talk to Zinzolin.');
         plasmaUnovaQuestLine.addQuest(talktoZinzolin1);
 
