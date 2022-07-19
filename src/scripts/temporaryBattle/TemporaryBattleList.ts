@@ -875,19 +875,19 @@ TemporaryBattleList.Calyrex = new TemporaryBattle(
     'Calyrex',
     [new GymPokemon('Calyrex', 1886555626, 80)],
     'Cracrown crow. Roooooowwwn rown crown.',
-    [new QuestLineStepCompletedRequirement('The Crown of Galar', 1)]
+    [new QuestLineStepCompletedRequirement('The Crown of Galar', 0)]
 );
 TemporaryBattleList.Glastrier = new TemporaryBattle(
     'Glastrier',
     [new GymPokemon('Glastrier', 2031393560, 75)],
     'The Pokémon ran away!',
-    [new QuestLineStepCompletedRequirement('The Crown of Galar', 5)]
+    [new QuestLineStepCompletedRequirement('The Crown of Galar', 4)]
 );
 TemporaryBattleList.Spectrier = new TemporaryBattle(
     'Spectrier',
     [new GymPokemon('Spectrier', 2031393560, 75)],
     'The Pokémon ran away!',
-    [new QuestLineStepCompletedRequirement('The Crown of Galar', 5)]
+    [new QuestLineStepCompletedRequirement('The Crown of Galar', 4)]
 );
 TemporaryBattleList['Dyna Tree Birds'] = new TemporaryBattle(
     'Dyna Tree Birds',
@@ -897,11 +897,11 @@ TemporaryBattleList['Dyna Tree Birds'] = new TemporaryBattle(
         new GymPokemon('Galarian Moltres', 710987746, 70),
     ],
     'The legendary birds fled to roam the region.',
-    [new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 2)]
+    [new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 1)]
 );
 TemporaryBattleList.Regigigas = new TemporaryBattle(
     'Regigigas',
     [new GymPokemon('Regigigas', 2336102594, 100)],
     'The ancient giant was defeated!',
-    [new QuestLineStepCompletedRequirement('The Crown of Galar', 8)]
+    [new QuestLineStepCompletedRequirement('The Ancient Golems', 7)]
 );

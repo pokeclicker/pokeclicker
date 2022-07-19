@@ -107,13 +107,13 @@ RoamingPokemonList.add(GameConstants.Region.alola, 0, new RoamingPokemon('Marsha
 RoamingPokemonList.add(GameConstants.Region.alola, 0, new RoamingPokemon('Zeraora', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
 
 //Galar
-RoamingPokemonList.add(GameConstants.Region.galar, 0, new RoamingPokemon('Galarian Zapdos', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 4)));
+RoamingPokemonList.add(GameConstants.Region.galar, 0, new RoamingPokemon('Galarian Zapdos', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3)));
 
 //Galar - Isle of Armor
 RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Zarude', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
-RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Galarian Moltres', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 4)));
+RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Galarian Moltres', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3)));
 
 //Galar - Crown Tundra
-RoamingPokemonList.add(GameConstants.Region.galar, 3, new RoamingPokemon('Spectrier', new QuestLineStepCompletedRequirement('The Crown of Galar', 7)));
-RoamingPokemonList.add(GameConstants.Region.galar, 3, new RoamingPokemon('Glastrier', new QuestLineStepCompletedRequirement('The Crown of Galar', 7)));
-RoamingPokemonList.add(GameConstants.Region.galar, 3, new RoamingPokemon('Galarian Articuno', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 4)));
+RoamingPokemonList.add(GameConstants.Region.galar, 3, new RoamingPokemon('Spectrier', new QuestLineStepCompletedRequirement('The Crown of Galar', 6)));
+RoamingPokemonList.add(GameConstants.Region.galar, 3, new RoamingPokemon('Glastrier', new QuestLineStepCompletedRequirement('The Crown of Galar', 6)));
+RoamingPokemonList.add(GameConstants.Region.galar, 3, new RoamingPokemon('Galarian Articuno', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3)));
