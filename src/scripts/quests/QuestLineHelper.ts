@@ -896,24 +896,6 @@ class QuestLineHelper {
                 clearAvery3,
             ], 'For the final trial, you must defeat both Klara and Avery at the Master Dojo Battlefield.', KubfuReward));
 
-        const TowerofDarknessReward = () => {
-            App.game.party.gainPokemonById(892);
-            Notifier.notify({
-                title: dojoArmorQuestLine.name,
-                message: 'Kubfu evolved into Urshifu (Single Strike)!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
-        const TowerofWatersReward = () => {
-            App.game.party.gainPokemonById(892.1);
-            Notifier.notify({
-                title: dojoArmorQuestLine.name,
-                message: 'Kubfu evolved into Urshifu (Rapid Strike)!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
         const clearTowerofDarkness = new CustomQuest(1, TowerofDarknessReward, 'Defeat Tower of Darkness.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Tower of Darkness')]());
         const clearTowerofWaters = new CustomQuest(1, TowerofWatersReward, 'Defeat Tower of Waters', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Tower of Waters')]());
         dojoArmorQuestLine.addQuest(new MultipleQuestsQuest(
