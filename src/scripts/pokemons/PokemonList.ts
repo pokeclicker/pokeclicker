@@ -123,6 +123,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
+        'evolutions': [new LevelEvolution('Bulbasaur (Rose)', 'Ivysaur (Rose)', 42069)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -177,6 +178,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
+        'evolutions': [new LevelEvolution('Ivysaur (Rose)', 'Venusaur (Rose)', 69420)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
