@@ -202,7 +202,7 @@ TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
         new GymPokemon('Noivern', 123998000, 62),
         new GymPokemon('Ash Greninja', 123998000, 62),
     ],
-    'I forgive you for chasing me around, I\'m going to take some time off with a long vacation on a tropical island! Will you take care of my Greninja for me? He has a special Bond while in Battle with his trainer.',
+    'I forgive you for chasing me around. I\'m going to take some time off with a long vacation on a tropical island! Will you take care of my Greninja for me? He has a special Bond while in Battle with his trainer.',
     [new QuestLineStepCompletedRequirement('The New Kid', 4)],
     undefined,
     {
