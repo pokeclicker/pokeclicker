@@ -98,6 +98,9 @@ class Pokeballs implements Feature {
                 return Math.min(15,Math.pow(amountCaught,2) / 5000);
             }, 1250, 'Increased catch rate and EV gain rate with more catches', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
+            new Pokeball(GameConstants.Pokeball.Beastball, () => {
+                return 10;
+            }, 1000, 'Can only be used on Ultra Beasts', new TemporaryBattleRequirement('Anabel')),
         ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);
@@ -140,8 +143,11 @@ class Pokeballs implements Feature {
     public calculatePokeballToUse(id: number, isShiny: boolean): GameConstants.Pokeball {
         const alreadyCaught = App.game.party.alreadyCaughtPokemon(id);
         const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(id, true);
+        const pokemon = PokemonHelper.getPokemonById(id);
         let pref: GameConstants.Pokeball;
+
         // just check against alreadyCaughtShiny as this returns false when you don't have the pokemon yet.
+
         if (isShiny) {
             if (!alreadyCaughtShiny) {
                 // if the pokemon is also not caught, use the higher selection since a notCaughtShiny is also a notCaught pokemon
@@ -159,6 +165,20 @@ class Pokeballs implements Feature {
         }
 
         let use: GameConstants.Pokeball = GameConstants.Pokeball.None;
+
+        if (pref == GameConstants.Pokeball.Beastball) {
+            if (GameConstants.UltraBeastType[pokemon.name] != undefined && this.pokeballs[GameConstants.Pokeball.Beastball].quantity() > 0) {
+                return GameConstants.Pokeball.Beastball;
+            } else {
+                return GameConstants.Pokeball.None;
+            }
+        } else if (GameConstants.UltraBeastType[pokemon.name] != undefined) {
+            if (pref != GameConstants.Pokeball.None && this.pokeballs[GameConstants.Pokeball.Beastball].quantity() > 0) {
+                return GameConstants.Pokeball.Beastball;
+            } else {
+                return GameConstants.Pokeball.None;
+            }
+        }
 
         if (this.pokeballs[pref]?.quantity()) {
             return pref;
