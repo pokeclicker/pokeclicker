@@ -850,7 +850,7 @@ class Update implements Saveable {
 
             // Add Berry Forest
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 11);
-            
+
             // Turn Parfum Palace into a town
             saveData.statistics.dungeonsCleared.splice(96, 1);
 
