@@ -836,7 +836,7 @@ class Update implements Saveable {
             }
             // Start Ash questline if player has beaten Kalos champion already
             if (saveData.badgeCase[78]) {
-                saveData.quests.questLines.push({state: 1, name: 'The new kid', quest: 0});
+                saveData.quests.questLines.push({state: 1, name: 'The New Kid', quest: 0});
             }
 
             // Just incase statistics is not set
