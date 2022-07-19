@@ -110,7 +110,7 @@ SpecialEvents.newEvent('Gale of darkness!', 'Encounter Shadow Lugia for a limite
 // Pokemon yellow release date
 SpecialEvents.newEvent('Pokémon Yellow!', 'Encounter Classic Pikachu for a limited time in Viridian Forest and evolve it into Classic Raichu.',
     // Start
-    new Date(new Date().getFullYear(), 8, 4, 1), () => {
+    new Date(new Date().getFullYear(), 6, 18, 1), () => {
         dungeonList['Viridian Forest'].bossList.push(new DungeonBossPokemon('Classic Pikachu', 510, 7));
     },
     // End
@@ -119,7 +119,7 @@ SpecialEvents.newEvent('Pokémon Yellow!', 'Encounter Classic Pikachu for a limi
     }
 );
 // Pokemon mystery dungeon explorers release date
-SpecialEvents.newEvent('Explorers of time and darkness!', 'Encounter Primal Dialga for a limited time in Spear Pillar.<br/>Encounter Explorer Piplup roaming in Sinnoh',
+SpecialEvents.newEvent('Explorers of time and darkness!', 'Encounter Primal Dialga for a limited time in Spear Pillar.<br/>Encounter Explorer Piplup roaming in Sinnoh.',
     // Start
     new Date(new Date().getFullYear(), 8, 13, 1), () => {
         dungeonList['Spear Pillar'].bossList.push(new DungeonBossPokemon('Primal Dialga', 11880000, 100));
