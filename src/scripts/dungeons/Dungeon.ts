@@ -8510,7 +8510,7 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
         new DungeonTrainer('Dojo Master',
             [new GymPokemon('Kubfu', 144430560, 70)], { weight: 1 }, 'Mustard'),
     ],
-    96500, 36),
+    96500, 36,
     () => {
         App.game.party.gainPokemonById(892.1);
         Notifier.notify({
