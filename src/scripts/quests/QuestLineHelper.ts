@@ -846,7 +846,7 @@ class QuestLineHelper {
             [
                 clearSordward2,
                 clearShielbert2,
-            ], 'Sordward and Shielbert are trying to using the Rusted Sword and Shield to make Zacian and Zamazenta go on a rampage in Energy Plant. Stop them.'));
+            ], 'Sordward and Shielbert are trying to use the Rusted Sword and Shield to make Zacian and Zamazenta go on a rampage in Energy Plant. Stop them.'));
 
         const clearRampagingZacian = new CustomQuest(1, 0, 'Defeat Zacian.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Zacian')]());
         const clearRampagingZamazenta = new CustomQuest(1, 0, 'Defeat Zamazenta.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Zamazenta')]());
@@ -892,8 +892,8 @@ class QuestLineHelper {
         const clearAvery3 = new CustomQuest(1, 0, 'Defeat Avery', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Avery3')]());
         dojoArmorQuestLine.addQuest(new MultipleQuestsQuest(
             [
-                clearKlara2,
-                clearAvery2,
+                clearKlara3,
+                clearAvery3,
             ], 'For the final trial, you must defeat both Klara and Avery at the Master Dojo Battlefield.', KubfuReward));
 
         const TowerofDarknessReward = () => {
