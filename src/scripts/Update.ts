@@ -800,6 +800,7 @@ class Update implements Saveable {
         },
 
         '0.9.8': ({ playerData, saveData, settingsData }) => {
+            // Add names to oak item loadouts
             saveData.oakItemLoadouts = saveData.oakItemLoadouts?.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list })) || [];
 
             // Fix pokerus
@@ -812,29 +813,72 @@ class Update implements Saveable {
                 p[8] = status;
             });
 
+            // Moved EVs from statistics
+            saveData.party.caughtPokemon.forEach(p => {
+                p[9] = saveData.statistics.effortPoints?.[p.id] * 100 || 0;
+            });
+
             // Give the players Linking Cords in place of Trade Stones
-            playerData._itemList.Linking_cord = playerData._itemList.Trade_stone;
+            playerData._itemList.Linking_cord = playerData._itemList.Trade_stone || 0;
             delete playerData._itemList.Trade_stone;
 
-            // Fix quest default color
-            if (settingsData) {
-                if (settingsData && settingsData['--questAtLocation'] && settingsData['--questAtLocation'] === '#34BF45') {
-                    settingsData['--questAtLocation'] = '#55ff00';
-                }
-                delete settingsData['--currentPlace'];
+            // Start Sevii questline if player has Volcano Badge already
+            if (saveData.badgeCase[7]) {
+                saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
+            }
+            // Start Persons of Interest questline if player has Earth Badge already
+            if (saveData.badgeCase[8]) {
+                saveData.quests.questLines.push({state: 1, name: 'Persons of Interest', quest: 0});
+            }
+            // Start UB questline if player has beaten Alola Champion already
+            if (saveData.badgeCase[95]) {
+                saveData.quests.questLines.push({state: 1, name: 'Ultra Beast Hunt', quest: 0});
+            }
+            // Start Ash questline if player has beaten Kalos champion already
+            if (saveData.badgeCase[78]) {
+                saveData.quests.questLines.push({state: 1, name: 'The new kid', quest: 0});
             }
 
-            // Add total proteins obtained
             // Just incase statistics is not set
             saveData.statistics = saveData.statistics || {};
-            // Set new statistic
-            saveData.statistics = {
-                ...saveData.statistics,
-                totalProteinsPurchased: saveData.statistics.totalProteinsObtained || 0,
-            };
 
-            // Split dungeon loot notification into two
+            // Add new statistic
+            saveData.statistics.totalProteinsPurchased = saveData.statistics.totalProteinsObtained || 0;
+
+            // Add Mt. Ember Summit
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 10);
+
+            // Add Berry Forest
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 11);
+
+            // Add Biker Gang Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 3);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 4);
+
+            // Add Galactic Boss Cyrus Temporary Battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 5);
+
+            // Add Ash Ketchum Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 8);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 9);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 10);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+
+            // Update settings
             if (settingsData) {
+                // Update our default quest location color
+                if (settingsData['--questAtLocation'] === '#34BF45') {
+                    settingsData['--questAtLocation'] = '#55ff00';
+                }
+
+                // Remove current location color
+                delete settingsData['--currentPlace'];
+
+                // Split dungeon loot notifications into two
                 settingsData['notification.common_dungeon_item_found'] = settingsData['notification.dungeon_item_found'] ?? true;
                 settingsData['notification.common_dungeon_item_found.desktop'] = settingsData['notification.dungeon_item_found.desktop'] ?? false;
                 settingsData['notification.rare_dungeon_item_found'] = settingsData['notification.dungeon_item_found'] ?? true;
@@ -842,53 +886,6 @@ class Update implements Saveable {
                 delete settingsData['notification.dungeon_item_found'];
                 delete settingsData['notification.dungeon_item_found.desktop'];
             }
-
-            // Moved EVs from statistics
-            saveData.party.caughtPokemon.forEach(p => {
-                p[9] = saveData.statistics.effortPoints?.[p.id] * 100 || 0;
-            });
-
-            // Add Galactic Boss Cyrus TemporaryBattle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
-
-            // Start Sevii questline if player has Volcano Badge already
-            if (saveData.badgeCase[7]) {
-                saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
-            }
-            // Add Mt. Ember Summit
-            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 10);
-            // Add Berry Forest
-            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 11);
-            // Add Biker Gang TemporaryBattles
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 3);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 4);
-
-            // Start Persons of Interest questline if player has Earth Badge already
-            if (saveData.badgeCase[8]) {
-                saveData.quests.questLines.push({state: 1, name: 'Persons of Interest', quest: 0});
-            }
-            // Start UB questline
-            if (saveData.badgeCase[95]) {
-                saveData.quests.questLines.push({state: 1, name: 'Ultra Beast Hunt', quest: 0});
-            }
-            // Start Ash questline if the player has beaten Kalos champion
-            if (saveData.badgeCase[78]) {
-                saveData.quests.questLines.push({state: 1, name: 'The new kid', quest: 0});
-            }
-            // Add Ash Ketchum Kanto TemporaryBattle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
-            // Add Ash Ketchum Johto TemporaryBattle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 8);
-            // Add Ash Ketchum Hoenn TemporaryBattle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 9);
-            // Add Ash Ketchum Sinnoh TemporaryBattle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 10);
-            // Add Ash Ketchum Unova TemporaryBattle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
-            // Add Ash Ketchum Kalos TemporaryBattle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
         },
     };
 
