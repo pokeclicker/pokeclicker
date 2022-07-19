@@ -869,6 +869,10 @@ class Update implements Saveable {
             if (saveData.badgeCase[8]) {
                 saveData.quests.questLines.push({state: 1, name: 'Persons of Interest', quest: 0});
             }
+            // Start UB questline
+            if (saveData.badgeCase[95]) {
+                saveData.quests.questLines.push({state: 1, name: 'Ultra Beast Hunt', quest: 0});
+            }
             // Start Ash questline if the player has beaten Kalos champion
             if (saveData.badgeCase[78]) {
                 saveData.quests.questLines.push({state: 1, name: 'The New Kid', quest: 0});
