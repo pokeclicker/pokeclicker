@@ -36,7 +36,6 @@ class PokemonFactory {
         const exp: number = basePokemon.exp;
         const level: number = this.routeLevel(route, region);
         const heldItem: BagItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_MODIFIER);
-
         const money: number = this.routeMoney(route,region);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         if (shiny) {
