@@ -881,7 +881,7 @@ class QuestLineHelper {
         const KubfuReward = () => {
             App.game.party.gainPokemonById(891);
             Notifier.notify({
-                title: ashKetchumQuestLine.name,
+                title: dojoArmorQuestLine.name,
                 message: 'You obtained Kubfu!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
