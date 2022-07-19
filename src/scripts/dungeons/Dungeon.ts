@@ -7147,7 +7147,15 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
         new DungeonTrainer('Dojo Master',
             [new GymPokemon('Kubfu', 144430560, 70)], { weight: 1 }, 'Mustard'),
     ],
-    96500, 40);
+    96500, 40,
+    () => {
+        App.game.party.gainPokemonById(892);
+        Notifier.notify({
+            message: 'Kubfu evolved into Urshifu (Single Strike)!',
+            type: NotificationConstants.NotificationOption.success,
+            timeout: 3e4,
+        });
+    });
 
 dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
     [
@@ -7175,7 +7183,15 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
         new DungeonTrainer('Dojo Master',
             [new GymPokemon('Kubfu', 144430560, 70)], { weight: 1 }, 'Mustard'),
     ],
-    96500, 36);
+    96500, 36),
+    () => {
+        App.game.party.gainPokemonById(892.1);
+        Notifier.notify({
+            message: 'Kubfu evolved into Urshifu (Rapid Strike)!',
+            type: NotificationConstants.NotificationOption.success,
+            timeout: 3e4,
+        });
+    });
 
 
 //Crown Tundra
