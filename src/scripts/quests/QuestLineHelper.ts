@@ -620,6 +620,135 @@ class QuestLineHelper {
         App.game.quests.questLines().push(minasTrialAlolaQuestLine);
     }
 
+    public static createUltraBeastQuestLine() {
+        const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts');
+
+        const talkToLooker = new TalkToNPCQuest(RoadsideMotelLooker1, 'Talk to Looker at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToLooker);
+
+        const AnabelReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,5,false);
+        };
+
+        const AnabelBattle = new CustomQuest(
+            1,
+            AnabelReward,
+            'Defeat Agent Anabel at the Roadside Motel.',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anabel')](),
+            0
+        );
+        UltraBeastQuestLine.addQuest(AnabelBattle);
+
+        const talkToAnabel1 = new TalkToNPCQuest(RoadsideMotelAnabel1, 'Talk to Anabel at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToAnabel1);
+
+        const talkToLooker2 = new TalkToNPCQuest(RoadsideMotelLooker2, 'Talk to Looker at the Roadside Motel to learn about Beast Balls.');
+        UltraBeastQuestLine.addQuest(talkToLooker2);
+
+        const createUltraBeastQuest = (ultrabeast: PokemonNameType, hint: string, numberCaught: number, ultraBeastReward?: (() => void)) => {
+            const time = (numberCaught > 0) ?  'times!' : 'time!';
+            const validHint = hint ?? '';
+
+            const catchUltraBeast = new CaptureSpecificPokemonQuest(
+                ultrabeast,
+                `Capture ${ultrabeast} ${numberCaught} ${time} ${validHint}`,
+                numberCaught,
+                false,
+                ultraBeastReward,
+                undefined
+            );
+
+            return catchUltraBeast;
+        };
+        const ultraBeastReward = () => {
+            Notifier.notify({
+                title: UltraBeastQuestLine.name,
+                message: 'An Ultra Beast is hiding somewhere...',
+                type: NotificationConstants.NotificationOption.info,
+                timeout: 3e1,
+            });
+        };
+
+        UltraBeastQuestLine.addQuest(createUltraBeastQuest('Nihilego', ' Nihilego has been spotted at Wela Volcano Park and Diglett\'s Tunnel!', 1, ultraBeastReward));
+
+        const talkToAnabel2 = new TalkToNPCQuest(RoadsideMotelAnabel2, 'Talk to Anabel at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToAnabel2);
+
+        UltraBeastQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                createUltraBeastQuest('Buzzwole', undefined, 2),
+                createUltraBeastQuest('Pheromosa', undefined, 4),
+            ], 'Rare Ultra Beasts have been spotted!\nBuzzwole in Melemele Meadow and Pheromosa in Verdant Cavern!', ultraBeastReward));
+
+        const talkToAnabel3 = new TalkToNPCQuest(RoadsideMotelAnabel3, 'Talk to Anabel at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToAnabel3);
+
+        const MinaBattle = new CustomQuest(
+            1,
+            undefined,
+            'Defeat Trial Captain Mina at the Roadside Motel.',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Mina UB')](),
+            0
+        );
+        UltraBeastQuestLine.addQuest(MinaBattle);
+
+        const talkToMina1 = new TalkToNPCQuest(RoadsideMotelMina, 'Talk to Captain Mina at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToMina1);
+
+        UltraBeastQuestLine.addQuest(createUltraBeastQuest('Xurkitree', ' Xurkitree has been spotted at Memorial Hill and Lush Jungle!', 2, ultraBeastReward));
+
+        const talkToNanu1 = new TalkToNPCQuest(RoadsideMotelNanu1, 'Talk to Kahuna Nanu at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToNanu1);
+
+        UltraBeastQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                createUltraBeastQuest('Kartana', undefined, 4),
+                createUltraBeastQuest('Celesteela', undefined, 2),
+            ], 'Rare Ultra Beasts have been spotted! Kartana at Malie Garden and Route 17, and Celesteela at Malie Garden and Haina Desert!', ultraBeastReward));
+
+        const talkToNanu2 = new TalkToNPCQuest(RoadsideMotelNanu2, 'Talk to Kahuna Nanu at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToNanu2);
+
+        const NanuBattle = new CustomQuest(
+            1,
+            undefined,
+            'Defeat Kahuna Nanu at the Roadside Motel.',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahuna Nanu UB')](),
+            0
+        );
+        UltraBeastQuestLine.addQuest(NanuBattle);
+
+        const talkToAnabel4 = new TalkToNPCQuest(RoadsideMotelAnabel4, 'Talk to Anabel at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToAnabel4);
+
+        UltraBeastQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                createUltraBeastQuest('Blacephalon', undefined, 5),
+                createUltraBeastQuest('Stakataka', undefined, 5),
+            ], 'Rare Ultra Beasts have been spotted! Blacephalon and Stakataka are both at Poni Grove!', ultraBeastReward));
+
+        const talkToAnabel5 = new TalkToNPCQuest(RoadsideMotelAnabel5, 'Talk to Anabel at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToAnabel5);
+
+        const GuzzlordReward = () => {
+            Notifier.notify({ message: 'You caught all the Ultra Beasts!', type: NotificationConstants.NotificationOption.success });
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,50,false);
+        };
+
+        const GuzzlordCatch = new CaptureSpecificPokemonQuest(
+            'Guzzlord',
+            'Catch Guzzlord at Resolution Cave.',
+            1,
+            false,
+            GuzzlordReward,
+            undefined
+        );
+
+        UltraBeastQuestLine.addQuest(GuzzlordCatch);
+
+        App.game.quests.questLines().push(UltraBeastQuestLine);
+    }
+        
     public static createDarkestDayQuestLine() {
         const darkestDayQuestLine = new QuestLine('The Darkest Day', 'Stop the return of the Darkest Day!');
 
@@ -989,6 +1118,7 @@ class QuestLineHelper {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
 
+
     public static loadQuestLines() {
         this.createTutorial();
         this.createRocketKantoQuestLine();
@@ -1004,6 +1134,7 @@ class QuestLineHelper {
         this.createAshKetchumQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
+        this.createUltraBeastQuestLine();
         this.createDarkestDayQuestLine();
         this.createSwordShieldQuestLine();
         this.createDojoArmorQuestLine();

@@ -174,6 +174,7 @@ namespace GameConstants {
         'Lureball',
         'Nestball',
         'Repeatball',
+        'Beastball',
     }
     declare enum Currency {
         money,
@@ -339,6 +340,21 @@ namespace GameConstants {
         'Eternatus',
         'Kubfu',
     }
+
+    declare enum UltraBeastType {
+         'Nihilego',
+         'Buzzwole',
+         'Pheromosa',
+         'Xurkitree',
+         'Kartana',
+         'Celesteela',
+         'Blacephalon',
+         'Stakataka',
+         'Guzzlord',
+         'Poipole',
+         'Naganadel'
+     }
+
     declare enum PokeBlockColor {
         Black,
         Red,

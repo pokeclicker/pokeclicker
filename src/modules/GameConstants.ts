@@ -278,6 +278,7 @@ export enum Pokeball {
     'Lureball',
     'Nestball',
     'Repeatball',
+    'Beastball',
 }
 
 export enum Currency {
@@ -722,6 +723,20 @@ export enum PokemonItemType {
     'Poipole',
     'Eternatus',
     'Kubfu',
+}
+
+export enum UltraBeastType {
+    'Nihilego',
+    'Buzzwole',
+    'Pheromosa',
+    'Xurkitree',
+    'Kartana',
+    'Celesteela',
+    'Blacephalon',
+    'Stakataka',
+    'Guzzlord',
+    'Poipole',
+    'Naganadel',
 }
 
 export enum PokeBlockColor {
@@ -1240,6 +1255,9 @@ export const TemporaryBattles = [
     'Captain Kiawe',
     'Captain Sophocles',
     'Kahuna Nanu',
+    'Anabel',
+    'Captain Mina UB',
+    'Kahuna Nanu UB',
     'Ash Ketchum Alola',
     'Hop1',
     'Mirages',
