@@ -871,7 +871,7 @@ class Update implements Saveable {
             }
             // Start Ash questline if the player has beaten Kalos champion
             if (saveData.badgeCase[78]) {
-                saveData.quests.questLines.push({state: 1, name: 'The new kid', quest: 0});
+                saveData.quests.questLines.push({state: 1, name: 'The New Kid', quest: 0});
             }
             // Add Ash Ketchum Kanto TemporaryBattle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);

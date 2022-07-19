@@ -1195,7 +1195,7 @@ GymList['Champion Diantha'] = new Champion(
     undefined,
     undefined,
     () => {
-        App.game.quests.getQuestLine('The new kid').beginQuest();
+        App.game.quests.getQuestLine('The New Kid').beginQuest();
     }
 );
 
