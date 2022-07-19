@@ -99,7 +99,7 @@ SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a l
 // Pokemon XD release date
 SpecialEvents.newEvent('Gale of darkness!', 'Encounter Shadow Lugia for a limited time in Whirl Islands.',
     // Start
-    new Date(new Date().getFullYear(), 6, 18, 1), () => {
+    new Date(new Date().getFullYear(), 7, 4, 1), () => {
         dungeonList['Whirl Islands'].bossList.push(new DungeonBossPokemon('Shadow Lugia', 1410000, 100));
     },
     // End
