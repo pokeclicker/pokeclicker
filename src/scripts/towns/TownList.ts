@@ -3500,7 +3500,7 @@ TownList.Ballonlea = new Town(
 TownList.Hammerlocke = new Town(
     'Hammerlocke',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Hop6, TemporaryBattleList['Rampaging Haxorus'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Hammerlocke)],
+    [TemporaryBattleList['Rampaging Haxorus'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Hammerlocke)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
     }
@@ -3508,7 +3508,7 @@ TownList.Hammerlocke = new Town(
 TownList.Circhester = new Town(
     'Circhester',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Hop7, TemporaryBattleList['Rampaging Gigalith'], TemporaryBattleList['Rampaging Froslass'], GymList.Circhester1, GymList.Circhester2, CirchesterShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Circhester)],
+    [TemporaryBattleList['Rampaging Gigalith'], TemporaryBattleList['Rampaging Froslass'], GymList.Circhester1, GymList.Circhester2, CirchesterShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Circhester)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
     }
