@@ -99,7 +99,7 @@ SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a l
 // Pokemon XD release date
 SpecialEvents.newEvent('Gale of darkness!', 'Encounter Shadow Lugia for a limited time in Whirl Islands.',
     // Start
-    new Date(new Date().getFullYear(), 7, 4, 1), () => {
+    new Date(new Date().getFullYear(), 6, 18, 1), () => {
         dungeonList['Whirl Islands'].bossList.push(new DungeonBossPokemon('Shadow Lugia', 1410000, 100));
     },
     // End
@@ -110,7 +110,7 @@ SpecialEvents.newEvent('Gale of darkness!', 'Encounter Shadow Lugia for a limite
 // Pokemon yellow release date
 SpecialEvents.newEvent('Pokémon Yellow!', 'Encounter Classic Pikachu for a limited time in Viridian Forest and evolve it into Classic Raichu.',
     // Start
-    new Date(new Date().getFullYear(), 6, 18, 1), () => {
+    new Date(new Date().getFullYear(), 8, 4, 1), () => {
         dungeonList['Viridian Forest'].bossList.push(new DungeonBossPokemon('Classic Pikachu', 510, 7));
     },
     // End
