@@ -34,6 +34,11 @@ class TemporaryBattle extends TownContent {
     public getDisplayName() {
         return this.optionalArgs.displayName ?? this.name;
     }
+
+    public getImageName() {
+        return this.optionalArgs.imageName ?? this.name;
+    }
+
     public getTown() {
         return this.parent ?? TownList[this.optionalArgs.returnTown] ?? TownList[GameConstants.DockTowns[player.region]];
     }

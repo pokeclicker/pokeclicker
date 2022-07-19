@@ -312,6 +312,52 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
     '...',
     [new TemporaryBattleRequirement('Captain Sophocles')]
 );
+TemporaryBattleList.Anabel = new TemporaryBattle(
+    'Anabel',
+    [
+        new GymPokemon('Alakazam', 229464883, 61),
+        new GymPokemon('Weavile', 229464883, 61),
+        new GymPokemon('Mismagius', 229464883, 61),
+        new GymPokemon('Salamence', 229464883, 61),
+        new GymPokemon('Snorlax', 234464883, 61),
+    ],
+    'Oh you\'re good! You might just have a shot, here are some Beast Balls. Go hunt down those strange Ultra Beasts! If you need more Beast Balls, you can buy them here.',
+    [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 0)]
+);
+TemporaryBattleList['Captain Mina UB'] = new TemporaryBattle(
+    'Captain Mina UB',
+    [
+        new GymPokemon('Klefki', 239464883, 61),
+        new GymPokemon('Granbull', 239464883, 61),
+        new GymPokemon('Shiinotic', 239464883, 61),
+        new GymPokemon('Wigglytuff', 239464883, 61),
+        new GymPokemon('Ribombee', 244464883, 61),
+    ],
+    'Your strength is still shocking!',
+    [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 7)],
+    undefined,
+    {
+        displayName: 'Captain Mina',
+        imageName: 'Captain Mina',
+    }
+);
+TemporaryBattleList['Kahuna Nanu UB'] = new TemporaryBattle(
+    'Kahuna Nanu UB',
+    [
+        new GymPokemon('Sableye', 249464883, 63),
+        new GymPokemon('Krookodile', 249464883, 63),
+        new GymPokemon('Honchkrow', 249464883, 63),
+        new GymPokemon('Absol', 249464883, 63),
+        new GymPokemon('Alolan Persian', 254464883, 63),
+    ],
+    'I had to be sure. Sure that you\'re ready for what\'s coming...',
+    [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 13)],
+    undefined,
+    {
+        displayName: 'Kahuna Nanu',
+        imageName: 'Kahuna Nanu',
+    }
+);
 TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
     'Ash Ketchum Alola',
     [
