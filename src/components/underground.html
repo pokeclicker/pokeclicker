@@ -241,14 +241,14 @@
                 <span data-bind="text: '('+$data.amount().toLocaleString('en-US')+')'"></span>
             </td>
             <td class='vertical-middle' data-bind='text: name'></td>
-            <!-- ko if: valueType == "Mine Egg" -->
+            <!-- ko if: (Underground.getMineItemById(id).isShard() || valueType == "Mine Egg") -->
             <td></td>
             <!-- /ko -->
-            <!-- ko ifnot: valueType == "Mine Egg" -->
+            <!-- ko ifnot: (Underground.getMineItemById(id).isShard() || valueType == "Mine Egg")  -->
             <td class='vertical-middle' data-bind='text: value + " " + GameConstants.camelCaseToString(UndergroundItem.getFullResourceName(valueType, value))'></td>
             <!-- /ko -->
-            <!-- ko ifnot: Underground.getMineItemById(id).isShard() -->
             <td class='vertical-middle'>
+                <!-- ko ifnot: Underground.getMineItemById(id).isShard() -->
                 <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
                     <!-- ko ifnot: valueType == "Mine Egg" -->
                     <label
@@ -275,8 +275,8 @@
                     </div>
                     <!-- /ko -->
                 </div>
+                <!-- /ko -->
             </td>
-            <!-- /ko -->
         </tr>
     </script>
 </div>
