@@ -12,7 +12,7 @@ Replace the everything in this file (except for this comment) with what was copi
 Change the type of `PokemonListData -> name` back to `PokemonNameType`
 */
 
-export type string
+export type PokemonNameType
     = 'Bulbasaur'
     | 'Bulbasaur (Rose)'
     | 'Ivysaur'
