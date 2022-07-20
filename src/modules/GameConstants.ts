@@ -234,6 +234,7 @@ export const SHOPMON_EP_YIELD = 1000;
 export const SAFARI_EP_YIELD = 1000;
 
 export const SHINY_EP_MODIFIER = 5;
+export const REPEATBALL_EP_MODIFIER = 5;
 export const DUNGEON_EP_MODIFIER = 3;
 export const DUNGEON_BOSS_EP_MODIFIER = 10;
 export const ROAMER_EP_MODIFIER = 50;
