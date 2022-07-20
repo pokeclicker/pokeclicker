@@ -6301,7 +6301,7 @@ dungeonList['Sea Spirit\'s Den'] = new Dungeon('Sea Spirit\'s Den',
     [new DungeonBossPokemon('Lugia', 92375000, 100)],
     600000, 23);
 
-dungeonList['Pokéball Factory'] = new Dungeon('Pokéball Factory',
+dungeonList['Poké Ball Factory'] = new Dungeon('Poké Ball Factory',
     [
         new DungeonTrainer('Team Flare Grunt',
             [new GymPokemon('Toxicroak', 8173950, 37)], { weight: 1 }, undefined, '(male)'),

@@ -1457,8 +1457,8 @@ Routes.add(new RegionRoute(
         land: ['Mightyena', 'Skorupi', 'Watchog', 'Liepard', 'Foongus', 'Pawniard', 'Klefki'],
         water: ['Poliwag', 'Poliwhirl', 'Lombre', 'Floatzel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokéball Factory'))]
-    // Replace req with Pokéball Factory dungeon if implemented.
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Poké Ball Factory'))]
+    // Replace req with Poké Ball Factory dungeon if implemented.
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 16', GameConstants.Region.kalos, 16,
