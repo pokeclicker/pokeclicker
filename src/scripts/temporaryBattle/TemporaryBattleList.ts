@@ -82,7 +82,7 @@ TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
         new GymPokemon('Murkrow', 3665000, 36),
     ],
     'Impressive. Your prowess is notable.',
-    [new GymBadgeRequirement(BadgeEnums.Fen)]
+    [new QuestLineStepCompletedRequirement('A new world', 2)]
 );
 
 // Kalos Temporarybattles
