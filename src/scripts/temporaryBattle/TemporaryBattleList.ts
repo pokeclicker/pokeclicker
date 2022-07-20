@@ -37,6 +37,7 @@ TemporaryBattleList['Biker Goon 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Biker Goon',
+        imageName: 'Biker Goon',
     }
 );
 TemporaryBattleList['Biker Goon 2'] = new TemporaryBattle(
@@ -47,6 +48,7 @@ TemporaryBattleList['Biker Goon 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Biker Goon',
+        imageName: 'Biker Goon',
     }
 );
 TemporaryBattleList['Biker Goon 3'] = new TemporaryBattle(
@@ -57,6 +59,7 @@ TemporaryBattleList['Biker Goon 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Biker Goon',
+        imageName: 'Biker Goon',
     }
 );
 TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
@@ -82,7 +85,7 @@ TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
         new GymPokemon('Murkrow', 3665000, 36),
     ],
     'Impressive. Your prowess is notable.',
-    [new GymBadgeRequirement(BadgeEnums.Fen)]
+    [new QuestLineStepCompletedRequirement('A new world', 2)]
 );
 
 // Unova Temporarybattles
@@ -319,6 +322,7 @@ TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Pallet Town',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
@@ -337,6 +341,7 @@ TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Cianwood City',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
@@ -355,6 +360,7 @@ TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Lilycove City',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
@@ -373,6 +379,7 @@ TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Survival Area',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
@@ -391,6 +398,7 @@ TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Mistralton City',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
@@ -409,6 +417,7 @@ TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Kiloude City',
+        imageName: 'Ash Ketchum',
     }
 );
 
@@ -566,6 +575,7 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Seafolk Village',
+        imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
             App.game.party.gainPokemonById(25.07);
         },
