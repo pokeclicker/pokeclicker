@@ -319,6 +319,7 @@ export const SpriteCredits: Credit[] = [
         image: 'https://a.deviantart.net/avatars-big/t/e/tebited15.png',
         resources: [
             'Grant',
+            'Calem overworld',
         ],
         // Notes: Permission given on image page if credited.
     },
