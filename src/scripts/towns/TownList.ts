@@ -2955,7 +2955,7 @@ TownList['Heahea City'] = new Town(
 TownList['Paniola Town'] = new Town(
     'Paniola Town',
     GameConstants.Region.alola,
-    [TemporaryBattleList.Hau4, TemporaryBattleList['Team Skull Gladion1'],PaniolaTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Paniola Town'])],
+    [TemporaryBattleList.Hau4, TemporaryBattleList['Gladion1'],PaniolaTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Paniola Town'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 4)],
         npcs: [PaniolaTownActor],
@@ -3000,7 +3000,7 @@ TownList['Malie City'] = new Town(
 TownList['Tapu Village'] = new Town(
     'Tapu Village',
     GameConstants.Region.alola,
-    [TemporaryBattleList['Team Skull Admin Plumeria2'], TemporaryBattleList['Team Skull Gladion2'], TemporaryBattleList.Gladion3, TapuVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Tapu Village']), TemporaryBattleList['Kahuna Nanu']],
+    [TemporaryBattleList['Plumeria2'], TemporaryBattleList['Gladion2'], TemporaryBattleList.Gladion3, TapuVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Tapu Village']), TemporaryBattleList['Kahuna Nanu']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
         npcs: [TapuWorker],
@@ -3088,7 +3088,7 @@ TownList['Paniola Ranch'] = new DungeonTown(
 TownList['Brooklet Hill'] = new DungeonTown(
     'Brooklet Hill',
     GameConstants.Region.alola,
-    [new TemporaryBattleRequirement('Team Skull Gladion1')]
+    [new TemporaryBattleRequirement('Gladion1')]
 );
 TownList['Wela Volcano Park'] = new DungeonTown(
     'Wela Volcano Park',
@@ -3111,7 +3111,7 @@ TownList['Memorial Hill'] = new DungeonTown(
     'Memorial Hill',
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
-    [TemporaryBattleList['Team Skull Admin Plumeria1']]
+    [TemporaryBattleList['Admin Plumeria1']]
 );
 TownList['Malie Garden'] = new DungeonTown(
     'Malie Garden',

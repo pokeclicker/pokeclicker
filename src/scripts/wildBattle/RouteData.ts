@@ -1631,7 +1631,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Gumshoos', 'Sandygast'],
         water: ['Tentacruel', 'Magikarp', 'Clamperl', 'Finneon', 'Wishiwashi (Solo)', 'Bruxish'],
     }),
-    [new TemporaryBattleRequirement('Team Skull Admin Plumeria2')],
+    [new TemporaryBattleRequirement('Admin Plumeria2')],
     undefined,
     AlolaSubRegions.UlaulaAndPoniIslands
 ));

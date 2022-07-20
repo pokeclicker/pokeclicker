@@ -1219,7 +1219,7 @@ GymList['Konikoni City'] = new Gym(
     BadgeEnums.RockiumZ,
     128000,
     'How lovely.',
-    [new TemporaryBattleRequirement('Team Skull Admin Plumeria1')],
+    [new TemporaryBattleRequirement('Plumeria1')],
     () => {
         App.game.quests.getQuestLine('Eater of Light').beginQuest();
     }
@@ -1235,7 +1235,7 @@ GymList['Malie City'] = new Gym(
     BadgeEnums.DarkiniumZ,
     128000,
     'Hmph...',
-    [new TemporaryBattleRequirement('Team Skull Gladion2')]
+    [new TemporaryBattleRequirement('Gladion2')]
 );
 GymList['Exeggutor Island'] = new Gym(
     'Hapu',

@@ -17305,7 +17305,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 107,
         'catchRate': 3,
-        'evolutions': [new StoneEvolution('Type: Null', 'Silvally (normal)', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [new StoneEvolution('Type: Null', 'Silvally (Normal)', GameConstants.StoneType.Soothe_bell)],
         'base': {
             'hitpoints': 95,
             'attack': 95,
@@ -17317,7 +17317,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773,
-        'name': 'Silvally (normal)',
+        'name': 'Silvally (Normal)',
         'type': [PokemonType.Normal],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17334,7 +17334,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.01,
-        'name': 'Silvally (fire)',
+        'name': 'Silvally (Fire)',
         'type': [PokemonType.Fire],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17351,7 +17351,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.02,
-        'name': 'Silvally (water)',
+        'name': 'Silvally (Water)',
         'type': [PokemonType.Water],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17368,7 +17368,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.03,
-        'name': 'Silvally (electric)',
+        'name': 'Silvally (Electric)',
         'type': [PokemonType.Electric],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17385,7 +17385,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.04,
-        'name': 'Silvally (grass)',
+        'name': 'Silvally (Grass)',
         'type': [PokemonType.Grass],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17402,7 +17402,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.05,
-        'name': 'Silvally (ice)',
+        'name': 'Silvally (Ice)',
         'type': [PokemonType.Ice],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17419,7 +17419,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.06,
-        'name': 'Silvally (fighting)',
+        'name': 'Silvally (Fighting)',
         'type': [PokemonType.Fighting],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17436,7 +17436,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.07,
-        'name': 'Silvally (poison)',
+        'name': 'Silvally (Poison)',
         'type': [PokemonType.Poison],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17453,7 +17453,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.08,
-        'name': 'Silvally (ground)',
+        'name': 'Silvally (Ground)',
         'type': [PokemonType.Ground],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17470,7 +17470,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.09,
-        'name': 'Silvally (flying)',
+        'name': 'Silvally (Flying)',
         'type': [PokemonType.Flying],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17487,7 +17487,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.10,
-        'name': 'Silvally (psychic)',
+        'name': 'Silvally (Psychic)',
         'type': [PokemonType.Psychic],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17504,7 +17504,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.11,
-        'name': 'Silvally (bug)',
+        'name': 'Silvally (Bug)',
         'type': [PokemonType.Bug],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17521,7 +17521,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.12,
-        'name': 'Silvally (rock)',
+        'name': 'Silvally (Rock)',
         'type': [PokemonType.Rock],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17538,7 +17538,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.13,
-        'name': 'Silvally (ghost)',
+        'name': 'Silvally (Ghost)',
         'type': [PokemonType.Ghost],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17555,7 +17555,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.14,
-        'name': 'Silvally (dragon)',
+        'name': 'Silvally (Dragon)',
         'type': [PokemonType.Dragon],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17572,7 +17572,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.15,
-        'name': 'Silvally (dark)',
+        'name': 'Silvally (Dark)',
         'type': [PokemonType.Dark],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17589,7 +17589,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.16,
-        'name': 'Silvally (steel)',
+        'name': 'Silvally (Steel)',
         'type': [PokemonType.Steel],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -17606,7 +17606,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 773.17,
-        'name': 'Silvally (fairy)',
+        'name': 'Silvally (Fairy)',
         'type': [PokemonType.Fairy],
         'eggCycles': 120,
         'levelType': LevelType.slow,
