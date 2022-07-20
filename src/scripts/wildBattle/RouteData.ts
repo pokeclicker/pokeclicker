@@ -1383,7 +1383,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Abra', 'Doduo', 'Plusle', 'Minun', 'Gulpin', 'Bunnelby', 'Skiddo', 'Pancham', 'Furfrou'],
     }),
-    [new TemporaryBattleRequirement('Professor Sycamore1')]
+    [new TemporaryBattleRequirement('Sycamore1')]
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 6', GameConstants.Region.kalos, 6,
@@ -1492,7 +1492,7 @@ Routes.add(new RegionRoute(
         land: ['Weepinbell', 'Haunter', 'Quagsire', 'Drapion', 'Carnivine', 'Karrablast', 'Shelmet', 'Sliggoo'],
         water: ['Poliwag', 'Poliwhirl', 'Barboach', 'Stunfisk', 'Politoed'],
     }),
-    [new TemporaryBattleRequirement('Professor Sycamore2')]
+    [new TemporaryBattleRequirement('Sycamore2')]
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 20', GameConstants.Region.kalos, 20,
@@ -1725,7 +1725,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Gumshoos', 'Sandygast'],
         water: ['Tentacruel', 'Magikarp', 'Clamperl', 'Finneon', 'Wishiwashi (Solo)', 'Bruxish'],
     }),
-    [new TemporaryBattleRequirement('Admin Plumeria2')],
+    [new TemporaryBattleRequirement('Plumeria2')],
     undefined,
     GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));

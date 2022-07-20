@@ -874,8 +874,8 @@ TemporaryBattleList.Shauna1 = new TemporaryBattle(
         imageName: 'Shauna',
     }
 );
-TemporaryBattleList['Professor Sycamore1'] = new TemporaryBattle(
-    'Professor Sycamore1',
+TemporaryBattleList['Sycamore1'] = new TemporaryBattle(
+    'Sycamore1',
     [
         new GymPokemon('Bulbasaur', 17568392, 10),
         new GymPokemon('Charmander', 17568392, 10),
@@ -991,8 +991,8 @@ TemporaryBattleList.Calem4 = new TemporaryBattle(
         imageName: 'Calem',
     }
 );
-TemporaryBattleList['Professor Sycamore2'] = new TemporaryBattle(
-    'Professor Sycamore2',
+TemporaryBattleList['Sycamore2'] = new TemporaryBattle(
+    'Sycamore2',
     [
         new GymPokemon('Venusaur', 88799088, 50),
         new GymPokemon('Charizard', 88799088, 50),
@@ -1088,6 +1088,7 @@ TemporaryBattleList.AZ = new TemporaryBattle(
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
     undefined,
     {
+        displayName: 'Pokémon Trainer AZ',
         firstTimeRewardFunction: () => {
             App.game.party.gainPokemonById(670.05);
         },
@@ -1356,7 +1357,7 @@ TemporaryBattleList['Battle Royal'] = new TemporaryBattle(
     'The battle is over!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 6)]
 );
-TemporaryBattleList['Admin Plumeria1'] = new TemporaryBattle(
+TemporaryBattleList.Plumeria1 = new TemporaryBattle(
     'Admin Plumeria1',
     [
         new GymPokemon('Golbat', 190972759, 26),
