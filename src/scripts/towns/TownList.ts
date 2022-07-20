@@ -2444,14 +2444,14 @@ TownList['Plasma Frigate'] = new DungeonTown(
         new RouteKillRequirement(10, GameConstants.Region.unova, 22),
         new GymBadgeRequirement(BadgeEnums.Wave),
     ],
-    [TemporaryBattleList['Colress']],
+    [TemporaryBattleList.Colress],
     [PlasmaFrigateColress]
 );
 TownList['Giant Chasm'] = new DungeonTown(
     'Giant Chasm',
     GameConstants.Region.unova,
     [new TemporaryBattleRequirement('Colress')],
-    [TemporaryBattleList['Ghetsis']]
+    [TemporaryBattleList.Ghetsis]
 );
 TownList['Cave of Being'] = new DungeonTown(
     'Cave of Being',

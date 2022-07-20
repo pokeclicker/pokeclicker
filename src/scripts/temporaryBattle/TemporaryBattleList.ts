@@ -259,7 +259,7 @@ TemporaryBattleList['Plasma Shadow'] = new TemporaryBattle(
     'I hate to admit it, but... You\'re a good trainer. Awww. How unlucky. I don\'t happen to be the one holding the DNA Splicers. I was just buying time for the others to escape. Cheerio, bye-bye, whatever.',
     [new TemporaryBattleRequirement('Zinzolin 2')]
 );
-TemporaryBattleList['Colress'] = new TemporaryBattle(
+TemporaryBattleList.Colress = new TemporaryBattle(
     'Colress',
     [
         new GymPokemon('Magneton', 18065533, 50),
@@ -271,7 +271,7 @@ TemporaryBattleList['Colress'] = new TemporaryBattle(
     'So this is what it means to draw forth the power hidden in your Pokémon! To me, whether Team Plasma wins or whether you win will decide how the relationship between people and Pokémon should be! So where will this be settled? At the Giant Chasm! You\'d better hurry, they have already captured the legendary Dragon-type Pokémon!',
     [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 16)]
 );
-TemporaryBattleList['Ghetsis'] = new TemporaryBattle(
+TemporaryBattleList.Ghetsis = new TemporaryBattle(
     'Ghetsis',
     [
         new GymPokemon('Kyurem (Black)', 18065533, 50),
