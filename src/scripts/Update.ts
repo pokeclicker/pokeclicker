@@ -978,8 +978,6 @@ class Update implements Saveable {
             renamePokemon(saveData, 'Minior (Red-core)', 'Minior (Red Core)');
             renamePokemon(saveData, 'Minior (Violet-core)', 'Minior (Violet Core)');
             renamePokemon(saveData, 'Minior (Yellow-core)', 'Minior (Yellow Core)');
-
-            console.log(saveData);
         },
     };
 
