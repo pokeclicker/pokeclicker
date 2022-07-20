@@ -186,12 +186,9 @@ class Party implements Feature {
         }
 
         if (shiny) {
-            EPNum *= GameConstants.SHINY_EP_YIELD;
+            EPNum *= GameConstants.SHINY_EP_MODIFIER;
         }
 
-        if (App.game.gameState === GameConstants.GameState.dungeon && DungeonBattle.catching()) {
-            EPNum *= GameConstants.DUNGEON_EP_YIELD;
-        }
         return Math.floor(EPNum);
     }
 
