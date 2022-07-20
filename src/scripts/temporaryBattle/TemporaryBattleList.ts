@@ -11,7 +11,10 @@ TemporaryBattleList.Blue1 = new TemporaryBattle(
         new GymPokemon('Bulbasaur', 1678, 9/*, new StarterRequirement(GameConstants.Region.kanto, 3)*/),
     ],
     'I heard the Pokémon League is crawling with tough Trainers. I have to figure out how to get past them. You should quit dawdling and get a move on!',
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 22)],
+    [
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 22),
+        new GymBadgeRequirement(BadgeEnums.Boulder, GameConstants.AchievementOption.less),
+    ],
     undefined,
     {
         displayName: 'Rival Blue',
@@ -55,6 +58,7 @@ TemporaryBattleList.Blue3 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Rival Blue',
+        returnTown: 'Vermilion City',
         imageName: 'Blue2',
     }
 );
@@ -77,10 +81,11 @@ TemporaryBattleList.Blue4 = new TemporaryBattle(
         new GymPokemon('Ivysaur', 33438, 25/*, new StarterRequirement(GameConstants.Region.kanto, 3)*/),
     ],
     'What? You stinker! I took it easy on you, too!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
     undefined,
     {
         displayName: 'Rival Blue',
+        returnTown: 'Lavender Town',
         imageName: 'Blue2',
     }
 );
@@ -128,10 +133,11 @@ TemporaryBattleList.Blue5 = new TemporaryBattle(
         new GymPokemon('Venusaur', 44113, 40/*, new StarterRequirement(GameConstants.Region.kanto, 3)*/),
     ],
     'I\'m moving on up and ahead! I\'m going to the Pokémon League to boot out the Elite Four! I\'ll become the world\'s most powerful Trainer! Well, good luck to you! Don\'t sweat it! Smell ya!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Silph Co.'))],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
     undefined,
     {
         displayName: 'Rival Blue',
+        returnTown: 'Saffron City',
         imageName: 'Blue2',
         firstTimeRewardFunction: () => {
             App.game.party.gainPokemonById(131);
@@ -210,7 +216,6 @@ TemporaryBattleList.Blue6 = new TemporaryBattle(
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 22),
         new GymBadgeRequirement(BadgeEnums.Earth),
-        new TemporaryBattleRequirement('Blue1'),
     ],
     undefined,
     {
@@ -869,8 +874,8 @@ TemporaryBattleList.Shauna1 = new TemporaryBattle(
         imageName: 'Shauna',
     }
 );
-TemporaryBattleList.Sycamore1 = new TemporaryBattle(
-    'Sycamore1',
+TemporaryBattleList['Professor Sycamore1'] = new TemporaryBattle(
+    'Professor Sycamore1',
     [
         new GymPokemon('Bulbasaur', 17568392, 10),
         new GymPokemon('Charmander', 17568392, 10),
@@ -1351,8 +1356,8 @@ TemporaryBattleList['Battle Royal'] = new TemporaryBattle(
     'The battle is over!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 6)]
 );
-TemporaryBattleList.Plumeria1 = new TemporaryBattle(
-    'Plumeria1',
+TemporaryBattleList['Admin Plumeria1'] = new TemporaryBattle(
+    'Admin Plumeria1',
     [
         new GymPokemon('Golbat', 190972759, 26),
         new GymPokemon('Salandit', 202785507, 27),

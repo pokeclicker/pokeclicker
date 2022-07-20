@@ -308,7 +308,7 @@ TownList['Pallet Town'] = new Town(
 TownList['Viridian City'] = new Town(
     'Viridian City',
     GameConstants.Region.kanto,
-    [TemporaryBattleList.Blue1, TemporaryBattleList.Blue6, ViridianCityShop],
+    [ViridianCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 1)],
         npcs: [ViridianCityOldMan1, ViridianCityOldMan2, ViridianCityOldMan3],
@@ -340,7 +340,7 @@ TownList['Route 3 Pokémon Center'] = new Town(
 TownList['Cerulean City'] = new Town(
     'Cerulean City',
     GameConstants.Region.kanto,
-    [TemporaryBattleList.Blue2, CeruleanCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cerulean City']), new MoveToDungeon(dungeonList['Cerulean Cave'])],
+    [CeruleanCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cerulean City']), new MoveToDungeon(dungeonList['Cerulean Cave'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
         npcs: [CeruleanKantoBerryMaster, CeruleanSuperNerd],
@@ -349,7 +349,7 @@ TownList['Cerulean City'] = new Town(
 TownList['Vermilion City'] = new Town(
     'Vermilion City',
     GameConstants.Region.kanto,
-    [TemporaryBattleList.Blue3, VermilionCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Vermilion City'])],
+    [VermilionCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Vermilion City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
         npcs: [VermilionFanClubChairman, VermilionShardApprentice],
@@ -492,14 +492,13 @@ TownList['Pokémon Tower'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 7),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
-    ],
-    [TemporaryBattleList.Blue4]
+        new TemporaryBattleRequirement('Blue4'),
+    ]
 );
 TownList['Silph Co.'] = new DungeonTown(
     'Silph Co.',
     GameConstants.Region.kanto,
-    [new TemporaryBattleRequirement('Blue4')],
-    [TemporaryBattleList.Blue5]
+    [new TemporaryBattleRequirement('Blue5')]
 );
 TownList['Power Plant'] = new DungeonTown(
     'Power Plant',
