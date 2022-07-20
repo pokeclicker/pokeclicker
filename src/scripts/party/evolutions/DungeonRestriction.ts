@@ -7,6 +7,7 @@ function ByDungeon<EvoClass extends MinimalEvo>(Base: EvoClass) {
         constructor(...args: any[]) {
             const [dungeon, ...rest] = args;
             super(...rest);
+            this.type.push(EvolutionType.Dungeon);
             this.dungeon = dungeon;
         }
 
@@ -29,4 +30,4 @@ function DungeonRestricted<T extends Constructor<any>>(Base: T): DungeonRestrict
     return LocationRestricted(ByDungeon(Base));
 }
 
-const AnyDungeonRestricted = restrictEvoWith(() => App.game.gameState == GameConstants.GameState.dungeon, EvolutionType.Location);
+const AnyDungeonRestricted = restrictEvoWith(() => App.game.gameState == GameConstants.GameState.dungeon, EvolutionType.Dungeon);

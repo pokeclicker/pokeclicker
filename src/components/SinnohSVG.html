@@ -468,6 +468,16 @@
         })
     %>
 
+    <!--Team Galactic Eterna Building-->
+    <%- include('templates/mapDungeon',
+        { name: "Team Galactic Eterna Building"
+        , x: 31, y: 26
+        , height: 4, width: 4
+        , invisible: true
+        })
+    %>
+
+
     <!--Mt. Coronet-->
     <%- include('templates/mapDungeon',
         { name: "Mt. Coronet"
@@ -786,6 +796,15 @@
         })
     %>
 
+    <!--Team Galactic HQ-->
+    <%- include('templates/mapDungeon',
+        { name: "Team Galactic HQ"
+        , x: 64, y: 29
+        , height: 4, width: 9
+        ,invisible: true
+        })
+    %>
+
     <!--Fullmoon Island-->
     <%- include('templates/mapDungeon',
         { name: "Fullmoon Island"
@@ -926,6 +945,16 @@
          , databind: "click:function(){MapHelper.moveToTown('Twinleaf Town')}, attr:{ class: MapHelper.calculateTownCssClass('Twinleaf Town') }"
          , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
          , image: "assets/images/map/blimp_pikachu.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Ash Ketchum"
+         , x: 70, y: 3
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Ash Ketchum Sinnoh'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Ash Ketchum Sinnoh'] && TemporaryBattleList['Ash Ketchum Sinnoh'].isVisible()"
+         , image: "assets/images/map/ashketchumoverworld.png"
          })
      %>
 

@@ -123,7 +123,7 @@ class Party implements Feature {
 
     public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeFlute = true): number {
         let multiplier = 1, attack = 0;
-        const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : (pokemon.attack * (this.calculateEVAttackBonus(pokemon))));
+        const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : pokemon.attack);
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
 
         // Check if the pokemon is in their native region
@@ -178,17 +178,18 @@ class Party implements Feature {
         return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
     }
 
-    public getEffortValues(pokemon: PartyPokemon): KnockoutObservable<number> {
-        const power = App.game.challenges.list.slowEVs.active() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
-        return ko.observable(Math.floor(App.game.statistics.effortPoints[pokemon.id]() / GameConstants.EP_EV_RATIO / power));
-    }
+    public gainEffortPoints(pokemon: PartyPokemon, shiny: boolean, number = GameConstants.BASE_EP_YIELD): number {
+        let EPNum = number * App.game.multiplier.getBonus('ev');
 
-    public calculateEVAttackBonus(pokemon: PartyPokemon): number {
-        const EVs = this.getEffortValues(pokemon)();
         if (pokemon.pokerus < GameConstants.Pokerus.Contagious) {
-            return 1;
+            return 0;
         }
-        return (EVs < 50) ? (1 + 0.01 * EVs) : (1 + Math.min(1, Math.pow((EVs - 30),0.075) - 0.75));
+
+        if (shiny) {
+            EPNum *= GameConstants.SHINY_EP_MODIFIER;
+        }
+
+        return Math.floor(EPNum);
     }
 
     public pokemonAttackObservable: KnockoutComputed<number> = ko.pureComputed(() => {

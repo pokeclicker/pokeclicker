@@ -60,8 +60,8 @@ class MapHelper {
         return !!Routes.getRoute(region, route);
     }
 
-    public static normalizeRoute(route: number, region: GameConstants.Region): number {
-        return Routes.normalizedNumber(region, route);
+    public static normalizeRoute(route: number, region: GameConstants.Region, skipIgnoredRoutes = true): number {
+        return Routes.normalizedNumber(region, route, skipIgnoredRoutes);
     }
 
     public static accessToRoute = function (route: number, region: GameConstants.Region) {
@@ -69,7 +69,10 @@ class MapHelper {
     };
 
     public static getCurrentEnvironment(): GameConstants.Environment {
-        const area = player.route() || player.town()?.name || undefined;
+        const area = player.route() ||
+            (App.game.gameState == GameConstants.GameState.temporaryBattle ? TemporaryBattleRunner.battleObservable()?.parent?.name ?? TemporaryBattleRunner.battleObservable()?.optionalArgs.returnTown : undefined) ||
+            player.town()?.name ||
+            undefined;
 
         const [env] = Object.entries(GameConstants.Environments).find(
             ([, regions]) => regions[player.region]?.has(area)
@@ -116,6 +119,9 @@ class MapHelper {
     }
 
     public static isTownCurrentLocation(townName: string): boolean {
+        if (App.game.gameState == GameConstants.GameState.temporaryBattle) {
+            return TemporaryBattleRunner.battleObservable().getTown().name == townName;
+        }
         return !player.route() && player.town().name == townName;
     }
 
