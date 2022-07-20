@@ -818,10 +818,6 @@ class Update implements Saveable {
                 p[9] = saveData.statistics.effortPoints?.[p.id] * 100 || 0;
             });
 
-            // Give the players Linking Cords in place of Trade Stones
-            playerData._itemList.Linking_cord = playerData._itemList.Trade_stone || 0;
-            delete playerData._itemList.Trade_stone;
-
             // Start Sevii questline if player has Volcano Badge already
             if (saveData.badgeCase[7]) {
                 saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
@@ -886,6 +882,104 @@ class Update implements Saveable {
                 delete settingsData['notification.dungeon_item_found'];
                 delete settingsData['notification.dungeon_item_found.desktop'];
             }
+
+            // Give the players Linking Cords in place of Trade Stones
+            playerData._itemList.Linking_cord = playerData._itemList.Trade_stone || 0;
+            delete playerData._itemList.Trade_stone;
+
+            // Filter out BF Milestones already earned with item renames
+            const milestones = [
+                [5, '25 x Pokéball'],
+                [10, '100 x Pokéball'],
+                [20, '100 x Greatball'],
+                [30, '100 x Ultraball'],
+                [35, '100 x xClick'],
+                [40, '100 x xAttack'],
+                [50, '100 x Small Restore'],
+                [100, 'Deoxys'],
+                [110, '10 x Water Stone'],
+                [120, '10 x Leaf Stone'],
+                [130, '10 x Thunder Stone'],
+                [140, '10 x Fire Stone'],
+                [150, '200 x Medium Restore'],
+                [151, 'Deoxys (Attack)'],
+                [160, '100 x Lucky Egg'],
+                [170, '100 x Lucky Incense'],
+                [180, '100 x Dowsing Machine'],
+                [190, '10 x Mystery Egg'],
+                [200, '100 x Large Restore'],
+                [210, '40 x Water Stone'],
+                [220, '40 x Leaf Stone'],
+                [230, '40 x Thunder Stone'],
+                [240, '40 x Moon Stone'],
+                [250, '6400 x Ultraball'],
+                [251, 'Deoxys (Defense)'],
+                [300, '100 x Linking Cord'],
+                [386, 'Deoxys (Speed)'],
+            ];
+            const highestStageCompleted = saveData.statistics?.battleFrontierHighestStageCompleted || 0;
+            saveData.battleFrontier = {
+                milestones: milestones.filter(([stage]) => stage <= highestStageCompleted),
+                checkpoint: saveData.battleFrontier.checkpoint,
+            };
+
+            // Update Pokemon name changes
+            const renamePokemon = Update.renamePokemonInSaveData;
+            renamePokemon(saveData, 'Bulbasaur (clone)', 'Bulbasaur (Clone)');
+            renamePokemon(saveData, 'Ivysaur (clone)', 'Ivysaur (Clone)');
+            renamePokemon(saveData, 'Venusaur (clone)', 'Venusaur (Clone)');
+            renamePokemon(saveData, 'Charmander (clone)', 'Charmander (Clone)');
+            renamePokemon(saveData, 'Charmeleon (clone)', 'Charmeleon (Clone)');
+            renamePokemon(saveData, 'Charizard (clone)', 'Charizard (Clone)');
+            renamePokemon(saveData, 'Pikachu (Original cap)', 'Pikachu (Original Cap)');
+            renamePokemon(saveData, 'Pikachu (Hoenn cap)', 'Pikachu (Hoenn Cap)');
+            renamePokemon(saveData, 'Pikachu (Sinnoh cap)', 'Pikachu (Sinnoh Cap)');
+            renamePokemon(saveData, 'Pikachu (Unova cap)', 'Pikachu (Unova Cap)');
+            renamePokemon(saveData, 'Pikachu (Kalos cap)', 'Pikachu (Kalos Cap)');
+            renamePokemon(saveData, 'Pikachu (Alola cap)', 'Pikachu (Alola Cap)');
+            renamePokemon(saveData, 'Pikachu (Partner cap)', 'Pikachu (Partner Cap)');
+            renamePokemon(saveData, 'Castform (sunny)', 'Castform (Sunny)');
+            renamePokemon(saveData, 'Castform (rainy)', 'Castform (Rainy)');
+            renamePokemon(saveData, 'Castform (snowy)', 'Castform (Snowy)');
+            renamePokemon(saveData, 'Deoxys (attack)', 'Deoxys (Attack)');
+            renamePokemon(saveData, 'Deoxys (defense)', 'Deoxys (Defense)');
+            renamePokemon(saveData, 'Deoxys (speed)', 'Deoxys (Speed)');
+            renamePokemon(saveData, 'Burmy (plant)', 'Burmy (Plant)');
+            renamePokemon(saveData, 'Burmy (sand)', 'Burmy (Sand)');
+            renamePokemon(saveData, 'Burmy (trash)', 'Burmy (Trash)');
+            renamePokemon(saveData, 'Wormadam (plant)', 'Wormadam (Plant)');
+            renamePokemon(saveData, 'Wormadam (sand)', 'Wormadam (Sand)');
+            renamePokemon(saveData, 'Wormadam (trash)', 'Wormadam (Trash)');
+            renamePokemon(saveData, 'Cherrim (overcast)', 'Cherrim (Overcast)');
+            renamePokemon(saveData, 'Cherrim (sunshine)', 'Cherrim (Sunshine)');
+            renamePokemon(saveData, 'Shellos (west)', 'Shellos (West)');
+            renamePokemon(saveData, 'Shellos (east)', 'Shellos (East)');
+            renamePokemon(saveData, 'Gastrodon (west)', 'Gastrodon (West)');
+            renamePokemon(saveData, 'Gastrodon (east)', 'Gastrodon (East)');
+            renamePokemon(saveData, 'Rotom (heat)', 'Rotom (Heat)');
+            renamePokemon(saveData, 'Rotom (wash)', 'Rotom (Wash)');
+            renamePokemon(saveData, 'Rotom (frost)', 'Rotom (Frost)');
+            renamePokemon(saveData, 'Rotom (fan)', 'Rotom (Fan)');
+            renamePokemon(saveData, 'Rotom (mow)', 'Rotom (Mow)');
+            renamePokemon(saveData, 'Rotom (discord)', 'Rotom (Discord)');
+            renamePokemon(saveData, 'Giratina (altered)', 'Giratina (Altered)');
+            renamePokemon(saveData, 'Shaymin (land)', 'Shaymin (Land)');
+            renamePokemon(saveData, 'Shaymin (sky)', 'Shaymin (Sky)');
+            renamePokemon(saveData, 'Arceus (normal)', 'Arceus (Normal)');
+            renamePokemon(saveData, 'Meloetta (aria)', 'Meloetta (Aria)');
+            renamePokemon(saveData, 'Meloetta (pirouette)', 'Meloetta (Pirouette)');
+            renamePokemon(saveData, 'Ash Greninja', 'Ash-Greninja');
+            renamePokemon(saveData, 'Vivillon (Pokéball)', 'Vivillon (Poké Ball)');
+            renamePokemon(saveData, 'Oricorio (Pom-pom)', 'Oricorio (Pom-Pom)');
+            renamePokemon(saveData, 'Minior (Blue-core)', 'Minior (Blue Core)');
+            renamePokemon(saveData, 'Minior (Green-core)', 'Minior (Green Core)');
+            renamePokemon(saveData, 'Minior (Indigo-core)', 'Minior (Indigo Core)');
+            renamePokemon(saveData, 'Minior (Orange-core)', 'Minior (Orange Core)');
+            renamePokemon(saveData, 'Minior (Red-core)', 'Minior (Red Core)');
+            renamePokemon(saveData, 'Minior (Violet-core)', 'Minior (Violet Core)');
+            renamePokemon(saveData, 'Minior (Yellow-core)', 'Minior (Yellow Core)');
+
+            console.log(saveData);
         },
     };
 
