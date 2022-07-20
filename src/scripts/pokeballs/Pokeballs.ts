@@ -23,7 +23,7 @@ class Pokeballs implements Feature {
 
     constructor() {
         this.pokeballs = [
-            new Pokeball(GameConstants.Pokeball.Pokeball, () => 0, 1250, 'A standard Pokéball', undefined, 25),
+            new Pokeball(GameConstants.Pokeball.Pokeball, () => 0, 1250, 'A standard Poké Ball', undefined, 25),
             new Pokeball(GameConstants.Pokeball.Greatball, () => 5, 1000, '+5% chance to catch'),
             new Pokeball(GameConstants.Pokeball.Ultraball, () => 10, 750, '+10% chance to catch'),
             new Pokeball(GameConstants.Pokeball.Masterball, () => 100, 500, '100% chance to catch'),
@@ -62,7 +62,7 @@ class Pokeballs implements Feature {
                 return 0;
             }, 1000, 'Increased catch rate at night time or in dungeons', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
             // TODO: this needs some sort of bonus, possibly extra dungeon tokens
-            new Pokeball(GameConstants.Pokeball.Luxuryball, () => 0, 1250, 'A Luxury Pokéball', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+            new Pokeball(GameConstants.Pokeball.Luxuryball, () => 0, 1250, 'A Luxury Poké Ball', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Diveball, () => {
 
@@ -123,7 +123,7 @@ class Pokeballs implements Feature {
                     selection(GameConstants.Pokeball.Ultraball);
                     Notifier.notify({
                         title: 'Challenge Mode',
-                        message: 'Masterballs are disabled!',
+                        message: 'Master Balls are disabled!',
                         type: NotificationConstants.NotificationOption.danger,
                     });
                 } else if (!this.pokeballs[value]?.unlocked()) {
