@@ -1457,7 +1457,7 @@ const PalParkShop = new Shop([
     ItemList.Razor_claw,
     ItemList.Razor_fang,
     ItemList.Combee,
-    ItemList['Burmy (plant)'],
+    ItemList['Burmy (Plant)'],
     ItemList.Cherubi,
 ]);
 const SnowpointCityShop = new Shop([
@@ -2055,7 +2055,7 @@ const NuvemaTownShop = new Shop([
     ItemList.Magmarizer,
 ]);
 const AnvilleTownShop = new Shop([
-    ItemList['Meloetta (pirouette)'],
+    ItemList['Meloetta (Pirouette)'],
 ]);
 
 //Unova Gem Master
@@ -2287,7 +2287,7 @@ TownList['Anville Town'] = new Town(
     [AnvilleTownShop],
     {
         requirements: [
-            new ObtainedPokemonRequirement(pokemonMap['Meloetta (aria)']),
+            new ObtainedPokemonRequirement(pokemonMap['Meloetta (Aria)']),
             new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
         ],
     }
