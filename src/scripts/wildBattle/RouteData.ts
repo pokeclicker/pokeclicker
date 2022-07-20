@@ -1150,7 +1150,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-        new GymBadgeRequirement(BadgeEnums.Insect),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1161,7 +1161,7 @@ Routes.add(new RegionRoute(
     [
 
         new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-        new GymBadgeRequirement(BadgeEnums.Insect),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ],
     5
 ));
