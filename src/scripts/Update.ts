@@ -889,10 +889,10 @@ class Update implements Saveable {
 
             // Filter already earned milestones due to item name updates
             const milestones = [
-                [5, '25 x Pokéball'],
-                [10, '100 x Pokéball'],
-                [20, '100 x Greatball'],
-                [30, '100 x Ultraball'],
+                [5, '25 x Poké Ball'],
+                [10, '100 x Poké Ball'],
+                [20, '100 x Great Ball'],
+                [30, '100 x Ultra Ball'],
                 [35, '100 x X Click'],
                 [40, '100 x X Attack'],
                 [50, '100 x Small Restore'],
@@ -912,7 +912,7 @@ class Update implements Saveable {
                 [220, '40 x Leaf Stone'],
                 [230, '40 x Thunder Stone'],
                 [240, '40 x Moon Stone'],
-                [250, '6400 x Ultraball'],
+                [250, '6,400 x Ultra Ball'],
                 [251, 'Deoxys (Defense)'],
                 [300, '100 x Linking Cord'],
                 [386, 'Deoxys (Speed)'],
