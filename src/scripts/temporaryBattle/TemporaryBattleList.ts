@@ -874,7 +874,7 @@ TemporaryBattleList.Shauna1 = new TemporaryBattle(
         imageName: 'Shauna',
     }
 );
-TemporaryBattleList['Sycamore1'] = new TemporaryBattle(
+TemporaryBattleList.Sycamore1 = new TemporaryBattle(
     'Sycamore1',
     [
         new GymPokemon('Bulbasaur', 17568392, 10),
@@ -991,7 +991,7 @@ TemporaryBattleList.Calem4 = new TemporaryBattle(
         imageName: 'Calem',
     }
 );
-TemporaryBattleList['Sycamore2'] = new TemporaryBattle(
+TemporaryBattleList.Sycamore2 = new TemporaryBattle(
     'Sycamore2',
     [
         new GymPokemon('Venusaur', 88799088, 50),

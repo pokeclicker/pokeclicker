@@ -2653,7 +2653,7 @@ TownList['Santalune City'] = new Town(
 TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
-    [TemporaryBattleList['Sycamore1'], TemporaryBattleList.Tierno1, TemporaryBattleList.Calem3, DepartmentStoreShop,FriseurFurfrouShop, TemporaryBattleList.AZ],
+    [TemporaryBattleList.Sycamore1, TemporaryBattleList.Tierno1, TemporaryBattleList.Calem3, DepartmentStoreShop,FriseurFurfrouShop, TemporaryBattleList.AZ],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
         npcs: [ProfSycamore, LumioseEngineer],
@@ -2738,7 +2738,7 @@ TownList['Anistar City'] = new Town(
 TownList['Couriway Town'] = new Town(
     'Couriway Town',
     GameConstants.Region.kalos,
-    [TemporaryBattleList['Sycamore2'], TemporaryBattleList.Shauna2, TemporaryBattleList.Tierno2, TemporaryBattleList.Trevor, CouriwayTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Couriway Town'])],
+    [TemporaryBattleList.Sycamore2, TemporaryBattleList.Shauna2, TemporaryBattleList.Tierno2, TemporaryBattleList.Trevor, CouriwayTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Couriway Town'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 18)],
     }
