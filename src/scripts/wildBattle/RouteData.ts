@@ -212,7 +212,15 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Rattata', 'Raticate', 'Spearow', 'Doduo'],
     }),
-    [new TemporaryBattleRequirement('Snorlax route 16'), new SpecificPokemonCaughtRequirement('Snorlax')],
+    [
+        new OneFromManyRequirement([
+            new MultiRequirement([
+                new TemporaryBattleRequirement('Snorlax route 16'),
+                new SpecificPokemonCaughtRequirement('Snorlax'),
+            ]),
+            new RouteKillRequirement(10, GameConstants.Region.kanto, 17),
+        ]),
+    ],
     undefined,
     GameConstants.KantoSubRegions.Kanto
 ));
