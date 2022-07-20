@@ -75,9 +75,9 @@ class RoamingPokemonList {
 RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Mew'));
 
 // Johto
-RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Raikou', new TemporaryBattleRequirement('Silver3')));
-RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Entei', new TemporaryBattleRequirement('Silver3')));
-RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon('Suicune', new TemporaryBattleRequirement('Silver3')));
+RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Raikou', new TemporaryBattleRequirement('Silver3')));
+RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Entei', new TemporaryBattleRequirement('Silver3')));
+RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Suicune', new TemporaryBattleRequirement('Silver3')));
 
 // Hoenn
 RoamingPokemonList.add(GameConstants.Region.hoenn, 0, new RoamingPokemon('Latios', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));

@@ -11,7 +11,13 @@ TemporaryBattleList.Blue1 = new TemporaryBattle(
         new GymPokemon('Bulbasaur', 1678, 9/*, new StarterRequirement(GameConstants.Region.kanto, 3)*/),
     ],
     'I heard the Pokémon League is crawling with tough Trainers. I have to figure out how to get past them. You should quit dawdling and get a move on!',
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 22)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 22)],
+    undefined,
+    {
+        displayName: 'Rival Blue',
+        returnTown: 'Viridian City',
+        imageName: 'Blue1',
+    }
 );
 TemporaryBattleList.Blue2 = new TemporaryBattle(
     'Blue2',
@@ -25,7 +31,13 @@ TemporaryBattleList.Blue2 = new TemporaryBattle(
         new GymPokemon('Bulbasaur', 3791, 18/*, new StarterRequirement(GameConstants.Region.kanto, 3)*/),
     ],
     'Hey! Take it easy! You won already!',
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
+    undefined,
+    {
+        displayName: 'Rival Blue',
+        returnTown: 'Cerulean City',
+        imageName: 'Blue1',
+    }
 );
 TemporaryBattleList.Blue3 = new TemporaryBattle(
     'Blue3',
@@ -39,7 +51,12 @@ TemporaryBattleList.Blue3 = new TemporaryBattle(
         new GymPokemon('Ivysaur', 20797, 20/*, new StarterRequirement(GameConstants.Region.kanto, 3)*/),
     ],
     'Humph! At least you\'re raising your Pokémon!',
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
+    undefined,
+    {
+        displayName: 'Rival Blue',
+        imageName: 'Blue2',
+    }
 );
 TemporaryBattleList.Blue4 = new TemporaryBattle(
     'Blue4',
@@ -60,7 +77,12 @@ TemporaryBattleList.Blue4 = new TemporaryBattle(
         new GymPokemon('Ivysaur', 33438, 25/*, new StarterRequirement(GameConstants.Region.kanto, 3)*/),
     ],
     'What? You stinker! I took it easy on you, too!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    undefined,
+    {
+        displayName: 'Rival Blue',
+        imageName: 'Blue2',
+    }
 );
 TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
     'Fighting Dojo',
@@ -107,9 +129,13 @@ TemporaryBattleList.Blue5 = new TemporaryBattle(
     ],
     'I\'m moving on up and ahead! I\'m going to the Pokémon League to boot out the Elite Four! I\'ll become the world\'s most powerful Trainer! Well, good luck to you! Don\'t sweat it! Smell ya!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Silph Co.'))],
-    [],
-    () => {
-        App.game.party.gainPokemonById(131);
+    undefined,
+    {
+        displayName: 'Rival Blue',
+        imageName: 'Blue2',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonById(131);
+        },
     }
 );
 TemporaryBattleList['Biker Goon 1'] = new TemporaryBattle(
@@ -185,7 +211,13 @@ TemporaryBattleList.Blue6 = new TemporaryBattle(
         new RouteKillRequirement(10, GameConstants.Region.kanto, 22),
         new GymBadgeRequirement(BadgeEnums.Earth),
         new TemporaryBattleRequirement('Blue1'),
-    ]
+    ],
+    undefined,
+    {
+        displayName: 'Rival Blue',
+        returnTown: 'Viridian City',
+        imageName: 'Blue2',
+    }
 );
 
 //Johto Temporary Battles
@@ -197,7 +229,13 @@ TemporaryBattleList.Silver1 = new TemporaryBattle(
         new GymPokemon('Chikorita', 176000, 5/*, new StarterRequirement(GameConstants.Region.johto, 2)*/),
     ],
     '...Humph! Are you happy you won?',
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 30)]
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 30)],
+    undefined,
+    {
+        displayName: 'Rival Silver',
+        returnTown: 'Cherrygrove City',
+        imageName: 'Silver',
+    }
 );
 TemporaryBattleList.Silver2 = new TemporaryBattle(
     'Silver2',
@@ -209,7 +247,13 @@ TemporaryBattleList.Silver2 = new TemporaryBattle(
         new GymPokemon('Bayleef', 237772, 18/*, new StarterRequirement(GameConstants.Region.johto, 2)*/),
     ],
     '...Humph! Useless Pokémon! Listen, you. You only won because my Pokémon were weak.',
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 33)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 33)],
+    undefined,
+    {
+        displayName: 'Rival Silver',
+        returnTown: 'Azalea Town',
+        imageName: 'Silver',
+    }
 );
 TemporaryBattleList.Silver3 = new TemporaryBattle(
     'Silver3',
@@ -222,7 +266,12 @@ TemporaryBattleList.Silver3 = new TemporaryBattle(
         new GymPokemon('Bayleef', 251262, 22/*, new StarterRequirement(GameConstants.Region.johto, 2)*/),
     ],
     '...Humph! I\'m not fighting with another weakling ever again. It\'s just too much playing around.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))],
+    undefined,
+    {
+        displayName: 'Rival Silver',
+        imageName: 'Silver',
+    }
 );
 TemporaryBattleList.Silver4 = new TemporaryBattle(
     'Silver4',
@@ -239,7 +288,12 @@ TemporaryBattleList.Silver4 = new TemporaryBattle(
     [
         new GymBadgeRequirement(BadgeEnums.Mineral),
         new GymBadgeRequirement(BadgeEnums.Glacier),
-    ]
+    ],
+    undefined,
+    {
+        displayName: 'Rival Silver',
+        imageName: 'Silver',
+    }
 );
 TemporaryBattleList.Silver5 = new TemporaryBattle(
     'Silver5',
@@ -254,7 +308,13 @@ TemporaryBattleList.Silver5 = new TemporaryBattle(
         new GymPokemon('Meganium', 397807, 40/*, new StarterRequirement(GameConstants.Region.johto, 2)*/),
     ],
     '.................. I haven\'t given up on becoming the greatest Trainer... I\'m going to find out why I can\'t win and become stronger... When I do, I will challenge you. I\'ll beat you down with all my power. ...Humph! You keep at it until then.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Johto'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Johto'))],
+    undefined,
+    {
+        displayName: 'Rival Silver',
+        returnTown: 'Indigo Plateau Johto',
+        imageName: 'Silver',
+    }
 );
 TemporaryBattleList.Silver6 = new TemporaryBattle(
     'Silver6',
@@ -269,7 +329,12 @@ TemporaryBattleList.Silver6 = new TemporaryBattle(
         new GymPokemon('Meganium', 581846, 50/*, new StarterRequirement(GameConstants.Region.johto, 2)*/),
     ],
     'My training\'s still not good enough...? My Pokémon are so weak, it makes me frustrated... But I can feel that they are getting better after each battle... .................. Tch! They\'re still too weak! I need to give them more training...',
-    [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
+    undefined,
+    {
+        displayName: 'Rival Silver',
+        imageName: 'Silver',
+    }
 );
 TemporaryBattleList.Silver7 = new TemporaryBattle(
     'Silver7',
@@ -284,7 +349,13 @@ TemporaryBattleList.Silver7 = new TemporaryBattle(
         new GymPokemon('Meganium', 705124, 60/*, new StarterRequirement(GameConstants.Region.johto, 2)*/),
     ],
     '...Oh, no... I still can\'t win after all that training... I...I have to believe more in my Pokémon... ...No big deal. Sorry to have got in the way. Don\'t forget to rest your Pokémon before you challenge the Champion again!',
-    [new TemporaryBattleRequirement('Silver6')]
+    [new TemporaryBattleRequirement('Silver6')],
+    undefined,
+    {
+        displayName: 'Rival Silver',
+        returnTown: 'Indigo Plateau Johto',
+        imageName: 'Silver',
+    }
 );
 
 //Hoenn Temporary Battles
@@ -296,7 +367,13 @@ TemporaryBattleList.May1 = new TemporaryBattle(
         new GymPokemon('Treecko', 823400, 5/*, new StarterRequirement(GameConstants.Region.hoenn, 2)*/),
     ],
     'Wow! That\'s great! You\'re pretty good!',
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 103)]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 103)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer May',
+        returnTown: 'Oldale Town',
+        imageName: 'May',
+    }
 );
 TemporaryBattleList.May2 = new TemporaryBattle(
     'May2',
@@ -309,7 +386,13 @@ TemporaryBattleList.May2 = new TemporaryBattle(
         new GymPokemon('Treecko', 1197952, 15/*, new StarterRequirement(GameConstants.Region.hoenn, 2)*/),
     ],
     'Yikes! You\'re better than I expected!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rusturf Tunnel'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rusturf Tunnel'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer May',
+        returnTown: 'Rustboro City',
+        imageName: 'May',
+    }
 );
 TemporaryBattleList.May3 = new TemporaryBattle(
     'May3',
@@ -325,13 +408,24 @@ TemporaryBattleList.May3 = new TemporaryBattle(
         new GymPokemon('Grovyle', 1153450, 20/*, new StarterRequirement(GameConstants.Region.hoenn, 2)*/),
     ],
     'Yikes! You\'re better than I expected!',
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 110)]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 110)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer May',
+        returnTown: 'Mauville City',
+        imageName: 'May',
+    }
 );
 TemporaryBattleList.Wally1 = new TemporaryBattle(
     'Wally1',
     [new GymPokemon('Ralts', 1234567, 16)],
     '... ... ... ... ... ... ... ... ... ... ... ... ... ... ... I lost...',
-    [new TemporaryBattleRequirement('May3')]
+    [new TemporaryBattleRequirement('May3')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Wally',
+        imageName: 'Wally',
+    }
 );
 TemporaryBattleList.May4 = new TemporaryBattle(
     'May4',
@@ -347,7 +441,13 @@ TemporaryBattleList.May4 = new TemporaryBattle(
         new GymPokemon('Grovyle', 1887680, 31/*, new StarterRequirement(GameConstants.Region.hoenn, 2)*/),
     ],
     'Achah! You\'re strong! I was worried that you might be struggling with your training.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer May',
+        returnTown: 'Fortree City',
+        imageName: 'May',
+    }
 );
 TemporaryBattleList.May5 = new TemporaryBattle(
     'May5',
@@ -364,7 +464,12 @@ TemporaryBattleList.May5 = new TemporaryBattle(
         new GymPokemon('Grovyle', 2133912, 34/*, new StarterRequirement(GameConstants.Region.hoenn, 2)*/),
     ],
     'I remember the battle I had with you on Route 103. That battle helped you become this strong, didn\'t it?',
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer May',
+        imageName: 'May',
+    }
 );
 TemporaryBattleList.Wally2 = new TemporaryBattle(
     'Wally2',
@@ -376,7 +481,13 @@ TemporaryBattleList.Wally2 = new TemporaryBattle(
         new GymPokemon('Gardevoir', 2206313, 45),
     ],
     'Wow! You are strong, after all! I couldn\'t beat you today, but one of these days, I\'ll catch up to you!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Hoenn'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Hoenn'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Wally',
+        returnTown: 'Pokémon League Hoenn',
+        imageName: 'Wally',
+    }
 );
 
 //Sinnoh Temporary Battles
@@ -388,7 +499,13 @@ TemporaryBattleList.Barry1 = new TemporaryBattle(
         new GymPokemon('Turtwig', 1689240, 5/*, new StarterRequirement(GameConstants.Region.sinnoh, 2)*/),
     ],
     'What are you saying?! We ended up losing?!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Barry',
+        returnTown: 'Twinleaf Town',
+        imageName: 'Barry',
+    }
 );
 TemporaryBattleList.Barry2 = new TemporaryBattle(
     'Barry2',
@@ -399,7 +516,13 @@ TemporaryBattleList.Barry2 = new TemporaryBattle(
         new GymPokemon('Turtwig', 3074416, 9/*, new StarterRequirement(GameConstants.Region.sinnoh, 2)*/),
     ],
     'What just happened? I lost?!',
-    [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 202)]
+    [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 202)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Barry',
+        returnTown: 'Jubilife City',
+        imageName: 'Barry',
+    }
 );
 TemporaryBattleList.Barry3 = new TemporaryBattle(
     'Barry3',
@@ -416,7 +539,13 @@ TemporaryBattleList.Barry3 = new TemporaryBattle(
         new GymPokemon('Grotle', 2329444, 27/*, new StarterRequirement(GameConstants.Region.sinnoh, 2)*/),
     ],
     'Waaah! It goes to show my surefire winning strategy doesn\'t work',
-    [new GymBadgeRequirement(BadgeEnums.Relic)]
+    [new GymBadgeRequirement(BadgeEnums.Relic)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Barry',
+        returnTown: 'Hearthome City',
+        imageName: 'Barry',
+    }
 );
 TemporaryBattleList.Barry4 = new TemporaryBattle(
     'Barry4',
@@ -436,7 +565,13 @@ TemporaryBattleList.Barry4 = new TemporaryBattle(
     [
         new GymBadgeRequirement(BadgeEnums.Cobble),
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 213),
-    ]
+    ],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Barry',
+        returnTown: 'Pastoria City',
+        imageName: 'Barry',
+    }
 );
 TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
     'Galactic Boss Cyrus',
@@ -464,7 +599,13 @@ TemporaryBattleList.Barry5 = new TemporaryBattle(
         new GymPokemon('Torterra', 2209284, 38/*, new StarterRequirement(GameConstants.Region.sinnoh, 2)*/),
     ],
     'Yeah, yeah, you\'re just a bit better than me, as usual.',
-    [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)]
+    [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Barry',
+        returnTown: 'Canalave City',
+        imageName: 'Barry',
+    }
 );
 TemporaryBattleList.Barry6 = new TemporaryBattle(
     'Barry6',
@@ -485,7 +626,12 @@ TemporaryBattleList.Barry6 = new TemporaryBattle(
         new GymPokemon('Torterra', 4161784, 51/*, new StarterRequirement(GameConstants.Region.sinnoh, 2)*/),
     ],
     'I guess I\'m not ready for the Pokémon League if I\'m losing to you! Darn it! You watch, though! I\'ll get tougher and win my way through the Pokémon League! Because I\'m going to become the Champion, the toughest Trainer! You\'d better not lose to anyone before me!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Sinnoh'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Sinnoh'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Barry',
+        imageName: 'Barry',
+    }
 );
 TemporaryBattleList.Barry7 = new TemporaryBattle(
     'Barry7',
@@ -507,7 +653,13 @@ TemporaryBattleList.Barry7 = new TemporaryBattle(
     [
         new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion),
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 225),
-    ]
+    ],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Barry',
+        returnTown: 'Survival Area',
+        imageName: 'Barry',
+    }
 );
 
 //Unova Temporary Battles
@@ -519,7 +671,13 @@ TemporaryBattleList.Hugh1 = new TemporaryBattle(
         new GymPokemon('Snivy', 7269010, 5/*, new StarterRequirement(GameConstants.Region.unova, 2)*/),
     ],
     'I couldn\'t achieve victory for my partner... I won\'t let myself forget this frustration!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hugh',
+        returnTown: 'Aspertia City',
+        imageName: 'Hugh',
+    }
 );
 TemporaryBattleList.Hugh2 = new TemporaryBattle(
     'Hugh2',
@@ -529,7 +687,12 @@ TemporaryBattleList.Hugh2 = new TemporaryBattle(
         new GymPokemon('Snivy', 11630416, 8/*, new StarterRequirement(GameConstants.Region.unova, 2)*/),
     ],
     'It can\'t be! How could I have lost? I need to apologize to my partner...',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Floccesy Ranch'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Floccesy Ranch'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hugh',
+        imageName: 'Hugh',
+    }
 );
 TemporaryBattleList.Colress1 = new TemporaryBattle(
     'Colress1',
@@ -541,7 +704,13 @@ TemporaryBattleList.Colress1 = new TemporaryBattle(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 4),
         new GymBadgeRequirement(BadgeEnums.Insect),
-    ]
+    ],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Colress',
+        returnTown: 'Nimbasa City',
+        imageName: 'Colress',
+    }
 );
 TemporaryBattleList.Hugh3 = new TemporaryBattle(
     'Hugh3',
@@ -555,7 +724,13 @@ TemporaryBattleList.Hugh3 = new TemporaryBattle(
         new GymPokemon('Simisear', 13456278, 25/*, new StarterRequirement(GameConstants.Region.unova, 2)*/),
     ],
     'Man! I lost... You\'ve become way too tough! But, I\'m gonna get stronger, too!',
-    [new GymBadgeRequirement(BadgeEnums.Quake)]
+    [new GymBadgeRequirement(BadgeEnums.Quake)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hugh',
+        returnTown: 'Driftveil City',
+        imageName: 'Hugh',
+    }
 );
 TemporaryBattleList.Cheren = new TemporaryBattle(
     'Cheren',
@@ -565,7 +740,13 @@ TemporaryBattleList.Cheren = new TemporaryBattle(
         new GymPokemon('Watchog', 13832478, 25),
     ],
     'Fantastic! You and your Pokémon have grown much stronger!',
-    [new TemporaryBattleRequirement('Hugh3')]
+    [new TemporaryBattleRequirement('Hugh3')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Cheren',
+        returnTown: 'Driftveil City',
+        imageName: 'Hugh',
+    }
 );
 TemporaryBattleList.Colress2 = new TemporaryBattle(
     'Colress2',
@@ -575,7 +756,13 @@ TemporaryBattleList.Colress2 = new TemporaryBattle(
         new GymPokemon('Klink', 14334078, 25),
     ],
     'Well done! I learned much from this battle!',
-    [new TemporaryBattleRequirement('Cheren')]
+    [new TemporaryBattleRequirement('Cheren')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Colress',
+        returnTown: 'Driftveil',
+        imageName: 'Colress',
+    }
 );
 TemporaryBattleList.Hugh4 = new TemporaryBattle(
     'Hugh4',
@@ -589,7 +776,13 @@ TemporaryBattleList.Hugh4 = new TemporaryBattle(
         new GymPokemon('Serperior', 17264044, 41/*, new StarterRequirement(GameConstants.Region.unova, 2)*/),
     ],
     'I couldn\'t even draw out my team\'s real strength... How pathetic!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hugh',
+        returnTown: 'Undella Town',
+        imageName: 'Hugh',
+    }
 );
 TemporaryBattleList.Hugh5 = new TemporaryBattle(
     'Hugh5',
@@ -604,7 +797,13 @@ TemporaryBattleList.Hugh5 = new TemporaryBattle(
         new GymPokemon('Serperior', 24217071, 57/*, new StarterRequirement(GameConstants.Region.unova, 2)*/),
     ],
     '...Phew! You\'re really something! Thanks to you, I accomplished what I set out to do during my journey! I think you\'re really amazing! So become the Champion! Get the proof that you\'re a Trainer your Pokémon can be proud of! See you!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Unova'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Unova'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hugh',
+        returnTown: 'Pokémon League Unova',
+        imageName: 'Hugh',
+    }
 );
 TemporaryBattleList.Hugh6 = new TemporaryBattle(
     'Hugh6',
@@ -621,7 +820,13 @@ TemporaryBattleList.Hugh6 = new TemporaryBattle(
         new GymPokemon('Serperior', 32605200, 64/*, new StarterRequirement(GameConstants.Region.unova, 2)*/),
     ],
     'This bitter...yet refreshing feeling.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hugh',
+        returnTown: 'Undella Town',
+        imageName: 'Hugh',
+    }
 );
 TemporaryBattleList.Hugh7 = new TemporaryBattle(
     'Hugh7',
@@ -638,7 +843,13 @@ TemporaryBattleList.Hugh7 = new TemporaryBattle(
         new GymPokemon('Serperior', 37338212, 67/*, new StarterRequirement(GameConstants.Region.unova, 2)*/),
     ],
     'Just as I\'d expected! You are really drawing forth your Pokémon\'s power!... I suppose that\'s it. If winning in battles is strength, then believing that your Pokémon will come back and waiting for its return is also strength. Doing what you think is right no matter what anyone else says, like these guys do, is strength, too.',
-    [new TemporaryBattleRequirement('Hugh6')]
+    [new TemporaryBattleRequirement('Hugh6')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hugh',
+        returnTown: 'Driftveil City',
+        imageName: 'Hugh',
+    }
 );
 
 //Kalos Temporary Battles
@@ -650,7 +861,13 @@ TemporaryBattleList.Shauna1 = new TemporaryBattle(
         new GymPokemon('Fennekin', 24906504, 5/*, new StarterRequirement(GameConstants.Region.kalos, 2)*/),
     ],
     'Hey! I wasn\'t done watching my cute Li\'l Pokémon yet!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Shauna',
+        returnTown: 'Aquacorde Town',
+        imageName: 'Shauna',
+    }
 );
 TemporaryBattleList.Sycamore1 = new TemporaryBattle(
     'Sycamore1',
@@ -660,13 +877,24 @@ TemporaryBattleList.Sycamore1 = new TemporaryBattle(
         new GymPokemon('Squirtle', 17568392, 10),
     ],
     'Ha ha! You\'re too much for me! You\'re really something, aren\'t you?',
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
+    undefined,
+    {
+        displayName: 'Pokémon Professor Sycamore',
+        imageName: 'Sycamore',
+    }
 );
 TemporaryBattleList.Tierno1 = new TemporaryBattle(
     'Tierno1',
     [new GymPokemon('Corphish', 40132328, 12)],
     'That was some nice footwork!',
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 5)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 5)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Tierno',
+        returnTown: 'Camphrier Town',
+        imageName: 'Tierno',
+    }
 );
 TemporaryBattleList['Trevor & Tierno'] = new TemporaryBattle(
     'Trevor & Tierno',
@@ -676,7 +904,12 @@ TemporaryBattleList['Trevor & Tierno'] = new TemporaryBattle(
         new GymPokemon('Flabébé (Orange)', 23154377, 14),
     ],
     'So you can\'t learn everything just from the Pokédex... I see!',
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 7)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 7)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Trevor & Pokémon Trainer Tierno',
+        returnTown: 'Camphrier Town',
+    }
 );
 TemporaryBattleList.Calem1 = new TemporaryBattle(
     'Calem1',
@@ -688,7 +921,13 @@ TemporaryBattleList.Calem1 = new TemporaryBattle(
         new GymPokemon('Quilladin', 41888812, 30/*, new StarterRequirement(GameConstants.Region.kalos, 2)*/),
     ],
     'Your bonds with your Pokémon are really strong. Although, I don\'t like losing much...',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reflection Cave'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reflection Cave'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Calem',
+        returnTown: 'Shalour City',
+        imageName: 'Calem',
+    }
 );
 TemporaryBattleList.Calem2 = new TemporaryBattle(
     'Calem2',
@@ -700,7 +939,13 @@ TemporaryBattleList.Calem2 = new TemporaryBattle(
         new GymPokemon('Quilladin', 54231360, 33/*, new StarterRequirement(GameConstants.Region.kalos, 2)*/),
     ],
     'Oof. I\'d kind of forgotten how strong you are.',
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Calem',
+        returnTown: 'Coumarine City',
+        imageName: 'Calem',
+    }
 );
 TemporaryBattleList.Calem3 = new TemporaryBattle(
     'Calem3',
@@ -712,7 +957,13 @@ TemporaryBattleList.Calem3 = new TemporaryBattle(
         new GymPokemon('Chesnaught', 67476604, 37/*, new StarterRequirement(GameConstants.Region.kalos, 2)*/),
     ],
     'Battling with you is fun, but losing all the time doesn\'t really make me look all that good.',
-    [new GymBadgeRequirement(BadgeEnums.Voltage)]
+    [new GymBadgeRequirement(BadgeEnums.Voltage)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Calem',
+        returnTown: 'Lumiose City',
+        imageName: 'Calem',
+    }
 );
 TemporaryBattleList.Calem4 = new TemporaryBattle(
     'Calem4',
@@ -727,7 +978,13 @@ TemporaryBattleList.Calem4 = new TemporaryBattle(
         new GymPokemon('Chesnaught', 63846796, 46/*, new StarterRequirement(GameConstants.Region.kalos, 2)*/),
     ],
     'Why am I still playing catch-up to you?!',
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 17)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 17)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Calem',
+        returnTown: 'Anistar City',
+        imageName: 'Calem',
+    }
 );
 TemporaryBattleList['Professor Sycamore2'] = new TemporaryBattle(
     'Professor Sycamore2',
@@ -737,7 +994,12 @@ TemporaryBattleList['Professor Sycamore2'] = new TemporaryBattle(
         new GymPokemon('Blastoise', 88799088, 50),
     ],
     'You are really something! You and your Pokémon have developed strong bonds by spending time together and by caring about one another. That\'s why you and your Pokémon are so strong.',
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 18)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 18)],
+    undefined,
+    {
+        displayName: 'Pokémon Professor Sycamore',
+        imageName: 'Sycamore',
+    }
 );
 TemporaryBattleList.Shauna2 = new TemporaryBattle(
     'Shauna2',
@@ -749,7 +1011,13 @@ TemporaryBattleList.Shauna2 = new TemporaryBattle(
         new GymPokemon('Delphox', 94497751, 51/*, new StarterRequirement(GameConstants.Region.kalos, 2)*/),
     ],
     'Battles with friends are really, really exciting!',
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 19)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 19)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Shauna',
+        returnTown: 'Couriway Town',
+        imageName: 'Shauna',
+    }
 );
 TemporaryBattleList.Tierno2 = new TemporaryBattle(
     'Tierno2',
@@ -759,7 +1027,13 @@ TemporaryBattleList.Tierno2 = new TemporaryBattle(
         new GymPokemon('Crawdaunt', 94618062, 52),
     ],
     'It\'s weird, but… I don\'t get that down when I lose to you.',
-    [new TemporaryBattleRequirement('Shauna2')]
+    [new TemporaryBattleRequirement('Shauna2')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Tierno',
+        returnTown: 'Couriway Town',
+        imageName: 'Tierno',
+    }
 );
 TemporaryBattleList.Trevor = new TemporaryBattle(
     'Trevor',
@@ -769,7 +1043,12 @@ TemporaryBattleList.Trevor = new TemporaryBattle(
         new GymPokemon('Florges (Orange)', 94858684, 51),
     ],
     'There is still so much I don\'t know. Do I just not have what it takes?',
-    [new TemporaryBattleRequirement('Tierno2')]
+    [new TemporaryBattleRequirement('Tierno2')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Trevor',
+        returnTown: 'Couriway Town',
+    }
 );
 TemporaryBattleList.Calem5 = new TemporaryBattle(
     'Calem5',
@@ -785,7 +1064,13 @@ TemporaryBattleList.Calem5 = new TemporaryBattle(
         new GymPokemon('Chesnaught', 87228108, 61/*, new StarterRequirement(GameConstants.Region.kalos, 2)*/),
     ],
     'I\'m still no match for you... You know, it\'s because I met you that I was able to get this far... But our journey\'s just getting started. Who knows what heights we\'ll reach!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Kalos'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Kalos'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Calem',
+        returnTown: 'Pokémon League Kalos',
+        imageName: 'Calem',
+    }
 );
 TemporaryBattleList.AZ = new TemporaryBattle(
     'AZ',
@@ -932,7 +1217,13 @@ TemporaryBattleList.Calem6 = new TemporaryBattle(
         new GymPokemon('Mega Absol', 190460928, 68),
     ],
     'I\'ll think about what you did well and use this loss to fuel my desire to improve.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Calem',
+        returnTown: 'Kiloude City',
+        imageName: 'Calem',
+    }
 );
 
 //Alola Temporary Battles
@@ -944,7 +1235,13 @@ TemporaryBattleList.Hau1 = new TemporaryBattle(
         new GymPokemon('Litten', 71131094, 5/*, new StarterRequirement(GameConstants.Region.alola, 2)*/),
     ],
     'Whoa! That was awesome! You and your Pokémon were both so cool!',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 1)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hau',
+        returnTown: 'Iki Town',
+        imageName: 'Hau',
+    }
 );
 TemporaryBattleList.Hau2 = new TemporaryBattle(
     'Hau2',
@@ -955,7 +1252,13 @@ TemporaryBattleList.Hau2 = new TemporaryBattle(
         new GymPokemon('Litten', 81763320, 7/*, new StarterRequirement(GameConstants.Region.alola, 2)*/),
     ],
     'Phew... That was awesome! That was a really great battle! I had a blast fighting you!',
-    [new TemporaryBattleRequirement('Hau1')]
+    [new TemporaryBattleRequirement('Hau1')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hau',
+        returnTown: 'Iki Town',
+        imageName: 'Hau',
+    }
 );
 TemporaryBattleList.Hau3 = new TemporaryBattle(
     'Hau3',
@@ -967,7 +1270,13 @@ TemporaryBattleList.Hau3 = new TemporaryBattle(
         new GymPokemon('Pikachu', 93893044, 12),
     ],
     'Aww, man! I wanted to show off my Pokémon\'s best side more!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hau',
+        returnTown: 'Melemele Woods',
+        imageName: 'Hau',
+    }
 );
 TemporaryBattleList.Dexio = new TemporaryBattle(
     'Dexio',
@@ -976,7 +1285,11 @@ TemporaryBattleList.Dexio = new TemporaryBattle(
         new GymPokemon('Espeon', 195395639, 15),
     ],
     'That\'s what I would expect from a Trainer doing the island challenge. I felt the bond between you and your Pokémon!',
-    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)]
+    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Dexio',
+    }
 );
 TemporaryBattleList.Sina = new TemporaryBattle(
     'Sina',
@@ -985,7 +1298,11 @@ TemporaryBattleList.Sina = new TemporaryBattle(
         new GymPokemon('Glaceon', 195395639, 15),
     ],
     'I get it... Facing trials helps you grow close to your team. I think that\'s absolutely wonderful!',
-    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)]
+    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Sina',
+    }
 );
 TemporaryBattleList.Hau4 = new TemporaryBattle(
     'Hau4',
@@ -998,7 +1315,13 @@ TemporaryBattleList.Hau4 = new TemporaryBattle(
         new GymPokemon('Eevee', 93880356, 14),
     ],
     'Nice! How\'d you come up with that kind of battle plan? You gotta tell me!',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 4)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 4)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hau',
+        returnTown: 'Paniola Town',
+        imageName: 'Hau',
+    }
 );
 TemporaryBattleList.Gladion1 = new TemporaryBattle(
     'Gladion1',
@@ -1008,7 +1331,13 @@ TemporaryBattleList.Gladion1 = new TemporaryBattle(
         new GymPokemon('Type: Null', 135172109, 18),
     ],
     'Hmph... It\'s not like me to slip up like that. I\'ve got to keep fighting stronger opponents. Looks like I\'m still not ready...',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 5)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 5)],
+    undefined,
+    {
+        displayName: 'Team Skull Gladion',
+        returnTown: 'Paniola Town',
+        imageName: 'Gladion',
+    }
 );
 TemporaryBattleList['Battle Royal'] = new TemporaryBattle(
     'Battle Royal',
@@ -1029,7 +1358,13 @@ TemporaryBattleList.Plumeria1 = new TemporaryBattle(
         new GymPokemon('Salandit', 202785507, 27),
     ],
     'Hmmph! You\'re pretty strong. I\'ll give you that. But mess with anyone in Team Skull again, and I\'ll show you how serious I can get.',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 21)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 21)],
+    undefined,
+    {
+        displayName: 'Team Skull Admin Plumeria',
+        returnTown: 'Memorial Hill',
+        imageName: 'Plumeria',
+    }
 );
 TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
@@ -1051,7 +1386,13 @@ TemporaryBattleList.Hau5 = new TemporaryBattle(
         new GymPokemon('Alolan Raichu', 83521097, 29),
     ],
     'Bwah!! I had my breath held that whole battle!',
-    [new TemporaryBattleRequirement('Ultra Wormhole')]
+    [new TemporaryBattleRequirement('Ultra Wormhole')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hau',
+        returnTown: 'Malie City',
+        imageName: 'Hau',
+    }
 );
 TemporaryBattleList.Plumeria2 = new TemporaryBattle(
     'Plumeria2',
@@ -1060,7 +1401,13 @@ TemporaryBattleList.Plumeria2 = new TemporaryBattle(
         new GymPokemon('Salazzle', 213143655, 38),
     ],
     'Hmmph. Guess you are pretty tough. Now I understand why my Grunts waste so much time battling kids. But if you want us to return the Pokémon, then you\'ll have to come to us. Alone. The boss is dying to meet you, hmmph! See you at our base in Po Town!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))],
+    undefined,
+    {
+        displayName: 'Team Skull Admin Plumeria',
+        returnTown: 'Tapu Village',
+        imageName: 'Plumeria',
+    }
 );
 TemporaryBattleList.Gladion2 = new TemporaryBattle(
     'Gladion2',
@@ -1070,7 +1417,13 @@ TemporaryBattleList.Gladion2 = new TemporaryBattle(
         new GymPokemon('Type: Null', 146525911, 43),
     ],
     'That was wrong of me... I shouldn\'t have dragged you into a meaningless battle like that...',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))],
+    undefined,
+    {
+        displayName: 'Team Skull Gladion',
+        returnTown: 'Tapu Village',
+        imageName: 'Gladion',
+    }
 );
 TemporaryBattleList.Necrozma = new TemporaryBattle(
     'Necrozma',
@@ -1177,7 +1530,14 @@ TemporaryBattleList.Gladion3 = new TemporaryBattle(
         new GymPokemon('Silvally (Grass)', 209152017, 55/*, new StarterRequirement(GameConstants.Region.alola, 2)*/),
     ],
     'You\'ve got good Pokémon. I know what kind of Trainer you are now. And what kind of journey you\'ve been through.',
-    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
+    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Gladion',
+        returnTown: 'Mount Lanakila',
+        imageName: 'Gladion',
+    }
+);
 TemporaryBattleList.Anabel = new TemporaryBattle(
     'Anabel',
     [

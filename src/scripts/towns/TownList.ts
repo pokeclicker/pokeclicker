@@ -3087,7 +3087,7 @@ TownList['Iki Town'] = new Town(
     GameConstants.Region.alola,
     [TemporaryBattleList.Hau1, TemporaryBattleList.Hau2, IkiTownShop],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
+        requirements: [new TemporaryBattleRequirement('Hau1')],
         npcs: [IkiKahuna],
     }
 );
