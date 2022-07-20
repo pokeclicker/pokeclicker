@@ -97,6 +97,7 @@ TemporaryBattleList['Team Plasma Grunt 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Plasma Grunt',
+        imageName: 'Team Plasma Grunt (male)',
     }
 );
 TemporaryBattleList['Team Plasma Grunt 2'] = new TemporaryBattle(
@@ -107,6 +108,7 @@ TemporaryBattleList['Team Plasma Grunt 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Plasma Grunt',
+        imageName: 'Team Plasma Grunt (male)',
     }
 );
 TemporaryBattleList['Team Plasma Grunt 3'] = new TemporaryBattle(
@@ -117,6 +119,7 @@ TemporaryBattleList['Team Plasma Grunt 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Plasma Grunt',
+        imageName: 'Team Plasma Grunt (female)',
     }
 );
 TemporaryBattleList['Team Plasma Grunt 4'] = new TemporaryBattle(
@@ -127,6 +130,7 @@ TemporaryBattleList['Team Plasma Grunt 4'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Plasma Grunt',
+        imageName: 'Team Plasma Grunt (male)',
     }
 );
 TemporaryBattleList['Team Plasma Grunt 5'] = new TemporaryBattle(
@@ -137,6 +141,7 @@ TemporaryBattleList['Team Plasma Grunt 5'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Plasma Grunt',
+        imageName: 'Team Plasma Grunt (male)',
     }
 );
 TemporaryBattleList['Team Plasma Grunts 1'] = new TemporaryBattle(
@@ -152,6 +157,7 @@ TemporaryBattleList['Team Plasma Grunts 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Plasma Grunts',
+        imageName: 'Team Plasma Grunts (male)',
     }
 );
 TemporaryBattleList['Team Plasma Grunts 2'] = new TemporaryBattle(
@@ -167,6 +173,7 @@ TemporaryBattleList['Team Plasma Grunts 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Plasma Grunts',
+        imageName: 'Team Plasma Grunts (male)',
     }
 );
 TemporaryBattleList['Team Plasma Grunt 6'] = new TemporaryBattle(
@@ -180,6 +187,7 @@ TemporaryBattleList['Team Plasma Grunt 6'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Plasma Grunt',
+        imageName: 'Team Plasma Grunt (male)',
     }
 );
 TemporaryBattleList['Zinzolin 1'] = new TemporaryBattle(
@@ -193,6 +201,7 @@ TemporaryBattleList['Zinzolin 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Zinzolin',
+        imageName: 'Zinzolin',
     }
 );
 TemporaryBattleList['Team Plasma Grunt 7'] = new TemporaryBattle(
@@ -206,6 +215,7 @@ TemporaryBattleList['Team Plasma Grunt 7'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Plasma Grunt',
+        imageName: 'Team Plasma Grunt (male)',
     }
 );
 TemporaryBattleList['Team Plasma Grunt 8'] = new TemporaryBattle(
@@ -219,6 +229,7 @@ TemporaryBattleList['Team Plasma Grunt 8'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Plasma Grunt',
+        imageName: 'Team Plasma Grunt (female)',
     }
 );
 TemporaryBattleList['Team Plasma Grunt 9'] = new TemporaryBattle(
@@ -232,6 +243,7 @@ TemporaryBattleList['Team Plasma Grunt 9'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Plasma Grunt',
+        imageName: 'Team Plasma Grunt (male)',
     }
 );
 TemporaryBattleList['Zinzolin 2'] = new TemporaryBattle(
@@ -250,6 +262,7 @@ TemporaryBattleList['Zinzolin 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Zinzolin',
+        imageName: 'Zinzolin',
     }
 );
 TemporaryBattleList['Plasma Shadow'] = new TemporaryBattle(
