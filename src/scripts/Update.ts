@@ -887,7 +887,7 @@ class Update implements Saveable {
             playerData._itemList.Linking_cord = playerData._itemList.Trade_stone || 0;
             delete playerData._itemList.Trade_stone;
 
-            // Filter already earned milestones and save player checkpoints
+            // Filter already earned milestones due to item name updates
             const milestones = [
                 [5, '25 x Poké Ball'],
                 [10, '100 x Poké Ball'],
