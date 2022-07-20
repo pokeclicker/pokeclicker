@@ -818,6 +818,10 @@ class Update implements Saveable {
                 p[9] = saveData.statistics.effortPoints?.[p.id] * 100 || 0;
             });
 
+            // Give the players Linking Cords in place of Trade Stones
+            playerData._itemList.Linking_cord = playerData._itemList.Trade_stone || 0;
+            delete playerData._itemList.Trade_stone;
+
             // Start Sevii questline if player has Volcano Badge already
             if (saveData.badgeCase[7]) {
                 saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
@@ -882,46 +886,6 @@ class Update implements Saveable {
                 delete settingsData['notification.dungeon_item_found'];
                 delete settingsData['notification.dungeon_item_found.desktop'];
             }
-
-            // Give the players Linking Cords in place of Trade Stones
-            playerData._itemList.Linking_cord = playerData._itemList.Trade_stone || 0;
-            delete playerData._itemList.Trade_stone;
-
-            // Filter already earned milestones due to item name updates
-            const milestones = [
-                [5, '25 x Poké Ball'],
-                [10, '100 x Poké Ball'],
-                [20, '100 x Great Ball'],
-                [30, '100 x Ultra Ball'],
-                [35, '100 x xClick'],
-                [40, '100 x xAttack'],
-                [50, '100 x Small Restore'],
-                [100, 'Deoxys'],
-                [110, '10 x Water Stone'],
-                [120, '10 x Leaf Stone'],
-                [130, '10 x Thunder Stone'],
-                [140, '10 x Fire Stone'],
-                [150, '200 x Medium Restore'],
-                [151, 'Deoxys (attack)'],
-                [160, '100 x Lucky Egg'],
-                [170, '100 x Lucky Incense'],
-                [180, '100 x Dowsing Machine'],
-                [190, '10 x Mystery Egg'],
-                [200, '100 x Large Restore'],
-                [210, '40 x Water Stone'],
-                [220, '40 x Leaf Stone'],
-                [230, '40 x Thunder Stone'],
-                [240, '40 x Moon Stone'],
-                [250, '6,400 x Ultra Ball'],
-                [251, 'Deoxys (defense)'],
-                [300, '100 x Linking Cord'],
-                [386, 'Deoxys (speed)'],
-            ];
-            const highestStageCompleted = saveData.statistics?.battleFrontierHighestStageCompleted || 0;
-            saveData.battleFrontier = {
-                milestones: milestones.filter(([stage]) => stage <= highestStageCompleted),
-                checkpoint: saveData.battleFrontier.checkpoint,
-            };
         },
     };
 
