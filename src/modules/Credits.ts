@@ -64,6 +64,14 @@ export const SpriteCredits: Credit[] = [
         // Notes: DaleArwin aka IanWalder, a GitHub contributor to this project, gives his permission
     },
     {
+        name: 'Data',
+        link: 'https://discordapp.com/users/240607391807307777/',
+        resources: [
+            'Pokerus Virus key item sprite',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'Drawnamu',
         link: 'https://www.deviantart.com/drawnamu',
         image: 'https://a.deviantart.net/avatars-big/d/r/drawnamu.png',
@@ -242,6 +250,14 @@ export const SpriteCredits: Credit[] = [
             'Furfrou Trim Shop Icons',
         ],
         // NOTES: Granted permission on devianart to NiceDice via PN
+    },
+    {
+        name: 'PKMNTrainerSpriterC, akuma-tsubasa & Metapod23',
+        link: 'https://www.deviantart.com/pkmntrainerspriterc/art/Ash-Ketchum-Sprite-Set-435950341',
+        resources: [
+            'Ash Ketchum',
+        ],
+        // NOTES: Permission given on image page if credited.
     },
     {
         name: 'Pokémon Reborn\'s cass and Amethyst',

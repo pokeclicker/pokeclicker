@@ -197,8 +197,15 @@ class QuestLineHelper {
         const talktoGameCornerOwner1 = new TalkToNPCQuest(TwoIslandGameCornerOwner1, 'Ask the Game Corner owner on Two Island about the meteorite.');
         billSeviiQuestLine.addQuest(talktoGameCornerOwner1);
 
-        const clearBikerGangTemporaryBattle = new CustomQuest(1, 0, 'A biker gang has invaded Three island. They will not let you continue to Berry Forest. You\'ll have to take out all the Biker Goons before you can get to their leader.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Cue Ball Paxton')]());
-        billSeviiQuestLine.addQuest(clearBikerGangTemporaryBattle);
+        const clearBikerGangTemporaryBattles = new CustomQuest(3, 0, 'A biker gang has invaded Three island. They will not let you continue to Berry Forest. Defeat the Biker Goons.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Biker Goon 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Biker Goon 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Biker Goon 3')]()
+        );
+        billSeviiQuestLine.addQuest(clearBikerGangTemporaryBattles);
+
+        const clearCueBallPaxtonTemporaryBattle = new CustomQuest(1, 0, 'Defeat the biker gang\'s leader.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Cue Ball Paxton')]());
+        billSeviiQuestLine.addQuest(clearCueBallPaxtonTemporaryBattle);
 
         const clearBerryForest = new CustomQuest(1, 0, 'Find Lostelle. Clear Berry Forest.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Berry Forest')]());
         billSeviiQuestLine.addQuest(clearBerryForest);
@@ -517,6 +524,40 @@ class QuestLineHelper {
         App.game.quests.questLines().push(vivillonQuestLine);
     }
 
+    public static createAshKetchumQuestLine() {
+        const ashKetchumQuestLine = new QuestLine('The New Kid', 'A new kid from your home town is making waves. Show him who the real prodigy of Pallet Town is.');
+
+        const clearKantoAsh = new CustomQuest(1, 0, 'Defeat the kid near Pallet Town.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kanto')]());
+        ashKetchumQuestLine.addQuest(clearKantoAsh);
+
+        const clearJohtoAsh = new CustomQuest(1, 0, 'He\'s not stopping. Find the kid in Johto.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Johto')]());
+        ashKetchumQuestLine.addQuest(clearJohtoAsh);
+
+        const clearHoennAsh = new CustomQuest(1, 0, 'He just won\'t learn his lesson. Defeat the kid again in Hoenn.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Hoenn')]());
+        ashKetchumQuestLine.addQuest(clearHoennAsh);
+
+        const clearSinnohAsh = new CustomQuest(1, 0, 'Who does this kid think he is anyway? Pretending he\'s the main character. He\'s in Sinnoh now.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Sinnoh')]());
+        ashKetchumQuestLine.addQuest(clearSinnohAsh);
+
+        const clearUnovaAsh = new CustomQuest(1, 0, 'The kid is hiding in Unova!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Unova')]());
+        ashKetchumQuestLine.addQuest(clearUnovaAsh);
+
+        const AshKetchumReward = () => {
+            App.game.party.gainPokemonById(658.01);
+            Notifier.notify({
+                title: ashKetchumQuestLine.name,
+                message: 'You obtained Ash Greninja!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearKalosAsh = new CustomQuest(1, AshKetchumReward, 'Maybe you were too hard on the kid... You should offer him an apology in Kalos.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kalos')]());
+        ashKetchumQuestLine.addQuest(clearKalosAsh);
+
+        App.game.quests.questLines().push(ashKetchumQuestLine);
+    }
+
     // Alola QuestLines
     public static createSkullAetherAlolaQuestLine() {
         const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
@@ -577,6 +618,135 @@ class QuestLineHelper {
         minasTrialAlolaQuestLine.addQuest(clearMinasHouseboat);
 
         App.game.quests.questLines().push(minasTrialAlolaQuestLine);
+    }
+
+    public static createUltraBeastQuestLine() {
+        const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts');
+
+        const talkToLooker = new TalkToNPCQuest(RoadsideMotelLooker1, 'Talk to Looker at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToLooker);
+
+        const AnabelReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,5,false);
+        };
+
+        const AnabelBattle = new CustomQuest(
+            1,
+            AnabelReward,
+            'Defeat Agent Anabel at the Roadside Motel.',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anabel')](),
+            0
+        );
+        UltraBeastQuestLine.addQuest(AnabelBattle);
+
+        const talkToAnabel1 = new TalkToNPCQuest(RoadsideMotelAnabel1, 'Talk to Anabel at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToAnabel1);
+
+        const talkToLooker2 = new TalkToNPCQuest(RoadsideMotelLooker2, 'Talk to Looker at the Roadside Motel to learn about Beast Balls.');
+        UltraBeastQuestLine.addQuest(talkToLooker2);
+
+        const createUltraBeastQuest = (ultrabeast: PokemonNameType, hint: string, numberCaught: number, ultraBeastReward?: (() => void)) => {
+            const time = (numberCaught > 0) ?  'times!' : 'time!';
+            const validHint = hint ?? '';
+
+            const catchUltraBeast = new CaptureSpecificPokemonQuest(
+                ultrabeast,
+                `Capture ${ultrabeast} ${numberCaught} ${time} ${validHint}`,
+                numberCaught,
+                false,
+                ultraBeastReward,
+                undefined
+            );
+
+            return catchUltraBeast;
+        };
+        const ultraBeastReward = () => {
+            Notifier.notify({
+                title: UltraBeastQuestLine.name,
+                message: 'An Ultra Beast is hiding somewhere...',
+                type: NotificationConstants.NotificationOption.info,
+                timeout: 3e1,
+            });
+        };
+
+        UltraBeastQuestLine.addQuest(createUltraBeastQuest('Nihilego', ' Nihilego has been spotted at Wela Volcano Park and Diglett\'s Tunnel!', 1, ultraBeastReward));
+
+        const talkToAnabel2 = new TalkToNPCQuest(RoadsideMotelAnabel2, 'Talk to Anabel at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToAnabel2);
+
+        UltraBeastQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                createUltraBeastQuest('Buzzwole', undefined, 2),
+                createUltraBeastQuest('Pheromosa', undefined, 4),
+            ], 'Rare Ultra Beasts have been spotted!\nBuzzwole in Melemele Meadow and Pheromosa in Verdant Cavern!', ultraBeastReward));
+
+        const talkToAnabel3 = new TalkToNPCQuest(RoadsideMotelAnabel3, 'Talk to Anabel at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToAnabel3);
+
+        const MinaBattle = new CustomQuest(
+            1,
+            undefined,
+            'Defeat Trial Captain Mina at the Roadside Motel.',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Mina UB')](),
+            0
+        );
+        UltraBeastQuestLine.addQuest(MinaBattle);
+
+        const talkToMina1 = new TalkToNPCQuest(RoadsideMotelMina, 'Talk to Captain Mina at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToMina1);
+
+        UltraBeastQuestLine.addQuest(createUltraBeastQuest('Xurkitree', ' Xurkitree has been spotted at Memorial Hill and Lush Jungle!', 2, ultraBeastReward));
+
+        const talkToNanu1 = new TalkToNPCQuest(RoadsideMotelNanu1, 'Talk to Kahuna Nanu at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToNanu1);
+
+        UltraBeastQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                createUltraBeastQuest('Kartana', undefined, 4),
+                createUltraBeastQuest('Celesteela', undefined, 2),
+            ], 'Rare Ultra Beasts have been spotted! Kartana at Malie Garden and Route 17, and Celesteela at Malie Garden and Haina Desert!', ultraBeastReward));
+
+        const talkToNanu2 = new TalkToNPCQuest(RoadsideMotelNanu2, 'Talk to Kahuna Nanu at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToNanu2);
+
+        const NanuBattle = new CustomQuest(
+            1,
+            undefined,
+            'Defeat Kahuna Nanu at the Roadside Motel.',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahuna Nanu UB')](),
+            0
+        );
+        UltraBeastQuestLine.addQuest(NanuBattle);
+
+        const talkToAnabel4 = new TalkToNPCQuest(RoadsideMotelAnabel4, 'Talk to Anabel at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToAnabel4);
+
+        UltraBeastQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                createUltraBeastQuest('Blacephalon', undefined, 5),
+                createUltraBeastQuest('Stakataka', undefined, 5),
+            ], 'Rare Ultra Beasts have been spotted! Blacephalon and Stakataka are both at Poni Grove!', ultraBeastReward));
+
+        const talkToAnabel5 = new TalkToNPCQuest(RoadsideMotelAnabel5, 'Talk to Anabel at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToAnabel5);
+
+        const GuzzlordReward = () => {
+            Notifier.notify({ message: 'You caught all the Ultra Beasts!', type: NotificationConstants.NotificationOption.success });
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,50,false);
+        };
+
+        const GuzzlordCatch = new CaptureSpecificPokemonQuest(
+            'Guzzlord',
+            'Catch Guzzlord at Resolution Cave.',
+            1,
+            false,
+            GuzzlordReward,
+            undefined
+        );
+
+        UltraBeastQuestLine.addQuest(GuzzlordCatch);
+
+        App.game.quests.questLines().push(UltraBeastQuestLine);
     }
 
     // Event QuestLines
@@ -642,6 +812,7 @@ class QuestLineHelper {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
 
+
     public static loadQuestLines() {
         this.createTutorial();
         this.createRocketKantoQuestLine();
@@ -654,8 +825,10 @@ class QuestLineHelper {
         this.createGalacticSinnohQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createVivillonQuestLine();
+        this.createAshKetchumQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
+        this.createUltraBeastQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
     }
 }

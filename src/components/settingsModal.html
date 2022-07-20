@@ -27,6 +27,7 @@
                               </tr>
                             </thead> -->
                             <tbody>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('gameDisplayStyle')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('theme')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('backgroundImage')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('breedingDisplay')}"></tr>
@@ -43,7 +44,6 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmLeaveDungeon')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmBeformeMulchingAllPlots')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGymGoAnimation')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('fullWidthContainer')}"></tr>
                                 <tr><th colspan="2">Map Colors</th></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--incomplete')}"></tr>
@@ -268,7 +268,7 @@
 
 
 <script type="text/html" id="MultipleChoiceSettingTemplate">
-    <td class="p-2" data-bind="text: $data.displayName">setting name</td>
+    <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
     <td class="p-0">
         <select class="form-control" onchange="Settings.setSettingByName(this.name, this.value)" data-bind="foreach: $data.options, attr: {name}">
             <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>

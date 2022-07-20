@@ -1190,7 +1190,13 @@ GymList['Champion Diantha'] = new Champion(
     BadgeEnums.Elite_KalosChampion,
     128000,
     'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart...',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)],
+    undefined,
+    undefined,
+    undefined,
+    () => {
+        App.game.quests.getQuestLine('The New Kid').beginQuest();
+    }
 );
 
 //Alola Gyms
@@ -1489,9 +1495,11 @@ GymList['Champion Hau'] = new Champion(
     [
         new GymPokemon('Leafeon', 89636471, 58),
         new GymPokemon('Incineroar', 96725389, 60),
-    ]
+    ],
+    () => {
+        App.game.quests.getQuestLine('Ultra Beast Hunt').beginQuest();
+    }
 );
-
 
 //Galar Leaders
 //TODO Addition of G-Max forms?
