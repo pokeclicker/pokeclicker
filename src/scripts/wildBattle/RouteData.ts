@@ -117,7 +117,7 @@ Routes.add(new RegionRoute(
         land: ['Rattata', 'Spearow', 'Ekans', 'Sandshrew'],
     }),
     [
-        new RouteKillRequirement(10, GameConstants.Region.kanto, 6),
+        new TemporaryBattleRequirement('Blue3'),
         new GymBadgeRequirement(BadgeEnums.Cascade),
     ],
     undefined,
@@ -160,7 +160,7 @@ Routes.add(new RegionRoute(
         land: ['Pidgey', 'Oddish', 'Gloom', 'Venonat', 'Bellsprout', 'Weepinbell', 'Farfetch\'d', 'Snorlax'],
         water: ['Poliwag', 'Slowpoke', 'Slowbro', 'Goldeen', 'Magikarp'],
     }),
-    [new TemporaryBattleRequirement('Blue4')],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
     undefined,
     GameConstants.KantoSubRegions.Kanto
 
@@ -213,7 +213,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Rattata', 'Raticate', 'Spearow', 'Doduo', 'Snorlax'],
     }),
-    [new TemporaryBattleRequirement('Blue4')],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
     undefined,
     GameConstants.KantoSubRegions.Kanto
 ));

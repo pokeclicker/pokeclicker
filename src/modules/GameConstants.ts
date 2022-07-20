@@ -1290,7 +1290,7 @@ export const TemporaryBattles = [
     'Hau4',
     'Gladion1',
     'Battle Royal',
-    'Plumeria1',
+    'Admin Plumeria1',
     'Ultra Wormhole',
     'Hau5',
     'Plumeria2',
