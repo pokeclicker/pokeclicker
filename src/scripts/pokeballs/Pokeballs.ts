@@ -96,7 +96,7 @@ class Pokeballs implements Feature {
                 const amountCaught = App.game.statistics.pokemonCaptured[Battle.enemyPokemon().id]();
 
                 return Math.min(15,Math.pow(amountCaught,2) / 5000);
-            }, 1250, 'Increased catch rate with more catches', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+            }, 1250, 'Increased catch rate and EV gain rate with more catches', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Beastball, () => {
                 return 10;
@@ -221,6 +221,11 @@ class Pokeballs implements Feature {
     getBallQuantity(ball: GameConstants.Pokeball): number {
         const pokeball = this.pokeballs[ball];
         return pokeball ? pokeball.quantity() : 0;
+    }
+
+    getEPBonus(ball: GameConstants.Pokeball): number {
+        const pokeballType = this.pokeballs[ball].type;
+        return pokeballType == GameConstants.Pokeball.Repeatball ? GameConstants.REPEATBALL_EP_MODIFIER : 1;
     }
 
     canAccess(): boolean {
