@@ -433,8 +433,8 @@ class QuestLineHelper {
         );
         plasmaUnovaQuestLine.addQuest(clearDriftveilGrunts);
 
-        const talktoZinzolin1 = new TalkToNPCQuest(DriftveilZinzolin, 'Talk to Zinzolin.');
-        plasmaUnovaQuestLine.addQuest(talktoZinzolin1);
+        const talktoZinzolin = new TalkToNPCQuest(DriftveilZinzolin, 'Talk to Zinzolin.');
+        plasmaUnovaQuestLine.addQuest(talktoZinzolin);
 
         const unovaRoute13 = new CustomQuest(10, 0, 'The Frigate is gone. Nothing to do but move forward. Clear route 13.', () => App.game.statistics.routeKills[GameConstants.Region.unova]['13']());
         plasmaUnovaQuestLine.addQuest(unovaRoute13);
@@ -464,7 +464,16 @@ class QuestLineHelper {
         const clearPlasmaFrigate = new CustomQuest(1, 0, 'Team Plasma has fled the scene with the stolen DNA Splicers. Find and clear out the Plasma Frigate.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]());
         plasmaUnovaQuestLine.addQuest(clearPlasmaFrigate);
 
-        const giantChasmReward = () => {
+        const talktoColress = new TalkToNPCQuest(PlasmaFrigateColress, 'Talk to Colress.');
+        plasmaUnovaQuestLine.addQuest(talktoColress);
+
+        const clearColress = new CustomQuest (1, 0, 'Defeat Colress.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Colress')]());
+        plasmaUnovaQuestLine.addQuest(clearColress);
+
+        const clearGiantChasm = new CustomQuest(1, 0, 'Team Plasma\'s leader Ghetsis plans on using the DNA Splicers on Kyurem in Giant Chasm. Clear the dungeon to end his evil plans.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]());
+        plasmaUnovaQuestLine.addQuest(clearGiantChasm);
+
+        const ghetsisReward = () => {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
             Notifier.notify({
                 title: plasmaUnovaQuestLine.name,
@@ -474,8 +483,8 @@ class QuestLineHelper {
             });
         };
 
-        const clearGiantChasm = new CustomQuest(1, giantChasmReward, 'Team Plasma\'s leader Ghetsis plans on using the DNA Splicers on Kyurem in Giant Chasm. Clear the dungeon to end his evil plans.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]());
-        plasmaUnovaQuestLine.addQuest(clearGiantChasm);
+        const clearGhetsis = new CustomQuest (1, ghetsisReward, 'Ghetsis has one more trick up his sleeve. He has done something to the legendary Dragon-type Pokémon!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis')]());
+        plasmaUnovaQuestLine.addQuest(clearGhetsis);
 
         App.game.quests.questLines().push(plasmaUnovaQuestLine);
     }

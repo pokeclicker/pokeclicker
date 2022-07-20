@@ -2106,6 +2106,14 @@ const PlasmaGrunt3 = new NPC('Team Plasma Grunt', [
     'I\'m gonna be sick...',
 ]);
 
+const PlasmaFrigateColress = new NPC('Colress', [
+    'Welcome! I was asked by an acquaintance to help with his research. What I desire is to bring out the entirety in Pokémon potential! If I can accomplish that, I don\'t care what it takes!',
+    'If it means the strength must be brought out by the interactions between Pokémon and Trainers, then so be it! If it means you have to use a merciless approach, like Team Plasma\'s, and force out all of the Pokémon\'s power, then so be it! And yes, if the entire world is destroyed as a result, then so be it...',
+    'That aside! The reason I have been traveling all over Unova and battling many Pokémon Trainers is because I was testing the viability of this approach to bringing out the full strength of Pokémon. In that respect, you\'ve done an amazing job.',
+    'Well now! Tell me if you have the answer I desire or not! If you\'re ready, come at me!',
+],
+{ requirement: new MultiRequirement([new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate')), new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 17, GameConstants.AchievementOption.less)]) });
+
 const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
     'Legends say Kyurem is missing a part of itself. It is waiting for a hero to fill in the missing parts of its body with Truth or Ideals.',
     'The legendary dragons of Dragonspiral Tower are said to embody these very concepts. They sometimes leave a piece of their DNA behind after a battle.',
@@ -2435,12 +2443,15 @@ TownList['Plasma Frigate'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 22),
         new GymBadgeRequirement(BadgeEnums.Wave),
-    ]
+    ],
+    [TemporaryBattleList['Colress']],
+    [PlasmaFrigateColress]
 );
 TownList['Giant Chasm'] = new DungeonTown(
     'Giant Chasm',
     GameConstants.Region.unova,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate'))]
+    [new TemporaryBattleRequirement('Colress')],
+    [TemporaryBattleList['Ghetsis']]
 );
 TownList['Cave of Being'] = new DungeonTown(
     'Cave of Being',

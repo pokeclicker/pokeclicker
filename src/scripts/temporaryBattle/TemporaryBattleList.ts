@@ -195,8 +195,8 @@ TemporaryBattleList['Zinzolin 1'] = new TemporaryBattle(
 TemporaryBattleList['Team Plasma Grunt 7'] = new TemporaryBattle(
     'Team Plasma Grunt 7',
     [
-        new GymPokemon('Watchog', 22848300, 44),
-        new GymPokemon('Muk', 24848300, 44),
+        new GymPokemon('Watchog', 26298300, 44),
+        new GymPokemon('Muk', 28298300, 44),
     ],
     'You little... You knocked out my stupid pawns!',
     [],
@@ -208,8 +208,8 @@ TemporaryBattleList['Team Plasma Grunt 7'] = new TemporaryBattle(
 TemporaryBattleList['Team Plasma Grunt 8'] = new TemporaryBattle(
     'Team Plasma Grunt 8',
     [
-        new GymPokemon('Golbat', 22848300, 44),
-        new GymPokemon('Garbodor', 24848300, 44),
+        new GymPokemon('Golbat', 26298300, 44),
+        new GymPokemon('Garbodor', 28298300, 44),
     ],
     'Argh! Lame! Stupid! Fool! Plasmaaaa!',
     [],
@@ -221,8 +221,8 @@ TemporaryBattleList['Team Plasma Grunt 8'] = new TemporaryBattle(
 TemporaryBattleList['Team Plasma Grunt 9'] = new TemporaryBattle(
     'Team Plasma Grunt 9',
     [
-        new GymPokemon('Seviper', 22848300, 44),
-        new GymPokemon('Weezing', 24848300, 44),
+        new GymPokemon('Seviper', 26298300, 44),
+        new GymPokemon('Weezing', 28298300, 44),
     ],
     'Even if I lose, I will not give up on justice for Team Plasma! That\'s all!',
     [],
@@ -234,9 +234,9 @@ TemporaryBattleList['Team Plasma Grunt 9'] = new TemporaryBattle(
 TemporaryBattleList['Zinzolin 2'] = new TemporaryBattle(
     'Zinzolin 2',
     [
-        new GymPokemon('Cryogonal', 22848300, 46),
-        new GymPokemon('Cryogonal', 22848300, 46),
-        new GymPokemon('Weavile', 24848300, 48),
+        new GymPokemon('Cryogonal', 17632200, 46),
+        new GymPokemon('Cryogonal', 17632200, 46),
+        new GymPokemon('Weavile', 20632200, 48),
     ],
     'Have you gotten even stronger than you were in Lucanosa Town? How, in such a brief amount of time...',
     [
@@ -252,12 +252,39 @@ TemporaryBattleList['Zinzolin 2'] = new TemporaryBattle(
 TemporaryBattleList['Plasma Shadow'] = new TemporaryBattle(
     'Plasma Shadow',
     [
-        new GymPokemon('Pawniard', 22848300, 46),
-        new GymPokemon('Pawniard', 22848300, 46),
-        new GymPokemon('Absol', 24848300, 48),
+        new GymPokemon('Pawniard', 18065533, 46),
+        new GymPokemon('Pawniard', 18065533, 46),
+        new GymPokemon('Absol', 21065533, 48),
     ],
     'I hate to admit it, but... You\'re a good trainer. Awww. How unlucky. I don\'t happen to be the one holding the DNA Splicers. I was just buying time for the others to escape. Cheerio, bye-bye, whatever.',
     [new TemporaryBattleRequirement('Zinzolin 2')]
+);
+TemporaryBattleList['Colress'] = new TemporaryBattle(
+    'Colress',
+    [
+        new GymPokemon('Magneton', 18065533, 50),
+        new GymPokemon('Metang', 18065533, 50),
+        new GymPokemon('Beheeyem', 21065533, 50),
+        new GymPokemon('Magnezone', 18065533, 50),
+        new GymPokemon('Klinklang', 21065533, 52),
+    ],
+    'So this is what it means to draw forth the power hidden in your Pokémon! To me, whether Team Plasma wins or whether you win will decide how the relationship between people and Pokémon should be! So where will this be settled? At the Giant Chasm! You\'d better hurry, they have already captured the legendary Dragon-type Pokémon!',
+    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 16)]
+);
+TemporaryBattleList['Ghetsis'] = new TemporaryBattle(
+    'Ghetsis',
+    [
+        new GymPokemon('Kyurem (Black)', 18065533, 50),
+        new GymPokemon('Kyurem (White)', 18065533, 50),
+    ],
+    'I can\'t believe it! The Black and White Kyurem I went to all the trouble of preparing! How irritating! My plans for complete and total world domination foiled yet again? No! It mustn\'t be! I couldn\'t have been defeated by some random Trainer from who knows where!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))],
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.keyItems.gainKeyItem(KeyItemType.DNA_splicers, true);
+        },
+    }
 );
 // Kalos Temporarybattles
 TemporaryBattleList.AZ = new TemporaryBattle(

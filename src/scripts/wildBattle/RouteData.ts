@@ -1259,7 +1259,7 @@ Routes.add(new RegionRoute(
         land: ['Golduck', 'Gligar', 'Amoonguss', 'Mienfoo', 'Bouffalant', 'Rufflet', 'Vullaby'],
         water: ['Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))]
+    [new TemporaryBattleRequirement('Ghetsis')]
 ));
 Routes.add(new RegionRoute(
     'Unova Route 8', GameConstants.Region.unova, 8,
