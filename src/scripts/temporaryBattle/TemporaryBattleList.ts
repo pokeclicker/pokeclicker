@@ -279,7 +279,6 @@ TemporaryBattleList['Plasma Shadow 1'] = new TemporaryBattle(
         displayName: 'Plasma Shadow',
         imageName: 'Plasma Shadow',
     }
-    
 );
 TemporaryBattleList.Colress = new TemporaryBattle(
     'Colress',
