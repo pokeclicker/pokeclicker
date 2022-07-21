@@ -25,7 +25,6 @@ class Egg implements Saveable {
     ) {
         this.steps = ko.observable(steps);
         this.init();
-        this.partyPokemon = type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonByName(pokemon).id) : null;
     }
 
     private init() {
@@ -49,6 +48,7 @@ class Egg implements Saveable {
             this.pokemonType1 = PokemonType.Normal;
             this.pokemonType2 = PokemonType.Normal;
         }
+        this.partyPokemon = this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.pokemon).id) : null;
     }
 
     isNone() {
@@ -136,7 +136,7 @@ class Egg implements Saveable {
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched_shiny,
             });
-            App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}! ${App.game.party.alreadyCaughtPokemon(partyPokemon.id, true) ? '(duplicate)' : ''}`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}! ${App.game.party.alreadyCaughtPokemon(pokemonID, true) ? '(duplicate)' : ''}`);
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonHatched[pokemonID]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonHatched);
         } else {

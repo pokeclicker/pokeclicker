@@ -43,10 +43,7 @@ abstract class Evolution {
 
         // EVs
         const evolvedPartyPokemon = App.game.party.getPokemonByName(evolvedPokemon);
-        if (evolvedPartyPokemon.pokerus >= GameConstants.Pokerus.Contagious) {
-            const EPYield = (shiny ? GameConstants.SHINY_EP_YIELD : 1) * GameConstants.STONE_EP_YIELD;
-            evolvedPartyPokemon.effortPoints +=  EPYield;
-        }
+        evolvedPartyPokemon.effortPoints += App.game.party.gainEffortPoints(evolvedPartyPokemon, shiny, GameConstants.STONE_EP_YIELD);
         return shiny;
     }
 
