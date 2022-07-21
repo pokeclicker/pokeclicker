@@ -1132,7 +1132,7 @@ Routes.add(new RegionRoute(
     [
         new GymBadgeRequirement(BadgeEnums.Toxic),
         new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 1)
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 1),
     ]
 ));
 Routes.add(new RegionRoute(
