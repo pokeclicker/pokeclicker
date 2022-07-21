@@ -141,6 +141,7 @@ namespace GameConstants {
     declare const SHOPMON_EP_YIELD: number;
     declare const SAFARI_EP_YIELD: number;
     declare const SHINY_EP_MODIFIER: number;
+    declare const REPEATBALL_EP_MODIFIER: number;
     declare const DUNGEON_EP_MODIFIER: number;
     declare const DUNGEON_BOSS_EP_MODIFIER: number;
     declare const ROAMER_EP_MODIFIER: number;
