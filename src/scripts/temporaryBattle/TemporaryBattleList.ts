@@ -104,7 +104,10 @@ TemporaryBattleList['Team Plasma Grunt 2'] = new TemporaryBattle(
     'Team Plasma Grunt 2',
     [new GymPokemon('Trubbish', 35896600, 27)],
     'Don\'t let it go to your head... But you put up a good fight, kid!',
-    [new GymBadgeRequirement(BadgeEnums.Bolt)],
+    [
+        new GymBadgeRequirement(BadgeEnums.Bolt),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 3),
+    ],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -115,7 +118,10 @@ TemporaryBattleList['Team Plasma Grunt 3'] = new TemporaryBattle(
     'Team Plasma Grunt 3',
     [new GymPokemon('Watchog', 35896600, 27)],
     'What\'s the big idea? This Pokémon I stole is useless!',
-    [new GymBadgeRequirement(BadgeEnums.Bolt)],
+    [
+        new GymBadgeRequirement(BadgeEnums.Bolt),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 3),
+    ],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -183,7 +189,7 @@ TemporaryBattleList['Team Plasma Grunt 6'] = new TemporaryBattle(
         new GymPokemon('Garbodor', 24848300, 39),
     ],
     'What a blunder to have made in front of Zinzolin...',
-    [],
+    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 8)],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -292,6 +298,7 @@ TemporaryBattleList.Colress = new TemporaryBattle(
     'So this is what it means to draw forth the power hidden in your Pokémon! To me, whether Team Plasma wins or whether you win will decide how the relationship between people and Pokémon should be! You\'d better hurry, they have already captured the legendary Dragon-type Pokémon! Good luck in your battle!',
     [
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 17),
+        new TemporaryBattleRequirement('Plasma Shadow 1'),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')),
     ]
 );
