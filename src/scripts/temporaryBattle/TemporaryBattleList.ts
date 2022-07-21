@@ -265,15 +265,21 @@ TemporaryBattleList['Zinzolin 2'] = new TemporaryBattle(
         imageName: 'Zinzolin',
     }
 );
-TemporaryBattleList['Plasma Shadow'] = new TemporaryBattle(
-    'Plasma Shadow',
+TemporaryBattleList['Plasma Shadow 1'] = new TemporaryBattle(
+    'Plasma Shadow 1',
     [
         new GymPokemon('Pawniard', 18065533, 46),
         new GymPokemon('Pawniard', 18065533, 46),
         new GymPokemon('Absol', 21065533, 48),
     ],
     'I hate to admit it, but... You\'re a good trainer. Awww. How unlucky. I don\'t happen to be the one holding the DNA Splicers. I was just buying time for the others to escape. Cheerio, bye-bye, whatever.',
-    [new TemporaryBattleRequirement('Zinzolin 2')]
+    [new TemporaryBattleRequirement('Zinzolin 2')],
+    undefined,
+    {
+        displayName: 'Plasma Shadow',
+        imageName: 'Plasma Shadow',
+    }
+    
 );
 TemporaryBattleList.Colress = new TemporaryBattle(
     'Colress',
@@ -284,19 +290,92 @@ TemporaryBattleList.Colress = new TemporaryBattle(
         new GymPokemon('Magnezone', 18065533, 50),
         new GymPokemon('Klinklang', 21065533, 52),
     ],
-    'So this is what it means to draw forth the power hidden in your Pokémon! To me, whether Team Plasma wins or whether you win will decide how the relationship between people and Pokémon should be! So where will this be settled? At the Giant Chasm! You\'d better hurry, they have already captured the legendary Dragon-type Pokémon!',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 16)]
+    'So this is what it means to draw forth the power hidden in your Pokémon! To me, whether Team Plasma wins or whether you win will decide how the relationship between people and Pokémon should be! You\'d better hurry, they have already captured the legendary Dragon-type Pokémon! Good luck in your battle!',
+    [
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 17),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')),
+    ]
 );
-TemporaryBattleList.Ghetsis = new TemporaryBattle(
-    'Ghetsis',
+TemporaryBattleList['Plasma Shadow 2'] = new TemporaryBattle(
+    'Plasma Shadow 2',
+    [
+        new GymPokemon('Pawniard', 18065533, 49),
+        new GymPokemon('Pawniard', 18065533, 49),
+        new GymPokemon('Absol', 21065533, 51),
+    ],
+    'It doesn\'t bother us a bit if the stolen Pokémon cry or beg.',
+    [new TemporaryBattleRequirement('Colress')],
+    undefined,
+    {
+        displayName: 'Plasma Shadow',
+        imageName: 'Plasma Shadow',
+    }
+);
+TemporaryBattleList['Plasma Shadow 3'] = new TemporaryBattle(
+    'Plasma Shadow 3',
+    [
+        new GymPokemon('Pawniard', 18065533, 49),
+        new GymPokemon('Pawniard', 18065533, 49),
+        new GymPokemon('Banette', 21065533, 51),
+    ],
+    'It doesn\'t bother us a bit if we have to use another Pokémon after one is defeated.',
+    [new TemporaryBattleRequirement('Colress')],
+    undefined,
+    {
+        displayName: 'Plasma Shadow',
+        imageName: 'Plasma Shadow',
+    }
+);
+TemporaryBattleList['Plasma Shadow 4'] = new TemporaryBattle(
+    'Plasma Shadow 4',
+    [
+        new GymPokemon('Pawniard', 18065533, 49),
+        new GymPokemon('Pawniard', 18065533, 49),
+        new GymPokemon('Accelgor', 21065533, 51),
+    ],
+    'It doesn\'t bother us a bit if Pokémon win or lose.',
+    [new TemporaryBattleRequirement('Colress')],
+    undefined,
+    {
+        displayName: 'Plasma Shadow',
+        imageName: 'Plasma Shadow',
+    }
+);
+TemporaryBattleList['Ghetsis 1'] = new TemporaryBattle(
+    'Ghetsis 1',
     [
         new GymPokemon('Kyurem (Black)', 18065533, 50),
         new GymPokemon('Kyurem (White)', 18065533, 50),
     ],
-    'I can\'t believe it! The Black and White Kyurem I went to all the trouble of preparing! How irritating! My plans for complete and total world domination foiled yet again? No! It mustn\'t be! I couldn\'t have been defeated by some random Trainer from who knows where!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))],
+    'I can\'t believe it! The Black and White Kyurem I went to all the trouble of preparing! How irritating! Now I have to go recapture Kyurem, don\'t I? But first, I\'ll take down this disgusting Trainer with my own hand! This time I WILL succeed! No matter what they try, no one will be able to stop me!',
+    [
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 20),
+        new TemporaryBattleRequirement('Plasma Shadow 2'),
+        new TemporaryBattleRequirement('Plasma Shadow 3'),
+        new TemporaryBattleRequirement('Plasma Shadow 4'),
+    ],
     undefined,
     {
+        displayName: 'Ghetsis',
+        imageName: 'Ghetsis',
+    }
+);
+TemporaryBattleList['Ghetsis 2'] = new TemporaryBattle(
+    'Ghetsis 2',
+    [
+        new GymPokemon('Cofagrigus', 6000000, 50),
+        new GymPokemon('Seismitoad', 6000000, 50),
+        new GymPokemon('Eelektross', 6000000, 50),
+        new GymPokemon('Drapion', 6000000, 50),
+        new GymPokemon('Toxicroak', 6000000, 50),
+        new GymPokemon('Hydreigon', 6500000, 52),
+    ],
+    'My plans for complete and total world domination foiled yet again? No! It mustn\'t be! I couldn\'t have been defeated by some random Trainer from who knows where!',
+    [new TemporaryBattleRequirement('Ghetsis 1')],
+    undefined,
+    {
+        displayName: 'Ghetsis',
+        imageName: 'Ghetsis',
         firstTimeRewardFunction: () => {
             App.game.keyItems.gainKeyItem(KeyItemType.DNA_splicers, true);
         },

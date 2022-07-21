@@ -493,7 +493,7 @@
         , x: 47, y: 5
         , width: 9, height: 6.5
         , databind: "click:function(){MapHelper.moveToTown('Team Plasma Assault')}, attr:{ class: MapHelper.calculateTownCssClass('Team Plasma Assault') }"
-        , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]() >= 1 && App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() <= 14 && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow')]() == 0"
+        , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]() >= 1 && App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() <= 14 && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow 1')]() == 0"
         , image: "assets/images/map/plasmafrigate_airship.png"
         , connectedToTown: "Team Plasma Assault"
         })
@@ -725,7 +725,7 @@
         , x: 95, y: 16
         , width: 4, height: 9
         , databind: "click:function(){MapHelper.moveToTown('Plasma Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('Plasma Frigate') }"
-        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow')]() >= 1 && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Colress')]() == 0"
+        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow 1')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() == 0"
         , image: "assets/images/map/plasmafrigate_ship.png"
         , connectedToTown: "Plasma Frigate"
         })
@@ -736,7 +736,7 @@
         , x: 95, y: 16
         , width: 4, height: 9
         , databind: "click:function(){MapHelper.moveToTown('Plasma Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('Plasma Frigate') }"
-        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis')]() >= 1"
+        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis 2')]() >= 1"
         , image: "assets/images/map/plasmafrigate_ship.png"
         , connectedToTown: "Plasma Frigate"
         })
@@ -755,7 +755,7 @@
         , x: 77, y: 0.5
         , width: 9, height: 6.5
         , databind: "click:function(){MapHelper.moveToTown('Giant Chasm')}, attr:{ class: MapHelper.calculateTownCssClass('Giant Chasm') }"
-        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Colress')]() >= 1 && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis')]() == 0"
+        , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() >= 1 && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis 2')]() == 0"
         , image: "assets/images/map/plasmafrigate_airship.png"
         , isExtension: true
         })

@@ -2106,13 +2106,19 @@ const PlasmaGrunt3 = new NPC('Team Plasma Grunt', [
     'I\'m gonna be sick...',
 ]);
 
-const PlasmaFrigateColress = new NPC('Colress', [
+const GiantChasmColress = new NPC('Colress', [
     'Welcome! I was asked by an acquaintance to help with his research. What I desire is to bring out the entirety in Pokémon potential! If I can accomplish that, I don\'t care what it takes!',
     'If it means the strength must be brought out by the interactions between Pokémon and Trainers, then so be it! If it means you have to use a merciless approach, like Team Plasma\'s, and force out all of the Pokémon\'s power, then so be it! And yes, if the entire world is destroyed as a result, then so be it...',
     'That aside! The reason I have been traveling all over Unova and battling many Pokémon Trainers is because I was testing the viability of this approach to bringing out the full strength of Pokémon. In that respect, you\'ve done an amazing job.',
     'Well now! Tell me if you have the answer I desire or not! If you\'re ready, come at me!',
 ],
-{ requirement: new MultiRequirement([new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate')), new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 17, GameConstants.AchievementOption.less)]) });
+{ requirement: new MultiRequirement([new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')), new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 18, GameConstants.AchievementOption.less)]) });
+
+const GiantChasmShadowTriad = new NPC('Shadow Triad', [
+    'Listen well! We swore to be loyal to Lord Ghetsis since he saved us! The only thing we want is the world Lord Ghetsis desires! Even if we lose, Lord Ghetsis simply has to win...',
+    'The only thing you can do is watch Lord Ghetsis use Kyurem to freeze Unova solid. That\'s all...',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 19), new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 21, GameConstants.AchievementOption.less)]) });
 
 const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
     'Legends say Kyurem is missing a part of itself. It is waiting for a hero to fill in the missing parts of its body with Truth or Ideals.',
@@ -2261,7 +2267,7 @@ TownList['Opelucid City'] = new Town(
 TownList['Team Plasma Assault'] = new Town(
     'Team Plasma Assault',
     GameConstants.Region.unova,
-    [TemporaryBattleList['Team Plasma Grunt 7'], TemporaryBattleList['Team Plasma Grunt 8'], TemporaryBattleList['Team Plasma Grunt 9'], TemporaryBattleList['Zinzolin 2'], TemporaryBattleList['Plasma Shadow']],
+    [TemporaryBattleList['Team Plasma Grunt 7'], TemporaryBattleList['Team Plasma Grunt 8'], TemporaryBattleList['Team Plasma Grunt 9'], TemporaryBattleList['Zinzolin 2'], TemporaryBattleList['Plasma Shadow 1']],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Legend)],
         npcs: [PlasmaGrunt3],
@@ -2434,7 +2440,7 @@ TownList['Seaside Cave'] = new DungeonTown(
     GameConstants.Region.unova,
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 24),
-        new TemporaryBattleRequirement('Plasma Shadow'),
+        new TemporaryBattleRequirement('Plasma Shadow 1'),
     ]
 );
 TownList['Plasma Frigate'] = new DungeonTown(
@@ -2443,15 +2449,14 @@ TownList['Plasma Frigate'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 22),
         new GymBadgeRequirement(BadgeEnums.Wave),
-    ],
-    [TemporaryBattleList.Colress],
-    [PlasmaFrigateColress]
+    ]
 );
 TownList['Giant Chasm'] = new DungeonTown(
     'Giant Chasm',
     GameConstants.Region.unova,
-    [new TemporaryBattleRequirement('Colress')],
-    [TemporaryBattleList.Ghetsis]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate'))],
+    [TemporaryBattleList.Colress, TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4'], TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']],
+    [GiantChasmColress, GiantChasmShadowTriad]
 );
 TownList['Cave of Being'] = new DungeonTown(
     'Cave of Being',
