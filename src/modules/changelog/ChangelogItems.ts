@@ -22,6 +22,7 @@ const ChangelogItems = [
     new Changelog(changelogType.NEW, 'Rowap berry now affects EVs gained'),
     new Changelog(changelogType.NEW, 'More methods to gain EVs'),
     new Changelog(changelogType.NEW, 'More sounds'),
+    new Changelog(changelogType.CHANGE, 'Pokérus can now spread between Pokémon sharing a type'),
     new Changelog(changelogType.CHANGE, 'Updated current location to use player sprite'),
     new Changelog(changelogType.CHANGE, 'Updated default quest location color'),
     new Changelog(changelogType.CHANGE, 'More notification options'),
