@@ -807,7 +807,7 @@ class Update implements Saveable {
             saveData.party.caughtPokemon.forEach(p => {
                 // If has pokerus, set to "contagious"
                 let status = (p[8]) ? 2 : 0;
-                // Get effort points (0 if not infected)
+                // Get effort points (0 if not infected), Multiply by 100 for finer control
                 const effortPoints = status ? saveData.statistics.effortPoints?.[p.id] * 100 || 0 : 0;
                 // Set to cured if reached required amount of EVs
                 const requiredForCured = saveData.challenges.list.slowEVs ? 500000 : 50000;
