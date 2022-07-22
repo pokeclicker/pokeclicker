@@ -768,7 +768,7 @@ export enum EggItemType {
 }
 
 export enum BulletinBoards {
-    All,
+    All = -1,
     Kalos,
 }
 

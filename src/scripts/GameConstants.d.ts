@@ -378,7 +378,7 @@ namespace GameConstants {
         'Mystery_egg'
     }
     export enum BulletinBoards {
-        All,
+        All = -1,
         Kalos,
     }
     declare const EnergyRestoreEffect: {
