@@ -897,12 +897,35 @@ Routes.add(new RegionRoute(
     [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 202)]
 ));
 Routes.add(new RegionRoute(
-    'Sinnoh Route 205', GameConstants.Region.sinnoh, 205,
+    'Sinnoh Route 205 South', GameConstants.Region.sinnoh, 205,
     new RoutePokemon({
-        land: ['Hoothoot', 'Wurmple', 'Silcoon', 'Beautifly', 'Cascoon', 'Dustox', 'Bidoof', 'Kricketot', 'Budew', 'Buizel', 'Shellos (west)'],
-        water: ['Psyduck', 'Golduck', 'Tentacool', 'Tentacruel', 'Shellder', 'Magikarp', 'Gyarados', 'Shellos (west)', 'Gastrodon (west)', 'Finneon', 'Lumineon', 'Barboach', 'Whiscash'],
+        land: ['Bidoof', 'Buizel', 'Shellos (west)'],
+        water: ['Tentacool', 'Tentacruel', 'Shellder', 'Magikarp', 'Gyarados', 'Shellos (west)', 'Gastrodon (west)', 'Finneon', 'Lumineon'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Valley Windworks'))]
+));
+Routes.add(new RegionRoute(
+    'Sinnoh Route 205 North', GameConstants.Region.sinnoh, 231,
+    new RoutePokemon({
+        land: ['Hoothoot', 'Wurmple', 'Silcoon', 'Beautifly', 'Cascoon', 'Dustox', 'Bidoof', 'Kricketot', 'Budew', 'Buizel', 'Shellos (west)'],
+        water: ['Psyduck', 'Golduck', 'Magikarp', 'Gyarados', 'Barboach', 'Whiscash'],
+    }),
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Eterna Forest'))],
+    205.1,
+    GameConstants.SinnohSubRegions.Sinnoh,
+    true,
+    1073616
+));
+Routes.add(new RegionRoute(
+    'Sinnoh Route 211 West', GameConstants.Region.sinnoh, 232,
+    new RoutePokemon({
+        land: ['Zubat', 'Machop', 'Hoothoot', 'Meditite', 'Bidoof', 'Chingling', 'Bronzor'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 231)],
+    205.2,
+    GameConstants.SinnohSubRegions.Sinnoh,
+    true,
+    1084013
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 206', GameConstants.Region.sinnoh, 206,
@@ -935,10 +958,9 @@ Routes.add(new RegionRoute(
     [new GymBadgeRequirement(BadgeEnums.Relic)]
 ));
 Routes.add(new RegionRoute(
-    'Sinnoh Route 210', GameConstants.Region.sinnoh, 210,
+    'Sinnoh Route 210 South', GameConstants.Region.sinnoh, 210,
     new RoutePokemon({
-        land: ['Psyduck', 'Machop', 'Machoke', 'Geodude', 'Ponyta', 'Chansey', 'Scyther', 'Hoothoot', 'Noctowl', 'Roselia', 'Meditite', 'Swablu', 'Bibarel', 'Staravia'],
-        water: ['Psyduck', 'Golduck', 'Magikarp', 'Gyarados', 'Barboach', 'Whiscash'],
+        land: ['Geodude', 'Ponyta', 'Chansey', 'Scyther', 'Hoothoot', 'Noctowl', 'Roselia', 'Staravia'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 209)]
 ));
@@ -978,12 +1000,24 @@ Routes.add(new RegionRoute(
     210.4
 ));
 Routes.add(new RegionRoute(
-    'Sinnoh Route 211', GameConstants.Region.sinnoh, 211,
+    'Sinnoh Route 10 North', GameConstants.Region.sinnoh, 233,
     new RoutePokemon({
-        land: ['Zubat', 'Machop', 'Machoke', 'Graveler', 'Hoothoot', 'Noctowl', 'Meditite', 'Bidoof', 'Chingling', 'Bronzor'],
+        land: ['Psyduck', 'Machop', 'Machoke', 'Scyther', 'Hoothoot', 'Noctowl', 'Meditite', 'Swablu', 'Bibarel'],
+        water: ['Psyduck', 'Golduck', 'Magikarp', 'Gyarados', 'Barboach', 'Whiscash'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Fen)],
-    210.5
+    210.5,
+    GameConstants.SinnohSubRegions.Sinnoh,
+    true,
+    1382025
+));
+Routes.add(new RegionRoute(
+    'Sinnoh Route 211 East', GameConstants.Region.sinnoh, 211,
+    new RoutePokemon({
+        land: ['Zubat', 'Machoke', 'Graveler', 'Noctowl', 'Meditite', 'Chingling', 'Bronzor'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 233)],
+    210.6
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 218', GameConstants.Region.sinnoh, 218,
@@ -992,7 +1026,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Shellos (west)', 'Gastrodon (west)', 'Finneon', 'Lumineon'],
     }),
     [new TemporaryBattleRequirement('Galactic Boss Cyrus')],
-    210.6
+    210.7
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 216', GameConstants.Region.sinnoh, 216,

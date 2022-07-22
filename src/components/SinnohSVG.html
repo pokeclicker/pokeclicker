@@ -50,8 +50,7 @@
         })
     %>
 
-    
-    <!--Route 205 Extension-->
+    <!--Route 205 South-->
     <%- include('templates/mapRoute',
         { route: 205, region: 3
         , height: 3, width: 17
@@ -60,11 +59,19 @@
         })
     %>
 
-    <!--Route 205-->
+    <!--Route 205 North-->
     <%- include('templates/mapRoute',
-        { route: 205, region: 3
+        { route: 231, region: 3
         , height: 3, width: 9
         , x: 51, y: 47, name: "205 North"
+        })
+    %>
+
+    <!--Route 211 West-->
+    <%- include('templates/mapRoute',
+        { route: 232, region: 3
+        , height: 3, width: 10
+        , x: 70, y: 47, name: "211 West"
         })
     %>
 
@@ -110,7 +117,6 @@
         , rotate: true
         })
     %>
-
     <!--Route 209 extension-->
     <%- include('templates/mapRoute',
         { route: 209, region: 3
@@ -120,7 +126,7 @@
         })
     %>
 
-    <!--Route 210-->
+    <!--Route 210 South-->
     <%- include('templates/mapRoute',
         { route: 210, region: 3
         , height: 3, width: 14
@@ -129,61 +135,11 @@
         })
     %>
 
-    <!--Route 210 extension-->
+    <!--Route 215-->
     <%- include('templates/mapRoute',
-        { route: 210, region: 3
-        , height: 3, width: 16
-        , x: 102, y: 47, name: "210 North"
-        })
-    %>
-
-    <!--Route 211-->
-    <%- include('templates/mapRoute',
-        { route: 211, region: 3
-        , height: 3, width: 10
-        , x: 70, y: 47, name: "211 West"
-        })
-    %>
-
-    <!--Route 211 extension-->
-    <%- include('templates/mapRoute',
-        { route: 211, region: 3
-        , height: 3, width: 9
-        , x: 85, y: 47, name: "211 East"
-        })
-    %>
-
-    <!--Route 212-->
-    <%- include('templates/mapRoute',
-        { route: 212, region: 3
-        , height: 3, width: 16
-        , x: 101, y: 102
-        })
-    %>
-
-    <!--Route 212 extra-->
-    <%- include('templates/mapRoute',
-        { route: 212, region: 3
-        , height: 22, width: 3
-        , x: 101, y: 80
-        , noText: true
-        })
-    %>
-
-    <!--Route 213-->
-    <%- include('templates/mapRoute',
-        { route: 213, region: 3
-        , height: 3, width: 21
-        , x: 128, y: 93
-        })
-    %>
-
-    <!--Route 213-->
-    <%- include('templates/mapRoute',
-        { route: 213, region: 3
-        , height: 1, width: 3
-        , x: 146, y: 92
-        , noText: true
+        { route: 215, region: 3
+        , height: 3, width: 22
+        , x: 118, y: 58
         })
     %>
 
@@ -196,11 +152,51 @@
         })
     %>
 
-    <!--Route 215-->
+    <!--Route 213-->
     <%- include('templates/mapRoute',
-        { route: 215, region: 3
-        , height: 3, width: 22
-        , x: 118, y: 58
+        { route: 213, region: 3
+        , height: 3, width: 21
+        , x: 128, y: 93
+        })
+    %>
+    <!--Route 213 extension-->
+    <%- include('templates/mapRoute',
+        { route: 213, region: 3
+        , height: 1, width: 3
+        , x: 146, y: 92
+        , noText: true
+        })
+    %>
+
+    <!--Route 212-->
+    <%- include('templates/mapRoute',
+        { route: 212, region: 3
+        , height: 3, width: 16
+        , x: 101, y: 102
+        })
+    %>
+    <!--Route 212 extension-->
+    <%- include('templates/mapRoute',
+        { route: 212, region: 3
+        , height: 22, width: 3
+        , x: 101, y: 80
+        , noText: true
+        })
+    %>
+
+    <!--Route 210 North-->
+    <%- include('templates/mapRoute',
+        { route: 233, region: 3
+        , height: 3, width: 16
+        , x: 102, y: 47, name: "210 North"
+        })
+    %>
+
+    <!--Route 211 East-->
+    <%- include('templates/mapRoute',
+        { route: 211, region: 3
+        , height: 3, width: 9
+        , x: 85, y: 47, name: "211 East"
         })
     %>
 
