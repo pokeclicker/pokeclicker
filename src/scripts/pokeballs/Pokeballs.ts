@@ -205,7 +205,7 @@ class Pokeballs implements Feature {
         GameHelper.incrementObservable(this.pokeballs[ball].quantity, amount);
         GameHelper.incrementObservable(App.game.statistics.pokeballsObtained[ball],amount);
         if (purchase === true) {
-            GameHelper.incrementObservable(App.game.statistics.pokeballsBought[ball],amount);
+            GameHelper.incrementObservable(App.game.statistics.pokeballsPurchased[ball],amount);
         }
     }
 
