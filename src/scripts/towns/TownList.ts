@@ -184,7 +184,7 @@ const ViridianCityOldMan3 = new NPC('Old Man', [
 ],
 { requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 5) });
 const PewterBattleItemRival = new NPC('Battle Item Master', [
-    'Hey kid, you look new! Let me offer some advice: Battle Items like xAttack can be acquired along Routes, inside Dungeons and in Shops!',
+    'Hey kid, you look new! Let me offer some advice: Battle Items like X Attack can be acquired along Routes, inside Dungeons and in Shops!',
     'Use them to help you out whenever you feel like time is against you!',
 ]);
 
@@ -1574,8 +1574,7 @@ const SnowpointYoungGirl = new NPC('Young Girl', [
 const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
     'Oh! I don’t get visitors often. My husband is a sailor who visits far away lands… he always tells me these fantastic things.',
     'One time he came back and his Wailmer looked funny. We took it to the Pokécenter and they said it had caught some weird virus called Pokérus!',
-    'They said that it is a virus that can spread in the Pokémon Day Care. However, not every Pokémon that is infected can spread it...',
-    'You need some kind of "special bond" or something with the infected Pokémon for it to spread the virus. His Wailmer was his Starter Pokémon, so maybe that was it? They also said that Pokémon can only spread the virus if they aren’t ready to hatch.',
+    'They said that it is a virus that can spread in the Pokémon Day Care. They said that Pokémon can only spread or catch the virus if they aren’t ready to hatch yet, and that they need to share a type with one another.',
     'If you have a Pokémon with Pokérus, try catching more of that type of Pokémon. When he got back from his next trip, oddly enough Wailmer seemed stronger than ever!',
 ]);
 
@@ -2886,6 +2885,10 @@ const PaniolaTownShop = new Shop([
     ItemList.Fire_egg,
     ItemList.Water_egg,
 ]);
+const RoadsideMotelShop = new Shop([
+    ItemList.Beastball,
+], undefined, [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1),
+]);
 const KonikoniCityShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -3009,6 +3012,62 @@ const ProfKukui = new ProfNPC('Prof. Kukui',
     'TODO',
     'TODO');
 
+const RoadsideMotelLooker1 = new NPC('Looker', [
+    'I\'m very grateful that you accepted my invitation. My name is Looker. This here is my boss, Chief Anabel, head of the UB Taskforce.',
+    'Ever since the incident at Aether Paradise, where you encountered UB-01 Symbiont, also known as Nihilego, we have heard reports of other Symbiont appearing in Alola. And other types of UBs too.',
+    'They came here from a different world. Dropped rudely into our world against their will. We know nothing about them. They could be dangerous. They are almost certainly extremely wary and combative.',
+    'We must find a way to calm their nerves. To make them feel at home in our world. Or we must destroy them. Either way, we must understand them. We must catch them.',
+    'That is where you come in. The Champion of Alola. We do not have the battle power, but hopefully you do. Please allow Anabel to test your battle ability to ensure that you can handle this job.',
+], { requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1, GameConstants.AchievementOption.less )});
+const RoadsideMotelAnabel1 = new NPC('Anabel', [
+    'The testing is complete. I see no problem at all with your skills. Rather I would have to praise you for them. Welcome to the team!',
+    'There is no more time to waste. UB-01 Symbiont, Nihilego, has been spotted on Akala Island! I will protect the nearby population centers, you must go and confront the Beast!',
+    'Looker will stay here to coordinate reinforcements if needed. You can ask him about the special Beast Balls you will be using on this mission. I have given you a couple of them, but they are expensive so you will have to pitch in if you need more.',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 4, GameConstants.AchievementOption.less )])});
+const RoadsideMotelLooker2 = new NPC('Looker', [
+    'Catching lots of Ultra Beasts? Oh you want to know more about Beast Balls!',
+    'Beast Balls can only be used to catch Ultra Beasts. You can\'t even try use them against normal Pokémon, and any other Pokéball type won\'t work against Ultra Beasts.',
+    'If you\'re looking to most effectively hunt the Ultra Beasts down, try putting Beast Balls in your "Already Caught" selector. Beast Balls will never be thrown at Pokémon that aren\'t Ultra Beasts.',
+], { requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 2)});
+const RoadsideMotelAnabel2 = new NPC('Anabel', [
+    'Congratulations on a job well done. I\'ve had contact with our colleagues at HQ. They have agreed to let you keep the UBs you catch.',
+    'I\'m sure the UBs will truly flourish in the company of a competent trainer like yourself. It\'ll be much better for them than being locked up in some stuffy lab. Just be sure to let us know how they are doing.',
+    'Now, enough chit-chat. UB-02 Absorption and UB-02 Beauty, Buzzwole and Pheromosa, have been sighted on Melemele Island. You know what to do!',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 4, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 6, GameConstants.AchievementOption.less )])});
+const RoadsideMotelAnabel3 = new NPC('Anabel', [
+    'Congratulations once again. Looker told me he wants to take us to a great restaurant to celebrate. I don\'t know how he knows any restaurants around here, we\'ve only just arrived.',
+    'It doesn\'t matter though. There is no rest for us. Captain Mina is here with news, but she insist on battling you before she\'ll tell us anything.',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 6, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 8, GameConstants.AchievementOption.less )])});
+const RoadsideMotelMina = new NPC('Captain Mina', [
+    'Still in tip top shape I see. Good. That means you\'re strong enough to take out this monster I heard about on Akala Island.',
+    'According to your little list here its... uhm... this one! UB-03 Lighting. Xurkitree. These are some strange names you guys come up with.',
+    'Good luck out there!',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 8, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 10, GameConstants.AchievementOption.less )])});
+const RoadsideMotelNanu1 = new NPC('Kahuna Nanu', [
+    '...',
+    'I let myself in. Hope you don\'t mind.',
+    'I\'m here to tell you about sightings of monsters on Ula\'ula Island. I missed some big Kahuna meeting we were all supposed to go to, so I got stuck as the messenger.',
+    'It\'s not like I\'ve seen them or anything. Your friend Looker knew them from the description though. UB-04 Blade and UB-04 Blaster he called them. Kartana and Celesteela.',
+    '...',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 10, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 12, GameConstants.AchievementOption.less )])});
+const RoadsideMotelNanu2 = new NPC('Kahuna Nanu', [
+    '...',
+    'Good job on rounding up those creatures kid.',
+    'Now, how about one more battle? I insist.',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 12, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 14, GameConstants.AchievementOption.less )])});
+const RoadsideMotelAnabel4 = new NPC('Anabel', [
+    'This is tiring work, but I have a feeling that we\'re almost done.',
+    'Looker\'s informants told us about monster sightings on Poni Island. It seems UB Assembly and UB Burst, Stakataka and Blacephalon, have taken up residence.',
+    'Please be careful.',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 14, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 16, GameConstants.AchievementOption.less )])});
+const RoadsideMotelAnabel5 = new NPC('Anabel', [
+    'And so here we are. At the end. And back at the beginning.',
+    'Our final target is UB-05 Glutton. Guzzlord. It is very dangerous. You must not underestimate this beast.',
+    'Ten years ago a very similar incident occured. Looker and his team were assigned to fight Guzzlord. Nanu was there too. They lost. Looker lost a collegue that day.',
+    'After the battle they found something. A strange young girl, alone in the wilderness of Poni Island. They found me. It seems I came from another world as well. Not their world though. These creatures are strange to me too.',
+    'I have made myself at home here. I hope Glutton can do the same. Please catch this Guzzlord. End this once and for all.',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 16, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 18, GameConstants.AchievementOption.less )])});
+
 //Alola Towns
 
 TownList['Iki Town Outskirts'] = new Town(
@@ -3054,14 +3113,13 @@ TownList['Melemele Woods'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 2)],
     }
 );
-//TODO: Change requirement when UB questline is merged.
 TownList['Roadside Motel'] = new Town(
     'Roadside Motel',
     GameConstants.Region.alola,
-    [],
+    [TemporaryBattleList.Anabel, TemporaryBattleList['Captain Mina UB'], TemporaryBattleList['Kahuna Nanu UB'], RoadsideMotelShop],
     {
-        // requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
-        requirements: [new NullRequirement()],
+        requirements: [new QuestLineStartedRequirement('Ultra Beast Hunt')],
+        npcs: [RoadsideMotelLooker1, RoadsideMotelAnabel1, RoadsideMotelLooker2, RoadsideMotelAnabel2, RoadsideMotelAnabel3, RoadsideMotelMina, RoadsideMotelNanu1, RoadsideMotelNanu2, RoadsideMotelAnabel4, RoadsideMotelAnabel5],
     }
 );
 TownList['Heahea City'] = new Town(
@@ -3322,16 +3380,15 @@ TownList['Poni Meadow'] = new DungeonTown(
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 28)]
 );
-//TODO: Change requirement when UB questline is merged.
 TownList['Resolution Cave'] = new DungeonTown(
     'Resolution Cave',
     GameConstants.Region.alola,
-    //[new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Poni Meadow'))]
-    [new NullRequirement()]
+    [
+        new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 17),
+    ]
 );
+
 //Galar Shops
-
-
 const PostwickShop = new Shop([
     ItemList.Pokeball,
 ]);

@@ -1195,7 +1195,7 @@ GymList['Champion Diantha'] = new Champion(
     undefined,
     undefined,
     () => {
-        App.game.quests.getQuestLine('The new kid').beginQuest();
+        App.game.quests.getQuestLine('The New Kid').beginQuest();
     }
 );
 
@@ -1495,9 +1495,11 @@ GymList['Champion Hau'] = new Champion(
     [
         new GymPokemon('Leafeon', 89636471, 58),
         new GymPokemon('Incineroar', 96725389, 60),
-    ]
+    ],
+    () => {
+        App.game.quests.getQuestLine('Ultra Beast Hunt').beginQuest();
+    }
 );
-
 
 //Galar Leaders
 //TODO Addition of G-Max forms?

@@ -46,7 +46,7 @@ export default class KeyItems implements Feature {
                 () => App.game.party.caughtPokemon.length >= 110, undefined, undefined, 'Holo Caster'),
             new KeyItem(KeyItemType.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémon Attack. Some baby Pokémon can only be found through breeding, too!',
                 () => App.game.statistics.routeKills[Region.kanto][5]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Mystery Egg'),
-            new KeyItem(KeyItemType.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City.'),
+            new KeyItem(KeyItemType.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City.', undefined, undefined, undefined, 'Safari Ticket'),
             new KeyItem(KeyItemType.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.',
                 () => MapHelper.accessToRoute(14, Region.kanto), undefined, undefined, 'Wailmer Pail'),
 
@@ -57,9 +57,9 @@ export default class KeyItems implements Feature {
             new KeyItem(KeyItemType.DNA_splicers, 'A splicer that fuses certain Pokémon.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Giant Chasm')]() > 0,
                 undefined, undefined, 'DNA Splicers'),
-            new KeyItem(KeyItemType.Pokerus_virus, 'A virus sample collected from the Hatchery',
+            new KeyItem(KeyItemType.Pokerus_virus, 'A virus sample collected from the Hatchery.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Distortion World')]() > 0,
-                undefined, () => { App.game.party.getPokemon(pokemonMap[(Starter[player.starter()])].id).pokerus = Pokerus.Contagious; }, 'Pokerus Virus'),
+                undefined, () => { App.game.party.getPokemon(pokemonMap[(Starter[player.starter()])].id).pokerus = Pokerus.Contagious; }, 'Pokérus Virus'),
         ];
     }
 

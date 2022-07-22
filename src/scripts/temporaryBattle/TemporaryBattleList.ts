@@ -37,6 +37,7 @@ TemporaryBattleList['Biker Goon 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Biker Goon',
+        imageName: 'Biker Goon',
     }
 );
 TemporaryBattleList['Biker Goon 2'] = new TemporaryBattle(
@@ -47,6 +48,7 @@ TemporaryBattleList['Biker Goon 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Biker Goon',
+        imageName: 'Biker Goon',
     }
 );
 TemporaryBattleList['Biker Goon 3'] = new TemporaryBattle(
@@ -57,6 +59,7 @@ TemporaryBattleList['Biker Goon 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Biker Goon',
+        imageName: 'Biker Goon',
     }
 );
 TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
@@ -82,7 +85,7 @@ TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
         new GymPokemon('Murkrow', 3665000, 36),
     ],
     'Impressive. Your prowess is notable.',
-    [new GymBadgeRequirement(BadgeEnums.Fen)]
+    [new QuestLineStepCompletedRequirement('A new world', 2)]
 );
 
 // Kalos Temporarybattles
@@ -113,11 +116,12 @@ TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
         new GymPokemon('Muk', 123998000, 62),
     ],
     'That was a fun battle!',
-    [new QuestLineStartedRequirement('The new kid')],
+    [new QuestLineStartedRequirement('The New Kid')],
     undefined,
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Pallet Town',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
@@ -130,12 +134,13 @@ TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
         new GymPokemon('Cyndaquil', 123998000, 62),
         new GymPokemon('Totodile', 123998000, 62),
     ],
-    'That was a nice rematch...',
-    [new QuestLineStepCompletedRequirement('The new kid', 0), new RouteKillRequirement(10, GameConstants.Region.johto, 48)],
+    'Don\'t I know you from somewhere?',
+    [new QuestLineStepCompletedRequirement('The New Kid', 0), new RouteKillRequirement(10, GameConstants.Region.johto, 48)],
     undefined,
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Cianwood City',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
@@ -148,12 +153,13 @@ TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
         new GymPokemon('Corphish', 123998000, 60),
         new GymPokemon('Glalie', 123998000, 62),
     ],
-    'Are you following me?',
-    [new QuestLineStepCompletedRequirement('The new kid', 1)],
+    'That was a nice rematch. You sure are a strong Pokémon trainer! I\'ll beat you next time!',
+    [new QuestLineStepCompletedRequirement('The New Kid', 1)],
     undefined,
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Lilycove City',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
@@ -166,12 +172,13 @@ TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
         new GymPokemon('Buizel', 123998000, 62),
         new GymPokemon('Gible', 123998000, 62),
     ],
-    'Please leave me alone.',
-    [new QuestLineStepCompletedRequirement('The new kid', 2), new RouteKillRequirement(10, GameConstants.Region.sinnoh, 226)],
+    'Wow, these battles are intense. It\'s getting hard to keep up with you... I think I need a break.',
+    [new QuestLineStepCompletedRequirement('The New Kid', 2), new RouteKillRequirement(10, GameConstants.Region.sinnoh, 226)],
     undefined,
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Survival Area',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
@@ -184,12 +191,13 @@ TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
         new GymPokemon('Oshawott', 123998000, 56),
         new GymPokemon('Krookodile', 123998000, 62),
     ],
-    'Stop it!',
-    [new QuestLineStepCompletedRequirement('The new kid', 3)],
+    'Hey, what gives? I was just trying to relax here!',
+    [new QuestLineStepCompletedRequirement('The New Kid', 3)],
     undefined,
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Mistralton City',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
@@ -202,12 +210,13 @@ TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
         new GymPokemon('Noivern', 123998000, 62),
         new GymPokemon('Ash Greninja', 123998000, 62),
     ],
-    'Will you leave me alone if I give you my Greninja? I was gonna release it anyway.',
-    [new QuestLineStepCompletedRequirement('The new kid', 4)],
+    'I forgive you for chasing me around. I\'m going to take some time off with a long vacation on a tropical island! Will you take care of my Greninja for me? He has a special Bond while in Battle with his trainer.',
+    [new QuestLineStepCompletedRequirement('The New Kid', 4)],
     undefined,
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Kiloude City',
+        imageName: 'Ash Ketchum',
     }
 );
 
@@ -303,6 +312,52 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
     '...',
     [new TemporaryBattleRequirement('Captain Sophocles')]
 );
+TemporaryBattleList.Anabel = new TemporaryBattle(
+    'Anabel',
+    [
+        new GymPokemon('Alakazam', 229464883, 61),
+        new GymPokemon('Weavile', 229464883, 61),
+        new GymPokemon('Mismagius', 229464883, 61),
+        new GymPokemon('Salamence', 229464883, 61),
+        new GymPokemon('Snorlax', 234464883, 61),
+    ],
+    'Oh you\'re good! You might just have a shot, here are some Beast Balls. Go hunt down those strange Ultra Beasts! If you need more Beast Balls, you can buy them here.',
+    [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 0)]
+);
+TemporaryBattleList['Captain Mina UB'] = new TemporaryBattle(
+    'Captain Mina UB',
+    [
+        new GymPokemon('Klefki', 239464883, 61),
+        new GymPokemon('Granbull', 239464883, 61),
+        new GymPokemon('Shiinotic', 239464883, 61),
+        new GymPokemon('Wigglytuff', 239464883, 61),
+        new GymPokemon('Ribombee', 244464883, 61),
+    ],
+    'Your strength is still shocking!',
+    [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 7)],
+    undefined,
+    {
+        displayName: 'Captain Mina',
+        imageName: 'Captain Mina',
+    }
+);
+TemporaryBattleList['Kahuna Nanu UB'] = new TemporaryBattle(
+    'Kahuna Nanu UB',
+    [
+        new GymPokemon('Sableye', 249464883, 63),
+        new GymPokemon('Krookodile', 249464883, 63),
+        new GymPokemon('Honchkrow', 249464883, 63),
+        new GymPokemon('Absol', 249464883, 63),
+        new GymPokemon('Alolan Persian', 254464883, 63),
+    ],
+    'I had to be sure. Sure that you\'re ready for what\'s coming...',
+    [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 13)],
+    undefined,
+    {
+        displayName: 'Kahuna Nanu',
+        imageName: 'Kahuna Nanu',
+    }
+);
 TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
     'Ash Ketchum Alola',
     [
@@ -313,12 +368,13 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
         new GymPokemon('Naganadel', 182908638, 62),
         new GymPokemon('Melmetal', 182908638, 62),
     ],
-    'Fine. I quit. Take my Pikachu.',
-    [new QuestLineCompletedRequirement('The new kid'), new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
+    'Thanks for battling with me again! I\'ve reignited my passion to battle after a nice, long break! I have no idea where I keep getting all these hats, but I have too many. Here, take this one for your Pikachu. It can help you grow together as partners!',
+    [new QuestLineCompletedRequirement('The New Kid'), new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
     undefined,
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Seafolk Village',
+        imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
             App.game.party.gainPokemonById(25.07);
         },
