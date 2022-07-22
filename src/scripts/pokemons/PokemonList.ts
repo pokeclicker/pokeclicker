@@ -86,7 +86,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Bulbasaur (clone)', 'Ivysaur (clone)', 16)],
+        'evolutions': [new LevelEvolution('Bulbasaur (Clone)', 'Ivysaur (Clone)', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -159,7 +159,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Ivysaur (clone)', 'Venusaur (clone)', 32)],
+        'evolutions': [new LevelEvolution('Ivysaur (Clone)', 'Venusaur (Clone)', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -249,7 +249,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Charmander (clone)', 'Charmeleon (clone)', 16)],
+        'evolutions': [new LevelEvolution('Charmander (Clone)', 'Charmeleon (Clone)', 16)],
         'base': {
             'hitpoints': 39,
             'attack': 52,
@@ -286,7 +286,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Charmeleon (clone)', 'Charizard (clone)', 36)],
+        'evolutions': [new LevelEvolution('Charmeleon (Clone)', 'Charizard (Clone)', 36)],
         'base': {
             'hitpoints': 58,
             'attack': 64,
@@ -376,7 +376,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Squirtle (clone)', 'Wartortle (clone)', 16)],
+        'evolutions': [new LevelEvolution('Squirtle (Clone)', 'Wartortle (Clone)', 16)],
         'base': {
             'hitpoints': 44,
             'attack': 48,
@@ -413,7 +413,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Wartortle (clone)', 'Blastoise (clone)', 36)],
+        'evolutions': [new LevelEvolution('Wartortle (Clone)', 'Blastoise (Clone)', 36)],
         'base': {
             'hitpoints': 59,
             'attack': 63,
@@ -8165,7 +8165,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 351.1,
-        'name': 'Castform (sunny)',
+        'name': 'Castform (Sunny)',
         'type': [PokemonType.Fire],
         'eggCycles': 25,
         'levelType': LevelType.mediumfast,
@@ -8182,7 +8182,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 351.2,
-        'name': 'Castform (rainy)',
+        'name': 'Castform (Rainy)',
         'type': [PokemonType.Water],
         'eggCycles': 25,
         'levelType': LevelType.mediumfast,
@@ -8199,7 +8199,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 351.3,
-        'name': 'Castform (snowy)',
+        'name': 'Castform (Snowy)',
         'type': [PokemonType.Ice],
         'eggCycles': 25,
         'levelType': LevelType.mediumfast,
