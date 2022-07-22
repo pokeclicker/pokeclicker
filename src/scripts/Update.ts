@@ -887,6 +887,35 @@ class Update implements Saveable {
             // Give the players Linking Cords in place of Trade Stones
             playerData._itemList.Linking_cord = playerData._itemList.Trade_stone || 0;
             delete playerData._itemList.Trade_stone;
+        },
+
+        '0.9.9': ({ playerData, saveData }) => {
+            // Fix pokemon having Pokérus early (key item not unlocked)
+            if (!saveData.keyItems.Pokerus_virus) {
+                saveData.party.caughtPokemon.forEach(p => {
+                    // Pokérus State
+                    p[8] = 0;
+                    // Effort Points
+                    p[9] = 0;
+                });
+            }
+
+            // If Pokémon doesn't have Pokérus yet, it shouldn't have Effort Points
+            saveData.party.caughtPokemon.forEach(p => {
+                // Check Pokérus state
+                if (p[8] == 0) {
+                    // Reset Effort Points
+                    p[9] = 0;
+                }
+            });
+        },
+
+        '0.9.10': ({ playerData, saveData }) => {
+            // Rename statistic
+            saveData.statistics.pokeballsPurchased = saveData.statistics.pokeballsBought;
+
+            // Update total proteins obtained to be equal to the total purchased (or whichever is higher)
+            saveData.statistics.totalProteinsObtained = Math.max(saveData.statistics.totalProteinsPurchased, saveData.statistics.totalProteinsObtained);
 
             // Filter already earned milestones due to item/Pokémon name updates
             const milestones = [
@@ -979,35 +1008,6 @@ class Update implements Saveable {
             renamePokemon(saveData, 'Minior (Red-core)', 'Minior (Red Core)');
             renamePokemon(saveData, 'Minior (Violet-core)', 'Minior (Violet Core)');
             renamePokemon(saveData, 'Minior (Yellow-core)', 'Minior (Yellow Core)');
-        },
-
-        '0.9.9': ({ playerData, saveData }) => {
-            // Fix pokemon having Pokérus early (key item not unlocked)
-            if (!saveData.keyItems.Pokerus_virus) {
-                saveData.party.caughtPokemon.forEach(p => {
-                    // Pokérus State
-                    p[8] = 0;
-                    // Effort Points
-                    p[9] = 0;
-                });
-            }
-
-            // If Pokémon doesn't have Pokérus yet, it shouldn't have Effort Points
-            saveData.party.caughtPokemon.forEach(p => {
-                // Check Pokérus state
-                if (p[8] == 0) {
-                    // Reset Effort Points
-                    p[9] = 0;
-                }
-            });
-        },
-
-        '0.9.10': ({ playerData, saveData }) => {
-            // Rename statistic
-            saveData.statistics.pokeballsPurchased = saveData.statistics.pokeballsBought;
-
-            // Update total proteins obtained to be equal to the total purchased (or whichever is higher)
-            saveData.statistics.totalProteinsObtained = Math.max(saveData.statistics.totalProteinsPurchased, saveData.statistics.totalProteinsObtained);
         },
     };
 
