@@ -17634,7 +17634,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 774.01,
-        'name': 'Minior (Blue-Core)',
+        'name': 'Minior (Blue Core)',
         'type': [PokemonType.Rock, PokemonType.Flying],
         'eggCycles': 25,
         'levelType': LevelType.mediumslow,
@@ -17651,7 +17651,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 774.02,
-        'name': 'Minior (Green-Core)',
+        'name': 'Minior (Green Core)',
         'type': [PokemonType.Rock, PokemonType.Flying],
         'eggCycles': 25,
         'levelType': LevelType.mediumslow,
@@ -17668,7 +17668,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 774.03,
-        'name': 'Minior (Indigo-Core)',
+        'name': 'Minior (Indigo Core)',
         'type': [PokemonType.Rock, PokemonType.Flying],
         'eggCycles': 25,
         'levelType': LevelType.mediumslow,
@@ -17685,7 +17685,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 774.04,
-        'name': 'Minior (Orange-Core)',
+        'name': 'Minior (Orange Core)',
         'type': [PokemonType.Rock, PokemonType.Flying],
         'eggCycles': 25,
         'levelType': LevelType.mediumslow,
@@ -17702,7 +17702,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 774.05,
-        'name': 'Minior (Red-Core)',
+        'name': 'Minior (Red Core)',
         'type': [PokemonType.Rock, PokemonType.Flying],
         'eggCycles': 25,
         'levelType': LevelType.mediumslow,
@@ -17719,7 +17719,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 774.06,
-        'name': 'Minior (Violet-Core)',
+        'name': 'Minior (Violet Core)',
         'type': [PokemonType.Rock, PokemonType.Flying],
         'eggCycles': 25,
         'levelType': LevelType.mediumslow,
@@ -17736,7 +17736,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 774.07,
-        'name': 'Minior (Yellow-Core)',
+        'name': 'Minior (Yellow Core)',
         'type': [PokemonType.Rock, PokemonType.Flying],
         'eggCycles': 25,
         'levelType': LevelType.mediumslow,
