@@ -1483,7 +1483,7 @@ const FightAreaShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
-    //ItemList.Macho_Brace,
+    ItemList.Macho_Brace,
 ]);
 const SurvivalAreaShop = new Shop([
     ItemList.Pokeball,
