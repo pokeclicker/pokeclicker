@@ -913,6 +913,9 @@ class Update implements Saveable {
         '0.9.10': ({ playerData, saveData }) => {
             // Rename statistic
             saveData.statistics.pokeballsPurchased = saveData.statistics.pokeballsBought;
+
+            // Update total proteins obtained to be equal to the total purchased (or whichever is higher)
+            saveData.statistics.totalProteinsObtained = Math.max(saveData.statistics.totalProteinsPurchased, saveData.statistics.totalProteinsObtained);
         },
     };
 
