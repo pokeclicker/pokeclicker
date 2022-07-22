@@ -643,7 +643,7 @@ GymList['Eterna City'] = new Gym(
     'Eterna City',
     [
         new GymPokemon('Turtwig', 1433000, 20),
-        new GymPokemon('Cherrim (overcast)', 1437500, 20),
+        new GymPokemon('Cherrim (Overcast)', 1437500, 20),
         new GymPokemon('Roserade', 1439000, 22),
     ],
     BadgeEnums.Forest,
@@ -1252,7 +1252,7 @@ GymList['Exeggutor Island'] = new Gym(
     'Exeggutor Island',
     [
         new GymPokemon('Golurk', 76658268, 53),
-        new GymPokemon('Gastrodon (east)', 76658268, 53),
+        new GymPokemon('Gastrodon (East)', 76658268, 53),
         new GymPokemon('Flygon', 76658268, 53),
         new GymPokemon('Mudsdale', 77747374, 54),
     ],

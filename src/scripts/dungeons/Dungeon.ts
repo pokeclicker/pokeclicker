@@ -3094,7 +3094,7 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
                 new GymPokemon('Wurmple', 812000, 9),
                 new GymPokemon('Cascoon', 812000, 11),
                 new GymPokemon('Dustox', 812000, 13),
-                new GymPokemon('Burmy (plant)', 812000, 12),
+                new GymPokemon('Burmy (Plant)', 812000, 12),
                 new GymPokemon('Kricketune', 812000, 12),
             ], { weight: 1 }, 'Philip & Donald'),
         new DungeonTrainer('Melded Minds',
@@ -3194,23 +3194,23 @@ dungeonList['Team Galactic Eterna Building'] = new Dungeon('Team Galactic Eterna
                 new GymPokemon('Zubat', 2150000, 21),
                 new GymPokemon('Skuntank', 2150000, 23),
             ], { weight: 1 }, 'Jupiter', '(jupiter)'),
-        new DungeonBossPokemon('Rotom (heat)', 4300000, 100, {requirement: new MultiRequirement([
+        new DungeonBossPokemon('Rotom (Heat)', 4300000, 100, {requirement: new MultiRequirement([
             new ObtainedPokemonRequirement(pokemonMap.Rotom),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
-        new DungeonBossPokemon('Rotom (wash)', 4300000, 100, {requirement: new MultiRequirement([
+        new DungeonBossPokemon('Rotom (Wash)', 4300000, 100, {requirement: new MultiRequirement([
             new ObtainedPokemonRequirement(pokemonMap.Rotom),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
-        new DungeonBossPokemon('Rotom (frost)', 4300000, 100, {requirement: new MultiRequirement([
+        new DungeonBossPokemon('Rotom (Frost)', 4300000, 100, {requirement: new MultiRequirement([
             new ObtainedPokemonRequirement(pokemonMap.Rotom),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
-        new DungeonBossPokemon('Rotom (fan)', 4300000, 100, {requirement: new MultiRequirement([
+        new DungeonBossPokemon('Rotom (Fan)', 4300000, 100, {requirement: new MultiRequirement([
             new ObtainedPokemonRequirement(pokemonMap.Rotom),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
-        new DungeonBossPokemon('Rotom (mow)', 4300000, 100, {requirement: new MultiRequirement([
+        new DungeonBossPokemon('Rotom (Mow)', 4300000, 100, {requirement: new MultiRequirement([
             new ObtainedPokemonRequirement(pokemonMap.Rotom),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
@@ -3233,7 +3233,7 @@ dungeonList['Wayward Cave'] = new Dungeon('Wayward Cave',
                 new GymPokemon('Buneary', 903000, 22),
                 new GymPokemon('Staravia', 903000, 17),
                 new GymPokemon('Ponyta', 903000, 20),
-                new GymPokemon('Shellos (west)', 903000, 20),
+                new GymPokemon('Shellos (West)', 903000, 20),
             ], { weight: 1 }, 'Cassidy & Wayne'),
         new DungeonTrainer('Nature Friends',
             [
@@ -3802,7 +3802,7 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
                 new GymPokemon('Gyarados', 1128000, 46),
                 new GymPokemon('Weavile', 1128000, 47),
             ], { weight: 1 }, 'Cyrus', '(cyrus)'),
-        new DungeonBossPokemon('Giratina (altered)', 11880000, 45, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)}),
+        new DungeonBossPokemon('Giratina (Altered)', 11880000, 45, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)}),
     ],
     86500, 217);
 
@@ -3986,7 +3986,7 @@ dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
     },
     2653000,
     [
-        new DungeonBossPokemon('Arceus (normal)', 13000000, 100),
+        new DungeonBossPokemon('Arceus (Normal)', 13000000, 100),
         new DungeonBossPokemon('Slaking', 10000000, 100),
         new DungeonBossPokemon('Snorlax', 10000000, 100),
         new DungeonBossPokemon('Shuckle', 10000000, 100),
@@ -4043,8 +4043,8 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
     [
         new DungeonBossPokemon('Parasect', 9900000, 50),
         new DungeonBossPokemon('Breloom', 11000000, 50),
-        new DungeonBossPokemon('Shaymin (land)', 11000000, 50),
-        new DungeonBossPokemon('Shaymin (sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement(pokemonMap['Shaymin (land)'])}),
+        new DungeonBossPokemon('Shaymin (Land)', 11000000, 50),
+        new DungeonBossPokemon('Shaymin (Sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement(pokemonMap['Shaymin (Land)'])}),
     ],
     96500, 230);
 
@@ -5694,7 +5694,7 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
             ], { weight: 1 }, 'Samantha', '(female)'),
         new DungeonTrainer('Preschooler',
             [
-                new GymPokemon('Burmy (plant)', 356500, 59),
+                new GymPokemon('Burmy (Plant)', 356500, 59),
                 new GymPokemon('Scyther', 356500, 59),
                 new GymPokemon('Paras', 356500, 59),
             ], { weight: 1 }, 'José', '(male)'),
@@ -5954,7 +5954,7 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
         new DungeonTrainer('Team Plasma',
             [
                 new GymPokemon('Magneton', 10000000, 72),
-                new GymPokemon('Rotom (wash)', 10000000, 72),
+                new GymPokemon('Rotom (Wash)', 10000000, 72),
                 new GymPokemon('Metagross', 10000000, 72),
                 new GymPokemon('Beheeyem', 10000000, 72),
                 new GymPokemon('Magnezone', 10000000, 72),
@@ -6289,7 +6289,7 @@ dungeonList['Sea Spirit\'s Den'] = new Dungeon('Sea Spirit\'s Den',
     [new DungeonBossPokemon('Lugia', 92375000, 100)],
     600000, 23);
 
-dungeonList['Pokéball Factory'] = new Dungeon('Pokéball Factory',
+dungeonList['Poké Ball Factory'] = new Dungeon('Poké Ball Factory',
     [
         new DungeonTrainer('Team Flare Grunt',
             [new GymPokemon('Toxicroak', 8173950, 37)], { weight: 1 }, undefined, '(male)'),
@@ -6392,11 +6392,11 @@ dungeonList['Lost Hotel'] = new Dungeon('Lost Hotel',
             {loot: 'Duskball'},
         ],
         legendary: [
-            {loot: 'Rotom (heat)'},
-            {loot: 'Rotom (wash)'},
-            {loot: 'Rotom (fan)'},
-            {loot: 'Rotom (frost)'},
-            {loot: 'Rotom (mow)'},
+            {loot: 'Rotom (Heat)'},
+            {loot: 'Rotom (Wash)'},
+            {loot: 'Rotom (Fan)'},
+            {loot: 'Rotom (Frost)'},
+            {loot: 'Rotom (Mow)'},
         ],
         mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Lost Hotel'))}],
     },
@@ -6984,7 +6984,7 @@ dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
         {pokemon: 'Cutiefly', options: { weight: 0.55 }},
         {pokemon: 'Buzzwole', options: { weight: 0.55, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 5)}},
         new DungeonTrainer('Actor',
-            [new GymPokemon('Oricorio (Pom-pom)', 11769270, 12)], { weight: 1 }, 'Meredith'),
+            [new GymPokemon('Oricorio (Pom-Pom)', 11769270, 12)], { weight: 1 }, 'Meredith'),
     ],
     {
         common: [
@@ -7003,7 +7003,7 @@ dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
     11769270,
     [
         new DungeonBossPokemon('Flabébé (Red)', 58846350, 12),
-        new DungeonBossPokemon('Oricorio (Pom-pom)', 58846350, 12),
+        new DungeonBossPokemon('Oricorio (Pom-Pom)', 58846350, 12),
     ],
     825000, 3);
 
@@ -7081,12 +7081,12 @@ dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
     },
     11952804,
     [
-        new DungeonBossPokemon('Pikachu (Original cap)', 59764020, 15),
-        new DungeonBossPokemon('Pikachu (Hoenn cap)', 59764020, 15),
-        new DungeonBossPokemon('Pikachu (Sinnoh cap)', 59764020, 15),
-        new DungeonBossPokemon('Pikachu (Unova cap)', 59764020, 15),
-        new DungeonBossPokemon('Pikachu (Kalos cap)', 59764020, 15),
-        new DungeonBossPokemon('Pikachu (Alola cap)', 59764020, 15),
+        new DungeonBossPokemon('Pikachu (Original Cap)', 59764020, 15),
+        new DungeonBossPokemon('Pikachu (Hoenn Cap)', 59764020, 15),
+        new DungeonBossPokemon('Pikachu (Sinnoh Cap)', 59764020, 15),
+        new DungeonBossPokemon('Pikachu (Unova Cap)', 59764020, 15),
+        new DungeonBossPokemon('Pikachu (Kalos Cap)', 59764020, 15),
+        new DungeonBossPokemon('Pikachu (Alola Cap)', 59764020, 15),
     ],
     850000, 4);
 
@@ -7691,7 +7691,7 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
     1080000, 17);
 
 dungeonList['Exeggutor Island Hill'] = new Dungeon('Exeggutor Island Hill',
-    ['Exeggcute', 'Pelipper', 'Gastrodon (east)'],
+    ['Exeggcute', 'Pelipper', 'Gastrodon (East)'],
     {
         common: [
             {loot: 'xClick'},
@@ -8193,7 +8193,7 @@ dungeonList['Galar Mine'] = new Dungeon('Galar Mine',
     96500, 201);
 
 dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
-    ['Shuckle', 'Shellos (east)', 'Croagunk', 'Scraggy', 'Binacle', 'Noibat', 'Chewtle'],
+    ['Shuckle', 'Shellos (East)', 'Croagunk', 'Scraggy', 'Binacle', 'Noibat', 'Chewtle'],
     {
         common: [
             {loot: 'xAttack'},
@@ -8203,7 +8203,7 @@ dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
     2203000,
     [
         new DungeonBossPokemon('Galarian Stunfisk', 8000000, 70),
-        new DungeonBossPokemon('Gastrodon (east)', 8000000, 70),
+        new DungeonBossPokemon('Gastrodon (East)', 8000000, 70),
         new DungeonBossPokemon('Drednaw', 8000000, 70),
     ],
     96500, 201);

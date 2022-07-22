@@ -1097,7 +1097,7 @@ TemporaryBattleList.AZ = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
     'Ash Ketchum Kanto',
     [
-        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Pikachu (Partner Cap)', 123998000, 58),
         new GymPokemon('Pidgeot', 123998000, 56),
         new GymPokemon('Bulbasaur', 123998000, 56),
         new GymPokemon('Charizard', 123998000, 60),
@@ -1116,7 +1116,7 @@ TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
     'Ash Ketchum Johto',
     [
-        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Pikachu (Partner Cap)', 123998000, 58),
         new GymPokemon('Heracross', 123998000, 56),
         new GymPokemon('Noctowl', 123998000, 56),
         new GymPokemon('Bayleef', 123998000, 60),
@@ -1135,7 +1135,7 @@ TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
     'Ash Ketchum Hoenn',
     [
-        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Pikachu (Partner Cap)', 123998000, 58),
         new GymPokemon('Swellow', 123998000, 56),
         new GymPokemon('Grovyle', 123998000, 56),
         new GymPokemon('Torkoal', 123998000, 62),
@@ -1154,7 +1154,7 @@ TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
     'Ash Ketchum Sinnoh',
     [
-        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Pikachu (Partner Cap)', 123998000, 58),
         new GymPokemon('Staraptor', 123998000, 56),
         new GymPokemon('Torterra', 123998000, 56),
         new GymPokemon('Infernape', 123998000, 60),
@@ -1173,7 +1173,7 @@ TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
     'Ash Ketchum Unova',
     [
-        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Pikachu (Partner Cap)', 123998000, 58),
         new GymPokemon('Unfezant', 123998000, 56),
         new GymPokemon('Snivy', 123998000, 62),
         new GymPokemon('Pignite', 123998000, 60),
@@ -1192,12 +1192,12 @@ TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
     'Ash Ketchum Kalos',
     [
-        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Pikachu (Partner Cap)', 123998000, 58),
         new GymPokemon('Talonflame', 123998000, 56),
         new GymPokemon('Hawlucha', 123998000, 56),
         new GymPokemon('Goodra', 123998000, 60),
         new GymPokemon('Noivern', 123998000, 62),
-        new GymPokemon('Ash Greninja', 123998000, 62),
+        new GymPokemon('Ash-Greninja', 123998000, 62),
     ],
     'I forgive you for chasing me around. I\'m going to take some time off with a long vacation on a tropical island! Will you take care of my Greninja for me? He has a special Bond while in Battle with his trainer.',
     [new QuestLineStepCompletedRequirement('The New Kid', 4)],
@@ -1593,7 +1593,7 @@ TemporaryBattleList['Kahuna Nanu UB'] = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
     'Ash Ketchum Alola',
     [
-        new GymPokemon('Pikachu (Partner cap)', 182908638, 58),
+        new GymPokemon('Pikachu (Partner Cap)', 182908638, 58),
         new GymPokemon('Rowlet', 182908638, 56),
         new GymPokemon('Incineroar', 182908638, 56),
         new GymPokemon('Lycanroc (Dusk)', 182908638, 60),
