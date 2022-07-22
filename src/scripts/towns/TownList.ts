@@ -2077,6 +2077,11 @@ const CasteliaMusician = new NPC('Musician', [
     'Sometimes a cool singing Pokémon shows up and joins in on our set. I’ve heard that trainers as strong as the Champion have found it roaming around the region looking for Pokémon battles… but even I wouldn’t challenge it to a Music battle.',
 ]);
 
+const RelicCastleRuinmaniac = new NPC('Ruin Maniac', [
+    'I\'ve heard tell of a secret room in this ruin. A room that supposedly contains a very rare Pokémon.',
+    'Apparently this secret room is only accessible via a secret entrance in Relic Passage. Relic Passage runs from Driftveil City all the way under the river to Relic Castle. It\'s very impressive. Once I\'m done investigating this part of the ruin I\'m definitely going to check it out!',
+]);
+
 const NimbasaExplorer = new NPC('Explorer', [
     'Whew! The desert is rough out there, glad you\'ve made it all the way to Nimbasa.',
     'Sometimes I find some weird stuff out in the sand, sometimes even Pokémon hiding in Chests. Like this one time in Relic Castle, I found a Pokémon that looks like a statue that I\'ve never seen before!',
@@ -2086,7 +2091,7 @@ const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
     'Legends say Kyurem is missing a part of itself. It is waiting for a hero to fill in the missing parts of its body with Truth or Ideals.',
     'The legendary dragons of Dragonspiral Tower are said to embody these very concepts. They sometimes leave a piece of their DNA behind after a battle.',
     'If you have DNA splicers, perhaps you can make Kyurem whole again.',
-    'I\'ve never seen it, but supposedly it works just like any evolution stone.',
+    'I\'ve never seen it, but supposedly it works just like any other evolution item.',
 ]);
 
 const P2LaboratoryColress = new NPC('Colress', [
@@ -2342,7 +2347,9 @@ TownList['Relic Passage'] = new DungeonTown(
 TownList['Relic Castle'] = new DungeonTown(
     'Relic Castle',
     GameConstants.Region.unova,
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 25)]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 25)],
+    [],
+    [RelicCastleRuinmaniac]
 );
 TownList['Lostlorn Forest'] = new DungeonTown(
     'Lostlorn Forest',
@@ -2960,10 +2967,9 @@ const IkiOutskirtsMom = new NPC('Scratch Cat Girl', [
 ]);
 const KukuisLabProfessor = new NPC('Professor Kukui', [
     'Are you looking for some rare Pokémon? Maybe I can help with that. Ask away!',
-    'Ultra Beast? Never heard of it. I have no idea what that is. As far as I know they simply do not exist.',
-    'Meltan? What\'s a Meltan? Nope, don\'t know about that one either.',
-    'You seem very sure about this. Look, if you\'re so certain that these things you are talking about are real, I\'m sure they will show up sooner or later. If you\'re patient...',
-    'You got me all excited. We\'ll WAIT FOR these new rare Pokémon together. Hold on, let me just UPDATE my calendar. Just to be sure I\'m free to investigate these new Pokémon that only you know about when they show up. I wouldn\'t miss this for the world.',
+    'Meltan? What\'s a Meltan? Nope, don\'t know about that one.',
+    'You seem very sure about this. Look, if you\'re so certain that this thing you are talking about is real, I\'m sure it will show up sooner or later. If you\'re patient...',
+    'You got me all excited. We\'ll WAIT FOR this new rare Pokémon together. Hold on, let me just UPDATE my calendar. Just to be sure I\'m free to investigate this new Pokémon that only you know about when it shows up. I wouldn\'t miss this for the world.',
 ]);
 const IkiKahuna = new NPC('Kahuna Hala', [
     'Welcome to Alola!',
