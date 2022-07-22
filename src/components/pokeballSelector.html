@@ -31,7 +31,7 @@
             </thead>
         </table>
     </div>
-<!-- TODO FIX THIS -->
+
     <script type="text/html" id="selectedPokeballDisplayTemplate">
         <img class="pokeball-small clickable pokeball-selected"
             data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.value] + '.svg'}, tooltip: {title: $data.value === -1 ? 'None' : ItemList[GameConstants.Pokeball[$data.value]].displayName, trigger: 'hover', animation: false, placement: 'right'}, click: function() {App.game.pokeballs.selectedSelection($data.field); App.game.pokeballs.selectedTitle($data.title); $('#pokeballSelectorModal').modal('show')}"/>
