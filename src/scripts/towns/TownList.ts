@@ -2077,6 +2077,11 @@ const CasteliaMusician = new NPC('Musician', [
     'Sometimes a cool singing Pokémon shows up and joins in on our set. I’ve heard that trainers as strong as the Champion have found it roaming around the region looking for Pokémon battles… but even I wouldn’t challenge it to a Music battle.',
 ]);
 
+const RelicCastleRuinmaniac = new NPC('Ruin Maniac', [
+    'I\'ve heard tell of a secret room in this ruin. A room that supposedly contains a very rare Pokémon.',
+    'Apparently this secret room is only accessible via a secret entrance in Relic Passage. Relic Passage runs from Driftveil City all the way under the river to Relic Castle. It\'s very impressive. Once I\'m done investigating this part of the ruin I\'m definitely going to check it out!',
+]);
+
 const NimbasaExplorer = new NPC('Explorer', [
     'Whew! The desert is rough out there, glad you\'ve made it all the way to Nimbasa.',
     'Sometimes I find some weird stuff out in the sand, sometimes even Pokémon hiding in Chests. Like this one time in Relic Castle, I found a Pokémon that looks like a statue that I\'ve never seen before!',
@@ -2343,7 +2348,9 @@ TownList['Relic Passage'] = new DungeonTown(
 TownList['Relic Castle'] = new DungeonTown(
     'Relic Castle',
     GameConstants.Region.unova,
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 25)]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 25)],
+    [],
+    [RelicCastleRuinmaniac]
 );
 TownList['Lostlorn Forest'] = new DungeonTown(
     'Lostlorn Forest',
