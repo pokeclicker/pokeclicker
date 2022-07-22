@@ -41,14 +41,6 @@ export const SpriteCredits: Credit[] = [
         // Notes: Found in spritesheet description: "Feel free to use them, just give me credit."
     },
     {
-        name: 'Bleutailfly',
-        link: 'https://opengameart.org/content/bulletin-board-and-items',
-        resources: [
-            'Bulletin board',
-        ],
-        // Notes: Copyright description: "a link back here will be fine."
-    },
-    {
         name: 'Croak',
         link: 'https://discordapp.com/users/206839451069054976/',
         resources: [
