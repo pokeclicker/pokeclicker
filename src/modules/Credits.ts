@@ -501,19 +501,19 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            15,
+            16,
         ],
-        name: 'Mephistic',
-        link: 'https://github.com/Mephistic',
-        image: 'https://avatars.githubusercontent.com/u/2694761?v=4',
+        name: 'NiCeDiCe90',
+        link: 'https://github.com/NiCeDiCe90',
+        image: 'https://avatars.githubusercontent.com/u/82889773?v=4',
     },
     {
         resources: [
             15,
         ],
-        name: 'NiCeDiCe90',
-        link: 'https://github.com/NiCeDiCe90',
-        image: 'https://avatars.githubusercontent.com/u/82889773?v=4',
+        name: 'Mephistic',
+        link: 'https://github.com/Mephistic',
+        image: 'https://avatars.githubusercontent.com/u/2694761?v=4',
     },
     {
         resources: [
@@ -581,19 +581,19 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            5,
+            6,
         ],
-        name: 'Crobat4',
-        link: 'https://github.com/Crobat4',
-        image: 'https://avatars.githubusercontent.com/u/104547700?v=4',
+        name: 'DataCrusade',
+        link: 'https://github.com/DataCrusade',
+        image: 'https://avatars.githubusercontent.com/u/36621129?v=4',
     },
     {
         resources: [
             5,
         ],
-        name: 'DataCrusade',
-        link: 'https://github.com/DataCrusade',
-        image: 'https://avatars.githubusercontent.com/u/36621129?v=4',
+        name: 'Crobat4',
+        link: 'https://github.com/Crobat4',
+        image: 'https://avatars.githubusercontent.com/u/104547700?v=4',
     },
     {
         resources: [
