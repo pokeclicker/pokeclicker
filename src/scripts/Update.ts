@@ -953,7 +953,7 @@ class Update implements Saveable {
                 checkpoint: saveData.battleFrontier.checkpoint,
             };
 
-            // Update Pokemon name changes
+            // Update Pokemon name changes for hatchery/queue
             const renamePokemon = Update.renamePokemonInSaveData;
             renamePokemon(saveData, 'Bulbasaur (clone)', 'Bulbasaur (Clone)');
             renamePokemon(saveData, 'Ivysaur (clone)', 'Ivysaur (Clone)');
