@@ -10,8 +10,13 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.9
+    new ChangelogUpdate('v0.9.9', new Date(2022, 6, 22)),
+    new Changelog(changelogType.FIXED, 'Hatching new Pokémon causing errors'),
+    new Changelog(changelogType.FIXED, 'Pokémon gaining Pokérus and EVs early'),
+
     // v0.9.8
-    new ChangelogUpdate('v0.9.8', new Date(2022, 6, 21)),
+    new ChangelogUpdate('v0.9.8', new Date(2022, 6, 22)),
     new Changelog(changelogType.NEW, 'Ability to name Oak item loadouts'),
     new Changelog(changelogType.NEW, 'Shards now appear in Underground'),
     new Changelog(changelogType.NEW, 'Shard traders'),
