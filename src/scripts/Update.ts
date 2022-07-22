@@ -803,19 +803,20 @@ class Update implements Saveable {
             // Add names to oak item loadouts
             saveData.oakItemLoadouts = saveData.oakItemLoadouts?.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list })) || [];
 
-            // Fix pokerus
+            // Fix pokerus & EVs moved from statistics
             saveData.party.caughtPokemon.forEach(p => {
+                // If has pokerus, set to "contagious"
                 let status = (p[8]) ? 2 : 0;
-                const requiredForCured = saveData.challenges.list.slowEVs ? 5000 : 500;
-                if (saveData.statistics.effortPoints?.[p.id] >= requiredForCured) {
+                // Get effort points (0 if not infected), Multiply by 100 for finer control
+                const effortPoints = status ? saveData.statistics.effortPoints?.[p.id] * 100 || 0 : 0;
+                // Set to cured if reached required amount of EVs
+                const requiredForCured = saveData.challenges.list.slowEVs ? 500000 : 50000;
+                if (effortPoints >= requiredForCured) {
                     status = 3;
                 }
+                // Update status and EVs
                 p[8] = status;
-            });
-
-            // Moved EVs from statistics
-            saveData.party.caughtPokemon.forEach(p => {
-                p[9] = saveData.statistics.effortPoints?.[p.id] * 100 || 0;
+                p[9] = effortPoints;
             });
 
             // Give the players Linking Cords in place of Trade Stones
@@ -886,6 +887,35 @@ class Update implements Saveable {
                 delete settingsData['notification.dungeon_item_found'];
                 delete settingsData['notification.dungeon_item_found.desktop'];
             }
+        },
+
+        '0.9.9': ({ playerData, saveData }) => {
+            // Fix pokemon having Pokérus early (key item not unlocked)
+            if (!saveData.keyItems.Pokerus_virus) {
+                saveData.party.caughtPokemon.forEach(p => {
+                    // Pokérus State
+                    p[8] = 0;
+                    // Effort Points
+                    p[9] = 0;
+                });
+            }
+
+            // If Pokémon doesn't have Pokérus yet, it shouldn't have Effort Points
+            saveData.party.caughtPokemon.forEach(p => {
+                // Check Pokérus state
+                if (p[8] == 0) {
+                    // Reset Effort Points
+                    p[9] = 0;
+                }
+            });
+        },
+
+        '0.9.10': ({ playerData, saveData }) => {
+            // Rename statistic
+            saveData.statistics.pokeballsPurchased = saveData.statistics.pokeballsBought;
+
+            // Update total proteins obtained to be equal to the total purchased (or whichever is higher)
+            saveData.statistics.totalProteinsObtained = Math.max(saveData.statistics.totalProteinsPurchased, saveData.statistics.totalProteinsObtained);
         },
     };
 
