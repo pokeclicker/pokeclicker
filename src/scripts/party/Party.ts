@@ -178,7 +178,7 @@ class Party implements Feature {
         return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
     }
 
-    public gainEffortPoints(pokemon: PartyPokemon, shiny: boolean, number = GameConstants.BASE_EP_YIELD): number {
+    public calculateEffortPoints(pokemon: PartyPokemon, shiny: boolean, number = GameConstants.BASE_EP_YIELD): number {
         let EPNum = number * App.game.multiplier.getBonus('ev');
 
         if (pokemon.pokerus < GameConstants.Pokerus.Contagious) {
