@@ -833,11 +833,11 @@ class Update implements Saveable {
             }
             // Start UB questline if player has beaten Alola Champion already
             if (saveData.badgeCase[95]) {
-                saveData.quests.questLines.push({state: 1, name: 'Ultra Beast Hunt', quest: 0});
+                saveData.quests.questLines.push({state: 3, name: 'Ultra Beast Hunt', quest: 0});
             }
             // Start Ash questline if player has beaten Kalos champion already
             if (saveData.badgeCase[78]) {
-                saveData.quests.questLines.push({state: 1, name: 'The New Kid', quest: 0});
+                saveData.quests.questLines.push({state: 3, name: 'The New Kid', quest: 0});
             }
 
             // Just incase statistics is not set
