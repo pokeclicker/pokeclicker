@@ -2965,10 +2965,9 @@ const IkiOutskirtsMom = new NPC('Scratch Cat Girl', [
 ]);
 const KukuisLabProfessor = new NPC('Professor Kukui', [
     'Are you looking for some rare Pokémon? Maybe I can help with that. Ask away!',
-    'Ultra Beast? Never heard of it. I have no idea what that is. As far as I know they simply do not exist.',
-    'Meltan? What\'s a Meltan? Nope, don\'t know about that one either.',
-    'You seem very sure about this. Look, if you\'re so certain that these things you are talking about are real, I\'m sure they will show up sooner or later. If you\'re patient...',
-    'You got me all excited. We\'ll WAIT FOR these new rare Pokémon together. Hold on, let me just UPDATE my calendar. Just to be sure I\'m free to investigate these new Pokémon that only you know about when they show up. I wouldn\'t miss this for the world.',
+    'Meltan? What\'s a Meltan? Nope, don\'t know about that one.',
+    'You seem very sure about this. Look, if you\'re so certain that this thing you are talking about is real, I\'m sure it will show up sooner or later. If you\'re patient...',
+    'You got me all excited. We\'ll WAIT FOR this new rare Pokémon together. Hold on, let me just UPDATE my calendar. Just to be sure I\'m free to investigate this new Pokémon that only you know about when it shows up. I wouldn\'t miss this for the world.',
 ]);
 const IkiKahuna = new NPC('Kahuna Hala', [
     'Welcome to Alola!',
