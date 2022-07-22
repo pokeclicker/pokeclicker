@@ -2,7 +2,7 @@ import Sortable from 'sortablejs';
 import Settings from './settings/Settings';
 import Setting from './settings/Setting';
 
-const columns = ['left-column', 'middle-top-sort-column', 'middle-bottom-sort-column', 'right-column'];
+const columns = ['left-column', 'left-column-2', 'middle-top-sort-column', 'middle-bottom-sort-column', 'right-column', 'right-column-2'];
 
 // Create the settings to be loaded/saved
 columns.forEach((column) => {
