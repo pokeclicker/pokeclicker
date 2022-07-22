@@ -770,6 +770,7 @@ export enum EggItemType {
 export enum BulletinBoards {
     All = -1,
     Kalos,
+    Alola,
 }
 
 export const EnergyRestoreEffect = {

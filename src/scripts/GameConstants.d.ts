@@ -380,6 +380,7 @@ namespace GameConstants {
     export enum BulletinBoards {
         All = -1,
         Kalos,
+        Alola
     }
     declare const EnergyRestoreEffect: {
         SmallRestore: number;

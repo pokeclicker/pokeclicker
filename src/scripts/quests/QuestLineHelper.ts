@@ -621,7 +621,7 @@ class QuestLineHelper {
     }
 
     public static createUltraBeastQuestLine() {
-        const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts');
+        const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts', true, GameConstants.BulletinBoards.Alola);
 
         const talkToLooker = new TalkToNPCQuest(RoadsideMotelLooker1, 'Talk to Looker at the Roadside Motel.');
         UltraBeastQuestLine.addQuest(talkToLooker);
