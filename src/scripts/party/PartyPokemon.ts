@@ -10,10 +10,14 @@ enum PartyPokemonSaveKeys {
     category,
     levelEvolutionTriggered,
     pokerus,
+    effortPoints,
 }
 
 class PartyPokemon implements Saveable {
     saveKey: string;
+    public exp = 0;
+    public evs: KnockoutComputed<number>;
+    _attack: KnockoutComputed<number>;
 
     defaults = {
         attackBonusPercent: 0,
@@ -25,50 +29,55 @@ class PartyPokemon implements Saveable {
         category: 0,
         levelEvolutionTriggered: false,
         pokerus: GameConstants.Pokerus.None,
+        effortPoints: 0,
     };
 
+    // Saveable observables
     _breeding: KnockoutObservable<boolean>;
     _shiny: KnockoutObservable<boolean>;
     _level: KnockoutObservable<number>;
-    _attack: KnockoutObservable<number>;
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
     _pokerus: KnockoutObservable<GameConstants.Pokerus>;
     proteinsUsed: KnockoutObservable<number>;
-    effortPoints: KnockoutObservable<number>;
+    _effortPoints: KnockoutObservable<number>;
 
     constructor(
         public id: number,
         public name: PokemonNameType,
         public evolutions: Evolution[],
         public baseAttack: number,
-        attackBonusPercent = 0,
-        attackBonusAmount = 0,
-        proteinsUsed,
-        effortPoints,
-        public exp: number = 0,
-        breeding = false,
-        shiny = false,
-        category = 0,
-        pokerus = GameConstants.Pokerus.None
+        shiny = false
     ) {
-        this.proteinsUsed = ko.observable(proteinsUsed).extend({ numeric: 0 });
-        this.effortPoints = ko.observable(effortPoints).extend({ numeric: 0 });
-        this._breeding = ko.observable(breeding).extend({ boolean: null });
+        this.proteinsUsed = ko.observable(0).extend({ numeric: 0 });
+        this._breeding = ko.observable(false).extend({ boolean: null });
         this._shiny = ko.observable(shiny).extend({ boolean: null });
         this._level = ko.observable(1).extend({ numeric: 0 });
-        this._attackBonusPercent = ko.observable(attackBonusPercent).extend({ numeric: 0 });
-        this._attackBonusAmount = ko.observable(attackBonusAmount).extend({ numeric: 0 });
-        this._attack = ko.observable(this.calculateAttack()).extend({ numeric: 0 });
-        this._category = ko.observable(category).extend({ numeric: 0 });
-        this._pokerus = ko.observable(pokerus).extend({ numeric: 0 });
+        this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
+        this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
+        this._category = ko.observable(0).extend({ numeric: 0 });
+        this._pokerus = ko.observable(GameConstants.Pokerus.None).extend({ numeric: 0 });
+        this._effortPoints = ko.observable(0).extend({ numeric: 0 });
+        this.evs = ko.pureComputed(() => {
+            const power = App.game.challenges.list.slowEVs.active() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
+            return Math.floor(this.effortPoints / GameConstants.EP_EV_RATIO / power);
+        });
+        this._attack = ko.pureComputed(() => this.calculateAttack());
     }
 
     public calculateAttack(ignoreLevel = false): number {
         const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
         const levelMultiplier = ignoreLevel ? 1 : this.level / 100;
-        return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier));
+        const evsMultiplier = this.calculateEVAttackBonus();
+        return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier));
+    }
+
+    public calculateEVAttackBonus(): number {
+        if (this.pokerus < GameConstants.Pokerus.Contagious) {
+            return 1;
+        }
+        return (this.evs() < 50) ? (1 + 0.01 * this.evs()) : (1 + Math.min(1, Math.pow((this.evs() - 30),0.075) - 0.75));
     }
 
     public canCatchPokerus(): boolean {
@@ -82,7 +91,7 @@ class PartyPokemon implements Saveable {
             if (i > App.game.breeding.hatcheryHelpers.hired().length - 1) {
                 const egg = App.game.breeding.eggList[i]();
                 if (!egg.canHatch() && !egg.isNone()) {
-                    const pokerus = App.game.party.getPokemon(pokemonMap[egg.pokemon].id).pokerus;
+                    const pokerus = App.game.party.getPokemon(pokemonMap[egg.pokemon].id)?.pokerus;
                     if (pokerus && pokerus >= GameConstants.Pokerus.Contagious) {
                         eggTypes.add(PokemonHelper.getPokemonByName(pokemonMap[App.game.breeding.eggList[i]().pokemon].name).type1);
                         eggTypes.add(PokemonHelper.getPokemonByName(pokemonMap[App.game.breeding.eggList[i]().pokemon].name).type2);
@@ -125,7 +134,6 @@ class PartyPokemon implements Saveable {
         const newLevel = this.calculateLevelFromExp();
         if (oldLevel !== newLevel) {
             this.level = newLevel;
-            this.attack = this.calculateAttack();
             this.checkForLevelEvolution();
         }
     }
@@ -235,8 +243,8 @@ class PartyPokemon implements Saveable {
         this.shiny = json[PartyPokemonSaveKeys.shiny] ?? this.defaults.shiny;
         this.category = json[PartyPokemonSaveKeys.category] ?? this.defaults.category;
         this.level = this.calculateLevelFromExp();
-        this.attack = this.calculateAttack();
         this.pokerus = json[PartyPokemonSaveKeys.pokerus] ?? this.defaults.pokerus;
+        this.effortPoints = json[PartyPokemonSaveKeys.effortPoints] ?? this.defaults.effortPoints;
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
@@ -267,6 +275,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.levelEvolutionTriggered]: levelEvolutionTriggered,
             [PartyPokemonSaveKeys.category]: this.category,
             [PartyPokemonSaveKeys.pokerus]: this.pokerus,
+            [PartyPokemonSaveKeys.effortPoints]: this.effortPoints,
         };
 
         // Don't save anything that is the default option
@@ -290,10 +299,6 @@ class PartyPokemon implements Saveable {
 
     get attack(): number {
         return this._attack();
-    }
-
-    set attack(attack: number) {
-        this._attack(attack);
     }
 
     get attackBonusAmount(): number {
@@ -326,6 +331,14 @@ class PartyPokemon implements Saveable {
 
     set pokerus(index: GameConstants.Pokerus) {
         this._pokerus(index);
+    }
+
+    get effortPoints(): number {
+        return this._effortPoints();
+    }
+
+    set effortPoints(amount: number) {
+        this._effortPoints(amount);
     }
 
     get shiny(): boolean {

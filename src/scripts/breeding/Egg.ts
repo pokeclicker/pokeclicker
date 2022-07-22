@@ -25,7 +25,6 @@ class Egg implements Saveable {
     ) {
         this.steps = ko.observable(steps);
         this.init();
-        this.partyPokemon = type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonByName(pokemon).id) : null;
     }
 
     private init() {
@@ -49,6 +48,7 @@ class Egg implements Saveable {
             this.pokemonType1 = PokemonType.Normal;
             this.pokemonType2 = PokemonType.Normal;
         }
+        this.partyPokemon = this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.pokemon).id) : null;
     }
 
     isNone() {
@@ -123,12 +123,10 @@ class Egg implements Saveable {
                 if (partyPokemon.pokerus == GameConstants.Pokerus.Infected) {
                     partyPokemon.pokerus = GameConstants.Pokerus.Contagious;
                 }
-                if (App.game.statistics.effortPoints[pokemonID] >= 50 && partyPokemon.pokerus == GameConstants.Pokerus.Contagious) {
+                if (partyPokemon.evs() >= 50 && partyPokemon.pokerus == GameConstants.Pokerus.Contagious) {
                     partyPokemon.pokerus = GameConstants.Pokerus.Cured;
                 }
             }
-            // Recalculate current attack
-            partyPokemon.attack = partyPokemon.calculateAttack();
         }
 
         if (shiny) {
@@ -138,7 +136,7 @@ class Egg implements Saveable {
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched_shiny,
             });
-            App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}! ${App.game.party.alreadyCaughtPokemon(partyPokemon.id, true) ? '(duplicate)' : ''}`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}! ${App.game.party.alreadyCaughtPokemon(pokemonID, true) ? '(duplicate)' : ''}`);
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonHatched[pokemonID]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonHatched);
         } else {

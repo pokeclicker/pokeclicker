@@ -52,13 +52,13 @@ Settings.add(
         ],
         'yeti'),
 );
-Settings.add(new Setting<string>('breedingDisplay', 'Breeding progress display:',
+Settings.add(new Setting<string>('breedingDisplay', 'Breeding progress display',
     [
         new SettingOption('Percentage', 'percentage'),
         new SettingOption('Step count', 'stepCount'),
     ],
     'percentage'));
-Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons:',
+Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons',
     [
         new SettingOption('+10, +100', 'original'),
         new SettingOption('+100, +1000', 'bigplus'),
@@ -69,28 +69,28 @@ Settings.add(new BooleanSetting('resetShopAmountOnPurchase', 'Reset buy quantity
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
 Settings.add(new BooleanSetting('showCurrencyLostAnimation', 'Show currency lost animation', true));
 Settings.add(new BooleanSetting('hideChallengeRelatedModules', 'Hide challenge related modules', false));
-Settings.add(new Setting<string>('backgroundImage', 'Background image:',
+Settings.add(new Setting<string>('backgroundImage', 'Background image',
     [
         new SettingOption('Day', 'background-day'),
         new SettingOption('Night', 'background-night'),
         new SettingOption('Dynamic', 'background-dynamic'),
     ],
     'background-day'));
-Settings.add(new Setting<string>('eggAnimation', 'Egg Hatching Animation:',
+Settings.add(new Setting<string>('eggAnimation', 'Egg Hatching Animation',
     [
         new SettingOption('None', 'none'),
         new SettingOption('Almost & fully ready', 'almost'),
         new SettingOption('Fully ready', 'full'),
     ],
     'full'));
-Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal:',
+Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal',
     [
         new SettingOption('Never', 'never'),
         new SettingOption('Egg Slots Full', 'egg'),
         new SettingOption('Queue Slots Full', 'queue'),
     ],
     'queue'));
-Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
+Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     [
         new SettingOption('To Next Stage', 'nextStage'),
         new SettingOption('Ripe/Death', 'ripeDeath'),
@@ -99,7 +99,15 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points and Battle Points on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
+Settings.add(new BooleanSetting('confirmBeformeMulchingAllPlots', 'Confirm before mulching all plots', false));
 Settings.add(new BooleanSetting('showGymGoAnimation', 'Show Gym GO animation', true));
+Settings.add(new Setting<string>('gameDisplayStyle', 'Game display style',
+    [
+        new SettingOption('Standard (3 columns)', 'standard3'),
+        new SettingOption('Full width (3 columns)', 'fullWidth3'),
+        new SettingOption('Full width (5 columns)', 'fullWidth5'),
+    ],
+    'standard3'));
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
@@ -115,7 +123,7 @@ Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#fff
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
 Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web workers for game ticks (more consistent game speed)', true));
 Settings.add(new BooleanSetting('disableOfflineProgress', 'Disable offline progress', false));
-Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in game time):',
+Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in game time)',
     [
         new SettingOption('Never', '0'),
         new SettingOption('1 Hour', (1 * HOUR).toString()),
@@ -158,21 +166,21 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
 const partySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
-Settings.add(new Setting<number>('partySort', 'Sort:', partySortSettings, SortOptions.id));
+Settings.add(new Setting<number>('partySort', 'Sort', partySortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
 
 // Hatchery Sorting
 const hatcherySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
-Settings.add(new Setting<number>('hatcherySort', 'Sort:', hatcherySortSettings, SortOptions.id));
+Settings.add(new Setting<number>('hatcherySort', 'Sort', hatcherySortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('hatcherySortDirection', 'reverse', false));
 
 // Protein Sorting
 const proteinSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
-Settings.add(new Setting<number>('proteinSort', 'Sort:', proteinSortSettings, SortOptions.id));
+Settings.add(new Setting<number>('proteinSort', 'Sort', proteinSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('proteinSortDirection', 'reverse', false));
 Settings.add(new BooleanSetting('proteinHideMaxedPokemon', 'Hide Pokémon with max protein', false));
 Settings.add(new BooleanSetting('proteinHideShinyPokemon', 'Hide shiny Pokémon', false));
@@ -212,11 +220,17 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
     ],
     'attack'));
 
+Settings.add(new Setting<string>('breedingRegionalAttackDebuffSetting', 'breedingRegionalAttackDebuffSetting',
+    [
+        ...Settings.enumToSettingOptionArray(Region),
+    ],
+    '-1'));
+
 // Achievement sorting
 const achievementSortSettings = Object.keys(AchievementSortOptionConfigs).map((opt) => (
     new SettingOption<number>(AchievementSortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
-Settings.add(new Setting<number>('achievementSort', 'Sort:', achievementSortSettings, AchievementSortOptions.default));
+Settings.add(new Setting<number>('achievementSort', 'Sort', achievementSortSettings, AchievementSortOptions.default));
 Settings.add(new BooleanSetting('achievementSortDirection', 'reverse', false));
 
 // Achievements Filters

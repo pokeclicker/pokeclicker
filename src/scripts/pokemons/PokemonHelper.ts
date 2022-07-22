@@ -193,7 +193,7 @@ class PokemonHelper {
                 }
             }
             // Dungeon Chest
-            dungeon.itemList.forEach(i => {
+            Object.values(dungeon.lootTable).flat().forEach(i => {
                 if (i.loot == pokemonName) {
                     const data = {
                         dungeon: dungeonName,
@@ -244,11 +244,11 @@ class PokemonHelper {
 
     public static getPokemonRoamingRegions(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
         const regions = [];
-        Object.entries(RoamingPokemonList.list).forEach(([region, pokemonArr]) => {
+        Object.entries(RoamingPokemonList.list).forEach(([region, regionArr]) => {
             if (maxRegion != GameConstants.Region.none && (+region) > maxRegion) {
                 return false;
             }
-            const pokemon = pokemonArr.find(r => r.pokemon.name == pokemonName);
+            const pokemon = regionArr.flat().find(r => r.pokemon.name == pokemonName);
             if (pokemon) {
                 const data = {
                     region: +region,

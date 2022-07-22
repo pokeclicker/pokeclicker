@@ -108,7 +108,10 @@ GymList['Cinnabar Island'] = new Gym(
     BadgeEnums.Volcano,
     5000,
     'I have burned down to nothing! Not even ashes remain! You have earned the VolcanoBadge.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Mansion'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Mansion'))],
+    () => {
+        App.game.quests.getQuestLine('Bill\'s Errand').beginQuest();
+    }
 );
 GymList['Viridian City'] = new Gym(
     'Giovanni',
@@ -127,10 +130,11 @@ GymList['Viridian City'] = new Gym(
         new GymBadgeRequirement(BadgeEnums.Thunder),
         new GymBadgeRequirement(BadgeEnums.Rainbow),
         new GymBadgeRequirement(BadgeEnums.Marsh),
-        new GymBadgeRequirement(BadgeEnums.Volcano),
+        new QuestLineCompletedRequirement('Bill\'s Errand'),
     ],
     () => {
         App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
+        App.game.quests.getQuestLine('Persons of Interest').beginQuest();
     }
 );
 
@@ -1211,7 +1215,13 @@ GymList['Champion Diantha'] = new Champion(
     BadgeEnums.Elite_KalosChampion,
     128000,
     'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart...',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)],
+    undefined,
+    undefined,
+    undefined,
+    () => {
+        App.game.quests.getQuestLine('The New Kid').beginQuest();
+    }
 );
 
 //Alola Gyms
@@ -1510,9 +1520,11 @@ GymList['Champion Hau'] = new Champion(
     [
         new GymPokemon('Leafeon', 89636471, 58),
         new GymPokemon('Incineroar', 96725389, 60),
-    ]
+    ],
+    () => {
+        App.game.quests.getQuestLine('Ultra Beast Hunt').beginQuest();
+    }
 );
-
 
 //Galar Leaders
 //TODO Addition of G-Max forms?

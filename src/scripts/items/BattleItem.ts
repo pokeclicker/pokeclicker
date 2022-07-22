@@ -41,8 +41,8 @@ class BattleItem extends Item {
     }
 }
 
-ItemList.xAttack         = new BattleItem(GameConstants.BattleItemType.xAttack, '+50% Bonus to Pokémon attack for 30 seconds', 600, undefined, undefined, 'pokemonAttack', 1.5);
-ItemList.xClick          = new BattleItem(GameConstants.BattleItemType.xClick, '+50% Bonus to click attack for 30 seconds', 400, undefined, undefined, 'clickAttack', 1.5);
+ItemList.xAttack         = new BattleItem(GameConstants.BattleItemType.xAttack, '+50% Bonus to Pokémon attack for 30 seconds', 600, undefined, 'X Attack', 'pokemonAttack', 1.5);
+ItemList.xClick          = new BattleItem(GameConstants.BattleItemType.xClick, '+50% Bonus to click attack for 30 seconds', 400, undefined, 'X Click', 'clickAttack', 1.5);
 ItemList.Lucky_egg       = new BattleItem(GameConstants.BattleItemType.Lucky_egg, '+50% Bonus to experience gained for 30 seconds', 800, undefined, 'Lucky Egg', 'exp', 1.5);
 ItemList.Token_collector = new BattleItem(GameConstants.BattleItemType.Token_collector, '+50% Bonus to Dungeon Tokens gained for 30 seconds', 1000, undefined, 'Token Collector', 'dungeonToken', 1.5);
 ItemList.Dowsing_machine     = new BattleItem(GameConstants.BattleItemType.Dowsing_machine, 'Increased chance of gaining extra items for 30 seconds', 1500, undefined, 'Dowsing Machine');

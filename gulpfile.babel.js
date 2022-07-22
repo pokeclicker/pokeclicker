@@ -119,6 +119,7 @@ gulp.task('browserSync', () => {
         server: {
             baseDir: dests.base,
         },
+        ghostMode: false,
     });
     gulp.watch(srcs.html, gulp.series('compile-html'));
     gulp.watch(srcs.ejsTemplates, gulp.series('compile-html'));
