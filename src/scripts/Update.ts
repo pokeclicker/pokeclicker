@@ -803,19 +803,20 @@ class Update implements Saveable {
             // Add names to oak item loadouts
             saveData.oakItemLoadouts = saveData.oakItemLoadouts?.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list })) || [];
 
-            // Fix pokerus
+            // Fix pokerus & EVs moved from statistics
             saveData.party.caughtPokemon.forEach(p => {
+                // If has pokerus, set to "contagious"
                 let status = (p[8]) ? 2 : 0;
-                const requiredForCured = saveData.challenges.list.slowEVs ? 5000 : 500;
-                if (saveData.statistics.effortPoints?.[p.id] >= requiredForCured) {
+                // Get effort points (0 if not infected)
+                const effortPoints = status ? saveData.statistics.effortPoints?.[p.id] * 100 || 0 : 0;
+                // Set to cured if reached required amount of EVs
+                const requiredForCured = saveData.challenges.list.slowEVs ? 500000 : 50000;
+                if (effortPoints >= requiredForCured) {
                     status = 3;
                 }
+                // Update status and EVs
                 p[8] = status;
-            });
-
-            // Moved EVs from statistics
-            saveData.party.caughtPokemon.forEach(p => {
-                p[9] = saveData.statistics.effortPoints?.[p.id] * 100 || 0;
+                p[9] = effortPoints;
             });
 
             // Give the players Linking Cords in place of Trade Stones
