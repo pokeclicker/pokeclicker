@@ -887,6 +887,27 @@ class Update implements Saveable {
                 delete settingsData['notification.dungeon_item_found.desktop'];
             }
         },
+
+        '0.9.9': ({ playerData, saveData }) => {
+            // Fix pokemon having Pokérus early (key item not unlocked)
+            if (!saveData.keyItems.Pokerus_virus) {
+                saveData.party.caughtPokemon.forEach(p => {
+                    // Pokérus State
+                    p[8] = 0;
+                    // Effort Points
+                    p[9] = 0;
+                });
+            }
+
+            // If Pokémon doesn't have Pokérus yet, it shouldn't have Effort Points
+            saveData.party.caughtPokemon.forEach(p => {
+                // Check Pokérus state
+                if (p[8] == 0) {
+                    // Reset Effort Points
+                    p[9] = 0;
+                }
+            });
+        },
     };
 
     constructor() {
