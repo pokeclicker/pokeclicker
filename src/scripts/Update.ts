@@ -909,6 +909,11 @@ class Update implements Saveable {
                 }
             });
         },
+
+        '0.9.10': ({ playerData, saveData }) => {
+            // Rename statistic
+            saveData.statistics.pokeballsPurchased = saveData.statistics.pokeballsBought;
+        },
     };
 
     constructor() {
