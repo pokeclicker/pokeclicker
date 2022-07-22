@@ -7,7 +7,7 @@ export default class ProteinObtainRequirement extends AchievementRequirement {
     }
 
     public getProgress() {
-        return Math.min(App.game.statistics.totalProteinsObtained(), this.requiredValue);
+        return Math.min(App.game.statistics.totalProteinsObtained() && App.game.statistics.totalProteinsPurchased(), this.requiredValue);
     }
 
     public hint(): string {
