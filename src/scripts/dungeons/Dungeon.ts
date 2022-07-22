@@ -3538,7 +3538,7 @@ dungeonList['Lake Verity'] = new Dungeon('Lake Verity',
             [
                 new GymPokemon('Golbat', 1606667, 38),
                 new GymPokemon('Bronzor', 1606667, 38),
-                new GymPokemon('Toxicroak', 1606667, 40),
+                new GymPokemon('Purugly', 1606667, 40),
             ], { weight: 1 }, 'Mars', '(mars)'),
     ],
     72500, 218);
@@ -3597,8 +3597,8 @@ dungeonList['Lake Acuity'] = new Dungeon('Lake Acuity',
     [
         new DungeonTrainer('Commander',
             [
+                new GymPokemon('Golbat', 1690000, 38),
                 new GymPokemon('Bronzor', 1690000, 38),
-                new GymPokemon('Zubat', 1690000, 38),
                 new GymPokemon('Skuntank', 1690000, 40),
             ], { weight: 1 }, 'Jupiter', '(jupiter)'),
         new DungeonBossPokemon('Uxie', 10070000, 50, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),

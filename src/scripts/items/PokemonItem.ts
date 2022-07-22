@@ -25,7 +25,7 @@ class PokemonItem extends CaughtIndicatingItem {
         const pokemonID = PokemonHelper.getPokemonByName(pokemonName).id;
         App.game.party.gainPokemonById(pokemonID, shiny, true);
         const partyPokemon = App.game.party.getPokemon(pokemonID);
-        partyPokemon.effortPoints += App.game.party.gainEffortPoints(partyPokemon, shiny, GameConstants.SHOPMON_EP_YIELD);
+        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, shiny, GameConstants.SHOPMON_EP_YIELD);
     }
 
     getCaughtStatus(): CaughtStatus {
