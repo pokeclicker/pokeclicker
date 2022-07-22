@@ -497,7 +497,7 @@ class QuestLineHelper {
 
         // Capture Vivillon (Pokéball)
         const viviBallAdd = () => {
-            BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(666, 'Vivillon (Pokéball)'));
+            BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(666, 'Vivillon (Poké Ball)'));
             Notifier.notify({
                 title: vivillonQuestLine.name,
                 message: 'A Vivillon is hiding somewhere.\nOnly the strongest Challengers can reach it.',
@@ -507,12 +507,12 @@ class QuestLineHelper {
         const viviBalldone = () => {
             Notifier.notify({
                 title: vivillonQuestLine.name,
-                message: 'You caught the last rare Vivillon (Pokéball).\nCongratulations!',
+                message: 'You caught the last rare Vivillon (Poké Ball).\nCongratulations!',
                 type: NotificationConstants.NotificationOption.success,
             });
         };
         const catchBall = new CaptureSpecificPokemonQuest(
-            'Vivillon (Pokéball)',
+            'Vivillon (Poké Ball)',
             'Find and capture the rare Vivillon!\nHint: Only the strongest Challengers can reach it.',
             1,
             false,
@@ -546,7 +546,7 @@ class QuestLineHelper {
             App.game.party.gainPokemonById(658.01);
             Notifier.notify({
                 title: ashKetchumQuestLine.name,
-                message: 'You obtained Ash Greninja!',
+                message: 'You obtained Ash-Greninja!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
