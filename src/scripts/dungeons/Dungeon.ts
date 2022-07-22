@@ -6896,7 +6896,7 @@ dungeonList['Galar Mine'] = new Dungeon('Galar Mine',
 
 dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
     [
-        {pokemon: 'Shellos (east)', options: { weight: 1.6 }},
+        {pokemon: 'Shellos (East)', options: { weight: 1.6 }},
         {pokemon: 'Wimpod', options: { weight: 1.6 }},
         {pokemon: 'Binacle', options: { weight: 1.6 }},
         {pokemon: 'Chewtle', options: { weight: 1.6 }},
@@ -6939,7 +6939,7 @@ dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
     21294640,
     [
         new DungeonBossPokemon('Galarian Stunfisk', 106473200, 25),
-        new DungeonBossPokemon('Gastrodon (east)', 106473200, 50),
+        new DungeonBossPokemon('Gastrodon (East)', 106473200, 50),
         new DungeonBossPokemon('Drednaw', 106473200, 24),
     ],
     96500, 14);
