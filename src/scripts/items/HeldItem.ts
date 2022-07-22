@@ -60,7 +60,7 @@ class TypeRestrictedAttackBonusHeldItem extends AttackBonusHeldItem {
     }
 }
 
-class EVsGainedBonusHeldItem extends HeldItem { // TODO: make sure this class does something
+class EVsGainedBonusHeldItem extends HeldItem {
     constructor(
         name: string,
         basePrice: number,
@@ -68,9 +68,10 @@ class EVsGainedBonusHeldItem extends HeldItem { // TODO: make sure this class do
         shopOptions : ShopOptions,
         displayName: string,
         public gainedBonus: number,
-        regionUnlocked: GameConstants.Region,
-        canUse = (pokemon: PartyPokemon) => true) {
-        super(name, basePrice, currency, shopOptions, displayName, `A held item that increases the EVs the pokémon gains by ${((gainedBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked, canUse);
+        regionUnlocked: GameConstants.Region) {
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that increases the EVs the pokémon gains by ${((gainedBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked, (pokemon: PartyPokemon) => {
+            return pokemon.pokerus > GameConstants.Pokerus.None;
+        });
     }
 }
 
