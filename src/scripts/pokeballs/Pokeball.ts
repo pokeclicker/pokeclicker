@@ -6,6 +6,7 @@ class Pokeball {
         public catchBonus: () => number,
         public catchTime: number,
         public description: string,
+        public displayName: string,
         public unlockRequirement: Requirement | MultiRequirement = new MultiRequirement(),
         quantity = 0
     ) {
