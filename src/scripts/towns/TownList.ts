@@ -2089,7 +2089,7 @@ const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
     'Legends say Kyurem is missing a part of itself. It is waiting for a hero to fill in the missing parts of its body with Truth or Ideals.',
     'The legendary dragons of Dragonspiral Tower are said to embody these very concepts. They sometimes leave a piece of their DNA behind after a battle.',
     'If you have DNA splicers, perhaps you can make Kyurem whole again.',
-    'I\'ve never seen it, but supposedly it works just like any evolution stone.',
+    'I\'ve never seen it, but supposedly it works just like any other evolution item.',
 ]);
 
 const P2LaboratoryColress = new NPC('Colress', [
