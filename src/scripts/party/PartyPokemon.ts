@@ -275,7 +275,7 @@ class PartyPokemon implements Saveable {
             Notifier.confirm({
                 title: 'Remove held item',
                 message: 'Held items are one time use only.\nRemoved items will be lost.\nAre you sure you want to remove it?',
-                confirm: 'remove',
+                confirm: 'Remove',
                 type: NotificationConstants.NotificationOption.warning,
             }).then((confirmed) => {
                 if (confirmed) {
