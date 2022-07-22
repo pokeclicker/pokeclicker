@@ -79,7 +79,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 1.1,
-        'name': 'Bulbasaur (clone)',
+        'name': 'Bulbasaur (Clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Poison],
@@ -152,7 +152,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 2.1,
-        'name': 'Ivysaur (clone)',
+        'name': 'Ivysaur (Clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Poison],
@@ -188,7 +188,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 3.1,
-        'name': 'Venusaur (clone)',
+        'name': 'Venusaur (Clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Poison],
@@ -242,7 +242,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 4.1,
-        'name': 'Charmander (clone)',
+        'name': 'Charmander (Clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
         'type': [PokemonType.Fire],
@@ -279,7 +279,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 5.1,
-        'name': 'Charmeleon (clone)',
+        'name': 'Charmeleon (Clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
         'type': [PokemonType.Fire],
@@ -315,7 +315,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 6.1,
-        'name': 'Charizard (clone)',
+        'name': 'Charizard (Clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
         'type': [PokemonType.Fire, PokemonType.Flying],
@@ -369,7 +369,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 7.1,
-        'name': 'Squirtle (clone)',
+        'name': 'Squirtle (Clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
         'type': [PokemonType.Water],
@@ -406,7 +406,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 8.1,
-        'name': 'Wartortle (clone)',
+        'name': 'Wartortle (Clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
         'type': [PokemonType.Water],
@@ -442,7 +442,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 9.1,
-        'name': 'Blastoise (clone)',
+        'name': 'Blastoise (Clone)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 45,
         'type': [PokemonType.Water],
@@ -9333,20 +9333,20 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 412,
-        'name': 'Burmy (plant)',
+        'name': 'Burmy (Plant)',
         'type': [PokemonType.Bug],
         'eggCycles': 15,
         'levelType': LevelType.mediumfast,
         'exp': 45,
         'catchRate': 120,
         'evolutions': [
-            new LevelEvolution('Burmy (plant)', 'Wormadam (plant)', 20),
-            new LevelEvolution('Burmy (plant)', 'Mothim', 20),
-            new EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (plant)', 'Burmy (sand)', 1),
-            new EnvironmentRestrictedLevelEvolution('GemCave', 'Burmy (plant)', 'Burmy (sand)', 1),
-            new EnvironmentRestrictedLevelEvolution('PowerPlant', 'Burmy (plant)', 'Burmy (trash)', 1),
-            new EnvironmentRestrictedLevelEvolution('Mansion', 'Burmy (plant)', 'Burmy (trash)', 1),
-            new EnvironmentRestrictedLevelEvolution('Graveyard', 'Burmy (plant)', 'Burmy (trash)', 1),
+            new LevelEvolution('Burmy (Plant)', 'Wormadam (Plant)', 20),
+            new LevelEvolution('Burmy (Plant)', 'Mothim', 20),
+            new EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Plant)', 'Burmy (Sand)', 1),
+            new EnvironmentRestrictedLevelEvolution('GemCave', 'Burmy (Plant)', 'Burmy (Sand)', 1),
+            new EnvironmentRestrictedLevelEvolution('PowerPlant', 'Burmy (Plant)', 'Burmy (Trash)', 1),
+            new EnvironmentRestrictedLevelEvolution('Mansion', 'Burmy (Plant)', 'Burmy (Trash)', 1),
+            new EnvironmentRestrictedLevelEvolution('Graveyard', 'Burmy (Plant)', 'Burmy (Trash)', 1),
         ],
         'base': {
             'hitpoints': 40,
@@ -9359,15 +9359,15 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 412.1,
-        'name': 'Burmy (sand)',
+        'name': 'Burmy (Sand)',
         'type': [PokemonType.Bug],
         'eggCycles': 15,
         'levelType': LevelType.mediumfast,
         'exp': 45,
         'catchRate': 120,
         'evolutions': [
-            new LevelEvolution('Burmy (sand)', 'Wormadam (sand)', 20),
-            new LevelEvolution('Burmy (sand)', 'Mothim', 20),
+            new LevelEvolution('Burmy (Sand)', 'Wormadam (Sand)', 20),
+            new LevelEvolution('Burmy (Sand)', 'Mothim', 20),
         ],
         'base': {
             'hitpoints': 40,
@@ -9380,15 +9380,15 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 412.2,
-        'name': 'Burmy (trash)',
+        'name': 'Burmy (Trash)',
         'type': [PokemonType.Bug],
         'eggCycles': 15,
         'levelType': LevelType.mediumfast,
         'exp': 45,
         'catchRate': 120,
         'evolutions': [
-            new LevelEvolution('Burmy (trash)', 'Wormadam (trash)', 20),
-            new LevelEvolution('Burmy (trash)', 'Mothim', 20),
+            new LevelEvolution('Burmy (Trash)', 'Wormadam (Trash)', 20),
+            new LevelEvolution('Burmy (Trash)', 'Mothim', 20),
         ],
         'base': {
             'hitpoints': 40,
@@ -9401,7 +9401,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 413,
-        'name': 'Wormadam (plant)',
+        'name': 'Wormadam (Plant)',
         'type': [PokemonType.Bug, PokemonType.Grass],
         'eggCycles': 15,
         'levelType': LevelType.mediumfast,
@@ -9418,7 +9418,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 413.1,
-        'name': 'Wormadam (sand)',
+        'name': 'Wormadam (Sand)',
         'type': [PokemonType.Bug, PokemonType.Ground],
         'eggCycles': 15,
         'levelType': LevelType.mediumfast,
@@ -9435,7 +9435,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 413.2,
-        'name': 'Wormadam (trash)',
+        'name': 'Wormadam (Trash)',
         'type': [PokemonType.Bug, PokemonType.Steel],
         'eggCycles': 15,
         'levelType': LevelType.mediumfast,
@@ -9562,7 +9562,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 55,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Cherubi', 'Cherrim (overcast)', 25)],
+        'evolutions': [new LevelEvolution('Cherubi', 'Cherrim (Overcast)', 25)],
         'base': {
             'hitpoints': 45,
             'attack': 35,
@@ -9574,13 +9574,13 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 421,
-        'name': 'Cherrim (overcast)',
+        'name': 'Cherrim (Overcast)',
         'type': [PokemonType.Grass],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
         'exp': 158,
         'catchRate': 75,
-        'evolutions': [new WeatherRestrictedLevelEvolution('Cherrim (overcast)', 'Cherrim (sunshine)', 1, [WeatherType.Sunny])],
+        'evolutions': [new WeatherRestrictedLevelEvolution('Cherrim (Overcast)', 'Cherrim (Sunshine)', 1, [WeatherType.Sunny])],
         'base': {
             'hitpoints': 70,
             'attack': 60,
@@ -9592,7 +9592,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 421.1,
-        'name': 'Cherrim (sunshine)',
+        'name': 'Cherrim (Sunshine)',
         'type': [PokemonType.Grass],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
