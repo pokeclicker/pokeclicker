@@ -819,6 +819,10 @@ class Update implements Saveable {
                 p[9] = effortPoints;
             });
 
+            // Give the players Linking Cords in place of Trade Stones
+            playerData._itemList.Linking_cord = playerData._itemList.Trade_stone || 0;
+            delete playerData._itemList.Trade_stone;
+
             // Start Sevii questline if player has Volcano Badge already
             if (saveData.badgeCase[7]) {
                 saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
@@ -883,10 +887,6 @@ class Update implements Saveable {
                 delete settingsData['notification.dungeon_item_found'];
                 delete settingsData['notification.dungeon_item_found.desktop'];
             }
-
-            // Give the players Linking Cords in place of Trade Stones
-            playerData._itemList.Linking_cord = playerData._itemList.Trade_stone || 0;
-            delete playerData._itemList.Trade_stone;
         },
 
         '0.9.9': ({ playerData, saveData }) => {
