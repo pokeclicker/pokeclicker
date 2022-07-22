@@ -14790,7 +14790,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 666.01,
-        'name': 'Vivillon (Pokéball)',
+        'name': 'Vivillon (Poké Ball)',
         'type': [PokemonType.Bug, PokemonType.Flying],
         // Boosted to match standard Vivillon (Meadow)
         'eggCycles': 35,
