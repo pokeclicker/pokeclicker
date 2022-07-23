@@ -21,7 +21,7 @@
             </thead>
             <tbody>
               <tr class="clickable"
-                data-bind="template: { name: 'pokeballSelectionTemplate', data: { 'image': 'None', 'type': -1, 'description': 'Do not catch', 'displayName': 'None' }},
+                data-bind="template: { name: 'pokeballSelectionTemplate', data: { 'image': 'None', 'type': -1, 'description': 'Do not catch' }},
                     click: function(){App.game.pokeballs.selectedSelection()(GameConstants.Pokeball.None)}"></tr>
               <!-- ko foreach: App.game.pokeballs.pokeballs -->
               <tr class="clickable"
@@ -47,7 +47,7 @@
 <script type="text/html" id="pokeballSelectionTemplate">
   <td class="text-center">
     <img class="pokeball-small"
-      data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.type] + '.svg'}, css: {'pokeball-selected': App.game.pokeballs.selectedSelection()() === $data.type}, tooltip: {title: $data.displayName, trigger: 'hover', animation: false, placement: 'bottom'}"/>
+      data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.type] + '.svg'}, css: {'pokeball-selected': App.game.pokeballs.selectedSelection()() === $data.type}, tooltip: {title: $data.type === -1 ? 'None' : ItemList[GameConstants.Pokeball[$data.type]].displayName, trigger: 'hover', animation: false, placement: 'bottom'}"/>
   </td>
   <td class="align-middle">
     <span data-bind="text: $data.description"></span>
