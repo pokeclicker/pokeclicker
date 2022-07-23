@@ -3069,7 +3069,7 @@ const RoadsideMotelAnabel4 = new NPC('Anabel', [
 const RoadsideMotelAnabel5 = new NPC('Anabel', [
     'And so here we are. At the end. And back at the beginning.',
     'Our final target is UB-05 Glutton. Guzzlord. It is very dangerous. You must not underestimate this beast.',
-    'Ten years ago a very similar incident occured. Looker and his team were assigned to fight Guzzlord. Nanu was there too. They lost. Looker lost a colleague that day.',
+    'Ten years ago, a very similar incident occured. Looker and his team were assigned to fight Guzzlord. Nanu was there too. They lost. Looker lost a colleague that day.',
     'After the battle they found something. A strange young girl, alone in the wilderness of Poni Island. They found me. It seems I came from another world as well. Not their world though. These creatures are strange to me too.',
     'I have made myself at home here. I hope Glutton can do the same. Please catch this Guzzlord. End this once and for all.',
 ], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 16, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 18, GameConstants.AchievementOption.less )])});
