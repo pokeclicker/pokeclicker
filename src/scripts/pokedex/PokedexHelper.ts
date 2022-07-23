@@ -185,6 +185,21 @@ class PokedexHelper {
     private static isPureType(pokemon: PokemonListData, type: (PokemonType | null)): boolean {
         return (pokemon.type.length === 1 && (type == null || pokemon.type[0] === type));
     }
+
+    public static setNickname(nickname: string, id: number) {
+        if (App.game.party.alreadyCaughtPokemon(id) && nickname != '') {
+            const pokemon = App.game.party.getPokemon(id);
+            pokemon.nickname = nickname;
+        }
+    }
+
+    public static getNickname(id: number) {
+        if (App.game.party.alreadyCaughtPokemon(id)) {
+            const pokemon = App.game.party.getPokemon(id);
+
+            return pokemon.nickname ?? pokemon.name;
+        }
+    }
 }
 
 $(document).ready(() => {

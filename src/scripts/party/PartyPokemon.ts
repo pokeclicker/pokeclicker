@@ -11,6 +11,7 @@ enum PartyPokemonSaveKeys {
     levelEvolutionTriggered,
     pokerus,
     effortPoints,
+    nickname,
 }
 
 class PartyPokemon implements Saveable {
@@ -30,6 +31,7 @@ class PartyPokemon implements Saveable {
         levelEvolutionTriggered: false,
         pokerus: GameConstants.Pokerus.None,
         effortPoints: 0,
+        nickname : null,
     };
 
     // Saveable observables
@@ -42,6 +44,7 @@ class PartyPokemon implements Saveable {
     _pokerus: KnockoutObservable<GameConstants.Pokerus>;
     proteinsUsed: KnockoutObservable<number>;
     _effortPoints: KnockoutObservable<number>;
+    _nickname: KnockoutObservable<string>;
 
     constructor(
         public id: number,
@@ -64,6 +67,7 @@ class PartyPokemon implements Saveable {
             return Math.floor(this.effortPoints / GameConstants.EP_EV_RATIO / power);
         });
         this._attack = ko.pureComputed(() => this.calculateAttack());
+        this._nickname = ko.observable(null).extend({ string: null });
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -245,6 +249,7 @@ class PartyPokemon implements Saveable {
         this.level = this.calculateLevelFromExp();
         this.pokerus = json[PartyPokemonSaveKeys.pokerus] ?? this.defaults.pokerus;
         this.effortPoints = json[PartyPokemonSaveKeys.effortPoints] ?? this.defaults.effortPoints;
+        this.nickname = json[PartyPokemonSaveKeys.nickname] ?? this.defaults.nickname;
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
@@ -276,6 +281,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.category]: this.category,
             [PartyPokemonSaveKeys.pokerus]: this.pokerus,
             [PartyPokemonSaveKeys.effortPoints]: this.effortPoints,
+            [PartyPokemonSaveKeys.nickname]: this.nickname,
         };
 
         // Don't save anything that is the default option
@@ -339,6 +345,14 @@ class PartyPokemon implements Saveable {
 
     set effortPoints(amount: number) {
         this._effortPoints(amount);
+    }
+
+    get nickname(): string {
+        return this._nickname();
+    }
+
+    set nickname(rename: string) {
+        this._nickname(rename);
     }
 
     get shiny(): boolean {

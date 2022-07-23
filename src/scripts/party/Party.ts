@@ -216,6 +216,12 @@ class Party implements Feature {
         return false;
     }
 
+    alreadyNickname(id: number): boolean {
+        const pokemon = this.getPokemon(id);
+
+        return pokemon?.nickname == null ? false : true;
+    }
+
     calculateClickAttack(useItem = false): number {
         // Base power
         // Shiny pokemon help with a 50% boost
@@ -236,6 +242,7 @@ class Party implements Feature {
         }
 
         const caughtPokemonSave = json.caughtPokemon;
+
         for (let i = 0; i < caughtPokemonSave.length; i++) {
             const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
             partyPokemon.fromJSON(caughtPokemonSave[i]);
