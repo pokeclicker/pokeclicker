@@ -67,7 +67,10 @@
                     <td>
                         <div>
                             <div class="pokemonName">
-                                <span data-bind="text: name">Name</span>
+                                <span data-bind="text: `${!App.game.party.alreadyNickname($data.id) ? $data.name : PokedexHelper.getNickname($data.id)}`">name</span>
+                                <!-- ko if: App.game.party.alreadyNickname($data.id) -->
+                                <span style="color: grey" data-bind="text: `[${$data.name}]`">text</span>
+                                <!-- /ko -->
                                 <sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
                             </div>
                             <div class="pokemonAttack" data-bind="text: attack.toLocaleString('en-US')"></div>

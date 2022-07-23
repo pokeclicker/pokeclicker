@@ -12,10 +12,16 @@
                 </button>
             </div>
             <div class="modal-body p-0">
-              <div style="position: absolute; top: 0px; right: 0px;" data-bind="if: App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus">
-                  <img width="40px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus]}.png`}"/>
-              </div>
+                <div style="position: absolute; top: 0px; right: 0px;" data-bind="if: App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus">
+                    <img width="40px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus]}.png`}"/>
+                </div>
                 <img data-bind="attr:{ src: PokedexHelper.getImageStatistics(pokemonMap[$data].id) }" src=""/>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="nickname" maxlength="12" data-bind="attr: { placeholder: !PokedexHelper.getNickname(pokemonMap[$data].id) ? 'Nickname' : PokedexHelper.getNickname(pokemonMap[$data].id)}" aria-label="Nickname" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" data-bind="click: function(){ PokedexHelper.setNickname($('#nickname').val(), pokemonMap[$data].id) }">Rename</button>
+                    </div>
+                </div>
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
                     <tr class="text-light">
