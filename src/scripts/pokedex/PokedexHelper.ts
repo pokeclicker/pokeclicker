@@ -70,6 +70,7 @@ class PokedexHelper {
             // Checks based on caught/shiny status
             const alreadyCaught = App.game.party.alreadyCaughtPokemon(pokemon.id);
             const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(pokemon.id, true);
+            const pokemonNickname = App.game.party.getPokemon(pokemon.id)?.nickname;
 
             // If the Pokemon shouldn't be unlocked yet
             const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
@@ -94,7 +95,7 @@ class PokedexHelper {
             }
 
             // Check if the name contains the string
-            if (filter.name && !pokemon.name.toLowerCase().includes(filter.name.toLowerCase().trim())) {
+            if (filter.name && !pokemon.name.toLowerCase().includes(filter.name.toLowerCase().trim()) && !pokemonNickname?.toLowerCase().includes(filter.name.toLowerCase().trim())) {
                 return false;
             }
 

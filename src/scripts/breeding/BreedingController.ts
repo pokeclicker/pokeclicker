@@ -142,7 +142,7 @@ class BreedingController {
                 return false;
             }
 
-            if (!BreedingFilters.search.value().test(partyPokemon.name)) {
+            if (!BreedingFilters.search.value().test(partyPokemon.name) && !BreedingFilters.search.value().test(partyPokemon?.nickname)) {
                 return false;
             }
 
