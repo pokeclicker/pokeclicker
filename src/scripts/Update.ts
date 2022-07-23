@@ -1008,6 +1008,11 @@ class Update implements Saveable {
             renamePokemon(saveData, 'Minior (Red-core)', 'Minior (Red Core)');
             renamePokemon(saveData, 'Minior (Violet-core)', 'Minior (Violet Core)');
             renamePokemon(saveData, 'Minior (Yellow-core)', 'Minior (Yellow Core)');
+
+            // Start Galactic questline if player has Coal Badge already
+            if (saveData.badgeCase[40]) {
+                saveData.quests.questLines.push({state: 1, name: 'A new world', quest: 0});
+            }
         },
     };
 
