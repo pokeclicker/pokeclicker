@@ -867,15 +867,15 @@ Routes.add(new RegionRoute(
         hoennsurf: ['Tentacool', 'Wingull', 'Pelipper'],
         special:
       [
-          new SpecialRoutePokemon(['Castform (sunny)'], new MultiRequirement([
+          new SpecialRoutePokemon(['Castform (Sunny)'], new MultiRequirement([
               new ObtainedPokemonRequirement(pokemonMap.Castform),
               new WeatherRequirement([WeatherType.Sunny]),
           ])),
-          new SpecialRoutePokemon(['Castform (rainy)'], new MultiRequirement([
+          new SpecialRoutePokemon(['Castform (Rainy)'], new MultiRequirement([
               new ObtainedPokemonRequirement(pokemonMap.Castform),
               new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm]),
           ])),
-          new SpecialRoutePokemon(['Castform (snowy)'], new MultiRequirement([
+          new SpecialRoutePokemon(['Castform (Snowy)'], new MultiRequirement([
               new ObtainedPokemonRequirement(pokemonMap.Castform),
               new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail, WeatherType.Fog]),
           ])),
@@ -1093,11 +1093,11 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 205', GameConstants.Region.sinnoh, 205,
     new RoutePokemon({
-        land: ['Hoothoot', 'Wurmple', 'Silcoon', 'Beautifly', 'Cascoon', 'Dustox', 'Bidoof', 'Kricketot', 'Budew', 'Buizel', 'Shellos (west)'],
+        land: ['Hoothoot', 'Wurmple', 'Silcoon', 'Beautifly', 'Cascoon', 'Dustox', 'Bidoof', 'Kricketot', 'Budew', 'Buizel', 'Shellos (West)'],
         sinnoholdrod: ['Magikarp'],
         sinnohgoodrod: ['Magikarp', 'Barboach', 'Finneon'],
         sinnohsuperrod: ['Shellder', 'Gyarados', 'Whiscash', 'Lumineon'],
-        sinnohsurf: ['Psyduck', 'Golduck', 'Tentacool', 'Tentacruel', 'Shellos (west)', 'Gastrodon (west)'],
+        sinnohsurf: ['Psyduck', 'Golduck', 'Tentacool', 'Tentacruel', 'Shellos (West)', 'Gastrodon (West)'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Valley Windworks'))]
 ));
@@ -1171,11 +1171,11 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 213', GameConstants.Region.sinnoh, 213,
     new RoutePokemon({
-        land: ['Wingull', 'Buizel', 'Shellos (east)', 'Chatot'],
+        land: ['Wingull', 'Buizel', 'Shellos (East)', 'Chatot'],
         sinnoholdrod: ['Magikarp'],
         sinnohgoodrod: ['Magikarp', 'Remoraid'],
         sinnohsuperrod: ['Gyarados', 'Octillery'],
-        sinnohsurf: ['Tentacool', 'Tentacruel', 'Wingull', 'Shellos (east)', 'Gastrodon (east)'],
+        sinnohsurf: ['Tentacool', 'Tentacruel', 'Wingull', 'Shellos (East)', 'Gastrodon (East)'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 214)],
     210.3
@@ -1183,11 +1183,11 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 212', GameConstants.Region.sinnoh, 212,
     new RoutePokemon({
-        land: ['Marill', 'Quagsire', 'Ralts', 'Kirlia', 'Roselia', 'Staravia', 'Buizel', 'Shellos (east)', 'Croagunk'],
+        land: ['Marill', 'Quagsire', 'Ralts', 'Kirlia', 'Roselia', 'Staravia', 'Buizel', 'Shellos (East)', 'Croagunk'],
         sinnoholdrod: ['Magikarp'],
         sinnohgoodrod: ['Goldeen', 'Magikarp', 'Remoraid'],
         sinnohsuperrod: ['Seaking', 'Gyarados', 'Octillery'],
-        sinnohsurf: ['Psyduck', 'Golduck', 'Shellos (east)', 'Gastrodon (east)'],
+        sinnohsurf: ['Psyduck', 'Golduck', 'Shellos (East)', 'Gastrodon (East)'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 213)],
     210.4
@@ -1203,11 +1203,11 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 218', GameConstants.Region.sinnoh, 218,
     new RoutePokemon({
-        land: ['Mr. Mime', 'Floatzel', 'Gastrodon (west)', 'Glameow', 'Chatot'],
+        land: ['Mr. Mime', 'Floatzel', 'Gastrodon (West)', 'Glameow', 'Chatot'],
         sinnoholdrod: ['Magikarp'],
         sinnohgoodrod: ['Magikarp', 'Finneon'],
         sinnohsuperrod: ['Gyarados', 'Lumineon'],
-        sinnohsurf: ['Tentacool', 'Tentacruel', 'Shellos (west)', 'Gastrodon (west)'],
+        sinnohsurf: ['Tentacool', 'Tentacruel', 'Shellos (West)', 'Gastrodon (West)'],
     }),
     [new TemporaryBattleRequirement('Galactic Boss Cyrus')],
     210.6
@@ -1249,7 +1249,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 221', GameConstants.Region.sinnoh, 221,
     new RoutePokemon({
-        land: ['Sudowoodo', 'Girafarig', 'Roselia', 'Floatzel', 'Shellos (west)', 'Gastrodon (west)', 'Stunky', 'Skuntank'],
+        land: ['Sudowoodo', 'Girafarig', 'Roselia', 'Floatzel', 'Shellos (West)', 'Gastrodon (West)', 'Stunky', 'Skuntank'],
         sinnoholdrod: ['Magikarp'],
         sinnohgoodrod: ['Magikarp', 'Finneon', 'Lumineon'],
         sinnohsuperrod: ['Gyarados', 'Clamperl', 'Lumineon'],
@@ -1281,11 +1281,11 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 224', GameConstants.Region.sinnoh, 224,
     new RoutePokemon({
-        land: ['Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Beautifly', 'Dustox', 'Roselia', 'Floatzel', 'Gastrodon (east)', 'Chatot'],
+        land: ['Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Beautifly', 'Dustox', 'Roselia', 'Floatzel', 'Gastrodon (East)', 'Chatot'],
         sinnoholdrod: ['Magikarp'],
         sinnohgoodrod: ['Magikarp', 'Remoraid'],
         sinnohsuperrod: ['Gyarados', 'Octillery', 'Luvdisc'],
-        sinnohsurf: ['Tentacruel', 'Pelipper', 'Gastrodon (east)'],
+        sinnohsurf: ['Tentacruel', 'Pelipper', 'Gastrodon (East)'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
 ));
@@ -1655,7 +1655,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kalos Route 3', GameConstants.Region.kalos, 3,
     new RoutePokemon({
-        land: ['Pidgey', 'Pikachu', 'Dunsparce', 'Azurill', 'Bidoof', 'Burmy (plant)', 'Bunnelby', 'Fletchling'],
+        land: ['Pidgey', 'Pikachu', 'Dunsparce', 'Azurill', 'Bidoof', 'Burmy (Plant)', 'Bunnelby', 'Fletchling'],
         kalosoldrod: ['Magikarp'],
         kalosgoodrod: ['Goldeen', 'Corphish'],
         kalossuperrod: ['Seaking', 'Gyarados', 'Crawdaunt'],
@@ -1777,8 +1777,8 @@ Routes.add(new RegionRoute(
         kalossuperrod: ['Poliwhirl', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
         kalossurf: ['Lombre', 'Floatzel'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokéball Factory'))]
-    // Replace req with Pokéball Factory dungeon if implemented.
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Poké Ball Factory'))]
+    // Replace req with Poké Ball Factory dungeon if implemented.
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 16', GameConstants.Region.kalos, 16,
@@ -2005,7 +2005,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Mount Hokulani', GameConstants.Region.alola, 22,
     new RoutePokemon({
-        land: ['Fearow', 'Ditto', 'Cleffa', 'Skarmory', 'Elekid', 'Beldum', 'Elgyem', 'Minior (Meteor)', 'Minior (Blue-core)', 'Minior (Green-core)', 'Minior (Indigo-core)', 'Minior (Orange-core)', 'Minior (Red-core)', 'Minior (Violet-core)', 'Minior (Yellow-core)'],
+        land: ['Fearow', 'Ditto', 'Cleffa', 'Skarmory', 'Elekid', 'Beldum', 'Elgyem', 'Minior (Meteor)', 'Minior (Blue Core)', 'Minior (Green Core)', 'Minior (Indigo Core)', 'Minior (Orange Core)', 'Minior (Red Core)', 'Minior (Violet Core)', 'Minior (Yellow Core)'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 10)],
     10.1,
@@ -2100,7 +2100,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Poni Wilds', GameConstants.Region.alola, 24,
     new RoutePokemon({
-        land: ['Granbull', 'Pelipper', 'Gastrodon (east)', 'Furfrou', 'Inkay'],
+        land: ['Granbull', 'Pelipper', 'Gastrodon (East)', 'Furfrou', 'Inkay'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
     undefined,
@@ -2109,7 +2109,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Ancient Poni Path', GameConstants.Region.alola, 25,
     new RoutePokemon({
-        land: ['Granbull', 'Pelipper', 'Gastrodon (east)', 'Furfrou', 'Inkay'],
+        land: ['Granbull', 'Pelipper', 'Gastrodon (East)', 'Furfrou', 'Inkay'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 24)],
     undefined,
@@ -2118,11 +2118,11 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Poni Breaker Coast', GameConstants.Region.alola, 26,
     new RoutePokemon({
-        land: ['Tentacruel', 'Lapras', 'Magikarp', 'Pelipper', 'Gastrodon (east)', 'Lumineon'],
+        land: ['Tentacruel', 'Lapras', 'Magikarp', 'Pelipper', 'Gastrodon (East)', 'Lumineon'],
         alolaoldrod: ['Magikarp'],
         alolagoodrod: ['Magikarp', 'Carvanha', 'Wailmer', 'Relicanth'],
         alolasuperrod: ['Gyarados', 'Sharpedo', 'Wailord', 'Relicanth'],
-        alolasurf: ['Tentacruel', 'Lapras', 'Pelipper', 'Gastrodon (east)', 'Lumineon'],
+        alolasurf: ['Tentacruel', 'Lapras', 'Pelipper', 'Gastrodon (East)', 'Lumineon'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
     undefined,
@@ -2428,7 +2428,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 9', GameConstants.Region.galar, 20,
     new RoutePokemon({
-        land: ['Cramorant', 'Octillery', 'Kingler', 'Pyukumuku', 'Gastrodon (east)', 'Jellicent', 'Mareanie', 'Glalie'],
+        land: ['Cramorant', 'Octillery', 'Kingler', 'Pyukumuku', 'Gastrodon (East)', 'Jellicent', 'Mareanie', 'Glalie'],
         water: ['Wishiwashi (Solo)', 'Qwilfish', 'Mantyke'],
     }),
     [
@@ -2441,7 +2441,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Circhester Bay', GameConstants.Region.galar, 21,
     new RoutePokemon({
-        land: ['Gastrodon (east)', 'Inkay', 'Cramorant', 'Octillery', 'Barbaracle', 'Bergmite', 'Toxapex', 'Dhelmise', 'Clobbopus'],
+        land: ['Gastrodon (East)', 'Inkay', 'Cramorant', 'Octillery', 'Barbaracle', 'Bergmite', 'Toxapex', 'Dhelmise', 'Clobbopus'],
         water: ['Lapras', 'Mantine', 'Mantyke', 'Wailmer', 'Wailord', 'Remoraid', 'Grapploct'],
         headbutt: ['Greedent'],
     }),
@@ -2731,11 +2731,11 @@ Routes.add(new RegionRoute(
         water: ['Magikarp', 'Remoraid', 'Octillery', 'Sharpedo', 'Mantyke', 'Wingull', 'Tentacool', 'Clauncher', 'Skrelp', 'Gyarados', 'Clawitzer', 'Dragalge'],
         special:
       [
-          new SpecialRoutePokemon(['Chansey', 'Exeggutor', 'Rotom (mow)'],  new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Chansey', 'Rotom (fan)', 'Tentacruel', 'Jellicent'], new WeatherRequirement([WeatherType.Overcast])),
-          new SpecialRoutePokemon(['Chansey', 'Rotom (frost)', 'Pelipper'], new WeatherRequirement([WeatherType.Rain])),
-          new SpecialRoutePokemon(['Chansey', 'Rotom (wash)', 'Pelipper', 'Chinchou', 'Lanturn'], new WeatherRequirement([WeatherType.Thunderstorm])),
-          new SpecialRoutePokemon(['Chansey', 'Exeggutor', 'Rotom (heat)', 'Fletchinder'], new WeatherRequirement([WeatherType.Sunny])),
+          new SpecialRoutePokemon(['Chansey', 'Exeggutor', 'Rotom (Mow)'],  new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Chansey', 'Rotom (Fan)', 'Tentacruel', 'Jellicent'], new WeatherRequirement([WeatherType.Overcast])),
+          new SpecialRoutePokemon(['Chansey', 'Rotom (Frost)', 'Pelipper'], new WeatherRequirement([WeatherType.Rain])),
+          new SpecialRoutePokemon(['Chansey', 'Rotom (Wash)', 'Pelipper', 'Chinchou', 'Lanturn'], new WeatherRequirement([WeatherType.Thunderstorm])),
+          new SpecialRoutePokemon(['Chansey', 'Exeggutor', 'Rotom (Heat)', 'Fletchinder'], new WeatherRequirement([WeatherType.Sunny])),
           new SpecialRoutePokemon(['Chansey', 'Rotom'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Blissey', 'Rotom', 'Drifloon', 'Jellicent', 'Wailord'], new WeatherRequirement([WeatherType.Fog])),
       ],
