@@ -899,15 +899,6 @@ class Update implements Saveable {
                     p[9] = 0;
                 });
             }
-
-            // If Pokémon doesn't have Pokérus yet, it shouldn't have Effort Points
-            saveData.party.caughtPokemon.forEach(p => {
-                // Check Pokérus state
-                if (p[8] == 0) {
-                    // Reset Effort Points
-                    p[9] = 0;
-                }
-            });
         },
 
         '0.9.10': ({ playerData, saveData }) => {
@@ -916,6 +907,15 @@ class Update implements Saveable {
 
             // Update total proteins obtained to be equal to the total purchased (or whichever is higher)
             saveData.statistics.totalProteinsObtained = Math.max(saveData.statistics.totalProteinsPurchased, saveData.statistics.totalProteinsObtained);
+
+            // If Pokémon doesn't have Pokérus yet, it shouldn't have Effort Points
+            saveData.party.caughtPokemon.forEach(p => {
+                // Check Pokérus state
+                if (!p[8]) {
+                    // Reset Effort Points
+                    p[9] = 0;
+                }
+            });
 
             // Filter already earned milestones due to item/Pokémon name updates
             const milestones = [
