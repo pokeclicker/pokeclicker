@@ -725,7 +725,19 @@
         , x: 95, y: 16
         , width: 4, height: 9
         , databind: "click:function(){MapHelper.moveToTown('Plasma Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('Plasma Frigate') }"
-        , visible:  "(App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow 1')]() >= 1 && App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 15 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() == 0) || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis 2')]() >= 1"
+        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow 1')]() >= 1 && App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 15 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() == 0"
+        , image: "assets/images/map/plasmafrigate_ship.png"
+        , connectedToTown: "Plasma Frigate"
+        })
+    %>
+
+    <!--Plasma Frigate extension-->
+    <%- include('templates/mapOverlay',
+        { name: "Plasma Frigate"
+        , x: 95, y: 16
+        , width: 4, height: 9
+        , databind: "click:function(){MapHelper.moveToTown('Plasma Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('Plasma Frigate') }"
+        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis 2')]() >= 1"
         , image: "assets/images/map/plasmafrigate_ship.png"
         , connectedToTown: "Plasma Frigate"
         })
