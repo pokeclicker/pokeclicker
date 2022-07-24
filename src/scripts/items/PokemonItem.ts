@@ -22,7 +22,10 @@ class PokemonItem extends CaughtIndicatingItem {
             });
             App.game.logbook.newLog(LogBookTypes.SHINY, `The purchased ${pokemonName} turned out to be shiny! ${App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true) ? '(duplicate)' : ''}`);
         }
-        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(pokemonName).id, shiny, true);
+        const pokemonID = PokemonHelper.getPokemonByName(pokemonName).id;
+        App.game.party.gainPokemonById(pokemonID, shiny, true);
+        const partyPokemon = App.game.party.getPokemon(pokemonID);
+        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, shiny, GameConstants.SHOPMON_EP_YIELD);
     }
 
     getCaughtStatus(): CaughtStatus {
@@ -45,11 +48,11 @@ ItemList.Togepi               = new PokemonItem('Togepi', 15000);
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
 ItemList.Skorupi              = new PokemonItem('Skorupi', 6750);
 ItemList.Combee               = new PokemonItem('Combee', 6750);
-ItemList['Burmy (plant)']        = new PokemonItem('Burmy (plant)', 6750);
+ItemList['Burmy (Plant)']        = new PokemonItem('Burmy (Plant)', 6750);
 ItemList.Cherubi              = new PokemonItem('Cherubi', 6750);
 ItemList.Spiritomb            = new PokemonItem('Spiritomb', 6750);
 ItemList.Zorua                = new PokemonItem('Zorua', 50625);
-ItemList['Meloetta (pirouette)'] = new PokemonItem('Meloetta (pirouette)', 200000);
+ItemList['Meloetta (Pirouette)'] = new PokemonItem('Meloetta (Pirouette)', 200000);
 ItemList['Furfrou (Debutante)']  = new PokemonItem('Furfrou (Debutante)', 5000000000, Currency.money);
 ItemList['Furfrou (Diamond)']    = new PokemonItem('Furfrou (Diamond)', 15000, Currency.diamond);
 ItemList['Furfrou (Matron)']     = new PokemonItem('Furfrou (Matron)', 1500000, Currency.farmPoint);

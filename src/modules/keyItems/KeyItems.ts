@@ -23,7 +23,7 @@ export default class KeyItems implements Feature {
         this.itemList = [
             new KeyItem(KeyItemType.Teachy_tv, 'A television set that is tuned to a program with useful tips for novice TRAINERS.', null, true, undefined, 'Teachy TV'),
             new KeyItem(KeyItemType.Coin_case, 'A case for holding Pokédollars.', null, true, undefined, 'Coin Case'),
-            new KeyItem(KeyItemType.Pokeball_bag, 'A small bag that can hold many different types of Pokéballs.', null, true, undefined, 'Pokéball Bag'),
+            new KeyItem(KeyItemType.Pokeball_bag, 'A small bag that can hold many different types of Poké Balls.', null, true, undefined, 'Poké Ball Bag'),
             new KeyItem(KeyItemType.Town_map, 'A very convenient map that can be viewed anytime. It even shows you your present location in the region.',
                 () => App.game.statistics.routeKills[Region.kanto][1]() >= ROUTE_KILLS_NEEDED,
                 false,
@@ -38,7 +38,7 @@ export default class KeyItems implements Feature {
                     });
                 }, 'Town Map'),
             // TODO obtain somewhere at the start
-            new KeyItem(KeyItemType.Factory_key, 'This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13.', undefined, undefined, undefined, 'Factory Key'),
+            new KeyItem(KeyItemType.Factory_key, 'This pass serves as an ID card for gaining access to the Poké Ball factory that lies along Route 13.', undefined, undefined, undefined, 'Factory Key'),
             new KeyItem(KeyItemType.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region and beyond.<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon.', undefined, undefined, undefined, 'Dungeon Ticket'),
             new KeyItem(KeyItemType.Super_rod, 'The best fishing rod for catching wild water Pokémon.',
                 () => App.game.statistics.routeKills[Region.kanto][12]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Super Rod'),
@@ -46,7 +46,7 @@ export default class KeyItems implements Feature {
                 () => App.game.party.caughtPokemon.length >= 110, undefined, undefined, 'Holo Caster'),
             new KeyItem(KeyItemType.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémon Attack. Some baby Pokémon can only be found through breeding, too!',
                 () => App.game.statistics.routeKills[Region.kanto][5]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Mystery Egg'),
-            new KeyItem(KeyItemType.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City.'),
+            new KeyItem(KeyItemType.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City.', undefined, undefined, undefined, 'Safari Ticket'),
             new KeyItem(KeyItemType.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.',
                 () => MapHelper.accessToRoute(14, Region.kanto), undefined, undefined, 'Wailmer Pail'),
 
@@ -57,9 +57,9 @@ export default class KeyItems implements Feature {
             new KeyItem(KeyItemType.DNA_splicers, 'A splicer that fuses certain Pokémon.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Giant Chasm')]() > 0,
                 undefined, undefined, 'DNA Splicers'),
-            new KeyItem(KeyItemType.Pokerus_virus, 'A virus sample collected from the Hatchery',
+            new KeyItem(KeyItemType.Pokerus_virus, 'A virus sample collected from the Hatchery.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Distortion World')]() > 0,
-                undefined, () => { App.game.party.getPokemon(pokemonMap[(Starter[player.starter()])].id).pokerus = Pokerus.Contagious; }, 'Pokerus Virus'),
+                undefined, () => { App.game.party.getPokemon(pokemonMap[(Starter[player.starter()])].id).pokerus = Pokerus.Contagious; }, 'Pokérus Virus'),
         ];
     }
 

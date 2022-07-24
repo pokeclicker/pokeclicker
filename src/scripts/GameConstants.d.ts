@@ -92,7 +92,7 @@ namespace GameConstants {
         'Hatch',
         'Pokeball',
         'Click',
-        'Route Kill',
+        'Route Defeat',
         'Clear Gym',
         'Clear Dungeon',
         'Farming',
@@ -136,9 +136,15 @@ namespace GameConstants {
     declare const QUEST_CLICKS_PER_SECOND: number;
     declare const QUESTS_PER_SET: number;
     declare const BASE_EP_YIELD: number;
-    declare const SHINY_EP_YIELD: number;
-    declare const DUNGEON_EP_YIELD: number;
     declare const STONE_EP_YIELD: number;
+    declare const WANDERER_EP_YIELD: number;
+    declare const SHOPMON_EP_YIELD: number;
+    declare const SAFARI_EP_YIELD: number;
+    declare const SHINY_EP_MODIFIER: number;
+    declare const REPEATBALL_EP_MODIFIER: number;
+    declare const DUNGEON_EP_MODIFIER: number;
+    declare const DUNGEON_BOSS_EP_MODIFIER: number;
+    declare const ROAMER_EP_MODIFIER: number;
     declare const EP_EV_RATIO: number;
     declare const EP_CHALLENGE_MODIFIER: number;
     declare const DNA_ITEM_CHANCE: number;
@@ -169,6 +175,7 @@ namespace GameConstants {
         'Lureball',
         'Nestball',
         'Repeatball',
+        'Beastball',
     }
     declare enum Currency {
         money,
@@ -271,6 +278,22 @@ namespace GameConstants {
         'Whipped_dream',
         'Ice_stone',
     }
+    declare enum ShardType {
+        'None',
+        'Red Shard',
+        'Yellow Shard',
+        'Green Shard',
+        'Blue Shard',
+        'Grey Shard',
+        'Purple Shard',
+        'Ochre Shard',
+        'Black Shard',
+        'Crimson Shard',
+        'Lime Shard',
+        'White Shard',
+        'Pink Shard',
+        'Cyan Shard',
+    }
     declare enum BattleItemType {
         'xAttack' = '',
         'xClick' = '',
@@ -312,6 +335,21 @@ namespace GameConstants {
         'Eternatus',
         'Slowpoke (Galar)'
     }
+
+    declare enum UltraBeastType {
+         'Nihilego',
+         'Buzzwole',
+         'Pheromosa',
+         'Xurkitree',
+         'Kartana',
+         'Celesteela',
+         'Blacephalon',
+         'Stakataka',
+         'Guzzlord',
+         'Poipole',
+         'Naganadel'
+     }
+
     declare enum PokeBlockColor {
         Black,
         Red,

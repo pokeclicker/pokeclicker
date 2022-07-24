@@ -639,7 +639,7 @@ GymList['Eterna City'] = new Gym(
     'Eterna City',
     [
         new GymPokemon('Turtwig', 1433000, 20),
-        new GymPokemon('Cherrim (overcast)', 1437500, 20),
+        new GymPokemon('Cherrim (Overcast)', 1437500, 20),
         new GymPokemon('Roserade', 1439000, 22),
     ],
     BadgeEnums.Forest,
@@ -1195,7 +1195,7 @@ GymList['Champion Diantha'] = new Champion(
     undefined,
     undefined,
     () => {
-        App.game.quests.getQuestLine('The new kid').beginQuest();
+        App.game.quests.getQuestLine('The New Kid').beginQuest();
     }
 );
 
@@ -1248,7 +1248,7 @@ GymList['Exeggutor Island'] = new Gym(
     'Exeggutor Island',
     [
         new GymPokemon('Golurk', 76658268, 53),
-        new GymPokemon('Gastrodon (east)', 76658268, 53),
+        new GymPokemon('Gastrodon (East)', 76658268, 53),
         new GymPokemon('Flygon', 76658268, 53),
         new GymPokemon('Mudsdale', 77747374, 54),
     ],
@@ -1495,9 +1495,11 @@ GymList['Champion Hau'] = new Champion(
     [
         new GymPokemon('Leafeon', 89636471, 58),
         new GymPokemon('Incineroar', 96725389, 60),
-    ]
+    ],
+    () => {
+        App.game.quests.getQuestLine('Ultra Beast Hunt').beginQuest();
+    }
 );
-
 
 //Galar Leaders
 //TODO Addition of G-Max forms?
