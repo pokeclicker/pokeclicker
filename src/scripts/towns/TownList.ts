@@ -1860,7 +1860,7 @@ TownList['Mt. Coronet North'] = new DungeonTown(
                 new RouteKillRequirement(10, GameConstants.Region.sinnoh, 232),
             ]),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lake Verity')),
-        ])
+        ]),
     ]
 );
 TownList['Lake Acuity'] = new DungeonTown(
