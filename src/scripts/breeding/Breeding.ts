@@ -211,7 +211,7 @@ class Breeding implements Feature {
                 partyPokemon.calculatePokerus();
             }
             egg.addSteps(amount, this.multiplier);
-            if (this.queueList().length && egg.progress() >= 100) {
+            if (this.queueList().length && egg.canHatch()) {
                 this.hatchPokemonEgg(index);
             }
         }
