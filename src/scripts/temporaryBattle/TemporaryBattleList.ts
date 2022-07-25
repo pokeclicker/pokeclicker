@@ -692,7 +692,6 @@ TemporaryBattleList.Hugh2 = new TemporaryBattle(
         new GymPokemon('Snivy', 11630416, 8/*, new StarterRequirement(GameConstants.Region.unova, 2)*/),
     ],
     'It can\'t be! How could I have lost? I need to apologize to my partner...',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Floccesy Ranch'))],
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 20),
         new TemporaryBattleRequirement('Hugh1'),
