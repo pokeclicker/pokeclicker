@@ -216,13 +216,15 @@ class Dungeon {
     }
 
     public getRandomLoot(tier: LootTier): Loot {
-        return Rand.fromWeightedArray(this.lootTable[tier], this.lootTable[tier].map((loot) => loot.weight ?? 1));
+        const lootTable = this.lootTable[tier].filter((loot) => !loot.requirement || loot.requirement.isCompleted());
+        return Rand.fromWeightedArray(lootTable, lootTable.map((loot) => loot.weight ?? 1));
     }
 
     public getLootTierWeights(clears: number, highestRegion: GameConstants.Region): Record<LootTier, number> {
         if (GameConstants.getDungeonRegion(this.name) < highestRegion - 2) {
             return Object.entries(nerfedLootTierChance).reduce((chances, [tier, chance]) => {
-                if (tier in this.lootTable) {
+                if (tier in this.lootTable &&
+                    this.lootTable[tier].some((loot) => !loot.requirement || loot.requirement.isCompleted())) {
                     chances[tier] = chance;
                 }
                 return chances;
