@@ -132,7 +132,7 @@ export enum AchievementType {
     'Hatch',
     'Pokeball',
     'Click',
-    'Route Kill',
+    'Route Defeat',
     'Clear Gym',
     'Clear Dungeon',
     'Farming',
@@ -228,9 +228,17 @@ export const QUESTS_PER_SET = 10;
 
 // EVs
 export const BASE_EP_YIELD = 100;
-export const SHINY_EP_YIELD = 5;
-export const DUNGEON_EP_YIELD = 200;
 export const STONE_EP_YIELD = 1000;
+export const WANDERER_EP_YIELD = 500;
+export const SHOPMON_EP_YIELD = 1000;
+export const SAFARI_EP_YIELD = 1000;
+
+export const SHINY_EP_MODIFIER = 5;
+export const REPEATBALL_EP_MODIFIER = 5;
+export const DUNGEON_EP_MODIFIER = 3;
+export const DUNGEON_BOSS_EP_MODIFIER = 10;
+export const ROAMER_EP_MODIFIER = 50;
+
 export const EP_EV_RATIO = 1000;
 export const EP_CHALLENGE_MODIFIER = 10;
 
@@ -271,6 +279,7 @@ export enum Pokeball {
     'Lureball',
     'Nestball',
     'Repeatball',
+    'Beastball',
 }
 
 export enum Currency {
@@ -566,7 +575,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.hoenn]: new Set(['Mauville City', 'New Mauville', 'Weather Institute']),
         [Region.sinnoh]: new Set(['Sunyshore City', 'Valley Windworks', 'Team Galactic Eterna Building', 'Team Galactic HQ']),
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City']),
-        [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Pokéball Factory', 'Team Flare Secret HQ']),
+        [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Poké Ball Factory', 'Team Flare Secret HQ']),
         [Region.alola]: new Set(['Aether Paradise', 'Hokulani Observatory', 'Aether Foundation']),
         [Region.galar]: new Set(['Spikemuth']),
     },
@@ -577,7 +586,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.hoenn]: new Set(['Petalburg City', 'Jagged Pass']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
-        [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
+        [Region.kalos]: new Set(['Lost Hotel']),
         [Region.alola]: new Set(['Trainers\' School', 'Thrifty Megamart', 'Po Town', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
         [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side']),
     },
@@ -650,6 +659,23 @@ export enum StoneType {
     'Ice_stone',
 }
 
+export enum ShardType {
+    'None' = -1,
+    'Red Shard',
+    'Yellow Shard',
+    'Green Shard',
+    'Blue Shard',
+    'Grey Shard',
+    'Purple Shard',
+    'Ochre Shard',
+    'Black Shard',
+    'Crimson Shard',
+    'Lime Shard',
+    'White Shard',
+    'Pink Shard',
+    'Cyan Shard',
+}
+
 export enum BattleItemType {
     'xAttack' = 'xAttack',
     'xClick' = 'xClick',
@@ -684,16 +710,30 @@ export enum PokemonItemType {
     'Beldum',
     'Skorupi',
     'Combee',
-    'Burmy (plant)',
+    'Burmy (Plant)',
     'Spiritomb',
     'Cherubi',
     'Zorua',
-    'Meloetta (pirouette)',
+    'Meloetta (Pirouette)',
     'Type: Null',
     'Poipole',
     'Toxel',
     'Eternatus',
     'Slowpoke (Galar)',
+}
+
+export enum UltraBeastType {
+    'Nihilego',
+    'Buzzwole',
+    'Pheromosa',
+    'Xurkitree',
+    'Kartana',
+    'Celesteela',
+    'Blacephalon',
+    'Stakataka',
+    'Guzzlord',
+    'Poipole',
+    'Naganadel',
 }
 
 export enum PokeBlockColor {
@@ -1052,14 +1092,13 @@ export const UnovaDungeons = [
 
 export const KalosDungeons = [
     'Santalune Forest',
-    'Parfum Palace',
     'Connecting Cave',
     'Glittering Cave',
     'Reflection Cave',
     // 'Tower of Mastery',
     'Sea Spirit\'s Den',
     'Kalos Power Plant',
-    'Pokéball Factory',
+    'Poké Ball Factory',
     'Lost Hotel',
     'Frost Cavern',
     'Team Flare Secret HQ',
@@ -1200,6 +1239,9 @@ export const TemporaryBattles = [
     'Captain Kiawe',
     'Captain Sophocles',
     'Kahuna Nanu',
+    'Anabel',
+    'Captain Mina UB',
+    'Kahuna Nanu UB',
     'Ash Ketchum Alola',
 ];
 
@@ -1258,6 +1300,7 @@ export enum ShardTraderLocations {
     'Accumula Town',
     'Nuvema Town',
     'Camphrier Town',
+    'Parfum Palace',
     'Ambrette Town',
     'Cyllage City',
     'Geosenge Town',

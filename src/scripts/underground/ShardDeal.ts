@@ -22,7 +22,7 @@ class ShardDeal {
     }
 
     public static canUse(town: GameConstants.ShardTraderLocations, i: number): boolean {
-        const deal = ShardDeal.list[GameConstants.ShardTraderLocations[town]].peek()[i];
+        const deal = ShardDeal.list[GameConstants.ShardTraderLocations[town]]?.peek()[i];
         if (!deal) {
             return false;
         }
@@ -36,7 +36,7 @@ class ShardDeal {
     }
 
     public static use(town: GameConstants.ShardTraderLocations, i: number, tradeTimes = 1) {
-        const deal = ShardDeal.list[GameConstants.ShardTraderLocations[town]].peek()[i];
+        const deal = ShardDeal.list[GameConstants.ShardTraderLocations[town]]?.peek()[i];
         if (ShardDeal.canUse(town, i)) {
             const trades = deal.shards.map(shard => {
                 const amt = player.getUndergroundItemAmount(shard.shardType.id);
@@ -46,10 +46,17 @@ class ShardDeal {
             const qp = App.game.wallet.currencies[GameConstants.Currency.questPoint]();
             const maxCurrencyTrades = Math.floor(qp / deal.questPointCost);
             const maxTrades = Math.min(maxCurrencyTrades,trades.reduce((a,b) => Math.min(a,b), tradeTimes));
-            deal.shards.forEach((value) =>
-                Underground.gainMineItem(value.shardType.id, -value.amount * maxTrades));
+            deal.shards.forEach((value) => Underground.gainMineItem(value.shardType.id, -value.amount * maxTrades));
+
+            const amount = deal.item.amount * maxTrades;
+            const multiple = amount > 1 ? 's' : '';
             deal.item.itemType.gain(deal.item.amount * maxTrades);
             App.game.wallet.loseAmount(new Amount(deal.questPointCost * maxTrades, GameConstants.Currency.questPoint));
+            Notifier.notify({
+                message: `You traded for ${amount.toLocaleString('en-US')} ${GameConstants.humanifyString(deal.item.itemType.displayName)}${multiple}`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Items.item_bought,
+            });
         }
     }
 
@@ -1215,6 +1222,27 @@ class ShardDeal {
                         {shardTypeString: 'Black Shard', amount: 75},
                     ],
                     ItemList.Reaper_cloth,
+                    1),
+            ]
+        );
+        ShardDeal.list[GameConstants.ShardTraderLocations['Parfum Palace']] = ko.observableArray(
+            [
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Red Shard', amount: 5000},
+                        {shardTypeString: 'Yellow Shard', amount: 5000},
+                        {shardTypeString: 'Green Shard', amount: 5000},
+                        {shardTypeString: 'Blue Shard', amount: 5000},
+                        {shardTypeString: 'Grey Shard', amount: 2000},
+                        {shardTypeString: 'Purple Shard', amount: 2000},
+                        {shardTypeString: 'Ochre Shard', amount: 2000},
+                        {shardTypeString: 'Black Shard', amount: 1000},
+                        {shardTypeString: 'Crimson Shard', amount: 1000},
+                        {shardTypeString: 'Lime Shard', amount: 1000},
+                        {shardTypeString: 'White Shard', amount: 1000},
+                        {shardTypeString: 'Pink Shard', amount: 500},
+                    ],
+                    ItemList['Furfrou (Star)'],
                     1),
             ]
         );

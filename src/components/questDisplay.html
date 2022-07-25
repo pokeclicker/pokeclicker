@@ -72,17 +72,22 @@
                     <!-- /ko -->
                     <!-- ko if: $data.curQuestObject().quests -->
                         <!-- ko foreach: $data.curQuestObject().quests -->
-                        <tr>
-                            <td colspan="2">
-                                <div class="progress p-0">
-                                    <div class="progress-bar bg-success" role="progressbar"
-                                        data-bind="attr:{ style: 'width:' + ($data.progress() * 100) + '%'}"
-                                        aria-valuemin="0" aria-valuemax="100">
-                                        <span data-bind="text: ko.pureComputed(function(){return $data.progressText()})">0/1000</span>
+                            <!-- ko if: $data.description-->
+                                <tr class="text-center font-italic">
+                                    <td colspan="2" data-bind="text: $data.description"></td>
+                                </tr>
+                            <!-- /ko -->
+                            <tr>
+                                <td colspan="2">
+                                    <div class="progress p-0">
+                                        <div class="progress-bar bg-success" role="progressbar"
+                                            data-bind="attr:{ style: 'width:' + ($data.progress() * 100) + '%'}"
+                                            aria-valuemin="0" aria-valuemax="100">
+                                            <span data-bind="text: ko.pureComputed(function(){return $data.progressText()})">0/1000</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
                         <!-- /ko -->
                     <!-- /ko -->
                 <!-- /ko -->

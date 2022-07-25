@@ -46,8 +46,10 @@
                     <div id="mineBody" class="container" style="margin:auto">
                     </div>
                     <div class='row no-gutters'>
-                        <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'>Hammer (<knockout data-bind="text: Underground.HAMMER_ENERGY"></knockout> energy)</button>
-                        <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'>Chisel (<knockout data-bind="text: Underground.CHISEL_ENERGY"></knockout> energy)</button>
+                        <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'
+                        data-bind="tooltip: {title: 'Hammer will mine 1 layer of all 9 tiles in a chosen 3x3 area.', trigger: 'hover', placement: 'top'}">Hammer (<knockout data-bind="text: Underground.HAMMER_ENERGY"></knockout> energy)</button>
+                        <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'
+                        data-bind="tooltip: {title: 'Chisel will mine 2 layers on a single chosen tile.', trigger: 'hover', placement: 'top'}">Chisel (<knockout data-bind="text: Underground.CHISEL_ENERGY"></knockout> energy)</button>
                         <button class="col-12 col-md-4 btn btn-secondary"
                             id="mine-survey-result"
                             data-bind="
@@ -63,11 +65,14 @@
                         </button>
                         <button class='col-12 col-md-4 btn btn-success'
                                 onClick='Mine.survey()'
-                                data-bind="disable: Mine.surveyResult() ? true : false">
+                                data-bind="disable: Mine.surveyResult() ? true : false, tooltip: {title: `Survey gives you information about the items to be found on this layer. It also fully damages ${App.game.underground.getSurvey_Efficiency()} (cleared or uncleared) random tile${App.game.underground.getSurvey_Efficiency() > 1 ? 's' : ''}.`, trigger: 'hover', placement: 'top'}">
                             Survey (<knockout data-bind="text: App.game.underground.getSurvey_Cost()"></knockout> energy)
                         </button>
-                        <button class='col-12 col-md-4 btn btn-warning' onClick='Mine.bomb()'>Bomb (<knockout data-bind="text: Underground.BOMB_ENERGY"></knockout> energy)</button>
-                        <button class='col-12 col-md-4 btn btn-danger' onClick='Mine.skipLayer(true)'>Skip (<knockout data-bind="text: `${Mine.skipsRemaining()} / ${Mine.maxSkips}`"></knockout>)</button>
+                        <!-- FIX NUMBER-->
+                        <button class='col-12 col-md-4 btn btn-warning' onClick='Mine.bomb()'
+                        data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, trigger: 'hover', placement: 'top'}">Bomb (<knockout data-bind="text: Underground.BOMB_ENERGY"></knockout> energy)</button>
+                        <button class='col-12 col-md-4 btn btn-danger' onClick='Mine.skipLayer(true)'
+                        data-bind="tooltip: {title: `Skips the current layer. Fully mine a layer to recover one Skip.`, trigger: 'hover', placement: 'top'}">Skip (<knockout data-bind="text: `${Mine.skipsRemaining()} / ${Mine.maxSkips}`"></knockout>)</button>
                     </div>
                 </div>
                 <div id="treasures" class="tab-pane fade">
@@ -241,13 +246,14 @@
                 <span data-bind="text: '('+$data.amount().toLocaleString('en-US')+')'"></span>
             </td>
             <td class='vertical-middle' data-bind='text: name'></td>
-            <!-- ko if: valueType == "Mine Egg" -->
+            <!-- ko if: (Underground.getMineItemById(id).isShard() || valueType == "Mine Egg") -->
             <td></td>
             <!-- /ko -->
-            <!-- ko ifnot: valueType == "Mine Egg" -->
+            <!-- ko ifnot: (Underground.getMineItemById(id).isShard() || valueType == "Mine Egg")  -->
             <td class='vertical-middle' data-bind='text: value + " " + GameConstants.camelCaseToString(UndergroundItem.getFullResourceName(valueType, value))'></td>
             <!-- /ko -->
             <td class='vertical-middle'>
+                <!-- ko ifnot: Underground.getMineItemById(id).isShard() -->
                 <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
                     <!-- ko ifnot: valueType == "Mine Egg" -->
                     <label
@@ -274,6 +280,7 @@
                     </div>
                     <!-- /ko -->
                 </div>
+                <!-- /ko -->
             </td>
         </tr>
     </script>
@@ -281,7 +288,7 @@
 
 <div aria-labelledby="mineSellAllTreasuresModalLabel" class="modal fade noselect mt-5" id="mineSellAllTreasuresModal" role="dialog"
      style="cursor:default" tabindex="-1">
-    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document" data-bind="let: { filteredMineInvetory: player.mineInventory().filter(t => t.amount() > 0 && t.valueType != 'Mine Egg') }">
+    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document" data-bind="let: { filteredMineInvetory: player.mineInventory().filter(t => t.amount() > 0 && t.valueType != 'Mine Egg' && !Underground.getMineItemById(t.id).isShard()) }">
         <div class="modal-content">
             <div class="modal-header d-block">
                 <h4 class="mb-0">
