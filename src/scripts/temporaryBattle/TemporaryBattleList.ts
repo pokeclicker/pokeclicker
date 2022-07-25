@@ -106,6 +106,7 @@ TemporaryBattleList['Team Plasma Grunt 2'] = new TemporaryBattle(
     'Don\'t let it go to your head... But you put up a good fight, kid!',
     [
         new GymBadgeRequirement(BadgeEnums.Bolt),
+        new TemporaryBattleRequirement('Team Plasma Grunt 1'),
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 3),
     ],
     undefined,
@@ -120,6 +121,7 @@ TemporaryBattleList['Team Plasma Grunt 3'] = new TemporaryBattle(
     'What\'s the big idea? This Pokémon I stole is useless!',
     [
         new GymBadgeRequirement(BadgeEnums.Bolt),
+        new TemporaryBattleRequirement('Team Plasma Grunt 1'),
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 3),
     ],
     undefined,
@@ -189,7 +191,13 @@ TemporaryBattleList['Team Plasma Grunt 6'] = new TemporaryBattle(
         new GymPokemon('Garbodor', 24848300, 39),
     ],
     'What a blunder to have made in front of Zinzolin...',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 8)],
+    [
+        new TemporaryBattleRequirement('Team Plasma Grunt 4'),
+        new TemporaryBattleRequirement('Team Plasma Grunt 5'),
+        new TemporaryBattleRequirement('Team Plasma Grunts 1'),
+        new TemporaryBattleRequirement('Team Plasma Grunts 2'),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 8),
+    ],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -297,9 +305,9 @@ TemporaryBattleList.Colress = new TemporaryBattle(
     ],
     'So this is what it means to draw forth the power hidden in your Pokémon! To me, whether Team Plasma wins or whether you win will decide how the relationship between people and Pokémon should be! You\'d better hurry, they have already captured the legendary Dragon-type Pokémon! Good luck in your battle!',
     [
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 17),
-        new TemporaryBattleRequirement('Plasma Shadow 1'),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')),
+        new TemporaryBattleRequirement('Plasma Shadow 1'),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 17),
     ]
 );
 TemporaryBattleList['Plasma Shadow 2'] = new TemporaryBattle(
@@ -355,10 +363,10 @@ TemporaryBattleList['Ghetsis 1'] = new TemporaryBattle(
     ],
     'I can\'t believe it! The Black and White Kyurem I went to all the trouble of preparing! How irritating! Now I have to go recapture Kyurem, don\'t I? But first, I\'ll take down this disgusting Trainer with my own hand! This time I WILL succeed! No matter what they try, no one will be able to stop me!',
     [
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 20),
         new TemporaryBattleRequirement('Plasma Shadow 2'),
         new TemporaryBattleRequirement('Plasma Shadow 3'),
         new TemporaryBattleRequirement('Plasma Shadow 4'),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 20),
     ],
     undefined,
     {
