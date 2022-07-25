@@ -5935,27 +5935,6 @@ dungeonList['Santalune Forest'] = new Dungeon('Santalune Forest',
     400000, 2
 );
 
-dungeonList['Parfum Palace'] = new Dungeon('Parfum Palace',
-    ['Goldeen', 'Seaking', 'Magikarp', 'Gyarados', 'Corphish', 'Crawdaunt'],
-    {
-        common: [
-            {loot: 'Oran'},
-            {loot: 'Lucky_incense'},
-            {loot: 'xAttack'},
-        ],
-        rare: [
-            {loot: 'Blue Shard'},
-            {loot: 'Red Shard'},
-        ],
-        legendary: [
-            {loot: 'Revive', weight: 2},
-            {loot: 'MediumRestore'},
-        ],
-    },
-    6303405,
-    [new DungeonBossPokemon('Furfrou', 56375930, 50)],
-    445000, 6);
-
 dungeonList['Connecting Cave'] = new Dungeon('Connecting Cave',
     [
         {pokemon: 'Zubat', options: { weight: 1.33 }},
