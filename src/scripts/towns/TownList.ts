@@ -2323,8 +2323,10 @@ TownList['Pledge Grove'] = new DungeonTown(
 TownList['Floccesy Ranch'] = new DungeonTown(
     'Floccesy Ranch',
     GameConstants.Region.unova,
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 20)],
-    [TemporaryBattleList.Hugh2]
+    [
+        new RouteKillRequirement(10, GameConstants.Region.unova, 20),
+        new TemporaryBattleRequirement('Hugh2'),
+    ]
 );
 TownList['Liberty Garden'] = new DungeonTown(
     'Liberty Garden',

@@ -704,6 +704,36 @@
      %>
 
      <%- include('templates/mapOverlay',
+         { name: "Rival Silver"
+         , x: 54, y: 41
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Silver1'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Silver1'] && TemporaryBattleList['Silver1'].isVisible()"
+         , image: "assets/images/map/silver.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Rival Silver"
+         , x: 24, y: 54
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Silver2'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Silver2'] && TemporaryBattleList['Silver2'].isVisible()"
+         , image: "assets/images/map/silver.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Rival Silver"
+         , x: 93, y: 14
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Silver5'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Silver5'] && TemporaryBattleList['Silver5'].isVisible()"
+         , image: "assets/images/map/silver.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
          { name: "Ash Ketchum"
          , x: 0, y: 21
          , width: 4, height: 4

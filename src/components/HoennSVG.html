@@ -874,6 +874,66 @@
          })
     %>
 
+    <%- include('templates/mapOverlay',
+        { name: "Pokémon Trainer May"
+        , x: 15, y: 31
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['May1'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['May1'] && TemporaryBattleList['May1'].isVisible()"
+        , image: "assets/images/map/may.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Pokémon Trainer May"
+        , x: 1, y: 25
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['May2'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['May2'] && TemporaryBattleList['May2'].isVisible()"
+        , image: "assets/images/map/may.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Pokémon Trainer May"
+        , x: 29, y: 30
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['May3'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['May3'] && TemporaryBattleList['May3'].isVisible()"
+        , image: "assets/images/map/may.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Pokémon Trainer Wally"
+        , x: 28, y: 25
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Wally1'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Wally1'] && TemporaryBattleList['Wally1'].isVisible()"
+        , image: "assets/images/map/wally.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Pokémon Trainer May"
+        , x: 40, y: 7
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['May4'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['May4'] && TemporaryBattleList['May4'].isVisible()"
+        , image: "assets/images/map/may.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Pokémon Trainer May"
+        , x: 70, y: 13
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['May5'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['May5'] && TemporaryBattleList['May5'].isVisible()"
+        , image: "assets/images/map/may.png"
+        })
+    %>
+
      <%- include('templates/mapOverlay',
          { name: "Ash Ketchum"
          , x: 50, y: 10

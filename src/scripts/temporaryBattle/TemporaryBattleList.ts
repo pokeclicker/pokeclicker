@@ -693,6 +693,10 @@ TemporaryBattleList.Hugh2 = new TemporaryBattle(
     ],
     'It can\'t be! How could I have lost? I need to apologize to my partner...',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Floccesy Ranch'))],
+    [
+        new RouteKillRequirement(10, GameConstants.Region.unova, 20),
+        new TemporaryBattleRequirement('Hugh1'),
+    ],
     undefined,
     {
         displayName: 'Pokémon Trainer Hugh',
