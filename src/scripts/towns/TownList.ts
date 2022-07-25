@@ -2671,6 +2671,14 @@ TownList['Camphrier Town'] = new Town(
         npcs: [CamphrierFlabébéEnthusiast],
     }
 );
+TownList['Parfum Palace'] = new Town(
+    'Parfum Palace',
+    GameConstants.Region.kalos,
+    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou Trader')],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)],
+    }
+);
 TownList['Ambrette Town'] = new Town(
     'Ambrette Town',
     GameConstants.Region.kalos,
@@ -2783,11 +2791,6 @@ TownList['Santalune Forest'] = new DungeonTown(
     'Santalune Forest',
     GameConstants.Region.kalos,
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 2)]
-);
-TownList['Parfum Palace'] = new DungeonTown(
-    'Parfum Palace',
-    GameConstants.Region.kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)]
 );
 TownList['Connecting Cave'] = new DungeonTown(
     'Connecting Cave',
