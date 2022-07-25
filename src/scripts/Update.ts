@@ -1008,7 +1008,28 @@ class Update implements Saveable {
             renamePokemon(saveData, 'Minior (Red-core)', 'Minior (Red Core)');
             renamePokemon(saveData, 'Minior (Violet-core)', 'Minior (Violet Core)');
             renamePokemon(saveData, 'Minior (Yellow-core)', 'Minior (Yellow Core)');
+
+            // Update mine inventory
+            playerData.mineInventory.forEach(i => {
+                if (i.valueType == 'Diamond') {
+                    // Shards
+                    if (i.name.includes('Shard')) {
+                        i.valueType = 2;
+                    } else { // Diamond items
+                        i.valueType = 0;
+                    }
+                }
+                // Fossils
+                if (i.valueType == 'Mine Egg') {
+                    i.valueType = 3;
+                }
+                // Gems
+                if (i.value == 100) {
+                    i.valueType = 1;
+                }
+            });
         },
+
     };
 
     constructor() {

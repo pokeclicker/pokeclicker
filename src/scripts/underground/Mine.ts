@@ -35,7 +35,7 @@ class Mine {
 
         let added = 0;
         for (let i = 0; i < App.game.underground.getMaxItems(); i++) {
-            const item = UndergroundItem.getRandomItem();
+            const item = UndergroundItems.getRandomItem();
             const x = Mine.getRandomCoord(Underground.sizeX, item.space[0].length);
             const y = Mine.getRandomCoord(App.game.underground.getSizeY(), item.space.length);
             const res = Mine.canAddReward(x, y, item);
@@ -48,7 +48,7 @@ class Mine {
         // Check in case player upgrade min above max
         const min = Math.min(App.game.underground.getMinItems(), App.game.underground.getMaxItems());
         while (added < min) {
-            const item = UndergroundItem.getRandomItem();
+            const item = UndergroundItems.getRandomItem();
             const x = Mine.getRandomCoord(Underground.sizeX, item.space[0].length);
             const y = Mine.getRandomCoord(App.game.underground.getSizeY(), item.space.length);
             const res = Mine.canAddReward(x, y, item);
@@ -183,28 +183,25 @@ class Mine {
 
     private static rewardSummary() {
         return Mine.rewardNumbers.reduce((res, id) => {
-            const reward = UndergroundItem.list.find(x => x.id == id);
+            const reward = UndergroundItems.list.find(x => x.id == id);
 
-            if (ItemList[reward.valueType]) {
-                res.evoItems++;
-            } else {
-                switch (reward.valueType) {
-                    case 'Diamond': {
-                        if (reward.isShard()) {
-                            res.shards++;
-                            break;
-                        }
-                        res.totalValue += reward.value;
-                        break;
-                    }
-                    case 'Mine Egg': {
-                        res.fossils++;
-                        break;
-                    }
-                    default: {
-                        res.plates++;
-                    }
-                }
+            switch (reward.valueType) {
+                case UndergroundItemValueType.Diamond:
+                    res.totalValue += reward.value;
+                    break;
+                case UndergroundItemValueType.Fossil:
+                    res.fossils++;
+                    break;
+                case UndergroundItemValueType.Shard:
+                    res.shards++;
+                    break;
+                case UndergroundItemValueType.EvolutionItem:
+                    res.evoItems++;
+                    break;
+                case UndergroundItemValueType.Gem:
+                    res.plates++;
+                    break;
+                default:
             }
             return res;
         }, {fossils: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0});
