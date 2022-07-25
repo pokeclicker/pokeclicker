@@ -917,6 +917,9 @@ class Update implements Saveable {
                 }
             });
 
+            // Turn Parfum Palace into a town
+            saveData.statistics.dungeonsCleared.splice(96, 1);
+
             // Filter already earned milestones due to item/Pokémon name updates
             const milestones = [
                 [5, '25 x Poké Ball'],
