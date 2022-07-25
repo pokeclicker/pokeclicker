@@ -121,6 +121,7 @@ type ItemNameType
     | 'Furfrou (Dandy)'
     | 'Furfrou (Kabuki)'
     | 'Furfrou (Pharaoh)'
+    | 'Furfrou (Star)'
     | 'Type: Null'
     | 'Poipole'
     | 'Eternatus'

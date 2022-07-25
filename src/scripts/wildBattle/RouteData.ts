@@ -1397,7 +1397,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Smeargle', 'Volbeat', 'Illumise', 'Roselia', 'Croagunk', 'Ducklett', 'Flabébé (Orange)', 'Flabébé (White)', 'Spritzee', 'Swirlix'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Parfum Palace'))]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)]
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 8', GameConstants.Region.kalos, 8,
