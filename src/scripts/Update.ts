@@ -85,7 +85,7 @@ class Update implements Saveable {
             saveData.badgeCase = saveData.badgeCase || [];
             // Not using game constants incase the value isn't 39 in the future
             if (saveData.badgeCase[39]) {
-                saveData.quests.questLines.push({state: 1, name: 'Mystery of Deoxys', quest: 0});
+                Update.startQuestLine(saveData, 'Mystery of Deoxys');
             }
         },
 
@@ -112,7 +112,7 @@ class Update implements Saveable {
             // If the player has the Soul Badge already
             // Not using game constants incase the badge value isn't 5 in the future
             if (saveData.badgeCase[5]) {
-                saveData.quests.questLines.push({state: 1, name: 'Mining Expedition', quest: 0});
+                Update.startQuestLine(saveData, 'Mining Expedition');
             }
         },
 
@@ -422,7 +422,7 @@ class Update implements Saveable {
             saveData.badgeCase = saveData.badgeCase || [];
             // Not using game constants incase the value isn't 73 in the future
             if (saveData.badgeCase[73]) { // Iceberg badge
-                saveData.quests.questLines.push({state: 1, name: 'The Great Vivillon Hunt!', quest: 0});
+                Update.startQuestLine(saveData, 'The Great Vivillon Hunt!');
             }
 
             // Add missing key items if the player has the badge
@@ -523,7 +523,7 @@ class Update implements Saveable {
             // If the player has the Fog Badge already
             // Not using game constants incase the badge value isn't 17 in the future
             if (saveData.badgeCase[17]) {
-                saveData.quests.questLines.push({state: 1, name: 'Team Rocket Again', quest: 0});
+                Update.startQuestLine(saveData, 'Team Rocket Again');
             }
 
             setTimeout(async () => {
@@ -540,7 +540,7 @@ class Update implements Saveable {
         '0.8.14': ({ playerData, saveData }) => {
             // Start Aqua Magma questline if player has Dynamo Badge already
             if (saveData.badgeCase[29]) {
-                saveData.quests.questLines.push({state: 1, name: 'Land vs. Water', quest: 0});
+                Update.startQuestLine(saveData, 'Land vs. Water');
             }
 
             // Just incase statistics is not set
@@ -559,7 +559,7 @@ class Update implements Saveable {
         '0.8.15': ({ playerData, saveData }) => {
             // Start Plasma questline if player has Jet Badge already
             if (saveData.badgeCase[58]) {
-                saveData.quests.questLines.push({state: 1, name: 'Quest for the DNA Splicers', quest: 0});
+                Update.startQuestLine(saveData, 'Quest for the DNA Splicers');
             }
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 2, 1); // Digletts Cave
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 5, 4); // Power Plant
@@ -672,7 +672,7 @@ class Update implements Saveable {
 
             // Start Galactic questline if player has Coal Badge already
             if (saveData.badgeCase[40]) {
-                saveData.quests.questLines.push({state: 1, name: 'A new world', quest: 0});
+                Update.startQuestLine(saveData, 'A new world');
             }
 
             // Clear Valley Windworks Clears
@@ -733,7 +733,7 @@ class Update implements Saveable {
 
             // Start Mina's Trial questline if player has cleared Ultra Necrozma already
             if (saveData.statistics.temporaryBattleDefeated[1]) {
-                saveData.quests.questLines.push({state: 1, name: 'Mina\'s Trial', quest: 0});
+                Update.startQuestLine(saveData, 'Mina\'s Trial');
             }
 
             // Add Rocket Game Corner
@@ -742,7 +742,7 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 6);
             // Start Team Rocket Kanto questline if player has Cascade Badge already
             if (saveData.badgeCase[2]) {
-                saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
+                Update.startQuestLine(saveData, 'Team Rocket');
             }
 
             // Rename Land vs. Water questline, so QuestLineCompletedRequirement will work
@@ -825,19 +825,19 @@ class Update implements Saveable {
 
             // Start Sevii questline if player has Volcano Badge already
             if (saveData.badgeCase[7]) {
-                saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
+                Update.startQuestLine(saveData, 'Bill\'s Errand');
             }
             // Start Persons of Interest questline if player has Earth Badge already
             if (saveData.badgeCase[8]) {
-                saveData.quests.questLines.push({state: 1, name: 'Persons of Interest', quest: 0});
+                Update.startQuestLine(saveData, 'Persons of Interest');
             }
             // Start UB questline if player has beaten Alola Champion already
             if (saveData.badgeCase[95]) {
-                saveData.quests.questLines.push({state: 1, name: 'Ultra Beast Hunt', quest: 0});
+                Update.startQuestLine(saveData, 'Ultra Beast Hunt');
             }
             // Start Ash questline if player has beaten Kalos champion already
             if (saveData.badgeCase[78]) {
-                saveData.quests.questLines.push({state: 1, name: 'The New Kid', quest: 0});
+                Update.startQuestLine(saveData, 'The New Kid');
             }
 
             // Just incase statistics is not set
@@ -1011,7 +1011,7 @@ class Update implements Saveable {
 
             // Start Galactic questline if player has Coal Badge already
             if (saveData.badgeCase[40]) {
-                saveData.quests.questLines.push({state: 1, name: 'A new world', quest: 0});
+                Update.startQuestLine(saveData, 'A new world');
             }
         },
     };
@@ -1258,6 +1258,17 @@ class Update implements Saveable {
 
         // Fixup queue
         saveData.breeding.queueList = saveData.breeding.queueList?.map(p => p == oldName ? newName : p) || [];
+    }
+
+    static startQuestLine = (saveData, questLineName: string) => {
+        const questLine = saveData.quests.questLines.find(ql => ql.name == questLineName);
+        if (questLine) {
+            // Set to started if not yet started, otherwise leave in it's current state
+            questLine.state = questLine.state == 0 ? 1 : questLine.state;
+        } else {
+            // Push the quest, doesn't exist in save data yet
+            saveData.quests.questLines.push({ state: 1, name: questLineName, quest: 0 });
+        }
     }
 
     getPlayerData() {
