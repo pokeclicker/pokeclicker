@@ -2,6 +2,8 @@ class DungeonMap {
     board: KnockoutObservable<DungeonTile[][]>;
     playerPosition: KnockoutObservable<Point>;
     playerMoved: KnockoutObservable<boolean>;
+    totalFights: KnockoutObservable<number>;
+    totalChests: KnockoutObservable<number>;
 
     constructor(
         public size: number,
@@ -27,6 +29,8 @@ class DungeonMap {
         if (this.flash) {
             this.nearbyTiles(this.playerPosition()).forEach(t => t.isVisible = true);
         }
+        this.totalFights = ko.observable(this.board().flat().filter((t) => t.type() == GameConstants.DungeonTile.enemy).length);
+        this.totalChests = ko.observable(this.board().flat().filter((t) => t.type() == GameConstants.DungeonTile.chest).length);
     }
 
     public moveToCoordinates(x: number, y: number) {
