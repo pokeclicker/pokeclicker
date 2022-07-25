@@ -210,25 +210,37 @@ class Underground implements Feature {
     // TODO: fix this function
     public static getCumulativeValues(): Record<string, { cumulativeValue: number, imgSrc: string }> {
         const cumulativeValues = {};
-        player.mineInventory().forEach(mineItem => {
+        player.mineInventory().forEach(item => {
             if (
-                mineItem.valueType !== UndergroundItemValueType.Fossil
-                && mineItem.valueType !== UndergroundItemValueType.Shard
-                && mineItem.amount() > 0
-                && !mineItem.sellLocked()
+                // Cannot sell Shards or Fossils
+                item.valueType !== UndergroundItemValueType.Fossil
+                && item.valueType !== UndergroundItemValueType.Shard
+                && item.amount() > 0
+                && !item.sellLocked()
             ) {
-                let cumulativeValueOfType = cumulativeValues[mineItem.valueType];
-                if (!cumulativeValueOfType) {
-                    cumulativeValueOfType = { cumulativeValue: 0, imgSrc: null };
-                    cumulativeValues[mineItem.valueType] = cumulativeValueOfType;
+                let valueType;
+                switch (item.valueType) {
+                    case UndergroundItemValueType.Gem:
+                        valueType = `${PokemonType[UndergroundItems.getById(item.id).type]} Gems`;
+                        break;
+                    case UndergroundItemValueType.Diamond:
+                    default:
+                        valueType = `${UndergroundItemValueType[item.valueType]}s`;
                 }
 
-                if (mineItem.valueType == UndergroundItemValueType.Diamond) {
-                    cumulativeValueOfType.imgSrc = 'assets/images/underground/diamond.svg';
-                } else {
-                    cumulativeValueOfType.imgSrc = UndergroundItems.getById(mineItem.id).image;
+                let cumulativeValueOfType = cumulativeValues[valueType];
+                if (!cumulativeValueOfType) {
+                    cumulativeValueOfType = { cumulativeValue: 0 };
+                    // Set image source
+                    if (item.valueType == UndergroundItemValueType.Diamond) {
+                        cumulativeValueOfType.imgSrc = 'assets/images/underground/diamond.svg';
+                    } else {
+                        cumulativeValueOfType.imgSrc = UndergroundItems.getById(item.id).image;
+                    }
+                    cumulativeValues[valueType] = cumulativeValueOfType;
                 }
-                cumulativeValueOfType.cumulativeValue += mineItem.value * mineItem.amount();
+
+                cumulativeValueOfType.cumulativeValue += item.value * item.amount();
             }
         });
 
@@ -367,6 +379,7 @@ class Underground implements Feature {
 
     private static gainProfit(item: UndergroundItem, amount: number): boolean {
         let success = true;
+        const uItem = UndergroundItems.getById(item.id);
         switch (item.valueType) {
             case UndergroundItemValueType.Diamond:
                 App.game.wallet.gainDiamonds(item.value * amount);
@@ -378,7 +391,7 @@ class Underground implements Feature {
                 success = App.game.breeding.gainEgg(App.game.breeding.createFossilEgg(item.name));
                 break;
             case UndergroundItemValueType.Gem:
-                const type = (item as UndergroundGemItem).type;
+                const type = uItem.type;
                 App.game.gems.gainGems(GameConstants.PLATE_VALUE * amount, type);
                 break;
             // Nothing else can be sold

@@ -288,13 +288,13 @@
 
 <div aria-labelledby="mineSellAllTreasuresModalLabel" class="modal fade noselect mt-5" id="mineSellAllTreasuresModal" role="dialog"
      style="cursor:default" tabindex="-1">
-    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document" data-bind="let: { filteredMineInvetory: player.mineInventory().filter(t => t.amount() > 0 && t.valueType !== UndergroundItemValueType.Fossil && t.valueType !== UndergroundItemValueType.Shard) }">
+    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document" data-bind="let: { filteredMineInventory: player.mineInventory().filter(t => t.amount() > 0 && t.valueType !== UndergroundItemValueType.Fossil && t.valueType !== UndergroundItemValueType.Shard) }">
         <div class="modal-content">
             <div class="modal-header d-block">
                 <h4 class="mb-0">
                     Sell all selected treasures
                 </h4>
-                (<span data-bind="text: filteredMineInvetory.filter(t => !t.sellLocked()).length + ' of ' + filteredMineInvetory.length"></span>)
+                (<span data-bind="text: filteredMineInventory.filter(t => !t.sellLocked()).length + ' of ' + filteredMineInventory.length"></span>)
             </div>
             <div class="modal-body p-0">
                 <table class="table table-sm table-hover table-striped m-0">
@@ -319,12 +319,12 @@
     </div>
 
     <script type="text/html" id="cumulativeValueListTemplate">
-        <tr data-bind="let: { valueType: $data, cumulativeValue: Underground.getCumulativeValues()[$data].cumulativeValue, imgSrc: Underground.getCumulativeValues()[$data].imgSrc }">
+        <tr data-bind="let: { type: $data, cumulativeValue: Underground.getCumulativeValues()[$data].cumulativeValue, imgSrc: Underground.getCumulativeValues()[$data].imgSrc }">
             <td>
                 <img width="20px'" data-bind="attr: { src: imgSrc }">
             </td>
             <td>
-                <span data-bind="text: cumulativeValue.toLocaleString('en-US') + ' ' + GameConstants.camelCaseToString(UndergroundItems.getFullResourceName($data, cumulativeValue))"></span>
+                <span data-bind="text: cumulativeValue.toLocaleString('en-US') + ' ' + type"></span>
             </td>
         </tr>
     </script>
