@@ -241,7 +241,7 @@ class Player {
         if (mineItem) {
             return mineItem.amount();
         }
-        const itemAmount = player.itemList[Underground.getMineItemById(id)?.valueType];
+        const itemAmount = player.itemList[UndergroundItems.getById(id)?.valueType];
         return itemAmount?.() || 0;
     }
 

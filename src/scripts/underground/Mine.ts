@@ -308,7 +308,7 @@ class Mine {
         const reward = Mine.rewardGrid[x][y];
         if (newlayer == 0 && reward != 0 && reward.revealed != 1) {
             reward.revealed = 1;
-            const image = Underground.getMineItemById(reward.value).undergroundImage;
+            const image = UndergroundItems.getById(reward.value).undergroundImage;
             $(`div[data-i=${x}][data-j=${y}]`).html(`<div class="mineReward size-${reward.sizeX}-${reward.sizeY} pos-${reward.x}-${reward.y} rotations-${reward.rotations}" style="background-image: url('${image}');"></div>`);
             Mine.checkItemsRevealed();
         }
@@ -330,7 +330,7 @@ class Mine {
         for (let i = 0; i < Mine.rewardNumbers.length; i++) {
             if (Mine.checkItemRevealed(Mine.rewardNumbers[i])) {
                 let amount = 1;
-                const itemName = Underground.getMineItemById(Mine.rewardNumbers[i]).name;
+                const itemName = UndergroundItems.getById(Mine.rewardNumbers[i]).name;
                 Notifier.notify({
                     message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}`,
                     type: NotificationConstants.NotificationOption.success,

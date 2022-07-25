@@ -154,7 +154,7 @@ class Underground implements Feature {
     private static mineSquare(amount: number, i: number, j: number): string {
         if (Mine.rewardGrid[i][j] != 0 && Mine.grid[i][j]() == 0) {
             Mine.rewardGrid[i][j].revealed = 1;
-            const image = Underground.getMineItemById(Mine.rewardGrid[i][j].value).undergroundImage;
+            const image = UndergroundItems.getById(Mine.rewardGrid[i][j].value).undergroundImage;
             return `<div data-bind='css: Underground.calculateCssClass(${i},${j})' data-i='${i}' data-j='${j}'><div class="mineReward size-${Mine.rewardGrid[i][j].sizeX}-${Mine.rewardGrid[i][j].sizeY} pos-${Mine.rewardGrid[i][j].x}-${Mine.rewardGrid[i][j].y} rotations-${Mine.rewardGrid[i][j].rotations}" style="background-image: url('${image}');"></div></div>`;
         } else {
             return `<div data-bind='css: Underground.calculateCssClass(${i},${j})' data-i='${i}' data-j='${j}'></div>`;
@@ -171,7 +171,7 @@ class Underground implements Feature {
 
     public static gainMineItem(id: number, num = 1) {
         const index = player.mineInventoryIndex(id);
-        const item = Underground.getMineItemById(id);
+        const item = UndergroundItems.getById(id);
 
         if (item.valueType == UndergroundItemValueType.EvolutionItem) {
             const evostone: EvolutionStone = (ItemList[item.valueType] as EvolutionStone);
@@ -226,7 +226,7 @@ class Underground implements Feature {
                 if (mineItem.valueType == UndergroundItemValueType.Diamond) {
                     cumulativeValueOfType.imgSrc = 'assets/images/underground/diamond.svg';
                 } else {
-                    cumulativeValueOfType.imgSrc = Underground.getMineItemById(mineItem.id).image;
+                    cumulativeValueOfType.imgSrc = UndergroundItems.getById(mineItem.id).image;
                 }
                 cumulativeValueOfType.cumulativeValue += mineItem.value * mineItem.amount();
             }
@@ -251,18 +251,6 @@ class Underground implements Feature {
 
         return `<u>Owned:</u><br>Mine items: ${nMineItems.toLocaleString('en-US')}<br>Fossils: ${nFossils.toLocaleString('en-US')}<br>Plates: ${nPlates.toLocaleString('en-US')}`;
     });
-
-    public static getMineItemByName(name: string): UndergroundItem {
-        return UndergroundItems.list.find(i => i.name == name);
-    }
-
-    public static getMineItemById(id: number): UndergroundItem {
-        for (const item of UndergroundItems.list) {
-            if (item.id == id) {
-                return item;
-            }
-        }
-    }
 
     gainEnergy() {
         if (this.energy < this.getMaxEnergy()) {

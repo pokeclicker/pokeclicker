@@ -14,6 +14,14 @@ export default class UndergroundItems {
         this.list.push(item);
     }
 
+    public static getByName(name: string): UndergroundItem {
+        return this.list.find((item) => item.name === name);
+    }
+
+    public static getById(id: number): UndergroundItem {
+        return this.list.find((item) => item.id === id);
+    }
+
     // Returns a random unlocked item
     public static getRandomItem(): UndergroundItem {
         const unlockedItems = this.list.filter((item) => item.isUnlocked());
@@ -22,9 +30,10 @@ export default class UndergroundItems {
 
     public static getFullResourceName(item: UndergroundItem, amt: number): string {
         let output = '';
+        const uItem = this.getById(item.id);
         switch (item.valueType) {
             case UndergroundItemValueType.Gem:
-                output = `${(item as UndergroundGemItem).type} Gem`;
+                output = `${PokemonType[uItem.type]} Gem`;
                 break;
             default:
                 output = UndergroundItemValueType[item.valueType];

@@ -12,7 +12,7 @@ class ShardDeal {
 
     constructor(shardCosts: ShardCost[], item: Item, itemAmount: number) {
         this.shards = shardCosts;
-        this.shards.forEach(s => s.shardType = Underground.getMineItemByName(s.shardTypeString));
+        this.shards.forEach(s => s.shardType = UndergroundItems.getByName(s.shardTypeString));
         this.item = {itemType: item, amount: itemAmount};
         this.questPointCost = this.item.itemType.basePrice / 4 || 1;
     }

@@ -3,6 +3,7 @@ import Requirement from '../requirements/Requirement';
 
 export default class UndergroundItem {
     public space: Array<Array<any>>;
+    public type?: number;
 
     constructor(
         public name: string,
