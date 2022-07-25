@@ -52,6 +52,14 @@ export const SpriteCredits: Credit[] = [
         // Notes: Made specifically for PokéClicker.
     },
     {
+        name: 'Cthulhu Follower',
+        link: 'https://discordapp.com/users/303604152733270017/',
+        resources: [
+            'Higher quality Underground stones',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'DaleArwin',
         link: 'https://www.deviantart.com/dalearwin',
         resources: [
