@@ -328,7 +328,7 @@ class Quests implements Saveable {
             lastRefreshRegion: this.lastRefreshRegion,
             freeRefresh: this.freeRefresh(),
             questList: this.questList().map(quest => quest.toJSON()),
-            questLines: this.questLines(),
+            questLines: this.questLines().filter(q => q.state()),
         };
     }
 
