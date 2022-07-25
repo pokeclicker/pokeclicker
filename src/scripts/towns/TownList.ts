@@ -2125,10 +2125,10 @@ TownList['Floccesy Town'] = new Town(
     GameConstants.Region.unova,
     [FloccesyTownShop],
     {
-      requirements: [
-          new RouteKillRequirement(10, GameConstants.Region.unova, 19),
-          new TemporaryBattleRequirement('Hugh1'),
-      ],
+        requirements: [
+            new RouteKillRequirement(10, GameConstants.Region.unova, 19),
+            new TemporaryBattleRequirement('Hugh1'),
+        ],
     }
 );
 TownList['Virbank City'] = new Town(
