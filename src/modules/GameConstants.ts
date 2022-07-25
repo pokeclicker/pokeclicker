@@ -132,7 +132,7 @@ export enum AchievementType {
     'Hatch',
     'Pokeball',
     'Click',
-    'Route Kill',
+    'Route Defeat',
     'Clear Gym',
     'Clear Dungeon',
     'Farming',
@@ -234,6 +234,7 @@ export const SHOPMON_EP_YIELD = 1000;
 export const SAFARI_EP_YIELD = 1000;
 
 export const SHINY_EP_MODIFIER = 5;
+export const REPEATBALL_EP_MODIFIER = 5;
 export const DUNGEON_EP_MODIFIER = 3;
 export const DUNGEON_BOSS_EP_MODIFIER = 10;
 export const ROAMER_EP_MODIFIER = 50;
@@ -574,7 +575,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.hoenn]: new Set(['Mauville City', 'New Mauville', 'Weather Institute']),
         [Region.sinnoh]: new Set(['Sunyshore City', 'Valley Windworks', 'Team Galactic Eterna Building', 'Team Galactic HQ']),
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City']),
-        [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Pokéball Factory', 'Team Flare Secret HQ']),
+        [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Poké Ball Factory', 'Team Flare Secret HQ']),
         [Region.alola]: new Set(['Aether Paradise', 'Hokulani Observatory', 'Aether Foundation']),
         [Region.galar]: new Set(['Spikemuth']),
     },
@@ -709,11 +710,11 @@ export enum PokemonItemType {
     'Beldum',
     'Skorupi',
     'Combee',
-    'Burmy (plant)',
+    'Burmy (Plant)',
     'Spiritomb',
     'Cherubi',
     'Zorua',
-    'Meloetta (pirouette)',
+    'Meloetta (Pirouette)',
     'Type: Null',
     'Poipole',
     'Toxel',
@@ -1097,7 +1098,7 @@ export const KalosDungeons = [
     // 'Tower of Mastery',
     'Sea Spirit\'s Den',
     'Kalos Power Plant',
-    'Pokéball Factory',
+    'Poké Ball Factory',
     'Lost Hotel',
     'Frost Cavern',
     'Team Flare Secret HQ',

@@ -43,7 +43,7 @@ abstract class Evolution {
 
         // EVs
         const evolvedPartyPokemon = App.game.party.getPokemonByName(evolvedPokemon);
-        evolvedPartyPokemon.effortPoints += App.game.party.gainEffortPoints(evolvedPartyPokemon, shiny, GameConstants.STONE_EP_YIELD);
+        evolvedPartyPokemon.effortPoints += App.game.party.calculateEffortPoints(evolvedPartyPokemon, shiny, GameConstants.STONE_EP_YIELD);
         return shiny;
     }
 

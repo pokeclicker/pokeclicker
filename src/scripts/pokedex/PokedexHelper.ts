@@ -135,6 +135,14 @@ class PokedexHelper {
                 return false;
             }
 
+            /* Only base form if alternate exist (Zarbi, Basculin, ...)
+             * if Mega are not alternative pokemon, this work
+             * else change condition by `filter['hide-alternate'] && (!Number.isInteger(pokemon.id) || Math.sign(pokemon.id) === -1)`
+             */
+            if (filter['hide-alternate'] && !Number.isInteger(pokemon.id)) {
+                return false;
+            }
+
             // Only pokemon with a hold item
             if (filter['held-item'] && !BagHandler.displayName((pokemon as PokemonListData).heldItem)) {
                 return false;
@@ -152,6 +160,7 @@ class PokedexHelper {
         res.region = $('#pokedex-filter-region').val();
         res['caught-shiny'] = $('#pokedex-filter-shiny-caught').val();
         res['held-item'] = $('#pokedex-filter-held-item').is(':checked');
+        res['hide-alternate'] = $('#pokedex-filter-hide-alternate').is(':checked');
         return res;
     }
 

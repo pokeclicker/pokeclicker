@@ -37,6 +37,7 @@ TemporaryBattleList['Biker Goon 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Biker Goon',
+        imageName: 'Biker Goon',
     }
 );
 TemporaryBattleList['Biker Goon 2'] = new TemporaryBattle(
@@ -47,6 +48,7 @@ TemporaryBattleList['Biker Goon 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Biker Goon',
+        imageName: 'Biker Goon',
     }
 );
 TemporaryBattleList['Biker Goon 3'] = new TemporaryBattle(
@@ -57,6 +59,7 @@ TemporaryBattleList['Biker Goon 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Biker Goon',
+        imageName: 'Biker Goon',
     }
 );
 TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
@@ -82,7 +85,7 @@ TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
         new GymPokemon('Murkrow', 3665000, 36),
     ],
     'Impressive. Your prowess is notable.',
-    [new GymBadgeRequirement(BadgeEnums.Fen)]
+    [new QuestLineStepCompletedRequirement('A new world', 2)]
 );
 
 // Kalos Temporarybattles
@@ -105,7 +108,7 @@ TemporaryBattleList.AZ = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
     'Ash Ketchum Kanto',
     [
-        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Pikachu (Partner Cap)', 123998000, 58),
         new GymPokemon('Pidgeot', 123998000, 56),
         new GymPokemon('Bulbasaur', 123998000, 56),
         new GymPokemon('Charizard', 123998000, 60),
@@ -118,12 +121,13 @@ TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Pallet Town',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
     'Ash Ketchum Johto',
     [
-        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Pikachu (Partner Cap)', 123998000, 58),
         new GymPokemon('Heracross', 123998000, 56),
         new GymPokemon('Noctowl', 123998000, 56),
         new GymPokemon('Bayleef', 123998000, 60),
@@ -136,12 +140,13 @@ TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Cianwood City',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
     'Ash Ketchum Hoenn',
     [
-        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Pikachu (Partner Cap)', 123998000, 58),
         new GymPokemon('Swellow', 123998000, 56),
         new GymPokemon('Grovyle', 123998000, 56),
         new GymPokemon('Torkoal', 123998000, 62),
@@ -154,12 +159,13 @@ TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Lilycove City',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
     'Ash Ketchum Sinnoh',
     [
-        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Pikachu (Partner Cap)', 123998000, 58),
         new GymPokemon('Staraptor', 123998000, 56),
         new GymPokemon('Torterra', 123998000, 56),
         new GymPokemon('Infernape', 123998000, 60),
@@ -172,12 +178,13 @@ TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Survival Area',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
     'Ash Ketchum Unova',
     [
-        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Pikachu (Partner Cap)', 123998000, 58),
         new GymPokemon('Unfezant', 123998000, 56),
         new GymPokemon('Snivy', 123998000, 62),
         new GymPokemon('Pignite', 123998000, 60),
@@ -190,17 +197,18 @@ TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Mistralton City',
+        imageName: 'Ash Ketchum',
     }
 );
 TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
     'Ash Ketchum Kalos',
     [
-        new GymPokemon('Pikachu (Partner cap)', 123998000, 58),
+        new GymPokemon('Pikachu (Partner Cap)', 123998000, 58),
         new GymPokemon('Talonflame', 123998000, 56),
         new GymPokemon('Hawlucha', 123998000, 56),
         new GymPokemon('Goodra', 123998000, 60),
         new GymPokemon('Noivern', 123998000, 62),
-        new GymPokemon('Ash Greninja', 123998000, 62),
+        new GymPokemon('Ash-Greninja', 123998000, 62),
     ],
     'I forgive you for chasing me around. I\'m going to take some time off with a long vacation on a tropical island! Will you take care of my Greninja for me? He has a special Bond while in Battle with his trainer.',
     [new QuestLineStepCompletedRequirement('The New Kid', 4)],
@@ -208,6 +216,7 @@ TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Kiloude City',
+        imageName: 'Ash Ketchum',
     }
 );
 
@@ -352,7 +361,7 @@ TemporaryBattleList['Kahuna Nanu UB'] = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
     'Ash Ketchum Alola',
     [
-        new GymPokemon('Pikachu (Partner cap)', 182908638, 58),
+        new GymPokemon('Pikachu (Partner Cap)', 182908638, 58),
         new GymPokemon('Rowlet', 182908638, 56),
         new GymPokemon('Incineroar', 182908638, 56),
         new GymPokemon('Lycanroc (Dusk)', 182908638, 60),
@@ -365,6 +374,7 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
     {
         displayName: 'Ash Ketchum',
         returnTown: 'Seafolk Village',
+        imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
             App.game.party.gainPokemonById(25.07);
         },
