@@ -4,7 +4,7 @@ import Information from '../utilities/Information';
 import KeyItemController from './KeyItemController';
 import { Feature } from '../DataStore/common/Feature';
 import {
-    getDungeonIndex, Region, ROUTE_KILLS_NEEDED, Starter, Pokerus,
+    getDungeonIndex, Region, ROUTE_KILLS_NEEDED, Starter, Pokerus, getTemporaryBattlesIndex,
 } from '../GameConstants';
 
 export default class KeyItems implements Feature {
@@ -54,7 +54,9 @@ export default class KeyItems implements Feature {
             // TODO buy for 500 quest points
             new KeyItem(KeyItemType.Event_calendar, 'This calendar will keep you up to date on the latest events.', undefined, undefined, undefined, 'Event Calendar'),
             new KeyItem(KeyItemType.Gem_case, 'A case specifically designed for holding gems.', undefined, undefined, undefined, 'Gem Case'),
-            new KeyItem(KeyItemType.DNA_splicers, 'A splicer that fuses certain Pokémon.', undefined, undefined, undefined, 'DNA Splicers'),
+            new KeyItem(KeyItemType.DNA_splicers, 'A splicer that fuses certain Pokémon.',
+                () => App.game.statistics.temporaryBattleDefeated[getTemporaryBattlesIndex('Ghetsis 2')]() > 0,
+                undefined, undefined, 'DNA Splicers'),
             new KeyItem(KeyItemType.Pokerus_virus, 'A virus sample collected from the Hatchery.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Distortion World')]() > 0,
                 undefined, () => { App.game.party.getPokemon(pokemonMap[(Starter[player.starter()])].id).pokerus = Pokerus.Contagious; }, 'Pokérus Virus'),
