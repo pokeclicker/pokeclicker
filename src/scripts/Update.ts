@@ -852,9 +852,6 @@ class Update implements Saveable {
             // Add Berry Forest
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 11);
 
-            // Turn Parfum Palace into a town
-            saveData.statistics.dungeonsCleared.splice(96, 1);
-
             // Add Biker Gang Temporary Battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
@@ -919,6 +916,9 @@ class Update implements Saveable {
 
             // Update total proteins obtained to be equal to the total purchased (or whichever is higher)
             saveData.statistics.totalProteinsObtained = Math.max(saveData.statistics.totalProteinsPurchased, saveData.statistics.totalProteinsObtained);
+
+            // Turn Parfum Palace into a town
+            saveData.statistics.dungeonsCleared.splice(96, 1);
 
             // Filter already earned milestones due to item/Pokémon name updates
             const milestones = [
