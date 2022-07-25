@@ -100,7 +100,12 @@ UndergroundItems.addItem(new UndergroundEvolutionItem('Water Stone', 301, [[1, 1
 UndergroundItems.addItem(new UndergroundEvolutionItem('Thunder Stone', 302, [[0, 1, 1], [1, 1, 1], [1, 1, 0]], 1, StoneType.Thunder_stone));
 UndergroundItems.addItem(new UndergroundEvolutionItem('Leaf Stone', 303, [[0, 1, 0], [1, 1, 1], [1, 1, 1], [0, 1, 0]], 1, StoneType.Leaf_stone));
 UndergroundItems.addItem(new UndergroundEvolutionItem('Moon Stone', 304, [[0, 1, 1, 1], [1, 1, 1, 0]], 1, StoneType.Moon_stone));
-// TODO: Fix these requirements
+// TODO: Replace these requirements with StoneUnlockedRequirement once moved to modules
+UndergroundItems.addItem(new UndergroundEvolutionItem('Sun Stone', 305, [[0, 1, 0], [1, 1, 1], [1, 1, 1]], 1, StoneType.Sun_stone, new MaxRegionRequirement(Region.johto)));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Shiny Stone', 306, [[0, 1, 1], [1, 1, 1], [1, 1, 1]], 1, StoneType.Shiny_stone, new MaxRegionRequirement(Region.hoenn)));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Dusk Stone', 307, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], 1, StoneType.Dusk_stone, new MaxRegionRequirement(Region.hoenn)));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Dawn Stone', 308, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 1, StoneType.Dawn_stone, new MaxRegionRequirement(Region.hoenn)));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Ice Stone', 309, [[1, 1, 1], [1, 1, 1]], 1, StoneType.Ice_stone, new MaxRegionRequirement(Region.hoenn)));
 // UndergroundItems.addItem(new UndergroundEvolutionItem('Sun Stone', 305, [[0, 1, 0], [1, 1, 1], [1, 1, 1]], 1, StoneType.Sun_stone, new StoneUnlockedRequirement(StoneType.Sun_stone)));
 // UndergroundItems.addItem(new UndergroundEvolutionItem('Shiny Stone', 306, [[0, 1, 1], [1, 1, 1], [1, 1, 1]], 1, StoneType.Shiny_stone, new StoneUnlockedRequirement(StoneType.Shiny_stone)));
 // UndergroundItems.addItem(new UndergroundEvolutionItem('Dusk Stone', 307, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], 1, StoneType.Dusk_stone, new StoneUnlockedRequirement(StoneType.Dusk_stone)));
