@@ -207,7 +207,6 @@ class Underground implements Feature {
         return diamondNetWorth + App.game.wallet.currencies[GameConstants.Currency.diamond]();
     }
 
-    // TODO: fix this function
     public static getCumulativeValues(): Record<string, { cumulativeValue: number, imgSrc: string }> {
         const cumulativeValues = {};
         player.mineInventory().forEach(item => {
