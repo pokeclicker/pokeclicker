@@ -124,18 +124,15 @@ class Breeding implements Feature {
 
         this._eggList = this.defaults.eggList;
         if (json.eggList !== null) {
-            // Deferring this because Egg constructor wants to access App.game.party, which isn't avaliable yet
-            setTimeout(() => {
-                const saveEggList: Record<string, any>[] = json.eggList;
+            const saveEggList: Record<string, any>[] = json.eggList;
 
-                for (let i = 0; i < this._eggList.length; i++) {
-                    if (saveEggList[i] != null) {
-                        const egg: Egg = new Egg(null, null, null);
-                        egg.fromJSON(saveEggList[i]);
-                        this._eggList[i](egg);
-                    }
+            for (let i = 0; i < this._eggList.length; i++) {
+                if (saveEggList[i] != null) {
+                    const egg: Egg = new Egg(null, null, null);
+                    egg.fromJSON(saveEggList[i]);
+                    this._eggList[i](egg);
                 }
-            }, 0);
+            }
         }
         this.queueSlots(json.queueSlots ?? this.defaults.queueSlots);
         this._queueList(json.queueList ? json.queueList : this.defaults.queueList);
