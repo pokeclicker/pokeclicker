@@ -235,7 +235,8 @@ class Dungeon {
         const redist = lootRedistibuteAmount * timesCleared / 500;
 
         const updatedChances = Object.entries(baseLootTierChance).reduce((chances, [tier, chance]) => {
-            if (tier in this.lootTable) {
+            if (tier in this.lootTable &&
+                this.lootTable[tier].some((loot) => !loot.requirement || loot.requirement.isCompleted())) {
                 chances[tier] = chance + (redist * lootRedistribution[tier]);
             }
             return chances;
