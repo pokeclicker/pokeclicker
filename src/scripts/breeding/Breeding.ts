@@ -20,7 +20,7 @@ class Breeding implements Feature {
     private _eggList: Array<KnockoutObservable<Egg>>;
     private _eggSlots: KnockoutObservable<number>;
 
-    private queueList: KnockoutObservableArray<PokemonNameType>;
+    private _queueList: KnockoutObservableArray<PokemonNameType>;
     private queueSlots: KnockoutObservable<number>;
 
     public hatchList: { [name: number]: PokemonNameType[][] } = {};
@@ -28,7 +28,7 @@ class Breeding implements Feature {
     constructor(private multiplier: Multiplier) {
         this._eggList = this.defaults.eggList;
         this._eggSlots = ko.observable(this.defaults.eggSlots);
-        this.queueList = ko.observableArray(this.defaults.queueList);
+        this._queueList = ko.observableArray(this.defaults.queueList);
         this.queueSlots = ko.observable(this.defaults.queueSlots);
 
         this._eggList.forEach((egg) => {
@@ -138,7 +138,7 @@ class Breeding implements Feature {
             }, 0);
         }
         this.queueSlots(json.queueSlots ?? this.defaults.queueSlots);
-        this.queueList(json.queueList ? json.queueList : this.defaults.queueList);
+        this._queueList(json.queueList ? json.queueList : this.defaults.queueList);
         this.hatcheryHelpers.fromJSON(json.hatcheryHelpers || []);
     }
 
@@ -147,7 +147,7 @@ class Breeding implements Feature {
         return {
             eggList: this.eggList.map(egg => egg() === null ? new Egg() : egg().toJSON()),
             eggSlots: this.eggSlots,
-            queueList: this.queueList(),
+            queueList: this._queueList(),
             queueSlots: this.queueSlots(),
             hatcheryHelpers: this.hatcheryHelpers.toJSON(),
         };
@@ -169,7 +169,7 @@ class Breeding implements Feature {
 
     public hasFreeQueueSlot(): boolean {
         const slots = this.queueSlots();
-        return slots && this.queueList().length < slots;
+        return slots && this._queueList().length < slots;
     }
 
     public gainEgg(e: Egg, isHelper = false) {
@@ -211,7 +211,7 @@ class Breeding implements Feature {
                 partyPokemon.calculatePokerus();
             }
             egg.addSteps(amount, this.multiplier);
-            if (this.queueList().length && egg.canHatch()) {
+            if (this._queueList().length && egg.canHatch()) {
                 this.hatchPokemonEgg(index);
             }
         }
@@ -243,19 +243,19 @@ class Breeding implements Feature {
     }
 
     public addToQueue(pokemon: PartyPokemon): boolean {
-        const queueSize = this.queueList().length;
+        const queueSize = this._queueList().length;
         if (queueSize < this.queueSlots()) {
             pokemon.breeding = true;
-            this.queueList.push(pokemon.name);
+            this._queueList.push(pokemon.name);
             return true;
         }
         return false;
     }
 
     public removeFromQueue(index: number): boolean {
-        const queueSize = this.queueList().length;
+        const queueSize = this._queueList().length;
         if (queueSize > index) {
-            const pokemonName = this.queueList.splice(index, 1)[0];
+            const pokemonName = this._queueList.splice(index, 1)[0];
             App.game.party._caughtPokemon().find(p => p.name == pokemonName).breeding = false;
             return true;
         }
@@ -285,10 +285,10 @@ class Breeding implements Feature {
         if (hatched) {
             this._eggList[index](new Egg());
             this.moveEggs();
-            if (this.queueList().length) {
-                const nextEgg = this.createEgg(this.queueList.shift());
+            if (this._queueList().length) {
+                const nextEgg = this.createEgg(this._queueList.shift());
                 this.gainEgg(nextEgg);
-                if (!this.queueList().length) {
+                if (!this._queueList().length) {
                     Notifier.notify({
                         message: 'Hatchery queue is empty',
                         type: NotificationConstants.NotificationOption.success,
@@ -391,6 +391,10 @@ class Breeding implements Feature {
 
     set eggSlots(value: number) {
         this._eggSlots(value);
+    }
+
+    get queueList(): KnockoutObservable<Array<PokemonNameType>> {
+        return this._queueList;
     }
 
     public gainEggSlot(): void {

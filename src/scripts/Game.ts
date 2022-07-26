@@ -215,6 +215,13 @@ class Game {
                 quest.initial(quest.focus());
             }
         });
+        // Check for breeding pokemons not in queue
+        App.game.party._caughtPokemon().filter((p) => p.breeding).forEach((p) => {
+            if (!App.game.breeding.eggList.map((l) => l().pokemon).includes(p.name) &&
+                !App.game.breeding.queueList().includes(p.name)) {
+                p.breeding = false;
+            }
+        });
     }
 
     start() {
