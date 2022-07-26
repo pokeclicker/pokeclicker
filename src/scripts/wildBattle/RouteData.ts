@@ -1511,7 +1511,8 @@ Routes.add(new RegionRoute(
         land: ['Slowpoke', 'Exeggcute', 'Chatot', 'Inkay'],
         water: ['Tentacool', 'Lapras', 'Chinchou', 'Remoraid', 'Luvdisc', 'Mantyke'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)], 12
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)],
+    12
 ));
 
 // From here down :
@@ -1526,9 +1527,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Caterpie', 'Alolan Rattata', 'Ledyba', 'Spinarak', 'Pichu', 'Buneary', 'Pikipek', 'Yungoos', 'Grubbin'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-    undefined,
-    GameConstants.AlolaSubRegions.MelemeleIsland
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)]
 ));
 Routes.add(new RegionRoute(
     'Route 1 Hau\'oli Outskirts', GameConstants.Region.alola, 18,
@@ -1537,26 +1536,21 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Mantyke', 'Finneon'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
-    1.1,
-    GameConstants.AlolaSubRegions.MelemeleIsland
+    1.1
 ));
 Routes.add(new RegionRoute(
     'Alola Route 2', GameConstants.Region.alola, 2,
     new RoutePokemon({
         land: ['Alolan Rattata', 'Spearow', 'Ekans', 'Alolan Meowth', 'Growlithe', 'Abra', 'Drowzee', 'Smeargle', 'Makuhita', 'Furfrou', 'Yungoos', 'Cutiefly'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
-    undefined,
-    GameConstants.AlolaSubRegions.MelemeleIsland
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 3', GameConstants.Region.alola, 3,
     new RoutePokemon({
         land: ['Spearow', 'Mankey', 'Bagon', 'Rufflet', 'Vullaby', 'Hawlucha', 'Cutiefly'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Verdant Cavern'))],
-    undefined,
-    GameConstants.AlolaSubRegions.MelemeleIsland
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Verdant Cavern'))]
 ));
 Routes.add(new RegionRoute(
     'Melemele Sea', GameConstants.Region.alola, 19,
@@ -1564,8 +1558,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Magikarp', 'Corsola', 'Remoraid', 'Wingull', 'Clamperl', 'Luvdisc', 'Mantyke', 'Finneon', 'Wishiwashi (Solo)'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill'))],
-    5.1,
-    GameConstants.AlolaSubRegions.MelemeleIsland
+    5.1
 ));
 Routes.add(new RegionRoute(
     'Kala\'e Bay', GameConstants.Region.alola, 20,
@@ -1577,44 +1570,35 @@ Routes.add(new RegionRoute(
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Seaward Cave')),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill')),
     ],
-    5.2,
-    GameConstants.AlolaSubRegions.MelemeleIsland
+    5.2
 ));
 Routes.add(new RegionRoute(
     'Alola Route 4', GameConstants.Region.alola, 4,
     new RoutePokemon({
         land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
-    undefined,
-    GameConstants.AlolaSubRegions.AkalaIsland
+    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 5', GameConstants.Region.alola, 5,
     new RoutePokemon({
         land: ['Caterpie', 'Metapod', 'Butterfree', 'Bonsly', 'Lillipup', 'Pikipek', 'Trumbeak', 'Grubbin', 'Fomantis'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Paniola Ranch'))],
-    undefined,
-    GameConstants.AlolaSubRegions.AkalaIsland
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Paniola Ranch'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 6', GameConstants.Region.alola, 6,
     new RoutePokemon({
         land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill'))],
-    undefined,
-    GameConstants.AlolaSubRegions.AkalaIsland
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 7', GameConstants.Region.alola, 7,
     new RoutePokemon({
         water: ['Tentacool', 'Staryu', 'Magikarp', 'Wingull', 'Finneon', 'Wishiwashi (Solo)', 'Pyukumuku'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
-    undefined,
-    GameConstants.AlolaSubRegions.AkalaIsland
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 6)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 8', GameConstants.Region.alola, 8,
@@ -1622,18 +1606,14 @@ Routes.add(new RegionRoute(
         land: ['Alolan Rattata', 'Fletchling', 'Trumbeak', 'Yungoos', 'Stufful'],
         water: ['Tentacool', 'Magikarp', 'Chinchou', 'Remoraid', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Wela Volcano Park'))],
-    undefined,
-    GameConstants.AlolaSubRegions.AkalaIsland
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Wela Volcano Park'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 9', GameConstants.Region.alola, 9,
     new RoutePokemon({
         water: ['Magikarp', 'Corsola', 'Luvdisc', 'Wishiwashi (Solo)', 'Mareanie'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Diglett\'s Tunnel'))],
-    undefined,
-    GameConstants.AlolaSubRegions.AkalaIsland
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Diglett\'s Tunnel'))]
 ));
 Routes.add(new RegionRoute(
     'Akala Outskirts', GameConstants.Region.alola, 21,
@@ -1642,17 +1622,14 @@ Routes.add(new RegionRoute(
         water: ['Magikarp', 'Chinchou', 'Wishiwashi (Solo)'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Memorial Hill'))],
-    9.1,
-    GameConstants.AlolaSubRegions.AkalaIsland
+    9.1
 ));
 Routes.add(new RegionRoute(
     'Alola Route 10', GameConstants.Region.alola, 10,
     new RoutePokemon({
         land: ['Alolan Raticate', 'Fearow', 'Ledian', 'Ariados', 'Skarmory', 'Pancham', 'Gumshoos'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Malie Garden'))],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Malie Garden'))]
 ));
 Routes.add(new RegionRoute(
     'Mount Hokulani', GameConstants.Region.alola, 22,
@@ -1660,17 +1637,14 @@ Routes.add(new RegionRoute(
         land: ['Fearow', 'Ditto', 'Cleffa', 'Skarmory', 'Elekid', 'Beldum', 'Elgyem', 'Minior (Meteor)', 'Minior (Blue Core)', 'Minior (Green Core)', 'Minior (Indigo Core)', 'Minior (Orange Core)', 'Minior (Red Core)', 'Minior (Violet Core)', 'Minior (Yellow Core)'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 10)],
-    10.1,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    10.1
 ));
 Routes.add(new RegionRoute(
     'Alola Route 11', GameConstants.Region.alola, 11,
     new RoutePokemon({
         land: ['Parasect', 'Ledian', 'Ariados', 'Pancham', 'Trumbeak', 'Komala'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Malie Garden'))],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Malie Garden'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 12', GameConstants.Region.alola, 12,
@@ -1680,27 +1654,21 @@ Routes.add(new RegionRoute(
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 11),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Hokulani Observatory')),
-    ],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    ]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 13', GameConstants.Region.alola, 13,
     new RoutePokemon({
         water: ['Magikarp', 'Wishiwashi (Solo)', 'Bruxish'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 12)],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 12)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 14', GameConstants.Region.alola, 14,
     new RoutePokemon({
         water: ['Tentacruel', 'Magikarp', 'Pelipper', 'Finneon', 'Frillish', 'Wishiwashi (Solo)', 'Bruxish'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 13)]
 ));
 Routes.add(new RegionRoute(
     'Haina Desert', GameConstants.Region.alola, 23,
@@ -1709,8 +1677,7 @@ Routes.add(new RegionRoute(
         special: [new SpecialRoutePokemon(['Celesteela'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 11))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    14
 ));
 Routes.add(new RegionRoute(
     'Alola Route 15', GameConstants.Region.alola, 15,
@@ -1718,18 +1685,14 @@ Routes.add(new RegionRoute(
         land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Gumshoos', 'Sandygast'],
         water: ['Tentacruel', 'Magikarp', 'Clamperl', 'Finneon', 'Wishiwashi (Solo)', 'Bruxish'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 16', GameConstants.Region.alola, 16,
     new RoutePokemon({
         land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Scraggy', 'Gumshoos'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 15)],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 15)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 17', GameConstants.Region.alola, 17,
@@ -1737,36 +1700,28 @@ Routes.add(new RegionRoute(
         land: ['Alolan Raticate', 'Fearow', 'Alolan Graveler', 'Ledian', 'Ariados', 'Scraggy', 'Bisharp', 'Gumshoos'],
         special: [new SpecialRoutePokemon(['Kartana'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 11))],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ula\'ula Meadow'))],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ula\'ula Meadow'))]
 ));
 Routes.add(new RegionRoute(
     'Poni Wilds', GameConstants.Region.alola, 24,
     new RoutePokemon({
         land: ['Granbull', 'Pelipper', 'Gastrodon (East)', 'Furfrou', 'Inkay'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))]
 ));
 Routes.add(new RegionRoute(
     'Ancient Poni Path', GameConstants.Region.alola, 25,
     new RoutePokemon({
         land: ['Granbull', 'Pelipper', 'Gastrodon (East)', 'Furfrou', 'Inkay'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 24)],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 24)]
 ));
 Routes.add(new RegionRoute(
     'Poni Breaker Coast', GameConstants.Region.alola, 26,
     new RoutePokemon({
         water: ['Tentacruel', 'Lapras', 'Magikarp', 'Pelipper', 'Carvanha', 'Wailmer', 'Relicanth', 'Gastrodon (East)', 'Lumineon'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 25)]
 ));
 Routes.add(new RegionRoute(
     'Poni Grove', GameConstants.Region.alola, 27,
@@ -1777,27 +1732,21 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Stakataka'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 15)),
         ],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
 ));
 Routes.add(new RegionRoute(
     'Poni Plains', GameConstants.Region.alola, 28,
     new RoutePokemon({
         land: ['Alolan Raticate', 'Fearow', 'Hypno', 'Tauros', 'Miltank', 'Pelipper', 'Hariyama', 'Cottonee', 'Petilil', 'Trumbeak', 'Gumshoos', 'Mudsdale'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 27)],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 27)]
 ));
 Routes.add(new RegionRoute(
     'Poni Coast', GameConstants.Region.alola, 29,
     new RoutePokemon({
         land: ['Alolan Dugtrio'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 28)],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 28)]
 ));
 Routes.add(new RegionRoute(
     'Poni Gauntlet', GameConstants.Region.alola, 30,
@@ -1805,9 +1754,7 @@ Routes.add(new RegionRoute(
         land: ['Pelipper', 'Lickitung', 'Golduck', 'Granbull', 'Inkay', 'Bewear'],
         water: ['Magikarp', 'Dratini', 'Barboach'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 29)],
-    undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 29)]
 ));
 
 /*

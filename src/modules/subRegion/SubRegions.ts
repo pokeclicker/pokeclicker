@@ -51,13 +51,7 @@ SubRegions.addSubRegion(Region.hoenn, new SubRegion('Hoenn', HoennSubRegions.Hoe
 SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Sinnoh', SinnohSubRegions.Sinnoh));
 SubRegions.addSubRegion(Region.unova, new SubRegion('Unova', UnovaSubRegions.Unova));
 SubRegions.addSubRegion(Region.kalos, new SubRegion('Kalos', KalosSubRegions.Kalos));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Melemele island', AlolaSubRegions.MelemeleIsland, undefined, 'Hau\'oli City'));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Akala island', AlolaSubRegions.AkalaIsland, new GymBadgeRequirement(BadgeEnums.FightiniumZ), 'Heahea City'));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula & Poni islands', AlolaSubRegions.UlaulaAndPoniIslands, new TemporaryBattleRequirement('Ultra Wormhole'), 'Malie City'));
-// For when Alola is split into 4 regions
-// SubRegions.addSubRegion(Region.alola, new SubRegion('Akala island', new GymBadgeRequirement(BadgeEnums.MelemeleKahuna), 'Heahea City'));
-// SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula island', new TemporaryBattleRequirement('Ultra Wormhole'), 'Malie City'));
-// SubRegions.addSubRegion(Region.alola, new SubRegion('Poni island', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation')), 'Seafolk Village'));
+SubRegions.addSubRegion(Region.alola, new SubRegion('Alola', AlolaSubRegions.Alola));
 
 SubRegions.addSubRegion(Region.galar, new SubRegion('Galar', GalarSubRegions.Galar, undefined, 'Postwick', undefined));
 // For once Galar is split into 2 regions

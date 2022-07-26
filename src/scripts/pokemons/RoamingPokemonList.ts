@@ -11,7 +11,7 @@ class RoamingPokemonList {
         [[GameConstants.SinnohSubRegions.Sinnoh]],
         [[GameConstants.UnovaSubRegions.Unova]],
         [[GameConstants.KalosSubRegions.Kalos]],
-        [[GameConstants.AlolaSubRegions.MelemeleIsland, GameConstants.AlolaSubRegions.AkalaIsland, GameConstants.AlolaSubRegions.UlaulaAndPoniIslands]],
+        [[GameConstants.AlolaSubRegions.Alola]],
         [[GameConstants.GalarSubRegions.Galar], [GameConstants.GalarSubRegions.IsleOfArmor], [GameConstants.GalarSubRegions.CrownTundra]],
     ];
 

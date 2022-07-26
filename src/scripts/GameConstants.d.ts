@@ -545,11 +545,7 @@ namespace GameConstants {
         Kalos,
     }
     declare enum AlolaSubRegions {
-        MelemeleIsland,
-        AkalaIsland,
-        UlaulaAndPoniIslands,
-        // UlaulaIsland,
-        // PoniIsland,
+        Alola,
     }
     declare enum GalarSubRegions {
         Galar,

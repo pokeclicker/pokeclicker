@@ -1371,11 +1371,7 @@ export enum KalosSubRegions {
 }
 
 export enum AlolaSubRegions {
-    MelemeleIsland = 0,
-    AkalaIsland,
-    UlaulaAndPoniIslands,
-    // UlaulaIsland,
-    // PoniIsland,
+    Alola = 0,
 }
 
 export enum GalarSubRegions {
