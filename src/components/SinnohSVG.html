@@ -1,24 +1,18 @@
 <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
-    <image width="1600" height="960" xlink:href="assets/images/sinnoh.png" href="assets/images/sinnoh.png"></image>
+    <image width="1600" height="960" data-bind="attr: {
+        'xlink:href':'assets/images/sinnoh.png?v=$VERSION',
+        href:'assets/images/sinnoh.png?v=$VERSION'
+    }"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
     <!-- ------ -->
 
-    <!--Route 201 extra (behind because of text)-->
-    <%- include('templates/mapRoute',
-        { route: 201, region: 3
-        , height: 2.5, width: 5
-        , x: 7, y: 50
-        , noText: true
-        })
-    %>
     <!--Route 201-->
     <%- include('templates/mapRoute',
         { route: 201, region: 3
-        , height: 3, width: 5
-        , x: 12, y: 50
-        , textX: -40
+        , height: 3, width: 10
+        , x: 7, y: 50
         })
     %>
 
@@ -449,6 +443,7 @@
         { name: "Jubilife City"
         , x: 14, y: 40.5
         , height: 0.5, width: 5
+        , isExtension: true
         })
     %>
 
@@ -473,6 +468,16 @@
         })
     %>
 
+    <!--Team Galactic Eterna Building-->
+    <%- include('templates/mapDungeon',
+        { name: "Team Galactic Eterna Building"
+        , x: 31, y: 26
+        , height: 4, width: 4
+        , invisible: true
+        })
+    %>
+
+
     <!--Mt. Coronet-->
     <%- include('templates/mapDungeon',
         { name: "Mt. Coronet"
@@ -486,6 +491,7 @@
         { name: "Mt. Coronet"
         , x: 44, y: 26
         , height: 1, width: 2
+        , isExtension: true
         })
     %>
 
@@ -494,6 +500,7 @@
         { name: "Mt. Coronet"
         , x: 40, y: 18
         , height: 4, width: 4
+        , isExtension: true
         })
     %>
 
@@ -502,6 +509,7 @@
         { name: "Mt. Coronet"
         , x: 40, y: 31
         , height: 6, width: 4
+        , isExtension: true
         })
     %>
 
@@ -510,6 +518,7 @@
         { name: "Mt. Coronet"
         , x: 39, y: 26
         , height: 5, width: 5
+        , isExtension: true
         })
     %>
 
@@ -518,6 +527,7 @@
         { name: "Mt. Coronet"
         , x: 37, y: 33
         , height: 8, width: 3
+        , isExtension: true
         })
     %>
 
@@ -526,6 +536,7 @@
         { name: "Mt. Coronet"
         , x: 40, y: 37
         , height: 4, width: 1
+        , isExtension: true
         })
     %>
 
@@ -542,6 +553,7 @@
         { name: "Hearthome City"
         , x: 44, y: 38.5
         , height: 0.5, width: 5
+        , isExtension: true
         })
     %>
 
@@ -566,6 +578,7 @@
         { name: "Veilstone City"
         , x: 64, y: 28.5
         , height: 0.5, width: 5
+        , isExtension: true
         })
     %>
 
@@ -598,6 +611,7 @@
         { name: "Sunyshore City"
         , x: 78, y: 47.5
         , height: 0.5, width: 5
+        , isExtension: true
         })
     %>
 
@@ -654,6 +668,7 @@
         { name: "Pokémon League Sinnoh"
         , x: 84, y: 30.5
         , width: 3, height: 0.5
+        , isExtension: true
         })
     %>
 
@@ -709,6 +724,47 @@
         })
     %>
 
+
+    <!--Mt. Coronet South-->
+    <%- include('templates/mapDungeon',
+        { name: "Mt. Coronet South"
+        , x: 40, y: 22
+        , height: 4, width: 6
+        , moveToTown: "Mt. Coronet"
+        , invisible: true
+        })
+    %>
+
+    <!--Mt. Coronet North-->
+    <%- include('templates/mapDungeon',
+        { name: "Mt. Coronet North"
+        , x: 40, y: 22
+        , height: 4, width: 6
+        , moveToTown: "Mt. Coronet"
+        , invisible: true
+        })
+    %>
+
+    <!--Spear Pillar-->
+    <%- include('templates/mapDungeon',
+        { name: "Spear Pillar"
+        , x: 40, y: 22
+        , height: 4, width: 6
+        , moveToTown: "Mt. Coronet"
+        , invisible: true
+        })
+    %>
+
+    <!--Hall of Origin-->
+    <%- include('templates/mapDungeon',
+        { name: "Hall of Origin"
+        , x: 40, y: 22
+        , height: 4, width: 6
+        , moveToTown: "Mt. Coronet"
+        , invisible: true
+        })
+    %>
+
     <!--Solaceon Ruins-->
     <%- include ('templates/mapDungeon',
         { name: "Solaceon Ruins"
@@ -737,6 +793,15 @@
         { name: "Snowpoint Temple"
         , x: 38, y: 0
         , height: 6, width: 3
+        })
+    %>
+
+    <!--Team Galactic HQ-->
+    <%- include('templates/mapDungeon',
+        { name: "Team Galactic HQ"
+        , x: 64, y: 29
+        , height: 4, width: 9
+        ,invisible: true
         })
     %>
 
@@ -801,6 +866,7 @@
         { name: "Sendoff Spring"
         , x: 73, y: 41
         , height: 3, width: 2
+        , isExtension: true
         })
     %>
 
@@ -833,7 +899,7 @@
      %>
 
      <%- include('templates/mapPOI',
-        { name: "Pokemon Day Care"
+        { name: "Pokémon Day Care"
         , x: 49, y: 35
         , width: 4, height: 4
         , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
@@ -847,6 +913,7 @@
          , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: MapHelper.calculateTownCssClass('Distortion World') }"
          , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Spear Pillar')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]() == 0"
          , image: "assets/images/map/distortion_world.png"
+         , connectedToTown: "Distortion World"
          })
      %>
 
@@ -857,6 +924,7 @@
          , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: MapHelper.calculateTownCssClass('Distortion World') }"
          , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Sendoff Spring')]() >= 1"
          , image: "assets/images/map/distortion_world.png"
+         , connectedToTown: "Distortion World"
          })
      %>
 
@@ -877,6 +945,16 @@
          , databind: "click:function(){MapHelper.moveToTown('Twinleaf Town')}, attr:{ class: MapHelper.calculateTownCssClass('Twinleaf Town') }"
          , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
          , image: "assets/images/map/blimp_pikachu.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Ash Ketchum"
+         , x: 70, y: 3
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Ash Ketchum Sinnoh'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Ash Ketchum Sinnoh'] && TemporaryBattleList['Ash Ketchum Sinnoh'].isVisible()"
+         , image: "assets/images/map/ashketchumoverworld.png"
          })
      %>
 

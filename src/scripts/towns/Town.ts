@@ -1,19 +1,19 @@
 ///<reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="NPC.ts"/>
 ///<reference path="KantoBerryMasterNPC.ts"/>
-///<reference path="ProfOakNPC.ts"/>
+///<reference path="ProfNPC.ts"/>
 ///<reference path="RoamerNPC.ts"/>
 ///<reference path="TownContent.ts"/>
 
 type TownOptionalArgument = {
-    requirements?: (Requirement | OneFromManyRequirement)[],
+    requirements?: Requirement[],
     npcs?: NPC[],
 };
 
 class Town {
     public name: string;
     public region: GameConstants.Region;
-    public requirements: (Requirement | OneFromManyRequirement)[];
+    public requirements: Requirement[];
     public dungeon?: Dungeon;
     public npcs?: NPC[];
     public startingTown: boolean;
@@ -57,8 +57,8 @@ class Town {
 class DungeonTown extends Town {
     dungeon: Dungeon
 
-    constructor(name: string, region: GameConstants.Region, requirements: (Requirement | OneFromManyRequirement)[] = []) {
-        super(name, region, [], { requirements });
+    constructor(name: string, region: GameConstants.Region, requirements: Requirement[] = [], content: TownContent[] = [], npcs: NPC[] = []) {
+        super(name, region, content, { requirements, npcs });
         this.dungeon = dungeonList[name];
     }
 }

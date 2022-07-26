@@ -154,6 +154,11 @@ class Mine {
     }
 
     public static survey() {
+        // Disable survey while loading new layer
+        if (this.loadingNewLayer) {
+            return;
+        }
+
         if (Mine.surveyResult()) {
             $('#mine-survey-result').tooltip('show');
             return;
@@ -185,6 +190,10 @@ class Mine {
             } else {
                 switch (reward.valueType) {
                     case 'Diamond': {
+                        if (reward.isShard()) {
+                            res.shards++;
+                            break;
+                        }
                         res.totalValue += reward.value;
                         break;
                     }
@@ -198,7 +207,7 @@ class Mine {
                 }
             }
             return res;
-        }, {fossils: 0, plates: 0, evoItems: 0, totalValue: 0});
+        }, {fossils: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0});
     }
 
     private static updatesurveyResult(summary) {
@@ -211,6 +220,9 @@ class Mine {
         }
         if (summary.plates) {
             text.push(`Gem Plates: ${summary.plates}`);
+        }
+        if (summary.shards) {
+            text.push(`Shards: ${summary.shards}`);
         }
         text.push(`Diamond Value: ${summary.totalValue}`);
 
@@ -256,6 +268,11 @@ class Mine {
     }
 
     public static bomb() {
+        // Disable bomb while loading new layer
+        if (this.loadingNewLayer) {
+            return;
+        }
+
         let tiles = App.game.underground.getBombEfficiency();
         if (App.game.underground.energy >= Underground.BOMB_ENERGY) {
             while (tiles-- > 0) {
@@ -276,7 +293,7 @@ class Mine {
             title: 'Underground',
             message: 'Skip this mine layer?',
             type: NotificationConstants.NotificationOption.warning,
-            confirm: 'skip',
+            confirm: 'Skip',
         })) {
             setTimeout(Mine.completed, 1500);
             Mine.loadingNewLayer = true;
@@ -320,6 +337,7 @@ class Mine {
                 Notifier.notify({
                     message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}`,
                     type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
                 });
 
                 if (App.game.oakItems.isActive(OakItemType.Treasure_Scanner)) {
@@ -402,6 +420,7 @@ class Mine {
         Notifier.notify({
             message: 'You dig deeper...',
             type: NotificationConstants.NotificationOption.info,
+            setting: NotificationConstants.NotificationSetting.Underground.underground_dig_deeper,
         });
         ko.cleanNode(document.getElementById('mineBody'));
         App.game.oakItems.use(OakItemType.Explosive_Charge);

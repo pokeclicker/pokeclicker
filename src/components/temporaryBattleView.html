@@ -4,7 +4,7 @@
         <h2 class="pageItemTitle" style="display: block;">
 
             <knockout class="left">
-                <knockout data-bind="text: TemporaryBattleBattle.battle.name"></knockout>
+                <knockout data-bind="text: TemporaryBattleBattle.battle.getDisplayName()"></knockout>
             </knockout>
 
             <knockout>
@@ -46,7 +46,7 @@
             <div class="progress-bar bg-danger" role="progressbar"
                     data-bind="attr:{ style: 'width:' + TemporaryBattleBattle.enemyPokemon().healthPercentage() + '%' }"
                     aria-valuemin="0" aria-valuemax="100">
-                <span data-bind="text: TemporaryBattleBattle.enemyPokemon().health() + ' / ' + TemporaryBattleBattle.enemyPokemon().maxHealth()" style="font-size: 12px;"></span>
+                <span data-bind="text: TemporaryBattleBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + TemporaryBattleBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
             </div>
         </div>
     </div>

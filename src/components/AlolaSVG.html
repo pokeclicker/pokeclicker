@@ -1,7 +1,10 @@
 <g data-bind='visible: player.region == GameConstants.Region.alola'>
-    
+
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele island').id">
-        <image width="1600" height="960" xlink:href="assets/images/alola-melemele.png" href="assets/images/alola-melemele.png"></image>
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/alola-melemele.png?v=$VERSION',
+            href:'assets/images/alola-melemele.png?v=$VERSION'
+        }"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
@@ -141,7 +144,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts--> 
+        <!--Route 1 Hau'oli Outskirts-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 8, height: 2
@@ -149,7 +152,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 5, height: 2
@@ -158,7 +161,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 4, height: 2
@@ -167,7 +170,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 4, height: 3
@@ -176,7 +179,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 2, height: 1
@@ -185,7 +188,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 2, height: 1
@@ -194,7 +197,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 3, height: 1
@@ -203,7 +206,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 2, height: 1
@@ -212,7 +215,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 2, height: 2
@@ -221,7 +224,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 1, height: 1
@@ -230,7 +233,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 1, height: 1
@@ -239,7 +242,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 2, height: 1
@@ -248,7 +251,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 2, height: 3
@@ -257,7 +260,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 1, height: 2
@@ -266,7 +269,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 1, height: 2
@@ -275,7 +278,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 1, height: 1
@@ -284,7 +287,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 6, height: 2
@@ -293,7 +296,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 1, height: 1
@@ -302,7 +305,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 2, height: 1
@@ -311,7 +314,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 8, height: 1
@@ -320,7 +323,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 2, height: 1
@@ -329,7 +332,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 6, height: 2
@@ -338,7 +341,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 4, height: 2
@@ -347,7 +350,7 @@
             })
         %>
 
-        <!--Route 1 Hau'oli Outskirts extension--> 
+        <!--Route 1 Hau'oli Outskirts extension-->
         <%- include('templates/mapRoute',
             { route: 18, region: 6
             , width: 2, height: 1
@@ -656,7 +659,7 @@
         <%- include('templates/mapRoute',
             { route: 19, region: 6
             , width: 13, height: 3
-            , x: 78, y: 40, name: "Melemele"
+            , x: 78, y: 40, name: "Melemele Sea"
             })
         %>
 
@@ -665,6 +668,7 @@
             { route: 19, region: 6
             , width: 13, height: 3
             , x: 78, y: 43, name: "Sea"
+            , noText: true
             })
         %>
 
@@ -1029,7 +1033,6 @@
             })
         %>
 
-
         <!--Melemele Sea extension-->
         <%- include('templates/mapRoute',
             { route: 19, region: 6
@@ -1163,6 +1166,7 @@
             { name: "Iki Town"
             , x: 31, y: 16
             , width: 1, height: 7
+            , isExtension: true
             })
         %>
 
@@ -1187,6 +1191,7 @@
             { name: "Hau'oli City"
             , x: 13, y: 29.5
             , width: 5, height: 0.5
+            , isExtension: true
             })
         %>
 
@@ -1195,6 +1200,7 @@
             { name: "Hau'oli City"
             , x: 20, y: 29.5
             , width: 5, height: 0.5
+            , isExtension: true
             })
         %>
 
@@ -1203,6 +1209,7 @@
             { name: "Hau'oli City"
             , x: 5, y: 34
             , width: 28, height: 7
+            , isExtension: true
             })
         %>
 
@@ -1211,6 +1218,7 @@
             { name: "Hau'oli City"
             , x: 8, y: 33
             , width: 1, height: 1
+            , isExtension: true
             })
         %>
 
@@ -1219,6 +1227,7 @@
             { name: "Hau'oli City"
             , x: 14, y: 41
             , width: 19, height: 2
+            , isExtension: true
             })
         %>
 
@@ -1227,6 +1236,7 @@
             { name: "Hau'oli City"
             , x: 13, y: 41
             , width: 1, height: 1
+            , isExtension: true
             })
         %>
 
@@ -1235,6 +1245,7 @@
             { name: "Hau'oli City"
             , x: 14, y: 43
             , width: 10, height: 1
+            , isExtension: true
             })
         %>
 
@@ -1243,6 +1254,7 @@
             { name: "Hau'oli City"
             , x: 10, y: 29
             , width: 3, height: 1
+            , isExtension: true
             })
         %>
 
@@ -1251,6 +1263,7 @@
             { name: "Hau'oli City"
             , x: 37, y: 32.5
             , width: 5, height: 3.5
+            , isExtension: true
             })
         %>
 
@@ -1259,6 +1272,7 @@
             { name: "Hau'oli City"
             , x: 42, y: 34.5
             , width: 5, height: 3.5
+            , isExtension: true
             })
         %>
 
@@ -1275,6 +1289,7 @@
             { name: "Melemele Woods"
             , x: 29, y: 10
             , width: 13, height: 3
+            , isExtension: true
             })
         %>
 
@@ -1283,6 +1298,7 @@
             { name: "Melemele Woods"
             , x: 33, y: 8
             , width: 8, height: 2
+            , isExtension: true
             })
         %>
 
@@ -1291,6 +1307,7 @@
             { name: "Melemele Woods"
             , x: 41, y: 9
             , width: 3, height: 1
+            , isExtension: true
             })
         %>
 
@@ -1299,6 +1316,7 @@
             { name: "Melemele Woods"
             , x: 42, y: 10
             , width: 3, height: 1
+            , isExtension: true
             })
         %>
 
@@ -1307,6 +1325,7 @@
             { name: "Melemele Woods"
             , x: 31, y: 9
             , width: 2, height: 1
+            , isExtension: true
             })
         %>
 
@@ -1343,6 +1362,7 @@
             { name: "Hau'oli Cemetery"
             , x: 26, y: 22
             , width: 1, height: 4
+            , isExtension: true
             })
         %>
 
@@ -1351,6 +1371,34 @@
             { name: "Hau'oli Cemetery"
             , x: 16, y: 24
             , width: 4, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!--Verdant Cavern-->
+        <%- include('templates/mapDungeon',
+            { name: "Verdant Cavern"
+            , x: 28, y: 13
+            , width: 14, height: 3
+            , invisible: true
+            })
+        %>
+
+        <!--Melemele Meadow-->
+        <%- include('templates/mapDungeon',
+            { name: "Melemele Meadow"
+            , x: 28, y: 13
+            , width: 14, height: 3
+            , invisible: true
+            })
+        %>
+
+        <!--Ruins of Conflict-->
+        <%- include('templates/mapDungeon',
+            { name: "Ruins of Conflict"
+            , x: 28, y: 13
+            , width: 14, height: 3
+            , invisible: true
             })
         %>
 
@@ -1367,6 +1415,7 @@
             { name: "Seaward Cave"
             , x: 51, y: 9
             , width: 2, height: 3
+            , isExtension: true
             })
         %>
 
@@ -1375,6 +1424,7 @@
             { name: "Seaward Cave"
             , x: 51, y: 12
             , width: 1, height: 1
+            , isExtension: true
             })
         %>
 
@@ -1391,6 +1441,7 @@
             { name: "Ten Carat Hill"
             , x: 55, y: 50
             , width: 10, height: 3
+            , isExtension: true
             })
         %>
 
@@ -1399,6 +1450,7 @@
             { name: "Ten Carat Hill"
             , x: 57, y: 41
             , width: 11, height: 2
+            , isExtension: true
             })
         %>
 
@@ -1407,6 +1459,7 @@
             { name: "Ten Carat Hill"
             , x: 62, y: 39
             , width: 6, height: 2
+            , isExtension: true
             })
         %>
 
@@ -1415,6 +1468,7 @@
             { name: "Ten Carat Hill"
             , x: 66, y: 37
             , width: 2, height: 2
+            , isExtension: true
             })
         %>
 
@@ -1423,6 +1477,7 @@
             { name: "Ten Carat Hill"
             , x: 65, y: 38
             , width: 1, height: 1
+            , isExtension: true
             })
         %>
 
@@ -1431,6 +1486,7 @@
             { name: "Ten Carat Hill"
             , x: 60, y: 40
             , width: 2, height: 1
+            , isExtension: true
             })
         %>
 
@@ -1439,6 +1495,7 @@
             { name: "Ten Carat Hill"
             , x: 55, y: 42
             , width: 2, height: 1
+            , isExtension: true
             })
         %>
 
@@ -1447,6 +1504,7 @@
             { name: "Ten Carat Hill"
             , x: 51, y: 44
             , width: 1, height: 2
+            , isExtension: true
             })
         %>
 
@@ -1455,48 +1513,54 @@
             { name: "Ten Carat Hill"
             , x: 51, y: 47
             , width: 1, height: 2
+            , isExtension: true
             })
         %>
 
-        
+
         <!--Ten Carat Hill extension-->
         <%- include('templates/mapDungeon',
             { name: "Ten Carat Hill"
             , x: 54, y: 50
             , width: 1, height: 2
+            , isExtension: true
             })
         %>
-        
+
         <!--Ten Carat Hill extension-->
         <%- include('templates/mapDungeon',
             { name: "Ten Carat Hill"
             , x: 53, y: 50
             , width: 1, height: 1
+            , isExtension: true
             })
         %>
-        
+
         <!--Ten Carat Hill extension-->
         <%- include('templates/mapDungeon',
             { name: "Ten Carat Hill"
             , x: 58, y: 53
             , width: 6, height: 1
+            , isExtension: true
             })
         %>
-        
+
         <!--Ten Carat Hill extension-->
         <%- include('templates/mapDungeon',
             { name: "Ten Carat Hill"
             , x: 65, y: 50
             , width: 2, height: 2
+            , isExtension: true
             })
         %>
 
-            
+
         <!--Ten Carat Hill extension-->
         <%- include('templates/mapDungeon',
             { name: "Ten Carat Hill"
             , x: 68, y: 39
             , width: 1, height: 2
+            , isExtension: true
             })
         %>
 
@@ -1533,7 +1597,10 @@
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala island').id">
-        <image width="1600" height="960" xlink:href="assets/images/alola.png" href="assets/images/alola-akala.png"></image>
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/alola-akala.png?v=$VERSION',
+            href:'assets/images/alola-akala.png?v=$VERSION'
+        }"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
@@ -2071,6 +2138,7 @@
             { name: "Heahea City"
             , x: 50, y: 36
             , width: 6, height: 4
+            , isExtension: true
             })
         %>
 
@@ -2079,6 +2147,7 @@
             { name: "Heahea City"
             , x: 40, y: 40
             , width: 22, height: 2
+            , isExtension: true
             })
         %>
 
@@ -2087,6 +2156,7 @@
             { name: "Heahea City"
             , x: 47, y: 31.5
             , width: 3, height: 2.5
+            , isExtension: true
             })
         %>
 
@@ -2095,6 +2165,7 @@
             { name: "Heahea City"
             , x: 50, y: 35
             , width: 1, height: 1
+            , isExtension: true
             })
         %>
 
@@ -2103,6 +2174,7 @@
             { name: "Heahea City"
             , x: 61, y: 38
             , width: 8, height: 2
+            , isExtension: true
             })
         %>
 
@@ -2111,6 +2183,7 @@
             { name: "Heahea City"
             , x: 60, y: 39
             , width: 1, height: 1
+            , isExtension: true
             })
         %>
 
@@ -2119,6 +2192,7 @@
             { name: "Heahea City"
             , x: 62, y: 40
             , width: 1, height: 1
+            , isExtension: true
             })
         %>
 
@@ -2127,6 +2201,7 @@
             { name: "Heahea City"
             , x: 40, y: 42
             , width: 1, height: 1
+            , isExtension: true
             })
         %>
 
@@ -2135,6 +2210,7 @@
             { name: "Heahea City"
             , x: 57, y: 42
             , width: 1, height: 2
+            , isExtension: true
             })
         %>
 
@@ -2143,6 +2219,7 @@
             { name: "Heahea City"
             , x: 56, y: 39
             , width: 1, height: 1
+            , isExtension: true
             })
         %>
 
@@ -2159,6 +2236,7 @@
             { name: "Paniola Town"
             , x: 59, y: 29
             , width: 1, height: 1
+            , isExtension: true
             })
         %>
 
@@ -2175,6 +2253,7 @@
             { name: "Royal Avenue"
             , x: 68, y: 31
             , width: 1, height: 4
+            , isExtension: true
             })
         %>
 
@@ -2183,6 +2262,7 @@
             { name: "Royal Avenue"
             , x: 82, y: 24
             , width: 1, height: 5
+            , isExtension: true
             })
         %>
 
@@ -2191,6 +2271,7 @@
             { name: "Royal Avenue"
             , x: 71, y: 24
             , width: 11, height: 4
+            , isExtension: true
             })
         %>
 
@@ -2199,6 +2280,7 @@
             { name: "Royal Avenue"
             , x: 72, y: 23
             , width: 5, height: 1
+            , isExtension: true
             })
         %>
 
@@ -2215,6 +2297,7 @@
             { name: "Konikoni City"
             , x: 43, y: 48
             , width: 1, height: 2
+            , isExtension: true
             })
         %>
 
@@ -2239,6 +2322,7 @@
             { name: "Roadside Motel"
             , x: 56, y: 12
             , width: 5, height: 2
+            , isExtension: true
             })
         %>
 
@@ -2259,6 +2343,7 @@
             { name: "Pikachu Valley"
             , x: 53, y: 27
             , width: 2, height: 1
+            , isExtension: true
             })
         %>
 
@@ -2267,6 +2352,7 @@
             { name: "Pikachu Valley"
             , x: 50, y: 28
             , width: 1, height: 2
+            , isExtension: true
             })
         %>
 
@@ -2291,6 +2377,7 @@
             { name: "Brooklet Hill"
             , x: 49, y: 21
             , width: 4, height: 6
+            , isExtension: true
             })
         %>
 
@@ -2299,6 +2386,7 @@
             { name: "Brooklet Hill"
             , x: 53, y: 23
             , width: 1, height: 3
+            , isExtension: true
             })
         %>
 
@@ -2315,6 +2403,7 @@
             { name: "Wela Volcano Park"
             , x: 75, y: 17
             , width: 2, height: 4
+            , isExtension: true
             })
         %>
 
@@ -2323,6 +2412,7 @@
             { name: "Wela Volcano Park"
             , x: 77, y: 19
             , width: 2, height: 1
+            , isExtension: true
             })
         %>
 
@@ -2339,6 +2429,7 @@
             { name: "Lush Jungle"
             , x: 65, y: 6
             , width: 4, height: 2
+            , isExtension: true
             })
         %>
 
@@ -2347,6 +2438,7 @@
             { name: "Lush Jungle"
             , x: 64, y: 7
             , width: 1, height: 1
+            , isExtension: true
             })
         %>
 
@@ -2355,6 +2447,7 @@
             { name: "Lush Jungle"
             , x: 69, y: 7
             , width: 1, height: 6
+            , isExtension: true
             })
         %>
 
@@ -2371,6 +2464,7 @@
             { name: "Diglett's Tunnel"
             , x: 49, y: 48
             , width: 3, height: 5
+            , isExtension: true
             })
         %>
 
@@ -2379,6 +2473,7 @@
             { name: "Diglett's Tunnel"
             , x: 56, y: 44
             , width: 3, height: 1
+            , isExtension: true
             })
         %>
 
@@ -2395,9 +2490,10 @@
             { name: "Memorial Hill"
             , x: 53, y: 58
             , width: 2, height: 1
+            , isExtension: true
             })
         %>
-        
+
         <!--Aether Foundation-->
         <%- include('templates/mapDungeon',
             { name: "Aether Foundation"
@@ -2411,6 +2507,7 @@
             { name: "Aether Foundation"
             , x: 12, y: 43
             , width: 2, height: 0.5
+            , isExtension: true
             })
         %>
 
@@ -2460,7 +2557,10 @@
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula & Poni islands').id">
-        <image width="1600" height="960" xlink:href="assets/images/kanto.png" href="assets/images/alola2.png"></image>
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/alola2.png?v=$VERSION',
+            href:'assets/images/alola2.png?v=$VERSION'
+        }"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
@@ -2834,6 +2934,7 @@
             { name: "Malie City"
             , x: 73, y: 18
             , width: 4, height: 4
+            , isExtension: true
             })
         %>
 
@@ -2882,6 +2983,7 @@
             { name: "Pokémon League Alola"
             , x: 64, y: 38.5
             , width: 3, height: 1.5
+            , isExtension: true
             })
         %>
 
@@ -2945,11 +3047,31 @@
             })
         %>
 
+
+        <!--Mina's Houseboat-->
+        <%- include('templates/mapDungeon',
+            { name: "Mina's Houseboat"
+            , x: 15, y: 41.5
+            , width: 5, height: 4.5
+            ,invisible: true
+            })
+        %>
+
+        <!--Exeggutor Island Hill-->
+        <%- include('templates/mapDungeon',
+            { name: "Exeggutor Island Hill"
+            , x: 5, y: 43
+            , width: 4, height: 4
+            ,invisible: true
+            })
+        %>
+
         <!--Vast Poni Canyon Extension-->
         <%- include('templates/mapDungeon',
             { name: "Vast Poni Canyon"
             , x: 25, y: 29
             , width: 4, height: 3
+            , isExtension: true
             })
         %>
 
@@ -2958,6 +3080,7 @@
             { name: "Vast Poni Canyon"
             , x: 28, y: 32
             , width: 1, height: 1
+            , isExtension: true
             })
         %>
 
@@ -2966,6 +3089,7 @@
             { name: "Vast Poni Canyon"
             , x: 29, y: 30
             , width: 2, height: 1
+            , isExtension: true
             })
         %>
 
@@ -3009,6 +3133,16 @@
             , width: 3, height: 4
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Malie City') }"
             })
+        %>
+
+        <%- include('templates/mapOverlay',
+           { name: "Ash Ketchum"
+           , x: 32, y: 19
+           , width: 4, height: 4
+           , databind: "click: () => TemporaryBattleList['Ash Ketchum Alola'].protectedOnclick()"
+           , visible:  "TemporaryBattleList['Ash Ketchum Alola'] && TemporaryBattleList['Ash Ketchum Alola'].isVisible()"
+           , image: "assets/images/map/ashketchumoverworld.png"
+           })
         %>
     </g>
 </g>

@@ -39,7 +39,14 @@
                                     <!-- ko if: $index() === 0 -->
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">→</td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">
-                                        <img class='mineInventoryItem' data-bind='attr: {src: $parent.item.itemType.image}'>
+                                        <img class='mineInventoryItem' data-bind="
+                                            attr: {src: $parent.item.itemType.image},
+                                            tooltip: {
+                                                title: $parent.item.itemType.description ? $parent.item.itemType.description : '',
+                                                trigger: 'hover',
+                                                placement:'bottom',
+                                                html: true
+                                              }">
                                     </td>
                                     <td class='vertical-middle' data-bind='attr: { rowspan: $parent.berries.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">

@@ -45,11 +45,11 @@ class SpecialEvents implements Feature {
 SpecialEvents.newEvent('Lunar New Year', 'Encounter Fancy Pattern Vivillon for a limited time roaming Kalos.',
     // Start
     new Date(new Date().getFullYear(), 0, 24, 1), () => {
-        RoamingPokemonList.add(GameConstants.Region.kalos, new RoamingPokemon('Vivillon (Fancy)'));
+        RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Fancy)'));
     },
     // End
     new Date(new Date().getFullYear(), 1, 7, 23), () => {
-        RoamingPokemonList.remove(GameConstants.Region.kalos, 'Vivillon (Fancy)');
+        RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Fancy)');
     }
 );
 // Easter
@@ -67,14 +67,16 @@ SpecialEvents.newEvent('Easter', 'Encounter Surprise Togepi for a limited time w
     }
 );
 // First Event
-SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu for a limited time roaming Kanto.',
+SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu and Red Spearow for a limited time roaming Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 6, 1), () => {
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Flying Pikachu'));
+        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Flying Pikachu'));
+        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Red Spearow'));
     },
     // End
     new Date(new Date().getFullYear(), 6, 12, 23), () => {
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 'Flying Pikachu');
+        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Flying Pikachu');
+        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Red Spearow');
     }
 );
 // Pokemon the first movie release date
@@ -82,14 +84,16 @@ SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a l
     // Start
     new Date(new Date().getFullYear(), 6, 18, 1), () => {
         dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Armored Mewtwo', 1000000, 80));
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Bulbasaur (clone)'));
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Charmander (clone)'));
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Squirtle (clone)'));
+        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Bulbasaur (Clone)'));
+        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Charmander (Clone)'));
+        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Squirtle (Clone)'));
     },
     // End
     new Date(new Date().getFullYear(), 6, 24, 23), () => {
         dungeonList['Cerulean Cave'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Armored Mewtwo');
-        RoamingPokemonList.list[GameConstants.Region.kanto] = RoamingPokemonList.list[GameConstants.Region.kanto].filter(r => !['Bulbasaur (clone)', 'Charmander (clone)', 'Squirtle (clone)'].includes(r.pokemon.name));
+        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Bulbasaur (Clone)');
+        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Charmander (Clone)');
+        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Squirtle (Clone)');
     }
 );
 // Halloween
@@ -122,13 +126,13 @@ SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited ti
 SpecialEvents.newEvent('Let\'s GO!', 'Encounter special Eevee and Pikachu roaming in the Kanto region.',
     // Start
     new Date(new Date().getFullYear(), 10, 16, 1), () => {
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Let\'s Go Pikachu'));
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon('Let\'s Go Eevee'));
+        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Let\'s Go Pikachu'));
+        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Let\'s Go Eevee'));
     },
     // End
     new Date(new Date().getFullYear(), 10, 23, 23), () => {
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 'Let\'s Go Pikachu');
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 'Let\'s Go Eevee');
+        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Let\'s Go Pikachu');
+        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Let\'s Go Eevee');
     }
 );
 // Christmas
@@ -137,7 +141,7 @@ SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the 
     new Date(new Date().getFullYear(), 11, 24, 1), () => {
         // Add to every region excluding None
         GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
-            RoamingPokemonList.add(region, new RoamingPokemon('Santa Snorlax'));
+            RoamingPokemonList.add(region, 0, new RoamingPokemon('Santa Snorlax'));
         });
         dungeonList['Ilex Forest'].bossList.push(new DungeonBossPokemon('Grinch Celebi', 1600000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)}));
     },
@@ -145,7 +149,7 @@ SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the 
     new Date(new Date().getFullYear(), 11, 30, 23), () => {
         // Remove from every region excluding None
         GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
-            RoamingPokemonList.remove(region, 'Santa Snorlax');
+            RoamingPokemonList.remove(region, 0, 'Santa Snorlax');
         });
         dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Grinch Celebi');
     }

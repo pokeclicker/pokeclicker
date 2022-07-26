@@ -14,6 +14,7 @@ enum KeyItemType {
     'Event_calendar',
     'Gem_case',
     'DNA_splicers',
+    'Pokerus_virus',
 }
 
 export default KeyItemType;

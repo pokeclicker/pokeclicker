@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/settings/BreedingFilters.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 /// <reference path="../../declarations/breeding/EggType.d.ts" />
@@ -33,12 +34,14 @@ class Breeding implements Feature {
         this._eggList.forEach((egg) => {
             egg.extend({deferred: true});
         });
-        BreedingController.filter.category(Settings.getSetting('breedingCategoryFilter').value);
-        BreedingController.filter.region(Settings.getSetting('breedingRegionFilter').value);
-        BreedingController.filter.type1(Settings.getSetting('breedingTypeFilter1').value);
-        BreedingController.filter.type2(Settings.getSetting('breedingTypeFilter2').value);
-        BreedingController.filter.shinyStatus(Settings.getSetting('breedingShinyFilter').value);
+        BreedingFilters.category.value(Settings.getSetting('breedingCategoryFilter').value);
+        BreedingFilters.region.value(Settings.getSetting('breedingRegionFilter').value);
+        BreedingFilters.type1.value(Settings.getSetting('breedingTypeFilter1').value);
+        BreedingFilters.type2.value(Settings.getSetting('breedingTypeFilter2').value);
+        BreedingFilters.shinyStatus.value(Settings.getSetting('breedingShinyFilter').value);
+        BreedingFilters.pokerus.value(Settings.getSetting('breedingPokerusFilter').value);
         BreedingController.displayValue(Settings.getSetting('breedingDisplayFilter').value);
+        BreedingController.regionalAttackDebuff(+Settings.getSetting('breedingRegionalAttackDebuffSetting').value);
     }
 
     initialize(): void {
@@ -117,23 +120,25 @@ class Breeding implements Feature {
             return;
         }
 
-        this.eggSlots = json['eggSlots'] ?? this.defaults.eggSlots;
+        this.eggSlots = json.eggSlots ?? this.defaults.eggSlots;
 
-        if (json['eggList'] == null) {
-            this._eggList = this.defaults.eggList;
-        } else {
-            const saveEggList: Record<string, any>[] = json['eggList'];
+        this._eggList = this.defaults.eggList;
+        if (json.eggList !== null) {
+            // Deferring this because Egg constructor wants to access App.game.party, which isn't avaliable yet
+            setTimeout(() => {
+                const saveEggList: Record<string, any>[] = json.eggList;
 
-            for (let i = 0; i < this._eggList.length; i++) {
-                if (saveEggList[i] != null) {
-                    const egg: Egg = new Egg(null, null, null);
-                    egg.fromJSON(saveEggList[i]);
-                    this._eggList[i](egg);
+                for (let i = 0; i < this._eggList.length; i++) {
+                    if (saveEggList[i] != null) {
+                        const egg: Egg = new Egg(null, null, null);
+                        egg.fromJSON(saveEggList[i]);
+                        this._eggList[i](egg);
+                    }
                 }
-            }
+            }, 0);
         }
-        this.queueSlots(json['queueSlots'] ?? this.defaults.queueSlots);
-        this.queueList(json['queueList'] ? json['queueList'] : this.defaults.queueList);
+        this.queueSlots(json.queueSlots ?? this.defaults.queueSlots);
+        this.queueList(json.queueList ? json.queueList : this.defaults.queueList);
         this.hatcheryHelpers.fromJSON(json.hatcheryHelpers || []);
     }
 
@@ -152,10 +157,10 @@ class Breeding implements Feature {
         return App.game.party.hasMaxLevelPokemon() && (this.hasFreeEggSlot() || this.hasFreeQueueSlot());
     }
 
-    public hasFreeEggSlot(): boolean {
+    public hasFreeEggSlot(isHelper = false): boolean {
         let counter = 0;
-        for (const egg of this._eggList) {
-            if (!egg().isNone()) {
+        for (let i = 0; i < this._eggList.length; i++) {
+            if (!this._eggList[i]().isNone() || (!isHelper && this.hatcheryHelpers.hired()[i])) {
                 counter++;
             }
         }
@@ -167,12 +172,12 @@ class Breeding implements Feature {
         return slots && this.queueList().length < slots;
     }
 
-    public gainEgg(e: Egg) {
+    public gainEgg(e: Egg, isHelper = false) {
         if (e.isNone()) {
             return false;
         }
         for (let i = 0; i < this._eggList.length; i++) {
-            if (this._eggList[i]().isNone()) {
+            if (this._eggList[i]().isNone() && (isHelper || !this.hatcheryHelpers.hired()[i])) {
                 this._eggList[i](e);
                 return true;
             }
@@ -201,6 +206,10 @@ class Breeding implements Feature {
                 continue;
             }
             const egg = this.eggList[index]();
+            const partyPokemon = egg.partyPokemon;
+            if (!egg.isNone() && partyPokemon && partyPokemon.canCatchPokerus() && partyPokemon.pokerus == GameConstants.Pokerus.None) {
+                partyPokemon.calculatePokerus();
+            }
             egg.addSteps(amount, this.multiplier);
             if (this.queueList().length && egg.progress() >= 100) {
                 this.hatchPokemonEgg(index);
@@ -253,8 +262,8 @@ class Breeding implements Feature {
         return false;
     }
 
-    public gainPokemonEgg(pokemon: PartyPokemon | PokemonListData): boolean {
-        if (!this.hasFreeEggSlot()) {
+    public gainPokemonEgg(pokemon: PartyPokemon | PokemonListData, isHelper = false): boolean {
+        if (!this.hasFreeEggSlot(isHelper)) {
             Notifier.notify({
                 message: 'You don\'t have any free egg slots',
                 type: NotificationConstants.NotificationOption.warning,
@@ -267,7 +276,7 @@ class Breeding implements Feature {
             pokemon.breeding = true;
         }
 
-        return this.gainEgg(egg);
+        return this.gainEgg(egg, isHelper);
     }
 
     public hatchPokemonEgg(index: number): void {

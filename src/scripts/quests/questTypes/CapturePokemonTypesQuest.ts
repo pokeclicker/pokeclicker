@@ -42,13 +42,13 @@ class CapturePokemonTypesQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return `Capture ${this.amount.toLocaleString('en-US')} ${PokemonType[this.type]} type Pokémon.`;
+        return `Capture ${this.amount.toLocaleString('en-US')} ${PokemonType[this.type]}-type Pokémon.`;
     }
 
     toJSON() {
         const json = super.toJSON();
-        json['name'] = this.constructor.name;
-        json['data'].push(this.type);
+        json.name = this.constructor.name;
+        json.data.push(this.type);
         return json;
     }
 }
