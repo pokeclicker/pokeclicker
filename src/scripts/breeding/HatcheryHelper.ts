@@ -188,7 +188,7 @@ class HatcheryHelpers {
             egg.addSteps(steps, multiplier);
 
             // Check if the egg is ready to hatch
-            if (egg.canHatch()) {
+            if (egg.canHatch() || egg.isNone()) {
                 egg.hatch(helper.attackEfficiency(), true);
                 this.hatchery.eggList[index](new Egg());
 
