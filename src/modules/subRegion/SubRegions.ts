@@ -13,7 +13,6 @@ import {
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
 import MultiRequirement from '../requirements/MultiRequirement';
 import NullRequirement from '../requirements/NullRequirement';
-import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
 import SubRegion from './SubRegion';
 
 export default class SubRegions {
