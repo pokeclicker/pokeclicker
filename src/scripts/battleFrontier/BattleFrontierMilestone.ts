@@ -5,7 +5,6 @@ class BattleFrontierMilestone {
         public stage: number,
         public rewardFunction: () => void,
         public _image?: string,
-        private requirement?: Requirement,
         private _description?: string
     ) {}
 
