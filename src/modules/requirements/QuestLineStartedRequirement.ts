@@ -4,16 +4,21 @@ import QuestLineState from '../quests/QuestLineState';
 import Requirement from './Requirement';
 
 export default class QuestLineStartedRequirement extends Requirement {
-    questLineName: string;
+    cachedQuest: any;
+    get quest() {
+        if (!this.cachedQuest) {
+            this.cachedQuest = App.game.quests.getQuestLine(this.questLineName);
+        }
+        return this.cachedQuest;
+    }
 
-    constructor(questLineName: string, option = AchievementOption.equal) {
+    constructor(private questLineName: string, option = AchievementOption.equal) {
         super(1, option);
-        this.questLineName = questLineName;
     }
 
     public getProgress(): number {
-        return (App.game.quests.getQuestLine(this.questLineName).state() === QuestLineState.started
-            || App.game.quests.getQuestLine(this.questLineName).state() === QuestLineState.ended)
+        return (this.quest.state() === QuestLineState.started
+            || this.quest.state() === QuestLineState.ended)
             ? 1 : 0;
     }
 
