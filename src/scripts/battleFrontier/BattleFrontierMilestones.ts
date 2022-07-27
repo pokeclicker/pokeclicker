@@ -5,7 +5,10 @@ class BattleFrontierMilestones {
 
     public static milestoneRewards = [];
 
-    public static addMilestone(milestone: BattleFrontierMilestone) {
+    public static addMilestone(
+    milestone: BattleFrontierMilestone
+    requirement?: Requirement
+    ) {
         this.milestoneRewards.push(milestone);
         // Sort the milestones by lowest to highest stage incase they are added out of order
         this.milestoneRewards.sort((a, b) => a.stage - b.stage);
@@ -93,20 +96,18 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(400, 'Soot
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(410, 'Deepsea_tooth', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(420, 'Shiny_stone', 40));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(430, 'Deepsea_scale', 10));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(440, 'Dusk_stone', 40));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(440, 'Dusk_stone', 40, new MaxRegionRequirement(GameConstants.Region.sinnoh));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(450, 'Prism_scale', 10));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(460, 'Dawn_stone', 40));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(470, 'Razor_claw', 10));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(480, 'Razor_fang', 10));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(490, 'Dubious_disc', 10));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(460, 'Dawn_stone', 40, new MaxRegionRequirement(GameConstants.Region.sinnoh));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(470, 'Razor_claw', 10, new MaxRegionRequirement(GameConstants.Region.sinnoh));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(480, 'Razor_fang', 10, new MaxRegionRequirement(GameConstants.Region.sinnoh));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(490, 'Dubious_disc', 10, new MaxRegionRequirement(GameConstants.Region.sinnoh));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(500, 'Ultraball', 10000));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(525, 'Magmarizer', 15));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(550, 'Electirizer', 15));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(575, 'Protector', 15));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(600, 'Reaper_cloth', 15));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(643, 'White_DNA', 10));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(644, 'Black_DNA', 10));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(660, 'Satchet', 15));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(670, 'Whipped_dream', 15));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(700, 'Ice_stone', 40));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(525, 'Magmarizer', 15, new MaxRegionRequirement(GameConstants.Region.sinnoh));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(550, 'Electirizer', 15, new MaxRegionRequirement(GameConstants.Region.sinnoh));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(575, 'Protector', 15, new MaxRegionRequirement(GameConstants.Region.sinnoh));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(600, 'Reaper_cloth', 15, new MaxRegionRequirement(GameConstants.Region.sinnoh));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(660, 'Satchet', 15, new MaxRegionRequirement(GameConstants.Region.kalos));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(670, 'Whipped_dream', 15, new MaxRegionRequirement(GameConstants.Region.kalos));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(700, 'Ice_stone', 40, new MaxRegionRequirement(GameConstants.Region.alola));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(1000, 'Masterball', 10));
