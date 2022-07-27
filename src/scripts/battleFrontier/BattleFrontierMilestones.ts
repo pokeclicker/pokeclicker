@@ -5,10 +5,7 @@ class BattleFrontierMilestones {
 
     public static milestoneRewards = [];
 
-    public static addMilestone(
-    milestone: BattleFrontierMilestone
-    requirement?: Requirement
-    ) {
+    public static addMilestone(milestone: BattleFrontierMilestone) {
         this.milestoneRewards.push(milestone);
         // Sort the milestones by lowest to highest stage incase they are added out of order
         this.milestoneRewards.sort((a, b) => a.stage - b.stage);
