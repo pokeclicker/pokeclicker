@@ -59,6 +59,7 @@ ItemList['Furfrou (Matron)']     = new PokemonItem('Furfrou (Matron)', 1500000, 
 ItemList['Furfrou (Dandy)']      = new PokemonItem('Furfrou (Dandy)', 250000);
 ItemList['Furfrou (Kabuki)']     = new PokemonItem('Furfrou (Kabuki)', 75000, Currency.battlePoint);
 ItemList['Furfrou (Pharaoh)']    = new PokemonItem('Furfrou (Pharaoh)', 300000000, Currency.dungeonToken);
+ItemList['Furfrou (Star)']    = new PokemonItem('Furfrou (Star)', 10000);
 ItemList['Type: Null']           = new PokemonItem('Type: Null', 114000);
 ItemList.Poipole              = new PokemonItem('Poipole', 90000);
 ItemList.Eternatus            = new PokemonItem('Eternatus', 50000);
