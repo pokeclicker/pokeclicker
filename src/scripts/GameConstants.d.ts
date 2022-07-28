@@ -298,6 +298,8 @@ namespace GameConstants {
         'White Shard',
         'Pink Shard',
         'Cyan Shard',
+        'Rose Shard',
+        'Brown Shard',
     }
     declare enum BattleItemType {
         'xAttack' = '',
