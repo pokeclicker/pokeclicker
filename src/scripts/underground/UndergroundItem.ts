@@ -59,6 +59,10 @@ class UndergroundItem {
         return ItemList[this.valueType] instanceof EvolutionStone;
     }
 
+    public isShard(): boolean {
+        return GameConstants.ShardType.hasOwnProperty(this.name);
+    }
+
     get displayName() {
         return this.name;
     }
@@ -138,20 +142,24 @@ UndergroundItem.addItem('Thunder Stone', 302, [[0,1,1], [1,1,1], [1,1,0]], 1, Ga
 UndergroundItem.addItem('Leaf Stone',    303, [[0,1,0], [1,1,1], [1,1,1], [0,1,0]], 1, GameConstants.StoneType[GameConstants.StoneType.Leaf_stone]);
 UndergroundItem.addItem('Moon Stone',    304, [[0,1,1,1], [1,1,1,0]], 1, GameConstants.StoneType[GameConstants.StoneType.Moon_stone]);
 UndergroundItem.addItem('Sun Stone',     305, [[0,1,0], [1,1,1], [1,1,1]], 1, GameConstants.StoneType[GameConstants.StoneType.Sun_stone], new StoneUnlockedRequirement(GameConstants.StoneType.Sun_stone));
+UndergroundItem.addItem('Shiny Stone',   306, [[0,1,1], [1,1,1], [1,1,1]], 1, GameConstants.StoneType[GameConstants.StoneType.Shiny_stone], new StoneUnlockedRequirement(GameConstants.StoneType.Shiny_stone));
+UndergroundItem.addItem('Dusk Stone',    307, [[1,1,1], [1,1,1], [1,1,0]], 1, GameConstants.StoneType[GameConstants.StoneType.Dusk_stone], new StoneUnlockedRequirement(GameConstants.StoneType.Dusk_stone));
+UndergroundItem.addItem('Dawn Stone',    308, [[1,1,1], [1,1,1], [1,1,1]], 1, GameConstants.StoneType[GameConstants.StoneType.Dawn_stone], new StoneUnlockedRequirement(GameConstants.StoneType.Dawn_stone));
+UndergroundItem.addItem('Ice Stone',     309, [[1,1,1], [1,1,1]], 1, GameConstants.StoneType[GameConstants.StoneType.Ice_stone], new StoneUnlockedRequirement(GameConstants.StoneType.Ice_stone));
 
 // Shards
-UndergroundItem.addItem('Red Shard', 400, [[1,1,1], [1,1,0], [1,1,1]], 1);
-UndergroundItem.addItem('Yellow Shard', 401, [[1,0,1,0], [1,1,1,0], [1,1,1,1]], 1);
-UndergroundItem.addItem('Green Shard', 402, [[1,1,1,1], [1,1,1,1], [1,1,0,1]], 1);
-UndergroundItem.addItem('Blue Shard', 403, [[1,1,1], [1,1,1], [1,1,0]], 1);
-UndergroundItem.addItem('Grey Shard', 404, [[1,1,1], [1,1,1], [0,0,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.johto));
-UndergroundItem.addItem('Purple Shard', 405, [[1,1,1], [1,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.johto));
-UndergroundItem.addItem('Ochre Shard', 406, [[1,1,0], [1,1,1], [1,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.hoenn));
-UndergroundItem.addItem('Black Shard', 407, [[1,1,1], [0,1,1], [0,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.sinnoh));
-UndergroundItem.addItem('Crimson Shard', 408, [[0,1,1,1], [0,1,1,1], [0,1,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.sinnoh));
-UndergroundItem.addItem('Lime Shard', 409, [[0,0,0,0], [0,1,1,1], [1,1,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.sinnoh));
-UndergroundItem.addItem('White Shard', 410, [[1,1,1,1], [0,1,1,1], [0,1,1,0]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.sinnoh));
-UndergroundItem.addItem('Pink Shard', 411, [[1,1,1,1], [1,1,1,1], [1,1,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.kalos));
-UndergroundItem.addItem('Cyan Shard', 412, [[1,1,1,1], [0,1,1,1], [0,0,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.alola));
-UndergroundItem.addItem('Rose Shard', 413, [[0,0,1,1], [1,1,1,1], [0,1,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.galar));
-UndergroundItem.addItem('Brown Shard', 414, [[1,1,0], [1,1,1], [1,1,1]], 1, undefined, new MaxRegionRequirement(GameConstants.Region.galar));
+UndergroundItem.addItem('Red Shard', 400, [[1,1,1], [1,1,0], [1,1,1]], 0);
+UndergroundItem.addItem('Yellow Shard', 401, [[1,0,1,0], [1,1,1,0], [1,1,1,1]], 0);
+UndergroundItem.addItem('Green Shard', 402, [[1,1,1,1], [1,1,1,1], [1,1,0,1]], 0);
+UndergroundItem.addItem('Blue Shard', 403, [[1,1,1], [1,1,1], [1,1,0]], 0);
+UndergroundItem.addItem('Grey Shard', 404, [[1,1,1], [1,1,1], [0,0,1]], 0, undefined, new MaxRegionRequirement(GameConstants.Region.johto));
+UndergroundItem.addItem('Purple Shard', 405, [[1,1,1], [1,1,1]], 0, undefined, new MaxRegionRequirement(GameConstants.Region.johto));
+UndergroundItem.addItem('Ochre Shard', 406, [[1,1,0], [1,1,1], [1,1,1]], 0, undefined, new MaxRegionRequirement(GameConstants.Region.hoenn));
+UndergroundItem.addItem('Black Shard', 407, [[1,1,1], [0,1,1], [0,1,1]], 0, undefined, new MaxRegionRequirement(GameConstants.Region.sinnoh));
+UndergroundItem.addItem('Crimson Shard', 408, [[0,1,1,1], [0,1,1,1], [0,1,1,1]], 0, undefined, new MaxRegionRequirement(GameConstants.Region.sinnoh));
+UndergroundItem.addItem('Lime Shard', 409, [[0,0,0,0], [0,1,1,1], [1,1,1,1]], 0, undefined, new MaxRegionRequirement(GameConstants.Region.sinnoh));
+UndergroundItem.addItem('White Shard', 410, [[1,1,1,1], [0,1,1,1], [0,1,1,0]], 0, undefined, new MaxRegionRequirement(GameConstants.Region.sinnoh));
+UndergroundItem.addItem('Pink Shard', 411, [[1,1,1,1], [1,1,1,1], [1,1,1,1]], 0, undefined, new MaxRegionRequirement(GameConstants.Region.kalos));
+UndergroundItem.addItem('Cyan Shard', 412, [[1,1,1,1], [0,1,1,1], [0,0,1,1]], 0, undefined, new MaxRegionRequirement(GameConstants.Region.alola));
+UndergroundItem.addItem('Rose Shard', 413, [[0,1,1,1], [1,1,1,1], [1,1,1,1]], 0, undefined, new MaxRegionRequirement(GameConstants.Region.galar));
+UndergroundItem.addItem('Brown Shard', 414, [[1,1,0], [1,1,0], [1,1,1]], 0, undefined, new MaxRegionRequirement(GameConstants.Region.galar));
