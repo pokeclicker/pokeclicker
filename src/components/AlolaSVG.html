@@ -2851,6 +2851,33 @@
         })
     %>
 
+    <!--Underground Entrance-->
+    <%- include('templates/mapPOI',
+        { name: "Underground Entrance"
+        , x: 188, y: 3.5
+        , width: 3, height: 3.5
+        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
+        })
+    %>
+
+    <!--Farm-->
+    <%- include('templates/mapPOI',
+        { name: "Farm"
+        , x: 192, y: 9
+        , width: 3, height: 3
+        , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
+        })
+    %>
+
+    <!--Pokémon Day Care-->
+    <%- include('templates/mapPOI',
+        { name: "Pokémon Day Care"
+        , x: 194, y: 2
+        , width: 4, height: 3.5
+        , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
+        })
+    %>
+
     <!--Tunnel-->
     <%- include('templates/mapPOI',
         { name: "Dividing Peak Tunnel"
