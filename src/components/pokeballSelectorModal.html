@@ -27,7 +27,7 @@
               <tr class="clickable"
                 data-bind="template: { name: 'pokeballSelectionTemplate', data: $data},
                   click: function(){App.game.pokeballs.selectedSelection()($data.type)},
-                  visible: $data.unlocked(),
+                  visible: $data.unlocked() || $data.quantity(),
                   css: {
                     'clickable': !($data.type === GameConstants.Pokeball.Masterball && App.game.challenges.list.disableMasterballs.active()),
                     'disabled no-click text-muted': ($data.type === GameConstants.Pokeball.Masterball && App.game.challenges.list.disableMasterballs.active()),
