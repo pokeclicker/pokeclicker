@@ -21160,7 +21160,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 876,
-        'name': 'Indeedee (male)',
+        'name': 'Indeedee (Male)',
         'type': [
             PokemonType.Psychic,
             PokemonType.Normal,
@@ -21180,7 +21180,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 876.1,
-        'name': 'Indeedee (female)',
+        'name': 'Indeedee (Female)',
         'type': [
             PokemonType.Psychic,
             PokemonType.Normal,
@@ -21220,7 +21220,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 877.1,
-        'name': 'Morpeko (hangry)',
+        'name': 'Morpeko (Hangry)',
         'type': [
             PokemonType.Electric,
             PokemonType.Dark,
