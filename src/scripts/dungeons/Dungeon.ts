@@ -7035,8 +7035,8 @@ dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
             { weight: 1 }, 'Derek'),
         new DungeonTrainer('Madame',
             [
-                new GymPokemon('Indeedee (male)', 23764848, 33),
-                new GymPokemon('Indeedee (female)', 23764848, 33),
+                new GymPokemon('Indeedee (Male)', 23764848, 33),
+                new GymPokemon('Indeedee (Female)', 23764848, 33),
             ],
             { weight: 1 }, 'Judy'),
         new DungeonTrainer('Beauty',
@@ -7053,8 +7053,8 @@ dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
     [
         new DungeonBossPokemon('Hattrem', 118824240, 36),
         new DungeonBossPokemon('Morgrem', 118824240, 36),
-        new DungeonBossPokemon('Indeedee (male)', 118824240, 36),
-        new DungeonBossPokemon('Indeedee (female)', 118824240, 36),
+        new DungeonBossPokemon('Indeedee (Male)', 118824240, 36),
+        new DungeonBossPokemon('Indeedee (Female)', 118824240, 36),
     ],
     96500, 23);
 
