@@ -1105,6 +1105,8 @@ export type PokemonNameType
     | 'Sandaconda'
     | 'Gigantamax Sandaconda'
     | 'Cramorant'
+    | 'Cramorant (Gulping)'
+    | 'Cramorant (Gorging)'
     | 'Arrokuda'
     | 'Barraskewda'
     | 'Toxel'
