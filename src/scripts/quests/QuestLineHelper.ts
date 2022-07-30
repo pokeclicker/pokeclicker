@@ -862,13 +862,16 @@ class QuestLineHelper {
             [
                 catchZacian,
                 catchZamazenta,
-            ], 'Now they have calmed down, Zacian and Zamazenta seem to want you to catch them!'));
+            ], 'Now they have calmed down, Zacian and Zamazenta seem to be willing to let you try to catch them!'));
 
         App.game.quests.questLines().push(swordShieldQuestLine);
     }
 
     public static createDojoArmorQuestLine() {
         const dojoArmorQuestLine = new QuestLine('The Dojo\'s Armor', 'Obtain the Secret Armor of the Master Dojo.');
+
+        const catch3GalarianSlowpoke = new CaptureSpecificPokemonQuest('Galarian Slowpoke', 'Catch 3 Galarian Slowpoke.', 3, false, 0, undefined);
+        dojoArmorQuestLine.addQuest(catch3GalarianSlowpoke);
 
         const clearKlara2 = new CustomQuest(1, 0, 'Defeat Klara.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Klara2')]());
         const clearAvery2 = new CustomQuest(1, 0, 'Defeat Avery.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Avery2')]());
@@ -941,8 +944,8 @@ class QuestLineHelper {
         const talktoCalyrex3 = new TalkToNPCQuest(Calyrex3, 'Talk to Calyrex again.');
         galarCrownQuestLine.addQuest(talktoCalyrex3);
 
-        const catchSpectrier = new CustomQuest(1, 0, 'Catch Spectrier.', () => App.game.statistics.pokemonCaptured[pokemonMap.Spectrier.id](), 0);
-        const catchGlastrier = new CustomQuest(1, 0, 'Catch Glastrier.', () => App.game.statistics.pokemonCaptured[pokemonMap.Glastrier.id](), 0);
+        const catchSpectrier = new CaptureSpecificPokemonQuest('Spectrier', 'Catch Spectrier.', 1, false, 0, undefined);
+        const catchGlastrier = new CaptureSpecificPokemonQuest('Glastrier', 'Catch 3 Glastrier.', 1, false, 0, undefined);
         galarCrownQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchSpectrier,
@@ -952,7 +955,7 @@ class QuestLineHelper {
         const talktoCalyrex4 = new TalkToNPCQuest(Calyrex4, 'Now you have captured both of its steeds, talk to Calyrex at the Crown Shrine.');
         galarCrownQuestLine.addQuest(talktoCalyrex4);
 
-        const catchCalyrex = new CustomQuest(1, 0, 'Now you have found and caught Glastrier and Spectrier, Calyrex wants to challenge you at Crown Shrine. Catch it!', () => App.game.statistics.pokemonCaptured[pokemonMap.Calyrex.id](), 0);
+        const catchCalyrex = new CaptureSpecificPokemonQuest('Calyrex', 'Now you have found and caught Glastrier and Spectrier, Calyrex wants to challenge you at Crown Shrine. Catch it!', 1, false, 0, undefined);
         galarCrownQuestLine.addQuest(catchCalyrex);
 
         const talktoCrownPeony2 = new TalkToNPCQuest(CrownPeony2, 'Now you have captured Calyrex, go report back to Peony!');
@@ -976,9 +979,9 @@ class QuestLineHelper {
         const talktoBirdPeony2 = new TalkToNPCQuest(BirdPeony2, 'Tell Peony about your encounter with the birds resembling Articuno, Zapdos and Moltres.');
         dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony2);
 
-        const catchGalarianArticuno = new CustomQuest(1, 0, 'Catch Galarian Articuno.', () => App.game.statistics.pokemonCaptured[pokemonMap['Galarian Articuno'].id](), 0);
-        const catchGalarianZapdos = new CustomQuest(1, 0, 'Catch Galarian Zapdos.', () => App.game.statistics.pokemonCaptured[pokemonMap['Galarian Zapdos'].id](), 0);
-        const catchGalarianMoltres = new CustomQuest(1, 0, 'Catch Galarian Moltres.', () => App.game.statistics.pokemonCaptured[pokemonMap['Galarian Moltres'].id](), 0);
+        const catchGalarianArticuno = new CaptureSpecificPokemonQuest('Galarian Articuno', 'Catch Galarian Articuno.', 1, false, 0, undefined);
+        const catchGalarianZapdos = new CaptureSpecificPokemonQuest('Galarian Zapdos', 'Catch Galarian Zapdos.', 1, false, 0, undefined);
+        const catchGalarianMoltres = new CaptureSpecificPokemonQuest('Galarian Moltres', 'Catch Galarian Moltres.', 1, false, 0, undefined);
         dynaTreeBirdsQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchGalarianArticuno,
@@ -1017,9 +1020,9 @@ class QuestLineHelper {
         const talktoGolemPeony3 = new TalkToNPCQuest(GolemPeony3, 'The ruins are still locked, report to Peony.');
         ancientGolemsQuestLine.addQuest(talktoGolemPeony3);
 
-        const catchRegirock = new CustomQuest(1, 0, 'Catch Regirock.', () => App.game.statistics.pokemonCaptured[pokemonMap.Regirock.id](), 0);
-        const catchRegice = new CustomQuest(1, 0, 'Catch Regice.', () => App.game.statistics.pokemonCaptured[pokemonMap.Regice.id](), 0);
-        const catchRegisteel = new CustomQuest(1, 0, 'Catch Registeel.', () => App.game.statistics.pokemonCaptured[pokemonMap.Registeel.id](), 0);
+        const catchRegirock = new CaptureSpecificPokemonQuest('Regirock', 'Catch Regirock.', 1, false, 0, undefined);
+        const catchRegice = new CaptureSpecificPokemonQuest('Regice', 'Catch Regice.', 1, false, 0, undefined);
+        const catchRegisteel = new CaptureSpecificPokemonQuest('Registeel', 'Catch Registeel.', 1, false, 0, undefined);
         ancientGolemsQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchRegirock,
@@ -1027,8 +1030,8 @@ class QuestLineHelper {
                 catchRegisteel,
             ], 'Catch Regirock, Regice and Registeel in the Rock Peak Ruins, Iceberg Ruins and Iron Ruins respectively'));
 
-        const catchRegieleki = new CustomQuest(1, 0, 'Catch Regieleki.', () => App.game.statistics.pokemonCaptured[pokemonMap.Regieleki.id](), 0);
-        const catchRegidrago = new CustomQuest(1, 0, 'Catch Regidrago.', () => App.game.statistics.pokemonCaptured[pokemonMap.Regidrago.id](), 0);
+        const catchRegieleki = new CaptureSpecificPokemonQuest('Regieleki', 'Catch Regieleki.', 1, false, 0, undefined);
+        const catchRegidrago = new CaptureSpecificPokemonQuest('Regidrago', 'Catch Regidrago.', 1, false, 0, undefined);
         ancientGolemsQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchRegieleki,
