@@ -395,6 +395,7 @@ TemporaryBattleList.Hop1 = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Hop',
         returnTown: 'Postwick',
+        imageName: 'Hop',
     }
 );
 TemporaryBattleList.Mirages = new TemporaryBattle(
@@ -419,6 +420,7 @@ TemporaryBattleList.Hop2 = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Hop',
         returnTown: 'Professor Magnolia\'s Lab',
+        imageName: 'Hop',
     }
 );
 TemporaryBattleList.Hop3 = new TemporaryBattle(
@@ -434,6 +436,7 @@ TemporaryBattleList.Hop3 = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Hop',
         returnTown: 'Motostoke',
+        imageName: 'Hop',
     }
 );
 TemporaryBattleList.Bede1 = new TemporaryBattle(
@@ -448,6 +451,7 @@ TemporaryBattleList.Bede1 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Bede',
+        imageName: 'Bede1',
     }
 );
 TemporaryBattleList.Hop4 = new TemporaryBattle(
@@ -463,6 +467,7 @@ TemporaryBattleList.Hop4 = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Hop',
         returnTown: 'Hulbury',
+        imageName: 'Hop',
     }
 );
 TemporaryBattleList.Bede2 = new TemporaryBattle(
@@ -478,6 +483,7 @@ TemporaryBattleList.Bede2 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Bede',
+        imageName: 'Bede',
     }
 );
 TemporaryBattleList.Marnie1 = new TemporaryBattle(
@@ -492,6 +498,7 @@ TemporaryBattleList.Marnie1 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Marnie',
+        imageName: 'Marnie',
     }
 );
 TemporaryBattleList.Hop5 = new TemporaryBattle(
@@ -508,6 +515,7 @@ TemporaryBattleList.Hop5 = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Hop',
         returnTown: 'Stow-on-Side',
+        imageName: 'Hop',
     }
 );
 TemporaryBattleList.Bede3 = new TemporaryBattle(
@@ -528,6 +536,7 @@ TemporaryBattleList.Bede3 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Bede',
+        imageName: 'Bede',
         firstTimeRewardFunction: () => {
             App.game.quests.getQuestLine('The Darkest Day').beginQuest();
         },
@@ -548,6 +557,7 @@ TemporaryBattleList.Hop6 = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Hop',
         returnTown: 'Motostoke',
+        imageName: 'Hop',
     }
 );
 TemporaryBattleList.Hop7 = new TemporaryBattle(
@@ -570,6 +580,7 @@ TemporaryBattleList.Hop7 = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Hop',
         returnTown: 'Circhester',
+        imageName: 'Hop',
     }
 );
 TemporaryBattleList.Marnie2 = new TemporaryBattle(
@@ -586,6 +597,7 @@ TemporaryBattleList.Marnie2 = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Marnie',
         returnTown: 'Spikemuth',
+        imageName: 'Marnie',
     }
 );
 TemporaryBattleList.Eternatus = new TemporaryBattle(
@@ -621,6 +633,7 @@ TemporaryBattleList.Hop8 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Hop',
+        imageName: 'Hop',
         firstTimeRewardFunction: () => {
             App.game.quests.getQuestLine('Sword and Shield').beginQuest();
         },
@@ -639,6 +652,7 @@ TemporaryBattleList.Sordward1 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Sordward',
+        imageName: 'Sordward',
     }
 );
 TemporaryBattleList.Shielbert1 = new TemporaryBattle(
@@ -654,6 +668,7 @@ TemporaryBattleList.Shielbert1 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Shielbert',
+        imageName: 'Shielbert',
     }
 );
 TemporaryBattleList['Rampaging Tsareena'] = new TemporaryBattle(
@@ -762,6 +777,7 @@ TemporaryBattleList.Sordward2 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Sordward',
+        imageName: 'Sordward',
     }
 );
 TemporaryBattleList.Shielbert2 = new TemporaryBattle(
@@ -777,6 +793,7 @@ TemporaryBattleList.Shielbert2 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Shielbert',
+        imageName: 'Shielbert',
     }
 );
 TemporaryBattleList['Rampaging Zacian'] = new TemporaryBattle(
@@ -809,6 +826,7 @@ TemporaryBattleList.Klara1 = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Klara',
         returnTown: 'Armor Station',
+        imageName: 'Klara',
     }
 );
 TemporaryBattleList.Avery1 = new TemporaryBattle(
@@ -823,6 +841,7 @@ TemporaryBattleList.Avery1 = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Avery',
         returnTown: 'Armor Station',
+        imageName: 'Avery',
     }
 );
 TemporaryBattleList.Mustard = new TemporaryBattle(
@@ -858,6 +877,7 @@ TemporaryBattleList.Klara2 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Klara',
+        imageName: 'Klara',
     }
 );
 TemporaryBattleList.Avery2 = new TemporaryBattle(
@@ -877,6 +897,7 @@ TemporaryBattleList.Avery2 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Avery',
+        imageName: 'Avery',
     }
 );
 TemporaryBattleList.Klara3 = new TemporaryBattle(
@@ -898,6 +919,7 @@ TemporaryBattleList.Klara3 = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Klara',
         returnTown: 'Master Dojo',
+        imageName: 'Klara',
     }
 );
 TemporaryBattleList.Avery3 = new TemporaryBattle(
@@ -919,6 +941,7 @@ TemporaryBattleList.Avery3 = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Avery',
         returnTown: 'Master Dojo',
+        imageName: 'Avery',
     }
 );
 TemporaryBattleList.Peony = new TemporaryBattle(
