@@ -56,9 +56,9 @@ SpecialEvents.newEvent('Lunar New Year', 'Encounter Fancy Pattern Vivillon for a
 SpecialEvents.newEvent('Hoopa Day', 'The Mischief Pokémon unleashes his tricks upon the world.',
     // Start
     new Date(new Date().getFullYear(), 3, 1, 1), () => {
-        const pikabluQuestLine = App.game.quests.getQuestLine('Pikablu');
+        const pikabluQuestLine = App.game.quests.getQuestLine('How blu mouse');
         if (pikabluQuestLine.state() == QuestLineState.inactive) {
-            App.game.quests.getQuestLine('Pikablu').beginQuest();
+            App.game.quests.getQuestLine('How blu mouse').beginQuest();
         }
     },
     // End
