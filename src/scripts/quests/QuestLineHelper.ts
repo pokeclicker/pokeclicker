@@ -809,7 +809,7 @@ class QuestLineHelper {
     }
 
     public static createHoopaDayPikabluQuestLine() {
-        const hoopaDayPikabluQuestLine = new QuestLine('Pikablu', 'Apparently a strange blue mouse-like Pokémon might be out there somewhere?');
+        const hoopaDayPikabluQuestLine = new QuestLine('How blu mouse?', 'Apparently a strange blue mouse-like Pokémon might be out there somewhere?');
 
         const PikabluCatch = new CaptureSpecificPokemonQuest(
             'Marill',
