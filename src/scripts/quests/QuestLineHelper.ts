@@ -433,7 +433,11 @@ class QuestLineHelper {
         );
         plasmaUnovaQuestLine.addQuest(clearDriftveilGrunts);
 
-        const talktoZinzolin = new TalkToNPCQuest(DriftveilZinzolin, 'Talk to Zinzolin.');
+        const talktoZinzolinReward = () => {
+            MapHelper.moveToTown('Driftveil City');
+        };
+
+        const talktoZinzolin = new TalkToNPCQuest(DriftveilZinzolin, 'Talk to Zinzolin.', talktoZinzolinReward);
         plasmaUnovaQuestLine.addQuest(talktoZinzolin);
 
         const unovaRoute13 = new CustomQuest(10, 0, 'The Frigate is gone. Nothing to do but move forward. Clear route 13.', () => App.game.statistics.routeKills[GameConstants.Region.unova]['13']());
@@ -458,10 +462,18 @@ class QuestLineHelper {
         const clearZinzolin2 = new CustomQuest (1, 0, 'Defeat Zinzolin.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zinzolin 2')]());
         plasmaUnovaQuestLine.addQuest(clearZinzolin2);
 
-        const clearPlasmaShadow1 = new CustomQuest (1, 0, 'Defeat the Plasma Shadow.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow 1')]());
+        const clearPlasmaShadow1Reward = () => {
+            MapHelper.moveToTown('Opelucid City');
+        };
+
+        const clearPlasmaShadow1 = new CustomQuest (1, clearPlasmaShadow1Reward, 'Defeat the Plasma Shadow.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow 1')]());
         plasmaUnovaQuestLine.addQuest(clearPlasmaShadow1);
 
-        const clearPlasmaFrigate = new CustomQuest(1, 0, 'Team Plasma has fled the scene with the stolen DNA Splicers. Find and clear out the Plasma Frigate.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]());
+        const clearPlasmaFrigateReward = () => {
+            MapHelper.moveToTown('Humilau City');
+        };
+
+        const clearPlasmaFrigate = new CustomQuest(1, clearPlasmaFrigateReward, 'Team Plasma has fled the scene with the stolen DNA Splicers. Find and clear out the Plasma Frigate.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]());
         plasmaUnovaQuestLine.addQuest(clearPlasmaFrigate);
 
         const clearGiantChasm = new CustomQuest(1, 0, 'Team Plasma\'s leader Ghetsis plans on using the DNA Splicers on Kyurem in Giant Chasm. Clear the dungeon to end his evil plans.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]());
