@@ -8154,7 +8154,7 @@ dungeonList['Slumbering Weald Shrine'] = new Dungeon('Slumbering Weald Shrine',
         new DungeonBossPokemon('Corviknight', 135047520, 60),
         new DungeonBossPokemon('Galarian Weezing', 135047520, 60),
     ],
-    96500, 32);
+    2000000, 32);
 
 dungeonList['Galar Mine'] = new Dungeon('Galar Mine',
     [
@@ -8192,7 +8192,7 @@ dungeonList['Galar Mine'] = new Dungeon('Galar Mine',
     },
     20767840,
     [new DungeonBossPokemon('Carkol', 103839200, 18)],
-    96500, 12);
+    1320000, 12);
 
 dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
     [
@@ -8242,7 +8242,7 @@ dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
         new DungeonBossPokemon('Gastrodon (East)', 106473200, 50),
         new DungeonBossPokemon('Drednaw', 106473200, 24),
     ],
-    96500, 14);
+    1430000, 14);
 
 dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
     [
@@ -8286,7 +8286,7 @@ dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
             ],
             { weight: 1 }, 'Oleana', '(oleana)'),
     ],
-    96500, 32);
+    1800000, 32);
 
 dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
     ['Steelix', 'Mawile', 'Bronzong', 'Durant', 'Bisharp', 'Doublade', 'Golisopod', 'Galarian Stunfisk', 'Sirfetch\'d'],
@@ -8310,7 +8310,7 @@ dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
         new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 11)}),
         new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 11)}),
     ],
-    96500, 32);
+    1850000, 32);
 
 dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
     [
@@ -8356,7 +8356,7 @@ dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
         new DungeonBossPokemon('Indeedee (Male)', 118824240, 36),
         new DungeonBossPokemon('Indeedee (Female)', 118824240, 36),
     ],
-    96500, 23);
+    1680000, 23);
 
 dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
     ['Gurdurr', 'Ferrothorn', 'Klang', 'Meowstic', 'Barbaracle', 'Applin', 'Hattrem', 'Qwilfish', 'Hitmonlee', 'Hitmonchan', 'Koffing'],
@@ -8373,7 +8373,7 @@ dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
         new DungeonBossPokemon('Sigilyph', 114616050, 60),
         new DungeonBossPokemon('Tyranitar', 114616050, 60),
     ],
-    96500, 20);
+    1570000, 20);
 
 
 //Isle of Armor
@@ -8387,7 +8387,7 @@ dungeonList['Warm-Up Tunnel'] = new Dungeon('Warm-Up Tunnel',
     },
     28252100,
     [new DungeonBossPokemon('Kangaskhan', 141260500, 60)],
-    96500, 38);
+    1730000, 38);
 
 dungeonList['Courageous Cavern'] = new Dungeon('Courageous Cavern',
     ['Pincurchin', 'Dwebble', 'Crustle', 'Swoobat', 'Magikarp', 'Shellder', 'Cloyster', 'Tentacool', 'Clobbopus', 'Chewtle', 'Tentacruel', 'Whiscash'],
@@ -8403,7 +8403,7 @@ dungeonList['Courageous Cavern'] = new Dungeon('Courageous Cavern',
         new DungeonBossPokemon('Druddigon', 133520620, 60),
         new DungeonBossPokemon('Drednaw', 133520620, 60),
     ],
-    96500, 33);
+    1730000, 33);
 
 dungeonList['Brawlers Cave'] = new Dungeon('Brawlers Cave',
     ['Whismur', 'Woobat', 'Azurill', 'Lickitung', 'Loudred', 'Swoobat', 'Golduck', 'Poliwag', 'Barboach', 'Whiscash', 'Chansey', 'Psyduck'],
@@ -8419,7 +8419,7 @@ dungeonList['Brawlers Cave'] = new Dungeon('Brawlers Cave',
         new DungeonBossPokemon('Druddigon', 135047520, 60),
         new DungeonBossPokemon('Poliwrath', 135047520, 60),
     ],
-    96500, 34);
+    1730000, 34);
 
 dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     [
@@ -8447,7 +8447,7 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
         new DungeonTrainer('Dojo Master',
             [new GymPokemon('Kubfu', 144430560, 70)], { weight: 1 }, 'Mustard'),
     ],
-    96500, 40,
+    2000000, 40,
     () => {
         App.game.party.gainPokemonById(892);
         Notifier.notify({
@@ -8483,7 +8483,7 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
         new DungeonTrainer('Dojo Master',
             [new GymPokemon('Kubfu', 144430560, 70)], { weight: 1 }, 'Mustard'),
     ],
-    96500, 36,
+    2000000, 36,
     () => {
         App.game.party.gainPokemonById(892.1);
         Notifier.notify({
@@ -8510,7 +8510,7 @@ dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
         new DungeonBossPokemon('Hydreigon', 160924440, 60),
         new DungeonBossPokemon('Lucario', 160924440, 60),
     ],
-    96500, 50);
+    1730000, 50);
 
 dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
     ['Stonjourner', 'Rhyperior', 'Aerodactyl', 'Aggron', 'Coalossal', 'Barbaracle', 'Gigalith', 'Crustle'],
@@ -8525,7 +8525,7 @@ dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
         new DungeonBossPokemon('Relicanth', 149662240, 60),
         new DungeonBossPokemon('Regirock', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 5) }),
     ],
-    96500, 48);
+    1920000, 48);
 
 dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
     ['Bronzong', 'Duraludon', 'Copperajah', 'Corviknight', 'Perrserker', 'Bisharp', 'Ferrothorn', 'Excadrill'],
@@ -8540,7 +8540,7 @@ dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
         new DungeonBossPokemon('Metagross', 149662240, 60),
         new DungeonBossPokemon('Registeel', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 5) }),
     ],
-    96500, 48);
+    1920000, 48);
 
 dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
     ['Cryogonal', 'Beartic', 'Galarian Darumaka', 'Aurorus', 'Weavile', 'Vanilluxe', 'Froslass', 'Delibird'],
@@ -8555,7 +8555,7 @@ dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
         new DungeonBossPokemon('Glalie', 149662240, 60),
         new DungeonBossPokemon('Regice', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 5) }),
     ],
-    96500, 54);
+    1920000, 54);
 
 dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
     ['Electabuzz', 'Drakloak', 'Cryogonal', 'Bronzong', 'Stonjourner', 'Galvantula', 'Altaria', 'Relicanth', 'Glalie', 'Metagross'],
@@ -8572,7 +8572,7 @@ dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
         new DungeonBossPokemon('Regidrago', 164353300, 70),
         new DungeonBossPokemon('Regieleki', 164353300, 70),
     ],
-    96500, 52);
+    2000000, 52);
 
 dungeonList['Lakeside Cave'] = new Dungeon('Lakeside Cave',
     ['Zubat', 'Aron', 'Carbink', 'Carkol', 'Ferroseed', 'Mawile', 'Sableye', 'Audino', 'Lairon'],
@@ -8588,7 +8588,7 @@ dungeonList['Lakeside Cave'] = new Dungeon('Lakeside Cave',
         new DungeonBossPokemon('Aggron', 166608415, 60),
         new DungeonBossPokemon('Coalossal', 166608415, 60),
     ],
-    96500, 53);
+    1750000, 53);
 
 dungeonList['Dyna Tree Hill'] = new Dungeon('Dyna Tree Hill',
     ['Magmar', 'Absol', 'Beartic', 'Cryogonal', 'Dubwool', 'Glalie', 'Clefable'],
@@ -8600,7 +8600,7 @@ dungeonList['Dyna Tree Hill'] = new Dungeon('Dyna Tree Hill',
     },
     33216830,
     [new DungeonBossPokemon('Greedent', 166608415, 60)],
-    96500, 53);
+    1920000, 53);
 
 dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
     ['Zubat', 'Aron', 'Carbink', 'Carkol', 'Ferroseed', 'Mawile', 'Sableye', 'Audino', 'Lairon'],
@@ -8616,7 +8616,7 @@ dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
         new DungeonBossPokemon('Aggron', 167825980, 60),
         new DungeonBossPokemon('Coalossal', 167825980, 60),
     ],
-    96500, 54);
+    2000000, 54);
 dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
     ['Dhelmise', 'Hatterene', 'Reuniclus', 'Mr. Rime', 'Mamoswine', 'Roserade'],
     {
@@ -8633,4 +8633,4 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
         new DungeonBossPokemon('Weavile', 161099869, 60),
         new DungeonBossPokemon('Calyrex', 169578810, 80, { requirement: new QuestLineStepCompletedRequirement('The Crown of Galar', 9) }),
     ],
-    96500, 55);
+    2200000, 55);
