@@ -7076,7 +7076,8 @@ dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
         new DungeonBossPokemon('Pikachu (Sinnoh Cap)', 59764020, 15),
         new DungeonBossPokemon('Pikachu (Unova Cap)', 59764020, 15),
         new DungeonBossPokemon('Pikachu (Kalos Cap)', 59764020, 15),
-        new DungeonBossPokemon('Pikachu (Alola Cap)', 59764020, 15),
+        new DungeonBossPokemon('Pikachu (Alola Cap)', 59764020, 15, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Pikachu (World Cap)', 59764020, 15, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)}),
     ],
     850000, 4);
 
