@@ -48,7 +48,10 @@ class Egg implements Saveable {
             this.pokemonType1 = PokemonType.Normal;
             this.pokemonType2 = PokemonType.Normal;
         }
-        this.partyPokemon = this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.pokemon).id) : null;
+        // Deferring this because it wants to access App.game.party, which isn't avaliable yet
+        setTimeout(() => {
+            this.partyPokemon = this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.pokemon).id) : null;
+        }, 0);
     }
 
     isNone() {
