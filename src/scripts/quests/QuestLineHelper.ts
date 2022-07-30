@@ -955,7 +955,7 @@ class QuestLineHelper {
         const catchCalyrex = new CustomQuest(1, 0, 'Now you have found and caught Glastrier and Spectrier, Calyrex wants to challenge you at Crown Shrine. Catch it!', () => App.game.statistics.pokemonCaptured[pokemonMap.Calyrex.id](), 0);
         galarCrownQuestLine.addQuest(catchCalyrex);
 
-        const talktoCrownPeony2 = new TalkToNPCQuest(CrownPeony2, 'Now you have captured Calyrex, go report back to Peony!.');
+        const talktoCrownPeony2 = new TalkToNPCQuest(CrownPeony2, 'Now you have captured Calyrex, go report back to Peony!');
         galarCrownQuestLine.addQuest(talktoCrownPeony2);
 
         App.game.quests.questLines().push(galarCrownQuestLine);
@@ -973,7 +973,7 @@ class QuestLineHelper {
         const clearDynaTreeBirds = new CustomQuest(1, 0, 'You witnessed 3 powerful looking bird pokemon resembling Articuno, Zapdos and Moltres fighting over the fruit of the Dyna Tree. Upon noticing you, they attack!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dyna Tree Birds')]());
         dynaTreeBirdsQuestLine.addQuest(clearDynaTreeBirds);
 
-        const talktoBirdPeony2 = new TalkToNPCQuest(BirdPeony2, 'Tell Peony about your encounter with the birds resembling Articuno, Zapdos and Moltres');
+        const talktoBirdPeony2 = new TalkToNPCQuest(BirdPeony2, 'Tell Peony about your encounter with the birds resembling Articuno, Zapdos and Moltres.');
         dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony2);
 
         const catchGalarianArticuno = new CustomQuest(1, 0, 'Catch Galarian Articuno.', () => App.game.statistics.pokemonCaptured[pokemonMap['Galarian Articuno'].id](), 0);

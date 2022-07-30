@@ -3572,7 +3572,7 @@ const BirdPeony2 = new NPC ('Peony', [
     'Plus a fiery-lookin\' one out on the Isle of Armor!',
     'You\'re sayin\' you saw them and that\'s what you were tellin\' me about? Ah, sorry \'bout that. Anyway, you should go find \'em!',
 ],
-{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 2), new QuestLineStepCompletedRequirement('TThe Birds of the Dyna Tree', 4, GameConstants.AchievementOption.less )])});
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 2), new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 4, GameConstants.AchievementOption.less )])});
 const BirdPeony3 = new NPC ('Peony', [
     'Wait--you really caught Articuno, Moltres and Zapdos from the legends?! Thats\'s ultra-mega-brilliant! Report away!',
     'So that\'s them is it? I can definitely see the resemblance, but they don\'t seem quite the same...',
