@@ -67,6 +67,7 @@ export type PokemonNameType
     | 'Pikachu (Unova Cap)'
     | 'Pikachu (Kalos Cap)'
     | 'Pikachu (Alola Cap)'
+    | 'Pikachu (World Cap)'
     | 'Pikachu (Partner Cap)'
     | 'Flying Pikachu'
     | 'Surfing Pikachu'

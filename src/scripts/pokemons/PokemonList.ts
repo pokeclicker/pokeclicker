@@ -955,7 +955,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 25.07,
-        'name': 'Pikachu (Partner Cap)',
+        'name': 'Pikachu (World Cap)',
         'catchRate': 190,
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
@@ -972,6 +972,23 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 25.08,
+        'name': 'Pikachu (Partner Cap)',
+        'catchRate': 190,
+        'type': [PokemonType.Electric],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+    },
+    {
+        'id': 25.09,
         'name': 'Flying Pikachu',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
@@ -989,7 +1006,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 25.09,
+        'id': 25.10,
         'name': 'Surfing Pikachu',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
@@ -1007,7 +1024,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 25.10,
+        'id': 25.11,
         'name': 'Pikachu (Gengar)',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
@@ -1025,7 +1042,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 25.11,
+        'id': 25.12,
         'name': 'Let\'s Go Pikachu',
         'nativeRegion': GameConstants.Region.kanto,
         'catchRate': 50,
@@ -1043,7 +1060,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 25.12,
+        'id': 25.13,
         'name': 'Gigantamax Pikachu',
         'nativeRegion': GameConstants.Region.none,
         'catchRate': 190,
