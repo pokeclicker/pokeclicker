@@ -1,5 +1,3 @@
-///<reference path="../../declarations/requirements/MaxRegionRequirement.d.ts"/>
-
 class BattleFrontierMilestone {
     public obtained = ko.observable(false);
 
