@@ -123,7 +123,7 @@ class Player {
         this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
 
         // Save game origins, useful for tracking down any errors that may not be related to the main game
-        this._origins = [...new Set((savedPlayer.origin || [])).add(window.location?.origin)];
+        this._origins = [...new Set((savedPlayer._origins || [])).add(window.location?.origin)];
     }
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
