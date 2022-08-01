@@ -1036,6 +1036,10 @@ class Update implements Saveable {
                     i.valueType = 1;
                 }
             });
+
+            if (playerData._region == 6) {
+                playerData._subregion = 0;
+            }
         },
 
     };
