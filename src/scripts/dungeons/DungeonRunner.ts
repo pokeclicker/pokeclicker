@@ -152,9 +152,9 @@ class DungeonRunner {
         } else if (ItemList[input] instanceof PokeballItem) {
             DungeonRunner.lootNotification(input, amount, weight, ItemList[input].image);
             return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount, false);
-        } else if (Underground.getMineItemByName(input) instanceof UndergroundItem) {
-            DungeonRunner.lootNotification(input, amount, weight, Underground.getMineItemByName(input).image);
-            return Underground.gainMineItem(Underground.getMineItemByName(input).id, amount);
+        } else if (UndergroundItems.getByName(input) instanceof UndergroundItem) {
+            DungeonRunner.lootNotification(input, amount, weight, UndergroundItems.getByName(input).image);
+            return Underground.gainMineItem(UndergroundItems.getByName(input).id, amount);
         } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
             const image = `assets/images/pokemon/${PokemonHelper.getPokemonByName(input).id}.png`;
             DungeonRunner.lootNotification(input, amount, weight, image);
