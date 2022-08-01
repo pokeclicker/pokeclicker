@@ -13,11 +13,11 @@ class BattleFrontierMilestones {
 
     public static nextMileStone() {
         // Get next reward that is unlocked, not obtained, and earned past the latest stage beaten in the active run.
-        return this.milestoneRewards.find(r => r.isUnlocked() && !r.obtained());
+        return this.milestoneRewards.find(r => r.isUnlocked() && !r.obtained() && (r.stage > (BattleFrontierRunner.checkpoint() - 1)));
     }
 
     public static availableMilestones() {
-        return BattleFrontierMilestones.milestoneRewards.filter(r => r.isUnlocked() && !r.obtained());
+        return BattleFrontierMilestones.milestoneRewards.filter(r => r.isUnlocked() && !r.obtained() && r.stage > (BattleFrontierRunner.checkpoint() - 1));
     }
 
     public static nextMileStoneStage(): number {
