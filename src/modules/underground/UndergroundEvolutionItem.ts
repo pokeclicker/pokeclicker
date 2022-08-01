@@ -5,12 +5,12 @@ import UndergroundItem from './UndergroundItem';
 
 export default class UndergroundEvolutionItem extends UndergroundItem {
     constructor(
-        public name: string,
-        public id: number,
+        name: string,
+        id: number,
         space: Array<Array<number>>,
-        public value = 1,
+        value = 1,
         public type: StoneType,
-        public requirement?: Requirement,
+        requirement?: Requirement,
     ) {
         super(name, id, space, value, UndergroundItemValueType.EvolutionItem, requirement);
     }
