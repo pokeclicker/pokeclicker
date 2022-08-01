@@ -85,7 +85,7 @@ class Update implements Saveable {
             saveData.badgeCase = saveData.badgeCase || [];
             // Not using game constants incase the value isn't 39 in the future
             if (saveData.badgeCase[39]) {
-                saveData.quests.questLines.push({state: 1, name: 'Mystery of Deoxys', quest: 0});
+                Update.startQuestLine(saveData, 'Mystery of Deoxys');
             }
         },
 
@@ -112,7 +112,7 @@ class Update implements Saveable {
             // If the player has the Soul Badge already
             // Not using game constants incase the badge value isn't 5 in the future
             if (saveData.badgeCase[5]) {
-                saveData.quests.questLines.push({state: 1, name: 'Mining Expedition', quest: 0});
+                Update.startQuestLine(saveData, 'Mining Expedition');
             }
         },
 
@@ -244,10 +244,10 @@ class Update implements Saveable {
             if (this.minUpdateVersion('0.6.0', saveData)) {
                 if (saveData.oakItems.purchaseList) {
                     if (saveData.oakItems.purchaseList[OakItemType.Squirtbottle]) {
-                        saveData.oakItems[OakItemType[OakItemType.Squirtbottle]]['purchased'] = true;
+                        saveData.oakItems[OakItemType[OakItemType.Squirtbottle]].purchased = true;
                     }
                     if (saveData.oakItems.purchaseList[OakItemType.Sprinklotad]) {
-                        saveData.oakItems[OakItemType[OakItemType.Sprinklotad]]['purchased'] = true;
+                        saveData.oakItems[OakItemType[OakItemType.Sprinklotad]].purchased = true;
                     }
                 }
             }
@@ -422,7 +422,7 @@ class Update implements Saveable {
             saveData.badgeCase = saveData.badgeCase || [];
             // Not using game constants incase the value isn't 73 in the future
             if (saveData.badgeCase[73]) { // Iceberg badge
-                saveData.quests.questLines.push({state: 1, name: 'The Great Vivillon Hunt!', quest: 0});
+                Update.startQuestLine(saveData, 'The Great Vivillon Hunt!');
             }
 
             // Add missing key items if the player has the badge
@@ -469,7 +469,7 @@ class Update implements Saveable {
                 [240, '40 x Moon Stone'],
                 [250, '6400 x Ultraball'],
                 [251, 'Deoxys (defense)'],
-                [300, '100 x Trade Stone'],
+                [300, '100 x Linking Cord'],
                 [386, 'Deoxys (speed)'],
             ];
             const highestStageCompleted = saveData.statistics?.battleFrontierHighestStageCompleted || 0;
@@ -523,7 +523,7 @@ class Update implements Saveable {
             // If the player has the Fog Badge already
             // Not using game constants incase the badge value isn't 17 in the future
             if (saveData.badgeCase[17]) {
-                saveData.quests.questLines.push({state: 1, name: 'Team Rocket Again', quest: 0});
+                Update.startQuestLine(saveData, 'Team Rocket Again');
             }
 
             setTimeout(async () => {
@@ -540,7 +540,7 @@ class Update implements Saveable {
         '0.8.14': ({ playerData, saveData }) => {
             // Start Aqua Magma questline if player has Dynamo Badge already
             if (saveData.badgeCase[29]) {
-                saveData.quests.questLines.push({state: 1, name: 'Land vs Water', quest: 0});
+                Update.startQuestLine(saveData, 'Land vs. Water');
             }
 
             // Just incase statistics is not set
@@ -559,7 +559,7 @@ class Update implements Saveable {
         '0.8.15': ({ playerData, saveData }) => {
             // Start Plasma questline if player has Jet Badge already
             if (saveData.badgeCase[58]) {
-                saveData.quests.questLines.push({state: 1, name: 'Quest for the DNA Splicers', quest: 0});
+                Update.startQuestLine(saveData, 'Quest for the DNA Splicers');
             }
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 2, 1); // Digletts Cave
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 5, 4); // Power Plant
@@ -586,11 +586,11 @@ class Update implements Saveable {
                 gemUpgrades: saveData.shards.shardUpgrades || [],
             };
 
-            delete saveData.keyItems['Shard_case'];
+            delete saveData.keyItems.Shard_case;
 
             // Swapping Shard Case for Gem Case
             if (saveData.badgeCase[8]) {
-                saveData.keyItems['Gem_case'] = true;
+                saveData.keyItems.Gem_case = true;
             }
 
             // Just incase statistics is not set
@@ -664,6 +664,7 @@ class Update implements Saveable {
                 delete saveData.statistics.shinyPokemonHatched[oldID];
             });
 
+
             playerData.mineInventory = playerData.mineInventory?.map(i => {
                 i.sellLocked = false;
                 return i;
@@ -671,7 +672,7 @@ class Update implements Saveable {
 
             // Start Galactic questline if player has Coal Badge already
             if (saveData.badgeCase[40]) {
-                saveData.quests.questLines.push({state: 1, name: 'A new world', quest: 0});
+                Update.startQuestLine(saveData, 'A new world');
             }
 
             // Clear Valley Windworks Clears
@@ -689,7 +690,6 @@ class Update implements Saveable {
             // Add Sendoff Spring
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
         },
-
         '0.9.4': ({ playerData, saveData }) => {
             // Modifications relating to smaller save file sizes
             const PartyKeyMap = {
@@ -721,6 +721,301 @@ class Update implements Saveable {
             // Remove the Elite_ULtraNecrozma Gym, now a temporary battle instead of a gym
             saveData.statistics.gymsDefeated.splice(88, 1);
             saveData.badgeCase.splice(88, 1);
+        },
+
+        '0.9.6': ({ playerData, saveData }) => {
+            // Set our last save reminder/download to our current in game time
+            // This way we won't get a reminder notification for at least 12 hours
+            saveData.saveReminder = {
+                lastReminder: saveData.statistics.secondsPlayed,
+                lastDownloaded: saveData.statistics.secondsPlayed,
+            };
+
+            // Start Mina's Trial questline if player has cleared Ultra Necrozma already
+            if (saveData.statistics.temporaryBattleDefeated[1]) {
+                Update.startQuestLine(saveData, 'Mina\'s Trial');
+            }
+
+            // Add Rocket Game Corner
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 4);
+            // Add Silph Co.
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 6);
+            // Start Team Rocket Kanto questline if player has Cascade Badge already
+            if (saveData.badgeCase[2]) {
+                Update.startQuestLine(saveData, 'Team Rocket');
+            }
+
+            // Rename Land vs. Water questline, so QuestLineCompletedRequirement will work
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'Land vs Water') {
+                    v.name = 'Land vs. Water';
+                }
+            });
+
+            // Add AZ TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
+
+            //Replace Poison Barb with Rocky Helmet
+            saveData.oakItems.Rocky_Helmet = saveData.oakItems.Poison_Barb;
+            delete saveData.oakItems.Poison_Barb;
+
+            // Give the players Dowsing Machines in place of Item Magnets
+            playerData._itemList.Dowsing_machine = playerData._itemList.Item_magnet;
+            playerData.effectList.Dowsing_machine = playerData.effectList.Item_magnet;
+            delete playerData._itemList.Item_magnet;
+            delete playerData.effectList.Item_magnet;
+
+            // Start pokerus
+            setTimeout(async () => {
+                // Check if player wants to activate the new challenge modes
+                if (!await Notifier.confirm({ title: 'Slow EVs', message: 'New challenge mode added: Slow EVs.\n\nDiminishes the rate at which EVs are gained.\n\nThis is an optional challenge and is NOT the recommended way to play.\n\nPlease choose if you would like this challenge mode to be disabled or enabled.\n\nCan be disabled later. Can NOT be enabled later!', confirm: 'Disable', cancel: 'Enable' })) {
+                    App.game.challenges.list.slowEVs.activate();
+                }
+            }, GameConstants.SECOND);
+        },
+
+        '0.9.7': ({ playerData, saveData }) => {
+            // Fix people not getting the pokerus
+            if (saveData.keyItems.Pokerus_virus) {
+                let starter;
+                switch (playerData.starter) {
+                    case 0:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 1);
+                        break;
+                    case 1:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 4);
+                        break;
+                    case 2:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 7);
+                        break;
+                    case 3:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 25);
+                        break;
+                }
+                starter[8] = true;
+            }
+
+            // Add Fighting Dojo TemporaryBattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
+        },
+
+        '0.9.8': ({ playerData, saveData, settingsData }) => {
+            // Add names to oak item loadouts
+            saveData.oakItemLoadouts = saveData.oakItemLoadouts?.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list })) || [];
+
+            // Fix pokerus & EVs moved from statistics
+            saveData.party.caughtPokemon.forEach(p => {
+                // If has pokerus, set to "contagious"
+                let status = (p[8]) ? 2 : 0;
+                // Get effort points (0 if not infected), Multiply by 100 for finer control
+                const effortPoints = status ? saveData.statistics.effortPoints?.[p.id] * 100 || 0 : 0;
+                // Set to cured if reached required amount of EVs
+                const requiredForCured = saveData.challenges.list.slowEVs ? 500000 : 50000;
+                if (effortPoints >= requiredForCured) {
+                    status = 3;
+                }
+                // Update status and EVs
+                p[8] = status;
+                p[9] = effortPoints;
+            });
+
+            // Give the players Linking Cords in place of Trade Stones
+            playerData._itemList.Linking_cord = playerData._itemList.Trade_stone || 0;
+            delete playerData._itemList.Trade_stone;
+
+            // Start Sevii questline if player has Volcano Badge already
+            if (saveData.badgeCase[7]) {
+                Update.startQuestLine(saveData, 'Bill\'s Errand');
+            }
+            // Start Persons of Interest questline if player has Earth Badge already
+            if (saveData.badgeCase[8]) {
+                Update.startQuestLine(saveData, 'Persons of Interest');
+            }
+            // Start UB questline if player has beaten Alola Champion already
+            if (saveData.badgeCase[95]) {
+                Update.startQuestLine(saveData, 'Ultra Beast Hunt');
+            }
+            // Start Ash questline if player has beaten Kalos champion already
+            if (saveData.badgeCase[78]) {
+                Update.startQuestLine(saveData, 'The New Kid');
+            }
+
+            // Just incase statistics is not set
+            saveData.statistics = saveData.statistics || {};
+
+            // Add new statistic
+            saveData.statistics.totalProteinsPurchased = saveData.statistics.totalProteinsObtained || 0;
+
+            // Add Mt. Ember Summit
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 10);
+
+            // Add Berry Forest
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 11);
+
+            // Add Biker Gang Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 3);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 4);
+
+            // Add Galactic Boss Cyrus Temporary Battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 5);
+
+            // Add Ash Ketchum Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 8);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 9);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 10);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+
+            // Update settings
+            if (settingsData) {
+                // Update our default quest location color
+                if (settingsData['--questAtLocation'] === '#34BF45') {
+                    settingsData['--questAtLocation'] = '#55ff00';
+                }
+
+                // Remove current location color
+                delete settingsData['--currentPlace'];
+
+                // Split dungeon loot notifications into two
+                settingsData['notification.common_dungeon_item_found'] = settingsData['notification.dungeon_item_found'] ?? true;
+                settingsData['notification.common_dungeon_item_found.desktop'] = settingsData['notification.dungeon_item_found.desktop'] ?? false;
+                settingsData['notification.rare_dungeon_item_found'] = settingsData['notification.dungeon_item_found'] ?? true;
+                settingsData['notification.rare_dungeon_item_found.desktop'] = settingsData['notification.dungeon_item_found.desktop'] ?? false;
+                delete settingsData['notification.dungeon_item_found'];
+                delete settingsData['notification.dungeon_item_found.desktop'];
+            }
+        },
+
+        '0.9.9': ({ playerData, saveData }) => {
+            // Fix pokemon having Pokérus early (key item not unlocked)
+            if (!saveData.keyItems.Pokerus_virus) {
+                saveData.party.caughtPokemon.forEach(p => {
+                    // Pokérus State
+                    p[8] = 0;
+                    // Effort Points
+                    p[9] = 0;
+                });
+            }
+        },
+
+        '0.9.10': ({ playerData, saveData }) => {
+            // Rename statistic
+            saveData.statistics.pokeballsPurchased = saveData.statistics.pokeballsBought;
+
+            // Update total proteins obtained to be equal to the total purchased (or whichever is higher)
+            saveData.statistics.totalProteinsObtained = Math.max(saveData.statistics.totalProteinsPurchased, saveData.statistics.totalProteinsObtained);
+
+            // If Pokémon doesn't have Pokérus yet, it shouldn't have Effort Points
+            saveData.party.caughtPokemon.forEach(p => {
+                // Check Pokérus state
+                if (!p[8]) {
+                    // Reset Effort Points
+                    p[9] = 0;
+                }
+            });
+
+            // Turn Parfum Palace into a town
+            saveData.statistics.dungeonsCleared.splice(96, 1);
+
+            // Filter already earned milestones due to item/Pokémon name updates
+            const milestones = [
+                [5, '25 x Poké Ball'],
+                [10, '100 x Poké Ball'],
+                [20, '100 x Great Ball'],
+                [30, '100 x Ultra Ball'],
+                [35, '100 x X Click'],
+                [40, '100 x X Attack'],
+                [50, '100 x Small Restore'],
+                [100, 'Deoxys'],
+                [110, '10 x Water Stone'],
+                [120, '10 x Leaf Stone'],
+                [130, '10 x Thunder Stone'],
+                [140, '10 x Fire Stone'],
+                [150, '200 x Medium Restore'],
+                [151, 'Deoxys (Attack)'],
+                [160, '100 x Lucky Egg'],
+                [170, '100 x Lucky Incense'],
+                [180, '100 x Dowsing Machine'],
+                [190, '10 x Mystery Egg'],
+                [200, '100 x Large Restore'],
+                [210, '40 x Water Stone'],
+                [220, '40 x Leaf Stone'],
+                [230, '40 x Thunder Stone'],
+                [240, '40 x Moon Stone'],
+                [250, '6,400 x Ultra Ball'],
+                [251, 'Deoxys (Defense)'],
+                [300, '100 x Linking Cord'],
+                [386, 'Deoxys (Speed)'],
+            ];
+            const highestStageCompleted = saveData.statistics?.battleFrontierHighestStageCompleted || 0;
+            saveData.battleFrontier = {
+                milestones: milestones.filter(([stage]) => stage <= highestStageCompleted),
+                checkpoint: saveData.battleFrontier.checkpoint,
+            };
+
+            // Update Pokemon name changes for hatchery/queue
+            const renamePokemon = Update.renamePokemonInSaveData;
+            renamePokemon(saveData, 'Bulbasaur (clone)', 'Bulbasaur (Clone)');
+            renamePokemon(saveData, 'Ivysaur (clone)', 'Ivysaur (Clone)');
+            renamePokemon(saveData, 'Venusaur (clone)', 'Venusaur (Clone)');
+            renamePokemon(saveData, 'Charmander (clone)', 'Charmander (Clone)');
+            renamePokemon(saveData, 'Charmeleon (clone)', 'Charmeleon (Clone)');
+            renamePokemon(saveData, 'Charizard (clone)', 'Charizard (Clone)');
+            renamePokemon(saveData, 'Pikachu (Original cap)', 'Pikachu (Original Cap)');
+            renamePokemon(saveData, 'Pikachu (Hoenn cap)', 'Pikachu (Hoenn Cap)');
+            renamePokemon(saveData, 'Pikachu (Sinnoh cap)', 'Pikachu (Sinnoh Cap)');
+            renamePokemon(saveData, 'Pikachu (Unova cap)', 'Pikachu (Unova Cap)');
+            renamePokemon(saveData, 'Pikachu (Kalos cap)', 'Pikachu (Kalos Cap)');
+            renamePokemon(saveData, 'Pikachu (Alola cap)', 'Pikachu (Alola Cap)');
+            renamePokemon(saveData, 'Pikachu (Partner cap)', 'Pikachu (Partner Cap)');
+            renamePokemon(saveData, 'Castform (sunny)', 'Castform (Sunny)');
+            renamePokemon(saveData, 'Castform (rainy)', 'Castform (Rainy)');
+            renamePokemon(saveData, 'Castform (snowy)', 'Castform (Snowy)');
+            renamePokemon(saveData, 'Deoxys (attack)', 'Deoxys (Attack)');
+            renamePokemon(saveData, 'Deoxys (defense)', 'Deoxys (Defense)');
+            renamePokemon(saveData, 'Deoxys (speed)', 'Deoxys (Speed)');
+            renamePokemon(saveData, 'Burmy (plant)', 'Burmy (Plant)');
+            renamePokemon(saveData, 'Burmy (sand)', 'Burmy (Sand)');
+            renamePokemon(saveData, 'Burmy (trash)', 'Burmy (Trash)');
+            renamePokemon(saveData, 'Wormadam (plant)', 'Wormadam (Plant)');
+            renamePokemon(saveData, 'Wormadam (sand)', 'Wormadam (Sand)');
+            renamePokemon(saveData, 'Wormadam (trash)', 'Wormadam (Trash)');
+            renamePokemon(saveData, 'Cherrim (overcast)', 'Cherrim (Overcast)');
+            renamePokemon(saveData, 'Cherrim (sunshine)', 'Cherrim (Sunshine)');
+            renamePokemon(saveData, 'Shellos (west)', 'Shellos (West)');
+            renamePokemon(saveData, 'Shellos (east)', 'Shellos (East)');
+            renamePokemon(saveData, 'Gastrodon (west)', 'Gastrodon (West)');
+            renamePokemon(saveData, 'Gastrodon (east)', 'Gastrodon (East)');
+            renamePokemon(saveData, 'Rotom (heat)', 'Rotom (Heat)');
+            renamePokemon(saveData, 'Rotom (wash)', 'Rotom (Wash)');
+            renamePokemon(saveData, 'Rotom (frost)', 'Rotom (Frost)');
+            renamePokemon(saveData, 'Rotom (fan)', 'Rotom (Fan)');
+            renamePokemon(saveData, 'Rotom (mow)', 'Rotom (Mow)');
+            renamePokemon(saveData, 'Rotom (discord)', 'Rotom (Discord)');
+            renamePokemon(saveData, 'Giratina (altered)', 'Giratina (Altered)');
+            renamePokemon(saveData, 'Shaymin (land)', 'Shaymin (Land)');
+            renamePokemon(saveData, 'Shaymin (sky)', 'Shaymin (Sky)');
+            renamePokemon(saveData, 'Arceus (normal)', 'Arceus (Normal)');
+            renamePokemon(saveData, 'Meloetta (aria)', 'Meloetta (Aria)');
+            renamePokemon(saveData, 'Meloetta (pirouette)', 'Meloetta (Pirouette)');
+            renamePokemon(saveData, 'Ash Greninja', 'Ash-Greninja');
+            renamePokemon(saveData, 'Vivillon (Pokéball)', 'Vivillon (Poké Ball)');
+            renamePokemon(saveData, 'Oricorio (Pom-pom)', 'Oricorio (Pom-Pom)');
+            renamePokemon(saveData, 'Minior (Blue-core)', 'Minior (Blue Core)');
+            renamePokemon(saveData, 'Minior (Green-core)', 'Minior (Green Core)');
+            renamePokemon(saveData, 'Minior (Indigo-core)', 'Minior (Indigo Core)');
+            renamePokemon(saveData, 'Minior (Orange-core)', 'Minior (Orange Core)');
+            renamePokemon(saveData, 'Minior (Red-core)', 'Minior (Red Core)');
+            renamePokemon(saveData, 'Minior (Violet-core)', 'Minior (Violet Core)');
+            renamePokemon(saveData, 'Minior (Yellow-core)', 'Minior (Yellow Core)');
+
+            // Start Galactic questline if player has Coal Badge already
+            if (saveData.badgeCase[40]) {
+                Update.startQuestLine(saveData, 'A new world');
+            }
         },
     };
 
@@ -966,6 +1261,17 @@ class Update implements Saveable {
 
         // Fixup queue
         saveData.breeding.queueList = saveData.breeding.queueList?.map(p => p == oldName ? newName : p) || [];
+    }
+
+    static startQuestLine = (saveData, questLineName: string) => {
+        const questLine = saveData.quests.questLines.find(ql => ql.name == questLineName);
+        if (questLine) {
+            // Set to started if not yet started, otherwise leave in it's current state
+            questLine.state = questLine.state == 0 ? 1 : questLine.state;
+        } else {
+            // Push the quest, doesn't exist in save data yet
+            saveData.quests.questLines.push({ state: 1, name: questLineName, quest: 0 });
+        }
     }
 
     getPlayerData() {

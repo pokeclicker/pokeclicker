@@ -27,11 +27,13 @@ class FluteEffectRunner {
                 if (this.numActiveFlutes() >= this.getLowestGem(itemName)) {
                     this.removeEffect(itemName);
                     Notifier.notify({
-                        message: `The ${GameConstants.humanifyString(itemName)}'s effect ran out!`,
+                        message: `You ran out of gems for the ${GameConstants.humanifyString(itemName)}'s effect!`,
                         type: NotificationConstants.NotificationOption.danger,
                         sound: NotificationConstants.NotificationSound.General.battle_item_timer,
                         setting: NotificationConstants.NotificationSetting.Items.battle_item_timer,
+                        timeout: 1 * GameConstants.MINUTE,
                     });
+                    App.game.logbook.newLog(LogBookTypes.OTHER, `You ran out of gems for the ${GameConstants.humanifyString(itemName)}!`);
                 }
             }
         });
@@ -98,7 +100,7 @@ class FluteEffectRunner {
         str.push(`Gems/Second: ${FluteEffectRunner.numActiveFlutes()} <br><br>Gem Types Used:`);
         const item = (ItemList[itemName] as FluteItem);
         item.gemTypes.forEach(t => {
-            str.push(`${t}: ${App.game.gems.gemWallet[PokemonType[t]]()}`);
+            str.push(`${t}: ${App.game.gems.gemWallet[PokemonType[t]]().toLocaleString('en-US')}`);
         });
         str.push(`<br>Time Remaining:<br> ${GameConstants.formatSecondsToTime(this.fluteFormattedTime(itemName))}`);
         return str.join('<br>');

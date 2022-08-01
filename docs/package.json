@@ -1,6 +1,6 @@
 {
   "name": "pokeclicker",
-  "version": "0.9.5",
+  "version": "0.9.9",
   "description": "PokéClicker repository",
   "main": "index.js",
   "scripts": {

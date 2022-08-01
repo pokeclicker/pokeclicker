@@ -1,9 +1,3 @@
-enum QuestLineState {
-    inactive,
-    started,
-    ended,
-}
-
 class QuestLine {
     name: string;
     description: string;
@@ -94,11 +88,15 @@ class QuestLine {
     }
 
     toJSON() {
-        return {
+        const json = {
             state: this.state(),
             name: this.name,
             quest: this.curQuest(),
             initial: this.curQuestInitial(),
         };
+        if (this.curQuestObject() instanceof MultipleQuestsQuest) {
+            json.initial = this.curQuestObject().quests.map((q) => q.initial());
+        }
+        return json;
     }
 }

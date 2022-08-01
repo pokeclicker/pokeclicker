@@ -7,7 +7,7 @@ class BuyPokeballsQuest extends Quest implements QuestInterface {
     constructor(amount: number, reward: number, pokeball: GameConstants.Pokeball) {
         super(amount, reward);
         this.pokeball = pokeball;
-        this.focus = App.game.statistics.pokeballsBought[this.pokeball];
+        this.focus = App.game.statistics.pokeballsPurchased[this.pokeball];
     }
 
     get description(): string {
@@ -16,8 +16,8 @@ class BuyPokeballsQuest extends Quest implements QuestInterface {
 
     toJSON() {
         const json = super.toJSON();
-        json['name'] = this.constructor.name;
-        json['data'].push(this.pokeball);
+        json.name = this.constructor.name;
+        json.data.push(this.pokeball);
         return json;
     }
 }

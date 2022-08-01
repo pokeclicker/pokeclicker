@@ -93,7 +93,7 @@
                                     </ul>
                                     <div class="justify-content-center py-1">
                                         <div class="btn-group btn-block">
-                                            <button type="button" class="btn btn-sm btn-secondary"
+                                            <button type="button" class="btn btn-sm btn-secondary col-3"
                                             data-bind="text: FarmController.multipliers[FarmController.multIndex()]"
                                             onclick="FarmController.incrementMultiplier()"
                                             oncontextmenu="FarmController.decrementMultiplier(); return false"
@@ -244,6 +244,10 @@
                         <tr>
                             <td>Amaze Mulch</td>
                             <td>A weaker version of all three effects.</td>
+                        </tr>
+                        <tr>
+                            <td>Freeze Mulch</td>
+                            <td>Stops Berry growth and auras. Mutations will still occur while berries are frozen.</td>
                         </tr>
                     </table>
 

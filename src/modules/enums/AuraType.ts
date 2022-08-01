@@ -9,6 +9,7 @@ enum AuraType {
     Death,
     Boost,
     Roaming,
+    Ev,
 }
 
 export default AuraType;
