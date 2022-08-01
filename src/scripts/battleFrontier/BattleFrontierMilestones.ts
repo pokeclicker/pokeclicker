@@ -12,12 +12,12 @@ class BattleFrontierMilestones {
     }
 
     public static nextMileStone() {
-        // Get the next possible reward
-        return this.milestoneRewards.find(r => !r.obtained());
+        // Get next reward that is unlocked, not obtained, and earned past the latest stage beaten in the active run.
+        return this.milestoneRewards.find(r => r.isUnlocked() && !r.obtained());
     }
 
     public static availableMilestones() {
-        return BattleFrontierMilestones.milestoneRewards.filter(r => !r.obtained());
+        return BattleFrontierMilestones.milestoneRewards.filter(r => r.isUnlocked() && !r.obtained());
     }
 
     public static nextMileStoneStage(): number {
@@ -56,7 +56,6 @@ class BattleFrontierMilestones {
     }
 }
 
-// TODO: update rewards
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(5, 'Pokeball', 25));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(10, 'Pokeball', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(20, 'Greatball', 100));

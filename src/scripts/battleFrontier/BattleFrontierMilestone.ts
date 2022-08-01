@@ -1,12 +1,19 @@
+///<reference path="../../declarations/requirements/MaxRegionRequirement.d.ts"/>
+
 class BattleFrontierMilestone {
     public obtained = ko.observable(false);
 
     constructor (
         public stage: number,
         public rewardFunction: () => void,
+        public requirement?: Requirement,
         public _image?: string,
         private _description?: string
-    ) {}
+    ) { }
+
+    public isUnlocked(): boolean {
+        return this.requirement ? this.requirement.isCompleted() : true;
+    }
 
     gain () {
         if (!this.obtained()) {
