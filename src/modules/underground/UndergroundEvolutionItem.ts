@@ -10,9 +10,8 @@ export default class UndergroundEvolutionItem extends UndergroundItem {
         space: Array<Array<number>>,
         value = 1,
         public type: StoneType,
-        itemListName: string,
         requirement?: Requirement,
     ) {
-        super(name, id, space, value, UndergroundItemValueType.EvolutionItem, requirement, itemListName);
+        super(name, id, space, value, UndergroundItemValueType.EvolutionItem, requirement);
     }
 }
