@@ -95,17 +95,17 @@ UndergroundItems.addItem(new UndergroundItem('Jaw Fossil', 209, [[0, 0, 1, 1, 1]
 UndergroundItems.addItem(new UndergroundItem('Sail Fossil', 210, [[1, 1, 1, 0, 0], [1, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.kalos)));
 
 // Evolution Stones
-UndergroundItems.addItem(new UndergroundEvolutionItem('Fire Stone', 300, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 1, StoneType.Fire_stone));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Water Stone', 301, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], 1, StoneType.Water_stone));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Thunder Stone', 302, [[0, 1, 1], [1, 1, 1], [1, 1, 0]], 1, StoneType.Thunder_stone));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Leaf Stone', 303, [[0, 1, 0], [1, 1, 1], [1, 1, 1], [0, 1, 0]], 1, StoneType.Leaf_stone));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Moon Stone', 304, [[0, 1, 1, 1], [1, 1, 1, 0]], 1, StoneType.Moon_stone));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Fire Stone', 300, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 1, StoneType.Fire_stone, 'Fire_stone'));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Water Stone', 301, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], 1, StoneType.Water_stone, 'Water_stone'));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Thunder Stone', 302, [[0, 1, 1], [1, 1, 1], [1, 1, 0]], 1, StoneType.Thunder_stone, 'Thunder_stone'));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Leaf Stone', 303, [[0, 1, 0], [1, 1, 1], [1, 1, 1], [0, 1, 0]], 1, StoneType.Leaf_stone, 'Leaf_stone'));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Moon Stone', 304, [[0, 1, 1, 1], [1, 1, 1, 0]], 1, StoneType.Moon_stone, 'Moon_stone'));
 // TODO: Replace these requirements with StoneUnlockedRequirement once moved to modules
-UndergroundItems.addItem(new UndergroundEvolutionItem('Sun Stone', 305, [[0, 1, 0], [1, 1, 1], [1, 1, 1]], 1, StoneType.Sun_stone, new MaxRegionRequirement(Region.johto)));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Shiny Stone', 306, [[0, 1, 1], [1, 1, 1], [1, 1, 1]], 1, StoneType.Shiny_stone, new MaxRegionRequirement(Region.sinnoh)));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Dusk Stone', 307, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], 1, StoneType.Dusk_stone, new MaxRegionRequirement(Region.sinnoh)));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Dawn Stone', 308, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 1, StoneType.Dawn_stone, new MaxRegionRequirement(Region.sinnoh)));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Ice Stone', 309, [[1, 1, 1], [1, 1, 1]], 1, StoneType.Ice_stone, new MaxRegionRequirement(Region.alola)));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Sun Stone', 305, [[0, 1, 0], [1, 1, 1], [1, 1, 1]], 1, StoneType.Sun_stone, 'Sun_stone', new MaxRegionRequirement(Region.johto)));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Shiny Stone', 306, [[0, 1, 1], [1, 1, 1], [1, 1, 1]], 1, StoneType.Shiny_stone, 'Shiny_stone', new MaxRegionRequirement(Region.sinnoh)));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Dusk Stone', 307, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], 1, StoneType.Dusk_stone, 'Dusk_stone', new MaxRegionRequirement(Region.sinnoh)));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Dawn Stone', 308, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 1, StoneType.Dawn_stone, 'Dawn_stone', new MaxRegionRequirement(Region.sinnoh)));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Ice Stone', 309, [[1, 1, 1], [1, 1, 1]], 1, StoneType.Ice_stone, 'Ice_stone', new MaxRegionRequirement(Region.alola)));
 // UndergroundItems.addItem(new UndergroundEvolutionItem('Sun Stone', 305, [[0, 1, 0], [1, 1, 1], [1, 1, 1]], 1, StoneType.Sun_stone, new StoneUnlockedRequirement(StoneType.Sun_stone)));
 // UndergroundItems.addItem(new UndergroundEvolutionItem('Shiny Stone', 306, [[0, 1, 1], [1, 1, 1], [1, 1, 1]], 1, StoneType.Shiny_stone, new StoneUnlockedRequirement(StoneType.Shiny_stone)));
 // UndergroundItems.addItem(new UndergroundEvolutionItem('Dusk Stone', 307, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], 1, StoneType.Dusk_stone, new StoneUnlockedRequirement(StoneType.Dusk_stone)));

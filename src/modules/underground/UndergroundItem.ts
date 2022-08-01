@@ -12,6 +12,7 @@ export default class UndergroundItem {
         public value = 1,
         public valueType = UndergroundItemValueType.Diamond,
         public requirement?: Requirement,
+        public itemListName?: string,
     ) {
         // Map out our item sizing
         this.space = space.map((r, y) => r.map((v, x) => ({
