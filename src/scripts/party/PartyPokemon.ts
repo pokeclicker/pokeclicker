@@ -315,7 +315,7 @@ class PartyPokemon implements Saveable {
         this.level = this.calculateLevelFromExp();
         this.pokerus = json[PartyPokemonSaveKeys.pokerus] ?? this.defaults.pokerus;
         this.effortPoints = json[PartyPokemonSaveKeys.effortPoints] ?? this.defaults.effortPoints;
-        this.heldItem(json.heldItem && ItemList[json.heldItem] instanceof HeldItem ? ItemList[json.heldItem] as HeldItem : undefined);
+        this.heldItem(json[PartyPokemonSaveKeys.heldItem] && ItemList[json[PartyPokemonSaveKeys.heldItem]] instanceof HeldItem ? ItemList[json[PartyPokemonSaveKeys.heldItem]] as HeldItem : undefined);
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
