@@ -190,6 +190,10 @@ class Mine {
             } else {
                 switch (reward.valueType) {
                     case 'Diamond': {
+                        if (reward.isShard()) {
+                            res.shards++;
+                            break;
+                        }
                         res.totalValue += reward.value;
                         break;
                     }
@@ -203,7 +207,7 @@ class Mine {
                 }
             }
             return res;
-        }, {fossils: 0, plates: 0, evoItems: 0, totalValue: 0});
+        }, {fossils: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0});
     }
 
     private static updatesurveyResult(summary) {
@@ -216,6 +220,9 @@ class Mine {
         }
         if (summary.plates) {
             text.push(`Gem Plates: ${summary.plates}`);
+        }
+        if (summary.shards) {
+            text.push(`Shards: ${summary.shards}`);
         }
         text.push(`Diamond Value: ${summary.totalValue}`);
 
