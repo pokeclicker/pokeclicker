@@ -22,24 +22,24 @@ abstract class Evolution {
         if (PokemonHelper.calcNativeRegion(evolvedPokemon) > player.highestRegion()) {
             return false;
         }
+        const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
 
-        // Notify the player if they haven't already caught the evolution, or notifications are forced
-        if (!App.game.party.alreadyCaughtPokemonByName(evolvedPokemon) || notification) {
+        // Notify the player if they haven't already caught the evolution, it's shiny, or notifications are forced
+        if (!App.game.party.alreadyCaughtPokemonByName(evolvedPokemon) || shiny || notification) {
             Notifier.notify({
-                message: `Your ${this.basePokemon} evolved into ${GameHelper.anOrA(evolvedPokemon)} ${evolvedPokemon}!`,
+                message: `Your ${this.basePokemon} evolved into ${shiny ? 'a shiny' : GameHelper.anOrA(evolvedPokemon)} ${evolvedPokemon}!`,
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
         }
 
-        const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
-        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, true);
-
         // Add shiny to logbook
         if (shiny) {
             App.game.logbook.newLog(LogBookTypes.SHINY, `Your ${this.basePokemon} evolved into a shiny ${evolvedPokemon}! ${App.game.party.alreadyCaughtPokemonByName(evolvedPokemon, true) ? '(duplicate)' : ''}`);
         }
+
+        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, true);
 
         // EVs
         const evolvedPartyPokemon = App.game.party.getPokemonByName(evolvedPokemon);
