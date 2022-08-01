@@ -216,13 +216,15 @@ class Dungeon {
     }
 
     public getRandomLoot(tier: LootTier): Loot {
-        return Rand.fromWeightedArray(this.lootTable[tier], this.lootTable[tier].map((loot) => loot.weight ?? 1));
+        const lootTable = this.lootTable[tier].filter((loot) => !loot.requirement || loot.requirement.isCompleted());
+        return Rand.fromWeightedArray(lootTable, lootTable.map((loot) => loot.weight ?? 1));
     }
 
     public getLootTierWeights(clears: number, highestRegion: GameConstants.Region): Record<LootTier, number> {
         if (GameConstants.getDungeonRegion(this.name) < highestRegion - 2) {
             return Object.entries(nerfedLootTierChance).reduce((chances, [tier, chance]) => {
-                if (tier in this.lootTable) {
+                if (tier in this.lootTable &&
+                    this.lootTable[tier].some((loot) => !loot.requirement || loot.requirement.isCompleted())) {
                     chances[tier] = chance;
                 }
                 return chances;
@@ -233,7 +235,8 @@ class Dungeon {
         const redist = lootRedistibuteAmount * timesCleared / 500;
 
         const updatedChances = Object.entries(baseLootTierChance).reduce((chances, [tier, chance]) => {
-            if (tier in this.lootTable) {
+            if (tier in this.lootTable &&
+                this.lootTable[tier].some((loot) => !loot.requirement || loot.requirement.isCompleted())) {
                 chances[tier] = chance + (redist * lootRedistribution[tier]);
             }
             return chances;
@@ -513,7 +516,7 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
     () => {
         const item = Rand.boolean() ? 'Dome Fossil' : 'Helix Fossil';
 
-        Underground.gainMineItem(Underground.getMineItemByName(item).id, 1);
+        Underground.gainMineItem(UndergroundItems.getByName(item).id, 1);
         Notifier.notify({
             message: `You were awarded a ${GameConstants.humanifyString(item)} for defeating the Super Nerd!`,
             type: NotificationConstants.NotificationOption.success,

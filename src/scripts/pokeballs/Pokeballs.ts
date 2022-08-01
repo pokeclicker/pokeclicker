@@ -85,7 +85,8 @@ class Pokeballs implements Feature {
             }, 1250, 'Increased catch rate on fished Pokémon', new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)),
 
             new Pokeball(GameConstants.Pokeball.Nestball, () => {
-                const maxRoute = MapHelper.normalizeRoute(Routes.getRoute(player.highestRegion(), Routes.getRoutesByRegion(player.highestRegion()).length - 1).number, player.highestRegion());
+                const highestRegionRoutes = Routes.getRoutesByRegion(player.highestRegion());
+                const maxRoute = MapHelper.normalizeRoute(highestRegionRoutes[highestRegionRoutes.length - 1].number, player.highestRegion());
                 const currentRoute = MapHelper.normalizeRoute(player.route(),player.region);
 
                 // Increased rate for earlier routes, scales with regional progression
