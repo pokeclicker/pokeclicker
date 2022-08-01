@@ -12,12 +12,12 @@ class BattleFrontierMilestones {
     }
 
     public static nextMileStone() {
-        // Get the next possible reward
-        return this.milestoneRewards.find(r => !r.obtained());
+        // Get next reward that is unlocked, not obtained, and earned past the latest stage beaten in the active run.
+        return this.milestoneRewards.find(r => r.isUnlocked() && !r.obtained() && (r.stage > (BattleFrontierRunner.checkpoint() - 1)));
     }
 
     public static availableMilestones() {
-        return BattleFrontierMilestones.milestoneRewards.filter(r => !r.obtained());
+        return BattleFrontierMilestones.milestoneRewards.filter(r => r.isUnlocked() && !r.obtained() && r.stage > (BattleFrontierRunner.checkpoint() - 1));
     }
 
     public static nextMileStoneStage(): number {
@@ -45,7 +45,7 @@ class BattleFrontierMilestones {
         if (reward && reward.stage == defeatedStage) {
             Notifier.notify({
                 title: 'Battle Frontier',
-                message: `You've successfully defeated stage ${defeatedStage.toLocaleString('en-US')} and earned:\n<span>${reward.description}</span>!`,
+                message: `You've successfully defeated stage ${defeatedStage.toLocaleString('en-US')} and earned:\n<span><img src="${reward.image}" height="24px"/> ${reward.description}</span>!`,
                 type: NotificationConstants.NotificationOption.info,
                 setting: NotificationConstants.NotificationSetting.General.battle_frontier,
                 timeout: 1e4,
@@ -56,7 +56,6 @@ class BattleFrontierMilestones {
     }
 }
 
-// TODO: update rewards
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(5, 'Pokeball', 25));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(10, 'Pokeball', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(20, 'Greatball', 100));
