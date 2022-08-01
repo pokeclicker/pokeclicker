@@ -35,13 +35,13 @@
             <!-- ko ifnot: $data.isNone() -->
             <div style="margin-top: 20px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
                 <!-- ko if: $data.type == EggType.Fossil -->
-                <img data-bind="attr: {src: BreedingController.getEggImage($data)}, class: BreedingController.getEggCssClass($data)"/>
+                <img class="egg" data-bind="attr: {src: BreedingController.getEggImage($data)}, class: BreedingController.getEggCssClass($data)"/>
                 <!-- /ko -->
                 <!-- ko ifnot: $data.type == EggType.Fossil -->
                 <div data-bind="template: { name: 'eggSVGTemplate', data: $data}, class: BreedingController.getEggCssClass($data)"></div>
                     <!-- ko if: $data.type == EggType.Pokemon -->
                     <div data-bind="if: $data.partyPokemon?.pokerus > GameConstants.Pokerus.None" style="position: absolute;right: 2px;top: -3px;">
-                        <img width="14px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[$data.partyPokemon?.pokerus]}.png`}"/>
+                        <img width="40px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[$data.partyPokemon?.pokerus]}.png`}"/>
                     </div>
                     <!-- /ko -->
                 <!-- /ko -->
