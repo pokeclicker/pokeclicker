@@ -45,7 +45,7 @@ class BattleFrontierMilestones {
         if (reward && reward.stage == defeatedStage) {
             Notifier.notify({
                 title: 'Battle Frontier',
-                message: `You've successfully defeated stage ${defeatedStage.toLocaleString('en-US')} and earned:\n<span>${reward.description}</span>!`,
+                message: `You've successfully defeated stage ${defeatedStage.toLocaleString('en-US')} and earned:\n<span><img src="${reward.image}" height="24px"/> ${reward.description}</span>!`,
                 type: NotificationConstants.NotificationOption.info,
                 setting: NotificationConstants.NotificationSetting.General.battle_frontier,
                 timeout: 1e4,
