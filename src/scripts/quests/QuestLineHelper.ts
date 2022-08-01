@@ -170,7 +170,7 @@ class QuestLineHelper {
         // Mine 5 layers in the Unerground
         const oldAmberReward = () => {
             // Gain an Old Amber
-            const oldAmber = UndergroundItem.list.find(item => item.name == 'Old Amber');
+            const oldAmber = UndergroundItems.list.find(item => item.name == 'Old Amber');
             if (!oldAmber) {
                 return console.error('Unable to find item Old Amber');
             }
@@ -319,7 +319,7 @@ class QuestLineHelper {
 
         // Capture 200 Psychic type Pokemon
         const mindPlateReward = () => {
-            const mindPlate = UndergroundItem.list.find(item => item.name == 'Mind Plate');
+            const mindPlate = UndergroundItems.list.find(item => item.name == 'Mind Plate');
             if (!mindPlate) {
                 return console.error('Unable to find item Mind Plate');
             }
