@@ -1095,7 +1095,7 @@ class Farming implements Feature {
 
     plant(index: number, berry: BerryType, suppressResetAura = false) {
         const plot = this.plotList[index];
-        if (!plot.isEmpty() || !plot.isUnlocked || !this.hasBerry(berry)) {
+        if (!plot.isEmpty() || !plot.isUnlocked || !this.hasBerry(berry) || plot.isSafeLocked) {
             return;
         }
 
@@ -1187,7 +1187,7 @@ class Farming implements Feature {
      */
     public shovelMulch(index: number): void {
         const plot = this.plotList[index];
-        if (!plot.isUnlocked) {
+        if (!plot.isUnlocked || plot.isSafeLocked) {
             return;
         }
         if (this.mulchShovelAmt() <= 0) {
