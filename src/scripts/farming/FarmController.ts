@@ -88,13 +88,13 @@ class FarmController {
         const plot: Plot = App.game.farming.plotList[index];
 
         if (event.shiftKey) {
-            this.handleShiftClickActions(plot, index);
+            this.shiftTogglePlotSafeLock(plot, index);
         } else {
             this.handleClickActions(plot, index);
         }
     }
 
-    private static handleShiftClickActions(plot: Plot, index: number) {
+    private static shiftTogglePlotSafeLock(plot: Plot, index: number) {
         if (!plot.isUnlocked) {
             return;
         }
