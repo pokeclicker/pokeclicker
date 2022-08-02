@@ -8,7 +8,6 @@ function LocationRestricted<EvoClass extends LocationEvo>(Base: EvoClass) {
     return class extends Base {
         constructor(...args: any[]) {
             super(...args);
-            this.type.push(EvolutionType.Location);
         }
 
         isSatisfied(): boolean {

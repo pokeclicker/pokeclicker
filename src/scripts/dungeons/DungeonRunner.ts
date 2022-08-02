@@ -9,11 +9,13 @@ class DungeonRunner {
 
     public static fighting: KnockoutObservable<boolean> = ko.observable(false);
     public static map: DungeonMap;
-    public static chestsOpened: number;
+    public static chestsOpened: KnockoutObservable<number> = ko.observable(0);
     public static currentTileType;
+    public static encountersWon: KnockoutObservable<number> = ko.observable(0);
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
     public static defeatedBoss: KnockoutObservable<boolean> = ko.observable(false);
     public static dungeonFinished: KnockoutObservable<boolean> = ko.observable(false);
+    public static fightingLootEnemy: boolean;
 
     public static initializeDungeon(dungeon) {
         if (!dungeon.isUnlocked()) {
@@ -45,10 +47,12 @@ class DungeonRunner {
         // Dungeon size minimum of MIN_DUNGEON_SIZE
         DungeonRunner.map = new DungeonMap(Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize), flash);
 
-        DungeonRunner.chestsOpened = 0;
+        DungeonRunner.chestsOpened(0);
+        DungeonRunner.encountersWon(0);
         DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
         });
+        DungeonRunner.fightingLootEnemy = false;
         DungeonRunner.fightingBoss(false);
         DungeonRunner.defeatedBoss(false);
         DungeonRunner.dungeonFinished(false);
@@ -100,37 +104,43 @@ class DungeonRunner {
         }
     }
 
-    public static lootInput() {
-        const generatedLoot = Rand.fromWeightedArray(DungeonRunner.dungeon.itemList, DungeonRunner.dungeon.lootWeightList);
-        return generatedLoot;
-    }
-
     public static openChest() {
         if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.chest) {
             return;
         }
 
-        DungeonRunner.chestsOpened++;
-        const loot = DungeonRunner.lootInput();
+        GameHelper.incrementObservable(DungeonRunner.chestsOpened);
+
+        const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]();
+        const tier = DungeonRunner.dungeon.getRandomLootTier(clears, player.highestRegion());
+        const loot = DungeonRunner.dungeon.getRandomLoot(tier);
         let amount = loot.amount || 1;
+
+        const tierWeight = {
+            common: 4,
+            rare: 3,
+            epic: 2,
+            legendary: 1,
+            mythic: 0,
+        }[tier];
 
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Dowsing_machine)()) {
             // Decreasing chance for rarer items (62.5% → 12.5%)
-            const magnetChance = 0.5 / (4 / (loot.weight + 1));
+            const magnetChance = 0.5 / (4 / (tierWeight + 1));
             if (Rand.chance(magnetChance)) {
                 // Gain more items in higher regions
-                amount += Math.max(1, Math.round(Math.max(loot.weight,2) / 8 * (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 1)));
+                amount += Math.max(1, Math.round(Math.max(tierWeight,2) / 8 * (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 1)));
             }
         }
 
-        DungeonRunner.gainLoot(loot.loot, amount, loot.weight);
+        DungeonRunner.gainLoot(loot.loot, amount, tierWeight);
 
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
-        if (DungeonRunner.chestsOpened == Math.floor(DungeonRunner.map.size / 3)) {
+        if (DungeonRunner.chestsOpened() == Math.floor(DungeonRunner.map.size / 3)) {
             DungeonRunner.map.showChestTiles();
         }
-        if (DungeonRunner.chestsOpened == Math.ceil(DungeonRunner.map.size / 2)) {
+        if (DungeonRunner.chestsOpened() == Math.ceil(DungeonRunner.map.size / 2)) {
             DungeonRunner.map.showAllTiles();
         }
     }
@@ -142,12 +152,13 @@ class DungeonRunner {
         } else if (ItemList[input] instanceof PokeballItem) {
             DungeonRunner.lootNotification(input, amount, weight, ItemList[input].image);
             return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount, false);
-        } else if (Underground.getMineItemByName(input) instanceof UndergroundItem) {
-            DungeonRunner.lootNotification(input, amount, weight, Underground.getMineItemByName(input).image);
-            return Underground.gainMineItem(Underground.getMineItemByName(input).id, amount);
+        } else if (UndergroundItems.getByName(input) instanceof UndergroundItem) {
+            DungeonRunner.lootNotification(input, amount, weight, UndergroundItems.getByName(input).image);
+            return Underground.gainMineItem(UndergroundItems.getByName(input).id, amount);
         } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
             const image = `assets/images/pokemon/${PokemonHelper.getPokemonByName(input).id}.png`;
             DungeonRunner.lootNotification(input, amount, weight, image);
+            DungeonRunner.fightingLootEnemy = true;
             return DungeonBattle.generateNewLootEnemy(input);
         } else if (ItemList[input] instanceof EvolutionStone || EggItem || BattleItem || Vitamin || EnergyRestore) {
             if (ItemList[input] instanceof Vitamin) {
@@ -163,15 +174,17 @@ class DungeonRunner {
 
     public static lootNotification(input, amount, weight, image) {
         const multiple = (amount < 2) ? '' : 's';
-        let message = `Found ${amount} × <img src="${image}" height="24px"/> ${GameConstants.camelCaseToString(GameConstants.humanifyString(input))}${multiple} in a dungeon chest`;
+        let message = `Found ${amount} × <img src="${image}" height="24px"/> ${GameConstants.camelCaseToString(GameConstants.humanifyString(input))}${multiple} in a dungeon chest.`;
         let type = NotificationConstants.NotificationOption.success;
         let setting = NotificationConstants.NotificationSetting.Dungeons.common_dungeon_item_found;
 
         if (typeof BerryType[input] == 'number') {
             const berryPlural = (amount < 2) ? 'Berry' : 'Berries';
-            message = `Found ${Math.floor(amount)} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} ${berryPlural} in a dungeon chest`;
+            message = `Found ${Math.floor(amount)} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} ${berryPlural} in a dungeon chest.`;
+        } if (ItemList[input] instanceof PokeballItem) {
+            message = `Found ${amount} × <img src="${image}" height ="24px"/> ${ItemList[input].displayName}${multiple} in a dungeon chest.`;
         } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
-            message = `Encountered ${GameHelper.anOrA(input)} <img src="${image}" height="40px"/> ${GameConstants.humanifyString(input)} in a dungeon chest`;
+            message = `Encountered ${GameHelper.anOrA(input)} <img src="${image}" height="40px"/> ${GameConstants.humanifyString(input)} in a dungeon chest.`;
         }
 
         if (weight <= 2) {

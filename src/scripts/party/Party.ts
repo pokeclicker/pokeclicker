@@ -178,6 +178,20 @@ class Party implements Feature {
         return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
     }
 
+    public calculateEffortPoints(pokemon: PartyPokemon, shiny: boolean, number = GameConstants.BASE_EP_YIELD): number {
+        if (pokemon.pokerus < GameConstants.Pokerus.Contagious) {
+            return 0;
+        }
+
+        let EPNum = number * App.game.multiplier.getBonus('ev');
+
+        if (shiny) {
+            EPNum *= GameConstants.SHINY_EP_MODIFIER;
+        }
+
+        return Math.floor(EPNum);
+    }
+
     public pokemonAttackObservable: KnockoutComputed<number> = ko.pureComputed(() => {
         return App.game.party.calculatePokemonAttack();
     }).extend({rateLimit: 1000});
