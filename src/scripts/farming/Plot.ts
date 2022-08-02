@@ -6,6 +6,7 @@ class Plot implements Saveable {
         age: 0,
         mulch: MulchType.None,
         mulchTimeLeft: 0,
+        isSafeLocked: false,
     };
 
     _isUnlocked: KnockoutObservable<boolean>;
@@ -302,7 +303,7 @@ class Plot implements Saveable {
      * Returns how many berries will be harvested
      */
     harvestAmount(): number {
-        return Math.floor(Math.max(1, Math.floor(this.berryData.harvestAmount)) * this.getHarvestMultiplier());
+        return Math.floor(this.berryData.harvestAmount * this.getHarvestMultiplier());
     }
 
     /**
@@ -519,6 +520,7 @@ class Plot implements Saveable {
         this.mulch = json.mulch ?? this.defaults.mulch;
         this.mulchTimeLeft = json.mulchTimeLeft ?? this.defaults.mulchTimeLeft;
         this.lastPlanted = json.lastPlanted ?? json.berry ?? this.defaults.berry;
+        this.isSafeLocked = json.isSafeLocked ?? this.defaults.isSafeLocked;
     }
 
     toJSON(): Record<string, any> {
@@ -529,6 +531,7 @@ class Plot implements Saveable {
             age: this.age,
             mulch: this.mulch,
             mulchTimeLeft: this.mulchTimeLeft,
+            isSafeLocked: this.isSafeLocked,
         };
     }
 
