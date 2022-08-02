@@ -9,6 +9,7 @@ class Plot implements Saveable {
     };
 
     _isUnlocked: KnockoutObservable<boolean>;
+    _isSafeLocked: KnockoutObservable<boolean>;
     _berry: KnockoutObservable<BerryType>;
     _lastPlanted: KnockoutObservable<BerryType>;
     _age: KnockoutObservable<number>;
@@ -40,6 +41,7 @@ class Plot implements Saveable {
 
     constructor(isUnlocked: boolean, berry: BerryType, age: number, mulch: MulchType, mulchTimeLeft: number) {
         this._isUnlocked = ko.observable(isUnlocked);
+        this._isSafeLocked = ko.observable(false);
         this._berry = ko.observable(berry).extend({ numeric: 0 });
         this._lastPlanted = ko.observable(berry).extend({ numeric: 0 });
         this._age = ko.observable(age).extend({ numeric: 3 });
@@ -582,6 +584,14 @@ class Plot implements Saveable {
 
     set isUnlocked(value: boolean) {
         this._isUnlocked(value);
+    }
+
+    get isSafeLocked(): boolean {
+        return this._isSafeLocked();
+    }
+
+    set isSafeLocked(value: boolean) {
+        this._isSafeLocked(value);
     }
 
     get berry(): BerryType {
