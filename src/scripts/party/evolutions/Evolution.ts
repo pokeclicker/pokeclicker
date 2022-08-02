@@ -22,25 +22,25 @@ abstract class Evolution {
         if (PokemonHelper.calcNativeRegion(evolvedPokemon) > player.highestRegion()) {
             return false;
         }
+        const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
 
         const newPokemon = !App.game.party.alreadyCaughtPokemonByName(evolvedPokemon);
-        if (newPokemon || notification) {
+        if (newPokemon || shiny || notification) {
             // Notify the player if they haven't already caught the evolution, or notifications are forced
             Notifier.notify({
-                message: `Your ${this.basePokemon} evolved into ${GameHelper.anOrA(evolvedPokemon)} ${evolvedPokemon}!`,
+                message: `Your ${this.basePokemon} evolved into ${shiny ? 'a shiny' : GameHelper.anOrA(evolvedPokemon)} ${evolvedPokemon}!`,
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
         }
 
-        const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
-        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, true);
-
         // Add shiny to logbook
         if (shiny) {
             App.game.logbook.newLog(LogBookTypes.SHINY, `Your ${this.basePokemon} evolved into a shiny ${evolvedPokemon}! ${App.game.party.alreadyCaughtPokemonByName(evolvedPokemon, true) ? '(duplicate)' : ''}`);
         }
+
+        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, true);
 
         const evolvedPartyPokemon = App.game.party.getPokemonByName(evolvedPokemon);
         if (newPokemon && App.game.challenges.list.realEvolutions.active()) {
@@ -55,10 +55,7 @@ abstract class Evolution {
         }
 
         // EVs
-        if (evolvedPartyPokemon.pokerus >= GameConstants.Pokerus.Contagious) {
-            const EPYield = (shiny ? GameConstants.SHINY_EP_YIELD : 1) * GameConstants.STONE_EP_YIELD;
-            evolvedPartyPokemon.effortPoints +=  EPYield;
-        }
+        evolvedPartyPokemon.effortPoints += App.game.party.calculateEffortPoints(evolvedPartyPokemon, shiny, GameConstants.STONE_EP_YIELD);
         return shiny;
     }
 

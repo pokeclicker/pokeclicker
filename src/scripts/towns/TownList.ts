@@ -37,11 +37,11 @@ const DepartmentStoreShop = new Shop([
 ], 'Department Store');
 
 const pokeLeagueShop = () => new Shop([
-    new PokeballItem(GameConstants.Pokeball.Masterball, 10000000, GameConstants.Currency.money       , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.money]}` }),
-    new PokeballItem(GameConstants.Pokeball.Masterball, 75000   , GameConstants.Currency.dungeonToken, { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.dungeonToken]}` }),
-    new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.questPoint  , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.questPoint]}` }),
-    new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.farmPoint   , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.farmPoint]}` }),
-    new PokeballItem(GameConstants.Pokeball.Masterball, 50      , GameConstants.Currency.diamond     , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.diamond]}` }),
+    new PokeballItem(GameConstants.Pokeball.Masterball, 10000000, GameConstants.Currency.money       , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.money]}` }, 'Master Ball'),
+    new PokeballItem(GameConstants.Pokeball.Masterball, 75000   , GameConstants.Currency.dungeonToken, { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.dungeonToken]}` }, 'Master Ball'),
+    new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.questPoint  , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.questPoint]}` }, 'Master Ball'),
+    new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.farmPoint   , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.farmPoint]}` }, 'Master Ball'),
+    new PokeballItem(GameConstants.Pokeball.Masterball, 50      , GameConstants.Currency.diamond     , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.diamond]}` }, 'Master Ball'),
     //ItemList['RareCandy'],
     ItemList.Protein,
 ]);
@@ -156,22 +156,40 @@ const PalletProfOak = new ProfNPC('Prof. Oak',
     'Your journey isn\'t over yet, a whole world awaits you! Onwards to Johto!',
     'assets/images/oak.png');
 
-const PalletMom = new NPC('Mom', [
-    'Traveling on your own can be scary. But remember that there are nice people everywhere you go. So strike up a converstation. You will probably learn something useful.',
-]);
-
-const ViridianCityOldMan = new NPC('Old Man', [
+const PalletMom1 = new NPC('Mom', [
+    'So you\'re really leaving on your very own Pokémon journey. I\'m so proud of you. Let me give you some words of wisdom for your travels.',
+    'Traveling on your own can be scary. But remember that there are nice people everywhere you go. So strike up a conversation! You will probably learn something useful.',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Tutorial Quests', 2), new QuestLineStepCompletedRequirement('Tutorial Quests', 3, GameConstants.AchievementOption.less )]) });
+const PalletMom2 = new NPC('Mom', [
+    'Remember that there are nice people everywhere you go. So strike up a conversation! You will probably learn something useful.',
+],
+{ requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 3) });
+const ViridianCityOldMan1 = new NPC('Old Man', [
+    'Leave me alone. I need my coffee.',
+],
+{ requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 4, GameConstants.AchievementOption.less) });
+const ViridianCityOldMan2 = new NPC('Old Man', [
     'Ahh, I\'ve had my coffee now and I feel great!',
-    'You can use the Pokéball Selector to select which type of Pokéball to use on specific Pokémon based on caught status.',
-]);
-
+    'You can use the Poké Ball Selector to select which type of Poké Ball to use on specific Pokémon based on caught status. The options, from left to right, are Caught, Caught shiny, New, New shiny.',
+    'For example, if you click on the empty ball below the word Caught and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
+    'Here, let me show you how it works.',
+    'I\'ll always be here to explain it again if you forget.',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Tutorial Quests', 4), new QuestLineStepCompletedRequirement('Tutorial Quests', 5, GameConstants.AchievementOption.less )]) });
+const ViridianCityOldMan3 = new NPC('Old Man', [
+    'You can use the Poké Ball Selector to select which type of Poké Ball to use on specific Pokémon based on caught status. The options, from left to right, are Caught, Caught shiny, New, New shiny.',
+    'For example, if you click on the empty ball below the word Caught and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
+    'I\'ll always be here to explain it again if you forget.',
+],
+{ requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 5) });
 const PewterBattleItemRival = new NPC('Battle Item Master', [
-    'Hey kid, you look new! Let me offer some advice: Battle Items like xAttack can be acquired along Routes, inside Dungeons and in Shops!',
+    'Hey kid, you look new! Let me offer some advice: Battle Items like X Attack can be acquired along Routes, inside Dungeons and in Shops!',
     'Use them to help you out whenever you feel like time is against you!',
 ]);
 
 const PewterScientist = new NPC('Gem Scientist', [
-    'I see you are carrying a Shard Case. Here at the museum we study space, fossils and gems!',
+    'I see you are carrying a Gem Case. Here at the museum we study space, fossils and gems!',
     'When you defeat a Pokémon you gain a gem of that Pokémon\'s type. If the Pokémon has two types you gain one for each! Defeating very strong Pokémon, such as those owned by gym leaders, gets you five!',
     'You can click Gems in the Start Menu to boost your damage using these gems. For example, using rock gems you can boost the super effective damage of your rock type Pokémon! Those flying types had better watch out for your might!',
     'You can even use this to eliminate immunities! By using electric gems to boost your electric type immune damage, your electric Pokémon can suddenly do damage against ground types!',
@@ -219,6 +237,14 @@ const BigSpender = new NPC('Big Spender', [
     'You can use the Shop Amount Button settings to make it easy for big purchases, too!',
 ]);
 
+const EggHuntErika = new NPC('Erika', [
+    'And here comes another one. Let me guess, you\'re gonna ask me about the Togepi too?',
+    'Listen here you. Just because I\'m the Grass type gym leader doesn\'t mean I know everything that goes on in the forest! I live in one of the biggest cities in the region! With tall buildings! And gambling! And crime! I like it here! I don\'t care about the forest!',
+    '...',
+    'All right, fine. It just so happens that I have heard about <span style="font-style: italic">something</span> going on in Viridian Forest. But I don\'t know what, and I don\'t care! You can go figure it out! I\'m staying here! Viridian Forest doesn\'t even have any Grass types. It\'s all Bugs over there.',
+],
+{ requirement: new MultiRequirement([new QuestLineStartedRequirement('Togepi Egg Hunt'), new QuestLineCompletedRequirement('Togepi Egg Hunt', GameConstants.AchievementOption.less )]) });
+
 const SaffronBattleItemRival = new NPC('Battle Item Master', [
     'Do I know you? Wait... Have you met my worthless rival? Ha! Let me guess, he gave you some unwanted advice?',
     'I bet he forget to tell you that although all Battle Items only last for 30 seconds, they can stack and last for days! Now scram!',
@@ -251,7 +277,7 @@ const OneIslandCelio2 = new NPC ('Celio', [
     'I\'m glad to hear Lostelle is all right. You can hand the meteorite to me. Bill, thank you for your assistance, I\'ll take it from here. I can see that your friend is eager to get back to Kanto and challenge the Pokémon League.',
     'Thank you both very much.',
 ],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 4), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less )]) });
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 5), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less )]) });
 const OneIslandCelio3 = new NPC ('Celio', [
     'You\'ve been a great help. Thanks again. Maybe we\'ll meet again some day...',
 ],
@@ -265,18 +291,18 @@ const TwoIslandGameCornerOwner1 = new NPC ('Game Corner Owner', [
     'What? The meteorite for Celio? Yes, I can give that to you. But I need you to do something for me first.',
     'My daughter Lostelle is missing. She likes to pick berries in the Berry Forest on Three Island. She does it all the time. But this time she hasn\'t come back. Please go find her.',
 ],
-{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 3, GameConstants.AchievementOption.less ) });
+{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 4, GameConstants.AchievementOption.less ) });
 const TwoIslandGameCornerOwner2 = new NPC ('Game Corner Owner', [
     'My sweet Lostelle! I\'m so glad you\'re all right.',
     'Thank you very much kind stranger. Please take the Meteorite.',
 ],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 3), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less)]) });
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 4), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less)]) });
 const ThreeIslandBiker = new NPC ('Biker', [
     'You know what sucks? The other islands are off limits for some arbitrary reason. There is no explanation. Just can\'t go there.',
     'Alright, you want the real truth? Some weird old dude told me this: "The other islands don\'t exist. Yet. Gotta wait for the devs to put them in."',
     'I don\'t know what half those words mean. All I know is I can\'t go back to Kanto with the rest of the gang. This sucks.',
 ],
-{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 2) });
+{ requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 3) });
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
@@ -284,7 +310,7 @@ TownList['Pallet Town'] = new Town(
     GameConstants.Region.kanto,
     [],
     {
-        npcs: [PalletProfOak, PalletMom],
+        npcs: [PalletProfOak, PalletMom1, PalletMom2],
     }
 );
 TownList['Viridian City'] = new Town(
@@ -293,7 +319,7 @@ TownList['Viridian City'] = new Town(
     [ViridianCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 1)],
-        npcs: [ViridianCityOldMan],
+        npcs: [ViridianCityOldMan1, ViridianCityOldMan2, ViridianCityOldMan3],
     }
 );
 TownList['Pewter City'] = new Town(
@@ -352,7 +378,7 @@ TownList['Celadon City'] = new Town(
     [CeladonDepartmentStoreShop, CeladonCityShop, new MoveToDungeon(dungeonList['Rocket Game Corner'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
-        npcs: [BigSpender],
+        npcs: [BigSpender, EggHuntErika],
     }
 );
 TownList['Saffron City'] = new Town(
@@ -613,6 +639,7 @@ const JohtoBerryMaster = new BerryMasterShop([
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,
     ItemList.Amaze_Mulch,
+    ItemList.Freeze_Mulch,
     ItemList.Berry_Shovel,
     ItemList.Mulch_Shovel,
     ItemList.Squirtbottle,
@@ -645,7 +672,7 @@ const AzaleaOldMan = new NPC('Wise Old Man', [
 
 const AzaleaHiker = new NPC('Hiker Daniel', [
     'The PokéManiacs in Union Cave are restless. They have been ranting and raving about a weekly visitor.',
-    'According to them a strange Pokémon\'s cries can be heard from a lake deep inside the cave.',
+    'According to them, a strange Pokémon\'s cries can be heard from a lake deep inside the cave.',
     'I\'ve never heard it myself. Apparently it only happens on Fridays.',
 ],
 { requirement: new GymBadgeRequirement(BadgeEnums.Fog) });
@@ -657,7 +684,7 @@ const EcruteakBill = new NPC('Bill', [
 ]);
 
 const EcruteakEusine = new NPC('Eusine', [
-    'Legends say that when the Brass Tower burned down and became the Burned Tower three unnamed Pokémon perished in the flames.',
+    'Legends say that when the Brass Tower burned down and became the Burned Tower, three unnamed Pokémon perished in the flames...',
     'Ho-oh came down from the Tin Tower and revived those Pokémon. They became the Legendary Beasts. Some say these Beasts still inhabit the basement of the Burned Tower.',
     'Could you please clear Burned Tower for me and see if this is true?',
 ],
@@ -685,7 +712,7 @@ const CianwoodPhotographyAide = new NPC('Photography Aide', [
 ]);
 
 const MahoganySouvenirShopAttendant = new NPC('Souvenir Shop Attendant', [
-    'We’ve got stuff here nobody else has got! But keep any Item Magnets you have away from the merchandise… especially the RageCandyBars. Keep ‘em outside where they belong! I’ve heard magnets can attract Pokémon with held items more often, and even more so in Dungeons!',
+    'We’ve got stuff here nobody else has got! But keep any Dowsing Machines you have away from the merchandise… especially the RageCandyBars. Keep ‘em outside where they belong! I’ve heard those machines can attract Pokémon with held items more often, and even more so in Dungeons!',
 ]);
 
 const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
@@ -993,8 +1020,8 @@ const EverGrandeCityShop = new Shop([
 ]);
 // TODO: finalize items and prices
 const BattleFrontierShop = new Shop([
-    new PokeballItem(GameConstants.Pokeball.Ultraball, 1, GameConstants.Currency.battlePoint),
-    new PokeballItem(GameConstants.Pokeball.Masterball, 500, GameConstants.Currency.battlePoint , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.battlePoint]}` }),
+    new PokeballItem(GameConstants.Pokeball.Ultraball, 1, GameConstants.Currency.battlePoint, undefined, 'Ultra Ball'),
+    new PokeballItem(GameConstants.Pokeball.Masterball, 500, GameConstants.Currency.battlePoint , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.battlePoint]}` }, 'Master Ball'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 10, GameConstants.Currency.battlePoint),
     new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 20, GameConstants.Currency.battlePoint),
     new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 40, GameConstants.Currency.battlePoint),
@@ -1008,6 +1035,7 @@ const HoennBerryMaster = new BerryMasterShop([
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,
     ItemList.Amaze_Mulch,
+    ItemList.Freeze_Mulch,
     ItemList.Berry_Shovel,
     ItemList.Mulch_Shovel,
     ItemList.Sprinklotad,
@@ -1437,7 +1465,7 @@ const PalParkShop = new Shop([
     ItemList.Razor_claw,
     ItemList.Razor_fang,
     ItemList.Combee,
-    ItemList['Burmy (plant)'],
+    ItemList['Burmy (Plant)'],
     ItemList.Cherubi,
 ]);
 const SnowpointCityShop = new Shop([
@@ -1485,6 +1513,7 @@ const SinnohBerryMaster = new BerryMasterShop([
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,
     ItemList.Amaze_Mulch,
+    ItemList.Freeze_Mulch,
     ItemList.Berry_Shovel,
     ItemList.Mulch_Shovel,
     ItemList.FarmHandRiley,
@@ -1522,7 +1551,7 @@ const HearthomeContestFan = new NPC('Contest Fan', [
     'I\'m so happy for them, all of that training in Mt. Coronet must have paid off!',
 ]);
 
-const CelesticGrandma = new NPC('Cynthia\s Grandmother', [
+const CelesticGrandma = new NPC('Cynthia\'s Grandmother', [
     'Hello young one, have you come here to learn of Sinnoh’s mysteries?',
     'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine… maybe they should try the Day Care?',
 ]);
@@ -1553,8 +1582,7 @@ const SnowpointYoungGirl = new NPC('Young Girl', [
 const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
     'Oh! I don’t get visitors often. My husband is a sailor who visits far away lands… he always tells me these fantastic things.',
     'One time he came back and his Wailmer looked funny. We took it to the Pokécenter and they said it had caught some weird virus called Pokérus!',
-    'They said that it is a virus that can spread in the Pokémon Day Care. However, not every Pokémon that is infected can spread it...',
-    'You need some kind of "special bond" or something with the infected Pokémon for it to spread the virus. His Wailmer was his Starter Pokémon, so maybe that was it? They also said that Pokémon can only spread the virus if they aren’t ready to hatch.',
+    'They said that it is a virus that can spread in the Pokémon Day Care. They said that Pokémon can only spread or catch the virus if they aren’t ready to hatch yet, and that they need to share a type with one another.',
     'If you have a Pokémon with Pokérus, try catching more of that type of Pokémon. When he got back from his next trip, oddly enough Wailmer seemed stronger than ever!',
 ]);
 
@@ -2035,7 +2063,7 @@ const NuvemaTownShop = new Shop([
     ItemList.Magmarizer,
 ]);
 const AnvilleTownShop = new Shop([
-    ItemList['Meloetta (pirouette)'],
+    ItemList['Meloetta (Pirouette)'],
 ]);
 
 //Unova Gem Master
@@ -2055,6 +2083,11 @@ const CasteliaMusician = new NPC('Musician', [
     'Sometimes a cool singing Pokémon shows up and joins in on our set. I’ve heard that trainers as strong as the Champion have found it roaming around the region looking for Pokémon battles… but even I wouldn’t challenge it to a Music battle.',
 ]);
 
+const RelicCastleRuinmaniac = new NPC('Ruin Maniac', [
+    'I\'ve heard tell of a secret room in this ruin. A room that supposedly contains a very rare Pokémon.',
+    'Apparently this secret room is only accessible via a secret entrance in Relic Passage. Relic Passage runs from Driftveil City all the way under the river to Relic Castle. It\'s very impressive. Once I\'m done investigating this part of the ruin I\'m definitely going to check it out!',
+]);
+
 const NimbasaExplorer = new NPC('Explorer', [
     'Whew! The desert is rough out there, glad you\'ve made it all the way to Nimbasa.',
     'Sometimes I find some weird stuff out in the sand, sometimes even Pokémon hiding in Chests. Like this one time in Relic Castle, I found a Pokémon that looks like a statue that I\'ve never seen before!',
@@ -2064,7 +2097,7 @@ const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
     'Legends say Kyurem is missing a part of itself. It is waiting for a hero to fill in the missing parts of its body with Truth or Ideals.',
     'The legendary dragons of Dragonspiral Tower are said to embody these very concepts. They sometimes leave a piece of their DNA behind after a battle.',
     'If you have DNA splicers, perhaps you can make Kyurem whole again.',
-    'I\'ve never seen it, but supposedly it works just like any evolution stone.',
+    'I\'ve never seen it, but supposedly it works just like any other evolution item.',
 ]);
 
 const P2LaboratoryColress = new NPC('Colress', [
@@ -2267,7 +2300,7 @@ TownList['Anville Town'] = new Town(
     [AnvilleTownShop],
     {
         requirements: [
-            new ObtainedPokemonRequirement(pokemonMap['Meloetta (aria)']),
+            new ObtainedPokemonRequirement(pokemonMap['Meloetta (Aria)']),
             new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
         ],
     }
@@ -2320,7 +2353,9 @@ TownList['Relic Passage'] = new DungeonTown(
 TownList['Relic Castle'] = new DungeonTown(
     'Relic Castle',
     GameConstants.Region.unova,
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 25)]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 25)],
+    [],
+    [RelicCastleRuinmaniac]
 );
 TownList['Lostlorn Forest'] = new DungeonTown(
     'Lostlorn Forest',
@@ -2644,6 +2679,14 @@ TownList['Camphrier Town'] = new Town(
         npcs: [CamphrierFlabébéEnthusiast],
     }
 );
+TownList['Parfum Palace'] = new Town(
+    'Parfum Palace',
+    GameConstants.Region.kalos,
+    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou Trader')],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)],
+    }
+);
 TownList['Ambrette Town'] = new Town(
     'Ambrette Town',
     GameConstants.Region.kalos,
@@ -2757,11 +2800,6 @@ TownList['Santalune Forest'] = new DungeonTown(
     GameConstants.Region.kalos,
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 2)]
 );
-TownList['Parfum Palace'] = new DungeonTown(
-    'Parfum Palace',
-    GameConstants.Region.kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)]
-);
 TownList['Connecting Cave'] = new DungeonTown(
     'Connecting Cave',
     GameConstants.Region.kalos,
@@ -2783,8 +2821,8 @@ TownList['Sea Spirit\'s Den'] = new DungeonTown(
     GameConstants.Region.kalos,
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 23)]
 );
-TownList['Pokéball Factory'] = new DungeonTown(
-    'Pokéball Factory',
+TownList['Poké Ball Factory'] = new DungeonTown(
+    'Poké Ball Factory',
     GameConstants.Region.kalos,
     [new GymBadgeRequirement(BadgeEnums.Fairy)]
 );
@@ -2865,6 +2903,10 @@ const PaniolaTownShop = new Shop([
     ItemList.Fire_egg,
     ItemList.Water_egg,
 ]);
+const RoadsideMotelShop = new Shop([
+    ItemList.Beastball,
+], undefined, [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1),
+]);
 const KonikoniCityShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -2934,10 +2976,9 @@ const IkiOutskirtsMom = new NPC('Scratch Cat Girl', [
 ]);
 const KukuisLabProfessor = new NPC('Professor Kukui', [
     'Are you looking for some rare Pokémon? Maybe I can help with that. Ask away!',
-    'Ultra Beast? Never heard of it. I have no idea what that is. As far as I know they simply do not exist.',
-    'Meltan? What\'s a Meltan? Nope, don\'t know about that one either.',
-    'You seem very sure about this. Look, if you\'re so certain that these things you are talking about are real, I\'m sure they will show up sooner or later. If you\'re patient...',
-    'You got me all excited. We\'ll WAIT FOR these new rare Pokémon together. Hold on, let me just UPDATE my calendar. Just to be sure I\'m free to investigate these new Pokémon that only you know about when they show up. I wouldn\'t miss this for the world.',
+    'Meltan? What\'s a Meltan? Nope, don\'t know about that one.',
+    'You seem very sure about this. Look, if you\'re so certain that this thing you are talking about is real, I\'m sure it will show up sooner or later. If you\'re patient...',
+    'You got me all excited. We\'ll WAIT FOR this new rare Pokémon together. Hold on, let me just UPDATE my calendar. Just to be sure I\'m free to investigate this new Pokémon that only you know about when it shows up. I wouldn\'t miss this for the world.',
 ]);
 const IkiKahuna = new NPC('Kahuna Hala', [
     'Welcome to Alola!',
@@ -2988,6 +3029,62 @@ const ProfKukui = new ProfNPC('Prof. Kukui',
     'TODO',
     'TODO');
 
+const RoadsideMotelLooker1 = new NPC('Looker', [
+    'I\'m very grateful that you accepted my invitation. My name is Looker. This here is my boss, Chief Anabel, head of the UB Taskforce.',
+    'Ever since the incident at Aether Paradise, where you encountered UB-01 Symbiont, also known as Nihilego, we have heard reports of other Symbiont appearing in Alola. And other types of UBs too.',
+    'They came here from a different world. Dropped rudely into our world against their will. We know nothing about them. They could be dangerous. They are almost certainly extremely wary and combative.',
+    'We must find a way to calm their nerves. To make them feel at home in our world. Or we must destroy them. Either way, we must understand them. We must catch them.',
+    'That is where you come in. The Champion of Alola. We do not have the battle power, but hopefully you do. Please allow Anabel to test your battle ability to ensure that you can handle this job.',
+], { requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1, GameConstants.AchievementOption.less )});
+const RoadsideMotelAnabel1 = new NPC('Anabel', [
+    'The testing is complete. I see no problem at all with your skills. Rather I would have to praise you for them. Welcome to the team!',
+    'There is no more time to waste. UB-01 Symbiont, Nihilego, has been spotted on Akala Island! I will protect the nearby population centers, you must go and confront the Beast!',
+    'Looker will stay here to coordinate reinforcements if needed. You can ask him about the special Beast Balls you will be using on this mission. I have given you a couple of them, but they are expensive so you will have to pitch in if you need more.',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 4, GameConstants.AchievementOption.less )])});
+const RoadsideMotelLooker2 = new NPC('Looker', [
+    'Catching lots of Ultra Beasts? Oh you want to know more about Beast Balls!',
+    'Beast Balls can only be used to catch Ultra Beasts. You can\'t even try use them against normal Pokémon, and any other Poké Ball type won\'t work against Ultra Beasts.',
+    'If you\'re looking to most effectively hunt the Ultra Beasts down, try putting Beast Balls in your "Already Caught" selector. Beast Balls will never be thrown at Pokémon that aren\'t Ultra Beasts.',
+], { requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 2)});
+const RoadsideMotelAnabel2 = new NPC('Anabel', [
+    'Congratulations on a job well done. I\'ve had contact with our colleagues at HQ. They have agreed to let you keep the UBs you catch.',
+    'I\'m sure the UBs will truly flourish in the company of a competent trainer like yourself. It\'ll be much better for them than being locked up in some stuffy lab. Just be sure to let us know how they are doing.',
+    'Now, enough chit-chat. UB-02 Absorption and UB-02 Beauty, Buzzwole and Pheromosa, have been sighted on Melemele Island. You know what to do!',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 4, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 6, GameConstants.AchievementOption.less )])});
+const RoadsideMotelAnabel3 = new NPC('Anabel', [
+    'Congratulations once again. Looker told me he wants to take us to a great restaurant to celebrate. I don\'t know how he knows any restaurants around here, we\'ve only just arrived.',
+    'It doesn\'t matter though. There is no rest for us. Captain Mina is here with news, but she insist on battling you before she\'ll tell us anything.',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 6, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 8, GameConstants.AchievementOption.less )])});
+const RoadsideMotelMina = new NPC('Captain Mina', [
+    'Still in tip top shape I see. Good. That means you\'re strong enough to take out this monster I heard about on Akala Island.',
+    'According to your little list here its... uhm... this one! UB-03 Lighting. Xurkitree. These are some strange names you guys come up with.',
+    'Good luck out there!',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 8, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 10, GameConstants.AchievementOption.less )])});
+const RoadsideMotelNanu1 = new NPC('Kahuna Nanu', [
+    '...',
+    'I let myself in. Hope you don\'t mind.',
+    'I\'m here to tell you about sightings of monsters on Ula\'ula Island. I missed some big Kahuna meeting we were all supposed to go to, so I got stuck as the messenger.',
+    'It\'s not like I\'ve seen them or anything. Your friend Looker knew them from the description though. UB-04 Blade and UB-04 Blaster he called them. Kartana and Celesteela.',
+    '...',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 10, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 12, GameConstants.AchievementOption.less )])});
+const RoadsideMotelNanu2 = new NPC('Kahuna Nanu', [
+    '...',
+    'Good job on rounding up those creatures kid.',
+    'Now, how about one more battle? I insist.',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 12, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 14, GameConstants.AchievementOption.less )])});
+const RoadsideMotelAnabel4 = new NPC('Anabel', [
+    'This is tiring work, but I have a feeling that we\'re almost done.',
+    'Looker\'s informants told us about monster sightings on Poni Island. It seems UB Assembly and UB Burst, Stakataka and Blacephalon, have taken up residence.',
+    'Please be careful.',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 14, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 16, GameConstants.AchievementOption.less )])});
+const RoadsideMotelAnabel5 = new NPC('Anabel', [
+    'And so here we are. At the end. And back at the beginning.',
+    'Our final target is UB-05 Glutton. Guzzlord. It is very dangerous. You must not underestimate this beast.',
+    'Ten years ago, a very similar incident occured. Looker and his team were assigned to fight Guzzlord. Nanu was there too. They lost. Looker lost a colleague that day.',
+    'After the battle they found something. A strange young girl, alone in the wilderness of Poni Island. They found me. It seems I came from another world as well. Not their world though. These creatures are strange to me too.',
+    'I have made myself at home here. I hope Glutton can do the same. Please catch this Guzzlord. End this once and for all.',
+], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 16, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 18, GameConstants.AchievementOption.less )])});
+
 //Alola Towns
 
 TownList['Iki Town Outskirts'] = new Town(
@@ -3033,14 +3130,13 @@ TownList['Melemele Woods'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 2)],
     }
 );
-//TODO: Change requirement when UB questline is merged.
 TownList['Roadside Motel'] = new Town(
     'Roadside Motel',
     GameConstants.Region.alola,
-    [],
+    [TemporaryBattleList.Anabel, TemporaryBattleList['Captain Mina UB'], TemporaryBattleList['Kahuna Nanu UB'], RoadsideMotelShop],
     {
-        // requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
-        requirements: [new NullRequirement()],
+        requirements: [new QuestLineStartedRequirement('Ultra Beast Hunt')],
+        npcs: [RoadsideMotelLooker1, RoadsideMotelAnabel1, RoadsideMotelLooker2, RoadsideMotelAnabel2, RoadsideMotelAnabel3, RoadsideMotelMina, RoadsideMotelNanu1, RoadsideMotelNanu2, RoadsideMotelAnabel4, RoadsideMotelAnabel5],
     }
 );
 TownList['Heahea City'] = new Town(
@@ -3301,16 +3397,15 @@ TownList['Poni Meadow'] = new DungeonTown(
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 28)]
 );
-//TODO: Change requirement when UB questline is merged.
 TownList['Resolution Cave'] = new DungeonTown(
     'Resolution Cave',
     GameConstants.Region.alola,
-    //[new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Poni Meadow'))]
-    [new NullRequirement()]
+    [
+        new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 17),
+    ]
 );
+
 //Galar Shops
-
-
 const PostwickShop = new Shop([
     ItemList.Pokeball,
 ]);

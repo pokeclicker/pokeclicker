@@ -33,6 +33,12 @@ class DungeonBattle extends Battle {
         }
 
         DungeonRunner.fighting(false);
+        if (DungeonRunner.fightingLootEnemy) {
+            DungeonRunner.fightingLootEnemy = false;
+        } else {
+            GameHelper.incrementObservable(DungeonRunner.encountersWon);
+        }
+
         if (DungeonRunner.fightingBoss()) {
             DungeonRunner.fightingBoss(false);
             DungeonRunner.defeatedBoss(true);
@@ -48,11 +54,13 @@ class DungeonBattle extends Battle {
         // Attempting to catch Pokemon
         const isShiny: boolean = enemyPokemon.shiny;
         const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny);
+        const route = player.town()?.dungeon?.difficultyRoute || 1;
+        const region = player.region;
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.prepareCatch(enemyPokemon, pokeBall);
             setTimeout(
                 () => {
-                    this.attemptCatch(enemyPokemon);
+                    this.attemptCatch(enemyPokemon, route, region);
                     if (DungeonRunner.defeatedBoss()) {
                         DungeonRunner.dungeonWon();
                     }
@@ -91,6 +99,7 @@ class DungeonBattle extends Battle {
             }
 
             DungeonRunner.fighting(false);
+            GameHelper.incrementObservable(DungeonRunner.encountersWon);
             this.trainer(null);
             this.trainerPokemonIndex(0);
 
@@ -119,7 +128,7 @@ class DungeonBattle extends Battle {
         // Pokemon
         if (typeof enemy === 'string' || enemy.hasOwnProperty('pokemon')) {
             const pokemon = (typeof enemy === 'string') ? enemy : (<DetailedPokemon>enemy).pokemon;
-            const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon, DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeonLevel());
+            const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon, DungeonRunner.chestsOpened(), DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeonLevel());
             this.enemyPokemon(enemyPokemon);
 
             GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[enemyPokemon.id]);
@@ -147,7 +156,7 @@ class DungeonBattle extends Battle {
         this.catching(false);
         this.counter = 0;
         const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon
-            , DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth * 2, DungeonRunner.dungeonLevel());
+            , DungeonRunner.chestsOpened(), DungeonRunner.dungeon.baseHealth * 2, DungeonRunner.dungeonLevel());
         this.enemyPokemon(enemyPokemon);
 
         GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[enemyPokemon.id]);
@@ -171,7 +180,7 @@ class DungeonBattle extends Battle {
         const pokemon = this.trainer().team[this.trainerPokemonIndex()];
         const baseHealth = DungeonRunner.fightingBoss() ? pokemon.maxHealth : DungeonRunner.dungeon.baseHealth;
         const level = DungeonRunner.fightingBoss() ? pokemon.level : DungeonRunner.dungeonLevel();
-        const enemyPokemon = PokemonFactory.generateDungeonTrainerPokemon(pokemon, DungeonRunner.chestsOpened, baseHealth, level);
+        const enemyPokemon = PokemonFactory.generateDungeonTrainerPokemon(pokemon, DungeonRunner.chestsOpened(), baseHealth, level);
 
         this.enemyPokemon(enemyPokemon);
     }
@@ -185,7 +194,7 @@ class DungeonBattle extends Battle {
         const enemy = Rand.fromWeightedArray(DungeonRunner.dungeon.availableBosses(), DungeonRunner.dungeon.bossWeightList);
         // Pokemon
         if (enemy instanceof DungeonBossPokemon) {
-            this.enemyPokemon(PokemonFactory.generateDungeonBoss(enemy, DungeonRunner.chestsOpened));
+            this.enemyPokemon(PokemonFactory.generateDungeonBoss(enemy, DungeonRunner.chestsOpened()));
             GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[this.enemyPokemon().id]);
             GameHelper.incrementObservable(App.game.statistics.totalPokemonEncountered);
 

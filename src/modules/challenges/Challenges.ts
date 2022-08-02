@@ -11,7 +11,7 @@ export default class Challenges implements Saveable {
         requireCompletePokedex: new Challenge('Require Complete Pokédex (recommended)', 'Requires a complete regional Pokédex before moving on to the next region', true),
         disableClickAttack: new Challenge('No Click Attack', 'Disables the ability to use Click Attacks'),
         disableBattleItems: new Challenge('No Battle Item', 'Disables the usage of Battle Items'),
-        disableMasterballs: new Challenge('No Masterball', 'Disables the usage of Masterballs'),
+        disableMasterballs: new Challenge('No Master Ball', 'Disables the usage of Master Balls'),
         disableOakItems: new Challenge('No Oak Item', 'Disables the usage of all Oak Items'),
         disableGems: new Challenge('No Gem', 'Disables the usage of Gems for increasing damage multipliers'),
         disableProteins: new Challenge('No Protein', 'Disables the usage of Proteins'),
