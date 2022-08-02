@@ -174,7 +174,7 @@ class Underground implements Feature {
         const item = UndergroundItems.getById(id);
 
         if (item.valueType == UndergroundItemValueType.EvolutionItem) {
-            const evostone: EvolutionStone = (ItemList[item.valueType] as EvolutionStone);
+            const evostone: EvolutionStone = (ItemList[GameConstants.StoneType[item.type]] as EvolutionStone);
             evostone.gain(num);
             return;
         }
