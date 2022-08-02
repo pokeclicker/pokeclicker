@@ -12,6 +12,7 @@ class FarmController {
     public static selectedMulch: KnockoutObservable<MulchType> = ko.observable(MulchType.Boost_Mulch);
     public static selectedShovel: KnockoutObservable<boolean> = ko.observable(false);
     public static selectedMulchShovel: KnockoutObservable<boolean> = ko.observable(false);
+    public static selectedPlotSafeLock: KnockoutObservable<boolean> = ko.observable(false);
 
     public static berryListVisible: KnockoutObservable<boolean> = ko.observable(true);
 
@@ -61,6 +62,9 @@ class FarmController {
     }
 
     public static calculateCssClass() {
+        if (this.selectedPlotSafeLock()) {
+            return 'PlotSafeLockSelected';
+        }
         if (this.selectedShovel()) {
             return 'ShovelSelected';
         }
@@ -102,6 +106,9 @@ class FarmController {
         // Unlocking Plot
         if (!plot.isUnlocked) {
             App.game.farming.unlockPlot(index);
+            // Handle Safe Locking Plot
+        } else if (this.selectedPlotSafeLock()) {
+            App.game.farming.togglePlotSafeLock(index);
             // Handle Shovel
         } else if (this.selectedShovel()) {
             App.game.farming.shovel(index);
