@@ -3089,7 +3089,7 @@ const BattleTreeRed = new NPC('Red', [
 ]);
 const BattleTreeBlue = new NPC('Blue', [
     'Hello there champ! Fancy seeing you here.',
-    'We just planted this sapling here. Maybe it will grow into something great some day.'
+    'We just planted this sapling here. Maybe it will grow into something great some day.',
 ]);
 
 //Alola Towns
