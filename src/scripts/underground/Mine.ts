@@ -221,7 +221,9 @@ class Mine {
         if (summary.shards) {
             text.push(`Shards: ${summary.shards}`);
         }
-        text.push(`Diamond Value: ${summary.totalValue}`);
+        if (summary.totalValue) {
+            text.push(`Diamond Value: ${summary.totalValue}`);
+        }
 
         Mine.surveyResult(text.join('<br>'));
         $('#mine-survey-result').tooltip('show');
