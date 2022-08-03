@@ -402,8 +402,10 @@
                     }">
                 </knockout>
                 <div class="safeLockButton">
-                    <button type="button" class="btn btn-primary"
-                        data-bind="click: function() {FarmController.selectedPlotSafeLock(true);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);},
+
+                    <button type="button" class="btn btn-primary" data-bind="click: function() {
+                        FarmController.selectedPlotSafeLock() ? FarmController.selectedPlotSafeLock(false) : FarmController.selectedPlotSafeLock(true);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);
+                    },
                         css: { 'active': FarmController.selectedPlotSafeLock() },
                         tooltip: {title: 'Toggle locking a plot from interaction.',  trigger: 'hover', animation: false}"
                         >
