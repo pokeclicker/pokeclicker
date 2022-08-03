@@ -64,7 +64,7 @@
                             >
                         </button>
                         <button class='col-12 col-md-4 btn btn-success'
-                                onClick='Mine.survey()'
+                                onClick='Mine.survey(); $(this).tooltip("hide")'
                                 data-bind="disable: Mine.surveyResult() ? true : false, tooltip: {title: `Survey gives you information about the items to be found on this layer. It also fully damages ${App.game.underground.getSurvey_Efficiency()} (cleared or uncleared) random tile${App.game.underground.getSurvey_Efficiency() > 1 ? 's' : ''}.`, trigger: 'hover', placement: 'top'}">
                             Survey (<knockout data-bind="text: App.game.underground.getSurvey_Cost()"></knockout> energy)
                         </button>
@@ -242,20 +242,20 @@
     <script type="text/html" id="treasureListTemplate">
         <tr data-bind='if: amount() > 0'>
             <td class='vertical-middle'>
-                <img class='mineInventoryItem' data-bind='attr:{ src: Underground.getMineItemById(id).image }'>
+                <img class='mineInventoryItem' data-bind='attr:{ src: UndergroundItems.getById(id).image }'>
                 <span data-bind="text: '('+$data.amount().toLocaleString('en-US')+')'"></span>
             </td>
             <td class='vertical-middle' data-bind='text: name'></td>
-            <!-- ko if: (Underground.getMineItemById(id).isShard() || valueType == "Mine Egg") -->
+            <!-- ko if: (valueType == UndergroundItemValueType.Shard || valueType == UndergroundItemValueType.Fossil) -->
             <td></td>
             <!-- /ko -->
-            <!-- ko ifnot: (Underground.getMineItemById(id).isShard() || valueType == "Mine Egg")  -->
-            <td class='vertical-middle' data-bind='text: value + " " + GameConstants.camelCaseToString(UndergroundItem.getFullResourceName(valueType, value))'></td>
+            <!-- ko ifnot: (valueType == UndergroundItemValueType.Shard || valueType == UndergroundItemValueType.Fossil)  -->
+            <td class='vertical-middle' data-bind='text: value + " " + GameConstants.camelCaseToString(UndergroundItems.getFullResourceName($data, value))'></td>
             <!-- /ko -->
             <td class='vertical-middle'>
-                <!-- ko ifnot: Underground.getMineItemById(id).isShard() -->
+                <!-- ko ifnot: valueType == UndergroundItemValueType.Shard -->
                 <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
-                    <!-- ko ifnot: valueType == "Mine Egg" -->
+                    <!-- ko ifnot: valueType == UndergroundItemValueType.Fossil -->
                     <label
                     class="input-group-prepend btn btn-success active clickable m-0"
                         data-bind="text: sellLocked() ? '🔒' : '🔓', attr: { for: 'sellLockedIndicatorOfItem' + id }"
@@ -268,11 +268,11 @@
                     <!-- /ko -->
                     <button class='btn btn-success btn-block'
                             data-bind="attr: { 'data-itemid': id },
-                            css: { disabled: amount() <= 0 || sellLocked() || (valueType === 'Mine Egg' && !App.game.breeding.hasFreeEggSlot()) },
-                                    text: valueType === 'Mine Egg' ? 'Breed' : 'Sell',
+                            css: { disabled: amount() <= 0 || sellLocked() || (valueType === UndergroundItemValueType.Fossil && !App.game.breeding.hasFreeEggSlot()) },
+                                    text: valueType === UndergroundItemValueType.Fossil ? 'Breed' : 'Sell',
                                     click: function(){Underground.sellMineItem($element.dataset.itemid, sellAmount() || 1)}">
                     </button>
-                    <!-- ko if: valueType !== 'Mine Egg' -->
+                    <!-- ko if: valueType !== UndergroundItemValueType.Fossil -->
                     <button type="button" data-bind="text: sellAmount() + '&nbsp;', css: { disabled: sellLocked() }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
@@ -288,13 +288,13 @@
 
 <div aria-labelledby="mineSellAllTreasuresModalLabel" class="modal fade noselect mt-5" id="mineSellAllTreasuresModal" role="dialog"
      style="cursor:default" tabindex="-1">
-    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document" data-bind="let: { filteredMineInvetory: player.mineInventory().filter(t => t.amount() > 0 && t.valueType != 'Mine Egg' && !Underground.getMineItemById(t.id).isShard()) }">
+    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document" data-bind="let: { filteredMineInventory: player.mineInventory().filter(t => t.amount() > 0 && t.valueType !== UndergroundItemValueType.Fossil && t.valueType !== UndergroundItemValueType.Shard) }">
         <div class="modal-content">
             <div class="modal-header d-block">
                 <h4 class="mb-0">
                     Sell all selected treasures
                 </h4>
-                (<span data-bind="text: filteredMineInvetory.filter(t => !t.sellLocked()).length + ' of ' + filteredMineInvetory.length"></span>)
+                (<span data-bind="text: filteredMineInventory.filter(t => !t.sellLocked()).length + ' of ' + filteredMineInventory.length"></span>)
             </div>
             <div class="modal-body p-0">
                 <table class="table table-sm table-hover table-striped m-0">
@@ -319,12 +319,12 @@
     </div>
 
     <script type="text/html" id="cumulativeValueListTemplate">
-        <tr data-bind="let: { valueType: $data, cumulativeValue: Underground.getCumulativeValues()[$data].cumulativeValue, imgSrc: Underground.getCumulativeValues()[$data].imgSrc }">
+        <tr data-bind="let: { type: $data, cumulativeValue: Underground.getCumulativeValues()[$data].cumulativeValue, imgSrc: Underground.getCumulativeValues()[$data].imgSrc }">
             <td>
                 <img width="20px'" data-bind="attr: { src: imgSrc }">
             </td>
             <td>
-                <span data-bind="text: cumulativeValue.toLocaleString('en-US') + ' ' + GameConstants.camelCaseToString(UndergroundItem.getFullResourceName(valueType, cumulativeValue))"></span>
+                <span data-bind="text: cumulativeValue.toLocaleString('en-US') + ' ' + type"></span>
             </td>
         </tr>
     </script>

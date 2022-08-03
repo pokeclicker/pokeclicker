@@ -11,6 +11,16 @@ import ChangelogUpdate from './ChangelogUpdate';
 const ChangelogItems = [
     // note that month is 0 indexed
     // v0.9.9
+    new ChangelogUpdate('v0.9.10', new Date(2022, 7, 3)),
+    new Changelog(changelogType.NEW, 'Added Furfrou (star)'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc NPC changes'),
+    new Changelog(changelogType.FIXED, 'Underground survey now shows shards'),
+    new Changelog(changelogType.FIXED, 'Correct amount of Chest/Enemies shown in Dungeon'),
+    new Changelog(changelogType.FIXED, 'Dungeon loot requirements'),
+
+    // v0.9.9
     new ChangelogUpdate('v0.9.9', new Date(2022, 6, 22)),
     new Changelog(changelogType.FIXED, 'Hatching new Pokémon causing errors'),
     new Changelog(changelogType.FIXED, 'Pokémon gaining Pokérus and EVs early'),
