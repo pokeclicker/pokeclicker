@@ -27,7 +27,7 @@ class Egg implements Saveable {
         this.init();
     }
 
-    private init() {
+    private init(initial = false) {
         this.progress = ko.pureComputed(function () {
             return this.steps() / this.totalSteps * 100;
         }, this);
@@ -48,10 +48,15 @@ class Egg implements Saveable {
             this.pokemonType1 = PokemonType.Normal;
             this.pokemonType2 = PokemonType.Normal;
         }
-        // Deferring this because it wants to access App.game.party, which isn't avaliable yet
-        setTimeout(() => {
+
+        if (initial) {
+            // Deferring this because it wants to access App.game.party, which isn't avaliable yet
+            setTimeout(() => {
+                this.partyPokemon = this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.pokemon).id) : null;
+            }, 0);
+        } else {
             this.partyPokemon = this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.pokemon).id) : null;
-        }, 0);
+        }
     }
 
     isNone() {
@@ -189,6 +194,6 @@ class Egg implements Saveable {
         this.pokemon = json.pokemon;
         this.type = json.type;
         this.notified = json.notified;
-        this.init();
+        this.init(true);
     }
 }
