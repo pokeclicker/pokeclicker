@@ -52,6 +52,20 @@ SpecialEvents.newEvent('Lunar New Year', 'Encounter Fancy Pattern Vivillon for a
         RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Fancy)');
     }
 );
+//Hoopa Day
+SpecialEvents.newEvent('Hoopa Day', 'The Mischief Pokémon unleashes his tricks upon the world.',
+    // Start
+    new Date(new Date().getFullYear(), 3, 1, 1), () => {
+        const pikabluQuestLine = App.game.quests.getQuestLine('How blu mouse?');
+        if (pikabluQuestLine.state() == QuestLineState.inactive) {
+            App.game.quests.getQuestLine('How blu mouse?').beginQuest();
+        }
+    },
+    // End
+    new Date(new Date().getFullYear(), 3, 2, 1), () => {
+        // do not end questline, so ppl can finish it
+    }
+);
 // Easter
 SpecialEvents.newEvent('Easter', 'Encounter Surprise Togepi for a limited time with a dedicated Quest Line.',
     // Start
