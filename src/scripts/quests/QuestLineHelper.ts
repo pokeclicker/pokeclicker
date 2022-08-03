@@ -1109,6 +1109,23 @@ class QuestLineHelper {
         App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
     }
 
+    public static createHoopaDayPikabluQuestLine() {
+        const hoopaDayPikabluQuestLine = new QuestLine('How blu mouse?', 'Apparently a strange blue mouse-like Pokémon might be out there somewhere?');
+
+        const PikabluCatch = new CaptureSpecificPokemonQuest(
+            'Marill',
+            'Catch Pikablu.',
+            1,
+            false,
+            5000,
+            undefined
+        );
+
+        hoopaDayPikabluQuestLine.addQuest(PikabluCatch);
+
+        App.game.quests.questLines().push(hoopaDayPikabluQuestLine);
+    }
+
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
@@ -1137,5 +1154,6 @@ class QuestLineHelper {
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
+        this.createHoopaDayPikabluQuestLine();
     }
 }
