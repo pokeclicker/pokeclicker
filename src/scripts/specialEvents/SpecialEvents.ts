@@ -58,7 +58,7 @@ SpecialEvents.newEvent('Hoopa Day', 'The Mischief Pokémon unleashes his tricks 
     new Date(new Date().getFullYear(), 3, 1, 1), () => {
         const pikabluQuestLine = App.game.quests.getQuestLine('How blu mouse?');
         if (pikabluQuestLine.state() == QuestLineState.inactive) {
-            App.game.quests.getQuestLine('How blu mouse').beginQuest();
+            App.game.quests.getQuestLine('How blu mouse?').beginQuest();
         }
     },
     // End
