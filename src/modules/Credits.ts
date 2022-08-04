@@ -376,6 +376,17 @@ export const SpriteCredits: Credit[] = [
         ],
         // Notes: Permission given on image page when asked.
     },
+    {
+        name: 'Zender1752',
+        link: 'https://www.deviantart.com/zender1752',
+        image: 'https://a.deviantart.net/avatars-big/z/e/zender1752.png',
+        resources: [
+            'Hau overworld',
+            'Gladion overworld',
+            'Plumeria overworld',
+        ],
+        // Notes: Permission given on image page if credited
+    },
 ].map((c) => {
     SeededRand.seed(parseInt(c.name, 36));
     // eslint-disable-next-line no-param-reassign
