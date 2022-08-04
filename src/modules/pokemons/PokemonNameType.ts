@@ -1235,6 +1235,7 @@ export type PokemonNameType
     | 'Gigantamax Urshifu (Single Strike)'
     | 'Gigantamax Urshifu (Rapid Strike)'
     | 'Zarude'
+    | 'Zarude (Dada)'
     | 'Regieleki'
     | 'Regidrago'
     | 'Glastrier'

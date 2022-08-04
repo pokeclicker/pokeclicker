@@ -21723,6 +21723,26 @@ const pokemonList = createPokemonArray(
         'exp': 335,
     },
     {
+        'id': 893.1,
+        'name': 'Zarude (Dada)',
+        'type': [
+            PokemonType.Dark,
+            PokemonType.Grass,
+        ],
+        'base': {
+            'hitpoints': 105,
+            'attack': 120,
+            'specialAttack': 70,
+            'defense': 105,
+            'specialDefense': 95,
+            'speed': 105,
+        },
+        'catchRate': 3,
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 335,
+    },
+    {
         'id': 894,
         'name': 'Regieleki',
         'type': [PokemonType.Electric],
