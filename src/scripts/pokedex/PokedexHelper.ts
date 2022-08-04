@@ -70,6 +70,7 @@ class PokedexHelper {
             // Checks based on caught/shiny status
             const alreadyCaught = App.game.party.alreadyCaughtPokemon(pokemon.id);
             const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(pokemon.id, true);
+            const pokerusStatus = App.game.party.getPokemon(pokemon.id)?.pokerus;
 
             // If the Pokemon shouldn't be unlocked yet
             const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
@@ -148,6 +149,26 @@ class PokedexHelper {
                 return false;
             }
 
+            // Only pokemon uninfected by pokerus || None
+            if (filter['status-pokerus'] == 'none' && pokerusStatus != GameConstants.Pokerus.None) {
+                return false;
+            }
+
+            // Only pokemon infected by pokerus
+            if (filter['status-pokerus'] == 'infected' && pokerusStatus != GameConstants.Pokerus.Infected) {
+                return false;
+            }
+
+            // Only pokemon contagious of pokerus
+            if (filter['status-pokerus'] == 'contagious' && pokerusStatus != GameConstants.Pokerus.Contagious) {
+                return false;
+            }
+
+            // Only pokemon cured of pokerus
+            if (filter['status-pokerus'] == 'cured' && pokerusStatus != GameConstants.Pokerus.Cured) {
+                return false;
+            }
+
             return true;
         });
     }
@@ -159,6 +180,7 @@ class PokedexHelper {
         res.type2 = $('#pokedex-filter-type2').val();
         res.region = $('#pokedex-filter-region').val();
         res['caught-shiny'] = $('#pokedex-filter-shiny-caught').val();
+        res['status-pokerus'] = $('#pokedex-filter-pokerus-status').val();
         res['held-item'] = $('#pokedex-filter-held-item').is(':checked');
         res['hide-alternate'] = $('#pokedex-filter-hide-alternate').is(':checked');
         return res;
