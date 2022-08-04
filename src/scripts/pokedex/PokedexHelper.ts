@@ -164,7 +164,7 @@ class PokedexHelper {
                 return false;
             }
 
-            // Only pokemon cured of pokerus
+            // Only pokemon cured of pokerus || Resistant
             if (filter['status-pokerus'] == 'cured' && pokerusStatus != GameConstants.Pokerus.Cured) {
                 return false;
             }
