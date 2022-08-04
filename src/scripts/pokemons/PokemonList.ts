@@ -19377,6 +19377,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 166,
         'catchRate': 45,
+        'evolutions': [
+            new EnvironmentRestrictedLevelEvolution('Water', 'Cramorant', 'Cramorant (Gulping)', 50),
+            new EnvironmentRestrictedLevelEvolution('PowerPlant', 'Cramorant', 'Cramorant (Gorging)', 50),
+        ],
     },
     {
         'id': 845.1,
