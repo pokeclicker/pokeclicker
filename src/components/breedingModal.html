@@ -351,6 +351,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     html: true,
                 }">
             </knockout>
+		   <button type="button" class="btn btn-danger" data-bind="visible : !!App.game.breeding.hatcheryHelpers.hired().length, click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})}">Fire All</button>
            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
        </div>
    </div>
