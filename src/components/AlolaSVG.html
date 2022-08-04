@@ -1594,6 +1594,26 @@
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hau\\'oli City') }"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Professor Kukui's Blimp"
+            , x: 72, y: 30
+            , width: 6, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Iki Town Outskirts')}, attr:{ class: MapHelper.calculateTownCssClass('Iki Town Outskirts') }"
+            , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+            , image: "assets/images/map/blimp_empty.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Professor Kukui's Blimp"
+            , x: 72, y: 30
+            , width: 6, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Iki Town Outskirts')}, attr:{ class: MapHelper.calculateTownCssClass('Iki Town Outskirts') }"
+            , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+            , image: "assets/images/map/blimp_pikachu.png"
+            })
+        %>
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala island').id">
