@@ -14,7 +14,7 @@ class FossilDeal {
         this.fossilpieces = fossilPieceCosts;
         this.fossilpieces.forEach(s => s.fossilPieceType = UndergroundItems.getByName(s.fossilPieceTypeString));
         this.item = {itemType: item, amount: itemAmount};
-        this.questPointCost = 10000
+        this.questPointCost = 10000;
     }
 
     public static getDeals(town: GameConstants.FossilMasterLocations) {
