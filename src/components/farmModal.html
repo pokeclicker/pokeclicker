@@ -33,7 +33,7 @@
                                     <ul id="seedList" class="list-group p-0">
                                         <!-- ko foreach: FarmController.getBerryListWithIndex() -->
                                         <li class="list-group-item list-group-item-action seed-list-item p-2"
-                                            data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
+                                            data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);FarmController.selectedPlotSafeLock(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
                                             <img src="" height="28px"
                                                 data-bind="attr:{ src: FarmController.getBerryImage($data) },
                                                 css: {'berryLocked': !App.game.farming.unlockedBerries[$data]() }">
@@ -81,7 +81,7 @@
                                     <ul id="mulchList" class="list-group p-0">
                                         <!-- ko foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1) -->
                                         <li class="list-group-item list-group-item-action seed-list-item p-2"
-                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);},
+                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);FarmController.selectedPlotSafeLock(false);},
                                                 css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() },
                                                 tooltip: {title: ItemList[MulchType[$data]].description, trigger: 'hover', animation: false}">
                                             <img src="" width="24px"
@@ -116,7 +116,7 @@
                             <ul id="shovelList" class="list-group">
                                 <!-- ko if: FarmController.berryListVisible() -->
                                 <li class="list-group-item list-group-item-action seed-list-item p-2"
-                                    data-bind="click: function() {FarmController.selectedShovel(true);FarmController.selectedMulchShovel(false);},
+                                    data-bind="click: function() {FarmController.selectedShovel(true);FarmController.selectedMulchShovel(false);FarmController.selectedPlotSafeLock(false);},
                                     css: { 'active': FarmController.selectedShovel() },
                                     tooltip: {title: 'Clear a Plant from a plot.', trigger: 'hover', animation: false}">
                                     <img src="" height="24px"
@@ -129,7 +129,7 @@
                             <ul id="shovelMulch" class="list-group p-0">
                                 <!-- ko if: !FarmController.berryListVisible() -->
                                 <li class="list-group-item list-group-item-action seed-list-item p-3"
-                                    data-bind="click: function() {FarmController.selectedMulchShovel(true);FarmController.selectedShovel(false);FarmController.selectedMulch(-1);},
+                                    data-bind="click: function() {FarmController.selectedMulchShovel(true);FarmController.selectedShovel(false);FarmController.selectedMulch(-1);FarmController.selectedPlotSafeLock(false);},
                             css: { 'active': FarmController.selectedMulchShovel() },
                             tooltip: {title: 'Clear a Mulch from a plot.', trigger: 'hover', animation: false}">
                                     <img src="" height="21px"
@@ -151,6 +151,9 @@
                                         <div class="plotImage">
                                             <img style="width: 100%" src="assets/images/farm/soil.png"
                                                 data-bind="class: FarmController.calcMulchClass($data)">
+                                            <!-- ko if: $data.isSafeLocked -->
+                                            <img class ="plotSafeLockIcon" src= "assets/images/farm/plotSafeLock.svg" >
+                                            <!-- /ko -->
                                             <!-- ko if: !$data.isUnlocked -->
                                             <div class="plotButton plotLockHover">
                                                 <div>
@@ -168,7 +171,7 @@
                                             <!-- /ko -->
                                             <div class="plotButton"
                                                 data-bind="ifnot: $data.isEmpty(),
-                                                click: function(){FarmController.plotClick($index())},
+                                                click: function(data, event){FarmController.plotClick($index(), event)},
                                                 tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true}">
                                                 <img width="100%" height="100%" src=""
                                                     style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
@@ -250,6 +253,17 @@
                     <p>If you want to remove a Berry plant before it is fully grown,
                     <br/>you can use a Shovel to uproot it.
                     <br/><i>(shovels can be purchased in later regions from Berry Masters)</i></p>
+
+                    <h4><u>Locking Plots</u></h4>
+                    <p>You can lock specific plots by toggling on the lock with the lock button
+                    <br/>or using the hotkey (default: 'L').
+                    <br/>You can also press <i>Shift + Click</i> while having any tool/berry selected to safely lock a plot.</p>
+
+                    <p>Locking a plot prevents you from planting, harvesting,<br/>or interacting with the plot in any way.</p>
+
+                    <p><i>Locked plots ignore Harvest All, Plant All, or Mulch All buttons as well as Farm Hand activity.</i></p>
+
+                    <p>You can unlock a plot by using the toggle or pressing <i>Shift + Click</i> on the plot again.</p>
 
                     <h4><u>Trades</u></h4>
                     <p>Berries can be traded with Berry Masters in later regions for other useful items.</p>
@@ -387,7 +401,16 @@
                         html: true,
                     }">
                 </knockout>
-				<button id="farm-fireall" type="button" class="btn btn-danger" data-bind="attr : {disabled : !App.game.farming.farmHands.hired().length}, click: function(){App.game.farming.farmHands.hired().forEach(function(f){f.fire();})}" style="display : none;">Fire All</button>
+        				<button id="farm-fireall" type="button" class="btn btn-danger" data-bind="attr : {disabled : !App.game.farming.farmHands.hired().length}, click: function(){App.game.farming.farmHands.hired().forEach(function(f){f.fire();})}" style="display : none;">Fire All</button>
+                <div class="safeLockButton">
+
+                    <button type="button" class="btn btn-primary" data-bind="click: function() {FarmController.selectedPlotSafeLock() ? FarmController.selectedPlotSafeLock(false) : FarmController.selectedPlotSafeLock(true);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);},
+                        css: { 'active': FarmController.selectedPlotSafeLock() },
+                        tooltip: {title: 'Toggle locking a plot from interaction.',  trigger: 'hover', animation: false}"
+                        >
+                        <img src="assets/images/farm/plotSafeLock.svg" height="22">
+                    </button>
+                </div>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
