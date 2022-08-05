@@ -154,11 +154,6 @@ class PokedexHelper {
                 return false;
             }
 
-            // Only pokemon infected by pokerus
-            if (filter['status-pokerus'] == 'infected' && pokerusStatus != GameConstants.Pokerus.Infected) {
-                return false;
-            }
-
             // Only pokemon contagious of pokerus
             if (filter['status-pokerus'] == 'contagious' && pokerusStatus != GameConstants.Pokerus.Contagious) {
                 return false;
