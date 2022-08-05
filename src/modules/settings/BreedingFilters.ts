@@ -59,7 +59,7 @@ const BreedingFilters: Record<string, FilterOption> = {
         'breedingPokerusFilter',
         [
             new SettingOption('All', '-1'),
-            ...Settings.enumToSettingOptionArray(Pokerus).map((t) => new SettingOption(['Uninfected', 'Infected', 'Contagious', 'Resistant'][t.value], t.value)),
+            ...Settings.enumToSettingOptionArray(Pokerus),
         ],
     ),
 };

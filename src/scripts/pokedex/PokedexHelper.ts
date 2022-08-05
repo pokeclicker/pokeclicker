@@ -150,7 +150,7 @@ class PokedexHelper {
             }
 
             // Only pokemon uninfected by pokerus || None
-            if (filter['status-pokerus'] == 'none' && pokerusStatus != GameConstants.Pokerus.None) {
+            if (filter['status-pokerus'] == 'uninfected' && pokerusStatus != GameConstants.Pokerus.Uninfected) {
                 return false;
             }
 
@@ -165,7 +165,7 @@ class PokedexHelper {
             }
 
             // Only pokemon cured of pokerus || Resistant
-            if (filter['status-pokerus'] == 'cured' && pokerusStatus != GameConstants.Pokerus.Cured) {
+            if (filter['status-pokerus'] == 'resistant' && pokerusStatus != GameConstants.Pokerus.Resistant) {
                 return false;
             }
 
