@@ -13,7 +13,7 @@ class Egg implements Saveable {
     progress: KnockoutComputed<number>;
     progressText: KnockoutComputed<string>;
     stepsRemaining: KnockoutComputed<number>;
-    partyPokemon: PartyPokemon;
+    partyPokemon: KnockoutObservable<PartyPokemon>;
 
     constructor(
         public type = EggType.None,
@@ -24,6 +24,7 @@ class Egg implements Saveable {
         public notified = false
     ) {
         this.steps = ko.observable(steps);
+        this.partyPokemon = ko.observable();
         this.init();
     }
 
@@ -49,14 +50,10 @@ class Egg implements Saveable {
             this.pokemonType2 = PokemonType.Normal;
         }
 
-        if (initial) {
-            // Deferring this because it wants to access App.game.party, which isn't avaliable yet
-            setTimeout(() => {
-                this.partyPokemon = this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.pokemon).id) : null;
-            }, 0);
-        } else {
-            this.partyPokemon = this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.pokemon).id) : null;
-        }
+        // Deferring this because it wants to access App.game.party, which isn't avaliable yet
+        setTimeout(() => {
+            this.partyPokemon(this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.pokemon).id) : null);
+        }, 0);
     }
 
     isNone() {
@@ -109,7 +106,7 @@ class Egg implements Saveable {
         }
         const shiny = PokemonFactory.generateShiny(this.shinyChance, true);
 
-        const partyPokemon = this.partyPokemon;
+        const partyPokemon = this.partyPokemon();
         // If the party pokemon exist, increase it's damage output
 
         const pokemonID = PokemonHelper.getPokemonByName(this.pokemon).id;
