@@ -301,6 +301,13 @@ namespace GameConstants {
         'Rose Shard',
         'Brown Shard',
     }
+    declare enum FossilPieceType {
+        'None',
+        'Fossilized Bird',
+        'Fossilized Fish',
+        'Fossilized Drake',
+        'Fossilized Dino',
+    }
     declare enum BattleItemType {
         'xAttack' = '',
         'xClick' = '',
@@ -340,6 +347,10 @@ namespace GameConstants {
         'Meloetta (pirouette)',
         'Type: Null',
         'Poipole',
+        'Dracozolt',
+        'Arctozolt',
+        'Dracovish',
+        'Arctovish',
         'Eternatus',
         'Kubfu',
     }
@@ -541,6 +552,9 @@ namespace GameConstants {
         'Circhester',
         'Spikemuth',
         'Master Dojo',
+    }
+    declare enum FossilMasterLocations {
+        'Stow-on-Side',
     }
     declare enum KantoSubRegions {
         Kanto,

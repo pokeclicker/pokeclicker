@@ -681,6 +681,14 @@ export enum ShardType {
     'Cyan Shard',
 }
 
+export enum FossilPieceType {
+    'None' = -1,
+    'Fossilized Bird',
+    'Fossilized Fish',
+    'Fossilized Drake',
+    'Fossilized Dino',
+}
+
 export enum BattleItemType {
     'xAttack' = 'xAttack',
     'xClick' = 'xClick',
@@ -722,6 +730,10 @@ export enum PokemonItemType {
     'Meloetta (Pirouette)',
     'Type: Null',
     'Poipole',
+    'Dracozolt',
+    'Arctozolt',
+    'Dracovish',
+    'Arctovish',
     'Eternatus',
     'Kubfu',
 }
@@ -1392,6 +1404,11 @@ export enum ShardTraderLocations {
     'Circhester',
     'Spikemuth',
     'Master Dojo',
+}
+
+export enum FossilMasterLocations {
+    'None' = -1,
+    'Stow-on-Side' = 0,
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

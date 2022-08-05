@@ -3631,7 +3631,7 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
 TownList.Postwick = new Town(
     'Postwick',
     GameConstants.Region.galar,
-    [PostwickShop],
+    [PostwickShop, new FossilMasterShop(GameConstants.FossilMasterLocations['Stow-on-Side'])],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
         npcs: [ProfMagnolia, Mom],
@@ -3640,7 +3640,7 @@ TownList.Postwick = new Town(
 TownList['Slumbering Weald'] = new Town(
     'Slumbering Weald',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Mirages, new MoveToDungeon(dungeonList['Slumbering Weald Shrine'])],
+    [TemporaryBattleList.Mirages],
     {
         requirements: [new TemporaryBattleRequirement('Hop1')],
     }
@@ -3689,7 +3689,7 @@ TownList.Hulbury = new Town(
 TownList['Stow-on-Side'] = new Town(
     'Stow-on-Side',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Bede3, TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side'])],
+    [TemporaryBattleList.Bede3, TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side']), new FossilMasterShop(GameConstants.FossilMasterLocations['Stow-on-Side'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
     }
