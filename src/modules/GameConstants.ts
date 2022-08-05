@@ -1338,10 +1338,10 @@ export enum DayOfWeek {
 }
 
 export enum Pokerus {
-    'None' = 0,
+    'Uninfected' = 0,
     'Infected',
     'Contagious',
-    'Cured',
+    'Resistant',
 }
 
 // Subregions
