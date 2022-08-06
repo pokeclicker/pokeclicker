@@ -253,7 +253,7 @@
             <td class='vertical-middle' data-bind='text: value + " " + GameConstants.camelCaseToString(UndergroundItems.getFullResourceName($data, value))'></td>
             <!-- /ko -->
             <td class='vertical-middle'>
-                <!-- ko ifnot: valueType == UndergroundItemValueType.Shard -->
+                <!-- ko ifnot: valueType == UndergroundItemValueType.Shard || valueType == UndergroundItemValueType.FossilPiece -->
                 <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
                     <!-- ko ifnot: valueType == UndergroundItemValueType.Fossil -->
                     <label
