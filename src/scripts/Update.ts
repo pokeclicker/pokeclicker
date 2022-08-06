@@ -1043,6 +1043,35 @@ class Update implements Saveable {
             if (saveData.badgeCase[78]) {
                 saveData.quests.questLines.push({state: 1, name: 'The Missing Primals', quest: 0});
             }
+            // Add Delta Petalburg Woods
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 108);
+            // Add Delta Rusturf Tunnel
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 109);
+            // Add Delta Granite Cave
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 110);
+            // Add Delta Fiery Path
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 111);
+            // Add Delta Fiery Path
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 112);
+            // Add Delta Fiery Path
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 113);
+            // Add Delta New Mauville
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 114);
+            // Add Delta Mt. Pyre
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 115);
+            // Add Delta Shoal Cave
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 116);
+            // Add Delta Cave of Origin
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 117);
+            // Add Delta Sky Pillar
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 118);
+            // Add Delta Victory Road Hoenn
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 119);
+            // Add Marine Cave
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 120);
+            // Add Terra Cave
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 121);
+            
         },
 
     };
