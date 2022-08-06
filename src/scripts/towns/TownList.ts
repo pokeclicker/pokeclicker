@@ -3640,7 +3640,7 @@ TownList.Postwick = new Town(
 TownList['Slumbering Weald'] = new Town(
     'Slumbering Weald',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Mirages],
+    [TemporaryBattleList.Mirages, new MoveToDungeon(dungeonList['Slumbering Weald Shrine'])],
     {
         requirements: [new TemporaryBattleRequirement('Hop1')],
     }
