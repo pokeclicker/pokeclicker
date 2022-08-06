@@ -32,7 +32,7 @@ class MapHelper {
             //check if player is not on town or dungeon and check actual route is complete or destination route is complete
             if (player.route() != 0 && !(actualRoute || destinationRoute)) {
                 return Notifier.notify({
-                    message: 'You have not complete shiny route',
+                    message: 'All shinies in the previous route must be caught first.',
                     type: NotificationConstants.NotificationOption.warning,
                 });
             }

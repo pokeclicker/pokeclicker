@@ -16,7 +16,7 @@ export default class Challenges implements Saveable {
         disableGems: new Challenge('No Gem', 'Disables the usage of Gems for increasing damage multipliers'),
         disableProteins: new Challenge('No Protein', 'Disables the usage of Proteins'),
         slowEVs: new Challenge('Slow EVs', 'Gain EVs 10x slower'),
-        shinyCompleteRoute: new Challenge('Shiny Complete Route', 'Complete each route with shiny pokemon before move to the next'),
+        shinyCompleteRoute: new Challenge('Shiny Complete Route', 'Requires every shiny Pokémon on a route to be captured before moving on to the next route.'),
     };
 
     fromJSON(json): void {

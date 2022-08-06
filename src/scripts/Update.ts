@@ -1041,7 +1041,7 @@ class Update implements Saveable {
         '0.9.11': ({ playerData, saveData }) => {
             setTimeout(async () => {
                 // Check if player wants to activate the new challenge modes
-                if (await Notifier.confirm({ title: 'Shiny Complete Route', message: 'New challenge mode added Shiny Complete Route.\n\nComplete each route with shiny before move to the next.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
+                if (await Notifier.confirm({ title: 'Shiny Complete Route', message: 'New challenge mode added: Shiny Complete Route.\n\nRequires every shiny on a route to be captured before you may move on to the next route.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
                     App.game.challenges.list.shinyCompleteRoute.activate();
                 }
             }, GameConstants.SECOND);
