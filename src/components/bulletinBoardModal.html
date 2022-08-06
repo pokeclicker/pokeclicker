@@ -12,14 +12,16 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                     <tr>
                         <!-- ko foreach: $data -->
                         <td class="col-md-3">
-                            <div class="text-left p-4 bulletin-paper card">
-                                <h5 style="padding-right: 20px;">
-                                    <knockout data-bind="text: $data.name" style="font-size: 1.5rem; font-weight: bold;">Name</knockout>
-                                </h5>
-                                <div class="p-0">
-                                    <knockout data-bind="text: $data.description" style="font-size: 1.3rem;">Description</knockout>
+                            <div class="text-left bulletin-paper card">
+                                <div class="card-footer">
+                                    <h5 class="card-title m-0" data-bind="text: $data.name">Card title</h5>
                                 </div>
-                                <button class="btn btn-primary absolute-bottom" style="position: absolute; bottom: 30px;" data-bind="click: () => { $data.beginQuest(0, undefined, true); }">Accept</button>
+                                <div class="card-body">
+                                    <p class="card-text" data-bind="text: $data.description" style="font-size: 1.3rem;">Description</p>
+                                </div>
+                                <div class="card-footer p-0">
+                                    <button class="btn btn-primary btn-block" data-bind="click: () => { $data.beginQuest(0, undefined, true); }">Accept</button>
+                                </div>
                             </div>
                         </td>
                         <!-- /ko -->
