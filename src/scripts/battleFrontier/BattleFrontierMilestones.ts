@@ -12,12 +12,12 @@ class BattleFrontierMilestones {
     }
 
     public static nextMileStone() {
-        // Get the next possible reward
-        return this.milestoneRewards.find(r => !r.obtained());
+        // Get next reward that is unlocked, not obtained, and earned past the latest stage beaten in the active run.
+        return this.milestoneRewards.find(r => r.isUnlocked() && !r.obtained() && (r.stage > (BattleFrontierRunner.checkpoint() - 1)));
     }
 
     public static availableMilestones() {
-        return BattleFrontierMilestones.milestoneRewards.filter(r => !r.obtained());
+        return BattleFrontierMilestones.milestoneRewards.filter(r => r.isUnlocked() && !r.obtained() && r.stage > (BattleFrontierRunner.checkpoint() - 1));
     }
 
     public static nextMileStoneStage(): number {
@@ -45,7 +45,7 @@ class BattleFrontierMilestones {
         if (reward && reward.stage == defeatedStage) {
             Notifier.notify({
                 title: 'Battle Frontier',
-                message: `You've successfully defeated stage ${defeatedStage.toLocaleString('en-US')} and earned:\n<span>${reward.description}</span>!`,
+                message: `You've successfully defeated stage ${defeatedStage.toLocaleString('en-US')} and earned:\n<span><img src="${reward.image}" height="24px"/> ${reward.description}</span>!`,
                 type: NotificationConstants.NotificationOption.info,
                 setting: NotificationConstants.NotificationSetting.General.battle_frontier,
                 timeout: 1e4,
@@ -56,7 +56,6 @@ class BattleFrontierMilestones {
     }
 }
 
-// TODO: update rewards
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(5, 'Pokeball', 25));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(10, 'Pokeball', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(20, 'Greatball', 100));
@@ -83,4 +82,28 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(240, 'Moon
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(250, 'Ultraball', 6400));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(251, 'Deoxys (Defense)'));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(300, 'Linking_cord', 100));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(310, 'Dragon_scale', 20));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(320, 'Sun_stone', 40));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(330, 'Kings_rock', 20));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(340, 'Metal_coat', 20));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(350, 'Upgrade', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(386, 'Deoxys (Speed)'));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(400, 'Soothe_bell', 40));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(410, 'Deepsea_tooth', 10));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(420, 'Shiny_stone', 40));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(430, 'Deepsea_scale', 10));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(440, 'Dusk_stone', 40, new MaxRegionRequirement(GameConstants.Region.sinnoh)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(450, 'Prism_scale', 10));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(460, 'Dawn_stone', 40, new MaxRegionRequirement(GameConstants.Region.sinnoh)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(470, 'Razor_claw', 10, new MaxRegionRequirement(GameConstants.Region.sinnoh)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(480, 'Razor_fang', 10, new MaxRegionRequirement(GameConstants.Region.sinnoh)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(490, 'Dubious_disc', 10, new MaxRegionRequirement(GameConstants.Region.sinnoh)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(500, 'Ultraball', 10000));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(525, 'Magmarizer', 15, new MaxRegionRequirement(GameConstants.Region.sinnoh)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(550, 'Electirizer', 15, new MaxRegionRequirement(GameConstants.Region.sinnoh)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(575, 'Protector', 15, new MaxRegionRequirement(GameConstants.Region.sinnoh)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(600, 'Reaper_cloth', 15, new MaxRegionRequirement(GameConstants.Region.sinnoh)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(660, 'Sachet', 15, new MaxRegionRequirement(GameConstants.Region.kalos)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(670, 'Whipped_dream', 15, new MaxRegionRequirement(GameConstants.Region.kalos)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(700, 'Ice_stone', 40, new MaxRegionRequirement(GameConstants.Region.alola)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(1000, 'Masterball', 10));
