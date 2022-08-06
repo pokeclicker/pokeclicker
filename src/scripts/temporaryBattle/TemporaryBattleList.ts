@@ -389,7 +389,7 @@ TemporaryBattleList['Team Rocket Leader Giovanni'] = new TemporaryBattle(
         new GymPokemon('Hypno', 60000000, 60),
     ],
     'Snarky text goes here.',
-    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',26)]
+    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',9)]
 );
 
 TemporaryBattleList['Team Aqua Leader Archie'] = new TemporaryBattle(
@@ -402,7 +402,7 @@ TemporaryBattleList['Team Aqua Leader Archie'] = new TemporaryBattle(
         new GymPokemon('Kyogre', 60000000, 60),
     ],
     'Snarky text goes here.',
-    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',27)]
+    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',10)]
 );
 
 TemporaryBattleList['Team Magma Leader Maxie'] = new TemporaryBattle(
@@ -415,7 +415,7 @@ TemporaryBattleList['Team Magma Leader Maxie'] = new TemporaryBattle(
         new GymPokemon('Groudon', 60000000, 60),
     ],
     'Snarky text goes here.',
-    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',28)]
+    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',10)]
 );
 
 TemporaryBattleList['Team Galactic Leader Cyrus'] = new TemporaryBattle(
@@ -429,7 +429,7 @@ TemporaryBattleList['Team Galactic Leader Cyrus'] = new TemporaryBattle(
         new GymPokemon('Palkia', 60000000, 60),
     ],
     'Snarky text goes here.',
-    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',29)]
+    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',11)]
 );
 
 TemporaryBattleList['Team Flare Leader Lysandre'] = new TemporaryBattle(
@@ -443,7 +443,7 @@ TemporaryBattleList['Team Flare Leader Lysandre'] = new TemporaryBattle(
         new GymPokemon('Yveltal', 60000000, 60),
     ],
     'Snarky text goes here.',
-    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',30)]
+    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',12)]
 );
 
 TemporaryBattleList['Team Plasma Leader Ghetsis'] = new TemporaryBattle(
@@ -457,7 +457,7 @@ TemporaryBattleList['Team Plasma Leader Ghetsis'] = new TemporaryBattle(
         new GymPokemon('Reshiram', 60000000, 60),
     ],
     'Snarky text goes here.',
-    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',31)]
+    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',13)]
 );
 
 TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
@@ -470,5 +470,5 @@ TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
         new GymPokemon('Mewtwo', 60000000, 60),
     ],
     'Snarky text goes here.',
-    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',32)]
+    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',14)]
 );

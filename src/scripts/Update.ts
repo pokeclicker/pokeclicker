@@ -1038,6 +1038,12 @@ class Update implements Saveable {
             });
         },
 
+        '0.9.11': ({ playerData, saveData }) => {
+            if (saveData.badgeCase[95]) {
+                Update.startQuestLine(saveData, 'Let\'s Go, Meltan!');
+            }
+        },
+
     };
 
     constructor() {
