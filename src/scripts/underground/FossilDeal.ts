@@ -31,7 +31,7 @@ class FossilDeal {
         } else if (deal.questPointCost > App.game.wallet.currencies[GameConstants.Currency.questPoint]()) {
             return false;
         } else {
-            return deal.shards.every((value) => player.getUndergroundItemAmount(value.fossilPieceType.id) >= value.amount);
+            return deal.fossilpieces.every((value) => player.getUndergroundItemAmount(value.fossilPieceType.id) >= value.amount);
         }
     }
 
