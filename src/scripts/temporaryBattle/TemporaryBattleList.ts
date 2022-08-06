@@ -390,6 +390,12 @@ TemporaryBattleList['Ghetsis 2'] = new TemporaryBattle(
     {
         displayName: 'Ghetsis',
         imageName: 'Ghetsis',
+        firstTimeRewardFunction: () => {
+            App.game.keyItems.gainKeyItem(KeyItemType.DNA_splicers, true);
+            $('#temporaryBattleWonModal').one('hidden.bs.modal', () => {
+                KeyItemController.showGainModal(KeyItemType.DNA_splicers);
+            });
+    },
     }
 );
 // Kalos Temporarybattles
