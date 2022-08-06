@@ -725,7 +725,7 @@
         , x: 95, y: 16
         , width: 4, height: 9
         , databind: "click:function(){MapHelper.moveToTown('Plasma Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('Plasma Frigate') }"
-        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow 1')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() == 0 && (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 15 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2)"
+        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow 1')]() >= 1 && (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() == 0 || (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() <= 15 && App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 1)) && (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 15 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2)"
         , image: "assets/images/map/plasmafrigate_ship.png"
         , connectedToTown: "Plasma Frigate"
         })

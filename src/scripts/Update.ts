@@ -1066,6 +1066,18 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 23);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 24);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 25);
+            // Move player out of Team Plasma Assault
+            if (playerData._townName == ('Team Plasma Assault')) {
+                playerData._townName = ('Opelucid City');
+            }
+            // Move player out of Plasma Frigate
+            if (playerData._townName == ('Plasma Frigate')) {
+                playerData._townName = ('Humilau City');
+            }
+            // Move player out of Giant Chasm
+            if (playerData._townName == ('Giant Chasm')) {
+                playerData._townName = ('Humilau City');
+            }
         },
 
     };
