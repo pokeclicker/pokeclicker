@@ -868,7 +868,7 @@ class QuestLineHelper {
         const meltanCatch30Gulpin = new CustomQuest(30, 0, 'Catch 30 Gulpin', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Gulpin').id]());
         meltanQuestLine.addQuest(meltanCatch30Gulpin);
 
-        const meltanObtain10MB = new CustomQuest(10, 0, 'Obtain 10 Masterballs', () => App.game.statistics.pokeballsBought[GameConstants.Pokeball.Masterball]());
+        const meltanObtain10MB = new CustomQuest(10, 0, 'Obtain 10 Masterballs', () => App.game.statistics.pokeballsPurchased[GameConstants.Pokeball.Masterball]());
         meltanQuestLine.addQuest(meltanObtain10MB);
 
         const meltanCatch35Magnemite = new CustomQuest(35, 0, 'Catch 35 Magnemite', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Magnemite').id]());
