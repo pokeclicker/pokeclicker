@@ -1243,7 +1243,7 @@ export const TemporaryBattles = [
     'Captain Mina UB',
     'Kahuna Nanu UB',
     'Ash Ketchum Alola',
-    'Team Rocket Leader Giovanni',
+    'Aether Branch Chief Faba',
     'Team Aqua Leader Archie',
     'Team Magma Leader Maxie',
     'Team Galactic Leader Cyrus',
