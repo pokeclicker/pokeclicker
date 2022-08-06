@@ -93,7 +93,7 @@ RoamingPokemonList.add(GameConstants.Region.sinnoh, 0, new RoamingPokemon('Cress
 // Unova
 RoamingPokemonList.add(GameConstants.Region.unova, 0, new RoamingPokemon('Tornadus', new GymBadgeRequirement(BadgeEnums.Legend)));
 RoamingPokemonList.add(GameConstants.Region.unova, 0, new RoamingPokemon('Thundurus', new GymBadgeRequirement(BadgeEnums.Legend)));
-RoamingPokemonList.add(GameConstants.Region.unova, 0, new RoamingPokemon('Meloetta (aria)', new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)));
+RoamingPokemonList.add(GameConstants.Region.unova, 0, new RoamingPokemon('Meloetta (Aria)', new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)));
 
 // Kalos
 RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Zapdos', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Sea Spirit\'s Den'))));

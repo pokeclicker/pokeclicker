@@ -15,7 +15,7 @@ class Berry {
         'Tangela', 'Scyther',
         'Pineco', 'Heracross',
         'Volbeat', 'Illumise',
-        'Burmy (plant)', 'Combee', 'Cherubi', 'Munchlax',
+        'Burmy (Plant)', 'Combee', 'Cherubi', 'Munchlax',
         'Sewaddle', 'Karrablast',
         'Cutiefly', 'Bounsweet',
     ];
