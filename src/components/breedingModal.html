@@ -23,11 +23,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
        </div>
        <div class="modal-body p-0">
            <ul class="nav nav-tabs nav-fill">
-                <li class="nav-item"><a class="nav-link active" href="#breeding-pokemon" data-toggle="tab">Pokémon</a></li>
-                <li class="nav-item"><a class="nav-link" href="#breeding-eggs" data-toggle="tab">Eggs</a></li>
-                <li class="nav-item"><a class="nav-link" href="#breeding-fossils" data-toggle="tab">Fossils</a></li>
-                <li class="nav-item" data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()"><a class="nav-link" href="#breeding-helpers" data-toggle="tab">Helpers (BETA)</a></li>
-                <li class="nav-item"><a class="nav-link" href="#breeding-help" data-toggle="tab">Help</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#breeding-pokemon" data-toggle="tab" onclick="$('#breeding-fireall').hide()">Pokémon</a></li>
+                <li class="nav-item"><a class="nav-link" href="#breeding-eggs" data-toggle="tab" onclick="$('#breeding-fireall').hide()">Eggs</a></li>
+                <li class="nav-item"><a class="nav-link" href="#breeding-fossils" data-toggle="tab" onclick="$('#breeding-fireall').hide()">Fossils</a></li>
+                <li class="nav-item" data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()" onclick="$('#breeding-fireall').show()"><a class="nav-link" href="#breeding-helpers" data-toggle="tab">Helpers (BETA)</a></li>
+                <li class="nav-item"><a class="nav-link" href="#breeding-help" data-toggle="tab" onclick="$('#breeding-fireall').hide()">Help</a></li>
             </ul>
 
             <p class="bg-warning my-0" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
@@ -351,6 +351,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     html: true,
                 }">
             </knockout>
+		   <button id="breeding-fireall" type="button" class="btn btn-danger" data-bind="attr : {disabled : !App.game.breeding.hatcheryHelpers.hired().length}, click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})}" style="display : none;">Fire All</button>
            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
        </div>
    </div>

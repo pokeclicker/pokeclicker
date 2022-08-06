@@ -237,6 +237,14 @@ const BigSpender = new NPC('Big Spender', [
     'You can use the Shop Amount Button settings to make it easy for big purchases, too!',
 ]);
 
+const EggHuntErika = new NPC('Erika', [
+    'And here comes another one. Let me guess, you\'re gonna ask me about the Togepi too?',
+    'Listen here you. Just because I\'m the Grass type gym leader doesn\'t mean I know everything that goes on in the forest! I live in one of the biggest cities in the region! With tall buildings! And gambling! And crime! I like it here! I don\'t care about the forest!',
+    '...',
+    'All right, fine. It just so happens that I have heard about <span style="font-style: italic">something</span> going on in Viridian Forest. But I don\'t know what, and I don\'t care! You can go figure it out! I\'m staying here! Viridian Forest doesn\'t even have any Grass types. It\'s all Bugs over there.',
+],
+{ requirement: new MultiRequirement([new QuestLineStartedRequirement('Togepi Egg Hunt'), new QuestLineCompletedRequirement('Togepi Egg Hunt', GameConstants.AchievementOption.less )]) });
+
 const SaffronBattleItemRival = new NPC('Battle Item Master', [
     'Do I know you? Wait... Have you met my worthless rival? Ha! Let me guess, he gave you some unwanted advice?',
     'I bet he forget to tell you that although all Battle Items only last for 30 seconds, they can stack and last for days! Now scram!',
@@ -370,7 +378,7 @@ TownList['Celadon City'] = new Town(
     [CeladonDepartmentStoreShop, CeladonCityShop, new MoveToDungeon(dungeonList['Rocket Game Corner'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
-        npcs: [BigSpender],
+        npcs: [BigSpender, EggHuntErika],
     }
 );
 TownList['Saffron City'] = new Town(
@@ -2676,6 +2684,14 @@ TownList['Camphrier Town'] = new Town(
         npcs: [CamphrierFlabébéEnthusiast],
     }
 );
+TownList['Parfum Palace'] = new Town(
+    'Parfum Palace',
+    GameConstants.Region.kalos,
+    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou Trader')],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)],
+    }
+);
 TownList['Ambrette Town'] = new Town(
     'Ambrette Town',
     GameConstants.Region.kalos,
@@ -2788,11 +2804,6 @@ TownList['Santalune Forest'] = new DungeonTown(
     'Santalune Forest',
     GameConstants.Region.kalos,
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 2)]
-);
-TownList['Parfum Palace'] = new DungeonTown(
-    'Parfum Palace',
-    GameConstants.Region.kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)]
 );
 TownList['Connecting Cave'] = new DungeonTown(
     'Connecting Cave',
@@ -3074,7 +3085,7 @@ const RoadsideMotelAnabel4 = new NPC('Anabel', [
 const RoadsideMotelAnabel5 = new NPC('Anabel', [
     'And so here we are. At the end. And back at the beginning.',
     'Our final target is UB-05 Glutton. Guzzlord. It is very dangerous. You must not underestimate this beast.',
-    'Ten years ago a very similar incident occured. Looker and his team were assigned to fight Guzzlord. Nanu was there too. They lost. Looker lost a collegue that day.',
+    'Ten years ago, a very similar incident occured. Looker and his team were assigned to fight Guzzlord. Nanu was there too. They lost. Looker lost a colleague that day.',
     'After the battle they found something. A strange young girl, alone in the wilderness of Poni Island. They found me. It seems I came from another world as well. Not their world though. These creatures are strange to me too.',
     'I have made myself at home here. I hope Glutton can do the same. Please catch this Guzzlord. End this once and for all.',
 ], { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 16, GameConstants.AchievementOption.more ), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 18, GameConstants.AchievementOption.less )])});

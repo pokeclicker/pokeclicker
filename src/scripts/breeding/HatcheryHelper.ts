@@ -184,14 +184,21 @@ class HatcheryHelpers {
             const steps = Math.max(1, Math.round(amount * (helper.stepEfficiency() / 100)));
 
             // Add steps to the egg we are managing
-            const egg = this.hatchery.eggList[index]();
+            let egg = this.hatchery.eggList[index]();
             egg.addSteps(steps, multiplier);
 
             // Check if the egg is ready to hatch
-            if (egg.progress() >= 100 || egg.isNone()) {
-                egg.hatch(helper.attackEfficiency(), true);
-                this.hatchery.eggList[index](new Egg());
+            if (egg.canHatch()) {
+                const hatched = egg.hatch(helper.attackEfficiency(), true);
+                if (hatched) {
+                    // Reset egg
+                    this.hatchery.eggList[index](new Egg());
+                    egg = this.hatchery.eggList[index]();
+                }
+            }
 
+            // Check if egg slot empty
+            if (egg.isNone()) {
                 // Get the currently selected region
                 const currentRegion = +Settings.getSetting('breedingRegionalAttackDebuffSetting').value;
 

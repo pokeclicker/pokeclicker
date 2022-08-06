@@ -503,6 +503,7 @@ namespace GameConstants {
         'Accumula Town',
         'Nuvema Town',
         'Camphrier Town',
+        'Parfum Palace',
         'Ambrette Town',
         'Cyllage City',
         'Geosenge Town',

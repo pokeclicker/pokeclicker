@@ -108,7 +108,7 @@ class PartyPokemon implements Saveable {
     public calculatePokerus() {
         const eggTypes = this.calculatePokerusTypes();
         return App.game.breeding.eggList.forEach(p => {
-            const pokemon = p().partyPokemon;
+            const pokemon = p().partyPokemon();
             if (pokemon && pokemon.pokerus == GameConstants.Pokerus.None) {
                 const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
                 if (eggTypes.has(dataPokemon.type1) || eggTypes.has(dataPokemon.type2)) {

@@ -33,7 +33,7 @@ class DailyDeal {
     }
 
     private static randomItem(): UndergroundItem {
-        return SeededRand.fromArray(UndergroundItem.list);
+        return SeededRand.fromArray(UndergroundItems.list);
     }
 
     private static randomAmount(): number {
@@ -48,7 +48,11 @@ class DailyDeal {
             return false;
         }
 
-        if (this.item1.isStone() || this.item1.isShard()) {
+        // Left side item cannot be Evolution Item or Shard
+        if (
+            this.item1.valueType == UndergroundItemValueType.EvolutionItem
+            || this.item1.valueType == UndergroundItemValueType.Shard
+        ) {
             return false;
         }
 
