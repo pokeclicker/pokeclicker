@@ -574,7 +574,9 @@ class QuestLineHelper {
             'Exploud',
             'Catch Exploud.',
             1,
-            false
+            false,
+            undefined,
+            undefined
         );
 
         const clearCaveofOrigin = new CustomQuest(5, 0, 'Clear Delta Cave of Origin', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Delta Cave of Origin')]());
@@ -592,7 +594,9 @@ class QuestLineHelper {
             'Castform',
             'Catch some Castform.',
             5,
-            false
+            false,
+            undefined,
+            undefined
         );
 
         primalsQuestLine.addQuest(CatchCastform);
