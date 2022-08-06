@@ -1593,7 +1593,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 103', GameConstants.Region.kalos, 103,
     new RoutePokemon({
-        land: ['Poochyena', 'Zigzagoon', 'Wingull', 'Shellos (west)', 'Shellos (east)', 'Chatot', 'Lillipup'],
+        land: ['Poochyena', 'Zigzagoon', 'Wingull', 'Shellos (West)', 'Shellos (East)', 'Chatot', 'Lillipup'],
         water: ['Tentacool', 'Magikarp', 'Wingull', 'Pelipper', 'Wailmer'],
     }),
     [
@@ -1702,7 +1702,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Delta Route 110', GameConstants.Region.kalos, 110,
     new RoutePokemon({
-        land: ['Oddish', 'Magnemite', 'Voltorb', 'Zigzagoon', 'Wingull', 'Electrike', 'Plusle', 'Minun', 'Gulpin', 'Shellos (west)', 'Shellos (east)', 'Trubbish', 'Chatot'],
+        land: ['Oddish', 'Magnemite', 'Voltorb', 'Zigzagoon', 'Wingull', 'Electrike', 'Plusle', 'Minun', 'Gulpin', 'Shellos (West)', 'Shellos (East)', 'Trubbish', 'Chatot'],
         water: ['Tentacool', 'Magikarp', 'Wingull', 'Pelipper', 'Wailmer'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
