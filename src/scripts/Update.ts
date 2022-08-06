@@ -1037,9 +1037,9 @@ class Update implements Saveable {
                 }
             });
         },
-        
+
         '0.9.11': ({ playerData, saveData }) => {
-        // Start Primals questline if the player has beaten Kalos champion
+            // Start Primals questline if the player has beaten Kalos champion
             if (saveData.badgeCase[78]) {
                 saveData.quests.questLines.push({state: 1, name: 'The Missing Primals', quest: 0});
             }
