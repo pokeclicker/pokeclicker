@@ -3,6 +3,7 @@
  */
 class QuestLineHelper {
 
+    // Kanto QuestLines
     public static createTutorial() {
         const tutorial = new QuestLine('Tutorial Quests', 'A short set of quests to get you going.');
 
@@ -16,13 +17,13 @@ class QuestLineHelper {
 
         //Capture 1 pokemon
         const captureOne = new CustomQuest(1, 20,
-            'Capture 1 Pokémon. When you defeat a Pokémon, a Pokéball is thrown and you have a chance to capture it.',
+            'Capture 1 Pokémon. When you defeat a Pokémon, a Poké Ball is thrown and you have a chance to capture it.',
             () => App.game.statistics.totalPokemonCaptured(),
             1 // Initial of 1 so it auto completes if bugged
         );
         tutorial.addQuest(captureOne);
 
-        //Kill 5 on route 2
+        //Kill 10 on route 2
         const routeTwo = new CustomQuest(10, 20,
             'Defeat 10 Pokémon on Route 2. Click Route 2 on the map to move there and begin fighting.',
             () => App.game.statistics.routeKills[GameConstants.Region.kanto]['2'](),
@@ -30,13 +31,67 @@ class QuestLineHelper {
         );
         tutorial.addQuest(routeTwo);
 
+        //Say bye to mom
+        const talkToMom = new TalkToNPCQuest(PalletMom1, 'Go back to Pallet Town and say bye to mom.');
+        tutorial.addQuest(talkToMom);
+
         //Buy pokeballs
-        const buyPokeballs = new CustomQuest(10, 50,
-            'Buy 10 Pokéballs. You can find these in the Viridian City Shop.',
-            () => App.game.statistics.pokeballsBought[GameConstants.Pokeball.Pokeball](),
+        const buyPokeballs = new CustomQuest(10, 20,
+            'Buy 10 Poké Balls. You can find these in the Viridian City Shop.',
+            () => App.game.statistics.pokeballsPurchased[GameConstants.Pokeball.Pokeball](),
             0 // Initial of 0 so it auto completes if bugged
         );
         tutorial.addQuest(buyPokeballs);
+
+        //Learn about catching from old man
+        const OldManReward = () => {
+            $('#npc-modal').one('hidden.bs.modal', () => {
+                Information.show({
+                    steps: [
+                        {
+                            element: document.getElementById('pokeballSelector'),
+                            intro: 'Select which Poké Ball types to catch Pokémon with based on their caught/shiny status.<br/><i><sup>Hover over the column titles for more info.</sup></i><br/><br/>Capturing Pokémon gains you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens.<br/><br/>Try now by clicking the "Caught" selector to change it.',
+                        },
+                    ],
+                    exitOnEsc: false,
+                    showButtons: false,
+                });
+                const caughtSelector: HTMLElement = document.querySelector('.pokeball-small.clickable.pokeball-selected');
+                caughtSelector.addEventListener('click', () => {
+                    Information.hide();
+                    $('#pokeballSelectorModal').one('shown.bs.modal', null, () => {
+                        // Need to set a timeout, otherwise it messes up the modal layout
+                        setTimeout(() => {
+                            Information.show({
+                                steps: [
+                                    {
+                                        element: document.querySelector('#pokeballSelectorModal .modal-body'),
+                                        intro: 'Select the <img title="Poké Ball" src="assets/images/pokeball/Pokeball.svg" height="25px"> Poké Ball to use this type of ball to capture already caught Pokémon, which will give you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens when captured.',
+                                    },
+                                ],
+                                // Needed for IntroJs on modals
+                                overlayOpacity: 0,
+                            });
+                        }, 100);
+
+                        // Hide the IntroJS overlay once the user selects the Pokeball
+                        const selectPokeball = document.querySelectorAll('#pokeballSelectorModal .clickable')[1];
+                        selectPokeball.addEventListener('click', () => {
+                            Information.hide();
+                        }, {
+                            once: true,
+                        });
+                    });
+                }, {
+                    once: true,
+                });
+            });
+        };
+        const talkToOldMan = new TalkToNPCQuest(ViridianCityOldMan2, 'Talk to the Old Man in Viridian City to learn about catching.', OldManReward);
+        tutorial.addQuest(talkToOldMan);
+
+        const catch5Pidgey = new CustomQuest(5, 30, 'Use what you\'ve learned to catch 5 Pidgey. Talk to the Old Man again if you need a reminder.', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Pidgey').id]());
+        tutorial.addQuest(catch5Pidgey);
 
         //Buy Dungeon ticket
         const buyDungeonTicket = new CustomQuest(1, 50,
@@ -61,7 +116,7 @@ class QuestLineHelper {
                 steps: [
                     {
                         element: document.getElementById('questDisplayContainer'),
-                        intro: 'Click "List" to see the current quests that can be completed for <img title="Quest points" src="assets/images/currency/questPoint.svg" height="25px"> Quest Points.',
+                        intro: 'Click "List" to see the current quests that can be completed for <img title="Quest points" src="assets/images/currency/questPoint.svg" height="24px"> Quest Points.',
                     },
                     {
                         element: document.getElementById('startMenu'),
@@ -78,6 +133,167 @@ class QuestLineHelper {
         tutorial.addQuest(pewter);
 
         App.game.quests.questLines().push(tutorial);
+    }
+
+    public static createRocketKantoQuestLine() {
+        const rocketKantoQuestLine = new QuestLine('Team Rocket', 'Some nasty villains are up to no good.');
+
+        const clearRocketGameCorner = new CustomQuest(1, 0, 'Illegal activity is afoot. Clear the Rocket Game Corner in Celadon City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rocket Game Corner')]());
+        rocketKantoQuestLine.addQuest(clearRocketGameCorner);
+
+        const clearSilphCo = new CustomQuest(1, 0, 'Team Rocket has occupied Silph Co. Clear Silph Co. in Saffron City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Silph Co.')]());
+        rocketKantoQuestLine.addQuest(clearSilphCo);
+
+        const ViridianGymReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            Notifier.notify({
+                title: rocketKantoQuestLine.name,
+                message: 'The President of Silph Co. has rewarded you with a Master Ball!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearViridianGym = new CustomQuest(1, ViridianGymReward, 'If you take down Team Rocket\'s leader one more time they will surely never come back from this! Clear Viridian City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Viridian City')]());
+        rocketKantoQuestLine.addQuest(clearViridianGym);
+
+        App.game.quests.questLines().push(rocketKantoQuestLine);
+    }
+
+    public static createUndergroundQuestLine() {
+        const undergroundQuestLine = new QuestLine('Mining Expedition', 'Explore the underground!');
+
+        //Buy Explorer Kit (no reward)
+        const buyExplorerKit = new CustomQuest(1, () => {}, 'Buy the Explorer Kit from Cinnabar Island Shop.', () => +App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit), 0);
+        undergroundQuestLine.addQuest(buyExplorerKit);
+
+        // Mine 5 layers in the Unerground
+        const oldAmberReward = () => {
+            // Gain an Old Amber
+            const oldAmber = UndergroundItems.list.find(item => item.name == 'Old Amber');
+            if (!oldAmber) {
+                return console.error('Unable to find item Old Amber');
+            }
+            Underground.gainMineItem(oldAmber.id);
+            Notifier.notify({
+                title: undergroundQuestLine.name,
+                message: 'You have gained an Old Amber fossil!\n<i>You can breed this in the hatchery.</i>',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: GameConstants.MINUTE,
+            });
+        };
+        const mineLayers = new CustomQuest(5, oldAmberReward, 'Mine 5 layers in the Underground.', App.game.statistics.undergroundLayersMined);
+        undergroundQuestLine.addQuest(mineLayers);
+
+        App.game.quests.questLines().push(undergroundQuestLine);
+    }
+
+    public static createBillSeviiQuestLine() {
+        const billSeviiQuestLine = new QuestLine('Bill\'s Errand', 'Bill has asked you to journey to the Sevii Islands with him to set up a digital connection to mainland Kanto.');
+
+        const talktoCelio1 = new TalkToNPCQuest(OneIslandCelio1, 'Use the Subregional Travel button at the top of the map to travel to the Sevii Islands and speak with Celio on One Island.');
+        billSeviiQuestLine.addQuest(talktoCelio1);
+
+        const talktoGameCornerOwner1 = new TalkToNPCQuest(TwoIslandGameCornerOwner1, 'Ask the Game Corner owner on Two Island about the meteorite.');
+        billSeviiQuestLine.addQuest(talktoGameCornerOwner1);
+
+        const clearBikerGangTemporaryBattles = new CustomQuest(3, 0, 'A biker gang has invaded Three island. They will not let you continue to Berry Forest. Defeat the Biker Goons.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Biker Goon 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Biker Goon 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Biker Goon 3')]()
+        );
+        billSeviiQuestLine.addQuest(clearBikerGangTemporaryBattles);
+
+        const clearCueBallPaxtonTemporaryBattle = new CustomQuest(1, 0, 'Defeat the biker gang\'s leader.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Cue Ball Paxton')]());
+        billSeviiQuestLine.addQuest(clearCueBallPaxtonTemporaryBattle);
+
+        const clearBerryForest = new CustomQuest(1, 0, 'Find Lostelle. Clear Berry Forest.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Berry Forest')]());
+        billSeviiQuestLine.addQuest(clearBerryForest);
+
+        const talktoGameCornerOwner2 = new TalkToNPCQuest(TwoIslandGameCornerOwner2, 'Lostelle has been found. Return to the Game Corner owner on Two Island.');
+        billSeviiQuestLine.addQuest(talktoGameCornerOwner2);
+
+        const BillsErrandReward = () => {
+            App.game.wallet.gainQuestPoints(1000, true);
+            Notifier.notify({
+                title: billSeviiQuestLine.name,
+                message: 'Celio has rewarded you with 1,000 Quest Points!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talktoCelio2 = new TalkToNPCQuest(OneIslandCelio2, 'Deliver the meteorite to Celio on One Island.', BillsErrandReward);
+        billSeviiQuestLine.addQuest(talktoCelio2);
+
+        App.game.quests.questLines().push(billSeviiQuestLine);
+    }
+
+    public static createPersonsofInterestQuestLine() {
+        const personsofInterestQuestLine = new QuestLine('Persons of Interest', 'Some people want to talk to you.');
+
+        const talktoBreeder = new TalkToNPCQuest(SaffronBreeder, 'Talk to the Breeder in Saffron City.', 250);
+        personsofInterestQuestLine.addQuest(talktoBreeder);
+
+        const talktoGemScientist = new TalkToNPCQuest(PewterScientist, 'Talk to the Gem Scientist in Pewter City.', 250);
+        personsofInterestQuestLine.addQuest(talktoGemScientist);
+
+        App.game.quests.questLines().push(personsofInterestQuestLine);
+    }
+
+    // Johto QuestLines
+    public static createRocketJohtoQuestLine() {
+        const rocketJohtoQuestLine = new QuestLine('Team Rocket Again', 'Team Rocket is up to no good again!');
+
+        const clearTeamRocketHideout = new CustomQuest(1, 0, 'Clear the Team Rocket\'s Hideout dungeon in Mahogany Town', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Rocket\'s Hideout')]());
+        rocketJohtoQuestLine.addQuest(clearTeamRocketHideout);
+
+        const radioTowerReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            Notifier.notify({
+                title: rocketJohtoQuestLine.name,
+                message: 'The grateful radio director gave you a Master Ball!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearRadioTower = new CustomQuest(1, radioTowerReward, 'Clear the Radio Tower dungeon in Goldenrod City', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')]());
+        rocketJohtoQuestLine.addQuest(clearRadioTower);
+
+        App.game.quests.questLines().push(rocketJohtoQuestLine);
+    }
+
+    // Hoenn QuestLines
+    public static createAquaMagmaHoennQuestLine() {
+        const aquaMagmaHoennQuestLine = new QuestLine('Land vs. Water', 'Put a stop to the schemes of Team Aqua and Team Magma!');
+
+        const clearMtChimney = new CustomQuest(1, 0, 'Stop Team Magma at Mt. Chimney Crater.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Chimney Crater')]());
+        aquaMagmaHoennQuestLine.addQuest(clearMtChimney);
+
+        const clearWeatherInstitute = new CustomQuest(1, 0, 'Stop Team Aqua at the Weather Institute.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Weather Institute')]());
+        aquaMagmaHoennQuestLine.addQuest(clearWeatherInstitute);
+
+        const clearMagmaHideout = new CustomQuest(1, 0, 'Raid the Team Magma hideout.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Magma Hideout')]());
+        aquaMagmaHoennQuestLine.addQuest(clearMagmaHideout);
+
+        const clearAquaHideout = new CustomQuest(1, 0, 'Raid the Team Aqua hideout.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aqua Hideout')]());
+        aquaMagmaHoennQuestLine.addQuest(clearAquaHideout);
+
+        const seafloorCavernReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            Notifier.notify({
+                title: aquaMagmaHoennQuestLine.name,
+                message: 'You found a Master Ball!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearSeafloorCavern = new CustomQuest(1, seafloorCavernReward, 'Team Aqua\'s leader Archie escaped from their hideout. Find him in the Seafloor Cavern and put a stop to this once and for all!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seafloor Cavern')]());
+        aquaMagmaHoennQuestLine.addQuest(clearSeafloorCavern);
+
+        App.game.quests.questLines().push(aquaMagmaHoennQuestLine);
     }
 
     public static createDeoxysQuestLine() {
@@ -103,7 +319,7 @@ class QuestLineHelper {
 
         // Capture 200 Psychic type Pokemon
         const mindPlateReward = () => {
-            const mindPlate = UndergroundItem.list.find(item => item.name == 'Mind Plate');
+            const mindPlate = UndergroundItems.list.find(item => item.name == 'Mind Plate');
             if (!mindPlate) {
                 return console.error('Unable to find item Mind Plate');
             }
@@ -134,34 +350,86 @@ class QuestLineHelper {
         App.game.quests.questLines().push(deoxysQuestLine);
     }
 
-    public static createUndergroundQuestLine() {
-        const undergroundQuestLine = new QuestLine('Mining Expedition', 'Explore the underground!');
+    // Sinnoh QuestLines
+    public static createGalacticSinnohQuestLine() {
+        const galacticSinnohQuestLine = new QuestLine('A new world', 'End Team Galactic\'s plan to destroy the world and create a new one in its place.');
 
-        //Buy Explorer Kit (no reward)
-        const buyExplorerKit = new CustomQuest(1, () => {}, 'Buy the Explorer Kit from Cinnabar Island Shop.', () => +App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit), 0);
-        undergroundQuestLine.addQuest(buyExplorerKit);
+        const clearValleyWindworks = new CustomQuest(1, 0, 'Team Galactic is stealing energy. Clear Valley Windworks.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Valley Windworks')]());
+        galacticSinnohQuestLine.addQuest(clearValleyWindworks);
 
-        // Mine 5 layers in the Unerground
-        const oldAmberReward = () => {
-            // Gain an Old Amber
-            const oldAmber = UndergroundItem.list.find(item => item.name == 'Old Amber');
-            if (!oldAmber) {
-                return console.error('Unable to find item Old Amber');
-            }
-            Underground.gainMineItem(oldAmber.id);
+        const clearTeamGalacticEternaBuilding = new CustomQuest(1, 0, 'Team Galactic is kidnapping Pokémon now. Clear Team Galactic Eterna Building in Eterna City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Galactic Eterna Building')]());
+        galacticSinnohQuestLine.addQuest(clearTeamGalacticEternaBuilding);
+
+        const clearPastoriaCityGym = new CustomQuest(1, 0, 'All is quiet. Team Galactic isn\'t doing anything. Guess they learned their lesson. Just keep traveling, I guess. Clear the Pastoria City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pastoria City')]());
+        galacticSinnohQuestLine.addQuest(clearPastoriaCityGym);
+
+        const clearCyrus1TemporaryBattle = new CustomQuest(1, 0, 'The boss of Team Galactic has been spotted in Celestic Town!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galactic Boss Cyrus')]());
+        galacticSinnohQuestLine.addQuest(clearCyrus1TemporaryBattle);
+
+        const clearCanalaveCityGym = new CustomQuest(1, 0, 'Cyrus is gone. Nowhere to be found. Nothing to do but proceed. Adventure awaits! Clear the Canalave City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Canalave City')]());
+        galacticSinnohQuestLine.addQuest(clearCanalaveCityGym);
+
+        const clearLakeValor = new CustomQuest(1, 0, 'A commotion was heard at Lake Valor. You must protect the lake\'s guardian! Clear Lake Valor.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Lake Valor')]());
+        galacticSinnohQuestLine.addQuest(clearLakeValor);
+
+        const clearLakeVerity = new CustomQuest(1, 0, 'Lake Valor\'s guardian was taken. Better try again at the next lake. Clear Lake Verity.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Lake Verity')]());
+        galacticSinnohQuestLine.addQuest(clearLakeVerity);
+
+        const clearLakeAcuity = new CustomQuest(1, 0, 'Lake Verity\'s guardian was also taken. Only one lake remains. Clear Lake Acuity.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Lake Acuity')]());
+        galacticSinnohQuestLine.addQuest(clearLakeAcuity);
+
+        const clearTeamGalacticHQ = new CustomQuest(1, 0, 'You failed to protect any of the lake guardians. They have been taken to Veilstone City. So that\'s what that strange building was... Clear Team Galactic HQ in Veilstone City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Galactic HQ')]());
+        galacticSinnohQuestLine.addQuest(clearTeamGalacticHQ);
+
+        const clearSpearPillar = new CustomQuest(1, 0, 'The lake guardians have been rescued, but Cyrus has used them to forge the Red Chain. He is taking it to the top of Mount Coronet. Follow him! Clear Spear Pillar.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Spear Pillar')]());
+        galacticSinnohQuestLine.addQuest(clearSpearPillar);
+
+        const DistortionWorldReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
             Notifier.notify({
-                title: undergroundQuestLine.name,
-                message: 'You have gained an Old Amber fossil!\n<i>You can breed this in the hatchery.</i>',
+                title: galacticSinnohQuestLine.name,
+                message: 'You found a Master Ball!',
                 type: NotificationConstants.NotificationOption.success,
-                timeout: GameConstants.MINUTE,
+                timeout: 3e4,
             });
         };
-        const mineLayers = new CustomQuest(5, oldAmberReward, 'Mine 5 layers in the Underground.', App.game.statistics.undergroundLayersMined);
-        undergroundQuestLine.addQuest(mineLayers);
 
-        App.game.quests.questLines().push(undergroundQuestLine);
+        const clearDistortionWorld = new CustomQuest(1, DistortionWorldReward, 'Cyrus planned to use the Red Chain to enslave Dialga and Palkia, but he accidentally angered Giratina and has been taken to its realm. A portal has appeared on top of Mount Coronet. Use it to follow Cyrus and end his threat once and for all. Clear Distortion World.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]());
+        galacticSinnohQuestLine.addQuest(clearDistortionWorld);
+
+        App.game.quests.questLines().push(galacticSinnohQuestLine);
     }
 
+    // Unova QuestLines
+    public static createPlasmaUnovaQuestLine() {
+        const plasmaUnovaQuestLine = new QuestLine('Quest for the DNA Splicers', 'Prevent Team Plasma from using these dangerous Splicers.');
+
+        const clearOpelucidGym = new CustomQuest(1, 0, 'Defeat the Opelucid City gym leader to obtain the DNA Splicers', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]());
+        plasmaUnovaQuestLine.addQuest(clearOpelucidGym);
+
+        const clearTeamPlasmaAssault = new CustomQuest(1, 0, 'Zinzolin has stolen the DNA Splicers and is assaulting the city with his army of grunts and shadows! Defend against the Team Plasma Assault in Opelucid City!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Plasma Assault')]());
+        plasmaUnovaQuestLine.addQuest(clearTeamPlasmaAssault);
+
+        const clearPlasmaFrigate = new CustomQuest(1, 0, 'Zinzolin has fled the scene with the stolen DNA Splicers. Find and clear out the Plasma Frigate.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]());
+        plasmaUnovaQuestLine.addQuest(clearPlasmaFrigate);
+
+        const giantChasmReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            Notifier.notify({
+                title: plasmaUnovaQuestLine.name,
+                message: 'You found a Master Ball!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearGiantChasm = new CustomQuest(1, giantChasmReward, 'Team Plasma\'s leader Ghetsis plans on using the DNA Splicers on Kyurem in Giant Chasm. Clear the dungeon to end his evil plans.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]());
+        plasmaUnovaQuestLine.addQuest(clearGiantChasm);
+
+        App.game.quests.questLines().push(plasmaUnovaQuestLine);
+    }
+
+    // Kalos QuestLines
     public static createVivillonQuestLine() {
         const vivillonQuestLine = new QuestLine('The Great Vivillon Hunt!', 'Discover the beauty of Vivillon.');
 
@@ -193,14 +461,13 @@ class QuestLineHelper {
                     type: NotificationConstants.NotificationOption.success,
                 });
             };
-            const catchVivillon = new CustomQuest(
-                1,
-                vivillonRemove,
+            const catchVivillon = new CaptureSpecificPokemonQuest(
+                vivillon,
                 `Find and capture the rare Vivillon!\nHint: ${hint}`,
-                App.game.statistics.pokemonCaptured[pokemonMap[vivillon].id],
-                undefined,
-                vivillonAdd
-            );
+                1,
+                false,
+                vivillonRemove,
+                vivillonAdd);
             vivillonQuestLine.addQuest(catchVivillon);
         };
 
@@ -208,7 +475,7 @@ class QuestLineHelper {
         createVivillonQuest(PokemonType.Psychic, 'Vivillon (Modern)', ['Cerulean Cave'], 'It\'s surrounded by strong Pokémon.');
         createVivillonQuest(PokemonType.Poison, 'Vivillon (Jungle)', ['Moor of Icirrus'], 'It has been spotted in a swamp.');
         createVivillonQuest(PokemonType.Dark, 'Vivillon (Monsoon)', ['Dark Cave'], 'It\'s hiding at a dark place.');
-        createVivillonQuest(PokemonType.Steel, 'Vivillon (Tundra)', ['Pokéball Factory'], 'It flew into a factory.');
+        createVivillonQuest(PokemonType.Steel, 'Vivillon (Tundra)', ['Poké Ball Factory'], 'It flew into a factory.');
         createVivillonQuest(PokemonType.Fire, 'Vivillon (Sun)', ['Mt. Chimney Crater'], 'It seems to like hot places.');
         createVivillonQuest(PokemonType.Fighting, 'Vivillon (Archipelago)', ['Sprout Tower'], 'It\'s sitting on a swaying pillar.');
         createVivillonQuest(PokemonType.Ghost, 'Vivillon (Elegant)', ['Lost Hotel'], 'It\'s visiting an abandoned and spooky place.');
@@ -230,7 +497,7 @@ class QuestLineHelper {
 
         // Capture Vivillon (Pokéball)
         const viviBallAdd = () => {
-            BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(666, 'Vivillon (Pokéball)'));
+            BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(666, 'Vivillon (Poké Ball)'));
             Notifier.notify({
                 title: vivillonQuestLine.name,
                 message: 'A Vivillon is hiding somewhere.\nOnly the strongest Challengers can reach it.',
@@ -240,105 +507,249 @@ class QuestLineHelper {
         const viviBalldone = () => {
             Notifier.notify({
                 title: vivillonQuestLine.name,
-                message: 'You caught the last rare Vivillon (Pokéball).\nCongratulations!',
+                message: 'You caught the last rare Vivillon (Poké Ball).\nCongratulations!',
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchBall = new CustomQuest(
-            1,
-            viviBalldone,
+        const catchBall = new CaptureSpecificPokemonQuest(
+            'Vivillon (Poké Ball)',
             'Find and capture the rare Vivillon!\nHint: Only the strongest Challengers can reach it.',
-            App.game.statistics.pokemonCaptured[666.01],
-            undefined,
-            viviBallAdd
-        );
+            1,
+            false,
+            viviBalldone,
+            viviBallAdd);
         vivillonQuestLine.addQuest(catchBall);
 
         // Add quest to quest line
         App.game.quests.questLines().push(vivillonQuestLine);
     }
 
-    public static createRocketJohtoQuestLine() {
-        const rocketJohtoQuestLine = new QuestLine('Team Rocket Again', 'Team Rocket is up to no good again!');
+    public static createAshKetchumQuestLine() {
+        const ashKetchumQuestLine = new QuestLine('The New Kid', 'A new kid from your home town is making waves. Show him who the real prodigy of Pallet Town is.');
 
-        const clearTeamRocketHideout = new CustomQuest(1, 0, 'Clear the Team Rocket\'s Hideout dungeon in Mahogany Town', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Rocket\'s Hideout')]());
-        rocketJohtoQuestLine.addQuest(clearTeamRocketHideout);
+        const clearKantoAsh = new CustomQuest(1, 0, 'Defeat the kid near Pallet Town.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kanto')]());
+        ashKetchumQuestLine.addQuest(clearKantoAsh);
 
-        const radioTowerReward = () => {
-            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+        const clearJohtoAsh = new CustomQuest(1, 0, 'He\'s not stopping. Find the kid in Johto.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Johto')]());
+        ashKetchumQuestLine.addQuest(clearJohtoAsh);
+
+        const clearHoennAsh = new CustomQuest(1, 0, 'He just won\'t learn his lesson. Defeat the kid again in Hoenn.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Hoenn')]());
+        ashKetchumQuestLine.addQuest(clearHoennAsh);
+
+        const clearSinnohAsh = new CustomQuest(1, 0, 'Who does this kid think he is anyway? Pretending he\'s the main character. He\'s in Sinnoh now.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Sinnoh')]());
+        ashKetchumQuestLine.addQuest(clearSinnohAsh);
+
+        const clearUnovaAsh = new CustomQuest(1, 0, 'The kid is hiding in Unova!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Unova')]());
+        ashKetchumQuestLine.addQuest(clearUnovaAsh);
+
+        const AshKetchumReward = () => {
+            App.game.party.gainPokemonById(658.01);
             Notifier.notify({
-                title: rocketJohtoQuestLine.name,
-                message: 'The grateful radio director gave you a Masterball!',
+                title: ashKetchumQuestLine.name,
+                message: 'You obtained Ash-Greninja!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
         };
 
-        const clearRadioTower = new CustomQuest(1, radioTowerReward, 'Clear the Radio Tower dungeon in Goldenrod City', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')]());
-        rocketJohtoQuestLine.addQuest(clearRadioTower);
+        const clearKalosAsh = new CustomQuest(1, AshKetchumReward, 'Maybe you were too hard on the kid... You should offer him an apology in Kalos.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kalos')]());
+        ashKetchumQuestLine.addQuest(clearKalosAsh);
 
-        App.game.quests.questLines().push(rocketJohtoQuestLine);
+        App.game.quests.questLines().push(ashKetchumQuestLine);
     }
 
-    public static createAquaMagmaHoennQuestLine() {
-        const aquaMagmaHoennQuestLine = new QuestLine('Land vs. Water', 'Put a stop to the schemes of Team Aqua and Team Magma!');
+    // Alola QuestLines
+    public static createSkullAetherAlolaQuestLine() {
+        const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
 
-        const clearMtChimney = new CustomQuest(1, 0, 'Stop Team Magma at Mt. Chimney Crater.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Chimney Crater')]());
-        aquaMagmaHoennQuestLine.addQuest(clearMtChimney);
+        const clearUltraWormhole = new CustomQuest(1, 0, 'A strange creature has appeared in Aether Paradise. Make it go away. Clear the Ultra Wormhole.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ultra Wormhole')]());
+        skullAetherAlolaQuestLine.addQuest(clearUltraWormhole);
 
-        const clearWeatherInstitute = new CustomQuest(1, 0, 'Stop Team Aqua at the Weather Institute.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Weather Institute')]());
-        aquaMagmaHoennQuestLine.addQuest(clearWeatherInstitute);
+        const clearMalieGarden = new CustomQuest(1, 0, 'Team Skull are being annoying. Get rid of them. Clear the Malie Garden dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Malie Garden')]());
+        skullAetherAlolaQuestLine.addQuest(clearMalieGarden);
 
-        const clearMagmaHideout = new CustomQuest(1, 0, 'Raid the Team Magma hideout.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Magma Hideout')]());
-        aquaMagmaHoennQuestLine.addQuest(clearMagmaHideout);
+        const clearPoTown = new CustomQuest(1, 0, 'Team Skull have stolen a child\'s Yungoos. Raid their base. Clear the Po Town dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Po Town')]());
+        skullAetherAlolaQuestLine.addQuest(clearPoTown);
 
-        const clearAquaHideout = new CustomQuest(1, 0, 'Raid the Team Aqua hideout.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aqua Hideout')]());
-        aquaMagmaHoennQuestLine.addQuest(clearAquaHideout);
+        const clearAetherFoundation = new CustomQuest(1, 0, 'Aether president Lusamine has recruited Team Skull in her own plan to stop the Eater of Light. She\'s an idiot. Stop her. Clear the Aether Foundation dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')]());
+        skullAetherAlolaQuestLine.addQuest(clearAetherFoundation);
 
-        const seafloorCavernReward = () => {
+        const UltraMegalopolisReward = () => {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
             Notifier.notify({
-                title: aquaMagmaHoennQuestLine.name,
-                message: 'You found a Masterball!',
+                title: skullAetherAlolaQuestLine.name,
+                message: 'You found a Master Ball!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
         };
 
-        const clearSeafloorCavern = new CustomQuest(1, seafloorCavernReward, 'Team Aqua\'s leader Archie escaped from their hideout. Find him in the Seafloor Cavern and put a stop to this once and for all!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seafloor Cavern')]());
-        aquaMagmaHoennQuestLine.addQuest(clearSeafloorCavern);
+        const clearUltraMegalopolis = new CustomQuest(1, UltraMegalopolisReward, 'Stop the Eater of Light from absorbing all light in Alola. Clear Ultra Megalopolis at the Altar of the Sunne and Moone.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ultra Megalopolis')]());
+        skullAetherAlolaQuestLine.addQuest(clearUltraMegalopolis);
 
-        App.game.quests.questLines().push(aquaMagmaHoennQuestLine);
+        App.game.quests.questLines().push(skullAetherAlolaQuestLine);
     }
 
-    public static createPlasmaUnovaQuestLine() {
-        const plasmaUnovaQuestLine = new QuestLine('Quest for the DNA Splicers', 'Prevent Team Plasma from using these dangerous Splicers.');
+    public static createMinasTrialAlolaQuestLine() {
+        const minasTrialAlolaQuestLine = new QuestLine('Mina\'s Trial', 'Mina has asked you to battle the Trial captains of the other islands to earn access to her Trial site.');
 
-        const clearOpelucidGym = new CustomQuest(1, 0, 'Defeat the Opelucid City gym leader to obtain the DNA Splicers', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]());
-        plasmaUnovaQuestLine.addQuest(clearOpelucidGym);
+        const clearCaptainMina = new CustomQuest(1, 0, 'Defeat Captain Mina in Seafolk Village.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Mina')]());
+        minasTrialAlolaQuestLine.addQuest(clearCaptainMina);
 
-        const clearTeamPlasmaAssault = new CustomQuest(1, 0, 'Zinzolin has stolen the DNA Splicers and is assaulting the city with his army of grunts and shadows! Defend against the Team Plasma Assault in Opelucid City!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Plasma Assault')]());
-        plasmaUnovaQuestLine.addQuest(clearTeamPlasmaAssault);
+        const clearCaptainIlima = new CustomQuest(1, 0, 'Defeat Captain Ilima in Hau\'oli Cemetery.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Ilima')]());
+        minasTrialAlolaQuestLine.addQuest(clearCaptainIlima);
 
-        const clearPlasmaFrigate = new CustomQuest(1, 0, 'Zinzolin has fled the scene with the stolen DNA Splicers. Find and clear out the Plasma Frigate.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]());
-        plasmaUnovaQuestLine.addQuest(clearPlasmaFrigate);
+        const clearCaptainMallow = new CustomQuest(1, 0, 'Defeat Captain Mallow in Lush Jungle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Mallow')]());
+        minasTrialAlolaQuestLine.addQuest(clearCaptainMallow);
 
-        const giantChasmReward = () => {
-            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+        const clearCaptainLana = new CustomQuest(1, 0, 'Defeat Captain Lana in Lush Jungle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Lana')]());
+        minasTrialAlolaQuestLine.addQuest(clearCaptainLana);
+
+        const clearCaptainKiawe = new CustomQuest(1, 0, 'Defeat Captain Kiawe in Wela Volcano Park.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Kiawe')]());
+        minasTrialAlolaQuestLine.addQuest(clearCaptainKiawe);
+
+        const clearCaptainSophocles = new CustomQuest(1, 0, 'Defeat Captain Sophocles in Hokulani Observatory.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Sophocles')]());
+        minasTrialAlolaQuestLine.addQuest(clearCaptainSophocles);
+
+        const clearKahunaNanu = new CustomQuest(1, 0, 'Captain Acerola is apparently busy with something at the top of Mount Lanakila. Defeat Kahuna Nanu in Tapu Village instead.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahuna Nanu')]());
+        minasTrialAlolaQuestLine.addQuest(clearKahunaNanu);
+
+        const clearMinasHouseboat = new CustomQuest(1, 0, 'Complete the Trial! Clear Mina\'s Houseboat in Seafolk Village.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mina\'s Houseboat')]());
+        minasTrialAlolaQuestLine.addQuest(clearMinasHouseboat);
+
+        App.game.quests.questLines().push(minasTrialAlolaQuestLine);
+    }
+
+    public static createUltraBeastQuestLine() {
+        const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts');
+
+        const talkToLooker = new TalkToNPCQuest(RoadsideMotelLooker1, 'Talk to Looker at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToLooker);
+
+        const AnabelReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,5,false);
+        };
+
+        const AnabelBattle = new CustomQuest(
+            1,
+            AnabelReward,
+            'Defeat Agent Anabel at the Roadside Motel.',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anabel')](),
+            0
+        );
+        UltraBeastQuestLine.addQuest(AnabelBattle);
+
+        const talkToAnabel1 = new TalkToNPCQuest(RoadsideMotelAnabel1, 'Talk to Anabel at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToAnabel1);
+
+        const talkToLooker2 = new TalkToNPCQuest(RoadsideMotelLooker2, 'Talk to Looker at the Roadside Motel to learn about Beast Balls.');
+        UltraBeastQuestLine.addQuest(talkToLooker2);
+
+        const createUltraBeastQuest = (ultrabeast: PokemonNameType, hint: string, numberCaught: number, ultraBeastReward?: (() => void)) => {
+            const time = (numberCaught > 0) ?  'times!' : 'time!';
+            const validHint = hint ?? '';
+
+            const catchUltraBeast = new CaptureSpecificPokemonQuest(
+                ultrabeast,
+                `Capture ${ultrabeast} ${numberCaught} ${time} ${validHint}`,
+                numberCaught,
+                false,
+                ultraBeastReward,
+                undefined
+            );
+
+            return catchUltraBeast;
+        };
+        const ultraBeastReward = () => {
             Notifier.notify({
-                title: plasmaUnovaQuestLine.name,
-                message: 'You found a Masterball!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
+                title: UltraBeastQuestLine.name,
+                message: 'An Ultra Beast is hiding somewhere...',
+                type: NotificationConstants.NotificationOption.info,
+                timeout: 3e1,
             });
         };
 
-        const clearGiantChasm = new CustomQuest(1, giantChasmReward, 'Team Plasma\'s leader Ghetsis plans on using the DNA Splicers on Kyurem in Giant Chasm. Clear the dungeon to end his evil plans.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]());
-        plasmaUnovaQuestLine.addQuest(clearGiantChasm);
+        UltraBeastQuestLine.addQuest(createUltraBeastQuest('Nihilego', ' Nihilego has been spotted at Wela Volcano Park and Diglett\'s Tunnel!', 1, ultraBeastReward));
 
-        App.game.quests.questLines().push(plasmaUnovaQuestLine);
+        const talkToAnabel2 = new TalkToNPCQuest(RoadsideMotelAnabel2, 'Talk to Anabel at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToAnabel2);
+
+        UltraBeastQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                createUltraBeastQuest('Buzzwole', undefined, 2),
+                createUltraBeastQuest('Pheromosa', undefined, 4),
+            ], 'Rare Ultra Beasts have been spotted!\nBuzzwole in Melemele Meadow and Pheromosa in Verdant Cavern!', ultraBeastReward));
+
+        const talkToAnabel3 = new TalkToNPCQuest(RoadsideMotelAnabel3, 'Talk to Anabel at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToAnabel3);
+
+        const MinaBattle = new CustomQuest(
+            1,
+            undefined,
+            'Defeat Trial Captain Mina at the Roadside Motel.',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Mina UB')](),
+            0
+        );
+        UltraBeastQuestLine.addQuest(MinaBattle);
+
+        const talkToMina1 = new TalkToNPCQuest(RoadsideMotelMina, 'Talk to Captain Mina at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToMina1);
+
+        UltraBeastQuestLine.addQuest(createUltraBeastQuest('Xurkitree', ' Xurkitree has been spotted at Memorial Hill and Lush Jungle!', 2, ultraBeastReward));
+
+        const talkToNanu1 = new TalkToNPCQuest(RoadsideMotelNanu1, 'Talk to Kahuna Nanu at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToNanu1);
+
+        UltraBeastQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                createUltraBeastQuest('Kartana', undefined, 4),
+                createUltraBeastQuest('Celesteela', undefined, 2),
+            ], 'Rare Ultra Beasts have been spotted! Kartana at Malie Garden and Route 17, and Celesteela at Malie Garden and Haina Desert!', ultraBeastReward));
+
+        const talkToNanu2 = new TalkToNPCQuest(RoadsideMotelNanu2, 'Talk to Kahuna Nanu at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToNanu2);
+
+        const NanuBattle = new CustomQuest(
+            1,
+            undefined,
+            'Defeat Kahuna Nanu at the Roadside Motel.',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahuna Nanu UB')](),
+            0
+        );
+        UltraBeastQuestLine.addQuest(NanuBattle);
+
+        const talkToAnabel4 = new TalkToNPCQuest(RoadsideMotelAnabel4, 'Talk to Anabel at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToAnabel4);
+
+        UltraBeastQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                createUltraBeastQuest('Blacephalon', undefined, 5),
+                createUltraBeastQuest('Stakataka', undefined, 5),
+            ], 'Rare Ultra Beasts have been spotted! Blacephalon and Stakataka are both at Poni Grove!', ultraBeastReward));
+
+        const talkToAnabel5 = new TalkToNPCQuest(RoadsideMotelAnabel5, 'Talk to Anabel at the Roadside Motel.');
+        UltraBeastQuestLine.addQuest(talkToAnabel5);
+
+        const GuzzlordReward = () => {
+            Notifier.notify({ message: 'You caught all the Ultra Beasts!', type: NotificationConstants.NotificationOption.success });
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Beastball,50,false);
+        };
+
+        const GuzzlordCatch = new CaptureSpecificPokemonQuest(
+            'Guzzlord',
+            'Catch Guzzlord at Resolution Cave.',
+            1,
+            false,
+            GuzzlordReward,
+            undefined
+        );
+
+        UltraBeastQuestLine.addQuest(GuzzlordCatch);
+
+        App.game.quests.questLines().push(UltraBeastQuestLine);
     }
 
+    // Event QuestLines
     public static createFindSurpriseTogepiForEasterQuestLine() {
         const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted, but cannot be found!');
 
@@ -359,7 +770,7 @@ class QuestLineHelper {
 
             dungeonList['Viridian Forest'].bossList = dungeonList['Viridian Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const defeatTogepiInKanto = new CustomQuest(1, afterDefeatingTogepiInKanto, 'Erika reported that a strange Togepi has been seen around Kanto. Go look for it!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 0, togepiInKantoSetup);
+        const defeatTogepiInKanto = new CustomQuest(1, afterDefeatingTogepiInKanto, 'A strange Togepi has been seen around Kanto. Go look for it! Maybe Erika knows more.', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 0, togepiInKantoSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(defeatTogepiInKanto);
 
         const togepiInJohtoSetup = () => {
@@ -397,81 +808,21 @@ class QuestLineHelper {
         App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
     }
 
-    public static createSkullAetherAlolaQuestLine() {
-        const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
+    public static createHoopaDayPikabluQuestLine() {
+        const hoopaDayPikabluQuestLine = new QuestLine('How blu mouse?', 'Apparently a strange blue mouse-like Pokémon might be out there somewhere?');
 
-        const clearUltraWormhole = new CustomQuest(1, 0, 'A strange creature has appeared in Aether Paradise. Make it go away. Clear the Ultra Wormhole.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ultra Wormhole')]());
-        skullAetherAlolaQuestLine.addQuest(clearUltraWormhole);
+        const PikabluCatch = new CaptureSpecificPokemonQuest(
+            'Marill',
+            'Catch Pikablu.',
+            1,
+            false,
+            5000,
+            undefined
+        );
 
-        const clearMalieGarden = new CustomQuest(1, 0, 'Team Skull are being annoying. Get rid of them. Clear the Malie Garden dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Malie Garden')]());
-        skullAetherAlolaQuestLine.addQuest(clearMalieGarden);
+        hoopaDayPikabluQuestLine.addQuest(PikabluCatch);
 
-        const clearPoTown = new CustomQuest(1, 0, 'Team Skull have stolen a child\'s Yungoos. Raid their base. Clear the Po Town dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Po Town')]());
-        skullAetherAlolaQuestLine.addQuest(clearPoTown);
-
-        const clearAetherFoundation = new CustomQuest(1, 0, 'Aether president Lusamine has recruited Team Skull in her own plan to stop the Eater of Light. She\'s an idiot. Stop her. Clear the Aether Foundation dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')]());
-        skullAetherAlolaQuestLine.addQuest(clearAetherFoundation);
-
-        const UltraMegalopolisReward = () => {
-            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
-            Notifier.notify({
-                title: skullAetherAlolaQuestLine.name,
-                message: 'You found a Masterball!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
-
-        const clearUltraMegalopolis = new CustomQuest(1, UltraMegalopolisReward, 'Stop the Eater of Light from absorbing all light in Alola. Clear Ultra Megalopolis at the Altar of the Sunne and Moone.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ultra Megalopolis')]());
-        skullAetherAlolaQuestLine.addQuest(clearUltraMegalopolis);
-
-        App.game.quests.questLines().push(skullAetherAlolaQuestLine);
-    }
-
-    public static createGalacticSinnohQuestLine() {
-        const galacticSinnohQuestLine = new QuestLine('A new world', 'End Team Galactic\'s plan to destroy the world and create a new one in its place.');
-
-        const clearValleyWindworks = new CustomQuest(1, 0, 'Team Galactic is stealing energy. Clear Valley Windworks.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Valley Windworks')]());
-        galacticSinnohQuestLine.addQuest(clearValleyWindworks);
-
-        const clearTeamGalacticEternaBuilding = new CustomQuest(1, 0, 'Team Galactic is kidnapping Pokémon now. Clear Team Galactic Eterna Building in Eterna City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Galactic Eterna Building')]());
-        galacticSinnohQuestLine.addQuest(clearTeamGalacticEternaBuilding);
-
-        const clearVeilstoneCityGym = new CustomQuest(1, 0, 'All is quiet. Team Galactic isn\'t doing anything. Guess they learned their lesson. Just keep traveling, I guess. Clear the Veilstone City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Veilstone City')]());
-        galacticSinnohQuestLine.addQuest(clearVeilstoneCityGym);
-
-        const clearCanalaveCityGym = new CustomQuest(1, 0, 'That sure is a strange building in Veilstone City. Oh well, no use worrying about that now. Adventure awaits! Clear the Canalave City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Canalave City')]());
-        galacticSinnohQuestLine.addQuest(clearCanalaveCityGym);
-
-        const clearLakeValor = new CustomQuest(1, 0, 'A commotion was heard at Lake Valor. You must protect the lake\'s guardian! Clear Lake Valor.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Lake Valor')]());
-        galacticSinnohQuestLine.addQuest(clearLakeValor);
-
-        const clearLakeVerity = new CustomQuest(1, 0, 'Lake Valor\'s guardian was taken. Better try again at the next lake. Clear Lake Verity.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Lake Verity')]());
-        galacticSinnohQuestLine.addQuest(clearLakeVerity);
-
-        const clearLakeAcuity = new CustomQuest(1, 0, 'Lake Verity\'s guardian was also taken. Only one lake remains. Clear Lake Acuity.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Lake Acuity')]());
-        galacticSinnohQuestLine.addQuest(clearLakeAcuity);
-
-        const clearTeamGalacticHQ = new CustomQuest(1, 0, 'You failed to protect any of the lake guardians. They have been taken to Veilstone City. So that\'s what that strange building was... Clear Team Galactic HQ in Veilstone City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Galactic HQ')]());
-        galacticSinnohQuestLine.addQuest(clearTeamGalacticHQ);
-
-        const clearSpearPillar = new CustomQuest(1, 0, 'The lake guardians have been rescued, but Cyrus has used them to forge the Red Chain. He is taking it to the top of Mount Coronet. Follow him! Clear Spear Pillar.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Spear Pillar')]());
-        galacticSinnohQuestLine.addQuest(clearSpearPillar);
-
-        const DistortionWorldReward = () => {
-            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
-            Notifier.notify({
-                title: galacticSinnohQuestLine.name,
-                message: 'You found a Masterball!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
-
-        const clearDistortionWorld = new CustomQuest(1, DistortionWorldReward, 'Cyrus planned to use the Red Chain to enslave Dialga and Palkia, but he accidentally angered Giratina and has been taken to its realm. A portal has appeared on top of Mount Coronet. Use it to follow Cyrus and end his threat once and for all. Clear Distortion World.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]());
-        galacticSinnohQuestLine.addQuest(clearDistortionWorld);
-
-        App.game.quests.questLines().push(galacticSinnohQuestLine);
+        App.game.quests.questLines().push(hoopaDayPikabluQuestLine);
     }
 
     public static createMeltanQuestLine() {
@@ -612,16 +963,25 @@ class QuestLineHelper {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
 
+
     public static loadQuestLines() {
         this.createTutorial();
-        this.createDeoxysQuestLine();
+        this.createRocketKantoQuestLine();
         this.createUndergroundQuestLine();
-        this.createVivillonQuestLine();
+        this.createBillSeviiQuestLine();
+        this.createPersonsofInterestQuestLine();
         this.createRocketJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
+        this.createDeoxysQuestLine();
+        this.createGalacticSinnohQuestLine();
         this.createPlasmaUnovaQuestLine();
+        this.createVivillonQuestLine();
+        this.createAshKetchumQuestLine();
         this.createSkullAetherAlolaQuestLine();
+        this.createMinasTrialAlolaQuestLine();
+        this.createUltraBeastQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
+        this.createHoopaDayPikabluQuestLine();
         this.createGalacticSinnohQuestLine();
         this.createMeltanQuestLine();
     }

@@ -12,6 +12,7 @@ class FarmController {
     public static selectedMulch: KnockoutObservable<MulchType> = ko.observable(MulchType.Boost_Mulch);
     public static selectedShovel: KnockoutObservable<boolean> = ko.observable(false);
     public static selectedMulchShovel: KnockoutObservable<boolean> = ko.observable(false);
+    public static selectedPlotSafeLock: KnockoutObservable<boolean> = ko.observable(false);
 
     public static berryListVisible: KnockoutObservable<boolean> = ko.observable(true);
 
@@ -41,7 +42,7 @@ class FarmController {
             $('#farmModal').modal('show');
         } else {
             Notifier.notify({
-                message: `You need the ${GameConstants.humanifyString(KeyItemType[KeyItemType.Wailmer_pail])} to access this location`,
+                message: `You need the ${GameConstants.humanifyString(KeyItemType[KeyItemType.Wailmer_pail])} to access this location.\n<i>Clear Route 13 or 15 first.</i>`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -61,6 +62,9 @@ class FarmController {
     }
 
     public static calculateCssClass() {
+        if (this.selectedPlotSafeLock()) {
+            return 'PlotSafeLockSelected';
+        }
         if (this.selectedShovel()) {
             return 'ShovelSelected';
         }
@@ -80,11 +84,31 @@ class FarmController {
         return MulchType[plot.mulch];
     }
 
-    public static plotClick(index: number) {
+    public static plotClick(index: number, event: MouseEvent) {
         const plot: Plot = App.game.farming.plotList[index];
+
+        if (event.shiftKey) {
+            this.shiftTogglePlotSafeLock(plot, index);
+        } else {
+            this.handleClickActions(plot, index);
+        }
+    }
+
+    private static shiftTogglePlotSafeLock(plot: Plot, index: number) {
+        if (!plot.isUnlocked) {
+            return;
+        }
+
+        App.game.farming.togglePlotSafeLock(index);
+    }
+
+    private static handleClickActions(plot: Plot, index: number) {
         // Unlocking Plot
         if (!plot.isUnlocked) {
             App.game.farming.unlockPlot(index);
+        // Handle Safe Locking Plot
+        } else if (this.selectedPlotSafeLock()) {
+            App.game.farming.togglePlotSafeLock(index);
         // Handle Shovel
         } else if (this.selectedShovel()) {
             App.game.farming.shovel(index);
@@ -105,7 +129,20 @@ class FarmController {
     }
 
     public static mulchAll() {
-        App.game.farming.mulchAll(FarmController.selectedMulch(), this.getAmount());
+        if (!Settings.getSetting('confirmBeformeMulchingAllPlots').observableValue()) {
+            return App.game.farming.mulchAll(FarmController.selectedMulch(), this.getAmount());
+        }
+
+        Notifier.confirm({
+            title: 'Mulch All',
+            message: `Are you sure you want to use ${this.getAmount()} ${MulchType[FarmController.selectedMulch()].replace('_', ' ')} on all plots?`,
+            type: NotificationConstants.NotificationOption.info,
+            confirm: 'Mulch',
+        }).then(confirmed => {
+            if (confirmed) {
+                App.game.farming.mulchAll(FarmController.selectedMulch(), this.getAmount());
+            }
+        });
     }
 
     public static navigateRight() {

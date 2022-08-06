@@ -25,13 +25,13 @@ class UsePokeballQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return `Use ${this.amount.toLocaleString('en-US')} ${GameConstants.Pokeball[this.pokeball]}s.`;
+        return `Use ${this.amount.toLocaleString('en-US')} ${ItemList[GameConstants.Pokeball[this.pokeball]].displayName}s.`;
     }
 
     toJSON() {
         const json = super.toJSON();
-        json['name'] = this.constructor.name;
-        json['data'].push(this.pokeball);
+        json.name = this.constructor.name;
+        json.data.push(this.pokeball);
         return json;
     }
 }

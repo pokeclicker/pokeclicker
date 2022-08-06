@@ -17,12 +17,12 @@ export default (): any => {
                     return regionStats[prop];
                 }
 
-                // Route kills are tracked by the route number as the key,
+                // Route Defeat are tracked by the route number as the key,
                 // so only allow keys that can be numbers
                 if (Number.isNaN(Number(prop))) {
                     if (Number.isNaN(prop)) {
                         // eslint-disable-next-line no-console
-                        console.trace(`[Statistics] [routeKills.${region}] Invalid property requested:`, prop);
+                        console.trace(`[Statistics] [routeDefeat.${region}] Invalid property requested:`, prop);
                     }
                     return failedSetValue;
                 }

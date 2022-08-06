@@ -21,11 +21,14 @@ import ItemType from './enums/ItemType';
 import KeyItemType from './enums/KeyItemType';
 import MulchType from './enums/MulchType';
 import PlotStage from './enums/PlotStage';
+import QuestLineState from './quests/QuestLineState';
 // end enums
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
 import SettingOption from './settings/SettingOption';
+import BreedingFilters from './settings/BreedingFilters';
+import ProteinFilters from './settings/ProteinFilters';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
 import SeededRand from './utilities/SeededRand';
@@ -62,13 +65,14 @@ import OakItem from './oakItems/OakItem';
 import OakItems from './oakItems/OakItems';
 import BoughtOakItem from './oakItems/BoughtOakItem';
 import OakItemController from './oakItems/OakItemController';
+import OakItemLoadout from './oakItems/OakItemLoadout';
 import OakItemLoadouts from './oakItems/OakItemLoadouts';
 import SpecialRoutePokemon from './routes/SpecialRoutePokemon';
 import RoutePokemon from './routes/RoutePokemon';
 import RegionRoute from './routes/RegionRoute';
 import Routes from './routes/Routes';
 import SubRegion from './subRegion/SubRegion';
-import SubRegions, { AlolaSubRegions } from './subRegion/SubRegions';
+import SubRegions from './subRegion/SubRegions';
 import Requirement from './requirements/Requirement';
 import AchievementRequirement from './requirements/AchievementRequirement';
 import NullRequirement from './requirements/NullRequirement';
@@ -100,6 +104,9 @@ import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
+import UndergroundItemValueType from './enums/UndergroundItemValueType';
+import UndergroundItem from './underground/UndergroundItem';
+import UndergroundItems from './underground/UndergroundItems';
 import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
 import WeatherRequirement from './requirements/WeatherRequirement';
 import { SortModules, SortSaves } from './Sortable';
@@ -110,8 +117,10 @@ import Achievement from './achievements/Achievement';
 import Gems from './gems/Gems';
 import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequirement';
 import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompletedRequirement';
+import QuestLineStartedRequirement from './requirements/QuestLineStartedRequirement';
 import TemporaryBattleRequirement from './requirements/TemporaryBattleRequirement';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
+import SaveReminder from './saveReminder/SaveReminder';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -135,6 +144,7 @@ Object.assign(<any>window, {
     KeyItemType,
     MulchType,
     PlotStage,
+    QuestLineState,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -147,6 +157,8 @@ Object.assign(<any>window, {
     Settings,
     NotificationConstants,
     Notifier,
+    ProteinFilters,
+    BreedingFilters,
     SortOptionConfigs,
     SortOptions,
     AchievementSortOptionConfigs,
@@ -179,6 +191,7 @@ Object.assign(<any>window, {
     OakItems,
     BoughtOakItem,
     OakItemController,
+    OakItemLoadout,
     OakItemLoadouts,
     SpecialRoutePokemon,
     RoutePokemon,
@@ -186,7 +199,6 @@ Object.assign(<any>window, {
     Routes,
     SubRegion,
     SubRegions,
-    AlolaSubRegions,
     Requirement,
     AchievementRequirement,
     NullRequirement,
@@ -218,6 +230,9 @@ Object.assign(<any>window, {
     SubregionRequirement,
     TokenRequirement,
     UndergroundItemsFoundRequirement,
+    UndergroundItemValueType,
+    UndergroundItem,
+    UndergroundItems,
     UndergroundLayersMinedRequirement,
     WeatherRequirement,
     SortModules,
@@ -229,6 +244,8 @@ Object.assign(<any>window, {
     Gems,
     QuestLineCompletedRequirement,
     QuestLineStepCompletedRequirement,
+    QuestLineStartedRequirement,
     TemporaryBattleRequirement,
     DayOfWeekRequirement,
+    SaveReminder,
 });

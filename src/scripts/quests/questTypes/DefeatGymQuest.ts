@@ -51,8 +51,8 @@ class DefeatGymQuest extends Quest implements QuestInterface {
 
     toJSON() {
         const json = super.toJSON();
-        json['name'] = this.constructor.name;
-        json['data'].push(this.gymTown);
+        json.name = this.constructor.name;
+        json.data.push(this.gymTown);
         return json;
     }
 }

@@ -2,7 +2,7 @@ import TypeColor = GameConstants.TypeColor;
 
 class PokedexHelper {
     public static toggleStatisticShiny = ko.observable(true);
-    public static toggleAllShiny = ko.observable(true);
+    public static hideShinyImages = ko.observable(false);
 
     public static getBackgroundColors(name: PokemonNameType): string {
         const pokemon = PokemonHelper.getPokemonByName(name);
@@ -59,7 +59,7 @@ class PokedexHelper {
     }
 
     public static getList(): Array<Record<string, any>> {
-        const filter = PokedexHelper.getFilters();
+        const filter: Record<string, any> = PokedexHelper.getFilters();
 
         const highestEncountered = App.game.statistics.pokemonEncountered.highestID;
         const highestDefeated = App.game.statistics.pokemonDefeated.highestID;
@@ -78,7 +78,7 @@ class PokedexHelper {
             }
 
             // If not showing this region
-            const region: (GameConstants.Region | null) = filter['region'] ? parseInt(filter['region'], 10) : null;
+            const region: (GameConstants.Region | null) = filter.region ? parseInt(filter.region, 10) : null;
             if (region != null && region != nativeRegion) {
                 return false;
             }
@@ -94,13 +94,13 @@ class PokedexHelper {
             }
 
             // Check if the name contains the string
-            if (filter['name'] && !pokemon.name.toLowerCase().includes(filter['name'].toLowerCase().trim())) {
+            if (filter.name && !pokemon.name.toLowerCase().includes(filter.name.toLowerCase().trim())) {
                 return false;
             }
 
             // Check if either of the types match
-            const type1: (PokemonType | null) = filter['type1'] ? parseInt(filter['type1'], 10) : null;
-            const type2: (PokemonType | null) = filter['type2'] ? parseInt(filter['type2'], 10) : null;
+            const type1: (PokemonType | null) = filter.type1 ? parseInt(filter.type1, 10) : null;
+            const type2: (PokemonType | null) = filter.type2 ? parseInt(filter.type2, 10) : null;
             if ([type1, type2].includes(PokemonType.None)) {
                 const type = (type1 == PokemonType.None) ? type2 : type1;
                 if (!PokedexHelper.isPureType(pokemon, type)) {
@@ -135,6 +135,14 @@ class PokedexHelper {
                 return false;
             }
 
+            /* Only base form if alternate exist (Zarbi, Basculin, ...)
+             * if Mega are not alternative pokemon, this work
+             * else change condition by `filter['hide-alternate'] && (!Number.isInteger(pokemon.id) || Math.sign(pokemon.id) === -1)`
+             */
+            if (filter['hide-alternate'] && !Number.isInteger(pokemon.id)) {
+                return false;
+            }
+
             // Only pokemon with a hold item
             if (filter['held-item'] && !BagHandler.displayName((pokemon as PokemonListData).heldItem)) {
                 return false;
@@ -145,19 +153,20 @@ class PokedexHelper {
     }
 
     private static getFilters() {
-        const res = {};
-        res['name'] = $('#nameFilter').val();
-        res['type1'] = $('#pokedex-filter-type1').val();
-        res['type2'] = $('#pokedex-filter-type2').val();
-        res['region'] = $('#pokedex-filter-region').val();
+        const res: Record<string, any> = {};
+        res.name = $('#nameFilter').val();
+        res.type1 = $('#pokedex-filter-type1').val();
+        res.type2 = $('#pokedex-filter-type2').val();
+        res.region = $('#pokedex-filter-region').val();
         res['caught-shiny'] = $('#pokedex-filter-shiny-caught').val();
         res['held-item'] = $('#pokedex-filter-held-item').is(':checked');
+        res['hide-alternate'] = $('#pokedex-filter-hide-alternate').is(':checked');
         return res;
     }
 
     public static getImage(id: number) {
         let src = 'assets/images/';
-        if (App.game.party.alreadyCaughtPokemon(id, true) && this.toggleAllShiny()) {
+        if (App.game.party.alreadyCaughtPokemon(id, true) && !this.hideShinyImages()) {
             src += 'shiny';
         }
         src += `pokemon/${id}.png`;

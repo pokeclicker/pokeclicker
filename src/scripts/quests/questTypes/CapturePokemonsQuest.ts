@@ -24,7 +24,7 @@ class CapturePokemonsQuest extends Quest implements QuestInterface {
 
     toJSON() {
         const json = super.toJSON();
-        json['name'] = this.constructor.name;
+        json.name = this.constructor.name;
         return json;
     }
 }

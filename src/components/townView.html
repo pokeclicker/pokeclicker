@@ -47,7 +47,7 @@
                         text: $data.text(),
                         visible: $data.isVisible(),
                         click: $data.protectedOnclick,
-                        tooltip: ($data.tooltip || $data.clears() ? { title: $data.clears() != undefined ? `Total Clears: ${$data.clears()}` : $data.tooltip, trigger: 'hover', placement: 'left' } : undefined)
+                        tooltip: ($data.tooltip || $data.clears() ? { title: $data.clears() != undefined ? `Total Clears: ${$data.clears().toLocaleString('en-US')}` : $data.tooltip, trigger: 'hover', placement: 'left' } : undefined)
                         "></button>
                     <!-- ko if: $data instanceof Gym -->
                     <button class="btn btn-info p-0 btn-gym-auto-restart" data-bind="
@@ -78,14 +78,14 @@
         <!--Display all available Pokémon in this dungeon-->
         <ul class="list-inline">
           <!-- ko foreach: player.town().dungeon.normalEncounterList -->
-          <li class="list-inline-item">
+          <li class="list-inline-item" data-bind="hidden: $data.hide">
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
-            css: { 'dungeon-pokemon-locked': $data.hidden }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
+            css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
             <img class="lock" src="assets/images/breeding/lock.svg" data-bind="
             hidden: !$data.lock,
             tooltip: {
-                title: 'Try talking to the locals. Sometimes they know more than you think.',
+                title: 'Try progressing in the story, catching new Pokémon, or talking to the locals!',
                 html: true,
                 placement: 'bottom',
                 trigger: 'hover'
@@ -97,11 +97,11 @@
           <li class="list-inline-item" data-bind="hidden: $data.hide">
             <img class="boss" src="assets/images/dungeons/boss.svg"/>
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
-            css: { 'dungeon-pokemon-locked': $data.hidden }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
+            css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
             <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock,
             tooltip: {
-                title: 'Try talking to the locals. Sometimes they know more than you think.',
+                title: 'Try progressing in the story, catching new Pokémon, or talking to the locals!',
                 html: true,
                 placement: 'bottom',
                 trigger: 'hover'

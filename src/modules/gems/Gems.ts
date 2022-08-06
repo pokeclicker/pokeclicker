@@ -43,7 +43,7 @@ export default class Gems implements Feature {
             this.validUpgrades[type] = {};
             this.validUpgrades[type][TypeEffectiveness.Immune] = !!TypeHelper.typeMatrix[type]?.includes(TypeEffectivenessValue.Immune);
             this.validUpgrades[type][TypeEffectiveness.NotVery] = !!TypeHelper.typeMatrix[type]?.includes(TypeEffectivenessValue.NotVery);
-            this.validUpgrades[type][TypeEffectiveness.Normal] = !!TypeHelper.typeMatrix[type]?.includes(TypeEffectivenessValue.Normal);
+            this.validUpgrades[type][TypeEffectiveness.Neutral] = !!TypeHelper.typeMatrix[type]?.includes(TypeEffectivenessValue.Neutral);
             this.validUpgrades[type][TypeEffectiveness.Very] = !!TypeHelper.typeMatrix[type]?.includes(TypeEffectivenessValue.Very);
         });
     }
@@ -156,7 +156,7 @@ export default class Gems implements Feature {
             $('#gemModal').modal('show');
         } else {
             Notifier.notify({
-                message: 'You do not have the Gem Case',
+                message: 'You do not have the Gem Case.\n<i>Requires the Earth Badge.</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
