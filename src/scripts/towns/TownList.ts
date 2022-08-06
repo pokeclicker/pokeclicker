@@ -2188,10 +2188,7 @@ TownList['Castelia City'] = new Town(
     GameConstants.Region.unova,
     [CasteliaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Castelia City']), new MoveToDungeon(dungeonList['Castelia Sewers'])],
     {
-        requirements: [
-            new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 0),
-        ],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Toxic)],
         npcs: [CasteliaMusician],
     }
 );
