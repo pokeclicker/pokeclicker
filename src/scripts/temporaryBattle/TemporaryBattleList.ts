@@ -438,7 +438,7 @@ TemporaryBattleList['Team Flare Leader Lysandre'] = new TemporaryBattle(
         new GymPokemon('Mienshao', 60000000, 60),
         new GymPokemon('Pyroar', 60000000, 60),
         new GymPokemon('Honchkrow', 60000000, 60),
-        new GymPokemon('Gyarados', 60000000, 60),
+        new GymPokemon('Mega Gyarados', 60000000, 60),
         new GymPokemon('Xerneas', 60000000, 60),
         new GymPokemon('Yveltal', 60000000, 60),
     ],
@@ -468,6 +468,9 @@ TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
         new GymPokemon('Nidoqueen', 60000000, 60),
         new GymPokemon('Rhyperior', 60000000, 60),
         new GymPokemon('Mewtwo', 60000000, 60),
+        new GymPokemon('Mewtwo', 60000000, 60),
+        // new GymPokemon('Mega Mewtwo X', 60000000, 60),
+        // new GymPokemon('Mega Mewtwo Y', 60000000, 60),
     ],
     'Snarky text goes here.',
     [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',14)]
