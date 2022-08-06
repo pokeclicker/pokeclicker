@@ -570,7 +570,12 @@ class QuestLineHelper {
         const talkToWeatherScientist2 = new TalkToNPCQuest(WeatherInstituteScientist2, 'Report your findings to the Delta Weather Institute.');
         primalsQuestLine.addQuest(talkToWeatherScientist2);
 
-        const catchExploud = new CustomQuest(1, 0, 'Catch Exploud.', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Exploud').id]());
+        const catchExploud = new CaptureSpecificPokemonQuest(
+            'Exploud',
+            'Catch Exploud.',
+            1,
+            false
+        );
 
         const clearCaveofOrigin = new CustomQuest(5, 0, 'Clear Delta Cave of Origin', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Delta Cave of Origin')]());
 
@@ -583,7 +588,13 @@ class QuestLineHelper {
         const talkToWeatherScientist3 = new TalkToNPCQuest(WeatherInstituteScientist3, 'Bring Exploud to the Delta Weather Institute.');
         primalsQuestLine.addQuest(talkToWeatherScientist3);
 
-        const CatchCastform = new CustomQuest(5, 0, 'Catch some Castform.', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Castform').id]());
+        const CatchCastform = new CaptureSpecificPokemonQuest(
+            'Castform',
+            'Catch some Castform.',
+            5,
+            false
+        );
+
         primalsQuestLine.addQuest(CatchCastform);
 
         const talkToWeatherScientist4 = new TalkToNPCQuest(WeatherInstituteScientist4, 'Bring the Castform to the Delta Weather Institute.');
