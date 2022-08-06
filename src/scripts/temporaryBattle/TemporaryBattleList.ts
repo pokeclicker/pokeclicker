@@ -395,7 +395,7 @@ TemporaryBattleList['Ghetsis 2'] = new TemporaryBattle(
             $('#temporaryBattleWonModal').one('hidden.bs.modal', () => {
                 KeyItemController.showGainModal(KeyItemType.DNA_splicers);
             });
-    },
+        },
     }
 );
 // Kalos Temporarybattles

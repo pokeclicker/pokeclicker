@@ -4,7 +4,7 @@ import Information from '../utilities/Information';
 import KeyItemController from './KeyItemController';
 import { Feature } from '../DataStore/common/Feature';
 import {
-    getDungeonIndex, Region, ROUTE_KILLS_NEEDED, Starter, Pokerus, getTemporaryBattlesIndex,
+    getDungeonIndex, Region, ROUTE_KILLS_NEEDED, Starter, Pokerus,
 } from '../GameConstants';
 
 export default class KeyItems implements Feature {
