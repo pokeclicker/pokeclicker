@@ -1641,6 +1641,38 @@ class ShardDeal {
                     1),
             ]
         );
+        ShardDeal.list[GameConstants.ShardTraderLocations['Route 6']] = ko.observableArray(
+            [
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Fossilized Bird', amount: 1},
+                        {shardTypeString: 'Fossilized Drake', amount: 1},
+                    ],
+                    ItemList.Dracozolt,
+                    1),
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Fossilized Bird', amount: 1},
+                        {shardTypeString: 'Fossilized Dino', amount: 1},
+                    ],
+                    ItemList.Arctozolt,
+                    1),
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Fossilized Fish', amount: 1},
+                        {shardTypeString: 'Fossilized Drake', amount: 1},
+                    ],
+                    ItemList.Dracovish,
+                    1),
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Fossilized Fish', amount: 1},
+                        {shardTypeString: 'Fossilized Dino', amount: 1},
+                    ],
+                    ItemList.Arctovish,
+                    1),
+            ]
+        );
         ShardDeal.list[GameConstants.ShardTraderLocations['Stow-on-Side']] = ko.observableArray(
             [
                 new ShardDeal(

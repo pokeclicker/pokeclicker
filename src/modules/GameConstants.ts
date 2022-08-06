@@ -1399,16 +1399,12 @@ export enum ShardTraderLocations {
     'Hulbury',
     'Motostoke',
     'Hammerlocke',
+    'Route 6',
     'Stow-on-Side',
     'Ballonlea',
     'Circhester',
     'Spikemuth',
     'Master Dojo',
-}
-
-export enum FossilMasterLocations {
-    'None' = -1,
-    'Stow-on-Side' = 0,
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

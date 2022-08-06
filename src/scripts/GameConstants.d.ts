@@ -547,14 +547,12 @@ namespace GameConstants {
         'Hulbury',
         'Motostoke',
         'Hammerlocke',
+        'Route 6',
         'Stow-on-Side',
         'Ballonlea',
         'Circhester',
         'Spikemuth',
         'Master Dojo',
-    }
-    declare enum FossilMasterLocations {
-        'Stow-on-Side',
     }
     declare enum KantoSubRegions {
         Kanto,

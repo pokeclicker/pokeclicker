@@ -62,3 +62,7 @@ ItemList['Furfrou (Pharaoh)']    = new PokemonItem('Furfrou (Pharaoh)', 30000000
 ItemList['Furfrou (Star)']    = new PokemonItem('Furfrou (Star)', 10000);
 ItemList['Type: Null']           = new PokemonItem('Type: Null', 114000);
 ItemList.Poipole              = new PokemonItem('Poipole', 90000);
+ItemList.Dracozolt              = new PokemonItem('Dracozolt', 100000);
+ItemList.Arctozolt              = new PokemonItem('Arctozolt', 100000);
+ItemList.Dracovish              = new PokemonItem('Dracovish', 100000);
+ItemList.Arctovish              = new PokemonItem('Arctovish', 100000);
