@@ -203,7 +203,7 @@ class Breeding implements Feature {
                 continue;
             }
             const egg = this.eggList[index]();
-            const partyPokemon = egg.partyPokemon;
+            const partyPokemon = egg.partyPokemon();
             if (!egg.isNone() && partyPokemon && partyPokemon.canCatchPokerus() && partyPokemon.pokerus == GameConstants.Pokerus.None) {
                 partyPokemon.calculatePokerus();
             }
