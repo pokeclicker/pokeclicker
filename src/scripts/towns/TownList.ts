@@ -3180,7 +3180,7 @@ TownList['Aether Paradise'] = new Town(
     GameConstants.Region.alola,
     [
         TemporaryBattleList['Ultra Wormhole'],
-        TemporaryBattleList['Team Rocket Leader Giovanni'],
+        TemporaryBattleList['Aether Branch Chief Faba'],
         TemporaryBattleList['Team Aqua Leader Archie'],
         TemporaryBattleList['Team Magma Leader Maxie'],
         TemporaryBattleList['Team Galactic Leader Cyrus'],

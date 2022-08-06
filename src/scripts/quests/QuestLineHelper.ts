@@ -935,7 +935,7 @@ class QuestLineHelper {
 
         // Rainbow Rocket @ Aether Foundation, series of one-time battles (steps 10-17)
 
-        const meltanRainbow1 = new CustomQuest(1, 0, 'Defeat Team Rocket Leader Giovanni.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Rocket Leader Giovanni')]());
+        const meltanRainbow1 = new CustomQuest(1, 0, 'Defeat Aether Branch Chief Faba.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Aether Branch Chief Faba')]());
         meltanQuestLine.addQuest(meltanRainbow1);
 
         const meltanRainbow2 = new CustomQuest(1, 0, 'Defeat Team Aqua Leader Archie.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Aqua Leader Archie')]());

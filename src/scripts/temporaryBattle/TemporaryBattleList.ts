@@ -381,8 +381,8 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
     }
 );
 
-TemporaryBattleList['Team Rocket Leader Giovanni'] = new TemporaryBattle(
-    'Team Rocket Leader Giovanni',
+TemporaryBattleList['Aether Branch Chief Faba'] = new TemporaryBattle(
+    'Aether Branch Chief Faba',
     [
         new GymPokemon('Claydol', 60000000, 60),
         new GymPokemon('Bruxish', 60000000, 60),
