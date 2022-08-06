@@ -955,13 +955,7 @@ class QuestLineHelper {
         const meltanRainbow6 = new CustomQuest(1, 0, 'Defeat Team Plasma Leader Ghetsis.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Leader Ghetsis')]());
         meltanQuestLine.addQuest(meltanRainbow6);
 
-        const afterBeatingRainbowRocket = () => {
-            Routes.getRoutesByRegion(GameConstants.Region.alola).forEach(route => {
-                route.pokemon.land.push('Meltan');
-            });
-        };
-
-        const meltanRainbow7 = new CustomQuest(1, afterBeatingRainbowRocket, 'Defeat Team Rainbow Leader Giovanni.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Rainbow Leader Giovanni')]());
+        const meltanRainbow7 = new CustomQuest(1, 0, 'Defeat Team Rainbow Leader Giovanni.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Rainbow Leader Giovanni')]());
         meltanQuestLine.addQuest(meltanRainbow7);
 
         const meltanGetMelmetal = () => {
