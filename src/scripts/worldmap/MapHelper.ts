@@ -23,6 +23,21 @@ class MapHelper {
         if (route != Battle.route) {
             genNewEnemy = true;
         }
+
+        //check if we have finish tutorial and Challenge is active
+        if (App.game.quests.getQuestLine('Tutorial Quests').state() == 2 && App.game.challenges.list.shinyCompleteRoute.active()) {
+            const actualRoute = RouteHelper.routeCompleted(player.route(), player.region, true);
+            const destinationRoute = RouteHelper.routeCompleted(route, region, true);
+
+            //check if player is not on town or dungeon and check actual route is complete or destination route is complete
+            if (player.route() != 0 && !(actualRoute || destinationRoute)) {
+                return Notifier.notify({
+                    message: 'You have not complete shiny route',
+                    type: NotificationConstants.NotificationOption.warning,
+                });
+            }
+        }
+
         if (this.accessToRoute(route, region)) {
             player.route(route);
             player._subregion(routeData.subRegion != undefined ? routeData.subRegion : 0);
@@ -222,6 +237,19 @@ class MapHelper {
         // If player already reached highest region, they can't move on
         if (player.highestRegion() >= GameConstants.MAX_AVAILABLE_REGION) {
             return false;
+        }
+
+        if (App.game.challenges.list.shinyCompleteRoute.active()) {
+            let allroutecomplete = true;
+            Routes.getRoutesByRegion(player.highestRegion()).forEach((r) => {
+                if (!RouteHelper.routeCompleted(r.number, r.region, true)) {
+                    allroutecomplete = false;
+                }
+            });
+
+            if (!allroutecomplete) {
+                return false;
+            }
         }
 
         const challengeActive = App.game.challenges.list.requireCompletePokedex.active();
