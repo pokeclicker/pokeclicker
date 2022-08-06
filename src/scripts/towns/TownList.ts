@@ -238,6 +238,14 @@ const BigSpender = new NPC('Big Spender', [
     'You can use the Shop Amount Button settings to make it easy for big purchases, too!',
 ]);
 
+const EggHuntErika = new NPC('Erika', [
+    'And here comes another one. Let me guess, you\'re gonna ask me about the Togepi too?',
+    'Listen here you. Just because I\'m the Grass type gym leader doesn\'t mean I know everything that goes on in the forest! I live in one of the biggest cities in the region! With tall buildings! And gambling! And crime! I like it here! I don\'t care about the forest!',
+    '...',
+    'All right, fine. It just so happens that I have heard about <span style="font-style: italic">something</span> going on in Viridian Forest. But I don\'t know what, and I don\'t care! You can go figure it out! I\'m staying here! Viridian Forest doesn\'t even have any Grass types. It\'s all Bugs over there.',
+],
+{ requirement: new MultiRequirement([new QuestLineStartedRequirement('Togepi Egg Hunt'), new QuestLineCompletedRequirement('Togepi Egg Hunt', GameConstants.AchievementOption.less )]) });
+
 const SaffronBattleItemRival = new NPC('Battle Item Master', [
     'Do I know you? Wait... Have you met my worthless rival? Ha! Let me guess, he gave you some unwanted advice?',
     'I bet he forget to tell you that although all Battle Items only last for 30 seconds, they can stack and last for days! Now scram!',
@@ -371,7 +379,7 @@ TownList['Celadon City'] = new Town(
     [CeladonDepartmentStoreShop, CeladonCityShop, new MoveToDungeon(dungeonList['Rocket Game Corner'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
-        npcs: [BigSpender],
+        npcs: [BigSpender, EggHuntErika],
     }
 );
 TownList['Saffron City'] = new Town(

@@ -54,11 +54,13 @@ class DungeonBattle extends Battle {
         // Attempting to catch Pokemon
         const isShiny: boolean = enemyPokemon.shiny;
         const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny);
+        const route = player.town()?.dungeon?.difficultyRoute || 1;
+        const region = player.region;
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.prepareCatch(enemyPokemon, pokeBall);
             setTimeout(
                 () => {
-                    this.attemptCatch(enemyPokemon);
+                    this.attemptCatch(enemyPokemon, route, region);
                     if (DungeonRunner.defeatedBoss()) {
                         DungeonRunner.dungeonWon();
                     }
