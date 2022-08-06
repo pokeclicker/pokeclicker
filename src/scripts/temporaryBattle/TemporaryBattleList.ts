@@ -388,7 +388,7 @@ TemporaryBattleList['Aether Branch Chief Faba'] = new TemporaryBattle(
         new GymPokemon('Bruxish', 60000000, 60),
         new GymPokemon('Hypno', 60000000, 60),
     ],
-    'Snarky text goes here.',
+    'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',9)]
 );
 
@@ -401,7 +401,7 @@ TemporaryBattleList['Team Aqua Leader Archie'] = new TemporaryBattle(
         new GymPokemon('Sharpedo', 60000000, 60),
         new GymPokemon('Kyogre', 60000000, 60),
     ],
-    'Snarky text goes here.',
+    'You\'ve made your point. I can see you are not one to be trifled with.',
     [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',10)]
 );
 
@@ -414,7 +414,7 @@ TemporaryBattleList['Team Magma Leader Maxie'] = new TemporaryBattle(
         new GymPokemon('Camerupt', 60000000, 60),
         new GymPokemon('Groudon', 60000000, 60),
     ],
-    'Snarky text goes here.',
+    'I fell behind, but only by an inch.',
     [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',10)]
 );
 
@@ -428,7 +428,7 @@ TemporaryBattleList['Team Galactic Leader Cyrus'] = new TemporaryBattle(
         new GymPokemon('Dialga', 60000000, 60),
         new GymPokemon('Palkia', 60000000, 60),
     ],
-    'Snarky text goes here.',
+    'Impressive. Your prowess is notable.',
     [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',11)]
 );
 
@@ -442,7 +442,7 @@ TemporaryBattleList['Team Flare Leader Lysandre'] = new TemporaryBattle(
         new GymPokemon('Xerneas', 60000000, 60),
         new GymPokemon('Yveltal', 60000000, 60),
     ],
-    'Snarky text goes here.',
+    'I can feel the fire of your convictions burning deep within your heart!',
     [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',12)]
 );
 
@@ -456,7 +456,7 @@ TemporaryBattleList['Team Plasma Leader Ghetsis'] = new TemporaryBattle(
         new GymPokemon('Zekrom', 60000000, 60),
         new GymPokemon('Reshiram', 60000000, 60),
     ],
-    'Snarky text goes here.',
+    'I couldn\'t have been defeated by some random Trainer from who knows where!',
     [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',13)]
 );
 
@@ -472,6 +472,6 @@ TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
         // new GymPokemon('Mega Mewtwo X', 60000000, 60),
         // new GymPokemon('Mega Mewtwo Y', 60000000, 60),
     ],
-    'Snarky text goes here.',
+    'Ha! That was a truly intense fight!',
     [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',14)]
 );
