@@ -998,7 +998,6 @@ class QuestLineHelper {
         this.createUltraBeastQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
-        this.createGalacticSinnohQuestLine();
         this.createMeltanQuestLine();
     }
 }
