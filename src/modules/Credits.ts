@@ -110,6 +110,8 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/356459678965956613',
         resources: [
             'Freeze Mulch',
+            'Underground Fossilized Dino',
+            'Underground Fossilized Drake',
         ],
         // Notes: Made specifically for PokéClicker.
     },

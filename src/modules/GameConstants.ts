@@ -734,8 +734,6 @@ export enum PokemonItemType {
     'Arctozolt',
     'Dracovish',
     'Arctovish',
-    'Eternatus',
-    'Kubfu',
 }
 
 export enum UltraBeastType {

@@ -351,8 +351,6 @@ namespace GameConstants {
         'Arctozolt',
         'Dracovish',
         'Arctovish',
-        'Eternatus',
-        'Kubfu',
     }
 
     declare enum UltraBeastType {
