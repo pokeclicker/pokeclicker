@@ -203,7 +203,7 @@ class Breeding implements Feature {
                 continue;
             }
             const egg = this.eggList[index]();
-            const partyPokemon = egg.partyPokemon;
+            const partyPokemon = egg.partyPokemon();
             if (!egg.isNone() && partyPokemon && partyPokemon.canCatchPokerus() && partyPokemon.pokerus == GameConstants.Pokerus.None) {
                 partyPokemon.calculatePokerus();
             }
@@ -269,11 +269,13 @@ class Breeding implements Feature {
         }
         const egg = this.createEgg(pokemon.name);
 
-        if (pokemon instanceof PartyPokemon) {
+        const success = this.gainEgg(egg, isHelper);
+
+        if (success && pokemon instanceof PartyPokemon) {
             pokemon.breeding = true;
         }
 
-        return this.gainEgg(egg, isHelper);
+        return success;
     }
 
     public hatchPokemonEgg(index: number): void {
