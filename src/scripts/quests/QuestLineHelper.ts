@@ -170,7 +170,7 @@ class QuestLineHelper {
         // Mine 5 layers in the Unerground
         const oldAmberReward = () => {
             // Gain an Old Amber
-            const oldAmber = UndergroundItem.list.find(item => item.name == 'Old Amber');
+            const oldAmber = UndergroundItems.list.find(item => item.name == 'Old Amber');
             if (!oldAmber) {
                 return console.error('Unable to find item Old Amber');
             }
@@ -319,7 +319,7 @@ class QuestLineHelper {
 
         // Capture 200 Psychic type Pokemon
         const mindPlateReward = () => {
-            const mindPlate = UndergroundItem.list.find(item => item.name == 'Mind Plate');
+            const mindPlate = UndergroundItems.list.find(item => item.name == 'Mind Plate');
             if (!mindPlate) {
                 return console.error('Unable to find item Mind Plate');
             }
@@ -855,7 +855,7 @@ class QuestLineHelper {
 
             dungeonList['Viridian Forest'].bossList = dungeonList['Viridian Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const defeatTogepiInKanto = new CustomQuest(1, afterDefeatingTogepiInKanto, 'Erika reported that a strange Togepi has been seen around Kanto. Go look for it!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 0, togepiInKantoSetup);
+        const defeatTogepiInKanto = new CustomQuest(1, afterDefeatingTogepiInKanto, 'A strange Togepi has been seen around Kanto. Go look for it! Maybe Erika knows more.', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 0, togepiInKantoSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(defeatTogepiInKanto);
 
         const togepiInJohtoSetup = () => {
@@ -893,6 +893,23 @@ class QuestLineHelper {
         App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
     }
 
+    public static createHoopaDayPikabluQuestLine() {
+        const hoopaDayPikabluQuestLine = new QuestLine('How blu mouse?', 'Apparently a strange blue mouse-like Pokémon might be out there somewhere?');
+
+        const PikabluCatch = new CaptureSpecificPokemonQuest(
+            'Marill',
+            'Catch Pikablu.',
+            1,
+            false,
+            5000,
+            undefined
+        );
+
+        hoopaDayPikabluQuestLine.addQuest(PikabluCatch);
+
+        App.game.quests.questLines().push(hoopaDayPikabluQuestLine);
+    }
+
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
@@ -915,5 +932,6 @@ class QuestLineHelper {
         this.createMinasTrialAlolaQuestLine();
         this.createUltraBeastQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
+        this.createHoopaDayPikabluQuestLine();
     }
 }

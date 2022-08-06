@@ -1017,6 +1017,28 @@ class Update implements Saveable {
                 Update.startQuestLine(saveData, 'A new world');
             }
 
+            // Update mine inventory
+            playerData.mineInventory.forEach(i => {
+                if (i.valueType == 'Diamond') {
+                    // Shards
+                    if (i.name.includes('Shard')) {
+                        i.valueType = 2;
+                    } else { // Diamond items
+                        i.valueType = 0;
+                    }
+                }
+                // Fossils
+                if (i.valueType == 'Mine Egg') {
+                    i.valueType = 3;
+                }
+                // Gems
+                if (i.value == 100) {
+                    i.valueType = 1;
+                }
+            });
+        },
+
+        '0.9.11': ({ playerData, saveData }) => {
             // Start Plasma questline if player has Toxic Badge already
             if (saveData.badgeCase[54]) {
                 Update.startQuestLine(saveData, 'Quest for the DNA Splicers');
