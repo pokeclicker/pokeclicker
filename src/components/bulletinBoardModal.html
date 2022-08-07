@@ -33,6 +33,11 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                         <!-- /ko -->
                     </tr >
                     <!-- /ko -->
+                    <!-- ko if: BulletinBoard.selectedBulletinBoard().getQuests().length == 0 -->
+                    <tr>
+                        <td>Board is empty.</td>
+                    </tr>
+                    <!-- /ko -->
                 </tbody>
             </table>
         </div>
