@@ -11,7 +11,7 @@ class QuestLine {
     constructor(
         public name: string,
         public description: string,
-        public requirements?: Array<Requirement>,
+        public requirement?: Requirement,
         public bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.None
     ) {
         this.name = name;
