@@ -572,7 +572,7 @@ class QuestLineHelper {
 
         const talktoWally1 = new TalkToNPCQuest(DeltaWally1, 'Investigate in Petalburg City.');
         deltaEpisodeQuestLine.addQuest(talktoWally1);
-        
+
         const defeatAquaMagmaAdmins = new CustomQuest(2, 0, 'Defeat the wannabe thieves.', () =>
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Aqua Admin Matt 1')]() +
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Magma Admin Courtney 1')]()

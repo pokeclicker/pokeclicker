@@ -2631,7 +2631,7 @@ const KiloudeConfusedHiker = new NPC('Confused Hiker', [
 const DeltaSlateportHoennReporter1 = new NPC('Reporter Gabby', [
     'Oh hey! Didn\'t expect to see you again. A lot has changed around here.',
     'I don\'t report on roaming Pokémon anymore. But what I can report on is that a whole bunch of strange Pokémon from other regions have moved in! I don\'t know what caused it. They are just... here now.',
-    'A message from Professor Birch? Stuff\'s a little weird, but nothing I\'d call in the Champion of Hoenn for. If there\'s more going on I don\'t know about it. You\'re gonna have to ask the prof yourself.'
+    'A message from Professor Birch? Stuff\'s a little weird, but nothing I\'d call in the Champion of Hoenn for. If there\'s more going on I don\'t know about it. You\'re gonna have to ask the prof yourself.',
 ],
 { requirement: new QuestLineStepCompletedRequirement('Delta Episode', 1, GameConstants.AchievementOption.less ) });
 const DeltaSlateportHoennReporter2 = new NPC('Reporter Gabby', [
@@ -2642,7 +2642,7 @@ const DeltaProfBirch1 = new NPC('Professor Birch', [
     'Welcome back, Champ! You look worried?',
     'Oh no, this is a big misunderstanding! There\'s nothing wrong. No emergency! Just an invitation.',
     'A spectacular meteor shower will be visible from Hoenn soon. It\'s a once in a lifetime sight. You should go see it at the Mossdeep space station! And bring a friend, if you want.',
-    'You could check out my bulletin board while you\'re here. There\'s some new opportunities for you to check out.'
+    'You could check out my bulletin board while you\'re here. There\'s some new opportunities for you to check out.',
 ],
 { requirement: new QuestLineStepCompletedRequirement('Delta Episode', 2, GameConstants.AchievementOption.less ) });
 const DeltaMay1 = new NPC('May', [
