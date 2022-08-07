@@ -930,7 +930,7 @@ class QuestLineHelper {
         const meltanCatch50Aerodactyl = new CaptureSpecificPokemonQuest('Aerodactyl', 'Catch 50 Aerodactyl', 50 / 50, true, 0, undefined);
         const meltanDefeatHau15 = new DefeatGymQuest(15 / 10, 0, 'Champion Hau');
 
-        meltanQuestLine.addQuest(new MultipleQuestsQuest([meltanCatch50Anorith,meltanCatch50Lileep,meltanCatch50Aerodactyl,meltanDefeatHau15],''));
+        meltanQuestLine.addQuest(new MultipleQuestsQuest([meltanCatch50Anorith,meltanCatch50Lileep,meltanCatch50Aerodactyl,meltanDefeatHau15],'', () => App.game.quests.getQuestLine('Defeat Rainbow Rocket').beginQuest()));
 
         // Multi-step #10
 
