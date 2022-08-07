@@ -853,7 +853,6 @@ TemporaryBattleList.Mustard = new TemporaryBattle(
         new GymPokemon('Shinx', 856950891, 60),
     ],
     'That was everything I hoped for and more!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
     [
         new MultiRequirement([
             new RouteKillRequirement(10, GameConstants.Region.galar, 33),
