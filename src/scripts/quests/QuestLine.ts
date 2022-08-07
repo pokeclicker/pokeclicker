@@ -83,7 +83,7 @@ class QuestLine {
                 this.quests()[i].complete();
             }
             if (index < this.totalQuests) {
-                this.beginQuest(index, initial, true);
+                this.beginQuest(index, initial);
             }
         } else {
             this.beginQuest(0);

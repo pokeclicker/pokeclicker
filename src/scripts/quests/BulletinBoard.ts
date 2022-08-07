@@ -15,7 +15,7 @@ class BulletinBoard extends TownContent {
         $('#bulletinBoardModal').modal('show');
     }
     public areaStatus() {
-        if (this.getQuests().filter((q) => q.state() == QuestLineState.onBulletinBoard).length) {
+        if (this.getQuests().filter((q) => q.state() == QuestLineState.inactive).length) {
             return areaStatus.unlockedUnfinished;
         }
         return areaStatus.completed;
