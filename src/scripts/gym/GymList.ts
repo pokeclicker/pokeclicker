@@ -1115,10 +1115,7 @@ GymList['Snowbelle City'] = new Gym(
     BadgeEnums.Iceberg,
     52000,
     'Impressive! Your Pokémon fought with great courage. I can tell that you\'ve trained your Pokémon well.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Village'))],
-    () => {
-        App.game.quests.getQuestLine('The Great Vivillon Hunt!').beginQuest();
-    }
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Village'))]
 );
 //Kalos Elite 4
 //TODO: Balancing of elite Pokemon HP & rewards.
@@ -1194,13 +1191,7 @@ GymList['Champion Diantha'] = new Champion(
     BadgeEnums.Elite_KalosChampion,
     128000,
     'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart...',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)],
-    undefined,
-    undefined,
-    undefined,
-    () => {
-        App.game.quests.getQuestLine('The New Kid').beginQuest();
-    }
+    [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]
 );
 
 //Alola Gyms
@@ -1499,10 +1490,7 @@ GymList['Champion Hau'] = new Champion(
     [
         new GymPokemon('Leafeon', 89636471, 58),
         new GymPokemon('Incineroar', 96725389, 60),
-    ],
-    () => {
-        App.game.quests.getQuestLine('Ultra Beast Hunt').beginQuest();
-    }
+    ]
 );
 
 //Galar Leaders
