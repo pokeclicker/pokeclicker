@@ -391,7 +391,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 1'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -409,7 +409,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 2'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -427,7 +427,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 3'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -445,7 +445,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 4'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -463,7 +463,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 5'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -481,7 +481,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 6'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -499,7 +499,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 7'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -519,7 +519,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 8'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -538,7 +538,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 9'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -556,7 +556,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 10'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -577,7 +577,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 11'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -595,7 +595,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 12'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -614,7 +614,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 13'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -632,7 +632,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 14'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -651,7 +651,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 15'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -670,7 +670,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 16'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -688,7 +688,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 17'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -708,7 +708,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 18'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -728,7 +728,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 19'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -749,7 +749,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 20'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -767,7 +767,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 21'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -786,7 +786,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 22'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -805,7 +805,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 23'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -820,7 +820,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 24'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -835,7 +835,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 25'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -853,7 +853,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 26'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -871,7 +871,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 27'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -891,7 +891,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 28'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -909,7 +909,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 29'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -929,7 +929,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 30'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -948,7 +948,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 31'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -967,7 +967,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 32'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -986,7 +986,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 33'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1001,7 +1001,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 34'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1022,7 +1022,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 35'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1041,7 +1041,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 36'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1059,7 +1059,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 37'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1079,7 +1079,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 38'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1098,7 +1098,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 39'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1117,7 +1117,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 40'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1136,7 +1136,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 41'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1154,7 +1154,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 42'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1172,7 +1172,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 43'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1191,7 +1191,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 44'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1209,7 +1209,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 45'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1227,7 +1227,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 46'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1246,7 +1246,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 47'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1261,7 +1261,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 48'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1281,7 +1281,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 49'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1299,7 +1299,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 50'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1318,7 +1318,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 51'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1336,7 +1336,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 52'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1351,7 +1351,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 53'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1370,7 +1370,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 54'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1388,7 +1388,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 55'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1406,7 +1406,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 56'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1421,7 +1421,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 57'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1442,7 +1442,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 58'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1461,7 +1461,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 59'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1479,7 +1479,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 60'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1499,7 +1499,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 61'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1514,7 +1514,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 62'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1532,7 +1532,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 63'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1547,7 +1547,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 64'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1566,7 +1566,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 65'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1584,7 +1584,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 66'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1602,7 +1602,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 67'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1620,7 +1620,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 68'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1638,7 +1638,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 69'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1656,7 +1656,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 70'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1674,7 +1674,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 71'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1693,7 +1693,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 72'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1712,7 +1712,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 73'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1727,7 +1727,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 74'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1745,7 +1745,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 75'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1764,7 +1764,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 76'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1782,7 +1782,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 77'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1800,7 +1800,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 78'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1815,7 +1815,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 79'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1837,7 +1837,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 80'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1859,7 +1859,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 81'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1881,7 +1881,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 82'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1903,7 +1903,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 83'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1925,7 +1925,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 84'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1947,7 +1947,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 85'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1969,7 +1969,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 86'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -1991,7 +1991,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 87'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2013,7 +2013,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 88'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2035,7 +2035,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 89'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2057,7 +2057,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 90'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2079,7 +2079,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 91'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2101,7 +2101,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 92'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2123,7 +2123,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 93'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2142,7 +2142,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 94'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2157,7 +2157,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 95'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2172,7 +2172,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 96'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2187,7 +2187,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 97'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2205,7 +2205,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 98'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2220,7 +2220,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 99'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2235,7 +2235,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 99'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2253,7 +2253,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 100'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2271,7 +2271,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 101'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2289,7 +2289,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 102'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 10, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
@@ -2307,7 +2307,7 @@ TemporaryBattleList['Aether Branch Chief Faba'] = new TemporaryBattle(
         new GymPokemon('Hypno', 60000000, 60),
     ],
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
-    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',10)]
+    [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket',1)]
 );
 
 TemporaryBattleList['Team Aqua Leader Archie'] = new TemporaryBattle(
@@ -2320,7 +2320,7 @@ TemporaryBattleList['Team Aqua Leader Archie'] = new TemporaryBattle(
         new GymPokemon('Kyogre', 60000000, 60),
     ],
     'You\'ve made your point. I can see you are not one to be trifled with.',
-    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',11)]
+    [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket',2)]
 );
 
 TemporaryBattleList['Team Magma Leader Maxie'] = new TemporaryBattle(
@@ -2333,7 +2333,7 @@ TemporaryBattleList['Team Magma Leader Maxie'] = new TemporaryBattle(
         new GymPokemon('Groudon', 60000000, 60),
     ],
     'I fell behind, but only by an inch.',
-    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',11)]
+    [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket',2)]
 );
 
 TemporaryBattleList['Team Galactic Leader Cyrus'] = new TemporaryBattle(
@@ -2347,7 +2347,7 @@ TemporaryBattleList['Team Galactic Leader Cyrus'] = new TemporaryBattle(
         new GymPokemon('Palkia', 60000000, 60),
     ],
     'Impressive. Your prowess is notable.',
-    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',12)]
+    [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket',3)]
 );
 
 TemporaryBattleList['Team Flare Leader Lysandre'] = new TemporaryBattle(
@@ -2361,7 +2361,7 @@ TemporaryBattleList['Team Flare Leader Lysandre'] = new TemporaryBattle(
         new GymPokemon('Yveltal', 60000000, 60),
     ],
     'I can feel the fire of your convictions burning deep within your heart!',
-    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',13)]
+    [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket',4)]
 );
 
 TemporaryBattleList['Team Plasma Leader Ghetsis'] = new TemporaryBattle(
@@ -2375,7 +2375,7 @@ TemporaryBattleList['Team Plasma Leader Ghetsis'] = new TemporaryBattle(
         new GymPokemon('Reshiram', 60000000, 60),
     ],
     'I couldn\'t have been defeated by some random Trainer from who knows where!',
-    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',14)]
+    [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket',5)]
 );
 
 TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
@@ -2391,5 +2391,5 @@ TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
         new GymPokemon('Mega Mewtwo Y', 60000000, 60),
     ],
     'Ha! That was a truly intense fight!',
-    [new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!',15)]
+    [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket',6)]
 );

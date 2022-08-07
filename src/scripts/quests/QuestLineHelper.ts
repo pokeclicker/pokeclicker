@@ -842,6 +842,7 @@ class QuestLineHelper {
 
         const meltanBreed50 = new HatchEggsQuest(50 / 10, 0);
         const meltanObtain15kFP = new GainFarmPointsQuest(15000 / 1000, 0);
+
         meltanQuestLine.addQuest(new MultipleQuestsQuest([
             meltanBreed50,
             meltanObtain15kFP,
@@ -851,6 +852,7 @@ class QuestLineHelper {
 
         const meltanCatch15Ditto = new CaptureSpecificPokemonQuest('Ditto', 'Catch 15 Ditto', 15 / 10, true, 0, undefined);
         const meltanDefeatMolayne10 = new DefeatGymQuest(10 / 10, 0, 'Elite Molayne');
+
         meltanQuestLine.addQuest(new MultipleQuestsQuest([
             meltanCatch15Ditto,
             meltanDefeatMolayne10,
@@ -861,6 +863,7 @@ class QuestLineHelper {
         const meltanCatch150Steel = new CapturePokemonTypesQuest(150 / 10, undefined, PokemonType.Steel);
         const meltanCatch150Electric = new CapturePokemonTypesQuest(150 / 10, undefined, PokemonType.Electric);
         const meltanDefeatOlivia10 = new DefeatGymQuest(10 / 10, 0, 'Elite Olivia');
+
         meltanQuestLine.addQuest(new MultipleQuestsQuest([
             meltanCatch150Steel,
             meltanCatch150Electric,
@@ -929,9 +932,34 @@ class QuestLineHelper {
 
         meltanQuestLine.addQuest(new MultipleQuestsQuest([meltanCatch50Anorith,meltanCatch50Lileep,meltanCatch50Aerodactyl,meltanDefeatHau15],''));
 
-        // Rainbow Rocket @ Aether Foundation, series of one-time battles (steps 10-18)
+        // Multi-step #10
 
-        const meltanRainbowInvasion = new CustomQuest (50, 0, 'Defeat 50 Rocket Grunts.', () =>
+        const meltanCatch400Meltan = new CaptureSpecificPokemonQuest('Meltan','Catch 400 Meltan',400 / 100, false, 0, undefined);
+        const meltanRainbowRocket = new CustomQuest(1, 0, 'Defeat Team Rainbow Leader Giovanni.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Rainbow Leader Giovanni')]());
+
+        const meltanGetMelmetal = () => {
+            App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Melmetal').id);
+            Notifier.notify({
+                title: meltanQuestLine.name,
+                message: 'You found Melmetal!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        meltanQuestLine.addQuest(new MultipleQuestsQuest([
+            meltanCatch400Meltan,
+            meltanRainbowRocket,
+        ],'',meltanGetMelmetal));
+
+        App.game.quests.questLines().push(meltanQuestLine);
+
+    }
+
+    public static createRainbowRocketQuestLine() {
+        const rainbowQuestLine = new QuestLine('Defeat Rainbow Rocket', 'description');
+
+        const rainbowInvasion = new CustomQuest (50, 0, 'Defeat 50 Rocket Grunts.', () =>
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rainbow Rocket Grunt 1')]() +
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rainbow Rocket Grunt 2')]() +
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rainbow Rocket Grunt 3')]() +
@@ -1035,52 +1063,36 @@ class QuestLineHelper {
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rainbow Rocket Grunt 101')]() +
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rainbow Rocket Grunt 102')]()
         );
-        meltanQuestLine.addQuest(meltanRainbowInvasion);
+        rainbowQuestLine.addQuest(rainbowInvasion);
 
-        const meltanRainbow1 = new CustomQuest(1, 0, 'Defeat Aether Branch Chief Faba.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Aether Branch Chief Faba')]());
-        meltanQuestLine.addQuest(meltanRainbow1);
+        const rainbowFaba = new CustomQuest(1, 0, 'Defeat Aether Branch Chief Faba.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Aether Branch Chief Faba')]());
+        rainbowQuestLine.addQuest(rainbowFaba);
 
-        const meltanRainbow2 = new CustomQuest(1, 0, 'Defeat Team Aqua Leader Archie.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Aqua Leader Archie')]());
-        const meltanRainbow3 = new CustomQuest(1, 0, 'Defeat Team Magma Leader Maxie.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Magma Leader Maxie')]());
+        const rainbowArchie = new CustomQuest(1, 0, 'Defeat Team Aqua Leader Archie.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Aqua Leader Archie')]());
+        const rainbowMaxie = new CustomQuest(1, 0, 'Defeat Team Magma Leader Maxie.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Magma Leader Maxie')]());
 
-        meltanQuestLine.addQuest(new MultipleQuestsQuest([
-            meltanRainbow2,
-            meltanRainbow3,
+        rainbowQuestLine.addQuest(new MultipleQuestsQuest([
+            rainbowArchie,
+            rainbowMaxie,
         ],''));
 
-        const meltanRainbow4 = new CustomQuest(1, 0, 'Defeat Team Galactic Leader Cyrus.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Galactic Leader Cyrus')]());
-        meltanQuestLine.addQuest(meltanRainbow4);
+        const rainbowCyrus = new CustomQuest(1, 0, 'Defeat Team Galactic Leader Cyrus.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Galactic Leader Cyrus')]());
+        rainbowQuestLine.addQuest(rainbowCyrus);
 
-        const meltanRainbow5 = new CustomQuest(1, 0, 'Defeat Team Flare Leader Lysandre.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Leader Lysandre')]());
-        meltanQuestLine.addQuest(meltanRainbow5);
+        const rainbowLysandre = new CustomQuest(1, 0, 'Defeat Team Flare Leader Lysandre.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Leader Lysandre')]());
+        rainbowQuestLine.addQuest(rainbowLysandre);
 
-        const meltanRainbow6 = new CustomQuest(1, 0, 'Defeat Team Plasma Leader Ghetsis.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Leader Ghetsis')]());
-        meltanQuestLine.addQuest(meltanRainbow6);
+        const rainbowGhetsis = new CustomQuest(1, 0, 'Defeat Team Plasma Leader Ghetsis.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Leader Ghetsis')]());
+        rainbowQuestLine.addQuest(rainbowGhetsis);
 
-        const meltanRainbow7 = new CustomQuest(1, 0, 'Defeat Team Rainbow Leader Giovanni.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Rainbow Leader Giovanni')]());
-        meltanQuestLine.addQuest(meltanRainbow7);
-
-        const meltanGetMelmetal = () => {
-            App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Melmetal').id);
-            Notifier.notify({
-                title: meltanQuestLine.name,
-                message: 'You found Melmetal!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
-
-        const meltanCatch400Meltan = new CustomQuest(400 / 100, 0, 'Catch 400 Meltan', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Meltan').id](), App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Meltan').id]);
-        meltanQuestLine.addQuest(meltanCatch400Meltan);
-
-        App.game.quests.questLines().push(meltanQuestLine);
+        const rainbowGiovanni = new CustomQuest(1, 0, 'Defeat Team Rainbow Leader Giovanni.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Rainbow Leader Giovanni')]());
+        rainbowQuestLine.addQuest(rainbowGiovanni);
 
     }
 
     public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
-
 
     public static loadQuestLines() {
         this.createTutorial();
@@ -1101,5 +1113,6 @@ class QuestLineHelper {
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
         this.createMeltanQuestLine();
+        this.createRainbowRocketQuestLine();
     }
 }
