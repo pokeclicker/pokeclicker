@@ -451,7 +451,7 @@ TemporaryBattleList.Bede1 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Bede',
-        imageName: 'Bede1',
+        imageName: 'Bede',
     }
 );
 TemporaryBattleList.Hop4 = new TemporaryBattle(
