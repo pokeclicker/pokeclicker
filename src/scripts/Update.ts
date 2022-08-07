@@ -1039,6 +1039,10 @@ class Update implements Saveable {
         },
 
         '0.9.11': ({ playerData, saveData }) => {
+            // Start Delta questline if the player has beaten Kalos champion
+            if (saveData.badgeCase[78]) {
+                saveData.quests.questLines.push({state: 1, name: 'Delta Episode', quest: 0});
+            }
             // Start Primals questline if the player has beaten Kalos champion
             if (saveData.badgeCase[78]) {
                 saveData.quests.questLines.push({state: 1, name: 'The Missing Primals', quest: 0});
@@ -1071,6 +1075,9 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 120);
             // Add Terra Cave
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 121);
+            // Add Delta Episode Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 13);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 14);
         },
 
     };

@@ -2628,9 +2628,35 @@ const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
 const KiloudeConfusedHiker = new NPC('Confused Hiker', [
     'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
 ]);
-const DeltaSlateportHoennReporter = new NPC('Reporter Gabby', [
+const DeltaSlateportHoennReporter1 = new NPC('Reporter Gabby', [
+    'Oh hey! Didn\'t expect to see you again. A lot has changed around here.',
     'I don\'t report on roaming Pokémon anymore. But what I can report on is that a whole bunch of strange Pokémon from other regions have moved in! I don\'t know what caused it. They are just... here now.',
-]);
+    'A message from Professor Birch? Stuff\'s a little weird, but nothing I\'d call in the Champion of Hoenn for. If there\'s more going on I don\'t know about it. You\'re gonna have to ask the prof yourself.'
+],
+{ requirement: new QuestLineStepCompletedRequirement('Delta Episode', 1, GameConstants.AchievementOption.less ) });
+const DeltaSlateportHoennReporter2 = new NPC('Reporter Gabby', [
+    'I don\'t report on roaming Pokémon anymore. But what I can report on is that a whole bunch of strange Pokémon from other regions have moved in! I don\'t know what caused it. They are just... here now.',
+],
+{ requirement: new QuestLineStepCompletedRequirement('Delta Episode', 1) });
+const DeltaProfBirch1 = new NPC('Professor Birch', [
+    'Welcome back, Champ! You look worried?',
+    'Oh no, this is a big misunderstanding! There\'s nothing wrong. No emergency! Just an invitation.',
+    'A spectacular meteor shower will be visible from Hoenn soon. It\'s a once in a lifetime sight. You should go see it at the Mossdeep space station! And bring a friend, if you want.',
+    'You could check out my bulletin board while you\'re here. There\'s some new opportunities for you to check out.'
+],
+{ requirement: new QuestLineStepCompletedRequirement('Delta Episode', 2, GameConstants.AchievementOption.less ) });
+const DeltaMay1 = new NPC('May', [
+    'Hello, nice to see you again. You want to ask me something? No time for that now!',
+    'Someone stole my Mega Stone! Yes, we have Mega Stones here now. Happened a while ago, while you were away. Didn\'t anyone tell you? So much has changed.',
+    'The thief fled in the direction of Petalburg City! Please, help me recover my Mega Stone!',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Delta Episode', 1), new QuestLineStepCompletedRequirement('Delta Episode', 3, GameConstants.AchievementOption.less )]) });
+const DeltaWally1 = new NPC('Wally', [
+    'Good timing!',
+    'These guys want to steal my Mega Stone! Problem is, I don\'t have it. It\'s already been stolen!',
+    'They just won\'t listen. Please, help me.',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Delta Episode', 2), new QuestLineStepCompletedRequirement('Delta Episode', 4, GameConstants.AchievementOption.less )]) });
 const DeltaFallarborGemMaster = new NPC('Gem Master', [
     'Yep. My shop\'s still open. Don\'t act surprised, I know how to run a business.',
 ]);
@@ -2851,6 +2877,7 @@ TownList['Delta Littleroot Town'] = new Town(
     [],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 101)],
+        npcs: [DeltaProfBirch1, DeltaMay1],
     }
 );
 TownList['Delta Oldale Town'] = new Town(
@@ -2869,7 +2896,7 @@ TownList['Delta Oldale Town'] = new Town(
 TownList['Delta Petalburg City'] = new Town(
     'Delta Petalburg City',
     GameConstants.Region.kalos,
-    [PetalburgCityShop],
+    [PetalburgCityShop, TemporaryBattleList['Aqua Admin Matt 1'], TemporaryBattleList['Magma Admin Courtney 1']],
     {
         requirements: [
             new OneFromManyRequirement([
@@ -2877,6 +2904,7 @@ TownList['Delta Petalburg City'] = new Town(
                 new RouteKillRequirement(10, GameConstants.Region.kalos, 104),
             ]),
         ],
+        npcs: [DeltaWally1],
     }
 );
 TownList['Delta Rustboro City'] = new Town(
@@ -2912,7 +2940,7 @@ TownList['Delta Slateport City'] = new Town(
     [SlateportCityShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-        npcs: [DeltaSlateportHoennReporter],
+        npcs: [DeltaSlateportHoennReporter1, DeltaSlateportHoennReporter2],
     }
 );
 TownList['Delta Mauville City'] = new Town(

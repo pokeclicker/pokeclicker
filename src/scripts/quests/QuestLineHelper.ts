@@ -558,6 +558,30 @@ class QuestLineHelper {
         App.game.quests.questLines().push(ashKetchumQuestLine);
     }
 
+    public static createDeltaEpisodeQuestLine() {
+        const deltaEpisodeQuestLine = new QuestLine('Delta Episode', 'Something is going on in Hoenn.');
+
+        const talktoReporterGabby1 = new TalkToNPCQuest(DeltaSlateportHoennReporter1, 'Use Subregional Travel to travel to the Delta Episode and ask the first person you meet for information.');
+        deltaEpisodeQuestLine.addQuest(talktoReporterGabby1);
+
+        const talktoProfessorBirch1 = new TalkToNPCQuest(DeltaProfBirch1, 'Talk to Professor Birch in Littleroot Town.');
+        deltaEpisodeQuestLine.addQuest(talktoProfessorBirch1);
+
+        const talktoMay1 = new TalkToNPCQuest(DeltaMay1, 'Bring a friend.');
+        deltaEpisodeQuestLine.addQuest(talktoMay1);
+
+        const talktoWally1 = new TalkToNPCQuest(DeltaWally1, 'Investigate in Petalburg City.');
+        deltaEpisodeQuestLine.addQuest(talktoWally1);
+        
+        const defeatAquaMagmaAdmins = new CustomQuest(2, 0, 'Defeat the wannabe thieves.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Aqua Admin Matt 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Magma Admin Courtney 1')]()
+        );
+        deltaEpisodeQuestLine.addQuest(defeatAquaMagmaAdmins);
+
+        App.game.quests.questLines().push(deltaEpisodeQuestLine);
+    }
+
     public static createPrimalsQuestLine() {
         const primalsQuestLine = new QuestLine('The Missing Primals', 'The scientists at the Delta Weather Institute need help.');
 
@@ -919,6 +943,7 @@ class QuestLineHelper {
         this.createPlasmaUnovaQuestLine();
         this.createVivillonQuestLine();
         this.createAshKetchumQuestLine();
+        this.createDeltaEpisodeQuestLine();
         this.createPrimalsQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();

@@ -1244,6 +1244,8 @@ export const TemporaryBattles = [
     'Ash Ketchum Sinnoh',
     'Ash Ketchum Unova',
     'Ash Ketchum Kalos',
+    'Aqua Admin Matt 1',
+    'Magma Admin Courtney 1',
     'Ultra Wormhole',
     'Ultra Megalopolis',
     'Captain Mina',

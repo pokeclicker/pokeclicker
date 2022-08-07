@@ -219,6 +219,28 @@ TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
         imageName: 'Ash Ketchum',
     }
 );
+TemporaryBattleList['Aqua Admin Matt 1'] = new TemporaryBattle(
+    'Aqua Admin Matt 1',
+    [new GymPokemon('Sharpedo', 743988000, 53)],
+    'Hooaahhh! You clown! Always getting\' all up in my business! If it\'s gonna be like that, I\'m off to Meteor Falls.',
+    [new QuestLineStepCompletedRequirement('Delta Episode', 3)],
+    undefined,
+    {
+        displayName: 'Aqua Admin Matt',
+        imageName: 'Aqua Admin Matt',
+    }
+);
+TemporaryBattleList['Magma Admin Courtney 1'] = new TemporaryBattle(
+    'Magma Admin Courtney 1',
+    [new GymPokemon('Camerupt', 743988000, 53)],
+    '"...No! You\'re always meddling! If that\'s...how it is...at Meteor Falls...the Leader\'s...Mega Stone...',
+    [new QuestLineStepCompletedRequirement('Delta Episode', 3)],
+    undefined,
+    {
+        displayName: 'Magma Admin Courtney',
+        imageName: 'Magma Admin Courtney',
+    }
+);
 
 // Alola Temporarybattles
 TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(

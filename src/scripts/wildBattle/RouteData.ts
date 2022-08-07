@@ -1693,7 +1693,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Tentacool', 'Krabby', 'Magikarp', 'Wingull', 'Pelipper', 'Wailmer', 'Frillish', 'Skrelp', 'Clauncher'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+    [new QuestLineStepCompletedRequirement('Delta Episode', 0)],
     21.1,
     GameConstants.KalosSubRegions.DeltaEpisode,
     true,
@@ -1705,7 +1705,7 @@ Routes.add(new RegionRoute(
         land: ['Oddish', 'Magnemite', 'Voltorb', 'Zigzagoon', 'Wingull', 'Electrike', 'Plusle', 'Minun', 'Gulpin', 'Shellos (West)', 'Shellos (East)', 'Trubbish', 'Chatot'],
         water: ['Tentacool', 'Magikarp', 'Wingull', 'Pelipper', 'Wailmer'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+    [new QuestLineStepCompletedRequirement('Delta Episode', 0)],
     21.1,
     GameConstants.KalosSubRegions.DeltaEpisode,
     true,
