@@ -831,14 +831,6 @@ class Update implements Saveable {
             if (saveData.badgeCase[8]) {
                 Update.startQuestLine(saveData, 'Persons of Interest');
             }
-            // Start UB questline if player has beaten Alola Champion already
-            if (saveData.badgeCase[95]) {
-                Update.startQuestLine(saveData, 'Ultra Beast Hunt', true);
-            }
-            // Start Ash questline if player has beaten Kalos champion already
-            if (saveData.badgeCase[78]) {
-                Update.startQuestLine(saveData, 'The New Kid', true);
-            }
 
             // Just incase statistics is not set
             saveData.statistics = saveData.statistics || {};
@@ -1284,15 +1276,14 @@ class Update implements Saveable {
         saveData.breeding.queueList = saveData.breeding.queueList?.map(p => p == oldName ? newName : p) || [];
     }
 
-    static startQuestLine = (saveData, questLineName: string, optional = false) => {
+    static startQuestLine = (saveData, questLineName: string) => {
         const questLine = saveData.quests.questLines.find(ql => ql.name == questLineName);
-        const newState = optional ? 3 : 1;
         if (questLine) {
             // Set to started if not yet started, otherwise leave in it's current state
-            questLine.state = questLine.state == 0 ? newState : questLine.state;
+            questLine.state = questLine.state == 0 ? 1 : questLine.state;
         } else {
             // Push the quest, doesn't exist in save data yet
-            saveData.quests.questLines.push({ state: newState, name: questLineName, quest: 0 });
+            saveData.quests.questLines.push({ state: 1, name: questLineName, quest: 0 });
         }
     }
 

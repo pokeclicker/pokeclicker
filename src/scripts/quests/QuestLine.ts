@@ -1,24 +1,23 @@
 class QuestLine {
-    name: string;
-    description: string;
     state: KnockoutObservable<QuestLineState> = ko.observable(QuestLineState.inactive).extend({ numeric: 0 });
     quests: KnockoutObservableArray<Quest>;
     curQuest: KnockoutComputed<number>;
     curQuestObject: KnockoutComputed<any>;
     curQuestInitial: KnockoutObservable<number>;
     totalQuests: number;
-    optional: boolean;
-    bulletinBoard: GameConstants.BulletinBoards;
 
     autoBegin: KnockoutSubscription;
 
-    constructor(name: string, description: string, optional = false, bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.All) {
+    constructor(
+        public name: string,
+        public description: string,
+        public requirements?: Requirement,
+        public bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.None
+    ) {
         this.name = name;
         this.description = description;
         this.quests = ko.observableArray();
         this.totalQuests = 0;
-        this.optional = optional;
-        this.bulletinBoard = bulletinBoard;
         this.curQuest = ko.pureComputed(() => {
             const acc = 0;
             return this.quests().map((quest) => {
@@ -65,11 +64,7 @@ class QuestLine {
         this.quests.push(quest);
     }
 
-    beginQuest(index = 0, initial?: number, force = false) {
-        if (index == 0 && this.optional && !force) {
-            this.state(QuestLineState.onBulletinBoard);
-            return;
-        }
+    beginQuest(index = 0, initial?: number) {
         const quest = this.quests()[index];
         if (initial != undefined) {
             quest.initial(initial);

@@ -22,10 +22,18 @@ class BulletinBoard extends TownContent {
     }
 
     public getQuests() {
-        return App.game.quests.questLines().filter(q => (q.state() == QuestLineState.onBulletinBoard ||
-            (q.state() == QuestLineState.started && q.optional)) &&
-            (q.bulletinBoard == GameConstants.BulletinBoards.All ||
-            q.bulletinBoard == this.board));
+        return App.game.quests.questLines().filter(q => {
+            if (q.state() == QuestLineState.ended) {
+                return false;
+            }
+            if (q.requirements ? !q.requirements.isCompleted() : false) {
+                return false;
+            }
+            if (q.bulletinBoard !== GameConstants.BulletinBoards.All && q.bulletinBoard !== this.board) {
+                return false;
+            }
+            return true;
+        });
     }
 
     constructor(public board: GameConstants.BulletinBoards) {
