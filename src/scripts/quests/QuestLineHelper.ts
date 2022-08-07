@@ -1036,7 +1036,7 @@ class QuestLineHelper {
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rainbow Rocket Grunt 102')]()
         );
         meltanQuestLine.addQuest(meltanRainbowInvasion);
-        
+
         const meltanRainbow1 = new CustomQuest(1, 0, 'Defeat Aether Branch Chief Faba.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Aether Branch Chief Faba')]());
         meltanQuestLine.addQuest(meltanRainbow1);
 
