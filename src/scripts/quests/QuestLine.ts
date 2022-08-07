@@ -1,6 +1,4 @@
 class QuestLine {
-    name: string;
-    description: string;
     state: KnockoutObservable<QuestLineState> = ko.observable(QuestLineState.inactive).extend({ numeric: 0 });
     quests: KnockoutObservableArray<Quest>;
     curQuest: KnockoutComputed<number>;
@@ -10,7 +8,12 @@ class QuestLine {
 
     autoBegin: KnockoutSubscription;
 
-    constructor(name: string, description: string) {
+    constructor(
+        public name: string,
+        public description: string,
+        public requirement?: Requirement,
+        public bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.None
+    ) {
         this.name = name;
         this.description = description;
         this.quests = ko.observableArray();
