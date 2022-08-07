@@ -1525,7 +1525,7 @@ Routes.add(new RegionRoute(
     'Alola Route 1', GameConstants.Region.alola, 1,
     new RoutePokemon({
         land: ['Caterpie', 'Alolan Rattata', 'Ledyba', 'Spinarak', 'Pichu', 'Buneary', 'Pikipek', 'Yungoos', 'Grubbin'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
     undefined,
@@ -1536,7 +1536,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Slowpoke', 'Wingull', 'Inkay'],
         water: ['Tentacool', 'Mantyke', 'Finneon'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
     1.1,
@@ -1546,7 +1546,7 @@ Routes.add(new RegionRoute(
     'Alola Route 2', GameConstants.Region.alola, 2,
     new RoutePokemon({
         land: ['Alolan Rattata', 'Spearow', 'Ekans', 'Alolan Meowth', 'Growlithe', 'Abra', 'Drowzee', 'Smeargle', 'Makuhita', 'Furfrou', 'Yungoos', 'Cutiefly'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
     undefined,
@@ -1556,7 +1556,7 @@ Routes.add(new RegionRoute(
     'Alola Route 3', GameConstants.Region.alola, 3,
     new RoutePokemon({
         land: ['Spearow', 'Mankey', 'Bagon', 'Rufflet', 'Vullaby', 'Hawlucha', 'Cutiefly'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Verdant Cavern'))],
     undefined,
@@ -1566,7 +1566,7 @@ Routes.add(new RegionRoute(
     'Melemele Sea', GameConstants.Region.alola, 19,
     new RoutePokemon({
         water: ['Tentacool', 'Magikarp', 'Corsola', 'Remoraid', 'Wingull', 'Clamperl', 'Luvdisc', 'Mantyke', 'Finneon', 'Wishiwashi (Solo)'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill'))],
     5.1,
@@ -1577,7 +1577,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Alolan Rattata', 'Slowpoke', 'Wingull', 'Bagon', 'Yungoos'],
         water: ['Tentacool', 'Shellder', 'Magikarp', 'Remoraid', 'Wingull', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Seaward Cave')),
@@ -1590,7 +1590,7 @@ Routes.add(new RegionRoute(
     'Alola Route 4', GameConstants.Region.alola, 4,
     new RoutePokemon({
         land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
     undefined,
@@ -1600,7 +1600,7 @@ Routes.add(new RegionRoute(
     'Alola Route 5', GameConstants.Region.alola, 5,
     new RoutePokemon({
         land: ['Caterpie', 'Metapod', 'Butterfree', 'Bonsly', 'Lillipup', 'Pikipek', 'Trumbeak', 'Grubbin', 'Fomantis'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Paniola Ranch'))],
     undefined,
@@ -1610,7 +1610,7 @@ Routes.add(new RegionRoute(
     'Alola Route 6', GameConstants.Region.alola, 6,
     new RoutePokemon({
         land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill'))],
     undefined,
@@ -1620,7 +1620,7 @@ Routes.add(new RegionRoute(
     'Alola Route 7', GameConstants.Region.alola, 7,
     new RoutePokemon({
         water: ['Tentacool', 'Staryu', 'Magikarp', 'Wingull', 'Finneon', 'Wishiwashi (Solo)', 'Pyukumuku'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
     undefined,
@@ -1631,7 +1631,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Alolan Rattata', 'Fletchling', 'Trumbeak', 'Yungoos', 'Stufful'],
         water: ['Tentacool', 'Magikarp', 'Chinchou', 'Remoraid', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Wela Volcano Park'))],
     undefined,
@@ -1641,7 +1641,7 @@ Routes.add(new RegionRoute(
     'Alola Route 9', GameConstants.Region.alola, 9,
     new RoutePokemon({
         water: ['Magikarp', 'Corsola', 'Luvdisc', 'Wishiwashi (Solo)', 'Mareanie'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Diglett\'s Tunnel'))],
     undefined,
@@ -1652,7 +1652,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Alolan Raticate', 'Natu', 'Wingull', 'Nosepass', 'Gumshoos', 'Stufful'],
         water: ['Magikarp', 'Chinchou', 'Wishiwashi (Solo)'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Memorial Hill'))],
     9.1,
@@ -1662,7 +1662,7 @@ Routes.add(new RegionRoute(
     'Alola Route 10', GameConstants.Region.alola, 10,
     new RoutePokemon({
         land: ['Alolan Raticate', 'Fearow', 'Ledian', 'Ariados', 'Skarmory', 'Pancham', 'Gumshoos'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Malie Garden'))],
     undefined,
@@ -1672,7 +1672,7 @@ Routes.add(new RegionRoute(
     'Mount Hokulani', GameConstants.Region.alola, 22,
     new RoutePokemon({
         land: ['Fearow', 'Ditto', 'Cleffa', 'Skarmory', 'Elekid', 'Beldum', 'Elgyem', 'Minior (Meteor)', 'Minior (Blue Core)', 'Minior (Green Core)', 'Minior (Indigo Core)', 'Minior (Orange Core)', 'Minior (Red Core)', 'Minior (Violet Core)', 'Minior (Yellow Core)'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 10)],
     10.1,
@@ -1682,7 +1682,7 @@ Routes.add(new RegionRoute(
     'Alola Route 11', GameConstants.Region.alola, 11,
     new RoutePokemon({
         land: ['Parasect', 'Ledian', 'Ariados', 'Pancham', 'Trumbeak', 'Komala'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Malie Garden'))],
     undefined,
@@ -1692,7 +1692,7 @@ Routes.add(new RegionRoute(
     'Alola Route 12', GameConstants.Region.alola, 12,
     new RoutePokemon({
         land: ['Alolan Geodude', 'Alolan Graveler', 'Houndoom', 'Manectric', 'Torkoal', 'Mudbray'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 11),
@@ -1705,7 +1705,7 @@ Routes.add(new RegionRoute(
     'Alola Route 13', GameConstants.Region.alola, 13,
     new RoutePokemon({
         water: ['Magikarp', 'Wishiwashi (Solo)', 'Bruxish'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 12)],
     undefined,
@@ -1715,7 +1715,7 @@ Routes.add(new RegionRoute(
     'Alola Route 14', GameConstants.Region.alola, 14,
     new RoutePokemon({
         water: ['Tentacruel', 'Magikarp', 'Pelipper', 'Finneon', 'Frillish', 'Wishiwashi (Solo)', 'Bruxish'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
     undefined,
@@ -1727,7 +1727,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Dugtrio', 'Trapinch', 'Baltoy', 'Gabite', 'Krokorok', 'Golett'],
         special: [
             new SpecialRoutePokemon(['Celesteela'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 11)),
-            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15)),
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
         ],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))],
@@ -1739,7 +1739,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Gumshoos', 'Sandygast'],
         water: ['Tentacruel', 'Magikarp', 'Clamperl', 'Finneon', 'Wishiwashi (Solo)', 'Bruxish'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))],
     undefined,
@@ -1749,7 +1749,7 @@ Routes.add(new RegionRoute(
     'Alola Route 16', GameConstants.Region.alola, 16,
     new RoutePokemon({
         land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Scraggy', 'Gumshoos'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 15)],
     undefined,
@@ -1761,7 +1761,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Raticate', 'Fearow', 'Alolan Graveler', 'Ledian', 'Ariados', 'Scraggy', 'Bisharp', 'Gumshoos'],
         special: [
             new SpecialRoutePokemon(['Kartana'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 11)),
-            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15)),
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
         ],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ula\'ula Meadow'))],
@@ -1772,7 +1772,7 @@ Routes.add(new RegionRoute(
     'Poni Wilds', GameConstants.Region.alola, 24,
     new RoutePokemon({
         land: ['Granbull', 'Pelipper', 'Gastrodon (East)', 'Furfrou', 'Inkay'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
     undefined,
@@ -1782,7 +1782,7 @@ Routes.add(new RegionRoute(
     'Ancient Poni Path', GameConstants.Region.alola, 25,
     new RoutePokemon({
         land: ['Granbull', 'Pelipper', 'Gastrodon (East)', 'Furfrou', 'Inkay'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 24)],
     undefined,
@@ -1792,7 +1792,7 @@ Routes.add(new RegionRoute(
     'Poni Breaker Coast', GameConstants.Region.alola, 26,
     new RoutePokemon({
         water: ['Tentacruel', 'Lapras', 'Magikarp', 'Pelipper', 'Carvanha', 'Wailmer', 'Relicanth', 'Gastrodon (East)', 'Lumineon'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
     undefined,
@@ -1805,7 +1805,7 @@ Routes.add(new RegionRoute(
         special: [
             new SpecialRoutePokemon(['Blacephalon'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 15)),
             new SpecialRoutePokemon(['Stakataka'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 15)),
-            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15)),
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
         ],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
@@ -1816,7 +1816,7 @@ Routes.add(new RegionRoute(
     'Poni Plains', GameConstants.Region.alola, 28,
     new RoutePokemon({
         land: ['Alolan Raticate', 'Fearow', 'Hypno', 'Tauros', 'Miltank', 'Pelipper', 'Hariyama', 'Cottonee', 'Petilil', 'Trumbeak', 'Gumshoos', 'Mudsdale'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 27)],
     undefined,
@@ -1826,7 +1826,7 @@ Routes.add(new RegionRoute(
     'Poni Coast', GameConstants.Region.alola, 29,
     new RoutePokemon({
         land: ['Alolan Dugtrio'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 28)],
     undefined,
@@ -1837,7 +1837,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Pelipper', 'Lickitung', 'Golduck', 'Granbull', 'Inkay', 'Bewear'],
         water: ['Magikarp', 'Dratini', 'Barboach'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 15))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 29)],
     undefined,

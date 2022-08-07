@@ -964,7 +964,7 @@ class QuestLineHelper {
             });
         };
 
-        const meltanCatch400Meltan = new CaptureSpecificPokemonQuest('Meltan', 'Catch 400 Meltan', 400 / 100, true, meltanGetMelmetal, undefined);
+        const meltanCatch400Meltan = new CustomQuest(400 / 100, 0, 'Catch 400 Meltan', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Meltan').id](), App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Meltan').id]);
         meltanQuestLine.addQuest(meltanCatch400Meltan);
 
         App.game.quests.questLines().push(meltanQuestLine);
