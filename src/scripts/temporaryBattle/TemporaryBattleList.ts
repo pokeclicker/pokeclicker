@@ -856,7 +856,7 @@ TemporaryBattleList.Mustard = new TemporaryBattle(
     [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
     [
         new MultiRequirement([
-            new RouteKillRequirement(10, GameConstants.Region.galar, 33)
+            new RouteKillRequirement(10, GameConstants.Region.galar, 33),
             new QuestLineStartedRequirement('The Dojo\'s Armor'),
         ]),
     ],
