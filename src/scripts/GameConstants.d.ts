@@ -398,7 +398,10 @@ namespace GameConstants {
         None = -2,
         All = -1,
         Kalos,
-        Alola
+        Alola,
+        Galar,
+        Armor,
+        Crown
     }
     declare const EnergyRestoreEffect: {
         SmallRestore: number;

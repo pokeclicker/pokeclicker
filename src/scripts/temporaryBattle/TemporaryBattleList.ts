@@ -629,14 +629,16 @@ TemporaryBattleList.Hop8 = new TemporaryBattle(
         new GymPokemon('Inteleon', 375642238, 60),
     ],
     'I didn\'t expect there to be such a gap between you and me, mate...',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Slumbering Weald Shrine'))],
+    [
+        new MultiRequirement([
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Slumbering Weald Shrine')),
+            new QuestLineStartedRequirement('Sword & Shield'),
+        ]),
+    ],
     undefined,
     {
         displayName: 'Pokémon Trainer Hop',
         imageName: 'Hop',
-        firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('Sword and Shield').beginQuest();
-        },
     }
 );
 TemporaryBattleList.Sordward1 = new TemporaryBattle(
@@ -852,12 +854,15 @@ TemporaryBattleList.Mustard = new TemporaryBattle(
     ],
     'That was everything I hoped for and more!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
+    [
+        new MultiRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.galar, 33)
+            new QuestLineStartedRequirement('The Dojo\'s Armor'),
+        ]),
+    ],
     undefined,
     {
         displayName: 'Dojo Master Mustard',
-        firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('The Dojo\'s Armor').beginQuest();
-        },
     }
 );
 TemporaryBattleList.Klara2 = new TemporaryBattle(

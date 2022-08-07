@@ -786,6 +786,9 @@ export enum BulletinBoards {
     All = -1,
     Kalos,
     Alola,
+    Galar,
+    Armor,
+    Crown,
 }
 
 export const EnergyRestoreEffect = {
