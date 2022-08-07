@@ -431,7 +431,7 @@ class QuestLineHelper {
 
     // Kalos QuestLines
     public static createVivillonQuestLine() {
-        const vivillonQuestLine = new QuestLine('The Great Vivillon Hunt!', 'Discover the beauty of Vivillon.', new GymBadgeRequirement(BadgeEnums.Iceberg), GameConstants.BulletinBoards.Kalos);
+        const vivillonQuestLine = new QuestLine('The Great Vivillon Hunt!', 'Discover the beauty of Vivillon.', [new GymBadgeRequirement(BadgeEnums.Iceberg)], GameConstants.BulletinBoards.Kalos);
 
         const createVivillonQuest = (type: PokemonType, vivillon: PokemonNameType, dungeons: Array<string>, hint: string) => {
             // Capture 100 Water type Pokemon
@@ -525,7 +525,7 @@ class QuestLineHelper {
     }
 
     public static createAshKetchumQuestLine() {
-        const ashKetchumQuestLine = new QuestLine('The New Kid', 'A new kid from your home town is making waves. Show him who the real prodigy of Pallet Town is.', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), GameConstants.BulletinBoards.Kalos);
+        const ashKetchumQuestLine = new QuestLine('The New Kid', 'A new kid from your home town is making waves. Show him who the real prodigy of Pallet Town is.', [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)], GameConstants.BulletinBoards.Kalos);
 
         const clearKantoAsh = new CustomQuest(1, 0, 'Defeat the kid near Pallet Town.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Kanto')]());
         ashKetchumQuestLine.addQuest(clearKantoAsh);
@@ -621,7 +621,7 @@ class QuestLineHelper {
     }
 
     public static createUltraBeastQuestLine() {
-        const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), GameConstants.BulletinBoards.Alola);
+        const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts', [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)], GameConstants.BulletinBoards.Alola);
 
         const talkToLooker = new TalkToNPCQuest(RoadsideMotelLooker1, 'Talk to Looker at the Roadside Motel.');
         UltraBeastQuestLine.addQuest(talkToLooker);
