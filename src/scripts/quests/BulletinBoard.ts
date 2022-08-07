@@ -15,14 +15,15 @@ class BulletinBoard extends TownContent {
         $('#bulletinBoardModal').modal('show');
     }
     public areaStatus() {
-        if (this.getQuests().length) {
+        if (this.getQuests().filter((q) => q.state() == QuestLineState.onBulletinBoard).length) {
             return areaStatus.unlockedUnfinished;
         }
         return areaStatus.completed;
     }
 
     public getQuests() {
-        return App.game.quests.questLines().filter(q => q.state() == QuestLineState.onBulletinBoard &&
+        return App.game.quests.questLines().filter(q => (q.state() == QuestLineState.onBulletinBoard ||
+            (q.state() == QuestLineState.started && q.optional)) &&
             (q.bulletinBoard == GameConstants.BulletinBoards.All ||
             q.bulletinBoard == this.board));
     }

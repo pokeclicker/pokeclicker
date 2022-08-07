@@ -20,7 +20,12 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                                     <p class="card-text" data-bind="text: $data.description" style="font-size: 1.3rem;">Description</p>
                                 </div>
                                 <div class="card-footer p-0">
+                                    <!-- ko if: $data.state() == QuestLineState.onBulletinBoard -->
                                     <button class="btn btn-primary btn-block" data-bind="click: () => { $data.beginQuest(0, undefined, true); }">Accept</button>
+                                    <!-- /ko -->
+                                    <!-- ko ifnot: $data.state() == QuestLineState.onBulletinBoard -->
+                                    <span>In progress</span>
+                                    <!-- /ko -->
                                 </div>
                             </div>
                         </td>
