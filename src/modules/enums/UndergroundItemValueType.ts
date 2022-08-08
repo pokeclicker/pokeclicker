@@ -3,6 +3,7 @@ enum UndergroundItemValueType {
     Gem,
     Shard,
     Fossil,
+    FossilPiece,
     EvolutionItem,
 }
 
