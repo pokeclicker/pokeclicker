@@ -28,7 +28,7 @@ class TemporaryBattleBattle extends Battle {
                 this.prepareCatch(enemyPokemon, pokeBall);
                 setTimeout(
                     () => {
-                        this.attemptCatch(enemyPokemon);
+                        this.attemptCatch(enemyPokemon, 1, player.region);
                         this.endFight();
                     },
                     App.game.pokeballs.calculateCatchTime(pokeBall)
