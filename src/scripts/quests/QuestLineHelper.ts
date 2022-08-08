@@ -1235,9 +1235,14 @@ class QuestLineHelper {
         const meltanCatch50Anorith = new CaptureSpecificPokemonQuest('Anorith', 'Catch 50 Anorith', 50 / 50, true, 0, undefined);
         const meltanCatch50Lileep = new CaptureSpecificPokemonQuest('Lileep', 'Catch 50 Lileep', 50 / 50, true, 0, undefined);
         const meltanCatch50Aerodactyl = new CaptureSpecificPokemonQuest('Aerodactyl', 'Catch 50 Aerodactyl', 50 / 50, true, 0, undefined);
-        const meltanDefeatHau15 = new DefeatGymQuest(15 / 10, 0, 'Champion Hau');
+        const meltanDefeatHau15 = new DefeatGymQuest(15 / 15, 0, 'Champion Hau');
 
-        meltanQuestLine.addQuest(new MultipleQuestsQuest([meltanCatch50Anorith,meltanCatch50Lileep,meltanCatch50Aerodactyl,meltanDefeatHau15],'', () => App.game.quests.getQuestLine('Defeat Rainbow Rocket').beginQuest()));
+        meltanQuestLine.addQuest(new MultipleQuestsQuest([
+            meltanCatch50Anorith,
+            meltanCatch50Lileep,
+            meltanCatch50Aerodactyl,
+            meltanDefeatHau15,
+        ],''));
 
         // Multi-step #10
 
@@ -1264,7 +1269,7 @@ class QuestLineHelper {
     }
 
     public static createRainbowRocketQuestLine() {
-        const rainbowQuestLine = new QuestLine('Defeat Rainbow Rocket', 'description');
+        const rainbowQuestLine = new QuestLine('Defeat Rainbow Rocket', 'description', new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9));
 
         const rainbowInvasion = new CustomQuest (50, 0, 'Defeat 50 Rocket Grunts.', () =>
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rainbow Rocket Grunt 1')]() +
