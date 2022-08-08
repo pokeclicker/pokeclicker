@@ -1061,7 +1061,8 @@ class QuestLineHelper {
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rainbow Rocket Grunt 99')]() +
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rainbow Rocket Grunt 100')]() +
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rainbow Rocket Grunt 101')]() +
-            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rainbow Rocket Grunt 102')]()
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rainbow Rocket Grunt 102')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rainbow Rocket Grunt 103')]()
         );
         rainbowQuestLine.addQuest(rainbowInvasion);
 
