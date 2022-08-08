@@ -1596,6 +1596,26 @@
         %>
 
         <%- include('templates/mapOverlay',
+            { name: "Professor Kukui's Blimp"
+            , x: 72, y: 30
+            , width: 6, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Iki Town Outskirts')}, attr:{ class: MapHelper.calculateTownCssClass('Iki Town Outskirts') }"
+            , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+            , image: "assets/images/map/blimp_empty.png"
+            })
+        %>
+        
+        <%- include('templates/mapOverlay',
+            { name: "Professor Kukui's Blimp"
+            , x: 72, y: 30
+            , width: 6, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Iki Town Outskirts')}, attr:{ class: MapHelper.calculateTownCssClass('Iki Town Outskirts') }"
+            , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+            , image: "assets/images/map/blimp_pikachu.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
             { name: "Pokémon Trainer Hau"
             , x: 41, y: 24
             , width: 4, height: 4
@@ -1604,8 +1624,6 @@
             , image: "assets/images/map/hau.png"
             })
         %>
-
-        <%- include('templates/mapOverlay',
             { name: "Pokémon Trainer Hau"
             , x: 35, y: 16
             , width: 4, height: 4

@@ -86,16 +86,8 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/drawnamu',
         image: 'https://a.deviantart.net/avatars-big/d/r/drawnamu.png',
         resources: [
-            'Bea',
-            'Bede',
-            'Gordie',
-            'Kabu',
-            'Klara',
-            'Marnie',
-            'Mustard',
-            'Nessa',
-            'Opal',
-            'Raihan',
+            'Marnie (Gym Leader)',
+            'Mustard (battle pose)',
         ],
         // NOTES: Gives permission to everyone who asks in the comments section of the spritesheet as long as credit is given
     },
@@ -121,6 +113,8 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/356459678965956613',
         resources: [
             'Freeze Mulch',
+            'Underground Fossilized Dino',
+            'Underground Fossilized Drake',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -134,7 +128,6 @@ export const SpriteCredits: Credit[] = [
             'Korrina',
             'Malva',
             'Onympia',
-            'Piers',
             'Ramos',
             'Siebold',
             'Team Flare Bryony',
@@ -145,6 +138,39 @@ export const SpriteCredits: Credit[] = [
             'Wulfric',
         ],
         // NOTES: Feel free to use it if you like, but don\'t forget to give me credit~!
+    },
+    {
+        name: 'Brumirage, Altthiel, Pujolly, Irpachuza',
+        link: 'https://www.smogon.com/forums/threads/revamped-add-sword-and-shield-trainer-avatars-for-everyone.3672829/',
+        image: 'https://www.smogon.com/media/zracknel-beta.svg.m.1',
+        resources: [
+            'Allister',
+            'Avery',
+            'Bea',
+            'Bede',
+            'Gym Leader Bede',
+            'Gordie',
+            'Hop',
+            'Kabu',
+            'Klara',
+            'Leon',
+            'Marnie',
+            'Master Dojo Student',
+            'Melony',
+            'Milo',
+            'Mustard',
+            'Nessa',
+            'Oleana',
+            'Opal',
+            'Peony',
+            'Piers',
+            'Raihan',
+            'Rose',
+            'Shielbert',
+            'Sordward',
+            'Team Yell Grunts',
+        ],
+        // NOTES: No notes about credit, but is made for public use. Unclear who made what, so credited together
     },
     {
         name: 'HighOnMushrooms',
@@ -204,6 +230,7 @@ export const SpriteCredits: Credit[] = [
             'Sky Trainer (male)',
             'Tourist (female)',
             'Tourist (male)',
+            'Worker (female)',
         ],
         // Notes: Permission given on image page if credited.
     },
@@ -302,6 +329,8 @@ export const SpriteCredits: Credit[] = [
             'Spooky Bulbasaur',
             'Spooky Togepi',
             'Totem Ribombee',
+            'Underground Fossilized Bird',
+            'Underground Fossilized Fish',
         ],
     },
     {
@@ -347,6 +376,15 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Professor Sycamore',
         ],
+        // Notes: Permission given on image page if credited
+    },
+    {
+        name: 'Wolfang62',
+        link: 'https://www.deviantart.com/wolfang62',
+        image: 'https://a.deviantart.net/avatars-big/w/o/wolfang62.jpg',
+        resources: [
+            'Overworld Hop',
+        ],
         // Notes: Permission given on image page if credited.
     },
     {
@@ -368,6 +406,15 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given on image page if credited.
     },
     {
+        name: 'izzyvicious',
+        link: 'https://www.deviantart.com/izzyvicious',
+        image: 'https://a.deviantart.net/avatars-big/i/z/izzyvicious.png',
+        resources: [
+            'Overworld Marnie',
+        ],
+        // Notes: Gives credit on image page if asked.
+    },
+    {
         name: 'aveontrainer',
         link: 'https://www.deviantart.com/aveontrainer',
         image: 'https://a.deviantart.net/avatars-big/a/v/aveontrainer.png',
@@ -384,6 +431,8 @@ export const SpriteCredits: Credit[] = [
             'Hau overworld',
             'Gladion overworld',
             'Plumeria overworld',
+            'Overworld Klara',
+            'Overworld Avery',
         ],
         // Notes: Permission given on image page if credited
     },
