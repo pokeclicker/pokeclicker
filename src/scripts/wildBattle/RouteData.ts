@@ -172,7 +172,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new OneFromManyRequirement([
-            new MultiRequirement([new TemporaryBattleRequirement('Snorlax route 12'), new SpecificPokemonCaughtRequirement('Snorlax')]),
+            new MultiRequirement([new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)]),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 14),
         ]),
     ],
@@ -216,7 +216,7 @@ Routes.add(new RegionRoute(
         new OneFromManyRequirement([
             new MultiRequirement([
                 new TemporaryBattleRequirement('Snorlax route 16'),
-                new SpecificPokemonCaughtRequirement('Snorlax'),
+                new ObtainedPokemonRequirement(pokemonMap.Snorlax),
             ]),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 17),
         ]),

@@ -34,7 +34,7 @@ TemporaryBattleList['Snorlax route 12'] = new TemporaryBattle(
         new RouteKillRequirement(10, GameConstants.Region.kanto, 12),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower')),
     ],
-    [new TemporaryBattleRequirement('Snorlax route 12'), new SpecificPokemonCaughtRequirement('Snorlax')],
+    [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
     {
         isTrainerBattle: false,
         showBeforeUnlocked: true,
@@ -45,7 +45,7 @@ TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
     [new GymPokemon('Snorlax', 189990, 30)],
     undefined,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
-    [new TemporaryBattleRequirement('Snorlax route 16'), new SpecificPokemonCaughtRequirement('Snorlax')],
+    [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
     {
         isTrainerBattle: false,
         showBeforeUnlocked: true,
