@@ -1089,6 +1089,8 @@ class QuestLineHelper {
         const rainbowGiovanni = new CustomQuest(1, 0, 'Defeat Team Rainbow Leader Giovanni.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Rainbow Leader Giovanni')]());
         rainbowQuestLine.addQuest(rainbowGiovanni);
 
+        App.game.quests.questLines().push(rainbowQuestLine);
+
     }
 
     public static isQuestLineCompleted(name: string) {

@@ -2524,6 +2524,16 @@
             })
         %>
 
+        <!--Aether Foundation Extension-->
+        <%- include('templates/mapOverlay',
+            { x: 9, y: 38
+            , width: 8, height: 5.5
+            , databind: "style: {'pointer-events': 'none'}"
+            , visible:  "App.game.quests.getQuestLine('Defeat Rainbow Rocket').state() == QuestLineState.started"
+            , image: "assets/images/map/rainbowrocketcastle.png"
+            })
+        %>
+
         <!--Aether Foundation-->
         <%- include('templates/mapDungeon',
             { name: "Aether Foundation"

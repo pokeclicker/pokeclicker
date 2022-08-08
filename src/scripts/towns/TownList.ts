@@ -3181,13 +3181,6 @@ TownList['Aether Paradise'] = new Town(
     GameConstants.Region.alola,
     [
         TemporaryBattleList['Ultra Wormhole'],
-        TemporaryBattleList['Aether Branch Chief Faba'],
-        TemporaryBattleList['Team Aqua Leader Archie'],
-        TemporaryBattleList['Team Magma Leader Maxie'],
-        TemporaryBattleList['Team Galactic Leader Cyrus'],
-        TemporaryBattleList['Team Flare Leader Lysandre'],
-        TemporaryBattleList['Team Plasma Leader Ghetsis'],
-        TemporaryBattleList['Team Rainbow Leader Giovanni'],
         AetherParadiseShop,
         new ShardTraderShop(GameConstants.ShardTraderLocations['Aether Paradise']),
         new MoveToDungeon(dungeonList['Aether Foundation']),
@@ -3349,7 +3342,16 @@ TownList['Po Town'] = new DungeonTown(
 TownList['Aether Foundation'] = new DungeonTown(
     'Aether Foundation',
     GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)]
+    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
+    [
+        TemporaryBattleList['Aether Branch Chief Faba'],
+        TemporaryBattleList['Team Aqua Leader Archie'],
+        TemporaryBattleList['Team Magma Leader Maxie'],
+        TemporaryBattleList['Team Galactic Leader Cyrus'],
+        TemporaryBattleList['Team Flare Leader Lysandre'],
+        TemporaryBattleList['Team Plasma Leader Ghetsis'],
+        TemporaryBattleList['Team Rainbow Leader Giovanni'],
+    ]
 );
 TownList['Exeggutor Island Hill'] = new DungeonTown(
     'Exeggutor Island Hill',
