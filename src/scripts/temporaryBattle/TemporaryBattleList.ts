@@ -92,7 +92,7 @@ TemporaryBattleList['Suicune 1'] = new TemporaryBattle(
         imageName: 'Suicune',
     }
 );
-TemporaryBattleList['Eusine'] = new TemporaryBattle(
+TemporaryBattleList.Eusine = new TemporaryBattle(
     'Eusine',
     [
         new GymPokemon('Drowzee', 348000, 25),
@@ -171,7 +171,7 @@ TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
     'Suicune escaped.',
     [
         new QuestLineStepCompletedRequirement('Eusine\'s Chase', 10),
-        new QuestLineCompletedRequirement('Eusine\'s Chase', GameConstants.AchievementOption.less )
+        new QuestLineCompletedRequirement('Eusine\'s Chase', GameConstants.AchievementOption.less ),
     ],
     undefined,
     {
