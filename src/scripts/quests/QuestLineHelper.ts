@@ -950,7 +950,7 @@ class QuestLineHelper {
         galarCrownQuestLine.addQuest(talktoCalyrex3);
 
         const catchSpectrier = new CaptureSpecificPokemonQuest('Spectrier', 'Catch Spectrier.', 1, false, 0, undefined);
-        const catchGlastrier = new CaptureSpecificPokemonQuest('Glastrier', 'Catch 3 Glastrier.', 1, false, 0, undefined);
+        const catchGlastrier = new CaptureSpecificPokemonQuest('Glastrier', 'Catch Glastrier.', 1, false, 0, undefined);
         galarCrownQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchSpectrier,

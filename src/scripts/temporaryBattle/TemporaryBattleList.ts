@@ -959,11 +959,6 @@ TemporaryBattleList.Peony = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Peony',
-        firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('The Crown of Galar').beginQuest();
-            App.game.quests.getQuestLine('The Birds of the Dyna Tree').beginQuest();
-            App.game.quests.getQuestLine('The Ancient Golems').beginQuest();
-        },
     }
 );
 TemporaryBattleList.Calyrex = new TemporaryBattle(
