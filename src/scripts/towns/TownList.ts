@@ -3425,31 +3425,79 @@ const PostwickShop = new Shop([
     ItemList.Pokeball,
 ]);
 const WedgehurstShop = new Shop([
-    ItemList.Greatball,
+    ItemList.Pokeball,
     ItemList.Mystery_egg,
 ]);
-const CirchesterShop = new Shop([
-    ItemList.Ice_stone,
-]);
 const TurffieldShop = new Shop([
+    ItemList.Pokeball,
     ItemList.Grass_egg,
+    ItemList.Sweet_apple,
+    ItemList.Tart_apple,
+    ItemList.Leaf_stone,
+    ItemList.Sun_stone,
 ]);
 const HulburyShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
     ItemList.Water_egg,
-    ItemList.Toxel,
+    ItemList.Water_stone,
+    ItemList.Kings_rock,
+    ItemList.Prism_scale,
+    ItemList.Deepsea_tooth,
+    ItemList.Deepsea_scale,
 ]);
 const MotostokeShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
     ItemList.Fire_egg,
+    ItemList.Fire_stone,
+    ItemList.Linking_cord,
+    ItemList.Magmarizer,
 ]);
 const HammerlockeShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
     ItemList.Dragon_egg,
-    ItemList.Eternatus,
+    ItemList.Metal_coat,
+    ItemList.Upgrade,
+    ItemList.Dragon_scale,
 ]);
 const StowonSideShop: Shop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
     ItemList.Fighting_egg,
+    ItemList.Soothe_bell,
+    ItemList.Dawn_stone,
+    ItemList.Dubious_disc,
+    ItemList.Reaper_cloth,
+]);
+const BallonleaShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.Cracked_pot,
+    ItemList.Moon_stone,
+    ItemList.Shiny_stone,
+    ItemList.Sachet,
+    ItemList.Whipped_dream,
+]);
+const CirchesterShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.Razor_claw,
+    ItemList.Razor_fang,
+    ItemList.Protector,
+    ItemList.Ice_stone,
 ]);
 const SpikemuthShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
     ItemList.Electric_egg,
+    ItemList.Thunder_stone,
+    ItemList.Dusk_stone,
+    ItemList.Electirizer,
 ]);
 const WyndonShop = new Shop([
     ItemList.Pokeball,
@@ -3465,7 +3513,18 @@ const WyndonShop = new Shop([
     ItemList.Dowsing_machine,
     ItemList.Lucky_incense,
 ]);
-
+const MasterDojoShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.Galarica_cuff,
+    ItemList.Galarica_wreath,
+]);
+const FreezingtonShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+]);
 
 //Galar NPC
 
@@ -3477,9 +3536,105 @@ const Mom = new NPC('Mom', [
 ]);
 const TrainStationGuy = new NPC('Train Station Guy', [
     'There are some areas around Galar that you can only reach after beating the Champion.',
-    'One is sparsely populated, but the other is teeming with Pokemon.',
-    'There are plenty of unique, powerful ones there, too!',
+    'One is an island paradise, and the other a freezing wasteland.',
+    'I\m sure if you go to these places you\'ll find many unique and powerful Pokémon!',
 ]);
+const SouthGalarRoamerNPC = new RoamerNPC('Sonia Magnolia', [
+    'I\'ve heard there\'s been sightings of a never-before-seen, superstrong Pokémon on {ROUTE_NAME}! You should go check it out!',
+], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.SouthGalar));
+const IsleofArmorRoamerNPC = new RoamerNPC('Master Dojo Student', [
+    'One of the other students said they saw a rare Pokémon on {ROUTE_NAME}. Might be worth having a look.',
+], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.IsleofArmor));
+const CrownTundraRoamerNPC = new RoamerNPC('Freezington Mayor', [
+    'If my eyes didn\'t decieve me, I saw a rare Pokémon at {ROUTE_NAME}. Go and see if you can find it if you\'re interested.',
+], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.CrownTundra));
+const CrownPeony1 = new NPC ('Peony', [
+    'Hey, Chief! I was talking to the locals and they were talking some ancient king Pokémon! They also mentioned a couple of horsey Pokémon that it was ultra-mega-close to. There\'s a statue of it outside and I\'ve heard this rock I\'ve been using as a pillow is part of it!',
+    'Could you go and put it back on for me?',
+],
+{ requirement: new MultiRequirement([new QuestLineStartedRequirement('The Crown of Galar'), new QuestLineStepCompletedRequirement('The Crown of Galar', 1, GameConstants.AchievementOption.less )])});
+const Calyrex1 = new NPC ('Calyrex', [
+    'Ah, yes. A sturdy body, just as i expected. I hope this man doesn\'t mind that I make use of it for the time being.',
+    'I am Calyrex. I am also known as the King of Bountiful Harvests. I have borrowed this man\'s body in order to thank you in person for restoring my statue...so to speak.',
+    'I once reigned over these land as king, but now I have lost all but a fraction of my former strength. Even my loyal steeds have abandoned me.',
+    'Would you do me the favour of protecting me from wild Pokémon at the Old Cemetery and Snowslide Slope? I wish to grow a Shaderoot Carrot and an Iceroot Carrot which I believe could draw out my loyal steeds.',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 1), new QuestLineStepCompletedRequirement('The Crown of Galar', 3, GameConstants.AchievementOption.less )])});
+const Calyrex2 = new NPC ('Calyrex', [
+    'Thank you for your help in growing these carrots. It is my belief that they will draw my loyal steeds back to me...',
+    'What?! They are here already! But they appear to be unable to tell exactly where the scent of the carrots is coming from!',
+    'The people of this place are in danger, you must fight them off!',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 3), new QuestLineStepCompletedRequirement('The Crown of Galar', 5, GameConstants.AchievementOption.less )])});
+const Calyrex3 = new NPC ('Calyrex', [
+    'You have my thanks for protecting the village, human child. Although, unfortunately, this has also caused my loyal steeds to flee.',
+    'Hmm...... Perhaps now we know they are in this area, it would be better to search for them?.',
+    'I think that would be for the best. Once you capture them, I would appreciate it if you could bring them to the Crown Shrine at the mountain\'s peak.',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 5), new QuestLineStepCompletedRequirement('The Crown of Galar', 7, GameConstants.AchievementOption.less )])});
+const Calyrex4 = new NPC ('Calyrex', [
+    'Finally, my loyal steeds have returned to me. There are truly no words with which to fully express my gratitude to you. So... I have a suggestion',
+    'If you are able to capture me, it will prove your worth beyond any doubt, and I will lend you my strength on your journey. Once you have readied yourself, come face me!',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 7), new QuestLineStepCompletedRequirement('The Crown of Galar', 9, GameConstants.AchievementOption.less )])});
+const CrownPeony2 = new NPC ('Peony', [
+    'Wait--you really caught Calyrex from the legends?! Thats\'s ultra-mega-brilliant! Report away!',
+    'Th-that noggin\'s MASSIVE! I-is that the King of Bountiful Harvests? The one calling the shots around here? Huh? I could swear I\'ve seen it before... Or then again, maybe not...',
+    'A-anyway! It\'s definitely regal of it to have steeds... and that massive head does sort of resemble a crown! It\'s kingly enough, at any rate! Let\'s just call this a successful expedition! Smashin\'!',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 9), new QuestLineCompletedRequirement('The Crown of Galar', GameConstants.AchievementOption.less)]) });
+const BirdPeony1 = new NPC ('Peony', [
+    'Hey, Chief! I was talking to the locals and they mentioned they had seen some bird Pokémon that looked like the legendary birds of Kanto at that ultra-mega-massive tree in the middle of Ballimere Lake!',
+    'You should go check it out!',
+],
+{ requirement: new MultiRequirement([new QuestLineStartedRequirement('The Birds of the Dyna Tree'), new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 2, GameConstants.AchievementOption.less )])});
+const BirdPeony2 = new NPC ('Peony', [
+    'You\'re saying you saw some Pokémon that looked like.... Hang on, Chief! There\'s breaking news on the telly! They\'re sayin\' dodgy bird Pokémon are poppin\' up left and right!',
+    'There\'s this fancy graceful one\'s apparently flyin\' about the Crown Tundra!',
+    'And there\'s this pointy feathered one runnin\' about in Southern Galar!',
+    'Plus a fiery-lookin\' one out on the Isle of Armor!',
+    'You\'re sayin\' you saw them and that\'s what you were tellin\' me about? Ah, sorry \'bout that. Anyway, you should go find \'em!',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 2), new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 4, GameConstants.AchievementOption.less )])});
+const BirdPeony3 = new NPC ('Peony', [
+    'Wait--you really caught Articuno, Moltres and Zapdos from the legends?! Thats\'s ultra-mega-brilliant! Report away!',
+    'So that\'s them is it? I can definitely see the resemblance, but they don\'t seem quite the same...',
+    'Maybe they\'re regional variants or somethin\'? At an rate, that\'s good enough for me. Let\'s call this expedition a success!',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 4), new QuestLineCompletedRequirement('The Birds of the Dyna Tree', GameConstants.AchievementOption.less)]) });
+const GolemPeony1 = new NPC ('Peony', [
+    'Hey, Chief! I was talking to the locals and they mentioned some weird purple and yellow ruins at Three-Point Pass. You should go check \'em out!',
+],
+{ requirement: new MultiRequirement([new QuestLineStartedRequirement('The Ancient Golems'), new QuestLineStepCompletedRequirement('The Ancient Golems', 1, GameConstants.AchievementOption.less )])});
+const GolemPeony2 = new NPC ('Peony', [
+    'So they wouldn\'t open... That\'s annoyin\'. Well, there are also 3 more ruins, 2 at opposite ends of Giants Bed, and one at Snowslide Slope. Maybe you should have a look at those?',
+    'How \'bout clearin\' em 10 times each, and see if you find anythin\' to open up the ruins at Three-Point Pass.',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Ancient Golems', 1), new QuestLineStepCompletedRequirement('The Ancient Golems', 3, GameConstants.AchievementOption.less )])});
+const GolemPeony3 = new NPC ('Peony', [
+    'So that didn/t work? Well, I heard there are some legendary Pokémon in those ruins, called Regirock, Regice and Registeel. Apparently they\'ll show up to people who have done enough explorin\' in their ruins.',
+    'Maybe if you caught them, the other ruins would open? What? You already have? Well, it might be worth doing it again, anyway.',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Ancient Golems', 3), new QuestLineStepCompletedRequirement('The Ancient Golems', 5, GameConstants.AchievementOption.less )])});
+const GolemPeony4 = new NPC ('Peony', [
+    'They\'ve went and opened up now? Well, what are you doing here, then! If there were legendary Pokémon in those other ruins, there probably will be in these ones too! Go and catch \'em!',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Ancient Golems', 5), new QuestLineStepCompletedRequirement('The Ancient Golems', 6, GameConstants.AchievementOption.less )])});
+const GolemPeony5 = new NPC ('Peony', [
+    'You caught Regieleki and Regidrago from the legends? Amazing! I\'d call this expedition a success, but another legendary golem Pokémon has appeared in the middle of Giants Bed',
+    'Apparently it\'s ultra-mega-strong! You should go see if you can beat it!',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Ancient Golems', 6), new QuestLineStepCompletedRequirement('The Ancient Golems', 8, GameConstants.AchievementOption.less )])});
+const GolemPeony6 = new NPC ('Peony', [
+    'Wait--so you really beat Regigigas from the legends? You know, it\'s said that it created the other Regi Pokémon. Maybe that\'s why it showed up when you caught \'em all?',
+    'Anyway, we may as well call this expedition a success!',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Ancient Golems', 8), new QuestLineCompletedRequirement('The Ancient Golems', GameConstants.AchievementOption.less)]) });
+const PeonyComplete = new NPC ('Peony', [
+    'Huh? Well how \'bout that, Chief! Looks like that was the last bit of the grand Peony Adven-tour that I had for you! Whoooooo! Now this is an occasion! What\'s the word? Ultra-mega-epic! Your passion for all this caught me off guard, Chief...',
+    'This whole Adven-tour thing was built out of a load of rubbish I scraped together. Even I had my doubts about the whole thing. But you? You went at it with a ton of energy! Thanks for stickin\' around and finishin\' every part of my Adven-tour!',
+],
+{ requirement: new MultiRequirement([new QuestLineCompletedRequirement('The Crown of Galar'), new QuestLineCompletedRequirement('The Birds of the Dyna Tree'), new QuestLineCompletedRequirement('The Ancient Golems')])});
 const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     GameConstants.Region.galar,
     'TODO: Add text before Galar is released',
@@ -3491,10 +3646,18 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
 TownList.Postwick = new Town(
     'Postwick',
     GameConstants.Region.galar,
-    [PostwickShop],
+    [new BulletinBoard(GameConstants.BulletinBoards.Galar), PostwickShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
         npcs: [ProfMagnolia, Mom],
+    }
+);
+TownList['Slumbering Weald'] = new Town(
+    'Slumbering Weald',
+    GameConstants.Region.galar,
+    [TemporaryBattleList.Mirages, new MoveToDungeon(dungeonList['Slumbering Weald Shrine'])],
+    {
+        requirements: [new TemporaryBattleRequirement('Hop1')],
     }
 );
 TownList.Wedgehurst = new Town(
@@ -3503,13 +3666,21 @@ TownList.Wedgehurst = new Town(
     [WedgehurstShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
-        npcs: [TrainStationGuy],
+        npcs: [TrainStationGuy, SouthGalarRoamerNPC],
+    }
+);
+TownList['Professor Magnolia\'s House'] = new Town(
+    'Professor Magnolia\'s House',
+    GameConstants.Region.galar,
+    [TemporaryBattleList['Sordward & Shielbert']],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 2)],
     }
 );
 TownList.Motostoke = new Town(
     'Motostoke',
     GameConstants.Region.galar,
-    [MotostokeShop],
+    [TemporaryBattleList.Marnie1, TemporaryBattleList['Rampaging Torkoal'], MotostokeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Motostoke)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
     }
@@ -3517,31 +3688,31 @@ TownList.Motostoke = new Town(
 TownList.Turffield = new Town(
     'Turffield',
     GameConstants.Region.galar,
-    [TurffieldShop],
+    [TemporaryBattleList['Rampaging Tsareena'], TurffieldShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Turffield)],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 11)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 13)],
     }
 );
 TownList.Hulbury = new Town(
     'Hulbury',
     GameConstants.Region.galar,
-    [HulburyShop],
+    [TemporaryBattleList['Rampaging Gyarados'], HulburyShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Hulbury)],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 12)],
+        requirements: [new TemporaryBattleRequirement('Hop4')],
     }
 );
 TownList['Stow-on-Side'] = new Town(
     'Stow-on-Side',
     GameConstants.Region.galar,
-    [GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop],
+    [TemporaryBattleList.Bede3, TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side']), new ShardTraderShop(GameConstants.ShardTraderLocations['Route 6'], 'Fossil Master')],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 15)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
     }
 );
 TownList.Ballonlea = new Town(
     'Ballonlea',
     GameConstants.Region.galar,
-    [],
+    [TemporaryBattleList['Gym Leader Bede'], BallonleaShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Ballonlea)],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glimwood Tangle'))],
     }
@@ -3549,25 +3720,25 @@ TownList.Ballonlea = new Town(
 TownList.Hammerlocke = new Town(
     'Hammerlocke',
     GameConstants.Region.galar,
-    [HammerlockeShop],
+    [TemporaryBattleList['Rampaging Haxorus'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Hammerlocke)],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 14)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
     }
 );
 TownList.Circhester = new Town(
     'Circhester',
     GameConstants.Region.galar,
-    [GymList.Circhester1, GymList.Circhester2, CirchesterShop],
+    [TemporaryBattleList['Rampaging Gigalith'], TemporaryBattleList['Rampaging Froslass'], GymList.Circhester1, GymList.Circhester2, CirchesterShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Circhester)],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 18)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
     }
 );
 TownList.Spikemuth = new Town(
     'Spikemuth',
     GameConstants.Region.galar,
-    [SpikemuthShop],
+    [TemporaryBattleList['Gym Leader Marnie'], SpikemuthShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Spikemuth)],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
+        requirements: [new TemporaryBattleRequirement('Marnie2')],
     }
 );
 TownList.Wyndon = new Town(
@@ -3575,7 +3746,7 @@ TownList.Wyndon = new Town(
     GameConstants.Region.galar,
     [WyndonShop, new MoveToDungeon(dungeonList['Rose Tower'])],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 24)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 32)],
     }
 );
 TownList['Wyndon Stadium'] = new Town(
@@ -3583,42 +3754,57 @@ TownList['Wyndon Stadium'] = new Town(
     GameConstants.Region.galar,
     [GymList['Trainer Marnie'], GymList['Gym Leader Bede'], GymList['Trainer Hop'], GymList['Champion Leon'], pokeLeagueShop()],
     {
-        requirements: [
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower')),
-        ],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 32)],
     }
 );
 //Isle of Armor towns
-
+TownList['Armor Station'] = new Town(
+    'Armor Station',
+    GameConstants.Region.galar,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    }
+);
 TownList['Master Dojo'] = new Town(
     'Master Dojo',
     GameConstants.Region.galar,
-    [new MoveToDungeon(dungeonList['Master Dojo Trial'])],
+    [new BulletinBoard(GameConstants.BulletinBoards.Armor), TemporaryBattleList.Mustard, MasterDojoShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Master Dojo'])],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
+        npcs: [IsleofArmorRoamerNPC],
     }
 );
-TownList['Master Dojo Battlefield'] = new Town(
-    'Master Dojo Battlefield',
+TownList['Master Dojo Battle Court'] = new Town(
+    'Master Dojo Battle Court',
     GameConstants.Region.galar,
-    [GymList['Gym Leader Klara'], GymList['Gym Leader Avery'], GymList['Dojo Master Mustard'], pokeLeagueShop()],
+    [GymList['Gym Leader Klara'], GymList['Gym Leader Avery'], GymList['Dojo Matron Honey'], GymList['Dojo Master Mustard']],
     {
         requirements: [
             new MultiRequirement([
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Waters')),
                 new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Water')),
             ]),
         ],
     }
 );
 
 //Crown Tundra Towns
+TownList['Crown Tundra Station'] = new Town(
+    'Crown Tundra Station',
+    GameConstants.Region.galar,
+    [TemporaryBattleList.Peony],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    }
+);
 TownList.Freezington = new Town(
     'Freezington',
     GameConstants.Region.galar,
-    [],
+    [new BulletinBoard(GameConstants.BulletinBoards.Crown), TemporaryBattleList.Calyrex, TemporaryBattleList.Glastrier, TemporaryBattleList.Spectrier, FreezingtonShop],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 46)],
+        npcs: [CrownPeony1, Calyrex1, Calyrex2, Calyrex3, CrownPeony2, BirdPeony1, BirdPeony2, BirdPeony3, GolemPeony1, GolemPeony2, GolemPeony3, GolemPeony4, GolemPeony5, GolemPeony6, PeonyComplete, CrownTundraRoamerNPC],
     }
 );
 
@@ -3626,105 +3812,133 @@ TownList.Freezington = new Town(
 //Galar Dungeons
 
 
-TownList['Slumbering Weald'] = new DungeonTown(
-    'Slumbering Weald',
+TownList['Slumbering Weald Shrine'] = new DungeonTown(
+    'Slumbering Weald Shrine',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
-);
-TownList['Inner Slumbering Weald'] = new DungeonTown(
-    'Inner Slumbering Weald',
-    GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    [TemporaryBattleList.Hop8, TemporaryBattleList.Sordward1, TemporaryBattleList.Shielbert1]
 );
 TownList['Galar Mine'] = new DungeonTown(
     'Galar Mine',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 10)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 12)],
+    [TemporaryBattleList.Bede1]
 );
 TownList['Galar Mine No. 2'] = new DungeonTown(
     'Galar Mine No. 2',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Galar_Water)]
+    [new GymBadgeRequirement(BadgeEnums.Galar_Water)],
+    [TemporaryBattleList.Bede2]
 );
 TownList['Glimwood Tangle'] = new DungeonTown(
     'Glimwood Tangle',
     GameConstants.Region.galar,
-    [
-        new MultiRequirement([
-            new GymBadgeRequirement(BadgeEnums.Galar_Rock),
-            new GymBadgeRequirement(BadgeEnums.Galar_Ice),
-        ]),
-    ]
+    [new TemporaryBattleRequirement('Bede3')]
 );
 TownList['Rose Tower'] = new DungeonTown(
     'Rose Tower',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 24)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Hop)]
 );
-TownList['Watchtower Ruins'] = new DungeonTown(
-    'Watchtower Ruins',
+TownList['Energy Plant'] = new DungeonTown(
+    'Energy Plant',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 4)]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))],
+    [TemporaryBattleList.Eternatus, TemporaryBattleList.Sordward2, TemporaryBattleList.Shielbert2, TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day']]
 );
 TownList['Dusty Bowl'] = new DungeonTown(
     'Dusty Bowl',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Galar_Fire)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 18)]
 );
-TownList['Lake of Outrage'] = new DungeonTown(
-    'Lake of Outrage',
+TownList['Courageous Cavern'] = new DungeonTown(
+    'Courageous Cavern',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+    [
+        new OneFromManyRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.galar, 33),
+            new RouteKillRequirement(10, GameConstants.Region.galar, 34),
+            new RouteKillRequirement(10, GameConstants.Region.galar, 36),
+            new RouteKillRequirement(10, GameConstants.Region.galar, 37),
+        ]),
+    ]
 );
-TownList['Master Dojo Trial'] = new DungeonTown(
-    'Master Dojo Trial',
+TownList['Brawlers Cave'] = new DungeonTown(
+    'Brawlers Cave',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 25)]
+    [
+        new OneFromManyRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.galar, 34),
+            new RouteKillRequirement(10, GameConstants.Region.galar, 40),
+        ]),
+    ]
+);
+TownList['Warm-Up Tunnel'] = new DungeonTown(
+    'Warm-Up Tunnel',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 38)],
+    [TemporaryBattleList.Klara2, TemporaryBattleList.Avery2]
 );
 TownList['Tower of Darkness'] = new DungeonTown(
     'Tower of Darkness',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 34)]
+    [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 3)]
 );
-TownList['Tower of Water'] = new DungeonTown(
-    'Tower of Water',
+TownList['Tower of Waters'] = new DungeonTown(
+    'Tower of Waters',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 28)]
+    [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 3)]
+);
+TownList['Roaring-Sea Caves'] = new DungeonTown(
+    'Roaring-Sea Caves',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 50)]
 );
 TownList['Rock Peak Ruins'] = new DungeonTown(
     'Rock Peak Ruins',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 43)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 48)]
 );
 TownList['Iron Ruins'] = new DungeonTown(
     'Iron Ruins',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 43)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 48)]
 );
 TownList['Iceberg Ruins'] = new DungeonTown(
     'Iceberg Ruins',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 51)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)]
 );
 TownList['Split-Decision Ruins'] = new DungeonTown(
     'Split-Decision Ruins',
     GameConstants.Region.galar,
     [
         new MultiRequirement([
-            new RouteKillRequirement(10, GameConstants.Region.galar, 48),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Iron Ruins')),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Iceberg Ruins')),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rock Peak Ruins')),
+            new RouteKillRequirement(10, GameConstants.Region.galar, 52),
+            new QuestLineStepCompletedRequirement('The Ancient Golems', 6),
         ]),
     ]
+);
+TownList['Lakeside Cave'] = new DungeonTown(
+    'Lakeside Cave',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 53)]
 );
 TownList['Dyna Tree Hill'] = new DungeonTown(
     'Dyna Tree Hill',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 50)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 53)],
+    [TemporaryBattleList['Dyna Tree Birds']]
+);
+TownList['Tunnel to the Top'] = new DungeonTown(
+    'Tunnel to the Top',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)]
 );
 TownList['Crown Shrine'] = new DungeonTown(
     'Crown Shrine',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 53)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 55)],
+    [],
+    [Calyrex4]
 );

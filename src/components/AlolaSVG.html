@@ -1604,6 +1604,16 @@
             , image: "assets/images/map/rocket_grunt.png"
             })
         %>
+        
+        <%- include('templates/mapOverlay',
+            { name: "Professor Kukui's Blimp"
+            , x: 72, y: 30
+            , width: 6, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Iki Town Outskirts')}, attr:{ class: MapHelper.calculateTownCssClass('Iki Town Outskirts') }"
+            , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+            , image: "assets/images/map/blimp_empty.png"
+            })
+        %>
 
         <%- include('templates/mapOverlay',
             { name: "Rainbow Rocket Grunt"
@@ -1622,6 +1632,16 @@
             , databind: "click: () => TemporaryBattleList['Rainbow Rocket Grunt 96'].protectedOnclick()"
             , visible:  "TemporaryBattleList['Rainbow Rocket Grunt 96'] && TemporaryBattleList['Rainbow Rocket Grunt 96'].isVisible()"
             , image: "assets/images/map/rocket_grunt.png"
+            })
+        %>
+        
+        <%- include('templates/mapOverlay',
+            { name: "Professor Kukui's Blimp"
+            , x: 72, y: 30
+            , width: 6, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Iki Town Outskirts')}, attr:{ class: MapHelper.calculateTownCssClass('Iki Town Outskirts') }"
+            , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+            , image: "assets/images/map/blimp_pikachu.png"
             })
         %>
     </g>
