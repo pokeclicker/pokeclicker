@@ -1352,6 +1352,7 @@ export const TemporaryBattles = [
     'Rainbow Rocket Grunt 100',
     'Rainbow Rocket Grunt 101',
     'Rainbow Rocket Grunt 102',
+    'Rainbow Rocket Grunt 103',
     'Aether Branch Chief Faba',
     'Team Aqua Leader Archie',
     'Team Magma Leader Maxie',

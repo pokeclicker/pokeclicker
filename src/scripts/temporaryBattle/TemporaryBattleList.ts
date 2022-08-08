@@ -2216,21 +2216,6 @@ TemporaryBattleList['Rainbow Rocket Grunt 98'] = new TemporaryBattle(
 );
 TemporaryBattleList['Rainbow Rocket Grunt 99'] = new TemporaryBattle(
     'Rainbow Rocket Grunt 99',
-    [new GymPokemon('Muk', 60000000, 62)],
-    'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
-    [
-        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
-    ],
-    undefined,
-    {
-        displayName: 'Rainbow Rocket Grunt',
-        returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 2',
-    }
-);
-TemporaryBattleList['Rainbow Rocket Grunt 99'] = new TemporaryBattle(
-    'Rainbow Rocket Grunt 99',
     [new GymPokemon('Tentacruel', 60000000, 62)],
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
@@ -2296,6 +2281,21 @@ TemporaryBattleList['Rainbow Rocket Grunt 102'] = new TemporaryBattle(
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Altar of the Sunne and Moone',
         imageName: 'Team Rocket Grunt 1',
+    }
+);
+TemporaryBattleList['Rainbow Rocket Grunt 103'] = new TemporaryBattle(
+    'Rainbow Rocket Grunt 103',
+    [new GymPokemon('Muk', 60000000, 62)],
+    'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
+    [
+        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1, GameConstants.AchievementOption.less ),
+    ],
+    undefined,
+    {
+        displayName: 'Rainbow Rocket Grunt',
+        returnTown: 'Seafolk Village',
+        imageName: 'Team Rocket Grunt 2',
     }
 );
 
