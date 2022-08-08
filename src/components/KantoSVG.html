@@ -680,6 +680,46 @@
             , image: "assets/images/map/ashketchumoverworld.png"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Suicune"
+            , x: 66, y: 34
+            , width: 3, height: 4
+            , databind: "click: () => TemporaryBattleList['Suicune 3'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Suicune 3'] && TemporaryBattleList['Suicune 3'].isVisible()"
+            , image: "assets/images/map/suicune.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Suicune"
+            , x: 75, y: 43
+            , width: 3, height: 4
+            , databind: "click: () => TemporaryBattleList['Suicune 4'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Suicune 4'] && TemporaryBattleList['Suicune 4'].isVisible()"
+            , image: "assets/images/map/suicune.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Suicune"
+            , x: 80, y: 1
+            , width: 3, height: 4
+            , databind: "click: () => TemporaryBattleList['Suicune 5'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Suicune 5'] && TemporaryBattleList['Suicune 5'].isVisible()"
+            , image: "assets/images/map/suicune.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Suicune"
+            , x: 80, y: 1
+            , width: 3, height: 4
+            , databind: "click: () => TemporaryBattleList['Suicune 6'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Suicune 6'] && TemporaryBattleList['Suicune 6'].isVisible()"
+            , image: "assets/images/map/suicune.png"
+            })
+        %>
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">

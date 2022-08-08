@@ -770,6 +770,7 @@ export enum EggItemType {
 export enum BulletinBoards {
     None = -2,
     All = -1,
+    Johto,
     Kalos,
     Alola,
 }
@@ -1229,6 +1230,13 @@ export const TemporaryBattles = [
     'Biker Goon 2',
     'Biker Goon 3',
     'Cue Ball Paxton',
+    'Suicune 1',
+    'Eusine',
+    'Suicune 2',
+    'Suicune 3',
+    'Suicune 4',
+    'Suicune 5',
+    'Suicune 6',
     'Galactic Boss Cyrus',
     'AZ',
     'Ash Ketchum Kanto',
