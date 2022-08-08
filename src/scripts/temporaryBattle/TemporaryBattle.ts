@@ -5,7 +5,7 @@ type TemporaryBattleOptionalArgument = {
     displayName?: string,
     returnTown?: string, // If in town, that town will be used. If not in town, this will be used, with the Dock town as default
     imageName?: string,
-    showBeforeUnlocked?: boolean,
+    visibleRequirement?: Requirement,
 };
 
 class TemporaryBattle extends TownContent {
@@ -18,7 +18,7 @@ class TemporaryBattle extends TownContent {
         return `Fight ${this.getDisplayName()}`;
     }
     public isVisible(): boolean {
-        return (this.isUnlocked() || this.optionalArgs.showBeforeUnlocked) && !this.completeRequirements.every(r => r.isCompleted());
+        return (this.isUnlocked() || this.optionalArgs.visibleRequirement?.isCompleted()) && !this.completeRequirements.every(r => r.isCompleted());
     }
     public onclick(): void {
         TemporaryBattleRunner.startBattle(this);

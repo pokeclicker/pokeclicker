@@ -37,7 +37,7 @@ TemporaryBattleList['Snorlax route 12'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
     {
         isTrainerBattle: false,
-        showBeforeUnlocked: true,
+        visibleRequirement: new OneFromManyRequirement([new RouteKillRequirement(10, GameConstants.Region.kanto, 11), new RouteKillRequirement(10, GameConstants.Region.kanto, 10)]),
     }
 );
 TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
@@ -48,7 +48,7 @@ TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
     {
         isTrainerBattle: false,
-        showBeforeUnlocked: true,
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.kanto, 7),
     }
 );
 TemporaryBattleList['Biker Goon 1'] = new TemporaryBattle(
