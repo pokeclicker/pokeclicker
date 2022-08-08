@@ -3868,12 +3868,12 @@ TownList['Warm-Up Tunnel'] = new DungeonTown(
 TownList['Tower of Darkness'] = new DungeonTown(
     'Tower of Darkness',
     GameConstants.Region.galar,
-    [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 3)]
+    [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 2)]
 );
 TownList['Tower of Waters'] = new DungeonTown(
     'Tower of Waters',
     GameConstants.Region.galar,
-    [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 3)]
+    [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 2)]
 );
 TownList['Roaring-Sea Caves'] = new DungeonTown(
     'Roaring-Sea Caves',

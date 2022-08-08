@@ -632,7 +632,7 @@ TemporaryBattleList.Hop8 = new TemporaryBattle(
     [
         new MultiRequirement([
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Slumbering Weald Shrine')),
-            new QuestLineStartedRequirement('Sword & Shield'),
+            new QuestLineStartedRequirement('Sword and Shield'),
         ]),
     ],
     undefined,
