@@ -685,7 +685,7 @@
             { name: "Snorlax"
             , x: 87, y: 32
             , width: 4, height: 4
-            , databind: "click: () => TemporaryBattleList['Snorlax route 12'].protectedOnclick()"
+            , databind: "click: () => TemporaryBattleList['Snorlax route 12'].protectedOnclick(), attr: { class: TemporaryBattleList['Snorlax route 12'].isUnlocked() ? '' : 'locked' }"
             , visible:  "TemporaryBattleList['Snorlax route 12'] && TemporaryBattleList['Snorlax route 12'].isVisible()"
             , image: "assets/images/map/snorlaxoverworld.png"
             })
@@ -695,7 +695,7 @@
             { name: "Snorlax"
             , x: 36, y: 19
             , width: 4, height: 4
-            , databind: "click: () => TemporaryBattleList['Snorlax route 16'].protectedOnclick()"
+            , databind: "click: () => TemporaryBattleList['Snorlax route 16'].protectedOnclick(), attr: { class: TemporaryBattleList['Snorlax route 16'].isUnlocked() ? '' : 'locked' }"
             , visible:  "TemporaryBattleList['Snorlax route 16'] && TemporaryBattleList['Snorlax route 16'].isVisible()"
             , image: "assets/images/map/snorlaxoverworld.png"
             })
