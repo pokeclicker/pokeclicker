@@ -874,6 +874,7 @@ class QuestLineHelper {
         const dojoArmorQuestLine = new QuestLine('The Dojo\'s Armor', 'Obtain the Secret Armor of the Master Dojo.', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), GameConstants.BulletinBoards.Armor);
 
         const clearMustard = new CustomQuest(1, 0, 'Mustard wants to test your ability at the Master Dojo. Defeat him.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Mustard')]());
+        dojoArmorQuestLine.addQuest(clearMustard);
 
         const catch3GalarianSlowpoke = new CaptureSpecificPokemonQuest('Galarian Slowpoke', 'Catch 3 Galarian Slowpoke.', 3, false, 0, undefined);
         dojoArmorQuestLine.addQuest(catch3GalarianSlowpoke);
