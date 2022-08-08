@@ -875,7 +875,7 @@ TemporaryBattleList.Klara2 = new TemporaryBattle(
     [
         new MultiRequirement([
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel')),
-            new TemporaryBattleRequirement('Mustard'),
+            new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 1),
         ]),
     ],
     undefined,
@@ -895,7 +895,7 @@ TemporaryBattleList.Avery2 = new TemporaryBattle(
     [
         new MultiRequirement([
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel')),
-            new TemporaryBattleRequirement('Mustard'),
+            new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 1),
         ]),
     ],
     undefined,
