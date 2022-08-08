@@ -356,11 +356,11 @@
                 <div class="card-header p-0">
                     <div style="position: absolute; left: 2px">
                         <img title="Chests opened in current dungeon" src="assets/images/dungeons/chest.png" height="25px" />
-                        <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.size}`"></span>
+                        <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.totalChests()}`"></span>
                     </div>
                     <div style="position: absolute; right: 4px">
                         <img title="Encounters won in current dungeon" src="assets/images/dungeons/encounter.png" height="25px" />
-                        <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.size * 2 + 3}`"></span>
+                        <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.totalFights()}`"></span>
                     </div>
                     <span data-bind="text: `${DungeonRunner.dungeon.name}`"></span>
                 </div>
@@ -442,7 +442,7 @@
                         <div class='col-12'>
                             <i>NOTE: These colors can be customized in the settings menu</i>
                         </div>
-                    </div>" 
+                    </div>"
                     data-placement="bottom">ⓘ</button>
                     <button class='btn btn-sm' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
                     data-bind='style: { background: Weather.color() },
@@ -651,6 +651,9 @@
 
 <!-- Category Modal -->
 @import "categoryModal.html"
+
+<!-- Bulletin board Modal -->
+@import "bulletinBoardModal.html"
 
 </body>
 </html>

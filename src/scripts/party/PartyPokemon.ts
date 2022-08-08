@@ -91,7 +91,7 @@ class PartyPokemon implements Saveable {
             if (i > App.game.breeding.hatcheryHelpers.hired().length - 1) {
                 const egg = App.game.breeding.eggList[i]();
                 if (!egg.canHatch() && !egg.isNone()) {
-                    const pokerus = App.game.party.getPokemon(pokemonMap[egg.pokemon].id).pokerus;
+                    const pokerus = App.game.party.getPokemon(pokemonMap[egg.pokemon].id)?.pokerus;
                     if (pokerus && pokerus >= GameConstants.Pokerus.Contagious) {
                         eggTypes.add(PokemonHelper.getPokemonByName(pokemonMap[App.game.breeding.eggList[i]().pokemon].name).type1);
                         eggTypes.add(PokemonHelper.getPokemonByName(pokemonMap[App.game.breeding.eggList[i]().pokemon].name).type2);
@@ -108,7 +108,7 @@ class PartyPokemon implements Saveable {
     public calculatePokerus() {
         const eggTypes = this.calculatePokerusTypes();
         return App.game.breeding.eggList.forEach(p => {
-            const pokemon = p().partyPokemon;
+            const pokemon = p().partyPokemon();
             if (pokemon && pokemon.pokerus == GameConstants.Pokerus.None) {
                 const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
                 if (eggTypes.has(dataPokemon.type1) || eggTypes.has(dataPokemon.type2)) {

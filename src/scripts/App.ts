@@ -7,6 +7,9 @@ class App {
     static game: Game;
 
     static start() {
+        // Hide tooltips that stay on game load
+        $('.tooltip').tooltip('hide');
+
         if (!App.debug) {
             Object.freeze(GameConstants);
         }

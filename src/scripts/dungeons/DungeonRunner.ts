@@ -152,9 +152,9 @@ class DungeonRunner {
         } else if (ItemList[input] instanceof PokeballItem) {
             DungeonRunner.lootNotification(input, amount, weight, ItemList[input].image);
             return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount, false);
-        } else if (Underground.getMineItemByName(input) instanceof UndergroundItem) {
-            DungeonRunner.lootNotification(input, amount, weight, Underground.getMineItemByName(input).image);
-            return Underground.gainMineItem(Underground.getMineItemByName(input).id, amount);
+        } else if (UndergroundItems.getByName(input) instanceof UndergroundItem) {
+            DungeonRunner.lootNotification(input, amount, weight, UndergroundItems.getByName(input).image);
+            return Underground.gainMineItem(UndergroundItems.getByName(input).id, amount);
         } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
             const image = `assets/images/pokemon/${PokemonHelper.getPokemonByName(input).id}.png`;
             DungeonRunner.lootNotification(input, amount, weight, image);
@@ -174,15 +174,17 @@ class DungeonRunner {
 
     public static lootNotification(input, amount, weight, image) {
         const multiple = (amount < 2) ? '' : 's';
-        let message = `Found ${amount} × <img src="${image}" height="24px"/> ${GameConstants.camelCaseToString(GameConstants.humanifyString(input))}${multiple} in a dungeon chest`;
+        let message = `Found ${amount} × <img src="${image}" height="24px"/> ${GameConstants.camelCaseToString(GameConstants.humanifyString(input))}${multiple} in a dungeon chest.`;
         let type = NotificationConstants.NotificationOption.success;
         let setting = NotificationConstants.NotificationSetting.Dungeons.common_dungeon_item_found;
 
         if (typeof BerryType[input] == 'number') {
             const berryPlural = (amount < 2) ? 'Berry' : 'Berries';
-            message = `Found ${Math.floor(amount)} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} ${berryPlural} in a dungeon chest`;
+            message = `Found ${Math.floor(amount)} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} ${berryPlural} in a dungeon chest.`;
+        } if (ItemList[input] instanceof PokeballItem) {
+            message = `Found ${amount} × <img src="${image}" height ="24px"/> ${ItemList[input].displayName}${multiple} in a dungeon chest.`;
         } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
-            message = `Encountered ${GameHelper.anOrA(input)} <img src="${image}" height="40px"/> ${GameConstants.humanifyString(input)} in a dungeon chest`;
+            message = `Encountered ${GameHelper.anOrA(input)} <img src="${image}" height="40px"/> ${GameConstants.humanifyString(input)} in a dungeon chest.`;
         }
 
         if (weight <= 2) {
