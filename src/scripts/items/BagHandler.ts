@@ -98,9 +98,9 @@ class BagHandler {
 
     private static getUndergroundItem(id: string | number): UndergroundItem {
         if (typeof id === 'string') {
-            return Underground.getMineItemByName(id);
+            return UndergroundItems.getByName(id);
         } else {
-            return Underground.getMineItemById(id);
+            return UndergroundItems.getById(id);
         }
     }
 

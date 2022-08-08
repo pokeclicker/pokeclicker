@@ -140,6 +140,7 @@ class Item {
 
         if (this.name == 'Protein') {
             GameHelper.incrementObservable(App.game.statistics.totalProteinsPurchased, n);
+            GameHelper.incrementObservable(App.game.statistics.totalProteinsObtained, n);
         }
     }
 

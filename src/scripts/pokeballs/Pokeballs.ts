@@ -23,7 +23,7 @@ class Pokeballs implements Feature {
 
     constructor() {
         this.pokeballs = [
-            new Pokeball(GameConstants.Pokeball.Pokeball, () => 0, 1250, 'A standard Pokéball', undefined, 25),
+            new Pokeball(GameConstants.Pokeball.Pokeball, () => 0, 1250, 'A standard Poké Ball', undefined, 25),
             new Pokeball(GameConstants.Pokeball.Greatball, () => 5, 1000, '+5% chance to catch'),
             new Pokeball(GameConstants.Pokeball.Ultraball, () => 10, 750, '+10% chance to catch'),
             new Pokeball(GameConstants.Pokeball.Masterball, () => 100, 500, '100% chance to catch'),
@@ -62,7 +62,7 @@ class Pokeballs implements Feature {
                 return 0;
             }, 1000, 'Increased catch rate at night time or in dungeons', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
             // TODO: this needs some sort of bonus, possibly extra dungeon tokens
-            new Pokeball(GameConstants.Pokeball.Luxuryball, () => 0, 1250, 'A Luxury Pokéball', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+            new Pokeball(GameConstants.Pokeball.Luxuryball, () => 0, 1250, 'A Luxury Poké Ball', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Diveball, () => {
 
@@ -85,7 +85,8 @@ class Pokeballs implements Feature {
             }, 1250, 'Increased catch rate on fished Pokémon', new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)),
 
             new Pokeball(GameConstants.Pokeball.Nestball, () => {
-                const maxRoute = MapHelper.normalizeRoute(Routes.getRoute(player.highestRegion(), Routes.getRoutesByRegion(player.highestRegion()).length - 1).number, player.highestRegion());
+                const highestRegionRoutes = Routes.getRoutesByRegion(player.highestRegion());
+                const maxRoute = MapHelper.normalizeRoute(highestRegionRoutes[highestRegionRoutes.length - 1].number, player.highestRegion());
                 const currentRoute = MapHelper.normalizeRoute(player.route(),player.region);
 
                 // Increased rate for earlier routes, scales with regional progression
@@ -96,7 +97,7 @@ class Pokeballs implements Feature {
                 const amountCaught = App.game.statistics.pokemonCaptured[Battle.enemyPokemon().id]();
 
                 return Math.min(15,Math.pow(amountCaught,2) / 5000);
-            }, 1250, 'Increased catch rate with more catches', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+            }, 1250, 'Increased catch rate and EV gain rate with more catches', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Beastball, () => {
                 return 10;
@@ -123,7 +124,7 @@ class Pokeballs implements Feature {
                     selection(GameConstants.Pokeball.Ultraball);
                     Notifier.notify({
                         title: 'Challenge Mode',
-                        message: 'Masterballs are disabled!',
+                        message: 'Master Balls are disabled!',
                         type: NotificationConstants.NotificationOption.danger,
                     });
                 } else if (!this.pokeballs[value]?.unlocked()) {
@@ -150,11 +151,9 @@ class Pokeballs implements Feature {
 
         if (isShiny) {
             if (!alreadyCaughtShiny) {
-                // if the pokemon is also not caught, use the higher selection since a notCaughtShiny is also a notCaught pokemon
-                pref = !alreadyCaught ? Math.max(this.notCaughtSelection, this.notCaughtShinySelection) : this.notCaughtShinySelection;
+                pref = this.notCaughtShinySelection;
             } else {
-                // if the shiny is already caught, use the higher selection since the pokemon is also a caught pokemon
-                pref = Math.max(this.alreadyCaughtSelection, this.alreadyCaughtShinySelection);
+                pref = this.alreadyCaughtShinySelection;
             }
         } else {
             if (!alreadyCaught) {
@@ -173,11 +172,7 @@ class Pokeballs implements Feature {
                 return GameConstants.Pokeball.None;
             }
         } else if (GameConstants.UltraBeastType[pokemon.name] != undefined) {
-            if (pref != GameConstants.Pokeball.None && this.pokeballs[GameConstants.Pokeball.Beastball].quantity() > 0) {
-                return GameConstants.Pokeball.Beastball;
-            } else {
-                return GameConstants.Pokeball.None;
-            }
+            return GameConstants.Pokeball.None;
         }
 
         if (this.pokeballs[pref]?.quantity()) {
@@ -205,7 +200,7 @@ class Pokeballs implements Feature {
         GameHelper.incrementObservable(this.pokeballs[ball].quantity, amount);
         GameHelper.incrementObservable(App.game.statistics.pokeballsObtained[ball],amount);
         if (purchase === true) {
-            GameHelper.incrementObservable(App.game.statistics.pokeballsBought[ball],amount);
+            GameHelper.incrementObservable(App.game.statistics.pokeballsPurchased[ball],amount);
         }
     }
 
@@ -221,6 +216,11 @@ class Pokeballs implements Feature {
     getBallQuantity(ball: GameConstants.Pokeball): number {
         const pokeball = this.pokeballs[ball];
         return pokeball ? pokeball.quantity() : 0;
+    }
+
+    getEPBonus(ball: GameConstants.Pokeball): number {
+        const pokeballType = this.pokeballs[ball].type;
+        return pokeballType == GameConstants.Pokeball.Repeatball ? GameConstants.REPEATBALL_EP_MODIFIER : 1;
     }
 
     canAccess(): boolean {
