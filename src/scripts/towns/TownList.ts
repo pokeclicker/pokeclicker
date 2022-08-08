@@ -2875,7 +2875,7 @@ TownList['Pokémon League Kalos'] = new Town(
 TownList['Delta Littleroot Town'] = new Town(
     'Delta Littleroot Town',
     GameConstants.Region.kalos,
-    [],
+    [new BulletinBoard(GameConstants.BulletinBoards.DeltaEpisode)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 101)],
         npcs: [DeltaProfBirch1, DeltaMay1],

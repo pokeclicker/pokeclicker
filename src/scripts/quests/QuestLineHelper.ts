@@ -559,7 +559,7 @@ class QuestLineHelper {
     }
 
     public static createDeltaEpisodeQuestLine() {
-        const deltaEpisodeQuestLine = new QuestLine('Delta Episode', 'Something is going on in Hoenn.');
+        const deltaEpisodeQuestLine = new QuestLine('Delta Episode', 'Something is going on in Hoenn.', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), GameConstants.BulletinBoards.Kalos);
 
         const talktoReporterGabby1 = new TalkToNPCQuest(DeltaSlateportHoennReporter1, 'Use Subregional Travel to travel to the Delta Episode and ask the first person you meet for information.');
         deltaEpisodeQuestLine.addQuest(talktoReporterGabby1);
@@ -583,7 +583,7 @@ class QuestLineHelper {
     }
 
     public static createPrimalsQuestLine() {
-        const primalsQuestLine = new QuestLine('The Missing Primals', 'The scientists at the Delta Weather Institute need help.');
+        const primalsQuestLine = new QuestLine('The Missing Primals', 'The scientists at the Delta Weather Institute need help.', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), GameConstants.BulletinBoards.DeltaEpisode);
 
         const talkToWeatherScientist1 = new TalkToNPCQuest(WeatherInstituteScientist1, 'Talk to the Weather Scientist at the Delta Weather Institute.');
         primalsQuestLine.addQuest(talkToWeatherScientist1);

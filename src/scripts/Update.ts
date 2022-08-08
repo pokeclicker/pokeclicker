@@ -1031,14 +1031,6 @@ class Update implements Saveable {
         },
 
         '0.9.11': ({ playerData, saveData }) => {
-            // Start Delta questline if the player has beaten Kalos champion
-            if (saveData.badgeCase[78]) {
-                saveData.quests.questLines.push({state: 1, name: 'Delta Episode', quest: 0});
-            }
-            // Start Primals questline if the player has beaten Kalos champion
-            if (saveData.badgeCase[78]) {
-                saveData.quests.questLines.push({state: 1, name: 'The Missing Primals', quest: 0});
-            }
             // Add Delta Petalburg Woods
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 108);
             // Add Delta Rusturf Tunnel

@@ -771,6 +771,7 @@ export enum BulletinBoards {
     None = -2,
     All = -1,
     Kalos,
+    DeltaEpisode,
     Alola,
 }
 

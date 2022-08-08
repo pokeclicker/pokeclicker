@@ -381,6 +381,7 @@ namespace GameConstants {
         None = -2,
         All = -1,
         Kalos,
+        DeltaEpisode,
         Alola
     }
     declare const EnergyRestoreEffect: {
