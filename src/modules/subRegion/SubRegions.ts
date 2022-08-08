@@ -11,10 +11,10 @@ import {
     GalarSubRegions,
 } from '../GameConstants';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
-import MultiRequirement from '../requirements/MultiRequirement';
-import NullRequirement from '../requirements/NullRequirement';
 import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
+import RouteKillRequirement from '../requirements/RouteKillRequirement';
 import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
+import * as GameConstants from '../GameConstants';
 import SubRegion from './SubRegion';
 
 export default class SubRegions {
@@ -57,20 +57,9 @@ SubRegions.addSubRegion(Region.alola, new SubRegion('Melemele island', AlolaSubR
 SubRegions.addSubRegion(Region.alola, new SubRegion('Akala island', AlolaSubRegions.AkalaIsland, new GymBadgeRequirement(BadgeEnums.FightiniumZ), 'Heahea City'));
 SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula & Poni islands', AlolaSubRegions.UlaulaAndPoniIslands, new TemporaryBattleRequirement('Ultra Wormhole'), 'Malie City'));
 // For when Alola is split into 4 regions
-// SubRegions.addSubRegion(Region.alola, new SubRegion('Akala island', new GymBadgeRequirement(BadgeEnums.MelemeleKahuna), 'Heahea City'));
 // SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula island', new TemporaryBattleRequirement('Ultra Wormhole'), 'Malie City'));
 // SubRegions.addSubRegion(Region.alola, new SubRegion('Poni island', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation')), 'Seafolk Village'));
-
-SubRegions.addSubRegion(Region.galar, new SubRegion('Galar', GalarSubRegions.Galar, undefined, 'Postwick', undefined));
-// For once Galar is split into 2 regions
-// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar South', undefined, 'Postwick', undefined));
-// SubRegions.addSubRegion(GameConstants.Region.galar, new SubRegion('Galar North', new RouteKillRequirement(10, GameConstants.Region.galar, 14), 'Hammerlocke', undefined));
-// Galar DLC islands
-SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', GalarSubRegions.IsleOfArmor, new MultiRequirement([
-    new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
-    new NullRequirement(),
-]), undefined, undefined));
-SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', GalarSubRegions.CrownTundra, new MultiRequirement([
-    new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
-    new NullRequirement(),
-]), undefined, undefined));
+SubRegions.addSubRegion(Region.galar, new SubRegion('South Galar', GalarSubRegions.SouthGalar, undefined, 'Hulbury'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('North Galar', GalarSubRegions.NorthGalar, new RouteKillRequirement(10, GameConstants.Region.galar, 22), 'Hammerlocke'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', GalarSubRegions.IsleofArmor, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Armor Station'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', GalarSubRegions.CrownTundra, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Crown Tundra Station'));

@@ -277,6 +277,11 @@ namespace GameConstants {
         'Sachet',
         'Whipped_dream',
         'Ice_stone',
+        'Sweet_apple',
+        'Tart_apple',
+        'Cracked_pot',
+        'Galarica_cuff',
+        'Galarica_wreath',
     }
     declare enum ShardType {
         'None',
@@ -293,6 +298,15 @@ namespace GameConstants {
         'White Shard',
         'Pink Shard',
         'Cyan Shard',
+        'Rose Shard',
+        'Brown Shard',
+    }
+    declare enum FossilPieceType {
+        'None',
+        'Fossilized Bird',
+        'Fossilized Fish',
+        'Fossilized Drake',
+        'Fossilized Dino',
     }
     declare enum BattleItemType {
         'xAttack' = '',
@@ -331,9 +345,12 @@ namespace GameConstants {
         'Cherubi',
         'Zorua',
         'Meloetta (pirouette)',
-        'Toxel',
-        'Eternatus',
-        'Slowpoke (Galar)'
+        'Type: Null',
+        'Poipole',
+        'Dracozolt',
+        'Arctozolt',
+        'Dracovish',
+        'Arctovish',
     }
 
     declare enum UltraBeastType {
@@ -382,7 +399,10 @@ namespace GameConstants {
         All = -1,
         Kalos,
         DeltaEpisode,
-        Alola
+        Alola,
+        Galar,
+        Armor,
+        Crown
     }
     declare const EnergyRestoreEffect: {
         SmallRestore: number;
@@ -531,6 +551,16 @@ namespace GameConstants {
         'Seafolk Village',
         'Exeggutor Island',
         'Altar of the Sunne and Moone',
+        'Turffield',
+        'Hulbury',
+        'Motostoke',
+        'Hammerlocke',
+        'Route 6',
+        'Stow-on-Side',
+        'Ballonlea',
+        'Circhester',
+        'Spikemuth',
+        'Master Dojo',
     }
     declare enum KantoSubRegions {
         Kanto,
@@ -560,10 +590,9 @@ namespace GameConstants {
         // PoniIsland,
     }
     declare enum GalarSubRegions {
-        Galar,
-        // GalarSouth,
-        // GalarNorth,
-        IsleOfArmor,
+        SouthGalar,
+        NorthGalar,
+        IsleofArmor,
         CrownTundra,
     }
 }
