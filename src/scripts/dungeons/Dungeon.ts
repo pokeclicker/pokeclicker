@@ -8496,7 +8496,7 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
 //Crown Tundra
 dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
     [
-        'Zubat', 'Carbink', 'Piloswine', 'Deino', 'Larvitar', 'Riolu', 'Audino', 'Golbat', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Magikarp', 'Feebas'
+        'Zubat', 'Carbink', 'Piloswine', 'Deino', 'Larvitar', 'Riolu', 'Audino', 'Golbat', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Magikarp', 'Feebas',
         {pokemon: 'Omanyte', options: { hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Omanyte)}},
         {pokemon: 'Kabuto', options: { hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Kabuto)}},
     ],

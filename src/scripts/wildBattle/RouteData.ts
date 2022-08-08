@@ -2886,7 +2886,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Cryogonal', 'Vanillish', 'Corvisquire', 'Vanillite', 'Vanilluxe', 'Coalossal'],  new WeatherRequirement([WeatherType.Snow])),
           new SpecialRoutePokemon(['Carkol', 'Magmar', 'Gossifleur', 'Shuckle', 'Magby', 'Magmortar'],  new WeatherRequirement([WeatherType.Sunny])),
           new SpecialRoutePokemon(['Hattrem', 'Mimikyu', 'Hatenna', 'Hatterene', 'Coalossal', 'Dragonair'],  new WeatherRequirement([WeatherType.Fog])),
-          new SpecialRoutePokemon(['Anorith'], new ObtainedPokemonRequirement(pokemonMap.Anorith),
+          new SpecialRoutePokemon(['Anorith'], new ObtainedPokemonRequirement(pokemonMap.Anorith)),
           new SpecialRoutePokemon(['Tyrunt'], new ObtainedPokemonRequirement(pokemonMap.Tyrunt)),
       ],
         headbutt: ['Skwovet', 'Greedent', 'Munchlax'],
