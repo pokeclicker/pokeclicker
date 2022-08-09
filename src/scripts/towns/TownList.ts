@@ -3649,7 +3649,7 @@ TownList['Slumbering Weald'] = new Town(
 TownList.Wedgehurst = new Town(
     'Wedgehurst',
     GameConstants.Region.galar,
-    [WedgehurstShop],
+    [TemporaryBattleList['Sordward & Shielbert'], WedgehurstShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
         npcs: [TrainStationGuy, SouthGalarRoamerNPC],
@@ -3658,7 +3658,7 @@ TownList.Wedgehurst = new Town(
 TownList['Professor Magnolia\'s House'] = new Town(
     'Professor Magnolia\'s House',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Sordward & Shielbert']],
+    [],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 2)],
     }
