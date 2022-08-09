@@ -66,3 +66,4 @@ ItemList.Dracozolt              = new PokemonItem('Dracozolt', 100000);
 ItemList.Arctozolt              = new PokemonItem('Arctozolt', 100000);
 ItemList.Dracovish              = new PokemonItem('Dracovish', 100000);
 ItemList.Arctovish              = new PokemonItem('Arctovish', 100000);
+ItemList['Zarude (Dada)']       = new PokemonItem('Zarude (Dada)', 500000);

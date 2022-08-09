@@ -8625,8 +8625,8 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
             {loot: 'Dowsing_machine'},
         ],
         mythic: [
-            {loot: 'Heart Scale'}
-            {loot: 'Galarian Darmanitan (Zen)'}
+            {loot: 'Heart Scale'},
+            {loot: 'Galarian Darmanitan (Zen)'},
         ],
     },
     33915762,

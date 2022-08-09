@@ -3448,7 +3448,7 @@ const HammerlockeShop = new Shop([
     ItemList.Upgrade,
     ItemList.Dragon_scale,
 ]);
-const StowonSideShop: Shop = new Shop([
+const StowonSideShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Fighting_egg,
@@ -3457,6 +3457,9 @@ const StowonSideShop: Shop = new Shop([
     ItemList.Dubious_disc,
     ItemList.Reaper_cloth,
 ]);
+const GlimwoodTangleShop = new Shop([
+    ItemList['Zarude (Dada)'],
+], undefined, [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glimwood Tangle'))]);
 const BallonleaShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -3819,7 +3822,8 @@ TownList['Galar Mine No. 2'] = new DungeonTown(
 TownList['Glimwood Tangle'] = new DungeonTown(
     'Glimwood Tangle',
     GameConstants.Region.galar,
-    [new TemporaryBattleRequirement('Bede3')]
+    [new TemporaryBattleRequirement('Bede3')],
+    [GlimwoodTangleShop]
 );
 TownList['Rose Tower'] = new DungeonTown(
     'Rose Tower',
