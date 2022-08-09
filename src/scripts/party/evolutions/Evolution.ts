@@ -52,6 +52,9 @@ abstract class Evolution {
             evolvedPartyPokemon.attackBonusPercent = basePartyPokemon.attackBonusPercent;
             evolvedPartyPokemon.proteinsUsed = basePartyPokemon.proteinsUsed;
             App.game.party.removePokemonByName(this.basePokemon);
+            const basePokemonStatistics = App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName(this.basePokemon).id];
+            App.game.statistics.pokemonCaptured[evolvedPartyPokemon.id](basePokemonStatistics());
+            basePokemonStatistics(0);
         }
 
         // EVs
