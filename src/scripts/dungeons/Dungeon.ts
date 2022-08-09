@@ -8390,7 +8390,7 @@ dungeonList['Warm-Up Tunnel'] = new Dungeon('Warm-Up Tunnel',
     1730000, 38);
 
 dungeonList['Courageous Cavern'] = new Dungeon('Courageous Cavern',
-    ['Pincurchin', 'Dwebble', 'Crustle', 'Swoobat', 'Magikarp', 'Shellder', 'Cloyster', 'Tentacool', 'Clobbopus', 'Chewtle', 'Tentacruel', 'Whiscash'],
+    ['Pincurchin', 'Dwebble', 'Crustle', 'Swoobat', 'Magikarp', 'Shellder', 'Cloyster', 'Tentacool', 'Chewtle', 'Tentacruel', 'Whiscash'],
     {
         common: [
             {loot: 'xClick'},
@@ -8495,7 +8495,11 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
 
 //Crown Tundra
 dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
-    ['Zubat', 'Carbink', 'Piloswine', 'Deino', 'Larvitar', 'Riolu', 'Audino', 'Golbat', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Magikarp', 'Omanyte', 'Kabuto', 'Feebas'],
+    [
+        'Zubat', 'Carbink', 'Piloswine', 'Deino', 'Larvitar', 'Riolu', 'Audino', 'Golbat', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Magikarp', 'Feebas',
+        {pokemon: 'Omanyte', options: { hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Omanyte)}},
+        {pokemon: 'Kabuto', options: { hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Kabuto)}},
+    ],
     {
         common: [
             {loot: 'xClick'},
@@ -8504,8 +8508,8 @@ dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
     },
     32184888,
     [
-        new DungeonBossPokemon('Kabutops', 160924440, 60),
-        new DungeonBossPokemon('Omastar', 160924440, 60),
+        new DungeonBossPokemon('Kabutops', 160924440, 60, {hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Kabutops)}),
+        new DungeonBossPokemon('Omastar', 160924440, 60, {hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Omastar)}),
         new DungeonBossPokemon('Tyranitar', 160924440, 60),
         new DungeonBossPokemon('Hydreigon', 160924440, 60),
         new DungeonBossPokemon('Lucario', 160924440, 60),
@@ -8558,7 +8562,7 @@ dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
     1920000, 54);
 
 dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
-    ['Electabuzz', 'Drakloak', 'Cryogonal', 'Bronzong', 'Stonjourner', 'Galvantula', 'Altaria', 'Relicanth', 'Glalie', 'Metagross'],
+    ['Electabuzz', 'Cryogonal', 'Bronzong', 'Stonjourner', 'Galvantula', 'Relicanth', 'Glalie', 'Metagross'],
     {
         common: [
             {loot: 'xClick'},
@@ -8567,7 +8571,7 @@ dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
     },
     32870660,
     [
-        new DungeonBossPokemon('Dragapult', 156135635, 60),
+        new DungeonBossPokemon('Altaria', 156135635, 60),
         new DungeonBossPokemon('Electivire', 156135635, 60),
         new DungeonBossPokemon('Regidrago', 164353300, 70),
         new DungeonBossPokemon('Regieleki', 164353300, 70),
