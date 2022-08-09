@@ -464,6 +464,15 @@ TownList['Three Island'] = new Town(
         npcs: [ThreeIslandBiker],
     }
 );
+TownList['Professor Ivy\'s Lab'] = new Town(
+    'Professor Ivy\'s Lab',
+    GameConstants.Region.kanto,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Volcano)],
+        npcs: [],
+    }
+);
 
 //Kanto Dungeons
 TownList['Viridian Forest'] = new DungeonTown(
