@@ -8517,7 +8517,10 @@ dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
     1730000, 50);
 
 dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
-    ['Stonjourner', 'Rhyperior', 'Aerodactyl', 'Aggron', 'Coalossal', 'Barbaracle', 'Gigalith', 'Crustle'],
+    [
+        'Stonjourner', 'Rhyperior', 'Aggron', 'Coalossal', 'Barbaracle', 'Gigalith', 'Crustle',
+        {pokemon: 'Aerodactyl', options: { hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Aerodactyl)}},
+    ],
     {
         common: [
             {loot: 'xClick'},
