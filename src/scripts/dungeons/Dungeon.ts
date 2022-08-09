@@ -8527,7 +8527,7 @@ dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
     31507840,
     [
         new DungeonBossPokemon('Relicanth', 149662240, 60),
-        new DungeonBossPokemon('Regirock', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 5) }),
+        new DungeonBossPokemon('Regirock', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 4) }),
     ],
     1920000, 48);
 
@@ -8542,7 +8542,7 @@ dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
     31507840,
     [
         new DungeonBossPokemon('Metagross', 149662240, 60),
-        new DungeonBossPokemon('Registeel', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 5) }),
+        new DungeonBossPokemon('Registeel', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 4) }),
     ],
     1920000, 48);
 
@@ -8557,7 +8557,7 @@ dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
     31507840,
     [
         new DungeonBossPokemon('Glalie', 149662240, 60),
-        new DungeonBossPokemon('Regice', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 5) }),
+        new DungeonBossPokemon('Regice', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 4) }),
     ],
     1920000, 54);
 
