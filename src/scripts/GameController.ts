@@ -168,9 +168,15 @@ class GameController {
 
             // Within modals
             if ($farmsModal.data('bs.modal')?._isShown) {
-                if (key == Settings.getSetting('hotkey.farm.toggleShovel').value) {
-                    FarmController.selectedShovel() ? FarmController.selectedShovel(false) : FarmController.selectedShovel(true);
-                    return e.preventDefault();
+                switch (key) {
+                    case Settings.getSetting('hotkey.farm.toggleShovel').value:
+                        FarmController.selectedShovel() ? FarmController.selectedShovel(false) : FarmController.selectedShovel(true);
+                        FarmController.selectedPlotSafeLock(false);
+                        return e.preventDefault();
+                    case Settings.getSetting('hotkey.farm.togglePlotSafeLock').value:
+                        FarmController.selectedPlotSafeLock() ? FarmController.selectedPlotSafeLock(false) : FarmController.selectedPlotSafeLock(true);
+                        FarmController.selectedShovel(false);
+                        return e.preventDefault();
                 }
             }
             if ($undergroundModal.data('bs.modal')?._isShown) {
