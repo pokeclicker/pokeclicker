@@ -1030,6 +1030,11 @@ class Update implements Saveable {
             });
         },
 
+        '0.9.11': ({ playerData, saveData }) => {
+            // Add Tohjo Falls
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 27);
+        },
+
     };
 
     constructor() {

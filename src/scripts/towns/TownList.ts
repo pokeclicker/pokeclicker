@@ -910,6 +910,11 @@ TownList['Dark Cave'] = new DungeonTown(
     GameConstants.Region.johto,
     [new RouteKillRequirement(10, GameConstants.Region.johto, 45)]
 );
+TownList['Tohjo Falls'] = new DungeonTown(
+    'Tohjo Falls',
+    GameConstants.Region.johto,
+    [new GymBadgeRequirement(BadgeEnums.Rising)]
+);
 TownList['Victory Road Johto'] = new DungeonTown(
     'Victory Road Johto',
     GameConstants.Region.johto,

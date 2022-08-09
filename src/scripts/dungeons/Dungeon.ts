@@ -2070,6 +2070,33 @@ dungeonList['Dark Cave'] = new Dungeon('Dark Cave',
     [new DungeonBossPokemon('Dunsparce', 460000, 55)],
     6500, 45);
 
+dungeonList['Tohjo Falls'] = new Dungeon('Tohjo Falls',
+    ['Rattata', 'Raticate', 'Zubat', 'Slowpoke', 'Goldeen', 'Magikarp'],
+    {
+        common: [
+            {loot: 'Token_collector'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [
+            {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
+        ],
+        legendary: [
+            {loot: 'Greatball'},
+            {loot: 'Hard Stone'},
+            {loot: 'SmallRestore'},
+        ],
+        mythic: [
+            {loot: 'Max Revive'},
+        ],
+    },
+    127750,
+    [
+        new DungeonBossPokemon('Golbat', 480000, 55),
+        new DungeonBossPokemon('Seaking', 480000, 55),
+    ],
+    6750, 45);
+
 dungeonList['Victory Road Johto'] = new Dungeon('Victory Road Johto',
     ['Golbat', 'Graveler', 'Onix', 'Rhyhorn'],
     {
@@ -2098,7 +2125,7 @@ dungeonList['Victory Road Johto'] = new Dungeon('Victory Road Johto',
         new DungeonBossPokemon('Sandslash', 500000, 55),
         new DungeonBossPokemon('Rhydon', 500000, 55),
     ],
-    7000, 46);
+    7000, 26);
 
 dungeonList['Mt. Silver'] = new Dungeon('Mt. Silver',
     ['Ponyta', 'Doduo', 'Tangela', 'Sneasel', 'Ursaring', 'Donphan', 'Teddiursa', 'Phanpy', 'Quagsire', 'Misdreavus'],

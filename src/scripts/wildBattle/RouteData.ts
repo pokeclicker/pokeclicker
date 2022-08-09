@@ -539,7 +539,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Shellder', 'Chinchou', 'Lanturn'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Rising)],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tohjo Falls'))],
     49
 ));
 Routes.add(new RegionRoute(
