@@ -2086,9 +2086,7 @@ dungeonList['Tohjo Falls'] = new Dungeon('Tohjo Falls',
             {loot: 'Hard Stone'},
             {loot: 'SmallRestore'},
         ],
-        mythic: [
-            {loot: 'Max Revive'},
-        ],
+        mythic: [{loot: 'Max Revive'}],
     },
     127750,
     [
