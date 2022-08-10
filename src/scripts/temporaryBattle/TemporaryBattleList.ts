@@ -321,6 +321,27 @@ TemporaryBattleList.Silver5 = new TemporaryBattle(
         imageName: 'Silver',
     }
 );
+TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
+    'Spiky-eared Pichu',
+    [new GymPokemon('Spiky-eared Pichu', 3178500, 20)],
+    '',
+    [new QuestLineStepCompletedRequirement('Unfinished Business', 6)],
+    undefined,
+    {
+        displayName: 'Strange Pichu',
+    }
+);
+TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
+    'Rocket Boss Giovanni',
+    [
+        new GymPokemon('Nidoking', 861275, 42),
+        new GymPokemon('Murkrow', 861275, 43),
+        new GymPokemon('Nidoqueen', 861275, 46),
+        new GymPokemon('Kangaskhan', 875275, 40),
+    ],
+    'What in the world are you? How this is possible...? How can a kid like you manage to destroy my dream once again? The precious dream of Team Rocket has become little more than an illusion...',
+    [new QuestLineStepCompletedRequirement('Unfinished Business', 9)]
+);
 TemporaryBattleList.Silver6 = new TemporaryBattle(
     'Silver6',
     [
@@ -1658,7 +1679,7 @@ TemporaryBattleList.Hop2 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Hop',
-        returnTown: 'Professor Magnolia\'s Lab',
+        returnTown: 'Professor Magnolia\'s House',
         imageName: 'Hop',
     }
 );

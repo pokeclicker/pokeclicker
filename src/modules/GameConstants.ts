@@ -549,7 +549,7 @@ export const Environments: Record<string, EnvironmentData> = {
 
     Cave: {
         [Region.kanto]: new Set(['Pewter City', 'Diglett\'s Cave', 'Mt. Moon', 'Rock Tunnel', 'Mt. Ember', 'Mt. Ember Summit', 'Victory Road']),
-        [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt. Mortar', 'Dark Cave', 'Victory Road Johto']),
+        [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt. Mortar', 'Dark Cave', 'Tohjo Falls', 'Victory Road Johto']),
         [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Seafloor Cavern', 'Victory Road Hoenn']),
         [Region.sinnoh]: new Set(['Oreburgh City', 'Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
         [Region.unova]: new Set(['Relic Castle', 'Relic Passage', 'Seaside Cave', 'Victory Road Unova', 'Twist Mountain']),
@@ -784,6 +784,7 @@ export enum EggItemType {
 export enum BulletinBoards {
     None = -2,
     All = -1,
+    Kanto,
     Kalos,
     Alola,
     Galar,
@@ -1010,6 +1011,7 @@ export const JohtoDungeons = [
     'Radio Tower',
     'Ice Path',
     'Dark Cave',
+    'Tohjo Falls',
     'Victory Road Johto',
     'Mt. Silver',
 ];
@@ -1269,6 +1271,8 @@ export const TemporaryBattles = [
     'Silver3',
     'Silver4',
     'Silver5',
+    'Spiky-eared Pichu',
+    'Rocket Boss Giovanni',
     'Silver6',
     'Silver7',
     'May1',
