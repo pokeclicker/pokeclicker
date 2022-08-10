@@ -442,7 +442,7 @@ TemporaryBattleList.Hop2 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Hop',
-        returnTown: 'Professor Magnolia\'s Lab',
+        returnTown: 'Professor Magnolia\'s House',
         imageName: 'Hop',
     }
 );
