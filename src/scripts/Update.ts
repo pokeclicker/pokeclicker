@@ -1033,6 +1033,9 @@ class Update implements Saveable {
         '0.9.11': ({ playerData, saveData }) => {
             // Add Tohjo Falls
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 27);
+            // Add Celebi Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 5);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 6);
         },
 
     };
