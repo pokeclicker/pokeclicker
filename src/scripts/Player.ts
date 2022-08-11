@@ -241,8 +241,10 @@ class Player {
         if (mineItem) {
             return mineItem.amount();
         }
-        const itemAmount = player.itemList[UndergroundItems.getById(id)?.valueType];
-        return itemAmount?.() || 0;
+        if (UndergroundItems.getById(id)?.valueType == UndergroundItemValueType.EvolutionItem) {
+            return player.itemList[GameConstants.StoneType[UndergroundItems.getById(id).type]]?.() ?? 0;
+        }
+        return 0;
     }
 
     public toJSON() {
