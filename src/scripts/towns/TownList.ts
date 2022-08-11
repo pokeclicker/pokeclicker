@@ -508,10 +508,7 @@ TownList['Professor Ivy\'s Lab'] = new Town(
     GameConstants.Region.kanto,
     [],
     {
-        requirements: [
-            new QuestLineStepCompletedRequirement('Unfinished Business', 0),
-            new QuestLineStepCompletedRequirement('Unfinished Business', 2, GameConstants.AchievementOption.less),
-        ],
+        requirements: [new QuestLineStepCompletedRequirement('Unfinished Business', 0)],
         npcs: [CelebiProfIvy],
     }
 );
