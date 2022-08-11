@@ -84,7 +84,8 @@ TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Unfinished Business', 6)],
     undefined,
     {
-        displayName: 'Transparent',
+        displayName: 'Strange Pichu',
+        imageName: 'Transparent',
     }
 );
 TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
