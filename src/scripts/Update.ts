@@ -1034,7 +1034,7 @@ class Update implements Saveable {
             if (saveData.badgeCase[95]) {
                 Update.startQuestLine(saveData, 'Let\'s Go, Meltan!');
             }
-          
+
             // Add Tohjo Falls
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 27);
             // Add Celebi Temporary Battles
