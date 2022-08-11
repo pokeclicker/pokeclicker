@@ -1111,7 +1111,7 @@ class QuestLineHelper {
             [
                 catchRegieleki,
                 catchRegidrago,
-            ], 'Now it has finally unlocked, catch Regieleki and Regidrago in the Split-Decision Ruins!'));
+            ], 'Now that it has finally unlocked, catch Regieleki and Regidrago in the Split-Decision Ruins!'));
 
         const talktoGolemPeony5 = new TalkToNPCQuest(GolemPeony5, 'Now that you have captured Regieleki and Regidrago, go report back to Peony.');
         ancientGolemsQuestLine.addQuest(talktoGolemPeony5);
