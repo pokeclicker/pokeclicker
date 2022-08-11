@@ -79,6 +79,15 @@ export const SpriteCredits: Credit[] = [
         // Notes: Made specifically for PokéClicker.
     },
     {
+        name: 'DraK4y',
+        link: 'https://discordapp.com/users/272336444297707521/',
+        resources: [
+            'Team Flare Admin (male)',
+            'Team Flare Aliana',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'Drawnamu',
         link: 'https://www.deviantart.com/drawnamu',
         image: 'https://a.deviantart.net/avatars-big/d/r/drawnamu.png',
