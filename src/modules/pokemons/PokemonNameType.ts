@@ -259,6 +259,7 @@ export type PokemonNameType
     | 'Chinchou'
     | 'Lanturn'
     | 'Pichu'
+    | 'Spiky-eared Pichu'
     | 'Cleffa'
     | 'Igglybuff'
     | 'Togepi'
