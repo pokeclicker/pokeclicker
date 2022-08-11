@@ -3638,7 +3638,7 @@ const TrainStationGuy = new NPC('Train Station Guy', [
     'One is an island paradise, and the other a freezing wasteland.',
     'I\m sure if you go to these places you\'ll find many unique and powerful Pokémon!',
 ]);
-const SouthGalarRoamerNPC = new RoamerNPC('Sonia', [
+const SouthGalarRoamerNPC = new RoamerNPC('Professor Sonia', [
     'I\'ve heard there\'s been sightings of a never-before-seen, superstrong Pokémon on {ROUTE_NAME}! You should go check it out!',
 ], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.SouthGalar));
 const IsleofArmorRoamerNPC = new RoamerNPC('Master Dojo Student', [
