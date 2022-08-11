@@ -1626,7 +1626,7 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
         new DungeonBossPokemon('Noctowl', 340000, 30),
         new DungeonBossPokemon('Beedrill', 340000, 30),
         new DungeonBossPokemon('Butterfree', 340000, 30),
-        new DungeonBossPokemon('Celebi', 800000, 50, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)}),
+        new DungeonBossPokemon('Celebi', 800000, 50, {hide: true, requirement: new QuestLineStepCompletedRequirement('Unfinished Business', 12)}),
     ],
     4000, 34);
 
@@ -2070,6 +2070,31 @@ dungeonList['Dark Cave'] = new Dungeon('Dark Cave',
     [new DungeonBossPokemon('Dunsparce', 460000, 55)],
     6500, 45);
 
+dungeonList['Tohjo Falls'] = new Dungeon('Tohjo Falls',
+    ['Rattata', 'Raticate', 'Zubat', 'Slowpoke', 'Goldeen', 'Magikarp'],
+    {
+        common: [
+            {loot: 'Token_collector'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [
+            {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
+        ],
+        legendary: [
+            {loot: 'Greatball'},
+            {loot: 'Hard Stone'},
+            {loot: 'SmallRestore'},
+        ],
+        mythic: [{loot: 'Max Revive'}],
+    },
+    127750,
+    [
+        new DungeonBossPokemon('Golbat', 480000, 55),
+        new DungeonBossPokemon('Seaking', 480000, 55),
+    ],
+    6750, 45);
+
 dungeonList['Victory Road Johto'] = new Dungeon('Victory Road Johto',
     ['Golbat', 'Graveler', 'Onix', 'Rhyhorn'],
     {
@@ -2098,7 +2123,7 @@ dungeonList['Victory Road Johto'] = new Dungeon('Victory Road Johto',
         new DungeonBossPokemon('Sandslash', 500000, 55),
         new DungeonBossPokemon('Rhydon', 500000, 55),
     ],
-    7000, 46);
+    7000, 26);
 
 dungeonList['Mt. Silver'] = new Dungeon('Mt. Silver',
     ['Ponyta', 'Doduo', 'Tangela', 'Sneasel', 'Ursaring', 'Donphan', 'Teddiursa', 'Phanpy', 'Quagsire', 'Misdreavus'],
@@ -8390,7 +8415,7 @@ dungeonList['Warm-Up Tunnel'] = new Dungeon('Warm-Up Tunnel',
     1730000, 38);
 
 dungeonList['Courageous Cavern'] = new Dungeon('Courageous Cavern',
-    ['Pincurchin', 'Dwebble', 'Crustle', 'Swoobat', 'Magikarp', 'Shellder', 'Cloyster', 'Tentacool', 'Clobbopus', 'Chewtle', 'Tentacruel', 'Whiscash'],
+    ['Pincurchin', 'Dwebble', 'Crustle', 'Swoobat', 'Magikarp', 'Shellder', 'Cloyster', 'Tentacool', 'Chewtle', 'Tentacruel', 'Whiscash'],
     {
         common: [
             {loot: 'xClick'},
@@ -8495,7 +8520,11 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
 
 //Crown Tundra
 dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
-    ['Zubat', 'Carbink', 'Piloswine', 'Deino', 'Larvitar', 'Riolu', 'Audino', 'Golbat', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Magikarp', 'Omanyte', 'Kabuto', 'Feebas'],
+    [
+        'Zubat', 'Carbink', 'Piloswine', 'Deino', 'Larvitar', 'Riolu', 'Audino', 'Golbat', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Magikarp', 'Feebas',
+        {pokemon: 'Omanyte', options: { hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Omanyte)}},
+        {pokemon: 'Kabuto', options: { hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Kabuto)}},
+    ],
     {
         common: [
             {loot: 'xClick'},
@@ -8504,8 +8533,8 @@ dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
     },
     32184888,
     [
-        new DungeonBossPokemon('Kabutops', 160924440, 60),
-        new DungeonBossPokemon('Omastar', 160924440, 60),
+        new DungeonBossPokemon('Kabutops', 160924440, 60, {hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Kabutops)}),
+        new DungeonBossPokemon('Omastar', 160924440, 60, {hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Omastar)}),
         new DungeonBossPokemon('Tyranitar', 160924440, 60),
         new DungeonBossPokemon('Hydreigon', 160924440, 60),
         new DungeonBossPokemon('Lucario', 160924440, 60),
@@ -8513,7 +8542,10 @@ dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
     1730000, 50);
 
 dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
-    ['Stonjourner', 'Rhyperior', 'Aerodactyl', 'Aggron', 'Coalossal', 'Barbaracle', 'Gigalith', 'Crustle'],
+    [
+        'Stonjourner', 'Rhyperior', 'Aggron', 'Coalossal', 'Barbaracle', 'Gigalith', 'Crustle',
+        {pokemon: 'Aerodactyl', options: { hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Aerodactyl)}},
+    ],
     {
         common: [
             {loot: 'xClick'},
@@ -8523,7 +8555,7 @@ dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
     31507840,
     [
         new DungeonBossPokemon('Relicanth', 149662240, 60),
-        new DungeonBossPokemon('Regirock', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 5) }),
+        new DungeonBossPokemon('Regirock', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 4) }),
     ],
     1920000, 48);
 
@@ -8538,7 +8570,7 @@ dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
     31507840,
     [
         new DungeonBossPokemon('Metagross', 149662240, 60),
-        new DungeonBossPokemon('Registeel', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 5) }),
+        new DungeonBossPokemon('Registeel', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 4) }),
     ],
     1920000, 48);
 
@@ -8553,12 +8585,12 @@ dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
     31507840,
     [
         new DungeonBossPokemon('Glalie', 149662240, 60),
-        new DungeonBossPokemon('Regice', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 5) }),
+        new DungeonBossPokemon('Regice', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 4) }),
     ],
     1920000, 54);
 
 dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
-    ['Electabuzz', 'Drakloak', 'Cryogonal', 'Bronzong', 'Stonjourner', 'Galvantula', 'Altaria', 'Relicanth', 'Glalie', 'Metagross'],
+    ['Electabuzz', 'Cryogonal', 'Bronzong', 'Stonjourner', 'Galvantula', 'Relicanth', 'Glalie', 'Metagross'],
     {
         common: [
             {loot: 'xClick'},
@@ -8567,7 +8599,7 @@ dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
     },
     32870660,
     [
-        new DungeonBossPokemon('Dragapult', 156135635, 60),
+        new DungeonBossPokemon('Altaria', 156135635, 60),
         new DungeonBossPokemon('Electivire', 156135635, 60),
         new DungeonBossPokemon('Regidrago', 164353300, 70),
         new DungeonBossPokemon('Regieleki', 164353300, 70),

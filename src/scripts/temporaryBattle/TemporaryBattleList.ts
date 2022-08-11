@@ -92,6 +92,7 @@ TemporaryBattleList['Suicune 1'] = new TemporaryBattle(
         imageName: 'Suicune',
     }
 );
+
 TemporaryBattleList.Eusine = new TemporaryBattle(
     'Eusine',
     [
@@ -108,6 +109,7 @@ TemporaryBattleList.Eusine = new TemporaryBattle(
         imageName: 'Eusine',
     }
 );
+
 TemporaryBattleList['Suicune 2'] = new TemporaryBattle(
     'Suicune 2',
     [new GymPokemon('Suicune', 1115500, 40)],
@@ -123,6 +125,7 @@ TemporaryBattleList['Suicune 2'] = new TemporaryBattle(
         imageName: 'Suicune',
     }
 );
+
 TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
     'Suicune 3',
     [new GymPokemon('Suicune', 3269100, 40)],
@@ -138,6 +141,7 @@ TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
         imageName: 'Suicune',
     }
 );
+
 TemporaryBattleList['Suicune 4'] = new TemporaryBattle(
     'Suicune 4',
     [new GymPokemon('Suicune', 3359100, 40)],
@@ -153,6 +157,7 @@ TemporaryBattleList['Suicune 4'] = new TemporaryBattle(
         imageName: 'Suicune',
     }
 );
+
 TemporaryBattleList['Suicune 5'] = new TemporaryBattle(
     'Suicune 5',
     [new GymPokemon('Suicune', 3449100, 40)],
@@ -165,6 +170,7 @@ TemporaryBattleList['Suicune 5'] = new TemporaryBattle(
         imageName: 'Suicune',
     }
 );
+
 TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
     'Suicune 6',
     [new GymPokemon('Suicune', 3449100, 40)],
@@ -179,6 +185,29 @@ TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
         returnTown: 'Cerulean City',
         imageName: 'Suicune',
     }
+);
+
+TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
+    'Spiky-eared Pichu',
+    [new GymPokemon('Spiky-eared Pichu', 3178500, 20)],
+    '',
+    [new QuestLineStepCompletedRequirement('Unfinished Business', 6)],
+    undefined,
+    {
+        displayName: 'Strange Pichu',
+    }
+);
+
+TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
+    'Rocket Boss Giovanni',
+    [
+        new GymPokemon('Nidoking', 861275, 42),
+        new GymPokemon('Murkrow', 861275, 43),
+        new GymPokemon('Nidoqueen', 861275, 46),
+        new GymPokemon('Kangaskhan', 875275, 40),
+    ],
+    'What in the world are you? How this is possible...? How can a kid like you manage to destroy my dream once again? The precious dream of Team Rocket has become little more than an illusion...',
+    [new QuestLineStepCompletedRequirement('Unfinished Business', 9)]
 );
 
 // Sinnoh Temporary Battles
@@ -524,7 +553,7 @@ TemporaryBattleList.Hop2 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Hop',
-        returnTown: 'Professor Magnolia\'s Lab',
+        returnTown: 'Professor Magnolia\'s House',
         imageName: 'Hop',
     }
 );
