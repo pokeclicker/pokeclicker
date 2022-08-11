@@ -338,6 +338,11 @@ class QuestLineHelper {
         const catchRoute25Suicune = new CaptureSpecificPokemonQuest(
             'Suicune',
             'Catch Suicune.',
+            1,
+            false,
+            undefined,
+            undefined
+        );
 
         johtoSuicuneQuestLine.addQuest(catchRoute25Suicune);
 
