@@ -214,6 +214,7 @@ class Underground implements Feature {
                 // Cannot sell Shards or Fossils
                 item.valueType !== UndergroundItemValueType.Fossil
                 && item.valueType !== UndergroundItemValueType.Shard
+                && item.valueType != UndergroundItemValueType.FossilPiece
                 && item.amount() > 0
                 && !item.sellLocked()
             ) {
@@ -359,6 +360,7 @@ class Underground implements Feature {
                 !item.sellLocked()
                 && item.valueType != UndergroundItemValueType.Fossil
                 && item.valueType != UndergroundItemValueType.Shard
+                && item.valueType != UndergroundItemValueType.FossilPiece
             ) {
                 Underground.sellMineItem(item.id, Infinity);
             }

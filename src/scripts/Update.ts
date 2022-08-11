@@ -831,14 +831,6 @@ class Update implements Saveable {
             if (saveData.badgeCase[8]) {
                 Update.startQuestLine(saveData, 'Persons of Interest');
             }
-            // Start UB questline if player has beaten Alola Champion already
-            if (saveData.badgeCase[95]) {
-                Update.startQuestLine(saveData, 'Ultra Beast Hunt');
-            }
-            // Start Ash questline if player has beaten Kalos champion already
-            if (saveData.badgeCase[78]) {
-                Update.startQuestLine(saveData, 'The New Kid');
-            }
 
             // Just incase statistics is not set
             saveData.statistics = saveData.statistics || {};
@@ -1036,6 +1028,14 @@ class Update implements Saveable {
                     i.valueType = 1;
                 }
             });
+        },
+
+        '0.9.11': ({ playerData, saveData }) => {
+            // Add Tohjo Falls
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 27);
+            // Add Celebi Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 5);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 6);
         },
 
     };
