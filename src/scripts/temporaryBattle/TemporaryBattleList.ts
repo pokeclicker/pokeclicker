@@ -1030,13 +1030,21 @@ TemporaryBattleList.Calyrex = new TemporaryBattle(
     'Calyrex',
     [new GymPokemon('Calyrex', 1886555626, 80)],
     'Cracrown crow. Roooooowwwn rown crown.',
-    [new QuestLineStepCompletedRequirement('The Crown of Galar', 0)]
+    [new QuestLineStepCompletedRequirement('The Crown of Galar', 0)],
+    undefined,
+    {
+        imageName: 'Transparent',
+    }
 );
 TemporaryBattleList.Glastrier = new TemporaryBattle(
     'Glastrier',
     [new GymPokemon('Glastrier', 2031393560, 75)],
     'The Pokémon ran away!',
-    [new QuestLineStepCompletedRequirement('The Crown of Galar', 4)]
+    [new QuestLineStepCompletedRequirement('The Crown of Galar', 4)],
+    undefined,
+    {
+        imageName: 'Transparent',
+    }
 );
 TemporaryBattleList.Spectrier = new TemporaryBattle(
     'Spectrier',
