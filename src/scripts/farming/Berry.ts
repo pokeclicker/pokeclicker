@@ -18,6 +18,7 @@ class Berry {
         'Burmy (Plant)', 'Combee', 'Cherubi', 'Munchlax',
         'Sewaddle', 'Karrablast',
         'Cutiefly', 'Bounsweet',
+        'Sizzlipede', 'Applin',
     ];
 
     constructor(

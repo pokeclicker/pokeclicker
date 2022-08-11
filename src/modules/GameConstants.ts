@@ -1326,6 +1326,10 @@ export const TemporaryBattles = [
     'Spectrier',
     'Dyna Tree Birds',
     'Regigigas',
+    'Zarude Tribe 1',
+    'Zarude Tribe 2',
+    'Zarude Tribe 3',
+    'Ash Ketchum Galar',
 ];
 
 export enum ShardTraderLocations {

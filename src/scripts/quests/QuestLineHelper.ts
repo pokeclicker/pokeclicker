@@ -1056,6 +1056,24 @@ class QuestLineHelper {
         App.game.quests.questLines().push(ancientGolemsQuestLine);
     }
 
+    public static createJungleSecretsQuestLine() {
+        const jungleSecretsQuestLine = new QuestLine('Secrets of the Jungle', 'Discover the secrets of the jungle where Zarude reside.', new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap.Zarude), new TemporaryBattleRequirement('Ash Ketchum Galar')]), GameConstants.BulletinBoards.Galar);
+
+        const clearZarudeTribe1 = new CustomQuest(1, 0, 'Defeat Zarude Tribe', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zarude Tribe 1')]());
+        jungleSecretsQuestLine.addQuest(clearZarudeTribe1);
+
+        const clearZarudeTribe2 = new CustomQuest(1, 0, 'Defeat Zarude Tribe', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zarude Tribe 2')]());
+        jungleSecretsQuestLine.addQuest(clearZarudeTribe2);
+
+        const clearZarudeTribe3 = new CustomQuest(1, 0, 'Defeat Zarude Tribe', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zarude Tribe 3')]());
+        jungleSecretsQuestLine.addQuest(clearZarudeTribe3);
+
+        const clearGalarAsh = new CustomQuest(20, 0, 'Defeat Ash Ketchum at the Master Dojo', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Galar')]());
+        jungleSecretsQuestLine.addQuest(clearGalarAsh);
+
+        App.game.quests.questLines().push(jungleSecretsQuestLine);
+    }
+
     // Event QuestLines
     public static createFindSurpriseTogepiForEasterQuestLine() {
         const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted, but cannot be found!');
@@ -1159,6 +1177,7 @@ class QuestLineHelper {
         this.createGalarCrownQuestLine();
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
+        this.createJungleSecretsQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
     }

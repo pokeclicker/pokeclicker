@@ -995,3 +995,75 @@ TemporaryBattleList.Regigigas = new TemporaryBattle(
     'The ancient giant was defeated!',
     [new QuestLineStepCompletedRequirement('The Ancient Golems', 7)]
 );
+TemporaryBattleList['Zarude Tribe 1'] = new TemporaryBattle(
+    'Zarude Tribe 1',
+    [
+        new GymPokemon('Zarude', 182908638, 79),
+        new GymPokemon('Zarude', 182908638, 80),
+        new GymPokemon('Zarude', 182908638, 81),
+        new GymPokemon('Zarude', 182908638, 81),
+        new GymPokemon('Zarude', 182908638, 81),
+    ],
+    'Za! Za! Zarude!',
+    [new QuestLineStepCompletedRequirement('Secrets of the Jungle', ?)],
+    undefined,
+    {
+        displayName: 'Zarude Tribe',
+        imageName: 'Zarude Tribe',
+    }
+);
+TemporaryBattleList['Zarude Tribe 2'] = new TemporaryBattle(
+    'Zarude Tribe 2',
+    [
+        new GymPokemon('Zarude', 182908638, 82),
+        new GymPokemon('Zarude', 182908638, 82),
+        new GymPokemon('Zarude', 182908638, 83),
+        new GymPokemon('Zarude', 182908638, 83),
+        new GymPokemon('Zarude', 182908638, 84),
+        new GymPokemon('Zarude', 182908638, 85),
+    ],
+    'Za! Za! Zarude!',
+    [new QuestLineStepCompletedRequirement('Secrets of the Jungle', ?)],
+    undefined,
+    {
+        displayName: 'Zarude Tribe',
+        imageName: 'Zarude Tribe',
+    }
+);
+TemporaryBattleList['Zarude Tribe 3'] = new TemporaryBattle(
+    'Zarude Tribe 3',
+    [
+        new GymPokemon('Zarude', 182908638, 85),
+        new GymPokemon('Zarude', 182908638, 85),
+        new GymPokemon('Zarude', 182908638, 86),
+        new GymPokemon('Zarude', 182908638, 86),
+        new GymPokemon('Zarude', 182908638, 87),
+        new GymPokemon('Zarude (Dada)', 182908638, 90),
+    ],
+    'Za! Za! Zarude!',
+    [new QuestLineStepCompletedRequirement('Secrets of the Jungle', ?)],
+    undefined,
+    {
+        displayName: 'Zarude Tribe',
+        imageName: 'Zarude Tribe (Dada)',
+    }
+);
+TemporaryBattleList['Ash Ketchum Galar'] = new TemporaryBattle(
+    'Ash Ketchum Galar',
+    [
+        new GymPokemon('Pikachu (Partner Cap)', 182908638, 58),
+        new GymPokemon('Sirfetch\'d', 182908638, 56),
+        new GymPokemon('Dragonite', 182908638, 56),
+        new GymPokemon('Dracovish', 182908638, 60),
+        new GymPokemon('Gigantamax Gengar', 182908638, 62),
+        new GymPokemon('Mega Lucario', 182908638, 62),
+    ],
+    'Thanks for battling with me again! I\'ve reignited my passion to battle after a nice, long break! I have no idea where I keep getting all these hats, but I have too many. Here, take this one for your Pikachu. It can help you grow together as partners!',
+    [new QuestLineStepCompletedRequirement('Secrets of the Jungle', ?)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Glimwood Tangle',
+        imageName: 'Ash Ketchum',
+    }
+);
