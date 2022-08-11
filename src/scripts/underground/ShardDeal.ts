@@ -22,7 +22,7 @@ class ShardDeal {
     }
 
     public static canUse(town: GameConstants.ShardTraderLocations, i: number): boolean {
-        const deal = ShardDeal.list[GameConstants.ShardTraderLocations[town]]?.peek()[i];
+        const deal = ShardDeal.list[town]?.peek()[i];
         if (!deal) {
             return false;
         }
@@ -36,7 +36,7 @@ class ShardDeal {
     }
 
     public static use(town: GameConstants.ShardTraderLocations, i: number, tradeTimes = 1) {
-        const deal = ShardDeal.list[GameConstants.ShardTraderLocations[town]]?.peek()[i];
+        const deal = ShardDeal.list[town]?.peek()[i];
         if (ShardDeal.canUse(town, i)) {
             const trades = deal.shards.map(shard => {
                 const amt = player.getUndergroundItemAmount(shard.shardType.id);
