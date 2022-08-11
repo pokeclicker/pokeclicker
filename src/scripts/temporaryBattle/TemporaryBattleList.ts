@@ -122,7 +122,7 @@ TemporaryBattleList['Suicune 2'] = new TemporaryBattle(
     {
         displayName: 'Suicune',
         returnTown: 'Mahogany Town',
-        imageName: 'Suicune',
+        imageName: 'Transparent',
     }
 );
 
@@ -138,7 +138,7 @@ TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
     {
         displayName: 'Suicune',
         returnTown: 'Vermilion City',
-        imageName: 'Suicune',
+        imageName: 'Transparent',
     }
 );
 
@@ -154,7 +154,7 @@ TemporaryBattleList['Suicune 4'] = new TemporaryBattle(
     {
         displayName: 'Suicune',
         returnTown: 'Fuchsia City',
-        imageName: 'Suicune',
+        imageName: 'Transparent',
     }
 );
 
@@ -167,14 +167,14 @@ TemporaryBattleList['Suicune 5'] = new TemporaryBattle(
     {
         displayName: 'Suicune',
         returnTown: 'Cerulean City',
-        imageName: 'Suicune',
+        imageName: 'Transparent',
     }
 );
 
 TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
     'Suicune 6',
     [new GymPokemon('Suicune', 3449100, 40)],
-    'Suicune escaped.',
+    '',
     [
         new QuestLineStepCompletedRequirement('Eusine\'s Chase', 10),
         new QuestLineCompletedRequirement('Eusine\'s Chase', GameConstants.AchievementOption.less ),
@@ -183,7 +183,7 @@ TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
     {
         displayName: 'Suicune',
         returnTown: 'Cerulean City',
-        imageName: 'Suicune',
+        imageName: 'Transparent',
     }
 );
 
@@ -195,6 +195,7 @@ TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Strange Pichu',
+        imageName: 'Transparent',
     }
 );
 
