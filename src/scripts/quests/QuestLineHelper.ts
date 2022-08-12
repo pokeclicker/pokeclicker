@@ -1258,8 +1258,10 @@ class QuestLineHelper {
             meltanCatch30Gulpin,
         ],''));
 
-        const meltanObtain10MB = new BuyPokeballsQuest(10 / 10, 0, GameConstants.Pokeball.Masterball);
-        meltanQuestLine.addQuest(meltanObtain10MB);
+        // Multi-step #5:
+
+        const meltanObtain10MB = new BuyPokeballsQuest(10, 0, GameConstants.Pokeball.Masterball);
+        meltanQuestLine.addQuest(new MultipleQuestsQuest([meltanObtain10MB],''));
 
         // Multi-step #6:
 
@@ -1301,6 +1303,10 @@ class QuestLineHelper {
 
         // Multi-step #9:
 
+        const startRainbowRocket = () => {
+            App.game.quests.getQuestLine('Defeat Rainbow Rocket').beginQuest();
+        };
+
         const meltanCatch50Anorith = new CaptureSpecificPokemonQuest('Anorith', 'Catch 50 Anorith', 50 / 50, true, 0, undefined);
         const meltanCatch50Lileep = new CaptureSpecificPokemonQuest('Lileep', 'Catch 50 Lileep', 50 / 50, true, 0, undefined);
         const meltanCatch50Aerodactyl = new CaptureSpecificPokemonQuest('Aerodactyl', 'Catch 50 Aerodactyl', 50 / 50, true, 0, undefined);
@@ -1311,7 +1317,7 @@ class QuestLineHelper {
             meltanCatch50Lileep,
             meltanCatch50Aerodactyl,
             meltanDefeatHau15,
-        ],''));
+        ],'', startRainbowRocket));
 
         // Multi-step #10
 
