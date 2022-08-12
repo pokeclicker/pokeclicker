@@ -306,7 +306,7 @@ class Quests implements Saveable {
                     ql.state(questLine.state);
                     if (questLine.state == QuestLineState.started) {
                         if (ql.curQuestObject() instanceof MultipleQuestsQuest) {
-                            ql.resumeAt(questLine.quest, (questLine.initial instanceof Number ? questLine.initial : 0));
+                            ql.resumeAt(questLine.quest, 0);
                             ql.curQuestObject().quests.forEach((q, i) => {
                                 q.initial(questLine?.initial[i] ?? 0);
                             });
