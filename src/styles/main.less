@@ -36,11 +36,11 @@
   #left-column, #middle-sort-column, #right-column {
     &:empty {
       height: 30px;
-      border-color: rgba(30, 30, 30, 0.3);
+      border-color: rgba(129, 129, 129, 0.3);
       border-style: dashed;
       border-width: 1px;
       &::after {
-        color: rgba(30, 30, 30, 0.3);
+        color: rgba(129, 129, 129, 0.3);
         font-size: 10px;
         content: 'DRAG AND DROP MODULES HERE';
       }
@@ -587,4 +587,18 @@ td.tight {
   position: absolute;
   opacity: 1;
   z-index: 50;
+}
+
+/* Popovers */
+.popover {
+  max-width: 450px !important;
+}
+
+/* Map color legend */
+.map-legend > [class*="col-"] {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.legend-item > span:before {
+  content: "- ";
 }

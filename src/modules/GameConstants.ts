@@ -38,7 +38,7 @@ export enum Region {
     final = 8,
 }
 
-export const MAX_AVAILABLE_REGION = Region.alola;
+export const MAX_AVAILABLE_REGION = Region.galar;
 
 export const MaxIDPerRegion = [
     151, // 151 - Kanto
@@ -88,6 +88,7 @@ export const SURPRISE_MULCH_MULTIPLIER = 1.5;
 export const AMAZE_MULCH_GROWTH_MULTIPLIER = 1.25;
 export const AMAZE_MULCH_PRODUCE_MULTIPLIER = 1.5;
 export const AMAZE_MULCH_MUTATE_MULTIPLIER = 1.25;
+export const FREEZE_MULCH_MULTIPLIER = 0;
 
 export const WANDER_RATE = 0.0005;
 
@@ -131,7 +132,7 @@ export enum AchievementType {
     'Hatch',
     'Pokeball',
     'Click',
-    'Route Kill',
+    'Route Defeat',
     'Clear Gym',
     'Clear Dungeon',
     'Farming',
@@ -226,11 +227,19 @@ export const QUEST_CLICKS_PER_SECOND = 5;
 export const QUESTS_PER_SET = 10;
 
 // EVs
-export const BASE_EP_YIELD = 1;
-export const SHINY_EP_YIELD = 5;
-export const DUNGEON_EP_YIELD = 2;
-export const STONE_EP_YIELD = 10;
-export const EP_EV_RATIO = 10;
+export const BASE_EP_YIELD = 100;
+export const STONE_EP_YIELD = 1000;
+export const WANDERER_EP_YIELD = 500;
+export const SHOPMON_EP_YIELD = 1000;
+export const SAFARI_EP_YIELD = 1000;
+
+export const SHINY_EP_MODIFIER = 5;
+export const REPEATBALL_EP_MODIFIER = 5;
+export const DUNGEON_EP_MODIFIER = 3;
+export const DUNGEON_BOSS_EP_MODIFIER = 10;
+export const ROAMER_EP_MODIFIER = 50;
+
+export const EP_EV_RATIO = 1000;
 export const EP_CHALLENGE_MODIFIER = 10;
 
 /**
@@ -270,6 +279,7 @@ export enum Pokeball {
     'Lureball',
     'Nestball',
     'Repeatball',
+    'Beastball',
 }
 
 export enum Currency {
@@ -313,6 +323,7 @@ export function formatDate(date: Date): string {
 
 export function formatTime(input: number | Date): string {
     if (input === 0) { return 'Ready'; }
+    if (input === Infinity) { return '∞'; }
 
     const time = parseInt(`${input}`, 10); // don't forget the second param
     const hours: any = `${Math.floor(time / 3600)}`.padStart(2, '0');
@@ -500,7 +511,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City', 'Plasma Frigate']),
         [Region.kalos]: new Set([8, 23, 'Coumarine City', 'Couriway Town', 'Sea Spirit\'s Den']),
         [Region.alola]: new Set([15, 19, 20, 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
-        [Region.galar]: new Set([5, 6, 8, 9, 19, 21, 'Hulbury']),
+        [Region.galar]: new Set(['Hulbury', 'Roaring-Sea Caves', 5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53]),
     },
 
     Ice: {
@@ -511,7 +522,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Giant Chasm', 'Team Plasma Assault']),
         [Region.kalos]: new Set([17, 'Dendemille Town', 'Snowbelle City', 'Frost Cavern']),
         [Region.alola]: new Set(['Mount Lanakila']),
-        [Region.galar]: new Set(['Circhester', 20, 23, 24]),
+        [Region.galar]: new Set(['Circhester', 'Iceberg Ruins', 'Crown Shrine', 'Freezington', 26, 28, 31, 32, 46, 47, 54, 55]),
     },
 
     Fire: {
@@ -533,18 +544,18 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set([6, 'Floccesy Town', 'Lostlorn Forest', 'Pinwheel Forest', 'Pledge Grove']),
         [Region.kalos]: new Set([1, 14, 20, 'Laverre City', 'Santalune Forest', 'Pokémon Village']),
         [Region.alola]: new Set([27, 'Melemele Woods', 'Lush Jungle', 'Malie Garden', 'Ula\'ula Meadow', 'Poni Meadow']),
-        [Region.galar]: new Set([4, 'Ballonlea', 'Slumbering Weald', 'Inner Slumbering Weald', 'Glimwood Tangle']),
+        [Region.galar]: new Set(['Slumbering Weald', 'Slumbering Weald Shrine', 'Glimwood Tangle', 'Ballonlea', 'Dyna Tree Hill', 2, 12, 13, 35]),
     },
 
     Cave: {
         [Region.kanto]: new Set(['Pewter City', 'Diglett\'s Cave', 'Mt. Moon', 'Rock Tunnel', 'Mt. Ember', 'Mt. Ember Summit', 'Victory Road']),
-        [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt. Mortar', 'Dark Cave', 'Victory Road Johto']),
+        [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt. Mortar', 'Dark Cave', 'Tohjo Falls', 'Victory Road Johto']),
         [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Seafloor Cavern', 'Victory Road Hoenn']),
         [Region.sinnoh]: new Set(['Oreburgh City', 'Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
         [Region.unova]: new Set(['Relic Castle', 'Relic Passage', 'Seaside Cave', 'Victory Road Unova', 'Twist Mountain']),
-        [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Terminus Cave', 'Victory Road Kalos']),
+        [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Kiloude City', 'Terminus Cave', 'Victory Road Kalos']),
         [Region.alola]: new Set([12, 22, 29, 'Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon']),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Warm-Up Tunnel', 'Courageous Cavern', 'Brawlers Cave', 'Rock Peak Ruins', 'Split-Decision Ruins', 'Lakeside Cave', 'Tunnel to the Top', 18]),
     },
 
     GemCave: {
@@ -555,7 +566,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
         [Region.kalos]: new Set(['Glittering Cave', 'Reflection Cave']),
         [Region.alola]: new Set(['Altar of the Sunne and Moone', 'Resolution Cave']),
-        [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2']),
+        [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2', 'Iron Ruins']),
     },
 
     PowerPlant: {
@@ -564,9 +575,9 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.hoenn]: new Set(['Mauville City', 'New Mauville', 'Weather Institute']),
         [Region.sinnoh]: new Set(['Sunyshore City', 'Valley Windworks', 'Team Galactic Eterna Building', 'Team Galactic HQ']),
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City']),
-        [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Pokéball Factory', 'Team Flare Secret HQ']),
+        [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Poké Ball Factory', 'Team Flare Secret HQ']),
         [Region.alola]: new Set(['Aether Paradise', 'Hokulani Observatory', 'Aether Foundation']),
-        [Region.galar]: new Set(['Spikemuth']),
+        [Region.galar]: new Set(['Spikemuth', 'Energy Plant', 'Armor Station', 'Crown Tundra Station']),
     },
 
     Mansion: {
@@ -575,9 +586,9 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.hoenn]: new Set(['Petalburg City', 'Jagged Pass']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
-        [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
+        [Region.kalos]: new Set(['Lost Hotel']),
         [Region.alola]: new Set(['Trainers\' School', 'Thrifty Megamart', 'Po Town', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
-        [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side']),
+        [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side', 'Tower of Darkness', 'Tower of waters', 'Professor Magnolia\'s House', 'Wyndon', 'Wyndon Stadium', 'Master Dojo', 11]),
     },
 
     Graveyard: {
@@ -588,7 +599,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Celestial Tower']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(['Hau\'oli Cemetery', 'Memorial Hill']),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Dusty Bowl', 49]),
     },
 };
 
@@ -646,6 +657,36 @@ export enum StoneType {
     'Sachet',
     'Whipped_dream',
     'Ice_stone',
+    'Sweet_apple',
+    'Tart_apple',
+    'Cracked_pot',
+    'Galarica_cuff',
+    'Galarica_wreath',
+}
+
+export enum ShardType {
+    'None' = -1,
+    'Red Shard',
+    'Yellow Shard',
+    'Green Shard',
+    'Blue Shard',
+    'Grey Shard',
+    'Purple Shard',
+    'Ochre Shard',
+    'Black Shard',
+    'Crimson Shard',
+    'Lime Shard',
+    'White Shard',
+    'Pink Shard',
+    'Cyan Shard',
+}
+
+export enum FossilPieceType {
+    'None' = -1,
+    'Fossilized Bird',
+    'Fossilized Fish',
+    'Fossilized Drake',
+    'Fossilized Dino',
 }
 
 export enum BattleItemType {
@@ -682,16 +723,31 @@ export enum PokemonItemType {
     'Beldum',
     'Skorupi',
     'Combee',
-    'Burmy (plant)',
+    'Burmy (Plant)',
     'Spiritomb',
     'Cherubi',
     'Zorua',
-    'Meloetta (pirouette)',
+    'Meloetta (Pirouette)',
     'Type: Null',
     'Poipole',
-    'Toxel',
-    'Eternatus',
-    'Slowpoke (Galar)',
+    'Dracozolt',
+    'Arctozolt',
+    'Dracovish',
+    'Arctovish',
+}
+
+export enum UltraBeastType {
+    'Nihilego',
+    'Buzzwole',
+    'Pheromosa',
+    'Xurkitree',
+    'Kartana',
+    'Celesteela',
+    'Blacephalon',
+    'Stakataka',
+    'Guzzlord',
+    'Poipole',
+    'Naganadel',
 }
 
 export enum PokeBlockColor {
@@ -723,6 +779,17 @@ export enum EggItemType {
     'Dragon_egg',
     'Pokemon_egg',
     'Mystery_egg',
+}
+
+export enum BulletinBoards {
+    None = -2,
+    All = -1,
+    Kanto,
+    Kalos,
+    Alola,
+    Galar,
+    Armor,
+    Crown,
 }
 
 export const EnergyRestoreEffect = {
@@ -944,6 +1011,7 @@ export const JohtoDungeons = [
     'Radio Tower',
     'Ice Path',
     'Dark Cave',
+    'Tohjo Falls',
     'Victory Road Johto',
     'Mt. Silver',
 ];
@@ -1050,14 +1118,13 @@ export const UnovaDungeons = [
 
 export const KalosDungeons = [
     'Santalune Forest',
-    'Parfum Palace',
     'Connecting Cave',
     'Glittering Cave',
     'Reflection Cave',
     // 'Tower of Mastery',
     'Sea Spirit\'s Den',
     'Kalos Power Plant',
-    'Pokéball Factory',
+    'Poké Ball Factory',
     'Lost Hotel',
     'Frost Cavern',
     'Team Flare Secret HQ',
@@ -1101,15 +1168,27 @@ export const AlolaDungeons = [
 ];
 
 export const GalarDungeons = [
-    'Slumbering Weald',
-    'Inner Slumbering Weald',
+    'Slumbering Weald Shrine',
     'Galar Mine',
     'Galar Mine No. 2',
     'Glimwood Tangle',
     'Rose Tower',
-    'Watchtower Ruins',
+    'Energy Plant',
     'Dusty Bowl',
-    'Lake of Outrage',
+    'Courageous Cavern',
+    'Brawlers Cave',
+    'Warm-Up Tunnel',
+    'Tower of Darkness',
+    'Tower of Waters',
+    'Roaring-Sea Caves',
+    'Rock Peak Ruins',
+    'Iron Ruins',
+    'Iceberg Ruins',
+    'Split-Decision Ruins',
+    'Lakeside Cave',
+    'Dyna Tree Hill',
+    'Tunnel to the Top',
+    'Crown Shrine',
 ];
 
 export const RegionDungeons = [
@@ -1181,8 +1260,16 @@ export const TemporaryBattles = [
     'Biker Goon 2',
     'Biker Goon 3',
     'Cue Ball Paxton',
+    'Spiky-eared Pichu',
+    'Rocket Boss Giovanni',
     'Galactic Boss Cyrus',
     'AZ',
+    'Ash Ketchum Kanto',
+    'Ash Ketchum Johto',
+    'Ash Ketchum Hoenn',
+    'Ash Ketchum Sinnoh',
+    'Ash Ketchum Unova',
+    'Ash Ketchum Kalos',
     'Ultra Wormhole',
     'Ultra Megalopolis',
     'Captain Mina',
@@ -1192,6 +1279,56 @@ export const TemporaryBattles = [
     'Captain Kiawe',
     'Captain Sophocles',
     'Kahuna Nanu',
+    'Anabel',
+    'Captain Mina UB',
+    'Kahuna Nanu UB',
+    'Ash Ketchum Alola',
+    'Hop1',
+    'Mirages',
+    'Hop2',
+    'Hop3',
+    'Bede1',
+    'Hop4',
+    'Bede2',
+    'Marnie1',
+    'Hop5',
+    'Bede3',
+    'Hop6',
+    'Hop7',
+    'Marnie2',
+    'Eternatus',
+    'The Darkest Day',
+    'Hop8',
+    'Sordward1',
+    'Shielbert1',
+    'Rampaging Tsareena',
+    'Rampaging Gyarados',
+    'Rampaging Torkoal',
+    'Sordward & Shielbert',
+    'Rampaging Conkeldurr',
+    'Rampaging Dusknoir',
+    'Gym Leader Bede',
+    'Rampaging Gigalith',
+    'Rampaging Froslass',
+    'Gym Leader Marnie',
+    'Rampaging Haxorus',
+    'Sordward2',
+    'Shielbert2',
+    'Rampaging Zacian',
+    'Rampaging Zamazenta',
+    'Klara1',
+    'Avery1',
+    'Mustard',
+    'Klara2',
+    'Avery2',
+    'Klara3',
+    'Avery3',
+    'Peony',
+    'Calyrex',
+    'Glastrier',
+    'Spectrier',
+    'Dyna Tree Birds',
+    'Regigigas',
 ];
 
 export enum ShardTraderLocations {
@@ -1249,6 +1386,7 @@ export enum ShardTraderLocations {
     'Accumula Town',
     'Nuvema Town',
     'Camphrier Town',
+    'Parfum Palace',
     'Ambrette Town',
     'Cyllage City',
     'Geosenge Town',
@@ -1269,6 +1407,16 @@ export enum ShardTraderLocations {
     'Seafolk Village',
     'Exeggutor Island',
     'Altar of the Sunne and Moone',
+    'Turffield',
+    'Hulbury',
+    'Motostoke',
+    'Hammerlocke',
+    'Route 6',
+    'Stow-on-Side',
+    'Ballonlea',
+    'Circhester',
+    'Spikemuth',
+    'Master Dojo',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
@@ -1327,9 +1475,8 @@ export enum AlolaSubRegions {
 }
 
 export enum GalarSubRegions {
-    Galar = 0,
-    // GalarSouth = 0,
-    // GalarNorth,
-    IsleOfArmor,
+    SouthGalar = 0,
+    NorthGalar,
+    IsleofArmor,
     CrownTundra,
 }

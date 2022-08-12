@@ -305,7 +305,14 @@ class Quests implements Saveable {
                 if (ql) {
                     ql.state(questLine.state);
                     if (questLine.state == QuestLineState.started) {
-                        ql.resumeAt(questLine.quest, questLine.initial);
+                        if (ql.curQuestObject() instanceof MultipleQuestsQuest) {
+                            ql.resumeAt(questLine.quest, 0);
+                            ql.curQuestObject().quests.forEach((q, i) => {
+                                q.initial(questLine?.initial[i] ?? 0);
+                            });
+                        } else {
+                            ql.resumeAt(questLine.quest, questLine.initial);
+                        }
                     }
                 }
             } catch (e) {
@@ -323,7 +330,7 @@ class Quests implements Saveable {
             lastRefreshRegion: this.lastRefreshRegion,
             freeRefresh: this.freeRefresh(),
             questList: this.questList().map(quest => quest.toJSON()),
-            questLines: this.questLines(),
+            questLines: this.questLines().filter(q => q.state()),
         };
     }
 

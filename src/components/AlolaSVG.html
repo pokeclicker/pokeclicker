@@ -1375,6 +1375,33 @@
             })
         %>
 
+        <!--Verdant Cavern-->
+        <%- include('templates/mapDungeon',
+            { name: "Verdant Cavern"
+            , x: 28, y: 13
+            , width: 14, height: 3
+            , invisible: true
+            })
+        %>
+
+        <!--Melemele Meadow-->
+        <%- include('templates/mapDungeon',
+            { name: "Melemele Meadow"
+            , x: 28, y: 13
+            , width: 14, height: 3
+            , invisible: true
+            })
+        %>
+
+        <!--Ruins of Conflict-->
+        <%- include('templates/mapDungeon',
+            { name: "Ruins of Conflict"
+            , x: 28, y: 13
+            , width: 14, height: 3
+            , invisible: true
+            })
+        %>
+
         <!--Seaward Cave-->
         <%- include('templates/mapDungeon',
             { name: "Seaward Cave"
@@ -1565,6 +1592,26 @@
             , x: 23, y: 45
             , width: 7, height: 1
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hau\\'oli City') }"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Professor Kukui's Blimp"
+            , x: 72, y: 30
+            , width: 6, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Iki Town Outskirts')}, attr:{ class: MapHelper.calculateTownCssClass('Iki Town Outskirts') }"
+            , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+            , image: "assets/images/map/blimp_empty.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Professor Kukui's Blimp"
+            , x: 72, y: 30
+            , width: 6, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Iki Town Outskirts')}, attr:{ class: MapHelper.calculateTownCssClass('Iki Town Outskirts') }"
+            , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+            , image: "assets/images/map/blimp_pikachu.png"
             })
         %>
     </g>
@@ -3020,6 +3067,25 @@
             })
         %>
 
+
+        <!--Mina's Houseboat-->
+        <%- include('templates/mapDungeon',
+            { name: "Mina's Houseboat"
+            , x: 15, y: 41.5
+            , width: 5, height: 4.5
+            ,invisible: true
+            })
+        %>
+
+        <!--Exeggutor Island Hill-->
+        <%- include('templates/mapDungeon',
+            { name: "Exeggutor Island Hill"
+            , x: 5, y: 43
+            , width: 4, height: 4
+            ,invisible: true
+            })
+        %>
+
         <!--Vast Poni Canyon Extension-->
         <%- include('templates/mapDungeon',
             { name: "Vast Poni Canyon"
@@ -3087,6 +3153,16 @@
             , width: 3, height: 4
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Malie City') }"
             })
+        %>
+
+        <%- include('templates/mapOverlay',
+           { name: "Ash Ketchum"
+           , x: 32, y: 19
+           , width: 4, height: 4
+           , databind: "click: () => TemporaryBattleList['Ash Ketchum Alola'].protectedOnclick()"
+           , visible:  "TemporaryBattleList['Ash Ketchum Alola'] && TemporaryBattleList['Ash Ketchum Alola'].isVisible()"
+           , image: "assets/images/map/ashketchumoverworld.png"
+           })
         %>
     </g>
 </g>
