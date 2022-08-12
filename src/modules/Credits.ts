@@ -138,6 +138,7 @@ export const SpriteCredits: Credit[] = [
             'Ramos',
             'Siebold',
             'Team Flare Bryony',
+            'Team Flare Xerosic',
             'Valerie',
             'Viola',
             'Wikstrom',
