@@ -1303,10 +1303,6 @@ class QuestLineHelper {
 
         // Multi-step #9:
 
-        const startRainbowRocket = () => {
-            App.game.quests.getQuestLine('Defeat Rainbow Rocket').beginQuest();
-        };
-
         const meltanCatch50Anorith = new CaptureSpecificPokemonQuest('Anorith', 'Catch 50 Anorith', 50 / 50, true, 0, undefined);
         const meltanCatch50Lileep = new CaptureSpecificPokemonQuest('Lileep', 'Catch 50 Lileep', 50 / 50, true, 0, undefined);
         const meltanCatch50Aerodactyl = new CaptureSpecificPokemonQuest('Aerodactyl', 'Catch 50 Aerodactyl', 50 / 50, true, 0, undefined);
@@ -1317,7 +1313,7 @@ class QuestLineHelper {
             meltanCatch50Lileep,
             meltanCatch50Aerodactyl,
             meltanDefeatHau15,
-        ],'', startRainbowRocket));
+        ],'', () => App.game.quests.getQuestLine('Defeat Rainbow Rocket').beginQuest()));
 
         // Multi-step #10
 
