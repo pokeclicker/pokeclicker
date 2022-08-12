@@ -83,6 +83,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/272336444297707521/',
         resources: [
             'Team Flare Admin (male)',
+            'Team Flare Admin (female)',
             'Team Flare Aliana',
         ],
         // Notes: Made specifically for PokéClicker.
