@@ -123,7 +123,7 @@ class Player {
         this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
 
         // Save game origins, useful for tracking down any errors that may not be related to the main game
-        this._origins = [...new Set((savedPlayer.origin || [])).add(window.location?.origin)];
+        this._origins = [...new Set((savedPlayer._origins || [])).add(window.location?.origin)];
     }
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
@@ -241,8 +241,10 @@ class Player {
         if (mineItem) {
             return mineItem.amount();
         }
-        const itemAmount = player.itemList[Underground.getMineItemById(id)?.valueType];
-        return itemAmount?.() || 0;
+        if (UndergroundItems.getById(id)?.valueType == UndergroundItemValueType.EvolutionItem) {
+            return player.itemList[GameConstants.StoneType[UndergroundItems.getById(id).type]]?.() ?? 0;
+        }
+        return 0;
     }
 
     public toJSON() {

@@ -113,7 +113,7 @@
 @import "templates/eggSVGTemplate.html"
 @import "templates/multiOptionTemplate.html"
 
-<div id="game" class="container loading">
+<div id="game" class="container loading" data-bind="css: {'container': Settings.getSetting('gameDisplayStyle').observableValue() === 'standard3', 'container-fluid': Settings.getSetting('gameDisplayStyle').observableValue() !== 'standard3'}">
     <div class="row justify-content-center">
         <!--The id title is needed for a default marker for money animation to display when not in a wild battle where the playerMoney span is not visible-->
         <h1 id="gameTitle">PokéClicker</h1>
@@ -122,21 +122,38 @@
 
         <!--The next two divs switch around on large screens. This way, battle screen/map is on top on smaller screens-->
         <!--left column-->
-        <div id="left-column" class="col-lg-3 col-md-6 order-lg-first">
+        <div class="col-lg-3 col-md-6 order-lg-first" data-bind="css: {
+            'col-lg-3': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+            'col-lg-4': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
+        }">
+            <div class="row p-0">
+                <div id="left-column-2" class="col-12" data-bind="css: {
+                    'col-lg-12': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+                    'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
+                }"></div>
+                <div id="left-column" class="col-12" data-bind="css: {
+                    'col-lg-12': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+                    'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
+                }">
 
-            <!-- pokeball selector -->
-            @import "pokeballSelector.html"
+                    <!-- pokeball selector -->
+                    @import "pokeballSelector.html"
 
-            <!-- Battle Item container-->
-            @import "battleItemContainer.html"
+                    <!-- Battle Item container-->
+                    @import "battleItemContainer.html"
 
-            <!-- Pokémon List container-->
-            @import "pokemonListContainer.html"
+                    <!-- Pokémon List container-->
+                    @import "pokemonListContainer.html"
 
+                </div>
+            </div>
         </div>
 
         <!--Middle column-->
-        <div id="middle-column" class="col-lg-6 col-md-12 order-md-first">
+        <div id="middle-column" class="col-lg-6 col-md-12 order-md-first" data-bind="css: {
+            'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+            'col-lg-4': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
+        }">
             <div id="middle-top-sort-column">
                 <!-- Achievement Tracker -->
                 @import "achievementTrackerContainer.html"
@@ -200,7 +217,7 @@
                 <!--Use the base battle layout for fighting, dungeons and battle frontier.-->
 
                 <div class="battle-view card-body p-0 justify-content-center no-gutters no-select"
-                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier) || App.game.gameState == GameConstants.GameState.temporaryBattle,
+                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier || App.game.gameState == GameConstants.GameState.temporaryBattle),
                         class: MapHelper.calculateBattleCssClass()">
 
                     <!-- Route Battles -->
@@ -339,11 +356,11 @@
                 <div class="card-header p-0">
                     <div style="position: absolute; left: 2px">
                         <img title="Chests opened in current dungeon" src="assets/images/dungeons/chest.png" height="25px" />
-                        <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.size}`"></span>
+                        <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.totalChests()}`"></span>
                     </div>
                     <div style="position: absolute; right: 4px">
                         <img title="Encounters won in current dungeon" src="assets/images/dungeons/encounter.png" height="25px" />
-                        <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.size * 2 + 3}`"></span>
+                        <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.totalFights()}`"></span>
                     </div>
                     <span data-bind="text: `${DungeonRunner.dungeon.name}`"></span>
                 </div>
@@ -364,31 +381,69 @@
 
             <div id="middle-bottom-sort-column">
                 <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
-                    App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
+                    App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.temporaryBattle || App.game.gameState === GameConstants.GameState.paused)">
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
                         <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
                     </div>
                     <button class='btn btn-sm' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" data-toggle="popover" data-trigger="hover" data-html="true" data-title="Map Legend:"
-                    data-content="Map locations will be coloured based on the following:
-                    <br/>
-                    <br/><span>Locked:</span>
-                    <span class='float-right px-4 bg-locked'>&nbsp;</span>
-                    <br/><span>Incomplete:</span>
-                    <span class='float-right px-4 bg-incomplete'>&nbsp;</span>
-                    <br/><span>Quest at Location:</span>
-                    <span class='float-right px-4 bg-questAtLocation'>&nbsp;</span>
-                    <br/><span>Uncaught Pokemon:</span>
-                    <span class='float-right px-4 bg-uncaughtPokemon'>&nbsp;</span>
-                    <br/><span>Uncaught Shiny Pokemon and Missing Achievement:</span>
-                    <span class='float-right px-4 bg-uncaughtShinyPokemonAndMissingAchievement'>&nbsp;</span>
-                    <br/><span>Uncaught Shiny Pokemon:</span>
-                    <span class='float-right px-4 bg-uncaughtShinyPokemon'>&nbsp;</span>
-                    <br/><span>Missing Achievement:</span>
-                    <span class='float-right px-4 bg-missingAchievement'>&nbsp;</span>
-                    <br/><span>Completed:</span>
-                    <span class='float-right px-4 bg-completed'>&nbsp;</span>
-                    <br/>
-                    <br/><i>NOTE:<br/>These colors can be customized in the settings menu</i>" data-placement="bottom">ⓘ</button>
+                    data-content="
+                    <div class='row map-legend'>
+                        <div class='col-12'>
+                            Map locations will be coloured based on the following:
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Locked:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-locked'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Incomplete:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-incomplete'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Quest at Location:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-questAtLocation'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Uncaught Pokemon:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-uncaughtPokemon'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Uncaught Shiny Pokemon and Missing Achievement:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-uncaughtShinyPokemonAndMissingAchievement'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Uncaught Shiny Pokemon:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-uncaughtShinyPokemon'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Missing Achievement:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-missingAchievement'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Completed:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-completed'>&nbsp;</span>
+                        </div>
+                        <div class='col-12'>
+                            <i>NOTE: These colors can be customized in the settings menu</i>
+                        </div>
+                    </div>"
+                    data-placement="bottom">ⓘ</button>
                     <button class='btn btn-sm' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
                     data-bind='style: { background: Weather.color() },
                         tooltip: {
@@ -441,19 +496,34 @@
         </div>
 
         <!--Right column-->
-        <div id="right-column" class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6" data-bind="css: {
+            'col-lg-3': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+            'col-lg-4': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
+        }">
+            <div class="row p-0">
+                <div id="right-column" class="col-12" data-bind="css: {
+                    'col-lg-12': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+                    'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
+                }">
 
-            <!-- Oak Items -->
-            @import "oakItemsContainer.html"
+                    <!-- Oak Items -->
+                    @import "oakItemsContainer.html"
 
-            <!-- Current Quest -->
-            @import "questDisplay.html"
+                    <!-- Current Quest -->
+                    @import "questDisplay.html"
 
-            <!-- Egg Slots/Breeding-->
-            @import "breedingDisplay.html"
+                    <!-- Egg Slots/Breeding-->
+                    @import "breedingDisplay.html"
 
-            <!-- Shortcuts Menu -->
-            @import "shortcutsContainer.html"
+                    <!-- Shortcuts Menu -->
+                    @import "shortcutsContainer.html"
+                </div>
+                <div id="right-column-2" class="col-12" data-bind="css: {
+                    'col-lg-12': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+                    'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
+                }">
+                </div>
+            </div>
         </div>
 
     </div>
@@ -581,6 +651,9 @@
 
 <!-- Category Modal -->
 @import "categoryModal.html"
+
+<!-- Bulletin board Modal -->
+@import "bulletinBoardModal.html"
 
 </body>
 </html>

@@ -639,7 +639,7 @@ GymList['Eterna City'] = new Gym(
     'Eterna City',
     [
         new GymPokemon('Turtwig', 1433000, 20),
-        new GymPokemon('Cherrim (overcast)', 1437500, 20),
+        new GymPokemon('Cherrim (Overcast)', 1437500, 20),
         new GymPokemon('Roserade', 1439000, 22),
     ],
     BadgeEnums.Forest,
@@ -1111,10 +1111,7 @@ GymList['Snowbelle City'] = new Gym(
     BadgeEnums.Iceberg,
     52000,
     'Impressive! Your Pokémon fought with great courage. I can tell that you\'ve trained your Pokémon well.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Village'))],
-    () => {
-        App.game.quests.getQuestLine('The Great Vivillon Hunt!').beginQuest();
-    }
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Village'))]
 );
 //Kalos Elite 4
 //TODO: Balancing of elite Pokemon HP & rewards.
@@ -1242,7 +1239,7 @@ GymList['Exeggutor Island'] = new Gym(
     'Exeggutor Island',
     [
         new GymPokemon('Golurk', 76658268, 53),
-        new GymPokemon('Gastrodon (east)', 76658268, 53),
+        new GymPokemon('Gastrodon (East)', 76658268, 53),
         new GymPokemon('Flygon', 76658268, 53),
         new GymPokemon('Mudsdale', 77747374, 54),
     ],
@@ -1492,83 +1489,82 @@ GymList['Champion Hau'] = new Champion(
     ]
 );
 
-
 //Galar Leaders
 //TODO Addition of G-Max forms?
 GymList.Turffield = new Gym(
     'Milo',
     'Turffield',
     [
-        new GymPokemon('Gossifleur', 40466361, 19),
-        new GymPokemon('Eldegoss', 42596169, 20),
+        new GymPokemon('Gossifleur', 81538851, 19),
+        new GymPokemon('Eldegoss', 90598724, 20),
     ],
     BadgeEnums.Galar_Grass,
     40000,
     'The power of Grass has wilted... What an incredible Gym Challenger!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 4)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 13)]
 );
 GymList.Hulbury = new Gym(
     'Nessa',
     'Hulbury',
     [
-        new GymPokemon('Goldeen', 47607484, 22),
-        new GymPokemon('Arrokuda', 48108615, 23),
-        new GymPokemon('Drednaw', 50113141, 24),
+        new GymPokemon('Goldeen', 87532510, 22),
+        new GymPokemon('Arrokuda', 87532510, 23),
+        new GymPokemon('Gigantamax Drednaw', 90185011, 24),
     ],
     BadgeEnums.Galar_Water,
     60000,
     'I may proudly be the strongest member of this Gym, but I was totally washed away!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 5)]
+    [new TemporaryBattleRequirement('Hop4')]
 );
 GymList.Motostoke = new Gym(
     'Kabu',
     'Motostoke',
     [
-        new GymPokemon('Ninetales', 56008804, 25),
-        new GymPokemon('Arcanine', 56008804, 25),
-        new GymPokemon('Centiskorch', 58936636, 27),
+        new GymPokemon('Ninetales', 91921207, 25),
+        new GymPokemon('Arcanine', 91921207, 25),
+        new GymPokemon('Gigantamax Centiskorch', 97666283, 27),
     ],
     BadgeEnums.Galar_Fire,
     60000,
     'I\'m often regarded as the first real roadblock of the Gym Challenge, and yet you defeated me! Clearly, your talent surpassed my many years of experience. I still have much to learn!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 13)]
+    [new TemporaryBattleRequirement('Marnie1')]
 );
 GymList['Stow-on-Side1'] = new Gym(
     'Bea',
     'Stow-on-Side1',
     [
-        new GymPokemon('Hitmontop', 65892712, 34),
-        new GymPokemon('Pangoro', 65892712, 34),
-        new GymPokemon('Sirfetch\'d', 66586319, 35),
-        new GymPokemon('Machamp', 69360749, 36),
+        new GymPokemon('Hitmontop', 96582649, 34),
+        new GymPokemon('Pangoro', 96582649, 34),
+        new GymPokemon('Sirfetch\'d', 96582649, 35),
+        new GymPokemon('Gigantamax Machamp', 104466958, 36),
     ],
     BadgeEnums.Galar_Fighting,
     80000,
-    'Your strength nearly made me want to turn and run in my bare feet!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 15)]
+    'Your strength nearly made me want to turn and run in my bare feet',
+    [new TemporaryBattleRequirement('Hop5')]
 );
 GymList['Stow-on-Side2'] = new Gym(
     'Allister',
     'Stow-on-Side2',
     [
-        new GymPokemon('Galarian Yamask', 65892712, 34),
-        new GymPokemon('Mimikyu', 65892712, 34),
-        new GymPokemon('Cursola', 66586319, 35),
-        new GymPokemon('Gengar', 69360749, 36),
+        new GymPokemon('Galarian Yamask', 96582649, 34),
+        new GymPokemon('Mimikyu', 96582649, 34),
+        new GymPokemon('Cursola', 96582649, 35),
+        new GymPokemon('Gigantamax Gengar', 104466958, 36),
     ],
     BadgeEnums.Galar_Ghost,
     80000,
     'Maybe my mask... kept me from seeing just how strong you really are...',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 15)]
+    [new TemporaryBattleRequirement('Hop5')]
 );
 GymList.Ballonlea = new Gym(
     'Opal',
     'Ballonlea',
     [
-        new GymPokemon('Galarian Weezing', 71622513, 36),
-        new GymPokemon('Mawile', 71622513, 36),
-        new GymPokemon('Togekiss', 73130355, 37),
-        new GymPokemon('Alcremie (Strawberry Vanilla)', 75392119, 38),
+        new GymPokemon('Galarian Weezing', 99999999, 36),
+        new GymPokemon('Mawile', 99999999, 36),
+        new GymPokemon('Togekiss', 99999999, 37),
+        new GymPokemon('Gigantamax Alcremie', 108160234, 38),
     ],
     BadgeEnums.Galar_Fairy,
     80000,
@@ -1579,85 +1575,82 @@ GymList.Circhester1 = new Gym(
     'Gordie',
     'Circhester1',
     [
-        new GymPokemon('Barbaracle', 84261781, 40),
-        new GymPokemon('Shuckle', 84261781, 40),
-        new GymPokemon('Stonjourner', 86035713, 41),
-        new GymPokemon('Coalossal', 88696611, 42),
+        new GymPokemon('Barbaracle', 103122110, 40),
+        new GymPokemon('Shuckle', 103122110, 40),
+        new GymPokemon('Stonjourner', 103122110, 41),
+        new GymPokemon('Gigantamax Coalossal', 111540241, 42),
     ],
     BadgeEnums.Galar_Rock,
     80000,
     'I just want to climb into a hole... Well, I guess it\'d be more like falling from here.',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 18)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
 );
 GymList.Circhester2 = new Gym(
     'Melony',
     'Circhester2',
     [
-        new GymPokemon('Frosmoth', 84261781, 40),
-        new GymPokemon('Galarian Darmanitan', 84261781, 40),
-        new GymPokemon('Eiscue', 86035713, 41),
-        new GymPokemon('Lapras', 88696611, 42),
+        new GymPokemon('Frosmoth', 103122110, 40),
+        new GymPokemon('Galarian Darmanitan', 103122110, 40),
+        new GymPokemon('Eiscue (Ice Face)', 103122110, 41),
+        new GymPokemon('Gigantamax Lapras', 111540241, 42),
     ],
     BadgeEnums.Galar_Ice,
     80000,
     'I think you took breaking the ice a little too literally...',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 18)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
 );
 GymList.Spikemuth = new Gym(
     'Piers',
     'Spikemuth',
     [
-        new GymPokemon('Scrafty', 99141007, 44),
-        new GymPokemon('Malamar', 100184597, 45),
-        new GymPokemon('Skuntank', 100184597, 45),
-        new GymPokemon('Obstagoon', 104348955, 46),
+        new GymPokemon('Scrafty', 107024027, 44),
+        new GymPokemon('Malamar', 107024027, 45),
+        new GymPokemon('Skuntank', 107024027, 45),
+        new GymPokemon('Obstagoon', 115760683, 46),
     ],
     BadgeEnums.Galar_Dark,
     96000,
     'Me an\' my team gave it our best. Let\'s meet up again for a battle some time...',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 22)]
+    [new TemporaryBattleRequirement('Marnie2')]
 );
 GymList.Hammerlocke = new Gym(
     'Raihan',
     'Hammerlocke',
     [
-        new GymPokemon('Gigalith', 111645278, 46),
-        new GymPokemon('Flygon', 112820492, 47),
-        new GymPokemon('Sandaconda', 111645278, 46),
-        new GymPokemon('Duraludon', 117521346, 48),
+        new GymPokemon('Gigalith', 111232838, 46),
+        new GymPokemon('Flygon', 111232838, 47),
+        new GymPokemon('Sandaconda', 111232838, 46),
+        new GymPokemon('Gigantamax Duraludon', 120313069, 48),
     ],
     BadgeEnums.Galar_Dragon,
     128000,
     'I might have lost, but I still look good. Maybe I should snap a quick selfie...',
-    [
-        new RouteKillRequirement(10, GameConstants.Region.galar, 22),
-        new GymBadgeRequirement(BadgeEnums.Galar_Dark),
-    ]
+    [new GymBadgeRequirement(BadgeEnums.Galar_Dark)]
 );
 GymList['Trainer Marnie'] = new Gym(
     'Marnie',
     'Trainer Marnie',
     [
-        new GymPokemon('Liepard', 117521346, 47),
-        new GymPokemon('Toxicroak', 117521346, 47),
-        new GymPokemon('Scrafty', 117521346, 47),
-        new GymPokemon('Morpeko', 127967688, 48),
-        new GymPokemon('Grimmsnarl', 130579274, 49),
+        new GymPokemon('Liepard', 117681650, 47),
+        new GymPokemon('Toxicroak', 117681650, 47),
+        new GymPokemon('Scrafty', 117681650, 47),
+        new GymPokemon('Morpeko', 121675557, 48),
+        new GymPokemon('Gigantamax Grimmsnarl', 126153272, 49),
     ],
     BadgeEnums.Elite_Marnie,
     150000,
-    'I mean, If you\'re gonna win, you could at least win in a way that makes me look good, right?',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))]
+    'OK, so I lost... but I got to see a lot of the good points of you and your Pokémon!',
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
 );
 GymList['Gym Leader Bede'] = new Gym(
     'Bede',
     'Gym Leader Bede',
     [
-        new GymPokemon('Mawile', 117521346, 51),
-        new GymPokemon('Sylveon', 117521346, 51),
-        new GymPokemon('Gardevoir', 117521346, 51),
-        new GymPokemon('Galarian Rapidash', 127967688, 52),
-        new GymPokemon('Hatterene', 130579274, 53),
+        new GymPokemon('Mawile', 117681650, 51),
+        new GymPokemon('Sylveon', 117681650, 51),
+        new GymPokemon('Gardevoir', 117681650, 51),
+        new GymPokemon('Galarian Rapidash', 121675557, 52),
+        new GymPokemon('Gigantamax Hatterene', 126153272, 53),
     ],
     BadgeEnums.Elite_Bede,
     150000,
@@ -1668,23 +1661,22 @@ GymList['Trainer Hop'] = new Gym(
     'Hop',
     'Trainer Hop',
     [
-        new GymPokemon('Dubwool', 130579274, 59),
-        new GymPokemon('Cramorant', 117521346, 58),
-        new GymPokemon('Pincurchin', 117521346, 58),
-        new GymPokemon('Snorlax', 117521346, 58),
-        new GymPokemon('Corviknight', 130579274, 59),
-        new GymPokemon('Inteleon', 137833678, 60),
+        new GymPokemon('Dubwool', 127578161, 59),
+        new GymPokemon('Pincurchin', 124130462, 58),
+        new GymPokemon('Snorlax', 124130462, 58),
+        new GymPokemon('Inteleon', 131993475, 59),
+        new GymPokemon('Gigantamax Corviknight', 139216928, 60),
     ],
     BadgeEnums.Elite_Hop,
     200000,
     'Thanks, mate. I\'m really glad you were the one here with me.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Bede)]
     // TODO: Add ability to change gym leaders pokemon based on your starter
-    // Bulbasaur
+    // Grookey
     // [new GymPokemon('Inteleon', 137833678, 60)],
-    // Charmander
+    // Scorbunny
     // [new GymPokemon('Rillaboom', 137833678, 60)],
-    // Squirtle/Pikachu
+    // Sobble
     // [new GymPokemon('Cinderace', 137833678, 60)]
 );
 // Galar Champion
@@ -1700,24 +1692,24 @@ GymList['Champion Leon'] = new Champion(
     BadgeEnums.Elite_GalarChampion,
     250000,
     'My time as Champion is over... But what a champion time it\'s been! Thank you for the greatest battle I\'ve ever had!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Hop)],
-    // Bulbasaur
+    [new TemporaryBattleRequirement('The Darkest Day')],
+    // Grookey
     [
         new GymPokemon('Seismitoad', 133481036, 64),
         new GymPokemon('Cinderace', 137833678, 64),
-        new GymPokemon('Charizard', 145088083, 65),
+        new GymPokemon('Gigantamax Charizard', 145088815, 65),
     ],
-    // Charmander
+    // Scorbunny
     [
         new GymPokemon('Mr. Rime', 133481036, 64),
         new GymPokemon('Inteleon', 137833678, 64),
-        new GymPokemon('Charizard', 145088083, 65),
+        new GymPokemon('Gigantamax Charizard', 145088818, 65),
     ],
-    // Squirtle/Pikachu
+    // Sobbke
     [
         new GymPokemon('Rhyperior', 133481036, 64),
         new GymPokemon('Rillaboom', 137833678, 64),
-        new GymPokemon('Charizard', 145088083, 65),
+        new GymPokemon('Gigantamax Charizard', 145088812, 65),
     ]
 );
 
@@ -1737,8 +1729,8 @@ GymList['Gym Leader Klara'] = new Gym(
     'Aww, come on! What a drag! But...I guess it was also kinda fun!',
     [
         new MultiRequirement([
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Water')),
+            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Single Strike)']),
+            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Rapid Strike)']),
         ]),
     ]
 );
@@ -1755,7 +1747,33 @@ GymList['Gym Leader Avery'] = new Gym(
     BadgeEnums.Elite_ArmorPsychic,
     150000,
     'More! I require more! Show me your Stored Power!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_ArmorPoison)]
+    [
+        new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Single Strike)']),
+            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Rapid Strike)']),
+        ]),
+    ]
+);
+GymList['Dojo Matron Honey'] = new Gym(
+    'Honey',
+    'Dojo Matron Honey',
+    [
+        new GymPokemon('Galarian Darmanitan', 151617046, 73),
+        new GymPokemon('Gallade', 151617046, 74),
+        new GymPokemon('Salazzle', 154808984, 73),
+        new GymPokemon('Togekiss', 154808984, 75),
+        new GymPokemon('Gigantamax Venusaur', 159596891, 75),
+        new GymPokemon('Gigantamax Blastoise', 159596891, 75),
+    ],
+    BadgeEnums.Elite_ArmorMatron,
+    250000,
+    'That was a delight! Nice battling, love!',
+    [
+        new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Elite_ArmorPoison),
+            new GymBadgeRequirement(BadgeEnums.Elite_ArmorPsychic),
+        ]),
+    ]
 );
 GymList['Dojo Master Mustard'] = new Gym(
     'Mustard',
@@ -1765,13 +1783,13 @@ GymList['Dojo Master Mustard'] = new Gym(
         new GymPokemon('Luxray', 151617046, 73),
         new GymPokemon('Lycanroc (Midday)', 154808984, 75),
         new GymPokemon('Kommo-o', 154808984, 75),
-        new GymPokemon('Urshifu (Single Strike)', 159596891, 75),
-        new GymPokemon('Urshifu (Rapid Strike)', 159596891, 75),
+        new GymPokemon('Gigantamax Urshifu (Single Strike)', 159596891, 75),
+        new GymPokemon('Gigantamax Urshifu (Rapid Strike)', 159596891, 75),
     ],
     BadgeEnums.Elite_ArmorChampion,
     250000,
     'That strength of yours doesn\'t bend easily!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_ArmorPsychic)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_ArmorMatron)]
 );
 GymList['Trainer Peony'] = new Gym(
     'Freezington',
