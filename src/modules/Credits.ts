@@ -342,7 +342,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Macro Cosmos (male) and (female)',
         ],
-        // NOTES: free for non-profit use.
+        // NOTES: Made specifically for Pokeclicker.
     },
     {
         name: 'Smogon Sprite Project',
