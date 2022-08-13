@@ -3652,7 +3652,7 @@ const TrainStationGuy = new NPC('Train Station Guy', [
     'One is an island paradise, and the other a freezing wasteland.',
     'I\m sure if you go to these places you\'ll find many unique and powerful Pokémon!',
 ]);
-const SouthGalarRoamerNPC = new RoamerNPC('Sonia Magnolia', [
+const SouthGalarRoamerNPC = new RoamerNPC('Professor Sonia', [
     'I\'ve heard there\'s been sightings of a never-before-seen, superstrong Pokémon on {ROUTE_NAME}! You should go check it out!',
 ], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.SouthGalar));
 const IsleofArmorRoamerNPC = new RoamerNPC('Master Dojo Student', [
@@ -3667,7 +3667,7 @@ const CrownPeony1 = new NPC ('Peony', [
 ],
 { requirement: new MultiRequirement([new QuestLineStartedRequirement('The Crown of Galar'), new QuestLineStepCompletedRequirement('The Crown of Galar', 1, GameConstants.AchievementOption.less )])});
 const Calyrex1 = new NPC ('Calyrex', [
-    'Ah, yes. A sturdy body, just as i expected. I hope this man doesn\'t mind that I make use of it for the time being.',
+    'Ah, yes. A sturdy body, just as I expected. I hope this man doesn\'t mind that I make use of it for the time being.',
     'I am Calyrex. I am also known as the King of Bountiful Harvests. I have borrowed this man\'s body in order to thank you in person for restoring my statue...so to speak.',
     'I once reigned over these land as king, but now I have lost all but a fraction of my former strength. Even my loyal steeds have abandoned me.',
     'Would you do me the favour of protecting me from wild Pokémon at the Old Cemetery and Snowslide Slope? I wish to grow a Shaderoot Carrot and an Iceroot Carrot which I believe could draw out my loyal steeds.',
