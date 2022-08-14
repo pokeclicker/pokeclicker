@@ -414,11 +414,11 @@ class Farming implements Feature {
         this.berryData[BerryType.Apicot]    = new Berry(BerryType.Apicot,   [10800, 21600, 43200, 86400, 432000],
             0.5, 0, 15000, 20,
             [10, 30, 0, 0, 30], BerryColor.Blue,
-            ['This is a very, very mystifying Berry. There is no telling how it can be used, or what may happen if it is used.'], undefined, ['Flabébé (Blue)']);
+            ['This is a very, very mystifying Berry. There is no telling how it can be used, or what may happen if it is used.'], undefined, ['Druddigon', 'Flabébé (Blue)']);
         this.berryData[BerryType.Lansat]    = new Berry(BerryType.Lansat,   [10800, 21600, 43200, 86400, 432000],
             0.5, 0, 15000, 20,
             [30, 10, 30, 10, 30], BerryColor.Red,
-            ['This is said to be a legendary Berry. Holding it supposedly brings great joy.'], undefined, ['Oricorio (Baile)']);
+            ['This is said to be a legendary Berry. Holding it supposedly brings great joy.'], undefined, ['Audino', 'Oricorio (Baile)']);
         this.berryData[BerryType.Starf]     = new Berry(BerryType.Starf,    [10800, 21600, 43200, 86400, 432000],
             0.5, 0, 15000, 20,
             [30, 10, 30, 10, 30], BerryColor.Green,
