@@ -38,6 +38,10 @@
           </div>
         </div>
 
+        <div style="position:absolute; left:65%;" data-bind="if: !TemporaryBattleRunner.battleObservable().optionalArgs.hideTrainer">
+            <img data-bind="attr:{ src: TemporaryBattleRunner.battleObservable().getImage() }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
+        </div>
+
         <div>
             <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(TemporaryBattleBattle.enemyPokemon(), TemporaryBattleBattle.enemyPokemon().shiny) }" src=""/>
         </div>

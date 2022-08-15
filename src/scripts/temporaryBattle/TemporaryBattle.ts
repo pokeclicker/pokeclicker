@@ -5,6 +5,7 @@ type TemporaryBattleOptionalArgument = {
     displayName?: string,
     returnTown?: string, // If in town, that town will be used. If not in town, this will be used, with the Dock town as default
     imageName?: string,
+    hideTrainer?: boolean
 };
 
 class TemporaryBattle extends TownContent {
