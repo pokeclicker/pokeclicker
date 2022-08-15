@@ -150,7 +150,7 @@ class PokedexHelper {
             }
 
             // Only pokemon uninfected by pokerus || None
-            if (filter['status-pokerus'] != 'All' && filter['status-pokerus'] != GameConstants.Pokerus[pokerusStatus]) {
+            if (filter['status-pokerus'] != -1 && filter['status-pokerus'] != App.game.party.getPokemon(pokemon.id)?.pokerus) {
                 return false;
             }
 
