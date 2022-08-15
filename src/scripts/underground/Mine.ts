@@ -192,6 +192,9 @@ class Mine {
                 case UndergroundItemValueType.Fossil:
                     res.fossils++;
                     break;
+                case UndergroundItemValueType.FossilPiece:
+                    res.fossilpieces++;
+                    break;
                 case UndergroundItemValueType.Shard:
                     res.shards++;
                     break;
@@ -204,13 +207,16 @@ class Mine {
                 default:
             }
             return res;
-        }, {fossils: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0});
+        }, {fossils: 0, fossilpieces: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0});
     }
 
     private static updatesurveyResult(summary) {
         const text = [];
         if (summary.fossils) {
             text.push(`Fossils: ${summary.fossils}`);
+        }
+        if (summary.fossilpieces) {
+            text.push(`Fossil Pieces: ${summary.fossilpieces}`);
         }
         if (summary.evoItems) {
             text.push(`Evolution Items: ${summary.evoItems}`);
