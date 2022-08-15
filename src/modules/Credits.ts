@@ -81,6 +81,7 @@ export const SpriteCredits: Credit[] = [
     {
         name: 'DraK4y',
         link: 'https://discordapp.com/users/272336444297707521/',
+        image: 'assets/images/profile/trainer-96.png',
         resources: [
             'Team Flare Admin (male)',
             'Team Flare Admin (female)',
