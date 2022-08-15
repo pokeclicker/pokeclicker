@@ -79,6 +79,18 @@ export const SpriteCredits: Credit[] = [
         // Notes: Made specifically for PokéClicker.
     },
     {
+        name: 'DraK4y',
+        link: 'https://discordapp.com/users/272336444297707521/',
+        image: 'assets/images/profile/trainer-96.png',
+        resources: [
+            'Team Flare Admin (male)',
+            'Team Flare Admin (female)',
+            'Team Flare Aliana',
+            'Tourist Couple/Bellhop',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'Drawnamu',
         link: 'https://www.deviantart.com/drawnamu',
         image: 'https://a.deviantart.net/avatars-big/d/r/drawnamu.png',
@@ -128,6 +140,7 @@ export const SpriteCredits: Credit[] = [
             'Ramos',
             'Siebold',
             'Team Flare Bryony',
+            'Team Flare Xerosic',
             'Valerie',
             'Viola',
             'Wikstrom',
