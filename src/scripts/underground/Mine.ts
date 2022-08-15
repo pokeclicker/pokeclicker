@@ -35,7 +35,7 @@ class Mine {
 
         let added = 0;
         for (let i = 0; i < App.game.underground.getMaxItems(); i++) {
-            const item = UndergroundItem.getRandomItem();
+            const item = UndergroundItems.getRandomItem();
             const x = Mine.getRandomCoord(Underground.sizeX, item.space[0].length);
             const y = Mine.getRandomCoord(App.game.underground.getSizeY(), item.space.length);
             const res = Mine.canAddReward(x, y, item);
@@ -48,7 +48,7 @@ class Mine {
         // Check in case player upgrade min above max
         const min = Math.min(App.game.underground.getMinItems(), App.game.underground.getMaxItems());
         while (added < min) {
-            const item = UndergroundItem.getRandomItem();
+            const item = UndergroundItems.getRandomItem();
             const x = Mine.getRandomCoord(Underground.sizeX, item.space[0].length);
             const y = Mine.getRandomCoord(App.game.underground.getSizeY(), item.space.length);
             const res = Mine.canAddReward(x, y, item);
@@ -154,6 +154,11 @@ class Mine {
     }
 
     public static survey() {
+        // Disable survey while loading new layer
+        if (this.loadingNewLayer) {
+            return;
+        }
+
         if (Mine.surveyResult()) {
             $('#mine-survey-result').tooltip('show');
             return;
@@ -178,27 +183,31 @@ class Mine {
 
     private static rewardSummary() {
         return Mine.rewardNumbers.reduce((res, id) => {
-            const reward = UndergroundItem.list.find(x => x.id == id);
+            const reward = UndergroundItems.list.find(x => x.id == id);
 
-            if (ItemList[reward.valueType]) {
-                res.evoItems++;
-            } else {
-                switch (reward.valueType) {
-                    case 'Diamond': {
-                        res.totalValue += reward.value;
-                        break;
-                    }
-                    case 'Mine Egg': {
-                        res.fossils++;
-                        break;
-                    }
-                    default: {
-                        res.plates++;
-                    }
-                }
+            switch (reward.valueType) {
+                case UndergroundItemValueType.Diamond:
+                    res.totalValue += reward.value;
+                    break;
+                case UndergroundItemValueType.Fossil:
+                    res.fossils++;
+                    break;
+                case UndergroundItemValueType.FossilPiece:
+                    res.fossilpieces++;
+                    break;
+                case UndergroundItemValueType.Shard:
+                    res.shards++;
+                    break;
+                case UndergroundItemValueType.EvolutionItem:
+                    res.evoItems++;
+                    break;
+                case UndergroundItemValueType.Gem:
+                    res.plates++;
+                    break;
+                default:
             }
             return res;
-        }, {fossils: 0, plates: 0, evoItems: 0, totalValue: 0});
+        }, {fossils: 0, fossilpieces: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0});
     }
 
     private static updatesurveyResult(summary) {
@@ -206,13 +215,21 @@ class Mine {
         if (summary.fossils) {
             text.push(`Fossils: ${summary.fossils}`);
         }
+        if (summary.fossilpieces) {
+            text.push(`Fossil Pieces: ${summary.fossilpieces}`);
+        }
         if (summary.evoItems) {
             text.push(`Evolution Items: ${summary.evoItems}`);
         }
         if (summary.plates) {
             text.push(`Gem Plates: ${summary.plates}`);
         }
-        text.push(`Diamond Value: ${summary.totalValue}`);
+        if (summary.shards) {
+            text.push(`Shards: ${summary.shards}`);
+        }
+        if (summary.totalValue) {
+            text.push(`Diamond Value: ${summary.totalValue}`);
+        }
 
         Mine.surveyResult(text.join('<br>'));
         $('#mine-survey-result').tooltip('show');
@@ -256,6 +273,11 @@ class Mine {
     }
 
     public static bomb() {
+        // Disable bomb while loading new layer
+        if (this.loadingNewLayer) {
+            return;
+        }
+
         let tiles = App.game.underground.getBombEfficiency();
         if (App.game.underground.energy >= Underground.BOMB_ENERGY) {
             while (tiles-- > 0) {
@@ -276,7 +298,7 @@ class Mine {
             title: 'Underground',
             message: 'Skip this mine layer?',
             type: NotificationConstants.NotificationOption.warning,
-            confirm: 'skip',
+            confirm: 'Skip',
         })) {
             setTimeout(Mine.completed, 1500);
             Mine.loadingNewLayer = true;
@@ -294,7 +316,7 @@ class Mine {
         const reward = Mine.rewardGrid[x][y];
         if (newlayer == 0 && reward != 0 && reward.revealed != 1) {
             reward.revealed = 1;
-            const image = Underground.getMineItemById(reward.value).undergroundImage;
+            const image = UndergroundItems.getById(reward.value).undergroundImage;
             $(`div[data-i=${x}][data-j=${y}]`).html(`<div class="mineReward size-${reward.sizeX}-${reward.sizeY} pos-${reward.x}-${reward.y} rotations-${reward.rotations}" style="background-image: url('${image}');"></div>`);
             Mine.checkItemsRevealed();
         }
@@ -316,10 +338,11 @@ class Mine {
         for (let i = 0; i < Mine.rewardNumbers.length; i++) {
             if (Mine.checkItemRevealed(Mine.rewardNumbers[i])) {
                 let amount = 1;
-                const itemName = Underground.getMineItemById(Mine.rewardNumbers[i]).name;
+                const itemName = UndergroundItems.getById(Mine.rewardNumbers[i]).name;
                 Notifier.notify({
                     message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}`,
                     type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
                 });
 
                 if (App.game.oakItems.isActive(OakItemType.Treasure_Scanner)) {
@@ -402,6 +425,7 @@ class Mine {
         Notifier.notify({
             message: 'You dig deeper...',
             type: NotificationConstants.NotificationOption.info,
+            setting: NotificationConstants.NotificationSetting.Underground.underground_dig_deeper,
         });
         ko.cleanNode(document.getElementById('mineBody'));
         App.game.oakItems.use(OakItemType.Explosive_Charge);

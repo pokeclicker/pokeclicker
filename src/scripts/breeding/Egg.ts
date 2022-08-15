@@ -13,6 +13,7 @@ class Egg implements Saveable {
     progress: KnockoutComputed<number>;
     progressText: KnockoutComputed<string>;
     stepsRemaining: KnockoutComputed<number>;
+    partyPokemon: KnockoutObservable<PartyPokemon>;
 
     constructor(
         public type = EggType.None,
@@ -23,16 +24,17 @@ class Egg implements Saveable {
         public notified = false
     ) {
         this.steps = ko.observable(steps);
+        this.partyPokemon = ko.observable();
         this.init();
     }
 
-    private init() {
+    private init(initial = false) {
         this.progress = ko.pureComputed(function () {
             return this.steps() / this.totalSteps * 100;
         }, this);
 
         this.progressText = ko.pureComputed(function () {
-            return `${this.steps()} / ${this.totalSteps}`;
+            return `${this.steps().toLocaleString('en-US')} / ${this.totalSteps.toLocaleString('en-US')}`;
         }, this);
 
         this.stepsRemaining = ko.pureComputed(function () {
@@ -44,9 +46,14 @@ class Egg implements Saveable {
             this.pokemonType1 = dataPokemon.type1;
             this.pokemonType2 = dataPokemon.type2 === PokemonType.None ? dataPokemon.type1 : dataPokemon.type2;
         } else {
-            this.pokemonType1 = PokemonType['Normal'];
-            this.pokemonType2 = PokemonType['Normal'];
+            this.pokemonType1 = PokemonType.Normal;
+            this.pokemonType2 = PokemonType.Normal;
         }
+
+        // Deferring this because it wants to access App.game.party, which isn't avaliable yet
+        setTimeout(() => {
+            this.partyPokemon(this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.pokemon).id) : null);
+        }, 0);
     }
 
     isNone() {
@@ -93,14 +100,16 @@ class Egg implements Saveable {
         return !this.isNone() && this.steps() >= this.totalSteps;
     }
 
-    hatch(efficiency = 100): boolean {
+    hatch(efficiency = 100, helper = false): boolean {
         if (!this.canHatch()) {
             return false;
         }
         const shiny = PokemonFactory.generateShiny(this.shinyChance, true);
 
-        const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == this.pokemon);
+        const partyPokemon = this.partyPokemon();
         // If the party pokemon exist, increase it's damage output
+
+        const pokemonID = PokemonHelper.getPokemonByName(this.pokemon).id;
         if (partyPokemon) {
             // Increase attack
             partyPokemon.attackBonusPercent += Math.max(1, Math.round(GameConstants.BREEDING_ATTACK_BONUS * (efficiency / 100)));
@@ -116,15 +125,14 @@ class Egg implements Saveable {
                 partyPokemon.breeding = false;
                 partyPokemon.level = partyPokemon.calculateLevelFromExp();
                 partyPokemon.checkForLevelEvolution();
+                if (partyPokemon.pokerus == GameConstants.Pokerus.Infected) {
+                    partyPokemon.pokerus = GameConstants.Pokerus.Contagious;
+                }
+                if (partyPokemon.evs() >= 50 && partyPokemon.pokerus == GameConstants.Pokerus.Contagious) {
+                    partyPokemon.pokerus = GameConstants.Pokerus.Cured;
+                }
             }
-
-            // Recalculate current attack
-            partyPokemon.attack = partyPokemon.calculateAttack();
         }
-
-        const pokemonID = PokemonHelper.getPokemonByName(this.pokemon).id;
-
-        App.game.party.gainPokemonById(pokemonID, shiny);
 
         if (shiny) {
             Notifier.notify({
@@ -133,7 +141,7 @@ class Egg implements Saveable {
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched_shiny,
             });
-            App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}!`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}! ${App.game.party.alreadyCaughtPokemon(pokemonID, true) ? '(duplicate)' : ''}`);
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonHatched[pokemonID]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonHatched);
         } else {
@@ -143,6 +151,7 @@ class Egg implements Saveable {
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched,
             });
         }
+        App.game.party.gainPokemonById(pokemonID, shiny);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
         const baseForm = App.game.breeding.calculateBaseForm(this.pokemon);
@@ -176,12 +185,12 @@ class Egg implements Saveable {
     }
 
     fromJSON(json: Record<string, any>): void {
-        this.totalSteps = json['totalSteps'];
-        this.steps = ko.observable(json['steps']);
-        this.shinyChance = json['shinyChance'];
-        this.pokemon = json['pokemon'];
-        this.type = json['type'];
-        this.notified = json['notified'];
-        this.init();
+        this.totalSteps = json.totalSteps;
+        this.steps = ko.observable(json.steps);
+        this.shinyChance = json.shinyChance;
+        this.pokemon = json.pokemon;
+        this.type = json.type;
+        this.notified = json.notified;
+        this.init(true);
     }
 }

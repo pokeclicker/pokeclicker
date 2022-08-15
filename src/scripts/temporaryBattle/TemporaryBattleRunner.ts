@@ -19,6 +19,9 @@ class TemporaryBattleRunner {
         this.timeLeft(GameConstants.TEMP_BATTLE_TIME * this.timeBonus());
         this.timeLeftPercentage(100);
 
+        player.route(0);
+        Battle.route = 0;
+        Battle.catching(!(battle.optionalArgs.isTrainerBattle ?? true));
         TemporaryBattleBattle.battle = battle;
         TemporaryBattleBattle.totalPokemons(battle.pokemons.length);
         TemporaryBattleBattle.index(0);
@@ -78,10 +81,10 @@ class TemporaryBattleRunner {
         if (this.running()) {
             this.running(false);
             Notifier.notify({
-                message: `It appears you are not strong enough to defeat ${TemporaryBattleBattle.battle.name}`,
+                message: `It appears you are not strong enough to defeat ${TemporaryBattleBattle.battle.getDisplayName()}.`,
                 type: NotificationConstants.NotificationOption.danger,
             });
-            player.town(TemporaryBattleBattle.battle.parent);
+            player.town(TemporaryBattleBattle.battle.getTown());
             App.game.gameState = GameConstants.GameState.town;
         }
     }
@@ -90,13 +93,14 @@ class TemporaryBattleRunner {
         if (this.running()) {
             this.running(false);
             if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(battle.name)]() == 0) {
-                battle.rewardFunction();
+                battle.optionalArgs.firstTimeRewardFunction?.();
                 if (battle.defeatMessage) {
                     $('#temporaryBattleWonModal').modal('show');
                 }
             }
+            battle.optionalArgs.rewardFunction?.();
             GameHelper.incrementObservable(App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(battle.name)]);
-            player.town(battle.parent);
+            player.town(battle.getTown());
             App.game.gameState = GameConstants.GameState.town;
         }
     }

@@ -63,6 +63,7 @@ namespace GameConstants {
     declare const AMAZE_MULCH_GROWTH_MULTIPLIER: number;
     declare const AMAZE_MULCH_PRODUCE_MULTIPLIER: number;
     declare const AMAZE_MULCH_MUTATE_MULTIPLIER: number;
+    declare const FREEZE_MULCH_MULTIPLIER: number;
     declare const WANDER_RATE: number;
     declare const BerryColor: string[];
     declare const BASE_DUNGEON_SIZE: number;
@@ -91,7 +92,7 @@ namespace GameConstants {
         'Hatch',
         'Pokeball',
         'Click',
-        'Route Kill',
+        'Route Defeat',
         'Clear Gym',
         'Clear Dungeon',
         'Farming',
@@ -134,6 +135,18 @@ namespace GameConstants {
     declare const ACTIVE_QUEST_MULTIPLIER: number;
     declare const QUEST_CLICKS_PER_SECOND: number;
     declare const QUESTS_PER_SET: number;
+    declare const BASE_EP_YIELD: number;
+    declare const STONE_EP_YIELD: number;
+    declare const WANDERER_EP_YIELD: number;
+    declare const SHOPMON_EP_YIELD: number;
+    declare const SAFARI_EP_YIELD: number;
+    declare const SHINY_EP_MODIFIER: number;
+    declare const REPEATBALL_EP_MODIFIER: number;
+    declare const DUNGEON_EP_MODIFIER: number;
+    declare const DUNGEON_BOSS_EP_MODIFIER: number;
+    declare const ROAMER_EP_MODIFIER: number;
+    declare const EP_EV_RATIO: number;
+    declare const EP_CHALLENGE_MODIFIER: number;
     declare const DNA_ITEM_CHANCE: number;
     declare enum GameState {
         idle,
@@ -162,6 +175,7 @@ namespace GameConstants {
         'Lureball',
         'Nestball',
         'Repeatball',
+        'Beastball',
     }
     declare enum Currency {
         money,
@@ -214,6 +228,7 @@ namespace GameConstants {
     declare const Environments: {
         Water: EnvironmentData,
         Ice: EnvironmentData,
+        Fire: EnvironmentData,
         Forest: EnvironmentData,
         Cave: EnvironmentData,
         GemCave: EnvironmentData,
@@ -237,7 +252,7 @@ namespace GameConstants {
         'Water_stone',
         'Thunder_stone',
         'Moon_stone',
-        'Trade_stone',
+        'Linking_cord',
         'Sun_stone',
         'Soothe_bell',
         'Metal_coat',
@@ -262,13 +277,43 @@ namespace GameConstants {
         'Sachet',
         'Whipped_dream',
         'Ice_stone',
+        'Sweet_apple',
+        'Tart_apple',
+        'Cracked_pot',
+        'Galarica_cuff',
+        'Galarica_wreath',
+    }
+    declare enum ShardType {
+        'None',
+        'Red Shard',
+        'Yellow Shard',
+        'Green Shard',
+        'Blue Shard',
+        'Grey Shard',
+        'Purple Shard',
+        'Ochre Shard',
+        'Black Shard',
+        'Crimson Shard',
+        'Lime Shard',
+        'White Shard',
+        'Pink Shard',
+        'Cyan Shard',
+        'Rose Shard',
+        'Brown Shard',
+    }
+    declare enum FossilPieceType {
+        'None',
+        'Fossilized Bird',
+        'Fossilized Fish',
+        'Fossilized Drake',
+        'Fossilized Dino',
     }
     declare enum BattleItemType {
         'xAttack' = '',
         'xClick' = '',
         'Lucky_egg' = '',
         'Token_collector' = '',
-        'Item_magnet' = '',
+        'Dowsing_machine' = '',
         'Lucky_incense' = '',
     }
     declare enum FluteItemType {
@@ -300,10 +345,28 @@ namespace GameConstants {
         'Cherubi',
         'Zorua',
         'Meloetta (pirouette)',
-        'Toxel',
-        'Eternatus',
-        'Slowpoke (Galar)'
+        'Type: Null',
+        'Poipole',
+        'Dracozolt',
+        'Arctozolt',
+        'Dracovish',
+        'Arctovish',
     }
+
+    declare enum UltraBeastType {
+         'Nihilego',
+         'Buzzwole',
+         'Pheromosa',
+         'Xurkitree',
+         'Kartana',
+         'Celesteela',
+         'Blacephalon',
+         'Stakataka',
+         'Guzzlord',
+         'Poipole',
+         'Naganadel'
+     }
+
     declare enum PokeBlockColor {
         Black,
         Red,
@@ -330,6 +393,16 @@ namespace GameConstants {
         'Dragon_egg',
         'Pokemon_egg',
         'Mystery_egg'
+    }
+    export enum BulletinBoards {
+        None = -2,
+        All = -1,
+        Kanto,
+        Kalos,
+        Alola,
+        Galar,
+        Armor,
+        Crown
     }
     declare const EnergyRestoreEffect: {
         SmallRestore: number;
@@ -396,5 +469,129 @@ namespace GameConstants {
         'Thursday',
         'Friday',
         'Saturday',
+    }
+    declare enum Pokerus {
+        'None',
+        'Infected',
+        'Contagious',
+        'Cured',
+    }
+    declare enum ShardTraderLocations {
+        'Cerulean City',
+        'Vermilion City',
+        'Lavender Town',
+        'Saffron City',
+        'Fuchsia City',
+        'Cinnabar Island',
+        'Azalea Town',
+        'Ecruteak City',
+        'Olivine City',
+        'Cianwood City',
+        'Mahogany Town',
+        'Blackthorn City',
+        'Petalburg City',
+        'Dewford Town',
+        'Slateport City',
+        'Mauville City',
+        'Verdanturf Town',
+        'Lavaridge Town',
+        'Fallarbor Town',
+        'Fortree City',
+        'Mossdeep City',
+        'Pacifidlog Town',
+        'Sootopolis City',
+        'Ever Grande City',
+        'Oreburgh City',
+        'Floaroma Town',
+        'Eterna City',
+        'Hearthome City',
+        'Solaceon Town',
+        'Pastoria City',
+        'Celestic Town',
+        'Pal Park',
+        'Canalave City',
+        'Snowpoint City',
+        'Sunyshore City',
+        'Survival Area',
+        'Resort Area',
+        'Castelia City',
+        'Nimbasa City',
+        'Driftveil City',
+        'Mistralton City',
+        'Lentimas Town',
+        'Undella Town',
+        'Lacunosa Town',
+        'Opelucid City',
+        'Humilau City',
+        'Icirrus City',
+        'Black and White Park',
+        'Nacrene City',
+        'Striaton City',
+        'Accumula Town',
+        'Nuvema Town',
+        'Camphrier Town',
+        'Parfum Palace',
+        'Ambrette Town',
+        'Cyllage City',
+        'Geosenge Town',
+        'Shalour City',
+        'Coumarine City',
+        'Laverre City',
+        'Dendemille Town',
+        'Anistar City',
+        'Couriway Town',
+        'Snowbelle City',
+        'Hau\'oli City',
+        'Heahea City',
+        'Paniola Town',
+        'Konikoni City',
+        'Aether Paradise',
+        'Malie City',
+        'Tapu Village',
+        'Seafolk Village',
+        'Exeggutor Island',
+        'Altar of the Sunne and Moone',
+        'Turffield',
+        'Hulbury',
+        'Motostoke',
+        'Hammerlocke',
+        'Route 6',
+        'Stow-on-Side',
+        'Ballonlea',
+        'Circhester',
+        'Spikemuth',
+        'Master Dojo',
+    }
+    declare enum KantoSubRegions {
+        Kanto,
+        Sevii123,
+    }
+    declare enum JohtoSubRegions {
+        Johto,
+    }
+    declare enum HoennSubRegions {
+        Hoenn,
+    }
+    declare enum SinnohSubRegions {
+        Sinnoh,
+    }
+    declare enum UnovaSubRegions {
+        Unova,
+    }
+    declare enum KalosSubRegions {
+        Kalos,
+    }
+    declare enum AlolaSubRegions {
+        MelemeleIsland,
+        AkalaIsland,
+        UlaulaAndPoniIslands,
+        // UlaulaIsland,
+        // PoniIsland,
+    }
+    declare enum GalarSubRegions {
+        SouthGalar,
+        NorthGalar,
+        IsleofArmor,
+        CrownTundra,
     }
 }

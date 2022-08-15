@@ -1,12 +1,4 @@
-enum QuestLineState {
-    inactive,
-    started,
-    ended,
-}
-
 class QuestLine {
-    name: string;
-    description: string;
     state: KnockoutObservable<QuestLineState> = ko.observable(QuestLineState.inactive).extend({ numeric: 0 });
     quests: KnockoutObservableArray<Quest>;
     curQuest: KnockoutComputed<number>;
@@ -16,7 +8,12 @@ class QuestLine {
 
     autoBegin: KnockoutSubscription;
 
-    constructor(name: string, description: string) {
+    constructor(
+        public name: string,
+        public description: string,
+        public requirement?: Requirement,
+        public bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.None
+    ) {
         this.name = name;
         this.description = description;
         this.quests = ko.observableArray();
@@ -94,11 +91,15 @@ class QuestLine {
     }
 
     toJSON() {
-        return {
+        const json = {
             state: this.state(),
             name: this.name,
             quest: this.curQuest(),
             initial: this.curQuestInitial(),
         };
+        if (this.curQuestObject() instanceof MultipleQuestsQuest) {
+            json.initial = this.curQuestObject().quests.map((q) => q.initial());
+        }
+        return json;
     }
 }

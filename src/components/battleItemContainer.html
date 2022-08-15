@@ -23,7 +23,7 @@
         <tbody>
           <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem'))">
             <tr data-bind="foreach: $data">
-                 <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data](),trigger:'hover',placement:'top',animation:false}"></td>
+                 <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data]().toLocaleString('en-US'),trigger:'hover',placement:'top',animation:false}"></td>
             </tr>
             <tr data-bind="foreach: $data">
                  <td class="p-0" data-bind="attr: {
@@ -40,7 +40,7 @@
                             tooltip: {
                               title: ItemList[$data].displayName + '<br/>' + ItemList[$data].description,
                               trigger: 'hover',
-                              placement:'left',
+                              placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
                               html: true
                             }">
                 <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
@@ -85,9 +85,9 @@
                                 click: function(){ItemHandler.useItem($data)}
                             },
                             tooltip: {
-                              title: ItemList[$data].displayName + '<br/>' + ItemList[$data].getDescription() + '<br/>' + 'Consumes: ' + ItemList[$data].gemTypes[0] + ', ' + ItemList[$data].gemTypes[1] + ', and ' + ItemList[$data].gemTypes[2] + ' Gems',
+                              title: ItemList[$data].displayName + '<br/>' + ItemList[$data].getDescription() + '<br/>' + 'Consumes: ' + ItemList[$data].gemTypes[0] + ' (' + App.game.gems.gemWallet[PokemonType[ItemList[$data].gemTypes[0]]]().toLocaleString('en-US') + '), ' + ItemList[$data].gemTypes[1] + ' (' + App.game.gems.gemWallet[PokemonType[ItemList[$data].gemTypes[1]]]().toLocaleString('en-US') + '), and ' + ItemList[$data].gemTypes[2] + ' (' + App.game.gems.gemWallet[PokemonType[ItemList[$data].gemTypes[2]]]().toLocaleString('en-US') + ') Gems',
                               trigger: 'hover',
-                              placement:'left',
+                              placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
                               html: true
                             }">
                 <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">

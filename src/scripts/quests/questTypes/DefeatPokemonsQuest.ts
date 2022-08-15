@@ -30,14 +30,14 @@ class DefeatPokemonsQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return `Defeat ${this.amount.toLocaleString('en-US')} Pokémon on ${Routes.getName(this.route, this.region)}.`;
+        return `Defeat ${this.amount.toLocaleString('en-US')} Pokémon on ${Routes.getName(this.route, this.region, true)}.`;
     }
 
     toJSON() {
         const json = super.toJSON();
-        json['name'] = this.constructor.name;
-        json['data'].push(this.route);
-        json['data'].push(this.region);
+        json.name = this.constructor.name;
+        json.data.push(this.route);
+        json.data.push(this.region);
         return json;
     }
 }

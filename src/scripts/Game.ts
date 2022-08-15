@@ -100,6 +100,7 @@ class Game {
         BerryDeal.generateDeals(now);
         Weather.generateWeather(now);
         GemDeal.generateDeals();
+        ShardDeal.generateDeals();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
@@ -145,7 +146,7 @@ class Game {
 
             Notifier.notify({
                 type: NotificationConstants.NotificationOption.info,
-                title: 'Offline-time bonus',
+                title: 'Offline-time Bonus',
                 message: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
                 strippedMessage: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: ${moneyToEarn.toLocaleString('en-US')} Pokédollars`,
                 timeout: 2 * GameConstants.MINUTE,
@@ -212,6 +213,13 @@ class Game {
             const quest = questLine.curQuestObject();
             if (quest.initial() > quest.focus()) {
                 quest.initial(quest.focus());
+            }
+        });
+        // Check for breeding pokemons not in queue
+        const breeding = [...App.game.breeding.eggList.map((l) => l().pokemon), ...App.game.breeding.queueList()];
+        App.game.party._caughtPokemon().filter((p) => p.breeding).forEach((p) => {
+            if (!breeding.includes(p.name)) {
+                p.breeding = false;
             }
         });
     }

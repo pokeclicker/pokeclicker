@@ -98,7 +98,7 @@ class GameController {
     }
 
     // Store keys for multi-key combinations
-    static keyHeld = {}
+    static keyHeld: Record<string, any> = {}
     static addKeyListeners() {
         // Oak Items
         const $oakItemsModal = $('#oakItemsModal');
@@ -168,9 +168,15 @@ class GameController {
 
             // Within modals
             if ($farmsModal.data('bs.modal')?._isShown) {
-                if (key == Settings.getSetting('hotkey.farm.toggleShovel').value) {
-                    FarmController.selectedShovel() ? FarmController.selectedShovel(false) : FarmController.selectedShovel(true);
-                    return e.preventDefault();
+                switch (key) {
+                    case Settings.getSetting('hotkey.farm.toggleShovel').value:
+                        FarmController.selectedShovel() ? FarmController.selectedShovel(false) : FarmController.selectedShovel(true);
+                        FarmController.selectedPlotSafeLock(false);
+                        return e.preventDefault();
+                    case Settings.getSetting('hotkey.farm.togglePlotSafeLock').value:
+                        FarmController.selectedPlotSafeLock() ? FarmController.selectedPlotSafeLock(false) : FarmController.selectedPlotSafeLock(true);
+                        FarmController.selectedShovel(false);
+                        return e.preventDefault();
                 }
             }
             if ($undergroundModal.data('bs.modal')?._isShown) {
@@ -190,11 +196,11 @@ class GameController {
                 }
                 if (isNumberKey) {
                     if (numberKey === 0) {
-                        ItemList['SmallRestore'].use();
+                        ItemList.SmallRestore.use();
                     } else if (numberKey === 1) {
-                        ItemList['MediumRestore'].use();
+                        ItemList.MediumRestore.use();
                     } else if (numberKey === 2) {
-                        ItemList['LargeRestore'].use();
+                        ItemList.LargeRestore.use();
                     }
                     return e.preventDefault();
                 }
@@ -255,7 +261,7 @@ class GameController {
                         ShopHandler.resetAmount();
                         return e.preventDefault();
                     case Settings.getSetting('hotkey.shop.increase').value:
-                        if (GameController.keyHeld['Shift']) {
+                        if (GameController.keyHeld.Shift) {
                             switch (Settings.getSetting('shopButtons').value) {
                                 case 'original':
                                     ShopHandler.increaseAmount(100);
@@ -288,21 +294,21 @@ class GameController {
             if (visibleModals === 0) {
                 // Route Battles
                 if (App.game.gameState === GameConstants.GameState.fighting) {
-                    const initialRoute = MapHelper.normalizeRoute(player.route(),player.region);
+                    const initialRoute = MapHelper.normalizeRoute(player.route(),player.region, false);
                     const firstRoute = Routes.getRoutesByRegion(player.region)[0].number;
                     const lastRoute = Routes.getRoutesByRegion(player.region)[Routes.getRoutesByRegion(player.region).length - 1].number;
                     // Allow '=' to fallthrough to '+' since they share a key on many keyboards
                     switch (key) {
                         case '=':
                         case '+':
-                            if (initialRoute + 1 > MapHelper.normalizeRoute(lastRoute, player.region)) {
+                            if (initialRoute + 1 > MapHelper.normalizeRoute(lastRoute, player.region, false)) {
                                 MapHelper.moveToRoute(firstRoute, player.region);
                             } else {
                                 MapHelper.moveToRoute(Routes.unnormalizeRoute(initialRoute + 1), player.region);
                             }
                             return e.preventDefault();
                         case '-':
-                            if (initialRoute - 1 < MapHelper.normalizeRoute(firstRoute, player.region)) {
+                            if (initialRoute - 1 < MapHelper.normalizeRoute(firstRoute, player.region, false)) {
                                 MapHelper.moveToRoute(lastRoute, player.region);
                             } else {
                                 MapHelper.moveToRoute(Routes.unnormalizeRoute(initialRoute - 1), player.region);
@@ -403,7 +409,7 @@ class GameController {
                     }
                     break;
                 case Settings.getSetting('hotkey.forceSave').value:
-                    if (GameController.keyHeld['Shift']) {
+                    if (GameController.keyHeld.Shift) {
                         Save.store(player);
                         return e.preventDefault();
                     }

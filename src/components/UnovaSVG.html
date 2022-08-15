@@ -384,6 +384,7 @@
     <%- include('templates/mapTown',
         { name: "Castelia City"
         , x: 53, y: 49
+        , isExtension: true
         })
     %>
 
@@ -398,6 +399,7 @@
     <%- include('templates/mapTown',
         { name: "Nimbasa City"
         , x: 52, y: 31
+        , isExtension: true
         })
     %>
 
@@ -412,6 +414,7 @@
     <%- include('templates/mapTown',
         { name: "Driftveil City"
         , x: 30, y: 31
+        , isExtension: true
         })
     %>
 
@@ -426,6 +429,7 @@
     <%- include('templates/mapTown',
         { name: "Mistralton City"
         , x: 17, y: 22
+        , isExtension: true
         })
     %>
 
@@ -440,6 +444,7 @@
     <%- include('templates/mapTown',
         { name: "Icirrus City"
         , x: 30, y: 12
+        , isExtension: true
         })
     %>
 
@@ -454,6 +459,7 @@
     <%- include('templates/mapTown',
         { name: "Opelucid City"
         , x: 52, y: 12
+        , isExtension: true
         })
     %>
 
@@ -483,6 +489,7 @@
     <%- include('templates/mapTown',
         { name: "Undella Town"
         , x: 84, y: 20
+        , isExtension: true
         })
     %>
 
@@ -504,6 +511,7 @@
     <%- include('templates/mapTown',
         { name: "Black and White Park"
         , x: 73, y: 31
+        , isExtension: true
         })
     %>
 
@@ -557,6 +565,7 @@
         { name: "Pokémon League Unova"
         , x: 59, y: 5.5
         , width: 3, height: 0.5
+        , isExtension: true
         })
     %>
 
@@ -687,6 +696,7 @@
         { name: "Reversal Mountain"
         , x: 71, y: 21
         , width: 3, height: 3
+        , isExtension: true
         })
     %>
 
@@ -865,6 +875,7 @@
         , databind: "click:function(){MapHelper.moveToTown('Team Plasma Assault')}, attr:{ class: MapHelper.calculateTownCssClass('Team Plasma Assault') }"
         , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Plasma Assault')]() == 0"
         , image: "assets/images/map/plasmafrigate_airship.png"
+        , connectedToTown: "Team Plasma Assault"
         })
     %>
 
@@ -876,6 +887,7 @@
         , databind: "click:function(){MapHelper.moveToTown('Team Plasma Assault')}, attr:{ class: MapHelper.calculateTownCssClass('Team Plasma Assault') }"
         , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]() >= 1"
         , image: "assets/images/map/plasmafrigate_airship.png"
+        , connectedToTown: "Team Plasma Assault"
         })
     %>
 
@@ -887,6 +899,7 @@
         , databind: "click:function(){MapHelper.moveToTown('Plasma Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('Plasma Frigate') }"
         , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Plasma Assault')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() == 0"
         , image: "assets/images/map/plasmafrigate_ship.png"
+        , connectedToTown: "Plasma Frigate"
         })
     %>
 
@@ -898,6 +911,7 @@
         , databind: "click:function(){MapHelper.moveToTown('Plasma Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('Plasma Frigate') }"
         , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]() >= 1"
         , image: "assets/images/map/plasmafrigate_ship.png"
+        , connectedToTown: "Plasma Frigate"
         })
     %>
 
@@ -909,7 +923,18 @@
         , databind: "click:function(){MapHelper.moveToTown('Giant Chasm')}, attr:{ class: MapHelper.calculateTownCssClass('Giant Chasm') }"
         , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]() == 0"
         , image: "assets/images/map/plasmafrigate_airship.png"
+        , connectedToTown: "Giant Chasm"
         })
     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Ash Ketchum"
+         , x: 8, y: 27
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Ash Ketchum Unova'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Ash Ketchum Unova'] && TemporaryBattleList['Ash Ketchum Unova'].isVisible()"
+         , image: "assets/images/map/ashketchumoverworld.png"
+         })
+     %>
 
 </g>
