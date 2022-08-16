@@ -1320,16 +1320,18 @@ export const TemporaryBattles = [
     'Avery2',
     'Klara3',
     'Avery3',
+    'Zarude Tribe 1',
+    'Zarude Tribe 2',
+    'Zarude Tribe 3',
+    'Ash Ketchum Galar',
+    'Zarude (Dada)',
+    'Flowering Celebi',
     'Peony',
     'Calyrex',
     'Glastrier',
     'Spectrier',
     'Dyna Tree Birds',
     'Regigigas',
-    'Zarude Tribe 1',
-    'Zarude Tribe 2',
-    'Zarude Tribe 3',
-    'Ash Ketchum Galar',
 ];
 
 export enum ShardTraderLocations {

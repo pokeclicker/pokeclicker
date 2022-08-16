@@ -370,6 +370,7 @@ export type PokemonNameType
     | 'Ho-Oh'
     | 'Celebi'
     | 'Grinch Celebi'
+    | 'Flowering Celebi'
     | 'Treecko'
     | 'Grovyle'
     | 'Sceptile'
