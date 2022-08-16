@@ -4416,6 +4416,23 @@ const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 172.1,
+        'name': 'Spiky-eared Pichu',
+        'catchRate': 190,
+        'type': [PokemonType.Electric],
+        'levelType': LevelType.mediumfast,
+        'exp': 41,
+        'eggCycles': 8,
+        'base': {
+            'hitpoints': 20,
+            'attack': 40,
+            'specialAttack': 35,
+            'defense': 15,
+            'specialDefense': 35,
+            'speed': 60,
+        },
+    },
+    {
         'id': 173,
         'name': 'Cleffa',
         'catchRate': 150,
@@ -6641,7 +6658,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 147,
         'catchRate': 90,
-        'evolutions': [new LevelEvolution('Galarian Linoone', 'Obstagoon', 35)],
+        'evolutions': [new NightTimedLevelEvolution('Galarian Linoone', 'Obstagoon', 35)],
         'base': {
             'hitpoints': 78,
             'attack': 70,

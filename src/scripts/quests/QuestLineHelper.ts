@@ -264,6 +264,75 @@ class QuestLineHelper {
         App.game.quests.questLines().push(rocketJohtoQuestLine);
     }
 
+    public static createCelebiJohtoQuestLine() {
+        const celebiJohtoQuestLine = new QuestLine('Unfinished Business', 'A request from Professor Oak.', new QuestLineCompletedRequirement('Bill\'s Errand'), GameConstants.BulletinBoards.Kanto);
+
+        const talktoProfOak1 = new TalkToNPCQuest(PalletCelebiProfOak1, 'Talk to Professor Oak in Pallet Town.');
+        celebiJohtoQuestLine.addQuest(talktoProfOak1);
+
+        const talktoProfIvy = new TalkToNPCQuest(CelebiProfIvy, 'Talk to Professor Ivy in her lab in the Sevii Islands.');
+        celebiJohtoQuestLine.addQuest(talktoProfIvy);
+
+        const talktoProfOak2 = new TalkToNPCQuest(PalletCelebiProfOak2, 'Deliver the GS Ball to Professor Oak in Pallet Town.');
+        celebiJohtoQuestLine.addQuest(talktoProfOak2);
+
+        const talktoKurt1 = new TalkToNPCQuest(AzaleaCelebiKurt2, 'Deliver the GS Ball to Kurt in Azalea Town.');
+        celebiJohtoQuestLine.addQuest(talktoKurt1);
+
+        const talktoKurt2 = new TalkToNPCQuest(AzaleaCelebiKurt4, 'Talk to Kurt again after becoming Champion of Johto.');
+        celebiJohtoQuestLine.addQuest(talktoKurt2);
+
+        const talktoProfOak3 = new TalkToNPCQuest(AzaleaCelebiOak1, 'Talk to Professor Oak in Azalea Town.');
+        celebiJohtoQuestLine.addQuest(talktoProfOak3);
+
+        const talktoIlexForestShrine1 = new TalkToNPCQuest(IlexForestShrine1, 'Investigate the shrine in Ilex Forest.');
+        celebiJohtoQuestLine.addQuest(talktoIlexForestShrine1);
+
+        const SpikyEaredPichuReward = () => {
+            App.game.party.gainPokemonById(172.1);
+            Notifier.notify({
+                title: celebiJohtoQuestLine.name,
+                message: 'You captured the Spiky-eared Pichu!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearSpikyEaredPichu = new CustomQuest(1, SpikyEaredPichuReward, 'Defeat the strange Pichu.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Spiky-eared Pichu')]());
+        celebiJohtoQuestLine.addQuest(clearSpikyEaredPichu);
+
+        const talktoProfOak4 = new TalkToNPCQuest(AzaleaCelebiOak2, 'Talk to Professor Oak in Azalea Town.');
+        celebiJohtoQuestLine.addQuest(talktoProfOak4);
+
+        const talktoTohjoFallsTimeDistortion = new TalkToNPCQuest(TohjoFallsCelebiTimeDistortion, 'Investigate the Time Distortion in Tohjo Falls.');
+        celebiJohtoQuestLine.addQuest(talktoTohjoFallsTimeDistortion);
+
+        const clearGiovanni = new CustomQuest(1, 0, 'Defeat Giovanni.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rocket Boss Giovanni')]());
+        celebiJohtoQuestLine.addQuest(clearGiovanni);
+
+        const talktoProfOak5 = new TalkToNPCQuest(AzaleaCelebiOak3, 'Talk to Professor Oak in Azalea Town.');
+        celebiJohtoQuestLine.addQuest(talktoProfOak5);
+
+        const talktoIlexForestShrine2 = new TalkToNPCQuest(IlexForestShrine2, 'Investigate the shrine in Ilex Forest.');
+        celebiJohtoQuestLine.addQuest(talktoIlexForestShrine2);
+
+        const CelebiCatch = new CaptureSpecificPokemonQuest(
+            'Celebi',
+            'Play with Celebi.',
+            1,
+            false,
+            undefined,
+            undefined
+        );
+
+        celebiJohtoQuestLine.addQuest(CelebiCatch);
+
+        const talktoProfOak6 = new TalkToNPCQuest(AzaleaCelebiOak4, 'Talk to Professor Oak in Azalea Town.');
+        celebiJohtoQuestLine.addQuest(talktoProfOak6);
+
+        App.game.quests.questLines().push(celebiJohtoQuestLine);
+    }
+
     // Hoenn QuestLines
     public static createAquaMagmaHoennQuestLine() {
         const aquaMagmaHoennQuestLine = new QuestLine('Land vs. Water', 'Put a stop to the schemes of Team Aqua and Team Magma!');
@@ -770,7 +839,7 @@ class QuestLineHelper {
         const clearRoseTower = new CustomQuest(1, 0, 'Champion Leon was seen heading to Rose Tower. Ascend Rose Tower so you can find him.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rose Tower')]());
         darkestDayQuestLine.addQuest(clearRoseTower);
 
-        const clearEnergyPlant = new CustomQuest(1, 0, 'Chairman Rose has interupted your fight with Leon and brought about the Darkest Day. Go to the Energy Plant in Hammerlocke to put an end to his plans!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Energy Plant')]());
+        const clearEnergyPlant = new CustomQuest(1, 0, 'Chairman Rose has interrupted your fight with Leon and brought about the Darkest Day. Go to the Energy Plant in Hammerlocke to put an end to his plans!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Energy Plant')]());
         darkestDayQuestLine.addQuest(clearEnergyPlant);
 
         const clearEternatus = new CustomQuest(1, 0, 'Leon failed to capture Eternatus. Defeat it before it can cause any more damage!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Eternatus')]());
@@ -786,7 +855,7 @@ class QuestLineHelper {
             });
         };
 
-        const clearTheDarkestDay = new CustomQuest(1, TheDarkestDayReward, 'Eternatus has ascended to it\'s Eternamax form! Catch it to put an end to the Darkest Day!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('The Darkest Day')]());
+        const clearTheDarkestDay = new CustomQuest(1, TheDarkestDayReward, 'Eternatus has ascended to its Eternamax form! Catch it to put an end to the Darkest Day!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('The Darkest Day')]());
         darkestDayQuestLine.addQuest(clearTheDarkestDay);
 
         App.game.quests.questLines().push(darkestDayQuestLine);
@@ -804,7 +873,7 @@ class QuestLineHelper {
             [
                 clearSordward1,
                 clearShielbert1,
-            ], 'A pair with weird hair has taken the Rusted Sword and Sworded Shield. Defeat them to take them back.'));
+            ], 'A pair with weird hair has taken the Rusted Sword and Rusted Shield. Defeat them to take them back.'));
 
         const clearRampagingTsareena = new CustomQuest(1, 0, 'Sordward and Shielbert are forcing Pokémon to rampage in Galar\'s Stadiums. First is a Tsareena in Turffield Stadium. Defeat it.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Tsareena')]());
         swordShieldQuestLine.addQuest(clearRampagingTsareena);
@@ -815,7 +884,7 @@ class QuestLineHelper {
         const clearRampagingTorkoal = new CustomQuest(1, 0, 'Sordward and Shielbert have forced a Torkoal to rampage in Motostoke Stadium. Defeat it as well.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Torkoal')]());
         swordShieldQuestLine.addQuest(clearRampagingTorkoal);
 
-        const clearSordwardandShielbert = new CustomQuest(1, 0, 'Sordward and Shielbert are trying to steal the Wishing Stars at Professor Magnolia\'s Lab. Stop them.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sordward & Shielbert')]());
+        const clearSordwardandShielbert = new CustomQuest(1, 0, 'Sordward and Shielbert are trying to steal the Wishing Stars at Professor Magnolia\'s Lab in Wedgehurst. Stop them.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sordward & Shielbert')]());
         swordShieldQuestLine.addQuest(clearSordwardandShielbert);
 
         const clearRampagingConkeldurr = new CustomQuest(1, 0, 'Defeat Conkeldurr.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Conkeldurr')]());
@@ -865,7 +934,7 @@ class QuestLineHelper {
             [
                 catchZacian,
                 catchZamazenta,
-            ], 'Now they have calmed down, Zacian and Zamazenta seem to be willing to let you try to catch them!'));
+            ], 'Now that they have calmed down, Zacian and Zamazenta seem to be willing to let you try to catch them!'));
 
         App.game.quests.questLines().push(swordShieldQuestLine);
     }
@@ -983,14 +1052,14 @@ class QuestLineHelper {
         galarCrownQuestLine.addQuest(talktoCalyrex1);
 
         const oldCemetery = new CustomQuest(30, 0, 'Old Cemetery.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['49'](), 0);
-        const slipperySlope = new CustomQuest(30, 0, 'Slippery Slope.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['54'](), 0);
+        const snowslideSlope = new CustomQuest(30, 0, 'Snowslide Slope.', () => App.game.statistics.routeKills[GameConstants.Region.galar]['54'](), 0);
         galarCrownQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 oldCemetery,
-                slipperySlope,
-            ], 'Calyrex is going to Old Cemetery and Slippery Slope to grow a Shaderoot Carrot and an Iceroot Carrot. Protect it from wild Pokémon so it can concentrate.'));
+                snowslideSlope,
+            ], 'Calyrex is going to Old Cemetery and Snowslide Slope to grow a Shaderoot Carrot and an Iceroot Carrot. Protect it from wild Pokémon so it can concentrate.'));
 
-        const talktoCalyrex2 = new TalkToNPCQuest(Calyrex2, 'Now it has grown both carrots, Calyrex has returned to Freezington. Talk to it.');
+        const talktoCalyrex2 = new TalkToNPCQuest(Calyrex2, 'After growing both carrots, Calyrex has returned to Freezington. Talk to it.');
         galarCrownQuestLine.addQuest(talktoCalyrex2);
 
         const clearSpectrier = new CustomQuest(1, 0, 'Defeat Spectrier.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Spectrier')]());
@@ -1012,13 +1081,13 @@ class QuestLineHelper {
                 catchGlastrier,
             ], 'Spectrier and Glastrier are now roaming the Crown Tundra. Catch them when the opportunity arises!'));
 
-        const talktoCalyrex4 = new TalkToNPCQuest(Calyrex4, 'Now you have captured both of its steeds, talk to Calyrex at the Crown Shrine.');
+        const talktoCalyrex4 = new TalkToNPCQuest(Calyrex4, 'Now that you have captured both of its steeds, talk to Calyrex at the Crown Shrine.');
         galarCrownQuestLine.addQuest(talktoCalyrex4);
 
-        const catchCalyrex = new CaptureSpecificPokemonQuest('Calyrex', 'Now you have found and caught Glastrier and Spectrier, Calyrex wants to challenge you at Crown Shrine. Catch it!', 1, false, 0, undefined);
+        const catchCalyrex = new CaptureSpecificPokemonQuest('Calyrex', 'Now that you have found and caught Glastrier and Spectrier, Calyrex wants to challenge you at Crown Shrine. Catch it!', 1, false, 0, undefined);
         galarCrownQuestLine.addQuest(catchCalyrex);
 
-        const talktoCrownPeony2 = new TalkToNPCQuest(CrownPeony2, 'Now you have captured Calyrex, go report back to Peony!');
+        const talktoCrownPeony2 = new TalkToNPCQuest(CrownPeony2, 'Now that you have captured Calyrex, go report back to Peony!');
         galarCrownQuestLine.addQuest(talktoCrownPeony2);
 
         App.game.quests.questLines().push(galarCrownQuestLine);
@@ -1049,7 +1118,7 @@ class QuestLineHelper {
                 catchGalarianMoltres,
             ], 'The Galarian forms of Articuno, Zapdos and Moltres are roaming in the Crown Tundra, Southern Galar and the Isle of Armor respectively. Catch them when the opportunity arises!'));
 
-        const talktoBirdPeony3 = new TalkToNPCQuest(BirdPeony3, 'Now you have captured Galarian Articuno, Zapdos and Moltres, go report back to Peony!.');
+        const talktoBirdPeony3 = new TalkToNPCQuest(BirdPeony3, 'Now that you have captured Galarian Articuno, Zapdos and Moltres, go report back to Peony!.');
         dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony3);
 
         App.game.quests.questLines().push(dynaTreeBirdsQuestLine);
@@ -1096,15 +1165,15 @@ class QuestLineHelper {
             [
                 catchRegieleki,
                 catchRegidrago,
-            ], 'Now it has finally unlocked, catch Regieleki and Regidrago in the Split-Decision Ruins!'));
+            ], 'Now that it has finally unlocked, catch Regieleki and Regidrago in the Split-Decision Ruins!'));
 
-        const talktoGolemPeony5 = new TalkToNPCQuest(GolemPeony5, 'Now you have captured Regieleki and Regidrago, go report back to Peony.');
+        const talktoGolemPeony5 = new TalkToNPCQuest(GolemPeony5, 'Now that you have captured Regieleki and Regidrago, go report back to Peony.');
         ancientGolemsQuestLine.addQuest(talktoGolemPeony5);
 
-        const clearRegigigas = new CustomQuest(1, 0, 'Now you have caught all of the legendary golems it created, Regigigas has appeared in Giants Bed. Defeat it!,', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Regigigas')]());
+        const clearRegigigas = new CustomQuest(1, 0, 'Now that you have caught all of the legendary golems it created, Regigigas has appeared in Giants Bed. Defeat it!,', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Regigigas')]());
         ancientGolemsQuestLine.addQuest(clearRegigigas);
 
-        const talktoGolemPeony6 = new TalkToNPCQuest(GolemPeony6, 'Now you have beaten Regigigas, report back to Peony.');
+        const talktoGolemPeony6 = new TalkToNPCQuest(GolemPeony6, 'Now that you have beaten Regigigas, report back to Peony.');
         ancientGolemsQuestLine.addQuest(talktoGolemPeony6);
 
         App.game.quests.questLines().push(ancientGolemsQuestLine);
@@ -1198,6 +1267,7 @@ class QuestLineHelper {
         this.createBillSeviiQuestLine();
         this.createPersonsofInterestQuestLine();
         this.createRocketJohtoQuestLine();
+        this.createCelebiJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
         this.createDeoxysQuestLine();
         this.createGalacticSinnohQuestLine();

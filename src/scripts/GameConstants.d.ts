@@ -398,6 +398,7 @@ namespace GameConstants {
     export enum BulletinBoards {
         None = -2,
         All = -1,
+        Kanto,
         Kalos,
         Alola,
         Galar,
@@ -471,10 +472,10 @@ namespace GameConstants {
         'Saturday',
     }
     declare enum Pokerus {
-        'None',
+        'Uninfected',
         'Infected',
         'Contagious',
-        'Cured',
+        'Resistant',
     }
     declare enum ShardTraderLocations {
         'Cerulean City',
