@@ -1017,7 +1017,7 @@ TemporaryBattleList['Ash Ketchum Galar'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ash Ketchum',
-        returnTown: 'Glimwood Tangle',
+        returnTown: 'Master Dojo',
         imageName: 'Ash Ketchum',
     }
 );

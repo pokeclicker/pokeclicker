@@ -2279,6 +2279,16 @@
                , image: "assets/images/map/avery.png"
                })
             %>
+
+            <%- include('templates/mapOverlay',
+               { name: "Ash Ketchum"
+               , x: 56, y: 43
+               , width: 4, height: 4
+               , databind: "click: () => TemporaryBattleList['Ash Ketchum Galar'].protectedOnclick()"
+               , visible:  "TemporaryBattleList['Ash Ketchum Galar'] && TemporaryBattleList['Ash Ketchum Galar'].isVisible()"
+               , image: "assets/images/map/ashketchumoverworld.png"
+               })
+            %>
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
