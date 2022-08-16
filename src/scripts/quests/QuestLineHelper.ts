@@ -1011,7 +1011,7 @@ class QuestLineHelper {
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zarude Tribe 3')]()
         );
         jungleSecretsQuestLine.addQuest(clearZarudeTribes);
-        
+
         const talktoJungleKoko4 = new TalkToNPCQuest(JungleKoko4, 'Talk to Koko in Glimwood Tangle.');
         jungleSecretsQuestLine.addQuest(talktoJungleKoko4);
 
