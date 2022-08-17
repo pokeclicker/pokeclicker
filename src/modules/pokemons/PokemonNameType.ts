@@ -186,6 +186,7 @@ export type PokemonNameType
     | 'Gengar'
     | 'Gigantamax Gengar'
     | 'Onix'
+    | 'Crystal Onix'
     | 'Drowzee'
     | 'Hypno'
     | 'Krabby'
