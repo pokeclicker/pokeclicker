@@ -1388,6 +1388,30 @@ TownList['Pokémon League Hoenn'] = new Town(
         ],
     }
 );
+TownList['Four Island'] = new Town(
+    'Four Island',
+    GameConstants.Region.hoenn,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    }
+);
+TownList['Five Island'] = new Town(
+    'Five Island',
+    GameConstants.Region.hoenn,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    }
+);
+TownList['Six Island'] = new Town(
+    'Six Island',
+    GameConstants.Region.hoenn,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    }
+);
 
 //Hoenn Dungeons
 TownList['Petalburg Woods'] = new DungeonTown(
@@ -1495,6 +1519,32 @@ TownList['Sealed Chamber'] = new DungeonTown(
         new GymBadgeRequirement(BadgeEnums.Mind),
     ]
 );
+TownList['Icefall Cave'] = new DungeonTown(
+    'Icefall Cave',
+    GameConstants.Region.hoenn,
+    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)]
+);
+TownList['Lost Cave'] = new DungeonTown(
+    'Lost Cave',
+    GameConstants.Region.hoenn,
+    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)]
+);
+TownList['Pattern Bush'] = new DungeonTown(
+    'Pattern Bush',
+    GameConstants.Region.hoenn,
+    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)]
+);
+TownList['Altering Cave'] = new DungeonTown(
+    'Altering Cave',
+    GameConstants.Region.hoenn,
+    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)]
+);
+TownList['Tanoby Ruins'] = new DungeonTown(
+    'Tanoby Ruins',
+    GameConstants.Region.hoenn,
+    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)]
+);
+
 
 //Sinnoh Shops
 const SandgemTownShop = new Shop([

@@ -7,7 +7,7 @@ class RoamingPokemonList {
     public static roamerGroups = [
         [[GameConstants.KantoSubRegions.Kanto], [GameConstants.KantoSubRegions.Sevii123]],
         [[GameConstants.JohtoSubRegions.Johto]],
-        [[GameConstants.HoennSubRegions.Hoenn]],
+        [[GameConstants.HoennSubRegions.Hoenn], [GameConstants.HoennSubRegions.Sevii4567]],
         [[GameConstants.SinnohSubRegions.Sinnoh]],
         [[GameConstants.UnovaSubRegions.Unova]],
         [[GameConstants.KalosSubRegions.Kalos]],

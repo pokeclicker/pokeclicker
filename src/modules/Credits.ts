@@ -284,6 +284,8 @@ export const SpriteCredits: Credit[] = [
         name: 'NiCeDiCe',
         link: 'https://github.com/NiCeDiCe90',
         resources: [
+            'Crystal Onix',
+            'Pinkan Rhyhorn',
             'Red Spearow',
             'shiny Totem Ribombee',
             'Weather Institute world sprite',
@@ -348,6 +350,16 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Pokémon background',
         ],
+    },
+    {
+        name: 'Someone Soul',
+        link: 'https://discordapp.com/users/824384977633411082/',
+        resources: [
+            'Valencian Butterfree',
+            'Valencian Vileplume',
+            'Valencian Weepinbell',
+        ],
+        // NOTES: Made specifically for Pokeclicker.
     },
     {
         name: 'Smogon Sprite Project',

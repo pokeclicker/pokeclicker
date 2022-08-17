@@ -1035,6 +1035,11 @@ export const HoennDungeons = [
     'Cave of Origin',
     'Sky Pillar',
     'Victory Road Hoenn',
+    'Icefall Cave',
+    'Lost Cave',
+    'Pattern Bush',
+    'Altering Cave',
+    'Tanoby Ruins',
     // These aren't implemented anywhere yet
     /*
     "Island Cave",
@@ -1452,6 +1457,7 @@ export enum JohtoSubRegions {
 
 export enum HoennSubRegions {
     Hoenn = 0,
+    Sevii4567,
 }
 
 export enum SinnohSubRegions {

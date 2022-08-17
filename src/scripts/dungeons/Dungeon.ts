@@ -3018,6 +3018,79 @@ dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
     ],
     37000, 101);
 
+dungeonList['Icefall Cave'] = new Dungeon('Icefall Cave',
+    ['Zubat', 'Golbat', 'Seel', 'Psyduck', 'Slowpoke', 'Swinub', 'Delibird', 'Sneasel', 'Wooper', 'Marill', 'Magikarp', 'Poliwag', 'Goldeen', 'Poliwhirl', 'Tentacool', 'Tentacruel', 'Horsea', 'Krabby', 'Shellder', 'Staryu', 'Seadra', 'Kingler'],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+    },
+    500000,
+    [
+        new DungeonBossPokemon('Dewgong', 4500000, 20),
+        new DungeonBossPokemon('Gyarados', 4500000, 20),
+        new DungeonBossPokemon('Lapras', 4500000, 20),
+    ],
+    36000, 101);
+
+dungeonList['Lost Cave'] = new Dungeon('Lost Cave',
+    ['Gastly', 'Zubat', 'Golbat', 'Murkrow', 'Misdreavus'],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+    },
+    500000,
+    [
+        new DungeonBossPokemon('Haunter', 4500000, 20),
+    ],
+    36000, 101);
+
+dungeonList['Pattern Bush'] = new Dungeon('Pattern Bush',
+    ['Spinarak', 'Ledyba', 'Caterpie', 'Weedle', 'Metapod', 'Kakuna'],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+    },
+    500000,
+    [
+        new DungeonBossPokemon('Heracross', 4500000, 20),
+    ],
+    36000, 101);
+
+dungeonList['Altering Cave'] = new Dungeon('Altering Cave',
+    ['Zubat', 'Mareep', 'Pineco', 'Houndour', 'Teddiursa', 'Aipom', 'Shuckle'],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+    },
+    500000,
+    [
+        new DungeonBossPokemon('Stantler', 4500000, 20),
+        new DungeonBossPokemon('Smeargle', 4500000, 20),
+    ],
+    36000, 101);
+
+dungeonList['Tanoby Ruins'] = new Dungeon('Tanoby Ruins',
+    ['Tentacool', 'Tentacruel', 'Mantine', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Psyduck', 'Kingler'],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+    },
+    500000,
+    [
+        new DungeonBossPokemon('Unown (?)', 4500000, 20),
+        new DungeonBossPokemon('Unown (!)', 4500000, 20),
+    ],
+    36000, 101);
 // Sinnoh
 
 dungeonList['Oreburgh Gate'] = new Dungeon('Oreburgh Gate',
