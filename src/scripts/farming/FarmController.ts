@@ -5,6 +5,7 @@ class FarmController {
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static berryListFiltered: KnockoutObservableArray<BerryType> = ko.observableArray([]);
     public static numberOfTabs: KnockoutComputed<number>;
+    public static farmingModalTabSelected: KnockoutObservable<string> = ko.observable('berryFarmView');
 
     public static berryListEnd: KnockoutComputed<number>;
 

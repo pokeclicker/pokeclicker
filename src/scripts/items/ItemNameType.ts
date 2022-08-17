@@ -145,8 +145,6 @@ type ItemNameType
     | 'Furfrou (Star)'
     | 'Type: Null'
     | 'Poipole'
-    | 'Eternatus'
-    | 'Toxel'
     | 'Berry_Shovel'
     | 'Mulch_Shovel'
     | 'RareCandy'

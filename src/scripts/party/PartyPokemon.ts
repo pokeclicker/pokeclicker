@@ -29,7 +29,7 @@ class PartyPokemon implements Saveable {
         shiny: false,
         category: 0,
         levelEvolutionTriggered: false,
-        pokerus: GameConstants.Pokerus.None,
+        pokerus: GameConstants.Pokerus.Uninfected,
         effortPoints: 0,
     };
 
@@ -59,7 +59,7 @@ class PartyPokemon implements Saveable {
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
         this._category = ko.observable(0).extend({ numeric: 0 });
-        this._pokerus = ko.observable(GameConstants.Pokerus.None).extend({ numeric: 0 });
+        this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
         this.evs = ko.pureComputed(() => {
             const power = App.game.challenges.list.slowEVs.active() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
@@ -113,7 +113,7 @@ class PartyPokemon implements Saveable {
         const eggTypes = this.calculatePokerusTypes();
         return App.game.breeding.eggList.forEach(p => {
             const pokemon = p().partyPokemon();
-            if (pokemon && pokemon.pokerus == GameConstants.Pokerus.None) {
+            if (pokemon && pokemon.pokerus == GameConstants.Pokerus.Uninfected) {
                 const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
                 if (eggTypes.has(dataPokemon.type1) || eggTypes.has(dataPokemon.type2)) {
                     pokemon.pokerus = GameConstants.Pokerus.Infected;

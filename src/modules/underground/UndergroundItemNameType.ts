@@ -53,6 +53,10 @@ type UndergroundItemNameType
     | 'Plume Fossil'
     | 'Jaw Fossil'
     | 'Sail Fossil'
+    | 'Fossilized Bird'
+    | 'Fossilized Fish'
+    | 'Fossilized Drake'
+    | 'Fossilized Dino'
     | 'Fire Stone'
     | 'Water Stone'
     | 'Thunder Stone'
@@ -75,6 +79,8 @@ type UndergroundItemNameType
     | 'Lime Shard'
     | 'White Shard'
     | 'Pink Shard'
-    | 'Cyan Shard';
+    | 'Cyan Shard'
+    | 'Rose Shard'
+    | 'Brown Shard';
 
 export default UndergroundItemNameType;
