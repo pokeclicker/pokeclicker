@@ -3043,9 +3043,7 @@ dungeonList['Lost Cave'] = new Dungeon('Lost Cave',
         ],
     },
     500000,
-    [
-        new DungeonBossPokemon('Haunter', 4500000, 20),
-    ],
+    [new DungeonBossPokemon('Haunter', 4500000, 20)],
     36000, 101);
 
 dungeonList['Pattern Bush'] = new Dungeon('Pattern Bush',
@@ -3057,9 +3055,7 @@ dungeonList['Pattern Bush'] = new Dungeon('Pattern Bush',
         ],
     },
     500000,
-    [
-        new DungeonBossPokemon('Heracross', 4500000, 20),
-    ],
+    [new DungeonBossPokemon('Heracross', 4500000, 20)],
     36000, 101);
 
 dungeonList['Altering Cave'] = new Dungeon('Altering Cave',
