@@ -63,6 +63,11 @@ class PartyPokemon implements Saveable {
             const power = App.game.challenges.list.slowEVs.active() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
             return Math.floor(this.effortPoints / GameConstants.EP_EV_RATIO / power);
         });
+        this.evs.subscribe((newValue) => {
+            if (this.pokerus && this.pokerus < GameConstants.Pokerus.Resistant && newValue >= 50) {
+                this.pokerus = GameConstants.Pokerus.Resistant;
+            }
+        });
         this._attack = ko.pureComputed(() => this.calculateAttack());
     }
 
