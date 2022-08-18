@@ -1412,12 +1412,12 @@ TownList['Six Island'] = new Town(
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
     }
 );
-TownList['Valencia Pokecenter'] = new Town(
-    'Valencia Pokecenter',
+TownList['Valencia Pokémon Center'] = new Town(
+    'Valencia Pokémon Center',
     GameConstants.Region.hoenn,
     [],
     {
-        requirements: [],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
     }
 );
 
