@@ -155,7 +155,9 @@ const PalletProfOak = new ProfNPC('Prof. Oak',
     GameConstants.Region.kanto,
     'Congratulations on completing your Kanto Pokédex!',
     'Your journey isn\'t over yet, a whole world awaits you! Onwards to Johto!',
-    'assets/images/oak.png');
+    'assets/images/oak.png',
+    // Make sure Oak isn't cloned while in the Celebi questline.
+    new OneFromManyRequirement([new QuestLineStartedRequirement('Unfinished Business', GameConstants.AchievementOption.less), new QuestLineStepCompletedRequirement('Unfinished Business', 2), new QuestLineCompletedRequirement('Unfinished Business')]));
 
 const PalletMom1 = new NPC('Mom', [
     'So you\'re really leaving on your very own Pokémon journey. I\'m so proud of you. Let me give you some words of wisdom for your travels.',
@@ -329,7 +331,7 @@ TownList['Pallet Town'] = new Town(
     GameConstants.Region.kanto,
     [new BulletinBoard(GameConstants.BulletinBoards.Kanto)],
     {
-        npcs: [PalletProfOak, PalletMom1, PalletMom2, PalletCelebiProfOak1, PalletCelebiProfOak2],
+        npcs: [PalletProfOak, PalletCelebiProfOak1, PalletCelebiProfOak2, PalletMom1, PalletMom2],
     }
 );
 TownList['Viridian City'] = new Town(
@@ -753,14 +755,14 @@ const AzaleaCelebiOak3 = new NPC('Prof. Oak', [
     'So Giovanni was there at the Falls while you were dealing with that mess at the Radio Tower? If only we had known, we could have had him arrested right then and there.',
     'The Time Distortion seems to have cleared up. Celebi should be happy now. You should go check out the Shrine again.',
 ],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 10), new QuestLineStepCompletedRequirement('Unfinished Business', 12, GameConstants.AchievementOption.less )]) });
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 10), new QuestLineStepCompletedRequirement('Unfinished Business', 13, GameConstants.AchievementOption.less )]) });
 
 const AzaleaCelebiOak4 = new NPC('Prof. Oak', [
     'I\'m glad Celebi has been released from that wretched prison and has found a home with a great young trainer like yourself. I\'m going back to Kanto.',
     '...',
     'Goodbye Celebi.',
 ],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 12), new QuestLineCompletedRequirement('Unfinished Business', GameConstants.AchievementOption.less)]) });
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 13), new QuestLineCompletedRequirement('Unfinished Business', GameConstants.AchievementOption.less)]) });
 
 const IlexForestShrine1 = new NPC('Investigate the Shrine', [
     '<i>Something strange is going on here. The air seems to curve around itself. You feel like you\'re here, but also not here at the same time.</i>',
