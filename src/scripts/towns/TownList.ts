@@ -499,7 +499,7 @@ TownList['Client Island'] = new Town(
     GameConstants.Region.kanto,
     [ClientIslandShop],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Volcano)],
+        requirements: [new ClientRequirement(), new GymBadgeRequirement(BadgeEnums.Volcano)],
     }
 );
 
