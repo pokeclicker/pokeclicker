@@ -151,6 +151,11 @@ class PokedexHelper {
                 return false;
             }
 
+            // Only pokemon uninfected by pokerus || None
+            if (filter['status-pokerus'] != -1 && filter['status-pokerus'] != App.game.party.getPokemon(pokemon.id)?.pokerus) {
+                return false;
+            }
+
             return true;
         });
     }
@@ -162,6 +167,7 @@ class PokedexHelper {
         res.type2 = $('#pokedex-filter-type2').val();
         res.region = $('#pokedex-filter-region').val();
         res['caught-shiny'] = $('#pokedex-filter-shiny-caught').val();
+        res['status-pokerus'] = $('#pokedex-filter-pokerus-status').val();
         res['held-item'] = $('#pokedex-filter-held-item').is(':checked');
         res['hide-alternate'] = $('#pokedex-filter-hide-alternate').is(':checked');
         return res;

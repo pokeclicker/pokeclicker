@@ -6640,7 +6640,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 147,
         'catchRate': 90,
-        'evolutions': [new LevelEvolution('Galarian Linoone', 'Obstagoon', 35)],
+        'evolutions': [new NightTimedLevelEvolution('Galarian Linoone', 'Obstagoon', 35)],
         'base': {
             'hitpoints': 78,
             'attack': 70,

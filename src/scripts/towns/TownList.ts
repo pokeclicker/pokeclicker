@@ -763,14 +763,14 @@ const AzaleaCelebiOak4 = new NPC('Prof. Oak', [
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 12), new QuestLineCompletedRequirement('Unfinished Business', GameConstants.AchievementOption.less)]) });
 
 const IlexForestShrine1 = new NPC('Investigate the Shrine', [
-    '<span style="font-style: italic">Something strange is going on here. The air seems to curve around itself. You feel like you\'re here, but also not here at the same time.</span>',
-    '<span style="font-style: italic">No sign of Celebi, but you do see a strange looking Pichu approaching.</span>',
+    '<i>Something strange is going on here. The air seems to curve around itself. You feel like you\'re here, but also not here at the same time.</i>',
+    '<i>No sign of Celebi, but you do see a strange looking Pichu approaching.</i>',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 5), new QuestLineStepCompletedRequirement('Unfinished Business', 7, GameConstants.AchievementOption.less )]) });
 
 const IlexForestShrine2 = new NPC('Investigate the Shrine', [
-    '<span style="font-style: italic">Everything is normal.</span>',
-    '<span style="font-style: italic">Celebi is here! It seems to want to play with you, but every time you approach it backs off. It\'s luring you deeper into the forest!</span>',
+    '<i>Everything is normal.</i>',
+    '<i>Celebi is here! It seems to want to play with you, but every time you approach it backs off. It\'s luring you deeper into the forest!</i>',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 11), new QuestLineStepCompletedRequirement('Unfinished Business', 13, GameConstants.AchievementOption.less )]) });
 
@@ -817,8 +817,8 @@ const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
 ], GameConstants.Region.johto, RoamingPokemonList.findGroup(GameConstants.Region.johto, GameConstants.JohtoSubRegions.Johto));
 
 const TohjoFallsCelebiTimeDistortion = new NPC('Investigate the Time Distortion', [
-    '<span style="font-style: italic">You are experiencing that same feeling again. Like you\'re not really here.</span>',
-    '<span style="font-style: italic">A man sits in the back of the cave. He is listening to a portable radio.</span>',
+    '<i>You are experiencing that same feeling again. Like you\'re not really here.</i>',
+    '<i>A man sits in the back of the cave. He is listening to a portable radio.</i>',
     '...I don\'t know why you have come here. Anyway, I have to warn you that this is not a place for kids like you.',
     'You have a certain look... You\'re the kid who stood in front of me in Viridian City! I\'m on my way to Goldenrod City to answer the call and join my team. Are you going to get in my way?',
 ],
