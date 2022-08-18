@@ -491,6 +491,38 @@ TownList['Professor Ivy\'s Lab'] = new Town(
         npcs: [CelebiProfIvy],
     }
 );
+TownList['Four Island'] = new Town(
+    'Four Island',
+    GameConstants.Region.kanto,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    }
+);
+TownList['Five Island'] = new Town(
+    'Five Island',
+    GameConstants.Region.kanto,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    }
+);
+TownList['Six Island'] = new Town(
+    'Six Island',
+    GameConstants.Region.kanto,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    }
+);
+TownList['Valencia Pokémon Center'] = new Town(
+    'Valencia Pokémon Center',
+    GameConstants.Region.kanto,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    }
+);
 
 //Kanto Dungeons
 TownList['Viridian Forest'] = new DungeonTown(
@@ -577,6 +609,31 @@ TownList['Cerulean Cave'] = new DungeonTown(
     'Cerulean Cave',
     GameConstants.Region.kanto,
     [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)]
+);
+TownList['Icefall Cave'] = new DungeonTown(
+    'Icefall Cave',
+    GameConstants.Region.kanto,
+    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)]
+);
+TownList['Lost Cave'] = new DungeonTown(
+    'Lost Cave',
+    GameConstants.Region.kanto,
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 33)]
+);
+TownList['Pattern Bush'] = new DungeonTown(
+    'Pattern Bush',
+    GameConstants.Region.kanto,
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 34)]
+);
+TownList['Altering Cave'] = new DungeonTown(
+    'Altering Cave',
+    GameConstants.Region.kanto,
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 36)]
+);
+TownList['Tanoby Ruins'] = new DungeonTown(
+    'Tanoby Ruins',
+    GameConstants.Region.kanto,
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 39)]
 );
 
 //Johto Shops
@@ -1388,38 +1445,6 @@ TownList['Pokémon League Hoenn'] = new Town(
         ],
     }
 );
-TownList['Four Island'] = new Town(
-    'Four Island',
-    GameConstants.Region.hoenn,
-    [],
-    {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
-    }
-);
-TownList['Five Island'] = new Town(
-    'Five Island',
-    GameConstants.Region.hoenn,
-    [],
-    {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
-    }
-);
-TownList['Six Island'] = new Town(
-    'Six Island',
-    GameConstants.Region.hoenn,
-    [],
-    {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
-    }
-);
-TownList['Valencia Pokémon Center'] = new Town(
-    'Valencia Pokémon Center',
-    GameConstants.Region.hoenn,
-    [],
-    {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
-    }
-);
 
 //Hoenn Dungeons
 TownList['Petalburg Woods'] = new DungeonTown(
@@ -1526,31 +1551,6 @@ TownList['Sealed Chamber'] = new DungeonTown(
         new RouteKillRequirement(10, GameConstants.Region.hoenn, 134),
         new GymBadgeRequirement(BadgeEnums.Mind),
     ]
-);
-TownList['Icefall Cave'] = new DungeonTown(
-    'Icefall Cave',
-    GameConstants.Region.hoenn,
-    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)]
-);
-TownList['Lost Cave'] = new DungeonTown(
-    'Lost Cave',
-    GameConstants.Region.hoenn,
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 138)]
-);
-TownList['Pattern Bush'] = new DungeonTown(
-    'Pattern Bush',
-    GameConstants.Region.hoenn,
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 139)]
-);
-TownList['Altering Cave'] = new DungeonTown(
-    'Altering Cave',
-    GameConstants.Region.hoenn,
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 141)]
-);
-TownList['Tanoby Ruins'] = new DungeonTown(
-    'Tanoby Ruins',
-    GameConstants.Region.hoenn,
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 144)]
 );
 
 

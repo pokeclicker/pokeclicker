@@ -883,46 +883,4 @@
          , image: "assets/images/map/ashketchumoverworld.png"
          })
      %>
-
-
-     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.hoenn, 'Sevii Islands 4567').id">
-        <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/hoenn-sevii4567.png?v=$VERSION',
-            href:'assets/images/hoenn-sevii4567.png?v=$VERSION'
-        }"></image>
-
-        <!-- ------ -->
-        <!-- ROUTES -->
-        <!-- ------ -->
-
-        <!--Valencia Island-->
-        <%- include('templates/mapRoute',
-            { route: 145, region: 2
-            , width: 2, height: 6
-            , x: 3, y: 7
-            , name: "VaI"
-            })
-        %>
-        <!--Valencia Island extension-->
-        <%- include('templates/mapRoute',
-        { route: 145, region: 2
-            , width: 2, height: 3
-            , x: 4, y: 6
-            , noText: true
-            })
-        %>
-
-        <!-- ----- -->
-        <!-- TOWNS -->
-        <!-- ----- -->
-
-        <!--Valencia Pokecenter-->
-        <%- include('templates/mapTown',
-            { name: "Valencia Pokecenter"
-            , x: 3, y: 2
-            , width: 4, height: 4
-            })
-        %>
-    </g>
-
 </g>

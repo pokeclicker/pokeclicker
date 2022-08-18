@@ -565,13 +565,13 @@ namespace GameConstants {
     declare enum KantoSubRegions {
         Kanto,
         Sevii123,
+        Sevii4567,
     }
     declare enum JohtoSubRegions {
         Johto,
     }
     declare enum HoennSubRegions {
         Hoenn,
-        Sevii4567,
     }
     declare enum SinnohSubRegions {
         Sinnoh,

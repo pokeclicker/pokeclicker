@@ -995,6 +995,11 @@ export const KantoDungeons = [
     'Berry Forest',
     'Victory Road',
     'Cerulean Cave',
+    'Icefall Cave',
+    'Lost Cave',
+    'Pattern Bush',
+    'Altering Cave',
+    'Tanoby Ruins',
 ];
 
 export const JohtoDungeons = [
@@ -1035,11 +1040,6 @@ export const HoennDungeons = [
     'Cave of Origin',
     'Sky Pillar',
     'Victory Road Hoenn',
-    'Icefall Cave',
-    'Lost Cave',
-    'Pattern Bush',
-    'Altering Cave',
-    'Tanoby Ruins',
     // These aren't implemented anywhere yet
     /*
     "Island Cave",
@@ -1449,6 +1449,7 @@ export enum Pokerus {
 export enum KantoSubRegions {
     Kanto = 0,
     Sevii123,
+    Sevii4567,
 }
 
 export enum JohtoSubRegions {
@@ -1457,7 +1458,6 @@ export enum JohtoSubRegions {
 
 export enum HoennSubRegions {
     Hoenn = 0,
-    Sevii4567,
 }
 
 export enum SinnohSubRegions {
