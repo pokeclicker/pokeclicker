@@ -1016,6 +1016,18 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.HoennSubRegions.Sevii4567
 ));
+Routes.add(new RegionRoute(
+    'Valencia Island', GameConstants.Region.hoenn, 145,
+    new RoutePokemon({
+        land: ['Valencian Butterfree', 'Valencian Raticate', 'Valencian Vileplume', 'Valencian Paras', 'Valencian Weepinbell', 'Nidoran(M)', 'Nidoran(F)', 'Nidorina'],
+        water: ['Gyarados', 'Cloyster', 'Poliwhirl'],
+    }),
+    [],
+    undefined,
+    GameConstants.HoennSubRegions.Sevii4567,
+    true,
+    900000
+));
 
 /*
 SINNOH
