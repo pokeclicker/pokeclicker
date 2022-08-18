@@ -23,11 +23,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
        </div>
        <div class="modal-body p-0">
            <ul class="nav nav-tabs nav-fill">
-                <li class="nav-item"><a class="nav-link active" href="#breeding-pokemon" data-toggle="tab">Pokémon</a></li>
-                <li class="nav-item"><a class="nav-link" href="#breeding-eggs" data-toggle="tab">Eggs</a></li>
-                <li class="nav-item"><a class="nav-link" href="#breeding-fossils" data-toggle="tab">Fossils</a></li>
-                <li class="nav-item" data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()"><a class="nav-link" href="#breeding-helpers" data-toggle="tab">Helpers (BETA)</a></li>
-                <li class="nav-item"><a class="nav-link" href="#breeding-help" data-toggle="tab">Help</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#breeding-pokemon" data-toggle="tab" onclick="$('#breeding-fireall').hide()">Pokémon</a></li>
+                <li class="nav-item"><a class="nav-link" href="#breeding-eggs" data-toggle="tab" onclick="$('#breeding-fireall').hide()">Eggs</a></li>
+                <li class="nav-item"><a class="nav-link" href="#breeding-fossils" data-toggle="tab" onclick="$('#breeding-fireall').hide()">Fossils</a></li>
+                <li class="nav-item" data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()" onclick="$('#breeding-fireall').show()"><a class="nav-link" href="#breeding-helpers" data-toggle="tab">Helpers (BETA)</a></li>
+                <li class="nav-item"><a class="nav-link" href="#breeding-help" data-toggle="tab" onclick="$('#breeding-fireall').hide()">Help</a></li>
             </ul>
 
             <p class="bg-warning my-0" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
@@ -145,8 +145,8 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                 <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
                                 <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 1px;top: -2px;height: 24px">✨</div>
-                                <div data-bind="visible: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top:10px;">
-                                    <img width="30px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id).pokerus]}.png`}"/>
+                                <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top:10px;">
+                                    <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id).pokerus]}.png`}"/>
                                 </div>
                                 <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
                                 <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
@@ -155,7 +155,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <button data-toggle="dropdown" data-bind="class: `category-${$data.category + 1}`"></button>
                                     <div class="dropdown-menu p-0">
                                         <!-- ko foreach: PokemonCategories.categories -->
-                                        <a class="dropdown-item category" href="#" data-bind="text: $data.name, click: () => { $parent.category = $index() }">Category</a>
+                                        <a class="dropdown-item category" href="#" data-bind="text: $data.name, style: { background: $data.color }, click: () => { $parent.category = $index() }">Category</a>
                                         <!-- /ko -->
                                         <a class="dropdown-item bg-dark py-1" href="#categoryModal" data-toggle="modal"><i>Edit</i></a>
                                     </div>
@@ -351,6 +351,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     html: true,
                 }">
             </knockout>
+		   <button id="breeding-fireall" type="button" class="btn btn-danger" data-bind="attr : {disabled : !App.game.breeding.hatcheryHelpers.hired().length}, click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})}" style="display : none;">Fire All</button>
            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
        </div>
    </div>

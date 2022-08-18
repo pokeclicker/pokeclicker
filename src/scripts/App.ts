@@ -8,6 +8,9 @@ class App {
     static readonly isUsingClient = typeof navigator === 'object' && typeof navigator.userAgent === 'string' && navigator.userAgent.indexOf('Electron') >= 0;
 
     static start() {
+        // Hide tooltips that stay on game load
+        $('.tooltip').tooltip('hide');
+
         if (!App.debug) {
             Object.freeze(GameConstants);
         }

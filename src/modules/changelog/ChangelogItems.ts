@@ -10,6 +10,67 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.11
+    new ChangelogUpdate('v0.9.11', new Date(2022, 7, 18)),
+    new Changelog(changelogType.NEW, 'Celebi questline'),
+    new Changelog(changelogType.NEW, 'Added ability to lock plots in the farm'),
+    new Changelog(changelogType.NEW, 'Bulletin Board, With misc quests available'),
+    new Changelog(changelogType.CHANGE, 'More Battle Frontier rewards'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc NPC changes'),
+    new Changelog(changelogType.FIXED, 'Pokérus status not visually updating in the hatchery'),
+    new Changelog(changelogType.FIXED, 'Multi quest progression'),
+
+    // v0.9.10
+    new ChangelogUpdate('v0.9.10', new Date(2022, 7, 3)),
+    new Changelog(changelogType.NEW, 'Added Furfrou (star)'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc NPC changes'),
+    new Changelog(changelogType.FIXED, 'Underground survey now shows shards'),
+    new Changelog(changelogType.FIXED, 'Correct amount of Chest/Enemies shown in Dungeon'),
+    new Changelog(changelogType.FIXED, 'Dungeon loot requirements'),
+
+    // v0.9.9
+    new ChangelogUpdate('v0.9.9', new Date(2022, 6, 22)),
+    new Changelog(changelogType.FIXED, 'Hatching new Pokémon causing errors'),
+    new Changelog(changelogType.FIXED, 'Pokémon gaining Pokérus and EVs early'),
+
+    // v0.9.8
+    new ChangelogUpdate('v0.9.8', new Date(2022, 6, 22)),
+    new Changelog(changelogType.NEW, 'Ability to name Oak item loadouts'),
+    new Changelog(changelogType.NEW, 'Shards now appear in Underground'),
+    new Changelog(changelogType.NEW, 'Shard traders'),
+    new Changelog(changelogType.NEW, 'New one time battles'),
+    new Changelog(changelogType.NEW, 'More questlines'),
+    new Changelog(changelogType.NEW, 'First 3 Sevii islands'),
+    new Changelog(changelogType.NEW, 'Freeze mulch added to Farm'),
+    new Changelog(changelogType.NEW, 'Rowap berry now affects EVs gained'),
+    new Changelog(changelogType.NEW, 'More methods to gain EVs'),
+    new Changelog(changelogType.NEW, 'More sounds'),
+    new Changelog(changelogType.CHANGE, 'Pokérus can now spread between Pokémon sharing a type'),
+    new Changelog(changelogType.CHANGE, 'Updated current location to use player sprite'),
+    new Changelog(changelogType.CHANGE, 'Updated default quest location color'),
+    new Changelog(changelogType.CHANGE, 'More notification options'),
+    new Changelog(changelogType.CHANGE, 'Unlock extra quest slots 5 levels earlier'),
+    new Changelog(changelogType.CHANGE, 'Trade stone is now Linking cord'),
+    new Changelog(changelogType.CHANGE, 'More filters and sorting options added'),
+    new Changelog(changelogType.CHANGE, 'Updated Tutorial quests'),
+    new Changelog(changelogType.CHANGE, 'Baby Pokémon can now be obtained by breeding any evolution in the line'),
+    new Changelog(changelogType.CHANGE, 'Display chests and Pokémon remaining in dungeon'),
+    new Changelog(changelogType.CHANGE, 'Some Sinnoh and Alola stones added to Underground'),
+    new Changelog(changelogType.CHANGE, 'Adjusted loot found in dungeon chests'),
+    new Changelog(changelogType.CHANGE, 'Updated some Pokémon evolution methods'),
+    new Changelog(changelogType.CHANGE, 'Setting for wider game UI'),
+    new Changelog(changelogType.CHANGE, 'Updated some sprites'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.FIXED, 'Withered berries statistics not increasing correctly'),
+    new Changelog(changelogType.FIXED, 'Some dungeons rewarding fighting eggs every time they were completed'),
+    new Changelog(changelogType.FIXED, 'Unable to use some battle items on mobile'),
+    new Changelog(changelogType.FIXED, 'Missing town images'),
+
     // v0.9.7
     new ChangelogUpdate('v0.9.7', new Date(2022, 5, 28)),
     new Changelog(changelogType.NEW, 'Added Fighting Dojo to Saffron City'),

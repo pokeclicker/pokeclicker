@@ -104,6 +104,9 @@ import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
+import UndergroundItemValueType from './enums/UndergroundItemValueType';
+import UndergroundItem from './underground/UndergroundItem';
+import UndergroundItems from './underground/UndergroundItems';
 import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
 import WeatherRequirement from './requirements/WeatherRequirement';
 import { SortModules, SortSaves } from './Sortable';
@@ -114,6 +117,7 @@ import Achievement from './achievements/Achievement';
 import Gems from './gems/Gems';
 import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequirement';
 import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompletedRequirement';
+import QuestLineStartedRequirement from './requirements/QuestLineStartedRequirement';
 import TemporaryBattleRequirement from './requirements/TemporaryBattleRequirement';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
@@ -227,6 +231,9 @@ Object.assign(<any>window, {
     SubregionRequirement,
     TokenRequirement,
     UndergroundItemsFoundRequirement,
+    UndergroundItemValueType,
+    UndergroundItem,
+    UndergroundItems,
     UndergroundLayersMinedRequirement,
     WeatherRequirement,
     SortModules,
@@ -238,6 +245,7 @@ Object.assign(<any>window, {
     Gems,
     QuestLineCompletedRequirement,
     QuestLineStepCompletedRequirement,
+    QuestLineStartedRequirement,
     TemporaryBattleRequirement,
     DayOfWeekRequirement,
     SaveReminder,

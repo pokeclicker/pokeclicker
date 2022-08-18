@@ -193,7 +193,7 @@ class PokemonHelper {
                 }
             }
             // Dungeon Chest
-            dungeon.itemList.forEach(i => {
+            Object.values(dungeon.lootTable).flat().forEach(i => {
                 if (i.loot == pokemonName) {
                     const data = {
                         dungeon: dungeonName,

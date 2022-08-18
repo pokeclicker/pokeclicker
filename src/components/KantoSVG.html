@@ -312,7 +312,7 @@
             , width: 1, height: 3
             , isExtension: true
             })
-        %>	  
+        %>
 
         <!--Pewter City-->
         <%- include('templates/mapTown',
@@ -328,7 +328,7 @@
             , width: 7, height: 3
             , isExtension: true
             })
-        %>	 
+        %>
 
         <!--Cerulean City-->
         <%- include('templates/mapTown',
@@ -350,7 +350,7 @@
         <%- include('templates/mapTown',
             { name: "Lavender Town"
             , x: 85, y: 19
-            , width: 4, height: 5		 
+            , width: 4, height: 5
             })
         %>
 
@@ -424,7 +424,7 @@
             , width: 8, height: 1
             , isExtension: true
             })
-        %>	 
+        %>
         <!--Cinnabar Island extension-->
         <%- include('templates/mapTown',
             { name: "Cinnabar Island"
@@ -432,8 +432,8 @@
             , width: 7, height: 3
             , isExtension: true
             })
-        %>	 	 
-	 
+        %>
+
         <!--Indigo Plateau Kanto-->
         <%- include('templates/mapTown',
             { name: "Indigo Plateau Kanto"
@@ -670,6 +670,16 @@
             , image: "assets/images/map/professor_oak.png"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Ash Ketchum"
+            , x: 18, y: 33
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Ash Ketchum Kanto'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Ash Ketchum Kanto'] && TemporaryBattleList['Ash Ketchum Kanto'].isVisible()"
+            , image: "assets/images/map/ashketchumoverworld.png"
+            })
+        %>
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
@@ -706,7 +716,7 @@
         <%- include('templates/mapRoute',
             { route: 28, region: 0
             , width: 4, height: 3
-            , x: 47, y: 27
+            , x: 41, y: 29
             , name: "C.B."
             , rotate: true
             })
@@ -716,7 +726,7 @@
         <%- include('templates/mapRoute',
             { route: 29, region: 0
             , width: 12, height: 3
-            , x: 73, y: 41
+            , x: 64, y: 43
             , name: "B.B."
             })
         %>
@@ -736,7 +746,7 @@
         <!--Mt. Ember-->
         <%- include('templates/mapTown',
             { name: "Mt. Ember"
-            , x: 9, y: 1		
+            , x: 9, y: 1
             , width: 7, height: 6
             })
         %>
@@ -744,7 +754,7 @@
         <!--Two Island-->
         <%- include('templates/mapTown',
             { name: "Two Island"
-            , x: 46, y: 31
+            , x: 40, y: 33
             , width: 4, height: 4
             })
         %>
@@ -752,10 +762,27 @@
         <!--Three Island-->
         <%- include('templates/mapTown',
             { name: "Three Island"
-            , x: 85, y: 41
+            , x: 76, y: 43
             , width: 4, height: 4
             })
         %>
+
+        <!--Professor Ivy's Lab-->
+        <%- include('templates/mapTown',
+            { name: "Professor Ivy\'s Lab"
+            , x: 95, y: 32.5
+            , width: 4, height: 3.5
+            })
+        %>
+        <!--Professor Ivy's Lab extension-->
+        <%- include('templates/mapTown',
+            { name: "Professor Ivy\'s Lab"
+            , x: 97.3, y: 36
+            , width: 1.5, height: 0.4
+            , isExtension: true
+            })
+        %>
+
 
         <!--Client Island-->
         <%- include('templates/mapOverlay',
@@ -815,17 +842,26 @@
         <!-- DUNGEONS -->
         <!-- -------- -->
 
+        <!--Mt. Ember Summit-->
+        <%- include('templates/mapDungeon',
+            { name: "Mt. Ember Summit"
+            , x: 9, y: 1
+            , width: 7, height: 6
+            ,invisible: true
+            })
+        %>
+
         <!--Berry Forest-->
         <%- include('templates/mapDungeon',
             { name: "Berry Forest"
-            , x: 65, y: 39		
+            , x: 56, y: 41
             , width: 8, height: 5
             })
         %>
         <!--Berry Forest extension-->
         <%- include('templates/mapDungeon',
             { name: "Berry Forest"
-            , x: 64, y: 39		
+            , x: 55, y: 41
             , width: 1, height: 3
             , isExtension: true
             })
@@ -833,7 +869,7 @@
         <!--Berry Forest extension-->
         <%- include('templates/mapDungeon',
             { name: "Berry Forest"
-            , x: 65, y: 38		
+            , x: 56, y: 40
             , width: 7, height: 1
             , isExtension: true
             })
