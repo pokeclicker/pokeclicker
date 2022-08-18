@@ -148,6 +148,9 @@ const ThreeIslandShop = new Shop([
     ItemList.Ultraball,
     ItemList.Token_collector,
 ]);
+const ClientIslandShop = new Shop([
+    ItemList['Charity Chansey'],
+]);
 
 // Kanto NPCs
 
@@ -482,7 +485,6 @@ TownList['Three Island'] = new Town(
         npcs: [ThreeIslandBiker],
     }
 );
-
 TownList['Professor Ivy\'s Lab'] = new Town(
     'Professor Ivy\'s Lab',
     GameConstants.Region.kanto,
@@ -492,11 +494,10 @@ TownList['Professor Ivy\'s Lab'] = new Town(
         npcs: [CelebiProfIvy],
     }
 );
-
 TownList['Client Island'] = new Town(
     'Client Island',
     GameConstants.Region.kanto,
-    [],
+    [ClientIslandShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Volcano)],
     }

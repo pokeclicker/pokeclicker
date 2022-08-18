@@ -41,14 +41,15 @@ class PokemonItem extends CaughtIndicatingItem {
 ItemList.Eevee                = new PokemonItem('Eevee', 4000);
 ItemList.Porygon              = new PokemonItem('Porygon', 2000);
 ItemList.Jynx                 = new PokemonItem('Jynx', 2000);
-ItemList['Mr. Mime']             = new PokemonItem('Mr. Mime', 1000);
+ItemList['Mr. Mime']          = new PokemonItem('Mr. Mime', 1000);
 ItemList.Lickitung            = new PokemonItem('Lickitung', 1000);
 ItemList.Magikarp             = new PokemonItem('Magikarp', 50000, Currency.money);
+ItemList['Charity Chansey']   = new PokemonItem('Charity Chansey', 10000);
 ItemList.Togepi               = new PokemonItem('Togepi', 15000);
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
 ItemList.Skorupi              = new PokemonItem('Skorupi', 6750);
 ItemList.Combee               = new PokemonItem('Combee', 6750);
-ItemList['Burmy (Plant)']        = new PokemonItem('Burmy (Plant)', 6750);
+ItemList['Burmy (Plant)']     = new PokemonItem('Burmy (Plant)', 6750);
 ItemList.Cherubi              = new PokemonItem('Cherubi', 6750);
 ItemList.Spiritomb            = new PokemonItem('Spiritomb', 6750);
 ItemList.Zorua                = new PokemonItem('Zorua', 50625);
