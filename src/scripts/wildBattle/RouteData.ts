@@ -463,6 +463,7 @@ Routes.add(new RegionRoute(
     GameConstants.KantoSubRegions.Sevii4567,
     true,
     900000
+));
 
 /*
 JOHTO
