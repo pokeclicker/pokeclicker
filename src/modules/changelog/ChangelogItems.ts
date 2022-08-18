@@ -10,6 +10,10 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.12
+    new ChangelogUpdate('v0.9.12', new Date(2022, 7, 18)),
+    new Changelog(changelogType.FIXED, 'Revert regional update'),
+
     // v0.9.11
     new ChangelogUpdate('v0.9.11', new Date(2022, 7, 18)),
     new Changelog(changelogType.NEW, 'Celebi questline'),
