@@ -427,7 +427,7 @@ TemporaryBattleList.Mirages = new TemporaryBattle(
         new GymPokemon('Zacian (Battle Hero)', 34427515, 70),
         new GymPokemon('Zamazenta (Battle Hero)', 34427515, 70),
     ],
-    'The Pokémon fled.',
+    '<i>The Pokémon fled.</i>',
     [new TemporaryBattleRequirement('Hop1')]
 );
 TemporaryBattleList.Hop2 = new TemporaryBattle(
