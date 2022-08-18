@@ -2724,7 +2724,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 94.1,
+        'id': 94.02,
         'name': 'Gigantamax Gengar',
         'nativeRegion': GameConstants.Region.none,
         'catchRate': 45,
