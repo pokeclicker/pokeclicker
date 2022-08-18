@@ -1527,22 +1527,22 @@ TownList['Icefall Cave'] = new DungeonTown(
 TownList['Lost Cave'] = new DungeonTown(
     'Lost Cave',
     GameConstants.Region.hoenn,
-    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 138)]
 );
 TownList['Pattern Bush'] = new DungeonTown(
     'Pattern Bush',
     GameConstants.Region.hoenn,
-    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 139)]
 );
 TownList['Altering Cave'] = new DungeonTown(
     'Altering Cave',
     GameConstants.Region.hoenn,
-    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 141)]
 );
 TownList['Tanoby Ruins'] = new DungeonTown(
     'Tanoby Ruins',
     GameConstants.Region.hoenn,
-    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 144)]
 );
 
 

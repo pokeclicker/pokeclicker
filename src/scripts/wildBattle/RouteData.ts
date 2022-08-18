@@ -937,7 +937,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Hoppip', 'Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 135)],
     undefined,
     GameConstants.HoennSubRegions.Sevii4567
 ));
@@ -955,7 +955,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Hoppip', 'Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 137)],
     undefined,
     GameConstants.HoennSubRegions.Sevii4567
 ));
@@ -974,7 +974,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pattern Bush'))],
     undefined,
     GameConstants.HoennSubRegions.Sevii4567
 ));
@@ -983,7 +983,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 140)],
     undefined,
     GameConstants.HoennSubRegions.Sevii4567
 ));
@@ -993,7 +993,7 @@ Routes.add(new RegionRoute(
         land: ['Natu', 'Spearow', 'Fearow', 'Meowth', 'Yanma', 'Wooper', 'Marill', 'Persian', 'Psyduck', 'Slowpoke', 'Wobbuffet'],
         water: ['Magikarp', 'Poliwag', 'Goldeen', 'Poliwhirl', 'Gyarados'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 139)],
     undefined,
     GameConstants.HoennSubRegions.Sevii4567
 ));
@@ -1012,7 +1012,7 @@ Routes.add(new RegionRoute(
         land: ['Geodude', 'Phanpy', 'Fearow', 'Meowth', 'Cubone', 'Marowak', 'Persian', 'Onix', 'Skarmory', 'Larvitar'],
         headbutt: ['Graveler'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 143)],
     undefined,
     GameConstants.HoennSubRegions.Sevii4567
 ));
