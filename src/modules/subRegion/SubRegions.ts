@@ -13,6 +13,7 @@ import {
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
 import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
 import RouteKillRequirement from '../requirements/RouteKillRequirement';
+import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepCompletedRequirement';
 import * as GameConstants from '../GameConstants';
 import SubRegion from './SubRegion';
 
