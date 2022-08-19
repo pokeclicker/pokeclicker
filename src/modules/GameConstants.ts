@@ -979,20 +979,8 @@ export const RegionGyms = [
     KalosGyms,
     AlolaGyms,
     GalarGyms,
-    // Keep it at the buttom, as we want optional badges at the buttom
+    // Keep it at the bottom, as we want optional badges at the bottom
     OrangeGyms,
-];
-
-export const BadgeGroups = [
-    'Kanto',
-    'Johto',
-    'Hoenn',
-    'Sinnoh',
-    'Unova',
-    'Kalos',
-    'Alola',
-    'Galar',
-    'Orange League',
 ];
 
 export function getGymIndex(gym: string): number {
