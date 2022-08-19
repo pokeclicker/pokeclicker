@@ -365,6 +365,61 @@ class QuestLineHelper {
         App.game.quests.questLines().push(aquaMagmaHoennQuestLine);
     }
 
+    public static createRubySapphireSeviiQuestLine() {
+        const billSeviiQuestLine = new QuestLine('Celio\'s Errand', 'Celio has asked you to help him set up a digital connection to Hoenn.');
+
+        const talktoCelio3 = new TalkToNPCQuest(OneIslandCelio3, 'Speak with Celio on One Island.');
+        rubySapphireSeviiQuestLine.addQuest(talktoCelio3);
+
+        const talktoRocketGrunts = new TalkToNPCQuest(SeviiRocketGrunts, 'Eavesdrop on the Team Rocket Grunts at Mt. Ember.');
+        rubySapphireSeviiQuestLine.addQuest(talktoRocketGrunts);
+
+        const clearSeviiRocketGrunts1 = new CustomQuest(2, 0, '2 Team Rocket Grunts are blocking the entrance to Ruby Path. Defeat them.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 2')]()
+        );
+        rubySapphireSeviiQuestLine.addQuest(clearSeviiRocketGrunts1);
+
+        const clearRubyPath = new CustomQuest(1, 0, 'Locate the Ruby. Clear Ruby Path.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ruby Path')]());
+        rubySapphireSeviiQuestLine.addQuest(clearRubyPath);
+
+        const talktoRuby = new TalkToNPCQuest(SeviiRuby, 'Take the Ruby in Ruby Path');
+        rubySapphireSeviiQuestLine.addQuest(talktoRuby);
+
+        const talktoCelio4 = new TalkToNPCQuest(OneIslandCelio4, 'Return the Ruby to Celio on One Island');
+        rubySapphireSeviiQuestLine.addQuest(talktoCelio4);
+
+        const clearIcefallCave = new CustomQuest(1, 0, 'Help Lorelei with Team Rocket Grunts by clearing Icefall Cave.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Icefall Cave')]());
+        rubySapphireSeviiQuestLine.addQuest(clearIcefallCave);
+
+        const talktoLorelei = new TalkToNPCQuest(SeviiLorelei, 'Talk to Lorelei in Icefall Cave');
+        rubySapphireSeviiQuestLine.addQuest(talktoLorelei);
+
+        const talktoGideon = new TalkToNPCQuest(SeviiGideon2, 'Return the Gideon in Dotted Hole');
+        rubySapphireSeviiQuestLine.addQuest(talktoGideon);
+
+        const clearSeviiRocketGrunts1 = new CustomQuest(2, 0, 'Defeat the Team Rocket Grunts in Rocket Warehouse.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 3')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 4')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 5')]()
+        );
+        rubySapphireSeviiQuestLine.addQuest(clearSeviiRocketGrunts2);
+
+        const clearSeviiAriana = new CustomQuest(1, 0, 'Defeat Team Rocket Executive Ariana in Rocket Warehouse.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Ariana')]());
+        rubySapphireQuestLine.addQuest(clearSeviiAriana);
+
+        const clearSeviiArcher = new CustomQuest(1, 0, 'Defeat Team Rocket Executive Archer in Rocket Warehouse.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Archer')]());
+        rubySapphireQuestLine.addQuest(clearSeviiArcher);
+
+        const clearSeviiGideon = new CustomQuest(1, 0, 'Defeat Scientist Gideon to reclaim the Sapphire.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Scientist Gideon')]());
+        rubySapphireQuestLine.addQuest(clearSeviiGideon);
+
+        const talktoCelio5 = new TalkToNPCQuest(OneIslandCelio5, 'Return the Sapphire to Celio on One Island');
+        rubySapphireSeviiQuestLine.addQuest(talktoCelio5);
+
+        App.game.quests.questLines().push(rubySapphireSeviiQuestLine);
+    }
+
     public static createDeoxysQuestLine() {
         const deoxysQuestLine = new QuestLine('Mystery of Deoxys', 'Discover the mystery of Deoxys.');
 
@@ -1216,6 +1271,7 @@ class QuestLineHelper {
         this.createCelebiJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
         this.createDeoxysQuestLine();
+        this.createRubySapphireSeviiQuestLine();
         this.createGalacticSinnohQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createVivillonQuestLine();

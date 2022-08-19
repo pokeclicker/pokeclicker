@@ -339,7 +339,7 @@ Routes.add(new RegionRoute(
     37487
 ));
 Routes.add(new RegionRoute(
-    'Five Island Meadow', GameConstants.Region.kanto, 30,
+    'Five Isle Meadow', GameConstants.Region.kanto, 30,
     new RoutePokemon({
         land: ['Sentret', 'Pidgey', 'Pidgeotto', 'Hoppip', 'Meowth', 'Persian', 'Psyduck', 'Slowpoke'],
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler'],

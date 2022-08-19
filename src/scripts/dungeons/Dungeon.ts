@@ -1384,7 +1384,7 @@ dungeonList['Ruby Path'] = new Dungeon('Ruby Path',
     36000, 101);
 
 dungeonList['Icefall Cave'] = new Dungeon('Icefall Cave',
-    ['Zubat', 'Golbat', 'Seel', 'Psyduck', 'Slowpoke', 'Swinub', 'Delibird', 'Sneasel', 'Wooper', 'Marill', 'Magikarp', 'Poliwag', 'Goldeen', 'Poliwhirl', 'Tentacool', 'Tentacruel', 'Horsea', 'Krabby', 'Shellder', 'Staryu', 'Seadra', 'Kingler'],
+    ['Zubat', 'Golbat', 'Seel', 'Psyduck', 'Slowpoke', 'Swinub', 'Delibird', 'Sneasel', 'Wooper', 'Marill', 'Magikarp', 'Poliwag', 'Goldeen', 'Poliwhirl', 'Tentacool', 'Tentacruel', 'Horsea', 'Krabby', 'Shellder', 'Staryu', 'Seadra', 'Kingler', 'Dewgong', 'Gyarados', 'Lapras'],
     {
         common: [
             {loot: 'xClick'},
@@ -1393,14 +1393,17 @@ dungeonList['Icefall Cave'] = new Dungeon('Icefall Cave',
     },
     500000,
     [
-        new DungeonBossPokemon('Dewgong', 4500000, 20),
-        new DungeonBossPokemon('Gyarados', 4500000, 20),
-        new DungeonBossPokemon('Lapras', 4500000, 20),
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Zubat', 1940, 38),
+                new GymPokemon('Zubat', 1940, 38),
+                new GymPokemon('Golbat', 1940, 38),
+            ], { weight: 1 }, undefined, '(male)'),
     ],
     36000, 101);
 
 dungeonList['Lost Cave'] = new Dungeon('Lost Cave',
-    ['Gastly', 'Zubat', 'Golbat', 'Murkrow', 'Misdreavus'],
+    ['Gastly', 'Haunter', 'Zubat', 'Golbat', 'Murkrow', 'Misdreavus'],
     {
         common: [
             {loot: 'xClick'},
@@ -1408,7 +1411,13 @@ dungeonList['Lost Cave'] = new Dungeon('Lost Cave',
         ],
     },
     500000,
-    [new DungeonBossPokemon('Haunter', 4500000, 20)],
+    [
+        new DungeonTrainer('Lady',
+            [
+                new GymPokemon('Persian', 1940, 49),
+                new GymPokemon('Persian', 1940, 49),
+            ], { weight: 1 }, 'Selphy',
+    ],
     36000, 101);
 
 dungeonList['Pattern Bush'] = new Dungeon('Pattern Bush',

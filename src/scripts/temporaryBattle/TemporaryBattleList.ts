@@ -99,6 +99,123 @@ TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Unfinished Business', 9)]
 );
 
+//Hoenn Temporary battles
+TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
+    'Sevii Rocket Grunt 1',
+    [
+        new GymPokemon('Cubone', 198477, 37),
+        new GymPokemon('Marowak', 198477, 37),
+    ],
+    'Huh, what? Why\'d you have to win?',
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
+    undefined,
+    {
+        displayName: 'Team Rocket Grunt',
+        imageName: 'Team Rocket Grunt (female)',
+    }
+);
+TemporaryBattleList['Sevii Rocket Grunt 2'] = new TemporaryBattle(
+    'Sevii Rocket Grunt 2',
+    [
+        new GymPokemon('Rattata', 198477, 35),
+        new GymPokemon('Raticate', 198477, 35),
+        new GymPokemon('Sandshrew', 198477, 35),
+        new GymPokemon('Sandslash', 198477, 35),
+    ],
+    'Develop amnesia conveniently and forget everything you heard!',
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
+    undefined,
+    {
+        displayName: 'Team Rocket Grunt',
+        imageName: 'Team Rocket Grunt (male)',
+    }
+);
+TemporaryBattleList['Sevii Rocket Grunt 3'] = new TemporaryBattle(
+    'Sevii Rocket Grunt 3',
+    [
+        new GymPokemon('Houndour', 198477, 49),
+        new GymPokemon('Houndour', 198477, 49),
+    ],
+    'Oh, but... Too much!',
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
+    undefined,
+    {
+        displayName: 'Team Rocket Grunt',
+        imageName: 'Team Rocket Grunt (female)',
+    }
+);
+TemporaryBattleList['Sevii Rocket Grunt 4'] = new TemporaryBattle(
+    'Sevii Rocket Grunt 4',
+    [
+        new GymPokemon('Machop', 198477, 48),
+        new GymPokemon('Machop', 198477, 48),
+        new GymPokemon('Machoke', 198477, 48),
+    ],
+    'What do you think you\'re doing?!',
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
+    undefined,
+    {
+        displayName: 'Team Rocket Grunt',
+        imageName: 'Team Rocket Grunt (male)',
+    }
+);
+TemporaryBattleList['Sevii Rocket Grunt 5'] = new TemporaryBattle(
+    'Sevii Rocket Grunt 5',
+    [
+        new GymPokemon('Hypno', 198477, 49),
+        new GymPokemon('Hypno', 198477, 49),
+    ],
+    'Don\'t...you...dare...laugh...',
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
+    undefined,
+    {
+        displayName: 'Team Rocket Grunt',
+        imageName: 'Team Rocket Grunt (male)',
+    }
+);
+TemporaryBattleList['Sevii Rocket Ariana'] = new TemporaryBattle(
+    'Sevii Rocket Ariana',
+    [
+        new GymPokemon('Muk', 198477, 52),
+        new GymPokemon('Arbok', 198477, 53),
+        new GymPokemon('Vileplume', 198477, 54),
+    ],
+    'You\'re doing things according to your beliefs and morals. I understand now...',
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
+    undefined,
+    {
+        displayName: 'Team Rocket Executive Ariana',
+        imageName: 'Team Rocket Executive Ariana',
+    }
+);
+TemporaryBattleList['Sevii Rocket Archer'] = new TemporaryBattle(
+    'Sevii Rocket Archer',
+    [
+        new GymPokemon('Golbat', 198477, 53),
+        new GymPokemon('Weezing', 198477, 54),
+        new GymPokemon('Houndoom', 198477, 55),
+    ],
+    'Urgh... You were too strong... ... Th-that\'s Giovanni\'s Badge! So it\'s true? Team Rocket really has disbanded? ...We will abandon this warehouse. But don\'t think this is over. I won\'t let this be the end. I will find Giovanni. And I will resurrect Team Rocket! I will... Until then, farewell!',
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
+    undefined,
+    {
+        displayName: 'Team Rocket Executive Archer',
+        imageName: 'Team Rocket Executive Archer',
+    }
+);
+TemporaryBattleList['Scientist Gideon'] = new TemporaryBattle(
+    'Scientist Gideon',
+    [
+        new GymPokemon('Voltorb', 198477, 46),
+        new GymPokemon('Electrode', 198477, 46),
+        new GymPokemon('Magnemite', 198477, 46),
+        new GymPokemon('Magneton', 198477, 46),
+        new GymPokemon('Porygon', 198477, 46),
+    ],
+    'If I can\'t sell the Sapphire, it\'s worthless! Go ahead, take it!',
+    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)]
+);
+
 // Sinnoh Temporary Battles
 TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
     'Galactic Boss Cyrus',

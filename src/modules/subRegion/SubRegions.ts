@@ -45,7 +45,7 @@ export default class SubRegions {
 
 SubRegions.addSubRegion(Region.kanto, new SubRegion('Kanto', KantoSubRegions.Kanto, undefined, 'Vermilion City', undefined));
 SubRegions.addSubRegion(Region.kanto, new SubRegion('Sevii Islands 123', KantoSubRegions.Sevii123, new GymBadgeRequirement(BadgeEnums.Volcano), 'One Island', undefined));
-SubRegions.addSubRegion(Region.kanto, new SubRegion('Sevii Islands 4567', KantoSubRegions.Sevii4567, new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), 'Four Island', undefined));
+SubRegions.addSubRegion(Region.kanto, new SubRegion('Sevii Islands 4567', KantoSubRegions.Sevii4567, new QuestLineStepCompletedRequirement('Celio\'s Errand', 5), 'Four Island', undefined));
 
 SubRegions.addSubRegion(Region.johto, new SubRegion('Johto', JohtoSubRegions.Johto));
 SubRegions.addSubRegion(Region.hoenn, new SubRegion('Hoenn', HoennSubRegions.Hoenn, undefined, 'Slateport City'));
