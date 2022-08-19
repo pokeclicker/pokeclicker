@@ -547,7 +547,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 12.1,
+        'id': 12.01,
         'name': 'Valencian Butterfree',
         'catchRate': 45,
         'type': [PokemonType.Bug, PokemonType.Flying],
@@ -564,7 +564,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 12.2,
+        'id': 12.02,
         'name': 'Gigantamax Butterfree',
         'nativeRegion': GameConstants.Region.none,
         'catchRate': 45,
@@ -1680,7 +1680,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 45.1,
+        'id': 45.01,
         'name': 'Valencian Vileplume',
         'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Poison],
@@ -2388,7 +2388,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 70.1,
+        'id': 70.01,
         'name': 'Valencian Weepinbell',
         'catchRate': 120,
         'type': [PokemonType.Grass, PokemonType.Poison],
@@ -3068,7 +3068,7 @@ const pokemonList = createPokemonArray(
         'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
     },
     {
-        'id': 95.1,
+        'id': 95.01,
         'name': 'Crystal Onix',
         'catchRate': 45,
         'type': [PokemonType.Rock, PokemonType.Ground],
@@ -3484,7 +3484,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 111,
+        'id': 111.01,
         'name': 'Pinkan Rhyhorn',
         'catchRate': 120,
         'type': [PokemonType.Ground, PokemonType.Rock],
