@@ -2,10 +2,10 @@
 
 class BadgeCaseController {
     static getDisplayableBadges() {
-        const region = player.highestRegion();
+        const region = player.highestRegion(); //TODO: find a way to use this again
         const result = {};
-        GameConstants.RegionGyms.slice(0, region + 1).forEach((region, index) => {
-            result[GameConstants.Region[index].charAt(0).toUpperCase() + GameConstants.Region[index].slice(1)] = region
+        GameConstants.RegionGyms.forEach((region, index) => {
+            result[GameConstants.BadgeGroups[index]] = region
                 .map(gym => BadgeEnums[GymList[gym].badgeReward])
                 .filter(b => !b.startsWith('Elite') && b != 'None');
         });

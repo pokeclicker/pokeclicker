@@ -617,6 +617,50 @@ GymList['Champion Wallace'] = new Champion(
     }
 );
 
+// Orange league gyms
+GymList['Mikan Island'] = new Gym(
+    'Cissy',
+    'Mikan Island',
+    [], // TODO]
+    BadgeEnums['Coral-Eye'],
+    1200,
+    'TODO'
+);
+GymList['Navel Island'] = new Gym(
+    'Danny',
+    'Navel Island',
+    [], // TODO]
+    BadgeEnums.Sea_Ruby,
+    1200,
+    'TODO'
+);
+GymList['Trovita Island'] = new Gym(
+    'Rudy',
+    'Trovita Island',
+    [], // TODO]
+    BadgeEnums.Spike_Shell,
+    1200,
+    'TODO'
+);
+GymList['Kumquat Island'] = new Gym(
+    'Luana',
+    'Kumquat Island',
+    [], // TODO]
+    BadgeEnums.Jade_Star,
+    1200,
+    'TODO'
+);
+
+// Orange league champion
+GymList['Supreme Gym Leader Drake'] = new Gym(
+    'Supreme Gym Leader Drake',
+    'Supreme Gym Leader Drake',
+    [], // TODO]
+    BadgeEnums.Elite_OrangeChampion,
+    1200,
+    'TODO'
+);
+
 //Sinnoh Gyms
 GymList['Oreburgh City'] = new Gym(
     'Roark',

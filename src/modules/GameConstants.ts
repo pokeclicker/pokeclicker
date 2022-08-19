@@ -962,6 +962,14 @@ export const GalarGyms = [
     'Champion Leon',
 ];
 
+export const OrangeGyms = [
+    'Mikan Island',
+    'Navel Island',
+    'Trovita Island',
+    'Kumquat Island',
+    'Supreme Gym Leader Drake',
+];
+
 export const RegionGyms = [
     KantoGyms,
     JohtoGyms,
@@ -971,6 +979,20 @@ export const RegionGyms = [
     KalosGyms,
     AlolaGyms,
     GalarGyms,
+    // Keep it at the buttom, as we want optional badges at the buttom
+    OrangeGyms,
+];
+
+export const BadgeGroups = [
+    'Kanto',
+    'Johto',
+    'Hoenn',
+    'Sinnoh',
+    'Unova',
+    'Kalos',
+    'Alola',
+    'Galar',
+    'Orange League',
 ];
 
 export function getGymIndex(gym: string): number {

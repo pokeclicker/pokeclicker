@@ -1066,6 +1066,13 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 17);
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 18);
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 19);
+
+            // Add orange league badges
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 40);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 41);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 42);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 43);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 44);
         },
 
     };
