@@ -366,6 +366,12 @@ const SeviiGideon2 = new NPC ('Gideon', [
     '...D-don\'t glare at me like that! If you want it back, why don\'t you go get it after I sell it? I\'ll even tell you one of the passwords to Team Rocket\'s Warehouse. The Warehouse password I know is "Yes, nah, Chansey." I\'m done. Don\'t think badly of me!',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 7), new QuestLineStepCompletedRequirement('Celio\'s Errand', 9, GameConstants.AchievementOption.less )]) });
+const ValenciaProfIvy = new NPC ('Prof. Ivy', [
+    'Hello again! I see you too found a way around the giant cliff.',
+    'On this island, pokémon have changed over the years. I am here to study them.',
+    'Oh, you have already encountered them? And you busy with the Orange League?',
+    'Well, good luck to you, then.',
+]);
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
@@ -591,6 +597,7 @@ TownList['Valencia Pokémon Center'] = new Town(
     [],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 40)],
+        npcs: [ValenciaProfIvy],
     }
 );
 
