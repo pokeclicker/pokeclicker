@@ -865,11 +865,19 @@
         <!-- TOWNS -->
         <!-- ----- -->
 
+        <!--Four Island-->
+        <%- include('templates/mapTown',
+            { name: "Four Island"
+            , x: 38, y: 12
+            , width: 4, height: 4
+            })
+        %>
+
         <!--Kumquat Island-->
         <%- include('templates/mapTown',
             { name: "Kumquat Island"
-            , x: 18, y: 2
-            , width: 9, height: 15
+            , x: 20, y: 3
+            , width: 6, height: 10
             })
         %>
 
@@ -878,6 +886,18 @@
             { name: "Valencia Pokémon Center"
             , x: 3, y: 2
             , width: 4, height: 4
+            })
+        %>
+
+        <!-- -------- -->
+        <!-- DUNGEONS -->
+        <!-- -------- -->
+
+        <!--Icefall Cave-->
+        <%- include('templates/mapDungeon',
+            { name: "Icefall Cave"
+            , x: 41, y: 11
+            , width: 3, height: 2
             })
         %>
     </g>
