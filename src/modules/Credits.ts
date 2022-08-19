@@ -101,6 +101,14 @@ export const SpriteCredits: Credit[] = [
         // NOTES: Gives permission to everyone who asks in the comments section of the spritesheet as long as credit is given
     },
     {
+        name: 'Eat Pant',
+        link: 'TODO',
+        resources: [
+            'TODO name for Dugtrio',
+        ],
+        // NOTES: Made specifically for Pokeclicker.
+    },
+    {
         name: 'EmmaRoak',
         link: 'https://www.deviantart.com/emmaroak',
         image: 'https://a.deviantart.net/avatars-big/e/m/emmaroak.png',
@@ -348,6 +356,18 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Pokémon background',
         ],
+    },
+    {
+        name: 'Someone Soul',
+        link: 'https://discordapp.com/users/824384977633411082/',
+        resources: [
+            'TODO name for Onix',
+            'TODO name for Gengar',
+            'TODO name for Weepinbell',
+            'TODO name for Gengar',
+            'TODO name for Tangela',
+        ],
+        // NOTES: Made specifically for Pokeclicker.
     },
     {
         name: 'Smogon Sprite Project',
