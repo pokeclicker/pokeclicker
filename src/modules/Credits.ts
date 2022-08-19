@@ -83,6 +83,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/272336444297707521/',
         image: 'assets/images/profile/trainer-96.png',
         resources: [
+            'Pinkan Caterpie',
             'Pinkan Rhyhorn (shiny)',
             'Team Flare Admin (male)',
             'Team Flare Admin (female)',

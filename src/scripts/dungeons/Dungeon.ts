@@ -1573,6 +1573,22 @@ dungeonList['Tanoby Ruins'] = new Dungeon('Tanoby Ruins',
     ],
     36000, 101);
 
+dungeonList['Pinkan Mountain'] = new Dungeon('Pinkan Mountain',
+    ['Pinkan Rattata', 'Pinkan Nidoran(M)', 'Pinkan Nidoran(F)', 'Pinkan Mankey', 'Pinkan Rhyhorn'],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+    },
+    500000,
+    [
+        new DungeonBossPokemon('Pinkan Primeape', 4500000, 20),
+        new DungeonBossPokemon('Pinkan Rhyhorn', 4500000, 20),
+        new DungeonBossPokemon('Pinkan Nidoking', 4500000, 20),
+    ],
+    36000, 101);
+
 // Johto Dungeons
 
 dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',

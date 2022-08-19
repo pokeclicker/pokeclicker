@@ -1013,6 +1013,7 @@ export const KantoDungeons = [
     'Pattern Bush',
     'Altering Cave',
     'Tanoby Ruins',
+    'Pinkan Mountain',
 ];
 
 export const JohtoDungeons = [

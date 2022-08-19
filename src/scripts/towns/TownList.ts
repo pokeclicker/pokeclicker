@@ -729,6 +729,14 @@ TownList['Tanoby Ruins'] = new DungeonTown(
     GameConstants.Region.kanto,
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 39)]
 );
+TownList['Pinkan Mountain'] = new DungeonTown(
+    'Pinkan Mountain',
+    GameConstants.Region.kanto,
+    [
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 42),
+        new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion),
+    ]
+);
 
 //Johto Shops
 const CherrygroveCityShop = new Shop([
