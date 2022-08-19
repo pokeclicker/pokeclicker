@@ -366,9 +366,9 @@ class QuestLineHelper {
     }
 
     public static createRubySapphireSeviiQuestLine() {
-        const billSeviiQuestLine = new QuestLine('Celio\'s Errand', 'Celio has asked you to help him set up a digital connection to Hoenn.');
+        const rubySapphireSeviiQuestLine = new QuestLine('Celio\'s Errand', 'Celio has asked you to help him set up a digital connection to Hoenn.');
 
-        const talktoCelio3 = new TalkToNPCQuest(OneIslandCelio3, 'Speak with Celio on One Island.');
+        const talktoCelio3 = new TalkToNPCQuest(OneIslandCelio4, 'Speak with Celio on One Island.');
         rubySapphireSeviiQuestLine.addQuest(talktoCelio3);
 
         const talktoRocketGrunts = new TalkToNPCQuest(SeviiRocketGrunts, 'Eavesdrop on the Team Rocket Grunts at Mt. Ember.');
@@ -386,7 +386,7 @@ class QuestLineHelper {
         const talktoRuby = new TalkToNPCQuest(SeviiRuby, 'Take the Ruby in Ruby Path');
         rubySapphireSeviiQuestLine.addQuest(talktoRuby);
 
-        const talktoCelio4 = new TalkToNPCQuest(OneIslandCelio4, 'Return the Ruby to Celio on One Island');
+        const talktoCelio4 = new TalkToNPCQuest(OneIslandCelio5, 'Return the Ruby to Celio on One Island');
         rubySapphireSeviiQuestLine.addQuest(talktoCelio4);
 
         const clearIcefallCave = new CustomQuest(1, 0, 'Help Lorelei with Team Rocket Grunts by clearing Icefall Cave.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Icefall Cave')]());
@@ -414,7 +414,7 @@ class QuestLineHelper {
         const clearSeviiGideon = new CustomQuest(1, 0, 'Defeat Scientist Gideon to reclaim the Sapphire.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Scientist Gideon')]());
         rubySapphireQuestLine.addQuest(clearSeviiGideon);
 
-        const talktoCelio5 = new TalkToNPCQuest(OneIslandCelio5, 'Return the Sapphire to Celio on One Island');
+        const talktoCelio5 = new TalkToNPCQuest(OneIslandCelio6, 'Return the Sapphire to Celio on One Island');
         rubySapphireSeviiQuestLine.addQuest(talktoCelio5);
 
         App.game.quests.questLines().push(rubySapphireSeviiQuestLine);

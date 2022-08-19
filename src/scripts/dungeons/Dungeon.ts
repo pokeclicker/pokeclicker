@@ -1403,7 +1403,22 @@ dungeonList['Icefall Cave'] = new Dungeon('Icefall Cave',
     36000, 101);
 
 dungeonList['Lost Cave'] = new Dungeon('Lost Cave',
-    ['Gastly', 'Haunter', 'Zubat', 'Golbat', 'Murkrow', 'Misdreavus'],
+    [
+        'Gastly', 'Haunter', 'Zubat', 'Golbat', 'Murkrow', 'Misdreavus',
+        new DungeonTrainer('Ruin Maniac',
+            [
+                new GymPokemon('Onix', 1940, 47),
+                new GymPokemon('Graveler', 1940, 48),
+                new GymPokemon('Marowak', 1940, 49),
+            ], { weight: 0.75 }, 'Lawson'),
+        new DungeonTrainer('Psychic',
+            [
+                new GymPokemon('Natu', 1940, 48),
+                new GymPokemon('Natu', 1940, 48),
+                new GymPokemon('Xatu', 1940, 49),
+            ], { weight: 0.75 }, 'Laura'),
+
+    ],
     {
         common: [
             {loot: 'xClick'},
@@ -1416,12 +1431,73 @@ dungeonList['Lost Cave'] = new Dungeon('Lost Cave',
             [
                 new GymPokemon('Persian', 1940, 49),
                 new GymPokemon('Persian', 1940, 49),
-            ], { weight: 1 }, 'Selphy',
+            ], { weight: 1 }, 'Selphy'),
     ],
     36000, 101);
 
 dungeonList['Pattern Bush'] = new Dungeon('Pattern Bush',
-    ['Spinarak', 'Ledyba', 'Caterpie', 'Weedle', 'Metapod', 'Kakuna'],
+    [
+        'Spinarak', 'Ledyba', 'Caterpie', 'Weedle', 'Metapod', 'Kakuna',
+        new DungeonTrainer('Youngster',
+            [
+                new GymPokemon('Farfetch\'d', 1940, 48),
+                new GymPokemon('Farfetch\'d', 1940, 48),
+            ], { weight: 0.125 }, 'Cordell'),
+        new DungeonTrainer('Pokémon Breeder',
+            [new GymPokemon('Chansey', 1940, 50)], { weight: 0.125 }, 'Bethany'),
+        new DungeonTrainer('Bug Catcher',
+            [new GymPokemon('Heracross', 1940, 49)], { weight: 0.125 }, 'Garett'),
+        new DungeonTrainer('Lass',
+            [new GymPokemon('Snubbull', 1940, 49)], { weight: 0.125 }, 'Joanna'),
+        new DungeonTrainer('Youngster',
+            [
+                new GymPokemon('Weepinbell', 1940, 47),
+                new GymPokemon('Weepinbell', 1940, 47),
+                new GymPokemon('Victreebel', 1940, 49),
+            ], { weight: 0.125 }, 'Nash'),
+        new DungeonTrainer('Bug Catcher',
+            [
+                new GymPokemon('Venonat', 1940, 48),
+                new GymPokemon('Venomoth', 1940, 48),
+            ], { weight: 0.125 }, 'Vance'),
+        new DungeonTrainer('Ruin Maniac',
+            [
+                new GymPokemon('Sandslash', 1940, 48),
+                new GymPokemon('Onix', 1940, 48),
+                new GymPokemon('Sandslash', 1940, 48),
+            ], { weight: 0.125 }, 'Layton'),
+        new DungeonTrainer('Picnicker',
+            [
+                new GymPokemon('Paras', 1940, 48),
+                new GymPokemon('Paras', 1940, 48),
+                new GymPokemon('Parasect', 1940, 49),
+            ], { weight: 0.125 }, 'Marcy'),
+        new DungeonTrainer('Bug Catcher',
+            [
+                new GymPokemon('Yanma', 1940, 45),
+                new GymPokemon('Beedrill', 1940, 45),
+                new GymPokemon('Yanma', 1940, 46),
+                new GymPokemon('Beedrill', 1940, 47),
+            ], { weight: 0.125 }, 'Jonah'),
+        new DungeonTrainer('Lass',
+            [
+                new GymPokemon('Hoppip', 1940, 46),
+                new GymPokemon('Hoppip', 1940, 47),
+                new GymPokemon('Skiploom', 1940, 47),
+                new GymPokemon('Skiploom', 1940, 48),
+            ], { weight: 0.125 }, 'Dalia'),
+        new DungeonTrainer('Pokémon Breeder',
+            [
+                new GymPokemon('Clefairy', 1940, 48),
+                new GymPokemon('Clefairy', 1940, 48),
+                new GymPokemon('Clefable', 1940, 48),
+            ], { weight: 0.125 }, 'Allison'),
+        new DungeonTrainer('Camper',
+            [
+                new GymPokemon('Pinsir', 1940, 49),
+                new GymPokemon('Heracross', 1940, 50),
+            ], { weight: 0.125 }, 'Riley'),
+    ],
     {
         common: [
             {loot: 'xClick'},
@@ -1452,7 +1528,24 @@ SeededRand.seed(4567);
 const TanobyUnownList = SeededRand.shuffleArray('ABCDGIJKLMNOQRSTUVWXYZ!?'.split(''));
 
 dungeonList['Tanoby Ruins'] = new Dungeon('Tanoby Ruins',
-    ['Tentacool', 'Tentacruel', 'Mantine', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Psyduck', 'Kingler'],
+    [
+        'Tentacool', 'Tentacruel', 'Mantine', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Psyduck', 'Kingler',
+        new DungeonTrainer('Ruin Maniac',
+            [new GymPokemon('Onix', 1940, 50)], { weight: 0.75 }, 'Brandon'),
+        new DungeonTrainer('Gentleman',
+            [
+                new GymPokemon('Marowak', 1940, 49),
+                new GymPokemon('Golduck', 1940, 49),
+            ], { weight: 0.75 }, 'Clifford'),
+        new DungeonTrainer('Painter Edna',
+            [new GymPokemon('Smeargle', 1940, 50)], { weight: 0.75 }, 'Allison'),
+        new DungeonTrainer('Ruin Maniac',
+            [
+                new GymPokemon('Geodude', 1940, 48),
+                new GymPokemon('Graveler', 1940, 48),
+                new GymPokemon('Graveler', 1940, 48),
+            ], { weight: 0.75 }, 'Benjamin'),
+    ],
     {
         common: [
             {loot: 'xClick'},
