@@ -563,7 +563,10 @@ TownList['Rocket Warehouse'] = new Town(
     GameConstants.Region.kanto,
     [TemporaryBattleList['Sevii Rocket Grunt 3'], TemporaryBattleList['Sevii Rocket Grunt 4'], TemporaryBattleList['Sevii Rocket Grunt 5'], TemporaryBattleList['Sevii Rocket Ariana'], TemporaryBattleList['Sevii Rocket Archer'], TemporaryBattleList['Scientist Gideon']],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 30)],
+      requirements: [
+          new RouteKillRequirement(10, GameConstants.Region.kanto, 30),
+          new QuestLineStepCompletedRequirement('Celio\'s Errand', 8),
+      ],
     }
 );
 TownList['Six Island'] = new Town(
