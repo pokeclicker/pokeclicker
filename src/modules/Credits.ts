@@ -234,11 +234,12 @@ export const SpriteCredits: Credit[] = [
     },
     {
         name: 'NiCeDiCe',
-        link: 'https://github.com/NiCeDiCe90',
+        link: 'https://twitter.com/NiCeDiCe90',
         resources: [
             'Red Spearow',
             'shiny Totem Ribombee',
-            'Weather Institute world sprite',
+            'misc Map sprite edits',
+            'Bulbasaur (Rose)',
         ],
         // NOTES: Created specifically for PokéClicker.
     },
