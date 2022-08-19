@@ -83,6 +83,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/272336444297707521/',
         image: 'assets/images/profile/trainer-96.png',
         resources: [
+            'Pinkan Rhyhorn (shiny)',
             'Team Flare Admin (male)',
             'Team Flare Admin (female)',
             'Team Flare Aliana',
@@ -287,7 +288,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://github.com/NiCeDiCe90',
         resources: [
             'Crystal Onix',
-            'Pinkan Rhyhorn',
+            'Pinkan Rhyhorn (non shiny)',
             'Red Spearow',
             'shiny Totem Ribombee',
             'Weather Institute world sprite',
@@ -357,6 +358,7 @@ export const SpriteCredits: Credit[] = [
         name: 'Someone Soul',
         link: 'https://discordapp.com/users/824384977633411082/',
         resources: [
+            'Pinkan Pidgey',
             'Valencian Butterfree',
             'Valencian Vileplume',
             'Valencian Weepinbell',
