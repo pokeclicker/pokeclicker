@@ -452,7 +452,7 @@ class QuestLineHelper {
         const talktoGideon = new TalkToNPCQuest(SeviiGideon2, 'Return the Gideon in Dotted Hole');
         rubySapphireSeviiQuestLine.addQuest(talktoGideon);
 
-        const clearSeviiRocketGrunts1 = new CustomQuest(2, 0, 'Defeat the Team Rocket Grunts in Rocket Warehouse.', () =>
+        const clearSeviiRocketGrunts2 = new CustomQuest(2, 0, 'Defeat the Team Rocket Grunts in Rocket Warehouse.', () =>
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 3')]() +
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 4')]() +
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 5')]()
@@ -460,13 +460,13 @@ class QuestLineHelper {
         rubySapphireSeviiQuestLine.addQuest(clearSeviiRocketGrunts2);
 
         const clearSeviiAriana = new CustomQuest(1, 0, 'Defeat Team Rocket Executive Ariana in Rocket Warehouse.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Ariana')]());
-        rubySapphireQuestLine.addQuest(clearSeviiAriana);
+        rubySapphireSeviiQuestLine.addQuest(clearSeviiAriana);
 
         const clearSeviiArcher = new CustomQuest(1, 0, 'Defeat Team Rocket Executive Archer in Rocket Warehouse.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Archer')]());
-        rubySapphireQuestLine.addQuest(clearSeviiArcher);
+        rubySapphireSeviiQuestLine.addQuest(clearSeviiArcher);
 
         const clearSeviiGideon = new CustomQuest(1, 0, 'Defeat Scientist Gideon to reclaim the Sapphire.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Scientist Gideon')]());
-        rubySapphireQuestLine.addQuest(clearSeviiGideon);
+        rubySapphireSeviiQuestLine.addQuest(clearSeviiGideon);
 
         const talktoCelio5 = new TalkToNPCQuest(OneIslandCelio6, 'Return the Sapphire to Celio on One Island');
         rubySapphireSeviiQuestLine.addQuest(talktoCelio5);

@@ -299,7 +299,7 @@ const OneIslandCelio4 = new NPC ('Celio', [
     'How have things been for you? Oh, is that right? You\'ve caught more Pokémon. Do you know what? Maybe I can be useful to you. I\'m modifying the Network Machine right now. I\'m changing it so it can handle trades over long distances. When I get finished, you\'ll be trading for exotic Pokémon from Trainers far away.',
     'But, there is a slight catch. For the link to work, the Machine needs a special gemstone. It\'s supposed to be on One Island, but I haven\'t found one yet. Who knows where it could be.',
 ],
-{ requirement: new MultiRequirement([new QuestLineStartedRequirement('Celio\'s Errand'), new QuestLineStepCompletedRequirement('Celio\'s Errand', 1, GameConstants.AchievementOption.less ) });
+{ requirement: new MultiRequirement([new QuestLineStartedRequirement('Celio\'s Errand'), new QuestLineStepCompletedRequirement('Celio\'s Errand', 1, GameConstants.AchievementOption.less )]) });
 const OneIslandCelio5 = new NPC ('Celio', [
     'Oh! Th-that\'s... Thank you! You\'re simply amazing. ... ... ... ... Um... May I ask one more giant favor of you?',
     'While I was studying gemstones, I discovered something important. There is another gem that forms a pair with this Ruby. That other gemstone is supposed to be in the Sevii Islands. Please, I need you to go find the other gem.',
@@ -314,7 +314,7 @@ const OneIslandCelio6 = new NPC ('Celio', [
 const OneIslandCelio7 = new NPC ('Celio', [
     'I... I\'m not crying. That\'s enough about me! You\'re going to keep looking for exotic Pokémon, right? I wish you the best of luck!',
 ],
-{ requirement: new QuestLineCompletedRequirement('Celio\'s Errand')) });
+{ requirement: new QuestLineCompletedRequirement('Celio\'s Errand') });
 const OneIslandYoungster = new NPC ('Youngster', [
     'Isn\'t it strange how Mol<span style="font-style: italic; font-weight: bold">tres</span> lives on <span style="font-style: italic; font-weight: bold">One</span> Island?',
 ],
@@ -362,7 +362,7 @@ const SeviiGideon1 = new NPC ('Gideon', [
 ],
 { requirement: new QuestLineStepCompletedRequirement('Celio\'s Errand', 7 , GameConstants.AchievementOption.less ) });
 const SeviiGideon2 = new NPC ('Gideon', [
-    'Fufu... Fufufufu... I guessed right. I was right in tailing you! I knew there was a Sapphire here, so it belongs to me! I\'ll sell it to Team Rocket for serious money.'
+    'Fufu... Fufufufu... I guessed right. I was right in tailing you! I knew there was a Sapphire here, so it belongs to me! I\'ll sell it to Team Rocket for serious money.',
     '...D-don\'t glare at me like that! If you want it back, why don\'t you go get it after I sell it? I\'ll even tell you one of the passwords to Team Rocket\'s Warehouse. The Warehouse password I know is "Yes, nah, Chansey." I\'m done. Don\'t think badly of me!',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 7), new QuestLineStepCompletedRequirement('Celio\'s Errand', 9, GameConstants.AchievementOption.less )]) });
