@@ -847,16 +847,26 @@
         <!--Valencia Island-->
         <%- include('templates/mapRoute',
             { route: 40, region: 0
-            , width: 2, height: 6
-            , x: 3, y: 7
-            , name: "VaI"
+            , width: 2, height: 4
+            , x: 3, y: 9
+            , name: "VI"
             })
         %>
+
         <!--Valencia Island extension-->
         <%- include('templates/mapRoute',
         { route: 40, region: 0
             , width: 2, height: 3
             , x: 4, y: 6
+            , noText: true
+            })
+        %>
+
+        <!--Valencia Island extension-->
+        <%- include('templates/mapRoute',
+        { route: 40, region: 0
+            , width: 1, height: 2
+            , x: 3, y: 7
             , noText: true
             })
         %>
@@ -878,6 +888,7 @@
             { name: "Four Island"
             , x: 41, y: 13
             , width: 1, height: 3
+            , isExtension: true
             })
         %>
 
