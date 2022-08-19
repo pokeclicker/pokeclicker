@@ -645,7 +645,10 @@ GymList['Trovita Island'] = new Gym(
 GymList['Kumquat Island'] = new Gym(
     'Luana',
     'Kumquat Island',
-    [], // TODO]
+    [
+        new GymPokemon('Alakazam', 1, 1),
+        new GymPokemon('Marowak', 1, 1),
+    ],
     BadgeEnums.Jade_Star,
     1200,
     'TODO'

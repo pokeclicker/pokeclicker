@@ -107,7 +107,7 @@ TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
         new GymPokemon('Marowak', 198477, 37),
     ],
     'Huh, what? Why\'d you have to win?',
-    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 1)],
     undefined,
     {
         displayName: 'Team Rocket Grunt',
@@ -123,7 +123,7 @@ TemporaryBattleList['Sevii Rocket Grunt 2'] = new TemporaryBattle(
         new GymPokemon('Sandslash', 198477, 35),
     ],
     'Develop amnesia conveniently and forget everything you heard!',
-    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 1)],
     undefined,
     {
         displayName: 'Team Rocket Grunt',

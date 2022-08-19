@@ -458,7 +458,7 @@ Routes.add(new RegionRoute(
         land: ['Valencian Butterfree', 'Valencian Raticate', 'Valencian Vileplume', 'Valencian Paras', 'Valencian Weepinbell', 'Nidoran(M)', 'Nidoran(F)', 'Nidorina'],
         water: ['Gyarados', 'Cloyster', 'Poliwhirl'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    [new GymBadgeRequirement(BadgeEnums.Jade_Star)],
     undefined,
     GameConstants.KantoSubRegions.Sevii4567,
     true,

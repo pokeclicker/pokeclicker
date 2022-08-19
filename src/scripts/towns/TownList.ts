@@ -577,12 +577,20 @@ TownList['Dotted Hole'] = new Town(
         npcs: [SeviiGideon1, SeviiGideon2],
     }
 );
+TownList['Kumquat Island'] = new Town(
+    'Kumquat Island',
+    GameConstants.Region.kanto,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    }
+);
 TownList['Valencia Pokémon Center'] = new Town(
     'Valencia Pokémon Center',
     GameConstants.Region.kanto,
     [],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 40)],
     }
 );
 
