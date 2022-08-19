@@ -588,7 +588,7 @@ TownList['Kumquat Island'] = new Town(
     GameConstants.Region.kanto,
     [],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)], //TODO: unlock after defeating Four island
     }
 );
 TownList['Valencia Pokémon Center'] = new Town(
