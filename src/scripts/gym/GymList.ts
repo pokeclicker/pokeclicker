@@ -621,25 +621,38 @@ GymList['Champion Wallace'] = new Champion(
 GymList['Mikan Island'] = new Gym(
     'Cissy',
     'Mikan Island',
-    [], // TODO]
+    [
+        new GymPokemon('Seadra', 2307500, 24),
+        new GymPokemon('Blastoise', 2307500, 24),
+    ],
     BadgeEnums['Coral-Eye'],
-    1200,
+    1200, //TODO
     'TODO'
 );
 GymList['Navel Island'] = new Gym(
     'Danny',
     'Navel Island',
-    [], // TODO]
+    [
+        new GymPokemon('Nidoqueen', 923000, 24),
+        new GymPokemon('Machoke', 923000, 24),
+        new GymPokemon('Scyther', 923000, 24),
+        new GymPokemon('Electrode', 923000, 24),
+        new GymPokemon('Geodude', 923000, 24),
+    ],
     BadgeEnums.Sea_Ruby,
-    1200,
+    1200, //TODO
     'TODO'
 );
 GymList['Trovita Island'] = new Gym(
     'Rudy',
     'Trovita Island',
-    [], // TODO]
+    [
+        new GymPokemon('Electabuzz', 1538333, 24),
+        new GymPokemon('Exeggutor', 1538333, 24),
+        new GymPokemon('Starmie', 1538333, 24),
+    ],
     BadgeEnums.Spike_Shell,
-    1200,
+    1200, //TODO
     'TODO'
 );
 GymList['Kumquat Island'] = new Gym(
@@ -650,7 +663,7 @@ GymList['Kumquat Island'] = new Gym(
         new GymPokemon('Marowak', 1, 1),
     ],
     BadgeEnums.Jade_Star,
-    1200,
+    1200, //TODO
     'TODO'
 );
 
@@ -658,10 +671,17 @@ GymList['Kumquat Island'] = new Gym(
 GymList['Supreme Gym Leader Drake'] = new Gym(
     'Supreme Gym Leader Drake',
     'Supreme Gym Leader Drake',
-    [], // TODO]
+    [
+        new GymPokemon('Dragonite', 884000, 37),
+        new GymPokemon('Ditto', 884000, 38),
+        new GymPokemon('Onix', 884000, 39),
+        new GymPokemon('Gengar', 884000, 40),
+        new GymPokemon('Venusaur', 884000, 40),
+        new GymPokemon('Electabuzz', 884000, 41),
+    ],
     BadgeEnums.Elite_OrangeChampion,
     1200,
-    'TODO'
+    'TODO' //TODO
 );
 
 //Sinnoh Gyms
