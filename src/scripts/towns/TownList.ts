@@ -503,7 +503,7 @@ TownList['One Island'] = new Town(
 TownList['Mt. Ember'] = new Town(
     'Mt. Ember',
     GameConstants.Region.kanto,
-    [new MoveToDungeon(dungeonList['Mt. Ember Summit']), new MoveToDungeon(dungeonList['Ruby Path'])],
+    [new MoveToDungeon(dungeonList['Mt. Ember Summit']), new MoveToDungeon(dungeonList['Ruby Path']), TemporaryBattleList['Sevii Rocket Grunt 1'], TemporaryBattleList['Sevii Rocket Grunt 2']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)],
         npcs: [SeviiRocketGrunts],
