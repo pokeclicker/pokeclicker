@@ -1402,6 +1402,18 @@ dungeonList['Icefall Cave'] = new Dungeon('Icefall Cave',
     ],
     36000, 101);
 
+dungeonList['Sunburst Island'] = new Dungeon('Sunburst Island',
+    ['Hoppip', 'Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+    },
+    500000,
+    [new DungeonBossPokemon('Crystal Onix', 4500000, 20)],
+    36000, 101);
+
 dungeonList['Lost Cave'] = new Dungeon('Lost Cave',
     [
         'Gastly', 'Haunter', 'Zubat', 'Golbat', 'Murkrow', 'Misdreavus',

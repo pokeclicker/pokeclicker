@@ -559,7 +559,7 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     GemCave: {
-        [Region.kanto]: new Set(['Viridian City', 'Cerulean Cave']),
+        [Region.kanto]: new Set(['Viridian City', 'Cerulean Cave', 'Sunburst Island']),
         [Region.johto]: new Set(['Blackthorn City', 'Mt. Silver', 'Whirl Islands']),
         [Region.hoenn]: new Set(['Cave of Origin', 'Sky Pillar', 'Sealed Chamber']),
         [Region.sinnoh]: new Set(['Spear Pillar', 'Hall of Origin']),
@@ -1008,6 +1008,7 @@ export const KantoDungeons = [
     'Cerulean Cave',
     'Ruby Path',
     'Icefall Cave',
+    'Sunburst Island',
     'Lost Cave',
     'Pattern Bush',
     'Altering Cave',

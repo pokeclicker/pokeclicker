@@ -701,6 +701,11 @@ TownList['Icefall Cave'] = new DungeonTown(
     [],
     [SeviiLorelei]
 );
+TownList['Sunburst Island'] = new DungeonTown(
+    'Sunburst Island',
+    GameConstants.Region.kanto,
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 31)]
+);
 TownList['Lost Cave'] = new DungeonTown(
     'Lost Cave',
     GameConstants.Region.kanto,

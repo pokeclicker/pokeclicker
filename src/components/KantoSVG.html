@@ -844,6 +844,69 @@
         <!-- ROUTES -->
         <!-- ------ -->
 
+        <!--Five Isle Meadow-->
+        <%- include('templates/mapRoute',
+            { route: 30, region: 0
+            , width: 3, height: 6.5
+            , x: 68, y: 23
+            , name: "FIM"
+            })
+        %>
+
+        <!--Five Isle Meadow extension-->
+        <%- include('templates/mapRoute',
+            { route: 30, region: 0
+            , width: 2, height: 3
+            , x: 66, y: 23
+            , noText: true
+            })
+        %>
+
+        <!--Five Isle Meadow extension-->
+        <%- include('templates/mapRoute',
+            { route: 30, region: 0
+            , width: 4, height: 3
+            , x: 68, y: 33
+            , noText: true
+            })
+        %>
+
+        <!--Memorial Pillar-->
+        <%- include('templates/mapRoute',
+            { route: 31, region: 0
+            , width: 3, height: 8
+            , x: 72, y: 33
+            , name: "MP"
+            })
+        %>
+
+        <!--Water Labyrinth-->
+        <%- include('templates/mapRoute',
+            { route: 32, region: 0
+            , width: 9, height: 3
+            , x: 54, y: 20
+            , name: "WL"
+            })
+        %>
+
+        <!--Water Labyrinth extension-->
+        <%- include('templates/mapRoute',
+            { route: 32, region: 0
+            , width: 2, height: 2
+            , x: 63, y: 20
+            , noText: true
+            })
+        %>
+
+        <!--Resort Gorgeous-->
+        <%- include('templates/mapRoute',
+            { route: 33, region: 0
+            , width: 11, height: 3
+            , x: 54, y: 20
+            , name: "RG"
+            })
+        %>
+
         <!--Valencia Island-->
         <%- include('templates/mapRoute',
             { route: 40, region: 0
@@ -855,7 +918,7 @@
 
         <!--Valencia Island extension-->
         <%- include('templates/mapRoute',
-        { route: 40, region: 0
+            { route: 40, region: 0
             , width: 2, height: 3
             , x: 4, y: 6
             , noText: true
@@ -864,7 +927,7 @@
 
         <!--Valencia Island extension-->
         <%- include('templates/mapRoute',
-        { route: 40, region: 0
+            { route: 40, region: 0
             , width: 1, height: 2
             , x: 3, y: 7
             , noText: true
@@ -878,17 +941,42 @@
         <!--Four Island-->
         <%- include('templates/mapTown',
             { name: "Four Island"
-            , x: 38, y: 12
-            , width: 3, height: 4
+            , x: 38, y: 13
+            , width: 4, height: 3
             })
         %>
 
         <!--Four Island extension-->
         <%- include('templates/mapTown',
             { name: "Four Island"
-            , x: 41, y: 13
-            , width: 1, height: 3
+            , x: 38, y: 11
+            , width: 3, height: 1
             , isExtension: true
+            })
+        %>
+
+        <!--Five Island-->
+        <%- include('templates/mapTown',
+            { name: "Five Island"
+            , x: 62, y: 23
+            , width: 4, height: 3
+            })
+        %>
+
+        <!--Five Island extension-->
+        <%- include('templates/mapTown',
+            { name: "Five Island"
+            , x: 63, y: 22
+            , width: 3, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Rocket Warehouse-->
+        <%- include('templates/mapTown',
+            { name: "Rocket Warehouse"
+            , x: 67, y: 29.5
+            , width: 4, height: 3.5
             })
         %>
 
@@ -903,8 +991,8 @@
         <!--Valencia Pokémon Center-->
         <%- include('templates/mapTown',
             { name: "Valencia Pokémon Center"
-            , x: 3, y: 2
-            , width: 4, height: 4
+            , x: 3, y: 2.5
+            , width: 4, height: 3.5
             })
         %>
 
@@ -917,6 +1005,40 @@
             { name: "Icefall Cave"
             , x: 41, y: 11
             , width: 3, height: 2
+            })
+        %>
+
+        <!--Lost Cave-->
+        <%- include('templates/mapDungeon',
+            { name: "Lost Cave"
+            , x: 74, y: 17
+            , width: 3, height: 3
+            })
+        %>
+
+        <!--Lost Cave extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Lost Cave"
+            , x: 84, y: 14
+            , width: 3, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!--Sunburst Island-->
+        <%- include('templates/mapDungeon',
+            { name: "Sunburst Island"
+            , x: 71, y: 41
+            , width: 5, height: 3
+            })
+        %>
+
+        <!--Sunburst Island extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Sunburst Island"
+            , x: 71, y: 44
+            , width: 2, height: 1
+            , isExtension: true
             })
         %>
     </g>
