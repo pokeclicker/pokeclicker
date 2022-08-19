@@ -87,6 +87,7 @@ export const SpriteCredits: Credit[] = [
             'Team Flare Admin (female)',
             'Team Flare Aliana',
             'Tourist Couple/Bellhop',
+            'Valencian Raticate',
         ],
         // Notes: Made specifically for PokéClicker.
     },
