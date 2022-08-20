@@ -105,7 +105,7 @@ class FarmController {
 
     public static toggleAllPlotsLocked(lock: boolean) {
         App.game.farming.plotList.forEach((plot, index) => {
-            if ((lock && !plot.isSafeLocked) || (!lock && plot.isSafeLocked)) {
+            if (plot.isUnlocked && (lock && !plot.isSafeLocked) || (!lock && plot.isSafeLocked)) {
                 App.game.farming.togglePlotSafeLock(index);
             }
         });
