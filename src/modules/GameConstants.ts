@@ -38,7 +38,7 @@ export enum Region {
     final = 8,
 }
 
-export const MAX_AVAILABLE_REGION = Region.galar;
+export const MAX_AVAILABLE_REGION = Region.alola;
 
 export const MaxIDPerRegion = [
     151, // 151 - Kanto
@@ -1434,10 +1434,10 @@ export enum DayOfWeek {
 }
 
 export enum Pokerus {
-    'None' = 0,
+    'Uninfected' = 0,
     'Infected',
     'Contagious',
-    'Cured',
+    'Resistant',
 }
 
 // Subregions

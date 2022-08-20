@@ -471,10 +471,10 @@ namespace GameConstants {
         'Saturday',
     }
     declare enum Pokerus {
-        'None',
+        'Uninfected',
         'Infected',
         'Contagious',
-        'Cured',
+        'Resistant',
     }
     declare enum ShardTraderLocations {
         'Cerulean City',

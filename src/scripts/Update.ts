@@ -1038,6 +1038,16 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 6);
         },
 
+        '0.9.12': ({ playerData, saveData }) => {
+            // Revert player back to Alola if in Galar
+            if (playerData._region >= 7) {
+                playerData._region = 6;
+                playerData._subregion = 0;
+                playerData._route = 0;
+                playerData._townName = 'Iki Town Outskirts';
+            }
+        },
+
     };
 
     constructor() {
