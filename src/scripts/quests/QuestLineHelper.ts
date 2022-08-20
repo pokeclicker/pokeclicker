@@ -327,7 +327,7 @@ class QuestLineHelper {
 
         celebiJohtoQuestLine.addQuest(CelebiCatch);
 
-        const talktoProfOak6 = new TalkToNPCQuest(AzaleaCelebiOak4, 'Talk to Professor Oak in Azalea Town.');
+        const talktoProfOak6 = new TalkToNPCQuest(AzaleaCelebiOak5, 'Talk to Professor Oak in Azalea Town.');
         celebiJohtoQuestLine.addQuest(talktoProfOak6);
 
         App.game.quests.questLines().push(celebiJohtoQuestLine);
