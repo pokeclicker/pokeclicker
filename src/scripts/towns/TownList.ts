@@ -156,8 +156,8 @@ const PalletProfOak = new ProfNPC('Prof. Oak',
     'Congratulations on completing your Kanto Pokédex!',
     'Your journey isn\'t over yet, a whole world awaits you! Onwards to Johto!',
     'assets/images/oak.png',
-    // Make sure Oak isn't cloned while in the Celebi questline.
-    new OneFromManyRequirement([new QuestLineStartedRequirement('Unfinished Business', GameConstants.AchievementOption.less), new QuestLineStepCompletedRequirement('Unfinished Business', 2), new QuestLineCompletedRequirement('Unfinished Business')]));
+    // Prevent Prof. Oak clones
+    new OneFromManyRequirement([new QuestLineStartedRequirement('Unfinished Business', GameConstants.AchievementOption.less), new QuestLineCompletedRequirement('Unfinished Business'), new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 2), new QuestLineStepCompletedRequirement('Unfinished Business', 4, GameConstants.AchievementOption.less)])]));
 
 const PalletMom1 = new NPC('Mom', [
     'So you\'re really leaving on your very own Pokémon journey. I\'m so proud of you. Let me give you some words of wisdom for your travels.',
@@ -179,7 +179,7 @@ const PalletCelebiProfOak2 = new NPC('Prof. Oak', [
     'Hm. I just can\'t figure this out. There\'s clearly something inside, but I just can\'t get the darned thing to open.',
     'I know just the man for the job! Kurt, a Poké Ball expert. He lives in Azalea Town, in Johto. Please deliver the GS Ball to him.',
 ],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 1), new QuestLineStepCompletedRequirement('Unfinished Business', 3, GameConstants.AchievementOption.less )]) });
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 1), new QuestLineStepCompletedRequirement('Unfinished Business', 2, GameConstants.AchievementOption.less )]) });
 const ViridianCityOldMan1 = new NPC('Old Man', [
     'Leave me alone. I need my coffee.',
 ],
@@ -739,7 +739,7 @@ const AzaleaCelebiKurt4 = new NPC('Kurt', [
 
 const AzaleaCelebiOak1 = new NPC('Prof. Oak', [
     'I knew it! I knew that Celebi was in there! Well, I didn\'t actually know. I had a feeling.',
-    'That Celebi is an old friend of mine. Back in the day it liked to hang out at the old shrine in Ilex Forest. If you want to catch this Celebi you should go check it out.',
+    'That Celebi is an old friend of mine. Back in the day it liked to hang out at the old shrine in Ilex Forest. You should go check it out and try to catch Celebi.',
     'I can\'t think of a better trainer for this Celebi.',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 4), new QuestLineStepCompletedRequirement('Unfinished Business', 6, GameConstants.AchievementOption.less )]) });
@@ -747,7 +747,7 @@ const AzaleaCelebiOak1 = new NPC('Prof. Oak', [
 const AzaleaCelebiOak2 = new NPC('Prof. Oak', [
     'Celebi wasn\'t there? Strange, usually it loves to play with young people at the shrine.',
     'Wait. That Pichu! It used to play with us at that shrine way back when! It looks like it hasn\'t aged a day!',
-    'It sounds like you encountered a Time Distortion. Celebi is sensitive to time, it must be distressed. I have heared rumors of something similar going on at Tohjo Falls. Maybe if you clear up that Time Distortion Celebi will want to come out to play?',
+    'It sounds like you encountered a Time Distortion. Celebi is sensitive to time, it must be distressed. I have heared rumors of something similar going on at Tohjo Falls. Maybe if you clear up that Time Distortion, Celebi will want to come out to play?',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 7), new QuestLineStepCompletedRequirement('Unfinished Business', 9, GameConstants.AchievementOption.less )]) });
 
@@ -755,9 +755,16 @@ const AzaleaCelebiOak3 = new NPC('Prof. Oak', [
     'So Giovanni was there at the Falls while you were dealing with that mess at the Radio Tower? If only we had known, we could have had him arrested right then and there.',
     'The Time Distortion seems to have cleared up. Celebi should be happy now. You should go check out the Shrine again.',
 ],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 10), new QuestLineStepCompletedRequirement('Unfinished Business', 13, GameConstants.AchievementOption.less )]) });
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 10), new QuestLineStepCompletedRequirement('Unfinished Business', 12, GameConstants.AchievementOption.less )]) });
 
 const AzaleaCelebiOak4 = new NPC('Prof. Oak', [
+    'What\'s that? Celebi ran back into the forest?',
+    'Well, follow it!',
+    'If it wants to play I\'m sure a great trainer such as yourself can figure out a way that you can be friends and play all the time!',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 12), new QuestLineStepCompletedRequirement('Unfinished Business', 13, GameConstants.AchievementOption.less )]) });
+
+const AzaleaCelebiOak5 = new NPC('Prof. Oak', [
     'I\'m glad Celebi has been released from that wretched prison and has found a home with a great young trainer like yourself. I\'m going back to Kanto.',
     '...',
     'Goodbye Celebi.',
@@ -866,7 +873,7 @@ TownList['Azalea Town'] = new Town(
     [AzaleaTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Azalea Town']), new MoveToDungeon(dungeonList['Slowpoke Well'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 33)],
-        npcs: [AzaleaOldMan, AzaleaHiker, AzaleaCelebiKurt1, AzaleaCelebiKurt2, AzaleaCelebiKurt3, AzaleaCelebiKurt4, AzaleaCelebiOak1, AzaleaCelebiOak2, AzaleaCelebiOak3, AzaleaCelebiOak4],
+        npcs: [AzaleaOldMan, AzaleaHiker, AzaleaCelebiKurt1, AzaleaCelebiKurt2, AzaleaCelebiKurt3, AzaleaCelebiKurt4, AzaleaCelebiOak1, AzaleaCelebiOak2, AzaleaCelebiOak3, AzaleaCelebiOak4, AzaleaCelebiOak5],
     }
 );
 TownList['Goldenrod City'] = new Town(

@@ -318,7 +318,7 @@ class QuestLineHelper {
 
         const CelebiCatch = new CaptureSpecificPokemonQuest(
             'Celebi',
-            'Play with Celebi.',
+            'Play with Celebi in Ilex Forest.',
             1,
             false,
             undefined,
