@@ -406,15 +406,28 @@
                             visible: FarmController.farmingModalTabSelected() == 'farmHandsView'
                         ">Fire All</button>
                 <div class="safeLockButton">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-primary" data-bind="click: function() {FarmController.selectedPlotSafeLock() ? FarmController.selectedPlotSafeLock(false) : FarmController.selectedPlotSafeLock(true);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);},
+                            css: { 'active': FarmController.selectedPlotSafeLock() },
+                            tooltip: {title: 'Toggle locking a plot from interaction.',  trigger: 'hover', animation: false},
+                            visible: FarmController.farmingModalTabSelected() == 'berryFarmView'
+                        ">
+                            <img src="assets/images/farm/plotSafeLock.svg" height="22">
+                        </button>
 
-                    <button type="button" class="btn btn-primary" data-bind="click: function() {FarmController.selectedPlotSafeLock() ? FarmController.selectedPlotSafeLock(false) : FarmController.selectedPlotSafeLock(true);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);},
-                        css: { 'active': FarmController.selectedPlotSafeLock() },
-                        tooltip: {title: 'Toggle locking a plot from interaction.',  trigger: 'hover', animation: false},
-                        visible: FarmController.farmingModalTabSelected() == 'berryFarmView'
-                    ">
-                        <img src="assets/images/farm/plotSafeLock.svg" height="22">
-                    </button>
+                        <button type="button" class="btn btn-primary" data-bind="
+                            click: () => FarmController.toggleAllPlotsLocked(true),
+                            tooltip: { title: 'Lock all plots.', trigger: 'hover', animation: false },
+                            visible: FarmController.farmingModalTabSelected() == 'berryFarmView'
+                        ">All</button>
+                        <button type="button" class="btn btn-primary" data-bind="
+                            click: () => FarmController.toggleAllPlotsLocked(false),
+                            tooltip: { title: 'Unlock all plots.', trigger: 'hover', animation: false },
+                            visible: FarmController.farmingModalTabSelected() == 'berryFarmView'
+                        ">None</button>
+                    </div>
                 </div>
+
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
