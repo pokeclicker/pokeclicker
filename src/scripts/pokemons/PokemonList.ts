@@ -495,7 +495,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 10.1,
+        'id': 10.01,
         'name': 'Pinkan Caterpie',
         'catchRate': 255,
         'type': [PokemonType.Bug],
@@ -600,7 +600,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 13.1,
+        'id': 13.01,
         'name': 'Pinkan Weedle',
         'catchRate': 255,
         'type': [PokemonType.Bug, PokemonType.Poison],
@@ -670,7 +670,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 16.1,
+        'id': 16.01,
         'name': 'Pinkan Pidgey',
         'catchRate': 255,
         'type': [PokemonType.Normal, PokemonType.Flying],
@@ -1322,7 +1322,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 29.1,
+        'id': 29.01,
         'name': 'Pinkan Nidoran(F)',
         'catchRate': 235,
         'type': [PokemonType.Poison],
@@ -1392,7 +1392,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 32.1,
+        'id': 32.01,
         'name': 'Pinkan Nidoran(M)',
         'catchRate': 235,
         'type': [PokemonType.Poison],
@@ -1444,7 +1444,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 34.1,
+        'id': 34.01,
         'name': 'Pinkan Nidoking',
         'catchRate': 45,
         'type': [PokemonType.Poison, PokemonType.Ground],
@@ -1714,7 +1714,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 45.2,
+        'id': 45.02,
         'name': 'Pinkan Vileplume',
         'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Poison],
@@ -1766,7 +1766,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 46.2,
+        'id': 46.02,
         'name': 'Pinkan Paras',
         'catchRate': 190,
         'type': [PokemonType.Bug, PokemonType.Grass],
@@ -2086,7 +2086,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 56.1,
+        'id': 56.01,
         'name': 'Pinkan Mankey',
         'catchRate': 190,
         'type': [PokemonType.Fighting],
@@ -2121,7 +2121,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 57.1,
+        'id': 57.01,
         'name': 'Pinkan Primeape',
         'catchRate': 75,
         'type': [PokemonType.Fighting],
@@ -2370,7 +2370,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 69.1,
+        'id': 69.01,
         'name': 'Pinkan Bellsprout',
         'catchRate': 255,
         'type': [PokemonType.Grass, PokemonType.Poison],
@@ -3537,7 +3537,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 112.1,
+        'id': 112.01,
         'name': 'Pinkan Rhydon',
         'catchRate': 60,
         'type': [PokemonType.Ground, PokemonType.Rock],
