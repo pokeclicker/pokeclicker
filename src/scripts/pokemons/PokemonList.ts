@@ -3071,7 +3071,7 @@ const pokemonList = createPokemonArray(
         'id': 95.01,
         'name': 'Crystal Onix',
         'catchRate': 45,
-        'type': [PokemonType.Rock, PokemonType.Ground],
+        'type': [PokemonType.Rock, PokemonType.Ice],
         'levelType': LevelType.mediumfast,
         'exp': 77,
         'eggCycles': 25,
