@@ -150,7 +150,7 @@ const ThreeIslandShop = new Shop([
 ]);
 const ClientIslandShop = new Shop([
     ItemList['Charity Chansey'],
-]);
+], 'Gift Shop');
 
 // Kanto NPCs
 
@@ -326,6 +326,19 @@ const CelebiProfIvy = new NPC ('Prof. Ivy', [
 ],
 { requirement: new QuestLineStepCompletedRequirement('Unfinished Business', 2, GameConstants.AchievementOption.less) });
 
+const ClientSignpost = new NPC('Welcome Sign', [
+    '<i>Welcome to Client Island!</i>',
+    '<i>This island is exclusive to those dedicated to reducing server load by downloading the client.</i>',
+    '<i>Without your support, Red Spearow here wouldn\'t have any time to relax!</i>',
+    '<i>Please drop by the Gift Shop on your way out to make a whole new line of friends.</i>',
+]);
+
+const RedSpearow = new NPC('Red Spearow', [
+    '<b><i>SQUAWK! SQUAWK!</i></b>',
+    '...',
+    '<i>The Red Spearow seems to appreciate your visit.</i>',
+]);
+
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
@@ -500,6 +513,7 @@ TownList['Client Island'] = new Town(
     [ClientIslandShop],
     {
         requirements: [new ClientRequirement(), new GymBadgeRequirement(BadgeEnums.Volcano)],
+        npcs: [ClientSignpost, RedSpearow],
     }
 );
 
