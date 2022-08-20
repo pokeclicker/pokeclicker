@@ -333,8 +333,8 @@ const Informant2 = new NPC('Informant', [
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 4), new QuestLineStepCompletedRequirement('Detective Pikachu', 6, GameConstants.AchievementOption.less )])});
 
 const MewTwo1 = new NPC('Mewtwo', [
-    'You were wise to seek my out. Howard Clifford has been decieving you. He is the one making the R drug, and....',
-    'A sphere of energy envelops Mewtwo, and he is dragged away by some sort of helicopter. The helicopter has a logo on it: Clifford Industries!',
+    'You were wise to seek my out. Howard Clifford has been deceiving you. He is the one making the R drug, and....',
+    '<i>A sphere of energy envelops Mewtwo, and he is dragged away by some sort of helicopter. The helicopter has a logo on it: Clifford Industries!</i>',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 10), new QuestLineStepCompletedRequirement('Detective Pikachu', 12, GameConstants.AchievementOption.less )])});
 
@@ -858,7 +858,7 @@ const ProfElm = new ProfNPC('Prof. Elm',
     'Amazing! Next stop is Hoenn, enjoy the sunshine while you\'re there!');
 
 const searchForClues = new NPC('Search For Clues', [
-    'You look around the city in search of clues, and are set upon by a gang of angry Aipoms!',
+    '<i>You look around the city in search of clues, and are set upon by a gang of angry Aipoms!</i>',
 ],
 { requirement: new MultiRequirement([new QuestLineStartedRequirement('Detective Pikachu'), new QuestLineStepCompletedRequirement('Detective Pikachu', 1, GameConstants.AchievementOption.less )]) });
 
@@ -869,8 +869,8 @@ const HowardClifford1= new NPC('Howard Clifford', [
 
 const HowardClifford2= new NPC('Howard Clifford', [
     'You are too late to stop me! The R drug puts Pokemon in a frenzied state, and allows us to control them with the right equipment! You led me straight to Mewtwo, and now I will take control of the most powerful Pokemon in the world!',
-    'Howard puts on a headset and pushes a button. The energy sphere containing Mewtwo comes into view, and it has a crazed look in its eyes. Howard pushes a botton on his headset and slumps back in his chair.',
-    'Mewtwo makes eye contact with you, and you hear Howard\'s voice in your mind, laughing maniacally. An armed man comes into the room, and warns you not to move.',
+    '<i>Howard puts on a headset and pushes a button. The energy sphere containing Mewtwo comes into view, and it has a crazed look in its eyes. Howard pushes a botton on his headset and slumps back in his chair.</i>',
+    '<i>Mewtwo makes eye contact with you, and you hear Howard\'s voice in your mind, laughing maniacally. An armed man comes into the room, and warns you not to move.</i>',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 11), new QuestLineStepCompletedRequirement('Detective Pikachu', 13, GameConstants.AchievementOption.less )])});
 
