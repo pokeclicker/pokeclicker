@@ -83,14 +83,16 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/272336444297707521/',
         image: 'assets/images/profile/trainer-96.png',
         resources: [
+            'Blimp base',
             'Pinkan Caterpie',
+            'Pinkan Pikachu',
             'Pinkan Rhyhorn (shiny)',
+            'Pinkan Weedle',
             'Team Flare Admin (male)',
             'Team Flare Admin (female)',
             'Team Flare Aliana',
             'Tourist Couple/Bellhop',
-            'Pinkan Caterpie',
-            'Caterpie Pikachu',
+
             'Valencian Raticate',
             'Valencian Paras',
         ],
