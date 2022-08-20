@@ -758,7 +758,7 @@ const AzaleaCelebiOak3 = new NPC('Prof. Oak', [
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 10), new QuestLineStepCompletedRequirement('Unfinished Business', 12, GameConstants.AchievementOption.less )]) });
 
 const AzaleaCelebiOak4 = new NPC('Prof. Oak', [
-    'What\'s that? Celebi ran back into the forest?',
+    'What\'s that? Celebi went back into the forest?',
     'Well, follow it!',
     'If it wants to play I\'m sure a great trainer such as yourself can figure out a way that you can be friends and play all the time!',
 ],
@@ -780,6 +780,7 @@ const IlexForestShrine1 = new NPC('Investigate the Shrine', [
 const IlexForestShrine2 = new NPC('Investigate the Shrine', [
     '<i>Everything is normal.</i>',
     '<i>Celebi is here! It seems to want to play with you, but every time you approach it backs off. It\'s luring you deeper into the forest!</i>',
+    '<i>What would the professor do?</i>',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 11), new QuestLineStepCompletedRequirement('Unfinished Business', 13, GameConstants.AchievementOption.less )]) });
 
