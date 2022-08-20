@@ -420,7 +420,7 @@ class QuestLineHelper {
     }
 
     public static createRubySapphireSeviiQuestLine() {
-        const rubySapphireSeviiQuestLine = new QuestLine('Celio\'s Errand', 'Celio has asked you to help him set up a digital connection to Hoenn.', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), GameConstants.BulletinBoards.Hoenn);
+        const rubySapphireSeviiQuestLine = new QuestLine('Celio\'s Errand', 'Celio has asked you to help him set up a digital connection between the Sevii Islands and Hoenn.', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), GameConstants.BulletinBoards.Hoenn);
 
         const talktoCelio3 = new TalkToNPCQuest(OneIslandCelio4, 'Speak with Celio on One Island.');
         rubySapphireSeviiQuestLine.addQuest(talktoCelio3);
@@ -449,7 +449,7 @@ class QuestLineHelper {
         const talktoLorelei = new TalkToNPCQuest(SeviiLorelei, 'Talk to Lorelei in Icefall Cave');
         rubySapphireSeviiQuestLine.addQuest(talktoLorelei);
 
-        const talktoGideon = new TalkToNPCQuest(SeviiGideon2, 'Return the Gideon in Dotted Hole');
+        const talktoGideon = new TalkToNPCQuest(SeviiGideon2, 'Talk to Gideon in Dotted Hole');
         rubySapphireSeviiQuestLine.addQuest(talktoGideon);
 
         const clearSeviiRocketGrunts2 = new CustomQuest(2, 0, 'Defeat the Team Rocket Grunts in Rocket Warehouse.', () =>
