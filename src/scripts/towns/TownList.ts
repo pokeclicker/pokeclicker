@@ -344,7 +344,7 @@ const MewTwo2 = new NPC('Mewtwo', [
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 15), new QuestLineStepCompletedRequirement('Detective Pikachu', 17, GameConstants.AchievementOption.less )])});
 
-const DetectiveRaichu= new NPC('Detective Raichu', [
+const DetectiveRaichu = new NPC('Detective Raichu', [
     'Thanks for your help, kid! I\'ll stick along with you until our next mystery comes along.',
 
 ],
@@ -603,7 +603,7 @@ TownList['Victory Road'] = new DungeonTown(
 TownList['Cerulean Cave'] = new DungeonTown(
     'Cerulean Cave',
     GameConstants.Region.kanto,
-    [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
+    [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)]
 
 );
 
@@ -862,19 +862,19 @@ const searchForClues = new NPC('Search For Clues', [
 ],
 { requirement: new MultiRequirement([new QuestLineStartedRequirement('Detective Pikachu'), new QuestLineStepCompletedRequirement('Detective Pikachu', 1, GameConstants.AchievementOption.less )]) });
 
-const HowardClifford1= new NPC('Howard Clifford', [
+const HowardClifford1 = new NPC('Howard Clifford', [
     'I am Howard Clifford, CEO of Clifford Industries. I hear you have been investigating both my company, and a mysterious drug called R. I have reason to believe that a high ranking official in the company is manufacturing this drug, but have been unable to get to the bottom of it myself. There is a journalist in Hearthome City who may be able to help us both. Please make contact with her, and report anything you find back to me.',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 6), new QuestLineStepCompletedRequirement('Detective Pikachu', 8, GameConstants.AchievementOption.less )])});
 
-const HowardClifford2= new NPC('Howard Clifford', [
+const HowardClifford2 = new NPC('Howard Clifford', [
     'You are too late to stop me! The R drug puts Pokemon in a frenzied state, and allows us to control them with the right equipment! You led me straight to Mewtwo, and now I will take control of the most powerful Pokemon in the world!',
     '<i>Howard puts on a headset and pushes a button. The energy sphere containing Mewtwo comes into view, and it has a crazed look in its eyes. Howard pushes a botton on his headset and slumps back in his chair.</i>',
     '<i>Mewtwo makes eye contact with you, and you hear Howard\'s voice in your mind, laughing maniacally. An armed man comes into the room, and warns you not to move.</i>',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 11), new QuestLineStepCompletedRequirement('Detective Pikachu', 13, GameConstants.AchievementOption.less )])});
 
-const HowardClifford3= new NPC('Howard Clifford', [
+const HowardClifford3 = new NPC('Howard Clifford', [
     'UNLIMITED POWER! YOU\'LL NEVER STOP ME!',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 13), new QuestLineStepCompletedRequirement('Detective Pikachu', 15, GameConstants.AchievementOption.less )])});
@@ -920,7 +920,7 @@ TownList['Azalea Town'] = new Town(
 TownList['Goldenrod City'] = new Town(
     'Goldenrod City',
     GameConstants.Region.johto,
-    [GoldenrodDepartmentStoreShop, JohtoBerryMaster, new MoveToDungeon(dungeonList['Radio Tower']), TemporaryBattleList['Aipom Alley'], TemporaryBattleList['Imposter'], TemporaryBattleList['Possessed Mewtwo']],
+    [GoldenrodDepartmentStoreShop, JohtoBerryMaster, new MoveToDungeon(dungeonList['Radio Tower']), TemporaryBattleList['Aipom Alley'], TemporaryBattleList.Imposter, TemporaryBattleList['Possessed Mewtwo']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
         npcs: [BigSpender, searchForClues, HowardClifford1, HowardClifford2, HowardClifford3],
@@ -1765,7 +1765,7 @@ const ProfRowan = new ProfNPC('Prof. Rowan',
     'Congratulations, you\'re more than half-way completed on the national Pokédex!',
     'Next stop is Unova! I\'ve always wanted to visit Castelia City, personally...');
 
-const LucyStevens1= new NPC('Lucy Stevens', [
+const LucyStevens1 = new NPC('Lucy Stevens', [
     'Who sent you to talk to me? Howard Clifford himself? That\'s a little suspicious, but you seem trustworthy enough. I\'ve been doing some research on this R compound, and have reason to believe it is being manufactured or used in research at the P2 lab in Unova. We should investigate!',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 7), new QuestLineStepCompletedRequirement('Detective Pikachu', 9, GameConstants.AchievementOption.less )])});

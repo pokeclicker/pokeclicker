@@ -1076,7 +1076,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
-   },
+    },
     {
         'id': 25.14,
         'name': 'Detective Pikachu',

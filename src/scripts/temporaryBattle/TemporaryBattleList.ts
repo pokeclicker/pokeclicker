@@ -105,15 +105,17 @@ TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
 );
 TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
     'Aipom Alley',
-    [new GymPokemon('Aipom', 10456789, 66),
-    new GymPokemon('Aipom', 10456789, 66),
-    new GymPokemon('Aipom', 10456789, 66),
-    new GymPokemon('Aipom', 10456789, 66),
-    new GymPokemon('Aipom', 10456789, 66)],
+    [
+        new GymPokemon('Aipom', 10456789, 66),
+        new GymPokemon('Aipom', 10456789, 66),
+        new GymPokemon('Aipom', 10456789, 66),
+        new GymPokemon('Aipom', 10456789, 66),
+        new GymPokemon('Aipom', 10456789, 66),
+    ],
     '<i>The Aipoms run off, dropping a small glass vial.</i>',
     [new QuestLineStepCompletedRequirement('Detective Pikachu', 0)]
 );
-TemporaryBattleList['Imposter'] = new TemporaryBattle(
+TemporaryBattleList.Imposter = new TemporaryBattle(
     'Imposter',
     [new GymPokemon('Ditto', 70348615, 100)],
     '<i>The Ditto loses its human form and collapses to the floor.</i>',
@@ -128,9 +130,11 @@ TemporaryBattleList['Possessed Mewtwo'] = new TemporaryBattle(
 // Hoenn Temporary Battles
 TemporaryBattleList['Underground Fighting Ring'] = new TemporaryBattle(
     'Underground Fighting Ring',
-    [new GymPokemon('Charizard', 20354982, 70),
-    new GymPokemon('Magikarp', 10, 70),
-    new GymPokemon('Gyarados', 44963852, 70)],
+    [
+        new GymPokemon('Charizard', 20354982, 70),
+        new GymPokemon('Magikarp', 10, 70),
+        new GymPokemon('Gyarados', 44963852, 70),
+    ],
     'OK, OK! I get my R from a guy at Clifford Industries, in Goldenrod City.',
     [new QuestLineStepCompletedRequirement('Detective Pikachu', 5)]
 );
@@ -147,9 +151,11 @@ TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
 );
 TemporaryBattleList['Lab Ambush'] = new TemporaryBattle(
     'Lab Ambush',
-    [new GymPokemon('Greninja', 21954982, 70),
-    new GymPokemon('Greninja', 21954982, 70),
-    new GymPokemon('Greninja', 21954982, 70)],
+    [
+        new GymPokemon('Greninja', 21954982, 70),
+        new GymPokemon('Greninja', 21954982, 70),
+        new GymPokemon('Greninja', 21954982, 70),
+    ],
     '<i>As the dust clears from the battle, you see that Detective Pikachu has been wounded!</i>',
     [new QuestLineStepCompletedRequirement('Detective Pikachu', 9)]
 );

@@ -354,7 +354,7 @@ class QuestLineHelper {
         const searchForClues4 = new TalkToNPCQuest(Informant2, 'The informant is finally willing to "talk", find out what he has to say.');
         detectivePikachuQuestLine.addQuest(searchForClues4);
 
-        const undergroundFightingRing= new CustomQuest(1, 0, 'Infiltrate the underground fighting ring.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Underground Fighting Ring')]());
+        const undergroundFightingRing = new CustomQuest(1, 0, 'Infiltrate the underground fighting ring.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Underground Fighting Ring')]());
         detectivePikachuQuestLine.addQuest(undergroundFightingRing);
 
         const searchForClues5 = new TalkToNPCQuest(HowardClifford1, 'Go to Clifford Industries to demand some answers.');
@@ -366,7 +366,7 @@ class QuestLineHelper {
         const searchForClues7 = new CustomQuest(1, 0, 'Search the research laboratory for clues.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('P2 Laboratory')]());
         detectivePikachuQuestLine.addQuest(searchForClues7);
 
-        const labAmbush= new CustomQuest(1, 0, 'It was an ambush! You have been followed to Nuvema Town, defeat the mysterious attackers and escape!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lab Ambush')]());
+        const labAmbush = new CustomQuest(1, 0, 'It was an ambush! You have been followed to Nuvema Town, defeat the mysterious attackers and escape!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lab Ambush')]());
         detectivePikachuQuestLine.addQuest(labAmbush);
 
         const searchForClues8 = new TalkToNPCQuest(MewTwo1, 'Detective Pikachu is injured. He asks you to get help from his friend near Cerulean Cave');
@@ -375,13 +375,13 @@ class QuestLineHelper {
         const searchForClues9 = new TalkToNPCQuest(HowardClifford2, 'Confront Howard Clifford about his involvement with the R vials.');
         detectivePikachuQuestLine.addQuest(searchForClues9);
 
-        const imposterAttack= new CustomQuest(1, 0, 'Defeat Howard\'s bodyguard and escape.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Imposter')]());
+        const imposterAttack = new CustomQuest(1, 0, 'Defeat Howard\'s bodyguard and escape.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Imposter')]());
         detectivePikachuQuestLine.addQuest(imposterAttack);
 
         const howardConfront = new TalkToNPCQuest(HowardClifford3, 'Give Howard Clifford one last change to surrender!');
         detectivePikachuQuestLine.addQuest(howardConfront);
 
-        const possessedFight= new CustomQuest(1, 0, 'Defeat Mewtwo to free it from Howard\'s control!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Possessed Mewtwo')]());
+        const possessedFight = new CustomQuest(1, 0, 'Defeat Mewtwo to free it from Howard\'s control!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Possessed Mewtwo')]());
         detectivePikachuQuestLine.addQuest(possessedFight);
 
         const searchForClues10 = new TalkToNPCQuest(MewTwo2, 'Talk to Mewtwo about Detective Pikachu\'s partner.');
@@ -397,12 +397,12 @@ class QuestLineHelper {
             });
         };
 
-	const searchForClues11 = new TalkToNPCQuest(DetectiveRaichu, 'Talk to Detective Raichu', DetectiveRaichuReward);
+        const searchForClues11 = new TalkToNPCQuest(DetectiveRaichu, 'Talk to Detective Raichu', DetectiveRaichuReward);
         detectivePikachuQuestLine.addQuest(searchForClues11);
 
         App.game.quests.questLines().push(detectivePikachuQuestLine);
-    }    
-    
+    }
+
     // Hoenn QuestLines
     public static createAquaMagmaHoennQuestLine() {
         const aquaMagmaHoennQuestLine = new QuestLine('Land vs. Water', 'Put a stop to the schemes of Team Aqua and Team Magma!');
@@ -1271,7 +1271,7 @@ class QuestLineHelper {
         App.game.quests.questLines().push(hoopaDayPikabluQuestLine);
     }
 
-       public static isQuestLineCompleted(name: string) {
+    public static isQuestLineCompleted(name: string) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
 
