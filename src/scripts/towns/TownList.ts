@@ -758,8 +758,7 @@ const AzaleaCelebiOak3 = new NPC('Prof. Oak', [
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 10), new QuestLineStepCompletedRequirement('Unfinished Business', 12, GameConstants.AchievementOption.less )]) });
 
 const AzaleaCelebiOak4 = new NPC('Prof. Oak', [
-    'What\'s that? Celebi went back into the forest?',
-    'Well, follow it!',
+    'What\'s that? Celebi went back into the forest? Well, follow it!',
     'If it wants to play I\'m sure a great trainer such as yourself can figure out a way that you can be friends and play all the time!',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 12), new QuestLineStepCompletedRequirement('Unfinished Business', 13, GameConstants.AchievementOption.less )]) });
