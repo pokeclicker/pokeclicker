@@ -586,6 +586,14 @@ TownList['Dotted Hole'] = new Town(
         npcs: [SeviiGideon1, SeviiGideon2],
     }
 );
+TownList['Navel Island'] = new Town(
+    'Navel Island',
+    GameConstants.Region.kanto,
+    [],
+    {
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lost Cave'))],
+    }
+);
 TownList['Kumquat Island'] = new Town(
     'Kumquat Island',
     GameConstants.Region.kanto,
