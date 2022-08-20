@@ -1749,7 +1749,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 46.1,
+        'id': 46.01,
         'name': 'Valencian Paras',
         'catchRate': 190,
         'type': [PokemonType.Bug, PokemonType.Grass],
