@@ -361,6 +361,7 @@ export const SpriteCredits: Credit[] = [
         name: 'Someone Soul',
         link: 'https://discordapp.com/users/824384977633411082/',
         resources: [
+            'Macro Cosmos (male) and (female)',
             'Cissy',
             'Pinkan Pidgey',
             'Valencian Butterfree',
