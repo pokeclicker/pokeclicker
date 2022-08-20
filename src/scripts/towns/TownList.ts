@@ -547,7 +547,7 @@ TownList['Four Island'] = new Town(
     GameConstants.Region.kanto,
     [],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+        requirements: [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     }
 );
 TownList['Five Island'] = new Town(
@@ -555,7 +555,7 @@ TownList['Five Island'] = new Town(
     GameConstants.Region.kanto,
     [],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+        requirements: [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     }
 );
 TownList['Rocket Warehouse'] = new Town(
