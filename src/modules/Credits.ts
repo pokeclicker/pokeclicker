@@ -366,6 +366,7 @@ export const SpriteCredits: Credit[] = [
             'TODO name for Weepinbell',
             'TODO name for Gengar',
             'TODO name for Tangela',
+            'TODO name for Goldeen',
         ],
         // NOTES: Made specifically for Pokeclicker.
     },
