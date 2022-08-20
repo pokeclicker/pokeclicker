@@ -109,6 +109,15 @@ export const SpriteCredits: Credit[] = [
         // NOTES: Gives permission to everyone who asks in the comments section of the spritesheet as long as credit is given
     },
     {
+        name: 'Eat Pant',
+        link: 'https://discordapp.com/users/TODO',
+        resources: [
+            'Pinkan Nidoran(F)',
+            'Pinkan Nidoran(M)',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'EmmaRoak',
         link: 'https://www.deviantart.com/emmaroak',
         image: 'https://a.deviantart.net/avatars-big/e/m/emmaroak.png',
