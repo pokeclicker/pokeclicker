@@ -14,10 +14,13 @@ Change the type of `PokemonListData -> name` back to `PokemonNameType`
 
 export type PokemonNameType
     = 'Bulbasaur'
+    | 'Spooky Bulbasaur'
     | 'Bulbasaur (Rose)'
     | 'Ivysaur'
+    | 'Spooky Ivysaur'
     | 'Ivysaur (Rose)'
     | 'Venusaur'
+    | 'Spooky Venusaur'
     | 'Venusaur (Rose)'
     | 'Charmander'
     | 'Charmeleon'
@@ -1190,7 +1193,6 @@ export type PokemonNameType
     | 'Santa Snorlax'
     | 'Spooky Togepi'
     | 'Surprise Togepi'
-    | 'Spooky Bulbasaur'
     | 'Pikachu (Gengar)'
     | 'Let\'s Go Pikachu'
     | 'Let\'s Go Eevee'
