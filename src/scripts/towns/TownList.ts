@@ -324,11 +324,11 @@ const CelebiProfIvy = new NPC ('Prof. Ivy', [
 { requirement: new QuestLineStepCompletedRequirement('Unfinished Business', 2, GameConstants.AchievementOption.less) });
 
 const Informant1 = new NPC('Informant', [
-    'In a shady warehouse, you find the informant. He is a Mr. Mime, and he doesn\'t seem willing to divulge the information you need.',
+    '<i>In a shady warehouse, you find the informant. He is a Mr. Mime, and he doesn\'t seem willing to divulge the information you need.</i>',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 2), new QuestLineStepCompletedRequirement('Detective Pikachu', 4, GameConstants.AchievementOption.less )]) });
 const Informant2 = new NPC('Informant', [
-    'The Mr. Mime signals to you that this is an illicit drug called R, and that it is frequently used in the underground fighting rings near the Battle Frontier',
+    '<i>The Mr. Mime signals to you that this is an illicit drug called R, and that it is frequently used in the underground fighting rings near the Battle Frontier</i>',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 4), new QuestLineStepCompletedRequirement('Detective Pikachu', 6, GameConstants.AchievementOption.less )])});
 

@@ -78,7 +78,7 @@ TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
 TemporaryBattleList['Mime Interview'] = new TemporaryBattle(
     'Mime Interview',
     [new GymPokemon('Mr. Mime', 60144365, 100)],
-    'Mr. Mime relents and agrees to tell you what he knows.',
+    '<i>Mr. Mime relents and agrees to tell you what he knows.</i>',
     [new QuestLineStepCompletedRequirement('Detective Pikachu', 3)]
 );
 // Johto Temporary Battles
@@ -110,19 +110,19 @@ TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
     new GymPokemon('Aipom', 10456789, 66),
     new GymPokemon('Aipom', 10456789, 66),
     new GymPokemon('Aipom', 10456789, 66)],
-    'The Aipoms run off, dropping a small glass vial.',
+    '<i>The Aipoms run off, dropping a small glass vial.</i>',
     [new QuestLineStepCompletedRequirement('Detective Pikachu', 0)]
 );
 TemporaryBattleList['Imposter'] = new TemporaryBattle(
     'Imposter',
     [new GymPokemon('Ditto', 70348615, 100)],
-    'The Ditto loses its human form and collapses to the floor.',
+    '<i>The Ditto loses its human form and collapses to the floor.</i>',
     [new QuestLineStepCompletedRequirement('Detective Pikachu', 12)]
 );
 TemporaryBattleList['Possessed Mewtwo'] = new TemporaryBattle(
     'Possessed Mewtwo',
     [new GymPokemon('Mewtwo', 100348615, 100)],
-    'Howard\'s headset sparks and breaks. Mewtwo calms down, apparently free from Howard\'s influence. Mewtwo gives you a brief nod and flies off.',
+    '<i>Howard\'s headset sparks and breaks. Mewtwo calms down, apparently free from Howard\'s influence. Mewtwo gives you a brief nod and flies off.</i>',
     [new QuestLineStepCompletedRequirement('Detective Pikachu', 14)]
 );
 // Hoenn Temporary Battles
@@ -150,7 +150,7 @@ TemporaryBattleList['Lab Ambush'] = new TemporaryBattle(
     [new GymPokemon('Greninja', 21954982, 70),
     new GymPokemon('Greninja', 21954982, 70),
     new GymPokemon('Greninja', 21954982, 70)],
-    'As the dust clears from the battle, you see that Detective Pikachu has been wounded!',
+    '<i>As the dust clears from the battle, you see that Detective Pikachu has been wounded!</i>',
     [new QuestLineStepCompletedRequirement('Detective Pikachu', 9)]
 );
 // Kalos Temporary Battles
