@@ -602,6 +602,20 @@ TownList['Kumquat Island'] = new Town(
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Icefall Cave'))],
     }
 );
+TownList['Pummelo Island'] = new Town(
+    'Pummelo Island',
+    GameConstants.Region.kanto,
+    [GymList['Supreme Gym Leader Drake']],
+    {
+        requirements:
+        [
+            new GymBadgeRequirement(BadgeEnums['Coral-Eye']),
+            new GymBadgeRequirement(BadgeEnums.Sea_Ruby),
+            new GymBadgeRequirement(BadgeEnums.Spike_Shell),
+            new GymBadgeRequirement(BadgeEnums.Jade_Star),
+        ],
+    }
+);
 TownList['Valencia Pokémon Center'] = new Town(
     'Valencia Pokémon Center',
     GameConstants.Region.kanto,
