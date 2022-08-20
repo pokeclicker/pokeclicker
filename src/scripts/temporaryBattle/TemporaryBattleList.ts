@@ -75,7 +75,12 @@ TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Biker Goon 3'),
     ]
 );
-
+TemporaryBattleList['Mime Interview'] = new TemporaryBattle(
+    'Mime Interview',
+    [new GymPokemon('Mr. Mime', 60144365, 100)],
+    'Mr. Mime relents and agrees to tell you what he knows.',
+    [new QuestLineStepCompletedRequirement('Detective Pikachu', 3)]
+);
 // Johto Temporary Battles
 TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
     'Spiky-eared Pichu',
@@ -98,7 +103,37 @@ TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
     'What in the world are you? How this is possible...? How can a kid like you manage to destroy my dream once again? The precious dream of Team Rocket has become little more than an illusion...',
     [new QuestLineStepCompletedRequirement('Unfinished Business', 9)]
 );
-
+TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
+    'Aipom Alley',
+    [new GymPokemon('Aipom', 10456789, 66),
+    new GymPokemon('Aipom', 10456789, 66),
+    new GymPokemon('Aipom', 10456789, 66),
+    new GymPokemon('Aipom', 10456789, 66),
+    new GymPokemon('Aipom', 10456789, 66)],
+    'The Aipoms run off, dropping a small glass vial.',
+    [new QuestLineStepCompletedRequirement('Detective Pikachu', 0)]
+);
+TemporaryBattleList['Imposter'] = new TemporaryBattle(
+    'Imposter',
+    [new GymPokemon('Ditto', 70348615, 100)],
+    'The Ditto loses its human form and collapses to the floor.',
+    [new QuestLineStepCompletedRequirement('Detective Pikachu', 12)]
+);
+TemporaryBattleList['Possessed Mewtwo'] = new TemporaryBattle(
+    'Possessed Mewtwo',
+    [new GymPokemon('Mewtwo', 100348615, 100)],
+    'Howard\'s headset sparks and breaks. Mewtwo calms down, apparently free from Howard\'s influence. Mewtwo gives you a brief nod and flies off.',
+    [new QuestLineStepCompletedRequirement('Detective Pikachu', 14)]
+);
+// Hoenn Temporary Battles
+TemporaryBattleList['Underground Fighting Ring'] = new TemporaryBattle(
+    'Underground Fighting Ring',
+    [new GymPokemon('Charizard', 20354982, 70),
+    new GymPokemon('Magikarp', 10, 70),
+    new GymPokemon('Gyarados', 44963852, 70)],
+    'OK, OK! I get my R from a guy at Clifford Industries, in Goldenrod City.',
+    [new QuestLineStepCompletedRequirement('Detective Pikachu', 5)]
+);
 // Sinnoh Temporary Battles
 TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
     'Galactic Boss Cyrus',
@@ -110,7 +145,14 @@ TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
     'Impressive. Your prowess is notable.',
     [new QuestLineStepCompletedRequirement('A new world', 2)]
 );
-
+TemporaryBattleList['Lab Ambush'] = new TemporaryBattle(
+    'Lab Ambush',
+    [new GymPokemon('Greninja', 21954982, 70),
+    new GymPokemon('Greninja', 21954982, 70),
+    new GymPokemon('Greninja', 21954982, 70)],
+    'As the dust clears from the battle, you see that Detective Pikachu has been wounded!',
+    [new QuestLineStepCompletedRequirement('Detective Pikachu', 9)]
+);
 // Kalos Temporary Battles
 TemporaryBattleList.AZ = new TemporaryBattle(
     'AZ',

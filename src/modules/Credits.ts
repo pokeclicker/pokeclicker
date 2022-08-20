@@ -360,6 +360,14 @@ export const SpriteCredits: Credit[] = [
         // NOTES: free for non-profit use.
     },
     {
+        name: 'Someone Soul',
+        link: 'https://discordapp.com/users/824384977633411082',
+        resources: [
+            'Detective Pikachu',
+            'Detective Raichu',
+        ],
+    },
+    {
         name: 'tebited15',
         link: 'https://www.deviantart.com/tebited15',
         image: 'https://a.deviantart.net/avatars-big/t/e/tebited15.png',
