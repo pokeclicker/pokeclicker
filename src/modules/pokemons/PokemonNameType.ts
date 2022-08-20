@@ -79,6 +79,7 @@ export type PokemonNameType
     | 'Pikachu (Gengar)'
     | 'Let\'s Go Pikachu'
     | 'Pikachu (World Cap)'
+    | 'Pinkan Pikachu'
     | 'Gigantamax Pikachu'
     | 'Raichu'
     | 'Alolan Raichu'

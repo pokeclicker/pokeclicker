@@ -89,6 +89,8 @@ export const SpriteCredits: Credit[] = [
             'Team Flare Admin (female)',
             'Team Flare Aliana',
             'Tourist Couple/Bellhop',
+            'Pinkan Caterpie',
+            'Caterpie Pikachu',
             'Valencian Raticate',
             'Valencian Paras',
         ],

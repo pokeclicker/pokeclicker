@@ -1163,6 +1163,23 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 25.13,
+        'name': 'Pinkan Pikachu',
+        'catchRate': 190,
+        'type': [PokemonType.Electric],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+    },
+    {
+        'id': 25.14,
         'name': 'Gigantamax Pikachu',
         'nativeRegion': GameConstants.Region.none,
         'catchRate': 190,
