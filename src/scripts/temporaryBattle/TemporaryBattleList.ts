@@ -137,7 +137,7 @@ TemporaryBattleList['Sevii Rocket Grunt 3'] = new TemporaryBattle(
         new GymPokemon('Houndour', 198477, 49),
     ],
     'Oh, but... Too much!',
-    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 8)],
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 8)],
     undefined,
     {
         displayName: 'Team Rocket Grunt',
@@ -152,7 +152,7 @@ TemporaryBattleList['Sevii Rocket Grunt 4'] = new TemporaryBattle(
         new GymPokemon('Machoke', 198477, 48),
     ],
     'What do you think you\'re doing?!',
-    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 8)],
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 8)],
     undefined,
     {
         displayName: 'Team Rocket Grunt',
@@ -166,7 +166,7 @@ TemporaryBattleList['Sevii Rocket Grunt 5'] = new TemporaryBattle(
         new GymPokemon('Hypno', 198477, 49),
     ],
     'Don\'t...you...dare...laugh...',
-    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 8)],
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 8)],
     undefined,
     {
         displayName: 'Team Rocket Grunt',
@@ -181,7 +181,7 @@ TemporaryBattleList['Sevii Rocket Ariana'] = new TemporaryBattle(
         new GymPokemon('Vileplume', 198477, 54),
     ],
     'You\'re doing things according to your beliefs and morals. I understand now...',
-    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 9)],
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 9)],
     undefined,
     {
         displayName: 'Team Rocket Executive Ariana',
@@ -196,7 +196,7 @@ TemporaryBattleList['Sevii Rocket Archer'] = new TemporaryBattle(
         new GymPokemon('Houndoom', 198477, 55),
     ],
     'Urgh... You were too strong... ... Th-that\'s Giovanni\'s Badge! So it\'s true? Team Rocket really has disbanded? ...We will abandon this warehouse. But don\'t think this is over. I won\'t let this be the end. I will find Giovanni. And I will resurrect Team Rocket! I will... Until then, farewell!',
-    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 10)],
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 10)],
     undefined,
     {
         displayName: 'Team Rocket Executive Archer',
@@ -213,7 +213,7 @@ TemporaryBattleList['Scientist Gideon'] = new TemporaryBattle(
         new GymPokemon('Porygon', 198477, 46),
     ],
     'If I can\'t sell the Sapphire, it\'s worthless! Go ahead, take it!',
-    [new QuestLineStepCompletedRequirement('Bill\'s Errand', 11)]
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 11)]
 );
 
 // Sinnoh Temporary Battles

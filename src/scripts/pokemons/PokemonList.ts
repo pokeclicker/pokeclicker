@@ -1818,6 +1818,23 @@ const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 48.1,
+        'name': 'Pinkan Venonat',
+        'catchRate': 190,
+        'type': [PokemonType.Bug, PokemonType.Poison],
+        'levelType': LevelType.mediumfast,
+        'exp': 61,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 60,
+            'attack': 55,
+            'specialAttack': 40,
+            'defense': 50,
+            'specialDefense': 55,
+            'speed': 45,
+        },
+    },
+    {
         'id': 49,
         'name': 'Venomoth',
         'catchRate': 75,
