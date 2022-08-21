@@ -907,6 +907,32 @@
             })
         %>
 
+        <!--Green Path-->
+        <%- include('templates/mapRoute',
+            { route: 35, region: 0
+            , width: 11, height: 3
+            , x: 45, y: 37
+            , name: "OI"
+            })
+        %>
+
+        <!--Outcast Island-->
+        <%- include('templates/mapRoute',
+            { route: 36, region: 0
+            , width: 2, height: 6
+            , x: 42, y: 27
+            , name: "OI"
+            })
+        %>
+        <!--Outcast Island extension-->
+        <%- include('templates/mapRoute',
+            { route: 36, region: 0
+            , width: 5, height: 2
+            , x: 44, y: 29
+            , noText: true
+            })
+        %>
+
         <!--Valencia Island-->
         <%- include('templates/mapRoute',
             { route: 40, region: 0
@@ -1036,6 +1062,14 @@
             })
         %>
 
+        <!--Six Island-->
+        <%- include('templates/mapTown',
+            { name: "Five Island"
+            , x: 51, y: 43
+            , width: 4, height: 4
+            })
+        %>
+
         <!--Rocket Warehouse-->
         <%- include('templates/mapTown',
             { name: "Rocket Warehouse"
@@ -1116,6 +1150,23 @@
         <%- include('templates/mapDungeon',
             { name: "Lost Cave"
             , x: 89, y: 12
+            , width: 3, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!--Altering Cave-->
+        <%- include('templates/mapDungeon',
+            { name: "Altering Cave"
+            , x: 44, y: 26
+            , width: 5, height: 3
+            })
+        %>
+
+        <!--Altering Cave extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Altering Cave"
+            , x: 40, y: 14
             , width: 3, height: 2
             , isExtension: true
             })
