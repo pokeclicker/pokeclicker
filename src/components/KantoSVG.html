@@ -997,6 +997,33 @@
             })
         %>
 
+        <!--Canyon Entrance-->
+        <%- include('templates/mapRoute',
+            { route: 38, region: 0
+            , width: 3, height: 10
+            , x: 24, y: 31
+            , name: "CE"
+            })
+        %>
+
+        <!--Canyon Entrance extension-->
+        <%- include('templates/mapRoute',
+            { route: 38, region: 0
+            , width: 1, height: 3
+            , x: 27, y: 38
+            , noText: true
+            })
+        %>
+
+        <!--Sevault Canyon-->
+        <%- include('templates/mapRoute',
+            { route: 39, region: 0
+            , width: 3, height: 12
+            , x: 28, y: 38
+            , name: "SC"
+            })
+        %>
+
         <!--Valencia Island-->
         <%- include('templates/mapRoute',
             { route: 40, region: 0
@@ -1192,7 +1219,7 @@
 
         <!--Six Island-->
         <%- include('templates/mapTown',
-            { name: "Five Island"
+            { name: "Six Island"
             , x: 51, y: 43
             , width: 4, height: 4
             })
@@ -1203,6 +1230,14 @@
             { name: "Dotted Hole"
             , x: 51, y: 52
             , width: 3, height: 3
+            })
+        %>
+
+        <!--Seven Island-->
+        <%- include('templates/mapTown',
+            { name: "Seven Island"
+            , x: 24, y: 26
+            , width: 4, height: 4
             })
         %>
 
@@ -1314,6 +1349,14 @@
             { name: "Pattern Bush"
             , x: 51, y: 36
             , width: 5, height: 4
+            })
+        %>
+
+        <!--Tanoby Ruins-->
+        <%- include('templates/mapDungeon',
+            { name: "Tanoby Ruins"
+            , x: 19, y: 50
+            , width: 20, height: 4
             })
         %>
 
