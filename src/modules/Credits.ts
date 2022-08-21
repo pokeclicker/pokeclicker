@@ -84,6 +84,7 @@ export const SpriteCredits: Credit[] = [
         image: 'assets/images/profile/trainer-96.png',
         resources: [
             'Blimp base',
+            'Danny',
             'Pinkan Caterpie',
             'Pinkan Pikachu',
             'Pinkan Rhyhorn (shiny)',
@@ -92,7 +93,6 @@ export const SpriteCredits: Credit[] = [
             'Team Flare Admin (female)',
             'Team Flare Aliana',
             'Tourist Couple/Bellhop',
-
             'Valencian Raticate',
             'Valencian Paras',
         ],
