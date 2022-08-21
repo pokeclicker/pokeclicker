@@ -428,13 +428,13 @@ class QuestLineHelper {
         const talktoRocketGrunts = new TalkToNPCQuest(SeviiRocketGrunts, 'Eavesdrop on the Team Rocket Grunts at Mt. Ember.');
         rubySapphireSeviiQuestLine.addQuest(talktoRocketGrunts);
 
-        const clearSeviiRocketGrunts1 = new CustomQuest(2, 0, '2 Team Rocket Grunts are blocking the entrance to Ruby Path. Defeat them.', () =>
+        const clearSeviiRocketGrunts1 = new CustomQuest(2, 0, 'Two Team Rocket Grunts are blocking the entrance to Ruby Path. Defeat them.', () =>
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 1')]() +
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 2')]()
         );
         rubySapphireSeviiQuestLine.addQuest(clearSeviiRocketGrunts1);
 
-        const clearRubyPath = new CustomQuest(1, 0, 'Locate the Ruby. Clear Ruby Path.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ruby Path')]());
+        const clearRubyPath = new CustomQuest(1, 0, 'Locate the Ruby. Clear Ruby Path in Mt. Ember.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ruby Path')]());
         rubySapphireSeviiQuestLine.addQuest(clearRubyPath);
 
         const talktoRuby = new TalkToNPCQuest(SeviiRuby, 'Take the Ruby in Ruby Path');
@@ -452,7 +452,7 @@ class QuestLineHelper {
         const talktoGideon = new TalkToNPCQuest(SeviiGideon2, 'Talk to Gideon in Dotted Hole');
         rubySapphireSeviiQuestLine.addQuest(talktoGideon);
 
-        const clearSeviiRocketGrunts2 = new CustomQuest(3, 0, 'Defeat the Team Rocket Grunts in Rocket Warehouse.', () =>
+        const clearSeviiRocketGrunts2 = new CustomQuest(3, 0, 'Defeat the Three Team Rocket Grunts in Rocket Warehouse.', () =>
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 3')]() +
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 4')]() +
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 5')]()
