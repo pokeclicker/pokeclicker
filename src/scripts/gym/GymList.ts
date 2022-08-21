@@ -634,11 +634,11 @@ GymList['Navel Island'] = new Gym(
     'Danny',
     'Navel Island',
     [
+        new GymPokemon('Geodude', 923000, 24),
         new GymPokemon('Nidoqueen', 923000, 24),
         new GymPokemon('Machoke', 923000, 24),
         new GymPokemon('Scyther', 923000, 24),
         new GymPokemon('Electrode', 923000, 24),
-        new GymPokemon('Geodude', 923000, 24),
     ],
     BadgeEnums.Sea_Ruby,
     1200, //TODO
@@ -660,8 +660,8 @@ GymList['Kumquat Island'] = new Gym(
     'Luana',
     'Kumquat Island',
     [
-        new GymPokemon('Alakazam', 1025555, 24),
-        new GymPokemon('Marowak', 1025555, 24),
+        new GymPokemon('Alakazam', 2307500, 24),
+        new GymPokemon('Marowak', 2307500, 24),
     ],
     BadgeEnums.Jade_Star,
     1200, //TODO
@@ -673,12 +673,12 @@ GymList['Supreme Gym Leader Drake'] = new Gym(
     'Supreme Gym Leader Drake',
     'Supreme Gym Leader Drake',
     [
-        new GymPokemon('Dragonite', 884000, 37),
-        new GymPokemon('Ditto', 884000, 38),
-        new GymPokemon('Onix', 884000, 39),
-        new GymPokemon('Gengar', 884000, 40),
-        new GymPokemon('Venusaur', 884000, 40),
-        new GymPokemon('Electabuzz', 884000, 41),
+        new GymPokemon('Ditto', 899520, 38),
+        new GymPokemon('Onix', 899520, 39),
+        new GymPokemon('Gengar', 899520, 40),
+        new GymPokemon('Venusaur', 899520, 40),
+        new GymPokemon('Electabuzz', 899520, 41),
+        new GymPokemon('Dragonite', 1124400, 37),
     ],
     BadgeEnums.Elite_OrangeChampion,
     1200, //TODO
