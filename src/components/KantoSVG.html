@@ -907,28 +907,92 @@
             })
         %>
 
+        <!--Water Path-->
+        <%- include('templates/mapRoute',
+            { route: 34, region: 0
+            , width: 3, height: 15
+            , x: 57, y: 37
+            , name: "WP"
+            })
+        %>
+
+        <!--Water Path extension-->
+        <%- include('templates/mapRoute',
+            { route: 34, region: 0
+            , width: 2, height: 3
+            , x: 55, y: 44
+            , noText: true
+            })
+        %>
+
+        <!--Water Path extension-->
+        <%- include('templates/mapRoute',
+            { route: 34, region: 0
+            , width: 1, height: 2
+            , x: 56, y: 50
+            , noText: true
+            })
+        %>
+
         <!--Green Path-->
         <%- include('templates/mapRoute',
             { route: 35, region: 0
-            , width: 11, height: 3
+            , width: 6, height: 3
             , x: 45, y: 37
-            , name: "OI"
+            , name: "GP"
+            })
+        %>
+
+        <!--Green Path extension-->
+        <%- include('templates/mapRoute',
+            { route: 35, region: 0
+            , width: 1, height: 3
+            , x: 56, y: 37
+            , noText: true
             })
         %>
 
         <!--Outcast Island-->
         <%- include('templates/mapRoute',
-            { route: 36, region: 0
-            , width: 2, height: 6
-            , x: 42, y: 27
+            { route: 35, region: 0
+            , width: 3, height: 8
+            , x: 45, y: 29
             , name: "OI"
             })
         %>
-        <!--Outcast Island extension-->
+
+        <!--Ruin Valley-->
         <%- include('templates/mapRoute',
-            { route: 36, region: 0
+            { route: 37, region: 0
+            , width: 7, height: 2
+            , x: 49, y: 50
+            , name: "RV"
+            })
+        %>
+
+        <!--Ruin Valley extension-->
+        <%- include('templates/mapRoute',
+            { route: 37, region: 0
+            , width: 2, height: 5
+            , x: 49, y: 52
+            , noText: true
+            })
+        %>
+
+        <!--Ruin Valley extension-->
+        <%- include('templates/mapRoute',
+            { route: 37, region: 0
             , width: 5, height: 2
-            , x: 44, y: 29
+            , x: 51, y: 55
+            , noText: true
+            })
+        %>
+
+        <!--Ruin Valley extension-->
+        <%- include('templates/mapRoute',
+            { route: 37, region: 0
+            , width: 2, height: 3
+            , x: 54, y: 52
             , noText: true
             })
         %>
@@ -958,34 +1022,9 @@
             })
         %>
 
-        <!--Pinkan Plains-->
-        <%- include('templates/mapRoute',
-            { route: 41, region: 0
-            , width: 5, height: 4
-            , x: 37, y: 10
-            , name: "PP"
-            })
-        %>
-        <!--Pinkan Plains extension-->
-        <%- include('templates/mapRoute',
-            { route: 41, region: 0
-            , width: 1, height: 2
-            , x: 36, y: 10
-            , noText: true
-            })
-        %>
-        <!--Pinkan Plains extension-->
-        <%- include('templates/mapRoute',
-            { route: 41, region: 0
-            , width: 3, height: 2
-            , x: 37, y: 14
-            , noText: true
-            })
-        %>
-
         <!--Pinkan Forest-->
         <%- include('templates/mapRoute',
-            { route: 42, region: 0
+            { route: 41, region: 0
             , width: 5, height: 13
             , x: 45, y: 3
             , name: "PF"
@@ -993,7 +1032,23 @@
         %>
         <!--Pinkan Forest extension-->
         <%- include('templates/mapRoute',
-            { route: 42, region: 0
+            { route: 41, region: 0
+            , width: 6, height: 1
+            , x: 39, y: 3
+            , noText: true
+            })
+        %>
+        <!--Pinkan Forest extension-->
+        <%- include('templates/mapRoute',
+            { route: 41, region: 0
+            , width: 4, height: 1
+            , x: 43, y: 2
+            , noText: true
+            })
+        %>
+        <!--Pinkan Forest extension-->
+        <%- include('templates/mapRoute',
+            { route: 41, region: 0
             , width: 1, height: 3
             , x: 50, y: 8
             , noText: true
@@ -1001,25 +1056,90 @@
         %>
         <!--Pinkan Forest extension-->
         <%- include('templates/mapRoute',
-            { route: 42, region: 0
-            , width: 5, height: 1
-            , x: 44, y: 16
+            { route: 41, region: 0
+            , width: 3, height: 3
+            , x: 42, y: 11
             , noText: true
             })
         %>
         <!--Pinkan Forest extension-->
         <%- include('templates/mapRoute',
-            { route: 42, region: 0
-            , width: 2, height: 6
+            { route: 41, region: 0
+            , width: 2, height: 3
             , x: 43, y: 10
             , noText: true
             })
         %>
         <!--Pinkan Forest extension-->
         <%- include('templates/mapRoute',
+            { route: 41, region: 0
+            , width: 1, height: 2
+            , x: 44, y: 14
+            , noText: true
+            })
+        %>
+        <!--Pinkan Forest extension-->
+        <%- include('templates/mapRoute',
+            { route: 41, region: 0
+            , width: 6, height: 1
+            , x: 42, y: 16
+            , noText: true
+            })
+        %>
+
+        <!--Pinkan Plains-->
+        <%- include('templates/mapRoute',
             { route: 42, region: 0
-            , width: 1, height: 3
-            , x: 42, y: 11
+            , width: 3, height: 5
+            , x: 39, y: 9
+            , name: "PP"
+            })
+        %>
+        <!--Pinkan Plains extension-->
+        <%- include('templates/mapRoute',
+            { route: 42, region: 0
+            , width: 3, height: 1
+            , x: 42, y: 9
+            , noText: true
+            })
+        %>
+        <!--Pinkan Plains extension-->
+        <%- include('templates/mapRoute',
+            { route: 42, region: 0
+            , width: 1, height: 1
+            , x: 42, y: 10
+            , noText: true
+            })
+        %>
+        <!--Pinkan Plains extension-->
+        <%- include('templates/mapRoute',
+            { route: 42, region: 0
+            , width: 1, height: 1
+            , x: 39, y: 14
+            , noText: true
+            })
+        %>
+        <!--Pinkan Plains extension-->
+        <%- include('templates/mapRoute',
+            { route: 42, region: 0
+            , width: 7, height: 1
+            , x: 33, y: 15
+            , noText: true
+            })
+        %>
+        <!--Pinkan Plains extension-->
+        <%- include('templates/mapRoute',
+            { route: 42, region: 0
+            , width: 1, height: 2
+            , x: 34, y: 7
+            , noText: true
+            })
+        %>
+        <!--Pinkan Plains extension-->
+        <%- include('templates/mapRoute',
+            { route: 42, region: 0
+            , width: 5, height: 1.5
+            , x: 34, y: 9
             , noText: true
             })
         %>
@@ -1062,6 +1182,14 @@
             })
         %>
 
+        <!--Rocket Warehouse-->
+        <%- include('templates/mapTown',
+            { name: "Rocket Warehouse"
+            , x: 72, y: 27.5
+            , width: 4, height: 3.5
+            })
+        %>
+
         <!--Six Island-->
         <%- include('templates/mapTown',
             { name: "Five Island"
@@ -1070,11 +1198,11 @@
             })
         %>
 
-        <!--Rocket Warehouse-->
+        <!--Dotted Hole-->
         <%- include('templates/mapTown',
-            { name: "Rocket Warehouse"
-            , x: 72, y: 27.5
-            , width: 4, height: 3.5
+            { name: "Dotted Hole"
+            , x: 51, y: 52
+            , width: 3, height: 3
             })
         %>
 
@@ -1118,11 +1246,11 @@
             })
         %>
 
-        <!--Pokémon Reserve Preserve-->
+        <!--Pinkan Pokémon Reserve-->
         <%- include('templates/mapTown',
-            { name: "Pokémon Reserve Preserve"
-            , x: 33, y: 12
-            , width: 4, height: 4
+            { name: "Pinkan Pokémon Reserve"
+            , x: 33, y: 10.5
+            , width: 6, height: 4.5
             })
         %>
 
@@ -1167,8 +1295,25 @@
         <%- include('templates/mapDungeon',
             { name: "Altering Cave"
             , x: 40, y: 14
-            , width: 3, height: 2
+            , width: 4, height: 3
             , isExtension: true
+            })
+        %>
+
+        <!--Altering Cave extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Altering Cave"
+            , x: 40, y: 16
+            , width: 2, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Pattern Bush-->
+        <%- include('templates/mapDungeon',
+            { name: "Pattern Bush"
+            , x: 51, y: 36
+            , width: 5, height: 4
             })
         %>
 
