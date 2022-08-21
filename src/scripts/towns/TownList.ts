@@ -148,6 +148,9 @@ const ThreeIslandShop = new Shop([
     ItemList.Ultraball,
     ItemList.Token_collector,
 ]);
+const TanobyRuinsShop = new Shop([
+    ItemList['Pinkan Exeggutor'],
+]);
 
 // Kanto NPCs
 
@@ -371,6 +374,12 @@ const ValenciaProfIvy = new NPC ('Prof. Ivy', [
     'On this island, pokémon have changed over the years. I am here to study them.',
     'Oh, you have already encountered them? And you busy with the Orange League?',
     'Well, good luck to you, then.',
+]);
+const TanobyProfIvy = new NPC ('Prof. Ivy', [
+    'Hello again! I see you too found your way to these ancient ruins!',
+    'A peculiar Pokémon known as Unown lives here. There are 28 different forms of Unown, but only one shows up at a time, but the form that appears changes every time the clock strikes midnight.',
+    'There are 2 other ruins like this, one in Johto, and one in Sinnoh. I have heard that in each ruins, there forms that only appear there. For example, the forms that resemble a question mark and an exclamation point have only been seen here.',
+    'Speaking of peculiar Pokémon, I found this unusual variant of Exeggutor on an island in this area. Hmm. If you want, you could buy it from me. I am needing some research funds.',
 ]);
 const PinkanOfficerJenny = new NPC ('Officer Jenny', [
     'This island is strictly off limits. Pinkan is a protected Pokémon reserve. How did you kids get here?',
@@ -770,7 +779,9 @@ TownList['Altering Cave'] = new DungeonTown(
 TownList['Tanoby Ruins'] = new DungeonTown(
     'Tanoby Ruins',
     GameConstants.Region.kanto,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 39)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 39)],
+    [TanobyRuinsShop],
+    [TanobyProfIvy]
 );
 TownList['Pinkan Mountain'] = new DungeonTown(
     'Pinkan Mountain',

@@ -338,6 +338,7 @@ namespace GameConstants {
         'Lickitung',
         'Togepi',
         'Beldum',
+        'Pinkan Exeggutor',
         'Skorupi',
         'Combee',
         'Burmy (plant)',
