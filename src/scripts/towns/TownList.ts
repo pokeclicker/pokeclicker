@@ -599,6 +599,14 @@ TownList['Dotted Hole'] = new Town(
         npcs: [SeviiGideon1, SeviiGideon2],
     }
 );
+TownList['Seven Island'] = new Town(
+    'Seven Island',
+    GameConstants.Region.kanto,
+    [],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
+    }
+);
 TownList['Mikan Island'] = new Town(
     'Mikan Island',
     GameConstants.Region.kanto,
@@ -620,7 +628,7 @@ TownList['Trovita Island'] = new Town(
     GameConstants.Region.kanto,
     [],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 42)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 41)],
     }
 );
 TownList['Kumquat Island'] = new Town(

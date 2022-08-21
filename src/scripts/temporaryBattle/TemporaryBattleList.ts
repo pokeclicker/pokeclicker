@@ -370,7 +370,7 @@ TemporaryBattleList['Ash Ketchum Pinkan'] = new TemporaryBattle(
         new GymPokemon('Charizard', 123998000, 62),
     ],
     'Hey, you found me on my vacation! Just make sure your Pikachu does not eat the berries here.',
-    [new QuestLineCompletedRequirement('The New Kid'), new RouteKillRequirement(10, GameConstants.Region.kanto, 41)],
+    [new QuestLineCompletedRequirement('The New Kid'), new RouteKillRequirement(10, GameConstants.Region.kanto, 42)],
     undefined,
     {
         displayName: 'Ash Ketchum',
