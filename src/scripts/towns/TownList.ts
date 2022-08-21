@@ -642,11 +642,7 @@ TownList['Pinkan Pokémon Reserve'] = new Town(
     GameConstants.Region.kanto,
     [],
     {
-        requirements:
-        [
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Altering Cave')),
-            new QuestLineCompletedRequirement('Celio\'s Errand'),
-        ],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 42)],
         npcs: [PinkanOfficerJenny],
     }
 );
