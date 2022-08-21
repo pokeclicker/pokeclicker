@@ -103,8 +103,8 @@ TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
     'Sevii Rocket Grunt 1',
     [
-        new GymPokemon('Cubone', 198477, 37),
-        new GymPokemon('Marowak', 198477, 37),
+        new GymPokemon('Cubone', 3861120, 37),
+        new GymPokemon('Marowak', 4182880, 37),
     ],
     'Huh, what? Why\'d you have to win?',
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 1)],
@@ -117,10 +117,10 @@ TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
 TemporaryBattleList['Sevii Rocket Grunt 2'] = new TemporaryBattle(
     'Sevii Rocket Grunt 2',
     [
-        new GymPokemon('Rattata', 198477, 35),
-        new GymPokemon('Raticate', 198477, 35),
-        new GymPokemon('Sandshrew', 198477, 35),
-        new GymPokemon('Sandslash', 198477, 35),
+        new GymPokemon('Rattata', 1850120, 35),
+        new GymPokemon('Raticate', 2011000, 35),
+        new GymPokemon('Sandshrew', 1930560, 35),
+        new GymPokemon('Sandslash', 2091440, 35),
     ],
     'Develop amnesia conveniently and forget everything you heard!',
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 1)],
@@ -133,8 +133,8 @@ TemporaryBattleList['Sevii Rocket Grunt 2'] = new TemporaryBattle(
 TemporaryBattleList['Sevii Rocket Grunt 3'] = new TemporaryBattle(
     'Sevii Rocket Grunt 3',
     [
-        new GymPokemon('Houndour', 198477, 49),
-        new GymPokemon('Houndour', 198477, 49),
+        new GymPokemon('Houndour', 4309500, 49),
+        new GymPokemon('Houndour', 4309500, 49),
     ],
     'Oh, but... Too much!',
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 8)],
@@ -147,9 +147,9 @@ TemporaryBattleList['Sevii Rocket Grunt 3'] = new TemporaryBattle(
 TemporaryBattleList['Sevii Rocket Grunt 4'] = new TemporaryBattle(
     'Sevii Rocket Grunt 4',
     [
-        new GymPokemon('Machop', 198477, 48),
-        new GymPokemon('Machop', 198477, 48),
-        new GymPokemon('Machoke', 198477, 48),
+        new GymPokemon('Machop', 2844270, 48),
+        new GymPokemon('Machop', 2844270, 48),
+        new GymPokemon('Machoke', 2930460, 48),
     ],
     'What do you think you\'re doing?!',
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 8)],
@@ -162,8 +162,8 @@ TemporaryBattleList['Sevii Rocket Grunt 4'] = new TemporaryBattle(
 TemporaryBattleList['Sevii Rocket Grunt 5'] = new TemporaryBattle(
     'Sevii Rocket Grunt 5',
     [
-        new GymPokemon('Hypno', 198477, 49),
-        new GymPokemon('Hypno', 198477, 49),
+        new GymPokemon('Hypno', 4309500, 49),
+        new GymPokemon('Hypno', 4309500, 49),
     ],
     'Don\'t...you...dare...laugh...',
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 8)],
@@ -176,9 +176,9 @@ TemporaryBattleList['Sevii Rocket Grunt 5'] = new TemporaryBattle(
 TemporaryBattleList['Sevii Rocket Ariana'] = new TemporaryBattle(
     'Sevii Rocket Ariana',
     [
-        new GymPokemon('Muk', 198477, 52),
-        new GymPokemon('Arbok', 198477, 53),
-        new GymPokemon('Vileplume', 198477, 54),
+        new GymPokemon('Muk', 2910600, 52),
+        new GymPokemon('Arbok', 2910600, 53),
+        new GymPokemon('Vileplume', 2998800, 54),
     ],
     'You\'re doing things according to your beliefs and morals. I understand now...',
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 9)],
@@ -191,9 +191,9 @@ TemporaryBattleList['Sevii Rocket Ariana'] = new TemporaryBattle(
 TemporaryBattleList['Sevii Rocket Archer'] = new TemporaryBattle(
     'Sevii Rocket Archer',
     [
-        new GymPokemon('Golbat', 198477, 53),
-        new GymPokemon('Weezing', 198477, 54),
-        new GymPokemon('Houndoom', 198477, 55),
+        new GymPokemon('Golbat', 3045900, 53),
+        new GymPokemon('Weezing', 3045900, 54),
+        new GymPokemon('Houndoom', 3138200, 55),
     ],
     'Urgh... You were too strong... ... Th-that\'s Giovanni\'s Badge! So it\'s true? Team Rocket really has disbanded? ...We will abandon this warehouse. But don\'t think this is over. I won\'t let this be the end. I will find Giovanni. And I will resurrect Team Rocket! I will... Until then, farewell!',
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 10)],
@@ -206,11 +206,11 @@ TemporaryBattleList['Sevii Rocket Archer'] = new TemporaryBattle(
 TemporaryBattleList['Scientist Gideon'] = new TemporaryBattle(
     'Scientist Gideon',
     [
-        new GymPokemon('Voltorb', 198477, 46),
-        new GymPokemon('Electrode', 198477, 46),
-        new GymPokemon('Magnemite', 198477, 46),
-        new GymPokemon('Magneton', 198477, 46),
-        new GymPokemon('Porygon', 198477, 46),
+        new GymPokemon('Voltorb', 1623360, 46),
+        new GymPokemon('Electrode', 1724820, 46),
+        new GymPokemon('Magnemite', 1623360, 46),
+        new GymPokemon('Magneton', 1724820, 46),
+        new GymPokemon('Porygon', 1877010, 46),
     ],
     'If I can\'t sell the Sapphire, it\'s worthless! Go ahead, take it!',
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 11)]
