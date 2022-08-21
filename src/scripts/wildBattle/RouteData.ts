@@ -348,7 +348,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.KantoSubRegions.Sevii4567,
     true,
-    900000
+    1050000
 ));
 Routes.add(new RegionRoute(
     'Memorial Pillar', GameConstants.Region.kanto, 31,
@@ -359,7 +359,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.KantoSubRegions.Sevii4567,
     true,
-    900000
+    1050000
 ));
 Routes.add(new RegionRoute(
     'Water Labyrinth', GameConstants.Region.kanto, 32,
@@ -370,7 +370,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.KantoSubRegions.Sevii4567,
     true,
-    900000
+    1050000
 ));
 Routes.add(new RegionRoute(
     'Resort Gorgeous', GameConstants.Region.kanto, 33,
@@ -381,7 +381,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.KantoSubRegions.Sevii4567,
     true,
-    900000
+    1050000
 ));
 Routes.add(new RegionRoute(
     'Water Path', GameConstants.Region.kanto, 34,
@@ -393,7 +393,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.KantoSubRegions.Sevii4567,
     true,
-    900000
+    1050000
 ));
 Routes.add(new RegionRoute(
     'Green Path', GameConstants.Region.kanto, 35,
@@ -404,7 +404,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.KantoSubRegions.Sevii4567,
     true,
-    900000
+    1050000
 ));
 Routes.add(new RegionRoute(
     'Outcast Island', GameConstants.Region.kanto, 36,
@@ -415,7 +415,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.KantoSubRegions.Sevii4567,
     true,
-    900000
+    1050000
 ));
 Routes.add(new RegionRoute(
     'Ruin Valley', GameConstants.Region.kanto, 37,
@@ -427,7 +427,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.KantoSubRegions.Sevii4567,
     true,
-    900000
+    1050000
 ));
 Routes.add(new RegionRoute(
     'Canyon Entrance', GameConstants.Region.kanto, 38,
@@ -438,7 +438,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.KantoSubRegions.Sevii4567,
     true,
-    900000
+    1050000
 ));
 Routes.add(new RegionRoute(
     'Sevault Canyon', GameConstants.Region.kanto, 39,
@@ -450,7 +450,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.KantoSubRegions.Sevii4567,
     true,
-    900000
+    1050000
 ));
 Routes.add(new RegionRoute(
     'Valencia Island', GameConstants.Region.kanto, 40,
@@ -462,7 +462,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.KantoSubRegions.Sevii4567,
     true,
-    900000
+    1250000
 ));
 
 Routes.add(new RegionRoute(
@@ -477,7 +477,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.KantoSubRegions.Sevii4567,
     true,
-    900000
+    1250000
 ));
 Routes.add(new RegionRoute(
     'Pinkan Plains', GameConstants.Region.kanto, 42,
@@ -488,7 +488,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.KantoSubRegions.Sevii4567,
     true,
-    900000
+    1250000
 ));
 
 /*
