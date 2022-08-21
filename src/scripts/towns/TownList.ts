@@ -637,12 +637,16 @@ TownList['Valencia Pokémon Center'] = new Town(
         npcs: [ValenciaProfIvy],
     }
 );
-TownList['Pokémon Reserve Preserve'] = new Town(
-    'Pokémon Reserve Preserve',
+TownList['Pinkan Pokémon Reserve'] = new Town(
+    'Pinkan Pokémon Reserve',
     GameConstants.Region.kanto,
     [],
     {
-        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Altering Cave'))],
+        requirements:
+        [
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Altering Cave')),
+            new QuestLineCompletedRequirement('Celio\'s Errand'),
+        ],
         npcs: [PinkanOfficerJenny],
     }
 );
