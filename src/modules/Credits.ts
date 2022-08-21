@@ -362,7 +362,6 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/824384977633411082/',
         resources: [
             'TODO name for Onix',
-            'TODO name for Gengar',
             'TODO name for Weepinbell',
             'TODO name for Gengar',
             'TODO name for Tangela',
