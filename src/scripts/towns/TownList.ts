@@ -598,6 +598,14 @@ TownList['Navel Island'] = new Town(
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lost Cave'))],
     }
 );
+TownList['Trovita Island'] = new Town(
+    'Trovita Island',
+    GameConstants.Region.kanto,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 42)],
+    }
+);
 TownList['Kumquat Island'] = new Town(
     'Kumquat Island',
     GameConstants.Region.kanto,
