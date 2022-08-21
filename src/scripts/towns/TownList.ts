@@ -372,6 +372,10 @@ const ValenciaProfIvy = new NPC ('Prof. Ivy', [
     'Oh, you have already encountered them? And you busy with the Orange League?',
     'Well, good luck to you, then.',
 ]);
+const PinkanOfficerJenny = new NPC ('Officer Jenny', [
+    'This island is strictly off limits. Pinkan is a protected Pokémon reserve. How did you kids get here?',
+    'Have you seen the Pinkan berries? That is what makes all the Pokémon on this island turn pink.',
+]);
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
@@ -623,6 +627,15 @@ TownList['Valencia Pokémon Center'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 40)],
         npcs: [ValenciaProfIvy],
+    }
+);
+TownList['Pokémon Reserve Preserve'] = new Town(
+    'Pokémon Reserve Preserve',
+    GameConstants.Region.kanto,
+    [],
+    {
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Altering Cave'))],
+        npcs: [PinkanOfficerJenny],
     }
 );
 
