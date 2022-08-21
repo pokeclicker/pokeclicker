@@ -1245,7 +1245,7 @@
         <%- include('templates/mapTown',
             { name: "Mikan Island"
             , x: 4, y: 50.5
-            , width: 2, height: 4
+            , width: 4, height: 5.5
             })
         %>
 
@@ -1253,7 +1253,7 @@
         <%- include('templates/mapTown',
             { name: "Navel Island"
             , x: 89, y: 8
-            , width: 4, height: 5.5
+            , width: 2, height: 4
             })
         %>
 
@@ -1304,8 +1304,17 @@
         <!--Icefall Cave-->
         <%- include('templates/mapDungeon',
             { name: "Icefall Cave"
-            , x: 23, y: 11
+            , x: 23, y: 10
+            , width: 3, height: 3
+            })
+        %>
+
+        <!--Icefall Cave extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Icefall Cave"
+            , x: 20, y: 10
             , width: 3, height: 2
+            , isExtension: true
             })
         %>
 
@@ -1322,7 +1331,6 @@
             { name: "Lost Cave"
             , x: 89, y: 12
             , width: 3, height: 2
-            , isExtension: true
             })
         %>
 
@@ -1339,7 +1347,6 @@
             { name: "Altering Cave"
             , x: 40, y: 14
             , width: 4, height: 2
-            , isExtension: true
             })
         %>
 
@@ -1408,7 +1415,7 @@
 
         <%- include('templates/mapOverlay',
             { name: "Ash Ketchum"
-            , x: 34, y: 9
+            , x: 38, y: 3
             , width: 4, height: 4
             , databind: "click: () => TemporaryBattleList['Ash Ketchum Pinkan'].protectedOnclick()"
             , visible:  "TemporaryBattleList['Ash Ketchum Pinkan'] && TemporaryBattleList['Ash Ketchum Pinkan'].isVisible()"

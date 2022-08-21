@@ -85,7 +85,9 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Blimp base',
             'Danny',
+            'Pinkan Bellsprout',
             'Pinkan Caterpie',
+            'Pinkan Exeggutor',
             'Pinkan Pikachu',
             'Pinkan Rhyhorn (shiny)',
             'Pinkan Weedle',
@@ -376,6 +378,7 @@ export const SpriteCredits: Credit[] = [
             'Macro Cosmos (male) and (female)',
             'Cissy',
             'Pinkan Pidgey',
+            'Pinkan Rattata',
             'Valencian Butterfree',
             'Valencian Vileplume',
             'Valencian Weepinbell',

@@ -1428,7 +1428,7 @@ dungeonList['Lost Cave'] = new Dungeon('Lost Cave',
                 new GymPokemon('Natu', 200600, 20),
                 new GymPokemon('Natu', 200600, 20),
                 new GymPokemon('Xatu', 200600, 20),
-            ], { weight: 0.75 }, 'Laura'),
+            ], { weight: 0.75 }, 'Laura', '(female)'),
 
     ],
     {
@@ -1584,7 +1584,7 @@ dungeonList['Pinkan Mountain'] = new Dungeon('Pinkan Mountain',
     1503000,
     [
         new DungeonBossPokemon('Pinkan Primeape', 7000000, 40),
-        new DungeonBossPokemon('Pinkan Rhyhorn', 7000000, 40),
+        new DungeonBossPokemon('Pinkan Rhydon', 7000000, 40),
         new DungeonBossPokemon('Pinkan Nidoking', 7000000, 40),
     ],
     89500, 101);

@@ -370,11 +370,11 @@ TemporaryBattleList['Ash Ketchum Pinkan'] = new TemporaryBattle(
         new GymPokemon('Charizard', 123998000, 62),
     ],
     'Hey, you found me on my vacation! Just make sure your Pikachu does not eat the berries here.',
-    [new QuestLineCompletedRequirement('The New Kid'), new RouteKillRequirement(10, GameConstants.Region.kanto, 42)],
+    [new QuestLineCompletedRequirement('The New Kid'), new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinkan Mountain'))],
     undefined,
     {
         displayName: 'Ash Ketchum',
-        returnTown: 'Pokémon Reserve Preserve',
+        returnTown: 'Pinkan Mountain',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
             App.game.party.gainPokemonById(25.13);

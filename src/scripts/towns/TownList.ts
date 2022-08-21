@@ -805,8 +805,7 @@ TownList['Pinkan Mountain'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 42),
         new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion),
-    ],
-    [TemporaryBattleList['Ash Ketchum Pinkan']]
+    ]
 );
 
 //Johto Shops
