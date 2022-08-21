@@ -599,6 +599,14 @@ TownList['Dotted Hole'] = new Town(
         npcs: [SeviiGideon1, SeviiGideon2],
     }
 );
+TownList['Mikan Island'] = new Town(
+    'Mikan Island',
+    GameConstants.Region.kanto,
+    [],
+    {
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tanoby Ruins'))],
+    }
+);
 TownList['Navel Island'] = new Town(
     'Navel Island',
     GameConstants.Region.kanto,

@@ -1241,11 +1241,19 @@
             })
         %>
 
+        <!--Mikan Island-->
+        <%- include('templates/mapTown',
+            { name: "Mikan Island"
+            , x: 4, y: 50.5
+            , width: 2, height: 4
+            })
+        %>
+
         <!--Navel Island-->
         <%- include('templates/mapTown',
             { name: "Navel Island"
             , x: 89, y: 8
-            , width: 2, height: 4
+            , width: 4, height: 5.5
             })
         %>
 
@@ -1388,6 +1396,15 @@
         <!-- ------------------ -->
         <!-- PLACES OF INTEREST -->
         <!-- ------------------ -->
+
+        <!--Dock-->
+        <%- include('templates/mapPOI',
+            { name: "Dock"
+            , x: 63, y: 22
+            , width: 3, height: 2
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Five Island') }"
+            })
+        %>
 
         <%- include('templates/mapOverlay',
             { name: "Ash Ketchum"
