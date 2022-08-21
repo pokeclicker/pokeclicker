@@ -943,8 +943,8 @@
         <!--Pinkan Plains extension-->
         <%- include('templates/mapRoute',
             { route: 41, region: 0
-            , width: 3, height: 2
-            , x: 34, y: 10
+            , width: 1, height: 2
+            , x: 36, y: 10
             , noText: true
             })
         %>
@@ -1135,6 +1135,20 @@
             { name: "Pinkan Mountain"
             , x: 35, y: 4
             , width: 10, height: 5
+            })
+        %>
+
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+
+        <%- include('templates/mapOverlay',
+            { name: "Ash Ketchum"
+            , x: 34, y: 9
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Ash Ketchum Pinkan'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Ash Ketchum Pinkan'] && TemporaryBattleList['Ash Ketchum Pinkan'].isVisible()"
+            , image: "assets/images/map/ashketchumoverworld.png"
             })
         %>
     </g>

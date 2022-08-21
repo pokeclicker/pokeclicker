@@ -359,6 +359,28 @@ TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
         imageName: 'Ash Ketchum',
     }
 );
+TemporaryBattleList['Ash Ketchum Pinkan'] = new TemporaryBattle(
+    'Ash Ketchum Pinkan',
+    [
+        new GymPokemon('Pinkan Pikachu', 123998000, 58),
+        new GymPokemon('Snorlax', 123998000, 56),
+        new GymPokemon('Lapras', 123998000, 56),
+        new GymPokemon('Kingler', 123998000, 60),
+        new GymPokemon('Tauros', 123998000, 62),
+        new GymPokemon('Charizard', 123998000, 62),
+    ],
+    'Hey, you found me on my vacation! Just make sure your Pikachu does not eat the berries here.',
+    [new QuestLineCompletedRequirement('The New Kid'), new RouteKillRequirement(10, GameConstants.Region.kanto, 41)],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Pokémon Reserve Preserve',
+        imageName: 'Ash Ketchum',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonById(25.13);
+        },
+    }
+);
 
 //Alola Temporary Battles
 TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
