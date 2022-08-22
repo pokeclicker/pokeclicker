@@ -2480,6 +2480,7 @@ const pokemonList = createPokemonArray(
             new DungeonRestrictedLevelEvolution('Chargestone Cave', 'Magneton', 'Magnezone', 20),
             new DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Magneton', 'Magnezone', 20),
             new DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Magneton', 'Magnezone', 20),
+            new RegionStoneEvolution(galarOnly, 'Magneton', 'Magnezone', GameConstants.StoneType.Thunder_stone),
         ],
         'base': {
             'hitpoints': 50,
@@ -3608,6 +3609,8 @@ const pokemonList = createPokemonArray(
             new DungeonRestrictedLevelEvolution('Frost Cavern','Eevee','Glaceon', 20),
             new DungeonRestrictedLevelEvolution('Mount Lanakila','Eevee','Glaceon', 20),
             new LevelEvolution('Eevee', 'Sylveon', 29),
+            new RegionStoneEvolution(galarOnly, 'Eevee', 'Leafeon', GameConstants.StoneType.Leaf_stone),
+            new RegionStoneEvolution(galarOnly, 'Eevee', 'Glaceon', GameConstants.StoneType.Ice_stone),
         ],
         'base': {
             'hitpoints': 55,
@@ -16835,6 +16838,7 @@ const pokemonList = createPokemonArray(
             new DungeonRestrictedLevelEvolution('Chargestone Cave', 'Charjabug', 'Vikavolt', 20),
             new DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Charjabug', 'Vikavolt', 20),
             new DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Charjabug', 'Vikavolt', 20),
+            new RegionStoneEvolution(galarOnly, 'Charjabug', 'Vikavolt', GameConstants.StoneType.Thunder_stone),
         ],
         'base': {
             'hitpoints': 57,
