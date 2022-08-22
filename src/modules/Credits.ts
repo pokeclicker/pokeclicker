@@ -88,6 +88,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Bellsprout',
             'Pinkan Caterpie',
             'Pinkan Exeggutor',
+            'Pinkan Paras',
             'Pinkan Pikachu',
             'Pinkan Rhyhorn (shiny)',
             'Pinkan Weedle',
