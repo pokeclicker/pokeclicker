@@ -157,7 +157,7 @@ const PalletProfOak = new ProfNPC('Prof. Oak',
     'Your journey isn\'t over yet, a whole world awaits you! Onwards to Johto!',
     'assets/images/oak.png',
     // Prevent Prof. Oak clones during Celebi questline
-    new OneFromManyRequirement([new QuestLineStartedRequirement('Unfinished Business', GameConstants.AchievementOption.less), new QuestLineCompletedRequirement('Unfinished Business'), new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 2), new QuestLineStepCompletedRequirement('Unfinished Business', 4, GameConstants.AchievementOption.less)])]));
+    new OneFromManyRequirement([new QuestLineStartedRequirement('Unfinished Business', GameConstants.AchievementOption.less), new QuestLineCompletedRequirement('Unfinished Business'), new QuestLineStepCompletedRequirement('Unfinished Business', 2)]));
 
 const PalletMom1 = new NPC('Mom', [
     'So you\'re really leaving on your very own Pokémon journey. I\'m so proud of you. Let me give you some words of wisdom for your travels.',
