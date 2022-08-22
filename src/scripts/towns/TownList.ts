@@ -150,7 +150,7 @@ const ThreeIslandShop = new Shop([
 ]);
 const TanobyRuinsShop = new Shop([
     ItemList['Pinkan Exeggutor'],
-]);
+], 'Trade with Prof. Ivy');
 
 // Kanto NPCs
 
