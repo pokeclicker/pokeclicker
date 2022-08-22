@@ -113,7 +113,7 @@ export const SpriteCredits: Credit[] = [
     },
     {
         name: 'Eat Pant',
-        link: 'https://discordapp.com/users/TODO',
+        link: 'https://discordapp.com/users/736029608587296819',
         resources: [
             'Pinkan Nidoran(F)',
             'Pinkan Nidoran(M)',
