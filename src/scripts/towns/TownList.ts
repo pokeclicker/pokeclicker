@@ -3654,12 +3654,14 @@ const AssistantHenry = new NPC('Assistant Henry', [
 ]);
 // Route 5 Trainer funny
 const ApplinNPC = new NPC('Cook Stuart', [
-    'I love Apples!',
-    'text',
+    'I love Sweet and Tart Apples! Oh, this is Applin! It isn’t a snack, but helps me make all sorts of dishes!',
+    'Applin absolutely loves Sweet and Tart treats.',
+    'But, I could never give Applin a Sweet or Tart Apple, that just seems so... wrong...',
+    'I can’t be missing out on much anyways, what could be more perfect than my Applin!',
 ]);
 const CramorantNPC = new NPC('Cramorant', [
-    'Have you seen a blue bird walking around with an Arrokuda in its throat? It’s not a very smart Pokémon, but it sure is hungry! I guess if it trains near water it tries to swallow Arrokudas, but they always get stuck in its throat.',
-    'My friend told me a story of a Pikachu getting lodged in the gluttonous bird’s gullet while it was gorging near an industrial area! But that sounds ridiculous! How would it not be bothered by the big rat in its throat?',
+    'Have you spotted a blue bird walking around with an Arrokuda in its throat? It’s quite a daft Pokémon, but it sure is hungry! I guess if it trains near water it tries to swallow Arrokudas, but they always get stuck in its throat.',
+    'My mate told me a story of a Pikachu getting lodged in the gluttonous bird’s gullet while it was gorging near an industrial area! But that sounds ridiculous! How would it not be bothered by the big rat in its throat? It would drive me mad.',
     'Now, what was that bird’s name again...',
 ]);
 const RunerigusNPC = new NPC('Runerigus', [
@@ -3668,7 +3670,8 @@ const RunerigusNPC = new NPC('Runerigus', [
     '<i>Sounds like lazy game design to me...</i>',
 ]);
 const AncientMural = new NPC('Ancient Mural', [
-    '',
+    '<i>It’s Stow-on-Side’s famous mural.</i>',
+    '<i>It’s said to be a very deep work of art...</i>',
 ]);
 const StoryContext = new NPC ('Story Context', [
     'Not a brilliant turn of events, but the ruins were brought into the light for us to see...',
@@ -3680,7 +3683,7 @@ const StoryContext = new NPC ('Story Context', [
 ],
 { requirement: new MultiRequirement([new QuestLineStartedRequirement('The Darkest Day'), new QuestLineStepCompletedRequirement('The Darkest Day', 1, GameConstants.AchievementOption.less)]) });
 
-const MuralRuins = new NPC('Ancient Mural Ruins', [
+const AncientMural2 = new NPC('Ancient Mural Ruins', [
     '<i>It’s the statues that were hidden behind Stow-on-Side’s famous mural.</i>',
     '<i>They depict two heroes and two Pokémon.</i>',
 ],
@@ -3693,23 +3696,27 @@ const HerosBath = new NPC('Hero\'s Bath', [
 // Wyndon (route 10 first encounter) or Motostoke
 const EiscueNPC = new NPC('Eiscue', [
     'I love how silly my Eiscue looks with his worried expression after training for the Gym Challenge in Motostoke!',
-    'You see, it’s so hot in the Motostoke Stadium that the ice on his head melted right off!',
+    'You see, it’s so hot in the Motostoke Stadium that\' the ice on his head melted right\' off!',
 ]);
 // Circhester?
-const SnomNPC = new NPC('Snom', [
-    'text',
-    'text',
+const SnomNPC = new NPC('Guitarist Justin', [
+    'I caught this Snom on Steamdrift Way, we’ve become really good mates.',
+    'I thought that friendship was all Snom needed to evolve, but I keep trying to give it a Soothe Bell during the daytime and nothing happens!',
+    'I sure hope Snom doesn’t prefer the nighttime, I’m too busy playing gigs to play with Snom in the evening!',
 ]);
 // Idk where
-const GalarOnlyStoneEvosNPC = new NPC('galarOnly', [
+const KantotoGalarEvosNPC = new NPC('Artist Doug', [
     'text',
     'text',
 ]);
 
+/* To be added when held item evos are ready
 const FarfetchdNPC = new NPC('SirFetchd', [
-    'Leeky boy',
-    'text',
+    'My Kantonian Farfetch’d would never evolve no matter how many fresh Leeks I gave it.',
+    'Lo and behold, here in Galar the Farfetch’d wield thick, tough leeks for battle!',
+    'Once my Galarian Farfetch’d was holding a Leek, I was gobsmacked by how  quickly he transformed into a noble ally. With the Leek growing into a mighty stalk for battle!',
 ]);
+*/
 
 // Isle of Armor
 const IsleofArmorRoamerNPC = new RoamerNPC('Master Dojo Student', [
@@ -3718,11 +3725,11 @@ const IsleofArmorRoamerNPC = new RoamerNPC('Master Dojo Student', [
 
 // Crown Tundra
 const CrownTundraRoamerNPC = new RoamerNPC('Freezington Mayor', [
-    'If my eyes didn\'t decieve me, I saw a rare Pokémon at {ROUTE_NAME}. Go and see if you can find it if you\'re interested.',
+    'If my eyes didn\'t deceive me, I saw a rare Pokémon at {ROUTE_NAME}. Go and see if you can find it if you\'re interested.',
 ], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.CrownTundra));
 
 const CrownPeony1 = new NPC ('Peony', [
-    'Hey, Chief! I was talking to the locals and they were talking some ancient king Pokémon! They also mentioned a couple of horsey Pokémon that it was ultra-mega-close to. There\'s a statue of it outside and I\'ve heard this rock I\'ve been using as a pillow is part of it!',
+    'Hey, Chief! I was talking to the locals and they were talking about some ancient king Pokémon! They also mentioned a couple of horsey Pokémon that it was ultra-mega-close to. There\'s a statue of it outside and I\'ve heard this rock I\'ve been using as a pillow is part of it!',
     'Could you go and put it back on for me?',
 ],
 { requirement: new MultiRequirement([new QuestLineStartedRequirement('The Crown of Galar'), new QuestLineStepCompletedRequirement('The Crown of Galar', 1, GameConstants.AchievementOption.less)]) });
@@ -3891,7 +3898,7 @@ TownList['Stow-on-Side'] = new Town(
     [TemporaryBattleList.Bede3, TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side']), new ShardTraderShop(GameConstants.ShardTraderLocations['Route 6'], 'Fossil Master')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
-        npcs: [HerosBath],
+        npcs: [AncientMural, AncientMural2, StoryContext],
     }
 );
 TownList.Ballonlea = new Town(
@@ -3916,6 +3923,7 @@ TownList.Circhester = new Town(
     [TemporaryBattleList['Rampaging Gigalith'], TemporaryBattleList['Rampaging Froslass'], GymList.Circhester1, GymList.Circhester2, CirchesterShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Circhester)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
+        npcs: [HerosBath],
     }
 );
 TownList.Spikemuth = new Town(
