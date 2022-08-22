@@ -407,7 +407,8 @@
                         ">Fire All</button>
                 <div class="safeLockButton" data-bind="visible: FarmController.farmingModalTabSelected() == 'berryFarmView'">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-primary" data-bind="click: function() {FarmController.selectedPlotSafeLock() ? FarmController.selectedPlotSafeLock(false) : FarmController.selectedPlotSafeLock(true);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);},
+                        <button type="button" class="btn btn-primary" data-bind="
+                            click: function() {FarmController.selectedPlotSafeLock() ? FarmController.selectedPlotSafeLock(false) : FarmController.selectedPlotSafeLock(true);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);},
                             css: { 'active': FarmController.selectedPlotSafeLock() },
                             tooltip: {title: 'Toggle locking a plot from interaction.',  trigger: 'hover', animation: false}
                         ">
