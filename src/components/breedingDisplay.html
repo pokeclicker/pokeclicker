@@ -18,8 +18,8 @@
                 <button class='btn btn-primary' onclick='App.game.breeding.buyEggSlot()'
                         data-bind='css: {disabled: App.game.wallet.currencies[GameConstants.Currency.questPoint]() <= App.game.breeding.nextEggSlotCost().amount}'>Unlock</button>
             </div>
-            <div data-bind="visible: $index() > App.game.breeding.eggSlots" style="margin-top: 20px;">
-                <img src="assets/images/breeding/lock.svg">
+            <div data-bind="visible: $index() > App.game.breeding.eggSlots">
+                <img class="lockedSlotImage" src="assets/images/breeding/lock.svg">
             </div>
             <div data-bind="if: App.game.breeding.hatcheryHelpers.hired()[$index()]">
               <div data-bind="with: App.game.breeding.hatcheryHelpers.hired()[$index()]">
