@@ -384,6 +384,7 @@ export const SpriteCredits: Credit[] = [
             'Cissy',
             'Pinkan Pidgey',
             'Pinkan Rattata',
+            'Pinkan Vileplume',
             'Valencian Butterfree',
             'Valencian Vileplume',
             'Valencian Weepinbell',
