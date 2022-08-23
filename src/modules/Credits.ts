@@ -93,6 +93,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Pikachu',
             'Pinkan Rhyhorn (shiny)',
             'Pinkan Weedle',
+            'Rudy',
             'Supreme Gym Leader Drake',
             'Team Flare Admin (male)',
             'Team Flare Admin (female)',
