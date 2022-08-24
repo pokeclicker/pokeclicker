@@ -8388,9 +8388,20 @@ dungeonList['Slumbering Weald Shrine'] = new Dungeon('Slumbering Weald Shrine',
     ['Galarian Stunfisk', 'Munna', 'Butterfree', 'Orbeetle', 'Whiscash', 'Barboach', 'Magikarp'],
     {
         common: [
-            {loot: 'xClick'},
+            {loot: 'Chesto'},
             {loot: 'Dowsing_machine'},
         ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Lime Shard'},
+            {loot: 'Pink Shard'},
+        ],
+        epic: [
+            {loot: 'Pixie Plate'},
+            {loot: 'Fist Plate'},
+            {loot: 'Iron Plate'},
+        ],
+        legendary: [{loot: 'LargeRestore'}],
     },
     27009504,
     [
@@ -8429,8 +8440,19 @@ dungeonList['Galar Mine'] = new Dungeon('Galar Mine',
     ],
     {
         common: [
-            {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'Greatball', weight: 5},
+            {loot: 'MediumRestore', weight: 1},
+            {loot: 'Carkol', weight: 0.5},
+            {loot: 'Woobat', weight: 0.5},
+        ],
+        rare: [
+            {loot: 'Crimson Shard'},
+            {loot: 'Brown Shard'},
+        ],
+        legendary: [
+            {loot: 'Revive'},
+            {loot: 'Star Piece'},
+            {loot: 'Hard Stone'},
         ],
     },
     20767840,
@@ -8475,9 +8497,19 @@ dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
     ],
     {
         common: [
-            {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'Dowsing_machine', weight: 4},
+            {loot: 'xClick', weight: 2.5},
+            {loot: 'Galarian Stunfisk', weight: 0.5},
         ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Ochre Shard'},
+        ],
+        epic: [
+            {loot: 'Earth Plate'},
+            {loot: 'Duskball'},
+        ],
+        legendary: [{loot: 'Star Piece'}],
     },
     21294640,
     [
@@ -8513,9 +8545,14 @@ dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
     ],
     {
         common: [
-            {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'xAttack'},
+            {loot: 'Lucky_incense'},
         ],
+        rare: [
+            {loot: 'Rose Shard'},
+            {loot: 'Grey Shard'},
+        ],
+        epic: [{loot: 'Iron Plate'}],
     },
     26400842,
     [
@@ -8535,8 +8572,13 @@ dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
     ['Steelix', 'Mawile', 'Bronzong', 'Durant', 'Bisharp', 'Doublade', 'Golisopod', 'Galarian Stunfisk', 'Sirfetch\'d'],
     {
         common: [
-            {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'Token_collector'},
+            {loot: 'Lucky_egg'},
+            {loot: 'Pokeball'},
+        ],
+        rare: [
+            {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
         ],
     },
     26704124,
@@ -8588,9 +8630,15 @@ dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
     ],
     {
         common: [
-            {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'Cheri', weight: 3},
+            {loot: 'Pecha', weight: 3},
+            {loot: 'Impidimp'},
         ],
+        rare: [
+            {loot: 'White Shard'},
+            {loot: 'Pink Shard'},
+        ],
+        epic: [{loot: 'LargeRestore'}],
     },
     23764848,
     [
@@ -8605,8 +8653,19 @@ dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
     ['Gurdurr', 'Ferrothorn', 'Klang', 'Meowstic', 'Barbaracle', 'Applin', 'Hattrem', 'Qwilfish', 'Hitmonlee', 'Hitmonchan', 'Koffing'],
     {
         common: [
-            {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'Pokeball'},
+            {loot: 'Greatball'},
+            {loot: 'Ultraball'},
+        ],
+        rare: [
+            {loot: 'Ochre Shard'},
+            {loot: 'Grey Shard'},
+        ],
+        legendary: [
+            {loot: 'Revive'},
+            {loot: 'Max Revive'},
+            {loot: 'Rare Bone'},
+            {loot: 'Star Piece'},
         ],
     },
     22923210,
@@ -8625,7 +8684,16 @@ dungeonList['Warm-Up Tunnel'] = new Dungeon('Warm-Up Tunnel',
     {
         common: [
             {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Brown Shard'},
+        ],
+        epic: [{loot: 'Quickball'}],
+        legendary: [
+            {loot: 'Revive'},
+            {loot: 'Max Revive'},
         ],
     },
     28252100,
@@ -8636,8 +8704,25 @@ dungeonList['Courageous Cavern'] = new Dungeon('Courageous Cavern',
     ['Pincurchin', 'Dwebble', 'Crustle', 'Swoobat', 'Magikarp', 'Shellder', 'Cloyster', 'Tentacool', 'Chewtle', 'Tentacruel', 'Whiscash'],
     {
         common: [
-            {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'Pokeball'},
+            {loot: 'Greatball'},
+            {loot: 'Ultraball'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Duskball'},
+            {loot: 'Quickball'},
+        ],
+        legendary: [
+            {loot: 'Icy Rock'},
+            {loot: 'Star Piece'},
+            {loot: 'Revive'},
+            {loot: 'Oval Stone'},
+            {loot: 'Everstone'},
+            {loot: 'Hard Stone'},
         ],
     },
     26704124,
@@ -8652,9 +8737,28 @@ dungeonList['Brawlers Cave'] = new Dungeon('Brawlers Cave',
     ['Whismur', 'Woobat', 'Azurill', 'Lickitung', 'Loudred', 'Swoobat', 'Golduck', 'Poliwag', 'Barboach', 'Whiscash', 'Chansey', 'Psyduck'],
     {
         common: [
-            {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'Greatball', weight: 3},
+            {loot: 'Ultraball', weight: 3},
+            {loot: 'MediumRestore'},
         ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Ochre Shard'},
+            {loot: 'Rose Shard'},
+        ],
+        epic: [
+            {loot: 'Duskball'},
+            {loot: 'Nestball'},
+            {loot: 'Timerball'},
+            {loot: 'Luxuryball'},
+        ],
+        legendary: [
+            {loot: 'Rare Bone'},
+            {loot: 'Hard Stone'},
+            {loot: 'Star Piece'},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Brawlers Cave'))}],
     },
     27009504,
     [
@@ -8682,8 +8786,13 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     {
         common: [
             {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'xAttack'},
         ],
+        rare: [
+            {loot: 'Black Shard'},
+            {loot: 'Ochre Shard'},
+        ],
+        epic: [{loot: 'Dread Plate'}],
     },
     28886112,
     [
@@ -8718,8 +8827,13 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
     {
         common: [
             {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'xAttack'},
         ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Ochre Shard'},
+        ],
+        epic: [{loot: 'Splash Plate'}],
     },
     28886112,
     [
@@ -8745,8 +8859,25 @@ dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
     ],
     {
         common: [
-            {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'Greatball'},
+            {loot: 'Ultraball'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Cyan Shard'},
+        ],
+        epic: [
+            {loot: 'Duskball'},
+            {loot: 'MediumRestore'},
+            {loot: 'LargeRestore'},
+        ],
+        legendary: [
+            {loot: 'Revive'},
+            {loot: 'Max Revive'},
+            {loot: 'Hard Stone'},
+            {loot: 'Star Piece'},
+            {loot: 'Everstone'},
+            {loot: 'Rare Bone'},
         ],
     },
     32184888,
@@ -8766,8 +8897,17 @@ dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
     ],
     {
         common: [
-            {loot: 'xClick'},
             {loot: 'Dowsing_machine'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [
+            {loot: 'Brown Shard'},
+            {loot: 'Grey Shard'},
+        ],
+        epic: [
+            {loot: 'Hard Stone'},
+            {loot: 'Everstone'},
+            {loot: 'Stone Plate'},
         ],
     },
     31507840,
@@ -8781,8 +8921,14 @@ dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
     ['Bronzong', 'Duraludon', 'Copperajah', 'Corviknight', 'Perrserker', 'Bisharp', 'Ferrothorn', 'Excadrill'],
     {
         common: [
-            {loot: 'xClick'},
             {loot: 'Dowsing_machine'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [{loot: 'Grey Shard'}],
+        epic: [
+            {loot: 'Hard Stone'},
+            {loot: 'Everstone'},
+            {loot: 'Iron Plate'},
         ],
     },
     31507840,
@@ -8796,8 +8942,18 @@ dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
     ['Cryogonal', 'Beartic', 'Galarian Darumaka', 'Aurorus', 'Weavile', 'Vanilluxe', 'Froslass', 'Delibird'],
     {
         common: [
-            {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'Dowsing_machine', weight: 3},
+            {loot: 'Lucky_incense', weight: 3},
+            {loot: 'Cryogonal'},
+        ],
+        rare: [
+            {loot: 'White Shard'},
+            {loot: 'Cyan Shard'},
+        ],
+        epic: [
+            {loot: 'Hard Stone'},
+            {loot: 'Everstone'},
+            {loot: 'Icicle Plate'},
         ],
     },
     31507840,
@@ -8811,8 +8967,19 @@ dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
     ['Electabuzz', 'Cryogonal', 'Bronzong', 'Stonjourner', 'Galvantula', 'Relicanth', 'Glalie', 'Metagross'],
     {
         common: [
-            {loot: 'xClick'},
             {loot: 'Dowsing_machine'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [
+            {loot: 'White Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Purple Shard'},
+        ],
+        mythic: [
+            {loot: 'Iron Plate'},
+            {loot: 'Icicle Plate'},
+            {loot: 'Stone Plate'},
         ],
     },
     32870660,
@@ -8829,7 +8996,18 @@ dungeonList['Lakeside Cave'] = new Dungeon('Lakeside Cave',
     {
         common: [
             {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [
+            {loot: 'Grey Shard'},
+            {loot: 'Brown Shard'},
+        ],
+        epic: [{loot: 'Duskball'}],
+        legendary: [
+            {loot: 'Rare Bone'},
+            {loot: 'Star Piece'},
+            {loot: 'Hard Stone'},
+            {loot: 'Everstone'},
         ],
     },
     33216830,
@@ -8844,8 +9022,18 @@ dungeonList['Dyna Tree Hill'] = new Dungeon('Dyna Tree Hill',
     ['Magmar', 'Absol', 'Beartic', 'Cryogonal', 'Dubwool', 'Glalie', 'Clefable'],
     {
         common: [
-            {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'Oran', weight: 2},
+            {loot: 'Sitrus'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Cyan Shard'},
+            {loot: 'Rose Shard'},
+        ],
+        epic: [
+            {loot: 'Meadow Plate'},
+            {loot: 'Tamato'},
+            {loot: 'Hondew'},
         ],
     },
     33216830,
@@ -8856,8 +9044,29 @@ dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
     ['Zubat', 'Aron', 'Carbink', 'Carkol', 'Ferroseed', 'Mawile', 'Sableye', 'Audino', 'Lairon'],
     {
         common: [
-            {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'Rawst'},
+            {loot: 'Aspear'},
+            {loot: 'xAttack'},
+        ],
+        rare: [
+            {loot: 'Brown Shard'},
+            {loot: 'Rose Shard'},
+        ],
+        epic: [
+            {loot: 'Duskball'},
+            {loot: 'Quickball'},
+            {loot: 'Flame Plate'},
+            {loot: 'LargeRestore'},
+        ],
+        legendary: [
+            {loot: 'Hard Stone'},
+            {loot: 'Heat Rock'},
+            {loot: 'Icy Rock'},
+            {loot: 'Everstone'},
+            {loot: 'Rare Bone'},
+            {loot: 'Revive'},
+            {loot: 'Star Piece'},
+            {loot: 'Max Revive'},
         ],
     },
     33565196,
@@ -8871,9 +9080,19 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
     ['Dhelmise', 'Hatterene', 'Reuniclus', 'Mr. Rime', 'Mamoswine', 'Roserade'],
     {
         common: [
-            {loot: 'xClick'},
-            {loot: 'Dowsing_machine'},
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
         ],
+        rare: [
+            {loot: 'Brown Shard'},
+            {loot: 'Rose Shard'},
+        ],
+        epic: [
+            {loot: 'Mind Plate'},
+            {loot: 'Icicle Plate'},
+            {loot: 'Spooky Plate'},
+        ],
+        legendary: [{loot: 'Max Revive'}],
     },
     33915762,
     [
