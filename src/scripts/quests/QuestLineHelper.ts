@@ -342,7 +342,7 @@ class QuestLineHelper {
         const aipomAlley = new CustomQuest(1, 0, 'Defeat the Aipoms', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Aipom Alley')]());
         detectivePikachuQuestLine.addQuest(aipomAlley);
 
-        const searchForClues2 = new CustomQuest(1, 0, 'The Aipoms dropped some sort of vial while they were running away. Find it!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')]());
+        const searchForClues2 = new CustomQuest(1, 0, 'The Aipoms dropped some sort of vial while they were running away. It looks like they were headed towards the Radio Tower. Find it!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')]());
         detectivePikachuQuestLine.addQuest(searchForClues2);
 
         const searchForClues3 = new TalkToNPCQuest(Informant1, 'Detective Pikachu has an informant who knows more about the mysterious vial. Meet with him in Saffron City.');
@@ -357,7 +357,7 @@ class QuestLineHelper {
         const undergroundFightingRing = new CustomQuest(1, 0, 'Infiltrate the underground fighting ring.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Underground Fighting Ring')]());
         detectivePikachuQuestLine.addQuest(undergroundFightingRing);
 
-        const searchForClues5 = new TalkToNPCQuest(HowardClifford1, 'Go to Clifford Industries to demand some answers.');
+        const searchForClues5 = new TalkToNPCQuest(HowardClifford1, 'Go to Clifford Industries in Goldenrod City to demand some answers.');
         detectivePikachuQuestLine.addQuest(searchForClues5);
 
         const searchForClues6 = new TalkToNPCQuest(LucyStevens1, 'Meet up with investigative journalist Lucy Stevens in Hearthome City');
@@ -372,7 +372,7 @@ class QuestLineHelper {
         const searchForClues8 = new TalkToNPCQuest(MewTwo1, 'Detective Pikachu is injured. He asks you to get help from his friend near Cerulean Cave');
         detectivePikachuQuestLine.addQuest(searchForClues8);
 
-        const searchForClues9 = new TalkToNPCQuest(HowardClifford2, 'Confront Howard Clifford about his involvement with the R vials.');
+        const searchForClues9 = new TalkToNPCQuest(HowardClifford2, 'Confront Howard Clifford in Goldenrod City about his involvement with the R vials.');
         detectivePikachuQuestLine.addQuest(searchForClues9);
 
         const imposterAttack = new CustomQuest(1, 0, 'Defeat Howard\'s bodyguard and escape.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Imposter')]());
@@ -384,7 +384,7 @@ class QuestLineHelper {
         const possessedFight = new CustomQuest(1, 0, 'Defeat Mewtwo to free it from Howard\'s control!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Possessed Mewtwo')]());
         detectivePikachuQuestLine.addQuest(possessedFight);
 
-        const searchForClues10 = new TalkToNPCQuest(MewTwo2, 'Talk to Mewtwo about Detective Pikachu\'s partner.');
+        const searchForClues10 = new TalkToNPCQuest(MewTwo2, 'Talk to Mewtwo near Cerulean Cave about Detective Pikachu\'s partner.');
         detectivePikachuQuestLine.addQuest(searchForClues10);
 
         const DetectiveRaichuReward = () => {
