@@ -356,6 +356,14 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given via Discord #development-chat
     },
     {
+        name: 'Qwertypop04',
+        link: 'https://discordapp.com/users/345944451472031744/',
+        resources: [
+            'Pinkan Rhydon',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
         image: 'https://avatars.githubusercontent.com/u/7288322?v=4',
