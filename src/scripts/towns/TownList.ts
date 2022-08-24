@@ -625,13 +625,13 @@ TownList['One Island'] = new Town(
     [OneIslandShop, new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Volcano)],
-        npcs: [OneIslandCelio1, OneIslandCelio2, OneIslandCelio3, OneIslandYoungster],
+        npcs: [OneIslandCelio1, OneIslandCelio2, OneIslandCelio3, OneIslandCelio4, OneIslandCelio5, OneIslandCelio6, OneIslandCelio7, OneIslandYoungster],
     }
 );
 TownList['Mt. Ember'] = new Town(
     'Mt. Ember',
     GameConstants.Region.kanto,
-    [new MoveToDungeon(dungeonList['Mt. Ember Summit'])],
+    [new MoveToDungeon(dungeonList['Mt. Ember Summit']), new MoveToDungeon(dungeonList['Ruby Path']), TemporaryBattleList['Sevii Rocket Grunt 1'], TemporaryBattleList['Sevii Rocket Grunt 2']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)],
         npcs: [SeviiRocketGrunts],
@@ -1599,7 +1599,7 @@ const ProfBirch = new ProfNPC('Prof. Birch',
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
     GameConstants.Region.hoenn,
-    [],
+    [new BulletinBoard(GameConstants.BulletinBoards.Hoenn)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
         npcs: [ProfBirch, LittlerootAide],
