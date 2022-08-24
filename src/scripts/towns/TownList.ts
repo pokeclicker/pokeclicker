@@ -656,8 +656,8 @@ TownList['Six Island'] = new Town(
 );
 TownList['Dotted Hole'] = new Town(
     'Dotted Hole',
-    [],
     GameConstants.Region.kanto,
+    [],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 37)],
         npcs: [SeviiGideon1, SeviiGideon2],
