@@ -617,6 +617,74 @@ GymList['Champion Wallace'] = new Champion(
     }
 );
 
+// Orange league gyms
+GymList['Mikan Island'] = new Gym(
+    'Cissy',
+    'Mikan Island',
+    [
+        new GymPokemon('Seadra', 2307500, 24),
+        new GymPokemon('Blastoise', 2307500, 24),
+    ],
+    BadgeEnums['Coral-Eye'],
+    740,
+    'I can see why you made it so far in the Indigo League, and i bet you\'ll do pretty well in the Orange League.\n' +
+    'This is the Coral-Eye Badge of the Mikan Gym, to prove that you won your match!'
+);
+GymList['Navel Island'] = new Gym(
+    'Danny',
+    'Navel Island',
+    [
+        new GymPokemon('Geodude', 923000, 24),
+        new GymPokemon('Nidoqueen', 923000, 24),
+        new GymPokemon('Machoke', 923000, 24),
+        new GymPokemon('Scyther', 923000, 24),
+        new GymPokemon('Electrode', 923000, 24),
+    ],
+    BadgeEnums.Sea_Ruby,
+    740,
+    'You and the others were great.\nNow I\'d like to give you and your fellow challengers something you really deserve. The Sea Ruby badge. It\'s yours.'
+);
+GymList['Trovita Island'] = new Gym(
+    'Rudy',
+    'Trovita Island',
+    [
+        new GymPokemon('Electabuzz', 1538333, 24),
+        new GymPokemon('Exeggutor', 1538333, 24),
+        new GymPokemon('Starmie', 1538333, 24),
+    ],
+    BadgeEnums.Spike_Shell,
+    740,
+    'Nice job, guys. Here are your Spike Shell badges, guys.'
+);
+GymList['Kumquat Island'] = new Gym(
+    'Luana',
+    'Kumquat Island',
+    [
+        new GymPokemon('Alakazam', 2307500, 24),
+        new GymPokemon('Marowak', 2307500, 24),
+    ],
+    BadgeEnums.Jade_Star,
+    740, //TODO
+    'You did a fine job.\nAnd now, as Kumquat Island gym leader, and a member of the Orange Crew, I happily present this token of your victory.'
+);
+
+// Orange league champion
+GymList['Supreme Gym Leader Drake'] = new Gym(
+    'Supreme Gym Leader Drake',
+    'Supreme Gym Leader Drake',
+    [
+        new GymPokemon('Ditto', 899520, 38),
+        new GymPokemon('Onix', 899520, 39),
+        new GymPokemon('Gengar', 899520, 40),
+        new GymPokemon('Venusaur', 899520, 40),
+        new GymPokemon('Electabuzz', 899520, 41),
+        new GymPokemon('Dragonite', 1124400, 37),
+    ],
+    BadgeEnums.Elite_OrangeChampion,
+    4800,
+    'You really deserve that trophy. You\'re a great Pokémon trainer.'
+);
+
 //Sinnoh Gyms
 GymList['Oreburgh City'] = new Gym(
     'Roark',

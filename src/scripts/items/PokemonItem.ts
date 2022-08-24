@@ -46,6 +46,7 @@ ItemList.Lickitung            = new PokemonItem('Lickitung', 1000);
 ItemList.Magikarp             = new PokemonItem('Magikarp', 50000, Currency.money);
 ItemList.Togepi               = new PokemonItem('Togepi', 15000);
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
+ItemList['Pinkan Exeggutor']  = new PokemonItem('Pinkan Exeggutor', 50000);
 ItemList.Skorupi              = new PokemonItem('Skorupi', 6750);
 ItemList.Combee               = new PokemonItem('Combee', 6750);
 ItemList['Burmy (Plant)']        = new PokemonItem('Burmy (Plant)', 6750);
