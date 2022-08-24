@@ -53,6 +53,15 @@ export const SpriteCredits: Credit[] = [
         // Notes: Found in spritesheet description: "Feel free to use them, just give me credit."
     },
     {
+        name: 'CGMetalDragon',
+        link: 'https://www.deviantart.com/cgmetaldragon',
+        image: 'https://a.deviantart.net/avatars-big/c/g/cgmetaldragon.png',
+        resources: [
+            'Contest Champion (Johanna)',
+        ],
+        // Notes: No notes about credit, have messaged asking for permission, awaiting confirmation
+    },
+    {
         name: 'Croak',
         link: 'https://discordapp.com/users/206839451069054976/',
         resources: [
@@ -475,6 +484,15 @@ export const SpriteCredits: Credit[] = [
             'Overworld Hop',
         ],
         // Notes: Permission given on image page if credited.
+    },
+    {
+        name: 'X-5-4-5-2',
+        link: 'https://www.deviantart.com/x-5-4-5-2',
+        image: 'https://a.deviantart.net/avatars-big/x/_/x-5-4-5-2.png',
+        resources: [
+            'Officer Jenny',
+        ],
+        // Notes: Permission given on image page.
     },
 ].map((c) => {
     SeededRand.seed(parseInt(c.name, 36));
