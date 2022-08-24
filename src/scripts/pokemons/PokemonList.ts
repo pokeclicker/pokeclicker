@@ -1818,7 +1818,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 48.1,
+        'id': 48.01,
         'name': 'Pinkan Venonat',
         'catchRate': 190,
         'type': [PokemonType.Bug, PokemonType.Poison],
