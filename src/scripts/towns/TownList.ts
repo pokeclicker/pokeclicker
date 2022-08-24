@@ -148,6 +148,67 @@ const ThreeIslandShop = new Shop([
     ItemList.Ultraball,
     ItemList.Token_collector,
 ]);
+const FourIslandShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.xAttack,
+]);
+const FiveIslandShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.xClick,
+]);
+const SixIslandShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.Lucky_egg,
+]);
+const SevenIslandShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.Token_collector,
+]);
+const MikanIslandShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+]);
+const NavelIslandShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+]);
+const TrovitaIslandShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+]);
+const KumquatIslandShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+]);
+const PummeloIslandShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+]);
+const ValenciaPokémonCenterShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.Dowsing_machine,
+]);
+const PinkanPokémonReserveShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.Lucky_incense,
+]);
 const TanobyRuinsShop = new Shop([
     ItemList['Pinkan Exeggutor'],
 ], 'Trade with Prof. Ivy');
@@ -561,7 +622,7 @@ TownList['Professor Ivy\'s Lab'] = new Town(
 TownList['Four Island'] = new Town(
     'Four Island',
     GameConstants.Region.kanto,
-    [],
+    [FourIslandShop],
     {
         requirements: [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     }
@@ -569,7 +630,7 @@ TownList['Four Island'] = new Town(
 TownList['Five Island'] = new Town(
     'Five Island',
     GameConstants.Region.kanto,
-    [],
+    [FiveIslandShop],
     {
         requirements: [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     }
@@ -588,15 +649,15 @@ TownList['Rocket Warehouse'] = new Town(
 TownList['Six Island'] = new Town(
     'Six Island',
     GameConstants.Region.kanto,
-    [],
+    [SixIslandShop],
     {
         requirements: [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     }
 );
 TownList['Dotted Hole'] = new Town(
     'Dotted Hole',
-    GameConstants.Region.kanto,
     [],
+    GameConstants.Region.kanto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 37)],
         npcs: [SeviiGideon1, SeviiGideon2],
@@ -605,7 +666,7 @@ TownList['Dotted Hole'] = new Town(
 TownList['Seven Island'] = new Town(
     'Seven Island',
     GameConstants.Region.kanto,
-    [],
+    [SevenIslandShop],
     {
         requirements: [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     }
@@ -613,7 +674,7 @@ TownList['Seven Island'] = new Town(
 TownList['Mikan Island'] = new Town(
     'Mikan Island',
     GameConstants.Region.kanto,
-    [],
+    [MikanIslandShop],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tanoby Ruins'))],
     }
@@ -621,7 +682,7 @@ TownList['Mikan Island'] = new Town(
 TownList['Navel Island'] = new Town(
     'Navel Island',
     GameConstants.Region.kanto,
-    [],
+    [NavelIslandShop],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lost Cave'))],
     }
@@ -629,7 +690,7 @@ TownList['Navel Island'] = new Town(
 TownList['Trovita Island'] = new Town(
     'Trovita Island',
     GameConstants.Region.kanto,
-    [],
+    [TrovitaIslandShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 41)],
     }
@@ -637,7 +698,7 @@ TownList['Trovita Island'] = new Town(
 TownList['Kumquat Island'] = new Town(
     'Kumquat Island',
     GameConstants.Region.kanto,
-    [],
+    [KumquatIslandShop],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Icefall Cave'))],
     }
@@ -645,7 +706,7 @@ TownList['Kumquat Island'] = new Town(
 TownList['Pummelo Island'] = new Town(
     'Pummelo Island',
     GameConstants.Region.kanto,
-    [GymList['Supreme Gym Leader Drake']],
+    [GymList['Supreme Gym Leader Drake'], PummeloIslandShop],
     {
         requirements:
         [
@@ -659,7 +720,7 @@ TownList['Pummelo Island'] = new Town(
 TownList['Valencia Pokémon Center'] = new Town(
     'Valencia Pokémon Center',
     GameConstants.Region.kanto,
-    [],
+    [ValenciaPokémonCenterShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 40)],
         npcs: [ValenciaProfIvy],
@@ -668,7 +729,7 @@ TownList['Valencia Pokémon Center'] = new Town(
 TownList['Pinkan Pokémon Reserve'] = new Town(
     'Pinkan Pokémon Reserve',
     GameConstants.Region.kanto,
-    [],
+    [PinkanPokémonReserveShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 42)],
         npcs: [PinkanOfficerJenny],
