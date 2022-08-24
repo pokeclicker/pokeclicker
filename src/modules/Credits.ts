@@ -85,6 +85,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Blimp base',
             'Danny',
+            'Luana',
             'Pinkan Bellsprout',
             'Pinkan Caterpie',
             'Pinkan Diglett',
