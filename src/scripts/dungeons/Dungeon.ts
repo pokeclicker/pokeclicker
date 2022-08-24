@@ -1371,6 +1371,224 @@ dungeonList['Cerulean Cave'] = new Dungeon('Cerulean Cave',
     ],
     2500, 23);
 
+dungeonList['Ruby Path'] = new Dungeon('Ruby Path',
+    ['Geodude', 'Graveler', 'Machop', 'Machoke', 'Slugma'],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+    },
+    720600,
+    [new DungeonBossPokemon('Magcargo', 3703000, 20)],
+    43000, 101);
+
+dungeonList['Icefall Cave'] = new Dungeon('Icefall Cave',
+    ['Zubat', 'Golbat', 'Seel', 'Psyduck', 'Slowpoke', 'Swinub', 'Delibird', 'Sneasel', 'Wooper', 'Marill', 'Magikarp', 'Poliwag', 'Goldeen', 'Poliwhirl', 'Tentacool', 'Tentacruel', 'Horsea', 'Krabby', 'Shellder', 'Staryu', 'Seadra', 'Kingler', 'Dewgong', 'Gyarados', 'Lapras'],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+    },
+    720600,
+    [
+        new DungeonTrainer('Team Rocket Grunt',
+            [
+                new GymPokemon('Zubat', 250000, 20),
+                new GymPokemon('Zubat', 250000, 20),
+                new GymPokemon('Golbat', 250000, 20),
+            ], { weight: 1 }, undefined, '(male)'),
+    ],
+    43000, 101);
+
+dungeonList['Sunburst Island'] = new Dungeon('Sunburst Island',
+    ['Hoppip', 'Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+    },
+    720600,
+    [new DungeonBossPokemon('Crystal Onix', 4500000, 20)],
+    43000, 101);
+
+dungeonList['Lost Cave'] = new Dungeon('Lost Cave',
+    [
+        'Gastly', 'Haunter', 'Zubat', 'Golbat', 'Murkrow', 'Misdreavus',
+        new DungeonTrainer('Ruin Maniac',
+            [
+                new GymPokemon('Onix', 200600, 20),
+                new GymPokemon('Graveler', 200600, 20),
+                new GymPokemon('Marowak', 200600, 20),
+            ], { weight: 0.75 }, 'Lawson'),
+        new DungeonTrainer('Psychic',
+            [
+                new GymPokemon('Natu', 200600, 20),
+                new GymPokemon('Natu', 200600, 20),
+                new GymPokemon('Xatu', 200600, 20),
+            ], { weight: 0.75 }, 'Laura', '(female)'),
+
+    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+    },
+    720600,
+    [
+        new DungeonTrainer('Lady',
+            [
+                new GymPokemon('Persian', 1800000, 49),
+                new GymPokemon('Persian', 1800000, 49),
+            ], { weight: 1 }, 'Selphy'),
+    ],
+    36000, 101);
+
+dungeonList['Pattern Bush'] = new Dungeon('Pattern Bush',
+    [
+        'Spinarak', 'Ledyba', 'Caterpie', 'Weedle', 'Metapod', 'Kakuna',
+        new DungeonTrainer('Youngster',
+            [
+                new GymPokemon('Farfetch\'d', 720600, 20),
+                new GymPokemon('Farfetch\'d', 720600, 20),
+            ], { weight: 0.125 }, 'Cordell'),
+        new DungeonTrainer('Pokémon Breeder',
+            [new GymPokemon('Chansey', 720600, 20)], { weight: 0.125 }, 'Bethany', '(female)'),
+        new DungeonTrainer('Bug Catcher',
+            [new GymPokemon('Heracross', 720600, 20)], { weight: 0.125 }, 'Garett'),
+        new DungeonTrainer('Lass',
+            [new GymPokemon('Snubbull', 720600, 20)], { weight: 0.125 }, 'Joanna'),
+        new DungeonTrainer('Youngster',
+            [
+                new GymPokemon('Weepinbell', 200000, 20),
+                new GymPokemon('Weepinbell', 200000, 20),
+                new GymPokemon('Victreebel', 200000, 20),
+            ], { weight: 0.125 }, 'Nash'),
+        new DungeonTrainer('Bug Catcher',
+            [
+                new GymPokemon('Venonat', 200000, 20),
+                new GymPokemon('Venomoth', 200000, 20),
+            ], { weight: 0.125 }, 'Vance'),
+        new DungeonTrainer('Ruin Maniac',
+            [
+                new GymPokemon('Sandslash', 200000, 20),
+                new GymPokemon('Onix', 200000, 20),
+                new GymPokemon('Sandslash', 200000, 20),
+            ], { weight: 0.125 }, 'Layton'),
+        new DungeonTrainer('Picnicker',
+            [
+                new GymPokemon('Paras', 200000, 20),
+                new GymPokemon('Paras', 200000, 20),
+                new GymPokemon('Parasect', 200000, 20),
+            ], { weight: 0.125 }, 'Marcy'),
+        new DungeonTrainer('Bug Catcher',
+            [
+                new GymPokemon('Yanma', 200000, 20),
+                new GymPokemon('Beedrill', 200000, 20),
+                new GymPokemon('Yanma', 200000, 20),
+                new GymPokemon('Beedrill', 200000, 20),
+            ], { weight: 0.125 }, 'Jonah'),
+        new DungeonTrainer('Lass',
+            [
+                new GymPokemon('Hoppip', 200000, 20),
+                new GymPokemon('Hoppip', 200000, 20),
+                new GymPokemon('Skiploom', 200000, 20),
+                new GymPokemon('Skiploom', 200000, 20),
+            ], { weight: 0.125 }, 'Dalia'),
+        new DungeonTrainer('Pokémon Breeder',
+            [
+                new GymPokemon('Clefairy', 200000, 20),
+                new GymPokemon('Clefairy', 200000, 20),
+                new GymPokemon('Clefable', 200000, 20),
+            ], { weight: 0.125 }, 'Allison', '(female)'),
+        new DungeonTrainer('Camper',
+            [
+                new GymPokemon('Pinsir', 200000, 20),
+                new GymPokemon('Heracross', 200000, 20),
+            ], { weight: 0.125 }, 'Riley'),
+    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+    },
+    500000,
+    [new DungeonBossPokemon('Heracross', 3703000, 20)],
+    43000, 101);
+
+dungeonList['Altering Cave'] = new Dungeon('Altering Cave',
+    ['Zubat', 'Mareep', 'Pineco', 'Houndour', 'Teddiursa', 'Aipom', 'Shuckle'],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+    },
+    720600,
+    [
+        new DungeonBossPokemon('Stantler', 3703000, 20),
+        new DungeonBossPokemon('Smeargle', 3703000, 20),
+    ],
+    43000, 101);
+
+// All Unown except "EFHP"
+SeededRand.seed(4567);
+const TanobyUnownList = SeededRand.shuffleArray('ABCDGIJKLMNOQRSTUVWXYZ!?'.split(''));
+
+dungeonList['Tanoby Ruins'] = new Dungeon('Tanoby Ruins',
+    [
+        'Tentacool', 'Tentacruel', 'Mantine', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Psyduck', 'Kingler',
+        new DungeonTrainer('Ruin Maniac',
+            [new GymPokemon('Onix', 1940, 20)], { weight: 0.75 }, 'Brandon'),
+        new DungeonTrainer('Gentleman',
+            [
+                new GymPokemon('Marowak', 200000, 20),
+                new GymPokemon('Golduck', 200000, 20),
+            ], { weight: 0.75 }, 'Clifford'),
+        new DungeonTrainer('Painter',
+            [new GymPokemon('Smeargle', 200000, 20)], { weight: 0.75 }, 'Allison'),
+        new DungeonTrainer('Ruin Maniac',
+            [
+                new GymPokemon('Geodude', 200000, 20),
+                new GymPokemon('Graveler', 200000, 20),
+                new GymPokemon('Graveler', 200000, 20),
+            ], { weight: 0.75 }, 'Benjamin'),
+    ],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+    },
+    720600,
+    [
+        ...TanobyUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(TanobyUnownList) == char),
+        })),
+    ],
+    43000, 101);
+
+dungeonList['Pinkan Mountain'] = new Dungeon('Pinkan Mountain',
+    ['Pinkan Rattata', 'Pinkan Nidoran(M)', 'Pinkan Nidoran(F)', 'Pinkan Mankey', 'Pinkan Rhyhorn'],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+    },
+    1503000,
+    [
+        new DungeonBossPokemon('Pinkan Primeape', 7000000, 40),
+        new DungeonBossPokemon('Pinkan Rhydon', 7000000, 40),
+        new DungeonBossPokemon('Pinkan Nidoking', 7000000, 40),
+    ],
+    89500, 101);
+
 // Johto Dungeons
 
 dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
