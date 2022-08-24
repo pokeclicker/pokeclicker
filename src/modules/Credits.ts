@@ -123,6 +123,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Nidoran(F)',
             'Pinkan Nidoran(M)',
             'Pinkan Primeape',
+            'Pinkan Venonat',
         ],
         // Notes: Made specifically for PokéClicker.
     },
