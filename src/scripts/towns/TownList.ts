@@ -416,7 +416,7 @@ const SeviiRocketGrunts = new NPC ('Team Rocket Grunts', [
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 0), new QuestLineStepCompletedRequirement('Celio\'s Errand', 2, GameConstants.AchievementOption.less )]) });
 const SeviiRuby = new NPC ('Ruby', [
-    '<img src="assets/images/ruby.png">',
+    '<img src="assets/images/npcs/textbody/ruby.png">',
     '<i>You found a Ruby!</i>',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 3), new QuestLineStepCompletedRequirement('Celio\'s Errand', 5, GameConstants.AchievementOption.less )]) });
