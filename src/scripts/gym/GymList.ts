@@ -626,7 +626,7 @@ GymList['Mikan Island'] = new Gym(
         new GymPokemon('Blastoise', 2307500, 24),
     ],
     BadgeEnums['Coral-Eye'],
-    1200, //TODO
+    740,
     'I can see why you made it so far in the Indigo League, and i bet you\'ll do pretty well in the Orange League.\n' +
     'This is the Coral-Eye Badge of the Mikan Gym, to prove that you won your match!'
 );
@@ -641,7 +641,7 @@ GymList['Navel Island'] = new Gym(
         new GymPokemon('Electrode', 923000, 24),
     ],
     BadgeEnums.Sea_Ruby,
-    1200, //TODO
+    740,
     'You and the others were great.\nNow I\'d like to give you and your fellow challengers something you really deserve. The Sea Ruby badge. It\'s yours.'
 );
 GymList['Trovita Island'] = new Gym(
@@ -653,7 +653,7 @@ GymList['Trovita Island'] = new Gym(
         new GymPokemon('Starmie', 1538333, 24),
     ],
     BadgeEnums.Spike_Shell,
-    1200, //TODO
+    740,
     'Nice job, guys. Here are your Spike Shell badges, guys.'
 );
 GymList['Kumquat Island'] = new Gym(
@@ -664,7 +664,7 @@ GymList['Kumquat Island'] = new Gym(
         new GymPokemon('Marowak', 2307500, 24),
     ],
     BadgeEnums.Jade_Star,
-    1200, //TODO
+    740, //TODO
     'You did a fine job.\nAnd now, as Kumquat Island gym leader, and a member of the Orange Crew, I happily present this token of your victory.'
 );
 
@@ -681,7 +681,7 @@ GymList['Supreme Gym Leader Drake'] = new Gym(
         new GymPokemon('Dragonite', 1124400, 37),
     ],
     BadgeEnums.Elite_OrangeChampion,
-    1200, //TODO
+    4800,
     'You really deserve that trophy. You\'re a great Pokémon trainer.'
 );
 
