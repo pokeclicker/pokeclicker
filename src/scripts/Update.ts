@@ -1078,7 +1078,7 @@ class Update implements Saveable {
 
 
             // Start Plasma questline if player has Toxic Badge already
-            if (saveData.badgeCase[54]) {
+            if (saveData.badgeCase[59]) {
                 Update.startQuestLine(saveData, 'Quest for the DNA Splicers');
             }
             // Remove Team Plasma Assault dungeon
