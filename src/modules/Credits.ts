@@ -83,10 +83,24 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/272336444297707521/',
         image: 'assets/images/profile/trainer-96.png',
         resources: [
+            'Blimp base',
+            'Danny',
+            'Pinkan Bellsprout',
+            'Pinkan Caterpie',
+            'Pinkan Diglett',
+            'Pinkan Exeggutor',
+            'Pinkan Paras',
+            'Pinkan Pikachu',
+            'Pinkan Rhyhorn (shiny)',
+            'Pinkan Weedle',
+            'Rudy',
+            'Supreme Gym Leader Drake',
             'Team Flare Admin (male)',
             'Team Flare Admin (female)',
             'Team Flare Aliana',
             'Tourist Couple/Bellhop',
+            'Valencian Raticate',
+            'Valencian Paras',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -99,6 +113,19 @@ export const SpriteCredits: Credit[] = [
             'Mustard (battle pose)',
         ],
         // NOTES: Gives permission to everyone who asks in the comments section of the spritesheet as long as credit is given
+    },
+    {
+        name: 'Eat Pant',
+        link: 'https://discordapp.com/users/736029608587296819',
+        resources: [
+            'Pinkan Mankey',
+            'Pinkan Nidoking',
+            'Pinkan Nidoran(F)',
+            'Pinkan Nidoran(M)',
+            'Pinkan Primeape',
+            'Pinkan Venonat',
+        ],
+        // Notes: Made specifically for PokéClicker.
     },
     {
         name: 'EmmaRoak',
@@ -284,6 +311,8 @@ export const SpriteCredits: Credit[] = [
         name: 'NiCeDiCe',
         link: 'https://github.com/NiCeDiCe90',
         resources: [
+            'Crystal Onix',
+            'Pinkan Rhyhorn (non shiny)',
             'Red Spearow',
             'shiny Totem Ribombee',
             'Weather Institute world sprite',
@@ -327,6 +356,14 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given via Discord #development-chat
     },
     {
+        name: 'Qwertypop04',
+        link: 'https://discordapp.com/users/345944451472031744/',
+        resources: [
+            'Pinkan Rhydon',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
         image: 'https://avatars.githubusercontent.com/u/7288322?v=4',
@@ -354,6 +391,13 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/824384977633411082/',
         resources: [
             'Macro Cosmos (male) and (female)',
+            'Cissy',
+            'Pinkan Pidgey',
+            'Pinkan Rattata',
+            'Pinkan Vileplume',
+            'Valencian Butterfree',
+            'Valencian Vileplume',
+            'Valencian Weepinbell',
         ],
         // NOTES: Made specifically for Pokeclicker.
     },

@@ -338,6 +338,158 @@ Routes.add(new RegionRoute(
     true,
     37487
 ));
+Routes.add(new RegionRoute(
+    'Five Isle Meadow', GameConstants.Region.kanto, 30,
+    new RoutePokemon({
+        land: ['Sentret', 'Pidgey', 'Pidgeotto', 'Hoppip', 'Meowth', 'Persian', 'Psyduck', 'Slowpoke'],
+        water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler'],
+    }),
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Memorial Pillar', GameConstants.Region.kanto, 31,
+    new RoutePokemon({
+        water: ['Hoppip', 'Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 30)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Water Labyrinth', GameConstants.Region.kanto, 32,
+    new RoutePokemon({
+        water: ['Hoppip', 'Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
+    }),
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Resort Gorgeous', GameConstants.Region.kanto, 33,
+    new RoutePokemon({
+        water: ['Hoppip', 'Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 32)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Water Path', GameConstants.Region.kanto, 34,
+    new RoutePokemon({
+        land: ['Sentret', 'Spearow', 'Fearow', 'Oddish', 'Bellsprout', 'Meowth', 'Gloom', 'Weepinbell', 'Persian', 'Psyduck', 'Slowpoke'],
+        water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler'],
+    }),
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Green Path', GameConstants.Region.kanto, 35,
+    new RoutePokemon({
+        water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
+    }),
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pattern Bush'))],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Outcast Island', GameConstants.Region.kanto, 36,
+    new RoutePokemon({
+        water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 35)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Ruin Valley', GameConstants.Region.kanto, 37,
+    new RoutePokemon({
+        land: ['Natu', 'Spearow', 'Fearow', 'Meowth', 'Yanma', 'Wooper', 'Marill', 'Persian', 'Psyduck', 'Slowpoke', 'Wobbuffet'],
+        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Poliwhirl', 'Gyarados'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 34)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Canyon Entrance', GameConstants.Region.kanto, 38,
+    new RoutePokemon({
+        land: ['Sentret', 'Spearow', 'Fearow', 'Phanpy', 'Meowth', 'Persian', 'Psyduck', 'Slowpoke'],
+    }),
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Sevault Canyon', GameConstants.Region.kanto, 39,
+    new RoutePokemon({
+        land: ['Geodude', 'Phanpy', 'Fearow', 'Meowth', 'Cubone', 'Marowak', 'Persian', 'Onix', 'Skarmory', 'Larvitar'],
+        headbutt: ['Graveler'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 38)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Valencia Island', GameConstants.Region.kanto, 40,
+    new RoutePokemon({
+        land: ['Valencian Butterfree', 'Valencian Raticate', 'Valencian Vileplume', 'Valencian Paras', 'Valencian Weepinbell', 'Nidoran(M)', 'Nidoran(F)', 'Nidorina'],
+        water: ['Gyarados', 'Cloyster', 'Poliwhirl'],
+    }),
+    [new GymBadgeRequirement(BadgeEnums.Jade_Star)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1250000
+));
+
+Routes.add(new RegionRoute(
+    'Pinkan Forest', GameConstants.Region.kanto, 41,
+    new RoutePokemon({
+        land: ['Pinkan Caterpie', 'Pinkan Weedle', 'Pinkan Pidgey', 'Pinkan Vileplume', 'Pinkan Paras', 'Pinkan Venonat', 'Pinkan Mankey'],
+    }),
+    [
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Altering Cave')),
+        new QuestLineCompletedRequirement('Celio\'s Errand'),
+    ],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Pinkan Plains', GameConstants.Region.kanto, 42,
+    new RoutePokemon({
+        land: ['Pinkan Pidgey', 'Pinkan Rattata', 'Pinkan Nidoran(M)', 'Pinkan Nidoran(F)', 'Pinkan Diglett', 'Pinkan Bellsprout'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 41)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1250000
+));
 
 /*
 JOHTO
