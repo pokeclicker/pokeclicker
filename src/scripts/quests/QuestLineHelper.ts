@@ -419,6 +419,61 @@ class QuestLineHelper {
         App.game.quests.questLines().push(deoxysQuestLine);
     }
 
+    public static createRubySapphireSeviiQuestLine() {
+        const rubySapphireSeviiQuestLine = new QuestLine('Celio\'s Errand', 'Celio has asked you to help him set up a digital connection between the Sevii Islands and Hoenn.', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), GameConstants.BulletinBoards.Hoenn);
+
+        const talktoCelio3 = new TalkToNPCQuest(OneIslandCelio4, 'Speak with Celio on One Island in Sevii.');
+        rubySapphireSeviiQuestLine.addQuest(talktoCelio3);
+
+        const talktoRocketGrunts = new TalkToNPCQuest(SeviiRocketGrunts, 'Eavesdrop on the Team Rocket Grunts at Mt. Ember.');
+        rubySapphireSeviiQuestLine.addQuest(talktoRocketGrunts);
+
+        const clearSeviiRocketGrunts1 = new CustomQuest(2, 0, 'Two Team Rocket Grunts are blocking the entrance to Ruby Path. Defeat them.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 2')]()
+        );
+        rubySapphireSeviiQuestLine.addQuest(clearSeviiRocketGrunts1);
+
+        const clearRubyPath = new CustomQuest(1, 0, 'Locate the Ruby. Clear Ruby Path in Mt. Ember.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ruby Path')]());
+        rubySapphireSeviiQuestLine.addQuest(clearRubyPath);
+
+        const talktoRuby = new TalkToNPCQuest(SeviiRuby, 'Take the Ruby in Ruby Path');
+        rubySapphireSeviiQuestLine.addQuest(talktoRuby);
+
+        const talktoCelio4 = new TalkToNPCQuest(OneIslandCelio5, 'Return the Ruby to Celio on One Island');
+        rubySapphireSeviiQuestLine.addQuest(talktoCelio4);
+
+        const clearIcefallCave = new CustomQuest(1, 0, 'Help Lorelei with Team Rocket Grunts by clearing Icefall Cave on Four Island.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Icefall Cave')]());
+        rubySapphireSeviiQuestLine.addQuest(clearIcefallCave);
+
+        const talktoLorelei = new TalkToNPCQuest(SeviiLorelei, 'Talk to Lorelei in Icefall Cave');
+        rubySapphireSeviiQuestLine.addQuest(talktoLorelei);
+
+        const talktoGideon = new TalkToNPCQuest(SeviiGideon2, 'Talk to Gideon in Dotted Hole');
+        rubySapphireSeviiQuestLine.addQuest(talktoGideon);
+
+        const clearSeviiRocketGrunts2 = new CustomQuest(3, 0, 'Defeat the Three Team Rocket Grunts in Rocket Warehouse.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 3')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 4')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Grunt 5')]()
+        );
+        rubySapphireSeviiQuestLine.addQuest(clearSeviiRocketGrunts2);
+
+        const clearSeviiAriana = new CustomQuest(1, 0, 'Defeat Team Rocket Executive Ariana in Rocket Warehouse.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Ariana')]());
+        rubySapphireSeviiQuestLine.addQuest(clearSeviiAriana);
+
+        const clearSeviiArcher = new CustomQuest(1, 0, 'Defeat Team Rocket Executive Archer in Rocket Warehouse.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Archer')]());
+        rubySapphireSeviiQuestLine.addQuest(clearSeviiArcher);
+
+        const clearSeviiGideon = new CustomQuest(1, 0, 'Defeat Scientist Gideon to reclaim the Sapphire.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Scientist Gideon')]());
+        rubySapphireSeviiQuestLine.addQuest(clearSeviiGideon);
+
+        const talktoCelio5 = new TalkToNPCQuest(OneIslandCelio6, 'Return the Sapphire to Celio on One Island');
+        rubySapphireSeviiQuestLine.addQuest(talktoCelio5);
+
+        App.game.quests.questLines().push(rubySapphireSeviiQuestLine);
+    }
+
     // Sinnoh QuestLines
     public static createGalacticSinnohQuestLine() {
         const galacticSinnohQuestLine = new QuestLine('A new world', 'End Team Galactic\'s plan to destroy the world and create a new one in its place.');
@@ -1270,6 +1325,7 @@ class QuestLineHelper {
         this.createCelebiJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
         this.createDeoxysQuestLine();
+        this.createRubySapphireSeviiQuestLine();
         this.createGalacticSinnohQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createVivillonQuestLine();
