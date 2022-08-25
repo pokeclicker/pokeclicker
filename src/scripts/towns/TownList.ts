@@ -327,30 +327,39 @@ const CelebiProfIvy = new NPC ('Prof. Ivy', [
 
 const Informant1 = new NPC('Informant', [
     '<i>In a shady warehouse, you find the informant. He is a Mr. Mime, and he doesn\'t seem willing to divulge the information you need.</i>',
-],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 2), new QuestLineStepCompletedRequirement('Detective Pikachu', 4, GameConstants.AchievementOption.less )]) });
+], {
+    image: 'assets/images/temporaryBattle/Mime Interview.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 2), new QuestLineStepCompletedRequirement('Detective Pikachu', 4, GameConstants.AchievementOption.less)]),
+});
 const Informant2 = new NPC('Informant', [
-    '<i>The Mr. Mime signals to you that this is an illicit drug called R, and that it is frequently used in the underground fighting rings near the Battle Frontier</i>',
-],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 4), new QuestLineStepCompletedRequirement('Detective Pikachu', 6, GameConstants.AchievementOption.less )])});
+    '<i>The Mr. Mime signals to you that this is an illicit drug called R. It is frequently used in the underground fighting rings near the Battle Frontier.</i>',
+], {
+    image: 'assets/images/temporaryBattle/Mime Interview.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 4), new QuestLineStepCompletedRequirement('Detective Pikachu', 6, GameConstants.AchievementOption.less)]),
+});
 
-const MewTwo1 = new NPC('Mewtwo', [
-    'You were wise to seek my out. Howard Clifford has been deceiving you. He is the one making the R drug, and....',
+const Mewtwo1 = new NPC('Mewtwo', [
+    'You were wise to seek me out. Howard Clifford has been deceiving you. He is the one making the R drug, and....',
     '<i>A sphere of energy envelops Mewtwo, and he is dragged away by some sort of helicopter. The helicopter has a logo on it: Clifford Industries!</i>',
-],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 10), new QuestLineStepCompletedRequirement('Detective Pikachu', 12, GameConstants.AchievementOption.less )])});
+], {
+    image: 'assets/images/temporaryBattle/Possessed Mewtwo.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 10), new QuestLineStepCompletedRequirement('Detective Pikachu', 12, GameConstants.AchievementOption.less)]),
+});
 
-const MewTwo2 = new NPC('Mewtwo', [
-    'Thank you for your help. I have little to offer you in return, but perhaps this will help. I found Detective Pikachu\'s partner some days ago injured on the side of the road, and have nursed him back to health. I hope this reunion will suffice.',
-
-],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 15), new QuestLineStepCompletedRequirement('Detective Pikachu', 17, GameConstants.AchievementOption.less )])});
+const Mewtwo2 = new NPC('Mewtwo', [
+    'Thank you for your help. I have little to offer you in return, but perhaps this will help.',
+    'I found Detective Pikachu\'s partner some days ago injured on the side of the road, and have nursed him back to health. I hope this reunion will suffice.',
+], {
+    image: 'assets/images/temporaryBattle/Possessed Mewtwo.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 15), new QuestLineStepCompletedRequirement('Detective Pikachu', 17, GameConstants.AchievementOption.less)]),
+});
 
 const DetectiveRaichu = new NPC('Detective Raichu', [
     'Thanks for your help, kid! I\'ll stick along with you until our next mystery comes along.',
-
-],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 16), new QuestLineStepCompletedRequirement('Detective Pikachu', 17, GameConstants.AchievementOption.less )])});
+], {
+    image: 'assets/images/pokemon/26.02.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 16), new QuestLineStepCompletedRequirement('Detective Pikachu', 17, GameConstants.AchievementOption.less)]),
+});
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
@@ -399,7 +408,7 @@ TownList['Cerulean City'] = new Town(
     [CeruleanCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cerulean City']), new MoveToDungeon(dungeonList['Cerulean Cave'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
-        npcs: [CeruleanKantoBerryMaster, CeruleanSuperNerd, MewTwo1, MewTwo2, DetectiveRaichu],
+        npcs: [CeruleanKantoBerryMaster, CeruleanSuperNerd, Mewtwo1, Mewtwo2, DetectiveRaichu],
     }
 );
 TownList['Vermilion City'] = new Town(
@@ -868,32 +877,42 @@ const ProfElm = new ProfNPC('Prof. Elm',
 
 const searchForClues = new NPC('Search For Clues', [
     '<i>You look around the city in search of clues, and are set upon by a gang of angry Aipoms!</i>',
-],
-{ requirement: new MultiRequirement([new QuestLineStartedRequirement('Detective Pikachu'), new QuestLineStepCompletedRequirement('Detective Pikachu', 1, GameConstants.AchievementOption.less )]) });
+], {
+    image: 'assets/images/temporaryBattle/Aipom Alley.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Detective Pikachu'), new QuestLineStepCompletedRequirement('Detective Pikachu', 1, GameConstants.AchievementOption.less)]),
+});
 
 const HowardClifford1 = new NPC('Howard Clifford', [
-    'I am Howard Clifford, CEO of Clifford Industries. I hear you have been investigating both my company, and a mysterious drug called R. I have reason to believe that a high ranking official in the company is manufacturing this drug, but have been unable to get to the bottom of it myself. There is a journalist in Hearthome City who may be able to help us both. Please make contact with her, and report anything you find back to me.',
-],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 6), new QuestLineStepCompletedRequirement('Detective Pikachu', 8, GameConstants.AchievementOption.less )])});
+    'I am Howard Clifford, CEO of Clifford Industries. I hear you have been investigating both my company, and a mysterious drug called R.',
+    'I have reason to believe that a high ranking official in the company is manufacturing this drug, but have been unable to get to the bottom of it myself.',
+    'There is a journalist in Hearthome City who may be able to help us both.Please make contact with her and report anything you find back to me.',
+], {
+    image: 'assets/images/npcs/Howard Clifford.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 6), new QuestLineStepCompletedRequirement('Detective Pikachu', 8, GameConstants.AchievementOption.less)]),
+});
 
 const HowardClifford2 = new NPC('Howard Clifford', [
     'You are too late to stop me! The R drug puts Pokemon in a frenzied state, and allows us to control them with the right equipment! You led me straight to Mewtwo, and now I will take control of the most powerful Pokemon in the world!',
     '<i>Howard puts on a headset and pushes a button. The energy sphere containing Mewtwo comes into view, and it has a crazed look in its eyes. Howard pushes a botton on his headset and slumps back in his chair.</i>',
     '<i>Mewtwo makes eye contact with you, and you hear Howard\'s voice in your mind, laughing maniacally. An armed man comes into the room, and warns you not to move.</i>',
-],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 11), new QuestLineStepCompletedRequirement('Detective Pikachu', 13, GameConstants.AchievementOption.less )])});
+], {
+    image: 'assets/images/npcs/Howard Clifford.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 11), new QuestLineStepCompletedRequirement('Detective Pikachu', 13, GameConstants.AchievementOption.less)]),
+});
 
 const HowardClifford3 = new NPC('Howard Clifford', [
     'UNLIMITED POWER! YOU\'LL NEVER STOP ME!',
-],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 13), new QuestLineStepCompletedRequirement('Detective Pikachu', 15, GameConstants.AchievementOption.less )])});
+], {
+    image: 'assets/images/npcs/Howard Clifford.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 13), new QuestLineStepCompletedRequirement('Detective Pikachu', 15, GameConstants.AchievementOption.less)]),
+});
 
 
 //Johto Towns
 TownList['New Bark Town'] = new Town(
     'New Bark Town',
     GameConstants.Region.johto,
-    [],
+    [new BulletinBoard(GameConstants.BulletinBoards.Johto)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
         npcs: [ProfElm, NewBarkTechnologyEnthusiast],
@@ -1775,9 +1794,13 @@ const ProfRowan = new ProfNPC('Prof. Rowan',
     'Next stop is Unova! I\'ve always wanted to visit Castelia City, personally...');
 
 const LucyStevens1 = new NPC('Lucy Stevens', [
-    'Who sent you to talk to me? Howard Clifford himself? That\'s a little suspicious, but you seem trustworthy enough. I\'ve been doing some research on this R compound, and have reason to believe it is being manufactured or used in research at the P2 lab in Unova. We should investigate!',
-],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 7), new QuestLineStepCompletedRequirement('Detective Pikachu', 9, GameConstants.AchievementOption.less )])});
+    'Who sent you to talk to me? Howard Clifford himself? That\'s a little suspicious, but you seem trustworthy enough.',
+    'I\'ve been doing some research on this R compound, and have reason to believe it is being manufactured or used in research at the P2 Lab in Unova.',
+    'We should investigate!',
+], {
+    image: 'assets/images/npcs/Lucy Stevens.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 7), new QuestLineStepCompletedRequirement('Detective Pikachu', 9, GameConstants.AchievementOption.less)]),
+});
 
 
 //Sinnoh Towns
