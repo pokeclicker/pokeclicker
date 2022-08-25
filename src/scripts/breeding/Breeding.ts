@@ -259,6 +259,12 @@ class Breeding implements Feature {
         return false;
     }
 
+    public clearQueue() {
+        while (this._queueList().length) {
+            this.removeFromQueue(0);
+        }
+    }
+
     public gainPokemonEgg(pokemon: PartyPokemon | PokemonListData, isHelper = false): boolean {
         if (!this.hasFreeEggSlot(isHelper)) {
             Notifier.notify({

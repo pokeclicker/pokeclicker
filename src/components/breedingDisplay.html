@@ -75,5 +75,15 @@
         <img src="" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data], App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true)) }">
       </div>
     </div>
+    <div id="hatcheryQueueInfo" class="card-footer p-0 small">
+        <span data-bind="text: App.game.breeding.queueList().length + ' / ' + App.game.breeding.queueSlots()" style="line-height: 30px;"></span>
+        <button class="btn btn-sm btn-danger" style="position: absolute; right: 0; width: auto;"
+                data-bind="
+                    click: () => App.game.breeding.clearQueue(),
+                    tooltip: { title: 'Remove all Pokémon from the queue.', trigger: 'hover' }
+                ">
+            Clear
+        </button>
+    </div>
     <!-- /ko -->
 </div>
