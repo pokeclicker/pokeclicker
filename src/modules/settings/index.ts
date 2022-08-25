@@ -69,6 +69,7 @@ Settings.add(new BooleanSetting('resetShopAmountOnPurchase', 'Reset buy quantity
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
 Settings.add(new BooleanSetting('showCurrencyLostAnimation', 'Show currency lost animation', true));
 Settings.add(new BooleanSetting('hideChallengeRelatedModules', 'Hide challenge related modules', false));
+Settings.add(new BooleanSetting('disableRightClickMenu', 'Disable the right click menu', true));
 Settings.add(new Setting<string>('backgroundImage', 'Background image',
     [
         new SettingOption('Day', 'background-day'),
@@ -263,9 +264,10 @@ Settings.add(new HotkeySetting('hotkey.farm', 'Farm', 'F'));
 Settings.add(new HotkeySetting('hotkey.hatchery', 'Hatchery', 'H'));
 Settings.add(new HotkeySetting('hotkey.oakItems', 'Oak Items', 'O'));
 Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
-Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Pokéball Selection', 'P', { suffix: ' + Number' }));
+Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Poké Ball Selection', 'P', { suffix: ' + Number' }));
 
 Settings.add(new HotkeySetting('hotkey.farm.toggleShovel', 'Toggle Shovel', 'S'));
+Settings.add(new HotkeySetting('hotkey.farm.togglePlotSafeLock', 'Toggle Plot Lock', 'L', { suffix: ' or Shift + Click' }));
 
 Settings.add(new HotkeySetting('hotkey.underground.hammer', 'Switch to Hammer', 'H'));
 Settings.add(new HotkeySetting('hotkey.underground.chisel', 'Switch to Chisel', 'C'));

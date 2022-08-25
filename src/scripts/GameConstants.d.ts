@@ -92,7 +92,7 @@ namespace GameConstants {
         'Hatch',
         'Pokeball',
         'Click',
-        'Route Kill',
+        'Route Defeat',
         'Clear Gym',
         'Clear Dungeon',
         'Farming',
@@ -136,9 +136,15 @@ namespace GameConstants {
     declare const QUEST_CLICKS_PER_SECOND: number;
     declare const QUESTS_PER_SET: number;
     declare const BASE_EP_YIELD: number;
-    declare const SHINY_EP_YIELD: number;
-    declare const DUNGEON_EP_YIELD: number;
     declare const STONE_EP_YIELD: number;
+    declare const WANDERER_EP_YIELD: number;
+    declare const SHOPMON_EP_YIELD: number;
+    declare const SAFARI_EP_YIELD: number;
+    declare const SHINY_EP_MODIFIER: number;
+    declare const REPEATBALL_EP_MODIFIER: number;
+    declare const DUNGEON_EP_MODIFIER: number;
+    declare const DUNGEON_BOSS_EP_MODIFIER: number;
+    declare const ROAMER_EP_MODIFIER: number;
     declare const EP_EV_RATIO: number;
     declare const EP_CHALLENGE_MODIFIER: number;
     declare const DNA_ITEM_CHANCE: number;
@@ -169,6 +175,7 @@ namespace GameConstants {
         'Lureball',
         'Nestball',
         'Repeatball',
+        'Beastball',
     }
     declare enum Currency {
         money,
@@ -270,6 +277,11 @@ namespace GameConstants {
         'Sachet',
         'Whipped_dream',
         'Ice_stone',
+        'Sweet_apple',
+        'Tart_apple',
+        'Cracked_pot',
+        'Galarica_cuff',
+        'Galarica_wreath',
     }
     declare enum ShardType {
         'None',
@@ -286,6 +298,15 @@ namespace GameConstants {
         'White Shard',
         'Pink Shard',
         'Cyan Shard',
+        'Rose Shard',
+        'Brown Shard',
+    }
+    declare enum FossilPieceType {
+        'None',
+        'Fossilized Bird',
+        'Fossilized Fish',
+        'Fossilized Drake',
+        'Fossilized Dino',
     }
     declare enum BattleItemType {
         'xAttack' = '',
@@ -317,6 +338,7 @@ namespace GameConstants {
         'Lickitung',
         'Togepi',
         'Beldum',
+        'Pinkan Exeggutor',
         'Skorupi',
         'Combee',
         'Burmy (plant)',
@@ -324,10 +346,28 @@ namespace GameConstants {
         'Cherubi',
         'Zorua',
         'Meloetta (pirouette)',
-        'Toxel',
-        'Eternatus',
-        'Slowpoke (Galar)'
+        'Type: Null',
+        'Poipole',
+        'Dracozolt',
+        'Arctozolt',
+        'Dracovish',
+        'Arctovish',
     }
+
+    declare enum UltraBeastType {
+         'Nihilego',
+         'Buzzwole',
+         'Pheromosa',
+         'Xurkitree',
+         'Kartana',
+         'Celesteela',
+         'Blacephalon',
+         'Stakataka',
+         'Guzzlord',
+         'Poipole',
+         'Naganadel'
+     }
+
     declare enum PokeBlockColor {
         Black,
         Red,
@@ -354,6 +394,17 @@ namespace GameConstants {
         'Dragon_egg',
         'Pokemon_egg',
         'Mystery_egg'
+    }
+    export enum BulletinBoards {
+        None = -2,
+        All = -1,
+        Kanto,
+        Hoenn,
+        Kalos,
+        Alola,
+        Galar,
+        Armor,
+        Crown
     }
     declare const EnergyRestoreEffect: {
         SmallRestore: number;
@@ -393,6 +444,7 @@ namespace GameConstants {
     declare const UnovaGyms: string[];
     declare const KalosGyms: string[];
     declare const GalarGyms: string[];
+    declare const OrangeGyms: string[];
     declare const RegionGyms: string[][];
     declare function getGymIndex(gym: string): number;
     declare function getGymRegion(gym: string): Region;
@@ -422,10 +474,10 @@ namespace GameConstants {
         'Saturday',
     }
     declare enum Pokerus {
-        'None',
+        'Uninfected',
         'Infected',
         'Contagious',
-        'Cured',
+        'Resistant',
     }
     declare enum ShardTraderLocations {
         'Cerulean City',
@@ -481,6 +533,7 @@ namespace GameConstants {
         'Accumula Town',
         'Nuvema Town',
         'Camphrier Town',
+        'Parfum Palace',
         'Ambrette Town',
         'Cyllage City',
         'Geosenge Town',
@@ -501,10 +554,21 @@ namespace GameConstants {
         'Seafolk Village',
         'Exeggutor Island',
         'Altar of the Sunne and Moone',
+        'Turffield',
+        'Hulbury',
+        'Motostoke',
+        'Hammerlocke',
+        'Route 6',
+        'Stow-on-Side',
+        'Ballonlea',
+        'Circhester',
+        'Spikemuth',
+        'Master Dojo',
     }
     declare enum KantoSubRegions {
         Kanto,
         Sevii123,
+        Sevii4567,
     }
     declare enum JohtoSubRegions {
         Johto,
@@ -529,10 +593,9 @@ namespace GameConstants {
         // PoniIsland,
     }
     declare enum GalarSubRegions {
-        Galar,
-        // GalarSouth,
-        // GalarNorth,
-        IsleOfArmor,
+        SouthGalar,
+        NorthGalar,
+        IsleofArmor,
         CrownTundra,
     }
 }

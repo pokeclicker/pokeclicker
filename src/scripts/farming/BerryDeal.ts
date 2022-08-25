@@ -27,7 +27,7 @@ class BerryDeal {
     }
 
     private static randomUndergroundItem(): UndergroundItem {
-        return SeededRand.fromArray(UndergroundItem.list);
+        return SeededRand.fromArray(UndergroundItems.list);
     }
 
     private static randomPokeballDeal(): BerryDeal {

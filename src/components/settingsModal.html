@@ -44,6 +44,7 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmLeaveDungeon')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmBeformeMulchingAllPlots')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGymGoAnimation')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableRightClickMenu')}"></tr>
                                 <tr><th colspan="2">Map Colors</th></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--incomplete')}"></tr>
@@ -105,6 +106,7 @@
                             </thead>
                             <tbody>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.farm.toggleShovel')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.farm.togglePlotSafeLock')}"></tr>
                             </tbody>
                             <thead>
                                 <tr><th colspan="2">Underground</th></tr>
@@ -143,15 +145,15 @@
                                 </tr>
                             </tbody>
                             <thead>
-                                <tr><th colspan="2">Pokéball Selector</th></tr>
+                                <tr><th colspan="2">Poké Ball Selector</th></tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td class="p-2">
-                                        <knockout>Select Pokéball Type:</knockout>
+                                        <knockout>Select Poké Ball Type:</knockout>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
-                                        title: 'Each number refers to a specific Pokéball',
+                                        title: 'Each number refers to a specific Poké Ball',
                                         trigger: 'hover',
                                     }">
                                         <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>

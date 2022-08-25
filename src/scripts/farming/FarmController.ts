@@ -5,6 +5,7 @@ class FarmController {
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static berryListFiltered: KnockoutObservableArray<BerryType> = ko.observableArray([]);
     public static numberOfTabs: KnockoutComputed<number>;
+    public static farmingModalTabSelected: KnockoutObservable<string> = ko.observable('berryFarmView');
 
     public static berryListEnd: KnockoutComputed<number>;
 
@@ -12,6 +13,7 @@ class FarmController {
     public static selectedMulch: KnockoutObservable<MulchType> = ko.observable(MulchType.Boost_Mulch);
     public static selectedShovel: KnockoutObservable<boolean> = ko.observable(false);
     public static selectedMulchShovel: KnockoutObservable<boolean> = ko.observable(false);
+    public static selectedPlotSafeLock: KnockoutObservable<boolean> = ko.observable(false);
 
     public static berryListVisible: KnockoutObservable<boolean> = ko.observable(true);
 
@@ -61,6 +63,9 @@ class FarmController {
     }
 
     public static calculateCssClass() {
+        if (this.selectedPlotSafeLock()) {
+            return 'PlotSafeLockSelected';
+        }
         if (this.selectedShovel()) {
             return 'ShovelSelected';
         }
@@ -80,11 +85,39 @@ class FarmController {
         return MulchType[plot.mulch];
     }
 
-    public static plotClick(index: number) {
+    public static plotClick(index: number, event: MouseEvent) {
         const plot: Plot = App.game.farming.plotList[index];
+
+        if (event.shiftKey) {
+            this.shiftTogglePlotSafeLock(plot, index);
+        } else {
+            this.handleClickActions(plot, index);
+        }
+    }
+
+    private static shiftTogglePlotSafeLock(plot: Plot, index: number) {
+        if (!plot.isUnlocked) {
+            return;
+        }
+
+        App.game.farming.togglePlotSafeLock(index);
+    }
+
+    public static toggleAllPlotsLocked(lock: boolean) {
+        App.game.farming.plotList.forEach((plot, index) => {
+            if (plot.isUnlocked && ((lock && !plot.isSafeLocked) || (!lock && plot.isSafeLocked))) {
+                App.game.farming.togglePlotSafeLock(index);
+            }
+        });
+    }
+
+    private static handleClickActions(plot: Plot, index: number) {
         // Unlocking Plot
         if (!plot.isUnlocked) {
             App.game.farming.unlockPlot(index);
+        // Handle Safe Locking Plot
+        } else if (this.selectedPlotSafeLock()) {
+            App.game.farming.togglePlotSafeLock(index);
         // Handle Shovel
         } else if (this.selectedShovel()) {
             App.game.farming.shovel(index);
