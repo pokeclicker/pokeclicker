@@ -225,7 +225,7 @@ class Dungeon {
     }
 
     public getLootTierWeights(clears: number, highestRegion: GameConstants.Region): Record<LootTier, number> {
-        if (GameConstants.getDungeonRegion(this.name) < highestRegion - 2) {
+        if ((this.optionalParameters?.dungoenBasedOnRegion ?? GameConstants.getDungeonRegion(this.name)) < highestRegion - 2) {
             return Object.entries(nerfedLootTierChance).reduce((chances, [tier, chance]) => {
                 if (tier in this.lootTable &&
                     this.lootTable[tier].some((loot) => !loot.requirement || loot.requirement.isCompleted())) {
