@@ -356,7 +356,6 @@ const Mewtwo2 = new NPC('Mewtwo', [
 
 const DetectiveRaichu = new NPC('Detective Raichu', [
     'Thanks for your help, kid! I\'ll stick along with you until our next mystery comes along.',
-
 ], {
     image: 'assets/images/pokemon/26.02.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 16), new QuestLineStepCompletedRequirement('Detective Pikachu', 17, GameConstants.AchievementOption.less)]),
