@@ -1078,7 +1078,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 25.14,
+        'id': 25.15,
         'name': 'Detective Pikachu',
         'catchRate': 190,
         'type': [PokemonType.Electric],
