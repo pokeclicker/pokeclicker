@@ -82,7 +82,7 @@ class PartyPokemon implements Saveable {
         if (this.pokerus < GameConstants.Pokerus.Contagious) {
             return 1;
         }
-        return (this.evs() < 50) ? (1 + 0.01 * this.evs()) : (1 + Math.min(1, Math.pow((this.evs() - 30),0.075) - 0.75));
+        return (this.evs() < 50) ? (1 + 0.01 * this.evs()) : (Math.pow(this.evs(),Math.log(1.5) / Math.log(50)));
     }
 
     public canCatchPokerus(): boolean {
