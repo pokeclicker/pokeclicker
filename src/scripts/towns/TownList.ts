@@ -1277,7 +1277,7 @@ const HowardClifford3 = new NPC('Howard Clifford', [
 TownList['New Bark Town'] = new Town(
     'New Bark Town',
     GameConstants.Region.johto,
-    [new BulletinBoard(GameConstants.BulletinBoards.Johto)],
+    [],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
         npcs: [ProfElm, NewBarkTechnologyEnthusiast],
