@@ -1309,6 +1309,12 @@ export const TemporaryBattles = [
     'Plasma Shadow 4',
     'Ghetsis 1',
     'Ghetsis 2',
+    'Aipom Alley',
+    'Mime Interview',
+    'Underground Fighting Ring',
+    'Lab Ambush',
+    'Imposter',
+    'Possessed Mewtwo',
     'AZ',
     'Ash Ketchum Kanto',
     'Ash Ketchum Johto',
@@ -1376,12 +1382,6 @@ export const TemporaryBattles = [
     'Spectrier',
     'Dyna Tree Birds',
     'Regigigas',
-    'Aipom Alley',
-    'Mime Interview',
-    'Underground Fighting Ring',
-    'Lab Ambush',
-    'Imposter',
-    'Possessed Mewtwo',
 ];
 
 export enum ShardTraderLocations {

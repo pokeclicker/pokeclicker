@@ -290,6 +290,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Bill',
             'Fairy Tale Girl',
+            'Gen 8 Reporter (Lucy Stevens)',
             'Hex Maniac',
             'Looker',
             'Mr. Fuji',
