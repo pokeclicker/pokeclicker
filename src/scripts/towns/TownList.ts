@@ -1250,7 +1250,7 @@ const searchForClues = new NPC('Search For Clues', [
 const HowardClifford1 = new NPC('Howard Clifford', [
     'I am Howard Clifford, CEO of Clifford Industries. I hear you have been investigating both my company, and a mysterious drug called R.',
     'I have reason to believe that a high ranking official in the company is manufacturing this drug, but have been unable to get to the bottom of it myself.',
-    'There is a journalist in Hearthome City who may be able to help us both.Please make contact with her and report anything you find back to me.',
+    'There is a journalist in Hearthome City who may be able to help us both. Please make contact with her and report anything you find back to me.',
 ], {
     image: 'assets/images/npcs/Howard Clifford.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 6), new QuestLineStepCompletedRequirement('Detective Pikachu', 8, GameConstants.AchievementOption.less)]),
