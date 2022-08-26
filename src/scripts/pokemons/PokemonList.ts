@@ -22036,6 +22036,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 890.1,
         'name': 'Eternamax Eternatus',
+        'nativeRegion': GameConstants.Region.none,
         'type': [
             PokemonType.Poison,
             PokemonType.Dragon,
