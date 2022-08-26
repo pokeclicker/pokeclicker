@@ -429,13 +429,28 @@ const TwoIslandGameCornerOwner2 = new NPC ('Game Corner Owner', [
 ], {
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 4), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less)]),
 });
-const ThreeIslandBiker = new NPC ('Biker', [
+const ThreeIslandBiker1 = new NPC ('Biker', [
     'You know what sucks? The other islands are off limits for some arbitrary reason. There is no explanation. Just can\'t go there.',
-    'Alright, you want the real truth? Some weird old dude told me this: "The other islands don\'t exist. Yet. Gotta wait for the devs to put them in."',
+    'Alright, you want the real truth? Some weird old dude told me this: "The other islands are locked behind part of a "Quest Line" You have to progress to unlock it."',
     'I don\'t know what half those words mean. All I know is I can\'t go back to Kanto with the rest of the gang. This sucks.',
 ], {
     image: 'assets/images/temporaryBattle/Biker Goon.png',
-    requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 3),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 3), new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion, GameConstants.AchievementOption.less)]),
+});
+const ThreeIslandBiker2 = new NPC ('Biker', [
+    'You know what sucks? The other islands are off limits for some arbitrary reason. There is no explanation. Just can\'t go there.',
+    'Alright, you want the real truth? Some weird old dude told me this: "The other islands are locked behind part of a Questline. You can unlock it at a Bulletin Board."',
+    'I don\'t know what half those words mean. All I know is I can\'t go back to Kanto with the rest of the gang. This sucks.',
+], {
+    image: 'assets/images/temporaryBattle/Biker Goon.png',
+    requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStepCompletedRequirement('Celio\'s Errand', 5 , GameConstants.AchievementOption.less)]),
+});
+const ThreeIslandBiker3 = new NPC ('Biker', [
+    'You know what sucks? The other islands are off limits for some arbitrary reason. There is no explanation. Just can\'t go there.',
+    'Wait, you got to them? Good for you. Not that it matters to me, I\'m still stuck here. This sucks.',
+], {
+    image: 'assets/images/temporaryBattle/Biker Goon.png',
+    requirement: new QuestLineStepCompletedRequirement('Celio\'s Errand', 5),
 });
 const CelebiProfIvy = new NPC ('Prof. Ivy', [
     'Welcome to Valencia Island! Well, this tiny beach on Valencia Island. I don\'t know why I decided to have this lab built below this giant cliff... Can\'t even get to the rest of the island from here.',
@@ -458,7 +473,7 @@ const SeviiRuby = new NPC ('Ruby', [
     '<img src="assets/images/npcs/textbody/ruby.png">',
     '<i>You found a Ruby!</i>',
 ],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 3), new QuestLineStepCompletedRequirement('Celio\'s Errand', 5, GameConstants.AchievementOption.less )]) });
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 3), new QuestLineStepCompletedRequirement('Celio\'s Errand', 4, GameConstants.AchievementOption.less )]) });
 const SeviiLorelei = new NPC ('Lorelei', [
     'Thank you. But this is awful... I was born and raised here on these islands. I had no idea that those horrible criminals were loose here…',
 ], {
@@ -478,10 +493,26 @@ const SeviiGideon2 = new NPC ('Gideon', [
     image: 'assets/images/temporaryBattle/Scientist Gideon.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 7), new QuestLineStepCompletedRequirement('Celio\'s Errand', 9, GameConstants.AchievementOption.less)]),
 });
+const AlteringCaveRuinManiac1 = new NPC ('Ruin Maniac', [
+    'Hello. You want to know what I\'m doing in this pointless dead end cave?',
+    'Well, I\m trying to dig to a secluded island north of here. I\'ve heard there are some unusual Pokémon there.',
+    'Want to help me? No? Ah, you\'re busy dealing with a group of Team Rocket? Well, I wish you luck with that',
+    'Once I finish it you\'ll have a way to get to get to that island too, so make sure to come back later!',
+  ], {
+      image: 'assets/images/npcs/Ruin Maniac.png',
+      requirement: new QuestLineCompletedRequirement('Celio\'s Errand', GameConstants.AchievementOption.less),
+  });
+const AlteringCaveRuinManiac2 = new NPC ('Ruin Maniac', [
+    'Wow, that was some back breaking work... But I have done it!',
+    'I\'ve dug a tunnel to Pinkan Island! Though, I think I\'ll need to rest for a while first... You go on ahead.'
+  ], {
+      image: 'assets/images/npcs/Ruin Maniac.png',
+      requirement: new QuestLineCompletedRequirement('Celio\'s Errand'),
+  });
 const ValenciaProfIvy = new NPC ('Prof. Ivy', [
     'Hello again! I see you too found a way around the giant cliff.',
     'On this island, pokémon have changed over the years. I am here to study them.',
-    'Oh, you have already encountered them? And you busy with the Orange League?',
+    'Oh, you have already encountered them? And you are busy with the Orange League?',
     'Well, good luck to you, then.',
 ], {image: 'assets/images/npcs/Professor Ivy.png'});
 const TanobyProfIvy = new NPC ('Prof. Ivy', [
@@ -490,10 +521,25 @@ const TanobyProfIvy = new NPC ('Prof. Ivy', [
     'There are 2 other ruins like this, one in Johto, and one in Sinnoh. I have heard that in each ruins, there forms that only appear there. For example, the forms that resemble a question mark and an exclamation point have only been seen here.',
     'Speaking of peculiar Pokémon, I found this unusual variant of Exeggutor on an island in this area. Hmm. If you want, you could buy it from me. I am needing some research funds.',
 ], {image: 'assets/images/npcs/Professor Ivy.png'});
-const PinkanOfficerJenny = new NPC ('Officer Jenny', [
-    'This island is strictly off limits. Pinkan is a protected Pokémon reserve. How did you kids get here?',
+const PinkanOfficerJenny1 = new NPC ('Officer Jenny', [
     'Have you seen the Pinkan berries? That is what makes all the Pokémon on this island turn pink.',
-], {image: 'assets/images/npcs/Officer Jenny.png'});
+    'Hang on, this island is strictly off limits! Pinkan is a protected Pokémon reserve. How did you get here?',
+    'Well I suppose you did deal with that Team Rocket branch on Five Island, so I guess I\'ll let you stay, as thanks.',
+    'I\'m afraid I can\'t allow you into Pinkan Mountain though. The Pokémon there are extremely territorial.',
+    'If you want to prove you can deal with such dangerous Pokémon safely, I suggest defeating the Orange League.',
+], {
+    image: 'assets/images/npcs/Officer Jenny.png',
+    requirement: new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion, GameConstants.AchievementOption.less),
+});
+const PinkanOfficerJenny2 = new NPC ('Officer Jenny', [
+    'Have you seen the Pinkan berries? That is what makes all the Pokémon on this island turn pink.',
+    'Hang on, this island is strictly off limits! Pinkan is a protected Pokémon reserve. How did you get here?',
+    'Well I suppose you did deal with that Team Rocket branch on Five Island, so I guess I\'ll let you stay, as thanks.',
+    'And since you\'ve conquered the Orange League, I suppose it should be safe to let you into Pinkan Mountain. Just be careful.',
+], {
+    image: 'assets/images/npcs/Officer Jenny.png',
+    requirement: new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion),
+});
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
@@ -652,7 +698,7 @@ TownList['Three Island'] = new Town(
     [ThreeIslandShop, TemporaryBattleList['Biker Goon 1'], TemporaryBattleList['Biker Goon 2'], TemporaryBattleList['Biker Goon 3'], TemporaryBattleList['Cue Ball Paxton']],
     {
         requirements: [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
-        npcs: [ThreeIslandBiker],
+        npcs: [ThreeIslandBiker1, ThreeIslandBiker2, ThreeIslandBiker3],
     }
 );
 TownList['Professor Ivy\'s Lab'] = new Town(
@@ -777,7 +823,7 @@ TownList['Pinkan Pokémon Reserve'] = new Town(
     [PinkanPokémonReserveShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 42)],
-        npcs: [PinkanOfficerJenny],
+        npcs: [PinkanOfficerJenny1, PinkanOfficerJenny2],
     }
 );
 
@@ -899,7 +945,9 @@ TownList['Pattern Bush'] = new DungeonTown(
 TownList['Altering Cave'] = new DungeonTown(
     'Altering Cave',
     GameConstants.Region.kanto,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 36)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 36)],
+    [],
+    [AlteringCaveRuinManiac1, AlteringCaveRuinManiac2]
 );
 TownList['Tanoby Ruins'] = new DungeonTown(
     'Tanoby Ruins',
