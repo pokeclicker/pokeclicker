@@ -127,6 +127,7 @@ TemporaryBattleList['Possessed Mewtwo'] = new TemporaryBattle(
     '<i>Howard\'s headset sparks and breaks. Mewtwo calms down, apparently free from Howard\'s influence. Mewtwo gives you a brief nod and flies off.</i>',
     [new QuestLineStepCompletedRequirement('Detective Pikachu', 14)]
 );
+
 // Hoenn Temporary Battles
 TemporaryBattleList['Underground Fighting Ring'] = new TemporaryBattle(
     'Underground Fighting Ring',
@@ -138,6 +139,122 @@ TemporaryBattleList['Underground Fighting Ring'] = new TemporaryBattle(
     'OK, OK! I get my R from a guy at Clifford Industries, in Goldenrod City.',
     [new QuestLineStepCompletedRequirement('Detective Pikachu', 5)]
 );
+TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
+    'Sevii Rocket Grunt 1',
+    [
+        new GymPokemon('Cubone', 3861120, 37),
+        new GymPokemon('Marowak', 4182880, 37),
+    ],
+    'Huh, what? Why\'d you have to win?',
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 1)],
+    undefined,
+    {
+        displayName: 'Team Rocket Grunt',
+        imageName: 'Team Rocket Grunt (female)',
+    }
+);
+TemporaryBattleList['Sevii Rocket Grunt 2'] = new TemporaryBattle(
+    'Sevii Rocket Grunt 2',
+    [
+        new GymPokemon('Rattata', 1850120, 35),
+        new GymPokemon('Raticate', 2011000, 35),
+        new GymPokemon('Sandshrew', 1930560, 35),
+        new GymPokemon('Sandslash', 2091440, 35),
+    ],
+    'Develop amnesia conveniently and forget everything you heard!',
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 1)],
+    undefined,
+    {
+        displayName: 'Team Rocket Grunt',
+        imageName: 'Team Rocket Grunt (male)',
+    }
+);
+TemporaryBattleList['Sevii Rocket Grunt 3'] = new TemporaryBattle(
+    'Sevii Rocket Grunt 3',
+    [
+        new GymPokemon('Houndour', 4309500, 49),
+        new GymPokemon('Houndour', 4309500, 49),
+    ],
+    'Oh, but... Too much!',
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 8)],
+    undefined,
+    {
+        displayName: 'Team Rocket Grunt',
+        imageName: 'Team Rocket Grunt (female)',
+    }
+);
+TemporaryBattleList['Sevii Rocket Grunt 4'] = new TemporaryBattle(
+    'Sevii Rocket Grunt 4',
+    [
+        new GymPokemon('Machop', 2844270, 48),
+        new GymPokemon('Machop', 2844270, 48),
+        new GymPokemon('Machoke', 2930460, 48),
+    ],
+    'What do you think you\'re doing?!',
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 8)],
+    undefined,
+    {
+        displayName: 'Team Rocket Grunt',
+        imageName: 'Team Rocket Grunt (male)',
+    }
+);
+TemporaryBattleList['Sevii Rocket Grunt 5'] = new TemporaryBattle(
+    'Sevii Rocket Grunt 5',
+    [
+        new GymPokemon('Hypno', 4309500, 49),
+        new GymPokemon('Hypno', 4309500, 49),
+    ],
+    'Don\'t...you...dare...laugh...',
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 8)],
+    undefined,
+    {
+        displayName: 'Team Rocket Grunt',
+        imageName: 'Team Rocket Grunt (male)',
+    }
+);
+TemporaryBattleList['Sevii Rocket Ariana'] = new TemporaryBattle(
+    'Sevii Rocket Ariana',
+    [
+        new GymPokemon('Muk', 2910600, 52),
+        new GymPokemon('Arbok', 2910600, 53),
+        new GymPokemon('Vileplume', 2998800, 54),
+    ],
+    'You\'re doing things according to your beliefs and morals. I understand now...',
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 9)],
+    undefined,
+    {
+        displayName: 'Team Rocket Executive Ariana',
+        imageName: 'Team Rocket Executive Ariana',
+    }
+);
+TemporaryBattleList['Sevii Rocket Archer'] = new TemporaryBattle(
+    'Sevii Rocket Archer',
+    [
+        new GymPokemon('Golbat', 3045900, 53),
+        new GymPokemon('Weezing', 3045900, 54),
+        new GymPokemon('Houndoom', 3138200, 55),
+    ],
+    'Urgh... You were too strong... ... Th-that\'s Giovanni\'s Badge! So it\'s true? Team Rocket really has disbanded? ...We will abandon this warehouse. But don\'t think this is over. I won\'t let this be the end. I will find Giovanni. And I will resurrect Team Rocket! I will... Until then, farewell!',
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 10)],
+    undefined,
+    {
+        displayName: 'Team Rocket Executive Archer',
+        imageName: 'Team Rocket Executive Archer',
+    }
+);
+TemporaryBattleList['Scientist Gideon'] = new TemporaryBattle(
+    'Scientist Gideon',
+    [
+        new GymPokemon('Voltorb', 1623360, 46),
+        new GymPokemon('Electrode', 1724820, 46),
+        new GymPokemon('Magnemite', 1623360, 46),
+        new GymPokemon('Magneton', 1724820, 46),
+        new GymPokemon('Porygon', 1877010, 46),
+    ],
+    'If I can\'t sell the Sapphire, it\'s worthless! Go ahead, take it!',
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 11)]
+);
+
 // Sinnoh Temporary Battles
 TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
     'Galactic Boss Cyrus',
@@ -288,6 +405,28 @@ TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
         displayName: 'Ash Ketchum',
         returnTown: 'Kiloude City',
         imageName: 'Ash Ketchum',
+    }
+);
+TemporaryBattleList['Ash Ketchum Pinkan'] = new TemporaryBattle(
+    'Ash Ketchum Pinkan',
+    [
+        new GymPokemon('Pinkan Pikachu', 123998000, 58),
+        new GymPokemon('Snorlax', 123998000, 56),
+        new GymPokemon('Lapras', 123998000, 56),
+        new GymPokemon('Kingler', 123998000, 60),
+        new GymPokemon('Tauros', 123998000, 62),
+        new GymPokemon('Charizard', 123998000, 62),
+    ],
+    'Hey, you found me on my vacation! Just make sure your Pikachu does not eat the berries here.',
+    [new QuestLineCompletedRequirement('The New Kid'), new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinkan Mountain'))],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        returnTown: 'Pinkan Mountain',
+        imageName: 'Ash Ketchum',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonById(25.13);
+        },
     }
 );
 
