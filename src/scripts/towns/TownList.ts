@@ -498,17 +498,17 @@ const AlteringCaveRuinManiac1 = new NPC ('Ruin Maniac', [
     'Well, I\m trying to dig to a secluded island north of here. I\'ve heard there are some unusual Pokémon there.',
     'Want to help me? No? Ah, you\'re busy dealing with a group of Team Rocket? Well, I wish you luck with that',
     'Once I finish it you\'ll have a way to get to get to that island too, so make sure to come back later!',
-  ], {
-      image: 'assets/images/npcs/Ruin Maniac.png',
-      requirement: new QuestLineCompletedRequirement('Celio\'s Errand', GameConstants.AchievementOption.less),
-  });
+], {
+    image: 'assets/images/npcs/Ruin Maniac.png',
+    requirement: new QuestLineCompletedRequirement('Celio\'s Errand', GameConstants.AchievementOption.less),
+});
 const AlteringCaveRuinManiac2 = new NPC ('Ruin Maniac', [
     'Wow, that was some back breaking work... But I have done it!',
-    'I\'ve dug a tunnel to Pinkan Island! Though, I think I\'ll need to rest for a while first... You go on ahead.'
-  ], {
-      image: 'assets/images/npcs/Ruin Maniac.png',
-      requirement: new QuestLineCompletedRequirement('Celio\'s Errand'),
-  });
+    'I\'ve dug a tunnel to Pinkan Island! Though, I think I\'ll need to rest for a while first... You go on ahead.',
+], {
+    image: 'assets/images/npcs/Ruin Maniac.png',
+    requirement: new QuestLineCompletedRequirement('Celio\'s Errand'),
+});
 const ValenciaProfIvy = new NPC ('Prof. Ivy', [
     'Hello again! I see you too found a way around the giant cliff.',
     'On this island, pokémon have changed over the years. I am here to study them.',
