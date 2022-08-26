@@ -630,6 +630,10 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
+            App.game.keyItems.gainKeyItem(KeyItemType.DNA_splicers, true);
+            $('#temporaryBattleWonModal').one('hidden.bs.modal', () => {
+                KeyItemController.showGainModal(KeyItemType.DNA_splicers);
+            });
         };
 
         const clearGhetsis2 = new CustomQuest (1, ghetsisReward, 'Defeat Ghetis one final time!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis 2')]());
