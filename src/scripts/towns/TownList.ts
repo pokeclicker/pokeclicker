@@ -2649,6 +2649,12 @@ const CasteliaMusician = new NPC('Musician', [
     'Sometimes a cool singing Pokémon shows up and joins in on our set. I’ve heard that trainers as strong as the Champion have found it roaming around the region looking for Pokémon battles… but even I wouldn’t challenge it to a Music battle.',
 ]);
 
+const PlasmaGrunt1 = new NPC('Team Plasma Grunt', [
+    'Why hello there. Nothing strange going on here. Please move along.',
+    'Oh that business in the sewers? Yes, we should not have gone in there. Very unfortunate situation. A complete misunderstanding. We were just curious about what was down there.',
+    'Bye now.',
+]);
+
 const RelicCastleRuinmaniac = new NPC('Ruin Maniac', [
     'I\'ve heard tell of a secret room in this ruin. A room that supposedly contains a very rare Pokémon.',
     'Apparently this secret room is only accessible via a secret entrance in Relic Passage. Relic Passage runs from Driftveil City all the way under the river to Relic Castle. It\'s very impressive. Once I\'m done investigating this part of the ruin I\'m definitely going to check it out!',
@@ -2658,6 +2664,40 @@ const NimbasaExplorer = new NPC('Explorer', [
     'Whew! The desert is rough out there, glad you\'ve made it all the way to Nimbasa.',
     'Sometimes I find some weird stuff out in the sand, sometimes even Pokémon hiding in Chests. Like this one time in Relic Castle, I found a Pokémon that looks like a statue that I\'ve never seen before!',
 ]);
+
+const PlasmaGrunt2 = new NPC('Team Plasma Grunt', [
+    'I told you. There\'s nothing suspicious going on here. We aren\'t stealing any Pokémon.',
+    'If you won\'t leave, we\'ll have to remove you.',
+],
+{ requirement: new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 6, GameConstants.AchievementOption.less) });
+
+const DriftveilZinzolin = new NPC('Zinzolin', [
+    'YOU!',
+    'Once again we will use the legendary Dragon-type Pokémon and we will rule the Unova region!',
+    'Curious Trainers, we shall not let you run around as you please!',
+    'Shadow Triad! Get them out of here!',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 6), new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 7, GameConstants.AchievementOption.less)]) });
+
+const PlasmaGrunt3 = new NPC('Team Plasma Grunt', [
+    'Remember when I told you that there was nothing suspicious about this frigate? I was lying, of course.',
+    'But truth be told, I didn\'t know that this thing could fly. I was not prepared for this.',
+    'I\'m gonna be sick...',
+]);
+
+const GiantChasmColress = new NPC('Colress', [
+    'Welcome! I was asked by an acquaintance to help with his research. What I desire is to bring out the entirety in Pokémon potential! If I can accomplish that, I don\'t care what it takes!',
+    'If it means the strength must be brought out by the interactions between Pokémon and Trainers, then so be it! If it means you have to use a merciless approach, like Team Plasma\'s, and force out all of the Pokémon\'s power, then so be it! And yes, if the entire world is destroyed as a result, then so be it...',
+    'That aside! The reason I have been traveling all over Unova and battling many Pokémon Trainers is because I was testing the viability of this approach to bringing out the full strength of Pokémon. In that respect, you\'ve done an amazing job.',
+    'Well now! Tell me if you have the answer I desire or not! If you\'re ready, come at me!',
+],
+{ requirement: new MultiRequirement([new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')), new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 18, GameConstants.AchievementOption.less)]) });
+
+const GiantChasmShadowTriad = new NPC('Shadow Triad', [
+    'Listen well! We swore to be loyal to Lord Ghetsis since he saved us! The only thing we want is the world Lord Ghetsis desires! Even if we lose, Lord Ghetsis simply has to win...',
+    'The only thing you can do is watch Lord Ghetsis use Kyurem to freeze Unova solid. That\'s all...',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 19), new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 21, GameConstants.AchievementOption.less)]) });
 
 const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
     'Legends say Kyurem is missing a part of itself. It is waiting for a hero to fill in the missing parts of its body with Truth or Ideals.',
@@ -2706,7 +2746,7 @@ TownList['Floccesy Town'] = new Town(
 TownList['Virbank City'] = new Town(
     'Virbank City',
     GameConstants.Region.unova,
-    [VirbankCityShop],
+    [VirbankCityShop, TemporaryBattleList['Team Plasma Grunt 1']],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Basic)],
     }
@@ -2720,14 +2760,27 @@ TownList['Castelia City'] = new Town(
         npcs: [CasteliaMusician],
     }
 );
+TownList['A Perfectly Ordinary Frigate'] = new Town(
+    'A Perfectly Ordinary Frigate',
+    GameConstants.Region.unova,
+    [],
+    {
+        requirements: [
+            new GymBadgeRequirement(BadgeEnums.Insect),
+            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 1),
+        ],
+        npcs: [PlasmaGrunt1],
+    }
+);
 TownList['Nimbasa City'] = new Town(
     'Nimbasa City',
     GameConstants.Region.unova,
-    [NimbasaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Nimbasa City'])],
+    [NimbasaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Nimbasa City']), TemporaryBattleList['Team Plasma Grunt 2'], TemporaryBattleList['Team Plasma Grunt 3']],
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.unova, 4),
             new GymBadgeRequirement(BadgeEnums.Insect),
+            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
         ],
         npcs: [NimbasaExplorer],
     }
@@ -2739,8 +2792,22 @@ TownList['Driftveil City'] = new Town(
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.unova,5),
-            new GymBadgeRequirement(BadgeEnums.Bolt),
+            new TemporaryBattleRequirement('Team Plasma Grunt 2'),
+            new TemporaryBattleRequirement('Team Plasma Grunt 3'),
+            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 4),
         ],
+    }
+);
+TownList['A Totally Unsuspicious Frigate'] = new Town(
+    'A Totally Unsuspicious Frigate',
+    GameConstants.Region.unova,
+    [TemporaryBattleList['Team Plasma Grunt 4'], TemporaryBattleList['Team Plasma Grunt 5'], TemporaryBattleList['Team Plasma Grunts 1'], TemporaryBattleList['Team Plasma Grunts 2']],
+    {
+        requirements: [
+            new GymBadgeRequirement(BadgeEnums.Quake),
+            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 4),
+        ],
+        npcs: [PlasmaGrunt2, DriftveilZinzolin],
     }
 );
 TownList['Mistralton City'] = new Town(
@@ -2751,6 +2818,7 @@ TownList['Mistralton City'] = new Town(
         requirements: [
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Chargestone Cave')),
             new GymBadgeRequirement(BadgeEnums.Quake),
+            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 7),
         ],
     }
 );
@@ -2773,9 +2841,12 @@ TownList['Undella Town'] = new Town(
 TownList['Lacunosa Town'] = new Town(
     'Lacunosa Town',
     GameConstants.Region.unova,
-    [LacunosaTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lacunosa Town'])],
+    [LacunosaTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lacunosa Town']), TemporaryBattleList['Team Plasma Grunt 6'], TemporaryBattleList['Zinzolin 1']],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 13)],
+        requirements: [
+            new RouteKillRequirement(10, GameConstants.Region.unova, 13),
+            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 8),
+        ],
     }
 );
 TownList['Opelucid City'] = new Town(
@@ -2784,6 +2855,18 @@ TownList['Opelucid City'] = new Town(
     [OpelucidCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Opelucid City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 11)],
+    }
+);
+TownList['Team Plasma Assault'] = new Town(
+    'Team Plasma Assault',
+    GameConstants.Region.unova,
+    [TemporaryBattleList['Team Plasma Grunt 7'], TemporaryBattleList['Team Plasma Grunt 8'], TemporaryBattleList['Team Plasma Grunt 9'], TemporaryBattleList['Zinzolin 2'], TemporaryBattleList['Plasma Shadow 1']],
+    {
+        requirements: [
+            new GymBadgeRequirement(BadgeEnums.Legend),
+            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 11),
+        ],
+        npcs: [PlasmaGrunt3],
     }
 );
 TownList['Shopping Mall Nine'] = new Town(
@@ -2904,20 +2987,20 @@ TownList['Liberty Garden'] = new DungeonTown(
     'Liberty Garden',
     GameConstants.Region.unova,
     //Victini dungeon, maybe unlock later
-    [new GymBadgeRequirement(BadgeEnums.Toxic)]
+    [new TemporaryBattleRequirement('Team Plasma Grunt 1')]
 );
 TownList['Castelia Sewers'] = new DungeonTown(
     'Castelia Sewers',
     GameConstants.Region.unova,
-    [new GymBadgeRequirement(BadgeEnums.Toxic)]
+    [
+        new TemporaryBattleRequirement('Team Plasma Grunt 1'),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 0),
+    ]
 );
 TownList['Relic Passage'] = new DungeonTown(
     'Relic Passage',
     GameConstants.Region.unova,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.unova, 5),
-        new GymBadgeRequirement(BadgeEnums.Bolt),
-    ]
+    [new GymBadgeRequirement(BadgeEnums.Quake)]
 );
 TownList['Relic Castle'] = new DungeonTown(
     'Relic Castle',
@@ -2954,19 +3037,13 @@ TownList['Reversal Mountain'] = new DungeonTown(
     GameConstants.Region.unova,
     [new GymBadgeRequirement(BadgeEnums.Jet)]
 );
-TownList['Team Plasma Assault'] = new DungeonTown(
-    'Team Plasma Assault',
-    GameConstants.Region.unova,
-    [
-        new GymBadgeRequirement(BadgeEnums.Legend),
-    ]
-);
 TownList['Seaside Cave'] = new DungeonTown(
     'Seaside Cave',
     GameConstants.Region.unova,
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 24),
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Plasma Assault')),
+        new TemporaryBattleRequirement('Plasma Shadow 1'),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 14),
     ]
 );
 TownList['Plasma Frigate'] = new DungeonTown(
@@ -2975,12 +3052,18 @@ TownList['Plasma Frigate'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 22),
         new GymBadgeRequirement(BadgeEnums.Wave),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 14),
     ]
 );
 TownList['Giant Chasm'] = new DungeonTown(
     'Giant Chasm',
     GameConstants.Region.unova,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate'))]
+    [
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate')),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 15),
+    ],
+    [TemporaryBattleList.Colress, TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4'], TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']],
+    [GiantChasmColress, GiantChasmShadowTriad]
 );
 TownList['Cave of Being'] = new DungeonTown(
     'Cave of Being',
