@@ -42,7 +42,7 @@ class BattleFrontier implements Feature {
         return {
             milestones: this.milestones.milestoneRewards.filter(m => m.obtained()).map(m => [m.stage, m.description]),
             checkpoint: BattleFrontierRunner.checkpoint(),
-			lastEarningsCheckpoint : BattleFrontierRunner.lastEarningsCheckpoint(),
+            lastEarningsCheckpoint : BattleFrontierRunner.lastEarningsCheckpoint(),
         };
     }
 
@@ -56,6 +56,6 @@ class BattleFrontier implements Feature {
         });
 
         BattleFrontierRunner.checkpoint(json.checkpoint);
-		BattleFrontierRunner.lastEarningsCheckpoint(json.lastEarningsCheckpoint);
+        BattleFrontierRunner.lastEarningsCheckpoint(json.lastEarningsCheckpoint);
     }
 }
