@@ -22,6 +22,9 @@
     </div>
     <!-- /ko -->
     <!-- ko if: BattleFrontierRunner.started -->
+	<p class="bg-warning my-0" data-bind="visible : BattleFrontierRunner.lastEarningsCheckpoint() >= BattleFrontierRunner.stage(), text : `In this run, you will only earn Pokédollars and Battle Points from stages past ${BattleFrontierRunner.lastEarningsCheckpoint()}.`">
+		Required Stage
+	</p>
     <div class="card-body text-center p-0">
         <table class="table table-hover table-striped table-bordered table-sm m-0">
             <thead>
