@@ -1116,8 +1116,8 @@ class Update implements Saveable {
             if (playerData._townName == ('Giant Chasm')) {
                 playerData._townName = ('Humilau City');
             }
-			// Add lastEarningsCheckpoint
-			saveData.battleFrontier.lastEarningsCheckpoint = 0;
+            // Add lastEarningsCheckpoint
+            saveData.battleFrontier.lastEarningsCheckpoint = 0;
         },
 
     };
