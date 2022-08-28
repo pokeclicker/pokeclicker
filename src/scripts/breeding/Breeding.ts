@@ -42,6 +42,7 @@ class Breeding implements Feature {
         BreedingFilters.pokerus.value(Settings.getSetting('breedingPokerusFilter').value);
         BreedingController.displayValue(Settings.getSetting('breedingDisplayFilter').value);
         BreedingController.regionalAttackDebuff(+Settings.getSetting('breedingRegionalAttackDebuffSetting').value);
+        BreedingController.queueSizeLimit(+Settings.getSetting('breedingQueueSizeSetting').value);
     }
 
     initialize(): void {
@@ -165,7 +166,7 @@ class Breeding implements Feature {
     }
 
     public hasFreeQueueSlot(): boolean {
-        const slots = this.queueSlots();
+        const slots = this.usableQueueSlots();
         return slots && this._queueList().length < slots;
     }
 
@@ -241,7 +242,7 @@ class Breeding implements Feature {
 
     public addToQueue(pokemon: PartyPokemon): boolean {
         const queueSize = this._queueList().length;
-        if (queueSize < this.queueSlots()) {
+        if (queueSize < this.usableQueueSlots()) {
             pokemon.breeding = true;
             this._queueList.push(pokemon.name);
             return true;
@@ -457,4 +458,35 @@ class Breeding implements Feature {
         }
     }
 
+    private usableQueueSlots = ko.pureComputed(() => {
+        const queueSizeSetting = BreedingController.queueSizeLimit();
+        return queueSizeSetting > -1 ? queueSizeSetting : this.queueSlots();
+    });
+
+    public getQueueSizeSettingOptions(): SettingOption<string>[] {
+        const options = [new SettingOption('0 (Off)', '0')];
+        const highestRegion = player.highestRegion();
+        if (highestRegion > 0) {
+            let totalSlots = 0;
+            for (let i = 0; i < highestRegion; i++) {
+                totalSlots += this.queueSlotsGainedFromRegion(i);
+                if (i < highestRegion - 1) {
+                    options.push(new SettingOption(totalSlots.toString(), totalSlots.toString()));
+                }
+            }
+            options.push(new SettingOption(`Max (${totalSlots})`, '-1'));
+        }
+        return options.reverse();
+    }
+
+    public updateQueueSizeLimit(size: number) {
+        BreedingController.queueSizeLimit(size);
+        if (size == 0) {
+            this.clearQueue();
+        } else if (size > 0) {
+            for (let i = this.queueList().length; i > this.usableQueueSlots(); i--) {
+                this.removeFromQueue(i - 1);
+            }
+        }
+    }
 }

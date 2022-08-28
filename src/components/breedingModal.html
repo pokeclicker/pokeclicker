@@ -114,7 +114,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </select>
                             </div>
                             <!-- /ko -->
-                            <div class="form-group col-md-6 col-12" style="max-width: 100%; flex-grow: 1" data-bind="with: Settings.getSetting('hatcherySort')">
+                            <div class="form-group col-md-4 col-12" style="max-width: 100%; flex-grow: 1" data-bind="with: Settings.getSetting('hatcherySort')">
                                 <label>Sort</label>
                                 <div class="input-group">
                                     <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
@@ -133,6 +133,16 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     </div>
                                 </div>
                             </div>
+                            <!-- ko if: player.highestRegion() > 0 -->
+                            <div class="form-group col-md-2 col-6">
+                                <label>Queue Size</label>
+                                <select name="breedingQueueSizeSetting" class="custom-select" onchange="App.game.breeding.updateQueueSizeLimit(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <!-- ko foreach: App.game.breeding.getQueueSizeSettingOptions() -->
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingQueueSizeSetting').value === $data.value }, text: $data.text">Type</option>
+                                    <!-- /ko -->
+                                </select>
+                            </div>
+                            <!-- /ko -->
                         </div>
                     </div>
                     <div>
