@@ -3334,6 +3334,10 @@ const ProfSycamore = new ProfNPC('Prof. Sycamore',
     'You\'re encountering Pokémon at a really good clip, aren\'t you? Congratulations! You completed the Pokédex!',
     'Onward to Alola, shall we?');
 
+const MysteryFan = new NPC('Mystery Fan', [
+    'I\'ve heard a Pokemon detective is sniffing around here for mysteries! He might be interested in an enigmatic berry, too.',
+]);
+
 //Kalos Towns
 
 TownList['Vaniville Town'] = new Town(
@@ -3359,6 +3363,7 @@ TownList['Santalune City'] = new Town(
     [SantaluneCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 3)],
+        npcs: [MysteryFan],
     }
 );
 TownList['Lumiose City'] = new Town(
