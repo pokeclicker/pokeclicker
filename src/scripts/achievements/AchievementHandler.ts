@@ -271,7 +271,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Just making sure no rare Pokémon flees', 'Obtain 100,000 Ultra Balls', new PokeballRequirement(100000, GameConstants.Pokeball.Ultraball), 0.40);
 
         AchievementHandler.addAchievement('The Ultimate Catching Device', 'Obtain your first Master Ball', new PokeballRequirement(1, GameConstants.Pokeball.Masterball), 0.20);
-        AchievementHandler.addAchievement('Can a human handle this much power?', 'Obtain 10 Master Balls', new PokeballRequirement(10, GameConstants.Pokeball.Masterball), 0.30);
+        AchievementHandler.addAchievement('Legendaries hate that guy', 'Obtain 10 Master Balls', new PokeballRequirement(10, GameConstants.Pokeball.Masterball), 0.30);
         AchievementHandler.addAchievement('No Pokémon in the world can run away from me now!', 'Obtain 100 Master Balls', new PokeballRequirement(100, GameConstants.Pokeball.Masterball), 0.40);
 
         AchievementHandler.addAchievement('A Few Clicks In', 'Click 10 times', new ClickRequirement(10, 1), 0.02, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
