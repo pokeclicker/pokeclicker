@@ -1281,7 +1281,11 @@ Routes.add(new RegionRoute(
         land: ['Sandile', 'Darumaka', 'Trubbish', 'Minccino', 'Scraggy'],
         water: ['Frillish'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Toxic)]
+    [
+        new GymBadgeRequirement(BadgeEnums.Toxic),
+        new TemporaryBattleRequirement('Team Plasma Grunt 1'),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 1),
+    ]
 ));
 Routes.add(new RegionRoute(
     'Desert Resort', GameConstants.Region.unova, 25,
@@ -1292,6 +1296,7 @@ Routes.add(new RegionRoute(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 4),
         new GymBadgeRequirement(BadgeEnums.Insect),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ],
     4
 ));
@@ -1303,6 +1308,7 @@ Routes.add(new RegionRoute(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 4),
         new GymBadgeRequirement(BadgeEnums.Insect),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1314,6 +1320,7 @@ Routes.add(new RegionRoute(
 
         new RouteKillRequirement(10, GameConstants.Region.unova, 4),
         new GymBadgeRequirement(BadgeEnums.Insect),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ],
     5
 ));
@@ -1326,6 +1333,9 @@ Routes.add(new RegionRoute(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 5),
         new GymBadgeRequirement(BadgeEnums.Bolt),
+        new TemporaryBattleRequirement('Team Plasma Grunt 2'),
+        new TemporaryBattleRequirement('Team Plasma Grunt 3'),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 4),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1336,6 +1346,7 @@ Routes.add(new RegionRoute(
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Chargestone Cave')),
         new GymBadgeRequirement(BadgeEnums.Quake),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 7),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1369,7 +1380,11 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Pinsir', 'Heracross', 'Roselia', 'Combee', 'Tranquill', 'Sewaddle'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 13)],
+    [
+        new RouteKillRequirement(10, GameConstants.Region.unova, 13),
+        new TemporaryBattleRequirement('Zinzolin 1'),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 10),
+    ],
     13.1
 ));
 Routes.add(new RegionRoute(
@@ -1410,7 +1425,11 @@ Routes.add(new RegionRoute(
         land: ['Golduck', 'Gligar', 'Amoonguss', 'Mienfoo', 'Bouffalant', 'Rufflet', 'Vullaby'],
         water: ['Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))]
+    [
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')),
+        new TemporaryBattleRequirement('Ghetsis 2'),
+        new QuestLineCompletedRequirement('Quest for the DNA Splicers'),
+    ]
 ));
 Routes.add(new RegionRoute(
     'Unova Route 8', GameConstants.Region.unova, 8,
