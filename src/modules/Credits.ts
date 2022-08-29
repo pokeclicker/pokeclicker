@@ -290,6 +290,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Bill',
             'Fairy Tale Girl',
+            'Gen 8 Reporter (Lucy Stevens)',
             'Hex Maniac',
             'Looker',
             'Mr. Fuji',
@@ -444,6 +445,14 @@ export const SpriteCredits: Credit[] = [
             'Kalos Sprites',
         ],
         // NOTES: free for non-profit use.
+    },
+    {
+        name: 'Someone Soul',
+        link: 'https://discordapp.com/users/824384977633411082',
+        resources: [
+            'Detective Pikachu',
+            'Detective Raichu',
+        ],
     },
     {
         name: 'tebited15',
