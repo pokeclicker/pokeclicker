@@ -544,6 +544,7 @@ export const SpriteCredits: Credit[] = [
                     'Officer Jenny',
         ],
         // Notes: Permission given on image page.
+    },
     {
         name: 'Zender1752',
         link: 'https://www.deviantart.com/zender1752',
