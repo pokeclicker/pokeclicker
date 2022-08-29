@@ -487,6 +487,7 @@ export const SpriteCredits: Credit[] = [
         ],
         // Notes: Permission given on image page if credited
     },
+    {
         name: 'VictorV111',
         link: 'https://www.deviantart.com/victorv111',
         image: 'https://a.deviantart.net/avatars-big/v/i/victorv111.png',
