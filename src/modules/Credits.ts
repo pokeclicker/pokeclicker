@@ -146,6 +146,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Nidoran(M)',
             'Pinkan Primeape',
             'Pinkan Venonat',
+            'Koga Trainer',
         ],
         // Notes: Made specifically for PokéClicker.
     },
