@@ -541,6 +541,42 @@ const PinkanOfficerJenny2 = new NPC ('Officer Jenny', [
     requirement: new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion),
 });
 
+const Informant1 = new NPC('Informant', [
+    '<i>In a shady warehouse, you find the informant. He is a Mr. Mime, and he doesn\'t seem willing to divulge the information you need.</i>',
+], {
+    image: 'assets/images/temporaryBattle/Mime Interview.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 2), new QuestLineStepCompletedRequirement('Detective Pikachu', 4, GameConstants.AchievementOption.less)]),
+});
+const Informant2 = new NPC('Informant', [
+    '<i>The Mr. Mime signals to you that this is an illicit drug called R. It is frequently used in the underground fighting rings near the Battle Frontier.</i>',
+], {
+    image: 'assets/images/temporaryBattle/Mime Interview.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 4), new QuestLineStepCompletedRequirement('Detective Pikachu', 6, GameConstants.AchievementOption.less)]),
+});
+
+const Mewtwo1 = new NPC('Mewtwo', [
+    'You were wise to seek me out. Howard Clifford has been deceiving you. He is the one making the R drug, and....',
+    '<i>A sphere of energy envelops Mewtwo, and he is dragged away by some sort of helicopter. The helicopter has a logo on it: Clifford Industries!</i>',
+], {
+    image: 'assets/images/temporaryBattle/Possessed Mewtwo.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 10), new QuestLineStepCompletedRequirement('Detective Pikachu', 12, GameConstants.AchievementOption.less)]),
+});
+
+const Mewtwo2 = new NPC('Mewtwo', [
+    'Thank you for your help. I have little to offer you in return, but perhaps this will help.',
+    'I found Detective Pikachu\'s partner some days ago injured on the side of the road, and have nursed him back to health. I hope this reunion will suffice.',
+], {
+    image: 'assets/images/temporaryBattle/Possessed Mewtwo.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 15), new QuestLineStepCompletedRequirement('Detective Pikachu', 17, GameConstants.AchievementOption.less)]),
+});
+
+const DetectiveRaichu = new NPC('Detective Raichu', [
+    'Thanks for your help, kid! I\'ll stick along with you until our next mystery comes along.',
+], {
+    image: 'assets/images/pokemon/26.02.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 16), new QuestLineStepCompletedRequirement('Detective Pikachu', 17, GameConstants.AchievementOption.less)]),
+});
+
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
@@ -588,7 +624,7 @@ TownList['Cerulean City'] = new Town(
     [CeruleanCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cerulean City']), new MoveToDungeon(dungeonList['Cerulean Cave'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
-        npcs: [CeruleanKantoBerryMaster, CeruleanSuperNerd],
+        npcs: [CeruleanKantoBerryMaster, CeruleanSuperNerd, Mewtwo1, Mewtwo2, DetectiveRaichu],
     }
 );
 TownList['Vermilion City'] = new Town(
@@ -621,13 +657,13 @@ TownList['Celadon City'] = new Town(
 TownList['Saffron City'] = new Town(
     'Saffron City',
     GameConstants.Region.kanto,
-    [SaffronCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Saffron City']), new MoveToDungeon(dungeonList['Silph Co.']), TemporaryBattleList['Fighting Dojo']],
+    [SaffronCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Saffron City']), new MoveToDungeon(dungeonList['Silph Co.']), TemporaryBattleList['Fighting Dojo'], TemporaryBattleList['Mime Interview']],
     {
         requirements: [new OneFromManyRequirement([
             new GymBadgeRequirement(BadgeEnums.Rainbow),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
         ])],
-        npcs: [SaffronBattleItemRival, SaffronBreeder],
+        npcs: [SaffronBattleItemRival, SaffronBreeder, Informant1, Informant2],
     }
 );
 TownList['Fuchsia City'] = new Town(
@@ -912,6 +948,7 @@ TownList['Cerulean Cave'] = new DungeonTown(
     'Cerulean Cave',
     GameConstants.Region.kanto,
     [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)]
+
 );
 TownList['Ruby Path'] = new DungeonTown(
     'Ruby Path',
@@ -1251,6 +1288,38 @@ const ProfElm = new ProfNPC('Prof. Elm',
     'Amazing! Next stop is Hoenn, enjoy the sunshine while you\'re there!',
     'assets/images/npcs/Professor Elm.png');
 
+const searchForClues = new NPC('Search For Clues', [
+    '<i>You look around the city in search of clues, and are set upon by a gang of angry Aipoms!</i>',
+], {
+    image: 'assets/images/temporaryBattle/Aipom Alley.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Detective Pikachu'), new QuestLineStepCompletedRequirement('Detective Pikachu', 1, GameConstants.AchievementOption.less)]),
+});
+
+const HowardClifford1 = new NPC('Howard Clifford', [
+    'I am Howard Clifford, CEO of Clifford Industries. I hear you have been investigating both my company, and a mysterious drug called R.',
+    'I have reason to believe that a high ranking official in the company is manufacturing this drug, but have been unable to get to the bottom of it myself.',
+    'There is a journalist in Hearthome City who may be able to help us both. Please make contact with her and report anything you find back to me.',
+], {
+    image: 'assets/images/npcs/Howard Clifford.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 6), new QuestLineStepCompletedRequirement('Detective Pikachu', 8, GameConstants.AchievementOption.less)]),
+});
+
+const HowardClifford2 = new NPC('Howard Clifford', [
+    'You are too late to stop me! The R drug puts Pokemon in a frenzied state, and allows us to control them with the right equipment! You led me straight to Mewtwo, and now I will take control of the most powerful Pokemon in the world!',
+    '<i>Howard puts on a headset and pushes a button. The energy sphere containing Mewtwo comes into view, and it has a crazed look in its eyes. Howard pushes a botton on his headset and slumps back in his chair.</i>',
+    '<i>Mewtwo makes eye contact with you, and you hear Howard\'s voice in your mind, laughing maniacally. An armed man comes into the room, and warns you not to move.</i>',
+], {
+    image: 'assets/images/npcs/Howard Clifford.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 11), new QuestLineStepCompletedRequirement('Detective Pikachu', 13, GameConstants.AchievementOption.less)]),
+});
+
+const HowardClifford3 = new NPC('Howard Clifford', [
+    'UNLIMITED POWER! YOU\'LL NEVER STOP ME!',
+], {
+    image: 'assets/images/npcs/Howard Clifford.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 13), new QuestLineStepCompletedRequirement('Detective Pikachu', 15, GameConstants.AchievementOption.less)]),
+});
+
 
 //Johto Towns
 TownList['New Bark Town'] = new Town(
@@ -1292,10 +1361,10 @@ TownList['Azalea Town'] = new Town(
 TownList['Goldenrod City'] = new Town(
     'Goldenrod City',
     GameConstants.Region.johto,
-    [GoldenrodDepartmentStoreShop, JohtoBerryMaster, new MoveToDungeon(dungeonList['Radio Tower'])],
+    [GoldenrodDepartmentStoreShop, JohtoBerryMaster, new MoveToDungeon(dungeonList['Radio Tower']), TemporaryBattleList['Aipom Alley'], TemporaryBattleList.Imposter, TemporaryBattleList['Possessed Mewtwo']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
-        npcs: [BigSpender],
+        npcs: [BigSpender, searchForClues, HowardClifford1, HowardClifford2, HowardClifford3],
     }
 );
 TownList['Ecruteak City'] = new Town(
@@ -1769,7 +1838,7 @@ TownList['Mossdeep City'] = new Town(
 TownList['Pacifidlog Town'] = new Town(
     'Pacifidlog Town',
     GameConstants.Region.hoenn,
-    [PacifidlogTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Pacifidlog Town'])],
+    [PacifidlogTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Pacifidlog Town']), TemporaryBattleList['Underground Fighting Ring']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 131)],
         npcs: [PacifidlogDiver],
@@ -2138,6 +2207,14 @@ const ProfRowan = new ProfNPC('Prof. Rowan',
     'Congratulations, you\'re more than half-way completed on the national Pokédex!',
     'Next stop is Unova! I\'ve always wanted to visit Castelia City, personally...');
 
+const LucyStevens1 = new NPC('Lucy Stevens', [
+    'Who sent you to talk to me? Howard Clifford himself? That\'s a little suspicious, but you seem trustworthy enough.',
+    'I\'ve been doing some research on this R compound, and have reason to believe it is being manufactured or used in research at the P2 Lab in Unova.',
+    'We should investigate!',
+], {
+    image: 'assets/images/npcs/Lucy Stevens.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 7), new QuestLineStepCompletedRequirement('Detective Pikachu', 9, GameConstants.AchievementOption.less)]),
+});
 
 
 //Sinnoh Towns
@@ -2211,7 +2288,7 @@ TownList['Hearthome City'] = new Town(
     [HearthomeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hearthome City']), SinnohBerryMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208)],
-        npcs: [HearthomeContestFan],
+        npcs: [HearthomeContestFan, LucyStevens1],
     }
 );
 TownList['Solaceon Town'] = new Town(
@@ -2911,7 +2988,7 @@ TownList['Accumula Town'] = new Town(
 TownList['Nuvema Town'] = new Town(
     'Nuvema Town',
     GameConstants.Region.unova,
-    [NuvemaTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Nuvema Town'])],
+    [NuvemaTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Nuvema Town']), TemporaryBattleList['Lab Ambush']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 1)],
         npcs: [ProfJuniper, UnovaRoamerNPC],
@@ -3257,6 +3334,10 @@ const ProfSycamore = new ProfNPC('Prof. Sycamore',
     'You\'re encountering Pokémon at a really good clip, aren\'t you? Congratulations! You completed the Pokédex!',
     'Onward to Alola, shall we?');
 
+const MysteryFan = new NPC('Mystery Fan', [
+    'I\'ve heard a Pokémon detective is sniffing around here for mysteries! He might be interested in an enigmatic berry, too.',
+]);
+
 //Kalos Towns
 
 TownList['Vaniville Town'] = new Town(
@@ -3282,6 +3363,7 @@ TownList['Santalune City'] = new Town(
     [SantaluneCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 3)],
+        npcs: [MysteryFan],
     }
 );
 TownList['Lumiose City'] = new Town(

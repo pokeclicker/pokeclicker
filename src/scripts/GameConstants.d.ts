@@ -400,6 +400,7 @@ namespace GameConstants {
         None = -2,
         All = -1,
         Kanto,
+        Johto,
         Hoenn,
         Kalos,
         Alola,
