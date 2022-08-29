@@ -3335,7 +3335,7 @@ const ProfSycamore = new ProfNPC('Prof. Sycamore',
     'Onward to Alola, shall we?');
 
 const MysteryFan = new NPC('Mystery Fan', [
-    'I\'ve heard a Pokemon detective is sniffing around here for mysteries! He might be interested in an enigmatic berry, too.',
+    'I\'ve heard a Pokémon detective is sniffing around here for mysteries! He might be interested in an enigmatic berry, too.',
 ]);
 
 //Kalos Towns
