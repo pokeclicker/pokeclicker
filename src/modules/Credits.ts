@@ -153,6 +153,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Kanto Gym Leader/E4 sprite remakes',
             'Kanto Blue recolours',
+            'Roxanne, Norman, Winona, Tate & Liza remake',
         ],
         // NOTES: Allowed use with credit given.
     },
