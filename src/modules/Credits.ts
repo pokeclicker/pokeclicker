@@ -11,6 +11,16 @@ type Credit = {
 // Sort alphabetically
 export const SpriteCredits: Credit[] = [
     {
+        name: 'aveontrainer',
+        link: 'https://www.deviantart.com/aveontrainer',
+        image: 'https://a.deviantart.net/avatars-big/a/v/aveontrainer.png',
+        resources: [
+            'Overworld Klara',
+            'Overworld Avery',
+        ],
+        // Notes: Gives credit on image page if asked.
+    },
+    {
         name: 'Beliot419',
         link: 'https://www.deviantart.com/beliot419',
         image: 'https://a.deviantart.net/avatars-big/b/e/beliot419.png',
@@ -32,13 +42,34 @@ export const SpriteCredits: Credit[] = [
             'Molayne',
             'Nanu',
             'Olivia',
+            'Professor Kukui',
             'Rising Star (male)',
             'Sightseer (female)',
             'Sophocles',
             'Team Skull Boss (guzma)',
+            'Wicke',
             'Youth Athlete (female)',
         ],
         // Notes: Found in spritesheet description: "Feel free to use them, just give me credit."
+    },
+    {
+        name: 'CGMetalDragon',
+        link: 'https://www.deviantart.com/cgmetaldragon',
+        image: 'https://a.deviantart.net/avatars-big/c/g/cgmetaldragon.png',
+        resources: [
+            'Contest Champion (Johanna)',
+        ],
+        // Notes: No notes about credit, have messaged asking for permission, awaiting confirmation
+    },
+    {
+        name: 'CorgiOnNeptune',
+        link: 'https://linktr.ee/CorgiOnNeptune',
+        resources: [
+            'Recolours of Duncapham\'s sprite remakes',
+            'Sounds for Wanderer/Roamer',
+            'Sounds for BF finish & empty queue',
+        ],
+        // Notes: Made specifically for PokéClicker.
     },
     {
         name: 'Croak',
@@ -115,6 +146,24 @@ export const SpriteCredits: Credit[] = [
             'Mustard (battle pose)',
         ],
         // NOTES: Gives permission to everyone who asks in the comments section of the spritesheet as long as credit is given
+    },
+    {
+        name: 'Duncapham',
+        link: 'https://www.deviantart.com/duncapham',
+        image: 'https://a.deviantart.net/avatars-big/d/u/duncapham.png',
+        resources: [
+            'Kanto Gym Leader/E4 sprite remakes',
+            'Blue recolours',
+            'Roxanne remake',
+            'Norman remake',
+            'Winona remake',
+            'Tate & Liza remake',
+            'Drake remake',
+            'Phoebe remake',
+            'Sidney remake',
+            'Steven remake',
+        ],
+        // NOTES: Allowed use with credit given.
     },
     {
         name: 'Eat Pant',
@@ -220,6 +269,15 @@ export const SpriteCredits: Credit[] = [
         // NOTES: No notes about credit, can no longer find an existing profile for the user
     },
     {
+        name: 'izzyvicious',
+        link: 'https://www.deviantart.com/izzyvicious',
+        image: 'https://a.deviantart.net/avatars-big/i/z/izzyvicious.png',
+        resources: [
+            'Overworld Marnie',
+        ],
+        // Notes: Gives credit on image page if asked.
+    },
+    {
         name: 'JapuDCret',
         link: 'https://github.com/JapuDCret',
         image: 'https://avatars.githubusercontent.com/u/14893450?v=4',
@@ -228,6 +286,15 @@ export const SpriteCredits: Credit[] = [
             'Surprise Togepi',
         ],
         // NOTES: Permission given via PRs
+    },
+    {
+        name: 'Kensuyjin33',
+        link: 'https://www.deviantart.com/kensuyjin33',
+        image: 'https://a.deviantart.net/avatars-big/k/e/kensuyjin33.png',
+        resources: [
+            'Blue sprite remakes',
+        ],
+        // NOTES: Allowed use with credit given.
     },
     {
         name: 'Kilima',
@@ -259,8 +326,12 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/kyle-dove',
         image: 'https://a.deviantart.net/avatars-big/k/y/kyle-dove.png',
         resources: [
+            'Bill',
             'Fairy Tale Girl',
+            'Gen 8 Reporter (Lucy Stevens)',
             'Hex Maniac',
+            'Looker',
+            'Mr. Fuji',
             'Punk Girl',
             'Punk Guy',
             'Sightseer (male)',
@@ -414,6 +485,14 @@ export const SpriteCredits: Credit[] = [
         // NOTES: free for non-profit use.
     },
     {
+        name: 'Someone Soul',
+        link: 'https://discordapp.com/users/824384977633411082',
+        resources: [
+            'Detective Pikachu',
+            'Detective Raichu',
+        ],
+    },
+    {
         name: 'tebited15',
         link: 'https://www.deviantart.com/tebited15',
         image: 'https://a.deviantart.net/avatars-big/t/e/tebited15.png',
@@ -432,6 +511,28 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given on image page, credit optional, still given cuz we're nice like that.
     },
     {
+        name: 'VictorV111',
+        link: 'https://www.deviantart.com/victorv111',
+        image: 'https://a.deviantart.net/avatars-big/v/i/victorv111.png',
+        resources: [
+            'Celio',
+            'Kurt',
+            'Mr. Pokémon',
+            'Professor Elm',
+            'Professor Ivy',
+        ],
+        // Notes: Permission given on image page if credited.
+    },
+    {
+        name: 'Vur3',
+        link: 'https://www.deviantart.com/vur3',
+        image: 'https://a.deviantart.net/avatars-big/v/u/vur3.png',
+        resources: [
+            'Glacia remake',
+        ],
+        // Notes: Permission if credited.
+    },
+    {
         name: 'Wolfang62',
         link: 'https://www.deviantart.com/wolfang62',
         image: 'https://a.deviantart.net/avatars-big/w/o/wolfang62.jpg',
@@ -441,23 +542,13 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given on image page if credited.
     },
     {
-        name: 'izzyvicious',
-        link: 'https://www.deviantart.com/izzyvicious',
-        image: 'https://a.deviantart.net/avatars-big/i/z/izzyvicious.png',
+        name: 'X-5-4-5-2',
+        link: 'https://www.deviantart.com/x-5-4-5-2',
+        image: 'https://a.deviantart.net/avatars-big/x/_/x-5-4-5-2.png',
         resources: [
-            'Overworld Marnie',
+            'Officer Jenny',
         ],
-        // Notes: Gives credit on image page if asked.
-    },
-    {
-        name: 'aveontrainer',
-        link: 'https://www.deviantart.com/aveontrainer',
-        image: 'https://a.deviantart.net/avatars-big/a/v/aveontrainer.png',
-        resources: [
-            'Overworld Klara',
-            'Overworld Avery',
-        ],
-        // Notes: Gives credit on image page if asked.
+        // Notes: Permission given on image page.
     },
 ].map((c) => {
     SeededRand.seed(parseInt(c.name, 36));

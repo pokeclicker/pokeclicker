@@ -902,7 +902,10 @@ GymList['Virbank City'] = new Gym(
     BadgeEnums.Toxic,
     800,
     'Sigh! What are you doing losing, Roxie?! Well…I guess that means you\'re strong! This stinks, but I gave it everything I had, and I feel revitalized and refreshed now! Here! Proof that you beat me!',
-    [new GymBadgeRequirement(BadgeEnums.Basic)]
+    [new GymBadgeRequirement(BadgeEnums.Basic)],
+    () => {
+        App.game.quests.getQuestLine('Quest for the DNA Splicers').beginQuest();
+    }
 );
 GymList['Castelia City'] = new Gym(
     'Burgh',
@@ -958,10 +961,7 @@ GymList['Mistralton City'] = new Gym(
     BadgeEnums.Jet,
     7600,
     'You\'re an amazing Pokémon Trainer. My Pokémon and I are happy because for the first time in quite a while--about two years, I\'d say--we could fight with our full strength. This is an official League Gym Badge. But this is just a stepping-stone.',
-    [new GymBadgeRequirement(BadgeEnums.Quake)],
-    () => {
-        App.game.quests.getQuestLine('Quest for the DNA Splicers').beginQuest();
-    }
+    [new GymBadgeRequirement(BadgeEnums.Quake)]
 );
 GymList['Opelucid City'] = new Gym(
     'Drayden',
