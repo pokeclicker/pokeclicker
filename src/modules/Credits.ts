@@ -387,6 +387,15 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given to SomeoneAlive via Discord DM
     },
     {
+        name: 'PhoenixOfLight92',
+        link: 'https://www.deviantart.com/phoenixoflight92',
+        image: 'https://a.deviantart.net/avatars-big/p/h/phoenixoflight92.png',
+        resources: [
+            'Shauna',
+        ],
+        // Notes: Permission given on image page if credited.
+    },
+    {
         name: 'procompyart',
         link: 'https://www.instagram.com/procompyart/',
         resources: [
@@ -427,9 +436,20 @@ export const SpriteCredits: Credit[] = [
         ],
     },
     {
+        name: 'Similation',
+        link: 'https://www.deviantart.com/similation',
+        image: 'https://a.deviantart.net/avatars-big/s/i/similation.jpg',
+        resources: [
+            'Professor Sycamore',
+        ],
+        // Notes: Permission given on image page if credited
+    },
+    {
         name: 'Someone Soul',
         link: 'https://discordapp.com/users/824384977633411082/',
         resources: [
+            'Detective Pikachu',
+            'Detective Raichu',
             'Macro Cosmos (male) and (female)',
             'Cissy',
             'Pinkan Pidgey',
@@ -452,51 +472,12 @@ export const SpriteCredits: Credit[] = [
         // NOTES: free for non-profit use.
     },
     {
-        name: 'Someone Soul',
-        link: 'https://discordapp.com/users/824384977633411082',
-        resources: [
-            'Detective Pikachu',
-            'Detective Raichu',
-        ],
-    },
-    {
         name: 'tebited15',
         link: 'https://www.deviantart.com/tebited15',
         image: 'https://a.deviantart.net/avatars-big/t/e/tebited15.png',
         resources: [
             'Grant',
             'Calem overworld',
-        ],
-        // Notes: Permission given on image page if credited.
-    },
-    {
-        name: 'Ulithium_Dragon',
-        link: 'https://www.pokecommunity.com/showthread.php?t=397580',
-        image: 'https://www.pokecommunity.com/customavatars/avatar531836_2.gif',
-        resources: [
-            'Ultra Wormhole',
-        ],
-        // Notes: Permission given on image page, credit optional, still given cuz we're nice like that.
-    },
-    {
-        name: 'Similation',
-        link: 'https://www.deviantart.com/similation',
-        image: 'https://a.deviantart.net/avatars-big/s/i/similation.jpg',
-        resources: [
-            'Professor Sycamore',
-        ],
-        // Notes: Permission given on image page if credited
-    },
-    {
-        name: 'VictorV111',
-        link: 'https://www.deviantart.com/victorv111',
-        image: 'https://a.deviantart.net/avatars-big/v/i/victorv111.png',
-        resources: [
-            'Celio',
-            'Kurt',
-            'Mr. Pokémon',
-            'Professor Elm',
-            'Professor Ivy',
         ],
         // Notes: Permission given on image page if credited.
     },
@@ -510,22 +491,26 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given on image page if credited.
     },
     {
-        name: 'PhoenixOfLight92',
-        link: 'https://www.deviantart.com/phoenixoflight92',
-        image: 'https://a.deviantart.net/avatars-big/p/h/phoenixoflight92.png',
+        name: 'Ulithium_Dragon',
+        link: 'https://www.pokecommunity.com/showthread.php?t=397580',
+        image: 'https://www.pokecommunity.com/customavatars/avatar531836_2.gif',
         resources: [
-            'Shauna',
+            'Ultra Wormhole',
         ],
-        // Notes: Permission given on image page if credited.
+        // Notes: Permission given on image page, credit optional, still given cuz we're nice like that.
     },
     {
-        name: 'izzyvicious',
-        link: 'https://www.deviantart.com/izzyvicious',
-        image: 'https://a.deviantart.net/avatars-big/i/z/izzyvicious.png',
+        name: 'VictorV111',
+        link: 'https://www.deviantart.com/victorv111',
+        image: 'https://a.deviantart.net/avatars-big/v/i/victorv111.png',
         resources: [
-            'Overworld Marnie',
+            'Celio',
+            'Kurt',
+            'Mr. Pokémon',
+            'Professor Elm',
+            'Professor Ivy',
         ],
-        // Notes: Permission given on image page if asked.
+        // Notes: Permission given on image page if credited.
     },
     {
         name: 'Wolfang62',
