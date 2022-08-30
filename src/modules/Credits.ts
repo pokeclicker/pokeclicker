@@ -152,8 +152,15 @@ export const SpriteCredits: Credit[] = [
         image: 'https://a.deviantart.net/avatars-big/d/u/duncapham.png',
         resources: [
             'Kanto Gym Leader/E4 sprite remakes',
-            'Kanto Blue recolours',
-            'Roxanne, Norman, Winona, Tate & Liza remake',
+            'Blue recolours',
+            'Roxanne remake',
+            'Norman remake',
+            'Winona remake',
+            'Tate & Liza remake',
+            'Drake remake',
+            'Phoebe remake',
+            'Sidney remake',
+            'Steven remake',
         ],
         // NOTES: Allowed use with credit given.
     },
@@ -284,7 +291,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/kensuyjin33',
         image: 'https://a.deviantart.net/avatars-big/k/e/kensuyjin33.png',
         resources: [
-            'Kanto - Blue sprite remakes',
+            'Blue sprite remakes',
         ],
         // NOTES: Allowed use with credit given.
     },
