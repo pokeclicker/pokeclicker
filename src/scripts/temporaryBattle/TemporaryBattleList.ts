@@ -514,6 +514,7 @@ TemporaryBattleList.Wally2 = new TemporaryBattle(
         returnTown: 'Pokémon League Hoenn',
         imageName: 'Wally',
     }
+);
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
     'Sevii Rocket Grunt 1',
     [
@@ -1426,6 +1427,7 @@ TemporaryBattleList['Possessed Mewtwo'] = new TemporaryBattle(
     [new GymPokemon('Mewtwo', 214456599, 100)],
     '<i>Howard\'s headset sparks and breaks. Mewtwo calms down, apparently free from Howard\'s influence. Mewtwo gives you a brief nod and flies off.</i>',
     [new QuestLineStepCompletedRequirement('Detective Pikachu', 14)]
+);
 TemporaryBattleList.Calem2 = new TemporaryBattle(
     'Calem2',
     [
