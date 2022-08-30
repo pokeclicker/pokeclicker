@@ -526,7 +526,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/x-5-4-5-2',
         image: 'https://a.deviantart.net/avatars-big/x/_/x-5-4-5-2.png',
         resources: [
-                    'Officer Jenny',
+            'Officer Jenny',
         ],
         // Notes: Permission given on image page.
     },
