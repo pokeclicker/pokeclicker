@@ -204,7 +204,7 @@ class Breeding implements Feature {
             }
             const egg = this.eggList[index]();
             const partyPokemon = egg.partyPokemon();
-            if (!egg.isNone() && partyPokemon && partyPokemon.canCatchPokerus() && partyPokemon.pokerus == GameConstants.Pokerus.None) {
+            if (!egg.isNone() && partyPokemon && partyPokemon.canCatchPokerus() && partyPokemon.pokerus == GameConstants.Pokerus.Uninfected) {
                 partyPokemon.calculatePokerus();
             }
             egg.addSteps(amount, this.multiplier);

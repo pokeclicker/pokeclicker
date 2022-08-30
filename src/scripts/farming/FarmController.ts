@@ -5,6 +5,7 @@ class FarmController {
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static berryListFiltered: KnockoutObservableArray<BerryType> = ko.observableArray([]);
     public static numberOfTabs: KnockoutComputed<number>;
+    public static farmingModalTabSelected: KnockoutObservable<string> = ko.observable('berryFarmView');
 
     public static berryListEnd: KnockoutComputed<number>;
 
@@ -100,6 +101,14 @@ class FarmController {
         }
 
         App.game.farming.togglePlotSafeLock(index);
+    }
+
+    public static toggleAllPlotsLocked(lock: boolean) {
+        App.game.farming.plotList.forEach((plot, index) => {
+            if (plot.isUnlocked && ((lock && !plot.isSafeLocked) || (!lock && plot.isSafeLocked))) {
+                App.game.farming.togglePlotSafeLock(index);
+            }
+        });
     }
 
     private static handleClickActions(plot: Plot, index: number) {

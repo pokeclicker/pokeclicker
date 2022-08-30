@@ -56,6 +56,15 @@ aria-labelledby="pokedexModalLabel">
                                 <option value="caught-shiny">Caught Shiny</option>
                             </select>
                         </div>
+
+                        <div class="form-group col-md-6 col-6">
+                            <label for="pokedex-filter-pokerus-status">Pokerus Status</label>
+                            <select id="pokedex-filter-pokerus-status" autocomplete="off" class="custom-select" onchange="PokedexHelper.updateList()">
+                                <!-- ko foreach: Settings.getSetting('breedingPokerusFilter').options -->
+                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingPokerusFilter').value === $data.value }, text: $data.text"></option>
+                                <!-- /ko -->
+                            </select>
+                        </div>
                         <div class="form-group col-md-6 col-6">
                             <!--Rare Hold Item-->
                             <div class="col-12">

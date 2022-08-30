@@ -5,7 +5,7 @@ class BulletinBoard extends TownContent {
         return 'btn btn-secondary';
     }
     public text(): string {
-        return 'Bulletin board';
+        return 'Bulletin Board';
     }
     public isVisible(): boolean {
         return true;
