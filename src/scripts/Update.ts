@@ -1082,7 +1082,7 @@ class Update implements Saveable {
                 Update.startQuestLine(saveData, 'Quest for the DNA Splicers');
             }
             // Remove Team Plasma Assault dungeon
-            saveData.statistics.dungeonsCleared.splice(81, 1);
+            saveData.statistics.dungeonsCleared.splice(90, 1);
             // Add Team Plasma Temporary Battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 16);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 17);
