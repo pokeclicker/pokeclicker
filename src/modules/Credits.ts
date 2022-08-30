@@ -523,6 +523,15 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given on image page if credited.
     },
     {
+        name: 'Vur3',
+        link: 'https://www.deviantart.com/vur3',
+        image: 'https://a.deviantart.net/avatars-big/v/u/vur3.png',
+        resources: [
+            'Glacia remake',
+        ],
+        // Notes: Permission if credited.
+    },
+    {
         name: 'Wolfang62',
         link: 'https://www.deviantart.com/wolfang62',
         image: 'https://a.deviantart.net/avatars-big/w/o/wolfang62.jpg',
