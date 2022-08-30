@@ -53,6 +53,11 @@ type PokemonListData = {
   baby?: boolean;
   attack?: number;
   heldItem?: BagItem;
+  gender?: {
+    type?: number;
+    ratio?: number;
+    difference?: boolean;
+  }
 }
 
 function createPokemonArray<T extends readonly PokemonListData[] & Array<{name: V}>, V extends string>(...args: T) {
@@ -23693,6 +23698,15 @@ pokemonList.forEach(p => {
     (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.MaxIDPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(p.id));
     // Create an index of pokemon
     pokemonNameIndex[p.name.toLowerCase()] = p;
+
+    // Fill gender object as default
+    (p as PokemonListData).gender = (p as PokemonListData).gender === undefined ? {'type': GameConstants.MALE_FEMALE, 'ratio': GameConstants.MALE_50, 'difference': false} : (p as PokemonListData).gender;
+    // Add MALE_FEMALE as default gender type
+    (p as PokemonListData).gender.type = (p as PokemonListData).gender.type === undefined ? GameConstants.MALE_FEMALE : (p as PokemonListData).gender.type;
+    // Add MALE_50 as default gender ratio
+    (p as PokemonListData).gender.ratio = (p as PokemonListData).gender.ratio === undefined ? GameConstants.MALE_50 : (p as PokemonListData).gender.ratio;
+    // Add false as default gender difference
+    (p as PokemonListData).gender.difference = (p as PokemonListData).gender.difference === undefined ? false : (p as PokemonListData).gender.difference;
 }
 );
 

@@ -1562,3 +1562,16 @@ export enum GalarSubRegions {
     IsleofArmor,
     CrownTundra,
 }
+
+// Gender types
+export const GENDERLESS = 0;
+export const MALE_ONLY = 1;
+export const FEMALE_ONLY = 2;
+export const MALE_FEMALE = 3; // Default
+
+// Gender ratio
+export const MALE_12_5 = 8 / 7;
+export const MALE_25 = 4 / 3;
+export const MALE_50 = 2; // Default
+export const MALE_75 = 4;
+export const MALE_87_5 = 8;
