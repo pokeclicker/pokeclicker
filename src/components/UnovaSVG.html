@@ -394,7 +394,7 @@
         , x: 39, y: 52
         , width: 4, height: 9
         , databind: "click:function(){MapHelper.moveToTown('A Perfectly Ordinary Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('A Perfectly Ordinary Frigate') }"
-        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 1')]() >= 1 && (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 1 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2) && (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 2')]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 3')]() == 0 || (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() <= 4 && App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 1))"
+        , visible:  "(App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 1 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2) && (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 2')]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 3')]() == 0 || (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() <= 4 && App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 1))"
         , image: "assets/images/map/plasmafrigate_ship.png"
         , connectedToTown: "A Perfectly Ordinary Frigate"
         })
@@ -756,7 +756,7 @@
         , x: 77, y: 0.5
         , width: 9, height: 6.5
         , databind: "click:function(){MapHelper.moveToTown('Giant Chasm')}, attr:{ class: MapHelper.calculateTownCssClass('Giant Chasm') }"
-        , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() >= 1 && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis 2')]() == 0 && (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 16 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2)"
+        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow 1')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() >= 1 && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis 2')]() == 0 && (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 16 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2)"
         , image: "assets/images/map/plasmafrigate_airship.png"
         , isExtension: true
         })
