@@ -1123,6 +1123,12 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 39);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 40);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 41);
+
+            //Aegislash and Pumpkaboo line renames
+            const renamePokemon = Update.renamePokemonInSaveData;
+            renamePokemon(saveData, 'Aegislash', 'Aegislash (Shield)');
+            renamePokemon(saveData, 'Pumpkaboo', 'Pumpkaboo (Average)');
+            renamePokemon(saveData, 'Gourgeist', 'Gourgeist (Average)');
         },
 
     };
