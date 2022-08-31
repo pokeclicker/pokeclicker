@@ -998,12 +998,11 @@ GymList['Elite Shauntal'] = new Gym(
     'Shauntal',
     'Elite Shauntal',
     [
-        new GymPokemon('Cofagrigus', 8945330, 49),
-        new GymPokemon('Gengar', 8948300, 49),
-        new GymPokemon('Froslass', 8952000, 50),
-        new GymPokemon('Drifblim', 8957000, 51),
-        new GymPokemon('Golurk', 8960250, 53),
-        new GymPokemon('Chandelure', 8960250, 53),
+        new GymPokemon('Cofagrigus', 10957000, 60),
+        new GymPokemon('Drifblim', 10957000, 60),
+        new GymPokemon('Golurk', 10957000, 60),
+        new GymPokemon('Banette', 10957000, 60),
+        new GymPokemon('Chandelure', 11960250, 62),
     ],
     BadgeEnums.Elite_Shauntal,
     32000,
@@ -1014,49 +1013,46 @@ GymList['Elite Marshal'] = new Gym(
     'Marshal',
     'Elite Marshal',
     [
-        new GymPokemon('Throh', 9945330, 49),
-        new GymPokemon('Sawk', 9948300, 49),
-        new GymPokemon('Lucario', 9952000, 50),
-        new GymPokemon('Mienshao', 9957000, 51),
-        new GymPokemon('Machamp', 9957000, 51),
-        new GymPokemon('Conkeldurr', 9960250, 53),
+        new GymPokemon('Throh', 10957000, 60),
+        new GymPokemon('Sawk', 10957000, 60),
+        new GymPokemon('Mienshao', 10957000, 60),
+        new GymPokemon('Lucario', 10957000, 60),
+        new GymPokemon('Conkeldurr', 11960250, 62),
     ],
     BadgeEnums.Elite_Marshal,
     32000,
     'Whew! Well done! As your battles continue, aim for even greater heights!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Shauntal)]
+    [new GymBadgeRequirement(BadgeEnums.Wave)]
 );
 GymList['Elite Grimsley'] = new Gym(
     'Grimsley',
     'Elite Grimsley',
     [
-        new GymPokemon('Honchkrow', 10945330, 49),
-        new GymPokemon('Scrafty', 10948300, 49),
-        new GymPokemon('Krookodile', 10952000, 50),
-        new GymPokemon('Houndoom', 10957000, 51),
-        new GymPokemon('Tyranitar', 10957000, 51),
-        new GymPokemon('Bisharp', 10960250, 53),
+        new GymPokemon('Liepard', 10945330, 60),
+        new GymPokemon('Scrafty', 10948300, 60),
+        new GymPokemon('Krookodile', 10952000, 60),
+        new GymPokemon('Absol', 10957000, 60),
+        new GymPokemon('Bisharp', 11960250, 62),
     ],
     BadgeEnums.Elite_Grimsley,
     32000,
     'Whether or not you get to fight at full strength, whether or not luck smiles on you--none of that matters. Only results matter. And a loss is a loss. See, victory shines like a bright light. And right now, you and your Pokémon are shining brilliantly.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Marshal)]
+    [new GymBadgeRequirement(BadgeEnums.Wave)]
 );
 GymList['Elite Caitlin'] = new Gym(
     'Caitlin',
     'Elite Caitlin',
     [
-        new GymPokemon('Musharna', 11945330, 49),
-        new GymPokemon('Alakazam', 11948300, 49),
-        new GymPokemon('Gothitelle', 11957000, 51),
-        new GymPokemon('Gallade', 11957000, 51),
-        new GymPokemon('Reuniclus', 11952000, 50),
-        new GymPokemon('Metagross', 11960250, 53),
+        new GymPokemon('Musharna', 10957000, 60),
+        new GymPokemon('Sigilyph', 10957000, 60),
+        new GymPokemon('Reuniclus', 10957000, 60),
+        new GymPokemon('Gothitelle', 10957000, 60),
+        new GymPokemon('Metagross', 11960250, 62),
     ],
     BadgeEnums.Elite_Caitlin,
     32000,
     'You and your Pokémon are both excellent and elegant. To have been able to battle against such a splendid team... My Pokémon and I learned a lot! I offer you my thanks.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Grimsley)]
+    [new GymBadgeRequirement(BadgeEnums.Wave)]
 );
 
 // Unova Champion
@@ -1074,7 +1070,14 @@ GymList['Champion Iris'] = new Champion(
     BadgeEnums.Elite_UnovaChampion,
     64000,
     'I\'m upset I couldn\'t win! But you know what? More than that, I\'m happy! I mean, come on. By having a serious battle, you and your Pokémon, and me and my Pokémon, we all got to know one another better than before! Yep, we sure did! OK, let\'s go!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Caitlin)]
+    [
+        new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Elite_Shauntal),
+            new GymBadgeRequirement(BadgeEnums.Elite_Marshal),
+            new GymBadgeRequirement(BadgeEnums.Elite_Grimsley),
+            new GymBadgeRequirement(BadgeEnums.Elite_Caitlin),
+        ]),
+    ]
 );
 
 //Kalos Gyms
@@ -1209,7 +1212,7 @@ GymList['Elite Siebold'] = new Gym(
     BadgeEnums.Elite_Siebold,
     64000,
     'I shall store my memory of you and your Pokémon forever away within my heart.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Malva)]
+    [new GymBadgeRequirement(BadgeEnums.Iceberg)]
 );
 GymList['Elite Wikstrom'] = new Gym(
     'Wikstrom',
@@ -1223,7 +1226,7 @@ GymList['Elite Wikstrom'] = new Gym(
     BadgeEnums.Elite_Wikstrom,
     64000,
     'Glorious! The trust that you share with your honorable Pokémon surpasses even mine!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Siebold)]
+    [new GymBadgeRequirement(BadgeEnums.Iceberg)]
 );
 GymList['Elite Drasna'] = new Gym(
     'Drasna',
@@ -1237,7 +1240,7 @@ GymList['Elite Drasna'] = new Gym(
     BadgeEnums.Elite_Drasna,
     64000,
     'Oh, dear me. That sure was a quick battle... I do hope you\'ll come back again sometime!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom)]
+    [new GymBadgeRequirement(BadgeEnums.Iceberg)]
 );
 
 // Kalos Champion
@@ -1255,7 +1258,14 @@ GymList['Champion Diantha'] = new Champion(
     BadgeEnums.Elite_KalosChampion,
     128000,
     'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart...',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]
+    [
+        new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Elite_Malva),
+            new GymBadgeRequirement(BadgeEnums.Elite_Siebold),
+            new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom),
+            new GymBadgeRequirement(BadgeEnums.Elite_Drasna),
+        ]),
+    ]
 );
 
 //Alola Gyms
@@ -1492,7 +1502,7 @@ GymList['Elite Olivia'] = new Gym(
     BadgeEnums.Elite_Olivia,
     64000,
     'I don\'t see the same look in your eyes that I saw when we first met on Akala Island. Have you had some experiences that you\'ll carry with you in your heart forever? Well, it\'s time for you to move on.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Molayne)]
+    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
 );
 GymList['Elite Acerola'] = new Gym(
     'Acerola',
@@ -1507,7 +1517,7 @@ GymList['Elite Acerola'] = new Gym(
     BadgeEnums.Elite_Acerola,
     64000,
     'I\'m...I\'m speechless! You\'ve done me in!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Olivia)]
+    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
 );
 GymList['Elite Kahili'] = new Gym(
     'Kahili',
@@ -1522,7 +1532,7 @@ GymList['Elite Kahili'] = new Gym(
     BadgeEnums.Elite_Kahili,
     64000,
     'It\'s frustrating to me as a member of the Elite Four, but it seems your strength is the real deal.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Acerola)]
+    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
 );
 
 // Alola Champion
@@ -1539,7 +1549,14 @@ GymList['Champion Hau'] = new Champion(
     BadgeEnums.Elite_AlolaChampion,
     100000,
     'We\'re gonna keep moving forward, by staying at full power all the time!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Kahili)],
+    [
+        new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Elite_Molayne),
+            new GymBadgeRequirement(BadgeEnums.Elite_Olivia),
+            new GymBadgeRequirement(BadgeEnums.Elite_Acerola),
+            new GymBadgeRequirement(BadgeEnums.Elite_Kahili),
+        ]),
+    ]
     // Bulbasaur
     [
         new GymPokemon('Flareon', 89636471, 58),
