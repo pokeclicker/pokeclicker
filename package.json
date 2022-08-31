@@ -1,6 +1,6 @@
 {
   "name": "pokeclicker",
-  "version": "0.9.11",
+  "version": "0.9.13",
   "description": "PokéClicker repository",
   "main": "index.js",
   "scripts": {
@@ -64,7 +64,7 @@
     "gulp-strip-debug": "^3.0.0",
     "gulp-typescript": "^5.0.1",
     "gulp-util": "^3.0.7",
-    "husky": "^4.3.0",
+    "husky": "^4.3.8",
     "natives": "^1.1.6",
     "ts-loader": "^8.0.4",
     "typescript": "^3.7.4",
