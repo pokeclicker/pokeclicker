@@ -1550,7 +1550,7 @@ GymList['Champion Hau'] = new Champion(
         new GymBadgeRequirement(BadgeEnums.Elite_Olivia),
         new GymBadgeRequirement(BadgeEnums.Elite_Acerola),
         new GymBadgeRequirement(BadgeEnums.Elite_Kahili),
-    ]
+    ],
     // Bulbasaur
     [
         new GymPokemon('Flareon', 89636471, 58),
