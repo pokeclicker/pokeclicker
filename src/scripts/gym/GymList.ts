@@ -1071,12 +1071,10 @@ GymList['Champion Iris'] = new Champion(
     64000,
     'I\'m upset I couldn\'t win! But you know what? More than that, I\'m happy! I mean, come on. By having a serious battle, you and your Pokémon, and me and my Pokémon, we all got to know one another better than before! Yep, we sure did! OK, let\'s go!',
     [
-        new MultiRequirement([
-            new GymBadgeRequirement(BadgeEnums.Elite_Shauntal),
-            new GymBadgeRequirement(BadgeEnums.Elite_Marshal),
-            new GymBadgeRequirement(BadgeEnums.Elite_Grimsley),
-            new GymBadgeRequirement(BadgeEnums.Elite_Caitlin),
-        ]),
+        new GymBadgeRequirement(BadgeEnums.Elite_Shauntal),
+        new GymBadgeRequirement(BadgeEnums.Elite_Marshal),
+        new GymBadgeRequirement(BadgeEnums.Elite_Grimsley),
+        new GymBadgeRequirement(BadgeEnums.Elite_Caitlin),
     ]
 );
 
@@ -1259,12 +1257,10 @@ GymList['Champion Diantha'] = new Champion(
     128000,
     'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart...',
     [
-        new MultiRequirement([
-            new GymBadgeRequirement(BadgeEnums.Elite_Malva),
-            new GymBadgeRequirement(BadgeEnums.Elite_Siebold),
-            new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom),
-            new GymBadgeRequirement(BadgeEnums.Elite_Drasna),
-        ]),
+        new GymBadgeRequirement(BadgeEnums.Elite_Malva),
+        new GymBadgeRequirement(BadgeEnums.Elite_Siebold),
+        new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom),
+        new GymBadgeRequirement(BadgeEnums.Elite_Drasna),
     ]
 );
 
@@ -1550,12 +1546,10 @@ GymList['Champion Hau'] = new Champion(
     100000,
     'We\'re gonna keep moving forward, by staying at full power all the time!',
     [
-        new MultiRequirement([
-            new GymBadgeRequirement(BadgeEnums.Elite_Molayne),
-            new GymBadgeRequirement(BadgeEnums.Elite_Olivia),
-            new GymBadgeRequirement(BadgeEnums.Elite_Acerola),
-            new GymBadgeRequirement(BadgeEnums.Elite_Kahili),
-        ]),
+        new GymBadgeRequirement(BadgeEnums.Elite_Molayne),
+        new GymBadgeRequirement(BadgeEnums.Elite_Olivia),
+        new GymBadgeRequirement(BadgeEnums.Elite_Acerola),
+        new GymBadgeRequirement(BadgeEnums.Elite_Kahili),
     ]
     // Bulbasaur
     [
