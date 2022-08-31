@@ -62,6 +62,16 @@ export const SpriteCredits: Credit[] = [
         // Notes: No notes about credit, have messaged asking for permission, awaiting confirmation
     },
     {
+        name: 'CorgiOnNeptune',
+        link: 'https://linktr.ee/CorgiOnNeptune',
+        resources: [
+            'Recolours of Duncapham\'s sprite remakes',
+            'Sounds for Wanderer/Roamer',
+            'Sounds for BF finish & empty queue',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'Croak',
         link: 'https://discordapp.com/users/206839451069054976/',
         resources: [
@@ -135,6 +145,24 @@ export const SpriteCredits: Credit[] = [
             'Mustard (battle pose)',
         ],
         // NOTES: Gives permission to everyone who asks in the comments section of the spritesheet as long as credit is given
+    },
+    {
+        name: 'Duncapham',
+        link: 'https://www.deviantart.com/duncapham',
+        image: 'https://a.deviantart.net/avatars-big/d/u/duncapham.png',
+        resources: [
+            'Kanto Gym Leader/E4 sprite remakes',
+            'Blue recolours',
+            'Roxanne remake',
+            'Norman remake',
+            'Winona remake',
+            'Tate & Liza remake',
+            'Drake remake',
+            'Phoebe remake',
+            'Sidney remake',
+            'Steven remake',
+        ],
+        // NOTES: Allowed use with credit given.
     },
     {
         name: 'Eat Pant',
@@ -257,6 +285,15 @@ export const SpriteCredits: Credit[] = [
             'Surprise Togepi',
         ],
         // NOTES: Permission given via PRs
+    },
+    {
+        name: 'Kensuyjin33',
+        link: 'https://www.deviantart.com/kensuyjin33',
+        image: 'https://a.deviantart.net/avatars-big/k/e/kensuyjin33.png',
+        resources: [
+            'Blue sprite remakes',
+        ],
+        // NOTES: Allowed use with credit given.
     },
     {
         name: 'Kilima',
@@ -422,21 +459,6 @@ export const SpriteCredits: Credit[] = [
         ],
     },
     {
-        name: 'Someone Soul',
-        link: 'https://discordapp.com/users/824384977633411082/',
-        resources: [
-            'Macro Cosmos (male) and (female)',
-            'Cissy',
-            'Pinkan Pidgey',
-            'Pinkan Rattata',
-            'Pinkan Vileplume',
-            'Valencian Butterfree',
-            'Valencian Vileplume',
-            'Valencian Weepinbell',
-        ],
-        // NOTES: Made specifically for Pokeclicker.
-    },
-    {
         name: 'Smogon Sprite Project',
         link: 'https://www.smogon.com/forums/forums/smeargles-laptop.325/',
         resources: [
@@ -452,7 +474,16 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Detective Pikachu',
             'Detective Raichu',
+            'Cissy',
+            'Macro Cosmos (male) and (female)',
+            'Pinkan Pidgey',
+            'Pinkan Rattata',
+            'Pinkan Vileplume',
+            'Valencian Butterfree',
+            'Valencian Vileplume',
+            'Valencian Weepinbell',
         ],
+        // NOTES: Made specifically for Pokeclicker.
     },
     {
         name: 'tebited15',
@@ -484,6 +515,15 @@ export const SpriteCredits: Credit[] = [
             'Professor Ivy',
         ],
         // Notes: Permission given on image page if credited.
+    },
+    {
+        name: 'Vur3',
+        link: 'https://www.deviantart.com/vur3',
+        image: 'https://a.deviantart.net/avatars-big/v/u/vur3.png',
+        resources: [
+            'Glacia remake',
+        ],
+        // Notes: Permission if credited.
     },
     {
         name: 'Wolfang62',
