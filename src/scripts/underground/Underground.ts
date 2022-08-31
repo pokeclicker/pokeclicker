@@ -314,14 +314,22 @@ class Underground implements Feature {
         }
 
         player.mineInventory.sort((a, b) => {
+            let result = 0;
             switch (prop) {
                 case 'Amount':
-                    return (a.amount() - b.amount()) * this.sortDirection;
+                    result = (a.amount() - b.amount()) * this.sortDirection;
+                    break;
                 case 'Value':
-                    return (a.value - b.value) * this.sortDirection;
+                    result = (a.value - b.value) * this.sortDirection;
+                    break;
                 case 'Item':
-                    return a.name > b.name ? 1 * this.sortDirection : -1 * this.sortDirection;
+                    result = a.name > b.name ? 1 * this.sortDirection : -1 * this.sortDirection;
+                    break;
             }
+            if (result == 0) {
+                return a.id - b.id;
+            }
+            return result;
         });
     }
 
