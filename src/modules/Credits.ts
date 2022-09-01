@@ -172,6 +172,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Nidoking',
             'Pinkan Nidoran(F)',
             'Pinkan Nidoran(M)',
+            'Pinkan Oddish',
             'Pinkan Primeape',
             'Pinkan Venonat',
         ],

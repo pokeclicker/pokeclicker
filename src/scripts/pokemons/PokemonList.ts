@@ -1693,6 +1693,23 @@ const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 43.01,
+        'name': 'Pinkan Oddish',
+        'catchRate': 255,
+        'type': [PokemonType.Grass, PokemonType.Poison],
+        'levelType': LevelType.mediumslow,
+        'exp': 64,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 45,
+            'attack': 50,
+            'specialAttack': 75,
+            'defense': 55,
+            'specialDefense': 65,
+            'speed': 30,
+        },
+    },
+    {
         'id': 44,
         'name': 'Gloom',
         'catchRate': 120,

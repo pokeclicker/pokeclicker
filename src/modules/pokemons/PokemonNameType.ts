@@ -109,6 +109,7 @@ export type PokemonNameType
     | 'Zubat'
     | 'Golbat'
     | 'Oddish'
+    | 'Pinkan Oddish'
     | 'Gloom'
     | 'Vileplume'
     | 'Valencian Vileplume'
