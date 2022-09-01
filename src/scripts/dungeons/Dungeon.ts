@@ -1390,7 +1390,7 @@ dungeonList['Ruby Path'] = new Dungeon('Ruby Path',
     },
     720600,
     [new DungeonBossPokemon('Magcargo', 3703000, 20)],
-    43000, 27,
+    43000, 30,
     () => {},
     {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
@@ -1422,7 +1422,7 @@ dungeonList['Icefall Cave'] = new Dungeon('Icefall Cave',
                 new GymPokemon('Golbat', 250000, 20),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    43000, 29,
+    43000, 30,
     () => {},
     {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
