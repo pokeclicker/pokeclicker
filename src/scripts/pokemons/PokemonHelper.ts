@@ -61,7 +61,7 @@ class PokemonHelper {
         const type2: PokemonType = basePokemon.type[1] ?? PokemonType.None;
 
         const eggCycles: number = basePokemon.eggCycles || 20;
-        return new DataPokemon(basePokemon.id, basePokemon.name, basePokemon.catchRate, basePokemon.evolutions, type1, type2, basePokemon.attack, basePokemon.base.hitpoints, basePokemon.levelType, basePokemon.exp, eggCycles, basePokemon.heldItem);
+        return new DataPokemon(basePokemon.id, basePokemon.name, basePokemon.catchRate, basePokemon.evolutions, type1, type2, basePokemon.attack, basePokemon.base.hitpoints, basePokemon.levelType, basePokemon.exp, eggCycles, basePokemon.heldItem, basePokemon.gender);
     }
 
     public static typeStringToId(id: string) {

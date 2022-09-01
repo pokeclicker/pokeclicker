@@ -597,16 +597,21 @@ namespace GameConstants {
         CrownTundra,
     }
 
-    // Gender types
+    // Gender Types
     declare const GENDERLESS;
     declare const MALE_ONLY;
     declare const FEMALE_ONLY;
     declare const MALE_FEMALE;
     
-    // Gender ratio
+    // Gender Ratio
     declare const MALE_12_5;
     declare const MALE_25;
     declare const MALE_50;
     declare const MALE_75;
     declare const MALE_87_5;
+
+    // Gender Text
+    declare const TEXT_GENDERLESS;
+    declare const TEXT_MALE;
+    declare const TEXT_FEMALE;
 }

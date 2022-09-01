@@ -18,6 +18,7 @@ class BattlePokemon implements EnemyPokemonInterface {
      * @param exp base exp reward for defeating this Pokémon
      * @param reward currency reward for defeating this Pokémon
      * @param shiny is a shiny variant
+     * @param gender Pokémon gender
      * @param [heldItem] item to possibly gain for defeating this Pokémon
      */
 
@@ -33,8 +34,9 @@ class BattlePokemon implements EnemyPokemonInterface {
         public reward: Amount = new Amount(0, GameConstants.Currency.money),
         public shiny: boolean,
         public gemReward = 1,
+        public gender: number,
         public heldItem?: BagItem,
-        public ep?: number
+        public ep?: number,
     ) {
         this.health = ko.observable(maxHealth);
         this.maxHealth = ko.observable(maxHealth);
