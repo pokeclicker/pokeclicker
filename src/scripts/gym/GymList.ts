@@ -627,7 +627,7 @@ GymList['Mikan Island'] = new Gym(
     ],
     BadgeEnums['Coral-Eye'],
     740,
-    'I can see why you made it so far in the Indigo League, and i bet you\'ll do pretty well in the Orange League.\n' +
+    'I can see why you made it so far in the Indigo League, and I bet you\'ll do pretty well in the Orange League.\n' +
     'This is the Coral-Eye Badge of the Mikan Gym, to prove that you won your match!'
 );
 GymList['Navel Island'] = new Gym(
