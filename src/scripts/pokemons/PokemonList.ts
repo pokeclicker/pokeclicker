@@ -2911,7 +2911,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Normal, PokemonType.Flying],
         'levelType': LevelType.mediumfast,
         'exp': 165,
-        'eggCycles': 20,
+        'eggCycles': 30,
         'base': {
             'hitpoints': 60,
             'attack': 110,
