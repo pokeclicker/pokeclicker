@@ -639,7 +639,7 @@ class Farming implements Feature {
             }));
 
         // Pinkan
-        this.mutations.push(new GrowNearBerryMutation(1, BerryType.Pinkan,
+        this.mutations.push(new GrowNearBerryMutation(0.0001, BerryType.Pinkan,
             [
                 BerryType.Pecha,
                 BerryType.Persim,
