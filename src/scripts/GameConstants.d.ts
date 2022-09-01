@@ -401,6 +401,7 @@ namespace GameConstants {
         Kanto,
         Johto,
         Hoenn,
+        Sevii4567,
         Kalos,
         Alola,
         Galar,

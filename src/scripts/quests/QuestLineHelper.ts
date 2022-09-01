@@ -474,6 +474,22 @@ class QuestLineHelper {
         App.game.quests.questLines().push(rubySapphireSeviiQuestLine);
     }
 
+    public static createPinkanThemeparkQuestLine() {
+        const pinkanThemeparkQuestLine = new QuestLine('Pinkan Themepark', 'Help Team Rocket build a Pinkan Themepark.', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion), GameConstants.BulletinBoards.Sevii4567);
+
+        const talktoTeamRocket = new TalkToNPCQuest(ThemeparkTeamRocket1, 'Talk to Team Rocket on Pinkan, to hear about their plans');
+        pinkanThemeparkQuestLine.addQuest(talktoTeamRocket);
+
+        const defeatForest = new CustomQuest(10,
+            () => App.game.farming.gainBerry(BerryType.Pinkan, 10),
+            'Do some research. Defeat 100 Pinkan in the forest.',
+            () => App.game.statistics.routeKills[GameConstants.Region.kanto][41]()
+        );
+        pinkanThemeparkQuestLine.addQuest(defeatForest);
+
+        App.game.quests.questLines().push(pinkanThemeparkQuestLine);
+    }
+
     // Sinnoh QuestLines
     public static createGalacticSinnohQuestLine() {
         const galacticSinnohQuestLine = new QuestLine('A new world', 'End Team Galactic\'s plan to destroy the world and create a new one in its place.');
@@ -1431,6 +1447,7 @@ class QuestLineHelper {
         this.createAquaMagmaHoennQuestLine();
         this.createDeoxysQuestLine();
         this.createRubySapphireSeviiQuestLine();
+        this.createPinkanThemeparkQuestLine();
         this.createGalacticSinnohQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createDetectivePikachuQuestLine();

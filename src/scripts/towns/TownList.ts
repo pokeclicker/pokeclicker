@@ -541,6 +541,13 @@ const PinkanOfficerJenny2 = new NPC ('Officer Jenny', [
     image: 'assets/images/npcs/Officer Jenny.png',
     requirement: new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion),
 });
+const ThemeparkTeamRocket1 = new NPC('Jessie and James', [
+    'We want to build a themepark, but our dialog has not been written yet.',
+    'Defeat 100 pink mons in the forest, and then we will throw some berries after you.',
+    '(You might need to mutate it later, so this might only be a test).',
+], {
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Pinkan Themepark'), new QuestLineStepCompletedRequirement('Pinkan Themepark', 2, GameConstants.AchievementOption.less)]),
+});
 
 const Informant1 = new NPC('Informant', [
     '<i>In a shady warehouse, you find the informant. He is a Mr. Mime, and he doesn\'t seem willing to divulge the information you need.</i>',
@@ -834,7 +841,7 @@ TownList['Kumquat Island'] = new Town(
 TownList['Pummelo Island'] = new Town(
     'Pummelo Island',
     GameConstants.Region.kanto,
-    [GymList['Supreme Gym Leader Drake'], PummeloIslandShop],
+    [GymList['Supreme Gym Leader Drake'], PummeloIslandShop, new BulletinBoard(GameConstants.BulletinBoards.Sevii4567)],
     {
         requirements:
         [
@@ -860,7 +867,7 @@ TownList['Pinkan Pokémon Reserve'] = new Town(
     [PinkanPokémonReserveShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 42)],
-        npcs: [PinkanOfficerJenny1, PinkanOfficerJenny2],
+        npcs: [PinkanOfficerJenny1, PinkanOfficerJenny2, ThemeparkTeamRocket1],
     }
 );
 

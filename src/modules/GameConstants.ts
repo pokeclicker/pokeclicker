@@ -786,6 +786,7 @@ export enum BulletinBoards {
     All = -1,
     Kanto,
     Hoenn,
+    Sevii4567,
     Kalos,
     Alola,
     Galar,
