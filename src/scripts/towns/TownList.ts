@@ -210,7 +210,7 @@ const PinkanPokémonReserveShop = new Shop([
     ItemList.Lucky_incense,
 ]);
 const TanobyRuinsShop = new Shop([
-    ItemList['Pinkan Exeggutor'],
+    ItemList['Pinkan Dodrio'],
 ], 'Trade with Prof. Ivy');
 
 // Kanto NPCs
