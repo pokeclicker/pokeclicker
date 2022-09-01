@@ -1125,6 +1125,12 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 41);
         },
 
+        '0.9.14': ({ playerData, saveData }) => {
+            if (saveData.party.caughtPokemon.filter(p => p.id === 103.02)) {
+                saveData.wallet.currencies[1] += 50000;
+            }
+        },
+
     };
 
     constructor() {

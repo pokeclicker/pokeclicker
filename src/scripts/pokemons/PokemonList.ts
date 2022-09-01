@@ -2905,6 +2905,23 @@ const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 85.01,
+        'name': 'Pinkan Dodrio',
+        'catchRate': 45,
+        'type': [PokemonType.Normal, PokemonType.Flying],
+        'levelType': LevelType.mediumfast,
+        'exp': 165,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 60,
+            'attack': 110,
+            'specialAttack': 60,
+            'defense': 70,
+            'specialDefense': 60,
+            'speed': 110,
+        },
+    },
+    {
         'id': 86,
         'name': 'Seel',
         'catchRate': 190,
