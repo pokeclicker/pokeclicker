@@ -1123,6 +1123,20 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 39);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 40);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 41);
+
+            //Pinkan Berry
+            const enigmaUnlocked = saveData.farming.unlockedBerries[66];
+            saveData.farming.berryList = Update.moveIndex(saveData.farming.berryList, 35);
+            saveData.farming.plotList.forEach(p => {
+                if (p.berry >= 35) {
+                    p.berry++;
+                }
+            });
+
+            saveData.farming.unlockedBerries[35] = false;
+            if (enigmaUnlocked) {
+                saveData.farming.unlockedBerries[67] = true;
+            }
         },
 
     };
