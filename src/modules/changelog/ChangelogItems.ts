@@ -10,6 +10,17 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.13
+    new ChangelogUpdate('v0.9.13', new Date(2022, 8, 1)),
+    new Changelog(changelogType.NEW, 'Sevii islands 4, 5, 6 and 7'),
+    new Changelog(changelogType.NEW, 'Sevii questline'),
+    new Changelog(changelogType.NEW, 'Detective Pikachu questline'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Team Plasma questline'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Underground item sorting'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc NPC changes'),
+
     // v0.9.12
     new ChangelogUpdate('v0.9.12', new Date(2022, 7, 18)),
     new Changelog(changelogType.FIXED, 'Revert regional update'),

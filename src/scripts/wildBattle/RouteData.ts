@@ -469,7 +469,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Pinkan Forest', GameConstants.Region.kanto, 41,
     new RoutePokemon({
-        land: ['Pinkan Caterpie', 'Pinkan Weedle', 'Pinkan Pidgey', 'Pinkan Vileplume', 'Pinkan Paras', 'Pinkan Venonat', 'Pinkan Mankey'],
+        land: ['Pinkan Caterpie', 'Pinkan Weedle', 'Pinkan Pidgey', 'Pinkan Vileplume', 'Pinkan Paras', 'Pinkan Venonat', 'Pinkan Mankey', 'Pinkan Exeggutor'],
     }),
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Altering Cave')),
