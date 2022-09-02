@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.9.12"></script>
+    <script src="scripts/modules.min.js?v=0.9.14"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.9.12"></script>
+    <script src="scripts/script.min.js?v=0.9.14"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -38,7 +38,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.9.12" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.9.14" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -96,7 +96,7 @@
     </style>
 
 </head>
-<body class="no-select" data-bind="class: 'no-select ' + Settings.getSetting('theme').observableValue() + ' ' + Settings.getSetting('backgroundImage').observableValue() ">
+<body class="no-select" data-bind="class: 'no-select ' + Settings.getSetting('theme').observableValue() + ' ' + Settings.getSetting('backgroundImage').observableValue(), attr : {'oncontextmenu' : 'return !' + Settings.getSetting('disableRightClickMenu').observableValue().toString() + ';'}">
 <div id="dynamic-background">
     <!-- Sky -->
     <div id="sky1" class="sky sky-0" style="opacity: 1;"></div>
@@ -290,7 +290,7 @@
         <div class="modal-content" style="text-align: center">
             <div class="modal-header">
                 <div style="width: 100%;">
-                    <img src="assets/images/oak.png">
+                    <img src="assets/images/npcs/Professor Oak.png">
                     <h5 class="modal-title" id="keyItemModalLabel">New key item!</h5>
                 </div>
             </div>
@@ -1746,8 +1746,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Kanto').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-kanto.png?v=0.9.12',
-            href:'assets/images/kanto-kanto.png?v=0.9.12'
+            'xlink:href':'assets/images/kanto-kanto.png?v=0.9.14',
+            href:'assets/images/kanto-kanto.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -3717,8 +3717,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii123.png?v=0.9.12',
-            href:'assets/images/kanto-sevii123.png?v=0.9.12'
+            'xlink:href':'assets/images/kanto-sevii123.png?v=0.9.14',
+            href:'assets/images/kanto-sevii123.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -4097,12 +4097,1516 @@
 </rect>
     </g>
 
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 4567').id">
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.9.14',
+            href:'assets/images/kanto-sevii4567.png?v=0.9.14'
+        }"></image>
+
+        <!-- ------ -->
+        <!-- ROUTES -->
+        <!-- ------ -->
+
+        <!--Five Isle Meadow-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(30, 0); } ">
+    <rect data-route='30'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(30, 0) }"
+        height="104"
+        width="48"
+        x="1168" y="336">
+    </rect>
+
+    <text style="font-size: 32px"
+        x="1168"
+        y="398"
+        data-bind="visible: !MapHelper.isRouteCurrentLocation(30, 0)">
+        FIM
+    </text>
+    <image width="48" height="48"
+        x="1168"
+        y="364"
+        class="iconLocation"
+        transform='rotate(0)'
+        data-bind="visible: MapHelper.isRouteCurrentLocation(30, 0),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+    
+
+</g>
+
+
+        <!--Five Isle Meadow extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(30, 0); } ">
+    <rect data-route='30'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(30, 0) }"
+        height="48"
+        width="32"
+        x="1136" y="336">
+    </rect>
+
+
+</g>
+
+
+        <!--Five Isle Meadow extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(30, 0); } ">
+    <rect data-route='30'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(30, 0) }"
+        height="48"
+        width="64"
+        x="1168" y="496">
+    </rect>
+
+
+</g>
+
+
+        <!--Memorial Pillar-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(31, 0); } ">
+    <rect data-route='31'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(31, 0) }"
+        height="128"
+        width="48"
+        x="1232" y="496">
+    </rect>
+
+    <text style="font-size: 32px"
+        x="1240"
+        y="570"
+        data-bind="visible: !MapHelper.isRouteCurrentLocation(31, 0)">
+        MP
+    </text>
+    <image width="48" height="48"
+        x="1232"
+        y="536"
+        class="iconLocation"
+        transform='rotate(0)'
+        data-bind="visible: MapHelper.isRouteCurrentLocation(31, 0),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+    
+
+</g>
+
+
+        <!--Water Labyrinth-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(32, 0); } ">
+    <rect data-route='32'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(32, 0) }"
+        height="48"
+        width="128"
+        x="944" y="288">
+    </rect>
+
+    <text style="font-size: 32px"
+        x="992"
+        y="322"
+        data-bind="visible: !MapHelper.isRouteCurrentLocation(32, 0)">
+        WL
+    </text>
+    <image width="48" height="48"
+        x="984"
+        y="288"
+        class="iconLocation"
+        transform='rotate(0)'
+        data-bind="visible: MapHelper.isRouteCurrentLocation(32, 0),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+    
+
+</g>
+
+
+        <!--Water Labyrinth extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(32, 0); } ">
+    <rect data-route='32'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(32, 0) }"
+        height="32"
+        width="48"
+        x="1072" y="288">
+    </rect>
+
+
+</g>
+
+
+        <!--Resort Gorgeous-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(33, 0); } ">
+    <rect data-route='33'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(33, 0) }"
+        height="48"
+        width="176"
+        x="1072" y="240">
+    </rect>
+
+    <text style="font-size: 32px"
+        x="1144"
+        y="274"
+        data-bind="visible: !MapHelper.isRouteCurrentLocation(33, 0)">
+        RG
+    </text>
+    <image width="48" height="48"
+        x="1136"
+        y="240"
+        class="iconLocation"
+        transform='rotate(0)'
+        data-bind="visible: MapHelper.isRouteCurrentLocation(33, 0),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+    
+
+</g>
+
+
+        <!--Water Path-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(34, 0); } ">
+    <rect data-route='34'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(34, 0) }"
+        height="240"
+        width="48"
+        x="912" y="592">
+    </rect>
+
+    <text style="font-size: 32px"
+        x="920"
+        y="722"
+        data-bind="visible: !MapHelper.isRouteCurrentLocation(34, 0)">
+        WP
+    </text>
+    <image width="48" height="48"
+        x="912"
+        y="688"
+        class="iconLocation"
+        transform='rotate(0)'
+        data-bind="visible: MapHelper.isRouteCurrentLocation(34, 0),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+    
+
+</g>
+
+
+        <!--Water Path extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(34, 0); } ">
+    <rect data-route='34'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(34, 0) }"
+        height="48"
+        width="32"
+        x="880" y="704">
+    </rect>
+
+
+</g>
+
+
+        <!--Water Path extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(34, 0); } ">
+    <rect data-route='34'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(34, 0) }"
+        height="32"
+        width="16"
+        x="896" y="800">
+    </rect>
+
+
+</g>
+
+
+        <!--Green Path-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(35, 0); } ">
+    <rect data-route='35'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(35, 0) }"
+        height="48"
+        width="96"
+        x="720" y="592">
+    </rect>
+
+    <text style="font-size: 32px"
+        x="752"
+        y="626"
+        data-bind="visible: !MapHelper.isRouteCurrentLocation(35, 0)">
+        GP
+    </text>
+    <image width="48" height="48"
+        x="744"
+        y="592"
+        class="iconLocation"
+        transform='rotate(0)'
+        data-bind="visible: MapHelper.isRouteCurrentLocation(35, 0),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+    
+
+</g>
+
+
+        <!--Green Path extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(35, 0); } ">
+    <rect data-route='35'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(35, 0) }"
+        height="48"
+        width="16"
+        x="896" y="592">
+    </rect>
+
+
+</g>
+
+
+        <!--Outcast Island-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(36, 0); } ">
+    <rect data-route='36'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(36, 0) }"
+        height="128"
+        width="48"
+        x="720" y="464">
+    </rect>
+
+    <text style="font-size: 32px"
+        x="728"
+        y="538"
+        data-bind="visible: !MapHelper.isRouteCurrentLocation(36, 0)">
+        OI
+    </text>
+    <image width="48" height="48"
+        x="720"
+        y="504"
+        class="iconLocation"
+        transform='rotate(0)'
+        data-bind="visible: MapHelper.isRouteCurrentLocation(36, 0),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+    
+
+</g>
+
+
+        <!--Ruin Valley-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(37, 0); } ">
+    <rect data-route='37'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(37, 0) }"
+        height="32"
+        width="112"
+        x="784" y="800">
+    </rect>
+
+    <text style="font-size: 32px"
+        x="824"
+        y="826"
+        data-bind="visible: !MapHelper.isRouteCurrentLocation(37, 0)">
+        RV
+    </text>
+    <image width="48" height="48"
+        x="816"
+        y="792"
+        class="iconLocation"
+        transform='rotate(0)'
+        data-bind="visible: MapHelper.isRouteCurrentLocation(37, 0),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+    
+
+</g>
+
+
+        <!--Ruin Valley extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(37, 0); } ">
+    <rect data-route='37'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(37, 0) }"
+        height="80"
+        width="32"
+        x="784" y="832">
+    </rect>
+
+
+</g>
+
+
+        <!--Ruin Valley extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(37, 0); } ">
+    <rect data-route='37'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(37, 0) }"
+        height="32"
+        width="80"
+        x="816" y="880">
+    </rect>
+
+
+</g>
+
+
+        <!--Ruin Valley extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(37, 0); } ">
+    <rect data-route='37'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(37, 0) }"
+        height="48"
+        width="32"
+        x="864" y="832">
+    </rect>
+
+
+</g>
+
+
+        <!--Canyon Entrance-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(38, 0); } ">
+    <rect data-route='38'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(38, 0) }"
+        height="160"
+        width="48"
+        x="384" y="496">
+    </rect>
+
+    <text style="font-size: 32px"
+        x="392"
+        y="586"
+        data-bind="visible: !MapHelper.isRouteCurrentLocation(38, 0)">
+        CE
+    </text>
+    <image width="48" height="48"
+        x="384"
+        y="552"
+        class="iconLocation"
+        transform='rotate(0)'
+        data-bind="visible: MapHelper.isRouteCurrentLocation(38, 0),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+    
+
+</g>
+
+
+        <!--Canyon Entrance extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(38, 0); } ">
+    <rect data-route='38'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(38, 0) }"
+        height="48"
+        width="16"
+        x="432" y="608">
+    </rect>
+
+
+</g>
+
+
+        <!--Sevault Canyon-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(39, 0); } ">
+    <rect data-route='39'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(39, 0) }"
+        height="192"
+        width="48"
+        x="448" y="608">
+    </rect>
+
+    <text style="font-size: 32px"
+        x="456"
+        y="714"
+        data-bind="visible: !MapHelper.isRouteCurrentLocation(39, 0)">
+        SC
+    </text>
+    <image width="48" height="48"
+        x="448"
+        y="680"
+        class="iconLocation"
+        transform='rotate(0)'
+        data-bind="visible: MapHelper.isRouteCurrentLocation(39, 0),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+    
+
+</g>
+
+
+        <!--Valencia Island-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(40, 0); } ">
+    <rect data-route='40'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(40, 0) }"
+        height="64"
+        width="32"
+        x="48" y="144">
+    </rect>
+
+    <text style="font-size: 32px"
+        x="48"
+        y="186"
+        data-bind="visible: !MapHelper.isRouteCurrentLocation(40, 0)">
+        VI
+    </text>
+    <image width="48" height="48"
+        x="40"
+        y="152"
+        class="iconLocation"
+        transform='rotate(0)'
+        data-bind="visible: MapHelper.isRouteCurrentLocation(40, 0),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+    
+
+</g>
+
+        <!--Valencia Island extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(40, 0); } ">
+    <rect data-route='40'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(40, 0) }"
+        height="48"
+        width="32"
+        x="64" y="96">
+    </rect>
+
+
+</g>
+
+        <!--Valencia Island extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(40, 0); } ">
+    <rect data-route='40'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(40, 0) }"
+        height="32"
+        width="16"
+        x="48" y="112">
+    </rect>
+
+
+</g>
+
+
+        <!--Pinkan Forest-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(41, 0); } ">
+    <rect data-route='41'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(41, 0) }"
+        height="208"
+        width="80"
+        x="720" y="48">
+    </rect>
+
+    <text style="font-size: 32px"
+        x="744"
+        y="162"
+        data-bind="visible: !MapHelper.isRouteCurrentLocation(41, 0)">
+        PF
+    </text>
+    <image width="48" height="48"
+        x="736"
+        y="128"
+        class="iconLocation"
+        transform='rotate(0)'
+        data-bind="visible: MapHelper.isRouteCurrentLocation(41, 0),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+    
+
+</g>
+
+        <!--Pinkan Forest extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(41, 0); } ">
+    <rect data-route='41'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(41, 0) }"
+        height="16"
+        width="96"
+        x="624" y="48">
+    </rect>
+
+
+</g>
+
+        <!--Pinkan Forest extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(41, 0); } ">
+    <rect data-route='41'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(41, 0) }"
+        height="16"
+        width="64"
+        x="688" y="32">
+    </rect>
+
+
+</g>
+
+        <!--Pinkan Forest extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(41, 0); } ">
+    <rect data-route='41'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(41, 0) }"
+        height="48"
+        width="16"
+        x="800" y="128">
+    </rect>
+
+
+</g>
+
+        <!--Pinkan Forest extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(41, 0); } ">
+    <rect data-route='41'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(41, 0) }"
+        height="48"
+        width="48"
+        x="672" y="176">
+    </rect>
+
+
+</g>
+
+        <!--Pinkan Forest extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(41, 0); } ">
+    <rect data-route='41'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(41, 0) }"
+        height="16"
+        width="32"
+        x="688" y="160">
+    </rect>
+
+
+</g>
+
+        <!--Pinkan Forest extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(41, 0); } ">
+    <rect data-route='41'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(41, 0) }"
+        height="32"
+        width="16"
+        x="704" y="224">
+    </rect>
+
+
+</g>
+
+        <!--Pinkan Forest extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(41, 0); } ">
+    <rect data-route='41'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(41, 0) }"
+        height="16"
+        width="96"
+        x="672" y="256">
+    </rect>
+
+
+</g>
+
+
+        <!--Pinkan Plains-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(42, 0); } ">
+    <rect data-route='42'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(42, 0) }"
+        height="80"
+        width="48"
+        x="624" y="144">
+    </rect>
+
+    <text style="font-size: 32px"
+        x="632"
+        y="194"
+        data-bind="visible: !MapHelper.isRouteCurrentLocation(42, 0)">
+        PP
+    </text>
+    <image width="48" height="48"
+        x="624"
+        y="160"
+        class="iconLocation"
+        transform='rotate(0)'
+        data-bind="visible: MapHelper.isRouteCurrentLocation(42, 0),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+    
+
+</g>
+
+        <!--Pinkan Plains extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(42, 0); } ">
+    <rect data-route='42'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(42, 0) }"
+        height="16"
+        width="48"
+        x="672" y="144">
+    </rect>
+
+
+</g>
+
+        <!--Pinkan Plains extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(42, 0); } ">
+    <rect data-route='42'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(42, 0) }"
+        height="16"
+        width="16"
+        x="672" y="160">
+    </rect>
+
+
+</g>
+
+        <!--Pinkan Plains extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(42, 0); } ">
+    <rect data-route='42'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(42, 0) }"
+        height="16"
+        width="16"
+        x="624" y="224">
+    </rect>
+
+
+</g>
+
+        <!--Pinkan Plains extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(42, 0); } ">
+    <rect data-route='42'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(42, 0) }"
+        height="16"
+        width="112"
+        x="528" y="240">
+    </rect>
+
+
+</g>
+
+        <!--Pinkan Plains extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(42, 0); } ">
+    <rect data-route='42'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(42, 0) }"
+        height="32"
+        width="16"
+        x="544" y="112">
+    </rect>
+
+
+</g>
+
+        <!--Pinkan Plains extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(42, 0); } ">
+    <rect data-route='42'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(42, 0) }"
+        height="24"
+        width="80"
+        x="544" y="144">
+    </rect>
+
+
+</g>
+
+
+        <!-- ----- -->
+        <!-- TOWNS -->
+        <!-- ----- -->
+
+        <!--Four Island-->
+        
+
+<rect class="city"
+    data-town="Four Island"
+    x="320"
+    y="208"
+    height="48"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Four Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Four Island') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="328"
+        y="208"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Four Island')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Four Island extension-->
+        
+
+<rect class="city"
+    data-town="Four Island"
+    x="320"
+    y="176"
+    height="16"
+    width="48"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Four Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Four Island') },
+        ">
+</rect>
+
+
+
+        <!--Five Island-->
+        
+
+<rect class="city"
+    data-town="Five Island"
+    x="1072"
+    y="320"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Five Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Five Island') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="1080"
+        y="328"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Five Island')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Rocket Warehouse-->
+        
+
+<rect class="city"
+    data-town="Rocket Warehouse"
+    x="1152"
+    y="440"
+    height="56"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Rocket Warehouse')},
+        attr: { class: MapHelper.calculateTownCssClass('Rocket Warehouse') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="1160"
+        y="444"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Rocket Warehouse')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Six Island-->
+        
+
+<rect class="city"
+    data-town="Six Island"
+    x="816"
+    y="688"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Six Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Six Island') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="824"
+        y="696"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Six Island')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Dotted Hole-->
+        
+
+<rect class="city"
+    data-town="Dotted Hole"
+    x="816"
+    y="832"
+    height="48"
+    width="48"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Dotted Hole')},
+        attr: { class: MapHelper.calculateTownCssClass('Dotted Hole') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="816"
+        y="832"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Dotted Hole')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Seven Island-->
+        
+
+<rect class="city"
+    data-town="Seven Island"
+    x="384"
+    y="416"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Seven Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Seven Island') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="392"
+        y="424"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Seven Island')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Mikan Island-->
+        
+
+<rect class="city"
+    data-town="Mikan Island"
+    x="64"
+    y="808"
+    height="88"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Mikan Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Mikan Island') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="72"
+        y="828"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Mikan Island')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Navel Island-->
+        
+
+<rect class="city"
+    data-town="Navel Island"
+    x="1424"
+    y="128"
+    height="64"
+    width="32"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Navel Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Navel Island') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="1416"
+        y="136"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Navel Island')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Trovita Island-->
+        
+
+<rect class="city"
+    data-town="Trovita Island"
+    x="928"
+    y="64"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Trovita Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Trovita Island') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="936"
+        y="72"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Trovita Island')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Kumquat Island-->
+        
+
+<rect class="city"
+    data-town="Kumquat Island"
+    x="96"
+    y="368"
+    height="160"
+    width="96"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Kumquat Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Kumquat Island') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="120"
+        y="424"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Kumquat Island')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Pummelo Island-->
+            
+
+<rect class="city"
+    data-town="Pummelo Island"
+    x="1408"
+    y="816"
+    height="64"
+    width="112"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Pummelo Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Pummelo Island') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="1440"
+        y="824"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Pummelo Island')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Valencia Pokémon Center-->
+        
+
+<rect class="city"
+    data-town="Valencia Pokémon Center"
+    x="48"
+    y="40"
+    height="56"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Valencia Pokémon Center')},
+        attr: { class: MapHelper.calculateTownCssClass('Valencia Pokémon Center') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="56"
+        y="44"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Valencia Pokémon Center')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Pinkan Pokémon Reserve-->
+        
+
+<rect class="city"
+    data-town="Pinkan Pokémon Reserve"
+    x="528"
+    y="168"
+    height="72"
+    width="96"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Pinkan Pokémon Reserve')},
+        attr: { class: MapHelper.calculateTownCssClass('Pinkan Pokémon Reserve') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="552"
+        y="180"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Pinkan Pokémon Reserve')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!-- -------- -->
+        <!-- DUNGEONS -->
+        <!-- -------- -->
+
+        <!--Icefall Cave-->
+        
+
+
+    <rect class="city"
+        data-town="Icefall Cave"
+        x="368"
+        y="160"
+        height="48"
+        width="48"
+        data-bind="click:function(){MapHelper.moveToTown('Icefall Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Icefall Cave') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="368"
+        y="160"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Icefall Cave')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Icefall Cave extension-->
+        
+
+
+    <rect class="city"
+        data-town="Icefall Cave"
+        x="320"
+        y="160"
+        height="32"
+        width="48"
+        data-bind="click:function(){MapHelper.moveToTown('Icefall Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Icefall Cave') }">
+    </rect>
+
+
+
+
+        <!--Lost Cave-->
+        
+
+
+    <rect class="city"
+        data-town="Lost Cave"
+        x="1264"
+        y="240"
+        height="48"
+        width="48"
+        data-bind="click:function(){MapHelper.moveToTown('Lost Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Lost Cave') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="1264"
+        y="240"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Lost Cave')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Lost Cave extension-->
+        
+
+
+    <rect class="city"
+        data-town="Lost Cave"
+        x="1424"
+        y="192"
+        height="32"
+        width="48"
+        data-bind="click:function(){MapHelper.moveToTown('Lost Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Lost Cave') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="1424"
+        y="184"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Lost Cave')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Altering Cave-->
+        
+
+
+    <rect class="city"
+        data-town="Altering Cave"
+        x="704"
+        y="416"
+        height="48"
+        width="80"
+        data-bind="click:function(){MapHelper.moveToTown('Altering Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Altering Cave') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="720"
+        y="416"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Altering Cave')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Altering Cave extension-->
+        
+
+
+    <rect class="city"
+        data-town="Altering Cave"
+        x="640"
+        y="224"
+        height="32"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Altering Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Altering Cave') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="648"
+        y="216"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Altering Cave')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Altering Cave extension-->
+        
+
+
+    <rect class="city"
+        data-town="Altering Cave"
+        x="640"
+        y="256"
+        height="16"
+        width="32"
+        data-bind="click:function(){MapHelper.moveToTown('Altering Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Altering Cave') }">
+    </rect>
+
+
+
+
+        <!--Pattern Bush-->
+        
+
+
+    <rect class="city"
+        data-town="Pattern Bush"
+        x="816"
+        y="576"
+        height="64"
+        width="80"
+        data-bind="click:function(){MapHelper.moveToTown('Pattern Bush')},
+            attr: { class: MapHelper.calculateTownCssClass('Pattern Bush') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="832"
+        y="584"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Pattern Bush')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Tanoby Ruins-->
+        
+
+
+    <rect class="city"
+        data-town="Tanoby Ruins"
+        x="304"
+        y="800"
+        height="64"
+        width="320"
+        data-bind="click:function(){MapHelper.moveToTown('Tanoby Ruins')},
+            attr: { class: MapHelper.calculateTownCssClass('Tanoby Ruins') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="440"
+        y="808"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Tanoby Ruins')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Sunburst Island-->
+        
+
+
+    <rect class="city"
+        data-town="Sunburst Island"
+        x="1216"
+        y="624"
+        height="48"
+        width="80"
+        data-bind="click:function(){MapHelper.moveToTown('Sunburst Island')},
+            attr: { class: MapHelper.calculateTownCssClass('Sunburst Island') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="1232"
+        y="624"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Sunburst Island')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Sunburst Island extension-->
+        
+
+
+    <rect class="city"
+        data-town="Sunburst Island"
+        x="1216"
+        y="672"
+        height="16"
+        width="32"
+        data-bind="click:function(){MapHelper.moveToTown('Sunburst Island')},
+            attr: { class: MapHelper.calculateTownCssClass('Sunburst Island') }">
+    </rect>
+
+
+
+
+        <!--Pinkan Mountain-->
+        
+
+
+    <rect class="city"
+        data-town="Pinkan Mountain"
+        x="560"
+        y="64"
+        height="80"
+        width="160"
+        data-bind="click:function(){MapHelper.moveToTown('Pinkan Mountain')},
+            attr: { class: MapHelper.calculateTownCssClass('Pinkan Mountain') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="616"
+        y="80"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Pinkan Mountain')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+
+        <!--Dock-->
+        
+
+<rect class="city"
+    data-town="Dock" 
+    x="1008"
+    y="352"
+    height="32"
+    width="48"
+    data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Five Island&#39;) }">
+</rect>
+
+        
+
+<image href="assets/images/map/ashketchumoverworld.png" xlink:href="assets/images/map/ashketchumoverworld.png"
+    x="608"
+    y="48"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Ash Ketchum Pinkan&#39;] &amp;&amp; TemporaryBattleList[&#39;Ash Ketchum Pinkan&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Ash Ketchum"
+    x="608"
+    y="48"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Ash Ketchum Pinkan&#39;] &amp;&amp; TemporaryBattleList[&#39;Ash Ketchum Pinkan&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Ash Ketchum Pinkan&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="616"
+    y="56"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Ash Ketchum Pinkan&#39;] &amp;&amp; TemporaryBattleList[&#39;Ash Ketchum Pinkan&#39;].isVisible()
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+    </g>
+
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/johto.png?v=0.9.12',
-        href:'assets/images/johto.png?v=0.9.12'
+        'xlink:href':'assets/images/johto.png?v=0.9.14',
+        href:'assets/images/johto.png?v=0.9.14'
     }"></image>
 
     <!-- ------ -->
@@ -6145,8 +7649,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hoenn.png?v=0.9.12',
-        href:'assets/images/hoenn.png?v=0.9.12'
+        'xlink:href':'assets/images/hoenn.png?v=0.9.14',
+        href:'assets/images/hoenn.png?v=0.9.14'
     }"></image>
 
     <!-- ------ -->
@@ -8750,8 +10254,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/sinnoh.png?v=0.9.12',
-        href:'assets/images/sinnoh.png?v=0.9.12'
+        'xlink:href':'assets/images/sinnoh.png?v=0.9.14',
+        href:'assets/images/sinnoh.png?v=0.9.14'
     }"></image>
 
     <!-- ------ -->
@@ -11423,8 +12927,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/unova.png?v=0.9.12',
-        href:'assets/images/unova.png?v=0.9.12'
+        'xlink:href':'assets/images/unova.png?v=0.9.14',
+        href:'assets/images/unova.png?v=0.9.14'
     }"></image>
 
     <!-- ------ -->
@@ -12629,6 +14133,32 @@
 
 
 
+    <!--A Perfectly Ordinary Frigate-->
+    
+
+<image href="assets/images/map/plasmafrigate_ship.png" xlink:href="assets/images/map/plasmafrigate_ship.png"
+    x="624"
+    y="832"
+    height="144"
+    width="64"
+    data-bind="visible: (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &gt;= 1 || App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 2) &amp;&amp; (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 2&#39;)]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 3&#39;)]() == 0 || (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &lt;= 4 &amp;&amp; App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 1))"/>
+<rect class="city"
+    data-town="A Perfectly Ordinary Frigate"
+    x="624"
+    y="832"
+    height="144"
+    width="64"
+    data-bind="visible: (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &gt;= 1 || App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 2) &amp;&amp; (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 2&#39;)]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 3&#39;)]() == 0 || (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &lt;= 4 &amp;&amp; App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 1)), click:function(){MapHelper.moveToTown(&#39;A Perfectly Ordinary Frigate&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;A Perfectly Ordinary Frigate&#39;) }">
+</rect>
+<image width="48" height="48"
+    x="632"
+    y="880"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('A Perfectly Ordinary Frigate') && (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &gt;= 1 || App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 2) &amp;&amp; (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 2&#39;)]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 3&#39;)]() == 0 || (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &lt;= 4 &amp;&amp; App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 1))
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
     <!--Nimbasa City-->
     
 
@@ -12709,6 +14239,32 @@
         ">
 </rect>
 
+
+
+    <!--A Totally Unsuspicious Frigate-->
+    
+
+<image href="assets/images/map/plasmafrigate_ship.png" xlink:href="assets/images/map/plasmafrigate_ship.png"
+    x="576"
+    y="560"
+    height="144"
+    width="64"
+    data-bind="visible: App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 2&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 3&#39;)]() &gt;= 1 &amp;&amp; (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &gt;= 5 || App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 2) &amp;&amp; (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 4&#39;)]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 5&#39;)]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunts 1&#39;)]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunts 2&#39;)]() == 0 || (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &lt;= 7 &amp;&amp; App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 1))"/>
+<rect class="city"
+    data-town="A Totally Unsuspicious Frigate"
+    x="576"
+    y="560"
+    height="144"
+    width="64"
+    data-bind="visible: App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 2&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 3&#39;)]() &gt;= 1 &amp;&amp; (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &gt;= 5 || App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 2) &amp;&amp; (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 4&#39;)]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 5&#39;)]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunts 1&#39;)]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunts 2&#39;)]() == 0 || (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &lt;= 7 &amp;&amp; App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 1)), click:function(){MapHelper.moveToTown(&#39;A Totally Unsuspicious Frigate&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;A Totally Unsuspicious Frigate&#39;) }">
+</rect>
+<image width="48" height="48"
+    x="584"
+    y="608"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('A Totally Unsuspicious Frigate') && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 2&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 3&#39;)]() &gt;= 1 &amp;&amp; (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &gt;= 5 || App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 2) &amp;&amp; (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 4&#39;)]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunt 5&#39;)]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunts 1&#39;)]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Team Plasma Grunts 2&#39;)]() == 0 || (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &lt;= 7 &amp;&amp; App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 1))
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
 
 
     <!--Mistralton City-->
@@ -12832,6 +14388,32 @@
         ">
 </rect>
 
+
+
+    <!--Team Plasma Assault-->
+    
+
+<image href="assets/images/map/plasmafrigate_airship.png" xlink:href="assets/images/map/plasmafrigate_airship.png"
+    x="752"
+    y="80"
+    height="104"
+    width="144"
+    data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Opelucid City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Zinzolin 1&#39;)]() &gt;= 1 &amp;&amp; (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &gt;= 12 || App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 2) &amp;&amp; (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Plasma Shadow 1&#39;)]() == 0 || (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &lt;= 14 &amp;&amp; App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 1))"/>
+<rect class="city"
+    data-town="Team Plasma Assault"
+    x="752"
+    y="80"
+    height="104"
+    width="144"
+    data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Opelucid City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Zinzolin 1&#39;)]() &gt;= 1 &amp;&amp; (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &gt;= 12 || App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 2) &amp;&amp; (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Plasma Shadow 1&#39;)]() == 0 || (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &lt;= 14 &amp;&amp; App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 1)), click:function(){MapHelper.moveToTown(&#39;Team Plasma Assault&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Team Plasma Assault&#39;) }">
+</rect>
+<image width="48" height="48"
+    x="800"
+    y="108"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('Team Plasma Assault') && App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Opelucid City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Zinzolin 1&#39;)]() &gt;= 1 &amp;&amp; (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &gt;= 12 || App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 2) &amp;&amp; (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Plasma Shadow 1&#39;)]() == 0 || (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &lt;= 14 &amp;&amp; App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 1))
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
 
 
     <!--Shopping Mall Nine-->
@@ -13163,101 +14745,76 @@
     <!-- DUNGEONS -->
     <!-- -------- -->
 
-    <!--P2 Laboratory-->
+    <!--Pledge Grove-->
     
 
 
     <rect class="city"
-        data-town="P2 Laboratory"
-        x="1248"
+        data-town="Pledge Grove"
+        x="176"
+        y="624"
+        height="48"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Pledge Grove')},
+            attr: { class: MapHelper.calculateTownCssClass('Pledge Grove') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="184"
+        y="624"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Pledge Grove')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+    <!--Floccesy Ranch-->
+    
+
+
+    <rect class="city"
+        data-town="Floccesy Ranch"
+        x="272"
+        y="640"
+        height="48"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Floccesy Ranch')},
+            attr: { class: MapHelper.calculateTownCssClass('Floccesy Ranch') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="280"
+        y="640"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Floccesy Ranch')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+    <!--Liberty Garden-->
+    
+
+
+    <rect class="city"
+        data-town="Liberty Garden"
+        x="448"
         y="832"
         height="48"
         width="64"
-        data-bind="click:function(){MapHelper.moveToTown('P2 Laboratory')},
-            attr: { class: MapHelper.calculateTownCssClass('P2 Laboratory') }">
+        data-bind="click:function(){MapHelper.moveToTown('Liberty Garden')},
+            attr: { class: MapHelper.calculateTownCssClass('Liberty Garden') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="1256"
+        x="456"
         y="832"
         class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('P2 Laboratory')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-    <!--Seaside Cave-->
-    
-
-
-    <rect class="city"
-        data-town="Seaside Cave"
-        x="1456"
-        y="256"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Seaside Cave')},
-            attr: { class: MapHelper.calculateTownCssClass('Seaside Cave') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="1464"
-        y="256"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Seaside Cave')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-    <!--Dreamyard-->
-    
-
-
-    <rect class="city"
-        data-town="Dreamyard"
-        x="1440"
-        y="640"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Dreamyard')},
-            attr: { class: MapHelper.calculateTownCssClass('Dreamyard') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="1448"
-        y="640"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Dreamyard')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-    <!--Pinwheel Forest-->
-    
-
-
-    <rect class="city"
-        data-town="Pinwheel Forest"
-        x="1152"
-        y="640"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Pinwheel Forest')},
-            attr: { class: MapHelper.calculateTownCssClass('Pinwheel Forest') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="1160"
-        y="640"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Pinwheel Forest')
+        data-bind="visible: MapHelper.isTownCurrentLocation('Liberty Garden')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
 
@@ -13283,31 +14840,6 @@
         y="872"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Castelia Sewers')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-    <!--Relic Castle-->
-    
-
-
-    <rect class="city"
-        data-town="Relic Castle"
-        x="688"
-        y="576"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Relic Castle')},
-            attr: { class: MapHelper.calculateTownCssClass('Relic Castle') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="696"
-        y="576"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Relic Castle')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
 
@@ -13362,26 +14894,51 @@
 
 
 
-    <!--Mistralton Cave-->
+    <!--Relic Castle-->
     
 
 
     <rect class="city"
-        data-town="Mistralton Cave"
-        x="368"
-        y="416"
+        data-town="Relic Castle"
+        x="688"
+        y="576"
         height="48"
         width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Mistralton Cave')},
-            attr: { class: MapHelper.calculateTownCssClass('Mistralton Cave') }">
+        data-bind="click:function(){MapHelper.moveToTown('Relic Castle')},
+            attr: { class: MapHelper.calculateTownCssClass('Relic Castle') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="376"
-        y="416"
+        x="696"
+        y="576"
         class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Mistralton Cave')
+        data-bind="visible: MapHelper.isTownCurrentLocation('Relic Castle')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+    <!--Lostlorn Forest-->
+    
+
+
+    <rect class="city"
+        data-town="Lostlorn Forest"
+        x="944"
+        y="464"
+        height="48"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Lostlorn Forest')},
+            attr: { class: MapHelper.calculateTownCssClass('Lostlorn Forest') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="952"
+        y="464"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Lostlorn Forest')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
 
@@ -13412,6 +14969,31 @@
 
 
 
+    <!--Mistralton Cave-->
+    
+
+
+    <rect class="city"
+        data-town="Mistralton Cave"
+        x="368"
+        y="416"
+        height="48"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Mistralton Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Mistralton Cave') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="376"
+        y="416"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Mistralton Cave')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
     <!--Celestial Tower-->
     
 
@@ -13432,6 +15014,249 @@
         y="208"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Celestial Tower')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+    <!--Reversal Mountain-->
+    
+
+
+    <rect class="city"
+        data-town="Reversal Mountain"
+        x="1184"
+        y="320"
+        height="80"
+        width="80"
+        data-bind="click:function(){MapHelper.moveToTown('Reversal Mountain')},
+            attr: { class: MapHelper.calculateTownCssClass('Reversal Mountain') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="1200"
+        y="336"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Reversal Mountain')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+    <!--Reversal Mountain extension-->
+    
+
+
+    <rect class="city"
+        data-town="Reversal Mountain"
+        x="1136"
+        y="336"
+        height="48"
+        width="48"
+        data-bind="click:function(){MapHelper.moveToTown('Reversal Mountain')},
+            attr: { class: MapHelper.calculateTownCssClass('Reversal Mountain') }">
+    </rect>
+
+
+
+
+    <!--Seaside Cave-->
+    
+
+
+    <rect class="city"
+        data-town="Seaside Cave"
+        x="1456"
+        y="256"
+        height="48"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Seaside Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Seaside Cave') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="1464"
+        y="256"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Seaside Cave')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+    <!--Plasma Frigate-->
+    
+
+<image href="assets/images/map/plasmafrigate_ship.png" xlink:href="assets/images/map/plasmafrigate_ship.png"
+    x="1520"
+    y="256"
+    height="144"
+    width="64"
+    data-bind="visible: App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Plasma Shadow 1&#39;)]() &gt;= 1 &amp;&amp; (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Plasma Frigate&#39;)]() == 0 || (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &lt;= 15 &amp;&amp; App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 1)) &amp;&amp; (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &gt;= 15 || App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 2)"/>
+<rect class="city"
+    data-town="Plasma Frigate"
+    x="1520"
+    y="256"
+    height="144"
+    width="64"
+    data-bind="visible: App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Plasma Shadow 1&#39;)]() &gt;= 1 &amp;&amp; (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Plasma Frigate&#39;)]() == 0 || (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &lt;= 15 &amp;&amp; App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 1)) &amp;&amp; (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &gt;= 15 || App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 2), click:function(){MapHelper.moveToTown(&#39;Plasma Frigate&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Plasma Frigate&#39;) }">
+</rect>
+<image width="48" height="48"
+    x="1528"
+    y="304"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('Plasma Frigate') && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Plasma Shadow 1&#39;)]() &gt;= 1 &amp;&amp; (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Plasma Frigate&#39;)]() == 0 || (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &lt;= 15 &amp;&amp; App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 1)) &amp;&amp; (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &gt;= 15 || App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 2)
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
+    <!--Plasma Frigate extension-->
+    
+
+<image href="assets/images/map/plasmafrigate_ship.png" xlink:href="assets/images/map/plasmafrigate_ship.png"
+    x="1520"
+    y="256"
+    height="144"
+    width="64"
+    data-bind="visible: App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Ghetsis 2&#39;)]() &gt;= 1"/>
+<rect class="city"
+    data-town="Plasma Frigate"
+    x="1520"
+    y="256"
+    height="144"
+    width="64"
+    data-bind="visible: App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Ghetsis 2&#39;)]() &gt;= 1, click:function(){MapHelper.moveToTown(&#39;Plasma Frigate&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Plasma Frigate&#39;) }">
+</rect>
+<image width="48" height="48"
+    x="1528"
+    y="304"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('Plasma Frigate') && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Ghetsis 2&#39;)]() &gt;= 1
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
+    <!--Giant Chasm-->
+    
+
+
+    <rect class="city"
+        data-town="Giant Chasm"
+        x="1264"
+        y="112"
+        height="48"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Giant Chasm')},
+            attr: { class: MapHelper.calculateTownCssClass('Giant Chasm') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="1272"
+        y="112"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Giant Chasm')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+    <!--Giant Chasm extension-->
+    
+
+<image href="assets/images/map/plasmafrigate_airship.png" xlink:href="assets/images/map/plasmafrigate_airship.png"
+    x="1232"
+    y="8"
+    height="104"
+    width="144"
+    data-bind="visible: App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Plasma Shadow 1&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Plasma Frigate&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Ghetsis 2&#39;)]() == 0 &amp;&amp; (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &gt;= 16 || App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 2)"/>
+<rect class="city"
+    data-town="Giant Chasm"
+    x="1232"
+    y="8"
+    height="104"
+    width="144"
+    data-bind="visible: App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Plasma Shadow 1&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Plasma Frigate&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Ghetsis 2&#39;)]() == 0 &amp;&amp; (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &gt;= 16 || App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 2), click:function(){MapHelper.moveToTown(&#39;Giant Chasm&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Giant Chasm&#39;) }">
+</rect>
+<image width="48" height="48"
+    x="1280"
+    y="36"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Plasma Shadow 1&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Plasma Frigate&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(&#39;Ghetsis 2&#39;)]() == 0 &amp;&amp; (App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).curQuest() &gt;= 16 || App.game.quests.getQuestLine(&#39;Quest for the DNA Splicers&#39;).state() == 2)
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
+    <!--Cave of Being-->
+    
+
+
+    <rect class="city"
+        data-town="Cave of Being"
+        x="272"
+        y="736"
+        height="48"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Cave of Being')},
+            attr: { class: MapHelper.calculateTownCssClass('Cave of Being') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="280"
+        y="736"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Cave of Being')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+    <!--Abundant Shrine-->
+    
+
+
+    <rect class="city"
+        data-town="Abundant Shrine"
+        x="1120"
+        y="400"
+        height="48"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Abundant Shrine')},
+            attr: { class: MapHelper.calculateTownCssClass('Abundant Shrine') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="1128"
+        y="400"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Abundant Shrine')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+    <!--Victory Road Unova-->
+    
+
+
+    <rect class="city"
+        data-town="Victory Road Unova"
+        x="1056"
+        y="32"
+        height="48"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Victory Road Unova')},
+            attr: { class: MapHelper.calculateTownCssClass('Victory Road Unova') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="1064"
+        y="32"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Victory Road Unova')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
 
@@ -13512,242 +15337,76 @@
 
 
 
-    <!--Reversal Mountain-->
+    <!--Pinwheel Forest-->
     
 
 
     <rect class="city"
-        data-town="Reversal Mountain"
-        x="1184"
-        y="320"
-        height="80"
-        width="80"
-        data-bind="click:function(){MapHelper.moveToTown('Reversal Mountain')},
-            attr: { class: MapHelper.calculateTownCssClass('Reversal Mountain') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="1200"
-        y="336"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Reversal Mountain')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-    <!--Reversal Mountain extension-->
-    
-
-
-    <rect class="city"
-        data-town="Reversal Mountain"
-        x="1136"
-        y="336"
-        height="48"
-        width="48"
-        data-bind="click:function(){MapHelper.moveToTown('Reversal Mountain')},
-            attr: { class: MapHelper.calculateTownCssClass('Reversal Mountain') }">
-    </rect>
-
-
-
-
-    <!--Abundant Shrine-->
-    
-
-
-    <rect class="city"
-        data-town="Abundant Shrine"
-        x="1120"
-        y="400"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Abundant Shrine')},
-            attr: { class: MapHelper.calculateTownCssClass('Abundant Shrine') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="1128"
-        y="400"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Abundant Shrine')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-    <!--Lostlorn Forest-->
-    
-
-
-    <rect class="city"
-        data-town="Lostlorn Forest"
-        x="944"
-        y="464"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Lostlorn Forest')},
-            attr: { class: MapHelper.calculateTownCssClass('Lostlorn Forest') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="952"
-        y="464"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Lostlorn Forest')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-    <!--Floccesy Ranch-->
-    
-
-
-    <rect class="city"
-        data-town="Floccesy Ranch"
-        x="272"
+        data-town="Pinwheel Forest"
+        x="1152"
         y="640"
         height="48"
         width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Floccesy Ranch')},
-            attr: { class: MapHelper.calculateTownCssClass('Floccesy Ranch') }">
+        data-bind="click:function(){MapHelper.moveToTown('Pinwheel Forest')},
+            attr: { class: MapHelper.calculateTownCssClass('Pinwheel Forest') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="280"
+        x="1160"
         y="640"
         class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Floccesy Ranch')
+        data-bind="visible: MapHelper.isTownCurrentLocation('Pinwheel Forest')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
 
 
 
-    <!--Cave of Being-->
+    <!--Dreamyard-->
     
 
 
     <rect class="city"
-        data-town="Cave of Being"
-        x="272"
-        y="736"
+        data-town="Dreamyard"
+        x="1440"
+        y="640"
         height="48"
         width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Cave of Being')},
-            attr: { class: MapHelper.calculateTownCssClass('Cave of Being') }">
+        data-bind="click:function(){MapHelper.moveToTown('Dreamyard')},
+            attr: { class: MapHelper.calculateTownCssClass('Dreamyard') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="280"
-        y="736"
+        x="1448"
+        y="640"
         class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Cave of Being')
+        data-bind="visible: MapHelper.isTownCurrentLocation('Dreamyard')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
 
 
 
-    <!--Liberty Garden-->
+    <!--P2 Laboratory-->
     
 
 
     <rect class="city"
-        data-town="Liberty Garden"
-        x="448"
+        data-town="P2 Laboratory"
+        x="1248"
         y="832"
         height="48"
         width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Liberty Garden')},
-            attr: { class: MapHelper.calculateTownCssClass('Liberty Garden') }">
+        data-bind="click:function(){MapHelper.moveToTown('P2 Laboratory')},
+            attr: { class: MapHelper.calculateTownCssClass('P2 Laboratory') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="456"
+        x="1256"
         y="832"
         class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Liberty Garden')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-    <!--Giant Chasm-->
-    
-
-
-    <rect class="city"
-        data-town="Giant Chasm"
-        x="1264"
-        y="112"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Giant Chasm')},
-            attr: { class: MapHelper.calculateTownCssClass('Giant Chasm') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="1272"
-        y="112"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Giant Chasm')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-    <!--Victory Road Unova-->
-    
-
-
-    <rect class="city"
-        data-town="Victory Road Unova"
-        x="1056"
-        y="32"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Victory Road Unova')},
-            attr: { class: MapHelper.calculateTownCssClass('Victory Road Unova') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="1064"
-        y="32"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Victory Road Unova')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-    <!--Pledge Grove-->
-    
-
-
-    <rect class="city"
-        data-town="Pledge Grove"
-        x="176"
-        y="624"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Pledge Grove')},
-            attr: { class: MapHelper.calculateTownCssClass('Pledge Grove') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="184"
-        y="624"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Pledge Grove')
+        data-bind="visible: MapHelper.isTownCurrentLocation('P2 Laboratory')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
 
@@ -13879,193 +15538,7 @@
 </image>
 
 
-    <!--Plasma Frigate 1, Castelia City-->
     
-
-<image href="assets/images/map/plasmafrigate_ship.png" xlink:href="assets/images/map/plasmafrigate_ship.png"
-    x="624"
-    y="832"
-    height="144"
-    width="64"
-    data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Virbank City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Driftveil City&#39;)]() == 0"/>
-<rect class="city"
-    data-town="A very normal frigate"
-    x="624"
-    y="832"
-    height="144"
-    width="64"
-    data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Virbank City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Driftveil City&#39;)]() == 0, click: () =&gt; {
-                Notifier.notify({message: &#39;Nothing out of the ordinary.&#39;});
-                }">
-</rect>
-<image width="48" height="48"
-    x="632"
-    y="880"
-    class="iconLocation"
-    data-bind="visible: MapHelper.isTownCurrentLocation('') && App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Virbank City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Driftveil City&#39;)]() == 0
-    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-</image>
-
-
-    <!--Plasma Frigate 2, Driftveil City-->
-    
-
-<image href="assets/images/map/plasmafrigate_ship.png" xlink:href="assets/images/map/plasmafrigate_ship.png"
-    x="576"
-    y="560"
-    height="144"
-    width="64"
-    data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Driftveil City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Opelucid City&#39;)]() == 0"/>
-<rect class="city"
-    data-town="A totally unsuspicious frigate"
-    x="576"
-    y="560"
-    height="144"
-    width="64"
-    data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Driftveil City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Opelucid City&#39;)]() == 0, click: () =&gt; {
-                Notifier.notify({message: &#39;Nope, nothing suspicious here.&#39;});
-                }">
-</rect>
-<image width="48" height="48"
-    x="584"
-    y="608"
-    class="iconLocation"
-    data-bind="visible: MapHelper.isTownCurrentLocation('') && App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Driftveil City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Opelucid City&#39;)]() == 0
-    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-</image>
-
-
-    <!--Plasma Frigate 3, Team Plasma Assault dungeon 1-->
-    
-
-<image href="assets/images/map/plasmafrigate_airship.png" xlink:href="assets/images/map/plasmafrigate_airship.png"
-    x="752"
-    y="80"
-    height="104"
-    width="144"
-    data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Opelucid City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Team Plasma Assault&#39;)]() == 0"/>
-<rect class="city"
-    data-town="Team Plasma Assault"
-    x="752"
-    y="80"
-    height="104"
-    width="144"
-    data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Opelucid City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Team Plasma Assault&#39;)]() == 0, click:function(){MapHelper.moveToTown(&#39;Team Plasma Assault&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Team Plasma Assault&#39;) }">
-</rect>
-<image width="48" height="48"
-    x="800"
-    y="108"
-    class="iconLocation"
-    data-bind="visible: MapHelper.isTownCurrentLocation('Team Plasma Assault') && App.game.statistics.gymsDefeated[GameConstants.getGymIndex(&#39;Opelucid City&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Team Plasma Assault&#39;)]() == 0
-    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-</image>
-
-
-    <!--Plasma Frigate 4, Team Plasma Assault dungeon 2-->
-    
-
-<image href="assets/images/map/plasmafrigate_airship.png" xlink:href="assets/images/map/plasmafrigate_airship.png"
-    x="752"
-    y="80"
-    height="104"
-    width="144"
-    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Giant Chasm&#39;)]() &gt;= 1"/>
-<rect class="city"
-    data-town="Team Plasma Assault"
-    x="752"
-    y="80"
-    height="104"
-    width="144"
-    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Giant Chasm&#39;)]() &gt;= 1, click:function(){MapHelper.moveToTown(&#39;Team Plasma Assault&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Team Plasma Assault&#39;) }">
-</rect>
-<image width="48" height="48"
-    x="800"
-    y="108"
-    class="iconLocation"
-    data-bind="visible: MapHelper.isTownCurrentLocation('Team Plasma Assault') && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Giant Chasm&#39;)]() &gt;= 1
-    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-</image>
-
-
-    <!--Plasma Frigate 5, Plasma Frigate dungeon 1-->
-    
-
-<image href="assets/images/map/plasmafrigate_ship.png" xlink:href="assets/images/map/plasmafrigate_ship.png"
-    x="1520"
-    y="256"
-    height="144"
-    width="64"
-    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Team Plasma Assault&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Plasma Frigate&#39;)]() == 0"/>
-<rect class="city"
-    data-town="Plasma Frigate"
-    x="1520"
-    y="256"
-    height="144"
-    width="64"
-    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Team Plasma Assault&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Plasma Frigate&#39;)]() == 0, click:function(){MapHelper.moveToTown(&#39;Plasma Frigate&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Plasma Frigate&#39;) }">
-</rect>
-<image width="48" height="48"
-    x="1528"
-    y="304"
-    class="iconLocation"
-    data-bind="visible: MapHelper.isTownCurrentLocation('Plasma Frigate') && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Team Plasma Assault&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Plasma Frigate&#39;)]() == 0
-    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-</image>
-
-
-    <!--Plasma Frigate 6, Plasma Frigate dungeon 2-->
-    
-
-<image href="assets/images/map/plasmafrigate_ship.png" xlink:href="assets/images/map/plasmafrigate_ship.png"
-    x="1520"
-    y="256"
-    height="144"
-    width="64"
-    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Giant Chasm&#39;)]() &gt;= 1"/>
-<rect class="city"
-    data-town="Plasma Frigate"
-    x="1520"
-    y="256"
-    height="144"
-    width="64"
-    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Giant Chasm&#39;)]() &gt;= 1, click:function(){MapHelper.moveToTown(&#39;Plasma Frigate&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Plasma Frigate&#39;) }">
-</rect>
-<image width="48" height="48"
-    x="1528"
-    y="304"
-    class="iconLocation"
-    data-bind="visible: MapHelper.isTownCurrentLocation('Plasma Frigate') && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Giant Chasm&#39;)]() &gt;= 1
-    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-</image>
-
-
-    <!--Plasma Frigate 7, Giant Chasm-->
-    
-
-<image href="assets/images/map/plasmafrigate_airship.png" xlink:href="assets/images/map/plasmafrigate_airship.png"
-    x="1232"
-    y="8"
-    height="104"
-    width="144"
-    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Plasma Frigate&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Giant Chasm&#39;)]() == 0"/>
-<rect class="city"
-    data-town="Giant Chasm"
-    x="1232"
-    y="8"
-    height="104"
-    width="144"
-    data-bind="visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Plasma Frigate&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Giant Chasm&#39;)]() == 0, click:function(){MapHelper.moveToTown(&#39;Giant Chasm&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Giant Chasm&#39;) }">
-</rect>
-<image width="48" height="48"
-    x="1280"
-    y="36"
-    class="iconLocation"
-    data-bind="visible: MapHelper.isTownCurrentLocation('Giant Chasm') && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Plasma Frigate&#39;)]() &gt;= 1 &amp;&amp; App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(&#39;Giant Chasm&#39;)]() == 0
-    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-</image>
-
-
-     
 
 <image href="assets/images/map/ashketchumoverworld.png" xlink:href="assets/images/map/ashketchumoverworld.png"
     x="128"
@@ -14094,8 +15567,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/kalos.png?v=0.9.12',
-        href:'assets/images/kalos.png?v=0.9.12'
+        'xlink:href':'assets/images/kalos.png?v=0.9.14',
+        href:'assets/images/kalos.png?v=0.9.14'
     }"></image>
 
     <!-- ------ -->
@@ -16169,8 +17642,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-melemele.png?v=0.9.12',
-            href:'assets/images/alola-melemele.png?v=0.9.12'
+            'xlink:href':'assets/images/alola-melemele.png?v=0.9.14',
+            href:'assets/images/alola-melemele.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -19390,8 +20863,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-akala.png?v=0.9.12',
-            href:'assets/images/alola-akala.png?v=0.9.12'
+            'xlink:href':'assets/images/alola-akala.png?v=0.9.14',
+            href:'assets/images/alola-akala.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -21430,8 +22903,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula & Poni Islands').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola2.png?v=0.9.12',
-            href:'assets/images/alola2.png?v=0.9.12'
+            'xlink:href':'assets/images/alola2.png?v=0.9.14',
+            href:'assets/images/alola2.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -23008,8 +24481,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'South Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-south.png?v=0.9.12',
-            href:'assets/images/galar-south.png?v=0.9.12'
+            'xlink:href':'assets/images/galar-south.png?v=0.9.14',
+            href:'assets/images/galar-south.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -24976,8 +26449,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-north.png?v=0.9.12',
-            href:'assets/images/galar-north.png?v=0.9.12'
+            'xlink:href':'assets/images/galar-north.png?v=0.9.14',
+            href:'assets/images/galar-north.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -25976,8 +27449,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.9.12',
-            href:'assets/images/galar-isle-of-armor.png?v=0.9.12'
+            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.9.14',
+            href:'assets/images/galar-isle-of-armor.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -28356,8 +29829,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.9.12',
-            href:'assets/images/galar-crown-tundra.png?v=0.9.12'
+            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.9.14',
+            href:'assets/images/galar-crown-tundra.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -30101,8 +31574,8 @@
                 <button class='btn btn-primary' onclick='App.game.breeding.buyEggSlot()'
                         data-bind='css: {disabled: App.game.wallet.currencies[GameConstants.Currency.questPoint]() <= App.game.breeding.nextEggSlotCost().amount}'>Unlock</button>
             </div>
-            <div data-bind="visible: $index() > App.game.breeding.eggSlots" style="margin-top: 20px;">
-                <img src="assets/images/breeding/lock.svg">
+            <div data-bind="visible: $index() > App.game.breeding.eggSlots">
+                <img class="lockedSlotImage" src="assets/images/breeding/lock.svg">
             </div>
             <div data-bind="if: App.game.breeding.hatcheryHelpers.hired()[$index()]">
               <div data-bind="with: App.game.breeding.hatcheryHelpers.hired()[$index()]">
@@ -30406,7 +31879,7 @@ aria-labelledby="temporaryBattleWonModalLabel" aria-hidden="true">
            </div>
         </div>
         <div class="modal-body">
-           <p data-bind="text: TemporaryBattleRunner.battleObservable()?.defeatMessage"></p>
+           <p data-bind="html: TemporaryBattleRunner.battleObservable()?.defeatMessage"></p>
 
         </div>
         <div class="modal-footer">
@@ -30831,6 +32304,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmLeaveDungeon')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmBeformeMulchingAllPlots')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGymGoAnimation')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableRightClickMenu')}"></tr>
                                 <tr><th colspan="2">Map Colors</th></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--incomplete')}"></tr>
@@ -31469,7 +32943,7 @@ aria-labelledby="startSequenceModalLabel" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
                 <div style="width: 100%;">
-                    <img src="assets/images/oak.png">
+                    <img src="assets/images/npcs/Professor Oak.png">
                     <h5 class="modal-title" id="startSequenceModalLabel">Professor Oak</h5>
                 </div>
             </div>
@@ -31500,7 +32974,7 @@ aria-labelledby="pickStarterTutorialModalLabel" aria-hidden="true">
    <div class="modal-content">
        <div class="modal-header">
            <div style="width: 100%;">
-               <img src="assets/images/oak.png">
+               <img src="assets/images/npcs/Professor Oak.png">
                <h5 class="modal-title" id="pickStarterTutorialModalLabel">Professor Oak</h5>
            </div>
        </div>
@@ -31543,7 +33017,7 @@ data-backdrop="static" data-keyboard="false">
    <div class="modal-content">
        <div class="modal-header">
            <div style="width: 100%;">
-               <img src="assets/images/oak.png">
+               <img src="assets/images/npcs/Professor Oak.png">
                <h5 class="modal-title" id="pickStarterModalLabel">Professor Oak</h5>
            </div>
        </div>
@@ -31575,7 +33049,7 @@ aria-labelledby="starterCaughtModalLabel" aria-hidden="true">
    <div class="modal-content">
        <div class="modal-header">
            <div style="width: 100%;">
-               <img src="assets/images/oak.png">
+               <img src="assets/images/npcs/Professor Oak.png">
                <h5 class="modal-title" id="starterCaughtModalLabel">Professor Oak</h5>
            </div>
        </div>
@@ -31631,7 +33105,7 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
    <div class="modal-content">
        <div class="modal-header">
            <div style="width: 100%;">
-               <img src="assets/images/oak.png">
+               <img src="assets/images/npcs/Professor Oak.png">
                <h5 class="modal-title" id="hallOfFameModalLabel">Professor Oak</h5>
            </div>
        </div>
@@ -32893,7 +34367,7 @@ aria-labelledby="badgeCaseModalLabel">
                                 css: { 'badge-not-acquired': !App.game.badgeCase.hasBadge(BadgeEnums[$data])}">
 
                             <p style="bottom: 0;"
-                                data-bind="text: $data">name</p>
+                                data-bind="text: $data.replace(/_/g, ' ')">name</p>
                         </div>
                     </div>
                 </div>
@@ -33468,16 +34942,27 @@ aria-labelledby="badgeCaseModalLabel">
                             click: () => App.game.farming.farmHands.hired().forEach((f) => f.fire()),
                             visible: FarmController.farmingModalTabSelected() == 'farmHandsView'
                         ">Fire All</button>
-                <div class="safeLockButton">
+                <div class="safeLockButton" data-bind="visible: FarmController.farmingModalTabSelected() == 'berryFarmView'">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-primary" data-bind="
+                            click: function() {FarmController.selectedPlotSafeLock() ? FarmController.selectedPlotSafeLock(false) : FarmController.selectedPlotSafeLock(true);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);},
+                            css: { 'active': FarmController.selectedPlotSafeLock() },
+                            tooltip: {title: 'Toggle locking a plot from interaction.',  trigger: 'hover', animation: false}
+                        ">
+                            <img src="assets/images/farm/plotSafeLock.svg" height="22">
+                        </button>
 
-                    <button type="button" class="btn btn-primary" data-bind="click: function() {FarmController.selectedPlotSafeLock() ? FarmController.selectedPlotSafeLock(false) : FarmController.selectedPlotSafeLock(true);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);},
-                        css: { 'active': FarmController.selectedPlotSafeLock() },
-                        tooltip: {title: 'Toggle locking a plot from interaction.',  trigger: 'hover', animation: false},
-                        visible: FarmController.farmingModalTabSelected() == 'berryFarmView'
-                    ">
-                        <img src="assets/images/farm/plotSafeLock.svg" height="22">
-                    </button>
+                        <button type="button" class="btn btn-primary" data-bind="
+                            click: () => FarmController.toggleAllPlotsLocked(true),
+                            tooltip: { title: 'Lock all plots.', trigger: 'hover', animation: false }
+                        ">All</button>
+                        <button type="button" class="btn btn-primary" data-bind="
+                            click: () => FarmController.toggleAllPlotsLocked(false),
+                            tooltip: { title: 'Unlock all plots.', trigger: 'hover', animation: false }
+                        ">None</button>
+                    </div>
                 </div>
+
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -34133,7 +35618,7 @@ aria-labelledby="badgeCaseModalLabel">
   <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-body text-center">
-        <u><h5 class="npc-name">NPC Name</h5></u><br/>
+        <u><h5 class="npc-name">NPC Name</h5></u>
         <img class="npc-image" src=""/>
         <div class="npc-dialog"></div>
         <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
@@ -34141,6 +35626,7 @@ aria-labelledby="badgeCaseModalLabel">
     </div>
   </div>
 </div>
+
 
 <!-- Pokeball Selector Modal -->
 <div class="modal fade" id="pokeballSelectorModal" tabindex="-1" role="dialog"
