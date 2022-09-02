@@ -520,7 +520,7 @@ const TanobyProfIvy = new NPC ('Prof. Ivy', [
     'Hello again! I see you too found your way to these ancient ruins!',
     'A peculiar Pokémon known as Unown lives here. There are 28 different forms of Unown, but only one shows up at a time, but the form that appears changes every time the clock strikes midnight.',
     'There are 2 other ruins like this, one in Johto, and one in Sinnoh. I have heard that in each ruins, there are forms that only appear there. For example, the forms that resemble a question mark and an exclamation point have only been seen here.',
-    'Speaking of peculiar Pokémon, I found this unusual variant of Exeggutor on an island in this area. Hmm. If you want, you could buy it from me. I am needing some research funds.',
+    'Speaking of peculiar Pokémon, I found this unusual variant of Dodrio on an island in this area. Hmm. If you want, you could buy it from me. I am needing some research funds.',
 ], {image: 'assets/images/npcs/Professor Ivy.png'});
 const PinkanOfficerJenny1 = new NPC ('Officer Jenny', [
     'Have you seen the Pinkan berries? That is what makes all the Pokémon on this island turn pink.',
