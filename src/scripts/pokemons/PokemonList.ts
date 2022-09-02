@@ -1204,6 +1204,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
+        'evolutions': [new LevelEvolution('Detective Pikachu', 'Detective Raichu', 1234)],
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -1255,7 +1256,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
         'exp': 218,
-        'eggCycles': 15,
+        'eggCycles': 10,
         'base': {
             'hitpoints': 60,
             'attack': 90,
@@ -12944,7 +12945,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Darumaka', 'Darmanitan', 35)],
+        'evolutions': [
+            new LevelEvolution('Darumaka', 'Darmanitan', 35),
+            new LevelEvolution('Darumaka', 'Darmanitan (Zen)', 1234),
+        ],
         'base': {
             'hitpoints': 70,
             'attack': 90,
@@ -12963,7 +12967,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Galarian Darumaka', 'Galarian Darmanitan', GameConstants.StoneType.Ice_stone)],
+        'evolutions': [
+            new StoneEvolution('Galarian Darumaka', 'Galarian Darmanitan', GameConstants.StoneType.Ice_stone),
+            new LevelEvolution('Galarian Darumaka', 'Galarian Darmanitan (Zen)', 1234),
+        ],
         'base': {
             'hitpoints': 70,
             'attack': 90,
@@ -12994,7 +13001,7 @@ const pokemonList = createPokemonArray(
         'id': 555.1,
         'name': 'Darmanitan (Zen)',
         'type': [PokemonType.Fire, PokemonType.Psychic],
-        'eggCycles': 30,
+        'eggCycles': 20,
         'levelType': LevelType.mediumslow,
         'exp': 189,
         'catchRate': 60,
@@ -13030,7 +13037,7 @@ const pokemonList = createPokemonArray(
         'name': 'Galarian Darmanitan (Zen)',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Fire, PokemonType.Ice],
-        'eggCycles': 30,
+        'eggCycles': 20,
         'levelType': LevelType.mediumslow,
         'exp': 189,
         'catchRate': 60,
