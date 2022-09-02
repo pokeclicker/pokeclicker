@@ -153,18 +153,21 @@ const FourIslandShop = new Shop([
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.xAttack,
+    ItemList.Soothe_bell,
 ]);
 const FiveIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.xClick,
+    ItemList.Dragon_scale,
 ]);
 const SixIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.Lucky_egg,
+    ItemList.Prism_scale,
 ]);
 const SevenIslandShop = new Shop([
     ItemList.Pokeball,
@@ -176,32 +179,33 @@ const MikanIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
+    ItemList.Metal_coat,
 ]);
 const NavelIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
+    ItemList.Kings_rock,
 ]);
 const TrovitaIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
+    ItemList.Deepsea_tooth,
+    ItemList.Deepsea_scale,
 ]);
 const KumquatIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
-]);
-const PummeloIslandShop = new Shop([
-    ItemList.Pokeball,
-    ItemList.Greatball,
-    ItemList.Ultraball,
+    ItemList.Upgrade,
 ]);
 const ValenciaPokémonCenterShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.Dowsing_machine,
+    ItemList.Sun_stone,
 ]);
 const PinkanPokémonReserveShop = new Shop([
     ItemList.Pokeball,
@@ -834,7 +838,7 @@ TownList['Kumquat Island'] = new Town(
 TownList['Pummelo Island'] = new Town(
     'Pummelo Island',
     GameConstants.Region.kanto,
-    [GymList['Supreme Gym Leader Drake'], PummeloIslandShop],
+    [GymList['Supreme Gym Leader Drake', pokeLeagueShop()],
     {
         requirements:
         [
