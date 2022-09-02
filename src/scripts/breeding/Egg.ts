@@ -18,7 +18,7 @@ class Egg implements Saveable {
     constructor(
         public type = EggType.None,
         public totalSteps = 0,
-        public pokemon: PokemonNameType = 'MissingNo.',
+        public pokemon: number = 0, // MissingNo.
         steps = 0,
         public shinyChance = GameConstants.SHINY_CHANCE_BREEDING,
         public notified = false
@@ -41,8 +41,8 @@ class Egg implements Saveable {
             return this.totalSteps - this.steps();
         }, this);
 
-        if (this.pokemon) {
-            const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(this.pokemon);
+        if (this.pokemon != 0) {
+            const dataPokemon: DataPokemon = PokemonHelper.getPokemonById(this.pokemon);
             this.pokemonType1 = dataPokemon.type1;
             this.pokemonType2 = dataPokemon.type2 === PokemonType.None ? dataPokemon.type1 : dataPokemon.type2;
         } else {
@@ -52,7 +52,7 @@ class Egg implements Saveable {
 
         // Deferring this because it wants to access App.game.party, which isn't avaliable yet
         setTimeout(() => {
-            this.partyPokemon(this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.pokemon).id) : null);
+            this.partyPokemon(this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonById(this.pokemon).id) : null);
         }, 0);
     }
 
@@ -79,7 +79,7 @@ class Egg implements Saveable {
         if (this.canHatch()) {
             if (this.type == EggType.Pokemon) {
                 Notifier.notify({
-                    message: `${this.pokemon} is ready to hatch!`,
+                    message: `${PokemonHelper.getPokemonById(this.pokemon).name} is ready to hatch!`,
                     type: NotificationConstants.NotificationOption.success,
                     sound: NotificationConstants.NotificationSound.Hatchery.ready_to_hatch,
                     setting: NotificationConstants.NotificationSetting.Hatchery.ready_to_hatch,
@@ -109,7 +109,7 @@ class Egg implements Saveable {
         const partyPokemon = this.partyPokemon();
         // If the party pokemon exist, increase it's damage output
 
-        const pokemonID = PokemonHelper.getPokemonByName(this.pokemon).id;
+        const pokemonID = PokemonHelper.getPokemonById(this.pokemon).id;
         if (partyPokemon) {
             // Increase attack
             partyPokemon.attackBonusPercent += Math.max(1, Math.round(GameConstants.BREEDING_ATTACK_BONUS * (efficiency / 100)));
@@ -136,17 +136,17 @@ class Egg implements Saveable {
 
         if (shiny) {
             Notifier.notify({
-                message: `✨ You hatched a shiny ${this.pokemon}! ✨`,
+                message: `✨ You hatched a shiny ${PokemonHelper.getPokemonById(this.pokemon).name}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched_shiny,
             });
-            App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}! ${App.game.party.alreadyCaughtPokemon(pokemonID, true) ? '(duplicate)' : ''}`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${PokemonHelper.getPokemonById(this.pokemon).name}! ${App.game.party.alreadyCaughtPokemon(pokemonID, true) ? '(duplicate)' : ''}`);
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonHatched[pokemonID]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonHatched);
         } else {
             Notifier.notify({
-                message: `You hatched ${GameHelper.anOrA(this.pokemon)} ${this.pokemon}!`,
+                message: `You hatched ${GameHelper.anOrA(PokemonHelper.getPokemonById(this.pokemon).name)} ${PokemonHelper.getPokemonById(this.pokemon).name}!`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched,
             });
@@ -154,8 +154,8 @@ class Egg implements Saveable {
         App.game.party.gainPokemonById(pokemonID, shiny);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
-        const baseForm = App.game.breeding.calculateBaseForm(this.pokemon);
-        if (this.pokemon != baseForm && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(baseForm).id)) {
+        const baseForm = App.game.breeding.calculateBaseForm(PokemonHelper.getPokemonById(this.pokemon).name);
+        if (PokemonHelper.getPokemonById(this.pokemon).name != baseForm && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(baseForm).id)) {
             Notifier.notify({
                 message: `You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`,
                 type: NotificationConstants.NotificationOption.success,
