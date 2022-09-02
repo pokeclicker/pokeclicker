@@ -176,6 +176,7 @@ export type PokemonNameType
     | 'Galarian Farfetch\'d'
     | 'Doduo'
     | 'Dodrio'
+    | 'Pinkan Dodrio'
     | 'Seel'
     | 'Dewgong'
     | 'Grimer'
