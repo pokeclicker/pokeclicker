@@ -41,7 +41,7 @@ class Egg implements Saveable {
             return this.totalSteps - this.steps();
         }, this);
 
-        if (this.pokemon != 0) {
+        if (this.pokemon) {
             const dataPokemon: DataPokemon = PokemonHelper.getPokemonById(this.pokemon);
             this.pokemonType1 = dataPokemon.type1;
             this.pokemonType2 = dataPokemon.type2 === PokemonType.None ? dataPokemon.type1 : dataPokemon.type2;
@@ -154,15 +154,17 @@ class Egg implements Saveable {
         App.game.party.gainPokemonById(pokemonID, shiny);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
-        const baseForm = App.game.breeding.calculateBaseForm(PokemonHelper.getPokemonById(this.pokemon).name);
-        if (PokemonHelper.getPokemonById(this.pokemon).name != baseForm && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(baseForm).id)) {
+        const pokemonName = PokemonHelper.getPokemonById(this.pokemon).name;
+        const baseFormName = App.game.breeding.calculateBaseForm(pokemonName);
+        const baseForm = PokemonHelper.getPokemonByName(baseFormName);
+        if (pokemonName != baseFormName && !App.game.party.alreadyCaughtPokemon(baseForm.id)) {
             Notifier.notify({
-                message: `You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`,
+                message: `You also found ${GameHelper.anOrA(baseFormName)} ${baseFormName} nearby!`,
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
-            App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(baseForm).id);
+            App.game.party.gainPokemonById(baseForm.id);
         }
 
         // Update statistics

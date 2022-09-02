@@ -267,7 +267,7 @@ class Breeding implements Feature {
             });
             return false;
         }
-        const egg = this.createEgg(pokemon.name);
+        const egg = this.createEgg(pokemon.id);
 
         const success = this.gainEgg(egg, isHelper);
 
@@ -285,8 +285,7 @@ class Breeding implements Feature {
             this._eggList[index](new Egg());
             this.moveEggs();
             if (this._queueList().length) {
-                const pokemon = PokemonHelper.getPokemonById(this._queueList.shift());
-                const nextEgg = this.createEgg(pokemon.name);
+                const nextEgg = this.createEgg(this._queueList.shift());
                 this.gainEgg(nextEgg);
                 if (!this._queueList().length) {
                     Notifier.notify({
@@ -309,9 +308,9 @@ class Breeding implements Feature {
         });
     }
 
-    public createEgg(pokemonName: PokemonNameType, type = EggType.Pokemon): Egg {
-        const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(pokemonName);
-        return new Egg(type, this.getSteps(dataPokemon.eggCycles), dataPokemon.id);
+    public createEgg(pokemonId: number, type = EggType.Pokemon): Egg {
+        const dataPokemon: DataPokemon = PokemonHelper.getPokemonById(pokemonId);
+        return new Egg(type, this.getSteps(dataPokemon.eggCycles), pokemonId);
     }
 
     public createTypedEgg(type: EggType): Egg {
@@ -323,8 +322,9 @@ class Breeding implements Feature {
         const ratio = 2;
         const possibleHatches = GameConstants.expRandomElement(hatchable, ratio);
 
-        const pokemon = Rand.fromArray(possibleHatches);
-        return this.createEgg(pokemon, type);
+        const pokemonName = Rand.fromArray(possibleHatches);
+        const pokemonId = PokemonHelper.getPokemonByName(pokemonName).id;
+        return this.createEgg(pokemonId, type);
     }
 
     public createRandomEgg(): Egg {
@@ -337,15 +337,19 @@ class Breeding implements Feature {
     public createFossilEgg(fossil: string): Egg {
         const pokemonName: PokemonNameType = GameConstants.FossilToPokemon[fossil];
         const pokemonNativeRegion = PokemonHelper.calcNativeRegion(pokemonName);
+        let fossilEgg: Egg;
         if (pokemonNativeRegion > player.highestRegion()) {
             Notifier.notify({
                 message: 'You must progress further before you can uncover this fossil Pokémon!',
                 type: NotificationConstants.NotificationOption.warning,
                 timeout: 5e3,
             });
-            return new Egg();
+            fossilEgg = new Egg();
+        } else {
+            const pokemonId = PokemonHelper.getPokemonByName(pokemonName).id;
+            fossilEgg = this.createEgg(pokemonId, EggType.Fossil);
         }
-        return this.createEgg(pokemonName, EggType.Fossil);
+        return fossilEgg;
     }
 
     public getSteps(eggCycles: number) {

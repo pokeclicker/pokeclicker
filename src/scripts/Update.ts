@@ -387,8 +387,8 @@ class Update implements Saveable {
         },
 
         '0.7.6': ({ playerData, saveData }) => {
-            Update.renamePokemonInSaveData(saveData, 'Lets go Pikachu', 'Let\'s Go Pikachu');
-            Update.renamePokemonInSaveData(saveData, 'Lets go Eevee', 'Let\'s Go Eevee');
+            Update.changeHatcheryKey(saveData, 'Lets go Pikachu', 'Let\'s Go Pikachu');
+            Update.changeHatcheryKey(saveData, 'Lets go Eevee', 'Let\'s Go Eevee');
 
             // Check if the Let's Go Pikachu is hidden due to MissingNo (reset breeding status)
             const pikachu = saveData.party.caughtPokemon.find(p => p.id == -8);
@@ -440,7 +440,7 @@ class Update implements Saveable {
 
         '0.8.4': ({ playerData, saveData }) => {
             // Update Pokemon names
-            Update.renamePokemonInSaveData(saveData, 'Vivillon', 'Vivillon (Meadow)');
+            Update.changeHatcheryKey(saveData, 'Vivillon', 'Vivillon (Meadow)');
 
             // Track Battle Frontier milestones earned
             const milestones = [
@@ -949,7 +949,7 @@ class Update implements Saveable {
             };
 
             // Update Pokemon name changes for hatchery/queue
-            const renamePokemon = Update.renamePokemonInSaveData;
+            const renamePokemon = Update.changeHatcheryKey;
             renamePokemon(saveData, 'Bulbasaur (clone)', 'Bulbasaur (Clone)');
             renamePokemon(saveData, 'Ivysaur (clone)', 'Ivysaur (Clone)');
             renamePokemon(saveData, 'Venusaur (clone)', 'Venusaur (Clone)');
@@ -1133,14 +1133,10 @@ class Update implements Saveable {
 
         '0.9.15': ({ playerData, saveData }) => {
             // Replace Pokémon names to IDs
-            saveData.breeding.eggList?.forEach(pokemonName => {
-                const pokemonEgg = PokemonHelper.getPokemonByName(pokemonName);
-                Update.renamePokemonInSaveData(saveData, pokemonName, pokemonEgg.id);
-            });
-            saveData.breeding.queueList?.forEach(pokemonName => {
-                const pokemonQueue = PokemonHelper.getPokemonByName(pokemonName);
-                Update.renamePokemonInSaveData(saveData, pokemonName, pokemonQueue.id);
-            });
+            const eggList = saveData.breeding.eggList;
+            const queueList = saveData.breeding.queueList;
+            Update.changePokemonNameToId(saveData, eggList);
+            Update.changePokemonNameToId(saveData, queueList);
         },
     };
 
@@ -1373,7 +1369,7 @@ class Update implements Saveable {
 
     // If any pokemon names change in the data rename them,
     // note that name isn't used in party.
-    static renamePokemonInSaveData = (saveData, oldName, newName) => {
+    static changeHatcheryKey = (saveData, oldName, newName) => {
         if (!saveData.breeding) {
             return;
         }
@@ -1386,6 +1382,14 @@ class Update implements Saveable {
 
         // Fixup queue
         saveData.breeding.queueList = saveData.breeding.queueList?.map(p => p == oldName ? newName : p) || [];
+    }
+
+    // Replaces Pokémon names to IDs in the save data
+    static changePokemonNameToId(saveData, pokemonArray) {
+        pokemonArray?.forEach(pokemonName => {
+            const pokemon = PokemonHelper.getPokemonByName(pokemonName);
+            Update.changeHatcheryKey(saveData, pokemonName, pokemon.id);
+        });
     }
 
     static startQuestLine = (saveData, questLineName: string) => {
