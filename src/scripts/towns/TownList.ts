@@ -210,7 +210,7 @@ const PinkanPokémonReserveShop = new Shop([
     ItemList.Lucky_incense,
 ]);
 const TanobyRuinsShop = new Shop([
-    ItemList['Pinkan Exeggutor'],
+    ItemList['Pinkan Dodrio'],
 ], 'Trade with Prof. Ivy');
 
 // Kanto NPCs
@@ -2719,7 +2719,7 @@ const PlasmaGrunt2 = new NPC('Team Plasma Grunt', [
     'If you won\'t leave, we\'ll have to remove you.',
 ], {
     image: 'assets/images/trainers/Team Plasma Grunt (male).png',
-    requirement: new OneFromManyRequirement([new TemporaryBattleRequirement('Team Plasma Grunt 4', GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunt 5', GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunts 1', GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunts 2', GameConstants.AchievementOption.less)]),
+    requirement: new OneFromManyRequirement([new TemporaryBattleRequirement('Team Plasma Grunt 4', 1, GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunt 5', 1, GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunts 1', 1, GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunts 2', 1, GameConstants.AchievementOption.less)]),
 });
 
 const DriftveilZinzolin = new NPC('Zinzolin', [
@@ -2745,7 +2745,7 @@ const GiantChasmColress = new NPC('Colress', [
     'Well now! Tell me if you have the answer I desire or not! If you\'re ready, come at me!',
 ], {
     image: 'assets/images/trainers/Team Plasma (colress).png',
-    requirement: new MultiRequirement([new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')), new TemporaryBattleRequirement('Plasma Shadow 1'), new TemporaryBattleRequirement('Colress', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')), new TemporaryBattleRequirement('Plasma Shadow 1'), new TemporaryBattleRequirement('Colress', 1, GameConstants.AchievementOption.less)]),
 });
 
 const GiantChasmShadowTriad = new NPC('Shadow Triad', [
@@ -2753,7 +2753,7 @@ const GiantChasmShadowTriad = new NPC('Shadow Triad', [
     'The only thing you can do is watch Lord Ghetsis use Kyurem to freeze Unova solid. That\'s all...',
 ], {
     image: 'assets/images/npcs/Shadow Triad.png',
-    requirement: new MultiRequirement([new TemporaryBattleRequirement('Colress'), new OneFromManyRequirement([new TemporaryBattleRequirement('Plasma Shadow 2', GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Plasma Shadow 3', GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Plasma Shadow 4', GameConstants.AchievementOption.less)])]),
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Colress'), new TemporaryBattleRequirement('Ghetsis 1', 1, GameConstants.AchievementOption.less)]),
 });
 
 const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
