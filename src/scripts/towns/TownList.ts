@@ -838,7 +838,7 @@ TownList['Kumquat Island'] = new Town(
 TownList['Pummelo Island'] = new Town(
     'Pummelo Island',
     GameConstants.Region.kanto,
-    [GymList['Supreme Gym Leader Drake', pokeLeagueShop()],
+    [GymList['Supreme Gym Leader Drake'], pokeLeagueShop()],
     {
         requirements:
         [
