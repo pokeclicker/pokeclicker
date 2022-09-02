@@ -1129,7 +1129,9 @@ class Update implements Saveable {
             if (saveData.party.caughtPokemon.filter(p => p.id === 103.02).length) {
                 saveData.wallet.currencies[1] += 50000;
             }
+        },
 
+        '0.9.15': ({ playerData, saveData }) => {
             // Replace Pokémon names to IDs
             saveData.breeding.eggList?.forEach(pokemonName => {
                 const pokemonEgg = PokemonHelper.getPokemonByName(pokemonName);
@@ -1140,7 +1142,6 @@ class Update implements Saveable {
                 Update.renamePokemonInSaveData(saveData, pokemonName, pokemonQueue.id);
             });
         },
-
     };
 
     constructor() {
