@@ -4283,7 +4283,7 @@ const WedgehurstRailStaff = new NPC('Rail Staff', [
     'There are some areas around Galar that you can only reach after beating the Champion.',
     'One is an island paradise, the other a freezing wasteland.',
     'I’m sure if you go to these places you’ll find many unique and powerful Pokémon!',
-], {image: 'assets/images/npcs/Rail Staff.png'});
+], {image: 'assets/images/trainers/Rail Staff.png'});
 
 const SouthGalarRoamerNPC = new RoamerNPC('Professor Sonia', [
     'I’ve heard there’s been sightings of a never-before-seen, superstrong Pokémon on {ROUTE_NAME}! You should go check it out!',
@@ -4314,12 +4314,15 @@ const RunerigusNPC = new NPC('Runerigus', [
     '<i>Sounds like lazy game design to me...</i>',
 ]);
 
-const AncientMural = new NPC('Ancient Mural', [
+const AncientMural1 = new NPC('Ancient Mural', [
     '<i>It’s Stow-on-Side’s famous mural.</i>',
     '<i>It’s said to be a very deep work of art...</i>',
-], {image: 'assets/images/npcs/other/Ancient Mural.png'});
+], {
+    image: 'assets/images/npcs/other/Ancient Mural.png',
+    requirement: new QuestLineStepCompletedRequirement('The Darkest Day', 1, GameConstants.AchievementOption.less),
+});
 
-const StoryContext = new NPC ('Story Context', [
+const StowonSideSonia = new NPC ('Sonia', [
     'Not a brilliant turn of events, but the ruins were brought into the light for us to see...',
     'What does this tell us about Galar’s legends? More than any hero, there’s those things that appear to be Pokémon that stand out!',
     'Not juts that, but those Pokémon appear to be holding a sword and shield as if they were using them!',
@@ -4327,8 +4330,8 @@ const StoryContext = new NPC ('Story Context', [
     'Seems like at some point in history the sword and shield were combined with the two actual Pokémon and treated as the same thing...',
     'Two young heroes... The sword and shield were actually Pokémon... But why would the truth of these ruins be hidden when their stories were depicted in artwork?',
 ], {
-    image: '',
-    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Darkest Day'), new QuestLineStepCompletedRequirement('The Darkest Day', 1, GameConstants.AchievementOption.less)]),
+    image: 'assets/images/npcs/Sonia.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 1), new QuestLineStepCompletedRequirement('The Darkest Day', 3, GameConstants.AchievementOption.less)]),
 });
 
 const AncientMural2 = new NPC('Ancient Mural Ruins', [
@@ -4336,7 +4339,7 @@ const AncientMural2 = new NPC('Ancient Mural Ruins', [
     '<i>They depict two heroes and two Pokémon.</i>',
 ], {
     image: 'assets/images/npcs/other/Ancient Mural Ruins.png',
-    requirement: new QuestLineStartedRequirement('The Darkest Day'),
+    requirement: new QuestLineStepCompletedRequirement('The Darkest Day', 1),
 });
 
 const HerosBath = new NPC('Hero\'s Bath', [
@@ -4583,7 +4586,7 @@ TownList['Stow-on-Side'] = new Town(
     [TemporaryBattleList.Bede3, TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side']), new ShardTraderShop(GameConstants.ShardTraderLocations['Route 6'], 'Fossil Master')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
-        npcs: [AncientMural, AncientMural2, StoryContext],
+        npcs: [AncientMural1, AncientMural2, StowonSideSonia],
     }
 );
 TownList.Ballonlea = new Town(

@@ -1035,6 +1035,20 @@ class QuestLineHelper {
     public static createDarkestDayQuestLine() {
         const darkestDayQuestLine = new QuestLine('The Darkest Day', 'Stop the return of the Darkest Day!');
 
+        const talkToMural1 = new TalkToNPCQuest(AncientMural1, 'Check out the Stow-on-Side mural.');
+        darkestDayQuestLine.addQuest(talkToMural1); // 0
+
+        const clearBede3 = new CustomQuest(1, 0, 'Stop Bede from destryoing the mural!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Bede3')]());
+        darkestDayQuestLine.addQuest(clearBede3);
+
+        const talkToMural2 = new TalkToNPCQuest(AncientMural2, '');
+        const talkToSonia1 = new TalkToNPCQuest(StowonSideSonia, 'Talk to Sonia');
+        darkestDayQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                talkToMural2,
+                talkToSonia1,
+            ], 'The mural was destroyed! See what you can learn by inspecting the ruins and speaking to the bystander.')); // 2
+
         const clearHop7 = new CustomQuest(1, 0, 'Learn more about the heroes who stopped the Darkest Day, and have a battle with Hop in Circhester.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hop7')]());
         darkestDayQuestLine.addQuest(clearHop7);
 
