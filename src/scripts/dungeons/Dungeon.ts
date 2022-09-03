@@ -91,6 +91,9 @@ const DungeonGainGymBadge = (gym: Gym, badge: BadgeEnums) => {
 /**
  * Gym class.
  */
+ interface optionalDungeonParameters {
+    dungeonRegionalDifficulty?: GameConstants.Region,
+}
 class Dungeon {
 
     constructor(
@@ -101,7 +104,8 @@ class Dungeon {
         public bossList: Boss[],
         public tokenCost: number,
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
-        public rewardFunction = () => {}
+        public rewardFunction = () => {},
+        public optionalParameters: optionalDungeonParameters = {}
     ) { }
 
     public isUnlocked(): boolean {
@@ -221,7 +225,7 @@ class Dungeon {
     }
 
     public getLootTierWeights(clears: number, highestRegion: GameConstants.Region): Record<LootTier, number> {
-        if (GameConstants.getDungeonRegion(this.name) < highestRegion - 2) {
+        if ((this.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(this.name)) < highestRegion - 2) {
             return Object.entries(nerfedLootTierChance).reduce((chances, [tier, chance]) => {
                 if (tier in this.lootTable &&
                     this.lootTable[tier].some((loot) => !loot.requirement || loot.requirement.isCompleted())) {
@@ -1386,7 +1390,9 @@ dungeonList['Ruby Path'] = new Dungeon('Ruby Path',
     },
     720600,
     [new DungeonBossPokemon('Magcargo', 3703000, 20)],
-    43000, 101);
+    43000, 30,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 dungeonList['Icefall Cave'] = new Dungeon('Icefall Cave',
     ['Zubat', 'Golbat', 'Seel', 'Psyduck', 'Slowpoke', 'Swinub', 'Delibird', 'Sneasel', 'Wooper', 'Marill', 'Magikarp', 'Poliwag', 'Goldeen', 'Poliwhirl', 'Tentacool', 'Tentacruel', 'Horsea', 'Krabby', 'Shellder', 'Staryu', 'Seadra', 'Kingler', 'Dewgong', 'Gyarados', 'Lapras'],
@@ -1416,7 +1422,9 @@ dungeonList['Icefall Cave'] = new Dungeon('Icefall Cave',
                 new GymPokemon('Golbat', 250000, 20),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    43000, 101);
+    43000, 30,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 dungeonList['Sunburst Island'] = new Dungeon('Sunburst Island',
     ['Hoppip', 'Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
@@ -1440,7 +1448,9 @@ dungeonList['Sunburst Island'] = new Dungeon('Sunburst Island',
     },
     720600,
     [new DungeonBossPokemon('Crystal Onix', 4500000, 20)],
-    43000, 101);
+    43000, 31,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 dungeonList['Lost Cave'] = new Dungeon('Lost Cave',
     [
@@ -1482,7 +1492,9 @@ dungeonList['Lost Cave'] = new Dungeon('Lost Cave',
                 new GymPokemon('Persian', 1800000, 49),
             ], { weight: 1 }, 'Selphy'),
     ],
-    36000, 101);
+    36000, 33,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 dungeonList['Pattern Bush'] = new Dungeon('Pattern Bush',
     [
@@ -1576,7 +1588,9 @@ dungeonList['Pattern Bush'] = new Dungeon('Pattern Bush',
     },
     500000,
     [new DungeonBossPokemon('Heracross', 3703000, 20)],
-    43000, 101);
+    43000, 35,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 dungeonList['Altering Cave'] = new Dungeon('Altering Cave',
     ['Zubat', 'Mareep', 'Pineco', 'Houndour', 'Teddiursa', 'Aipom', 'Shuckle'],
@@ -1600,7 +1614,9 @@ dungeonList['Altering Cave'] = new Dungeon('Altering Cave',
         new DungeonBossPokemon('Stantler', 3703000, 20),
         new DungeonBossPokemon('Smeargle', 3703000, 20),
     ],
-    43000, 101);
+    43000, 36,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 // All Unown except "EFHP"
 SeededRand.seed(4567);
@@ -1641,7 +1657,9 @@ dungeonList['Tanoby Ruins'] = new Dungeon('Tanoby Ruins',
             requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(TanobyUnownList) == char),
         })),
     ],
-    43000, 101);
+    43000, 39,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 dungeonList['Pinkan Mountain'] = new Dungeon('Pinkan Mountain',
     ['Pinkan Rattata', 'Pinkan Nidoran(M)', 'Pinkan Nidoran(F)', 'Pinkan Mankey', 'Pinkan Rhyhorn'],
@@ -1670,7 +1688,9 @@ dungeonList['Pinkan Mountain'] = new Dungeon('Pinkan Mountain',
         new DungeonBossPokemon('Pinkan Rhydon', 7000000, 40),
         new DungeonBossPokemon('Pinkan Nidoking', 7000000, 40),
     ],
-    89500, 101);
+    89500, 42,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 // Johto Dungeons
 
@@ -7005,7 +7025,7 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
                 new GymPokemon('Florges (Red)', 3500000, 56),
             ], { weight: 1 }, 'Corinne'),
         new DungeonTrainer('Hex Maniac',
-            [new GymPokemon('Gourgeist', 3500000, 58)],
+            [new GymPokemon('Gourgeist (Average)', 3500000, 58)],
             { weight: 1 }, 'Raziah'),
         new DungeonTrainer('Pokémon Ranger',
             [
