@@ -91,6 +91,9 @@ const DungeonGainGymBadge = (gym: Gym, badge: BadgeEnums) => {
 /**
  * Gym class.
  */
+ interface optionalDungeonParameters {
+    dungeonRegionalDifficulty?: GameConstants.Region,
+}
 class Dungeon {
 
     constructor(
@@ -101,7 +104,8 @@ class Dungeon {
         public bossList: Boss[],
         public tokenCost: number,
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
-        public rewardFunction = () => {}
+        public rewardFunction = () => {},
+        public optionalParameters: optionalDungeonParameters = {}
     ) { }
 
     public isUnlocked(): boolean {
@@ -221,7 +225,7 @@ class Dungeon {
     }
 
     public getLootTierWeights(clears: number, highestRegion: GameConstants.Region): Record<LootTier, number> {
-        if (GameConstants.getDungeonRegion(this.name) < highestRegion - 2) {
+        if ((this.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(this.name)) < highestRegion - 2) {
             return Object.entries(nerfedLootTierChance).reduce((chances, [tier, chance]) => {
                 if (tier in this.lootTable &&
                     this.lootTable[tier].some((loot) => !loot.requirement || loot.requirement.isCompleted())) {
@@ -1386,7 +1390,9 @@ dungeonList['Ruby Path'] = new Dungeon('Ruby Path',
     },
     720600,
     [new DungeonBossPokemon('Magcargo', 3703000, 20)],
-    43000, 101);
+    43000, 30,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 dungeonList['Icefall Cave'] = new Dungeon('Icefall Cave',
     ['Zubat', 'Golbat', 'Seel', 'Psyduck', 'Slowpoke', 'Swinub', 'Delibird', 'Sneasel', 'Wooper', 'Marill', 'Magikarp', 'Poliwag', 'Goldeen', 'Poliwhirl', 'Tentacool', 'Tentacruel', 'Horsea', 'Krabby', 'Shellder', 'Staryu', 'Seadra', 'Kingler', 'Dewgong', 'Gyarados', 'Lapras'],
@@ -1416,7 +1422,9 @@ dungeonList['Icefall Cave'] = new Dungeon('Icefall Cave',
                 new GymPokemon('Golbat', 250000, 20),
             ], { weight: 1 }, undefined, '(male)'),
     ],
-    43000, 101);
+    43000, 30,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 dungeonList['Sunburst Island'] = new Dungeon('Sunburst Island',
     ['Hoppip', 'Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
@@ -1440,7 +1448,9 @@ dungeonList['Sunburst Island'] = new Dungeon('Sunburst Island',
     },
     720600,
     [new DungeonBossPokemon('Crystal Onix', 4500000, 20)],
-    43000, 101);
+    43000, 31,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 dungeonList['Lost Cave'] = new Dungeon('Lost Cave',
     [
@@ -1482,7 +1492,9 @@ dungeonList['Lost Cave'] = new Dungeon('Lost Cave',
                 new GymPokemon('Persian', 1800000, 49),
             ], { weight: 1 }, 'Selphy'),
     ],
-    36000, 101);
+    36000, 33,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 dungeonList['Pattern Bush'] = new Dungeon('Pattern Bush',
     [
@@ -1576,7 +1588,9 @@ dungeonList['Pattern Bush'] = new Dungeon('Pattern Bush',
     },
     500000,
     [new DungeonBossPokemon('Heracross', 3703000, 20)],
-    43000, 101);
+    43000, 35,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 dungeonList['Altering Cave'] = new Dungeon('Altering Cave',
     ['Zubat', 'Mareep', 'Pineco', 'Houndour', 'Teddiursa', 'Aipom', 'Shuckle'],
@@ -1600,7 +1614,9 @@ dungeonList['Altering Cave'] = new Dungeon('Altering Cave',
         new DungeonBossPokemon('Stantler', 3703000, 20),
         new DungeonBossPokemon('Smeargle', 3703000, 20),
     ],
-    43000, 101);
+    43000, 36,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 // All Unown except "EFHP"
 SeededRand.seed(4567);
@@ -1641,7 +1657,9 @@ dungeonList['Tanoby Ruins'] = new Dungeon('Tanoby Ruins',
             requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(TanobyUnownList) == char),
         })),
     ],
-    43000, 101);
+    43000, 39,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 dungeonList['Pinkan Mountain'] = new Dungeon('Pinkan Mountain',
     ['Pinkan Rattata', 'Pinkan Nidoran(M)', 'Pinkan Nidoran(F)', 'Pinkan Mankey', 'Pinkan Rhyhorn'],
@@ -1670,7 +1688,9 @@ dungeonList['Pinkan Mountain'] = new Dungeon('Pinkan Mountain',
         new DungeonBossPokemon('Pinkan Rhydon', 7000000, 40),
         new DungeonBossPokemon('Pinkan Nidoking', 7000000, 40),
     ],
-    89500, 101);
+    89500, 42,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 // Johto Dungeons
 
@@ -5139,56 +5159,6 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
     ],
     226500, 14);
 
-dungeonList['Team Plasma Assault'] = new Dungeon('Team Plasma Assault',
-    [
-        new DungeonTrainer('Team Plasma Grunt',
-            [
-                new GymPokemon('Watchog', 241500, 44),
-                new GymPokemon('Muk', 241500, 44),
-            ], { weight: 1 }, undefined, '(male)'),
-        new DungeonTrainer('Team Plasma Grunt',
-            [
-                new GymPokemon('Golbat', 241500, 44),
-                new GymPokemon('Garbodor', 241500, 44),
-            ], { weight: 1 }, undefined, '(female)'),
-        new DungeonTrainer('Team Plasma Grunt',
-            [
-                new GymPokemon('Seviper', 241500, 44),
-                new GymPokemon('Weezing', 241500, 44),
-            ], { weight: 1 }, undefined, '(male)'),
-        new DungeonTrainer('Team Plasma',
-            [
-                new GymPokemon('Pawniard', 241500, 46),
-                new GymPokemon('Pawniard', 241500, 46),
-                new GymPokemon('Absol', 241500, 46),
-            ], { weight: 1 }, 'Shadow', '(shadow)'),
-    ],
-    {
-        common: [
-            {loot: 'xClick', weight: 2},
-            {loot: 'Greatball'},
-        ],
-        rare: [
-            {loot: 'Blue Shard'},
-            {loot: 'Green Shard'},
-        ],
-        epic: [
-            {loot: 'Draco Plate'},
-            {loot: 'Icicle Plate'},
-        ],
-        legendary: [{loot: 'Ultraball'}],
-    },
-    4603000,
-    [
-        new DungeonTrainer('Team Plasma',
-            [
-                new GymPokemon('Cryogonal', 11000000, 46),
-                new GymPokemon('Cryogonal', 11000000, 46),
-                new GymPokemon('Weavile', 12000000, 48),
-            ], { weight: 1 }, 'Zinzolin', '(zinzolin)'),
-    ],
-    241500, 20);
-
 dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
     [
         {pokemon: 'Golduck', options: { weight: 3.5 }},
@@ -5351,21 +5321,21 @@ dungeonList['Plasma Frigate'] = new Dungeon('Plasma Frigate',
 
 dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
     [
-        {pokemon: 'Clefairy', options: { weight: 5.33 }},
-        {pokemon: 'Poliwag', options: { weight: 5.33 }},
-        {pokemon: 'Seel', options: { weight: 5.33 }},
-        {pokemon: 'Tangela', options: { weight: 5.33 }},
-        {pokemon: 'Delibird', options: { weight: 5.33 }},
-        {pokemon: 'Sneasel', options: { weight: 5.33 }},
-        {pokemon: 'Piloswine', options: { weight: 5.33 }},
-        {pokemon: 'Pelipper', options: { weight: 5.33 }},
-        {pokemon: 'Lunatone', options: { weight: 5.33 }},
-        {pokemon: 'Solrock', options: { weight: 5.33 }},
-        {pokemon: 'Vanillish', options: { weight: 5.33 }},
-        {pokemon: 'Basculin (Red-Striped)', options: { weight: 5.33 }},
-        {pokemon: 'Basculin (Blue-Striped)', options: { weight: 5.33 }},
-        {pokemon: 'Ditto', options: { weight: 5.33 }},
-        {pokemon: 'Metang', options: { weight: 5.33 }},
+        {pokemon: 'Clefairy', options: { weight: 4 }},
+        {pokemon: 'Poliwag', options: { weight: 4 }},
+        {pokemon: 'Seel', options: { weight: 4 }},
+        {pokemon: 'Tangela', options: { weight: 4 }},
+        {pokemon: 'Delibird', options: { weight: 4 }},
+        {pokemon: 'Sneasel', options: { weight: 4 }},
+        {pokemon: 'Piloswine', options: { weight: 4 }},
+        {pokemon: 'Pelipper', options: { weight: 4 }},
+        {pokemon: 'Lunatone', options: { weight: 4 }},
+        {pokemon: 'Solrock', options: { weight: 4 }},
+        {pokemon: 'Vanillish', options: { weight: 4 }},
+        {pokemon: 'Basculin (Red-Striped)', options: { weight: 4 }},
+        {pokemon: 'Basculin (Blue-Striped)', options: { weight: 4 }},
+        {pokemon: 'Ditto', options: { weight: 4 }},
+        {pokemon: 'Metang', options: { weight: 4 }},
         new DungeonTrainer('Team Plasma Grunt',
             [
                 new GymPokemon('Weezing', 266500, 46),
@@ -5435,38 +5405,6 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
                 new GymPokemon('Koffing', 266500, 46),
                 new GymPokemon('Amoonguss', 266500, 46),
             ], { weight: 1 }, undefined, '(male)'),
-        new DungeonTrainer('Team Plasma',
-            [
-                new GymPokemon('Cryogonal', 266500, 49),
-                new GymPokemon('Cryogonal', 266500, 49),
-                new GymPokemon('Weavile', 266500, 51),
-            ], { weight: 1 }, 'Zinzolin', '(zinzolin)'),
-        new DungeonTrainer('Team Plasma',
-            [
-                new GymPokemon('Magneton', 266500, 50),
-                new GymPokemon('Beheeyem', 266500, 50),
-                new GymPokemon('Metang', 266500, 50),
-                new GymPokemon('Magnezone', 266500, 50),
-                new GymPokemon('Klinklang', 266500, 52),
-            ], { weight: 1 }, 'Colress', '(colress)'),
-        new DungeonTrainer('Team Plasma',
-            [
-                new GymPokemon('Pawniard', 266500, 49),
-                new GymPokemon('Pawniard', 266500, 49),
-                new GymPokemon('Absol', 266500, 51),
-            ], { weight: 1 }, 'Shadow', '(shadow)'),
-        new DungeonTrainer('Team Plasma',
-            [
-                new GymPokemon('Pawniard', 266500, 49),
-                new GymPokemon('Pawniard', 266500, 49),
-                new GymPokemon('Banette', 266500, 51),
-            ], { weight: 1 }, 'Shadow', '(shadow)'),
-        new DungeonTrainer('Team Plasma',
-            [
-                new GymPokemon('Pawniard', 266500, 49),
-                new GymPokemon('Pawniard', 266500, 49),
-                new GymPokemon('Accelgor', 266500, 51),
-            ], { weight: 1 }, 'Shadow', '(shadow)'),
     ],
     {
         common: [
@@ -5494,17 +5432,17 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
     [
         new DungeonTrainer('Team Plasma',
             [
-                new GymPokemon('Cofagrigus', 6000000, 50),
-                new GymPokemon('Seismitoad', 6000000, 50),
-                new GymPokemon('Eelektross', 6000000, 50),
-                new GymPokemon('Drapion', 6000000, 50),
-                new GymPokemon('Toxicroak', 6000000, 50),
-                new GymPokemon('Hydreigon', 6500000, 52),
-            ], { weight: 1 }, 'Ghetsis', '(ghetsis)'),
-        new DungeonBossPokemon('Tangrowth', 30000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))}),
-        new DungeonBossPokemon('Audino', 32000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))}),
-        new DungeonBossPokemon('Mamoswine', 32000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))}),
-        new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)}),
+                new GymPokemon('Cryogonal', 12000000, 49),
+                new GymPokemon('Cryogonal', 12000000, 49),
+                new GymPokemon('Weavile', 12500000, 51),
+            ], { weight: 1 }, 'Zinzolin', '(zinzolin)'),
+        new DungeonBossPokemon('Tangrowth', 30000000, 100, {requirement: new TemporaryBattleRequirement('Ghetsis 2')}),
+        new DungeonBossPokemon('Audino', 32000000, 100, {requirement: new TemporaryBattleRequirement('Ghetsis 2')}),
+        new DungeonBossPokemon('Mamoswine', 32000000, 100, {requirement: new TemporaryBattleRequirement('Ghetsis 2')}),
+        new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new MultiRequirement([
+            new TemporaryBattleRequirement('Ghetsis 2'),
+            new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
+        ])}),
     ],
     266500, 22);
 
@@ -7087,7 +7025,7 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
                 new GymPokemon('Florges (Red)', 3500000, 56),
             ], { weight: 1 }, 'Corinne'),
         new DungeonTrainer('Hex Maniac',
-            [new GymPokemon('Gourgeist', 3500000, 58)],
+            [new GymPokemon('Gourgeist (Average)', 3500000, 58)],
             { weight: 1 }, 'Raziah'),
         new DungeonTrainer('Pokémon Ranger',
             [
