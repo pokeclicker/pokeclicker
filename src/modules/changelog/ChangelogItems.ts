@@ -10,6 +10,16 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.14
+    new ChangelogUpdate('v0.9.14', new Date(2022, 8, 2)),
+    new Changelog(changelogType.CHANGE, 'Pinkan Dodrio is now purchasable in place of Pinkan Exeggutor'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc Pokémon stats updated'),
+    new Changelog(changelogType.FIXED, 'Sevii island fixes'),
+    new Changelog(changelogType.FIXED, 'Alola islands being inaccessible for some people'),
+    new Changelog(changelogType.FIXED, 'Questline requirements'),
+    new Changelog(changelogType.FIXED, 'All badges now displayed in badge case when available'),
+
     // v0.9.13
     new ChangelogUpdate('v0.9.13', new Date(2022, 8, 1)),
     new Changelog(changelogType.NEW, 'Sevii islands 4, 5, 6 and 7'),
