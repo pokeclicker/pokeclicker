@@ -21,7 +21,7 @@ class PokemonItem extends CaughtIndicatingItem {
                 message: `${(shiny) ? `✨ You obtained a shiny ${pokemonName}! ✨` : `You obtained ${GameHelper.anOrA(pokemonName)} ${pokemonName}!`}`,
                 type: (shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success),
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
+                sound: ((!App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id) || (shiny && (!App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true))) ? NotificationConstants.NotificationSound.General.new_catch : null)),
             });
         }
         if (shiny) {
@@ -58,7 +58,7 @@ ItemList.Skorupi              = new PokemonItem('Skorupi', 6750);
 ItemList.Combee               = new PokemonItem('Combee', 6750);
 ItemList['Burmy (Plant)']        = new PokemonItem('Burmy (Plant)', 6750);
 ItemList.Cherubi              = new PokemonItem('Cherubi', 6750);
-ItemList.Spiritomb            = new PokemonItem('Spiritomb', 6750);
+ItemList.Spiritomb            = new PokemonItem('Spiritomb', 1);
 ItemList.Zorua                = new PokemonItem('Zorua', 50625);
 ItemList['Meloetta (Pirouette)'] = new PokemonItem('Meloetta (Pirouette)', 200000);
 ItemList['Furfrou (Debutante)']  = new PokemonItem('Furfrou (Debutante)', 5000000000, Currency.money);
