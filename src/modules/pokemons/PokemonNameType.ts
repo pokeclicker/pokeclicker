@@ -353,6 +353,7 @@ export type PokemonNameType
     | 'Dunsparce'
     | 'Gligar'
     | 'Steelix'
+    | 'Crystal Steelix'
     | 'Snubbull'
     | 'Granbull'
     | 'Qwilfish'
