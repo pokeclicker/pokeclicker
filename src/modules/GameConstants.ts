@@ -992,7 +992,7 @@ export function getGymRegion(gym: string): Region {
 }
 
 export const KantoDungeons = [
-    'Viridian Forest',
+    'Viridian Forest', // 0
     'Mt. Moon',
     'Diglett\'s Cave',
     'Rock Tunnel',
@@ -1013,11 +1013,11 @@ export const KantoDungeons = [
     'Pattern Bush',
     'Altering Cave',
     'Tanoby Ruins',
-    'Pinkan Mountain',
+    'Pinkan Mountain', // 21
 ];
 
 export const JohtoDungeons = [
-    'Sprout Tower',
+    'Sprout Tower', // 22
     'Ruins of Alph',
     'Union Cave',
     'Slowpoke Well',
@@ -1032,11 +1032,11 @@ export const JohtoDungeons = [
     'Dark Cave',
     'Tohjo Falls',
     'Victory Road Johto',
-    'Mt. Silver',
+    'Mt. Silver', // 37
 ];
 
 export const HoennDungeons = [
-    'Petalburg Woods',
+    'Petalburg Woods', // 38
     'Rusturf Tunnel',
     'Granite Cave',
     'Fiery Path',
@@ -1053,7 +1053,7 @@ export const HoennDungeons = [
     'Sealed Chamber',
     'Cave of Origin',
     'Sky Pillar',
-    'Victory Road Hoenn',
+    'Victory Road Hoenn', // 55
     // These aren't implemented anywhere yet
     /*
     "Island Cave",
@@ -1082,7 +1082,7 @@ export const HoennDungeons = [
 ];
 
 export const SinnohDungeons = [
-    'Oreburgh Gate',
+    'Oreburgh Gate', // 56
     'Valley Windworks',
     'Eterna Forest',
     'Old Chateau',
@@ -1105,11 +1105,11 @@ export const SinnohDungeons = [
     'Flower Paradise',
     'Snowpoint Temple',
     'Stark Mountain',
-    'Hall of Origin',
+    'Hall of Origin', // 79
 ];
 
 export const UnovaDungeons = [
-    'Floccesy Ranch',
+    'Floccesy Ranch', // 80
     'Liberty Garden',
     'Castelia Sewers',
     'Relic Passage',
@@ -1131,11 +1131,11 @@ export const UnovaDungeons = [
     'Pledge Grove',
     'Pinwheel Forest',
     'Dreamyard',
-    'P2 Laboratory',
+    'P2 Laboratory', // 102
 ];
 
 export const KalosDungeons = [
-    'Santalune Forest',
+    'Santalune Forest', // 103
     'Connecting Cave',
     'Glittering Cave',
     'Reflection Cave',
@@ -1148,12 +1148,12 @@ export const KalosDungeons = [
     'Team Flare Secret HQ',
     'Terminus Cave',
     'Pokémon Village',
-    'Victory Road Kalos',
+    'Victory Road Kalos', // 115
     // 'Unknown Dungeon',
 ];
 
 export const AlolaDungeons = [
-    'Trainers\' School',
+    'Trainers\' School', // 116
     'Hau\'oli Cemetery',
     'Verdant Cavern',
     'Melemele Meadow',
@@ -1182,11 +1182,11 @@ export const AlolaDungeons = [
     'Ruins of Abundance',
     'Ruins of Hope',
     'Poni Meadow',
-    'Resolution Cave',
+    'Resolution Cave', // 145
 ];
 
 export const GalarDungeons = [
-    'Slumbering Weald Shrine',
+    'Slumbering Weald Shrine', // 146
     'Galar Mine',
     'Galar Mine No. 2',
     'Glimwood Tangle',
@@ -1206,7 +1206,7 @@ export const GalarDungeons = [
     'Lakeside Cave',
     'Dyna Tree Hill',
     'Tunnel to the Top',
-    'Crown Shrine',
+    'Crown Shrine', // 166
 ];
 
 export const RegionDungeons = [
@@ -1309,6 +1309,12 @@ export const TemporaryBattles = [
     'Plasma Shadow 4',
     'Ghetsis 1',
     'Ghetsis 2',
+    'Aipom Alley',
+    'Mime Interview',
+    'Underground Fighting Ring',
+    'Lab Ambush',
+    'Imposter',
+    'Possessed Mewtwo',
     'AZ',
     'Ash Ketchum Kanto',
     'Ash Ketchum Johto',
