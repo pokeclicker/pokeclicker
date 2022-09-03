@@ -483,7 +483,19 @@ class Breeding implements Feature {
         return queueSizeSetting > -1 ? queueSizeSetting : this.queueSlots();
     });
 
-    public getQueueSizeSettingOptions(): SettingOption<string>[] {
+    public getQueueSizeSetting(): Setting<string> {
+        const setting = Settings.getSetting('breedingQueueSizeSetting');
+        if (!setting.options.length) {
+            setting.options = this.getQueueSizeSettingOptions();
+            setting.observableValue.subscribe((newValue) => {
+                this.updateQueueSizeLimit(+newValue);
+            });
+        }
+
+        return setting;
+    }
+
+    private getQueueSizeSettingOptions(): SettingOption<string>[] {
         const options = [new SettingOption('0 (Off)', '0')];
         const highestRegion = player.highestRegion();
         if (highestRegion > 0) {
@@ -499,7 +511,7 @@ class Breeding implements Feature {
         return options.reverse();
     }
 
-    public updateQueueSizeLimit(size: number) {
+    private updateQueueSizeLimit(size: number) {
         BreedingController.queueSizeLimit(size);
         if (size == 0) {
             this.clearQueue();
