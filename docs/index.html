@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.9.13"></script>
+    <script src="scripts/modules.min.js?v=0.9.14"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.9.13"></script>
+    <script src="scripts/script.min.js?v=0.9.14"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -38,7 +38,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.9.13" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.9.14" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -1746,8 +1746,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Kanto').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-kanto.png?v=0.9.13',
-            href:'assets/images/kanto-kanto.png?v=0.9.13'
+            'xlink:href':'assets/images/kanto-kanto.png?v=0.9.14',
+            href:'assets/images/kanto-kanto.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -3717,8 +3717,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii123.png?v=0.9.13',
-            href:'assets/images/kanto-sevii123.png?v=0.9.13'
+            'xlink:href':'assets/images/kanto-sevii123.png?v=0.9.14',
+            href:'assets/images/kanto-sevii123.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -4099,8 +4099,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 4567').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.9.13',
-            href:'assets/images/kanto-sevii4567.png?v=0.9.13'
+            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.9.14',
+            href:'assets/images/kanto-sevii4567.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -4214,18 +4214,18 @@
     <rect data-route='32'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(32, 0) }"
         height="48"
-        width="144"
+        width="128"
         x="944" y="288">
     </rect>
 
     <text style="font-size: 32px"
-        x="1000"
+        x="992"
         y="322"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(32, 0)">
         WL
     </text>
     <image width="48" height="48"
-        x="992"
+        x="984"
         y="288"
         class="iconLocation"
         transform='rotate(0)'
@@ -4246,8 +4246,8 @@
     <rect data-route='32'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(32, 0) }"
         height="32"
-        width="32"
-        x="1088" y="288">
+        width="48"
+        x="1072" y="288">
     </rect>
 
 
@@ -4984,9 +4984,9 @@
 
 <rect class="city"
     data-town="Five Island"
-    x="1040"
-    y="336"
-    height="48"
+    x="1072"
+    y="320"
+    height="64"
     width="64"
     data-bind="
         click:function(){MapHelper.moveToTown('Five Island')},
@@ -4995,29 +4995,12 @@
 </rect>
 
     <image width="48" height="48"
-        x="1048"
-        y="336"
+        x="1080"
+        y="328"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Five Island')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
-
-
-
-        <!--Five Island extension-->
-        
-
-<rect class="city"
-    data-town="Five Island"
-    x="1088"
-    y="320"
-    height="16"
-    width="48"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Five Island')},
-        attr: { class: MapHelper.calculateTownCssClass('Five Island') },
-        ">
-</rect>
 
 
 
@@ -5622,8 +5605,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/johto.png?v=0.9.13',
-        href:'assets/images/johto.png?v=0.9.13'
+        'xlink:href':'assets/images/johto.png?v=0.9.14',
+        href:'assets/images/johto.png?v=0.9.14'
     }"></image>
 
     <!-- ------ -->
@@ -7666,8 +7649,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hoenn.png?v=0.9.13',
-        href:'assets/images/hoenn.png?v=0.9.13'
+        'xlink:href':'assets/images/hoenn.png?v=0.9.14',
+        href:'assets/images/hoenn.png?v=0.9.14'
     }"></image>
 
     <!-- ------ -->
@@ -10271,8 +10254,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/sinnoh.png?v=0.9.13',
-        href:'assets/images/sinnoh.png?v=0.9.13'
+        'xlink:href':'assets/images/sinnoh.png?v=0.9.14',
+        href:'assets/images/sinnoh.png?v=0.9.14'
     }"></image>
 
     <!-- ------ -->
@@ -12944,8 +12927,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/unova.png?v=0.9.13',
-        href:'assets/images/unova.png?v=0.9.13'
+        'xlink:href':'assets/images/unova.png?v=0.9.14',
+        href:'assets/images/unova.png?v=0.9.14'
     }"></image>
 
     <!-- ------ -->
@@ -15584,8 +15567,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/kalos.png?v=0.9.13',
-        href:'assets/images/kalos.png?v=0.9.13'
+        'xlink:href':'assets/images/kalos.png?v=0.9.14',
+        href:'assets/images/kalos.png?v=0.9.14'
     }"></image>
 
     <!-- ------ -->
@@ -17659,8 +17642,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-melemele.png?v=0.9.13',
-            href:'assets/images/alola-melemele.png?v=0.9.13'
+            'xlink:href':'assets/images/alola-melemele.png?v=0.9.14',
+            href:'assets/images/alola-melemele.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -20880,8 +20863,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-akala.png?v=0.9.13',
-            href:'assets/images/alola-akala.png?v=0.9.13'
+            'xlink:href':'assets/images/alola-akala.png?v=0.9.14',
+            href:'assets/images/alola-akala.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -22920,8 +22903,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula & Poni Islands').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola2.png?v=0.9.13',
-            href:'assets/images/alola2.png?v=0.9.13'
+            'xlink:href':'assets/images/alola2.png?v=0.9.14',
+            href:'assets/images/alola2.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -24498,8 +24481,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'South Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-south.png?v=0.9.13',
-            href:'assets/images/galar-south.png?v=0.9.13'
+            'xlink:href':'assets/images/galar-south.png?v=0.9.14',
+            href:'assets/images/galar-south.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -26466,8 +26449,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-north.png?v=0.9.13',
-            href:'assets/images/galar-north.png?v=0.9.13'
+            'xlink:href':'assets/images/galar-north.png?v=0.9.14',
+            href:'assets/images/galar-north.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -27466,8 +27449,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.9.13',
-            href:'assets/images/galar-isle-of-armor.png?v=0.9.13'
+            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.9.14',
+            href:'assets/images/galar-isle-of-armor.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -29846,8 +29829,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.9.13',
-            href:'assets/images/galar-crown-tundra.png?v=0.9.13'
+            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.9.14',
+            href:'assets/images/galar-crown-tundra.png?v=0.9.14'
         }"></image>
 
         <!-- ------ -->
@@ -34384,7 +34367,7 @@ aria-labelledby="badgeCaseModalLabel">
                                 css: { 'badge-not-acquired': !App.game.badgeCase.hasBadge(BadgeEnums[$data])}">
 
                             <p style="bottom: 0;"
-                                data-bind="text: $data">name</p>
+                                data-bind="text: $data.replace(/_/g, ' ')">name</p>
                         </div>
                     </div>
                 </div>
