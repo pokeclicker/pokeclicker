@@ -49,6 +49,8 @@ export type PokemonNameType
     | 'Metapod'
     | 'Butterfree'
     | 'Valencian Butterfree'
+    | 'Pink Butterfree'
+    | 'Ash\'s Butterfree'
     | 'Gigantamax Butterfree'
     | 'Weedle'
     | 'Pinkan Weedle'
