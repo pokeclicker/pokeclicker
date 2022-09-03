@@ -1080,7 +1080,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Electric, PokemonType.Flying],
         'levelType': LevelType.mediumfast,
         'exp': 112,
-        'eggCycles': 20,
+        'eggCycles': 10,
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -1098,7 +1098,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Electric, PokemonType.Water],
         'levelType': LevelType.mediumfast,
         'exp': 112,
-        'eggCycles': 20,
+        'eggCycles': 10,
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -1116,7 +1116,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
         'exp': 112,
-        'eggCycles': 20,
+        'eggCycles': 10,
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -1134,7 +1134,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
         'exp': 112,
-        'eggCycles': 20,
+        'eggCycles': 10,
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -4888,7 +4888,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
         'exp': 41,
-        'eggCycles': 8,
+        'eggCycles': 8,//Lowered to match base form
         'base': {
             'hitpoints': 20,
             'attack': 40,
@@ -4946,6 +4946,7 @@ const pokemonList = createPokemonArray(
         'exp': 49,
         'eggCycles': 10,
         'evolutions': [new StoneEvolution('Togepi', 'Togetic', GameConstants.StoneType.Soothe_bell)],
+        'baby': true,
         'base': {
             'hitpoints': 35,
             'attack': 20,
@@ -4963,7 +4964,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Fairy],
         'levelType': LevelType.fast,
         'exp': 49,
-        'eggCycles': 10,
+        'eggCycles': 8,//Lowered to match base form
         'base': {
             'hitpoints': 35,
             'attack': 25,
@@ -4981,7 +4982,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Fairy],
         'levelType': LevelType.fast,
         'exp': 49,
-        'eggCycles': 10,
+        'eggCycles': 8,//lowered to match base form
         'base': {
             'hitpoints': 35,
             'attack': 25,
@@ -10628,6 +10629,7 @@ const pokemonList = createPokemonArray(
         'exp': 57,
         'catchRate': 75,
         'evolutions': [new DayTimedStoneEvolution('Riolu', 'Lucario', GameConstants.StoneType.Soothe_bell)],
+        'baby': true,
         'base': {
             'hitpoints': 40,
             'attack': 70,
@@ -20088,6 +20090,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 48,
         'catchRate': 75,
+        'baby': true,
         'evolutions': [
             new LevelEvolution('Toxel', 'Toxtricity (Amped)', 30),
             new LevelEvolution('Toxel', 'Toxtricity (Low Key)', 30),
