@@ -153,18 +153,21 @@ const FourIslandShop = new Shop([
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.xAttack,
+    ItemList.Soothe_bell,
 ]);
 const FiveIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.xClick,
+    ItemList.Dragon_scale,
 ]);
 const SixIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.Lucky_egg,
+    ItemList.Prism_scale,
 ]);
 const SevenIslandShop = new Shop([
     ItemList.Pokeball,
@@ -176,32 +179,33 @@ const MikanIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
+    ItemList.Metal_coat,
 ]);
 const NavelIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
+    ItemList.Kings_rock,
 ]);
 const TrovitaIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
+    ItemList.Deepsea_tooth,
+    ItemList.Deepsea_scale,
 ]);
 const KumquatIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
-]);
-const PummeloIslandShop = new Shop([
-    ItemList.Pokeball,
-    ItemList.Greatball,
-    ItemList.Ultraball,
+    ItemList.Upgrade,
 ]);
 const ValenciaPokémonCenterShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.Dowsing_machine,
+    ItemList.Sun_stone,
 ]);
 const PinkanPokémonReserveShop = new Shop([
     ItemList.Pokeball,
@@ -210,7 +214,7 @@ const PinkanPokémonReserveShop = new Shop([
     ItemList.Lucky_incense,
 ]);
 const TanobyRuinsShop = new Shop([
-    ItemList['Pinkan Exeggutor'],
+    ItemList['Pinkan Dodrio'],
 ], 'Trade with Prof. Ivy');
 
 // Kanto NPCs
@@ -347,6 +351,7 @@ const SaffronBreeder = new NPC('Breeder', [
     'And the best part is you can keep doing it over and over and over again! The sky is the limit! Reach for the stars!',
     'With Protein your Pokémon will become even stronger when you breed them. I hear they sell it at the Indigo Plateau.',
 ], {
+    image: 'assets/images/trainers/Pokémon Breeder (female).png',
     requirement: new GymBadgeRequirement(BadgeEnums.Earth),
 });
 
@@ -518,8 +523,8 @@ const ValenciaProfIvy = new NPC ('Prof. Ivy', [
 const TanobyProfIvy = new NPC ('Prof. Ivy', [
     'Hello again! I see you too found your way to these ancient ruins!',
     'A peculiar Pokémon known as Unown lives here. There are 28 different forms of Unown, but only one shows up at a time, but the form that appears changes every time the clock strikes midnight.',
-    'There are 2 other ruins like this, one in Johto, and one in Sinnoh. I have heard that in each ruins, there forms that only appear there. For example, the forms that resemble a question mark and an exclamation point have only been seen here.',
-    'Speaking of peculiar Pokémon, I found this unusual variant of Exeggutor on an island in this area. Hmm. If you want, you could buy it from me. I am needing some research funds.',
+    'There are 2 other ruins like this, one in Johto, and one in Sinnoh. I have heard that in each ruins, there are forms that only appear there. For example, the forms that resemble a question mark and an exclamation point have only been seen here.',
+    'Speaking of peculiar Pokémon, I found this unusual variant of Dodrio on an island in this area. Hmm. If you want, you could buy it from me. I am needing some research funds.',
 ], {image: 'assets/images/npcs/Professor Ivy.png'});
 const PinkanOfficerJenny1 = new NPC ('Officer Jenny', [
     'Have you seen the Pinkan berries? That is what makes all the Pokémon on this island turn pink.',
@@ -713,7 +718,7 @@ TownList['One Island'] = new Town(
 TownList['Mt. Ember'] = new Town(
     'Mt. Ember',
     GameConstants.Region.kanto,
-    [new MoveToDungeon(dungeonList['Mt. Ember Summit']), new MoveToDungeon(dungeonList['Ruby Path']), TemporaryBattleList['Sevii Rocket Grunt 1'], TemporaryBattleList['Sevii Rocket Grunt 2']],
+    [new MoveToDungeon(dungeonList['Mt. Ember Summit']), new MoveToDungeon(dungeonList['Ruby Path'], new MaxRegionRequirement(GameConstants.Region.hoenn)), TemporaryBattleList['Sevii Rocket Grunt 1'], TemporaryBattleList['Sevii Rocket Grunt 2']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)],
         npcs: [SeviiRocketGrunts],
@@ -833,7 +838,7 @@ TownList['Kumquat Island'] = new Town(
 TownList['Pummelo Island'] = new Town(
     'Pummelo Island',
     GameConstants.Region.kanto,
-    [GymList['Supreme Gym Leader Drake'], PummeloIslandShop],
+    [GymList['Supreme Gym Leader Drake'], pokeLeagueShop()],
     {
         requirements:
         [
@@ -2690,18 +2695,18 @@ const ExcitedChild = new NPC('Excited Child', [
     'I was just watching my favorite show, The National Gymquirer. It was a live segment! Some hot shot trainer from Kanto defeated Drayden! It was amazing! That trainer is so cool! Drayden is like unbeatable.',
     'Then my programme got interrupted by an emergency broadcast. A report on the first confirmed sightings of Tornadus and Thundurus in over twenty-five years! I\'ve read so much about them, they are my favorites.',
     'Last time they were spotted they just roamed around, causing all kinds of mischief. According to my books anyway. I\'m sure that amazing trainer from the TV will want to catch these mighty forces of nature.',
-]);
+], {image: 'assets/images/trainers/School Kid (female).png'});
 
 const CasteliaMusician = new NPC('Musician', [
     'Sup. Ya like jazz? No? Well then you should check out me and my band at the Sonata Cafe where we never play Jazz.',
     'Sometimes a cool singing Pokémon shows up and joins in on our set. I’ve heard that trainers as strong as the Champion have found it roaming around the region looking for Pokémon battles… but even I wouldn’t challenge it to a Music battle.',
-]);
+], {image: 'assets/images/trainers/Musician.png'});
 
 const PlasmaGrunt1 = new NPC('Team Plasma Grunt', [
     'Why hello there. Nothing strange going on here. Please move along.',
     'Oh that business in the sewers? Yes, we should not have gone in there. Very unfortunate situation. A complete misunderstanding. We were just curious about what was down there.',
     'Bye now.',
-]);
+], {image: 'assets/images/trainers/Team Plasma Grunt (male).png'});
 
 const RelicCastleRuinmaniac = new NPC('Ruin Maniac', [
     'I\'ve heard tell of a secret room in this ruin. A room that supposedly contains a very rare Pokémon.',
@@ -2711,41 +2716,49 @@ const RelicCastleRuinmaniac = new NPC('Ruin Maniac', [
 const NimbasaExplorer = new NPC('Explorer', [
     'Whew! The desert is rough out there, glad you\'ve made it all the way to Nimbasa.',
     'Sometimes I find some weird stuff out in the sand, sometimes even Pokémon hiding in Chests. Like this one time in Relic Castle, I found a Pokémon that looks like a statue that I\'ve never seen before!',
-]);
+], {image: 'assets/images/trainers/Backpacker (male).png'});
 
 const PlasmaGrunt2 = new NPC('Team Plasma Grunt', [
     'I told you. There\'s nothing suspicious going on here. We aren\'t stealing any Pokémon.',
     'If you won\'t leave, we\'ll have to remove you.',
-],
-{ requirement: new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 6, GameConstants.AchievementOption.less) });
+], {
+    image: 'assets/images/trainers/Team Plasma Grunt (male).png',
+    requirement: new OneFromManyRequirement([new TemporaryBattleRequirement('Team Plasma Grunt 4', 1, GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunt 5', 1, GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunts 1', 1, GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunts 2', 1, GameConstants.AchievementOption.less)]),
+});
 
 const DriftveilZinzolin = new NPC('Zinzolin', [
     'YOU!',
     'Once again we will use the legendary Dragon-type Pokémon and we will rule the Unova region!',
     'Curious Trainers, we shall not let you run around as you please!',
     'Shadow Triad! Get them out of here!',
-],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 6), new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 7, GameConstants.AchievementOption.less)]) });
+], {
+    image: 'assets/images/trainers/Team Plasma (zinzolin).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 6), new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 7, GameConstants.AchievementOption.less)]),
+});
 
 const PlasmaGrunt3 = new NPC('Team Plasma Grunt', [
     'Remember when I told you that there was nothing suspicious about this frigate? I was lying, of course.',
     'But truth be told, I didn\'t know that this thing could fly. I was not prepared for this.',
     'I\'m gonna be sick...',
-]);
+], {image: 'assets/images/trainers/Team Plasma Grunt (male).png'});
 
 const GiantChasmColress = new NPC('Colress', [
     'Welcome! I was asked by an acquaintance to help with his research. What I desire is to bring out the entirety in Pokémon potential! If I can accomplish that, I don\'t care what it takes!',
     'If it means the strength must be brought out by the interactions between Pokémon and Trainers, then so be it! If it means you have to use a merciless approach, like Team Plasma\'s, and force out all of the Pokémon\'s power, then so be it! And yes, if the entire world is destroyed as a result, then so be it...',
     'That aside! The reason I have been traveling all over Unova and battling many Pokémon Trainers is because I was testing the viability of this approach to bringing out the full strength of Pokémon. In that respect, you\'ve done an amazing job.',
     'Well now! Tell me if you have the answer I desire or not! If you\'re ready, come at me!',
-],
-{ requirement: new MultiRequirement([new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')), new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 18, GameConstants.AchievementOption.less)]) });
+], {
+    image: 'assets/images/trainers/Team Plasma (colress).png',
+    requirement: new MultiRequirement([new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')), new TemporaryBattleRequirement('Plasma Shadow 1'), new TemporaryBattleRequirement('Colress', 1, GameConstants.AchievementOption.less)]),
+});
 
 const GiantChasmShadowTriad = new NPC('Shadow Triad', [
     'Listen well! We swore to be loyal to Lord Ghetsis since he saved us! The only thing we want is the world Lord Ghetsis desires! Even if we lose, Lord Ghetsis simply has to win...',
     'The only thing you can do is watch Lord Ghetsis use Kyurem to freeze Unova solid. That\'s all...',
-],
-{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 19), new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 21, GameConstants.AchievementOption.less)]) });
+], {
+    image: 'assets/images/npcs/Shadow Triad.png',
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Colress'), new TemporaryBattleRequirement('Ghetsis 1', 1, GameConstants.AchievementOption.less)]),
+});
 
 const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
     'Legends say Kyurem is missing a part of itself. It is waiting for a hero to fill in the missing parts of its body with Truth or Ideals.',
@@ -2816,6 +2829,7 @@ TownList['A Perfectly Ordinary Frigate'] = new Town(
         requirements: [
             new GymBadgeRequirement(BadgeEnums.Insect),
             new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 1),
+            new TemporaryBattleRequirement('Team Plasma Grunt 1'),
         ],
         npcs: [PlasmaGrunt1],
     }
