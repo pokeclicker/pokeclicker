@@ -260,9 +260,24 @@ class Breeding implements Feature {
         return false;
     }
 
-    public clearQueue() {
-        while (this._queueList().length) {
-            this.removeFromQueue(0);
+    public clearQueue(shouldConfirm = false) {
+        if (shouldConfirm) {
+            Notifier.confirm({
+                title: 'Clear Queue',
+                message: 'Are you sure?\n\nAll Pokémon will be removed from your breeding queue.',
+                type: NotificationConstants.NotificationOption.warning,
+                confirm: 'Clear',
+            }).then(confirmed => {
+                if (confirmed) {
+                    while (this._queueList().length) {
+                        this.removeFromQueue(0);
+                    }
+                }
+            });
+        } else {
+            while (this._queueList().length) {
+                this.removeFromQueue(0);
+            }
         }
     }
 
@@ -463,7 +478,7 @@ class Breeding implements Feature {
         }
     }
 
-    private usableQueueSlots = ko.pureComputed(() => {
+    public usableQueueSlots = ko.pureComputed(() => {
         const queueSizeSetting = BreedingController.queueSizeLimit();
         return queueSizeSetting > -1 ? queueSizeSetting : this.queueSlots();
     });
