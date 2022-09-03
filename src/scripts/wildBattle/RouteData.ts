@@ -1638,7 +1638,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kalos Route 16', GameConstants.Region.kalos, 16,
     new RoutePokemon({
-        land: ['Weepinbell', 'Floatzel', 'Skorupi', 'Foongus', 'Klefki', 'Phantump', 'Pumpkaboo'],
+        land: ['Weepinbell', 'Floatzel', 'Skorupi', 'Foongus', 'Klefki', 'Phantump', 'Pumpkaboo (Average)', 'Pumpkaboo (Small)', 'Pumpkaboo (Large)', 'Pumpkaboo (Super Size)'],
         water: ['Poliwag', 'Poliwhirl', 'Lombre', 'Floatzel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 15)]
@@ -2249,7 +2249,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 4', GameConstants.Region.galar, 13,
     new RoutePokemon({
-        land: ['Yamper', 'Cutiefly', 'Wooloo', 'Milcery', 'Galarian Meowth', 'Budew', 'Ferroseed', 'Joltik', 'Pikachu', 'Eevee', 'Electrike', 'Pumpkaboo', 'Diglett'],
+        land: ['Yamper', 'Cutiefly', 'Wooloo', 'Milcery', 'Galarian Meowth', 'Budew', 'Ferroseed', 'Joltik', 'Pikachu', 'Eevee', 'Electrike', 'Pumpkaboo (Average)', 'Pumpkaboo (Small)', 'Pumpkaboo (Large)', 'Pumpkaboo (Super Size)', 'Diglett'],
         water: ['Magikarp', 'Goldeen', 'Chewtle'],
         headbutt: ['Skwovet'],
     }),
@@ -2357,7 +2357,7 @@ Routes.add(new RegionRoute(
         headbutt: ['Greedent', 'Cherubi'],
         special:
       [
-          new SpecialRoutePokemon(['Woobat', 'Pumpkaboo', 'Nickit', 'Gloom', 'Skorupi', 'Dottler', 'Budew', 'Machamp', 'Bellossom', 'Unfezant', 'Frillish'], new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Woobat', 'Pumpkaboo (Average)', 'Pumpkaboo (Small)', 'Pumpkaboo (Large)', 'Pumpkaboo (Super Size)', 'Nickit', 'Gloom', 'Skorupi', 'Dottler', 'Budew', 'Machamp', 'Bellossom', 'Unfezant', 'Frillish'], new WeatherRequirement([WeatherType.Clear])),
           new SpecialRoutePokemon(['Butterfree', 'Sawk', 'Throh', 'Galarian Farfetch\'d', 'Gloom', 'Skorupi', 'Roselia', 'Dottler', 'Machamp', 'Vileplume', 'Unfezant', 'Frillish'], new WeatherRequirement([WeatherType.Overcast])),
           new SpecialRoutePokemon(['Wimpod', 'Palpitoad', 'Natu', 'Chewtle', 'Gloom', 'Skorupi', 'Dottler', 'Seismitoad', 'Vileplume', 'Xatu', 'Frillish'], new WeatherRequirement([WeatherType.Rain])),
           new SpecialRoutePokemon(['Helioptile', 'Joltik', 'Yamper', 'Natu', 'Gloom', 'Applin', 'Skorupi', 'Machamp', 'Vileplume', 'Xatu', 'Frillish'], new WeatherRequirement([WeatherType.Thunderstorm])),
@@ -2393,7 +2393,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Sneasel', 'Vanillite', 'Galarian Linoone', 'Riolu', 'Snorunt', 'Pawniard', 'Delibird', 'Dottler', 'Doublade', 'Glalie', 'Gengar'], new WeatherRequirement([WeatherType.Blizzard])),
           new SpecialRoutePokemon(['Carkol', 'Diggersby', 'Torkoal', 'Noctowl', 'Golett', 'Baltoy', 'Drilbur', 'Dugtrio', 'Doublade', 'Excadrill', 'Gengar'], new WeatherRequirement([WeatherType.Sunny])),
           new SpecialRoutePokemon(['Carkol', 'Diggersby', 'Noctowl', 'Shuckle', 'Golett', 'Drilbur', 'Mudbray', 'Dottler', 'Doublade', 'Excadrill', 'Gengar'], new WeatherRequirement([WeatherType.Sandstorm])),
-          new SpecialRoutePokemon(['Gothita', 'Solosis', 'Clefairy', 'Noctowl', 'Galarian Linoone', 'Munna', 'Dottler', 'Duskull', 'Eldegoss', 'Aegislash', 'Cinccino', 'Gengar'], new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Gothita', 'Solosis', 'Clefairy', 'Noctowl', 'Galarian Linoone', 'Munna', 'Dottler', 'Duskull', 'Eldegoss', 'Aegislash (Shield)', 'Cinccino', 'Gengar'], new WeatherRequirement([WeatherType.Fog])),
       ],
     }),
     [
@@ -2437,7 +2437,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Hammerlocke Hills', GameConstants.Region.galar, 22,
     new RoutePokemon({
-        land: ['Pumpkaboo', 'Klink', 'Unfezant', 'Corvisquire', 'Hawlucha', 'Corviknight', 'Copperajah', 'Gourgeist'],
+        land: ['Pumpkaboo (Average)', 'Pumpkaboo (Small)', 'Pumpkaboo (Large)', 'Pumpkaboo (Super Size)', 'Klink', 'Unfezant', 'Corvisquire', 'Hawlucha', 'Corviknight', 'Copperajah', 'Gourgeist (Average)', 'Gourgeist (Small)', 'Gourgeist (Large)', 'Gourgeist (Super Size)'],
         special:
       [
           new SpecialRoutePokemon(['Espurr', 'Inkay', 'Dubwool', 'Machoke', 'Sudowoodo', 'Wobbuffet', 'Stufful', 'Vileplume', 'Klang'], new WeatherRequirement([WeatherType.Clear])),

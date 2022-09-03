@@ -153,18 +153,21 @@ const FourIslandShop = new Shop([
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.xAttack,
+    ItemList.Soothe_bell,
 ]);
 const FiveIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.xClick,
+    ItemList.Dragon_scale,
 ]);
 const SixIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.Lucky_egg,
+    ItemList.Prism_scale,
 ]);
 const SevenIslandShop = new Shop([
     ItemList.Pokeball,
@@ -176,32 +179,33 @@ const MikanIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
+    ItemList.Metal_coat,
 ]);
 const NavelIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
+    ItemList.Kings_rock,
 ]);
 const TrovitaIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
+    ItemList.Deepsea_tooth,
+    ItemList.Deepsea_scale,
 ]);
 const KumquatIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
-]);
-const PummeloIslandShop = new Shop([
-    ItemList.Pokeball,
-    ItemList.Greatball,
-    ItemList.Ultraball,
+    ItemList.Upgrade,
 ]);
 const ValenciaPokémonCenterShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.Dowsing_machine,
+    ItemList.Sun_stone,
 ]);
 const PinkanPokémonReserveShop = new Shop([
     ItemList.Pokeball,
@@ -520,7 +524,7 @@ const TanobyProfIvy = new NPC ('Prof. Ivy', [
     'Hello again! I see you too found your way to these ancient ruins!',
     'A peculiar Pokémon known as Unown lives here. There are 28 different forms of Unown, but only one shows up at a time, but the form that appears changes every time the clock strikes midnight.',
     'There are 2 other ruins like this, one in Johto, and one in Sinnoh. I have heard that in each ruins, there are forms that only appear there. For example, the forms that resemble a question mark and an exclamation point have only been seen here.',
-    'Speaking of peculiar Pokémon, I found this unusual variant of Exeggutor on an island in this area. Hmm. If you want, you could buy it from me. I am needing some research funds.',
+    'Speaking of peculiar Pokémon, I found this unusual variant of Dodrio on an island in this area. Hmm. If you want, you could buy it from me. I am needing some research funds.',
 ], {image: 'assets/images/npcs/Professor Ivy.png'});
 const PinkanOfficerJenny1 = new NPC ('Officer Jenny', [
     'Have you seen the Pinkan berries? That is what makes all the Pokémon on this island turn pink.',
@@ -834,7 +838,7 @@ TownList['Kumquat Island'] = new Town(
 TownList['Pummelo Island'] = new Town(
     'Pummelo Island',
     GameConstants.Region.kanto,
-    [GymList['Supreme Gym Leader Drake'], PummeloIslandShop],
+    [GymList['Supreme Gym Leader Drake'], pokeLeagueShop()],
     {
         requirements:
         [
