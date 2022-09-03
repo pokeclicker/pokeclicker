@@ -16,22 +16,18 @@ class PokemonItem extends CaughtIndicatingItem {
         }
         const pokemonName = this.name as PokemonNameType;
 
-        if (shiny) {
+        if (shiny || !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id)) {
             Notifier.notify({
-                message: `✨ You obtained a shiny ${pokemonName}! ✨`,
-                type: NotificationConstants.NotificationOption.warning,
-            });
-            App.game.logbook.newLog(LogBookTypes.SHINY, `The purchased ${pokemonName} turned out to be shiny! ${App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true) ? '(duplicate)' : ''}`);
-        }
-
-        if (!App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id)) {
-            Notifier.notify({
-                message: `You have obtained ${GameHelper.anOrA(pokemonName)} ${pokemonName}!`,
-                type: NotificationConstants.NotificationOption.success,
+                message: `${(shiny) ? `✨ You obtained a shiny ${pokemonName}! ✨` : `You obtained ${GameHelper.anOrA(pokemonName)} ${pokemonName}!`}`,
+                type: (shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success),
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
         }
+        if (shiny) {
+            App.game.logbook.newLog(LogBookTypes.SHINY, `The purchased ${pokemonName} turned out to be shiny! ${App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true) ? '(duplicate)' : ''}`);
+        }
+
         const pokemonID = PokemonHelper.getPokemonByName(pokemonName).id;
         App.game.party.gainPokemonById(pokemonID, shiny, true);
 

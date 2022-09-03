@@ -256,6 +256,14 @@ class BerryDeal {
                 deal.item.itemType.gain(deal.item.amount * maxTrades);
             }
             GameHelper.incrementObservable(App.game.statistics.berryDailyDealTrades);
+
+            const amount = deal.item.amount * maxTrades;
+            const multiple = amount > 1 ? 's' : '';
+            Notifier.notify({
+                message: `You traded for <img src="${deal.item.itemType.image}" height="24px"/> ${amount.toLocaleString('en-US')} ${GameConstants.humanifyString(deal.item.itemType.displayName)}${multiple}.`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Items.item_bought,
+            });
         }
     }
 }
