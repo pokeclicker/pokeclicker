@@ -1219,8 +1219,8 @@ class ShardDeal {
                     1),
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Blue Shard', amount: 1},
-                        {shardTypeString: 'Black Shard', amount: 1},
+                        {shardTypeString: 'Blue Shard', amount: 50},
+                        {shardTypeString: 'Black Shard', amount: 75},
                     ],
                     ItemList.Reaper_cloth,
                     1),
