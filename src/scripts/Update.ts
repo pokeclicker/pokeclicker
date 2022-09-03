@@ -1123,12 +1123,6 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 39);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 40);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 41);
-
-            //Aegislash and Pumpkaboo line renames
-            const renamePokemon = Update.renamePokemonInSaveData;
-            renamePokemon(saveData, 'Aegislash', 'Aegislash (Shield)');
-            renamePokemon(saveData, 'Pumpkaboo', 'Pumpkaboo (Average)');
-            renamePokemon(saveData, 'Gourgeist', 'Gourgeist (Average)');
         },
 
         '0.9.14': ({ playerData, saveData }) => {
@@ -1138,6 +1132,11 @@ class Update implements Saveable {
         },
 
         '0.9.15': ({ playerData, saveData }) => {
+            // Aegislash and Pumpkaboo line renames
+            Update.changePokemonNameToId(saveData, 'Aegislash', 'Aegislash (Shield)');
+            Update.changePokemonNameToId(saveData, 'Pumpkaboo', 'Pumpkaboo (Average)');
+            Update.changePokemonNameToId(saveData, 'Gourgeist', 'Gourgeist (Average)');
+
             // Replace Pokémon names to IDs
             const eggList = saveData.breeding.eggList;
             const queueList = saveData.breeding.queueList;
