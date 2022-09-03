@@ -15,6 +15,7 @@ class PokemonItem extends CaughtIndicatingItem {
             shiny = shiny || PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
         }
         const pokemonName = this.name as PokemonNameType;
+
         if (shiny) {
             Notifier.notify({
                 message: `✨ You obtained a shiny ${pokemonName}! ✨`,
@@ -22,8 +23,18 @@ class PokemonItem extends CaughtIndicatingItem {
             });
             App.game.logbook.newLog(LogBookTypes.SHINY, `The purchased ${pokemonName} turned out to be shiny! ${App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true) ? '(duplicate)' : ''}`);
         }
+
+        if (!App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id)) {
+            Notifier.notify({
+                message: `You have obtained ${GameHelper.anOrA(pokemonName)} ${pokemonName}!`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+            });
+        }
         const pokemonID = PokemonHelper.getPokemonByName(pokemonName).id;
         App.game.party.gainPokemonById(pokemonID, shiny, true);
+
         const partyPokemon = App.game.party.getPokemon(pokemonID);
         partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, shiny, GameConstants.SHOPMON_EP_YIELD);
     }

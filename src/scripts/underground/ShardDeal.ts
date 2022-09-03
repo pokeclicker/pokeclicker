@@ -53,7 +53,7 @@ class ShardDeal {
             deal.item.itemType.gain(deal.item.amount * maxTrades);
             App.game.wallet.loseAmount(new Amount(deal.questPointCost * maxTrades, GameConstants.Currency.questPoint));
             Notifier.notify({
-                message: `You traded for ${amount.toLocaleString('en-US')} ${GameConstants.humanifyString(deal.item.itemType.displayName)}${multiple}`,
+                message: `You traded for ${amount.toLocaleString('en-US')} ${GameConstants.humanifyString(deal.item.itemType.displayName)}${multiple}.`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.item_bought,
             });
@@ -1219,8 +1219,8 @@ class ShardDeal {
                     1),
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Blue Shard', amount: 50},
-                        {shardTypeString: 'Black Shard', amount: 75},
+                        {shardTypeString: 'Blue Shard', amount: 1},
+                        {shardTypeString: 'Black Shard', amount: 1},
                     ],
                     ItemList.Reaper_cloth,
                     1),
@@ -1230,18 +1230,8 @@ class ShardDeal {
             [
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Red Shard', amount: 5000},
-                        {shardTypeString: 'Yellow Shard', amount: 5000},
-                        {shardTypeString: 'Green Shard', amount: 5000},
-                        {shardTypeString: 'Blue Shard', amount: 5000},
-                        {shardTypeString: 'Grey Shard', amount: 2000},
-                        {shardTypeString: 'Purple Shard', amount: 2000},
-                        {shardTypeString: 'Ochre Shard', amount: 2000},
-                        {shardTypeString: 'Black Shard', amount: 1000},
-                        {shardTypeString: 'Crimson Shard', amount: 1000},
-                        {shardTypeString: 'Lime Shard', amount: 1000},
-                        {shardTypeString: 'White Shard', amount: 1000},
-                        {shardTypeString: 'Pink Shard', amount: 500},
+                        {shardTypeString: 'Red Shard', amount: 1},
+                        {shardTypeString: 'Yellow Shard', amount: 1},
                     ],
                     ItemList['Furfrou (Star)'],
                     1),
