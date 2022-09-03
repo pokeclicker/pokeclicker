@@ -47,6 +47,7 @@ ItemList.Magikarp             = new PokemonItem('Magikarp', 50000, Currency.mone
 ItemList['Charity Chansey']   = new PokemonItem('Charity Chansey', 5000);
 ItemList.Togepi               = new PokemonItem('Togepi', 15000);
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
+ItemList['Pinkan Dodrio']  = new PokemonItem('Pinkan Dodrio', 50000);
 ItemList.Skorupi              = new PokemonItem('Skorupi', 6750);
 ItemList.Combee               = new PokemonItem('Combee', 6750);
 ItemList['Burmy (Plant)']     = new PokemonItem('Burmy (Plant)', 6750);

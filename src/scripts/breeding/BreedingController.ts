@@ -106,10 +106,10 @@ class BreedingController {
     public static getEggImage(egg: Egg): string {
         let eggType = EggType[egg.type].toLowerCase();
         if (eggType == 'pokemon') {
-            const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(egg.pokemon);
+            const dataPokemon: DataPokemon = PokemonHelper.getPokemonById(egg.pokemon);
             eggType = String(PokemonType[dataPokemon.type1]).toLowerCase();
         } else if (eggType == 'fossil') {
-            eggType = GameConstants.PokemonToFossil[egg.pokemon];
+            eggType = GameConstants.PokemonToFossil[PokemonHelper.getPokemonById(egg.pokemon).name];
         }
         return `assets/images/breeding/${eggType}.png`;
     }
