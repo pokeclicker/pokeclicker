@@ -121,6 +121,8 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Bellsprout',
             'Pinkan Caterpie',
             'Pinkan Diglett',
+            'Pinkan Dodrio',
+            'Pinkan Dodrio shop image',
             'Pinkan Exeggutor',
             'Pinkan Paras',
             'Pinkan Pikachu',
@@ -175,6 +177,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Nidoran(M)',
             'Pinkan Primeape',
             'Pinkan Venonat',
+            'Koga Trainer',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -460,21 +463,6 @@ export const SpriteCredits: Credit[] = [
         ],
     },
     {
-        name: 'Someone Soul',
-        link: 'https://discordapp.com/users/824384977633411082/',
-        resources: [
-            'Macro Cosmos (male) and (female)',
-            'Cissy',
-            'Pinkan Pidgey',
-            'Pinkan Rattata',
-            'Pinkan Vileplume',
-            'Valencian Butterfree',
-            'Valencian Vileplume',
-            'Valencian Weepinbell',
-        ],
-        // NOTES: Made specifically for Pokeclicker.
-    },
-    {
         name: 'Smogon Sprite Project',
         link: 'https://www.smogon.com/forums/forums/smeargles-laptop.325/',
         resources: [
@@ -490,7 +478,16 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Detective Pikachu',
             'Detective Raichu',
+            'Cissy',
+            'Macro Cosmos (male) and (female)',
+            'Pinkan Pidgey',
+            'Pinkan Rattata',
+            'Pinkan Vileplume',
+            'Valencian Butterfree',
+            'Valencian Vileplume',
+            'Valencian Weepinbell',
         ],
+        // NOTES: Made specifically for Pokeclicker.
     },
     {
         name: 'tebited15',
@@ -580,7 +577,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
 export const CodeCredits: Credit[] = [
     {
         resources: [
-            1335,
+            1341,
         ],
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
@@ -612,7 +609,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            178,
+            179,
         ],
         name: 'Ultima1990',
         link: 'https://github.com/Ultima1990',
@@ -620,7 +617,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            95,
+            101,
         ],
         name: 'Jaaslet',
         link: 'https://github.com/Jaaslet',
@@ -636,7 +633,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            56,
+            58,
         ],
         name: 'jk13pclick',
         link: 'https://github.com/jk13pclick',
@@ -660,7 +657,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            32,
+            41,
         ],
         name: 'CorgiOnNeptune',
         link: 'https://github.com/CorgiOnNeptune',
@@ -716,11 +713,19 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            19,
+            20,
         ],
         name: 'DataCrusade',
         link: 'https://github.com/DataCrusade',
         image: 'https://avatars.githubusercontent.com/u/36621129?v=4',
+    },
+    {
+        resources: [
+            18,
+        ],
+        name: 'Qwertypop04',
+        link: 'https://github.com/Qwertypop04',
+        image: 'https://avatars.githubusercontent.com/u/63805905?v=4',
     },
     {
         resources: [
@@ -756,7 +761,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            11,
+            12,
         ],
         name: 'dependabot[bot]',
         link: 'https://github.com/apps/dependabot',
@@ -785,14 +790,6 @@ export const CodeCredits: Credit[] = [
         name: 'Symi001',
         link: 'https://github.com/Symi001',
         image: 'https://avatars.githubusercontent.com/u/86664830?v=4',
-    },
-    {
-        resources: [
-            8,
-        ],
-        name: 'Qwertypop04',
-        link: 'https://github.com/Qwertypop04',
-        image: 'https://avatars.githubusercontent.com/u/63805905?v=4',
     },
     {
         resources: [
@@ -942,6 +939,14 @@ export const CodeCredits: Credit[] = [
         resources: [
             2,
         ],
+        name: 'RegisCoaxans',
+        link: 'https://github.com/RegisCoaxans',
+        image: 'https://avatars.githubusercontent.com/u/68825215?v=4',
+    },
+    {
+        resources: [
+            2,
+        ],
         name: 'switchlove',
         link: 'https://github.com/switchlove',
         image: 'https://avatars.githubusercontent.com/u/24837595?v=4',
@@ -990,6 +995,14 @@ export const CodeCredits: Credit[] = [
         resources: [
             1,
         ],
+        name: 'CypherX',
+        link: 'https://github.com/CypherX',
+        image: 'https://avatars.githubusercontent.com/u/672420?v=4',
+    },
+    {
+        resources: [
+            1,
+        ],
         name: 'Ash031',
         link: 'https://github.com/Ash031',
         image: 'https://avatars.githubusercontent.com/u/17141421?v=4',
@@ -1001,6 +1014,14 @@ export const CodeCredits: Credit[] = [
         name: 'FredisonP',
         link: 'https://github.com/FredisonP',
         image: 'https://avatars.githubusercontent.com/u/94978719?v=4',
+    },
+    {
+        resources: [
+            1,
+        ],
+        name: 'HyruleTeam64',
+        link: 'https://github.com/HyruleTeam64',
+        image: 'https://avatars.githubusercontent.com/u/106347315?v=4',
     },
     {
         resources: [
@@ -1089,14 +1110,6 @@ export const CodeCredits: Credit[] = [
         name: 'MrGrote',
         link: 'https://github.com/MrGrote',
         image: 'https://avatars.githubusercontent.com/u/18028309?v=4',
-    },
-    {
-        resources: [
-            1,
-        ],
-        name: 'RegisCoaxans',
-        link: 'https://github.com/RegisCoaxans',
-        image: 'https://avatars.githubusercontent.com/u/68825215?v=4',
     },
     {
         resources: [
@@ -1201,6 +1214,14 @@ export const CodeCredits: Credit[] = [
         name: 'catie-cat-3183',
         link: 'https://github.com/catie-cat-3183',
         image: 'https://avatars.githubusercontent.com/u/46425941?v=4',
+    },
+    {
+        resources: [
+            1,
+        ],
+        name: 'Farboo171',
+        link: 'https://github.com/Farboo171',
+        image: 'https://avatars.githubusercontent.com/u/109317224?v=4',
     },
     {
         resources: [
