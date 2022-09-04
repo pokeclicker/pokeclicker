@@ -3270,6 +3270,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 77,
         'eggCycles': 25,
+        'evolutions': [new StoneEvolution('Crystal Onix', 'Crystal Steelix', GameConstants.StoneType.Ice_stone)],
         'base': {
             'hitpoints': 35,
             'attack': 45,
@@ -6154,6 +6155,23 @@ const pokemonList = createPokemonArray(
             'speed': 30,
         },
         'heldItem': {type: ItemType.item, id: 'Metal_coat'},
+    },
+    {
+        'id': 208.1,
+        'name': 'Crystal Steelix',
+        'catchRate': 25,
+        'type': [PokemonType.Steel, PokemonType.Ice],
+        'levelType': LevelType.mediumfast,
+        'exp': 179,
+        'eggCycles': 25,
+        'base': {
+            'hitpoints': 75,
+            'attack': 85,
+            'specialAttack': 55,
+            'defense': 200,
+            'specialDefense': 65,
+            'speed': 30,
+        },
     },
     {
         'id': 209,
