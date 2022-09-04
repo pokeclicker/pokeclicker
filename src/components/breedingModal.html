@@ -55,12 +55,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
-                                <label>Region</label>
-                                <select name="breedingRegionFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.region.value(+this.value), Settings.setSettingByName(this.name, this.value)">
-                                    <!-- ko foreach: Settings.getSetting('breedingRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
-                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingRegionFilter').value === $data.value }, text: $data.text">Region</option>
-                                    <!-- /ko -->
-                                </select>
+                                <label>Regions</label><br/>
+                                <button type="button" class="col-12 btn btn-secondary" href="#breedingRegionModal" data-toggle="modal" data-bind="text :'Selected : ' + Settings.getSetting('breedingRegionFilter').observableValue().toString(2).split('').reduce(function(s,n){ return s + (n == '1' ? 1 : 0)}, 0)">
+									Regions
+								</button>
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Shiny Status</label>

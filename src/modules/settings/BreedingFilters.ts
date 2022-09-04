@@ -46,12 +46,9 @@ const BreedingFilters: Record<string, FilterOption> = {
     ),
     region: new FilterOption<number>(
         'Region',
-        ko.observable(-2).extend({ numeric: 0 }),
+        ko.observable((1 << Region.final) - 1).extend({ numeric: 0 }),
         'breedingRegionFilter',
-        [
-            new SettingOption('All', '-2'),
-            ...Settings.enumToSettingOptionArray(Region, (t) => t !== 'none'),
-        ],
+        [],
     ),
     pokerus: new FilterOption<number>(
         'Pokerus',
