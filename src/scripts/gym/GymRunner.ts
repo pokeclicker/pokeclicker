@@ -103,7 +103,7 @@ class GymRunner {
         if (this.running()) {
             this.running(false);
             Notifier.notify({
-                message: `Congratulations, you defeated ${GymBattle.gym.leaderName}!`,
+                message: `Congratulations, you defeated ${GymBattle.gym.buttonText}!`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.gym_won,
             });

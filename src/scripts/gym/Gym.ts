@@ -75,10 +75,18 @@ class Gym extends TownContent {
         super(requirements);
         this.flags.quest = quest;
         this.flags.achievement = achievement;
-        if (!town.includes('Elite') && !town.includes('Champion')) {
-            this.buttonText = `${leaderName.replace(/\d/g,'')}'s gym`;
+        this.buttonText = this.determineButtonText();
+    }
+
+    private determineButtonText(): string {
+        if (this.town.includes('Elite')) {
+            return `Elite ${this.leaderName.replace(/\d/g,'')}`;
+        } else if (this.town.includes('Champion')) {
+            return `Champion ${this.leaderName.replace(/\d/g,'')}`;
+        } else if (this.town.includes('Trial')) {
+            return `Trial Captain ${this.leaderName.replace(/\d/g,'')}`;
         } else {
-            this.buttonText = leaderName.replace(/\d/g,'');
+            return `${this.leaderName.replace(/\d/g,'')}'s Gym`;
         }
     }
 
