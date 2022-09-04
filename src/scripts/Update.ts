@@ -1138,6 +1138,11 @@ class Update implements Saveable {
             renamePokemon(saveData, 'Pumpkaboo', 'Pumpkaboo (Average)');
             renamePokemon(saveData, 'Gourgeist', 'Gourgeist (Average)');
 
+            // Add Princess Diancie Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 43);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 44);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 45);
+
             // Replace Pokémon names to IDs
             const eggList = saveData.breeding.eggList;
             const queueList = saveData.breeding.queueList;

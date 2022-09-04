@@ -582,6 +582,36 @@ TemporaryBattleList['Possessed Mewtwo'] = new TemporaryBattle(
     '<i>Howard\'s headset sparks and breaks. Mewtwo calms down, apparently free from Howard\'s influence. Mewtwo gives you a brief nod and flies off.</i>',
     [new QuestLineStepCompletedRequirement('Detective Pikachu', 14)]
 );
+TemporaryBattleList.Riot = new TemporaryBattle(
+    'Riot',
+    [
+        new GymPokemon('Ninjask', 160554441, 70),
+        new GymPokemon('Ninjask', 160554441, 70),
+        new GymPokemon('Greninja', 165551573, 70),
+    ],
+    'Curse you! Diancie has escaped!',
+    [new QuestLineStepCompletedRequirement('Princess Diancie', 0)]
+);
+TemporaryBattleList.Merilyn = new TemporaryBattle(
+    'Merilyn',
+    [
+        new GymPokemon('Yanma', 243684567, 80),
+        new GymPokemon('Delphox', 249682234, 80),
+    ],
+    'You ruined my shopping spree!',
+    [new QuestLineStepCompletedRequirement('Princess Diancie', 1)]
+);
+TemporaryBattleList['Millis and Argus Steel'] = new TemporaryBattle(
+    'Millis and Argus Steel',
+    [
+        new GymPokemon('Honedge', 126325325, 70),
+        new GymPokemon('Doublade', 129983175, 70),
+        new GymPokemon('Aegislash (Blade)', 130012468, 70),
+        new GymPokemon('Chesnaught', 131462975, 70),
+    ],
+    'Our plans are ruined! Retreat!',
+    [new QuestLineStepCompletedRequirement('Princess Diancie', 3)]
+);
 TemporaryBattleList.AZ = new TemporaryBattle(
     'AZ',
     [

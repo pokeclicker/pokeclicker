@@ -114,10 +114,12 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/272336444297707521/',
         image: 'assets/images/profile/trainer-96.png',
         resources: [
+            'Argus Steel',
             'Ash\'s Butterfree',
             'Blimp base',
             'Danny',
             'Luana',
+            'Merilyn',
             'Pinkan Bellsprout',
             'Pinkan Caterpie',
             'Pinkan Diglett',
@@ -202,8 +204,8 @@ export const SpriteCredits: Credit[] = [
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
     },
     {
-        name: 'eugene171',
-        link: 'https://discordapp.com/users/356459678965956613',
+        name: 'Farboo171',
+        link: 'https://github.com/Farboo171',
         resources: [
             'Freeze Mulch',
             'Underground Fossilized Dino',
@@ -485,9 +487,11 @@ export const SpriteCredits: Credit[] = [
             'Detective Raichu',
             'Cissy',
             'Macro Cosmos (male) and (female)',
+            'Millis Steel',
             'Pinkan Pidgey',
             'Pinkan Rattata',
             'Pinkan Vileplume',
+            'Riot',
             'Valencian Butterfree',
             'Valencian Vileplume',
             'Valencian Weepinbell',
