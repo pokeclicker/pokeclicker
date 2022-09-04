@@ -260,7 +260,7 @@ class BerryDeal {
             const amount = deal.item.amount * maxTrades;
             const multiple = amount > 1 ? 's' : '';
             Notifier.notify({
-                message: `You traded for <img src="${deal.item.itemType.image}" height="24px"/> ${amount.toLocaleString('en-US')} ${GameConstants.humanifyString(deal.item.itemType.displayName)}${multiple}.`,
+                message: `You traded for ${amount.toLocaleString('en-US')} × <img src="${deal.item.itemType.image}" height="24px"/> ${GameConstants.humanifyString(deal.item.itemType.displayName)}${multiple}.`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.item_bought,
             });
