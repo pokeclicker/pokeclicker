@@ -217,6 +217,8 @@ const TanobyRuinsShop = new Shop([
     ItemList['Pinkan Dodrio'],
 ], 'Trade with Prof. Ivy');
 
+const PinkanBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Pinkan Island'], []);
+
 // Kanto NPCs
 
 const PalletProfOak = new ProfNPC('Prof. Oak',
@@ -906,7 +908,7 @@ TownList['Valencia Pokémon Center'] = new Town(
 TownList['Pinkan Pokémon Reserve'] = new Town(
     'Pinkan Pokémon Reserve',
     GameConstants.Region.kanto,
-    [PinkanPokémonReserveShop, TemporaryBattleList['Pinkan Jessie & James'], TemporaryBattleList['Pinkan Officer Jenny']],
+    [PinkanPokémonReserveShop, PinkanBerryMaster, TemporaryBattleList['Pinkan Jessie & James'], TemporaryBattleList['Pinkan Officer Jenny']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 42)],
         npcs: [PinkanOfficerJenny1, PinkanOfficerJenny2, PinkanOfficerJenny3, ThemeparkTeamRocket1, ThemeparkTeamRocket2, ThemeparkTeamRocket3, ThemeparkTeamRocket4],
@@ -1135,7 +1137,7 @@ const BlackthornCityShop = new Shop([
 
 // Johto NPCs
 
-const JohtoBerryMaster = new BerryMasterShop([
+const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Goldenrod City'], [
     ItemList.Boost_Mulch,
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,
@@ -1685,7 +1687,7 @@ const BattleFrontierShop = new Shop([
 ]);
 
 //Hoenn Berry Master
-const HoennBerryMaster = new BerryMasterShop([
+const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Mauville City'],[
     ItemList.Boost_Mulch,
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,
@@ -2164,7 +2166,7 @@ const ResortAreaShop = new Shop([
 ]);
 
 //Sinnoh Berry Master
-const SinnohBerryMaster = new BerryMasterShop([
+const SinnohBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Hearthome City'],[
     ItemList.Boost_Mulch,
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,

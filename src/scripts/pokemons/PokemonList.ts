@@ -711,6 +711,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 50,
         'eggCycles': 15,
+        'evolutions': [new LevelEvolution('Pinkan Pidgey', 'Pinkan Pidgeotto', 18)],
         'base': {
             'hitpoints': 40,
             'attack': 45,

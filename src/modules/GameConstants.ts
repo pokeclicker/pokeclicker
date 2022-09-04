@@ -714,11 +714,20 @@ export enum FluteItemType {
 }
 
 export enum PokemonItemType {
+    'Pinkan Arbok',
+    'Pinkan Oddish',
+    'Pinkan Poliwhirl',
+    'Pinkan Geodude',
+    'Pinkan Dodrio',
+    'Lickitung',
+    'Pinkan Weezing',
+    'Mr. Mime',
+    'Pinkan Scyther',
+    'Jynx',
+    'Pinkan Electabuzz',
+    'Magikarp',
     'Eevee',
     'Porygon',
-    'Jynx',
-    'Mr. Mime',
-    'Lickitung',
     'Togepi',
     'Beldum',
     'Skorupi',
@@ -1473,6 +1482,14 @@ export enum ShardTraderLocations {
     'Circhester',
     'Spikemuth',
     'Master Dojo',
+}
+
+export enum BerryTraderLocations {
+    'None' = -1,
+    'Goldenrod City' = 0,
+    'Mauville City',
+    'Pinkan Island',
+    'Hearthome City',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
