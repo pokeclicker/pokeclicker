@@ -1124,19 +1124,6 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 40);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 41);
 
-            //Pinkan Berry
-            const enigmaUnlocked = saveData.farming.unlockedBerries[66];
-            saveData.farming.berryList = Update.moveIndex(saveData.farming.berryList, 35);
-            saveData.farming.plotList.forEach(p => {
-                if (p.berry >= 35) {
-                    p.berry++;
-                }
-            });
-
-            saveData.farming.unlockedBerries[35] = false;
-            if (enigmaUnlocked) {
-                saveData.farming.unlockedBerries[67] = true;
-            }
         },
 
         '0.9.14': ({ playerData, saveData }) => {
@@ -1146,17 +1133,21 @@ class Update implements Saveable {
         },
 
         '0.9.15': ({ playerData, saveData }) => {
-            // Aegislash and Pumpkaboo line renames
-            const renamePokemon = Update.changeHatcheryKey;
-            renamePokemon(saveData, 'Aegislash', 'Aegislash (Shield)');
-            renamePokemon(saveData, 'Pumpkaboo', 'Pumpkaboo (Average)');
-            renamePokemon(saveData, 'Gourgeist', 'Gourgeist (Average)');
+            //Pinkan Berry
+            const enigmaUnlocked = saveData.farming.unlockedBerries[66];
+            saveData.farming.berryList = Update.moveIndex(saveData.farming.berryList, 35);
+            saveData.farming.plotList.forEach(p => {
+                if (p.berry >= 35) {
+                    p.berry++;
+                }
+            });
+            saveData.farming.unlockedBerries[35] = false;
+            if (enigmaUnlocked) {
+                saveData.farming.unlockedBerries[67] = true;
+            }
 
-            // Replace Pokémon names to IDs
-            const eggList = saveData.breeding.eggList;
-            const queueList = saveData.breeding.queueList;
-            Update.changePokemonNameToId(saveData, eggList);
-            Update.changePokemonNameToId(saveData, queueList);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 13);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 14);
         },
     };
 

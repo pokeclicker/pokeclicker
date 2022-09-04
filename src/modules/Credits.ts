@@ -11,6 +11,14 @@ type Credit = {
 // Sort alphabetically
 export const SpriteCredits: Credit[] = [
     {
+        name: 'arduousFrivolity',
+        link: 'https://discordapp.com/users/200069836724764673/',
+        resources: [
+            'Pinkan Scyther',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'aveontrainer',
         link: 'https://www.deviantart.com/aveontrainer',
         image: 'https://a.deviantart.net/avatars-big/a/v/aveontrainer.png',
@@ -118,17 +126,21 @@ export const SpriteCredits: Credit[] = [
             'Blimp base',
             'Danny',
             'Luana',
+            'Pink Butterfree',
+            'Pinkan Arbok',
             'Pinkan Bellsprout',
             'Pinkan Caterpie',
             'Pinkan Diglett',
             'Pinkan Dodrio',
-            'Pinkan Dodrio shop image',
+            'Pinkan Dodrio Shuffle',
             'Pinkan Exeggutor',
+            'Pinkan Jessie & James',
             'Pinkan Paras',
             'Pinkan Pikachu',
+            'Pinkan Poliwhirl',
             'Pinkan Rhyhorn (shiny)',
             'Pinkan Weedle',
-            'Pink Butterfree',
+            'Pinkan Weezing',
             'Rudy',
             'Supreme Gym Leader Drake',
             'Team Flare Admin (male)',
@@ -172,6 +184,7 @@ export const SpriteCredits: Credit[] = [
         name: 'Eat Pant',
         link: 'https://discordapp.com/users/736029608587296819',
         resources: [
+            'Pinkan Geodude',
             'Pinkan Mankey',
             'Pinkan Nidoking',
             'Pinkan Nidoran(F)',
@@ -482,7 +495,10 @@ export const SpriteCredits: Credit[] = [
             'Detective Raichu',
             'Cissy',
             'Macro Cosmos (male) and (female)',
+            'Pinkan Berry',
+            'Pinkan Electabuzz',
             'Pinkan Pidgey',
+            'Pinkan Pidgeotto',
             'Pinkan Rattata',
             'Pinkan Vileplume',
             'Valencian Butterfree',
