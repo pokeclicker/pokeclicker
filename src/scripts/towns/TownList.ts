@@ -153,18 +153,21 @@ const FourIslandShop = new Shop([
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.xAttack,
+    ItemList.Soothe_bell,
 ]);
 const FiveIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.xClick,
+    ItemList.Dragon_scale,
 ]);
 const SixIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.Lucky_egg,
+    ItemList.Prism_scale,
 ]);
 const SevenIslandShop = new Shop([
     ItemList.Pokeball,
@@ -176,32 +179,33 @@ const MikanIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
+    ItemList.Metal_coat,
 ]);
 const NavelIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
+    ItemList.Kings_rock,
 ]);
 const TrovitaIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
+    ItemList.Deepsea_tooth,
+    ItemList.Deepsea_scale,
 ]);
 const KumquatIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
-]);
-const PummeloIslandShop = new Shop([
-    ItemList.Pokeball,
-    ItemList.Greatball,
-    ItemList.Ultraball,
+    ItemList.Upgrade,
 ]);
 const ValenciaPokémonCenterShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.Dowsing_machine,
+    ItemList.Sun_stone,
 ]);
 const PinkanPokémonReserveShop = new Shop([
     ItemList.Pokeball,
@@ -210,7 +214,7 @@ const PinkanPokémonReserveShop = new Shop([
     ItemList.Lucky_incense,
 ]);
 const TanobyRuinsShop = new Shop([
-    ItemList['Pinkan Exeggutor'],
+    ItemList['Pinkan Dodrio'],
 ], 'Trade with Prof. Ivy');
 
 // Kanto NPCs
@@ -494,6 +498,9 @@ const SeviiGideon2 = new NPC ('Gideon', [
     image: 'assets/images/temporaryBattle/Scientist Gideon.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 7), new QuestLineStepCompletedRequirement('Celio\'s Errand', 9, GameConstants.AchievementOption.less)]),
 });
+const SixIslandSeviiRoamerNPC = new RoamerNPC('Bug Catcher John', [
+    'Apparently some kid released one of his Pokémon around here. That Pokémon, it\'s partner, and for whatever reason, the Legendary Beasts from Johto have been seen roaming on {ROUTE_NAME}.',
+], GameConstants.Region.kanto, RoamingPokemonList.findGroup(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii4567), undefined, new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion));
 const AlteringCaveRuinManiac1 = new NPC ('Ruin Maniac', [
     'Hello. You want to know what I\'m doing in this pointless dead end cave?',
     'Well, I\m trying to dig to a secluded island north of here. I\'ve heard there are some unusual Pokémon there.',
@@ -519,8 +526,8 @@ const ValenciaProfIvy = new NPC ('Prof. Ivy', [
 const TanobyProfIvy = new NPC ('Prof. Ivy', [
     'Hello again! I see you too found your way to these ancient ruins!',
     'A peculiar Pokémon known as Unown lives here. There are 28 different forms of Unown, but only one shows up at a time, but the form that appears changes every time the clock strikes midnight.',
-    'There are 2 other ruins like this, one in Johto, and one in Sinnoh. I have heard that in each ruins, there forms that only appear there. For example, the forms that resemble a question mark and an exclamation point have only been seen here.',
-    'Speaking of peculiar Pokémon, I found this unusual variant of Exeggutor on an island in this area. Hmm. If you want, you could buy it from me. I am needing some research funds.',
+    'There are 2 other ruins like this, one in Johto, and one in Sinnoh. I have heard that in each ruins, there are forms that only appear there. For example, the forms that resemble a question mark and an exclamation point have only been seen here.',
+    'Speaking of peculiar Pokémon, I found this unusual variant of Dodrio on an island in this area. Hmm. If you want, you could buy it from me. I am needing some research funds.',
 ], {image: 'assets/images/npcs/Professor Ivy.png'});
 const PinkanOfficerJenny1 = new NPC ('Officer Jenny', [
     'Have you seen the Pinkan berries? That is what makes all the Pokémon on this island turn pink.',
@@ -714,7 +721,7 @@ TownList['One Island'] = new Town(
 TownList['Mt. Ember'] = new Town(
     'Mt. Ember',
     GameConstants.Region.kanto,
-    [new MoveToDungeon(dungeonList['Mt. Ember Summit']), new MoveToDungeon(dungeonList['Ruby Path']), TemporaryBattleList['Sevii Rocket Grunt 1'], TemporaryBattleList['Sevii Rocket Grunt 2']],
+    [new MoveToDungeon(dungeonList['Mt. Ember Summit']), new MoveToDungeon(dungeonList['Ruby Path'], new MaxRegionRequirement(GameConstants.Region.hoenn)), TemporaryBattleList['Sevii Rocket Grunt 1'], TemporaryBattleList['Sevii Rocket Grunt 2']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)],
         npcs: [SeviiRocketGrunts],
@@ -758,7 +765,7 @@ TownList['Four Island'] = new Town(
 TownList['Five Island'] = new Town(
     'Five Island',
     GameConstants.Region.kanto,
-    [FiveIslandShop],
+    [FiveIslandShop, new DockTownContent()],
     {
         requirements: [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     }
@@ -780,6 +787,7 @@ TownList['Six Island'] = new Town(
     [SixIslandShop],
     {
         requirements: [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
+        npcs: [SixIslandSeviiRoamerNPC],
     }
 );
 TownList['Dotted Hole'] = new Town(
@@ -834,7 +842,7 @@ TownList['Kumquat Island'] = new Town(
 TownList['Pummelo Island'] = new Town(
     'Pummelo Island',
     GameConstants.Region.kanto,
-    [GymList['Supreme Gym Leader Drake'], PummeloIslandShop],
+    [GymList['Supreme Gym Leader Drake'], pokeLeagueShop()],
     {
         requirements:
         [
@@ -2719,7 +2727,7 @@ const PlasmaGrunt2 = new NPC('Team Plasma Grunt', [
     'If you won\'t leave, we\'ll have to remove you.',
 ], {
     image: 'assets/images/trainers/Team Plasma Grunt (male).png',
-    requirement: new OneFromManyRequirement([new TemporaryBattleRequirement('Team Plasma Grunt 4', GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunt 5', GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunts 1', GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunts 2', GameConstants.AchievementOption.less)]),
+    requirement: new OneFromManyRequirement([new TemporaryBattleRequirement('Team Plasma Grunt 4', 1, GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunt 5', 1, GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunts 1', 1, GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunts 2', 1, GameConstants.AchievementOption.less)]),
 });
 
 const DriftveilZinzolin = new NPC('Zinzolin', [
@@ -2745,7 +2753,7 @@ const GiantChasmColress = new NPC('Colress', [
     'Well now! Tell me if you have the answer I desire or not! If you\'re ready, come at me!',
 ], {
     image: 'assets/images/trainers/Team Plasma (colress).png',
-    requirement: new MultiRequirement([new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')), new TemporaryBattleRequirement('Plasma Shadow 1'), new TemporaryBattleRequirement('Colress', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')), new TemporaryBattleRequirement('Plasma Shadow 1'), new TemporaryBattleRequirement('Colress', 1, GameConstants.AchievementOption.less)]),
 });
 
 const GiantChasmShadowTriad = new NPC('Shadow Triad', [
@@ -2753,7 +2761,7 @@ const GiantChasmShadowTriad = new NPC('Shadow Triad', [
     'The only thing you can do is watch Lord Ghetsis use Kyurem to freeze Unova solid. That\'s all...',
 ], {
     image: 'assets/images/npcs/Shadow Triad.png',
-    requirement: new MultiRequirement([new TemporaryBattleRequirement('Colress'), new OneFromManyRequirement([new TemporaryBattleRequirement('Plasma Shadow 2', GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Plasma Shadow 3', GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Plasma Shadow 4', GameConstants.AchievementOption.less)])]),
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Colress'), new TemporaryBattleRequirement('Ghetsis 1', 1, GameConstants.AchievementOption.less)]),
 });
 
 const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
