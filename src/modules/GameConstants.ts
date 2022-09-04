@@ -1488,7 +1488,7 @@ export enum BerryTraderLocations {
     'None' = -1,
     'Goldenrod City' = 0,
     'Mauville City',
-    'Pinkan Island',
+    'Pinkan Pokémon Reserve',
     'Hearthome City',
 }
 

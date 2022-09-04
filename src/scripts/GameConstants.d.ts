@@ -492,7 +492,7 @@ namespace GameConstants {
     declare enum BerryTraderLocations {
         'Goldenrod City',
         'Mauville City',
-        'Pinkan Island',
+        'Pinkan Pokémon Reserve',
         'Hearthome City',
     }
     declare enum ShardTraderLocations {

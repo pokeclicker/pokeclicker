@@ -217,7 +217,7 @@ const TanobyRuinsShop = new Shop([
     ItemList['Pinkan Dodrio'],
 ], 'Trade with Prof. Ivy');
 
-const PinkanBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Pinkan Island'], []);
+const PinkanBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve'], [], 'Officer Jenny\'s Pinkan Trade Shop', [new QuestLineCompletedRequirement('Team Rocket\'s Pinkan Themepark')]);
 
 // Kanto NPCs
 
@@ -552,7 +552,7 @@ const PinkanOfficerJenny2 = new NPC ('Officer Jenny', [
 });
 const PinkanOfficerJenny3 = new NPC ('Officer Jenny', [
     'Oh it\'s you again! Got some Pinkan Berries to trade?',
-    'So long as you\'re not helping with the Rocket clowns, we\'ll let you trade for some of those rare Pinkan Pokémon that have only just come to the Island!',
+    'So long as you\'re not helping those Rocket clowns, we\'ll let you trade for some of those rare Pinkan Pokémon that have only just come to the island.',
 ], {
     image: 'assets/images/npcs/Officer Jenny.png',
     requirement: new QuestLineCompletedRequirement('Team Rocket\'s Pinkan Themepark'),

@@ -480,11 +480,7 @@ class QuestLineHelper {
         const talktoTeamRocket = new TalkToNPCQuest(ThemeparkTeamRocket1, 'Talk to Team Rocket on Pinkan Island to hear about their plans');
         pinkanThemeparkQuestLine.addQuest(talktoTeamRocket);
 
-        const farmPinkan = new CustomQuest(1,
-            () => App.game.farming.gainBerry(BerryType.Pinkan, 9),
-            'Gain a Pinkan Berry by mutating it in the Farm.',
-            () => App.game.farming.berryList[35]()
-        );
+        const farmPinkan = new HarvestBerriesQuest(1, undefined, BerryType.Pinkan);
         pinkanThemeparkQuestLine.addQuest(farmPinkan);
 
         const defeatPinkans = new MultipleQuestsQuest(

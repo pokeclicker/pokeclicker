@@ -108,7 +108,7 @@ class BerryDeal {
     public static generateDeals(date: Date) {
         SeededRand.seedWithDate(date);
 
-        const berryMasterTowns = [GameConstants.BerryTraderLocations['Goldenrod City'], GameConstants.BerryTraderLocations['Mauville City'], GameConstants.BerryTraderLocations['Hearthome City'], GameConstants.BerryTraderLocations['Pinkan Island']];
+        const berryMasterTowns = [GameConstants.BerryTraderLocations['Goldenrod City'], GameConstants.BerryTraderLocations['Mauville City'], GameConstants.BerryTraderLocations['Hearthome City'], GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve']];
 
         // Removing old deals
         for (const town of berryMasterTowns) {
@@ -120,8 +120,8 @@ class BerryDeal {
         }
         BerryDeal.list[GameConstants.BerryTraderLocations['Goldenrod City']].push(...this.generateGoldenrodDeals());
         BerryDeal.list[GameConstants.BerryTraderLocations['Mauville City']].push(...this.generateMauvilleDeals());
+        BerryDeal.list[GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve']].push(...this.generatePinkanDeals());
         BerryDeal.list[GameConstants.BerryTraderLocations['Hearthome City']].push(...this.generateHearthomeDeals());
-        BerryDeal.list[GameConstants.BerryTraderLocations['Pinkan Island']].push(...this.generatePinkanDeals());
     }
 
     private static generateGoldenrodDeals() {
@@ -284,7 +284,7 @@ class BerryDeal {
     }
 
     public static canUse(town: GameConstants.BerryTraderLocations, i: number): boolean {
-        const deal = BerryDeal.list[town]?.peek()[i];
+        const deal = BerryDeal.list[GameConstants.BerryTraderLocations[town]]?.peek()[i];
         if (!deal) {
             return false;
         } else {
@@ -293,7 +293,7 @@ class BerryDeal {
     }
 
     public static use(town: GameConstants.BerryTraderLocations, i: number, tradeTimes = 1) {
-        const deal = BerryDeal.list[town]?.peek()[i];
+        const deal = BerryDeal.list[GameConstants.BerryTraderLocations[town]]?.peek()[i];
         if (BerryDeal.canUse(town, i)) {
             const trades = deal.berries.map(berry => {
                 const amt = App.game.farming.berryList[berry.berryType]();
@@ -304,6 +304,8 @@ class BerryDeal {
             deal.berries.forEach((value) => GameHelper.incrementObservable(App.game.farming.berryList[value.berryType], -value.amount * maxTrades));
             if (deal.item.itemType instanceof UndergroundItem) {
                 Underground.gainMineItem(deal.item.itemType.id, deal.item.amount * maxTrades);
+            } else if (deal.item.itemType instanceof PokemonItem) {
+
             } else {
                 deal.item.itemType.gain(deal.item.amount * maxTrades);
             }
