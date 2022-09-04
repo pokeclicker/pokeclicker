@@ -185,7 +185,7 @@ class HatcheryHelpers {
 
             // Add steps to the egg we are managing
             let egg = this.hatchery.eggList[index]();
-            egg.addSteps(steps, multiplier, true);
+            egg.addSteps(steps, multiplier);
 
             // Check if the egg is ready to hatch
             if (egg.canHatch()) {
