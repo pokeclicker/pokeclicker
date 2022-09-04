@@ -114,6 +114,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/272336444297707521/',
         image: 'assets/images/profile/trainer-96.png',
         resources: [
+            'Ash\'s Butterfree',
             'Blimp base',
             'Danny',
             'Luana',
@@ -127,6 +128,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Pikachu',
             'Pinkan Rhyhorn (shiny)',
             'Pinkan Weedle',
+            'Pink Butterfree',
             'Rudy',
             'Supreme Gym Leader Drake',
             'Team Flare Admin (male)',
@@ -177,6 +179,8 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Primeape',
             'Pinkan Venonat',
             'Koga Trainer',
+            'Spooky Ivysaur',
+            'Spooky Venusaur',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -384,13 +388,15 @@ export const SpriteCredits: Credit[] = [
     },
     {
         name: 'NiCeDiCe',
-        link: 'https://github.com/NiCeDiCe90',
+        link: 'https://twitter.com/NiCeDiCe90',
         resources: [
             'Crystal Onix',
+            'Crystal Steelix',
             'Pinkan Rhyhorn (non shiny)',
             'Red Spearow',
             'shiny Totem Ribombee',
-            'Weather Institute world sprite',
+            'misc Map sprite edits',
+            'Bulbasaur (Rose)',
         ],
         // NOTES: Created specifically for PokéClicker.
     },
@@ -427,6 +433,8 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Elf Munchlax',
             'Grinch Celebi',
+            'Ivysaur (Rose)',
+            'Venusaur (Rose)',
         ],
         // Notes: Permission given via Discord #development-chat
     },
