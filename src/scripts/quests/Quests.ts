@@ -82,9 +82,7 @@ class Quests implements Saveable {
         // Check if we can start a new quest, and the requested quest isn't started or completed
         if (this.canStartNewQuest() && quest && !quest.inProgress() && !quest.isCompleted()) {
             quest.begin();
-            // check if hideQuestsOnFull setting is toggled
             if ((Settings.getSetting('hideQuestsOnFull').value) && this.currentQuests().length >= this.questSlots()) {
-                // close questModal if setting is not set to never
                 $('#QuestModal').modal('hide');
             }
         } else {
