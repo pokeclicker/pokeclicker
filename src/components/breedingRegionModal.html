@@ -11,7 +11,7 @@
 				<ul class="list-group" data-bind="foreach : Object.keys(GameConstants.Region).filter(function(r){ return r <= player.highestRegion() && r >= 0; })">
 					<li class="list-group-item">
 						<label class="col-6" data-bind="attr : {for : 'breedingRegion' + $data}, text : GameConstants.camelCaseToString(GameConstants.Region[$data])">Region</label>
-						<input class="col-3"type="checkbox" data-bind="attr : {name : 'breedingRegion' + $data, id : 'breedingRegion' + $data, onchange : 'var bfield = BreedingFilters.region.value() ^ ' + (1 << $data) + ' | (this.checked ? ' + (1 << $data) + ' : 0); BreedingFilters.region.value(bfield); Settings.setSettingByName(\'breedingRegionFilter\', bfield);'}, checked : !!(Settings.getSetting('breedingRegionFilter').observableValue() & (1 << $data))"/>
+						<input class="col-5"type="checkbox" data-bind="attr : {name : 'breedingRegion' + $data, id : 'breedingRegion' + $data, onchange : 'var bfield = BreedingFilters.region.value() ^ ' + (1 << $data) + ' | (this.checked ? ' + (1 << $data) + ' : 0); BreedingFilters.region.value(bfield); Settings.setSettingByName(\'breedingRegionFilter\', bfield);'}, checked : !!(Settings.getSetting('breedingRegionFilter').observableValue() & (1 << $data))"/>
 					</li>
 				</ul>
 			</div>
