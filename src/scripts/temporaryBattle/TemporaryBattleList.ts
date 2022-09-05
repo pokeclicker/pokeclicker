@@ -420,7 +420,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 1'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Hearthome City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 2'] = new TemporaryBattle(
@@ -438,7 +438,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 2'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Lilycove City',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 3'] = new TemporaryBattle(
@@ -456,7 +456,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 3'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Lavender Town',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 4'] = new TemporaryBattle(
@@ -474,7 +474,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 4'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 5'] = new TemporaryBattle(
@@ -492,7 +492,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 5'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Dendemille Town',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 6'] = new TemporaryBattle(
@@ -510,7 +510,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 6'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 7'] = new TemporaryBattle(
@@ -528,7 +528,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 7'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 8'] = new TemporaryBattle(
@@ -548,7 +548,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 8'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Laverre City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 9'] = new TemporaryBattle(
@@ -567,7 +567,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 9'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 10'] = new TemporaryBattle(
@@ -585,7 +585,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 10'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Goldenrod City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 11'] = new TemporaryBattle(
@@ -606,7 +606,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 11'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Santalune City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 12'] = new TemporaryBattle(
@@ -624,7 +624,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 12'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Royal Avenue',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 13'] = new TemporaryBattle(
@@ -643,7 +643,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 13'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Indigo Plateau Kanto',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 14'] = new TemporaryBattle(
@@ -661,7 +661,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 14'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Castelia City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 15'] = new TemporaryBattle(
@@ -680,7 +680,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 15'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 16'] = new TemporaryBattle(
@@ -699,7 +699,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 16'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Fight Area',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 17'] = new TemporaryBattle(
@@ -717,7 +717,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 17'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Two Island',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 18'] = new TemporaryBattle(
@@ -737,7 +737,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 18'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 19'] = new TemporaryBattle(
@@ -757,7 +757,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 19'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Opelucid City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 20'] = new TemporaryBattle(
@@ -778,7 +778,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 20'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Azalea Town',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 21'] = new TemporaryBattle(
@@ -796,7 +796,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 21'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Celadon City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 22'] = new TemporaryBattle(
@@ -815,7 +815,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 22'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Iki Town',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 23'] = new TemporaryBattle(
@@ -834,7 +834,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 23'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Mossdeep City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 24'] = new TemporaryBattle(
@@ -849,7 +849,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 24'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 25'] = new TemporaryBattle(
@@ -864,7 +864,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 25'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Vermilion City',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 26'] = new TemporaryBattle(
@@ -882,7 +882,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 26'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 27'] = new TemporaryBattle(
@@ -900,7 +900,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 27'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 28'] = new TemporaryBattle(
@@ -920,7 +920,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 28'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Pewter City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 29'] = new TemporaryBattle(
@@ -938,7 +938,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 29'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 30'] = new TemporaryBattle(
@@ -958,7 +958,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 30'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Castelia City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 31'] = new TemporaryBattle(
@@ -977,7 +977,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 31'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Ambrette Town',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 32'] = new TemporaryBattle(
@@ -996,7 +996,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 32'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Dewford Town',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 33'] = new TemporaryBattle(
@@ -1015,7 +1015,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 33'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 34'] = new TemporaryBattle(
@@ -1030,7 +1030,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 34'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Three Island',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 35'] = new TemporaryBattle(
@@ -1051,7 +1051,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 35'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Sunyshore City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 36'] = new TemporaryBattle(
@@ -1070,7 +1070,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 36'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Blackthorn City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 37'] = new TemporaryBattle(
@@ -1088,7 +1088,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 37'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 38'] = new TemporaryBattle(
@@ -1108,7 +1108,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 38'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Floaroma Town',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 39'] = new TemporaryBattle(
@@ -1127,7 +1127,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 39'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 40'] = new TemporaryBattle(
@@ -1146,7 +1146,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 40'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 41'] = new TemporaryBattle(
@@ -1165,7 +1165,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 41'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Tapu Village',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 42'] = new TemporaryBattle(
@@ -1183,7 +1183,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 42'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Indigo Plateau Kanto',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 43'] = new TemporaryBattle(
@@ -1201,7 +1201,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 43'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 44'] = new TemporaryBattle(
@@ -1220,7 +1220,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 44'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 45'] = new TemporaryBattle(
@@ -1238,7 +1238,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 45'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Cianwood City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 46'] = new TemporaryBattle(
@@ -1256,7 +1256,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 46'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Pal Park',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 47'] = new TemporaryBattle(
@@ -1275,7 +1275,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 47'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 48'] = new TemporaryBattle(
@@ -1290,7 +1290,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 48'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 49'] = new TemporaryBattle(
@@ -1310,7 +1310,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 49'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Olivine City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 50'] = new TemporaryBattle(
@@ -1328,7 +1328,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 50'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Coumarine City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 51'] = new TemporaryBattle(
@@ -1347,7 +1347,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 51'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Striaton City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 52'] = new TemporaryBattle(
@@ -1365,7 +1365,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 52'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 53'] = new TemporaryBattle(
@@ -1380,7 +1380,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 53'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Ecruteak City',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 54'] = new TemporaryBattle(
@@ -1399,7 +1399,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 54'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Oldale Town',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 55'] = new TemporaryBattle(
@@ -1417,7 +1417,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 55'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 56'] = new TemporaryBattle(
@@ -1435,7 +1435,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 56'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Sandgem Town',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 57'] = new TemporaryBattle(
@@ -1450,7 +1450,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 57'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Cherrygrove City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 58'] = new TemporaryBattle(
@@ -1471,7 +1471,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 58'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 59'] = new TemporaryBattle(
@@ -1490,7 +1490,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 59'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Mahogany Town',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 60'] = new TemporaryBattle(
@@ -1508,7 +1508,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 60'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 61'] = new TemporaryBattle(
@@ -1528,7 +1528,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 61'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 62'] = new TemporaryBattle(
@@ -1543,7 +1543,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 62'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Undella Town',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 63'] = new TemporaryBattle(
@@ -1561,7 +1561,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 63'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Violet City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 64'] = new TemporaryBattle(
@@ -1576,7 +1576,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 64'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Floccesy Town',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 65'] = new TemporaryBattle(
@@ -1595,7 +1595,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 65'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Nimbasa City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 66'] = new TemporaryBattle(
@@ -1613,7 +1613,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 66'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Viridian City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 67'] = new TemporaryBattle(
@@ -1631,7 +1631,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 67'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 68'] = new TemporaryBattle(
@@ -1649,7 +1649,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 68'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Paniola Town',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 69'] = new TemporaryBattle(
@@ -1667,7 +1667,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 69'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Rustboro City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 70'] = new TemporaryBattle(
@@ -1685,7 +1685,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 70'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Shalour City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 71'] = new TemporaryBattle(
@@ -1703,7 +1703,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 71'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Sootopolis City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 72'] = new TemporaryBattle(
@@ -1722,7 +1722,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 72'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 73'] = new TemporaryBattle(
@@ -1741,7 +1741,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 73'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Battle Frontier',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 74'] = new TemporaryBattle(
@@ -1756,7 +1756,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 74'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Veilstone City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 75'] = new TemporaryBattle(
@@ -1774,7 +1774,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 75'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Nuvema Town',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 76'] = new TemporaryBattle(
@@ -1793,7 +1793,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 76'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Indigo Plateau Johto',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 77'] = new TemporaryBattle(
@@ -1811,7 +1811,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 77'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Humilau City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 78'] = new TemporaryBattle(
@@ -1829,7 +1829,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 78'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 79'] = new TemporaryBattle(
@@ -1844,7 +1844,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 79'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 80'] = new TemporaryBattle(
@@ -1866,7 +1866,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 80'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Mistralton City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 81'] = new TemporaryBattle(
@@ -1888,7 +1888,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 81'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Pastoria City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 82'] = new TemporaryBattle(
@@ -1910,7 +1910,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 82'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Snowpoint City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 83'] = new TemporaryBattle(
@@ -1932,7 +1932,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 83'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Konikoni City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 84'] = new TemporaryBattle(
@@ -1954,7 +1954,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 84'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Lumiose City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 85'] = new TemporaryBattle(
@@ -1976,7 +1976,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 85'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 86'] = new TemporaryBattle(
@@ -1998,7 +1998,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 86'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 87'] = new TemporaryBattle(
@@ -2020,7 +2020,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 87'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Fortree City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 88'] = new TemporaryBattle(
@@ -2042,7 +2042,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 88'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Canalave City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 89'] = new TemporaryBattle(
@@ -2064,7 +2064,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 89'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Mauville City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 90'] = new TemporaryBattle(
@@ -2086,7 +2086,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 90'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 91'] = new TemporaryBattle(
@@ -2108,7 +2108,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 91'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Eterna City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 92'] = new TemporaryBattle(
@@ -2130,7 +2130,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 92'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Hau\'oli City',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 93'] = new TemporaryBattle(
@@ -2152,7 +2152,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 93'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 94'] = new TemporaryBattle(
@@ -2171,7 +2171,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 94'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Aquacorde Town',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 95'] = new TemporaryBattle(
@@ -2186,7 +2186,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 95'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Fallarbor Town',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 96'] = new TemporaryBattle(
@@ -2201,7 +2201,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 96'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Professor Kukui\'s Lab',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 97'] = new TemporaryBattle(
@@ -2216,7 +2216,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 97'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Fuschia City',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 98'] = new TemporaryBattle(
@@ -2234,7 +2234,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 98'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Cerulean City',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 99'] = new TemporaryBattle(
@@ -2249,7 +2249,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 99'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Malie City',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 100'] = new TemporaryBattle(
@@ -2267,7 +2267,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 100'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Heahea City',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 101'] = new TemporaryBattle(
@@ -2285,7 +2285,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 101'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Snowbelle City',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 102'] = new TemporaryBattle(
@@ -2303,7 +2303,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 102'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Altar of the Sunne and Moone',
-        imageName: 'Team Rocket Grunt 1',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
     }
 );
 TemporaryBattleList['Rainbow Rocket Grunt 103'] = new TemporaryBattle(
@@ -2318,7 +2318,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 103'] = new TemporaryBattle(
     {
         displayName: 'Rainbow Rocket Grunt',
         returnTown: 'Seafolk Village',
-        imageName: 'Team Rocket Grunt 2',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
     }
 );
 

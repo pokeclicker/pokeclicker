@@ -318,6 +318,15 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given to SomeoneAlive via Discord DM
     },
     {
+        name: 'Prodigal96',
+        link: 'https://www.deviantart.com/prodigal96',
+        image: 'https://a.deviantart.net/avatars-big/p/r/prodigal96.jpg',
+        resources: [
+            'Rainbow Rocket overworld sprites',
+        ],
+        // Notes: Free to use, no credit required
+    },
+    {
         name: 'procompyart',
         link: 'https://www.instagram.com/procompyart/',
         resources: [
