@@ -65,7 +65,7 @@ Routes.add(new RegionRoute(
         land: ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Pidgey', 'Oddish', 'Abra', 'Bellsprout'],
         water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
     }),
-    [new TemporaryBattleRequirement('Blue2')],
+    [new TemporaryBattleRequirement('Blue 2')],
     4.1,
     GameConstants.KantoSubRegions.Kanto
 ));
@@ -117,7 +117,7 @@ Routes.add(new RegionRoute(
         land: ['Rattata', 'Spearow', 'Ekans', 'Sandshrew'],
     }),
     [
-        new TemporaryBattleRequirement('Blue3'),
+        new TemporaryBattleRequirement('Blue 3'),
         new GymBadgeRequirement(BadgeEnums.Cascade),
     ],
     undefined,
@@ -286,7 +286,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 22),
-        new TemporaryBattleRequirement('Blue6'),
+        new TemporaryBattleRequirement('Blue 6'),
     ],
     undefined,
     GameConstants.KantoSubRegions.Kanto
@@ -519,7 +519,7 @@ Routes.add(new RegionRoute(
         water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
         headbutt: ['Spearow', 'Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Aipom', 'Pineco', 'Heracross'],
     }),
-    [new TemporaryBattleRequirement('Silver1')]
+    [new TemporaryBattleRequirement('Silver 1')]
 ));
 Routes.add(new RegionRoute(
     'Johto Route 32', GameConstants.Region.johto, 32,
@@ -1030,7 +1030,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 201),
-        new TemporaryBattleRequirement('Barry1'),
+        new TemporaryBattleRequirement('Barry 1'),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1039,7 +1039,7 @@ Routes.add(new RegionRoute(
         land: ['Zubat', 'Abra', 'Starly', 'Bidoof', 'Kricketot', 'Shinx'],
         water: ['Psyduck', 'Golduck', 'Magikarp', 'Goldeen', 'Seaking', 'Gyarados'],
     }),
-    [new TemporaryBattleRequirement('Barry2')]
+    [new TemporaryBattleRequirement('Barry 2')]
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 204', GameConstants.Region.sinnoh, 204,
@@ -1085,7 +1085,7 @@ Routes.add(new RegionRoute(
         land: ['Zubat', 'Chansey', 'Ralts', 'Roselia', 'Duskull', 'Staravia', 'Bibarel'],
         water: ['Psyduck', 'Golduck', 'Goldeen', 'Seaking', 'Magikarp', 'Gyarados'],
     }),
-    [new TemporaryBattleRequirement('Barry3')]
+    [new TemporaryBattleRequirement('Barry 3')]
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 210', GameConstants.Region.sinnoh, 210,
@@ -1275,7 +1275,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 19),
-        new TemporaryBattleRequirement('Hugh1'),
+        new TemporaryBattleRequirement('Hugh 1'),
     ],
     0.2
 ));
@@ -1299,7 +1299,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-        new TemporaryBattleRequirement('Colress1'),
+        new TemporaryBattleRequirement('Colress 1'),
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ],
     4
@@ -1349,7 +1349,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Chargestone Cave')),
-        new TemporaryBattleRequirement('Colress2'),
+        new TemporaryBattleRequirement('Colress 2'),
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 7),
     ]
 ));
@@ -1359,7 +1359,7 @@ Routes.add(new RegionRoute(
         land: ['Tangela', 'Pelipper', 'Drifblim', 'Absol', 'Lunatone', 'Solrock'],
         water: ['Staryu', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Frillish'],
     }),
-    [new TemporaryBattleRequirement('Hugh4')]
+    [new TemporaryBattleRequirement('Hugh 4')]
 ));
 Routes.add(new RegionRoute(
     'Undella Bay', GameConstants.Region.unova, 24,
@@ -1554,7 +1554,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Abra', 'Doduo', 'Plusle', 'Minun', 'Gulpin', 'Bunnelby', 'Skiddo', 'Pancham', 'Furfrou'],
     }),
-    [new TemporaryBattleRequirement('Sycamore1')]
+    [new TemporaryBattleRequirement('Sycamore 1')]
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 6', GameConstants.Region.kalos, 6,
@@ -1624,7 +1624,7 @@ Routes.add(new RegionRoute(
         land: ['Weepinbell', 'Haunter', 'Quagsire', 'Skorupi', 'Carnivine', 'Karrablast', 'Shelmet', 'Goomy'],
         water: ['Poliwag', 'Poliwhirl', 'Barboach', 'Stunfisk'],
     }),
-    [new TemporaryBattleRequirement('Calem3')]
+    [new TemporaryBattleRequirement('Calem 3')]
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 15', GameConstants.Region.kalos, 15,
@@ -1663,7 +1663,7 @@ Routes.add(new RegionRoute(
         land: ['Weepinbell', 'Haunter', 'Quagsire', 'Drapion', 'Carnivine', 'Karrablast', 'Shelmet', 'Sliggoo'],
         water: ['Poliwag', 'Poliwhirl', 'Barboach', 'Stunfisk', 'Politoed'],
     }),
-    [new TemporaryBattleRequirement('Sycamore2')]
+    [new TemporaryBattleRequirement('Sycamore 2')]
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 20', GameConstants.Region.kalos, 20,
@@ -1711,7 +1711,7 @@ Routes.add(new RegionRoute(
         land: ['Slowpoke', 'Wingull', 'Inkay'],
         water: ['Tentacool', 'Mantyke', 'Finneon'],
     }),
-    [new TemporaryBattleRequirement('Hau2')],
+    [new TemporaryBattleRequirement('Hau 2')],
     1.1,
     GameConstants.AlolaSubRegions.MelemeleIsland
 ));
@@ -1896,7 +1896,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Gumshoos', 'Sandygast'],
         water: ['Tentacruel', 'Magikarp', 'Clamperl', 'Finneon', 'Wishiwashi (Solo)', 'Bruxish'],
     }),
-    [new TemporaryBattleRequirement('Plumeria2')],
+    [new TemporaryBattleRequirement('Plumeria 2')],
     undefined,
     GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
 ));
@@ -2031,7 +2031,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Mudsdale', 'Natu', 'Munna', 'Ralts', 'Kirlia', 'Roselia', 'Gardevoir'], new WeatherRequirement([WeatherType.Fog])),
       ],
     }),
-    [new TemporaryBattleRequirement('Hop2')],
+    [new TemporaryBattleRequirement('Hop 2')],
     undefined,
     GameConstants.GalarSubRegions.SouthGalar
 ));
@@ -2242,7 +2242,7 @@ Routes.add(new RegionRoute(
         land: ['Gossifleur', 'Corvisquire', 'Rookidee', 'Rolycoly', 'Sizzlipede', 'Vulpix', 'Growlithe', 'Tyrogue', 'Galarian Zigzagoon', 'Stunky', 'Trubbish', 'Cherubi', 'Mudbray','Pancham', 'Klink', 'Machop'],
         headbutt: ['Skwovet', 'Cherubi'],
     }),
-    [new TemporaryBattleRequirement('Hop3')],
+    [new TemporaryBattleRequirement('Hop 3')],
     undefined,
     GameConstants.GalarSubRegions.SouthGalar
 ));
@@ -2253,7 +2253,7 @@ Routes.add(new RegionRoute(
         water: ['Magikarp', 'Goldeen', 'Chewtle'],
         headbutt: ['Skwovet'],
     }),
-    [new TemporaryBattleRequirement('Bede1')],
+    [new TemporaryBattleRequirement('Bede 1')],
     undefined,
     GameConstants.GalarSubRegions.SouthGalar
 ));
@@ -2273,7 +2273,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Impidimp', 'Chewtle', 'Koffing', 'Hatenna', 'Noctowl', 'Throh', 'Sawk', 'Sudowoodo', 'Salandit', 'Pawniard', 'Scraggy', 'Croagunk', 'Roggenrola'],
     }),
-    [new TemporaryBattleRequirement('Bede2')],
+    [new TemporaryBattleRequirement('Bede 2')],
     undefined,
     GameConstants.GalarSubRegions.SouthGalar
 ));
@@ -2477,7 +2477,7 @@ Routes.add(new RegionRoute(
         land: ['Thievul', 'Corviknight', 'Perrserker', 'Morpeko', 'Morpeko (Hangry)', 'Liepard', 'Seismitoad', 'Karrablast', 'Shelmet', 'Meowstic', 'Galvantula', 'Inkay'],
         headbutt: ['Greedent'],
     }),
-    [new TemporaryBattleRequirement('Hop6')],
+    [new TemporaryBattleRequirement('Hop 6')],
     undefined,
     GameConstants.GalarSubRegions.NorthGalar
 ));
@@ -2515,7 +2515,7 @@ Routes.add(new RegionRoute(
         land: ['Cramorant', 'Octillery', 'Kingler', 'Pyukumuku', 'Gastrodon (East)', 'Jellicent', 'Mareanie', 'Glalie', 'Pelipper', 'Pincurchin'],
         water: ['Wishiwashi (Solo)', 'Qwilfish', 'Mantyke'],
     }),
-    [new TemporaryBattleRequirement('Hop7')],
+    [new TemporaryBattleRequirement('Hop 7')],
     undefined,
     GameConstants.GalarSubRegions.NorthGalar
 ));
@@ -2581,8 +2581,8 @@ Routes.add(new RegionRoute(
     }),
     [
         new MultiRequirement([
-            new TemporaryBattleRequirement('Klara1'),
-            new TemporaryBattleRequirement('Avery1'),
+            new TemporaryBattleRequirement('Klara 1'),
+            new TemporaryBattleRequirement('Avery 1'),
         ]),
     ],
     undefined,

@@ -41,7 +41,7 @@ GymList['Vermilion City'] = new Gym(
     1000,
     'Now that\'s a shocker! You\'re the real deal, kid! Fine, then, take the ThunderBadge!',
     [
-        new TemporaryBattleRequirement('Blue3'),
+        new TemporaryBattleRequirement('Blue 3'),
         new GymBadgeRequirement(BadgeEnums.Cascade),
     ]
 );
@@ -353,7 +353,7 @@ GymList['Elite Will'] = new Gym(
     BadgeEnums.Elite_Will,
     7500,
     'Even though I was defeated, I won\'t change my course. I will continue battling until I stand above all Trainers! Now move on and experience the true ferocity of the Elite Four.',
-    [new TemporaryBattleRequirement('Silver5')]
+    [new TemporaryBattleRequirement('Silver 5')]
 );
 GymList['Elite Koga'] = new Gym(
     'Koga2',
@@ -456,7 +456,7 @@ GymList['Mauville City'] = new Gym(
     BadgeEnums.Dynamo,
     3000,
     'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!',
-    [new TemporaryBattleRequirement('Wally1')],
+    [new TemporaryBattleRequirement('Wally 1')],
     () => {
         App.game.quests.getQuestLine('Land vs. Water').beginQuest();
     }
@@ -504,7 +504,7 @@ GymList['Fortree City'] = new Gym(
     BadgeEnums.Feather,
     6000,
     'Never before have I seen a Trainer command Pokémon with more grace than I... In recognition of your prowess, I present to you this Gym Badge.',
-    [new TemporaryBattleRequirement('May4')]
+    [new TemporaryBattleRequirement('May 4')]
 );
 GymList['Mossdeep City'] = new Gym(
     'Tate & Liza',
@@ -549,7 +549,7 @@ GymList['Elite Sidney'] = new Gym(
     BadgeEnums.Elite_Sidney,
     15000,
     'Well, listen to what this loser has to say. You\'ve got what it takes to go far. Now, go on to the next room and enjoy your next battle!',
-    [new TemporaryBattleRequirement('Wally2')]
+    [new TemporaryBattleRequirement('Wally 2')]
 );
 GymList['Elite Phoebe'] = new Gym(
     'Phoebe',
@@ -756,7 +756,7 @@ GymList['Pastoria City'] = new Gym(
     BadgeEnums.Fen,
     2500,
     'It seems the undertow pulled me under... But I had a great time battling with you! You\'ve earned this!',
-    [new TemporaryBattleRequirement('Barry4')]
+    [new TemporaryBattleRequirement('Barry 4')]
 );
 GymList['Canalave City'] = new Gym(
     'Byron',
@@ -769,7 +769,7 @@ GymList['Canalave City'] = new Gym(
     BadgeEnums.Mine,
     4800,
     'You were strong enough to take down my prized team of Pokémon. In recognition of that power, I give you this: the Mine Badge!',
-    [new TemporaryBattleRequirement('Barry5')]
+    [new TemporaryBattleRequirement('Barry 5')]
 );
 GymList['Snowpoint City'] = new Gym(
     'Candice',
@@ -814,7 +814,7 @@ GymList['Elite Aaron'] = new Gym(
     BadgeEnums.Elite_Aaron,
     18000,
     'I lost with the most beautiful and toughest of the bug Pokémon... We lost because I wasn\'t good enough... That\'s it! Back to training camp! Let\'s hear it for me! No... That was wrong... Anyway... Go on to the next room! Three Trainers are waiting for you. They are all tougher than me.',
-    [new TemporaryBattleRequirement('Barry6')]
+    [new TemporaryBattleRequirement('Barry 6')]
 );
 GymList['Elite Bertha'] = new Gym(
     'Bertha',
@@ -1119,7 +1119,7 @@ GymList['Shalour City'] = new Gym(
     BadgeEnums.Rumble,
     3800,
     'Oh! I have been defeated! Alack, alay! Lady Korrina gave a terrible display! This is it. I must give up my title and admit that your strength far exceeds-- Just teasing! But here\'s your Badge. Boy, you\'ll be rolling in \'em soon!',
-    [new TemporaryBattleRequirement('Calem1')]
+    [new TemporaryBattleRequirement('Calem 1')]
 );
 GymList['Coumarine City'] = new Gym(
     'Ramos',
@@ -1132,7 +1132,7 @@ GymList['Coumarine City'] = new Gym(
     BadgeEnums.Plant,
     5500,
     'Yeh believe in yer Pokémon... And they believe in yeh, too... Mighty oaks from acorns grow. Go on, then. Yeh\'ve earned it. Here\'s yer own Plant Badge, sprout.',
-    [new TemporaryBattleRequirement('Calem2')]
+    [new TemporaryBattleRequirement('Calem 2')]
 );
 GymList['Lumiose City'] = new Gym(
     'Clemont',
@@ -1171,7 +1171,7 @@ GymList['Anistar City'] = new Gym(
     BadgeEnums.Psychic,
     30000,
     'Now, the Psychic Badge. A testament to your skill. Proof of your power.',
-    [new TemporaryBattleRequirement('Calem4')]
+    [new TemporaryBattleRequirement('Calem 4')]
 );
 GymList['Snowbelle City'] = new Gym(
     'Wulfric',
@@ -1281,7 +1281,7 @@ GymList['Iki Town'] = new Gym(
     BadgeEnums.FightiniumZ,
     128000,
     'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too!',
-    [new TemporaryBattleRequirement('Hau3')]
+    [new TemporaryBattleRequirement('Hau 3')]
 );
 GymList['Konikoni City'] = new Gym(
     'Olivia',
@@ -1294,7 +1294,7 @@ GymList['Konikoni City'] = new Gym(
     BadgeEnums.RockiumZ,
     128000,
     'How lovely.',
-    [new TemporaryBattleRequirement('Plumeria1')],
+    [new TemporaryBattleRequirement('Plumeria 1')],
     () => {
         App.game.quests.getQuestLine('Eater of Light').beginQuest();
     }
@@ -1310,7 +1310,7 @@ GymList['Malie City'] = new Gym(
     BadgeEnums.DarkiniumZ,
     128000,
     'Hmph...',
-    [new TemporaryBattleRequirement('Gladion2')]
+    [new TemporaryBattleRequirement('Gladion 2')]
 );
 GymList['Exeggutor Island'] = new Gym(
     'Hapu',
@@ -1597,7 +1597,7 @@ GymList.Hulbury = new Gym(
     BadgeEnums.Galar_Water,
     60000,
     'I may proudly be the strongest member of this Gym, but I was totally washed away!',
-    [new TemporaryBattleRequirement('Hop4')]
+    [new TemporaryBattleRequirement('Hop 4')]
 );
 GymList.Motostoke = new Gym(
     'Kabu',
@@ -1610,7 +1610,7 @@ GymList.Motostoke = new Gym(
     BadgeEnums.Galar_Fire,
     60000,
     'I\'m often regarded as the first real roadblock of the Gym Challenge, and yet you defeated me! Clearly, your talent surpassed my many years of experience. I still have much to learn!',
-    [new TemporaryBattleRequirement('Marnie1')]
+    [new TemporaryBattleRequirement('Marnie 1')]
 );
 GymList['Stow-on-Side1'] = new Gym(
     'Bea',
@@ -1624,7 +1624,7 @@ GymList['Stow-on-Side1'] = new Gym(
     BadgeEnums.Galar_Fighting,
     80000,
     'Your strength nearly made me want to turn and run in my bare feet',
-    [new TemporaryBattleRequirement('Hop5')]
+    [new TemporaryBattleRequirement('Hop 5')]
 );
 GymList['Stow-on-Side2'] = new Gym(
     'Allister',
@@ -1638,7 +1638,7 @@ GymList['Stow-on-Side2'] = new Gym(
     BadgeEnums.Galar_Ghost,
     80000,
     'Maybe my mask... kept me from seeing just how strong you really are...',
-    [new TemporaryBattleRequirement('Hop5')]
+    [new TemporaryBattleRequirement('Hop 5')]
 );
 GymList.Ballonlea = new Gym(
     'Opal',
@@ -1694,7 +1694,7 @@ GymList.Spikemuth = new Gym(
     BadgeEnums.Galar_Dark,
     96000,
     'Me an\' my team gave it our best. Let\'s meet up again for a battle some time...',
-    [new TemporaryBattleRequirement('Marnie2')]
+    [new TemporaryBattleRequirement('Marnie 2')]
 );
 GymList.Hammerlocke = new Gym(
     'Raihan',
