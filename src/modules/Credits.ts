@@ -114,6 +114,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/272336444297707521/',
         image: 'assets/images/profile/trainer-96.png',
         resources: [
+            'Ash\'s Butterfree',
             'Blimp base',
             'Danny',
             'Luana',
@@ -127,6 +128,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Pikachu',
             'Pinkan Rhyhorn (shiny)',
             'Pinkan Weedle',
+            'Pink Butterfree',
             'Rudy',
             'Supreme Gym Leader Drake',
             'Team Flare Admin (male)',
@@ -176,6 +178,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Nidoran(M)',
             'Pinkan Primeape',
             'Pinkan Venonat',
+            'Koga Trainer',
         ],
         // Notes: Made specifically for PokéClicker.
     },

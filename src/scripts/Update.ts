@@ -1132,6 +1132,12 @@ class Update implements Saveable {
         },
 
         '0.9.15': ({ playerData, saveData }) => {
+            // Aegislash and Pumpkaboo line renames
+            const renamePokemon = Update.changeHatcheryKey;
+            renamePokemon(saveData, 'Aegislash', 'Aegislash (Shield)');
+            renamePokemon(saveData, 'Pumpkaboo', 'Pumpkaboo (Average)');
+            renamePokemon(saveData, 'Gourgeist', 'Gourgeist (Average)');
+
             // Replace Pokémon names to IDs
             const eggList = saveData.breeding.eggList;
             const queueList = saveData.breeding.queueList;
