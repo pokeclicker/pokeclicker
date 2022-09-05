@@ -338,6 +338,7 @@ namespace GameConstants {
         'Lickitung',
         'Togepi',
         'Beldum',
+        'Pinkan Dodrio',
         'Skorupi',
         'Combee',
         'Burmy (plant)',
@@ -398,6 +399,8 @@ namespace GameConstants {
         None = -2,
         All = -1,
         Kanto,
+        Johto,
+        Hoenn,
         Kalos,
         Alola,
         Galar,
@@ -442,6 +445,7 @@ namespace GameConstants {
     declare const UnovaGyms: string[];
     declare const KalosGyms: string[];
     declare const GalarGyms: string[];
+    declare const OrangeGyms: string[];
     declare const RegionGyms: string[][];
     declare function getGymIndex(gym: string): number;
     declare function getGymRegion(gym: string): Region;
@@ -565,6 +569,7 @@ namespace GameConstants {
     declare enum KantoSubRegions {
         Kanto,
         Sevii123,
+        Sevii4567,
     }
     declare enum JohtoSubRegions {
         Johto,
