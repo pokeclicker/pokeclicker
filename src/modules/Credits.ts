@@ -181,6 +181,7 @@ export const SpriteCredits: Credit[] = [
             'Koga Trainer',
             'Spooky Ivysaur',
             'Spooky Venusaur',
+            'TODO name for Dugtrio',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -493,6 +494,11 @@ export const SpriteCredits: Credit[] = [
             'Valencian Butterfree',
             'Valencian Vileplume',
             'Valencian Weepinbell',
+            'TODO name for Onix',
+            'TODO name for Weepinbell',
+            'TODO name for Gengar',
+            'TODO name for Tangela',
+            'TODO name for Goldeen',
         ],
         // NOTES: Made specifically for Pokeclicker.
     },
