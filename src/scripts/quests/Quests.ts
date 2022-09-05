@@ -82,6 +82,9 @@ class Quests implements Saveable {
         // Check if we can start a new quest, and the requested quest isn't started or completed
         if (this.canStartNewQuest() && quest && !quest.inProgress() && !quest.isCompleted()) {
             quest.begin();
+            if ((Settings.getSetting('hideQuestsOnFull').value) && this.currentQuests().length >= this.questSlots()) {
+                $('#QuestModal').modal('hide');
+            }
         } else {
             Notifier.notify({
                 message: 'You cannot start more quests.',
