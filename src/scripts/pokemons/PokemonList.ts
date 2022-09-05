@@ -1188,7 +1188,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Electric, PokemonType.Flying],
         'levelType': LevelType.mediumfast,
         'exp': 112,
-        'eggCycles': 20,
+        'eggCycles': 10,
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -1206,7 +1206,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Electric, PokemonType.Water],
         'levelType': LevelType.mediumfast,
         'exp': 112,
-        'eggCycles': 20,
+        'eggCycles': 10,
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -1224,7 +1224,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
         'exp': 112,
-        'eggCycles': 20,
+        'eggCycles': 10,
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -1242,7 +1242,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
         'exp': 112,
-        'eggCycles': 20,
+        'eggCycles': 10,
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -3270,6 +3270,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 77,
         'eggCycles': 25,
+        'evolutions': [new StoneEvolution('Crystal Onix', 'Crystal Steelix', GameConstants.StoneType.Ice_stone)],
         'base': {
             'hitpoints': 35,
             'attack': 45,
@@ -4996,7 +4997,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
         'exp': 41,
-        'eggCycles': 8,
+        'eggCycles': 8,//Lowered to match base form
         'base': {
             'hitpoints': 20,
             'attack': 40,
@@ -5054,6 +5055,7 @@ const pokemonList = createPokemonArray(
         'exp': 49,
         'eggCycles': 10,
         'evolutions': [new StoneEvolution('Togepi', 'Togetic', GameConstants.StoneType.Soothe_bell)],
+        'baby': true,
         'base': {
             'hitpoints': 35,
             'attack': 20,
@@ -5071,7 +5073,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Fairy],
         'levelType': LevelType.fast,
         'exp': 49,
-        'eggCycles': 10,
+        'eggCycles': 8,//Lowered to match base form
         'base': {
             'hitpoints': 35,
             'attack': 25,
@@ -5089,7 +5091,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Fairy],
         'levelType': LevelType.fast,
         'exp': 49,
-        'eggCycles': 10,
+        'eggCycles': 8,//lowered to match base form
         'base': {
             'hitpoints': 35,
             'attack': 25,
@@ -6154,6 +6156,23 @@ const pokemonList = createPokemonArray(
             'speed': 30,
         },
         'heldItem': {type: ItemType.item, id: 'Metal_coat'},
+    },
+    {
+        'id': 208.1,
+        'name': 'Crystal Steelix',
+        'catchRate': 25,
+        'type': [PokemonType.Steel, PokemonType.Ice],
+        'levelType': LevelType.mediumfast,
+        'exp': 179,
+        'eggCycles': 25,
+        'base': {
+            'hitpoints': 75,
+            'attack': 85,
+            'specialAttack': 55,
+            'defense': 200,
+            'specialDefense': 65,
+            'speed': 30,
+        },
     },
     {
         'id': 209,
@@ -10736,6 +10755,7 @@ const pokemonList = createPokemonArray(
         'exp': 57,
         'catchRate': 75,
         'evolutions': [new DayTimedStoneEvolution('Riolu', 'Lucario', GameConstants.StoneType.Soothe_bell)],
+        'baby': true,
         'base': {
             'hitpoints': 40,
             'attack': 70,
@@ -20196,6 +20216,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 48,
         'catchRate': 75,
+        'baby': true,
         'evolutions': [
             new LevelEvolution('Toxel', 'Toxtricity (Amped)', 30),
             new LevelEvolution('Toxel', 'Toxtricity (Low Key)', 30),
