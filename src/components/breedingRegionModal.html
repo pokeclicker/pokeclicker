@@ -17,7 +17,7 @@
 			</div>
 			<div class="modal-footer">
 				<div class="btn-group mr-auto">
-					<button type="button" class="btn btn-success" onclick="Settings.setSettingByName('breedingRegionFilter', (1 << GameConstants.Region.final) - 1); BreedingFilters.region.value((1 << GameConstants.Region.final) - 1);">All</button>
+					<button type="button" class="btn btn-success" onclick="var bfield = (1 << (player.highestRegion() + 1)) - 1; Settings.setSettingByName('breedingRegionFilter', bfield); BreedingFilters.region.value(bfield);">All</button>
 					<button type="button" class="btn btn-danger" onclick="Settings.setSettingByName('breedingRegionFilter', 0); BreedingFilters.region.value(0);">None</button>
 				</div>
 				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

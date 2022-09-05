@@ -1,5 +1,5 @@
 import PokemonType from '../enums/PokemonType';
-import { Region, Pokerus } from '../GameConstants';
+import { Pokerus } from '../GameConstants';
 import SettingOption from './SettingOption';
 import Settings from './Settings';
 import FilterOption from './FilterOption';
@@ -46,7 +46,7 @@ const BreedingFilters: Record<string, FilterOption> = {
     ),
     region: new FilterOption<number>(
         'Region',
-        ko.observable((1 << Region.final) - 1).extend({ numeric: 0 }),
+        ko.observable(1).extend({ numeric: 0 }),
         'breedingRegionFilter',
         [],
     ),

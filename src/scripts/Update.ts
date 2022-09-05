@@ -1131,7 +1131,7 @@ class Update implements Saveable {
             }
         },
 
-        '0.9.15': ({ playerData, saveData }) => {
+        '0.9.15': ({ playerData, saveData, settingsData }) => {
             // Aegislash and Pumpkaboo line renames
             const renamePokemon = Update.changeHatcheryKey;
             renamePokemon(saveData, 'Aegislash', 'Aegislash (Shield)');
@@ -1143,6 +1143,12 @@ class Update implements Saveable {
             const queueList = saveData.breeding.queueList;
             Update.changePokemonNameToId(saveData, eggList);
             Update.changePokemonNameToId(saveData, queueList);
+
+            if (settingsData.breedingRegionFilter == -2) {
+                settingsData.breedingRegionFilter = 2 ** (playerData.highestRegion + 1) - 1;
+            } else {
+                settingsData.breedingRegionFilter = 2 ** settingsData.breedingRegionFilter;
+            }
         },
     };
 
