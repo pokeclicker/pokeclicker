@@ -284,7 +284,7 @@ class BerryDeal {
     }
 
     public static canUse(town: GameConstants.BerryTraderLocations, i: number): boolean {
-        const deal = BerryDeal.list[GameConstants.BerryTraderLocations[town]]?.peek()[i];
+        const deal = BerryDeal.list[town]?.peek()[i];
         if (!deal) {
             return false;
         } else {
@@ -293,7 +293,7 @@ class BerryDeal {
     }
 
     public static use(town: GameConstants.BerryTraderLocations, i: number, tradeTimes = 1) {
-        const deal = BerryDeal.list[GameConstants.BerryTraderLocations[town]]?.peek()[i];
+        const deal = BerryDeal.list[town]?.peek()[i];
         if (BerryDeal.canUse(town, i)) {
             const trades = deal.berries.map(berry => {
                 const amt = App.game.farming.berryList[berry.berryType]();
