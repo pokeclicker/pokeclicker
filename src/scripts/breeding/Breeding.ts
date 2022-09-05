@@ -21,7 +21,7 @@ class Breeding implements Feature {
     private _eggSlots: KnockoutObservable<number>;
 
     private _queueList: KnockoutObservableArray<number>;
-    private queueSlots: KnockoutObservable<number>;
+    public queueSlots: KnockoutObservable<number>;
 
     public hatchList: { [name: number]: PokemonNameType[][] } = {};
 
@@ -483,35 +483,7 @@ class Breeding implements Feature {
         return queueSizeSetting > -1 ? queueSizeSetting : this.queueSlots();
     });
 
-    public getQueueSizeSetting(): Setting<string> {
-        const setting = Settings.getSetting('breedingQueueSizeSetting');
-        if (!setting.options.length) {
-            setting.options = this.getQueueSizeSettingOptions();
-            setting.observableValue.subscribe((newValue) => {
-                this.updateQueueSizeLimit(+newValue);
-            });
-        }
-
-        return setting;
-    }
-
-    private getQueueSizeSettingOptions(): SettingOption<string>[] {
-        const options = [new SettingOption('0 (Off)', '0')];
-        const highestRegion = player.highestRegion();
-        if (highestRegion > 0) {
-            let totalSlots = 0;
-            for (let i = 0; i < highestRegion; i++) {
-                totalSlots += this.queueSlotsGainedFromRegion(i);
-                if (i < highestRegion - 1) {
-                    options.push(new SettingOption(totalSlots.toString(), totalSlots.toString()));
-                }
-            }
-            options.push(new SettingOption(`Max (${totalSlots})`, '-1'));
-        }
-        return options.reverse();
-    }
-
-    private updateQueueSizeLimit(size: number) {
+    public updateQueueSizeLimit(size: number) {
         BreedingController.queueSizeLimit(size);
         if (size == 0) {
             this.clearQueue();
