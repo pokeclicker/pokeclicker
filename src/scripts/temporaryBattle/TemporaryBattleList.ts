@@ -1971,7 +1971,7 @@ TemporaryBattleList['Captain Mina'] = new TemporaryBattle(
     [
         new GymPokemon('Mawile', 189973142, 51),
         new GymPokemon('Granbull', 189973142, 51),
-        new GymPokemon('Ribombee', 102200640, 51),
+        new GymPokemon('Ribombee', 198608284, 51),
     ],
     'Woah! I\'m shocked at your strength!',
     [new TemporaryBattleRequirement('Ultra Megalopolis')]
