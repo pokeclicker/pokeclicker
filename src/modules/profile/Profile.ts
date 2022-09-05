@@ -7,7 +7,7 @@ import Notifier from '../notifications/Notifier';
 import Rand from '../utilities/Rand';
 
 export default class Profile implements Saveable {
-    public static MAX_TRAINER = 119;
+    public static MAX_TRAINER = 120;
     public static MAX_BACKGROUND = 40;
 
     saveKey = 'profile';

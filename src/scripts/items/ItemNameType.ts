@@ -108,6 +108,7 @@ type ItemNameType
     | 'Magikarp'
     | 'Togepi'
     | 'Beldum'
+    | 'Pinkan Dodrio'
     | 'Skorupi'
     | 'Combee'
     | 'Burmy (Plant)'

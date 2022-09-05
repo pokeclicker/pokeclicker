@@ -388,6 +388,18 @@
         })
     %>
 
+    <!--A Perfectly Ordinary Frigate-->
+    <%- include('templates/mapOverlay',
+        { name: "A Perfectly Ordinary Frigate"
+        , x: 39, y: 52
+        , width: 4, height: 9
+        , databind: "click:function(){MapHelper.moveToTown('A Perfectly Ordinary Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('A Perfectly Ordinary Frigate') }"
+        , visible:  "(App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 1 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2) && (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 2')]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 3')]() == 0 || (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() <= 4 && App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 1))"
+        , image: "assets/images/map/plasmafrigate_ship.png"
+        , connectedToTown: "A Perfectly Ordinary Frigate"
+        })
+    %>
+
     <!--Nimbasa City-->
     <%- include('templates/mapTown',
         { name: "Nimbasa City"
@@ -415,6 +427,18 @@
         { name: "Driftveil City"
         , x: 30, y: 31
         , isExtension: true
+        })
+    %>
+
+    <!--A Totally Unsuspicious Frigate-->
+    <%- include('templates/mapOverlay',
+        { name: "A Totally Unsuspicious Frigate"
+        , x: 36, y: 35
+        , width: 4, height: 9
+        , databind: "click:function(){MapHelper.moveToTown('A Totally Unsuspicious Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('A Totally Unsuspicious Frigate') }"
+        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 2')]() >= 1 && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 3')]() >= 1 && (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 5 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2) && (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 4')]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 5')]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunts 1')]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunts 2')]() == 0 || (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() <= 7 && App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 1))"
+        , image: "assets/images/map/plasmafrigate_ship.png"
+        , connectedToTown: "A Totally Unsuspicious Frigate"
         })
     %>
 
@@ -460,6 +484,18 @@
         { name: "Opelucid City"
         , x: 52, y: 12
         , isExtension: true
+        })
+    %>
+
+    <!--Team Plasma Assault-->
+    <%- include('templates/mapOverlay',
+        { name: "Team Plasma Assault"
+        , x: 47, y: 5
+        , width: 9, height: 6.5
+        , databind: "click:function(){MapHelper.moveToTown('Team Plasma Assault')}, attr:{ class: MapHelper.calculateTownCssClass('Team Plasma Assault') }"
+        , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]() >= 1 && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zinzolin 1')]() >= 1 && (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 12 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2) && (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow 1')]() == 0 || (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() <= 14 && App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 1))"
+        , image: "assets/images/map/plasmafrigate_airship.png"
+        , connectedToTown: "Team Plasma Assault"
         })
     %>
 
@@ -573,34 +609,25 @@
     <!-- DUNGEONS -->
     <!-- -------- -->
 
-    <!--P2 Laboratory-->
+    <!--Pledge Grove-->
     <%- include('templates/mapDungeon',
-        { name: "P2 Laboratory"
-        , x: 78, y: 52
+        { name: "Pledge Grove"
+        , x: 11, y: 39
+        })
+    %>
+
+    <!--Floccesy Ranch-->
+    <%- include('templates/mapDungeon',
+        { name: "Floccesy Ranch"
+        , x: 17, y: 40
         , width: 4, height: 3
         })
     %>
 
-    <!--Seaside Cave-->
+    <!--Liberty Garden-->
     <%- include('templates/mapDungeon',
-        { name: "Seaside Cave"
-        , x: 91, y: 16
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Dreamyard-->
-    <%- include('templates/mapDungeon',
-        { name: "Dreamyard"
-        , x: 90, y: 40
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Pinwheel Forest-->
-    <%- include('templates/mapDungeon',
-        { name: "Pinwheel Forest"
-        , x: 72, y: 40
+        { name: "Liberty Garden"
+        , x: 28, y: 52
         , width: 4, height: 3
         })
     %>
@@ -610,14 +637,6 @@
         { name: "Castelia Sewers"
         , x: 56, y: 54
         , width: 3, height: 4
-        })
-    %>
-
-    <!--Relic Castle-->
-    <%- include('templates/mapDungeon',
-        { name: "Relic Castle"
-        , x: 43, y: 36
-        , width: 4, height: 3
         })
     %>
 
@@ -636,10 +655,18 @@
         })
     %>
 
-    <!--Mistralton Cave-->
+    <!--Relic Castle-->
     <%- include('templates/mapDungeon',
-        { name: "Mistralton Cave"
-        , x: 23, y: 26
+        { name: "Relic Castle"
+        , x: 43, y: 36
+        , width: 4, height: 3
+        })
+    %>
+
+    <!--Lostlorn Forest-->
+    <%- include('templates/mapDungeon',
+        { name: "Lostlorn Forest"
+        , x: 59, y: 29
         , width: 4, height: 3
         })
     %>
@@ -652,10 +679,109 @@
         })
     %>
 
+    <!--Mistralton Cave-->
+    <%- include('templates/mapDungeon',
+        { name: "Mistralton Cave"
+        , x: 23, y: 26
+        , width: 4, height: 3
+        })
+    %>
+
     <!--Celestial Tower-->
     <%- include('templates/mapDungeon',
         { name: "Celestial Tower"
         , x: 17, y: 13
+        , width: 4, height: 3
+        })
+    %>
+
+    <!--Reversal Mountain-->
+    <%- include('templates/mapDungeon',
+        { name: "Reversal Mountain"
+        , x: 74, y: 20
+        , width: 5, height: 5
+        })
+    %>
+    <!--Reversal Mountain extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Reversal Mountain"
+        , x: 71, y: 21
+        , width: 3, height: 3
+        , isExtension: true
+        })
+    %>
+
+    <!--Seaside Cave-->
+    <%- include('templates/mapDungeon',
+        { name: "Seaside Cave"
+        , x: 91, y: 16
+        , width: 4, height: 3
+        })
+    %>
+
+    <!--Plasma Frigate-->
+    <%- include('templates/mapOverlay',
+        { name: "Plasma Frigate"
+        , x: 95, y: 16
+        , width: 4, height: 9
+        , databind: "click:function(){MapHelper.moveToTown('Plasma Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('Plasma Frigate') }"
+        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow 1')]() >= 1 && (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() == 0 || (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() <= 15 && App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 1)) && (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 15 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2)"
+        , image: "assets/images/map/plasmafrigate_ship.png"
+        , connectedToTown: "Plasma Frigate"
+        })
+    %>
+
+    <!--Plasma Frigate extension-->
+    <%- include('templates/mapOverlay',
+        { name: "Plasma Frigate"
+        , x: 95, y: 16
+        , width: 4, height: 9
+        , databind: "click:function(){MapHelper.moveToTown('Plasma Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('Plasma Frigate') }"
+        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis 2')]() >= 1"
+        , image: "assets/images/map/plasmafrigate_ship.png"
+        , connectedToTown: "Plasma Frigate"
+        })
+    %>
+
+    <!--Giant Chasm-->
+    <%- include('templates/mapDungeon',
+        { name: "Giant Chasm"
+        , x: 79, y: 7
+        , width: 4, height: 3
+        })
+    %>
+    <!--Giant Chasm extension-->
+    <%- include('templates/mapOverlay',
+        { name: "Giant Chasm"
+        , x: 77, y: 0.5
+        , width: 9, height: 6.5
+        , databind: "click:function(){MapHelper.moveToTown('Giant Chasm')}, attr:{ class: MapHelper.calculateTownCssClass('Giant Chasm') }"
+        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow 1')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() >= 1 && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis 2')]() == 0 && (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 16 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2)"
+        , image: "assets/images/map/plasmafrigate_airship.png"
+        , isExtension: true
+        })
+    %>
+
+    <!--Cave of Being-->
+    <%- include('templates/mapDungeon',
+        { name: "Cave of Being"
+        , x: 17, y: 46
+        , width: 4, height: 3
+        })
+    %>
+
+    <!--Abundant Shrine-->
+    <%- include('templates/mapDungeon',
+        { name: "Abundant Shrine"
+        , x: 70, y: 25
+        , width: 4, height: 3
+        })
+    %>
+
+    <!--Victory Road Unova-->
+    <%- include('templates/mapDungeon',
+        { name: "Victory Road Unova"
+        , x: 66, y: 2
         , width: 4, height: 3
         })
     %>
@@ -684,82 +810,27 @@
         })
     %>
 
-    <!--Reversal Mountain-->
+    <!--Pinwheel Forest-->
     <%- include('templates/mapDungeon',
-        { name: "Reversal Mountain"
-        , x: 74, y: 20
-        , width: 5, height: 5
-        })
-    %>
-    <!--Reversal Mountain extension-->
-    <%- include('templates/mapDungeon',
-        { name: "Reversal Mountain"
-        , x: 71, y: 21
-        , width: 3, height: 3
-        , isExtension: true
-        })
-    %>
-
-    <!--Abundant Shrine-->
-    <%- include('templates/mapDungeon',
-        { name: "Abundant Shrine"
-        , x: 70, y: 25
+        { name: "Pinwheel Forest"
+        , x: 72, y: 40
         , width: 4, height: 3
         })
     %>
 
-    <!--Lostlorn Forest-->
+    <!--Dreamyard-->
     <%- include('templates/mapDungeon',
-        { name: "Lostlorn Forest"
-        , x: 59, y: 29
+        { name: "Dreamyard"
+        , x: 90, y: 40
         , width: 4, height: 3
         })
     %>
 
-    <!--Floccesy Ranch-->
+    <!--P2 Laboratory-->
     <%- include('templates/mapDungeon',
-        { name: "Floccesy Ranch"
-        , x: 17, y: 40
+        { name: "P2 Laboratory"
+        , x: 78, y: 52
         , width: 4, height: 3
-        })
-    %>
-
-    <!--Cave of Being-->
-    <%- include('templates/mapDungeon',
-        { name: "Cave of Being"
-        , x: 17, y: 46
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Liberty Garden-->
-    <%- include('templates/mapDungeon',
-        { name: "Liberty Garden"
-        , x: 28, y: 52
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Giant Chasm-->
-    <%- include('templates/mapDungeon',
-        { name: "Giant Chasm"
-        , x: 79, y: 7
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Victory Road Unova-->
-    <%- include('templates/mapDungeon',
-        { name: "Victory Road Unova"
-        , x: 66, y: 2
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Pledge Grove-->
-    <%- include('templates/mapDungeon',
-        { name: "Pledge Grove"
-        , x: 11, y: 39
         })
     %>
 
@@ -841,16 +912,13 @@
         })
     %>
 
-    <!--Plasma Frigate 1, Castelia City-->
     <%- include('templates/mapOverlay',
-        { name: "A very normal frigate"
-        , x: 39, y: 52
-        , width: 4, height: 9
-        , databind: `click: () => {
-                Notifier.notify({message: 'Nothing out of the ordinary.'});
-                }`
-        , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Virbank City')]() >= 1 && App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Driftveil City')]() == 0"
-        , image: "assets/images/map/plasmafrigate_ship.png"
+        { name: "Ash Ketchum"
+        , x: 8, y: 27
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Ash Ketchum Unova'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Ash Ketchum Unova'] && TemporaryBattleList['Ash Ketchum Unova'].isVisible()"
+        , image: "assets/images/map/ashketchumoverworld.png"
         })
     %>
 
@@ -1036,5 +1104,4 @@
         , image: "assets/images/map/RainbowGruntM_Overworld.png"
         })
     %>
-
 </g>

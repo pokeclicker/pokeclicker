@@ -428,7 +428,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [10800, 21600, 43200, 86400, 604800],
             0.5, 0, 15000, 20,
             [40, 10, 0, 0, 0], BerryColor.Purple,
-            ['A completely enigmatic Berry. It apparently has the power of the stars that fill the night sky.'], undefined, ['Oricorio (Sensu)']);
+            ['A completely enigmatic Berry. It apparently has the power of the stars that fill the night sky.'], undefined, ['Detective Pikachu', 'Oricorio (Sensu)']);
         //#endregion
 
         //#endregion

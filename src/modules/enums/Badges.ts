@@ -42,6 +42,12 @@ enum BadgeEnums {
     'Elite_Glacia',
     'Elite_Drake',
     'Elite_HoennChampion',
+    // Orange league
+    'Coral-Eye',
+    'Sea_Ruby',
+    'Spike_Shell',
+    'Jade_Star',
+    'Elite_OrangeChampion',
     // Sinnoh
     'Coal',
     'Forest',
