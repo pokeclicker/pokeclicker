@@ -498,6 +498,9 @@ const SeviiGideon2 = new NPC ('Gideon', [
     image: 'assets/images/temporaryBattle/Scientist Gideon.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 7), new QuestLineStepCompletedRequirement('Celio\'s Errand', 9, GameConstants.AchievementOption.less)]),
 });
+const SixIslandSeviiRoamerNPC = new RoamerNPC('Bug Catcher John', [
+    'Apparently some kid released one of his Pokémon around here. That Pokémon, it\'s partner, and for whatever reason, the Legendary Beasts from Johto have been seen roaming on {ROUTE_NAME}.',
+], GameConstants.Region.kanto, RoamingPokemonList.findGroup(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii4567), undefined, new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion));
 const AlteringCaveRuinManiac1 = new NPC ('Ruin Maniac', [
     'Hello. You want to know what I\'m doing in this pointless dead end cave?',
     'Well, I\m trying to dig to a secluded island north of here. I\'ve heard there are some unusual Pokémon there.',
@@ -762,7 +765,7 @@ TownList['Four Island'] = new Town(
 TownList['Five Island'] = new Town(
     'Five Island',
     GameConstants.Region.kanto,
-    [FiveIslandShop],
+    [FiveIslandShop, new DockTownContent()],
     {
         requirements: [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     }
@@ -784,6 +787,7 @@ TownList['Six Island'] = new Town(
     [SixIslandShop],
     {
         requirements: [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
+        npcs: [SixIslandSeviiRoamerNPC],
     }
 );
 TownList['Dotted Hole'] = new Town(
@@ -1632,9 +1636,9 @@ const EverGrandeCityShop = new Shop([
 const BattleFrontierShop = new Shop([
     new PokeballItem(GameConstants.Pokeball.Ultraball, 1, GameConstants.Currency.battlePoint, undefined, 'Ultra Ball'),
     new PokeballItem(GameConstants.Pokeball.Masterball, 500, GameConstants.Currency.battlePoint , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.battlePoint]}` }, 'Master Ball'),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 10, GameConstants.Currency.battlePoint),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 20, GameConstants.Currency.battlePoint),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 40, GameConstants.Currency.battlePoint),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 10, GameConstants.Currency.battlePoint, 'Small Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 20, GameConstants.Currency.battlePoint, 'Medium Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 40, GameConstants.Currency.battlePoint, 'Large Restore'),
     ItemList.FarmHandJamie,
     ItemList.HatcheryHelperNoel,
 ]);
