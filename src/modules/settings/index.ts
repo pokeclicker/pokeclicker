@@ -91,10 +91,7 @@ Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal',
         new SettingOption('Queue Slots Full', 'queue'),
     ],
     'queue'));
-Settings.add(new Setting<string>('hideQuests', 'Hide Quest Menu', [
-    new SettingOption('Quest Log Full', 'full'),
-    new SettingOption('Keep Open', 'never'),
-], 'full'));
+Settings.add(new BooleanSetting('hideQuestsOnFull', 'Hide Quest Menu on full questslots', true));
 Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     [
         new SettingOption('To Next Stage', 'nextStage'),
