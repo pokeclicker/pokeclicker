@@ -137,6 +137,12 @@ export const SpriteCredits: Credit[] = [
             'Tourist Couple/Bellhop',
             'Valencian Raticate',
             'Valencian Paras',
+            'TODO Dugtrio shop image',
+            'TODO Gengar shop image',
+            'TODO Goldeen shop image',
+            'TODO Onix shop image',
+            'TODO Tangela shop image',
+            'TODO Weepinbell shop image',
         ],
         // Notes: Made specifically for PokéClicker.
     },
