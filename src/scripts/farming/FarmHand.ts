@@ -193,7 +193,7 @@ class FarmHand {
         if (this.shouldHarvest()) {
             let readyPlotIndex;
             do {
-                readyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry !== BerryType.None && p.stage() >= PlotStage.Berry && this.plots().includes(i));
+                readyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry !== BerryType.None && p.stage() >= PlotStage.Berry && this.plots().includes(i) && !p.isSafeLocked);
                 if (readyPlotIndex >= 0 && workTimes > 0) {
                     const berry = App.game.farming.plotList[readyPlotIndex].berry;
                     App.game.farming.harvest(readyPlotIndex);
@@ -213,7 +213,7 @@ class FarmHand {
             let emptyPlotIndex;
             do {
                 // Find empty plots
-                emptyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry == BerryType.None && this.plots().includes(i));
+                emptyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry == BerryType.None && this.plots().includes(i) && !p.isSafeLocked);
                 // Plant the berry
                 if (emptyPlotIndex >= 0 && workTimes > 0) {
                     // Plant the expected berry
