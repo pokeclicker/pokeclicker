@@ -1546,7 +1546,11 @@ TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
     'Flowering Celebi',
     [new GymPokemon('Flowering Celebi', 2336102594, 100)],
     'Cel Cel Celebi!',
-    [new QuestLineStepCompletedRequirement('Secrets of the Jungle', 12)]
+    [new QuestLineStepCompletedRequirement('Secrets of the Jungle', 12)],
+    undefined,
+    {
+        isTrainerBattle: false,
+    }
 );
 TemporaryBattleList.Peony = new TemporaryBattle(
     'Peony',
