@@ -1124,10 +1124,6 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 39);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 40);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 41);
-
-            // Add Snorlax Temporary Battles
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
         },
 
         '0.9.14': ({ playerData, saveData }) => {
@@ -1142,6 +1138,10 @@ class Update implements Saveable {
             renamePokemon(saveData, 'Aegislash', 'Aegislash (Shield)');
             renamePokemon(saveData, 'Pumpkaboo', 'Pumpkaboo (Average)');
             renamePokemon(saveData, 'Gourgeist', 'Gourgeist (Average)');
+
+            // Add Snorlax Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
 
             // Replace Pokémon names to IDs
             const eggList = saveData.breeding.eggList;
