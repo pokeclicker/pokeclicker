@@ -1572,7 +1572,7 @@ TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
     [new GymPokemon('Flowering Celebi', 2336102594, 100)],
     'Cel Cel Celebi!',
     [new QuestLineStepCompletedRequirement('Secrets of the Jungle', 12)],
-    undefined,
+    [new ObtainedPokemonRequirement(pokemonMap['Flowering Celebi'])],
     {
         isTrainerBattle: false,
     }
