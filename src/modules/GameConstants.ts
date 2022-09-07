@@ -1278,6 +1278,8 @@ export const TemporaryBattles = [
     'Blue 3',
     'Blue 4',
     'Fighting Dojo',
+    'Snorlax route 12',
+    'Snorlax route 16',
     'Blue 5',
     'Biker Goon 1',
     'Biker Goon 2',
