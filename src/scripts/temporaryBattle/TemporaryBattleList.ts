@@ -1492,11 +1492,11 @@ TemporaryBattleList.Avery3 = new TemporaryBattle(
 TemporaryBattleList['Zarude Tribe 1'] = new TemporaryBattle(
     'Zarude Tribe 1',
     [
-        new GymPokemon('Zarude', 182908638, 79),
-        new GymPokemon('Zarude', 182908638, 80),
-        new GymPokemon('Zarude', 182908638, 81),
-        new GymPokemon('Zarude', 182908638, 81),
-        new GymPokemon('Zarude', 182908638, 81),
+        new GymPokemon('Zarude', 379667456, 79),
+        new GymPokemon('Zarude', 379667456, 80),
+        new GymPokemon('Zarude', 379667456, 81),
+        new GymPokemon('Zarude', 379667456, 81),
+        new GymPokemon('Zarude', 379667456, 81),
     ],
     'Za! Za! Zarude!',
     [new QuestLineStepCompletedRequirement('Secrets of the Jungle', 3)],
@@ -1509,12 +1509,12 @@ TemporaryBattleList['Zarude Tribe 1'] = new TemporaryBattle(
 TemporaryBattleList['Zarude Tribe 2'] = new TemporaryBattle(
     'Zarude Tribe 2',
     [
-        new GymPokemon('Zarude', 182908638, 82),
-        new GymPokemon('Zarude', 182908638, 82),
-        new GymPokemon('Zarude', 182908638, 83),
-        new GymPokemon('Zarude', 182908638, 83),
-        new GymPokemon('Zarude', 182908638, 84),
-        new GymPokemon('Zarude', 182908638, 85),
+        new GymPokemon('Zarude', 327054363, 82),
+        new GymPokemon('Zarude', 327054363, 82),
+        new GymPokemon('Zarude', 327054363, 83),
+        new GymPokemon('Zarude', 327054363, 83),
+        new GymPokemon('Zarude', 327054363, 84),
+        new GymPokemon('Zarude', 327054363, 85),
     ],
     'Za! Za! Zarude!',
     [new QuestLineStepCompletedRequirement('Secrets of the Jungle', 5)],
@@ -1527,12 +1527,12 @@ TemporaryBattleList['Zarude Tribe 2'] = new TemporaryBattle(
 TemporaryBattleList['Zarude Tribe 3'] = new TemporaryBattle(
     'Zarude Tribe 3',
     [
-        new GymPokemon('Zarude', 182908638, 85),
-        new GymPokemon('Zarude', 182908638, 85),
-        new GymPokemon('Zarude', 182908638, 86),
-        new GymPokemon('Zarude', 182908638, 86),
-        new GymPokemon('Zarude', 182908638, 87),
-        new GymPokemon('Zarude', 182908638, 88),
+        new GymPokemon('Zarude', 327054363, 85),
+        new GymPokemon('Zarude', 327054363, 85),
+        new GymPokemon('Zarude', 327054363, 86),
+        new GymPokemon('Zarude', 327054363, 86),
+        new GymPokemon('Zarude', 327054363, 87),
+        new GymPokemon('Zarude', 327054363, 88),
     ],
     'Za! Za! Zarude!',
     [new QuestLineStepCompletedRequirement('Secrets of the Jungle', 5)],
@@ -1545,12 +1545,12 @@ TemporaryBattleList['Zarude Tribe 3'] = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Galar'] = new TemporaryBattle(
     'Ash Ketchum Galar',
     [
-        new GymPokemon('Pikachu (Partner Cap)', 182908638, 58),
-        new GymPokemon('Sirfetch\'d', 182908638, 56),
-        new GymPokemon('Dragonite', 182908638, 56),
-        new GymPokemon('Dracovish', 182908638, 60),
-        new GymPokemon('Gigantamax Gengar', 182908638, 62),
-        new GymPokemon('Mega Lucario', 182908638, 62),
+        new GymPokemon('Pikachu (Partner Cap)', 348526193, 58),
+        new GymPokemon('Sirfetch\'d', 342447247, 56),
+        new GymPokemon('Dragonite', 342447247, 56),
+        new GymPokemon('Dracovish', 342447247, 60),
+        new GymPokemon('Gigantamax Gengar', 358657768, 62),
+        new GymPokemon('Mega Lucario', 368789343, 62),
     ],
     '...I really thought I could beat you this time. Still, it was a really fun battle! Okay, let\'s go to Glimwood Tangle! I\'ll beat you there!',
     [new QuestLineStepCompletedRequirement('Secrets of the Jungle', 8)],
@@ -1563,14 +1563,14 @@ TemporaryBattleList['Ash Ketchum Galar'] = new TemporaryBattle(
 );
 TemporaryBattleList['Zarude (Dada)'] = new TemporaryBattle(
     'Zarude (Dada)',
-    [new GymPokemon('Zarude (Dada)', 2336102594, 90)],
+    [new GymPokemon('Zarude (Dada)', 2090303973, 90)],
     'Zaru Zaruza. Zarude!',
     [new QuestLineStepCompletedRequirement('Secrets of the Jungle', 10)]
 );
 TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
     'Flowering Celebi',
-    [new GymPokemon('Flowering Celebi', 2336102594, 100)],
-    'Cel Cel Celebi!',
+    [new GymPokemon('Flowering Celebi', 2132963238, 100)],
+    'Cel Cel! Celebi!',
     [new QuestLineStepCompletedRequirement('Secrets of the Jungle', 12)],
     [new ObtainedPokemonRequirement(pokemonMap['Flowering Celebi'])],
     {
@@ -1620,7 +1620,7 @@ TemporaryBattleList['Dyna Tree Birds'] = new TemporaryBattle(
 );
 TemporaryBattleList.Regigigas = new TemporaryBattle(
     'Regigigas',
-    [new GymPokemon('Regigigas', 2336102594, 100)],
+    [new GymPokemon('Regigigas', 2031393560, 100)],
     'The ancient giant was defeated!',
     [new QuestLineStepCompletedRequirement('The Ancient Golems', 7)]
 );

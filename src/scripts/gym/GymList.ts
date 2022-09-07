@@ -1784,7 +1784,7 @@ GymList['Champion Leon'] = new Champion(
         new GymPokemon('Inteleon', 137833678, 64),
         new GymPokemon('Gigantamax Charizard', 145088818, 65),
     ],
-    // Sobbke
+    // Sobble
     [
         new GymPokemon('Rhyperior', 133481036, 64),
         new GymPokemon('Rillaboom', 137833678, 64),

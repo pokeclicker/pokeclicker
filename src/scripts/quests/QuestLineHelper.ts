@@ -1200,7 +1200,7 @@ class QuestLineHelper {
     }
 
     public static createJungleSecretsQuestLine() {
-        const jungleSecretsQuestLine = new QuestLine('Secrets of the Jungle', 'Discover the secrets of the jungle where Zarude reside.', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), new TemporaryBattleRequirement('Ash Ketchum Alola')]), GameConstants.BulletinBoards.Galar);
+        const jungleSecretsQuestLine = new QuestLine('Secrets of the Jungle', 'Discover the secrets of the jungle.', new TemporaryBattleRequirement('Ash Ketchum Alola'), GameConstants.BulletinBoards.Armor);
 
         const talktoJungleAsh1 = new TalkToNPCQuest(JungleAsh1, 'Ash Ketchum wants to talk to you at the Master Dojo.');
         jungleSecretsQuestLine.addQuest(talktoJungleAsh1);
