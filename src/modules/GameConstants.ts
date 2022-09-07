@@ -1274,6 +1274,8 @@ export const RegionalStarters = [
 
 export const TemporaryBattles = [
     'Fighting Dojo',
+    'Snorlax route 12',
+    'Snorlax route 16',
     'Biker Goon 1',
     'Biker Goon 2',
     'Biker Goon 3',
