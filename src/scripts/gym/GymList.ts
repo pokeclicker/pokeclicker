@@ -1871,7 +1871,7 @@ GymList['Elite Dojo Master Mustard'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_ArmorMatron)]
 );
 GymList['Elite Trainer Peony'] = new Gym(
-    'Freezington',
+    'Peony',
     'Elite Trainer Peony',
     [
         new GymPokemon('Perrserker', 197029616, 74),
@@ -1884,4 +1884,11 @@ GymList['Elite Trainer Peony'] = new Gym(
     250000,
     'Gone and got stronger again, have you? Ah well! Hats off to you-in more ways than one!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Crown Shrine'))]
+    [
+        new MultiRequirement([
+            new QuestLineCompletedRequirement('The Crown of Galar'),
+            new QuestLineCompletedRequirement('The Dyna Tree Birds'),
+            new QuestLineCompletedRequirement('The Ancient Golems'),
+        ]),
+    ]
 );
