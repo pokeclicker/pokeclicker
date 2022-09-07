@@ -1200,12 +1200,12 @@ class QuestLineHelper {
     }
 
     public static createJungleSecretsQuestLine() {
-        const jungleSecretsQuestLine = new QuestLine('Secrets of the Jungle', 'Discover the secrets of the jungle where Zarude reside.', new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap.Zarude), new TemporaryBattleRequirement('Ash Ketchum Galar')]), GameConstants.BulletinBoards.Galar);
+        const jungleSecretsQuestLine = new QuestLine('Secrets of the Jungle', 'Discover the secrets of the jungle where Zarude reside.', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), new TemporaryBattleRequirement('Ash Ketchum Alola')]), GameConstants.BulletinBoards.Galar);
 
-        const talktoJungleAsh1 = new TalkToNPCQuest(JungleAsh1, 'Ash wants to talk to you at the Master Dojo.');
+        const talktoJungleAsh1 = new TalkToNPCQuest(JungleAsh1, 'Ash Ketchum wants to talk to you at the Master Dojo.');
         jungleSecretsQuestLine.addQuest(talktoJungleAsh1);
 
-        const talktoJungleKoko1 = new TalkToNPCQuest(JungleKoko1, 'Talk to Ash\'s friend, Koko, in Glimwood Tangle.');
+        const talktoJungleKoko1 = new TalkToNPCQuest(JungleKoko1, 'Talk to Ash Ketchum\'s friend, Koko, in Glimwood Tangle.');
         jungleSecretsQuestLine.addQuest(talktoJungleKoko1);
 
         const catchZarude = new CaptureSpecificPokemonQuest('Zarude', 'Catch the missing Zarude roaming around the Isle of Armor', 1, false, 0, undefined);
@@ -1229,7 +1229,7 @@ class QuestLineHelper {
         const talktoJungleKoko4 = new TalkToNPCQuest(JungleKoko4, 'Talk to Koko in Glimwood Tangle.');
         jungleSecretsQuestLine.addQuest(talktoJungleKoko4);
 
-        const talktoJungleAsh2 = new TalkToNPCQuest(JungleAsh2, 'Talk to Ash at the Master Dojo.');
+        const talktoJungleAsh2 = new TalkToNPCQuest(JungleAsh2, 'Talk to Ash Ketchum at the Master Dojo.');
         jungleSecretsQuestLine.addQuest(talktoJungleAsh2);
 
         const clearGalarAsh = new CustomQuest(1, 0, 'Defeat Ash Ketchum outside the Master Dojo.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ash Ketchum Galar')]());
@@ -1241,7 +1241,7 @@ class QuestLineHelper {
         const clearZarudeDada = new CustomQuest(1, 0, 'A final Zarude wants to challenge you. Defeat Zarude (Dada)', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zarude (Dada)')]());
         jungleSecretsQuestLine.addQuest(clearZarudeDada);
 
-        const talktoJungleAsh3 = new TalkToNPCQuest(JungleAsh3, 'Talk to Ash in Glimwood Tangle.');
+        const talktoJungleAsh3 = new TalkToNPCQuest(JungleAsh3, 'Talk to Ash Ketchum in Glimwood Tangle.');
         jungleSecretsQuestLine.addQuest(talktoJungleAsh3);
 
         const catchFloweringCelebi = new CaptureSpecificPokemonQuest('Flowering Celebi', 'Play with Flowering Celebi', 1, false, 0, undefined);

@@ -4290,7 +4290,7 @@ const IsleofArmorRoamerNPC = new RoamerNPC('Master Dojo Student', [
     'One of the other students said they saw a rare Pokémon on {ROUTE_NAME}. Might be worth having a look.',
 ], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.IsleofArmor));
 
-const JungleAsh1 = new NPC ('Ash', [
+const JungleAsh1 = new NPC ('Ash Ketchum', [
     'Hey! I didn\'t expect to see you again here. Fancy a ba-. Actually, no, I\'d like to ask a favour of you; a friend of mine living in Glimwood Tangle called me asking for some help.',
     'I would go myself, but I promised one of the students here a battle and I don\'t want to bail on them. Would you be able to go for me?',
     'Great! My friends name is Koko, tell him I sent you. This battle shouldn\'t take me too long, so come ask for my help if you need it!',
@@ -4319,7 +4319,7 @@ const JungleKoko4 = new NPC ('Koko', [
     'Would you be able to bring Ash here? I think the 3 of us together should be able to calm the lot of them down. He\'s probably still at the Master Dojo.',
 ],
 { requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 6), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 9, GameConstants.AchievementOption.less )])});
-const JungleAsh2 = new NPC ('Ash', [
+const JungleAsh2 = new NPC ('Ash Ketchum', [
     'You\'re back! How did it go with the Zarude?',
     'Oh, I see, that\'s quite the problem... Still, you said they\'re all out cold for now, right? In that case, we should have time for a battle!',
     'The battlefield out the back of the Dojo is being used out the moment, so let\'s battle out in front of the Dojo.',
@@ -4333,7 +4333,7 @@ const JungleKoko5 = new NPC ('Koko', [
     'I should tell you, Dada is much stronger than the rest of the Zarude. Have a good fight, both of you!',
 ],
 { requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 9), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 11, GameConstants.AchievementOption.less )])});
-const JungleAsh3 = new NPC ('Ash', [
+const JungleAsh3 = new NPC ('Ash Ketchum', [
     'Amazing, you even beat Dada! It\'s really clear that he is really amazed by your strength!',
     'Hang on, did you guys see something? Oh, over there, it\'s Celebi! It must have come now things are peaceful here. It looks like it wants to play!',
     'Actually, it looks interested in you in particular. Maybe it wants you to try and catch it? You should give it a shot!',
