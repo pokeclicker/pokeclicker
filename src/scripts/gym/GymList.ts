@@ -1883,7 +1883,6 @@ GymList['Elite Trainer Peony'] = new Gym(
     BadgeEnums.Elite_CrownChampion,
     250000,
     'Gone and got stronger again, have you? Ah well! Hats off to you-in more ways than one!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Crown Shrine'))]
     [
         new MultiRequirement([
             new QuestLineCompletedRequirement('The Crown of Galar'),
