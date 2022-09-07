@@ -303,13 +303,13 @@ class FarmHand {
         if (!json) {
             return;
         }
-        this.focus(json.focus || this.defaults.focus);
-        this.shouldHarvest(json.shouldHarvest || this.defaults.shouldHarvest);
-        this.workTicks(json.workTicks || this.defaults.workTicks);
-        this.costTicks(json.costTicks || this.defaults.costTicks);
-        this.energy(json.energy || this.defaults.energy);
-        this.hired(json.hired || this.defaults.hired);
-        this.plots(json.plots || this.defaults.plots);
+        this.focus(json.focus ?? this.defaults.focus);
+        this.shouldHarvest(json.shouldHarvest ?? this.defaults.shouldHarvest);
+        this.workTicks(json.workTicks ?? this.defaults.workTicks);
+        this.costTicks(json.costTicks ?? this.defaults.costTicks);
+        this.energy(json.energy ?? this.defaults.energy);
+        this.hired(json.hired ?? this.defaults.hired);
+        this.plots(json.plots ?? this.defaults.plots);
     }
 }
 
