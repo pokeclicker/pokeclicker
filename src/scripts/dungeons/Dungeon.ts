@@ -8590,7 +8590,7 @@ dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
     1800000, 32);
 
 dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
-    ['Steelix', 'Mawile', 'Bronzong', 'Durant', 'Bisharp', 'Doublade', 'Golisopod', 'Galarian Stunfisk', 'Sirfetch\'d'],
+    ['Steelix', 'Mawile', 'Bronzong', 'Durant', 'Bisharp', 'Doublade', 'Golisopod', 'Galarian Stunfisk'],
     {
         common: [
             {loot: 'Token_collector'},
