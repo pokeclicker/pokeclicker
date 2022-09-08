@@ -877,8 +877,19 @@ class QuestLineHelper {
         const heartDiamond = new CustomQuest(1000, undefined, 'Diancie needs help building a Heart Diamond to stabilize the Diamond Domain. Gather some Fairy Gems for her.', App.game.statistics.gemsGained[17]);
         princessDiancieQuestLine.addQuest(heartDiamond);
 
-        const thanksDiancie = new TalkToNPCQuest(ThanksDiancie, 'Talk to Princess Diancie');
+        const thanksDiancie = new TalkToNPCQuest(ThanksDiancie, 'Talk to Princess Diancie in Shalour City.');
         princessDiancieQuestLine.addQuest(thanksDiancie);
+
+        const DiancieCatch = new CaptureSpecificPokemonQuest(
+            'Diancie',
+            'Capture Diancie in Reflection Cave.',
+            1,
+            false,
+            undefined,
+            undefined
+        );
+
+        princessDiancieQuestLine.addQuest(DiancieCatch);        
 
         App.game.quests.questLines().push(princessDiancieQuestLine);
     }
