@@ -889,7 +889,7 @@ class QuestLineHelper {
             undefined
         );
 
-        princessDiancieQuestLine.addQuest(DiancieCatch);        
+        princessDiancieQuestLine.addQuest(DiancieCatch);
 
         App.game.quests.questLines().push(princessDiancieQuestLine);
     }
