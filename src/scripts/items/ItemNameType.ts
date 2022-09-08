@@ -142,6 +142,7 @@ type ItemNameType
     | 'Arctozolt'
     | 'Dracovish'
     | 'Arctovish'
+    | 'Zarude (Dada)'
     | 'Berry_Shovel'
     | 'Mulch_Shovel'
     | 'RareCandy'

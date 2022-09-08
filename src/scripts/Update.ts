@@ -1116,6 +1116,7 @@ class Update implements Saveable {
             if (playerData._townName == ('Giant Chasm')) {
                 playerData._townName = ('Humilau City');
             }
+
             // Add Detective Pikachu TemporaryBattles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 36);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 37);
@@ -1133,6 +1134,22 @@ class Update implements Saveable {
         },
 
         '0.9.15': ({ playerData, saveData }) => {
+            // Aegislash and Pumpkaboo line renames
+            const renamePokemon = Update.changeHatcheryKey;
+            renamePokemon(saveData, 'Aegislash', 'Aegislash (Shield)');
+            renamePokemon(saveData, 'Pumpkaboo', 'Pumpkaboo (Average)');
+            renamePokemon(saveData, 'Gourgeist', 'Gourgeist (Average)');
+
+            // Add Snorlax Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
+
+            // Replace Pokémon names to IDs
+            const eggList = saveData.breeding.eggList;
+            const queueList = saveData.breeding.queueList;
+            Update.changePokemonNameToId(saveData, eggList);
+            Update.changePokemonNameToId(saveData, queueList);
+
             //Pinkan Berry
             const enigmaUnlocked = saveData.farming.unlockedBerries[66];
             saveData.farming.berryList = Update.moveIndex(saveData.farming.berryList, 35);
@@ -1145,9 +1162,8 @@ class Update implements Saveable {
             if (enigmaUnlocked) {
                 saveData.farming.unlockedBerries[67] = true;
             }
-
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 13);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 14);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 16);
         },
     };
 
