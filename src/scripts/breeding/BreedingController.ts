@@ -223,4 +223,7 @@ class BreedingController {
         }
         return 1.0;
     }
+
+    // Queue size limit setting
+    public static queueSizeLimit = ko.observable(-1);
 }

@@ -2,7 +2,7 @@
 aria-labelledby="temporaryBattleWonModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable" role="document">
    <div class="modal-content">
-    <!-- ko if: TemporaryBattleRunner.battleObservable() -->
+    <!-- ko if: TemporaryBattleRunner.battleObservable()?.defeatMessage -->
        <div class="modal-header">
            <div style="width: 100%;">
                <img src="" onerror="this.src='assets/images/trainers/Mysterious Trainer.png'"
