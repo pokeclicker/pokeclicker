@@ -1,4 +1,4 @@
-import { Observable, PureComputed } from 'knockout';
+import { Observable, ObservableArray, PureComputed } from 'knockout';
 import GameHelper from '../GameHelper';
 
 function createObserver(loader: HTMLElement, options: IntersectionObserverInit): { page: Observable<number>, observer: IntersectionObserver} {
@@ -32,6 +32,14 @@ function findScrollingParent(element: HTMLElement): HTMLElement {
     return elem;
 }
 
+function createLoaderElem(): HTMLElement {
+    const loader = document.createElement('img');
+    loader.src = 'assets/images/pokeball/Pokeball.svg';
+    loader.className = 'loader-pokeball';
+
+    return loader;
+}
+
 export type LazyLoadOptions = {
     triggerMargin: string; // must be px or %
     threshold: number;
@@ -46,7 +54,7 @@ const defaultOptions: LazyLoadOptions = {
 
 const memo = new WeakMap<HTMLElement, PureComputed<Array<unknown>>>();
 
-export default function lazyLoad(element: HTMLElement, list: Array<unknown>, options?: Partial<LazyLoadOptions>): PureComputed<Array<unknown>> {
+export default function lazyLoad(element: HTMLElement, list: ObservableArray<unknown>, options?: Partial<LazyLoadOptions>): PureComputed<Array<unknown>> {
     if (memo.has(element)) {
         return memo.get(element);
     }
@@ -56,8 +64,7 @@ export default function lazyLoad(element: HTMLElement, list: Array<unknown>, opt
         ...options,
     };
 
-    const loader = document.createElement('div');
-    loader.textContent = 'Loading More...';
+    const loader = createLoaderElem();
     element.parentElement.append(loader);
 
     const { page } = createObserver(loader, {
@@ -68,6 +75,9 @@ export default function lazyLoad(element: HTMLElement, list: Array<unknown>, opt
 
     const lazyList = ko.pureComputed(() => {
         const lastElem = page() * opts.pageSize;
+
+        loader.style.display = lastElem >= list().length ? 'none' : 'initial';
+
         return list.slice(0, lastElem);
     });
 
