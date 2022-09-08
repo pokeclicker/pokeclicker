@@ -4,9 +4,22 @@ import GameHelper from '../GameHelper';
 function createObserver(loader: HTMLElement, options: IntersectionObserverInit): { page: Observable<number>, observer: IntersectionObserver} {
     const page = ko.observable(1);
 
-    const callback = (entries) => {
-        if (entries[0].isIntersecting) {
+    let visible = false;
+
+    const loadMore = () => {
+        if (visible) {
             GameHelper.incrementObservable(page);
+
+            // keep loading more in case we don't push the loader off screen
+            // @ts-ignore
+            requestIdleCallback(loadMore);
+        }
+    };
+
+    const callback = (entries) => {
+        visible = entries[0].isIntersecting;
+        if (entries[0].isIntersecting) {
+            loadMore();
         }
     };
 
@@ -48,7 +61,7 @@ export type LazyLoadOptions = {
 
 const defaultOptions: LazyLoadOptions = {
     triggerMargin: '10%',
-    threshold: 1,
+    threshold: 0,
     pageSize: 40,
 };
 
