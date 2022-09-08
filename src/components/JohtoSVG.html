@@ -88,37 +88,19 @@
     <!--Route 33-->
     <%- include('templates/mapRoute',
         { route: 33, region: 1
-        , width: 13, height: 3
-        , x: 32, y: 55
+        , width: 11, height: 3
+        , x: 34, y: 55
         })
      %>
 
     <!--Route 34-->
     <%- include('templates/mapRoute',
         { route: 34, region: 1
-        , width: 9, height: 3
+        , width: 11, height: 3
         , x: 24, y: 41
         , rotate: true
         })
      %>
-     <!--Extra bit of Route 34-->
-     <%- include('templates/mapRoute',
-         { route: 34, region: 1
-         , width: 5, height: 3
-         , x: 24, y: 53
-         , noText: true
-         , rotate: true
-         })
-      %>
-      <!--Extra bit of Route 34-->
-      <%- include('templates/mapRoute',
-          { route: 34, region: 1
-          , width: 3, height: 1
-          , x: 27, y: 55
-          , noText: true
-          , rotate: true
-          })
-       %>
 
     <!--Route 35-->
     <%- include('templates/mapRoute',
@@ -351,7 +333,7 @@
     <!--Azalea Town-->
     <%- include('templates/mapTown',
         { name: "Azalea Town"
-        , x: 28, y: 54
+        , x: 30, y: 54
         })
      %>
 
@@ -492,14 +474,15 @@
     <!--Slowpoke Well-->
     <%- include('templates/mapDungeon',
         { name: "Slowpoke Well"
-        , x: 32, y: 52
+        , x: 35, y: 52
         })
      %>
 
     <!--Ilex Forest-->
     <%- include('templates/mapDungeon',
         { name: "Ilex Forest"
-        , x: 24, y: 50
+        , x: 22, y: 52
+        , width: 8, height: 7
         })
      %>
 
