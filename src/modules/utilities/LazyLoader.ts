@@ -75,10 +75,11 @@ export default function lazyLoad(element: HTMLElement, list: ObservableArray<unk
 
     const lazyList = ko.pureComputed(() => {
         const lastElem = page() * opts.pageSize;
+        const array = list();
 
-        loader.style.display = lastElem >= list().length ? 'none' : 'initial';
+        loader.style.display = lastElem >= array.length ? 'none' : 'initial';
 
-        return list.slice(0, lastElem);
+        return array.slice(0, lastElem);
     });
 
     memo.set(element, lazyList);

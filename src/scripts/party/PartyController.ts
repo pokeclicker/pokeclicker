@@ -65,16 +65,14 @@ class PartyController {
     }).extend({ rateLimit: 500 });
 
     private static hatcherySortedList = [];
-    static getHatcherySortedList = (region = -1) => {
-        return ko.pureComputed(() => {
-            // If the breeding modal is open, we should sort it.
-            if (modalUtils.observableState.breedingModal === 'show') {
-                PartyController.hatcherySortedList = [...App.game.party.caughtPokemon];
-                return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
-            }
-            return PartyController.hatcherySortedList;
-        }).extend({ rateLimit: 500 });
-    };
+    static getHatcherySortedList = ko.pureComputed(() => {
+        // If the breeding modal is open, we should sort it.
+        if (modalUtils.observableState.breedingModal === 'show') {
+            PartyController.hatcherySortedList = [...App.game.party.caughtPokemon];
+            return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), BreedingController.regionalAttackDebuff()));
+        }
+        return PartyController.hatcherySortedList;
+    }).extend({ rateLimit: 500 });
 
 
     private static proteinSortedList = [];
