@@ -1886,7 +1886,7 @@ GymList['Elite Trainer Peony'] = new Gym(
     [
         new MultiRequirement([
             new QuestLineCompletedRequirement('The Crown of Galar'),
-            new QuestLineCompletedRequirement('The Dyna Tree Birds'),
+            new QuestLineCompletedRequirement('The Birds of the Dyna Tree'),
             new QuestLineCompletedRequirement('The Ancient Golems'),
         ]),
     ]
