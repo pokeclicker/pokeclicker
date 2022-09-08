@@ -117,7 +117,7 @@ export const SpriteCredits: Credit[] = [
             'Ash\'s Butterfree',
             'Blimp base',
             'Danny',
-            'Dracovish shop image'
+            'Dracovish shop image',
             'Luana',
             'Pinkan Bellsprout',
             'Pinkan Caterpie',
