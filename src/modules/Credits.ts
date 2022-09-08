@@ -141,6 +141,7 @@ export const SpriteCredits: Credit[] = [
             'Tourist Couple/Bellhop',
             'Valencian Raticate',
             'Valencian Paras',
+            'Zarude (Dada) shop image',
         ],
         // Notes: Made specifically for PokéClicker.
     },

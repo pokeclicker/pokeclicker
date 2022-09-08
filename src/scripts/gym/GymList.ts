@@ -1710,9 +1710,9 @@ GymList.Hammerlocke = new Gym(
     'I might have lost, but I still look good. Maybe I should snap a quick selfie...',
     [new GymBadgeRequirement(BadgeEnums.Galar_Dark)]
 );
-GymList['Trainer Marnie'] = new Gym(
+GymList['Elite Trainer Marnie'] = new Gym(
     'Marnie',
-    'Trainer Marnie',
+    'Elite Trainer Marnie',
     [
         new GymPokemon('Liepard', 117681650, 47),
         new GymPokemon('Toxicroak', 117681650, 47),
@@ -1725,9 +1725,9 @@ GymList['Trainer Marnie'] = new Gym(
     'OK, so I lost... but I got to see a lot of the good points of you and your Pokémon!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
 );
-GymList['Gym Leader Bede'] = new Gym(
+GymList['Elite Gym Leader Bede'] = new Gym(
     'Bede',
-    'Gym Leader Bede',
+    'Elite Gym Leader Bede',
     [
         new GymPokemon('Mawile', 117681650, 51),
         new GymPokemon('Sylveon', 117681650, 51),
@@ -1740,9 +1740,9 @@ GymList['Gym Leader Bede'] = new Gym(
     'I couldn\'t win, but at least I was able to show everyone how great Fairy types are.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Marnie)]
 );
-GymList['Trainer Hop'] = new Gym(
+GymList['Elite Trainer Hop'] = new Gym(
     'Hop',
-    'Trainer Hop',
+    'Elite Trainer Hop',
     [
         new GymPokemon('Dubwool', 127578161, 59),
         new GymPokemon('Pincurchin', 124130462, 58),
@@ -1788,7 +1788,7 @@ GymList['Champion Leon'] = new Champion(
         new GymPokemon('Inteleon', 137833678, 64),
         new GymPokemon('Gigantamax Charizard', 145088818, 65),
     ],
-    // Sobbke
+    // Sobble
     [
         new GymPokemon('Rhyperior', 133481036, 64),
         new GymPokemon('Rillaboom', 137833678, 64),
@@ -1797,9 +1797,9 @@ GymList['Champion Leon'] = new Champion(
 );
 
 // Armor + crown gyms
-GymList['Gym Leader Klara'] = new Gym(
+GymList['Elite Gym Leader Klara'] = new Gym(
     'Klara',
-    'Gym Leader Klara',
+    'Elite Gym Leader Klara',
     [
         new GymPokemon('Galarian Slowking', 144036193, 68),
         new GymPokemon('Galarian Weezing', 144036193, 68),
@@ -1817,9 +1817,9 @@ GymList['Gym Leader Klara'] = new Gym(
         ]),
     ]
 );
-GymList['Gym Leader Avery'] = new Gym(
+GymList['Elite Gym Leader Avery'] = new Gym(
     'Avery',
-    'Gym Leader Avery',
+    'Elite Gym Leader Avery',
     [
         new GymPokemon('Galarian Slowbro', 144036193, 68),
         new GymPokemon('Swoobat', 144036193, 68),
@@ -1837,9 +1837,9 @@ GymList['Gym Leader Avery'] = new Gym(
         ]),
     ]
 );
-GymList['Dojo Matron Honey'] = new Gym(
+GymList['Elite Dojo Matron Honey'] = new Gym(
     'Honey',
-    'Dojo Matron Honey',
+    'Elite Dojo Matron Honey',
     [
         new GymPokemon('Galarian Darmanitan', 151617046, 73),
         new GymPokemon('Gallade', 151617046, 74),
@@ -1858,9 +1858,9 @@ GymList['Dojo Matron Honey'] = new Gym(
         ]),
     ]
 );
-GymList['Dojo Master Mustard'] = new Gym(
+GymList['Elite Dojo Master Mustard'] = new Gym(
     'Mustard',
-    'Dojo Master Mustard',
+    'Elite Dojo Master Mustard',
     [
         new GymPokemon('Mienshao', 151617046, 73),
         new GymPokemon('Luxray', 151617046, 73),
@@ -1874,9 +1874,9 @@ GymList['Dojo Master Mustard'] = new Gym(
     'That strength of yours doesn\'t bend easily!',
     [new GymBadgeRequirement(BadgeEnums.Elite_ArmorMatron)]
 );
-GymList['Trainer Peony'] = new Gym(
-    'Freezington',
-    'Trainer Peony',
+GymList['Elite Trainer Peony'] = new Gym(
+    'Peony',
+    'Elite Trainer Peony',
     [
         new GymPokemon('Perrserker', 197029616, 74),
         new GymPokemon('Bronzong', 192967150, 73),
@@ -1887,5 +1887,11 @@ GymList['Trainer Peony'] = new Gym(
     BadgeEnums.Elite_CrownChampion,
     250000,
     'Gone and got stronger again, have you? Ah well! Hats off to you-in more ways than one!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Crown Shrine'))]
+    [
+        new MultiRequirement([
+            new QuestLineCompletedRequirement('The Crown of Galar'),
+            new QuestLineCompletedRequirement('The Birds of the Dyna Tree'),
+            new QuestLineCompletedRequirement('The Ancient Golems'),
+        ]),
+    ]
 );
