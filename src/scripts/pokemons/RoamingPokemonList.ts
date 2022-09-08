@@ -5,7 +5,7 @@
 
 class RoamingPokemonList {
     public static roamerGroups = [
-        [[GameConstants.KantoSubRegions.Kanto], [GameConstants.KantoSubRegions.Sevii123]],
+        [[GameConstants.KantoSubRegions.Kanto], [GameConstants.KantoSubRegions.Sevii123 ,GameConstants.KantoSubRegions.Sevii4567]],
         [[GameConstants.JohtoSubRegions.Johto]],
         [[GameConstants.HoennSubRegions.Hoenn]],
         [[GameConstants.SinnohSubRegions.Sinnoh]],
@@ -74,6 +74,13 @@ class RoamingPokemonList {
 // Kanto
 RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Mew'));
 
+//Kanto - Sevii Islands
+RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Raikou', new QuestLineCompletedRequirement('Celio\'s Errand')));
+RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Entei', new QuestLineCompletedRequirement('Celio\'s Errand')));
+RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Suicune', new MultiRequirement([new QuestLineCompletedRequirement('Celio\'s Errand'), new ObtainedPokemonRequirement(pokemonMap.Suicune)])));
+RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Pink Butterfree', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion)));
+RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Ash\'s Butterfree', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion)));
+
 // Johto
 RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Raikou', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))));
 RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Entei', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))));
@@ -110,7 +117,7 @@ RoamingPokemonList.add(GameConstants.Region.alola, 0, new RoamingPokemon('Zeraor
 RoamingPokemonList.add(GameConstants.Region.galar, 0, new RoamingPokemon('Galarian Zapdos', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3)));
 
 //Galar - Isle of Armor
-RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Zarude', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
+RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Zarude', new QuestLineStepCompletedRequirement('Secrets of the Jungle', 1)));
 RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Galarian Moltres', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3)));
 
 //Galar - Crown Tundra

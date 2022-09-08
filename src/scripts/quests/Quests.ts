@@ -82,6 +82,9 @@ class Quests implements Saveable {
         // Check if we can start a new quest, and the requested quest isn't started or completed
         if (this.canStartNewQuest() && quest && !quest.inProgress() && !quest.isCompleted()) {
             quest.begin();
+            if ((Settings.getSetting('hideQuestsOnFull').value) && this.currentQuests().length >= this.questSlots()) {
+                $('#QuestModal').modal('hide');
+            }
         } else {
             Notifier.notify({
                 message: 'You cannot start more quests.',
@@ -305,11 +308,13 @@ class Quests implements Saveable {
                 if (ql) {
                     ql.state(questLine.state);
                     if (questLine.state == QuestLineState.started) {
-                        ql.resumeAt(questLine.quest, questLine.initial);
-                        if (ql.curQuestObject() instanceof MultipleQuestsQuest) {
+                        if (ql.quests()[questLine.quest] instanceof MultipleQuestsQuest) {
+                            ql.resumeAt(questLine.quest, 0);
                             ql.curQuestObject().quests.forEach((q, i) => {
                                 q.initial(questLine?.initial[i] ?? 0);
                             });
+                        } else {
+                            ql.resumeAt(questLine.quest, questLine.initial);
                         }
                     }
                 }
