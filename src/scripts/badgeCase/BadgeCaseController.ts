@@ -9,7 +9,7 @@ class BadgeCaseController {
         GameConstants.RegionGyms.forEach((region, i) => {
             // Optional leagues
             if (i >= GameConstants.Region.final) {
-                if (region.every(gym => !GymList[gym].badgeReward)) {
+                if (!region.some(gym => App.game.badgeCase.hasBadge(GymList[gym].badgeReward))) {
                     return;
                 }
                 result[this.optionalLeagueNames[i - GameConstants.Region.final]] = this.regionToBadges(region);
