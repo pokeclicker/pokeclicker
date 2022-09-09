@@ -22,7 +22,7 @@ class ShardDeal {
     }
 
     public static canUse(town: GameConstants.ShardTraderLocations, i: number): boolean {
-        const deal = ShardDeal.list[GameConstants.ShardTraderLocations[town]]?.peek()[i];
+        const deal = ShardDeal.list[town]?.peek()[i];
         if (!deal) {
             return false;
         }
@@ -36,7 +36,7 @@ class ShardDeal {
     }
 
     public static use(town: GameConstants.ShardTraderLocations, i: number, tradeTimes = 1) {
-        const deal = ShardDeal.list[GameConstants.ShardTraderLocations[town]]?.peek()[i];
+        const deal = ShardDeal.list[town]?.peek()[i];
         if (ShardDeal.canUse(town, i)) {
             const trades = deal.shards.map(shard => {
                 const amt = player.getUndergroundItemAmount(shard.shardType.id);
@@ -53,7 +53,7 @@ class ShardDeal {
             deal.item.itemType.gain(deal.item.amount * maxTrades);
             App.game.wallet.loseAmount(new Amount(deal.questPointCost * maxTrades, GameConstants.Currency.questPoint));
             Notifier.notify({
-                message: `You traded for ${amount.toLocaleString('en-US')} ${GameConstants.humanifyString(deal.item.itemType.displayName)}${multiple}`,
+                message: `You traded for ${amount.toLocaleString('en-US')} × <img src="${deal.item.itemType.image}" height="24px"/> ${GameConstants.humanifyString(deal.item.itemType.displayName)}${multiple}.`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.item_bought,
             });

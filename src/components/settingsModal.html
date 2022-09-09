@@ -36,6 +36,7 @@
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('eggAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('hideHatchery')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('farmDisplay')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideQuestsOnFull')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyLostAnimation')}"></tr>
                                 <tr data-bind="visible: Object.values(App.game.challenges.list).filter(c => c.active()).length > 0, template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideChallengeRelatedModules')}"></tr>
@@ -250,6 +251,21 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('useWebWorkerForGameTicks')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableOfflineProgress')}"></tr>
+                                <tr data-bind="visible: player.highestRegion() > 0, with: Settings.getSetting('breedingQueueSizeSetting')">
+                                    <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
+                                    <td class="p-0">
+                                        <input type="text" class="form-control"
+                                            data-bind="attr: { name: $data.name, id: `setting-${$data.name}` }, value: $data.observableValue, tooltip: {
+                                                title: `Restrict your hatchery queue to a specific size or disable entirely. Enter a value between 1 and your current max size (${App.game.breeding.queueSlots()}), zero (0) to disable the queue entirely, or -1 for no limit.`,
+                                                trigger: 'hover'
+                                            }"
+                                            onchange="(() => {
+                                                const val = Number.isNaN(parseInt(this.value)) ? -1 : +this.value;
+                                                this.value = val < -1 ? -1 : Math.min(val, App.game.breeding.queueSlots());
+                                            })(), App.game.breeding.updateQueueSizeLimit(+this.value), Settings.setSettingByName(this.name, this.value)
+                                        ">
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="btn-group btn-block">

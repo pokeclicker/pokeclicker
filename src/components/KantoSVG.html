@@ -680,6 +680,27 @@
             , image: "assets/images/map/ashketchumoverworld.png"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Snorlax"
+            , x: 87, y: 32
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Snorlax route 12'].protectedOnclick(), attr: { class: TemporaryBattleList['Snorlax route 12'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Snorlax route 12'] && TemporaryBattleList['Snorlax route 12'].isVisible()"
+            , image: "assets/images/map/snorlaxoverworld.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Snorlax"
+            , x: 36, y: 19
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Snorlax route 16'].protectedOnclick(), attr: { class: TemporaryBattleList['Snorlax route 16'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Snorlax route 16'] && TemporaryBattleList['Snorlax route 16'].isVisible()"
+            , image: "assets/images/map/snorlaxoverworld.png"
+            })
+        %>
+    %>
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
@@ -883,7 +904,7 @@
         <!--Water Labyrinth-->
         <%- include('templates/mapRoute',
             { route: 32, region: 0
-            , width: 9, height: 3
+            , width: 8, height: 3
             , x: 59, y: 18
             , name: "WL"
             })
@@ -892,8 +913,8 @@
         <!--Water Labyrinth extension-->
         <%- include('templates/mapRoute',
             { route: 32, region: 0
-            , width: 2, height: 2
-            , x: 68, y: 18
+            , width: 3, height: 2
+            , x: 67, y: 18
             , noText: true
             })
         %>
@@ -1195,17 +1216,8 @@
         <!--Five Island-->
         <%- include('templates/mapTown',
             { name: "Five Island"
-            , x: 65, y: 21
-            , width: 4, height: 3
-            })
-        %>
-
-        <!--Five Island extension-->
-        <%- include('templates/mapTown',
-            { name: "Five Island"
-            , x: 68, y: 20
-            , width: 3, height: 1
-            , isExtension: true
+            , x: 67, y: 20
+            , width: 4, height: 4
             })
         %>
 
