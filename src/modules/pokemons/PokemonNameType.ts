@@ -405,6 +405,7 @@ export type PokemonNameType
     | 'Ho-Oh'
     | 'Celebi'
     | 'Grinch Celebi'
+    | 'Flowering Celebi'
     | 'Treecko'
     | 'Grovyle'
     | 'Sceptile'
@@ -1291,4 +1292,5 @@ export type PokemonNameType
     | 'Mega Gyarados'
     | 'Mega Gardevoir'
     | 'Mega Rayquaza'
+    | 'Mega Lucario'
     | '???';
