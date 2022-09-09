@@ -114,9 +114,13 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/272336444297707521/',
         image: 'assets/images/profile/trainer-96.png',
         resources: [
+            'Arctovish shop image',
+            'Arctozolt shop image',
             'Ash\'s Butterfree',
             'Blimp base',
             'Danny',
+            'Dracovish shop image',
+            'Dracozolt shop image',
             'Luana',
             'Pinkan Bellsprout',
             'Pinkan Caterpie',
@@ -137,6 +141,7 @@ export const SpriteCredits: Credit[] = [
             'Tourist Couple/Bellhop',
             'Valencian Raticate',
             'Valencian Paras',
+            'Zarude (Dada) shop image',
         ],
         // Notes: Made specifically for PokéClicker.
     },
