@@ -5542,6 +5542,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 35,
             'speed': 60,
         },
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        }
     },
     {
         'id': 173,
