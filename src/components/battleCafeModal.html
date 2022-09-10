@@ -15,6 +15,7 @@ aria-labelledby="battleCafeModal"Label">
                         css: { 'bg-primary': BattleCafeController.selectedSweet() == GameConstants.AlcremieSweet[$data]}
                     ">
                         <span data-bind="text: $data"></span>
+                        <img data-bind="attr:{ src: 'assets/images/sweets/' + $data + '.png' }"/>
                     </div>
                     <!-- /ko -->
                 </div>
