@@ -127,6 +127,61 @@ class BattleCafeController {
         evolutions[AlcremieSweet[AlcremieSweet['Love Sweet']]][AlcremieSpins[AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Love Caramel)', 0);
         evolutions[AlcremieSweet[AlcremieSweet['Love Sweet']]][AlcremieSpins[AlcremieSpins.at7Above10]] = new PokemonItem('Alcremie (Love Rainbow)', 0);
 
+        evolutions[AlcremieSweet[AlcremieSweet['Berry Sweet']]] = {};
+        evolutions[AlcremieSweet[AlcremieSweet['Berry Sweet']]][AlcremieSpins[AlcremieSpins.dayClockwiseBelow5]] = new PokemonItem('Alcremie (Berry Vanilla)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Berry Sweet']]][AlcremieSpins[AlcremieSpins.dayCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Berry Ruby Cream)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Berry Sweet']]][AlcremieSpins[AlcremieSpins.nightClockwiseBelow5]] = new PokemonItem('Alcremie (Berry Matcha)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Berry Sweet']]][AlcremieSpins[AlcremieSpins.nightCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Berry Mint)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Berry Sweet']]][AlcremieSpins[AlcremieSpins.nightClockwiseAbove5]] = new PokemonItem('Alcremie (Berry Lemon)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Berry Sweet']]][AlcremieSpins[AlcremieSpins.nightCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Berry Salted)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Berry Sweet']]][AlcremieSpins[AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Berry Ruby Swirl)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Berry Sweet']]][AlcremieSpins[AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Berry Caramel)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Berry Sweet']]][AlcremieSpins[AlcremieSpins.at7Above10]] = new PokemonItem('Alcremie (Berry Rainbow)', 0);
+
+        evolutions[AlcremieSweet[AlcremieSweet['Clover Sweet']]] = {};
+        evolutions[AlcremieSweet[AlcremieSweet['Clover Sweet']]][AlcremieSpins[AlcremieSpins.dayClockwiseBelow5]] = new PokemonItem('Alcremie (Clover Vanilla)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Clover Sweet']]][AlcremieSpins[AlcremieSpins.dayCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Clover Ruby Cream)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Clover Sweet']]][AlcremieSpins[AlcremieSpins.nightClockwiseBelow5]] = new PokemonItem('Alcremie (Clover Matcha)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Clover Sweet']]][AlcremieSpins[AlcremieSpins.nightCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Clover Mint)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Clover Sweet']]][AlcremieSpins[AlcremieSpins.nightClockwiseAbove5]] = new PokemonItem('Alcremie (Clover Lemon)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Clover Sweet']]][AlcremieSpins[AlcremieSpins.nightCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Clover Salted)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Clover Sweet']]][AlcremieSpins[AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Clover Ruby Swirl)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Clover Sweet']]][AlcremieSpins[AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Clover Caramel)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Clover Sweet']]][AlcremieSpins[AlcremieSpins.at7Above10]] = new PokemonItem('Alcremie (Clover Rainbow)', 0);
+
+        evolutions[AlcremieSweet[AlcremieSweet['Flower Sweet']]] = {};
+        evolutions[AlcremieSweet[AlcremieSweet['Flower Sweet']]][AlcremieSpins[AlcremieSpins.dayClockwiseBelow5]] = new PokemonItem('Alcremie (Flower Vanilla)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Flower Sweet']]][AlcremieSpins[AlcremieSpins.dayCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Flower Ruby Cream)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Flower Sweet']]][AlcremieSpins[AlcremieSpins.nightClockwiseBelow5]] = new PokemonItem('Alcremie (Flower Matcha)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Flower Sweet']]][AlcremieSpins[AlcremieSpins.nightCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Flower Mint)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Flower Sweet']]][AlcremieSpins[AlcremieSpins.nightClockwiseAbove5]] = new PokemonItem('Alcremie (Flower Lemon)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Flower Sweet']]][AlcremieSpins[AlcremieSpins.nightCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Flower Salted)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Flower Sweet']]][AlcremieSpins[AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Flower Ruby Swirl)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Flower Sweet']]][AlcremieSpins[AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Flower Caramel)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Flower Sweet']]][AlcremieSpins[AlcremieSpins.at7Above10]] = new PokemonItem('Alcremie (Flower Rainbow)', 0);
+
+        evolutions[AlcremieSweet[AlcremieSweet['Star Sweet']]] = {};
+        evolutions[AlcremieSweet[AlcremieSweet['Star Sweet']]][AlcremieSpins[AlcremieSpins.dayClockwiseBelow5]] = new PokemonItem('Alcremie (Star Vanilla)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Star Sweet']]][AlcremieSpins[AlcremieSpins.dayCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Star Ruby Cream)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Star Sweet']]][AlcremieSpins[AlcremieSpins.nightClockwiseBelow5]] = new PokemonItem('Alcremie (Star Matcha)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Star Sweet']]][AlcremieSpins[AlcremieSpins.nightCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Star Mint)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Star Sweet']]][AlcremieSpins[AlcremieSpins.nightClockwiseAbove5]] = new PokemonItem('Alcremie (Star Lemon)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Star Sweet']]][AlcremieSpins[AlcremieSpins.nightCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Star Salted)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Star Sweet']]][AlcremieSpins[AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Star Ruby Swirl)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Star Sweet']]][AlcremieSpins[AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Star Caramel)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Star Sweet']]][AlcremieSpins[AlcremieSpins.at7Above10]] = new PokemonItem('Alcremie (Star Rainbow)', 0);
+
+        evolutions[AlcremieSweet[AlcremieSweet['Ribbon Sweet']]] = {};
+        evolutions[AlcremieSweet[AlcremieSweet['Ribbon Sweet']]][AlcremieSpins[AlcremieSpins.dayClockwiseBelow5]] = new PokemonItem('Alcremie (Ribbon Vanilla)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Ribbon Sweet']]][AlcremieSpins[AlcremieSpins.dayCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Ribbon Ruby Cream)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Ribbon Sweet']]][AlcremieSpins[AlcremieSpins.nightClockwiseBelow5]] = new PokemonItem('Alcremie (Ribbon Matcha)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Ribbon Sweet']]][AlcremieSpins[AlcremieSpins.nightCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Ribbon Mint)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Ribbon Sweet']]][AlcremieSpins[AlcremieSpins.nightClockwiseAbove5]] = new PokemonItem('Alcremie (Ribbon Lemon)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Ribbon Sweet']]][AlcremieSpins[AlcremieSpins.nightCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Ribbon Salted)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Ribbon Sweet']]][AlcremieSpins[AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Ribbon Ruby Swirl)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Ribbon Sweet']]][AlcremieSpins[AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Ribbon Caramel)', 0);
+        evolutions[AlcremieSweet[AlcremieSweet['Ribbon Sweet']]][AlcremieSpins[AlcremieSpins.at7Above10]] = new PokemonItem('Alcremie (Ribbon Rainbow)', 0);
+
         return evolutions;
     }
 }
