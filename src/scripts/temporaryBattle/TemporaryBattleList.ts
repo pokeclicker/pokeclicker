@@ -1611,6 +1611,7 @@ TemporaryBattleList['Zarude Tribe 1'] = new TemporaryBattle(
     {
         displayName: 'Zarude Tribe',
         imageName: 'Zarude Tribe',
+        hideTrainer: true,
     }
 );
 TemporaryBattleList['Zarude Tribe 2'] = new TemporaryBattle(
@@ -1629,6 +1630,7 @@ TemporaryBattleList['Zarude Tribe 2'] = new TemporaryBattle(
     {
         displayName: 'Zarude Tribe',
         imageName: 'Zarude Tribe',
+        hideTrainer: true,
     }
 );
 TemporaryBattleList['Zarude Tribe 3'] = new TemporaryBattle(
@@ -1647,6 +1649,7 @@ TemporaryBattleList['Zarude Tribe 3'] = new TemporaryBattle(
     {
         displayName: 'Zarude Tribe',
         imageName: 'Zarude Tribe',
+        hideTrainer: true,
     }
 );
 TemporaryBattleList['Ash Ketchum Galar'] = new TemporaryBattle(
@@ -1672,7 +1675,11 @@ TemporaryBattleList['Zarude (Dada)'] = new TemporaryBattle(
     'Zarude (Dada)',
     [new GymPokemon('Zarude (Dada)', 2090303973, 90)],
     'Zaru Zaruza. Zarude!',
-    [new QuestLineStepCompletedRequirement('Secrets of the Jungle', 10)]
+    [new QuestLineStepCompletedRequirement('Secrets of the Jungle', 10)],
+    undefined,
+    {
+        hideTrainer: true,
+    }
 );
 TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
     'Flowering Celebi',
@@ -1682,6 +1689,7 @@ TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
     [new ObtainedPokemonRequirement(pokemonMap['Flowering Celebi'])],
     {
         isTrainerBattle: false,
+        hideTrainer: true,
     }
 );
 TemporaryBattleList.Peony = new TemporaryBattle(
