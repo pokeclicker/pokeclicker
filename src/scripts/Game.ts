@@ -388,7 +388,7 @@ class Game {
                     });
                 }
                 // Give the players more Battle Cafe spins
-                BattleCafeController.spinsLeft(BattleCafeController.defaultSpins);¨
+                BattleCafeController.spinsLeft(BattleCafeController.defaultSpins);
 
                 DayOfWeekRequirement.date(now.getDay());
             }
