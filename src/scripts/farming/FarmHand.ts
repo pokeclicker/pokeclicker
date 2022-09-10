@@ -77,7 +77,7 @@ class FarmHand {
         public unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement
     ) {
         SeededRand.seed(parseInt(this.name, 36));
-        this.trainerSprite = SeededRand.intBetween(0, Profile.MAX_TRAINER - 1);
+        this.trainerSprite = SeededRand.intBetween(0, 118);
         // Negative value so they are charged on the first tick and work on the first tick
         this.workTicks(-GameConstants.TICK_TIME);
         this.costTicks(-GameConstants.TICK_TIME);
