@@ -171,9 +171,11 @@ export const SpriteCredits: Credit[] = [
             'Winona remake',
             'Tate & Liza remake',
             'Drake remake',
+            'May revamp',
             'Phoebe remake',
             'Sidney remake',
             'Steven remake',
+            'Wally revamp',
         ],
         // NOTES: Allowed use with credit given.
     },
