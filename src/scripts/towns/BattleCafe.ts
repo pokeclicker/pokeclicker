@@ -1,11 +1,9 @@
-import { notify } from "jquery";
-
 class BattleCafe extends TownContent {
     public cssClass() {
         return 'btn btn-info';
     }
     public isVisible() {
-        return true
+        return true;
     }
 
     public onclick(): void {
