@@ -44,7 +44,7 @@ class HatcheryHelper {
         public unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement
     ) {
         SeededRand.seed(parseInt(this.name, 36));
-        this.trainerSprite = SeededRand.intBetween(0, Profile.MAX_TRAINER - 1);
+        this.trainerSprite = SeededRand.intBetween(0, 118);
 
         this.tooltip = ko.pureComputed(() => `<strong>${this.name}</strong><br/>
             Cost: <img src="assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" width="20px">&nbsp;${(this.cost.amount).toLocaleString('en-US')}/hatch<br/>
