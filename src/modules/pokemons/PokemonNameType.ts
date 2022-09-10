@@ -1293,6 +1293,6 @@ export type PokemonNameType
     | 'Mega Gardevoir'
     | 'Mega Rayquaza'
     | 'Mega Mewtwo X'
-    | 'Mega Mewtwo Y';
+    | 'Mega Mewtwo Y'
     | 'Mega Lucario'
     | '???';
