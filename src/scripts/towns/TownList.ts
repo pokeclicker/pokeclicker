@@ -1265,11 +1265,9 @@ const EcruteakEusine = new NPC('Eusine', [
     'Legends say that when the Brass Tower burned down and became the Burned Tower, three unnamed Pokémon perished in the flames...',
     'Ho-oh came down from the Tin Tower and revived those Pokémon. They became the Legendary Beasts. Some say these Beasts still inhabit the basement of the Burned Tower.',
     'Could you please clear Burned Tower for me and see if this is true?',
-],
-{ requirement: new MultiRequirement([new QuestLineStartedRequirement('The Legendary Beasts'), new QuestLineStepCompletedRequirement('The Legendary Beasts', 1, GameConstants.AchievementOption.less )]) });
 ], {
     image: 'assets/images/temporaryBattle/Euisine',
-    requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'), GameConstants.AchievementOption.less),
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Legendary Beasts'), new QuestLineStepCompletedRequirement('The Legendary Beasts', 1, GameConstants.AchievementOption.less )]),
 });
 const EcruteakPokéfan = new NPC('Pokéfan Derek', [
     'I saw it! Did you see it?! I saw you go in there! I don\'t know what you did in the Burned Tower, but three great Beasts came running out of there!',
