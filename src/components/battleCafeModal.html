@@ -27,7 +27,7 @@ aria-labelledby="battleCafeModal"Label">
             <div>
                 <img style="width: 60px;" data-bind="
                 attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` },
-                class: BattleCafeController.isSpinning() ? 'player-animated' : ''
+                class: BattleCafeController.isSpinning() ? 'player-animated' + (BattleCafeController.clockwise() ? '' : '-counter') : ''
                 " src="assets/images/profile/trainer-1.png">
             </div>
             <div>

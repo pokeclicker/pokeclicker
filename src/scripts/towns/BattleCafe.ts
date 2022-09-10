@@ -1,4 +1,8 @@
 class BattleCafe extends TownContent {
+    constructor() {
+        super([new ObtainedPokemonRequirement(pokemonMap.Milcery)]);
+    }
+
     public cssClass() {
         return 'btn btn-info';
     }
@@ -19,12 +23,14 @@ class BattleCafeController {
     static selectedSweet = ko.observable<GameConstants.AlcremieSweet>(undefined);
     static spinsLeft = ko.observable<number>(3);
     static isSpinning = ko.observable<boolean>(false);
+    static clockwise = ko.observable<boolean>(false);
 
     public static spin(clockwise: boolean) {
         if (!BattleCafeController.canSpin()) {
             return;
         }
 
+        BattleCafeController.clockwise(clockwise);
         BattleCafeController.isSpinning(true);
         BattleCafeController.spinsLeft(BattleCafeController.spinsLeft() - 1);
         const spinTime = +$('#battleCafeDuration').val();
