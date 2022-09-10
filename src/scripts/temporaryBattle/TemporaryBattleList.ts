@@ -115,6 +115,7 @@ TemporaryBattleList['Suicune 1'] = new TemporaryBattle(
         displayName: 'Suicune',
         returnTown: 'Cianwood City',
         imageName: 'Suicune',
+        hideTrainer: true,
     }
 );
 
@@ -131,7 +132,6 @@ TemporaryBattleList.Eusine = new TemporaryBattle(
     {
         displayName: 'Eusine',
         returnTown: 'Cianwood City',
-        imageName: 'Eusine',
     }
 );
 
@@ -147,7 +147,8 @@ TemporaryBattleList['Suicune 2'] = new TemporaryBattle(
     {
         displayName: 'Suicune',
         returnTown: 'Mahogany Town',
-        imageName: 'Transparent',
+        imageName: 'Suicune',
+        hideTrainer: true,
     }
 );
 
@@ -163,7 +164,8 @@ TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
     {
         displayName: 'Suicune',
         returnTown: 'Vermilion City',
-        imageName: 'Transparent',
+        imageName: 'Suicune',
+        hideTrainer: true,
     }
 );
 
@@ -179,7 +181,8 @@ TemporaryBattleList['Suicune 4'] = new TemporaryBattle(
     {
         displayName: 'Suicune',
         returnTown: 'Fuchsia City',
-        imageName: 'Transparent',
+        imageName: 'Suicune',
+        hideTrainer: true,
     }
 );
 
@@ -192,7 +195,8 @@ TemporaryBattleList['Suicune 5'] = new TemporaryBattle(
     {
         displayName: 'Suicune',
         returnTown: 'Cerulean City',
-        imageName: 'Transparent',
+        imageName: 'Suicune',
+        hideTrainer: true,
     }
 );
 
@@ -208,7 +212,10 @@ TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
     {
         displayName: 'Suicune',
         returnTown: 'Cerulean City',
-        imageName: 'Transparent',
+        imageName: 'Suicune',
+        hideTrainer: true,
+        isTrainerBattle: false,
+
     }
 );
 
