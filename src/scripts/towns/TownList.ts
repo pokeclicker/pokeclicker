@@ -1279,12 +1279,9 @@ const EcruteakPokéfan = new NPC('Pokéfan Derek', [
     'I saw it! Did you see it?! I saw you go in there! I don\'t know what you did in the Burned Tower, but three great Beasts came running out of there!',
     'It was a great sight to behold. They all went in different directions. I think they are just roaming the region now. My friend Trevor in Blackthorn City can tell you more.',
     'Eusine was here a second ago. He seemed very excited, but then he suddenly left. I don\'t know where he went, but he seemed to be particularly interested in the blue one.',
-],
-{ requirement: new QuestLineStepCompletedRequirement('The Legendary Beasts', 1) });
-    'Eusine was here a second ago. He seemed very excited, but then he suddenly left. I don\'t know where he went. I was a bit distracted by those majestic Beasts...',
 ], {
     image: 'assets/images/trainers/PokéManiac.png',
-    requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower')),
+    requirement: new QuestLineStepCompletedRequirement('The Legendary Beasts', 1),
 });
 
 const EcruteakKimonoGirl = new NPC('Kimono Girl', [
